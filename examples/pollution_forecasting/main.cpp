@@ -35,7 +35,7 @@ int main(void)
 
         DataSet data_set;
 
-        data_set.set_data_file_name("../../../datasets/pollution.csv");
+        data_set.set_data_file_name("../../datasets/pollution.csv");
         data_set.set_separator(',');
         data_set.set_has_columns_names(true);
         size_t lags_number = 2;
@@ -103,15 +103,15 @@ int main(void)
 
         // Save results
 
-        data_set.save("../data/data_set.xml");
+        data_set.save("data/data_set.xml");
 
-        neural_network.save("../data/neural_network.xml");
-        neural_network.save_expression("../data/expression.txt");
+        neural_network.save("data/neural_network.xml");
+        neural_network.save_expression("data/expression.txt");
 
-        training_strategy.save("../data/training_strategy.xml");
-        training_strategy_results.save("../data/training_strategy_results.dat");
+        training_strategy.save("data/training_strategy.xml");
+        training_strategy_results.save("data/training_strategy_results.dat");
 
-        linear_regression_results.save("../data/linear_regression_analysis_results.dat");
+        linear_regression_results.save("data/linear_regression_analysis_results.dat");
 
         return 0;
     }

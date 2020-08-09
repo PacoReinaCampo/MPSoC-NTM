@@ -35,7 +35,7 @@ int main(void)
 
         // Data set
 
-        DataSet data_set("../data/airfoil_self_noise.csv", ';', true);
+        DataSet data_set("data/airfoil_self_noise.csv", ';', true);
 
         const Vector<string> inputs_names = data_set.get_input_variables_names();
         const Vector<string> targets_names = data_set.get_target_variables_names();
@@ -85,16 +85,16 @@ int main(void)
 
         // Save results
 
-        data_set.save("../data/data_set.xml");
+        data_set.save("data/data_set.xml");
 
-        neural_network.save("../data/neural_network.xml");
-//        neural_network.save_expression("../data/expression.txt");
+        neural_network.save("data/neural_network.xml");
+//        neural_network.save_expression("data/expression.txt");
 
-        training_strategy.save("../data/training_strategy.xml");
+        training_strategy.save("data/training_strategy.xml");
 
-        optimization_algorithm_results.save("../data/optimization_algorithm_results.dat");
+        optimization_algorithm_results.save("data/optimization_algorithm_results.dat");
 
-        linear_regression_analysis.save("../data/linear_regression_analysis.dat");
+        linear_regression_analysis.save("data/linear_regression_analysis.dat");
 
         return 0;
     }

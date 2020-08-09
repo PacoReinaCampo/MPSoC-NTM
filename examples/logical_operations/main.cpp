@@ -30,7 +30,7 @@ int main(void)
 
         // Data set
 
-        DataSet data_set("../data/logical_operations.csv", ';', true);
+        DataSet data_set("data/logical_operations.csv", ';', true);
 
         data_set.set_columns_uses({"Input","Input","Target","Target","Target","Target","Target","Target"});
 
@@ -53,11 +53,11 @@ int main(void)
 
         // Save results
 
-        data_set.save("../data/data_set.xml");
+        data_set.save("data/data_set.xml");
 
-        neural_network.save("../data/neural_network.xml");
+        neural_network.save("data/neural_network.xml");
 
-        training_strategy.save("../data/training_strategy.xml");
+        training_strategy.save("data/training_strategy.xml");
 
         // Print results to screen
 

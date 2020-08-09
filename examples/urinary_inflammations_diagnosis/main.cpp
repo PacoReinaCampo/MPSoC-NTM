@@ -33,7 +33,7 @@ int main(void)
 
         // Data set
 
-        DataSet data_set("../data/urinary_inflammations_diagnosis.csv", ';', true);
+        DataSet data_set("data/urinary_inflammations_diagnosis.csv", ';', true);
 
         data_set.print_data_preview();
 
@@ -106,17 +106,17 @@ int main(void)
 
         // Save results
 
-        data_set.save("../data/data_set.xml");
+        data_set.save("data/data_set.xml");
 
-        neural_network.save("../data/neural_network.xml");
-        neural_network.save_expression("../data/expression.txt");
+        neural_network.save("data/neural_network.xml");
+        neural_network.save_expression("data/expression.txt");
 
-        training_strategy.save("../data/training_strategy.xml");
+        training_strategy.save("data/training_strategy.xml");
 
-//        model_selection.save("../data/model_selection.xml");
-//        model_selection_results.save("../data/model_selection_results.dat");
+//        model_selection.save("data/model_selection.xml");
+//        model_selection_results.save("data/model_selection_results.dat");
 
-        confusion.save_csv("../data/confusion.csv");
+        confusion.save_csv("data/confusion.csv");
 
         return 0;
     }

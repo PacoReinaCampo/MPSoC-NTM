@@ -29,7 +29,7 @@ int main(void)
 
         // Data set
 
-        DataSet data_set("../data/breast_cancer.csv",';',true);
+        DataSet data_set("data/breast_cancer.csv",';',true);
 
         data_set.split_instances_random();
 

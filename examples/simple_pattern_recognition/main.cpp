@@ -29,7 +29,7 @@ int main(void)
 
         // Data set
 
-        DataSet data_set("../data/simple_pattern_recognition.csv", ';', true);
+        DataSet data_set("data/simple_pattern_recognition.csv", ';', true);
 
         // Variables
 
@@ -72,16 +72,16 @@ int main(void)
 
         // Save results
 
-        data_set.save("../data/data_set.xml");
+        data_set.save("data/data_set.xml");
 
-        neural_network.save("../data/neural_network.xml");
-        neural_network.save_expression("../data/expression.txt");
+        neural_network.save("data/neural_network.xml");
+        neural_network.save_expression("data/expression.txt");
 
-        training_strategy.save("../data/training_strategy.xml");
-//        training_strategy_results.save("../data/training_strategy_results.dat");
+        training_strategy.save("data/training_strategy.xml");
+//        training_strategy_results.save("data/training_strategy_results.dat");
 
-        binary_classification_tests.save("../data/binary_classification_tests.dat");
-//        confusion.save("../data/confusion.dat");
+        binary_classification_tests.save("data/binary_classification_tests.dat");
+//        confusion.save("data/confusion.dat");
 
         cout << "Bye" << endl;
 

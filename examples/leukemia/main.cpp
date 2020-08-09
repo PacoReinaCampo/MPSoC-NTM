@@ -32,7 +32,7 @@ int main(void)
         srand(static_cast<unsigned>(time(nullptr)));
 
         // Data set
-        DataSet data_set("../data/leukemia.csv", ';', false);
+        DataSet data_set("data/leukemia.csv", ';', false);
 
         const Vector<string> inputs_names = data_set.get_input_variables_names();
         const Vector<string> targets_names = data_set.get_target_variables_names();
@@ -99,16 +99,16 @@ int main(void)
 
         // Save results
 
-        data_set.save("../data/data_set.xml");
+        data_set.save("data/data_set.xml");
 
-        neural_network.save("../data/neural_network.xml");
+        neural_network.save("data/neural_network.xml");
 
-        training_strategy.save("../data/training_strategy.xml");
+        training_strategy.save("data/training_strategy.xml");
 
-//        model_selection.save("../data/model_selection.xml");
-//        model_selection_results.save("../data/model_selection_results.dat");
+//        model_selection.save("data/model_selection.xml");
+//        model_selection_results.save("data/model_selection_results.dat");
 
-        confusion.save_csv("../data/confusion.csv");
+        confusion.save_csv("data/confusion.csv");
 */
         cout << "Bye" << endl;
 
