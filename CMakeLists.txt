@@ -31,6 +31,7 @@ option(OpenNN_BUILD_EXAMPLES "Build OpenNN examples" ON)
 
 if(OpenNN_BUILD_EXAMPLES)
     add_subdirectory(examples)
+    add_subdirectory(ntm)
 endif(OpenNN_BUILD_EXAMPLES)
 
 include(CPack)

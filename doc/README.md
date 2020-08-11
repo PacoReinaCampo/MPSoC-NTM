@@ -127,6 +127,21 @@ type:
 ./mnist
 ```
 
+## 2.2. Neural Turing Machine
+
+### 2.2.1. blank
+
+type:
+```
+./blank
+```
+
+### 2.2.2. FinTech
+
+type:
+```
+./FinTech
+```
 
 # 3. WORKFLOW
 
