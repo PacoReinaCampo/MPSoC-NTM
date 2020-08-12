@@ -129,18 +129,25 @@ type:
 
 ## 2.2. Neural Turing Machine
 
-### 2.2.1. blank
+### 2.2.1. PU
 
 type:
 ```
-./blank
+./PU
 ```
 
-### 2.2.2. FinTech
+### 2.2.2. SoC
 
 type:
 ```
-./FinTech
+./SoC
+```
+
+### 2.2.3. MPSoC
+
+type:
+```
+./MPSoC
 ```
 
 # 3. WORKFLOW
