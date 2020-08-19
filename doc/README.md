@@ -152,6 +152,40 @@ type:
 
 # 3. WORKFLOW
 
+## 3.1. Hardware
+
+### 3.1.1. MSP430 GNU C/C++
+
+### 3.1.2. OpenRISC GNU C/C++
+
+### 3.1.3. RISC-V GNU C/C++
+
+type:
+```
+sudo apt install autoconf automake autotools-dev curl python3 libmpc-dev \
+libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf \
+libtool patchutils bc zlib1g-dev libexpat-dev
+```
+
+type:
+```
+git clone --recursive https://github.com/riscv/riscv-gnu-toolchain
+
+cd riscv-gnu-toolchain
+
+./configure --prefix=/opt/riscv-elf-gcc
+sudo make
+
+./configure --prefix=/opt/riscv-elf-gcc
+sudo make linux
+
+./configure --prefix=/opt/riscv-elf-gcc --enable-multilib
+sudo make linux
+sudo make report-linux
+```
+
+## 3.2. Software
+
 type:
 ```
 rm -rf build

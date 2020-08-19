@@ -1,0 +1,8 @@
+export PATH="$PATH:/opt/riscv-elf-gcc/bin"
+
+rm -rf build
+mkdir build
+cd build
+
+cmake ..
+make
