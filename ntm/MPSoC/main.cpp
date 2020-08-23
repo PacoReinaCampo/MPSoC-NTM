@@ -19,7 +19,6 @@
 #include <chrono>
 #include <stdint.h>
 #include <limits.h>
-#include <statistics.h>
 #include <regex>
 
 // Systems Complementaries

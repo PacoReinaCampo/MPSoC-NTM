@@ -1,0 +1,4 @@
+export PATH=/opt/riscv-elf-gcc/bin:${PATH}
+
+make clean
+make riscv
