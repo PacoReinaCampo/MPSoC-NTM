@@ -4,3 +4,6 @@
 [submodule "opennn"]
 	path = opennn
 	url = https://github.com/PacoReinaCampo/OpenNN.git
+[submodule "mpsoc-uvm"]
+	path = mpsoc-uvm
+	url = https://github.com/PacoReinaCampo/MPSoC-UVM.git
