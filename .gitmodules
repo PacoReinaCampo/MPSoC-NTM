@@ -1,9 +1,3 @@
 [submodule "opennn"]
 	path = opennn
 	url = https://github.com/PacoReinaCampo/OpenNN.git
-[submodule "mpsoc-rtos"]
-	path = mpsoc-rtos
-	url = https://github.com/PacoReinaCampo/MPSoC-RTOS.git
-[submodule "mpsoc-dv"]
-	path = mpsoc-dv
-	url = https://github.com/PacoReinaCampo/MPSoC-DV.git
