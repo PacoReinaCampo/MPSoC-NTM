@@ -42,7 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity ntm_multiplier is
+entity ntm_vector_multiplier is
   generic (
     DATA_SIZE : integer := 512
   );
@@ -63,7 +63,7 @@ entity ntm_multiplier is
   );
 end entity;
 
-architecture ntm_multiplier_architecture of ntm_multiplier is
+architecture ntm_vector_multiplier_architecture of ntm_vector_multiplier is
 
   -----------------------------------------------------------------------
   -- Types
