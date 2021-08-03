@@ -42,8 +42,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity ntm_vector_inverter is
+entity ntm_matrix_inverter is
   generic (
+    X : integer := 64,
+
     DATA_SIZE : integer := 512
   );
   port (
@@ -53,16 +55,16 @@ entity ntm_vector_inverter is
 
     -- CONTROL
     START : in  std_logic;
-    READY : out std_logic;
+    READY : out std_logic_arithmetic_scalar_vector(X-1 downto 0);
 
     -- DATA
-    MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    MODULO   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    DATA_IN  : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    DATA_OUT : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 
-architecture ntm_vector_inverter_architecture of ntm_vector_inverter is
+architecture ntm_matrix_inverter_architecture of ntm_matrix_inverter is
 
   -----------------------------------------------------------------------
   -- Types
@@ -103,143 +105,147 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  ctrl_fsm : process(CLK, RST)
-  begin
-    if (RST = '0') then
-      -- Data Outputs
-      DATA_OUT <= (others => '0');
+  for i in X-1 downto 0 generate
 
-      -- Control Outputs
-      READY <= '0';
+    ctrl_fsm : process(CLK, RST)
+    begin
+      if (RST = '0') then
+        -- Data Outputs
+        DATA_OUT(i) <= (others => '0');
 
-      -- Assignation
-      u_int <= ZERO;
-      v_int <= ZERO;
+        -- Control Outputs
+        READY(i) <= '0';
 
-      x_int <= ZERO;
-      y_int <= ZERO;
+        -- Assignation
+        u_int <= ZERO;
+        v_int <= ZERO;
 
-    elsif (rising_edge(CLK)) then
+        x_int <= ZERO;
+        y_int <= ZERO;
 
-      case inverter_ctrl_fsm_st is
-        when STARTER_ST =>  -- STEP 0
-          -- Control Outputs
-          READY <= '0';
+      elsif (rising_edge(CLK)) then
 
-          if (START = '1') then
+        case inverter_ctrl_fsm_st is
+          when STARTER_ST =>            -- STEP 0
+            -- Control Outputs
+            READY(i) <= '0';
+
+            if (START = '1') then
+              -- Assignation
+              u_int <= '0' & DATA_IN(i);
+              v_int <= '0' & MODULO(i);
+
+              x_int <= ONE;
+              y_int <= ZERO;
+
+              -- FSM Control
+              inverter_ctrl_fsm_st <= ENDER_ST;
+            end if;
+
+          when ENDER_ST =>              -- STEP 1
+
+            if(unsigned(u_int) = unsigned(ONE)) then
+              if (unsigned(x_int) < '0' & unsigned(MODULO(i))) then
+                -- Data Outputs
+                DATA_OUT(i) <= x_int(DATA_SIZE-1 downto 0);
+
+                -- Control Outputs
+                READY(i) <= '1';
+
+                -- FSM Control
+                inverter_ctrl_fsm_st <= STARTER_ST;
+              else
+                -- Assignations
+                x_int <= std_logic_vector(unsigned(x_int) - ('0' & unsigned(MODULO(i))));
+              end if;
+            elsif(unsigned(v_int) = unsigned(ONE)) then
+              if (unsigned(y_int) < '0' & unsigned(MODULO(i))) then
+                -- Data Outputs
+                DATA_OUT(i) <= y_int(DATA_SIZE-1 downto 0);
+
+                -- Control Outputs
+                READY(i) <= '1';
+
+                -- FSM Control
+                inverter_ctrl_fsm_st <= STARTER_ST;
+              else
+                -- Assignations
+                y_int <= std_logic_vector(unsigned(y_int) - ('0' & unsigned(MODULO(i))));
+              end if;
+            elsif(u_int(0) = '0') then
+              -- FSM Control
+              inverter_ctrl_fsm_st <= CHECK_U_ST;
+            elsif(v_int(0) = '0') then
+              -- FSM Control
+              inverter_ctrl_fsm_st <= CHECK_V_ST;
+            else
+              -- FSM Control
+              inverter_ctrl_fsm_st <= CHECK_D_ST;
+            end if;
+
+          when CHECK_U_ST =>            -- STEP 2
+
             -- Assignation
-            u_int <= '0' & DATA_IN;
-            v_int <= '0' & MODULO;
+            u_int <= std_logic_vector(unsigned(u_int) srl 1);
 
-            x_int <= ONE;
-            y_int <= ZERO;
+            if(x_int(0) = '0') then
+              x_int <= std_logic_vector(unsigned(x_int) srl 1);
+            else
+              x_int <= std_logic_vector(unsigned(x_int) + ('0' & unsigned(MODULO(i))) srl 1);
+            end if;
+
+            -- FSM Control
+            if(v_int(0) = '0') then
+              inverter_ctrl_fsm_st <= CHECK_V_ST;
+            else
+              inverter_ctrl_fsm_st <= CHECK_D_ST;
+            end if;
+
+          when CHECK_V_ST =>            -- STEP 3
+
+            -- Assignation
+            v_int <= std_logic_vector(unsigned(v_int) srl 1);
+
+            if(y_int(0) = '0') then
+              y_int <= std_logic_vector(unsigned(y_int) srl 1);
+            else
+              y_int <= std_logic_vector(unsigned(y_int) + ('0' & unsigned(MODULO(i))) srl 1);
+            end if;
+
+            -- FSM Control
+            inverter_ctrl_fsm_st <= CHECK_D_ST;
+
+          when CHECK_D_ST =>            -- STEP 4
+
+            -- Assignation
+            if(unsigned(u_int) < unsigned(v_int)) then
+              v_int <= std_logic_vector(unsigned(v_int) - unsigned(u_int));
+
+              if (unsigned(y_int) > unsigned(x_int)) then
+                y_int <= std_logic_vector(unsigned(y_int) - unsigned(x_int));
+              else
+                y_int <= std_logic_vector(unsigned(y_int) - unsigned(x_int) + ('0' & unsigned(MODULO(i))));
+              end if;
+            else
+              u_int <= std_logic_vector(unsigned(u_int) - unsigned(v_int));
+
+              if (unsigned(x_int) > unsigned(y_int)) then
+                x_int <= std_logic_vector(unsigned(x_int) - unsigned(y_int));
+              else
+                x_int <= std_logic_vector(unsigned(x_int) - unsigned(y_int) + ('0' & unsigned(MODULO(i))));
+              end if;
+            end if;
 
             -- FSM Control
             inverter_ctrl_fsm_st <= ENDER_ST;
-          end if;
 
-        when ENDER_ST =>  -- STEP 1
-
-          if(unsigned(u_int) = unsigned(ONE)) then
-            if (unsigned(x_int) < '0' & unsigned(MODULO)) then
-              -- Data Outputs
-              DATA_OUT <= x_int(DATA_SIZE-1 downto 0);
-
-              -- Control Outputs
-              READY <= '1';
-
-              -- FSM Control
-              inverter_ctrl_fsm_st <= STARTER_ST;
-            else
-              -- Assignations
-              x_int <= std_logic_vector(unsigned(x_int) - ('0' & unsigned(MODULO)));
-            end if;
-          elsif(unsigned(v_int) = unsigned(ONE)) then
-            if (unsigned(y_int) < '0' & unsigned(MODULO)) then
-              -- Data Outputs
-              DATA_OUT <= y_int(DATA_SIZE-1 downto 0);
-
-              -- Control Outputs
-              READY <= '1';
-
-              -- FSM Control
-              inverter_ctrl_fsm_st <= STARTER_ST;
-            else
-              -- Assignations
-              y_int <= std_logic_vector(unsigned(y_int) - ('0' & unsigned(MODULO)));
-            end if;
-          elsif(u_int(0) = '0') then
+          when others =>
             -- FSM Control
-            inverter_ctrl_fsm_st <= CHECK_U_ST;
-          elsif(v_int(0) = '0') then
-            -- FSM Control
-            inverter_ctrl_fsm_st <= CHECK_V_ST;
-          else
-            -- FSM Control
-            inverter_ctrl_fsm_st <= CHECK_D_ST;
-          end if;
+            inverter_ctrl_fsm_st <= STARTER_ST;
+        end case;
+      end if;
+    end process;
 
-        when CHECK_U_ST =>  -- STEP 2
-
-          -- Assignation
-          u_int <= std_logic_vector(unsigned(u_int) srl 1);
-
-          if(x_int(0) = '0') then
-            x_int <= std_logic_vector(unsigned(x_int) srl 1);
-          else
-            x_int <= std_logic_vector(unsigned(x_int) + ('0' & unsigned(MODULO)) srl 1);
-          end if;
-
-          -- FSM Control
-          if(v_int(0) = '0') then
-            inverter_ctrl_fsm_st <= CHECK_V_ST;
-          else
-            inverter_ctrl_fsm_st <= CHECK_D_ST;
-          end if;
-
-        when CHECK_V_ST =>  -- STEP 3
-
-          -- Assignation
-          v_int <= std_logic_vector(unsigned(v_int) srl 1);
-
-          if(y_int(0) = '0') then
-            y_int <= std_logic_vector(unsigned(y_int) srl 1);
-          else
-            y_int <= std_logic_vector(unsigned(y_int) + ('0' & unsigned(MODULO)) srl 1);
-          end if;
-
-          -- FSM Control
-          inverter_ctrl_fsm_st <= CHECK_D_ST;
-
-        when CHECK_D_ST =>  -- STEP 4
-
-          -- Assignation
-          if(unsigned(u_int) < unsigned(v_int)) then
-            v_int <= std_logic_vector(unsigned(v_int) - unsigned(u_int));
-
-            if (unsigned(y_int) > unsigned(x_int)) then
-              y_int <= std_logic_vector(unsigned(y_int) - unsigned(x_int));
-            else
-              y_int <= std_logic_vector(unsigned(y_int) - unsigned(x_int) + ('0' & unsigned(MODULO)));
-            end if;
-          else
-            u_int <= std_logic_vector(unsigned(u_int) - unsigned(v_int));
-
-            if (unsigned(x_int) > unsigned(y_int)) then
-              x_int <= std_logic_vector(unsigned(x_int) - unsigned(y_int));
-            else
-              x_int <= std_logic_vector(unsigned(x_int) - unsigned(y_int) + ('0' & unsigned(MODULO)));
-            end if;
-          end if;
-
-          -- FSM Control
-          inverter_ctrl_fsm_st <= ENDER_ST;
-
-        when others =>
-          -- FSM Control
-          inverter_ctrl_fsm_st <= STARTER_ST;
-      end case;
-    end if;
-  end process;
+  end generate;
 
 end architecture;

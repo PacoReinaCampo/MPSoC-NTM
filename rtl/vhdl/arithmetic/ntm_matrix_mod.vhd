@@ -44,6 +44,9 @@ use ieee.numeric_std.all;
 
 entity ntm_matrix_mod is
   generic (
+    X : integer := 64,
+    Y : integer := 64,
+
     DATA_SIZE : integer := 512
   );
   port (
@@ -53,12 +56,12 @@ entity ntm_matrix_mod is
 
     -- CONTROL
     START : in  std_logic;
-    READY : out std_logic;
+    READY : out std_logic_arithmetic_scalar_matrix(X-1 downto 0)(Y-1 downto 0);
 
     -- DATA
-    MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    MODULO   : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+    DATA_IN  : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+    DATA_OUT : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -95,85 +98,91 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  ctrl_fsm : process(CLK, RST)
-  begin
-    if (RST = '0') then
-      -- Data Outputs
-      DATA_OUT <= ZERO;
+  for i in X-1 downto 0 generate
+    for j in Y-1 downto 0 generate
 
-      -- Control Outputs
-      READY <= '0';
+      ctrl_fsm : process(CLK, RST)
+      begin
+        if (RST = '0') then
+          -- Data Outputs
+          DATA_OUT(i)(j) <= ZERO;
 
-      -- Assignations
-      arithmetic_int <= ZERO;
-
-    elsif (rising_edge(CLK)) then
-
-      case mod_ctrl_fsm_st is
-        when STARTER_ST =>  -- STEP 0
           -- Control Outputs
-          READY <= '0';
+          READY(i)(j) <= '0';
 
-          if (START = '1') then
-            -- Assignations
-            arithmetic_int <= DATA_IN;
+          -- Assignations
+          arithmetic_int <= ZERO;
 
-            -- FSM Control
-            mod_ctrl_fsm_st <= ENDER_ST;
-          end if;
+        elsif (rising_edge(CLK)) then
 
-        when ENDER_ST =>  -- STEP 1
-
-          if (unsigned(MODULO) > unsigned(ZERO)) then
-            if (unsigned(arithmetic_int) > unsigned(ZERO)) then
-              if (unsigned(arithmetic_int) = unsigned(MODULO)) then
-                -- Data Outputs
-                DATA_OUT <= ZERO;
-
-                -- Control Outputs
-                READY <= '1';
-
-                -- FSM Control
-                mod_ctrl_fsm_st <= STARTER_ST;
-              elsif (unsigned(arithmetic_int) < unsigned(MODULO)) then
-                -- Data Outputs
-                DATA_OUT <= arithmetic_int;
-
-                -- Control Outputs
-                READY <= '1';
-
-                -- FSM Control
-                mod_ctrl_fsm_st <= STARTER_ST;
-              else
-                -- Assignations
-                arithmetic_int <= std_logic_vector(unsigned(arithmetic_int) - unsigned(MODULO));
-              end if;
-            elsif (unsigned(arithmetic_int) = unsigned(ZERO)) then
-              -- Data Outputs
-              DATA_OUT <= ZERO;
-
+          case mod_ctrl_fsm_st is
+            when STARTER_ST =>          -- STEP 0
               -- Control Outputs
-              READY <= '1';
+              READY(i)(j) <= '0';
 
+              if (START = '1') then
+                -- Assignations
+                arithmetic_int <= DATA_IN(i)(j);
+
+                -- FSM Control
+                mod_ctrl_fsm_st <= ENDER_ST;
+              end if;
+
+            when ENDER_ST =>            -- STEP 1
+
+              if (unsigned(MODULO(i)(j)) > unsigned(ZERO)) then
+                if (unsigned(arithmetic_int) > unsigned(ZERO)) then
+                  if (unsigned(arithmetic_int) = unsigned(MODULO(i)(j))) then
+                    -- Data Outputs
+                    DATA_OUT(i)(j) <= ZERO;
+
+                    -- Control Outputs
+                    READY(i)(j) <= '1';
+
+                    -- FSM Control
+                    mod_ctrl_fsm_st <= STARTER_ST;
+                  elsif (unsigned(arithmetic_int) < unsigned(MODULO(i)(j))) then
+                    -- Data Outputs
+                    DATA_OUT(i)(j) <= arithmetic_int;
+
+                    -- Control Outputs
+                    READY(i)(j) <= '1';
+
+                    -- FSM Control
+                    mod_ctrl_fsm_st <= STARTER_ST;
+                  else
+                    -- Assignations
+                    arithmetic_int <= std_logic_vector(unsigned(arithmetic_int) - unsigned(MODULO(i)(j)));
+                  end if;
+                elsif (unsigned(arithmetic_int) = unsigned(ZERO)) then
+                  -- Data Outputs
+                  DATA_OUT(i)(j) <= ZERO;
+
+                  -- Control Outputs
+                  READY(i)(j) <= '1';
+
+                  -- FSM Control
+                  mod_ctrl_fsm_st <= STARTER_ST;
+                end if;
+              elsif (unsigned(MODULO(i)(j)) = unsigned(ZERO)) then
+                -- Data Outputs
+                DATA_OUT(i)(j) <= arithmetic_int;
+
+                -- Control Outputs
+                READY(i)(j) <= '1';
+
+                -- FSM Control
+                mod_ctrl_fsm_st <= STARTER_ST;
+              end if;
+
+            when others =>
               -- FSM Control
               mod_ctrl_fsm_st <= STARTER_ST;
-            end if;
-          elsif (unsigned(MODULO) = unsigned(ZERO)) then
-            -- Data Outputs
-            DATA_OUT <= arithmetic_int;
+          end case;
+        end if;
+      end process;
 
-            -- Control Outputs
-            READY <= '1';
-
-            -- FSM Control
-            mod_ctrl_fsm_st <= STARTER_ST;
-          end if;
-
-        when others =>
-          -- FSM Control
-          mod_ctrl_fsm_st <= STARTER_ST;
-      end case;
-    end if;
-  end process;
+    end generate;
+  end generate;
 
 end architecture;

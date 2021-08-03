@@ -42,8 +42,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity ntm_vector_multiplier is
+entity ntm_matrix_multiplier is
   generic (
+    X : integer := 64,
+
     DATA_SIZE : integer := 512
   );
   port (
@@ -53,17 +55,17 @@ entity ntm_vector_multiplier is
 
     -- CONTROL
     START : in  std_logic;
-    READY : out std_logic;
+    READY : out std_logic_arithmetic_scalar_vector(X-1 downto 0);
 
     -- DATA
-    MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    MODULO    : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    DATA_A_IN : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 
-architecture ntm_vector_multiplier_architecture of ntm_vector_multiplier is
+architecture ntm_matrix_multiplier_architecture of ntm_matrix_multiplier is
 
   -----------------------------------------------------------------------
   -- Types
@@ -103,105 +105,109 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  ctrl_fsm : process(CLK, RST)
-  begin
-    if (RST = '0') then
-      -- Data Outputs
-      DATA_OUT <= ZERO;
+  for i in X-1 downto 0 generate
 
-      -- Control Outputs
-      READY <= '0';
+    ctrl_fsm : process(CLK, RST)
+    begin
+      if (RST = '0') then
+        -- Data Outputs
+        DATA_OUT(i) <= ZERO;
 
-      -- Assignation
-      u_int <= (others => '0');
-      v_int <= (others => '0');
+        -- Control Outputs
+        READY(i) <= '0';
 
-      product_int <= (others => '0');
+        -- Assignation
+        u_int <= (others => '0');
+        v_int <= (others => '0');
 
-    elsif (rising_edge(CLK)) then
+        product_int <= (others => '0');
 
-      case multiplier_ctrl_fsm_st is
-        when STARTER_ST =>  -- STEP 0
-          -- Control Outputs
-          READY <= '0';
+      elsif (rising_edge(CLK)) then
 
-          if (START = '1') then
-            -- Assignation
-            u_int <= '0' & DATA_A_IN;
-            v_int <= '0' & DATA_B_IN;
-
-            if (DATA_A_IN(0) = '1') then
-              product_int <= '0' & DATA_B_IN;
-            else              
-              product_int <= (others => '0');
-            end if;
-
-            -- FSM Control
-            multiplier_ctrl_fsm_st <= SET_DATA_B_ST;
-          end if;
-
-        when SET_DATA_B_ST =>  -- STEP 1
-
-          -- Assignation
-          u_int <= std_logic_vector(unsigned(u_int) srl 1);
-          v_int <= std_logic_vector(unsigned(v_int) sll 1);
-
-          -- FSM Control
-          if ((unsigned(v_int) sll 1) < '0' & unsigned(MODULO)) then
-            multiplier_ctrl_fsm_st <= SET_PRODUCT_OUT_ST;
-          else
-            multiplier_ctrl_fsm_st <= REDUCE_DATA_B_ST;
-          end if;
-
-        when REDUCE_DATA_B_ST =>  -- STEP 2
-
-          if (unsigned(v_int) < '0' & unsigned(MODULO)) then
-            -- FSM Control
-            multiplier_ctrl_fsm_st <= SET_PRODUCT_OUT_ST;
-          else
-            -- Assignation
-            v_int <= std_logic_vector(unsigned(v_int) - ('0' & unsigned(MODULO)));
-          end if;
-
-        when SET_PRODUCT_OUT_ST =>  -- STEP 3
-          
-          -- Assignation
-          if (u_int(0) = '1') then
-            if (unsigned(product_int) + unsigned(v_int) < '0' & unsigned(MODULO)) then
-              product_int <= std_logic_vector(unsigned(product_int) + unsigned(v_int));
-            else
-              product_int <= std_logic_vector(unsigned(product_int) + unsigned(v_int) - ('0' & unsigned(MODULO)));
-            end if;
-          else
-            if (unsigned(product_int) >= '0' & unsigned(MODULO)) then
-              product_int <= std_logic_vector(unsigned(product_int) - unsigned(MODULO));
-            end if;
-          end if;
-
-          -- FSM Control
-          multiplier_ctrl_fsm_st <= ENDER_ST;
-
-        when ENDER_ST =>  -- STEP 4
-
-          if (unsigned(u_int) = '0' & unsigned(ONE)) then
-            -- Data Outputs
-            DATA_OUT <= product_int(DATA_SIZE-1 downto 0);
-
+        case multiplier_ctrl_fsm_st is
+          when STARTER_ST =>            -- STEP 0
             -- Control Outputs
-            READY <= '1';
+            READY(i) <= '0';
 
+            if (START = '1') then
+              -- Assignation
+              u_int <= '0' & DATA_A_IN(i);
+              v_int <= '0' & DATA_B_IN(i);
+
+              if (DATA_A_IN(i)(0) = '1') then
+                product_int <= '0' & DATA_B_IN(i);
+              else
+                product_int <= (others => '0');
+              end if;
+
+              -- FSM Control
+              multiplier_ctrl_fsm_st <= SET_DATA_B_ST;
+            end if;
+
+          when SET_DATA_B_ST =>         -- STEP 1
+
+            -- Assignation
+            u_int <= std_logic_vector(unsigned(u_int) srl 1);
+            v_int <= std_logic_vector(unsigned(v_int) sll 1);
+
+            -- FSM Control
+            if ((unsigned(v_int) sll 1) < '0' & unsigned(MODULO(i))) then
+              multiplier_ctrl_fsm_st <= SET_PRODUCT_OUT_ST;
+            else
+              multiplier_ctrl_fsm_st <= REDUCE_DATA_B_ST;
+            end if;
+
+          when REDUCE_DATA_B_ST =>      -- STEP 2
+
+            if (unsigned(v_int) < '0' & unsigned(MODULO(i))) then
+              -- FSM Control
+              multiplier_ctrl_fsm_st <= SET_PRODUCT_OUT_ST;
+            else
+              -- Assignation
+              v_int <= std_logic_vector(unsigned(v_int) - ('0' & unsigned(MODULO(i))));
+            end if;
+
+          when SET_PRODUCT_OUT_ST =>    -- STEP 3
+
+            -- Assignation
+            if (u_int(0) = '1') then
+              if (unsigned(product_int) + unsigned(v_int) < '0' & unsigned(MODULO(i))) then
+                product_int <= std_logic_vector(unsigned(product_int) + unsigned(v_int));
+              else
+                product_int <= std_logic_vector(unsigned(product_int) + unsigned(v_int) - ('0' & unsigned(MODULO(i))));
+              end if;
+            else
+              if (unsigned(product_int) >= '0' & unsigned(MODULO(i))) then
+                product_int <= std_logic_vector(unsigned(product_int) - unsigned(MODULO(i)));
+              end if;
+            end if;
+
+            -- FSM Control
+            multiplier_ctrl_fsm_st <= ENDER_ST;
+
+          when ENDER_ST =>              -- STEP 4
+
+            if (unsigned(u_int) = '0' & unsigned(ONE)) then
+              -- Data Outputs
+              DATA_OUT(i) <= product_int(DATA_SIZE-1 downto 0);
+
+              -- Control Outputs
+              READY(i) <= '1';
+
+              -- FSM Control
+              multiplier_ctrl_fsm_st <= STARTER_ST;
+            else
+              -- FSM Control
+              multiplier_ctrl_fsm_st <= SET_DATA_B_ST;
+            end if;
+
+          when others =>
             -- FSM Control
             multiplier_ctrl_fsm_st <= STARTER_ST;
-          else
-            -- FSM Control
-            multiplier_ctrl_fsm_st <= SET_DATA_B_ST;
-          end if;
+        end case;
+      end if;
+    end process;
 
-        when others =>
-          -- FSM Control
-          multiplier_ctrl_fsm_st <= STARTER_ST;
-      end case;
-    end if;
-  end process;
+  end generate;
 
 end architecture;
