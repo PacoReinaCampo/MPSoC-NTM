@@ -42,7 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity ntm_matrix_mod is
+entity ntm_vector_mod is
   generic (
     X : integer := 64,
 
@@ -64,7 +64,7 @@ entity ntm_matrix_mod is
   );
 end entity;
 
-architecture ntm_matrix_mod_architecture of ntm_matrix_mod is
+architecture ntm_vector_mod_architecture of ntm_vector_mod is
 
   -----------------------------------------------------------------------
   -- Types
