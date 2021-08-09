@@ -55,7 +55,7 @@ entity ntm_vector_adder is
 
     -- CONTROL
     START : in  std_logic;
-    READY : out std_logic_arithmetic_scalar_vector(X-1 downto 0);
+    READY : out std_logic_vector(X-1 downto 0);
 
     OPERATION : in std_logic;
 

@@ -146,7 +146,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
 
       -- CONTROL
       START : in  std_logic;
-      READY : out std_logic_arithmetic_scalar_vector(X-1 downto 0);
+      READY : out std_logic_vector(X-1 downto 0);
 
       -- DATA
       MODULO   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -168,7 +168,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
 
       -- CONTROL
       START : in  std_logic;
-      READY : out std_logic_arithmetic_scalar_vector(X-1 downto 0);
+      READY : out std_logic_vector(X-1 downto 0);
 
       OPERATION : in std_logic;
 
@@ -193,7 +193,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
 
       -- CONTROL
       START : in  std_logic;
-      READY : out std_logic_arithmetic_scalar_vector(X-1 downto 0);
+      READY : out std_logic_vector(X-1 downto 0);
 
       -- DATA
       MODULO    : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -216,7 +216,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
 
       -- CONTROL
       START : in  std_logic;
-      READY : out std_logic_arithmetic_scalar_vector(X-1 downto 0);
+      READY : out std_logic_vector(X-1 downto 0);
 
       -- DATA
       MODULO   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -238,7 +238,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
 
       -- CONTROL
       START : in  std_logic;
-      READY : out std_logic_arithmetic_scalar_vector(X-1 downto 0);
+      READY : out std_logic_vector(X-1 downto 0);
 
       -- DATA
       MODULO   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -365,11 +365,21 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal START : std_logic;
 
   -- Scalar
+  signal SCALAR_READY : std_logic;
+
+  -- Vector
+  signal VECTOR_READY : std_logic_vector(X-1 downto 0);
+
+  -- Matrix
+  signal MATRIX_READY : std_logic_arithmetic_scalar_matrix(X-1 downto 0)(Y-1 downto 0);
+
+  -- DATA
+
+  -- Scalar
 
   -- Vector
 
   -- Matrix
-  signal MATRIX_READY : std_logic_arithmetic_scalar_matrix(X-1 downto 0)(Y-1 downto 0);
 
 begin
 
@@ -378,8 +388,52 @@ begin
   -----------------------------------------------------------------------
 
   -- SCALAR
+  scalar_inverter : ntm_scalar_inverter
+    generic map (
+      X => X,
+      Y => Y,
+      Z => Z,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => START,
+      READY => SCALAR_READY,
+
+      -- DATA
+      MODULO   => SCALAR_MODULO,
+      DATA_IN  => SCALAR_DATA_IN,
+      DATA_OUT => SCALAR_DATA_OUT
+    );
 
   -- VECTOR
+  vector_inverter : ntm_vector_inverter
+    generic map (
+      X => X,
+      Y => Y,
+      Z => Z,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => START,
+      READY => VECTOR_READY,
+
+      -- DATA
+      MODULO   => VECTOR_MODULO,
+      DATA_IN  => VECTOR_DATA_IN,
+      DATA_OUT => VECTOR_DATA_OUT
+    );
 
   -- MATRIX
   matrix_inverter : ntm_matrix_inverter
@@ -400,8 +454,8 @@ begin
       READY => MATRIX_READY,
 
       -- DATA
-      MODULO   => MODULO,
-      DATA_IN  => DATA_IN,
-      DATA_OUT => DATA_OUT
+      MODULO   => MATRIX_MODULO,
+      DATA_IN  => MATRIX_DATA_IN,
+      DATA_OUT => MATRIX_DATA_OUT
     );
 end ntm_arithmetic_testbench_architecture;
