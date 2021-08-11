@@ -40,7 +40,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-package dnc_pkg is
+package ntm_pkg is
 
   -----------------------------------------------------------------------
   -- Types
@@ -421,9 +421,9 @@ package dnc_pkg is
 
   function to_stdlogic (input : boolean) return std_logic;
 
-end dnc_pkg;
+end ntm_pkg;
 
-package body dnc_pkg is
+package body ntm_pkg is
 
   -----------------------------------------------------------------------
   -- Functions
@@ -440,4 +440,4 @@ package body dnc_pkg is
     end if;
   end function to_stdlogic;
 
-end dnc_pkg;
+end ntm_pkg;
