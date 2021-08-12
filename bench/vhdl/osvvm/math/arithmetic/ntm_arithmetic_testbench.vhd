@@ -40,7 +40,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-package ntm_pkg is
+entity ntm_arithmetic_testbench is
+end ntm_arithmetic_testbench;
+
+architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench is
 
   -----------------------------------------------------------------------
   -- Types
@@ -53,7 +56,6 @@ package ntm_pkg is
   -- Components
   -----------------------------------------------------------------------
 
-  -- SCALAR
   component ntm_scalar_mod is
     generic (
       DATA_SIZE : integer := 512
@@ -159,28 +161,6 @@ package ntm_pkg is
     );
   end component;
 
-  component ntm_scalar_exponentiator is
-    generic (
-      DATA_SIZE : integer := 512
-    );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      -- DATA
-      MODULO               : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      BASE_EXPONENTIATION  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      POWER_EXPONENTIATION : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT             : out std_logic_vector(DATA_SIZE-1 downto 0)
-    );
-  end component;
-
-  -- VECTOR
   component ntm_vector_mod is
     generic (
       X : integer := 64,
@@ -296,30 +276,6 @@ package ntm_pkg is
     );
   end component;
 
-  component ntm_vector_exponentiator is
-    generic (
-      X : integer := 64,
-
-      DATA_SIZE : integer := 512
-    );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic_vector(X-1 downto 0);
-
-      -- DATA
-      MODULO               : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      BASE_EXPONENTIATION  : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      POWER_EXPONENTIATION : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT             : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
-    );
-  end component;
-
-  -- MATRIX
   component ntm_matrix_mod is
     generic (
       X : integer := 64,
@@ -339,6 +295,29 @@ package ntm_pkg is
       MODULO   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
       DATA_IN  : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
       DATA_OUT : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+    );
+  end component;
+
+  component ntm_matrix_mod is
+    generic (
+      X : integer := 64,
+      Y : integer := 64,
+
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic_arithmetic_scalar_matrix(X-1 downto 0)(Y-1 downto 0);
+
+      -- DATA
+      MODULO   : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -439,53 +418,134 @@ package ntm_pkg is
     );
   end component;
 
-  component ntm_matrix_exponentiator is
-    generic (
-      X : integer := 64,
-      Y : integer := 64,
+  -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
 
-      DATA_SIZE : integer := 512
-    );
-    port (
+  constant X : integer := 64;
+  constant Y : integer := 64;
+  constant Z : integer := 64;
+
+  constant DATA_SIZE : integer := 64;
+
+  -----------------------------------------------------------------------
+  -- Signals
+  -----------------------------------------------------------------------
+
+  -- GLOBAL
+  signal CLK : std_logic;
+  signal RST : std_logic;
+
+  -- CONTROL
+  signal START : std_logic;
+
+  -- Scalar
+  signal SCALAR_READY : std_logic;
+
+  -- Vector
+  signal VECTOR_READY : std_logic_vector(X-1 downto 0);
+
+  -- Matrix
+  signal MATRIX_READY : std_logic_arithmetic_scalar_matrix(X-1 downto 0)(Y-1 downto 0);
+
+  -- DATA
+
+  -- Scalar
+  signal SCALAR_MODULO    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal SCALAR_DATA_IN   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal SCALAR_DATA_A_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal SCALAR_DATA_B_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal SCALAR_DATA_OUT  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- Vector
+  signal VECTOR_MODULO    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal VECTOR_DATA_IN   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal VECTOR_DATA_A_IN : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal VECTOR_DATA_B_IN : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal VECTOR_DATA_OUT  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  -- Matrix
+  signal MATRIX_MODULO    : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal MATRIX_DATA_IN   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal MATRIX_DATA_A_IN : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal MATRIX_DATA_B_IN : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal MATRIX_DATA_OUT  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+
+begin
+
+  -----------------------------------------------------------------------
+  -- Body
+  -----------------------------------------------------------------------
+
+  -- SCALAR
+  scalar_inverter : ntm_scalar_inverter
+    generic map (
+      X => X,
+      Y => Y,
+      Z => Z,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
       -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
+      CLK => CLK,
+      RST => RST,
 
       -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic_arithmetic_scalar_matrix(X-1 downto 0)(Y-1 downto 0);
+      START => START,
+      READY => SCALAR_READY,
 
       -- DATA
-      MODULO               : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-      BASE_EXPONENTIATION  : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-      POWER_EXPONENTIATION : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT             : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   => SCALAR_MODULO,
+      DATA_IN  => SCALAR_DATA_IN,
+      DATA_OUT => SCALAR_DATA_OUT
     );
-  end component;
 
-  -----------------------------------------------------------------------
-  -- Functions
-  -----------------------------------------------------------------------
+  -- VECTOR
+  vector_inverter : ntm_vector_inverter
+    generic map (
+      X => X,
+      Y => Y,
+      Z => Z,
 
-  function to_stdlogic (input : boolean) return std_logic;
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
 
-end ntm_pkg;
+      -- CONTROL
+      START => START,
+      READY => VECTOR_READY,
 
-package body ntm_pkg is
+      -- DATA
+      MODULO   => VECTOR_MODULO,
+      DATA_IN  => VECTOR_DATA_IN,
+      DATA_OUT => VECTOR_DATA_OUT
+    );
 
-  -----------------------------------------------------------------------
-  -- Functions
-  -----------------------------------------------------------------------
+  -- MATRIX
+  matrix_inverter : ntm_matrix_inverter
+    generic map (
+      X => X,
+      Y => Y,
+      Z => Z,
 
-  function to_stdlogic (
-    input : boolean
-  ) return std_logic is
-  begin
-    if input then
-      return('1');
-    else
-      return('0');
-    end if;
-  end function to_stdlogic;
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
 
-end ntm_pkg;
+      -- CONTROL
+      START => START,
+      READY => MATRIX_READY,
+
+      -- DATA
+      MODULO   => MATRIX_MODULO,
+      DATA_IN  => MATRIX_DATA_IN,
+      DATA_OUT => MATRIX_DATA_OUT
+    );
+end ntm_arithmetic_testbench_architecture;
