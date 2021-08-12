@@ -44,10 +44,8 @@ use ieee.numeric_std.all;
 
 use work.ntm_pkg.all;
 
-entity ntm_vector_divider is
+entity ntm_scalar_inverter is
   generic (
-    X : integer := 64,
-
     DATA_SIZE : integer := 512
   );
   port (
@@ -60,9 +58,8 @@ entity ntm_vector_divider is
     READY : out std_logic;
 
     -- DATA
-    MODULO               : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    BASE_EXPONENTIATION  : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    POWER_EXPONENTIATION : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_OUT             : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
