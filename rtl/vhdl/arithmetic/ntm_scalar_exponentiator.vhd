@@ -42,6 +42,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.ntm_pkg.all;
+
 entity ntm_scalar_divider is
   generic (
     DATA_SIZE : integer := 512
@@ -56,9 +58,9 @@ entity ntm_scalar_divider is
     READY : out std_logic;
 
     -- DATA
-    MODULO              : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    BASE_EXPONENTIATION : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    POWER_EXPNENTIATION : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT            : out std_logic_vector(DATA_SIZE-1 downto 0)
+    MODULO               : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    BASE_EXPONENTIATION  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    POWER_EXPONENTIATION : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT             : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;

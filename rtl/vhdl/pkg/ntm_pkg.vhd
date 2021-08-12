@@ -158,6 +158,27 @@ package ntm_pkg is
     );
   end component;
 
+  component ntm_scalar_exponentiator is
+    generic (
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      MODULO               : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      BASE_EXPONENTIATION  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      POWER_EXPONENTIATION : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT             : out std_logic_vector(DATA_SIZE-1 downto 0)
+    );
+  end component;
+
   component ntm_vector_mod is
     generic (
       X : integer := 64,
@@ -273,6 +294,29 @@ package ntm_pkg is
     );
   end component;
 
+  component ntm_vector_exponentiator is
+    generic (
+      X : integer := 64,
+
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic_vector(X-1 downto 0);
+
+      -- DATA
+      MODULO               : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      BASE_EXPONENTIATION  : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      POWER_EXPONENTIATION : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_OUT             : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+    );
+  end component;
+
   component ntm_matrix_mod is
     generic (
       X : integer := 64,
@@ -292,29 +336,6 @@ package ntm_pkg is
       MODULO   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
       DATA_IN  : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
       DATA_OUT : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
-    );
-  end component;
-
-  component ntm_matrix_mod is
-    generic (
-      X : integer := 64,
-      Y : integer := 64,
-
-      DATA_SIZE : integer := 512
-    );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic_arithmetic_scalar_matrix(X-1 downto 0)(Y-1 downto 0);
-
-      -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -412,6 +433,30 @@ package ntm_pkg is
       DATA_A_IN : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+    );
+  end component;
+
+  component ntm_matrix_exponentiator is
+    generic (
+      X : integer := 64,
+      Y : integer := 64,
+
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic_arithmetic_scalar_matrix(X-1 downto 0)(Y-1 downto 0);
+
+      -- DATA
+      MODULO               : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+      BASE_EXPONENTIATION  : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+      POWER_EXPONENTIATION : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_OUT             : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
 
