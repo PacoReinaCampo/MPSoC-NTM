@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_pkg.all;
 
-entity ntm_vector_inverter is
+entity ntm_vector_logarithm is
   generic (
     X : integer := 64,
 
