@@ -35,3 +35,32 @@
 -- THE SOFTWARE.
 --
 --------------------------------------------------------------------------------
+-- Author(s):
+--   Paco Reina Campo <pacoreinacampo@queenfield.tech>
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+use work.ntm_pkg.all;
+
+entity ntm_addressing_location is
+  generic (
+    DATA_SIZE : integer := 512
+  );
+  port (
+    -- GLOBAL
+    CLK : in std_logic;
+    RST : in std_logic;
+
+    -- CONTROL
+    START : in  std_logic;
+    READY : out std_logic;
+
+    -- DATA
+    MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    W_IN     : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    GAMMA_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    W_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0)
+  );
+end entity;
