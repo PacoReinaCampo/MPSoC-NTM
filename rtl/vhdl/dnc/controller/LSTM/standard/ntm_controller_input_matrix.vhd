@@ -44,9 +44,9 @@ use ieee.numeric_std.all;
 
 use work.ntm_pkg.all;
 
-entity ntm_hidden_gate_vector is
+entity ntm_controller_input_matrix is
   generic (
-    H : integer := 64,
+    X : integer := 64,
 
     DATA_SIZE : integer := 512
   );
@@ -60,10 +60,67 @@ entity ntm_hidden_gate_vector is
     READY : out std_logic;
 
     -- DATA
-    S_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-    O_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+    X_IN  : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    R_IN  : in std_logic_arithmetic_vector_matrix(W-1 downto 0)(R-1 downto 0)(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-    H_OUT  : out std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO : in  std_logic_arithmetic_vector_matrix(W-1 downto 0)(R-1 downto 0)(DATA_SIZE-1 downto 0);
+    X_OUT  : out std_logic_arithmetic_vector_matrix(W-1 downto 0)(R-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
+
+architecture ntm_dnc_output_vector_architecture of ntm_dnc_output_vector is
+
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Signals
+  -----------------------------------------------------------------------
+
+  -- 3ARRAY PRODUCT
+  -- CONTROL
+  signal start_3array_product : std_logic;
+  signal ready_3array_product : std_logic;
+
+  -- DATA
+  signal modulo_3array_product    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_3array_product : std_logic_arithmetic_vector_3array(H-1 downto 0)(W-1 downto 0)(R-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_3array_product : std_logic_arithmetic_vector_matrix(W-1 downto 0)(R-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_3array_product  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+
+begin
+
+  -----------------------------------------------------------------------
+  -- Body
+  -----------------------------------------------------------------------
+
+  ntm_3array_product_i : ntm_3array_product
+    generic map (
+      X => H,
+      Y => W,
+      Z => R,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_3array_product,
+      READY => ready_3array_product,
+
+      -- DATA
+      MODULO    => modulo_3array_product,
+      DATA_A_IN => data_a_in_3array_product,
+      DATA_B_IN => data_b_in_3array_product,
+      DATA_OUT  => data_out_3array_product
+    );
+
+end architecture;

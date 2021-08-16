@@ -71,3 +71,97 @@ entity ntm_dnc_output_vector is
     Y_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
+
+architecture ntm_dnc_output_vector_architecture of ntm_dnc_output_vector is
+
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Signals
+  -----------------------------------------------------------------------
+
+  -- VECTOR ADDER
+  -- CONTROL
+  signal start_vector_adder : std_logic;
+  signal ready_vector_adder : std_logic;
+
+  signal operation_vector_adder : std_logic;
+
+  -- DATA
+  signal modulo_vector_adder    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_adder : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_adder : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_adder  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  -- 3ARRAY PRODUCT
+  -- CONTROL
+  signal start_3array_product : std_logic;
+  signal ready_3array_product : std_logic;
+
+  -- DATA
+  signal modulo_3array_product    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_3array_product : std_logic_arithmetic_vector_3array(H-1 downto 0)(W-1 downto 0)(R-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_3array_product : std_logic_arithmetic_vector_matrix(W-1 downto 0)(R-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_3array_product  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+
+begin
+
+  -----------------------------------------------------------------------
+  -- Body
+  -----------------------------------------------------------------------
+
+  ntm_vector_adder_i : ntm_vector_adder
+    generic map (
+      X => H,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_adder,
+      READY => ready_vector_adder,
+
+      OPERATION => operation_vector_adder,
+
+      -- DATA
+      MODULO    => modulo_vector_adder,
+      DATA_A_IN => data_a_in_vector_adder,
+      DATA_B_IN => data_b_in_vector_adder,
+      DATA_OUT  => data_out_vector_adder
+    );
+
+  ntm_3array_product_i : ntm_3array_product
+    generic map (
+      X => H,
+      Y => W,
+      Z => R,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_3array_product,
+      READY => ready_3array_product,
+
+      -- DATA
+      MODULO    => modulo_3array_product,
+      DATA_A_IN => data_a_in_3array_product,
+      DATA_B_IN => data_b_in_3array_product,
+      DATA_OUT  => data_out_3array_product
+    );
+
+end architecture;

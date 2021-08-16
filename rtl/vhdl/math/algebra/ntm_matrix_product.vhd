@@ -67,3 +67,91 @@ entity ntm_matrix_product is
     DATA_OUT  : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
+
+architecture ntm_matrix_product_architecture of ntm_matrix_product is
+
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Signals
+  -----------------------------------------------------------------------
+
+  -- SCALAR ADDER
+  -- CONTROL
+  signal start_scalar_adder : std_logic;
+  signal ready_scalar_adder : std_logic;
+
+  signal operation_scalar_adder : std_logic;
+
+  -- DATA
+  signal modulo_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- SCALAR MULTIPLIER
+  -- CONTROL
+  signal start_scalar_multiplier : std_logic;
+  signal ready_scalar_multiplier : std_logic;
+
+  -- DATA
+  signal modulo_scalar_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+begin
+
+  -----------------------------------------------------------------------
+  -- Body
+  -----------------------------------------------------------------------
+
+  ntm_scalar_adder_i : ntm_scalar_adder
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_adder,
+      READY => ready_scalar_adder,
+
+      OPERATION => operation_scalar_adder,
+
+      -- DATA
+      MODULO    => modulo_scalar_adder,
+      DATA_A_IN => data_a_in_scalar_adder,
+      DATA_B_IN => data_b_in_scalar_adder,
+      DATA_OUT  => data_out_scalar_adder
+    );
+
+  ntm_scalar_multiplier_i : ntm_scalar_multiplier
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_multiplier,
+      READY => ready_scalar_multiplier,
+
+      -- DATA
+      MODULO    => modulo_scalar_multiplier,
+      DATA_A_IN => data_a_in_scalar_multiplier,
+      DATA_B_IN => data_b_in_scalar_multiplier,
+      DATA_OUT  => data_out_scalar_multiplier
+    );
+
+end architecture;

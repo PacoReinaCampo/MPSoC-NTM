@@ -44,10 +44,9 @@ use ieee.numeric_std.all;
 
 use work.ntm_pkg.all;
 
-entity ntm_matrix_transpose is
+entity ntm_hidden_gate_vector is
   generic (
-    X : integer := 64,
-    Y : integer := 64,
+    H : integer := 64,
 
     DATA_SIZE : integer := 512
   );
@@ -61,13 +60,15 @@ entity ntm_matrix_transpose is
     READY : out std_logic;
 
     -- DATA
-    MODULO   : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+    S_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+    O_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+
+    MODULO : in  std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+    H_OUT  : out std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 
-architecture ntm_matrix_transpose_architecture of ntm_matrix_transpose is
+architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
 
   -----------------------------------------------------------------------
   -- Types
@@ -81,29 +82,26 @@ architecture ntm_matrix_transpose_architecture of ntm_matrix_transpose is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- SCALAR ADDER
+  -- VECTOR TANH FUNCTION
   -- CONTROL
-  signal start_scalar_adder : std_logic;
-  signal ready_scalar_adder : std_logic;
-
-  signal operation_scalar_adder : std_logic;
+  signal start_vector_tanh_function : std_logic;
+  signal ready_vector_tanh_function : std_logic;
 
   -- DATA
-  signal modulo_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_vector_tanh_function   : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_vector_tanh_function  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_tanh_function : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  -- SCALAR MULTIPLIER
+  -- VECTOR MULTIPLIER
   -- CONTROL
-  signal start_scalar_multiplier : std_logic;
-  signal ready_scalar_multiplier : std_logic;
+  signal start_vector_multiplier : std_logic;
+  signal ready_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_scalar_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_vector_multiplier    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplier : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplier : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplier  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -111,8 +109,10 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  ntm_scalar_adder_i : ntm_scalar_adder
+  ntm_vector_tanh_function_i : ntm_vector_tanh_function
     generic map (
+      X => H,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -121,20 +121,19 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_adder,
-      READY => ready_scalar_adder,
-
-      OPERATION => operation_scalar_adder,
+      START => start_vector_tanh_function,
+      READY => ready_vector_tanh_function,
 
       -- DATA
-      MODULO    => modulo_scalar_adder,
-      DATA_A_IN => data_a_in_scalar_adder,
-      DATA_B_IN => data_b_in_scalar_adder,
-      DATA_OUT  => data_out_scalar_adder
+      MODULO   => modulo_vector_tanh_function,
+      DATA_IN  => data_in_vector_tanh_function,
+      DATA_OUT => data_out_vector_tanh_function
     );
 
-  ntm_scalar_multiplier_i : ntm_scalar_multiplier
+  ntm_vector_multiplier_i : ntm_vector_multiplier
     generic map (
+      X => H,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -143,14 +142,14 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_multiplier,
-      READY => ready_scalar_multiplier,
+      START => start_vector_multiplier,
+      READY => ready_vector_multiplier,
 
       -- DATA
-      MODULO    => modulo_scalar_multiplier,
-      DATA_A_IN => data_a_in_scalar_multiplier,
-      DATA_B_IN => data_b_in_scalar_multiplier,
-      DATA_OUT  => data_out_scalar_multiplier
+      MODULO    => modulo_vector_multiplier,
+      DATA_A_IN => data_a_in_vector_multiplier,
+      DATA_B_IN => data_b_in_vector_multiplier,
+      DATA_OUT  => data_out_vector_multiplier
     );
 
 end architecture;
