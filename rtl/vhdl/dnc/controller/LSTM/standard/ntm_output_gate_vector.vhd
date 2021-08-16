@@ -128,16 +128,16 @@ architecture ntm_output_gate_vector_architecture of ntm_output_gate_vector is
   signal data_b_in_matrix_product_x : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product_x  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  -- MATRIX PRODUCT
+  -- MATRIX PRODUCT H
   -- CONTROL
-  signal start_matrix_product : std_logic;
-  signal ready_matrix_product : std_logic;
+  signal start_matrix_product_h : std_logic;
+  signal ready_matrix_product_h : std_logic;
 
   -- DATA
-  signal modulo_matrix_product    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_product : std_logic_arithmetic_vector_matrix(H-1 downto 0)(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_product : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_product  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_product_h    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_product_h : std_logic_arithmetic_vector_matrix(H-1 downto 0)(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_product_h : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_product_h  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- 3ARRAY PRODUCT
   -- CONTROL
@@ -201,7 +201,7 @@ begin
       DATA_OUT  => data_out_vector_adder
     );
 
-  ntm_matrix_product_x_i : ntm_matrix_product
+  ntm_matrix_product_x_i : ntm_matrix_product_h
     generic map (
       X => H,
       Y => X,
@@ -224,7 +224,7 @@ begin
       DATA_OUT  => data_out_matrix_product_x
     );
 
-  ntm_matrix_product_i : ntm_matrix_product
+  ntm_matrix_product_h_i : ntm_matrix_product_h
     generic map (
       X => H,
       Y => H,
@@ -237,14 +237,14 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_product,
-      READY => ready_matrix_product,
+      START => start_matrix_product_h,
+      READY => ready_matrix_product_h,
 
       -- DATA
-      MODULO    => modulo_matrix_product,
-      DATA_A_IN => data_a_in_matrix_product,
-      DATA_B_IN => data_b_in_matrix_product,
-      DATA_OUT  => data_out_matrix_product
+      MODULO    => modulo_matrix_product_h,
+      DATA_A_IN => data_a_in_matrix_product_h,
+      DATA_B_IN => data_b_in_matrix_product_h,
+      DATA_OUT  => data_out_matrix_product_h
     );
 
   ntm_3array_product_i : ntm_3array_product
