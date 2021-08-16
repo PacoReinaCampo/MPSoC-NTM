@@ -117,38 +117,38 @@ architecture ntm_forget_gate_vector_architecture of ntm_forget_gate_vector is
   signal data_b_in_vector_adder : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  -- MATRIX PRODUCT X
+  -- MATRIX CONVOLUTION X
   -- CONTROL
-  signal start_matrix_product_x : std_logic;
-  signal ready_matrix_product_x : std_logic;
+  signal start_matrix_convolution_x : std_logic;
+  signal ready_matrix_convolution_x : std_logic;
 
   -- DATA
-  signal modulo_matrix_product_x    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_product_x : std_logic_arithmetic_vector_matrix(H-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_product_x : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_product_x  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_convolution_x    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_convolution_x : std_logic_arithmetic_vector_matrix(H-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_convolution_x : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_convolution_x  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  -- MATRIX PRODUCT H
+  -- MATRIX CONVOLUTION H
   -- CONTROL
-  signal start_matrix_product_h : std_logic;
-  signal ready_matrix_product_h : std_logic;
+  signal start_matrix_convolution_h : std_logic;
+  signal ready_matrix_convolution_h : std_logic;
 
   -- DATA
-  signal modulo_matrix_product_h    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_product_h : std_logic_arithmetic_vector_matrix(H-1 downto 0)(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_product_h : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_product_h  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_convolution_h    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_convolution_h : std_logic_arithmetic_vector_matrix(H-1 downto 0)(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_convolution_h : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_convolution_h  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  -- 3ARRAY PRODUCT
+  -- 3ARRAY CONVOLUTION
   -- CONTROL
-  signal start_3array_product : std_logic;
-  signal ready_3array_product : std_logic;
+  signal start_3array_convolution : std_logic;
+  signal ready_3array_convolution : std_logic;
 
   -- DATA
-  signal modulo_3array_product    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_3array_product : std_logic_arithmetic_vector_3array(H-1 downto 0)(W-1 downto 0)(R-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_3array_product : std_logic_arithmetic_vector_matrix(W-1 downto 0)(R-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_3array_product  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_3array_convolution    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_3array_convolution : std_logic_arithmetic_vector_3array(H-1 downto 0)(W-1 downto 0)(R-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_3array_convolution : std_logic_arithmetic_vector_matrix(W-1 downto 0)(R-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_3array_convolution  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -201,7 +201,7 @@ begin
       DATA_OUT  => data_out_vector_adder
     );
 
-  ntm_matrix_product_x_i : ntm_matrix_product_h
+  ntm_matrix_convolution_x_i : ntm_matrix_convolution_h
     generic map (
       X => H,
       Y => X,
@@ -214,17 +214,17 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_product_x,
-      READY => ready_matrix_product_x,
+      START => start_matrix_convolution_x,
+      READY => ready_matrix_convolution_x,
 
       -- DATA
-      MODULO    => modulo_matrix_product_x,
-      DATA_A_IN => data_a_in_matrix_product_x,
-      DATA_B_IN => data_b_in_matrix_product_x,
-      DATA_OUT  => data_out_matrix_product_x
+      MODULO    => modulo_matrix_convolution_x,
+      DATA_A_IN => data_a_in_matrix_convolution_x,
+      DATA_B_IN => data_b_in_matrix_convolution_x,
+      DATA_OUT  => data_out_matrix_convolution_x
     );
 
-  ntm_matrix_product_h_i : ntm_matrix_product_h
+  ntm_matrix_convolution_h_i : ntm_matrix_convolution_h
     generic map (
       X => H,
       Y => H,
@@ -237,17 +237,17 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_product_h,
-      READY => ready_matrix_product_h,
+      START => start_matrix_convolution_h,
+      READY => ready_matrix_convolution_h,
 
       -- DATA
-      MODULO    => modulo_matrix_product_h,
-      DATA_A_IN => data_a_in_matrix_product_h,
-      DATA_B_IN => data_b_in_matrix_product_h,
-      DATA_OUT  => data_out_matrix_product_h
+      MODULO    => modulo_matrix_convolution_h,
+      DATA_A_IN => data_a_in_matrix_convolution_h,
+      DATA_B_IN => data_b_in_matrix_convolution_h,
+      DATA_OUT  => data_out_matrix_convolution_h
     );
 
-  ntm_3array_product_i : ntm_3array_product
+  ntm_3array_convolution_i : ntm_3array_convolution
     generic map (
       X => H,
       Y => W,
@@ -261,14 +261,14 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_3array_product,
-      READY => ready_3array_product,
+      START => start_3array_convolution,
+      READY => ready_3array_convolution,
 
       -- DATA
-      MODULO    => modulo_3array_product,
-      DATA_A_IN => data_a_in_3array_product,
-      DATA_B_IN => data_b_in_3array_product,
-      DATA_OUT  => data_out_3array_product
+      MODULO    => modulo_3array_convolution,
+      DATA_A_IN => data_a_in_3array_convolution,
+      DATA_B_IN => data_b_in_3array_convolution,
+      DATA_OUT  => data_out_3array_convolution
     );
 
 end architecture;
