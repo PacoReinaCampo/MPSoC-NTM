@@ -237,7 +237,7 @@ begin
       DATA_OUT  => data_out_vector_multiplier
     );
 
-  ntm_matrix_convolution_x_i : ntm_matrix_convolution_h
+  ntm_matrix_convolution_x_i : ntm_matrix_convolution
     generic map (
       X => H,
       Y => X,
@@ -260,7 +260,7 @@ begin
       DATA_OUT  => data_out_matrix_convolution_x
     );
 
-  ntm_matrix_convolution_h_i : ntm_matrix_convolution_h
+  ntm_matrix_convolution_h_i : ntm_matrix_convolution
     generic map (
       X => H,
       Y => H,

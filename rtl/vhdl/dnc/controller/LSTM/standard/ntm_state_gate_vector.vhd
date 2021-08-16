@@ -237,7 +237,7 @@ begin
       DATA_OUT  => data_out_vector_multiplier
     );
 
-  ntm_matrix_product_x_i : ntm_matrix_product_h
+  ntm_matrix_product_x_i : ntm_matrix_product
     generic map (
       X => H,
       Y => X,
@@ -260,7 +260,7 @@ begin
       DATA_OUT  => data_out_matrix_product_x
     );
 
-  ntm_matrix_product_h_i : ntm_matrix_product_h
+  ntm_matrix_product_h_i : ntm_matrix_product
     generic map (
       X => H,
       Y => H,
