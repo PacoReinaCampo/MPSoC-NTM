@@ -46,7 +46,7 @@ use work.ntm_pkg.all;
 
 entity ntm_hidden_gate_vector is
   generic (
-    X : integer := 64,
+    H : integer := 64,
 
     DATA_SIZE : integer := 512
   );
@@ -60,9 +60,10 @@ entity ntm_hidden_gate_vector is
     READY : out std_logic;
 
     -- DATA
-    MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    C_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    O_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    H_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+    S_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+    O_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+
+    MODULO : in  std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+    H_OUT  : out std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;

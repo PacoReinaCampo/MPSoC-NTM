@@ -44,10 +44,12 @@ use ieee.numeric_std.all;
 
 use work.ntm_pkg.all;
 
-entity ntm_output_gate_vector is
+entity ntm_state_gate_vector is
   generic (
     X : integer := 64,
-    Y : integer := 64,
+    W : integer := 64,
+    R : integer := 64,
+    H : integer := 64,
 
     DATA_SIZE : integer := 512
   );
@@ -61,13 +63,20 @@ entity ntm_output_gate_vector is
     READY : out std_logic;
 
     -- DATA
-    MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    X_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    F_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    C_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    H_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    B_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    W_IN   : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    C_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+    W_IN : in std_logic_arithmetic_vector_matrix(H-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    K_IN : in std_logic_arithmetic_vector_3array(H-1 downto 0)(W-1 downto 0)(R-1 downto 0)(DATA_SIZE-1 downto 0);
+    U_IN : in std_logic_arithmetic_vector_matrix(H-1 downto 0)(H-1 downto 0)(DATA_SIZE-1 downto 0);
+    V_IN : in std_logic_arithmetic_vector_matrix(H-1 downto 0)(H-1 downto 0)(DATA_SIZE-1 downto 0);
+
+    X_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    R_IN : in std_logic_arithmetic_vector_matrix(W-1 downto 0)(R-1 downto 0)(DATA_SIZE-1 downto 0);
+    F_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+    S_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+    H_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+
+    B_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+
+    MODULO : in  std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+    S_OUT  : out std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
