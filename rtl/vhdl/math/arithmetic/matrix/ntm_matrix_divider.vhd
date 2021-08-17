@@ -94,7 +94,7 @@ architecture ntm_matrix_divider_architecture of ntm_matrix_divider is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal divider_ctrl_fsm_st : divider_ctrl_fsm_type;
+  signal divider_ctrl_fsm_state : divider_ctrl_fsm_type;
 
   -- Internal Signals
   signal u_int : std_logic_vector(DATA_SIZE downto 0);
@@ -108,8 +108,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  for i in X-1 downto 0 generate
-    for j in Y-1 downto 0 generate
+  Y_LABEL : for i in Y-1 downto 0 generate
+    X_LABEL : for j in X-1 downto 0 generate
 
       ctrl_fsm : process(CLK, RST)
       begin
@@ -128,7 +128,7 @@ begin
 
         elsif (rising_edge(CLK)) then
 
-          case divider_ctrl_fsm_st is
+          case divider_ctrl_fsm_state(i,j) is
             when STARTER_ST =>          -- STEP 0
               -- Control Outputs
               READY(i)(j) <= '0';
@@ -145,7 +145,7 @@ begin
                 end if;
 
                 -- FSM Control
-                divider_ctrl_fsm_st <= SET_DATA_B_ST;
+                divider_ctrl_fsm_state(i,j) <= SET_DATA_B_ST;
               end if;
 
             when SET_DATA_B_ST =>       -- STEP 1
@@ -156,16 +156,16 @@ begin
 
               -- FSM Control
               if ((unsigned(v_int) sll 1) < '0' & unsigned(MODULO(i)(j))) then
-                divider_ctrl_fsm_st <= SET_PRODUCT_OUT_ST;
+                divider_ctrl_fsm_state(i,j) <= SET_PRODUCT_OUT_ST;
               else
-                divider_ctrl_fsm_st <= REDUCE_DATA_B_ST;
+                divider_ctrl_fsm_state(i,j) <= REDUCE_DATA_B_ST;
               end if;
 
             when REDUCE_DATA_B_ST =>    -- STEP 2
 
               if (unsigned(v_int) < '0' & unsigned(MODULO(i)(j))) then
                 -- FSM Control
-                divider_ctrl_fsm_st <= SET_PRODUCT_OUT_ST;
+                divider_ctrl_fsm_state(i,j) <= SET_PRODUCT_OUT_ST;
               else
                 -- Assignation
                 v_int <= std_logic_vector(unsigned(v_int) - ('0' & unsigned(MODULO(i)(j))));
@@ -187,7 +187,7 @@ begin
               end if;
 
               -- FSM Control
-              divider_ctrl_fsm_st <= ENDER_ST;
+              divider_ctrl_fsm_state(i,j) <= ENDER_ST;
 
             when ENDER_ST =>            -- STEP 4
 
@@ -199,20 +199,20 @@ begin
                 READY(i)(j) <= '1';
 
                 -- FSM Control
-                divider_ctrl_fsm_st <= STARTER_ST;
+                divider_ctrl_fsm_state(i,j) <= STARTER_ST;
               else
                 -- FSM Control
-                divider_ctrl_fsm_st <= SET_DATA_B_ST;
+                divider_ctrl_fsm_state(i,j) <= SET_DATA_B_ST;
               end if;
 
             when others =>
               -- FSM Control
-              divider_ctrl_fsm_st <= STARTER_ST;
+              divider_ctrl_fsm_state(i,j) <= STARTER_ST;
           end case;
         end if;
       end process;
 
-    end generate;
-  end generate;
+    end generate X_LABEL;
+  end generate Y_LABEL;
 
 end architecture;

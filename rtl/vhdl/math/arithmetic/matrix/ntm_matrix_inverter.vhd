@@ -93,7 +93,7 @@ architecture ntm_matrix_inverter_architecture of ntm_matrix_inverter is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal inverter_ctrl_fsm_st : inverter_ctrl_fsm_type;
+  signal inverter_ctrl_fsm_state : inverter_ctrl_fsm_type;
 
   -- Internal Signals
   signal u_int : std_logic_vector(DATA_SIZE downto 0);
@@ -108,8 +108,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  for i in X-1 downto 0 generate
-    for j in Y-1 downto 0 generate
+  Y_LABEL : for i in Y-1 downto 0 generate
+    X_LABEL : for j in X-1 downto 0 generate
 
       ctrl_fsm : process(CLK, RST)
       begin
@@ -129,7 +129,7 @@ begin
 
         elsif (rising_edge(CLK)) then
 
-          case inverter_ctrl_fsm_st is
+          case inverter_ctrl_fsm_state(i,j) is
             when STARTER_ST =>          -- STEP 0
               -- Control Outputs
               READY(i)(j) <= '0';
@@ -143,7 +143,7 @@ begin
                 y_int <= ZERO;
 
                 -- FSM Control
-                inverter_ctrl_fsm_st <= ENDER_ST;
+                inverter_ctrl_fsm_state(i,j) <= ENDER_ST;
               end if;
 
             when ENDER_ST =>            -- STEP 1
@@ -157,7 +157,7 @@ begin
                   READY(i)(j) <= '1';
 
                   -- FSM Control
-                  inverter_ctrl_fsm_st <= STARTER_ST;
+                  inverter_ctrl_fsm_state(i,j) <= STARTER_ST;
                 else
                   -- Assignations
                   x_int <= std_logic_vector(unsigned(x_int) - ('0' & unsigned(MODULO(i)(j))));
@@ -171,20 +171,20 @@ begin
                   READY(i)(j) <= '1';
 
                   -- FSM Control
-                  inverter_ctrl_fsm_st <= STARTER_ST;
+                  inverter_ctrl_fsm_state(i,j) <= STARTER_ST;
                 else
                   -- Assignations
                   y_int <= std_logic_vector(unsigned(y_int) - ('0' & unsigned(MODULO(i)(j))));
                 end if;
               elsif(u_int(0) = '0') then
                 -- FSM Control
-                inverter_ctrl_fsm_st <= CHECK_U_ST;
+                inverter_ctrl_fsm_state(i,j) <= CHECK_U_ST;
               elsif(v_int(0) = '0') then
                 -- FSM Control
-                inverter_ctrl_fsm_st <= CHECK_V_ST;
+                inverter_ctrl_fsm_state(i,j) <= CHECK_V_ST;
               else
                 -- FSM Control
-                inverter_ctrl_fsm_st <= CHECK_D_ST;
+                inverter_ctrl_fsm_state(i,j) <= CHECK_D_ST;
               end if;
 
             when CHECK_U_ST =>          -- STEP 2
@@ -200,9 +200,9 @@ begin
 
               -- FSM Control
               if(v_int(0) = '0') then
-                inverter_ctrl_fsm_st <= CHECK_V_ST;
+                inverter_ctrl_fsm_state(i,j) <= CHECK_V_ST;
               else
-                inverter_ctrl_fsm_st <= CHECK_D_ST;
+                inverter_ctrl_fsm_state(i,j) <= CHECK_D_ST;
               end if;
 
             when CHECK_V_ST =>          -- STEP 3
@@ -217,7 +217,7 @@ begin
               end if;
 
               -- FSM Control
-              inverter_ctrl_fsm_st <= CHECK_D_ST;
+              inverter_ctrl_fsm_state(i,j) <= CHECK_D_ST;
 
             when CHECK_D_ST =>          -- STEP 4
 
@@ -241,16 +241,16 @@ begin
               end if;
 
               -- FSM Control
-              inverter_ctrl_fsm_st <= ENDER_ST;
+              inverter_ctrl_fsm_state(i,j) <= ENDER_ST;
 
             when others =>
               -- FSM Control
-              inverter_ctrl_fsm_st <= STARTER_ST;
+              inverter_ctrl_fsm_state(i,j) <= STARTER_ST;
           end case;
         end if;
       end process;
 
-    end generate;
-  end generate;
+    end generate X_LABEL;
+  end generate Y_LABEL;
 
 end architecture;
