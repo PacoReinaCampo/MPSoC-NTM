@@ -46,13 +46,30 @@ package ntm_pkg is
   -- Types
   -----------------------------------------------------------------------
 
-  type std_logic_arithmetic_vector_vector is array (natural range <>) of std_logic_vector;
-  type std_logic_arithmetic_vector_matrix is array (natural range <>) of std_logic_arithmetic_vector_vector;
-  type std_logic_arithmetic_vector_3array is array (natural range <>) of std_logic_arithmetic_vector_matrix;
+  type std_logic_matrix is array (integer range <>) of std_logic_vector;
+  type std_logic_3array is array (integer range <>) of std_logic_matrix;
+
+  type std_logic_arithmetic_vector_vector is array (integer range <>) of std_logic_vector;
+  type std_logic_arithmetic_vector_matrix is array (integer range <>) of std_logic_matrix;
+  type std_logic_arithmetic_vector_3array is array (integer range <>) of std_logic_3array;
+
+  type std_logic_arithmetic_matrix_vector is array (integer range <>, integer range <>) of std_logic_vector;
+  type std_logic_arithmetic_matrix_matrix is array (integer range <>, integer range <>) of std_logic_matrix;
+  type std_logic_arithmetic_matrix_3array is array (integer range <>, integer range <>) of std_logic_3array;
+
+  type std_logic_arithmetic_3array_vector is array (integer range <>, integer range <>) of std_logic_vector;
+  type std_logic_arithmetic_3array_matrix is array (integer range <>, integer range <>) of std_logic_matrix;
+  type std_logic_arithmetic_3array_3array is array (integer range <>, integer range <>) of std_logic_3array;
 
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
+
+  constant X : integer := 64;
+  constant Y : integer := 64;
+  constant Z : integer := 64;
+
+  constant DATA_SIZE : integer := 512;
 
   -----------------------------------------------------------------------
   -- MATH - ARITHMETIC
@@ -229,7 +246,7 @@ package ntm_pkg is
   -- VECTOR
   component ntm_vector_mod is
     generic (
-      X : integer := 64,
+      X : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -251,7 +268,7 @@ package ntm_pkg is
 
   component ntm_vector_adder is
     generic (
-      X : integer := 64,
+      X : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -264,7 +281,7 @@ package ntm_pkg is
       START : in  std_logic;
       READY : out std_logic_vector(X-1 downto 0);
 
-      OPERATION : in std_logic;
+      OPERATION : in std_logic_vector(X-1 downto 0);
 
       -- DATA
       MODULO    : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -276,7 +293,7 @@ package ntm_pkg is
 
   component ntm_vector_multiplier is
     generic (
-      X : integer := 64,
+      X : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -299,7 +316,7 @@ package ntm_pkg is
 
   component ntm_vector_inverter is
     generic (
-      X : integer := 64,
+      X : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -321,7 +338,7 @@ package ntm_pkg is
 
   component ntm_vector_divider is
     generic (
-      X : integer := 64,
+      X : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -344,7 +361,7 @@ package ntm_pkg is
 
   component ntm_vector_exponentiator is
     generic (
-      X : integer := 64,
+      X : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -367,7 +384,7 @@ package ntm_pkg is
 
   component ntm_vector_root is
     generic (
-      X : integer := 64,
+      X : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -378,7 +395,7 @@ package ntm_pkg is
 
       -- CONTROL
       START : in  std_logic;
-      READY : out std_logic;
+      READY : out std_logic_vector(X-1 downto 0);
 
       -- DATA
       MODULO     : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -390,7 +407,7 @@ package ntm_pkg is
 
   component ntm_vector_logarithm is
     generic (
-      X : integer := 64,
+      X : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -413,7 +430,7 @@ package ntm_pkg is
   -- MATRIX
   component ntm_matrix_mod is
     generic (
-      X : integer := 64,
+      X : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -424,19 +441,19 @@ package ntm_pkg is
 
       -- CONTROL
       START : in  std_logic;
-      READY : out std_logic_vector(X-1 downto 0);
+      READY : out std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
 
   component ntm_matrix_adder is
     generic (
-      X : integer := 64,
-      Y : integer := 64,
+      X : integer := 64;
+      Y : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -447,9 +464,9 @@ package ntm_pkg is
 
       -- CONTROL
       START : in  std_logic;
-      READY : out std_logic_arithmetic_scalar_matrix(X-1 downto 0)(Y-1 downto 0);
+      READY : out std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
 
-      OPERATION : in std_logic;
+      OPERATION : in std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
 
       -- DATA
       MODULO    : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -461,8 +478,8 @@ package ntm_pkg is
 
   component ntm_matrix_multiplier is
     generic (
-      X : integer := 64,
-      Y : integer := 64,
+      X : integer := 64;
+      Y : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -473,7 +490,7 @@ package ntm_pkg is
 
       -- CONTROL
       START : in  std_logic;
-      READY : out std_logic_arithmetic_scalar_matrix(X-1 downto 0)(Y-1 downto 0);
+      READY : out std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
 
       -- DATA
       MODULO    : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -485,8 +502,8 @@ package ntm_pkg is
 
   component ntm_matrix_inverter is
     generic (
-      X : integer := 64,
-      Y : integer := 64,
+      X : integer := 64;
+      Y : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -497,7 +514,7 @@ package ntm_pkg is
 
       -- CONTROL
       START : in  std_logic;
-      READY : out std_logic_arithmetic_scalar_matrix(X-1 downto 0)(Y-1 downto 0);
+      READY : out std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
 
       -- DATA
       MODULO   : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -508,8 +525,8 @@ package ntm_pkg is
 
   component ntm_matrix_divider is
     generic (
-      X : integer := 64,
-      Y : integer := 64,
+      X : integer := 64;
+      Y : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -520,7 +537,7 @@ package ntm_pkg is
 
       -- CONTROL
       START : in  std_logic;
-      READY : out std_logic_arithmetic_scalar_matrix(X-1 downto 0)(Y-1 downto 0);
+      READY : out std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
 
       -- DATA
       MODULO    : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -532,8 +549,8 @@ package ntm_pkg is
 
   component ntm_matrix_exponentiator is
     generic (
-      X : integer := 64,
-      Y : integer := 64,
+      X : integer := 64;
+      Y : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -544,7 +561,7 @@ package ntm_pkg is
 
       -- CONTROL
       START : in  std_logic;
-      READY : out std_logic_arithmetic_scalar_matrix(X-1 downto 0)(Y-1 downto 0);
+      READY : out std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
 
       -- DATA
       MODULO               : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -556,8 +573,8 @@ package ntm_pkg is
 
   component ntm_matrix_root is
     generic (
-      X : integer := 64,
-      Y : integer := 64,
+      X : integer := 64;
+      Y : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -580,8 +597,8 @@ package ntm_pkg is
 
   component ntm_matrix_logarithm is
     generic (
-      X : integer := 64,
-      Y : integer := 64,
+      X : integer := 64;
+      Y : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -592,7 +609,7 @@ package ntm_pkg is
 
       -- CONTROL
       START : in  std_logic;
-      READY : out std_logic_arithmetic_scalar_matrix(X-1 downto 0)(Y-1 downto 0);
+      READY : out std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
 
       -- DATA
       MODULO   : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -607,8 +624,8 @@ package ntm_pkg is
 
   component ntm_matrix_determinant is
     generic (
-      X : integer := 64,
-      Y : integer := 64,
+      X : integer := 64;
+      Y : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -630,8 +647,8 @@ package ntm_pkg is
 
   component ntm_matrix_inversion is
     generic (
-      X : integer := 64,
-      Y : integer := 64,
+      X : integer := 64;
+      Y : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -653,8 +670,8 @@ package ntm_pkg is
 
   component ntm_matrix_product is
     generic (
-      X : integer := 64,
-      Y : integer := 64,
+      X : integer := 64;
+      Y : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -677,8 +694,8 @@ package ntm_pkg is
 
   component ntm_matrix_rank is
     generic (
-      X : integer := 64,
-      Y : integer := 64,
+      X : integer := 64;
+      Y : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -700,8 +717,8 @@ package ntm_pkg is
 
   component ntm_matrix_transpose is
     generic (
-      X : integer := 64,
-      Y : integer := 64,
+      X : integer := 64;
+      Y : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -744,7 +761,7 @@ package ntm_pkg is
 
   component ntm_vector_product is
     generic (
-      X : integer := 64,
+      X : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -794,7 +811,7 @@ package ntm_pkg is
 
   component ntm_scalar_cosine_similarity_function is
     generic (
-      X : integer := 64,
+      X : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -840,7 +857,7 @@ package ntm_pkg is
 
   component ntm_vector_cosine_similarity_function is
     generic (
-      X : integer := 64,
+      X : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -886,7 +903,7 @@ package ntm_pkg is
 
   component ntm_matrix_cosine_similarity_function is
     generic (
-      X : integer := 64,
+      X : integer := 64;
 
       DATA_SIZE : integer := 512
     );

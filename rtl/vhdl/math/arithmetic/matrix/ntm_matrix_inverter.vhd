@@ -58,7 +58,7 @@ entity ntm_matrix_inverter is
 
     -- CONTROL
     START : in  std_logic;
-    READY : out std_logic_arithmetic_scalar_matrix(X-1 downto 0)(Y-1 downto 0);
+    READY : out std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
 
     -- DATA
     MODULO   : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);

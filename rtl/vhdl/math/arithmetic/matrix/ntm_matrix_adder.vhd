@@ -58,9 +58,9 @@ entity ntm_matrix_adder is
 
     -- CONTROL
     START : in  std_logic;
-    READY : out std_logic_arithmetic_scalar_matrix(X-1 downto 0)(Y-1 downto 0);
+    READY : out std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
 
-    OPERATION : in std_logic;
+    OPERATION : in std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
 
     -- DATA
     MODULO    : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -127,7 +127,7 @@ begin
 
               if (START = '1') then
                 -- Assignations
-                if (OPERATION = '1') then
+                if (OPERATION(i)(j) = '1') then
                   if (unsigned(DATA_A_IN(i)(j)) > unsigned(DATA_B_IN(i)(j))) then
                     arithmetic_int <= std_logic_vector(('0' & unsigned(DATA_A_IN(i)(j))) - ('0' & unsigned(DATA_B_IN(i)(j))));
                   else
@@ -168,7 +168,7 @@ begin
                     arithmetic_int <= std_logic_vector(unsigned(arithmetic_int) - ('0' & unsigned(MODULO(i)(j))));
                   end if;
                 elsif (unsigned(DATA_A_IN(i)(j)) = unsigned(DATA_B_IN(i)(j))) then
-                  if (OPERATION = '1') then
+                  if (OPERATION(i)(j) = '1') then
                     -- Data Outputs
                     DATA_OUT(i)(j) <= ZERO;
 
@@ -202,7 +202,7 @@ begin
                     end if;
                   end if;
                 elsif (unsigned(DATA_A_IN(i)(j)) < unsigned(DATA_B_IN(i)(j))) then
-                  if (OPERATION = '1') then
+                  if (OPERATION(i)(j) = '1') then
                     if (unsigned(arithmetic_int) = '0' & unsigned(MODULO(i)(j))) then
                       -- Data Outputs
                       DATA_OUT(i)(j) <= ZERO;

@@ -46,7 +46,7 @@ use work.ntm_pkg.all;
 
 entity ntm_vector_mod is
   generic (
-    X : integer := 64,
+    X : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -72,10 +72,12 @@ architecture ntm_vector_mod_architecture of ntm_vector_mod is
   -- Types
   -----------------------------------------------------------------------
 
-  type mod_ctrl_fsm_type is (
+  type mod_ctrl_fsm is (
     STARTER_ST,  -- STEP 0
     ENDER_ST     -- STEP 1
   );
+
+  type mod_ctrl_fsm_vector is array (X-1 downto 0) of mod_ctrl_fsm;
 
   -----------------------------------------------------------------------
   -- Constants
@@ -88,7 +90,7 @@ architecture ntm_vector_mod_architecture of ntm_vector_mod is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal mod_ctrl_fsm_st : mod_ctrl_fsm_type;
+  signal mod_ctrl_fsm_state : mod_ctrl_fsm_vector;
 
   -- Internal Signals
   signal arithmetic_int : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -99,7 +101,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  for i in X-1 downto 0 generate
+  X_LABEL : for i in X-1 downto 0 generate
 
     ctrl_fsm : process(CLK, RST)
     begin
@@ -115,7 +117,7 @@ begin
 
       elsif (rising_edge(CLK)) then
 
-        case mod_ctrl_fsm_st is
+        case mod_ctrl_fsm_state(i) is
           when STARTER_ST =>            -- STEP 0
             -- Control Outputs
             READY(i) <= '0';
@@ -125,7 +127,7 @@ begin
               arithmetic_int <= DATA_IN(i);
 
               -- FSM Control
-              mod_ctrl_fsm_st <= ENDER_ST;
+              mod_ctrl_fsm_state(i) <= ENDER_ST;
             end if;
 
           when ENDER_ST =>              -- STEP 1
@@ -140,7 +142,7 @@ begin
                   READY(i) <= '1';
 
                   -- FSM Control
-                  mod_ctrl_fsm_st <= STARTER_ST;
+                  mod_ctrl_fsm_state(i) <= STARTER_ST;
                 elsif (unsigned(arithmetic_int) < unsigned(MODULO(i))) then
                   -- Data Outputs
                   DATA_OUT(i) <= arithmetic_int;
@@ -149,7 +151,7 @@ begin
                   READY(i) <= '1';
 
                   -- FSM Control
-                  mod_ctrl_fsm_st <= STARTER_ST;
+                  mod_ctrl_fsm_state(i) <= STARTER_ST;
                 else
                   -- Assignations
                   arithmetic_int <= std_logic_vector(unsigned(arithmetic_int) - unsigned(MODULO(i)));
@@ -162,7 +164,7 @@ begin
                 READY(i) <= '1';
 
                 -- FSM Control
-                mod_ctrl_fsm_st <= STARTER_ST;
+                mod_ctrl_fsm_state(i) <= STARTER_ST;
               end if;
             elsif (unsigned(MODULO(i)) = unsigned(ZERO)) then
               -- Data Outputs
@@ -172,16 +174,16 @@ begin
               READY(i) <= '1';
 
               -- FSM Control
-              mod_ctrl_fsm_st <= STARTER_ST;
+              mod_ctrl_fsm_state(i) <= STARTER_ST;
             end if;
 
           when others =>
             -- FSM Control
-            mod_ctrl_fsm_st <= STARTER_ST;
+            mod_ctrl_fsm_state(i) <= STARTER_ST;
         end case;
       end if;
     end process;
 
-  end generate;
+  end generate X_LABEL;
 
 end architecture;
