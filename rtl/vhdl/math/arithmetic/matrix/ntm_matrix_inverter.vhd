@@ -73,13 +73,15 @@ architecture ntm_matrix_inverter_architecture of ntm_matrix_inverter is
   -- Types
   -----------------------------------------------------------------------
 
-  type inverter_ctrl_fsm_type is (
+  type inverter_ctrl_fsm is (
     STARTER_ST,  -- STEP 0
     ENDER_ST,    -- STEP 1
     CHECK_U_ST,  -- STEP 2
     CHECK_V_ST,  -- STEP 3
     CHECK_D_ST   -- STEP 4
   );
+
+  type inverter_ctrl_fsm_matrix is array (X-1 downto 0, Y-1 downto 0) of inverter_ctrl_fsm;
 
   -----------------------------------------------------------------------
   -- Constants
@@ -93,7 +95,7 @@ architecture ntm_matrix_inverter_architecture of ntm_matrix_inverter is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal inverter_ctrl_fsm_state : inverter_ctrl_fsm_type;
+  signal inverter_ctrl_fsm_state : inverter_ctrl_fsm_matrix;
 
   -- Internal Signals
   signal u_int : std_logic_vector(DATA_SIZE downto 0);

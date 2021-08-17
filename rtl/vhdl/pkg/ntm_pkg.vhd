@@ -431,6 +431,7 @@ package ntm_pkg is
   component ntm_matrix_mod is
     generic (
       X : integer := 64;
+      Y : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -585,7 +586,7 @@ package ntm_pkg is
 
       -- CONTROL
       START : in  std_logic;
-      READY : out std_logic;
+      READY : out std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
 
       -- DATA
       MODULO     : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);

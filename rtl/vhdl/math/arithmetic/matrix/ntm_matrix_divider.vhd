@@ -58,7 +58,7 @@ entity ntm_matrix_divider is
 
     -- CONTROL
     START : in  std_logic;
-    READY : out std_logic_arithmetic_scalar_matrix(X-1 downto 0)(Y-1 downto 0);
+    READY : out std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
 
     -- DATA
     MODULO    : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -74,13 +74,15 @@ architecture ntm_matrix_divider_architecture of ntm_matrix_divider is
   -- Types
   -----------------------------------------------------------------------
 
-  type divider_ctrl_fsm_type is (
+  type divider_ctrl_fsm is (
     STARTER_ST,          -- STEP 0
     SET_DATA_B_ST,       -- STEP 1
     REDUCE_DATA_B_ST,    -- STEP 2
     SET_PRODUCT_OUT_ST,  -- STEP 3
     ENDER_ST             -- STEP 4
   );
+
+  type divider_ctrl_fsm_matrix is array (X-1 downto 0, Y-1 downto 0) of divider_ctrl_fsm;
 
   -----------------------------------------------------------------------
   -- Constants
@@ -94,7 +96,7 @@ architecture ntm_matrix_divider_architecture of ntm_matrix_divider is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal divider_ctrl_fsm_state : divider_ctrl_fsm_type;
+  signal divider_ctrl_fsm_state : divider_ctrl_fsm_matrix;
 
   -- Internal Signals
   signal u_int : std_logic_vector(DATA_SIZE downto 0);

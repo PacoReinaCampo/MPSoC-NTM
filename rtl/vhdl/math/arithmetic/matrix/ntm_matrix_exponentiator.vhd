@@ -58,7 +58,7 @@ entity ntm_matrix_exponentiator is
 
     -- CONTROL
     START : in  std_logic;
-    READY : out std_logic;
+    READY : out std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
 
     -- DATA
     MODULO               : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -67,3 +67,31 @@ entity ntm_matrix_exponentiator is
     DATA_OUT             : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
+
+architecture ntm_matrix_exponentiator_architecture of ntm_matrix_exponentiator is
+
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Signals
+  -----------------------------------------------------------------------
+
+begin
+
+  -----------------------------------------------------------------------
+  -- Body
+  -----------------------------------------------------------------------
+
+  Y_LABEL : for i in Y-1 downto 0 generate
+    X_LABEL : for j in X-1 downto 0 generate
+
+    end generate X_LABEL;
+  end generate Y_LABEL;
+
+end architecture;

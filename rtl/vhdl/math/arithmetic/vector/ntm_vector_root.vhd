@@ -57,7 +57,7 @@ entity ntm_vector_root is
 
     -- CONTROL
     START : in  std_logic;
-    READY : out std_logic;
+    READY : out std_logic_vector(X-1 downto 0);
 
     -- DATA
     MODULO     : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -66,3 +66,29 @@ entity ntm_vector_root is
     DATA_OUT   : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
+
+architecture ntm_vector_root_architecture of ntm_vector_root is
+
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Signals
+  -----------------------------------------------------------------------
+
+begin
+
+  -----------------------------------------------------------------------
+  -- Body
+  -----------------------------------------------------------------------
+
+  X_LABEL : for j in X-1 downto 0 generate
+
+  end generate X_LABEL;
+
+end architecture;
