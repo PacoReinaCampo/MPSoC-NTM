@@ -46,7 +46,7 @@ use work.ntm_pkg.all;
 
 entity ntm_vector_root is
   generic (
-    X : integer := 64,
+    X : integer := 64;
 
     DATA_SIZE : integer := 512
   );

@@ -46,8 +46,8 @@ use work.ntm_pkg.all;
 
 entity ntm_matrix_adder is
   generic (
-    X : integer := 64,
-    Y : integer := 64,
+    X : integer := 64;
+    Y : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -76,10 +76,12 @@ architecture ntm_matrix_adder_architecture of ntm_matrix_adder is
   -- Types
   -----------------------------------------------------------------------
 
-  type adder_ctrl_fsm_type is (
+  type adder_ctrl_fsm is (
     STARTER_ST,  -- STEP 0
     ENDER_ST     -- STEP 1
   );
+
+  type adder_ctrl_fsm_matrix is array (X-1 downto 0, Y-1 downto 0) of adder_ctrl_fsm;
 
   -----------------------------------------------------------------------
   -- Constants
@@ -92,7 +94,7 @@ architecture ntm_matrix_adder_architecture of ntm_matrix_adder is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal adder_ctrl_fsm_st : adder_ctrl_fsm_type;
+  signal adder_ctrl_fsm_state : adder_ctrl_fsm_matrix;
 
   -- Internal Signals
   signal arithmetic_int : std_logic_vector(DATA_SIZE downto 0);
@@ -103,8 +105,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  for i in X-1 downto 0 generate
-    for j in Y-1 downto 0 generate
+  Y_LABEL : for i in Y-1 downto 0 generate
+    X_LABEL : for j in X-1 downto 0 generate
 
       ctrl_fsm : process(CLK, RST)
       begin
@@ -120,7 +122,7 @@ begin
 
         elsif (rising_edge(CLK)) then
 
-          case adder_ctrl_fsm_st is
+          case adder_ctrl_fsm_state(i,j) is
             when STARTER_ST =>          -- STEP 0
               -- Control Outputs
               READY(i)(j) <= '0';
@@ -138,7 +140,7 @@ begin
                 end if;
 
                 -- FSM Control
-                adder_ctrl_fsm_st <= ENDER_ST;
+                adder_ctrl_fsm_state(i,j) <= ENDER_ST;
               end if;
 
             when ENDER_ST =>            -- STEP 1
@@ -153,7 +155,7 @@ begin
                     READY(i)(j) <= '1';
 
                     -- FSM Control
-                    adder_ctrl_fsm_st <= STARTER_ST;
+                    adder_ctrl_fsm_state(i,j) <= STARTER_ST;
                   elsif (unsigned(arithmetic_int) < '0' & unsigned(MODULO(i)(j))) then
                     -- Data Outputs
                     DATA_OUT(i)(j) <= arithmetic_int(DATA_SIZE-1 downto 0);
@@ -162,7 +164,7 @@ begin
                     READY(i)(j) <= '1';
 
                     -- FSM Control
-                    adder_ctrl_fsm_st <= STARTER_ST;
+                    adder_ctrl_fsm_state(i,j) <= STARTER_ST;
                   else
                     -- Assignations
                     arithmetic_int <= std_logic_vector(unsigned(arithmetic_int) - ('0' & unsigned(MODULO(i)(j))));
@@ -176,7 +178,7 @@ begin
                     READY(i)(j) <= '1';
 
                     -- FSM Control
-                    adder_ctrl_fsm_st <= STARTER_ST;
+                    adder_ctrl_fsm_state(i,j) <= STARTER_ST;
                   else
                     if (unsigned(arithmetic_int) = '0' & unsigned(MODULO(i)(j))) then
                       -- Data Outputs
@@ -186,7 +188,7 @@ begin
                       READY(i)(j) <= '1';
 
                       -- FSM Control
-                      adder_ctrl_fsm_st <= STARTER_ST;
+                      adder_ctrl_fsm_state(i,j) <= STARTER_ST;
                     elsif (unsigned(arithmetic_int) < '0' & unsigned(MODULO(i)(j))) then
                       -- Data Outputs
                       DATA_OUT(i)(j) <= arithmetic_int(DATA_SIZE-1 downto 0);
@@ -195,7 +197,7 @@ begin
                       READY(i)(j) <= '1';
 
                       -- FSM Control
-                      adder_ctrl_fsm_st <= STARTER_ST;
+                      adder_ctrl_fsm_state(i,j) <= STARTER_ST;
                     else
                       -- Assignations
                       arithmetic_int <= std_logic_vector(unsigned(arithmetic_int) - ('0' & unsigned(MODULO(i)(j))));
@@ -211,7 +213,7 @@ begin
                       READY(i)(j) <= '1';
 
                       -- FSM Control
-                      adder_ctrl_fsm_st <= STARTER_ST;
+                      adder_ctrl_fsm_state(i,j) <= STARTER_ST;
                     elsif (unsigned(arithmetic_int) < '0' & unsigned(MODULO(i)(j))) then
                       -- Data Outputs
                       DATA_OUT(i)(j) <= std_logic_vector(unsigned(MODULO(i)(j)) - unsigned(arithmetic_int(DATA_SIZE-1 downto 0)));
@@ -220,7 +222,7 @@ begin
                       READY(i)(j) <= '1';
 
                       -- FSM Control
-                      adder_ctrl_fsm_st <= STARTER_ST;
+                      adder_ctrl_fsm_state(i,j) <= STARTER_ST;
                     else
                       -- Assignations
                       arithmetic_int <= std_logic_vector(unsigned(arithmetic_int) - ('0' & unsigned(MODULO(i)(j))));
@@ -234,7 +236,7 @@ begin
                       READY(i)(j) <= '1';
 
                       -- FSM Control
-                      adder_ctrl_fsm_st <= STARTER_ST;
+                      adder_ctrl_fsm_state(i,j) <= STARTER_ST;
                     elsif (unsigned(arithmetic_int) < '0' & unsigned(MODULO(i)(j))) then
                       -- Data Outputs
                       DATA_OUT(i)(j) <= arithmetic_int(DATA_SIZE-1 downto 0);
@@ -243,7 +245,7 @@ begin
                       READY(i)(j) <= '1';
 
                       -- FSM Control
-                      adder_ctrl_fsm_st <= STARTER_ST;
+                      adder_ctrl_fsm_state(i,j) <= STARTER_ST;
                     else
                       -- Assignations
                       arithmetic_int <= std_logic_vector(unsigned(arithmetic_int) - ('0' & unsigned(MODULO(i)(j))));
@@ -258,17 +260,17 @@ begin
                 READY(i)(j) <= '1';
 
                 -- FSM Control
-                adder_ctrl_fsm_st <= STARTER_ST;
+                adder_ctrl_fsm_state(i,j) <= STARTER_ST;
               end if;
 
             when others =>
               -- FSM Control
-              adder_ctrl_fsm_st <= STARTER_ST;
+              adder_ctrl_fsm_state(i,j) <= STARTER_ST;
           end case;
         end if;
       end process;
 
-    end generate;
-  end generate;
+    end generate X_LABEL;
+  end generate Y_LABEL;
 
 end architecture;

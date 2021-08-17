@@ -46,8 +46,8 @@ use work.ntm_pkg.all;
 
 entity ntm_matrix_mod is
   generic (
-    X : integer := 64,
-    Y : integer := 64,
+    X : integer := 64;
+    Y : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -58,7 +58,7 @@ entity ntm_matrix_mod is
 
     -- CONTROL
     START : in  std_logic;
-    READY : out std_logic_arithmetic_scalar_matrix(X-1 downto 0)(Y-1 downto 0);
+    READY : out std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
 
     -- DATA
     MODULO   : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -73,10 +73,12 @@ architecture ntm_matrix_mod_architecture of ntm_matrix_mod is
   -- Types
   -----------------------------------------------------------------------
 
-  type mod_ctrl_fsm_type is (
+  type mod_ctrl_fsm is (
     STARTER_ST,  -- STEP 0
     ENDER_ST     -- STEP 1
   );
+
+  type mod_ctrl_fsm_matrix is array (X-1 downto 0, Y-1 downto 0) of mod_ctrl_fsm;
 
   -----------------------------------------------------------------------
   -- Constants
@@ -89,7 +91,7 @@ architecture ntm_matrix_mod_architecture of ntm_matrix_mod is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal mod_ctrl_fsm_st : mod_ctrl_fsm_type;
+  signal mod_ctrl_fsm_state : mod_ctrl_fsm_matrix;
 
   -- Internal Signals
   signal arithmetic_int : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -100,8 +102,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  for i in X-1 downto 0 generate
-    for j in Y-1 downto 0 generate
+  Y_LABEL : for i in Y-1 downto 0 generate
+    X_LABEL : for j in X-1 downto 0 generate
 
       ctrl_fsm : process(CLK, RST)
       begin
@@ -117,7 +119,7 @@ begin
 
         elsif (rising_edge(CLK)) then
 
-          case mod_ctrl_fsm_st is
+          case mod_ctrl_fsm_state(i,j) is
             when STARTER_ST =>          -- STEP 0
               -- Control Outputs
               READY(i)(j) <= '0';
@@ -127,7 +129,7 @@ begin
                 arithmetic_int <= DATA_IN(i)(j);
 
                 -- FSM Control
-                mod_ctrl_fsm_st <= ENDER_ST;
+                mod_ctrl_fsm_state(i,j) <= ENDER_ST;
               end if;
 
             when ENDER_ST =>            -- STEP 1
@@ -142,7 +144,7 @@ begin
                     READY(i)(j) <= '1';
 
                     -- FSM Control
-                    mod_ctrl_fsm_st <= STARTER_ST;
+                    mod_ctrl_fsm_state(i,j) <= STARTER_ST;
                   elsif (unsigned(arithmetic_int) < unsigned(MODULO(i)(j))) then
                     -- Data Outputs
                     DATA_OUT(i)(j) <= arithmetic_int;
@@ -151,7 +153,7 @@ begin
                     READY(i)(j) <= '1';
 
                     -- FSM Control
-                    mod_ctrl_fsm_st <= STARTER_ST;
+                    mod_ctrl_fsm_state(i,j) <= STARTER_ST;
                   else
                     -- Assignations
                     arithmetic_int <= std_logic_vector(unsigned(arithmetic_int) - unsigned(MODULO(i)(j)));
@@ -164,7 +166,7 @@ begin
                   READY(i)(j) <= '1';
 
                   -- FSM Control
-                  mod_ctrl_fsm_st <= STARTER_ST;
+                  mod_ctrl_fsm_state(i,j) <= STARTER_ST;
                 end if;
               elsif (unsigned(MODULO(i)(j)) = unsigned(ZERO)) then
                 -- Data Outputs
@@ -174,17 +176,17 @@ begin
                 READY(i)(j) <= '1';
 
                 -- FSM Control
-                mod_ctrl_fsm_st <= STARTER_ST;
+                mod_ctrl_fsm_state(i,j) <= STARTER_ST;
               end if;
 
             when others =>
               -- FSM Control
-              mod_ctrl_fsm_st <= STARTER_ST;
+              mod_ctrl_fsm_state(i,j) <= STARTER_ST;
           end case;
         end if;
       end process;
 
-    end generate;
-  end generate;
+    end generate X_LABEL;
+  end generate Y_LABEL;
 
 end architecture;

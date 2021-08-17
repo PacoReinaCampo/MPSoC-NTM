@@ -46,8 +46,8 @@ use work.ntm_pkg.all;
 
 entity ntm_matrix_logarithm is
   generic (
-    X : integer := 64,
-    Y : integer := 64,
+    X : integer := 64;
+    Y : integer := 64;
 
     DATA_SIZE : integer := 512
   );
