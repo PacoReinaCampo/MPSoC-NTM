@@ -44,9 +44,10 @@ use ieee.numeric_std.all;
 
 use work.ntm_pkg.all;
 
-entity ntm_cosine_similarity_function is
+entity ntm_matrix_cosine_similarity_function is
   generic (
-    X : integer := 64,
+    X : integer := 64;
+    Y : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -60,14 +61,15 @@ entity ntm_cosine_similarity_function is
     READY : out std_logic;
 
     -- DATA
-    MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_U_IN : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_V_IN : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    MODULO    : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+    SIZE_IN   : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+    DATA_U_IN : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+    DATA_V_IN : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 
-architecture ntm_cosine_similarity_function_architecture of ntm_cosine_similarity_function is
+architecture ntm_matrix_cosine_similarity_function_architecture of ntm_matrix_cosine_similarity_function is
 
   -----------------------------------------------------------------------
   -- Types
@@ -91,7 +93,7 @@ architecture ntm_cosine_similarity_function_architecture of ntm_cosine_similarit
   -- DATA
   signal modulo_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR MULTIPLIER
@@ -102,7 +104,7 @@ architecture ntm_cosine_similarity_function_architecture of ntm_cosine_similarit
   -- DATA
   signal modulo_scalar_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -129,7 +131,7 @@ begin
       -- DATA
       MODULO    => modulo_scalar_adder,
       DATA_A_IN => data_a_in_scalar_adder,
-      DATA_B_IN => data_a_in_scalar_adder,
+      DATA_B_IN => data_b_in_scalar_adder,
       DATA_OUT  => data_out_scalar_adder
     );
 
@@ -149,7 +151,7 @@ begin
       -- DATA
       MODULO    => modulo_scalar_multiplier,
       DATA_A_IN => data_a_in_scalar_multiplier,
-      DATA_B_IN => data_a_in_scalar_multiplier,
+      DATA_B_IN => data_b_in_scalar_multiplier,
       DATA_OUT  => data_out_scalar_multiplier
     );
 

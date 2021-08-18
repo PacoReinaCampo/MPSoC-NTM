@@ -46,8 +46,8 @@ use work.ntm_pkg.all;
 
 entity ntm_matrix_inversion is
   generic (
-    X : integer := 64,
-    Y : integer := 64,
+    X : integer := 64;
+    Y : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -102,7 +102,7 @@ architecture ntm_matrix_inversion_architecture of ntm_matrix_inversion is
   -- DATA
   signal modulo_scalar_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -149,7 +149,7 @@ begin
       -- DATA
       MODULO    => modulo_scalar_multiplier,
       DATA_A_IN => data_a_in_scalar_multiplier,
-      DATA_B_IN => data_a_in_scalar_multiplier,
+      DATA_B_IN => data_b_in_scalar_multiplier,
       DATA_OUT  => data_out_scalar_multiplier
     );
 

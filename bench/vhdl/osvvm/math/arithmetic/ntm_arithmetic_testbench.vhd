@@ -48,16 +48,6 @@ end ntm_arithmetic_testbench;
 architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench is
 
   -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
-
-  constant X : integer := 64;
-  constant Y : integer := 64;
-  constant Z : integer := 64;
-
-  constant DATA_SIZE : integer := 64;
-
-  -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
 

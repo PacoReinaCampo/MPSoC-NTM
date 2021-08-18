@@ -46,7 +46,7 @@ use work.ntm_pkg.all;
 
 entity ntm_vector_product is
   generic (
-    X : integer := 64,
+    X : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -61,9 +61,9 @@ entity ntm_vector_product is
 
     -- DATA
     MODULO    : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_A_IN : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(DATA_SIZE-1 downto 0)
+    DATA_A_IN : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 

@@ -46,6 +46,8 @@ use work.ntm_pkg.all;
 
 entity ntm_scalar_product is
   generic (
+    X : integer := 64;
+
     DATA_SIZE : integer := 512
   );
   port (
