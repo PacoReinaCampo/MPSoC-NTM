@@ -139,7 +139,7 @@ begin
       DATA_OUT  => data_out_vector_adder
     );
 
-  ntm_matrix_convolution_i : ntm_matrix_convolution
+  ntm_vector_convolution_function_i : ntm_vector_convolution_function
     generic map (
       X => H,
       Y => W,

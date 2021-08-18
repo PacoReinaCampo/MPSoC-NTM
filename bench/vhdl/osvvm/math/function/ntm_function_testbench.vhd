@@ -154,11 +154,11 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_vector_convolution : std_logic;
 
   -- DATA
-  signal modulo_vector_convolution : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal n_in_vector_convolution   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_vector_convolution   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal s_in_vector_convolution   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_out_vector_convolution  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_convolution : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal n_in_vector_convolution   : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_vector_convolution   : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal s_in_vector_convolution   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_out_vector_convolution  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- COSINE SIMILARITY
   -- CONTROL

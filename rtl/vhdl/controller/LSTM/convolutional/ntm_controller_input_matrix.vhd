@@ -100,7 +100,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  ntm_matrix_convolution_i : ntm_matrix_convolution
+  ntm_vector_convolution_function_i : ntm_vector_convolution_function
     generic map (
       X => X,
       Y => W,

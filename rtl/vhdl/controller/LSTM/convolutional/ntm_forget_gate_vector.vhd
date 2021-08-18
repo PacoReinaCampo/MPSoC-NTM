@@ -198,7 +198,7 @@ begin
       DATA_OUT  => data_out_vector_adder
     );
 
-  ntm_matrix_convolution_h_i : ntm_matrix_convolution
+  ntm_vector_convolution_function_h_i : ntm_vector_convolution_function
     generic map (
       X => H,
       Y => X,
@@ -221,7 +221,7 @@ begin
       DATA_OUT  => data_out_matrix_convolution_x
     );
 
-  ntm_matrix_convolution_w_i : ntm_matrix_convolution
+  ntm_vector_convolution_function_w_i : ntm_vector_convolution_function
     generic map (
       X => H,
       Y => W,
@@ -244,7 +244,7 @@ begin
       DATA_OUT  => data_out_matrix_convolution_w
     );
 
-  ntm_matrix_convolution_h_i : ntm_matrix_convolution
+  ntm_vector_convolution_function_h_i : ntm_vector_convolution_function
     generic map (
       X => H,
       Y => H,
