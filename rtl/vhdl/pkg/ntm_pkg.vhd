@@ -62,7 +62,7 @@ package ntm_pkg is
   type std_logic_arithmetic_3array_3array is array (integer range <>, integer range <>) of std_logic_3array;
 
   -----------------------------------------------------------------------
-  -- Components
+  -- Constants
   -----------------------------------------------------------------------
 
   constant X : integer := 64;
@@ -70,6 +70,10 @@ package ntm_pkg is
   constant Z : integer := 64;
 
   constant DATA_SIZE : integer := 512;
+
+  -----------------------------------------------------------------------
+  -- Components
+  -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
   -- MATH - ARITHMETIC

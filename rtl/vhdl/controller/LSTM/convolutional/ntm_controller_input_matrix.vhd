@@ -46,7 +46,8 @@ use work.ntm_pkg.all;
 
 entity ntm_dnc_input_matrix is
   generic (
-    X : integer := 64,
+    X : integer := 64;
+    W : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -61,10 +62,10 @@ entity ntm_dnc_input_matrix is
 
     -- DATA
     X_IN  : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    R_IN  : in std_logic_arithmetic_vector_matrix(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    R_IN  : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_arithmetic_vector_matrix(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    X_OUT  : out std_logic_arithmetic_vector_matrix(W-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO : in  std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    X_OUT  : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -88,10 +89,10 @@ architecture ntm_dnc_input_matrix_architecture of ntm_dnc_input_matrix is
   signal ready_matrix_convolution : std_logic;
 
   -- DATA
-  signal modulo_matrix_convolution    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_convolution : std_logic_arithmetic_vector_matrix(H-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_convolution    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_convolution : std_logic_arithmetic_vector_matrix(X-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_convolution : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_convolution  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_convolution  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -101,9 +102,8 @@ begin
 
   ntm_matrix_convolution_i : ntm_matrix_convolution
     generic map (
-      X => H,
+      X => X,
       Y => W,
-      Z => R,
 
       DATA_SIZE => DATA_SIZE
     )

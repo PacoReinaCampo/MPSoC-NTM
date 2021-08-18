@@ -46,9 +46,8 @@ use work.ntm_pkg.all;
 
 entity ntm_dnc_output_vector is
   generic (
-    Y : integer := 64,
-    W : integer := 64,
-    R : integer := 64,
+    Y : integer := 64;
+    W : integer := 64;
 
     DATA_SIZE : integer := 512
   );

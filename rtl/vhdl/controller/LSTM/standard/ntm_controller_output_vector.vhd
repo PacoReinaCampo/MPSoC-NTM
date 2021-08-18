@@ -44,11 +44,10 @@ use ieee.numeric_std.all;
 
 use work.ntm_pkg.all;
 
-entity ntm_dnc_output_vector is
+entity ntm_controller_output_matrix is
   generic (
-    Y : integer := 64,
-    W : integer := 64,
-    R : integer := 64,
+    Y : integer := 64;
+    W : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -72,7 +71,7 @@ entity ntm_dnc_output_vector is
   );
 end entity;
 
-architecture ntm_dnc_output_vector_architecture of ntm_dnc_output_vector is
+architecture ntm_controller_output_matrix_architecture of ntm_controller_output_matrix is
 
   -----------------------------------------------------------------------
   -- Types

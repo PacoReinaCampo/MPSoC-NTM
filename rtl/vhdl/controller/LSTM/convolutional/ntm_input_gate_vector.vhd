@@ -46,10 +46,9 @@ use work.ntm_pkg.all;
 
 entity ntm_input_gate_vector is
   generic (
-    X : integer := 64,
-    W : integer := 64,
-    R : integer := 64,
-    H : integer := 64,
+    X : integer := 64;
+    W : integer := 64;
+    H : integer := 64;
 
     DATA_SIZE : integer := 512
   );

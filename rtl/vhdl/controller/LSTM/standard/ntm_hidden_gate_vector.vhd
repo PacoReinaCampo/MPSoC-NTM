@@ -46,7 +46,7 @@ use work.ntm_pkg.all;
 
 entity ntm_hidden_gate_vector is
   generic (
-    H : integer := 64,
+    H : integer := 64;
 
     DATA_SIZE : integer := 512
   );
