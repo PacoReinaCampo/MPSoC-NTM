@@ -63,4 +63,4 @@
 ../../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_output_gate_vector.vhd
 ../../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_state_gate_vector.vhd
 
-../../../../../../../../bench/vhdl/osvvm/math/function/ntm_function_testbench.vhd
+../../../../../../../../bench/vhdl/osvvm/controller/LSTM/convolutional/ntm_convolutional_lstm_testbench.vhd

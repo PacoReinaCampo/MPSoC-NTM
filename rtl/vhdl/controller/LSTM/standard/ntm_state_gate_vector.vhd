@@ -80,7 +80,7 @@ entity ntm_state_gate_vector is
   );
 end entity;
 
-architecture ntm_input_gate_vector_architecture of ntm_input_gate_vector is
+architecture ntm_state_gate_vector_architecture of ntm_state_gate_vector is
 
   -----------------------------------------------------------------------
   -- Types

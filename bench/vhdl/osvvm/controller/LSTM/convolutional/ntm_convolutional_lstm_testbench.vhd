@@ -242,6 +242,8 @@ begin
       R_IN => r_in_input_gate_vector,
       H_IN => h_in_input_gate_vector,
 
+      B_IN => b_in_input_gate_vector,
+
       MODULO => modulo_input_gate_vector,
       I_OUT  => i_out_input_gate_vector
     );
@@ -273,8 +275,10 @@ begin
       R_IN => r_in_output_gate_vector,
       H_IN => h_in_output_gate_vector,
 
+      B_IN => b_in_output_gate_vector,
+
       MODULO => modulo_output_gate_vector,
-      I_OUT  => o_out_output_gate_vector
+      O_OUT  => o_out_output_gate_vector
     );
 
   -- FORGET GATE VECTOR
@@ -303,6 +307,8 @@ begin
       X_IN => x_in_forget_gate_vector,
       R_IN => r_in_forget_gate_vector,
       H_IN => h_in_forget_gate_vector,
+
+      B_IN => b_in_forget_gate_vector,
 
       MODULO => modulo_forget_gate_vector,
       F_OUT  => f_out_forget_gate_vector
