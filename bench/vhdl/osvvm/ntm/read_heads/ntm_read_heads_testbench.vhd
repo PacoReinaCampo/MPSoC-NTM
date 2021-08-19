@@ -35,3 +35,65 @@
 -- THE SOFTWARE.
 --
 --------------------------------------------------------------------------------
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+use work.ntm_math_pkg.all;
+use work.ntm_core_pkg.all;
+
+entity ntm_read_heads_testbench is
+end ntm_read_heads_testbench;
+
+architecture ntm_read_heads_testbench_architecture of ntm_read_heads_testbench is
+
+  -----------------------------------------------------------------------
+  -- Signals
+  -----------------------------------------------------------------------
+
+  -- GLOBAL
+  signal CLK : std_logic;
+  signal RST : std_logic;
+
+  -- READING
+  -- CONTROL
+  signal start_reading : std_logic;
+  signal ready_reading : std_logic;
+
+  -- DATA
+  signal modulo_reading : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_reading   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_in_reading   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal r_out_reading  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+
+begin
+
+  -----------------------------------------------------------------------
+  -- Body
+  -----------------------------------------------------------------------
+
+  -- READING
+  reading : ntm_reading
+    generic map (
+      X => X,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_reading,
+      READY => ready_reading,
+
+      -- DATA
+      MODULO => modulo_reading,
+      W_IN   => w_in_reading,
+      M_IN   => m_in_reading,
+      R_OUT  => r_out_reading
+    );
+
+end ntm_read_heads_testbench_architecture;

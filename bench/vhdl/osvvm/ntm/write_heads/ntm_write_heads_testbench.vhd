@@ -35,3 +35,67 @@
 -- THE SOFTWARE.
 --
 --------------------------------------------------------------------------------
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+use work.ntm_math_pkg.all;
+use work.ntm_core_pkg.all;
+
+entity ntm_write_heads_testbench is
+end ntm_write_heads_testbench;
+
+architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench is
+
+  -----------------------------------------------------------------------
+  -- Signals
+  -----------------------------------------------------------------------
+
+  -- GLOBAL
+  signal CLK : std_logic;
+  signal RST : std_logic;
+
+  -- WIRTING
+  -- CONTROL
+  signal start_writing : std_logic;
+  signal ready_writing : std_logic;
+
+  -- DATA
+  signal modulo_writing : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_writing   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal e_in_writing   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_out_writing  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+
+begin
+
+  -----------------------------------------------------------------------
+  -- Body
+  -----------------------------------------------------------------------
+
+  -- WIRTING
+  writing : ntm_writing
+    generic map (
+      X => X,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_writing,
+      READY => ready_writing,
+
+      -- DATA
+      MODULO => modulo_writing,
+      M_IN   => m_in_writing,
+      E_IN   => e_in_writing,
+      W_IN   => w_in_writing,
+      M_OUT  => m_out_writing
+    );
+
+end ntm_write_heads_testbench_architecture;
