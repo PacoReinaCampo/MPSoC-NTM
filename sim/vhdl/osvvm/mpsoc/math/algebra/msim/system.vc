@@ -1,4 +1,4 @@
-../../../../../../../rtl/vhdl/pkg/ntm_pkg.vhd
+../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
 
 ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_determinant.vhd
 ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_inversion.vhd

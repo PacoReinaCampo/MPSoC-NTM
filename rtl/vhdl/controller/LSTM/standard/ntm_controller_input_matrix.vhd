@@ -42,11 +42,12 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.ntm_pkg.all;
+use work.ntm_math_pkg.all;
 
 entity ntm_controller_input_matrix is
   generic (
     X : integer := 64;
+    W : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -82,16 +83,16 @@ architecture ntm_controller_input_matrix_architecture of ntm_controller_input_ma
   -- Signals
   -----------------------------------------------------------------------
 
-  -- 3ARRAY CONVOLUTION
+  -- VECTOR PRODUCT
   -- CONTROL
-  signal start_matrix_product : std_logic;
-  signal ready_matrix_product : std_logic;
+  signal start_vector_product : std_logic;
+  signal ready_vector_product : std_logic;
 
   -- DATA
-  signal modulo_matrix_product    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_product : std_logic_arithmetic_vector_matrix(X-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_product : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_product  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_product    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_product : std_logic_arithmetic_vector_matrix(X-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_product : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_product  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -99,7 +100,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  ntm_matrix_product_i : ntm_matrix_product
+  ntm_vector_product_i : ntm_vector_product
     generic map (
       X => X,
       Y => W,
@@ -112,14 +113,14 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_product,
-      READY => ready_matrix_product,
+      START => start_vector_product,
+      READY => ready_vector_product,
 
       -- DATA
-      MODULO    => modulo_matrix_product,
-      DATA_A_IN => data_a_in_matrix_product,
-      DATA_B_IN => data_b_in_matrix_product,
-      DATA_OUT  => data_out_matrix_product
+      MODULO    => modulo_vector_product,
+      DATA_A_IN => data_a_in_vector_product,
+      DATA_B_IN => data_b_in_vector_product,
+      DATA_OUT  => data_out_vector_product
     );
 
 end architecture;

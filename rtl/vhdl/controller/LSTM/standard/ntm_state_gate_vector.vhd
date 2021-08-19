@@ -42,7 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.ntm_pkg.all;
+use work.ntm_math_pkg.all;
 
 entity ntm_state_gate_vector is
   generic (
@@ -107,9 +107,9 @@ architecture ntm_input_gate_vector_architecture of ntm_input_gate_vector is
   -- VECTOR ADDER
   -- CONTROL
   signal start_vector_adder : std_logic;
-  signal ready_vector_adder : std_logic;
+  signal ready_vector_adder : std_logic_vector(H-1 downto 0);
 
-  signal operation_vector_adder : std_logic;
+  signal operation_vector_adder : std_logic_vector(H-1 downto 0);
 
   -- DATA
   signal modulo_vector_adder    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -120,7 +120,7 @@ architecture ntm_input_gate_vector_architecture of ntm_input_gate_vector is
   -- VECTOR MULTIPLIER
   -- CONTROL
   signal start_vector_multiplier : std_logic;
-  signal ready_vector_multiplier : std_logic;
+  signal ready_vector_multiplier : std_logic_vector(H-1 downto 0);
 
   -- DATA
   signal modulo_vector_multiplier    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -128,38 +128,38 @@ architecture ntm_input_gate_vector_architecture of ntm_input_gate_vector is
   signal data_b_in_vector_multiplier : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  -- MATRIX CONVOLUTION X
+  -- VECTOR MULTIPLIER X
   -- CONTROL
-  signal start_matrix_product_x : std_logic;
-  signal ready_matrix_product_x : std_logic;
+  signal start_vector_product_x : std_logic;
+  signal ready_vector_product_x : std_logic;
 
   -- DATA
-  signal modulo_matrix_product_x    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_product_x : std_logic_arithmetic_vector_matrix(H-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_product_x : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_product_x  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_product_x    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_product_x : std_logic_arithmetic_vector_matrix(H-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_product_x : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_product_x  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  -- MATRIX CONVOLUTION H
+  -- VECTOR MULTIPLIER H
   -- CONTROL
-  signal start_matrix_product_h : std_logic;
-  signal ready_matrix_product_h : std_logic;
+  signal start_vector_product_h : std_logic;
+  signal ready_vector_product_h : std_logic;
 
   -- DATA
-  signal modulo_matrix_product_h    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_product_h : std_logic_arithmetic_vector_matrix(H-1 downto 0)(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_product_h : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_product_h  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_product_h    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_product_h : std_logic_arithmetic_vector_matrix(H-1 downto 0)(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_product_h : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_product_h  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  -- 3ARRAY CONVOLUTION
+  -- VECTOR MULTIPLIER W
   -- CONTROL
-  signal start_3array_product : std_logic;
-  signal ready_3array_product : std_logic;
+  signal start_vector_product_w : std_logic;
+  signal ready_vector_product_w : std_logic;
 
   -- DATA
-  signal modulo_3array_product    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_3array_product : std_logic_arithmetic_vector_matrix(H-1 downto 0)(W-1 downto 0)(R-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_3array_product : std_logic_arithmetic_vector_matrix(W-1 downto 0)(R-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_3array_product  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_product_w    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_product_w : std_logic_arithmetic_vector_matrix(H-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_product_w : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_product_w  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -234,7 +234,7 @@ begin
       DATA_OUT  => data_out_vector_multiplier
     );
 
-  ntm_matrix_product_h_i : ntm_matrix_product
+  ntm_vector_product_x_i : ntm_vector_product
     generic map (
       X => H,
       Y => X,
@@ -247,17 +247,17 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_product_x,
-      READY => ready_matrix_product_x,
+      START => start_vector_product_x,
+      READY => ready_vector_product_x,
 
       -- DATA
-      MODULO    => modulo_matrix_product_x,
-      DATA_A_IN => data_a_in_matrix_product_x,
-      DATA_B_IN => data_b_in_matrix_product_x,
-      DATA_OUT  => data_out_matrix_product_x
+      MODULO    => modulo_vector_product_x,
+      DATA_A_IN => data_a_in_vector_product_x,
+      DATA_B_IN => data_b_in_vector_product_x,
+      DATA_OUT  => data_out_vector_product_x
     );
 
-  ntm_matrix_product_w_i : ntm_matrix_product
+  ntm_vector_product_w_i : ntm_vector_product
     generic map (
       X => H,
       Y => W,
@@ -270,17 +270,17 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_product_w,
-      READY => ready_matrix_product_w,
+      START => start_vector_product_w,
+      READY => ready_vector_product_w,
 
       -- DATA
-      MODULO    => modulo_matrix_product_w,
-      DATA_A_IN => data_a_in_matrix_product_w,
-      DATA_B_IN => data_b_in_matrix_product_w,
-      DATA_OUT  => data_out_matrix_product_w
+      MODULO    => modulo_vector_product_w,
+      DATA_A_IN => data_a_in_vector_product_w,
+      DATA_B_IN => data_b_in_vector_product_w,
+      DATA_OUT  => data_out_vector_product_w
     );
 
-  ntm_matrix_product_h_i : ntm_matrix_product
+  ntm_vector_product_h_i : ntm_vector_product
     generic map (
       X => H,
       Y => H,
@@ -293,14 +293,14 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_product_h,
-      READY => ready_matrix_product_h,
+      START => start_vector_product_h,
+      READY => ready_vector_product_h,
 
       -- DATA
-      MODULO    => modulo_matrix_product_h,
-      DATA_A_IN => data_a_in_matrix_product_h,
-      DATA_B_IN => data_b_in_matrix_product_h,
-      DATA_OUT  => data_out_matrix_product_h
+      MODULO    => modulo_vector_product_h,
+      DATA_A_IN => data_a_in_vector_product_h,
+      DATA_B_IN => data_b_in_vector_product_h,
+      DATA_OUT  => data_out_vector_product_h
     );
 
 end architecture;

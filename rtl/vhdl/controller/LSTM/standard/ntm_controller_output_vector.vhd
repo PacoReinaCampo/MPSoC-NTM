@@ -42,7 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.ntm_pkg.all;
+use work.ntm_math_pkg.all;
 
 entity ntm_controller_output_matrix is
   generic (
@@ -88,9 +88,9 @@ architecture ntm_controller_output_matrix_architecture of ntm_controller_output_
   -- VECTOR ADDER
   -- CONTROL
   signal start_vector_adder : std_logic;
-  signal ready_vector_adder : std_logic;
+  signal ready_vector_adder : std_logic_vector(Y-1 downto 0);
 
-  signal operation_vector_adder : std_logic;
+  signal operation_vector_adder : std_logic_vector(Y-1 downto 0);
 
   -- DATA
   signal modulo_vector_adder    : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -100,14 +100,14 @@ architecture ntm_controller_output_matrix_architecture of ntm_controller_output_
 
   -- MATRIX CONVOLUTION
   -- CONTROL
-  signal start_matrix_product : std_logic;
-  signal ready_matrix_product : std_logic;
+  signal start_vector_product : std_logic;
+  signal ready_vector_product : std_logic;
 
   -- DATA
-  signal modulo_matrix_product    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_product : std_logic_arithmetic_vector_matrix(H-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_product : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_product  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_product    : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_product : std_logic_arithmetic_vector_matrix(Y-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_product : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_product  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -139,9 +139,9 @@ begin
       DATA_OUT  => data_out_vector_adder
     );
 
-  ntm_matrix_product_i : ntm_matrix_product
+  ntm_vector_product_i : ntm_vector_product
     generic map (
-      X => H,
+      X => Y,
       Y => W,
 
       DATA_SIZE => DATA_SIZE
@@ -152,14 +152,14 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_product,
-      READY => ready_matrix_product,
+      START => start_vector_product,
+      READY => ready_vector_product,
 
       -- DATA
-      MODULO    => modulo_matrix_product,
-      DATA_A_IN => data_a_in_matrix_product,
-      DATA_B_IN => data_b_in_matrix_product,
-      DATA_OUT  => data_out_matrix_product
+      MODULO    => modulo_vector_product,
+      DATA_A_IN => data_a_in_vector_product,
+      DATA_B_IN => data_b_in_vector_product,
+      DATA_OUT  => data_out_vector_product
     );
 
 end architecture;

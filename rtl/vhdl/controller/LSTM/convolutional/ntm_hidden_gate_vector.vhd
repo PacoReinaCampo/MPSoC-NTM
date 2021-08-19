@@ -42,7 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.ntm_pkg.all;
+use work.ntm_math_pkg.all;
 
 entity ntm_hidden_gate_vector is
   generic (
@@ -95,7 +95,7 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
   -- VECTOR MULTIPLIER
   -- CONTROL
   signal start_vector_multiplier : std_logic;
-  signal ready_vector_multiplier : std_logic;
+  signal ready_vector_multiplier : std_logic_vector(H-1 downto 0);
 
   -- DATA
   signal modulo_vector_multiplier    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);

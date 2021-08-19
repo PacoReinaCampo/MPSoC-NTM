@@ -42,7 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.ntm_pkg.all;
+use work.ntm_math_pkg.all;
 
 entity ntm_dnc_output_vector is
   generic (
@@ -88,9 +88,9 @@ architecture ntm_dnc_output_vector_architecture of ntm_dnc_output_vector is
   -- VECTOR ADDER
   -- CONTROL
   signal start_vector_adder : std_logic;
-  signal ready_vector_adder : std_logic;
+  signal ready_vector_adder : std_logic_vector(Y-1 downto 0);
 
-  signal operation_vector_adder : std_logic;
+  signal operation_vector_adder : std_logic_vector(Y-1 downto 0);
 
   -- DATA
   signal modulo_vector_adder    : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -98,16 +98,16 @@ architecture ntm_dnc_output_vector_architecture of ntm_dnc_output_vector is
   signal data_b_in_vector_adder : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  -- MATRIX CONVOLUTION
+  -- VECTOR CONVOLUTION
   -- CONTROL
-  signal start_matrix_convolution : std_logic;
-  signal ready_matrix_convolution : std_logic;
+  signal start_vector_convolution : std_logic;
+  signal ready_vector_convolution : std_logic;
 
   -- DATA
-  signal modulo_matrix_convolution    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_convolution : std_logic_arithmetic_vector_matrix(H-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_convolution : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_convolution  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_convolution    : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_convolution : std_logic_arithmetic_vector_matrix(Y-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_convolution : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_convolution  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -141,7 +141,7 @@ begin
 
   ntm_vector_convolution_function_i : ntm_vector_convolution_function
     generic map (
-      X => H,
+      X => Y,
       Y => W,
 
       DATA_SIZE => DATA_SIZE
@@ -152,14 +152,14 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_convolution,
-      READY => ready_matrix_convolution,
+      START => start_vector_convolution,
+      READY => ready_vector_convolution,
 
       -- DATA
-      MODULO    => modulo_matrix_convolution,
-      DATA_A_IN => data_a_in_matrix_convolution,
-      DATA_B_IN => data_b_in_matrix_convolution,
-      DATA_OUT  => data_out_matrix_convolution
+      MODULO    => modulo_vector_convolution,
+      DATA_A_IN => data_a_in_vector_convolution,
+      DATA_B_IN => data_b_in_vector_convolution,
+      DATA_OUT  => data_out_vector_convolution
     );
 
 end architecture;

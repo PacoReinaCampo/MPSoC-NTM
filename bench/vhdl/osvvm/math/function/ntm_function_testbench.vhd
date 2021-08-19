@@ -40,7 +40,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.ntm_pkg.all;
+use work.ntm_math_pkg.all;
 
 entity ntm_function_testbench is
 end ntm_function_testbench;
@@ -65,11 +65,10 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_scalar_convolution : std_logic;
 
   -- DATA
-  signal modulo_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal n_in_scalar_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_in_scalar_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal s_in_scalar_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_out_scalar_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_scalar_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- COSINE SIMILARITY
   -- CONTROL
@@ -154,11 +153,10 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_vector_convolution : std_logic;
 
   -- DATA
-  signal modulo_vector_convolution : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal n_in_vector_convolution   : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_vector_convolution   : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal s_in_vector_convolution   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_out_vector_convolution  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_convolution    : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_convolution : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_convolution : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_convolution  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- COSINE SIMILARITY
   -- CONTROL
@@ -243,11 +241,10 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_matrix_convolution : std_logic;
 
   -- DATA
-  signal modulo_matrix_convolution : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal n_in_matrix_convolution   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_matrix_convolution   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal s_in_matrix_convolution   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_out_matrix_convolution  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_convolution    : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_convolution : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_convolution : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_convolution  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- COSINE SIMILARITY
   -- CONTROL
@@ -347,11 +344,10 @@ begin
       READY => ready_scalar_convolution,
 
       -- DATA
-      MODULO => modulo_scalar_convolution,
-      N_IN   => n_in_scalar_convolution,
-      W_IN   => w_in_scalar_convolution,
-      S_IN   => s_in_scalar_convolution,
-      W_OUT  => w_out_scalar_convolution
+      MODULO    => modulo_scalar_convolution,
+      DATA_A_IN => data_a_in_scalar_convolution,
+      DATA_B_IN => data_b_in_scalar_convolution,
+      DATA_OUT  => data_out_scalar_convolution
     );
 
   -- COSINE SIMILARITY
@@ -518,11 +514,10 @@ begin
       READY => ready_vector_convolution,
 
       -- DATA
-      MODULO => modulo_vector_convolution,
-      N_IN   => n_in_vector_convolution,
-      W_IN   => w_in_vector_convolution,
-      S_IN   => s_in_vector_convolution,
-      W_OUT  => w_out_vector_convolution
+      MODULO    => modulo_vector_convolution,
+      DATA_A_IN => data_a_in_vector_convolution,
+      DATA_B_IN => data_b_in_vector_convolution,
+      DATA_OUT  => data_out_vector_convolution
     );
 
   -- COSINE SIMILARITY
@@ -690,11 +685,10 @@ begin
       READY => ready_matrix_convolution,
 
       -- DATA
-      MODULO => modulo_matrix_convolution,
-      N_IN   => n_in_matrix_convolution,
-      W_IN   => w_in_matrix_convolution,
-      S_IN   => s_in_matrix_convolution,
-      W_OUT  => w_out_matrix_convolution
+      MODULO    => modulo_matrix_convolution,
+      DATA_A_IN => data_a_in_matrix_convolution,
+      DATA_B_IN => data_b_in_matrix_convolution,
+      DATA_OUT  => data_out_matrix_convolution
     );
 
   -- COSINE SIMILARITY

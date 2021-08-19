@@ -1,4 +1,4 @@
-../../../../../../../rtl/vhdl/pkg/ntm_pkg.vhd
+../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
 
 ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_mod.vhd
 ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_adder.vhd
