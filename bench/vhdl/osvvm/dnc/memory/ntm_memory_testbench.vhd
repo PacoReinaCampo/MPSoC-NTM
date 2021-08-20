@@ -134,4 +134,290 @@ begin
       B_OUT  => b_out_backward_weighting
     );
 
+  -- FORWARD WEIGHTING
+  backward_weighting : ntm_backward_weighting
+    generic map (
+      X => X,
+      Y => Y,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_backward_weighting,
+      READY => ready_backward_weighting,
+
+      -- DATA
+      L_IN => l_in_backward_weighting,
+
+      W_IN => w_in_backward_weighting,
+
+      MODULO => modulo_backward_weighting,
+      B_OUT  => b_out_backward_weighting
+    );
+
+  -- MEMORY MATRIX
+  backward_weighting : ntm_backward_weighting
+    generic map (
+      X => X,
+      Y => Y,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_backward_weighting,
+      READY => ready_backward_weighting,
+
+      -- DATA
+      L_IN => l_in_backward_weighting,
+
+      W_IN => w_in_backward_weighting,
+
+      MODULO => modulo_backward_weighting,
+      B_OUT  => b_out_backward_weighting
+    );
+
+  -- MEMORY RETENTION VECTOR
+  backward_weighting : ntm_backward_weighting
+    generic map (
+      X => X,
+      Y => Y,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_backward_weighting,
+      READY => ready_backward_weighting,
+
+      -- DATA
+      L_IN => l_in_backward_weighting,
+
+      W_IN => w_in_backward_weighting,
+
+      MODULO => modulo_backward_weighting,
+      B_OUT  => b_out_backward_weighting
+    );
+
+  -- PRECEDENCE WEIGHTING
+  backward_weighting : ntm_backward_weighting
+    generic map (
+      X => X,
+      Y => Y,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_backward_weighting,
+      READY => ready_backward_weighting,
+
+      -- DATA
+      L_IN => l_in_backward_weighting,
+
+      W_IN => w_in_backward_weighting,
+
+      MODULO => modulo_backward_weighting,
+      B_OUT  => b_out_backward_weighting
+    );
+
+  -- READ CONTENT WEIGHTING
+  backward_weighting : ntm_backward_weighting
+    generic map (
+      X => X,
+      Y => Y,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_backward_weighting,
+      READY => ready_backward_weighting,
+
+      -- DATA
+      L_IN => l_in_backward_weighting,
+
+      W_IN => w_in_backward_weighting,
+
+      MODULO => modulo_backward_weighting,
+      B_OUT  => b_out_backward_weighting
+    );
+
+  -- READ VECTORS
+  backward_weighting : ntm_backward_weighting
+    generic map (
+      X => X,
+      Y => Y,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_backward_weighting,
+      READY => ready_backward_weighting,
+
+      -- DATA
+      L_IN => l_in_backward_weighting,
+
+      W_IN => w_in_backward_weighting,
+
+      MODULO => modulo_backward_weighting,
+      B_OUT  => b_out_backward_weighting
+    );
+
+  -- READ WEIGHTING
+  backward_weighting : ntm_backward_weighting
+    generic map (
+      X => X,
+      Y => Y,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_backward_weighting,
+      READY => ready_backward_weighting,
+
+      -- DATA
+      L_IN => l_in_backward_weighting,
+
+      W_IN => w_in_backward_weighting,
+
+      MODULO => modulo_backward_weighting,
+      B_OUT  => b_out_backward_weighting
+    );
+
+  -- TEMPORAL LINK MATRIX
+  backward_weighting : ntm_backward_weighting
+    generic map (
+      X => X,
+      Y => Y,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_backward_weighting,
+      READY => ready_backward_weighting,
+
+      -- DATA
+      L_IN => l_in_backward_weighting,
+
+      W_IN => w_in_backward_weighting,
+
+      MODULO => modulo_backward_weighting,
+      B_OUT  => b_out_backward_weighting
+    );
+
+  -- USAGE VECTOR
+  backward_weighting : ntm_backward_weighting
+    generic map (
+      X => X,
+      Y => Y,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_backward_weighting,
+      READY => ready_backward_weighting,
+
+      -- DATA
+      L_IN => l_in_backward_weighting,
+
+      W_IN => w_in_backward_weighting,
+
+      MODULO => modulo_backward_weighting,
+      B_OUT  => b_out_backward_weighting
+    );
+
+  -- WRITE CONTENT WEIGHTING
+  backward_weighting : ntm_backward_weighting
+    generic map (
+      X => X,
+      Y => Y,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_backward_weighting,
+      READY => ready_backward_weighting,
+
+      -- DATA
+      L_IN => l_in_backward_weighting,
+
+      W_IN => w_in_backward_weighting,
+
+      MODULO => modulo_backward_weighting,
+      B_OUT  => b_out_backward_weighting
+    );
+
+  -- WRITE WEIGHTING
+  backward_weighting : ntm_backward_weighting
+    generic map (
+      X => X,
+      Y => Y,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_backward_weighting,
+      READY => ready_backward_weighting,
+
+      -- DATA
+      L_IN => l_in_backward_weighting,
+
+      W_IN => w_in_backward_weighting,
+
+      MODULO => modulo_backward_weighting,
+      B_OUT  => b_out_backward_weighting
+    );
+
 end ntm_memory_testbench_architecture;
