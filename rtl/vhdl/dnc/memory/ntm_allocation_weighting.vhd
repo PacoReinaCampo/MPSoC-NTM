@@ -35,3 +35,159 @@
 -- THE SOFTWARE.
 --
 --------------------------------------------------------------------------------
+-- Author(s):
+--   Paco Reina Campo <pacoreinacampo@queenfield.tech>
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+use work.ntm_math_pkg.all;
+
+entity ntm_allocation_weighting is
+  generic (
+    X : integer := 64;
+
+    DATA_SIZE : integer := 512
+  );
+  port (
+    -- GLOBAL
+    CLK : in std_logic;
+    RST : in std_logic;
+
+    -- CONTROL
+    START : in  std_logic;
+    READY : out std_logic;
+
+    -- DATA
+    PHI_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    U_IN   : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+
+    MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    A_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+  );
+end entity;
+
+architecture ntm_allocation_weighting_architecture of ntm_allocation_weighting is
+
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Signals
+  -----------------------------------------------------------------------
+  -- VECTOR MULTIPLICATION
+  -- CONTROL
+  signal start_vector_multiplication : std_logic;
+  signal ready_vector_multiplication : std_logic;
+
+  -- DATA
+  signal modulo_vector_multiplication    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplication : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplication : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplication  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  -- VECTOR ADDER
+  -- CONTROL
+  signal start_vector_adder : std_logic;
+  signal ready_vector_adder : std_logic_vector(X-1 downto 0);
+
+  signal operation_vector_adder : std_logic_vector(X-1 downto 0);
+
+  -- DATA
+  signal modulo_vector_adder    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_adder : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_adder : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_adder  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  -- VECTOR MULTIPLIER
+  -- CONTROL
+  signal start_vector_multiplier : std_logic;
+  signal ready_vector_multiplier : std_logic_vector(X-1 downto 0);
+
+  -- DATA
+  signal modulo_vector_multiplier    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplier : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplier : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplier  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+
+begin
+
+  -----------------------------------------------------------------------
+  -- Body
+  -----------------------------------------------------------------------
+
+  ntm_vector_multiplication_function_i : ntm_vector_multiplication_function
+    generic map (
+      X => X,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_multiplication,
+      READY => ready_vector_multiplication,
+
+      -- DATA
+      MODULO    => modulo_vector_multiplication,
+      DATA_A_IN => data_a_in_vector_multiplication,
+      DATA_B_IN => data_b_in_vector_multiplication,
+      DATA_OUT  => data_out_vector_multiplication
+    );
+
+  ntm_vector_adder_i : ntm_vector_adder
+    generic map (
+      X => X,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_adder,
+      READY => ready_vector_adder,
+
+      OPERATION => operation_vector_adder,
+
+      -- DATA
+      MODULO    => modulo_vector_adder,
+      DATA_A_IN => data_a_in_vector_adder,
+      DATA_B_IN => data_b_in_vector_adder,
+      DATA_OUT  => data_out_vector_adder
+    );
+
+  ntm_vector_multiplier_i : ntm_vector_multiplier
+    generic map (
+      X => X,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_multiplier,
+      READY => ready_vector_multiplier,
+
+      -- DATA
+      MODULO    => modulo_vector_multiplier,
+      DATA_A_IN => data_a_in_vector_multiplier,
+      DATA_B_IN => data_b_in_vector_multiplier,
+      DATA_OUT  => data_out_vector_multiplier
+    );
+
+end architecture;

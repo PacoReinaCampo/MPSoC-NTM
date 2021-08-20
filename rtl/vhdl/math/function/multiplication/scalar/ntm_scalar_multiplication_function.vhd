@@ -44,11 +44,8 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_vector_multiplication_function is
-  generic (
-    X : integer := 64;
-    Y : integer := 64;
-    
+entity ntm_scalar_multiplication_function is
+  generic (    
     DATA_SIZE : integer := 512
   );
   port (
@@ -61,14 +58,14 @@ entity ntm_vector_multiplication_function is
     READY : out std_logic;
 
     -- DATA
-    MODULO    : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_A_IN : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
-architecture ntm_vector_multiplication_function_architecture of ntm_vector_multiplication_function is
+architecture ntm_scalar_multiplication_function_architecture of ntm_scalar_multiplication_function is
 
   -----------------------------------------------------------------------
   -- Types

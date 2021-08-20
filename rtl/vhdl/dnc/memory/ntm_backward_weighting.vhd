@@ -35,3 +35,125 @@
 -- THE SOFTWARE.
 --
 --------------------------------------------------------------------------------
+-- Author(s):
+--   Paco Reina Campo <pacoreinacampo@queenfield.tech>
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+use work.ntm_math_pkg.all;
+
+entity ntm_backward_weighting is
+  generic (
+    X : integer := 64;
+    Y : integer := 64;
+
+    DATA_SIZE : integer := 512
+  );
+  port (
+    -- GLOBAL
+    CLK : in std_logic;
+    RST : in std_logic;
+
+    -- CONTROL
+    START : in  std_logic;
+    READY : out std_logic;
+
+    -- DATA
+    L_IN : in std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+
+    W_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+
+    MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    B_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+  );
+end entity;
+
+architecture ntm_backward_weighting_architecture of ntm_backward_weighting is
+
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Signals
+  -----------------------------------------------------------------------
+
+  -- MATRIX TRANSPOSE
+  -- CONTROL
+  signal start_matrix_transpose : std_logic;
+  signal ready_matrix_transpose : std_logic;
+
+  -- DATA
+  signal modulo_matrix_transpose   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_transpose  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_transpose : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  -- VECTOR PRODUCT
+  -- CONTROL
+  signal start_vector_product : std_logic;
+  signal ready_vector_product : std_logic;
+
+  -- DATA
+  signal modulo_vector_product    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_product : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_product : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_product  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+
+begin
+
+  -----------------------------------------------------------------------
+  -- Body
+  -----------------------------------------------------------------------
+
+  ntm_matrix_transpose_i : ntm_matrix_transpose
+    generic map (
+      X => X,
+      Y => Y,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_matrix_transpose,
+      READY => ready_matrix_transpose,
+
+      -- DATA
+      MODULO   => modulo_matrix_transpose,
+      DATA_IN  => data_in_matrix_transpose,
+      DATA_OUT => data_out_matrix_transpose
+    );
+
+  ntm_vector_product_i : ntm_vector_product
+    generic map (
+      X => X,
+      Y => Y,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_product,
+      READY => ready_vector_product,
+
+      -- DATA
+      MODULO    => modulo_vector_product,
+      DATA_A_IN => data_a_in_vector_product,
+      DATA_B_IN => data_b_in_vector_product,
+      DATA_OUT  => data_out_vector_product
+    );
+
+end architecture;

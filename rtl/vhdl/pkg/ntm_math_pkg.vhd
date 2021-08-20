@@ -51,15 +51,6 @@ package ntm_math_pkg is
 
   type std_logic_arithmetic_vector_vector is array (integer range <>) of std_logic_vector;
   type std_logic_arithmetic_vector_matrix is array (integer range <>) of std_logic_matrix;
-  type std_logic_arithmetic_vector_3array is array (integer range <>) of std_logic_3array;
-
-  type std_logic_arithmetic_matrix_vector is array (integer range <>, integer range <>) of std_logic_vector;
-  type std_logic_arithmetic_matrix_matrix is array (integer range <>, integer range <>) of std_logic_matrix;
-  type std_logic_arithmetic_matrix_3array is array (integer range <>, integer range <>) of std_logic_3array;
-
-  type std_logic_arithmetic_3array_vector is array (integer range <>, integer range <>) of std_logic_vector;
-  type std_logic_arithmetic_3array_matrix is array (integer range <>, integer range <>) of std_logic_matrix;
-  type std_logic_arithmetic_3array_3array is array (integer range <>, integer range <>) of std_logic_3array;
 
   -----------------------------------------------------------------------
   -- Constants
@@ -838,6 +829,27 @@ package ntm_math_pkg is
     );
   end component;
 
+  component ntm_scalar_multiplication_function is
+    generic (
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    );
+  end component;
+
   component ntm_scalar_cosh_function is
     generic (
       DATA_SIZE : integer := 512
@@ -959,6 +971,27 @@ package ntm_math_pkg is
     );
   end component;
 
+  component ntm_scalar_summation_function is
+    generic (
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    );
+  end component;
+
   -- VECTOR
   component ntm_vector_convolution_function is
     generic (
@@ -1004,6 +1037,29 @@ package ntm_math_pkg is
       SIZE_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
       DATA_U_IN : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
       DATA_V_IN : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+    );
+  end component;
+
+  component ntm_vector_multiplication_function is
+    generic (
+      X : integer := 64;
+
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      MODULO    : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
@@ -1141,6 +1197,29 @@ package ntm_math_pkg is
     );
   end component;
 
+  component ntm_vector_summation_function is
+    generic (
+      X : integer := 64;
+
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      MODULO    : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+    );
+  end component;
+
   -- MATRIX
   component ntm_matrix_convolution_function is
     generic (
@@ -1165,6 +1244,7 @@ package ntm_math_pkg is
       DATA_OUT  : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
+
   component ntm_matrix_cosine_similarity_function is
     generic (
       X : integer := 64;
@@ -1186,6 +1266,30 @@ package ntm_math_pkg is
       SIZE_IN   : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
       DATA_U_IN : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
       DATA_V_IN : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+    );
+  end component;
+
+  component ntm_matrix_multiplication_function is
+    generic (
+      X : integer := 64;
+      Y : integer := 64;
+
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      MODULO    : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
@@ -1326,6 +1430,30 @@ package ntm_math_pkg is
       MODULO   : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
       DATA_IN  : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
       DATA_OUT : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+    );
+  end component;
+
+  component ntm_matrix_summation_function is
+    generic (
+      X : integer := 64;
+      Y : integer := 64;
+
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      MODULO    : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
 

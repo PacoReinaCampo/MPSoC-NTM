@@ -35,52 +35,48 @@
 -- THE SOFTWARE.
 --
 --------------------------------------------------------------------------------
--- Author(s):
---   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
+use work.ntm_dnc_core_pkg.all;
 
-entity ntm_scalar_multiplication_function is
-  generic (
-    X : integer := 64;
-    Y : integer := 64;
-    
-    DATA_SIZE : integer := 512
-  );
-  port (
-    -- GLOBAL
-    CLK : in std_logic;
-    RST : in std_logic;
+entity ntm_memory_testbench is
+end ntm_memory_testbench;
 
-    -- CONTROL
-    START : in  std_logic;
-    READY : out std_logic;
-
-    -- DATA
-    MODULO    : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_A_IN : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0)
-  );
-end entity;
-
-architecture ntm_scalar_multiplication_function_architecture of ntm_scalar_multiplication_function is
-
-  -----------------------------------------------------------------------
-  -- Types
-  -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
+architecture ntm_memory_testbench_architecture of ntm_memory_testbench is
 
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- GLOBAL
+  signal CLK : std_logic;
+  signal RST : std_logic;
+
+  -- ALLOCATION WEIGHTING
+  -- CONTROL
+  signal start_allocation_weighting : std_logic;
+  signal ready_allocation_weighting : std_logic;
+
+  -- DATA
+  signal modulo_allocation_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal phi_in_allocation_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal u_in_allocation_weighting   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal a_out_allocation_weighting  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  -- BACKWARD WEIGHTING
+  -- CONTROL
+  signal start_backward_weighting : std_logic;
+  signal ready_backward_weighting : std_logic;
+
+  -- DATA
+  signal modulo_backward_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal l_in_backward_weighting   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_backward_weighting   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal b_out_backward_weighting  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -88,4 +84,54 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-end architecture;
+  -- ALLOCATION WEIGHTING
+  allocation_weighting : ntm_allocation_weighting
+    generic map (
+      X => X,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_allocation_weighting,
+      READY => ready_allocation_weighting,
+
+      -- DATA
+      PHI_IN => phi_in_allocation_weighting,
+      U_IN   => u_in_allocation_weighting,
+
+      MODULO => modulo_allocation_weighting,
+      A_OUT  => a_out_allocation_weighting
+    );
+
+  -- BACKWARD WEIGHTING
+  backward_weighting : ntm_backward_weighting
+    generic map (
+      X => X,
+      Y => Y,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_backward_weighting,
+      READY => ready_backward_weighting,
+
+      -- DATA
+      L_IN => l_in_backward_weighting,
+
+      W_IN => w_in_backward_weighting,
+
+      MODULO => modulo_backward_weighting,
+      B_OUT  => b_out_backward_weighting
+    );
+
+end ntm_memory_testbench_architecture;

@@ -82,6 +82,17 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_v_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- MULTIPLICATION
+  -- CONTROL
+  signal start_scalar_multiplication : std_logic;
+  signal ready_scalar_multiplication : std_logic;
+
+  -- DATA
+  signal modulo_scalar_multiplication    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- COSH
   -- CONTROL
   signal start_scalar_cosh : std_logic;
@@ -143,6 +154,17 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_scalar_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- SUMMATION
+  -- CONTROL
+  signal start_scalar_summation : std_logic;
+  signal ready_scalar_summation : std_logic;
+
+  -- DATA
+  signal modulo_scalar_summation    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -----------------------------------------------------------------------
   -- VECTOR
   -----------------------------------------------------------------------
@@ -169,6 +191,17 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_u_in_vector_cosine : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
   signal data_v_in_vector_cosine : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
   signal data_out_vector_cosine  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  -- MULTIPLICATION
+  -- CONTROL
+  signal start_vector_multiplication : std_logic;
+  signal ready_vector_multiplication : std_logic;
+
+  -- DATA
+  signal modulo_vector_multiplication    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplication : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplication : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplication  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- COSH
   -- CONTROL
@@ -231,6 +264,17 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_vector_oneplus  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
   signal data_out_vector_oneplus : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
 
+  -- SUMMATION
+  -- CONTROL
+  signal start_vector_summation : std_logic;
+  signal ready_vector_summation : std_logic;
+
+  -- DATA
+  signal modulo_vector_summation    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_summation : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_summation : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_summation  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+
   -----------------------------------------------------------------------
   -- MATRIX
   -----------------------------------------------------------------------
@@ -257,6 +301,17 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_u_in_matrix_cosine : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
   signal data_v_in_matrix_cosine : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
   signal data_out_matrix_cosine  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  -- MULTIPLICATION
+  -- CONTROL
+  signal start_matrix_multiplication : std_logic;
+  signal ready_matrix_multiplication : std_logic;
+
+  -- DATA
+  signal modulo_matrix_multiplication    : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_multiplication : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_multiplication : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_multiplication  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- COSH
   -- CONTROL
@@ -319,6 +374,17 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_matrix_oneplus  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
   signal data_out_matrix_oneplus : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
 
+  -- SUMMATION
+  -- CONTROL
+  signal start_matrix_summation : std_logic;
+  signal ready_matrix_summation : std_logic;
+
+  -- DATA
+  signal modulo_matrix_summation    : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_summation : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_summation : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_summation  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
@@ -370,6 +436,27 @@ begin
       DATA_U_IN => data_u_in_scalar_cosine,
       DATA_V_IN => data_v_in_scalar_cosine,
       DATA_OUT  => data_out_scalar_cosine
+    );
+
+  -- MULTIPLICATION
+  scalar_multiplication_function : ntm_scalar_multiplication_function
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_multiplication,
+      READY => ready_scalar_multiplication,
+
+      -- DATA
+      MODULO    => modulo_scalar_multiplication,
+      DATA_A_IN => data_a_in_scalar_multiplication,
+      DATA_B_IN => data_b_in_scalar_multiplication,
+      DATA_OUT  => data_out_scalar_multiplication
     );
 
   -- COSH
@@ -493,6 +580,27 @@ begin
       DATA_OUT => data_out_scalar_oneplus
     );
 
+  -- SUMMATION
+  scalar_summation_function : ntm_scalar_summation_function
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_summation,
+      READY => ready_scalar_summation,
+
+      -- DATA
+      MODULO    => modulo_scalar_summation,
+      DATA_A_IN => data_a_in_scalar_summation,
+      DATA_B_IN => data_b_in_scalar_summation,
+      DATA_OUT  => data_out_scalar_summation
+    );
+
   -----------------------------------------------------------------------
   -- VECTOR
   -----------------------------------------------------------------------
@@ -540,6 +648,29 @@ begin
       DATA_U_IN => data_u_in_vector_cosine,
       DATA_V_IN => data_v_in_vector_cosine,
       DATA_OUT  => data_out_vector_cosine
+    );
+
+  -- MULTIPLICATION
+  vector_multiplication_function : ntm_vector_multiplication_function
+    generic map (
+      X => X,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_multiplication,
+      READY => ready_vector_multiplication,
+
+      -- DATA
+      MODULO    => modulo_vector_multiplication,
+      DATA_A_IN => data_a_in_vector_multiplication,
+      DATA_B_IN => data_b_in_vector_multiplication,
+      DATA_OUT  => data_out_vector_multiplication
     );
 
   -- COSH
@@ -663,6 +794,29 @@ begin
       DATA_OUT => data_out_vector_oneplus
     );
 
+  -- SUMMATION
+  vector_summation_function : ntm_vector_summation_function
+    generic map (
+      X => X,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_summation,
+      READY => ready_vector_summation,
+
+      -- DATA
+      MODULO    => modulo_vector_summation,
+      DATA_A_IN => data_a_in_vector_summation,
+      DATA_B_IN => data_b_in_vector_summation,
+      DATA_OUT  => data_out_vector_summation
+    );
+
   -----------------------------------------------------------------------
   -- MATRIX
   -----------------------------------------------------------------------
@@ -711,6 +865,30 @@ begin
       DATA_U_IN => data_u_in_matrix_cosine,
       DATA_V_IN => data_v_in_matrix_cosine,
       DATA_OUT  => data_out_matrix_cosine
+    );
+
+  -- MULTIPLICATION
+  matrix_multiplication_function : ntm_matrix_multiplication_function
+    generic map (
+      X => X,
+      Y => Y,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_matrix_multiplication,
+      READY => ready_matrix_multiplication,
+
+      -- DATA
+      MODULO    => modulo_matrix_multiplication,
+      DATA_A_IN => data_a_in_matrix_multiplication,
+      DATA_B_IN => data_b_in_matrix_multiplication,
+      DATA_OUT  => data_out_matrix_multiplication
     );
 
   -- COSH
@@ -832,6 +1010,30 @@ begin
       MODULO   => modulo_matrix_oneplus,
       DATA_IN  => data_in_matrix_oneplus,
       DATA_OUT => data_out_matrix_oneplus
+    );
+
+  -- SUMMATION
+  matrix_summation_function : ntm_matrix_summation_function
+    generic map (
+      X => X,
+      Y => Y,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_matrix_summation,
+      READY => ready_matrix_summation,
+
+      -- DATA
+      MODULO    => modulo_matrix_summation,
+      DATA_A_IN => data_a_in_matrix_summation,
+      DATA_B_IN => data_b_in_matrix_summation,
+      DATA_OUT  => data_out_matrix_summation
     );
 
 end ntm_function_testbench_architecture;
