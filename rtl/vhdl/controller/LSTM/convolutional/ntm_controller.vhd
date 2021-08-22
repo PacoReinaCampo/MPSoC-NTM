@@ -35,6 +35,8 @@
 -- THE SOFTWARE.
 --
 --------------------------------------------------------------------------------
+-- Author(s):
+--   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -43,18 +45,46 @@ use ieee.numeric_std.all;
 use work.ntm_math_pkg.all;
 use work.ntm_lstm_controller_pkg.all;
 
-entity ntm_convolutional_lstm_testbench is
-end ntm_convolutional_lstm_testbench;
+entity ntm_controller is
+  generic (
+    X : integer := 64;
+    Y : integer := 64;
+    W : integer := 64;
+    H : integer := 64;
 
-architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_lstm_testbench is
+    DATA_SIZE : integer := 512
+  );
+  port (
+    -- GLOBAL
+    CLK : in std_logic;
+    RST : in std_logic;
+
+    -- CONTROL
+    START : in  std_logic;
+    READY : out std_logic;
+
+    -- DATA
+    X_IN  : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    R_IN  : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+
+    MODULO : in  std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+    Y_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+  );
+end entity;
+
+architecture ntm_controller_architecture of ntm_controller is
+
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
-
-  -- GLOBAL
-  signal CLK : std_logic;
-  signal RST : std_logic;
 
   -- INTPUT GATE VECTOR
   -- CONTROL
@@ -145,17 +175,6 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal w_in_controller_output_vector   : std_logic_arithmetic_vector_matrix(Y-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
   signal modulo_controller_output_vector : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
   signal y_out_controller_output_vector  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-
-  -- CONTROLLER
-  -- CONTROL
-  signal start_controller : std_logic;
-  signal ready_controller : std_logic;
-
-  -- DATA
-  signal x_in_controller   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_in_controller   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_controller : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal y_out_controller  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -349,31 +368,4 @@ begin
       Y_OUT  => y_out_controller_output_vector
     );
 
-  -- CONTROLLER
-  controller_input_matrix : ntm_controller
-    generic map (
-      X => X,
-      Y => Y,
-      W => W,
-      H => H,
-
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_controller,
-      READY => ready_controller,
-
-      -- DATA
-      X_IN => x_in_controller,
-      R_IN => r_in_controller,
-
-      MODULO => modulo_controller,
-      Y_OUT  => y_out_controller
-    );
-
-end ntm_convolutional_lstm_testbench_architecture;
+end architecture;

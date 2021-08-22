@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_controller_output_matrix is
+entity ntm_controller_output_vector is
   generic (
     Y : integer := 64;
     W : integer := 64;
@@ -71,7 +71,7 @@ entity ntm_controller_output_matrix is
   );
 end entity;
 
-architecture ntm_controller_output_matrix_architecture of ntm_controller_output_matrix is
+architecture ntm_controller_output_vector_architecture of ntm_controller_output_vector is
 
   -----------------------------------------------------------------------
   -- Types

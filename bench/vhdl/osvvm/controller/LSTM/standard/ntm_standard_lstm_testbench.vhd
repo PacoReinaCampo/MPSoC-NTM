@@ -56,29 +56,6 @@ architecture ntm_standard_lstm_testbench_architecture of ntm_standard_lstm_testb
   signal CLK : std_logic;
   signal RST : std_logic;
 
-  -- CONTROLLER INPUT MATRIX
-  -- CONTROL
-  signal start_controller_input_matrix : std_logic;
-  signal ready_controller_input_matrix : std_logic;
-
-  -- DATA
-  signal x_in_controller_input_matrix   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_in_controller_input_matrix   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_controller_input_matrix : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal x_out_controller_input_matrix  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-
-  -- CONTROLLER OUTPUT MATRIX
-  -- CONTROL
-  signal start_controller_output_matrix : std_logic;
-  signal ready_controller_output_matrix : std_logic;
-
-  -- DATA
-  signal r_in_controller_output_matrix   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal nu_in_controller_output_matrix  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_controller_output_matrix   : std_logic_arithmetic_vector_matrix(Y-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_controller_output_matrix : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal y_out_controller_output_matrix  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-
   -- INTPUT GATE VECTOR
   -- CONTROL
   signal start_input_gate_vector : std_logic;
@@ -157,63 +134,34 @@ architecture ntm_standard_lstm_testbench_architecture of ntm_standard_lstm_testb
   signal modulo_hidden_gate_vector : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
   signal h_out_hidden_gate_vector  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
 
+  -- CONTROLLER OUTPUT VECTOR
+  -- CONTROL
+  signal start_controller_output_vector : std_logic;
+  signal ready_controller_output_vector : std_logic;
+
+  -- DATA
+  signal r_in_controller_output_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal nu_in_controller_output_vector  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_controller_output_vector   : std_logic_arithmetic_vector_matrix(Y-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_controller_output_vector : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal y_out_controller_output_vector  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  -- CONTROLLER
+  -- CONTROL
+  signal start_controller : std_logic;
+  signal ready_controller : std_logic;
+
+  -- DATA
+  signal x_in_controller   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal r_in_controller   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_controller : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal y_out_controller  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
-
-  -- CONTROLLER INPUT MATRIX
-  controller_input_matrix : ntm_controller_input_matrix
-    generic map (
-      X => X,
-      W => W,
-
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_controller_input_matrix,
-      READY => ready_controller_input_matrix,
-
-      -- DATA
-      X_IN => x_in_controller_input_matrix,
-      R_IN => r_in_controller_input_matrix,
-
-      MODULO => modulo_controller_input_matrix,
-      X_OUT  => x_out_controller_input_matrix
-    );
-
-  -- CONTROLLER OUTPUT MATRIX
-  controller_output_matrix : ntm_controller_output_matrix
-    generic map (
-      Y => Y,
-      W => W,
-
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_controller_output_matrix,
-      READY => ready_controller_output_matrix,
-
-      -- DATA
-      R_IN  => r_in_controller_output_matrix,
-      NU_IN => nu_in_controller_output_matrix,
-
-      W_IN => w_in_controller_output_matrix,
-
-      MODULO => modulo_controller_output_matrix,
-      Y_OUT  => y_out_controller_output_matrix
-    );
 
   -- INTPUT GATE VECTOR
   input_gate_vector : ntm_input_gate_vector
@@ -372,6 +320,60 @@ begin
 
       MODULO => modulo_hidden_gate_vector,
       H_OUT  => h_out_hidden_gate_vector
+    );
+
+  -- CONTROLLER OUTPUT VECTOR
+  controller_output_vector : ntm_controller_output_vector
+    generic map (
+      Y => Y,
+      W => W,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_controller_output_vector,
+      READY => ready_controller_output_vector,
+
+      -- DATA
+      R_IN  => r_in_controller_output_vector,
+      NU_IN => nu_in_controller_output_vector,
+
+      W_IN => w_in_controller_output_vector,
+
+      MODULO => modulo_controller_output_vector,
+      Y_OUT  => y_out_controller_output_vector
+    );
+
+  -- CONTROLLER
+  controller_input_matrix : ntm_controller
+    generic map (
+      X => X,
+      Y => Y,
+      W => W,
+      H => H,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_controller,
+      READY => ready_controller,
+
+      -- DATA
+      X_IN => x_in_controller,
+      R_IN => r_in_controller,
+
+      MODULO => modulo_controller,
+      Y_OUT  => y_out_controller
     );
 
 end ntm_standard_lstm_testbench_architecture;
