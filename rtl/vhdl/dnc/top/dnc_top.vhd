@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_write_weighting is
+entity dnc_write_weighting is
   generic (
     X : integer := 64;
     Y : integer := 64;
@@ -70,7 +70,7 @@ entity ntm_write_weighting is
   );
 end entity;
 
-architecture ntm_write_weighting_architecture of ntm_write_weighting is
+architecture dnc_write_weighting_architecture of dnc_write_weighting is
 
   -----------------------------------------------------------------------
   -- Types

@@ -1,5 +1,5 @@
 ../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
-../../../../../../../rtl/vhdl/pkg/ntm_dnc_core_pkg.vhd
+../../../../../../../rtl/vhdl/pkg/dnc_core_pkg.vhd
 
 ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_mod.vhd
 ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_adder.vhd
@@ -61,20 +61,20 @@
 ../../../../../../../rtl/vhdl/math/function/sigmoid/matrix/oneplus/ntm_matrix_oneplus_function.vhd
 ../../../../../../../rtl/vhdl/math/function/summation/matrix/ntm_matrix_summation_function.vhd
 
-../../../../../../../rtl/vhdl/dnc/memory/ntm_content_based_addressing.vhd
-../../../../../../../rtl/vhdl/dnc/memory/ntm_allocation_weighting.vhd
-../../../../../../../rtl/vhdl/dnc/memory/ntm_backward_weighting.vhd
-../../../../../../../rtl/vhdl/dnc/memory/ntm_forward_weighting.vhd
-../../../../../../../rtl/vhdl/dnc/memory/ntm_memory_matrix.vhd
-../../../../../../../rtl/vhdl/dnc/memory/ntm_memory_retention_vector.vhd
-../../../../../../../rtl/vhdl/dnc/memory/ntm_precedence_weighting.vhd
-../../../../../../../rtl/vhdl/dnc/memory/ntm_read_content_weighting.vhd
-../../../../../../../rtl/vhdl/dnc/memory/ntm_read_vectors.vhd
-../../../../../../../rtl/vhdl/dnc/memory/ntm_read_weighting.vhd
-../../../../../../../rtl/vhdl/dnc/memory/ntm_temporal_link_matrix.vhd
-../../../../../../../rtl/vhdl/dnc/memory/ntm_usage_vector.vhd
-../../../../../../../rtl/vhdl/dnc/memory/ntm_write_content_weighting.vhd
-../../../../../../../rtl/vhdl/dnc/memory/ntm_write_weighting.vhd
-../../../../../../../rtl/vhdl/dnc/memory/ntm_addressing.vhd
+../../../../../../../rtl/vhdl/dnc/memory/dnc_content_based_addressing.vhd
+../../../../../../../rtl/vhdl/dnc/memory/dnc_allocation_weighting.vhd
+../../../../../../../rtl/vhdl/dnc/memory/dnc_backward_weighting.vhd
+../../../../../../../rtl/vhdl/dnc/memory/dnc_forward_weighting.vhd
+../../../../../../../rtl/vhdl/dnc/memory/dnc_memory_matrix.vhd
+../../../../../../../rtl/vhdl/dnc/memory/dnc_memory_retention_vector.vhd
+../../../../../../../rtl/vhdl/dnc/memory/dnc_precedence_weighting.vhd
+../../../../../../../rtl/vhdl/dnc/memory/dnc_read_content_weighting.vhd
+../../../../../../../rtl/vhdl/dnc/memory/dnc_read_vectors.vhd
+../../../../../../../rtl/vhdl/dnc/memory/dnc_read_weighting.vhd
+../../../../../../../rtl/vhdl/dnc/memory/dnc_temporal_link_matrix.vhd
+../../../../../../../rtl/vhdl/dnc/memory/dnc_usage_vector.vhd
+../../../../../../../rtl/vhdl/dnc/memory/dnc_write_content_weighting.vhd
+../../../../../../../rtl/vhdl/dnc/memory/dnc_write_weighting.vhd
+../../../../../../../rtl/vhdl/dnc/memory/dnc_addressing.vhd
 
-../../../../../../../bench/vhdl/osvvm/dnc/memory/ntm_memory_testbench.vhd
+../../../../../../../bench/vhdl/osvvm/dnc/memory/dnc_memory_testbench.vhd
