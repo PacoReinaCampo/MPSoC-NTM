@@ -30,5 +30,6 @@
 
 ../../../../../../../rtl/vhdl/ntm/memory/ntm_addressing_content.vhd
 ../../../../../../../rtl/vhdl/ntm/memory/ntm_addressing_location.vhd
+../../../../../../../rtl/vhdl/ntm/memory/ntm_addressing.vhd
 
 ../../../../../../../bench/vhdl/osvvm/ntm/memory/ntm_memory_testbench.vhd

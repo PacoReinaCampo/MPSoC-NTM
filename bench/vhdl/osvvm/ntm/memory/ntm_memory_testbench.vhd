@@ -79,6 +79,17 @@ architecture ntm_memory_testbench_architecture of ntm_memory_testbench is
   signal gamma_in_addressing_location : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_out_addressing_location    : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- ADDRESSING
+  -- CONTROL
+  signal start_addressing : std_logic;
+  signal ready_addressing : std_logic;
+
+  -- DATA
+  signal modulo_addressing : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_addressing   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_addressing   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_out_addressing  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
@@ -128,6 +139,28 @@ begin
       W_IN     => w_in_addressing_location,
       GAMMA_IN => gamma_in_addressing_location,
       W_OUT    => w_out_addressing_location
+    );
+
+  ntm_addressing_i : ntm_addressing
+    generic map (
+      X => X,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_addressing,
+      READY => ready_addressing,
+
+      -- DATA
+      MODULO  => modulo_addressing,
+      W_IN    => w_in_addressing,
+      M_IN    => m_in_addressing,
+      W_OUT   => w_out_addressing
     );
 
 end ntm_memory_testbench_architecture;

@@ -97,6 +97,29 @@ package ntm_core_pkg is
     );
   end component;
 
+  component ntm_addressing is
+    generic (
+      X : integer := 64;
+
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      W_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      M_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      W_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+    );
+  end component;
+
   -----------------------------------------------------------------------
   -- READ HEADS
   -----------------------------------------------------------------------
@@ -125,7 +148,7 @@ package ntm_core_pkg is
   end component;
 
   -----------------------------------------------------------------------
-  -- WIRTE HEADS
+  -- WRITE HEADS
   -----------------------------------------------------------------------
 
   component ntm_writing is

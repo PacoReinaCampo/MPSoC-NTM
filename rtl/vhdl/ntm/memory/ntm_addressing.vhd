@@ -43,6 +43,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
+use work.ntm_core_pkg.all;
 
 entity ntm_addressing is
   generic (
@@ -60,11 +61,10 @@ entity ntm_addressing is
     READY : out std_logic;
 
     -- DATA
-    MODULO  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    K_IN    : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    M_IN    : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    BETA_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    W_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
+    MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    W_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    M_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    W_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -82,10 +82,76 @@ architecture ntm_addressing_architecture of ntm_addressing is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- ADDRESSING CONTENT
+  -- CONTROL
+  signal start_addressing_content : std_logic;
+  signal ready_addressing_content : std_logic;
+
+  -- DATA
+  signal modulo_addressing_content  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_in_addressing_content    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_addressing_content    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal beta_in_addressing_content : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_out_addressing_content   : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- ADDRESSING LOCATION
+  -- CONTROL
+  signal start_addressing_location : std_logic;
+  signal ready_addressing_location : std_logic;
+
+  -- DATA
+  signal modulo_addressing_location   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_addressing_location     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal gamma_in_addressing_location : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_out_addressing_location    : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  ntm_addressing_content_i : ntm_addressing_content
+    generic map (
+      X => X,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_addressing_content,
+      READY => ready_addressing_content,
+
+      -- DATA
+      MODULO  => modulo_addressing_content,
+      K_IN    => k_in_addressing_content,
+      M_IN    => m_in_addressing_content,
+      BETA_IN => beta_in_addressing_content,
+      W_OUT   => w_out_addressing_content
+    );
+
+  ntm_addressing_location_i : ntm_addressing_location
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_addressing_location,
+      READY => ready_addressing_location,
+
+      -- DATA
+      MODULO   => modulo_addressing_location,
+      W_IN     => w_in_addressing_location,
+      GAMMA_IN => gamma_in_addressing_location,
+      W_OUT    => w_out_addressing_location
+    );
 
 end architecture;
