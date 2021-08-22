@@ -61,9 +61,9 @@
 ../../../../../../../rtl/vhdl/math/function/sigmoid/matrix/oneplus/ntm_matrix_oneplus_function.vhd
 ../../../../../../../rtl/vhdl/math/function/summation/matrix/ntm_matrix_summation_function.vhd
 
+../../../../../../../rtl/vhdl/dnc/memory/ntm_content_based_addressing.vhd
 ../../../../../../../rtl/vhdl/dnc/memory/ntm_allocation_weighting.vhd
 ../../../../../../../rtl/vhdl/dnc/memory/ntm_backward_weighting.vhd
-../../../../../../../rtl/vhdl/dnc/memory/ntm_content_based_addressing.vhd
 ../../../../../../../rtl/vhdl/dnc/memory/ntm_forward_weighting.vhd
 ../../../../../../../rtl/vhdl/dnc/memory/ntm_memory_matrix.vhd
 ../../../../../../../rtl/vhdl/dnc/memory/ntm_memory_retention_vector.vhd
@@ -75,5 +75,6 @@
 ../../../../../../../rtl/vhdl/dnc/memory/ntm_usage_vector.vhd
 ../../../../../../../rtl/vhdl/dnc/memory/ntm_write_content_weighting.vhd
 ../../../../../../../rtl/vhdl/dnc/memory/ntm_write_weighting.vhd
+../../../../../../../rtl/vhdl/dnc/memory/ntm_addressing.vhd
 
 ../../../../../../../bench/vhdl/osvvm/dnc/memory/ntm_memory_testbench.vhd

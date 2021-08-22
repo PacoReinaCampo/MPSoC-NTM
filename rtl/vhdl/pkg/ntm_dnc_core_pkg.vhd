@@ -52,6 +52,31 @@ package ntm_dnc_core_pkg is
   -- MEMORY
   -----------------------------------------------------------------------
 
+  component ntm_content_based_addressing is
+    generic (
+      X : integer := 64;
+
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      K_IN    : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      M_IN    : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      C_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+    );
+  end component;
+
   component ntm_allocation_weighting is
     generic (
       X : integer := 64;
@@ -99,31 +124,6 @@ package ntm_dnc_core_pkg is
 
       MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
       B_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
-    );
-  end component;
-
-  component ntm_content_based_addressing is
-    generic (
-      X : integer := 64;
-
-      DATA_SIZE : integer := 512
-    );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      -- DATA
-      K_IN    : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      M_IN    : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      C_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -410,6 +410,24 @@ package ntm_dnc_core_pkg is
       W_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
+
+  component ntm_addressing is
+    generic (
+      X : integer := 64;
+      Y : integer := 64;
+
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic
+    );
+  end component ntm_addressing;
 
   -----------------------------------------------------------------------
   -- READ HEADS
