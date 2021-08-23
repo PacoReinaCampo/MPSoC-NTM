@@ -49,6 +49,7 @@ package ntm_lstm_controller_pkg is
   -----------------------------------------------------------------------
 
   constant W : integer := 64;
+  constant N : integer := 64;
   constant H : integer := 64;
 
   -----------------------------------------------------------------------

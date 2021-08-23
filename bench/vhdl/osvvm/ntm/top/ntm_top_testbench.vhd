@@ -41,12 +41,13 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
+use work.ntm_lstm_controller_pkg.all;
 use work.ntm_core_pkg.all;
 
-entity ntm_write_heads_testbench is
-end ntm_write_heads_testbench;
+entity ntm_top_testbench is
+end ntm_top_testbench;
 
-architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench is
+architecture ntm_top_testbench_architecture of ntm_top_testbench is
 
   -----------------------------------------------------------------------
   -- Signals
@@ -56,17 +57,19 @@ architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench
   signal CLK : std_logic;
   signal RST : std_logic;
 
-  -- WRITING
+  -- TOP
   -- CONTROL
-  signal start_writing : std_logic;
-  signal ready_writing : std_logic;
+  signal start_top : std_logic;
+  signal ready_top : std_logic;
 
   -- DATA
-  signal modulo_writing : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal m_in_writing   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal e_in_writing   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal m_out_writing  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal x_in_top : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal r_in_top : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_top : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal u_in_top : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  signal modulo_top : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal y_out_top  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -74,10 +77,13 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- WRITING
-  writing : ntm_writing
+  -- TOP
+  top : ntm_top
     generic map (
       X => X,
+      Y => Y,
+      N => N,
+      W => W,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -87,15 +93,17 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_writing,
-      READY => ready_writing,
+      START => start_top,
+      READY => ready_top,
 
       -- DATA
-      MODULO => modulo_writing,
-      M_IN   => m_in_writing,
-      E_IN   => e_in_writing,
-      W_IN   => w_in_writing,
-      M_OUT  => m_out_writing
+      X_IN   => x_in_top,
+      R_IN   => r_in_top,
+      W_IN   => w_in_top,
+      U_IN   => u_in_top,
+
+      MODULO => modulo_top,
+      Y_OUT  => y_out_top
     );
 
-end ntm_write_heads_testbench_architecture;
+end ntm_top_testbench_architecture;
