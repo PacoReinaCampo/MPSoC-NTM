@@ -35,3 +35,83 @@
 -- THE SOFTWARE.
 --
 --------------------------------------------------------------------------------
+-- Author(s):
+--   Paco Reina Campo <pacoreinacampo@queenfield.tech>
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+use work.ntm_math_pkg.all;
+
+entity dnc_write_gate is
+  generic (
+    DATA_SIZE : integer := 512
+  );
+  port (
+    -- GLOBAL
+    CLK : in std_logic;
+    RST : in std_logic;
+
+    -- CONTROL
+    START : in  std_logic;
+    READY : out std_logic;
+
+    -- DATA
+    GW_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    GW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+  );
+end entity;
+
+architecture dnc_write_gate_architecture of dnc_write_gate is
+
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Signals
+  -----------------------------------------------------------------------
+
+  -- SCALAR LOGISTIC
+  -- CONTROL
+  signal start_scalar_logistic : std_logic;
+  signal ready_scalar_logistic : std_logic;
+
+  -- DATA
+  signal modulo_scalar_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
+
+begin
+
+  -----------------------------------------------------------------------
+  -- Body
+  -----------------------------------------------------------------------
+
+  ntm_scalar_logistic_function_i : ntm_scalar_logistic_function
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_logistic,
+      READY => ready_scalar_logistic,
+
+      -- DATA
+      MODULO   => modulo_scalar_logistic,
+      DATA_IN  => data_in_scalar_logistic,
+      DATA_OUT => data_out_scalar_logistic
+    );
+
+end architecture;

@@ -35,3 +35,87 @@
 -- THE SOFTWARE.
 --
 --------------------------------------------------------------------------------
+-- Author(s):
+--   Paco Reina Campo <pacoreinacampo@queenfield.tech>
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+use work.ntm_math_pkg.all;
+
+entity dnc_read_modes is
+  generic (
+    X : integer := 64;
+
+    DATA_SIZE : integer := 512
+  );
+  port (
+    -- GLOBAL
+    CLK : in std_logic;
+    RST : in std_logic;
+
+    -- CONTROL
+    START : in  std_logic;
+    READY : out std_logic;
+
+    -- DATA
+    PI_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+
+    MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    PI_OUT : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+  );
+end entity;
+
+architecture dnc_read_modes_architecture of dnc_read_modes is
+
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Signals
+  -----------------------------------------------------------------------
+
+  -- VECTOR SOFTMAX
+  -- CONTROL
+  signal start_vector_softmax : std_logic;
+  signal ready_vector_softmax : std_logic;
+
+  -- DATA
+  signal modulo_vector_softmax   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal size_in_vector_softmax  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_vector_softmax  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_softmax : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+
+begin
+
+  -----------------------------------------------------------------------
+  -- Body
+  -----------------------------------------------------------------------
+
+  ntm_vector_softmax_function_i : ntm_vector_softmax_function
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_softmax,
+      READY => ready_vector_softmax,
+
+      -- DATA
+      MODULO   => modulo_vector_softmax,
+      SIZE_IN  => size_in_vector_softmax,
+      DATA_IN  => data_in_vector_softmax,
+      DATA_OUT => data_out_vector_softmax
+    );
+
+end architecture;

@@ -35,78 +35,66 @@
 -- THE SOFTWARE.
 --
 --------------------------------------------------------------------------------
--- Author(s):
---   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
+use work.dnc_core_pkg.all;
 
-entity dnc_top is
-  generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
+entity dnc_memory_testbench is
+end dnc_memory_testbench;
 
-    DATA_SIZE : integer := 512
-  );
-  port (
-    -- GLOBAL
-    CLK : in std_logic;
-    RST : in std_logic;
-
-    -- CONTROL
-    START : in  std_logic;
-    READY : out std_logic;
-
-    -- DATA
-    X_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    R_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    W_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    U_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-
-    MODULO : in  std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    Y_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
-  );
-end entity;
-
-architecture dnc_top_architecture of dnc_top is
-
-  -----------------------------------------------------------------------
-  -- Types
-  -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
+architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
 
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
 
-  -- CONTROLLER
+  -- GLOBAL
+  signal CLK : std_logic;
+  signal RST : std_logic;
+
+  -- FREE GATES
   -- CONTROL
-  signal start_controller : std_logic;
-  signal ready_controller : std_logic;
+  signal start_free_gates : std_logic;
+  signal ready_free_gates : std_logic;
 
   -- DATA
-  signal x_in_controller : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_in_controller : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal f_in_free_gates   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal f_out_free_gates  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_controller : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal y_out_controller  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-
-  -- READ HEADS
-
-  -- WRITE HEADS
-
-  -- MEMORY
+  -- READ KEYS
   -- CONTROL
-  signal start_addressing : std_logic;
-  signal ready_addressing : std_logic;
+  signal start_read_keys : std_logic;
+  signal ready_read_keys : std_logic;
+
+  -- DATA
+  signal k_in_read_keys   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_read_keys : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_out_read_keys  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  -- READ MODES
+  -- CONTROL
+  signal start_read_modes : std_logic;
+  signal ready_read_modes : std_logic;
+
+  -- DATA
+  signal pi_in_read_modes  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_read_modes : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal pi_out_read_modes : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  -- READ STRENGTHS
+  -- CONTROL
+  signal start_read_strengths : std_logic;
+  signal ready_read_strengths : std_logic;
+
+  -- DATA
+  signal beta_in_read_strengths  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_read_strengths   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal beta_out_read_strengths : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -114,13 +102,9 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -----------------------------------------------------------------------
-  -- CONTROLLER
-  -----------------------------------------------------------------------
-
-  ntm_controller_i : ntm_controller
+  -- FREE GATES
+  free_gates : dnc_free_gates
     generic map (
-      X => X,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -130,33 +114,20 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_controller,
-      READY => ready_controller,
+      START => start_free_gates,
+      READY => ready_free_gates,
 
       -- DATA
-      X_IN => x_in_controller,
-      R_IN => r_in_controller,
+      F_IN => f_in_free_gates,
 
-      MODULO => modulo_controller,
-      Y_OUT  => y_out_controller
+      MODULO => modulo_free_gates,
+      F_OUT  => f_out_free_gates
     );
 
-  -----------------------------------------------------------------------
-  -- READ HEADS
-  -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-  -- WRITE HEADS
-  -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-  -- MEMORY
-  -----------------------------------------------------------------------
-
-  dnc_addressing_i : dnc_addressing
+  -- READ KEYS
+  read_keys : dnc_read_keys
     generic map (
       X => X,
-      Y => Y,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -166,8 +137,58 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_addressing,
-      READY => ready_addressing
+      START => start_read_keys,
+      READY => ready_read_keys,
+
+      -- DATA
+      K_IN => k_in_read_keys,
+
+      MODULO => modulo_read_keys,
+      K_OUT  => k_out_read_keys
     );
 
-end architecture;
+  -- READ MODES
+  read_modes : dnc_read_modes
+    generic map (
+      X => X,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_read_modes,
+      READY => ready_read_modes,
+
+      -- DATA
+      PI_IN => pi_in_read_modes,
+
+      MODULO => modulo_read_modes,
+      PI_OUT => pi_out_read_modes
+    );
+
+  -- READ STRENGTHS
+  read_strengths : dnc_read_strengths
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_read_strengths,
+      READY => ready_read_strengths,
+
+      -- DATA
+      BETA_IN => beta_in_read_strengths,
+
+      MODULO   => modulo_read_strengths,
+      BETA_OUT => beta_out_read_strengths
+    );
+
+end dnc_memory_testbench_architecture;

@@ -88,8 +88,42 @@ architecture ntm_top_architecture of ntm_top is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- CONTROLLER
+  -- CONTROL
+  signal start_controller : std_logic;
+  signal ready_controller : std_logic;
 
-  -- ADDRESSING
+  -- DATA
+  signal x_in_controller : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal r_in_controller : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  signal modulo_controller : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal y_out_controller  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  -- READ HEADS
+  -- CONTROL
+  signal start_reading : std_logic;
+  signal ready_reading : std_logic;
+
+  -- DATA
+  signal modulo_reading : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_reading   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_in_reading   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal r_out_reading  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  -- WRITE HEADS
+  -- CONTROL
+  signal start_writing : std_logic;
+  signal ready_writing : std_logic;
+
+  -- DATA
+  signal modulo_writing : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_writing   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal e_in_writing   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_out_writing  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  -- MEMORY
   -- CONTROL
   signal start_addressing : std_logic;
   signal ready_addressing : std_logic;
@@ -105,6 +139,86 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- CONTROLLER
+  -----------------------------------------------------------------------
+
+  ntm_controller_i : ntm_controller
+    generic map (
+      X => X,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_controller,
+      READY => ready_controller,
+
+      -- DATA
+      X_IN => x_in_controller,
+      R_IN => r_in_controller,
+
+      MODULO => modulo_controller,
+      Y_OUT  => y_out_controller
+    );
+
+  -----------------------------------------------------------------------
+  -- READ HEADS
+  -----------------------------------------------------------------------
+
+  ntm_reading_i : ntm_reading
+    generic map (
+      X => X,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_reading,
+      READY => ready_reading,
+
+      -- DATA
+      MODULO => modulo_reading,
+      W_IN   => w_in_reading,
+      M_IN   => m_in_reading,
+      R_OUT  => r_out_reading
+    );
+
+  -----------------------------------------------------------------------
+  -- WRITE HEADS
+  -----------------------------------------------------------------------
+
+  ntm_writing_i : ntm_writing
+    generic map (
+      X => X,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_writing,
+      READY => ready_writing,
+
+      -- DATA
+      MODULO => modulo_writing,
+      M_IN   => m_in_writing,
+      E_IN   => e_in_writing,
+      W_IN   => w_in_writing,
+      M_OUT  => m_out_writing
+    );
 
   -----------------------------------------------------------------------
   -- MEMORY
@@ -131,13 +245,5 @@ begin
       M_IN    => m_in_addressing,
       W_OUT   => w_out_addressing
     );
-
-  -----------------------------------------------------------------------
-  -- READ HEADS
-  -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-  -- WRITE HEADS
-  -----------------------------------------------------------------------
 
 end architecture;

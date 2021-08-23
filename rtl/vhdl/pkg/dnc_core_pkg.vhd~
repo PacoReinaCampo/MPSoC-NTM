@@ -525,136 +525,136 @@ package dnc_core_pkg is
   -- WRITE HEADS
   -----------------------------------------------------------------------
 
-  component dnc_allocation_gate is
-    generic (
-      DATA_SIZE : integer := 512
-    );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
+component dnc_allocation_gate is
+  generic (
+    DATA_SIZE : integer := 512
+  );
+  port (
+    -- GLOBAL
+    CLK : in std_logic;
+    RST : in std_logic;
 
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
+    -- CONTROL
+    START : in  std_logic;
+    READY : out std_logic;
 
-      -- DATA
-      GA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    -- DATA
+    GA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      GA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-    );
-  end component;
+    MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    GA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+  );
+end component;
 
-  component dnc_erase_vector is
-    generic (
-      X : integer := 64;
+component dnc_erase_vector is
+  generic (
+    X : integer := 64;
 
-      DATA_SIZE : integer := 512
-    );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
+    DATA_SIZE : integer := 512
+  );
+  port (
+    -- GLOBAL
+    CLK : in std_logic;
+    RST : in std_logic;
 
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
+    -- CONTROL
+    START : in  std_logic;
+    READY : out std_logic;
 
-      -- DATA
-      E_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    -- DATA
+    E_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      E_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
-    );
-  end component;
+    MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    E_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+  );
+end component;
 
-  component dnc_write_gate is
-    generic (
-      DATA_SIZE : integer := 512
-    );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
+component dnc_write_gate is
+  generic (
+    DATA_SIZE : integer := 512
+  );
+  port (
+    -- GLOBAL
+    CLK : in std_logic;
+    RST : in std_logic;
 
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
+    -- CONTROL
+    START : in  std_logic;
+    READY : out std_logic;
 
-      -- DATA
-      GW_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    -- DATA
+    GW_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      GW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-    );
-  end component;
+    MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    GW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+  );
+end component;
 
-  component dnc_write_key is
-    generic (
-      X : integer := 64;
+component dnc_write_key is
+  generic (
+    X : integer := 64;
 
-      DATA_SIZE : integer := 512
-    );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
+    DATA_SIZE : integer := 512
+  );
+  port (
+    -- GLOBAL
+    CLK : in std_logic;
+    RST : in std_logic;
 
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
+    -- CONTROL
+    START : in  std_logic;
+    READY : out std_logic;
 
-      -- DATA
-      K_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    -- DATA
+    K_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      K_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
-    );
-  end component;
+    MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    K_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+  );
+end component;
 
-  component dnc_write_strength is
-    generic (
-      DATA_SIZE : integer := 512
-    );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
+component dnc_write_strength is
+  generic (
+    DATA_SIZE : integer := 512
+  );
+  port (
+    -- GLOBAL
+    CLK : in std_logic;
+    RST : in std_logic;
 
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
+    -- CONTROL
+    START : in  std_logic;
+    READY : out std_logic;
 
-      -- DATA
-      BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    -- DATA
+    BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-    );
-  end component;
+    MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+  );
+end component;
 
-  component dnc_write_vector is
-    generic (
-      X : integer := 64;
+component dnc_write_vector is
+  generic (
+    X : integer := 64;
 
-      DATA_SIZE : integer := 512
-    );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
+    DATA_SIZE : integer := 512
+  );
+  port (
+    -- GLOBAL
+    CLK : in std_logic;
+    RST : in std_logic;
 
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
+    -- CONTROL
+    START : in  std_logic;
+    READY : out std_logic;
 
-      -- DATA
-      V_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    -- DATA
+    V_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      V_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
-    );
-  end component;
+    MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    V_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+  );
+end component;
 
 end dnc_core_pkg;
