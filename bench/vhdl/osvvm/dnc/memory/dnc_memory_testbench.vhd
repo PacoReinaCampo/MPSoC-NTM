@@ -62,10 +62,10 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_allocation_weighting : std_logic;
 
   -- DATA
-  signal modulo_allocation_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal phi_in_allocation_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal u_in_allocation_weighting   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal a_out_allocation_weighting  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_allocation_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal phi_in_allocation_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal u_in_allocation_weighting   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal a_out_allocation_weighting  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- BACKWARD WEIGHTING
   -- CONTROL
@@ -73,10 +73,10 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_backward_weighting : std_logic;
 
   -- DATA
-  signal modulo_backward_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal l_in_backward_weighting   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_backward_weighting   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal b_out_backward_weighting  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_backward_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal l_in_backward_weighting   : std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_backward_weighting   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal b_out_backward_weighting  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- FORWARD WEIGHTING
   -- CONTROL
@@ -84,12 +84,12 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_forward_weighting : std_logic;
 
   -- DATA
-  signal l_in_forward_weighting : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal l_in_forward_weighting : std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  signal w_in_forward_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_forward_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  signal modulo_forward_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal f_out_forward_weighting  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_forward_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal f_out_forward_weighting  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- MEMORY MATRIX
   -- CONTROL
@@ -97,13 +97,14 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_memory_matrix : std_logic;
 
   -- DATA
-  signal m_in_memory_matrix : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_memory_matrix : std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  signal w_in_memory_matrix : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal e_in_memory_matrix : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_memory_matrix : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal v_in_memory_matrix : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal e_in_memory_matrix : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  signal modulo_memory_matrix : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_out_memory_matrix  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_memory_matrix : std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_out_memory_matrix  : std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- MEMORY RETENTION VECTOR
   -- CONTROL
@@ -111,11 +112,11 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_memory_retention_vector : std_logic;
 
   -- DATA
-  signal f_in_memory_retention_vector : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_memory_retention_vector : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal f_in_memory_retention_vector : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_memory_retention_vector : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  signal modulo_memory_retention_vector  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal PSI_OUT_memory_retention_vector : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_memory_retention_vector  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal PSI_OUT_memory_retention_vector : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- PRECEDENCE WEIGHTING
   -- CONTROL
@@ -123,11 +124,11 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_precedence_weighting : std_logic;
 
   -- DATA
-  signal w_in_precedence_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal p_in_precedence_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_precedence_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal p_in_precedence_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  signal modulo_precedence_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal P_OUT_precedence_weighting  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_precedence_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal p_out_precedence_weighting  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- READ CONTENT WEIGHTING
   -- CONTROL
@@ -135,12 +136,12 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_read_content_weighting : std_logic;
 
   -- DATA
-  signal k_in_read_content_weighting    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal m_in_read_content_weighting    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_in_read_content_weighting    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_read_content_weighting    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
   signal beta_in_read_content_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_read_content_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal c_out_read_content_weighting  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_read_content_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal c_out_read_content_weighting  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- READ VECTORS
   -- CONTROL
@@ -148,12 +149,12 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_read_vectors : std_logic;
 
   -- DATA
-  signal m_in_read_vectors : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_read_vectors : std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  signal w_in_read_vectors : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_read_vectors : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  signal modulo_read_vectors : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_out_read_vectors  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_read_vectors : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal r_out_read_vectors  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- READ WEIGHTING
   -- CONTROL
@@ -161,14 +162,14 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_read_weighting : std_logic;
 
   -- DATA
-  signal PI_IN_read_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal pi_in_read_weighting : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
 
-  signal b_in_read_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal c_in_read_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal f_in_read_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal b_in_read_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal c_in_read_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal f_in_read_weighting : std_logiC_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_read_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_out_read_weighting  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_read_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_out_read_weighting  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- TEMPORAL LINK MATRIX
   -- CONTROL
@@ -176,14 +177,14 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_temporal_link_matrix : std_logic;
 
   -- DATA
-  signal l_in_temporal_link_matrix : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal l_in_temporal_link_matrix : std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  signal wr_in_temporal_link_matrix : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal ww_in_temporal_link_matrix : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal p_in_temporal_link_matrix  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal wr_in_temporal_link_matrix : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal ww_in_temporal_link_matrix : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal p_in_temporal_link_matrix  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  signal modulo_temporal_link_matrix : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal l_out_temporal_link_matrix  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_temporal_link_matrix : std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal l_out_temporal_link_matrix  : std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- USAGE VECTOR
   -- CONTROL
@@ -191,12 +192,12 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_usage_vector : std_logic;
 
   -- DATA
-  signal u_in_usage_vector   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_usage_vector   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal psi_in_usage_vector : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal u_in_usage_vector   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_usage_vector   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal psi_in_usage_vector : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  signal modulo_usage_vector : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal u_out_usage_vector  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_usage_vector : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal u_out_usage_vector  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- WRITE CONTENT WEIGHTING
   -- CONTROL
@@ -204,12 +205,12 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_write_content_weighting : std_logic;
 
   -- DATA
-  signal k_in_write_content_weighting    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal m_in_write_content_weighting    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_in_write_content_weighting    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_write_content_weighting    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
   signal beta_in_write_content_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_write_content_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal c_out_write_content_weighting  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_write_content_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal c_out_write_content_weighting  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- WRITE WEIGHTING
   -- CONTROL
@@ -217,14 +218,14 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_write_weighting : std_logic;
 
   -- DATA
-  signal a_in_write_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal c_in_write_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal a_in_write_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal c_in_write_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  signal ga_in_write_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal gw_in_write_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal ga_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal gw_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_write_weighting : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_out_write_weighting  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_write_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_out_write_weighting  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- ADDRESSING
   -- CONTROL
@@ -240,7 +241,7 @@ begin
   -- ALLOCATION WEIGHTING
   allocation_weighting : dnc_allocation_weighting
     generic map (
-      X => X,
+      N => N,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -264,8 +265,7 @@ begin
   -- BACKWARD WEIGHTING
   backward_weighting : dnc_backward_weighting
     generic map (
-      X => X,
-      Y => Y,
+      N => N,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -290,8 +290,7 @@ begin
   -- FORWARD WEIGHTING
   forward_weighting : dnc_forward_weighting
     generic map (
-      X => X,
-      Y => Y,
+      N => N,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -316,8 +315,8 @@ begin
   -- MEMORY MATRIX
   memory_matrix : dnc_memory_matrix
     generic map (
-      X => X,
-      Y => Y,
+      N => N,
+      W => W,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -334,16 +333,17 @@ begin
       M_IN => m_in_memory_matrix,
 
       W_IN => w_in_memory_matrix,
+      V_IN => v_in_memory_matrix,
       E_IN => e_in_memory_matrix,
 
       MODULO => modulo_memory_matrix,
-      R_OUT  => r_out_memory_matrix
+      M_OUT  => m_out_memory_matrix
     );
 
   -- MEMORY RETENTION VECTOR
   memory_retention_vector : dnc_memory_retention_vector
     generic map (
-      X => X,
+      N => N,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -367,7 +367,7 @@ begin
   -- PRECEDENCE WEIGHTING
   precedence_weighting : dnc_precedence_weighting
     generic map (
-      X => X,
+      N => N,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -391,7 +391,8 @@ begin
   -- READ CONTENT WEIGHTING
   read_content_weighting : dnc_read_content_weighting
     generic map (
-      X => X,
+      N => N,
+      W => W,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -416,8 +417,8 @@ begin
   -- READ VECTORS
   read_vectors : dnc_read_vectors
     generic map (
-      X => X,
-      Y => Y,
+      N => N,
+      W => W,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -442,7 +443,7 @@ begin
   -- READ WEIGHTING
   read_weighting : dnc_read_weighting
     generic map (
-      X => X,
+      N => N,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -469,8 +470,7 @@ begin
   -- TEMPORAL LINK MATRIX
   temporal_link_matrix : dnc_temporal_link_matrix
     generic map (
-      X => X,
-      Y => Y,
+      N => N,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -497,7 +497,7 @@ begin
   -- USAGE VECTOR
   usage_vector : dnc_usage_vector
     generic map (
-      X => X,
+      N => N,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -522,7 +522,8 @@ begin
   -- WRITE CONTENT WEIGHTING
   write_content_weighting : dnc_write_content_weighting
     generic map (
-      X => X,
+      N => N,
+      W => W,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -547,7 +548,7 @@ begin
   -- WRITE WEIGHTING
   write_weighting : dnc_write_weighting
     generic map (
-      X => X,
+      N => N,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -575,8 +576,8 @@ begin
   -- ADDRESSING
   addressing : dnc_addressing
     generic map (
-      X => X,
-      Y => Y,
+      N => N,
+      W => W,
 
       DATA_SIZE => DATA_SIZE
     )

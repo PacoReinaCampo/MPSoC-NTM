@@ -46,7 +46,7 @@ use work.ntm_math_pkg.all;
 
 entity dnc_erase_vector is
   generic (
-    X : integer := 64;
+    W : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -60,10 +60,10 @@ entity dnc_erase_vector is
     READY : out std_logic;
 
     -- DATA
-    E_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    E_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    E_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO : in  std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    E_OUT  : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 

@@ -43,10 +43,10 @@ use ieee.numeric_std.all;
 use work.ntm_math_pkg.all;
 use work.dnc_core_pkg.all;
 
-entity dnc_memory_testbench is
-end dnc_memory_testbench;
+entity dnc_read_heads_testbench is
+end dnc_read_heads_testbench;
 
-architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
+architecture dnc_read_heads_testbench_architecture of dnc_read_heads_testbench is
 
   -----------------------------------------------------------------------
   -- Signals
@@ -72,9 +72,9 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_read_keys : std_logic;
 
   -- DATA
-  signal k_in_read_keys   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_read_keys : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal k_out_read_keys  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_in_read_keys   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_read_keys : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_out_read_keys  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- READ MODES
   -- CONTROL
@@ -82,9 +82,9 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_read_modes : std_logic;
 
   -- DATA
-  signal pi_in_read_modes  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_read_modes : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal pi_out_read_modes : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal pi_in_read_modes  : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_read_modes : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+  signal pi_out_read_modes : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
 
   -- READ STRENGTHS
   -- CONTROL
@@ -127,7 +127,7 @@ begin
   -- READ KEYS
   read_keys : dnc_read_keys
     generic map (
-      X => X,
+      W => W,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -150,8 +150,6 @@ begin
   -- READ MODES
   read_modes : dnc_read_modes
     generic map (
-      X => X,
-
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -191,4 +189,4 @@ begin
       BETA_OUT => beta_out_read_strengths
     );
 
-end dnc_memory_testbench_architecture;
+end dnc_read_heads_testbench_architecture;

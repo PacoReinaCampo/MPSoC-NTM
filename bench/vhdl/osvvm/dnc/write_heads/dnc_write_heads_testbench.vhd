@@ -43,10 +43,10 @@ use ieee.numeric_std.all;
 use work.ntm_math_pkg.all;
 use work.dnc_core_pkg.all;
 
-entity dnc_memory_testbench is
-end dnc_memory_testbench;
+entity dnc_write_heads_testbench is
+end dnc_write_heads_testbench;
 
-architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
+architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench is
 
   -----------------------------------------------------------------------
   -- Signals
@@ -72,9 +72,9 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_erase_vector : std_logic;
 
   -- DATA
-  signal e_in_erase_vector   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_erase_vector : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal e_out_erase_vector  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal e_in_erase_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_erase_vector : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal e_out_erase_vector  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- WRITE GATE
   -- CONTROL
@@ -92,9 +92,9 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_write_key : std_logic;
 
   -- DATA
-  signal k_in_write_key   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_write_key : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal k_out_write_key  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_in_write_key   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_write_key : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_out_write_key  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- WRITE STRENGHT
   -- CONTROL
@@ -112,9 +112,9 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_write_vector : std_logic;
 
   -- DATA
-  signal v_in_write_vector   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_write_vector : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal v_out_write_vector  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal v_in_write_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_write_vector : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal v_out_write_vector  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -146,7 +146,7 @@ begin
   -- ERASE VECTOR
   erase_vector : dnc_erase_vector
     generic map (
-      X => X,
+      W => W,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -190,7 +190,7 @@ begin
   -- WRITE KEY
   write_key : dnc_write_key
     generic map (
-      X => X,
+      W => W,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -234,7 +234,7 @@ begin
   -- WRITE VECTOR
   write_vector : dnc_write_vector
     generic map (
-      X => X,
+      W => W,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -254,4 +254,4 @@ begin
       V_OUT  => v_out_write_vector
     );
 
-end dnc_memory_testbench_architecture;
+end dnc_write_heads_testbench_architecture;

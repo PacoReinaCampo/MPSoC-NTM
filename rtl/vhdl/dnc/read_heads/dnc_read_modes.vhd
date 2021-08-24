@@ -46,8 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity dnc_read_modes is
   generic (
-    X : integer := 64;
-
     DATA_SIZE : integer := 512
   );
   port (
@@ -60,10 +58,10 @@ entity dnc_read_modes is
     READY : out std_logic;
 
     -- DATA
-    PI_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    PI_IN : in std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    PI_OUT : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO : in  std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+    PI_OUT : out std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -87,10 +85,10 @@ architecture dnc_read_modes_architecture of dnc_read_modes is
   signal ready_vector_softmax : std_logic;
 
   -- DATA
-  signal modulo_vector_softmax   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal size_in_vector_softmax  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_vector_softmax  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_softmax : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_softmax   : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+  signal size_in_vector_softmax  : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_vector_softmax  : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_softmax : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -100,6 +98,8 @@ begin
 
   ntm_vector_softmax_function_i : ntm_vector_softmax_function
     generic map (
+      X => 3,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (

@@ -46,8 +46,7 @@ use work.ntm_math_pkg.all;
 
 entity dnc_backward_weighting is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
+    N : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -61,12 +60,12 @@ entity dnc_backward_weighting is
     READY : out std_logic;
 
     -- DATA
-    L_IN : in std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+    L_IN : in std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
-    W_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    W_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    B_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+    B_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -90,9 +89,9 @@ architecture dnc_backward_weighting_architecture of dnc_backward_weighting is
   signal ready_matrix_transpose : std_logic;
 
   -- DATA
-  signal modulo_matrix_transpose   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_transpose  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_transpose : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_transpose   : std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_transpose  : std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_transpose : std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- VECTOR PRODUCT
   -- CONTROL
@@ -100,10 +99,10 @@ architecture dnc_backward_weighting_architecture of dnc_backward_weighting is
   signal ready_vector_product : std_logic;
 
   -- DATA
-  signal modulo_vector_product    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_product : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_product : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_product  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_product    : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_product : std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_product : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_product  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -113,8 +112,8 @@ begin
 
   ntm_matrix_transpose_i : ntm_matrix_transpose
     generic map (
-      X => X,
-      Y => Y,
+      X => N,
+      Y => N,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -135,8 +134,8 @@ begin
 
   ntm_vector_product_i : ntm_vector_product
     generic map (
-      X => X,
-      Y => Y,
+      X => N,
+      Y => N,
 
       DATA_SIZE => DATA_SIZE
     )

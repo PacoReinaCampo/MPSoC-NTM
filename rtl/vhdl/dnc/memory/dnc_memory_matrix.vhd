@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity dnc_memory_matrix is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
+    N : integer := 64;
+    W : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -61,13 +61,14 @@ entity dnc_memory_matrix is
     READY : out std_logic;
 
     -- DATA
-    M_IN : in std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+    M_IN : in std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
-    W_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    E_IN : in std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+    W_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+    V_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    E_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    R_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO : in  std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    M_OUT  : out std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -91,9 +92,9 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   signal ready_matrix_transpose : std_logic;
 
   -- DATA
-  signal modulo_matrix_transpose   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_transpose  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_transpose : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_transpose   : std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_transpose  : std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_transpose : std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- VECTOR PRODUCT
   -- CONTROL
@@ -101,10 +102,10 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   signal ready_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_matrix_product    : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_product : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_product : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_product  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_product    : std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_product : std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_product : std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_product  : std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -114,8 +115,8 @@ begin
 
   ntm_matrix_transpose_i : ntm_matrix_transpose
     generic map (
-      X => X,
-      Y => Y,
+      X => N,
+      Y => W,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -136,8 +137,8 @@ begin
 
   ntm_matrix_product_i : ntm_matrix_product
     generic map (
-      X => X,
-      Y => Y,
+      X => N,
+      Y => W,
 
       DATA_SIZE => DATA_SIZE
     )
