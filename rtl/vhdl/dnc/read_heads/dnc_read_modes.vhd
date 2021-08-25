@@ -98,7 +98,7 @@ begin
 
   ntm_vector_softmax_function_i : ntm_vector_softmax_function
     generic map (
-      X => 3,
+      I => 3,
 
       DATA_SIZE => DATA_SIZE
     )

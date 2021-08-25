@@ -48,10 +48,6 @@ package ntm_lstm_controller_pkg is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant W : integer := 64;
-  constant N : integer := 64;
-  constant H : integer := 64;
-
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
@@ -60,7 +56,7 @@ package ntm_lstm_controller_pkg is
     generic (
       X : integer := 64;
       W : integer := 64;
-      H : integer := 64;
+      L : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -74,18 +70,18 @@ package ntm_lstm_controller_pkg is
       READY : out std_logic;
 
       -- DATA
-      W_IN : in std_logic_arithmetic_vector_matrix(H-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      K_IN : in std_logic_arithmetic_vector_matrix(H-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      U_IN : in std_logic_arithmetic_vector_matrix(H-1 downto 0)(H-1 downto 0)(DATA_SIZE-1 downto 0);
+      W_IN : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      K_IN : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      U_IN : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
       X_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
       R_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      H_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+      H_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
-      B_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+      B_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-      I_OUT  : out std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO : in  std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+      I_OUT  : out std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -93,7 +89,7 @@ package ntm_lstm_controller_pkg is
     generic (
       X : integer := 64;
       W : integer := 64;
-      H : integer := 64;
+      L : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -107,18 +103,18 @@ package ntm_lstm_controller_pkg is
       READY : out std_logic;
 
       -- DATA
-      W_IN : in std_logic_arithmetic_vector_matrix(H-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      K_IN : in std_logic_arithmetic_vector_matrix(H-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      U_IN : in std_logic_arithmetic_vector_matrix(H-1 downto 0)(H-1 downto 0)(DATA_SIZE-1 downto 0);
+      W_IN : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      K_IN : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      U_IN : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
       X_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
       R_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      H_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+      H_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
-      B_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+      B_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-      O_OUT  : out std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO : in  std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+      O_OUT  : out std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -126,7 +122,7 @@ package ntm_lstm_controller_pkg is
     generic (
       X : integer := 64;
       W : integer := 64;
-      H : integer := 64;
+      L : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -140,18 +136,18 @@ package ntm_lstm_controller_pkg is
       READY : out std_logic;
 
       -- DATA
-      W_IN : in std_logic_arithmetic_vector_matrix(H-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      K_IN : in std_logic_arithmetic_vector_matrix(H-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      U_IN : in std_logic_arithmetic_vector_matrix(H-1 downto 0)(H-1 downto 0)(DATA_SIZE-1 downto 0);
+      W_IN : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      K_IN : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      U_IN : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
       X_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
       R_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      H_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+      H_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
-      B_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+      B_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-      F_OUT  : out std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO : in  std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+      F_OUT  : out std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -159,7 +155,7 @@ package ntm_lstm_controller_pkg is
     generic (
       X : integer := 64;
       W : integer := 64;
-      H : integer := 64;
+      L : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -173,27 +169,27 @@ package ntm_lstm_controller_pkg is
       READY : out std_logic;
 
       -- DATA
-      W_IN : in std_logic_arithmetic_vector_matrix(H-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      K_IN : in std_logic_arithmetic_vector_matrix(H-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      U_IN : in std_logic_arithmetic_vector_matrix(H-1 downto 0)(H-1 downto 0)(DATA_SIZE-1 downto 0);
+      W_IN : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      K_IN : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      U_IN : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
       X_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
       R_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      I_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-      F_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-      S_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-      H_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+      I_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+      F_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+      S_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+      H_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
-      B_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+      B_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-      S_OUT  : out std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO : in  std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+      S_OUT  : out std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
 
   component ntm_hidden_gate_vector is
     generic (
-      H : integer := 64;
+      L : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -207,11 +203,11 @@ package ntm_lstm_controller_pkg is
       READY : out std_logic;
 
       -- DATA
-      S_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-      O_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+      S_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+      O_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-      H_OUT  : out std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO : in  std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+      H_OUT  : out std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -246,8 +242,9 @@ package ntm_lstm_controller_pkg is
     generic (
       X : integer := 64;
       Y : integer := 64;
+      N : integer := 64;
       W : integer := 64;
-      H : integer := 64;
+      L : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -264,8 +261,8 @@ package ntm_lstm_controller_pkg is
       X_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
       R_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-      Y_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO : in  std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+      H_OUT  : out std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
 

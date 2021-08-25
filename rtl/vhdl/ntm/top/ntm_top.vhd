@@ -52,6 +52,7 @@ entity ntm_top is
     Y : integer := 64;
     N : integer := 64;
     W : integer := 64;
+    L : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -65,10 +66,7 @@ entity ntm_top is
     READY : out std_logic;
 
     -- DATA
-    X_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    R_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    W_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    U_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+    X_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
     MODULO : in  std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
     Y_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
@@ -98,8 +96,8 @@ architecture ntm_top_architecture of ntm_top is
   signal x_in_controller : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
   signal r_in_controller : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  signal modulo_controller : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal y_out_controller  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_controller : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal h_out_controller  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- READ HEADS
   -- CONTROL
@@ -109,8 +107,8 @@ architecture ntm_top_architecture of ntm_top is
   -- DATA
   signal modulo_reading : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
   signal w_in_reading   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal m_in_reading   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_out_reading  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_reading   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal r_out_reading  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- WRITE HEADS
   -- CONTROL
@@ -118,11 +116,11 @@ architecture ntm_top_architecture of ntm_top is
   signal ready_writing : std_logic;
 
   -- DATA
-  signal modulo_writing : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal m_in_writing   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal e_in_writing   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_writing : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_writing   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal e_in_writing   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
   signal w_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal m_out_writing  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_out_writing  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- MEMORY
   -- CONTROL
@@ -130,10 +128,10 @@ architecture ntm_top_architecture of ntm_top is
   signal ready_addressing : std_logic;
 
   -- DATA
-  signal modulo_addressing : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_addressing   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal m_in_addressing   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_out_addressing  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_addressing : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_addressing   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_addressing   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_out_addressing  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -148,6 +146,10 @@ begin
   ntm_controller_i : ntm_controller
     generic map (
       X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -165,7 +167,7 @@ begin
       R_IN => r_in_controller,
 
       MODULO => modulo_controller,
-      Y_OUT  => y_out_controller
+      H_OUT  => h_out_controller
     );
 
   -----------------------------------------------------------------------
@@ -174,7 +176,7 @@ begin
 
   ntm_reading_i : ntm_reading
     generic map (
-      X => X,
+      N => N,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -200,7 +202,7 @@ begin
 
   ntm_writing_i : ntm_writing
     generic map (
-      X => X,
+      N => N,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -227,7 +229,7 @@ begin
 
   ntm_addressing_i : ntm_addressing
     generic map (
-      X => X,
+      N => N,
 
       DATA_SIZE => DATA_SIZE
     )

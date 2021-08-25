@@ -48,9 +48,6 @@ package dnc_core_pkg is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant W : integer := 64;
-  constant N : integer := 64;
-
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
@@ -61,8 +58,8 @@ package dnc_core_pkg is
 
   component dnc_content_based_addressing is
     generic (
-      X : integer := 64;
-      Y : integer := 64;
+      I : integer := 64;
+      J : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -76,12 +73,12 @@ package dnc_core_pkg is
       READY : out std_logic;
 
       -- DATA
-      K_IN    : in std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-      M_IN    : in std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+      K_IN    : in std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
+      M_IN    : in std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
       BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      C_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+      C_OUT  : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -307,7 +304,7 @@ package dnc_core_pkg is
 
       B_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
       C_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      F_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
       MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
       W_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
@@ -411,8 +408,7 @@ package dnc_core_pkg is
       A_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
       C_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
-      GA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      GW_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      G_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
       W_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
@@ -673,6 +669,7 @@ package dnc_core_pkg is
       Y : integer := 64;
       N : integer := 64;
       W : integer := 64;
+      L : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -687,9 +684,6 @@ package dnc_core_pkg is
 
       -- DATA
       X_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      R_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      W_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      U_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
       MODULO : in  std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
       Y_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)

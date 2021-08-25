@@ -175,10 +175,10 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_vector_convolution : std_logic;
 
   -- DATA
-  signal modulo_vector_convolution    : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_convolution : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_convolution : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_convolution  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_convolution    : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_convolution : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_convolution : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_convolution  : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- COSINE SIMILARITY
   -- CONTROL
@@ -186,11 +186,11 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_vector_cosine : std_logic;
 
   -- DATA
-  signal modulo_vector_cosine    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal size_in_vector_cosine   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_u_in_vector_cosine : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_v_in_vector_cosine : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_cosine  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_cosine    : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal size_in_vector_cosine   : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_u_in_vector_cosine : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_v_in_vector_cosine : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_cosine  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- MULTIPLICATION
   -- CONTROL
@@ -198,10 +198,10 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_vector_multiplication : std_logic;
 
   -- DATA
-  signal modulo_vector_multiplication    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_multiplication : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_multiplication : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplication  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_multiplication    : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplication : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplication : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplication  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- COSH
   -- CONTROL
@@ -209,9 +209,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_vector_cosh : std_logic;
 
   -- DATA
-  signal modulo_vector_cosh   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_vector_cosh  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_cosh : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_cosh   : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_vector_cosh  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_cosh : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- SINH
   -- CONTROL
@@ -219,9 +219,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_vector_sinh : std_logic;
 
   -- DATA
-  signal modulo_vector_sinh   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_vector_sinh  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_sinh : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_sinh   : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_vector_sinh  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_sinh : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- TANH
   -- CONTROL
@@ -229,9 +229,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_vector_tanh : std_logic;
 
   -- DATA
-  signal modulo_vector_tanh   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_vector_tanh  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_tanh : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_tanh   : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_vector_tanh  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_tanh : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- LOGISTIC
   -- CONTROL
@@ -239,9 +239,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_vector_logistic : std_logic;
 
   -- DATA
-  signal modulo_vector_logistic   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_vector_logistic  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_logistic : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_logistic   : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_vector_logistic  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_logistic : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- SOFTMAX
   -- CONTROL
@@ -249,10 +249,10 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_vector_softmax : std_logic;
 
   -- DATA
-  signal modulo_vector_softmax   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal size_in_vector_softmax  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_vector_softmax  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_softmax : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_softmax   : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal size_in_vector_softmax  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_vector_softmax  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_softmax : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- ONEPLUS
   -- CONTROL
@@ -260,9 +260,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_vector_oneplus : std_logic;
 
   -- DATA
-  signal modulo_vector_oneplus   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_vector_oneplus  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_oneplus : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_oneplus   : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_vector_oneplus  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_oneplus : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- SUMMATION
   -- CONTROL
@@ -270,10 +270,10 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_vector_summation : std_logic;
 
   -- DATA
-  signal modulo_vector_summation    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_summation : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_summation : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_summation  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_summation    : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_summation : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_summation : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_summation  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- MATRIX
@@ -285,10 +285,10 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_matrix_convolution : std_logic;
 
   -- DATA
-  signal modulo_matrix_convolution    : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_convolution : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_convolution : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_convolution  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_convolution    : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_convolution : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_convolution : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_convolution  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- COSINE SIMILARITY
   -- CONTROL
@@ -296,11 +296,11 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_matrix_cosine : std_logic;
 
   -- DATA
-  signal modulo_matrix_cosine    : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal size_in_matrix_cosine   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_u_in_matrix_cosine : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_v_in_matrix_cosine : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_cosine  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_cosine    : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal size_in_matrix_cosine   : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_u_in_matrix_cosine : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_v_in_matrix_cosine : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_cosine  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- MULTIPLICATION
   -- CONTROL
@@ -308,10 +308,10 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_matrix_multiplication : std_logic;
 
   -- DATA
-  signal modulo_matrix_multiplication    : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_multiplication : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_multiplication : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_multiplication  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_multiplication    : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_multiplication : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_multiplication : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_multiplication  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- COSH
   -- CONTROL
@@ -319,9 +319,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_matrix_cosh : std_logic;
 
   -- DATA
-  signal modulo_matrix_cosh   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_cosh  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_cosh : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_cosh   : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_cosh  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_cosh : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- SINH
   -- CONTROL
@@ -329,9 +329,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_matrix_sinh : std_logic;
 
   -- DATA
-  signal modulo_matrix_sinh   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_sinh  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_sinh : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_sinh   : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_sinh  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_sinh : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- TANH
   -- CONTROL
@@ -339,9 +339,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_matrix_tanh : std_logic;
 
   -- DATA
-  signal modulo_matrix_tanh   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_tanh  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_tanh : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_tanh   : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_tanh  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_tanh : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- LOGISTIC
   -- CONTROL
@@ -349,9 +349,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_matrix_logistic : std_logic;
 
   -- DATA
-  signal modulo_matrix_logistic   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_logistic  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_logistic : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_logistic   : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_logistic  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_logistic : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- SOFTMAX
   -- CONTROL
@@ -359,10 +359,10 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_matrix_softmax : std_logic;
 
   -- DATA
-  signal modulo_matrix_softmax   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal size_in_matrix_softmax  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_softmax  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_softmax : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_softmax   : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal size_in_matrix_softmax  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_softmax  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_softmax : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- ONEPLUS
   -- CONTROL
@@ -370,9 +370,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_matrix_oneplus : std_logic;
 
   -- DATA
-  signal modulo_matrix_oneplus   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_oneplus  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_oneplus : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_oneplus   : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_oneplus  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_oneplus : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- SUMMATION
   -- CONTROL
@@ -380,10 +380,10 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_matrix_summation : std_logic;
 
   -- DATA
-  signal modulo_matrix_summation    : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_summation : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_summation : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_summation  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_summation    : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_summation : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_summation : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_summation  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -608,7 +608,7 @@ begin
   -- CONVOLUTION
   vector_convolution_function : ntm_vector_convolution_function
     generic map (
-      X => X,
+      I => I,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -653,7 +653,7 @@ begin
   -- MULTIPLICATION
   vector_multiplication_function : ntm_vector_multiplication_function
     generic map (
-      X => X,
+      I => I,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -797,7 +797,7 @@ begin
   -- SUMMATION
   vector_summation_function : ntm_vector_summation_function
     generic map (
-      X => X,
+      I => I,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -824,8 +824,8 @@ begin
   -- CONVOLUTION
   matrix_convolution_function : ntm_matrix_convolution_function
     generic map (
-      X => X,
-      Y => Y,
+      I => I,
+      J => J,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -870,8 +870,8 @@ begin
   -- MULTIPLICATION
   matrix_multiplication_function : ntm_matrix_multiplication_function
     generic map (
-      X => X,
-      Y => Y,
+      I => I,
+      J => J,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -1015,8 +1015,8 @@ begin
   -- SUMMATION
   matrix_summation_function : ntm_matrix_summation_function
     generic map (
-      X => X,
-      Y => Y,
+      I => I,
+      J => J,
 
       DATA_SIZE => DATA_SIZE
     )

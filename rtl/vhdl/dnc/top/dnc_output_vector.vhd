@@ -26,7 +26,7 @@
 -- The above copyright notice and this permission notice shall be included in
 -- all copies or substantial portions of the Software.
 --
--- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, ENPRESS OR
+-- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 -- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 -- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 -- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
@@ -35,37 +35,58 @@
 -- THE SOFTWARE.
 --
 --------------------------------------------------------------------------------
+-- Author(s):
+--   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
-use work.ntm_core_pkg.all;
+use work.dnc_core_pkg.all;
+use work.ntm_lstm_controller_pkg.all;
 
-entity ntm_read_heads_testbench is
-end ntm_read_heads_testbench;
+entity dnc_output_vector is
+  generic (
+    X : integer := 64;
+    Y : integer := 64;
+    N : integer := 64;
+    W : integer := 64;
+    L : integer := 64;
 
-architecture ntm_read_heads_testbench_architecture of ntm_read_heads_testbench is
+    DATA_SIZE : integer := 512
+  );
+  port (
+    -- GLOBAL
+    CLK : in std_logic;
+    RST : in std_logic;
+
+    -- CONTROL
+    START : in  std_logic;
+    READY : out std_logic;
+
+    -- DATA
+    R_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    H_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+
+    MODULO : in  std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+    Y_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+  );
+end entity;
+
+architecture dnc_output_vector_architecture of dnc_output_vector is
+
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
-
-  -- GLOBAL
-  signal CLK : std_logic;
-  signal RST : std_logic;
-
-  -- READING
-  -- CONTROL
-  signal start_reading : std_logic;
-  signal ready_reading : std_logic;
-
-  -- DATA
-  signal modulo_reading : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_reading   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal m_in_reading   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_out_reading  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -73,27 +94,4 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- READING
-  reading : ntm_reading
-    generic map (
-      N => N,
-
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_reading,
-      READY => ready_reading,
-
-      -- DATA
-      MODULO => modulo_reading,
-      W_IN   => w_in_reading,
-      M_IN   => m_in_reading,
-      R_OUT  => r_out_reading
-    );
-
-end ntm_read_heads_testbench_architecture;
+end architecture;

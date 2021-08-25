@@ -106,8 +106,8 @@ begin
 
   dnc_content_based_addressing_i : dnc_content_based_addressing
     generic map (
-      X => N,
-      Y => W,
+      I => N,
+      J => W,
 
       DATA_SIZE => DATA_SIZE
     )

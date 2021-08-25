@@ -52,6 +52,7 @@ entity dnc_top is
     Y : integer := 64;
     N : integer := 64;
     W : integer := 64;
+    L : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -66,9 +67,6 @@ entity dnc_top is
 
     -- DATA
     X_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    R_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    W_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    U_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
     MODULO : in  std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
     Y_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
@@ -89,7 +87,10 @@ architecture dnc_top_architecture of dnc_top is
   -- Signals
   -----------------------------------------------------------------------
 
+  -----------------------------------------------------------------------
   -- CONTROLLER
+  -----------------------------------------------------------------------
+
   -- CONTROL
   signal start_controller : std_logic;
   signal ready_controller : std_logic;
@@ -98,14 +99,121 @@ architecture dnc_top_architecture of dnc_top is
   signal x_in_controller : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
   signal r_in_controller : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  signal modulo_controller : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal y_out_controller  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_controller : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal h_out_controller  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
+  -----------------------------------------------------------------------
   -- READ HEADS
+  -----------------------------------------------------------------------
 
+  -- FREE GATES
+  -- CONTROL
+  signal start_free_gates : std_logic;
+  signal ready_free_gates : std_logic;
+
+  -- DATA
+  signal f_in_free_gates   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal f_out_free_gates  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- READ KEYS
+  -- CONTROL
+  signal start_read_keys : std_logic;
+  signal ready_read_keys : std_logic;
+
+  -- DATA
+  signal k_in_read_keys   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_read_keys : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_out_read_keys  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  -- READ MODES
+  -- CONTROL
+  signal start_read_modes : std_logic;
+  signal ready_read_modes : std_logic;
+
+  -- DATA
+  signal pi_in_read_modes  : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_read_modes : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+  signal pi_out_read_modes : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+
+  -- READ STRENGTHS
+  -- CONTROL
+  signal start_read_strengths : std_logic;
+  signal ready_read_strengths : std_logic;
+
+  -- DATA
+  signal beta_in_read_strengths  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_read_strengths   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal beta_out_read_strengths : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -----------------------------------------------------------------------
   -- WRITE HEADS
+  -----------------------------------------------------------------------
 
+  -- ALLOCATION GATE
+  -- CONTROL
+  signal start_allocation_gate : std_logic;
+  signal ready_allocation_gate : std_logic;
+
+  -- DATA
+  signal ga_in_allocation_gate  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_allocation_gate : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal ga_out_allocation_gate : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- ERASE VECTOR
+  -- CONTROL
+  signal start_erase_vector : std_logic;
+  signal ready_erase_vector : std_logic;
+
+  -- DATA
+  signal e_in_erase_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_erase_vector : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal e_out_erase_vector  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  -- WRITE GATE
+  -- CONTROL
+  signal start_write_gate : std_logic;
+  signal ready_write_gate : std_logic;
+
+  -- DATA
+  signal gw_in_write_gate  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_write_gate : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal gw_out_write_gate : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- WRITE KEY
+  -- CONTROL
+  signal start_write_key : std_logic;
+  signal ready_write_key : std_logic;
+
+  -- DATA
+  signal k_in_write_key   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_write_key : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_out_write_key  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  -- WRITE STRENGHT
+  -- CONTROL
+  signal start_write_strength : std_logic;
+  signal ready_write_strength : std_logic;
+
+  -- DATA
+  signal beta_in_write_strength  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_write_strength   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal beta_out_write_strength : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- WRITE VECTOR
+  -- CONTROL
+  signal start_write_vector : std_logic;
+  signal ready_write_vector : std_logic;
+
+  -- DATA
+  signal v_in_write_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_write_vector : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal v_out_write_vector  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  -----------------------------------------------------------------------
   -- MEMORY
+  -----------------------------------------------------------------------
+
   -- CONTROL
   signal start_addressing : std_logic;
   signal ready_addressing : std_logic;
@@ -123,6 +231,10 @@ begin
   ntm_controller_i : ntm_controller
     generic map (
       X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -140,16 +252,234 @@ begin
       R_IN => r_in_controller,
 
       MODULO => modulo_controller,
-      Y_OUT  => y_out_controller
+      H_OUT  => h_out_controller
     );
 
   -----------------------------------------------------------------------
   -- READ HEADS
   -----------------------------------------------------------------------
 
+  -- FREE GATES
+  free_gates : dnc_free_gates
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_free_gates,
+      READY => ready_free_gates,
+
+      -- DATA
+      F_IN => f_in_free_gates,
+
+      MODULO => modulo_free_gates,
+      F_OUT  => f_out_free_gates
+    );
+
+  -- READ KEYS
+  read_keys : dnc_read_keys
+    generic map (
+      W => W,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_read_keys,
+      READY => ready_read_keys,
+
+      -- DATA
+      K_IN => k_in_read_keys,
+
+      MODULO => modulo_read_keys,
+      K_OUT  => k_out_read_keys
+    );
+
+  -- READ MODES
+  read_modes : dnc_read_modes
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_read_modes,
+      READY => ready_read_modes,
+
+      -- DATA
+      PI_IN => pi_in_read_modes,
+
+      MODULO => modulo_read_modes,
+      PI_OUT => pi_out_read_modes
+    );
+
+  -- READ STRENGTHS
+  read_strengths : dnc_read_strengths
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_read_strengths,
+      READY => ready_read_strengths,
+
+      -- DATA
+      BETA_IN => beta_in_read_strengths,
+
+      MODULO   => modulo_read_strengths,
+      BETA_OUT => beta_out_read_strengths
+    );
+
   -----------------------------------------------------------------------
   -- WRITE HEADS
   -----------------------------------------------------------------------
+
+  -- ALLOCATION GATE
+  allocation_gate : dnc_allocation_gate
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_allocation_gate,
+      READY => ready_allocation_gate,
+
+      -- DATA
+      GA_IN => ga_in_allocation_gate,
+
+      MODULO => modulo_allocation_gate,
+      GA_OUT => ga_out_allocation_gate
+    );
+
+  -- ERASE VECTOR
+  erase_vector : dnc_erase_vector
+    generic map (
+      W => W,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_erase_vector,
+      READY => ready_erase_vector,
+
+      -- DATA
+      E_IN => e_in_erase_vector,
+
+      MODULO => modulo_erase_vector,
+      E_OUT  => e_out_erase_vector
+    );
+
+  -- WRITE GATE
+  write_gate : dnc_write_gate
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_write_gate,
+      READY => ready_write_gate,
+
+      -- DATA
+      GW_IN => gw_in_write_gate,
+
+      MODULO => modulo_write_gate,
+      GW_OUT => gw_out_write_gate
+    );
+
+  -- WRITE KEY
+  write_key : dnc_write_key
+    generic map (
+      W => W,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_write_key,
+      READY => ready_write_key,
+
+      -- DATA
+      K_IN => k_in_write_key,
+
+      MODULO => modulo_write_key,
+      K_OUT  => k_out_write_key
+    );
+
+  -- WRITE STRENGTH
+  write_strength : dnc_write_strength
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_write_strength,
+      READY => ready_write_strength,
+
+      -- DATA
+      BETA_IN => beta_in_write_strength,
+
+      MODULO   => modulo_write_strength,
+      BETA_OUT => beta_out_write_strength
+    );
+
+  -- WRITE VECTOR
+  write_vector : dnc_write_vector
+    generic map (
+      W => W,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_write_vector,
+      READY => ready_write_vector,
+
+      -- DATA
+      V_IN => v_in_write_vector,
+
+      MODULO => modulo_write_vector,
+      V_OUT  => v_out_write_vector
+    );
 
   -----------------------------------------------------------------------
   -- MEMORY
@@ -157,8 +487,8 @@ begin
 
   dnc_addressing_i : dnc_addressing
     generic map (
-      X => X,
-      Y => Y,
+      N => N,
+      W => W,
 
       DATA_SIZE => DATA_SIZE
     )

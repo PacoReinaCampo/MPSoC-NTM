@@ -46,7 +46,7 @@ use work.ntm_math_pkg.all;
 
 entity ntm_addressing_content is
   generic (
-    X : integer := 64;
+    W : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -61,8 +61,8 @@ entity ntm_addressing_content is
 
     -- DATA
     MODULO  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    K_IN    : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    M_IN    : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    K_IN    : in  std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    M_IN    : in  std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
     BETA_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     W_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
   );

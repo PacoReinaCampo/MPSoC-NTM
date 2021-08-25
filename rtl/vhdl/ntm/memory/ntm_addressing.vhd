@@ -47,7 +47,7 @@ use work.ntm_core_pkg.all;
 
 entity ntm_addressing is
   generic (
-    X : integer := 64;
+    N : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -61,10 +61,10 @@ entity ntm_addressing is
     READY : out std_logic;
 
     -- DATA
-    MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    W_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    M_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    W_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+    W_IN   : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+    M_IN   : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+    W_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -89,8 +89,8 @@ architecture ntm_addressing_architecture of ntm_addressing is
 
   -- DATA
   signal modulo_addressing_content  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_in_addressing_content    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal m_in_addressing_content    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_in_addressing_content    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_addressing_content    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
   signal beta_in_addressing_content : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_out_addressing_content   : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -113,7 +113,7 @@ begin
 
   ntm_addressing_content_i : ntm_addressing_content
     generic map (
-      X => X,
+      W => W,
 
       DATA_SIZE => DATA_SIZE
     )

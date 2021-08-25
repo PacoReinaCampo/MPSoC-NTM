@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity dnc_content_based_addressing is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
+    I : integer := 64;
+    J : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -61,12 +61,12 @@ entity dnc_content_based_addressing is
     READY : out std_logic;
 
     -- DATA
-    K_IN    : in std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    M_IN    : in std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+    K_IN    : in std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
+    M_IN    : in std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
     BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    C_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+    C_OUT  : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -87,13 +87,13 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
   -- VECTOR DIVIDER
   -- CONTROL
   signal start_vector_divider : std_logic;
-  signal ready_vector_divider : std_logic_vector(Y-1 downto 0);
+  signal ready_vector_divider : std_logic_vector(J-1 downto 0);
 
   -- DATA
-  signal modulo_vector_divider    : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_divider : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_divider : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_divider  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_divider    : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_divider : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_divider : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_divider  : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- VECTOR COSINE
   -- CONTROL
@@ -101,11 +101,11 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
   signal ready_vector_cosine : std_logic;
 
   -- DATA
-  signal modulo_vector_cosine    : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal size_in_vector_cosine   : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_u_in_vector_cosine : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_v_in_vector_cosine : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_cosine  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_cosine    : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal size_in_vector_cosine   : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_u_in_vector_cosine : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_v_in_vector_cosine : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_cosine  : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- VECTOR SOFTMAX
   -- CONTROL
@@ -113,10 +113,10 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
   signal ready_vector_softmax : std_logic;
 
   -- DATA
-  signal modulo_vector_softmax   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal size_in_vector_softmax  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_vector_softmax  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_softmax : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_softmax   : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal size_in_vector_softmax  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_vector_softmax  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_softmax : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -126,7 +126,7 @@ begin
 
   ntm_vector_divider_i : ntm_vector_divider
     generic map (
-      X => Y,
+      I => J,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -148,7 +148,7 @@ begin
 
   ntm_vector_cosine_similarity_function_i : ntm_vector_cosine_similarity_function
     generic map (
-      X => Y,
+      I => J,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -171,7 +171,7 @@ begin
 
   ntm_vector_softmax_function_i : ntm_vector_softmax_function
     generic map (
-      X => X,
+      I => I,
 
       DATA_SIZE => DATA_SIZE
     )

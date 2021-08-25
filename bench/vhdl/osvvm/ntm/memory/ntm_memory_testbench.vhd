@@ -63,8 +63,8 @@ architecture ntm_memory_testbench_architecture of ntm_memory_testbench is
 
   -- DATA
   signal modulo_addressing_content  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_in_addressing_content    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal m_in_addressing_content    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_in_addressing_content    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_addressing_content    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
   signal beta_in_addressing_content : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_out_addressing_content   : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -85,10 +85,10 @@ architecture ntm_memory_testbench_architecture of ntm_memory_testbench is
   signal ready_addressing : std_logic;
 
   -- DATA
-  signal modulo_addressing : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_addressing   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal m_in_addressing   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_out_addressing  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_addressing : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_addressing   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_addressing   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_out_addressing  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -99,7 +99,7 @@ begin
   -- ADDRESSING CONTENT
   addressing_content : ntm_addressing_content
     generic map (
-      X => X,
+      W => W,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -143,7 +143,7 @@ begin
 
   ntm_addressing_i : ntm_addressing
     generic map (
-      X => X,
+      N => N,
 
       DATA_SIZE => DATA_SIZE
     )

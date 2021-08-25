@@ -64,7 +64,7 @@ entity dnc_read_weighting is
 
     B_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
     C_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    F_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
     MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
     W_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
@@ -117,7 +117,7 @@ begin
 
   ntm_vector_adder_i : ntm_vector_adder
     generic map (
-      X => N,
+      I => N,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -141,7 +141,7 @@ begin
 
   ntm_vector_multiplier_i : ntm_vector_multiplier
     generic map (
-      X => N,
+      I => N,
 
       DATA_SIZE => DATA_SIZE
     )

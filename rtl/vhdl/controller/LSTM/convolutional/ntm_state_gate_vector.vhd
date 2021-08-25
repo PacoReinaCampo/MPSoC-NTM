@@ -48,7 +48,7 @@ entity ntm_state_gate_vector is
   generic (
     X : integer := 64;
     W : integer := 64;
-    H : integer := 64;
+    L : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -62,21 +62,21 @@ entity ntm_state_gate_vector is
     READY : out std_logic;
 
     -- DATA
-    W_IN : in std_logic_arithmetic_vector_matrix(H-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    K_IN : in std_logic_arithmetic_vector_matrix(H-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    U_IN : in std_logic_arithmetic_vector_matrix(H-1 downto 0)(H-1 downto 0)(DATA_SIZE-1 downto 0);
+    W_IN : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    K_IN : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    U_IN : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
     X_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
     R_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    I_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-    F_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-    S_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-    H_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+    I_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+    F_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+    S_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+    H_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
-    B_IN : in std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+    B_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-    S_OUT  : out std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO : in  std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+    S_OUT  : out std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -100,44 +100,44 @@ architecture ntm_state_gate_vector_architecture of ntm_state_gate_vector is
   signal ready_vector_tanh_function : std_logic;
 
   -- DATA
-  signal modulo_vector_tanh_function   : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_vector_tanh_function  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_tanh_function : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_tanh_function   : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_vector_tanh_function  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_tanh_function : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
   -- CONTROL
   signal start_vector_adder : std_logic;
-  signal ready_vector_adder : std_logic_vector(H-1 downto 0);
+  signal ready_vector_adder : std_logic_vector(L-1 downto 0);
 
-  signal operation_vector_adder : std_logic_vector(H-1 downto 0);
+  signal operation_vector_adder : std_logic_vector(L-1 downto 0);
 
   -- DATA
-  signal modulo_vector_adder    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_adder : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_adder : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_adder  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_adder    : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_adder : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_adder : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_adder  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- VECTOR MULTIPLIER
   -- CONTROL
   signal start_vector_multiplier : std_logic;
-  signal ready_vector_multiplier : std_logic_vector(H-1 downto 0);
+  signal ready_vector_multiplier : std_logic_vector(L-1 downto 0);
 
   -- DATA
-  signal modulo_vector_multiplier    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_multiplier : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_multiplier : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplier  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_multiplier    : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplier : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplier : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplier  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  -- VECTOR CONVOLUTION X
+  -- VECTOR CONVOLUTION I
   -- CONTROL
   signal start_vector_convolution_x : std_logic;
   signal ready_vector_convolution_x : std_logic;
 
   -- DATA
-  signal modulo_vector_convolution_x    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_convolution_x : std_logic_arithmetic_vector_matrix(H-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_convolution_x    : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_convolution_x : std_logic_arithmetic_vector_matrix(L-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_convolution_x : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_convolution_x  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_convolution_x  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- VECTOR CONVOLUTION W
   -- CONTROL
@@ -145,21 +145,21 @@ architecture ntm_state_gate_vector_architecture of ntm_state_gate_vector is
   signal ready_vector_convolution_w : std_logic;
 
   -- DATA
-  signal modulo_vector_convolution_w    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_convolution_w : std_logic_arithmetic_vector_matrix(H-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_convolution_w    : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_convolution_w : std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_convolution_w : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_convolution_w  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_convolution_w  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  -- VECTOR CONVOLUTION H
+  -- VECTOR CONVOLUTION L
   -- CONTROL
   signal start_vector_convolution_h : std_logic;
   signal ready_vector_convolution_h : std_logic;
 
   -- DATA
-  signal modulo_vector_convolution_h    : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_convolution_h : std_logic_arithmetic_vector_matrix(H-1 downto 0)(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_convolution_h : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_convolution_h  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_convolution_h    : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_convolution_h : std_logic_arithmetic_vector_matrix(L-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_convolution_h : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_convolution_h  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -169,7 +169,7 @@ begin
 
   ntm_vector_tanh_function_i : ntm_vector_tanh_function
     generic map (
-      X => H,
+      I => L,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -190,7 +190,7 @@ begin
 
   ntm_vector_adder_i : ntm_vector_adder
     generic map (
-      X => H,
+      I => L,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -214,7 +214,7 @@ begin
 
   ntm_vector_multiplier_i : ntm_vector_multiplier
     generic map (
-      X => H,
+      I => L,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -236,8 +236,8 @@ begin
 
   ntm_vector_convolution_function_x_i : ntm_vector_convolution_function
     generic map (
-      X => H,
-      Y => X,
+      I => L,
+      J => X,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -259,8 +259,8 @@ begin
 
   ntm_vector_convolution_function_w_i : ntm_vector_convolution_function
     generic map (
-      X => H,
-      Y => W,
+      I => L,
+      J => W,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -280,10 +280,10 @@ begin
       DATA_OUT  => data_out_vector_convolution_w
     );
 
-  ntm_vector_convolution_function_h_i : ntm_vector_convolution_function
+  ntm_vector_convolution_function_l_i : ntm_vector_convolution_function
     generic map (
-      X => H,
-      Y => H,
+      I => L,
+      J => L,
 
       DATA_SIZE => DATA_SIZE
     )

@@ -62,7 +62,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
 
   -- DATA
   signal modulo_matrix_determinant   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_determinant  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_determinant  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
   signal data_out_matrix_determinant : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX INVERSION
@@ -71,9 +71,9 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal ready_matrix_inversion : std_logic;
 
   -- DATA
-  signal modulo_matrix_inversion   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_inversion  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_inversion : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_inversion   : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_inversion  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_inversion : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- MATRIX PRODUCT
   -- CONTROL
@@ -81,10 +81,10 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal ready_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_matrix_product    : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_product : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_product : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_product  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_product    : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_product : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_product : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_product  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
   
   -- MATRIX RANK
   -- CONTROL
@@ -93,7 +93,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
 
   -- DATA
   signal modulo_matrix_rank   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_rank  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_rank  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
   signal data_out_matrix_rank : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX TRANSPOSE
@@ -102,9 +102,9 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal ready_matrix_transpose : std_logic;
 
   -- DATA
-  signal modulo_matrix_transpose   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_transpose  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_transpose : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_transpose   : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_transpose  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_transpose : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- SCALAR PRODUCT
   -- CONTROL
@@ -113,8 +113,8 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
 
   -- DATA
   signal modulo_scalar_product    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_product : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_product : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_product : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_product : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
   signal data_out_scalar_product  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR PRODUCT
@@ -123,10 +123,10 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal ready_vector_product : std_logic;
 
   -- DATA
-  signal modulo_vector_product    : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_product : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_product : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_product  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_product    : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_product : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_product : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_product  : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -137,8 +137,8 @@ begin
   -- MATRIX DETERMINANT
   matrix_determinant : ntm_matrix_determinant
     generic map (
-      X => X,
-      Y => Y,
+      I => I,
+      J => J,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -160,8 +160,8 @@ begin
   -- MATRIX INVERSION
   matrix_inversion : ntm_matrix_inversion
     generic map (
-      X => X,
-      Y => Y,
+      I => I,
+      J => J,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -183,8 +183,8 @@ begin
   -- MATRIX RANK
   matrix_rank : ntm_matrix_rank
     generic map (
-      X => X,
-      Y => Y,
+      I => I,
+      J => J,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -206,8 +206,8 @@ begin
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
     generic map (
-      X => X,
-      Y => Y,
+      I => I,
+      J => J,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -230,8 +230,8 @@ begin
   -- MATRIX TRANSPOSE
   matrix_transpose : ntm_matrix_transpose
     generic map (
-      X => X,
-      Y => Y,
+      I => I,
+      J => J,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -253,7 +253,7 @@ begin
   -- SCALAR PRODUCT
   scalar_product : ntm_scalar_product
     generic map (
-      X => X,
+      I => I,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -276,7 +276,7 @@ begin
   -- VECTOR PRODUCT
   vector_product : ntm_vector_product
     generic map (
-      X => X,
+      I => I,
 
       DATA_SIZE => DATA_SIZE
     )

@@ -64,9 +64,6 @@ architecture dnc_top_testbench_architecture of dnc_top_testbench is
 
   -- DATA
   signal x_in_top : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_in_top : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_top : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal u_in_top : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
   signal modulo_top : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
   signal y_out_top  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -84,6 +81,7 @@ begin
       Y => Y,
       N => N,
       W => W,
+      L => L,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -98,9 +96,6 @@ begin
 
       -- DATA
       X_IN   => x_in_top,
-      R_IN   => r_in_top,
-      W_IN   => w_in_top,
-      U_IN   => u_in_top,
 
       MODULO => modulo_top,
       Y_OUT  => y_out_top

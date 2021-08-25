@@ -62,15 +62,15 @@ architecture ntm_standard_lstm_testbench_architecture of ntm_standard_lstm_testb
   signal ready_input_gate_vector : std_logic;
 
   -- DATA
-  signal w_in_input_gate_vector   : std_logic_arithmetic_vector_matrix(H-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal k_in_input_gate_vector   : std_logic_arithmetic_vector_matrix(H-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal u_in_input_gate_vector   : std_logic_arithmetic_vector_matrix(H-1 downto 0)(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_input_gate_vector   : std_logic_arithmetic_vector_matrix(L-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_in_input_gate_vector   : std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal u_in_input_gate_vector   : std_logic_arithmetic_vector_matrix(L-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
   signal x_in_input_gate_vector   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
   signal r_in_input_gate_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal h_in_input_gate_vector   : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal b_in_input_gate_vector   : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_input_gate_vector : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal i_out_input_gate_vector  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal h_in_input_gate_vector   : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal b_in_input_gate_vector   : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_input_gate_vector : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal i_out_input_gate_vector  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- OUTPUT GATE VECTOR
   -- CONTROL
@@ -78,15 +78,15 @@ architecture ntm_standard_lstm_testbench_architecture of ntm_standard_lstm_testb
   signal ready_output_gate_vector : std_logic;
 
   -- DATA
-  signal w_in_output_gate_vector   : std_logic_arithmetic_vector_matrix(H-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal k_in_output_gate_vector   : std_logic_arithmetic_vector_matrix(H-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal u_in_output_gate_vector   : std_logic_arithmetic_vector_matrix(H-1 downto 0)(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_output_gate_vector   : std_logic_arithmetic_vector_matrix(L-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_in_output_gate_vector   : std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal u_in_output_gate_vector   : std_logic_arithmetic_vector_matrix(L-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
   signal x_in_output_gate_vector   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
   signal r_in_output_gate_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal h_in_output_gate_vector   : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal b_in_output_gate_vector   : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_output_gate_vector : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal o_out_output_gate_vector  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal h_in_output_gate_vector   : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal b_in_output_gate_vector   : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_output_gate_vector : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal o_out_output_gate_vector  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- FORGET GATE VECTOR
   -- CONTROL
@@ -94,15 +94,15 @@ architecture ntm_standard_lstm_testbench_architecture of ntm_standard_lstm_testb
   signal ready_forget_gate_vector : std_logic;
 
   -- DATA
-  signal w_in_forget_gate_vector   : std_logic_arithmetic_vector_matrix(H-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal k_in_forget_gate_vector   : std_logic_arithmetic_vector_matrix(H-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal u_in_forget_gate_vector   : std_logic_arithmetic_vector_matrix(H-1 downto 0)(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_forget_gate_vector   : std_logic_arithmetic_vector_matrix(L-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_in_forget_gate_vector   : std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal u_in_forget_gate_vector   : std_logic_arithmetic_vector_matrix(L-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
   signal x_in_forget_gate_vector   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
   signal r_in_forget_gate_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal h_in_forget_gate_vector   : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal b_in_forget_gate_vector   : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_forget_gate_vector : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal f_out_forget_gate_vector  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal h_in_forget_gate_vector   : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal b_in_forget_gate_vector   : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_forget_gate_vector : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal f_out_forget_gate_vector  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- STATE GATE VECTOR
   -- CONTROL
@@ -110,18 +110,18 @@ architecture ntm_standard_lstm_testbench_architecture of ntm_standard_lstm_testb
   signal ready_state_gate_vector : std_logic;
 
   -- DATA
-  signal w_in_state_gate_vector   : std_logic_arithmetic_vector_matrix(H-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal k_in_state_gate_vector   : std_logic_arithmetic_vector_matrix(H-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal u_in_state_gate_vector   : std_logic_arithmetic_vector_matrix(H-1 downto 0)(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_state_gate_vector   : std_logic_arithmetic_vector_matrix(L-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_in_state_gate_vector   : std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal u_in_state_gate_vector   : std_logic_arithmetic_vector_matrix(L-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
   signal x_in_state_gate_vector   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
   signal r_in_state_gate_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal i_in_state_gate_vector   : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal f_in_state_gate_vector   : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal s_in_state_gate_vector   : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal h_in_state_gate_vector   : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal b_in_state_gate_vector   : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_state_gate_vector : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal s_out_state_gate_vector  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal i_in_state_gate_vector   : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal f_in_state_gate_vector   : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal s_in_state_gate_vector   : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal h_in_state_gate_vector   : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal b_in_state_gate_vector   : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_state_gate_vector : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal s_out_state_gate_vector  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- HIDDEN GATE VECTOR
   -- CONTROL
@@ -129,10 +129,10 @@ architecture ntm_standard_lstm_testbench_architecture of ntm_standard_lstm_testb
   signal ready_hidden_gate_vector : std_logic;
 
   -- DATA
-  signal s_in_hidden_gate_vector   : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal o_in_hidden_gate_vector   : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_hidden_gate_vector : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal h_out_hidden_gate_vector  : std_logic_arithmetic_vector_vector(H-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal s_in_hidden_gate_vector   : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal o_in_hidden_gate_vector   : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_hidden_gate_vector : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal h_out_hidden_gate_vector  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- CONTROLLER OUTPUT VECTOR
   -- CONTROL
@@ -154,8 +154,8 @@ architecture ntm_standard_lstm_testbench_architecture of ntm_standard_lstm_testb
   -- DATA
   signal x_in_controller   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
   signal r_in_controller   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_controller : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal y_out_controller  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_controller : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal h_out_controller  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -168,7 +168,7 @@ begin
     generic map (
       X => X,
       W => W,
-      H => H,
+      L => L,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -201,7 +201,7 @@ begin
     generic map (
       X => X,
       W => W,
-      H => H,
+      L => L,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -234,7 +234,7 @@ begin
     generic map (
       X => X,
       W => W,
-      H => H,
+      L => L,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -267,7 +267,7 @@ begin
     generic map (
       X => X,
       W => W,
-      H => H,
+      L => L,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -301,7 +301,7 @@ begin
   -- HIDDEN GATE VECTOR
   hidden_gate_vector : ntm_hidden_gate_vector
     generic map (
-      H => H,
+      L => L,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -354,8 +354,9 @@ begin
     generic map (
       X => X,
       Y => Y,
+      N => N,
       W => W,
-      H => H,
+      L => L,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -373,7 +374,7 @@ begin
       R_IN => r_in_controller,
 
       MODULO => modulo_controller,
-      Y_OUT  => y_out_controller
+      H_OUT  => h_out_controller
     );
 
 end ntm_standard_lstm_testbench_architecture;

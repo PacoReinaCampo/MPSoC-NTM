@@ -153,89 +153,89 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   -- MOD
   -- CONTROL
   signal start_vector_mod : std_logic;
-  signal ready_vector_mod : std_logic_vector(X-1 downto 0);
+  signal ready_vector_mod : std_logic_vector(I-1 downto 0);
 
   -- DATA
-  signal modulo_vector_mod   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_vector_mod  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_mod : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_mod   : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_vector_mod  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_mod : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- ADDER
   -- CONTROL
   signal start_vector_adder : std_logic;
-  signal ready_vector_adder : std_logic_vector(X-1 downto 0);
+  signal ready_vector_adder : std_logic_vector(I-1 downto 0);
 
-  signal operation_vector_adder : std_logic_vector(X-1 downto 0);
+  signal operation_vector_adder : std_logic_vector(I-1 downto 0);
 
   -- DATA
-  signal modulo_vector_adder    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_adder : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_adder : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_adder  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_adder    : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_adder : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_adder : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_adder  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- MULTIPLIER
   -- CONTROL
   signal start_vector_multiplier : std_logic;
-  signal ready_vector_multiplier : std_logic_vector(X-1 downto 0);
+  signal ready_vector_multiplier : std_logic_vector(I-1 downto 0);
 
   -- DATA
-  signal modulo_vector_multiplier    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_multiplier : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_multiplier : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplier  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_multiplier    : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplier : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplier : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplier  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- INVERTER
   -- CONTROL
   signal start_vector_inverter : std_logic;
-  signal ready_vector_inverter : std_logic_vector(X-1 downto 0);
+  signal ready_vector_inverter : std_logic_vector(I-1 downto 0);
 
   -- DATA
-  signal modulo_vector_inverter   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_vector_inverter  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_inverter : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_inverter   : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_vector_inverter  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_inverter : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- DIVIDER
   -- CONTROL
   signal start_vector_divider : std_logic;
-  signal ready_vector_divider : std_logic_vector(X-1 downto 0);
+  signal ready_vector_divider : std_logic_vector(I-1 downto 0);
 
   -- DATA
-  signal modulo_vector_divider    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_divider : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_divider : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_divider  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_divider    : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_divider : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_divider : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_divider  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- EXPONENTIATOR
   -- CONTROL
   signal start_vector_exponentiator : std_logic;
-  signal ready_vector_exponentiator : std_logic_vector(X-1 downto 0);
+  signal ready_vector_exponentiator : std_logic_vector(I-1 downto 0);
 
   -- DATA
-  signal modulo_vector_exponentiator   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal base_vector_exponentiator     : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal power_vector_exponentiator    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_exponentiator : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_exponentiator   : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal base_vector_exponentiator     : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal power_vector_exponentiator    : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_exponentiator : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- ROOT
   -- CONTROL
   signal start_vector_root : std_logic;
-  signal ready_vector_root : std_logic_vector(X-1 downto 0);
+  signal ready_vector_root : std_logic_vector(I-1 downto 0);
 
   -- DATA
-  signal modulo_vector_root   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal base_vector_root     : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal power_vector_root    : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_root : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_root   : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal base_vector_root     : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal power_vector_root    : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_root : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- LOGARITHM
   -- CONTROL
   signal start_vector_logarithm : std_logic;
-  signal ready_vector_logarithm : std_logic_vector(X-1 downto 0);
+  signal ready_vector_logarithm : std_logic_vector(I-1 downto 0);
 
   -- DATA
-  signal modulo_vector_logarithm   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_vector_logarithm  : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_logarithm : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_logarithm   : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_vector_logarithm  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_logarithm : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- MATRIX
@@ -244,89 +244,89 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   -- MOD
   -- CONTROL
   signal start_matrix_mod : std_logic;
-  signal ready_matrix_mod : std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
+  signal ready_matrix_mod : std_logic_matrix(I-1 downto 0)(J-1 downto 0);
 
   -- DATA
-  signal modulo_matrix_mod   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_mod  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_mod : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_mod   : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_mod  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_mod : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- ADDER
   -- CONTROL
   signal start_matrix_adder : std_logic;
-  signal ready_matrix_adder : std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
+  signal ready_matrix_adder : std_logic_matrix(I-1 downto 0)(J-1 downto 0);
 
-  signal operation_matrix_adder : std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
+  signal operation_matrix_adder : std_logic_matrix(I-1 downto 0)(J-1 downto 0);
 
   -- DATA
-  signal modulo_matrix_adder    : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_adder : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_adder : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_adder  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_adder    : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_adder : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_adder : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_adder  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- MULTIPLIER
   -- CONTROL
   signal start_matrix_multiplier : std_logic;
-  signal ready_matrix_multiplier : std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
+  signal ready_matrix_multiplier : std_logic_matrix(I-1 downto 0)(J-1 downto 0);
 
   -- DATA
-  signal modulo_matrix_multiplier    : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_multiplier : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_multiplier : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_multiplier  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_multiplier    : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_multiplier : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_multiplier : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_multiplier  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- INVERTER
   -- CONTROL
   signal start_matrix_inverter : std_logic;
-  signal ready_matrix_inverter : std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
+  signal ready_matrix_inverter : std_logic_matrix(I-1 downto 0)(J-1 downto 0);
 
   -- DATA
-  signal modulo_matrix_inverter   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_inverter  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_inverter : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_inverter   : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_inverter  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_inverter : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- DIVIDER
   -- CONTROL
   signal start_matrix_divider : std_logic;
-  signal ready_matrix_divider : std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
+  signal ready_matrix_divider : std_logic_matrix(I-1 downto 0)(J-1 downto 0);
 
   -- DATA
-  signal modulo_matrix_divider    : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_divider : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_divider : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_divider  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_divider    : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_divider : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_divider : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_divider  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- EXPONENTIATOR
   -- CONTROL
   signal start_matrix_exponentiator : std_logic;
-  signal ready_matrix_exponentiator : std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
+  signal ready_matrix_exponentiator : std_logic_matrix(I-1 downto 0)(J-1 downto 0);
 
   -- DATA
-  signal modulo_matrix_exponentiator   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal base_matrix_exponentiator     : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal power_matrix_exponentiator    : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_exponentiator : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_exponentiator   : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal base_matrix_exponentiator     : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal power_matrix_exponentiator    : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_exponentiator : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- ROOT
   -- CONTROL
   signal start_matrix_root : std_logic;
-  signal ready_matrix_root : std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
+  signal ready_matrix_root : std_logic_matrix(I-1 downto 0)(J-1 downto 0);
 
   -- DATA
-  signal modulo_matrix_root   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal base_matrix_root     : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal power_matrix_root    : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_root : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_root   : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal base_matrix_root     : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal power_matrix_root    : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_root : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- LOGARITHM
   -- CONTROL
   signal start_matrix_logarithm : std_logic;
-  signal ready_matrix_logarithm : std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
+  signal ready_matrix_logarithm : std_logic_matrix(I-1 downto 0)(J-1 downto 0);
 
   -- DATA
-  signal modulo_matrix_logarithm   : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_logarithm  : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_logarithm : std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_logarithm   : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_logarithm  : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_logarithm : std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -512,7 +512,7 @@ begin
   -- MOD
   vector_mod : ntm_vector_mod
     generic map (
-      X => X,
+      I => I,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -534,7 +534,7 @@ begin
   -- ADDER
   vector_adder : ntm_vector_adder
     generic map (
-      X => X,
+      I => I,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -559,7 +559,7 @@ begin
   -- MULTIPLIER
   vector_multiplier : ntm_vector_multiplier
     generic map (
-      X => X,
+      I => I,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -582,7 +582,7 @@ begin
   -- INVERTER
   vector_inverter : ntm_vector_inverter
     generic map (
-      X => X,
+      I => I,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -604,7 +604,7 @@ begin
   -- DIVIDER
   vector_divider : ntm_vector_divider
     generic map (
-      X => X,
+      I => I,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -627,7 +627,7 @@ begin
   -- EXPONENTIATION
   vector_exponentiator : ntm_vector_exponentiator
     generic map (
-      X => X,
+      I => I,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -650,7 +650,7 @@ begin
   -- ROOT
   vector_root : ntm_vector_root
     generic map (
-      X => X,
+      I => I,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -673,7 +673,7 @@ begin
   -- LOGARITHM
   vector_logarithm : ntm_vector_logarithm
     generic map (
-      X => X,
+      I => I,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -699,8 +699,8 @@ begin
   -- MOD
   matrix_mod : ntm_matrix_mod
     generic map (
-      X => X,
-      Y => Y,
+      I => I,
+      J => J,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -722,8 +722,8 @@ begin
   -- ADDER
   matrix_adder : ntm_matrix_adder
     generic map (
-      X => X,
-      Y => Y,
+      I => I,
+      J => J,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -748,8 +748,8 @@ begin
   -- MULTIPLIER
   matrix_multiplier : ntm_matrix_multiplier
     generic map (
-      X => X,
-      Y => Y,
+      I => I,
+      J => J,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -772,8 +772,8 @@ begin
   -- INVERTER
   matrix_inverter : ntm_matrix_inverter
     generic map (
-      X => X,
-      Y => Y,
+      I => I,
+      J => J,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -795,8 +795,8 @@ begin
   -- DIVIDER
   matrix_divider : ntm_matrix_divider
     generic map (
-      X => X,
-      Y => Y,
+      I => I,
+      J => J,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -819,8 +819,8 @@ begin
   -- EXPONENTIATION
   matrix_exponentiator : ntm_matrix_exponentiator
     generic map (
-      X => X,
-      Y => Y,
+      I => I,
+      J => J,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -843,8 +843,8 @@ begin
   -- ROOT
   matrix_root : ntm_matrix_root
     generic map (
-      X => X,
-      Y => Y,
+      I => I,
+      J => J,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -867,8 +867,8 @@ begin
   -- LOGARITHM
   matrix_logarithm : ntm_matrix_logarithm
     generic map (
-      X => X,
-      Y => Y,
+      I => I,
+      J => J,
 
       DATA_SIZE => DATA_SIZE
     )

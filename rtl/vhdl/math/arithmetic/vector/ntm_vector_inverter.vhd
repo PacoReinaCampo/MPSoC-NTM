@@ -46,7 +46,7 @@ use work.ntm_math_pkg.all;
 
 entity ntm_vector_inverter is
   generic (
-    X : integer := 64;
+    I : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -57,12 +57,12 @@ entity ntm_vector_inverter is
 
     -- CONTROL
     START : in  std_logic;
-    READY : out std_logic_vector(X-1 downto 0);
+    READY : out std_logic_vector(I-1 downto 0);
 
     -- DATA
-    MODULO   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO   : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+    DATA_IN  : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+    DATA_OUT : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -80,7 +80,7 @@ architecture ntm_vector_inverter_architecture of ntm_vector_inverter is
     CHECK_D_ST   -- STEP 4
   );
 
-  type inverter_ctrl_fsm_vector is array (X-1 downto 0) of inverter_ctrl_fsm;
+  type inverter_ctrl_fsm_vector is array (I-1 downto 0) of inverter_ctrl_fsm;
 
   -----------------------------------------------------------------------
   -- Constants
@@ -109,7 +109,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  X_LABEL : for i in X-1 downto 0 generate
+  X_LABEL : for i in I-1 downto 0 generate
 
     ctrl_fsm : process(CLK, RST)
     begin

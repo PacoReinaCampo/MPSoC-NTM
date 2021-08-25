@@ -117,7 +117,7 @@ begin
 
   ntm_vector_adder_i : ntm_vector_adder
     generic map (
-      X => Y,
+      I => Y,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -141,8 +141,8 @@ begin
 
   ntm_vector_product_i : ntm_vector_product
     generic map (
-      X => Y,
-      Y => W,
+      I => Y,
+      J => W,
 
       DATA_SIZE => DATA_SIZE
     )

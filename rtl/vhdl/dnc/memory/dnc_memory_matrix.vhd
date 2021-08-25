@@ -115,8 +115,8 @@ begin
 
   ntm_matrix_transpose_i : ntm_matrix_transpose
     generic map (
-      X => N,
-      Y => W,
+      I => N,
+      J => W,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -137,8 +137,8 @@ begin
 
   ntm_matrix_product_i : ntm_matrix_product
     generic map (
-      X => N,
-      Y => W,
+      I => N,
+      J => W,
 
       DATA_SIZE => DATA_SIZE
     )

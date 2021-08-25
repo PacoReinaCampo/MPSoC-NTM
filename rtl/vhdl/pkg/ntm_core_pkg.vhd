@@ -48,12 +48,64 @@ package ntm_core_pkg is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant W : integer := 64;
-  constant N : integer := 64;
-
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- READ HEADS
+  -----------------------------------------------------------------------
+
+  component ntm_reading is
+    generic (
+      N : integer := 64;
+
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      W_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      M_IN   : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      R_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+    );
+  end component;
+
+  -----------------------------------------------------------------------
+  -- WRITE HEADS
+  -----------------------------------------------------------------------
+
+  component ntm_writing is
+    generic (
+      N : integer := 64;
+
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      M_IN   : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      E_IN   : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      W_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      M_OUT  : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+    );
+  end component;
 
   -----------------------------------------------------------------------
   -- MEMORY
@@ -61,7 +113,7 @@ package ntm_core_pkg is
 
   component ntm_addressing_content is
     generic (
-      X : integer := 64;
+      W : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -76,8 +128,8 @@ package ntm_core_pkg is
 
       -- DATA
       MODULO  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      K_IN    : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      M_IN    : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+      K_IN    : in  std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      M_IN    : in  std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
       BETA_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       W_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -106,7 +158,7 @@ package ntm_core_pkg is
 
   component ntm_addressing is
     generic (
-      X : integer := 64;
+      N : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -120,65 +172,10 @@ package ntm_core_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      W_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      M_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      W_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
-    );
-  end component;
-
-  -----------------------------------------------------------------------
-  -- READ HEADS
-  -----------------------------------------------------------------------
-
-  component ntm_reading is
-    generic (
-      X : integer := 64;
-
-      DATA_SIZE : integer := 512
-    );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      -- DATA
-      MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      W_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      M_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      R_OUT  : out std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
-    );
-  end component;
-
-  -----------------------------------------------------------------------
-  -- WRITE HEADS
-  -----------------------------------------------------------------------
-
-  component ntm_writing is
-    generic (
-      X : integer := 64;
-
-      DATA_SIZE : integer := 512
-    );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      -- DATA
-      MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      M_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      E_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      W_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      M_OUT  : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      W_IN   : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      M_IN   : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      W_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -192,6 +189,7 @@ package ntm_core_pkg is
       Y : integer := 64;
       N : integer := 64;
       W : integer := 64;
+      L : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -206,9 +204,6 @@ package ntm_core_pkg is
 
       -- DATA
       X_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-      R_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      W_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      U_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
       MODULO : in  std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
       Y_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)

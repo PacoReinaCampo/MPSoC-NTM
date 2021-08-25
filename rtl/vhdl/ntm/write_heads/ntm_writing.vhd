@@ -46,7 +46,7 @@ use work.ntm_math_pkg.all;
 
 entity ntm_writing is
   generic (
-    X : integer := 64;
+    N : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -60,11 +60,11 @@ entity ntm_writing is
     READY : out std_logic;
 
     -- DATA
-    MODULO : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    M_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    E_IN   : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+    M_IN   : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+    E_IN   : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
     W_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    M_OUT  : in  std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0)
+    M_OUT  : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 

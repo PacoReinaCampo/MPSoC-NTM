@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_matrix_mod is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
+    I : integer := 64;
+    J : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -58,12 +58,12 @@ entity ntm_matrix_mod is
 
     -- CONTROL
     START : in  std_logic;
-    READY : out std_logic_matrix(X-1 downto 0)(Y-1 downto 0);
+    READY : out std_logic_matrix(I-1 downto 0)(J-1 downto 0);
 
     -- DATA
-    MODULO   : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_arithmetic_vector_matrix(X-1 downto 0)(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO   : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+    DATA_IN  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+    DATA_OUT : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -78,9 +78,9 @@ architecture ntm_matrix_mod_architecture of ntm_matrix_mod is
     ENDER_ST     -- STEP 1
   );
 
-  type mod_ctrl_fsm_matrix is array (X-1 downto 0, Y-1 downto 0) of mod_ctrl_fsm;
+  type mod_ctrl_fsm_matrix is array (I-1 downto 0, J-1 downto 0) of mod_ctrl_fsm;
 
-  type std_logic_matrix_of_vector is array (X-1 downto 0, Y-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
+  type std_logic_matrix_of_vector is array (I-1 downto 0, J-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Constants
@@ -104,8 +104,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  Y_LABEL : for i in Y-1 downto 0 generate
-    X_LABEL : for j in X-1 downto 0 generate
+  Y_LABEL : for i in J-1 downto 0 generate
+    X_LABEL : for j in I-1 downto 0 generate
 
       ctrl_fsm : process(CLK, RST)
       begin

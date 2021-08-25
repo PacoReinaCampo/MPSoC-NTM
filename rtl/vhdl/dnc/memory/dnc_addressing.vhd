@@ -45,8 +45,8 @@ use work.dnc_core_pkg.all;
 
 entity dnc_addressing is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
+    N : integer := 64;
+    W : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -177,7 +177,7 @@ architecture dnc_addressing_architecture of dnc_addressing is
 
   signal b_in_read_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
   signal c_in_read_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal f_in_read_weighting : std_logiC_vector(DATA_SIZE-1 downto 0);
+  signal f_in_read_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
   signal modulo_read_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
   signal w_out_read_weighting  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -232,8 +232,7 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal a_in_write_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
   signal c_in_write_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  signal ga_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal gw_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal g_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal modulo_write_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
   signal w_out_write_weighting  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -572,8 +571,7 @@ begin
       C_IN => c_in_write_weighting,
 
       -- DATA
-      GA_IN => ga_in_write_weighting,
-      GW_IN => gw_in_write_weighting,
+      G_IN => g_in_write_weighting,
 
       MODULO => modulo_write_weighting,
       W_OUT  => w_out_write_weighting

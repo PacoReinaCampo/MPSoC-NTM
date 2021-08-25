@@ -124,7 +124,7 @@ begin
 
   ntm_vector_summation_function_i : ntm_vector_summation_function
     generic map (
-      X => N,
+      I => N,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -146,7 +146,7 @@ begin
 
   ntm_vector_adder_i : ntm_vector_adder
     generic map (
-      X => N,
+      I => N,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -170,7 +170,7 @@ begin
 
   ntm_vector_multiplier_i : ntm_vector_multiplier
     generic map (
-      X => N,
+      I => N,
 
       DATA_SIZE => DATA_SIZE
     )
