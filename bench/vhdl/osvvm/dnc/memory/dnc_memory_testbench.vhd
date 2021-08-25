@@ -231,6 +231,21 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal start_addressing : std_logic;
   signal ready_addressing : std_logic;
 
+    -- DATA
+  signal k_read_in_addressing    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal beta_read_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal f_read_in_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal pi_read_in_addressing   : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+
+  signal k_write_in_addressing    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal beta_write_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal e_write_in_addressing    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal v_write_in_addressing    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal ga_write_in_addressing   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal gw_write_in_addressing   : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal modulo_addressing : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal r_out_addressing  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 begin
 
   -----------------------------------------------------------------------
@@ -574,8 +589,11 @@ begin
   -- ADDRESSING
   addressing : dnc_addressing
     generic map (
+      X => X,
+      Y => Y,
       N => N,
       W => W,
+      L => L,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -586,7 +604,23 @@ begin
 
       -- CONTROL
       START => start_addressing,
-      READY => ready_addressing
+      READY => ready_addressing,
+
+      -- DATA
+      K_READ_IN    => k_read_in_addressing,
+      BETA_READ_IN => beta_read_in_addressing,
+      F_READ_IN    => f_read_in_addressing,
+      PI_READ_IN   => pi_read_in_addressing,
+
+      K_WRITE_IN    => k_write_in_addressing,
+      BETA_WRITE_IN => beta_write_in_addressing,
+      E_WRITE_IN    => e_write_in_addressing,
+      V_WRITE_IN    => v_write_in_addressing,
+      GA_WRITE_IN   => ga_write_in_addressing,
+      GW_WRITE_IN   => gw_write_in_addressing,
+
+      MODULO => modulo_addressing,
+      R_OUT  => r_out_addressing
     );
 
 end dnc_memory_testbench_architecture;

@@ -417,8 +417,11 @@ package dnc_core_pkg is
 
   component dnc_addressing is
     generic (
+      X : integer := 64;
+      Y : integer := 64;
       N : integer := 64;
       W : integer := 64;
+      L : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -429,7 +432,23 @@ package dnc_core_pkg is
 
       -- CONTROL
       START : in  std_logic;
-      READY : out std_logic
+      READY : out std_logic;
+
+      -- DATA
+      K_READ_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      BETA_READ_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      F_READ_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
+      PI_READ_IN   : in std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+
+      K_WRITE_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      BETA_WRITE_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      E_WRITE_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      V_WRITE_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      GA_WRITE_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+      GW_WRITE_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      MODULO : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      R_OUT  : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component dnc_addressing;
 
@@ -687,6 +706,109 @@ package dnc_core_pkg is
 
       MODULO : in  std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
       Y_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+    );
+  end component;
+
+  component dnc_output_vector is
+    generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
+
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      WY_IN : in std_logic_arithmetic_vector_matrix(Y-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
+      WR_IN : in std_logic_arithmetic_vector_matrix(Y-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+
+      H_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+      R_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+
+      MODULO : in  std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+      Y_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+    );
+  end component;
+
+  component dnc_read_interface_vector is
+    generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
+
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      WK_IN    : out std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      WBETA_IN : out std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+      WF_IN    : out std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+      WPI_IN   : out std_logic_arithmetic_vector_matrix(L-1 downto 0)(2 downto 0)(DATA_SIZE-1 downto 0);
+
+      H_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+
+      K_OUT    : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      F_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
+      PI_OUT   : out std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0)
+    );
+  end component;
+
+  component dnc_write_interface_vector is
+    generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
+
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      WK_IN    : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      WBETA_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+      WE_IN    : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      WV_IN    : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      WGA_IN   : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+      WGW_IN   : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+
+      H_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+
+      K_OUT    : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      E_OUT    : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      V_OUT    : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      GA_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      GW_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 

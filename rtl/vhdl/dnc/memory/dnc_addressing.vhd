@@ -45,8 +45,11 @@ use work.dnc_core_pkg.all;
 
 entity dnc_addressing is
   generic (
+    X : integer := 64;
+    Y : integer := 64;
     N : integer := 64;
     W : integer := 64;
+    L : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -57,7 +60,23 @@ entity dnc_addressing is
 
     -- CONTROL
     START : in  std_logic;
-    READY : out std_logic
+    READY : out std_logic;
+
+    -- DATA
+    K_READ_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    BETA_READ_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    F_READ_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
+    PI_READ_IN   : in std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+
+    K_WRITE_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    BETA_WRITE_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    E_WRITE_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    V_WRITE_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    GA_WRITE_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+    GW_WRITE_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    MODULO : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    R_OUT  : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end dnc_addressing;
 

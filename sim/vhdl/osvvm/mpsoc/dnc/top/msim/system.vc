@@ -99,5 +99,8 @@
 ../../../../../../../rtl/vhdl/dnc/memory/dnc_addressing.vhd
 
 ../../../../../../../rtl/vhdl/dnc/top/dnc_top.vhd
+../../../../../../../rtl/vhdl/dnc/top/dnc_output_vector.vhd
+../../../../../../../rtl/vhdl/dnc/top/dnc_read_interface_vector.vhd
+../../../../../../../rtl/vhdl/dnc/top/dnc_write_interface_vector.vhd
 
 ../../../../../../../bench/vhdl/osvvm/dnc/top/dnc_top_testbench.vhd

@@ -46,7 +46,7 @@ use work.ntm_math_pkg.all;
 use work.dnc_core_pkg.all;
 use work.ntm_lstm_controller_pkg.all;
 
-entity dnc_output_vector is
+entity dnc_write_interface_vector is
   generic (
     X : integer := 64;
     Y : integer := 64;
@@ -66,18 +66,25 @@ entity dnc_output_vector is
     READY : out std_logic;
 
     -- DATA
-    WY_IN : in std_logic_arithmetic_vector_matrix(Y-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
-    WR_IN : in std_logic_arithmetic_vector_matrix(Y-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    WK_IN    : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    WBETA_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+    WE_IN    : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    WV_IN    : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    WGA_IN   : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+    WGW_IN   : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
     H_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-    R_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    Y_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+    K_OUT    : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    E_OUT    : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    V_OUT    : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    GA_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    GW_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
-architecture dnc_output_vector_architecture of dnc_output_vector is
+architecture dnc_write_interface_vector_architecture of dnc_write_interface_vector is
 
   -----------------------------------------------------------------------
   -- Types

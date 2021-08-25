@@ -46,7 +46,7 @@ use work.ntm_math_pkg.all;
 use work.dnc_core_pkg.all;
 use work.ntm_lstm_controller_pkg.all;
 
-entity dnc_interface_vector is
+entity dnc_read_interface_vector is
   generic (
     X : integer := 64;
     Y : integer := 64;
@@ -66,14 +66,21 @@ entity dnc_interface_vector is
     READY : out std_logic;
 
     -- DATA
+    WK_IN    : out std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    WBETA_IN : out std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+    WF_IN    : out std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+    WPI_IN   : out std_logic_arithmetic_vector_matrix(L-1 downto 0)(2 downto 0)(DATA_SIZE-1 downto 0);
+
     H_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    Y_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+    K_OUT    : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    F_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    PI_OUT   : out std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 
-architecture dnc_interface_vector_architecture of dnc_interface_vector is
+architecture dnc_read_interface_vector_architecture of dnc_read_interface_vector is
 
   -----------------------------------------------------------------------
   -- Types
