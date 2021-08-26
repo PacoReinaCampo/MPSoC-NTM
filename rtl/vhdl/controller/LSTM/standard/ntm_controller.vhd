@@ -171,11 +171,10 @@ architecture ntm_controller_architecture of ntm_controller is
   signal ready_controller_output_vector : std_logic;
 
   -- DATA
-  signal r_in_controller_output_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal nu_in_controller_output_vector  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_controller_output_vector   : std_logic_arithmetic_vector_matrix(Y-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal h_in_controller_output_vector   : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_controller_output_vector   : std_logic_arithmetic_vector_matrix(Y-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
   signal modulo_controller_output_vector : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal y_out_controller_output_vector  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal nu_out_controller_output_vector : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -346,7 +345,7 @@ begin
   controller_output_vector : ntm_controller_output_vector
     generic map (
       Y => Y,
-      W => W,
+      L => L,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -360,13 +359,12 @@ begin
       READY => ready_controller_output_vector,
 
       -- DATA
-      R_IN  => r_in_controller_output_vector,
-      NU_IN => nu_in_controller_output_vector,
+      H_IN  => h_in_controller_output_vector,
 
       W_IN => w_in_controller_output_vector,
 
       MODULO => modulo_controller_output_vector,
-      Y_OUT  => y_out_controller_output_vector
+      NU_OUT => nu_out_controller_output_vector
     );
 
 end architecture;

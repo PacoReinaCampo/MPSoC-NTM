@@ -214,7 +214,7 @@ package ntm_lstm_controller_pkg is
   component ntm_controller_output_vector is
     generic (
       Y : integer := 64;
-      W : integer := 64;
+      L : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -228,13 +228,12 @@ package ntm_lstm_controller_pkg is
       READY : out std_logic;
 
       -- DATA
-      R_IN  : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      NU_IN : in std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+      H_IN  : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
-      W_IN : in std_logic_arithmetic_vector_matrix(Y-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      W_IN : in std_logic_arithmetic_vector_matrix(Y-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
       MODULO : in  std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-      Y_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+      NU_OUT : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
 

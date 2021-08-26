@@ -108,11 +108,10 @@ architecture dnc_top_architecture of dnc_top is
   signal ready_output_vector : std_logic;
 
   -- DATA
-  signal wy_in_output_vector : std_logic_arithmetic_vector_matrix(Y-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal wr_in_output_vector : std_logic_arithmetic_vector_matrix(Y-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-
-  signal H_in_output_vector : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
   signal r_in_output_vector : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal nu_in_output_vector : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  signal w_in_output_vector : std_logic_arithmetic_vector_matrix(Y-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
   signal modulo_output_vector : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
   signal y_out_output_vector  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
@@ -346,11 +345,10 @@ begin
       READY => ready_output_vector,
 
       -- DATA
-      WY_IN => wy_in_output_vector,
-      WR_IN => wr_in_output_vector,
+      R_IN  => r_in_output_vector,
+      NU_IN => nu_in_output_vector,
 
-      R_IN => r_in_output_vector,
-      H_IN => h_in_output_vector,
+      W_IN => w_in_output_vector,
 
       MODULO => modulo_output_vector,
       Y_OUT  => y_out_output_vector

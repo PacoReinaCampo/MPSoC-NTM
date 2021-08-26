@@ -729,11 +729,10 @@ package dnc_core_pkg is
       READY : out std_logic;
 
       -- DATA
-      WY_IN : in std_logic_arithmetic_vector_matrix(Y-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
-      WR_IN : in std_logic_arithmetic_vector_matrix(Y-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      R_IN  : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      NU_IN : in std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
 
-      H_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-      R_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      W_IN : in std_logic_arithmetic_vector_matrix(Y-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
       MODULO : in  std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
       Y_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)

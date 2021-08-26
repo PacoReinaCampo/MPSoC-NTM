@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 entity ntm_controller_output_vector is
   generic (
     Y : integer := 64;
-    W : integer := 64;
+    L : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -61,13 +61,12 @@ entity ntm_controller_output_vector is
     READY : out std_logic;
 
     -- DATA
-    R_IN  : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    NU_IN : in std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+    H_IN  : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
-    W_IN : in std_logic_arithmetic_vector_matrix(Y-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    W_IN : in std_logic_arithmetic_vector_matrix(Y-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
 
     MODULO : in  std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    Y_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+    NU_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -105,8 +104,8 @@ architecture ntm_controller_output_vector_architecture of ntm_controller_output_
 
   -- DATA
   signal modulo_vector_product    : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_product : std_logic_arithmetic_vector_matrix(Y-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_product : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_product : std_logic_arithmetic_vector_matrix(Y-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_product : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
   signal data_out_vector_product  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
@@ -142,7 +141,7 @@ begin
   ntm_vector_product_i : ntm_vector_product
     generic map (
       I => Y,
-      J => W,
+      J => L,
 
       DATA_SIZE => DATA_SIZE
     )
