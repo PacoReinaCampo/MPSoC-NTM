@@ -105,6 +105,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- f(t;i) = L(t)·w(t-1;r,i)
+
   ntm_vector_product_i : ntm_vector_product
     generic map (
       I => N,

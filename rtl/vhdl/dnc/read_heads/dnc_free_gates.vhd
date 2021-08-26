@@ -98,6 +98,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- f(t;i) = sigmoid(f^(t;i))
+
   ntm_scalar_logistic_function_i : ntm_scalar_logistic_function
     generic map (
       DATA_SIZE => DATA_SIZE

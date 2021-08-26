@@ -118,6 +118,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- M(t) = M(t-1) o (E - w(t;w)·transpose(e(t))) + w(t;w)·transpose(v(t))
+
   ntm_matrix_transpose_i : ntm_matrix_transpose
     generic map (
       I => N,

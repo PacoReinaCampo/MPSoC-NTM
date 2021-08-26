@@ -119,6 +119,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- w(t;w) = g(t;w)·(g(t;a)·a(t) + (1 - g(t;a))·c(t;w))
+
   ntm_vector_adder_i : ntm_vector_adder
     generic map (
       I => N,

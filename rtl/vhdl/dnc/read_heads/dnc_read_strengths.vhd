@@ -98,6 +98,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- beta(t;i) = oneplus(beta^(t;i))
+
   ntm_scalar_oneplus_function_i : ntm_scalar_oneplus_function
     generic map (
       DATA_SIZE => DATA_SIZE

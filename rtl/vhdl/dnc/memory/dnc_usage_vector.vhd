@@ -119,6 +119,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- u(t) = (u(t-1) + w(t-1;w) - u(t-1) o w(t-1;w)) o psi(t)
+
   ntm_vector_adder_i : ntm_vector_adder
     generic map (
       I => N,

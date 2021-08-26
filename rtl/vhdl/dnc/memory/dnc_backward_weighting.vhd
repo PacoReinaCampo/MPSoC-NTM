@@ -115,6 +115,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- b(t;i) = transpose(L(t))·w(t-1;r,i)
+
   ntm_matrix_transpose_i : ntm_matrix_transpose
     generic map (
       I => N,

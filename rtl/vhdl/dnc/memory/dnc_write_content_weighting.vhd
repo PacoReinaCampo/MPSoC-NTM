@@ -108,6 +108,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- c(t;w) = C(M(t-1),k(t;w),beta(t;w))
+
   dnc_content_based_addressing_i : dnc_content_based_addressing
     generic map (
       I => N,

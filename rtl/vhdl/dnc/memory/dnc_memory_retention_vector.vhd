@@ -127,6 +127,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- psi(t) = multiplication(1 - f(t;i)·w(t-1;r,i))[i in 1 to R]
+
   ntm_vector_multiplication_function_i : ntm_vector_multiplication_function
     generic map (
       I => N,

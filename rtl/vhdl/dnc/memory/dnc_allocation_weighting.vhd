@@ -126,6 +126,8 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+  
+  -- a(t)[phi(t)[j]] = (1 - u(t)[phi(t)[j]])·multiplication(u(t)[phi(t)[j]])[i in 1 to j-1]
 
   ntm_vector_multiplication_function_i : ntm_vector_multiplication_function
     generic map (

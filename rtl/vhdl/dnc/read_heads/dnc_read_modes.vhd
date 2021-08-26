@@ -99,6 +99,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- pi(t;i) = softmax(pi^(t;i))
+
   ntm_vector_softmax_function_i : ntm_vector_softmax_function
     generic map (
       I => 3,
