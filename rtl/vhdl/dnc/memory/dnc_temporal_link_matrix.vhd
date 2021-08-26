@@ -59,15 +59,23 @@ entity dnc_temporal_link_matrix is
     START : in  std_logic;
     READY : out std_logic;
 
+    L_IN_ENABLE : in std_logic;
+
+    WR_IN_ENABLE : in std_logic;
+    WW_IN_ENABLE : in std_logic;
+    P_IN_ENABLE  : in std_logic;
+
+    L_OUT_ENABLE : out std_logic;
+
     -- DATA
-    L_IN : in std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
+    L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    WR_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    WW_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    P_IN  : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+    WR_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    WW_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    P_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    L_OUT  : out std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    L_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 

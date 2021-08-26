@@ -61,13 +61,15 @@ entity dnc_read_content_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
+    C_OUT_ENABLE : out std_logic;
+
     -- DATA
     K_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
     M_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
     BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    C_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    C_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 

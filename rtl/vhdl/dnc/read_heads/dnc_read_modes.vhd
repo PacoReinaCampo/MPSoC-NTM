@@ -57,6 +57,9 @@ entity dnc_read_modes is
     START : in  std_logic;
     READY : out std_logic;
 
+    PI_IN_ENABLE  : in  std_logic;
+    PI_OUT_ENABLE : out std_logic;
+
     -- DATA
     PI_IN : in std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
 

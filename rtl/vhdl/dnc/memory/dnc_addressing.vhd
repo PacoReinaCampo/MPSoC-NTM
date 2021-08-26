@@ -91,170 +91,234 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal start_allocation_weighting : std_logic;
   signal ready_allocation_weighting : std_logic;
 
+  signal phi_in_enable_allocation_weighting : std_logic;
+  signal u_in_enable_allocation_weighting   : std_logic;
+
+  signal a_out_enable_allocation_weighting : std_logic;
+
   -- DATA
-  signal modulo_allocation_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal phi_in_allocation_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal u_in_allocation_weighting   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal a_out_allocation_weighting  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_allocation_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal phi_in_allocation_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal u_in_allocation_weighting   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal a_out_allocation_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- BACKWARD WEIGHTING
   -- CONTROL
   signal start_backward_weighting : std_logic;
   signal ready_backward_weighting : std_logic;
 
+  signal l_in_enable_backward_weighting : std_logic;
+  signal w_in_enable_backward_weighting : std_logic;
+
+  signal b_out_enable_backward_weighting : std_logic;
+
   -- DATA
-  signal modulo_backward_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal l_in_backward_weighting   : std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_backward_weighting   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal b_out_backward_weighting  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_backward_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal l_in_backward_weighting   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_backward_weighting   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal b_out_backward_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- FORWARD WEIGHTING
   -- CONTROL
   signal start_forward_weighting : std_logic;
   signal ready_forward_weighting : std_logic;
 
+  signal l_in_enable_forward_weighting : std_logic;
+  signal w_in_enable_forward_weighting : std_logic;
+
+  signal f_out_enable_forward_weighting : std_logic;
+
   -- DATA
-  signal l_in_forward_weighting : std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal l_in_forward_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal w_in_forward_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_forward_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_forward_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal f_out_forward_weighting  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_forward_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal f_out_forward_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MEMORY MATRIX
   -- CONTROL
   signal start_memory_matrix : std_logic;
   signal ready_memory_matrix : std_logic;
 
-  -- DATA
-  signal m_in_memory_matrix : std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_enable_memory_matrix : std_logic;
+  signal w_in_enable_memory_matrix : std_logic;
 
-  signal w_in_memory_matrix : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_out_enable_memory_matrix : std_logic;
+
+  -- DATA
+  signal m_in_memory_matrix : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+
+  signal w_in_memory_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
   signal v_in_memory_matrix : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
   signal e_in_memory_matrix : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  signal modulo_memory_matrix : std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal m_out_memory_matrix  : std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_memory_matrix : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_out_memory_matrix  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- MEMORY RETENTION VECTOR
   -- CONTROL
   signal start_memory_retention_vector : std_logic;
   signal ready_memory_retention_vector : std_logic;
 
-  -- DATA
-  signal f_in_memory_retention_vector : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_memory_retention_vector : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal f_in_enable_memory_retention_vector : std_logic;
+  signal w_in_enable_memory_retention_vector : std_logic;
 
-  signal modulo_memory_retention_vector  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal PSI_OUT_memory_retention_vector : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal psi_out_enable_memory_retention_vector : std_logic;
+
+  -- DATA
+  signal f_in_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal modulo_memory_retention_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal PSI_OUT_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- PRECEDENCE WEIGHTING
   -- CONTROL
   signal start_precedence_weighting : std_logic;
   signal ready_precedence_weighting : std_logic;
 
-  -- DATA
-  signal w_in_precedence_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal p_in_precedence_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_enable_precedence_weighting : std_logic;
+  signal p_in_enable_precedence_weighting : std_logic;
 
-  signal modulo_precedence_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal p_out_precedence_weighting  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal p_out_enable_precedence_weighting : std_logic;
+
+  -- DATA
+  signal w_in_precedence_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal p_in_precedence_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal modulo_precedence_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal p_out_precedence_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- READ CONTENT WEIGHTING
   -- CONTROL
   signal start_read_content_weighting : std_logic;
   signal ready_read_content_weighting : std_logic;
 
+  signal c_out_enable_read_content_weighting : std_logic;
+
   -- DATA
   signal k_in_read_content_weighting    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
   signal m_in_read_content_weighting    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
   signal beta_in_read_content_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_read_content_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal c_out_read_content_weighting  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_read_content_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal c_out_read_content_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- READ VECTORS
   -- CONTROL
   signal start_read_vectors : std_logic;
   signal ready_read_vectors : std_logic;
 
+  signal m_in_enable_read_vectors : std_logic;
+  signal w_in_enable_read_vectors : std_logic;
+
   -- DATA
-  signal m_in_read_vectors : std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_read_vectors : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  signal w_in_read_vectors : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_read_vectors : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_read_vectors : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_out_read_vectors  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_read_vectors : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal r_out_read_vectors  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
   -- READ WEIGHTING
   -- CONTROL
   signal start_read_weighting : std_logic;
   signal ready_read_weighting : std_logic;
 
+  signal b_in_enable_read_weighting : std_logic;
+  signal c_in_enable_read_weighting : std_logic;
+  signal f_in_enable_read_weighting : std_logic;
+
+  signal w_out_enable_read_weighting : std_logic;
+
   -- DATA
   signal pi_in_read_weighting : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
 
-  signal b_in_read_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal c_in_read_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal f_in_read_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal b_in_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal c_in_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal f_in_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_read_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_out_read_weighting  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_out_read_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- TEMPORAL LINK MATRIX
   -- CONTROL
   signal start_temporal_link_matrix : std_logic;
   signal ready_temporal_link_matrix : std_logic;
 
+  signal l_in_enable_temporal_link_matrix : std_logic;
+
+  signal wr_in_enable_temporal_link_matrix : std_logic;
+  signal ww_in_enable_temporal_link_matrix : std_logic;
+  signal p_in_enable_temporal_link_matrix  : std_logic;
+
+  signal l_out_enable_temporal_link_matrix : std_logic;
+
   -- DATA
-  signal l_in_temporal_link_matrix : std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal l_in_temporal_link_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal wr_in_temporal_link_matrix : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal ww_in_temporal_link_matrix : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal p_in_temporal_link_matrix  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal wr_in_temporal_link_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal ww_in_temporal_link_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal p_in_temporal_link_matrix  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_temporal_link_matrix : std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal l_out_temporal_link_matrix  : std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_temporal_link_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal l_out_temporal_link_matrix  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- USAGE VECTOR
   -- CONTROL
   signal start_usage_vector : std_logic;
   signal ready_usage_vector : std_logic;
 
-  -- DATA
-  signal u_in_usage_vector   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_usage_vector   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal psi_in_usage_vector : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal u_in_enable_usage_vector   : std_logic;
+  signal w_in_enable_usage_vector   : std_logic;
+  signal psi_in_enable_usage_vector : std_logic;
 
-  signal modulo_usage_vector : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal u_out_usage_vector  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal u_out_enable_usage_vector : std_logic;
+
+  -- DATA
+  signal u_in_usage_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_usage_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal psi_in_usage_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal modulo_usage_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal u_out_usage_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE CONTENT WEIGHTING
   -- CONTROL
   signal start_write_content_weighting : std_logic;
   signal ready_write_content_weighting : std_logic;
 
+  signal beta_in_enable_write_weighting : std_logic;
+
+  signal c_out_enable_write_weighting : std_logic;
+
   -- DATA
   signal k_in_write_content_weighting    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
   signal m_in_write_content_weighting    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
   signal beta_in_write_content_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_write_content_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal c_out_write_content_weighting  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_write_content_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal c_out_write_content_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE WEIGHTING
   -- CONTROL
   signal start_write_weighting : std_logic;
   signal ready_write_weighting : std_logic;
 
+  signal a_in_enable_write_weighting : std_logic;
+  signal c_in_enable_write_weighting : std_logic;
+
+  signal w_out_enable_write_weighting : std_logic;
+
   -- DATA
-  signal a_in_write_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal c_in_write_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal a_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal c_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal g_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_write_weighting : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_out_write_weighting  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_out_write_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -277,6 +341,11 @@ begin
       -- CONTROL
       START => start_allocation_weighting,
       READY => ready_allocation_weighting,
+
+      PHI_IN_ENABLE => phi_in_enable_allocation_weighting,
+      U_IN_ENABLE   => u_in_enable_allocation_weighting,
+
+      A_OUT_ENABLE => a_out_enable_allocation_weighting,
 
       -- DATA
       PHI_IN => phi_in_allocation_weighting,
@@ -301,6 +370,11 @@ begin
       -- CONTROL
       START => start_backward_weighting,
       READY => ready_backward_weighting,
+
+      L_IN_ENABLE => l_in_enable_backward_weighting,
+      W_IN_ENABLE => w_in_enable_backward_weighting,
+
+      B_OUT_ENABLE => b_out_enable_backward_weighting,
 
       -- DATA
       L_IN => l_in_backward_weighting,
@@ -327,6 +401,11 @@ begin
       START => start_forward_weighting,
       READY => ready_forward_weighting,
 
+      L_IN_ENABLE => l_in_enable_forward_weighting,
+      W_IN_ENABLE => w_in_enable_forward_weighting,
+
+      F_OUT_ENABLE => f_out_enable_forward_weighting,
+
       -- DATA
       L_IN => l_in_forward_weighting,
 
@@ -352,6 +431,11 @@ begin
       -- CONTROL
       START => start_memory_matrix,
       READY => ready_memory_matrix,
+
+      M_IN_ENABLE => m_in_enable_memory_matrix,
+      W_IN_ENABLE => w_in_enable_memory_matrix,
+
+      M_OUT_ENABLE => m_out_enable_memory_matrix,
 
       -- DATA
       M_IN => m_in_memory_matrix,
@@ -380,6 +464,11 @@ begin
       START => start_memory_retention_vector,
       READY => ready_memory_retention_vector,
 
+      F_IN_ENABLE => f_in_enable_memory_retention_vector,
+      W_IN_ENABLE => w_in_enable_memory_retention_vector,
+
+      PSI_OUT_ENABLE => psi_out_enable_memory_retention_vector,
+
       -- DATA
       F_IN => f_in_memory_retention_vector,
       W_IN => w_in_memory_retention_vector,
@@ -403,6 +492,11 @@ begin
       -- CONTROL
       START => start_precedence_weighting,
       READY => ready_precedence_weighting,
+
+      W_IN_ENABLE => w_in_enable_precedence_weighting,
+      P_IN_ENABLE => p_in_enable_precedence_weighting,
+
+      P_OUT_ENABLE => p_out_enable_precedence_weighting,
 
       -- DATA
       W_IN => w_in_precedence_weighting,
@@ -428,6 +522,8 @@ begin
       -- CONTROL
       START => start_read_content_weighting,
       READY => ready_read_content_weighting,
+
+      C_OUT_ENABLE => c_out_enable_read_content_weighting,
 
       -- DATA
       K_IN    => k_in_read_content_weighting,
@@ -455,6 +551,9 @@ begin
       START => start_read_vectors,
       READY => ready_read_vectors,
 
+      M_IN_ENABLE => m_in_enable_read_vectors,
+      W_IN_ENABLE => w_in_enable_read_vectors,
+
       -- DATA
       M_IN => m_in_read_vectors,
 
@@ -479,6 +578,12 @@ begin
       -- CONTROL
       START => start_read_weighting,
       READY => ready_read_weighting,
+
+      B_IN_ENABLE => b_in_enable_read_weighting,
+      C_IN_ENABLE => c_in_enable_read_weighting,
+      F_IN_ENABLE => f_in_enable_read_weighting,
+
+      W_OUT_ENABLE => w_out_enable_read_weighting,
 
       -- DATA
       PI_IN => pi_in_read_weighting,
@@ -507,6 +612,14 @@ begin
       START => start_temporal_link_matrix,
       READY => ready_temporal_link_matrix,
 
+      L_IN_ENABLE => l_in_enable_temporal_link_matrix,
+
+      WR_IN_ENABLE => wr_in_enable_temporal_link_matrix,
+      WW_IN_ENABLE => ww_in_enable_temporal_link_matrix,
+      P_IN_ENABLE  => p_in_enable_temporal_link_matrix,
+
+      L_OUT_ENABLE => l_out_enable_temporal_link_matrix,
+
       -- DATA
       L_IN => l_in_temporal_link_matrix,
 
@@ -534,6 +647,12 @@ begin
       START => start_usage_vector,
       READY => ready_usage_vector,
 
+      U_IN_ENABLE   => u_in_enable_usage_vector,
+      W_IN_ENABLE   => w_in_enable_usage_vector,
+      PSI_IN_ENABLE => psi_in_enable_usage_vector,
+
+      U_OUT_ENABLE => u_out_enable_usage_vector,
+
       -- DATA
       U_IN   => u_in_usage_vector,
       W_IN   => w_in_usage_vector,
@@ -560,6 +679,10 @@ begin
       START => start_write_content_weighting,
       READY => ready_write_content_weighting,
 
+      BETA_IN_ENABLE => beta_in_enable_write_weighting,
+
+      C_OUT_ENABLE => c_out_enable_write_weighting,
+
       -- DATA
       K_IN    => k_in_write_content_weighting,
       M_IN    => m_in_write_content_weighting,
@@ -584,6 +707,11 @@ begin
       -- CONTROL
       START => start_write_weighting,
       READY => ready_write_weighting,
+
+      A_IN_ENABLE => a_in_enable_write_weighting,
+      C_IN_ENABLE => c_in_enable_write_weighting,
+
+      W_OUT_ENABLE => w_out_enable_write_weighting,
 
       -- DATA
       A_IN => a_in_write_weighting,

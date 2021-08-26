@@ -66,10 +66,10 @@ entity dnc_read_interface_vector is
     READY : out std_logic;
 
     -- DATA
-    WK_IN    : out std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    WBETA_IN : out std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-    WF_IN    : out std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-    WPI_IN   : out std_logic_arithmetic_vector_matrix(L-1 downto 0)(2 downto 0)(DATA_SIZE-1 downto 0);
+    WK_IN    : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    WBETA_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+    WF_IN    : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+    WPI_IN   : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(2 downto 0)(DATA_SIZE-1 downto 0);
 
     H_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
 

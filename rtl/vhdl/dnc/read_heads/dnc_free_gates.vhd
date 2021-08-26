@@ -57,6 +57,9 @@ entity dnc_free_gates is
     START : in  std_logic;
     READY : out std_logic;
 
+    F_IN_ENABLE  : in  std_logic;
+    F_OUT_ENABLE : out std_logic;
+
     -- DATA
     F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 

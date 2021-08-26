@@ -59,6 +59,9 @@ entity dnc_read_keys is
     START : in  std_logic;
     READY : out std_logic;
 
+    K_IN_ENABLE  : in  std_logic;
+    K_OUT_ENABLE : out std_logic;
+
     -- DATA
     K_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 

@@ -97,12 +97,17 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      -- DATA
-      PHI_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      U_IN   : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      PHI_IN_ENABLE : in std_logic;
+      U_IN_ENABLE   : in std_logic;
 
-      MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      A_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+      A_OUT_ENABLE : out std_logic;
+
+      -- DATA
+      PHI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      U_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      A_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -121,13 +126,18 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
+      L_IN_ENABLE : in std_logic;
+      W_IN_ENABLE : in std_logic;
+
+      B_OUT_ENABLE : out std_logic;
+
       -- DATA
-      L_IN : in std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      W_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      B_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      B_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -146,13 +156,18 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
+      L_IN_ENABLE : in std_logic;
+      W_IN_ENABLE : in std_logic;
+
+      F_OUT_ENABLE : out std_logic;
+
       -- DATA
-      L_IN : in std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      W_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      F_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      F_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -172,15 +187,20 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      -- DATA
-      M_IN : in std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      M_IN_ENABLE : in std_logic;
+      W_IN_ENABLE : in std_logic;
 
-      W_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      M_OUT_ENABLE : out std_logic;
+
+      -- DATA
+      M_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+
+      W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       V_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
       E_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      M_OUT  : out std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO : in  std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      M_OUT  : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -199,12 +219,17 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      -- DATA
-      F_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      W_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      F_IN_ENABLE : in std_logic;
+      W_IN_ENABLE : in std_logic;
 
-      MODULO  : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      PSI_OUT : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+      PSI_OUT_ENABLE : out std_logic;
+
+      -- DATA
+      F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      MODULO  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      PSI_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -223,12 +248,17 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      -- DATA
-      W_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      P_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      W_IN_ENABLE : in std_logic;
+      P_IN_ENABLE : in std_logic;
 
-      MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      P_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+      P_OUT_ENABLE : out std_logic;
+
+      -- DATA
+      W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      P_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      P_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -248,13 +278,15 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
+      C_OUT_ENABLE : out std_logic;
+
       -- DATA
       K_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
       M_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
       BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      C_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      C_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -274,13 +306,16 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
+      M_IN_ENABLE : in std_logic;
+      W_IN_ENABLE : in std_logic;
+
       -- DATA
-      M_IN : in std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      M_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
-      W_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      R_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO : in  std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      R_OUT  : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -299,15 +334,21 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
+      B_IN_ENABLE : in std_logic;
+      C_IN_ENABLE : in std_logic;
+      F_IN_ENABLE : in std_logic;
+
+      W_OUT_ENABLE : out std_logic;
+
       -- DATA
       PI_IN : in std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
 
-      B_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      C_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      F_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      W_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      W_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -326,15 +367,23 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
+      L_IN_ENABLE : in std_logic;
+
+      WR_IN_ENABLE : in std_logic;
+      WW_IN_ENABLE : in std_logic;
+      P_IN_ENABLE  : in std_logic;
+
+      L_OUT_ENABLE : out std_logic;
+
       -- DATA
-      L_IN : in std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      WR_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      WW_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      P_IN  : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      WR_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      WW_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      P_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      L_OUT  : out std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      L_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -353,13 +402,19 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      -- DATA
-      U_IN   : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      W_IN   : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      PSI_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      U_IN_ENABLE   : in std_logic;
+      W_IN_ENABLE   : in std_logic;
+      PSI_IN_ENABLE : in std_logic;
 
-      MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      U_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+      U_OUT_ENABLE : out std_logic;
+
+      -- DATA
+      U_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+      W_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+      PSI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      U_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -379,13 +434,17 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
+      BETA_IN_ENABLE : in std_logic;
+
+      C_OUT_ENABLE : out std_logic;
+
       -- DATA
       K_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
       M_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
       BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      C_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      C_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -404,14 +463,19 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
+      A_IN_ENABLE : in std_logic;
+      C_IN_ENABLE : in std_logic;
+
+      W_OUT_ENABLE : out std_logic;
+
       -- DATA
-      A_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      C_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+      A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       G_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-      W_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      W_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -469,6 +533,9 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
+      F_IN_ENABLE  : in  std_logic;
+      F_OUT_ENABLE : out std_logic;
+
       -- DATA
       F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -492,6 +559,9 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
+      K_IN_ENABLE  : in  std_logic;
+      K_OUT_ENABLE : out std_logic;
+
       -- DATA
       K_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
@@ -513,6 +583,9 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
+      PI_IN_ENABLE  : in  std_logic;
+      PI_OUT_ENABLE : out std_logic;
+
       -- DATA
       PI_IN : in std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
 
@@ -533,6 +606,9 @@ package dnc_core_pkg is
       -- CONTROL
       START : in  std_logic;
       READY : out std_logic;
+
+      BETA_IN_ENABLE  : in  std_logic;
+      BETA_OUT_ENABLE : out std_logic;
 
       -- DATA
       BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

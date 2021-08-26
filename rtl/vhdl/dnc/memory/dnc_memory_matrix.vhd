@@ -60,15 +60,20 @@ entity dnc_memory_matrix is
     START : in  std_logic;
     READY : out std_logic;
 
-    -- DATA
-    M_IN : in std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    M_IN_ENABLE : in std_logic;
+    W_IN_ENABLE : in std_logic;
 
-    W_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+    M_OUT_ENABLE : out std_logic;
+
+    -- DATA
+    M_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+
+    W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     V_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
     E_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    M_OUT  : out std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO : in  std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    M_OUT  : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 

@@ -60,10 +60,13 @@ entity dnc_read_vectors is
     START : in  std_logic;
     READY : out std_logic;
 
-    -- DATA
-    M_IN : in std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    M_IN_ENABLE : in std_logic;
+    W_IN_ENABLE : in std_logic;
 
-    W_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+    -- DATA
+    M_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+
+    W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     MODULO : in  std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
     R_OUT  : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0)

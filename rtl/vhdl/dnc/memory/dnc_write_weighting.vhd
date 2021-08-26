@@ -59,14 +59,19 @@ entity dnc_write_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
+    A_IN_ENABLE : in std_logic;
+    C_IN_ENABLE : in std_logic;
+
+    W_OUT_ENABLE : out std_logic;
+
     -- DATA
-    A_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    C_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+    A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     G_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    W_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    W_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 

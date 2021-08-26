@@ -122,6 +122,9 @@ architecture dnc_top_architecture of dnc_top is
 
   -- FREE GATES
   -- CONTROL
+  signal f_in_enable_free_gates  : std_logic;
+  signal f_out_enable_free_gates : std_logic;
+
   signal start_free_gates : std_logic;
   signal ready_free_gates : std_logic;
 
@@ -132,6 +135,9 @@ architecture dnc_top_architecture of dnc_top is
 
   -- READ KEYS
   -- CONTROL
+  signal k_in_enable_free_gates  : std_logic;
+  signal k_out_enable_free_gates : std_logic;
+
   signal start_read_keys : std_logic;
   signal ready_read_keys : std_logic;
 
@@ -142,6 +148,9 @@ architecture dnc_top_architecture of dnc_top is
 
   -- READ MODES
   -- CONTROL
+  signal pi_in_enable_free_gates  : std_logic;
+  signal pi_out_enable_free_gates : std_logic;
+
   signal start_read_modes : std_logic;
   signal ready_read_modes : std_logic;
 
@@ -152,6 +161,9 @@ architecture dnc_top_architecture of dnc_top is
 
   -- READ STRENGTHS
   -- CONTROL
+  signal beta_in_enable_free_gates  : std_logic;
+  signal beta_out_enable_free_gates : std_logic;
+
   signal start_read_strengths : std_logic;
   signal ready_read_strengths : std_logic;
 
@@ -361,6 +373,7 @@ begin
   -- FREE GATES
   free_gates : dnc_free_gates
     generic map (
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -371,6 +384,9 @@ begin
       -- CONTROL
       START => start_free_gates,
       READY => ready_free_gates,
+
+      F_IN_ENABLE  => f_in_enable_free_gates,
+      F_OUT_ENABLE => f_out_enable_free_gates,
 
       -- DATA
       F_IN => f_in_free_gates,
@@ -395,6 +411,9 @@ begin
       START => start_read_keys,
       READY => ready_read_keys,
 
+      K_IN_ENABLE  => k_in_enable_free_gates,
+      K_OUT_ENABLE => k_out_enable_free_gates,
+
       -- DATA
       K_IN => k_in_read_keys,
 
@@ -416,6 +435,9 @@ begin
       START => start_read_modes,
       READY => ready_read_modes,
 
+      PI_IN_ENABLE  => pi_in_enable_free_gates,
+      PI_OUT_ENABLE => pi_out_enable_free_gates,
+
       -- DATA
       PI_IN => pi_in_read_modes,
 
@@ -436,6 +458,9 @@ begin
       -- CONTROL
       START => start_read_strengths,
       READY => ready_read_strengths,
+
+      BETA_IN_ENABLE  => beta_in_enable_free_gates,
+      BETA_OUT_ENABLE => beta_out_enable_free_gates,
 
       -- DATA
       BETA_IN => beta_in_read_strengths,

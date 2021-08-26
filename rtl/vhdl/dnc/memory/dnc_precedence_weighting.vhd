@@ -59,12 +59,17 @@ entity dnc_precedence_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    -- DATA
-    W_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    P_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+    W_IN_ENABLE : in std_logic;
+    P_IN_ENABLE : in std_logic;
 
-    MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    P_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+    P_OUT_ENABLE : out std_logic;
+
+    -- DATA
+    W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    P_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    P_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 

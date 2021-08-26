@@ -59,15 +59,21 @@ entity dnc_read_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
+    B_IN_ENABLE : in std_logic;
+    C_IN_ENABLE : in std_logic;
+    F_IN_ENABLE : in std_logic;
+
+    W_OUT_ENABLE : out std_logic;
+
     -- DATA
     PI_IN : in std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
 
-    B_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    C_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    F_IN : in std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+    B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    W_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    W_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
