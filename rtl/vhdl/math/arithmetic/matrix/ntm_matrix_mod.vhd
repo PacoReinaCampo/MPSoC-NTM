@@ -58,12 +58,12 @@ entity ntm_matrix_mod is
 
     -- CONTROL
     START : in  std_logic;
-    READY : out std_logic_matrix(I-1 downto 0)(J-1 downto 0);
+    READY : out std_logic;
 
     -- DATA
-    MODULO   : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -73,122 +73,18 @@ architecture ntm_matrix_mod_architecture of ntm_matrix_mod is
   -- Types
   -----------------------------------------------------------------------
 
-  type mod_ctrl_fsm is (
-    STARTER_ST,  -- STEP 0
-    ENDER_ST     -- STEP 1
-  );
-
-  type mod_ctrl_fsm_matrix is array (I-1 downto 0, J-1 downto 0) of mod_ctrl_fsm;
-
-  type std_logic_matrix_of_vector is array (I-1 downto 0, J-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
-
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
-
-  -- Finite State Machine
-  signal mod_ctrl_fsm_state : mod_ctrl_fsm_matrix;
-
-  -- Internal Signals
-  signal arithmetic_int : std_logic_matrix_of_vector;
 
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
-
-  Y_LABEL : for i in J-1 downto 0 generate
-    X_LABEL : for j in I-1 downto 0 generate
-
-      ctrl_fsm : process(CLK, RST)
-      begin
-        if (RST = '0') then
-          -- Data Outputs
-          DATA_OUT(i)(j) <= ZERO;
-
-          -- Control Outputs
-          READY(i)(j) <= '0';
-
-          -- Assignations
-          arithmetic_int(i,j) <= ZERO;
-
-        elsif (rising_edge(CLK)) then
-
-          case mod_ctrl_fsm_state(i,j) is
-            when STARTER_ST =>          -- STEP 0
-              -- Control Outputs
-              READY(i)(j) <= '0';
-
-              if (START = '1') then
-                -- Assignations
-                arithmetic_int(i,j) <= DATA_IN(i)(j);
-
-                -- FSM Control
-                mod_ctrl_fsm_state(i,j) <= ENDER_ST;
-              end if;
-
-            when ENDER_ST =>            -- STEP 1
-
-              if (unsigned(MODULO(i)(j)) > unsigned(ZERO)) then
-                if (unsigned(arithmetic_int(i,j)) > unsigned(ZERO)) then
-                  if (unsigned(arithmetic_int(i,j)) = unsigned(MODULO(i)(j))) then
-                    -- Data Outputs
-                    DATA_OUT(i)(j) <= ZERO;
-
-                    -- Control Outputs
-                    READY(i)(j) <= '1';
-
-                    -- FSM Control
-                    mod_ctrl_fsm_state(i,j) <= STARTER_ST;
-                  elsif (unsigned(arithmetic_int(i,j)) < unsigned(MODULO(i)(j))) then
-                    -- Data Outputs
-                    DATA_OUT(i)(j) <= arithmetic_int(i,j);
-
-                    -- Control Outputs
-                    READY(i)(j) <= '1';
-
-                    -- FSM Control
-                    mod_ctrl_fsm_state(i,j) <= STARTER_ST;
-                  else
-                    -- Assignations
-                    arithmetic_int(i,j) <= std_logic_vector(unsigned(arithmetic_int(i,j)) - unsigned(MODULO(i)(j)));
-                  end if;
-                elsif (unsigned(arithmetic_int(i,j)) = unsigned(ZERO)) then
-                  -- Data Outputs
-                  DATA_OUT(i)(j) <= ZERO;
-
-                  -- Control Outputs
-                  READY(i)(j) <= '1';
-
-                  -- FSM Control
-                  mod_ctrl_fsm_state(i,j) <= STARTER_ST;
-                end if;
-              elsif (unsigned(MODULO(i)(j)) = unsigned(ZERO)) then
-                -- Data Outputs
-                DATA_OUT(i)(j) <= arithmetic_int(i,j);
-
-                -- Control Outputs
-                READY(i)(j) <= '1';
-
-                -- FSM Control
-                mod_ctrl_fsm_state(i,j) <= STARTER_ST;
-              end if;
-
-            when others =>
-              -- FSM Control
-              mod_ctrl_fsm_state(i,j) <= STARTER_ST;
-          end case;
-        end if;
-      end process;
-
-    end generate X_LABEL;
-  end generate Y_LABEL;
 
 end architecture;

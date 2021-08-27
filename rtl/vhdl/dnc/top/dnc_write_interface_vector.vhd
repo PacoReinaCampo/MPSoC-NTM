@@ -65,15 +65,24 @@ entity dnc_write_interface_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    -- DATA
-    WK_IN    : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    WBETA_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-    WE_IN    : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    WV_IN    : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    WGA_IN   : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-    WGW_IN   : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+    WK_IN_ENABLE    : in std_logic;
+    WBETA_IN_ENABLE : in std_logic;
+    WE_IN_ENABLE    : in std_logic;
+    WV_IN_ENABLE    : in std_logic;
+    WGA_IN_ENABLE   : in std_logic;
+    WGW_IN_ENABLE   : in std_logic;
 
-    H_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+    H_IN_ENABLE : in std_logic;
+
+    -- DATA
+    WK_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    WBETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    WE_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    WV_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    WGA_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+    WGW_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     K_OUT    : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
     BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);

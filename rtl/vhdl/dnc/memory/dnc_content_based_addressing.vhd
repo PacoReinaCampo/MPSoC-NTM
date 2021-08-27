@@ -124,6 +124,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- C(M,k,beta)[i] = softmax(D(k,M)·beta)[i]
+
   ntm_vector_divider_i : ntm_vector_divider
     generic map (
       I => J,

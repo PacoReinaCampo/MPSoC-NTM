@@ -62,7 +62,7 @@ entity ntm_matrix_rank is
 
     -- DATA
     MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
@@ -110,6 +110,8 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- DATA_OUT = rank(DATA_IN)
 
   ntm_scalar_adder_i : ntm_scalar_adder
     generic map (

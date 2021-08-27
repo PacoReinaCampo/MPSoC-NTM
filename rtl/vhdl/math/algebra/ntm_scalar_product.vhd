@@ -111,6 +111,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- DATA_OUT = DATA_A_IN · DATA_B_IN
+
   ntm_scalar_adder_i : ntm_scalar_adder
     generic map (
       DATA_SIZE => DATA_SIZE

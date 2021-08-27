@@ -57,13 +57,13 @@ entity ntm_vector_divider is
 
     -- CONTROL
     START : in  std_logic;
-    READY : out std_logic_vector(I-1 downto 0);
+    READY : out std_logic;
 
     -- DATA
-    MODULO    : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_A_IN : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -73,145 +73,18 @@ architecture ntm_vector_divider_architecture of ntm_vector_divider is
   -- Types
   -----------------------------------------------------------------------
 
-  type divider_ctrl_fsm is (
-    STARTER_ST,          -- STEP 0
-    SET_DATA_B_ST,       -- STEP 1
-    REDUCE_DATA_B_ST,    -- STEP 2
-    SET_PRODUCT_OUT_ST,  -- STEP 3
-    ENDER_ST             -- STEP 4
-  );
-
-  type divider_ctrl_fsm_vector is array (I-1 downto 0) of divider_ctrl_fsm;
-
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
-
-  -- Finite State Machine
-  signal divider_ctrl_fsm_state : divider_ctrl_fsm_vector;
-
-  -- Internal Signals
-  signal u_int : std_logic_vector(DATA_SIZE downto 0);
-  signal v_int : std_logic_vector(DATA_SIZE downto 0);
-
-  signal division_int : std_logic_vector(DATA_SIZE downto 0);
 
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
-
-  X_LABEL : for i in I-1 downto 0 generate
-
-    ctrl_fsm : process(CLK, RST)
-    begin
-      if (RST = '0') then
-        -- Data Outputs
-        DATA_OUT(i) <= ZERO;
-
-        -- Control Outputs
-        READY(i) <= '0';
-
-        -- Assignation
-        u_int <= (others => '0');
-        v_int <= (others => '0');
-
-        division_int <= (others => '0');
-
-      elsif (rising_edge(CLK)) then
-
-        case divider_ctrl_fsm_state(i) is
-          when STARTER_ST =>            -- STEP 0
-            -- Control Outputs
-            READY(i) <= '0';
-
-            if (START = '1') then
-              -- Assignation
-              u_int <= '0' & DATA_A_IN(i);
-              v_int <= '0' & DATA_B_IN(i);
-
-              if (DATA_A_IN(i)(0) = '1') then
-                division_int <= '0' & DATA_B_IN(i);
-              else
-                division_int <= (others => '0');
-              end if;
-
-              -- FSM Control
-              divider_ctrl_fsm_state(i) <= SET_DATA_B_ST;
-            end if;
-
-          when SET_DATA_B_ST =>         -- STEP 1
-
-            -- Assignation
-            u_int <= std_logic_vector(unsigned(u_int) srl 1);
-            v_int <= std_logic_vector(unsigned(v_int) sll 1);
-
-            -- FSM Control
-            if ((unsigned(v_int) sll 1) < '0' & unsigned(MODULO(i))) then
-              divider_ctrl_fsm_state(i) <= SET_PRODUCT_OUT_ST;
-            else
-              divider_ctrl_fsm_state(i) <= REDUCE_DATA_B_ST;
-            end if;
-
-          when REDUCE_DATA_B_ST =>      -- STEP 2
-
-            if (unsigned(v_int) < '0' & unsigned(MODULO(i))) then
-              -- FSM Control
-              divider_ctrl_fsm_state(i) <= SET_PRODUCT_OUT_ST;
-            else
-              -- Assignation
-              v_int <= std_logic_vector(unsigned(v_int) - ('0' & unsigned(MODULO(i))));
-            end if;
-
-          when SET_PRODUCT_OUT_ST =>    -- STEP 3
-
-            -- Assignation
-            if (u_int(0) = '1') then
-              if (unsigned(division_int) + unsigned(v_int) < '0' & unsigned(MODULO(i))) then
-                division_int <= std_logic_vector(unsigned(division_int) + unsigned(v_int));
-              else
-                division_int <= std_logic_vector(unsigned(division_int) + unsigned(v_int) - ('0' & unsigned(MODULO(i))));
-              end if;
-            else
-              if (unsigned(division_int) >= '0' & unsigned(MODULO(i))) then
-                division_int <= std_logic_vector(unsigned(division_int) - unsigned(MODULO(i)));
-              end if;
-            end if;
-
-            -- FSM Control
-            divider_ctrl_fsm_state(i) <= ENDER_ST;
-
-          when ENDER_ST =>              -- STEP 4
-
-            if (unsigned(u_int) = '0' & unsigned(ONE)) then
-              -- Data Outputs
-              DATA_OUT(i) <= division_int(DATA_SIZE-1 downto 0);
-
-              -- Control Outputs
-              READY(i) <= '1';
-
-              -- FSM Control
-              divider_ctrl_fsm_state(i) <= STARTER_ST;
-            else
-              -- FSM Control
-              divider_ctrl_fsm_state(i) <= SET_DATA_B_ST;
-            end if;
-
-          when others =>
-            -- FSM Control
-            divider_ctrl_fsm_state(i) <= STARTER_ST;
-        end case;
-      end if;
-    end process;
-
-  end generate X_LABEL;
 
 end architecture;

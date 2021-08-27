@@ -59,12 +59,16 @@ entity ntm_writing is
     START : in  std_logic;
     READY : out std_logic;
 
+    M_IN_ENABLE  : in std_logic;
+    A_IN_ENABLE  : in std_logic;
+    M_OUT_ENABLE : in std_logic;
+
     -- DATA
-    MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    M_IN   : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    E_IN   : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    W_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    M_OUT  : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO : in std_logic_vector(DATA_SIZE-1 downto 0);
+    M_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+    A_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+    W_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+    M_OUT  : in std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 

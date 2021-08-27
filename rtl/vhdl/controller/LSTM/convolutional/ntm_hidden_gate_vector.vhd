@@ -59,12 +59,17 @@ entity ntm_hidden_gate_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    -- DATA
-    S_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-    O_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+    S_IN_ENABLE : in std_logic;
+    O_IN_ENABLE : in std_logic;
 
-    MODULO : in  std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-    H_OUT  : out std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0)
+    H_OUT_ENABLE : out std_logic;
+
+    -- DATA
+    S_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    O_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    H_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -84,24 +89,24 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
 
   -- VECTOR TANH FUNCTION
   -- CONTROL
-  signal start_vector_tanh_function : std_logic;
-  signal ready_vector_tanh_function : std_logic;
+  signal start_scalar_tanh_function : std_logic;
+  signal ready_scalar_tanh_function : std_logic;
 
   -- DATA
-  signal modulo_vector_tanh_function   : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_vector_tanh_function  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_tanh_function : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_scalar_tanh_function   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_tanh_function  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_tanh_function : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR MULTIPLIER
   -- CONTROL
   signal start_vector_multiplier : std_logic;
-  signal ready_vector_multiplier : std_logic_vector(L-1 downto 0);
+  signal ready_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_vector_multiplier    : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_multiplier : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_multiplier : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplier  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -109,10 +114,10 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  ntm_vector_tanh_function_i : ntm_vector_tanh_function
-    generic map (
-      I => L,
+  -- h(t;l) = o(t;l)·tanh(s(t;l))
 
+  ntm_scalar_tanh_function_i : ntm_scalar_tanh_function
+    generic map (
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -121,35 +126,13 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_tanh_function,
-      READY => ready_vector_tanh_function,
+      START => start_scalar_tanh_function,
+      READY => ready_scalar_tanh_function,
 
       -- DATA
-      MODULO   => modulo_vector_tanh_function,
-      DATA_IN  => data_in_vector_tanh_function,
-      DATA_OUT => data_out_vector_tanh_function
-    );
-
-  ntm_vector_multiplier_i : ntm_vector_multiplier
-    generic map (
-      I => L,
-
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_multiplier,
-      READY => ready_vector_multiplier,
-
-      -- DATA
-      MODULO    => modulo_vector_multiplier,
-      DATA_A_IN => data_a_in_vector_multiplier,
-      DATA_B_IN => data_b_in_vector_multiplier,
-      DATA_OUT  => data_out_vector_multiplier
+      MODULO   => modulo_scalar_tanh_function,
+      DATA_IN  => data_in_scalar_tanh_function,
+      DATA_OUT => data_out_scalar_tanh_function
     );
 
 end architecture;

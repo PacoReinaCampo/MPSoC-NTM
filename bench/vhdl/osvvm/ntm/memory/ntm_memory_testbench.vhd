@@ -85,10 +85,10 @@ architecture ntm_memory_testbench_architecture of ntm_memory_testbench is
   signal ready_addressing : std_logic;
 
   -- DATA
-  signal modulo_addressing : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_addressing   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal m_in_addressing   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_out_addressing  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_addressing   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_in_addressing   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_out_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 

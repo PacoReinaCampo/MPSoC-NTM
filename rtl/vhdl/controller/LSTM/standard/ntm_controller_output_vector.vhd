@@ -60,13 +60,19 @@ entity ntm_controller_output_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    -- DATA
-    H_IN  : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+    H_IN_ENABLE : in std_logic;
 
-    W_IN : in std_logic_arithmetic_vector_matrix(Y-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
+    W_IN_ENABLE : in std_logic;
+
+    NU_ENABLE_OUT : out std_logic;
+
+    -- DATA
+    H_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    W_IN : in std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
 
     MODULO : in  std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    NU_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+    NU_OUT : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -97,15 +103,15 @@ architecture ntm_controller_output_vector_architecture of ntm_controller_output_
   signal data_b_in_vector_adder : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
 
-  -- MATRIX CONVOLUTION
+  -- MATRIX PRODUCT
   -- CONTROL
   signal start_vector_product : std_logic;
   signal ready_vector_product : std_logic;
 
   -- DATA
   signal modulo_vector_product    : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_product : std_logic_arithmetic_vector_matrix(Y-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_product : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_product : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_product  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
 
 begin
@@ -114,10 +120,10 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- nu(t;l) = U(t;l)·h(t;l)
+
   ntm_vector_adder_i : ntm_vector_adder
     generic map (
-      I => Y,
-
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -136,29 +142,6 @@ begin
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
       DATA_OUT  => data_out_vector_adder
-    );
-
-  ntm_vector_product_i : ntm_vector_product
-    generic map (
-      I => Y,
-      J => L,
-
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_product,
-      READY => ready_vector_product,
-
-      -- DATA
-      MODULO    => modulo_vector_product,
-      DATA_A_IN => data_a_in_vector_product,
-      DATA_B_IN => data_b_in_vector_product,
-      DATA_OUT  => data_out_vector_product
     );
 
 end architecture;

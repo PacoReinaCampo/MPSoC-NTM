@@ -58,13 +58,13 @@ entity ntm_matrix_exponentiator is
 
     -- CONTROL
     START : in  std_logic;
-    READY : out std_logic_matrix(I-1 downto 0)(J-1 downto 0);
+    READY : out std_logic;
 
     -- DATA
-    MODULO               : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-    BASE_EXPONENTIATION  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-    POWER_EXPONENTIATION : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_OUT             : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO               : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    BASE_EXPONENTIATION  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    POWER_EXPONENTIATION : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT             : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -87,11 +87,5 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
-
-  Y_LABEL : for i in J-1 downto 0 generate
-    X_LABEL : for j in I-1 downto 0 generate
-
-    end generate X_LABEL;
-  end generate Y_LABEL;
 
 end architecture;

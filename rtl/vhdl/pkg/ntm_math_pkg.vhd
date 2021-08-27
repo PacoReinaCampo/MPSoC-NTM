@@ -260,9 +260,9 @@ package ntm_math_pkg is
       READY : out std_logic_vector(I-1 downto 0);
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -284,10 +284,10 @@ package ntm_math_pkg is
       OPERATION : in std_logic_vector(I-1 downto 0);
 
       -- DATA
-      MODULO    : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -307,10 +307,10 @@ package ntm_math_pkg is
       READY : out std_logic_vector(I-1 downto 0);
 
       -- DATA
-      MODULO    : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -330,9 +330,9 @@ package ntm_math_pkg is
       READY : out std_logic_vector(I-1 downto 0);
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -352,10 +352,10 @@ package ntm_math_pkg is
       READY : out std_logic_vector(I-1 downto 0);
 
       -- DATA
-      MODULO    : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -375,10 +375,10 @@ package ntm_math_pkg is
       READY : out std_logic_vector(I-1 downto 0);
 
       -- DATA
-      MODULO               : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      BASE_EXPONENTIATION  : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      POWER_EXPONENTIATION : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT             : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO               : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      BASE_EXPONENTIATION  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      POWER_EXPONENTIATION : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT             : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -398,10 +398,10 @@ package ntm_math_pkg is
       READY : out std_logic_vector(I-1 downto 0);
 
       -- DATA
-      MODULO     : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      BASE_ROOT  : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      POWER_ROOT : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT   : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO     : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      BASE_ROOT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      POWER_ROOT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -421,9 +421,9 @@ package ntm_math_pkg is
       READY : out std_logic_vector(I-1 downto 0);
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -445,9 +445,9 @@ package ntm_math_pkg is
       READY : out std_logic_matrix(I-1 downto 0)(J-1 downto 0);
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -470,10 +470,10 @@ package ntm_math_pkg is
       OPERATION : in std_logic_matrix(I-1 downto 0)(J-1 downto 0);
 
       -- DATA
-      MODULO    : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -494,10 +494,10 @@ package ntm_math_pkg is
       READY : out std_logic_matrix(I-1 downto 0)(J-1 downto 0);
 
       -- DATA
-      MODULO    : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -518,9 +518,9 @@ package ntm_math_pkg is
       READY : out std_logic_matrix(I-1 downto 0)(J-1 downto 0);
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -541,10 +541,10 @@ package ntm_math_pkg is
       READY : out std_logic_matrix(I-1 downto 0)(J-1 downto 0);
 
       -- DATA
-      MODULO    : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -565,10 +565,10 @@ package ntm_math_pkg is
       READY : out std_logic_matrix(I-1 downto 0)(J-1 downto 0);
 
       -- DATA
-      MODULO               : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      BASE_EXPONENTIATION  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      POWER_EXPONENTIATION : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT             : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO               : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      BASE_EXPONENTIATION  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      POWER_EXPONENTIATION : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT             : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -589,10 +589,10 @@ package ntm_math_pkg is
       READY : out std_logic_matrix(I-1 downto 0)(J-1 downto 0);
 
       -- DATA
-      MODULO     : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      BASE_ROOT  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      POWER_ROOT : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT   : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO     : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      BASE_ROOT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      POWER_ROOT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -613,9 +613,9 @@ package ntm_math_pkg is
       READY : out std_logic_matrix(I-1 downto 0)(J-1 downto 0);
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -641,7 +641,7 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
@@ -663,9 +663,9 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -686,10 +686,10 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO    : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -711,7 +711,7 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
@@ -733,9 +733,9 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -756,8 +756,8 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
@@ -779,10 +779,10 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO    : in  std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1015,10 +1015,10 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO    : in  std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1038,11 +1038,11 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO    : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_U_IN : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_V_IN : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_U_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_V_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1062,10 +1062,10 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO    : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1085,9 +1085,9 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1107,9 +1107,9 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1129,9 +1129,9 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1151,9 +1151,9 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1173,10 +1173,10 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      SIZE_IN  : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1196,9 +1196,9 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1218,10 +1218,10 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO    : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1243,10 +1243,10 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO    : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1267,11 +1267,11 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO    : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_U_IN : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_V_IN : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_U_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_V_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1292,10 +1292,10 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO    : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1316,9 +1316,9 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1339,9 +1339,9 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1362,9 +1362,9 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1385,9 +1385,9 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1408,10 +1408,10 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      SIZE_IN  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1432,9 +1432,9 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO   : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_IN  : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
@@ -1455,10 +1455,10 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO    : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0)
+      MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 

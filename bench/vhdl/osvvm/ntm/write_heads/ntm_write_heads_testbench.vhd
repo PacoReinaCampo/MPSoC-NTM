@@ -62,11 +62,11 @@ architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench
   signal ready_writing : std_logic;
 
   -- DATA
-  signal modulo_writing : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal m_in_writing   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal e_in_writing   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_writing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal e_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal m_out_writing  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_out_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 

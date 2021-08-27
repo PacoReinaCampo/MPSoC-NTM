@@ -61,19 +61,29 @@ entity ntm_input_gate_vector is
     START : in  std_logic;
     READY : out std_logic;
 
+    W_IN_ENABLE : in std_logic;
+    K_IN_ENABLE : in std_logic;
+    U_IN_ENABLE : in std_logic;
+
+    H_IN_ENABLE : in std_logic;
+
+    B_IN_ENABLE : in std_logic;
+
+    I_OUT_ENABLE : out std_logic;
+
     -- DATA
-    W_IN : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
-    K_IN : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    U_IN : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
+    W_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    K_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     X_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
     R_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    H_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+    H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    B_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+    B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-    I_OUT  : out std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    I_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -93,59 +103,59 @@ architecture ntm_input_gate_vector_architecture of ntm_input_gate_vector is
 
   -- VECTOR LOGISTIC FUNCTION
   -- CONTROL
-  signal start_vector_logistic_function : std_logic;
-  signal ready_vector_logistic_function : std_logic;
+  signal start_scalar_logistic_function : std_logic;
+  signal ready_scalar_logistic_function : std_logic;
 
   -- DATA
-  signal modulo_vector_logistic_function   : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_vector_logistic_function  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_logistic_function : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_scalar_logistic_function   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_logistic_function  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_logistic_function : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
   -- CONTROL
   signal start_vector_adder : std_logic;
-  signal ready_vector_adder : std_logic_vector(L-1 downto 0);
+  signal ready_vector_adder : std_logic;
 
-  signal operation_vector_adder : std_logic_vector(L-1 downto 0);
+  signal operation_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_vector_adder    : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_adder : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_adder : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_adder  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR CONVOLUTION I
+  -- VECTOR MULTIPLIER I
   -- CONTROL
-  signal start_vector_convolution_x : std_logic;
-  signal ready_vector_convolution_x : std_logic;
+  signal start_vector_product_x : std_logic;
+  signal ready_vector_product_x : std_logic;
 
   -- DATA
-  signal modulo_vector_convolution_x    : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_convolution_x : std_logic_arithmetic_vector_matrix(L-1 downto 0)(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_convolution_x : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_convolution_x  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_product_x    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_product_x : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_product_x : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_product_x  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR CONVOLUTION W
+  -- VECTOR MULTIPLIER W
   -- CONTROL
-  signal start_vector_convolution_w : std_logic;
-  signal ready_vector_convolution_w : std_logic;
+  signal start_vector_product_w : std_logic;
+  signal ready_vector_product_w : std_logic;
 
   -- DATA
-  signal modulo_vector_convolution_w    : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_convolution_w : std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_convolution_w : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_convolution_w  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_product_w    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_product_w : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_product_w : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_product_w  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR CONVOLUTION L
+  -- VECTOR MULTIPLIER L
   -- CONTROL
-  signal start_vector_convolution_h : std_logic;
-  signal ready_vector_convolution_h : std_logic;
+  signal start_vector_product_h : std_logic;
+  signal ready_vector_product_h : std_logic;
 
   -- DATA
-  signal modulo_vector_convolution_h    : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_convolution_h : std_logic_arithmetic_vector_matrix(L-1 downto 0)(L-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_convolution_h : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_convolution_h  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_product_h    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_product_h : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_product_h : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_product_h  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -153,10 +163,10 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  ntm_vector_logistic_function_i : ntm_vector_logistic_function
-    generic map (
-      I => L,
+  -- i(t;l) = sigmoid(W(t;l)·x(t;l) + K(t;l)·r(t;l) + U(t-1;l)·h(t-1;l) + U(t;l-1)·h(t;l-1) + b(t;l))
 
+  ntm_scalar_logistic_function_i : ntm_scalar_logistic_function
+    generic map (
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -165,106 +175,13 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_logistic_function,
-      READY => ready_vector_logistic_function,
+      START => start_scalar_logistic_function,
+      READY => ready_scalar_logistic_function,
 
       -- DATA
-      MODULO   => modulo_vector_logistic_function,
-      DATA_IN  => data_in_vector_logistic_function,
-      DATA_OUT => data_out_vector_logistic_function
-    );
-
-  ntm_vector_adder_i : ntm_vector_adder
-    generic map (
-      I => L,
-
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_adder,
-      READY => ready_vector_adder,
-
-      OPERATION => operation_vector_adder,
-
-      -- DATA
-      MODULO    => modulo_vector_adder,
-      DATA_A_IN => data_a_in_vector_adder,
-      DATA_B_IN => data_b_in_vector_adder,
-      DATA_OUT  => data_out_vector_adder
-    );
-
-  ntm_vector_convolution_function_x_i : ntm_vector_convolution_function
-    generic map (
-      I => L,
-      J => X,
-
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_convolution_x,
-      READY => ready_vector_convolution_x,
-
-      -- DATA
-      MODULO    => modulo_vector_convolution_x,
-      DATA_A_IN => data_a_in_vector_convolution_x,
-      DATA_B_IN => data_b_in_vector_convolution_x,
-      DATA_OUT  => data_out_vector_convolution_x
-    );
-
-  ntm_vector_convolution_function_w_i : ntm_vector_convolution_function
-    generic map (
-      I => L,
-      J => W,
-
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_convolution_w,
-      READY => ready_vector_convolution_w,
-
-      -- DATA
-      MODULO    => modulo_vector_convolution_w,
-      DATA_A_IN => data_a_in_vector_convolution_w,
-      DATA_B_IN => data_b_in_vector_convolution_w,
-      DATA_OUT  => data_out_vector_convolution_w
-    );
-
-  ntm_vector_convolution_function_h_i : ntm_vector_convolution_function
-    generic map (
-      I => L,
-      J => L,
-
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_convolution_h,
-      READY => ready_vector_convolution_h,
-
-      -- DATA
-      MODULO    => modulo_vector_convolution_h,
-      DATA_A_IN => data_a_in_vector_convolution_h,
-      DATA_B_IN => data_b_in_vector_convolution_h,
-      DATA_OUT  => data_out_vector_convolution_h
+      MODULO   => modulo_scalar_logistic_function,
+      DATA_IN  => data_in_scalar_logistic_function,
+      DATA_OUT => data_out_scalar_logistic_function
     );
 
 end architecture;

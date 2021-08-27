@@ -59,11 +59,14 @@ entity ntm_reading is
     START : in  std_logic;
     READY : out std_logic;
 
+    M_IN_ENABLE  : in  std_logic;
+    R_OUT_ENABLE : out std_logic;
+
     -- DATA
-    MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+    MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
     W_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    M_IN   : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    R_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+    M_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    R_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 

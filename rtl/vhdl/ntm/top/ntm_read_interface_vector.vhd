@@ -43,11 +43,16 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
+use work.ntm_core_pkg.all;
+use work.ntm_lstm_controller_pkg.all;
 
-entity ntm_matrix_oneplus_function is
+entity ntm_read_interface_vector is
   generic (
-    I : integer := 64;
-    J : integer := 64;
+    X : integer := 64;
+    Y : integer := 64;
+    N : integer := 64;
+    W : integer := 64;
+    L : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -60,14 +65,29 @@ entity ntm_matrix_oneplus_function is
     START : in  std_logic;
     READY : out std_logic;
 
+    WK_IN_ENABLE    : in std_logic;
+    WBETA_IN_ENABLE : in std_logic;
+    WF_IN_ENABLE    : in std_logic;
+    WPI_IN_ENABLE   : in std_logic;
+
+    H_IN_ENABLE : in std_logiC;
+
     -- DATA
-    MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    WK_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    WBETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    WF_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
+    WPI_IN   : in std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+
+    H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    K_OUT    : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    F_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    PI_OUT   : out std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0)
   );
 end entity;
 
-architecture ntm_matrix_oneplus_function_architecture of ntm_matrix_oneplus_function is
+architecture ntm_read_interface_vector_architecture of ntm_read_interface_vector is
 
   -----------------------------------------------------------------------
   -- Types
@@ -81,74 +101,10 @@ architecture ntm_matrix_oneplus_function_architecture of ntm_matrix_oneplus_func
   -- Signals
   -----------------------------------------------------------------------
 
-  -- SCALAR ADDER
-  -- CONTROL
-  signal start_scalar_adder : std_logic;
-  signal ready_scalar_adder : std_logic;
-
-  signal operation_scalar_adder : std_logic;
-
-  -- DATA
-  signal modulo_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR INVERTER
-  -- CONTROL
-  signal start_scalar_inverter : std_logic;
-  signal ready_scalar_inverter : std_logic;
-
-  -- DATA
-  signal modulo_scalar_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
-
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
-
-  ntm_scalar_adder_i : ntm_scalar_adder
-    generic map (
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_adder,
-      READY => ready_scalar_adder,
-
-      OPERATION => operation_scalar_adder,
-
-      -- DATA
-      MODULO    => modulo_scalar_adder,
-      DATA_A_IN => data_a_in_scalar_adder,
-      DATA_B_IN => data_b_in_scalar_adder,
-      DATA_OUT  => data_out_scalar_adder
-    );
-
-  ntm_scalar_inverter_i : ntm_scalar_inverter
-    generic map (
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_inverter,
-      READY => ready_scalar_inverter,
-
-      -- DATA
-      MODULO   => modulo_scalar_inverter,
-      DATA_IN  => data_in_scalar_inverter,
-      DATA_OUT => data_out_scalar_inverter
-    );
 
 end architecture;

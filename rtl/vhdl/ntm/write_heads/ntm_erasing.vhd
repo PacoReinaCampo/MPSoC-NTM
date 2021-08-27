@@ -44,10 +44,9 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_matrix_oneplus_function is
+entity ntm_writing is
   generic (
-    I : integer := 64;
-    J : integer := 64;
+    N : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -60,14 +59,20 @@ entity ntm_matrix_oneplus_function is
     START : in  std_logic;
     READY : out std_logic;
 
+    M_IN_ENABLE  : in std_logic;
+    E_IN_ENABLE  : in std_logic;
+    M_OUT_ENABLE : in std_logic;
+
     -- DATA
-    MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    MODULO : in std_logic_vector(DATA_SIZE-1 downto 0);
+    M_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+    E_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+    W_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+    M_OUT  : in std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
-architecture ntm_matrix_oneplus_function_architecture of ntm_matrix_oneplus_function is
+architecture ntm_writing_architecture of ntm_writing is
 
   -----------------------------------------------------------------------
   -- Types
@@ -94,15 +99,16 @@ architecture ntm_matrix_oneplus_function_architecture of ntm_matrix_oneplus_func
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR INVERTER
+  -- SCALAR MULTIPLIER
   -- CONTROL
-  signal start_scalar_inverter : std_logic;
-  signal ready_scalar_inverter : std_logic;
+  signal start_scalar_multiplier : std_logic;
+  signal ready_scalar_multiplier : std_logic;
 
   -- DATA
-  signal modulo_scalar_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_scalar_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -122,7 +128,7 @@ begin
       -- CONTROL
       START => start_scalar_adder,
       READY => ready_scalar_adder,
-
+      
       OPERATION => operation_scalar_adder,
 
       -- DATA
@@ -132,7 +138,7 @@ begin
       DATA_OUT  => data_out_scalar_adder
     );
 
-  ntm_scalar_inverter_i : ntm_scalar_inverter
+  ntm_scalar_multiplier_i : ntm_scalar_multiplier
     generic map (
       DATA_SIZE => DATA_SIZE
     )
@@ -142,13 +148,14 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_inverter,
-      READY => ready_scalar_inverter,
+      START => start_scalar_multiplier,
+      READY => ready_scalar_multiplier,
 
       -- DATA
-      MODULO   => modulo_scalar_inverter,
-      DATA_IN  => data_in_scalar_inverter,
-      DATA_OUT => data_out_scalar_inverter
+      MODULO    => modulo_scalar_multiplier,
+      DATA_A_IN => data_a_in_scalar_multiplier,
+      DATA_B_IN => data_b_in_scalar_multiplier,
+      DATA_OUT  => data_out_scalar_multiplier
     );
 
 end architecture;

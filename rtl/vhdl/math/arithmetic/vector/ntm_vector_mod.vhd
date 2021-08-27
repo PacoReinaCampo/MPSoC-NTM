@@ -57,12 +57,12 @@ entity ntm_vector_mod is
 
     -- CONTROL
     START : in  std_logic;
-    READY : out std_logic_vector(I-1 downto 0);
+    READY : out std_logic;
 
     -- DATA
-    MODULO   : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -72,118 +72,18 @@ architecture ntm_vector_mod_architecture of ntm_vector_mod is
   -- Types
   -----------------------------------------------------------------------
 
-  type mod_ctrl_fsm is (
-    STARTER_ST,  -- STEP 0
-    ENDER_ST     -- STEP 1
-  );
-
-  type mod_ctrl_fsm_vector is array (I-1 downto 0) of mod_ctrl_fsm;
-
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
-
-  -- Finite State Machine
-  signal mod_ctrl_fsm_state : mod_ctrl_fsm_vector;
-
-  -- Internal Signals
-  signal arithmetic_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
-
-  X_LABEL : for i in I-1 downto 0 generate
-
-    ctrl_fsm : process(CLK, RST)
-    begin
-      if (RST = '0') then
-        -- Data Outputs
-        DATA_OUT(i) <= ZERO;
-
-        -- Control Outputs
-        READY(i) <= '0';
-
-        -- Assignations
-        arithmetic_int <= ZERO;
-
-      elsif (rising_edge(CLK)) then
-
-        case mod_ctrl_fsm_state(i) is
-          when STARTER_ST =>            -- STEP 0
-            -- Control Outputs
-            READY(i) <= '0';
-
-            if (START = '1') then
-              -- Assignations
-              arithmetic_int <= DATA_IN(i);
-
-              -- FSM Control
-              mod_ctrl_fsm_state(i) <= ENDER_ST;
-            end if;
-
-          when ENDER_ST =>              -- STEP 1
-
-            if (unsigned(MODULO(i)) > unsigned(ZERO)) then
-              if (unsigned(arithmetic_int) > unsigned(ZERO)) then
-                if (unsigned(arithmetic_int) = unsigned(MODULO(i))) then
-                  -- Data Outputs
-                  DATA_OUT(i) <= ZERO;
-
-                  -- Control Outputs
-                  READY(i) <= '1';
-
-                  -- FSM Control
-                  mod_ctrl_fsm_state(i) <= STARTER_ST;
-                elsif (unsigned(arithmetic_int) < unsigned(MODULO(i))) then
-                  -- Data Outputs
-                  DATA_OUT(i) <= arithmetic_int;
-
-                  -- Control Outputs
-                  READY(i) <= '1';
-
-                  -- FSM Control
-                  mod_ctrl_fsm_state(i) <= STARTER_ST;
-                else
-                  -- Assignations
-                  arithmetic_int <= std_logic_vector(unsigned(arithmetic_int) - unsigned(MODULO(i)));
-                end if;
-              elsif (unsigned(arithmetic_int) = unsigned(ZERO)) then
-                -- Data Outputs
-                DATA_OUT(i) <= ZERO;
-
-                -- Control Outputs
-                READY(i) <= '1';
-
-                -- FSM Control
-                mod_ctrl_fsm_state(i) <= STARTER_ST;
-              end if;
-            elsif (unsigned(MODULO(i)) = unsigned(ZERO)) then
-              -- Data Outputs
-              DATA_OUT(i) <= arithmetic_int;
-
-              -- Control Outputs
-              READY(i) <= '1';
-
-              -- FSM Control
-              mod_ctrl_fsm_state(i) <= STARTER_ST;
-            end if;
-
-          when others =>
-            -- FSM Control
-            mod_ctrl_fsm_state(i) <= STARTER_ST;
-        end case;
-      end if;
-    end process;
-
-  end generate X_LABEL;
 
 end architecture;

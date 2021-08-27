@@ -835,12 +835,12 @@ package dnc_core_pkg is
       READY : out std_logic;
 
       -- DATA
-      WK_IN    : out std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      WBETA_IN : out std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-      WF_IN    : out std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-      WPI_IN   : out std_logic_arithmetic_vector_matrix(L-1 downto 0)(2 downto 0)(DATA_SIZE-1 downto 0);
+      WK_IN    : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      WBETA_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      WF_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+      WPI_IN   : out std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
 
-      H_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+      H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       K_OUT    : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
       BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -869,14 +869,14 @@ package dnc_core_pkg is
       READY : out std_logic;
 
       -- DATA
-      WK_IN    : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      WBETA_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-      WE_IN    : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      WV_IN    : in std_logic_arithmetic_vector_matrix(L-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      WGA_IN   : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-      WGW_IN   : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+      WK_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      WBETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      WE_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      WV_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      WGA_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+      WGW_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      H_IN : in std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+      H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       K_OUT    : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
       BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
