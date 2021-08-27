@@ -129,6 +129,8 @@ begin
 
   -- p(t) = (1 - summation(w(t;w))[i in 1 to N])·p(t-1) + w(t;w)
 
+  -- p(t=0) = 0
+
   ntm_vector_summation_function_i : ntm_vector_summation_function
     generic map (
       I => N,

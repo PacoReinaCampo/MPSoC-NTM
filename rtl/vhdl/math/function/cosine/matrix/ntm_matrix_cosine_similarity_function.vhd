@@ -60,6 +60,14 @@ entity ntm_matrix_cosine_similarity_function is
     START : in  std_logic;
     READY : out std_logic;
 
+    DATA_U_IN_I_ENABLE : in std_logic;
+    DATA_U_IN_J_ENABLE : in std_logic;
+    DATA_V_IN_I_ENABLE : in std_logic;
+    DATA_V_IN_J_ENABLE : in std_logic;
+
+    DATA_OUT_I_ENABLE : out std_logic;
+    DATA_OUT_J_ENABLE : out std_logic;
+
     -- DATA
     MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);

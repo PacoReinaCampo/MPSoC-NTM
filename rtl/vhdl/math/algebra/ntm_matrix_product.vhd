@@ -60,6 +60,14 @@ entity ntm_matrix_product is
     START : in  std_logic;
     READY : out std_logic;
 
+    DATA_A_IN_I_ENABLE : in std_logic;
+    DATA_A_IN_J_ENABLE : in std_logic;
+    DATA_B_IN_I_ENABLE : in std_logic;
+    DATA_B_IN_J_ENABLE : in std_logic;
+
+    DATA_OUT_I_ENABLE : out std_logic;
+    DATA_OUT_J_ENABLE : out std_logic;
+
     -- DATA
     MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -112,7 +120,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN * DATA_B_IN
+  -- DATA_OUT = DATA_A_IN · DATA_B_IN
 
   ntm_scalar_adder_i : ntm_scalar_adder
     generic map (

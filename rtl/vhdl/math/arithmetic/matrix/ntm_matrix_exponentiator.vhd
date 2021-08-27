@@ -60,6 +60,14 @@ entity ntm_matrix_exponentiator is
     START : in  std_logic;
     READY : out std_logic;
 
+    BASE_EXPONENTIATION_I_ENABLE  : in std_logic;
+    BASE_EXPONENTIATION_J_ENABLE  : in std_logic;
+    POWER_EXPONENTIATION_I_ENABLE : in std_logic;
+    POWER_EXPONENTIATION_J_ENABLE : in std_logic;
+
+    DATA_OUT_I_ENABLE : out std_logic;
+    DATA_OUT_J_ENABLE : out std_logic;
+
     -- DATA
     MODULO               : in  std_logic_vector(DATA_SIZE-1 downto 0);
     BASE_EXPONENTIATION  : in  std_logic_vector(DATA_SIZE-1 downto 0);

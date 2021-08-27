@@ -125,6 +125,8 @@ begin
 
   -- L(t)[i,j] = (1 - w(t;w)[i] - w(t;w)[j])·L(t-1)[i,j] + w(t;w)[i]·p(t-1;w)[j]
 
+  -- L(t=0)[i,j] = 0
+
   ntm_vector_adder_i : ntm_vector_adder
     generic map (
       I => N,

@@ -59,6 +59,11 @@ entity ntm_vector_cosine_similarity_function is
     START : in  std_logic;
     READY : out std_logic;
 
+    DATA_U_IN_ENABLE : in std_logic;
+    DATA_V_IN_ENABLE : in std_logic;
+
+    DATA_OUT_ENABLE : out std_logic;
+
     -- DATA
     MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);

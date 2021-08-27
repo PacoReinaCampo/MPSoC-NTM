@@ -180,7 +180,9 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- s(t;l) = f(t;l)·s(t-1;l) + i(t;l)·tanh(W(t;l)·x(t;l) + K(t;l)·r(t;l) + U(t-1;l)·h(t-1;l) + U(t;l-1)·h(t;l-1) + b(t;l))
+  -- s(t;l) = f(t;l)*s(t-1;l) + i(t;l)*tanh(W(t;l)*x(t;l) + K(t;l)*r(t;l) + U(t-1;l)*h(t-1;l) + U(t;l-1)*h(t;l-1) + b(t;l))
+
+  -- s(t=0;l) = 0
 
   ntm_scalar_tanh_function_i : ntm_scalar_tanh_function
     generic map (

@@ -105,6 +105,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- DATA_OUT = 1 / DATA_IN mod MODULO
+
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

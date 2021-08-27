@@ -60,6 +60,9 @@ entity ntm_matrix_rank is
     START : in  std_logic;
     READY : out std_logic;
 
+    DATA_IN_I_ENABLE : in std_logic;
+    DATA_IN_J_ENABLE : in std_logic;
+
     -- DATA
     MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);

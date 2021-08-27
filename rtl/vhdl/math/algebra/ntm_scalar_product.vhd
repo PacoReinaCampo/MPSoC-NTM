@@ -59,10 +59,13 @@ entity ntm_scalar_product is
     START : in  std_logic;
     READY : out std_logic;
 
+    DATA_A_IN_ENABLE : in std_logic;
+    DATA_B_IN_ENABLE : in std_logic;
+
     -- DATA
     MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_A_IN : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;

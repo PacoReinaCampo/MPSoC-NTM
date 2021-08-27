@@ -85,4 +85,6 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- DATA_OUT = root(BASE_ROOT, POWER_ROOT) mod MODULO
+
 end architecture;

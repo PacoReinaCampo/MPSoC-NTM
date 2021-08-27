@@ -60,6 +60,14 @@ entity ntm_matrix_root is
     START : in  std_logic;
     READY : out std_logic;
 
+    BASE_ROOT_I_ENABLE  : in std_logic;
+    BASE_ROOT_J_ENABLE  : in std_logic;
+    POWER_ROOT_I_ENABLE : in std_logic;
+    POWER_ROOT_J_ENABLE : in std_logic;
+
+    DATA_OUT_I_ENABLE : out std_logic;
+    DATA_OUT_J_ENABLE : out std_logic;
+
     -- DATA
     MODULO     : in  std_logic_vector(DATA_SIZE-1 downto 0);
     BASE_ROOT  : in  std_logic_vector(DATA_SIZE-1 downto 0);

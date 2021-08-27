@@ -85,4 +85,6 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- DATA_OUT = root(BASE_EXPONENTIATION, POWER_EXPONENTIATION) mod MODULO
+
 end architecture;

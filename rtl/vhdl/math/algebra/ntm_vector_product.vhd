@@ -47,7 +47,6 @@ use work.ntm_math_pkg.all;
 entity ntm_vector_product is
   generic (
     I : integer := 64;
-    J : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -59,6 +58,11 @@ entity ntm_vector_product is
     -- CONTROL
     START : in  std_logic;
     READY : out std_logic;
+
+    DATA_A_IN_ENABLE : in std_logic;
+    DATA_B_IN_ENABLE : in std_logic;
+
+    DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
     MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -112,7 +116,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN x DATA_B_IN
+  -- DATA_OUT = DATA_A_IN ^ DATA_B_IN
 
   ntm_scalar_adder_i : ntm_scalar_adder
     generic map (

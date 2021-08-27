@@ -114,7 +114,9 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- h(t;l) = o(t;l)·tanh(s(t;l))
+  -- h(t;l) = o(t;l)*tanh(s(t;l))
+
+  -- h(t=0;l) = 0; h(t;l=0) = 0
 
   ntm_scalar_tanh_function_i : ntm_scalar_tanh_function
     generic map (

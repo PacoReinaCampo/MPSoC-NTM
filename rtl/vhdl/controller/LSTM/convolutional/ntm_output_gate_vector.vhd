@@ -163,7 +163,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- o(t;l) = sigmoid(W(t;l)·x(t;l) + K(t;l)·r(t;l) + U(t-1;l)·h(t-1;l) + U(t;l-1)·h(t;l-1) + b(t;l))
+  -- o(t;l) = sigmoid(W(t;l)*x(t;l) + K(t;l)*r(t;l) + U(t-1;l)*h(t-1;l) + U(t;l-1)*h(t;l-1) + b(t;l))
 
   ntm_scalar_logistic_function_i : ntm_scalar_logistic_function
     generic map (

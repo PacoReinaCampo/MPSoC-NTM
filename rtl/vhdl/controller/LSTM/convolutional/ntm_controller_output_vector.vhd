@@ -120,7 +120,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- nu(t;l) = U(t;l)·h(t;l)
+  -- nu(t;l) = U(t;l)*h(t;l)
 
   ntm_vector_adder_i : ntm_vector_adder
     generic map (

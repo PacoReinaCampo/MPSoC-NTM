@@ -84,4 +84,6 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- DATA_OUT = logarithm(DATA_IN) mod MODULO
+
 end architecture;
