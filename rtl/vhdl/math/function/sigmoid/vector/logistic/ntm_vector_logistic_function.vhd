@@ -84,28 +84,15 @@ architecture ntm_vector_logistic_function_architecture of ntm_vector_logistic_fu
   -- Signals
   -----------------------------------------------------------------------
 
-  -- SCALAR ADDER
+  -- LOGISTIC
   -- CONTROL
-  signal start_scalar_adder : std_logic;
-  signal ready_scalar_adder : std_logic;
-
-  signal operation_scalar_adder : std_logic;
+  signal start_scalar_logistic : std_logic;
+  signal ready_scalar_logistic : std_logic;
 
   -- DATA
-  signal modulo_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR INVERTER
-  -- CONTROL
-  signal start_scalar_inverter : std_logic;
-  signal ready_scalar_inverter : std_logic;
-
-  -- DATA
-  signal modulo_scalar_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_scalar_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -113,7 +100,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  ntm_scalar_adder_i : ntm_scalar_adder
+  -- LOGISTIC
+  scalar_logistic_function : ntm_scalar_logistic_function
     generic map (
       DATA_SIZE => DATA_SIZE
     )
@@ -123,35 +111,13 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_adder,
-      READY => ready_scalar_adder,
-
-      OPERATION => operation_scalar_adder,
+      START => start_scalar_logistic,
+      READY => ready_scalar_logistic,
 
       -- DATA
-      MODULO    => modulo_scalar_adder,
-      DATA_A_IN => data_a_in_scalar_adder,
-      DATA_B_IN => data_b_in_scalar_adder,
-      DATA_OUT  => data_out_scalar_adder
-    );
-
-  ntm_scalar_inverter_i : ntm_scalar_inverter
-    generic map (
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_inverter,
-      READY => ready_scalar_inverter,
-
-      -- DATA
-      MODULO   => modulo_scalar_inverter,
-      DATA_IN  => data_in_scalar_inverter,
-      DATA_OUT => data_out_scalar_inverter
+      MODULO   => modulo_scalar_logistic,
+      DATA_IN  => data_in_scalar_logistic,
+      DATA_OUT => data_out_scalar_logistic
     );
 
 end architecture;

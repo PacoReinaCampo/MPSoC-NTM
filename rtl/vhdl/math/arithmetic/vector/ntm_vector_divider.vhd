@@ -86,10 +86,42 @@ architecture ntm_vector_divider_architecture of ntm_vector_divider is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- DIVIDER
+  -- CONTROL
+  signal start_scalar_divider : std_logic;
+  signal ready_scalar_divider : std_logic;
+
+  -- DATA
+  signal modulo_scalar_divider    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- DIVIDER
+  scalar_divider : ntm_scalar_divider
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_divider,
+      READY => ready_scalar_divider,
+
+      -- DATA
+      MODULO    => modulo_scalar_divider,
+      DATA_A_IN => data_a_in_scalar_divider,
+      DATA_B_IN => data_b_in_scalar_divider,
+      DATA_OUT  => data_out_scalar_divider
+    );
 
 end architecture;

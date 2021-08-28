@@ -87,10 +87,50 @@ architecture ntm_matrix_logarithm_architecture of ntm_matrix_logarithm is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- LOGARITHM
+  -- CONTROL
+  signal start_vector_logarithm : std_logic;
+  signal ready_vector_logarithm : std_logic;
+
+  signal data_in_enable_vector_logarithm : std_logic;
+
+  signal data_out_enable_vector_logarithm : std_logic;
+
+  -- DATA
+  signal modulo_vector_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- LOGARITHM
+  vector_logarithm : ntm_vector_logarithm
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_logarithm,
+      READY => ready_vector_logarithm,
+
+      DATA_IN_ENABLE => data_in_enable_vector_logarithm,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_logarithm,
+
+      -- DATA
+      MODULO   => modulo_vector_logarithm,
+      DATA_IN  => data_in_vector_logarithm,
+      DATA_OUT => data_out_vector_logarithm
+    );
 
 end architecture;

@@ -87,10 +87,50 @@ architecture ntm_matrix_inverter_architecture of ntm_matrix_inverter is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- INVERTER
+  -- CONTROL
+  signal start_vector_inverter : std_logic;
+  signal ready_vector_inverter : std_logic;
+
+  signal data_in_enable_vector_inverter : std_logic;
+
+  signal data_out_enable_vector_inverter : std_logic;
+
+  -- DATA
+  signal modulo_vector_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- INVERTER
+  vector_inverter : ntm_vector_inverter
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_inverter,
+      READY => ready_vector_inverter,
+
+      DATA_IN_ENABLE => data_in_enable_vector_inverter,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_inverter,
+
+      -- DATA
+      MODULO   => modulo_vector_inverter,
+      DATA_IN  => data_in_vector_inverter,
+      DATA_OUT => data_out_vector_inverter
+    );
 
 end architecture;

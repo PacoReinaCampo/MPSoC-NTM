@@ -47,7 +47,6 @@ use work.ntm_math_pkg.all;
 entity ntm_vector_convolution_function is
   generic (
     I : integer := 64;
-    J : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -66,10 +65,10 @@ entity ntm_vector_convolution_function is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    MODULO    : in  std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_A_IN : in  std_logic_arithmetic_vector_matrix(I-1 downto 0)(J-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0)
+    MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -87,29 +86,16 @@ architecture ntm_vector_convolution_function_architecture of ntm_vector_convolut
   -- Signals
   -----------------------------------------------------------------------
 
-  -- SCALAR ADDER
+  -- CONVOLUTION
   -- CONTROL
-  signal start_scalar_adder : std_logic;
-  signal ready_scalar_adder : std_logic;
-
-  signal operation_scalar_adder : std_logic;
+  signal start_scalar_convolution : std_logic;
+  signal ready_scalar_convolution : std_logic;
 
   -- DATA
-  signal modulo_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR MULTIPLIER
-  -- CONTROL
-  signal start_scalar_multiplier : std_logic;
-  signal ready_scalar_multiplier : std_logic;
-
-  -- DATA
-  signal modulo_scalar_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_scalar_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -117,7 +103,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  ntm_scalar_adder_i : ntm_scalar_adder
+  -- CONVOLUTION
+  scalar_convolution_function : ntm_scalar_convolution_function
     generic map (
       DATA_SIZE => DATA_SIZE
     )
@@ -127,36 +114,14 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_adder,
-      READY => ready_scalar_adder,
-
-      OPERATION => operation_scalar_adder,
+      START => start_scalar_convolution,
+      READY => ready_scalar_convolution,
 
       -- DATA
-      MODULO    => modulo_scalar_adder,
-      DATA_A_IN => data_a_in_scalar_adder,
-      DATA_B_IN => data_b_in_scalar_adder,
-      DATA_OUT  => data_out_scalar_adder
-    );
-
-  ntm_scalar_multiplier_i : ntm_scalar_multiplier
-    generic map (
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_multiplier,
-      READY => ready_scalar_multiplier,
-
-      -- DATA
-      MODULO    => modulo_scalar_multiplier,
-      DATA_A_IN => data_a_in_scalar_multiplier,
-      DATA_B_IN => data_b_in_scalar_multiplier,
-      DATA_OUT  => data_out_scalar_multiplier
+      MODULO    => modulo_scalar_convolution,
+      DATA_A_IN => data_a_in_scalar_convolution,
+      DATA_B_IN => data_b_in_scalar_convolution,
+      DATA_OUT  => data_out_scalar_convolution
     );
 
 end architecture;

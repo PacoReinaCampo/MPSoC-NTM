@@ -87,28 +87,19 @@ architecture ntm_matrix_oneplus_function_architecture of ntm_matrix_oneplus_func
   -- Signals
   -----------------------------------------------------------------------
 
-  -- SCALAR ADDER
+  -- ONEPLUS
   -- CONTROL
-  signal start_scalar_adder : std_logic;
-  signal ready_scalar_adder : std_logic;
+  signal start_vector_oneplus : std_logic;
+  signal ready_vector_oneplus : std_logic;
 
-  signal operation_scalar_adder : std_logic;
+  signal data_in_enable_vector_oneplus : std_logic;
+
+  signal data_out_enable_vector_oneplus : std_logic;
 
   -- DATA
-  signal modulo_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR INVERTER
-  -- CONTROL
-  signal start_scalar_inverter : std_logic;
-  signal ready_scalar_inverter : std_logic;
-
-  -- DATA
-  signal modulo_scalar_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_vector_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -116,7 +107,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  ntm_scalar_adder_i : ntm_scalar_adder
+  -- ONEPLUS
+  vector_oneplus_function : ntm_vector_oneplus_function
     generic map (
       DATA_SIZE => DATA_SIZE
     )
@@ -126,35 +118,17 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_adder,
-      READY => ready_scalar_adder,
+      START => start_vector_oneplus,
+      READY => ready_vector_oneplus,
 
-      OPERATION => operation_scalar_adder,
+      DATA_IN_ENABLE => data_in_enable_vector_oneplus,
 
-      -- DATA
-      MODULO    => modulo_scalar_adder,
-      DATA_A_IN => data_a_in_scalar_adder,
-      DATA_B_IN => data_b_in_scalar_adder,
-      DATA_OUT  => data_out_scalar_adder
-    );
-
-  ntm_scalar_inverter_i : ntm_scalar_inverter
-    generic map (
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_inverter,
-      READY => ready_scalar_inverter,
+      DATA_OUT_ENABLE => data_out_enable_vector_oneplus,
 
       -- DATA
-      MODULO   => modulo_scalar_inverter,
-      DATA_IN  => data_in_scalar_inverter,
-      DATA_OUT => data_out_scalar_inverter
+      MODULO   => modulo_vector_oneplus,
+      DATA_IN  => data_in_vector_oneplus,
+      DATA_OUT => data_out_vector_oneplus
     );
 
 end architecture;

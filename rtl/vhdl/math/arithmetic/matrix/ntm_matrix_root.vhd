@@ -90,10 +90,54 @@ architecture ntm_matrix_root_architecture of ntm_matrix_root is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- ROOT
+  -- CONTROL
+  signal start_vector_root : std_logic;
+  signal ready_vector_root : std_logic;
+
+  signal base_enable_vector_root  : std_logic;
+  signal power_enable_vector_root : std_logic;
+
+  signal data_out_enable_vector_root : std_logic;
+
+  -- DATA
+  signal modulo_vector_root   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal base_vector_root     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal power_vector_root    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_root : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- ROOT
+  vector_root : ntm_vector_root
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_root,
+      READY => ready_vector_root,
+
+      BASE_ROOT_ENABLE  => base_enable_vector_root,
+      POWER_ROOT_ENABLE => power_enable_vector_root,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_root,
+
+      -- DATA
+      MODULO     => modulo_vector_root,
+      BASE_ROOT  => base_vector_root,
+      POWER_ROOT => power_vector_root,
+      DATA_OUT   => data_out_vector_root
+    );
 
 end architecture;

@@ -60,6 +60,14 @@ entity ntm_matrix_multiplication_function is
     START : in  std_logic;
     READY : out std_logic;
 
+    DATA_A_IN_I_ENABLE : in std_logic;
+    DATA_A_IN_J_ENABLE : in std_logic;
+    DATA_B_IN_I_ENABLE : in std_logic;
+    DATA_B_IN_J_ENABLE : in std_logic;
+
+    DATA_OUT_I_ENABLE : out std_logic;
+    DATA_OUT_J_ENABLE : out std_logic;
+
     -- DATA
     MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -82,10 +90,54 @@ architecture ntm_matrix_multiplication_function_architecture of ntm_matrix_multi
   -- Signals
   -----------------------------------------------------------------------
 
+  -- MULTIPLICATION
+  -- CONTROL
+  signal start_vector_multiplication : std_logic;
+  signal ready_vector_multiplication : std_logic;
+
+  signal data_a_in_enable_vector_multiplication : std_logic;
+  signal data_b_in_enable_vector_multiplication : std_logic;
+
+  signal data_out_enable_vector_multiplication : std_logic;
+
+  -- DATA
+  signal modulo_vector_multiplication    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- MULTIPLICATION
+  vector_multiplication_function : ntm_vector_multiplication_function
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_multiplication,
+      READY => ready_vector_multiplication,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplication,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplication,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_multiplication,
+
+      -- DATA
+      MODULO    => modulo_vector_multiplication,
+      DATA_A_IN => data_a_in_vector_multiplication,
+      DATA_B_IN => data_b_in_vector_multiplication,
+      DATA_OUT  => data_out_vector_multiplication
+    );
 
 end architecture;

@@ -90,10 +90,54 @@ architecture ntm_matrix_summation_function_architecture of ntm_matrix_summation_
   -- Signals
   -----------------------------------------------------------------------
 
+  -- SUMMATION
+  -- CONTROL
+  signal start_vector_summation : std_logic;
+  signal ready_vector_summation : std_logic;
+
+  signal data_a_in_enable_vector_summation : std_logic;
+  signal data_b_in_enable_vector_summation : std_logic;
+
+  signal data_out_enable_vector_summation : std_logic;
+
+  -- DATA
+  signal modulo_vector_summation    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- SUMMATION
+  vector_summation_function : ntm_vector_summation_function
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_summation,
+      READY => ready_vector_summation,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_summation,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_summation,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_summation,
+
+      -- DATA
+      MODULO    => modulo_vector_summation,
+      DATA_A_IN => data_a_in_vector_summation,
+      DATA_B_IN => data_b_in_vector_summation,
+      DATA_OUT  => data_out_vector_summation
+    );
 
 end architecture;

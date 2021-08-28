@@ -92,10 +92,58 @@ architecture ntm_matrix_adder_architecture of ntm_matrix_adder is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- ADDER
+  -- CONTROL
+  signal start_vector_adder : std_logic;
+  signal ready_vector_adder : std_logic;
+
+  signal operation_vector_adder : std_logic;
+
+  signal data_a_in_enable_vector_adder : std_logic;
+  signal data_b_in_enable_vector_adder : std_logic;
+
+  signal data_out_enable_vector_adder : std_logic;
+
+  -- DATA
+  signal modulo_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- ADDER
+  vector_adder : ntm_vector_adder
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_adder,
+      READY => ready_vector_adder,
+
+      OPERATION => operation_vector_adder,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_adder,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_adder,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_adder,
+
+      -- DATA
+      MODULO    => modulo_vector_adder,
+      DATA_A_IN => data_a_in_vector_adder,
+      DATA_B_IN => data_b_in_vector_adder,
+      DATA_OUT  => data_out_vector_adder
+    );
 
 end architecture;

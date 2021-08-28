@@ -86,10 +86,42 @@ architecture ntm_vector_summation_function_architecture of ntm_vector_summation_
   -- Signals
   -----------------------------------------------------------------------
 
+  -- SUMMATION
+  -- CONTROL
+  signal start_scalar_summation : std_logic;
+  signal ready_scalar_summation : std_logic;
+
+  -- DATA
+  signal modulo_scalar_summation    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- SUMMATION
+  scalar_summation_function : ntm_scalar_summation_function
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_summation,
+      READY => ready_scalar_summation,
+
+      -- DATA
+      MODULO    => modulo_scalar_summation,
+      DATA_A_IN => data_a_in_scalar_summation,
+      DATA_B_IN => data_b_in_scalar_summation,
+      DATA_OUT  => data_out_scalar_summation
+    );
 
 end architecture;

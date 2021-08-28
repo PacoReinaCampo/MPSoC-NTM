@@ -90,10 +90,54 @@ architecture ntm_matrix_exponentiator_architecture of ntm_matrix_exponentiator i
   -- Signals
   -----------------------------------------------------------------------
 
+  -- EXPONENTIATOR
+  -- CONTROL
+  signal start_vector_exponentiator : std_logic;
+  signal ready_vector_exponentiator : std_logic;
+
+  signal base_enable_vector_exponentiator : std_logic;
+  signal power_enable_vector_exponentiator : std_logic;
+
+  signal data_out_enable_vector_exponentiator : std_logic;
+
+  -- DATA
+  signal modulo_vector_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal base_vector_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal power_vector_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- EXPONENTIATION
+  vector_exponentiator : ntm_vector_exponentiator
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_exponentiator,
+      READY => ready_vector_exponentiator,
+
+      BASE_EXPONENTIATION_ENABLE  => base_enable_vector_exponentiator,
+      POWER_EXPONENTIATION_ENABLE => power_enable_vector_exponentiator,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
+
+      -- DATA
+      MODULO               => modulo_vector_exponentiator,
+      BASE_EXPONENTIATION  => base_vector_exponentiator,
+      POWER_EXPONENTIATION => power_vector_exponentiator,
+      DATA_OUT             => data_out_vector_exponentiator
+    );
 
 end architecture;

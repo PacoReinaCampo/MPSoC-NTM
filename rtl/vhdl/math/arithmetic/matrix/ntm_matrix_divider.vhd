@@ -90,10 +90,54 @@ architecture ntm_matrix_divider_architecture of ntm_matrix_divider is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- DIVIDER
+  -- CONTROL
+  signal start_vector_divider : std_logic;
+  signal ready_vector_divider : std_logic;
+
+  signal data_a_in_enable_vector_divider : std_logic;
+  signal data_b_in_enable_vector_divider : std_logic;
+
+  signal data_out_enable_vector_divider : std_logic;
+
+  -- DATA
+  signal modulo_vector_divider    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- DIVIDER
+  vector_divider : ntm_vector_divider
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_divider,
+      READY => ready_vector_divider,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_divider,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_divider,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_divider,
+
+      -- DATA
+      MODULO    => modulo_vector_divider,
+      DATA_A_IN => data_a_in_vector_divider,
+      DATA_B_IN => data_b_in_vector_divider,
+      DATA_OUT  => data_out_vector_divider
+    );
 
 end architecture;

@@ -86,10 +86,42 @@ architecture ntm_vector_exponentiator_architecture of ntm_vector_exponentiator i
   -- Signals
   -----------------------------------------------------------------------
 
+  -- EXPONENTIATOR
+  -- CONTROL
+  signal start_scalar_exponentiator : std_logic;
+  signal ready_scalar_exponentiator : std_logic;
+
+  -- DATA
+  signal modulo_scalar_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal base_scalar_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal power_scalar_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- EXPONENTIATION
+  scalar_exponentiator : ntm_scalar_exponentiator
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_exponentiator,
+      READY => ready_scalar_exponentiator,
+
+      -- DATA
+      MODULO               => modulo_scalar_exponentiator,
+      BASE_EXPONENTIATION  => base_scalar_exponentiator,
+      POWER_EXPONENTIATION => power_scalar_exponentiator,
+      DATA_OUT             => data_out_scalar_exponentiator
+    );
 
 end architecture;

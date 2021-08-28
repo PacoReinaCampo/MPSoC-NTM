@@ -86,10 +86,42 @@ architecture ntm_vector_root_architecture of ntm_vector_root is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- ROOT
+  -- CONTROL
+  signal start_scalar_root : std_logic;
+  signal ready_scalar_root : std_logic;
+
+  -- DATA
+  signal modulo_scalar_root   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal base_scalar_root     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal power_scalar_root    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_root : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- ROOT
+  scalar_root : ntm_scalar_root
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_root,
+      READY => ready_scalar_root,
+
+      -- DATA
+      MODULO     => modulo_scalar_root,
+      BASE_ROOT  => base_scalar_root,
+      POWER_ROOT => power_scalar_root,
+      DATA_OUT   => data_out_scalar_root
+    );
 
 end architecture;

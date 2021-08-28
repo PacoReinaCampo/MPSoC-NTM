@@ -87,10 +87,50 @@ architecture ntm_matrix_mod_architecture of ntm_matrix_mod is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- MOD
+  -- CONTROL
+  signal start_vector_mod : std_logic;
+  signal ready_vector_mod : std_logic;
+
+  signal data_in_enable_vector_mod : std_logic;
+
+  signal data_out_enable_vector_mod : std_logic;
+
+  -- DATA
+  signal modulo_vector_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_mod  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_mod : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- MOD
+  vector_mod : ntm_vector_mod
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_mod,
+      READY => ready_vector_mod,
+
+      DATA_IN_ENABLE => data_in_enable_vector_mod,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_mod,
+
+      -- DATA
+      MODULO   => modulo_vector_mod,
+      DATA_IN  => data_in_vector_mod,
+      DATA_OUT => data_out_vector_mod
+    );
 
 end architecture;

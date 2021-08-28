@@ -84,10 +84,40 @@ architecture ntm_vector_logarithm_architecture of ntm_vector_logarithm is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- LOGARITHM
+  signal start_scalar_logarithm : std_logic;
+  signal ready_scalar_logarithm : std_logic;
+
+  -- CONTROL
+  -- DATA
+  signal modulo_scalar_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- LOGARITHM
+  scalar_logarithm : ntm_scalar_logarithm
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_logarithm,
+      READY => ready_scalar_logarithm,
+
+      -- DATA
+      MODULO   => modulo_scalar_logarithm,
+      DATA_IN  => data_in_scalar_logarithm,
+      DATA_OUT => data_out_scalar_logarithm
+    );
 
 end architecture;

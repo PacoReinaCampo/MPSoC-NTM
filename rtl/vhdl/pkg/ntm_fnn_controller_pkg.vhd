@@ -35,8 +35,6 @@
 -- THE SOFTWARE.
 --
 --------------------------------------------------------------------------------
--- Author(s):
---   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -44,80 +42,14 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_vector_cosh_function is
-  generic (
-    I : integer := 64;
-
-    DATA_SIZE : integer := 512
-  );
-  port (
-    -- GLOBAL
-    CLK : in std_logic;
-    RST : in std_logic;
-
-    -- CONTROL
-    START : in  std_logic;
-    READY : out std_logic;
-
-    DATA_IN_ENABLE : in std_logic;
-
-    DATA_OUT_ENABLE : out std_logic;
-
-    -- DATA
-    MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
-end entity;
-
-architecture ntm_vector_cosh_function_architecture of ntm_vector_cosh_function is
-
-  -----------------------------------------------------------------------
-  -- Types
-  -----------------------------------------------------------------------
+package ntm_fnn_controller_pkg is
 
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
-  -- Signals
+  -- Components
   -----------------------------------------------------------------------
 
-  -- COSH
-  -- CONTROL
-  signal start_scalar_cosh : std_logic;
-  signal ready_scalar_cosh : std_logic;
-
-  -- DATA
-  signal modulo_scalar_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_cosh : std_logic_vector(DATA_SIZE-1 downto 0);
-
-begin
-
-  -----------------------------------------------------------------------
-  -- Body
-  -----------------------------------------------------------------------
-
-  -- COSH
-  scalar_cosh_function : ntm_scalar_cosh_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_cosh,
-      READY => ready_scalar_cosh,
-
-      -- DATA
-      MODULO   => modulo_scalar_cosh,
-      DATA_IN  => data_in_scalar_cosh,
-      DATA_OUT => data_out_scalar_cosh
-    );
-
-end architecture;
+end ntm_fnn_controller_pkg;

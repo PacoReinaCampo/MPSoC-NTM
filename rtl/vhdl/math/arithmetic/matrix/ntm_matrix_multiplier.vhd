@@ -90,10 +90,54 @@ architecture ntm_matrix_multiplier_architecture of ntm_matrix_multiplier is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- MULTIPLIER
+  -- CONTROL
+  signal start_vector_multiplier : std_logic;
+  signal ready_vector_multiplier : std_logic;
+
+  signal data_a_in_enable_vector_multiplier : std_logic;
+  signal data_b_in_enable_vector_multiplier : std_logic;
+
+  signal data_out_enable_vector_multiplier : std_logic;
+
+  -- DATA
+  signal modulo_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- MULTIPLIER
+  vector_multiplier : ntm_vector_multiplier
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_multiplier,
+      READY => ready_vector_multiplier,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplier,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplier,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
+
+      -- DATA
+      MODULO    => modulo_vector_multiplier,
+      DATA_A_IN => data_a_in_vector_multiplier,
+      DATA_B_IN => data_b_in_vector_multiplier,
+      DATA_OUT  => data_out_vector_multiplier
+    );
 
 end architecture;
