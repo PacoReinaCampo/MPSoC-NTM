@@ -46,12 +46,6 @@ package ntm_math_pkg is
   -- Types
   -----------------------------------------------------------------------
 
-  type std_logic_matrix is array (integer range <>) of std_logic_vector;
-  type std_logic_3array is array (integer range <>) of std_logic_matrix;
-
-  type std_logic_arithmetic_vector_vector is array (integer range <>) of std_logic_vector;
-  type std_logic_arithmetic_vector_matrix is array (integer range <>) of std_logic_matrix;
-
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
@@ -64,6 +58,7 @@ package ntm_math_pkg is
   constant W : integer := 64;
   constant N : integer := 64;
   constant L : integer := 64;
+  constant R : integer := 64;
 
   constant DATA_SIZE : integer := 512;
 

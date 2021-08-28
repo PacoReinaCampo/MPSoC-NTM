@@ -61,10 +61,17 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal start_input_gate_vector : std_logic;
   signal ready_input_gate_vector : std_logic;
 
-  signal w_in_enable_input_gate_vector : std_logic;
-  signal k_in_enable_input_gate_vector : std_logic;
-  signal u_in_enable_input_gate_vector : std_logic;
+  signal w_in_l_enable_input_gate_vector : std_logic;
+  signal w_in_i_enable_input_gate_vector : std_logic;
+  signal x_in_enable_input_gate_vector   : std_logic;
 
+  signal k_in_i_enable_input_gate_vector : std_logic;
+  signal k_in_l_enable_input_gate_vector : std_logic;
+  signal k_in_j_enable_input_gate_vector : std_logic;
+  signal r_in_i_enable_input_gate_vector : std_logic;
+  signal r_in_j_enable_input_gate_vector : std_logic;
+
+  signal u_in_enable_input_gate_vector : std_logic;
   signal h_in_enable_input_gate_vector : std_logic;
 
   signal b_in_enable_input_gate_vector : std_logic;
@@ -72,28 +79,35 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal i_out_enable_input_gate_vector : std_logic;
 
   -- DATA
-  signal w_in_input_gate_vector   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal k_in_input_gate_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal u_in_input_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal x_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal x_in_input_gate_vector   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_in_input_gate_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal h_in_input_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal r_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal b_in_input_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal u_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal h_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal i_out_input_gate_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal b_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal i_out_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- OUTPUT GATE VECTOR
   -- CONTROL
   signal start_output_gate_vector : std_logic;
   signal ready_output_gate_vector : std_logic;
 
-  signal w_in_enable_output_gate_vector : std_logic;
-  signal k_in_enable_output_gate_vector : std_logic;
-  signal u_in_enable_output_gate_vector : std_logic;
+  signal w_in_l_enable_output_gate_vector : std_logic;
+  signal w_in_i_enable_output_gate_vector : std_logic;
+  signal x_in_enable_output_gate_vector   : std_logic;
 
+  signal k_in_i_enable_output_gate_vector : std_logic;
+  signal k_in_l_enable_output_gate_vector : std_logic;
+  signal k_in_j_enable_output_gate_vector : std_logic;
+  signal r_in_i_enable_output_gate_vector : std_logic;
+  signal r_in_j_enable_output_gate_vector : std_logic;
+
+  signal u_in_enable_output_gate_vector : std_logic;
   signal h_in_enable_output_gate_vector : std_logic;
 
   signal b_in_enable_output_gate_vector : std_logic;
@@ -101,28 +115,35 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal o_out_enable_output_gate_vector : std_logic;
 
   -- DATA
-  signal w_in_output_gate_vector   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal k_in_output_gate_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal u_in_output_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal x_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal x_in_output_gate_vector   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_in_output_gate_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal h_in_output_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal r_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal b_in_output_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal u_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal h_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal o_out_output_gate_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal b_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal o_out_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- FORGET GATE VECTOR
   -- CONTROL
   signal start_forget_gate_vector : std_logic;
   signal ready_forget_gate_vector : std_logic;
 
-  signal w_in_enable_forget_gate_vector : std_logic;
-  signal k_in_enable_forget_gate_vector : std_logic;
-  signal u_in_enable_forget_gate_vector : std_logic;
+  signal w_in_l_enable_forget_gate_vector : std_logic;
+  signal w_in_i_enable_forget_gate_vector : std_logic;
+  signal x_in_enable_forget_gate_vector   : std_logic;
 
+  signal k_in_i_enable_forget_gate_vector : std_logic;
+  signal k_in_l_enable_forget_gate_vector : std_logic;
+  signal k_in_j_enable_forget_gate_vector : std_logic;
+  signal r_in_i_enable_forget_gate_vector : std_logic;
+  signal r_in_j_enable_forget_gate_vector : std_logic;
+
+  signal u_in_enable_forget_gate_vector : std_logic;
   signal h_in_enable_forget_gate_vector : std_logic;
 
   signal b_in_enable_forget_gate_vector : std_logic;
@@ -130,53 +151,62 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal f_out_enable_forget_gate_vector : std_logic;
 
   -- DATA
-  signal w_in_forget_gate_vector   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal k_in_forget_gate_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal u_in_forget_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal x_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal x_in_forget_gate_vector   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_in_forget_gate_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal h_in_forget_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal r_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal b_in_forget_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal u_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal h_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal f_out_forget_gate_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal b_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal f_out_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- STATE GATE VECTOR
   -- CONTROL
   signal start_state_gate_vector : std_logic;
   signal ready_state_gate_vector : std_logic;
 
-  signal w_in_enable_state_gate_vector : std_logic;
-  signal k_in_enable_state_gate_vector : std_logic;
-  signal u_in_enable_state_gate_vector : std_logic;
+  signal w_in_l_enable_state_gate_vector : std_logic;
+  signal w_in_i_enable_state_gate_vector : std_logic;
+  signal x_in_enable_state_gate_vector   : std_logic;
 
+  signal k_in_i_enable_state_gate_vector : std_logic;
+  signal k_in_l_enable_state_gate_vector : std_logic;
+  signal k_in_j_enable_state_gate_vector : std_logic;
+  signal r_in_i_enable_state_gate_vector : std_logic;
+  signal r_in_j_enable_state_gate_vector : std_logic;
+
+  signal u_in_enable_state_gate_vector : std_logic;
+  signal h_in_enable_state_gate_vector : std_logic;
+
+  signal s_in_enable_state_gate_vector : std_logic;
   signal i_in_enable_state_gate_vector : std_logic;
   signal f_in_enable_state_gate_vector : std_logic;
-  signal s_in_enable_state_gate_vector : std_logic;
-  signal h_in_enable_state_gate_vector : std_logic;
 
   signal b_in_enable_state_gate_vector : std_logic;
 
   signal s_out_enable_state_gate_vector : std_logic;
 
   -- DATA
-  signal w_in_state_gate_vector   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal k_in_state_gate_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal u_in_state_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal x_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal x_in_state_gate_vector   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_in_state_gate_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal i_in_state_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal f_in_state_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal s_in_state_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal h_in_state_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal r_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal b_in_state_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal u_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal h_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal s_out_state_gate_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal s_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal i_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal f_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal b_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal s_out_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- HIDDEN GATE VECTOR
   -- CONTROL
@@ -189,41 +219,46 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal h_out_enable_hidden_gate_vector : std_logic;
 
   -- DATA
-  signal s_in_hidden_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal o_in_hidden_gate_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal s_in_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal o_in_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal h_out_hidden_gate_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal h_out_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- CONTROLLER OUTPUT VECTOR
   -- CONTROL
   signal start_controller_output_vector : std_logic;
   signal ready_controller_output_vector : std_logic;
 
-  signal h_in_enable_controller_output_vector : std_logic;
+  signal u_in_j_enable_controller_output_vector : std_logic;
+  signal u_in_l_enable_controller_output_vector : std_logic;
 
-  signal w_in_enable_controller_output_vector : std_logic;
+  signal h_in_enable_controller_output_vector : std_logic;
 
   signal nu_out_enable_controller_output_vector : std_logic;
 
   -- DATA
-  signal h_in_controller_output_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal u_in_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal h_in_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal w_in_controller_output_vector   : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-
-  signal modulo_controller_output_vector : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal nu_out_controller_output_vector : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal nu_out_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- CONTROLLER
   -- CONTROL
   signal start_controller : std_logic;
   signal ready_controller : std_logic;
 
+  signal x_in_enable_controller : std_logic;
+
+  signal r_in_i_enable_controller : std_logic;
+  signal r_in_j_enable_controller : std_logic;
+
+  signal h_out_enable_controller : std_logic;
+
   -- DATA
-  signal x_in_controller   : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_in_controller   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal h_out_controller  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal x_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal r_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal h_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -235,8 +270,11 @@ begin
   input_gate_vector : ntm_input_gate_vector
     generic map (
       X => X,
+      Y => Y,
+      N => N,
       W => W,
       L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -249,10 +287,17 @@ begin
       START => start_input_gate_vector,
       READY => ready_input_gate_vector,
 
-      W_IN_ENABLE => w_in_enable_input_gate_vector,
-      K_IN_ENABLE => k_in_enable_input_gate_vector,
-      U_IN_ENABLE => u_in_enable_input_gate_vector,
+      W_IN_L_ENABLE => w_in_l_enable_input_gate_vector,
+      W_IN_I_ENABLE => w_in_i_enable_input_gate_vector,
+      X_IN_ENABLE   => x_in_enable_input_gate_vector,
 
+      K_IN_I_ENABLE => k_in_i_enable_input_gate_vector,
+      K_IN_L_ENABLE => k_in_l_enable_input_gate_vector,
+      K_IN_J_ENABLE => k_in_j_enable_input_gate_vector,
+      R_IN_I_ENABLE => r_in_i_enable_input_gate_vector,
+      R_IN_J_ENABLE => r_in_j_enable_input_gate_vector,
+
+      U_IN_ENABLE => u_in_enable_input_gate_vector,
       H_IN_ENABLE => h_in_enable_input_gate_vector,
 
       B_IN_ENABLE => b_in_enable_input_gate_vector,
@@ -261,25 +306,28 @@ begin
 
       -- DATA
       W_IN => w_in_input_gate_vector,
-      K_IN => k_in_input_gate_vector,
-      U_IN => u_in_input_gate_vector,
-
       X_IN => x_in_input_gate_vector,
+
+      K_IN => k_in_input_gate_vector,
       R_IN => r_in_input_gate_vector,
+
+      U_IN => u_in_input_gate_vector,
       H_IN => h_in_input_gate_vector,
 
       B_IN => b_in_input_gate_vector,
 
-      MODULO => modulo_input_gate_vector,
-      I_OUT  => i_out_input_gate_vector
+      I_OUT => i_out_input_gate_vector
     );
 
   -- OUTPUT GATE VECTOR
   output_gate_vector : ntm_output_gate_vector
     generic map (
       X => X,
+      Y => Y,
+      N => N,
       W => W,
       L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -292,10 +340,17 @@ begin
       START => start_output_gate_vector,
       READY => ready_output_gate_vector,
 
-      W_IN_ENABLE => w_in_enable_output_gate_vector,
-      K_IN_ENABLE => k_in_enable_output_gate_vector,
-      U_IN_ENABLE => u_in_enable_output_gate_vector,
+      W_IN_L_ENABLE => w_in_l_enable_output_gate_vector,
+      W_IN_I_ENABLE => w_in_i_enable_output_gate_vector,
+      X_IN_ENABLE   => x_in_enable_output_gate_vector,
 
+      K_IN_I_ENABLE => k_in_i_enable_output_gate_vector,
+      K_IN_L_ENABLE => k_in_l_enable_output_gate_vector,
+      K_IN_J_ENABLE => k_in_j_enable_output_gate_vector,
+      R_IN_I_ENABLE => r_in_i_enable_output_gate_vector,
+      R_IN_J_ENABLE => r_in_j_enable_output_gate_vector,
+
+      U_IN_ENABLE => u_in_enable_output_gate_vector,
       H_IN_ENABLE => h_in_enable_output_gate_vector,
 
       B_IN_ENABLE => b_in_enable_output_gate_vector,
@@ -304,25 +359,28 @@ begin
 
       -- DATA
       W_IN => w_in_output_gate_vector,
-      K_IN => k_in_output_gate_vector,
-      U_IN => u_in_output_gate_vector,
-
       X_IN => x_in_output_gate_vector,
+
+      K_IN => k_in_output_gate_vector,
       R_IN => r_in_output_gate_vector,
+
+      U_IN => u_in_output_gate_vector,
       H_IN => h_in_output_gate_vector,
 
       B_IN => b_in_output_gate_vector,
 
-      MODULO => modulo_output_gate_vector,
-      O_OUT  => o_out_output_gate_vector
+      O_OUT => o_out_output_gate_vector
     );
 
   -- FORGET GATE VECTOR
   forget_gate_vector : ntm_forget_gate_vector
     generic map (
       X => X,
+      Y => Y,
+      N => N,
       W => W,
       L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -335,10 +393,17 @@ begin
       START => start_forget_gate_vector,
       READY => ready_forget_gate_vector,
 
-      W_IN_ENABLE => w_in_enable_forget_gate_vector,
-      K_IN_ENABLE => k_in_enable_forget_gate_vector,
-      U_IN_ENABLE => u_in_enable_forget_gate_vector,
+      W_IN_L_ENABLE => w_in_l_enable_forget_gate_vector,
+      W_IN_I_ENABLE => w_in_i_enable_forget_gate_vector,
+      X_IN_ENABLE   => x_in_enable_forget_gate_vector,
 
+      K_IN_I_ENABLE => k_in_i_enable_forget_gate_vector,
+      K_IN_L_ENABLE => k_in_l_enable_forget_gate_vector,
+      K_IN_J_ENABLE => k_in_j_enable_forget_gate_vector,
+      R_IN_I_ENABLE => r_in_i_enable_forget_gate_vector,
+      R_IN_J_ENABLE => r_in_j_enable_forget_gate_vector,
+
+      U_IN_ENABLE => u_in_enable_forget_gate_vector,
       H_IN_ENABLE => h_in_enable_forget_gate_vector,
 
       B_IN_ENABLE => b_in_enable_forget_gate_vector,
@@ -347,25 +412,28 @@ begin
 
       -- DATA
       W_IN => w_in_forget_gate_vector,
-      K_IN => k_in_forget_gate_vector,
-      U_IN => u_in_forget_gate_vector,
-
       X_IN => x_in_forget_gate_vector,
+
+      K_IN => k_in_forget_gate_vector,
       R_IN => r_in_forget_gate_vector,
+
+      U_IN => u_in_forget_gate_vector,
       H_IN => h_in_forget_gate_vector,
 
       B_IN => b_in_forget_gate_vector,
 
-      MODULO => modulo_forget_gate_vector,
-      F_OUT  => f_out_forget_gate_vector
+      F_OUT => f_out_forget_gate_vector
     );
 
   -- STATE GATE VECTOR
   state_gate_vector : ntm_state_gate_vector
     generic map (
       X => X,
+      Y => Y,
+      N => N,
       W => W,
       L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -378,14 +446,22 @@ begin
       START => start_state_gate_vector,
       READY => ready_state_gate_vector,
 
-      W_IN_ENABLE => w_in_enable_state_gate_vector,
-      K_IN_ENABLE => k_in_enable_state_gate_vector,
-      U_IN_ENABLE => u_in_enable_state_gate_vector,
+      W_IN_L_ENABLE => w_in_l_enable_state_gate_vector,
+      W_IN_I_ENABLE => w_in_i_enable_state_gate_vector,
+      X_IN_ENABLE   => x_in_enable_state_gate_vector,
 
+      K_IN_I_ENABLE => k_in_i_enable_state_gate_vector,
+      K_IN_L_ENABLE => k_in_l_enable_state_gate_vector,
+      K_IN_J_ENABLE => k_in_j_enable_state_gate_vector,
+      R_IN_I_ENABLE => r_in_i_enable_state_gate_vector,
+      R_IN_J_ENABLE => r_in_j_enable_state_gate_vector,
+
+      U_IN_ENABLE => u_in_enable_state_gate_vector,
+      H_IN_ENABLE => h_in_enable_state_gate_vector,
+
+      S_IN_ENABLE => s_in_enable_state_gate_vector,
       I_IN_ENABLE => i_in_enable_state_gate_vector,
       F_IN_ENABLE => f_in_enable_state_gate_vector,
-      S_IN_ENABLE => s_in_enable_state_gate_vector,
-      H_IN_ENABLE => h_in_enable_state_gate_vector,
 
       B_IN_ENABLE => b_in_enable_state_gate_vector,
 
@@ -393,26 +469,32 @@ begin
 
       -- DATA
       W_IN => w_in_state_gate_vector,
-      K_IN => k_in_state_gate_vector,
-      U_IN => u_in_state_gate_vector,
-
       X_IN => x_in_state_gate_vector,
+
+      K_IN => k_in_state_gate_vector,
       R_IN => r_in_state_gate_vector,
+
+      U_IN => u_in_state_gate_vector,
+      H_IN => h_in_state_gate_vector,
+
+      S_IN => s_in_state_gate_vector,
       I_IN => i_in_state_gate_vector,
       F_IN => f_in_state_gate_vector,
-      S_IN => s_in_state_gate_vector,
-      H_IN => h_in_state_gate_vector,
 
       B_IN => b_in_state_gate_vector,
 
-      MODULO => modulo_state_gate_vector,
-      S_OUT  => s_out_state_gate_vector
+      S_OUT => s_out_state_gate_vector
     );
 
   -- HIDDEN GATE VECTOR
   hidden_gate_vector : ntm_hidden_gate_vector
     generic map (
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
       L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -434,15 +516,18 @@ begin
       S_IN => s_in_hidden_gate_vector,
       O_IN => o_in_hidden_gate_vector,
 
-      MODULO => modulo_hidden_gate_vector,
-      H_OUT  => h_out_hidden_gate_vector
+      H_OUT => h_out_hidden_gate_vector
     );
 
   -- CONTROLLER OUTPUT VECTOR
   controller_output_vector : ntm_controller_output_vector
     generic map (
+      X => X,
       Y => Y,
+      N => N,
+      W => W,
       L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -455,18 +540,17 @@ begin
       START => start_controller_output_vector,
       READY => ready_controller_output_vector,
 
-      H_IN_ENABLE => h_in_enable_controller_output_vector,
+      U_IN_J_ENABLE => u_in_j_enable_controller_output_vector,
+      U_IN_L_ENABLE => u_in_l_enable_controller_output_vector,
 
-      W_IN_ENABLE => w_in_enable_controller_output_vector,
+      H_IN_ENABLE => h_in_enable_controller_output_vector,
 
       NU_ENABLE_OUT => nu_out_enable_controller_output_vector,
 
       -- DATA
-      H_IN  => h_in_controller_output_vector,
+      U_IN => u_in_controller_output_vector,
+      H_IN => h_in_controller_output_vector,
 
-      W_IN => w_in_controller_output_vector,
-
-      MODULO => modulo_controller_output_vector,
       NU_OUT => nu_out_controller_output_vector
     );
 
@@ -478,6 +562,7 @@ begin
       N => N,
       W => W,
       L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -490,12 +575,18 @@ begin
       START => start_controller,
       READY => ready_controller,
 
+      X_IN_ENABLE => x_in_enable_controller,
+
+      R_IN_I_ENABLE => r_in_i_enable_controller,
+      R_IN_J_ENABLE => r_in_j_enable_controller,
+
+      H_OUT_ENABLE => h_out_enable_controller,
+
       -- DATA
       X_IN => x_in_controller,
       R_IN => r_in_controller,
 
-      MODULO => modulo_controller,
-      H_OUT  => h_out_controller
+      H_OUT => h_out_controller
     );
 
 end ntm_convolutional_lstm_testbench_architecture;

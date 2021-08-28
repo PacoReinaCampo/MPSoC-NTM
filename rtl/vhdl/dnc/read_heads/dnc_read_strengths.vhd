@@ -46,6 +46,13 @@ use work.ntm_math_pkg.all;
 
 entity dnc_read_strengths is
   generic (
+    X : integer := 64;
+    Y : integer := 64;
+    N : integer := 64;
+    W : integer := 64;
+    L : integer := 64;
+    R : integer := 64;
+
     DATA_SIZE : integer := 512
   );
   port (
@@ -57,13 +64,13 @@ entity dnc_read_strengths is
     START : in  std_logic;
     READY : out std_logic;
 
-    BETA_IN_ENABLE  : in  std_logic;
-    BETA_OUT_ENABLE : out std_logic;
+    BETA_IN_ENABLE : in std_logic; -- for i in 0 to R-1
+
+    BETA_OUT_ENABLE : out std_logic; -- for i in 0 to R-1
 
     -- DATA
     BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;

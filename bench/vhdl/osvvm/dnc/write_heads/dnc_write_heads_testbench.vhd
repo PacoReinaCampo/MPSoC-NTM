@@ -63,7 +63,6 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
 
   -- DATA
   signal ga_in_allocation_gate  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal modulo_allocation_gate : std_logic_vector(DATA_SIZE-1 downto 0);
   signal ga_out_allocation_gate : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- ERASE VECTOR
@@ -71,10 +70,13 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
   signal start_erase_vector : std_logic;
   signal ready_erase_vector : std_logic;
 
+  signal e_in_enable_erase_vector : std_logic;
+
+  signal e_out_enable_erase_vector : std_logic;
+
   -- DATA
-  signal e_in_erase_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_erase_vector : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal e_out_erase_vector  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal e_in_erase_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal e_out_erase_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE GATE
   -- CONTROL
@@ -83,7 +85,6 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
 
   -- DATA
   signal gw_in_write_gate  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal modulo_write_gate : std_logic_vector(DATA_SIZE-1 downto 0);
   signal gw_out_write_gate : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE KEY
@@ -91,10 +92,13 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
   signal start_write_key : std_logic;
   signal ready_write_key : std_logic;
 
+  signal k_in_enable_write_key : std_logic;
+
+  signal k_out_enable_write_key : std_logic;
+
   -- DATA
-  signal k_in_write_key   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_write_key : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal k_out_write_key  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_in_write_key   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_write_key  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE STRENGHT
   -- CONTROL
@@ -103,7 +107,6 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
 
   -- DATA
   signal beta_in_write_strength  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal modulo_write_strength   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_out_write_strength : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE VECTOR
@@ -111,10 +114,13 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
   signal start_write_vector : std_logic;
   signal ready_write_vector : std_logic;
 
+  signal v_in_enable_write_vector : std_logic;
+
+  signal v_out_enable_write_vector : std_logic;
+
   -- DATA
-  signal v_in_write_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_write_vector : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal v_out_write_vector  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal v_in_write_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal v_out_write_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -125,6 +131,13 @@ begin
   -- ALLOCATION GATE
   allocation_gate : dnc_allocation_gate
     generic map (
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -139,14 +152,18 @@ begin
       -- DATA
       GA_IN => ga_in_allocation_gate,
 
-      MODULO => modulo_allocation_gate,
       GA_OUT => ga_out_allocation_gate
     );
 
   -- ERASE VECTOR
   erase_vector : dnc_erase_vector
     generic map (
+      X => X,
+      Y => Y,
+      N => N,
       W => W,
+      L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -159,16 +176,26 @@ begin
       START => start_erase_vector,
       READY => ready_erase_vector,
 
+      E_IN_ENABLE => e_in_enable_erase_vector,
+
+      E_OUT_ENABLE => e_out_enable_erase_vector,
+
       -- DATA
       E_IN => e_in_erase_vector,
 
-      MODULO => modulo_erase_vector,
       E_OUT  => e_out_erase_vector
     );
 
   -- WRITE GATE
   write_gate : dnc_write_gate
     generic map (
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -183,14 +210,18 @@ begin
       -- DATA
       GW_IN => gw_in_write_gate,
 
-      MODULO => modulo_write_gate,
       GW_OUT => gw_out_write_gate
     );
 
   -- WRITE KEY
   write_key : dnc_write_key
     generic map (
+      X => X,
+      Y => Y,
+      N => N,
       W => W,
+      L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -203,16 +234,26 @@ begin
       START => start_write_key,
       READY => ready_write_key,
 
+      K_IN_ENABLE => k_in_enable_write_key,
+
+      K_OUT_ENABLE => k_out_enable_write_key,
+
       -- DATA
       K_IN => k_in_write_key,
 
-      MODULO => modulo_write_key,
       K_OUT  => k_out_write_key
     );
 
   -- WRITE STRENGTH
   write_strength : dnc_write_strength
     generic map (
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -227,14 +268,18 @@ begin
       -- DATA
       BETA_IN => beta_in_write_strength,
 
-      MODULO   => modulo_write_strength,
       BETA_OUT => beta_out_write_strength
     );
 
   -- WRITE VECTOR
   write_vector : dnc_write_vector
     generic map (
+      X => X,
+      Y => Y,
+      N => N,
       W => W,
+      L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -247,10 +292,13 @@ begin
       START => start_write_vector,
       READY => ready_write_vector,
 
+      V_IN_ENABLE => v_in_enable_write_vector,
+
+      V_OUT_ENABLE => v_out_enable_write_vector,
+
       -- DATA
       V_IN => v_in_write_vector,
 
-      MODULO => modulo_write_vector,
       V_OUT  => v_out_write_vector
     );
 

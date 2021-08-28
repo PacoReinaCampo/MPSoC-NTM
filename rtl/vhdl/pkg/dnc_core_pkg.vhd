@@ -522,6 +522,13 @@ package dnc_core_pkg is
 
   component dnc_free_gates is
     generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
+      R : integer := 64;
+
       DATA_SIZE : integer := 512
     );
     port (
@@ -533,20 +540,25 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      F_IN_ENABLE  : in  std_logic;
-      F_OUT_ENABLE : out std_logic;
+      F_IN_ENABLE : in std_logic;  -- for i in 0 to R-1
+
+      F_OUT_ENABLE : out std_logic;  -- for i in 0 to R-1
 
       -- DATA
       F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      F_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      F_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
   component dnc_read_keys is
     generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
       W : integer := 64;
+      L : integer := 64;
+      R : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -559,19 +571,28 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      K_IN_ENABLE  : in  std_logic;
-      K_OUT_ENABLE : out std_logic;
+      K_IN_I_ENABLE : in std_logic;  -- for i in 0 to R-1
+      K_IN_J_ENABLE : in std_logic;  -- for j in 0 to W-1
+
+      K_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1
+      K_OUT_J_ENABLE : out std_logic;  -- for j in 0 to W-1
 
       -- DATA
-      K_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      K_OUT  : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0)
+      K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
   component dnc_read_modes is
     generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
+      R : integer := 64;
+
       DATA_SIZE : integer := 512
     );
     port (
@@ -583,19 +604,28 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      PI_IN_ENABLE  : in  std_logic;
-      PI_OUT_ENABLE : out std_logic;
+      PI_IN_I_ENABLE : in std_logic;  -- for i in 0 to R-1
+      PI_IN_J_ENABLE : in std_logic;  -- for i in 0 to 2
+
+      PI_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1
+      PI_OUT_J_ENABLE : out std_logic;  -- for i in 0 to 2
 
       -- DATA
-      PI_IN : in std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+      PI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
-      PI_OUT : out std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0)
+      PI_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
   component dnc_read_strengths is
     generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
+      R : integer := 64;
+
       DATA_SIZE : integer := 512
     );
     port (
@@ -607,13 +637,13 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      BETA_IN_ENABLE  : in  std_logic;
-      BETA_OUT_ENABLE : out std_logic;
+      BETA_IN_ENABLE : in std_logic;  -- for i in 0 to R-1
+
+      BETA_OUT_ENABLE : out std_logic;  -- for i in 0 to R-1
 
       -- DATA
       BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
@@ -624,6 +654,13 @@ package dnc_core_pkg is
 
   component dnc_allocation_gate is
     generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
+      R : integer := 64;
+
       DATA_SIZE : integer := 512
     );
     port (
@@ -638,14 +675,18 @@ package dnc_core_pkg is
       -- DATA
       GA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
       GA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
   component dnc_erase_vector is
     generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
       W : integer := 64;
+      L : integer := 64;
+      R : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -658,16 +699,26 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      -- DATA
-      E_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      E_IN_ENABLE : in std_logic;  -- for i in 0 to W-1
 
-      MODULO : in  std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      E_OUT  : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0)
+      E_OUT_ENABLE : out std_logic;  -- for i in 0 to W-1
+
+      -- DATA
+      E_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      E_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
   component dnc_write_gate is
     generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
+      R : integer := 64;
+
       DATA_SIZE : integer := 512
     );
     port (
@@ -682,14 +733,18 @@ package dnc_core_pkg is
       -- DATA
       GW_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
       GW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
   component dnc_write_key is
     generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
       W : integer := 64;
+      L : integer := 64;
+      R : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -702,16 +757,26 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      -- DATA
-      K_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      K_IN_ENABLE : in std_logic;  -- for j in 0 to W-1
 
-      MODULO : in  std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      K_OUT  : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0)
+      K_OUT_ENABLE : out std_logic;  -- for j in 0 to W-1
+
+      -- DATA
+      K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
   component dnc_write_strength is
     generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
+      R : integer := 64;
+
       DATA_SIZE : integer := 512
     );
     port (
@@ -726,14 +791,18 @@ package dnc_core_pkg is
       -- DATA
       BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 
   component dnc_write_vector is
     generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
       W : integer := 64;
+      L : integer := 64;
+      R : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -746,11 +815,14 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      -- DATA
-      V_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+      V_IN_ENABLE : in std_logic;  -- for i in 0 to W-1
 
-      MODULO : in  std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-      V_OUT  : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0)
+      V_OUT_ENABLE : out std_logic;  -- for i in 0 to W-1
+
+      -- DATA
+      V_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      V_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 

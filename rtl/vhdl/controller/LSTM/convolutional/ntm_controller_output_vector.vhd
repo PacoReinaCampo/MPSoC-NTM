@@ -46,8 +46,12 @@ use work.ntm_math_pkg.all;
 
 entity ntm_controller_output_vector is
   generic (
+    X : integer := 64;
     Y : integer := 64;
+    N : integer := 64;
+    W : integer := 64;
     L : integer := 64;
+    R : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -60,19 +64,18 @@ entity ntm_controller_output_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    H_IN_ENABLE : in std_logic;
+    U_IN_J_ENABLE : in std_logic; -- for j in 0 to Y-1
+    U_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
 
-    W_IN_ENABLE : in std_logic;
+    H_IN_ENABLE : in std_logic; -- for l in 0 to L-1
 
-    NU_ENABLE_OUT : out std_logic;
+    NU_ENABLE_OUT : out std_logic; -- for j in 0 to Y-1
 
     -- DATA
-    H_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
+    U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    W_IN : in std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-
-    MODULO : in  std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    NU_OUT : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+    NU_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -93,15 +96,20 @@ architecture ntm_controller_output_vector_architecture of ntm_controller_output_
   -- VECTOR ADDER
   -- CONTROL
   signal start_vector_adder : std_logic;
-  signal ready_vector_adder : std_logic_vector(Y-1 downto 0);
+  signal ready_vector_adder : std_logic;
 
-  signal operation_vector_adder : std_logic_vector(Y-1 downto 0);
+  signal operation_vector_adder : std_logic;
+
+  signal data_a_in_enable_vector_adder : std_logic;
+  signal data_b_in_enable_vector_adder : std_logic;
+
+  signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_vector_adder    : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_adder : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_adder : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_adder  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX PRODUCT
   -- CONTROL
@@ -109,10 +117,10 @@ architecture ntm_controller_output_vector_architecture of ntm_controller_output_
   signal ready_vector_product : std_logic;
 
   -- DATA
-  signal modulo_vector_product    : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_product : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_product  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_out_vector_product  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -124,6 +132,8 @@ begin
 
   ntm_vector_adder_i : ntm_vector_adder
     generic map (
+      I => Y,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -136,6 +146,11 @@ begin
       READY => ready_vector_adder,
 
       OPERATION => operation_vector_adder,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_adder,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_adder,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
       -- DATA
       MODULO    => modulo_vector_adder,
