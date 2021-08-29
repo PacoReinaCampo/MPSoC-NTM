@@ -183,7 +183,7 @@ begin
       -- DATA
       E_IN => e_in_erase_vector,
 
-      E_OUT  => e_out_erase_vector
+      E_OUT => e_out_erase_vector
     );
 
   -- WRITE GATE
@@ -241,7 +241,7 @@ begin
       -- DATA
       K_IN => k_in_write_key,
 
-      K_OUT  => k_out_write_key
+      K_OUT => k_out_write_key
     );
 
   -- WRITE STRENGTH
@@ -299,7 +299,7 @@ begin
       -- DATA
       V_IN => v_in_write_vector,
 
-      V_OUT  => v_out_write_vector
+      V_OUT => v_out_write_vector
     );
 
 end dnc_write_heads_testbench_architecture;

@@ -70,6 +70,8 @@ entity dnc_write_interface_vector is
     WK_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
     WK_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
 
+    K_OUT_ENABLE : out std_logic; -- for k in 0 to W-1
+
     -- Write Strength
     WBETA_IN_ENABLE : in std_logic; -- for l in 0 to L-1
 
@@ -77,9 +79,13 @@ entity dnc_write_interface_vector is
     WE_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
     WE_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
 
+    E_OUT_ENABLE : out std_logic; -- for k in 0 to W-1
+
     -- Write Vector
     WV_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
     WV_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+
+    V_OUT_ENABLE : out std_logic; -- for k in 0 to W-1
 
     -- Allocation Gate
     WGA_IN_ENABLE : in std_logic; -- for l in 0 to L-1

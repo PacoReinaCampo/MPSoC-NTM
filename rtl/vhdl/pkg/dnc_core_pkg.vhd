@@ -1030,14 +1030,14 @@ package dnc_core_pkg is
       K_OUT_K_ENABLE : in std_logic; -- for k in 0 to W-1
 
       -- Read Strength
-      WBETA_I_IN_ENABLE : in std_logic; -- for i in 0 to R-1
-      WBETA_L_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+      WBETA_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
+      WBETA_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
 
       BETA_OUT_ENABLE : in std_logic; -- for i in 0 to R-1
 
       -- Free Gate
-      WF_I_IN_ENABLE : in std_logic; -- for i in 0 to R-1
-      WF_L_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+      WF_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
+      WF_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
 
       F_OUT_ENABLE : in std_logic; -- for i in 0 to R-1
 
@@ -1053,10 +1053,10 @@ package dnc_core_pkg is
       H_IN_ENABLE : in std_logiC; -- for l in 0 to L-1
 
       -- DATA
-      WK_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      WBETA_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      WF_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      WPI_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      WK_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
+      WBETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      WF_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
+      WPI_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -1091,6 +1091,8 @@ package dnc_core_pkg is
       WK_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
       WK_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
 
+      K_OUT_ENABLE : out std_logic; -- for k in 0 to W-1
+
       -- Write Strength
       WBETA_IN_ENABLE : in std_logic; -- for l in 0 to L-1
 
@@ -1098,9 +1100,13 @@ package dnc_core_pkg is
       WE_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
       WE_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
 
+      E_OUT_ENABLE : out std_logic; -- for k in 0 to W-1
+
       -- Write Vector
       WV_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
       WV_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+
+      V_OUT_ENABLE : out std_logic; -- for k in 0 to W-1
 
       -- Allocation Gate
       WGA_IN_ENABLE : in std_logic; -- for l in 0 to L-1
