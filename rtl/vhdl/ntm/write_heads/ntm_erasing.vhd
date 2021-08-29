@@ -64,7 +64,6 @@ entity ntm_writing is
     M_OUT_ENABLE : in std_logic;
 
     -- DATA
-    MODULO : in std_logic_vector(DATA_SIZE-1 downto 0);
     M_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
     E_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
     W_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);

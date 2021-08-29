@@ -63,7 +63,6 @@ entity ntm_reading is
     R_OUT_ENABLE : out std_logic;
 
     -- DATA
-    MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
     W_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     M_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     R_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)

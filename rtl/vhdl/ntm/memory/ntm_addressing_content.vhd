@@ -59,12 +59,19 @@ entity ntm_addressing_content is
     START : in  std_logic;
     READY : out std_logic;
 
+    M_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
+    M_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+
+    K_IN_ENABLE : in std_logic; -- for k in 0 to W-1
+
+    W_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
+
     -- DATA
-    MODULO  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    K_IN    : in  std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    M_IN    : in  std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    BETA_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    W_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
+    K_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
+    BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    M_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 

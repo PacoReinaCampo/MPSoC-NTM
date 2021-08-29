@@ -62,6 +62,14 @@
 ../../../../../../../rtl/vhdl/math/function/sigmoid/matrix/oneplus/ntm_matrix_oneplus_function.vhd
 ../../../../../../../rtl/vhdl/math/function/summation/matrix/ntm_matrix_summation_function.vhd
 
+../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_determinant.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_inversion.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_product.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_rank.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_transpose.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_scalar_product.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_vector_product.vhd
+
 ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_controller.vhd
 ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_controller_output_vector.vhd
 ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_forget_gate_vector.vhd
@@ -78,6 +86,8 @@
 ../../../../../../../rtl/vhdl/ntm/memory/ntm_addressing_location.vhd
 ../../../../../../../rtl/vhdl/ntm/memory/ntm_addressing.vhd
 
+../../../../../../../rtl/vhdl/ntm/top/ntm_interface_vector.vhd
+../../../../../../../rtl/vhdl/ntm/top/ntm_output_vector.vhd
 ../../../../../../../rtl/vhdl/ntm/top/ntm_top.vhd
 
 ../../../../../../../bench/vhdl/osvvm/ntm/top/ntm_top_testbench.vhd

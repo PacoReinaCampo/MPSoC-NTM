@@ -61,6 +61,9 @@ architecture ntm_read_heads_testbench_architecture of ntm_read_heads_testbench i
   signal start_reading : std_logic;
   signal ready_reading : std_logic;
 
+  signal m_in_enable_reading  : std_logic;
+  signal r_out_enable_reading : std_logic;
+
   -- DATA
   signal modulo_reading : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_in_reading   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -85,12 +88,14 @@ begin
       CLK => CLK,
       RST => RST,
 
+      M_IN_ENABLE  => m_in_enable_reading,
+      R_OUT_ENABLE => r_out_enable_reading,
+
       -- CONTROL
       START => start_reading,
       READY => ready_reading,
 
       -- DATA
-      MODULO => modulo_reading,
       W_IN   => w_in_reading,
       M_IN   => m_in_reading,
       R_OUT  => r_out_reading

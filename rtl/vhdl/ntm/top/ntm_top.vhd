@@ -65,11 +65,14 @@ entity ntm_top is
     START : in  std_logic;
     READY : out std_logic;
 
-    -- DATA
-    X_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    X_IN_ENABLE : in std_logic; -- for x in 0 to X-1
 
-    MODULO : in  std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    Y_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+    Y_OUT_ENABLE : out std_logic; -- for y in 0 to Y-1
+
+    -- DATA
+    X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -87,51 +90,82 @@ architecture ntm_top_architecture of ntm_top is
   -- Signals
   -----------------------------------------------------------------------
 
+  -----------------------------------------------------------------------
   -- CONTROLLER
+  -----------------------------------------------------------------------
+
   -- CONTROL
   signal start_controller : std_logic;
   signal ready_controller : std_logic;
 
+  signal x_in_enable_controller : std_logic;
+
+  signal r_in_i_enable_controller : std_logic;
+  signal r_in_k_enable_controller : std_logic;
+
+  signal h_out_enable_controller : std_logic;
+
   -- DATA
-  signal x_in_controller : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_in_controller : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal x_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal r_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_controller : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal h_out_controller  : std_logic_arithmetic_vector_vector(L-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal h_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -----------------------------------------------------------------------
   -- READ HEADS
+  -----------------------------------------------------------------------
+
   -- CONTROL
   signal start_reading : std_logic;
   signal ready_reading : std_logic;
 
-  -- DATA
-  signal modulo_reading : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_reading   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal m_in_reading   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_out_reading  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_enable_reading  : std_logic;
+  signal r_out_enable_reading : std_logic;
 
+  -- DATA
+  signal modulo_reading : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_reading   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_in_reading   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal r_out_reading  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -----------------------------------------------------------------------
   -- WRITE HEADS
+  -----------------------------------------------------------------------
+
   -- CONTROL
   signal start_writing : std_logic;
   signal ready_writing : std_logic;
 
-  -- DATA
-  signal modulo_writing : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal m_in_writing   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal e_in_writing   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal m_out_writing  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_enable_writing  : std_logic;
+  signal a_in_enable_writing  : std_logic;
+  signal m_out_enable_writing : std_logic;
 
+  -- DATA
+  signal modulo_writing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal a_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_out_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -----------------------------------------------------------------------
   -- MEMORY
+  -----------------------------------------------------------------------
+
   -- CONTROL
   signal start_addressing : std_logic;
   signal ready_addressing : std_logic;
 
+  signal m_in_j_enable_addressing : std_logic;
+  signal m_in_k_enable_addressing : std_logic;
+
+  signal w_in_enable_addressing  : std_logic;
+  signal w_out_enable_addressing : std_logic;
+
   -- DATA
-  signal modulo_addressing : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_in_addressing   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal m_in_addressing   : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal w_out_addressing  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_addressing   : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal w_in_addressing   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_out_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -150,6 +184,7 @@ begin
       N => N,
       W => W,
       L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -162,19 +197,25 @@ begin
       START => start_controller,
       READY => ready_controller,
 
+      X_IN_ENABLE => x_in_enable_controller,
+
+      R_IN_I_ENABLE => r_in_i_enable_controller,
+      R_IN_K_ENABLE => r_in_k_enable_controller,
+
+      H_OUT_ENABLE => h_out_enable_controller,
+
       -- DATA
       X_IN => x_in_controller,
       R_IN => r_in_controller,
 
-      MODULO => modulo_controller,
-      H_OUT  => h_out_controller
+      H_OUT => h_out_controller
     );
 
   -----------------------------------------------------------------------
   -- READ HEADS
   -----------------------------------------------------------------------
 
-  ntm_reading_i : ntm_reading
+  reading : ntm_reading
     generic map (
       N => N,
 
@@ -185,12 +226,14 @@ begin
       CLK => CLK,
       RST => RST,
 
+      M_IN_ENABLE  => m_in_enable_reading,
+      R_OUT_ENABLE => r_out_enable_reading,
+
       -- CONTROL
       START => start_reading,
       READY => ready_reading,
 
       -- DATA
-      MODULO => modulo_reading,
       W_IN   => w_in_reading,
       M_IN   => m_in_reading,
       R_OUT  => r_out_reading
@@ -200,7 +243,7 @@ begin
   -- WRITE HEADS
   -----------------------------------------------------------------------
 
-  ntm_writing_i : ntm_writing
+  writing : ntm_writing
     generic map (
       N => N,
 
@@ -215,10 +258,13 @@ begin
       START => start_writing,
       READY => ready_writing,
 
+      M_IN_ENABLE  => m_in_enable_writing,
+      A_IN_ENABLE  => a_in_enable_writing,
+      M_OUT_ENABLE => m_out_enable_writing,
+
       -- DATA
-      MODULO => modulo_writing,
       M_IN   => m_in_writing,
-      E_IN   => e_in_writing,
+      A_IN   => a_in_writing,
       W_IN   => w_in_writing,
       M_OUT  => m_out_writing
     );
@@ -242,11 +288,17 @@ begin
       START => start_addressing,
       READY => ready_addressing,
 
+      M_IN_J_ENABLE => m_in_j_enable_addressing,
+      M_IN_K_ENABLE => m_in_k_enable_addressing,
+
+      W_IN_ENABLE  => w_in_enable_addressing,
+      W_OUT_ENABLE => w_out_enable_addressing,
+
       -- DATA
-      MODULO  => modulo_addressing,
-      W_IN    => w_in_addressing,
-      M_IN    => m_in_addressing,
-      W_OUT   => w_out_addressing
+      M_IN => m_in_addressing,
+
+      W_IN  => w_in_addressing,
+      W_OUT => w_out_addressing
     );
 
 end architecture;

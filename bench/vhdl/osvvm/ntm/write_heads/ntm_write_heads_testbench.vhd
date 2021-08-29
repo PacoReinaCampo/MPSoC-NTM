@@ -61,10 +61,14 @@ architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench
   signal start_writing : std_logic;
   signal ready_writing : std_logic;
 
+  signal m_in_enable_writing  : std_logic;
+  signal a_in_enable_writing  : std_logic;
+  signal m_out_enable_writing : std_logic;
+
   -- DATA
   signal modulo_writing : std_logic_vector(DATA_SIZE-1 downto 0);
   signal m_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal e_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal a_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal m_out_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -90,10 +94,13 @@ begin
       START => start_writing,
       READY => ready_writing,
 
+      M_IN_ENABLE  => m_in_enable_writing,
+      A_IN_ENABLE  => a_in_enable_writing,
+      M_OUT_ENABLE => m_out_enable_writing,
+
       -- DATA
-      MODULO => modulo_writing,
       M_IN   => m_in_writing,
-      E_IN   => e_in_writing,
+      A_IN   => a_in_writing,
       W_IN   => w_in_writing,
       M_OUT  => m_out_writing
     );

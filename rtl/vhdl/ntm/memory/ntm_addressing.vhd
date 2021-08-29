@@ -60,11 +60,17 @@ entity ntm_addressing is
     START : in  std_logic;
     READY : out std_logic;
 
+    M_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
+    M_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+
+    W_IN_ENABLE  : in  std_logic; -- for j in 0 to N-1
+    W_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
+
     -- DATA
-    MODULO : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    W_IN   : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    M_IN   : in  std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-    W_OUT  : out std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0)
+    M_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    W_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -87,23 +93,35 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal start_addressing_content : std_logic;
   signal ready_addressing_content : std_logic;
 
+  signal m_in_j_enable_addressing_content : std_logic;
+  signal m_in_k_enable_addressing_content : std_logic;
+
+  signal k_in_enable_addressing_content : std_logic;
+
+  signal w_out_enable_addressing_content : std_logic;
+
   -- DATA
-  signal modulo_addressing_content  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_in_addressing_content    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal m_in_addressing_content    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_in_addressing_content    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_in_addressing_content : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_out_addressing_content   : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal m_in_addressing_content  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_out_addressing_content : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- ADDRESSING LOCATION
   -- CONTROL
   signal start_addressing_location : std_logic;
   signal ready_addressing_location : std_logic;
 
+  signal w_in_enable_addressing_location  : std_logic;
+  signal w_out_enable_addressing_location : std_logic;
+
   -- DATA
-  signal modulo_addressing_location   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_in_addressing_location     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal g_in_addressing_location     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal s_in_addressing_location     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal gamma_in_addressing_location : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_out_addressing_location    : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal w_in_addressing_location  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_out_addressing_location : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -111,6 +129,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- ADDRESSING CONTENT
   ntm_addressing_content_i : ntm_addressing_content
     generic map (
       W => W,
@@ -126,14 +145,22 @@ begin
       START => start_addressing_content,
       READY => ready_addressing_content,
 
+      M_IN_J_ENABLE => m_in_j_enable_addressing_content,
+      M_IN_K_ENABLE => m_in_k_enable_addressing_content,
+
+      K_IN_ENABLE => k_in_enable_addressing_content,
+
+      W_OUT_ENABLE => w_out_enable_addressing_content,
+
       -- DATA
-      MODULO  => modulo_addressing_content,
       K_IN    => k_in_addressing_content,
-      M_IN    => m_in_addressing_content,
       BETA_IN => beta_in_addressing_content,
-      W_OUT   => w_out_addressing_content
+
+      M_IN  => m_in_addressing_content,
+      W_OUT => w_out_addressing_content
     );
 
+  -- ADDRESSING LOCATION
   ntm_addressing_location_i : ntm_addressing_location
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -147,11 +174,16 @@ begin
       START => start_addressing_location,
       READY => ready_addressing_location,
 
+      W_IN_ENABLE  => w_in_enable_addressing_location,
+      W_OUT_ENABLE => w_out_enable_addressing_location,
+
       -- DATA
-      MODULO   => modulo_addressing_location,
-      W_IN     => w_in_addressing_location,
+      G_IN     => g_in_addressing_location,
+      S_IN     => s_in_addressing_location,
       GAMMA_IN => gamma_in_addressing_location,
-      W_OUT    => w_out_addressing_location
+
+      W_IN  => w_in_addressing_location,
+      W_OUT => w_out_addressing_location
     );
 
 end architecture;

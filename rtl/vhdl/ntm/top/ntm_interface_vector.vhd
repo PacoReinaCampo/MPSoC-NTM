@@ -53,6 +53,7 @@ entity ntm_write_interface_vector is
     N : integer := 64;
     W : integer := 64;
     L : integer := 64;
+    R : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -65,31 +66,44 @@ entity ntm_write_interface_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    WK_IN_ENABLE    : in std_logic;
-    WBETA_IN_ENABLE : in std_logic;
-    WE_IN_ENABLE    : in std_logic;
-    WV_IN_ENABLE    : in std_logic;
-    WGA_IN_ENABLE   : in std_logic;
-    WGW_IN_ENABLE   : in std_logic;
+    -- Key Vector
+    WK_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
+    WK_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
 
-    H_IN_ENABLE : in std_logic;
+    K_OUT_ENABLE : out std_logic; -- for k in 0 to W-1
+
+    -- Key Strength
+    WBETA_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+
+    -- Interpolation Gate
+    WG_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
+    WG_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
+
+    G_OUT_ENABLE : out std_logic; -- for k in 0 to N-1
+
+    -- Shift Weighting
+    WS_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+
+    -- Sharpening
+    WGAMMA_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+
+    -- Hidden State
+    H_IN_ENABLE : in std_logic; -- for l in 0 to L-1
 
     -- DATA
-    WK_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    WBETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    WE_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    WV_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    WGA_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
-    WGW_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+    WK_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
+    WBETA_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
+    WG_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
+    WS_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
+    WGAMMA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    K_OUT    : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-    E_OUT    : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    V_OUT    : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    GA_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    GW_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
+    K_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    BETA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    G_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    S_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    GAMMA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
