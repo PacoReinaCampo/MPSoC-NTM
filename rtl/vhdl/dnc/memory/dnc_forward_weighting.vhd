@@ -46,7 +46,12 @@ use work.ntm_math_pkg.all;
 
 entity dnc_forward_weighting is
   generic (
+    X : integer := 64;
+    Y : integer := 64;
     N : integer := 64;
+    W : integer := 64;
+    L : integer := 64;
+    R : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -59,18 +64,20 @@ entity dnc_forward_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    L_IN_ENABLE : in std_logic;
-    W_IN_ENABLE : in std_logic;
+    L_IN_ENABLE : in std_logic; -- for i in 0 to N-1 (square matrix)
 
-    F_OUT_ENABLE : out std_logic;
+    W_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1 (read heads flow)
+    W_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
+
+    F_OUT_I_ENABLE : out std_logic; -- for i in 0 to R-1 (read heads flow)
+    F_OUT_J_ENABLE : out std_logic; -- for j in 0 to N-1
 
     -- DATA
     L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    F_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    F_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -88,16 +95,24 @@ architecture dnc_forward_weighting_architecture of dnc_forward_weighting is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- VECTOR PRODUCT
+  -- MATRIX PRODUCT
   -- CONTROL
-  signal start_vector_product : std_logic;
-  signal ready_vector_product : std_logic;
+  signal start_matrix_product : std_logic;
+  signal ready_matrix_product : std_logic;
+
+  signal data_a_in_i_enable_matrix_product : std_logic;
+  signal data_a_in_j_enable_matrix_product : std_logic;
+  signal data_b_in_i_enable_matrix_product : std_logic;
+  signal data_b_in_j_enable_matrix_product : std_logic;
+
+  signal data_out_i_enable_matrix_product : std_logic;
+  signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_vector_product    : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_product : std_logic_arithmetic_vector_matrix(N-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_product : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_product  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -107,9 +122,10 @@ begin
 
   -- f(t;i) = L(t)·w(t-1;r,i)
 
-  ntm_vector_product_i : ntm_vector_product
+  -- MATRIX PRODUCT
+  ntm_matrix_product_i : ntm_matrix_product
     generic map (
-      I => N,
+      I => W,
       J => N,
 
       DATA_SIZE => DATA_SIZE
@@ -120,14 +136,22 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_product,
-      READY => ready_vector_product,
+      START => start_matrix_product,
+      READY => ready_matrix_product,
+
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_product,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MODULO    => modulo_vector_product,
-      DATA_A_IN => data_a_in_vector_product,
-      DATA_B_IN => data_b_in_vector_product,
-      DATA_OUT  => data_out_vector_product
+      MODULO    => modulo_matrix_product,
+      DATA_A_IN => data_a_in_matrix_product,
+      DATA_B_IN => data_b_in_matrix_product,
+      DATA_OUT  => data_out_matrix_product
     );
 
 end architecture;

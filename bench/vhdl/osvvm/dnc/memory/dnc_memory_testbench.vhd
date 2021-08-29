@@ -67,9 +67,9 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal a_out_enable_allocation_weighting : std_logic;
 
   -- DATA
-  signal modulo_allocation_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal phi_in_allocation_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal u_in_allocation_weighting   : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal a_out_allocation_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- BACKWARD WEIGHTING
@@ -78,12 +78,14 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_backward_weighting : std_logic;
 
   signal l_in_enable_backward_weighting : std_logic;
-  signal w_in_enable_backward_weighting : std_logic;
 
-  signal b_out_enable_backward_weighting : std_logic;
+  signal w_in_i_enable_backward_weighting : std_logic;
+  signal w_in_j_enable_backward_weighting : std_logic;
+
+  signal b_out_i_enable_backward_weighting : std_logic;
+  signal b_out_j_enable_backward_weighting : std_logic;
 
   -- DATA
-  signal modulo_backward_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal l_in_backward_weighting   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_in_backward_weighting   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal b_out_backward_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -94,16 +96,18 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_forward_weighting : std_logic;
 
   signal l_in_enable_forward_weighting : std_logic;
-  signal w_in_enable_forward_weighting : std_logic;
 
-  signal f_out_enable_forward_weighting : std_logic;
+  signal w_in_i_enable_forward_weighting : std_logic;
+  signal w_in_j_enable_forward_weighting : std_logic;
+
+  signal f_out_i_enable_forward_weighting : std_logic;
+  signal f_out_j_enable_forward_weighting : std_logic;
 
   -- DATA
   signal l_in_forward_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_in_forward_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_forward_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal f_out_forward_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MEMORY MATRIX
@@ -111,20 +115,24 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal start_memory_matrix : std_logic;
   signal ready_memory_matrix : std_logic;
 
-  signal m_in_enable_memory_matrix : std_logic;
-  signal w_in_enable_memory_matrix : std_logic;
+  signal m_in_i_enable_memory_matrix : std_logic;
+  signal m_in_j_enable_memory_matrix : std_logic;
 
-  signal m_out_enable_memory_matrix : std_logic;
+  signal w_in_i_enable_memory_matrix : std_logic;
+  signal v_in_j_enable_memory_matrix : std_logic;
+  signal e_in_j_enable_memory_matrix : std_logic;
+
+  signal m_out_i_enable_memory_matrix : std_logic;
+  signal m_out_j_enable_memory_matrix : std_logic;
 
   -- DATA
-  signal m_in_memory_matrix : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_in_memory_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_in_memory_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal v_in_memory_matrix : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal e_in_memory_matrix : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal v_in_memory_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal e_in_memory_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_memory_matrix : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal m_out_memory_matrix  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal m_out_memory_matrix  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MEMORY RETENTION VECTOR
   -- CONTROL
@@ -132,7 +140,9 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_memory_retention_vector : std_logic;
 
   signal f_in_enable_memory_retention_vector : std_logic;
-  signal w_in_enable_memory_retention_vector : std_logic;
+
+  signal w_in_i_enable_memory_retention_vector : std_logic;
+  signal w_in_j_enable_memory_retention_vector : std_logic;
 
   signal psi_out_enable_memory_retention_vector : std_logic;
 
@@ -140,8 +150,7 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal f_in_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_in_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_memory_retention_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal PSI_OUT_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal psi_out_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- PRECEDENCE WEIGHTING
   -- CONTROL
@@ -157,7 +166,6 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal w_in_precedence_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal p_in_precedence_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_precedence_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal p_out_precedence_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- READ CONTENT WEIGHTING
@@ -165,14 +173,18 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal start_read_content_weighting : std_logic;
   signal ready_read_content_weighting : std_logic;
 
+  signal k_in_enable_read_content_weighting : std_logic;
+
+  signal m_in_i_enable_read_content_weighting : std_logic;
+  signal m_in_j_enable_read_content_weighting : std_logic;
+
   signal c_out_enable_read_content_weighting : std_logic;
 
   -- DATA
-  signal k_in_read_content_weighting    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal m_in_read_content_weighting    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_in_read_content_weighting    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_in_read_content_weighting    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_in_read_content_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_read_content_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal c_out_read_content_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- READ VECTORS
@@ -180,36 +192,48 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal start_read_vectors : std_logic;
   signal ready_read_vectors : std_logic;
 
-  signal m_in_enable_read_vectors : std_logic;
-  signal w_in_enable_read_vectors : std_logic;
+  signal m_in_i_enable_read_vectors : std_logic;
+  signal m_in_j_enable_read_vectors : std_logic;
+
+  signal w_in_i_enable_read_vectors : std_logic;
+  signal w_in_j_enable_read_vectors : std_logic;
+
+  signal r_out_i_enable_read_vectors : std_logic;
+  signal r_out_j_enable_read_vectors : std_logic;
 
   -- DATA
-  signal m_in_read_vectors : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-
+  signal m_in_read_vectors : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_in_read_vectors : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_read_vectors : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_out_read_vectors  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal r_out_read_vectors  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- READ WEIGHTING
   -- CONTROL
   signal start_read_weighting : std_logic;
   signal ready_read_weighting : std_logic;
 
-  signal b_in_enable_read_weighting : std_logic;
-  signal c_in_enable_read_weighting : std_logic;
-  signal f_in_enable_read_weighting : std_logic;
+  signal pi_in_i_enable_read_weighting : std_logic;
+  signal pi_in_j_enable_read_weighting : std_logic;
 
-  signal w_out_enable_read_weighting : std_logic;
+  signal b_in_i_enable_read_weighting : std_logic;
+  signal b_in_j_enable_read_weighting : std_logic;
+
+  signal c_in_i_enable_read_weighting : std_logic;
+  signal c_in_j_enable_read_weighting : std_logic;
+
+  signal f_in_i_enable_read_weighting : std_logic;
+  signal f_in_j_enable_read_weighting : std_logic;
+
+  signal w_out_i_enable_read_weighting : std_logic;
+  signal w_out_j_enable_read_weighting : std_logic;
 
   -- DATA
-  signal pi_in_read_weighting : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+  signal pi_in_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal b_in_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal c_in_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal f_in_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_out_read_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- TEMPORAL LINK MATRIX
@@ -218,22 +242,17 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_temporal_link_matrix : std_logic;
 
   signal l_in_enable_temporal_link_matrix : std_logic;
-
-  signal wr_in_enable_temporal_link_matrix : std_logic;
-  signal ww_in_enable_temporal_link_matrix : std_logic;
+  signal w_in_enable_temporal_link_matrix : std_logic;
   signal p_in_enable_temporal_link_matrix  : std_logic;
 
   signal l_out_enable_temporal_link_matrix : std_logic;
 
   -- DATA
   signal l_in_temporal_link_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal wr_in_temporal_link_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal ww_in_temporal_link_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_temporal_link_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
   signal p_in_temporal_link_matrix  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_temporal_link_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal l_out_temporal_link_matrix  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal l_out_temporal_link_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- USAGE VECTOR
   -- CONTROL
@@ -251,7 +270,6 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal w_in_usage_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal psi_in_usage_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_usage_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal u_out_usage_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE CONTENT WEIGHTING
@@ -259,16 +277,18 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal start_write_content_weighting : std_logic;
   signal ready_write_content_weighting : std_logic;
 
-  signal beta_in_enable_write_weighting : std_logic;
+  signal k_in_enable_write_weighting : std_logic;
+
+  signal m_in_i_enable_write_weighting : std_logic;
+  signal m_in_j_enable_write_weighting : std_logic;
 
   signal c_out_enable_write_weighting : std_logic;
 
   -- DATA
-  signal k_in_write_content_weighting    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal m_in_write_content_weighting    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_in_write_content_weighting    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_in_write_content_weighting    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_in_write_content_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_write_content_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal c_out_write_content_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE WEIGHTING
@@ -285,9 +305,9 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal a_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal c_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal g_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal ga_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal gw_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_out_write_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- ADDRESSING
@@ -295,21 +315,35 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal start_addressing : std_logic;
   signal ready_addressing : std_logic;
 
+  signal k_read_in_i_enable_addressing : std_logic;
+  signal k_read_in_j_enable_addressing : std_logic;
+
+  signal beta_read_in_enable_addressing : std_logic;
+
+  signal f_read_in_enable_addressing : std_logic;
+
+  signal pi_read_in_i_enable_addressing : std_logic;
+  signal pi_read_in_j_enable_addressing : std_logic;
+
+  signal k_write_in_j_enable_addressing : std_logic;
+  signal e_write_in_j_enable_addressing : std_logic;
+  signal v_write_in_j_enable_addressing : std_logic;
+
     -- DATA
-  signal k_read_in_addressing    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_read_in_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_read_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
   signal f_read_in_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal pi_read_in_addressing   : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+  signal pi_read_in_addressing   : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal k_write_in_addressing    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_write_in_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_write_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal e_write_in_addressing    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal v_write_in_addressing    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal e_write_in_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal v_write_in_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal ga_write_in_addressing   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal gw_write_in_addressing   : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_addressing : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_out_addressing  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal r_out_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
@@ -319,7 +353,12 @@ begin
   -- ALLOCATION WEIGHTING
   allocation_weighting : dnc_allocation_weighting
     generic map (
+      X => X,
+      Y => Y,
       N => N,
+      W => W,
+      L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -341,14 +380,18 @@ begin
       PHI_IN => phi_in_allocation_weighting,
       U_IN   => u_in_allocation_weighting,
 
-      MODULO => modulo_allocation_weighting,
-      A_OUT  => a_out_allocation_weighting
+      A_OUT => a_out_allocation_weighting
     );
 
   -- BACKWARD WEIGHTING
   backward_weighting : dnc_backward_weighting
     generic map (
+      X => X,
+      Y => Y,
       N => N,
+      W => W,
+      L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -362,23 +405,30 @@ begin
       READY => ready_backward_weighting,
 
       L_IN_ENABLE => l_in_enable_backward_weighting,
-      W_IN_ENABLE => w_in_enable_backward_weighting,
 
-      B_OUT_ENABLE => b_out_enable_backward_weighting,
+      W_IN_I_ENABLE => w_in_i_enable_backward_weighting,
+      W_IN_J_ENABLE => w_in_j_enable_forward_weighting,
+
+      B_OUT_I_ENABLE => b_out_i_enable_backward_weighting,
+      B_OUT_J_ENABLE => b_out_j_enable_backward_weighting,
 
       -- DATA
       L_IN => l_in_backward_weighting,
 
       W_IN => w_in_backward_weighting,
 
-      MODULO => modulo_backward_weighting,
-      B_OUT  => b_out_backward_weighting
+      B_OUT => b_out_backward_weighting
     );
 
   -- FORWARD WEIGHTING
   forward_weighting : dnc_forward_weighting
     generic map (
+      X => X,
+      Y => Y,
       N => N,
+      W => W,
+      L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -392,24 +442,30 @@ begin
       READY => ready_forward_weighting,
 
       L_IN_ENABLE => l_in_enable_forward_weighting,
-      W_IN_ENABLE => w_in_enable_forward_weighting,
 
-      F_OUT_ENABLE => f_out_enable_forward_weighting,
+      W_IN_I_ENABLE => w_in_i_enable_forward_weighting,
+      W_IN_J_ENABLE => w_in_j_enable_forward_weighting,
+
+      F_OUT_I_ENABLE => f_out_i_enable_forward_weighting,
+      F_OUT_J_ENABLE => f_out_j_enable_forward_weighting,
 
       -- DATA
       L_IN => l_in_forward_weighting,
 
       W_IN => w_in_forward_weighting,
 
-      MODULO => modulo_forward_weighting,
-      F_OUT  => f_out_forward_weighting
+      F_OUT => f_out_forward_weighting
     );
 
   -- MEMORY MATRIX
   memory_matrix : dnc_memory_matrix
     generic map (
+      X => X,
+      Y => Y,
       N => N,
       W => W,
+      L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -422,10 +478,15 @@ begin
       START => start_memory_matrix,
       READY => ready_memory_matrix,
 
-      M_IN_ENABLE => m_in_enable_memory_matrix,
-      W_IN_ENABLE => w_in_enable_memory_matrix,
+      M_IN_I_ENABLE => m_in_i_enable_memory_matrix,
+      M_IN_J_ENABLE => m_in_j_enable_memory_matrix,
 
-      M_OUT_ENABLE => m_out_enable_memory_matrix,
+      W_IN_I_ENABLE => w_in_i_enable_memory_matrix,
+      V_IN_J_ENABLE => v_in_j_enable_memory_matrix,
+      E_IN_J_ENABLE => e_in_j_enable_memory_matrix,
+
+      M_OUT_I_ENABLE => m_out_i_enable_memory_matrix,
+      M_OUT_J_ENABLE => m_out_j_enable_memory_matrix,
 
       -- DATA
       M_IN => m_in_memory_matrix,
@@ -434,14 +495,18 @@ begin
       V_IN => v_in_memory_matrix,
       E_IN => e_in_memory_matrix,
 
-      MODULO => modulo_memory_matrix,
-      M_OUT  => m_out_memory_matrix
+      M_OUT => m_out_memory_matrix
     );
 
   -- MEMORY RETENTION VECTOR
   memory_retention_vector : dnc_memory_retention_vector
     generic map (
+      X => X,
+      Y => Y,
       N => N,
+      W => W,
+      L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -455,22 +520,28 @@ begin
       READY => ready_memory_retention_vector,
 
       F_IN_ENABLE => f_in_enable_memory_retention_vector,
-      W_IN_ENABLE => w_in_enable_memory_retention_vector,
 
-      PSI_OUT_ENABLE => psi_out_enable_memory_retention_vector,
+      W_IN_I_ENABLE => w_in_i_enable_memory_retention_vector,
+      W_IN_J_ENABLE => w_in_j_enable_memory_retention_vector,
+
+      psi_out_ENABLE => psi_out_enable_memory_retention_vector,
 
       -- DATA
       F_IN => f_in_memory_retention_vector,
       W_IN => w_in_memory_retention_vector,
 
-      MODULO  => modulo_memory_retention_vector,
-      PSI_OUT => psi_out_memory_retention_vector
+      psi_out => psi_out_memory_retention_vector
     );
 
   -- PRECEDENCE WEIGHTING
   precedence_weighting : dnc_precedence_weighting
     generic map (
+      X => X,
+      Y => Y,
       N => N,
+      W => W,
+      L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -492,15 +563,18 @@ begin
       W_IN => w_in_precedence_weighting,
       P_IN => p_in_precedence_weighting,
 
-      MODULO => modulo_precedence_weighting,
-      P_OUT  => p_out_precedence_weighting
+      P_OUT => p_out_precedence_weighting
     );
 
   -- READ CONTENT WEIGHTING
   read_content_weighting : dnc_read_content_weighting
     generic map (
+      X => X,
+      Y => Y,
       N => N,
       W => W,
+      L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -513,6 +587,11 @@ begin
       START => start_read_content_weighting,
       READY => ready_read_content_weighting,
 
+      K_IN_ENABLE => k_in_enable_read_content_weighting,
+
+      M_IN_I_ENABLE => m_in_i_enable_read_content_weighting,
+      M_IN_J_ENABLE => m_in_j_enable_read_content_weighting,
+
       C_OUT_ENABLE => c_out_enable_read_content_weighting,
 
       -- DATA
@@ -520,15 +599,18 @@ begin
       M_IN    => m_in_read_content_weighting,
       BETA_IN => beta_in_read_content_weighting,
 
-      MODULO => modulo_read_content_weighting,
-      C_OUT  => c_out_read_content_weighting
+      C_OUT => c_out_read_content_weighting
     );
 
   -- READ VECTORS
   read_vectors : dnc_read_vectors
     generic map (
+      X => X,
+      Y => Y,
       N => N,
       W => W,
+      L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -541,22 +623,31 @@ begin
       START => start_read_vectors,
       READY => ready_read_vectors,
 
-      M_IN_ENABLE => m_in_enable_read_vectors,
-      W_IN_ENABLE => w_in_enable_read_vectors,
+      M_IN_I_ENABLE => m_in_i_enable_read_vectors,
+      M_IN_J_ENABLE => m_in_j_enable_read_vectors,
+
+      W_IN_I_ENABLE => w_in_i_enable_read_vectors,
+      W_IN_J_ENABLE => w_in_j_enable_read_vectors,
+
+      R_OUT_I_ENABLE => r_out_i_enable_read_vectors,
+      R_OUT_J_ENABLE => r_out_j_enable_read_vectors,
 
       -- DATA
       M_IN => m_in_read_vectors,
-
       W_IN => w_in_read_vectors,
 
-      MODULO => modulo_read_vectors,
-      R_OUT  => r_out_read_vectors
+      R_OUT => r_out_read_vectors
     );
 
   -- READ WEIGHTING
   read_weighting : dnc_read_weighting
     generic map (
+      X => X,
+      Y => Y,
       N => N,
+      W => W,
+      L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -569,11 +660,20 @@ begin
       START => start_read_weighting,
       READY => ready_read_weighting,
 
-      B_IN_ENABLE => b_in_enable_read_weighting,
-      C_IN_ENABLE => c_in_enable_read_weighting,
-      F_IN_ENABLE => f_in_enable_read_weighting,
+      PI_IN_I_ENABLE => pi_in_i_enable_read_weighting,
+      PI_IN_J_ENABLE => pi_in_j_enable_read_weighting,
 
-      W_OUT_ENABLE => w_out_enable_read_weighting,
+      B_IN_I_ENABLE => b_in_i_enable_read_weighting,
+      B_IN_J_ENABLE => b_in_j_enable_read_weighting,
+
+      C_IN_I_ENABLE => c_in_i_enable_read_weighting,
+      C_IN_J_ENABLE => c_in_j_enable_read_weighting,
+
+      F_IN_I_ENABLE => f_in_i_enable_read_weighting,
+      F_IN_J_ENABLE => f_in_j_enable_read_weighting,
+
+      W_OUT_I_ENABLE => w_out_i_enable_read_weighting,
+      W_OUT_J_ENABLE => w_out_j_enable_read_weighting,
 
       -- DATA
       PI_IN => pi_in_read_weighting,
@@ -582,14 +682,18 @@ begin
       C_IN => c_in_read_weighting,
       F_IN => f_in_read_weighting,
 
-      MODULO => modulo_read_weighting,
-      W_OUT  => w_out_read_weighting
+      W_OUT => w_out_read_weighting
     );
 
   -- TEMPORAL LINK MATRIX
   temporal_link_matrix : dnc_temporal_link_matrix
     generic map (
+      X => X,
+      Y => Y,
       N => N,
+      W => W,
+      L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -603,28 +707,28 @@ begin
       READY => ready_temporal_link_matrix,
 
       L_IN_ENABLE => l_in_enable_temporal_link_matrix,
-
-      WR_IN_ENABLE => l_in_enable_temporal_link_matrix,
-      WW_IN_ENABLE => l_in_enable_temporal_link_matrix,
-      P_IN_ENABLE  => l_in_enable_temporal_link_matrix,
+      W_IN_ENABLE => w_in_enable_temporal_link_matrix,
+      P_IN_ENABLE => p_in_enable_temporal_link_matrix,
 
       L_OUT_ENABLE => l_out_enable_temporal_link_matrix,
 
       -- DATA
       L_IN => l_in_temporal_link_matrix,
+      W_IN => w_in_temporal_link_matrix,
+      P_IN => p_in_temporal_link_matrix,
 
-      WR_IN => wr_in_temporal_link_matrix,
-      WW_IN => ww_in_temporal_link_matrix,
-      P_IN  => p_in_temporal_link_matrix,
-
-      MODULO => modulo_temporal_link_matrix,
-      L_OUT  => l_out_temporal_link_matrix
+      L_OUT => l_out_temporal_link_matrix
     );
 
   -- USAGE VECTOR
   usage_vector : dnc_usage_vector
     generic map (
+      X => X,
+      Y => Y,
       N => N,
+      W => W,
+      L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -648,15 +752,18 @@ begin
       W_IN   => w_in_usage_vector,
       PSI_IN => psi_in_usage_vector,
 
-      MODULO => modulo_usage_vector,
-      U_OUT  => u_out_usage_vector
+      U_OUT => u_out_usage_vector
     );
 
   -- WRITE CONTENT WEIGHTING
   write_content_weighting : dnc_write_content_weighting
     generic map (
+      X => X,
+      Y => Y,
       N => N,
       W => W,
+      L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -669,7 +776,10 @@ begin
       START => start_write_content_weighting,
       READY => ready_write_content_weighting,
 
-      BETA_IN_ENABLE => beta_in_enable_write_weighting,
+      K_IN_ENABLE => k_in_enable_write_weighting,
+
+      M_IN_I_ENABLE => m_in_i_enable_write_weighting,
+      M_IN_J_ENABLE => m_in_j_enable_write_weighting,
 
       C_OUT_ENABLE => c_out_enable_write_weighting,
 
@@ -678,14 +788,18 @@ begin
       M_IN    => m_in_write_content_weighting,
       BETA_IN => beta_in_write_content_weighting,
 
-      MODULO => modulo_write_content_weighting,
-      C_OUT  => c_out_write_content_weighting
+      C_OUT => c_out_write_content_weighting
     );
 
   -- WRITE WEIGHTING
   write_weighting : dnc_write_weighting
     generic map (
+      X => X,
+      Y => Y,
       N => N,
+      W => W,
+      L => L,
+      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -707,11 +821,10 @@ begin
       A_IN => a_in_write_weighting,
       C_IN => c_in_write_weighting,
 
-      -- DATA
-      G_IN => g_in_write_weighting,
+      GA_IN => ga_in_write_weighting,
+      GW_IN => gw_in_write_weighting,
 
-      MODULO => modulo_write_weighting,
-      W_OUT  => w_out_write_weighting
+      W_OUT => w_out_write_weighting
     );
 
   -- ADDRESSING
@@ -734,6 +847,20 @@ begin
       START => start_addressing,
       READY => ready_addressing,
 
+      K_READ_IN_I_ENABLE => k_read_in_i_enable_addressing,
+      K_READ_IN_J_ENABLE => k_read_in_j_enable_addressing,
+
+      BETA_READ_IN_ENABLE => beta_read_in_enable_addressing,
+
+      F_READ_IN_ENABLE => f_read_in_enable_addressing,
+
+      PI_READ_IN_I_ENABLE => pi_read_in_i_enable_addressing,
+      PI_READ_IN_J_ENABLE => pi_read_in_j_enable_addressing,
+
+      K_WRITE_IN_J_ENABLE => k_write_in_j_enable_addressing,
+      E_WRITE_IN_J_ENABLE => e_write_in_j_enable_addressing,
+      V_WRITE_IN_J_ENABLE => v_write_in_j_enable_addressing,
+
       -- DATA
       K_READ_IN    => k_read_in_addressing,
       BETA_READ_IN => beta_read_in_addressing,
@@ -747,7 +874,6 @@ begin
       GA_WRITE_IN   => ga_write_in_addressing,
       GW_WRITE_IN   => gw_write_in_addressing,
 
-      MODULO => modulo_addressing,
       R_OUT  => r_out_addressing
     );
 

@@ -47,8 +47,12 @@ use work.dnc_core_pkg.all;
 
 entity dnc_read_content_weighting is
   generic (
+    X : integer := 64;
+    Y : integer := 64;
     N : integer := 64;
     W : integer := 64;
+    L : integer := 64;
+    R : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -61,15 +65,19 @@ entity dnc_read_content_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    C_OUT_ENABLE : out std_logic;
+    K_IN_ENABLE : in std_logic; -- for j in 0 to W-1
+
+    M_IN_I_ENABLE : in std_logic; -- for i in 0 to N-1
+    M_IN_J_ENABLE : in std_logic; -- for j in 0 to W-1
+
+    C_OUT_ENABLE : out std_logic; -- for i in 0 to N-1
 
     -- DATA
-    K_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    M_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    K_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
+    M_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
     BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    C_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    C_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -92,13 +100,20 @@ architecture dnc_read_content_weighting_architecture of dnc_read_content_weighti
   signal start_vector_content_based_addressing : std_logic;
   signal ready_vector_content_based_addressing : std_logic;
 
+  signal k_in_enable_vector_content_based_addressing : std_logic;
+
+  signal m_in_i_enable_vector_content_based_addressing : std_logic;
+  signal m_in_j_enable_vector_content_based_addressing : std_logic;
+
+  signal c_out_enable_vector_content_based_addressing : std_logic;
+
   -- DATA
-  signal k_in_vector_content_based_addressing    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal m_in_vector_content_based_addressing    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_in_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_vector_content_based_addressing : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal c_out_vector_content_based_addressing  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal c_out_vector_content_based_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -106,8 +121,9 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- c(t;r,1) = C(M(t-1),k(t;r,i),beta(t;r,i))
+  -- c(t;w) = C(M(t-1),k(t;w),beta(t;w))
 
+  -- VECTOR CONTENT BASED ADDRESSING
   dnc_content_based_addressing_i : dnc_content_based_addressing
     generic map (
       I => N,
@@ -124,12 +140,18 @@ begin
       START => start_vector_content_based_addressing,
       READY => ready_vector_content_based_addressing,
 
+      K_IN_ENABLE => k_in_enable_vector_content_based_addressing,
+
+      M_IN_I_ENABLE => m_in_i_enable_vector_content_based_addressing,
+      M_IN_J_ENABLE => m_in_j_enable_vector_content_based_addressing,
+
+      C_OUT_ENABLE => c_out_enable_vector_content_based_addressing,
+
       -- DATA
       K_IN    => k_in_vector_content_based_addressing,
       M_IN    => m_in_vector_content_based_addressing,
       BETA_IN => beta_in_vector_content_based_addressing,
 
-      MODULO => modulo_vector_content_based_addressing,
       C_OUT  => c_out_vector_content_based_addressing
     );
 

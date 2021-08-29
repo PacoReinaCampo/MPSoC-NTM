@@ -60,13 +60,19 @@ entity dnc_content_based_addressing is
     START : in  std_logic;
     READY : out std_logic;
 
+    K_IN_ENABLE : in std_logic; -- for j in 0 to J-1
+
+    M_IN_I_ENABLE : in std_logic; -- for i in 0 to I-1
+    M_IN_J_ENABLE : in std_logic; -- for j in 0 to J-1
+
+    C_OUT_ENABLE : out std_logic; -- for i in 0 to I-1
+
     -- DATA
-    K_IN    : in std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
-    M_IN    : in std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
+    K_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
+    M_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
     BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-    C_OUT  : out std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0)
+    C_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -84,39 +90,37 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
   -- Signals
   -----------------------------------------------------------------------
 
-  -- VECTOR DIVIDER
-  -- CONTROL
-  signal start_vector_divider : std_logic;
-  signal ready_vector_divider : std_logic_vector(J-1 downto 0);
-
-  -- DATA
-  signal modulo_vector_divider    : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_divider : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_divider : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_divider  : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
-
-  -- VECTOR COSINE
+  -- COSINE SIMILARITY
   -- CONTROL
   signal start_vector_cosine : std_logic;
   signal ready_vector_cosine : std_logic;
 
-  -- DATA
-  signal modulo_vector_cosine    : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal size_in_vector_cosine   : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_u_in_vector_cosine : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_v_in_vector_cosine : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_cosine  : std_logic_arithmetic_vector_vector(J-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_u_in_enable_vector_cosine : std_logic;
+  signal data_v_in_enable_vector_cosine : std_logic;
 
-  -- VECTOR SOFTMAX
+  signal data_out_enable_vector_cosine : std_logic;
+
+  -- DATA
+  signal modulo_vector_cosine    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_cosine   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_u_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_v_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- SOFTMAX
   -- CONTROL
   signal start_vector_softmax : std_logic;
   signal ready_vector_softmax : std_logic;
 
+  signal data_in_enable_vector_softmax : std_logic;
+
+  signal data_out_enable_vector_softmax : std_logic;
+
   -- DATA
-  signal modulo_vector_softmax   : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal size_in_vector_softmax  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_vector_softmax  : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_softmax : std_logic_arithmetic_vector_vector(I-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -124,54 +128,10 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- C(M,k,beta)[i] = softmax(D(k,M)·beta)[i]
+  -- C(M,k,beta)[i] = softmax(cosine(k,M)·beta)[i]
 
-  ntm_vector_divider_i : ntm_vector_divider
-    generic map (
-      I => J,
-
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_divider,
-      READY => ready_vector_divider,
-
-      -- DATA
-      MODULO    => modulo_vector_divider,
-      DATA_A_IN => data_a_in_vector_divider,
-      DATA_B_IN => data_b_in_vector_divider,
-      DATA_OUT  => data_out_vector_divider
-    );
-
-  ntm_vector_cosine_similarity_function_i : ntm_vector_cosine_similarity_function
-    generic map (
-      I => J,
-
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_cosine,
-      READY => ready_vector_cosine,
-
-      -- DATA
-      MODULO    => modulo_vector_cosine,
-      SIZE_IN   => size_in_vector_cosine,
-      DATA_U_IN => data_u_in_vector_cosine,
-      DATA_V_IN => data_v_in_vector_cosine,
-      DATA_OUT  => data_out_vector_cosine
-    );
-
-  ntm_vector_softmax_function_i : ntm_vector_softmax_function
+  -- COSINE SIMILARITY
+  vector_cosine_similarity_function : ntm_vector_cosine_similarity_function
     generic map (
       I => I,
 
@@ -185,6 +145,39 @@ begin
       -- CONTROL
       START => start_vector_cosine,
       READY => ready_vector_cosine,
+
+      DATA_U_IN_ENABLE => data_u_in_enable_vector_cosine,
+      DATA_V_IN_ENABLE => data_v_in_enable_vector_cosine,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_cosine,
+
+      -- DATA
+      MODULO    => modulo_vector_cosine,
+      SIZE_IN   => size_in_vector_cosine,
+      DATA_U_IN => data_u_in_vector_cosine,
+      DATA_V_IN => data_v_in_vector_cosine,
+      DATA_OUT  => data_out_vector_cosine
+    );
+
+  -- SOFTMAX
+  vector_softmax_function : ntm_vector_softmax_function
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_softmax,
+      READY => ready_vector_softmax,
+
+      DATA_IN_ENABLE => data_in_enable_vector_softmax,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_softmax,
 
       -- DATA
       MODULO   => modulo_vector_softmax,

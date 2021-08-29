@@ -46,7 +46,12 @@ use work.ntm_math_pkg.all;
 
 entity dnc_allocation_weighting is
   generic (
+    X : integer := 64;
+    Y : integer := 64;
     N : integer := 64;
+    W : integer := 64;
+    L : integer := 64;
+    R : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -59,16 +64,15 @@ entity dnc_allocation_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    PHI_IN_ENABLE : in std_logic;
-    U_IN_ENABLE   : in std_logic;
+    PHI_IN_ENABLE : in std_logic; -- for i in 0 to N-1
+    U_IN_ENABLE   : in std_logic; -- for i in 0 to N-1
 
-    A_OUT_ENABLE : out std_logic;
+    A_OUT_ENABLE : out std_logic; -- for i in 0 to N-1
 
     -- DATA
     PHI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     U_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
     A_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
@@ -86,40 +90,56 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
   -- VECTOR MULTIPLICATION
   -- CONTROL
   signal start_vector_multiplication : std_logic;
   signal ready_vector_multiplication : std_logic;
 
+  signal data_a_in_enable_vector_multiplication : std_logic;
+  signal data_b_in_enable_vector_multiplication : std_logic;
+
+  signal data_out_enable_vector_multiplication : std_logic;
+
   -- DATA
-  signal modulo_vector_multiplication    : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_multiplication : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_multiplication : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplication  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_multiplication    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
   -- CONTROL
   signal start_vector_adder : std_logic;
-  signal ready_vector_adder : std_logic_vector(N-1 downto 0);
+  signal ready_vector_adder : std_logic;
 
-  signal operation_vector_adder : std_logic_vector(N-1 downto 0);
+  signal operation_vector_adder : std_logic;
+
+  signal data_a_in_enable_vector_adder : std_logic;
+  signal data_b_in_enable_vector_adder : std_logic;
+
+  signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_vector_adder    : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_adder : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_adder : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_adder  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR MULTIPLIER
   -- CONTROL
   signal start_vector_multiplier : std_logic;
-  signal ready_vector_multiplier : std_logic_vector(N-1 downto 0);
+  signal ready_vector_multiplier : std_logic;
+
+  signal data_a_in_enable_vector_multiplier : std_logic;
+  signal data_b_in_enable_vector_multiplier : std_logic;
+
+  signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_vector_multiplier    : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_multiplier : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_multiplier : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplier  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -129,7 +149,8 @@ begin
   
   -- a(t)[phi(t)[j]] = (1 - u(t)[phi(t)[j]])·multiplication(u(t)[phi(t)[j]])[i in 1 to j-1]
 
-  ntm_vector_multiplication_function_i : ntm_vector_multiplication_function
+  -- VECTOR MULTIPLICATION
+  vector_multiplication_function : ntm_vector_multiplication_function
     generic map (
       I => N,
 
@@ -144,6 +165,11 @@ begin
       START => start_vector_multiplication,
       READY => ready_vector_multiplication,
 
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplication,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplication,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_multiplication,
+
       -- DATA
       MODULO    => modulo_vector_multiplication,
       DATA_A_IN => data_a_in_vector_multiplication,
@@ -151,7 +177,8 @@ begin
       DATA_OUT  => data_out_vector_multiplication
     );
 
-  ntm_vector_adder_i : ntm_vector_adder
+  -- VECTOR ADDER
+  vector_adder : ntm_vector_adder
     generic map (
       I => N,
 
@@ -168,6 +195,11 @@ begin
 
       OPERATION => operation_vector_adder,
 
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_adder,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_adder,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_adder,
+
       -- DATA
       MODULO    => modulo_vector_adder,
       DATA_A_IN => data_a_in_vector_adder,
@@ -175,7 +207,8 @@ begin
       DATA_OUT  => data_out_vector_adder
     );
 
-  ntm_vector_multiplier_i : ntm_vector_multiplier
+  -- VECTOR MULTIPLIER
+  vector_multiplier : ntm_vector_multiplier
     generic map (
       I => N,
 
@@ -189,6 +222,11 @@ begin
       -- CONTROL
       START => start_vector_multiplier,
       READY => ready_vector_multiplier,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplier,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplier,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
       MODULO    => modulo_vector_multiplier,

@@ -46,7 +46,12 @@ use work.ntm_math_pkg.all;
 
 entity dnc_temporal_link_matrix is
   generic (
+    X : integer := 64;
+    Y : integer := 64;
     N : integer := 64;
+    W : integer := 64;
+    L : integer := 64;
+    R : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -59,23 +64,18 @@ entity dnc_temporal_link_matrix is
     START : in  std_logic;
     READY : out std_logic;
 
-    L_IN_ENABLE : in std_logic;
+    L_IN_ENABLE : in std_logic; -- for i in 0 to N-1 (square matrix)
+    W_IN_ENABLE : in std_logic; -- for i in 0 to N-1
+    P_IN_ENABLE : in std_logic; -- for i in 0 to N-1
 
-    WR_IN_ENABLE : in std_logic;
-    WW_IN_ENABLE : in std_logic;
-    P_IN_ENABLE  : in std_logic;
-
-    L_OUT_ENABLE : out std_logic;
+    L_OUT_ENABLE : out std_logic; -- for i in 0 to N-1
 
     -- DATA
     L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    P_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    WR_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    WW_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    P_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-    MODULO : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    L_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    L_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -93,29 +93,29 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
   -- Signals
   -----------------------------------------------------------------------
 
-  -- VECTOR ADDER
+  -- SCALAR ADDER
   -- CONTROL
-  signal start_vector_adder : std_logic;
-  signal ready_vector_adder : std_logic_vector(N-1 downto 0);
+  signal start_scalar_adder : std_logic;
+  signal ready_scalar_adder : std_logic;
 
-  signal operation_vector_adder : std_logic_vector(N-1 downto 0);
+  signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_vector_adder    : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_adder : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_adder : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_adder  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR MULTIPLIER
+  -- SCALAR MULTIPLIER
   -- CONTROL
-  signal start_vector_multiplier : std_logic;
-  signal ready_vector_multiplier : std_logic_vector(N-1 downto 0);
+  signal start_scalar_multiplier : std_logic;
+  signal ready_scalar_multiplier : std_logic;
 
   -- DATA
-  signal modulo_vector_multiplier    : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_multiplier : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_multiplier : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplier  : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_scalar_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -127,10 +127,9 @@ begin
 
   -- L(t=0)[i,j] = 0
 
-  ntm_vector_adder_i : ntm_vector_adder
+  -- SCALAR ADDER
+  ntm_scalar_adder_i : ntm_scalar_adder
     generic map (
-      I => N,
-
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -139,22 +138,21 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_adder,
-      READY => ready_vector_adder,
+      START => start_scalar_adder,
+      READY => ready_scalar_adder,
 
-      OPERATION => operation_vector_adder,
+      OPERATION => operation_scalar_adder,
 
       -- DATA
-      MODULO    => modulo_vector_adder,
-      DATA_A_IN => data_a_in_vector_adder,
-      DATA_B_IN => data_b_in_vector_adder,
-      DATA_OUT  => data_out_vector_adder
+      MODULO    => modulo_scalar_adder,
+      DATA_A_IN => data_a_in_scalar_adder,
+      DATA_B_IN => data_b_in_scalar_adder,
+      DATA_OUT  => data_out_scalar_adder
     );
 
-  ntm_vector_multiplier_i : ntm_vector_multiplier
+  -- SCALAR MULTIPLIER
+  ntm_scalar_multiplier_i : ntm_scalar_multiplier
     generic map (
-      I => N,
-
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -163,14 +161,14 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_multiplier,
-      READY => ready_vector_multiplier,
+      START => start_scalar_multiplier,
+      READY => ready_scalar_multiplier,
 
       -- DATA
-      MODULO    => modulo_vector_multiplier,
-      DATA_A_IN => data_a_in_vector_multiplier,
-      DATA_B_IN => data_b_in_vector_multiplier,
-      DATA_OUT  => data_out_vector_multiplier
+      MODULO    => modulo_scalar_multiplier,
+      DATA_A_IN => data_a_in_scalar_multiplier,
+      DATA_B_IN => data_b_in_scalar_multiplier,
+      DATA_OUT  => data_out_scalar_multiplier
     );
 
 end architecture;

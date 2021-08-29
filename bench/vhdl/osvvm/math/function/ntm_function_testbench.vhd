@@ -750,6 +750,8 @@ begin
   -- COSINE SIMILARITY
   vector_cosine_similarity_function : ntm_vector_cosine_similarity_function
     generic map (
+      I => I,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -805,6 +807,8 @@ begin
   -- COSH
   vector_cosh_function : ntm_vector_cosh_function
     generic map (
+      I => I,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -829,6 +833,8 @@ begin
   -- SINH
   vector_sinh_function : ntm_vector_sinh_function
     generic map (
+      I => I,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -853,6 +859,8 @@ begin
   -- TANH
   vector_tanh_function : ntm_vector_tanh_function
     generic map (
+      I => I,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -877,6 +885,8 @@ begin
   -- LOGISTIC
   vector_logistic_function : ntm_vector_logistic_function
     generic map (
+      I => I,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -901,6 +911,8 @@ begin
   -- SOFTMAX
   vector_softmax_function : ntm_vector_softmax_function
     generic map (
+      I => I,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -926,6 +938,8 @@ begin
   -- ONEPLUS
   vector_oneplus_function : ntm_vector_oneplus_function
     generic map (
+      I => I,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -1014,6 +1028,9 @@ begin
   -- COSINE SIMILARITY
   matrix_cosine_similarity_function : ntm_matrix_cosine_similarity_function
     generic map (
+      I => I,
+      J => J,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -1076,6 +1093,9 @@ begin
   -- COSH
   matrix_cosh_function : ntm_matrix_cosh_function
     generic map (
+      I => I,
+      J => J,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -1102,6 +1122,9 @@ begin
   -- SINH
   matrix_sinh_function : ntm_matrix_sinh_function
     generic map (
+      I => I,
+      J => J,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -1128,6 +1151,9 @@ begin
   -- TANH
   matrix_tanh_function : ntm_matrix_tanh_function
     generic map (
+      I => I,
+      J => J,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -1154,6 +1180,9 @@ begin
   -- LOGISTIC
   matrix_logistic_function : ntm_matrix_logistic_function
     generic map (
+      I => I,
+      J => J,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -1180,6 +1209,9 @@ begin
   -- SOFTMAX
   matrix_softmax_function : ntm_matrix_softmax_function
     generic map (
+      I => I,
+      J => J,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -1209,6 +1241,9 @@ begin
   -- ONEPLUS
   matrix_oneplus_function : ntm_matrix_oneplus_function
     generic map (
+      I => I,
+      J => J,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (

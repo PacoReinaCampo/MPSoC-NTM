@@ -46,8 +46,12 @@ use work.ntm_math_pkg.all;
 
 entity dnc_read_vectors is
   generic (
+    X : integer := 64;
+    Y : integer := 64;
     N : integer := 64;
     W : integer := 64;
+    L : integer := 64;
+    R : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -60,16 +64,20 @@ entity dnc_read_vectors is
     START : in  std_logic;
     READY : out std_logic;
 
-    M_IN_ENABLE : in std_logic;
-    W_IN_ENABLE : in std_logic;
+    M_IN_I_ENABLE : in std_logic; -- for i in 0 to N-1
+    M_IN_J_ENABLE : in std_logic; -- for j in 0 to W-1
+
+    W_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1 (read heads flow)
+    W_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
+
+    R_OUT_I_ENABLE : out std_logic; -- for i in 0 to R-1 (read heads flow)
+    R_OUT_J_ENABLE : out std_logic; -- for j in 0 to W-1
 
     -- DATA
-    M_IN : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-
+    M_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    R_OUT  : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0)
+    R_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -92,21 +100,35 @@ architecture dnc_read_vectors_architecture of dnc_read_vectors is
   signal start_matrix_transpose : std_logic;
   signal ready_matrix_transpose : std_logic;
 
-  -- DATA
-  signal modulo_matrix_transpose   : std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_transpose  : std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_transpose : std_logic_arithmetic_vector_matrix(N-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal data_in_i_enable_matrix_transpose : std_logic;
+  signal data_in_j_enable_matrix_transpose : std_logic;
 
-  -- VECTOR PRODUCT
+  signal data_out_i_enable_matrix_transpose : std_logic;
+  signal data_out_j_enable_matrix_transpose : std_logic;
+
+  -- DATA
+  signal modulo_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- MATRIX PRODUCT
   -- CONTROL
-  signal start_vector_product : std_logic;
-  signal ready_vector_product : std_logic;
+  signal start_matrix_product : std_logic;
+  signal ready_matrix_product : std_logic;
+
+  signal data_a_in_i_enable_matrix_product : std_logic;
+  signal data_a_in_j_enable_matrix_product : std_logic;
+  signal data_b_in_i_enable_matrix_product : std_logic;
+  signal data_b_in_j_enable_matrix_product : std_logic;
+
+  signal data_out_i_enable_matrix_product : std_logic;
+  signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_vector_product    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_product : std_logic_arithmetic_vector_matrix(W-1 downto 0)(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_product : std_logic_arithmetic_vector_vector(N-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal data_out_vector_product  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -116,6 +138,7 @@ begin
 
   -- r(t;i) = transpose(M(t))·w(t;r,i)
 
+  -- MATRIX TRANSPOSE
   ntm_matrix_transpose_i : ntm_matrix_transpose
     generic map (
       I => N,
@@ -132,13 +155,20 @@ begin
       START => start_matrix_transpose,
       READY => ready_matrix_transpose,
 
+      DATA_IN_I_ENABLE => data_in_i_enable_matrix_transpose,
+      DATA_IN_J_ENABLE => data_in_j_enable_matrix_transpose,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_transpose,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_transpose,
+
       -- DATA
       MODULO   => modulo_matrix_transpose,
       DATA_IN  => data_in_matrix_transpose,
       DATA_OUT => data_out_matrix_transpose
     );
 
-  ntm_vector_product_i : ntm_vector_product
+  -- MATRIX PRODUCT
+  ntm_matrix_product_i : ntm_matrix_product
     generic map (
       I => W,
       J => N,
@@ -151,14 +181,22 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_product,
-      READY => ready_vector_product,
+      START => start_matrix_product,
+      READY => ready_matrix_product,
+
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_product,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MODULO    => modulo_vector_product,
-      DATA_A_IN => data_a_in_vector_product,
-      DATA_B_IN => data_b_in_vector_product,
-      DATA_OUT  => data_out_vector_product
+      MODULO    => modulo_matrix_product,
+      DATA_A_IN => data_a_in_matrix_product,
+      DATA_B_IN => data_b_in_matrix_product,
+      DATA_OUT  => data_out_matrix_product
     );
 
 end architecture;
