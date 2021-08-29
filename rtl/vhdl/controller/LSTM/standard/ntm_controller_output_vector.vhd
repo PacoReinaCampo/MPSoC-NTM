@@ -64,7 +64,7 @@ entity ntm_controller_output_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    U_IN_J_ENABLE : in std_logic; -- for j in 0 to Y-1
+    U_IN_Y_ENABLE : in std_logic; -- for y in 0 to Y-1
     U_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
 
     H_IN_ENABLE : in std_logic; -- for l in 0 to L-1

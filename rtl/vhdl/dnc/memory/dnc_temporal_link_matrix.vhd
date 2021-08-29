@@ -64,11 +64,11 @@ entity dnc_temporal_link_matrix is
     START : in  std_logic;
     READY : out std_logic;
 
-    L_IN_ENABLE : in std_logic; -- for i in 0 to N-1 (square matrix)
-    W_IN_ENABLE : in std_logic; -- for i in 0 to N-1
-    P_IN_ENABLE : in std_logic; -- for i in 0 to N-1
+    L_IN_ENABLE : in std_logic; -- for j in 0 to N-1 (square matrix)
+    W_IN_ENABLE : in std_logic; -- for j in 0 to N-1
+    P_IN_ENABLE : in std_logic; -- for j in 0 to N-1
 
-    L_OUT_ENABLE : out std_logic; -- for i in 0 to N-1
+    L_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
 
     -- DATA
     L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

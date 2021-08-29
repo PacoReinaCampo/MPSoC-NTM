@@ -65,12 +65,12 @@ entity dnc_read_content_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    K_IN_ENABLE : in std_logic; -- for j in 0 to W-1
+    K_IN_ENABLE : in std_logic; -- for k in 0 to W-1
 
-    M_IN_I_ENABLE : in std_logic; -- for i in 0 to N-1
-    M_IN_J_ENABLE : in std_logic; -- for j in 0 to W-1
+    M_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
+    M_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
 
-    C_OUT_ENABLE : out std_logic; -- for i in 0 to N-1
+    C_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
 
     -- DATA
     K_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);

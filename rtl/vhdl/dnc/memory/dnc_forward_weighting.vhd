@@ -64,7 +64,7 @@ entity dnc_forward_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    L_IN_ENABLE : in std_logic; -- for i in 0 to N-1 (square matrix)
+    L_IN_ENABLE : in std_logic; -- for j in 0 to N-1 (square matrix)
 
     W_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1 (read heads flow)
     W_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1

@@ -65,7 +65,7 @@ entity dnc_read_weighting is
     READY : out std_logic;
 
     PI_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
-    PI_IN_J_ENABLE : in std_logic; -- for j in 0 to 2
+    PI_IN_P_ENABLE : in std_logic; -- for p in 0 to 2
 
     B_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
     B_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1

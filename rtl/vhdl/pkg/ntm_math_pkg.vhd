@@ -53,12 +53,12 @@ package ntm_math_pkg is
   constant I : integer := 64;
   constant J : integer := 64;
 
-  constant X : integer := 64;
-  constant Y : integer := 64;
-  constant W : integer := 64;
-  constant N : integer := 64;
-  constant L : integer := 64;
-  constant R : integer := 64;
+  constant X : integer := 64; -- x in 0 to X-1
+  constant Y : integer := 64; -- y in 0 to Y-1
+  constant N : integer := 64; -- j in 0 to N-1
+  constant W : integer := 64; -- k in 0 to W-1
+  constant L : integer := 64; -- l in 0 to L-1
+  constant R : integer := 64; -- i in 0 to R-1
 
   constant DATA_SIZE : integer := 512;
 

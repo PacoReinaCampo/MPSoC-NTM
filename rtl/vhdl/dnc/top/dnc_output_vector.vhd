@@ -53,6 +53,7 @@ entity dnc_output_vector is
     N : integer := 64;
     W : integer := 64;
     L : integer := 64;
+    R : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -65,14 +66,24 @@ entity dnc_output_vector is
     START : in  std_logic;
     READY : out std_logic;
 
+    K_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
+    K_IN_Y_ENABLE : in std_logic; -- for y in 0 to Y-1
+    K_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+
+    R_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
+    R_IN_K_ENABLE : in std_logic; -- for j in 0 to W-1
+
+    NU_IN_ENABLE : in std_logic; -- for y in 0 to Y-1
+
+    Y_OUT_ENABLE : in std_logic; -- for y in 0 to Y-1
+
     -- DATA
-    R_IN  : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-    NU_IN : in std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+    K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    W_IN : in std_logic_arithmetic_vector_matrix(Y-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    NU_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    MODULO : in  std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-    Y_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+    Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 

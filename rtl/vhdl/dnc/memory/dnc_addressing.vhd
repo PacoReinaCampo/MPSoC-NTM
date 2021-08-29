@@ -64,18 +64,18 @@ entity dnc_addressing is
     READY : out std_logic;
 
     K_READ_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
-    K_READ_IN_J_ENABLE : in std_logic; -- for j in 0 to W-1
+    K_READ_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
 
     BETA_READ_IN_ENABLE : in std_logic; -- for i in 0 to R-1
 
     F_READ_IN_ENABLE : in std_logic; -- for i in 0 to R-1
 
     PI_READ_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
-    PI_READ_IN_J_ENABLE : in std_logic; -- for j in 0 2
+    PI_READ_IN_P_ENABLE : in std_logic; -- for p in 0 to 2
 
-    K_WRITE_IN_J_ENABLE : in std_logic; -- for j in 0 to W-1
-    E_WRITE_IN_J_ENABLE : in std_logic; -- for j in 0 to W-1
-    V_WRITE_IN_J_ENABLE : in std_logic; -- for j in 0 to W-1
+    K_WRITE_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+    E_WRITE_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+    V_WRITE_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
 
     -- DATA
     K_READ_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -159,15 +159,15 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal start_memory_matrix : std_logic;
   signal ready_memory_matrix : std_logic;
 
-  signal m_in_i_enable_memory_matrix : std_logic;
   signal m_in_j_enable_memory_matrix : std_logic;
+  signal m_in_k_enable_memory_matrix : std_logic;
 
-  signal w_in_i_enable_memory_matrix : std_logic;
-  signal v_in_j_enable_memory_matrix : std_logic;
-  signal e_in_j_enable_memory_matrix : std_logic;
+  signal w_in_j_enable_memory_matrix : std_logic;
+  signal v_in_k_enable_memory_matrix : std_logic;
+  signal e_in_k_enable_memory_matrix : std_logic;
 
-  signal m_out_i_enable_memory_matrix : std_logic;
   signal m_out_j_enable_memory_matrix : std_logic;
+  signal m_out_k_enable_memory_matrix : std_logic;
 
   -- DATA
   signal m_in_memory_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -219,8 +219,8 @@ architecture dnc_addressing_architecture of dnc_addressing is
 
   signal k_in_enable_read_content_weighting : std_logic;
 
-  signal m_in_i_enable_read_content_weighting : std_logic;
   signal m_in_j_enable_read_content_weighting : std_logic;
+  signal m_in_k_enable_read_content_weighting : std_logic;
 
   signal c_out_enable_read_content_weighting : std_logic;
 
@@ -236,14 +236,14 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal start_read_vectors : std_logic;
   signal ready_read_vectors : std_logic;
 
-  signal m_in_i_enable_read_vectors : std_logic;
   signal m_in_j_enable_read_vectors : std_logic;
+  signal m_in_k_enable_read_vectors : std_logic;
 
-  signal w_in_i_enable_read_vectors : std_logic;
   signal w_in_j_enable_read_vectors : std_logic;
+  signal w_in_k_enable_read_vectors : std_logic;
 
-  signal r_out_i_enable_read_vectors : std_logic;
   signal r_out_j_enable_read_vectors : std_logic;
+  signal r_out_k_enable_read_vectors : std_logic;
 
   -- DATA
   signal m_in_read_vectors : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -257,7 +257,7 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal ready_read_weighting : std_logic;
 
   signal pi_in_i_enable_read_weighting : std_logic;
-  signal pi_in_j_enable_read_weighting : std_logic;
+  signal pi_in_p_enable_read_weighting : std_logic;
 
   signal b_in_i_enable_read_weighting : std_logic;
   signal b_in_j_enable_read_weighting : std_logic;
@@ -323,8 +323,8 @@ architecture dnc_addressing_architecture of dnc_addressing is
 
   signal k_in_enable_write_weighting : std_logic;
 
-  signal m_in_i_enable_write_weighting : std_logic;
   signal m_in_j_enable_write_weighting : std_logic;
+  signal m_in_k_enable_write_weighting : std_logic;
 
   signal c_out_enable_write_weighting : std_logic;
 
@@ -489,15 +489,15 @@ begin
       START => start_memory_matrix,
       READY => ready_memory_matrix,
 
-      M_IN_I_ENABLE => m_in_i_enable_memory_matrix,
       M_IN_J_ENABLE => m_in_j_enable_memory_matrix,
+      M_IN_K_ENABLE => m_in_k_enable_memory_matrix,
 
-      W_IN_I_ENABLE => w_in_i_enable_memory_matrix,
-      V_IN_J_ENABLE => v_in_j_enable_memory_matrix,
-      E_IN_J_ENABLE => e_in_j_enable_memory_matrix,
+      W_IN_J_ENABLE => w_in_j_enable_memory_matrix,
+      V_IN_K_ENABLE => v_in_k_enable_memory_matrix,
+      E_IN_K_ENABLE => e_in_k_enable_memory_matrix,
 
-      M_OUT_I_ENABLE => m_out_i_enable_memory_matrix,
       M_OUT_J_ENABLE => m_out_j_enable_memory_matrix,
+      M_OUT_K_ENABLE => m_out_k_enable_memory_matrix,
 
       -- DATA
       M_IN => m_in_memory_matrix,
@@ -600,8 +600,8 @@ begin
 
       K_IN_ENABLE => k_in_enable_read_content_weighting,
 
-      M_IN_I_ENABLE => m_in_i_enable_read_content_weighting,
       M_IN_J_ENABLE => m_in_j_enable_read_content_weighting,
+      M_IN_K_ENABLE => m_in_k_enable_read_content_weighting,
 
       C_OUT_ENABLE => c_out_enable_read_content_weighting,
 
@@ -634,14 +634,14 @@ begin
       START => start_read_vectors,
       READY => ready_read_vectors,
 
-      M_IN_I_ENABLE => m_in_i_enable_read_vectors,
       M_IN_J_ENABLE => m_in_j_enable_read_vectors,
+      M_IN_K_ENABLE => m_in_k_enable_read_vectors,
 
-      W_IN_I_ENABLE => w_in_i_enable_read_vectors,
       W_IN_J_ENABLE => w_in_j_enable_read_vectors,
+      W_IN_K_ENABLE => w_in_k_enable_read_vectors,
 
-      R_OUT_I_ENABLE => r_out_i_enable_read_vectors,
       R_OUT_J_ENABLE => r_out_j_enable_read_vectors,
+      R_OUT_K_ENABLE => r_out_k_enable_read_vectors,
 
       -- DATA
       M_IN => m_in_read_vectors,
@@ -672,7 +672,7 @@ begin
       READY => ready_read_weighting,
 
       PI_IN_I_ENABLE => pi_in_i_enable_read_weighting,
-      PI_IN_J_ENABLE => pi_in_j_enable_read_weighting,
+      PI_IN_P_ENABLE => pi_in_p_enable_read_weighting,
 
       B_IN_I_ENABLE => b_in_i_enable_read_weighting,
       B_IN_J_ENABLE => b_in_j_enable_read_weighting,
@@ -789,8 +789,8 @@ begin
 
       K_IN_ENABLE => k_in_enable_write_weighting,
 
-      M_IN_I_ENABLE => m_in_i_enable_write_weighting,
       M_IN_J_ENABLE => m_in_j_enable_write_weighting,
+      M_IN_K_ENABLE => m_in_k_enable_write_weighting,
 
       C_OUT_ENABLE => c_out_enable_write_weighting,
 

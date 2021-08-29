@@ -53,6 +53,7 @@ entity dnc_read_interface_vector is
     N : integer := 64;
     W : integer := 64;
     L : integer := 64;
+    R : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -65,25 +66,49 @@ entity dnc_read_interface_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    WK_IN_ENABLE    : in std_logic;
-    WBETA_IN_ENABLE : in std_logic;
-    WF_IN_ENABLE    : in std_logic;
-    WPI_IN_ENABLE   : in std_logic;
+    -- Read Key
+    WK_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
+    WK_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
+    WK_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
 
-    H_IN_ENABLE : in std_logiC;
+    K_OUT_I_ENABLE : in std_logic; -- for i in 0 to R-1
+    K_OUT_K_ENABLE : in std_logic; -- for k in 0 to W-1
+
+    -- Read Strength
+    WBETA_I_IN_ENABLE : in std_logic; -- for i in 0 to R-1
+    WBETA_L_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+
+    BETA_OUT_ENABLE : in std_logic; -- for i in 0 to R-1
+
+    -- Free Gate
+    WF_I_IN_ENABLE : in std_logic; -- for i in 0 to R-1
+    WF_L_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+
+    F_OUT_ENABLE : in std_logic; -- for i in 0 to R-1
+
+    -- Read Mode
+    WPI_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
+    WPI_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
+    WPI_IN_P_ENABLE : in std_logic; -- for p in 0 to 2
+
+    PI_OUT_I_ENABLE : in std_logic; -- for i in 0 to R-1
+    PI_OUT_P_ENABLE : in std_logic; -- for p in 0 to 2
+
+    -- Hidden State
+    H_IN_ENABLE : in std_logiC; -- for l in 0 to L-1
 
     -- DATA
-    WK_IN    : in std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    WK_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
     WBETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     WF_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
-    WPI_IN   : in std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+    WPI_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    K_OUT    : out std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+    K_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
     BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     F_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
-    PI_OUT   : out std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0)
+    PI_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 

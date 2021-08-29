@@ -64,9 +64,9 @@ entity dnc_write_key is
     START : in  std_logic;
     READY : out std_logic;
 
-    K_IN_ENABLE : in std_logic; -- for j in 0 to W-1
+    K_IN_ENABLE : in std_logic; -- for k in 0 to W-1
 
-    K_OUT_ENABLE : out std_logic; -- for j in 0 to W-1
+    K_OUT_ENABLE : out std_logic; -- for k in 0 to W-1
 
     -- DATA
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

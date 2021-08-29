@@ -64,10 +64,10 @@ entity dnc_precedence_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    W_IN_ENABLE : in std_logic; -- for i in 0 to N-1
-    P_IN_ENABLE : in std_logic; -- for i in 0 to N-1
+    W_IN_ENABLE : in std_logic; -- for j in 0 to N-1
+    P_IN_ENABLE : in std_logic; -- for j in 0 to N-1
 
-    P_OUT_ENABLE : out std_logic; -- for i in 0 to N-1
+    P_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
 
     -- DATA
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

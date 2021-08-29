@@ -65,10 +65,10 @@ entity dnc_read_modes is
     READY : out std_logic;
 
     PI_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
-    PI_IN_J_ENABLE : in std_logic; -- for i in 0 to 2
+    PI_IN_P_ENABLE : in std_logic; -- for p in 0 to 2
 
     PI_OUT_I_ENABLE : out std_logic; -- for i in 0 to R-1
-    PI_OUT_J_ENABLE : out std_logic; -- for i in 0 to 2
+    PI_OUT_P_ENABLE : out std_logic; -- for p in 0 to 2
 
     -- DATA
     PI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

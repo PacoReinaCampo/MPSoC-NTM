@@ -64,9 +64,9 @@ entity dnc_erase_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    E_IN_ENABLE : in std_logic; -- for i in 0 to W-1
+    E_IN_ENABLE : in std_logic; -- for k in 0 to W-1
 
-    E_OUT_ENABLE : out std_logic; -- for i in 0 to W-1
+    E_OUT_ENABLE : out std_logic; -- for k in 0 to W-1
 
     -- DATA
     E_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

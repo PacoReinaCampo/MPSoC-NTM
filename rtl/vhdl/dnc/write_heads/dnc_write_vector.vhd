@@ -64,9 +64,9 @@ entity dnc_write_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    V_IN_ENABLE : in std_logic; -- for i in 0 to W-1
+    V_IN_ENABLE : in std_logic; -- for k in 0 to W-1
 
-    V_OUT_ENABLE : out std_logic; -- for i in 0 to W-1
+    V_OUT_ENABLE : out std_logic; -- for k in 0 to W-1
 
     -- DATA
     V_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

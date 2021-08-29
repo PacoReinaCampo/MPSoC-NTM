@@ -115,15 +115,15 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal start_memory_matrix : std_logic;
   signal ready_memory_matrix : std_logic;
 
-  signal m_in_i_enable_memory_matrix : std_logic;
   signal m_in_j_enable_memory_matrix : std_logic;
+  signal m_in_k_enable_memory_matrix : std_logic;
 
   signal w_in_i_enable_memory_matrix : std_logic;
-  signal v_in_j_enable_memory_matrix : std_logic;
-  signal e_in_j_enable_memory_matrix : std_logic;
+  signal v_in_k_enable_memory_matrix : std_logic;
+  signal e_in_k_enable_memory_matrix : std_logic;
 
-  signal m_out_i_enable_memory_matrix : std_logic;
   signal m_out_j_enable_memory_matrix : std_logic;
+  signal m_out_k_enable_memory_matrix : std_logic;
 
   -- DATA
   signal m_in_memory_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -175,8 +175,8 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
 
   signal k_in_enable_read_content_weighting : std_logic;
 
-  signal m_in_i_enable_read_content_weighting : std_logic;
   signal m_in_j_enable_read_content_weighting : std_logic;
+  signal m_in_k_enable_read_content_weighting : std_logic;
 
   signal c_out_enable_read_content_weighting : std_logic;
 
@@ -192,14 +192,14 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal start_read_vectors : std_logic;
   signal ready_read_vectors : std_logic;
 
-  signal m_in_i_enable_read_vectors : std_logic;
   signal m_in_j_enable_read_vectors : std_logic;
+  signal m_in_k_enable_read_vectors : std_logic;
 
-  signal w_in_i_enable_read_vectors : std_logic;
   signal w_in_j_enable_read_vectors : std_logic;
+  signal w_in_k_enable_read_vectors : std_logic;
 
-  signal r_out_i_enable_read_vectors : std_logic;
   signal r_out_j_enable_read_vectors : std_logic;
+  signal r_out_k_enable_read_vectors : std_logic;
 
   -- DATA
   signal m_in_read_vectors : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -213,7 +213,7 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_read_weighting : std_logic;
 
   signal pi_in_i_enable_read_weighting : std_logic;
-  signal pi_in_j_enable_read_weighting : std_logic;
+  signal pi_in_p_enable_read_weighting : std_logic;
 
   signal b_in_i_enable_read_weighting : std_logic;
   signal b_in_j_enable_read_weighting : std_logic;
@@ -279,8 +279,8 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
 
   signal k_in_enable_write_weighting : std_logic;
 
-  signal m_in_i_enable_write_weighting : std_logic;
   signal m_in_j_enable_write_weighting : std_logic;
+  signal m_in_k_enable_write_weighting : std_logic;
 
   signal c_out_enable_write_weighting : std_logic;
 
@@ -316,18 +316,18 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal ready_addressing : std_logic;
 
   signal k_read_in_i_enable_addressing : std_logic;
-  signal k_read_in_j_enable_addressing : std_logic;
+  signal k_read_in_k_enable_addressing : std_logic;
 
   signal beta_read_in_enable_addressing : std_logic;
 
   signal f_read_in_enable_addressing : std_logic;
 
   signal pi_read_in_i_enable_addressing : std_logic;
-  signal pi_read_in_j_enable_addressing : std_logic;
+  signal pi_read_in_p_enable_addressing : std_logic;
 
-  signal k_write_in_j_enable_addressing : std_logic;
-  signal e_write_in_j_enable_addressing : std_logic;
-  signal v_write_in_j_enable_addressing : std_logic;
+  signal k_write_in_k_enable_addressing : std_logic;
+  signal e_write_in_k_enable_addressing : std_logic;
+  signal v_write_in_k_enable_addressing : std_logic;
 
     -- DATA
   signal k_read_in_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -478,15 +478,15 @@ begin
       START => start_memory_matrix,
       READY => ready_memory_matrix,
 
-      M_IN_I_ENABLE => m_in_i_enable_memory_matrix,
       M_IN_J_ENABLE => m_in_j_enable_memory_matrix,
+      M_IN_K_ENABLE => m_in_k_enable_memory_matrix,
 
-      W_IN_I_ENABLE => w_in_i_enable_memory_matrix,
-      V_IN_J_ENABLE => v_in_j_enable_memory_matrix,
-      E_IN_J_ENABLE => e_in_j_enable_memory_matrix,
+      W_IN_J_ENABLE => w_in_i_enable_memory_matrix,
+      V_IN_K_ENABLE => v_in_k_enable_memory_matrix,
+      E_IN_K_ENABLE => e_in_k_enable_memory_matrix,
 
-      M_OUT_I_ENABLE => m_out_i_enable_memory_matrix,
       M_OUT_J_ENABLE => m_out_j_enable_memory_matrix,
+      M_OUT_K_ENABLE => m_out_k_enable_memory_matrix,
 
       -- DATA
       M_IN => m_in_memory_matrix,
@@ -589,8 +589,8 @@ begin
 
       K_IN_ENABLE => k_in_enable_read_content_weighting,
 
-      M_IN_I_ENABLE => m_in_i_enable_read_content_weighting,
       M_IN_J_ENABLE => m_in_j_enable_read_content_weighting,
+      M_IN_K_ENABLE => m_in_k_enable_read_content_weighting,
 
       C_OUT_ENABLE => c_out_enable_read_content_weighting,
 
@@ -623,14 +623,14 @@ begin
       START => start_read_vectors,
       READY => ready_read_vectors,
 
-      M_IN_I_ENABLE => m_in_i_enable_read_vectors,
       M_IN_J_ENABLE => m_in_j_enable_read_vectors,
+      M_IN_K_ENABLE => m_in_k_enable_read_vectors,
 
-      W_IN_I_ENABLE => w_in_i_enable_read_vectors,
       W_IN_J_ENABLE => w_in_j_enable_read_vectors,
+      W_IN_K_ENABLE => w_in_k_enable_read_vectors,
 
-      R_OUT_I_ENABLE => r_out_i_enable_read_vectors,
       R_OUT_J_ENABLE => r_out_j_enable_read_vectors,
+      R_OUT_K_ENABLE => r_out_k_enable_read_vectors,
 
       -- DATA
       M_IN => m_in_read_vectors,
@@ -661,7 +661,7 @@ begin
       READY => ready_read_weighting,
 
       PI_IN_I_ENABLE => pi_in_i_enable_read_weighting,
-      PI_IN_J_ENABLE => pi_in_j_enable_read_weighting,
+      PI_IN_P_ENABLE => pi_in_p_enable_read_weighting,
 
       B_IN_I_ENABLE => b_in_i_enable_read_weighting,
       B_IN_J_ENABLE => b_in_j_enable_read_weighting,
@@ -778,8 +778,8 @@ begin
 
       K_IN_ENABLE => k_in_enable_write_weighting,
 
-      M_IN_I_ENABLE => m_in_i_enable_write_weighting,
       M_IN_J_ENABLE => m_in_j_enable_write_weighting,
+      M_IN_K_ENABLE => m_in_k_enable_write_weighting,
 
       C_OUT_ENABLE => c_out_enable_write_weighting,
 
@@ -848,18 +848,18 @@ begin
       READY => ready_addressing,
 
       K_READ_IN_I_ENABLE => k_read_in_i_enable_addressing,
-      K_READ_IN_J_ENABLE => k_read_in_j_enable_addressing,
+      K_READ_IN_K_ENABLE => k_read_in_k_enable_addressing,
 
       BETA_READ_IN_ENABLE => beta_read_in_enable_addressing,
 
       F_READ_IN_ENABLE => f_read_in_enable_addressing,
 
       PI_READ_IN_I_ENABLE => pi_read_in_i_enable_addressing,
-      PI_READ_IN_J_ENABLE => pi_read_in_j_enable_addressing,
+      PI_READ_IN_P_ENABLE => pi_read_in_p_enable_addressing,
 
-      K_WRITE_IN_J_ENABLE => k_write_in_j_enable_addressing,
-      E_WRITE_IN_J_ENABLE => e_write_in_j_enable_addressing,
-      V_WRITE_IN_J_ENABLE => v_write_in_j_enable_addressing,
+      K_WRITE_IN_K_ENABLE => k_write_in_k_enable_addressing,
+      E_WRITE_IN_K_ENABLE => e_write_in_k_enable_addressing,
+      V_WRITE_IN_K_ENABLE => v_write_in_k_enable_addressing,
 
       -- DATA
       K_READ_IN    => k_read_in_addressing,

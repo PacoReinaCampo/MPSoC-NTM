@@ -66,10 +66,14 @@ entity dnc_top is
     START : in  std_logic;
     READY : out std_logic;
 
-    -- DATA
-    X_IN : in std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
+    X_IN_ENABLE : in std_logic; -- for x in 0 to X-1
 
-    Y_OUT  : out std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0)
+    Y_OUT_ENABLE : out std_logic; -- for y in 0 to Y-1
+
+    -- DATA
+    X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -96,10 +100,9 @@ architecture dnc_top_architecture of dnc_top is
   signal ready_controller : std_logic;
 
   -- DATA
-  signal x_in_controller : std_logic_arithmetic_vector_vector(X-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_in_controller : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal x_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal r_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal h_out_controller  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- OUTPUT VECTOR
@@ -108,13 +111,12 @@ architecture dnc_top_architecture of dnc_top is
   signal ready_output_vector : std_logic;
 
   -- DATA
-  signal r_in_output_vector  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal nu_in_output_vector : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal r_in_output_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal nu_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal w_in_output_vector : std_logic_arithmetic_vector_matrix(Y-1 downto 0)(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal w_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_output_vector : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal y_out_output_vector  : std_logic_arithmetic_vector_vector(Y-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal y_out_output_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- READ HEADS
@@ -130,7 +132,6 @@ architecture dnc_top_architecture of dnc_top is
 
   -- DATA
   signal f_in_free_gates   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal modulo_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
   signal f_out_free_gates  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- READ KEYS
@@ -142,9 +143,8 @@ architecture dnc_top_architecture of dnc_top is
   signal ready_read_keys : std_logic;
 
   -- DATA
-  signal k_in_read_keys   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_read_keys : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal k_out_read_keys  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_in_read_keys   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_read_keys  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- READ MODES
   -- CONTROL
@@ -155,9 +155,8 @@ architecture dnc_top_architecture of dnc_top is
   signal ready_read_modes : std_logic;
 
   -- DATA
-  signal pi_in_read_modes  : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_read_modes : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
-  signal pi_out_read_modes : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+  signal pi_in_read_modes  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal pi_out_read_modes : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- READ STRENGTHS
   -- CONTROL
@@ -169,7 +168,6 @@ architecture dnc_top_architecture of dnc_top is
 
   -- DATA
   signal beta_in_read_strengths  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal modulo_read_strengths   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_out_read_strengths : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- READ INTERFACE VECTOR
@@ -185,17 +183,17 @@ architecture dnc_top_architecture of dnc_top is
   signal h_in_enable_interface_vector : std_logic;
 
     -- DATA
-  signal wk_in_read_interface_vector    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal wk_in_read_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal wbeta_in_read_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal wf_in_read_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal wpi_in_read_interface_vector   : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+  signal wpi_in_read_interface_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal h_in_read_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal k_out_read_interface_vector    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_out_read_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_out_read_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal f_out_read_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal pi_out_read_interface_vector   : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+  signal pi_out_read_interface_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- WRITE HEADS
@@ -208,7 +206,6 @@ architecture dnc_top_architecture of dnc_top is
 
   -- DATA
   signal ga_in_allocation_gate  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal modulo_allocation_gate : std_logic_vector(DATA_SIZE-1 downto 0);
   signal ga_out_allocation_gate : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- ERASE VECTOR
@@ -217,9 +214,8 @@ architecture dnc_top_architecture of dnc_top is
   signal ready_erase_vector : std_logic;
 
   -- DATA
-  signal e_in_erase_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_erase_vector : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal e_out_erase_vector  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal e_in_erase_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal e_out_erase_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE GATE
   -- CONTROL
@@ -228,7 +224,6 @@ architecture dnc_top_architecture of dnc_top is
 
   -- DATA
   signal gw_in_write_gate  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal modulo_write_gate : std_logic_vector(DATA_SIZE-1 downto 0);
   signal gw_out_write_gate : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE KEY
@@ -237,9 +232,8 @@ architecture dnc_top_architecture of dnc_top is
   signal ready_write_key : std_logic;
 
   -- DATA
-  signal k_in_write_key   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_write_key : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal k_out_write_key  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_in_write_key   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_write_key  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE STRENGHT
   -- CONTROL
@@ -248,7 +242,6 @@ architecture dnc_top_architecture of dnc_top is
 
   -- DATA
   signal beta_in_write_strength  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal modulo_write_strength   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_out_write_strength : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE VECTOR
@@ -257,9 +250,8 @@ architecture dnc_top_architecture of dnc_top is
   signal ready_write_vector : std_logic;
 
   -- DATA
-  signal v_in_write_vector   : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal modulo_write_vector : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal v_out_write_vector  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal v_in_write_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal v_out_write_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE INTERFACE VECTOR
   -- CONTROL
@@ -267,19 +259,19 @@ architecture dnc_top_architecture of dnc_top is
   signal ready_write_interface_vector : std_logic;
 
   -- DATA
-  signal wk_in_write_interface_vector    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal wk_in_write_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal wbeta_in_write_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal we_in_write_interface_vector    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal wv_in_write_interface_vector    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal we_in_write_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal wv_in_write_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal wga_in_write_interface_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal wgw_in_write_interface_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal h_in_write_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal k_out_write_interface_vector    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_out_write_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_out_write_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal e_out_write_interface_vector    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal v_out_write_interface_vector    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal e_out_write_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal v_out_write_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal ga_out_write_interface_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal gw_out_write_interface_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -292,20 +284,19 @@ architecture dnc_top_architecture of dnc_top is
   signal ready_addressing : std_logic;
 
     -- DATA
-  signal k_read_in_addressing    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_read_in_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_read_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
   signal f_read_in_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal pi_read_in_addressing   : std_logic_arithmetic_vector_vector(2 downto 0)(DATA_SIZE-1 downto 0);
+  signal pi_read_in_addressing   : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal k_write_in_addressing    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal k_write_in_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_write_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal e_write_in_addressing    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal v_write_in_addressing    : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal e_write_in_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal v_write_in_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal ga_write_in_addressing   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal gw_write_in_addressing   : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_addressing : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
-  signal r_out_addressing  : std_logic_arithmetic_vector_vector(W-1 downto 0)(DATA_SIZE-1 downto 0);
+  signal r_out_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -340,7 +331,6 @@ begin
       X_IN => x_in_controller,
       R_IN => r_in_controller,
 
-      MODULO => modulo_controller,
       H_OUT  => h_out_controller
     );
 
@@ -370,7 +360,6 @@ begin
 
       W_IN => w_in_output_vector,
 
-      MODULO => modulo_output_vector,
       Y_OUT  => y_out_output_vector
     );
 
@@ -399,7 +388,6 @@ begin
       -- DATA
       F_IN => f_in_free_gates,
 
-      MODULO => modulo_free_gates,
       F_OUT  => f_out_free_gates
     );
 
@@ -425,7 +413,6 @@ begin
       -- DATA
       K_IN => k_in_read_keys,
 
-      MODULO => modulo_read_keys,
       K_OUT  => k_out_read_keys
     );
 
@@ -449,7 +436,6 @@ begin
       -- DATA
       PI_IN => pi_in_read_modes,
 
-      MODULO => modulo_read_modes,
       PI_OUT => pi_out_read_modes
     );
 
@@ -473,7 +459,6 @@ begin
       -- DATA
       BETA_IN => beta_in_read_strengths,
 
-      MODULO   => modulo_read_strengths,
       BETA_OUT => beta_out_read_strengths
     );
 
@@ -532,7 +517,6 @@ begin
       -- DATA
       GA_IN => ga_in_allocation_gate,
 
-      MODULO => modulo_allocation_gate,
       GA_OUT => ga_out_allocation_gate
     );
 
@@ -555,7 +539,6 @@ begin
       -- DATA
       E_IN => e_in_erase_vector,
 
-      MODULO => modulo_erase_vector,
       E_OUT  => e_out_erase_vector
     );
 
@@ -576,7 +559,6 @@ begin
       -- DATA
       GW_IN => gw_in_write_gate,
 
-      MODULO => modulo_write_gate,
       GW_OUT => gw_out_write_gate
     );
 
@@ -599,7 +581,6 @@ begin
       -- DATA
       K_IN => k_in_write_key,
 
-      MODULO => modulo_write_key,
       K_OUT  => k_out_write_key
     );
 
@@ -620,7 +601,6 @@ begin
       -- DATA
       BETA_IN => beta_in_write_strength,
 
-      MODULO   => modulo_write_strength,
       BETA_OUT => beta_out_write_strength
     );
 
@@ -643,7 +623,6 @@ begin
       -- DATA
       V_IN => v_in_write_vector,
 
-      MODULO => modulo_write_vector,
       V_OUT  => v_out_write_vector
     );
 
@@ -722,7 +701,6 @@ begin
       GA_WRITE_IN   => ga_write_in_addressing,
       GW_WRITE_IN   => gw_write_in_addressing,
 
-      MODULO => modulo_addressing,
       R_OUT  => r_out_addressing
     );
 

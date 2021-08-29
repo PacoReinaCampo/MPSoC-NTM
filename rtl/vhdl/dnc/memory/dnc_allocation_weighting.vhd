@@ -64,10 +64,10 @@ entity dnc_allocation_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    PHI_IN_ENABLE : in std_logic; -- for i in 0 to N-1
-    U_IN_ENABLE   : in std_logic; -- for i in 0 to N-1
+    PHI_IN_ENABLE : in std_logic; -- for j in 0 to N-1
+    U_IN_ENABLE   : in std_logic; -- for j in 0 to N-1
 
-    A_OUT_ENABLE : out std_logic; -- for i in 0 to N-1
+    A_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
 
     -- DATA
     PHI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

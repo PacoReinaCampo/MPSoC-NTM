@@ -62,14 +62,14 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal ready_input_gate_vector : std_logic;
 
   signal w_in_l_enable_input_gate_vector : std_logic;
-  signal w_in_i_enable_input_gate_vector : std_logic;
+  signal w_in_x_enable_input_gate_vector : std_logic;
   signal x_in_enable_input_gate_vector   : std_logic;
 
   signal k_in_i_enable_input_gate_vector : std_logic;
   signal k_in_l_enable_input_gate_vector : std_logic;
-  signal k_in_j_enable_input_gate_vector : std_logic;
+  signal k_in_k_enable_input_gate_vector : std_logic;
   signal r_in_i_enable_input_gate_vector : std_logic;
-  signal r_in_j_enable_input_gate_vector : std_logic;
+  signal r_in_k_enable_input_gate_vector : std_logic;
 
   signal u_in_enable_input_gate_vector : std_logic;
   signal h_in_enable_input_gate_vector : std_logic;
@@ -98,14 +98,14 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal ready_output_gate_vector : std_logic;
 
   signal w_in_l_enable_output_gate_vector : std_logic;
-  signal w_in_i_enable_output_gate_vector : std_logic;
+  signal w_in_x_enable_output_gate_vector : std_logic;
   signal x_in_enable_output_gate_vector   : std_logic;
 
   signal k_in_i_enable_output_gate_vector : std_logic;
   signal k_in_l_enable_output_gate_vector : std_logic;
-  signal k_in_j_enable_output_gate_vector : std_logic;
+  signal k_in_k_enable_output_gate_vector : std_logic;
   signal r_in_i_enable_output_gate_vector : std_logic;
-  signal r_in_j_enable_output_gate_vector : std_logic;
+  signal r_in_k_enable_output_gate_vector : std_logic;
 
   signal u_in_enable_output_gate_vector : std_logic;
   signal h_in_enable_output_gate_vector : std_logic;
@@ -134,14 +134,14 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal ready_forget_gate_vector : std_logic;
 
   signal w_in_l_enable_forget_gate_vector : std_logic;
-  signal w_in_i_enable_forget_gate_vector : std_logic;
+  signal w_in_x_enable_forget_gate_vector : std_logic;
   signal x_in_enable_forget_gate_vector   : std_logic;
 
   signal k_in_i_enable_forget_gate_vector : std_logic;
   signal k_in_l_enable_forget_gate_vector : std_logic;
-  signal k_in_j_enable_forget_gate_vector : std_logic;
+  signal k_in_k_enable_forget_gate_vector : std_logic;
   signal r_in_i_enable_forget_gate_vector : std_logic;
-  signal r_in_j_enable_forget_gate_vector : std_logic;
+  signal r_in_k_enable_forget_gate_vector : std_logic;
 
   signal u_in_enable_forget_gate_vector : std_logic;
   signal h_in_enable_forget_gate_vector : std_logic;
@@ -170,14 +170,14 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal ready_state_gate_vector : std_logic;
 
   signal w_in_l_enable_state_gate_vector : std_logic;
-  signal w_in_i_enable_state_gate_vector : std_logic;
+  signal w_in_x_enable_state_gate_vector : std_logic;
   signal x_in_enable_state_gate_vector   : std_logic;
 
   signal k_in_i_enable_state_gate_vector : std_logic;
   signal k_in_l_enable_state_gate_vector : std_logic;
-  signal k_in_j_enable_state_gate_vector : std_logic;
+  signal k_in_k_enable_state_gate_vector : std_logic;
   signal r_in_i_enable_state_gate_vector : std_logic;
-  signal r_in_j_enable_state_gate_vector : std_logic;
+  signal r_in_k_enable_state_gate_vector : std_logic;
 
   signal u_in_enable_state_gate_vector : std_logic;
   signal h_in_enable_state_gate_vector : std_logic;
@@ -229,7 +229,7 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal start_controller_output_vector : std_logic;
   signal ready_controller_output_vector : std_logic;
 
-  signal u_in_j_enable_controller_output_vector : std_logic;
+  signal u_in_y_enable_controller_output_vector : std_logic;
   signal u_in_l_enable_controller_output_vector : std_logic;
 
   signal h_in_enable_controller_output_vector : std_logic;
@@ -250,7 +250,7 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal x_in_enable_controller : std_logic;
 
   signal r_in_i_enable_controller : std_logic;
-  signal r_in_j_enable_controller : std_logic;
+  signal r_in_k_enable_controller : std_logic;
 
   signal h_out_enable_controller : std_logic;
 
@@ -288,14 +288,14 @@ begin
       READY => ready_input_gate_vector,
 
       W_IN_L_ENABLE => w_in_l_enable_input_gate_vector,
-      W_IN_I_ENABLE => w_in_i_enable_input_gate_vector,
+      W_IN_X_ENABLE => w_in_x_enable_input_gate_vector,
       X_IN_ENABLE   => x_in_enable_input_gate_vector,
 
       K_IN_I_ENABLE => k_in_i_enable_input_gate_vector,
       K_IN_L_ENABLE => k_in_l_enable_input_gate_vector,
-      K_IN_J_ENABLE => k_in_j_enable_input_gate_vector,
+      K_IN_K_ENABLE => k_in_k_enable_input_gate_vector,
       R_IN_I_ENABLE => r_in_i_enable_input_gate_vector,
-      R_IN_J_ENABLE => r_in_j_enable_input_gate_vector,
+      R_IN_K_ENABLE => r_in_k_enable_input_gate_vector,
 
       U_IN_ENABLE => u_in_enable_input_gate_vector,
       H_IN_ENABLE => h_in_enable_input_gate_vector,
@@ -341,14 +341,14 @@ begin
       READY => ready_output_gate_vector,
 
       W_IN_L_ENABLE => w_in_l_enable_output_gate_vector,
-      W_IN_I_ENABLE => w_in_i_enable_output_gate_vector,
+      W_IN_X_ENABLE => w_in_x_enable_output_gate_vector,
       X_IN_ENABLE   => x_in_enable_output_gate_vector,
 
       K_IN_I_ENABLE => k_in_i_enable_output_gate_vector,
       K_IN_L_ENABLE => k_in_l_enable_output_gate_vector,
-      K_IN_J_ENABLE => k_in_j_enable_output_gate_vector,
+      K_IN_K_ENABLE => k_in_k_enable_output_gate_vector,
       R_IN_I_ENABLE => r_in_i_enable_output_gate_vector,
-      R_IN_J_ENABLE => r_in_j_enable_output_gate_vector,
+      R_IN_K_ENABLE => r_in_k_enable_output_gate_vector,
 
       U_IN_ENABLE => u_in_enable_output_gate_vector,
       H_IN_ENABLE => h_in_enable_output_gate_vector,
@@ -394,14 +394,14 @@ begin
       READY => ready_forget_gate_vector,
 
       W_IN_L_ENABLE => w_in_l_enable_forget_gate_vector,
-      W_IN_I_ENABLE => w_in_i_enable_forget_gate_vector,
+      W_IN_X_ENABLE => w_in_x_enable_forget_gate_vector,
       X_IN_ENABLE   => x_in_enable_forget_gate_vector,
 
       K_IN_I_ENABLE => k_in_i_enable_forget_gate_vector,
       K_IN_L_ENABLE => k_in_l_enable_forget_gate_vector,
-      K_IN_J_ENABLE => k_in_j_enable_forget_gate_vector,
+      K_IN_K_ENABLE => k_in_k_enable_forget_gate_vector,
       R_IN_I_ENABLE => r_in_i_enable_forget_gate_vector,
-      R_IN_J_ENABLE => r_in_j_enable_forget_gate_vector,
+      R_IN_K_ENABLE => r_in_k_enable_forget_gate_vector,
 
       U_IN_ENABLE => u_in_enable_forget_gate_vector,
       H_IN_ENABLE => h_in_enable_forget_gate_vector,
@@ -447,14 +447,14 @@ begin
       READY => ready_state_gate_vector,
 
       W_IN_L_ENABLE => w_in_l_enable_state_gate_vector,
-      W_IN_I_ENABLE => w_in_i_enable_state_gate_vector,
+      W_IN_X_ENABLE => w_in_x_enable_state_gate_vector,
       X_IN_ENABLE   => x_in_enable_state_gate_vector,
 
       K_IN_I_ENABLE => k_in_i_enable_state_gate_vector,
       K_IN_L_ENABLE => k_in_l_enable_state_gate_vector,
-      K_IN_J_ENABLE => k_in_j_enable_state_gate_vector,
+      K_IN_K_ENABLE => k_in_k_enable_state_gate_vector,
       R_IN_I_ENABLE => r_in_i_enable_state_gate_vector,
-      R_IN_J_ENABLE => r_in_j_enable_state_gate_vector,
+      R_IN_K_ENABLE => r_in_k_enable_state_gate_vector,
 
       U_IN_ENABLE => u_in_enable_state_gate_vector,
       H_IN_ENABLE => h_in_enable_state_gate_vector,
@@ -540,7 +540,7 @@ begin
       START => start_controller_output_vector,
       READY => ready_controller_output_vector,
 
-      U_IN_J_ENABLE => u_in_j_enable_controller_output_vector,
+      U_IN_Y_ENABLE => u_in_y_enable_controller_output_vector,
       U_IN_L_ENABLE => u_in_l_enable_controller_output_vector,
 
       H_IN_ENABLE => h_in_enable_controller_output_vector,
@@ -555,7 +555,7 @@ begin
     );
 
   -- CONTROLLER
-  controller_input_matrix : ntm_controller
+  controller : ntm_controller
     generic map (
       X => X,
       Y => Y,
@@ -578,7 +578,7 @@ begin
       X_IN_ENABLE => x_in_enable_controller,
 
       R_IN_I_ENABLE => r_in_i_enable_controller,
-      R_IN_J_ENABLE => r_in_j_enable_controller,
+      R_IN_K_ENABLE => r_in_k_enable_controller,
 
       H_OUT_ENABLE => h_out_enable_controller,
 
