@@ -80,6 +80,8 @@ architecture ntm_memory_testbench_architecture of ntm_memory_testbench is
   signal start_addressing_location : std_logic;
   signal ready_addressing_location : std_logic;
 
+  signal s_in_enable_addressing_location  : std_logic;
+
   signal w_in_enable_addressing_location  : std_logic;
   signal w_out_enable_addressing_location : std_logic;
 
@@ -95,6 +97,9 @@ architecture ntm_memory_testbench_architecture of ntm_memory_testbench is
   -- CONTROL
   signal start_addressing : std_logic;
   signal ready_addressing : std_logic;
+
+  signal k_in_enable_addressing : std_logic;
+  signal s_in_enable_addressing : std_logic;
 
   signal m_in_j_enable_addressing : std_logic;
   signal m_in_k_enable_addressing : std_logic;
@@ -159,6 +164,8 @@ begin
       START => start_addressing_location,
       READY => ready_addressing_location,
 
+      S_IN_ENABLE => s_in_enable_addressing_location,
+
       W_IN_ENABLE  => w_in_enable_addressing_location,
       W_OUT_ENABLE => w_out_enable_addressing_location,
 
@@ -186,6 +193,9 @@ begin
       -- CONTROL
       START => start_addressing,
       READY => ready_addressing,
+
+      K_IN_ENABLE => k_in_enable_addressing,
+      S_IN_ENABLE => s_in_enable_addressing,
 
       M_IN_J_ENABLE => m_in_j_enable_addressing,
       M_IN_K_ENABLE => m_in_k_enable_addressing,

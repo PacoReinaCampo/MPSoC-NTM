@@ -111,15 +111,62 @@ architecture ntm_forget_gate_vector_architecture of ntm_forget_gate_vector is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- SCALAR LOGISTIC FUNCTION
+  -- VECTOR ADDER
   -- CONTROL
-  signal start_scalar_logistic_function : std_logic;
-  signal ready_scalar_logistic_function : std_logic;
+  signal start_vector_adder : std_logic;
+  signal ready_vector_adder : std_logic;
+
+  signal operation_vector_adder : std_logic;
+
+  signal data_a_in_enable_vector_adder : std_logic;
+  signal data_b_in_enable_vector_adder : std_logic;
+
+  signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_scalar_logistic_function   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_logistic_function  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logistic_function : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- DATA
+  signal modulo_matrix_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- MATRIX PRODUCT
+  -- CONTROL
+  signal start_matrix_product : std_logic;
+  signal ready_matrix_product : std_logic;
+
+  signal data_a_in_i_enable_matrix_product : std_logic;
+  signal data_a_in_j_enable_matrix_product : std_logic;
+  signal data_b_in_i_enable_matrix_product : std_logic;
+  signal data_b_in_j_enable_matrix_product : std_logic;
+
+  signal data_out_i_enable_matrix_product : std_logic;
+  signal data_out_j_enable_matrix_product : std_logic;
+
+  -- DATA
+  signal modulo_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- VECTOR LOGISTIC
+  -- CONTROL
+  signal start_vector_logistic : std_logic;
+  signal ready_vector_logistic : std_logic;
+
+  signal data_in_enable_vector_logistic : std_logic;
+
+  signal data_out_enable_vector_logistic : std_logic;
+
+  -- DATA
+  signal modulo_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -129,8 +176,11 @@ begin
 
   -- f(t;l) = sigmoid(W(t;l)*x(t;l) + K(t;l)*r(t;l) + U(t-1;l)*h(t-1;l) + U(t;l-1)*h(t;l-1) + b(t;l))
 
-  ntm_scalar_logistic_function_i : ntm_scalar_logistic_function
+  -- VECTOR ADDER
+  vector_adder : ntm_vector_adder
     generic map (
+      I => I,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -139,13 +189,79 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_logistic_function,
-      READY => ready_scalar_logistic_function,
+      START => start_vector_adder,
+      READY => ready_vector_adder,
+
+      OPERATION => operation_vector_adder,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_adder,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_adder,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
       -- DATA
-      MODULO   => modulo_scalar_logistic_function,
-      DATA_IN  => data_in_scalar_logistic_function,
-      DATA_OUT => data_out_scalar_logistic_function
+      MODULO    => modulo_vector_adder,
+      DATA_A_IN => data_a_in_vector_adder,
+      DATA_B_IN => data_b_in_vector_adder,
+      DATA_OUT  => data_out_vector_adder
+    );
+
+  -- MATRIX PRODUCT
+  matrix_product : ntm_matrix_product
+    generic map (
+      I => I,
+      J => J,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_matrix_product,
+      READY => ready_matrix_product,
+
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_product,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
+
+      -- DATA
+      MODULO    => modulo_matrix_product,
+      DATA_A_IN => data_a_in_matrix_product,
+      DATA_B_IN => data_b_in_matrix_product,
+      DATA_OUT  => data_out_matrix_product
+    );
+
+  -- VECTOR LOGISTIC
+  vector_logistic_function : ntm_vector_logistic_function
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_logistic,
+      READY => ready_vector_logistic,
+
+      DATA_IN_ENABLE => data_in_enable_vector_logistic,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_logistic,
+
+      -- DATA
+      MODULO   => modulo_vector_logistic,
+      DATA_IN  => data_in_vector_logistic,
+      DATA_OUT => data_out_vector_logistic
     );
 
 end architecture;

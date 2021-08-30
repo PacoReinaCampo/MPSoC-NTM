@@ -109,8 +109,8 @@ architecture dnc_read_content_weighting_architecture of dnc_read_content_weighti
 
   -- DATA
   signal k_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal m_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_in_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal modulo_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
   signal c_out_vector_content_based_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -149,8 +149,8 @@ begin
 
       -- DATA
       K_IN    => k_in_vector_content_based_addressing,
-      M_IN    => m_in_vector_content_based_addressing,
       BETA_IN => beta_in_vector_content_based_addressing,
+      M_IN    => m_in_vector_content_based_addressing,
 
       C_OUT  => c_out_vector_content_based_addressing
     );

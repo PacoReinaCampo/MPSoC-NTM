@@ -89,10 +89,62 @@ architecture ntm_addressing_content_architecture of ntm_addressing_content is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- VECTOR CONTENT BASED ADDRESSING
+  -- CONTROL
+  signal start_vector_content_based_addressing : std_logic;
+  signal ready_vector_content_based_addressing : std_logic;
+
+  signal k_in_enable_vector_content_based_addressing : std_logic;
+
+  signal m_in_i_enable_vector_content_based_addressing : std_logic;
+  signal m_in_j_enable_vector_content_based_addressing : std_logic;
+
+  signal c_out_enable_vector_content_based_addressing : std_logic;
+
+  -- DATA
+  signal k_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal beta_in_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal modulo_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal c_out_vector_content_based_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- VECTOR CONTENT BASED ADDRESSING
+  ntm_content_based_addressing_i : ntm_content_based_addressing
+    generic map (
+      I => N,
+      J => W,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_content_based_addressing,
+      READY => ready_vector_content_based_addressing,
+
+      K_IN_ENABLE => k_in_enable_vector_content_based_addressing,
+
+      M_IN_I_ENABLE => m_in_i_enable_vector_content_based_addressing,
+      M_IN_J_ENABLE => m_in_j_enable_vector_content_based_addressing,
+
+      C_OUT_ENABLE => c_out_enable_vector_content_based_addressing,
+
+      -- DATA
+      K_IN    => k_in_vector_content_based_addressing,
+      BETA_IN => beta_in_vector_content_based_addressing,
+      M_IN    => m_in_vector_content_based_addressing,
+
+      C_OUT => c_out_vector_content_based_addressing
+    );
 
 end architecture;

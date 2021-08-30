@@ -83,29 +83,37 @@ architecture ntm_reading_architecture of ntm_reading is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- SCALAR ADDER
+  -- VECTOR SUMMATION
   -- CONTROL
-  signal start_scalar_adder : std_logic;
-  signal ready_scalar_adder : std_logic;
+  signal start_vector_summation : std_logic;
+  signal ready_vector_summation : std_logic;
 
-  signal operation_scalar_adder : std_logic;
+  signal data_a_in_enable_vector_summation : std_logic;
+  signal data_b_in_enable_vector_summation : std_logic;
+
+  signal data_out_enable_vector_summation : std_logic;
 
   -- DATA
-  signal modulo_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_vector_summation    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR MULTIPLIER
+  -- VECTOR MULTIPLIER
   -- CONTROL
-  signal start_scalar_multiplier : std_logic;
-  signal ready_scalar_multiplier : std_logic;
+  signal start_vector_multiplier : std_logic;
+  signal ready_vector_multiplier : std_logic;
+
+  signal data_a_in_enable_vector_multiplier : std_logic;
+  signal data_b_in_enable_vector_multiplier : std_logic;
+
+  signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_scalar_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -113,8 +121,11 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  ntm_scalar_adder_i : ntm_scalar_adder
+  -- VECTOR SUMMATION
+  vector_summation_function : ntm_vector_summation_function
     generic map (
+      I => I,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -123,20 +134,26 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_adder,
-      READY => ready_scalar_adder,
-      
-      OPERATION => operation_scalar_adder,
+      START => start_vector_summation,
+      READY => ready_vector_summation,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_summation,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_summation,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_summation,
 
       -- DATA
-      MODULO    => modulo_scalar_adder,
-      DATA_A_IN => data_a_in_scalar_adder,
-      DATA_B_IN => data_b_in_scalar_adder,
-      DATA_OUT  => data_out_scalar_adder
+      MODULO    => modulo_vector_summation,
+      DATA_A_IN => data_a_in_vector_summation,
+      DATA_B_IN => data_b_in_vector_summation,
+      DATA_OUT  => data_out_vector_summation
     );
 
-  ntm_scalar_multiplier_i : ntm_scalar_multiplier
+  -- VECTOR MULTIPLIER
+  vector_multiplier : ntm_vector_multiplier
     generic map (
+      I => I,
+
       DATA_SIZE => DATA_SIZE
     )
     port map (
@@ -145,14 +162,19 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_multiplier,
-      READY => ready_scalar_multiplier,
+      START => start_vector_multiplier,
+      READY => ready_vector_multiplier,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplier,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplier,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO    => modulo_scalar_multiplier,
-      DATA_A_IN => data_a_in_scalar_multiplier,
-      DATA_B_IN => data_b_in_scalar_multiplier,
-      DATA_OUT  => data_out_scalar_multiplier
+      MODULO    => modulo_vector_multiplier,
+      DATA_A_IN => data_a_in_vector_multiplier,
+      DATA_B_IN => data_b_in_vector_multiplier,
+      DATA_OUT  => data_out_vector_multiplier
     );
 
 end architecture;

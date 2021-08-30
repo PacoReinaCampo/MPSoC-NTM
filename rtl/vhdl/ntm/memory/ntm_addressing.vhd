@@ -60,6 +60,9 @@ entity ntm_addressing is
     START : in  std_logic;
     READY : out std_logic;
 
+    K_IN_ENABLE : in std_logic; -- for k in 0 to W-1
+    S_IN_ENABLE : in std_logic; -- for k in 0 to W-1
+
     M_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
     M_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
 
@@ -67,6 +70,12 @@ entity ntm_addressing is
     W_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
 
     -- DATA
+    K_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
+    BETA_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
+    G_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
+    S_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
+    GAMMA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
     M_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     W_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -111,6 +120,8 @@ architecture ntm_addressing_architecture of ntm_addressing is
   -- CONTROL
   signal start_addressing_location : std_logic;
   signal ready_addressing_location : std_logic;
+
+  signal s_in_enable_addressing_location  : std_logic;
 
   signal w_in_enable_addressing_location  : std_logic;
   signal w_out_enable_addressing_location : std_logic;
@@ -173,6 +184,8 @@ begin
       -- CONTROL
       START => start_addressing_location,
       READY => ready_addressing_location,
+
+      S_IN_ENABLE => s_in_enable_addressing_location,
 
       W_IN_ENABLE  => w_in_enable_addressing_location,
       W_OUT_ENABLE => w_out_enable_addressing_location,

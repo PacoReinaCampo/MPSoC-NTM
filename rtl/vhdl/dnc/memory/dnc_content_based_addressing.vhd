@@ -69,8 +69,8 @@ entity dnc_content_based_addressing is
 
     -- DATA
     K_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
-    M_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
     BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    M_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     C_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );

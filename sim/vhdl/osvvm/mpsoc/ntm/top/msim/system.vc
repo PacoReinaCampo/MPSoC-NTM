@@ -71,7 +71,6 @@
 ../../../../../../../rtl/vhdl/math/algebra/ntm_vector_product.vhd
 
 ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_controller.vhd
-../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_controller_output_vector.vhd
 ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_forget_gate_vector.vhd
 ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_hidden_gate_vector.vhd
 ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_input_gate_vector.vhd
@@ -87,6 +86,7 @@
 ../../../../../../../rtl/vhdl/ntm/memory/ntm_addressing.vhd
 
 ../../../../../../../rtl/vhdl/ntm/top/ntm_interface_vector.vhd
+../../../../../../../rtl/vhdl/ntm/top/ntm_controller_output_vector.vhd
 ../../../../../../../rtl/vhdl/ntm/top/ntm_output_vector.vhd
 ../../../../../../../rtl/vhdl/ntm/top/ntm_top.vhd
 

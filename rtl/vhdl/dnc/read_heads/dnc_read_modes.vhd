@@ -120,7 +120,7 @@ begin
 
   ntm_matrix_softmax_function_i : ntm_matrix_softmax_function
     generic map (
-      I => 3,
+      I => R,
       J => 3,
 
       DATA_SIZE => DATA_SIZE

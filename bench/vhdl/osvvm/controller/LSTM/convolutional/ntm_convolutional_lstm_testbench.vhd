@@ -224,24 +224,6 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
 
   signal h_out_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- CONTROLLER OUTPUT VECTOR
-  -- CONTROL
-  signal start_controller_output_vector : std_logic;
-  signal ready_controller_output_vector : std_logic;
-
-  signal u_in_y_enable_controller_output_vector : std_logic;
-  signal u_in_l_enable_controller_output_vector : std_logic;
-
-  signal h_in_enable_controller_output_vector : std_logic;
-
-  signal nu_out_enable_controller_output_vector : std_logic;
-
-  -- DATA
-  signal u_in_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal h_in_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal nu_out_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
   -- CONTROLLER
   -- CONTROL
   signal start_controller : std_logic;
@@ -517,41 +499,6 @@ begin
       O_IN => o_in_hidden_gate_vector,
 
       H_OUT => h_out_hidden_gate_vector
-    );
-
-  -- CONTROLLER OUTPUT VECTOR
-  controller_output_vector : ntm_controller_output_vector
-    generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_controller_output_vector,
-      READY => ready_controller_output_vector,
-
-      U_IN_Y_ENABLE => u_in_y_enable_controller_output_vector,
-      U_IN_L_ENABLE => u_in_l_enable_controller_output_vector,
-
-      H_IN_ENABLE => h_in_enable_controller_output_vector,
-
-      NU_ENABLE_OUT => nu_out_enable_controller_output_vector,
-
-      -- DATA
-      U_IN => u_in_controller_output_vector,
-      H_IN => h_in_controller_output_vector,
-
-      NU_OUT => nu_out_controller_output_vector
     );
 
   -- CONTROLLER

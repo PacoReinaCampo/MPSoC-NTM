@@ -57,6 +57,8 @@ entity ntm_addressing_location is
     START : in  std_logic;
     READY : out std_logic;
 
+    S_IN_ENABLE : in std_logic; -- for k in 0 to W-1
+
     W_IN_ENABLE  : in  std_logic; -- for j in 0 to N-1
     W_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
 
@@ -84,10 +86,177 @@ architecture ntm_addressing_location_architecture of ntm_addressing_location is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- SCALAR ADDER
+  -- CONTROL
+  signal start_scalar_adder : std_logic;
+  signal ready_scalar_adder : std_logic;
+
+  signal operation_scalar_adder : std_logic;
+
+  -- DATA
+  signal modulo_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- VECTOR EXPONENTIATOR
+  -- CONTROL
+  signal start_vector_exponentiator : std_logic;
+  signal ready_vector_exponentiator : std_logic;
+
+  signal base_enable_vector_exponentiator : std_logic;
+  signal power_enable_vector_exponentiator : std_logic;
+
+  signal data_out_enable_vector_exponentiator : std_logic;
+
+  -- DATA
+  signal modulo_vector_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal base_vector_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal power_vector_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- VECTOR MULTIPLIER
+  -- CONTROL
+  signal start_vector_multiplier : std_logic;
+  signal ready_vector_multiplier : std_logic;
+
+  signal data_a_in_enable_vector_multiplier : std_logic;
+  signal data_b_in_enable_vector_multiplier : std_logic;
+
+  signal data_out_enable_vector_multiplier : std_logic;
+
+  -- DATA
+  signal modulo_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- VECTOR CONVOLUTION
+  -- CONTROL
+  signal start_vector_convolution : std_logic;
+  signal ready_vector_convolution : std_logic;
+
+  signal data_a_in_enable_vector_convolution : std_logic;
+  signal data_b_in_enable_vector_convolution : std_logic;
+
+  signal data_out_enable_vector_convolution : std_logic;
+
+  -- DATA
+  signal modulo_vector_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
 
+  -- SCALAR ADDER
+  scalar_adder : ntm_scalar_adder
+    generic map (
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_adder,
+      READY => ready_scalar_adder,
+
+      OPERATION => operation_scalar_adder,
+
+      -- DATA
+      MODULO    => modulo_scalar_adder,
+      DATA_A_IN => data_a_in_scalar_adder,
+      DATA_B_IN => data_b_in_scalar_adder,
+      DATA_OUT  => data_out_scalar_adder
+    );
+
+  -- VECTOR EXPONENTIATOR
+  vector_exponentiator : ntm_vector_exponentiator
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_exponentiator,
+      READY => ready_vector_exponentiator,
+
+      BASE_EXPONENTIATION_ENABLE  => base_enable_vector_exponentiator,
+      POWER_EXPONENTIATION_ENABLE => power_enable_vector_exponentiator,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
+
+      -- DATA
+      MODULO               => modulo_vector_exponentiator,
+      BASE_EXPONENTIATION  => base_vector_exponentiator,
+      POWER_EXPONENTIATION => power_vector_exponentiator,
+      DATA_OUT             => data_out_vector_exponentiator
+    );
+
+  -- VECTOR MULTIPLIER
+  vector_multiplier : ntm_vector_multiplier
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_multiplier,
+      READY => ready_vector_multiplier,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplier,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplier,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
+
+      -- DATA
+      MODULO    => modulo_vector_multiplier,
+      DATA_A_IN => data_a_in_vector_multiplier,
+      DATA_B_IN => data_b_in_vector_multiplier,
+      DATA_OUT  => data_out_vector_multiplier
+    );
+
+  -- VECTOR CONVOLUTION
+  vector_convolution_function : ntm_vector_convolution_function
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_convolution,
+      READY => ready_vector_convolution,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_convolution,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_convolution,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_convolution,
+
+      -- DATA
+      MODULO    => modulo_vector_convolution,
+      DATA_A_IN => data_a_in_vector_convolution,
+      DATA_B_IN => data_b_in_vector_convolution,
+      DATA_OUT  => data_out_vector_convolution
+    );
+    
 end architecture;

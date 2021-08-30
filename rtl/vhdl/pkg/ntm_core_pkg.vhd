@@ -143,6 +143,38 @@ package ntm_core_pkg is
   -- MEMORY
   -----------------------------------------------------------------------
 
+  component ntm_content_based_addressing is
+    generic (
+      I : integer := 64;
+      J : integer := 64;
+
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      K_IN_ENABLE : in std_logic; -- for j in 0 to J-1
+
+      M_IN_I_ENABLE : in std_logic; -- for i in 0 to I-1
+      M_IN_J_ENABLE : in std_logic; -- for j in 0 to J-1
+
+      C_OUT_ENABLE : out std_logic; -- for i in 0 to I-1
+
+      -- DATA
+      K_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
+      M_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
+      BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      C_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    );
+  end component;
+
   component ntm_addressing_content is
     generic (
       W : integer := 64;
@@ -187,6 +219,8 @@ package ntm_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
+      S_IN_ENABLE : in std_logic; -- for k in 0 to W-1
+
       W_IN_ENABLE  : in  std_logic; -- for j in 0 to N-1
       W_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
 
@@ -214,6 +248,9 @@ package ntm_core_pkg is
       -- CONTROL
       START : in  std_logic;
       READY : out std_logic;
+
+      K_IN_ENABLE : in std_logic; -- for k in 0 to W-1
+      S_IN_ENABLE : in std_logic; -- for k in 0 to W-1
 
       M_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
       M_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
@@ -362,6 +399,41 @@ package ntm_core_pkg is
       NU_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    );
+  end component;
+
+  component ntm_controller_output_vector is
+    generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
+      R : integer := 64;
+
+      DATA_SIZE : integer := 512
+    );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      U_IN_Y_ENABLE : in std_logic; -- for y in 0 to Y-1
+      U_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
+
+      H_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+
+      NU_ENABLE_OUT : out std_logic; -- for j in 0 to Y-1
+
+      -- DATA
+      U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      NU_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
   end component;
 

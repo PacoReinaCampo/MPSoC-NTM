@@ -538,7 +538,7 @@ begin
       DATA_OUT  => data_out_scalar_divider
     );
 
-  -- EXPONENTIATION
+  -- EXPONENTIATOR
   scalar_exponentiator : ntm_scalar_exponentiator
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -742,7 +742,7 @@ begin
       DATA_OUT  => data_out_vector_divider
     );
 
-  -- EXPONENTIATION
+  -- EXPONENTIATOR
   vector_exponentiator : ntm_vector_exponentiator
     generic map (
       I => I,
@@ -984,7 +984,7 @@ begin
       DATA_OUT  => data_out_matrix_divider
     );
 
-  -- EXPONENTIATION
+  -- EXPONENTIATOR
   matrix_exponentiator : ntm_matrix_exponentiator
     generic map (
       I => I,

@@ -56,7 +56,6 @@
 ../../../../../../../../rtl/vhdl/math/function/sigmoid/matrix/oneplus/ntm_matrix_oneplus_function.vhd
 
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_controller.vhd
-../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_controller_output_vector.vhd
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_forget_gate_vector.vhd
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_hidden_gate_vector.vhd
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_input_gate_vector.vhd
