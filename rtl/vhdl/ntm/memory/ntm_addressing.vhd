@@ -97,42 +97,86 @@ architecture ntm_addressing_architecture of ntm_addressing is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- ADDRESSING CONTENT
+  -- VECTOR CONTENT BASED ADDRESSING
   -- CONTROL
-  signal start_addressing_content : std_logic;
-  signal ready_addressing_content : std_logic;
+  signal start_vector_content_based_addressing : std_logic;
+  signal ready_vector_content_based_addressing : std_logic;
 
-  signal m_in_j_enable_addressing_content : std_logic;
-  signal m_in_k_enable_addressing_content : std_logic;
+  signal k_in_enable_vector_content_based_addressing : std_logic;
 
-  signal k_in_enable_addressing_content : std_logic;
+  signal m_in_i_enable_vector_content_based_addressing : std_logic;
+  signal m_in_j_enable_vector_content_based_addressing : std_logic;
 
-  signal w_out_enable_addressing_content : std_logic;
+  signal c_out_enable_vector_content_based_addressing : std_logic;
 
   -- DATA
-  signal k_in_addressing_content    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal beta_in_addressing_content : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal beta_in_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal m_in_addressing_content  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_out_addressing_content : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal c_out_vector_content_based_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- ADDRESSING LOCATION
+  -- SCALAR ADDER
   -- CONTROL
-  signal start_addressing_location : std_logic;
-  signal ready_addressing_location : std_logic;
+  signal start_scalar_adder : std_logic;
+  signal ready_scalar_adder : std_logic;
 
-  signal s_in_enable_addressing_location  : std_logic;
-
-  signal w_in_enable_addressing_location  : std_logic;
-  signal w_out_enable_addressing_location : std_logic;
+  signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal g_in_addressing_location     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal s_in_addressing_location     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal gamma_in_addressing_location : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal w_in_addressing_location  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_out_addressing_location : std_logic_vector(DATA_SIZE-1 downto 0);
+  -- VECTOR EXPONENTIATOR
+  -- CONTROL
+  signal start_vector_exponentiator : std_logic;
+  signal ready_vector_exponentiator : std_logic;
+
+  signal base_enable_vector_exponentiator : std_logic;
+  signal power_enable_vector_exponentiator : std_logic;
+
+  signal data_out_enable_vector_exponentiator : std_logic;
+
+  -- DATA
+  signal modulo_vector_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal base_vector_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal power_vector_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- VECTOR MULTIPLIER
+  -- CONTROL
+  signal start_vector_multiplier : std_logic;
+  signal ready_vector_multiplier : std_logic;
+
+  signal data_a_in_enable_vector_multiplier : std_logic;
+  signal data_b_in_enable_vector_multiplier : std_logic;
+
+  signal data_out_enable_vector_multiplier : std_logic;
+
+  -- DATA
+  signal modulo_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- VECTOR CONVOLUTION
+  -- CONTROL
+  signal start_vector_convolution : std_logic;
+  signal ready_vector_convolution : std_logic;
+
+  signal data_a_in_enable_vector_convolution : std_logic;
+  signal data_b_in_enable_vector_convolution : std_logic;
+
+  signal data_out_enable_vector_convolution : std_logic;
+
+  -- DATA
+  signal modulo_vector_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -140,10 +184,11 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- ADDRESSING CONTENT
-  ntm_addressing_content_i : ntm_addressing_content
+  -- VECTOR CONTENT BASED ADDRESSING
+  ntm_content_based_addressing_i : ntm_content_based_addressing
     generic map (
-      W => W,
+      I => N,
+      J => W,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -153,26 +198,26 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_addressing_content,
-      READY => ready_addressing_content,
+      START => start_vector_content_based_addressing,
+      READY => ready_vector_content_based_addressing,
 
-      M_IN_J_ENABLE => m_in_j_enable_addressing_content,
-      M_IN_K_ENABLE => m_in_k_enable_addressing_content,
+      K_IN_ENABLE => k_in_enable_vector_content_based_addressing,
 
-      K_IN_ENABLE => k_in_enable_addressing_content,
+      M_IN_I_ENABLE => m_in_i_enable_vector_content_based_addressing,
+      M_IN_J_ENABLE => m_in_j_enable_vector_content_based_addressing,
 
-      W_OUT_ENABLE => w_out_enable_addressing_content,
+      C_OUT_ENABLE => c_out_enable_vector_content_based_addressing,
 
       -- DATA
-      K_IN    => k_in_addressing_content,
-      BETA_IN => beta_in_addressing_content,
+      K_IN    => k_in_vector_content_based_addressing,
+      BETA_IN => beta_in_vector_content_based_addressing,
+      M_IN    => m_in_vector_content_based_addressing,
 
-      M_IN  => m_in_addressing_content,
-      W_OUT => w_out_addressing_content
+      C_OUT => c_out_vector_content_based_addressing
     );
 
-  -- ADDRESSING LOCATION
-  ntm_addressing_location_i : ntm_addressing_location
+  -- SCALAR ADDER
+  scalar_adder : ntm_scalar_adder
     generic map (
       DATA_SIZE => DATA_SIZE
     )
@@ -182,21 +227,100 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_addressing_location,
-      READY => ready_addressing_location,
+      START => start_scalar_adder,
+      READY => ready_scalar_adder,
 
-      S_IN_ENABLE => s_in_enable_addressing_location,
-
-      W_IN_ENABLE  => w_in_enable_addressing_location,
-      W_OUT_ENABLE => w_out_enable_addressing_location,
+      OPERATION => operation_scalar_adder,
 
       -- DATA
-      G_IN     => g_in_addressing_location,
-      S_IN     => s_in_addressing_location,
-      GAMMA_IN => gamma_in_addressing_location,
+      MODULO    => modulo_scalar_adder,
+      DATA_A_IN => data_a_in_scalar_adder,
+      DATA_B_IN => data_b_in_scalar_adder,
+      DATA_OUT  => data_out_scalar_adder
+    );
 
-      W_IN  => w_in_addressing_location,
-      W_OUT => w_out_addressing_location
+  -- VECTOR EXPONENTIATOR
+  vector_exponentiator : ntm_vector_exponentiator
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_exponentiator,
+      READY => ready_vector_exponentiator,
+
+      BASE_EXPONENTIATION_ENABLE  => base_enable_vector_exponentiator,
+      POWER_EXPONENTIATION_ENABLE => power_enable_vector_exponentiator,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
+
+      -- DATA
+      MODULO               => modulo_vector_exponentiator,
+      BASE_EXPONENTIATION  => base_vector_exponentiator,
+      POWER_EXPONENTIATION => power_vector_exponentiator,
+      DATA_OUT             => data_out_vector_exponentiator
+    );
+
+  -- VECTOR MULTIPLIER
+  vector_multiplier : ntm_vector_multiplier
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_multiplier,
+      READY => ready_vector_multiplier,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplier,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplier,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
+
+      -- DATA
+      MODULO    => modulo_vector_multiplier,
+      DATA_A_IN => data_a_in_vector_multiplier,
+      DATA_B_IN => data_b_in_vector_multiplier,
+      DATA_OUT  => data_out_vector_multiplier
+    );
+
+  -- VECTOR CONVOLUTION
+  vector_convolution_function : ntm_vector_convolution_function
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_convolution,
+      READY => ready_vector_convolution,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_convolution,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_convolution,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_convolution,
+
+      -- DATA
+      MODULO    => modulo_vector_convolution,
+      DATA_A_IN => data_a_in_vector_convolution,
+      DATA_B_IN => data_b_in_vector_convolution,
+      DATA_OUT  => data_out_vector_convolution
     );
 
 end architecture;

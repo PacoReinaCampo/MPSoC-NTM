@@ -175,65 +175,6 @@ package ntm_core_pkg is
     );
   end component;
 
-  component ntm_addressing_content is
-    generic (
-      W : integer := 64;
-
-      DATA_SIZE : integer := 512
-    );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      M_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
-      M_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
-
-      K_IN_ENABLE : in std_logic; -- for k in 0 to W-1
-
-      W_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
-
-      -- DATA
-      K_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
-      BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      M_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-    );
-  end component;
-
-  component ntm_addressing_location is
-    generic (
-      DATA_SIZE : integer := 512
-    );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      S_IN_ENABLE : in std_logic; -- for k in 0 to W-1
-
-      W_IN_ENABLE  : in  std_logic; -- for j in 0 to N-1
-      W_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
-
-      -- DATA
-      G_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      S_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      GAMMA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      W_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-    );
-  end component;
-
   component ntm_addressing is
     generic (
       N : integer := 64;
@@ -259,6 +200,12 @@ package ntm_core_pkg is
       W_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
 
       -- DATA
+      K_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
+      BETA_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
+      G_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
+      S_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
+      GAMMA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
       M_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       W_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);

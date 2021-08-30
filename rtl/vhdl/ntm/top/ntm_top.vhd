@@ -129,6 +129,30 @@ architecture ntm_top_architecture of ntm_top is
 
   signal nu_out_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- OUTPUT VECTOR
+  -- CONTROL
+  signal start_output_vector : std_logic;
+  signal ready_output_vector : std_logic;
+
+  signal k_in_i_enable_output_vector : std_logic;
+  signal k_in_y_enable_output_vector : std_logic;
+  signal k_in_k_enable_output_vector : std_logic;
+
+  signal r_in_i_enable_output_vector : std_logic;
+  signal r_in_k_enable_output_vector : std_logic;
+
+  signal nu_in_enable_output_vector : std_logic;
+
+  signal y_in_enable_output_vector : std_logic;
+
+  -- DATA
+  signal k_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal r_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal nu_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal y_out_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -----------------------------------------------------------------------
   -- READ HEADS
   -----------------------------------------------------------------------
@@ -182,6 +206,12 @@ architecture ntm_top_architecture of ntm_top is
   signal w_out_enable_addressing : std_logic;
 
   -- DATA
+  signal k_in_addressing     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal beta_in_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal g_in_addressing     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal s_in_addressing     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal gamma_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal m_in_addressing   : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_in_addressing   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -264,6 +294,47 @@ begin
       H_IN => h_in_controller_output_vector,
 
       NU_OUT => nu_out_controller_output_vector
+    );
+
+  -- OUTPUT VECTOR
+  output_vector_i : ntm_output_vector
+    generic map (
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_output_vector,
+      READY => ready_output_vector,
+
+      K_IN_I_ENABLE => k_in_i_enable_output_vector,
+      K_IN_Y_ENABLE => k_in_y_enable_output_vector,
+      K_IN_K_ENABLE => k_in_k_enable_output_vector,
+
+      R_IN_I_ENABLE => r_in_i_enable_output_vector,
+      R_IN_K_ENABLE => r_in_k_enable_output_vector,
+
+      NU_IN_ENABLE => nu_in_enable_output_vector,
+
+      Y_OUT_ENABLE => y_in_enable_output_vector,
+
+      -- DATA
+      K_IN => k_in_output_vector,
+      R_IN => r_in_output_vector,
+
+      NU_IN => nu_in_output_vector,
+
+      Y_OUT  => y_out_output_vector
     );
 
   -----------------------------------------------------------------------
@@ -353,6 +424,12 @@ begin
       W_OUT_ENABLE => w_out_enable_addressing,
 
       -- DATA
+      K_IN     => k_in_addressing,
+      BETA_IN  => beta_in_addressing,
+      G_IN     => g_in_addressing,
+      S_IN     => s_in_addressing,
+      GAMMA_IN => gamma_in_addressing,
+
       M_IN => m_in_addressing,
 
       W_IN  => w_in_addressing,

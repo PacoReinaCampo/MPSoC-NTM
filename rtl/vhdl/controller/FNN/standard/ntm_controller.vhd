@@ -35,52 +35,64 @@
 -- THE SOFTWARE.
 --
 --------------------------------------------------------------------------------
+-- Author(s):
+--   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
-use work.ntm_core_pkg.all;
+use work.ntm_lstm_controller_pkg.all;
 
-entity ntm_memory_testbench is
-end ntm_memory_testbench;
+entity ntm_controller is
+  generic (
+    X : integer := 64;
+    Y : integer := 64;
+    N : integer := 64;
+    W : integer := 64;
+    L : integer := 64;
+    R : integer := 64;
 
-architecture ntm_memory_testbench_architecture of ntm_memory_testbench is
+    DATA_SIZE : integer := 512
+  );
+  port (
+    -- GLOBAL
+    CLK : in std_logic;
+    RST : in std_logic;
+
+    -- CONTROL
+    START : in  std_logic;
+    READY : out std_logic;
+
+    X_IN_ENABLE : in std_logic; -- for x in 0 to X-1
+
+    R_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1 (read heads flow)
+    R_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+
+    H_OUT_ENABLE : in std_logic; -- for l in 0 to L-1
+
+    -- DATA
+    X_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
+    R_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    H_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+  );
+end entity;
+
+architecture ntm_controller_architecture of ntm_controller is
+
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
-
-  -- GLOBAL
-  signal CLK : std_logic;
-  signal RST : std_logic;
-
-  -- ADDRESSING
-  -- CONTROL
-  signal start_addressing : std_logic;
-  signal ready_addressing : std_logic;
-
-  signal k_in_enable_addressing : std_logic;
-  signal s_in_enable_addressing : std_logic;
-
-  signal m_in_j_enable_addressing : std_logic;
-  signal m_in_k_enable_addressing : std_logic;
-
-  signal w_in_enable_addressing  : std_logic;
-  signal w_out_enable_addressing : std_logic;
-
-  -- DATA
-  signal k_in_addressing     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal beta_in_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal g_in_addressing     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal s_in_addressing     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal gamma_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal m_in_addressing   : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal w_in_addressing   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_out_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -88,42 +100,4 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- ADDRESSING
-  ntm_addressing_i : ntm_addressing
-    generic map (
-      N => N,
-
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_addressing,
-      READY => ready_addressing,
-
-      K_IN_ENABLE => k_in_enable_addressing,
-      S_IN_ENABLE => s_in_enable_addressing,
-
-      M_IN_J_ENABLE => m_in_j_enable_addressing,
-      M_IN_K_ENABLE => m_in_k_enable_addressing,
-
-      W_IN_ENABLE  => w_in_enable_addressing,
-      W_OUT_ENABLE => w_out_enable_addressing,
-
-      -- DATA
-      K_IN     => k_in_addressing,
-      BETA_IN  => beta_in_addressing,
-      G_IN     => g_in_addressing,
-      S_IN     => s_in_addressing,
-      GAMMA_IN => gamma_in_addressing,
-
-      M_IN => m_in_addressing,
-
-      W_IN  => w_in_addressing,
-      W_OUT => w_out_addressing
-    );
-
-end ntm_memory_testbench_architecture;
+end architecture;
