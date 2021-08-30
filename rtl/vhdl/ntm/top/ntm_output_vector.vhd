@@ -53,7 +53,6 @@ entity ntm_output_vector is
     N : integer := 64;
     W : integer := 64;
     L : integer := 64;
-    R : integer := 64;
 
     DATA_SIZE : integer := 512
   );

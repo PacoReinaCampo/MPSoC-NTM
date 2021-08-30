@@ -47,7 +47,11 @@ use work.ntm_core_pkg.all;
 
 entity ntm_addressing is
   generic (
+    X : integer := 64;
+    Y : integer := 64;
     N : integer := 64;
+    W : integer := 64;
+    L : integer := 64;
 
     DATA_SIZE : integer := 512
   );

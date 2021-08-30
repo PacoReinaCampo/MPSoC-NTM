@@ -46,7 +46,11 @@ use work.ntm_math_pkg.all;
 
 entity ntm_reading is
   generic (
+    X : integer := 64;
+    Y : integer := 64;
     N : integer := 64;
+    W : integer := 64;
+    L : integer := 64;
 
     DATA_SIZE : integer := 512
   );

@@ -79,6 +79,7 @@
 ../../../../../../../rtl/vhdl/dnc/memory/dnc_read_content_weighting.vhd
 ../../../../../../../rtl/vhdl/dnc/memory/dnc_read_vectors.vhd
 ../../../../../../../rtl/vhdl/dnc/memory/dnc_read_weighting.vhd
+../../../../../../../rtl/vhdl/dnc/memory/dnc_sort_vector.vhd
 ../../../../../../../rtl/vhdl/dnc/memory/dnc_temporal_link_matrix.vhd
 ../../../../../../../rtl/vhdl/dnc/memory/dnc_usage_vector.vhd
 ../../../../../../../rtl/vhdl/dnc/memory/dnc_write_content_weighting.vhd

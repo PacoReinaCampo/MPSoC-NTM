@@ -44,13 +44,14 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_writing is
+entity dnc_sort_vector is
   generic (
     X : integer := 64;
     Y : integer := 64;
     N : integer := 64;
     W : integer := 64;
     L : integer := 64;
+    R : integer := 64;
 
     DATA_SIZE : integer := 512
   );
@@ -63,19 +64,18 @@ entity ntm_writing is
     START : in  std_logic;
     READY : out std_logic;
 
-    M_IN_ENABLE  : in std_logic;
-    A_IN_ENABLE  : in std_logic;
-    M_OUT_ENABLE : in std_logic;
+    U_IN_ENABLE : in std_logic; -- for j in 0 to N-1
+
+    PHI_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
 
     -- DATA
-    M_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
-    A_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
-    W_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
-    M_OUT  : in std_logic_vector(DATA_SIZE-1 downto 0)
+    U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    PHI_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
-architecture ntm_writing_architecture of ntm_writing is
+architecture dnc_sort_vector_architecture of dnc_sort_vector is
 
   -----------------------------------------------------------------------
   -- Types
@@ -129,10 +129,12 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- phi(t) = sort(u(t))
+
   -- VECTOR ADDER
-  vector_adder : ntm_vector_adder
+  ntm_vector_adder_i : ntm_vector_adder
     generic map (
-      I => I,
+      I => N,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -160,9 +162,9 @@ begin
     );
 
   -- VECTOR MULTIPLIER
-  vector_multiplier : ntm_vector_multiplier
+  ntm_vector_multiplier_i : ntm_vector_multiplier
     generic map (
-      I => I,
+      I => N,
 
       DATA_SIZE => DATA_SIZE
     )

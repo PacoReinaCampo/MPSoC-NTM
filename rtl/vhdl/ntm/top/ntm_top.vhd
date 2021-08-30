@@ -269,7 +269,6 @@ begin
       N => N,
       W => W,
       L => L,
-      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -304,7 +303,6 @@ begin
       N => N,
       W => W,
       L => L,
-      R => R,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -343,7 +341,11 @@ begin
 
   reading : ntm_reading
     generic map (
+      X => X,
+      Y => Y,
       N => N,
+      W => W,
+      L => L,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -371,7 +373,11 @@ begin
 
   writing : ntm_writing
     generic map (
+      X => X,
+      Y => Y,
       N => N,
+      W => W,
+      L => L,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -401,7 +407,11 @@ begin
 
   ntm_addressing_i : ntm_addressing
     generic map (
+      X => X,
+      Y => Y,
       N => N,
+      W => W,
+      L => L,
 
       DATA_SIZE => DATA_SIZE
     )

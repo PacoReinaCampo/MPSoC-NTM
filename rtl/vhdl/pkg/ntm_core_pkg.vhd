@@ -58,7 +58,11 @@ package ntm_core_pkg is
 
   component ntm_reading is
     generic (
+      X : integer := 64;
+      Y : integer := 64;
       N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -87,7 +91,11 @@ package ntm_core_pkg is
 
   component ntm_writing is
     generic (
+      X : integer := 64;
+      Y : integer := 64;
       N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -114,7 +122,11 @@ package ntm_core_pkg is
 
   component ntm_erasing is
     generic (
+      X : integer := 64;
+      Y : integer := 64;
       N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -177,7 +189,11 @@ package ntm_core_pkg is
 
   component ntm_addressing is
     generic (
+      X : integer := 64;
+      Y : integer := 64;
       N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -254,7 +270,6 @@ package ntm_core_pkg is
       N : integer := 64;
       W : integer := 64;
       L : integer := 64;
-      R : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -315,7 +330,6 @@ package ntm_core_pkg is
       N : integer := 64;
       W : integer := 64;
       L : integer := 64;
-      R : integer := 64;
 
       DATA_SIZE : integer := 512
     );
@@ -356,7 +370,6 @@ package ntm_core_pkg is
       N : integer := 64;
       W : integer := 64;
       L : integer := 64;
-      R : integer := 64;
 
       DATA_SIZE : integer := 512
     );
