@@ -149,7 +149,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- psi(t) = multiplication(1 - f(t;i)·w(t-1;r,i))[i in 1 to R]
+  -- psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
 
   -- VECTOR MULTIPLICATION
   vector_multiplication_function : ntm_vector_multiplication_function

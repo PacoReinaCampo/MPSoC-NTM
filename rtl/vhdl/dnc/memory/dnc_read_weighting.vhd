@@ -144,7 +144,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
   
-  -- w(t;r,i) = pi(t;i)[1]·b(t;i) + pi(t;i)[2]·c(t;r,i) + pi(t;i)[3]·f(t;i)
+  -- w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
 
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder

@@ -140,7 +140,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- M(t) = M(t-1) o (E - w(t;w)·transpose(e(t))) + w(t;w)·transpose(v(t))
+  -- M(t;j;k) = M(t-1;j;k) o (E - w(t;j)·transpose(e(t;k))) + w(t;j)·transpose(v(t;k))
 
   -- MATRIX TRANSPOSE
   ntm_matrix_transpose_i : ntm_matrix_transpose

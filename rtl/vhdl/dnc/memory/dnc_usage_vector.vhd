@@ -133,7 +133,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- u(t) = (u(t-1) + w(t-1;w) - u(t-1) o w(t-1;w)) o psi(t)
+  -- u(t;j) = (u(t-1;j) + w(t-1;j) - u(t-1;j) o w(t-1;j)) o psi(t;j)
 
   -- VECTOR ADDER
   ntm_vector_adder_i : ntm_vector_adder

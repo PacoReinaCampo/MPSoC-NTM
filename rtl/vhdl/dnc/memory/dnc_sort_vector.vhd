@@ -129,7 +129,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- phi(t) = sort(u(t))
+  -- phi(t;j) = sort(u(t;j))
 
   -- VECTOR ADDER
   ntm_vector_adder_i : ntm_vector_adder

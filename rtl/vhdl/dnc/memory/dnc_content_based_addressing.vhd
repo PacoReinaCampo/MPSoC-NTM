@@ -144,7 +144,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- C(M,k,beta)[i] = softmax(exponentiation(cosine(k,M),beta))[i]
+  -- C(M,k,beta)[i] = softmax(exponentiation(e,cosine(k,M)·beta))[i]
 
   -- VECTOR EXPONENTIATOR
   vector_exponentiator : ntm_vector_exponentiator

@@ -121,7 +121,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- c(t;w) = C(M(t-1),k(t;w),beta(t;w))
+  -- c(t;j) = C(M(t-1;j;k),k(t;k),beta(t))
 
   -- VECTOR CONTENT BASED ADDRESSING
   dnc_content_based_addressing_i : dnc_content_based_addressing

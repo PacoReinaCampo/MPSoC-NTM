@@ -136,7 +136,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- b(t;i) = transpose(L(t))·w(t-1;r,i)
+  -- b(t;i;j) = transpose(L(t;j,j))·w(t-1;i;j)
 
   -- MATRIX TRANSPOSE
   matrix_transpose : ntm_matrix_transpose

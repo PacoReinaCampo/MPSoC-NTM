@@ -241,10 +241,10 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal m_in_j_enable_read_vectors : std_logic;
   signal m_in_k_enable_read_vectors : std_logic;
 
+  signal w_in_i_enable_read_vectors : std_logic;
   signal w_in_j_enable_read_vectors : std_logic;
-  signal w_in_k_enable_read_vectors : std_logic;
 
-  signal r_out_j_enable_read_vectors : std_logic;
+  signal r_out_i_enable_read_vectors : std_logic;
   signal r_out_k_enable_read_vectors : std_logic;
 
   -- DATA
@@ -369,7 +369,6 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal gw_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_write_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
-
 
 begin
 
@@ -653,10 +652,10 @@ begin
       M_IN_J_ENABLE => m_in_j_enable_read_vectors,
       M_IN_K_ENABLE => m_in_k_enable_read_vectors,
 
+      W_IN_I_ENABLE => w_in_i_enable_read_vectors,
       W_IN_J_ENABLE => w_in_j_enable_read_vectors,
-      W_IN_K_ENABLE => w_in_k_enable_read_vectors,
 
-      R_OUT_J_ENABLE => r_out_j_enable_read_vectors,
+      R_OUT_I_ENABLE => r_out_i_enable_read_vectors,
       R_OUT_K_ENABLE => r_out_k_enable_read_vectors,
 
       -- DATA

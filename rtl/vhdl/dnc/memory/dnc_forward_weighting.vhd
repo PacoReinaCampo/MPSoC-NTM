@@ -120,7 +120,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- f(t;i) = L(t)·w(t-1;r,i)
+  -- f(t;i;j) = L(t;j,j)·w(t-1;i;j)
 
   -- MATRIX PRODUCT
   ntm_matrix_product_i : ntm_matrix_product

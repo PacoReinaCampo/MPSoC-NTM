@@ -134,7 +134,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- w(t;w) = g(t;w)·(g(t;a)·a(t) + (1 - g(t;a))·c(t;w))
+  -- w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - g(t))·c(t;j))
 
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder
