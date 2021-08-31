@@ -90,7 +90,23 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
   -- Signals
   -----------------------------------------------------------------------
 
-  -- COSINE SIMILARITY
+  -- VECTOR EXPONENTIATOR
+  -- CONTROL
+  signal start_vector_exponentiator : std_logic;
+  signal ready_vector_exponentiator : std_logic;
+
+  signal base_enable_vector_exponentiator : std_logic;
+  signal power_enable_vector_exponentiator : std_logic;
+
+  signal data_out_enable_vector_exponentiator : std_logic;
+
+  -- DATA
+  signal modulo_vector_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal base_vector_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal power_vector_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- VECTOR COSINE SIMILARITY
   -- CONTROL
   signal start_vector_cosine : std_logic;
   signal ready_vector_cosine : std_logic;
@@ -107,7 +123,7 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
   signal data_v_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SOFTMAX
+  -- VECTOR SOFTMAX
   -- CONTROL
   signal start_vector_softmax : std_logic;
   signal ready_vector_softmax : std_logic;
@@ -128,9 +144,37 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- C(M,k,beta)[i] = softmax(cosine(k,M)·beta)[i]
+  -- C(M,k,beta)[i] = softmax(exponentiation(cosine(k,M),beta))[i]
 
-  -- COSINE SIMILARITY
+  -- VECTOR EXPONENTIATOR
+  vector_exponentiator : ntm_vector_exponentiator
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_exponentiator,
+      READY => ready_vector_exponentiator,
+
+      BASE_EXPONENTIATION_ENABLE  => base_enable_vector_exponentiator,
+      POWER_EXPONENTIATION_ENABLE => power_enable_vector_exponentiator,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
+
+      -- DATA
+      MODULO               => modulo_vector_exponentiator,
+      BASE_EXPONENTIATION  => base_vector_exponentiator,
+      POWER_EXPONENTIATION => power_vector_exponentiator,
+      DATA_OUT             => data_out_vector_exponentiator
+    );
+
+  -- VECTOR COSINE SIMILARITY
   vector_cosine_similarity_function : ntm_vector_cosine_similarity_function
     generic map (
       I => I,
@@ -159,7 +203,7 @@ begin
       DATA_OUT  => data_out_vector_cosine
     );
 
-  -- SOFTMAX
+  -- VECTOR SOFTMAX
   vector_softmax_function : ntm_vector_softmax_function
     generic map (
       I => I,

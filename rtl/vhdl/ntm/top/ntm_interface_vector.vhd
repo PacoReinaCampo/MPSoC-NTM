@@ -46,7 +46,7 @@ use work.ntm_math_pkg.all;
 use work.ntm_core_pkg.all;
 use work.ntm_lstm_controller_pkg.all;
 
-entity ntm_write_interface_vector is
+entity ntm_interface_vector is
   generic (
     X : integer := 64;
     Y : integer := 64;
@@ -75,13 +75,13 @@ entity ntm_write_interface_vector is
     WBETA_IN_ENABLE : in std_logic; -- for l in 0 to L-1
 
     -- Interpolation Gate
-    WG_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
-    WG_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
-
-    G_OUT_ENABLE : out std_logic; -- for k in 0 to N-1
+    WG_IN_ENABLE : in std_logic; -- for l in 0 to L-1
 
     -- Shift Weighting
-    WS_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+    WS_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
+    WS_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
+
+    S_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
 
     -- Sharpening
     WGAMMA_IN_ENABLE : in std_logic; -- for l in 0 to L-1
@@ -106,7 +106,7 @@ entity ntm_write_interface_vector is
   );
 end entity;
 
-architecture ntm_write_interface_vector_architecture of ntm_write_interface_vector is
+architecture ntm_interface_vector_architecture of ntm_interface_vector is
 
   -----------------------------------------------------------------------
   -- Types
@@ -120,10 +120,63 @@ architecture ntm_write_interface_vector_architecture of ntm_write_interface_vect
   -- Signals
   -----------------------------------------------------------------------
 
+  -- MATRIX PRODUCT
+  -- CONTROL
+  signal start_matrix_product : std_logic;
+  signal ready_matrix_product : std_logic;
+
+  signal data_a_in_i_enable_matrix_product : std_logic;
+  signal data_a_in_j_enable_matrix_product : std_logic;
+  signal data_b_in_i_enable_matrix_product : std_logic;
+  signal data_b_in_j_enable_matrix_product : std_logic;
+
+  signal data_out_i_enable_matrix_product : std_logic;
+  signal data_out_j_enable_matrix_product : std_logic;
+
+  -- DATA
+  signal modulo_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- xi(t;?) = U(t;?;l)·h(t;l)
+
+  -- MATRIX PRODUCT
+  matrix_product : ntm_matrix_product
+    generic map (
+      I => I,
+      J => J,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_matrix_product,
+      READY => ready_matrix_product,
+
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_product,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
+
+      -- DATA
+      MODULO    => modulo_matrix_product,
+      DATA_A_IN => data_a_in_matrix_product,
+      DATA_B_IN => data_b_in_matrix_product,
+      DATA_OUT  => data_out_matrix_product
+    );
 
 end architecture;

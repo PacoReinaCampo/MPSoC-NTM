@@ -263,7 +263,7 @@ package ntm_core_pkg is
     );
   end component;
 
-  component ntm_write_interface_vector is
+  component ntm_interface_vector is
     generic (
       X : integer := 64;
       Y : integer := 64;
@@ -292,13 +292,13 @@ package ntm_core_pkg is
       WBETA_IN_ENABLE : in std_logic; -- for l in 0 to L-1
 
       -- Interpolation Gate
-      WG_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
-      WG_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
-
-      G_OUT_ENABLE : out std_logic; -- for k in 0 to N-1
+      WG_IN_ENABLE : in std_logic; -- for l in 0 to L-1
 
       -- Shift Weighting
-      WS_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+      WS_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
+      WS_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
+
+      S_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
 
       -- Sharpening
       WGAMMA_IN_ENABLE : in std_logic; -- for l in 0 to L-1

@@ -423,6 +423,37 @@ package dnc_core_pkg is
     );
   end component;
 
+  component dnc_sort_vector is
+    generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
+      R : integer := 64;
+
+      DATA_SIZE : integer := 512
+    );
+    port (
+     -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      U_IN_ENABLE : in std_logic; -- for j in 0 to N-1
+
+      PHI_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
+
+      -- DATA
+      U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      PHI_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    );
+  end component;
+
   component dnc_temporal_link_matrix is
     generic (
       X : integer := 64;

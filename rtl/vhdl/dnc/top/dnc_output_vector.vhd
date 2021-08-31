@@ -101,12 +101,111 @@ architecture dnc_output_vector_architecture of dnc_output_vector is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- VECTOR ADDER
+  -- CONTROL
+  signal start_vector_adder : std_logic;
+  signal ready_vector_adder : std_logic;
+
+  signal operation_vector_adder : std_logic;
+
+  signal data_a_in_enable_vector_adder : std_logic;
+  signal data_b_in_enable_vector_adder : std_logic;
+
+  signal data_out_enable_vector_adder : std_logic;
+
+  -- DATA
+  signal modulo_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- MATRIX PRODUCT
+  -- CONTROL
+  signal start_matrix_product : std_logic;
+  signal ready_matrix_product : std_logic;
+
+  signal data_a_in_i_enable_matrix_product : std_logic;
+  signal data_a_in_j_enable_matrix_product : std_logic;
+  signal data_b_in_i_enable_matrix_product : std_logic;
+  signal data_b_in_j_enable_matrix_product : std_logic;
+
+  signal data_out_i_enable_matrix_product : std_logic;
+  signal data_out_j_enable_matrix_product : std_logic;
+
+  -- DATA
+  signal modulo_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
 
-  -- y(t;l) = K(t;l)·r(t;l) + nu(t;l)
+  -- y(t;y) = K(t;i;y;k)·r(t;i;k) + nu(t;y)
+
+  -- VECTOR ADDER
+  vector_adder : ntm_vector_adder
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_adder,
+      READY => ready_vector_adder,
+
+      OPERATION => operation_vector_adder,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_adder,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_adder,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_adder,
+
+      -- DATA
+      MODULO    => modulo_vector_adder,
+      DATA_A_IN => data_a_in_vector_adder,
+      DATA_B_IN => data_b_in_vector_adder,
+      DATA_OUT  => data_out_vector_adder
+    );
+
+  -- MATRIX PRODUCT
+  matrix_product : ntm_matrix_product
+    generic map (
+      I => I,
+      J => J,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_matrix_product,
+      READY => ready_matrix_product,
+
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_product,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
+
+      -- DATA
+      MODULO    => modulo_matrix_product,
+      DATA_A_IN => data_a_in_matrix_product,
+      DATA_B_IN => data_b_in_matrix_product,
+      DATA_OUT  => data_out_matrix_product
+    );
 
 end architecture;

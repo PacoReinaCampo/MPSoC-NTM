@@ -174,7 +174,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- f(t;l) = sigmoid(W(t;l)*x(t;l) + K(t;l)*r(t;l) + U(t-1;l)*h(t-1;l) + U(t;l-1)*h(t;l-1) + b(t;l))
+  -- f(t;l) = sigmoid(W(t;l;x)·x(t;x) + K(t;i;y;k)·r(t;i;k) + U(t-1;l;l)·h(t-1;l) + U(t;l-1;l-1)·h(t;l-1) + b(t;l))
 
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder

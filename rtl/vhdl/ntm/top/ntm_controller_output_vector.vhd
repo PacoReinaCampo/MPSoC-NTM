@@ -92,34 +92,24 @@ architecture ntm_controller_output_vector_architecture of ntm_controller_output_
   -- Signals
   -----------------------------------------------------------------------
 
-  -- VECTOR ADDER
-  -- CONTROL
-  signal start_vector_adder : std_logic;
-  signal ready_vector_adder : std_logic;
-
-  signal operation_vector_adder : std_logic;
-
-  signal data_a_in_enable_vector_adder : std_logic;
-  signal data_b_in_enable_vector_adder : std_logic;
-
-  signal data_out_enable_vector_adder : std_logic;
-
-  -- DATA
-  signal modulo_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
-
   -- MATRIX PRODUCT
   -- CONTROL
-  signal start_vector_product : std_logic;
-  signal ready_vector_product : std_logic;
+  signal start_matrix_product : std_logic;
+  signal ready_matrix_product : std_logic;
+
+  signal data_a_in_i_enable_matrix_product : std_logic;
+  signal data_a_in_j_enable_matrix_product : std_logic;
+  signal data_b_in_i_enable_matrix_product : std_logic;
+  signal data_b_in_j_enable_matrix_product : std_logic;
+
+  signal data_out_i_enable_matrix_product : std_logic;
+  signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_vector_product    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_product  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -127,11 +117,13 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- nu(t;l) = U(t;l)*h(t;l)
+  -- nu(t;y) = U(t;y;l)·h(t;l)
 
-  ntm_vector_adder_i : ntm_vector_adder
+  -- MATRIX PRODUCT
+  matrix_product : ntm_matrix_product
     generic map (
-      I => Y,
+      I => I,
+      J => J,
 
       DATA_SIZE => DATA_SIZE
     )
@@ -141,21 +133,22 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_adder,
-      READY => ready_vector_adder,
+      START => start_matrix_product,
+      READY => ready_matrix_product,
 
-      OPERATION => operation_vector_adder,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_product,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_adder,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_adder,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_adder,
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MODULO    => modulo_vector_adder,
-      DATA_A_IN => data_a_in_vector_adder,
-      DATA_B_IN => data_b_in_vector_adder,
-      DATA_OUT  => data_out_vector_adder
+      MODULO    => modulo_matrix_product,
+      DATA_A_IN => data_a_in_matrix_product,
+      DATA_B_IN => data_b_in_matrix_product,
+      DATA_OUT  => data_out_matrix_product
     );
 
 end architecture;

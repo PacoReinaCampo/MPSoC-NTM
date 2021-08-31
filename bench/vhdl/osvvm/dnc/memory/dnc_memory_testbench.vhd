@@ -227,6 +227,20 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal w_out_i_enable_read_weighting : std_logic;
   signal w_out_j_enable_read_weighting : std_logic;
 
+  -- SORT VECTOR
+  -- CONTROL
+  signal start_sort_vector : std_logic;
+  signal ready_sort_vector : std_logic;
+
+  signal u_in_enable_sort_vector : std_logic;
+
+  signal phi_out_enable_sort_vector : std_logic;
+
+  -- DATA
+  signal u_in_sort_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal phi_out_sort_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- DATA
   signal pi_in_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -683,6 +697,37 @@ begin
       F_IN => f_in_read_weighting,
 
       W_OUT => w_out_read_weighting
+    );
+
+  -- SORT VECTOR
+  sort_vector : dnc_sort_vector
+    generic map (
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_sort_vector,
+      READY => ready_sort_vector,
+
+      U_IN_ENABLE   => u_in_enable_sort_vector,
+
+      PHI_OUT_ENABLE => phi_out_enable_sort_vector,
+
+      -- DATA
+      U_IN   => u_in_sort_vector,
+
+      PHI_OUT => phi_out_sort_vector
     );
 
   -- TEMPORAL LINK MATRIX

@@ -80,6 +80,7 @@
 ../../../../../../../rtl/vhdl/ntm/read_heads/ntm_reading.vhd
 
 ../../../../../../../rtl/vhdl/ntm/write_heads/ntm_writing.vhd
+../../../../../../../rtl/vhdl/ntm/write_heads/ntm_erasing.vhd
 
 ../../../../../../../rtl/vhdl/ntm/memory/ntm_addressing.vhd
 ../../../../../../../rtl/vhdl/ntm/memory/ntm_content_based_addressing.vhd

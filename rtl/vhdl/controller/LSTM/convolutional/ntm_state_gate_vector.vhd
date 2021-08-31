@@ -137,21 +137,21 @@ architecture ntm_state_gate_vector_architecture of ntm_state_gate_vector is
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR MULTIPLIER
+  -- VECTOR CONVOLUTION
   -- CONTROL
-  signal start_vector_multiplier : std_logic;
-  signal ready_vector_multiplier : std_logic;
+  signal start_vector_convolution : std_logic;
+  signal ready_vector_convolution : std_logic;
 
-  signal data_a_in_enable_vector_multiplier : std_logic;
-  signal data_b_in_enable_vector_multiplier : std_logic;
+  signal data_a_in_enable_vector_convolution : std_logic;
+  signal data_b_in_enable_vector_convolution : std_logic;
 
-  signal data_out_enable_vector_multiplier : std_logic;
+  signal data_out_enable_vector_convolution : std_logic;
 
   -- DATA
-  signal modulo_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_vector_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX PRODUCT
   -- CONTROL
@@ -192,7 +192,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- s(t;l) = f(t;l)*s(t-1;l) + i(t;l)*tanh(W(t;l)*x(t;l) + K(t;l)*r(t;l) + U(t-1;l)*h(t-1;l) + U(t;l-1)*h(t;l-1) + b(t;l))
+  -- s(t;l) = f(t;l)*s(t-1;l) + i(t;l)*tanh(W(t;l;x)·x(t;x) + K(t;i;y;k)·r(t;i;k) + U(t-1;l;l)·h(t-1;l) + U(t;l-1;l-1)·h(t;l-1) + b(t;l))
 
   -- s(t=0;l) = 0
 
@@ -226,8 +226,8 @@ begin
       DATA_OUT  => data_out_vector_adder
     );
 
-  -- VECTOR MULTIPLIER
-  vector_multiplier : ntm_vector_multiplier
+  -- VECTOR CONVOLUTION
+  vector_convolution_function : ntm_vector_convolution_function
     generic map (
       I => I,
 
@@ -239,19 +239,19 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_multiplier,
-      READY => ready_vector_multiplier,
+      START => start_vector_convolution,
+      READY => ready_vector_convolution,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplier,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplier,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_convolution,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_convolution,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
+      DATA_OUT_ENABLE => data_out_enable_vector_convolution,
 
       -- DATA
-      MODULO    => modulo_vector_multiplier,
-      DATA_A_IN => data_a_in_vector_multiplier,
-      DATA_B_IN => data_b_in_vector_multiplier,
-      DATA_OUT  => data_out_vector_multiplier
+      MODULO    => modulo_vector_convolution,
+      DATA_A_IN => data_a_in_vector_convolution,
+      DATA_B_IN => data_b_in_vector_convolution,
+      DATA_OUT  => data_out_vector_convolution
     );
 
   -- MATRIX PRODUCT
