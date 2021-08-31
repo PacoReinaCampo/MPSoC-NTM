@@ -192,7 +192,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- s(t;l) = f(t;l)·s(t-1;l) + i(t;l)·tanh(W(t;l;x)·x(t;x) + K(t;i;y;k)·r(t;i;k) + U(t-1;l;l)·h(t-1;l) + U(t;l-1;l-1)·h(t;l-1) + b(t;l))
+  -- s(t;l) = f(t;l) o s(t-1;l) + i(t;l) o tanh(W(l;x) o x(t;x) + K(i;y;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
 
   -- s(t=0;l) = 0
 

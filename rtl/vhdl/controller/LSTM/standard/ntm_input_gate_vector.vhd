@@ -168,7 +168,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- i(t;l) = sigmoid(W(t;l;x)·x(t;x) + K(t;i;y;k)·r(t;i;k) + U(t-1;l;l)·h(t-1;l) + U(t;l-1;l-1)·h(t;l-1) + b(t;l))
+  -- i(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;y;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
 
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder

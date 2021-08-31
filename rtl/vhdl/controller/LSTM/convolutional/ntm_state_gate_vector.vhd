@@ -137,6 +137,22 @@ architecture ntm_state_gate_vector_architecture of ntm_state_gate_vector is
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- VECTOR MULTIPLIER
+  -- CONTROL
+  signal start_vector_multiplier : std_logic;
+  signal ready_vector_multiplier : std_logic;
+
+  signal data_a_in_enable_vector_multiplier : std_logic;
+  signal data_b_in_enable_vector_multiplier : std_logic;
+
+  signal data_out_enable_vector_multiplier : std_logic;
+
+  -- DATA
+  signal modulo_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- VECTOR CONVOLUTION
   -- CONTROL
   signal start_vector_convolution : std_logic;
@@ -192,7 +208,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- s(t;l) = f(t;l)*s(t-1;l) + i(t;l)*tanh(W(t;l;x)·x(t;x) + K(t;i;y;k)·r(t;i;k) + U(t-1;l;l)·h(t-1;l) + U(t;l-1;l-1)·h(t;l-1) + b(t;l))
+  -- s(t;l) = f(t;l)*s(t-1;l) + i(t;l) o tanh(W(l;x)·x(t;x) + K(i;y;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
 
   -- s(t=0;l) = 0
 
@@ -224,6 +240,34 @@ begin
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
       DATA_OUT  => data_out_vector_adder
+    );
+
+  -- VECTOR MULTIPLIER
+  vector_multiplier : ntm_vector_multiplier
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_multiplier,
+      READY => ready_vector_multiplier,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplier,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplier,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
+
+      -- DATA
+      MODULO    => modulo_vector_multiplier,
+      DATA_A_IN => data_a_in_vector_multiplier,
+      DATA_B_IN => data_b_in_vector_multiplier,
+      DATA_OUT  => data_out_vector_multiplier
     );
 
   -- VECTOR CONVOLUTION

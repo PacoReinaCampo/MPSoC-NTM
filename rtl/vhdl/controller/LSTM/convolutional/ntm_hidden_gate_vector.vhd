@@ -91,21 +91,21 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- VECTOR CONVOLUTION
+  -- VECTOR MULTIPLIER
   -- CONTROL
-  signal start_vector_convolution : std_logic;
-  signal ready_vector_convolution : std_logic;
+  signal start_vector_multiplier : std_logic;
+  signal ready_vector_multiplier : std_logic;
 
-  signal data_a_in_enable_vector_convolution : std_logic;
-  signal data_b_in_enable_vector_convolution : std_logic;
+  signal data_a_in_enable_vector_multiplier : std_logic;
+  signal data_b_in_enable_vector_multiplier : std_logic;
 
-  signal data_out_enable_vector_convolution : std_logic;
+  signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_vector_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR TANH
   -- CONTROL
@@ -127,12 +127,12 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- h(t;l) = o(t;l)*tanh(s(t;l))
+  -- h(t;l) = o(t;l) o tanh(s(t;l))
 
   -- h(t=0;l) = 0; h(t;l=0) = 0
 
-  -- VECTOR CONVOLUTION
-  vector_convolution_function : ntm_vector_convolution_function
+  -- VECTOR MULTIPLIER
+  vector_multiplier : ntm_vector_multiplier
     generic map (
       I => I,
 
@@ -144,19 +144,19 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_convolution,
-      READY => ready_vector_convolution,
+      START => start_vector_multiplier,
+      READY => ready_vector_multiplier,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_convolution,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_convolution,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplier,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplier,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_convolution,
+      DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO    => modulo_vector_convolution,
-      DATA_A_IN => data_a_in_vector_convolution,
-      DATA_B_IN => data_b_in_vector_convolution,
-      DATA_OUT  => data_out_vector_convolution
+      MODULO    => modulo_vector_multiplier,
+      DATA_A_IN => data_a_in_vector_multiplier,
+      DATA_B_IN => data_b_in_vector_multiplier,
+      DATA_OUT  => data_out_vector_multiplier
     );
 
   -- VECTOR TANH
