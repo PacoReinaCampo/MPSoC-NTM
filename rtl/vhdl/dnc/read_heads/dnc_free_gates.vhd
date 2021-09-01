@@ -71,7 +71,7 @@ entity dnc_free_gates is
     -- DATA
     F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    F_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    F_OUT : out std_logic
   );
 end entity;
 
@@ -95,9 +95,9 @@ architecture dnc_free_gates_architecture of dnc_free_gates is
   signal ready_scalar_logistic : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 

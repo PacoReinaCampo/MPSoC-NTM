@@ -71,7 +71,7 @@ entity dnc_erase_vector is
     -- DATA
     E_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    E_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    E_OUT : out std_logic
   );
 end entity;
 
@@ -95,9 +95,9 @@ architecture dnc_erase_vector_architecture of dnc_erase_vector is
   signal ready_scalar_logistic : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 

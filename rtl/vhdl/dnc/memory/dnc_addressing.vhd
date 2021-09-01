@@ -176,7 +176,7 @@ architecture dnc_addressing_architecture of dnc_addressing is
 
   signal w_in_memory_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
   signal v_in_memory_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal e_in_memory_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal e_in_memory_matrix : std_logic;
 
   signal m_out_memory_matrix  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -193,7 +193,7 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal psi_out_enable_memory_retention_vector : std_logic;
 
   -- DATA
-  signal f_in_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal f_in_memory_retention_vector : std_logic;
   signal w_in_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal psi_out_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -292,7 +292,7 @@ architecture dnc_addressing_architecture of dnc_addressing is
 
   signal b_in_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal c_in_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal f_in_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal f_in_read_weighting : std_logic;
 
   signal w_out_read_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -365,8 +365,8 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal a_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal c_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal ga_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal gw_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal ga_in_write_weighting : std_logic;
+  signal gw_in_write_weighting : std_logic;
 
   signal w_out_write_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
 

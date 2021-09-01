@@ -72,7 +72,7 @@ entity dnc_memory_retention_vector is
     PSI_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
 
     -- DATA
-    F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    F_IN : in std_logic;
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     PSI_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)

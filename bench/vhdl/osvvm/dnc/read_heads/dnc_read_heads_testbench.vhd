@@ -66,7 +66,7 @@ architecture dnc_read_heads_testbench_architecture of dnc_read_heads_testbench i
 
   -- DATA
   signal f_in_free_gates   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal f_out_free_gates  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal f_out_free_gates  : std_logic;
 
   -- READ KEYS
   -- CONTROL

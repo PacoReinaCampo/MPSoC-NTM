@@ -230,7 +230,7 @@ package dnc_core_pkg is
 
       W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       V_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      E_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      E_IN : in std_logic;
 
       M_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -264,7 +264,7 @@ package dnc_core_pkg is
       PSI_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
 
       -- DATA
-      F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      F_IN : in std_logic;
       W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       PSI_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -417,7 +417,7 @@ package dnc_core_pkg is
 
       B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      F_IN : in std_logic;
 
       W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -589,8 +589,8 @@ package dnc_core_pkg is
       A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      GA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      GW_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      GA_IN : in std_logic;
+      GW_IN : in std_logic;
 
       W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -677,7 +677,7 @@ package dnc_core_pkg is
       -- DATA
       F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      F_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      F_OUT : out std_logic
     );
   end component;
 
@@ -805,7 +805,7 @@ package dnc_core_pkg is
       -- DATA
       GA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      GA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      GA_OUT : out std_logic
     );
   end component;
 
@@ -836,7 +836,7 @@ package dnc_core_pkg is
       -- DATA
       E_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      E_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      E_OUT : out std_logic
     );
   end component;
 
@@ -863,7 +863,7 @@ package dnc_core_pkg is
       -- DATA
       GW_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      GW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      GW_OUT : out std_logic
     );
   end component;
 

@@ -63,7 +63,7 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
 
   -- DATA
   signal ga_in_allocation_gate  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal ga_out_allocation_gate : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal ga_out_allocation_gate : std_logic;
 
   -- ERASE VECTOR
   -- CONTROL
@@ -76,7 +76,7 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
 
   -- DATA
   signal e_in_erase_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal e_out_erase_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal e_out_erase_vector  : std_logic;
 
   -- WRITE GATE
   -- CONTROL
@@ -85,7 +85,7 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
 
   -- DATA
   signal gw_in_write_gate  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal gw_out_write_gate : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal gw_out_write_gate : std_logic;
 
   -- WRITE KEY
   -- CONTROL

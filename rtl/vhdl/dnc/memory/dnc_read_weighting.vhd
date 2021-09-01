@@ -84,7 +84,7 @@ entity dnc_read_weighting is
 
     B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    F_IN : in std_logic;
 
     W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );

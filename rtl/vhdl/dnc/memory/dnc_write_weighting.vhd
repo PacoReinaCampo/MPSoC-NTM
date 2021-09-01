@@ -73,8 +73,8 @@ entity dnc_write_weighting is
     A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    GA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    GW_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    GA_IN : in std_logic;
+    GW_IN : in std_logic;
 
     W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
@@ -107,7 +107,7 @@ architecture dnc_write_weighting_architecture of dnc_write_weighting is
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -123,7 +123,7 @@ architecture dnc_write_weighting_architecture of dnc_write_weighting is
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);

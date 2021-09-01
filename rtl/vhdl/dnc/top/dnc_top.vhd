@@ -168,7 +168,7 @@ architecture dnc_top_architecture of dnc_top is
 
   -- DATA
   signal f_in_free_gates   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal f_out_free_gates  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal f_out_free_gates  : std_logic;
 
   -- READ KEYS
   -- CONTROL
@@ -272,7 +272,7 @@ architecture dnc_top_architecture of dnc_top is
 
   -- DATA
   signal ga_in_allocation_gate  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal ga_out_allocation_gate : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal ga_out_allocation_gate : std_logic;
 
   -- ERASE VECTOR
   -- CONTROL
@@ -284,8 +284,8 @@ architecture dnc_top_architecture of dnc_top is
   signal e_out_enable_erase_vector : std_logic;
 
   -- DATA
-  signal e_in_erase_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal e_out_erase_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal e_in_erase_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal e_out_erase_vector : std_logic;
 
   -- WRITE GATE
   -- CONTROL
@@ -294,7 +294,7 @@ architecture dnc_top_architecture of dnc_top is
 
   -- DATA
   signal gw_in_write_gate  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal gw_out_write_gate : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal gw_out_write_gate : std_logic;
 
   -- WRITE KEY
   -- CONTROL
@@ -306,8 +306,8 @@ architecture dnc_top_architecture of dnc_top is
   signal k_out_enable_write_key : std_logic;
 
   -- DATA
-  signal k_in_write_key   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_out_write_key  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_in_write_key  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_write_key : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE STRENGHT
   -- CONTROL

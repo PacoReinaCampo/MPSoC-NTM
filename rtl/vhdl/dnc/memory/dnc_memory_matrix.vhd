@@ -79,7 +79,7 @@ entity dnc_memory_matrix is
 
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     V_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    E_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    E_IN : in std_logic;
 
     M_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
@@ -111,9 +111,9 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   signal data_out_j_enable_matrix_transpose : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX PRODUCT
   -- CONTROL
@@ -129,7 +129,7 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
