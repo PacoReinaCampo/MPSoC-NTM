@@ -153,40 +153,24 @@ architecture ntm_state_gate_vector_architecture of ntm_state_gate_vector is
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR CONVOLUTION
+  -- MATRIX CONVOLUTION
   -- CONTROL
-  signal start_vector_convolution : std_logic;
-  signal ready_vector_convolution : std_logic;
+  signal start_matrix_convolution : std_logic;
+  signal ready_matrix_convolution : std_logic;
 
-  signal data_a_in_enable_vector_convolution : std_logic;
-  signal data_b_in_enable_vector_convolution : std_logic;
+  signal data_a_in_i_enable_matrix_convolution : std_logic;
+  signal data_a_in_j_enable_matrix_convolution : std_logic;
+  signal data_b_in_i_enable_matrix_convolution : std_logic;
+  signal data_b_in_j_enable_matrix_convolution : std_logic;
 
-  signal data_out_enable_vector_convolution : std_logic;
+  signal data_out_i_enable_matrix_convolution : std_logic;
+  signal data_out_j_enable_matrix_convolution : std_logic;
 
   -- DATA
-  signal modulo_vector_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- MATRIX PRODUCT
-  -- CONTROL
-  signal start_matrix_product : std_logic;
-  signal ready_matrix_product : std_logic;
-
-  signal data_a_in_i_enable_matrix_product : std_logic;
-  signal data_a_in_j_enable_matrix_product : std_logic;
-  signal data_b_in_i_enable_matrix_product : std_logic;
-  signal data_b_in_j_enable_matrix_product : std_logic;
-
-  signal data_out_i_enable_matrix_product : std_logic;
-  signal data_out_j_enable_matrix_product : std_logic;
-
-  -- DATA
-  signal modulo_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_matrix_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR TANH
   -- CONTROL
@@ -208,7 +192,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- s(t;l) = f(t;l)*s(t-1;l) + i(t;l) o tanh(W(l;x)·x(t;x) + K(i;y;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
+  -- s(t;l) = f(t;l) o s(t-1;l) + i(t;l) o tanh(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
 
   -- s(t=0;l) = 0
 
@@ -270,36 +254,8 @@ begin
       DATA_OUT  => data_out_vector_multiplier
     );
 
-  -- VECTOR CONVOLUTION
-  vector_convolution_function : ntm_vector_convolution_function
-    generic map (
-      I => I,
-
-      DATA_SIZE => DATA_SIZE
-    )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_convolution,
-      READY => ready_vector_convolution,
-
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_convolution,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_convolution,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_convolution,
-
-      -- DATA
-      MODULO    => modulo_vector_convolution,
-      DATA_A_IN => data_a_in_vector_convolution,
-      DATA_B_IN => data_b_in_vector_convolution,
-      DATA_OUT  => data_out_vector_convolution
-    );
-
-  -- MATRIX PRODUCT
-  matrix_product : ntm_matrix_product
+  -- MATRIX CONVOLUTION
+  matrix_convolution_function : ntm_matrix_convolution_function
     generic map (
       I => I,
       J => J,
@@ -312,22 +268,22 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_product,
-      READY => ready_matrix_product,
+      START => start_matrix_convolution,
+      READY => ready_matrix_convolution,
 
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_product,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_convolution,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_convolution,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_convolution,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_convolution,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_convolution,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_convolution,
 
       -- DATA
-      MODULO    => modulo_matrix_product,
-      DATA_A_IN => data_a_in_matrix_product,
-      DATA_B_IN => data_b_in_matrix_product,
-      DATA_OUT  => data_out_matrix_product
+      MODULO    => modulo_matrix_convolution,
+      DATA_A_IN => data_a_in_matrix_convolution,
+      DATA_B_IN => data_b_in_matrix_convolution,
+      DATA_OUT  => data_out_matrix_convolution
     );
 
   -- VECTOR TANH

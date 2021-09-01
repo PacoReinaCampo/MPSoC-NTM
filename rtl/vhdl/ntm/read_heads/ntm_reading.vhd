@@ -125,6 +125,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
+
   -- VECTOR SUMMATION
   vector_summation_function : ntm_vector_summation_function
     generic map (

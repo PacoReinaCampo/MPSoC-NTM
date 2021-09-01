@@ -101,7 +101,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- g(t;w) = sigmoid(g^(t;w))
+  -- gw(t) = sigmoid(gw^(t))
 
   ntm_scalar_logistic_function_i : ntm_scalar_logistic_function
     generic map (

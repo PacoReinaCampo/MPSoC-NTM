@@ -94,10 +94,151 @@ architecture ntm_controller_architecture of ntm_controller is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- VECTOR ADDER
+  -- CONTROL
+  signal start_vector_adder : std_logic;
+  signal ready_vector_adder : std_logic;
+
+  signal operation_vector_adder : std_logic;
+
+  signal data_a_in_enable_vector_adder : std_logic;
+  signal data_b_in_enable_vector_adder : std_logic;
+
+  signal data_out_enable_vector_adder : std_logic;
+
+  -- DATA
+  signal modulo_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- MATRIX CONVOLUTION
+  -- CONTROL
+  signal start_matrix_convolution : std_logic;
+  signal ready_matrix_convolution : std_logic;
+
+  signal data_a_in_i_enable_matrix_convolution : std_logic;
+  signal data_a_in_j_enable_matrix_convolution : std_logic;
+  signal data_b_in_i_enable_matrix_convolution : std_logic;
+  signal data_b_in_j_enable_matrix_convolution : std_logic;
+
+  signal data_out_i_enable_matrix_convolution : std_logic;
+  signal data_out_j_enable_matrix_convolution : std_logic;
+
+  -- DATA
+  signal modulo_matrix_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- VECTOR LOGISTIC
+  -- CONTROL
+  signal start_vector_logistic : std_logic;
+  signal ready_vector_logistic : std_logic;
+
+  signal data_in_enable_vector_logistic : std_logic;
+
+  signal data_out_enable_vector_logistic : std_logic;
+
+  -- DATA
+  signal modulo_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + b(t;l))
+
+  -- VECTOR ADDER
+  vector_adder : ntm_vector_adder
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_adder,
+      READY => ready_vector_adder,
+
+      OPERATION => operation_vector_adder,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_adder,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_adder,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_adder,
+
+      -- DATA
+      MODULO    => modulo_vector_adder,
+      DATA_A_IN => data_a_in_vector_adder,
+      DATA_B_IN => data_b_in_vector_adder,
+      DATA_OUT  => data_out_vector_adder
+    );
+
+  -- MATRIX CONVOLUTION
+  matrix_convolution_function : ntm_matrix_convolution_function
+    generic map (
+      I => I,
+      J => J,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_matrix_convolution,
+      READY => ready_matrix_convolution,
+
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_convolution,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_convolution,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_convolution,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_convolution,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_convolution,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_convolution,
+
+      -- DATA
+      MODULO    => modulo_matrix_convolution,
+      DATA_A_IN => data_a_in_matrix_convolution,
+      DATA_B_IN => data_b_in_matrix_convolution,
+      DATA_OUT  => data_out_matrix_convolution
+    );
+
+  -- VECTOR LOGISTIC
+  vector_logistic_function : ntm_vector_logistic_function
+    generic map (
+      I => I,
+
+      DATA_SIZE => DATA_SIZE
+    )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_logistic,
+      READY => ready_vector_logistic,
+
+      DATA_IN_ENABLE => data_in_enable_vector_logistic,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_logistic,
+
+      -- DATA
+      MODULO   => modulo_vector_logistic,
+      DATA_IN  => data_in_vector_logistic,
+      DATA_OUT => data_out_vector_logistic
+    );
 
 end architecture;

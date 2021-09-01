@@ -101,7 +101,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- beta(t;w) = oneplus(beta^(t;w))
+  -- beta(t) = oneplus(beta^(t))
 
   ntm_scalar_oneplus_function_i : ntm_scalar_oneplus_function
     generic map (

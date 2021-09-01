@@ -116,7 +116,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- pi(t;i) = softmax(pi^(t;i))
+  -- pi(t;i;p) = softmax(pi^(t;i;p))
 
   ntm_matrix_softmax_function_i : ntm_matrix_softmax_function
     generic map (

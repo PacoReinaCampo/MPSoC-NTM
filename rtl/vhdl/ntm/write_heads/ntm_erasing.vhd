@@ -148,6 +148,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
+
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder
     generic map (

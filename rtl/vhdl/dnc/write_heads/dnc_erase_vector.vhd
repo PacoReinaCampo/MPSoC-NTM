@@ -105,7 +105,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- e(t) = sigmoid(e^(t))
+  -- e(t;k) = sigmoid(e^(t;k))
 
   ntm_scalar_logistic_function_i : ntm_scalar_logistic_function
     generic map (

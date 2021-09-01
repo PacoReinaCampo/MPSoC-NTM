@@ -101,6 +101,14 @@ architecture ntm_addressing_architecture of ntm_addressing is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
+
+  -- wg(t;j) = g(t)·wc(t;j)·(1 - g(t)·w(t-1;j)
+  
+  -- w(t;j) = w(t;j)*s(t;k)
+  
+  -- w(t;j) = softmax(exponentiation(w(t;k),gamma(t)))
+
   -- VECTOR CONTENT BASED ADDRESSING
   -- CONTROL
   signal start_vector_content_based_addressing : std_logic;
