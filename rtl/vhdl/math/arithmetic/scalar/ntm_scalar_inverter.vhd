@@ -70,7 +70,7 @@ architecture ntm_scalar_inverter_architecture of ntm_scalar_inverter is
   -- Types
   -----------------------------------------------------------------------
 
-  type inverter_ctrl_fsm_type is (
+  type inverter_ctrl_fsm is (
     STARTER_ST,  -- STEP 0
     ENDER_ST,    -- STEP 1
     CHECK_U_ST,  -- STEP 2
@@ -90,7 +90,7 @@ architecture ntm_scalar_inverter_architecture of ntm_scalar_inverter is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal inverter_ctrl_fsm_st : inverter_ctrl_fsm_type;
+  signal inverter_ctrl_fsm_int : inverter_ctrl_fsm;
 
   -- Internal Signals
   signal u_int : std_logic_vector(DATA_SIZE downto 0);
@@ -105,7 +105,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = 1 / DATA_IN mod MODULO_IN
+  -- 1 = DATA_OUT · DATA_IN mod MODULO_IN
 
   ctrl_fsm : process(CLK, RST)
   begin
@@ -125,7 +125,7 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      case inverter_ctrl_fsm_st is
+      case inverter_ctrl_fsm_int is
         when STARTER_ST =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -139,7 +139,7 @@ begin
             y_int <= ZERO;
 
             -- FSM Control
-            inverter_ctrl_fsm_st <= ENDER_ST;
+            inverter_ctrl_fsm_int <= ENDER_ST;
           end if;
 
         when ENDER_ST =>  -- STEP 1
@@ -153,7 +153,7 @@ begin
               READY <= '1';
 
               -- FSM Control
-              inverter_ctrl_fsm_st <= STARTER_ST;
+              inverter_ctrl_fsm_int <= STARTER_ST;
             else
               -- Assignations
               x_int <= std_logic_vector(unsigned(x_int) - ('0' & unsigned(MODULO_IN)));
@@ -167,20 +167,20 @@ begin
               READY <= '1';
 
               -- FSM Control
-              inverter_ctrl_fsm_st <= STARTER_ST;
+              inverter_ctrl_fsm_int <= STARTER_ST;
             else
               -- Assignations
               y_int <= std_logic_vector(unsigned(y_int) - ('0' & unsigned(MODULO_IN)));
             end if;
           elsif(u_int(0) = '0') then
             -- FSM Control
-            inverter_ctrl_fsm_st <= CHECK_U_ST;
+            inverter_ctrl_fsm_int <= CHECK_U_ST;
           elsif(v_int(0) = '0') then
             -- FSM Control
-            inverter_ctrl_fsm_st <= CHECK_V_ST;
+            inverter_ctrl_fsm_int <= CHECK_V_ST;
           else
             -- FSM Control
-            inverter_ctrl_fsm_st <= CHECK_D_ST;
+            inverter_ctrl_fsm_int <= CHECK_D_ST;
           end if;
 
         when CHECK_U_ST =>  -- STEP 2
@@ -196,9 +196,9 @@ begin
 
           -- FSM Control
           if(v_int(0) = '0') then
-            inverter_ctrl_fsm_st <= CHECK_V_ST;
+            inverter_ctrl_fsm_int <= CHECK_V_ST;
           else
-            inverter_ctrl_fsm_st <= CHECK_D_ST;
+            inverter_ctrl_fsm_int <= CHECK_D_ST;
           end if;
 
         when CHECK_V_ST =>  -- STEP 3
@@ -213,7 +213,7 @@ begin
           end if;
 
           -- FSM Control
-          inverter_ctrl_fsm_st <= CHECK_D_ST;
+          inverter_ctrl_fsm_int <= CHECK_D_ST;
 
         when CHECK_D_ST =>  -- STEP 4
 
@@ -237,11 +237,11 @@ begin
           end if;
 
           -- FSM Control
-          inverter_ctrl_fsm_st <= ENDER_ST;
+          inverter_ctrl_fsm_int <= ENDER_ST;
 
         when others =>
           -- FSM Control
-          inverter_ctrl_fsm_st <= STARTER_ST;
+          inverter_ctrl_fsm_int <= STARTER_ST;
       end case;
     end if;
   end process;

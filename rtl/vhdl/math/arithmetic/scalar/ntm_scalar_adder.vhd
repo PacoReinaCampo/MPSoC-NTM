@@ -73,7 +73,7 @@ architecture ntm_scalar_adder_architecture of ntm_scalar_adder is
   -- Types
   -----------------------------------------------------------------------
 
-  type adder_ctrl_fsm_type is (
+  type adder_ctrl_fsm is (
     STARTER_ST,  -- STEP 0
     ENDER_ST     -- STEP 1
   );
@@ -89,7 +89,7 @@ architecture ntm_scalar_adder_architecture of ntm_scalar_adder is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal adder_ctrl_fsm_st : adder_ctrl_fsm_type;
+  signal adder_ctrl_fsm_int : adder_ctrl_fsm;
 
   -- Internal Signals
   signal arithmetic_int : std_logic_vector(DATA_SIZE downto 0);
@@ -116,7 +116,7 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      case adder_ctrl_fsm_st is
+      case adder_ctrl_fsm_int is
         when STARTER_ST =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -134,7 +134,7 @@ begin
             end if;
 
             -- FSM Control
-            adder_ctrl_fsm_st <= ENDER_ST;
+            adder_ctrl_fsm_int <= ENDER_ST;
           end if;
 
         when ENDER_ST =>  -- STEP 1
@@ -149,7 +149,7 @@ begin
                 READY <= '1';
 
                 -- FSM Control
-                adder_ctrl_fsm_st <= STARTER_ST;
+                adder_ctrl_fsm_int <= STARTER_ST;
               elsif (unsigned(arithmetic_int) < '0' & unsigned(MODULO_IN)) then
                 -- Data Outputs
                 DATA_OUT <= arithmetic_int(DATA_SIZE-1 downto 0);
@@ -158,7 +158,7 @@ begin
                 READY <= '1';
 
                 -- FSM Control
-                adder_ctrl_fsm_st <= STARTER_ST;
+                adder_ctrl_fsm_int <= STARTER_ST;
               else
                 -- Assignations
                 arithmetic_int <= std_logic_vector(unsigned(arithmetic_int) - ('0' & unsigned(MODULO_IN)));
@@ -172,7 +172,7 @@ begin
                 READY <= '1';
 
                 -- FSM Control
-                adder_ctrl_fsm_st <= STARTER_ST;
+                adder_ctrl_fsm_int <= STARTER_ST;
               else
                 if (unsigned(arithmetic_int) = '0' & unsigned(MODULO_IN)) then
                   -- Data Outputs
@@ -182,7 +182,7 @@ begin
                   READY <= '1';
 
                   -- FSM Control
-                  adder_ctrl_fsm_st <= STARTER_ST;
+                  adder_ctrl_fsm_int <= STARTER_ST;
                 elsif (unsigned(arithmetic_int) < '0' & unsigned(MODULO_IN)) then
                   -- Data Outputs
                   DATA_OUT <= arithmetic_int(DATA_SIZE-1 downto 0);
@@ -191,7 +191,7 @@ begin
                   READY <= '1';
 
                   -- FSM Control
-                  adder_ctrl_fsm_st <= STARTER_ST;
+                  adder_ctrl_fsm_int <= STARTER_ST;
                 else
                   -- Assignations
                   arithmetic_int <= std_logic_vector(unsigned(arithmetic_int) - ('0' & unsigned(MODULO_IN)));
@@ -207,7 +207,7 @@ begin
                   READY <= '1';
 
                   -- FSM Control
-                  adder_ctrl_fsm_st <= STARTER_ST;
+                  adder_ctrl_fsm_int <= STARTER_ST;
                 elsif (unsigned(arithmetic_int) < '0' & unsigned(MODULO_IN)) then
                   -- Data Outputs
                   DATA_OUT <= std_logic_vector(unsigned(MODULO_IN) - unsigned(arithmetic_int(DATA_SIZE-1 downto 0)));
@@ -216,7 +216,7 @@ begin
                   READY <= '1';
 
                   -- FSM Control
-                  adder_ctrl_fsm_st <= STARTER_ST;
+                  adder_ctrl_fsm_int <= STARTER_ST;
                 else
                   -- Assignations
                   arithmetic_int <= std_logic_vector(unsigned(arithmetic_int) - ('0' & unsigned(MODULO_IN)));
@@ -230,7 +230,7 @@ begin
                   READY <= '1';
 
                   -- FSM Control
-                  adder_ctrl_fsm_st <= STARTER_ST;
+                  adder_ctrl_fsm_int <= STARTER_ST;
                 elsif (unsigned(arithmetic_int) < '0' & unsigned(MODULO_IN)) then
                   -- Data Outputs
                   DATA_OUT <= arithmetic_int(DATA_SIZE-1 downto 0);
@@ -239,7 +239,7 @@ begin
                   READY <= '1';
 
                   -- FSM Control
-                  adder_ctrl_fsm_st <= STARTER_ST;
+                  adder_ctrl_fsm_int <= STARTER_ST;
                 else
                   -- Assignations
                   arithmetic_int <= std_logic_vector(unsigned(arithmetic_int) - ('0' & unsigned(MODULO_IN)));
@@ -254,12 +254,12 @@ begin
             READY <= '1';
 
             -- FSM Control
-            adder_ctrl_fsm_st <= STARTER_ST;
+            adder_ctrl_fsm_int <= STARTER_ST;
           end if;
 
         when others =>
           -- FSM Control
-          adder_ctrl_fsm_st <= STARTER_ST;
+          adder_ctrl_fsm_int <= STARTER_ST;
       end case;
     end if;
   end process;

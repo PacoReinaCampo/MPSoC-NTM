@@ -70,7 +70,7 @@ architecture ntm_scalar_mod_architecture of ntm_scalar_mod is
   -- Types
   -----------------------------------------------------------------------
 
-  type mod_ctrl_fsm_type is (
+  type mod_ctrl_fsm is (
     STARTER_ST,  -- STEP 0
     ENDER_ST     -- STEP 1
   );
@@ -86,7 +86,7 @@ architecture ntm_scalar_mod_architecture of ntm_scalar_mod is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal mod_ctrl_fsm_st : mod_ctrl_fsm_type;
+  signal mod_ctrl_fsm_int : mod_ctrl_fsm;
 
   -- Internal Signals
   signal arithmetic_int : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -113,7 +113,7 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      case mod_ctrl_fsm_st is
+      case mod_ctrl_fsm_int is
         when STARTER_ST =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -123,7 +123,7 @@ begin
             arithmetic_int <= DATA_IN;
 
             -- FSM Control
-            mod_ctrl_fsm_st <= ENDER_ST;
+            mod_ctrl_fsm_int <= ENDER_ST;
           end if;
 
         when ENDER_ST =>  -- STEP 1
@@ -138,7 +138,7 @@ begin
                 READY <= '1';
 
                 -- FSM Control
-                mod_ctrl_fsm_st <= STARTER_ST;
+                mod_ctrl_fsm_int <= STARTER_ST;
               elsif (unsigned(arithmetic_int) < unsigned(MODULO_IN)) then
                 -- Data Outputs
                 DATA_OUT <= arithmetic_int;
@@ -147,7 +147,7 @@ begin
                 READY <= '1';
 
                 -- FSM Control
-                mod_ctrl_fsm_st <= STARTER_ST;
+                mod_ctrl_fsm_int <= STARTER_ST;
               else
                 -- Assignations
                 arithmetic_int <= std_logic_vector(unsigned(arithmetic_int) - unsigned(MODULO_IN));
@@ -160,7 +160,7 @@ begin
               READY <= '1';
 
               -- FSM Control
-              mod_ctrl_fsm_st <= STARTER_ST;
+              mod_ctrl_fsm_int <= STARTER_ST;
             end if;
           elsif (unsigned(MODULO_IN) = unsigned(ZERO)) then
             -- Data Outputs
@@ -170,12 +170,12 @@ begin
             READY <= '1';
 
             -- FSM Control
-            mod_ctrl_fsm_st <= STARTER_ST;
+            mod_ctrl_fsm_int <= STARTER_ST;
           end if;
 
         when others =>
           -- FSM Control
-          mod_ctrl_fsm_st <= STARTER_ST;
+          mod_ctrl_fsm_int <= STARTER_ST;
       end case;
     end if;
   end process;

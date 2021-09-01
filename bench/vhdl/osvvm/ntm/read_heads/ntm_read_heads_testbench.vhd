@@ -65,7 +65,7 @@ architecture ntm_read_heads_testbench_architecture of ntm_read_heads_testbench i
   signal r_out_enable_reading : std_logic;
 
   -- DATA
-  signal modulo_reading : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_reading : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_in_reading   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal m_in_reading   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal r_out_reading  : std_logic_vector(DATA_SIZE-1 downto 0);

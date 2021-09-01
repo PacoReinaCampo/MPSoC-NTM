@@ -66,7 +66,7 @@ architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench
   signal m_out_enable_writing : std_logic;
 
   -- DATA
-  signal modulo_writing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_writing : std_logic_vector(DATA_SIZE-1 downto 0);
   signal m_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal a_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);

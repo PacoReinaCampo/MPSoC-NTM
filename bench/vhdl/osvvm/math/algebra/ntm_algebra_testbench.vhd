@@ -64,7 +64,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_in_j_enable_matrix_determinant : std_logic;
 
   -- DATA
-  signal modulo_matrix_determinant   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_determinant   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_determinant  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_determinant : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -80,7 +80,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_out_j_enable_matrix_inversion : std_logic;
 
   -- DATA
-  signal modulo_matrix_inversion   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_inversion   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_inversion  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_inversion : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -98,7 +98,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -112,7 +112,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_in_j_enable_matrix_rank : std_logic;
 
   -- DATA
-  signal modulo_matrix_rank   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_rank   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_rank  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_rank : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -128,7 +128,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_out_j_enable_matrix_transpose : std_logic;
 
   -- DATA
-  signal modulo_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -141,7 +141,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_b_in_enable_scalar_product : std_logic;
 
   -- DATA
-  signal modulo_scalar_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_product    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_product  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -157,7 +157,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_out_enable_vector_product : std_logic;
 
   -- DATA
-  signal modulo_vector_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_product    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_product  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -189,7 +189,7 @@ begin
       DATA_IN_J_ENABLE => data_in_j_enable_matrix_determinant,
 
       -- DATA
-      MODULO   => modulo_matrix_determinant,
+      MODULO_IN   => modulo_in_matrix_determinant,
       DATA_IN  => data_in_matrix_determinant,
       DATA_OUT => data_out_matrix_determinant
     );
@@ -218,7 +218,7 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_inversion,
 
       -- DATA
-      MODULO   => modulo_matrix_inversion,
+      MODULO_IN   => modulo_in_matrix_inversion,
       DATA_IN  => data_in_matrix_inversion,
       DATA_OUT => data_out_matrix_inversion
     );
@@ -249,7 +249,7 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MODULO    => modulo_matrix_product,
+      MODULO_IN    => modulo_in_matrix_product,
       DATA_A_IN => data_a_in_matrix_product,
       DATA_B_IN => data_b_in_matrix_product,
       DATA_OUT  => data_out_matrix_product
@@ -276,7 +276,7 @@ begin
       DATA_IN_J_ENABLE => data_in_j_enable_matrix_rank,
 
       -- DATA
-      MODULO   => modulo_matrix_rank,
+      MODULO_IN   => modulo_in_matrix_rank,
       DATA_IN  => data_in_matrix_rank,
       DATA_OUT => data_out_matrix_rank
     );
@@ -305,7 +305,7 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_transpose,
 
       -- DATA
-      MODULO   => modulo_matrix_transpose,
+      MODULO_IN   => modulo_in_matrix_transpose,
       DATA_IN  => data_in_matrix_transpose,
       DATA_OUT => data_out_matrix_transpose
     );
@@ -330,7 +330,7 @@ begin
       DATA_B_IN_ENABLE => data_b_in_enable_scalar_product,
 
       -- DATA
-      MODULO    => modulo_scalar_product,
+      MODULO_IN    => modulo_in_scalar_product,
       DATA_A_IN => data_a_in_scalar_product,
       DATA_B_IN => data_b_in_scalar_product,
       DATA_OUT  => data_out_scalar_product
@@ -358,7 +358,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_product,
 
       -- DATA
-      MODULO    => modulo_vector_product,
+      MODULO_IN    => modulo_in_vector_product,
       DATA_A_IN => data_a_in_vector_product,
       DATA_B_IN => data_b_in_vector_product,
       DATA_OUT  => data_out_vector_product

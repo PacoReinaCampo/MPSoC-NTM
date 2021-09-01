@@ -65,7 +65,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal ready_scalar_mod : std_logic;
 
   -- DATA
-  signal modulo_scalar_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_mod  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_mod : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -77,7 +77,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -88,7 +88,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal ready_scalar_multiplier : std_logic;
 
   -- DATA
-  signal modulo_scalar_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -99,7 +99,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal ready_scalar_inverter : std_logic;
 
   -- DATA
-  signal modulo_scalar_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -109,7 +109,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal ready_scalar_divider : std_logic;
 
   -- DATA
-  signal modulo_scalar_divider    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_divider    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -120,7 +120,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal ready_scalar_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_scalar_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal base_scalar_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal power_scalar_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -131,7 +131,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal ready_scalar_root : std_logic;
 
   -- DATA
-  signal modulo_scalar_root   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_root   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal base_scalar_root     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal power_scalar_root    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_root : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -142,7 +142,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
 
   -- CONTROL
   -- DATA
-  signal modulo_scalar_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -160,7 +160,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_enable_vector_mod : std_logic;
 
   -- DATA
-  signal modulo_vector_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_mod  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_mod : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -177,7 +177,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -193,7 +193,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -208,7 +208,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_enable_vector_inverter : std_logic;
 
   -- DATA
-  signal modulo_vector_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -223,7 +223,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_enable_vector_divider : std_logic;
 
   -- DATA
-  signal modulo_vector_divider    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_divider    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -239,7 +239,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_enable_vector_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_vector_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal base_vector_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal power_vector_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -255,7 +255,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_enable_vector_root : std_logic;
 
   -- DATA
-  signal modulo_vector_root   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_root   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal base_vector_root     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal power_vector_root    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_root : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -270,7 +270,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_enable_vector_logarithm : std_logic;
 
   -- DATA
-  signal modulo_vector_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -290,7 +290,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_j_enable_matrix_mod : std_logic;
 
   -- DATA
-  signal modulo_matrix_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_mod  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_mod : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -310,7 +310,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_j_enable_matrix_adder : std_logic;
 
   -- DATA
-  signal modulo_matrix_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -329,7 +329,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_j_enable_matrix_multiplier : std_logic;
 
   -- DATA
-  signal modulo_matrix_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -346,7 +346,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_j_enable_matrix_inverter : std_logic;
 
   -- DATA
-  signal modulo_matrix_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -364,7 +364,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_j_enable_enable_matrix_divider : std_logic;
 
   -- DATA
-  signal modulo_matrix_divider    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_divider    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -383,7 +383,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_j_enable_matrix_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_matrix_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal base_matrix_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal power_matrix_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -402,7 +402,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_j_enable_enable_matrix_root : std_logic;
 
   -- DATA
-  signal modulo_matrix_root   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_root   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal base_matrix_root     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal power_matrix_root    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_root : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -419,7 +419,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_j_enable_matrix_logarithm : std_logic;
 
   -- DATA
-  signal modulo_matrix_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -448,7 +448,7 @@ begin
       READY => ready_scalar_adder,
 
       -- DATA
-      MODULO   => modulo_scalar_mod,
+      MODULO_IN   => modulo_in_scalar_mod,
       DATA_IN  => data_in_scalar_mod,
       DATA_OUT => data_out_scalar_mod
     );
@@ -470,7 +470,7 @@ begin
       OPERATION => operation_scalar_adder,
 
       -- DATA
-      MODULO    => modulo_scalar_adder,
+      MODULO_IN    => modulo_in_scalar_adder,
       DATA_A_IN => data_a_in_scalar_adder,
       DATA_B_IN => data_b_in_scalar_adder,
       DATA_OUT  => data_out_scalar_adder
@@ -491,7 +491,7 @@ begin
       READY => ready_scalar_adder,
 
       -- DATA
-      MODULO    => modulo_scalar_multiplier,
+      MODULO_IN    => modulo_in_scalar_multiplier,
       DATA_A_IN => data_a_in_scalar_multiplier,
       DATA_B_IN => data_b_in_scalar_multiplier,
       DATA_OUT  => data_out_scalar_multiplier
@@ -512,7 +512,7 @@ begin
       READY => ready_scalar_adder,
 
       -- DATA
-      MODULO   => modulo_scalar_inverter,
+      MODULO_IN   => modulo_in_scalar_inverter,
       DATA_IN  => data_in_scalar_inverter,
       DATA_OUT => data_out_scalar_inverter
     );
@@ -532,7 +532,7 @@ begin
       READY => ready_scalar_divider,
 
       -- DATA
-      MODULO    => modulo_scalar_divider,
+      MODULO_IN    => modulo_in_scalar_divider,
       DATA_A_IN => data_a_in_scalar_divider,
       DATA_B_IN => data_b_in_scalar_divider,
       DATA_OUT  => data_out_scalar_divider
@@ -553,7 +553,7 @@ begin
       READY => ready_scalar_exponentiator,
 
       -- DATA
-      MODULO               => modulo_scalar_exponentiator,
+      MODULO_IN               => modulo_in_scalar_exponentiator,
       BASE_EXPONENTIATION  => base_scalar_exponentiator,
       POWER_EXPONENTIATION => power_scalar_exponentiator,
       DATA_OUT             => data_out_scalar_exponentiator
@@ -574,7 +574,7 @@ begin
       READY => ready_scalar_root,
 
       -- DATA
-      MODULO     => modulo_scalar_root,
+      MODULO_IN     => modulo_in_scalar_root,
       BASE_ROOT  => base_scalar_root,
       POWER_ROOT => power_scalar_root,
       DATA_OUT   => data_out_scalar_root
@@ -595,7 +595,7 @@ begin
       READY => ready_scalar_logarithm,
 
       -- DATA
-      MODULO   => modulo_scalar_logarithm,
+      MODULO_IN   => modulo_in_scalar_logarithm,
       DATA_IN  => data_in_scalar_logarithm,
       DATA_OUT => data_out_scalar_logarithm
     );
@@ -625,7 +625,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_mod,
 
       -- DATA
-      MODULO   => modulo_vector_mod,
+      MODULO_IN   => modulo_in_vector_mod,
       DATA_IN  => data_in_vector_mod,
       DATA_OUT => data_out_vector_mod
     );
@@ -654,7 +654,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
       -- DATA
-      MODULO    => modulo_vector_adder,
+      MODULO_IN    => modulo_in_vector_adder,
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
       DATA_OUT  => data_out_vector_adder
@@ -682,7 +682,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO    => modulo_vector_multiplier,
+      MODULO_IN    => modulo_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
       DATA_OUT  => data_out_vector_multiplier
@@ -709,7 +709,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_inverter,
 
       -- DATA
-      MODULO   => modulo_vector_inverter,
+      MODULO_IN   => modulo_in_vector_inverter,
       DATA_IN  => data_in_vector_inverter,
       DATA_OUT => data_out_vector_inverter
     );
@@ -736,7 +736,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_divider,
 
       -- DATA
-      MODULO    => modulo_vector_divider,
+      MODULO_IN    => modulo_in_vector_divider,
       DATA_A_IN => data_a_in_vector_divider,
       DATA_B_IN => data_b_in_vector_divider,
       DATA_OUT  => data_out_vector_divider
@@ -764,7 +764,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
 
       -- DATA
-      MODULO               => modulo_vector_exponentiator,
+      MODULO_IN               => modulo_in_vector_exponentiator,
       BASE_EXPONENTIATION  => base_vector_exponentiator,
       POWER_EXPONENTIATION => power_vector_exponentiator,
       DATA_OUT             => data_out_vector_exponentiator
@@ -792,7 +792,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_root,
 
       -- DATA
-      MODULO     => modulo_vector_root,
+      MODULO_IN     => modulo_in_vector_root,
       BASE_ROOT  => base_vector_root,
       POWER_ROOT => power_vector_root,
       DATA_OUT   => data_out_vector_root
@@ -819,7 +819,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_logarithm,
 
       -- DATA
-      MODULO   => modulo_vector_logarithm,
+      MODULO_IN   => modulo_in_vector_logarithm,
       DATA_IN  => data_in_vector_logarithm,
       DATA_OUT => data_out_vector_logarithm
     );
@@ -852,7 +852,7 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_mod,
 
       -- DATA
-      MODULO   => modulo_matrix_mod,
+      MODULO_IN   => modulo_in_matrix_mod,
       DATA_IN  => data_in_matrix_mod,
       DATA_OUT => data_out_matrix_mod
     );
@@ -885,7 +885,7 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_adder,
 
       -- DATA
-      MODULO    => modulo_matrix_adder,
+      MODULO_IN    => modulo_in_matrix_adder,
       DATA_A_IN => data_a_in_matrix_adder,
       DATA_B_IN => data_b_in_matrix_adder,
       DATA_OUT  => data_out_matrix_adder
@@ -917,7 +917,7 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_multiplier,
 
       -- DATA
-      MODULO    => modulo_matrix_multiplier,
+      MODULO_IN    => modulo_in_matrix_multiplier,
       DATA_A_IN => data_a_in_matrix_multiplier,
       DATA_B_IN => data_b_in_matrix_multiplier,
       DATA_OUT  => data_out_matrix_multiplier
@@ -947,7 +947,7 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_inverter,
 
       -- DATA
-      MODULO   => modulo_matrix_inverter,
+      MODULO_IN   => modulo_in_matrix_inverter,
       DATA_IN  => data_in_matrix_inverter,
       DATA_OUT => data_out_matrix_inverter
     );
@@ -978,7 +978,7 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_enable_matrix_divider,
 
       -- DATA
-      MODULO    => modulo_matrix_divider,
+      MODULO_IN    => modulo_in_matrix_divider,
       DATA_A_IN => data_a_in_matrix_divider,
       DATA_B_IN => data_b_in_matrix_divider,
       DATA_OUT  => data_out_matrix_divider
@@ -1010,7 +1010,7 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_exponentiator,
 
       -- DATA
-      MODULO               => modulo_matrix_exponentiator,
+      MODULO_IN               => modulo_in_matrix_exponentiator,
       BASE_EXPONENTIATION  => base_matrix_exponentiator,
       POWER_EXPONENTIATION => power_matrix_exponentiator,
       DATA_OUT             => data_out_matrix_exponentiator
@@ -1042,7 +1042,7 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_enable_matrix_root,
 
       -- DATA
-      MODULO     => modulo_matrix_root,
+      MODULO_IN     => modulo_in_matrix_root,
       BASE_ROOT  => base_matrix_root,
       POWER_ROOT => power_matrix_root,
       DATA_OUT   => data_out_matrix_root
@@ -1072,7 +1072,7 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_logarithm,
 
       -- DATA
-      MODULO   => modulo_matrix_logarithm,
+      MODULO_IN   => modulo_in_matrix_logarithm,
       DATA_IN  => data_in_matrix_logarithm,
       DATA_OUT => data_out_matrix_logarithm
     );

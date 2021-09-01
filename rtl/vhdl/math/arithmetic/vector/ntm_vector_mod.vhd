@@ -76,13 +76,27 @@ architecture ntm_vector_mod_architecture of ntm_vector_mod is
   -- Types
   -----------------------------------------------------------------------
 
+  type mod_ctrl_fsm is (
+    STARTER_ST,  -- STEP 0
+    ENDER_ST     -- STEP 1
+  );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal mod_ctrl_fsm_int : mod_ctrl_fsm;
+
+  -- Internal Signals
+  signal mod_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MOD
   -- CONTROL
@@ -90,15 +104,50 @@ architecture ntm_vector_mod_architecture of ntm_vector_mod is
   signal ready_scalar_mod : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_mod  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_mod : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_mod : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_mod  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- DATA_OUT = DATA_IN mod MODULO_IN
+
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      DATA_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+      -- Assignations
+      mod_int <= (others => '0');
+
+    elsif (rising_edge(CLK)) then
+
+      case mod_ctrl_fsm_int is
+        when STARTER_ST =>  -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          -- FSM Control
+          mod_ctrl_fsm_int <= ENDER_ST;
+
+        when ENDER_ST =>  -- STEP 1
+          -- FSM Control
+          mod_ctrl_fsm_int <= STARTER_ST;
+
+        when others =>
+          -- FSM Control
+          mod_ctrl_fsm_int <= STARTER_ST;
+      end case;
+    end if;
+  end process;
 
     -- MOD
   scalar_mod : ntm_scalar_mod

@@ -78,13 +78,27 @@ architecture ntm_vector_exponentiator_architecture of ntm_vector_exponentiator i
   -- Types
   -----------------------------------------------------------------------
 
+  type exponentiator_ctrl_fsm is (
+    STARTER_ST,  -- STEP 0
+    ENDER_ST     -- STEP 1
+  );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal exponentiator_ctrl_fsm_int : exponentiator_ctrl_fsm;
+
+  -- Internal Signals
+  signal exponentiation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- EXPONENTIATOR
   -- CONTROL
@@ -92,16 +106,51 @@ architecture ntm_vector_exponentiator_architecture of ntm_vector_exponentiator i
   signal ready_scalar_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal base_scalar_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal power_scalar_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal base_scalar_exponentiator      : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal power_scalar_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- DATA_OUT = root(BASE_EXPONENTIATION, POWER_EXPONENTIATION) mod MODULO_IN
+
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      DATA_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+      -- Assignations
+      exponentiation_int <= (others => '0');
+
+    elsif (rising_edge(CLK)) then
+
+      case exponentiator_ctrl_fsm_int is
+        when STARTER_ST =>  -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          -- FSM Control
+          exponentiator_ctrl_fsm_int <= ENDER_ST;
+
+        when ENDER_ST =>  -- STEP 1
+          -- FSM Control
+          exponentiator_ctrl_fsm_int <= STARTER_ST;
+
+        when others =>
+          -- FSM Control
+          exponentiator_ctrl_fsm_int <= STARTER_ST;
+      end case;
+    end if;
+  end process;
 
   -- EXPONENTIATION
   scalar_exponentiator : ntm_scalar_exponentiator

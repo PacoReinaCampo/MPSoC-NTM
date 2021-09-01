@@ -72,19 +72,33 @@ entity ntm_vector_multiplier is
   );
 end entity;
 
-architecture ntm_vector_multiplier_architecture of ntm_vector_multiplier is
+architecture ntm_vector_divider_architecture of ntm_vector_multiplier is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
+  type multiplier_ctrl_fsm is (
+    STARTER_ST,  -- STEP 0
+    ENDER_ST     -- STEP 1
+  );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal multiplier_ctrl_fsm_int : multiplier_ctrl_fsm;
+
+  -- Internal Signals
+  signal multiplier_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MULTIPLIER
   -- CONTROL
@@ -92,7 +106,7 @@ architecture ntm_vector_multiplier_architecture of ntm_vector_multiplier is
   signal ready_scalar_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -103,6 +117,41 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- DATA_OUT = DATA_B_IN · DATA_A_IN mod MODULO_IN
+
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      DATA_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+      -- Assignations
+      multiplier_int <= (others => '0');
+
+    elsif (rising_edge(CLK)) then
+
+      case multiplier_ctrl_fsm_int is
+        when STARTER_ST =>  -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          -- FSM Control
+          multiplier_ctrl_fsm_int <= ENDER_ST;
+
+        when ENDER_ST =>  -- STEP 1
+          -- FSM Control
+          multiplier_ctrl_fsm_int <= STARTER_ST;
+
+        when others =>
+          -- FSM Control
+          multiplier_ctrl_fsm_int <= STARTER_ST;
+      end case;
+    end if;
+  end process;
 
   -- MULTIPLIER
   scalar_multiplier : ntm_scalar_multiplier
