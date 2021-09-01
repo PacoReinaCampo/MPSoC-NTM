@@ -58,7 +58,7 @@ entity ntm_scalar_divider is
     READY : out std_logic;
 
     -- DATA
-    MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -105,7 +105,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_B_IN / DATA_A_IN mod MODULO
+  -- DATA_OUT = DATA_B_IN / DATA_A_IN mod MODULO_IN
 
   ctrl_fsm : process(CLK, RST)
   begin
@@ -151,7 +151,7 @@ begin
           v_int <= std_logic_vector(unsigned(v_int) sll 1);
 
           -- FSM Control
-          if ((unsigned(v_int) sll 1) < '0' & unsigned(MODULO)) then
+          if ((unsigned(v_int) sll 1) < '0' & unsigned(MODULO_IN)) then
             divider_ctrl_fsm_st <= SET_PRODUCT_OUT_ST;
           else
             divider_ctrl_fsm_st <= REDUCE_DATA_B_ST;
@@ -159,26 +159,26 @@ begin
 
         when REDUCE_DATA_B_ST =>  -- STEP 2
 
-          if (unsigned(v_int) < '0' & unsigned(MODULO)) then
+          if (unsigned(v_int) < '0' & unsigned(MODULO_IN)) then
             -- FSM Control
             divider_ctrl_fsm_st <= SET_PRODUCT_OUT_ST;
           else
             -- Assignation
-            v_int <= std_logic_vector(unsigned(v_int) - ('0' & unsigned(MODULO)));
+            v_int <= std_logic_vector(unsigned(v_int) - ('0' & unsigned(MODULO_IN)));
           end if;
 
         when SET_PRODUCT_OUT_ST =>  -- STEP 3
           
           -- Assignation
           if (u_int(0) = '1') then
-            if (unsigned(division_int) + unsigned(v_int) < '0' & unsigned(MODULO)) then
+            if (unsigned(division_int) + unsigned(v_int) < '0' & unsigned(MODULO_IN)) then
               division_int <= std_logic_vector(unsigned(division_int) + unsigned(v_int));
             else
-              division_int <= std_logic_vector(unsigned(division_int) + unsigned(v_int) - ('0' & unsigned(MODULO)));
+              division_int <= std_logic_vector(unsigned(division_int) + unsigned(v_int) - ('0' & unsigned(MODULO_IN)));
             end if;
           else
-            if (unsigned(division_int) >= '0' & unsigned(MODULO)) then
-              division_int <= std_logic_vector(unsigned(division_int) - unsigned(MODULO));
+            if (unsigned(division_int) >= '0' & unsigned(MODULO_IN)) then
+              division_int <= std_logic_vector(unsigned(division_int) - unsigned(MODULO_IN));
             end if;
           end if;
 

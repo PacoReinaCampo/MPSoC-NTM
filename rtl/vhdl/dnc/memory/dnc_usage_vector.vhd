@@ -106,7 +106,7 @@ architecture dnc_usage_vector_architecture of dnc_usage_vector is
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -122,7 +122,7 @@ architecture dnc_usage_vector_architecture of dnc_usage_vector is
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -159,7 +159,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
       -- DATA
-      MODULO    => modulo_vector_adder,
+      MODULO_IN => modulo_in_vector_adder,
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
       DATA_OUT  => data_out_vector_adder
@@ -187,7 +187,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO    => modulo_vector_multiplier,
+      MODULO_IN => modulo_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
       DATA_OUT  => data_out_vector_multiplier

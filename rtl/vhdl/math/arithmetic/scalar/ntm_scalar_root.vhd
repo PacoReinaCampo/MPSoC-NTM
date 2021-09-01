@@ -58,7 +58,7 @@ entity ntm_scalar_root is
     READY : out std_logic;
 
     -- DATA
-    MODULO     : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MODULO_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     BASE_ROOT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     POWER_ROOT : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -85,6 +85,6 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = root(BASE_ROOT, POWER_ROOT) mod MODULO
+  -- DATA_OUT = root(BASE_ROOT, POWER_ROOT) mod MODULO_IN
 
 end architecture;

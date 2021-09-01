@@ -58,7 +58,7 @@ entity ntm_scalar_inverter is
     READY : out std_logic;
 
     -- DATA
-    MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MODULO_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
@@ -105,7 +105,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = 1 / DATA_IN mod MODULO
+  -- DATA_OUT = 1 / DATA_IN mod MODULO_IN
 
   ctrl_fsm : process(CLK, RST)
   begin
@@ -133,7 +133,7 @@ begin
           if (START = '1') then
             -- Assignation
             u_int <= '0' & DATA_IN;
-            v_int <= '0' & MODULO;
+            v_int <= '0' & MODULO_IN;
 
             x_int <= ONE;
             y_int <= ZERO;
@@ -145,7 +145,7 @@ begin
         when ENDER_ST =>  -- STEP 1
 
           if(unsigned(u_int) = unsigned(ONE)) then
-            if (unsigned(x_int) < '0' & unsigned(MODULO)) then
+            if (unsigned(x_int) < '0' & unsigned(MODULO_IN)) then
               -- Data Outputs
               DATA_OUT <= x_int(DATA_SIZE-1 downto 0);
 
@@ -156,10 +156,10 @@ begin
               inverter_ctrl_fsm_st <= STARTER_ST;
             else
               -- Assignations
-              x_int <= std_logic_vector(unsigned(x_int) - ('0' & unsigned(MODULO)));
+              x_int <= std_logic_vector(unsigned(x_int) - ('0' & unsigned(MODULO_IN)));
             end if;
           elsif(unsigned(v_int) = unsigned(ONE)) then
-            if (unsigned(y_int) < '0' & unsigned(MODULO)) then
+            if (unsigned(y_int) < '0' & unsigned(MODULO_IN)) then
               -- Data Outputs
               DATA_OUT <= y_int(DATA_SIZE-1 downto 0);
 
@@ -170,7 +170,7 @@ begin
               inverter_ctrl_fsm_st <= STARTER_ST;
             else
               -- Assignations
-              y_int <= std_logic_vector(unsigned(y_int) - ('0' & unsigned(MODULO)));
+              y_int <= std_logic_vector(unsigned(y_int) - ('0' & unsigned(MODULO_IN)));
             end if;
           elsif(u_int(0) = '0') then
             -- FSM Control
@@ -191,7 +191,7 @@ begin
           if(x_int(0) = '0') then
             x_int <= std_logic_vector(unsigned(x_int) srl 1);
           else
-            x_int <= std_logic_vector(unsigned(x_int) + ('0' & unsigned(MODULO)) srl 1);
+            x_int <= std_logic_vector(unsigned(x_int) + ('0' & unsigned(MODULO_IN)) srl 1);
           end if;
 
           -- FSM Control
@@ -209,7 +209,7 @@ begin
           if(y_int(0) = '0') then
             y_int <= std_logic_vector(unsigned(y_int) srl 1);
           else
-            y_int <= std_logic_vector(unsigned(y_int) + ('0' & unsigned(MODULO)) srl 1);
+            y_int <= std_logic_vector(unsigned(y_int) + ('0' & unsigned(MODULO_IN)) srl 1);
           end if;
 
           -- FSM Control
@@ -224,7 +224,7 @@ begin
             if (unsigned(y_int) > unsigned(x_int)) then
               y_int <= std_logic_vector(unsigned(y_int) - unsigned(x_int));
             else
-              y_int <= std_logic_vector(unsigned(y_int) - unsigned(x_int) + ('0' & unsigned(MODULO)));
+              y_int <= std_logic_vector(unsigned(y_int) - unsigned(x_int) + ('0' & unsigned(MODULO_IN)));
             end if;
           else
             u_int <= std_logic_vector(unsigned(u_int) - unsigned(v_int));
@@ -232,7 +232,7 @@ begin
             if (unsigned(x_int) > unsigned(y_int)) then
               x_int <= std_logic_vector(unsigned(x_int) - unsigned(y_int));
             else
-              x_int <= std_logic_vector(unsigned(x_int) - unsigned(y_int) + ('0' & unsigned(MODULO)));
+              x_int <= std_logic_vector(unsigned(x_int) - unsigned(y_int) + ('0' & unsigned(MODULO_IN)));
             end if;
           end if;
 

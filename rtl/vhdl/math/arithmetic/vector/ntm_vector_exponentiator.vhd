@@ -65,7 +65,7 @@ entity ntm_vector_exponentiator is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    MODULO               : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MODULO_IN            : in  std_logic_vector(DATA_SIZE-1 downto 0);
     BASE_EXPONENTIATION  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     POWER_EXPONENTIATION : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT             : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -92,7 +92,7 @@ architecture ntm_vector_exponentiator_architecture of ntm_vector_exponentiator i
   signal ready_scalar_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_scalar_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal base_scalar_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal power_scalar_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -118,7 +118,7 @@ begin
       READY => ready_scalar_exponentiator,
 
       -- DATA
-      MODULO               => modulo_scalar_exponentiator,
+      MODULO_IN            => modulo_in_scalar_exponentiator,
       BASE_EXPONENTIATION  => base_scalar_exponentiator,
       POWER_EXPONENTIATION => power_scalar_exponentiator,
       DATA_OUT             => data_out_scalar_exponentiator

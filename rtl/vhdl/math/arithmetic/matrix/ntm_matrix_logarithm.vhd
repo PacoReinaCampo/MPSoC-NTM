@@ -67,7 +67,7 @@ entity ntm_matrix_logarithm is
     DATA_OUT_J_ENABLE : out std_logic;
 
     -- DATA
-    MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MODULO_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
@@ -97,7 +97,7 @@ architecture ntm_matrix_logarithm_architecture of ntm_matrix_logarithm is
   signal data_out_enable_vector_logarithm : std_logic;
 
   -- DATA
-  signal modulo_vector_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -128,7 +128,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_logarithm,
 
       -- DATA
-      MODULO   => modulo_vector_logarithm,
+      MODULO_IN   => modulo_in_vector_logarithm,
       DATA_IN  => data_in_vector_logarithm,
       DATA_OUT => data_out_vector_logarithm
     );

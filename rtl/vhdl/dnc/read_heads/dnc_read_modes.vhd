@@ -105,7 +105,7 @@ architecture dnc_read_modes_architecture of dnc_read_modes is
   signal data_out_j_enable_matrix_softmax : std_logic;
 
   -- DATA
-  signal modulo_matrix_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_matrix_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -143,7 +143,7 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_softmax,
 
       -- DATA
-      MODULO   => modulo_matrix_softmax,
+      MODULO_IN   => modulo_in_matrix_softmax,
       SIZE_IN  => size_in_matrix_softmax,
       DATA_IN  => data_in_matrix_softmax,
       DATA_OUT => data_out_matrix_softmax

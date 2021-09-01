@@ -58,7 +58,7 @@ entity ntm_scalar_mod is
     READY : out std_logic;
 
     -- DATA
-    MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MODULO_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
@@ -97,7 +97,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_IN mod MODULO
+  -- DATA_OUT = DATA_IN mod MODULO_IN
 
   ctrl_fsm : process(CLK, RST)
   begin
@@ -128,9 +128,9 @@ begin
 
         when ENDER_ST =>  -- STEP 1
 
-          if (unsigned(MODULO) > unsigned(ZERO)) then
+          if (unsigned(MODULO_IN) > unsigned(ZERO)) then
             if (unsigned(arithmetic_int) > unsigned(ZERO)) then
-              if (unsigned(arithmetic_int) = unsigned(MODULO)) then
+              if (unsigned(arithmetic_int) = unsigned(MODULO_IN)) then
                 -- Data Outputs
                 DATA_OUT <= ZERO;
 
@@ -139,7 +139,7 @@ begin
 
                 -- FSM Control
                 mod_ctrl_fsm_st <= STARTER_ST;
-              elsif (unsigned(arithmetic_int) < unsigned(MODULO)) then
+              elsif (unsigned(arithmetic_int) < unsigned(MODULO_IN)) then
                 -- Data Outputs
                 DATA_OUT <= arithmetic_int;
 
@@ -150,7 +150,7 @@ begin
                 mod_ctrl_fsm_st <= STARTER_ST;
               else
                 -- Assignations
-                arithmetic_int <= std_logic_vector(unsigned(arithmetic_int) - unsigned(MODULO));
+                arithmetic_int <= std_logic_vector(unsigned(arithmetic_int) - unsigned(MODULO_IN));
               end if;
             elsif (unsigned(arithmetic_int) = unsigned(ZERO)) then
               -- Data Outputs
@@ -162,7 +162,7 @@ begin
               -- FSM Control
               mod_ctrl_fsm_st <= STARTER_ST;
             end if;
-          elsif (unsigned(MODULO) = unsigned(ZERO)) then
+          elsif (unsigned(MODULO_IN) = unsigned(ZERO)) then
             -- Data Outputs
             DATA_OUT <= arithmetic_int;
 

@@ -69,7 +69,7 @@ entity ntm_matrix_convolution_function is
     DATA_OUT_J_ENABLE : out std_logic;
 
     -- DATA
-    MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -101,7 +101,7 @@ architecture ntm_matrix_convolution_function_architecture of ntm_matrix_convolut
   signal data_out_enable_vector_convolution : std_logic;
 
   -- DATA
-  signal modulo_vector_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -134,7 +134,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_convolution,
 
       -- DATA
-      MODULO    => modulo_vector_convolution,
+      MODULO_IN => modulo_in_vector_convolution,
       DATA_A_IN => data_a_in_vector_convolution,
       DATA_B_IN => data_b_in_vector_convolution,
       DATA_OUT  => data_out_vector_convolution

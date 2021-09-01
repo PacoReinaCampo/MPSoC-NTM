@@ -65,7 +65,7 @@ entity ntm_vector_root is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    MODULO     : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MODULO_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     BASE_ROOT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     POWER_ROOT : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -92,7 +92,7 @@ architecture ntm_vector_root_architecture of ntm_vector_root is
   signal ready_scalar_root : std_logic;
 
   -- DATA
-  signal modulo_scalar_root   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_root   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal base_scalar_root     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal power_scalar_root    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_root : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -118,7 +118,7 @@ begin
       READY => ready_scalar_root,
 
       -- DATA
-      MODULO     => modulo_scalar_root,
+      MODULO_IN  => modulo_in_scalar_root,
       BASE_ROOT  => base_scalar_root,
       POWER_ROOT => power_scalar_root,
       DATA_OUT   => data_out_scalar_root

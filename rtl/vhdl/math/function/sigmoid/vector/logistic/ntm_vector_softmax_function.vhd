@@ -64,7 +64,7 @@ entity ntm_vector_softmax_function is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MODULO_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -91,7 +91,7 @@ architecture ntm_vector_softmax_function_architecture of ntm_vector_softmax_func
   signal ready_scalar_softmax : std_logic;
 
   -- DATA
-  signal modulo_scalar_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_scalar_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -117,7 +117,7 @@ begin
       READY => ready_scalar_softmax,
 
       -- DATA
-      MODULO   => modulo_scalar_softmax,
+      MODULO_IN   => modulo_in_scalar_softmax,
       SIZE_IN  => size_in_scalar_softmax,
       DATA_IN  => data_in_scalar_softmax,
       DATA_OUT => data_out_scalar_softmax

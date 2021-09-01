@@ -58,7 +58,7 @@ entity ntm_scalar_logarithm is
     READY : out std_logic;
 
     -- DATA
-    MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MODULO_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
@@ -84,6 +84,6 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = logarithm(DATA_IN) mod MODULO
+  -- DATA_OUT = logarithm(DATA_IN) mod MODULO_IN
 
 end architecture;

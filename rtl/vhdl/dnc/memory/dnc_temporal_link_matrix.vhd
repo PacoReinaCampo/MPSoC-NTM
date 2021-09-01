@@ -101,7 +101,7 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
   signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -112,7 +112,7 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
   signal ready_scalar_multiplier : std_logic;
 
   -- DATA
-  signal modulo_scalar_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -144,7 +144,7 @@ begin
       OPERATION => operation_scalar_adder,
 
       -- DATA
-      MODULO    => modulo_scalar_adder,
+      MODULO_IN => modulo_in_scalar_adder,
       DATA_A_IN => data_a_in_scalar_adder,
       DATA_B_IN => data_b_in_scalar_adder,
       DATA_OUT  => data_out_scalar_adder
@@ -165,7 +165,7 @@ begin
       READY => ready_scalar_multiplier,
 
       -- DATA
-      MODULO    => modulo_scalar_multiplier,
+      MODULO_IN => modulo_in_scalar_multiplier,
       DATA_A_IN => data_a_in_scalar_multiplier,
       DATA_B_IN => data_b_in_scalar_multiplier,
       DATA_OUT  => data_out_scalar_multiplier

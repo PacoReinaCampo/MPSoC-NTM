@@ -67,7 +67,7 @@ entity ntm_vector_adder is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -96,7 +96,7 @@ architecture ntm_vector_adder_architecture of ntm_vector_adder is
   signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -124,7 +124,7 @@ begin
       OPERATION => operation_scalar_adder,
 
       -- DATA
-      MODULO    => modulo_scalar_adder,
+      MODULO_IN => modulo_in_scalar_adder,
       DATA_A_IN => data_a_in_scalar_adder,
       DATA_B_IN => data_b_in_scalar_adder,
       DATA_OUT  => data_out_scalar_adder

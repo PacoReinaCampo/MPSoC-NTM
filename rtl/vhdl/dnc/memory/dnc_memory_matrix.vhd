@@ -111,7 +111,7 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   signal data_out_j_enable_matrix_transpose : std_logic;
 
   -- DATA
-  signal modulo_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -129,7 +129,7 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -166,7 +166,7 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_transpose,
 
       -- DATA
-      MODULO   => modulo_matrix_transpose,
+      MODULO_IN   => modulo_in_matrix_transpose,
       DATA_IN  => data_in_matrix_transpose,
       DATA_OUT => data_out_matrix_transpose
     );
@@ -197,7 +197,7 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MODULO    => modulo_matrix_product,
+      MODULO_IN => modulo_in_matrix_product,
       DATA_A_IN => data_a_in_matrix_product,
       DATA_B_IN => data_b_in_matrix_product,
       DATA_OUT  => data_out_matrix_product

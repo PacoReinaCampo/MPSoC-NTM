@@ -101,7 +101,7 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
   signal data_out_enable_vector_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_vector_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal base_vector_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal power_vector_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -117,7 +117,7 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
   signal data_out_enable_vector_cosine : std_logic;
 
   -- DATA
-  signal modulo_vector_cosine    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_cosine    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_cosine   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_u_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_v_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -133,7 +133,7 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
   signal data_out_enable_vector_softmax : std_logic;
 
   -- DATA
-  signal modulo_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -168,7 +168,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
 
       -- DATA
-      MODULO               => modulo_vector_exponentiator,
+      MODULO_IN            => modulo_in_vector_exponentiator,
       BASE_EXPONENTIATION  => base_vector_exponentiator,
       POWER_EXPONENTIATION => power_vector_exponentiator,
       DATA_OUT             => data_out_vector_exponentiator
@@ -196,7 +196,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_cosine,
 
       -- DATA
-      MODULO    => modulo_vector_cosine,
+      MODULO_IN => modulo_in_vector_cosine,
       SIZE_IN   => size_in_vector_cosine,
       DATA_U_IN => data_u_in_vector_cosine,
       DATA_V_IN => data_v_in_vector_cosine,
@@ -224,7 +224,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_softmax,
 
       -- DATA
-      MODULO   => modulo_vector_softmax,
+      MODULO_IN   => modulo_in_vector_softmax,
       SIZE_IN  => size_in_vector_softmax,
       DATA_IN  => data_in_vector_softmax,
       DATA_OUT => data_out_vector_softmax

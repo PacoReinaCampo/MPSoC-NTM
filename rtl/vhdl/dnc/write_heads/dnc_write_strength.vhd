@@ -91,7 +91,7 @@ architecture dnc_write_strength_architecture of dnc_write_strength is
   signal ready_scalar_oneplus : std_logic;
 
   -- DATA
-  signal modulo_scalar_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -117,7 +117,7 @@ begin
       READY => ready_scalar_oneplus,
 
       -- DATA
-      MODULO   => modulo_scalar_oneplus,
+      MODULO_IN   => modulo_in_scalar_oneplus,
       DATA_IN  => data_in_scalar_oneplus,
       DATA_OUT => data_out_scalar_oneplus
     );

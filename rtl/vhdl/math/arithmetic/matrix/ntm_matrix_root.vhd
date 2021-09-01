@@ -69,7 +69,7 @@ entity ntm_matrix_root is
     DATA_OUT_J_ENABLE : out std_logic;
 
     -- DATA
-    MODULO     : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MODULO_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     BASE_ROOT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     POWER_ROOT : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -101,7 +101,7 @@ architecture ntm_matrix_root_architecture of ntm_matrix_root is
   signal data_out_enable_vector_root : std_logic;
 
   -- DATA
-  signal modulo_vector_root   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_root   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal base_vector_root     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal power_vector_root    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_root : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -134,7 +134,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_root,
 
       -- DATA
-      MODULO     => modulo_vector_root,
+      MODULO_IN  => modulo_in_vector_root,
       BASE_ROOT  => base_vector_root,
       POWER_ROOT => power_vector_root,
       DATA_OUT   => data_out_vector_root

@@ -107,7 +107,7 @@ architecture ntm_controller_architecture of ntm_controller is
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -126,7 +126,7 @@ architecture ntm_controller_architecture of ntm_controller is
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -141,7 +141,7 @@ architecture ntm_controller_architecture of ntm_controller is
   signal data_out_enable_vector_logistic : std_logic;
 
   -- DATA
-  signal modulo_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -177,7 +177,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
       -- DATA
-      MODULO    => modulo_vector_adder,
+      MODULO_IN => modulo_in_vector_adder,
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
       DATA_OUT  => data_out_vector_adder
@@ -209,7 +209,7 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MODULO    => modulo_matrix_product,
+      MODULO_IN => modulo_in_matrix_product,
       DATA_A_IN => data_a_in_matrix_product,
       DATA_B_IN => data_b_in_matrix_product,
       DATA_OUT  => data_out_matrix_product
@@ -236,7 +236,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_logistic,
 
       -- DATA
-      MODULO   => modulo_vector_logistic,
+      MODULO_IN   => modulo_in_vector_logistic,
       DATA_IN  => data_in_vector_logistic,
       DATA_OUT => data_out_vector_logistic
     );

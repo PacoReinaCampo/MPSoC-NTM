@@ -65,7 +65,7 @@ entity ntm_vector_convolution_function is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    MODULO    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -92,7 +92,7 @@ architecture ntm_vector_convolution_function_architecture of ntm_vector_convolut
   signal ready_scalar_convolution : std_logic;
 
   -- DATA
-  signal modulo_scalar_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -118,7 +118,7 @@ begin
       READY => ready_scalar_convolution,
 
       -- DATA
-      MODULO    => modulo_scalar_convolution,
+      MODULO_IN => modulo_in_scalar_convolution,
       DATA_A_IN => data_a_in_scalar_convolution,
       DATA_B_IN => data_b_in_scalar_convolution,
       DATA_OUT  => data_out_scalar_convolution
