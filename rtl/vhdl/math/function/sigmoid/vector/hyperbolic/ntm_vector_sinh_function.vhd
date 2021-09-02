@@ -76,13 +76,28 @@ architecture ntm_vector_sinh_function_architecture of ntm_vector_sinh_function i
   -- Types
   -----------------------------------------------------------------------
 
+  type sinh_ctrl_fsm is (
+    STARTER_STATE,                      -- STEP 0
+    INPUT_STATE,                        -- STEP 1
+    ENDER_STATE                         -- STEP 2
+    );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal sinh_ctrl_fsm_int : sinh_ctrl_fsm;
+
+  -- Internal Signals
+  signal index_loop : integer;
 
   -- SINH
   -- CONTROL
@@ -99,6 +114,82 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      DATA_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+      -- Assignations
+      index_loop <= 0;
+
+    elsif (rising_edge(CLK)) then
+
+      case sinh_ctrl_fsm_int is
+        when STARTER_STATE =>           -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          if (START = '1') then
+            -- FSM Control
+            sinh_ctrl_fsm_int <= INPUT_STATE;
+          end if;
+
+        when INPUT_STATE =>             -- STEP 1
+
+          if (DATA_IN_ENABLE = '1') then
+            -- Data Inputs
+            modulo_in_scalar_sinh <= MODULO_IN;
+
+            data_in_scalar_sinh <= DATA_IN;
+
+            -- Control Internal
+            start_scalar_sinh <= '1';
+
+            -- FSM Control
+            sinh_ctrl_fsm_int <= ENDER_STATE;
+          end if;
+
+          -- Control Outputs
+          DATA_OUT_ENABLE <= '0';
+
+        when ENDER_STATE =>             -- STEP 2
+
+          if (ready_scalar_sinh = '1') then
+            if (index_loop = I-1) then
+              -- Control Outputs
+              READY <= '1';
+
+              -- FSM Control
+              sinh_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_loop <= index_loop + 1;
+
+              -- FSM Control
+              sinh_ctrl_fsm_int <= INPUT_STATE;
+            end if;
+
+            -- Data Outputs
+            DATA_OUT <= data_out_scalar_sinh;
+
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '1';
+          else
+            -- Control Internal
+            start_scalar_sinh <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          sinh_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
   -- SINH
   scalar_sinh_function : ntm_scalar_sinh_function
