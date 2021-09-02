@@ -55,7 +55,7 @@ entity ntm_interface_vector is
     L : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -66,28 +66,28 @@ entity ntm_interface_vector is
     READY : out std_logic;
 
     -- Key Vector
-    WK_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
-    WK_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+    WK_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+    WK_IN_K_ENABLE : in std_logic;      -- for k in 0 to W-1
 
-    K_OUT_ENABLE : out std_logic; -- for k in 0 to W-1
+    K_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
 
     -- Key Strength
-    WBETA_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+    WBETA_IN_ENABLE : in std_logic;     -- for l in 0 to L-1
 
     -- Interpolation Gate
-    WG_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+    WG_IN_ENABLE : in std_logic;        -- for l in 0 to L-1
 
     -- Shift Weighting
-    WS_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
-    WS_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
+    WS_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+    WS_IN_J_ENABLE : in std_logic;      -- for j in 0 to N-1
 
-    S_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
+    S_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- Sharpening
-    WGAMMA_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+    WGAMMA_IN_ENABLE : in std_logic;    -- for l in 0 to L-1
 
     -- Hidden State
-    H_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+    H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
     -- DATA
     WK_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -103,7 +103,7 @@ entity ntm_interface_vector is
     G_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
     S_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
     GAMMA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture ntm_interface_vector_architecture of ntm_interface_vector is
@@ -134,7 +134,7 @@ architecture ntm_interface_vector_architecture of ntm_interface_vector is
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -154,7 +154,7 @@ begin
       J => J,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -177,6 +177,6 @@ begin
       DATA_A_IN => data_a_in_matrix_product,
       DATA_B_IN => data_b_in_matrix_product,
       DATA_OUT  => data_out_matrix_product
-    );
+      );
 
 end architecture;

@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 entity ntm_scalar_adder is
   generic (
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,7 +64,7 @@ entity ntm_scalar_adder is
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture ntm_scalar_adder_architecture of ntm_scalar_adder is
@@ -74,9 +74,9 @@ architecture ntm_scalar_adder_architecture of ntm_scalar_adder is
   -----------------------------------------------------------------------
 
   type adder_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
-    ENDER_STATE     -- STEP 1
-  );
+    STARTER_STATE,                      -- STEP 0
+    ENDER_STATE                         -- STEP 1
+    );
 
   -----------------------------------------------------------------------
   -- Constants
@@ -117,7 +117,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case adder_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -137,7 +137,7 @@ begin
             adder_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
-        when ENDER_STATE =>  -- STEP 1
+        when ENDER_STATE =>             -- STEP 1
 
           if (unsigned(MODULO_IN) > unsigned(ZERO)) then
             if (unsigned(DATA_A_IN) > unsigned(DATA_B_IN)) then

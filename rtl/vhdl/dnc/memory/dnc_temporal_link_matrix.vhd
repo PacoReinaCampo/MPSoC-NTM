@@ -54,7 +54,7 @@ entity dnc_temporal_link_matrix is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,11 +64,11 @@ entity dnc_temporal_link_matrix is
     START : in  std_logic;
     READY : out std_logic;
 
-    L_IN_ENABLE : in std_logic; -- for j in 0 to N-1 (square matrix)
-    W_IN_ENABLE : in std_logic; -- for j in 0 to N-1
-    P_IN_ENABLE : in std_logic; -- for j in 0 to N-1
+    L_IN_ENABLE : in std_logic;         -- for j in 0 to N-1 (square matrix)
+    W_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
+    P_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
 
-    L_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
+    L_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- DATA
     L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -76,7 +76,7 @@ entity dnc_temporal_link_matrix is
     P_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     L_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix is
@@ -101,7 +101,7 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
   signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -112,7 +112,7 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
   signal ready_scalar_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -131,7 +131,7 @@ begin
   ntm_scalar_adder_i : ntm_scalar_adder
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -148,13 +148,13 @@ begin
       DATA_A_IN => data_a_in_scalar_adder,
       DATA_B_IN => data_b_in_scalar_adder,
       DATA_OUT  => data_out_scalar_adder
-    );
+      );
 
   -- SCALAR MULTIPLIER
   ntm_scalar_multiplier_i : ntm_scalar_multiplier
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -169,6 +169,6 @@ begin
       DATA_A_IN => data_a_in_scalar_multiplier,
       DATA_B_IN => data_b_in_scalar_multiplier,
       DATA_OUT  => data_out_scalar_multiplier
-    );
+      );
 
 end architecture;

@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 entity ntm_scalar_inverter is
   generic (
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -61,7 +61,7 @@ entity ntm_scalar_inverter is
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture ntm_scalar_inverter_architecture of ntm_scalar_inverter is
@@ -71,12 +71,12 @@ architecture ntm_scalar_inverter_architecture of ntm_scalar_inverter is
   -----------------------------------------------------------------------
 
   type inverter_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
-    ENDER_STATE,    -- STEP 1
-    CHECK_U_STATE,  -- STEP 2
-    CHECK_V_STATE,  -- STEP 3
-    CHECK_D_STATE   -- STEP 4
-  );
+    STARTER_STATE,                      -- STEP 0
+    ENDER_STATE,                        -- STEP 1
+    CHECK_U_STATE,                      -- STEP 2
+    CHECK_V_STATE,                      -- STEP 3
+    CHECK_D_STATE                       -- STEP 4
+    );
 
   -----------------------------------------------------------------------
   -- Constants
@@ -126,7 +126,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case inverter_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -142,7 +142,7 @@ begin
             inverter_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
-        when ENDER_STATE =>  -- STEP 1
+        when ENDER_STATE =>             -- STEP 1
 
           if(unsigned(u_int) = unsigned(ONE)) then
             if (unsigned(x_int) < '0' & unsigned(MODULO_IN)) then
@@ -183,7 +183,7 @@ begin
             inverter_ctrl_fsm_int <= CHECK_D_STATE;
           end if;
 
-        when CHECK_U_STATE =>  -- STEP 2
+        when CHECK_U_STATE =>           -- STEP 2
 
           -- Assignation
           u_int <= std_logic_vector(unsigned(u_int) srl 1);
@@ -201,7 +201,7 @@ begin
             inverter_ctrl_fsm_int <= CHECK_D_STATE;
           end if;
 
-        when CHECK_V_STATE =>  -- STEP 3
+        when CHECK_V_STATE =>           -- STEP 3
 
           -- Assignation
           v_int <= std_logic_vector(unsigned(v_int) srl 1);
@@ -215,7 +215,7 @@ begin
           -- FSM Control
           inverter_ctrl_fsm_int <= CHECK_D_STATE;
 
-        when CHECK_D_STATE =>  -- STEP 4
+        when CHECK_D_STATE =>           -- STEP 4
 
           -- Assignation
           if(unsigned(u_int) < unsigned(v_int)) then

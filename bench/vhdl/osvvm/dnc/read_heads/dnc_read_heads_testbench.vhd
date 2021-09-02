@@ -65,8 +65,8 @@ architecture dnc_read_heads_testbench_architecture of dnc_read_heads_testbench i
   signal ready_free_gates : std_logic;
 
   -- DATA
-  signal f_in_free_gates   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal f_out_free_gates  : std_logic;
+  signal f_in_free_gates  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal f_out_free_gates : std_logic;
 
   -- READ KEYS
   -- CONTROL
@@ -80,8 +80,8 @@ architecture dnc_read_heads_testbench_architecture of dnc_read_heads_testbench i
   signal ready_read_keys : std_logic;
 
   -- DATA
-  signal k_in_read_keys   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_out_read_keys  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_in_read_keys  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_read_keys : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- READ MODES
   -- CONTROL
@@ -127,7 +127,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -145,7 +145,7 @@ begin
       F_IN => f_in_free_gates,
 
       F_OUT => f_out_free_gates
-    );
+      );
 
   -- READ KEYS
   read_keys : dnc_read_keys
@@ -158,7 +158,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -168,8 +168,8 @@ begin
       START => start_read_keys,
       READY => ready_read_keys,
 
-      K_IN_I_ENABLE  => k_in_i_enable_read_keys,
-      K_IN_J_ENABLE  => k_in_j_enable_read_keys,
+      K_IN_I_ENABLE => k_in_i_enable_read_keys,
+      K_IN_J_ENABLE => k_in_j_enable_read_keys,
 
       K_OUT_I_ENABLE => k_out_i_enable_read_keys,
       K_OUT_J_ENABLE => k_out_j_enable_read_keys,
@@ -178,7 +178,7 @@ begin
       K_IN => k_in_read_keys,
 
       K_OUT => k_out_read_keys
-    );
+      );
 
   -- READ MODES
   read_modes : dnc_read_modes
@@ -191,7 +191,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -201,8 +201,8 @@ begin
       START => start_read_modes,
       READY => ready_read_modes,
 
-      PI_IN_I_ENABLE  => pi_in_i_enable_read_modes,
-      PI_IN_P_ENABLE  => pi_in_p_enable_read_modes,
+      PI_IN_I_ENABLE => pi_in_i_enable_read_modes,
+      PI_IN_P_ENABLE => pi_in_p_enable_read_modes,
 
       PI_OUT_I_ENABLE => pi_out_i_enable_read_modes,
       PI_OUT_P_ENABLE => pi_out_p_enable_read_modes,
@@ -211,7 +211,7 @@ begin
       PI_IN => pi_in_read_modes,
 
       PI_OUT => pi_out_read_modes
-    );
+      );
 
   -- READ STRENGTHS
   read_strengths : dnc_read_strengths
@@ -224,7 +224,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -241,6 +241,6 @@ begin
       BETA_IN => beta_in_read_strengths,
 
       BETA_OUT => beta_out_read_strengths
-    );
+      );
 
 end dnc_read_heads_testbench_architecture;

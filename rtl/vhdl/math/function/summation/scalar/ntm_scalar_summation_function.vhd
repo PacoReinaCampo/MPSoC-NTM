@@ -45,9 +45,9 @@ use ieee.numeric_std.all;
 use work.ntm_math_pkg.all;
 
 entity ntm_scalar_summation_function is
-  generic (    
+  generic (
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -62,7 +62,7 @@ entity ntm_scalar_summation_function is
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture ntm_scalar_summation_function_architecture of ntm_scalar_summation_function is

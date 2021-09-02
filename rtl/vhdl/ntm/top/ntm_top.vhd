@@ -55,7 +55,7 @@ entity ntm_top is
     L : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -65,15 +65,15 @@ entity ntm_top is
     START : in  std_logic;
     READY : out std_logic;
 
-    X_IN_ENABLE : in std_logic; -- for x in 0 to X-1
+    X_IN_ENABLE : in std_logic;         -- for x in 0 to X-1
 
-    Y_OUT_ENABLE : out std_logic; -- for y in 0 to Y-1
+    Y_OUT_ENABLE : out std_logic;       -- for y in 0 to Y-1
 
     -- DATA
     X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture ntm_top_architecture of ntm_top is
@@ -210,9 +210,9 @@ architecture ntm_top_architecture of ntm_top is
 
   -- DATA
   signal modulo_in_reading : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_in_reading   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal m_in_reading   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal r_out_reading  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_reading      : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_in_reading      : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal r_out_reading     : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- WRITE HEADS
@@ -297,7 +297,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -319,7 +319,7 @@ begin
       R_IN => r_in_controller,
 
       H_OUT => h_out_controller
-    );
+      );
 
   -- CONTROLLER OUTPUT VECTOR
   controller_output_vector : ntm_controller_output_vector
@@ -331,7 +331,7 @@ begin
       L => L,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -353,7 +353,7 @@ begin
       H_IN => h_in_controller_output_vector,
 
       NU_OUT => nu_out_controller_output_vector
-    );
+      );
 
   -- OUTPUT VECTOR
   output_vector_i : ntm_output_vector
@@ -365,7 +365,7 @@ begin
       L => L,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -393,7 +393,7 @@ begin
       NU_IN => nu_in_output_vector,
 
       Y_OUT => y_out_output_vector
-    );
+      );
 
   -- INTERFACE VECTOR
   ntm_interface_vector_i : ntm_interface_vector
@@ -405,7 +405,7 @@ begin
       L => L,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -453,7 +453,7 @@ begin
       G_OUT     => g_out_interface_vector,
       S_OUT     => s_out_interface_vector,
       GAMMA_OUT => gamma_out_interface_vector
-    );
+      );
 
   -----------------------------------------------------------------------
   -- READ HEADS
@@ -468,7 +468,7 @@ begin
       L => L,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -485,7 +485,7 @@ begin
       W_IN  => w_in_reading,
       M_IN  => m_in_reading,
       R_OUT => r_out_reading
-    );
+      );
 
   -----------------------------------------------------------------------
   -- WRITE HEADS
@@ -500,7 +500,7 @@ begin
       L => L,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -519,7 +519,7 @@ begin
       A_IN  => a_in_writing,
       W_IN  => w_in_writing,
       M_OUT => m_out_writing
-    );
+      );
 
   erasing : ntm_erasing
     generic map (
@@ -530,7 +530,7 @@ begin
       L => L,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -549,7 +549,7 @@ begin
       E_IN  => e_in_erasing,
       W_IN  => w_in_erasing,
       M_OUT => m_out_erasing
-    );
+      );
 
   -----------------------------------------------------------------------
   -- MEMORY
@@ -564,7 +564,7 @@ begin
       L => L,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -594,6 +594,6 @@ begin
 
       W_IN  => w_in_addressing,
       W_OUT => w_out_addressing
-    );
+      );
 
 end architecture;

@@ -54,7 +54,7 @@ entity dnc_allocation_weighting is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,17 +64,17 @@ entity dnc_allocation_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    PHI_IN_ENABLE : in std_logic; -- for j in 0 to N-1
-    U_IN_ENABLE   : in std_logic; -- for j in 0 to N-1
+    PHI_IN_ENABLE : in std_logic;       -- for j in 0 to N-1
+    U_IN_ENABLE   : in std_logic;       -- for j in 0 to N-1
 
-    A_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
+    A_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- DATA
     PHI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     U_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    A_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    A_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    );
 end entity;
 
 architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting is
@@ -102,7 +102,7 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   signal data_out_enable_vector_multiplication : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplication    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -120,7 +120,7 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -136,7 +136,7 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -146,7 +146,7 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
-  
+
   -- a(t)[phi(t)[j]] = (1 - u(t)[phi(t)[j]])·multiplication(u(t)[phi(t)[j]])[i in 1 to j-1]
 
   -- VECTOR MULTIPLICATION
@@ -155,7 +155,7 @@ begin
       I => N,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -175,7 +175,7 @@ begin
       DATA_A_IN => data_a_in_vector_multiplication,
       DATA_B_IN => data_b_in_vector_multiplication,
       DATA_OUT  => data_out_vector_multiplication
-    );
+      );
 
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder
@@ -183,7 +183,7 @@ begin
       I => N,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -205,7 +205,7 @@ begin
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
       DATA_OUT  => data_out_vector_adder
-    );
+      );
 
   -- VECTOR MULTIPLIER
   vector_multiplier : ntm_vector_multiplier
@@ -213,7 +213,7 @@ begin
       I => N,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -233,6 +233,6 @@ begin
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
       DATA_OUT  => data_out_vector_multiplier
-    );
+      );
 
 end architecture;

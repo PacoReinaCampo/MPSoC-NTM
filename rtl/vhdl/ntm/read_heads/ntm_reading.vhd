@@ -53,7 +53,7 @@ entity ntm_reading is
     L : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -67,10 +67,10 @@ entity ntm_reading is
     R_OUT_ENABLE : out std_logic;
 
     -- DATA
-    W_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    M_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    R_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    W_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    M_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    R_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    );
 end entity;
 
 architecture ntm_reading_architecture of ntm_reading is
@@ -98,7 +98,7 @@ architecture ntm_reading_architecture of ntm_reading is
   signal data_out_enable_vector_summation : std_logic;
 
   -- DATA
-  signal modulo_in_vector_summation    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -114,7 +114,7 @@ architecture ntm_reading_architecture of ntm_reading is
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -133,7 +133,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -153,7 +153,7 @@ begin
       DATA_A_IN => data_a_in_vector_summation,
       DATA_B_IN => data_b_in_vector_summation,
       DATA_OUT  => data_out_vector_summation
-    );
+      );
 
   -- VECTOR MULTIPLIER
   vector_multiplier : ntm_vector_multiplier
@@ -161,7 +161,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -181,6 +181,6 @@ begin
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
       DATA_OUT  => data_out_vector_multiplier
-    );
+      );
 
 end architecture;

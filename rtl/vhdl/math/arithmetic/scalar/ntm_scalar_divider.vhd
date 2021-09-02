@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 entity ntm_scalar_divider is
   generic (
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -62,7 +62,7 @@ entity ntm_scalar_divider is
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture ntm_scalar_divider_architecture of ntm_scalar_divider is
@@ -72,12 +72,12 @@ architecture ntm_scalar_divider_architecture of ntm_scalar_divider is
   -----------------------------------------------------------------------
 
   type divider_ctrl_fsm is (
-    STARTER_STATE,          -- STEP 0
-    SET_DATA_B_STATE,       -- STEP 1
-    REDUCE_DATA_B_STATE,    -- STEP 2
-    SET_PRODUCT_OUT_STATE,  -- STEP 3
-    ENDER_STATE             -- STEP 4
-  );
+    STARTER_STATE,                      -- STEP 0
+    SET_DATA_B_STATE,                   -- STEP 1
+    REDUCE_DATA_B_STATE,                -- STEP 2
+    SET_PRODUCT_OUT_STATE,              -- STEP 3
+    ENDER_STATE                         -- STEP 4
+    );
 
   -----------------------------------------------------------------------
   -- Constants
@@ -125,7 +125,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case divider_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -136,7 +136,7 @@ begin
 
             if (DATA_A_IN(0) = '1') then
               divider_int <= '0' & DATA_B_IN;
-            else              
+            else
               divider_int <= (others => '0');
             end if;
 
@@ -144,7 +144,7 @@ begin
             divider_ctrl_fsm_int <= SET_DATA_B_STATE;
           end if;
 
-        when SET_DATA_B_STATE =>  -- STEP 1
+        when SET_DATA_B_STATE =>        -- STEP 1
 
           -- Assignation
           u_int <= std_logic_vector(unsigned(u_int) srl 1);
@@ -157,7 +157,7 @@ begin
             divider_ctrl_fsm_int <= REDUCE_DATA_B_STATE;
           end if;
 
-        when REDUCE_DATA_B_STATE =>  -- STEP 2
+        when REDUCE_DATA_B_STATE =>     -- STEP 2
 
           if (unsigned(v_int) < '0' & unsigned(MODULO_IN)) then
             -- FSM Control
@@ -167,8 +167,8 @@ begin
             v_int <= std_logic_vector(unsigned(v_int) - ('0' & unsigned(MODULO_IN)));
           end if;
 
-        when SET_PRODUCT_OUT_STATE =>  -- STEP 3
-          
+        when SET_PRODUCT_OUT_STATE =>   -- STEP 3
+
           -- Assignation
           if (u_int(0) = '1') then
             if (unsigned(divider_int) + unsigned(v_int) < '0' & unsigned(MODULO_IN)) then
@@ -185,7 +185,7 @@ begin
           -- FSM Control
           divider_ctrl_fsm_int <= ENDER_STATE;
 
-        when ENDER_STATE =>  -- STEP 4
+        when ENDER_STATE =>             -- STEP 4
 
           if (unsigned(u_int) = '0' & unsigned(ONE)) then
             -- Data Outputs

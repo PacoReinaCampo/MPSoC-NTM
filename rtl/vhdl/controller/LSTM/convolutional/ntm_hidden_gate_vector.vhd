@@ -54,7 +54,7 @@ entity ntm_hidden_gate_vector is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,17 +64,17 @@ entity ntm_hidden_gate_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    S_IN_ENABLE : in std_logic; -- for l in 0 to L-1
-    O_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+    S_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+    O_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
-    H_OUT_ENABLE : out std_logic; -- for l in 0 to L-1
+    H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
     S_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     O_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     H_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
@@ -102,7 +102,7 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -117,9 +117,9 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
   signal data_out_enable_vector_tanh : std_logic;
 
   -- DATA
-  signal modulo_in_vector_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_vector_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -137,7 +137,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -157,7 +157,7 @@ begin
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
       DATA_OUT  => data_out_vector_multiplier
-    );
+      );
 
   -- VECTOR TANH
   vector_tanh_function : ntm_vector_tanh_function
@@ -165,7 +165,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -180,9 +180,9 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_tanh,
 
       -- DATA
-      MODULO_IN   => modulo_in_vector_tanh,
-      DATA_IN  => data_in_vector_tanh,
-      DATA_OUT => data_out_vector_tanh
-    );
+      MODULO_IN => modulo_in_vector_tanh,
+      DATA_IN   => data_in_vector_tanh,
+      DATA_OUT  => data_out_vector_tanh
+      );
 
 end architecture;

@@ -50,7 +50,7 @@ entity ntm_matrix_divider is
     J : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -73,7 +73,7 @@ entity ntm_matrix_divider is
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture ntm_matrix_divider_architecture of ntm_matrix_divider is
@@ -101,7 +101,7 @@ architecture ntm_matrix_divider_architecture of ntm_matrix_divider is
   signal data_out_enable_vector_divider : std_logic;
 
   -- DATA
-  signal modulo_in_vector_divider    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -118,7 +118,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -138,6 +138,6 @@ begin
       DATA_A_IN => data_a_in_vector_divider,
       DATA_B_IN => data_b_in_vector_divider,
       DATA_OUT  => data_out_vector_divider
-    );
+      );
 
 end architecture;

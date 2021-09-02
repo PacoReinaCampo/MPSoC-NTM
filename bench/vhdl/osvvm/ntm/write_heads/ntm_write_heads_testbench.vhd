@@ -67,10 +67,10 @@ architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench
 
   -- DATA
   signal modulo_in_writing : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal m_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal a_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_in_writing   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal m_out_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_in_writing      : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal a_in_writing      : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_writing      : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_out_writing     : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -84,7 +84,7 @@ begin
       N => N,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -99,10 +99,10 @@ begin
       M_OUT_ENABLE => m_out_enable_writing,
 
       -- DATA
-      M_IN   => m_in_writing,
-      A_IN   => a_in_writing,
-      W_IN   => w_in_writing,
-      M_OUT  => m_out_writing
-    );
+      M_IN  => m_in_writing,
+      A_IN  => a_in_writing,
+      W_IN  => w_in_writing,
+      M_OUT => m_out_writing
+      );
 
 end ntm_write_heads_testbench_architecture;

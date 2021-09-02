@@ -50,7 +50,7 @@ entity ntm_matrix_cosine_similarity_function is
     J : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -74,7 +74,7 @@ entity ntm_matrix_cosine_similarity_function is
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture ntm_matrix_cosine_similarity_function_architecture of ntm_matrix_cosine_similarity_function is
@@ -102,7 +102,7 @@ architecture ntm_matrix_cosine_similarity_function_architecture of ntm_matrix_co
   signal data_out_enable_vector_cosine : std_logic;
 
   -- DATA
-  signal modulo_in_vector_cosine    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_cosine   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -118,7 +118,7 @@ begin
   vector_cosine_similarity_function : ntm_vector_cosine_similarity_function
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -139,6 +139,6 @@ begin
       DATA_A_IN => data_a_in_vector_cosine,
       DATA_B_IN => data_b_in_vector_cosine,
       DATA_OUT  => data_out_vector_cosine
-    );
+      );
 
 end architecture;

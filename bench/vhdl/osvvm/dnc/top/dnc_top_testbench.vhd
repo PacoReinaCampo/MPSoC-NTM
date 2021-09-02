@@ -88,7 +88,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -103,9 +103,9 @@ begin
       Y_OUT_ENABLE => y_out_enable_top,
 
       -- DATA
-      X_IN  => x_in_top,
+      X_IN => x_in_top,
 
       Y_OUT => y_out_top
-    );
+      );
 
 end dnc_top_testbench_architecture;

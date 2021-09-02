@@ -65,9 +65,9 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal ready_scalar_mod : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_mod  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_mod : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_mod : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_mod  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- ADDER
   -- CONTROL
@@ -77,7 +77,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -88,7 +88,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal ready_scalar_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -99,9 +99,9 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal ready_scalar_inverter : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- DIVIDER
   -- CONTROL
@@ -109,7 +109,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal ready_scalar_divider : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_divider    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -120,10 +120,10 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal ready_scalar_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- ROOT
   -- CONTROL
@@ -131,10 +131,10 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal ready_scalar_root : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_root   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_root     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_root    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_root : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_root : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_root : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_root : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_root  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- LOGARITHM
   signal start_scalar_logarithm : std_logic;
@@ -142,9 +142,9 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
 
   -- CONTROL
   -- DATA
-  signal modulo_in_scalar_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- VECTOR
@@ -160,9 +160,9 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_enable_vector_mod : std_logic;
 
   -- DATA
-  signal modulo_in_vector_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_vector_mod  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_mod : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_mod : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_mod  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- ADDER
   -- CONTROL
@@ -177,7 +177,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -193,7 +193,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -208,9 +208,9 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_enable_vector_inverter : std_logic;
 
   -- DATA
-  signal modulo_in_vector_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_vector_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- DIVIDER
   -- CONTROL
@@ -223,7 +223,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_enable_vector_divider : std_logic;
 
   -- DATA
-  signal modulo_in_vector_divider    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -239,26 +239,26 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_enable_vector_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_in_vector_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- ROOT
   -- CONTROL
   signal start_vector_root : std_logic;
   signal ready_vector_root : std_logic;
 
-  signal data_a_in_enable_vector_root  : std_logic;
+  signal data_a_in_enable_vector_root : std_logic;
   signal data_b_in_enable_vector_root : std_logic;
 
   signal data_out_enable_vector_root : std_logic;
 
   -- DATA
-  signal modulo_in_vector_root   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_root     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_root    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_root : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_root : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_root : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_root : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_root  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- LOGARITHM
   -- CONTROL
@@ -270,9 +270,9 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_enable_vector_logarithm : std_logic;
 
   -- DATA
-  signal modulo_in_vector_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_vector_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- MATRIX
@@ -290,9 +290,9 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_j_enable_matrix_mod : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_mod  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_mod : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_mod : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_mod  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- ADDER
   -- CONTROL
@@ -310,7 +310,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_j_enable_matrix_adder : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -329,7 +329,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_j_enable_matrix_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -346,9 +346,9 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_j_enable_matrix_inverter : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- DIVIDER
   -- CONTROL
@@ -364,7 +364,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_j_enable_enable_matrix_divider : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_divider    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -374,8 +374,8 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal start_matrix_exponentiator : std_logic;
   signal ready_matrix_exponentiator : std_logic;
 
-  signal data_a_in_i_enable_matrix_exponentiator  : std_logic;
-  signal data_a_in_j_enable_matrix_exponentiator  : std_logic;
+  signal data_a_in_i_enable_matrix_exponentiator : std_logic;
+  signal data_a_in_j_enable_matrix_exponentiator : std_logic;
   signal data_b_in_i_enable_matrix_exponentiator : std_logic;
   signal data_b_in_j_enable_matrix_exponentiator : std_logic;
 
@@ -383,10 +383,10 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_j_enable_matrix_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- ROOT
   -- CONTROL
@@ -402,10 +402,10 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_j_enable_enable_matrix_root : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_root   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_root     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_root    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_root : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_root : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_root : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_root : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_root  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- LOGARITHM
   -- CONTROL
@@ -419,9 +419,9 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_out_j_enable_matrix_logarithm : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -433,11 +433,11 @@ begin
   -- SCALAR
   -----------------------------------------------------------------------
 
-    -- MOD
+  -- MOD
   scalar_mod : ntm_scalar_mod
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -448,16 +448,16 @@ begin
       READY => ready_scalar_adder,
 
       -- DATA
-      MODULO_IN   => modulo_in_scalar_mod,
-      DATA_IN  => data_in_scalar_mod,
-      DATA_OUT => data_out_scalar_mod
-    );
+      MODULO_IN => modulo_in_scalar_mod,
+      DATA_IN   => data_in_scalar_mod,
+      DATA_OUT  => data_out_scalar_mod
+      );
 
   -- ADDER
   scalar_adder : ntm_scalar_adder
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -470,17 +470,17 @@ begin
       OPERATION => operation_scalar_adder,
 
       -- DATA
-      MODULO_IN    => modulo_in_scalar_adder,
+      MODULO_IN => modulo_in_scalar_adder,
       DATA_A_IN => data_a_in_scalar_adder,
       DATA_B_IN => data_b_in_scalar_adder,
       DATA_OUT  => data_out_scalar_adder
-    );
+      );
 
   -- MULTIPLIER
   scalar_multiplier : ntm_scalar_multiplier
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -491,17 +491,17 @@ begin
       READY => ready_scalar_adder,
 
       -- DATA
-      MODULO_IN    => modulo_in_scalar_multiplier,
+      MODULO_IN => modulo_in_scalar_multiplier,
       DATA_A_IN => data_a_in_scalar_multiplier,
       DATA_B_IN => data_b_in_scalar_multiplier,
       DATA_OUT  => data_out_scalar_multiplier
-    );
+      );
 
   -- INVERTER
   scalar_inverter : ntm_scalar_inverter
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -512,16 +512,16 @@ begin
       READY => ready_scalar_adder,
 
       -- DATA
-      MODULO_IN   => modulo_in_scalar_inverter,
-      DATA_IN  => data_in_scalar_inverter,
-      DATA_OUT => data_out_scalar_inverter
-    );
+      MODULO_IN => modulo_in_scalar_inverter,
+      DATA_IN   => data_in_scalar_inverter,
+      DATA_OUT  => data_out_scalar_inverter
+      );
 
   -- DIVIDER
   scalar_divider : ntm_scalar_divider
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -536,13 +536,13 @@ begin
       DATA_A_IN => data_a_in_scalar_divider,
       DATA_B_IN => data_b_in_scalar_divider,
       DATA_OUT  => data_out_scalar_divider
-    );
+      );
 
   -- EXPONENTIATOR
   scalar_exponentiator : ntm_scalar_exponentiator
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -553,17 +553,17 @@ begin
       READY => ready_scalar_exponentiator,
 
       -- DATA
-      MODULO_IN            => modulo_in_scalar_exponentiator,
-      DATA_A_IN  => data_a_in_scalar_exponentiator,
+      MODULO_IN => modulo_in_scalar_exponentiator,
+      DATA_A_IN => data_a_in_scalar_exponentiator,
       DATA_B_IN => data_b_in_scalar_exponentiator,
-      DATA_OUT             => data_out_scalar_exponentiator
-    );
+      DATA_OUT  => data_out_scalar_exponentiator
+      );
 
   -- ROOT
   scalar_root : ntm_scalar_root
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -574,17 +574,17 @@ begin
       READY => ready_scalar_root,
 
       -- DATA
-      MODULO_IN     => modulo_in_scalar_root,
-      DATA_A_IN  => data_a_in_scalar_root,
+      MODULO_IN => modulo_in_scalar_root,
+      DATA_A_IN => data_a_in_scalar_root,
       DATA_B_IN => data_b_in_scalar_root,
-      DATA_OUT   => data_out_scalar_root
-    );
+      DATA_OUT  => data_out_scalar_root
+      );
 
   -- LOGARITHM
   scalar_logarithm : ntm_scalar_logarithm
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -595,10 +595,10 @@ begin
       READY => ready_scalar_logarithm,
 
       -- DATA
-      MODULO_IN   => modulo_in_scalar_logarithm,
-      DATA_IN  => data_in_scalar_logarithm,
-      DATA_OUT => data_out_scalar_logarithm
-    );
+      MODULO_IN => modulo_in_scalar_logarithm,
+      DATA_IN   => data_in_scalar_logarithm,
+      DATA_OUT  => data_out_scalar_logarithm
+      );
 
   -----------------------------------------------------------------------
   -- VECTOR
@@ -610,7 +610,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -625,10 +625,10 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_mod,
 
       -- DATA
-      MODULO_IN   => modulo_in_vector_mod,
-      DATA_IN  => data_in_vector_mod,
-      DATA_OUT => data_out_vector_mod
-    );
+      MODULO_IN => modulo_in_vector_mod,
+      DATA_IN   => data_in_vector_mod,
+      DATA_OUT  => data_out_vector_mod
+      );
 
   -- ADDER
   vector_adder : ntm_vector_adder
@@ -636,7 +636,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -654,11 +654,11 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
       -- DATA
-      MODULO_IN    => modulo_in_vector_adder,
+      MODULO_IN => modulo_in_vector_adder,
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
       DATA_OUT  => data_out_vector_adder
-    );
+      );
 
   -- MULTIPLIER
   vector_multiplier : ntm_vector_multiplier
@@ -666,7 +666,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -682,11 +682,11 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO_IN    => modulo_in_vector_multiplier,
+      MODULO_IN => modulo_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
       DATA_OUT  => data_out_vector_multiplier
-    );
+      );
 
   -- INVERTER
   vector_inverter : ntm_vector_inverter
@@ -694,7 +694,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -709,10 +709,10 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_inverter,
 
       -- DATA
-      MODULO_IN   => modulo_in_vector_inverter,
-      DATA_IN  => data_in_vector_inverter,
-      DATA_OUT => data_out_vector_inverter
-    );
+      MODULO_IN => modulo_in_vector_inverter,
+      DATA_IN   => data_in_vector_inverter,
+      DATA_OUT  => data_out_vector_inverter
+      );
 
   -- DIVIDER
   vector_divider : ntm_vector_divider
@@ -720,7 +720,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -736,11 +736,11 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_divider,
 
       -- DATA
-      MODULO_IN    => modulo_in_vector_divider,
+      MODULO_IN => modulo_in_vector_divider,
       DATA_A_IN => data_a_in_vector_divider,
       DATA_B_IN => data_b_in_vector_divider,
       DATA_OUT  => data_out_vector_divider
-    );
+      );
 
   -- EXPONENTIATOR
   vector_exponentiator : ntm_vector_exponentiator
@@ -748,7 +748,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -758,17 +758,17 @@ begin
       START => start_vector_exponentiator,
       READY => ready_vector_exponentiator,
 
-      DATA_A_IN_ENABLE  => data_a_in_enable_vector_exponentiator,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_exponentiator,
       DATA_B_IN_ENABLE => data_b_in_enable_vector_exponentiator,
 
       DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
 
       -- DATA
-      MODULO_IN               => modulo_in_vector_exponentiator,
-      DATA_A_IN  => data_a_in_vector_exponentiator,
+      MODULO_IN => modulo_in_vector_exponentiator,
+      DATA_A_IN => data_a_in_vector_exponentiator,
       DATA_B_IN => data_b_in_vector_exponentiator,
-      DATA_OUT             => data_out_vector_exponentiator
-    );
+      DATA_OUT  => data_out_vector_exponentiator
+      );
 
   -- ROOT
   vector_root : ntm_vector_root
@@ -776,7 +776,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -786,17 +786,17 @@ begin
       START => start_vector_root,
       READY => ready_vector_root,
 
-      DATA_A_IN_ENABLE  => data_a_in_enable_vector_root,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_root,
       DATA_B_IN_ENABLE => data_b_in_enable_vector_root,
 
       DATA_OUT_ENABLE => data_out_enable_vector_root,
 
       -- DATA
-      MODULO_IN     => modulo_in_vector_root,
-      DATA_A_IN  => data_a_in_vector_root,
+      MODULO_IN => modulo_in_vector_root,
+      DATA_A_IN => data_a_in_vector_root,
       DATA_B_IN => data_b_in_vector_root,
-      DATA_OUT   => data_out_vector_root
-    );
+      DATA_OUT  => data_out_vector_root
+      );
 
   -- LOGARITHM
   vector_logarithm : ntm_vector_logarithm
@@ -804,7 +804,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -819,10 +819,10 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_logarithm,
 
       -- DATA
-      MODULO_IN   => modulo_in_vector_logarithm,
-      DATA_IN  => data_in_vector_logarithm,
-      DATA_OUT => data_out_vector_logarithm
-    );
+      MODULO_IN => modulo_in_vector_logarithm,
+      DATA_IN   => data_in_vector_logarithm,
+      DATA_OUT  => data_out_vector_logarithm
+      );
 
   -----------------------------------------------------------------------
   -- MATRIX
@@ -835,7 +835,7 @@ begin
       J => J,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -852,10 +852,10 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_mod,
 
       -- DATA
-      MODULO_IN   => modulo_in_matrix_mod,
-      DATA_IN  => data_in_matrix_mod,
-      DATA_OUT => data_out_matrix_mod
-    );
+      MODULO_IN => modulo_in_matrix_mod,
+      DATA_IN   => data_in_matrix_mod,
+      DATA_OUT  => data_out_matrix_mod
+      );
 
   -- ADDER
   matrix_adder : ntm_matrix_adder
@@ -864,7 +864,7 @@ begin
       J => J,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -885,11 +885,11 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_adder,
 
       -- DATA
-      MODULO_IN    => modulo_in_matrix_adder,
+      MODULO_IN => modulo_in_matrix_adder,
       DATA_A_IN => data_a_in_matrix_adder,
       DATA_B_IN => data_b_in_matrix_adder,
       DATA_OUT  => data_out_matrix_adder
-    );
+      );
 
   -- MULTIPLIER
   matrix_multiplier : ntm_matrix_multiplier
@@ -898,7 +898,7 @@ begin
       J => J,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -917,11 +917,11 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_multiplier,
 
       -- DATA
-      MODULO_IN    => modulo_in_matrix_multiplier,
+      MODULO_IN => modulo_in_matrix_multiplier,
       DATA_A_IN => data_a_in_matrix_multiplier,
       DATA_B_IN => data_b_in_matrix_multiplier,
       DATA_OUT  => data_out_matrix_multiplier
-    );
+      );
 
   -- INVERTER
   matrix_inverter : ntm_matrix_inverter
@@ -930,7 +930,7 @@ begin
       J => J,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -947,10 +947,10 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_inverter,
 
       -- DATA
-      MODULO_IN   => modulo_in_matrix_inverter,
-      DATA_IN  => data_in_matrix_inverter,
-      DATA_OUT => data_out_matrix_inverter
-    );
+      MODULO_IN => modulo_in_matrix_inverter,
+      DATA_IN   => data_in_matrix_inverter,
+      DATA_OUT  => data_out_matrix_inverter
+      );
 
   -- DIVIDER
   matrix_divider : ntm_matrix_divider
@@ -959,7 +959,7 @@ begin
       J => J,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -978,11 +978,11 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_enable_matrix_divider,
 
       -- DATA
-      MODULO_IN    => modulo_in_matrix_divider,
+      MODULO_IN => modulo_in_matrix_divider,
       DATA_A_IN => data_a_in_matrix_divider,
       DATA_B_IN => data_b_in_matrix_divider,
       DATA_OUT  => data_out_matrix_divider
-    );
+      );
 
   -- EXPONENTIATOR
   matrix_exponentiator : ntm_matrix_exponentiator
@@ -991,7 +991,7 @@ begin
       J => J,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -1001,8 +1001,8 @@ begin
       START => start_matrix_exponentiator,
       READY => ready_matrix_exponentiator,
 
-      DATA_A_IN_I_ENABLE  => data_a_in_i_enable_matrix_exponentiator,
-      DATA_A_IN_J_ENABLE  => data_a_in_j_enable_matrix_exponentiator,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_exponentiator,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_exponentiator,
       DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_exponentiator,
       DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_exponentiator,
 
@@ -1010,11 +1010,11 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_exponentiator,
 
       -- DATA
-      MODULO_IN               => modulo_in_matrix_exponentiator,
-      DATA_A_IN  => data_a_in_matrix_exponentiator,
+      MODULO_IN => modulo_in_matrix_exponentiator,
+      DATA_A_IN => data_a_in_matrix_exponentiator,
       DATA_B_IN => data_b_in_matrix_exponentiator,
-      DATA_OUT             => data_out_matrix_exponentiator
-    );
+      DATA_OUT  => data_out_matrix_exponentiator
+      );
 
   -- ROOT
   matrix_root : ntm_matrix_root
@@ -1023,7 +1023,7 @@ begin
       J => J,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -1033,8 +1033,8 @@ begin
       START => start_matrix_root,
       READY => ready_matrix_root,
 
-      DATA_A_IN_I_ENABLE  => data_a_in_i_enable_matrix_root,
-      DATA_A_IN_J_ENABLE  => data_a_in_j_enable_matrix_root,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_root,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_root,
       DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_root,
       DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_root,
 
@@ -1042,11 +1042,11 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_enable_matrix_root,
 
       -- DATA
-      MODULO_IN     => modulo_in_matrix_root,
-      DATA_A_IN  => data_a_in_matrix_root,
+      MODULO_IN => modulo_in_matrix_root,
+      DATA_A_IN => data_a_in_matrix_root,
       DATA_B_IN => data_b_in_matrix_root,
-      DATA_OUT   => data_out_matrix_root
-    );
+      DATA_OUT  => data_out_matrix_root
+      );
 
   -- LOGARITHM
   matrix_logarithm : ntm_matrix_logarithm
@@ -1055,7 +1055,7 @@ begin
       J => J,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -1072,9 +1072,9 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_logarithm,
 
       -- DATA
-      MODULO_IN   => modulo_in_matrix_logarithm,
-      DATA_IN  => data_in_matrix_logarithm,
-      DATA_OUT => data_out_matrix_logarithm
-    );
+      MODULO_IN => modulo_in_matrix_logarithm,
+      DATA_IN   => data_in_matrix_logarithm,
+      DATA_OUT  => data_out_matrix_logarithm
+      );
 
 end ntm_arithmetic_testbench_architecture;

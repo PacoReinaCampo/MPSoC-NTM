@@ -50,7 +50,7 @@ entity ntm_matrix_exponentiator is
     J : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -60,8 +60,8 @@ entity ntm_matrix_exponentiator is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_A_IN_I_ENABLE  : in std_logic;
-    DATA_A_IN_J_ENABLE  : in std_logic;
+    DATA_A_IN_I_ENABLE : in std_logic;
+    DATA_A_IN_J_ENABLE : in std_logic;
     DATA_B_IN_I_ENABLE : in std_logic;
     DATA_B_IN_J_ENABLE : in std_logic;
 
@@ -69,11 +69,11 @@ entity ntm_matrix_exponentiator is
     DATA_OUT_J_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN            : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_A_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT             : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    );
 end entity;
 
 architecture ntm_matrix_exponentiator_architecture of ntm_matrix_exponentiator is
@@ -101,10 +101,10 @@ architecture ntm_matrix_exponentiator_architecture of ntm_matrix_exponentiator i
   signal data_out_enable_vector_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_in_vector_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -118,7 +118,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -128,16 +128,16 @@ begin
       START => start_vector_exponentiator,
       READY => ready_vector_exponentiator,
 
-      DATA_A_IN_ENABLE  => data_a_in_enable_vector_exponentiator,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_exponentiator,
       DATA_B_IN_ENABLE => data_b_in_enable_vector_exponentiator,
 
       DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
 
       -- DATA
-      MODULO_IN            => modulo_in_vector_exponentiator,
-      DATA_A_IN  => data_a_in_vector_exponentiator,
+      MODULO_IN => modulo_in_vector_exponentiator,
+      DATA_A_IN => data_a_in_vector_exponentiator,
       DATA_B_IN => data_b_in_vector_exponentiator,
-      DATA_OUT             => data_out_vector_exponentiator
-    );
+      DATA_OUT  => data_out_vector_exponentiator
+      );
 
 end architecture;

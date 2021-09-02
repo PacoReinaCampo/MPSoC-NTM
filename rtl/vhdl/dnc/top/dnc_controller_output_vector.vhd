@@ -54,7 +54,7 @@ entity dnc_controller_output_vector is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,19 +64,19 @@ entity dnc_controller_output_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    U_IN_Y_ENABLE : in std_logic; -- for y in 0 to Y-1
-    U_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
+    U_IN_Y_ENABLE : in std_logic;       -- for y in 0 to Y-1
+    U_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
 
-    H_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+    H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
-    NU_ENABLE_OUT : out std_logic; -- for y in 0 to Y-1
+    NU_ENABLE_OUT : out std_logic;      -- for y in 0 to Y-1
 
     -- DATA
     U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     NU_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture dnc_controller_output_vector_architecture of dnc_controller_output_vector is
@@ -107,7 +107,7 @@ architecture dnc_controller_output_vector_architecture of dnc_controller_output_
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -127,7 +127,7 @@ begin
       J => J,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -150,6 +150,6 @@ begin
       DATA_A_IN => data_a_in_matrix_product,
       DATA_B_IN => data_b_in_matrix_product,
       DATA_OUT  => data_out_matrix_product
-    );
+      );
 
 end architecture;

@@ -55,7 +55,7 @@ entity dnc_write_content_weighting is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -65,12 +65,12 @@ entity dnc_write_content_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    K_IN_ENABLE : in std_logic; -- for k in 0 to W-1
+    K_IN_ENABLE : in std_logic;         -- for k in 0 to W-1
 
-    M_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
-    M_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+    M_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
+    M_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    C_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
+    C_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- DATA
     K_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -78,7 +78,7 @@ entity dnc_write_content_weighting is
     BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     C_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture dnc_write_content_weighting_architecture of dnc_write_content_weighting is
@@ -113,7 +113,7 @@ architecture dnc_write_content_weighting_architecture of dnc_write_content_weigh
   signal m_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal modulo_in_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal c_out_vector_content_based_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal c_out_vector_content_based_addressing     : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -130,7 +130,7 @@ begin
       J => W,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -152,7 +152,7 @@ begin
       M_IN    => m_in_vector_content_based_addressing,
       BETA_IN => beta_in_vector_content_based_addressing,
 
-      C_OUT  => c_out_vector_content_based_addressing
-    );
+      C_OUT => c_out_vector_content_based_addressing
+      );
 
 end architecture;

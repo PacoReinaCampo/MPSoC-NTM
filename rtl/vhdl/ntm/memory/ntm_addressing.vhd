@@ -54,7 +54,7 @@ entity ntm_addressing is
     L : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,14 +64,14 @@ entity ntm_addressing is
     START : in  std_logic;
     READY : out std_logic;
 
-    K_IN_ENABLE : in std_logic; -- for k in 0 to W-1
-    S_IN_ENABLE : in std_logic; -- for k in 0 to W-1
+    K_IN_ENABLE : in std_logic;         -- for k in 0 to W-1
+    S_IN_ENABLE : in std_logic;         -- for k in 0 to W-1
 
-    M_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
-    M_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+    M_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
+    M_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    W_IN_ENABLE  : in  std_logic; -- for j in 0 to N-1
-    W_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
+    W_IN_ENABLE  : in  std_logic;       -- for j in 0 to N-1
+    W_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- DATA
     K_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -84,7 +84,7 @@ entity ntm_addressing is
 
     W_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture ntm_addressing_architecture of ntm_addressing is
@@ -119,7 +119,7 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal m_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal modulo_in_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal c_out_vector_content_based_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal c_out_vector_content_based_addressing     : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR ADDER
   -- CONTROL
@@ -129,7 +129,7 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -145,10 +145,10 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal data_out_enable_vector_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_in_vector_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR MULTIPLIER
   -- CONTROL
@@ -161,7 +161,7 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -177,7 +177,7 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal data_out_enable_vector_convolution : std_logic;
 
   -- DATA
-  signal modulo_in_vector_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -191,9 +191,9 @@ begin
   -- wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
 
   -- wg(t;j) = g(t)·wc(t;j)·(1 - g(t)·w(t-1;j)
-  
+
   -- w(t;j) = w(t;j)*s(t;k)
-  
+
   -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
 
   -- VECTOR CONTENT BASED ADDRESSING
@@ -203,7 +203,7 @@ begin
       J => W,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -226,13 +226,13 @@ begin
       M_IN    => m_in_vector_content_based_addressing,
 
       C_OUT => c_out_vector_content_based_addressing
-    );
+      );
 
   -- SCALAR ADDER
   scalar_adder : ntm_scalar_adder
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -249,7 +249,7 @@ begin
       DATA_A_IN => data_a_in_scalar_adder,
       DATA_B_IN => data_b_in_scalar_adder,
       DATA_OUT  => data_out_scalar_adder
-    );
+      );
 
   -- VECTOR EXPONENTIATOR
   vector_exponentiator : ntm_vector_exponentiator
@@ -257,7 +257,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -267,17 +267,17 @@ begin
       START => start_vector_exponentiator,
       READY => ready_vector_exponentiator,
 
-      DATA_A_IN_ENABLE  => data_a_in_enable_vector_exponentiator,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_exponentiator,
       DATA_B_IN_ENABLE => data_b_in_enable_vector_exponentiator,
 
       DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
 
       -- DATA
-      MODULO_IN            => modulo_in_vector_exponentiator,
-      DATA_A_IN  => data_a_in_vector_exponentiator,
+      MODULO_IN => modulo_in_vector_exponentiator,
+      DATA_A_IN => data_a_in_vector_exponentiator,
       DATA_B_IN => data_b_in_vector_exponentiator,
-      DATA_OUT             => data_out_vector_exponentiator
-    );
+      DATA_OUT  => data_out_vector_exponentiator
+      );
 
   -- VECTOR MULTIPLIER
   vector_multiplier : ntm_vector_multiplier
@@ -285,7 +285,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -305,7 +305,7 @@ begin
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
       DATA_OUT  => data_out_vector_multiplier
-    );
+      );
 
   -- VECTOR CONVOLUTION
   vector_convolution_function : ntm_vector_convolution_function
@@ -313,7 +313,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -333,6 +333,6 @@ begin
       DATA_A_IN => data_a_in_vector_convolution,
       DATA_B_IN => data_b_in_vector_convolution,
       DATA_OUT  => data_out_vector_convolution
-    );
+      );
 
 end architecture;

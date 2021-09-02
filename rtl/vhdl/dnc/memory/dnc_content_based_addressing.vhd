@@ -50,7 +50,7 @@ entity dnc_content_based_addressing is
     J : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -60,12 +60,12 @@ entity dnc_content_based_addressing is
     START : in  std_logic;
     READY : out std_logic;
 
-    K_IN_ENABLE : in std_logic; -- for j in 0 to J-1
+    K_IN_ENABLE : in std_logic;         -- for j in 0 to J-1
 
-    M_IN_I_ENABLE : in std_logic; -- for i in 0 to I-1
-    M_IN_J_ENABLE : in std_logic; -- for j in 0 to J-1
+    M_IN_I_ENABLE : in std_logic;       -- for i in 0 to I-1
+    M_IN_J_ENABLE : in std_logic;       -- for j in 0 to J-1
 
-    C_OUT_ENABLE : out std_logic; -- for i in 0 to I-1
+    C_OUT_ENABLE : out std_logic;       -- for i in 0 to I-1
 
     -- DATA
     K_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -73,7 +73,7 @@ entity dnc_content_based_addressing is
     M_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     C_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture dnc_content_based_addressing_architecture of dnc_content_based_addressing is
@@ -101,10 +101,10 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
   signal data_out_enable_vector_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_in_vector_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR COSINE SIMILARITY
   -- CONTROL
@@ -117,7 +117,7 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
   signal data_out_enable_vector_cosine : std_logic;
 
   -- DATA
-  signal modulo_in_vector_cosine    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_cosine   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -133,10 +133,10 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
   signal data_out_enable_vector_softmax : std_logic;
 
   -- DATA
-  signal modulo_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -152,7 +152,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -162,17 +162,17 @@ begin
       START => start_vector_exponentiator,
       READY => ready_vector_exponentiator,
 
-      DATA_A_IN_ENABLE  => data_a_in_enable_vector_exponentiator,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_exponentiator,
       DATA_B_IN_ENABLE => data_b_in_enable_vector_exponentiator,
 
       DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
 
       -- DATA
-      MODULO_IN            => modulo_in_vector_exponentiator,
-      DATA_A_IN  => data_a_in_vector_exponentiator,
+      MODULO_IN => modulo_in_vector_exponentiator,
+      DATA_A_IN => data_a_in_vector_exponentiator,
       DATA_B_IN => data_b_in_vector_exponentiator,
-      DATA_OUT             => data_out_vector_exponentiator
-    );
+      DATA_OUT  => data_out_vector_exponentiator
+      );
 
   -- VECTOR COSINE SIMILARITY
   vector_cosine_similarity_function : ntm_vector_cosine_similarity_function
@@ -180,7 +180,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -201,7 +201,7 @@ begin
       DATA_A_IN => data_a_in_vector_cosine,
       DATA_B_IN => data_b_in_vector_cosine,
       DATA_OUT  => data_out_vector_cosine
-    );
+      );
 
   -- VECTOR SOFTMAX
   vector_softmax_function : ntm_vector_softmax_function
@@ -209,7 +209,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -224,10 +224,10 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_softmax,
 
       -- DATA
-      MODULO_IN   => modulo_in_vector_softmax,
-      SIZE_IN  => size_in_vector_softmax,
-      DATA_IN  => data_in_vector_softmax,
-      DATA_OUT => data_out_vector_softmax
-    );
+      MODULO_IN => modulo_in_vector_softmax,
+      SIZE_IN   => size_in_vector_softmax,
+      DATA_IN   => data_in_vector_softmax,
+      DATA_OUT  => data_out_vector_softmax
+      );
 
 end architecture;

@@ -54,7 +54,7 @@ entity dnc_memory_retention_vector is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,19 +64,19 @@ entity dnc_memory_retention_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    F_IN_ENABLE : in std_logic; -- for i in 0 to R-1
+    F_IN_ENABLE : in std_logic;         -- for i in 0 to R-1
 
-    W_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
-    W_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
+    W_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
+    W_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
 
-    PSI_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
+    PSI_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     -- DATA
     F_IN : in std_logic;
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     PSI_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture dnc_memory_retention_vector_architecture of dnc_memory_retention_vector is
@@ -104,7 +104,7 @@ architecture dnc_memory_retention_vector_architecture of dnc_memory_retention_ve
   signal data_out_enable_vector_multiplication : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplication    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -122,7 +122,7 @@ architecture dnc_memory_retention_vector_architecture of dnc_memory_retention_ve
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -138,7 +138,7 @@ architecture dnc_memory_retention_vector_architecture of dnc_memory_retention_ve
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -157,7 +157,7 @@ begin
       I => N,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -177,7 +177,7 @@ begin
       DATA_A_IN => data_a_in_vector_multiplication,
       DATA_B_IN => data_b_in_vector_multiplication,
       DATA_OUT  => data_out_vector_multiplication
-    );
+      );
 
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder
@@ -185,7 +185,7 @@ begin
       I => N,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -207,7 +207,7 @@ begin
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
       DATA_OUT  => data_out_vector_adder
-    );
+      );
 
   -- VECTOR MULTIPLIER
   vector_multiplier : ntm_vector_multiplier
@@ -215,7 +215,7 @@ begin
       I => N,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -235,6 +235,6 @@ begin
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
       DATA_OUT  => data_out_vector_multiplier
-    );
+      );
 
 end architecture;

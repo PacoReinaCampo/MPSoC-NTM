@@ -49,7 +49,7 @@ entity ntm_vector_softmax_function is
     I : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,11 +64,11 @@ entity ntm_vector_softmax_function is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    );
 end entity;
 
 architecture ntm_vector_softmax_function_architecture of ntm_vector_softmax_function is
@@ -91,10 +91,10 @@ architecture ntm_vector_softmax_function_architecture of ntm_vector_softmax_func
   signal ready_scalar_softmax : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_scalar_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_scalar_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -106,7 +106,7 @@ begin
   scalar_softmax_function : ntm_scalar_softmax_function
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -117,10 +117,10 @@ begin
       READY => ready_scalar_softmax,
 
       -- DATA
-      MODULO_IN   => modulo_in_scalar_softmax,
-      SIZE_IN  => size_in_scalar_softmax,
-      DATA_IN  => data_in_scalar_softmax,
-      DATA_OUT => data_out_scalar_softmax
-    );
+      MODULO_IN => modulo_in_scalar_softmax,
+      SIZE_IN   => size_in_scalar_softmax,
+      DATA_IN   => data_in_scalar_softmax,
+      DATA_OUT  => data_out_scalar_softmax
+      );
 
 end architecture;

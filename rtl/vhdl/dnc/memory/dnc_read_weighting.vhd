@@ -54,7 +54,7 @@ entity dnc_read_weighting is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,20 +64,20 @@ entity dnc_read_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    PI_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
-    PI_IN_P_ENABLE : in std_logic; -- for p in 0 to 2
+    PI_IN_I_ENABLE : in std_logic;      -- for i in 0 to R-1
+    PI_IN_P_ENABLE : in std_logic;      -- for p in 0 to 2
 
-    B_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
-    B_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
+    B_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
+    B_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
 
-    C_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
-    C_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
+    C_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
+    C_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
 
-    F_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
-    F_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
+    F_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
+    F_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
 
-    W_OUT_I_ENABLE : out std_logic; -- for i in 0 to R-1
-    W_OUT_J_ENABLE : out std_logic; -- for j in 0 to N-1
+    W_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
+    W_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     -- DATA
     PI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -87,7 +87,7 @@ entity dnc_read_weighting is
     F_IN : in std_logic;
 
     W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture dnc_read_weighting_architecture of dnc_read_weighting is
@@ -117,7 +117,7 @@ architecture dnc_read_weighting_architecture of dnc_read_weighting is
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -133,7 +133,7 @@ architecture dnc_read_weighting_architecture of dnc_read_weighting is
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -143,7 +143,7 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
-  
+
   -- w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
 
   -- VECTOR ADDER
@@ -152,7 +152,7 @@ begin
       I => N,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -174,7 +174,7 @@ begin
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
       DATA_OUT  => data_out_vector_adder
-    );
+      );
 
   -- VECTOR MULTIPLIER
   vector_multiplier : ntm_vector_multiplier
@@ -182,7 +182,7 @@ begin
       I => N,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -202,6 +202,6 @@ begin
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
       DATA_OUT  => data_out_vector_multiplier
-    );
+      );
 
 end architecture;

@@ -54,7 +54,7 @@ entity dnc_write_weighting is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,10 +64,10 @@ entity dnc_write_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    A_IN_ENABLE : in std_logic; -- for j in 0 to N-1
-    C_IN_ENABLE : in std_logic; -- for j in 0 to N-1
+    A_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
+    C_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
 
-    W_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
+    W_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- DATA
     A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -77,7 +77,7 @@ entity dnc_write_weighting is
     GW_IN : in std_logic;
 
     W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture dnc_write_weighting_architecture of dnc_write_weighting is
@@ -142,7 +142,7 @@ begin
       I => N,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -164,7 +164,7 @@ begin
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
       DATA_OUT  => data_out_vector_adder
-    );
+      );
 
   -- VECTOR MULTIPLIER
   vector_multiplier : ntm_vector_multiplier
@@ -172,7 +172,7 @@ begin
       I => N,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -192,6 +192,6 @@ begin
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
       DATA_OUT  => data_out_vector_multiplier
-    );
+      );
 
 end architecture;

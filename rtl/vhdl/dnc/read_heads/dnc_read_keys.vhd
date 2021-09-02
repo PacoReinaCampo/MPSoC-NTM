@@ -54,7 +54,7 @@ entity dnc_read_keys is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,17 +64,17 @@ entity dnc_read_keys is
     START : in  std_logic;
     READY : out std_logic;
 
-    K_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
-    K_IN_J_ENABLE : in std_logic; -- for k in 0 to W-1
+    K_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
+    K_IN_J_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    K_OUT_I_ENABLE : out std_logic; -- for i in 0 to R-1
-    K_OUT_J_ENABLE : out std_logic; -- for k in 0 to W-1
+    K_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
+    K_OUT_J_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     -- DATA
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture dnc_read_keys_architecture of dnc_read_keys is

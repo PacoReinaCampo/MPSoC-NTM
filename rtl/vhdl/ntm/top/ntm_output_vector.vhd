@@ -55,7 +55,7 @@ entity ntm_output_vector is
     L : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -65,16 +65,16 @@ entity ntm_output_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    K_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
-    K_IN_Y_ENABLE : in std_logic; -- for y in 0 to Y-1
-    K_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+    K_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
+    K_IN_Y_ENABLE : in std_logic;       -- for y in 0 to Y-1
+    K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    R_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
-    R_IN_K_ENABLE : in std_logic; -- for j in 0 to W-1
+    R_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
+    R_IN_K_ENABLE : in std_logic;       -- for j in 0 to W-1
 
-    NU_IN_ENABLE : in std_logic; -- for y in 0 to Y-1
+    NU_IN_ENABLE : in std_logic;        -- for y in 0 to Y-1
 
-    Y_OUT_ENABLE : in std_logic; -- for y in 0 to Y-1
+    Y_OUT_ENABLE : in std_logic;        -- for y in 0 to Y-1
 
     -- DATA
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -83,7 +83,7 @@ entity ntm_output_vector is
     NU_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture ntm_output_vector_architecture of ntm_output_vector is
@@ -113,7 +113,7 @@ architecture ntm_output_vector_architecture of ntm_output_vector is
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -132,7 +132,7 @@ architecture ntm_output_vector_architecture of ntm_output_vector is
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -151,7 +151,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -173,7 +173,7 @@ begin
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
       DATA_OUT  => data_out_vector_adder
-    );
+      );
 
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
@@ -182,7 +182,7 @@ begin
       J => J,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -205,6 +205,6 @@ begin
       DATA_A_IN => data_a_in_matrix_product,
       DATA_B_IN => data_b_in_matrix_product,
       DATA_OUT  => data_out_matrix_product
-    );
+      );
 
 end architecture;

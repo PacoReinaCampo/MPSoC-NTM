@@ -54,7 +54,7 @@ entity dnc_write_key is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,15 +64,15 @@ entity dnc_write_key is
     START : in  std_logic;
     READY : out std_logic;
 
-    K_IN_ENABLE : in std_logic; -- for k in 0 to W-1
+    K_IN_ENABLE : in std_logic;         -- for k in 0 to W-1
 
-    K_OUT_ENABLE : out std_logic; -- for k in 0 to W-1
+    K_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
 
     -- DATA
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture dnc_write_key_architecture of dnc_write_key is

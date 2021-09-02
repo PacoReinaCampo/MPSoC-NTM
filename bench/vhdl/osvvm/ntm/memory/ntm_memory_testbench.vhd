@@ -77,10 +77,10 @@ architecture ntm_memory_testbench_architecture of ntm_memory_testbench is
   signal s_in_addressing     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal gamma_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal m_in_addressing   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal w_in_addressing   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_out_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_out_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -94,7 +94,7 @@ begin
       N => N,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -124,6 +124,6 @@ begin
 
       W_IN  => w_in_addressing,
       W_OUT => w_out_addressing
-    );
+      );
 
 end ntm_memory_testbench_architecture;

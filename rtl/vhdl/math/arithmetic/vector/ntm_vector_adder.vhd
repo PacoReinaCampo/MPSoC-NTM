@@ -49,7 +49,7 @@ entity ntm_vector_adder is
     I : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -71,7 +71,7 @@ entity ntm_vector_adder is
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture ntm_vector_adder_architecture of ntm_vector_adder is
@@ -81,10 +81,10 @@ architecture ntm_vector_adder_architecture of ntm_vector_adder is
   -----------------------------------------------------------------------
 
   type adder_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
-    INPUT_STATE,    -- STEP 1
-    ENDER_STATE     -- STEP 2
-  );
+    STARTER_STATE,                      -- STEP 0
+    INPUT_STATE,                        -- STEP 1
+    ENDER_STATE                         -- STEP 2
+    );
 
   -----------------------------------------------------------------------
   -- Constants
@@ -145,7 +145,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case adder_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -154,7 +154,7 @@ begin
             adder_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_STATE =>  -- STEP 1
+        when INPUT_STATE =>             -- STEP 1
 
           if (DATA_A_IN_ENABLE = '1') then
             -- Data Inputs
@@ -163,7 +163,7 @@ begin
             -- Control Internal
             data_a_in_adder_int <= '1';
           end if;
-          
+
           if (DATA_B_IN_ENABLE = '1') then
             -- Data Inputs
             data_b_in_scalar_adder <= DATA_B_IN;
@@ -188,7 +188,7 @@ begin
           -- Control Outputs
           DATA_OUT_ENABLE <= '0';
 
-        when ENDER_STATE =>  -- STEP 2
+        when ENDER_STATE =>             -- STEP 2
 
           if (ready_scalar_adder = '1') then
             if (index_loop = I-1) then
@@ -229,7 +229,7 @@ begin
   scalar_adder : ntm_scalar_adder
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -246,6 +246,6 @@ begin
       DATA_A_IN => data_a_in_scalar_adder,
       DATA_B_IN => data_b_in_scalar_adder,
       DATA_OUT  => data_out_scalar_adder
-    );
+      );
 
 end architecture;

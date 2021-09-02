@@ -56,7 +56,7 @@ entity dnc_write_interface_vector is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -67,34 +67,34 @@ entity dnc_write_interface_vector is
     READY : out std_logic;
 
     -- Write Key
-    WK_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
-    WK_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+    WK_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+    WK_IN_K_ENABLE : in std_logic;      -- for k in 0 to W-1
 
-    K_OUT_ENABLE : out std_logic; -- for k in 0 to W-1
+    K_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
 
     -- Write Strength
-    WBETA_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+    WBETA_IN_ENABLE : in std_logic;     -- for l in 0 to L-1
 
     -- Erase Vector
-    WE_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
-    WE_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+    WE_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+    WE_IN_K_ENABLE : in std_logic;      -- for k in 0 to W-1
 
-    E_OUT_ENABLE : out std_logic; -- for k in 0 to W-1
+    E_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
 
     -- Write Vector
-    WV_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
-    WV_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+    WV_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+    WV_IN_K_ENABLE : in std_logic;      -- for k in 0 to W-1
 
-    V_OUT_ENABLE : out std_logic; -- for k in 0 to W-1
+    V_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
 
     -- Allocation Gate
-    WGA_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+    WGA_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
     -- Write Gate
-    WGW_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+    WGW_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
     -- Hidden State
-    H_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+    H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
     -- DATA
     WK_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -112,7 +112,7 @@ entity dnc_write_interface_vector is
     V_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
     GA_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0);
     GW_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture dnc_write_interface_vector_architecture of dnc_write_interface_vector is
@@ -143,7 +143,7 @@ architecture dnc_write_interface_vector_architecture of dnc_write_interface_vect
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -163,7 +163,7 @@ begin
       J => J,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -186,6 +186,6 @@ begin
       DATA_A_IN => data_a_in_matrix_product,
       DATA_B_IN => data_b_in_matrix_product,
       DATA_OUT  => data_out_matrix_product
-    );
+      );
 
 end architecture;

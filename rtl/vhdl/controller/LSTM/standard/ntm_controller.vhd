@@ -55,7 +55,7 @@ entity ntm_controller is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -65,19 +65,19 @@ entity ntm_controller is
     START : in  std_logic;
     READY : out std_logic;
 
-    X_IN_ENABLE : in std_logic; -- for x in 0 to X-1
+    X_IN_ENABLE : in std_logic;         -- for x in 0 to X-1
 
-    R_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1 (read heads flow)
-    R_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+    R_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
+    R_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    H_OUT_ENABLE : in std_logic; -- for l in 0 to L-1
+    H_OUT_ENABLE : in std_logic;        -- for l in 0 to L-1
 
     -- DATA
-    X_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
-    R_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
+    X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     H_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture ntm_controller_architecture of ntm_controller is
@@ -279,7 +279,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -319,7 +319,7 @@ begin
       B_IN => b_in_input_gate_vector,
 
       I_OUT => i_out_input_gate_vector
-    );
+      );
 
   -- OUTPUT GATE VECTOR
   output_gate_vector : ntm_output_gate_vector
@@ -332,7 +332,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -372,7 +372,7 @@ begin
       B_IN => b_in_output_gate_vector,
 
       O_OUT => o_out_output_gate_vector
-    );
+      );
 
   -- FORGET GATE VECTOR
   forget_gate_vector : ntm_forget_gate_vector
@@ -385,7 +385,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -425,7 +425,7 @@ begin
       B_IN => b_in_forget_gate_vector,
 
       F_OUT => f_out_forget_gate_vector
-    );
+      );
 
   -- STATE GATE VECTOR
   state_gate_vector : ntm_state_gate_vector
@@ -438,7 +438,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -486,7 +486,7 @@ begin
       B_IN => b_in_state_gate_vector,
 
       S_OUT => s_out_state_gate_vector
-    );
+      );
 
   -- HIDDEN GATE VECTOR
   hidden_gate_vector : ntm_hidden_gate_vector
@@ -499,7 +499,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -519,6 +519,6 @@ begin
       O_IN => o_in_hidden_gate_vector,
 
       H_OUT => h_out_hidden_gate_vector
-    );
+      );
 
 end architecture;

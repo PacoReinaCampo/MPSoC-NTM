@@ -54,7 +54,7 @@ entity dnc_write_vector is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,15 +64,15 @@ entity dnc_write_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    V_IN_ENABLE : in std_logic; -- for k in 0 to W-1
+    V_IN_ENABLE : in std_logic;         -- for k in 0 to W-1
 
-    V_OUT_ENABLE : out std_logic; -- for k in 0 to W-1
+    V_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
 
     -- DATA
     V_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    V_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    V_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    );
 end entity;
 
 architecture dnc_write_vector_architecture of dnc_write_vector is

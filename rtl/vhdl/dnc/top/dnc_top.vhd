@@ -56,7 +56,7 @@ entity dnc_top is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -66,15 +66,15 @@ entity dnc_top is
     START : in  std_logic;
     READY : out std_logic;
 
-    X_IN_ENABLE : in std_logic; -- for x in 0 to X-1
+    X_IN_ENABLE : in std_logic;         -- for x in 0 to X-1
 
-    Y_OUT_ENABLE : out std_logic; -- for y in 0 to Y-1
+    Y_OUT_ENABLE : out std_logic;       -- for y in 0 to Y-1
 
     -- DATA
     X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture dnc_top_architecture of dnc_top is
@@ -167,8 +167,8 @@ architecture dnc_top_architecture of dnc_top is
   signal ready_free_gates : std_logic;
 
   -- DATA
-  signal f_in_free_gates   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal f_out_free_gates  : std_logic;
+  signal f_in_free_gates  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal f_out_free_gates : std_logic;
 
   -- READ KEYS
   -- CONTROL
@@ -182,8 +182,8 @@ architecture dnc_top_architecture of dnc_top is
   signal ready_read_keys : std_logic;
 
   -- DATA
-  signal k_in_read_keys   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_out_read_keys  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_in_read_keys  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_read_keys : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- READ MODES
   -- CONTROL
@@ -248,7 +248,7 @@ architecture dnc_top_architecture of dnc_top is
   -- Hidden State
   signal h_in_enable_read_interface_vector : std_logic;
 
-    -- DATA
+  -- DATA
   signal wk_in_read_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal wbeta_in_read_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal wf_in_read_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -328,8 +328,8 @@ architecture dnc_top_architecture of dnc_top is
   signal v_out_enable_write_vector : std_logic;
 
   -- DATA
-  signal v_in_write_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal v_out_write_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal v_in_write_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal v_out_write_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE INTERFACE VECTOR
   -- CONTROL
@@ -405,7 +405,7 @@ architecture dnc_top_architecture of dnc_top is
   signal e_write_in_k_enable_addressing : std_logic;
   signal v_write_in_k_enable_addressing : std_logic;
 
-    -- DATA
+  -- DATA
   signal k_read_in_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_read_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
   signal f_read_in_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -440,7 +440,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -462,7 +462,7 @@ begin
       R_IN => r_in_controller,
 
       H_OUT => h_out_controller
-    );
+      );
 
   -- CONTROLLER OUTPUT VECTOR
   controller_output_vector : dnc_controller_output_vector
@@ -475,7 +475,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -497,7 +497,7 @@ begin
       H_IN => h_in_controller_output_vector,
 
       NU_OUT => nu_out_controller_output_vector
-    );
+      );
 
   -- OUTPUT VECTOR
   output_vector_i : dnc_output_vector
@@ -510,7 +510,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -537,8 +537,8 @@ begin
 
       NU_IN => nu_in_output_vector,
 
-      Y_OUT  => y_out_output_vector
-    );
+      Y_OUT => y_out_output_vector
+      );
 
   -----------------------------------------------------------------------
   -- READ HEADS
@@ -555,7 +555,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -573,7 +573,7 @@ begin
       F_IN => f_in_free_gates,
 
       F_OUT => f_out_free_gates
-    );
+      );
 
   -- READ KEYS
   read_keys : dnc_read_keys
@@ -586,7 +586,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -596,8 +596,8 @@ begin
       START => start_read_keys,
       READY => ready_read_keys,
 
-      K_IN_I_ENABLE  => k_in_i_enable_read_keys,
-      K_IN_J_ENABLE  => k_in_j_enable_read_keys,
+      K_IN_I_ENABLE => k_in_i_enable_read_keys,
+      K_IN_J_ENABLE => k_in_j_enable_read_keys,
 
       K_OUT_I_ENABLE => k_out_i_enable_read_keys,
       K_OUT_J_ENABLE => k_out_j_enable_read_keys,
@@ -606,7 +606,7 @@ begin
       K_IN => k_in_read_keys,
 
       K_OUT => k_out_read_keys
-    );
+      );
 
   -- READ MODES
   read_modes : dnc_read_modes
@@ -619,7 +619,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -629,8 +629,8 @@ begin
       START => start_read_modes,
       READY => ready_read_modes,
 
-      PI_IN_I_ENABLE  => pi_in_i_enable_read_modes,
-      PI_IN_P_ENABLE  => pi_in_p_enable_read_modes,
+      PI_IN_I_ENABLE => pi_in_i_enable_read_modes,
+      PI_IN_P_ENABLE => pi_in_p_enable_read_modes,
 
       PI_OUT_I_ENABLE => pi_out_i_enable_read_modes,
       PI_OUT_P_ENABLE => pi_out_p_enable_read_modes,
@@ -639,7 +639,7 @@ begin
       PI_IN => pi_in_read_modes,
 
       PI_OUT => pi_out_read_modes
-    );
+      );
 
   -- READ STRENGTHS
   read_strengths : dnc_read_strengths
@@ -652,7 +652,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -669,7 +669,7 @@ begin
       BETA_IN => beta_in_read_strengths,
 
       BETA_OUT => beta_out_read_strengths
-    );
+      );
 
   -- READ INTERFACE VECTOR
   read_interface_vector : dnc_read_interface_vector
@@ -681,7 +681,7 @@ begin
       L => L,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -734,7 +734,7 @@ begin
       BETA_OUT => beta_out_read_interface_vector,
       F_OUT    => f_out_read_interface_vector,
       PI_OUT   => pi_out_read_interface_vector
-    );
+      );
 
   -----------------------------------------------------------------------
   -- WRITE HEADS
@@ -751,7 +751,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -765,7 +765,7 @@ begin
       GA_IN => ga_in_allocation_gate,
 
       GA_OUT => ga_out_allocation_gate
-    );
+      );
 
   -- ERASE VECTOR
   erase_vector : dnc_erase_vector
@@ -778,7 +778,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -796,7 +796,7 @@ begin
       E_IN => e_in_erase_vector,
 
       E_OUT => e_out_erase_vector
-    );
+      );
 
   -- WRITE GATE
   write_gate : dnc_write_gate
@@ -809,7 +809,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -823,7 +823,7 @@ begin
       GW_IN => gw_in_write_gate,
 
       GW_OUT => gw_out_write_gate
-    );
+      );
 
   -- WRITE KEY
   write_key : dnc_write_key
@@ -836,7 +836,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -854,7 +854,7 @@ begin
       K_IN => k_in_write_key,
 
       K_OUT => k_out_write_key
-    );
+      );
 
   -- WRITE STRENGTH
   write_strength : dnc_write_strength
@@ -867,7 +867,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -881,7 +881,7 @@ begin
       BETA_IN => beta_in_write_strength,
 
       BETA_OUT => beta_out_write_strength
-    );
+      );
 
   -- WRITE VECTOR
   write_vector : dnc_write_vector
@@ -894,7 +894,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -912,7 +912,7 @@ begin
       V_IN => v_in_write_vector,
 
       V_OUT => v_out_write_vector
-    );
+      );
 
   -- WRITE INTERFACE VECTOR
   write_interface_vector : dnc_write_interface_vector
@@ -925,7 +925,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -981,7 +981,7 @@ begin
       V_OUT    => v_out_write_interface_vector,
       GA_OUT   => ga_out_write_interface_vector,
       GW_OUT   => gw_out_write_interface_vector
-    );
+      );
 
   -----------------------------------------------------------------------
   -- MEMORY
@@ -996,7 +996,7 @@ begin
       L => L,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -1033,7 +1033,7 @@ begin
       GA_WRITE_IN   => ga_write_in_addressing,
       GW_WRITE_IN   => gw_write_in_addressing,
 
-      R_OUT  => r_out_addressing
-    );
+      R_OUT => r_out_addressing
+      );
 
 end architecture;

@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 entity ntm_scalar_logistic_function is
   generic (
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -58,10 +58,10 @@ entity ntm_scalar_logistic_function is
     READY : out std_logic;
 
     -- DATA
-    MODULO_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    );
 end entity;
 
 architecture ntm_scalar_logistic_function_architecture of ntm_scalar_logistic_function is
@@ -86,7 +86,7 @@ architecture ntm_scalar_logistic_function_architecture of ntm_scalar_logistic_fu
   signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -97,9 +97,9 @@ architecture ntm_scalar_logistic_function_architecture of ntm_scalar_logistic_fu
   signal ready_scalar_inverter : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -110,7 +110,7 @@ begin
   ntm_scalar_adder_i : ntm_scalar_adder
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -127,12 +127,12 @@ begin
       DATA_A_IN => data_a_in_scalar_adder,
       DATA_B_IN => data_b_in_scalar_adder,
       DATA_OUT  => data_out_scalar_adder
-    );
+      );
 
   ntm_scalar_inverter_i : ntm_scalar_inverter
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -143,9 +143,9 @@ begin
       READY => ready_scalar_inverter,
 
       -- DATA
-      MODULO_IN   => modulo_in_scalar_inverter,
-      DATA_IN  => data_in_scalar_inverter,
-      DATA_OUT => data_out_scalar_inverter
-    );
+      MODULO_IN => modulo_in_scalar_inverter,
+      DATA_IN   => data_in_scalar_inverter,
+      DATA_OUT  => data_out_scalar_inverter
+      );
 
 end architecture;

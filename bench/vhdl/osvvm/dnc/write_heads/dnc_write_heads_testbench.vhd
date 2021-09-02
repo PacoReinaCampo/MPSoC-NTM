@@ -75,8 +75,8 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
   signal e_out_enable_erase_vector : std_logic;
 
   -- DATA
-  signal e_in_erase_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal e_out_erase_vector  : std_logic;
+  signal e_in_erase_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal e_out_erase_vector : std_logic;
 
   -- WRITE GATE
   -- CONTROL
@@ -97,8 +97,8 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
   signal k_out_enable_write_key : std_logic;
 
   -- DATA
-  signal k_in_write_key   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_out_write_key  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_in_write_key  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_write_key : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE STRENGHT
   -- CONTROL
@@ -119,8 +119,8 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
   signal v_out_enable_write_vector : std_logic;
 
   -- DATA
-  signal v_in_write_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal v_out_write_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal v_in_write_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal v_out_write_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -139,7 +139,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -153,7 +153,7 @@ begin
       GA_IN => ga_in_allocation_gate,
 
       GA_OUT => ga_out_allocation_gate
-    );
+      );
 
   -- ERASE VECTOR
   erase_vector : dnc_erase_vector
@@ -166,7 +166,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -184,7 +184,7 @@ begin
       E_IN => e_in_erase_vector,
 
       E_OUT => e_out_erase_vector
-    );
+      );
 
   -- WRITE GATE
   write_gate : dnc_write_gate
@@ -197,7 +197,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -211,7 +211,7 @@ begin
       GW_IN => gw_in_write_gate,
 
       GW_OUT => gw_out_write_gate
-    );
+      );
 
   -- WRITE KEY
   write_key : dnc_write_key
@@ -224,7 +224,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -242,7 +242,7 @@ begin
       K_IN => k_in_write_key,
 
       K_OUT => k_out_write_key
-    );
+      );
 
   -- WRITE STRENGTH
   write_strength : dnc_write_strength
@@ -255,7 +255,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -269,7 +269,7 @@ begin
       BETA_IN => beta_in_write_strength,
 
       BETA_OUT => beta_out_write_strength
-    );
+      );
 
   -- WRITE VECTOR
   write_vector : dnc_write_vector
@@ -282,7 +282,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -300,6 +300,6 @@ begin
       V_IN => v_in_write_vector,
 
       V_OUT => v_out_write_vector
-    );
+      );
 
 end dnc_write_heads_testbench_architecture;

@@ -54,7 +54,7 @@ entity dnc_read_modes is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,17 +64,17 @@ entity dnc_read_modes is
     START : in  std_logic;
     READY : out std_logic;
 
-    PI_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
-    PI_IN_P_ENABLE : in std_logic; -- for p in 0 to 2
+    PI_IN_I_ENABLE : in std_logic;      -- for i in 0 to R-1
+    PI_IN_P_ENABLE : in std_logic;      -- for p in 0 to 2
 
-    PI_OUT_I_ENABLE : out std_logic; -- for i in 0 to R-1
-    PI_OUT_P_ENABLE : out std_logic; -- for p in 0 to 2
+    PI_OUT_I_ENABLE : out std_logic;    -- for i in 0 to R-1
+    PI_OUT_P_ENABLE : out std_logic;    -- for p in 0 to 2
 
     -- DATA
     PI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     PI_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture dnc_read_modes_architecture of dnc_read_modes is
@@ -105,10 +105,10 @@ architecture dnc_read_modes_architecture of dnc_read_modes is
   signal data_out_j_enable_matrix_softmax : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_matrix_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_matrix_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -124,7 +124,7 @@ begin
       J => 3,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -143,10 +143,10 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_softmax,
 
       -- DATA
-      MODULO_IN   => modulo_in_matrix_softmax,
-      SIZE_IN  => size_in_matrix_softmax,
-      DATA_IN  => data_in_matrix_softmax,
-      DATA_OUT => data_out_matrix_softmax
-    );
+      MODULO_IN => modulo_in_matrix_softmax,
+      SIZE_IN   => size_in_matrix_softmax,
+      DATA_IN   => data_in_matrix_softmax,
+      DATA_OUT  => data_out_matrix_softmax
+      );
 
 end architecture;

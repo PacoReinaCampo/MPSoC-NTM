@@ -54,7 +54,7 @@ entity ntm_forget_gate_vector is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,22 +64,22 @@ entity ntm_forget_gate_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    W_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
-    W_IN_X_ENABLE : in std_logic; -- for x in 0 to X-1
-    X_IN_ENABLE   : in std_logic; -- for x in 0 to X-1
+    W_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+    W_IN_X_ENABLE : in std_logic;       -- for x in 0 to X-1
+    X_IN_ENABLE   : in std_logic;       -- for x in 0 to X-1
 
-    K_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1 (read heads flow)
-    K_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
-    K_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
-    R_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1 (read heads flow)
-    R_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+    K_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
+    K_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+    K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
+    R_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
+    R_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    U_IN_ENABLE : in std_logic; -- for l in 0 to L-1 (square matrix)
-    H_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+    U_IN_ENABLE : in std_logic;         -- for l in 0 to L-1 (square matrix)
+    H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
-    B_IN_ENABLE : in std_logic; -- for l in 0 to L-1
+    B_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
-    F_OUT_ENABLE : out std_logic; -- for l in 0 to L-1
+    F_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -94,7 +94,7 @@ entity ntm_forget_gate_vector is
     B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     F_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture ntm_forget_gate_vector_architecture of ntm_forget_gate_vector is
@@ -124,13 +124,13 @@ architecture ntm_forget_gate_vector_architecture of ntm_forget_gate_vector is
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- DATA
-  signal modulo_in_matrix_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -149,7 +149,7 @@ architecture ntm_forget_gate_vector_architecture of ntm_forget_gate_vector is
   signal data_out_j_enable_matrix_convolution : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -164,9 +164,9 @@ architecture ntm_forget_gate_vector_architecture of ntm_forget_gate_vector is
   signal data_out_enable_vector_logistic : std_logic;
 
   -- DATA
-  signal modulo_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -182,7 +182,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -204,7 +204,7 @@ begin
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
       DATA_OUT  => data_out_vector_adder
-    );
+      );
 
   -- MATRIX CONVOLUTION
   matrix_convolution_function : ntm_matrix_convolution_function
@@ -213,7 +213,7 @@ begin
       J => J,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -236,7 +236,7 @@ begin
       DATA_A_IN => data_a_in_matrix_convolution,
       DATA_B_IN => data_b_in_matrix_convolution,
       DATA_OUT  => data_out_matrix_convolution
-    );
+      );
 
   -- VECTOR LOGISTIC
   vector_logistic_function : ntm_vector_logistic_function
@@ -244,7 +244,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -259,9 +259,9 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_logistic,
 
       -- DATA
-      MODULO_IN   => modulo_in_vector_logistic,
-      DATA_IN  => data_in_vector_logistic,
-      DATA_OUT => data_out_vector_logistic
-    );
+      MODULO_IN => modulo_in_vector_logistic,
+      DATA_IN   => data_in_vector_logistic,
+      DATA_OUT  => data_out_vector_logistic
+      );
 
 end architecture;

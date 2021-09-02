@@ -54,7 +54,7 @@ entity dnc_read_strengths is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,15 +64,15 @@ entity dnc_read_strengths is
     START : in  std_logic;
     READY : out std_logic;
 
-    BETA_IN_ENABLE : in std_logic; -- for i in 0 to R-1
+    BETA_IN_ENABLE : in std_logic;      -- for i in 0 to R-1
 
-    BETA_OUT_ENABLE : out std_logic; -- for i in 0 to R-1
+    BETA_OUT_ENABLE : out std_logic;    -- for i in 0 to R-1
 
     -- DATA
     BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture dnc_read_strengths_architecture of dnc_read_strengths is
@@ -95,9 +95,9 @@ architecture dnc_read_strengths_architecture of dnc_read_strengths is
   signal ready_scalar_oneplus : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -110,7 +110,7 @@ begin
   ntm_scalar_oneplus_function_i : ntm_scalar_oneplus_function
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -121,9 +121,9 @@ begin
       READY => ready_scalar_oneplus,
 
       -- DATA
-      MODULO_IN   => modulo_in_scalar_oneplus,
-      DATA_IN  => data_in_scalar_oneplus,
-      DATA_OUT => data_out_scalar_oneplus
-    );
+      MODULO_IN => modulo_in_scalar_oneplus,
+      DATA_IN   => data_in_scalar_oneplus,
+      DATA_OUT  => data_out_scalar_oneplus
+      );
 
 end architecture;

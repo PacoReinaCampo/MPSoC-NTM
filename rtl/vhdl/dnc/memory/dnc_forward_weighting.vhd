@@ -54,7 +54,7 @@ entity dnc_forward_weighting is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,13 +64,13 @@ entity dnc_forward_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    L_IN_ENABLE : in std_logic; -- for j in 0 to N-1 (square matrix)
+    L_IN_ENABLE : in std_logic;         -- for j in 0 to N-1 (square matrix)
 
-    W_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1 (read heads flow)
-    W_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
+    W_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
+    W_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
 
-    F_OUT_I_ENABLE : out std_logic; -- for i in 0 to R-1 (read heads flow)
-    F_OUT_J_ENABLE : out std_logic; -- for j in 0 to N-1
+    F_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
+    F_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     -- DATA
     L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -78,7 +78,7 @@ entity dnc_forward_weighting is
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     F_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture dnc_forward_weighting_architecture of dnc_forward_weighting is
@@ -109,7 +109,7 @@ architecture dnc_forward_weighting_architecture of dnc_forward_weighting is
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -129,7 +129,7 @@ begin
       J => N,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -152,6 +152,6 @@ begin
       DATA_A_IN => data_a_in_matrix_product,
       DATA_B_IN => data_b_in_matrix_product,
       DATA_OUT  => data_out_matrix_product
-    );
+      );
 
 end architecture;

@@ -55,7 +55,7 @@ entity ntm_controller is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -65,19 +65,19 @@ entity ntm_controller is
     START : in  std_logic;
     READY : out std_logic;
 
-    X_IN_ENABLE : in std_logic; -- for x in 0 to X-1
+    X_IN_ENABLE : in std_logic;         -- for x in 0 to X-1
 
-    R_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1 (read heads flow)
-    R_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+    R_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
+    R_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    H_OUT_ENABLE : in std_logic; -- for l in 0 to L-1
+    H_OUT_ENABLE : in std_logic;        -- for l in 0 to L-1
 
     -- DATA
-    X_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
-    R_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
+    X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     H_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture ntm_controller_architecture of ntm_controller is
@@ -107,7 +107,7 @@ architecture ntm_controller_architecture of ntm_controller is
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -126,7 +126,7 @@ architecture ntm_controller_architecture of ntm_controller is
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -141,9 +141,9 @@ architecture ntm_controller_architecture of ntm_controller is
   signal data_out_enable_vector_logistic : std_logic;
 
   -- DATA
-  signal modulo_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -159,7 +159,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -181,7 +181,7 @@ begin
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
       DATA_OUT  => data_out_vector_adder
-    );
+      );
 
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
@@ -190,7 +190,7 @@ begin
       J => J,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -213,7 +213,7 @@ begin
       DATA_A_IN => data_a_in_matrix_product,
       DATA_B_IN => data_b_in_matrix_product,
       DATA_OUT  => data_out_matrix_product
-    );
+      );
 
   -- VECTOR LOGISTIC
   vector_logistic_function : ntm_vector_logistic_function
@@ -221,7 +221,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -236,9 +236,9 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_logistic,
 
       -- DATA
-      MODULO_IN   => modulo_in_vector_logistic,
-      DATA_IN  => data_in_vector_logistic,
-      DATA_OUT => data_out_vector_logistic
-    );
+      MODULO_IN => modulo_in_vector_logistic,
+      DATA_IN   => data_in_vector_logistic,
+      DATA_OUT  => data_out_vector_logistic
+      );
 
 end architecture;

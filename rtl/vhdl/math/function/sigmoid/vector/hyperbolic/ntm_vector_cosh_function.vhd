@@ -49,7 +49,7 @@ entity ntm_vector_cosh_function is
     I : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,10 +64,10 @@ entity ntm_vector_cosh_function is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    );
 end entity;
 
 architecture ntm_vector_cosh_function_architecture of ntm_vector_cosh_function is
@@ -90,9 +90,9 @@ architecture ntm_vector_cosh_function_architecture of ntm_vector_cosh_function i
   signal ready_scalar_cosh : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_cosh : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_cosh : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -104,7 +104,7 @@ begin
   scalar_cosh_function : ntm_scalar_cosh_function
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -115,9 +115,9 @@ begin
       READY => ready_scalar_cosh,
 
       -- DATA
-      MODULO_IN   => modulo_in_scalar_cosh,
-      DATA_IN  => data_in_scalar_cosh,
-      DATA_OUT => data_out_scalar_cosh
-    );
+      MODULO_IN => modulo_in_scalar_cosh,
+      DATA_IN   => data_in_scalar_cosh,
+      DATA_OUT  => data_out_scalar_cosh
+      );
 
 end architecture;

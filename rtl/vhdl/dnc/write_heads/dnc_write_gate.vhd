@@ -54,7 +54,7 @@ entity dnc_write_gate is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -68,7 +68,7 @@ entity dnc_write_gate is
     GW_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     GW_OUT : out std_logic
-  );
+    );
 end entity;
 
 architecture dnc_write_gate_architecture of dnc_write_gate is
@@ -106,7 +106,7 @@ begin
   ntm_scalar_logistic_function_i : ntm_scalar_logistic_function
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -117,9 +117,9 @@ begin
       READY => ready_scalar_logistic,
 
       -- DATA
-      MODULO_IN   => modulo_in_scalar_logistic,
-      DATA_IN  => data_in_scalar_logistic,
-      DATA_OUT => data_out_scalar_logistic
-    );
+      MODULO_IN => modulo_in_scalar_logistic,
+      DATA_IN   => data_in_scalar_logistic,
+      DATA_OUT  => data_out_scalar_logistic
+      );
 
 end architecture;

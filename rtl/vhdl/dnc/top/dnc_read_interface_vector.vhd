@@ -56,7 +56,7 @@ entity dnc_read_interface_vector is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -67,35 +67,35 @@ entity dnc_read_interface_vector is
     READY : out std_logic;
 
     -- Read Key
-    WK_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
-    WK_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
-    WK_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+    WK_IN_I_ENABLE : in std_logic;      -- for i in 0 to R-1
+    WK_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+    WK_IN_K_ENABLE : in std_logic;      -- for k in 0 to W-1
 
-    K_OUT_I_ENABLE : in std_logic; -- for i in 0 to R-1
-    K_OUT_K_ENABLE : in std_logic; -- for k in 0 to W-1
+    K_OUT_I_ENABLE : in std_logic;      -- for i in 0 to R-1
+    K_OUT_K_ENABLE : in std_logic;      -- for k in 0 to W-1
 
     -- Read Strength
-    WBETA_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
-    WBETA_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
+    WBETA_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1
+    WBETA_IN_L_ENABLE : in std_logic;   -- for l in 0 to L-1
 
-    BETA_OUT_ENABLE : in std_logic; -- for i in 0 to R-1
+    BETA_OUT_ENABLE : in std_logic;     -- for i in 0 to R-1
 
     -- Free Gate
-    WF_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
-    WF_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
+    WF_IN_I_ENABLE : in std_logic;      -- for i in 0 to R-1
+    WF_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
 
-    F_OUT_ENABLE : in std_logic; -- for i in 0 to R-1
+    F_OUT_ENABLE : in std_logic;        -- for i in 0 to R-1
 
     -- Read Mode
-    WPI_IN_I_ENABLE : in std_logic; -- for i in 0 to R-1
-    WPI_IN_L_ENABLE : in std_logic; -- for l in 0 to L-1
-    WPI_IN_P_ENABLE : in std_logic; -- for p in 0 to 2
+    WPI_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
+    WPI_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+    WPI_IN_P_ENABLE : in std_logic;     -- for p in 0 to 2
 
-    PI_OUT_I_ENABLE : in std_logic; -- for i in 0 to R-1
-    PI_OUT_P_ENABLE : in std_logic; -- for p in 0 to 2
+    PI_OUT_I_ENABLE : in std_logic;     -- for i in 0 to R-1
+    PI_OUT_P_ENABLE : in std_logic;     -- for p in 0 to 2
 
     -- Hidden State
-    H_IN_ENABLE : in std_logiC; -- for l in 0 to L-1
+    H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
     -- DATA
     WK_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -109,7 +109,7 @@ entity dnc_read_interface_vector is
     BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     F_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
     PI_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture dnc_read_interface_vector_architecture of dnc_read_interface_vector is
@@ -140,7 +140,7 @@ architecture dnc_read_interface_vector_architecture of dnc_read_interface_vector
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -160,7 +160,7 @@ begin
       J => J,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -183,6 +183,6 @@ begin
       DATA_A_IN => data_a_in_matrix_product,
       DATA_B_IN => data_b_in_matrix_product,
       DATA_OUT  => data_out_matrix_product
-    );
+      );
 
 end architecture;

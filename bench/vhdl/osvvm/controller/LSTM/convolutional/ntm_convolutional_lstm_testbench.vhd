@@ -259,7 +259,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -299,7 +299,7 @@ begin
       B_IN => b_in_input_gate_vector,
 
       I_OUT => i_out_input_gate_vector
-    );
+      );
 
   -- OUTPUT GATE VECTOR
   output_gate_vector : ntm_output_gate_vector
@@ -312,7 +312,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -352,7 +352,7 @@ begin
       B_IN => b_in_output_gate_vector,
 
       O_OUT => o_out_output_gate_vector
-    );
+      );
 
   -- FORGET GATE VECTOR
   forget_gate_vector : ntm_forget_gate_vector
@@ -365,7 +365,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -405,7 +405,7 @@ begin
       B_IN => b_in_forget_gate_vector,
 
       F_OUT => f_out_forget_gate_vector
-    );
+      );
 
   -- STATE GATE VECTOR
   state_gate_vector : ntm_state_gate_vector
@@ -418,7 +418,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -466,7 +466,7 @@ begin
       B_IN => b_in_state_gate_vector,
 
       S_OUT => s_out_state_gate_vector
-    );
+      );
 
   -- HIDDEN GATE VECTOR
   hidden_gate_vector : ntm_hidden_gate_vector
@@ -479,7 +479,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -499,7 +499,7 @@ begin
       O_IN => o_in_hidden_gate_vector,
 
       H_OUT => h_out_hidden_gate_vector
-    );
+      );
 
   -- CONTROLLER
   controller : ntm_controller
@@ -512,7 +512,7 @@ begin
       R => R,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -534,6 +534,6 @@ begin
       R_IN => r_in_controller,
 
       H_OUT => h_out_controller
-    );
+      );
 
 end ntm_convolutional_lstm_testbench_architecture;

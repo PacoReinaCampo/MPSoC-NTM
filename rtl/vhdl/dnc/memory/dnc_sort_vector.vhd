@@ -54,7 +54,7 @@ entity dnc_sort_vector is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,15 +64,15 @@ entity dnc_sort_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    U_IN_ENABLE : in std_logic; -- for j in 0 to N-1
+    U_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
 
-    PHI_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
+    PHI_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     -- DATA
     U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     PHI_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture dnc_sort_vector_architecture of dnc_sort_vector is
@@ -102,7 +102,7 @@ architecture dnc_sort_vector_architecture of dnc_sort_vector is
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -118,7 +118,7 @@ architecture dnc_sort_vector_architecture of dnc_sort_vector is
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -137,7 +137,7 @@ begin
       I => N,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -159,7 +159,7 @@ begin
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
       DATA_OUT  => data_out_vector_adder
-    );
+      );
 
   -- VECTOR MULTIPLIER
   ntm_vector_multiplier_i : ntm_vector_multiplier
@@ -167,7 +167,7 @@ begin
       I => N,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -187,6 +187,6 @@ begin
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
       DATA_OUT  => data_out_vector_multiplier
-    );
+      );
 
 end architecture;

@@ -54,7 +54,7 @@ entity dnc_erase_vector is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,15 +64,15 @@ entity dnc_erase_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    E_IN_ENABLE : in std_logic; -- for k in 0 to W-1
+    E_IN_ENABLE : in std_logic;         -- for k in 0 to W-1
 
-    E_OUT_ENABLE : out std_logic; -- for k in 0 to W-1
+    E_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
 
     -- DATA
     E_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     E_OUT : out std_logic
-  );
+    );
 end entity;
 
 architecture dnc_erase_vector_architecture of dnc_erase_vector is
@@ -110,7 +110,7 @@ begin
   ntm_scalar_logistic_function_i : ntm_scalar_logistic_function
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -121,9 +121,9 @@ begin
       READY => ready_scalar_logistic,
 
       -- DATA
-      MODULO_IN   => modulo_in_scalar_logistic,
-      DATA_IN  => data_in_scalar_logistic,
-      DATA_OUT => data_out_scalar_logistic
-    );
+      MODULO_IN => modulo_in_scalar_logistic,
+      DATA_IN   => data_in_scalar_logistic,
+      DATA_OUT  => data_out_scalar_logistic
+      );
 
 end architecture;

@@ -54,7 +54,7 @@ entity dnc_precedence_weighting is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,17 +64,17 @@ entity dnc_precedence_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    W_IN_ENABLE : in std_logic; -- for j in 0 to N-1
-    P_IN_ENABLE : in std_logic; -- for j in 0 to N-1
+    W_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
+    P_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
 
-    P_OUT_ENABLE : out std_logic; -- for j in 0 to N-1
+    P_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- DATA
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     P_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     P_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture dnc_precedence_weighting_architecture of dnc_precedence_weighting is
@@ -102,7 +102,7 @@ architecture dnc_precedence_weighting_architecture of dnc_precedence_weighting i
   signal data_out_enable_vector_summation : std_logic;
 
   -- DATA
-  signal modulo_in_vector_summation    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -120,7 +120,7 @@ architecture dnc_precedence_weighting_architecture of dnc_precedence_weighting i
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -136,7 +136,7 @@ architecture dnc_precedence_weighting_architecture of dnc_precedence_weighting i
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -157,7 +157,7 @@ begin
       I => I,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -177,7 +177,7 @@ begin
       DATA_A_IN => data_a_in_vector_summation,
       DATA_B_IN => data_b_in_vector_summation,
       DATA_OUT  => data_out_vector_summation
-    );
+      );
 
   -- VECTOR ADDER
   ntm_vector_adder_i : ntm_vector_adder
@@ -185,7 +185,7 @@ begin
       I => N,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -207,7 +207,7 @@ begin
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
       DATA_OUT  => data_out_vector_adder
-    );
+      );
 
   -- VECTOR MULTIPLIER
   ntm_vector_multiplier_i : ntm_vector_multiplier
@@ -215,7 +215,7 @@ begin
       I => N,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -235,6 +235,6 @@ begin
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
       DATA_OUT  => data_out_vector_multiplier
-    );
+      );
 
 end architecture;

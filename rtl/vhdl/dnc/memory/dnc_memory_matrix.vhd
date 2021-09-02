@@ -54,7 +54,7 @@ entity dnc_memory_matrix is
     R : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,15 +64,15 @@ entity dnc_memory_matrix is
     START : in  std_logic;
     READY : out std_logic;
 
-    M_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
-    M_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+    M_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
+    M_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    W_IN_J_ENABLE : in std_logic; -- for j in 0 to N-1
-    V_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
-    E_IN_K_ENABLE : in std_logic; -- for k in 0 to W-1
+    W_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
+    V_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
+    E_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    M_OUT_J_ENABLE : out std_logic; -- for j in 0 to N-1
-    M_OUT_K_ENABLE : out std_logic; -- for k in 0 to W-1
+    M_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
+    M_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     -- DATA
     M_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -82,7 +82,7 @@ entity dnc_memory_matrix is
     E_IN : in std_logic;
 
     M_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
@@ -149,7 +149,7 @@ begin
       J => W,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -166,10 +166,10 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_transpose,
 
       -- DATA
-      MODULO_IN   => modulo_in_matrix_transpose,
-      DATA_IN  => data_in_matrix_transpose,
-      DATA_OUT => data_out_matrix_transpose
-    );
+      MODULO_IN => modulo_in_matrix_transpose,
+      DATA_IN   => data_in_matrix_transpose,
+      DATA_OUT  => data_out_matrix_transpose
+      );
 
   -- MATRIX PRODUCT
   ntm_matrix_product_i : ntm_matrix_product
@@ -178,7 +178,7 @@ begin
       J => W,
 
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -201,6 +201,6 @@ begin
       DATA_A_IN => data_a_in_matrix_product,
       DATA_B_IN => data_b_in_matrix_product,
       DATA_OUT  => data_out_matrix_product
-    );
+      );
 
 end architecture;

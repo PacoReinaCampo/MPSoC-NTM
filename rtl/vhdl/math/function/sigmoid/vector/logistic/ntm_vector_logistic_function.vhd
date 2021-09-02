@@ -49,7 +49,7 @@ entity ntm_vector_logistic_function is
     I : integer := 64;
 
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,10 +64,10 @@ entity ntm_vector_logistic_function is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    );
 end entity;
 
 architecture ntm_vector_logistic_function_architecture of ntm_vector_logistic_function is
@@ -90,9 +90,9 @@ architecture ntm_vector_logistic_function_architecture of ntm_vector_logistic_fu
   signal ready_scalar_logistic : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -104,7 +104,7 @@ begin
   scalar_logistic_function : ntm_scalar_logistic_function
     generic map (
       DATA_SIZE => DATA_SIZE
-    )
+      )
     port map (
       -- GLOBAL
       CLK => CLK,
@@ -115,9 +115,9 @@ begin
       READY => ready_scalar_logistic,
 
       -- DATA
-      MODULO_IN   => modulo_in_scalar_logistic,
-      DATA_IN  => data_in_scalar_logistic,
-      DATA_OUT => data_out_scalar_logistic
-    );
+      MODULO_IN => modulo_in_scalar_logistic,
+      DATA_IN   => data_in_scalar_logistic,
+      DATA_OUT  => data_out_scalar_logistic
+      );
 
 end architecture;
