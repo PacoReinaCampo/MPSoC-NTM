@@ -532,7 +532,7 @@ begin
       READY => ready_scalar_divider,
 
       -- DATA
-      MODULO_IN    => modulo_in_scalar_divider,
+      MODULO_IN => modulo_in_scalar_divider,
       DATA_A_IN => data_a_in_scalar_divider,
       DATA_B_IN => data_b_in_scalar_divider,
       DATA_OUT  => data_out_scalar_divider
@@ -553,7 +553,7 @@ begin
       READY => ready_scalar_exponentiator,
 
       -- DATA
-      MODULO_IN               => modulo_in_scalar_exponentiator,
+      MODULO_IN            => modulo_in_scalar_exponentiator,
       BASE_EXPONENTIATION  => base_scalar_exponentiator,
       POWER_EXPONENTIATION => power_scalar_exponentiator,
       DATA_OUT             => data_out_scalar_exponentiator

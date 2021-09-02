@@ -99,6 +99,8 @@ architecture ntm_vector_mod_architecture of ntm_vector_mod is
   -- Internal Signals
   signal index_loop : integer;
 
+  signal data_in_mod_int : std_logic;
+
   -- MOD
   -- CONTROL
   signal start_scalar_mod : std_logic;
@@ -143,17 +145,29 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          -- Control Internal
-          start_scalar_mod <= '1';
+          if (DATA_IN_ENABLE = '1') then
+            -- Data Inputs
+            modulo_in_scalar_mod <= MODULO_IN;
 
-          -- Data Inputs
-          modulo_in_scalar_mod <= MODULO_IN;
-          data_in_scalar_mod   <= DATA_IN;
+            data_in_scalar_mod <= DATA_IN;
+
+            -- Control Internal
+            start_scalar_mod <= '1';
+
+            -- FSM Control
+            mod_ctrl_fsm_int <= ENDER_STATE;
+          end if;
+
+          -- Control Outputs
+          DATA_OUT_ENABLE <= '0';
 
         when ENDER_STATE =>  -- STEP 2
 
           if (ready_scalar_mod = '1') then
             if (index_loop = I-1) then
+              -- Control Outputs
+              READY <= '1';
+
               -- FSM Control
               mod_ctrl_fsm_int <= STARTER_STATE;
             else
@@ -168,7 +182,10 @@ begin
             DATA_OUT <= data_out_scalar_mod;
 
             -- Control Outputs
-            READY <= '1';
+            DATA_OUT_ENABLE <= '1';
+          else
+            -- Control Internal
+            start_scalar_mod <= '0';
           end if;
 
         when others =>

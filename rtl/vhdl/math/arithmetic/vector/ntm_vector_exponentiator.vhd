@@ -101,6 +101,9 @@ architecture ntm_vector_exponentiator_architecture of ntm_vector_exponentiator i
   -- Internal Signals
   signal index_loop : integer;
 
+  signal base_exponentiator_int  : std_logic;
+  signal power_exponentiator_int : std_logic;
+
   -- EXPONENTIATOR
   -- CONTROL
   signal start_scalar_exponentiator : std_logic;
@@ -108,8 +111,8 @@ architecture ntm_vector_exponentiator_architecture of ntm_vector_exponentiator i
 
   -- DATA
   signal modulo_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal base_in_scalar_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal power_in_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal base_scalar_exponentiator      : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal power_scalar_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -132,6 +135,9 @@ begin
       -- Assignations
       index_loop <= 0;
 
+      base_exponentiator_int  <= '0';
+      power_exponentiator_int <= '0';
+
     elsif (rising_edge(CLK)) then
 
       case exponentiator_ctrl_fsm_int is
@@ -146,18 +152,43 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          -- Control Internal
-          start_scalar_exponentiator <= '1';
+          if (base_exponentiator_int = '1' and power_exponentiator_int = '1') then
+            -- Control Internal
+            start_scalar_exponentiator <= '1';
 
-          -- Data Inputs
-          modulo_in_scalar_exponentiator <= MODULO_IN;
-          base_in_scalar_exponentiator   <= BASE_EXPONENTIATION;
-          power_in_scalar_exponentiator  <= POWER_EXPONENTIATION;
+            -- Data Inputs
+            modulo_in_scalar_exponentiator <= MODULO_IN;
+
+            -- FSM Control
+            exponentiator_ctrl_fsm_int <= ENDER_STATE;
+          end if;
+
+          if (BASE_EXPONENTIATION_ENABLE = '1') then
+            -- Data Inputs
+            base_scalar_exponentiator <= BASE_EXPONENTIATION;
+
+            -- Control Internal
+            base_exponentiator_int <= '1';
+          end if;
+          
+          if (POWER_EXPONENTIATION_ENABLE = '1') then
+            -- Data Inputs
+            power_scalar_exponentiator <= POWER_EXPONENTIATION;
+
+            -- Control Internal
+            power_exponentiator_int <= '1';
+          end if;
+
+          -- Control Outputs
+          DATA_OUT_ENABLE <= '0';
 
         when ENDER_STATE =>  -- STEP 2
 
           if (ready_scalar_exponentiator = '1') then
             if (index_loop = I-1) then
+              -- Control Outputs
+              READY <= '1';
+
               -- FSM Control
               exponentiator_ctrl_fsm_int <= STARTER_STATE;
             else
@@ -172,7 +203,13 @@ begin
             DATA_OUT <= data_out_scalar_exponentiator;
 
             -- Control Outputs
-            READY <= '1';
+            DATA_OUT_ENABLE <= '1';
+          else
+            -- Control Internal
+            start_scalar_exponentiator <= '0';
+
+            base_exponentiator_int  <= '0';
+            power_exponentiator_int <= '0';
           end if;
 
         when others =>
@@ -198,8 +235,8 @@ begin
 
       -- DATA
       MODULO_IN            => modulo_in_scalar_exponentiator,
-      BASE_EXPONENTIATION  => base_in_scalar_exponentiator,
-      POWER_EXPONENTIATION => power_in_scalar_exponentiator,
+      BASE_EXPONENTIATION  => base_scalar_exponentiator,
+      POWER_EXPONENTIATION => power_scalar_exponentiator,
       DATA_OUT             => data_out_scalar_exponentiator
     );
 

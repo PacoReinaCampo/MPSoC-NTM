@@ -101,6 +101,9 @@ architecture ntm_vector_divider_architecture of ntm_vector_divider is
   -- Internal Signals
   signal index_loop : integer;
 
+  signal data_a_in_divider_int : std_logic;
+  signal data_b_in_divider_int : std_logic;
+
   -- DIVIDER
   -- CONTROL
   signal start_scalar_divider : std_logic;
@@ -132,6 +135,9 @@ begin
       -- Assignations
       index_loop <= 0;
 
+      data_a_in_divider_int <= '0';
+      data_b_in_divider_int <= '0';
+
     elsif (rising_edge(CLK)) then
 
       case divider_ctrl_fsm_int is
@@ -146,18 +152,43 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          -- Control Internal
-          start_scalar_divider <= '1';
+          if (data_a_in_divider_int = '1' and data_b_in_divider_int = '1') then
+            -- Control Internal
+            start_scalar_divider <= '1';
 
-          -- Data Inputs
-          modulo_in_scalar_divider <= MODULO_IN;
-          data_a_in_scalar_divider <= DATA_A_IN;
-          data_b_in_scalar_divider <= DATA_B_IN;
+            -- Data Inputs
+            modulo_in_scalar_divider <= MODULO_IN;
+
+            -- FSM Control
+            divider_ctrl_fsm_int <= ENDER_STATE;
+          end if;
+
+          if (DATA_A_IN_ENABLE = '1') then
+            -- Data Inputs
+            data_a_in_scalar_divider <= DATA_A_IN;
+
+            -- Control Internal
+            data_a_in_divider_int <= '1';
+          end if;
+          
+          if (DATA_B_IN_ENABLE = '1') then
+            -- Data Inputs
+            data_b_in_scalar_divider <= DATA_B_IN;
+
+            -- Control Internal
+            data_b_in_divider_int <= '1';
+          end if;
+
+          -- Control Outputs
+          DATA_OUT_ENABLE <= '0';
 
         when ENDER_STATE =>  -- STEP 2
 
           if (ready_scalar_divider = '1') then
             if (index_loop = I-1) then
+              -- Control Outputs
+              READY <= '1';
+
               -- FSM Control
               divider_ctrl_fsm_int <= STARTER_STATE;
             else
@@ -172,7 +203,13 @@ begin
             DATA_OUT <= data_out_scalar_divider;
 
             -- Control Outputs
-            READY <= '1';
+            DATA_OUT_ENABLE <= '1';
+          else
+            -- Control Internal
+            start_scalar_divider <= '0';
+
+            data_a_in_divider_int <= '0';
+            data_b_in_divider_int <= '0';
           end if;
 
         when others =>

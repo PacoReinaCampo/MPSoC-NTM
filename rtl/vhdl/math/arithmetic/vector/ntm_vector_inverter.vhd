@@ -143,17 +143,29 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
+        if (DATA_IN_ENABLE = '1') then
+          -- Data Inputs
+          modulo_in_scalar_inverter <= MODULO_IN;
+
+          data_in_scalar_inverter <= DATA_IN;
+
           -- Control Internal
           start_scalar_inverter <= '1';
 
-          -- Data Inputs
-          modulo_in_scalar_inverter <= MODULO_IN;
-          data_in_scalar_inverter   <= DATA_IN;
+          -- FSM Control
+          inverter_ctrl_fsm_int <= ENDER_STATE;
+        end if;
+
+        -- Control Outputs
+        DATA_OUT_ENABLE <= '0';
 
         when ENDER_STATE =>  -- STEP 2
 
           if (ready_scalar_inverter = '1') then
             if (index_loop = I-1) then
+              -- Control Outputs
+              READY <= '1';
+
               -- FSM Control
               inverter_ctrl_fsm_int <= STARTER_STATE;
             else
@@ -168,7 +180,10 @@ begin
             DATA_OUT <= data_out_scalar_inverter;
 
             -- Control Outputs
-            READY <= '1';
+            DATA_OUT_ENABLE <= '1';
+          else
+            -- Control Internal
+            start_scalar_inverter <= '0';
           end if;
 
         when others =>

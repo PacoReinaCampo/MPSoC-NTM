@@ -103,6 +103,9 @@ architecture ntm_vector_adder_architecture of ntm_vector_adder is
   -- Internal Signals
   signal index_loop : integer;
 
+  signal data_a_in_adder_int : std_logic;
+  signal data_b_in_adder_int : std_logic;
+
   -- ADDER
   -- CONTROL
   signal start_scalar_adder : std_logic;
@@ -136,6 +139,9 @@ begin
       -- Assignations
       index_loop <= 0;
 
+      data_a_in_adder_int <= '0';
+      data_b_in_adder_int <= '0';
+
     elsif (rising_edge(CLK)) then
 
       case adder_ctrl_fsm_int is
@@ -150,20 +156,45 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          -- Control Internal
-          start_scalar_adder <= '1';
+          if (DATA_A_IN_ENABLE = '1') then
+            -- Data Inputs
+            data_a_in_scalar_adder <= DATA_A_IN;
 
-          operation_scalar_adder <= OPERATION;
+            -- Control Internal
+            data_a_in_adder_int <= '1';
+          end if;
+          
+          if (DATA_B_IN_ENABLE = '1') then
+            -- Data Inputs
+            data_b_in_scalar_adder <= DATA_B_IN;
 
-          -- Data Inputs
-          modulo_in_scalar_adder <= MODULO_IN;
-          data_a_in_scalar_adder <= DATA_A_IN;
-          data_b_in_scalar_adder <= DATA_B_IN;
+            -- Control Internal
+            data_b_in_adder_int <= '1';
+          end if;
+
+          if (data_a_in_adder_int = '1' and data_b_in_adder_int = '1') then
+            -- Control Internal
+            start_scalar_adder <= '1';
+
+            operation_scalar_adder <= OPERATION;
+
+            -- Data Inputs
+            modulo_in_scalar_adder <= MODULO_IN;
+
+            -- FSM Control
+            adder_ctrl_fsm_int <= ENDER_STATE;
+          end if;
+
+          -- Control Outputs
+          DATA_OUT_ENABLE <= '0';
 
         when ENDER_STATE =>  -- STEP 2
 
           if (ready_scalar_adder = '1') then
             if (index_loop = I-1) then
+              -- Control Outputs
+              READY <= '1';
+
               -- FSM Control
               adder_ctrl_fsm_int <= STARTER_STATE;
             else
@@ -178,7 +209,13 @@ begin
             DATA_OUT <= data_out_scalar_adder;
 
             -- Control Outputs
-            READY <= '1';
+            DATA_OUT_ENABLE <= '1';
+          else
+            -- Control Internal
+            start_scalar_adder <= '0';
+
+            data_a_in_adder_int <= '0';
+            data_b_in_adder_int <= '0';
           end if;
 
         when others =>

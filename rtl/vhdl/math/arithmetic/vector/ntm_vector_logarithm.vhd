@@ -129,6 +129,7 @@ begin
       -- Assignations
       index_loop <= 0;
 
+
     elsif (rising_edge(CLK)) then
 
       case logarithm_ctrl_fsm_int is
@@ -143,17 +144,31 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          -- Control Internal
-          start_scalar_logarithm <= '1';
+          if (DATA_IN_ENABLE = '1') then
+            -- Data Inputs
+            modulo_in_scalar_logarithm <= MODULO_IN;
 
-          -- Data Inputs
-          modulo_in_scalar_logarithm <= MODULO_IN;
-          data_in_scalar_logarithm   <= DATA_IN;
+            data_in_scalar_logarithm <= DATA_IN;
+
+            -- Control Internal
+            start_scalar_logarithm <= '1';
+
+            data_in_scalar_logarithm <= DATA_IN;
+
+            -- FSM Control
+            logarithm_ctrl_fsm_int <= ENDER_STATE;
+          end if;
+
+          -- Control Outputs
+          DATA_OUT_ENABLE <= '0';
 
         when ENDER_STATE =>  -- STEP 2
 
           if (ready_scalar_logarithm = '1') then
             if (index_loop = I-1) then
+              -- Control Outputs
+              READY <= '1';
+
               -- FSM Control
               logarithm_ctrl_fsm_int <= STARTER_STATE;
             else
@@ -168,7 +183,10 @@ begin
             DATA_OUT <= data_out_scalar_logarithm;
 
             -- Control Outputs
-            READY <= '1';
+            DATA_OUT_ENABLE <= '1';
+          else
+            -- Control Internal
+            start_scalar_logarithm <= '0';
           end if;
 
         when others =>

@@ -101,6 +101,9 @@ architecture ntm_vector_root_architecture of ntm_vector_root is
   -- Internal Signals
   signal index_loop : integer;
 
+  signal base_root_int  : std_logic;
+  signal power_root_int : std_logic;
+
   -- ROOT
   -- CONTROL
   signal start_scalar_root : std_logic;
@@ -132,6 +135,9 @@ begin
       -- Assignations
       index_loop <= 0;
 
+      base_root_int  <= '0';
+      power_root_int <= '0';
+
     elsif (rising_edge(CLK)) then
 
       case root_ctrl_fsm_int is
@@ -146,18 +152,43 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          -- Control Internal
-          start_scalar_root <= '1';
+          if (base_root_int = '1' and power_root_int = '1') then
+            -- Control Internal
+            start_scalar_root <= '1';
 
-          -- Data Inputs
-          modulo_in_scalar_root <= MODULO_IN;
-          base_scalar_root <= BASE_ROOT;
-          power_scalar_root <= POWER_ROOT;
+            -- Data Inputs
+            modulo_in_scalar_root <= MODULO_IN;
+
+            -- FSM Control
+            root_ctrl_fsm_int <= ENDER_STATE;
+          end if;
+
+          if (BASE_ROOT_ENABLE = '1') then
+            -- Data Inputs
+            base_scalar_root <= BASE_ROOT;
+
+            -- Control Internal
+            base_root_int <= '1';
+          end if;
+          
+          if (POWER_ROOT_ENABLE = '1') then
+            -- Data Inputs
+            power_scalar_root <= POWER_ROOT;
+
+            -- Control Internal
+            power_root_int <= '1';
+          end if;
+
+          -- Control Outputs
+          DATA_OUT_ENABLE <= '0';
 
         when ENDER_STATE =>  -- STEP 2
 
           if (ready_scalar_root = '1') then
             if (index_loop = I-1) then
+              -- Control Outputs
+              READY <= '1';
+
               -- FSM Control
               root_ctrl_fsm_int <= STARTER_STATE;
             else
@@ -172,7 +203,13 @@ begin
             DATA_OUT <= data_out_scalar_root;
 
             -- Control Outputs
-            READY <= '1';
+            DATA_OUT_ENABLE <= '1';
+          else
+            -- Control Internal
+            start_scalar_root <= '0';
+
+            base_root_int  <= '0';
+            power_root_int <= '0';
           end if;
 
         when others =>
@@ -197,10 +234,10 @@ begin
       READY => ready_scalar_root,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_root,
-      BASE_ROOT => base_scalar_root,
+      MODULO_IN  => modulo_in_scalar_root,
+      BASE_ROOT  => base_scalar_root,
       POWER_ROOT => power_scalar_root,
-      DATA_OUT  => data_out_scalar_root
+      DATA_OUT   => data_out_scalar_root
     );
 
 end architecture;
