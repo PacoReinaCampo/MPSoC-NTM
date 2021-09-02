@@ -59,8 +59,8 @@ entity ntm_scalar_root is
 
     -- DATA
     MODULO_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    BASE_ROOT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    POWER_ROOT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_A_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
@@ -99,7 +99,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = root(BASE_ROOT, POWER_ROOT) mod MODULO_IN
+  -- DATA_OUT = root(DATA_A_IN, DATA_B_IN) mod MODULO_IN
 
   ctrl_fsm : process(CLK, RST)
   begin

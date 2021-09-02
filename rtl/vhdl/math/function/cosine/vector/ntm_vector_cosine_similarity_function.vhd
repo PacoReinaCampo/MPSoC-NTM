@@ -59,16 +59,16 @@ entity ntm_vector_cosine_similarity_function is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_U_IN_ENABLE : in std_logic;
-    DATA_V_IN_ENABLE : in std_logic;
+    DATA_A_IN_ENABLE : in std_logic;
+    DATA_B_IN_ENABLE : in std_logic;
 
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_U_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_V_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
@@ -95,8 +95,8 @@ architecture ntm_vector_cosine_similarity_function_architecture of ntm_vector_co
   -- DATA
   signal modulo_in_scalar_cosine    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_scalar_cosine   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_u_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_v_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -122,8 +122,8 @@ begin
       -- DATA
       MODULO_IN => modulo_in_scalar_cosine,
       SIZE_IN   => size_in_scalar_cosine,
-      DATA_U_IN => data_u_in_scalar_cosine,
-      DATA_V_IN => data_v_in_scalar_cosine,
+      DATA_A_IN => data_a_in_scalar_cosine,
+      DATA_B_IN => data_b_in_scalar_cosine,
       DATA_OUT  => data_out_scalar_cosine
     );
 

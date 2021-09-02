@@ -59,8 +59,8 @@ entity ntm_scalar_exponentiator is
 
     -- DATA
     MODULO_IN            : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    BASE_EXPONENTIATION  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    POWER_EXPONENTIATION : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_A_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT             : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
@@ -99,7 +99,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = exponentiator(BASE_EXPONENTIATION, POWER_EXPONENTIATION) mod MODULO_IN
+  -- DATA_OUT = exponentiator(DATA_A_IN, DATA_B_IN) mod MODULO_IN
 
   ctrl_fsm : process(CLK, RST)
   begin

@@ -59,15 +59,15 @@ entity ntm_vector_root is
     START : in  std_logic;
     READY : out std_logic;
 
-    BASE_ROOT_ENABLE  : in std_logic;
-    POWER_ROOT_ENABLE : in std_logic;
+    DATA_A_IN_ENABLE  : in std_logic;
+    DATA_B_IN_ENABLE : in std_logic;
 
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
     MODULO_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    BASE_ROOT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    POWER_ROOT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_A_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT   : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
@@ -101,8 +101,8 @@ architecture ntm_vector_root_architecture of ntm_vector_root is
   -- Internal Signals
   signal index_loop : integer;
 
-  signal base_root_int  : std_logic;
-  signal power_root_int : std_logic;
+  signal data_a_in_root_int  : std_logic;
+  signal data_b_in_root_int : std_logic;
 
   -- ROOT
   -- CONTROL
@@ -111,8 +111,8 @@ architecture ntm_vector_root_architecture of ntm_vector_root is
 
   -- DATA
   signal modulo_in_scalar_root : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal base_scalar_root      : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal power_scalar_root     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_root      : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_root     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_root  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -121,7 +121,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = root(BASE_ROOT, POWER_ROOT) mod MODULO_IN
+  -- DATA_OUT = root(DATA_A_IN, DATA_B_IN) mod MODULO_IN
 
   ctrl_fsm : process(CLK, RST)
   begin
@@ -135,8 +135,8 @@ begin
       -- Assignations
       index_loop <= 0;
 
-      base_root_int  <= '0';
-      power_root_int <= '0';
+      data_a_in_root_int  <= '0';
+      data_b_in_root_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -152,7 +152,7 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          if (base_root_int = '1' and power_root_int = '1') then
+          if (data_a_in_root_int = '1' and data_b_in_root_int = '1') then
             -- Control Internal
             start_scalar_root <= '1';
 
@@ -163,20 +163,20 @@ begin
             root_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
-          if (BASE_ROOT_ENABLE = '1') then
+          if (DATA_A_IN_ENABLE = '1') then
             -- Data Inputs
-            base_scalar_root <= BASE_ROOT;
+            data_a_in_scalar_root <= DATA_A_IN;
 
             -- Control Internal
-            base_root_int <= '1';
+            data_a_in_root_int <= '1';
           end if;
           
-          if (POWER_ROOT_ENABLE = '1') then
+          if (DATA_B_IN_ENABLE = '1') then
             -- Data Inputs
-            power_scalar_root <= POWER_ROOT;
+            data_b_in_scalar_root <= DATA_B_IN;
 
             -- Control Internal
-            power_root_int <= '1';
+            data_b_in_root_int <= '1';
           end if;
 
           -- Control Outputs
@@ -208,8 +208,8 @@ begin
             -- Control Internal
             start_scalar_root <= '0';
 
-            base_root_int  <= '0';
-            power_root_int <= '0';
+            data_a_in_root_int  <= '0';
+            data_b_in_root_int <= '0';
           end if;
 
         when others =>
@@ -235,8 +235,8 @@ begin
 
       -- DATA
       MODULO_IN  => modulo_in_scalar_root,
-      BASE_ROOT  => base_scalar_root,
-      POWER_ROOT => power_scalar_root,
+      DATA_A_IN  => data_a_in_scalar_root,
+      DATA_B_IN => data_b_in_scalar_root,
       DATA_OUT   => data_out_scalar_root
     );
 

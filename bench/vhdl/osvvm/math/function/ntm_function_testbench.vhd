@@ -78,8 +78,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   -- DATA
   signal modulo_in_scalar_cosine    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_scalar_cosine   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_u_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_v_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MULTIPLICATION
@@ -190,16 +190,16 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal start_vector_cosine : std_logic;
   signal ready_vector_cosine : std_logic;
 
-  signal data_u_in_enable_vector_cosine : std_logic;
-  signal data_v_in_enable_vector_cosine : std_logic;
+  signal data_a_in_enable_vector_cosine : std_logic;
+  signal data_b_in_enable_vector_cosine : std_logic;
 
   signal data_out_enable_vector_cosine : std_logic;
 
   -- DATA
   signal modulo_in_vector_cosine    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_cosine   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_u_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_v_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MULTIPLICATION
@@ -347,10 +347,10 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal start_matrix_cosine : std_logic;
   signal ready_matrix_cosine : std_logic;
 
-  signal data_u_in_i_enable_matrix_cosine : std_logic;
-  signal data_u_in_j_enable_matrix_cosine : std_logic;
-  signal data_v_in_i_enable_matrix_cosine : std_logic;
-  signal data_v_in_j_enable_matrix_cosine : std_logic;
+  signal data_a_in_i_enable_matrix_cosine : std_logic;
+  signal data_a_in_j_enable_matrix_cosine : std_logic;
+  signal data_b_in_i_enable_matrix_cosine : std_logic;
+  signal data_b_in_j_enable_matrix_cosine : std_logic;
 
   signal data_out_i_enable_matrix_cosine : std_logic;
   signal data_out_j_enable_matrix_cosine : std_logic;
@@ -358,8 +358,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   -- DATA
   signal modulo_in_matrix_cosine    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_matrix_cosine   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_u_in_matrix_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_v_in_matrix_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MULTIPLICATION
@@ -547,8 +547,8 @@ begin
       -- DATA
       MODULO_IN    => modulo_in_scalar_cosine,
       SIZE_IN   => size_in_scalar_cosine,
-      DATA_U_IN => data_u_in_scalar_cosine,
-      DATA_V_IN => data_v_in_scalar_cosine,
+      DATA_A_IN => data_a_in_scalar_cosine,
+      DATA_B_IN => data_b_in_scalar_cosine,
       DATA_OUT  => data_out_scalar_cosine
     );
 
@@ -763,16 +763,16 @@ begin
       START => start_vector_cosine,
       READY => ready_vector_cosine,
 
-      DATA_U_IN_ENABLE => data_u_in_enable_vector_cosine,
-      DATA_V_IN_ENABLE => data_v_in_enable_vector_cosine,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_cosine,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_cosine,
 
       DATA_OUT_ENABLE => data_out_enable_vector_cosine,
 
       -- DATA
       MODULO_IN    => modulo_in_vector_cosine,
       SIZE_IN   => size_in_vector_cosine,
-      DATA_U_IN => data_u_in_vector_cosine,
-      DATA_V_IN => data_v_in_vector_cosine,
+      DATA_A_IN => data_a_in_vector_cosine,
+      DATA_B_IN => data_b_in_vector_cosine,
       DATA_OUT  => data_out_vector_cosine
     );
 
@@ -1042,10 +1042,10 @@ begin
       START => start_matrix_cosine,
       READY => ready_matrix_cosine,
 
-      DATA_U_IN_I_ENABLE => data_u_in_i_enable_matrix_cosine,
-      DATA_U_IN_J_ENABLE => data_u_in_j_enable_matrix_cosine,
-      DATA_V_IN_I_ENABLE => data_v_in_i_enable_matrix_cosine,
-      DATA_V_IN_J_ENABLE => data_v_in_j_enable_matrix_cosine,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_cosine,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_cosine,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_cosine,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_cosine,
 
       DATA_OUT_I_ENABLE => data_out_i_enable_matrix_cosine,
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_cosine,
@@ -1053,8 +1053,8 @@ begin
       -- DATA
       MODULO_IN    => modulo_in_matrix_cosine,
       SIZE_IN   => size_in_matrix_cosine,
-      DATA_U_IN => data_u_in_matrix_cosine,
-      DATA_V_IN => data_v_in_matrix_cosine,
+      DATA_A_IN => data_a_in_matrix_cosine,
+      DATA_B_IN => data_b_in_matrix_cosine,
       DATA_OUT  => data_out_matrix_cosine
     );
 

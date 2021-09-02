@@ -60,10 +60,10 @@ entity ntm_matrix_cosine_similarity_function is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_U_IN_I_ENABLE : in std_logic;
-    DATA_U_IN_J_ENABLE : in std_logic;
-    DATA_V_IN_I_ENABLE : in std_logic;
-    DATA_V_IN_J_ENABLE : in std_logic;
+    DATA_A_IN_I_ENABLE : in std_logic;
+    DATA_A_IN_J_ENABLE : in std_logic;
+    DATA_B_IN_I_ENABLE : in std_logic;
+    DATA_B_IN_J_ENABLE : in std_logic;
 
     DATA_OUT_I_ENABLE : out std_logic;
     DATA_OUT_J_ENABLE : out std_logic;
@@ -71,8 +71,8 @@ entity ntm_matrix_cosine_similarity_function is
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_U_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_V_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
@@ -96,16 +96,16 @@ architecture ntm_matrix_cosine_similarity_function_architecture of ntm_matrix_co
   signal start_vector_cosine : std_logic;
   signal ready_vector_cosine : std_logic;
 
-  signal data_u_in_enable_vector_cosine : std_logic;
-  signal data_v_in_enable_vector_cosine : std_logic;
+  signal data_a_in_enable_vector_cosine : std_logic;
+  signal data_b_in_enable_vector_cosine : std_logic;
 
   signal data_out_enable_vector_cosine : std_logic;
 
   -- DATA
   signal modulo_in_vector_cosine    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_cosine   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_u_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_v_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -128,16 +128,16 @@ begin
       START => start_vector_cosine,
       READY => ready_vector_cosine,
 
-      DATA_U_IN_ENABLE => data_u_in_enable_vector_cosine,
-      DATA_V_IN_ENABLE => data_v_in_enable_vector_cosine,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_cosine,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_cosine,
 
       DATA_OUT_ENABLE => data_out_enable_vector_cosine,
 
       -- DATA
       MODULO_IN => modulo_in_vector_cosine,
       SIZE_IN   => size_in_vector_cosine,
-      DATA_U_IN => data_u_in_vector_cosine,
-      DATA_V_IN => data_v_in_vector_cosine,
+      DATA_A_IN => data_a_in_vector_cosine,
+      DATA_B_IN => data_b_in_vector_cosine,
       DATA_OUT  => data_out_vector_cosine
     );
 

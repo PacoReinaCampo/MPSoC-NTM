@@ -60,18 +60,18 @@ entity ntm_matrix_exponentiator is
     START : in  std_logic;
     READY : out std_logic;
 
-    BASE_EXPONENTIATION_I_ENABLE  : in std_logic;
-    BASE_EXPONENTIATION_J_ENABLE  : in std_logic;
-    POWER_EXPONENTIATION_I_ENABLE : in std_logic;
-    POWER_EXPONENTIATION_J_ENABLE : in std_logic;
+    DATA_A_IN_I_ENABLE  : in std_logic;
+    DATA_A_IN_J_ENABLE  : in std_logic;
+    DATA_B_IN_I_ENABLE : in std_logic;
+    DATA_B_IN_J_ENABLE : in std_logic;
 
     DATA_OUT_I_ENABLE : out std_logic;
     DATA_OUT_J_ENABLE : out std_logic;
 
     -- DATA
     MODULO_IN            : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    BASE_EXPONENTIATION  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    POWER_EXPONENTIATION : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_A_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT             : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
@@ -95,15 +95,15 @@ architecture ntm_matrix_exponentiator_architecture of ntm_matrix_exponentiator i
   signal start_vector_exponentiator : std_logic;
   signal ready_vector_exponentiator : std_logic;
 
-  signal base_enable_vector_exponentiator : std_logic;
-  signal power_enable_vector_exponentiator : std_logic;
+  signal data_a_in_enable_vector_exponentiator : std_logic;
+  signal data_b_in_enable_vector_exponentiator : std_logic;
 
   signal data_out_enable_vector_exponentiator : std_logic;
 
   -- DATA
   signal modulo_in_vector_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal base_vector_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal power_vector_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -128,15 +128,15 @@ begin
       START => start_vector_exponentiator,
       READY => ready_vector_exponentiator,
 
-      BASE_EXPONENTIATION_ENABLE  => base_enable_vector_exponentiator,
-      POWER_EXPONENTIATION_ENABLE => power_enable_vector_exponentiator,
+      DATA_A_IN_ENABLE  => data_a_in_enable_vector_exponentiator,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_exponentiator,
 
       DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
 
       -- DATA
       MODULO_IN            => modulo_in_vector_exponentiator,
-      BASE_EXPONENTIATION  => base_vector_exponentiator,
-      POWER_EXPONENTIATION => power_vector_exponentiator,
+      DATA_A_IN  => data_a_in_vector_exponentiator,
+      DATA_B_IN => data_b_in_vector_exponentiator,
       DATA_OUT             => data_out_vector_exponentiator
     );
 

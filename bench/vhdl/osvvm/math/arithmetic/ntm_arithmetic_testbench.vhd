@@ -121,8 +121,8 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
 
   -- DATA
   signal modulo_in_scalar_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal base_scalar_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal power_scalar_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- ROOT
@@ -132,8 +132,8 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
 
   -- DATA
   signal modulo_in_scalar_root   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal base_scalar_root     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal power_scalar_root    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_root     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_root    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_root : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- LOGARITHM
@@ -233,15 +233,15 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal start_vector_exponentiator : std_logic;
   signal ready_vector_exponentiator : std_logic;
 
-  signal base_enable_vector_exponentiator : std_logic;
-  signal power_enable_vector_exponentiator : std_logic;
+  signal data_a_in_enable_vector_exponentiator : std_logic;
+  signal data_b_in_enable_vector_exponentiator : std_logic;
 
   signal data_out_enable_vector_exponentiator : std_logic;
 
   -- DATA
   signal modulo_in_vector_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal base_vector_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal power_vector_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- ROOT
@@ -249,15 +249,15 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal start_vector_root : std_logic;
   signal ready_vector_root : std_logic;
 
-  signal base_enable_vector_root  : std_logic;
-  signal power_enable_vector_root : std_logic;
+  signal data_a_in_enable_vector_root  : std_logic;
+  signal data_b_in_enable_vector_root : std_logic;
 
   signal data_out_enable_vector_root : std_logic;
 
   -- DATA
   signal modulo_in_vector_root   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal base_vector_root     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal power_vector_root    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_root     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_root    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_root : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- LOGARITHM
@@ -374,18 +374,18 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal start_matrix_exponentiator : std_logic;
   signal ready_matrix_exponentiator : std_logic;
 
-  signal base_i_enable_matrix_exponentiator  : std_logic;
-  signal base_j_enable_matrix_exponentiator  : std_logic;
-  signal power_i_enable_matrix_exponentiator : std_logic;
-  signal power_j_enable_matrix_exponentiator : std_logic;
+  signal data_a_in_i_enable_matrix_exponentiator  : std_logic;
+  signal data_a_in_j_enable_matrix_exponentiator  : std_logic;
+  signal data_b_in_i_enable_matrix_exponentiator : std_logic;
+  signal data_b_in_j_enable_matrix_exponentiator : std_logic;
 
   signal data_out_i_enable_matrix_exponentiator : std_logic;
   signal data_out_j_enable_matrix_exponentiator : std_logic;
 
   -- DATA
   signal modulo_in_matrix_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal base_matrix_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal power_matrix_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_exponentiator    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- ROOT
@@ -393,18 +393,18 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal start_matrix_root : std_logic;
   signal ready_matrix_root : std_logic;
 
-  signal base_i_enable_matrix_root : std_logic;
-  signal base_j_enable_matrix_root : std_logic;
-  signal power_i_enable_matrix_root : std_logic;
-  signal power_j_enable_matrix_root : std_logic;
+  signal data_a_in_i_enable_matrix_root : std_logic;
+  signal data_a_in_j_enable_matrix_root : std_logic;
+  signal data_b_in_i_enable_matrix_root : std_logic;
+  signal data_b_in_j_enable_matrix_root : std_logic;
 
   signal data_out_i_enable_enable_matrix_root : std_logic;
   signal data_out_j_enable_enable_matrix_root : std_logic;
 
   -- DATA
   signal modulo_in_matrix_root   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal base_matrix_root     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal power_matrix_root    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_root     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_root    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_root : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- LOGARITHM
@@ -554,8 +554,8 @@ begin
 
       -- DATA
       MODULO_IN            => modulo_in_scalar_exponentiator,
-      BASE_EXPONENTIATION  => base_scalar_exponentiator,
-      POWER_EXPONENTIATION => power_scalar_exponentiator,
+      DATA_A_IN  => data_a_in_scalar_exponentiator,
+      DATA_B_IN => data_b_in_scalar_exponentiator,
       DATA_OUT             => data_out_scalar_exponentiator
     );
 
@@ -575,8 +575,8 @@ begin
 
       -- DATA
       MODULO_IN     => modulo_in_scalar_root,
-      BASE_ROOT  => base_scalar_root,
-      POWER_ROOT => power_scalar_root,
+      DATA_A_IN  => data_a_in_scalar_root,
+      DATA_B_IN => data_b_in_scalar_root,
       DATA_OUT   => data_out_scalar_root
     );
 
@@ -758,15 +758,15 @@ begin
       START => start_vector_exponentiator,
       READY => ready_vector_exponentiator,
 
-      BASE_EXPONENTIATION_ENABLE  => base_enable_vector_exponentiator,
-      POWER_EXPONENTIATION_ENABLE => power_enable_vector_exponentiator,
+      DATA_A_IN_ENABLE  => data_a_in_enable_vector_exponentiator,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_exponentiator,
 
       DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
 
       -- DATA
       MODULO_IN               => modulo_in_vector_exponentiator,
-      BASE_EXPONENTIATION  => base_vector_exponentiator,
-      POWER_EXPONENTIATION => power_vector_exponentiator,
+      DATA_A_IN  => data_a_in_vector_exponentiator,
+      DATA_B_IN => data_b_in_vector_exponentiator,
       DATA_OUT             => data_out_vector_exponentiator
     );
 
@@ -786,15 +786,15 @@ begin
       START => start_vector_root,
       READY => ready_vector_root,
 
-      BASE_ROOT_ENABLE  => base_enable_vector_root,
-      POWER_ROOT_ENABLE => power_enable_vector_root,
+      DATA_A_IN_ENABLE  => data_a_in_enable_vector_root,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_root,
 
       DATA_OUT_ENABLE => data_out_enable_vector_root,
 
       -- DATA
       MODULO_IN     => modulo_in_vector_root,
-      BASE_ROOT  => base_vector_root,
-      POWER_ROOT => power_vector_root,
+      DATA_A_IN  => data_a_in_vector_root,
+      DATA_B_IN => data_b_in_vector_root,
       DATA_OUT   => data_out_vector_root
     );
 
@@ -1001,18 +1001,18 @@ begin
       START => start_matrix_exponentiator,
       READY => ready_matrix_exponentiator,
 
-      BASE_EXPONENTIATION_I_ENABLE  => base_i_enable_matrix_exponentiator,
-      BASE_EXPONENTIATION_J_ENABLE  => base_j_enable_matrix_exponentiator,
-      POWER_EXPONENTIATION_I_ENABLE => power_i_enable_matrix_exponentiator,
-      POWER_EXPONENTIATION_J_ENABLE => power_j_enable_matrix_exponentiator,
+      DATA_A_IN_I_ENABLE  => data_a_in_i_enable_matrix_exponentiator,
+      DATA_A_IN_J_ENABLE  => data_a_in_j_enable_matrix_exponentiator,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_exponentiator,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_exponentiator,
 
       DATA_OUT_I_ENABLE => data_out_i_enable_matrix_exponentiator,
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_exponentiator,
 
       -- DATA
       MODULO_IN               => modulo_in_matrix_exponentiator,
-      BASE_EXPONENTIATION  => base_matrix_exponentiator,
-      POWER_EXPONENTIATION => power_matrix_exponentiator,
+      DATA_A_IN  => data_a_in_matrix_exponentiator,
+      DATA_B_IN => data_b_in_matrix_exponentiator,
       DATA_OUT             => data_out_matrix_exponentiator
     );
 
@@ -1033,18 +1033,18 @@ begin
       START => start_matrix_root,
       READY => ready_matrix_root,
 
-      BASE_ROOT_I_ENABLE  => base_i_enable_matrix_root,
-      BASE_ROOT_J_ENABLE  => base_j_enable_matrix_root,
-      POWER_ROOT_I_ENABLE => power_i_enable_matrix_root,
-      POWER_ROOT_J_ENABLE => power_j_enable_matrix_root,
+      DATA_A_IN_I_ENABLE  => data_a_in_i_enable_matrix_root,
+      DATA_A_IN_J_ENABLE  => data_a_in_j_enable_matrix_root,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_root,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_root,
 
       DATA_OUT_I_ENABLE => data_out_i_enable_enable_matrix_root,
       DATA_OUT_J_ENABLE => data_out_j_enable_enable_matrix_root,
 
       -- DATA
       MODULO_IN     => modulo_in_matrix_root,
-      BASE_ROOT  => base_matrix_root,
-      POWER_ROOT => power_matrix_root,
+      DATA_A_IN  => data_a_in_matrix_root,
+      DATA_B_IN => data_b_in_matrix_root,
       DATA_OUT   => data_out_matrix_root
     );
 

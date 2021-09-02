@@ -59,15 +59,15 @@ entity ntm_vector_exponentiator is
     START : in  std_logic;
     READY : out std_logic;
 
-    BASE_EXPONENTIATION_ENABLE  : in std_logic;
-    POWER_EXPONENTIATION_ENABLE : in std_logic;
+    DATA_A_IN_ENABLE  : in std_logic;
+    DATA_B_IN_ENABLE : in std_logic;
 
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
     MODULO_IN            : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    BASE_EXPONENTIATION  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    POWER_EXPONENTIATION : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_A_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT             : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
@@ -101,8 +101,8 @@ architecture ntm_vector_exponentiator_architecture of ntm_vector_exponentiator i
   -- Internal Signals
   signal index_loop : integer;
 
-  signal base_exponentiator_int  : std_logic;
-  signal power_exponentiator_int : std_logic;
+  signal data_a_in_exponentiator_int  : std_logic;
+  signal data_b_in_exponentiator_int : std_logic;
 
   -- EXPONENTIATOR
   -- CONTROL
@@ -111,8 +111,8 @@ architecture ntm_vector_exponentiator_architecture of ntm_vector_exponentiator i
 
   -- DATA
   signal modulo_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal base_scalar_exponentiator      : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal power_scalar_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_exponentiator      : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -121,7 +121,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = exponentiator(BASE_EXPONENTIATION, POWER_EXPONENTIATION) mod MODULO_IN
+  -- DATA_OUT = exponentiator(DATA_A_IN, DATA_B_IN) mod MODULO_IN
 
   ctrl_fsm : process(CLK, RST)
   begin
@@ -135,8 +135,8 @@ begin
       -- Assignations
       index_loop <= 0;
 
-      base_exponentiator_int  <= '0';
-      power_exponentiator_int <= '0';
+      data_a_in_exponentiator_int  <= '0';
+      data_b_in_exponentiator_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -152,7 +152,7 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          if (base_exponentiator_int = '1' and power_exponentiator_int = '1') then
+          if (data_a_in_exponentiator_int = '1' and data_b_in_exponentiator_int = '1') then
             -- Control Internal
             start_scalar_exponentiator <= '1';
 
@@ -163,20 +163,20 @@ begin
             exponentiator_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
-          if (BASE_EXPONENTIATION_ENABLE = '1') then
+          if (DATA_A_IN_ENABLE = '1') then
             -- Data Inputs
-            base_scalar_exponentiator <= BASE_EXPONENTIATION;
+            data_a_in_scalar_exponentiator <= DATA_A_IN;
 
             -- Control Internal
-            base_exponentiator_int <= '1';
+            data_a_in_exponentiator_int <= '1';
           end if;
           
-          if (POWER_EXPONENTIATION_ENABLE = '1') then
+          if (DATA_B_IN_ENABLE = '1') then
             -- Data Inputs
-            power_scalar_exponentiator <= POWER_EXPONENTIATION;
+            data_b_in_scalar_exponentiator <= DATA_B_IN;
 
             -- Control Internal
-            power_exponentiator_int <= '1';
+            data_b_in_exponentiator_int <= '1';
           end if;
 
           -- Control Outputs
@@ -208,8 +208,8 @@ begin
             -- Control Internal
             start_scalar_exponentiator <= '0';
 
-            base_exponentiator_int  <= '0';
-            power_exponentiator_int <= '0';
+            data_a_in_exponentiator_int  <= '0';
+            data_b_in_exponentiator_int <= '0';
           end if;
 
         when others =>
@@ -235,8 +235,8 @@ begin
 
       -- DATA
       MODULO_IN            => modulo_in_scalar_exponentiator,
-      BASE_EXPONENTIATION  => base_scalar_exponentiator,
-      POWER_EXPONENTIATION => power_scalar_exponentiator,
+      DATA_A_IN  => data_a_in_scalar_exponentiator,
+      DATA_B_IN => data_b_in_scalar_exponentiator,
       DATA_OUT             => data_out_scalar_exponentiator
     );
 
