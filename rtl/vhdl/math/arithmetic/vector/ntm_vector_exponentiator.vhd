@@ -79,8 +79,9 @@ architecture ntm_vector_exponentiator_architecture of ntm_vector_exponentiator i
   -----------------------------------------------------------------------
 
   type exponentiator_ctrl_fsm is (
-    STARTER_ST,  -- STEP 0
-    ENDER_ST     -- STEP 1
+    STARTER_STATE,  -- STEP 0
+    INPUT_STATE,    -- STEP 1
+    ENDER_STATE     -- STEP 2
   );
 
   -----------------------------------------------------------------------
@@ -98,7 +99,7 @@ architecture ntm_vector_exponentiator_architecture of ntm_vector_exponentiator i
   signal exponentiator_ctrl_fsm_int : exponentiator_ctrl_fsm;
 
   -- Internal Signals
-  signal exponentiation_int : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : integer;
 
   -- EXPONENTIATOR
   -- CONTROL
@@ -107,8 +108,8 @@ architecture ntm_vector_exponentiator_architecture of ntm_vector_exponentiator i
 
   -- DATA
   signal modulo_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal base_scalar_exponentiator      : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal power_scalar_exponentiator     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal base_in_scalar_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal power_in_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -117,7 +118,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = root(BASE_EXPONENTIATION, POWER_EXPONENTIATION) mod MODULO_IN
+  -- DATA_OUT = exponentiator(BASE_EXPONENTIATION, POWER_EXPONENTIATION) mod MODULO_IN
 
   ctrl_fsm : process(CLK, RST)
   begin
@@ -129,30 +130,59 @@ begin
       READY <= '0';
 
       -- Assignations
-      exponentiation_int <= (others => '0');
+      index_loop <= 0;
 
     elsif (rising_edge(CLK)) then
 
       case exponentiator_ctrl_fsm_int is
-        when STARTER_ST =>  -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
-          -- FSM Control
-          exponentiator_ctrl_fsm_int <= ENDER_ST;
+          if (START = '1') then
+            -- FSM Control
+            exponentiator_ctrl_fsm_int <= INPUT_STATE;
+          end if;
 
-        when ENDER_ST =>  -- STEP 1
-          -- FSM Control
-          exponentiator_ctrl_fsm_int <= STARTER_ST;
+        when INPUT_STATE =>  -- STEP 1
+
+          -- Control Internal
+          start_scalar_exponentiator <= '1';
+
+          -- Data Inputs
+          modulo_in_scalar_exponentiator <= MODULO_IN;
+          base_in_scalar_exponentiator   <= BASE_EXPONENTIATION;
+          power_in_scalar_exponentiator  <= POWER_EXPONENTIATION;
+
+        when ENDER_STATE =>  -- STEP 2
+
+          if (ready_scalar_exponentiator = '1') then
+            if (index_loop = I-1) then
+              -- FSM Control
+              exponentiator_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_loop <= index_loop + 1;
+
+              -- FSM Control
+              exponentiator_ctrl_fsm_int <= INPUT_STATE;
+            end if;
+
+            -- Data Outputs
+            DATA_OUT <= data_out_scalar_exponentiator;
+
+            -- Control Outputs
+            READY <= '1';
+          end if;
 
         when others =>
           -- FSM Control
-          exponentiator_ctrl_fsm_int <= STARTER_ST;
+          exponentiator_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
 
-  -- EXPONENTIATION
+  -- EXPONENTIATOR
   scalar_exponentiator : ntm_scalar_exponentiator
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -168,8 +198,8 @@ begin
 
       -- DATA
       MODULO_IN            => modulo_in_scalar_exponentiator,
-      BASE_EXPONENTIATION  => base_scalar_exponentiator,
-      POWER_EXPONENTIATION => power_scalar_exponentiator,
+      BASE_EXPONENTIATION  => base_in_scalar_exponentiator,
+      POWER_EXPONENTIATION => power_in_scalar_exponentiator,
       DATA_OUT             => data_out_scalar_exponentiator
     );
 

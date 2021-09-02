@@ -72,11 +72,11 @@ architecture ntm_scalar_divider_architecture of ntm_scalar_divider is
   -----------------------------------------------------------------------
 
   type divider_ctrl_fsm is (
-    STARTER_ST,          -- STEP 0
-    SET_DATA_B_ST,       -- STEP 1
-    REDUCE_DATA_B_ST,    -- STEP 2
-    SET_PRODUCT_OUT_ST,  -- STEP 3
-    ENDER_ST             -- STEP 4
+    STARTER_STATE,          -- STEP 0
+    SET_DATA_B_STATE,       -- STEP 1
+    REDUCE_DATA_B_STATE,    -- STEP 2
+    SET_PRODUCT_OUT_STATE,  -- STEP 3
+    ENDER_STATE             -- STEP 4
   );
 
   -----------------------------------------------------------------------
@@ -97,7 +97,7 @@ architecture ntm_scalar_divider_architecture of ntm_scalar_divider is
   signal u_int : std_logic_vector(DATA_SIZE downto 0);
   signal v_int : std_logic_vector(DATA_SIZE downto 0);
 
-  signal division_int : std_logic_vector(DATA_SIZE downto 0);
+  signal divider_int : std_logic_vector(DATA_SIZE downto 0);
 
 begin
 
@@ -120,12 +120,12 @@ begin
       u_int <= (others => '0');
       v_int <= (others => '0');
 
-      division_int <= (others => '0');
+      divider_int <= (others => '0');
 
     elsif (rising_edge(CLK)) then
 
       case divider_ctrl_fsm_int is
-        when STARTER_ST =>  -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -135,16 +135,16 @@ begin
             v_int <= '0' & DATA_B_IN;
 
             if (DATA_A_IN(0) = '1') then
-              division_int <= '0' & DATA_B_IN;
+              divider_int <= '0' & DATA_B_IN;
             else              
-              division_int <= (others => '0');
+              divider_int <= (others => '0');
             end if;
 
             -- FSM Control
-            divider_ctrl_fsm_int <= SET_DATA_B_ST;
+            divider_ctrl_fsm_int <= SET_DATA_B_STATE;
           end if;
 
-        when SET_DATA_B_ST =>  -- STEP 1
+        when SET_DATA_B_STATE =>  -- STEP 1
 
           -- Assignation
           u_int <= std_logic_vector(unsigned(u_int) srl 1);
@@ -152,58 +152,58 @@ begin
 
           -- FSM Control
           if ((unsigned(v_int) sll 1) < '0' & unsigned(MODULO_IN)) then
-            divider_ctrl_fsm_int <= SET_PRODUCT_OUT_ST;
+            divider_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
           else
-            divider_ctrl_fsm_int <= REDUCE_DATA_B_ST;
+            divider_ctrl_fsm_int <= REDUCE_DATA_B_STATE;
           end if;
 
-        when REDUCE_DATA_B_ST =>  -- STEP 2
+        when REDUCE_DATA_B_STATE =>  -- STEP 2
 
           if (unsigned(v_int) < '0' & unsigned(MODULO_IN)) then
             -- FSM Control
-            divider_ctrl_fsm_int <= SET_PRODUCT_OUT_ST;
+            divider_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
           else
             -- Assignation
             v_int <= std_logic_vector(unsigned(v_int) - ('0' & unsigned(MODULO_IN)));
           end if;
 
-        when SET_PRODUCT_OUT_ST =>  -- STEP 3
+        when SET_PRODUCT_OUT_STATE =>  -- STEP 3
           
           -- Assignation
           if (u_int(0) = '1') then
-            if (unsigned(division_int) + unsigned(v_int) < '0' & unsigned(MODULO_IN)) then
-              division_int <= std_logic_vector(unsigned(division_int) + unsigned(v_int));
+            if (unsigned(divider_int) + unsigned(v_int) < '0' & unsigned(MODULO_IN)) then
+              divider_int <= std_logic_vector(unsigned(divider_int) + unsigned(v_int));
             else
-              division_int <= std_logic_vector(unsigned(division_int) + unsigned(v_int) - ('0' & unsigned(MODULO_IN)));
+              divider_int <= std_logic_vector(unsigned(divider_int) + unsigned(v_int) - ('0' & unsigned(MODULO_IN)));
             end if;
           else
-            if (unsigned(division_int) >= '0' & unsigned(MODULO_IN)) then
-              division_int <= std_logic_vector(unsigned(division_int) - unsigned(MODULO_IN));
+            if (unsigned(divider_int) >= '0' & unsigned(MODULO_IN)) then
+              divider_int <= std_logic_vector(unsigned(divider_int) - unsigned(MODULO_IN));
             end if;
           end if;
 
           -- FSM Control
-          divider_ctrl_fsm_int <= ENDER_ST;
+          divider_ctrl_fsm_int <= ENDER_STATE;
 
-        when ENDER_ST =>  -- STEP 4
+        when ENDER_STATE =>  -- STEP 4
 
           if (unsigned(u_int) = '0' & unsigned(ONE)) then
             -- Data Outputs
-            DATA_OUT <= division_int(DATA_SIZE-1 downto 0);
+            DATA_OUT <= divider_int(DATA_SIZE-1 downto 0);
 
             -- Control Outputs
             READY <= '1';
 
             -- FSM Control
-            divider_ctrl_fsm_int <= STARTER_ST;
+            divider_ctrl_fsm_int <= STARTER_STATE;
           else
             -- FSM Control
-            divider_ctrl_fsm_int <= SET_DATA_B_ST;
+            divider_ctrl_fsm_int <= SET_DATA_B_STATE;
           end if;
 
         when others =>
           -- FSM Control
-          divider_ctrl_fsm_int <= STARTER_ST;
+          divider_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

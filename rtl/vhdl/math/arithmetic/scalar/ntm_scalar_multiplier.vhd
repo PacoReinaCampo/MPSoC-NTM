@@ -72,11 +72,11 @@ architecture ntm_scalar_multiplier_architecture of ntm_scalar_multiplier is
   -----------------------------------------------------------------------
 
   type multiplier_ctrl_fsm is (
-    STARTER_ST,          -- STEP 0
-    SET_DATA_B_ST,       -- STEP 1
-    REDUCE_DATA_B_ST,    -- STEP 2
-    SET_PRODUCT_OUT_ST,  -- STEP 3
-    ENDER_ST             -- STEP 4
+    STARTER_STATE,          -- STEP 0
+    SET_DATA_B_STATE,       -- STEP 1
+    REDUCE_DATA_B_STATE,    -- STEP 2
+    SET_PRODUCT_OUT_STATE,  -- STEP 3
+    ENDER_STATE             -- STEP 4
   );
 
   -----------------------------------------------------------------------
@@ -97,7 +97,7 @@ architecture ntm_scalar_multiplier_architecture of ntm_scalar_multiplier is
   signal u_int : std_logic_vector(DATA_SIZE downto 0);
   signal v_int : std_logic_vector(DATA_SIZE downto 0);
 
-  signal product_int : std_logic_vector(DATA_SIZE downto 0);
+  signal multiplier_int : std_logic_vector(DATA_SIZE downto 0);
 
 begin
 
@@ -120,12 +120,12 @@ begin
       u_int <= (others => '0');
       v_int <= (others => '0');
 
-      product_int <= (others => '0');
+      multiplier_int <= (others => '0');
 
     elsif (rising_edge(CLK)) then
 
       case multiplier_ctrl_fsm_int is
-        when STARTER_ST =>  -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -135,16 +135,16 @@ begin
             v_int <= '0' & DATA_B_IN;
 
             if (DATA_A_IN(0) = '1') then
-              product_int <= '0' & DATA_B_IN;
+              multiplier_int <= '0' & DATA_B_IN;
             else              
-              product_int <= (others => '0');
+              multiplier_int <= (others => '0');
             end if;
 
             -- FSM Control
-            multiplier_ctrl_fsm_int <= SET_DATA_B_ST;
+            multiplier_ctrl_fsm_int <= SET_DATA_B_STATE;
           end if;
 
-        when SET_DATA_B_ST =>  -- STEP 1
+        when SET_DATA_B_STATE =>  -- STEP 1
 
           -- Assignation
           u_int <= std_logic_vector(unsigned(u_int) srl 1);
@@ -152,58 +152,58 @@ begin
 
           -- FSM Control
           if ((unsigned(v_int) sll 1) < '0' & unsigned(MODULO_IN)) then
-            multiplier_ctrl_fsm_int <= SET_PRODUCT_OUT_ST;
+            multiplier_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
           else
-            multiplier_ctrl_fsm_int <= REDUCE_DATA_B_ST;
+            multiplier_ctrl_fsm_int <= REDUCE_DATA_B_STATE;
           end if;
 
-        when REDUCE_DATA_B_ST =>  -- STEP 2
+        when REDUCE_DATA_B_STATE =>  -- STEP 2
 
           if (unsigned(v_int) < '0' & unsigned(MODULO_IN)) then
             -- FSM Control
-            multiplier_ctrl_fsm_int <= SET_PRODUCT_OUT_ST;
+            multiplier_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
           else
             -- Assignation
             v_int <= std_logic_vector(unsigned(v_int) - ('0' & unsigned(MODULO_IN)));
           end if;
 
-        when SET_PRODUCT_OUT_ST =>  -- STEP 3
+        when SET_PRODUCT_OUT_STATE =>  -- STEP 3
           
           -- Assignation
           if (u_int(0) = '1') then
-            if (unsigned(product_int) + unsigned(v_int) < '0' & unsigned(MODULO_IN)) then
-              product_int <= std_logic_vector(unsigned(product_int) + unsigned(v_int));
+            if (unsigned(multiplier_int) + unsigned(v_int) < '0' & unsigned(MODULO_IN)) then
+              multiplier_int <= std_logic_vector(unsigned(multiplier_int) + unsigned(v_int));
             else
-              product_int <= std_logic_vector(unsigned(product_int) + unsigned(v_int) - ('0' & unsigned(MODULO_IN)));
+              multiplier_int <= std_logic_vector(unsigned(multiplier_int) + unsigned(v_int) - ('0' & unsigned(MODULO_IN)));
             end if;
           else
-            if (unsigned(product_int) >= '0' & unsigned(MODULO_IN)) then
-              product_int <= std_logic_vector(unsigned(product_int) - unsigned(MODULO_IN));
+            if (unsigned(multiplier_int) >= '0' & unsigned(MODULO_IN)) then
+              multiplier_int <= std_logic_vector(unsigned(multiplier_int) - unsigned(MODULO_IN));
             end if;
           end if;
 
           -- FSM Control
-          multiplier_ctrl_fsm_int <= ENDER_ST;
+          multiplier_ctrl_fsm_int <= ENDER_STATE;
 
-        when ENDER_ST =>  -- STEP 4
+        when ENDER_STATE =>  -- STEP 4
 
           if (unsigned(u_int) = '0' & unsigned(ONE)) then
             -- Data Outputs
-            DATA_OUT <= product_int(DATA_SIZE-1 downto 0);
+            DATA_OUT <= multiplier_int(DATA_SIZE-1 downto 0);
 
             -- Control Outputs
             READY <= '1';
 
             -- FSM Control
-            multiplier_ctrl_fsm_int <= STARTER_ST;
+            multiplier_ctrl_fsm_int <= STARTER_STATE;
           else
             -- FSM Control
-            multiplier_ctrl_fsm_int <= SET_DATA_B_ST;
+            multiplier_ctrl_fsm_int <= SET_DATA_B_STATE;
           end if;
 
         when others =>
           -- FSM Control
-          multiplier_ctrl_fsm_int <= STARTER_ST;
+          multiplier_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

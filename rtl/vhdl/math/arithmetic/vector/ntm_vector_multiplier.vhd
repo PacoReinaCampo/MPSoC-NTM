@@ -72,15 +72,16 @@ entity ntm_vector_multiplier is
   );
 end entity;
 
-architecture ntm_vector_divider_architecture of ntm_vector_multiplier is
+architecture ntm_vector_multiplier_architecture of ntm_vector_multiplier is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
   type multiplier_ctrl_fsm is (
-    STARTER_ST,  -- STEP 0
-    ENDER_ST     -- STEP 1
+    STARTER_STATE,  -- STEP 0
+    INPUT_STATE,    -- STEP 1
+    ENDER_STATE     -- STEP 2
   );
 
   -----------------------------------------------------------------------
@@ -98,7 +99,7 @@ architecture ntm_vector_divider_architecture of ntm_vector_multiplier is
   signal multiplier_ctrl_fsm_int : multiplier_ctrl_fsm;
 
   -- Internal Signals
-  signal multiplier_int : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : integer;
 
   -- MULTIPLIER
   -- CONTROL
@@ -110,7 +111,6 @@ architecture ntm_vector_divider_architecture of ntm_vector_multiplier is
   signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
-
 
 begin
 
@@ -130,25 +130,54 @@ begin
       READY <= '0';
 
       -- Assignations
-      multiplier_int <= (others => '0');
+      index_loop <= 0;
 
     elsif (rising_edge(CLK)) then
 
       case multiplier_ctrl_fsm_int is
-        when STARTER_ST =>  -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
-          -- FSM Control
-          multiplier_ctrl_fsm_int <= ENDER_ST;
+          if (START = '1') then
+            -- FSM Control
+            multiplier_ctrl_fsm_int <= INPUT_STATE;
+          end if;
 
-        when ENDER_ST =>  -- STEP 1
-          -- FSM Control
-          multiplier_ctrl_fsm_int <= STARTER_ST;
+        when INPUT_STATE =>  -- STEP 1
+
+          -- Control Internal
+          start_scalar_multiplier <= '1';
+
+          -- Data Inputs
+          modulo_in_scalar_multiplier <= MODULO_IN;
+          data_a_in_scalar_multiplier <= DATA_A_IN;
+          data_b_in_scalar_multiplier <= DATA_B_IN;
+
+        when ENDER_STATE =>  -- STEP 2
+
+          if (ready_scalar_multiplier = '1') then
+            if (index_loop = I-1) then
+              -- FSM Control
+              multiplier_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_loop <= index_loop + 1;
+
+              -- FSM Control
+              multiplier_ctrl_fsm_int <= INPUT_STATE;
+            end if;
+
+            -- Data Outputs
+            DATA_OUT <= data_out_scalar_multiplier;
+
+            -- Control Outputs
+            READY <= '1';
+          end if;
 
         when others =>
           -- FSM Control
-          multiplier_ctrl_fsm_int <= STARTER_ST;
+          multiplier_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

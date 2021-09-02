@@ -58,9 +58,9 @@ entity ntm_scalar_logarithm is
     READY : out std_logic;
 
     -- DATA
-    MODULO_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -71,8 +71,8 @@ architecture ntm_scalar_logarithm_architecture of ntm_scalar_logarithm is
   -----------------------------------------------------------------------
 
   type logarithm_ctrl_fsm is (
-    STARTER_ST,  -- STEP 0
-    ENDER_ST     -- STEP 1
+    STARTER_STATE,  -- STEP 0
+    ENDER_STATE     -- STEP 1
   );
 
   -----------------------------------------------------------------------
@@ -115,20 +115,20 @@ begin
     elsif (rising_edge(CLK)) then
 
       case logarithm_ctrl_fsm_int is
-        when STARTER_ST =>  -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
           -- FSM Control
-          logarithm_ctrl_fsm_int <= ENDER_ST;
+          logarithm_ctrl_fsm_int <= ENDER_STATE;
 
-        when ENDER_ST =>  -- STEP 1
+        when ENDER_STATE =>  -- STEP 1
           -- FSM Control
-          logarithm_ctrl_fsm_int <= STARTER_ST;
+          logarithm_ctrl_fsm_int <= STARTER_STATE;
 
         when others =>
           -- FSM Control
-          logarithm_ctrl_fsm_int <= STARTER_ST;
+          logarithm_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

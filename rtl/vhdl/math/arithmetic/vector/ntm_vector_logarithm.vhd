@@ -64,9 +64,9 @@ entity ntm_vector_logarithm is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
   );
 end entity;
 
@@ -77,8 +77,9 @@ architecture ntm_vector_logarithm_architecture of ntm_vector_logarithm is
   -----------------------------------------------------------------------
 
   type logarithm_ctrl_fsm is (
-    STARTER_ST,  -- STEP 0
-    ENDER_ST     -- STEP 1
+    STARTER_STATE,  -- STEP 0
+    INPUT_STATE,    -- STEP 1
+    ENDER_STATE     -- STEP 2
   );
 
   -----------------------------------------------------------------------
@@ -96,13 +97,13 @@ architecture ntm_vector_logarithm_architecture of ntm_vector_logarithm is
   signal logarithm_ctrl_fsm_int : logarithm_ctrl_fsm;
 
   -- Internal Signals
-  signal logarithm_int : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : integer;
 
   -- LOGARITHM
+  -- CONTROL
   signal start_scalar_logarithm : std_logic;
   signal ready_scalar_logarithm : std_logic;
 
-  -- CONTROL
   -- DATA
   signal modulo_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -126,25 +127,53 @@ begin
       READY <= '0';
 
       -- Assignations
-      logarithm_int <= (others => '0');
+      index_loop <= 0;
 
     elsif (rising_edge(CLK)) then
 
       case logarithm_ctrl_fsm_int is
-        when STARTER_ST =>  -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
-          -- FSM Control
-          logarithm_ctrl_fsm_int <= ENDER_ST;
+          if (START = '1') then
+            -- FSM Control
+            logarithm_ctrl_fsm_int <= INPUT_STATE;
+          end if;
 
-        when ENDER_ST =>  -- STEP 1
-          -- FSM Control
-          logarithm_ctrl_fsm_int <= STARTER_ST;
+        when INPUT_STATE =>  -- STEP 1
+
+          -- Control Internal
+          start_scalar_logarithm <= '1';
+
+          -- Data Inputs
+          modulo_in_scalar_logarithm <= MODULO_IN;
+          data_in_scalar_logarithm   <= DATA_IN;
+
+        when ENDER_STATE =>  -- STEP 2
+
+          if (ready_scalar_logarithm = '1') then
+            if (index_loop = I-1) then
+              -- FSM Control
+              logarithm_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_loop <= index_loop + 1;
+
+              -- FSM Control
+              logarithm_ctrl_fsm_int <= INPUT_STATE;
+            end if;
+
+            -- Data Outputs
+            DATA_OUT <= data_out_scalar_logarithm;
+
+            -- Control Outputs
+            READY <= '1';
+          end if;
 
         when others =>
           -- FSM Control
-          logarithm_ctrl_fsm_int <= STARTER_ST;
+          logarithm_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

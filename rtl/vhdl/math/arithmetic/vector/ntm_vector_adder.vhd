@@ -81,8 +81,9 @@ architecture ntm_vector_adder_architecture of ntm_vector_adder is
   -----------------------------------------------------------------------
 
   type adder_ctrl_fsm is (
-    STARTER_ST,  -- STEP 0
-    ENDER_ST     -- STEP 1
+    STARTER_STATE,  -- STEP 0
+    INPUT_STATE,    -- STEP 1
+    ENDER_STATE     -- STEP 2
   );
 
   -----------------------------------------------------------------------
@@ -100,7 +101,7 @@ architecture ntm_vector_adder_architecture of ntm_vector_adder is
   signal adder_ctrl_fsm_int : adder_ctrl_fsm;
 
   -- Internal Signals
-  signal adder_int : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : integer;
 
   -- ADDER
   -- CONTROL
@@ -133,25 +134,56 @@ begin
       READY <= '0';
 
       -- Assignations
-      adder_int <= (others => '0');
+      index_loop <= 0;
 
     elsif (rising_edge(CLK)) then
 
       case adder_ctrl_fsm_int is
-        when STARTER_ST =>  -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
-          -- FSM Control
-          adder_ctrl_fsm_int <= ENDER_ST;
+          if (START = '1') then
+            -- FSM Control
+            adder_ctrl_fsm_int <= INPUT_STATE;
+          end if;
 
-        when ENDER_ST =>  -- STEP 1
-          -- FSM Control
-          adder_ctrl_fsm_int <= STARTER_ST;
+        when INPUT_STATE =>  -- STEP 1
+
+          -- Control Internal
+          start_scalar_adder <= '1';
+
+          operation_scalar_adder <= OPERATION;
+
+          -- Data Inputs
+          modulo_in_scalar_adder <= MODULO_IN;
+          data_a_in_scalar_adder <= DATA_A_IN;
+          data_b_in_scalar_adder <= DATA_B_IN;
+
+        when ENDER_STATE =>  -- STEP 2
+
+          if (ready_scalar_adder = '1') then
+            if (index_loop = I-1) then
+              -- FSM Control
+              adder_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_loop <= index_loop + 1;
+
+              -- FSM Control
+              adder_ctrl_fsm_int <= INPUT_STATE;
+            end if;
+
+            -- Data Outputs
+            DATA_OUT <= data_out_scalar_adder;
+
+            -- Control Outputs
+            READY <= '1';
+          end if;
 
         when others =>
           -- FSM Control
-          adder_ctrl_fsm_int <= STARTER_ST;
+          adder_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

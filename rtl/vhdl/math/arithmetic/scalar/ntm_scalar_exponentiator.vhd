@@ -72,8 +72,8 @@ architecture ntm_scalar_exponentiator_architecture of ntm_scalar_exponentiator i
   -----------------------------------------------------------------------
 
   type exponentiator_ctrl_fsm is (
-    STARTER_ST,  -- STEP 0
-    ENDER_ST     -- STEP 1
+    STARTER_STATE,  -- STEP 0
+    ENDER_STATE     -- STEP 1
   );
 
   -----------------------------------------------------------------------
@@ -91,7 +91,7 @@ architecture ntm_scalar_exponentiator_architecture of ntm_scalar_exponentiator i
   signal exponentiator_ctrl_fsm_int : exponentiator_ctrl_fsm;
 
   -- Internal Signals
-  signal exponentiation_int : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal exponentiator_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -99,7 +99,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = root(BASE_EXPONENTIATION, POWER_EXPONENTIATION) mod MODULO_IN
+  -- DATA_OUT = exponentiator(BASE_EXPONENTIATION, POWER_EXPONENTIATION) mod MODULO_IN
 
   ctrl_fsm : process(CLK, RST)
   begin
@@ -111,25 +111,25 @@ begin
       READY <= '0';
 
       -- Assignations
-      exponentiation_int <= (others => '0');
+      exponentiator_int <= (others => '0');
 
     elsif (rising_edge(CLK)) then
 
       case exponentiator_ctrl_fsm_int is
-        when STARTER_ST =>  -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
           -- FSM Control
-          exponentiator_ctrl_fsm_int <= ENDER_ST;
+          exponentiator_ctrl_fsm_int <= ENDER_STATE;
 
-        when ENDER_ST =>  -- STEP 1
+        when ENDER_STATE =>  -- STEP 1
           -- FSM Control
-          exponentiator_ctrl_fsm_int <= STARTER_ST;
+          exponentiator_ctrl_fsm_int <= STARTER_STATE;
 
         when others =>
           -- FSM Control
-          exponentiator_ctrl_fsm_int <= STARTER_ST;
+          exponentiator_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

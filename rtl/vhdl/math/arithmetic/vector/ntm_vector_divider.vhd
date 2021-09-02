@@ -79,8 +79,9 @@ architecture ntm_vector_divider_architecture of ntm_vector_divider is
   -----------------------------------------------------------------------
 
   type divider_ctrl_fsm is (
-    STARTER_ST,  -- STEP 0
-    ENDER_ST     -- STEP 1
+    STARTER_STATE,  -- STEP 0
+    INPUT_STATE,    -- STEP 1
+    ENDER_STATE     -- STEP 2
   );
 
   -----------------------------------------------------------------------
@@ -98,7 +99,7 @@ architecture ntm_vector_divider_architecture of ntm_vector_divider is
   signal divider_ctrl_fsm_int : divider_ctrl_fsm;
 
   -- Internal Signals
-  signal divider_int : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : integer;
 
   -- DIVIDER
   -- CONTROL
@@ -129,25 +130,54 @@ begin
       READY <= '0';
 
       -- Assignations
-      divider_int <= (others => '0');
+      index_loop <= 0;
 
     elsif (rising_edge(CLK)) then
 
       case divider_ctrl_fsm_int is
-        when STARTER_ST =>  -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
-          -- FSM Control
-          divider_ctrl_fsm_int <= ENDER_ST;
+          if (START = '1') then
+            -- FSM Control
+            divider_ctrl_fsm_int <= INPUT_STATE;
+          end if;
 
-        when ENDER_ST =>  -- STEP 1
-          -- FSM Control
-          divider_ctrl_fsm_int <= STARTER_ST;
+        when INPUT_STATE =>  -- STEP 1
+
+          -- Control Internal
+          start_scalar_divider <= '1';
+
+          -- Data Inputs
+          modulo_in_scalar_divider <= MODULO_IN;
+          data_a_in_scalar_divider <= DATA_A_IN;
+          data_b_in_scalar_divider <= DATA_B_IN;
+
+        when ENDER_STATE =>  -- STEP 2
+
+          if (ready_scalar_divider = '1') then
+            if (index_loop = I-1) then
+              -- FSM Control
+              divider_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_loop <= index_loop + 1;
+
+              -- FSM Control
+              divider_ctrl_fsm_int <= INPUT_STATE;
+            end if;
+
+            -- Data Outputs
+            DATA_OUT <= data_out_scalar_divider;
+
+            -- Control Outputs
+            READY <= '1';
+          end if;
 
         when others =>
           -- FSM Control
-          divider_ctrl_fsm_int <= STARTER_ST;
+          divider_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

@@ -79,8 +79,9 @@ architecture ntm_vector_root_architecture of ntm_vector_root is
   -----------------------------------------------------------------------
 
   type root_ctrl_fsm is (
-    STARTER_ST,  -- STEP 0
-    ENDER_ST     -- STEP 1
+    STARTER_STATE,  -- STEP 0
+    INPUT_STATE,    -- STEP 1
+    ENDER_STATE     -- STEP 2
   );
 
   -----------------------------------------------------------------------
@@ -98,7 +99,7 @@ architecture ntm_vector_root_architecture of ntm_vector_root is
   signal root_ctrl_fsm_int : root_ctrl_fsm;
 
   -- Internal Signals
-  signal root_int : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : integer;
 
   -- ROOT
   -- CONTROL
@@ -129,25 +130,54 @@ begin
       READY <= '0';
 
       -- Assignations
-      root_int <= (others => '0');
+      index_loop <= 0;
 
     elsif (rising_edge(CLK)) then
 
       case root_ctrl_fsm_int is
-        when STARTER_ST =>  -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
-          -- FSM Control
-          root_ctrl_fsm_int <= ENDER_ST;
+          if (START = '1') then
+            -- FSM Control
+            root_ctrl_fsm_int <= INPUT_STATE;
+          end if;
 
-        when ENDER_ST =>  -- STEP 1
-          -- FSM Control
-          root_ctrl_fsm_int <= STARTER_ST;
+        when INPUT_STATE =>  -- STEP 1
+
+          -- Control Internal
+          start_scalar_root <= '1';
+
+          -- Data Inputs
+          modulo_in_scalar_root <= MODULO_IN;
+          base_scalar_root <= BASE_ROOT;
+          power_scalar_root <= POWER_ROOT;
+
+        when ENDER_STATE =>  -- STEP 2
+
+          if (ready_scalar_root = '1') then
+            if (index_loop = I-1) then
+              -- FSM Control
+              root_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_loop <= index_loop + 1;
+
+              -- FSM Control
+              root_ctrl_fsm_int <= INPUT_STATE;
+            end if;
+
+            -- Data Outputs
+            DATA_OUT <= data_out_scalar_root;
+
+            -- Control Outputs
+            READY <= '1';
+          end if;
 
         when others =>
           -- FSM Control
-          root_ctrl_fsm_int <= STARTER_ST;
+          root_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
@@ -167,10 +197,10 @@ begin
       READY => ready_scalar_root,
 
       -- DATA
-      MODULO_IN  => modulo_in_scalar_root,
-      BASE_ROOT  => base_scalar_root,
+      MODULO_IN => modulo_in_scalar_root,
+      BASE_ROOT => base_scalar_root,
       POWER_ROOT => power_scalar_root,
-      DATA_OUT   => data_out_scalar_root
+      DATA_OUT  => data_out_scalar_root
     );
 
 end architecture;
