@@ -43,7 +43,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
-use work.ntm_lstm_controller_pkg.all;
+use work.ntm_fnn_controller_pkg.all;
 
 entity ntm_controller is
   generic (
@@ -86,31 +86,53 @@ architecture ntm_controller_architecture of ntm_controller is
   -- Types
   -----------------------------------------------------------------------
 
+  type controller_ctrl_fsm is (
+    STARTER_STATE,                      -- STEP 0
+    VECTOR_SUMMATION_STATE,             -- STEP 1
+    MATRIX_PRODUCT_STATE,               -- STEP 2
+    ENDER_STATE                         -- STEP 3
+    );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
+
+  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
 
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
 
-  -- VECTOR ADDER
+  -- Finite State Machine
+  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+
+  -- Internal Signals
+  signal index_loop : integer;
+
+  signal data_in_vector_summation_int : std_logic;
+
+  signal data_a_in_i_matrix_product_int : std_logic;
+  signal data_a_in_j_matrix_product_int : std_logic;
+  signal data_b_in_i_matrix_product_int : std_logic;
+  signal data_b_in_j_matrix_product_int : std_logic;
+
+  signal data_in_vector_logistic_int : std_logic;
+
+  -- VECTOR SUMMATION
   -- CONTROL
-  signal start_vector_adder : std_logic;
-  signal ready_vector_adder : std_logic;
+  signal start_vector_summation : std_logic;
+  signal ready_vector_summation : std_logic;
 
-  signal operation_vector_adder : std_logic;
+  signal data_in_enable_vector_summation : std_logic;
 
-  signal data_a_in_enable_vector_adder : std_logic;
-  signal data_b_in_enable_vector_adder : std_logic;
-
-  signal data_out_enable_vector_adder : std_logic;
+  signal data_out_enable_vector_summation : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX PRODUCT
   -- CONTROL
@@ -153,11 +175,55 @@ begin
 
   -- h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + b(t;l))
 
-  -- VECTOR ADDER
-  vector_adder : ntm_vector_adder
-    generic map (
-      I => I,
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      H_OUT <= ZERO;
 
+      -- Control Outputs
+      READY <= '0';
+
+      -- Assignations
+      index_loop <= 0;
+
+      data_in_vector_summation_int <= '0';
+
+      data_a_in_i_matrix_product_int <= '0';
+      data_a_in_j_matrix_product_int <= '0';
+      data_b_in_i_matrix_product_int <= '0';
+      data_b_in_j_matrix_product_int <= '0';
+
+      data_in_vector_logistic_int <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_ctrl_fsm_int is
+        when STARTER_STATE =>           -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          if (START = '1') then
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_SUMMATION_STATE;
+          end if;
+
+        when VECTOR_SUMMATION_STATE =>  -- STEP 1
+
+        when MATRIX_PRODUCT_STATE =>    -- STEP 2
+
+        when ENDER_STATE =>             -- STEP 3
+
+        when others =>
+          -- FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
+
+  -- VECTOR SUMMATION
+  vector_summation_function : ntm_vector_summation_function
+    generic map (
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -166,21 +232,18 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_adder,
-      READY => ready_vector_adder,
+      START => start_vector_summation,
+      READY => ready_vector_summation,
 
-      OPERATION => operation_vector_adder,
+      DATA_IN_ENABLE => data_in_enable_vector_summation,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_adder,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_adder,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_adder,
+      DATA_OUT_ENABLE => data_out_enable_vector_summation,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_adder,
-      DATA_A_IN => data_a_in_vector_adder,
-      DATA_B_IN => data_b_in_vector_adder,
-      DATA_OUT  => data_out_vector_adder
+      MODULO_IN => modulo_in_vector_summation,
+      SIZE_IN   => size_in_vector_summation,
+      DATA_IN   => data_in_vector_summation,
+      DATA_OUT  => data_out_vector_summation
       );
 
   -- MATRIX PRODUCT

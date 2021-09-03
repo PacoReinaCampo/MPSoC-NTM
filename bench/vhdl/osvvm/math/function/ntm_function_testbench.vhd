@@ -89,8 +89,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_scalar_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_scalar_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- COSH
@@ -161,8 +161,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_scalar_summation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_summation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_scalar_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
@@ -207,15 +207,14 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal start_vector_multiplication : std_logic;
   signal ready_vector_multiplication : std_logic;
 
-  signal data_a_in_enable_vector_multiplication : std_logic;
-  signal data_b_in_enable_vector_multiplication : std_logic;
+  signal data_in_enable_vector_multiplication : std_logic;
 
   signal data_out_enable_vector_multiplication : std_logic;
 
   -- DATA
   signal modulo_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- COSH
@@ -308,15 +307,14 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal start_vector_summation : std_logic;
   signal ready_vector_summation : std_logic;
 
-  signal data_a_in_enable_vector_summation : std_logic;
-  signal data_b_in_enable_vector_summation : std_logic;
+  signal data_in_enable_vector_summation : std_logic;
 
   signal data_out_enable_vector_summation : std_logic;
 
   -- DATA
   signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
@@ -367,18 +365,16 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal start_matrix_multiplication : std_logic;
   signal ready_matrix_multiplication : std_logic;
 
-  signal data_a_in_i_enable_matrix_multiplication : std_logic;
-  signal data_a_in_j_enable_matrix_multiplication : std_logic;
-  signal data_b_in_i_enable_matrix_multiplication : std_logic;
-  signal data_b_in_j_enable_matrix_multiplication : std_logic;
+  signal data_in_i_enable_matrix_multiplication : std_logic;
+  signal data_in_j_enable_matrix_multiplication : std_logic;
 
   signal data_out_i_enable_matrix_multiplication : std_logic;
   signal data_out_j_enable_matrix_multiplication : std_logic;
 
   -- DATA
   signal modulo_in_matrix_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_matrix_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- COSH
@@ -485,18 +481,16 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal start_matrix_summation : std_logic;
   signal ready_matrix_summation : std_logic;
 
-  signal data_a_in_i_enable_matrix_summation : std_logic;
-  signal data_a_in_j_enable_matrix_summation : std_logic;
-  signal data_b_in_i_enable_matrix_summation : std_logic;
-  signal data_b_in_j_enable_matrix_summation : std_logic;
+  signal data_in_i_enable_matrix_summation : std_logic;
+  signal data_in_j_enable_matrix_summation : std_logic;
 
   signal data_out_i_enable_matrix_summation : std_logic;
   signal data_out_j_enable_matrix_summation : std_logic;
 
   -- DATA
   signal modulo_in_matrix_summation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_summation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_matrix_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -568,8 +562,8 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_scalar_multiplication,
-      DATA_A_IN => data_a_in_scalar_multiplication,
-      DATA_B_IN => data_b_in_scalar_multiplication,
+      SIZE_IN   => size_in_scalar_multiplication,
+      DATA_IN   => data_in_scalar_multiplication,
       DATA_OUT  => data_out_scalar_multiplication
       );
 
@@ -710,8 +704,8 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_scalar_summation,
-      DATA_A_IN => data_a_in_scalar_summation,
-      DATA_B_IN => data_b_in_scalar_summation,
+      SIZE_IN   => size_in_scalar_summation,
+      DATA_IN   => data_in_scalar_summation,
       DATA_OUT  => data_out_scalar_summation
       );
 
@@ -792,15 +786,14 @@ begin
       START => start_vector_multiplication,
       READY => ready_vector_multiplication,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplication,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplication,
+      DATA_IN_ENABLE => data_in_enable_vector_multiplication,
 
       DATA_OUT_ENABLE => data_out_enable_vector_multiplication,
 
       -- DATA
       MODULO_IN => modulo_in_vector_multiplication,
-      DATA_A_IN => data_a_in_vector_multiplication,
-      DATA_B_IN => data_b_in_vector_multiplication,
+      SIZE_IN   => size_in_vector_multiplication,
+      DATA_IN   => data_in_vector_multiplication,
       DATA_OUT  => data_out_vector_multiplication
       );
 
@@ -977,15 +970,14 @@ begin
       START => start_vector_summation,
       READY => ready_vector_summation,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_summation,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_summation,
+      DATA_IN_ENABLE => data_in_enable_vector_summation,
 
       DATA_OUT_ENABLE => data_out_enable_vector_summation,
 
       -- DATA
       MODULO_IN => modulo_in_vector_summation,
-      DATA_A_IN => data_a_in_vector_summation,
-      DATA_B_IN => data_b_in_vector_summation,
+      SIZE_IN   => size_in_vector_summation,
+      DATA_IN   => data_in_vector_summation,
       DATA_OUT  => data_out_vector_summation
       );
 
@@ -1075,18 +1067,16 @@ begin
       START => start_matrix_multiplication,
       READY => ready_matrix_multiplication,
 
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_multiplication,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_multiplication,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_multiplication,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_multiplication,
+      DATA_IN_I_ENABLE => data_in_i_enable_matrix_multiplication,
+      DATA_IN_J_ENABLE => data_in_j_enable_matrix_multiplication,
 
       DATA_OUT_I_ENABLE => data_out_i_enable_matrix_multiplication,
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_multiplication,
 
       -- DATA
       MODULO_IN => modulo_in_matrix_multiplication,
-      DATA_A_IN => data_a_in_matrix_multiplication,
-      DATA_B_IN => data_b_in_matrix_multiplication,
+      SIZE_IN   => size_in_matrix_multiplication,
+      DATA_IN   => data_in_matrix_multiplication,
       DATA_OUT  => data_out_matrix_multiplication
       );
 
@@ -1284,18 +1274,16 @@ begin
       START => start_matrix_summation,
       READY => ready_matrix_summation,
 
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_summation,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_summation,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_summation,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_summation,
+      DATA_IN_I_ENABLE => data_in_i_enable_matrix_summation,
+      DATA_IN_J_ENABLE => data_in_j_enable_matrix_summation,
 
       DATA_OUT_I_ENABLE => data_out_i_enable_matrix_summation,
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_summation,
 
       -- DATA
       MODULO_IN => modulo_in_matrix_summation,
-      DATA_A_IN => data_a_in_matrix_summation,
-      DATA_B_IN => data_b_in_matrix_summation,
+      SIZE_IN   => size_in_matrix_summation,
+      DATA_IN   => data_in_matrix_summation,
       DATA_OUT  => data_out_matrix_summation
       );
 

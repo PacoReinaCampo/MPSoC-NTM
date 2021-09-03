@@ -96,15 +96,14 @@ architecture dnc_precedence_weighting_architecture of dnc_precedence_weighting i
   signal start_vector_summation : std_logic;
   signal ready_vector_summation : std_logic;
 
-  signal data_a_in_enable_vector_summation : std_logic;
-  signal data_b_in_enable_vector_summation : std_logic;
+  signal data_in_enable_vector_summation : std_logic;
 
   signal data_out_enable_vector_summation : std_logic;
 
   -- DATA
   signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
@@ -167,15 +166,14 @@ begin
       START => start_vector_summation,
       READY => ready_vector_summation,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_summation,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_summation,
+      DATA_IN_ENABLE => data_in_enable_vector_summation,
 
       DATA_OUT_ENABLE => data_out_enable_vector_summation,
 
       -- DATA
       MODULO_IN => modulo_in_vector_summation,
-      DATA_A_IN => data_a_in_vector_summation,
-      DATA_B_IN => data_b_in_vector_summation,
+      SIZE_IN   => size_in_vector_summation,
+      DATA_IN   => data_in_vector_summation,
       DATA_OUT  => data_out_vector_summation
       );
 

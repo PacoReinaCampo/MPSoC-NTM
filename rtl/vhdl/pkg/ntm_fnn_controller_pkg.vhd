@@ -52,4 +52,39 @@ package ntm_fnn_controller_pkg is
   -- Components
   -----------------------------------------------------------------------
 
+  component ntm_controller is
+    generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
+      R : integer := 64;
+
+      DATA_SIZE : integer := 512
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      X_IN_ENABLE : in std_logic;       -- for x in 0 to X-1
+
+      R_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
+      R_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
+
+      H_OUT_ENABLE : in std_logic;      -- for l in 0 to L-1
+
+      -- DATA
+      X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      H_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
 end ntm_fnn_controller_pkg;

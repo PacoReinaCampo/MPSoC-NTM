@@ -59,15 +59,14 @@ entity ntm_vector_multiplication_function is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_A_IN_ENABLE : in std_logic;
-    DATA_B_IN_ENABLE : in std_logic;
+    DATA_IN_ENABLE : in std_logic;
 
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
@@ -101,9 +100,6 @@ architecture ntm_vector_multiplication_function_architecture of ntm_vector_multi
   -- Internal Signals
   signal index_loop : integer;
 
-  signal data_a_in_multiplication_int : std_logic;
-  signal data_b_in_multiplication_int : std_logic;
-
   -- MULTIPLICATION
   -- CONTROL
   signal start_scalar_multiplication : std_logic;
@@ -111,8 +107,8 @@ architecture ntm_vector_multiplication_function_architecture of ntm_vector_multi
 
   -- DATA
   signal modulo_in_scalar_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_scalar_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -133,9 +129,6 @@ begin
       -- Assignations
       index_loop <= 0;
 
-      data_a_in_multiplication_int <= '0';
-      data_b_in_multiplication_int <= '0';
-
     elsif (rising_edge(CLK)) then
 
       case multiplication_ctrl_fsm_int is
@@ -150,31 +143,18 @@ begin
 
         when INPUT_STATE =>             -- STEP 1
 
-          if (data_a_in_multiplication_int = '1' and data_b_in_multiplication_int = '1') then
+          if (DATA_IN_ENABLE = '1') then
+            -- Data Inputs
+            modulo_in_scalar_multiplication <= MODULO_IN;
+            size_in_scalar_multiplication   <= SIZE_IN;
+
+            data_in_scalar_multiplication <= DATA_IN;
+
             -- Control Internal
             start_scalar_multiplication <= '1';
 
-            -- Data Inputs
-            modulo_in_scalar_multiplication <= MODULO_IN;
-
             -- FSM Control
             multiplication_ctrl_fsm_int <= ENDER_STATE;
-          end if;
-
-          if (DATA_A_IN_ENABLE = '1') then
-            -- Data Inputs
-            data_a_in_scalar_multiplication <= DATA_A_IN;
-
-            -- Control Internal
-            data_a_in_multiplication_int <= '1';
-          end if;
-
-          if (DATA_B_IN_ENABLE = '1') then
-            -- Data Inputs
-            data_b_in_scalar_multiplication <= DATA_B_IN;
-
-            -- Control Internal
-            data_b_in_multiplication_int <= '1';
           end if;
 
           -- Control Outputs
@@ -205,9 +185,6 @@ begin
           else
             -- Control Internal
             start_scalar_multiplication <= '0';
-
-            data_a_in_multiplication_int <= '0';
-            data_b_in_multiplication_int <= '0';
           end if;
 
         when others =>
@@ -233,8 +210,8 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_scalar_multiplication,
-      DATA_A_IN => data_a_in_scalar_multiplication,
-      DATA_B_IN => data_b_in_scalar_multiplication,
+      SIZE_IN   => size_in_scalar_multiplication,
+      DATA_IN   => data_in_scalar_multiplication,
       DATA_OUT  => data_out_scalar_multiplication
       );
 

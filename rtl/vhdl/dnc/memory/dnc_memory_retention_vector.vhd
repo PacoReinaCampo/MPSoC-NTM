@@ -98,15 +98,14 @@ architecture dnc_memory_retention_vector_architecture of dnc_memory_retention_ve
   signal start_vector_multiplication : std_logic;
   signal ready_vector_multiplication : std_logic;
 
-  signal data_a_in_enable_vector_multiplication : std_logic;
-  signal data_b_in_enable_vector_multiplication : std_logic;
+  signal data_in_enable_vector_multiplication : std_logic;
 
   signal data_out_enable_vector_multiplication : std_logic;
 
   -- DATA
   signal modulo_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
@@ -167,15 +166,14 @@ begin
       START => start_vector_multiplication,
       READY => ready_vector_multiplication,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplication,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplication,
+      DATA_IN_ENABLE => data_in_enable_vector_multiplication,
 
       DATA_OUT_ENABLE => data_out_enable_vector_multiplication,
 
       -- DATA
       MODULO_IN => modulo_in_vector_multiplication,
-      DATA_A_IN => data_a_in_vector_multiplication,
-      DATA_B_IN => data_b_in_vector_multiplication,
+      SIZE_IN   => size_in_vector_multiplication,
+      DATA_IN   => data_in_vector_multiplication,
       DATA_OUT  => data_out_vector_multiplication
       );
 
