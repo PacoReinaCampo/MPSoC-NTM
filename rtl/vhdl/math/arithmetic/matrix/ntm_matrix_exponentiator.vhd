@@ -82,13 +82,35 @@ architecture ntm_matrix_exponentiator_architecture of ntm_matrix_exponentiator i
   -- Types
   -----------------------------------------------------------------------
 
+  type exponentiator_ctrl_fsm is (
+    STARTER_STATE,                      -- STEP 0
+    INPUT_I_STATE,                      -- STEP 1
+    INPUT_J_STATE,                      -- STEP 2
+    ENDER_STATE                         -- STEP 3
+    );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal exponentiator_ctrl_fsm_int : exponentiator_ctrl_fsm;
+
+  -- Internal Signals
+  signal index_i_loop : integer;
+  signal index_j_loop : integer;
+
+  signal data_a_in_i_exponentiator_int : std_logic;
+  signal data_a_in_j_exponentiator_int : std_logic;
+  signal data_b_in_i_exponentiator_int : std_logic;
+  signal data_b_in_j_exponentiator_int : std_logic;
 
   -- EXPONENTIATOR
   -- CONTROL
@@ -111,6 +133,164 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- DATA_OUT = exponentiator(DATA_A_IN, DATA_B_IN) mod MODULO_IN
+
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      DATA_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+      -- Assignations
+      index_i_loop <= 0;
+
+      data_a_in_i_exponentiator_int <= '0';
+      data_a_in_j_exponentiator_int <= '0';
+      data_b_in_i_exponentiator_int <= '0';
+      data_b_in_j_exponentiator_int <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case exponentiator_ctrl_fsm_int is
+        when STARTER_STATE =>           -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          if (START = '1') then
+            -- FSM Control
+            exponentiator_ctrl_fsm_int <= INPUT_I_STATE;
+          end if;
+
+        when INPUT_I_STATE =>           -- STEP 1
+
+          if (DATA_A_IN_I_ENABLE = '1') then
+            -- Data Inputs
+            data_a_in_vector_exponentiator <= DATA_A_IN;
+
+            -- Control Internal
+            data_a_in_enable_vector_exponentiator <= '1';
+
+            data_a_in_i_exponentiator_int <= '1';
+          else
+            -- Control Internal
+            data_a_in_enable_vector_exponentiator <= '0';
+          end if;
+
+          if (DATA_B_IN_I_ENABLE = '1') then
+            -- Data Inputs
+            data_b_in_vector_exponentiator <= DATA_B_IN;
+
+            -- Control Internal
+            data_b_in_enable_vector_exponentiator <= '1';
+
+            data_b_in_i_exponentiator_int <= '1';
+          else
+            -- Control Internal
+            data_b_in_enable_vector_exponentiator <= '0';
+          end if;
+
+          if (data_a_in_i_exponentiator_int = '1' and data_b_in_i_exponentiator_int = '1') then
+            -- Control Internal
+            start_vector_exponentiator <= '1';
+
+            -- Data Inputs
+            modulo_in_vector_exponentiator <= MODULO_IN;
+
+            -- FSM Control
+            exponentiator_ctrl_fsm_int <= ENDER_STATE;
+          end if;
+
+          -- Control Outputs
+          DATA_OUT_I_ENABLE <= '0';
+
+        when INPUT_J_STATE =>           -- STEP 2
+
+          if (DATA_A_IN_J_ENABLE = '1') then
+            -- Data Inputs
+            data_a_in_vector_exponentiator <= DATA_A_IN;
+
+            -- Control Internal
+            data_a_in_enable_vector_exponentiator <= '1';
+
+            data_a_in_j_exponentiator_int <= '1';
+          else
+            -- Control Internal
+            data_a_in_enable_vector_exponentiator <= '0';
+          end if;
+
+          if (DATA_B_IN_J_ENABLE = '1') then
+            -- Data Inputs
+            data_b_in_vector_exponentiator <= DATA_B_IN;
+
+            -- Control Internal
+            data_b_in_enable_vector_exponentiator <= '1';
+
+            data_b_in_j_exponentiator_int <= '1';
+          else
+            -- Control Internal
+            data_b_in_enable_vector_exponentiator <= '0';
+          end if;
+
+          if (data_a_in_j_exponentiator_int = '1' and data_b_in_j_exponentiator_int = '1') then
+            -- Control Internal
+            start_vector_exponentiator <= '1';
+
+            -- Data Inputs
+            modulo_in_vector_exponentiator <= MODULO_IN;
+
+            -- FSM Control
+            exponentiator_ctrl_fsm_int <= ENDER_STATE;
+          end if;
+
+          -- Control Outputs
+          DATA_OUT_J_ENABLE <= '0';
+
+        when ENDER_STATE =>             -- STEP 3
+
+          if (ready_vector_exponentiator = '1') then
+            if (index_j_loop = J-1) then
+              -- Control Outputs
+              READY <= '1';
+
+              -- FSM Control
+              exponentiator_ctrl_fsm_int <= STARTER_STATE;
+            elsif (index_j_loop < J-1) then
+              -- Control Internal
+              index_j_loop <= index_j_loop + 1;
+
+              -- FSM Control
+              exponentiator_ctrl_fsm_int <= INPUT_J_STATE;
+            elsif (index_j_loop = J-1) then
+              -- Control Internal
+              index_i_loop <= index_i_loop + 1;
+
+              -- FSM Control
+              exponentiator_ctrl_fsm_int <= INPUT_I_STATE;
+            end if;
+
+            -- Data Outputs
+            DATA_OUT <= data_out_vector_exponentiator;
+
+            -- Control Outputs
+            DATA_OUT_J_ENABLE <= '1';
+          else
+            -- Control Internal
+            start_vector_exponentiator <= '0';
+
+            data_a_in_j_exponentiator_int <= '0';
+            data_b_in_j_exponentiator_int <= '0';
+          end if;
+
+        when others =>
+          -- FSM Control
+          exponentiator_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
   -- EXPONENTIATION
   vector_exponentiator : ntm_vector_exponentiator
