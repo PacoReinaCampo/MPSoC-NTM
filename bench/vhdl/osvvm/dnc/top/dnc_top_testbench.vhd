@@ -62,13 +62,24 @@ architecture dnc_top_testbench_architecture of dnc_top_testbench is
   signal start_top : std_logic;
   signal ready_top : std_logic;
 
-  signal x_in_enable_top : std_logic;
+  signal w_in_i_enable_top : std_logic;
+  signal w_in_l_enable_top : std_logic;
+  signal w_in_x_enable_top : std_logic;
 
+  signal k_in_l_enable_top : std_logic;
+  signal k_in_k_enable_top : std_logic;
+
+  signal b_in_enable_top : std_logic;
+
+  signal x_in_enable_top  : std_logic;
   signal y_out_enable_top : std_logic;
 
   -- DATA
-  signal x_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal b_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  signal x_in_top  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal y_out_top : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -98,13 +109,24 @@ begin
       START => start_top,
       READY => ready_top,
 
-      X_IN_ENABLE => x_in_enable_top,
+      W_IN_I_ENABLE => w_in_i_enable_top,
+      W_IN_L_ENABLE => w_in_l_enable_top,
+      W_IN_X_ENABLE => w_in_x_enable_top,
 
+      K_IN_L_ENABLE => k_in_l_enable_top,
+      K_IN_K_ENABLE => k_in_k_enable_top,
+
+      B_IN_ENABLE => b_in_enable_top,
+
+      X_IN_ENABLE  => x_in_enable_top,
       Y_OUT_ENABLE => y_out_enable_top,
 
       -- DATA
-      X_IN => x_in_top,
+      W_IN => w_in_top,
+      K_IN => k_in_top,
+      B_IN => b_in_top,
 
+      X_IN  => x_in_top,
       Y_OUT => y_out_top
       );
 

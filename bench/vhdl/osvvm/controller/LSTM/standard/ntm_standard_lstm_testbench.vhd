@@ -229,6 +229,15 @@ architecture ntm_standard_lstm_testbench_architecture of ntm_standard_lstm_testb
   signal start_controller : std_logic;
   signal ready_controller : std_logic;
 
+  signal w_in_i_enable_controller : std_logic;
+  signal w_in_l_enable_controller : std_logic;
+  signal w_in_x_enable_controller : std_logic;
+
+  signal k_in_l_enable_controller : std_logic;
+  signal k_in_k_enable_controller : std_logic;
+
+  signal b_in_enable_controller : std_logic;
+
   signal x_in_enable_controller : std_logic;
 
   signal r_in_i_enable_controller : std_logic;
@@ -237,6 +246,10 @@ architecture ntm_standard_lstm_testbench_architecture of ntm_standard_lstm_testb
   signal h_out_enable_controller : std_logic;
 
   -- DATA
+  signal w_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal b_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal x_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal r_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -502,7 +515,7 @@ begin
       );
 
   -- CONTROLLER
-  controller : ntm_controller
+  ntm_controller_i : ntm_controller
     generic map (
       X => X,
       Y => Y,
@@ -522,6 +535,15 @@ begin
       START => start_controller,
       READY => ready_controller,
 
+      W_IN_I_ENABLE => w_in_i_enable_controller,
+      W_IN_L_ENABLE => w_in_l_enable_controller,
+      W_IN_X_ENABLE => w_in_x_enable_controller,
+
+      K_IN_L_ENABLE => k_in_l_enable_controller,
+      K_IN_K_ENABLE => k_in_k_enable_controller,
+
+      B_IN_ENABLE => b_in_enable_controller,
+
       X_IN_ENABLE => x_in_enable_controller,
 
       R_IN_I_ENABLE => r_in_i_enable_controller,
@@ -530,6 +552,10 @@ begin
       H_OUT_ENABLE => h_out_enable_controller,
 
       -- DATA
+      W_IN => w_in_controller,
+      K_IN => k_in_controller,
+      B_IN => b_in_controller,
+
       X_IN => x_in_controller,
       R_IN => r_in_controller,
 

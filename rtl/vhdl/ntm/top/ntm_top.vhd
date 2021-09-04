@@ -65,13 +65,24 @@ entity ntm_top is
     START : in  std_logic;
     READY : out std_logic;
 
-    X_IN_ENABLE : in std_logic;         -- for x in 0 to X-1
+    W_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
+    W_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+    W_IN_X_ENABLE : in std_logic;       -- for x in 0 to X-1
 
+    K_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+    K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
+
+    B_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+
+    X_IN_ENABLE  : in  std_logic;       -- for x in 0 to X-1
     Y_OUT_ENABLE : out std_logic;       -- for y in 0 to Y-1
 
     -- DATA
-    X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
+    X_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
@@ -94,9 +105,19 @@ architecture ntm_top_architecture of ntm_top is
   -- CONTROLLER
   -----------------------------------------------------------------------
 
+  -- CONTROLLER
   -- CONTROL
   signal start_controller : std_logic;
   signal ready_controller : std_logic;
+
+  signal w_in_i_enable_controller : std_logic;
+  signal w_in_l_enable_controller : std_logic;
+  signal w_in_x_enable_controller : std_logic;
+
+  signal k_in_l_enable_controller : std_logic;
+  signal k_in_k_enable_controller : std_logic;
+
+  signal b_in_enable_controller : std_logic;
 
   signal x_in_enable_controller : std_logic;
 
@@ -106,6 +127,10 @@ architecture ntm_top_architecture of ntm_top is
   signal h_out_enable_controller : std_logic;
 
   -- DATA
+  signal w_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal b_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal x_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal r_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -307,6 +332,15 @@ begin
       START => start_controller,
       READY => ready_controller,
 
+      W_IN_I_ENABLE => w_in_i_enable_controller,
+      W_IN_L_ENABLE => w_in_l_enable_controller,
+      W_IN_X_ENABLE => w_in_x_enable_controller,
+
+      K_IN_L_ENABLE => k_in_l_enable_controller,
+      K_IN_K_ENABLE => k_in_k_enable_controller,
+
+      B_IN_ENABLE => b_in_enable_controller,
+
       X_IN_ENABLE => x_in_enable_controller,
 
       R_IN_I_ENABLE => r_in_i_enable_controller,
@@ -315,6 +349,10 @@ begin
       H_OUT_ENABLE => h_out_enable_controller,
 
       -- DATA
+      W_IN => w_in_controller,
+      K_IN => k_in_controller,
+      B_IN => b_in_controller,
+
       X_IN => x_in_controller,
       R_IN => r_in_controller,
 

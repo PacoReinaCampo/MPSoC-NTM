@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_writing is
+entity ntm_erasing is
   generic (
     X : integer := 64;
     Y : integer := 64;
@@ -75,7 +75,7 @@ entity ntm_writing is
     );
 end entity;
 
-architecture ntm_writing_architecture of ntm_writing is
+architecture ntm_erasing_architecture of ntm_erasing is
 
   -----------------------------------------------------------------------
   -- Types

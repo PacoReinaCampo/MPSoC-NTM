@@ -29,5 +29,6 @@
 ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_logarithm.vhd
 
 ../../../../../../../rtl/vhdl/ntm/write_heads/ntm_writing.vhd
+../../../../../../../rtl/vhdl/ntm/write_heads/ntm_erasing.vhd
 
 ../../../../../../../bench/vhdl/osvvm/ntm/write_heads/ntm_write_heads_testbench.vhd

@@ -980,13 +980,24 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      X_IN_ENABLE : in std_logic;       -- for x in 0 to X-1
+      W_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
+      W_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+      W_IN_X_ENABLE : in std_logic;       -- for x in 0 to X-1
 
-      Y_OUT_ENABLE : out std_logic;     -- for y in 0 to Y-1
+      K_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+      K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
+
+      B_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+
+      X_IN_ENABLE  : in  std_logic;       -- for x in 0 to X-1
+      Y_OUT_ENABLE : out std_logic;       -- for y in 0 to Y-1
 
       -- DATA
-      X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
+      X_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
       Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
