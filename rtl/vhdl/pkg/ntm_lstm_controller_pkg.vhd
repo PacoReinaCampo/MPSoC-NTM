@@ -105,6 +105,46 @@ package ntm_lstm_controller_pkg is
       );
   end component;
 
+  component ntm_input_trainer is
+    generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
+      R : integer := 64;
+
+      DATA_SIZE : integer := 512
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+
+      W_OUT_I_ENABLE : in std_logic;      -- for i in 0 to R-1 (read heads flow)
+      W_OUT_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+      W_OUT_X_ENABLE : in std_logic;      -- for x in 0 to X-1
+
+      K_OUT_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+      K_OUT_K_ENABLE : in std_logic;      -- for k in 0 to W-1
+
+      B_OUT_ENABLE : in std_logic;        -- for l in 0 to L-1
+
+      -- DATA
+      H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
   component ntm_output_gate_vector is
     generic (
       X : integer := 64;
@@ -158,6 +198,46 @@ package ntm_lstm_controller_pkg is
       );
   end component;
 
+  component ntm_output_trainer is
+    generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
+      R : integer := 64;
+
+      DATA_SIZE : integer := 512
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+
+      W_OUT_I_ENABLE : in std_logic;      -- for i in 0 to R-1 (read heads flow)
+      W_OUT_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+      W_OUT_X_ENABLE : in std_logic;      -- for x in 0 to X-1
+
+      K_OUT_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+      K_OUT_K_ENABLE : in std_logic;      -- for k in 0 to W-1
+
+      B_OUT_ENABLE : in std_logic;        -- for l in 0 to L-1
+
+      -- DATA
+      H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
   component ntm_forget_gate_vector is
     generic (
       X : integer := 64;
@@ -208,6 +288,46 @@ package ntm_lstm_controller_pkg is
       B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       F_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_forget_trainer is
+    generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
+      R : integer := 64;
+
+      DATA_SIZE : integer := 512
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+
+      W_OUT_I_ENABLE : in std_logic;      -- for i in 0 to R-1 (read heads flow)
+      W_OUT_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+      W_OUT_X_ENABLE : in std_logic;      -- for x in 0 to X-1
+
+      K_OUT_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+      K_OUT_K_ENABLE : in std_logic;      -- for k in 0 to W-1
+
+      B_OUT_ENABLE : in std_logic;        -- for l in 0 to L-1
+
+      -- DATA
+      H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -272,6 +392,46 @@ package ntm_lstm_controller_pkg is
       );
   end component;
 
+  component ntm_state_trainer is
+    generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
+      R : integer := 64;
+
+      DATA_SIZE : integer := 512
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+
+      W_OUT_I_ENABLE : in std_logic;      -- for i in 0 to R-1 (read heads flow)
+      W_OUT_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+      W_OUT_X_ENABLE : in std_logic;      -- for x in 0 to X-1
+
+      K_OUT_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+      K_OUT_K_ENABLE : in std_logic;      -- for k in 0 to W-1
+
+      B_OUT_ENABLE : in std_logic;        -- for l in 0 to L-1
+
+      -- DATA
+      H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
   component ntm_hidden_gate_vector is
     generic (
       X : integer := 64;
@@ -302,6 +462,46 @@ package ntm_lstm_controller_pkg is
       O_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       H_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_hidden_trainer is
+    generic (
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
+      R : integer := 64;
+
+      DATA_SIZE : integer := 512
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+
+      W_OUT_I_ENABLE : in std_logic;      -- for i in 0 to R-1 (read heads flow)
+      W_OUT_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+      W_OUT_X_ENABLE : in std_logic;      -- for x in 0 to X-1
+
+      K_OUT_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+      K_OUT_K_ENABLE : in std_logic;      -- for k in 0 to W-1
+
+      B_OUT_ENABLE : in std_logic;        -- for l in 0 to L-1
+
+      -- DATA
+      H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

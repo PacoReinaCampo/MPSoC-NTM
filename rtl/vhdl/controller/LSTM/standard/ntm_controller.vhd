@@ -130,6 +130,29 @@ architecture ntm_controller_architecture of ntm_controller is
 
   signal i_out_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- INPUT TRAINER
+  -- CONTROL
+  signal start_input_trainer : std_logic;
+  signal ready_input_trainer : std_logic;
+
+  signal h_in_enable_input_trainer : std_logic;
+
+  signal w_out_i_enable_input_trainer : std_logic;
+  signal w_out_l_enable_input_trainer : std_logic;
+  signal w_out_x_enable_input_trainer : std_logic;
+
+  signal k_out_l_enable_input_trainer : std_logic;
+  signal k_out_k_enable_input_trainer : std_logic;
+
+  signal b_out_enable_input_trainer : std_logic;
+
+  -- DATA
+  signal h_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal w_out_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal b_out_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- OUTPUT GATE VECTOR
   -- CONTROL
   signal start_output_gate_vector : std_logic;
@@ -166,6 +189,29 @@ architecture ntm_controller_architecture of ntm_controller is
 
   signal o_out_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- OUTPUT TRAINER
+  -- CONTROL
+  signal start_output_trainer : std_logic;
+  signal ready_output_trainer : std_logic;
+
+  signal h_in_enable_output_trainer : std_logic;
+
+  signal w_out_i_enable_output_trainer : std_logic;
+  signal w_out_l_enable_output_trainer : std_logic;
+  signal w_out_x_enable_output_trainer : std_logic;
+
+  signal k_out_l_enable_output_trainer : std_logic;
+  signal k_out_k_enable_output_trainer : std_logic;
+
+  signal b_out_enable_output_trainer : std_logic;
+
+  -- DATA
+  signal h_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal w_out_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal b_out_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- FORGET GATE VECTOR
   -- CONTROL
   signal start_forget_gate_vector : std_logic;
@@ -201,6 +247,29 @@ architecture ntm_controller_architecture of ntm_controller is
   signal b_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal f_out_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- FORGET TRAINER
+  -- CONTROL
+  signal start_forget_trainer : std_logic;
+  signal ready_forget_trainer : std_logic;
+
+  signal h_in_enable_forget_trainer : std_logic;
+
+  signal w_out_i_enable_forget_trainer : std_logic;
+  signal w_out_l_enable_forget_trainer : std_logic;
+  signal w_out_x_enable_forget_trainer : std_logic;
+
+  signal k_out_l_enable_forget_trainer : std_logic;
+  signal k_out_k_enable_forget_trainer : std_logic;
+
+  signal b_out_enable_forget_trainer : std_logic;
+
+  -- DATA
+  signal h_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal w_out_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal b_out_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- STATE GATE VECTOR
   -- CONTROL
@@ -246,6 +315,29 @@ architecture ntm_controller_architecture of ntm_controller is
 
   signal s_out_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- STATE TRAINER
+  -- CONTROL
+  signal start_state_trainer : std_logic;
+  signal ready_state_trainer : std_logic;
+
+  signal h_in_enable_state_trainer : std_logic;
+
+  signal w_out_i_enable_state_trainer : std_logic;
+  signal w_out_l_enable_state_trainer : std_logic;
+  signal w_out_x_enable_state_trainer : std_logic;
+
+  signal k_out_l_enable_state_trainer : std_logic;
+  signal k_out_k_enable_state_trainer : std_logic;
+
+  signal b_out_enable_state_trainer : std_logic;
+
+  -- DATA
+  signal h_in_state_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal w_out_state_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_state_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal b_out_state_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- HIDDEN GATE VECTOR
   -- CONTROL
   signal start_hidden_gate_vector : std_logic;
@@ -261,6 +353,29 @@ architecture ntm_controller_architecture of ntm_controller is
   signal o_in_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal h_out_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- HIDDEN TRAINER
+  -- CONTROL
+  signal start_hidden_trainer : std_logic;
+  signal ready_hidden_trainer : std_logic;
+
+  signal h_in_enable_hidden_trainer : std_logic;
+
+  signal w_out_i_enable_hidden_trainer : std_logic;
+  signal w_out_l_enable_hidden_trainer : std_logic;
+  signal w_out_x_enable_hidden_trainer : std_logic;
+
+  signal k_out_l_enable_hidden_trainer : std_logic;
+  signal k_out_k_enable_hidden_trainer : std_logic;
+
+  signal b_out_enable_hidden_trainer : std_logic;
+
+  -- DATA
+  signal h_in_hidden_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal w_out_hidden_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_hidden_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal b_out_hidden_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -321,6 +436,46 @@ begin
       I_OUT => i_out_input_gate_vector
       );
 
+  -- INPUT TRAINER
+  input_trainer : ntm_input_trainer
+    generic map (
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R,
+
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_input_trainer,
+      READY => ready_input_trainer,
+
+      H_IN_ENABLE => h_in_enable_input_trainer,
+
+      W_OUT_I_ENABLE => w_out_i_enable_input_trainer,
+      W_OUT_L_ENABLE => w_out_l_enable_input_trainer,
+      W_OUT_X_ENABLE => w_out_x_enable_input_trainer,
+
+      K_OUT_L_ENABLE => k_out_l_enable_input_trainer,
+      K_OUT_K_ENABLE => k_out_k_enable_input_trainer,
+
+      B_OUT_ENABLE => b_out_enable_input_trainer,
+
+      -- DATA
+      H_IN => h_in_input_trainer,
+
+      W_OUT => w_out_input_trainer,
+      K_OUT => k_out_input_trainer,
+      B_OUT => b_out_input_trainer
+      );
+
   -- OUTPUT GATE VECTOR
   output_gate_vector : ntm_output_gate_vector
     generic map (
@@ -374,6 +529,46 @@ begin
       O_OUT => o_out_output_gate_vector
       );
 
+  -- OUTPUT TRAINER
+  output_trainer : ntm_output_trainer
+    generic map (
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R,
+
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_output_trainer,
+      READY => ready_output_trainer,
+
+      H_IN_ENABLE => h_in_enable_output_trainer,
+
+      W_OUT_I_ENABLE => w_out_i_enable_output_trainer,
+      W_OUT_L_ENABLE => w_out_l_enable_output_trainer,
+      W_OUT_X_ENABLE => w_out_x_enable_output_trainer,
+
+      K_OUT_L_ENABLE => k_out_l_enable_output_trainer,
+      K_OUT_K_ENABLE => k_out_k_enable_output_trainer,
+
+      B_OUT_ENABLE => b_out_enable_output_trainer,
+
+      -- DATA
+      H_IN => h_in_output_trainer,
+
+      W_OUT => w_out_output_trainer,
+      K_OUT => k_out_output_trainer,
+      B_OUT => b_out_output_trainer
+      );
+
   -- FORGET GATE VECTOR
   forget_gate_vector : ntm_forget_gate_vector
     generic map (
@@ -425,6 +620,46 @@ begin
       B_IN => b_in_forget_gate_vector,
 
       F_OUT => f_out_forget_gate_vector
+      );
+
+  -- FORGET TRAINER
+  forget_trainer : ntm_forget_trainer
+    generic map (
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R,
+
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_forget_trainer,
+      READY => ready_forget_trainer,
+
+      H_IN_ENABLE => h_in_enable_forget_trainer,
+
+      W_OUT_I_ENABLE => w_out_i_enable_forget_trainer,
+      W_OUT_L_ENABLE => w_out_l_enable_forget_trainer,
+      W_OUT_X_ENABLE => w_out_x_enable_forget_trainer,
+
+      K_OUT_L_ENABLE => k_out_l_enable_forget_trainer,
+      K_OUT_K_ENABLE => k_out_k_enable_forget_trainer,
+
+      B_OUT_ENABLE => b_out_enable_forget_trainer,
+
+      -- DATA
+      H_IN => h_in_forget_trainer,
+
+      W_OUT => w_out_forget_trainer,
+      K_OUT => k_out_forget_trainer,
+      B_OUT => b_out_forget_trainer
       );
 
   -- STATE GATE VECTOR
@@ -488,6 +723,46 @@ begin
       S_OUT => s_out_state_gate_vector
       );
 
+  -- STATE TRAINER
+  state_trainer : ntm_state_trainer
+    generic map (
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R,
+
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_state_trainer,
+      READY => ready_state_trainer,
+
+      H_IN_ENABLE => h_in_enable_state_trainer,
+
+      W_OUT_I_ENABLE => w_out_i_enable_state_trainer,
+      W_OUT_L_ENABLE => w_out_l_enable_state_trainer,
+      W_OUT_X_ENABLE => w_out_x_enable_state_trainer,
+
+      K_OUT_L_ENABLE => k_out_l_enable_state_trainer,
+      K_OUT_K_ENABLE => k_out_k_enable_state_trainer,
+
+      B_OUT_ENABLE => b_out_enable_state_trainer,
+
+      -- DATA
+      H_IN => h_in_state_trainer,
+
+      W_OUT => w_out_state_trainer,
+      K_OUT => k_out_state_trainer,
+      B_OUT => b_out_state_trainer
+      );
+
   -- HIDDEN GATE VECTOR
   hidden_gate_vector : ntm_hidden_gate_vector
     generic map (
@@ -519,6 +794,46 @@ begin
       O_IN => o_in_hidden_gate_vector,
 
       H_OUT => h_out_hidden_gate_vector
+      );
+
+  -- HIDDEN TRAINER
+  hidden_trainer : ntm_hidden_trainer
+    generic map (
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R,
+
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_hidden_trainer,
+      READY => ready_hidden_trainer,
+
+      H_IN_ENABLE => h_in_enable_hidden_trainer,
+
+      W_OUT_I_ENABLE => w_out_i_enable_hidden_trainer,
+      W_OUT_L_ENABLE => w_out_l_enable_hidden_trainer,
+      W_OUT_X_ENABLE => w_out_x_enable_hidden_trainer,
+
+      K_OUT_L_ENABLE => k_out_l_enable_hidden_trainer,
+      K_OUT_K_ENABLE => k_out_k_enable_hidden_trainer,
+
+      B_OUT_ENABLE => b_out_enable_hidden_trainer,
+
+      -- DATA
+      H_IN => h_in_hidden_trainer,
+
+      W_OUT => w_out_hidden_trainer,
+      K_OUT => k_out_hidden_trainer,
+      B_OUT => b_out_hidden_trainer
       );
 
 end architecture;

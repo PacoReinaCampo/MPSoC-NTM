@@ -167,6 +167,29 @@ architecture ntm_controller_architecture of ntm_controller is
   signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- TRAINER
+  -- CONTROL
+  signal start_trainer : std_logic;
+  signal ready_trainer : std_logic;
+
+  signal h_in_enable_trainer : std_logic;
+
+  signal w_out_i_enable_trainer : std_logic;
+  signal w_out_l_enable_trainer : std_logic;
+  signal w_out_x_enable_trainer : std_logic;
+
+  signal k_out_l_enable_trainer : std_logic;
+  signal k_out_k_enable_trainer : std_logic;
+
+  signal b_out_enable_trainer : std_logic;
+
+  -- DATA
+  signal h_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal w_out_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal b_out_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
@@ -302,6 +325,46 @@ begin
       MODULO_IN => modulo_in_vector_logistic,
       DATA_IN   => data_in_vector_logistic,
       DATA_OUT  => data_out_vector_logistic
+      );
+
+  -- TRAINER
+  ntm : ntm_trainer
+    generic map (
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R,
+
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_trainer,
+      READY => ready_trainer,
+
+      H_IN_ENABLE => h_in_enable_trainer,
+
+      W_OUT_I_ENABLE => w_out_i_enable_trainer,
+      W_OUT_L_ENABLE => w_out_l_enable_trainer,
+      W_OUT_X_ENABLE => w_out_x_enable_trainer,
+
+      K_OUT_L_ENABLE => k_out_l_enable_trainer,
+      K_OUT_K_ENABLE => k_out_k_enable_trainer,
+
+      B_OUT_ENABLE => b_out_enable_trainer,
+
+      -- DATA
+      H_IN => h_in_trainer,
+
+      W_OUT => w_out_trainer,
+      K_OUT => k_out_trainer,
+      B_OUT => b_out_trainer
       );
 
 end architecture;

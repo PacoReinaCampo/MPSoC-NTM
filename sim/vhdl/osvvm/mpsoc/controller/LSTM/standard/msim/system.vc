@@ -28,6 +28,14 @@
 ../../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_root.vhd
 ../../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_logarithm.vhd
 
+../../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_determinant.vhd
+../../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_inversion.vhd
+../../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_product.vhd
+../../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_rank.vhd
+../../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_transpose.vhd
+../../../../../../../../rtl/vhdl/math/algebra/ntm_scalar_product.vhd
+../../../../../../../../rtl/vhdl/math/algebra/ntm_vector_product.vhd
+
 ../../../../../../../../rtl/vhdl/math/function/convolution/scalar/ntm_scalar_convolution_function.vhd
 ../../../../../../../../rtl/vhdl/math/function/cosine/scalar/ntm_scalar_cosine_similarity_function.vhd
 ../../../../../../../../rtl/vhdl/math/function/sigmoid/scalar/hyperbolic/ntm_scalar_cosh_function.vhd
@@ -57,10 +65,15 @@
 
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_controller.vhd
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_forget_gate_vector.vhd
+../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_forget_trainer.vhd
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_hidden_gate_vector.vhd
+../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_hidden_trainer.vhd
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_input_gate_vector.vhd
+../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_input_trainer.vhd
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_output_gate_vector.vhd
+../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_output_trainer.vhd
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_state_gate_vector.vhd
+../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_state_trainer.vhd
 
 ../../../../../../../../bench/vhdl/osvvm/controller/LSTM/standard/ntm_standard_lstm_testbench.vhd
 
