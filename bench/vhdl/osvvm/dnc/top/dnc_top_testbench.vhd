@@ -62,10 +62,10 @@ architecture dnc_top_testbench_architecture of dnc_top_testbench is
   signal start_top : std_logic;
   signal ready_top : std_logic;
 
-  signal w_in_i_enable_top : std_logic;
   signal w_in_l_enable_top : std_logic;
   signal w_in_x_enable_top : std_logic;
 
+  signal k_in_i_enable_top : std_logic;
   signal k_in_l_enable_top : std_logic;
   signal k_in_k_enable_top : std_logic;
 
@@ -109,10 +109,10 @@ begin
       START => start_top,
       READY => ready_top,
 
-      W_IN_I_ENABLE => w_in_i_enable_top,
       W_IN_L_ENABLE => w_in_l_enable_top,
       W_IN_X_ENABLE => w_in_x_enable_top,
 
+      K_IN_I_ENABLE => k_in_i_enable_top,
       K_IN_L_ENABLE => k_in_l_enable_top,
       K_IN_K_ENABLE => k_in_k_enable_top,
 

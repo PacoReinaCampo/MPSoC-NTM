@@ -65,10 +65,10 @@ entity ntm_controller is
     START : in  std_logic;
     READY : out std_logic;
 
-    W_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
     W_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
     W_IN_X_ENABLE : in std_logic;       -- for x in 0 to X-1
 
+    K_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
     K_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
     K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
@@ -187,10 +187,10 @@ architecture ntm_controller_architecture of ntm_controller is
 
   signal h_in_enable_trainer : std_logic;
 
-  signal w_out_i_enable_trainer : std_logic;
   signal w_out_l_enable_trainer : std_logic;
   signal w_out_x_enable_trainer : std_logic;
 
+  signal k_out_i_enable_trainer : std_logic;
   signal k_out_l_enable_trainer : std_logic;
   signal k_out_k_enable_trainer : std_logic;
 
@@ -363,10 +363,10 @@ begin
 
       H_IN_ENABLE => h_in_enable_trainer,
 
-      W_OUT_I_ENABLE => w_out_i_enable_trainer,
       W_OUT_L_ENABLE => w_out_l_enable_trainer,
       W_OUT_X_ENABLE => w_out_x_enable_trainer,
 
+      K_OUT_I_ENABLE => k_out_i_enable_trainer,
       K_OUT_L_ENABLE => k_out_l_enable_trainer,
       K_OUT_K_ENABLE => k_out_k_enable_trainer,
 

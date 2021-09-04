@@ -252,10 +252,10 @@ package ntm_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      W_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
       W_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
       W_IN_X_ENABLE : in std_logic;       -- for x in 0 to X-1
 
+      K_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
       K_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
       K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 

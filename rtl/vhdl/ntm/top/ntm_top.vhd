@@ -65,10 +65,10 @@ entity ntm_top is
     START : in  std_logic;
     READY : out std_logic;
 
-    W_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
     W_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
     W_IN_X_ENABLE : in std_logic;       -- for x in 0 to X-1
 
+    K_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
     K_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
     K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
@@ -110,10 +110,10 @@ architecture ntm_top_architecture of ntm_top is
   signal start_controller : std_logic;
   signal ready_controller : std_logic;
 
-  signal w_in_i_enable_controller : std_logic;
   signal w_in_l_enable_controller : std_logic;
   signal w_in_x_enable_controller : std_logic;
 
+  signal k_in_i_enable_controller : std_logic;
   signal k_in_l_enable_controller : std_logic;
   signal k_in_k_enable_controller : std_logic;
 
@@ -332,10 +332,10 @@ begin
       START => start_controller,
       READY => ready_controller,
 
-      W_IN_I_ENABLE => w_in_i_enable_controller,
       W_IN_L_ENABLE => w_in_l_enable_controller,
       W_IN_X_ENABLE => w_in_x_enable_controller,
 
+      K_IN_I_ENABLE => k_in_i_enable_controller,
       K_IN_L_ENABLE => k_in_l_enable_controller,
       K_IN_K_ENABLE => k_in_k_enable_controller,
 

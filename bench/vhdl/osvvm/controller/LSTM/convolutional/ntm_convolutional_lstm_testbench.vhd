@@ -229,10 +229,10 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal start_controller : std_logic;
   signal ready_controller : std_logic;
 
-  signal w_in_i_enable_controller : std_logic;
   signal w_in_l_enable_controller : std_logic;
   signal w_in_x_enable_controller : std_logic;
 
+  signal k_in_i_enable_controller : std_logic;
   signal k_in_l_enable_controller : std_logic;
   signal k_in_k_enable_controller : std_logic;
 
@@ -535,10 +535,10 @@ begin
       START => start_controller,
       READY => ready_controller,
 
-      W_IN_I_ENABLE => w_in_i_enable_controller,
       W_IN_L_ENABLE => w_in_l_enable_controller,
       W_IN_X_ENABLE => w_in_x_enable_controller,
 
+      K_IN_I_ENABLE => k_in_i_enable_controller,
       K_IN_L_ENABLE => k_in_l_enable_controller,
       K_IN_K_ENABLE => k_in_k_enable_controller,
 
