@@ -208,7 +208,7 @@ begin
         when ENDER_STATE =>             -- STEP 3
 
           if (ready_vector_multiplication = '1') then
-            if (index_j_loop = J-1) then
+            if (index_i_loop = I-1 and index_j_loop = J-1) then
               -- Control Outputs
               READY <= '1';
 
@@ -237,6 +237,7 @@ begin
             -- Control Internal
             start_vector_multiplication <= '0';
 
+            data_in_i_multiplication_int <= '0';
             data_in_j_multiplication_int <= '0';
           end if;
 

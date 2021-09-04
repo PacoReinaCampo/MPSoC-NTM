@@ -209,7 +209,7 @@ begin
         when ENDER_STATE =>             -- STEP 3
 
           if (ready_vector_logarithm = '1') then
-            if (index_j_loop = J-1) then
+            if (index_i_loop = I-1 and index_j_loop = J-1) then
               -- Control Outputs
               READY <= '1';
 
@@ -238,6 +238,7 @@ begin
             -- Control Internal
             start_vector_logarithm <= '0';
 
+            data_in_i_logarithm_int <= '0';
             data_in_j_logarithm_int <= '0';
           end if;
 

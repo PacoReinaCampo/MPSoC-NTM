@@ -252,7 +252,7 @@ begin
         when ENDER_STATE =>             -- STEP 3
 
           if (ready_vector_cosine_similarity = '1') then
-            if (index_j_loop = J-1) then
+            if (index_i_loop = I-1 and index_j_loop = J-1) then
               -- Control Outputs
               READY <= '1';
 
@@ -281,7 +281,9 @@ begin
             -- Control Internal
             start_vector_cosine_similarity <= '0';
 
+            data_a_in_i_cosine_similarity_int <= '0';
             data_a_in_j_cosine_similarity_int <= '0';
+            data_b_in_i_cosine_similarity_int <= '0';
             data_b_in_j_cosine_similarity_int <= '0';
           end if;
 
