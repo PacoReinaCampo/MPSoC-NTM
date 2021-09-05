@@ -69,13 +69,11 @@
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_forget_gate_vector.vhd
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_forget_trainer.vhd
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_hidden_gate_vector.vhd
-../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_hidden_trainer.vhd
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_input_gate_vector.vhd
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_input_trainer.vhd
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_output_gate_vector.vhd
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_output_trainer.vhd
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_state_gate_vector.vhd
-../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_state_trainer.vhd
 
 ../../../../../../../../bench/vhdl/osvvm/controller/LSTM/standard/ntm_standard_lstm_testbench.vhd
 

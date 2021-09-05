@@ -363,29 +363,6 @@ architecture ntm_controller_architecture of ntm_controller is
 
   signal s_out_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- STATE TRAINER
-  -- CONTROL
-  signal start_state_trainer : std_logic;
-  signal ready_state_trainer : std_logic;
-
-  signal h_in_enable_state_trainer : std_logic;
-
-  signal w_out_l_enable_state_trainer : std_logic;
-  signal w_out_x_enable_state_trainer : std_logic;
-
-  signal k_out_i_enable_state_trainer : std_logic;
-  signal k_out_l_enable_state_trainer : std_logic;
-  signal k_out_k_enable_state_trainer : std_logic;
-
-  signal b_out_enable_state_trainer : std_logic;
-
-  -- DATA
-  signal h_in_state_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal w_out_state_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_out_state_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal b_out_state_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-
   -- HIDDEN GATE VECTOR
   -- CONTROL
   signal start_hidden_gate_vector : std_logic;
@@ -401,29 +378,6 @@ architecture ntm_controller_architecture of ntm_controller is
   signal o_in_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal h_out_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- HIDDEN TRAINER
-  -- CONTROL
-  signal start_hidden_trainer : std_logic;
-  signal ready_hidden_trainer : std_logic;
-
-  signal h_in_enable_hidden_trainer : std_logic;
-
-  signal w_out_l_enable_hidden_trainer : std_logic;
-  signal w_out_x_enable_hidden_trainer : std_logic;
-
-  signal k_out_i_enable_hidden_trainer : std_logic;
-  signal k_out_l_enable_hidden_trainer : std_logic;
-  signal k_out_k_enable_hidden_trainer : std_logic;
-
-  signal b_out_enable_hidden_trainer : std_logic;
-
-  -- DATA
-  signal h_in_hidden_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal w_out_hidden_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_out_hidden_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal b_out_hidden_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -840,46 +794,6 @@ begin
       S_OUT => s_out_state_gate_vector
       );
 
-  -- STATE TRAINER
-  state_trainer : ntm_state_trainer
-    generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_state_trainer,
-      READY => ready_state_trainer,
-
-      H_IN_ENABLE => h_in_enable_state_trainer,
-
-      W_OUT_L_ENABLE => w_out_l_enable_state_trainer,
-      W_OUT_X_ENABLE => w_out_x_enable_state_trainer,
-
-      K_OUT_I_ENABLE => k_out_i_enable_state_trainer,
-      K_OUT_L_ENABLE => k_out_l_enable_state_trainer,
-      K_OUT_K_ENABLE => k_out_k_enable_state_trainer,
-
-      B_OUT_ENABLE => b_out_enable_state_trainer,
-
-      -- DATA
-      H_IN => h_in_state_trainer,
-
-      W_OUT => w_out_state_trainer,
-      K_OUT => k_out_state_trainer,
-      B_OUT => b_out_state_trainer
-      );
-
   -- HIDDEN GATE VECTOR
   hidden_gate_vector : ntm_hidden_gate_vector
     generic map (
@@ -911,46 +825,6 @@ begin
       O_IN => o_in_hidden_gate_vector,
 
       H_OUT => h_out_hidden_gate_vector
-      );
-
-  -- HIDDEN TRAINER
-  hidden_trainer : ntm_hidden_trainer
-    generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_hidden_trainer,
-      READY => ready_hidden_trainer,
-
-      H_IN_ENABLE => h_in_enable_hidden_trainer,
-
-      W_OUT_L_ENABLE => w_out_l_enable_hidden_trainer,
-      W_OUT_X_ENABLE => w_out_x_enable_hidden_trainer,
-
-      K_OUT_I_ENABLE => k_out_i_enable_hidden_trainer,
-      K_OUT_L_ENABLE => k_out_l_enable_hidden_trainer,
-      K_OUT_K_ENABLE => k_out_k_enable_hidden_trainer,
-
-      B_OUT_ENABLE => b_out_enable_hidden_trainer,
-
-      -- DATA
-      H_IN => h_in_hidden_trainer,
-
-      W_OUT => w_out_hidden_trainer,
-      K_OUT => k_out_hidden_trainer,
-      B_OUT => b_out_hidden_trainer
       );
 
 end architecture;
