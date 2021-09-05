@@ -64,42 +64,18 @@ entity ntm_state_gate_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    W_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
-    W_IN_X_ENABLE : in std_logic;       -- for x in 0 to X-1
-    X_IN_ENABLE   : in std_logic;       -- for x in 0 to X-1
-
-    K_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
-    K_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
-    K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
-    R_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
-    R_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
-
-    U_IN_ENABLE : in std_logic;         -- for l in 0 to L-1 (square matrix)
-    H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
-
     S_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
     I_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
     F_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
-
-    B_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+    A_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
     S_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
-    W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-    K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-    U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
     S_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     I_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-    B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     S_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -153,46 +129,13 @@ architecture ntm_state_gate_vector_architecture of ntm_state_gate_vector is
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MATRIX CONVOLUTION
-  -- CONTROL
-  signal start_matrix_convolution : std_logic;
-  signal ready_matrix_convolution : std_logic;
-
-  signal data_a_in_i_enable_matrix_convolution : std_logic;
-  signal data_a_in_j_enable_matrix_convolution : std_logic;
-  signal data_b_in_i_enable_matrix_convolution : std_logic;
-  signal data_b_in_j_enable_matrix_convolution : std_logic;
-
-  signal data_out_i_enable_matrix_convolution : std_logic;
-  signal data_out_j_enable_matrix_convolution : std_logic;
-
-  -- DATA
-  signal modulo_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR TANH
-  -- CONTROL
-  signal start_vector_tanh : std_logic;
-  signal ready_vector_tanh : std_logic;
-
-  signal data_in_enable_vector_tanh : std_logic;
-
-  signal data_out_enable_vector_tanh : std_logic;
-
-  -- DATA
-  signal modulo_in_vector_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_vector_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
-
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
 
-  -- s(t;l) = f(t;l) o s(t-1;l) + i(t;l) o tanh(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+  -- s(t;l) = f(t;l) o s(t-1;l) + i(t;l) o a(t;l)
 
   -- s(t=0;l) = 0
 
@@ -252,64 +195,6 @@ begin
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
       DATA_OUT  => data_out_vector_multiplier
-      );
-
-  -- MATRIX CONVOLUTION
-  matrix_convolution_function : ntm_matrix_convolution_function
-    generic map (
-      I => I,
-      J => J,
-
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_matrix_convolution,
-      READY => ready_matrix_convolution,
-
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_convolution,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_convolution,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_convolution,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_convolution,
-
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_convolution,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_convolution,
-
-      -- DATA
-      MODULO_IN => modulo_in_matrix_convolution,
-      DATA_A_IN => data_a_in_matrix_convolution,
-      DATA_B_IN => data_b_in_matrix_convolution,
-      DATA_OUT  => data_out_matrix_convolution
-      );
-
-  -- VECTOR TANH
-  vector_tanh_function : ntm_vector_tanh_function
-    generic map (
-      I => I,
-
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_tanh,
-      READY => ready_vector_tanh,
-
-      DATA_IN_ENABLE => data_in_enable_vector_tanh,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_tanh,
-
-      -- DATA
-      MODULO_IN => modulo_in_vector_tanh,
-      DATA_IN   => data_in_vector_tanh,
-      DATA_OUT  => data_out_vector_tanh
       );
 
 end architecture;

@@ -56,6 +56,65 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal CLK : std_logic;
   signal RST : std_logic;
 
+  -- ACTIVATION GATE VECTOR
+  -- CONTROL
+  signal start_activation_gate_vector : std_logic;
+  signal ready_activation_gate_vector : std_logic;
+
+  signal w_in_l_enable_activation_gate_vector : std_logic;
+  signal w_in_x_enable_activation_gate_vector : std_logic;
+  signal x_in_enable_activation_gate_vector   : std_logic;
+
+  signal k_in_i_enable_activation_gate_vector : std_logic;
+  signal k_in_l_enable_activation_gate_vector : std_logic;
+  signal k_in_k_enable_activation_gate_vector : std_logic;
+  signal r_in_i_enable_activation_gate_vector : std_logic;
+  signal r_in_k_enable_activation_gate_vector : std_logic;
+
+  signal u_in_enable_activation_gate_vector : std_logic;
+  signal h_in_enable_activation_gate_vector : std_logic;
+
+  signal b_in_enable_activation_gate_vector : std_logic;
+
+  signal a_out_enable_activation_gate_vector : std_logic;
+
+  -- DATA
+  signal w_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal x_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal k_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal r_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal u_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal h_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal b_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal a_out_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- ACTIVATION TRAINER
+  -- CONTROL
+  signal start_activation_trainer : std_logic;
+  signal ready_activation_trainer : std_logic;
+
+  signal h_in_enable_activation_trainer : std_logic;
+
+  signal w_out_l_enable_activation_trainer : std_logic;
+  signal w_out_x_enable_activation_trainer : std_logic;
+
+  signal k_out_i_enable_activation_trainer : std_logic;
+  signal k_out_l_enable_activation_trainer : std_logic;
+  signal k_out_k_enable_activation_trainer : std_logic;
+
+  signal b_out_enable_activation_trainer : std_logic;
+
+  -- DATA
+  signal h_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal w_out_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal b_out_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- INTPUT GATE VECTOR
   -- CONTROL
   signal start_input_gate_vector : std_logic;
@@ -169,42 +228,18 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal start_state_gate_vector : std_logic;
   signal ready_state_gate_vector : std_logic;
 
-  signal w_in_l_enable_state_gate_vector : std_logic;
-  signal w_in_x_enable_state_gate_vector : std_logic;
-  signal x_in_enable_state_gate_vector   : std_logic;
-
-  signal k_in_i_enable_state_gate_vector : std_logic;
-  signal k_in_l_enable_state_gate_vector : std_logic;
-  signal k_in_k_enable_state_gate_vector : std_logic;
-  signal r_in_i_enable_state_gate_vector : std_logic;
-  signal r_in_k_enable_state_gate_vector : std_logic;
-
-  signal u_in_enable_state_gate_vector : std_logic;
-  signal h_in_enable_state_gate_vector : std_logic;
-
   signal s_in_enable_state_gate_vector : std_logic;
   signal i_in_enable_state_gate_vector : std_logic;
   signal f_in_enable_state_gate_vector : std_logic;
-
-  signal b_in_enable_state_gate_vector : std_logic;
+  signal a_in_enable_state_gate_vector : std_logic;
 
   signal s_out_enable_state_gate_vector : std_logic;
 
   -- DATA
-  signal w_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal x_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal k_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal r_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal u_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal h_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
   signal s_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal i_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal f_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal b_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal a_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal s_out_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -260,6 +295,99 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- ACTIVATION GATE VECTOR
+  activation_gate_vector : ntm_activation_gate_vector
+    generic map (
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R,
+
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_activation_gate_vector,
+      READY => ready_activation_gate_vector,
+
+      W_IN_L_ENABLE => w_in_l_enable_activation_gate_vector,
+      W_IN_X_ENABLE => w_in_x_enable_activation_gate_vector,
+      X_IN_ENABLE   => x_in_enable_activation_gate_vector,
+
+      K_IN_I_ENABLE => k_in_i_enable_activation_gate_vector,
+      K_IN_L_ENABLE => k_in_l_enable_activation_gate_vector,
+      K_IN_K_ENABLE => k_in_k_enable_activation_gate_vector,
+      R_IN_I_ENABLE => r_in_i_enable_activation_gate_vector,
+      R_IN_K_ENABLE => r_in_k_enable_activation_gate_vector,
+
+      U_IN_ENABLE => u_in_enable_activation_gate_vector,
+      H_IN_ENABLE => h_in_enable_activation_gate_vector,
+
+      B_IN_ENABLE => b_in_enable_activation_gate_vector,
+
+      A_OUT_ENABLE => a_out_enable_activation_gate_vector,
+
+      -- DATA
+      W_IN => w_in_activation_gate_vector,
+      X_IN => x_in_activation_gate_vector,
+
+      K_IN => k_in_activation_gate_vector,
+      R_IN => r_in_activation_gate_vector,
+
+      U_IN => u_in_activation_gate_vector,
+      H_IN => h_in_activation_gate_vector,
+
+      B_IN => b_in_activation_gate_vector,
+
+      A_OUT => a_out_activation_gate_vector
+      );
+
+  -- ACTIVATION TRAINER
+  activation_trainer : ntm_activation_trainer
+    generic map (
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R,
+
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_activation_trainer,
+      READY => ready_activation_trainer,
+
+      H_IN_ENABLE => h_in_enable_activation_trainer,
+
+      W_OUT_L_ENABLE => w_out_l_enable_activation_trainer,
+      W_OUT_X_ENABLE => w_out_x_enable_activation_trainer,
+
+      K_OUT_I_ENABLE => k_out_i_enable_activation_trainer,
+      K_OUT_L_ENABLE => k_out_l_enable_activation_trainer,
+      K_OUT_K_ENABLE => k_out_k_enable_activation_trainer,
+
+      B_OUT_ENABLE => b_out_enable_activation_trainer,
+
+      -- DATA
+      H_IN => h_in_activation_trainer,
+
+      W_OUT => w_out_activation_trainer,
+      K_OUT => k_out_activation_trainer,
+      B_OUT => b_out_activation_trainer
+      );
 
   -- INTPUT GATE VECTOR
   input_gate_vector : ntm_input_gate_vector
@@ -441,42 +569,18 @@ begin
       START => start_state_gate_vector,
       READY => ready_state_gate_vector,
 
-      W_IN_L_ENABLE => w_in_l_enable_state_gate_vector,
-      W_IN_X_ENABLE => w_in_x_enable_state_gate_vector,
-      X_IN_ENABLE   => x_in_enable_state_gate_vector,
-
-      K_IN_I_ENABLE => k_in_i_enable_state_gate_vector,
-      K_IN_L_ENABLE => k_in_l_enable_state_gate_vector,
-      K_IN_K_ENABLE => k_in_k_enable_state_gate_vector,
-      R_IN_I_ENABLE => r_in_i_enable_state_gate_vector,
-      R_IN_K_ENABLE => r_in_k_enable_state_gate_vector,
-
-      U_IN_ENABLE => u_in_enable_state_gate_vector,
-      H_IN_ENABLE => h_in_enable_state_gate_vector,
-
       S_IN_ENABLE => s_in_enable_state_gate_vector,
       I_IN_ENABLE => i_in_enable_state_gate_vector,
       F_IN_ENABLE => f_in_enable_state_gate_vector,
-
-      B_IN_ENABLE => b_in_enable_state_gate_vector,
+      A_IN_ENABLE => a_in_enable_state_gate_vector,
 
       S_OUT_ENABLE => s_out_enable_state_gate_vector,
 
       -- DATA
-      W_IN => w_in_state_gate_vector,
-      X_IN => x_in_state_gate_vector,
-
-      K_IN => k_in_state_gate_vector,
-      R_IN => r_in_state_gate_vector,
-
-      U_IN => u_in_state_gate_vector,
-      H_IN => h_in_state_gate_vector,
-
       S_IN => s_in_state_gate_vector,
       I_IN => i_in_state_gate_vector,
       F_IN => f_in_state_gate_vector,
-
-      B_IN => b_in_state_gate_vector,
+      A_IN => a_in_state_gate_vector,
 
       S_OUT => s_out_state_gate_vector
       );

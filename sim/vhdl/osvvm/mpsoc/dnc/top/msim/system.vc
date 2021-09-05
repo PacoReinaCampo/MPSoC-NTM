@@ -71,6 +71,8 @@
 ../../../../../../../rtl/vhdl/math/algebra/ntm_vector_product.vhd
 
 ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_controller.vhd
+../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_activation_gate_vector.vhd
+../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_activation_trainer.vhd
 ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_forget_gate_vector.vhd
 ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_forget_trainer.vhd
 ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_hidden_gate_vector.vhd
