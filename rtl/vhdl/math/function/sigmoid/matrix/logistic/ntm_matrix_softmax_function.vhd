@@ -153,6 +153,10 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          -- Assignations
+          index_i_loop <= 0;
+          index_j_loop <= 0;
+
           if (START = '1') then
             -- FSM Control
             softmax_ctrl_fsm_int <= INPUT_I_STATE;
@@ -166,8 +170,10 @@ begin
 
             data_in_vector_softmax <= DATA_IN;
 
-            -- Control Internal
-            start_vector_softmax <= '1';
+            if (index_i_loop = 0) then
+              -- Control Internal
+              start_vector_softmax <= '1';
+            end if;
 
             data_in_enable_vector_softmax <= '1';
 
@@ -191,8 +197,10 @@ begin
 
             data_in_vector_softmax <= DATA_IN;
 
-            -- Control Internal
-            start_vector_softmax <= '1';
+            if (index_j_loop = 0) then
+              -- Control Internal
+              start_vector_softmax <= '1';
+            end if;
 
             data_in_enable_vector_softmax <= '1';
 
@@ -226,6 +234,7 @@ begin
             elsif (index_j_loop = J-1) then
               -- Control Internal
               index_i_loop <= index_i_loop + 1;
+              index_j_loop <= 0;
 
               -- FSM Control
               softmax_ctrl_fsm_int <= INPUT_I_STATE;

@@ -199,8 +199,10 @@ begin
           end if;
 
           if (data_a_in_i_exponentiator_int = '1' and data_b_in_i_exponentiator_int = '1') then
-            -- Control Internal
-            start_vector_exponentiator <= '1';
+            if (index_i_loop = 0) then
+              -- Control Internal
+              start_vector_exponentiator <= '1';
+            end if;
 
             -- Data Inputs
             modulo_in_vector_exponentiator <= MODULO_IN;
@@ -241,8 +243,10 @@ begin
           end if;
 
           if (data_a_in_j_exponentiator_int = '1' and data_b_in_j_exponentiator_int = '1') then
-            -- Control Internal
-            start_vector_exponentiator <= '1';
+            if (index_j_loop = 0) then
+              -- Control Internal
+              start_vector_exponentiator <= '1';
+            end if;
 
             -- Data Inputs
             modulo_in_vector_exponentiator <= MODULO_IN;

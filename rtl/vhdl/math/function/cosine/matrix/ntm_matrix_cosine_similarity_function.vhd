@@ -161,6 +161,10 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          -- Assignations
+          index_i_loop <= 0;
+          index_j_loop <= 0;
+
           if (START = '1') then
             -- FSM Control
             cosine_similarity_ctrl_fsm_int <= INPUT_I_STATE;
@@ -195,8 +199,10 @@ begin
           end if;
 
           if (data_a_in_i_cosine_similarity_int = '1' and data_b_in_i_cosine_similarity_int = '1') then
-            -- Control Internal
-            start_vector_cosine_similarity <= '1';
+            if (index_i_loop = 0) then
+              -- Control Internal
+              start_vector_cosine_similarity <= '1';
+            end if;
 
             -- Data Inputs
             modulo_in_vector_cosine_similarity <= MODULO_IN;
@@ -237,8 +243,10 @@ begin
           end if;
 
           if (data_a_in_j_cosine_similarity_int = '1' and data_b_in_j_cosine_similarity_int = '1') then
-            -- Control Internal
-            start_vector_cosine_similarity <= '1';
+            if (index_j_loop = 0) then
+              -- Control Internal
+              start_vector_cosine_similarity <= '1';
+            end if;
 
             -- Data Inputs
             modulo_in_vector_cosine_similarity <= MODULO_IN;
@@ -268,6 +276,7 @@ begin
             elsif (index_j_loop = J-1) then
               -- Control Internal
               index_i_loop <= index_i_loop + 1;
+              index_j_loop <= 0;
 
               -- FSM Control
               cosine_similarity_ctrl_fsm_int <= INPUT_I_STATE;
