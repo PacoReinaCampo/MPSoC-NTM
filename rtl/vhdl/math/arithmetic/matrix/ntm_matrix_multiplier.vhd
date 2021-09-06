@@ -147,6 +147,7 @@ begin
 
       -- Assignations
       index_i_loop <= 0;
+      index_j_loop <= 0;
 
       data_a_in_i_multiplier_int <= '0';
       data_a_in_j_multiplier_int <= '0';

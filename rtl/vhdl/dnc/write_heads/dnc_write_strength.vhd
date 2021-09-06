@@ -103,6 +103,17 @@ begin
 
   -- beta(t) = oneplus(beta^(t))
 
+  -- ASSIGNATIONS
+  -- CONTROL
+  start_scalar_oneplus <= START;
+
+  READY <= ready_scalar_oneplus;
+
+  -- DATA
+  data_in_scalar_oneplus <= BETA_IN;
+
+  BETA_OUT <= data_out_scalar_oneplus;
+
   ntm_scalar_oneplus_function_i : ntm_scalar_oneplus_function
     generic map (
       DATA_SIZE => DATA_SIZE

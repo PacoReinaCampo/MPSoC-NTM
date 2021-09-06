@@ -131,7 +131,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   -- DATA
   signal modulo_in_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_logistic  : std_logic;
 
   -- SOFTMAX
   -- CONTROL
@@ -271,7 +271,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   -- DATA
   signal modulo_in_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_logistic  : std_logic;
 
   -- SOFTMAX
   -- CONTROL
@@ -439,7 +439,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   -- DATA
   signal modulo_in_matrix_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_logistic  : std_logic;
 
   -- SOFTMAX
   -- CONTROL

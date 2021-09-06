@@ -148,7 +148,9 @@ begin
             data_in_scalar_tanh <= DATA_IN;
 
             -- Control Internal
-            start_scalar_tanh <= '1';
+            if (index_loop = 0) then
+              start_scalar_tanh <= '1';
+            end if;
 
             -- FSM Control
             tanh_ctrl_fsm_int <= ENDER_STATE;

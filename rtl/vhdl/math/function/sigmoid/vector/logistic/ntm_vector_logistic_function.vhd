@@ -66,7 +66,7 @@ entity ntm_vector_logistic_function is
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    DATA_OUT  : out std_logic
     );
 end entity;
 
@@ -107,7 +107,7 @@ architecture ntm_vector_logistic_function_architecture of ntm_vector_logistic_fu
   -- DATA
   signal modulo_in_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_logistic  : std_logic;
 
 begin
 
@@ -119,7 +119,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO;
+      DATA_OUT <= '0';
 
       -- Control Outputs
       READY <= '0';
@@ -148,7 +148,9 @@ begin
             data_in_scalar_logistic <= DATA_IN;
 
             -- Control Internal
-            start_scalar_logistic <= '1';
+            if (index_loop = 0) then
+              start_scalar_logistic <= '1';
+            end if;
 
             -- FSM Control
             logistic_ctrl_fsm_int <= ENDER_STATE;

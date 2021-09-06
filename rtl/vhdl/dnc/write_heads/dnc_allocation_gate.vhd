@@ -93,7 +93,7 @@ architecture dnc_allocation_gate_architecture of dnc_allocation_gate is
   -- DATA
   signal modulo_in_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_logistic  : std_logic;
 
 begin
 
@@ -103,6 +103,18 @@ begin
 
   -- ga(t) = sigmoid(g^(t))
 
+  -- ASSIGNATIONS
+  -- CONTROL
+  start_scalar_logistic <= START;
+
+  READY <= ready_scalar_logistic;
+
+  -- DATA
+  data_in_scalar_logistic <= GA_IN;
+
+  GA_OUT <= data_out_scalar_logistic;
+
+  -- SCALAR LOGISTIC
   ntm_scalar_logistic_function_i : ntm_scalar_logistic_function
     generic map (
       DATA_SIZE => DATA_SIZE

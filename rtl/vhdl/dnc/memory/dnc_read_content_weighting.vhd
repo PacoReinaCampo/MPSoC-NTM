@@ -109,11 +109,10 @@ architecture dnc_read_content_weighting_architecture of dnc_read_content_weighti
 
   -- DATA
   signal k_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal beta_in_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
   signal m_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal beta_in_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_in_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal c_out_vector_content_based_addressing     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal c_out_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -122,6 +121,26 @@ begin
   -----------------------------------------------------------------------
 
   -- c(t;i;j) = C(M(t-1;j;k),k(t;i;k),beta(t;i))
+
+  -- ASSIGNATIONS
+  -- CONTROL
+  start_vector_content_based_addressing <= START;
+
+  READY <= ready_vector_content_based_addressing;
+
+  k_in_enable_vector_content_based_addressing <= K_IN_ENABLE;
+
+  m_in_i_enable_vector_content_based_addressing <= M_IN_J_ENABLE;
+  m_in_j_enable_vector_content_based_addressing <= M_IN_K_ENABLE;
+
+  C_OUT_ENABLE <= c_out_enable_vector_content_based_addressing;
+
+  -- DATA
+  k_in_vector_content_based_addressing    <= K_IN;
+  m_in_vector_content_based_addressing    <= M_IN;
+  beta_in_vector_content_based_addressing <= BETA_IN;
+
+  C_OUT <= c_out_vector_content_based_addressing;
 
   -- VECTOR CONTENT BASED ADDRESSING
   dnc_content_based_addressing_i : dnc_content_based_addressing
@@ -149,8 +168,8 @@ begin
 
       -- DATA
       K_IN    => k_in_vector_content_based_addressing,
-      BETA_IN => beta_in_vector_content_based_addressing,
       M_IN    => m_in_vector_content_based_addressing,
+      BETA_IN => beta_in_vector_content_based_addressing,
 
       C_OUT => c_out_vector_content_based_addressing
       );

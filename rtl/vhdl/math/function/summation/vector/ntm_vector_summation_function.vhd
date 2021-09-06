@@ -151,7 +151,9 @@ begin
             data_in_scalar_summation <= DATA_IN;
 
             -- Control Internal
-            start_scalar_summation <= '1';
+            if (index_loop = 0) then
+              start_scalar_summation <= '1';
+            end if;
 
             -- FSM Control
             summation_ctrl_fsm_int <= ENDER_STATE;

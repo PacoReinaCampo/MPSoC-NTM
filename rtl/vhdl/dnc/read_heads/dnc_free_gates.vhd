@@ -89,15 +89,19 @@ architecture dnc_free_gates_architecture of dnc_free_gates is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- SCALAR LOGISTIC
+  -- VECTOR LOGISTIC
   -- CONTROL
-  signal start_scalar_logistic : std_logic;
-  signal ready_scalar_logistic : std_logic;
+  signal start_vector_logistic : std_logic;
+  signal ready_vector_logistic : std_logic;
+
+  signal data_in_enable_vector_logistic : std_logic;
+
+  signal data_out_enable_vector_logistic : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_logistic  : std_logic;
 
 begin
 
@@ -107,8 +111,28 @@ begin
 
   -- f(t;i) = sigmoid(f^(t;i))
 
-  ntm_scalar_logistic_function_i : ntm_scalar_logistic_function
+  -- ASSIGNATIONS
+  -- CONTROL
+  start_vector_logistic <= START;
+
+  READY <= ready_vector_logistic;
+
+  data_in_enable_vector_logistic <= F_IN_ENABLE;
+
+  F_OUT_ENABLE <= data_out_enable_vector_logistic;
+
+  -- DATA
+  modulo_in_vector_logistic <= (others => '1');
+
+  data_in_vector_logistic <= F_IN;
+
+  F_OUT <= data_out_vector_logistic;
+
+  -- VECTOR LOGISTIC
+  vector_logistic_function : ntm_vector_logistic_function
     generic map (
+      I => R,
+
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -117,13 +141,17 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_logistic,
-      READY => ready_scalar_logistic,
+      START => start_vector_logistic,
+      READY => ready_vector_logistic,
+
+      DATA_IN_ENABLE => data_in_enable_vector_logistic,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_logistic,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_logistic,
-      DATA_IN   => data_in_scalar_logistic,
-      DATA_OUT  => data_out_scalar_logistic
+      MODULO_IN => modulo_in_vector_logistic,
+      DATA_IN   => data_in_vector_logistic,
+      DATA_OUT  => data_out_vector_logistic
       );
 
 end architecture;

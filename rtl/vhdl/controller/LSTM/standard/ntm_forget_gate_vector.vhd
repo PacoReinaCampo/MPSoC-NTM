@@ -166,7 +166,7 @@ architecture ntm_forget_gate_vector_architecture of ntm_forget_gate_vector is
   -- DATA
   signal modulo_in_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_logistic  : std_logic;
 
 begin
 

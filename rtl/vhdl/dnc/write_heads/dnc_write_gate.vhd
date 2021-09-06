@@ -93,7 +93,7 @@ architecture dnc_write_gate_architecture of dnc_write_gate is
   -- DATA
   signal modulo_in_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_logistic  : std_logic;
 
 begin
 
@@ -102,6 +102,17 @@ begin
   -----------------------------------------------------------------------
 
   -- gw(t) = sigmoid(gw^(t))
+
+  -- ASSIGNATIONS
+  -- CONTROL
+  start_scalar_logistic <= START;
+
+  READY <= ready_scalar_logistic;
+
+  -- DATA
+  data_in_scalar_logistic <= GW_IN;
+
+  GW_OUT <= data_out_scalar_logistic;
 
   ntm_scalar_logistic_function_i : ntm_scalar_logistic_function
     generic map (

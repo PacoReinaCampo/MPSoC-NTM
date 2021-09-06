@@ -147,6 +147,7 @@ begin
 
       -- Assignations
       index_i_loop <= 0;
+      index_j_loop <= 0;
 
       data_a_in_i_exponentiator_int <= '0';
       data_a_in_j_exponentiator_int <= '0';
@@ -159,6 +160,10 @@ begin
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
+
+          -- Assignations
+          index_i_loop <= 0;
+          index_j_loop <= 0;
 
           if (START = '1') then
             -- FSM Control
@@ -267,6 +272,7 @@ begin
             elsif (index_j_loop = J-1) then
               -- Control Internal
               index_i_loop <= index_i_loop + 1;
+              index_j_loop <= 0;
 
               -- FSM Control
               exponentiator_ctrl_fsm_int <= INPUT_I_STATE;

@@ -148,7 +148,9 @@ begin
             data_in_scalar_sinh <= DATA_IN;
 
             -- Control Internal
-            start_scalar_sinh <= '1';
+            if (index_loop = 0) then
+              start_scalar_sinh <= '1';
+            end if;
 
             -- FSM Control
             sinh_ctrl_fsm_int <= ENDER_STATE;

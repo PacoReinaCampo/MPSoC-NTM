@@ -152,7 +152,9 @@ begin
             data_in_scalar_mod <= DATA_IN;
 
             -- Control Internal
-            start_scalar_mod <= '1';
+            if (index_loop = 0) then
+              start_scalar_mod <= '1';
+            end if;
 
             -- FSM Control
             mod_ctrl_fsm_int <= ENDER_STATE;

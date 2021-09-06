@@ -154,7 +154,9 @@ begin
 
           if (data_a_in_root_int = '1' and data_b_in_root_int = '1') then
             -- Control Internal
-            start_scalar_root <= '1';
+            if (index_loop = 0) then
+              start_scalar_root <= '1';
+            end if;
 
             -- Data Inputs
             modulo_in_scalar_root <= MODULO_IN;

@@ -151,6 +151,7 @@ begin
 
       -- Assignations
       index_i_loop <= 0;
+      index_j_loop <= 0;
 
       data_a_in_i_adder_int <= '0';
       data_a_in_j_adder_int <= '0';

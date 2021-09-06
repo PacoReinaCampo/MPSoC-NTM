@@ -89,26 +89,50 @@ architecture dnc_read_strengths_architecture of dnc_read_strengths is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- SCALAR ONEPLUS
+  -- VECTOR ONEPLUS
   -- CONTROL
-  signal start_scalar_oneplus : std_logic;
-  signal ready_scalar_oneplus : std_logic;
+  signal start_vector_oneplus : std_logic;
+  signal ready_vector_oneplus : std_logic;
+
+  signal data_in_enable_vector_oneplus : std_logic;
+
+  signal data_out_enable_vector_oneplus : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
-
+ 
   -- beta(t;i) = oneplus(beta^(t;i))
 
-  ntm_scalar_oneplus_function_i : ntm_scalar_oneplus_function
+  -- ASSIGNATIONS
+  -- CONTROL
+  start_vector_oneplus <= START;
+
+  READY <= ready_vector_oneplus;
+
+  data_in_enable_vector_oneplus <= BETA_IN_ENABLE;
+
+  BETA_OUT_ENABLE <= data_out_enable_vector_oneplus;
+
+  -- DATA
+  modulo_in_vector_oneplus <= (others => '1');
+
+  data_in_vector_oneplus <= BETA_IN;
+
+  BETA_OUT <= data_out_vector_oneplus;
+
+  -- VECTOR ONEPLUS
+  ntm_vector_oneplus_function_i : ntm_vector_oneplus_function
     generic map (
+      I => R,
+
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -117,13 +141,17 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_oneplus,
-      READY => ready_scalar_oneplus,
+      START => start_vector_oneplus,
+      READY => ready_vector_oneplus,
+
+      DATA_IN_ENABLE => data_in_enable_vector_oneplus,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_oneplus,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_oneplus,
-      DATA_IN   => data_in_scalar_oneplus,
-      DATA_OUT  => data_out_scalar_oneplus
+      MODULO_IN => modulo_in_vector_oneplus,
+      DATA_IN   => data_in_vector_oneplus,
+      DATA_OUT  => data_out_vector_oneplus
       );
 
 end architecture;

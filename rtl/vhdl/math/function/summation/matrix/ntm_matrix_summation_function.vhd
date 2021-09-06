@@ -139,6 +139,7 @@ begin
 
       -- Assignations
       index_i_loop <= 0;
+      index_j_loop <= 0;
 
       data_in_i_summation_int <= '0';
       data_in_j_summation_int <= '0';

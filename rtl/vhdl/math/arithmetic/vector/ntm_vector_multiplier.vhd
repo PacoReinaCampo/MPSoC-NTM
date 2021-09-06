@@ -154,7 +154,9 @@ begin
 
           if (data_a_in_multiplier_int = '1' and data_b_in_multiplier_int = '1') then
             -- Control Internal
-            start_scalar_multiplier <= '1';
+            if (index_loop = 0) then
+              start_scalar_multiplier <= '1';
+            end if;
 
             -- Data Inputs
             modulo_in_scalar_multiplier <= MODULO_IN;

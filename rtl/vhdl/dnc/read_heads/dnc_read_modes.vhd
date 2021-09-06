@@ -118,6 +118,31 @@ begin
 
   -- pi(t;i;p) = softmax(pi^(t;i;p))
 
+  -- ASSIGNATIONS
+  -- CONTROL
+  start_matrix_softmax <= START;
+
+  READY <= ready_matrix_softmax;
+
+  size_in_i_enable_matrix_softmax <= PI_IN_I_ENABLE;
+  size_in_j_enable_matrix_softmax <= PI_IN_P_ENABLE;
+
+  data_in_i_enable_matrix_softmax <= PI_IN_I_ENABLE;
+  data_in_j_enable_matrix_softmax <= PI_IN_P_ENABLE;
+
+  PI_OUT_I_ENABLE <= data_out_i_enable_matrix_softmax;
+  PI_OUT_P_ENABLE <= data_out_j_enable_matrix_softmax;
+
+  -- DATA
+  modulo_in_matrix_softmax <= (others => '0');
+
+  size_in_matrix_softmax <= std_logic_vector(to_unsigned(R, DATA_SIZE));
+
+  data_in_matrix_softmax <= PI_IN;
+
+  PI_OUT <= data_out_matrix_softmax;
+
+  -- MATRIX SOFTMAX
   ntm_matrix_softmax_function_i : ntm_matrix_softmax_function
     generic map (
       I => R,
