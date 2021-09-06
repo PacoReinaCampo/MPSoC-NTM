@@ -136,6 +136,9 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          -- Assignations
+          index_loop <= 0;
+
           if (START = '1') then
             -- FSM Control
             inverter_ctrl_fsm_int <= INPUT_STATE;
@@ -149,8 +152,10 @@ begin
 
             data_in_scalar_inverter <= DATA_IN;
 
-            -- Control Internal
-            start_scalar_inverter <= '1';
+            if (index_loop = 0) then
+              -- Control Internal
+              start_scalar_inverter <= '1';
+            end if;
 
             -- FSM Control
             inverter_ctrl_fsm_int <= ENDER_STATE;

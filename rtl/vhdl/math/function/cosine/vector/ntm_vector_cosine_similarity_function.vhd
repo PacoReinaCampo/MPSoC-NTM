@@ -145,24 +145,15 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          -- Assignations
+          index_loop <= 0;
+
           if (START = '1') then
             -- FSM Control
             cosine_similarity_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
         when INPUT_STATE =>             -- STEP 1
-
-          if (data_a_in_cosine_similarity_int = '1' and data_b_in_cosine_similarity_int = '1') then
-            -- Control Internal
-            start_scalar_cosine_similarity <= '1';
-
-            -- Data Inputs
-            modulo_in_scalar_cosine_similarity <= MODULO_IN;
-            size_in_scalar_cosine_similarity   <= SIZE_IN;
-
-            -- FSM Control
-            cosine_similarity_ctrl_fsm_int <= ENDER_STATE;
-          end if;
 
           if (DATA_A_IN_ENABLE = '1') then
             -- Data Inputs
@@ -178,6 +169,20 @@ begin
 
             -- Control Internal
             data_b_in_cosine_similarity_int <= '1';
+          end if;
+
+          if (data_a_in_cosine_similarity_int = '1' and data_b_in_cosine_similarity_int = '1') then
+            if (index_loop = 0) then
+              -- Control Internal
+              start_scalar_cosine_similarity <= '1';
+            end if;
+
+            -- Data Inputs
+            modulo_in_scalar_cosine_similarity <= MODULO_IN;
+            size_in_scalar_cosine_similarity   <= SIZE_IN;
+
+            -- FSM Control
+            cosine_similarity_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
           -- Control Outputs

@@ -145,23 +145,15 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          -- Assignations
+          index_loop <= 0;
+
           if (START = '1') then
             -- FSM Control
             exponentiator_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
         when INPUT_STATE =>             -- STEP 1
-
-          if (data_a_in_exponentiator_int = '1' and data_b_in_exponentiator_int = '1') then
-            -- Control Internal
-            start_scalar_exponentiator <= '1';
-
-            -- Data Inputs
-            modulo_in_scalar_exponentiator <= MODULO_IN;
-
-            -- FSM Control
-            exponentiator_ctrl_fsm_int <= ENDER_STATE;
-          end if;
 
           if (DATA_A_IN_ENABLE = '1') then
             -- Data Inputs
@@ -177,6 +169,19 @@ begin
 
             -- Control Internal
             data_b_in_exponentiator_int <= '1';
+          end if;
+
+          if (data_a_in_exponentiator_int = '1' and data_b_in_exponentiator_int = '1') then
+            if (index_loop = 0) then
+              -- Control Internal
+              start_scalar_exponentiator <= '1';
+            end if;
+
+            -- Data Inputs
+            modulo_in_scalar_exponentiator <= MODULO_IN;
+
+            -- FSM Control
+            exponentiator_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
           -- Control Outputs

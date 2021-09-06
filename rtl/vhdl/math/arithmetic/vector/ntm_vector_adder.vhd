@@ -149,6 +149,9 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          -- Assignations
+          index_loop <= 0;
+
           if (START = '1') then
             -- FSM Control
             adder_ctrl_fsm_int <= INPUT_STATE;
@@ -173,8 +176,10 @@ begin
           end if;
 
           if (data_a_in_adder_int = '1' and data_b_in_adder_int = '1') then
-            -- Control Internal
-            start_scalar_adder <= '1';
+            if (index_loop = 0) then
+              -- Control Internal
+              start_scalar_adder <= '1';
+            end if;
 
             operation_scalar_adder <= OPERATION;
 

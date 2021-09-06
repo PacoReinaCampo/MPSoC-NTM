@@ -136,6 +136,9 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          -- Assignations
+          index_loop <= 0;
+
           if (START = '1') then
             -- FSM Control
             softmax_ctrl_fsm_int <= INPUT_STATE;
@@ -150,8 +153,8 @@ begin
 
             data_in_scalar_softmax <= DATA_IN;
 
-            -- Control Internal
             if (index_loop = 0) then
+              -- Control Internal
               start_scalar_softmax <= '1';
             end if;
 

@@ -267,13 +267,13 @@ begin
 
               -- FSM Control
               cosine_similarity_ctrl_fsm_int <= STARTER_STATE;
-            elsif (index_j_loop < J-1) then
+            elsif (index_i_loop < I-1 and index_j_loop < J-1) then
               -- Control Internal
               index_j_loop <= index_j_loop + 1;
 
               -- FSM Control
               cosine_similarity_ctrl_fsm_int <= INPUT_J_STATE;
-            elsif (index_j_loop = J-1) then
+            elsif (index_i_loop < I-1 and index_j_loop = J-1) then
               -- Control Internal
               index_i_loop <= index_i_loop + 1;
               index_j_loop <= 0;

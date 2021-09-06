@@ -138,6 +138,9 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          -- Assignations
+          index_loop <= 0;
+
           if (START = '1') then
             -- FSM Control
             mod_ctrl_fsm_int <= INPUT_STATE;
@@ -151,8 +154,8 @@ begin
 
             data_in_scalar_mod <= DATA_IN;
 
-            -- Control Internal
             if (index_loop = 0) then
+              -- Control Internal
               start_scalar_mod <= '1';
             end if;
 

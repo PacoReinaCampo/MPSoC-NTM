@@ -129,13 +129,15 @@ begin
       -- Assignations
       index_loop <= 0;
 
-
     elsif (rising_edge(CLK)) then
 
       case logarithm_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
+
+          -- Assignations
+          index_loop <= 0;
 
           if (START = '1') then
             -- FSM Control
@@ -150,8 +152,10 @@ begin
 
             data_in_scalar_logarithm <= DATA_IN;
 
-            -- Control Internal
-            start_scalar_logarithm <= '1';
+            if (index_loop = 0) then
+              -- Control Internal
+              start_scalar_logarithm <= '1';
+            end if;
 
             data_in_scalar_logarithm <= DATA_IN;
 
