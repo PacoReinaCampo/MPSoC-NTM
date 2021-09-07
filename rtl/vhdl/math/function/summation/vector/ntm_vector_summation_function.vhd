@@ -46,8 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity ntm_vector_summation_function is
   generic (
-    I : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -66,6 +64,7 @@ entity ntm_vector_summation_function is
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -98,7 +97,7 @@ architecture ntm_vector_summation_function_architecture of ntm_vector_summation_
   signal summation_ctrl_fsm_int : summation_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : integer;
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SUMMATION
   -- CONTROL
@@ -107,7 +106,7 @@ architecture ntm_vector_summation_function_architecture of ntm_vector_summation_
 
   -- DATA
   signal modulo_in_scalar_summation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_scalar_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_scalar_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -127,7 +126,7 @@ begin
       READY <= '0';
 
       -- Assignations
-      index_loop <= 0;
+      index_loop <= ZERO;
 
     elsif (rising_edge(CLK)) then
 
@@ -137,7 +136,7 @@ begin
           READY <= '0';
 
           -- Assignations
-          index_loop <= 0;
+          index_loop <= ZERO;
 
           if (START = '1') then
             -- FSM Control
@@ -149,11 +148,11 @@ begin
           if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
             modulo_in_scalar_summation <= MODULO_IN;
-            size_in_scalar_summation   <= SIZE_IN;
+            length_in_scalar_summation <= LENGTH_IN;
 
             data_in_scalar_summation <= DATA_IN;
 
-            if (index_loop = 0) then
+            if (index_loop = ZERO) then
               -- Control Internal
               start_scalar_summation <= '1';
             end if;
@@ -168,7 +167,7 @@ begin
         when ENDER_STATE =>             -- STEP 2
 
           if (ready_scalar_summation = '1') then
-            if (index_loop = I-1) then
+            if (index_loop = std_logic_vector(unsigned(SIZE_IN)-unsigned(ONE))) then
               -- Control Outputs
               READY <= '1';
 
@@ -176,7 +175,7 @@ begin
               summation_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_loop <= index_loop + 1;
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE));
 
               -- FSM Control
               summation_ctrl_fsm_int <= INPUT_STATE;
@@ -215,7 +214,7 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_scalar_summation,
-      SIZE_IN   => size_in_scalar_summation,
+      LENGTH_IN => length_in_scalar_summation,
       DATA_IN   => data_in_scalar_summation,
       DATA_OUT  => data_out_scalar_summation
       );

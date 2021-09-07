@@ -46,8 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity ntm_scalar_product is
   generic (
-    I : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -64,6 +62,7 @@ entity ntm_scalar_product is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)

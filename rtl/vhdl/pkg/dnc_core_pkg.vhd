@@ -58,9 +58,6 @@ package dnc_core_pkg is
 
   component dnc_content_based_addressing is
     generic (
-      I : integer := 64;
-      J : integer := 64;
-
       DATA_SIZE : integer := 512
       );
     port (
@@ -80,6 +77,9 @@ package dnc_core_pkg is
       C_OUT_ENABLE : out std_logic;     -- for i in 0 to I-1
 
       -- DATA
+      SIZE_I_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
       K_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
       M_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
       BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

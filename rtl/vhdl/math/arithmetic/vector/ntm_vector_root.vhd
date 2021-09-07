@@ -46,8 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity ntm_vector_root is
   generic (
-    I : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -66,6 +64,7 @@ entity ntm_vector_root is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -99,7 +98,7 @@ architecture ntm_vector_root_architecture of ntm_vector_root is
   signal root_ctrl_fsm_int : root_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : integer;
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal data_a_in_root_int : std_logic;
   signal data_b_in_root_int : std_logic;
@@ -133,7 +132,7 @@ begin
       READY <= '0';
 
       -- Assignations
-      index_loop <= 0;
+      index_loop <= ZERO;
 
       data_a_in_root_int <= '0';
       data_b_in_root_int <= '0';
@@ -146,7 +145,7 @@ begin
           READY <= '0';
 
           -- Assignations
-          index_loop <= 0;
+          index_loop <= ZERO;
 
           if (START = '1') then
             -- FSM Control
@@ -172,7 +171,7 @@ begin
           end if;
 
           if (data_a_in_root_int = '1' and data_b_in_root_int = '1') then
-            if (index_loop = 0) then
+            if (index_loop = ZERO) then
               -- Control Internal
               start_scalar_root <= '1';
             end if;
@@ -190,7 +189,7 @@ begin
         when ENDER_STATE =>             -- STEP 2
 
           if (ready_scalar_root = '1') then
-            if (index_loop = I-1) then
+            if (index_loop = std_logic_vector(unsigned(SIZE_IN)-unsigned(ONE))) then
               -- Control Outputs
               READY <= '1';
 
@@ -198,7 +197,7 @@ begin
               root_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_loop <= index_loop + 1;
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE));
 
               -- FSM Control
               root_ctrl_fsm_int <= INPUT_STATE;

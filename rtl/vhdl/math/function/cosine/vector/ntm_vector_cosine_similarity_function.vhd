@@ -46,8 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity ntm_vector_cosine_similarity_function is
   generic (
-    I : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -67,6 +65,7 @@ entity ntm_vector_cosine_similarity_function is
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -100,7 +99,7 @@ architecture ntm_vector_cosine_similarity_function_architecture of ntm_vector_co
   signal cosine_similarity_ctrl_fsm_int : cosine_similarity_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : integer;
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal data_a_in_cosine_similarity_int : std_logic;
   signal data_b_in_cosine_similarity_int : std_logic;
@@ -112,7 +111,7 @@ architecture ntm_vector_cosine_similarity_function_architecture of ntm_vector_co
 
   -- DATA
   signal modulo_in_scalar_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_scalar_cosine_similarity   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_scalar_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_cosine_similarity  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -133,7 +132,7 @@ begin
       READY <= '0';
 
       -- Assignations
-      index_loop <= 0;
+      index_loop <= ZERO;
 
       data_a_in_cosine_similarity_int <= '0';
       data_b_in_cosine_similarity_int <= '0';
@@ -146,7 +145,7 @@ begin
           READY <= '0';
 
           -- Assignations
-          index_loop <= 0;
+          index_loop <= ZERO;
 
           if (START = '1') then
             -- FSM Control
@@ -172,14 +171,14 @@ begin
           end if;
 
           if (data_a_in_cosine_similarity_int = '1' and data_b_in_cosine_similarity_int = '1') then
-            if (index_loop = 0) then
+            if (index_loop = ZERO) then
               -- Control Internal
               start_scalar_cosine_similarity <= '1';
             end if;
 
             -- Data Inputs
             modulo_in_scalar_cosine_similarity <= MODULO_IN;
-            size_in_scalar_cosine_similarity   <= SIZE_IN;
+            length_in_scalar_cosine_similarity <= LENGTH_IN;
 
             -- FSM Control
             cosine_similarity_ctrl_fsm_int <= ENDER_STATE;
@@ -191,7 +190,7 @@ begin
         when ENDER_STATE =>             -- STEP 2
 
           if (ready_scalar_cosine_similarity = '1') then
-            if (index_loop = I-1) then
+            if (index_loop = std_logic_vector(unsigned(SIZE_IN)-unsigned(ONE))) then
               -- Control Outputs
               READY <= '1';
 
@@ -199,7 +198,7 @@ begin
               cosine_similarity_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_loop <= index_loop + 1;
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE));
 
               -- FSM Control
               cosine_similarity_ctrl_fsm_int <= INPUT_STATE;
@@ -241,7 +240,7 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_scalar_cosine_similarity,
-      SIZE_IN   => size_in_scalar_cosine_similarity,
+      LENGTH_IN => length_in_scalar_cosine_similarity,
       DATA_A_IN => data_a_in_scalar_cosine_similarity,
       DATA_B_IN => data_b_in_scalar_cosine_similarity,
       DATA_OUT  => data_out_scalar_cosine_similarity

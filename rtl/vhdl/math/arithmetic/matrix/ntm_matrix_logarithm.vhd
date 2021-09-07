@@ -46,9 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity ntm_matrix_logarithm is
   generic (
-    I : integer := 64;
-    J : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -68,6 +65,8 @@ entity ntm_matrix_logarithm is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_I_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_J_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -101,8 +100,8 @@ architecture ntm_matrix_logarithm_architecture of ntm_matrix_logarithm is
   signal logarithm_ctrl_fsm_int : logarithm_ctrl_fsm;
 
   -- Internal Signals
-  signal index_i_loop : integer;
-  signal index_j_loop : integer;
+  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal data_in_i_logarithm_int : std_logic;
   signal data_in_j_logarithm_int : std_logic;
@@ -118,6 +117,7 @@ architecture ntm_matrix_logarithm_architecture of ntm_matrix_logarithm is
 
   -- DATA
   signal modulo_in_vector_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -139,8 +139,8 @@ begin
       READY <= '0';
 
       -- Assignations
-      index_i_loop <= 0;
-      index_j_loop <= 0;
+      index_i_loop <= ZERO;
+      index_j_loop <= ZERO;
 
       data_in_i_logarithm_int <= '0';
       data_in_j_logarithm_int <= '0';
@@ -153,8 +153,8 @@ begin
           READY <= '0';
 
           -- Assignations
-          index_i_loop <= 0;
-          index_j_loop <= 0;
+          index_i_loop <= ZERO;
+          index_j_loop <= ZERO;
 
           if (START = '1') then
             -- FSM Control
@@ -169,7 +169,7 @@ begin
 
             data_in_vector_logarithm <= DATA_IN;
 
-            if (index_i_loop = 0) then
+            if (index_i_loop = ZERO) then
               -- Control Internal
               start_vector_logarithm <= '1';
             end if;
@@ -196,7 +196,7 @@ begin
 
             data_in_vector_logarithm <= DATA_IN;
 
-            if (index_j_loop = 0) then
+            if (index_j_loop = ZERO) then
               -- Control Internal
               start_vector_logarithm <= '1';
             end if;
@@ -218,22 +218,22 @@ begin
         when ENDER_STATE =>             -- STEP 3
 
           if (ready_vector_logarithm = '1') then
-            if (index_i_loop = I-1 and index_j_loop = J-1) then
+            if (index_i_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               logarithm_ctrl_fsm_int <= STARTER_STATE;
-            elsif (index_i_loop < I-1 and index_j_loop < J-1) then
+            elsif (index_i_loop < std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) and index_j_loop < std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
               -- Control Internal
-              index_j_loop <= index_j_loop + 1;
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
 
               -- FSM Control
               logarithm_ctrl_fsm_int <= INPUT_J_STATE;
-            elsif (index_i_loop < I-1 and index_j_loop = J-1) then
+            elsif (index_i_loop < std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
               -- Control Internal
-              index_i_loop <= index_i_loop + 1;
-              index_j_loop <= 0;
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+              index_j_loop <= ZERO;
 
               -- FSM Control
               logarithm_ctrl_fsm_int <= INPUT_I_STATE;
@@ -262,8 +262,6 @@ begin
   -- LOGARITHM
   vector_logarithm : ntm_vector_logarithm
     generic map (
-      I => I,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -281,6 +279,7 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_vector_logarithm,
+      SIZE_IN   => size_in_vector_logarithm,
       DATA_IN   => data_in_vector_logarithm,
       DATA_OUT  => data_out_vector_logarithm
       );

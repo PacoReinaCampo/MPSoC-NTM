@@ -114,6 +114,9 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal c_out_enable_vector_content_based_addressing : std_logic;
 
   -- DATA
+  signal size_i_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_j_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal k_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_in_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
   signal m_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -199,9 +202,6 @@ begin
   -- VECTOR CONTENT BASED ADDRESSING
   ntm_content_based_addressing_i : ntm_content_based_addressing
     generic map (
-      I => N,
-      J => W,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -221,6 +221,9 @@ begin
       C_OUT_ENABLE => c_out_enable_vector_content_based_addressing,
 
       -- DATA
+      SIZE_I_IN => size_i_in_vector_content_based_addressing,
+      SIZE_J_IN => size_j_in_vector_content_based_addressing,
+
       K_IN    => k_in_vector_content_based_addressing,
       BETA_IN => beta_in_vector_content_based_addressing,
       M_IN    => m_in_vector_content_based_addressing,

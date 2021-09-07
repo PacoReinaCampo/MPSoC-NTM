@@ -46,7 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity ntm_vector_multiplication_function is
   generic (
-    I : integer := 64;
 
     DATA_SIZE : integer := 512
     );
@@ -66,6 +65,7 @@ entity ntm_vector_multiplication_function is
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -98,7 +98,7 @@ architecture ntm_vector_multiplication_function_architecture of ntm_vector_multi
   signal multiplication_ctrl_fsm_int : multiplication_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : integer;
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MULTIPLICATION
   -- CONTROL
@@ -107,7 +107,7 @@ architecture ntm_vector_multiplication_function_architecture of ntm_vector_multi
 
   -- DATA
   signal modulo_in_scalar_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_scalar_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_scalar_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -127,7 +127,7 @@ begin
       READY <= '0';
 
       -- Assignations
-      index_loop <= 0;
+      index_loop <= ZERO;
 
     elsif (rising_edge(CLK)) then
 
@@ -137,7 +137,7 @@ begin
           READY <= '0';
 
           -- Assignations
-          index_loop <= 0;
+          index_loop <= ZERO;
 
           if (START = '1') then
             -- FSM Control
@@ -149,11 +149,11 @@ begin
           if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
             modulo_in_scalar_multiplication <= MODULO_IN;
-            size_in_scalar_multiplication   <= SIZE_IN;
+            length_in_scalar_multiplication <= LENGTH_IN;
 
             data_in_scalar_multiplication <= DATA_IN;
 
-            if (index_loop = 0) then
+            if (index_loop = ZERO) then
               -- Control Internal
               start_scalar_multiplication <= '1';
             end if;
@@ -168,7 +168,7 @@ begin
         when ENDER_STATE =>             -- STEP 2
 
           if (ready_scalar_multiplication = '1') then
-            if (index_loop = I-1) then
+            if (index_loop = std_logic_vector(unsigned(SIZE_IN)-unsigned(ONE))) then
               -- Control Outputs
               READY <= '1';
 
@@ -176,7 +176,7 @@ begin
               multiplication_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_loop <= index_loop + 1;
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE));
 
               -- FSM Control
               multiplication_ctrl_fsm_int <= INPUT_STATE;
@@ -215,7 +215,7 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_scalar_multiplication,
-      SIZE_IN   => size_in_scalar_multiplication,
+      LENGTH_IN => length_in_scalar_multiplication,
       DATA_IN   => data_in_scalar_multiplication,
       DATA_OUT  => data_out_scalar_multiplication
       );

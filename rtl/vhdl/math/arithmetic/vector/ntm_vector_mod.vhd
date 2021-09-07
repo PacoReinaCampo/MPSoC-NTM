@@ -46,8 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity ntm_vector_mod is
   generic (
-    I : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -65,6 +63,7 @@ entity ntm_vector_mod is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -97,7 +96,7 @@ architecture ntm_vector_mod_architecture of ntm_vector_mod is
   signal mod_ctrl_fsm_int : mod_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : integer;
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal data_in_mod_int : std_logic;
 
@@ -129,7 +128,7 @@ begin
       READY <= '0';
 
       -- Assignations
-      index_loop <= 0;
+      index_loop <= ZERO;
 
     elsif (rising_edge(CLK)) then
 
@@ -139,7 +138,7 @@ begin
           READY <= '0';
 
           -- Assignations
-          index_loop <= 0;
+          index_loop <= ZERO;
 
           if (START = '1') then
             -- FSM Control
@@ -154,7 +153,7 @@ begin
 
             data_in_scalar_mod <= DATA_IN;
 
-            if (index_loop = 0) then
+            if (index_loop = ZERO) then
               -- Control Internal
               start_scalar_mod <= '1';
             end if;
@@ -169,7 +168,7 @@ begin
         when ENDER_STATE =>             -- STEP 2
 
           if (ready_scalar_mod = '1') then
-            if (index_loop = I-1) then
+            if (index_loop = std_logic_vector(unsigned(SIZE_IN)-unsigned(ONE))) then
               -- Control Outputs
               READY <= '1';
 
@@ -177,7 +176,7 @@ begin
               mod_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_loop <= index_loop + 1;
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE));
 
               -- FSM Control
               mod_ctrl_fsm_int <= INPUT_STATE;

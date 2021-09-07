@@ -46,8 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity ntm_vector_adder is
   generic (
-    I : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -68,6 +66,7 @@ entity ntm_vector_adder is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -101,7 +100,7 @@ architecture ntm_vector_adder_architecture of ntm_vector_adder is
   signal adder_ctrl_fsm_int : adder_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : integer;
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal data_a_in_adder_int : std_logic;
   signal data_b_in_adder_int : std_logic;
@@ -137,7 +136,7 @@ begin
       READY <= '0';
 
       -- Assignations
-      index_loop <= 0;
+      index_loop <= ZERO;
 
       data_a_in_adder_int <= '0';
       data_b_in_adder_int <= '0';
@@ -150,7 +149,7 @@ begin
           READY <= '0';
 
           -- Assignations
-          index_loop <= 0;
+          index_loop <= ZERO;
 
           if (START = '1') then
             -- FSM Control
@@ -176,7 +175,7 @@ begin
           end if;
 
           if (data_a_in_adder_int = '1' and data_b_in_adder_int = '1') then
-            if (index_loop = 0) then
+            if (index_loop = ZERO) then
               -- Control Internal
               start_scalar_adder <= '1';
             end if;
@@ -196,7 +195,7 @@ begin
         when ENDER_STATE =>             -- STEP 2
 
           if (ready_scalar_adder = '1') then
-            if (index_loop = I-1) then
+            if (index_loop = std_logic_vector(unsigned(SIZE_IN)-unsigned(ONE))) then
               -- Control Outputs
               READY <= '1';
 
@@ -204,7 +203,7 @@ begin
               adder_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_loop <= index_loop + 1;
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE));
 
               -- FSM Control
               adder_ctrl_fsm_int <= INPUT_STATE;

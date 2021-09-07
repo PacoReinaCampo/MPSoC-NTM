@@ -46,9 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity ntm_matrix_product is
   generic (
-    I : integer := 64;
-    J : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -69,10 +66,14 @@ entity ntm_matrix_product is
     DATA_OUT_J_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    MODULO_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_A_I_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_A_J_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_B_I_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_B_J_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_A_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 

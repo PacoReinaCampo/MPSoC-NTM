@@ -29,6 +29,14 @@
 ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_root.vhd
 ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_logarithm.vhd
 
+../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_determinant.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_inversion.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_product.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_rank.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_transpose.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_scalar_product.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_vector_product.vhd
+
 ../../../../../../../rtl/vhdl/math/function/convolution/scalar/ntm_scalar_convolution_function.vhd
 ../../../../../../../rtl/vhdl/math/function/cosine/scalar/ntm_scalar_cosine_similarity_function.vhd
 ../../../../../../../rtl/vhdl/math/function/multiplication/scalar/ntm_scalar_multiplication_function.vhd
@@ -61,14 +69,6 @@
 ../../../../../../../rtl/vhdl/math/function/sigmoid/matrix/logistic/ntm_matrix_softmax_function.vhd
 ../../../../../../../rtl/vhdl/math/function/sigmoid/matrix/oneplus/ntm_matrix_oneplus_function.vhd
 ../../../../../../../rtl/vhdl/math/function/summation/matrix/ntm_matrix_summation_function.vhd
-
-../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_determinant.vhd
-../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_inversion.vhd
-../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_product.vhd
-../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_rank.vhd
-../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_transpose.vhd
-../../../../../../../rtl/vhdl/math/algebra/ntm_scalar_product.vhd
-../../../../../../../rtl/vhdl/math/algebra/ntm_vector_product.vhd
 
 ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_controller.vhd
 ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_activation_gate_vector.vhd
