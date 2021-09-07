@@ -114,6 +114,7 @@ architecture ntm_output_vector_architecture of ntm_output_vector is
 
   -- DATA
   signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_adder   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -132,10 +133,14 @@ architecture ntm_output_vector_architecture of ntm_output_vector is
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_i_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_b_i_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_b_j_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -148,8 +153,6 @@ begin
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder
     generic map (
-      I => I,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -170,6 +173,7 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_vector_adder,
+      SIZE_IN   => size_in_vector_adder,
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
       DATA_OUT  => data_out_vector_adder
@@ -178,9 +182,6 @@ begin
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
     generic map (
-      I => I,
-      J => J,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -201,10 +202,14 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MODULO_IN => modulo_in_matrix_product,
-      DATA_A_IN => data_a_in_matrix_product,
-      DATA_B_IN => data_b_in_matrix_product,
-      DATA_OUT  => data_out_matrix_product
+      MODULO_IN   => modulo_in_matrix_product,
+      SIZE_A_I_IN => size_a_i_in_matrix_product,
+      SIZE_A_J_IN => size_a_j_in_matrix_product,
+      SIZE_B_I_IN => size_b_i_in_matrix_product,
+      SIZE_B_J_IN => size_b_j_in_matrix_product,
+      DATA_A_IN   => data_a_in_matrix_product,
+      DATA_B_IN   => data_b_in_matrix_product,
+      DATA_OUT    => data_out_matrix_product
       );
 
 end architecture;

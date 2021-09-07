@@ -149,6 +149,7 @@ architecture ntm_addressing_architecture of ntm_addressing is
 
   -- DATA
   signal modulo_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -165,6 +166,7 @@ architecture ntm_addressing_architecture of ntm_addressing is
 
   -- DATA
   signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_multiplier   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -181,6 +183,8 @@ architecture ntm_addressing_architecture of ntm_addressing is
 
   -- DATA
   signal modulo_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -257,8 +261,6 @@ begin
   -- VECTOR EXPONENTIATOR
   vector_exponentiator : ntm_vector_exponentiator
     generic map (
-      I => I,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -277,6 +279,7 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_vector_exponentiator,
+      SIZE_IN   => size_in_vector_exponentiator,
       DATA_A_IN => data_a_in_vector_exponentiator,
       DATA_B_IN => data_b_in_vector_exponentiator,
       DATA_OUT  => data_out_vector_exponentiator
@@ -285,8 +288,6 @@ begin
   -- VECTOR MULTIPLIER
   vector_multiplier : ntm_vector_multiplier
     generic map (
-      I => I,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -305,6 +306,7 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_vector_multiplier,
+      SIZE_IN   => size_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
       DATA_OUT  => data_out_vector_multiplier
@@ -313,8 +315,6 @@ begin
   -- VECTOR CONVOLUTION
   vector_convolution_function : ntm_vector_convolution_function
     generic map (
-      I => I,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -333,6 +333,8 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_vector_convolution,
+      SIZE_IN   => size_in_vector_convolution,
+      LENGTH_IN => length_in_vector_convolution,
       DATA_A_IN => data_a_in_vector_convolution,
       DATA_B_IN => data_b_in_vector_convolution,
       DATA_OUT  => data_out_vector_convolution

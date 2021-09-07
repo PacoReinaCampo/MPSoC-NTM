@@ -107,6 +107,7 @@ architecture dnc_usage_vector_architecture of dnc_usage_vector is
 
   -- DATA
   signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_adder   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -123,6 +124,7 @@ architecture dnc_usage_vector_architecture of dnc_usage_vector is
 
   -- DATA
   signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_multiplier   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -136,10 +138,8 @@ begin
   -- u(t;j) = (u(t-1;j) + w(t-1;j) - u(t-1;j) o w(t-1;j)) o psi(t;j)
 
   -- VECTOR ADDER
-  ntm_vector_adder_i : ntm_vector_adder
+  vector_adder : ntm_vector_adder
     generic map (
-      I => N,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -160,16 +160,15 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_vector_adder,
+      SIZE_IN   => size_in_vector_adder,
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
       DATA_OUT  => data_out_vector_adder
       );
 
   -- VECTOR MULTIPLIER
-  ntm_vector_multiplier_i : ntm_vector_multiplier
+  vector_multiplier : ntm_vector_multiplier
     generic map (
-      I => N,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -188,6 +187,7 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_vector_multiplier,
+      SIZE_IN   => size_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
       DATA_OUT  => data_out_vector_multiplier

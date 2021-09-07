@@ -102,6 +102,7 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
 
   -- DATA
   signal modulo_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -119,6 +120,7 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
   -- DATA
   signal modulo_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_cosine   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -134,6 +136,7 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
 
   -- DATA
   signal modulo_in_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -149,8 +152,6 @@ begin
   -- VECTOR EXPONENTIATOR
   vector_exponentiator : ntm_vector_exponentiator
     generic map (
-      I => I,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -169,6 +170,7 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_vector_exponentiator,
+      SIZE_IN   => size_in_vector_exponentiator,
       DATA_A_IN => data_a_in_vector_exponentiator,
       DATA_B_IN => data_b_in_vector_exponentiator,
       DATA_OUT  => data_out_vector_exponentiator
@@ -177,8 +179,6 @@ begin
   -- VECTOR COSINE SIMILARITY
   vector_cosine_similarity_function : ntm_vector_cosine_similarity_function
     generic map (
-      I => I,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -198,6 +198,7 @@ begin
       -- DATA
       MODULO_IN => modulo_in_vector_cosine,
       SIZE_IN   => size_in_vector_cosine,
+      LENGTH_IN => length_in_vector_cosine,
       DATA_A_IN => data_a_in_vector_cosine,
       DATA_B_IN => data_b_in_vector_cosine,
       DATA_OUT  => data_out_vector_cosine
@@ -206,8 +207,6 @@ begin
   -- VECTOR SOFTMAX
   vector_softmax_function : ntm_vector_softmax_function
     generic map (
-      I => I,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -226,6 +225,7 @@ begin
       -- DATA
       MODULO_IN => modulo_in_vector_softmax,
       SIZE_IN   => size_in_vector_softmax,
+      LENGTH_IN => length_in_vector_softmax,
       DATA_IN   => data_in_vector_softmax,
       DATA_OUT  => data_out_vector_softmax
       );

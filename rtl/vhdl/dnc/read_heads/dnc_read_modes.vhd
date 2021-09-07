@@ -106,7 +106,9 @@ architecture dnc_read_modes_architecture of dnc_read_modes is
 
   -- DATA
   signal modulo_in_matrix_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_matrix_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_j_in_matrix_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_matrix_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -136,18 +138,18 @@ begin
   -- DATA
   modulo_in_matrix_softmax <= (others => '0');
 
-  size_in_matrix_softmax <= std_logic_vector(to_unsigned(R, DATA_SIZE));
+  size_i_in_matrix_softmax <= std_logic_vector(to_unsigned(R, DATA_SIZE));
+  size_j_in_matrix_softmax <= std_logic_vector(to_unsigned(R, DATA_SIZE));
+
+  length_in_matrix_softmax <= std_logic_vector(to_unsigned(R, DATA_SIZE));
 
   data_in_matrix_softmax <= PI_IN;
 
   PI_OUT <= data_out_matrix_softmax;
 
   -- MATRIX SOFTMAX
-  ntm_matrix_softmax_function_i : ntm_matrix_softmax_function
+  matrix_softmax_function : ntm_matrix_softmax_function
     generic map (
-      I => R,
-      J => 3,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -169,7 +171,9 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_matrix_softmax,
-      SIZE_IN   => size_in_matrix_softmax,
+      SIZE_I_IN => size_i_in_matrix_softmax,
+      SIZE_J_IN => size_j_in_matrix_softmax,
+      LENGTH_IN => length_in_matrix_softmax,
       DATA_IN   => data_in_matrix_softmax,
       DATA_OUT  => data_out_matrix_softmax
       );

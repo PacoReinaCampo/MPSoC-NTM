@@ -100,6 +100,7 @@ architecture dnc_read_strengths_architecture of dnc_read_strengths is
 
   -- DATA
   signal modulo_in_vector_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -123,15 +124,15 @@ begin
 
   -- DATA
   modulo_in_vector_oneplus <= (others => '1');
+  size_in_vector_oneplus   <= (others => '1');
 
   data_in_vector_oneplus <= BETA_IN;
 
   BETA_OUT <= data_out_vector_oneplus;
 
   -- VECTOR ONEPLUS
-  ntm_vector_oneplus_function_i : ntm_vector_oneplus_function
+  vector_oneplus_function : ntm_vector_oneplus_function
     generic map (
-      I => R,
 
       DATA_SIZE => DATA_SIZE
       )
@@ -150,6 +151,7 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_vector_oneplus,
+      SIZE_IN   => size_in_vector_oneplus,
       DATA_IN   => data_in_vector_oneplus,
       DATA_OUT  => data_out_vector_oneplus
       );

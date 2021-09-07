@@ -128,7 +128,7 @@ begin
   -- L(t=0)[i,j] = 0
 
   -- SCALAR ADDER
-  ntm_scalar_adder_i : ntm_scalar_adder
+  scalar_adder : ntm_scalar_adder
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -151,7 +151,7 @@ begin
       );
 
   -- SCALAR MULTIPLIER
-  ntm_scalar_multiplier_i : ntm_scalar_multiplier
+  scalar_multiplier : ntm_scalar_multiplier
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -162,7 +162,7 @@ begin
 
       -- CONTROL
       START => start_scalar_multiplier,
-      READY => ready_scalar_multiplier,
+      READY => ready_scalar_adder,
 
       -- DATA
       MODULO_IN => modulo_in_scalar_multiplier,

@@ -100,6 +100,7 @@ architecture dnc_erase_vector_architecture of dnc_erase_vector is
 
   -- DATA
   signal modulo_in_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_logistic  : std_logic;
 
@@ -123,6 +124,7 @@ begin
 
   -- DATA
   modulo_in_vector_logistic <= (others => '1');
+  size_in_vector_logistic   <= (others => '1');
 
   data_in_vector_logistic <= E_IN;
 
@@ -131,8 +133,6 @@ begin
   -- VECTOR LOGISTIC
   vector_logistic_function : ntm_vector_logistic_function
     generic map (
-      I => W,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -150,6 +150,7 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_vector_logistic,
+      SIZE_IN   => size_in_vector_logistic,
       DATA_IN   => data_in_vector_logistic,
       DATA_OUT  => data_out_vector_logistic
       );

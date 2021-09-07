@@ -103,6 +103,7 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
 
   -- DATA
   signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_multiplier   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -118,6 +119,7 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
 
   -- DATA
   signal modulo_in_vector_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -134,8 +136,6 @@ begin
   -- VECTOR MULTIPLIER
   vector_multiplier : ntm_vector_multiplier
     generic map (
-      I => I,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -154,6 +154,7 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_vector_multiplier,
+      SIZE_IN   => size_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
       DATA_OUT  => data_out_vector_multiplier
@@ -162,8 +163,6 @@ begin
   -- VECTOR TANH
   vector_tanh_function : ntm_vector_tanh_function
     generic map (
-      I => I,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -181,6 +180,7 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_vector_tanh,
+      SIZE_IN   => size_in_vector_tanh,
       DATA_IN   => data_in_vector_tanh,
       DATA_OUT  => data_out_vector_tanh
       );

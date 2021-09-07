@@ -125,15 +125,10 @@ architecture ntm_forget_gate_vector_architecture of ntm_forget_gate_vector is
 
   -- DATA
   signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_adder   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- DATA
-  signal modulo_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX CONVOLUTION
   -- CONTROL
@@ -150,6 +145,9 @@ architecture ntm_forget_gate_vector_architecture of ntm_forget_gate_vector is
 
   -- DATA
   signal modulo_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_j_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -165,6 +163,7 @@ architecture ntm_forget_gate_vector_architecture of ntm_forget_gate_vector is
 
   -- DATA
   signal modulo_in_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_logistic  : std_logic;
 
@@ -179,8 +178,6 @@ begin
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder
     generic map (
-      I => I,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -201,6 +198,7 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_vector_adder,
+      SIZE_IN   => size_in_vector_adder,
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
       DATA_OUT  => data_out_vector_adder
@@ -209,9 +207,6 @@ begin
   -- MATRIX CONVOLUTION
   matrix_convolution_function : ntm_matrix_convolution_function
     generic map (
-      I => I,
-      J => J,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -233,6 +228,9 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_matrix_convolution,
+      SIZE_I_IN => size_i_in_matrix_convolution,
+      SIZE_J_IN => size_j_in_matrix_convolution,
+      LENGTH_IN => length_in_matrix_convolution,
       DATA_A_IN => data_a_in_matrix_convolution,
       DATA_B_IN => data_b_in_matrix_convolution,
       DATA_OUT  => data_out_matrix_convolution
@@ -241,8 +239,6 @@ begin
   -- VECTOR LOGISTIC
   vector_logistic_function : ntm_vector_logistic_function
     generic map (
-      I => I,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -260,6 +256,7 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_vector_logistic,
+      SIZE_IN   => size_in_vector_logistic,
       DATA_IN   => data_in_vector_logistic,
       DATA_OUT  => data_out_vector_logistic
       );

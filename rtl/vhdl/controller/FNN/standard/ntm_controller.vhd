@@ -144,6 +144,7 @@ architecture ntm_controller_architecture of ntm_controller is
   -- DATA
   signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -161,10 +162,14 @@ architecture ntm_controller_architecture of ntm_controller is
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_i_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_b_i_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_b_j_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR LOGISTIC
   -- CONTROL
@@ -177,8 +182,9 @@ architecture ntm_controller_architecture of ntm_controller is
 
   -- DATA
   signal modulo_in_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_logistic  : std_logic;
 
   -- TRAINER
   -- CONTROL
@@ -278,6 +284,7 @@ begin
       -- DATA
       MODULO_IN => modulo_in_vector_summation,
       SIZE_IN   => size_in_vector_summation,
+      LENGTH_IN => length_in_vector_summation,
       DATA_IN   => data_in_vector_summation,
       DATA_OUT  => data_out_vector_summation
       );
@@ -285,9 +292,6 @@ begin
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
     generic map (
-      I => I,
-      J => J,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -308,17 +312,19 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MODULO_IN => modulo_in_matrix_product,
-      DATA_A_IN => data_a_in_matrix_product,
-      DATA_B_IN => data_b_in_matrix_product,
-      DATA_OUT  => data_out_matrix_product
+      MODULO_IN   => modulo_in_matrix_product,
+      SIZE_A_I_IN => size_a_i_in_matrix_product,
+      SIZE_A_J_IN => size_a_j_in_matrix_product,
+      SIZE_B_I_IN => size_b_i_in_matrix_product,
+      SIZE_B_J_IN => size_b_j_in_matrix_product,
+      DATA_A_IN   => data_a_in_matrix_product,
+      DATA_B_IN   => data_b_in_matrix_product,
+      DATA_OUT    => data_out_matrix_product
       );
 
   -- VECTOR LOGISTIC
   vector_logistic_function : ntm_vector_logistic_function
     generic map (
-      I => I,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -336,6 +342,7 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_vector_logistic,
+      SIZE_IN   => size_in_vector_logistic,
       DATA_IN   => data_in_vector_logistic,
       DATA_OUT  => data_out_vector_logistic
       );
