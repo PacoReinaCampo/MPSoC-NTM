@@ -46,12 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity ntm_reading is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -67,6 +61,9 @@ entity ntm_reading is
     R_OUT_ENABLE : out std_logic;
 
     -- DATA
+    SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
     W_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     M_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     R_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)

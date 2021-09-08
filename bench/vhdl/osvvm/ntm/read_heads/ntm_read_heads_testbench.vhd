@@ -65,10 +65,12 @@ architecture ntm_read_heads_testbench_architecture of ntm_read_heads_testbench i
   signal r_out_enable_reading : std_logic;
 
   -- DATA
-  signal modulo_in_reading : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_in_reading      : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal m_in_reading      : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal r_out_reading     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_n_in_reading : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_reading : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal w_in_reading  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_in_reading  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal r_out_reading : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -79,8 +81,6 @@ begin
   -- READING
   reading : ntm_reading
     generic map (
-      N => N,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -96,6 +96,9 @@ begin
       READY => ready_reading,
 
       -- DATA
+      SIZE_N_IN => size_n_in_reading,
+      SIZE_W_IN => size_w_in_reading,
+
       W_IN  => w_in_reading,
       M_IN  => m_in_reading,
       R_OUT => r_out_reading

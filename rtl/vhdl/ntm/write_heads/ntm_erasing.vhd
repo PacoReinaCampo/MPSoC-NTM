@@ -46,12 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity ntm_erasing is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -68,10 +62,14 @@ entity ntm_erasing is
     M_OUT_ENABLE : in std_logic;
 
     -- DATA
-    M_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
-    E_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
-    W_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
-    M_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+    SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    M_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    E_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    M_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 

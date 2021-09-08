@@ -48,12 +48,6 @@ use work.ntm_lstm_controller_pkg.all;
 
 entity ntm_top is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -78,6 +72,13 @@ entity ntm_top is
     Y_OUT_ENABLE : out std_logic;       -- for y in 0 to Y-1
 
     -- DATA
+    SIZE_X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_Y_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -149,6 +150,9 @@ architecture ntm_top_architecture of ntm_top is
   signal nu_out_enable_controller_output_vector : std_logic;
 
   -- DATA
+  signal size_y_in_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal u_in_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal h_in_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -171,6 +175,11 @@ architecture ntm_top_architecture of ntm_top is
   signal y_in_enable_output_vector : std_logic;
 
   -- DATA
+  signal size_y_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal k_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal r_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -208,6 +217,10 @@ architecture ntm_top_architecture of ntm_top is
   signal h_in_enable_interface_vector : std_logic;
 
   -- DATA
+  signal size_n_in_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal wk_in_interface_vector     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal wbeta_in_interface_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal wg_in_interface_vector     : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -234,10 +247,12 @@ architecture ntm_top_architecture of ntm_top is
   signal r_out_enable_reading : std_logic;
 
   -- DATA
-  signal modulo_in_reading : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_in_reading      : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal m_in_reading      : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal r_out_reading     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_n_in_reading : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_reading : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal w_in_reading  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_in_reading  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal r_out_reading : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- WRITE HEADS
@@ -253,6 +268,9 @@ architecture ntm_top_architecture of ntm_top is
   signal m_out_enable_writing : std_logic;
 
   -- DATA
+  signal size_n_in_writing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_writing : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal m_in_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal a_in_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_in_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -268,9 +286,13 @@ architecture ntm_top_architecture of ntm_top is
   signal m_out_enable_erasing : std_logic;
 
   -- DATA
-  signal m_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal e_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_n_in_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal m_in_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal e_in_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal m_out_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
@@ -291,6 +313,9 @@ architecture ntm_top_architecture of ntm_top is
   signal w_out_enable_addressing : std_logic;
 
   -- DATA
+  signal size_n_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal k_in_addressing     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_in_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal g_in_addressing     : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -362,12 +387,6 @@ begin
   -- CONTROLLER OUTPUT VECTOR
   controller_output_vector : ntm_controller_output_vector
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -387,6 +406,9 @@ begin
       NU_ENABLE_OUT => nu_out_enable_controller_output_vector,
 
       -- DATA
+      SIZE_Y_IN => size_y_in_controller_output_vector,
+      SIZE_L_IN => size_l_in_controller_output_vector,
+
       U_IN => u_in_controller_output_vector,
       H_IN => h_in_controller_output_vector,
 
@@ -396,12 +418,6 @@ begin
   -- OUTPUT VECTOR
   output_vector_i : ntm_output_vector
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -425,6 +441,11 @@ begin
       Y_OUT_ENABLE => y_in_enable_output_vector,
 
       -- DATA
+      SIZE_Y_IN => size_y_in_output_vector,
+      SIZE_W_IN => size_w_in_output_vector,
+      SIZE_L_IN => size_l_in_output_vector,
+      SIZE_R_IN => size_r_in_output_vector,
+
       K_IN => k_in_output_vector,
       R_IN => r_in_output_vector,
 
@@ -436,12 +457,6 @@ begin
   -- INTERFACE VECTOR
   ntm_interface_vector_i : ntm_interface_vector
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -478,6 +493,10 @@ begin
       H_IN_ENABLE => h_in_enable_interface_vector,
 
       -- DATA
+      SIZE_N_IN => size_n_in_interface_vector,
+      SIZE_W_IN => size_w_in_interface_vector,
+      SIZE_L_IN => size_l_in_interface_vector,
+
       WK_IN     => wk_in_interface_vector,
       WBETA_IN  => wbeta_in_interface_vector,
       WG_IN     => wg_in_interface_vector,
@@ -499,12 +518,6 @@ begin
 
   reading : ntm_reading
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -520,6 +533,9 @@ begin
       READY => ready_reading,
 
       -- DATA
+      SIZE_N_IN => size_n_in_reading,
+      SIZE_W_IN => size_w_in_reading,
+
       W_IN  => w_in_reading,
       M_IN  => m_in_reading,
       R_OUT => r_out_reading
@@ -531,12 +547,6 @@ begin
 
   writing : ntm_writing
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -553,6 +563,9 @@ begin
       M_OUT_ENABLE => m_out_enable_writing,
 
       -- DATA
+      SIZE_N_IN => size_n_in_writing,
+      SIZE_W_IN => size_w_in_writing,
+
       M_IN  => m_in_writing,
       A_IN  => a_in_writing,
       W_IN  => w_in_writing,
@@ -561,12 +574,6 @@ begin
 
   erasing : ntm_erasing
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -583,9 +590,13 @@ begin
       M_OUT_ENABLE => m_out_enable_erasing,
 
       -- DATA
-      M_IN  => m_in_erasing,
-      E_IN  => e_in_erasing,
-      W_IN  => w_in_erasing,
+      SIZE_N_IN => size_n_in_erasing,
+      SIZE_W_IN => size_w_in_erasing,
+
+      M_IN => m_in_erasing,
+      E_IN => e_in_erasing,
+      W_IN => w_in_erasing,
+
       M_OUT => m_out_erasing
       );
 
@@ -595,12 +606,6 @@ begin
 
   ntm_addressing_i : ntm_addressing
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -622,6 +627,9 @@ begin
       W_OUT_ENABLE => w_out_enable_addressing,
 
       -- DATA
+      SIZE_N_IN => size_n_in_addressing,
+      SIZE_W_IN => size_w_in_addressing,
+
       K_IN     => k_in_addressing,
       BETA_IN  => beta_in_addressing,
       G_IN     => g_in_addressing,

@@ -71,6 +71,9 @@ architecture ntm_memory_testbench_architecture of ntm_memory_testbench is
   signal w_out_enable_addressing : std_logic;
 
   -- DATA
+  signal size_n_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal k_in_addressing     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_in_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal g_in_addressing     : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -91,8 +94,6 @@ begin
   -- ADDRESSING
   ntm_addressing_i : ntm_addressing
     generic map (
-      N => N,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -114,6 +115,9 @@ begin
       W_OUT_ENABLE => w_out_enable_addressing,
 
       -- DATA
+      SIZE_N_IN => size_n_in_addressing,
+      SIZE_W_IN => size_w_in_addressing,
+
       K_IN     => k_in_addressing,
       BETA_IN  => beta_in_addressing,
       G_IN     => g_in_addressing,
