@@ -705,7 +705,7 @@ package dnc_core_pkg is
       K_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
       K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
-      K_OUT_J_ENABLE : out std_logic;   -- for k in 0 to W-1
+      K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
       -- DATA
       K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

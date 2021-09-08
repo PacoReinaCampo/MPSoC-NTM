@@ -154,6 +154,9 @@ begin
 
             -- Control Outputs
             V_OUT_ENABLE <= '1';
+          else
+            -- Control Outputs
+            V_OUT_ENABLE <= '0';
           end if;
 
           -- Data Outputs

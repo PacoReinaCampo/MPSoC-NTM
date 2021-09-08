@@ -154,6 +154,9 @@ begin
 
             -- Control Outputs
             K_OUT_ENABLE <= '1';
+          else
+            -- Control Outputs
+            K_OUT_ENABLE <= '0';
           end if;
 
           -- Data Outputs
