@@ -77,7 +77,8 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal start_backward_weighting : std_logic;
   signal ready_backward_weighting : std_logic;
 
-  signal l_in_enable_backward_weighting : std_logic;
+  signal l_in_g_enable_backward_weighting : std_logic;
+  signal l_in_j_enable_backward_weighting : std_logic;
 
   signal w_in_i_enable_backward_weighting : std_logic;
   signal w_in_j_enable_backward_weighting : std_logic;
@@ -95,7 +96,8 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal start_forward_weighting : std_logic;
   signal ready_forward_weighting : std_logic;
 
-  signal l_in_enable_forward_weighting : std_logic;
+  signal l_in_g_enable_forward_weighting : std_logic;
+  signal l_in_j_enable_forward_weighting : std_logic;
 
   signal w_in_i_enable_forward_weighting : std_logic;
   signal w_in_j_enable_forward_weighting : std_logic;
@@ -255,11 +257,14 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal start_temporal_link_matrix : std_logic;
   signal ready_temporal_link_matrix : std_logic;
 
-  signal l_in_enable_temporal_link_matrix : std_logic;
+  signal l_in_g_enable_temporal_link_matrix : std_logic;
+  signal l_in_j_enable_temporal_link_matrix : std_logic;
+
   signal w_in_enable_temporal_link_matrix : std_logic;
   signal p_in_enable_temporal_link_matrix : std_logic;
 
-  signal l_out_enable_temporal_link_matrix : std_logic;
+  signal l_out_g_enable_temporal_link_matrix : std_logic;
+  signal l_out_j_enable_temporal_link_matrix : std_logic;
 
   -- DATA
   signal l_in_temporal_link_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -418,7 +423,8 @@ begin
       START => start_backward_weighting,
       READY => ready_backward_weighting,
 
-      L_IN_ENABLE => l_in_enable_backward_weighting,
+      L_IN_G_ENABLE => l_in_j_enable_backward_weighting,
+      L_IN_J_ENABLE => l_in_g_enable_backward_weighting,
 
       W_IN_I_ENABLE => w_in_i_enable_backward_weighting,
       W_IN_J_ENABLE => w_in_j_enable_forward_weighting,
@@ -455,7 +461,8 @@ begin
       START => start_forward_weighting,
       READY => ready_forward_weighting,
 
-      L_IN_ENABLE => l_in_enable_forward_weighting,
+      L_IN_G_ENABLE => l_in_g_enable_forward_weighting,
+      L_IN_J_ENABLE => l_in_j_enable_forward_weighting,
 
       W_IN_I_ENABLE => w_in_i_enable_forward_weighting,
       W_IN_J_ENABLE => w_in_j_enable_forward_weighting,
@@ -751,11 +758,14 @@ begin
       START => start_temporal_link_matrix,
       READY => ready_temporal_link_matrix,
 
-      L_IN_ENABLE => l_in_enable_temporal_link_matrix,
+      L_IN_G_ENABLE => l_in_g_enable_temporal_link_matrix,
+      L_IN_J_ENABLE => l_in_j_enable_temporal_link_matrix,
+
       W_IN_ENABLE => w_in_enable_temporal_link_matrix,
       P_IN_ENABLE => p_in_enable_temporal_link_matrix,
 
-      L_OUT_ENABLE => l_out_enable_temporal_link_matrix,
+      L_OUT_G_ENABLE => l_out_g_enable_temporal_link_matrix,
+      L_OUT_J_ENABLE => l_out_j_enable_temporal_link_matrix,
 
       -- DATA
       L_IN => l_in_temporal_link_matrix,

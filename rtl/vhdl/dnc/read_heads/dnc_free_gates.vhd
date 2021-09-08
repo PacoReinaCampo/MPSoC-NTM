@@ -85,6 +85,8 @@ architecture dnc_free_gates_architecture of dnc_free_gates is
   -- Constants
   -----------------------------------------------------------------------
 
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
@@ -123,8 +125,8 @@ begin
   F_OUT_ENABLE <= data_out_enable_vector_logistic;
 
   -- DATA
-  modulo_in_vector_logistic <= (others => '1');
-  size_in_vector_logistic   <= (others => '1');
+  modulo_in_vector_logistic <= FULL;
+  size_in_vector_logistic   <= FULL;
 
   data_in_vector_logistic <= F_IN;
 

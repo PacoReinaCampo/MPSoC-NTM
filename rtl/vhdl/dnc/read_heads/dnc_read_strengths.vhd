@@ -85,6 +85,8 @@ architecture dnc_read_strengths_architecture of dnc_read_strengths is
   -- Constants
   -----------------------------------------------------------------------
 
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
@@ -123,8 +125,8 @@ begin
   BETA_OUT_ENABLE <= data_out_enable_vector_oneplus;
 
   -- DATA
-  modulo_in_vector_oneplus <= (others => '1');
-  size_in_vector_oneplus   <= (others => '1');
+  modulo_in_vector_oneplus <= FULL;
+  size_in_vector_oneplus   <= FULL;
 
   data_in_vector_oneplus <= BETA_IN;
 

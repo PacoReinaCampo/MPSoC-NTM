@@ -64,7 +64,8 @@ entity dnc_forward_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    L_IN_ENABLE : in std_logic;         -- for j in 0 to N-1 (square matrix)
+    L_IN_G_ENABLE : in std_logic;       -- for g in 0 to N-1 (square matrix)
+    L_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1 (square matrix)
 
     W_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
     W_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
@@ -90,6 +91,10 @@ architecture dnc_forward_weighting_architecture of dnc_forward_weighting is
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
+
+  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -124,7 +129,32 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- f(t;i;j) = L(t;j,j)·w(t-1;i;j)
+  -- f(t;i;j) = L(t;g;j)·w(t-1;i;j)
+
+  -- ASSIGNATIONS
+  -- CONTROL
+  start_matrix_product <= START;
+
+  READY <= ready_matrix_product;
+
+  data_a_in_i_enable_matrix_product <= L_IN_G_ENABLE;
+  data_a_in_j_enable_matrix_product <= L_IN_J_ENABLE;
+  data_b_in_i_enable_matrix_product <= W_IN_I_ENABLE;
+  data_b_in_j_enable_matrix_product <= W_IN_J_ENABLE;
+
+  F_OUT_I_ENABLE <= data_out_i_enable_matrix_product;
+  F_OUT_J_ENABLE <= data_out_j_enable_matrix_product;
+
+  -- DATA
+  modulo_in_matrix_product   <= FULL;
+  size_a_i_in_matrix_product <= std_logic_vector(to_unsigned(N, DATA_SIZE));
+  size_a_j_in_matrix_product <= std_logic_vector(to_unsigned(N, DATA_SIZE));
+  size_b_i_in_matrix_product <= std_logic_vector(to_unsigned(N, DATA_SIZE));
+  size_b_j_in_matrix_product <= ONE;
+  data_a_in_matrix_product   <= L_IN;
+  data_b_in_matrix_product   <= W_IN;
+
+  F_OUT <= data_out_matrix_product;
 
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product

@@ -81,6 +81,8 @@ architecture dnc_allocation_gate_architecture of dnc_allocation_gate is
   -- Constants
   -----------------------------------------------------------------------
 
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
@@ -110,6 +112,8 @@ begin
   READY <= ready_scalar_logistic;
 
   -- DATA
+  modulo_in_scalar_logistic <= FULL;
+
   data_in_scalar_logistic <= GA_IN;
 
   GA_OUT <= data_out_scalar_logistic;

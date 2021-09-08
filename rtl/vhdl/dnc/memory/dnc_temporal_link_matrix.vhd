@@ -64,11 +64,14 @@ entity dnc_temporal_link_matrix is
     START : in  std_logic;
     READY : out std_logic;
 
-    L_IN_ENABLE : in std_logic;         -- for j in 0 to N-1 (square matrix)
+    L_IN_G_ENABLE : in std_logic;       -- for g in 0 to N-1 (square matrix)
+    L_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1 (square matrix)
+
     W_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
     P_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
 
-    L_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
+    L_OUT_G_ENABLE : out std_logic;     -- for g in 0 to N-1 (square matrix)
+    L_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1 (square matrix)
 
     -- DATA
     L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -123,9 +126,9 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- L(t)[i,j] = (1 - w(t;j)[i] - w(t;j)[j])·L(t-1)[i,j] + w(t;j)[i]·p(t-1;j)[j]
+  -- L(t)[g;j] = (1 - w(t;j)[i] - w(t;j)[j])·L(t-1)[g;j] + w(t;j)[i]·p(t-1;j)[j]
 
-  -- L(t=0)[i,j] = 0
+  -- L(t=0)[g,j] = 0
 
   -- SCALAR ADDER
   scalar_adder : ntm_scalar_adder

@@ -87,6 +87,8 @@ architecture dnc_read_modes_architecture of dnc_read_modes is
   -- Constants
   -----------------------------------------------------------------------
 
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
@@ -136,7 +138,7 @@ begin
   PI_OUT_P_ENABLE <= data_out_j_enable_matrix_softmax;
 
   -- DATA
-  modulo_in_matrix_softmax <= (others => '0');
+  modulo_in_matrix_softmax <= FULL;
 
   size_i_in_matrix_softmax <= std_logic_vector(to_unsigned(R, DATA_SIZE));
   size_j_in_matrix_softmax <= std_logic_vector(to_unsigned(R, DATA_SIZE));
