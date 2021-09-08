@@ -59,7 +59,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   -- SCALAR
   -----------------------------------------------------------------------
 
-  -- CONVOLUTION
+  -- SCALAR CONVOLUTION
   -- CONTROL
   signal start_scalar_convolution : std_logic;
   signal ready_scalar_convolution : std_logic;
@@ -71,31 +71,31 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_b_in_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- COSINE SIMILARITY
+  -- SCALAR COSINE SIMILARITY
   -- CONTROL
   signal start_scalar_cosine : std_logic;
   signal ready_scalar_cosine : std_logic;
 
   -- DATA
   signal modulo_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_scalar_cosine   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MULTIPLICATION
+  -- SCALAR MULTIPLICATION
   -- CONTROL
   signal start_scalar_multiplication : std_logic;
   signal ready_scalar_multiplication : std_logic;
 
   -- DATA
   signal modulo_in_scalar_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_scalar_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_scalar_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- COSH
-  -- CONTROL
+  -- SCALAR COSH
+   -- CONTROL
   signal start_scalar_cosh : std_logic;
   signal ready_scalar_cosh : std_logic;
 
@@ -104,7 +104,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_scalar_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SINH
+  -- SCALAR SINH
   -- CONTROL
   signal start_scalar_sinh : std_logic;
   signal ready_scalar_sinh : std_logic;
@@ -114,7 +114,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_scalar_sinh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_sinh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- TANH
+  -- SCALAR TANH
   -- CONTROL
   signal start_scalar_tanh : std_logic;
   signal ready_scalar_tanh : std_logic;
@@ -124,7 +124,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_scalar_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- LOGISTIC
+  -- SCALAR LOGISTIC
   -- CONTROL
   signal start_scalar_logistic : std_logic;
   signal ready_scalar_logistic : std_logic;
@@ -134,18 +134,18 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_scalar_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_logistic  : std_logic;
 
-  -- SOFTMAX
+  -- SCALAR SOFTMAX
   -- CONTROL
   signal start_scalar_softmax : std_logic;
   signal ready_scalar_softmax : std_logic;
 
   -- DATA
   signal modulo_in_scalar_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_scalar_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_scalar_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- ONEPLUS
+  -- SCALAR ONEPLUS
   -- CONTROL
   signal start_scalar_oneplus : std_logic;
   signal ready_scalar_oneplus : std_logic;
@@ -155,14 +155,14 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_scalar_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SUMMATION
+  -- SCALAR SUMMATION
   -- CONTROL
   signal start_scalar_summation : std_logic;
   signal ready_scalar_summation : std_logic;
 
   -- DATA
   signal modulo_in_scalar_summation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_scalar_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_scalar_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -170,7 +170,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   -- VECTOR
   -----------------------------------------------------------------------
 
-  -- CONVOLUTION
+  -- VECTOR CONVOLUTION
   -- CONTROL
   signal start_vector_convolution : std_logic;
   signal ready_vector_convolution : std_logic;
@@ -188,7 +188,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_b_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- COSINE SIMILARITY
+  -- VECTOR COSINE SIMILARITY
   -- CONTROL
   signal start_vector_cosine : std_logic;
   signal ready_vector_cosine : std_logic;
@@ -206,7 +206,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_b_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MULTIPLICATION
+  -- VECTOR MULTIPLICATION
   -- CONTROL
   signal start_vector_multiplication : std_logic;
   signal ready_vector_multiplication : std_logic;
@@ -222,7 +222,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- COSH
+  -- VECTOR COSH
   -- CONTROL
   signal start_vector_cosh : std_logic;
   signal ready_vector_cosh : std_logic;
@@ -237,7 +237,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_vector_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SINH
+  -- VECTOR SINH
   -- CONTROL
   signal start_vector_sinh : std_logic;
   signal ready_vector_sinh : std_logic;
@@ -252,7 +252,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_vector_sinh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_sinh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- TANH
+  -- VECTOR TANH
   -- CONTROL
   signal start_vector_tanh : std_logic;
   signal ready_vector_tanh : std_logic;
@@ -267,7 +267,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_vector_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- LOGISTIC
+  -- VECTOR LOGISTIC
   -- CONTROL
   signal start_vector_logistic : std_logic;
   signal ready_vector_logistic : std_logic;
@@ -282,7 +282,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_logistic  : std_logic;
 
-  -- SOFTMAX
+  -- VECTOR SOFTMAX
   -- CONTROL
   signal start_vector_softmax : std_logic;
   signal ready_vector_softmax : std_logic;
@@ -298,7 +298,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- ONEPLUS
+  -- VECTOR ONEPLUS
   -- CONTROL
   signal start_vector_oneplus : std_logic;
   signal ready_vector_oneplus : std_logic;
@@ -313,7 +313,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_vector_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SUMMATION
+  -- VECTOR SUMMATION
   -- CONTROL
   signal start_vector_summation : std_logic;
   signal ready_vector_summation : std_logic;
@@ -333,7 +333,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   -- MATRIX
   -----------------------------------------------------------------------
 
-  -- CONVOLUTION
+  -- MATRIX CONVOLUTION
   -- CONTROL
   signal start_matrix_convolution : std_logic;
   signal ready_matrix_convolution : std_logic;
@@ -355,7 +355,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_b_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- COSINE SIMILARITY
+  -- MATRIX COSINE SIMILARITY
   -- CONTROL
   signal start_matrix_cosine : std_logic;
   signal ready_matrix_cosine : std_logic;
@@ -377,7 +377,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_b_in_matrix_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MULTIPLICATION
+  -- MATRIX MULTIPLICATION
   -- CONTROL
   signal start_matrix_multiplication : std_logic;
   signal ready_matrix_multiplication : std_logic;
@@ -396,7 +396,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_matrix_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- COSH
+  -- MATRIX COSH
   -- CONTROL
   signal start_matrix_cosh : std_logic;
   signal ready_matrix_cosh : std_logic;
@@ -414,7 +414,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_matrix_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SINH
+  -- MATRIX SINH
   -- CONTROL
   signal start_matrix_sinh : std_logic;
   signal ready_matrix_sinh : std_logic;
@@ -432,7 +432,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_matrix_sinh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_sinh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- TANH
+  -- MATRIX TANH
   -- CONTROL
   signal start_matrix_tanh : std_logic;
   signal ready_matrix_tanh : std_logic;
@@ -450,7 +450,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_matrix_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- LOGISTIC
+  -- MATRIX LOGISTIC
   -- CONTROL
   signal start_matrix_logistic : std_logic;
   signal ready_matrix_logistic : std_logic;
@@ -468,7 +468,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_matrix_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_logistic  : std_logic;
 
-  -- SOFTMAX
+  -- MATRIX SOFTMAX
   -- CONTROL
   signal start_matrix_softmax : std_logic;
   signal ready_matrix_softmax : std_logic;
@@ -489,7 +489,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_matrix_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- ONEPLUS
+  -- MATRIX ONEPLUS
   -- CONTROL
   signal start_matrix_oneplus : std_logic;
   signal ready_matrix_oneplus : std_logic;
@@ -507,7 +507,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_matrix_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SUMMATION
+  -- MATRIX SUMMATION
   -- CONTROL
   signal start_matrix_summation : std_logic;
   signal ready_matrix_summation : std_logic;
@@ -536,7 +536,7 @@ begin
   -- SCALAR
   -----------------------------------------------------------------------
 
-  -- CONVOLUTION
+  -- SCALAR CONVOLUTION
   scalar_convolution_function : ntm_scalar_convolution_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -558,7 +558,7 @@ begin
       DATA_OUT  => data_out_scalar_convolution
       );
 
-  -- COSINE SIMILARITY
+  -- SCALAR COSINE SIMILARITY
   scalar_cosine_similarity_function : ntm_scalar_cosine_similarity_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -580,7 +580,7 @@ begin
       DATA_OUT  => data_out_scalar_cosine
       );
 
-  -- MULTIPLICATION
+  -- SCALAR MULTIPLICATION
   scalar_multiplication_function : ntm_scalar_multiplication_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -601,7 +601,7 @@ begin
       DATA_OUT  => data_out_scalar_multiplication
       );
 
-  -- COSH
+  -- SCALAR COSH
   scalar_cosh_function : ntm_scalar_cosh_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -621,7 +621,7 @@ begin
       DATA_OUT  => data_out_scalar_cosh
       );
 
-  -- SINH
+  -- SCALAR SINH
   scalar_sinh_function : ntm_scalar_sinh_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -641,7 +641,7 @@ begin
       DATA_OUT  => data_out_scalar_sinh
       );
 
-  -- TANH
+  -- SCALAR TANH
   scalar_tanh_function : ntm_scalar_tanh_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -661,7 +661,7 @@ begin
       DATA_OUT  => data_out_scalar_tanh
       );
 
-  -- LOGISTIC
+  -- SCALAR LOGISTIC
   scalar_logistic_function : ntm_scalar_logistic_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -681,7 +681,7 @@ begin
       DATA_OUT  => data_out_scalar_logistic
       );
 
-  -- SOFTMAX
+  -- SCALAR SOFTMAX
   scalar_softmax_function : ntm_scalar_softmax_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -702,7 +702,7 @@ begin
       DATA_OUT  => data_out_scalar_softmax
       );
 
-  -- ONEPLUS
+  -- SCALAR ONEPLUS
   scalar_oneplus_function : ntm_scalar_oneplus_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -722,7 +722,7 @@ begin
       DATA_OUT  => data_out_scalar_oneplus
       );
 
-  -- SUMMATION
+  -- SCALAR SUMMATION
   scalar_summation_function : ntm_scalar_summation_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -747,7 +747,7 @@ begin
   -- VECTOR
   -----------------------------------------------------------------------
 
-  -- CONVOLUTION
+  -- VECTOR CONVOLUTION
   vector_convolution_function : ntm_vector_convolution_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -775,7 +775,7 @@ begin
       DATA_OUT  => data_out_vector_convolution
       );
 
-  -- COSINE SIMILARITY
+  -- VECTOR COSINE SIMILARITY
   vector_cosine_similarity_function : ntm_vector_cosine_similarity_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -803,7 +803,7 @@ begin
       DATA_OUT  => data_out_vector_cosine
       );
 
-  -- MULTIPLICATION
+  -- VECTOR MULTIPLICATION
   vector_multiplication_function : ntm_vector_multiplication_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -829,7 +829,7 @@ begin
       DATA_OUT  => data_out_vector_multiplication
       );
 
-  -- COSH
+  -- VECTOR COSH
   vector_cosh_function : ntm_vector_cosh_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -854,7 +854,7 @@ begin
       DATA_OUT  => data_out_vector_cosh
       );
 
-  -- SINH
+  -- VECTOR SINH
   vector_sinh_function : ntm_vector_sinh_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -879,7 +879,7 @@ begin
       DATA_OUT  => data_out_vector_sinh
       );
 
-  -- TANH
+  -- VECTOR TANH
   vector_tanh_function : ntm_vector_tanh_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -904,7 +904,7 @@ begin
       DATA_OUT  => data_out_vector_tanh
       );
 
-  -- LOGISTIC
+  -- VECTOR LOGISTIC
   vector_logistic_function : ntm_vector_logistic_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -929,7 +929,7 @@ begin
       DATA_OUT  => data_out_vector_logistic
       );
 
-  -- SOFTMAX
+  -- VECTOR SOFTMAX
   vector_softmax_function : ntm_vector_softmax_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -955,7 +955,7 @@ begin
       DATA_OUT  => data_out_vector_softmax
       );
 
-  -- ONEPLUS
+  -- VECTOR ONEPLUS
   vector_oneplus_function : ntm_vector_oneplus_function
     generic map (
 
@@ -981,7 +981,7 @@ begin
       DATA_OUT  => data_out_vector_oneplus
       );
 
-  -- SUMMATION
+  -- VECTOR SUMMATION
   vector_summation_function : ntm_vector_summation_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -1011,7 +1011,7 @@ begin
   -- MATRIX
   -----------------------------------------------------------------------
 
-  -- CONVOLUTION
+  -- MATRIX CONVOLUTION
   matrix_convolution_function : ntm_matrix_convolution_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -1043,7 +1043,7 @@ begin
       DATA_OUT  => data_out_matrix_convolution
       );
 
-  -- COSINE SIMILARITY
+  -- MATRIX COSINE SIMILARITY
   matrix_cosine_similarity_function : ntm_matrix_cosine_similarity_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -1075,7 +1075,7 @@ begin
       DATA_OUT  => data_out_matrix_cosine
       );
 
-  -- MULTIPLICATION
+  -- MATRIX MULTIPLICATION
   matrix_multiplication_function : ntm_matrix_multiplication_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -1104,7 +1104,7 @@ begin
       DATA_OUT  => data_out_matrix_multiplication
       );
 
-  -- COSH
+  -- MATRIX COSH
   matrix_cosh_function : ntm_matrix_cosh_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -1132,7 +1132,7 @@ begin
       DATA_OUT  => data_out_matrix_cosh
       );
 
-  -- SINH
+  -- MATRIX SINH
   matrix_sinh_function : ntm_matrix_sinh_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -1160,7 +1160,7 @@ begin
       DATA_OUT  => data_out_matrix_sinh
       );
 
-  -- TANH
+  -- MATRIX TANH
   matrix_tanh_function : ntm_matrix_tanh_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -1188,7 +1188,7 @@ begin
       DATA_OUT  => data_out_matrix_tanh
       );
 
-  -- LOGISTIC
+  -- MATRIX LOGISTIC
   matrix_logistic_function : ntm_matrix_logistic_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -1216,7 +1216,7 @@ begin
       DATA_OUT  => data_out_matrix_logistic
       );
 
-  -- SOFTMAX
+  -- MATRIX SOFTMAX
   matrix_softmax_function : ntm_matrix_softmax_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -1247,7 +1247,7 @@ begin
       DATA_OUT  => data_out_matrix_softmax
       );
 
-  -- ONEPLUS
+  -- MATRIX ONEPLUS
   matrix_oneplus_function : ntm_matrix_oneplus_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -1275,7 +1275,7 @@ begin
       DATA_OUT  => data_out_matrix_oneplus
       );
 
-  -- SUMMATION
+  -- MATRIX SUMMATION
   matrix_summation_function : ntm_matrix_summation_function
     generic map (
       DATA_SIZE => DATA_SIZE

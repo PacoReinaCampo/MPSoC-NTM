@@ -702,7 +702,7 @@ package dnc_core_pkg is
       READY : out std_logic;
 
       K_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
-      K_IN_J_ENABLE : in std_logic;     -- for k in 0 to W-1
+      K_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
       K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
       K_OUT_J_ENABLE : out std_logic;   -- for k in 0 to W-1

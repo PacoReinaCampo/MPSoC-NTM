@@ -71,7 +71,7 @@ architecture dnc_read_heads_testbench_architecture of dnc_read_heads_testbench i
   -- READ KEYS
   -- CONTROL
   signal k_in_i_enable_read_keys : std_logic;
-  signal k_in_j_enable_read_keys : std_logic;
+  signal k_in_k_enable_read_keys : std_logic;
 
   signal k_out_i_enable_read_keys : std_logic;
   signal k_out_j_enable_read_keys : std_logic;
@@ -169,7 +169,7 @@ begin
       READY => ready_read_keys,
 
       K_IN_I_ENABLE => k_in_i_enable_read_keys,
-      K_IN_J_ENABLE => k_in_j_enable_read_keys,
+      K_IN_K_ENABLE => k_in_k_enable_read_keys,
 
       K_OUT_I_ENABLE => k_out_i_enable_read_keys,
       K_OUT_J_ENABLE => k_out_j_enable_read_keys,

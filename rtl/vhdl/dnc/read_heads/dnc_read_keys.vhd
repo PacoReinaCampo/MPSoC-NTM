@@ -65,7 +65,7 @@ entity dnc_read_keys is
     READY : out std_logic;
 
     K_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
-    K_IN_J_ENABLE : in std_logic;       -- for k in 0 to W-1
+    K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
     K_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
     K_OUT_J_ENABLE : out std_logic;     -- for k in 0 to W-1
@@ -112,7 +112,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- k(t;i,j) = k^(t;i,j)
+  -- k(t;i;k) = k^(t;i;k)
 
   ctrl_fsm : process(CLK, RST)
   begin
@@ -156,7 +156,7 @@ begin
             K_OUT_I_ENABLE <= '1';
           end if;
 
-          if (K_IN_J_ENABLE = '1') then
+          if (K_IN_K_ENABLE = '1') then
             if (index_i_loop = std_logic_vector(to_unsigned(R, DATA_SIZE)-unsigned(ONE)) and index_j_loop = std_logic_vector(to_unsigned(W, DATA_SIZE)-unsigned(ONE))) then
               -- Control Outputs
               READY <= '1';
