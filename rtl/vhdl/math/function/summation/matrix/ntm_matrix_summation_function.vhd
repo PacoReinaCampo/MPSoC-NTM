@@ -186,6 +186,7 @@ begin
 
           -- Control Outputs
           DATA_OUT_I_ENABLE <= '0';
+          DATA_OUT_J_ENABLE <= '0';
 
         when INPUT_J_STATE =>           -- STEP 2
 
@@ -221,6 +222,8 @@ begin
               -- Control Outputs
               READY <= '1';
 
+              DATA_OUT_J_ENABLE <= '1';
+
               -- FSM Control
               summation_ctrl_fsm_int <= STARTER_STATE;
             elsif (index_i_loop < std_logic_vector(unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop < std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
@@ -239,6 +242,7 @@ begin
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
+              DATA_OUT_J_ENABLE <= '1';
 
               -- FSM Control
               summation_ctrl_fsm_int <= INPUT_I_STATE;

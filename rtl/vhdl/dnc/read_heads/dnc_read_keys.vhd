@@ -154,9 +154,11 @@ begin
 
             -- Control Outputs
             K_OUT_I_ENABLE <= '1';
+            K_OUT_K_ENABLE <= '1';
           else
             -- Control Outputs
             K_OUT_I_ENABLE <= '0';
+            K_OUT_K_ENABLE <= '0';
           end if;
 
           if (K_IN_K_ENABLE = '1') then
