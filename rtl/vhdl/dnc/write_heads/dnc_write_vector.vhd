@@ -81,13 +81,27 @@ architecture dnc_write_vector_architecture of dnc_write_vector is
   -- Types
   -----------------------------------------------------------------------
 
+  type write_vector_ctrl_fsm is (
+    STARTER_STATE,                      -- STEP 0
+    ENDER_STATE                         -- STEP 1
+    );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal write_vector_ctrl_fsm_int : write_vector_ctrl_fsm;
+
+  -- Internal Signals
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -96,5 +110,60 @@ begin
   -----------------------------------------------------------------------
 
   -- v(t;k) = v^(t;k)
+
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      V_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+      -- Assignations
+      index_loop <= ZERO;
+
+    elsif (rising_edge(CLK)) then
+
+      case write_vector_ctrl_fsm_int is
+        when STARTER_STATE =>           -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          -- Assignations
+          index_loop <= ZERO;
+
+          if (START = '1') then
+            -- FSM Control
+            write_vector_ctrl_fsm_int <= ENDER_STATE;
+          end if;
+
+        when ENDER_STATE =>             -- STEP 1
+
+          if (V_IN_ENABLE = '1') then
+            if (index_loop = std_logic_vector(to_unsigned(W, DATA_SIZE)-unsigned(ONE))) then
+              -- Control Outputs
+              READY <= '1';
+
+              -- FSM Control
+              write_vector_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE));
+            end if;
+
+            -- Control Outputs
+            V_OUT_ENABLE <= '1';
+          end if;
+
+          -- Data Outputs
+          V_OUT <= V_IN;
+
+        when others =>
+          -- FSM Control
+          write_vector_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
 end architecture;

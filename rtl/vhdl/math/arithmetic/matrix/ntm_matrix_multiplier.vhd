@@ -261,22 +261,28 @@ begin
         when ENDER_STATE =>             -- STEP 3
 
           if (ready_vector_multiplier = '1') then
-            if (index_i_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
+            if (index_i_loop = std_logic_vector(unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               multiplier_ctrl_fsm_int <= STARTER_STATE;
-            elsif (index_i_loop < std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) and index_j_loop < std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
+            elsif (index_i_loop < std_logic_vector(unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop < std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
               -- Control Internal
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
 
+              -- Control Outputs
+              DATA_OUT_J_ENABLE <= '1';
+
               -- FSM Control
               multiplier_ctrl_fsm_int <= INPUT_J_STATE;
-            elsif (index_i_loop < std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
+            elsif (index_i_loop < std_logic_vector(unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
               index_j_loop <= ZERO;
+
+              -- Control Outputs
+              DATA_OUT_I_ENABLE <= '1';
 
               -- FSM Control
               multiplier_ctrl_fsm_int <= INPUT_I_STATE;
@@ -284,9 +290,6 @@ begin
 
             -- Data Outputs
             DATA_OUT <= data_out_vector_multiplier;
-
-            -- Control Outputs
-            DATA_OUT_J_ENABLE <= '1';
           else
             -- Control Internal
             start_vector_multiplier <= '0';

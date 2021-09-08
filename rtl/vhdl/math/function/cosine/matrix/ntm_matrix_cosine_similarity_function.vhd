@@ -272,6 +272,9 @@ begin
               -- Control Internal
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
 
+              -- Control Outputs
+              DATA_OUT_J_ENABLE <= '1';
+
               -- FSM Control
               cosine_similarity_ctrl_fsm_int <= INPUT_J_STATE;
             elsif (index_i_loop < std_logic_vector(unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
@@ -279,15 +282,15 @@ begin
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
               index_j_loop <= ZERO;
 
+              -- Control Outputs
+              DATA_OUT_I_ENABLE <= '1';
+
               -- FSM Control
               cosine_similarity_ctrl_fsm_int <= INPUT_I_STATE;
             end if;
 
             -- Data Outputs
             DATA_OUT <= data_out_vector_cosine_similarity;
-
-            -- Control Outputs
-            DATA_OUT_J_ENABLE <= '1';
           else
             -- Control Internal
             start_vector_cosine_similarity <= '0';
