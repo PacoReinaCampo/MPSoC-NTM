@@ -48,13 +48,6 @@ use work.ntm_lstm_controller_pkg.all;
 
 entity dnc_write_interface_vector is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -97,6 +90,10 @@ entity dnc_write_interface_vector is
     H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
     -- DATA
+    SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
     WK_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
     WBETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     WE_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);

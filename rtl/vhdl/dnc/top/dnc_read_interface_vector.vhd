@@ -48,13 +48,6 @@ use work.ntm_lstm_controller_pkg.all;
 
 entity dnc_read_interface_vector is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -89,15 +82,17 @@ entity dnc_read_interface_vector is
     -- Read Mode
     WPI_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
     WPI_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
-    WPI_IN_P_ENABLE : in std_logic;     -- for p in 0 to 2
 
-    PI_OUT_I_ENABLE : in std_logic;     -- for i in 0 to R-1
-    PI_OUT_P_ENABLE : in std_logic;     -- for p in 0 to 2
+    PI_OUT_ENABLE : in std_logic;       -- for i in 0 to R-1
 
     -- Hidden State
     H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
     -- DATA
+    SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
     WK_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
     WBETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     WF_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);

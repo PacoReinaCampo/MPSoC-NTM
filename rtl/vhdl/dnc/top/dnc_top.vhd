@@ -48,13 +48,6 @@ use work.ntm_lstm_controller_pkg.all;
 
 entity dnc_top is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -79,6 +72,13 @@ entity dnc_top is
     Y_OUT_ENABLE : out std_logic;       -- for y in 0 to Y-1
 
     -- DATA
+    SIZE_X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_Y_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -150,6 +150,9 @@ architecture dnc_top_architecture of dnc_top is
   signal nu_out_enable_controller_output_vector : std_logic;
 
   -- DATA
+  signal size_y_in_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal u_in_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal h_in_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -172,6 +175,10 @@ architecture dnc_top_architecture of dnc_top is
   signal y_in_enable_output_vector : std_logic;
 
   -- DATA
+  signal size_y_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal k_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal r_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -192,6 +199,8 @@ architecture dnc_top_architecture of dnc_top is
   signal ready_free_gates : std_logic;
 
   -- DATA
+  signal size_r_in_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal f_in_free_gates  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal f_out_free_gates : std_logic;
 
@@ -207,21 +216,24 @@ architecture dnc_top_architecture of dnc_top is
   signal ready_read_keys : std_logic;
 
   -- DATA
+  signal size_r_in_read_keys : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_read_keys : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal k_in_read_keys  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_out_read_keys : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- READ MODES
   -- CONTROL
-  signal pi_in_i_enable_read_modes : std_logic;
-  signal pi_in_p_enable_read_modes : std_logic;
+  signal pi_in_enable_read_modes : std_logic;
 
-  signal pi_out_i_enable_read_modes : std_logic;
-  signal pi_out_p_enable_read_modes : std_logic;
+  signal pi_out_enable_read_modes : std_logic;
 
   signal start_read_modes : std_logic;
   signal ready_read_modes : std_logic;
 
   -- DATA
+  signal size_r_in_read_modes : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal pi_in_read_modes  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal pi_out_read_modes : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -234,6 +246,8 @@ architecture dnc_top_architecture of dnc_top is
   signal ready_read_strengths : std_logic;
 
   -- DATA
+  signal size_r_in_read_strengths : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal beta_in_read_strengths  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_out_read_strengths : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -265,15 +279,17 @@ architecture dnc_top_architecture of dnc_top is
   -- Read Mode
   signal wpi_in_i_enable_read_interface_vector : std_logic;
   signal wpi_in_l_enable_read_interface_vector : std_logic;
-  signal wpi_in_p_enable_read_interface_vector : std_logic;
 
-  signal pi_out_i_enable_read_interface_vector : std_logic;
-  signal pi_out_p_enable_read_interface_vector : std_logic;
+  signal pi_out_enable_read_interface_vector : std_logic;
 
   -- Hidden State
   signal h_in_enable_read_interface_vector : std_logic;
 
   -- DATA
+  signal size_w_in_read_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_read_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_read_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal wk_in_read_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal wbeta_in_read_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal wf_in_read_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -309,6 +325,8 @@ architecture dnc_top_architecture of dnc_top is
   signal e_out_enable_erase_vector : std_logic;
 
   -- DATA
+  signal size_w_in_erase_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal e_in_erase_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal e_out_erase_vector : std_logic;
 
@@ -331,6 +349,8 @@ architecture dnc_top_architecture of dnc_top is
   signal k_out_enable_write_key : std_logic;
 
   -- DATA
+  signal size_w_in_write_key : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal k_in_write_key  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_out_write_key : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -353,6 +373,8 @@ architecture dnc_top_architecture of dnc_top is
   signal v_out_enable_write_vector : std_logic;
 
   -- DATA
+  signal size_w_in_write_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal v_in_write_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal v_out_write_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -392,6 +414,10 @@ architecture dnc_top_architecture of dnc_top is
   signal h_in_enable_write_interface_vector : std_logic;
 
   -- DATA
+  signal size_w_in_write_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_write_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_write_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal wk_in_write_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal wbeta_in_write_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal we_in_write_interface_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -423,14 +449,16 @@ architecture dnc_top_architecture of dnc_top is
 
   signal f_read_in_enable_addressing : std_logic;
 
-  signal pi_read_in_i_enable_addressing : std_logic;
-  signal pi_read_in_p_enable_addressing : std_logic;
+  signal pi_read_in_enable_addressing : std_logic;
 
   signal k_write_in_k_enable_addressing : std_logic;
   signal e_write_in_k_enable_addressing : std_logic;
   signal v_write_in_k_enable_addressing : std_logic;
 
   -- DATA
+  signal size_r_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal k_read_in_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_read_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
   signal f_read_in_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -505,13 +533,6 @@ begin
   -- CONTROLLER OUTPUT VECTOR
   controller_output_vector : dnc_controller_output_vector
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -531,6 +552,9 @@ begin
       NU_ENABLE_OUT => nu_out_enable_controller_output_vector,
 
       -- DATA
+      SIZE_Y_IN => size_y_in_controller_output_vector,
+      SIZE_L_IN => size_l_in_controller_output_vector,
+
       U_IN => u_in_controller_output_vector,
       H_IN => h_in_controller_output_vector,
 
@@ -540,13 +564,6 @@ begin
   -- OUTPUT VECTOR
   output_vector_i : dnc_output_vector
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -570,6 +587,10 @@ begin
       Y_OUT_ENABLE => y_in_enable_output_vector,
 
       -- DATA
+      SIZE_Y_IN => size_y_in_output_vector,
+      SIZE_W_IN => size_w_in_output_vector,
+      SIZE_R_IN => size_r_in_output_vector,
+
       K_IN => k_in_output_vector,
       R_IN => r_in_output_vector,
 
@@ -585,13 +606,6 @@ begin
   -- FREE GATES
   free_gates : dnc_free_gates
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -608,6 +622,8 @@ begin
       F_OUT_ENABLE => f_out_enable_free_gates,
 
       -- DATA
+      SIZE_R_IN => size_r_in_free_gates,
+
       F_IN => f_in_free_gates,
 
       F_OUT => f_out_free_gates
@@ -616,13 +632,6 @@ begin
   -- READ KEYS
   read_keys : dnc_read_keys
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -641,6 +650,9 @@ begin
       K_OUT_K_ENABLE => k_out_k_enable_read_keys,
 
       -- DATA
+      SIZE_R_IN => size_r_in_read_keys,
+      SIZE_W_IN => size_w_in_read_keys,
+
       K_IN => k_in_read_keys,
 
       K_OUT => k_out_read_keys
@@ -649,13 +661,6 @@ begin
   -- READ MODES
   read_modes : dnc_read_modes
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -667,13 +672,13 @@ begin
       START => start_read_modes,
       READY => ready_read_modes,
 
-      PI_IN_I_ENABLE => pi_in_i_enable_read_modes,
-      PI_IN_P_ENABLE => pi_in_p_enable_read_modes,
+      PI_IN_ENABLE => pi_in_enable_read_modes,
 
-      PI_OUT_I_ENABLE => pi_out_i_enable_read_modes,
-      PI_OUT_P_ENABLE => pi_out_p_enable_read_modes,
+      PI_OUT_ENABLE => pi_out_enable_read_modes,
 
       -- DATA
+      SIZE_R_IN => size_r_in_free_gates,
+
       PI_IN => pi_in_read_modes,
 
       PI_OUT => pi_out_read_modes
@@ -682,13 +687,6 @@ begin
   -- READ STRENGTHS
   read_strengths : dnc_read_strengths
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -704,6 +702,8 @@ begin
       BETA_OUT_ENABLE => beta_out_enable_read_strengths,
 
       -- DATA
+      SIZE_R_IN => size_r_in_free_gates,
+
       BETA_IN => beta_in_read_strengths,
 
       BETA_OUT => beta_out_read_strengths
@@ -712,12 +712,6 @@ begin
   -- READ INTERFACE VECTOR
   read_interface_vector : dnc_read_interface_vector
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -752,15 +746,17 @@ begin
       -- Read Mode
       WPI_IN_I_ENABLE => wpi_in_i_enable_read_interface_vector,
       WPI_IN_L_ENABLE => wpi_in_l_enable_read_interface_vector,
-      WPI_IN_P_ENABLE => wpi_in_p_enable_read_interface_vector,
 
-      PI_OUT_I_ENABLE => pi_out_i_enable_read_interface_vector,
-      PI_OUT_P_ENABLE => pi_out_p_enable_read_interface_vector,
+      PI_OUT_ENABLE => pi_out_enable_read_interface_vector,
 
       -- Hidden State
       H_IN_ENABLE => h_in_enable_read_interface_vector,
 
       -- DATA
+      SIZE_W_IN => size_w_in_read_interface_vector,
+      SIZE_L_IN => size_l_in_read_interface_vector,
+      SIZE_R_IN => size_r_in_read_interface_vector,
+
       WK_IN    => wk_in_read_interface_vector,
       WBETA_IN => wbeta_in_read_interface_vector,
       WF_IN    => wf_in_read_interface_vector,
@@ -781,13 +777,6 @@ begin
   -- ALLOCATION GATE
   allocation_gate : dnc_allocation_gate
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -808,13 +797,6 @@ begin
   -- ERASE VECTOR
   erase_vector : dnc_erase_vector
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -831,6 +813,8 @@ begin
       E_OUT_ENABLE => e_out_enable_erase_vector,
 
       -- DATA
+      SIZE_W_IN => size_w_in_erase_vector,
+
       E_IN => e_in_erase_vector,
 
       E_OUT => e_out_erase_vector
@@ -839,13 +823,6 @@ begin
   -- WRITE GATE
   write_gate : dnc_write_gate
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -866,13 +843,6 @@ begin
   -- WRITE KEY
   write_key : dnc_write_key
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -889,6 +859,8 @@ begin
       K_OUT_ENABLE => k_out_enable_write_key,
 
       -- DATA
+      SIZE_W_IN => size_w_in_write_key,
+
       K_IN => k_in_write_key,
 
       K_OUT => k_out_write_key
@@ -897,13 +869,6 @@ begin
   -- WRITE STRENGTH
   write_strength : dnc_write_strength
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -924,13 +889,6 @@ begin
   -- WRITE VECTOR
   write_vector : dnc_write_vector
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -947,6 +905,8 @@ begin
       V_OUT_ENABLE => v_out_enable_write_vector,
 
       -- DATA
+      SIZE_W_IN => size_w_in_write_vector,
+
       V_IN => v_in_write_vector,
 
       V_OUT => v_out_write_vector
@@ -955,13 +915,6 @@ begin
   -- WRITE INTERFACE VECTOR
   write_interface_vector : dnc_write_interface_vector
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -1004,6 +957,10 @@ begin
       H_IN_ENABLE => h_in_enable_write_interface_vector,
 
       -- DATA
+      SIZE_W_IN => size_w_in_write_interface_vector,
+      SIZE_L_IN => size_l_in_write_interface_vector,
+      SIZE_R_IN => size_r_in_write_interface_vector,
+
       WK_IN    => wk_in_write_interface_vector,
       WBETA_IN => wbeta_in_write_interface_vector,
       WE_IN    => we_in_write_interface_vector,
@@ -1027,12 +984,6 @@ begin
 
   addressing : dnc_addressing
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -1051,14 +1002,16 @@ begin
 
       F_READ_IN_ENABLE => f_read_in_enable_addressing,
 
-      PI_READ_IN_I_ENABLE => pi_read_in_i_enable_addressing,
-      PI_READ_IN_P_ENABLE => pi_read_in_p_enable_addressing,
+      PI_READ_IN_ENABLE => pi_read_in_enable_addressing,
 
       K_WRITE_IN_K_ENABLE => k_write_in_k_enable_addressing,
       E_WRITE_IN_K_ENABLE => e_write_in_k_enable_addressing,
       V_WRITE_IN_K_ENABLE => v_write_in_k_enable_addressing,
 
       -- DATA
+      SIZE_R_IN => size_r_in_addressing,
+      SIZE_W_IN => size_w_in_addressing,
+
       K_READ_IN    => k_read_in_addressing,
       BETA_READ_IN => beta_read_in_addressing,
       F_READ_IN    => f_read_in_addressing,

@@ -46,13 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity dnc_sort_vector is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -69,6 +62,8 @@ entity dnc_sort_vector is
     PHI_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     -- DATA
+    SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
     U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     PHI_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)

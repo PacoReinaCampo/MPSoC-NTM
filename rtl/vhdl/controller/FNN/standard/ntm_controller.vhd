@@ -47,13 +47,6 @@ use work.ntm_fnn_controller_pkg.all;
 
 entity ntm_controller is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -79,9 +72,14 @@ entity ntm_controller is
     R_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
     R_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    H_OUT_ENABLE : out std_logic;        -- for l in 0 to L-1
+    H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
+    SIZE_X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -203,6 +201,11 @@ architecture ntm_controller_architecture of ntm_controller is
   signal b_out_enable_trainer : std_logic;
 
   -- DATA
+  signal size_x_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal h_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -380,6 +383,11 @@ begin
       B_OUT_ENABLE => b_out_enable_trainer,
 
       -- DATA
+      SIZE_X_IN => size_x_in_trainer,
+      SIZE_W_IN => size_w_in_trainer,
+      SIZE_L_IN => size_l_in_trainer,
+      SIZE_R_IN => size_r_in_trainer,
+
       H_IN => h_in_trainer,
 
       W_OUT => w_out_trainer,

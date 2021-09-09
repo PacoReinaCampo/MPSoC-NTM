@@ -47,13 +47,6 @@ use work.dnc_core_pkg.all;
 
 entity dnc_write_content_weighting is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -73,6 +66,9 @@ entity dnc_write_content_weighting is
     C_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- DATA
+    SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
     K_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
     M_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
     BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

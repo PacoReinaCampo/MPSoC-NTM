@@ -46,13 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity dnc_read_vectors is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -74,6 +67,10 @@ entity dnc_read_vectors is
     R_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     -- DATA
+    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
     M_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 

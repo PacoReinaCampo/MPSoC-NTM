@@ -48,13 +48,6 @@ use work.ntm_lstm_controller_pkg.all;
 
 entity dnc_output_vector is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -78,6 +71,10 @@ entity dnc_output_vector is
     Y_OUT_ENABLE : in std_logic;        -- for y in 0 to Y-1
 
     -- DATA
+    SIZE_Y_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 

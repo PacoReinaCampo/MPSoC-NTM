@@ -46,13 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity dnc_read_keys is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -71,6 +64,9 @@ entity dnc_read_keys is
     K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     -- DATA
+    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -147,7 +143,7 @@ begin
 
           if (K_IN_I_ENABLE = '1') then
             -- Control Internal
-            if (index_i_loop < std_logic_vector(to_unsigned(R, DATA_SIZE)-unsigned(ONE)) and index_j_loop = std_logic_vector(to_unsigned(W, DATA_SIZE)-unsigned(ONE))) then
+            if (index_i_loop < SIZE_R_IN and index_j_loop = SIZE_W_IN) then
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
               index_j_loop <= ZERO;
             end if;
@@ -162,13 +158,13 @@ begin
           end if;
 
           if (K_IN_K_ENABLE = '1') then
-            if (index_i_loop = std_logic_vector(to_unsigned(R, DATA_SIZE)-unsigned(ONE)) and index_j_loop = std_logic_vector(to_unsigned(W, DATA_SIZE)-unsigned(ONE))) then
+            if (index_i_loop = SIZE_R_IN and index_j_loop = SIZE_W_IN) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               read_keys_ctrl_fsm_int <= STARTER_STATE;
-            elsif (index_i_loop < std_logic_vector(to_unsigned(R, DATA_SIZE)-unsigned(ONE)) and index_j_loop < std_logic_vector(to_unsigned(W, DATA_SIZE)-unsigned(ONE))) then
+            elsif (index_i_loop < SIZE_R_IN and index_j_loop < SIZE_W_IN) then
               -- Control Internal
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
             end if;

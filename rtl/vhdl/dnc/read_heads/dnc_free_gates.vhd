@@ -46,13 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity dnc_free_gates is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -69,6 +62,8 @@ entity dnc_free_gates is
     F_OUT_ENABLE : out std_logic;       -- for i in 0 to R-1
 
     -- DATA
+    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    
     F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     F_OUT : out std_logic
@@ -126,7 +121,7 @@ begin
 
   -- DATA
   modulo_in_vector_logistic <= FULL;
-  size_in_vector_logistic   <= FULL;
+  size_in_vector_logistic   <= SIZE_R_IN;
 
   data_in_vector_logistic <= F_IN;
 

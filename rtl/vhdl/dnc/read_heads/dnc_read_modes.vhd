@@ -46,13 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity dnc_read_modes is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -64,13 +57,13 @@ entity dnc_read_modes is
     START : in  std_logic;
     READY : out std_logic;
 
-    PI_IN_I_ENABLE : in std_logic;      -- for i in 0 to R-1
-    PI_IN_P_ENABLE : in std_logic;      -- for p in 0 to 2
+    PI_IN_ENABLE : in std_logic;      -- for i in 0 to R-1
 
-    PI_OUT_I_ENABLE : out std_logic;    -- for i in 0 to R-1
-    PI_OUT_P_ENABLE : out std_logic;    -- for p in 0 to 2
+    PI_OUT_ENABLE : out std_logic;    -- for i in 0 to R-1
 
     -- DATA
+    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
     PI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     PI_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -87,32 +80,28 @@ architecture dnc_read_modes_architecture of dnc_read_modes is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
+  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
 
-  -- MATRIX SOFTMAX
+  -- VECTOR SOFTMAX
   -- CONTROL
-  signal start_matrix_softmax : std_logic;
-  signal ready_matrix_softmax : std_logic;
+  signal start_vector_softmax : std_logic;
+  signal ready_vector_softmax : std_logic;
 
-  signal size_in_i_enable_matrix_softmax : std_logic;
-  signal size_in_j_enable_matrix_softmax : std_logic;
-  signal data_in_i_enable_matrix_softmax : std_logic;
-  signal data_in_j_enable_matrix_softmax : std_logic;
+  signal data_in_enable_vector_softmax : std_logic;
 
-  signal data_out_i_enable_matrix_softmax : std_logic;
-  signal data_out_j_enable_matrix_softmax : std_logic;
+  signal data_out_enable_vector_softmax : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_j_in_matrix_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_matrix_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -124,33 +113,25 @@ begin
 
   -- ASSIGNATIONS
   -- CONTROL
-  start_matrix_softmax <= START;
+  start_vector_softmax <= START;
 
-  READY <= ready_matrix_softmax;
+  READY <= ready_vector_softmax;
 
-  size_in_i_enable_matrix_softmax <= PI_IN_I_ENABLE;
-  size_in_j_enable_matrix_softmax <= PI_IN_P_ENABLE;
+  data_in_enable_vector_softmax <= PI_IN_ENABLE;
 
-  data_in_i_enable_matrix_softmax <= PI_IN_I_ENABLE;
-  data_in_j_enable_matrix_softmax <= PI_IN_P_ENABLE;
-
-  PI_OUT_I_ENABLE <= data_out_i_enable_matrix_softmax;
-  PI_OUT_P_ENABLE <= data_out_j_enable_matrix_softmax;
+  PI_OUT_ENABLE <= data_out_enable_vector_softmax;
 
   -- DATA
-  modulo_in_matrix_softmax <= FULL;
+  modulo_in_vector_softmax <= FULL;
+  size_in_vector_softmax   <= SIZE_R_IN;
+  length_in_vector_softmax <= THREE;
 
-  size_i_in_matrix_softmax <= std_logic_vector(to_unsigned(R, DATA_SIZE));
-  size_j_in_matrix_softmax <= std_logic_vector(to_unsigned(R, DATA_SIZE));
+  data_in_vector_softmax <= PI_IN;
 
-  length_in_matrix_softmax <= std_logic_vector(to_unsigned(R, DATA_SIZE));
+  PI_OUT <= data_out_vector_softmax;
 
-  data_in_matrix_softmax <= PI_IN;
-
-  PI_OUT <= data_out_matrix_softmax;
-
-  -- MATRIX SOFTMAX
-  matrix_softmax_function : ntm_matrix_softmax_function
+  -- VECTOR SOFTMAX
+  vector_softmax_function : ntm_vector_softmax_function
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -160,24 +141,19 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_softmax,
-      READY => ready_matrix_softmax,
+      START => start_vector_softmax,
+      READY => ready_vector_softmax,
 
-      SIZE_IN_I_ENABLE => size_in_i_enable_matrix_softmax,
-      SIZE_IN_J_ENABLE => size_in_j_enable_matrix_softmax,
-      DATA_IN_I_ENABLE => data_in_i_enable_matrix_softmax,
-      DATA_IN_J_ENABLE => data_in_j_enable_matrix_softmax,
+      DATA_IN_ENABLE => data_in_enable_vector_softmax,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_softmax,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_softmax,
+      DATA_OUT_ENABLE => data_out_enable_vector_softmax,
 
       -- DATA
-      MODULO_IN => modulo_in_matrix_softmax,
-      SIZE_I_IN => size_i_in_matrix_softmax,
-      SIZE_J_IN => size_j_in_matrix_softmax,
-      LENGTH_IN => length_in_matrix_softmax,
-      DATA_IN   => data_in_matrix_softmax,
-      DATA_OUT  => data_out_matrix_softmax
+      MODULO_IN => modulo_in_vector_softmax,
+      SIZE_IN   => size_in_vector_softmax,
+      LENGTH_IN => length_in_vector_softmax,
+      DATA_IN   => data_in_vector_softmax,
+      DATA_OUT  => data_out_vector_softmax
       );
 
 end architecture;

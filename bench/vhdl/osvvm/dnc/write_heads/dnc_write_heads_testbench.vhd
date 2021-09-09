@@ -75,6 +75,8 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
   signal e_out_enable_erase_vector : std_logic;
 
   -- DATA
+  signal size_w_in_erase_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal e_in_erase_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal e_out_erase_vector : std_logic;
 
@@ -97,6 +99,8 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
   signal k_out_enable_write_key : std_logic;
 
   -- DATA
+  signal size_w_in_write_key : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal k_in_write_key  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_out_write_key : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -119,6 +123,8 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
   signal v_out_enable_write_vector : std_logic;
 
   -- DATA
+  signal size_w_in_write_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal v_in_write_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal v_out_write_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -131,13 +137,6 @@ begin
   -- ALLOCATION GATE
   allocation_gate : dnc_allocation_gate
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -158,13 +157,6 @@ begin
   -- ERASE VECTOR
   erase_vector : dnc_erase_vector
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -181,6 +173,8 @@ begin
       E_OUT_ENABLE => e_out_enable_erase_vector,
 
       -- DATA
+      SIZE_W_IN => size_w_in_erase_vector,
+
       E_IN => e_in_erase_vector,
 
       E_OUT => e_out_erase_vector
@@ -189,13 +183,6 @@ begin
   -- WRITE GATE
   write_gate : dnc_write_gate
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -216,13 +203,6 @@ begin
   -- WRITE KEY
   write_key : dnc_write_key
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -239,6 +219,8 @@ begin
       K_OUT_ENABLE => k_out_enable_write_key,
 
       -- DATA
+      SIZE_W_IN => size_w_in_write_key,
+
       K_IN => k_in_write_key,
 
       K_OUT => k_out_write_key
@@ -247,13 +229,6 @@ begin
   -- WRITE STRENGTH
   write_strength : dnc_write_strength
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -274,13 +249,6 @@ begin
   -- WRITE VECTOR
   write_vector : dnc_write_vector
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -297,6 +265,8 @@ begin
       V_OUT_ENABLE => v_out_enable_write_vector,
 
       -- DATA
+      SIZE_W_IN => size_w_in_write_vector,
+
       V_IN => v_in_write_vector,
 
       V_OUT => v_out_write_vector

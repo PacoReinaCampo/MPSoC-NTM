@@ -46,13 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity dnc_write_gate is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (

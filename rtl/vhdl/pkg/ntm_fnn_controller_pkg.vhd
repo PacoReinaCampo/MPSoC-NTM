@@ -54,13 +54,6 @@ package ntm_fnn_controller_pkg is
 
   component ntm_controller is
     generic (
-      X : integer := 64;
-      Y : integer := 64;
-      N : integer := 64;
-      W : integer := 64;
-      L : integer := 64;
-      R : integer := 64;
-
       DATA_SIZE : integer := 512
       );
     port (
@@ -89,6 +82,11 @@ package ntm_fnn_controller_pkg is
       H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
       -- DATA
+      SIZE_X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
       W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -102,13 +100,6 @@ package ntm_fnn_controller_pkg is
 
   component ntm_trainer is
     generic (
-      X : integer := 64;
-      Y : integer := 64;
-      N : integer := 64;
-      W : integer := 64;
-      L : integer := 64;
-      R : integer := 64;
-
       DATA_SIZE : integer := 512
       );
     port (
@@ -132,6 +123,11 @@ package ntm_fnn_controller_pkg is
       B_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
       -- DATA
+      SIZE_X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
       H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);

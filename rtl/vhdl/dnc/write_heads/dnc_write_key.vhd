@@ -46,13 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity dnc_write_key is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -69,6 +62,8 @@ entity dnc_write_key is
     K_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
 
     -- DATA
+    SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -141,7 +136,7 @@ begin
         when ENDER_STATE =>             -- STEP 1
 
           if (K_IN_ENABLE = '1') then
-            if (index_loop = std_logic_vector(to_unsigned(W, DATA_SIZE)-unsigned(ONE))) then
+            if (index_loop = std_logic_vector(unsigned(SIZE_W_IN)-unsigned(ONE))) then
               -- Control Outputs
               READY <= '1';
 

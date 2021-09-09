@@ -75,6 +75,13 @@ architecture dnc_top_testbench_architecture of dnc_top_testbench is
   signal y_out_enable_top : std_logic;
 
   -- DATA
+  signal size_x_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_y_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_n_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal w_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
   signal b_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -91,13 +98,6 @@ begin
   -- TOP
   top : dnc_top
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -122,6 +122,13 @@ begin
       Y_OUT_ENABLE => y_out_enable_top,
 
       -- DATA
+      SIZE_X_IN => size_x_in_top,
+      SIZE_Y_IN => size_y_in_top,
+      SIZE_N_IN => size_n_in_top,
+      SIZE_W_IN => size_w_in_top,
+      SIZE_L_IN => size_l_in_top,
+      SIZE_R_IN => size_r_in_top,
+
       W_IN => w_in_top,
       K_IN => k_in_top,
       B_IN => b_in_top,

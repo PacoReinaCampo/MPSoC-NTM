@@ -78,6 +78,11 @@ architecture ntm_convolutional_fnn_testbench_architecture of ntm_convolutional_f
   signal h_out_enable_controller : std_logic;
 
   -- DATA
+  signal size_x_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal w_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal b_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -96,13 +101,6 @@ begin
   -- CONTROLLER
   ntm_controller_i : ntm_controller
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -131,6 +129,11 @@ begin
       H_OUT_ENABLE => h_out_enable_controller,
 
       -- DATA
+      SIZE_X_IN => size_x_in_controller,
+      SIZE_W_IN => size_w_in_controller,
+      SIZE_L_IN => size_l_in_controller,
+      SIZE_R_IN => size_r_in_controller,
+
       W_IN => w_in_controller,
       K_IN => k_in_controller,
       B_IN => b_in_controller,
