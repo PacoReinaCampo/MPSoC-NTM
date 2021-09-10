@@ -47,13 +47,6 @@ use work.ntm_lstm_controller_pkg.all;
 
 entity ntm_controller is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -82,6 +75,11 @@ entity ntm_controller is
     H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
+    SIZE_X_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -130,6 +128,11 @@ architecture ntm_controller_architecture of ntm_controller is
   signal a_out_enable_activation_gate_vector : std_logic;
 
   -- DATA
+  signal size_x_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal w_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal x_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -160,13 +163,18 @@ architecture ntm_controller_architecture of ntm_controller is
   signal b_out_enable_activation_trainer : std_logic;
 
   -- DATA
+  signal size_x_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  
   signal h_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_out_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal b_out_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- INPUT GATE VECTOR
+  -- INTPUT GATE VECTOR
   -- CONTROL
   signal start_input_gate_vector : std_logic;
   signal ready_input_gate_vector : std_logic;
@@ -189,6 +197,11 @@ architecture ntm_controller_architecture of ntm_controller is
   signal i_out_enable_input_gate_vector : std_logic;
 
   -- DATA
+  signal size_x_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal w_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal x_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -219,6 +232,11 @@ architecture ntm_controller_architecture of ntm_controller is
   signal b_out_enable_input_trainer : std_logic;
 
   -- DATA
+  signal size_x_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  
   signal h_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -248,6 +266,11 @@ architecture ntm_controller_architecture of ntm_controller is
   signal o_out_enable_output_gate_vector : std_logic;
 
   -- DATA
+  signal size_x_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal w_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal x_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -278,6 +301,11 @@ architecture ntm_controller_architecture of ntm_controller is
   signal b_out_enable_output_trainer : std_logic;
 
   -- DATA
+  signal size_x_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  
   signal h_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -307,6 +335,11 @@ architecture ntm_controller_architecture of ntm_controller is
   signal f_out_enable_forget_gate_vector : std_logic;
 
   -- DATA
+  signal size_x_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal w_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal x_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -337,6 +370,11 @@ architecture ntm_controller_architecture of ntm_controller is
   signal b_out_enable_forget_trainer : std_logic;
 
   -- DATA
+  signal size_x_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  
   signal h_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -356,6 +394,7 @@ architecture ntm_controller_architecture of ntm_controller is
   signal s_out_enable_state_gate_vector : std_logic;
 
   -- DATA
+  signal size_l_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal s_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal i_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -375,6 +414,8 @@ architecture ntm_controller_architecture of ntm_controller is
   signal h_out_enable_hidden_gate_vector : std_logic;
 
   -- DATA
+  signal size_l_in_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal s_in_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal o_in_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -389,13 +430,6 @@ begin
   -- ACTIVATION GATE VECTOR
   activation_gate_vector : ntm_activation_gate_vector
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -425,6 +459,11 @@ begin
       A_OUT_ENABLE => a_out_enable_activation_gate_vector,
 
       -- DATA
+      SIZE_X_IN => size_x_in_activation_gate_vector,
+      SIZE_W_IN => size_w_in_activation_gate_vector,
+      SIZE_L_IN => size_l_in_activation_gate_vector,
+      SIZE_R_IN => size_r_in_activation_gate_vector,
+
       W_IN => w_in_activation_gate_vector,
       X_IN => x_in_activation_gate_vector,
 
@@ -442,13 +481,6 @@ begin
   -- ACTIVATION TRAINER
   activation_trainer : ntm_activation_trainer
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -472,6 +504,11 @@ begin
       B_OUT_ENABLE => b_out_enable_activation_trainer,
 
       -- DATA
+      SIZE_X_IN => size_x_in_activation_trainer,
+      SIZE_W_IN => size_w_in_activation_trainer,
+      SIZE_L_IN => size_l_in_activation_trainer,
+      SIZE_R_IN => size_r_in_activation_trainer,
+
       H_IN => h_in_activation_trainer,
 
       W_OUT => w_out_activation_trainer,
@@ -479,16 +516,9 @@ begin
       B_OUT => b_out_activation_trainer
       );
 
-  -- INPUT GATE VECTOR
+  -- INTPUT GATE VECTOR
   input_gate_vector : ntm_input_gate_vector
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -518,6 +548,11 @@ begin
       I_OUT_ENABLE => i_out_enable_input_gate_vector,
 
       -- DATA
+      SIZE_X_IN => size_x_in_input_gate_vector,
+      SIZE_W_IN => size_w_in_input_gate_vector,
+      SIZE_L_IN => size_l_in_input_gate_vector,
+      SIZE_R_IN => size_r_in_input_gate_vector,
+
       W_IN => w_in_input_gate_vector,
       X_IN => x_in_input_gate_vector,
 
@@ -535,13 +570,6 @@ begin
   -- INPUT TRAINER
   input_trainer : ntm_input_trainer
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -565,6 +593,11 @@ begin
       B_OUT_ENABLE => b_out_enable_input_trainer,
 
       -- DATA
+      SIZE_X_IN => size_x_in_input_trainer,
+      SIZE_W_IN => size_w_in_input_trainer,
+      SIZE_L_IN => size_l_in_input_trainer,
+      SIZE_R_IN => size_r_in_input_trainer,
+
       H_IN => h_in_input_trainer,
 
       W_OUT => w_out_input_trainer,
@@ -575,13 +608,6 @@ begin
   -- OUTPUT GATE VECTOR
   output_gate_vector : ntm_output_gate_vector
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -611,6 +637,11 @@ begin
       O_OUT_ENABLE => o_out_enable_output_gate_vector,
 
       -- DATA
+      SIZE_X_IN => size_x_in_output_gate_vector,
+      SIZE_W_IN => size_w_in_output_gate_vector,
+      SIZE_L_IN => size_l_in_output_gate_vector,
+      SIZE_R_IN => size_r_in_output_gate_vector,
+
       W_IN => w_in_output_gate_vector,
       X_IN => x_in_output_gate_vector,
 
@@ -628,13 +659,6 @@ begin
   -- OUTPUT TRAINER
   output_trainer : ntm_output_trainer
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -658,6 +682,11 @@ begin
       B_OUT_ENABLE => b_out_enable_output_trainer,
 
       -- DATA
+      SIZE_X_IN => size_x_in_output_trainer,
+      SIZE_W_IN => size_w_in_output_trainer,
+      SIZE_L_IN => size_l_in_output_trainer,
+      SIZE_R_IN => size_r_in_output_trainer,
+
       H_IN => h_in_output_trainer,
 
       W_OUT => w_out_output_trainer,
@@ -668,13 +697,6 @@ begin
   -- FORGET GATE VECTOR
   forget_gate_vector : ntm_forget_gate_vector
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -704,6 +726,11 @@ begin
       F_OUT_ENABLE => f_out_enable_forget_gate_vector,
 
       -- DATA
+      SIZE_X_IN => size_x_in_forget_gate_vector,
+      SIZE_W_IN => size_w_in_forget_gate_vector,
+      SIZE_L_IN => size_l_in_forget_gate_vector,
+      SIZE_R_IN => size_r_in_forget_gate_vector,
+
       W_IN => w_in_forget_gate_vector,
       X_IN => x_in_forget_gate_vector,
 
@@ -721,13 +748,6 @@ begin
   -- FORGET TRAINER
   forget_trainer : ntm_forget_trainer
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -751,6 +771,11 @@ begin
       B_OUT_ENABLE => b_out_enable_forget_trainer,
 
       -- DATA
+      SIZE_X_IN => size_x_in_forget_trainer,
+      SIZE_W_IN => size_w_in_forget_trainer,
+      SIZE_L_IN => size_l_in_forget_trainer,
+      SIZE_R_IN => size_r_in_forget_trainer,
+
       H_IN => h_in_forget_trainer,
 
       W_OUT => w_out_forget_trainer,
@@ -761,13 +786,6 @@ begin
   -- STATE GATE VECTOR
   state_gate_vector : ntm_state_gate_vector
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -784,7 +802,11 @@ begin
       F_IN_ENABLE => f_in_enable_state_gate_vector,
       A_IN_ENABLE => a_in_enable_state_gate_vector,
 
+      S_OUT_ENABLE => s_out_enable_state_gate_vector,
+
       -- DATA
+      SIZE_L_IN => size_l_in_state_gate_vector,
+
       S_IN => s_in_state_gate_vector,
       I_IN => i_in_state_gate_vector,
       F_IN => f_in_state_gate_vector,
@@ -796,13 +818,6 @@ begin
   -- HIDDEN GATE VECTOR
   hidden_gate_vector : ntm_hidden_gate_vector
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -820,6 +835,8 @@ begin
       H_OUT_ENABLE => h_out_enable_hidden_gate_vector,
 
       -- DATA
+      SIZE_L_IN => size_l_in_hidden_gate_vector,
+
       S_IN => s_in_hidden_gate_vector,
       O_IN => o_in_hidden_gate_vector,
 

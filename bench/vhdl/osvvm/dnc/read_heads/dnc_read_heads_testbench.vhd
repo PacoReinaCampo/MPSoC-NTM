@@ -90,9 +90,11 @@ architecture dnc_read_heads_testbench_architecture of dnc_read_heads_testbench i
 
   -- READ MODES
   -- CONTROL
-  signal pi_in_enable_read_modes : std_logic;
+  signal pi_in_i_enable_read_modes : std_logic;
+  signal pi_in_p_enable_read_modes : std_logic;
 
-  signal pi_out_enable_read_modes : std_logic;
+  signal pi_out_i_enable_read_modes : std_logic;
+  signal pi_out_p_enable_read_modes : std_logic;
 
   signal start_read_modes : std_logic;
   signal ready_read_modes : std_logic;
@@ -192,9 +194,11 @@ begin
       START => start_read_modes,
       READY => ready_read_modes,
 
-      PI_IN_ENABLE => pi_in_enable_read_modes,
+      PI_IN_I_ENABLE => pi_in_i_enable_read_modes,
+      PI_IN_P_ENABLE => pi_in_p_enable_read_modes,
 
-      PI_OUT_ENABLE => pi_out_enable_read_modes,
+      PI_OUT_I_ENABLE => pi_out_i_enable_read_modes,
+      PI_OUT_P_ENABLE => pi_out_p_enable_read_modes,
 
       -- DATA
       SIZE_R_IN => size_r_in_free_gates,

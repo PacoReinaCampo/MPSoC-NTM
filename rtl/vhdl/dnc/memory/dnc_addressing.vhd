@@ -278,7 +278,8 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal start_read_weighting : std_logic;
   signal ready_read_weighting : std_logic;
 
-  signal pi_in_enable_read_weighting : std_logic;
+  signal pi_in_i_enable_read_weighting : std_logic;
+  signal pi_in_p_enable_read_weighting : std_logic;
 
   signal b_in_i_enable_read_weighting : std_logic;
   signal b_in_j_enable_read_weighting : std_logic;
@@ -684,7 +685,8 @@ begin
       START => start_read_weighting,
       READY => ready_read_weighting,
 
-      PI_IN_ENABLE => pi_in_enable_read_weighting,
+      PI_IN_I_ENABLE => pi_in_i_enable_read_weighting,
+      PI_IN_P_ENABLE => pi_in_p_enable_read_weighting,
 
       B_IN_I_ENABLE => b_in_i_enable_read_weighting,
       B_IN_J_ENABLE => b_in_j_enable_read_weighting,

@@ -143,7 +143,8 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   -- CONTROL
   -- DATA
   signal modulo_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
@@ -272,14 +273,16 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal start_vector_logarithm : std_logic;
   signal ready_vector_logarithm : std_logic;
 
-  signal data_in_enable_vector_logarithm : std_logic;
+  signal data_a_in_enable_vector_logarithm : std_logic;
+  signal data_b_in_enable_vector_logarithm : std_logic;
 
   signal data_out_enable_vector_logarithm : std_logic;
 
   -- DATA
   signal modulo_in_vector_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_vector_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
@@ -434,8 +437,10 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal start_matrix_logarithm : std_logic;
   signal ready_matrix_logarithm : std_logic;
 
-  signal data_in_i_enable_matrix_logarithm : std_logic;
-  signal data_in_j_enable_matrix_logarithm : std_logic;
+  signal data_a_in_i_enable_matrix_logarithm : std_logic;
+  signal data_a_in_j_enable_matrix_logarithm : std_logic;
+  signal data_b_in_i_enable_matrix_logarithm : std_logic;
+  signal data_b_in_j_enable_matrix_logarithm : std_logic;
 
   signal data_out_i_enable_matrix_logarithm : std_logic;
   signal data_out_j_enable_matrix_logarithm : std_logic;
@@ -444,7 +449,8 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal modulo_in_matrix_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_j_in_matrix_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_matrix_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -620,7 +626,8 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_scalar_logarithm,
-      DATA_IN   => data_in_scalar_logarithm,
+      DATA_A_IN => data_a_in_scalar_logarithm,
+      DATA_B_IN => data_b_in_scalar_logarithm,
       DATA_OUT  => data_out_scalar_logarithm
       );
 
@@ -829,14 +836,16 @@ begin
       START => start_vector_logarithm,
       READY => ready_vector_logarithm,
 
-      DATA_IN_ENABLE => data_in_enable_vector_logarithm,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_logarithm,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_logarithm,
 
       DATA_OUT_ENABLE => data_out_enable_vector_logarithm,
 
       -- DATA
       MODULO_IN => modulo_in_vector_logarithm,
       SIZE_IN   => size_in_vector_logarithm,
-      DATA_IN   => data_in_vector_logarithm,
+      DATA_A_IN => data_a_in_vector_logarithm,
+      DATA_B_IN => data_b_in_vector_logarithm,
       DATA_OUT  => data_out_vector_logarithm
       );
 
@@ -1071,8 +1080,10 @@ begin
       START => start_matrix_logarithm,
       READY => ready_matrix_logarithm,
 
-      DATA_IN_I_ENABLE => data_in_i_enable_matrix_logarithm,
-      DATA_IN_J_ENABLE => data_in_j_enable_matrix_logarithm,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_logarithm,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_logarithm,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_logarithm,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_logarithm,
 
       DATA_OUT_I_ENABLE => data_out_i_enable_matrix_logarithm,
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_logarithm,
@@ -1081,7 +1092,8 @@ begin
       MODULO_IN => modulo_in_matrix_logarithm,
       SIZE_I_IN => size_i_in_matrix_logarithm,
       SIZE_J_IN => size_j_in_matrix_logarithm,
-      DATA_IN   => data_in_matrix_logarithm,
+      DATA_A_IN => data_a_in_matrix_logarithm,
+      DATA_B_IN => data_b_in_matrix_logarithm,
       DATA_OUT  => data_out_matrix_logarithm
       );
 

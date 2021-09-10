@@ -57,14 +57,16 @@ entity ntm_vector_logarithm is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_IN_ENABLE : in std_logic;
+    DATA_A_IN_ENABLE : in std_logic;
+    DATA_B_IN_ENABLE : in std_logic;
 
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
@@ -98,6 +100,9 @@ architecture ntm_vector_logarithm_architecture of ntm_vector_logarithm is
   -- Internal Signals
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  signal data_a_in_logarithm_int : std_logic;
+  signal data_b_in_logarithm_int : std_logic;
+
   -- LOGARITHM
   -- CONTROL
   signal start_scalar_logarithm : std_logic;
@@ -105,7 +110,8 @@ architecture ntm_vector_logarithm_architecture of ntm_vector_logarithm is
 
   -- DATA
   signal modulo_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -114,7 +120,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = logarithm(DATA_IN) mod MODULO_IN
+  -- DATA_OUT = logarithm(DATA_A_IN, DATA_B_IN) mod MODULO_IN
 
   ctrl_fsm : process(CLK, RST)
   begin
@@ -127,6 +133,9 @@ begin
 
       -- Assignations
       index_loop <= ZERO;
+
+      data_a_in_logarithm_int <= '0';
+      data_b_in_logarithm_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -145,18 +154,30 @@ begin
 
         when INPUT_STATE =>             -- STEP 1
 
-          if (DATA_IN_ENABLE = '1') then
+          if (DATA_A_IN_ENABLE = '1') then
             -- Data Inputs
-            modulo_in_scalar_logarithm <= MODULO_IN;
+            data_a_in_scalar_logarithm <= DATA_A_IN;
 
-            data_in_scalar_logarithm <= DATA_IN;
+            -- Control Internal
+            data_a_in_logarithm_int <= '1';
+          end if;
 
+          if (DATA_B_IN_ENABLE = '1') then
+            -- Data Inputs
+            data_b_in_scalar_logarithm <= DATA_B_IN;
+
+            -- Control Internal
+            data_b_in_logarithm_int <= '1';
+          end if;
+
+          if (data_a_in_logarithm_int = '1' and data_b_in_logarithm_int = '1') then
             if (index_loop = ZERO) then
               -- Control Internal
               start_scalar_logarithm <= '1';
             end if;
 
-            data_in_scalar_logarithm <= DATA_IN;
+            -- Data Inputs
+            modulo_in_scalar_logarithm <= MODULO_IN;
 
             -- FSM Control
             logarithm_ctrl_fsm_int <= ENDER_STATE;
@@ -190,6 +211,9 @@ begin
           else
             -- Control Internal
             start_scalar_logarithm <= '0';
+
+            data_a_in_logarithm_int <= '0';
+            data_b_in_logarithm_int <= '0';
           end if;
 
         when others =>
@@ -215,7 +239,8 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_scalar_logarithm,
-      DATA_IN   => data_in_scalar_logarithm,
+      DATA_A_IN => data_a_in_scalar_logarithm,
+      DATA_B_IN => data_b_in_scalar_logarithm,
       DATA_OUT  => data_out_scalar_logarithm
       );
 

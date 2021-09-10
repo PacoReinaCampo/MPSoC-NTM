@@ -233,7 +233,8 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
@@ -439,14 +440,16 @@ package ntm_math_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      DATA_IN_ENABLE : in std_logic;
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
 
       DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
@@ -678,8 +681,10 @@ package ntm_math_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      DATA_IN_I_ENABLE : in std_logic;
-      DATA_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
 
       DATA_OUT_I_ENABLE : out std_logic;
       DATA_OUT_J_ENABLE : out std_logic;
@@ -688,7 +693,8 @@ package ntm_math_pkg is
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       SIZE_I_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       SIZE_J_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
@@ -1097,6 +1103,10 @@ package ntm_math_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
+      DATA_IN_ENABLE : in std_logic;
+
+      DATA_OUT_ENABLE : out std_logic;
+
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -1352,9 +1362,11 @@ package ntm_math_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      DATA_IN_ENABLE : in std_logic;
+      DATA_IN_VECTOR_ENABLE : in std_logic;
+      DATA_IN_SCALAR_ENABLE : in std_logic;
 
-      DATA_OUT_ENABLE : out std_logic;
+      DATA_OUT_VECTOR_ENABLE : out std_logic;
+      DATA_OUT_SCALAR_ENABLE : out std_logic;
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -1643,11 +1655,13 @@ package ntm_math_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      DATA_IN_I_ENABLE : in std_logic;
-      DATA_IN_J_ENABLE : in std_logic;
+      DATA_IN_MATRIX_ENABLE : in std_logic;
+      DATA_IN_VECTOR_ENABLE : in std_logic;
+      DATA_IN_SCALAR_ENABLE : in std_logic;
 
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
+      DATA_OUT_MATRIX_ENABLE : out std_logic;
+      DATA_OUT_VECTOR_ENABLE : out std_logic;
+      DATA_OUT_SCALAR_ENABLE : in std_logic;
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);

@@ -59,7 +59,8 @@ entity ntm_scalar_logarithm is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
@@ -98,7 +99,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = logarithm(DATA_IN) mod MODULO_IN
+  -- DATA_OUT = logarithm(DATA_A_IN, DATA_B_IN) mod MODULO_IN
 
   ctrl_fsm : process(CLK, RST)
   begin

@@ -359,7 +359,8 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      PI_IN_ENABLE : in std_logic;      -- for i in 0 to R-1
+      PI_IN_I_ENABLE : in std_logic;    -- for i in 0 to R-1
+      PI_IN_P_ENABLE : in std_logic;    -- for i in 0 to 2
 
       B_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
       B_IN_J_ENABLE : in std_logic;     -- for j in 0 to N-1
@@ -657,9 +658,11 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      PI_IN_ENABLE : in std_logic;    -- for i in 0 to R-1
+      PI_IN_I_ENABLE : in std_logic;    -- for i in 0 to R-1
+      PI_IN_P_ENABLE : in std_logic;    -- for i in 0 to 2
 
-      PI_OUT_ENABLE : out std_logic;  -- for i in 0 to R-1
+      PI_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1
+      PI_OUT_P_ENABLE : out std_logic;  -- for i in 0 to 2
 
       -- DATA
       SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

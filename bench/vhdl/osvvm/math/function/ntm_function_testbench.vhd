@@ -160,6 +160,10 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal start_scalar_summation : std_logic;
   signal ready_scalar_summation : std_logic;
 
+  signal data_in_enable_scalar_summation : std_logic;
+
+  signal data_out_enable_scalar_summation : std_logic;
+
   -- DATA
   signal modulo_in_scalar_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_scalar_summation : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -318,9 +322,11 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal start_vector_summation : std_logic;
   signal ready_vector_summation : std_logic;
 
-  signal data_in_enable_vector_summation : std_logic;
+  signal data_in_vector_enable_vector_summation : std_logic;
+  signal data_in_scalar_enable_vector_summation : std_logic;
 
-  signal data_out_enable_vector_summation : std_logic;
+  signal data_out_vector_enable_vector_summation : std_logic;
+  signal data_out_scalar_enable_vector_summation : std_logic;
 
   -- DATA
   signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -512,11 +518,13 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal start_matrix_summation : std_logic;
   signal ready_matrix_summation : std_logic;
 
-  signal data_in_i_enable_matrix_summation : std_logic;
-  signal data_in_j_enable_matrix_summation : std_logic;
+  signal data_in_matrix_i_enable_matrix_summation : std_logic;
+  signal data_in_matrix_j_enable_matrix_summation : std_logic;
+  signal data_in_scalar_enable_matrix_summation   : std_logic;
 
-  signal data_out_i_enable_matrix_summation : std_logic;
-  signal data_out_j_enable_matrix_summation : std_logic;
+  signal data_out_matrix_i_enable_matrix_summation : std_logic;
+  signal data_out_matrix_j_enable_matrix_summation : std_logic;
+  signal data_out_scalar_enable_matrix_summation   : std_logic;
 
   -- DATA
   signal modulo_in_matrix_summation : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -735,6 +743,10 @@ begin
       -- CONTROL
       START => start_scalar_summation,
       READY => ready_scalar_summation,
+
+      DATA_IN_ENABLE => data_in_enable_scalar_summation,
+
+      DATA_OUT_ENABLE => data_out_enable_scalar_summation,
 
       -- DATA
       MODULO_IN => modulo_in_scalar_summation,
@@ -995,9 +1007,11 @@ begin
       START => start_vector_summation,
       READY => ready_vector_summation,
 
-      DATA_IN_ENABLE => data_in_enable_vector_summation,
+      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_summation,
+      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_summation,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_summation,
+      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_summation,
+      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
 
       -- DATA
       MODULO_IN => modulo_in_vector_summation,
@@ -1289,11 +1303,13 @@ begin
       START => start_matrix_summation,
       READY => ready_matrix_summation,
 
-      DATA_IN_I_ENABLE => data_in_i_enable_matrix_summation,
-      DATA_IN_J_ENABLE => data_in_j_enable_matrix_summation,
+      DATA_IN_MATRIX_ENABLE => data_in_matrix_i_enable_matrix_summation,
+      DATA_IN_VECTOR_ENABLE => data_in_matrix_j_enable_matrix_summation,
+      DATA_IN_SCALAR_ENABLE   => data_in_scalar_enable_matrix_summation,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_summation,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_summation,
+      DATA_OUT_MATRIX_ENABLE => data_out_matrix_i_enable_matrix_summation,
+      DATA_OUT_VECTOR_ENABLE => data_out_matrix_j_enable_matrix_summation,
+      DATA_OUT_SCALAR_ENABLE   => data_out_scalar_enable_matrix_summation,
 
       -- DATA
       MODULO_IN => modulo_in_matrix_summation,

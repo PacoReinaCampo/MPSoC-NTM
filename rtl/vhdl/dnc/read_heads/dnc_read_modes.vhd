@@ -57,9 +57,11 @@ entity dnc_read_modes is
     START : in  std_logic;
     READY : out std_logic;
 
-    PI_IN_ENABLE : in std_logic;      -- for i in 0 to R-1
+    PI_IN_I_ENABLE : in std_logic;    -- for i in 0 to R-1
+    PI_IN_P_ENABLE : in std_logic;    -- for i in 0 to 2
 
-    PI_OUT_ENABLE : out std_logic;    -- for i in 0 to R-1
+    PI_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1
+    PI_OUT_P_ENABLE : out std_logic;  -- for i in 0 to 2
 
     -- DATA
     SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -113,22 +115,8 @@ begin
 
   -- ASSIGNATIONS
   -- CONTROL
-  start_vector_softmax <= START;
-
-  READY <= ready_vector_softmax;
-
-  data_in_enable_vector_softmax <= PI_IN_ENABLE;
-
-  PI_OUT_ENABLE <= data_out_enable_vector_softmax;
 
   -- DATA
-  modulo_in_vector_softmax <= FULL;
-  size_in_vector_softmax   <= SIZE_R_IN;
-  length_in_vector_softmax <= THREE;
-
-  data_in_vector_softmax <= PI_IN;
-
-  PI_OUT <= data_out_vector_softmax;
 
   -- VECTOR SOFTMAX
   vector_softmax_function : ntm_vector_softmax_function

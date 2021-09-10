@@ -128,6 +128,11 @@ architecture dnc_top_architecture of dnc_top is
   signal h_out_enable_controller : std_logic;
 
   -- DATA
+  signal size_x_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal w_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal b_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -224,12 +229,14 @@ architecture dnc_top_architecture of dnc_top is
 
   -- READ MODES
   -- CONTROL
-  signal pi_in_enable_read_modes : std_logic;
-
-  signal pi_out_enable_read_modes : std_logic;
-
   signal start_read_modes : std_logic;
   signal ready_read_modes : std_logic;
+
+  signal pi_in_i_enable_read_modes : std_logic;
+  signal pi_in_p_enable_read_modes : std_logic;
+
+  signal pi_out_i_enable_read_modes : std_logic;
+  signal pi_out_p_enable_read_modes : std_logic;
 
   -- DATA
   signal size_r_in_read_modes : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -485,13 +492,6 @@ begin
 
   ntm_controller_i : ntm_controller
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -520,6 +520,11 @@ begin
       H_OUT_ENABLE => h_out_enable_controller,
 
       -- DATA
+      SIZE_X_IN => size_x_in_controller,
+      SIZE_W_IN => size_w_in_controller,
+      SIZE_L_IN => size_l_in_controller,
+      SIZE_R_IN => size_r_in_controller,
+
       W_IN => w_in_controller,
       K_IN => k_in_controller,
       B_IN => b_in_controller,
@@ -672,9 +677,11 @@ begin
       START => start_read_modes,
       READY => ready_read_modes,
 
-      PI_IN_ENABLE => pi_in_enable_read_modes,
+      PI_IN_I_ENABLE => pi_in_i_enable_read_modes,
+      PI_IN_P_ENABLE => pi_in_p_enable_read_modes,
 
-      PI_OUT_ENABLE => pi_out_enable_read_modes,
+      PI_OUT_I_ENABLE => pi_out_i_enable_read_modes,
+      PI_OUT_P_ENABLE => pi_out_p_enable_read_modes,
 
       -- DATA
       SIZE_R_IN => size_r_in_free_gates,

@@ -46,13 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity ntm_state_gate_vector is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -72,6 +65,8 @@ entity ntm_state_gate_vector is
     S_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
+    SIZE_L_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
     S_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     I_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
