@@ -167,7 +167,7 @@ architecture ntm_controller_architecture of ntm_controller is
   signal size_w_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_l_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_r_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  
+
   signal h_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -236,7 +236,7 @@ architecture ntm_controller_architecture of ntm_controller is
   signal size_w_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_l_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_r_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  
+
   signal h_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -305,7 +305,7 @@ architecture ntm_controller_architecture of ntm_controller is
   signal size_w_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_l_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_r_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  
+
   signal h_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -374,7 +374,7 @@ architecture ntm_controller_architecture of ntm_controller is
   signal size_w_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_l_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_r_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  
+
   signal h_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);

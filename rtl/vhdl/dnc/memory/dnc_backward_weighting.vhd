@@ -69,7 +69,7 @@ entity dnc_backward_weighting is
     -- DATA
     SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
- 
+
     L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

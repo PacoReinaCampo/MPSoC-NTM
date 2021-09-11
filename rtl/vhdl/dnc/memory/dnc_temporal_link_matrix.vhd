@@ -68,7 +68,7 @@ entity dnc_temporal_link_matrix is
 
     -- DATA
     SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
- 
+
     L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     P_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

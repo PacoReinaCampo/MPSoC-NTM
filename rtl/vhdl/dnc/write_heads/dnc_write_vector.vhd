@@ -157,9 +157,6 @@ begin
             V_OUT_ENABLE <= '0';
           end if;
 
-          -- Data Outputs
-          V_OUT <= V_IN;
-
         when others =>
           -- FSM Control
           write_vector_ctrl_fsm_int <= STARTER_STATE;

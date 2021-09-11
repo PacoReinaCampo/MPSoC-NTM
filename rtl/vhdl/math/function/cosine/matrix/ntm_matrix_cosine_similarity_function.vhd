@@ -184,7 +184,7 @@ begin
             cosine_similarity_ctrl_fsm_int <= INPUT_MATRIX_STATE;
           end if;
 
-        when INPUT_MATRIX_STATE =>           -- STEP 1
+        when INPUT_MATRIX_STATE =>      -- STEP 1
 
           if (DATA_A_IN_MATRIX_ENABLE = '1') then
             -- Data Inputs

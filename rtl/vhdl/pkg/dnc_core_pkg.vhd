@@ -553,14 +553,14 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      K_READ_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1
-      K_READ_IN_K_ENABLE : in std_logic;   -- for k in 0 to W-1
+      K_READ_IN_I_ENABLE : in std_logic;  -- for i in 0 to R-1
+      K_READ_IN_K_ENABLE : in std_logic;  -- for k in 0 to W-1
 
       BETA_READ_IN_ENABLE : in std_logic;  -- for i in 0 to R-1
 
-      F_READ_IN_ENABLE : in std_logic;     -- for i in 0 to R-1
+      F_READ_IN_ENABLE : in std_logic;  -- for i in 0 to R-1
 
-      PI_READ_IN_ENABLE : in std_logic;    -- for i in 0 to R-1
+      PI_READ_IN_ENABLE : in std_logic;  -- for i in 0 to R-1
 
       K_WRITE_IN_K_ENABLE : in std_logic;  -- for k in 0 to W-1
       E_WRITE_IN_K_ENABLE : in std_logic;  -- for k in 0 to W-1
@@ -858,17 +858,17 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      W_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
-      W_IN_X_ENABLE : in std_logic;       -- for x in 0 to X-1
+      W_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+      W_IN_X_ENABLE : in std_logic;     -- for x in 0 to X-1
 
-      K_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
-      K_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
-      K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
+      K_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
+      K_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+      K_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
-      B_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+      B_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
-      X_IN_ENABLE  : in  std_logic;       -- for x in 0 to X-1
-      Y_OUT_ENABLE : out std_logic;       -- for y in 0 to Y-1
+      X_IN_ENABLE  : in  std_logic;     -- for x in 0 to X-1
+      Y_OUT_ENABLE : out std_logic;     -- for y in 0 to Y-1
 
       -- DATA
       SIZE_X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -970,39 +970,39 @@ package dnc_core_pkg is
       READY : out std_logic;
 
       -- Read Key
-      WK_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
-      WK_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
-      WK_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
+      WK_IN_I_ENABLE : in std_logic;    -- for i in 0 to R-1
+      WK_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
+      WK_IN_K_ENABLE : in std_logic;    -- for k in 0 to W-1
 
-      K_OUT_I_ENABLE : in std_logic;     -- for i in 0 to R-1
-      K_OUT_K_ENABLE : in std_logic;     -- for k in 0 to W-1
+      K_OUT_I_ENABLE : in std_logic;    -- for i in 0 to R-1
+      K_OUT_K_ENABLE : in std_logic;    -- for k in 0 to W-1
 
       -- Read Strength
       WBETA_IN_I_ENABLE : in std_logic;  -- for i in 0 to R-1
       WBETA_IN_L_ENABLE : in std_logic;  -- for l in 0 to L-1
 
-      BETA_OUT_ENABLE : in std_logic;    -- for i in 0 to R-1
+      BETA_OUT_ENABLE : in std_logic;   -- for i in 0 to R-1
 
       -- Free Gate
-      WF_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
-      WF_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+      WF_IN_I_ENABLE : in std_logic;    -- for i in 0 to R-1
+      WF_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
 
-      F_OUT_ENABLE : in std_logic;       -- for i in 0 to R-1
+      F_OUT_ENABLE : in std_logic;      -- for i in 0 to R-1
 
       -- Read Mode
-      WPI_IN_I_ENABLE : in std_logic;    -- for i in 0 to R-1
-      WPI_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
+      WPI_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1
+      WPI_IN_L_ENABLE : in std_logic;   -- for l in 0 to L-1
 
-      PI_OUT_ENABLE : in std_logic;      -- for i in 0 to R-1
+      PI_OUT_ENABLE : in std_logic;     -- for i in 0 to R-1
 
       -- Hidden State
-      H_IN_ENABLE : in std_logic;        -- for l in 0 to L-1
+      H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
       -- DATA
       SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    
+
       WK_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
       WBETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       WF_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);

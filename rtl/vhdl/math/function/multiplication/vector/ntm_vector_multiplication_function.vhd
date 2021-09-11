@@ -153,7 +153,7 @@ begin
             multiplication_ctrl_fsm_int <= INPUT_VECTOR_STATE;
           end if;
 
-        when INPUT_VECTOR_STATE =>           -- STEP 1
+        when INPUT_VECTOR_STATE =>      -- STEP 1
 
           if (DATA_IN_VECTOR_ENABLE = '1') then
             -- Data Inputs
@@ -179,7 +179,7 @@ begin
           DATA_OUT_VECTOR_ENABLE <= '0';
           DATA_OUT_SCALAR_ENABLE <= '0';
 
-        when INPUT_SCALAR_STATE =>           -- STEP 2
+        when INPUT_SCALAR_STATE =>      -- STEP 2
 
           if (DATA_IN_SCALAR_ENABLE = '1') then
             -- Data Inputs

@@ -58,14 +58,14 @@ entity dnc_addressing is
     START : in  std_logic;
     READY : out std_logic;
 
-    K_READ_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1
-    K_READ_IN_K_ENABLE : in std_logic;   -- for k in 0 to W-1
+    K_READ_IN_I_ENABLE : in std_logic;  -- for i in 0 to R-1
+    K_READ_IN_K_ENABLE : in std_logic;  -- for k in 0 to W-1
 
     BETA_READ_IN_ENABLE : in std_logic;  -- for i in 0 to R-1
 
-    F_READ_IN_ENABLE : in std_logic;     -- for i in 0 to R-1
+    F_READ_IN_ENABLE : in std_logic;    -- for i in 0 to R-1
 
-    PI_READ_IN_ENABLE : in std_logic;    -- for i in 0 to R-1
+    PI_READ_IN_ENABLE : in std_logic;   -- for i in 0 to R-1
 
     K_WRITE_IN_K_ENABLE : in std_logic;  -- for k in 0 to W-1
     E_WRITE_IN_K_ENABLE : in std_logic;  -- for k in 0 to W-1

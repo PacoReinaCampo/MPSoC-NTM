@@ -111,8 +111,8 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal c_out_enable_vector_content_based_addressing : std_logic;
 
   -- DATA
-  signal size_i_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_j_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_j_in_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal k_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_in_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);

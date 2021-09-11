@@ -107,7 +107,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_scalar_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR COSH
-   -- CONTROL
+  -- CONTROL
   signal start_scalar_cosh : std_logic;
   signal ready_scalar_cosh : std_logic;
 

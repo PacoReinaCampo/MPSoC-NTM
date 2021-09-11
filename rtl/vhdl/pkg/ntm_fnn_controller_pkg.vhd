@@ -111,16 +111,16 @@ package ntm_fnn_controller_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+      H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
-      W_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
-      W_OUT_X_ENABLE : out std_logic;     -- for x in 0 to X-1
+      W_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+      W_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
 
-      K_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
-      K_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
-      K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
+      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
+      K_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+      K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      B_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
+      B_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
       -- DATA
       SIZE_X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

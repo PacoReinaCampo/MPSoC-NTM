@@ -76,13 +76,43 @@ architecture ntm_write_heads_stimulus_architecture of ntm_write_heads_stimulus i
   -- Constants
   -----------------------------------------------------------------------
 
+  constant WORKING : time := 10 ns;
+
+  constant WAITING : time := 50 ns;
+  constant WORKING : time := 1000 ms;
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- GLOBAL
+  signal clk_int : std_logic;
+  signal rst_int : std_logic;
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- clk generation
+  clk_process : process
+  begin
+    clk_int <= '1';
+    wait for PERIOD/2;
+
+    clk_int <= '0';
+    wait for PERIOD/2;
+  end process;
+
+  -- rst generation
+  rst_process : process
+  begin
+    rst_int <= '0';
+    wait for WAITING;
+
+    rst_int <= '1';
+    wait for WORKING;
+  end process;
 
 end architecture;

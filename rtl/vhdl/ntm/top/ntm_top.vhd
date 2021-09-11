@@ -132,7 +132,7 @@ architecture ntm_top_architecture of ntm_top is
   signal size_w_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_l_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_r_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
-      
+
   signal w_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal b_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
