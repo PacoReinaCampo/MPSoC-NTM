@@ -112,10 +112,13 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
   signal start_vector_cosine : std_logic;
   signal ready_vector_cosine : std_logic;
 
-  signal data_a_in_enable_vector_cosine : std_logic;
-  signal data_b_in_enable_vector_cosine : std_logic;
+  signal data_a_in_vector_enable_vector_cosine : std_logic;
+  signal data_a_in_scalar_enable_vector_cosine : std_logic;
+  signal data_b_in_vector_enable_vector_cosine : std_logic;
+  signal data_b_in_scalar_enable_vector_cosine : std_logic;
 
-  signal data_out_enable_vector_cosine : std_logic;
+  signal data_out_vector_enable_vector_cosine : std_logic;
+  signal data_out_scalar_enable_vector_cosine : std_logic;
 
   -- DATA
   signal modulo_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -127,12 +130,15 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
 
   -- VECTOR SOFTMAX
   -- CONTROL
+  -- CONTROL
   signal start_vector_softmax : std_logic;
   signal ready_vector_softmax : std_logic;
 
-  signal data_in_enable_vector_softmax : std_logic;
+  signal data_in_vector_enable_vector_softmax : std_logic;
+  signal data_in_scalar_enable_vector_softmax : std_logic;
 
-  signal data_out_enable_vector_softmax : std_logic;
+  signal data_out_vector_enable_vector_softmax : std_logic;
+  signal data_out_scalar_enable_vector_softmax : std_logic;
 
   -- DATA
   signal modulo_in_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -190,10 +196,13 @@ begin
       START => start_vector_cosine,
       READY => ready_vector_cosine,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_cosine,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_cosine,
+      DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_cosine,
+      DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_cosine,
+      DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_cosine,
+      DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_cosine,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_cosine,
+      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_cosine,
+      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_cosine,
 
       -- DATA
       MODULO_IN => modulo_in_vector_cosine,
@@ -218,9 +227,11 @@ begin
       START => start_vector_softmax,
       READY => ready_vector_softmax,
 
-      DATA_IN_ENABLE => data_in_enable_vector_softmax,
+      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_softmax,
+      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_softmax,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_softmax,
+      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_softmax,
+      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_softmax,
 
       -- DATA
       MODULO_IN => modulo_in_vector_softmax,

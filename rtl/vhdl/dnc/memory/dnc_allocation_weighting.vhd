@@ -91,9 +91,11 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   signal start_vector_multiplication : std_logic;
   signal ready_vector_multiplication : std_logic;
 
-  signal data_in_enable_vector_multiplication : std_logic;
+  signal data_in_vector_enable_vector_multiplication : std_logic;
+  signal data_in_scalar_enable_vector_multiplication : std_logic;
 
-  signal data_out_enable_vector_multiplication : std_logic;
+  signal data_out_vector_enable_vector_multiplication : std_logic;
+  signal data_out_scalar_enable_vector_multiplication : std_logic;
 
   -- DATA
   signal modulo_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -160,9 +162,11 @@ begin
       START => start_vector_multiplication,
       READY => ready_vector_multiplication,
 
-      DATA_IN_ENABLE => data_in_enable_vector_multiplication,
+      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_multiplication,
+      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_multiplication,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_multiplication,
+      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_multiplication,
+      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_multiplication,
 
       -- DATA
       MODULO_IN => modulo_in_vector_multiplication,

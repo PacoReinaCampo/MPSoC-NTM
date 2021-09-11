@@ -133,13 +133,16 @@ architecture ntm_output_gate_vector_architecture of ntm_output_gate_vector is
   signal start_matrix_convolution : std_logic;
   signal ready_matrix_convolution : std_logic;
 
-  signal data_a_in_i_enable_matrix_convolution : std_logic;
-  signal data_a_in_j_enable_matrix_convolution : std_logic;
-  signal data_b_in_i_enable_matrix_convolution : std_logic;
-  signal data_b_in_j_enable_matrix_convolution : std_logic;
+  signal data_a_in_matrix_enable_matrix_convolution : std_logic;
+  signal data_a_in_vector_enable_matrix_convolution : std_logic;
+  signal data_a_in_scalar_enable_matrix_convolution : std_logic;
+  signal data_b_in_matrix_enable_matrix_convolution : std_logic;
+  signal data_b_in_vector_enable_matrix_convolution : std_logic;
+  signal data_b_in_scalar_enable_matrix_convolution : std_logic;
 
-  signal data_out_i_enable_matrix_convolution : std_logic;
-  signal data_out_j_enable_matrix_convolution : std_logic;
+  signal data_out_matrix_enable_matrix_convolution : std_logic;
+  signal data_out_vector_enable_matrix_convolution : std_logic;
+  signal data_out_scalar_enable_matrix_convolution : std_logic;
 
   -- DATA
   signal modulo_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -216,13 +219,16 @@ begin
       START => start_matrix_convolution,
       READY => ready_matrix_convolution,
 
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_convolution,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_convolution,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_convolution,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_convolution,
+      DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_convolution,
+      DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_convolution,
+      DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_convolution,
+      DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_convolution,
+      DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_convolution,
+      DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_convolution,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_convolution,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_convolution,
+      DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_convolution,
+      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_convolution,
+      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_convolution,
 
       -- DATA
       MODULO_IN => modulo_in_matrix_convolution,

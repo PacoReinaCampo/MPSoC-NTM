@@ -94,9 +94,11 @@ architecture dnc_read_modes_architecture of dnc_read_modes is
   signal start_vector_softmax : std_logic;
   signal ready_vector_softmax : std_logic;
 
-  signal data_in_enable_vector_softmax : std_logic;
+  signal data_in_vector_enable_vector_softmax : std_logic;
+  signal data_in_scalar_enable_vector_softmax : std_logic;
 
-  signal data_out_enable_vector_softmax : std_logic;
+  signal data_out_vector_enable_vector_softmax : std_logic;
+  signal data_out_scalar_enable_vector_softmax : std_logic;
 
   -- DATA
   signal modulo_in_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -115,8 +117,24 @@ begin
 
   -- ASSIGNATIONS
   -- CONTROL
+  start_vector_softmax <= START;
+
+  READY <= ready_vector_softmax;
+
+  data_in_vector_enable_vector_softmax <= PI_IN_I_ENABLE;
+  data_in_scalar_enable_vector_softmax <= PI_IN_P_ENABLE;
+
+  PI_OUT_I_ENABLE <= data_out_vector_enable_vector_softmax;
+  PI_OUT_P_ENABLE <= data_out_scalar_enable_vector_softmax;
 
   -- DATA
+  modulo_in_vector_softmax <= FULL;
+  length_in_vector_softmax <= THREE;
+  size_in_vector_softmax   <= SIZE_R_IN;
+
+  data_in_vector_softmax <= PI_IN;
+
+  PI_OUT <= data_out_vector_softmax;
 
   -- VECTOR SOFTMAX
   vector_softmax_function : ntm_vector_softmax_function
@@ -132,9 +150,11 @@ begin
       START => start_vector_softmax,
       READY => ready_vector_softmax,
 
-      DATA_IN_ENABLE => data_in_enable_vector_softmax,
+      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_softmax,
+      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_softmax,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_softmax,
+      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_softmax,
+      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_softmax,
 
       -- DATA
       MODULO_IN => modulo_in_vector_softmax,
