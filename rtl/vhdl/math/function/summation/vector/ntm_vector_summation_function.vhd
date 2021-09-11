@@ -102,9 +102,6 @@ architecture ntm_vector_summation_function_architecture of ntm_vector_summation_
   signal index_vector_loop : std_logic_vector(DATA_SIZE-1 downto 0);
   signal index_scalar_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_in_vector_summation_int : std_logic;
-  signal data_in_scalar_summation_int : std_logic;
-
   -- SUMMATION
   -- CONTROL
   signal start_scalar_summation : std_logic;
@@ -140,9 +137,6 @@ begin
       index_vector_loop <= ZERO;
       index_scalar_loop <= ZERO;
 
-      data_in_vector_summation_int <= '0';
-      data_in_scalar_summation_int <= '0';
-
     elsif (rising_edge(CLK)) then
 
       case summation_ctrl_fsm_int is
@@ -174,8 +168,6 @@ begin
 
             data_in_enable_scalar_summation <= '1';
 
-            data_in_vector_summation_int <= '1';
-
             -- FSM Control
             summation_ctrl_fsm_int <= ENDER_STATE;
           else
@@ -202,8 +194,6 @@ begin
 
             data_in_enable_scalar_summation <= '1';
 
-            data_in_scalar_summation_int <= '1';
-
             -- FSM Control
             summation_ctrl_fsm_int <= ENDER_STATE;
           else
@@ -217,7 +207,7 @@ begin
         when ENDER_STATE =>             -- STEP 3
 
           if (ready_scalar_summation = '1') then
-            if (index_vector_loop = std_logic_vector(unsigned(SIZE_IN)-unsigned(ONE)) and index_scalar_loop = std_logic_vector(unsigned(LENGTH_IN)-unsigned(ONE))) then
+            if (unsigned(index_vector_loop) = unsigned(SIZE_IN)-unsigned(ONE) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';
 
@@ -225,16 +215,7 @@ begin
 
               -- FSM Control
               summation_ctrl_fsm_int <= STARTER_STATE;
-            elsif (index_vector_loop < std_logic_vector(unsigned(SIZE_IN)-unsigned(ONE)) and index_scalar_loop < std_logic_vector(unsigned(LENGTH_IN)-unsigned(ONE))) then
-              -- Control Internal
-              index_scalar_loop <= std_logic_vector(unsigned(index_scalar_loop) + unsigned(ONE));
-
-              -- Control Outputs
-              DATA_OUT_SCALAR_ENABLE <= '1';
-
-              -- FSM Control
-              summation_ctrl_fsm_int <= INPUT_SCALAR_STATE;
-            elsif (index_vector_loop < std_logic_vector(unsigned(SIZE_IN)-unsigned(ONE)) and index_scalar_loop = std_logic_vector(unsigned(LENGTH_IN)-unsigned(ONE))) then
+            elsif (unsigned(index_vector_loop) < unsigned(SIZE_IN)-unsigned(ONE) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
               -- Control Internal
               index_vector_loop <= std_logic_vector(unsigned(index_vector_loop) + unsigned(ONE));
               index_scalar_loop <= ZERO;
@@ -245,6 +226,15 @@ begin
 
               -- FSM Control
               summation_ctrl_fsm_int <= INPUT_VECTOR_STATE;
+            elsif (unsigned(index_vector_loop) < unsigned(SIZE_IN)-unsigned(ONE) and unsigned(index_scalar_loop) < unsigned(LENGTH_IN)-unsigned(ONE)) then
+              -- Control Internal
+              index_scalar_loop <= std_logic_vector(unsigned(index_scalar_loop) + unsigned(ONE));
+
+              -- Control Outputs
+              DATA_OUT_SCALAR_ENABLE <= '1';
+
+              -- FSM Control
+              summation_ctrl_fsm_int <= INPUT_SCALAR_STATE;
             end if;
 
             -- Data Outputs
@@ -252,9 +242,6 @@ begin
           else
             -- Control Internal
             start_scalar_summation <= '0';
-
-            data_in_vector_summation_int <= '0';
-            data_in_scalar_summation_int <= '0';
           end if;
 
         when others =>

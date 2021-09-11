@@ -57,11 +57,13 @@ entity ntm_matrix_multiplication_function is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_IN_I_ENABLE : in std_logic;
-    DATA_IN_J_ENABLE : in std_logic;
+    DATA_IN_MATRIX_ENABLE : in std_logic;
+    DATA_IN_VECTOR_ENABLE : in std_logic;
+    DATA_IN_SCALAR_ENABLE : in std_logic;
 
-    DATA_OUT_I_ENABLE : out std_logic;
-    DATA_OUT_J_ENABLE : out std_logic;
+    DATA_OUT_MATRIX_ENABLE : out std_logic;
+    DATA_OUT_VECTOR_ENABLE : out std_logic;
+    DATA_OUT_SCALAR_ENABLE : out std_logic;
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -81,9 +83,10 @@ architecture ntm_matrix_multiplication_function_architecture of ntm_matrix_multi
 
   type multiplication_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    INPUT_I_STATE,                      -- STEP 1
-    INPUT_J_STATE,                      -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    INPUT_MATRIX_STATE,                 -- STEP 1
+    INPUT_VECTOR_STATE,                 -- STEP 2
+    INPUT_SCALAR_STATE,                 -- STEP 3
+    ENDER_STATE                         -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -100,20 +103,22 @@ architecture ntm_matrix_multiplication_function_architecture of ntm_matrix_multi
   signal multiplication_ctrl_fsm_int : multiplication_ctrl_fsm;
 
   -- Internal Signals
-  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_matrix_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_vector_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_scalar_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_in_i_multiplication_int : std_logic;
-  signal data_in_j_multiplication_int : std_logic;
+  signal data_in_matrix_multiplication_int : std_logic;
 
   -- MULTIPLICATION
   -- CONTROL
   signal start_vector_multiplication : std_logic;
   signal ready_vector_multiplication : std_logic;
 
-  signal data_in_enable_vector_multiplication : std_logic;
+  signal data_in_vector_enable_vector_multiplication : std_logic;
+  signal data_in_scalar_enable_vector_multiplication : std_logic;
 
-  signal data_out_enable_vector_multiplication : std_logic;
+  signal data_out_vector_enable_vector_multiplication : std_logic;
+  signal data_out_scalar_enable_vector_multiplication : std_logic;
 
   -- DATA
   signal modulo_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -138,11 +143,11 @@ begin
       READY <= '0';
 
       -- Assignations
-      index_i_loop <= ZERO;
-      index_j_loop <= ZERO;
+      index_matrix_loop <= ZERO;
+      index_vector_loop <= ZERO;
+      index_scalar_loop <= ZERO;
 
-      data_in_i_multiplication_int <= '0';
-      data_in_j_multiplication_int <= '0';
+      data_in_matrix_multiplication_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -152,100 +157,144 @@ begin
           READY <= '0';
 
           -- Assignations
-          index_i_loop <= ZERO;
-          index_j_loop <= ZERO;
+          index_matrix_loop <= ZERO;
+          index_vector_loop <= ZERO;
+          index_scalar_loop <= ZERO;
 
           if (START = '1') then
             -- FSM Control
-            multiplication_ctrl_fsm_int <= INPUT_I_STATE;
+            multiplication_ctrl_fsm_int <= INPUT_MATRIX_STATE;
           end if;
 
-        when INPUT_I_STATE =>           -- STEP 1
+        when INPUT_MATRIX_STATE =>           -- STEP 1
 
-          if (DATA_IN_I_ENABLE = '1') then
+          if (DATA_IN_MATRIX_ENABLE = '1') then
             -- Data Inputs
             modulo_in_vector_multiplication <= MODULO_IN;
 
             data_in_vector_multiplication <= DATA_IN;
 
-            if (index_i_loop = ZERO) then
+            if (index_matrix_loop = ZERO) then
               -- Control Internal
               start_vector_multiplication <= '1';
             end if;
 
-            data_in_enable_vector_multiplication <= '1';
+            data_in_matrix_multiplication_int <= '1';
 
-            data_in_i_multiplication_int <= '1';
+            data_in_vector_enable_vector_multiplication <= '1';
+            data_in_scalar_enable_vector_multiplication <= '1';
 
             -- FSM Control
             multiplication_ctrl_fsm_int <= ENDER_STATE;
           else
             -- Control Internal
-            data_in_enable_vector_multiplication <= '0';
+            data_in_matrix_multiplication_int <= '0';
+
+            data_in_vector_enable_vector_multiplication <= '0';
+            data_in_scalar_enable_vector_multiplication <= '0';
           end if;
 
           -- Control Outputs
-          DATA_OUT_I_ENABLE <= '0';
-          DATA_OUT_J_ENABLE <= '0';
+          DATA_OUT_MATRIX_ENABLE <= '0';
+          DATA_OUT_VECTOR_ENABLE <= '0';
+          DATA_OUT_SCALAR_ENABLE <= '0';
 
-        when INPUT_J_STATE =>           -- STEP 2
+        when INPUT_VECTOR_STATE =>           -- STEP 1
 
-          if (DATA_IN_J_ENABLE = '1') then
+          if (DATA_IN_VECTOR_ENABLE = '1') then
             -- Data Inputs
             modulo_in_vector_multiplication <= MODULO_IN;
 
             data_in_vector_multiplication <= DATA_IN;
 
-            if (index_j_loop = ZERO) then
+            if (index_vector_loop = ZERO) then
               -- Control Internal
               start_vector_multiplication <= '1';
             end if;
 
-            data_in_enable_vector_multiplication <= '1';
-
-            data_in_j_multiplication_int <= '1';
+            data_in_vector_enable_vector_multiplication <= '1';
+            data_in_scalar_enable_vector_multiplication <= '1';
 
             -- FSM Control
             multiplication_ctrl_fsm_int <= ENDER_STATE;
           else
             -- Control Internal
-            data_in_enable_vector_multiplication <= '0';
+            data_in_vector_enable_vector_multiplication <= '0';
+            data_in_scalar_enable_vector_multiplication <= '0';
           end if;
 
           -- Control Outputs
-          DATA_OUT_J_ENABLE <= '0';
+          DATA_OUT_VECTOR_ENABLE <= '0';
+          DATA_OUT_SCALAR_ENABLE <= '0';
+
+        when INPUT_SCALAR_STATE =>           -- STEP 2
+
+          if (DATA_IN_SCALAR_ENABLE = '1') then
+            -- Data Inputs
+            modulo_in_vector_multiplication <= MODULO_IN;
+
+            data_in_vector_multiplication <= DATA_IN;
+
+            if (index_scalar_loop = ZERO) then
+              -- Control Internal
+              start_vector_multiplication <= '1';
+            end if;
+
+            data_in_scalar_enable_vector_multiplication <= '1';
+
+            -- FSM Control
+            multiplication_ctrl_fsm_int <= ENDER_STATE;
+          else
+            -- Control Internal
+            data_in_scalar_enable_vector_multiplication <= '0';
+          end if;
+
+          -- Control Outputs
+          DATA_OUT_SCALAR_ENABLE <= '0';
 
         when ENDER_STATE =>             -- STEP 3
 
           if (ready_vector_multiplication = '1') then
-            if (index_i_loop = std_logic_vector(unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
+            if (unsigned(index_matrix_loop) = unsigned(SIZE_I_IN)-unsigned(ONE) and unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';
 
-              DATA_OUT_J_ENABLE <= '1';
+              DATA_OUT_VECTOR_ENABLE <= '1';
 
               -- FSM Control
               multiplication_ctrl_fsm_int <= STARTER_STATE;
-            elsif (index_i_loop < std_logic_vector(unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop < std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
+            elsif (unsigned(index_matrix_loop) < unsigned(SIZE_I_IN)-unsigned(ONE) and unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+              index_matrix_loop <= std_logic_vector(unsigned(index_matrix_loop) + unsigned(ONE));
+              index_vector_loop <= ZERO;
 
               -- Control Outputs
-              DATA_OUT_J_ENABLE <= '1';
+              DATA_OUT_MATRIX_ENABLE <= '1';
+              DATA_OUT_VECTOR_ENABLE <= '1';
+              DATA_OUT_SCALAR_ENABLE <= '1';
 
               -- FSM Control
-              multiplication_ctrl_fsm_int <= INPUT_J_STATE;
-            elsif (index_i_loop < std_logic_vector(unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
+              multiplication_ctrl_fsm_int <= INPUT_MATRIX_STATE;
+            elsif (unsigned(index_matrix_loop) < unsigned(SIZE_I_IN)-unsigned(ONE) and unsigned(index_vector_loop) < unsigned(SIZE_J_IN)-unsigned(ONE) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
               -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
-              index_j_loop <= ZERO;
+              index_vector_loop <= std_logic_vector(unsigned(index_vector_loop) + unsigned(ONE));
+              index_vector_loop <= ZERO;
 
               -- Control Outputs
-              DATA_OUT_I_ENABLE <= '1';
-              DATA_OUT_J_ENABLE <= '1';
+              DATA_OUT_VECTOR_ENABLE <= '1';
+              DATA_OUT_SCALAR_ENABLE <= '1';
 
               -- FSM Control
-              multiplication_ctrl_fsm_int <= INPUT_I_STATE;
+              multiplication_ctrl_fsm_int <= INPUT_VECTOR_STATE;
+            elsif (unsigned(index_matrix_loop) < unsigned(SIZE_I_IN)-unsigned(ONE) and unsigned(index_vector_loop) < unsigned(SIZE_J_IN)-unsigned(ONE) and unsigned(index_scalar_loop) < unsigned(LENGTH_IN)-unsigned(ONE)) then
+              -- Control Internal
+              index_scalar_loop <= std_logic_vector(unsigned(index_scalar_loop) + unsigned(ONE));
+
+              -- Control Outputs
+              DATA_OUT_SCALAR_ENABLE <= '1';
+
+              -- FSM Control
+              multiplication_ctrl_fsm_int <= INPUT_SCALAR_STATE;
             end if;
 
             -- Data Outputs
@@ -254,8 +303,10 @@ begin
             -- Control Internal
             start_vector_multiplication <= '0';
 
-            data_in_i_multiplication_int <= '0';
-            data_in_j_multiplication_int <= '0';
+            data_in_matrix_multiplication_int <= '0';
+
+            data_in_vector_enable_vector_multiplication <= '0';
+            data_in_scalar_enable_vector_multiplication <= '0';
           end if;
 
         when others =>
@@ -279,9 +330,11 @@ begin
       START => start_vector_multiplication,
       READY => ready_vector_multiplication,
 
-      DATA_IN_ENABLE => data_in_enable_vector_multiplication,
+      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_multiplication,
+      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_multiplication,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_multiplication,
+      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_multiplication,
+      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_multiplication,
 
       -- DATA
       MODULO_IN => modulo_in_vector_multiplication,

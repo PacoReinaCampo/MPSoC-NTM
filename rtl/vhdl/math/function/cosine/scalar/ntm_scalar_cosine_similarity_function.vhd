@@ -57,6 +57,10 @@ entity ntm_scalar_cosine_similarity_function is
     START : in  std_logic;
     READY : out std_logic;
 
+    DATA_IN_ENABLE : in std_logic;
+
+    DATA_OUT_ENABLE : out std_logic;
+
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);

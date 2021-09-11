@@ -46,7 +46,6 @@ use work.ntm_math_pkg.all;
 
 entity ntm_vector_softmax_function is
   generic (
-
     DATA_SIZE : integer := 512
     );
   port (
@@ -58,9 +57,11 @@ entity ntm_vector_softmax_function is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_IN_ENABLE : in std_logic;
+    DATA_IN_VECTOR_ENABLE : in std_logic;
+    DATA_IN_SCALAR_ENABLE : in std_logic;
 
-    DATA_OUT_ENABLE : out std_logic;
+    DATA_OUT_VECTOR_ENABLE : out std_logic;
+    DATA_OUT_SCALAR_ENABLE : out std_logic;
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -79,13 +80,13 @@ architecture ntm_vector_softmax_function_architecture of ntm_vector_softmax_func
 
   type softmax_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    INPUT_STATE,                        -- STEP 1
-    ENDER_STATE                         -- STEP 2
+    INPUT_VECTOR_STATE,                 -- STEP 1
+    INPUT_SCALAR_STATE,                 -- STEP 2
+    ENDER_STATE                         -- STEP 3
     );
 
   -----------------------------------------------------------------------
   -- Constants
-  -----------------------------------------------------------------------
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
@@ -98,17 +99,22 @@ architecture ntm_vector_softmax_function_architecture of ntm_vector_softmax_func
   signal softmax_ctrl_fsm_int : softmax_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_vector_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_scalar_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SOFTMAX
   -- CONTROL
   signal start_scalar_softmax : std_logic;
   signal ready_scalar_softmax : std_logic;
 
+  signal data_in_enable_scalar_softmax : std_logic;
+
+  signal data_out_enable_scalar_softmax : std_logic;
+
   -- DATA
   signal modulo_in_scalar_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_scalar_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_scalar_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_scalar_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -128,7 +134,8 @@ begin
       READY <= '0';
 
       -- Assignations
-      index_loop <= ZERO;
+      index_vector_loop <= ZERO;
+      index_scalar_loop <= ZERO;
 
     elsif (rising_edge(CLK)) then
 
@@ -138,56 +145,100 @@ begin
           READY <= '0';
 
           -- Assignations
-          index_loop <= ZERO;
+          index_vector_loop <= ZERO;
+          index_scalar_loop <= ZERO;
 
           if (START = '1') then
             -- FSM Control
-            softmax_ctrl_fsm_int <= INPUT_STATE;
+            softmax_ctrl_fsm_int <= INPUT_VECTOR_STATE;
           end if;
 
-        when INPUT_STATE =>             -- STEP 1
+        when INPUT_VECTOR_STATE =>           -- STEP 1
 
-          if (DATA_IN_ENABLE = '1') then
+          if (DATA_IN_VECTOR_ENABLE = '1') then
             -- Data Inputs
             modulo_in_scalar_softmax <= MODULO_IN;
-            length_in_scalar_softmax <= LENGTH_IN;
 
             data_in_scalar_softmax <= DATA_IN;
 
-            if (index_loop = ZERO) then
+            if (index_vector_loop = ZERO) then
               -- Control Internal
               start_scalar_softmax <= '1';
             end if;
 
+            data_in_enable_scalar_softmax <= '1';
+
             -- FSM Control
             softmax_ctrl_fsm_int <= ENDER_STATE;
+          else
+            -- Control Internal
+            data_in_enable_scalar_softmax <= '0';
           end if;
 
           -- Control Outputs
-          DATA_OUT_ENABLE <= '0';
+          DATA_OUT_VECTOR_ENABLE <= '0';
+          DATA_OUT_SCALAR_ENABLE <= '0';
 
-        when ENDER_STATE =>             -- STEP 2
+        when INPUT_SCALAR_STATE =>           -- STEP 2
+
+          if (DATA_IN_SCALAR_ENABLE = '1') then
+            -- Data Inputs
+            modulo_in_scalar_softmax <= MODULO_IN;
+
+            data_in_scalar_softmax <= DATA_IN;
+
+            if (index_scalar_loop = ZERO) then
+              -- Control Internal
+              start_scalar_softmax <= '1';
+            end if;
+
+            data_in_enable_scalar_softmax <= '1';
+
+            -- FSM Control
+            softmax_ctrl_fsm_int <= ENDER_STATE;
+          else
+            -- Control Internal
+            data_in_enable_scalar_softmax <= '0';
+          end if;
+
+          -- Control Outputs
+          DATA_OUT_SCALAR_ENABLE <= '0';
+
+        when ENDER_STATE =>             -- STEP 3
 
           if (ready_scalar_softmax = '1') then
-            if (index_loop = std_logic_vector(unsigned(SIZE_IN)-unsigned(ONE))) then
+            if (unsigned(index_vector_loop) = unsigned(SIZE_IN)-unsigned(ONE) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';
 
-              -- FSM Control
-              softmax_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE));
+              DATA_OUT_SCALAR_ENABLE <= '1';
 
               -- FSM Control
-              softmax_ctrl_fsm_int <= INPUT_STATE;
+              softmax_ctrl_fsm_int <= STARTER_STATE;
+            elsif (unsigned(index_vector_loop) < unsigned(SIZE_IN)-unsigned(ONE) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
+              -- Control Internal
+              index_vector_loop <= std_logic_vector(unsigned(index_vector_loop) + unsigned(ONE));
+              index_scalar_loop <= ZERO;
+
+              -- Control Outputs
+              DATA_OUT_VECTOR_ENABLE <= '1';
+              DATA_OUT_SCALAR_ENABLE <= '1';
+
+              -- FSM Control
+              softmax_ctrl_fsm_int <= INPUT_VECTOR_STATE;
+            elsif (unsigned(index_vector_loop) < unsigned(SIZE_IN)-unsigned(ONE) and unsigned(index_scalar_loop) < unsigned(LENGTH_IN)-unsigned(ONE)) then
+              -- Control Internal
+              index_scalar_loop <= std_logic_vector(unsigned(index_scalar_loop) + unsigned(ONE));
+
+              -- Control Outputs
+              DATA_OUT_SCALAR_ENABLE <= '1';
+
+              -- FSM Control
+              softmax_ctrl_fsm_int <= INPUT_SCALAR_STATE;
             end if;
 
             -- Data Outputs
             DATA_OUT <= data_out_scalar_softmax;
-
-            -- Control Outputs
-            DATA_OUT_ENABLE <= '1';
           else
             -- Control Internal
             start_scalar_softmax <= '0';
@@ -213,6 +264,10 @@ begin
       -- CONTROL
       START => start_scalar_softmax,
       READY => ready_scalar_softmax,
+
+      DATA_IN_ENABLE => data_in_enable_scalar_softmax,
+
+      DATA_OUT_ENABLE => data_out_enable_scalar_softmax,
 
       -- DATA
       MODULO_IN => modulo_in_scalar_softmax,
