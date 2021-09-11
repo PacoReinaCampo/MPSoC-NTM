@@ -136,7 +136,7 @@ begin
         when ENDER_STATE =>             -- STEP 1
 
           if (V_IN_ENABLE = '1') then
-            if (index_loop = std_logic_vector(unsigned(SIZE_W_IN)-unsigned(ONE))) then
+            if (unsigned(index_loop) = unsigned(SIZE_W_IN)-unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';
 
@@ -146,6 +146,9 @@ begin
               -- Control Internal
               index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE));
             end if;
+
+            -- Data Outputs
+            V_OUT <= V_IN;
 
             -- Control Outputs
             V_OUT_ENABLE <= '1';

@@ -148,6 +148,9 @@ begin
               index_j_loop <= ZERO;
             end if;
 
+            -- Data Outputs
+            K_OUT <= K_IN;
+
             -- Control Outputs
             K_OUT_I_ENABLE <= '1';
             K_OUT_K_ENABLE <= '1';
@@ -158,16 +161,19 @@ begin
           end if;
 
           if (K_IN_K_ENABLE = '1') then
-            if (index_i_loop = SIZE_R_IN and index_j_loop = SIZE_W_IN) then
+            if (unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE) and unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               read_keys_ctrl_fsm_int <= STARTER_STATE;
-            elsif (index_i_loop < SIZE_R_IN and index_j_loop < SIZE_W_IN) then
+            elsif (unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE) and unsigned(index_j_loop) < unsigned(SIZE_W_IN)-unsigned(ONE)) then
               -- Control Internal
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
             end if;
+
+            -- Data Outputs
+            K_OUT <= K_IN;
 
             -- Control Outputs
             K_OUT_K_ENABLE <= '1';
@@ -175,9 +181,6 @@ begin
             -- Control Outputs
             K_OUT_K_ENABLE <= '0';
           end if;
-
-          -- Data Outputs
-          K_OUT <= K_IN;
 
         when others =>
           -- FSM Control

@@ -135,8 +135,8 @@ begin
   C_OUT_ENABLE <= c_out_enable_vector_content_based_addressing;
 
   -- DATA
-  size_i_in_vector_content_based_addressing <= (others => '1');
-  size_j_in_vector_content_based_addressing <= (others => '1');
+  size_i_in_vector_content_based_addressing <= SIZE_N_IN;
+  size_j_in_vector_content_based_addressing <= SIZE_N_IN;
 
   k_in_vector_content_based_addressing    <= K_IN;
   m_in_vector_content_based_addressing    <= M_IN;
