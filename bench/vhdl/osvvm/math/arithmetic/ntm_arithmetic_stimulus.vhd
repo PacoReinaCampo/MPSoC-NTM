@@ -57,12 +57,12 @@ entity ntm_arithmetic_stimulus is
     );
   port (
     -- GLOBAL
-    CLK : in std_logic;
-    RST : in std_logic;
+    CLK : out std_logic;
+    RST : out std_logic;
 
     -- CONTROL
-    START : in  std_logic;
-    READY : out std_logic
+    START : out std_logic;
+    READY : in  std_logic
     );
 end entity;
 
@@ -76,7 +76,7 @@ architecture ntm_arithmetic_stimulus_architecture of ntm_arithmetic_stimulus is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant WORKING : time := 10 ns;
+  constant PERIOD : time := 10 ns;
 
   constant WAITING : time := 50 ns;
   constant WORKING : time := 1000 ms;

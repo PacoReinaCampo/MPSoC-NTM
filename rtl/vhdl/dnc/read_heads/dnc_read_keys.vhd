@@ -130,11 +130,11 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          -- Assignations
-          index_i_loop <= ZERO;
-          index_j_loop <= ZERO;
-
           if (START = '1') then
+            -- Assignations
+            index_i_loop <= ZERO;
+            index_j_loop <= ZERO;
+
             -- FSM Control
             read_keys_ctrl_fsm_int <= ENDER_STATE;
           end if;
@@ -143,7 +143,7 @@ begin
 
           if (K_IN_I_ENABLE = '1') then
             -- Control Internal
-            if (index_i_loop < SIZE_R_IN and index_j_loop = SIZE_W_IN) then
+            if (unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE) and unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE)) then
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
               index_j_loop <= ZERO;
             end if;

@@ -125,10 +125,10 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          -- Assignations
-          index_loop <= ZERO;
-
           if (START = '1') then
+            -- Assignations
+            index_loop <= ZERO;
+
             -- FSM Control
             write_key_ctrl_fsm_int <= ENDER_STATE;
           end if;
