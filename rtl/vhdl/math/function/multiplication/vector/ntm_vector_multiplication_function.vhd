@@ -144,11 +144,11 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          -- Assignations
-          index_vector_loop <= ZERO;
-          index_scalar_loop <= ZERO;
-
           if (START = '1') then
+            -- Assignations
+            index_vector_loop <= ZERO;
+            index_scalar_loop <= ZERO;
+
             -- FSM Control
             multiplication_ctrl_fsm_int <= INPUT_VECTOR_STATE;
           end if;
@@ -184,6 +184,7 @@ begin
           if (DATA_IN_SCALAR_ENABLE = '1') then
             -- Data Inputs
             modulo_in_scalar_multiplication <= MODULO_IN;
+            length_in_scalar_multiplication <= LENGTH_IN;
 
             data_in_scalar_multiplication <= DATA_IN;
 

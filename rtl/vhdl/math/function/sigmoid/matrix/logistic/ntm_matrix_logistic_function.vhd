@@ -102,10 +102,7 @@ architecture ntm_matrix_logistic_function_architecture of ntm_matrix_logistic_fu
   signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_in_i_logistic_int : std_logic;
-  signal data_in_j_logistic_int : std_logic;
-
-  -- LOGISTIC
+  -- TANH
   -- CONTROL
   signal start_vector_logistic : std_logic;
   signal ready_vector_logistic : std_logic;
@@ -139,9 +136,6 @@ begin
       index_i_loop <= ZERO;
       index_j_loop <= ZERO;
 
-      data_in_i_logistic_int <= '0';
-      data_in_j_logistic_int <= '0';
-
     elsif (rising_edge(CLK)) then
 
       case logistic_ctrl_fsm_int is
@@ -149,11 +143,11 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          -- Assignations
-          index_i_loop <= ZERO;
-          index_j_loop <= ZERO;
-
           if (START = '1') then
+            -- Assignations
+            index_i_loop <= ZERO;
+            index_j_loop <= ZERO;
+
             -- FSM Control
             logistic_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
@@ -173,8 +167,6 @@ begin
 
             data_in_enable_vector_logistic <= '1';
 
-            data_in_i_logistic_int <= '1';
-
             -- FSM Control
             logistic_ctrl_fsm_int <= ENDER_STATE;
           else
@@ -191,6 +183,7 @@ begin
           if (DATA_IN_J_ENABLE = '1') then
             -- Data Inputs
             modulo_in_vector_logistic <= MODULO_IN;
+            size_in_vector_logistic   <= SIZE_J_IN;
 
             data_in_vector_logistic <= DATA_IN;
 
@@ -200,8 +193,6 @@ begin
             end if;
 
             data_in_enable_vector_logistic <= '1';
-
-            data_in_j_logistic_int <= '1';
 
             -- FSM Control
             logistic_ctrl_fsm_int <= ENDER_STATE;
@@ -216,7 +207,7 @@ begin
         when ENDER_STATE =>             -- STEP 3
 
           if (ready_vector_logistic = '1') then
-            if (index_i_loop = std_logic_vector(unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
+            if (unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';
 
@@ -224,16 +215,7 @@ begin
 
               -- FSM Control
               logistic_ctrl_fsm_int <= STARTER_STATE;
-            elsif (index_i_loop < std_logic_vector(unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop < std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
-              -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
-
-              -- Control Outputs
-              DATA_OUT_J_ENABLE <= '1';
-
-              -- FSM Control
-              logistic_ctrl_fsm_int <= INPUT_J_STATE;
-            elsif (index_i_loop < std_logic_vector(unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
+            elsif (unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) then
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
               index_j_loop <= ZERO;
@@ -244,6 +226,15 @@ begin
 
               -- FSM Control
               logistic_ctrl_fsm_int <= INPUT_I_STATE;
+            elsif (unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop < std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) then
+              -- Control Internal
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+
+              -- Control Outputs
+              DATA_OUT_J_ENABLE <= '1';
+
+              -- FSM Control
+              logistic_ctrl_fsm_int <= INPUT_J_STATE;
             end if;
 
             -- Data Outputs
@@ -251,9 +242,6 @@ begin
           else
             -- Control Internal
             start_vector_logistic <= '0';
-
-            data_in_i_logistic_int <= '0';
-            data_in_j_logistic_int <= '0';
           end if;
 
         when others =>

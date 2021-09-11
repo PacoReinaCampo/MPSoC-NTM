@@ -107,9 +107,7 @@ architecture ntm_matrix_summation_function_architecture of ntm_matrix_summation_
   signal index_vector_loop : std_logic_vector(DATA_SIZE-1 downto 0);
   signal index_scalar_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_in_matrix_summation_int : std_logic;
-
-  -- SUMMATION
+  -- SOFTMAX
   -- CONTROL
   signal start_vector_summation : std_logic;
   signal ready_vector_summation : std_logic;
@@ -147,8 +145,6 @@ begin
       index_vector_loop <= ZERO;
       index_scalar_loop <= ZERO;
 
-      data_in_matrix_summation_int <= '0';
-
     elsif (rising_edge(CLK)) then
 
       case summation_ctrl_fsm_int is
@@ -156,12 +152,12 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          -- Assignations
-          index_matrix_loop <= ZERO;
-          index_vector_loop <= ZERO;
-          index_scalar_loop <= ZERO;
-
           if (START = '1') then
+            -- Assignations
+            index_matrix_loop <= ZERO;
+            index_vector_loop <= ZERO;
+            index_scalar_loop <= ZERO;
+
             -- FSM Control
             summation_ctrl_fsm_int <= INPUT_MATRIX_STATE;
           end if;
@@ -179,8 +175,6 @@ begin
               start_vector_summation <= '1';
             end if;
 
-            data_in_matrix_summation_int <= '1';
-
             data_in_vector_enable_vector_summation <= '1';
             data_in_scalar_enable_vector_summation <= '1';
 
@@ -188,8 +182,6 @@ begin
             summation_ctrl_fsm_int <= ENDER_STATE;
           else
             -- Control Internal
-            data_in_matrix_summation_int <= '0';
-
             data_in_vector_enable_vector_summation <= '0';
             data_in_scalar_enable_vector_summation <= '0';
           end if;
@@ -204,6 +196,7 @@ begin
           if (DATA_IN_VECTOR_ENABLE = '1') then
             -- Data Inputs
             modulo_in_vector_summation <= MODULO_IN;
+            size_in_vector_summation   <= SIZE_J_IN;
 
             data_in_vector_summation <= DATA_IN;
 
@@ -232,6 +225,7 @@ begin
           if (DATA_IN_SCALAR_ENABLE = '1') then
             -- Data Inputs
             modulo_in_vector_summation <= MODULO_IN;
+            length_in_vector_summation <= LENGTH_IN;
 
             data_in_vector_summation <= DATA_IN;
 
@@ -278,7 +272,7 @@ begin
             elsif (unsigned(index_matrix_loop) < unsigned(SIZE_I_IN)-unsigned(ONE) and unsigned(index_vector_loop) < unsigned(SIZE_J_IN)-unsigned(ONE) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
               -- Control Internal
               index_vector_loop <= std_logic_vector(unsigned(index_vector_loop) + unsigned(ONE));
-              index_vector_loop <= ZERO;
+              index_scalar_loop <= ZERO;
 
               -- Control Outputs
               DATA_OUT_VECTOR_ENABLE <= '1';
@@ -302,8 +296,6 @@ begin
           else
             -- Control Internal
             start_vector_summation <= '0';
-
-            data_in_matrix_summation_int <= '0';
 
             data_in_vector_enable_vector_summation <= '0';
             data_in_scalar_enable_vector_summation <= '0';

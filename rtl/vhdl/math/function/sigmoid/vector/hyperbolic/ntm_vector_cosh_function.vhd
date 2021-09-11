@@ -98,7 +98,7 @@ architecture ntm_vector_cosh_function_architecture of ntm_vector_cosh_function i
   -- Internal Signals
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- COSH
+  -- ONEPLUS
   -- CONTROL
   signal start_scalar_cosh : std_logic;
   signal ready_scalar_cosh : std_logic;
@@ -133,10 +133,10 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          -- Assignations
-          index_loop <= ZERO;
-
           if (START = '1') then
+            -- Assignations
+            index_loop <= ZERO;
+
             -- FSM Control
             cosh_ctrl_fsm_int <= INPUT_STATE;
           end if;
@@ -164,7 +164,7 @@ begin
         when ENDER_STATE =>             -- STEP 2
 
           if (ready_scalar_cosh = '1') then
-            if (index_loop = std_logic_vector(unsigned(SIZE_IN)-unsigned(ONE))) then
+            if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';
 

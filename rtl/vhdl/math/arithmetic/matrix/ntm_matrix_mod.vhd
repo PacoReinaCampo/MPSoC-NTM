@@ -151,11 +151,11 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          -- Assignations
-          index_i_loop <= ZERO;
-          index_j_loop <= ZERO;
-
           if (START = '1') then
+            -- Assignations
+            index_i_loop <= ZERO;
+            index_j_loop <= ZERO;
+
             -- FSM Control
             mod_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
@@ -193,6 +193,7 @@ begin
           if (DATA_IN_J_ENABLE = '1') then
             -- Data Inputs
             modulo_in_vector_mod <= MODULO_IN;
+            size_in_vector_mod   <= SIZE_J_IN;
 
             data_in_vector_mod <= DATA_IN;
 
@@ -218,7 +219,7 @@ begin
         when ENDER_STATE =>             -- STEP 3
 
           if (ready_vector_mod = '1') then
-            if (index_i_loop = std_logic_vector(unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
+            if (unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';
 
@@ -226,16 +227,7 @@ begin
 
               -- FSM Control
               mod_ctrl_fsm_int <= STARTER_STATE;
-            elsif (index_i_loop < std_logic_vector(unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop < std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
-              -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
-
-              -- Control Outputs
-              DATA_OUT_J_ENABLE <= '1';
-
-              -- FSM Control
-              mod_ctrl_fsm_int <= INPUT_J_STATE;
-            elsif (index_i_loop < std_logic_vector(unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE))) then
+            elsif (unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) then
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
               index_j_loop <= ZERO;
@@ -246,6 +238,15 @@ begin
 
               -- FSM Control
               mod_ctrl_fsm_int <= INPUT_I_STATE;
+            elsif (unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop < std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) then
+              -- Control Internal
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+
+              -- Control Outputs
+              DATA_OUT_J_ENABLE <= '1';
+
+              -- FSM Control
+              mod_ctrl_fsm_int <= INPUT_J_STATE;
             end if;
 
             -- Data Outputs

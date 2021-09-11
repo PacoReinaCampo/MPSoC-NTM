@@ -119,7 +119,7 @@ architecture ntm_matrix_convolution_function_architecture of ntm_matrix_convolut
   signal data_b_in_vector_convolution_int : std_logic;
   signal data_b_in_scalar_convolution_int : std_logic;
 
-  -- CONVOLUTION
+  -- COSINE SIMILARITY
   -- CONTROL
   signal start_vector_convolution : std_logic;
   signal ready_vector_convolution : std_logic;
@@ -174,12 +174,12 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          -- Assignations
-          index_matrix_loop <= ZERO;
-          index_vector_loop <= ZERO;
-          index_scalar_loop <= ZERO;
-
           if (START = '1') then
+            -- Assignations
+            index_matrix_loop <= ZERO;
+            index_vector_loop <= ZERO;
+            index_scalar_loop <= ZERO;
+
             -- FSM Control
             convolution_ctrl_fsm_int <= INPUT_MATRIX_STATE;
           end if;
@@ -266,6 +266,7 @@ begin
 
             -- Data Inputs
             modulo_in_vector_convolution <= MODULO_IN;
+            size_in_vector_convolution   <= SIZE_J_IN;
 
             -- FSM Control
             convolution_ctrl_fsm_int <= ENDER_STATE;
@@ -311,6 +312,7 @@ begin
 
             -- Data Inputs
             modulo_in_vector_convolution <= MODULO_IN;
+            length_in_vector_convolution <= LENGTH_IN;
 
             -- FSM Control
             convolution_ctrl_fsm_int <= ENDER_STATE;

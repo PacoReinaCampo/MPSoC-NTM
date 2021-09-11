@@ -158,11 +158,11 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          -- Assignations
-          index_vector_loop <= ZERO;
-          index_scalar_loop <= ZERO;
-
           if (START = '1') then
+            -- Assignations
+            index_vector_loop <= ZERO;
+            index_scalar_loop <= ZERO;
+
             -- FSM Control
             cosine_similarity_ctrl_fsm_int <= INPUT_VECTOR_STATE;
           end if;

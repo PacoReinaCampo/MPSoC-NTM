@@ -144,10 +144,10 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          -- Assignations
-          index_loop <= ZERO;
-
           if (START = '1') then
+            -- Assignations
+            index_loop <= ZERO;
+
             -- FSM Control
             divider_ctrl_fsm_int <= INPUT_STATE;
           end if;
@@ -189,7 +189,7 @@ begin
         when ENDER_STATE =>             -- STEP 2
 
           if (ready_scalar_divider = '1') then
-            if (index_loop = std_logic_vector(unsigned(SIZE_IN)-unsigned(ONE))) then
+            if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';
 

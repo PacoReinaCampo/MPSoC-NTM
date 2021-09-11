@@ -174,12 +174,12 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          -- Assignations
-          index_matrix_loop <= ZERO;
-          index_vector_loop <= ZERO;
-          index_scalar_loop <= ZERO;
-
           if (START = '1') then
+            -- Assignations
+            index_matrix_loop <= ZERO;
+            index_vector_loop <= ZERO;
+            index_scalar_loop <= ZERO;
+
             -- FSM Control
             cosine_similarity_ctrl_fsm_int <= INPUT_MATRIX_STATE;
           end if;
@@ -266,6 +266,7 @@ begin
 
             -- Data Inputs
             modulo_in_vector_cosine_similarity <= MODULO_IN;
+            size_in_vector_cosine_similarity   <= SIZE_J_IN;
 
             -- FSM Control
             cosine_similarity_ctrl_fsm_int <= ENDER_STATE;
@@ -311,6 +312,7 @@ begin
 
             -- Data Inputs
             modulo_in_vector_cosine_similarity <= MODULO_IN;
+            length_in_vector_cosine_similarity <= LENGTH_IN;
 
             -- FSM Control
             cosine_similarity_ctrl_fsm_int <= ENDER_STATE;
