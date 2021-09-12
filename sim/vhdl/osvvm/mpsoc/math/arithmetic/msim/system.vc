@@ -27,4 +27,6 @@
 ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_root.vhd
 ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_logarithm.vhd
 
+../../../../../../../bench/vhdl/osvvm/math/arithmetic/ntm_arithmetic_pkg.vhd
 ../../../../../../../bench/vhdl/osvvm/math/arithmetic/ntm_arithmetic_testbench.vhd
+../../../../../../../bench/vhdl/osvvm/math/arithmetic/ntm_arithmetic_stimulus.vhd
