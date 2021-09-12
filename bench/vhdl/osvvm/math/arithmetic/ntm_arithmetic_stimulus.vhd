@@ -385,6 +385,13 @@ architecture ntm_arithmetic_stimulus_architecture of ntm_arithmetic_stimulus is
   constant WAITING : time := 50 ns;
   constant WORKING : time := 1000 ms;
 
+  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+
+  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+  constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
@@ -490,6 +497,9 @@ begin
       MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MOD_TEST 0          ";
       -------------------------------------------------------------------
 
+      SCALAR_MOD_MODULO_IN <= FULL;
+      SCALAR_MOD_DATA_IN   <= ONE;
+
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MOD_TEST 1          ";
       -------------------------------------------------------------------
@@ -503,10 +513,16 @@ begin
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_NTM_SCALAR_ADDER_TEST          ";
       -------------------------------------------------------------------
+      
+      SCALAR_ADDER_OPERATION <= '0';
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ADDER_CASE 0        ";
       -------------------------------------------------------------------
+
+      SCALAR_ADDER_MODULO_IN <= FULL;
+      SCALAR_ADDER_DATA_A_IN <= TWO;
+      SCALAR_ADDER_DATA_B_IN <= ONE;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ADDER_CASE 1        ";
@@ -526,6 +542,10 @@ begin
       MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULTIPLIER_CASE 0   ";
       -------------------------------------------------------------------
 
+      SCALAR_MULTIPLIER_MODULO_IN <= FULL;
+      SCALAR_MULTIPLIER_DATA_A_IN <= TWO;
+      SCALAR_MULTIPLIER_DATA_B_IN <= ONE;
+
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULTIPLIER_CASE 1   ";
       -------------------------------------------------------------------
@@ -543,6 +563,9 @@ begin
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_SCALAR_INVERTER_CASE 0     ";
       -------------------------------------------------------------------
+
+      SCALAR_INVERTER_MODULO_IN <= FULL;
+      SCALAR_INVERTER_DATA_IN   <= ONE;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_SCALAR_INVERTER_CASE 1     ";
@@ -562,6 +585,10 @@ begin
       MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIVIDER_CASE 0      ";
       -------------------------------------------------------------------
 
+      SCALAR_DIVIDER_MODULO_IN <= FULL;
+      SCALAR_DIVIDER_DATA_A_IN <= TWO;
+      SCALAR_DIVIDER_DATA_B_IN <= ONE;
+
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIVIDER_CASE 1      ";
       -------------------------------------------------------------------
@@ -579,6 +606,10 @@ begin
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE 0";
       -------------------------------------------------------------------
+
+      SCALAR_EXPONENTIATOR_MODULO_IN <= FULL;
+      SCALAR_EXPONENTIATOR_DATA_A_IN <= TWO;
+      SCALAR_EXPONENTIATOR_DATA_B_IN <= ONE;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE 1";
@@ -598,6 +629,10 @@ begin
       MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ROOT_CASE 0         ";
       -------------------------------------------------------------------
 
+      SCALAR_ROOT_MODULO_IN <= FULL;
+      SCALAR_ROOT_DATA_A_IN <= TWO;
+      SCALAR_ROOT_DATA_B_IN <= ONE;
+
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ROOT_CASE 1         ";
       -------------------------------------------------------------------
@@ -615,6 +650,10 @@ begin
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_SCALAR_LOGARITHM_CASE 0    ";
       -------------------------------------------------------------------
+
+      SCALAR_LOGARITHM_MODULO_IN <= FULL;
+      SCALAR_LOGARITHM_DATA_A_IN <= TWO;
+      SCALAR_LOGARITHM_DATA_B_IN <= ONE;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_SCALAR_LOGARITHM_CASE 1    ";
