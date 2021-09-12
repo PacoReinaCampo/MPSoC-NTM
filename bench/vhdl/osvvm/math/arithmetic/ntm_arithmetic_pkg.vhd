@@ -87,6 +87,7 @@ package ntm_arithmetic_pkg is
   constant STIMULUS_NTM_MATRIX_ROOT_TEST          : boolean := false;
   constant STIMULUS_NTM_MATRIX_LOGARITHM_TEST     : boolean := false;
 
+  -- SYSTEM-SIZE
   constant DATA_SIZE : integer := 512;
 
   constant X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
@@ -248,6 +249,10 @@ package ntm_arithmetic_pkg is
       VECTOR_MOD_START : out std_logic;
       VECTOR_MOD_READY : in  std_logic;
 
+      VECTOR_MOD_DATA_IN_ENABLE : in std_logic;
+
+      VECTOR_MOD_DATA_OUT_ENABLE : out std_logic;
+
       -- DATA
       VECTOR_MOD_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_MOD_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -260,6 +265,11 @@ package ntm_arithmetic_pkg is
 
       VECTOR_ADDER_OPERATION : out std_logic;
 
+      VECTOR_ADDER_DATA_A_IN_ENABLE : in std_logic;
+      VECTOR_ADDER_DATA_B_IN_ENABLE : in std_logic;
+
+      VECTOR_ADDER_DATA_OUT_ENABLE : out std_logic;
+
       -- DATA
       VECTOR_ADDER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -270,6 +280,11 @@ package ntm_arithmetic_pkg is
       -- CONTROL
       VECTOR_MULTIPLIER_START : out std_logic;
       VECTOR_MULTIPLIER_READY : in  std_logic;
+
+      VECTOR_MULTIPLIER_DATA_A_IN_ENABLE : in std_logic;
+      VECTOR_MULTIPLIER_DATA_B_IN_ENABLE : in std_logic;
+
+      VECTOR_MULTIPLIER_DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
       VECTOR_MULTIPLIER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -282,6 +297,10 @@ package ntm_arithmetic_pkg is
       VECTOR_INVERTER_START : out std_logic;
       VECTOR_INVERTER_READY : in  std_logic;
 
+      VECTOR_INVERTER_DATA_IN_ENABLE : in std_logic;
+
+      VECTOR_INVERTER_DATA_OUT_ENABLE : out std_logic;
+
       -- DATA
       VECTOR_INVERTER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_INVERTER_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -291,6 +310,11 @@ package ntm_arithmetic_pkg is
       -- CONTROL
       VECTOR_DIVIDER_START : out std_logic;
       VECTOR_DIVIDER_READY : in  std_logic;
+
+      VECTOR_DIVIDER_DATA_A_IN_ENABLE : in std_logic;
+      VECTOR_DIVIDER_DATA_B_IN_ENABLE : in std_logic;
+
+      VECTOR_DIVIDER_DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
       VECTOR_DIVIDER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -303,6 +327,11 @@ package ntm_arithmetic_pkg is
       VECTOR_EXPONENTIATOR_START : out std_logic;
       VECTOR_EXPONENTIATOR_READY : in  std_logic;
 
+      VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE : in std_logic;
+      VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE : in std_logic;
+
+      VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE : out std_logic;
+
       -- DATA
       VECTOR_EXPONENTIATOR_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_EXPONENTIATOR_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -314,6 +343,11 @@ package ntm_arithmetic_pkg is
       VECTOR_ROOT_START : out std_logic;
       VECTOR_ROOT_READY : in  std_logic;
 
+      VECTOR_ROOT_DATA_A_IN_ENABLE : in std_logic;
+      VECTOR_ROOT_DATA_B_IN_ENABLE : in std_logic;
+
+      VECTOR_ROOT_DATA_OUT_ENABLE : out std_logic;
+
       -- DATA
       VECTOR_ROOT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_ROOT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -324,6 +358,11 @@ package ntm_arithmetic_pkg is
       -- CONTROL
       VECTOR_LOGARITHM_START : out std_logic;
       VECTOR_LOGARITHM_READY : in  std_logic;
+
+      VECTOR_LOGARITHM_DATA_A_IN_ENABLE : in std_logic;
+      VECTOR_LOGARITHM_DATA_B_IN_ENABLE : in std_logic;
+
+      VECTOR_LOGARITHM_DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
       VECTOR_LOGARITHM_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -340,6 +379,12 @@ package ntm_arithmetic_pkg is
       MATRIX_MOD_START : out std_logic;
       MATRIX_MOD_READY : in  std_logic;
 
+      MATRIX_MOD_DATA_IN_I_ENABLE : out std_logic;
+      MATRIX_MOD_DATA_IN_J_ENABLE : out std_logic;
+
+      MATRIX_MOD_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_MOD_DATA_OUT_J_ENABLE : in std_logic;
+
       -- DATA
       MATRIX_MOD_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_MOD_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -352,6 +397,14 @@ package ntm_arithmetic_pkg is
 
       MATRIX_ADDER_OPERATION : out std_logic;
 
+      MATRIX_ADDER_DATA_A_IN_I_ENABLE : out std_logic;
+      MATRIX_ADDER_DATA_A_IN_J_ENABLE : out std_logic;
+      MATRIX_ADDER_DATA_B_IN_I_ENABLE : out std_logic;
+      MATRIX_ADDER_DATA_B_IN_J_ENABLE : out std_logic;
+
+      MATRIX_ADDER_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_ADDER_DATA_OUT_J_ENABLE : in std_logic;
+
       -- DATA
       MATRIX_ADDER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -362,6 +415,14 @@ package ntm_arithmetic_pkg is
       -- CONTROL
       MATRIX_MULTIPLIER_START : out std_logic;
       MATRIX_MULTIPLIER_READY : in  std_logic;
+
+      MATRIX_MULTIPLIER_DATA_A_IN_I_ENABLE : out std_logic;
+      MATRIX_MULTIPLIER_DATA_A_IN_J_ENABLE : out std_logic;
+      MATRIX_MULTIPLIER_DATA_B_IN_I_ENABLE : out std_logic;
+      MATRIX_MULTIPLIER_DATA_B_IN_J_ENABLE : out std_logic;
+
+      MATRIX_MULTIPLIER_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_MULTIPLIER_DATA_OUT_J_ENABLE : in std_logic;
 
       -- DATA
       MATRIX_MULTIPLIER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -374,6 +435,12 @@ package ntm_arithmetic_pkg is
       MATRIX_INVERTER_START : out std_logic;
       MATRIX_INVERTER_READY : in  std_logic;
 
+      MATRIX_INVERTER_DATA_IN_I_ENABLE : out std_logic;
+      MATRIX_INVERTER_DATA_IN_J_ENABLE : out std_logic;
+
+      MATRIX_INVERTER_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_INVERTER_DATA_OUT_J_ENABLE : in std_logic;
+
       -- DATA
       MATRIX_INVERTER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_INVERTER_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -383,6 +450,14 @@ package ntm_arithmetic_pkg is
       -- CONTROL
       MATRIX_DIVIDER_START : out std_logic;
       MATRIX_DIVIDER_READY : in  std_logic;
+
+      MATRIX_DIVIDER_DATA_A_IN_I_ENABLE : out std_logic;
+      MATRIX_DIVIDER_DATA_A_IN_J_ENABLE : out std_logic;
+      MATRIX_DIVIDER_DATA_B_IN_I_ENABLE : out std_logic;
+      MATRIX_DIVIDER_DATA_B_IN_J_ENABLE : out std_logic;
+
+      MATRIX_DIVIDER_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_DIVIDER_DATA_OUT_J_ENABLE : in std_logic;
 
       -- DATA
       MATRIX_DIVIDER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -395,6 +470,14 @@ package ntm_arithmetic_pkg is
       MATRIX_EXPONENTIATOR_START : out std_logic;
       MATRIX_EXPONENTIATOR_READY : in  std_logic;
 
+      MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE : out std_logic;
+      MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE : out std_logic;
+      MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE : out std_logic;
+      MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE : out std_logic;
+
+      MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_EXPONENTIATOR_DATA_OUT_J_ENABLE : in std_logic;
+
       -- DATA
       MATRIX_EXPONENTIATOR_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_EXPONENTIATOR_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -406,6 +489,14 @@ package ntm_arithmetic_pkg is
       MATRIX_ROOT_START : out std_logic;
       MATRIX_ROOT_READY : in  std_logic;
 
+      MATRIX_ROOT_DATA_A_IN_I_ENABLE : out std_logic;
+      MATRIX_ROOT_DATA_A_IN_J_ENABLE : out std_logic;
+      MATRIX_ROOT_DATA_B_IN_I_ENABLE : out std_logic;
+      MATRIX_ROOT_DATA_B_IN_J_ENABLE : out std_logic;
+
+      MATRIX_ROOT_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_ROOT_DATA_OUT_J_ENABLE : in std_logic;
+
       -- DATA
       MATRIX_ROOT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_ROOT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -416,6 +507,14 @@ package ntm_arithmetic_pkg is
       -- CONTROL
       MATRIX_LOGARITHM_START : out std_logic;
       MATRIX_LOGARITHM_READY : in  std_logic;
+
+      MATRIX_LOGARITHM_DATA_A_IN_I_ENABLE : out std_logic;
+      MATRIX_LOGARITHM_DATA_A_IN_J_ENABLE : out std_logic;
+      MATRIX_LOGARITHM_DATA_B_IN_I_ENABLE : out std_logic;
+      MATRIX_LOGARITHM_DATA_B_IN_J_ENABLE : out std_logic;
+
+      MATRIX_LOGARITHM_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_LOGARITHM_DATA_OUT_J_ENABLE : in std_logic;
 
       -- DATA
       MATRIX_LOGARITHM_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);

@@ -356,10 +356,10 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
 
   signal operation_matrix_adder : std_logic;
 
-  signal data_a_in_i_matrix_adder : std_logic;
-  signal data_a_in_j_matrix_adder : std_logic;
-  signal data_b_in_i_matrix_adder : std_logic;
-  signal data_b_in_j_matrix_adder : std_logic;
+  signal data_a_in_i_enable_matrix_adder : std_logic;
+  signal data_a_in_j_enable_matrix_adder : std_logic;
+  signal data_b_in_i_enable_matrix_adder : std_logic;
+  signal data_b_in_j_enable_matrix_adder : std_logic;
 
   signal data_out_i_enable_matrix_adder : std_logic;
   signal data_out_j_enable_matrix_adder : std_logic;
@@ -377,10 +377,10 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal start_matrix_multiplier : std_logic;
   signal ready_matrix_multiplier : std_logic;
 
-  signal data_a_in_i_matrix_multiplier : std_logic;
-  signal data_a_in_j_matrix_multiplier : std_logic;
-  signal data_b_in_i_matrix_multiplier : std_logic;
-  signal data_b_in_j_matrix_multiplier : std_logic;
+  signal data_a_in_i_enable_matrix_multiplier : std_logic;
+  signal data_a_in_j_enable_matrix_multiplier : std_logic;
+  signal data_b_in_i_enable_matrix_multiplier : std_logic;
+  signal data_b_in_j_enable_matrix_multiplier : std_logic;
 
   signal data_out_i_enable_matrix_multiplier : std_logic;
   signal data_out_j_enable_matrix_multiplier : std_logic;
@@ -421,8 +421,8 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_b_in_i_enable_matrix_divider : std_logic;
   signal data_b_in_j_enable_matrix_divider : std_logic;
 
-  signal data_out_i_enable_enable_matrix_divider : std_logic;
-  signal data_out_j_enable_enable_matrix_divider : std_logic;
+  signal data_out_i_enable_matrix_divider : std_logic;
+  signal data_out_j_enable_matrix_divider : std_logic;
 
   -- DATA
   signal modulo_in_matrix_divider : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -463,8 +463,8 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_b_in_i_enable_matrix_root : std_logic;
   signal data_b_in_j_enable_matrix_root : std_logic;
 
-  signal data_out_i_enable_enable_matrix_root : std_logic;
-  signal data_out_j_enable_enable_matrix_root : std_logic;
+  signal data_out_i_enable_matrix_root : std_logic;
+  signal data_out_j_enable_matrix_root : std_logic;
 
   -- DATA
   signal modulo_in_matrix_root : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -649,6 +649,10 @@ begin
       VECTOR_MOD_START => start_vector_mod,
       VECTOR_MOD_READY => ready_vector_mod,
 
+      VECTOR_MOD_DATA_IN_ENABLE => data_in_enable_vector_mod,
+
+      VECTOR_MOD_DATA_OUT_ENABLE => data_out_enable_vector_mod,
+
       -- DATA
       VECTOR_MOD_MODULO_IN => modulo_in_vector_mod,
       VECTOR_MOD_DATA_IN   => data_in_vector_mod,
@@ -661,6 +665,11 @@ begin
 
       VECTOR_ADDER_OPERATION => operation_vector_adder,
 
+      VECTOR_ADDER_DATA_A_IN_ENABLE => data_a_in_enable_vector_adder,
+      VECTOR_ADDER_DATA_B_IN_ENABLE => data_b_in_enable_vector_adder,
+
+      VECTOR_ADDER_DATA_OUT_ENABLE => data_out_enable_vector_adder,
+
       -- DATA
       VECTOR_ADDER_MODULO_IN => modulo_in_vector_adder,
       VECTOR_ADDER_DATA_A_IN => data_a_in_vector_adder,
@@ -671,6 +680,11 @@ begin
       -- CONTROL
       VECTOR_MULTIPLIER_START => start_vector_multiplier,
       VECTOR_MULTIPLIER_READY => ready_vector_multiplier,
+
+      VECTOR_MULTIPLIER_DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplier,
+      VECTOR_MULTIPLIER_DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplier,
+
+      VECTOR_MULTIPLIER_DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
       VECTOR_MULTIPLIER_MODULO_IN => modulo_in_vector_multiplier,
@@ -683,6 +697,10 @@ begin
       VECTOR_INVERTER_START => start_vector_inverter,
       VECTOR_INVERTER_READY => ready_vector_inverter,
 
+      VECTOR_INVERTER_DATA_IN_ENABLE => data_in_enable_vector_inverter,
+
+      VECTOR_INVERTER_DATA_OUT_ENABLE => data_out_enable_vector_inverter,
+
       -- DATA
       VECTOR_INVERTER_MODULO_IN => modulo_in_vector_inverter,
       VECTOR_INVERTER_DATA_IN   => data_in_vector_inverter,
@@ -692,6 +710,11 @@ begin
       -- CONTROL
       VECTOR_DIVIDER_START => start_vector_divider,
       VECTOR_DIVIDER_READY => ready_vector_divider,
+
+      VECTOR_DIVIDER_DATA_A_IN_ENABLE => data_a_in_enable_vector_divider,
+      VECTOR_DIVIDER_DATA_B_IN_ENABLE => data_b_in_enable_vector_divider,
+
+      VECTOR_DIVIDER_DATA_OUT_ENABLE => data_out_enable_vector_divider,
 
       -- DATA
       VECTOR_DIVIDER_MODULO_IN => modulo_in_vector_divider,
@@ -704,6 +727,11 @@ begin
       VECTOR_EXPONENTIATOR_START => start_vector_exponentiator,
       VECTOR_EXPONENTIATOR_READY => ready_vector_exponentiator,
 
+      VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE => data_a_in_enable_vector_exponentiator,
+      VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE => data_b_in_enable_vector_exponentiator,
+
+      VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
+
       -- DATA
       VECTOR_EXPONENTIATOR_MODULO_IN => modulo_in_vector_exponentiator,
       VECTOR_EXPONENTIATOR_DATA_A_IN => data_a_in_vector_exponentiator,
@@ -715,6 +743,11 @@ begin
       VECTOR_ROOT_START => start_vector_root,
       VECTOR_ROOT_READY => ready_vector_root,
 
+      VECTOR_ROOT_DATA_A_IN_ENABLE => data_a_in_enable_vector_root,
+      VECTOR_ROOT_DATA_B_IN_ENABLE => data_b_in_enable_vector_root,
+
+      VECTOR_ROOT_DATA_OUT_ENABLE => data_out_enable_vector_root,
+
       -- DATA
       VECTOR_ROOT_MODULO_IN => modulo_in_vector_root,
       VECTOR_ROOT_DATA_A_IN => data_a_in_vector_root,
@@ -725,6 +758,11 @@ begin
       -- CONTROL
       VECTOR_LOGARITHM_START => start_vector_logarithm,
       VECTOR_LOGARITHM_READY => ready_vector_logarithm,
+
+      VECTOR_LOGARITHM_DATA_A_IN_ENABLE => data_a_in_enable_vector_logarithm,
+      VECTOR_LOGARITHM_DATA_B_IN_ENABLE => data_b_in_enable_vector_logarithm,
+
+      VECTOR_LOGARITHM_DATA_OUT_ENABLE => data_out_enable_vector_logarithm,
 
       -- DATA
       VECTOR_LOGARITHM_MODULO_IN => modulo_in_vector_logarithm,
@@ -741,6 +779,12 @@ begin
       MATRIX_MOD_START => start_matrix_mod,
       MATRIX_MOD_READY => ready_matrix_mod,
 
+      MATRIX_MOD_DATA_IN_I_ENABLE => data_in_i_enable_matrix_mod,
+      MATRIX_MOD_DATA_IN_J_ENABLE => data_in_j_enable_matrix_mod,
+
+      MATRIX_MOD_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_mod,
+      MATRIX_MOD_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_mod,
+
       -- DATA
       MATRIX_MOD_MODULO_IN => modulo_in_matrix_mod,
       MATRIX_MOD_DATA_IN   => data_in_matrix_mod,
@@ -753,6 +797,14 @@ begin
 
       MATRIX_ADDER_OPERATION => operation_matrix_adder,
 
+      MATRIX_ADDER_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_adder,
+      MATRIX_ADDER_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_adder,
+      MATRIX_ADDER_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_adder,
+      MATRIX_ADDER_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_adder,
+
+      MATRIX_ADDER_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_adder,
+      MATRIX_ADDER_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_adder,
+
       -- DATA
       MATRIX_ADDER_MODULO_IN => modulo_in_matrix_adder,
       MATRIX_ADDER_DATA_A_IN => data_a_in_matrix_adder,
@@ -763,6 +815,14 @@ begin
       -- CONTROL
       MATRIX_MULTIPLIER_START => start_matrix_multiplier,
       MATRIX_MULTIPLIER_READY => ready_matrix_multiplier,
+
+      MATRIX_MULTIPLIER_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_multiplier,
+      MATRIX_MULTIPLIER_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_multiplier,
+      MATRIX_MULTIPLIER_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_multiplier,
+      MATRIX_MULTIPLIER_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_multiplier,
+
+      MATRIX_MULTIPLIER_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_multiplier,
+      MATRIX_MULTIPLIER_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_multiplier,
 
       -- DATA
       MATRIX_MULTIPLIER_MODULO_IN => modulo_in_matrix_multiplier,
@@ -775,6 +835,12 @@ begin
       MATRIX_INVERTER_START => start_matrix_inverter,
       MATRIX_INVERTER_READY => ready_matrix_inverter,
 
+      MATRIX_INVERTER_DATA_IN_I_ENABLE => data_in_i_enable_matrix_inverter,
+      MATRIX_INVERTER_DATA_IN_J_ENABLE => data_in_j_enable_matrix_inverter,
+
+      MATRIX_INVERTER_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_inverter,
+      MATRIX_INVERTER_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_inverter,
+
       -- DATA
       MATRIX_INVERTER_MODULO_IN => modulo_in_matrix_inverter,
       MATRIX_INVERTER_DATA_IN   => data_in_matrix_inverter,
@@ -784,6 +850,14 @@ begin
       -- CONTROL
       MATRIX_DIVIDER_START => start_matrix_divider,
       MATRIX_DIVIDER_READY => ready_matrix_divider,
+
+      MATRIX_DIVIDER_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_divider,
+      MATRIX_DIVIDER_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_divider,
+      MATRIX_DIVIDER_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_divider,
+      MATRIX_DIVIDER_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_divider,
+
+      MATRIX_DIVIDER_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_divider,
+      MATRIX_DIVIDER_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_divider,
 
       -- DATA
       MATRIX_DIVIDER_MODULO_IN => modulo_in_matrix_divider,
@@ -796,6 +870,14 @@ begin
       MATRIX_EXPONENTIATOR_START => start_matrix_exponentiator,
       MATRIX_EXPONENTIATOR_READY => ready_matrix_exponentiator,
 
+      MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_exponentiator,
+      MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_exponentiator,
+      MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_exponentiator,
+      MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_exponentiator,
+
+      MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_exponentiator,
+      MATRIX_EXPONENTIATOR_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_exponentiator,
+
       -- DATA
       MATRIX_EXPONENTIATOR_MODULO_IN => modulo_in_matrix_exponentiator,
       MATRIX_EXPONENTIATOR_DATA_A_IN => data_a_in_matrix_exponentiator,
@@ -807,6 +889,14 @@ begin
       MATRIX_ROOT_START => start_matrix_root,
       MATRIX_ROOT_READY => ready_matrix_root,
 
+      MATRIX_ROOT_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_root,
+      MATRIX_ROOT_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_root,
+      MATRIX_ROOT_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_root,
+      MATRIX_ROOT_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_root,
+
+      MATRIX_ROOT_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_root,
+      MATRIX_ROOT_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_root,
+
       -- DATA
       MATRIX_ROOT_MODULO_IN => modulo_in_matrix_root,
       MATRIX_ROOT_DATA_A_IN => data_a_in_matrix_root,
@@ -817,6 +907,14 @@ begin
       -- CONTROL
       MATRIX_LOGARITHM_START => start_matrix_logarithm,
       MATRIX_LOGARITHM_READY => ready_matrix_logarithm,
+
+      MATRIX_LOGARITHM_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_logarithm,
+      MATRIX_LOGARITHM_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_logarithm,
+      MATRIX_LOGARITHM_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_logarithm,
+      MATRIX_LOGARITHM_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_logarithm,
+
+      MATRIX_LOGARITHM_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_logarithm,
+      MATRIX_LOGARITHM_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_logarithm,
 
       -- DATA
       MATRIX_LOGARITHM_MODULO_IN => modulo_in_matrix_logarithm,
@@ -1298,10 +1396,10 @@ begin
 
         OPERATION => operation_matrix_adder,
 
-        DATA_A_IN_I_ENABLE => data_a_in_i_matrix_adder,
-        DATA_A_IN_J_ENABLE => data_a_in_j_matrix_adder,
-        DATA_B_IN_I_ENABLE => data_b_in_i_matrix_adder,
-        DATA_B_IN_J_ENABLE => data_b_in_j_matrix_adder,
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_adder,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_adder,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_adder,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_adder,
 
         DATA_OUT_I_ENABLE => data_out_i_enable_matrix_adder,
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_adder,
@@ -1331,10 +1429,10 @@ begin
         START => start_matrix_multiplier,
         READY => ready_matrix_multiplier,
 
-        DATA_A_IN_I_ENABLE => data_a_in_i_matrix_multiplier,
-        DATA_A_IN_J_ENABLE => data_a_in_j_matrix_multiplier,
-        DATA_B_IN_I_ENABLE => data_b_in_i_matrix_multiplier,
-        DATA_B_IN_J_ENABLE => data_b_in_j_matrix_multiplier,
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_multiplier,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_multiplier,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_multiplier,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_multiplier,
 
         DATA_OUT_I_ENABLE => data_out_i_enable_matrix_multiplier,
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_multiplier,
@@ -1399,8 +1497,8 @@ begin
         DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_divider,
         DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_divider,
 
-        DATA_OUT_I_ENABLE => data_out_i_enable_enable_matrix_divider,
-        DATA_OUT_J_ENABLE => data_out_j_enable_enable_matrix_divider,
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_divider,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_divider,
 
         -- DATA
         MODULO_IN => modulo_in_matrix_divider,
@@ -1465,8 +1563,8 @@ begin
         DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_root,
         DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_root,
 
-        DATA_OUT_I_ENABLE => data_out_i_enable_enable_matrix_root,
-        DATA_OUT_J_ENABLE => data_out_j_enable_enable_matrix_root,
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_root,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_root,
 
         -- DATA
         MODULO_IN => modulo_in_matrix_root,
