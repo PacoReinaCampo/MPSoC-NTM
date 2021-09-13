@@ -1820,12 +1820,72 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_MATRIX_ADDER_TEST          ";
       -------------------------------------------------------------------
 
+      -- CONTROL
+      MATRIX_ADDER_OPERATION <= '0';
+
+      -- DATA
+      MATRIX_ADDER_MODULO_IN <= FULL;
+      MATRIX_ADDER_SIZE_I_IN <= THREE;
+      MATRIX_ADDER_SIZE_J_IN <= THREE;
+
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_MATRIX_ADDER_CASE 0        ";
       -------------------------------------------------------------------
 
-      if (STIMULUS_NTM_MATRIX_ADDER_CASE_1) then
+      if (STIMULUS_NTM_MATRIX_ADDER_CASE_0) then
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        MATRIX_ADDER_DATA_A_IN_I_ENABLE <= '0';
+        MATRIX_ADDER_DATA_A_IN_J_ENABLE <= '1';
+        MATRIX_ADDER_DATA_B_IN_I_ENABLE <= '0';
+        MATRIX_ADDER_DATA_B_IN_J_ENABLE <= '1';
 
+        -- DATA
+        MATRIX_ADDER_DATA_A_IN <= ONE;
+        MATRIX_ADDER_DATA_B_IN <= ONE;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+
+        loop
+          if ((MATRIX_ADDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(MATRIX_ADDER_SIZE_I_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_ADDER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_ADDER_DATA_B_IN_I_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_ADDER_DATA_A_IN <= ONE;
+            MATRIX_ADDER_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+            index_j_loop <= ZERO;
+          elsif ((MATRIX_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(MATRIX_ADDER_SIZE_J_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_ADDER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_ADDER_DATA_B_IN_J_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_ADDER_DATA_A_IN <= ONE;
+            MATRIX_ADDER_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+          else
+            -- CONTROL
+            MATRIX_ADDER_DATA_A_IN_I_ENABLE <= '0';
+            MATRIX_ADDER_DATA_A_IN_J_ENABLE <= '0';
+            MATRIX_ADDER_DATA_B_IN_I_ENABLE <= '0';
+            MATRIX_ADDER_DATA_B_IN_J_ENABLE <= '0';
+          end if;
+
+          -- CONTROL
+          exit when MATRIX_ADDER_READY = '1';
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+        end loop;
       end if;
 
       -------------------------------------------------------------------
@@ -1833,7 +1893,59 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_ADDER_CASE_1) then
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        MATRIX_ADDER_DATA_A_IN_I_ENABLE <= '0';
+        MATRIX_ADDER_DATA_A_IN_J_ENABLE <= '1';
+        MATRIX_ADDER_DATA_B_IN_I_ENABLE <= '0';
+        MATRIX_ADDER_DATA_B_IN_J_ENABLE <= '1';
 
+        -- DATA
+        MATRIX_ADDER_DATA_A_IN <= TWO;
+        MATRIX_ADDER_DATA_B_IN <= ONE;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+
+        loop
+          if ((MATRIX_ADDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(MATRIX_ADDER_SIZE_I_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_ADDER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_ADDER_DATA_B_IN_I_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_ADDER_DATA_A_IN <= TWO;
+            MATRIX_ADDER_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+            index_j_loop <= ZERO;
+          elsif ((MATRIX_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(MATRIX_ADDER_SIZE_J_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_ADDER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_ADDER_DATA_B_IN_J_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_ADDER_DATA_A_IN <= TWO;
+            MATRIX_ADDER_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+          else
+            -- CONTROL
+            MATRIX_ADDER_DATA_A_IN_I_ENABLE <= '0';
+            MATRIX_ADDER_DATA_A_IN_J_ENABLE <= '0';
+            MATRIX_ADDER_DATA_B_IN_I_ENABLE <= '0';
+            MATRIX_ADDER_DATA_B_IN_J_ENABLE <= '0';
+          end if;
+
+          -- CONTROL
+          exit when MATRIX_ADDER_READY = '1';
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+        end loop;
       end if;
 
       wait for WORKING;
@@ -1846,12 +1958,69 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_MATRIX_MULTIPLIER_TEST     ";
       -------------------------------------------------------------------
 
+      -- DATA
+      MATRIX_MULTIPLIER_MODULO_IN <= FULL;
+      MATRIX_MULTIPLIER_SIZE_I_IN <= THREE;
+      MATRIX_MULTIPLIER_SIZE_J_IN <= THREE;
+
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_MATRIX_MULTIPLIER_CASE 0   ";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_0) then
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        MATRIX_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
+        MATRIX_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
+        MATRIX_MULTIPLIER_DATA_B_IN_I_ENABLE <= '0';
+        MATRIX_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
 
+        -- DATA
+        MATRIX_MULTIPLIER_DATA_A_IN <= ONE;
+        MATRIX_MULTIPLIER_DATA_B_IN <= ONE;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+
+        loop
+          if ((MATRIX_MULTIPLIER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(MATRIX_MULTIPLIER_SIZE_I_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_MULTIPLIER_DATA_A_IN <= ONE;
+            MATRIX_MULTIPLIER_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+            index_j_loop <= ZERO;
+          elsif ((MATRIX_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(MATRIX_MULTIPLIER_SIZE_J_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_MULTIPLIER_DATA_A_IN <= ONE;
+            MATRIX_MULTIPLIER_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+          else
+            -- CONTROL
+            MATRIX_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
+            MATRIX_MULTIPLIER_DATA_A_IN_J_ENABLE <= '0';
+            MATRIX_MULTIPLIER_DATA_B_IN_I_ENABLE <= '0';
+            MATRIX_MULTIPLIER_DATA_B_IN_J_ENABLE <= '0';
+          end if;
+
+          -- CONTROL
+          exit when MATRIX_MULTIPLIER_READY = '1';
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+        end loop;
       end if;
 
       -------------------------------------------------------------------
@@ -1859,7 +2028,59 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_1) then
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        MATRIX_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
+        MATRIX_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
+        MATRIX_MULTIPLIER_DATA_B_IN_I_ENABLE <= '0';
+        MATRIX_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
 
+        -- DATA
+        MATRIX_MULTIPLIER_DATA_A_IN <= TWO;
+        MATRIX_MULTIPLIER_DATA_B_IN <= ONE;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+
+        loop
+          if ((MATRIX_MULTIPLIER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(MATRIX_MULTIPLIER_SIZE_I_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_MULTIPLIER_DATA_A_IN <= TWO;
+            MATRIX_MULTIPLIER_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+            index_j_loop <= ZERO;
+          elsif ((MATRIX_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(MATRIX_MULTIPLIER_SIZE_J_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_MULTIPLIER_DATA_A_IN <= TWO;
+            MATRIX_MULTIPLIER_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+          else
+            -- CONTROL
+            MATRIX_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
+            MATRIX_MULTIPLIER_DATA_A_IN_J_ENABLE <= '0';
+            MATRIX_MULTIPLIER_DATA_B_IN_I_ENABLE <= '0';
+            MATRIX_MULTIPLIER_DATA_B_IN_J_ENABLE <= '0';
+          end if;
+
+          -- CONTROL
+          exit when MATRIX_MULTIPLIER_READY = '1';
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+        end loop;
       end if;
 
       wait for WORKING;
@@ -1872,6 +2093,11 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_MATRIX_INVERTER_TEST       ";
       -------------------------------------------------------------------
 
+      -- DATA
+      MATRIX_INVERTER_MODULO_IN <= FULL;
+      MATRIX_INVERTER_SIZE_I_IN <= THREE;
+      MATRIX_INVERTER_SIZE_J_IN <= THREE;
+
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_MATRIX_INVERTER_CASE 0     ";
       -------------------------------------------------------------------
@@ -1879,44 +2105,44 @@ begin
       if (STIMULUS_NTM_MATRIX_INVERTER_CASE_0) then
         -- INITIAL CONDITIONS
         -- CONTROL
-        MATRIX_MOD_DATA_IN_I_ENABLE <= '0';
-        MATRIX_MOD_DATA_IN_J_ENABLE <= '1';
+        MATRIX_INVERTER_DATA_IN_I_ENABLE <= '0';
+        MATRIX_INVERTER_DATA_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_MOD_DATA_IN <= ONE;
+        MATRIX_INVERTER_DATA_IN <= ONE;
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
 
         loop
-          if ((MATRIX_MOD_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(MATRIX_MOD_SIZE_I_IN)-unsigned(ONE))) then
+          if ((MATRIX_INVERTER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(MATRIX_INVERTER_SIZE_I_IN)-unsigned(ONE))) then
             -- CONTROL
-            MATRIX_MOD_DATA_IN_I_ENABLE <= '1';
+            MATRIX_INVERTER_DATA_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_MOD_DATA_IN <= ONE;
+            MATRIX_INVERTER_DATA_IN <= ONE;
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
             index_j_loop <= ZERO;
-          elsif ((MATRIX_MOD_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(MATRIX_MOD_SIZE_J_IN)-unsigned(ONE))) then
+          elsif ((MATRIX_INVERTER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(MATRIX_INVERTER_SIZE_J_IN)-unsigned(ONE))) then
             -- CONTROL
-            MATRIX_MOD_DATA_IN_J_ENABLE <= '1';
+            MATRIX_INVERTER_DATA_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_MOD_DATA_IN <= ONE;
+            MATRIX_INVERTER_DATA_IN <= ONE;
 
             -- LOOP
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
           else
             -- CONTROL
-            MATRIX_MOD_DATA_IN_I_ENABLE <= '0';
-            MATRIX_MOD_DATA_IN_J_ENABLE <= '0';
+            MATRIX_INVERTER_DATA_IN_I_ENABLE <= '0';
+            MATRIX_INVERTER_DATA_IN_J_ENABLE <= '0';
           end if;
 
           -- CONTROL
-          exit when MATRIX_MOD_READY = '1';
+          exit when MATRIX_INVERTER_READY = '1';
 
           -- GLOBAL
           wait until rising_edge(clk_int);
@@ -1930,44 +2156,44 @@ begin
       if (STIMULUS_NTM_MATRIX_INVERTER_CASE_1) then
         -- INITIAL CONDITIONS
         -- CONTROL
-        MATRIX_MOD_DATA_IN_I_ENABLE <= '0';
-        MATRIX_MOD_DATA_IN_J_ENABLE <= '1';
+        MATRIX_INVERTER_DATA_IN_I_ENABLE <= '0';
+        MATRIX_INVERTER_DATA_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_MOD_DATA_IN <= ONE;
+        MATRIX_INVERTER_DATA_IN <= ONE;
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
 
         loop
-          if ((MATRIX_MOD_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(MATRIX_MOD_SIZE_I_IN)-unsigned(ONE))) then
+          if ((MATRIX_INVERTER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(MATRIX_INVERTER_SIZE_I_IN)-unsigned(ONE))) then
             -- CONTROL
-            MATRIX_MOD_DATA_IN_I_ENABLE <= '1';
+            MATRIX_INVERTER_DATA_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_MOD_DATA_IN <= TWO;
+            MATRIX_INVERTER_DATA_IN <= TWO;
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
             index_j_loop <= ZERO;
-          elsif ((MATRIX_MOD_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(MATRIX_MOD_SIZE_J_IN)-unsigned(ONE))) then
+          elsif ((MATRIX_INVERTER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(MATRIX_INVERTER_SIZE_J_IN)-unsigned(ONE))) then
             -- CONTROL
-            MATRIX_MOD_DATA_IN_J_ENABLE <= '1';
+            MATRIX_INVERTER_DATA_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_MOD_DATA_IN <= TWO;
+            MATRIX_INVERTER_DATA_IN <= TWO;
 
             -- LOOP
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
           else
             -- CONTROL
-            MATRIX_MOD_DATA_IN_I_ENABLE <= '0';
-            MATRIX_MOD_DATA_IN_J_ENABLE <= '0';
+            MATRIX_INVERTER_DATA_IN_I_ENABLE <= '0';
+            MATRIX_INVERTER_DATA_IN_J_ENABLE <= '0';
           end if;
 
           -- CONTROL
-          exit when MATRIX_MOD_READY = '1';
+          exit when MATRIX_INVERTER_READY = '1';
 
           -- GLOBAL
           wait until rising_edge(clk_int);
@@ -1984,12 +2210,69 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_MATRIX_DIVIDER_TEST        ";
       -------------------------------------------------------------------
 
+      -- DATA
+      MATRIX_DIVIDER_MODULO_IN <= FULL;
+      MATRIX_DIVIDER_SIZE_I_IN <= THREE;
+      MATRIX_DIVIDER_SIZE_J_IN <= THREE;
+
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_MATRIX_DIVIDER_CASE 0      ";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_DIVIDER_CASE_0) then
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        MATRIX_DIVIDER_DATA_A_IN_I_ENABLE <= '0';
+        MATRIX_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
+        MATRIX_DIVIDER_DATA_B_IN_I_ENABLE <= '0';
+        MATRIX_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
 
+        -- DATA
+        MATRIX_DIVIDER_DATA_A_IN <= ONE;
+        MATRIX_DIVIDER_DATA_B_IN <= ONE;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+
+        loop
+          if ((MATRIX_DIVIDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(MATRIX_DIVIDER_SIZE_I_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_DIVIDER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_DIVIDER_DATA_A_IN <= ONE;
+            MATRIX_DIVIDER_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+            index_j_loop <= ZERO;
+          elsif ((MATRIX_DIVIDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(MATRIX_DIVIDER_SIZE_J_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_DIVIDER_DATA_A_IN <= ONE;
+            MATRIX_DIVIDER_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+          else
+            -- CONTROL
+            MATRIX_DIVIDER_DATA_A_IN_I_ENABLE <= '0';
+            MATRIX_DIVIDER_DATA_A_IN_J_ENABLE <= '0';
+            MATRIX_DIVIDER_DATA_B_IN_I_ENABLE <= '0';
+            MATRIX_DIVIDER_DATA_B_IN_J_ENABLE <= '0';
+          end if;
+
+          -- CONTROL
+          exit when MATRIX_DIVIDER_READY = '1';
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+        end loop;
       end if;
 
       -------------------------------------------------------------------
@@ -1997,7 +2280,59 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_DIVIDER_CASE_1) then
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        MATRIX_DIVIDER_DATA_A_IN_I_ENABLE <= '0';
+        MATRIX_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
+        MATRIX_DIVIDER_DATA_B_IN_I_ENABLE <= '0';
+        MATRIX_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
 
+        -- DATA
+        MATRIX_DIVIDER_DATA_A_IN <= TWO;
+        MATRIX_DIVIDER_DATA_B_IN <= ONE;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+
+        loop
+          if ((MATRIX_DIVIDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(MATRIX_DIVIDER_SIZE_I_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_DIVIDER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_DIVIDER_DATA_A_IN <= TWO;
+            MATRIX_DIVIDER_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+            index_j_loop <= ZERO;
+          elsif ((MATRIX_DIVIDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(MATRIX_DIVIDER_SIZE_J_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_DIVIDER_DATA_A_IN <= TWO;
+            MATRIX_DIVIDER_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+          else
+            -- CONTROL
+            MATRIX_DIVIDER_DATA_A_IN_I_ENABLE <= '0';
+            MATRIX_DIVIDER_DATA_A_IN_J_ENABLE <= '0';
+            MATRIX_DIVIDER_DATA_B_IN_I_ENABLE <= '0';
+            MATRIX_DIVIDER_DATA_B_IN_J_ENABLE <= '0';
+          end if;
+
+          -- CONTROL
+          exit when MATRIX_DIVIDER_READY = '1';
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+        end loop;
       end if;
 
       wait for WORKING;
@@ -2010,12 +2345,69 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST  ";
       -------------------------------------------------------------------
 
+      -- DATA
+      MATRIX_EXPONENTIATOR_MODULO_IN <= FULL;
+      MATRIX_EXPONENTIATOR_SIZE_I_IN <= THREE;
+      MATRIX_EXPONENTIATOR_SIZE_J_IN <= THREE;
+
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE 0";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0) then
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE <= '0';
+        MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE <= '1';
+        MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE <= '0';
+        MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '1';
 
+        -- DATA
+        MATRIX_EXPONENTIATOR_DATA_A_IN <= ONE;
+        MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+
+        loop
+          if ((MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(MATRIX_EXPONENTIATOR_SIZE_I_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_EXPONENTIATOR_DATA_A_IN <= ONE;
+            MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+            index_j_loop <= ZERO;
+          elsif ((MATRIX_EXPONENTIATOR_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(MATRIX_EXPONENTIATOR_SIZE_J_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_EXPONENTIATOR_DATA_A_IN <= ONE;
+            MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+          else
+            -- CONTROL
+            MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE <= '0';
+            MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE <= '0';
+            MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE <= '0';
+            MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '0';
+          end if;
+
+          -- CONTROL
+          exit when MATRIX_EXPONENTIATOR_READY = '1';
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+        end loop;
       end if;
 
       -------------------------------------------------------------------
@@ -2023,7 +2415,59 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1) then
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE <= '0';
+        MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE <= '1';
+        MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE <= '0';
+        MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '1';
 
+        -- DATA
+        MATRIX_EXPONENTIATOR_DATA_A_IN <= TWO;
+        MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+
+        loop
+          if ((MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(MATRIX_EXPONENTIATOR_SIZE_I_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_EXPONENTIATOR_DATA_A_IN <= TWO;
+            MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+            index_j_loop <= ZERO;
+          elsif ((MATRIX_EXPONENTIATOR_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(MATRIX_EXPONENTIATOR_SIZE_J_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_EXPONENTIATOR_DATA_A_IN <= TWO;
+            MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+          else
+            -- CONTROL
+            MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE <= '0';
+            MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE <= '0';
+            MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE <= '0';
+            MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '0';
+          end if;
+
+          -- CONTROL
+          exit when MATRIX_EXPONENTIATOR_READY = '1';
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+        end loop;
       end if;
 
       wait for WORKING;
@@ -2036,12 +2480,69 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_MATRIX_ROOT_TEST           ";
       -------------------------------------------------------------------
 
+      -- DATA
+      MATRIX_ROOT_MODULO_IN <= FULL;
+      MATRIX_ROOT_SIZE_I_IN <= THREE;
+      MATRIX_ROOT_SIZE_J_IN <= THREE;
+
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_MATRIX_ROOT_CASE 0         ";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_ROOT_CASE_0) then
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        MATRIX_ROOT_DATA_A_IN_I_ENABLE <= '0';
+        MATRIX_ROOT_DATA_A_IN_J_ENABLE <= '1';
+        MATRIX_ROOT_DATA_B_IN_I_ENABLE <= '0';
+        MATRIX_ROOT_DATA_B_IN_J_ENABLE <= '1';
 
+        -- DATA
+        MATRIX_ROOT_DATA_A_IN <= ONE;
+        MATRIX_ROOT_DATA_B_IN <= ONE;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+
+        loop
+          if ((MATRIX_ROOT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(MATRIX_ROOT_SIZE_I_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_ROOT_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_ROOT_DATA_B_IN_I_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_ROOT_DATA_A_IN <= ONE;
+            MATRIX_ROOT_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+            index_j_loop <= ZERO;
+          elsif ((MATRIX_ROOT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(MATRIX_ROOT_SIZE_J_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_ROOT_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_ROOT_DATA_B_IN_J_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_ROOT_DATA_A_IN <= ONE;
+            MATRIX_ROOT_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+          else
+            -- CONTROL
+            MATRIX_ROOT_DATA_A_IN_I_ENABLE <= '0';
+            MATRIX_ROOT_DATA_A_IN_J_ENABLE <= '0';
+            MATRIX_ROOT_DATA_B_IN_I_ENABLE <= '0';
+            MATRIX_ROOT_DATA_B_IN_J_ENABLE <= '0';
+          end if;
+
+          -- CONTROL
+          exit when MATRIX_ROOT_READY = '1';
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+        end loop;
       end if;
 
       -------------------------------------------------------------------
@@ -2049,7 +2550,59 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_ROOT_CASE_1) then
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        MATRIX_ROOT_DATA_A_IN_I_ENABLE <= '0';
+        MATRIX_ROOT_DATA_A_IN_J_ENABLE <= '1';
+        MATRIX_ROOT_DATA_B_IN_I_ENABLE <= '0';
+        MATRIX_ROOT_DATA_B_IN_J_ENABLE <= '1';
 
+        -- DATA
+        MATRIX_ROOT_DATA_A_IN <= TWO;
+        MATRIX_ROOT_DATA_B_IN <= ONE;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+
+        loop
+          if ((MATRIX_ROOT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(MATRIX_ROOT_SIZE_I_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_ROOT_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_ROOT_DATA_B_IN_I_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_ROOT_DATA_A_IN <= TWO;
+            MATRIX_ROOT_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+            index_j_loop <= ZERO;
+          elsif ((MATRIX_ROOT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(MATRIX_ROOT_SIZE_J_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_ROOT_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_ROOT_DATA_B_IN_J_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_ROOT_DATA_A_IN <= TWO;
+            MATRIX_ROOT_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+          else
+            -- CONTROL
+            MATRIX_ROOT_DATA_A_IN_I_ENABLE <= '0';
+            MATRIX_ROOT_DATA_A_IN_J_ENABLE <= '0';
+            MATRIX_ROOT_DATA_B_IN_I_ENABLE <= '0';
+            MATRIX_ROOT_DATA_B_IN_J_ENABLE <= '0';
+          end if;
+
+          -- CONTROL
+          exit when MATRIX_ROOT_READY = '1';
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+        end loop;
       end if;
 
       wait for WORKING;
@@ -2062,12 +2615,69 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_MATRIX_LOGARITHM_TEST      ";
       -------------------------------------------------------------------
 
+      -- DATA
+      MATRIX_LOGARITHM_MODULO_IN <= FULL;
+      MATRIX_LOGARITHM_SIZE_I_IN <= THREE;
+      MATRIX_LOGARITHM_SIZE_J_IN <= THREE;
+
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_MATRIX_LOGARITHM_CASE 0    ";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_LOGARITHM_CASE_0) then
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        MATRIX_LOGARITHM_DATA_A_IN_I_ENABLE <= '0';
+        MATRIX_LOGARITHM_DATA_A_IN_J_ENABLE <= '1';
+        MATRIX_LOGARITHM_DATA_B_IN_I_ENABLE <= '0';
+        MATRIX_LOGARITHM_DATA_B_IN_J_ENABLE <= '1';
 
+        -- DATA
+        MATRIX_LOGARITHM_DATA_A_IN <= ONE;
+        MATRIX_LOGARITHM_DATA_B_IN <= ONE;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+
+        loop
+          if ((MATRIX_LOGARITHM_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(MATRIX_LOGARITHM_SIZE_I_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_LOGARITHM_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_LOGARITHM_DATA_B_IN_I_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_LOGARITHM_DATA_A_IN <= ONE;
+            MATRIX_LOGARITHM_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+            index_j_loop <= ZERO;
+          elsif ((MATRIX_LOGARITHM_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(MATRIX_LOGARITHM_SIZE_J_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_LOGARITHM_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_LOGARITHM_DATA_B_IN_J_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_LOGARITHM_DATA_A_IN <= ONE;
+            MATRIX_LOGARITHM_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+          else
+            -- CONTROL
+            MATRIX_LOGARITHM_DATA_A_IN_I_ENABLE <= '0';
+            MATRIX_LOGARITHM_DATA_A_IN_J_ENABLE <= '0';
+            MATRIX_LOGARITHM_DATA_B_IN_I_ENABLE <= '0';
+            MATRIX_LOGARITHM_DATA_B_IN_J_ENABLE <= '0';
+          end if;
+
+          -- CONTROL
+          exit when MATRIX_LOGARITHM_READY = '1';
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+        end loop;
       end if;
 
       -------------------------------------------------------------------
@@ -2075,7 +2685,59 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_LOGARITHM_CASE_1) then
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        MATRIX_LOGARITHM_DATA_A_IN_I_ENABLE <= '0';
+        MATRIX_LOGARITHM_DATA_A_IN_J_ENABLE <= '1';
+        MATRIX_LOGARITHM_DATA_B_IN_I_ENABLE <= '0';
+        MATRIX_LOGARITHM_DATA_B_IN_J_ENABLE <= '1';
 
+        -- DATA
+        MATRIX_LOGARITHM_DATA_A_IN <= TWO;
+        MATRIX_LOGARITHM_DATA_B_IN <= ONE;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+
+        loop
+          if ((MATRIX_LOGARITHM_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(MATRIX_LOGARITHM_SIZE_I_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_LOGARITHM_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_LOGARITHM_DATA_B_IN_I_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_LOGARITHM_DATA_A_IN <= TWO;
+            MATRIX_LOGARITHM_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+            index_j_loop <= ZERO;
+          elsif ((MATRIX_LOGARITHM_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(MATRIX_LOGARITHM_SIZE_J_IN)-unsigned(ONE))) then
+            -- CONTROL
+            MATRIX_LOGARITHM_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_LOGARITHM_DATA_B_IN_J_ENABLE <= '1';
+
+            -- DATA
+            MATRIX_LOGARITHM_DATA_A_IN <= TWO;
+            MATRIX_LOGARITHM_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+          else
+            -- CONTROL
+            MATRIX_LOGARITHM_DATA_A_IN_I_ENABLE <= '0';
+            MATRIX_LOGARITHM_DATA_A_IN_J_ENABLE <= '0';
+            MATRIX_LOGARITHM_DATA_B_IN_I_ENABLE <= '0';
+            MATRIX_LOGARITHM_DATA_B_IN_J_ENABLE <= '0';
+          end if;
+
+          -- CONTROL
+          exit when MATRIX_LOGARITHM_READY = '1';
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+        end loop;
       end if;
 
       wait for WORKING;
