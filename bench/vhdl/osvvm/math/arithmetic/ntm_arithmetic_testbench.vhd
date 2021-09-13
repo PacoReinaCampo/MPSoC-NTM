@@ -45,6 +45,16 @@ use work.ntm_arithmetic_pkg.all;
 
 entity ntm_arithmetic_testbench is
   generic (
+    -- SYSTEM-SIZE
+    DATA_SIZE : integer := 512;
+
+    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
+
     -- SCALAR-FUNCTIONALITY
     ENABLE_NTM_SCALAR_MOD_TEST           : boolean := false;
     ENABLE_NTM_SCALAR_ADDER_TEST         : boolean := false;
@@ -73,17 +83,7 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_MATRIX_DIVIDER_TEST       : boolean := false;
     ENABLE_NTM_MATRIX_EXPONENTIATOR_TEST : boolean := false;
     ENABLE_NTM_MATRIX_ROOT_TEST          : boolean := false;
-    ENABLE_NTM_MATRIX_LOGARITHM_TEST     : boolean := false;
-
-    -- SYSTEM-SIZE
-    DATA_SIZE : integer := 512;
-
-    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
-    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
-    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
-    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
-    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
-    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i in 0 to R-1
+    ENABLE_NTM_MATRIX_LOGARITHM_TEST     : boolean := false
     );
 end ntm_arithmetic_testbench;
 
@@ -503,6 +503,16 @@ begin
 
   arithmetic_stimulus : ntm_arithmetic_stimulus
     generic map (
+      -- SYSTEM-SIZE
+      DATA_SIZE => DATA_SIZE,
+
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R,
+
       -- SCALAR-FUNCTIONALITY
       STIMULUS_NTM_SCALAR_MOD_TEST           => STIMULUS_NTM_SCALAR_MOD_TEST,
       STIMULUS_NTM_SCALAR_ADDER_TEST         => STIMULUS_NTM_SCALAR_ADDER_TEST,
@@ -531,17 +541,7 @@ begin
       STIMULUS_NTM_MATRIX_DIVIDER_TEST       => STIMULUS_NTM_MATRIX_DIVIDER_TEST,
       STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST => STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST,
       STIMULUS_NTM_MATRIX_ROOT_TEST          => STIMULUS_NTM_MATRIX_ROOT_TEST,
-      STIMULUS_NTM_MATRIX_LOGARITHM_TEST     => STIMULUS_NTM_MATRIX_LOGARITHM_TEST,
-
-      -- SYSTEM-SIZE
-      DATA_SIZE => DATA_SIZE,
-
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R
+      STIMULUS_NTM_MATRIX_LOGARITHM_TEST     => STIMULUS_NTM_MATRIX_LOGARITHM_TEST
       )
     port map (
       -- GLOBAL
@@ -655,6 +655,7 @@ begin
 
       -- DATA
       VECTOR_MOD_MODULO_IN => modulo_in_vector_mod,
+      VECTOR_MOD_SIZE_IN   => size_in_vector_mod,
       VECTOR_MOD_DATA_IN   => data_in_vector_mod,
       VECTOR_MOD_DATA_OUT  => data_out_vector_mod,
 
@@ -672,6 +673,7 @@ begin
 
       -- DATA
       VECTOR_ADDER_MODULO_IN => modulo_in_vector_adder,
+      VECTOR_ADDER_SIZE_IN   => size_in_vector_adder,
       VECTOR_ADDER_DATA_A_IN => data_a_in_vector_adder,
       VECTOR_ADDER_DATA_B_IN => data_b_in_vector_adder,
       VECTOR_ADDER_DATA_OUT  => data_out_vector_adder,
@@ -688,6 +690,7 @@ begin
 
       -- DATA
       VECTOR_MULTIPLIER_MODULO_IN => modulo_in_vector_multiplier,
+      VECTOR_MULTIPLIER_SIZE_IN   => size_in_vector_multiplier,
       VECTOR_MULTIPLIER_DATA_A_IN => data_a_in_vector_multiplier,
       VECTOR_MULTIPLIER_DATA_B_IN => data_b_in_vector_multiplier,
       VECTOR_MULTIPLIER_DATA_OUT  => data_out_vector_multiplier,
@@ -703,6 +706,7 @@ begin
 
       -- DATA
       VECTOR_INVERTER_MODULO_IN => modulo_in_vector_inverter,
+      VECTOR_INVERTER_SIZE_IN   => size_in_vector_inverter,
       VECTOR_INVERTER_DATA_IN   => data_in_vector_inverter,
       VECTOR_INVERTER_DATA_OUT  => data_out_vector_inverter,
 
@@ -718,6 +722,7 @@ begin
 
       -- DATA
       VECTOR_DIVIDER_MODULO_IN => modulo_in_vector_divider,
+      VECTOR_DIVIDER_SIZE_IN   => size_in_vector_divider,
       VECTOR_DIVIDER_DATA_A_IN => data_a_in_vector_divider,
       VECTOR_DIVIDER_DATA_B_IN => data_b_in_vector_divider,
       VECTOR_DIVIDER_DATA_OUT  => data_out_vector_divider,
@@ -734,6 +739,7 @@ begin
 
       -- DATA
       VECTOR_EXPONENTIATOR_MODULO_IN => modulo_in_vector_exponentiator,
+      VECTOR_EXPONENTIATOR_SIZE_IN   => size_in_vector_exponentiator,
       VECTOR_EXPONENTIATOR_DATA_A_IN => data_a_in_vector_exponentiator,
       VECTOR_EXPONENTIATOR_DATA_B_IN => data_b_in_vector_exponentiator,
       VECTOR_EXPONENTIATOR_DATA_OUT  => data_out_vector_exponentiator,
@@ -750,6 +756,7 @@ begin
 
       -- DATA
       VECTOR_ROOT_MODULO_IN => modulo_in_vector_root,
+      VECTOR_ROOT_SIZE_IN   => size_in_vector_root,
       VECTOR_ROOT_DATA_A_IN => data_a_in_vector_root,
       VECTOR_ROOT_DATA_B_IN => data_b_in_vector_root,
       VECTOR_ROOT_DATA_OUT  => data_out_vector_root,
@@ -766,6 +773,7 @@ begin
 
       -- DATA
       VECTOR_LOGARITHM_MODULO_IN => modulo_in_vector_logarithm,
+      VECTOR_LOGARITHM_SIZE_IN   => size_in_vector_logarithm,
       VECTOR_LOGARITHM_DATA_A_IN => data_a_in_vector_logarithm,
       VECTOR_LOGARITHM_DATA_B_IN => data_b_in_vector_logarithm,
       VECTOR_LOGARITHM_DATA_OUT  => data_out_vector_logarithm,
@@ -787,6 +795,8 @@ begin
 
       -- DATA
       MATRIX_MOD_MODULO_IN => modulo_in_matrix_mod,
+      MATRIX_MOD_SIZE_I_IN => size_i_in_matrix_mod,
+      MATRIX_MOD_SIZE_J_IN => size_j_in_matrix_mod,
       MATRIX_MOD_DATA_IN   => data_in_matrix_mod,
       MATRIX_MOD_DATA_OUT  => data_out_matrix_mod,
 
@@ -807,6 +817,8 @@ begin
 
       -- DATA
       MATRIX_ADDER_MODULO_IN => modulo_in_matrix_adder,
+      MATRIX_ADDER_SIZE_I_IN => size_i_in_matrix_adder,
+      MATRIX_ADDER_SIZE_J_IN => size_j_in_matrix_adder,
       MATRIX_ADDER_DATA_A_IN => data_a_in_matrix_adder,
       MATRIX_ADDER_DATA_B_IN => data_b_in_matrix_adder,
       MATRIX_ADDER_DATA_OUT  => data_out_matrix_adder,
@@ -826,6 +838,8 @@ begin
 
       -- DATA
       MATRIX_MULTIPLIER_MODULO_IN => modulo_in_matrix_multiplier,
+      MATRIX_MULTIPLIER_SIZE_I_IN => size_i_in_matrix_multiplier,
+      MATRIX_MULTIPLIER_SIZE_J_IN => size_j_in_matrix_multiplier,
       MATRIX_MULTIPLIER_DATA_A_IN => data_a_in_matrix_multiplier,
       MATRIX_MULTIPLIER_DATA_B_IN => data_b_in_matrix_multiplier,
       MATRIX_MULTIPLIER_DATA_OUT  => data_out_matrix_multiplier,
@@ -843,6 +857,8 @@ begin
 
       -- DATA
       MATRIX_INVERTER_MODULO_IN => modulo_in_matrix_inverter,
+      MATRIX_INVERTER_SIZE_I_IN => size_i_in_matrix_inverter,
+      MATRIX_INVERTER_SIZE_J_IN => size_j_in_matrix_inverter,
       MATRIX_INVERTER_DATA_IN   => data_in_matrix_inverter,
       MATRIX_INVERTER_DATA_OUT  => data_out_matrix_inverter,
 
@@ -861,6 +877,8 @@ begin
 
       -- DATA
       MATRIX_DIVIDER_MODULO_IN => modulo_in_matrix_divider,
+      MATRIX_DIVIDER_SIZE_I_IN => size_i_in_matrix_divider,
+      MATRIX_DIVIDER_SIZE_J_IN => size_j_in_matrix_divider,
       MATRIX_DIVIDER_DATA_A_IN => data_a_in_matrix_divider,
       MATRIX_DIVIDER_DATA_B_IN => data_b_in_matrix_divider,
       MATRIX_DIVIDER_DATA_OUT  => data_out_matrix_divider,
@@ -880,6 +898,8 @@ begin
 
       -- DATA
       MATRIX_EXPONENTIATOR_MODULO_IN => modulo_in_matrix_exponentiator,
+      MATRIX_EXPONENTIATOR_SIZE_I_IN => size_i_in_matrix_exponentiator,
+      MATRIX_EXPONENTIATOR_SIZE_J_IN => size_j_in_matrix_exponentiator,
       MATRIX_EXPONENTIATOR_DATA_A_IN => data_a_in_matrix_exponentiator,
       MATRIX_EXPONENTIATOR_DATA_B_IN => data_b_in_matrix_exponentiator,
       MATRIX_EXPONENTIATOR_DATA_OUT  => data_out_matrix_exponentiator,
@@ -899,6 +919,8 @@ begin
 
       -- DATA
       MATRIX_ROOT_MODULO_IN => modulo_in_matrix_root,
+      MATRIX_ROOT_SIZE_I_IN => size_i_in_matrix_root,
+      MATRIX_ROOT_SIZE_J_IN => size_j_in_matrix_root,
       MATRIX_ROOT_DATA_A_IN => data_a_in_matrix_root,
       MATRIX_ROOT_DATA_B_IN => data_b_in_matrix_root,
       MATRIX_ROOT_DATA_OUT  => data_out_matrix_root,
@@ -918,6 +940,8 @@ begin
 
       -- DATA
       MATRIX_LOGARITHM_MODULO_IN => modulo_in_matrix_logarithm,
+      MATRIX_LOGARITHM_SIZE_I_IN => size_i_in_matrix_logarithm,
+      MATRIX_LOGARITHM_SIZE_J_IN => size_j_in_matrix_logarithm,
       MATRIX_LOGARITHM_DATA_A_IN => data_a_in_matrix_logarithm,
       MATRIX_LOGARITHM_DATA_B_IN => data_b_in_matrix_logarithm,
       MATRIX_LOGARITHM_DATA_OUT  => data_out_matrix_logarithm

@@ -47,6 +47,16 @@ use work.ntm_arithmetic_pkg.all;
 
 entity ntm_arithmetic_stimulus is
   generic (
+    -- SYSTEM-SIZE
+    DATA_SIZE : integer := 512;
+
+    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
+
     -- SCALAR-FUNCTIONALITY
     STIMULUS_NTM_SCALAR_MOD_TEST           : boolean := false;
     STIMULUS_NTM_SCALAR_ADDER_TEST         : boolean := false;
@@ -75,17 +85,7 @@ entity ntm_arithmetic_stimulus is
     STIMULUS_NTM_MATRIX_DIVIDER_TEST       : boolean := false;
     STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST : boolean := false;
     STIMULUS_NTM_MATRIX_ROOT_TEST          : boolean := false;
-    STIMULUS_NTM_MATRIX_LOGARITHM_TEST     : boolean := false;
-
-    -- SYSTEM-SIZE
-    DATA_SIZE : integer := 512;
-
-    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
-    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
-    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
-    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
-    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
-    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i in 0 to R-1
+    STIMULUS_NTM_MATRIX_LOGARITHM_TEST     : boolean := false
     );
   port (
     -- GLOBAL
@@ -193,12 +193,13 @@ entity ntm_arithmetic_stimulus is
     VECTOR_MOD_START : out std_logic;
     VECTOR_MOD_READY : in  std_logic;
 
-    VECTOR_MOD_DATA_IN_ENABLE : in std_logic;
+    VECTOR_MOD_DATA_IN_ENABLE : out std_logic;
 
-    VECTOR_MOD_DATA_OUT_ENABLE : out std_logic;
+    VECTOR_MOD_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
     VECTOR_MOD_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_MOD_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_MOD_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_MOD_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -209,13 +210,14 @@ entity ntm_arithmetic_stimulus is
 
     VECTOR_ADDER_OPERATION : out std_logic;
 
-    VECTOR_ADDER_DATA_A_IN_ENABLE : in std_logic;
-    VECTOR_ADDER_DATA_B_IN_ENABLE : in std_logic;
+    VECTOR_ADDER_DATA_A_IN_ENABLE : out std_logic;
+    VECTOR_ADDER_DATA_B_IN_ENABLE : out std_logic;
 
-    VECTOR_ADDER_DATA_OUT_ENABLE : out std_logic;
+    VECTOR_ADDER_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
     VECTOR_ADDER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_ADDER_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_ADDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -225,13 +227,14 @@ entity ntm_arithmetic_stimulus is
     VECTOR_MULTIPLIER_START : out std_logic;
     VECTOR_MULTIPLIER_READY : in  std_logic;
 
-    VECTOR_MULTIPLIER_DATA_A_IN_ENABLE : in std_logic;
-    VECTOR_MULTIPLIER_DATA_B_IN_ENABLE : in std_logic;
+    VECTOR_MULTIPLIER_DATA_A_IN_ENABLE : out std_logic;
+    VECTOR_MULTIPLIER_DATA_B_IN_ENABLE : out std_logic;
 
-    VECTOR_MULTIPLIER_DATA_OUT_ENABLE : out std_logic;
+    VECTOR_MULTIPLIER_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
     VECTOR_MULTIPLIER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_MULTIPLIER_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -241,12 +244,13 @@ entity ntm_arithmetic_stimulus is
     VECTOR_INVERTER_START : out std_logic;
     VECTOR_INVERTER_READY : in  std_logic;
 
-    VECTOR_INVERTER_DATA_IN_ENABLE : in std_logic;
+    VECTOR_INVERTER_DATA_IN_ENABLE : out std_logic;
 
-    VECTOR_INVERTER_DATA_OUT_ENABLE : out std_logic;
+    VECTOR_INVERTER_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
     VECTOR_INVERTER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_INVERTER_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_INVERTER_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_INVERTER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -255,13 +259,14 @@ entity ntm_arithmetic_stimulus is
     VECTOR_DIVIDER_START : out std_logic;
     VECTOR_DIVIDER_READY : in  std_logic;
 
-    VECTOR_DIVIDER_DATA_A_IN_ENABLE : in std_logic;
-    VECTOR_DIVIDER_DATA_B_IN_ENABLE : in std_logic;
+    VECTOR_DIVIDER_DATA_A_IN_ENABLE : out std_logic;
+    VECTOR_DIVIDER_DATA_B_IN_ENABLE : out std_logic;
 
-    VECTOR_DIVIDER_DATA_OUT_ENABLE : out std_logic;
+    VECTOR_DIVIDER_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
     VECTOR_DIVIDER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_DIVIDER_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -271,13 +276,14 @@ entity ntm_arithmetic_stimulus is
     VECTOR_EXPONENTIATOR_START : out std_logic;
     VECTOR_EXPONENTIATOR_READY : in  std_logic;
 
-    VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE : in std_logic;
-    VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE : in std_logic;
+    VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE : out std_logic;
+    VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE : out std_logic;
 
-    VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE : out std_logic;
+    VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
     VECTOR_EXPONENTIATOR_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_EXPONENTIATOR_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_EXPONENTIATOR_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_EXPONENTIATOR_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -287,13 +293,14 @@ entity ntm_arithmetic_stimulus is
     VECTOR_ROOT_START : out std_logic;
     VECTOR_ROOT_READY : in  std_logic;
 
-    VECTOR_ROOT_DATA_A_IN_ENABLE : in std_logic;
-    VECTOR_ROOT_DATA_B_IN_ENABLE : in std_logic;
+    VECTOR_ROOT_DATA_A_IN_ENABLE : out std_logic;
+    VECTOR_ROOT_DATA_B_IN_ENABLE : out std_logic;
 
-    VECTOR_ROOT_DATA_OUT_ENABLE : out std_logic;
+    VECTOR_ROOT_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
     VECTOR_ROOT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_ROOT_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_ROOT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_ROOT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_ROOT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -303,13 +310,14 @@ entity ntm_arithmetic_stimulus is
     VECTOR_LOGARITHM_START : out std_logic;
     VECTOR_LOGARITHM_READY : in  std_logic;
 
-    VECTOR_LOGARITHM_DATA_A_IN_ENABLE : in std_logic;
-    VECTOR_LOGARITHM_DATA_B_IN_ENABLE : in std_logic;
+    VECTOR_LOGARITHM_DATA_A_IN_ENABLE : out std_logic;
+    VECTOR_LOGARITHM_DATA_B_IN_ENABLE : out std_logic;
 
-    VECTOR_LOGARITHM_DATA_OUT_ENABLE : out std_logic;
+    VECTOR_LOGARITHM_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
     VECTOR_LOGARITHM_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_LOGARITHM_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_LOGARITHM_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_LOGARITHM_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_LOGARITHM_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -331,6 +339,8 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     MATRIX_MOD_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_MOD_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_MOD_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_MOD_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_MOD_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -351,6 +361,8 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     MATRIX_ADDER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_ADDER_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_ADDER_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_ADDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -370,6 +382,8 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     MATRIX_MULTIPLIER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_MULTIPLIER_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_MULTIPLIER_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -387,6 +401,8 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     MATRIX_INVERTER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_INVERTER_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_INVERTER_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_INVERTER_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_INVERTER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -405,6 +421,8 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     MATRIX_DIVIDER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_DIVIDER_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_DIVIDER_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -424,6 +442,8 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     MATRIX_EXPONENTIATOR_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_EXPONENTIATOR_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_EXPONENTIATOR_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_EXPONENTIATOR_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_EXPONENTIATOR_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -443,6 +463,8 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     MATRIX_ROOT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_ROOT_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_ROOT_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_ROOT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_ROOT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_ROOT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -462,6 +484,8 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     MATRIX_LOGARITHM_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_LOGARITHM_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_LOGARITHM_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_LOGARITHM_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_LOGARITHM_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_LOGARITHM_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
@@ -493,6 +517,10 @@ architecture ntm_arithmetic_stimulus_architecture of ntm_arithmetic_stimulus is
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- LOOP
+  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0) := ONE;
+  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0) := ONE;
 
   -- GLOBAL
   signal clk_int : std_logic;
@@ -771,9 +799,45 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_VECTOR_MOD_TEST            ";
       -------------------------------------------------------------------
 
+      -- DATA
+      VECTOR_MOD_MODULO_IN <= FULL;
+      VECTOR_MOD_SIZE_IN   <= THREE;
+
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_MOD_TEST 0          ";
       -------------------------------------------------------------------
+
+      -- INITIAL CONDITIONS
+      -- CONTROL
+      VECTOR_MOD_DATA_IN_ENABLE <= '1';
+
+      -- DATA
+      VECTOR_MOD_DATA_IN <= ONE;
+
+      -- LOOP
+      index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+
+      loop
+        if ((VECTOR_MOD_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(VECTOR_MOD_SIZE_IN)-unsigned(ONE))) then
+          -- CONTROL
+          VECTOR_MOD_DATA_IN_ENABLE <= '1';
+
+          -- DATA
+          VECTOR_MOD_DATA_IN <= ONE;
+
+          -- LOOP
+          index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        else
+          -- CONTROL
+          VECTOR_MOD_DATA_IN_ENABLE <= '0';
+        end if;
+
+        -- CONTROL
+        exit when VECTOR_MOD_READY = '1';
+
+        -- GLOBAL
+        wait until rising_edge(clk_int);
+      end loop;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_MOD_TEST 1          ";
@@ -789,9 +853,53 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_VECTOR_ADDER_TEST          ";
       -------------------------------------------------------------------
 
+      -- DATA
+      VECTOR_ADDER_MODULO_IN <= FULL;
+      VECTOR_ADDER_SIZE_IN   <= THREE;
+
+      -- OPERATION
+      VECTOR_ADDER_OPERATION <= '0';
+
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_ADDER_CASE 0        ";
       -------------------------------------------------------------------
+
+      -- INITIAL CONDITIONS
+      -- CONTROL
+      VECTOR_ADDER_DATA_A_IN_ENABLE <= '1';
+      VECTOR_ADDER_DATA_B_IN_ENABLE <= '1';
+
+      -- DATA
+      VECTOR_ADDER_DATA_A_IN <= TWO;
+      VECTOR_ADDER_DATA_B_IN <= ONE;
+
+      -- LOOP
+      index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+
+      loop
+        if ((VECTOR_ADDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(VECTOR_ADDER_SIZE_IN)-unsigned(ONE))) then
+          -- CONTROL
+          VECTOR_ADDER_DATA_A_IN_ENABLE <= '1';
+          VECTOR_ADDER_DATA_B_IN_ENABLE <= '1';
+
+          -- DATA
+          VECTOR_ADDER_DATA_A_IN <= TWO;
+          VECTOR_ADDER_DATA_B_IN <= ONE;
+
+          -- LOOP
+          index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        else
+          -- CONTROL
+          VECTOR_ADDER_DATA_A_IN_ENABLE <= '0';
+          VECTOR_ADDER_DATA_B_IN_ENABLE <= '0';
+        end if;
+
+        -- CONTROL
+        exit when VECTOR_ADDER_READY = '1';
+
+        -- GLOBAL
+        wait until rising_edge(clk_int);
+      end loop;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_ADDER_CASE 1        ";
@@ -807,9 +915,50 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_VECTOR_MULTIPLIER_TEST     ";
       -------------------------------------------------------------------
 
+      -- DATA
+      VECTOR_MULTIPLIER_MODULO_IN <= FULL;
+      VECTOR_MULTIPLIER_SIZE_IN   <= THREE;
+
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_MULTIPLIER_CASE 0   ";
       -------------------------------------------------------------------
+
+      -- INITIAL CONDITIONS
+      -- CONTROL
+      VECTOR_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
+      VECTOR_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
+
+      -- DATA
+      VECTOR_MULTIPLIER_DATA_A_IN <= TWO;
+      VECTOR_MULTIPLIER_DATA_B_IN <= ONE;
+
+      -- LOOP
+      index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+
+      loop
+        if ((VECTOR_MULTIPLIER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(VECTOR_MULTIPLIER_SIZE_IN)-unsigned(ONE))) then
+          -- CONTROL
+          VECTOR_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
+          VECTOR_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
+
+          -- DATA
+          VECTOR_MULTIPLIER_DATA_A_IN <= TWO;
+          VECTOR_MULTIPLIER_DATA_B_IN <= ONE;
+
+          -- LOOP
+          index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        else
+          -- CONTROL
+          VECTOR_MULTIPLIER_DATA_A_IN_ENABLE <= '0';
+          VECTOR_MULTIPLIER_DATA_B_IN_ENABLE <= '0';
+        end if;
+
+        -- CONTROL
+        exit when VECTOR_MULTIPLIER_READY = '1';
+
+        -- GLOBAL
+        wait until rising_edge(clk_int);
+      end loop;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_MULTIPLIER_CASE 1   ";
@@ -825,9 +974,45 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_VECTOR_INVERTER_TEST       ";
       -------------------------------------------------------------------
 
+      -- DATA
+      VECTOR_INVERTER_MODULO_IN <= FULL;
+      VECTOR_INVERTER_SIZE_IN   <= THREE;
+
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_INVERTER_CASE 0     ";
       -------------------------------------------------------------------
+
+      -- INITIAL CONDITIONS
+      -- CONTROL
+      VECTOR_INVERTER_DATA_IN_ENABLE <= '1';
+
+      -- DATA
+      VECTOR_INVERTER_DATA_IN <= ONE;
+
+      -- LOOP
+      index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+
+      loop
+        if ((VECTOR_INVERTER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(VECTOR_INVERTER_SIZE_IN)-unsigned(ONE))) then
+          -- CONTROL
+          VECTOR_INVERTER_DATA_IN_ENABLE <= '1';
+
+          -- DATA
+          VECTOR_INVERTER_DATA_IN <= ONE;
+
+          -- LOOP
+          index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        else
+          -- CONTROL
+          VECTOR_INVERTER_DATA_IN_ENABLE <= '0';
+        end if;
+
+        -- CONTROL
+        exit when VECTOR_INVERTER_READY = '1';
+
+        -- GLOBAL
+        wait until rising_edge(clk_int);
+      end loop;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_INVERTER_CASE 1     ";
@@ -843,9 +1028,50 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_VECTOR_DIVIDER_TEST        ";
       -------------------------------------------------------------------
 
+      -- DATA
+      VECTOR_DIVIDER_MODULO_IN <= FULL;
+      VECTOR_DIVIDER_SIZE_IN   <= THREE;
+
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_DIVIDER_CASE 0      ";
       -------------------------------------------------------------------
+
+      -- INITIAL CONDITIONS
+      -- CONTROL
+      VECTOR_DIVIDER_DATA_A_IN_ENABLE <= '1';
+      VECTOR_DIVIDER_DATA_B_IN_ENABLE <= '1';
+
+      -- DATA
+      VECTOR_DIVIDER_DATA_A_IN <= TWO;
+      VECTOR_DIVIDER_DATA_B_IN <= ONE;
+
+      -- LOOP
+      index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+
+      loop
+        if ((VECTOR_DIVIDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(VECTOR_DIVIDER_SIZE_IN)-unsigned(ONE))) then
+          -- CONTROL
+          VECTOR_DIVIDER_DATA_A_IN_ENABLE <= '1';
+          VECTOR_DIVIDER_DATA_B_IN_ENABLE <= '1';
+
+          -- DATA
+          VECTOR_DIVIDER_DATA_A_IN <= TWO;
+          VECTOR_DIVIDER_DATA_B_IN <= ONE;
+
+          -- LOOP
+          index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        else
+          -- CONTROL
+          VECTOR_DIVIDER_DATA_A_IN_ENABLE <= '0';
+          VECTOR_DIVIDER_DATA_B_IN_ENABLE <= '0';
+        end if;
+
+        -- CONTROL
+        exit when VECTOR_DIVIDER_READY = '1';
+
+        -- GLOBAL
+        wait until rising_edge(clk_int);
+      end loop;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_DIVIDER_CASE 1      ";
@@ -861,9 +1087,50 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST  ";
       -------------------------------------------------------------------
 
+      -- DATA
+      VECTOR_EXPONENTIATOR_MODULO_IN <= FULL;
+      VECTOR_EXPONENTIATOR_SIZE_IN   <= THREE;
+
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE 0";
       -------------------------------------------------------------------
+
+      -- INITIAL CONDITIONS
+      -- CONTROL
+      VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE <= '1';
+      VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE <= '1';
+
+      -- DATA
+      VECTOR_EXPONENTIATOR_DATA_A_IN <= TWO;
+      VECTOR_EXPONENTIATOR_DATA_B_IN <= ONE;
+
+      -- LOOP
+      index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+
+      loop
+        if ((VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(VECTOR_EXPONENTIATOR_SIZE_IN)-unsigned(ONE))) then
+          -- CONTROL
+          VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE <= '1';
+          VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE <= '1';
+
+          -- DATA
+          VECTOR_EXPONENTIATOR_DATA_A_IN <= TWO;
+          VECTOR_EXPONENTIATOR_DATA_B_IN <= ONE;
+
+          -- LOOP
+          index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        else
+          -- CONTROL
+          VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE <= '0';
+          VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE <= '0';
+        end if;
+
+        -- CONTROL
+        exit when VECTOR_EXPONENTIATOR_READY = '1';
+
+        -- GLOBAL
+        wait until rising_edge(clk_int);
+      end loop;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE 1";
@@ -879,9 +1146,50 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_VECTOR_ROOT_TEST           ";
       -------------------------------------------------------------------
 
+      -- DATA
+      VECTOR_ROOT_MODULO_IN <= FULL;
+      VECTOR_ROOT_SIZE_IN   <= THREE;
+
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_ROOT_CASE 0         ";
       -------------------------------------------------------------------
+
+      -- INITIAL CONDITIONS
+      -- CONTROL
+      VECTOR_ROOT_DATA_A_IN_ENABLE <= '1';
+      VECTOR_ROOT_DATA_B_IN_ENABLE <= '1';
+
+      -- DATA
+      VECTOR_ROOT_DATA_A_IN <= TWO;
+      VECTOR_ROOT_DATA_B_IN <= ONE;
+
+      -- LOOP
+      index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+
+      loop
+        if ((VECTOR_ROOT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(VECTOR_ROOT_SIZE_IN)-unsigned(ONE))) then
+          -- CONTROL
+          VECTOR_ROOT_DATA_A_IN_ENABLE <= '1';
+          VECTOR_ROOT_DATA_B_IN_ENABLE <= '1';
+
+          -- DATA
+          VECTOR_ROOT_DATA_A_IN <= TWO;
+          VECTOR_ROOT_DATA_B_IN <= ONE;
+
+          -- LOOP
+          index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        else
+          -- CONTROL
+          VECTOR_ROOT_DATA_A_IN_ENABLE <= '0';
+          VECTOR_ROOT_DATA_B_IN_ENABLE <= '0';
+        end if;
+
+        -- CONTROL
+        exit when VECTOR_ROOT_READY = '1';
+
+        -- GLOBAL
+        wait until rising_edge(clk_int);
+      end loop;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_ROOT_CASE 1         ";
@@ -897,9 +1205,50 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_VECTOR_LOGARITHM_TEST      ";
       -------------------------------------------------------------------
 
+      -- DATA
+      VECTOR_LOGARITHM_MODULO_IN <= FULL;
+      VECTOR_LOGARITHM_SIZE_IN   <= THREE;
+
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_LOGARITHM_CASE 0    ";
       -------------------------------------------------------------------
+
+      -- INITIAL CONDITIONS
+      -- CONTROL
+      VECTOR_LOGARITHM_DATA_A_IN_ENABLE <= '1';
+      VECTOR_LOGARITHM_DATA_B_IN_ENABLE <= '1';
+
+      -- DATA
+      VECTOR_LOGARITHM_DATA_A_IN <= TWO;
+      VECTOR_LOGARITHM_DATA_B_IN <= ONE;
+
+      -- LOOP
+      index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+
+      loop
+        if ((VECTOR_LOGARITHM_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(VECTOR_LOGARITHM_SIZE_IN)-unsigned(ONE))) then
+          -- CONTROL
+          VECTOR_LOGARITHM_DATA_A_IN_ENABLE <= '1';
+          VECTOR_LOGARITHM_DATA_B_IN_ENABLE <= '1';
+
+          -- DATA
+          VECTOR_LOGARITHM_DATA_A_IN <= TWO;
+          VECTOR_LOGARITHM_DATA_B_IN <= ONE;
+
+          -- LOOP
+          index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        else
+          -- CONTROL
+          VECTOR_LOGARITHM_DATA_A_IN_ENABLE <= '0';
+          VECTOR_LOGARITHM_DATA_B_IN_ENABLE <= '0';
+        end if;
+
+        -- CONTROL
+        exit when VECTOR_LOGARITHM_READY = '1';
+
+        -- GLOBAL
+        wait until rising_edge(clk_int);
+      end loop;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_LOGARITHM_CASE 1    ";
