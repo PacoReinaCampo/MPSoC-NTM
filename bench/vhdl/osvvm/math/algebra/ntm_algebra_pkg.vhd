@@ -67,6 +67,12 @@ package ntm_algebra_pkg is
   constant L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
   constant R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
+  constant SIZE_I : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
+  constant SIZE_J : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
+
+  constant SIZE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
+
+
   -- FUNCTIONALITY
   constant STIMULUS_NTM_MATRIX_DETERMINANT_TEST : boolean := false;
   constant STIMULUS_NTM_MATRIX_INVERSION_TEST   : boolean := false;
@@ -151,8 +157,6 @@ package ntm_algebra_pkg is
 
       -- DATA
       MATRIX_DETERMINANT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_DETERMINANT_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_DETERMINANT_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_DETERMINANT_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_DETERMINANT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 

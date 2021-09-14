@@ -105,6 +105,24 @@ package ntm_arithmetic_pkg is
   constant STIMULUS_NTM_VECTOR_ROOT_TEST          : boolean := false;
   constant STIMULUS_NTM_VECTOR_LOGARITHM_TEST     : boolean := false;
 
+  constant STIMULUS_NTM_VECTOR_MOD_CASE_0           : boolean := false;
+  constant STIMULUS_NTM_VECTOR_ADDER_CASE_0         : boolean := false;
+  constant STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_0    : boolean := false;
+  constant STIMULUS_NTM_VECTOR_INVERTER_CASE_0      : boolean := false;
+  constant STIMULUS_NTM_VECTOR_DIVIDER_CASE_0       : boolean := false;
+  constant STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0 : boolean := false;
+  constant STIMULUS_NTM_VECTOR_ROOT_CASE_0          : boolean := false;
+  constant STIMULUS_NTM_VECTOR_LOGARITHM_CASE_0     : boolean := false;
+
+  constant STIMULUS_NTM_VECTOR_MOD_CASE_1           : boolean := false;
+  constant STIMULUS_NTM_VECTOR_ADDER_CASE_1         : boolean := false;
+  constant STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_1    : boolean := false;
+  constant STIMULUS_NTM_VECTOR_INVERTER_CASE_1      : boolean := false;
+  constant STIMULUS_NTM_VECTOR_DIVIDER_CASE_1       : boolean := false;
+  constant STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_1 : boolean := false;
+  constant STIMULUS_NTM_VECTOR_ROOT_CASE_1          : boolean := false;
+  constant STIMULUS_NTM_VECTOR_LOGARITHM_CASE_1     : boolean := false;
+
   -- MATRIX-FUNCTIONALITY
   constant STIMULUS_NTM_MATRIX_MOD_TEST           : boolean := false;
   constant STIMULUS_NTM_MATRIX_ADDER_TEST         : boolean := false;
@@ -114,6 +132,24 @@ package ntm_arithmetic_pkg is
   constant STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST : boolean := false;
   constant STIMULUS_NTM_MATRIX_ROOT_TEST          : boolean := false;
   constant STIMULUS_NTM_MATRIX_LOGARITHM_TEST     : boolean := false;
+
+  constant STIMULUS_NTM_MATRIX_MOD_CASE_0           : boolean := false;
+  constant STIMULUS_NTM_MATRIX_ADDER_CASE_0         : boolean := false;
+  constant STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_0    : boolean := false;
+  constant STIMULUS_NTM_MATRIX_INVERTER_CASE_0      : boolean := false;
+  constant STIMULUS_NTM_MATRIX_DIVIDER_CASE_0       : boolean := false;
+  constant STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0 : boolean := false;
+  constant STIMULUS_NTM_MATRIX_ROOT_CASE_0          : boolean := false;
+  constant STIMULUS_NTM_MATRIX_LOGARITHM_CASE_0     : boolean := false;
+
+  constant STIMULUS_NTM_MATRIX_MOD_CASE_1           : boolean := false;
+  constant STIMULUS_NTM_MATRIX_ADDER_CASE_1         : boolean := false;
+  constant STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_1    : boolean := false;
+  constant STIMULUS_NTM_MATRIX_INVERTER_CASE_1      : boolean := false;
+  constant STIMULUS_NTM_MATRIX_DIVIDER_CASE_1       : boolean := false;
+  constant STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1 : boolean := false;
+  constant STIMULUS_NTM_MATRIX_ROOT_CASE_1          : boolean := false;
+  constant STIMULUS_NTM_MATRIX_LOGARITHM_CASE_1     : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components

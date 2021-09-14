@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_matrix_transpose is
   generic (
-    I : integer := 64;
-    J : integer := 64;
+    SIZE_I : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
+    SIZE_J : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
 
     DATA_SIZE : integer := 512
     );

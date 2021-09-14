@@ -100,8 +100,6 @@ entity ntm_algebra_stimulus is
 
     -- DATA
     MATRIX_DETERMINANT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_DETERMINANT_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_DETERMINANT_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_DETERMINANT_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_DETERMINANT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -234,9 +232,6 @@ architecture ntm_algebra_stimulus_architecture of ntm_algebra_stimulus is
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
-  constant SIZE_I : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
-  constant SIZE_J : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
-  
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
@@ -314,16 +309,14 @@ begin
     if (STIMULUS_NTM_MATRIX_DETERMINANT_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_DETERMINANT_TEST       ";
+      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_DETERMINANT_TEST    ";
       -------------------------------------------------------------------
 
       -- DATA
       MATRIX_DETERMINANT_MODULO_IN <= FULL;
-      MATRIX_DETERMINANT_SIZE_I_IN <= THREE;
-      MATRIX_DETERMINANT_SIZE_J_IN <= THREE;
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_DETERMINANT_CASE 0     ";
+      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_DETERMINANT_CASE 0  ";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_DETERMINANT_CASE_0) then
@@ -340,7 +333,7 @@ begin
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
 
         loop
-          if ((MATRIX_DETERMINANT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(MATRIX_DETERMINANT_SIZE_I_IN)-unsigned(ONE))) then
+          if ((MATRIX_DETERMINANT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE))) then
             -- CONTROL
             MATRIX_DETERMINANT_DATA_IN_I_ENABLE <= '1';
 
@@ -350,7 +343,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
             index_j_loop <= ZERO;
-          elsif ((MATRIX_DETERMINANT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(MATRIX_DETERMINANT_SIZE_J_IN)-unsigned(ONE))) then
+          elsif ((MATRIX_DETERMINANT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE))) then
             -- CONTROL
             MATRIX_DETERMINANT_DATA_IN_J_ENABLE <= '1';
 
@@ -374,7 +367,7 @@ begin
       end if;
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_DETERMINANT_CASE 1     ";
+      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_DETERMINANT_CASE 1  ";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_DETERMINANT_CASE_1) then
@@ -391,7 +384,7 @@ begin
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
 
         loop
-          if ((MATRIX_DETERMINANT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(MATRIX_DETERMINANT_SIZE_I_IN)-unsigned(ONE))) then
+          if ((MATRIX_DETERMINANT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE))) then
             -- CONTROL
             MATRIX_DETERMINANT_DATA_IN_I_ENABLE <= '1';
 
@@ -401,7 +394,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
             index_j_loop <= ZERO;
-          elsif ((MATRIX_DETERMINANT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(MATRIX_DETERMINANT_SIZE_J_IN)-unsigned(ONE))) then
+          elsif ((MATRIX_DETERMINANT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE))) then
             -- CONTROL
             MATRIX_DETERMINANT_DATA_IN_J_ENABLE <= '1';
 
@@ -431,14 +424,14 @@ begin
     if (STIMULUS_NTM_MATRIX_INVERSION_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_INVERSION_TEST       ";
+      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_INVERSION_TEST      ";
       -------------------------------------------------------------------
 
       -- DATA
       MATRIX_INVERSION_MODULO_IN <= FULL;
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_INVERSION_CASE 0     ";
+      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_INVERSION_CASE 0    ";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_INVERSION_CASE_0) then
@@ -489,7 +482,7 @@ begin
       end if;
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_INVERSION_CASE 1     ";
+      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_INVERSION_CASE 1    ";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_INVERSION_CASE_1) then
@@ -546,16 +539,14 @@ begin
     if (STIMULUS_NTM_MATRIX_PRODUCT_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_PRODUCT_TEST      ";
+      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_PRODUCT_TEST        ";
       -------------------------------------------------------------------
 
       -- DATA
       MATRIX_PRODUCT_MODULO_IN <= FULL;
-      SIZE_I <= THREE;
-      SIZE_J <= THREE;
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_PRODUCT_CASE 0    ";
+      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_PRODUCT_CASE 0      ";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_PRODUCT_CASE_0) then
@@ -615,7 +606,7 @@ begin
       end if;
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_PRODUCT_CASE 1    ";
+      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_PRODUCT_CASE 1      ";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_PRODUCT_CASE_1) then
@@ -681,16 +672,14 @@ begin
     if (STIMULUS_NTM_MATRIX_RANK_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_RANK_TEST       ";
+      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_RANK_TEST           ";
       -------------------------------------------------------------------
 
       -- DATA
       MATRIX_RANK_MODULO_IN <= FULL;
-      SIZE_I <= THREE;
-      SIZE_J <= THREE;
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_RANK_CASE 0     ";
+      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_RANK_CASE 0         ";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_RANK_CASE_0) then
@@ -741,7 +730,7 @@ begin
       end if;
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_RANK_CASE 1     ";
+      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_RANK_CASE 1         ";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_RANK_CASE_1) then
@@ -798,16 +787,14 @@ begin
     if (STIMULUS_NTM_MATRIX_TRANSPOSE_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_TRANSPOSE_TEST       ";
+      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_TRANSPOSE_TEST      ";
       -------------------------------------------------------------------
 
       -- DATA
       MATRIX_TRANSPOSE_MODULO_IN <= FULL;
-      SIZE_I <= THREE;
-      SIZE_J <= THREE;
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_TRANSPOSE_CASE 0     ";
+      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_TRANSPOSE_CASE 0    ";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0) then
@@ -858,7 +845,7 @@ begin
       end if;
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_TRANSPOSE_CASE 1     ";
+      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_TRANSPOSE_CASE 1    ";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1) then
@@ -915,7 +902,7 @@ begin
     if (STIMULUS_NTM_SCALAR_PRODUCT_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_PRODUCT_TEST       ";
+      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_PRODUCT_TEST        ";
       -------------------------------------------------------------------
 
       -- DATA
@@ -923,16 +910,18 @@ begin
       SCALAR_PRODUCT_LENGTH_IN <= THREE;
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_PRODUCT_CASE 0     ";
+      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_PRODUCT_CASE 0      ";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_SCALAR_PRODUCT_CASE_0) then
         -- INITIAL CONDITIONS
         -- CONTROL
-        SCALAR_PRODUCT_DATA_IN_ENABLE <= '1';
+        SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '1';
+        SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        SCALAR_PRODUCT_DATA_IN <= ONE;
+        SCALAR_PRODUCT_DATA_A_IN <= ONE;
+        SCALAR_PRODUCT_DATA_B_IN <= ONE;
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
@@ -940,16 +929,19 @@ begin
         loop
           if ((SCALAR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(SCALAR_PRODUCT_LENGTH_IN)-unsigned(ONE))) then
             -- CONTROL
-            SCALAR_PRODUCT_DATA_IN_ENABLE <= '1';
+            SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '1';
+            SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            SCALAR_PRODUCT_DATA_IN <= ONE;
+            SCALAR_PRODUCT_DATA_A_IN <= TWO;
+            SCALAR_PRODUCT_DATA_B_IN <= ONE;
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
           else
             -- CONTROL
-            SCALAR_PRODUCT_DATA_IN_ENABLE <= '0';
+            SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '0';
+            SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '0';
           end if;
 
           -- CONTROL
@@ -961,16 +953,18 @@ begin
       end if;
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_PRODUCT_CASE 1     ";
+      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_PRODUCT_CASE 1      ";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_SCALAR_PRODUCT_CASE_1) then
         -- INITIAL CONDITIONS
         -- CONTROL
-        SCALAR_PRODUCT_DATA_IN_ENABLE <= '1';
+        SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '1';
+        SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        SCALAR_PRODUCT_DATA_IN <= TWO;
+        SCALAR_PRODUCT_DATA_A_IN <= TWO;
+        SCALAR_PRODUCT_DATA_B_IN <= ONE;
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
@@ -978,16 +972,19 @@ begin
         loop
           if ((SCALAR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(SCALAR_PRODUCT_LENGTH_IN)-unsigned(ONE))) then
             -- CONTROL
-            SCALAR_PRODUCT_DATA_IN_ENABLE <= '1';
+            SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '1';
+            SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            SCALAR_PRODUCT_DATA_IN <= TWO;
+            SCALAR_PRODUCT_DATA_B_IN <= TWO;
+            SCALAR_PRODUCT_DATA_B_IN <= ONE;
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
           else
             -- CONTROL
-            SCALAR_PRODUCT_DATA_IN_ENABLE <= '0';
+            SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '0';
+            SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '0';
           end if;
 
           -- CONTROL
@@ -1005,14 +1002,14 @@ begin
     if (STIMULUS_NTM_VECTOR_PRODUCT_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_PRODUCT_TEST      ";
+      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_PRODUCT_TEST        ";
       -------------------------------------------------------------------
 
       -- DATA
       VECTOR_PRODUCT_MODULO_IN <= FULL;
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_VECTOR_PRODUCT_CASE 0    ";
+      MONITOR_CASE <= "STIMULUS_NTM_VECTOR_PRODUCT_CASE 0      ";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_VECTOR_PRODUCT_CASE_0) then
@@ -1029,7 +1026,7 @@ begin
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
 
         loop
-          if ((VECTOR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(VECTOR_PRODUCT_SIZE_IN)-unsigned(ONE))) then
+          if ((VECTOR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(SIZE)-unsigned(ONE))) then
             -- CONTROL
             VECTOR_PRODUCT_DATA_A_IN_ENABLE <= '1';
             VECTOR_PRODUCT_DATA_B_IN_ENABLE <= '1';
@@ -1055,7 +1052,7 @@ begin
       end if;
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_VECTOR_PRODUCT_CASE 1    ";
+      MONITOR_CASE <= "STIMULUS_NTM_VECTOR_PRODUCT_CASE 1      ";
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_VECTOR_PRODUCT_CASE_1) then
@@ -1072,7 +1069,7 @@ begin
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
 
         loop
-          if ((VECTOR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(VECTOR_PRODUCT_SIZE_IN)-unsigned(ONE))) then
+          if ((VECTOR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(SIZE)-unsigned(ONE))) then
             -- CONTROL
             VECTOR_PRODUCT_DATA_A_IN_ENABLE <= '1';
             VECTOR_PRODUCT_DATA_B_IN_ENABLE <= '1';

@@ -705,8 +705,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_determinant is
     generic (
-      I : integer := 64;
-      J : integer := 64;
+      SIZE_I : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
+      SIZE_J : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
 
       DATA_SIZE : integer := 512
       );
@@ -734,8 +734,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_inversion is
     generic (
-      I : integer := 64;
-      J : integer := 64;
+      SIZE_I : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
+      SIZE_J : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
 
       DATA_SIZE : integer := 512
       );
@@ -796,8 +796,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_rank is
     generic (
-      I : integer := 64;
-      J : integer := 64;
+      SIZE_I : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
+      SIZE_J : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
 
       DATA_SIZE : integer := 512
       );
@@ -825,8 +825,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_transpose is
     generic (
-      I : integer := 64;
-      J : integer := 64;
+      SIZE_I : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
+      SIZE_J : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
 
       DATA_SIZE : integer := 512
       );
@@ -881,7 +881,7 @@ package ntm_math_pkg is
 
   component ntm_vector_product is
     generic (
-      I : integer := 64;
+      SIZE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
 
       DATA_SIZE : integer := 512
       );

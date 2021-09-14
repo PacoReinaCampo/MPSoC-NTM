@@ -65,23 +65,23 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_SCALAR_ROOT_TEST          : boolean := false;
     ENABLE_NTM_SCALAR_LOGARITHM_TEST     : boolean := false;
 
-    STIMULUS_NTM_SCALAR_MOD_CASE_0           : boolean := false;
-    STIMULUS_NTM_SCALAR_ADDER_CASE_0         : boolean := false;
-    STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0    : boolean := false;
-    STIMULUS_NTM_SCALAR_INVERTER_CASE_0      : boolean := false;
-    STIMULUS_NTM_SCALAR_DIVIDER_CASE_0       : boolean := false;
-    STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0 : boolean := false;
-    STIMULUS_NTM_SCALAR_ROOT_CASE_0          : boolean := false;
-    STIMULUS_NTM_SCALAR_LOGARITHM_CASE_0     : boolean := false;
+    ENABLE_NTM_SCALAR_MOD_CASE_0           : boolean := false;
+    ENABLE_NTM_SCALAR_ADDER_CASE_0         : boolean := false;
+    ENABLE_NTM_SCALAR_MULTIPLIER_CASE_0    : boolean := false;
+    ENABLE_NTM_SCALAR_INVERTER_CASE_0      : boolean := false;
+    ENABLE_NTM_SCALAR_DIVIDER_CASE_0       : boolean := false;
+    ENABLE_NTM_SCALAR_EXPONENTIATOR_CASE_0 : boolean := false;
+    ENABLE_NTM_SCALAR_ROOT_CASE_0          : boolean := false;
+    ENABLE_NTM_SCALAR_LOGARITHM_CASE_0     : boolean := false;
 
-    STIMULUS_NTM_SCALAR_MOD_CASE_1           : boolean := false;
-    STIMULUS_NTM_SCALAR_ADDER_CASE_1         : boolean := false;
-    STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1    : boolean := false;
-    STIMULUS_NTM_SCALAR_INVERTER_CASE_1      : boolean := false;
-    STIMULUS_NTM_SCALAR_DIVIDER_CASE_1       : boolean := false;
-    STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1 : boolean := false;
-    STIMULUS_NTM_SCALAR_ROOT_CASE_1          : boolean := false;
-    STIMULUS_NTM_SCALAR_LOGARITHM_CASE_1     : boolean := false;
+    ENABLE_NTM_SCALAR_MOD_CASE_1           : boolean := false;
+    ENABLE_NTM_SCALAR_ADDER_CASE_1         : boolean := false;
+    ENABLE_NTM_SCALAR_MULTIPLIER_CASE_1    : boolean := false;
+    ENABLE_NTM_SCALAR_INVERTER_CASE_1      : boolean := false;
+    ENABLE_NTM_SCALAR_DIVIDER_CASE_1       : boolean := false;
+    ENABLE_NTM_SCALAR_EXPONENTIATOR_CASE_1 : boolean := false;
+    ENABLE_NTM_SCALAR_ROOT_CASE_1          : boolean := false;
+    ENABLE_NTM_SCALAR_LOGARITHM_CASE_1     : boolean := false;
 
     -- VECTOR-FUNCTIONALITY
     ENABLE_NTM_VECTOR_MOD_TEST           : boolean := false;
@@ -93,23 +93,23 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_VECTOR_ROOT_TEST          : boolean := false;
     ENABLE_NTM_VECTOR_LOGARITHM_TEST     : boolean := false;
 
-    STIMULUS_NTM_VECTOR_MOD_CASE_0           : boolean := false;
-    STIMULUS_NTM_VECTOR_ADDER_CASE_0         : boolean := false;
-    STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_0    : boolean := false;
-    STIMULUS_NTM_VECTOR_INVERTER_CASE_0      : boolean := false;
-    STIMULUS_NTM_VECTOR_DIVIDER_CASE_0       : boolean := false;
-    STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0 : boolean := false;
-    STIMULUS_NTM_VECTOR_ROOT_CASE_0          : boolean := false;
-    STIMULUS_NTM_VECTOR_LOGARITHM_CASE_0     : boolean := false;
+    ENABLE_NTM_VECTOR_MOD_CASE_0           : boolean := false;
+    ENABLE_NTM_VECTOR_ADDER_CASE_0         : boolean := false;
+    ENABLE_NTM_VECTOR_MULTIPLIER_CASE_0    : boolean := false;
+    ENABLE_NTM_VECTOR_INVERTER_CASE_0      : boolean := false;
+    ENABLE_NTM_VECTOR_DIVIDER_CASE_0       : boolean := false;
+    ENABLE_NTM_VECTOR_EXPONENTIATOR_CASE_0 : boolean := false;
+    ENABLE_NTM_VECTOR_ROOT_CASE_0          : boolean := false;
+    ENABLE_NTM_VECTOR_LOGARITHM_CASE_0     : boolean := false;
 
-    STIMULUS_NTM_VECTOR_MOD_CASE_1           : boolean := false;
-    STIMULUS_NTM_VECTOR_ADDER_CASE_1         : boolean := false;
-    STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_1    : boolean := false;
-    STIMULUS_NTM_VECTOR_INVERTER_CASE_1      : boolean := false;
-    STIMULUS_NTM_VECTOR_DIVIDER_CASE_1       : boolean := false;
-    STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_1 : boolean := false;
-    STIMULUS_NTM_VECTOR_ROOT_CASE_1          : boolean := false;
-    STIMULUS_NTM_VECTOR_LOGARITHM_CASE_1     : boolean := false;
+    ENABLE_NTM_VECTOR_MOD_CASE_1           : boolean := false;
+    ENABLE_NTM_VECTOR_ADDER_CASE_1         : boolean := false;
+    ENABLE_NTM_VECTOR_MULTIPLIER_CASE_1    : boolean := false;
+    ENABLE_NTM_VECTOR_INVERTER_CASE_1      : boolean := false;
+    ENABLE_NTM_VECTOR_DIVIDER_CASE_1       : boolean := false;
+    ENABLE_NTM_VECTOR_EXPONENTIATOR_CASE_1 : boolean := false;
+    ENABLE_NTM_VECTOR_ROOT_CASE_1          : boolean := false;
+    ENABLE_NTM_VECTOR_LOGARITHM_CASE_1     : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
     ENABLE_NTM_MATRIX_MOD_TEST           : boolean := false;
@@ -121,23 +121,23 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_MATRIX_ROOT_TEST          : boolean := false;
     ENABLE_NTM_MATRIX_LOGARITHM_TEST     : boolean := false;
 
-    STIMULUS_NTM_MATRIX_MOD_CASE_0           : boolean := false;
-    STIMULUS_NTM_MATRIX_ADDER_CASE_0         : boolean := false;
-    STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_0    : boolean := false;
-    STIMULUS_NTM_MATRIX_INVERTER_CASE_0      : boolean := false;
-    STIMULUS_NTM_MATRIX_DIVIDER_CASE_0       : boolean := false;
-    STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0 : boolean := false;
-    STIMULUS_NTM_MATRIX_ROOT_CASE_0          : boolean := false;
-    STIMULUS_NTM_MATRIX_LOGARITHM_CASE_0     : boolean := false;
+    ENABLE_NTM_MATRIX_MOD_CASE_0           : boolean := false;
+    ENABLE_NTM_MATRIX_ADDER_CASE_0         : boolean := false;
+    ENABLE_NTM_MATRIX_MULTIPLIER_CASE_0    : boolean := false;
+    ENABLE_NTM_MATRIX_INVERTER_CASE_0      : boolean := false;
+    ENABLE_NTM_MATRIX_DIVIDER_CASE_0       : boolean := false;
+    ENABLE_NTM_MATRIX_EXPONENTIATOR_CASE_0 : boolean := false;
+    ENABLE_NTM_MATRIX_ROOT_CASE_0          : boolean := false;
+    ENABLE_NTM_MATRIX_LOGARITHM_CASE_0     : boolean := false;
 
-    STIMULUS_NTM_MATRIX_MOD_CASE_1           : boolean := false;
-    STIMULUS_NTM_MATRIX_ADDER_CASE_1         : boolean := false;
-    STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_1    : boolean := false;
-    STIMULUS_NTM_MATRIX_INVERTER_CASE_1      : boolean := false;
-    STIMULUS_NTM_MATRIX_DIVIDER_CASE_1       : boolean := false;
-    STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1 : boolean := false;
-    STIMULUS_NTM_MATRIX_ROOT_CASE_1          : boolean := false;
-    STIMULUS_NTM_MATRIX_LOGARITHM_CASE_1     : boolean := false
+    ENABLE_NTM_MATRIX_MOD_CASE_1           : boolean := false;
+    ENABLE_NTM_MATRIX_ADDER_CASE_1         : boolean := false;
+    ENABLE_NTM_MATRIX_MULTIPLIER_CASE_1    : boolean := false;
+    ENABLE_NTM_MATRIX_INVERTER_CASE_1      : boolean := false;
+    ENABLE_NTM_MATRIX_DIVIDER_CASE_1       : boolean := false;
+    ENABLE_NTM_MATRIX_EXPONENTIATOR_CASE_1 : boolean := false;
+    ENABLE_NTM_MATRIX_ROOT_CASE_1          : boolean := false;
+    ENABLE_NTM_MATRIX_LOGARITHM_CASE_1     : boolean := false
     );
 end ntm_arithmetic_testbench;
 

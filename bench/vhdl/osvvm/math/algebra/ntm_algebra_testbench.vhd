@@ -41,6 +41,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
+use work.ntm_algebra_pkg.all;
 
 entity ntm_algebra_testbench is
   generic (
@@ -217,42 +218,42 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  ntm_algebra_stimulus : ntm_algebra_stimulus
+  algebra_stimulus : ntm_algebra_stimulus
     generic map (
       -- SYSTEM-SIZE
-      DATA_SIZE : integer := 512,
+      DATA_SIZE => DATA_SIZE,
 
-      X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE)),  -- x in 0 to X-1
-      Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE)),  -- y in 0 to Y-1
-      N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE)),  -- j in 0 to N-1
-      W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE)),  -- k in 0 to W-1
-      L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE)),  -- l in 0 to L-1
-      R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE)),  -- i in 0 to R-1
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R,
 
       -- FUNCTIONALITY
-      ENABLE_NTM_MATRIX_DETERMINANT_TEST => ENABLE_NTM_MATRIX_DETERMINANT_TEST,
-      ENABLE_NTM_MATRIX_INVERSION_TEST   => ENABLE_NTM_MATRIX_INVERSION_TEST,
-      ENABLE_NTM_MATRIX_PRODUCT_TEST     => ENABLE_NTM_MATRIX_PRODUCT_TEST,
-      ENABLE_NTM_MATRIX_RANK_TEST        => ENABLE_NTM_MATRIX_DETERMINANT_TEST,
-      ENABLE_NTM_MATRIX_TRANSPOSE_TEST   => ENABLE_NTM_MATRIX_RANK_TEST,
-      ENABLE_NTM_SCALAR_PRODUCT_TEST     => ENABLE_NTM_SCALAR_PRODUCT_TEST,
-      ENABLE_NTM_VECTOR_PRODUCT_TEST     => ENABLE_NTM_VECTOR_PRODUCT_TEST,
+      STIMULUS_NTM_MATRIX_DETERMINANT_TEST => STIMULUS_NTM_MATRIX_DETERMINANT_TEST,
+      STIMULUS_NTM_MATRIX_INVERSION_TEST   => STIMULUS_NTM_MATRIX_INVERSION_TEST,
+      STIMULUS_NTM_MATRIX_PRODUCT_TEST     => STIMULUS_NTM_MATRIX_PRODUCT_TEST,
+      STIMULUS_NTM_MATRIX_RANK_TEST        => STIMULUS_NTM_MATRIX_DETERMINANT_TEST,
+      STIMULUS_NTM_MATRIX_TRANSPOSE_TEST   => STIMULUS_NTM_MATRIX_RANK_TEST,
+      STIMULUS_NTM_SCALAR_PRODUCT_TEST     => STIMULUS_NTM_SCALAR_PRODUCT_TEST,
+      STIMULUS_NTM_VECTOR_PRODUCT_TEST     => STIMULUS_NTM_VECTOR_PRODUCT_TEST,
 
-      ENABLE_NTM_MATRIX_DETERMINANT_CASE_0 => ENABLE_NTM_MATRIX_DETERMINANT_CASE_0,
-      ENABLE_NTM_MATRIX_INVERSION_CASE_0   => ENABLE_NTM_MATRIX_INVERSION_CASE_0,
-      ENABLE_NTM_MATRIX_PRODUCT_CASE_0     => ENABLE_NTM_MATRIX_PRODUCT_CASE_0,
-      ENABLE_NTM_MATRIX_RANK_CASE_0        => ENABLE_NTM_MATRIX_RANK_CASE_0,
-      ENABLE_NTM_MATRIX_TRANSPOSE_CASE_0   => ENABLE_NTM_MATRIX_TRANSPOSE_CASE_0,
-      ENABLE_NTM_SCALAR_PRODUCT_CASE_0     => ENABLE_NTM_SCALAR_PRODUCT_CASE_0,
-      ENABLE_NTM_VECTOR_PRODUCT_CASE_0     => ENABLE_NTM_VECTOR_PRODUCT_CASE_0,
+      STIMULUS_NTM_MATRIX_DETERMINANT_CASE_0 => STIMULUS_NTM_MATRIX_DETERMINANT_CASE_0,
+      STIMULUS_NTM_MATRIX_INVERSION_CASE_0   => STIMULUS_NTM_MATRIX_INVERSION_CASE_0,
+      STIMULUS_NTM_MATRIX_PRODUCT_CASE_0     => STIMULUS_NTM_MATRIX_PRODUCT_CASE_0,
+      STIMULUS_NTM_MATRIX_RANK_CASE_0        => STIMULUS_NTM_MATRIX_RANK_CASE_0,
+      STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0   => STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0,
+      STIMULUS_NTM_SCALAR_PRODUCT_CASE_0     => STIMULUS_NTM_SCALAR_PRODUCT_CASE_0,
+      STIMULUS_NTM_VECTOR_PRODUCT_CASE_0     => STIMULUS_NTM_VECTOR_PRODUCT_CASE_0,
 
-      ENABLE_NTM_MATRIX_DETERMINANT_CASE_1 => ENABLE_NTM_MATRIX_DETERMINANT_CASE_1,
-      ENABLE_NTM_MATRIX_INVERSION_CASE_1   => ENABLE_NTM_MATRIX_INVERSION_CASE_1,
-      ENABLE_NTM_MATRIX_PRODUCT_CASE_1     => ENABLE_NTM_MATRIX_PRODUCT_CASE_1,
-      ENABLE_NTM_MATRIX_RANK_CASE_1        => ENABLE_NTM_MATRIX_RANK_CASE_1,
-      ENABLE_NTM_MATRIX_TRANSPOSE_CASE_1   => ENABLE_NTM_MATRIX_TRANSPOSE_CASE_1,
-      ENABLE_NTM_SCALAR_PRODUCT_CASE_1     => ENABLE_NTM_SCALAR_PRODUCT_CASE_1,
-      ENABLE_NTM_VECTOR_PRODUCT_CASE_1     => ENABLE_NTM_VECTOR_PRODUCT_CASE_1
+      STIMULUS_NTM_MATRIX_DETERMINANT_CASE_1 => STIMULUS_NTM_MATRIX_DETERMINANT_CASE_1,
+      STIMULUS_NTM_MATRIX_INVERSION_CASE_1   => STIMULUS_NTM_MATRIX_INVERSION_CASE_1,
+      STIMULUS_NTM_MATRIX_PRODUCT_CASE_1     => STIMULUS_NTM_MATRIX_PRODUCT_CASE_1,
+      STIMULUS_NTM_MATRIX_RANK_CASE_1        => STIMULUS_NTM_MATRIX_RANK_CASE_1,
+      STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1   => STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1,
+      STIMULUS_NTM_SCALAR_PRODUCT_CASE_1     => STIMULUS_NTM_SCALAR_PRODUCT_CASE_1,
+      STIMULUS_NTM_VECTOR_PRODUCT_CASE_1     => STIMULUS_NTM_VECTOR_PRODUCT_CASE_1
       )
     port map (
       -- GLOBAL
@@ -272,8 +273,6 @@ begin
 
       -- DATA
       MATRIX_DETERMINANT_MODULO_IN => modulo_in_matrix_determinant,
-      MATRIX_DETERMINANT_SIZE_I_IN => size_i_in_matrix_determinant,
-      MATRIX_DETERMINANT_SIZE_J_IN => size_j_in_matrix_determinant,
       MATRIX_DETERMINANT_DATA_IN   => data_in_matrix_determinant,
       MATRIX_DETERMINANT_DATA_OUT  => data_out_matrix_determinant,
 
@@ -307,13 +306,13 @@ begin
       MATRIX_PRODUCT_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MATRIX_PRODUCT_MODULO_IN   => modulo_matrix_product,
-      MATRIX_PRODUCT_SIZE_A_I_IN => size_a_i_in_enable_matrix_product,
-      MATRIX_PRODUCT_SIZE_A_J_IN => size_a_j_in_enable_matrix_product,
-      MATRIX_PRODUCT_SIZE_B_I_IN => size_b_i_in_enable_matrix_product,
-      MATRIX_PRODUCT_SIZE_B_J_IN => size_b_j_in_enable_matrix_product,
-      MATRIX_PRODUCT_DATA_A_IN   => data_a_in_b_matrix_product,
-      MATRIX_PRODUCT_DATA_B_IN   => data_b_in_b_matrix_product,
+      MATRIX_PRODUCT_MODULO_IN   => modulo_in_matrix_product,
+      MATRIX_PRODUCT_SIZE_A_I_IN => size_a_i_in_matrix_product,
+      MATRIX_PRODUCT_SIZE_A_J_IN => size_a_j_in_matrix_product,
+      MATRIX_PRODUCT_SIZE_B_I_IN => size_b_i_in_matrix_product,
+      MATRIX_PRODUCT_SIZE_B_J_IN => size_b_j_in_matrix_product,
+      MATRIX_PRODUCT_DATA_A_IN   => data_a_in_matrix_product,
+      MATRIX_PRODUCT_DATA_B_IN   => data_b_in_matrix_product,
       MATRIX_PRODUCT_DATA_OUT    => data_out_matrix_product,
 
       -- MATRIX RANK
@@ -353,8 +352,8 @@ begin
       SCALAR_PRODUCT_START => start_scalar_product,
       SCALAR_PRODUCT_READY => ready_scalar_product,
 
-      SCALAR_PRODUCT_DATA_A_IN_ENABLE => data_in_i_enable_scalar_product,
-      SCALAR_PRODUCT_DATA_B_IN_ENABLE => data_in_i_enable_scalar_product,
+      SCALAR_PRODUCT_DATA_A_IN_ENABLE => data_a_in_enable_scalar_product,
+      SCALAR_PRODUCT_DATA_B_IN_ENABLE => data_b_in_enable_scalar_product,
 
       SCALAR_PRODUCT_DATA_OUT_ENABLE => data_out_enable_scalar_product,
 
@@ -370,8 +369,8 @@ begin
       VECTOR_PRODUCT_START => start_vector_product,
       VECTOR_PRODUCT_READY => ready_vector_product,
 
-      VECTOR_PRODUCT_DATA_A_IN_ENABLE => data_in_i_enable_vector_product,
-      VECTOR_PRODUCT_DATA_B_IN_ENABLE => data_in_i_enable_vector_product,
+      VECTOR_PRODUCT_DATA_A_IN_ENABLE => data_a_in_enable_vector_product,
+      VECTOR_PRODUCT_DATA_B_IN_ENABLE => data_b_in_enable_vector_product,
 
       VECTOR_PRODUCT_DATA_OUT_ENABLE => data_out_enable_vector_product,
 
@@ -386,8 +385,8 @@ begin
   ntm_matrix_determinant_test : if (ENABLE_NTM_MATRIX_DETERMINANT_TEST) generate
     matrix_determinant : ntm_matrix_determinant
       generic map (
-        I => I,
-        J => J,
+        SIZE_I => SIZE_I,
+        SIZE_J => SIZE_J,
 
         DATA_SIZE => DATA_SIZE
         )
@@ -417,8 +416,8 @@ begin
   ntm_matrix_inversion_test : if (ENABLE_NTM_MATRIX_INVERSION_TEST) generate
     matrix_inversion : ntm_matrix_inversion
       generic map (
-        I => I,
-        J => J,
+        SIZE_I => SIZE_I,
+        SIZE_J => SIZE_J,
 
         DATA_SIZE => DATA_SIZE
         )
@@ -483,8 +482,8 @@ begin
   ntm_matrix_rank_test : if (ENABLE_NTM_MATRIX_RANK_TEST) generate
     matrix_rank : ntm_matrix_rank
       generic map (
-        I => I,
-        J => J,
+        SIZE_I => SIZE_I,
+        SIZE_J => SIZE_J,
 
         DATA_SIZE => DATA_SIZE
         )
@@ -514,8 +513,8 @@ begin
   ntm_matrix_transpose_test : if (ENABLE_NTM_MATRIX_TRANSPOSE_TEST) generate
     matrix_transpose : ntm_matrix_transpose
       generic map (
-        I => I,
-        J => J,
+        SIZE_I => SIZE_I,
+        SIZE_J => SIZE_J,
 
         DATA_SIZE => DATA_SIZE
         )
@@ -574,7 +573,7 @@ begin
   ntm_vector_product_test : if (ENABLE_NTM_VECTOR_PRODUCT_TEST) generate
     vector_product : ntm_vector_product
       generic map (
-        I => I,
+        SIZE => SIZE,
 
         DATA_SIZE => DATA_SIZE
         )
