@@ -8,4 +8,6 @@
 ../../../../../../../rtl/vhdl/math/algebra/ntm_scalar_product.vhd
 ../../../../../../../rtl/vhdl/math/algebra/ntm_vector_product.vhd
 
+../../../../../../../bench/vhdl/osvvm/math/algebra/ntm_algebra_pkg.vhd
+../../../../../../../bench/vhdl/osvvm/math/algebra/ntm_algebra_stimulus.vhd
 ../../../../../../../bench/vhdl/osvvm/math/algebra/ntm_algebra_testbench.vhd
