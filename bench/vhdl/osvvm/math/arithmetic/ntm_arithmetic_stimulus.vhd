@@ -702,6 +702,7 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_SCALAR_ADDER_TEST          ";
       -------------------------------------------------------------------
 
+      -- CONTROL
       SCALAR_ADDER_OPERATION <= '0';
 
       -------------------------------------------------------------------
@@ -1006,12 +1007,12 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_VECTOR_ADDER_TEST          ";
       -------------------------------------------------------------------
 
+      -- OPERATION
+      VECTOR_ADDER_OPERATION <= '0';
+
       -- DATA
       VECTOR_ADDER_MODULO_IN <= FULL;
       VECTOR_ADDER_SIZE_IN   <= THREE;
-
-      -- OPERATION
-      VECTOR_ADDER_OPERATION <= '0';
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_ADDER_CASE 0        ";

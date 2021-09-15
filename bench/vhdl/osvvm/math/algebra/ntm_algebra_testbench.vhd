@@ -385,10 +385,10 @@ begin
   ntm_matrix_determinant_test : if (ENABLE_NTM_MATRIX_DETERMINANT_TEST) generate
     matrix_determinant : ntm_matrix_determinant
       generic map (
-        SIZE_I => SIZE_I,
-        SIZE_J => SIZE_J,
+        DATA_SIZE => DATA_SIZE,
 
-        DATA_SIZE => DATA_SIZE
+        SIZE_I => SIZE_I,
+        SIZE_J => SIZE_J
         )
       port map (
         -- GLOBAL
@@ -416,10 +416,10 @@ begin
   ntm_matrix_inversion_test : if (ENABLE_NTM_MATRIX_INVERSION_TEST) generate
     matrix_inversion : ntm_matrix_inversion
       generic map (
-        SIZE_I => SIZE_I,
-        SIZE_J => SIZE_J,
+        DATA_SIZE => DATA_SIZE,
 
-        DATA_SIZE => DATA_SIZE
+        SIZE_I => SIZE_I,
+        SIZE_J => SIZE_J
         )
       port map (
         -- GLOBAL
@@ -482,10 +482,10 @@ begin
   ntm_matrix_rank_test : if (ENABLE_NTM_MATRIX_RANK_TEST) generate
     matrix_rank : ntm_matrix_rank
       generic map (
-        SIZE_I => SIZE_I,
-        SIZE_J => SIZE_J,
+        DATA_SIZE => DATA_SIZE,
 
-        DATA_SIZE => DATA_SIZE
+        SIZE_I => SIZE_I,
+        SIZE_J => SIZE_J
         )
       port map (
         -- GLOBAL
@@ -513,10 +513,10 @@ begin
   ntm_matrix_transpose_test : if (ENABLE_NTM_MATRIX_TRANSPOSE_TEST) generate
     matrix_transpose : ntm_matrix_transpose
       generic map (
-        SIZE_I => SIZE_I,
-        SIZE_J => SIZE_J,
+        DATA_SIZE => DATA_SIZE,
 
-        DATA_SIZE => DATA_SIZE
+        SIZE_I => SIZE_I,
+        SIZE_J => SIZE_J
         )
       port map (
         -- GLOBAL
@@ -573,9 +573,9 @@ begin
   ntm_vector_product_test : if (ENABLE_NTM_VECTOR_PRODUCT_TEST) generate
     vector_product : ntm_vector_product
       generic map (
-        SIZE => SIZE,
+        DATA_SIZE => DATA_SIZE,
 
-        DATA_SIZE => DATA_SIZE
+        SIZE => SIZE
         )
       port map (
         -- GLOBAL

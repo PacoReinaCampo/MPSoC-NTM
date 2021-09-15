@@ -263,7 +263,7 @@ begin
         when ENDER_STATE =>             -- STEP 3
 
           if (ready_vector_root = '1') then
-            if (unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE)))) then
               -- Control Outputs
               READY <= '1';
 
@@ -271,7 +271,7 @@ begin
 
               -- FSM Control
               root_ctrl_fsm_int <= STARTER_STATE;
-            elsif (unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE)))) then
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
               index_j_loop <= ZERO;
@@ -282,7 +282,7 @@ begin
 
               -- FSM Control
               root_ctrl_fsm_int <= INPUT_I_STATE;
-            elsif (unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop < std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE)))) then
               -- Control Internal
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
 
