@@ -60,4 +60,6 @@
 ../../../../../../../rtl/vhdl/math/function/sigmoid/matrix/oneplus/ntm_matrix_oneplus_function.vhd
 ../../../../../../../rtl/vhdl/math/function/summation/matrix/ntm_matrix_summation_function.vhd
 
+../../../../../../../bench/vhdl/osvvm/math/function/ntm_function_pkg.vhd
+../../../../../../../bench/vhdl/osvvm/math/function/ntm_function_stimulus.vhd
 ../../../../../../../bench/vhdl/osvvm/math/function/ntm_function_testbench.vhd
