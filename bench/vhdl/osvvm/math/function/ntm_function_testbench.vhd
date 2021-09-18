@@ -41,8 +41,122 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
+use work.ntm_function_pkg.all;
 
 entity ntm_function_testbench is
+  generic (
+    -- SYSTEM-SIZE
+    DATA_SIZE : integer := 512;
+
+    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
+
+    -- SCALAR-FUNCTIONALITY
+    ENABLE_NTM_SCALAR_CONVOLUTION_TEST       : boolean := false;
+    ENABLE_NTM_SCALAR_COSINE_SIMILARITY_TEST : boolean := false;
+    ENABLE_NTM_SCALAR_MULTIPLICATION_TEST    : boolean := false;
+    ENABLE_NTM_SCALAR_COSH_TEST              : boolean := false;
+    ENABLE_NTM_SCALAR_SINH_TEST              : boolean := false;
+    ENABLE_NTM_SCALAR_TANH_TEST              : boolean := false;
+    ENABLE_NTM_SCALAR_LOGISTIC_TEST          : boolean := false;
+    ENABLE_NTM_SCALAR_SOFTMAX_TEST           : boolean := false;
+    ENABLE_NTM_SCALAR_ONEPLUS_TEST           : boolean := false;
+    ENABLE_NTM_SCALAR_SUMMATION_TEST         : boolean := false;
+
+    ENABLE_NTM_SCALAR_CONVOLUTION_CASE_0       : boolean := false;
+    ENABLE_NTM_SCALAR_COSINE_SIMILARITY_CASE_0 : boolean := false;
+    ENABLE_NTM_SCALAR_MULTIPLICATION_CASE_0    : boolean := false;
+    ENABLE_NTM_SCALAR_COSH_CASE_0              : boolean := false;
+    ENABLE_NTM_SCALAR_SINH_CASE_0              : boolean := false;
+    ENABLE_NTM_SCALAR_TANH_CASE_0              : boolean := false;
+    ENABLE_NTM_SCALAR_LOGISTIC_CASE_0          : boolean := false;
+    ENABLE_NTM_SCALAR_SOFTMAX_CASE_0           : boolean := false;
+    ENABLE_NTM_SCALAR_ONEPLUS_CASE_0           : boolean := false;
+    ENABLE_NTM_SCALAR_SUMMATION_CASE_0         : boolean := false;
+
+    ENABLE_NTM_SCALAR_CONVOLUTION_CASE_1       : boolean := false;
+    ENABLE_NTM_SCALAR_COSINE_SIMILARITY_CASE_1 : boolean := false;
+    ENABLE_NTM_SCALAR_MULTIPLICATION_CASE_1    : boolean := false;
+    ENABLE_NTM_SCALAR_COSH_CASE_1              : boolean := false;
+    ENABLE_NTM_SCALAR_SINH_CASE_1              : boolean := false;
+    ENABLE_NTM_SCALAR_TANH_CASE_1              : boolean := false;
+    ENABLE_NTM_SCALAR_LOGISTIC_CASE_1          : boolean := false;
+    ENABLE_NTM_SCALAR_SOFTMAX_CASE_1           : boolean := false;
+    ENABLE_NTM_SCALAR_ONEPLUS_CASE_1           : boolean := false;
+    ENABLE_NTM_SCALAR_SUMMATION_CASE_1         : boolean := false;
+
+    -- VECTOR-FUNCTIONALITY
+    ENABLE_NTM_VECTOR_CONVOLUTION_TEST       : boolean := false;
+    ENABLE_NTM_VECTOR_COSINE_SIMILARITY_TEST : boolean := false;
+    ENABLE_NTM_VECTOR_MULTIPLICATION_TEST    : boolean := false;
+    ENABLE_NTM_VECTOR_COSH_TEST              : boolean := false;
+    ENABLE_NTM_VECTOR_SINH_TEST              : boolean := false;
+    ENABLE_NTM_VECTOR_TANH_TEST              : boolean := false;
+    ENABLE_NTM_VECTOR_LOGISTIC_TEST          : boolean := false;
+    ENABLE_NTM_VECTOR_SOFTMAX_TEST           : boolean := false;
+    ENABLE_NTM_VECTOR_ONEPLUS_TEST           : boolean := false;
+    ENABLE_NTM_VECTOR_SUMMATION_TEST         : boolean := false;
+
+    ENABLE_NTM_VECTOR_CONVOLUTION_CASE_0       : boolean := false;
+    ENABLE_NTM_VECTOR_COSINE_SIMILARITY_CASE_0 : boolean := false;
+    ENABLE_NTM_VECTOR_MULTIPLICATION_CASE_0    : boolean := false;
+    ENABLE_NTM_VECTOR_COSH_CASE_0              : boolean := false;
+    ENABLE_NTM_VECTOR_SINH_CASE_0              : boolean := false;
+    ENABLE_NTM_VECTOR_TANH_CASE_0              : boolean := false;
+    ENABLE_NTM_VECTOR_LOGISTIC_CASE_0          : boolean := false;
+    ENABLE_NTM_VECTOR_SOFTMAX_CASE_0           : boolean := false;
+    ENABLE_NTM_VECTOR_ONEPLUS_CASE_0           : boolean := false;
+    ENABLE_NTM_VECTOR_SUMMATION_CASE_0         : boolean := false;
+
+    ENABLE_NTM_VECTOR_CONVOLUTION_CASE_1       : boolean := false;
+    ENABLE_NTM_VECTOR_COSINE_SIMILARITY_CASE_1 : boolean := false;
+    ENABLE_NTM_VECTOR_MULTIPLICATION_CASE_1    : boolean := false;
+    ENABLE_NTM_VECTOR_COSH_CASE_1              : boolean := false;
+    ENABLE_NTM_VECTOR_SINH_CASE_1              : boolean := false;
+    ENABLE_NTM_VECTOR_TANH_CASE_1              : boolean := false;
+    ENABLE_NTM_VECTOR_LOGISTIC_CASE_1          : boolean := false;
+    ENABLE_NTM_VECTOR_SOFTMAX_CASE_1           : boolean := false;
+    ENABLE_NTM_VECTOR_ONEPLUS_CASE_1           : boolean := false;
+    ENABLE_NTM_VECTOR_SUMMATION_CASE_1         : boolean := false;
+
+    -- MATRIX-FUNCTIONALITY
+    ENABLE_NTM_MATRIX_CONVOLUTION_TEST       : boolean := false;
+    ENABLE_NTM_MATRIX_COSINE_SIMILARITY_TEST : boolean := false;
+    ENABLE_NTM_MATRIX_MULTIPLICATION_TEST    : boolean := false;
+    ENABLE_NTM_MATRIX_COSH_TEST              : boolean := false;
+    ENABLE_NTM_MATRIX_SINH_TEST              : boolean := false;
+    ENABLE_NTM_MATRIX_TANH_TEST              : boolean := false;
+    ENABLE_NTM_MATRIX_LOGISTIC_TEST          : boolean := false;
+    ENABLE_NTM_MATRIX_SOFTMAX_TEST           : boolean := false;
+    ENABLE_NTM_MATRIX_ONEPLUS_TEST           : boolean := false;
+    ENABLE_NTM_MATRIX_SUMMATION_TEST         : boolean := false;
+
+    ENABLE_NTM_MATRIX_CONVOLUTION_CASE_0       : boolean := false;
+    ENABLE_NTM_MATRIX_COSINE_SIMILARITY_CASE_0 : boolean := false;
+    ENABLE_NTM_MATRIX_MULTIPLICATION_CASE_0    : boolean := false;
+    ENABLE_NTM_MATRIX_COSH_CASE_0              : boolean := false;
+    ENABLE_NTM_MATRIX_SINH_CASE_0              : boolean := false;
+    ENABLE_NTM_MATRIX_TANH_CASE_0              : boolean := false;
+    ENABLE_NTM_MATRIX_LOGISTIC_CASE_0          : boolean := false;
+    ENABLE_NTM_MATRIX_SOFTMAX_CASE_0           : boolean := false;
+    ENABLE_NTM_MATRIX_ONEPLUS_CASE_0           : boolean := false;
+    ENABLE_NTM_MATRIX_SUMMATION_CASE_0         : boolean := false;
+
+    ENABLE_NTM_MATRIX_CONVOLUTION_CASE_1       : boolean := false;
+    ENABLE_NTM_MATRIX_COSINE_SIMILARITY_CASE_1 : boolean := false;
+    ENABLE_NTM_MATRIX_MULTIPLICATION_CASE_1    : boolean := false;
+    ENABLE_NTM_MATRIX_COSH_CASE_1              : boolean := false;
+    ENABLE_NTM_MATRIX_SINH_CASE_1              : boolean := false;
+    ENABLE_NTM_MATRIX_TANH_CASE_1              : boolean := false;
+    ENABLE_NTM_MATRIX_LOGISTIC_CASE_1          : boolean := false;
+    ENABLE_NTM_MATRIX_SOFTMAX_CASE_1           : boolean := false;
+    ENABLE_NTM_MATRIX_ONEPLUS_CASE_1           : boolean := false;
+    ENABLE_NTM_MATRIX_SUMMATION_CASE_1         : boolean := false
+    );
 end ntm_function_testbench;
 
 architecture ntm_function_testbench_architecture of ntm_function_testbench is
@@ -579,813 +693,873 @@ begin
   -----------------------------------------------------------------------
 
   -- SCALAR CONVOLUTION
-  scalar_convolution_function : ntm_scalar_convolution_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_scalar_convolution_test : if (ENABLE_NTM_SCALAR_CONVOLUTION_TEST) generate
+    scalar_convolution_function : ntm_scalar_convolution_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_scalar_convolution,
-      READY => ready_scalar_convolution,
+        -- CONTROL
+        START => start_scalar_convolution,
+        READY => ready_scalar_convolution,
 
-      DATA_IN_ENABLE => data_in_enable_scalar_convolution,
+        DATA_IN_ENABLE => data_in_enable_scalar_convolution,
 
-      DATA_OUT_ENABLE => data_out_enable_scalar_convolution,
+        DATA_OUT_ENABLE => data_out_enable_scalar_convolution,
 
-      -- DATA
-      MODULO_IN => modulo_in_scalar_convolution,
-      LENGTH_IN => length_in_scalar_convolution,
-      DATA_A_IN => data_a_in_scalar_convolution,
-      DATA_B_IN => data_b_in_scalar_convolution,
-      DATA_OUT  => data_out_scalar_convolution
-      );
+        -- DATA
+        MODULO_IN => modulo_in_scalar_convolution,
+        LENGTH_IN => length_in_scalar_convolution,
+        DATA_A_IN => data_a_in_scalar_convolution,
+        DATA_B_IN => data_b_in_scalar_convolution,
+        DATA_OUT  => data_out_scalar_convolution
+        );
+  end generate ntm_scalar_convolution_test;
 
   -- SCALAR COSINE SIMILARITY
-  scalar_cosine_similarity_function : ntm_scalar_cosine_similarity_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_scalar_cosine_similarity_test : if (ENABLE_NTM_SCALAR_COSINE_SIMILARITY_TEST) generate
+    scalar_cosine_similarity_function : ntm_scalar_cosine_similarity_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_scalar_cosine,
-      READY => ready_scalar_cosine,
+        -- CONTROL
+        START => start_scalar_cosine,
+        READY => ready_scalar_cosine,
 
-      DATA_IN_ENABLE => data_in_enable_scalar_cosine,
+        DATA_IN_ENABLE => data_in_enable_scalar_cosine,
 
-      DATA_OUT_ENABLE => data_out_enable_scalar_cosine,
+        DATA_OUT_ENABLE => data_out_enable_scalar_cosine,
 
-      -- DATA
-      MODULO_IN => modulo_in_scalar_cosine,
-      LENGTH_IN => length_in_scalar_cosine,
-      DATA_A_IN => data_a_in_scalar_cosine,
-      DATA_B_IN => data_b_in_scalar_cosine,
-      DATA_OUT  => data_out_scalar_cosine
-      );
+        -- DATA
+        MODULO_IN => modulo_in_scalar_cosine,
+        LENGTH_IN => length_in_scalar_cosine,
+        DATA_A_IN => data_a_in_scalar_cosine,
+        DATA_B_IN => data_b_in_scalar_cosine,
+        DATA_OUT  => data_out_scalar_cosine
+        );
+  end generate ntm_scalar_cosine_similarity_test;
 
   -- SCALAR MULTIPLICATION
-  scalar_multiplication_function : ntm_scalar_multiplication_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_scalar_multiplication_test : if (ENABLE_NTM_SCALAR_MULTIPLICATION_TEST) generate
+    scalar_multiplication_function : ntm_scalar_multiplication_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_scalar_multiplication,
-      READY => ready_scalar_multiplication,
+        -- CONTROL
+        START => start_scalar_multiplication,
+        READY => ready_scalar_multiplication,
 
-      DATA_IN_ENABLE => data_in_enable_scalar_multiplication,
+        DATA_IN_ENABLE => data_in_enable_scalar_multiplication,
 
-      DATA_OUT_ENABLE => data_out_enable_scalar_multiplication,
+        DATA_OUT_ENABLE => data_out_enable_scalar_multiplication,
 
-      -- DATA
-      MODULO_IN => modulo_in_scalar_multiplication,
-      LENGTH_IN => length_in_scalar_multiplication,
-      DATA_IN   => data_in_scalar_multiplication,
-      DATA_OUT  => data_out_scalar_multiplication
-      );
+        -- DATA
+        MODULO_IN => modulo_in_scalar_multiplication,
+        LENGTH_IN => length_in_scalar_multiplication,
+        DATA_IN   => data_in_scalar_multiplication,
+        DATA_OUT  => data_out_scalar_multiplication
+        );
+  end generate ntm_scalar_multiplication_test;
 
   -- SCALAR COSH
-  scalar_cosh_function : ntm_scalar_cosh_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_scalar_cosh_test : if (ENABLE_NTM_SCALAR_COSH_TEST) generate
+    scalar_cosh_function : ntm_scalar_cosh_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_scalar_cosh,
-      READY => ready_scalar_cosh,
+        -- CONTROL
+        START => start_scalar_cosh,
+        READY => ready_scalar_cosh,
 
-      -- DATA
-      MODULO_IN => modulo_in_scalar_cosh,
-      DATA_IN   => data_in_scalar_cosh,
-      DATA_OUT  => data_out_scalar_cosh
-      );
+        -- DATA
+        MODULO_IN => modulo_in_scalar_cosh,
+        DATA_IN   => data_in_scalar_cosh,
+        DATA_OUT  => data_out_scalar_cosh
+        );
+  end generate ntm_scalar_cosh_test;
 
   -- SCALAR SINH
-  scalar_sinh_function : ntm_scalar_sinh_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_scalar_sinh_test : if (ENABLE_NTM_SCALAR_SINH_TEST) generate
+    scalar_sinh_function : ntm_scalar_sinh_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_scalar_sinh,
-      READY => ready_scalar_sinh,
+        -- CONTROL
+        START => start_scalar_sinh,
+        READY => ready_scalar_sinh,
 
-      -- DATA
-      MODULO_IN => modulo_in_scalar_sinh,
-      DATA_IN   => data_in_scalar_sinh,
-      DATA_OUT  => data_out_scalar_sinh
-      );
+        -- DATA
+        MODULO_IN => modulo_in_scalar_sinh,
+        DATA_IN   => data_in_scalar_sinh,
+        DATA_OUT  => data_out_scalar_sinh
+        );
+  end generate ntm_scalar_sinh_test;
 
   -- SCALAR TANH
-  scalar_tanh_function : ntm_scalar_tanh_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_scalar_tanh_test : if (ENABLE_NTM_SCALAR_TANH_TEST) generate
+    scalar_tanh_function : ntm_scalar_tanh_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_scalar_tanh,
-      READY => ready_scalar_tanh,
+        -- CONTROL
+        START => start_scalar_tanh,
+        READY => ready_scalar_tanh,
 
-      -- DATA
-      MODULO_IN => modulo_in_scalar_tanh,
-      DATA_IN   => data_in_scalar_tanh,
-      DATA_OUT  => data_out_scalar_tanh
-      );
+        -- DATA
+        MODULO_IN => modulo_in_scalar_tanh,
+        DATA_IN   => data_in_scalar_tanh,
+        DATA_OUT  => data_out_scalar_tanh
+        );
+  end generate ntm_scalar_tanh_test;
 
   -- SCALAR LOGISTIC
-  scalar_logistic_function : ntm_scalar_logistic_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_scalar_logistic_test : if (ENABLE_NTM_SCALAR_LOGISTIC_TEST) generate
+    scalar_logistic_function : ntm_scalar_logistic_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_scalar_logistic,
-      READY => ready_scalar_logistic,
+        -- CONTROL
+        START => start_scalar_logistic,
+        READY => ready_scalar_logistic,
 
-      -- DATA
-      MODULO_IN => modulo_in_scalar_logistic,
-      DATA_IN   => data_in_scalar_logistic,
-      DATA_OUT  => data_out_scalar_logistic
-      );
+        -- DATA
+        MODULO_IN => modulo_in_scalar_logistic,
+        DATA_IN   => data_in_scalar_logistic,
+        DATA_OUT  => data_out_scalar_logistic
+        );
+  end generate ntm_scalar_logistic_test;
 
   -- SCALAR SOFTMAX
-  scalar_softmax_function : ntm_scalar_softmax_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_scalar_softmax_test : if (ENABLE_NTM_SCALAR_SOFTMAX_TEST) generate
+    scalar_softmax_function : ntm_scalar_softmax_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_scalar_softmax,
-      READY => ready_scalar_softmax,
+        -- CONTROL
+        START => start_scalar_softmax,
+        READY => ready_scalar_softmax,
 
-      DATA_IN_ENABLE => data_in_enable_scalar_softmax,
+        DATA_IN_ENABLE => data_in_enable_scalar_softmax,
 
-      DATA_OUT_ENABLE => data_out_enable_scalar_softmax,
+        DATA_OUT_ENABLE => data_out_enable_scalar_softmax,
 
-      -- DATA
-      MODULO_IN => modulo_in_scalar_softmax,
-      LENGTH_IN => length_in_scalar_softmax,
-      DATA_IN   => data_in_scalar_softmax,
-      DATA_OUT  => data_out_scalar_softmax
-      );
+        -- DATA
+        MODULO_IN => modulo_in_scalar_softmax,
+        LENGTH_IN => length_in_scalar_softmax,
+        DATA_IN   => data_in_scalar_softmax,
+        DATA_OUT  => data_out_scalar_softmax
+        );
+  end generate ntm_scalar_softmax_test;
 
   -- SCALAR ONEPLUS
-  scalar_oneplus_function : ntm_scalar_oneplus_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_scalar_oneplus_test : if (ENABLE_NTM_SCALAR_ONEPLUS_TEST) generate
+    scalar_oneplus_function : ntm_scalar_oneplus_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_scalar_oneplus,
-      READY => ready_scalar_oneplus,
+        -- CONTROL
+        START => start_scalar_oneplus,
+        READY => ready_scalar_oneplus,
 
-      -- DATA
-      MODULO_IN => modulo_in_scalar_oneplus,
-      DATA_IN   => data_in_scalar_oneplus,
-      DATA_OUT  => data_out_scalar_oneplus
-      );
+        -- DATA
+        MODULO_IN => modulo_in_scalar_oneplus,
+        DATA_IN   => data_in_scalar_oneplus,
+        DATA_OUT  => data_out_scalar_oneplus
+        );
+  end generate ntm_scalar_oneplus_test;
 
   -- SCALAR SUMMATION
-  scalar_summation_function : ntm_scalar_summation_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_scalar_summation_test : if (ENABLE_NTM_SCALAR_SUMMATION_TEST) generate
+    scalar_summation_function : ntm_scalar_summation_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_scalar_summation,
-      READY => ready_scalar_summation,
+        -- CONTROL
+        START => start_scalar_summation,
+        READY => ready_scalar_summation,
 
-      DATA_IN_ENABLE => data_in_enable_scalar_summation,
+        DATA_IN_ENABLE => data_in_enable_scalar_summation,
 
-      DATA_OUT_ENABLE => data_out_enable_scalar_summation,
+        DATA_OUT_ENABLE => data_out_enable_scalar_summation,
 
-      -- DATA
-      MODULO_IN => modulo_in_scalar_summation,
-      LENGTH_IN => length_in_scalar_summation,
-      DATA_IN   => data_in_scalar_summation,
-      DATA_OUT  => data_out_scalar_summation
-      );
+        -- DATA
+        MODULO_IN => modulo_in_scalar_summation,
+        LENGTH_IN => length_in_scalar_summation,
+        DATA_IN   => data_in_scalar_summation,
+        DATA_OUT  => data_out_scalar_summation
+        );
+  end generate ntm_scalar_summation_test;
 
   -----------------------------------------------------------------------
   -- VECTOR
   -----------------------------------------------------------------------
 
   -- VECTOR CONVOLUTION
-  vector_convolution_function : ntm_vector_convolution_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_vector_convolution_test : if (ENABLE_NTM_VECTOR_CONVOLUTION_TEST) generate
+    vector_convolution_function : ntm_vector_convolution_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_vector_convolution,
-      READY => ready_vector_convolution,
+        -- CONTROL
+        START => start_vector_convolution,
+        READY => ready_vector_convolution,
 
-      DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_convolution,
-      DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_convolution,
-      DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_convolution,
-      DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_convolution,
+        DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_convolution,
+        DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_convolution,
+        DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_convolution,
+        DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_convolution,
 
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_convolution,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_convolution,
+        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_convolution,
+        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_convolution,
 
-      -- DATA
-      MODULO_IN => modulo_in_vector_convolution,
-      SIZE_IN   => size_in_vector_convolution,
-      LENGTH_IN => length_in_vector_convolution,
-      DATA_A_IN => data_a_in_vector_convolution,
-      DATA_B_IN => data_b_in_vector_convolution,
-      DATA_OUT  => data_out_vector_convolution
-      );
+        -- DATA
+        MODULO_IN => modulo_in_vector_convolution,
+        SIZE_IN   => size_in_vector_convolution,
+        LENGTH_IN => length_in_vector_convolution,
+        DATA_A_IN => data_a_in_vector_convolution,
+        DATA_B_IN => data_b_in_vector_convolution,
+        DATA_OUT  => data_out_vector_convolution
+        );
+  end generate ntm_vector_convolution_test;
 
   -- VECTOR COSINE SIMILARITY
-  vector_cosine_similarity_function : ntm_vector_cosine_similarity_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_vector_cosine_similarity_test : if (ENABLE_NTM_VECTOR_COSINE_SIMILARITY_TEST) generate
+    vector_cosine_similarity_function : ntm_vector_cosine_similarity_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_vector_cosine,
-      READY => ready_vector_cosine,
+        -- CONTROL
+        START => start_vector_cosine,
+        READY => ready_vector_cosine,
 
-      DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_cosine,
-      DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_cosine,
-      DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_cosine,
-      DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_cosine,
+        DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_cosine,
+        DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_cosine,
+        DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_cosine,
+        DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_cosine,
 
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_cosine,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_cosine,
+        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_cosine,
+        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_cosine,
 
-      -- DATA
-      MODULO_IN => modulo_in_vector_cosine,
-      SIZE_IN   => size_in_vector_cosine,
-      LENGTH_IN => length_in_vector_cosine,
-      DATA_A_IN => data_a_in_vector_cosine,
-      DATA_B_IN => data_b_in_vector_cosine,
-      DATA_OUT  => data_out_vector_cosine
-      );
+        -- DATA
+        MODULO_IN => modulo_in_vector_cosine,
+        SIZE_IN   => size_in_vector_cosine,
+        LENGTH_IN => length_in_vector_cosine,
+        DATA_A_IN => data_a_in_vector_cosine,
+        DATA_B_IN => data_b_in_vector_cosine,
+        DATA_OUT  => data_out_vector_cosine
+        );
+  end generate ntm_vector_cosine_similarity_test;
 
   -- VECTOR MULTIPLICATION
-  vector_multiplication_function : ntm_vector_multiplication_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_vector_multiplication_test : if (ENABLE_NTM_VECTOR_MULTIPLICATION_TEST) generate
+    vector_multiplication_function : ntm_vector_multiplication_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_vector_multiplication,
-      READY => ready_vector_multiplication,
+        -- CONTROL
+        START => start_vector_multiplication,
+        READY => ready_vector_multiplication,
 
-      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_multiplication,
-      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_multiplication,
+        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_multiplication,
+        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_multiplication,
 
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_multiplication,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_multiplication,
+        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_multiplication,
+        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_multiplication,
 
-      -- DATA
-      MODULO_IN => modulo_in_vector_multiplication,
-      SIZE_IN   => size_in_vector_multiplication,
-      LENGTH_IN => length_in_vector_multiplication,
-      DATA_IN   => data_in_vector_multiplication,
-      DATA_OUT  => data_out_vector_multiplication
-      );
+        -- DATA
+        MODULO_IN => modulo_in_vector_multiplication,
+        SIZE_IN   => size_in_vector_multiplication,
+        LENGTH_IN => length_in_vector_multiplication,
+        DATA_IN   => data_in_vector_multiplication,
+        DATA_OUT  => data_out_vector_multiplication
+        );
+  end generate ntm_vector_multiplication_test;
 
   -- VECTOR COSH
-  vector_cosh_function : ntm_vector_cosh_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_vector_cosh_test : if (ENABLE_NTM_VECTOR_COSH_TEST) generate
+    vector_cosh_function : ntm_vector_cosh_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_vector_cosh,
-      READY => ready_vector_cosh,
+        -- CONTROL
+        START => start_vector_cosh,
+        READY => ready_vector_cosh,
 
-      DATA_IN_ENABLE => data_in_enable_vector_cosh,
+        DATA_IN_ENABLE => data_in_enable_vector_cosh,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_cosh,
+        DATA_OUT_ENABLE => data_out_enable_vector_cosh,
 
-      -- DATA
-      MODULO_IN => modulo_in_vector_cosh,
-      SIZE_IN   => size_in_vector_cosh,
-      DATA_IN   => data_in_vector_cosh,
-      DATA_OUT  => data_out_vector_cosh
-      );
+        -- DATA
+        MODULO_IN => modulo_in_vector_cosh,
+        SIZE_IN   => size_in_vector_cosh,
+        DATA_IN   => data_in_vector_cosh,
+        DATA_OUT  => data_out_vector_cosh
+        );
+  end generate ntm_vector_cosh_test;
 
   -- VECTOR SINH
-  vector_sinh_function : ntm_vector_sinh_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_vector_sinh_test : if (ENABLE_NTM_VECTOR_SINH_TEST) generate
+    vector_sinh_function : ntm_vector_sinh_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_vector_sinh,
-      READY => ready_vector_sinh,
+        -- CONTROL
+        START => start_vector_sinh,
+        READY => ready_vector_sinh,
 
-      DATA_IN_ENABLE => data_in_enable_vector_sinh,
+        DATA_IN_ENABLE => data_in_enable_vector_sinh,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_sinh,
+        DATA_OUT_ENABLE => data_out_enable_vector_sinh,
 
-      -- DATA
-      MODULO_IN => modulo_in_vector_sinh,
-      SIZE_IN   => size_in_vector_sinh,
-      DATA_IN   => data_in_vector_sinh,
-      DATA_OUT  => data_out_vector_sinh
-      );
+        -- DATA
+        MODULO_IN => modulo_in_vector_sinh,
+        SIZE_IN   => size_in_vector_sinh,
+        DATA_IN   => data_in_vector_sinh,
+        DATA_OUT  => data_out_vector_sinh
+        );
+  end generate ntm_vector_sinh_test;
 
   -- VECTOR TANH
-  vector_tanh_function : ntm_vector_tanh_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_vector_tanh_test : if (ENABLE_NTM_VECTOR_TANH_TEST) generate
+    vector_tanh_function : ntm_vector_tanh_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_vector_tanh,
-      READY => ready_vector_tanh,
+        -- CONTROL
+        START => start_vector_tanh,
+        READY => ready_vector_tanh,
 
-      DATA_IN_ENABLE => data_in_enable_vector_tanh,
+        DATA_IN_ENABLE => data_in_enable_vector_tanh,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_tanh,
+        DATA_OUT_ENABLE => data_out_enable_vector_tanh,
 
-      -- DATA
-      MODULO_IN => modulo_in_vector_tanh,
-      SIZE_IN   => size_in_vector_tanh,
-      DATA_IN   => data_in_vector_tanh,
-      DATA_OUT  => data_out_vector_tanh
-      );
+        -- DATA
+        MODULO_IN => modulo_in_vector_tanh,
+        SIZE_IN   => size_in_vector_tanh,
+        DATA_IN   => data_in_vector_tanh,
+        DATA_OUT  => data_out_vector_tanh
+        );
+  end generate ntm_vector_tanh_test;
 
   -- VECTOR LOGISTIC
-  vector_logistic_function : ntm_vector_logistic_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_vector_logistic_test : if (ENABLE_NTM_VECTOR_LOGISTIC_TEST) generate
+    vector_logistic_function : ntm_vector_logistic_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_vector_logistic,
-      READY => ready_vector_logistic,
+        -- CONTROL
+        START => start_vector_logistic,
+        READY => ready_vector_logistic,
 
-      DATA_IN_ENABLE => data_in_enable_vector_logistic,
+        DATA_IN_ENABLE => data_in_enable_vector_logistic,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_logistic,
+        DATA_OUT_ENABLE => data_out_enable_vector_logistic,
 
-      -- DATA
-      MODULO_IN => modulo_in_vector_logistic,
-      SIZE_IN   => size_in_vector_logistic,
-      DATA_IN   => data_in_vector_logistic,
-      DATA_OUT  => data_out_vector_logistic
-      );
+        -- DATA
+        MODULO_IN => modulo_in_vector_logistic,
+        SIZE_IN   => size_in_vector_logistic,
+        DATA_IN   => data_in_vector_logistic,
+        DATA_OUT  => data_out_vector_logistic
+        );
+  end generate ntm_vector_logistic_test;
 
   -- VECTOR SOFTMAX
-  vector_softmax_function : ntm_vector_softmax_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_vector_softmax_test : if (ENABLE_NTM_VECTOR_SOFTMAX_TEST) generate
+    vector_softmax_function : ntm_vector_softmax_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_vector_softmax,
-      READY => ready_vector_softmax,
+        -- CONTROL
+        START => start_vector_softmax,
+        READY => ready_vector_softmax,
 
-      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_softmax,
-      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_softmax,
+        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_softmax,
+        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_softmax,
 
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_softmax,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_softmax,
+        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_softmax,
+        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_softmax,
 
-      -- DATA
-      MODULO_IN => modulo_in_vector_softmax,
-      SIZE_IN   => size_in_vector_softmax,
-      LENGTH_IN => length_in_vector_softmax,
-      DATA_IN   => data_in_vector_softmax,
-      DATA_OUT  => data_out_vector_softmax
-      );
+        -- DATA
+        MODULO_IN => modulo_in_vector_softmax,
+        SIZE_IN   => size_in_vector_softmax,
+        LENGTH_IN => length_in_vector_softmax,
+        DATA_IN   => data_in_vector_softmax,
+        DATA_OUT  => data_out_vector_softmax
+        );
+  end generate ntm_vector_softmax_test;
 
   -- VECTOR ONEPLUS
-  vector_oneplus_function : ntm_vector_oneplus_function
-    generic map (
+  ntm_vector_oneplus_test : if (ENABLE_NTM_VECTOR_ONEPLUS_TEST) generate
+    vector_oneplus_function : ntm_vector_oneplus_function
+      generic map (
 
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_vector_oneplus,
-      READY => ready_vector_oneplus,
+        -- CONTROL
+        START => start_vector_oneplus,
+        READY => ready_vector_oneplus,
 
-      DATA_IN_ENABLE => data_in_enable_vector_oneplus,
+        DATA_IN_ENABLE => data_in_enable_vector_oneplus,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_oneplus,
+        DATA_OUT_ENABLE => data_out_enable_vector_oneplus,
 
-      -- DATA
-      MODULO_IN => modulo_in_vector_oneplus,
-      SIZE_IN   => size_in_vector_oneplus,
-      DATA_IN   => data_in_vector_oneplus,
-      DATA_OUT  => data_out_vector_oneplus
-      );
+        -- DATA
+        MODULO_IN => modulo_in_vector_oneplus,
+        SIZE_IN   => size_in_vector_oneplus,
+        DATA_IN   => data_in_vector_oneplus,
+        DATA_OUT  => data_out_vector_oneplus
+        );
+  end generate ntm_vector_oneplus_test;
 
   -- VECTOR SUMMATION
-  vector_summation_function : ntm_vector_summation_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_vector_summation_test : if (ENABLE_NTM_VECTOR_SUMMATION_TEST) generate
+    vector_summation_function : ntm_vector_summation_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_vector_summation,
-      READY => ready_vector_summation,
+        -- CONTROL
+        START => start_vector_summation,
+        READY => ready_vector_summation,
 
-      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_summation,
-      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_summation,
+        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_summation,
+        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_summation,
 
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_summation,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
+        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_summation,
+        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
 
-      -- DATA
-      MODULO_IN => modulo_in_vector_summation,
-      SIZE_IN   => size_in_vector_summation,
-      LENGTH_IN => length_in_vector_summation,
-      DATA_IN   => data_in_vector_summation,
-      DATA_OUT  => data_out_vector_summation
-      );
+        -- DATA
+        MODULO_IN => modulo_in_vector_summation,
+        SIZE_IN   => size_in_vector_summation,
+        LENGTH_IN => length_in_vector_summation,
+        DATA_IN   => data_in_vector_summation,
+        DATA_OUT  => data_out_vector_summation
+        );
+  end generate ntm_vector_summation_test;
 
   -----------------------------------------------------------------------
   -- MATRIX
   -----------------------------------------------------------------------
 
   -- MATRIX CONVOLUTION
-  matrix_convolution_function : ntm_matrix_convolution_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_matrix_convolution_test : if (ENABLE_NTM_MATRIX_CONVOLUTION_TEST) generate
+    matrix_convolution_function : ntm_matrix_convolution_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_matrix_convolution,
-      READY => ready_matrix_convolution,
+        -- CONTROL
+        START => start_matrix_convolution,
+        READY => ready_matrix_convolution,
 
-      DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_convolution,
-      DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_convolution,
-      DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_convolution,
-      DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_convolution,
-      DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_convolution,
-      DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_convolution,
+        DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_convolution,
+        DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_convolution,
+        DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_convolution,
+        DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_convolution,
+        DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_convolution,
+        DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_convolution,
 
-      DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_convolution,
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_convolution,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_convolution,
+        DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_convolution,
+        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_convolution,
+        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_convolution,
 
-      -- DATA
-      MODULO_IN => modulo_in_matrix_convolution,
-      SIZE_I_IN => size_i_in_matrix_convolution,
-      SIZE_J_IN => size_j_in_matrix_convolution,
-      LENGTH_IN => length_in_matrix_convolution,
-      DATA_A_IN => data_a_in_matrix_convolution,
-      DATA_B_IN => data_b_in_matrix_convolution,
-      DATA_OUT  => data_out_matrix_convolution
-      );
+        -- DATA
+        MODULO_IN => modulo_in_matrix_convolution,
+        SIZE_I_IN => size_i_in_matrix_convolution,
+        SIZE_J_IN => size_j_in_matrix_convolution,
+        LENGTH_IN => length_in_matrix_convolution,
+        DATA_A_IN => data_a_in_matrix_convolution,
+        DATA_B_IN => data_b_in_matrix_convolution,
+        DATA_OUT  => data_out_matrix_convolution
+        );
+  end generate ntm_matrix_convolution_test;
 
   -- MATRIX COSINE SIMILARITY
-  matrix_cosine_similarity_function : ntm_matrix_cosine_similarity_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_matrix_cosine_similarity_test : if (ENABLE_NTM_MATRIX_COSINE_SIMILARITY_TEST) generate
+    matrix_cosine_similarity_function : ntm_matrix_cosine_similarity_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_matrix_cosine,
-      READY => ready_matrix_cosine,
+        -- CONTROL
+        START => start_matrix_cosine,
+        READY => ready_matrix_cosine,
 
-      DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_cosine,
-      DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_cosine,
-      DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_cosine,
-      DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_cosine,
-      DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_cosine,
-      DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_cosine,
+        DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_cosine,
+        DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_cosine,
+        DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_cosine,
+        DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_cosine,
+        DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_cosine,
+        DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_cosine,
 
-      DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_cosine,
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_cosine,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_cosine,
+        DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_cosine,
+        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_cosine,
+        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_cosine,
 
-      -- DATA
-      MODULO_IN => modulo_in_matrix_cosine,
-      SIZE_I_IN => size_i_in_matrix_cosine,
-      SIZE_J_IN => size_j_in_matrix_cosine,
-      LENGTH_IN => length_in_matrix_cosine,
-      DATA_A_IN => data_a_in_matrix_cosine,
-      DATA_B_IN => data_b_in_matrix_cosine,
-      DATA_OUT  => data_out_matrix_cosine
-      );
+        -- DATA
+        MODULO_IN => modulo_in_matrix_cosine,
+        SIZE_I_IN => size_i_in_matrix_cosine,
+        SIZE_J_IN => size_j_in_matrix_cosine,
+        LENGTH_IN => length_in_matrix_cosine,
+        DATA_A_IN => data_a_in_matrix_cosine,
+        DATA_B_IN => data_b_in_matrix_cosine,
+        DATA_OUT  => data_out_matrix_cosine
+        );
+  end generate ntm_matrix_cosine_similarity_test;
 
   -- MATRIX MULTIPLICATION
-  matrix_multiplication_function : ntm_matrix_multiplication_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_matrix_multiplication_test : if (ENABLE_NTM_MATRIX_MULTIPLICATION_TEST) generate
+    matrix_multiplication_function : ntm_matrix_multiplication_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_matrix_multiplication,
-      READY => ready_matrix_multiplication,
+        -- CONTROL
+        START => start_matrix_multiplication,
+        READY => ready_matrix_multiplication,
 
-      DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_multiplication,
-      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_multiplication,
-      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_multiplication,
+        DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_multiplication,
+        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_multiplication,
+        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_multiplication,
 
-      DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_multiplication,
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_multiplication,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_multiplication,
+        DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_multiplication,
+        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_multiplication,
+        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_multiplication,
 
-      -- DATA
-      MODULO_IN => modulo_in_matrix_multiplication,
-      SIZE_I_IN => size_i_in_matrix_multiplication,
-      SIZE_J_IN => size_j_in_matrix_multiplication,
-      LENGTH_IN => length_in_matrix_multiplication,
-      DATA_IN   => data_in_matrix_multiplication,
-      DATA_OUT  => data_out_matrix_multiplication
-      );
+        -- DATA
+        MODULO_IN => modulo_in_matrix_multiplication,
+        SIZE_I_IN => size_i_in_matrix_multiplication,
+        SIZE_J_IN => size_j_in_matrix_multiplication,
+        LENGTH_IN => length_in_matrix_multiplication,
+        DATA_IN   => data_in_matrix_multiplication,
+        DATA_OUT  => data_out_matrix_multiplication
+        );
+  end generate ntm_matrix_multiplication_test;
 
   -- MATRIX COSH
-  matrix_cosh_function : ntm_matrix_cosh_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_matrix_cosh_test : if (ENABLE_NTM_MATRIX_COSH_TEST) generate
+    matrix_cosh_function : ntm_matrix_cosh_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_matrix_cosh,
-      READY => ready_matrix_cosh,
+        -- CONTROL
+        START => start_matrix_cosh,
+        READY => ready_matrix_cosh,
 
-      DATA_IN_I_ENABLE => data_in_i_enable_matrix_cosh,
-      DATA_IN_J_ENABLE => data_in_j_enable_matrix_cosh,
+        DATA_IN_I_ENABLE => data_in_i_enable_matrix_cosh,
+        DATA_IN_J_ENABLE => data_in_j_enable_matrix_cosh,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_cosh,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_cosh,
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_cosh,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_cosh,
 
-      -- DATA
-      MODULO_IN => modulo_in_matrix_cosh,
-      SIZE_I_IN => size_i_in_matrix_cosh,
-      SIZE_J_IN => size_j_in_matrix_cosh,
-      DATA_IN   => data_in_matrix_cosh,
-      DATA_OUT  => data_out_matrix_cosh
-      );
+        -- DATA
+        MODULO_IN => modulo_in_matrix_cosh,
+        SIZE_I_IN => size_i_in_matrix_cosh,
+        SIZE_J_IN => size_j_in_matrix_cosh,
+        DATA_IN   => data_in_matrix_cosh,
+        DATA_OUT  => data_out_matrix_cosh
+        );
+  end generate ntm_matrix_cosh_test;
 
   -- MATRIX SINH
-  matrix_sinh_function : ntm_matrix_sinh_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_matrix_sinh_test : if (ENABLE_NTM_MATRIX_SINH_TEST) generate
+    matrix_sinh_function : ntm_matrix_sinh_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_matrix_sinh,
-      READY => ready_matrix_sinh,
+        -- CONTROL
+        START => start_matrix_sinh,
+        READY => ready_matrix_sinh,
 
-      DATA_IN_I_ENABLE => data_in_i_enable_matrix_sinh,
-      DATA_IN_J_ENABLE => data_in_j_enable_matrix_sinh,
+        DATA_IN_I_ENABLE => data_in_i_enable_matrix_sinh,
+        DATA_IN_J_ENABLE => data_in_j_enable_matrix_sinh,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_sinh,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_sinh,
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_sinh,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_sinh,
 
-      -- DATA
-      MODULO_IN => modulo_in_matrix_sinh,
-      SIZE_I_IN => size_i_in_matrix_sinh,
-      SIZE_J_IN => size_j_in_matrix_sinh,
-      DATA_IN   => data_in_matrix_sinh,
-      DATA_OUT  => data_out_matrix_sinh
-      );
+        -- DATA
+        MODULO_IN => modulo_in_matrix_sinh,
+        SIZE_I_IN => size_i_in_matrix_sinh,
+        SIZE_J_IN => size_j_in_matrix_sinh,
+        DATA_IN   => data_in_matrix_sinh,
+        DATA_OUT  => data_out_matrix_sinh
+        );
+  end generate ntm_matrix_sinh_test;
 
   -- MATRIX TANH
-  matrix_tanh_function : ntm_matrix_tanh_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_matrix_tanh_test : if (ENABLE_NTM_MATRIX_TANH_TEST) generate
+    matrix_tanh_function : ntm_matrix_tanh_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_matrix_tanh,
-      READY => ready_matrix_tanh,
+        -- CONTROL
+        START => start_matrix_tanh,
+        READY => ready_matrix_tanh,
 
-      DATA_IN_I_ENABLE => data_in_i_enable_matrix_tanh,
-      DATA_IN_J_ENABLE => data_in_j_enable_matrix_tanh,
+        DATA_IN_I_ENABLE => data_in_i_enable_matrix_tanh,
+        DATA_IN_J_ENABLE => data_in_j_enable_matrix_tanh,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_tanh,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_tanh,
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_tanh,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_tanh,
 
-      -- DATA
-      MODULO_IN => modulo_in_matrix_tanh,
-      SIZE_I_IN => size_i_in_matrix_tanh,
-      SIZE_J_IN => size_j_in_matrix_tanh,
-      DATA_IN   => data_in_matrix_tanh,
-      DATA_OUT  => data_out_matrix_tanh
-      );
+        -- DATA
+        MODULO_IN => modulo_in_matrix_tanh,
+        SIZE_I_IN => size_i_in_matrix_tanh,
+        SIZE_J_IN => size_j_in_matrix_tanh,
+        DATA_IN   => data_in_matrix_tanh,
+        DATA_OUT  => data_out_matrix_tanh
+        );
+  end generate ntm_matrix_tanh_test;
 
   -- MATRIX LOGISTIC
-  matrix_logistic_function : ntm_matrix_logistic_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_matrix_logistic_test : if (ENABLE_NTM_MATRIX_LOGISTIC_TEST) generate
+    matrix_logistic_function : ntm_matrix_logistic_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_matrix_logistic,
-      READY => ready_matrix_logistic,
+        -- CONTROL
+        START => start_matrix_logistic,
+        READY => ready_matrix_logistic,
 
-      DATA_IN_I_ENABLE => data_in_i_enable_matrix_logistic,
-      DATA_IN_J_ENABLE => data_in_j_enable_matrix_logistic,
+        DATA_IN_I_ENABLE => data_in_i_enable_matrix_logistic,
+        DATA_IN_J_ENABLE => data_in_j_enable_matrix_logistic,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_logistic,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_logistic,
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_logistic,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_logistic,
 
-      -- DATA
-      MODULO_IN => modulo_in_matrix_logistic,
-      SIZE_I_IN => size_i_in_matrix_logistic,
-      SIZE_J_IN => size_j_in_matrix_logistic,
-      DATA_IN   => data_in_matrix_logistic,
-      DATA_OUT  => data_out_matrix_logistic
-      );
+        -- DATA
+        MODULO_IN => modulo_in_matrix_logistic,
+        SIZE_I_IN => size_i_in_matrix_logistic,
+        SIZE_J_IN => size_j_in_matrix_logistic,
+        DATA_IN   => data_in_matrix_logistic,
+        DATA_OUT  => data_out_matrix_logistic
+        );
+  end generate ntm_matrix_logistic_test;
 
   -- MATRIX SOFTMAX
-  matrix_softmax_function : ntm_matrix_softmax_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_matrix_softmax_test : if (ENABLE_NTM_MATRIX_SOFTMAX_TEST) generate
+    matrix_softmax_function : ntm_matrix_softmax_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_matrix_softmax,
-      READY => ready_matrix_softmax,
+        -- CONTROL
+        START => start_matrix_softmax,
+        READY => ready_matrix_softmax,
 
-      DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_softmax,
-      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_softmax,
-      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_softmax,
+        DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_softmax,
+        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_softmax,
+        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_softmax,
 
-      DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_softmax,
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_softmax,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_softmax,
+        DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_softmax,
+        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_softmax,
+        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_softmax,
 
-      -- DATA
-      MODULO_IN => modulo_in_matrix_softmax,
-      SIZE_I_IN => size_i_in_matrix_softmax,
-      SIZE_J_IN => size_j_in_matrix_softmax,
-      LENGTH_IN => length_in_matrix_softmax,
-      DATA_IN   => data_in_matrix_softmax,
-      DATA_OUT  => data_out_matrix_softmax
-      );
+        -- DATA
+        MODULO_IN => modulo_in_matrix_softmax,
+        SIZE_I_IN => size_i_in_matrix_softmax,
+        SIZE_J_IN => size_j_in_matrix_softmax,
+        LENGTH_IN => length_in_matrix_softmax,
+        DATA_IN   => data_in_matrix_softmax,
+        DATA_OUT  => data_out_matrix_softmax
+        );
+  end generate ntm_matrix_softmax_test;
 
   -- MATRIX ONEPLUS
-  matrix_oneplus_function : ntm_matrix_oneplus_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_matrix_oneplus_test : if (ENABLE_NTM_MATRIX_ONEPLUS_TEST) generate
+    matrix_oneplus_function : ntm_matrix_oneplus_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_matrix_oneplus,
-      READY => ready_matrix_oneplus,
+        -- CONTROL
+        START => start_matrix_oneplus,
+        READY => ready_matrix_oneplus,
 
-      DATA_IN_I_ENABLE => data_in_i_enable_matrix_oneplus,
-      DATA_IN_J_ENABLE => data_in_j_enable_matrix_oneplus,
+        DATA_IN_I_ENABLE => data_in_i_enable_matrix_oneplus,
+        DATA_IN_J_ENABLE => data_in_j_enable_matrix_oneplus,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_oneplus,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_oneplus,
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_oneplus,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_oneplus,
 
-      -- DATA
-      MODULO_IN => modulo_in_matrix_oneplus,
-      SIZE_I_IN => size_i_in_matrix_oneplus,
-      SIZE_J_IN => size_j_in_matrix_oneplus,
-      DATA_IN   => data_in_matrix_oneplus,
-      DATA_OUT  => data_out_matrix_oneplus
-      );
+        -- DATA
+        MODULO_IN => modulo_in_matrix_oneplus,
+        SIZE_I_IN => size_i_in_matrix_oneplus,
+        SIZE_J_IN => size_j_in_matrix_oneplus,
+        DATA_IN   => data_in_matrix_oneplus,
+        DATA_OUT  => data_out_matrix_oneplus
+        );
+  end generate ntm_matrix_oneplus_test;
 
   -- MATRIX SUMMATION
-  matrix_summation_function : ntm_matrix_summation_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  ntm_matrix_summation_test : if (ENABLE_NTM_MATRIX_SUMMATION_TEST) generate
+    matrix_summation_function : ntm_matrix_summation_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_matrix_summation,
-      READY => ready_matrix_summation,
+        -- CONTROL
+        START => start_matrix_summation,
+        READY => ready_matrix_summation,
 
-      DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_summation,
-      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_summation,
-      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_summation,
+        DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_summation,
+        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_summation,
+        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_summation,
 
-      DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_summation,
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_summation,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_summation,
+        DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_summation,
+        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_summation,
+        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_summation,
 
-      -- DATA
-      MODULO_IN => modulo_in_matrix_summation,
-      SIZE_I_IN => size_i_in_matrix_summation,
-      SIZE_J_IN => size_j_in_matrix_summation,
-      LENGTH_IN => length_in_matrix_summation,
-      DATA_IN   => data_in_matrix_summation,
-      DATA_OUT  => data_out_matrix_summation
-      );
+        -- DATA
+        MODULO_IN => modulo_in_matrix_summation,
+        SIZE_I_IN => size_i_in_matrix_summation,
+        SIZE_J_IN => size_j_in_matrix_summation,
+        LENGTH_IN => length_in_matrix_summation,
+        DATA_IN   => data_in_matrix_summation,
+        DATA_OUT  => data_out_matrix_summation
+        );
+  end generate ntm_matrix_summation_test;
 
 end ntm_function_testbench_architecture;

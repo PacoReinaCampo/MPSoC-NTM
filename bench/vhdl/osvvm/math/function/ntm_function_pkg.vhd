@@ -40,7 +40,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-package ntm_arithmetic_pkg is
+package ntm_function_pkg is
 
   -----------------------------------------------------------------------
   -- Types
@@ -68,52 +68,97 @@ package ntm_arithmetic_pkg is
   constant R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
   -- SCALAR-FUNCTIONALITY
-  constant STIMULUS_NTM_SCALAR_MOD_TEST           : boolean := false;
-  constant STIMULUS_NTM_SCALAR_ADDER_TEST         : boolean := false;
-  constant STIMULUS_NTM_SCALAR_MULTIPLIER_TEST    : boolean := false;
-  constant STIMULUS_NTM_SCALAR_INVERTER_TEST      : boolean := false;
-  constant STIMULUS_NTM_SCALAR_DIVIDER_TEST       : boolean := false;
-  constant STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST : boolean := false;
-  constant STIMULUS_NTM_SCALAR_ROOT_TEST          : boolean := false;
-  constant STIMULUS_NTM_SCALAR_LOGARITHM_TEST     : boolean := false;
+  constant STIMULUS_NTM_SCALAR_CONVOLUTION_TEST       : boolean := false;
+  constant STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_TEST : boolean := false;
+  constant STIMULUS_NTM_SCALAR_COSH_TEST              : boolean := false;
+  constant STIMULUS_NTM_SCALAR_SINH_TEST              : boolean := false;
+  constant STIMULUS_NTM_SCALAR_TANH_TEST              : boolean := false;
+  constant STIMULUS_NTM_SCALAR_LOGISTIC_TEST          : boolean := false;
+  constant STIMULUS_NTM_SCALAR_SOFTMAX_TEST           : boolean := false;
+  constant STIMULUS_NTM_SCALAR_ONEPLUS_TEST           : boolean := false;
+  constant STIMULUS_NTM_SCALAR_SUMMATION_TEST         : boolean := false;
 
-  constant STIMULUS_NTM_SCALAR_MOD_CASE_0           : boolean := false;
-  constant STIMULUS_NTM_SCALAR_ADDER_CASE_0         : boolean := false;
-  constant STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0    : boolean := false;
-  constant STIMULUS_NTM_SCALAR_INVERTER_CASE_0      : boolean := false;
-  constant STIMULUS_NTM_SCALAR_DIVIDER_CASE_0       : boolean := false;
-  constant STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0 : boolean := false;
-  constant STIMULUS_NTM_SCALAR_ROOT_CASE_0          : boolean := false;
-  constant STIMULUS_NTM_SCALAR_LOGARITHM_CASE_0     : boolean := false;
+  constant STIMULUS_NTM_SCALAR_CONVOLUTION_CASE_0       : boolean := false;
+  constant STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_CASE_0 : boolean := false;
+  constant STIMULUS_NTM_SCALAR_COSH_CASE_0              : boolean := false;
+  constant STIMULUS_NTM_SCALAR_SINH_CASE_0              : boolean := false;
+  constant STIMULUS_NTM_SCALAR_TANH_CASE_0              : boolean := false;
+  constant STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0          : boolean := false;
+  constant STIMULUS_NTM_SCALAR_SOFTMAX_CASE_0           : boolean := false;
+  constant STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0           : boolean := false;
+  constant STIMULUS_NTM_SCALAR_SUMMATION_CASE_0         : boolean := false;
 
-  constant STIMULUS_NTM_SCALAR_MOD_CASE_1           : boolean := false;
-  constant STIMULUS_NTM_SCALAR_ADDER_CASE_1         : boolean := false;
-  constant STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1    : boolean := false;
-  constant STIMULUS_NTM_SCALAR_INVERTER_CASE_1      : boolean := false;
-  constant STIMULUS_NTM_SCALAR_DIVIDER_CASE_1       : boolean := false;
-  constant STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1 : boolean := false;
-  constant STIMULUS_NTM_SCALAR_ROOT_CASE_1          : boolean := false;
-  constant STIMULUS_NTM_SCALAR_LOGARITHM_CASE_1     : boolean := false;
+  constant STIMULUS_NTM_SCALAR_CONVOLUTION_CASE_1       : boolean := false;
+  constant STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_CASE_1 : boolean := false;
+  constant STIMULUS_NTM_SCALAR_COSH_CASE_1              : boolean := false;
+  constant STIMULUS_NTM_SCALAR_SINH_CASE_1              : boolean := false;
+  constant STIMULUS_NTM_SCALAR_TANH_CASE_1              : boolean := false;
+  constant STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1          : boolean := false;
+  constant STIMULUS_NTM_SCALAR_SOFTMAX_CASE_1           : boolean := false;
+  constant STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1           : boolean := false;
+  constant STIMULUS_NTM_SCALAR_SUMMATION_CASE_1         : boolean := false;
 
   -- VECTOR-FUNCTIONALITY
-  constant STIMULUS_NTM_VECTOR_MOD_TEST           : boolean := false;
-  constant STIMULUS_NTM_VECTOR_ADDER_TEST         : boolean := false;
-  constant STIMULUS_NTM_VECTOR_MULTIPLIER_TEST    : boolean := false;
-  constant STIMULUS_NTM_VECTOR_INVERTER_TEST      : boolean := false;
-  constant STIMULUS_NTM_VECTOR_DIVIDER_TEST       : boolean := false;
-  constant STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST : boolean := false;
-  constant STIMULUS_NTM_VECTOR_ROOT_TEST          : boolean := false;
-  constant STIMULUS_NTM_VECTOR_LOGARITHM_TEST     : boolean := false;
+  constant STIMULUS_NTM_VECTOR_CONVOLUTION_TEST       : boolean := false;
+  constant STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_TEST : boolean := false;
+  constant STIMULUS_NTM_VECTOR_COSH_TEST              : boolean := false;
+  constant STIMULUS_NTM_VECTOR_SINH_TEST              : boolean := false;
+  constant STIMULUS_NTM_VECTOR_TANH_TEST              : boolean := false;
+  constant STIMULUS_NTM_VECTOR_LOGISTIC_TEST          : boolean := false;
+  constant STIMULUS_NTM_VECTOR_SOFTMAX_TEST           : boolean := false;
+  constant STIMULUS_NTM_VECTOR_ONEPLUS_TEST           : boolean := false;
+  constant STIMULUS_NTM_VECTOR_SUMMATION_TEST         : boolean := false;
+
+  constant STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_0       : boolean := false;
+  constant STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_0 : boolean := false;
+  constant STIMULUS_NTM_VECTOR_COSH_CASE_0              : boolean := false;
+  constant STIMULUS_NTM_VECTOR_SINH_CASE_0              : boolean := false;
+  constant STIMULUS_NTM_VECTOR_TANH_CASE_0              : boolean := false;
+  constant STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0          : boolean := false;
+  constant STIMULUS_NTM_VECTOR_SOFTMAX_CASE_0           : boolean := false;
+  constant STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0           : boolean := false;
+  constant STIMULUS_NTM_VECTOR_SUMMATION_CASE_0         : boolean := false;
+
+  constant STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_1       : boolean := false;
+  constant STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_1 : boolean := false;
+  constant STIMULUS_NTM_VECTOR_COSH_CASE_1              : boolean := false;
+  constant STIMULUS_NTM_VECTOR_SINH_CASE_1              : boolean := false;
+  constant STIMULUS_NTM_VECTOR_TANH_CASE_1              : boolean := false;
+  constant STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1          : boolean := false;
+  constant STIMULUS_NTM_VECTOR_SOFTMAX_CASE_1           : boolean := false;
+  constant STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1           : boolean := false;
+  constant STIMULUS_NTM_VECTOR_SUMMATION_CASE_1         : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
-  constant STIMULUS_NTM_MATRIX_MOD_TEST           : boolean := false;
-  constant STIMULUS_NTM_MATRIX_ADDER_TEST         : boolean := false;
-  constant STIMULUS_NTM_MATRIX_MULTIPLIER_TEST    : boolean := false;
-  constant STIMULUS_NTM_MATRIX_INVERTER_TEST      : boolean := false;
-  constant STIMULUS_NTM_MATRIX_DIVIDER_TEST       : boolean := false;
-  constant STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST : boolean := false;
-  constant STIMULUS_NTM_MATRIX_ROOT_TEST          : boolean := false;
-  constant STIMULUS_NTM_MATRIX_LOGARITHM_TEST     : boolean := false;
+  constant STIMULUS_NTM_MATRIX_CONVOLUTION_TEST       : boolean := false;
+  constant STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_TEST : boolean := false;
+  constant STIMULUS_NTM_MATRIX_COSH_TEST              : boolean := false;
+  constant STIMULUS_NTM_MATRIX_SINH_TEST              : boolean := false;
+  constant STIMULUS_NTM_MATRIX_TANH_TEST              : boolean := false;
+  constant STIMULUS_NTM_MATRIX_LOGISTIC_TEST          : boolean := false;
+  constant STIMULUS_NTM_MATRIX_SOFTMAX_TEST           : boolean := false;
+  constant STIMULUS_NTM_MATRIX_ONEPLUS_TEST           : boolean := false;
+  constant STIMULUS_NTM_MATRIX_SUMMATION_TEST         : boolean := false;
+
+  constant STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_0       : boolean := false;
+  constant STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_0 : boolean := false;
+  constant STIMULUS_NTM_MATRIX_COSH_CASE_0              : boolean := false;
+  constant STIMULUS_NTM_MATRIX_SINH_CASE_0              : boolean := false;
+  constant STIMULUS_NTM_MATRIX_TANH_CASE_0              : boolean := false;
+  constant STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0          : boolean := false;
+  constant STIMULUS_NTM_MATRIX_SOFTMAX_CASE_0           : boolean := false;
+  constant STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0           : boolean := false;
+  constant STIMULUS_NTM_MATRIX_SUMMATION_CASE_0         : boolean := false;
+
+  constant STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_1       : boolean := false;
+  constant STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_1 : boolean := false;
+  constant STIMULUS_NTM_MATRIX_COSH_CASE_1              : boolean := false;
+  constant STIMULUS_NTM_MATRIX_SINH_CASE_1              : boolean := false;
+  constant STIMULUS_NTM_MATRIX_TANH_CASE_1              : boolean := false;
+  constant STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1          : boolean := false;
+  constant STIMULUS_NTM_MATRIX_SOFTMAX_CASE_1           : boolean := false;
+  constant STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1           : boolean := false;
+  constant STIMULUS_NTM_MATRIX_SUMMATION_CASE_1         : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
@@ -233,11 +278,12 @@ package ntm_arithmetic_pkg is
       -- STIMULUS SCALAR
       -----------------------------------------------------------------------
 
+      -- SCALAR CONVOLUTION
       -- CONTROL
       SCALAR_CONVOLUTION_START : in  std_logic;
       SCALAR_CONVOLUTION_READY : out std_logic;
 
-      DSCALAR_CONVOLUTION_ATA_IN_ENABLE : in std_logic;
+      SCALAR_CONVOLUTION_DATA_IN_ENABLE : in std_logic;
 
       SCALAR_CONVOLUTION_DATA_OUT_ENABLE : out std_logic;
 
@@ -248,6 +294,7 @@ package ntm_arithmetic_pkg is
       SCALAR_CONVOLUTION_DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_CONVOLUTION_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- SCALAR COSINE SIMILARITY
       -- CONTROL
       SCALAR_COSINE_SIMILARITY_START : in  std_logic;
       SCALAR_COSINE_SIMILARITY_READY : out std_logic;
@@ -263,6 +310,7 @@ package ntm_arithmetic_pkg is
       SCALAR_COSINE_SIMILARITY_DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_COSINE_SIMILARITY_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- SCALAR MULTIPLICATION
       -- CONTROL
       SCALAR_MULTIPLICATION_START : in  std_logic;
       SCALAR_MULTIPLICATION_READY : out std_logic;
@@ -277,6 +325,7 @@ package ntm_arithmetic_pkg is
       SCALAR_MULTIPLICATION_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_MULTIPLICATION_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- SCALAR COSH
       -- CONTROL
       SCALAR_COSH_START : in  std_logic;
       SCALAR_COSH_READY : out std_logic;
@@ -286,6 +335,7 @@ package ntm_arithmetic_pkg is
       SCALAR_COSH_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_COSH_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- SCALAR SINH
       -- CONTROL
       SCALAR_SINH_START : in  std_logic;
       SCALAR_SINH_READY : out std_logic;
@@ -295,6 +345,7 @@ package ntm_arithmetic_pkg is
       SCALAR_SINH_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_SINH_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- SCALAR TANH
       -- CONTROL
       SCALAR_TANH_START : in  std_logic;
       SCALAR_TANH_READY : out std_logic;
@@ -313,6 +364,7 @@ package ntm_arithmetic_pkg is
       SCALAR_LOGISTIC_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_LOGISTIC_DATA_OUT  : out std_logic;
 
+      -- SCALAR SOFTMAX
       -- CONTROL
       SCALAR_SOFTMAX_START : in  std_logic;
       SCALAR_SOFTMAX_READY : out std_logic;
@@ -327,6 +379,7 @@ package ntm_arithmetic_pkg is
       SCALAR_SOFTMAX_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_SOFTMAX_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- SCALAR ONEPLUS
       -- CONTROL
       SCALAR_ONEPLUS_START : in  std_logic;
       SCALAR_ONEPLUS_READY : out std_logic;
@@ -336,6 +389,7 @@ package ntm_arithmetic_pkg is
       SCALAR_ONEPLUS_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_ONEPLUS_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- SCALAR SUMMATION
       -- CONTROL
       SCALAR_SUMMATION_START : in  std_logic;
       SCALAR_SUMMATION_READY : out std_logic;
@@ -354,6 +408,7 @@ package ntm_arithmetic_pkg is
       -- STIMULUS VECTOR
       -----------------------------------------------------------------------
 
+      -- VECTOR COSINE SIMILARITY
       -- CONTROL
       VECTOR_COSINE_SIMILARITY_START : in  std_logic;
       VECTOR_COSINE_SIMILARITY_READY : out std_logic;
@@ -374,6 +429,7 @@ package ntm_arithmetic_pkg is
       VECTOR_COSINE_SIMILARITY_DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_COSINE_SIMILARITY_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- VECTOR MULTIPLICATION
       -- CONTROL
       VECTOR_MULTIPLICATION_START : in  std_logic;
       VECTOR_MULTIPLICATION_READY : out std_logic;
@@ -391,6 +447,7 @@ package ntm_arithmetic_pkg is
       VECTOR_MULTIPLICATION_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_MULTIPLICATION_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- VECTOR COSH
       -- CONTROL
       VECTOR_COSH_START : in  std_logic;
       VECTOR_COSH_READY : out std_logic;
@@ -405,6 +462,7 @@ package ntm_arithmetic_pkg is
       VECTOR_COSH_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_COSH_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- VECTOR SINH
       -- CONTROL
       VECTOR_SINH_START : in  std_logic;
       VECTOR_SINH_READY : out std_logic;
@@ -419,6 +477,7 @@ package ntm_arithmetic_pkg is
       VECTOR_SINH_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_SINH_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- VECTOR TANH
       -- CONTROL
       VECTOR_TANH_START : in  std_logic;
       VECTOR_TANH_READY : out std_logic;
@@ -433,6 +492,7 @@ package ntm_arithmetic_pkg is
       VECTOR_TANH_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_TANH_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- VECTOR LOGISTIC
       -- CONTROL
       VECTOR_LOGISTIC_START : in  std_logic;
       VECTOR_LOGISTIC_READY : out std_logic;
@@ -447,6 +507,7 @@ package ntm_arithmetic_pkg is
       VECTOR_LOGISTIC_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_LOGISTIC_DATA_OUT  : out std_logic;
 
+      -- VECTOR SOFTMAX
       -- CONTROL
       VECTOR_SOFTMAX_START : in  std_logic;
       VECTOR_SOFTMAX_READY : out std_logic;
@@ -464,6 +525,7 @@ package ntm_arithmetic_pkg is
       VECTOR_SOFTMAX_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_SOFTMAX_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- VECTOR ONEPLUS
       -- CONTROL
       VECTOR_ONEPLUS_START : in  std_logic;
       VECTOR_ONEPLUS_READY : out std_logic;
@@ -478,6 +540,7 @@ package ntm_arithmetic_pkg is
       VECTOR_ONEPLUS_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_ONEPLUS_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- VECTOR SUMMATION
       -- CONTROL
       VECTOR_SUMMATION_START : in  std_logic;
       VECTOR_SUMMATION_READY : out std_logic;
@@ -496,9 +559,10 @@ package ntm_arithmetic_pkg is
       VECTOR_SUMMATION_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
-      -- STIMULUS VECTOR
+      -- STIMULUS MATRIX
       -----------------------------------------------------------------------
 
+      -- MATRIX CONVOLUTION
       -- CONTROL
       MATRIX_CONVOLUTION_START : in  std_logic;
       MATRIX_CONVOLUTION_READY : out std_logic;
@@ -523,6 +587,7 @@ package ntm_arithmetic_pkg is
       MATRIX_CONVOLUTION_DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_CONVOLUTION_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- MATRIX COSINE SIMILARITY
       -- CONTROL
       MATRIX_COSINE_SIMILARITY_START : in  std_logic;
       MATRIX_COSINE_SIMILARITY_READY : out std_logic;
@@ -547,6 +612,7 @@ package ntm_arithmetic_pkg is
       MATRIX_COSINE_SIMILARITY_DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_COSINE_SIMILARITY_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- MATRIX MULTIPLICATION
       -- CONTROL
       MATRIX_MULTIPLICATION_START : in  std_logic;
       MATRIX_MULTIPLICATION_READY : out std_logic;
@@ -567,6 +633,7 @@ package ntm_arithmetic_pkg is
       MATRIX_MULTIPLICATION_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_MULTIPLICATION_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- MATRIX COSH
       -- CONTROL
       MATRIX_COSH_START : in  std_logic;
       MATRIX_COSH_READY : out std_logic;
@@ -584,6 +651,7 @@ package ntm_arithmetic_pkg is
       MATRIX_COSH_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_COSH_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- MATRIX SINH
       -- CONTROL
       MATRIX_SINH_START : in  std_logic;
       MATRIX_SINH_READY : out std_logic;
@@ -601,6 +669,7 @@ package ntm_arithmetic_pkg is
       MATRIX_SINH_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_SINH_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- MATRIX TANH
       -- CONTROL
       MATRIX_TANH_START : in  std_logic;
       MATRIX_TANH_READY : out std_logic;
@@ -618,6 +687,7 @@ package ntm_arithmetic_pkg is
       MATRIX_TANH_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_TANH_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- MATRIX LOGISTIC
       -- CONTROL
       MATRIX_LOGISTIC_START : in  std_logic;
       MATRIX_LOGISTIC_READY : out std_logic;
@@ -635,6 +705,7 @@ package ntm_arithmetic_pkg is
       MATRIX_LOGISTIC_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_LOGISTIC_DATA_OUT  : out std_logic;
 
+      -- MATRIX SOFTMAX
       -- CONTROL
       MATRIX_SOFTMAX_START : in  std_logic;
       MATRIX_SOFTMAX_READY : out std_logic;
@@ -655,6 +726,7 @@ package ntm_arithmetic_pkg is
       MATRIX_SOFTMAX_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_SOFTMAX_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- MATRIX ONEPLUS
       -- CONTROL
       MATRIX_ONEPLUS_START : in  std_logic;
       MATRIX_ONEPLUS_READY : out std_logic;
@@ -672,6 +744,7 @@ package ntm_arithmetic_pkg is
       MATRIX_ONEPLUS_DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_ONEPLUS_DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- MATRIX SUMMATION
       -- CONTROL
       MATRIX_SUMMATION_START : in  std_logic;
       MATRIX_SUMMATION_READY : out std_logic;
@@ -698,12 +771,12 @@ package ntm_arithmetic_pkg is
   -- Functions
   -----------------------------------------------------------------------
 
-end ntm_arithmetic_pkg;
+end ntm_function_pkg;
 
-package body ntm_arithmetic_pkg is
+package body ntm_function_pkg is
 
   -----------------------------------------------------------------------
   -- Functions
   -----------------------------------------------------------------------
 
-end ntm_arithmetic_pkg;
+end ntm_function_pkg;
