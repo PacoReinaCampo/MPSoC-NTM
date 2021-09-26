@@ -43,17 +43,24 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
+use work.ntm_top_pkg.all;
 
 entity ntm_top_stimulus is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
+    -- SYSTEM-SIZE
+    DATA_SIZE : integer := 512;
 
-    DATA_SIZE : integer := 512
+    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
+
+    -- FUNCTIONALITY
+    STIMULUS_NTM_TOP_TEST   : boolean := false;
+    STIMULUS_NTM_TOP_CASE_0 : boolean := false;
+    STIMULUS_NTM_TOP_CASE_1 : boolean := false
     );
   port (
     -- GLOBAL
@@ -61,8 +68,35 @@ entity ntm_top_stimulus is
     RST : out std_logic;
 
     -- CONTROL
-    START : out std_logic;
-    READY : in  std_logic
+    NTM_TOP_START : out std_logic;
+    NTM_TOP_READY : in  std_logic;
+
+    NTM_TOP_W_IN_L_ENABLE : out std_logic;
+    NTM_TOP_W_IN_X_ENABLE : out std_logic;
+
+    NTM_TOP_K_IN_I_ENABLE : out std_logic;
+    NTM_TOP_K_IN_L_ENABLE : out std_logic;
+    NTM_TOP_K_IN_K_ENABLE : out std_logic;
+
+    NTM_TOP_B_IN_ENABLE : out std_logic;
+
+    NTM_TOP_X_IN_ENABLE  : out std_logic;
+    NTM_TOP_Y_OUT_ENABLE : in  std_logic;
+
+    -- DATA
+    NTM_TOP_SIZE_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TOP_SIZE_Y_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TOP_SIZE_N_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TOP_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TOP_SIZE_L_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TOP_SIZE_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    NTM_TOP_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TOP_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TOP_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    NTM_TOP_X_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TOP_Y_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -81,6 +115,14 @@ architecture ntm_top_stimulus_architecture of ntm_top_stimulus is
   constant WAITING : time := 50 ns;
   constant WORKING : time := 1000 ms;
 
+  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+
+  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+  constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
@@ -88,6 +130,9 @@ architecture ntm_top_stimulus_architecture of ntm_top_stimulus is
   -- GLOBAL
   signal clk_int : std_logic;
   signal rst_int : std_logic;
+
+  -- CONTROL
+  signal start_int : std_logic;
 
 begin
 
@@ -128,6 +173,9 @@ begin
     wait for WORKING;
   end process;
 
+  -- FUNCTIONALITY
+  NTM_TOP_START <= start_int;
+
   -----------------------------------------------------------------------
   -- STIMULUS
   -----------------------------------------------------------------------
@@ -135,35 +183,51 @@ begin
   main_test : process
   begin
 
-    if (NTM_TEST0) then
+    if (STIMULUS_NTM_TOP_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "NTM_TEST0                ";
-      -------------------------------------------------------------------
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE0                ";
+      MONITOR_TEST <= "STIMULUS_NTM_TOP_TEST                   ";
       -------------------------------------------------------------------
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE1                ";
+      MONITOR_CASE <= "STIMULUS_NTM_TOP_CASE_0                 ";
       -------------------------------------------------------------------
 
-    end if;
+      if (STIMULUS_NTM_TOP_CASE_0) then
+        NTM_TOP_SIZE_X_IN <= EMPTY;
+        NTM_TOP_SIZE_Y_IN <= EMPTY;
+        NTM_TOP_SIZE_N_IN <= EMPTY;
+        NTM_TOP_SIZE_W_IN <= EMPTY;
+        NTM_TOP_SIZE_L_IN <= EMPTY;
+        NTM_TOP_SIZE_R_IN <= EMPTY;
 
-    if (NTM_TEST1) then
+        NTM_TOP_W_IN <= EMPTY;
+        NTM_TOP_K_IN <= EMPTY;
+        NTM_TOP_B_IN <= EMPTY;
+
+        NTM_TOP_X_IN <= EMPTY;
+      end if;
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "NTM_TEST1                ";
+      MONITOR_CASE <= "STIMULUS_NTM_TOP_CASE_1                 ";
       -------------------------------------------------------------------
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE0                ";
-      -------------------------------------------------------------------
+      if (STIMULUS_NTM_TOP_CASE_1) then
+        NTM_TOP_SIZE_X_IN <= FULL;
+        NTM_TOP_SIZE_Y_IN <= FULL;
+        NTM_TOP_SIZE_N_IN <= FULL;
+        NTM_TOP_SIZE_W_IN <= FULL;
+        NTM_TOP_SIZE_L_IN <= FULL;
+        NTM_TOP_SIZE_R_IN <= FULL;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE1                ";
-      -------------------------------------------------------------------
+        NTM_TOP_W_IN <= FULL;
+        NTM_TOP_K_IN <= FULL;
+        NTM_TOP_B_IN <= FULL;
+
+        NTM_TOP_X_IN <= FULL;
+      end if;
+
+      wait for WORKING;
 
     end if;
 
