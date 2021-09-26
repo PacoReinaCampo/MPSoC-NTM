@@ -91,6 +91,11 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
@@ -145,10 +150,10 @@ begin
   -- MATRIX TRANSPOSE
   ntm_matrix_transpose_i : ntm_matrix_transpose
     generic map (
-      I => N,
-      J => W,
+      DATA_SIZE => DATA_SIZE,
 
-      DATA_SIZE => DATA_SIZE
+      SIZE_I => THREE,
+      SIZE_J => THREE
       )
     port map (
       -- GLOBAL
