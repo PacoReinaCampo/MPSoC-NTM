@@ -190,6 +190,7 @@ architecture ntm_controller_architecture of ntm_controller is
   signal ready_trainer : std_logic;
 
   signal h_in_enable_trainer : std_logic;
+  signal x_in_enable_trainer : std_logic;
 
   signal w_out_l_enable_trainer : std_logic;
   signal w_out_x_enable_trainer : std_logic;
@@ -207,6 +208,7 @@ architecture ntm_controller_architecture of ntm_controller is
   signal size_r_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal h_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal x_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_out_trainer : std_logic_vector(DATA_SIZE-1 downto 0);

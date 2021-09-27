@@ -117,6 +117,7 @@ package ntm_lstm_controller_pkg is
       READY : out std_logic;
 
       H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      A_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
       W_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       W_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
@@ -134,6 +135,7 @@ package ntm_lstm_controller_pkg is
       SIZE_R_IN : std_logic_vector(DATA_SIZE-1 downto 0);
 
       H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
       K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -206,6 +208,7 @@ package ntm_lstm_controller_pkg is
       READY : out std_logic;
 
       H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      I_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
       W_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       W_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
@@ -223,6 +226,7 @@ package ntm_lstm_controller_pkg is
       SIZE_R_IN : std_logic_vector(DATA_SIZE-1 downto 0);
 
       H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      I_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
       K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -295,6 +299,7 @@ package ntm_lstm_controller_pkg is
       READY : out std_logic;
 
       H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      O_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
       W_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       W_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
@@ -312,6 +317,7 @@ package ntm_lstm_controller_pkg is
       SIZE_R_IN : std_logic_vector(DATA_SIZE-1 downto 0);
 
       H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      O_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
       K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -384,6 +390,7 @@ package ntm_lstm_controller_pkg is
       READY : out std_logic;
 
       H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      F_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
       W_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
       W_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
@@ -401,6 +408,7 @@ package ntm_lstm_controller_pkg is
       SIZE_R_IN : std_logic_vector(DATA_SIZE-1 downto 0);
 
       H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
       K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);

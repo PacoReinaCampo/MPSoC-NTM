@@ -59,6 +59,7 @@ entity ntm_trainer is
     READY : out std_logic;
 
     H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+    X_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
     W_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
     W_OUT_X_ENABLE : out std_logic;     -- for x in 0 to X-1
@@ -76,6 +77,7 @@ entity ntm_trainer is
     SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
