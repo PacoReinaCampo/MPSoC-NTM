@@ -135,9 +135,11 @@ architecture ntm_controller_architecture of ntm_controller is
   signal start_vector_summation : std_logic;
   signal ready_vector_summation : std_logic;
 
-  signal data_in_enable_vector_summation : std_logic;
+  signal data_in_vector_enable_vector_summation : std_logic;
+  signal data_in_scalar_enable_vector_summation : std_logic;
 
-  signal data_out_enable_vector_summation : std_logic;
+  signal data_out_vector_enable_vector_summation : std_logic;
+  signal data_out_scalar_enable_vector_summation : std_logic;
 
   -- DATA
   signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -282,9 +284,11 @@ begin
       START => start_vector_summation,
       READY => ready_vector_summation,
 
-      DATA_IN_ENABLE => data_in_enable_vector_summation,
+      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_summation,
+      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_summation,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_summation,
+      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_summation,
+      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
 
       -- DATA
       MODULO_IN => modulo_in_vector_summation,
@@ -355,13 +359,6 @@ begin
   -- TRAINER
   ntm : ntm_trainer
     generic map (
-      X => X,
-      Y => Y,
-      N => N,
-      W => W,
-      L => L,
-      R => R,
-
       DATA_SIZE => DATA_SIZE
       )
     port map (
@@ -374,6 +371,7 @@ begin
       READY => ready_trainer,
 
       H_IN_ENABLE => h_in_enable_trainer,
+      X_IN_ENABLE => x_in_enable_trainer,
 
       W_OUT_L_ENABLE => w_out_l_enable_trainer,
       W_OUT_X_ENABLE => w_out_x_enable_trainer,
@@ -391,6 +389,7 @@ begin
       SIZE_R_IN => size_r_in_trainer,
 
       H_IN => h_in_trainer,
+      X_IN => x_in_trainer,
 
       W_OUT => w_out_trainer,
       K_OUT => k_out_trainer,
