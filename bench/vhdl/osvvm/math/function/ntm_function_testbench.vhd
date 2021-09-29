@@ -58,6 +58,7 @@ entity ntm_function_testbench is
     -- SCALAR-FUNCTIONALITY
     ENABLE_NTM_SCALAR_CONVOLUTION_TEST       : boolean := false;
     ENABLE_NTM_SCALAR_COSINE_SIMILARITY_TEST : boolean := false;
+    ENABLE_NTM_SCALAR_DIFFERENTIATION_TEST   : boolean := false;
     ENABLE_NTM_SCALAR_MULTIPLICATION_TEST    : boolean := false;
     ENABLE_NTM_SCALAR_COSH_TEST              : boolean := false;
     ENABLE_NTM_SCALAR_SINH_TEST              : boolean := false;
@@ -69,6 +70,7 @@ entity ntm_function_testbench is
 
     ENABLE_NTM_SCALAR_CONVOLUTION_CASE_0       : boolean := false;
     ENABLE_NTM_SCALAR_COSINE_SIMILARITY_CASE_0 : boolean := false;
+    ENABLE_NTM_SCALAR_DIFFERENTIATION_CASE_0   : boolean := false;
     ENABLE_NTM_SCALAR_MULTIPLICATION_CASE_0    : boolean := false;
     ENABLE_NTM_SCALAR_COSH_CASE_0              : boolean := false;
     ENABLE_NTM_SCALAR_SINH_CASE_0              : boolean := false;
@@ -80,6 +82,7 @@ entity ntm_function_testbench is
 
     ENABLE_NTM_SCALAR_CONVOLUTION_CASE_1       : boolean := false;
     ENABLE_NTM_SCALAR_COSINE_SIMILARITY_CASE_1 : boolean := false;
+    ENABLE_NTM_SCALAR_DIFFERENTIATION_CASE_1   : boolean := false;
     ENABLE_NTM_SCALAR_MULTIPLICATION_CASE_1    : boolean := false;
     ENABLE_NTM_SCALAR_COSH_CASE_1              : boolean := false;
     ENABLE_NTM_SCALAR_SINH_CASE_1              : boolean := false;
@@ -92,6 +95,7 @@ entity ntm_function_testbench is
     -- VECTOR-FUNCTIONALITY
     ENABLE_NTM_VECTOR_CONVOLUTION_TEST       : boolean := false;
     ENABLE_NTM_VECTOR_COSINE_SIMILARITY_TEST : boolean := false;
+    ENABLE_NTM_VECTOR_DIFFERENTIATION_TEST   : boolean := false;
     ENABLE_NTM_VECTOR_MULTIPLICATION_TEST    : boolean := false;
     ENABLE_NTM_VECTOR_COSH_TEST              : boolean := false;
     ENABLE_NTM_VECTOR_SINH_TEST              : boolean := false;
@@ -103,6 +107,7 @@ entity ntm_function_testbench is
 
     ENABLE_NTM_VECTOR_CONVOLUTION_CASE_0       : boolean := false;
     ENABLE_NTM_VECTOR_COSINE_SIMILARITY_CASE_0 : boolean := false;
+    ENABLE_NTM_VECTOR_DIFFERENTIATION_CASE_0   : boolean := false;
     ENABLE_NTM_VECTOR_MULTIPLICATION_CASE_0    : boolean := false;
     ENABLE_NTM_VECTOR_COSH_CASE_0              : boolean := false;
     ENABLE_NTM_VECTOR_SINH_CASE_0              : boolean := false;
@@ -114,6 +119,7 @@ entity ntm_function_testbench is
 
     ENABLE_NTM_VECTOR_CONVOLUTION_CASE_1       : boolean := false;
     ENABLE_NTM_VECTOR_COSINE_SIMILARITY_CASE_1 : boolean := false;
+    ENABLE_NTM_VECTOR_DIFFERENTIATION_CASE_1   : boolean := false;
     ENABLE_NTM_VECTOR_MULTIPLICATION_CASE_1    : boolean := false;
     ENABLE_NTM_VECTOR_COSH_CASE_1              : boolean := false;
     ENABLE_NTM_VECTOR_SINH_CASE_1              : boolean := false;
@@ -126,6 +132,7 @@ entity ntm_function_testbench is
     -- MATRIX-FUNCTIONALITY
     ENABLE_NTM_MATRIX_CONVOLUTION_TEST       : boolean := false;
     ENABLE_NTM_MATRIX_COSINE_SIMILARITY_TEST : boolean := false;
+    ENABLE_NTM_MATRIX_DIFFERENTIATION_TEST   : boolean := false;
     ENABLE_NTM_MATRIX_MULTIPLICATION_TEST    : boolean := false;
     ENABLE_NTM_MATRIX_COSH_TEST              : boolean := false;
     ENABLE_NTM_MATRIX_SINH_TEST              : boolean := false;
@@ -137,6 +144,7 @@ entity ntm_function_testbench is
 
     ENABLE_NTM_MATRIX_CONVOLUTION_CASE_0       : boolean := false;
     ENABLE_NTM_MATRIX_COSINE_SIMILARITY_CASE_0 : boolean := false;
+    ENABLE_NTM_MATRIX_DIFFERENTIATION_CASE_0   : boolean := false;
     ENABLE_NTM_MATRIX_MULTIPLICATION_CASE_0    : boolean := false;
     ENABLE_NTM_MATRIX_COSH_CASE_0              : boolean := false;
     ENABLE_NTM_MATRIX_SINH_CASE_0              : boolean := false;
@@ -148,6 +156,7 @@ entity ntm_function_testbench is
 
     ENABLE_NTM_MATRIX_CONVOLUTION_CASE_1       : boolean := false;
     ENABLE_NTM_MATRIX_COSINE_SIMILARITY_CASE_1 : boolean := false;
+    ENABLE_NTM_MATRIX_DIFFERENTIATION_CASE_1   : boolean := false;
     ENABLE_NTM_MATRIX_MULTIPLICATION_CASE_1    : boolean := false;
     ENABLE_NTM_MATRIX_COSH_CASE_1              : boolean := false;
     ENABLE_NTM_MATRIX_SINH_CASE_1              : boolean := false;
@@ -204,6 +213,16 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_a_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- SCALAR DIFFERENTIATION
+  -- CONTROL
+  signal start_scalar_differentiation : std_logic;
+  signal ready_scalar_differentiation : std_logic;
+
+  -- DATA
+  signal modulo_in_scalar_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR MULTIPLICATION
   -- CONTROL
@@ -338,6 +357,21 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_vector_enable_vector_cosine : std_logic;
   signal data_out_scalar_enable_vector_cosine : std_logic;
 
+  -- VECTOR COSH
+  -- CONTROL
+  signal start_vector_differentiation : std_logic;
+  signal ready_vector_differentiation : std_logic;
+
+  signal data_in_enable_vector_differentiation : std_logic;
+
+  signal data_out_enable_vector_differentiation : std_logic;
+
+  -- DATA
+  signal modulo_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- DATA
   signal modulo_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_cosine   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -364,20 +398,20 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR COSH
+  -- VECTOR DIFFERENTIATION
   -- CONTROL
-  signal start_vector_cosh : std_logic;
-  signal ready_vector_cosh : std_logic;
+  signal start_vector_differentiation : std_logic;
+  signal ready_vector_differentiation : std_logic;
 
-  signal data_in_enable_vector_cosh : std_logic;
+  signal data_in_enable_vector_differentiation : std_logic;
 
-  signal data_out_enable_vector_cosh : std_logic;
+  signal data_out_enable_vector_differentiation : std_logic;
 
   -- DATA
-  signal modulo_in_vector_cosh : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_vector_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR SINH
   -- CONTROL
@@ -1372,6 +1406,28 @@ begin
         );
   end generate ntm_scalar_cosine_similarity_test;
 
+  -- SCALAR DIFFERENTIATION
+  ntm_scalar_differentiation_test : if (ENABLE_NTM_SCALAR_DIFFERENTIATION_TEST) generate
+    scalar_differentiation_function : ntm_scalar_differentiation_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_scalar_differentiation,
+        READY => ready_scalar_differentiation,
+
+        -- DATA
+        MODULO_IN => modulo_in_scalar_differentiation,
+        DATA_IN   => data_in_scalar_differentiation,
+        DATA_OUT  => data_out_scalar_differentiation
+        );
+  end generate ntm_scalar_differentiation_test;
+
   -- SCALAR MULTIPLICATION
   ntm_scalar_multiplication_test : if (ENABLE_NTM_SCALAR_MULTIPLICATION_TEST) generate
     scalar_multiplication_function : ntm_scalar_multiplication_function
@@ -1632,6 +1688,33 @@ begin
         DATA_OUT  => data_out_vector_cosine
         );
   end generate ntm_vector_cosine_similarity_test;
+
+  -- VECTOR DIFFERENTIATION
+  ntm_vector_differentiation_test : if (ENABLE_NTM_VECTOR_DIFFERENTIATION_TEST) generate
+    vector_differentiation_function : ntm_vector_differentiation_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_vector_differentiation,
+        READY => ready_vector_differentiation,
+
+        DATA_IN_ENABLE => data_in_enable_vector_differentiation,
+
+        DATA_OUT_ENABLE => data_out_enable_vector_differentiation,
+
+        -- DATA
+        MODULO_IN => modulo_in_vector_differentiation,
+        SIZE_IN   => size_in_vector_differentiation,
+        DATA_IN   => data_in_vector_differentiation,
+        DATA_OUT  => data_out_vector_differentiation
+        );
+  end generate ntm_vector_differentiation_test;
 
   -- VECTOR MULTIPLICATION
   ntm_vector_multiplication_test : if (ENABLE_NTM_VECTOR_MULTIPLICATION_TEST) generate
@@ -1936,6 +2019,36 @@ begin
         DATA_OUT  => data_out_matrix_cosine
         );
   end generate ntm_matrix_cosine_similarity_test;
+
+  -- MATRIX DIFFERENTIATION
+  ntm_matrix_differentiation_test : if (ENABLE_NTM_MATRIX_DIFFERENTIATION_TEST) generate
+    matrix_differentiation_function : ntm_matrix_differentiation_function
+      generic map (
+        DATA_SIZE => DATA_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_matrix_differentiation,
+        READY => ready_matrix_differentiation,
+
+        DATA_IN_I_ENABLE => data_in_i_enable_matrix_differentiation,
+        DATA_IN_J_ENABLE => data_in_j_enable_matrix_differentiation,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_differentiation,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_differentiation,
+
+        -- DATA
+        MODULO_IN => modulo_in_matrix_differentiation,
+        SIZE_I_IN => size_i_in_matrix_differentiation,
+        SIZE_J_IN => size_j_in_matrix_differentiation,
+        DATA_IN   => data_in_matrix_differentiation,
+        DATA_OUT  => data_out_matrix_differentiation
+        );
+  end generate ntm_matrix_differentiation_test;
 
   -- MATRIX MULTIPLICATION
   ntm_matrix_multiplication_test : if (ENABLE_NTM_MATRIX_MULTIPLICATION_TEST) generate

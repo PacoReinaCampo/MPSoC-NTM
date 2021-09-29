@@ -43,9 +43,8 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
-use work.ntm_lstm_controller_pkg.all;
 
-entity ntm_input_trainer is
+entity ntm_scalar_differentiation_function is
   generic (
     DATA_SIZE : integer := 512
     );
@@ -58,36 +57,14 @@ entity ntm_input_trainer is
     START : in  std_logic;
     READY : out std_logic;
 
-    H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
-    X_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
-    I_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
-
-    W_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
-    W_OUT_X_ENABLE : out std_logic;     -- for x in 0 to X-1
-
-    K_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
-    K_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
-    K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
-
-    B_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
-
     -- DATA
-    SIZE_X_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_L_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-
-    H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    I_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-    W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-    K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-    B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
-architecture ntm_input_trainer_architecture of ntm_input_trainer is
+architecture ntm_scalar_differentiation_function_architecture of ntm_scalar_differentiation_function is
 
   -----------------------------------------------------------------------
   -- Types
@@ -101,28 +78,29 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- MATRIX PRODUCT
+  -- SCALAR ADDER
   -- CONTROL
-  signal start_matrix_product : std_logic;
-  signal ready_matrix_product : std_logic;
+  signal start_scalar_adder : std_logic;
+  signal ready_scalar_adder : std_logic;
 
-  signal data_a_in_i_enable_matrix_product : std_logic;
-  signal data_a_in_j_enable_matrix_product : std_logic;
-  signal data_b_in_i_enable_matrix_product : std_logic;
-  signal data_b_in_j_enable_matrix_product : std_logic;
-
-  signal data_out_i_enable_matrix_product : std_logic;
-  signal data_out_j_enable_matrix_product : std_logic;
+  signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_a_i_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_a_j_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_b_i_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_b_j_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- SCALAR MULTIPLIER
+  -- CONTROL
+  signal start_scalar_multiplier : std_logic;
+  signal ready_scalar_multiplier : std_logic;
+
+  -- DATA
+  signal modulo_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -130,8 +108,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- MATRIX PRODUCT
-  matrix_product : ntm_matrix_product
+  ntm_scalar_adder_i : ntm_scalar_adder
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -141,26 +118,36 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_product,
-      READY => ready_matrix_product,
+      START => start_scalar_adder,
+      READY => ready_scalar_adder,
 
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_product,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
-
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
+      OPERATION => operation_scalar_adder,
 
       -- DATA
-      MODULO_IN   => modulo_in_matrix_product,
-      SIZE_A_I_IN => size_a_i_in_matrix_product,
-      SIZE_A_J_IN => size_a_j_in_matrix_product,
-      SIZE_B_I_IN => size_b_i_in_matrix_product,
-      SIZE_B_J_IN => size_b_j_in_matrix_product,
-      DATA_A_IN   => data_a_in_matrix_product,
-      DATA_B_IN   => data_b_in_matrix_product,
-      DATA_OUT    => data_out_matrix_product
+      MODULO_IN => modulo_in_scalar_adder,
+      DATA_A_IN => data_a_in_scalar_adder,
+      DATA_B_IN => data_b_in_scalar_adder,
+      DATA_OUT  => data_out_scalar_adder
+      );
+
+  ntm_scalar_multiplier_i : ntm_scalar_multiplier
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_multiplier,
+      READY => ready_scalar_multiplier,
+
+      -- DATA
+      MODULO_IN => modulo_in_scalar_multiplier,
+      DATA_A_IN => data_a_in_scalar_multiplier,
+      DATA_B_IN => data_b_in_scalar_multiplier,
+      DATA_OUT  => data_out_scalar_multiplier
       );
 
 end architecture;

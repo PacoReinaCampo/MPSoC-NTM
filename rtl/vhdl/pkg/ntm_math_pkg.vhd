@@ -964,6 +964,26 @@ package ntm_math_pkg is
       );
   end component;
 
+  component ntm_scalar_differentiation_function is
+    generic (
+      DATA_SIZE : integer := 512
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
   component ntm_scalar_multiplication_function is
     generic (
       DATA_SIZE : integer := 512
@@ -1198,6 +1218,31 @@ package ntm_math_pkg is
       LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_vector_differentiation_function is
+    generic (
+      DATA_SIZE : integer := 512
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_IN_ENABLE : in std_logic;
+
+      DATA_OUT_ENABLE : out std_logic;
+
+      -- DATA
+      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
@@ -1478,6 +1523,34 @@ package ntm_math_pkg is
       LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_matrix_differentiation_function is
+    generic (
+      DATA_SIZE : integer := 512
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_IN_I_ENABLE : in std_logic;
+      DATA_IN_J_ENABLE : in std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+
+      -- DATA
+      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
