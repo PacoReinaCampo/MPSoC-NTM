@@ -132,6 +132,10 @@ begin
 
   -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
 
+  -- dW(t;l) = summation(do(t;l) · x(t;l))[t in 0 to T]
+  -- dU(t;l) = summation(do(t+1;l) · h(t;l))[t in 0 to T-1]
+  -- db(t;l) = summation(do(t;l))[t in 0 to T]
+
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
     generic map (

@@ -132,6 +132,10 @@ begin
 
   -- di(t;l) = ds(t;l) o a(t;l) o i(t;l) o (1 - i(t;l))
 
+  -- dW(t;l) = summation(di(t;l) · x(t;l))[t in 0 to T]
+  -- dU(t;l) = summation(di(t+1;l) · h(t;l))[t in 0 to T-1]
+  -- db(t;l) = summation(di(t;l))[t in 0 to T]
+
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
     generic map (

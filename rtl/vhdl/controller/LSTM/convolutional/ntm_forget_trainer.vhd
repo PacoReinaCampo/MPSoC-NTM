@@ -132,6 +132,10 @@ begin
 
   -- df(t;l) = ds(t;l) o s(t-1;l) o f(t;l) o (1 - f(t;l))
 
+  -- dW(t;l) = summation(df(t;l) · x(t;l))[t in 0 to T]
+  -- dU(t;l) = summation(df(t+1;l) · h(t;l))[t in 0 to T-1]
+  -- db(t;l) = summation(df(t;l))[t in 0 to T]
+
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
     generic map (

@@ -132,6 +132,10 @@ begin
 
   -- da(t;l) = ds(t;l) o i(t;l) o (1 - a(t;l)^2)
 
+  -- dW(t;l) = summation(da(t;l) · x(t;l))[t in 0 to T]
+  -- dU(t;l) = summation(da(t+1;l) · h(t;l))[t in 0 to T-1]
+  -- db(t;l) = summation(da(t;l))[t in 0 to T]
+
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
     generic map (
