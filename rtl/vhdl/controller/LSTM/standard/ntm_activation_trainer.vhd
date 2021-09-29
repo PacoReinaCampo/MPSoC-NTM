@@ -130,6 +130,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- da(t;l) = ds(t;l) o i(t;l) o (1 - a(t;l)^2)
+
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
     generic map (

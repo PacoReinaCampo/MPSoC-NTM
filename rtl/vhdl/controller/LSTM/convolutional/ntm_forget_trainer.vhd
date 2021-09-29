@@ -130,6 +130,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- df(t;l) = ds(t;l) o s(t-1;l) o f(t;l) o (1 - f(t;l))
+
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
     generic map (

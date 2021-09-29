@@ -130,6 +130,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
+
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
     generic map (

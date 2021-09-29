@@ -357,7 +357,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_vector_enable_vector_cosine : std_logic;
   signal data_out_scalar_enable_vector_cosine : std_logic;
 
-  -- VECTOR COSH
+  -- VECTOR DIFFERENTIATION
   -- CONTROL
   signal start_vector_differentiation : std_logic;
   signal ready_vector_differentiation : std_logic;
@@ -398,20 +398,20 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR DIFFERENTIATION
+  -- VECTOR COSH
   -- CONTROL
-  signal start_vector_differentiation : std_logic;
-  signal ready_vector_differentiation : std_logic;
+  signal start_vector_cosh : std_logic;
+  signal ready_vector_cosh : std_logic;
 
-  signal data_in_enable_vector_differentiation : std_logic;
+  signal data_in_enable_vector_cosh : std_logic;
 
-  signal data_out_enable_vector_differentiation : std_logic;
+  signal data_out_enable_vector_cosh : std_logic;
 
   -- DATA
-  signal modulo_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_cosh : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR SINH
   -- CONTROL
@@ -562,6 +562,24 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_a_in_matrix_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- MATRIX DIFFERENTIATION
+  -- CONTROL
+  signal start_matrix_differentiation : std_logic;
+  signal ready_matrix_differentiation : std_logic;
+
+  signal data_in_i_enable_matrix_differentiation : std_logic;
+  signal data_in_j_enable_matrix_differentiation : std_logic;
+
+  signal data_out_i_enable_matrix_differentiation : std_logic;
+  signal data_out_j_enable_matrix_differentiation : std_logic;
+
+  -- DATA
+  signal modulo_in_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_j_in_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX MULTIPLICATION
   -- CONTROL
