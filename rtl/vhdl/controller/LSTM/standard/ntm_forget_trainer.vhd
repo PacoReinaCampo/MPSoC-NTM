@@ -61,6 +61,7 @@ entity ntm_forget_trainer is
     H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
     X_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
     F_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+    S_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
     W_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
     W_OUT_X_ENABLE : out std_logic;     -- for x in 0 to X-1
@@ -80,6 +81,7 @@ entity ntm_forget_trainer is
     H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    S_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);

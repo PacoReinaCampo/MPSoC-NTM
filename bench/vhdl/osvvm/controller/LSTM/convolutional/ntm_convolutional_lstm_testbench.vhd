@@ -105,6 +105,8 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal h_in_enable_activation_trainer : std_logic;
   signal x_in_enable_activation_trainer : std_logic;
   signal a_in_enable_activation_trainer : std_logic;
+  signal i_in_enable_activation_trainer : std_logic;
+  signal s_in_enable_activation_trainer : std_logic;
 
   signal w_out_l_enable_activation_trainer : std_logic;
   signal w_out_x_enable_activation_trainer : std_logic;
@@ -124,6 +126,8 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal h_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal x_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal a_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal i_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal s_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_out_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -177,7 +181,9 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
 
   signal h_in_enable_input_trainer : std_logic;
   signal x_in_enable_input_trainer : std_logic;
+  signal a_in_enable_input_trainer : std_logic;
   signal i_in_enable_input_trainer : std_logic;
+  signal s_in_enable_input_trainer : std_logic;
 
   signal w_out_l_enable_input_trainer : std_logic;
   signal w_out_x_enable_input_trainer : std_logic;
@@ -196,7 +202,9 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
 
   signal h_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal x_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal a_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal i_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal s_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_out_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -250,6 +258,7 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
 
   signal h_in_enable_output_trainer : std_logic;
   signal x_in_enable_output_trainer : std_logic;
+  signal a_in_enable_output_trainer : std_logic;
   signal o_in_enable_output_trainer : std_logic;
 
   signal w_out_l_enable_output_trainer : std_logic;
@@ -269,6 +278,7 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
 
   signal h_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal x_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal a_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal o_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -324,6 +334,7 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal h_in_enable_forget_trainer : std_logic;
   signal x_in_enable_forget_trainer : std_logic;
   signal f_in_enable_forget_trainer : std_logic;
+  signal s_in_enable_forget_trainer : std_logic;
 
   signal w_out_l_enable_forget_trainer : std_logic;
   signal w_out_x_enable_forget_trainer : std_logic;
@@ -343,6 +354,7 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal h_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal x_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal f_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal s_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_out_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -498,6 +510,8 @@ begin
       H_IN_ENABLE => h_in_enable_activation_trainer,
       X_IN_ENABLE => x_in_enable_activation_trainer,
       A_IN_ENABLE => a_in_enable_activation_trainer,
+      I_IN_ENABLE => i_in_enable_activation_trainer,
+      S_IN_ENABLE => s_in_enable_activation_trainer,
 
       W_OUT_L_ENABLE => w_out_l_enable_activation_trainer,
       W_OUT_X_ENABLE => w_out_x_enable_activation_trainer,
@@ -517,6 +531,8 @@ begin
       H_IN => h_in_activation_trainer,
       X_IN => x_in_activation_trainer,
       A_IN => a_in_activation_trainer,
+      I_IN => i_in_activation_trainer,
+      S_IN => s_in_activation_trainer,
 
       W_OUT => w_out_activation_trainer,
       K_OUT => k_out_activation_trainer,
@@ -590,7 +606,9 @@ begin
 
       H_IN_ENABLE => h_in_enable_input_trainer,
       X_IN_ENABLE => x_in_enable_input_trainer,
+      A_IN_ENABLE => a_in_enable_input_trainer,
       I_IN_ENABLE => i_in_enable_input_trainer,
+      S_IN_ENABLE => s_in_enable_input_trainer,
 
       W_OUT_L_ENABLE => w_out_l_enable_input_trainer,
       W_OUT_X_ENABLE => w_out_x_enable_input_trainer,
@@ -609,7 +627,9 @@ begin
 
       H_IN => h_in_input_trainer,
       X_IN => x_in_input_trainer,
+      A_IN => a_in_input_trainer,
       I_IN => i_in_input_trainer,
+      S_IN => s_in_input_trainer,
 
       W_OUT => w_out_input_trainer,
       K_OUT => k_out_input_trainer,
@@ -683,6 +703,7 @@ begin
 
       H_IN_ENABLE => h_in_enable_output_trainer,
       X_IN_ENABLE => x_in_enable_output_trainer,
+      A_IN_ENABLE => a_in_enable_output_trainer,
       O_IN_ENABLE => o_in_enable_output_trainer,
 
       W_OUT_L_ENABLE => w_out_l_enable_output_trainer,
@@ -702,6 +723,7 @@ begin
 
       H_IN => h_in_output_trainer,
       X_IN => x_in_output_trainer,
+      A_IN => a_in_output_trainer,
       O_IN => o_in_output_trainer,
 
       W_OUT => w_out_output_trainer,
@@ -777,6 +799,7 @@ begin
       H_IN_ENABLE => h_in_enable_forget_trainer,
       X_IN_ENABLE => x_in_enable_forget_trainer,
       F_IN_ENABLE => f_in_enable_forget_trainer,
+      S_IN_ENABLE => s_in_enable_forget_trainer,
 
       W_OUT_L_ENABLE => w_out_l_enable_forget_trainer,
       W_OUT_X_ENABLE => w_out_x_enable_forget_trainer,
@@ -796,6 +819,7 @@ begin
       H_IN => h_in_forget_trainer,
       X_IN => x_in_forget_trainer,
       F_IN => f_in_forget_trainer,
+      S_IN => s_in_forget_trainer,
 
       W_OUT => w_out_forget_trainer,
       K_OUT => k_out_forget_trainer,
