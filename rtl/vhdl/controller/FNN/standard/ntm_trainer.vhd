@@ -99,6 +99,24 @@ architecture ntm_trainer_architecture of ntm_trainer is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- VECTOR SUMMATION
+  -- CONTROL
+  signal start_vector_summation : std_logic;
+  signal ready_vector_summation : std_logic;
+
+  signal data_in_vector_enable_vector_summation : std_logic;
+  signal data_in_scalar_enable_vector_summation : std_logic;
+
+  signal data_out_vector_enable_vector_summation : std_logic;
+  signal data_out_scalar_enable_vector_summation : std_logic;
+
+  -- DATA
+  signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- MATRIX PRODUCT
   -- CONTROL
   signal start_matrix_product : std_logic;
@@ -131,6 +149,34 @@ begin
   -- dW(t;l) = summation(dx(t;l) · x(t;l))[t in 0 to T]
   -- dU(t;l) = summation(dx(t+1;l) · h(t;l))[t in 0 to T-1]
   -- db(t;l) = summation(dx(t;l))[t in 0 to T]
+
+  -- VECTOR SUMMATION
+  vector_summation_function : ntm_vector_summation_function
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_summation,
+      READY => ready_vector_summation,
+
+      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_summation,
+      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_summation,
+
+      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_summation,
+      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
+
+      -- DATA
+      MODULO_IN => modulo_in_vector_summation,
+      SIZE_IN   => size_in_vector_summation,
+      LENGTH_IN => length_in_vector_summation,
+      DATA_IN   => data_in_vector_summation,
+      DATA_OUT  => data_out_vector_summation
+      );
 
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product

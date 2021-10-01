@@ -103,6 +103,60 @@ architecture ntm_forget_trainer_architecture of ntm_forget_trainer is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- VECTOR SUMMATION
+  -- CONTROL
+  signal start_vector_summation : std_logic;
+  signal ready_vector_summation : std_logic;
+
+  signal data_in_vector_enable_vector_summation : std_logic;
+  signal data_in_scalar_enable_vector_summation : std_logic;
+
+  signal data_out_vector_enable_vector_summation : std_logic;
+  signal data_out_scalar_enable_vector_summation : std_logic;
+
+  -- DATA
+  signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- VECTOR MULTIPLIER
+  -- CONTROL
+  signal start_vector_multiplier : std_logic;
+  signal ready_vector_multiplier : std_logic;
+
+  signal data_a_in_enable_vector_multiplier : std_logic;
+  signal data_b_in_enable_vector_multiplier : std_logic;
+
+  signal data_out_enable_vector_multiplier : std_logic;
+
+  -- DATA
+  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_multiplier   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- VECTOR ADDER
+  -- CONTROL
+  signal start_vector_adder : std_logic;
+  signal ready_vector_adder : std_logic;
+
+  signal operation_vector_adder : std_logic;
+
+  signal data_a_in_enable_vector_adder : std_logic;
+  signal data_b_in_enable_vector_adder : std_logic;
+
+  signal data_out_enable_vector_adder : std_logic;
+
+  -- DATA
+  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_adder   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- MATRIX PRODUCT
   -- CONTROL
   signal start_matrix_product : std_logic;
@@ -137,6 +191,90 @@ begin
   -- dW(t;l) = summation(df(t;l) · x(t;l))[t in 0 to T]
   -- dU(t;l) = summation(df(t+1;l) · h(t;l))[t in 0 to T-1]
   -- db(t;l) = summation(df(t;l))[t in 0 to T]
+
+  -- VECTOR SUMMATION
+  vector_summation_function : ntm_vector_summation_function
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_summation,
+      READY => ready_vector_summation,
+
+      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_summation,
+      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_summation,
+
+      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_summation,
+      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
+
+      -- DATA
+      MODULO_IN => modulo_in_vector_summation,
+      SIZE_IN   => size_in_vector_summation,
+      LENGTH_IN => length_in_vector_summation,
+      DATA_IN   => data_in_vector_summation,
+      DATA_OUT  => data_out_vector_summation
+      );
+
+  -- VECTOR MULTIPLIER
+  vector_multiplier : ntm_vector_multiplier
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_multiplier,
+      READY => ready_vector_multiplier,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplier,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplier,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
+
+      -- DATA
+      MODULO_IN => modulo_in_vector_multiplier,
+      SIZE_IN   => size_in_vector_multiplier,
+      DATA_A_IN => data_a_in_vector_multiplier,
+      DATA_B_IN => data_b_in_vector_multiplier,
+      DATA_OUT  => data_out_vector_multiplier
+      );
+
+  -- VECTOR ADDER
+  vector_adder : ntm_vector_adder
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_adder,
+      READY => ready_vector_adder,
+
+      OPERATION => operation_vector_adder,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_adder,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_adder,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_adder,
+
+      -- DATA
+      MODULO_IN => modulo_in_vector_adder,
+      SIZE_IN   => size_in_vector_adder,
+      DATA_A_IN => data_a_in_vector_adder,
+      DATA_B_IN => data_b_in_vector_adder,
+      DATA_OUT  => data_out_vector_adder
+      );
 
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
