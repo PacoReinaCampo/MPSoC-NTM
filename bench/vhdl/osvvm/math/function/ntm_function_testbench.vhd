@@ -845,524 +845,524 @@ begin
       STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1           => STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1,
       STIMULUS_NTM_MATRIX_SUMMATION_CASE_1         => STIMULUS_NTM_MATRIX_SUMMATION_CASE_1
       )
-  port map (
-    -- GLOBAL
-    CLK => CLK,
-    RST => RST,
-
-    -----------------------------------------------------------------------
-    -- STIMULUS SCALAR
-    -----------------------------------------------------------------------
-
-    -- SCALAR CONVOLUTION
-    -- CONTROL
-    SCALAR_CONVOLUTION_START => start_scalar_convolution,
-    SCALAR_CONVOLUTION_READY => ready_scalar_convolution,
-
-    SCALAR_CONVOLUTION_DATA_IN_ENABLE => data_in_enable_scalar_convolution,
-
-    SCALAR_CONVOLUTION_DATA_OUT_ENABLE => data_out_enable_scalar_convolution,
-
-    -- DATA
-    SCALAR_CONVOLUTION_MODULO_IN => modulo_in_scalar_convolution,
-    SCALAR_CONVOLUTION_LENGTH_IN => length_in_scalar_convolution,
-    SCALAR_CONVOLUTION_DATA_A_IN => data_a_in_scalar_convolution,
-    SCALAR_CONVOLUTION_DATA_B_IN => data_b_in_scalar_convolution,
-    SCALAR_CONVOLUTION_DATA_OUT  => data_out_scalar_convolution,
-
-    -- SCALAR COSINE SIMILARITY
-    -- CONTROL
-    SCALAR_COSINE_SIMILARITY_START => start_scalar_cosine,
-    SCALAR_COSINE_SIMILARITY_READY => ready_scalar_cosine,
-
-    SCALAR_COSINE_SIMILARITY_DATA_IN_ENABLE => data_in_enable_scalar_cosine,
-
-    SCALAR_COSINE_SIMILARITY_DATA_OUT_ENABLE => data_out_enable_scalar_cosine,
-
-    -- DATA
-    SCALAR_COSINE_SIMILARITY_MODULO_IN => modulo_in_scalar_cosine,
-    SCALAR_COSINE_SIMILARITY_LENGTH_IN => length_in_scalar_cosine,
-    SCALAR_COSINE_SIMILARITY_DATA_A_IN => data_a_in_scalar_cosine,
-    SCALAR_COSINE_SIMILARITY_DATA_B_IN => data_b_in_scalar_cosine,
-    SCALAR_COSINE_SIMILARITY_DATA_OUT  => data_out_scalar_cosine,
-
-    -- SCALAR MULTIPLICATION
-    -- CONTROL
-    SCALAR_MULTIPLICATION_START => start_scalar_multiplication,
-    SCALAR_MULTIPLICATION_READY => ready_scalar_multiplication,
-
-    SCALAR_MULTIPLICATION_DATA_IN_ENABLE => data_in_enable_scalar_multiplication,
-
-    SCALAR_MULTIPLICATION_DATA_OUT_ENABLE => data_out_enable_scalar_multiplication,
-
-    -- DATA
-    SCALAR_MULTIPLICATION_MODULO_IN => modulo_in_scalar_multiplication,
-    SCALAR_MULTIPLICATION_LENGTH_IN => length_in_scalar_multiplication,
-    SCALAR_MULTIPLICATION_DATA_IN   => data_in_scalar_multiplication,
-    SCALAR_MULTIPLICATION_DATA_OUT  => data_out_scalar_multiplication,
-
-    -- SCALAR COSH
-    -- CONTROL
-    SCALAR_COSH_START => start_scalar_cosh,
-    SCALAR_COSH_READY => ready_scalar_cosh,
-
-    -- DATA
-    SCALAR_COSH_MODULO_IN => modulo_in_scalar_cosh,
-    SCALAR_COSH_DATA_IN   => data_in_scalar_cosh,
-    SCALAR_COSH_DATA_OUT  => data_out_scalar_cosh,
-
-    -- SCALAR SINH
-    -- CONTROL
-    SCALAR_SINH_START => start_scalar_sinh,
-    SCALAR_SINH_READY => ready_scalar_sinh,
-
-    -- DATA
-    SCALAR_SINH_MODULO_IN => modulo_in_scalar_sinh,
-    SCALAR_SINH_DATA_IN   => data_in_scalar_sinh,
-    SCALAR_SINH_DATA_OUT  => data_out_scalar_sinh,
-
-    -- SCALAR TANH
-    -- CONTROL
-    SCALAR_TANH_START => start_scalar_tanh,
-    SCALAR_TANH_READY => ready_scalar_tanh,
-
-    -- DATA
-    SCALAR_TANH_MODULO_IN => modulo_in_scalar_tanh,
-    SCALAR_TANH_DATA_IN   => data_in_scalar_tanh,
-    SCALAR_TANH_DATA_OUT  => data_out_scalar_tanh,
-
-    -- SCALAR LOGISTIC
-    -- CONTROL
-    SCALAR_LOGISTIC_START => start_scalar_logistic,
-    SCALAR_LOGISTIC_READY => ready_scalar_logistic,
-
-    -- DATA
-    SCALAR_LOGISTIC_MODULO_IN => modulo_in_scalar_logistic,
-    SCALAR_LOGISTIC_DATA_IN   => data_in_scalar_logistic,
-    SCALAR_LOGISTIC_DATA_OUT  => data_out_scalar_logistic,
-
-    -- SCALAR SOFTMAX
-    -- CONTROL
-    SCALAR_SOFTMAX_START => start_scalar_softmax,
-    SCALAR_SOFTMAX_READY => ready_scalar_softmax,
-
-    SCALAR_SOFTMAX_DATA_IN_ENABLE => data_in_enable_scalar_softmax,
-
-    SCALAR_SOFTMAX_DATA_OUT_ENABLE => data_out_enable_scalar_softmax,
-
-    -- DATA
-    SCALAR_SOFTMAX_MODULO_IN => modulo_in_scalar_softmax,
-    SCALAR_SOFTMAX_LENGTH_IN => length_in_scalar_softmax,
-    SCALAR_SOFTMAX_DATA_IN   => data_in_scalar_softmax,
-    SCALAR_SOFTMAX_DATA_OUT  => data_out_scalar_softmax,
-
-    -- SCALAR ONEPLUS
-    -- CONTROL
-    SCALAR_ONEPLUS_START => start_scalar_oneplus,
-    SCALAR_ONEPLUS_READY => ready_scalar_oneplus,
-
-    -- DATA
-    SCALAR_ONEPLUS_MODULO_IN => modulo_in_scalar_oneplus,
-    SCALAR_ONEPLUS_DATA_IN   => data_in_scalar_oneplus,
-    SCALAR_ONEPLUS_DATA_OUT  => data_out_scalar_oneplus,
-
-    -- SCALAR SUMMATION
-    -- CONTROL
-    SCALAR_SUMMATION_START => start_scalar_summation,
-    SCALAR_SUMMATION_READY => ready_scalar_summation,
-
-    SCALAR_SUMMATION_DATA_IN_ENABLE => data_in_enable_scalar_summation,
-
-    SCALAR_SUMMATION_DATA_OUT_ENABLE => data_out_enable_scalar_summation,
-
-    -- DATA
-    SCALAR_SUMMATION_MODULO_IN => modulo_in_scalar_summation,
-    SCALAR_SUMMATION_LENGTH_IN => length_in_scalar_summation,
-    SCALAR_SUMMATION_DATA_IN   => data_in_scalar_summation,
-    SCALAR_SUMMATION_DATA_OUT  => data_out_scalar_summation,
-
-    -----------------------------------------------------------------------
-    -- STIMULUS VECTOR
-    -----------------------------------------------------------------------
-
-    -- VECTOR CONVOLUTION
-    -- CONTROL
-    VECTOR_CONVOLUTION_START => start_vector_convolution,
-    VECTOR_CONVOLUTION_READY => ready_vector_convolution,
-
-    VECTOR_CONVOLUTION_DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_convolution,
-    VECTOR_CONVOLUTION_DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_convolution,
-    VECTOR_CONVOLUTION_DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_convolution,
-    VECTOR_CONVOLUTION_DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_convolution,
-
-    VECTOR_CONVOLUTION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_convolution,
-    VECTOR_CONVOLUTION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_convolution,
-
-    -- DATA
-    VECTOR_CONVOLUTION_MODULO_IN => modulo_in_vector_convolution,
-    VECTOR_CONVOLUTION_SIZE_IN   => size_in_vector_convolution,
-    VECTOR_CONVOLUTION_LENGTH_IN => length_in_vector_convolution,
-    VECTOR_CONVOLUTION_DATA_A_IN => data_a_in_vector_convolution,
-    VECTOR_CONVOLUTION_DATA_B_IN => data_b_in_vector_convolution,
-    VECTOR_CONVOLUTION_DATA_OUT  => data_out_vector_convolution,
-
-    -- VECTOR COSINE SIMILARITY
-    -- CONTROL
-    VECTOR_COSINE_SIMILARITY_START => start_vector_cosine,
-    VECTOR_COSINE_SIMILARITY_READY => ready_vector_cosine,
-
-    VECTOR_COSINE_SIMILARITY_DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_cosine,
-    VECTOR_COSINE_SIMILARITY_DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_cosine,
-    VECTOR_COSINE_SIMILARITY_DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_cosine,
-    VECTOR_COSINE_SIMILARITY_DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_cosine,
-
-    VECTOR_COSINE_SIMILARITY_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_cosine,
-    VECTOR_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_cosine,
-
-    -- DATA
-    VECTOR_COSINE_SIMILARITY_MODULO_IN => modulo_in_vector_cosine,
-    VECTOR_COSINE_SIMILARITY_SIZE_IN   => size_in_vector_cosine,
-    VECTOR_COSINE_SIMILARITY_LENGTH_IN => length_in_vector_cosine,
-    VECTOR_COSINE_SIMILARITY_DATA_A_IN => data_a_in_vector_cosine,
-    VECTOR_COSINE_SIMILARITY_DATA_B_IN => data_b_in_vector_cosine,
-    VECTOR_COSINE_SIMILARITY_DATA_OUT  => data_out_vector_cosine,
-
-    -- VECTOR COSH
-    -- CONTROL
-    VECTOR_COSH_START => start_vector_cosh,
-    VECTOR_COSH_READY => ready_vector_cosh,
-
-    VECTOR_COSH_DATA_IN_ENABLE => data_in_enable_vector_cosh,
-
-    VECTOR_COSH_DATA_OUT_ENABLE => data_out_enable_vector_cosh,
-
-    -- DATA
-    VECTOR_COSH_MODULO_IN => modulo_in_vector_cosh,
-    VECTOR_COSH_SIZE_IN   => size_in_vector_cosh,
-    VECTOR_COSH_DATA_IN   => data_in_vector_cosh,
-    VECTOR_COSH_DATA_OUT  => data_out_vector_cosh,
-
-    -- VECTOR SINH
-    -- CONTROL
-    VECTOR_SINH_START => start_vector_sinh,
-    VECTOR_SINH_READY => ready_vector_sinh,
-
-    VECTOR_SINH_DATA_IN_ENABLE => data_in_enable_vector_sinh,
-
-    VECTOR_SINH_DATA_OUT_ENABLE => data_out_enable_vector_sinh,
-
-    -- DATA
-    VECTOR_SINH_MODULO_IN => modulo_in_vector_sinh,
-    VECTOR_SINH_SIZE_IN   => size_in_vector_sinh,
-    VECTOR_SINH_DATA_IN   => data_in_vector_sinh,
-    VECTOR_SINH_DATA_OUT  => data_out_vector_sinh,
-
-    -- VECTOR TANH
-    -- CONTROL
-    VECTOR_TANH_START => start_vector_tanh,
-    VECTOR_TANH_READY => ready_vector_tanh,
-
-    VECTOR_TANH_DATA_IN_ENABLE => data_in_enable_vector_tanh,
-
-    VECTOR_TANH_DATA_OUT_ENABLE => data_out_enable_vector_tanh,
-
-    -- DATA
-    VECTOR_TANH_MODULO_IN => modulo_in_vector_tanh,
-    VECTOR_TANH_SIZE_IN   => size_in_vector_tanh,
-    VECTOR_TANH_DATA_IN   => data_in_vector_tanh,
-    VECTOR_TANH_DATA_OUT  => data_out_vector_tanh,
-
-    -- VECTOR MULTIPLICATION
-    -- CONTROL
-    VECTOR_MULTIPLICATION_START => start_vector_multiplication,
-    VECTOR_MULTIPLICATION_READY => ready_vector_multiplication,
-
-    VECTOR_MULTIPLICATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_multiplication,
-    VECTOR_MULTIPLICATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_multiplication,
-
-    VECTOR_MULTIPLICATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_multiplication,
-    VECTOR_MULTIPLICATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_multiplication,
-
-    -- DATA
-    VECTOR_MULTIPLICATION_MODULO_IN => modulo_in_vector_multiplication,
-    VECTOR_MULTIPLICATION_SIZE_IN   => size_in_vector_multiplication,
-    VECTOR_MULTIPLICATION_LENGTH_IN => length_in_vector_multiplication,
-    VECTOR_MULTIPLICATION_DATA_IN   => data_in_vector_multiplication,
-    VECTOR_MULTIPLICATION_DATA_OUT  => data_out_vector_multiplication,
-
-    -- VECTOR LOGISTIC
-    -- CONTROL
-    VECTOR_LOGISTIC_START => start_vector_logistic,
-    VECTOR_LOGISTIC_READY => ready_vector_logistic,
-
-    VECTOR_LOGISTIC_DATA_IN_ENABLE => data_in_enable_vector_logistic,
-
-    VECTOR_LOGISTIC_DATA_OUT_ENABLE => data_out_enable_vector_logistic,
-
-    -- DATA
-    VECTOR_LOGISTIC_MODULO_IN => modulo_in_vector_logistic,
-    VECTOR_LOGISTIC_SIZE_IN   => size_in_vector_logistic,
-    VECTOR_LOGISTIC_DATA_IN   => data_in_vector_logistic,
-    VECTOR_LOGISTIC_DATA_OUT  => data_out_vector_logistic,
-
-    -- VECTOR SOFTMAX
-    -- CONTROL
-    VECTOR_SOFTMAX_START => start_vector_softmax,
-    VECTOR_SOFTMAX_READY => ready_vector_softmax,
-
-    VECTOR_SOFTMAX_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_softmax,
-    VECTOR_SOFTMAX_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_softmax,
-
-    VECTOR_SOFTMAX_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_softmax,
-    VECTOR_SOFTMAX_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_softmax,
-
-    -- DATA
-    VECTOR_SOFTMAX_MODULO_IN => modulo_in_vector_softmax,
-    VECTOR_SOFTMAX_SIZE_IN   => size_in_vector_softmax,
-    VECTOR_SOFTMAX_LENGTH_IN => length_in_vector_softmax,
-    VECTOR_SOFTMAX_DATA_IN   => data_in_vector_softmax,
-    VECTOR_SOFTMAX_DATA_OUT  => data_out_vector_softmax,
-
-    -- VECTOR ONEPLUS
-    -- CONTROL
-    VECTOR_ONEPLUS_START => start_vector_oneplus,
-    VECTOR_ONEPLUS_READY => ready_vector_oneplus,
-
-    VECTOR_ONEPLUS_DATA_IN_ENABLE => data_in_enable_vector_oneplus,
-
-    VECTOR_ONEPLUS_DATA_OUT_ENABLE => data_out_enable_vector_oneplus,
-
-    -- DATA
-    VECTOR_ONEPLUS_MODULO_IN => modulo_in_vector_oneplus,
-    VECTOR_ONEPLUS_SIZE_IN   => size_in_vector_oneplus,
-    VECTOR_ONEPLUS_DATA_IN   => data_in_vector_oneplus,
-    VECTOR_ONEPLUS_DATA_OUT  => data_out_vector_oneplus,
-
-    -- VECTOR SUMMATION
-    -- CONTROL
-    VECTOR_SUMMATION_START => start_vector_summation,
-    VECTOR_SUMMATION_READY => ready_vector_summation,
-
-    VECTOR_SUMMATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_summation,
-    VECTOR_SUMMATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_summation,
-
-    VECTOR_SUMMATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_summation,
-    VECTOR_SUMMATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
-
-    -- DATA
-    VECTOR_SUMMATION_MODULO_IN => modulo_in_vector_summation,
-    VECTOR_SUMMATION_SIZE_IN   => size_in_vector_summation,
-    VECTOR_SUMMATION_LENGTH_IN => length_in_vector_summation,
-    VECTOR_SUMMATION_DATA_IN   => data_in_vector_summation,
-    VECTOR_SUMMATION_DATA_OUT  => data_out_vector_summation,
-
-    -----------------------------------------------------------------------
-    -- STIMULUS MATRIX
-    -----------------------------------------------------------------------
-
-    -- MATRIX CONVOLUTION
-    -- CONTROL
-    MATRIX_CONVOLUTION_START => start_matrix_convolution,
-    MATRIX_CONVOLUTION_READY => ready_matrix_convolution,
-
-    MATRIX_CONVOLUTION_DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_convolution,
-    MATRIX_CONVOLUTION_DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_convolution,
-    MATRIX_CONVOLUTION_DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_convolution,
-    MATRIX_CONVOLUTION_DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_convolution,
-    MATRIX_CONVOLUTION_DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_convolution,
-    MATRIX_CONVOLUTION_DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_convolution,
-
-    MATRIX_CONVOLUTION_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_convolution,
-    MATRIX_CONVOLUTION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_convolution,
-    MATRIX_CONVOLUTION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_convolution,
-
-    -- DATA
-    MATRIX_CONVOLUTION_MODULO_IN => modulo_in_matrix_convolution,
-    MATRIX_CONVOLUTION_SIZE_I_IN => size_i_in_matrix_convolution,
-    MATRIX_CONVOLUTION_SIZE_J_IN => size_j_in_matrix_convolution,
-    MATRIX_CONVOLUTION_LENGTH_IN => length_in_matrix_convolution,
-    MATRIX_CONVOLUTION_DATA_A_IN => data_a_in_matrix_convolution,
-    MATRIX_CONVOLUTION_DATA_B_IN => data_b_in_matrix_convolution,
-    MATRIX_CONVOLUTION_DATA_OUT  => data_out_matrix_convolution,
-
-    -- MATRIX COSINE SIMILARITY
-    -- CONTROL
-    MATRIX_COSINE_SIMILARITY_START => start_matrix_cosine,
-    MATRIX_COSINE_SIMILARITY_READY => ready_matrix_cosine,
-
-    MATRIX_COSINE_SIMILARITY_DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_cosine,
-    MATRIX_COSINE_SIMILARITY_DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_cosine,
-    MATRIX_COSINE_SIMILARITY_DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_cosine,
-    MATRIX_COSINE_SIMILARITY_DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_cosine,
-    MATRIX_COSINE_SIMILARITY_DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_cosine,
-    MATRIX_COSINE_SIMILARITY_DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_cosine,
-
-    MATRIX_COSINE_SIMILARITY_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_cosine,
-    MATRIX_COSINE_SIMILARITY_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_cosine,
-    MATRIX_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_cosine,
-
-    -- DATA
-    MATRIX_COSINE_SIMILARITY_MODULO_IN => modulo_in_matrix_cosine,
-    MATRIX_COSINE_SIMILARITY_SIZE_I_IN => size_i_in_matrix_cosine,
-    MATRIX_COSINE_SIMILARITY_SIZE_J_IN => size_j_in_matrix_cosine,
-    MATRIX_COSINE_SIMILARITY_LENGTH_IN => length_in_matrix_cosine,
-    MATRIX_COSINE_SIMILARITY_DATA_A_IN => data_a_in_matrix_cosine,
-    MATRIX_COSINE_SIMILARITY_DATA_B_IN => data_b_in_matrix_cosine,
-    MATRIX_COSINE_SIMILARITY_DATA_OUT  => data_out_matrix_cosine,
-
-    -- MATRIX MULTIPLICATION
-    -- CONTROL
-    MATRIX_MULTIPLICATION_START => start_matrix_multiplication,
-    MATRIX_MULTIPLICATION_READY => ready_matrix_multiplication,
-
-    MATRIX_MULTIPLICATION_DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_multiplication,
-    MATRIX_MULTIPLICATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_multiplication,
-    MATRIX_MULTIPLICATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_multiplication,
-
-    MATRIX_MULTIPLICATION_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_multiplication,
-    MATRIX_MULTIPLICATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_multiplication,
-    MATRIX_MULTIPLICATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_multiplication,
-
-    -- DATA
-    MATRIX_MULTIPLICATION_MODULO_IN => modulo_in_matrix_multiplication,
-    MATRIX_MULTIPLICATION_SIZE_I_IN => size_i_in_matrix_multiplication,
-    MATRIX_MULTIPLICATION_SIZE_J_IN => size_j_in_matrix_multiplication,
-    MATRIX_MULTIPLICATION_LENGTH_IN => length_in_matrix_multiplication,
-    MATRIX_MULTIPLICATION_DATA_IN   => data_in_matrix_multiplication,
-    MATRIX_MULTIPLICATION_DATA_OUT  => data_out_matrix_multiplication,
-
-    -- MATRIX COSH
-    -- CONTROL
-    MATRIX_COSH_START => start_matrix_cosh,
-    MATRIX_COSH_READY => ready_matrix_cosh,
-
-    MATRIX_COSH_DATA_IN_I_ENABLE => data_in_i_enable_matrix_cosh,
-    MATRIX_COSH_DATA_IN_J_ENABLE => data_in_j_enable_matrix_cosh,
-
-    MATRIX_COSH_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_cosh,
-    MATRIX_COSH_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_cosh,
-
-    -- DATA
-    MATRIX_COSH_MODULO_IN => modulo_in_matrix_cosh,
-    MATRIX_COSH_SIZE_I_IN => size_i_in_matrix_cosh,
-    MATRIX_COSH_SIZE_J_IN => size_j_in_matrix_cosh,
-    MATRIX_COSH_DATA_IN   => data_in_matrix_cosh,
-    MATRIX_COSH_DATA_OUT  => data_out_matrix_cosh,
-
-    -- MATRIX SINH
-    -- CONTROL
-    MATRIX_SINH_START => start_matrix_sinh,
-    MATRIX_SINH_READY => ready_matrix_sinh,
-
-    MATRIX_SINH_DATA_IN_I_ENABLE => data_in_i_enable_matrix_sinh,
-    MATRIX_SINH_DATA_IN_J_ENABLE => data_in_j_enable_matrix_sinh,
-
-    MATRIX_SINH_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_sinh,
-    MATRIX_SINH_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_sinh,
-
-    -- DATA
-    MATRIX_SINH_MODULO_IN => modulo_in_matrix_sinh,
-    MATRIX_SINH_SIZE_I_IN => size_i_in_matrix_sinh,
-    MATRIX_SINH_SIZE_J_IN => size_j_in_matrix_sinh,
-    MATRIX_SINH_DATA_IN   => data_in_matrix_sinh,
-    MATRIX_SINH_DATA_OUT  => data_out_matrix_sinh,
-
-    -- MATRIX TANH
-    -- CONTROL
-    MATRIX_TANH_START => start_matrix_tanh,
-    MATRIX_TANH_READY => ready_matrix_tanh,
-
-    MATRIX_TANH_DATA_IN_I_ENABLE => data_in_i_enable_matrix_tanh,
-    MATRIX_TANH_DATA_IN_J_ENABLE => data_in_j_enable_matrix_tanh,
-
-    MATRIX_TANH_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_tanh,
-    MATRIX_TANH_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_tanh,
-
-    -- DATA
-    MATRIX_TANH_MODULO_IN => modulo_in_matrix_tanh,
-    MATRIX_TANH_SIZE_I_IN => size_i_in_matrix_tanh,
-    MATRIX_TANH_SIZE_J_IN => size_j_in_matrix_tanh,
-    MATRIX_TANH_DATA_IN   => data_in_matrix_tanh,
-    MATRIX_TANH_DATA_OUT  => data_out_matrix_tanh,
-
-    -- MATRIX LOGISTIC
-    -- CONTROL
-    MATRIX_LOGISTIC_START => start_matrix_logistic,
-    MATRIX_LOGISTIC_READY => ready_matrix_logistic,
-
-    MATRIX_LOGISTIC_DATA_IN_I_ENABLE => data_in_i_enable_matrix_logistic,
-    MATRIX_LOGISTIC_DATA_IN_J_ENABLE => data_in_j_enable_matrix_logistic,
-
-    MATRIX_LOGISTIC_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_logistic,
-    MATRIX_LOGISTIC_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_logistic,
-
-    -- DATA
-    MATRIX_LOGISTIC_MODULO_IN => modulo_in_matrix_logistic,
-    MATRIX_LOGISTIC_SIZE_I_IN => size_i_in_matrix_logistic,
-    MATRIX_LOGISTIC_SIZE_J_IN => size_j_in_matrix_logistic,
-    MATRIX_LOGISTIC_DATA_IN   => data_in_matrix_logistic,
-    MATRIX_LOGISTIC_DATA_OUT  => data_out_matrix_logistic,
-
-    -- MATRIX SOFTMAX
-    -- CONTROL
-    MATRIX_SOFTMAX_START => start_matrix_softmax,
-    MATRIX_SOFTMAX_READY => ready_matrix_softmax,
-
-    MATRIX_SOFTMAX_DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_softmax,
-    MATRIX_SOFTMAX_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_softmax,
-    MATRIX_SOFTMAX_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_softmax,
-
-    MATRIX_SOFTMAX_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_softmax,
-    MATRIX_SOFTMAX_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_softmax,
-    MATRIX_SOFTMAX_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_softmax,
-
-    -- DATA
-    MATRIX_SOFTMAX_MODULO_IN => modulo_in_matrix_softmax,
-    MATRIX_SOFTMAX_SIZE_I_IN => size_i_in_matrix_softmax,
-    MATRIX_SOFTMAX_SIZE_J_IN => size_j_in_matrix_softmax,
-    MATRIX_SOFTMAX_LENGTH_IN => length_in_matrix_softmax,
-    MATRIX_SOFTMAX_DATA_IN   => data_in_matrix_softmax,
-    MATRIX_SOFTMAX_DATA_OUT  => data_out_matrix_softmax,
-
-    -- MATRIX ONEPLUS
-    -- CONTROL
-    MATRIX_ONEPLUS_START => start_matrix_oneplus,
-    MATRIX_ONEPLUS_READY => ready_matrix_oneplus,
-
-    MATRIX_ONEPLUS_DATA_IN_I_ENABLE => data_in_i_enable_matrix_oneplus,
-    MATRIX_ONEPLUS_DATA_IN_J_ENABLE => data_in_j_enable_matrix_oneplus,
-
-    MATRIX_ONEPLUS_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_oneplus,
-    MATRIX_ONEPLUS_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_oneplus,
-
-    -- DATA
-    MATRIX_ONEPLUS_MODULO_IN => modulo_in_matrix_oneplus,
-    MATRIX_ONEPLUS_SIZE_I_IN => size_i_in_matrix_oneplus,
-    MATRIX_ONEPLUS_SIZE_J_IN => size_j_in_matrix_oneplus,
-    MATRIX_ONEPLUS_DATA_IN   => data_in_matrix_oneplus,
-    MATRIX_ONEPLUS_DATA_OUT  => data_out_matrix_oneplus,
-
-    -- MATRIX SUMMATION
-    -- CONTROL
-    MATRIX_SUMMATION_START => start_matrix_summation,
-    MATRIX_SUMMATION_READY => ready_matrix_summation,
-
-    MATRIX_SUMMATION_DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_summation,
-    MATRIX_SUMMATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_summation,
-    MATRIX_SUMMATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_summation,
-
-    MATRIX_SUMMATION_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_summation,
-    MATRIX_SUMMATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_summation,
-    MATRIX_SUMMATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_summation,
-
-    -- DATA
-    MATRIX_SUMMATION_MODULO_IN => modulo_in_matrix_summation,
-    MATRIX_SUMMATION_SIZE_I_IN => size_i_in_matrix_summation,
-    MATRIX_SUMMATION_SIZE_J_IN => size_j_in_matrix_summation,
-    MATRIX_SUMMATION_LENGTH_IN => length_in_matrix_summation,
-    MATRIX_SUMMATION_DATA_IN   => data_in_matrix_summation,
-    MATRIX_SUMMATION_DATA_OUT  => data_out_matrix_summation
-    );
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -----------------------------------------------------------------------
+      -- STIMULUS SCALAR
+      -----------------------------------------------------------------------
+
+      -- SCALAR CONVOLUTION
+      -- CONTROL
+      SCALAR_CONVOLUTION_START => start_scalar_convolution,
+      SCALAR_CONVOLUTION_READY => ready_scalar_convolution,
+
+      SCALAR_CONVOLUTION_DATA_IN_ENABLE => data_in_enable_scalar_convolution,
+
+      SCALAR_CONVOLUTION_DATA_OUT_ENABLE => data_out_enable_scalar_convolution,
+
+      -- DATA
+      SCALAR_CONVOLUTION_MODULO_IN => modulo_in_scalar_convolution,
+      SCALAR_CONVOLUTION_LENGTH_IN => length_in_scalar_convolution,
+      SCALAR_CONVOLUTION_DATA_A_IN => data_a_in_scalar_convolution,
+      SCALAR_CONVOLUTION_DATA_B_IN => data_b_in_scalar_convolution,
+      SCALAR_CONVOLUTION_DATA_OUT  => data_out_scalar_convolution,
+
+      -- SCALAR COSINE SIMILARITY
+      -- CONTROL
+      SCALAR_COSINE_SIMILARITY_START => start_scalar_cosine,
+      SCALAR_COSINE_SIMILARITY_READY => ready_scalar_cosine,
+
+      SCALAR_COSINE_SIMILARITY_DATA_IN_ENABLE => data_in_enable_scalar_cosine,
+
+      SCALAR_COSINE_SIMILARITY_DATA_OUT_ENABLE => data_out_enable_scalar_cosine,
+
+      -- DATA
+      SCALAR_COSINE_SIMILARITY_MODULO_IN => modulo_in_scalar_cosine,
+      SCALAR_COSINE_SIMILARITY_LENGTH_IN => length_in_scalar_cosine,
+      SCALAR_COSINE_SIMILARITY_DATA_A_IN => data_a_in_scalar_cosine,
+      SCALAR_COSINE_SIMILARITY_DATA_B_IN => data_b_in_scalar_cosine,
+      SCALAR_COSINE_SIMILARITY_DATA_OUT  => data_out_scalar_cosine,
+
+      -- SCALAR MULTIPLICATION
+      -- CONTROL
+      SCALAR_MULTIPLICATION_START => start_scalar_multiplication,
+      SCALAR_MULTIPLICATION_READY => ready_scalar_multiplication,
+
+      SCALAR_MULTIPLICATION_DATA_IN_ENABLE => data_in_enable_scalar_multiplication,
+
+      SCALAR_MULTIPLICATION_DATA_OUT_ENABLE => data_out_enable_scalar_multiplication,
+
+      -- DATA
+      SCALAR_MULTIPLICATION_MODULO_IN => modulo_in_scalar_multiplication,
+      SCALAR_MULTIPLICATION_LENGTH_IN => length_in_scalar_multiplication,
+      SCALAR_MULTIPLICATION_DATA_IN   => data_in_scalar_multiplication,
+      SCALAR_MULTIPLICATION_DATA_OUT  => data_out_scalar_multiplication,
+
+      -- SCALAR COSH
+      -- CONTROL
+      SCALAR_COSH_START => start_scalar_cosh,
+      SCALAR_COSH_READY => ready_scalar_cosh,
+
+      -- DATA
+      SCALAR_COSH_MODULO_IN => modulo_in_scalar_cosh,
+      SCALAR_COSH_DATA_IN   => data_in_scalar_cosh,
+      SCALAR_COSH_DATA_OUT  => data_out_scalar_cosh,
+
+      -- SCALAR SINH
+      -- CONTROL
+      SCALAR_SINH_START => start_scalar_sinh,
+      SCALAR_SINH_READY => ready_scalar_sinh,
+
+      -- DATA
+      SCALAR_SINH_MODULO_IN => modulo_in_scalar_sinh,
+      SCALAR_SINH_DATA_IN   => data_in_scalar_sinh,
+      SCALAR_SINH_DATA_OUT  => data_out_scalar_sinh,
+
+      -- SCALAR TANH
+      -- CONTROL
+      SCALAR_TANH_START => start_scalar_tanh,
+      SCALAR_TANH_READY => ready_scalar_tanh,
+
+      -- DATA
+      SCALAR_TANH_MODULO_IN => modulo_in_scalar_tanh,
+      SCALAR_TANH_DATA_IN   => data_in_scalar_tanh,
+      SCALAR_TANH_DATA_OUT  => data_out_scalar_tanh,
+
+      -- SCALAR LOGISTIC
+      -- CONTROL
+      SCALAR_LOGISTIC_START => start_scalar_logistic,
+      SCALAR_LOGISTIC_READY => ready_scalar_logistic,
+
+      -- DATA
+      SCALAR_LOGISTIC_MODULO_IN => modulo_in_scalar_logistic,
+      SCALAR_LOGISTIC_DATA_IN   => data_in_scalar_logistic,
+      SCALAR_LOGISTIC_DATA_OUT  => data_out_scalar_logistic,
+
+      -- SCALAR SOFTMAX
+      -- CONTROL
+      SCALAR_SOFTMAX_START => start_scalar_softmax,
+      SCALAR_SOFTMAX_READY => ready_scalar_softmax,
+
+      SCALAR_SOFTMAX_DATA_IN_ENABLE => data_in_enable_scalar_softmax,
+
+      SCALAR_SOFTMAX_DATA_OUT_ENABLE => data_out_enable_scalar_softmax,
+
+      -- DATA
+      SCALAR_SOFTMAX_MODULO_IN => modulo_in_scalar_softmax,
+      SCALAR_SOFTMAX_LENGTH_IN => length_in_scalar_softmax,
+      SCALAR_SOFTMAX_DATA_IN   => data_in_scalar_softmax,
+      SCALAR_SOFTMAX_DATA_OUT  => data_out_scalar_softmax,
+
+      -- SCALAR ONEPLUS
+      -- CONTROL
+      SCALAR_ONEPLUS_START => start_scalar_oneplus,
+      SCALAR_ONEPLUS_READY => ready_scalar_oneplus,
+
+      -- DATA
+      SCALAR_ONEPLUS_MODULO_IN => modulo_in_scalar_oneplus,
+      SCALAR_ONEPLUS_DATA_IN   => data_in_scalar_oneplus,
+      SCALAR_ONEPLUS_DATA_OUT  => data_out_scalar_oneplus,
+
+      -- SCALAR SUMMATION
+      -- CONTROL
+      SCALAR_SUMMATION_START => start_scalar_summation,
+      SCALAR_SUMMATION_READY => ready_scalar_summation,
+
+      SCALAR_SUMMATION_DATA_IN_ENABLE => data_in_enable_scalar_summation,
+
+      SCALAR_SUMMATION_DATA_OUT_ENABLE => data_out_enable_scalar_summation,
+
+      -- DATA
+      SCALAR_SUMMATION_MODULO_IN => modulo_in_scalar_summation,
+      SCALAR_SUMMATION_LENGTH_IN => length_in_scalar_summation,
+      SCALAR_SUMMATION_DATA_IN   => data_in_scalar_summation,
+      SCALAR_SUMMATION_DATA_OUT  => data_out_scalar_summation,
+
+      -----------------------------------------------------------------------
+      -- STIMULUS VECTOR
+      -----------------------------------------------------------------------
+
+      -- VECTOR CONVOLUTION
+      -- CONTROL
+      VECTOR_CONVOLUTION_START => start_vector_convolution,
+      VECTOR_CONVOLUTION_READY => ready_vector_convolution,
+
+      VECTOR_CONVOLUTION_DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_convolution,
+      VECTOR_CONVOLUTION_DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_convolution,
+      VECTOR_CONVOLUTION_DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_convolution,
+      VECTOR_CONVOLUTION_DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_convolution,
+
+      VECTOR_CONVOLUTION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_convolution,
+      VECTOR_CONVOLUTION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_convolution,
+
+      -- DATA
+      VECTOR_CONVOLUTION_MODULO_IN => modulo_in_vector_convolution,
+      VECTOR_CONVOLUTION_SIZE_IN   => size_in_vector_convolution,
+      VECTOR_CONVOLUTION_LENGTH_IN => length_in_vector_convolution,
+      VECTOR_CONVOLUTION_DATA_A_IN => data_a_in_vector_convolution,
+      VECTOR_CONVOLUTION_DATA_B_IN => data_b_in_vector_convolution,
+      VECTOR_CONVOLUTION_DATA_OUT  => data_out_vector_convolution,
+
+      -- VECTOR COSINE SIMILARITY
+      -- CONTROL
+      VECTOR_COSINE_SIMILARITY_START => start_vector_cosine,
+      VECTOR_COSINE_SIMILARITY_READY => ready_vector_cosine,
+
+      VECTOR_COSINE_SIMILARITY_DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_cosine,
+      VECTOR_COSINE_SIMILARITY_DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_cosine,
+      VECTOR_COSINE_SIMILARITY_DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_cosine,
+      VECTOR_COSINE_SIMILARITY_DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_cosine,
+
+      VECTOR_COSINE_SIMILARITY_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_cosine,
+      VECTOR_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_cosine,
+
+      -- DATA
+      VECTOR_COSINE_SIMILARITY_MODULO_IN => modulo_in_vector_cosine,
+      VECTOR_COSINE_SIMILARITY_SIZE_IN   => size_in_vector_cosine,
+      VECTOR_COSINE_SIMILARITY_LENGTH_IN => length_in_vector_cosine,
+      VECTOR_COSINE_SIMILARITY_DATA_A_IN => data_a_in_vector_cosine,
+      VECTOR_COSINE_SIMILARITY_DATA_B_IN => data_b_in_vector_cosine,
+      VECTOR_COSINE_SIMILARITY_DATA_OUT  => data_out_vector_cosine,
+
+      -- VECTOR COSH
+      -- CONTROL
+      VECTOR_COSH_START => start_vector_cosh,
+      VECTOR_COSH_READY => ready_vector_cosh,
+
+      VECTOR_COSH_DATA_IN_ENABLE => data_in_enable_vector_cosh,
+
+      VECTOR_COSH_DATA_OUT_ENABLE => data_out_enable_vector_cosh,
+
+      -- DATA
+      VECTOR_COSH_MODULO_IN => modulo_in_vector_cosh,
+      VECTOR_COSH_SIZE_IN   => size_in_vector_cosh,
+      VECTOR_COSH_DATA_IN   => data_in_vector_cosh,
+      VECTOR_COSH_DATA_OUT  => data_out_vector_cosh,
+
+      -- VECTOR SINH
+      -- CONTROL
+      VECTOR_SINH_START => start_vector_sinh,
+      VECTOR_SINH_READY => ready_vector_sinh,
+
+      VECTOR_SINH_DATA_IN_ENABLE => data_in_enable_vector_sinh,
+
+      VECTOR_SINH_DATA_OUT_ENABLE => data_out_enable_vector_sinh,
+
+      -- DATA
+      VECTOR_SINH_MODULO_IN => modulo_in_vector_sinh,
+      VECTOR_SINH_SIZE_IN   => size_in_vector_sinh,
+      VECTOR_SINH_DATA_IN   => data_in_vector_sinh,
+      VECTOR_SINH_DATA_OUT  => data_out_vector_sinh,
+
+      -- VECTOR TANH
+      -- CONTROL
+      VECTOR_TANH_START => start_vector_tanh,
+      VECTOR_TANH_READY => ready_vector_tanh,
+
+      VECTOR_TANH_DATA_IN_ENABLE => data_in_enable_vector_tanh,
+
+      VECTOR_TANH_DATA_OUT_ENABLE => data_out_enable_vector_tanh,
+
+      -- DATA
+      VECTOR_TANH_MODULO_IN => modulo_in_vector_tanh,
+      VECTOR_TANH_SIZE_IN   => size_in_vector_tanh,
+      VECTOR_TANH_DATA_IN   => data_in_vector_tanh,
+      VECTOR_TANH_DATA_OUT  => data_out_vector_tanh,
+
+      -- VECTOR MULTIPLICATION
+      -- CONTROL
+      VECTOR_MULTIPLICATION_START => start_vector_multiplication,
+      VECTOR_MULTIPLICATION_READY => ready_vector_multiplication,
+
+      VECTOR_MULTIPLICATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_multiplication,
+      VECTOR_MULTIPLICATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_multiplication,
+
+      VECTOR_MULTIPLICATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_multiplication,
+      VECTOR_MULTIPLICATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_multiplication,
+
+      -- DATA
+      VECTOR_MULTIPLICATION_MODULO_IN => modulo_in_vector_multiplication,
+      VECTOR_MULTIPLICATION_SIZE_IN   => size_in_vector_multiplication,
+      VECTOR_MULTIPLICATION_LENGTH_IN => length_in_vector_multiplication,
+      VECTOR_MULTIPLICATION_DATA_IN   => data_in_vector_multiplication,
+      VECTOR_MULTIPLICATION_DATA_OUT  => data_out_vector_multiplication,
+
+      -- VECTOR LOGISTIC
+      -- CONTROL
+      VECTOR_LOGISTIC_START => start_vector_logistic,
+      VECTOR_LOGISTIC_READY => ready_vector_logistic,
+
+      VECTOR_LOGISTIC_DATA_IN_ENABLE => data_in_enable_vector_logistic,
+
+      VECTOR_LOGISTIC_DATA_OUT_ENABLE => data_out_enable_vector_logistic,
+
+      -- DATA
+      VECTOR_LOGISTIC_MODULO_IN => modulo_in_vector_logistic,
+      VECTOR_LOGISTIC_SIZE_IN   => size_in_vector_logistic,
+      VECTOR_LOGISTIC_DATA_IN   => data_in_vector_logistic,
+      VECTOR_LOGISTIC_DATA_OUT  => data_out_vector_logistic,
+
+      -- VECTOR SOFTMAX
+      -- CONTROL
+      VECTOR_SOFTMAX_START => start_vector_softmax,
+      VECTOR_SOFTMAX_READY => ready_vector_softmax,
+
+      VECTOR_SOFTMAX_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_softmax,
+      VECTOR_SOFTMAX_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_softmax,
+
+      VECTOR_SOFTMAX_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_softmax,
+      VECTOR_SOFTMAX_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_softmax,
+
+      -- DATA
+      VECTOR_SOFTMAX_MODULO_IN => modulo_in_vector_softmax,
+      VECTOR_SOFTMAX_SIZE_IN   => size_in_vector_softmax,
+      VECTOR_SOFTMAX_LENGTH_IN => length_in_vector_softmax,
+      VECTOR_SOFTMAX_DATA_IN   => data_in_vector_softmax,
+      VECTOR_SOFTMAX_DATA_OUT  => data_out_vector_softmax,
+
+      -- VECTOR ONEPLUS
+      -- CONTROL
+      VECTOR_ONEPLUS_START => start_vector_oneplus,
+      VECTOR_ONEPLUS_READY => ready_vector_oneplus,
+
+      VECTOR_ONEPLUS_DATA_IN_ENABLE => data_in_enable_vector_oneplus,
+
+      VECTOR_ONEPLUS_DATA_OUT_ENABLE => data_out_enable_vector_oneplus,
+
+      -- DATA
+      VECTOR_ONEPLUS_MODULO_IN => modulo_in_vector_oneplus,
+      VECTOR_ONEPLUS_SIZE_IN   => size_in_vector_oneplus,
+      VECTOR_ONEPLUS_DATA_IN   => data_in_vector_oneplus,
+      VECTOR_ONEPLUS_DATA_OUT  => data_out_vector_oneplus,
+
+      -- VECTOR SUMMATION
+      -- CONTROL
+      VECTOR_SUMMATION_START => start_vector_summation,
+      VECTOR_SUMMATION_READY => ready_vector_summation,
+
+      VECTOR_SUMMATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_summation,
+      VECTOR_SUMMATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_summation,
+
+      VECTOR_SUMMATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_summation,
+      VECTOR_SUMMATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
+
+      -- DATA
+      VECTOR_SUMMATION_MODULO_IN => modulo_in_vector_summation,
+      VECTOR_SUMMATION_SIZE_IN   => size_in_vector_summation,
+      VECTOR_SUMMATION_LENGTH_IN => length_in_vector_summation,
+      VECTOR_SUMMATION_DATA_IN   => data_in_vector_summation,
+      VECTOR_SUMMATION_DATA_OUT  => data_out_vector_summation,
+
+      -----------------------------------------------------------------------
+      -- STIMULUS MATRIX
+      -----------------------------------------------------------------------
+
+      -- MATRIX CONVOLUTION
+      -- CONTROL
+      MATRIX_CONVOLUTION_START => start_matrix_convolution,
+      MATRIX_CONVOLUTION_READY => ready_matrix_convolution,
+
+      MATRIX_CONVOLUTION_DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_convolution,
+      MATRIX_CONVOLUTION_DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_convolution,
+      MATRIX_CONVOLUTION_DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_convolution,
+      MATRIX_CONVOLUTION_DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_convolution,
+      MATRIX_CONVOLUTION_DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_convolution,
+      MATRIX_CONVOLUTION_DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_convolution,
+
+      MATRIX_CONVOLUTION_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_convolution,
+      MATRIX_CONVOLUTION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_convolution,
+      MATRIX_CONVOLUTION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_convolution,
+
+      -- DATA
+      MATRIX_CONVOLUTION_MODULO_IN => modulo_in_matrix_convolution,
+      MATRIX_CONVOLUTION_SIZE_I_IN => size_i_in_matrix_convolution,
+      MATRIX_CONVOLUTION_SIZE_J_IN => size_j_in_matrix_convolution,
+      MATRIX_CONVOLUTION_LENGTH_IN => length_in_matrix_convolution,
+      MATRIX_CONVOLUTION_DATA_A_IN => data_a_in_matrix_convolution,
+      MATRIX_CONVOLUTION_DATA_B_IN => data_b_in_matrix_convolution,
+      MATRIX_CONVOLUTION_DATA_OUT  => data_out_matrix_convolution,
+
+      -- MATRIX COSINE SIMILARITY
+      -- CONTROL
+      MATRIX_COSINE_SIMILARITY_START => start_matrix_cosine,
+      MATRIX_COSINE_SIMILARITY_READY => ready_matrix_cosine,
+
+      MATRIX_COSINE_SIMILARITY_DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_cosine,
+      MATRIX_COSINE_SIMILARITY_DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_cosine,
+      MATRIX_COSINE_SIMILARITY_DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_cosine,
+      MATRIX_COSINE_SIMILARITY_DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_cosine,
+      MATRIX_COSINE_SIMILARITY_DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_cosine,
+      MATRIX_COSINE_SIMILARITY_DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_cosine,
+
+      MATRIX_COSINE_SIMILARITY_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_cosine,
+      MATRIX_COSINE_SIMILARITY_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_cosine,
+      MATRIX_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_cosine,
+
+      -- DATA
+      MATRIX_COSINE_SIMILARITY_MODULO_IN => modulo_in_matrix_cosine,
+      MATRIX_COSINE_SIMILARITY_SIZE_I_IN => size_i_in_matrix_cosine,
+      MATRIX_COSINE_SIMILARITY_SIZE_J_IN => size_j_in_matrix_cosine,
+      MATRIX_COSINE_SIMILARITY_LENGTH_IN => length_in_matrix_cosine,
+      MATRIX_COSINE_SIMILARITY_DATA_A_IN => data_a_in_matrix_cosine,
+      MATRIX_COSINE_SIMILARITY_DATA_B_IN => data_b_in_matrix_cosine,
+      MATRIX_COSINE_SIMILARITY_DATA_OUT  => data_out_matrix_cosine,
+
+      -- MATRIX MULTIPLICATION
+      -- CONTROL
+      MATRIX_MULTIPLICATION_START => start_matrix_multiplication,
+      MATRIX_MULTIPLICATION_READY => ready_matrix_multiplication,
+
+      MATRIX_MULTIPLICATION_DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_multiplication,
+      MATRIX_MULTIPLICATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_multiplication,
+      MATRIX_MULTIPLICATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_multiplication,
+
+      MATRIX_MULTIPLICATION_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_multiplication,
+      MATRIX_MULTIPLICATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_multiplication,
+      MATRIX_MULTIPLICATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_multiplication,
+
+      -- DATA
+      MATRIX_MULTIPLICATION_MODULO_IN => modulo_in_matrix_multiplication,
+      MATRIX_MULTIPLICATION_SIZE_I_IN => size_i_in_matrix_multiplication,
+      MATRIX_MULTIPLICATION_SIZE_J_IN => size_j_in_matrix_multiplication,
+      MATRIX_MULTIPLICATION_LENGTH_IN => length_in_matrix_multiplication,
+      MATRIX_MULTIPLICATION_DATA_IN   => data_in_matrix_multiplication,
+      MATRIX_MULTIPLICATION_DATA_OUT  => data_out_matrix_multiplication,
+
+      -- MATRIX COSH
+      -- CONTROL
+      MATRIX_COSH_START => start_matrix_cosh,
+      MATRIX_COSH_READY => ready_matrix_cosh,
+
+      MATRIX_COSH_DATA_IN_I_ENABLE => data_in_i_enable_matrix_cosh,
+      MATRIX_COSH_DATA_IN_J_ENABLE => data_in_j_enable_matrix_cosh,
+
+      MATRIX_COSH_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_cosh,
+      MATRIX_COSH_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_cosh,
+
+      -- DATA
+      MATRIX_COSH_MODULO_IN => modulo_in_matrix_cosh,
+      MATRIX_COSH_SIZE_I_IN => size_i_in_matrix_cosh,
+      MATRIX_COSH_SIZE_J_IN => size_j_in_matrix_cosh,
+      MATRIX_COSH_DATA_IN   => data_in_matrix_cosh,
+      MATRIX_COSH_DATA_OUT  => data_out_matrix_cosh,
+
+      -- MATRIX SINH
+      -- CONTROL
+      MATRIX_SINH_START => start_matrix_sinh,
+      MATRIX_SINH_READY => ready_matrix_sinh,
+
+      MATRIX_SINH_DATA_IN_I_ENABLE => data_in_i_enable_matrix_sinh,
+      MATRIX_SINH_DATA_IN_J_ENABLE => data_in_j_enable_matrix_sinh,
+
+      MATRIX_SINH_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_sinh,
+      MATRIX_SINH_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_sinh,
+
+      -- DATA
+      MATRIX_SINH_MODULO_IN => modulo_in_matrix_sinh,
+      MATRIX_SINH_SIZE_I_IN => size_i_in_matrix_sinh,
+      MATRIX_SINH_SIZE_J_IN => size_j_in_matrix_sinh,
+      MATRIX_SINH_DATA_IN   => data_in_matrix_sinh,
+      MATRIX_SINH_DATA_OUT  => data_out_matrix_sinh,
+
+      -- MATRIX TANH
+      -- CONTROL
+      MATRIX_TANH_START => start_matrix_tanh,
+      MATRIX_TANH_READY => ready_matrix_tanh,
+
+      MATRIX_TANH_DATA_IN_I_ENABLE => data_in_i_enable_matrix_tanh,
+      MATRIX_TANH_DATA_IN_J_ENABLE => data_in_j_enable_matrix_tanh,
+
+      MATRIX_TANH_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_tanh,
+      MATRIX_TANH_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_tanh,
+
+      -- DATA
+      MATRIX_TANH_MODULO_IN => modulo_in_matrix_tanh,
+      MATRIX_TANH_SIZE_I_IN => size_i_in_matrix_tanh,
+      MATRIX_TANH_SIZE_J_IN => size_j_in_matrix_tanh,
+      MATRIX_TANH_DATA_IN   => data_in_matrix_tanh,
+      MATRIX_TANH_DATA_OUT  => data_out_matrix_tanh,
+
+      -- MATRIX LOGISTIC
+      -- CONTROL
+      MATRIX_LOGISTIC_START => start_matrix_logistic,
+      MATRIX_LOGISTIC_READY => ready_matrix_logistic,
+
+      MATRIX_LOGISTIC_DATA_IN_I_ENABLE => data_in_i_enable_matrix_logistic,
+      MATRIX_LOGISTIC_DATA_IN_J_ENABLE => data_in_j_enable_matrix_logistic,
+
+      MATRIX_LOGISTIC_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_logistic,
+      MATRIX_LOGISTIC_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_logistic,
+
+      -- DATA
+      MATRIX_LOGISTIC_MODULO_IN => modulo_in_matrix_logistic,
+      MATRIX_LOGISTIC_SIZE_I_IN => size_i_in_matrix_logistic,
+      MATRIX_LOGISTIC_SIZE_J_IN => size_j_in_matrix_logistic,
+      MATRIX_LOGISTIC_DATA_IN   => data_in_matrix_logistic,
+      MATRIX_LOGISTIC_DATA_OUT  => data_out_matrix_logistic,
+
+      -- MATRIX SOFTMAX
+      -- CONTROL
+      MATRIX_SOFTMAX_START => start_matrix_softmax,
+      MATRIX_SOFTMAX_READY => ready_matrix_softmax,
+
+      MATRIX_SOFTMAX_DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_softmax,
+      MATRIX_SOFTMAX_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_softmax,
+      MATRIX_SOFTMAX_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_softmax,
+
+      MATRIX_SOFTMAX_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_softmax,
+      MATRIX_SOFTMAX_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_softmax,
+      MATRIX_SOFTMAX_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_softmax,
+
+      -- DATA
+      MATRIX_SOFTMAX_MODULO_IN => modulo_in_matrix_softmax,
+      MATRIX_SOFTMAX_SIZE_I_IN => size_i_in_matrix_softmax,
+      MATRIX_SOFTMAX_SIZE_J_IN => size_j_in_matrix_softmax,
+      MATRIX_SOFTMAX_LENGTH_IN => length_in_matrix_softmax,
+      MATRIX_SOFTMAX_DATA_IN   => data_in_matrix_softmax,
+      MATRIX_SOFTMAX_DATA_OUT  => data_out_matrix_softmax,
+
+      -- MATRIX ONEPLUS
+      -- CONTROL
+      MATRIX_ONEPLUS_START => start_matrix_oneplus,
+      MATRIX_ONEPLUS_READY => ready_matrix_oneplus,
+
+      MATRIX_ONEPLUS_DATA_IN_I_ENABLE => data_in_i_enable_matrix_oneplus,
+      MATRIX_ONEPLUS_DATA_IN_J_ENABLE => data_in_j_enable_matrix_oneplus,
+
+      MATRIX_ONEPLUS_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_oneplus,
+      MATRIX_ONEPLUS_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_oneplus,
+
+      -- DATA
+      MATRIX_ONEPLUS_MODULO_IN => modulo_in_matrix_oneplus,
+      MATRIX_ONEPLUS_SIZE_I_IN => size_i_in_matrix_oneplus,
+      MATRIX_ONEPLUS_SIZE_J_IN => size_j_in_matrix_oneplus,
+      MATRIX_ONEPLUS_DATA_IN   => data_in_matrix_oneplus,
+      MATRIX_ONEPLUS_DATA_OUT  => data_out_matrix_oneplus,
+
+      -- MATRIX SUMMATION
+      -- CONTROL
+      MATRIX_SUMMATION_START => start_matrix_summation,
+      MATRIX_SUMMATION_READY => ready_matrix_summation,
+
+      MATRIX_SUMMATION_DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_summation,
+      MATRIX_SUMMATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_summation,
+      MATRIX_SUMMATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_summation,
+
+      MATRIX_SUMMATION_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_summation,
+      MATRIX_SUMMATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_summation,
+      MATRIX_SUMMATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_summation,
+
+      -- DATA
+      MATRIX_SUMMATION_MODULO_IN => modulo_in_matrix_summation,
+      MATRIX_SUMMATION_SIZE_I_IN => size_i_in_matrix_summation,
+      MATRIX_SUMMATION_SIZE_J_IN => size_j_in_matrix_summation,
+      MATRIX_SUMMATION_LENGTH_IN => length_in_matrix_summation,
+      MATRIX_SUMMATION_DATA_IN   => data_in_matrix_summation,
+      MATRIX_SUMMATION_DATA_OUT  => data_out_matrix_summation
+      );
 
   -----------------------------------------------------------------------
   -- SCALAR

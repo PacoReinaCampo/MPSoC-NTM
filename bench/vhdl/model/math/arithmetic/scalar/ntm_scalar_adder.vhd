@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 entity ecdsa_adder is
   generic (
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -64,7 +64,7 @@ entity ecdsa_adder is
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture ecdsa_adder_architecture of ecdsa_adder is
@@ -74,9 +74,9 @@ architecture ecdsa_adder_architecture of ecdsa_adder is
   -----------------------------------------------------------------------
 
   type adder_ctrl_fsm_type is (
-    STARTER_ST,  -- STEP 0
-    ENDER_ST     -- STEP 1
-  );
+    STARTER_ST,                         -- STEP 0
+    ENDER_ST                            -- STEP 1
+    );
 
   -----------------------------------------------------------------------
   -- Constants
@@ -115,7 +115,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case adder_ctrl_fsm_st is
-        when STARTER_ST =>  -- STEP 0
+        when STARTER_ST =>              -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -135,7 +135,7 @@ begin
             adder_ctrl_fsm_st <= ENDER_ST;
           end if;
 
-        when ENDER_ST =>  -- STEP 1
+        when ENDER_ST =>                -- STEP 1
 
           if (unsigned(MODULO) > unsigned(ZERO)) then
             if (unsigned(DATA_A_IN) > unsigned(DATA_B_IN)) then

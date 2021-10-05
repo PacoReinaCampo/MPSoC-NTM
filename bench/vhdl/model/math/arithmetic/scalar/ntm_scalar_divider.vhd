@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 entity ntm_scalar_divider is
   generic (
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -62,7 +62,7 @@ entity ntm_scalar_divider is
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture ntm_scalar_divider_architecture of ntm_scalar_divider is
@@ -72,9 +72,9 @@ architecture ntm_scalar_divider_architecture of ntm_scalar_divider is
   -----------------------------------------------------------------------
 
   type divider_ctrl_fsm_type is (
-    STARTER_ST,  -- STEP 0
-    ENDER_ST     -- STEP 1
-  );
+    STARTER_ST,                         -- STEP 0
+    ENDER_ST                            -- STEP 1
+    );
 
   -----------------------------------------------------------------------
   -- Constants
@@ -113,7 +113,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case divider_ctrl_fsm_st is
-        when STARTER_ST =>  -- STEP 0
+        when STARTER_ST =>              -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -125,7 +125,7 @@ begin
             divider_ctrl_fsm_st <= ENDER_ST;
           end if;
 
-        when ENDER_ST =>  -- STEP 1
+        when ENDER_ST =>                -- STEP 1
 
           -- Data Outputs
           DATA_OUT <= division_int(DATA_SIZE-1 downto 0);

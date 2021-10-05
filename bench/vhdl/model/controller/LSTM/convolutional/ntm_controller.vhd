@@ -455,7 +455,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-   -- ACTIVATION GATE VECTOR
+  -- ACTIVATION GATE VECTOR
   activation_gate_vector : ntm_activation_gate_vector
     generic map (
       DATA_SIZE => DATA_SIZE

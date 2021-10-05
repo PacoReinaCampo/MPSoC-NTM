@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 entity ecdsa_inverter is
   generic (
     DATA_SIZE : integer := 512
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -61,7 +61,7 @@ entity ecdsa_inverter is
     MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    );
 end entity;
 
 architecture ecdsa_inverter_architecture of ecdsa_inverter is
@@ -71,10 +71,10 @@ architecture ecdsa_inverter_architecture of ecdsa_inverter is
   -----------------------------------------------------------------------
 
   type inverter_ctrl_fsm_type is (
-    STARTER_ST,  -- STEP 0
-    MODULO_ST,   -- STEP 1
-    ENDER_ST     -- STEP 2
-  );
+    STARTER_ST,                         -- STEP 0
+    MODULO_ST,                          -- STEP 1
+    ENDER_ST                            -- STEP 2
+    );
 
   -----------------------------------------------------------------------
   -- Constants
@@ -124,7 +124,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case inverter_ctrl_fsm_st is
-        when STARTER_ST =>  -- STEP 0
+        when STARTER_ST =>              -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -155,7 +155,7 @@ begin
             inverter_ctrl_fsm_st <= MODULO_ST;
           end if;
 
-        when MODULO_ST =>  -- STEP 1
+        when MODULO_ST =>               -- STEP 1
 
           -- Assignation
           inversion_int <= x1_var(DATA_SIZE-1 downto 0);
@@ -163,8 +163,8 @@ begin
           -- FSM Control
           inverter_ctrl_fsm_st <= ENDER_ST;
 
-        when ENDER_ST =>  -- STEP 2
-        
+        when ENDER_ST =>                -- STEP 2
+
           if (unsigned(MODULO) > unsigned(ZERO)) then
             if (unsigned(inversion_int) > unsigned(ZERO)) then
               if (x0_var(0) = '0') then
