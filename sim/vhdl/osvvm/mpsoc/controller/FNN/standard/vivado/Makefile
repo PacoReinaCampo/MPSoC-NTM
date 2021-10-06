@@ -9,14 +9,14 @@
 ##                  |_|                                                          ##
 ##                                                                               ##
 ##                                                                               ##
-##              MPSoC-SPRAM CPU                                                  ##
-##              Simulation Test Makefile                                         ##
+##              Peripheral-NTM for MPSoC                                         ##
+##              Neural Turing Machine for MPSoC                                  ##
 ##                                                                               ##
 ###################################################################################
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2018-2019 by the author(s)                                      ##
+## Copyright (c) 2020-2021 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -45,11 +45,11 @@
 all: build simulate
 
 build:
-	xvlog -prj system.prj
+	xvhdl -prj system.prj
 
 simulate:
-	xelab peripheral_spram_testbench
-	xsim -R peripheral_spram_testbench
+	xelab ntm_standard_fnn_testbench
+	xsim -R ntm_standard_fnn_testbench
 
 clean:
 	rm -rf *.dir *.jou *.log *.pb .Xil
