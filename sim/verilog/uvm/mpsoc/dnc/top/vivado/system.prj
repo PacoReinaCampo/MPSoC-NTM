@@ -1,0 +1,122 @@
+vhdl2008 work ../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/pkg/dnc_core_pkg.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/pkg/ntm_lstm_controller_pkg.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_mod.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_adder.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_multiplier.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_inverter.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_divider.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_exponentiator.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_root.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_logarithm.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_mod.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_adder.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_multiplier.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_inverter.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_divider.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_exponentiator.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_root.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_logarithm.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_mod.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_adder.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_multiplier.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_inverter.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_divider.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_exponentiator.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_root.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_logarithm.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_determinant.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_inversion.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_product.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_rank.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_transpose.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_scalar_product.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_vector_product.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/convolution/scalar/ntm_scalar_convolution_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/cosine/scalar/ntm_scalar_cosine_similarity_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/multiplication/scalar/ntm_scalar_multiplication_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/sigmoid/scalar/hyperbolic/ntm_scalar_cosh_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/sigmoid/scalar/hyperbolic/ntm_scalar_sinh_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/sigmoid/scalar/hyperbolic/ntm_scalar_tanh_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/sigmoid/scalar/logistic/ntm_scalar_logistic_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/sigmoid/scalar/logistic/ntm_scalar_softmax_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/sigmoid/scalar/oneplus/ntm_scalar_oneplus_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/summation/scalar/ntm_scalar_summation_function.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/convolution/vector/ntm_vector_convolution_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/cosine/vector/ntm_vector_cosine_similarity_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/multiplication/vector/ntm_vector_multiplication_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/sigmoid/vector/hyperbolic/ntm_vector_cosh_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/sigmoid/vector/hyperbolic/ntm_vector_sinh_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/sigmoid/vector/hyperbolic/ntm_vector_tanh_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/sigmoid/vector/logistic/ntm_vector_logistic_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/sigmoid/vector/logistic/ntm_vector_softmax_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/sigmoid/vector/oneplus/ntm_vector_oneplus_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/summation/vector/ntm_vector_summation_function.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/convolution/matrix/ntm_matrix_convolution_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/cosine/matrix/ntm_matrix_cosine_similarity_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/multiplication/matrix/ntm_matrix_multiplication_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/sigmoid/matrix/hyperbolic/ntm_matrix_cosh_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/sigmoid/matrix/hyperbolic/ntm_matrix_sinh_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/sigmoid/matrix/hyperbolic/ntm_matrix_tanh_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/sigmoid/matrix/logistic/ntm_matrix_logistic_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/sigmoid/matrix/logistic/ntm_matrix_softmax_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/sigmoid/matrix/oneplus/ntm_matrix_oneplus_function.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/function/summation/matrix/ntm_matrix_summation_function.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_controller.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_activation_gate_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_activation_trainer.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_forget_gate_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_forget_trainer.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_hidden_gate_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_input_gate_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_input_trainer.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_output_gate_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_output_trainer.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_state_gate_vector.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_free_gates.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_keys.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_modes.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_strengths.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_allocation_gate.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_erase_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_gate.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_key.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_strength.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_vector.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_content_based_addressing.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_allocation_weighting.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_backward_weighting.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_forward_weighting.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_memory_matrix.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_memory_retention_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_precedence_weighting.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_read_content_weighting.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_read_vectors.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_read_weighting.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_sort_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_temporal_link_matrix.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_usage_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_write_content_weighting.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_write_weighting.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/memory/dnc_addressing.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/top/dnc_top.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/top/dnc_output_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/top/dnc_controller_output_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/top/dnc_read_interface_vector.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/dnc/top/dnc_write_interface_vector.vhd
+
+vhdl2008 work ../../../../../../../bench/vhdl/osvvm/dnc/top/dnc_top_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/osvvm/dnc/top/dnc_top_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/osvvm/dnc/top/dnc_top_testbench.vhd

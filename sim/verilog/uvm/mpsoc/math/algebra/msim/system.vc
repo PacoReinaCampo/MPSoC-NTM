@@ -1,0 +1,13 @@
+../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
+
+../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_determinant.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_inversion.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_product.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_rank.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_transpose.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_scalar_product.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_vector_product.vhd
+
+../../../../../../../bench/vhdl/osvvm/math/algebra/ntm_algebra_pkg.vhd
+../../../../../../../bench/vhdl/osvvm/math/algebra/ntm_algebra_stimulus.vhd
+../../../../../../../bench/vhdl/osvvm/math/algebra/ntm_algebra_testbench.vhd
