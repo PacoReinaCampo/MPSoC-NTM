@@ -101,6 +101,7 @@ module dnc_output_vector(
   // CONTROL
   wire start_vector_adder;
   wire ready_vector_adder;
+
   wire operation_vector_adder;
   wire data_a_in_enable_vector_adder;
   wire data_b_in_enable_vector_adder;
@@ -117,6 +118,7 @@ module dnc_output_vector(
   // CONTROL
   wire start_matrix_product;
   wire ready_matrix_product;
+
   wire data_a_in_i_enable_matrix_product;
   wire data_a_in_j_enable_matrix_product;
   wire data_b_in_i_enable_matrix_product;
@@ -152,6 +154,7 @@ module dnc_output_vector(
     // CONTROL
     .START(start_vector_adder),
     .READY(ready_vector_adder),
+
     .OPERATION(operation_vector_adder),
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_adder),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_adder),
@@ -177,6 +180,7 @@ module dnc_output_vector(
     // CONTROL
     .START(start_matrix_product),
     .READY(ready_matrix_product),
+
     .DATA_A_IN_I_ENABLE(data_a_in_i_enable_matrix_product),
     .DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_product),
     .DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_product),

@@ -1,39 +1,18 @@
-// File vhdl/dnc/memory/dnc_read_weighting.vhd translated with vhd2vl v2.5 VHDL to Verilog RTL translator
-// vhd2vl settings:
-//  * Verilog Module Declaration Style: 1995
-
-// vhd2vl is Free (libre) Software:
-//   Copyright (C) 2001 Vincenzo Liguori - Ocean Logic Pty Ltd
-//     http://www.ocean-logic.com
-//   Modifications Copyright (C) 2006 Mark Gonzales - PMC Sierra Inc
-//   Modifications (C) 2010 Shankar Giri
-//   Modifications Copyright (C) 2002, 2005, 2008-2010, 2015 Larry Doolittle - LBNL
-//     http://doolittle.icarus.com/~larry/vhd2vl/
-//
-//   vhd2vl comes with ABSOLUTELY NO WARRANTY.  Always check the resulting
-//   Verilog for correctness, ideally with a formal verification tool.
-//
-//   You are welcome to redistribute vhd2vl under certain conditions.
-//   See the license (GPLv2) file included with the source for details.
-
-// The result of translation follows.  Its copyright status should be
-// considered unchanged from the original VHDL.
-
-//------------------------------------------------------------------------------
-//                                            __ _      _     _               --
-//                                           / _(_)    | |   | |              --
-//                __ _ _   _  ___  ___ _ __ | |_ _  ___| | __| |              --
-//               / _` | | | |/ _ \/ _ \ '_ \|  _| |/ _ \ |/ _` |              --
-//              | (_| | |_| |  __/  __/ | | | | | |  __/ | (_| |              --
-//               \__, |\__,_|\___|\___|_| |_|_| |_|\___|_|\__,_|              --
-//                  | |                                                       --
-//                  |_|                                                       --
-//                                                                            --
-//                                                                            --
-//              Peripheral-NTM for MPSoC                                      --
-//              Neural Turing Machine for MPSoC                               --
-//                                                                            --
-//------------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
+//                                            __ _      _     _               //
+//                                           / _(_)    | |   | |              //
+//                __ _ _   _  ___  ___ _ __ | |_ _  ___| | __| |              //
+//               / _` | | | |/ _ \/ _ \ '_ \|  _| |/ _ \ |/ _` |              //
+//              | (_| | |_| |  __/  __/ | | | | | |  __/ | (_| |              //
+//               \__, |\__,_|\___|\___|_| |_|_| |_|\___|_|\__,_|              //
+//                  | |                                                       //
+//                  |_|                                                       //
+//                                                                            //
+//                                                                            //
+//              Peripheral-NTM for MPSoC                                      //
+//              Neural Turing Machine for MPSoC                               //
+//                                                                            //
+////////////////////////////////////////////////////////////////////////////////
 // Copyright (c) 2020-2021 by the author(s)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -54,172 +33,166 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 //
-//------------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
-// no timescale needed
 
 module dnc_read_weighting(
-CLK,
-RST,
-START,
-READY,
-PI_IN_I_ENABLE,
-PI_IN_P_ENABLE,
-B_IN_I_ENABLE,
-B_IN_J_ENABLE,
-C_IN_I_ENABLE,
-C_IN_J_ENABLE,
-F_IN_I_ENABLE,
-F_IN_J_ENABLE,
-W_OUT_I_ENABLE,
-W_OUT_J_ENABLE,
-SIZE_R_IN,
-SIZE_N_IN,
-PI_IN,
-B_IN,
-C_IN,
-F_IN,
-W_OUT
+  CLK,
+  RST,
+  START,
+  READY,
+  PI_IN_I_ENABLE,
+  PI_IN_P_ENABLE,
+  B_IN_I_ENABLE,
+  B_IN_J_ENABLE,
+  C_IN_I_ENABLE,
+  C_IN_J_ENABLE,
+  F_IN_I_ENABLE,
+  F_IN_J_ENABLE,
+  W_OUT_I_ENABLE,
+  W_OUT_J_ENABLE,
+  SIZE_R_IN,
+  SIZE_N_IN,
+  PI_IN,
+  B_IN,
+  C_IN,
+  F_IN,
+  W_OUT
 );
 
-parameter [31:0] DATA_SIZE=512;
-// GLOBAL
-input CLK;
-input RST;
-// CONTROL
-input START;
-output READY;
-input PI_IN_I_ENABLE;
-// for i in 0 to R-1
-input PI_IN_P_ENABLE;
-// for p in 0 to 2
-input B_IN_I_ENABLE;
-// for i in 0 to R-1
-input B_IN_J_ENABLE;
-// for j in 0 to N-1
-input C_IN_I_ENABLE;
-// for i in 0 to R-1
-input C_IN_J_ENABLE;
-// for j in 0 to N-1
-input F_IN_I_ENABLE;
-// for i in 0 to R-1
-input F_IN_J_ENABLE;
-// for j in 0 to N-1
-output W_OUT_I_ENABLE;
-// for i in 0 to R-1
-output W_OUT_J_ENABLE;
-// for j in 0 to N-1
-// DATA
-input [DATA_SIZE - 1:0] SIZE_R_IN;
-input [DATA_SIZE - 1:0] SIZE_N_IN;
-input [DATA_SIZE - 1:0] PI_IN;
-input [DATA_SIZE - 1:0] B_IN;
-input [DATA_SIZE - 1:0] C_IN;
-input F_IN;
-output [DATA_SIZE - 1:0] W_OUT;
+  parameter [31:0] DATA_SIZE=512;
 
-wire CLK;
-wire RST;
-wire START;
-wire READY;
-wire PI_IN_I_ENABLE;
-wire PI_IN_P_ENABLE;
-wire B_IN_I_ENABLE;
-wire B_IN_J_ENABLE;
-wire C_IN_I_ENABLE;
-wire C_IN_J_ENABLE;
-wire F_IN_I_ENABLE;
-wire F_IN_J_ENABLE;
-wire W_OUT_I_ENABLE;
-wire W_OUT_J_ENABLE;
-wire [DATA_SIZE - 1:0] SIZE_R_IN;
-wire [DATA_SIZE - 1:0] SIZE_N_IN;
-wire [DATA_SIZE - 1:0] PI_IN;
-wire [DATA_SIZE - 1:0] B_IN;
-wire [DATA_SIZE - 1:0] C_IN;
-wire F_IN;
-wire [DATA_SIZE - 1:0] W_OUT;
+  // GLOBAL
+  input CLK;
+  input RST;
 
+  // CONTROL
+  input START;
+  output READY;
 
-//---------------------------------------------------------------------
-// Types
-//---------------------------------------------------------------------
-//---------------------------------------------------------------------
-// Constants
-//---------------------------------------------------------------------
-//---------------------------------------------------------------------
-// Signals
-//---------------------------------------------------------------------
-// VECTOR ADDER
-// CONTROL
-wire start_vector_adder;
-wire ready_vector_adder;
-wire operation_vector_adder;
-wire data_a_in_enable_vector_adder;
-wire data_b_in_enable_vector_adder;
-wire data_out_enable_vector_adder;  // DATA
-wire [DATA_SIZE - 1:0] modulo_in_vector_adder;
-wire [DATA_SIZE - 1:0] size_in_vector_adder;
-wire [DATA_SIZE - 1:0] data_a_in_vector_adder;
-wire [DATA_SIZE - 1:0] data_b_in_vector_adder;
-wire [DATA_SIZE - 1:0] data_out_vector_adder;  // VECTOR MULTIPLIER
-// CONTROL
-wire start_vector_multiplier;
-wire ready_vector_multiplier;
-wire data_a_in_enable_vector_multiplier;
-wire data_b_in_enable_vector_multiplier;
-wire data_out_enable_vector_multiplier;  // DATA
-wire [DATA_SIZE - 1:0] modulo_in_vector_multiplier;
-wire [DATA_SIZE - 1:0] size_in_vector_multiplier;
-wire [DATA_SIZE - 1:0] data_a_in_vector_multiplier;
-wire [DATA_SIZE - 1:0] data_b_in_vector_multiplier;
-wire [DATA_SIZE - 1:0] data_out_vector_multiplier;
+  input PI_IN_I_ENABLE;  // for i in 0 to R-1
+  input PI_IN_P_ENABLE;  // for p in 0 to 2
+  input B_IN_I_ENABLE;  // for i in 0 to R-1
+  input B_IN_J_ENABLE;  // for j in 0 to N-1
+  input C_IN_I_ENABLE;  // for i in 0 to R-1
+  input C_IN_J_ENABLE;  // for j in 0 to N-1
+  input F_IN_I_ENABLE;  // for i in 0 to R-1
+  input F_IN_J_ENABLE;  // for j in 0 to N-1
+  output W_OUT_I_ENABLE;  // for i in 0 to R-1
+  output W_OUT_J_ENABLE;  // for j in 0 to N-1
 
-  //---------------------------------------------------------------------
+  // DATA
+  input [DATA_SIZE - 1:0] SIZE_R_IN;
+  input [DATA_SIZE - 1:0] SIZE_N_IN;
+  input [DATA_SIZE - 1:0] PI_IN;
+  input [DATA_SIZE - 1:0] B_IN;
+  input [DATA_SIZE - 1:0] C_IN;
+  input F_IN;
+  output [DATA_SIZE - 1:0] W_OUT;
+
+  ///////////////////////////////////////////////////////////////////////
+  // Types
+  ///////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////////
+  // Constants
+  ///////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////////
+  // Signals
+  ///////////////////////////////////////////////////////////////////////
+
+  // VECTOR ADDER
+  // CONTROL
+  wire start_vector_adder;
+  wire ready_vector_adder;
+
+  wire operation_vector_adder;
+
+  wire data_a_in_enable_vector_adder;
+  wire data_b_in_enable_vector_adder;
+  wire data_out_enable_vector_adder;
+
+  // DATA
+  wire [DATA_SIZE - 1:0] modulo_in_vector_adder;
+  wire [DATA_SIZE - 1:0] size_in_vector_adder;
+  wire [DATA_SIZE - 1:0] data_a_in_vector_adder;
+  wire [DATA_SIZE - 1:0] data_b_in_vector_adder;
+  wire [DATA_SIZE - 1:0] data_out_vector_adder;
+
+  // VECTOR MULTIPLIER
+  // CONTROL
+  wire start_vector_multiplier;
+  wire ready_vector_multiplier;
+
+  wire data_a_in_enable_vector_multiplier;
+  wire data_b_in_enable_vector_multiplier;
+  wire data_out_enable_vector_multiplier;
+
+  // DATA
+  wire [DATA_SIZE - 1:0] modulo_in_vector_multiplier;
+  wire [DATA_SIZE - 1:0] size_in_vector_multiplier;
+  wire [DATA_SIZE - 1:0] data_a_in_vector_multiplier;
+  wire [DATA_SIZE - 1:0] data_b_in_vector_multiplier;
+  wire [DATA_SIZE - 1:0] data_out_vector_multiplier;
+
+  ///////////////////////////////////////////////////////////////////////
   // Body
-  //---------------------------------------------------------------------
+  ///////////////////////////////////////////////////////////////////////
+
   // w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
+
   // VECTOR ADDER
   ntm_vector_adder #(
-      .DATA_SIZE(DATA_SIZE))
+    .DATA_SIZE(DATA_SIZE)
+  )
   vector_adder(
-      // GLOBAL
+    // GLOBAL
     .CLK(CLK),
     .RST(RST),
+
     // CONTROL
     .START(start_vector_adder),
     .READY(ready_vector_adder),
+
     .OPERATION(operation_vector_adder),
+
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_adder),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_adder),
     .DATA_OUT_ENABLE(data_out_enable_vector_adder),
+
     // DATA
     .MODULO_IN(modulo_in_vector_adder),
     .SIZE_IN(size_in_vector_adder),
     .DATA_A_IN(data_a_in_vector_adder),
     .DATA_B_IN(data_b_in_vector_adder),
-    .DATA_OUT(data_out_vector_adder));
+    .DATA_OUT(data_out_vector_adder)
+  );
 
   // VECTOR MULTIPLIER
   ntm_vector_multiplier #(
-      .DATA_SIZE(DATA_SIZE))
+    .DATA_SIZE(DATA_SIZE)
+  )
   vector_multiplier(
-      // GLOBAL
+    // GLOBAL
     .CLK(CLK),
     .RST(RST),
+
     // CONTROL
     .START(start_vector_multiplier),
     .READY(ready_vector_multiplier),
+
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_multiplier),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_multiplier),
     .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
+
     // DATA
     .MODULO_IN(modulo_in_vector_multiplier),
     .SIZE_IN(size_in_vector_multiplier),
     .DATA_A_IN(data_a_in_vector_multiplier),
     .DATA_B_IN(data_b_in_vector_multiplier),
-    .DATA_OUT(data_out_vector_multiplier));
-
+    .DATA_OUT(data_out_vector_multiplier)
+  );
 
 endmodule

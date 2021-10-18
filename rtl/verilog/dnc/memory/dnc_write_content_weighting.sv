@@ -1,39 +1,18 @@
-// File vhdl/dnc/memory/dnc_write_content_weighting.vhd translated with vhd2vl v2.5 VHDL to Verilog RTL translator
-// vhd2vl settings:
-//  * Verilog Module Declaration Style: 1995
-
-// vhd2vl is Free (libre) Software:
-//   Copyright (C) 2001 Vincenzo Liguori - Ocean Logic Pty Ltd
-//     http://www.ocean-logic.com
-//   Modifications Copyright (C) 2006 Mark Gonzales - PMC Sierra Inc
-//   Modifications (C) 2010 Shankar Giri
-//   Modifications Copyright (C) 2002, 2005, 2008-2010, 2015 Larry Doolittle - LBNL
-//     http://doolittle.icarus.com/~larry/vhd2vl/
-//
-//   vhd2vl comes with ABSOLUTELY NO WARRANTY.  Always check the resulting
-//   Verilog for correctness, ideally with a formal verification tool.
-//
-//   You are welcome to redistribute vhd2vl under certain conditions.
-//   See the license (GPLv2) file included with the source for details.
-
-// The result of translation follows.  Its copyright status should be
-// considered unchanged from the original VHDL.
-
-//------------------------------------------------------------------------------
-//                                            __ _      _     _               --
-//                                           / _(_)    | |   | |              --
-//                __ _ _   _  ___  ___ _ __ | |_ _  ___| | __| |              --
-//               / _` | | | |/ _ \/ _ \ '_ \|  _| |/ _ \ |/ _` |              --
-//              | (_| | |_| |  __/  __/ | | | | | |  __/ | (_| |              --
-//               \__, |\__,_|\___|\___|_| |_|_| |_|\___|_|\__,_|              --
-//                  | |                                                       --
-//                  |_|                                                       --
-//                                                                            --
-//                                                                            --
-//              Peripheral-NTM for MPSoC                                      --
-//              Neural Turing Machine for MPSoC                               --
-//                                                                            --
-//------------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
+//                                            __ _      _     _               //
+//                                           / _(_)    | |   | |              //
+//                __ _ _   _  ___  ___ _ __ | |_ _  ___| | __| |              //
+//               / _` | | | |/ _ \/ _ \ '_ \|  _| |/ _ \ |/ _` |              //
+//              | (_| | |_| |  __/  __/ | | | | | |  __/ | (_| |              //
+//               \__, |\__,_|\___|\___|_| |_|_| |_|\___|_|\__,_|              //
+//                  | |                                                       //
+//                  |_|                                                       //
+//                                                                            //
+//                                                                            //
+//              Peripheral-NTM for MPSoC                                      //
+//              Neural Turing Machine for MPSoC                               //
+//                                                                            //
+////////////////////////////////////////////////////////////////////////////////
 // Copyright (c) 2020-2021 by the author(s)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -54,95 +33,85 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 //
-//------------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
-// no timescale needed
 
 module dnc_write_content_weighting(
-CLK,
-RST,
-START,
-READY,
-K_IN_ENABLE,
-M_IN_J_ENABLE,
-M_IN_K_ENABLE,
-C_OUT_ENABLE,
-SIZE_N_IN,
-SIZE_W_IN,
-K_IN,
-M_IN,
-BETA_IN,
-C_OUT
+  CLK,
+  RST,
+  START,
+  READY,
+  K_IN_ENABLE,
+  M_IN_J_ENABLE,
+  M_IN_K_ENABLE,
+  C_OUT_ENABLE,
+  SIZE_N_IN,
+  SIZE_W_IN,
+  K_IN,
+  M_IN,
+  BETA_IN,
+  C_OUT
 );
 
-parameter [31:0] DATA_SIZE=512;
-// GLOBAL
-input CLK;
-input RST;
-// CONTROL
-input START;
-output READY;
-input K_IN_ENABLE;
-// for k in 0 to W-1
-input M_IN_J_ENABLE;
-// for j in 0 to N-1
-input M_IN_K_ENABLE;
-// for k in 0 to W-1
-output C_OUT_ENABLE;
-// for j in 0 to N-1
-// DATA
-input [DATA_SIZE - 1:0] SIZE_N_IN;
-input [DATA_SIZE - 1:0] SIZE_W_IN;
-input [DATA_SIZE - 1:0] K_IN;
-input [DATA_SIZE - 1:0] M_IN;
-input [DATA_SIZE - 1:0] BETA_IN;
-output [DATA_SIZE - 1:0] C_OUT;
+  parameter [31:0] DATA_SIZE=512;
 
-wire CLK;
-wire RST;
-wire START;
-wire READY;
-wire K_IN_ENABLE;
-wire M_IN_J_ENABLE;
-wire M_IN_K_ENABLE;
-wire C_OUT_ENABLE;
-wire [DATA_SIZE - 1:0] SIZE_N_IN;
-wire [DATA_SIZE - 1:0] SIZE_W_IN;
-wire [DATA_SIZE - 1:0] K_IN;
-wire [DATA_SIZE - 1:0] M_IN;
-wire [DATA_SIZE - 1:0] BETA_IN;
-wire [DATA_SIZE - 1:0] C_OUT;
+  // GLOBAL
+  input CLK;
+  input RST;
 
+  // CONTROL
+  input START;
+  output READY;
 
-//---------------------------------------------------------------------
-// Types
-//---------------------------------------------------------------------
-//---------------------------------------------------------------------
-// Constants
-//---------------------------------------------------------------------
-//---------------------------------------------------------------------
-// Signals
-//---------------------------------------------------------------------
-// VECTOR CONTENT BASED ADDRESSING
-// CONTROL
-wire start_vector_content_based_addressing;
-wire ready_vector_content_based_addressing;
-wire k_in_enable_vector_content_based_addressing;
-wire m_in_i_enable_vector_content_based_addressing;
-wire m_in_j_enable_vector_content_based_addressing;
-wire c_out_enable_vector_content_based_addressing;  // DATA
-wire [DATA_SIZE - 1:0] size_i_in_vector_content_based_addressing;
-wire [DATA_SIZE - 1:0] size_j_in_vector_content_based_addressing;
-wire [DATA_SIZE - 1:0] k_in_vector_content_based_addressing;
-wire [DATA_SIZE - 1:0] m_in_vector_content_based_addressing;
-wire [DATA_SIZE - 1:0] beta_in_vector_content_based_addressing;
-wire [DATA_SIZE - 1:0] c_out_vector_content_based_addressing;
+  input K_IN_ENABLE;  // for k in 0 to W-1
+  input M_IN_J_ENABLE;  // for j in 0 to N-1
+  input M_IN_K_ENABLE;  // for k in 0 to W-1
+  output C_OUT_ENABLE;  // for j in 0 to N-1
 
-  //---------------------------------------------------------------------
+  // DATA
+  input [DATA_SIZE - 1:0] SIZE_N_IN;
+  input [DATA_SIZE - 1:0] SIZE_W_IN;
+  input [DATA_SIZE - 1:0] K_IN;
+  input [DATA_SIZE - 1:0] M_IN;
+  input [DATA_SIZE - 1:0] BETA_IN;
+  output [DATA_SIZE - 1:0] C_OUT;
+
+  ///////////////////////////////////////////////////////////////////////
+  // Types
+  ///////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////////
+  // Constants
+  ///////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////////
+  // Signals
+  ///////////////////////////////////////////////////////////////////////
+
+  // VECTOR CONTENT BASED ADDRESSING
+  // CONTROL
+  wire start_vector_content_based_addressing;
+  wire ready_vector_content_based_addressing;
+  wire k_in_enable_vector_content_based_addressing;
+  wire m_in_i_enable_vector_content_based_addressing;
+  wire m_in_j_enable_vector_content_based_addressing;
+  wire c_out_enable_vector_content_based_addressing;
+
+  // DATA
+  wire [DATA_SIZE - 1:0] size_i_in_vector_content_based_addressing;
+  wire [DATA_SIZE - 1:0] size_j_in_vector_content_based_addressing;
+  wire [DATA_SIZE - 1:0] k_in_vector_content_based_addressing;
+  wire [DATA_SIZE - 1:0] m_in_vector_content_based_addressing;
+  wire [DATA_SIZE - 1:0] beta_in_vector_content_based_addressing;
+  wire [DATA_SIZE - 1:0] c_out_vector_content_based_addressing;
+
+  ///////////////////////////////////////////////////////////////////////
   // Body
-  //---------------------------------------------------------------------
+  ///////////////////////////////////////////////////////////////////////
+
   // c(t;j) = C(M(t-1;j;k),k(t;k),beta(t))
+
   // ASSIGNATIONS
   // CONTROL
   assign start_vector_content_based_addressing = START;
@@ -151,6 +120,7 @@ wire [DATA_SIZE - 1:0] c_out_vector_content_based_addressing;
   assign m_in_i_enable_vector_content_based_addressing = M_IN_J_ENABLE;
   assign m_in_j_enable_vector_content_based_addressing = M_IN_K_ENABLE;
   assign C_OUT_ENABLE = c_out_enable_vector_content_based_addressing;
+
   // DATA
   assign size_i_in_vector_content_based_addressing = SIZE_N_IN;
   assign size_j_in_vector_content_based_addressing = SIZE_N_IN;
@@ -158,27 +128,32 @@ wire [DATA_SIZE - 1:0] c_out_vector_content_based_addressing;
   assign m_in_vector_content_based_addressing = M_IN;
   assign beta_in_vector_content_based_addressing = BETA_IN;
   assign C_OUT = c_out_vector_content_based_addressing;
+
   // VECTOR CONTENT BASED ADDRESSING
   dnc_content_based_addressing #(
-      .DATA_SIZE(DATA_SIZE))
+    .DATA_SIZE(DATA_SIZE)
+  )
   dnc_content_based_addressing_i(
-      // GLOBAL
+    // GLOBAL
     .CLK(CLK),
     .RST(RST),
+
     // CONTROL
     .START(start_vector_content_based_addressing),
     .READY(ready_vector_content_based_addressing),
+
     .K_IN_ENABLE(k_in_enable_vector_content_based_addressing),
     .M_IN_I_ENABLE(m_in_i_enable_vector_content_based_addressing),
     .M_IN_J_ENABLE(m_in_j_enable_vector_content_based_addressing),
     .C_OUT_ENABLE(c_out_enable_vector_content_based_addressing),
+
     // DATA
     .SIZE_I_IN(size_i_in_vector_content_based_addressing),
     .SIZE_J_IN(size_j_in_vector_content_based_addressing),
     .K_IN(k_in_vector_content_based_addressing),
     .M_IN(m_in_vector_content_based_addressing),
     .BETA_IN(beta_in_vector_content_based_addressing),
-    .C_OUT(c_out_vector_content_based_addressing));
-
+    .C_OUT(c_out_vector_content_based_addressing)
+  );
 
 endmodule

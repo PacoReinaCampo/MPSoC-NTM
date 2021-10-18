@@ -115,6 +115,7 @@ module dnc_top(
   // CONTROL
   wire start_controller;
   wire ready_controller;
+
   wire w_in_l_enable_controller;
   wire w_in_x_enable_controller;
   wire k_in_i_enable_controller;
@@ -142,6 +143,7 @@ module dnc_top(
   // CONTROL
   wire start_controller_output_vector;
   wire ready_controller_output_vector;
+
   wire u_in_j_enable_controller_output_vector;
   wire u_in_l_enable_controller_output_vector;
   wire h_in_enable_controller_output_vector;
@@ -158,6 +160,7 @@ module dnc_top(
   // CONTROL
   wire start_output_vector;
   wire ready_output_vector;
+
   wire k_in_i_enable_output_vector;
   wire k_in_y_enable_output_vector;
   wire k_in_k_enable_output_vector;
@@ -183,6 +186,7 @@ module dnc_top(
   // CONTROL
   wire f_in_enable_free_gates;
   wire f_out_enable_free_gates;
+
   wire start_free_gates;
   wire ready_free_gates;
 
@@ -197,6 +201,7 @@ module dnc_top(
   wire k_in_k_enable_read_keys;
   wire k_out_i_enable_read_keys;
   wire k_out_k_enable_read_keys;
+
   wire start_read_keys;
   wire ready_read_keys;
 
@@ -210,6 +215,7 @@ module dnc_top(
   // CONTROL
   wire start_read_modes;
   wire ready_read_modes;
+
   wire pi_in_i_enable_read_modes;
   wire pi_in_p_enable_read_modes;
   wire pi_out_i_enable_read_modes;
@@ -224,6 +230,7 @@ module dnc_top(
   // CONTROL
   wire beta_in_enable_read_strengths;
   wire beta_out_enable_read_strengths;
+
   wire start_read_strengths;
   wire ready_read_strengths;
 
@@ -293,6 +300,7 @@ module dnc_top(
   // CONTROL
   wire start_erase_vector;
   wire ready_erase_vector;
+
   wire e_in_enable_erase_vector;
   wire e_out_enable_erase_vector;
 
@@ -314,6 +322,7 @@ module dnc_top(
   // CONTROL
   wire start_write_key;
   wire ready_write_key;
+
   wire k_in_enable_write_key;
   wire k_out_enable_write_key;
 
@@ -335,6 +344,7 @@ module dnc_top(
   // CONTROL
   wire start_write_vector;
   wire ready_write_vector;
+
   wire v_in_enable_write_vector;
   wire v_out_enable_write_vector;
 
@@ -400,6 +410,7 @@ module dnc_top(
   // CONTROL
   wire start_addressing;
   wire ready_addressing;
+
   wire k_read_in_i_enable_addressing;
   wire k_read_in_k_enable_addressing;
   wire beta_read_in_enable_addressing;
@@ -443,6 +454,7 @@ module dnc_top(
     // CONTROL
     .START(start_controller),
     .READY(ready_controller),
+
     .W_IN_L_ENABLE(w_in_l_enable_controller),
     .W_IN_X_ENABLE(w_in_x_enable_controller),
     .K_IN_I_ENABLE(k_in_i_enable_controller),
@@ -479,6 +491,7 @@ module dnc_top(
     // CONTROL
     .START(start_controller_output_vector),
     .READY(ready_controller_output_vector),
+
     .U_IN_Y_ENABLE(u_in_j_enable_controller_output_vector),
     .U_IN_L_ENABLE(u_in_l_enable_controller_output_vector),
     .H_IN_ENABLE(h_in_enable_controller_output_vector),
@@ -504,6 +517,7 @@ module dnc_top(
     // CONTROL
     .START(start_output_vector),
     .READY(ready_output_vector),
+
     .K_IN_I_ENABLE(k_in_i_enable_output_vector),
     .K_IN_Y_ENABLE(k_in_y_enable_output_vector),
     .K_IN_K_ENABLE(k_in_k_enable_output_vector),
@@ -538,6 +552,7 @@ module dnc_top(
     // CONTROL
     .START(start_free_gates),
     .READY(ready_free_gates),
+
     .F_IN_ENABLE(f_in_enable_free_gates),
     .F_OUT_ENABLE(f_out_enable_free_gates),
 
@@ -559,6 +574,7 @@ module dnc_top(
     // CONTROL
     .START(start_read_keys),
     .READY(ready_read_keys),
+
     .K_IN_I_ENABLE(k_in_i_enable_read_keys),
     .K_IN_K_ENABLE(k_in_k_enable_read_keys),
     .K_OUT_I_ENABLE(k_out_i_enable_read_keys),
@@ -583,6 +599,7 @@ module dnc_top(
     // CONTROL
     .START(start_read_modes),
     .READY(ready_read_modes),
+
     .PI_IN_I_ENABLE(pi_in_i_enable_read_modes),
     .PI_IN_P_ENABLE(pi_in_p_enable_read_modes),
     .PI_OUT_I_ENABLE(pi_out_i_enable_read_modes),
@@ -606,6 +623,7 @@ module dnc_top(
     // CONTROL
     .START(start_read_strengths),
     .READY(ready_read_strengths),
+
     .BETA_IN_ENABLE(beta_in_enable_read_strengths),
     .BETA_OUT_ENABLE(beta_out_enable_read_strengths),
 
@@ -702,6 +720,7 @@ module dnc_top(
     // CONTROL
     .START(start_erase_vector),
     .READY(ready_erase_vector),
+
     .E_IN_ENABLE(e_in_enable_erase_vector),
     .E_OUT_ENABLE(e_out_enable_erase_vector),
 
@@ -741,6 +760,7 @@ module dnc_top(
     // CONTROL
     .START(start_write_key),
     .READY(ready_write_key),
+
     .K_IN_ENABLE(k_in_enable_write_key),
     .K_OUT_ENABLE(k_out_enable_write_key),
 
@@ -780,6 +800,7 @@ module dnc_top(
     // CONTROL
     .START(start_write_vector),
     .READY(ready_write_vector),
+
     .V_IN_ENABLE(v_in_enable_write_vector),
     .V_OUT_ENABLE(v_out_enable_write_vector),
 
@@ -863,6 +884,7 @@ module dnc_top(
     // CONTROL
     .START(start_addressing),
     .READY(ready_addressing),
+
     .K_READ_IN_I_ENABLE(k_read_in_i_enable_addressing),
     .K_READ_IN_K_ENABLE(k_read_in_k_enable_addressing),
     .BETA_READ_IN_ENABLE(beta_read_in_enable_addressing),

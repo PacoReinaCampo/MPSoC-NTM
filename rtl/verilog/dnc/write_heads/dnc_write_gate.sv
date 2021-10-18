@@ -1,39 +1,18 @@
-// File vhdl/dnc/write_heads/dnc_write_gate.vhd translated with vhd2vl v2.5 VHDL to Verilog RTL translator
-// vhd2vl settings:
-//  * Verilog Module Declaration Style: 1995
-
-// vhd2vl is Free (libre) Software:
-//   Copyright (C) 2001 Vincenzo Liguori - Ocean Logic Pty Ltd
-//     http://www.ocean-logic.com
-//   Modifications Copyright (C) 2006 Mark Gonzales - PMC Sierra Inc
-//   Modifications (C) 2010 Shankar Giri
-//   Modifications Copyright (C) 2002, 2005, 2008-2010, 2015 Larry Doolittle - LBNL
-//     http://doolittle.icarus.com/~larry/vhd2vl/
-//
-//   vhd2vl comes with ABSOLUTELY NO WARRANTY.  Always check the resulting
-//   Verilog for correctness, ideally with a formal verification tool.
-//
-//   You are welcome to redistribute vhd2vl under certain conditions.
-//   See the license (GPLv2) file included with the source for details.
-
-// The result of translation follows.  Its copyright status should be
-// considered unchanged from the original VHDL.
-
-//------------------------------------------------------------------------------
-//                                            __ _      _     _               --
-//                                           / _(_)    | |   | |              --
-//                __ _ _   _  ___  ___ _ __ | |_ _  ___| | __| |              --
-//               / _` | | | |/ _ \/ _ \ '_ \|  _| |/ _ \ |/ _` |              --
-//              | (_| | |_| |  __/  __/ | | | | | |  __/ | (_| |              --
-//               \__, |\__,_|\___|\___|_| |_|_| |_|\___|_|\__,_|              --
-//                  | |                                                       --
-//                  |_|                                                       --
-//                                                                            --
-//                                                                            --
-//              Peripheral-NTM for MPSoC                                      --
-//              Neural Turing Machine for MPSoC                               --
-//                                                                            --
-//------------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
+//                                            __ _      _     _               //
+//                                           / _(_)    | |   | |              //
+//                __ _ _   _  ___  ___ _ __ | |_ _  ___| | __| |              //
+//               / _` | | | |/ _ \/ _ \ '_ \|  _| |/ _ \ |/ _` |              //
+//              | (_| | |_| |  __/  __/ | | | | | |  __/ | (_| |              //
+//               \__, |\__,_|\___|\___|_| |_|_| |_|\___|_|\__,_|              //
+//                  | |                                                       //
+//                  |_|                                                       //
+//                                                                            //
+//                                                                            //
+//              Peripheral-NTM for MPSoC                                      //
+//              Neural Turing Machine for MPSoC                               //
+//                                                                            //
+////////////////////////////////////////////////////////////////////////////////
 // Copyright (c) 2020-2021 by the author(s)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -54,81 +33,87 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 //
-//------------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
-// no timescale needed
 
 module dnc_write_gate(
-CLK,
-RST,
-START,
-READY,
-GW_IN,
-GW_OUT
+  CLK,
+  RST,
+  START,
+  READY,
+  GW_IN,
+  GW_OUT
 );
 
-parameter [31:0] DATA_SIZE=512;
-// GLOBAL
-input CLK;
-input RST;
-// CONTROL
-input START;
-output READY;
-// DATA
-input [DATA_SIZE - 1:0] GW_IN;
-output GW_OUT;
+  parameter [31:0] DATA_SIZE=512;
 
-wire CLK;
-wire RST;
-wire START;
-wire READY;
-wire [DATA_SIZE - 1:0] GW_IN;
-wire GW_OUT;
+  // GLOBAL
+  input CLK;
+  input RST;
 
+  // CONTROL
+  input START;
+  output READY;
 
-//---------------------------------------------------------------------
-// Types
-//---------------------------------------------------------------------
-//---------------------------------------------------------------------
-// Constants
-//---------------------------------------------------------------------
-//---------------------------------------------------------------------
-// Signals
-//---------------------------------------------------------------------
-// SCALAR LOGISTIC
-// CONTROL
-wire start_scalar_logistic;
-wire ready_scalar_logistic;  // DATA
-wire [DATA_SIZE - 1:0] modulo_in_scalar_logistic;
-wire [DATA_SIZE - 1:0] data_in_scalar_logistic;
-wire data_out_scalar_logistic;
+  // DATA
+  input [DATA_SIZE - 1:0] GW_IN;
+  output GW_OUT;
 
-  //---------------------------------------------------------------------
+  ///////////////////////////////////////////////////////////////////////
+  // Types
+  ///////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////////
+  // Constants
+  ///////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////////
+  // Signals
+  ///////////////////////////////////////////////////////////////////////
+
+  // SCALAR LOGISTIC
+  // CONTROL
+  wire start_scalar_logistic;
+  wire ready_scalar_logistic;
+
+  // DATA
+  wire [DATA_SIZE - 1:0] modulo_in_scalar_logistic;
+  wire [DATA_SIZE - 1:0] data_in_scalar_logistic;
+  wire data_out_scalar_logistic;
+
+  ///////////////////////////////////////////////////////////////////////
   // Body
-  //---------------------------------------------------------------------
+  ///////////////////////////////////////////////////////////////////////
+
   // gw(t) = sigmoid(gw^(t))
+
   // ASSIGNATIONS
   // CONTROL
   assign start_scalar_logistic = START;
   assign READY = ready_scalar_logistic;
+
   // DATA
   assign data_in_scalar_logistic = GW_IN;
   assign GW_OUT = data_out_scalar_logistic;
+
   // SCALAR LOGISTIC
   ntm_scalar_logistic_function #(
-      .DATA_SIZE(DATA_SIZE))
+    .DATA_SIZE(DATA_SIZE)
+  )
   ntm_scalar_logistic_function_i(
-      // GLOBAL
+    // GLOBAL
     .CLK(CLK),
     .RST(RST),
+
     // CONTROL
     .START(start_scalar_logistic),
     .READY(ready_scalar_logistic),
+
     // DATA
     .MODULO_IN(modulo_in_scalar_logistic),
     .DATA_IN(data_in_scalar_logistic),
-    .DATA_OUT(data_out_scalar_logistic));
-
+    .DATA_OUT(data_out_scalar_logistic)
+  );
 
 endmodule

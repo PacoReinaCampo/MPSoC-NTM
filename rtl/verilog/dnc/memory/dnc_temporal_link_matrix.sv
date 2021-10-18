@@ -1,39 +1,18 @@
-// File vhdl/dnc/memory/dnc_temporal_link_matrix.vhd translated with vhd2vl v2.5 VHDL to Verilog RTL translator
-// vhd2vl settings:
-//  * Verilog Module Declaration Style: 1995
-
-// vhd2vl is Free (libre) Software:
-//   Copyright (C) 2001 Vincenzo Liguori - Ocean Logic Pty Ltd
-//     http://www.ocean-logic.com
-//   Modifications Copyright (C) 2006 Mark Gonzales - PMC Sierra Inc
-//   Modifications (C) 2010 Shankar Giri
-//   Modifications Copyright (C) 2002, 2005, 2008-2010, 2015 Larry Doolittle - LBNL
-//     http://doolittle.icarus.com/~larry/vhd2vl/
-//
-//   vhd2vl comes with ABSOLUTELY NO WARRANTY.  Always check the resulting
-//   Verilog for correctness, ideally with a formal verification tool.
-//
-//   You are welcome to redistribute vhd2vl under certain conditions.
-//   See the license (GPLv2) file included with the source for details.
-
-// The result of translation follows.  Its copyright status should be
-// considered unchanged from the original VHDL.
-
-//------------------------------------------------------------------------------
-//                                            __ _      _     _               --
-//                                           / _(_)    | |   | |              --
-//                __ _ _   _  ___  ___ _ __ | |_ _  ___| | __| |              --
-//               / _` | | | |/ _ \/ _ \ '_ \|  _| |/ _ \ |/ _` |              --
-//              | (_| | |_| |  __/  __/ | | | | | |  __/ | (_| |              --
-//               \__, |\__,_|\___|\___|_| |_|_| |_|\___|_|\__,_|              --
-//                  | |                                                       --
-//                  |_|                                                       --
-//                                                                            --
-//                                                                            --
-//              Peripheral-NTM for MPSoC                                      --
-//              Neural Turing Machine for MPSoC                               --
-//                                                                            --
-//------------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
+//                                            __ _      _     _               //
+//                                           / _(_)    | |   | |              //
+//                __ _ _   _  ___  ___ _ __ | |_ _  ___| | __| |              //
+//               / _` | | | |/ _ \/ _ \ '_ \|  _| |/ _ \ |/ _` |              //
+//              | (_| | |_| |  __/  __/ | | | | | |  __/ | (_| |              //
+//               \__, |\__,_|\___|\___|_| |_|_| |_|\___|_|\__,_|              //
+//                  | |                                                       //
+//                  |_|                                                       //
+//                                                                            //
+//                                                                            //
+//              Peripheral-NTM for MPSoC                                      //
+//              Neural Turing Machine for MPSoC                               //
+//                                                                            //
+////////////////////////////////////////////////////////////////////////////////
 // Copyright (c) 2020-2021 by the author(s)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -54,135 +33,134 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 //
-//------------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
-// no timescale needed
 
 module dnc_temporal_link_matrix(
-CLK,
-RST,
-START,
-READY,
-L_IN_G_ENABLE,
-L_IN_J_ENABLE,
-W_IN_ENABLE,
-P_IN_ENABLE,
-L_OUT_G_ENABLE,
-L_OUT_J_ENABLE,
-SIZE_N_IN,
-L_IN,
-W_IN,
-P_IN,
-L_OUT
+  CLK,
+  RST,
+  START,
+  READY,
+  L_IN_G_ENABLE,
+  L_IN_J_ENABLE,
+  W_IN_ENABLE,
+  P_IN_ENABLE,
+  L_OUT_G_ENABLE,
+  L_OUT_J_ENABLE,
+  SIZE_N_IN,
+  L_IN,
+  W_IN,
+  P_IN,
+  L_OUT
 );
 
-parameter [31:0] DATA_SIZE=512;
-// GLOBAL
-input CLK;
-input RST;
-// CONTROL
-input START;
-output READY;
-input L_IN_G_ENABLE;
-// for g in 0 to N-1 (square matrix)
-input L_IN_J_ENABLE;
-// for j in 0 to N-1 (square matrix)
-input W_IN_ENABLE;
-// for j in 0 to N-1
-input P_IN_ENABLE;
-// for j in 0 to N-1
-output L_OUT_G_ENABLE;
-// for g in 0 to N-1 (square matrix)
-output L_OUT_J_ENABLE;
-// for j in 0 to N-1 (square matrix)
-// DATA
-input [DATA_SIZE - 1:0] SIZE_N_IN;
-input [DATA_SIZE - 1:0] L_IN;
-input [DATA_SIZE - 1:0] W_IN;
-input [DATA_SIZE - 1:0] P_IN;
-output [DATA_SIZE - 1:0] L_OUT;
+  parameter [31:0] DATA_SIZE=512;
 
-wire CLK;
-wire RST;
-wire START;
-wire READY;
-wire L_IN_G_ENABLE;
-wire L_IN_J_ENABLE;
-wire W_IN_ENABLE;
-wire P_IN_ENABLE;
-wire L_OUT_G_ENABLE;
-wire L_OUT_J_ENABLE;
-wire [DATA_SIZE - 1:0] SIZE_N_IN;
-wire [DATA_SIZE - 1:0] L_IN;
-wire [DATA_SIZE - 1:0] W_IN;
-wire [DATA_SIZE - 1:0] P_IN;
-wire [DATA_SIZE - 1:0] L_OUT;
+  // GLOBAL
+  input CLK;
+  input RST;
 
+  // CONTROL
+  input START;
+  output READY;
 
-//---------------------------------------------------------------------
-// Types
-//---------------------------------------------------------------------
-//---------------------------------------------------------------------
-// Constants
-//---------------------------------------------------------------------
-//---------------------------------------------------------------------
-// Signals
-//---------------------------------------------------------------------
-// SCALAR ADDER
-// CONTROL
-wire start_scalar_adder;
-wire ready_scalar_adder;
-wire operation_scalar_adder;  // DATA
-wire [DATA_SIZE - 1:0] modulo_in_scalar_adder;
-wire [DATA_SIZE - 1:0] data_a_in_scalar_adder;
-wire [DATA_SIZE - 1:0] data_b_in_scalar_adder;
-wire [DATA_SIZE - 1:0] data_out_scalar_adder;  // SCALAR MULTIPLIER
-// CONTROL
-wire start_scalar_multiplier;
-wire ready_scalar_multiplier;  // DATA
-wire [DATA_SIZE - 1:0] modulo_in_scalar_multiplier;
-wire [DATA_SIZE - 1:0] data_a_in_scalar_multiplier;
-wire [DATA_SIZE - 1:0] data_b_in_scalar_multiplier;
-wire [DATA_SIZE - 1:0] data_out_scalar_multiplier;
+  input L_IN_G_ENABLE;  // for g in 0 to N-1 (square matrix)
+  input L_IN_J_ENABLE;  // for j in 0 to N-1 (square matrix)
+  input W_IN_ENABLE;  // for j in 0 to N-1
+  input P_IN_ENABLE;  // for j in 0 to N-1
+  output L_OUT_G_ENABLE;  // for g in 0 to N-1 (square matrix)
+  output L_OUT_J_ENABLE;  // for j in 0 to N-1 (square matrix)
 
-  //---------------------------------------------------------------------
+  // DATA
+  input [DATA_SIZE - 1:0] SIZE_N_IN;
+  input [DATA_SIZE - 1:0] L_IN;
+  input [DATA_SIZE - 1:0] W_IN;
+  input [DATA_SIZE - 1:0] P_IN;
+  output [DATA_SIZE - 1:0] L_OUT;
+
+  ///////////////////////////////////////////////////////////////////////
+  // Types
+  ///////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////////
+  // Constants
+  ///////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////////
+  // Signals
+  ///////////////////////////////////////////////////////////////////////
+
+  // SCALAR ADDER
+  // CONTROL
+  wire start_scalar_adder;
+  wire ready_scalar_adder;
+
+  wire operation_scalar_adder;
+
+  // DATA
+  wire [DATA_SIZE - 1:0] modulo_in_scalar_adder;
+  wire [DATA_SIZE - 1:0] data_a_in_scalar_adder;
+  wire [DATA_SIZE - 1:0] data_b_in_scalar_adder;
+  wire [DATA_SIZE - 1:0] data_out_scalar_adder;
+
+  // SCALAR MULTIPLIER
+  // CONTROL
+  wire start_scalar_multiplier;
+  wire ready_scalar_multiplier;
+  // DATA
+  wire [DATA_SIZE - 1:0] modulo_in_scalar_multiplier;
+  wire [DATA_SIZE - 1:0] data_a_in_scalar_multiplier;
+  wire [DATA_SIZE - 1:0] data_b_in_scalar_multiplier;
+  wire [DATA_SIZE - 1:0] data_out_scalar_multiplier;
+
+  ///////////////////////////////////////////////////////////////////////
   // Body
-  //---------------------------------------------------------------------
+  ///////////////////////////////////////////////////////////////////////
+
   // L(t)[g;j] = (1 - w(t;j)[i] - w(t;j)[j])·L(t-1)[g;j] + w(t;j)[i]·p(t-1;j)[j]
   // L(t=0)[g,j] = 0
+
   // SCALAR ADDER
   ntm_scalar_adder #(
-      .DATA_SIZE(DATA_SIZE))
+    .DATA_SIZE(DATA_SIZE)
+  )
   scalar_adder(
-      // GLOBAL
+    // GLOBAL
     .CLK(CLK),
     .RST(RST),
+
     // CONTROL
     .START(start_scalar_adder),
     .READY(ready_scalar_adder),
+
     .OPERATION(operation_scalar_adder),
+
     // DATA
     .MODULO_IN(modulo_in_scalar_adder),
     .DATA_A_IN(data_a_in_scalar_adder),
     .DATA_B_IN(data_b_in_scalar_adder),
-    .DATA_OUT(data_out_scalar_adder));
+    .DATA_OUT(data_out_scalar_adder)
+  );
 
   // SCALAR MULTIPLIER
   ntm_scalar_multiplier #(
-      .DATA_SIZE(DATA_SIZE))
+    .DATA_SIZE(DATA_SIZE)
+  )
   scalar_multiplier(
-      // GLOBAL
+    // GLOBAL
     .CLK(CLK),
     .RST(RST),
+
     // CONTROL
     .START(start_scalar_multiplier),
     .READY(ready_scalar_adder),
+
     // DATA
     .MODULO_IN(modulo_in_scalar_multiplier),
     .DATA_A_IN(data_a_in_scalar_multiplier),
     .DATA_B_IN(data_b_in_scalar_multiplier),
-    .DATA_OUT(data_out_scalar_multiplier));
-
+    .DATA_OUT(data_out_scalar_multiplier)
+  );
 
 endmodule
