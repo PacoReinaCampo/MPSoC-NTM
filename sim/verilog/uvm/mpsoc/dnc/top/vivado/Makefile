@@ -45,7 +45,7 @@
 all: build simulate
 
 build:
-	xvhdl -prj system.prj
+	xvlog -prj system.prj
 
 simulate:
 	xelab dnc_top_testbench

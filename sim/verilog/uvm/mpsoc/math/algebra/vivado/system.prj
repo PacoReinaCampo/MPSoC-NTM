@@ -1,13 +1,13 @@
-vhdl2008 work ../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
+sv work ../../../../../../../rtl/verilog/pkg/ntm_math_pkg.sv
 
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_determinant.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_inversion.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_product.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_rank.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_transpose.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_scalar_product.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_vector_product.vhd
+sv work ../../../../../../../rtl/verilog/math/algebra/ntm_matrix_determinant.sv
+sv work ../../../../../../../rtl/verilog/math/algebra/ntm_matrix_inversion.sv
+sv work ../../../../../../../rtl/verilog/math/algebra/ntm_matrix_product.sv
+sv work ../../../../../../../rtl/verilog/math/algebra/ntm_matrix_rank.sv
+sv work ../../../../../../../rtl/verilog/math/algebra/ntm_matrix_transpose.sv
+sv work ../../../../../../../rtl/verilog/math/algebra/ntm_scalar_product.sv
+sv work ../../../../../../../rtl/verilog/math/algebra/ntm_vector_product.sv
 
-vhdl2008 work ../../../../../../../bench/vhdl/osvvm/math/algebra/ntm_algebra_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/osvvm/math/algebra/ntm_algebra_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/osvvm/math/algebra/ntm_algebra_testbench.vhd
+sv work ../../../../../../../bench/verilog/osvvm/math/algebra/ntm_algebra_pkg.sv
+sv work ../../../../../../../bench/verilog/osvvm/math/algebra/ntm_algebra_stimulus.sv
+sv work ../../../../../../../bench/verilog/osvvm/math/algebra/ntm_algebra_testbench.sv

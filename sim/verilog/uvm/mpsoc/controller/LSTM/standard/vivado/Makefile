@@ -45,7 +45,7 @@
 all: build simulate
 
 build:
-	xvhdl -prj system.prj
+	xvlog -prj system.prj
 
 simulate:
 	xelab ntm_standard_lstm_testbench
