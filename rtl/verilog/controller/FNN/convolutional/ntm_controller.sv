@@ -231,7 +231,7 @@ module ntm_controller(
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
-          if((START == 1'b1)) begin
+          if(START == 1'b1) begin
             // FSM Control
             controller_ctrl_fsm_int <= VECTOR_SUMMATION_STATE;
           end

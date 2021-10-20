@@ -113,7 +113,7 @@ module dnc_write_vector(
           // Control Outputs
           READY <= 1'b0;
 
-          if((START == 1'b1)) begin
+          if(START == 1'b1) begin
             // Assignations
             index_loop <= ZERO;
 

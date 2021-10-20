@@ -114,7 +114,7 @@ module ntm_scalar_multiplier(
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
-          if((START == 1'b1)) begin
+          if(START == 1'b1) begin
             // Assignation
             u_int <= {1'b0,DATA_A_IN};
             v_int <= {1'b0,DATA_B_IN};

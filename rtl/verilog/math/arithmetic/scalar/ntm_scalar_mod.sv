@@ -104,7 +104,7 @@ module ntm_scalar_mod(
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
-          if((START == 1'b1)) begin
+          if(START == 1'b1) begin
             // Assignations
             mod_int <= DATA_IN;
             // FSM Control

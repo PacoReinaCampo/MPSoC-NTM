@@ -134,7 +134,7 @@ module ntm_matrix_tanh_function(
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
-          if((START == 1'b1)) begin
+          if(START == 1'b1) begin
             // Assignations
             index_i_loop <= ZERO;
             index_j_loop <= ZERO;

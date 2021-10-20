@@ -134,7 +134,7 @@ module ntm_vector_multiplication_function(
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
-          if((START == 1'b1)) begin
+          if(START == 1'b1) begin
             // Assignations
             index_vector_loop <= ZERO;
             index_scalar_loop <= ZERO;

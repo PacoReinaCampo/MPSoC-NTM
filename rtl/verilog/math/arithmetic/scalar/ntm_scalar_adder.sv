@@ -109,7 +109,7 @@ module ntm_scalar_adder(
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
-          if((START == 1'b1)) begin
+          if(START == 1'b1) begin
             // Assignations
             if((OPERATION == 1'b1)) begin
               if((((DATA_A_IN)) > ((DATA_B_IN)))) begin

@@ -124,7 +124,7 @@ module ntm_scalar_multiplication_function(
           // Control Outputs
           READY <= 1'b0;
           DATA_OUT_ENABLE <= 1'b0;
-          if((START == 1'b1)) begin
+          if(START == 1'b1) begin
             // Assignations
             index_loop <= ZERO;
             // Data Outputs
@@ -135,7 +135,7 @@ module ntm_scalar_multiplication_function(
         end
         ENDER_STATE : begin
           // STEP 1
-          if((DATA_IN_ENABLE == 1'b1)) begin
+          if(DATA_IN_ENABLE == 1'b1) begin
             if((index_loop == (LENGTH_IN - ONE))) begin
               // Control Outputs
               READY <= 1'b1;

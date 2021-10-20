@@ -124,7 +124,7 @@ module ntm_vector_oneplus_function(
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
-          if((START == 1'b1)) begin
+          if(START == 1'b1) begin
             // Assignations
             index_loop <= ZERO;
             // FSM Control
@@ -133,11 +133,11 @@ module ntm_vector_oneplus_function(
         end
         INPUT_STATE : begin
           // STEP 1
-          if((DATA_IN_ENABLE == 1'b1)) begin
+          if(DATA_IN_ENABLE == 1'b1) begin
             // Data Inputs
             modulo_in_scalar_oneplus <= MODULO_IN;
             data_in_scalar_oneplus <= DATA_IN;
-            if((index_loop == ZERO)) begin
+            if(index_loop == ZERO) begin
               // Control Internal
               start_scalar_oneplus <= 1'b1;
             end
@@ -149,8 +149,8 @@ module ntm_vector_oneplus_function(
         end
         ENDER_STATE : begin
           // STEP 2
-          if((ready_scalar_oneplus == 1'b1)) begin
-            if((index_loop == (SIZE_IN - ONE))) begin
+          if(ready_scalar_oneplus == 1'b1) begin
+            if(index_loop == (SIZE_IN - ONE)) begin
               // Control Outputs
               READY <= 1'b1;
               // FSM Control

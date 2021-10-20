@@ -133,7 +133,7 @@ module ntm_vector_divider(
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
-          if((START == 1'b1)) begin
+          if(START == 1'b1) begin
             // Assignations
             index_loop <= ZERO;
             // FSM Control
@@ -155,7 +155,7 @@ module ntm_vector_divider(
             data_b_in_divider_int <= 1'b1;
           end
           if((data_a_in_divider_int == 1'b1 && data_b_in_divider_int == 1'b1)) begin
-            if((index_loop == ZERO)) begin
+            if(index_loop == ZERO) begin
               // Control Internal
               start_scalar_divider <= 1'b1;
             end
@@ -170,7 +170,7 @@ module ntm_vector_divider(
         ENDER_STATE : begin
           // STEP 2
           if((ready_scalar_divider == 1'b1)) begin
-            if((index_loop == (SIZE_IN - ONE))) begin
+            if(index_loop == (SIZE_IN - ONE)) begin
               // Control Outputs
               READY <= 1'b1;
               // FSM Control
