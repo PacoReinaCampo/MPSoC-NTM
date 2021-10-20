@@ -51,10 +51,10 @@ module ntm_matrix_determinant(
   DATA_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
-  parameter [DATA_SIZE - 1:0] SIZE_I=((64));
-  parameter [DATA_SIZE - 1:0] SIZE_J=((64));
+  parameter [DATA_SIZE-1:0] SIZE_I=64;
+  parameter [DATA_SIZE-1:0] SIZE_J=64;
 
   // GLOBAL
   input CLK;
@@ -70,9 +70,9 @@ module ntm_matrix_determinant(
   output DATA_OUT_J_ENABLE;
 
   // DATA
-  input [DATA_SIZE - 1:0] MODULO_IN;
-  input [DATA_SIZE - 1:0] DATA_IN;
-  output [DATA_SIZE - 1:0] DATA_OUT;
+  input [DATA_SIZE-1:0] MODULO_IN;
+  input [DATA_SIZE-1:0] DATA_IN;
+  output [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -94,10 +94,10 @@ module ntm_matrix_determinant(
   wire operation_scalar_adder;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_scalar_adder;
-  wire [DATA_SIZE - 1:0] data_a_in_scalar_adder;
-  wire [DATA_SIZE - 1:0] data_b_in_scalar_adder;
-  wire [DATA_SIZE - 1:0] data_out_scalar_adder;
+  wire [DATA_SIZE-1:0] modulo_in_scalar_adder;
+  wire [DATA_SIZE-1:0] data_a_in_scalar_adder;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_adder;
+  wire [DATA_SIZE-1:0] data_out_scalar_adder;
 
   // SCALAR MULTIPLIER
   // CONTROL
@@ -105,10 +105,10 @@ module ntm_matrix_determinant(
   wire ready_scalar_multiplier;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_scalar_multiplier;
-  wire [DATA_SIZE - 1:0] data_a_in_scalar_multiplier;
-  wire [DATA_SIZE - 1:0] data_b_in_scalar_multiplier;
-  wire [DATA_SIZE - 1:0] data_out_scalar_multiplier;
+  wire [DATA_SIZE-1:0] modulo_in_scalar_multiplier;
+  wire [DATA_SIZE-1:0] data_a_in_scalar_multiplier;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_multiplier;
+  wire [DATA_SIZE-1:0] data_out_scalar_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

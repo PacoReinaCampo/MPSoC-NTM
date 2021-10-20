@@ -53,7 +53,7 @@ module dnc_usage_vector(
   U_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -69,11 +69,11 @@ module dnc_usage_vector(
   output U_OUT_ENABLE;  // for j in 0 to N-1
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_N_IN;
-  input [DATA_SIZE - 1:0] U_IN;
-  input [DATA_SIZE - 1:0] W_IN;
-  input [DATA_SIZE - 1:0] PSI_IN;
-  output [DATA_SIZE - 1:0] U_OUT;
+  input [DATA_SIZE-1:0] SIZE_N_IN;
+  input [DATA_SIZE-1:0] U_IN;
+  input [DATA_SIZE-1:0] W_IN;
+  input [DATA_SIZE-1:0] PSI_IN;
+  output [DATA_SIZE-1:0] U_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -97,11 +97,11 @@ module dnc_usage_vector(
   wire data_out_enable_vector_adder;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_adder;
-  wire [DATA_SIZE - 1:0] size_in_vector_adder;
-  wire [DATA_SIZE - 1:0] data_a_in_vector_adder;
-  wire [DATA_SIZE - 1:0] data_b_in_vector_adder;
-  wire [DATA_SIZE - 1:0] data_out_vector_adder;
+  wire [DATA_SIZE-1:0] modulo_in_vector_adder;
+  wire [DATA_SIZE-1:0] size_in_vector_adder;
+  wire [DATA_SIZE-1:0] data_a_in_vector_adder;
+  wire [DATA_SIZE-1:0] data_b_in_vector_adder;
+  wire [DATA_SIZE-1:0] data_out_vector_adder;
 
   // VECTOR MULTIPLIER
   // CONTROL
@@ -112,11 +112,11 @@ module dnc_usage_vector(
   wire data_out_enable_vector_multiplier;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] size_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] data_a_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] data_b_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] data_out_vector_multiplier;
+  wire [DATA_SIZE-1:0] modulo_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] size_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_out_vector_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

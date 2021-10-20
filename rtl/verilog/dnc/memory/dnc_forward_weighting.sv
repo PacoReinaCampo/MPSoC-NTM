@@ -55,7 +55,7 @@ module dnc_forward_weighting(
   F_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -72,11 +72,11 @@ module dnc_forward_weighting(
   output F_OUT_J_ENABLE;  // for j in 0 to N-1
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_R_IN;
-  input [DATA_SIZE - 1:0] SIZE_N_IN;
-  input [DATA_SIZE - 1:0] L_IN;
-  input [DATA_SIZE - 1:0] W_IN;
-  output [DATA_SIZE - 1:0] F_OUT;
+  input [DATA_SIZE-1:0] SIZE_R_IN;
+  input [DATA_SIZE-1:0] SIZE_N_IN;
+  input [DATA_SIZE-1:0] L_IN;
+  input [DATA_SIZE-1:0] W_IN;
+  output [DATA_SIZE-1:0] F_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -86,8 +86,8 @@ module dnc_forward_weighting(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO = ((0));
-  parameter ONE = ((1));
+  parameter ZERO = 0;
+  parameter ONE = 1;
   parameter FULL = 1;
 
   ///////////////////////////////////////////////////////////////////////
@@ -106,14 +106,14 @@ module dnc_forward_weighting(
   wire data_out_j_enable_matrix_product;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_a_i_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_a_j_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_b_i_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_b_j_in_matrix_product;
-  wire [DATA_SIZE - 1:0] data_a_in_matrix_product;
-  wire [DATA_SIZE - 1:0] data_b_in_matrix_product;
-  wire [DATA_SIZE - 1:0] data_out_matrix_product;
+  wire [DATA_SIZE-1:0] modulo_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_a_i_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_a_j_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_b_i_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_b_j_in_matrix_product;
+  wire [DATA_SIZE-1:0] data_a_in_matrix_product;
+  wire [DATA_SIZE-1:0] data_b_in_matrix_product;
+  wire [DATA_SIZE-1:0] data_out_matrix_product;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

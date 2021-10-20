@@ -49,7 +49,7 @@ module dnc_write_key(
   K_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -62,9 +62,9 @@ module dnc_write_key(
   output K_OUT_ENABLE;  // for k in 0 to W-1
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_W_IN;
-  input [DATA_SIZE - 1:0] K_IN;
-  output [DATA_SIZE - 1:0] K_OUT;
+  input [DATA_SIZE-1:0] SIZE_W_IN;
+  input [DATA_SIZE-1:0] K_IN;
+  output [DATA_SIZE-1:0] K_OUT;
 
 
   ///////////////////////////////////////////////////////////////////////
@@ -89,7 +89,7 @@ module dnc_write_key(
   reg write_key_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE - 1:0] index_loop;
+  reg [DATA_SIZE-1:0] index_loop;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -123,7 +123,7 @@ module dnc_write_key(
         ENDER_STATE : begin
           // STEP 1
           if((K_IN_ENABLE == 1'b1)) begin
-            if((((index_loop)) == (((SIZE_W_IN)) - ((ONE))))) begin
+            if((index_loop == (((SIZE_W_IN)) - ONE))) begin
               // Control Outputs
               READY <= 1'b1;
 
@@ -132,7 +132,7 @@ module dnc_write_key(
             end
             else begin
               // Control Internal
-              index_loop <= (((index_loop)) + ((ONE)));
+              index_loop <= (index_loop + ONE);
             end
             // Data Outputs
             K_OUT <= K_IN;

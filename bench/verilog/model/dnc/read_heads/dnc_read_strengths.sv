@@ -49,7 +49,7 @@ module dnc_read_strengths(
   BETA_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -63,9 +63,9 @@ module dnc_read_strengths(
   output BETA_OUT_ENABLE;  // for i in 0 to R-1
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_R_IN;
-  input [DATA_SIZE - 1:0] BETA_IN;
-  output [DATA_SIZE - 1:0] BETA_OUT;
+  input [DATA_SIZE-1:0] SIZE_R_IN;
+  input [DATA_SIZE-1:0] BETA_IN;
+  output [DATA_SIZE-1:0] BETA_OUT;
 
 
   ///////////////////////////////////////////////////////////////////////
@@ -90,10 +90,10 @@ module dnc_read_strengths(
   wire data_out_enable_vector_oneplus;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_oneplus;
-  wire [DATA_SIZE - 1:0] size_in_vector_oneplus;
-  wire [DATA_SIZE - 1:0] data_in_vector_oneplus;
-  wire [DATA_SIZE - 1:0] data_out_vector_oneplus;
+  wire [DATA_SIZE-1:0] modulo_in_vector_oneplus;
+  wire [DATA_SIZE-1:0] size_in_vector_oneplus;
+  wire [DATA_SIZE-1:0] data_in_vector_oneplus;
+  wire [DATA_SIZE-1:0] data_out_vector_oneplus;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

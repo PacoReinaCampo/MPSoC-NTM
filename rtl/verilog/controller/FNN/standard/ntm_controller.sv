@@ -64,7 +64,7 @@ module ntm_controller(
   H_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -86,16 +86,16 @@ module ntm_controller(
   output H_OUT_ENABLE;  // for l in 0 to L-1
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_X_IN;
-  input [DATA_SIZE - 1:0] SIZE_W_IN;
-  input [DATA_SIZE - 1:0] SIZE_L_IN;
-  input [DATA_SIZE - 1:0] SIZE_R_IN;
-  input [DATA_SIZE - 1:0] W_IN;
-  input [DATA_SIZE - 1:0] K_IN;
-  input [DATA_SIZE - 1:0] B_IN;
-  input [DATA_SIZE - 1:0] X_IN;
-  input [DATA_SIZE - 1:0] R_IN;
-  output [DATA_SIZE - 1:0] H_OUT;
+  input [DATA_SIZE-1:0] SIZE_X_IN;
+  input [DATA_SIZE-1:0] SIZE_W_IN;
+  input [DATA_SIZE-1:0] SIZE_L_IN;
+  input [DATA_SIZE-1:0] SIZE_R_IN;
+  input [DATA_SIZE-1:0] W_IN;
+  input [DATA_SIZE-1:0] K_IN;
+  input [DATA_SIZE-1:0] B_IN;
+  input [DATA_SIZE-1:0] X_IN;
+  input [DATA_SIZE-1:0] R_IN;
+  output [DATA_SIZE-1:0] H_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -110,8 +110,8 @@ module ntm_controller(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO = ((0));
-  parameter ONE = ((1));
+  parameter ZERO = 0;
+  parameter ONE = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -140,11 +140,11 @@ module ntm_controller(
   wire data_out_scalar_enable_vector_summation;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_summation;
-  wire [DATA_SIZE - 1:0] size_in_vector_summation;
-  wire [DATA_SIZE - 1:0] length_in_vector_summation;
-  wire [DATA_SIZE - 1:0] data_in_vector_summation;
-  wire [DATA_SIZE - 1:0] data_out_vector_summation;
+  wire [DATA_SIZE-1:0] modulo_in_vector_summation;
+  wire [DATA_SIZE-1:0] size_in_vector_summation;
+  wire [DATA_SIZE-1:0] length_in_vector_summation;
+  wire [DATA_SIZE-1:0] data_in_vector_summation;
+  wire [DATA_SIZE-1:0] data_out_vector_summation;
 
   // MATRIX PRODUCT
   // CONTROL
@@ -158,14 +158,14 @@ module ntm_controller(
   wire data_out_j_enable_matrix_product;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_a_i_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_a_j_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_b_i_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_b_j_in_matrix_product;
-  wire [DATA_SIZE - 1:0] data_a_in_matrix_product;
-  wire [DATA_SIZE - 1:0] data_b_in_matrix_product;
-  wire [DATA_SIZE - 1:0] data_out_matrix_product;
+  wire [DATA_SIZE-1:0] modulo_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_a_i_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_a_j_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_b_i_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_b_j_in_matrix_product;
+  wire [DATA_SIZE-1:0] data_a_in_matrix_product;
+  wire [DATA_SIZE-1:0] data_b_in_matrix_product;
+  wire [DATA_SIZE-1:0] data_out_matrix_product;
 
   // VECTOR LOGISTIC
   // CONTROL
@@ -175,9 +175,9 @@ module ntm_controller(
   wire data_out_enable_vector_logistic;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_logistic;
-  wire [DATA_SIZE - 1:0] size_in_vector_logistic;
-  wire [DATA_SIZE - 1:0] data_in_vector_logistic;
+  wire [DATA_SIZE-1:0] modulo_in_vector_logistic;
+  wire [DATA_SIZE-1:0] size_in_vector_logistic;
+  wire [DATA_SIZE-1:0] data_in_vector_logistic;
   wire data_out_vector_logistic;
 
   // TRAINER
@@ -194,15 +194,15 @@ module ntm_controller(
   wire b_out_enable_trainer;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_x_in_trainer;
-  wire [DATA_SIZE - 1:0] size_w_in_trainer;
-  wire [DATA_SIZE - 1:0] size_l_in_trainer;
-  wire [DATA_SIZE - 1:0] size_r_in_trainer;
-  wire [DATA_SIZE - 1:0] h_in_trainer;
-  wire [DATA_SIZE - 1:0] x_in_trainer;
-  wire [DATA_SIZE - 1:0] w_out_trainer;
-  wire [DATA_SIZE - 1:0] k_out_trainer;
-  wire [DATA_SIZE - 1:0] b_out_trainer;
+  wire [DATA_SIZE-1:0] size_x_in_trainer;
+  wire [DATA_SIZE-1:0] size_w_in_trainer;
+  wire [DATA_SIZE-1:0] size_l_in_trainer;
+  wire [DATA_SIZE-1:0] size_r_in_trainer;
+  wire [DATA_SIZE-1:0] h_in_trainer;
+  wire [DATA_SIZE-1:0] x_in_trainer;
+  wire [DATA_SIZE-1:0] w_out_trainer;
+  wire [DATA_SIZE-1:0] k_out_trainer;
+  wire [DATA_SIZE-1:0] b_out_trainer;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

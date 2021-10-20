@@ -49,7 +49,7 @@ module dnc_erase_vector(
   E_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -62,8 +62,8 @@ module dnc_erase_vector(
   output E_OUT_ENABLE;  // for k in 0 to W-1
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_W_IN;
-  input [DATA_SIZE - 1:0] E_IN;
+  input [DATA_SIZE-1:0] SIZE_W_IN;
+  input [DATA_SIZE-1:0] E_IN;
   output E_OUT;
 
   ///////////////////////////////////////////////////////////////////////
@@ -88,9 +88,9 @@ module dnc_erase_vector(
   wire data_out_enable_vector_logistic;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_logistic;
-  wire [DATA_SIZE - 1:0] size_in_vector_logistic;
-  wire [DATA_SIZE - 1:0] data_in_vector_logistic;
+  wire [DATA_SIZE-1:0] modulo_in_vector_logistic;
+  wire [DATA_SIZE-1:0] size_in_vector_logistic;
+  wire [DATA_SIZE-1:0] data_in_vector_logistic;
   wire data_out_vector_logistic;
 
   ///////////////////////////////////////////////////////////////////////

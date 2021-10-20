@@ -61,7 +61,7 @@ module ntm_trainer(
   B_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -81,15 +81,15 @@ module ntm_trainer(
   output B_OUT_ENABLE;  // for l in 0 to L-1
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_X_IN;
-  input [DATA_SIZE - 1:0] SIZE_W_IN;
-  input [DATA_SIZE - 1:0] SIZE_L_IN;
-  input [DATA_SIZE - 1:0] SIZE_R_IN;
-  input [DATA_SIZE - 1:0] H_IN;
-  input [DATA_SIZE - 1:0] X_IN;
-  output [DATA_SIZE - 1:0] W_OUT;
-  output [DATA_SIZE - 1:0] K_OUT;
-  output [DATA_SIZE - 1:0] B_OUT;
+  input [DATA_SIZE-1:0] SIZE_X_IN;
+  input [DATA_SIZE-1:0] SIZE_W_IN;
+  input [DATA_SIZE-1:0] SIZE_L_IN;
+  input [DATA_SIZE-1:0] SIZE_R_IN;
+  input [DATA_SIZE-1:0] H_IN;
+  input [DATA_SIZE-1:0] X_IN;
+  output [DATA_SIZE-1:0] W_OUT;
+  output [DATA_SIZE-1:0] K_OUT;
+  output [DATA_SIZE-1:0] B_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -113,11 +113,11 @@ module ntm_trainer(
   wire data_out_scalar_enable_vector_summation;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_summation;
-  wire [DATA_SIZE - 1:0] size_in_vector_summation;
-  wire [DATA_SIZE - 1:0] length_in_vector_summation;
-  wire [DATA_SIZE - 1:0] data_in_vector_summation;
-  wire [DATA_SIZE - 1:0] data_out_vector_summation;
+  wire [DATA_SIZE-1:0] modulo_in_vector_summation;
+  wire [DATA_SIZE-1:0] size_in_vector_summation;
+  wire [DATA_SIZE-1:0] length_in_vector_summation;
+  wire [DATA_SIZE-1:0] data_in_vector_summation;
+  wire [DATA_SIZE-1:0] data_out_vector_summation;
 
   // MATRIX PRODUCT
   // CONTROL
@@ -131,14 +131,14 @@ module ntm_trainer(
   wire data_out_j_enable_matrix_product;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_a_i_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_a_j_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_b_i_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_b_j_in_matrix_product;
-  wire [DATA_SIZE - 1:0] data_a_in_matrix_product;
-  wire [DATA_SIZE - 1:0] data_b_in_matrix_product;
-  wire [DATA_SIZE - 1:0] data_out_matrix_product;
+  wire [DATA_SIZE-1:0] modulo_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_a_i_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_a_j_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_b_i_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_b_j_in_matrix_product;
+  wire [DATA_SIZE-1:0] data_a_in_matrix_product;
+  wire [DATA_SIZE-1:0] data_b_in_matrix_product;
+  wire [DATA_SIZE-1:0] data_out_matrix_product;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

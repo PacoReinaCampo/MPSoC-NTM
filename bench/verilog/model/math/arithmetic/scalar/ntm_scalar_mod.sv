@@ -47,7 +47,7 @@ module ntm_scalar_mod(
   DATA_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -58,9 +58,9 @@ module ntm_scalar_mod(
   output READY;
 
   // DATA
-  input [DATA_SIZE - 1:0] MODULO_IN;
-  input [DATA_SIZE - 1:0] DATA_IN;
-  output [DATA_SIZE - 1:0] DATA_OUT;
+  input [DATA_SIZE-1:0] MODULO_IN;
+  input [DATA_SIZE-1:0] DATA_IN;
+  output [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -73,7 +73,7 @@ module ntm_scalar_mod(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO = ((0));
+  parameter ZERO = 0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -83,7 +83,7 @@ module ntm_scalar_mod(
   reg mod_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE - 1:0] mod_int;
+  reg [DATA_SIZE-1:0] mod_int;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -113,9 +113,9 @@ module ntm_scalar_mod(
         end
         ENDER_STATE : begin
           // STEP 1
-          if((((MODULO_IN)) > ((ZERO)))) begin
-            if((((mod_int)) > ((ZERO)))) begin
-              if((((mod_int)) == ((MODULO_IN)))) begin
+          if((MODULO_IN > ZERO)) begin
+            if((mod_int > ZERO)) begin
+              if((mod_int == MODULO_IN)) begin
                 // Data Outputs
                 DATA_OUT <= ZERO;
                 // Control Outputs
@@ -123,7 +123,7 @@ module ntm_scalar_mod(
                 // FSM Control
                 mod_ctrl_fsm_int <= STARTER_STATE;
               end
-              else if((((mod_int)) < ((MODULO_IN)))) begin
+              else if((mod_int < MODULO_IN)) begin
                 // Data Outputs
                 DATA_OUT <= mod_int;
                 // Control Outputs
@@ -133,10 +133,10 @@ module ntm_scalar_mod(
               end
               else begin
                 // Assignations
-                mod_int <= (((mod_int)) - ((MODULO_IN)));
+                mod_int <= (mod_int - MODULO_IN);
               end
             end
-            else if((((mod_int)) == ((ZERO)))) begin
+            else if((mod_int == ZERO)) begin
               // Data Outputs
               DATA_OUT <= ZERO;
               // Control Outputs
@@ -145,7 +145,7 @@ module ntm_scalar_mod(
               mod_ctrl_fsm_int <= STARTER_STATE;
             end
           end
-          else if((((MODULO_IN)) == ((ZERO)))) begin
+          else if((MODULO_IN == ZERO)) begin
             // Data Outputs
             DATA_OUT <= mod_int;
             // Control Outputs

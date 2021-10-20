@@ -53,7 +53,7 @@ module ntm_matrix_inverter(
   DATA_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
   // GLOBAL
   input CLK;
   input RST;
@@ -68,11 +68,11 @@ module ntm_matrix_inverter(
   output DATA_OUT_J_ENABLE;
 
   // DATA
-  input [DATA_SIZE - 1:0] MODULO_IN;
-  input [DATA_SIZE - 1:0] SIZE_I_IN;
-  input [DATA_SIZE - 1:0] SIZE_J_IN;
-  input [DATA_SIZE - 1:0] DATA_IN;
-  output [DATA_SIZE - 1:0] DATA_OUT;
+  input [DATA_SIZE-1:0] MODULO_IN;
+  input [DATA_SIZE-1:0] SIZE_I_IN;
+  input [DATA_SIZE-1:0] SIZE_J_IN;
+  input [DATA_SIZE-1:0] DATA_IN;
+  output [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -87,8 +87,8 @@ module ntm_matrix_inverter(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO = ((0));
-  parameter ONE = ((1));
+  parameter ZERO = 0;
+  parameter ONE = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -98,8 +98,8 @@ module ntm_matrix_inverter(
   reg [1:0] inverter_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE - 1:0] index_i_loop;
-  reg [DATA_SIZE - 1:0] index_j_loop;
+  reg [DATA_SIZE-1:0] index_i_loop;
+  reg [DATA_SIZE-1:0] index_j_loop;
 
   reg data_in_i_inverter_int;
   reg data_in_j_inverter_int;
@@ -112,10 +112,10 @@ module ntm_matrix_inverter(
   wire data_out_enable_vector_inverter;
 
   // DATA
-  reg [DATA_SIZE - 1:0] modulo_in_vector_inverter;
-  reg [DATA_SIZE - 1:0] size_in_vector_inverter;
-  reg [DATA_SIZE - 1:0] data_in_vector_inverter;
-  wire [DATA_SIZE - 1:0] data_out_vector_inverter;
+  reg [DATA_SIZE-1:0] modulo_in_vector_inverter;
+  reg [DATA_SIZE-1:0] size_in_vector_inverter;
+  reg [DATA_SIZE-1:0] data_in_vector_inverter;
+  wire [DATA_SIZE-1:0] data_out_vector_inverter;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -196,16 +196,16 @@ module ntm_matrix_inverter(
         ENDER_STATE : begin
           // STEP 3
           if((ready_vector_inverter == 1'b1)) begin
-            if(((((index_i_loop)) == (((SIZE_I_IN)) - ((ONE)))) && (((index_j_loop)) == ((((SIZE_J_IN)) - ((ONE))))))) begin
+            if(((index_i_loop == (SIZE_I_IN - ONE)) && (index_j_loop == (SIZE_J_IN - ONE)))) begin
               // Control Outputs
               READY <= 1'b1;
               DATA_OUT_J_ENABLE <= 1'b1;
               // FSM Control
               inverter_ctrl_fsm_int <= STARTER_STATE;
             end
-            else if(((((index_i_loop)) < (((SIZE_I_IN)) - ((ONE)))) && (((index_j_loop)) == ((((SIZE_J_IN)) - ((ONE))))))) begin
+            else if(((index_i_loop < (SIZE_I_IN - ONE)) && (index_j_loop == (SIZE_J_IN - ONE)))) begin
               // Control Internal
-              index_i_loop <= (((index_i_loop)) + ((ONE)));
+              index_i_loop <= (index_i_loop + ONE);
               index_j_loop <= ZERO;
               // Control Outputs
               DATA_OUT_I_ENABLE <= 1'b1;
@@ -213,9 +213,9 @@ module ntm_matrix_inverter(
               // FSM Control
               inverter_ctrl_fsm_int <= INPUT_I_STATE;
             end
-            else if(((((index_i_loop)) < (((SIZE_I_IN)) - ((ONE)))) && (((index_j_loop)) < ((((SIZE_J_IN)) - ((ONE))))))) begin
+            else if(((index_i_loop < (SIZE_I_IN - ONE)) && (index_j_loop < (SIZE_J_IN - ONE)))) begin
               // Control Internal
-              index_j_loop <= (((index_j_loop)) + ((ONE)));
+              index_j_loop <= (index_j_loop + ONE);
               // Control Outputs
               DATA_OUT_J_ENABLE <= 1'b1;
               // FSM Control

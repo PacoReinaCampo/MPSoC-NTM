@@ -52,7 +52,7 @@ module dnc_read_keys(
   K_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -68,10 +68,10 @@ module dnc_read_keys(
   output K_OUT_K_ENABLE;  // for k in 0 to W-1
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_R_IN;
-  input [DATA_SIZE - 1:0] SIZE_W_IN;
-  input [DATA_SIZE - 1:0] K_IN;
-  output [DATA_SIZE - 1:0] K_OUT;
+  input [DATA_SIZE-1:0] SIZE_R_IN;
+  input [DATA_SIZE-1:0] SIZE_W_IN;
+  input [DATA_SIZE-1:0] K_IN;
+  output [DATA_SIZE-1:0] K_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -95,8 +95,8 @@ module dnc_read_keys(
   reg read_keys_ctrl_fsm_int;
   
   // Internal Signals
-  reg [DATA_SIZE - 1:0] index_i_loop;
-  reg [DATA_SIZE - 1:0] index_j_loop;
+  reg [DATA_SIZE-1:0] index_i_loop;
+  reg [DATA_SIZE-1:0] index_j_loop;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -133,8 +133,8 @@ module dnc_read_keys(
           // STEP 1
           if((K_IN_I_ENABLE == 1'b1)) begin
             // Control Internal
-            if((((index_i_loop)) < (((SIZE_R_IN)) - ((ONE))) && ((index_j_loop)) == (((SIZE_W_IN)) - ((ONE))))) begin
-              index_i_loop <= (((index_i_loop)) + ((ONE)));
+            if((index_i_loop < (((SIZE_R_IN)) - ONE) && index_j_loop == (((SIZE_W_IN)) - ONE))) begin
+              index_i_loop <= (index_i_loop + ONE);
               index_j_loop <= ZERO;
             end
 
@@ -151,16 +151,16 @@ module dnc_read_keys(
             K_OUT_K_ENABLE <= 1'b0;
           end
           if((K_IN_K_ENABLE == 1'b1)) begin
-            if((((index_i_loop)) == (((SIZE_R_IN)) - ((ONE))) && ((index_j_loop)) == (((SIZE_W_IN)) - ((ONE))))) begin
+            if((index_i_loop == (((SIZE_R_IN)) - ONE) && index_j_loop == (((SIZE_W_IN)) - ONE))) begin
               // Control Outputs
               READY <= 1'b1;
 
               // FSM Control
               read_keys_ctrl_fsm_int <= STARTER_STATE;
             end
-            else if((((index_i_loop)) < (((SIZE_R_IN)) - ((ONE))) && ((index_j_loop)) < (((SIZE_W_IN)) - ((ONE))))) begin
+            else if((index_i_loop < (((SIZE_R_IN)) - ONE) && index_j_loop < (((SIZE_W_IN)) - ONE))) begin
               // Control Internal
-              index_j_loop <= (((index_j_loop)) + ((ONE)));
+              index_j_loop <= (index_j_loop + ONE);
             end
             // Data Outputs
             K_OUT <= K_IN;

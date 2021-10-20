@@ -63,7 +63,7 @@ module ntm_top(
   Y_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -83,17 +83,17 @@ module ntm_top(
   output Y_OUT_ENABLE;// for y in 0 to Y-1
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_X_IN;
-  input [DATA_SIZE - 1:0] SIZE_Y_IN;
-  input [DATA_SIZE - 1:0] SIZE_N_IN;
-  input [DATA_SIZE - 1:0] SIZE_W_IN;
-  input [DATA_SIZE - 1:0] SIZE_L_IN;
-  input [DATA_SIZE - 1:0] SIZE_R_IN;
-  input [DATA_SIZE - 1:0] W_IN;
-  input [DATA_SIZE - 1:0] K_IN;
-  input [DATA_SIZE - 1:0] B_IN;
-  input [DATA_SIZE - 1:0] X_IN;
-  output [DATA_SIZE - 1:0] Y_OUT;
+  input [DATA_SIZE-1:0] SIZE_X_IN;
+  input [DATA_SIZE-1:0] SIZE_Y_IN;
+  input [DATA_SIZE-1:0] SIZE_N_IN;
+  input [DATA_SIZE-1:0] SIZE_W_IN;
+  input [DATA_SIZE-1:0] SIZE_L_IN;
+  input [DATA_SIZE-1:0] SIZE_R_IN;
+  input [DATA_SIZE-1:0] W_IN;
+  input [DATA_SIZE-1:0] K_IN;
+  input [DATA_SIZE-1:0] B_IN;
+  input [DATA_SIZE-1:0] X_IN;
+  output [DATA_SIZE-1:0] Y_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -127,16 +127,16 @@ module ntm_top(
   wire h_out_enable_controller;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_x_in_controller;
-  wire [DATA_SIZE - 1:0] size_w_in_controller;
-  wire [DATA_SIZE - 1:0] size_l_in_controller;
-  wire [DATA_SIZE - 1:0] size_r_in_controller;
-  wire [DATA_SIZE - 1:0] w_in_controller;
-  wire [DATA_SIZE - 1:0] k_in_controller;
-  wire [DATA_SIZE - 1:0] b_in_controller;
-  wire [DATA_SIZE - 1:0] x_in_controller;
-  wire [DATA_SIZE - 1:0] r_in_controller;
-  wire [DATA_SIZE - 1:0] h_out_controller;
+  wire [DATA_SIZE-1:0] size_x_in_controller;
+  wire [DATA_SIZE-1:0] size_w_in_controller;
+  wire [DATA_SIZE-1:0] size_l_in_controller;
+  wire [DATA_SIZE-1:0] size_r_in_controller;
+  wire [DATA_SIZE-1:0] w_in_controller;
+  wire [DATA_SIZE-1:0] k_in_controller;
+  wire [DATA_SIZE-1:0] b_in_controller;
+  wire [DATA_SIZE-1:0] x_in_controller;
+  wire [DATA_SIZE-1:0] r_in_controller;
+  wire [DATA_SIZE-1:0] h_out_controller;
 
   // CONTROLLER OUTPUT VECTOR
   // CONTROL
@@ -148,11 +148,11 @@ module ntm_top(
   wire nu_out_enable_controller_output_vector;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_y_in_controller_output_vector;
-  wire [DATA_SIZE - 1:0] size_l_in_controller_output_vector;
-  wire [DATA_SIZE - 1:0] u_in_controller_output_vector;
-  wire [DATA_SIZE - 1:0] h_in_controller_output_vector;
-  wire [DATA_SIZE - 1:0] nu_out_controller_output_vector;
+  wire [DATA_SIZE-1:0] size_y_in_controller_output_vector;
+  wire [DATA_SIZE-1:0] size_l_in_controller_output_vector;
+  wire [DATA_SIZE-1:0] u_in_controller_output_vector;
+  wire [DATA_SIZE-1:0] h_in_controller_output_vector;
+  wire [DATA_SIZE-1:0] nu_out_controller_output_vector;
 
   // OUTPUT VECTOR
   // CONTROL
@@ -167,14 +167,14 @@ module ntm_top(
   wire y_in_enable_output_vector;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_y_in_output_vector;
-  wire [DATA_SIZE - 1:0] size_w_in_output_vector;
-  wire [DATA_SIZE - 1:0] size_l_in_output_vector;
-  wire [DATA_SIZE - 1:0] size_r_in_output_vector;
-  wire [DATA_SIZE - 1:0] k_in_output_vector;
-  wire [DATA_SIZE - 1:0] r_in_output_vector;
-  wire [DATA_SIZE - 1:0] nu_in_output_vector;
-  wire [DATA_SIZE - 1:0] y_out_output_vector;
+  wire [DATA_SIZE-1:0] size_y_in_output_vector;
+  wire [DATA_SIZE-1:0] size_w_in_output_vector;
+  wire [DATA_SIZE-1:0] size_l_in_output_vector;
+  wire [DATA_SIZE-1:0] size_r_in_output_vector;
+  wire [DATA_SIZE-1:0] k_in_output_vector;
+  wire [DATA_SIZE-1:0] r_in_output_vector;
+  wire [DATA_SIZE-1:0] nu_in_output_vector;
+  wire [DATA_SIZE-1:0] y_out_output_vector;
 
   // INTERFACE VECTOR
   // CONTROL
@@ -204,20 +204,20 @@ module ntm_top(
   wire h_in_enable_interface_vector;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_n_in_interface_vector;
-  wire [DATA_SIZE - 1:0] size_w_in_interface_vector;
-  wire [DATA_SIZE - 1:0] size_l_in_interface_vector;
-  wire [DATA_SIZE - 1:0] wk_in_interface_vector;
-  wire [DATA_SIZE - 1:0] wbeta_in_interface_vector;
-  wire [DATA_SIZE - 1:0] wg_in_interface_vector;
-  wire [DATA_SIZE - 1:0] ws_in_interface_vector;
-  wire [DATA_SIZE - 1:0] wgamma_in_interface_vector;
-  wire [DATA_SIZE - 1:0] h_in_interface_vector;
-  wire [DATA_SIZE - 1:0] k_out_interface_vector;
-  wire [DATA_SIZE - 1:0] beta_out_interface_vector;
-  wire [DATA_SIZE - 1:0] g_out_interface_vector;
-  wire [DATA_SIZE - 1:0] s_out_interface_vector;
-  wire [DATA_SIZE - 1:0] gamma_out_interface_vector;
+  wire [DATA_SIZE-1:0] size_n_in_interface_vector;
+  wire [DATA_SIZE-1:0] size_w_in_interface_vector;
+  wire [DATA_SIZE-1:0] size_l_in_interface_vector;
+  wire [DATA_SIZE-1:0] wk_in_interface_vector;
+  wire [DATA_SIZE-1:0] wbeta_in_interface_vector;
+  wire [DATA_SIZE-1:0] wg_in_interface_vector;
+  wire [DATA_SIZE-1:0] ws_in_interface_vector;
+  wire [DATA_SIZE-1:0] wgamma_in_interface_vector;
+  wire [DATA_SIZE-1:0] h_in_interface_vector;
+  wire [DATA_SIZE-1:0] k_out_interface_vector;
+  wire [DATA_SIZE-1:0] beta_out_interface_vector;
+  wire [DATA_SIZE-1:0] g_out_interface_vector;
+  wire [DATA_SIZE-1:0] s_out_interface_vector;
+  wire [DATA_SIZE-1:0] gamma_out_interface_vector;
 
   ///////////////////////////////////////////////////////////////////////
   // READ HEADS
@@ -230,11 +230,11 @@ module ntm_top(
   wire r_out_enable_reading;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_n_in_reading;
-  wire [DATA_SIZE - 1:0] size_w_in_reading;
-  wire [DATA_SIZE - 1:0] w_in_reading;
-  wire [DATA_SIZE - 1:0] m_in_reading;
-  wire [DATA_SIZE - 1:0] r_out_reading;
+  wire [DATA_SIZE-1:0] size_n_in_reading;
+  wire [DATA_SIZE-1:0] size_w_in_reading;
+  wire [DATA_SIZE-1:0] w_in_reading;
+  wire [DATA_SIZE-1:0] m_in_reading;
+  wire [DATA_SIZE-1:0] r_out_reading;
 
   ///////////////////////////////////////////////////////////////////////
   // WRITE HEADS
@@ -249,12 +249,12 @@ module ntm_top(
   wire m_out_enable_writing;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_n_in_writing;
-  wire [DATA_SIZE - 1:0] size_w_in_writing;
-  wire [DATA_SIZE - 1:0] m_in_writing;
-  wire [DATA_SIZE - 1:0] a_in_writing;
-  wire [DATA_SIZE - 1:0] w_in_writing;
-  wire [DATA_SIZE - 1:0] m_out_writing;
+  wire [DATA_SIZE-1:0] size_n_in_writing;
+  wire [DATA_SIZE-1:0] size_w_in_writing;
+  wire [DATA_SIZE-1:0] m_in_writing;
+  wire [DATA_SIZE-1:0] a_in_writing;
+  wire [DATA_SIZE-1:0] w_in_writing;
+  wire [DATA_SIZE-1:0] m_out_writing;
 
   // ERASING
   // CONTROL
@@ -265,12 +265,12 @@ module ntm_top(
   wire m_out_enable_erasing;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_n_in_erasing;
-  wire [DATA_SIZE - 1:0] size_w_in_erasing;
-  wire [DATA_SIZE - 1:0] m_in_erasing;
-  wire [DATA_SIZE - 1:0] e_in_erasing;
-  wire [DATA_SIZE - 1:0] w_in_erasing;
-  wire [DATA_SIZE - 1:0] m_out_erasing;
+  wire [DATA_SIZE-1:0] size_n_in_erasing;
+  wire [DATA_SIZE-1:0] size_w_in_erasing;
+  wire [DATA_SIZE-1:0] m_in_erasing;
+  wire [DATA_SIZE-1:0] e_in_erasing;
+  wire [DATA_SIZE-1:0] w_in_erasing;
+  wire [DATA_SIZE-1:0] m_out_erasing;
 
   ///////////////////////////////////////////////////////////////////////
   // MEMORY
@@ -287,16 +287,16 @@ module ntm_top(
   wire w_out_enable_addressing;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_n_in_addressing;
-  wire [DATA_SIZE - 1:0] size_w_in_addressing;
-  wire [DATA_SIZE - 1:0] k_in_addressing;
-  wire [DATA_SIZE - 1:0] beta_in_addressing;
-  wire [DATA_SIZE - 1:0] g_in_addressing;
-  wire [DATA_SIZE - 1:0] s_in_addressing;
-  wire [DATA_SIZE - 1:0] gamma_in_addressing;
-  wire [DATA_SIZE - 1:0] m_in_addressing;
-  wire [DATA_SIZE - 1:0] w_in_addressing;
-  wire [DATA_SIZE - 1:0] w_out_addressing;
+  wire [DATA_SIZE-1:0] size_n_in_addressing;
+  wire [DATA_SIZE-1:0] size_w_in_addressing;
+  wire [DATA_SIZE-1:0] k_in_addressing;
+  wire [DATA_SIZE-1:0] beta_in_addressing;
+  wire [DATA_SIZE-1:0] g_in_addressing;
+  wire [DATA_SIZE-1:0] s_in_addressing;
+  wire [DATA_SIZE-1:0] gamma_in_addressing;
+  wire [DATA_SIZE-1:0] m_in_addressing;
+  wire [DATA_SIZE-1:0] w_in_addressing;
+  wire [DATA_SIZE-1:0] w_out_addressing;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

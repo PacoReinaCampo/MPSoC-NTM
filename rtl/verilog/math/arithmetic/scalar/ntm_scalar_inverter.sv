@@ -47,7 +47,7 @@ module ntm_scalar_inverter(
   DATA_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -58,9 +58,9 @@ module ntm_scalar_inverter(
   output READY;
 
   // DATA
-  input [DATA_SIZE - 1:0] MODULO_IN;
-  input [DATA_SIZE - 1:0] DATA_IN;
-  output [DATA_SIZE - 1:0] DATA_OUT;
+  input [DATA_SIZE-1:0] MODULO_IN;
+  input [DATA_SIZE-1:0] DATA_IN;
+  output [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -76,8 +76,8 @@ module ntm_scalar_inverter(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO = ((0));
-  parameter ONE = ((1));
+  parameter ZERO = 0;
+  parameter ONE = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -100,7 +100,7 @@ module ntm_scalar_inverter(
   always @(posedge CLK or posedge RST) begin
     if((RST == 1'b0)) begin
       // Data Outputs
-      DATA_OUT <= {(((DATA_SIZE - 1))-((0))+1){1'b0}};
+      DATA_OUT <= {(((DATA_SIZE - 1))-0+1){1'b0}};
       // Control Outputs
       READY <= 1'b0;
       // Assignation
@@ -126,10 +126,10 @@ module ntm_scalar_inverter(
         end
         ENDER_STATE : begin
           // STEP 1
-          if((((u_int)) == ((ONE)))) begin
-            if((((x_int)) < {1'b0,(MODULO_IN)})) begin
+          if((u_int == ONE)) begin
+            if((x_int < {1'b0,MODULO_IN})) begin
               // Data Outputs
-              DATA_OUT <= x_int[DATA_SIZE - 1:0];
+              DATA_OUT <= x_int[DATA_SIZE-1:0];
               // Control Outputs
               READY <= 1'b1;
               // FSM Control
@@ -137,13 +137,13 @@ module ntm_scalar_inverter(
             end
             else begin
               // Assignations
-              x_int <= (((x_int)) - ({1'b0,(MODULO_IN)}));
+              x_int <= (x_int - {1'b0,MODULO_IN});
             end
           end
-          else if((((v_int)) == ((ONE)))) begin
-            if((((y_int)) < {1'b0,(MODULO_IN)})) begin
+          else if((v_int == ONE)) begin
+            if((y_int < {1'b0,MODULO_IN})) begin
               // Data Outputs
-              DATA_OUT <= y_int[DATA_SIZE - 1:0];
+              DATA_OUT <= y_int[DATA_SIZE-1:0];
               // Control Outputs
               READY <= 1'b1;
               // FSM Control
@@ -151,7 +151,7 @@ module ntm_scalar_inverter(
             end
             else begin
               // Assignations
-              y_int <= (((y_int)) - ({1'b0,(MODULO_IN)}));
+              y_int <= (y_int - {1'b0,MODULO_IN});
             end
           end
           else if((u_int[0] == 1'b0)) begin
@@ -175,7 +175,7 @@ module ntm_scalar_inverter(
             x_int <= x_int;
           end
           else begin
-            x_int <= (((x_int)) + ({1'b0,MODULO_IN}));
+            x_int <= (x_int + {1'b0,MODULO_IN});
           end
           // FSM Control
           if((v_int[0] == 1'b0)) begin
@@ -193,7 +193,7 @@ module ntm_scalar_inverter(
             y_int <= y_int;
           end
           else begin
-            y_int <= (((y_int)) + ({1'b0,MODULO_IN}));
+            y_int <= (y_int + {1'b0,MODULO_IN});
           end
           // FSM Control
           inverter_ctrl_fsm_int <= CHECK_D_STATE;
@@ -201,22 +201,22 @@ module ntm_scalar_inverter(
         CHECK_D_STATE : begin
           // STEP 4
           // Assignation
-          if((((u_int)) < ((v_int)))) begin
-            v_int <= (((v_int)) - ((u_int)));
-            if((((y_int)) > ((x_int)))) begin
-              y_int <= (((y_int)) - ((x_int)));
+          if((u_int < v_int)) begin
+            v_int <= (v_int - u_int);
+            if((y_int > x_int)) begin
+              y_int <= (y_int - x_int);
             end
             else begin
-              y_int <= (((y_int)) - ((x_int)) + ({1'b0,(MODULO_IN)}));
+              y_int <= (y_int - x_int + {1'b0,MODULO_IN});
             end
           end
           else begin
-            u_int <= (((u_int)) - ((v_int)));
-            if((((x_int)) > ((y_int)))) begin
-              x_int <= (((x_int)) - ((y_int)));
+            u_int <= (u_int - v_int);
+            if((x_int > y_int)) begin
+              x_int <= (x_int - y_int);
             end
             else begin
-              x_int <= (((x_int)) - ((y_int)) + ({1'b0,(MODULO_IN)}));
+              x_int <= (x_int - y_int + {1'b0,MODULO_IN});
             end
           end
           // FSM Control

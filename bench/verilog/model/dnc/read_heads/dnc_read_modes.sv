@@ -51,7 +51,7 @@ module dnc_read_modes(
   PI_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -67,9 +67,9 @@ module dnc_read_modes(
   output PI_OUT_P_ENABLE;  // for i in 0 to 2
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_R_IN;
-  input [DATA_SIZE - 1:0] PI_IN;
-  output [DATA_SIZE - 1:0] PI_OUT;
+  input [DATA_SIZE-1:0] SIZE_R_IN;
+  input [DATA_SIZE-1:0] PI_IN;
+  output [DATA_SIZE-1:0] PI_OUT;
 
 
   ///////////////////////////////////////////////////////////////////////
@@ -98,11 +98,11 @@ module dnc_read_modes(
   wire data_out_scalar_enable_vector_softmax;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_softmax;
-  wire [DATA_SIZE - 1:0] length_in_vector_softmax;
-  wire [DATA_SIZE - 1:0] size_in_vector_softmax;
-  wire [DATA_SIZE - 1:0] data_in_vector_softmax;
-  wire [DATA_SIZE - 1:0] data_out_vector_softmax;
+  wire [DATA_SIZE-1:0] modulo_in_vector_softmax;
+  wire [DATA_SIZE-1:0] length_in_vector_softmax;
+  wire [DATA_SIZE-1:0] size_in_vector_softmax;
+  wire [DATA_SIZE-1:0] data_in_vector_softmax;
+  wire [DATA_SIZE-1:0] data_out_vector_softmax;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

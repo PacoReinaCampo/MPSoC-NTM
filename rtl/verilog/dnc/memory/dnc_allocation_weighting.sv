@@ -51,7 +51,7 @@ module dnc_allocation_weighting(
   A_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -66,10 +66,10 @@ module dnc_allocation_weighting(
   output A_OUT_ENABLE;  // for j in 0 to N-1
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_N_IN;
-  input [DATA_SIZE - 1:0] PHI_IN;
-  input [DATA_SIZE - 1:0] U_IN;
-  output [DATA_SIZE - 1:0] A_OUT;
+  input [DATA_SIZE-1:0] SIZE_N_IN;
+  input [DATA_SIZE-1:0] PHI_IN;
+  input [DATA_SIZE-1:0] U_IN;
+  output [DATA_SIZE-1:0] A_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -93,11 +93,11 @@ module dnc_allocation_weighting(
   wire data_out_scalar_enable_vector_multiplication;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_multiplication;
-  wire [DATA_SIZE - 1:0] length_in_vector_multiplication;
-  wire [DATA_SIZE - 1:0] size_in_vector_multiplication;
-  wire [DATA_SIZE - 1:0] data_in_vector_multiplication;
-  wire [DATA_SIZE - 1:0] data_out_vector_multiplication;
+  wire [DATA_SIZE-1:0] modulo_in_vector_multiplication;
+  wire [DATA_SIZE-1:0] length_in_vector_multiplication;
+  wire [DATA_SIZE-1:0] size_in_vector_multiplication;
+  wire [DATA_SIZE-1:0] data_in_vector_multiplication;
+  wire [DATA_SIZE-1:0] data_out_vector_multiplication;
 
   // VECTOR ADDER
   // CONTROL
@@ -109,11 +109,11 @@ module dnc_allocation_weighting(
   wire data_out_enable_vector_adder;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_adder;
-  wire [DATA_SIZE - 1:0] size_in_vector_adder;
-  wire [DATA_SIZE - 1:0] data_a_in_vector_adder;
-  wire [DATA_SIZE - 1:0] data_b_in_vector_adder;
-  wire [DATA_SIZE - 1:0] data_out_vector_adder;
+  wire [DATA_SIZE-1:0] modulo_in_vector_adder;
+  wire [DATA_SIZE-1:0] size_in_vector_adder;
+  wire [DATA_SIZE-1:0] data_a_in_vector_adder;
+  wire [DATA_SIZE-1:0] data_b_in_vector_adder;
+  wire [DATA_SIZE-1:0] data_out_vector_adder;
 
   // VECTOR MULTIPLIER
   // CONTROL
@@ -124,11 +124,11 @@ module dnc_allocation_weighting(
   wire data_out_enable_vector_multiplier;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] size_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] data_a_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] data_b_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] data_out_vector_multiplier;
+  wire [DATA_SIZE-1:0] modulo_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] size_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_out_vector_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

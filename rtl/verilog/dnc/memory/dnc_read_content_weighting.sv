@@ -54,7 +54,7 @@ module dnc_read_content_weighting(
   C_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -70,12 +70,12 @@ module dnc_read_content_weighting(
   output C_OUT_ENABLE;  // for j in 0 to N-1
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_N_IN;
-  input [DATA_SIZE - 1:0] SIZE_W_IN;
-  input [DATA_SIZE - 1:0] K_IN;
-  input [DATA_SIZE - 1:0] M_IN;
-  input [DATA_SIZE - 1:0] BETA_IN;
-  output [DATA_SIZE - 1:0] C_OUT;
+  input [DATA_SIZE-1:0] SIZE_N_IN;
+  input [DATA_SIZE-1:0] SIZE_W_IN;
+  input [DATA_SIZE-1:0] K_IN;
+  input [DATA_SIZE-1:0] M_IN;
+  input [DATA_SIZE-1:0] BETA_IN;
+  output [DATA_SIZE-1:0] C_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -99,12 +99,12 @@ module dnc_read_content_weighting(
   wire c_out_enable_vector_content_based_addressing;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_i_in_vector_content_based_addressing;
-  wire [DATA_SIZE - 1:0] size_j_in_vector_content_based_addressing;
-  wire [DATA_SIZE - 1:0] k_in_vector_content_based_addressing;
-  wire [DATA_SIZE - 1:0] m_in_vector_content_based_addressing;
-  wire [DATA_SIZE - 1:0] beta_in_vector_content_based_addressing;
-  wire [DATA_SIZE - 1:0] c_out_vector_content_based_addressing;
+  wire [DATA_SIZE-1:0] size_i_in_vector_content_based_addressing;
+  wire [DATA_SIZE-1:0] size_j_in_vector_content_based_addressing;
+  wire [DATA_SIZE-1:0] k_in_vector_content_based_addressing;
+  wire [DATA_SIZE-1:0] m_in_vector_content_based_addressing;
+  wire [DATA_SIZE-1:0] beta_in_vector_content_based_addressing;
+  wire [DATA_SIZE-1:0] c_out_vector_content_based_addressing;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

@@ -50,7 +50,7 @@ module ntm_vector_inverter(
   DATA_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -64,10 +64,10 @@ module ntm_vector_inverter(
   output DATA_OUT_ENABLE;
 
   // DATA
-  input [DATA_SIZE - 1:0] MODULO_IN;
-  input [DATA_SIZE - 1:0] SIZE_IN;
-  input [DATA_SIZE - 1:0] DATA_IN;
-  output [DATA_SIZE - 1:0] DATA_OUT;
+  input [DATA_SIZE-1:0] MODULO_IN;
+  input [DATA_SIZE-1:0] SIZE_IN;
+  input [DATA_SIZE-1:0] DATA_IN;
+  output [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -81,8 +81,8 @@ module ntm_vector_inverter(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO = ((0));
-  parameter ONE = ((1));
+  parameter ZERO = 0;
+  parameter ONE = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -92,7 +92,7 @@ module ntm_vector_inverter(
   reg [1:0] inverter_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE - 1:0] index_loop;
+  reg [DATA_SIZE-1:0] index_loop;
 
   // INVERTER
   // CONTROL
@@ -100,9 +100,9 @@ module ntm_vector_inverter(
   wire ready_scalar_inverter;
 
   // DATA
-  reg [DATA_SIZE - 1:0] modulo_in_scalar_inverter;
-  reg [DATA_SIZE - 1:0] data_in_scalar_inverter;
-  wire [DATA_SIZE - 1:0] data_out_scalar_inverter;
+  reg [DATA_SIZE-1:0] modulo_in_scalar_inverter;
+  reg [DATA_SIZE-1:0] data_in_scalar_inverter;
+  wire [DATA_SIZE-1:0] data_out_scalar_inverter;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -149,7 +149,7 @@ module ntm_vector_inverter(
         ENDER_STATE : begin
           // STEP 2
           if((ready_scalar_inverter == 1'b1)) begin
-            if((((index_loop)) == (((SIZE_IN)) - ((ONE))))) begin
+            if((index_loop == (SIZE_IN - ONE))) begin
               // Control Outputs
               READY <= 1'b1;
               // FSM Control
@@ -157,7 +157,7 @@ module ntm_vector_inverter(
             end
             else begin
               // Control Internal
-              index_loop <= (((index_loop)) + ((ONE)));
+              index_loop <= (index_loop + ONE);
               // FSM Control
               inverter_ctrl_fsm_int <= INPUT_STATE;
             end

@@ -58,7 +58,7 @@ module dnc_output_vector(
   Y_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -77,13 +77,13 @@ module dnc_output_vector(
   input Y_OUT_ENABLE;  // for y in 0 to Y-1
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_Y_IN;
-  input [DATA_SIZE - 1:0] SIZE_W_IN;
-  input [DATA_SIZE - 1:0] SIZE_R_IN;
-  input [DATA_SIZE - 1:0] K_IN;
-  input [DATA_SIZE - 1:0] R_IN;
-  input [DATA_SIZE - 1:0] NU_IN;
-  output [DATA_SIZE - 1:0] Y_OUT;
+  input [DATA_SIZE-1:0] SIZE_Y_IN;
+  input [DATA_SIZE-1:0] SIZE_W_IN;
+  input [DATA_SIZE-1:0] SIZE_R_IN;
+  input [DATA_SIZE-1:0] K_IN;
+  input [DATA_SIZE-1:0] R_IN;
+  input [DATA_SIZE-1:0] NU_IN;
+  output [DATA_SIZE-1:0] Y_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -108,11 +108,11 @@ module dnc_output_vector(
   wire data_out_enable_vector_adder;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_adder;
-  wire [DATA_SIZE - 1:0] size_in_vector_adder;
-  wire [DATA_SIZE - 1:0] data_a_in_vector_adder;
-  wire [DATA_SIZE - 1:0] data_b_in_vector_adder;
-  wire [DATA_SIZE - 1:0] data_out_vector_adder;
+  wire [DATA_SIZE-1:0] modulo_in_vector_adder;
+  wire [DATA_SIZE-1:0] size_in_vector_adder;
+  wire [DATA_SIZE-1:0] data_a_in_vector_adder;
+  wire [DATA_SIZE-1:0] data_b_in_vector_adder;
+  wire [DATA_SIZE-1:0] data_out_vector_adder;
 
   // MATRIX PRODUCT
   // CONTROL
@@ -127,14 +127,14 @@ module dnc_output_vector(
   wire data_out_j_enable_matrix_product;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_a_i_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_a_j_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_b_i_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_b_j_in_matrix_product;
-  wire [DATA_SIZE - 1:0] data_a_in_matrix_product;
-  wire [DATA_SIZE - 1:0] data_b_in_matrix_product;
-  wire [DATA_SIZE - 1:0] data_out_matrix_product;
+  wire [DATA_SIZE-1:0] modulo_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_a_i_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_a_j_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_b_i_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_b_j_in_matrix_product;
+  wire [DATA_SIZE-1:0] data_a_in_matrix_product;
+  wire [DATA_SIZE-1:0] data_b_in_matrix_product;
+  wire [DATA_SIZE-1:0] data_out_matrix_product;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

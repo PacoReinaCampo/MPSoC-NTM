@@ -48,7 +48,7 @@ module ntm_scalar_root(
   DATA_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -59,10 +59,10 @@ module ntm_scalar_root(
   output READY;
 
   // DATA
-  input [DATA_SIZE - 1:0] MODULO_IN;
-  input [DATA_SIZE - 1:0] DATA_A_IN;
-  input [DATA_SIZE - 1:0] DATA_B_IN;
-  output [DATA_SIZE - 1:0] DATA_OUT;
+  input [DATA_SIZE-1:0] MODULO_IN;
+  input [DATA_SIZE-1:0] DATA_A_IN;
+  input [DATA_SIZE-1:0] DATA_B_IN;
+  output [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -75,8 +75,8 @@ module ntm_scalar_root(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO = ((0));
-  parameter ONE = ((1));
+  parameter ZERO = 0;
+  parameter ONE = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -86,7 +86,7 @@ module ntm_scalar_root(
   reg root_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE - 1:0] root_int;
+  reg [DATA_SIZE-1:0] root_int;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -100,7 +100,7 @@ module ntm_scalar_root(
       // Control Outputs
       READY <= 1'b0;
       // Assignations
-      root_int <= {(((DATA_SIZE - 1))-((0))+1){1'b0}};
+      root_int <= {(((DATA_SIZE - 1))-0+1){1'b0}};
     end else begin
       case(root_ctrl_fsm_int)
         STARTER_STATE : begin

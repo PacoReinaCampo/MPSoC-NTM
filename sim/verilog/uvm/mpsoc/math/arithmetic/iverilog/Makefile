@@ -45,7 +45,7 @@
 all: build simulate
 
 build:
-	iverilog -g2012 -o system.vvp -c system.vc -s ntm_convolutional_fnn_testbench
+	iverilog -g2012 -o system.vvp -c system.vc -s ntm_arithmetic_testbench
 
 simulate:
 	vvp system.vvp

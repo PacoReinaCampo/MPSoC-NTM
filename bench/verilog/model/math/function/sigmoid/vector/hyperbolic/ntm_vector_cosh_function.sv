@@ -50,7 +50,7 @@ module ntm_vector_cosh_function(
   DATA_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -64,10 +64,10 @@ module ntm_vector_cosh_function(
   output DATA_OUT_ENABLE;
 
   // DATA
-  input [DATA_SIZE - 1:0] MODULO_IN;
-  input [DATA_SIZE - 1:0] SIZE_IN;
-  input [DATA_SIZE - 1:0] DATA_IN;
-  output [DATA_SIZE - 1:0] DATA_OUT;
+  input [DATA_SIZE-1:0] MODULO_IN;
+  input [DATA_SIZE-1:0] SIZE_IN;
+  input [DATA_SIZE-1:0] DATA_IN;
+  output [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -81,8 +81,8 @@ module ntm_vector_cosh_function(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO = ((0));
-  parameter ONE = ((1));
+  parameter ZERO = 0;
+  parameter ONE = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -92,7 +92,7 @@ module ntm_vector_cosh_function(
   reg [1:0] cosh_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE - 1:0] index_loop;
+  reg [DATA_SIZE-1:0] index_loop;
 
   // ONEPLUS
   // CONTROL
@@ -100,9 +100,9 @@ module ntm_vector_cosh_function(
   wire ready_scalar_cosh;
 
   // DATA
-  reg [DATA_SIZE - 1:0] modulo_in_scalar_cosh;
-  reg [DATA_SIZE - 1:0] data_in_scalar_cosh;
-  wire [DATA_SIZE - 1:0] data_out_scalar_cosh;
+  reg [DATA_SIZE-1:0] modulo_in_scalar_cosh;
+  reg [DATA_SIZE-1:0] data_in_scalar_cosh;
+  wire [DATA_SIZE-1:0] data_out_scalar_cosh;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -148,7 +148,7 @@ module ntm_vector_cosh_function(
         ENDER_STATE : begin
           // STEP 2
           if((ready_scalar_cosh == 1'b1)) begin
-            if((((index_loop)) == (((SIZE_IN)) - ((ONE))))) begin
+            if((index_loop == (SIZE_IN - ONE))) begin
               // Control Outputs
               READY <= 1'b1;
               // FSM Control
@@ -156,7 +156,7 @@ module ntm_vector_cosh_function(
             end
             else begin
               // Control Internal
-              index_loop <= (((index_loop)) + ((ONE)));
+              index_loop <= (index_loop + ONE);
               // FSM Control
               cosh_ctrl_fsm_int <= INPUT_STATE;
             end

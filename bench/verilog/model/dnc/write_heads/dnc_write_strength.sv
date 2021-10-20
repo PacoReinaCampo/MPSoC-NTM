@@ -46,7 +46,7 @@ module dnc_write_strength(
   BETA_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -57,8 +57,8 @@ module dnc_write_strength(
   output READY;
 
   // DATA
-  input [DATA_SIZE - 1:0] BETA_IN;
-  output [DATA_SIZE - 1:0] BETA_OUT;
+  input [DATA_SIZE-1:0] BETA_IN;
+  output [DATA_SIZE-1:0] BETA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -78,9 +78,9 @@ module dnc_write_strength(
   wire ready_scalar_oneplus;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_scalar_oneplus;
-  wire [DATA_SIZE - 1:0] data_in_scalar_oneplus;
-  wire [DATA_SIZE - 1:0] data_out_scalar_oneplus;
+  wire [DATA_SIZE-1:0] modulo_in_scalar_oneplus;
+  wire [DATA_SIZE-1:0] data_in_scalar_oneplus;
+  wire [DATA_SIZE-1:0] data_out_scalar_oneplus;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

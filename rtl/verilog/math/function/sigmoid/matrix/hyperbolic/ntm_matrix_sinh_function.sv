@@ -53,7 +53,7 @@ module ntm_matrix_sinh_function(
   DATA_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -69,11 +69,11 @@ module ntm_matrix_sinh_function(
   output DATA_OUT_J_ENABLE;
 
   // DATA
-  input [DATA_SIZE - 1:0] MODULO_IN;
-  input [DATA_SIZE - 1:0] SIZE_I_IN;
-  input [DATA_SIZE - 1:0] SIZE_J_IN;
-  input [DATA_SIZE - 1:0] DATA_IN;
-  output [DATA_SIZE - 1:0] DATA_OUT;
+  input [DATA_SIZE-1:0] MODULO_IN;
+  input [DATA_SIZE-1:0] SIZE_I_IN;
+  input [DATA_SIZE-1:0] SIZE_J_IN;
+  input [DATA_SIZE-1:0] DATA_IN;
+  output [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -87,8 +87,8 @@ module ntm_matrix_sinh_function(
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
-  parameter ZERO = ((0));
-  parameter ONE = ((1));
+  parameter ZERO = 0;
+  parameter ONE = 1;
   ///////////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////////
@@ -99,8 +99,8 @@ module ntm_matrix_sinh_function(
   reg [1:0] sinh_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE - 1:0] index_i_loop;
-  reg [DATA_SIZE - 1:0] index_j_loop;
+  reg [DATA_SIZE-1:0] index_i_loop;
+  reg [DATA_SIZE-1:0] index_j_loop;
 
   // TANH
   // CONTROL
@@ -111,10 +111,10 @@ module ntm_matrix_sinh_function(
   wire data_out_enable_vector_sinh;
 
   // DATA
-  reg [DATA_SIZE - 1:0] modulo_in_vector_sinh;
-  reg [DATA_SIZE - 1:0] size_in_vector_sinh;
-  reg [DATA_SIZE - 1:0] data_in_vector_sinh;
-  wire [DATA_SIZE - 1:0] data_out_vector_sinh;
+  reg [DATA_SIZE-1:0] modulo_in_vector_sinh;
+  reg [DATA_SIZE-1:0] size_in_vector_sinh;
+  reg [DATA_SIZE-1:0] data_in_vector_sinh;
+  wire [DATA_SIZE-1:0] data_out_vector_sinh;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -190,16 +190,16 @@ module ntm_matrix_sinh_function(
         ENDER_STATE : begin
           // STEP 3
           if((ready_vector_sinh == 1'b1)) begin
-            if((((index_i_loop)) == (((SIZE_I_IN)) - ((ONE)))) && index_j_loop == ((((SIZE_J_IN)) - ((ONE))))) begin
+            if((index_i_loop == (SIZE_I_IN - ONE)) && index_j_loop == (SIZE_J_IN - ONE)) begin
               // Control Outputs
               READY <= 1'b1;
               DATA_OUT_J_ENABLE <= 1'b1;
               // FSM Control
               sinh_ctrl_fsm_int <= STARTER_STATE;
             end
-            else if((((index_i_loop)) < (((SIZE_I_IN)) - ((ONE)))) && index_j_loop == ((((SIZE_J_IN)) - ((ONE))))) begin
+            else if((index_i_loop < (SIZE_I_IN - ONE)) && index_j_loop == (SIZE_J_IN - ONE)) begin
               // Control Internal
-              index_i_loop <= (((index_i_loop)) + ((ONE)));
+              index_i_loop <= (index_i_loop + ONE);
               index_j_loop <= ZERO;
               // Control Outputs
               DATA_OUT_I_ENABLE <= 1'b1;
@@ -207,9 +207,9 @@ module ntm_matrix_sinh_function(
               // FSM Control
               sinh_ctrl_fsm_int <= INPUT_I_STATE;
             end
-            else if((((index_i_loop)) < (((SIZE_I_IN)) - ((ONE)))) && index_j_loop < ((((SIZE_J_IN)) - ((ONE))))) begin
+            else if((index_i_loop < (SIZE_I_IN - ONE)) && index_j_loop < (SIZE_J_IN - ONE)) begin
               // Control Internal
-              index_j_loop <= (((index_j_loop)) + ((ONE)));
+              index_j_loop <= (index_j_loop + ONE);
               // Control Outputs
               DATA_OUT_J_ENABLE <= 1'b1;
               // FSM Control

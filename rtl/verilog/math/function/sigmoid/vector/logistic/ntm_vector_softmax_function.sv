@@ -53,7 +53,7 @@ module ntm_vector_softmax_function(
   DATA_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -68,11 +68,11 @@ module ntm_vector_softmax_function(
   output DATA_OUT_SCALAR_ENABLE;
 
   // DATA
-  input [DATA_SIZE - 1:0] MODULO_IN;
-  input [DATA_SIZE - 1:0] SIZE_IN;
-  input [DATA_SIZE - 1:0] LENGTH_IN;
-  input [DATA_SIZE - 1:0] DATA_IN;
-  output [DATA_SIZE - 1:0] DATA_OUT;
+  input [DATA_SIZE-1:0] MODULO_IN;
+  input [DATA_SIZE-1:0] SIZE_IN;
+  input [DATA_SIZE-1:0] LENGTH_IN;
+  input [DATA_SIZE-1:0] DATA_IN;
+  output [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -86,8 +86,8 @@ module ntm_vector_softmax_function(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO = ((0));
-  parameter ONE = ((1));
+  parameter ZERO = 0;
+  parameter ONE = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -97,8 +97,8 @@ module ntm_vector_softmax_function(
   reg [1:0] softmax_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE - 1:0] index_vector_loop;
-  reg [DATA_SIZE - 1:0] index_scalar_loop;
+  reg [DATA_SIZE-1:0] index_vector_loop;
+  reg [DATA_SIZE-1:0] index_scalar_loop;
 
   // MULTIPLICATION
   // CONTROL
@@ -108,11 +108,11 @@ module ntm_vector_softmax_function(
   wire data_out_enable_scalar_softmax;
 
   // DATA
-  reg [DATA_SIZE - 1:0] modulo_in_scalar_softmax;
-  wire [DATA_SIZE - 1:0] size_in_scalar_softmax;
-  reg [DATA_SIZE - 1:0] length_in_scalar_softmax;
-  reg [DATA_SIZE - 1:0] data_in_scalar_softmax;
-  wire [DATA_SIZE - 1:0] data_out_scalar_softmax;
+  reg [DATA_SIZE-1:0] modulo_in_scalar_softmax;
+  wire [DATA_SIZE-1:0] size_in_scalar_softmax;
+  reg [DATA_SIZE-1:0] length_in_scalar_softmax;
+  reg [DATA_SIZE-1:0] data_in_scalar_softmax;
+  wire [DATA_SIZE-1:0] data_out_scalar_softmax;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -188,16 +188,16 @@ module ntm_vector_softmax_function(
         ENDER_STATE : begin
           // STEP 3
           if((ready_scalar_softmax == 1'b1)) begin
-            if((((index_vector_loop)) == (((SIZE_IN)) - ((ONE))) && ((index_scalar_loop)) == (((LENGTH_IN)) - ((ONE))))) begin
+            if((index_vector_loop == (SIZE_IN - ONE) && index_scalar_loop == (LENGTH_IN - ONE))) begin
               // Control Outputs
               READY <= 1'b1;
               DATA_OUT_SCALAR_ENABLE <= 1'b1;
               // FSM Control
               softmax_ctrl_fsm_int <= STARTER_STATE;
             end
-            else if((((index_vector_loop)) < (((SIZE_IN)) - ((ONE))) && ((index_scalar_loop)) == (((LENGTH_IN)) - ((ONE))))) begin
+            else if((index_vector_loop < (SIZE_IN - ONE) && index_scalar_loop == (LENGTH_IN - ONE))) begin
               // Control Internal
-              index_vector_loop <= (((index_vector_loop)) + ((ONE)));
+              index_vector_loop <= (index_vector_loop + ONE);
               index_scalar_loop <= ZERO;
               // Control Outputs
               DATA_OUT_VECTOR_ENABLE <= 1'b1;
@@ -205,9 +205,9 @@ module ntm_vector_softmax_function(
               // FSM Control
               softmax_ctrl_fsm_int <= INPUT_VECTOR_STATE;
             end
-            else if((((index_vector_loop)) < (((SIZE_IN)) - ((ONE))) && ((index_scalar_loop)) < (((LENGTH_IN)) - ((ONE))))) begin
+            else if((index_vector_loop < (SIZE_IN - ONE) && index_scalar_loop < (LENGTH_IN - ONE))) begin
               // Control Internal
-              index_scalar_loop <= (((index_scalar_loop)) + ((ONE)));
+              index_scalar_loop <= (index_scalar_loop + ONE);
               // Control Outputs
               DATA_OUT_SCALAR_ENABLE <= 1'b1;
               // FSM Control

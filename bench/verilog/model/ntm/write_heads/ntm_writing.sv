@@ -53,7 +53,7 @@ module ntm_writing(
   M_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -68,12 +68,12 @@ module ntm_writing(
   input M_OUT_ENABLE;
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_N_IN;
-  input [DATA_SIZE - 1:0] SIZE_W_IN;
-  input [DATA_SIZE - 1:0] M_IN;
-  input [DATA_SIZE - 1:0] A_IN;
-  input [DATA_SIZE - 1:0] W_IN;
-  input [DATA_SIZE - 1:0] M_OUT;
+  input [DATA_SIZE-1:0] SIZE_N_IN;
+  input [DATA_SIZE-1:0] SIZE_W_IN;
+  input [DATA_SIZE-1:0] M_IN;
+  input [DATA_SIZE-1:0] A_IN;
+  input [DATA_SIZE-1:0] W_IN;
+  input [DATA_SIZE-1:0] M_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -97,11 +97,11 @@ module ntm_writing(
   wire data_out_enable_vector_adder;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_adder;
-  wire [DATA_SIZE - 1:0] size_in_vector_adder;
-  wire [DATA_SIZE - 1:0] data_a_in_vector_adder;
-  wire [DATA_SIZE - 1:0] data_b_in_vector_adder;
-  wire [DATA_SIZE - 1:0] data_out_vector_adder;
+  wire [DATA_SIZE-1:0] modulo_in_vector_adder;
+  wire [DATA_SIZE-1:0] size_in_vector_adder;
+  wire [DATA_SIZE-1:0] data_a_in_vector_adder;
+  wire [DATA_SIZE-1:0] data_b_in_vector_adder;
+  wire [DATA_SIZE-1:0] data_out_vector_adder;
 
   // VECTOR MULTIPLIER
   // CONTROL
@@ -112,11 +112,11 @@ module ntm_writing(
   wire data_out_enable_vector_multiplier;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] size_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] data_a_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] data_b_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] data_out_vector_multiplier;
+  wire [DATA_SIZE-1:0] modulo_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] size_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_out_vector_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

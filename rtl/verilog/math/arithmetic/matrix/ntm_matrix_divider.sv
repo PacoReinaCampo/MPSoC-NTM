@@ -56,7 +56,7 @@ module ntm_matrix_divider(
   DATA_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -74,12 +74,12 @@ module ntm_matrix_divider(
   output DATA_OUT_J_ENABLE;
 
   // DATA
-  input [DATA_SIZE - 1:0] MODULO_IN;
-  input [DATA_SIZE - 1:0] SIZE_I_IN;
-  input [DATA_SIZE - 1:0] SIZE_J_IN;
-  input [DATA_SIZE - 1:0] DATA_A_IN;
-  input [DATA_SIZE - 1:0] DATA_B_IN;
-  output [DATA_SIZE - 1:0] DATA_OUT;
+  input [DATA_SIZE-1:0] MODULO_IN;
+  input [DATA_SIZE-1:0] SIZE_I_IN;
+  input [DATA_SIZE-1:0] SIZE_J_IN;
+  input [DATA_SIZE-1:0] DATA_A_IN;
+  input [DATA_SIZE-1:0] DATA_B_IN;
+  output [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -92,8 +92,8 @@ module ntm_matrix_divider(
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
-  parameter ZERO = ((0));
-  parameter ONE = ((1));
+  parameter ZERO = 0;
+  parameter ONE = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -103,8 +103,8 @@ module ntm_matrix_divider(
   reg [1:0] divider_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE - 1:0] index_i_loop;
-  reg [DATA_SIZE - 1:0] index_j_loop;
+  reg [DATA_SIZE-1:0] index_i_loop;
+  reg [DATA_SIZE-1:0] index_j_loop;
 
   reg data_a_in_i_divider_int;
   reg data_a_in_j_divider_int;
@@ -120,11 +120,11 @@ module ntm_matrix_divider(
   wire data_out_enable_vector_divider;
 
   // DATA
-  reg [DATA_SIZE - 1:0] modulo_in_vector_divider;
-  reg [DATA_SIZE - 1:0] size_in_vector_divider;
-  reg [DATA_SIZE - 1:0] data_a_in_vector_divider;
-  reg [DATA_SIZE - 1:0] data_b_in_vector_divider;
-  wire [DATA_SIZE - 1:0] data_out_vector_divider;
+  reg [DATA_SIZE-1:0] modulo_in_vector_divider;
+  reg [DATA_SIZE-1:0] size_in_vector_divider;
+  reg [DATA_SIZE-1:0] data_a_in_vector_divider;
+  reg [DATA_SIZE-1:0] data_b_in_vector_divider;
+  wire [DATA_SIZE-1:0] data_out_vector_divider;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -236,16 +236,16 @@ module ntm_matrix_divider(
         ENDER_STATE : begin
           // STEP 3
           if((ready_vector_divider == 1'b1)) begin
-            if(((((index_i_loop)) == (((SIZE_I_IN)) - ((ONE)))) && (((index_j_loop)) == ((((SIZE_J_IN)) - ((ONE))))))) begin
+            if(((index_i_loop == (SIZE_I_IN - ONE)) && (index_j_loop == (SIZE_J_IN - ONE)))) begin
               // Control Outputs
               READY <= 1'b1;
               DATA_OUT_J_ENABLE <= 1'b1;
               // FSM Control
               divider_ctrl_fsm_int <= STARTER_STATE;
             end
-            else if(((((index_i_loop)) < (((SIZE_I_IN)) - ((ONE)))) && (((index_j_loop)) == ((((SIZE_J_IN)) - ((ONE))))))) begin
+            else if(((index_i_loop < (SIZE_I_IN - ONE)) && (index_j_loop == (SIZE_J_IN - ONE)))) begin
               // Control Internal
-              index_i_loop <= (((index_i_loop)) + ((ONE)));
+              index_i_loop <= (index_i_loop + ONE);
               index_j_loop <= ZERO;
               // Control Outputs
               DATA_OUT_I_ENABLE <= 1'b1;
@@ -253,9 +253,9 @@ module ntm_matrix_divider(
               // FSM Control
               divider_ctrl_fsm_int <= INPUT_I_STATE;
             end
-            else if(((((index_i_loop)) < (((SIZE_I_IN)) - ((ONE)))) && (((index_j_loop)) < ((((SIZE_J_IN)) - ((ONE))))))) begin
+            else if(((index_i_loop < (SIZE_I_IN - ONE)) && (index_j_loop < (SIZE_J_IN - ONE)))) begin
               // Control Internal
-              index_j_loop <= (((index_j_loop)) + ((ONE)));
+              index_j_loop <= (index_j_loop + ONE);
               // Control Outputs
               DATA_OUT_J_ENABLE <= 1'b1;
               // FSM Control

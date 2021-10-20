@@ -49,7 +49,7 @@ module dnc_free_gates(
   F_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -63,8 +63,8 @@ module dnc_free_gates(
   output F_OUT_ENABLE;  // for i in 0 to R-1
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_R_IN;
-  input [DATA_SIZE - 1:0] F_IN;
+  input [DATA_SIZE-1:0] SIZE_R_IN;
+  input [DATA_SIZE-1:0] F_IN;
   output F_OUT;
 
   ///////////////////////////////////////////////////////////////////////
@@ -90,9 +90,9 @@ module dnc_free_gates(
   wire data_out_enable_vector_logistic;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_logistic;
-  wire [DATA_SIZE - 1:0] size_in_vector_logistic;
-  wire [DATA_SIZE - 1:0] data_in_vector_logistic;
+  wire [DATA_SIZE-1:0] modulo_in_vector_logistic;
+  wire [DATA_SIZE-1:0] size_in_vector_logistic;
+  wire [DATA_SIZE-1:0] data_in_vector_logistic;
   wire data_out_vector_logistic;
 
   ///////////////////////////////////////////////////////////////////////

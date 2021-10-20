@@ -51,7 +51,7 @@ module ntm_reading(
   R_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -65,11 +65,11 @@ module ntm_reading(
   output R_OUT_ENABLE;
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_N_IN;
-  input [DATA_SIZE - 1:0] SIZE_W_IN;
-  input [DATA_SIZE - 1:0] W_IN;
-  input [DATA_SIZE - 1:0] M_IN;
-  output [DATA_SIZE - 1:0] R_OUT;
+  input [DATA_SIZE-1:0] SIZE_N_IN;
+  input [DATA_SIZE-1:0] SIZE_W_IN;
+  input [DATA_SIZE-1:0] W_IN;
+  input [DATA_SIZE-1:0] M_IN;
+  output [DATA_SIZE-1:0] R_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -93,11 +93,11 @@ module ntm_reading(
   wire data_out_scalar_enable_vector_summation;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_summation;
-  wire [DATA_SIZE - 1:0] size_in_vector_summation;
-  wire [DATA_SIZE - 1:0] length_in_vector_summation;
-  wire [DATA_SIZE - 1:0] data_in_vector_summation;
-  wire [DATA_SIZE - 1:0] data_out_vector_summation;
+  wire [DATA_SIZE-1:0] modulo_in_vector_summation;
+  wire [DATA_SIZE-1:0] size_in_vector_summation;
+  wire [DATA_SIZE-1:0] length_in_vector_summation;
+  wire [DATA_SIZE-1:0] data_in_vector_summation;
+  wire [DATA_SIZE-1:0] data_out_vector_summation;
 
   // VECTOR MULTIPLIER
   // CONTROL
@@ -108,11 +108,11 @@ module ntm_reading(
   wire data_out_enable_vector_multiplier;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] size_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] data_a_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] data_b_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] data_out_vector_multiplier;
+  wire [DATA_SIZE-1:0] modulo_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] size_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_out_vector_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

@@ -58,7 +58,7 @@ module dnc_memory_matrix(
   M_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -77,13 +77,13 @@ module dnc_memory_matrix(
   output M_OUT_K_ENABLE;  // for k in 0 to W-1
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_N_IN;
-  input [DATA_SIZE - 1:0] SIZE_W_IN;
-  input [DATA_SIZE - 1:0] M_IN;
-  input [DATA_SIZE - 1:0] W_IN;
-  input [DATA_SIZE - 1:0] V_IN;
+  input [DATA_SIZE-1:0] SIZE_N_IN;
+  input [DATA_SIZE-1:0] SIZE_W_IN;
+  input [DATA_SIZE-1:0] M_IN;
+  input [DATA_SIZE-1:0] W_IN;
+  input [DATA_SIZE-1:0] V_IN;
   input E_IN;
-  output [DATA_SIZE - 1:0] M_OUT;
+  output [DATA_SIZE-1:0] M_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -93,10 +93,10 @@ module dnc_memory_matrix(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO = ((0));
-  parameter ONE = ((1));
-  parameter TWO = ((2));
-  parameter THREE = ((3));
+  parameter ZERO = 0;
+  parameter ONE = 1;
+  parameter TWO = 2;
+  parameter THREE = 3;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -113,9 +113,9 @@ module dnc_memory_matrix(
   wire data_out_j_enable_matrix_transpose;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_matrix_transpose;
-  wire [DATA_SIZE - 1:0] data_in_matrix_transpose;
-  wire [DATA_SIZE - 1:0] data_out_matrix_transpose;
+  wire [DATA_SIZE-1:0] modulo_in_matrix_transpose;
+  wire [DATA_SIZE-1:0] data_in_matrix_transpose;
+  wire [DATA_SIZE-1:0] data_out_matrix_transpose;
 
   // MATRIX PRODUCT
   // CONTROL
@@ -130,14 +130,14 @@ module dnc_memory_matrix(
   wire data_out_j_enable_matrix_product;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_a_i_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_a_j_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_b_i_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_b_j_in_matrix_product;
-  wire [DATA_SIZE - 1:0] data_a_in_matrix_product;
-  wire [DATA_SIZE - 1:0] data_b_in_matrix_product;
-  wire [DATA_SIZE - 1:0] data_out_matrix_product;
+  wire [DATA_SIZE-1:0] modulo_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_a_i_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_a_j_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_b_i_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_b_j_in_matrix_product;
+  wire [DATA_SIZE-1:0] data_a_in_matrix_product;
+  wire [DATA_SIZE-1:0] data_b_in_matrix_product;
+  wire [DATA_SIZE-1:0] data_out_matrix_product;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

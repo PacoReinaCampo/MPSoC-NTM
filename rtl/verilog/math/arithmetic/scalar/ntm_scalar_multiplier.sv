@@ -48,7 +48,7 @@ module ntm_scalar_multiplier(
   DATA_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -59,10 +59,10 @@ module ntm_scalar_multiplier(
   output READY;
 
   // DATA
-  input [DATA_SIZE - 1:0] MODULO_IN;
-  input [DATA_SIZE - 1:0] DATA_A_IN;
-  input [DATA_SIZE - 1:0] DATA_B_IN;
-  output [DATA_SIZE - 1:0] DATA_OUT;
+  input [DATA_SIZE-1:0] MODULO_IN;
+  input [DATA_SIZE-1:0] DATA_A_IN;
+  input [DATA_SIZE-1:0] DATA_B_IN;
+  output [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -78,8 +78,8 @@ module ntm_scalar_multiplier(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO = ((0));
-  parameter ONE = ((1));
+  parameter ZERO = 0;
+  parameter ONE = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -105,9 +105,9 @@ module ntm_scalar_multiplier(
       // Control Outputs
       READY <= 1'b0;
       // Assignation
-      u_int <= {(((DATA_SIZE))-((0))+1){1'b0}};
-      v_int <= {(((DATA_SIZE))-((0))+1){1'b0}};
-      multiplier_int <= {(((DATA_SIZE))-((0))+1){1'b0}};
+      u_int <= {(((DATA_SIZE))-0+1){1'b0}};
+      v_int <= {(((DATA_SIZE))-0+1){1'b0}};
+      multiplier_int <= {(((DATA_SIZE))-0+1){1'b0}};
     end else begin
       case(multiplier_ctrl_fsm_int)
         STARTER_STATE : begin
@@ -122,7 +122,7 @@ module ntm_scalar_multiplier(
               multiplier_int <= {1'b0,DATA_B_IN};
             end
             else begin
-              multiplier_int <= {(((DATA_SIZE))-((0))+1){1'b0}};
+              multiplier_int <= {(((DATA_SIZE))-0+1){1'b0}};
             end
             // FSM Control
             multiplier_ctrl_fsm_int <= SET_DATA_B_STATE;
@@ -134,7 +134,7 @@ module ntm_scalar_multiplier(
           u_int <= u_int;
           v_int <= v_int;
           // FSM Control
-          if((v_int < {1'b0,(MODULO_IN)})) begin
+          if((v_int < {1'b0,MODULO_IN})) begin
             multiplier_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
           end
           else begin
@@ -143,29 +143,29 @@ module ntm_scalar_multiplier(
         end
         REDUCE_DATA_B_STATE : begin
           // STEP 2
-          if((((v_int)) < {1'b0,(MODULO_IN)})) begin
+          if((v_int < {1'b0,MODULO_IN})) begin
             // FSM Control
             multiplier_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
           end
           else begin
             // Assignation
-            v_int <= (((v_int)) - ({1'b0,(MODULO_IN)}));
+            v_int <= (v_int - {1'b0,MODULO_IN});
           end
         end
         SET_PRODUCT_OUT_STATE : begin
           // STEP 3
           // Assignation
           if((u_int[0] == 1'b1)) begin
-            if(((((multiplier_int)) + ((v_int))) < {1'b0,(MODULO_IN)})) begin
-              multiplier_int <= (((multiplier_int)) + ((v_int)));
+            if(((multiplier_int + v_int) < {1'b0,MODULO_IN})) begin
+              multiplier_int <= (multiplier_int + v_int);
             end
             else begin
-              multiplier_int <= (((multiplier_int)) + ((v_int)) - ({1'b0,(MODULO_IN)}));
+              multiplier_int <= (multiplier_int + v_int - {1'b0,MODULO_IN});
             end
           end
           else begin
-            if((((multiplier_int)) >= {1'b0,(MODULO_IN)})) begin
-              multiplier_int <= (((multiplier_int)) - ((MODULO_IN)));
+            if((multiplier_int >= {1'b0,MODULO_IN})) begin
+              multiplier_int <= (multiplier_int - MODULO_IN);
             end
           end
           // FSM Control
@@ -173,9 +173,9 @@ module ntm_scalar_multiplier(
         end
         ENDER_STATE : begin
           // STEP 4
-          if((((u_int)) == {1'b0,(ONE)})) begin
+          if((u_int == {1'b0,ONE})) begin
             // Data Outputs
-            DATA_OUT <= multiplier_int[DATA_SIZE - 1:0];
+            DATA_OUT <= multiplier_int[DATA_SIZE-1:0];
             // Control Outputs
             READY <= 1'b1;
             // FSM Control

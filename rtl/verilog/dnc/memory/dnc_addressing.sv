@@ -65,7 +65,7 @@ module dnc_addressing(
   R_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -85,19 +85,19 @@ module dnc_addressing(
   input V_WRITE_IN_K_ENABLE;  // for k in 0 to W-1
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_R_IN;
-  input [DATA_SIZE - 1:0] SIZE_W_IN;
-  input [DATA_SIZE - 1:0] K_READ_IN;
-  input [DATA_SIZE - 1:0] BETA_READ_IN;
-  input [DATA_SIZE - 1:0] F_READ_IN;
-  input [DATA_SIZE - 1:0] PI_READ_IN;
-  input [DATA_SIZE - 1:0] K_WRITE_IN;
-  input [DATA_SIZE - 1:0] BETA_WRITE_IN;
-  input [DATA_SIZE - 1:0] E_WRITE_IN;
-  input [DATA_SIZE - 1:0] V_WRITE_IN;
-  input [DATA_SIZE - 1:0] GA_WRITE_IN;
-  input [DATA_SIZE - 1:0] GW_WRITE_IN;
-  output [DATA_SIZE - 1:0] R_OUT;
+  input [DATA_SIZE-1:0] SIZE_R_IN;
+  input [DATA_SIZE-1:0] SIZE_W_IN;
+  input [DATA_SIZE-1:0] K_READ_IN;
+  input [DATA_SIZE-1:0] BETA_READ_IN;
+  input [DATA_SIZE-1:0] F_READ_IN;
+  input [DATA_SIZE-1:0] PI_READ_IN;
+  input [DATA_SIZE-1:0] K_WRITE_IN;
+  input [DATA_SIZE-1:0] BETA_WRITE_IN;
+  input [DATA_SIZE-1:0] E_WRITE_IN;
+  input [DATA_SIZE-1:0] V_WRITE_IN;
+  input [DATA_SIZE-1:0] GA_WRITE_IN;
+  input [DATA_SIZE-1:0] GW_WRITE_IN;
+  output [DATA_SIZE-1:0] R_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -112,10 +112,10 @@ module dnc_addressing(
   wire a_out_enable_allocation_weighting;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_n_in_allocation_weighting;
-  wire [DATA_SIZE - 1:0] phi_in_allocation_weighting;
-  wire [DATA_SIZE - 1:0] u_in_allocation_weighting;
-  wire [DATA_SIZE - 1:0] a_out_allocation_weighting;
+  wire [DATA_SIZE-1:0] size_n_in_allocation_weighting;
+  wire [DATA_SIZE-1:0] phi_in_allocation_weighting;
+  wire [DATA_SIZE-1:0] u_in_allocation_weighting;
+  wire [DATA_SIZE-1:0] a_out_allocation_weighting;
 
   // BACKWARD WEIGHTING
   // CONTROL
@@ -129,11 +129,11 @@ module dnc_addressing(
   wire b_out_j_enable_backward_weighting;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_r_in_backward_weighting;
-  wire [DATA_SIZE - 1:0] size_n_in_backward_weighting;
-  wire [DATA_SIZE - 1:0] l_in_backward_weighting;
-  wire [DATA_SIZE - 1:0] w_in_backward_weighting;
-  wire [DATA_SIZE - 1:0] b_out_backward_weighting;
+  wire [DATA_SIZE-1:0] size_r_in_backward_weighting;
+  wire [DATA_SIZE-1:0] size_n_in_backward_weighting;
+  wire [DATA_SIZE-1:0] l_in_backward_weighting;
+  wire [DATA_SIZE-1:0] w_in_backward_weighting;
+  wire [DATA_SIZE-1:0] b_out_backward_weighting;
 
   // FORWARD WEIGHTING
   // CONTROL
@@ -147,11 +147,11 @@ module dnc_addressing(
   wire f_out_j_enable_forward_weighting;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_r_in_forward_weighting;
-  wire [DATA_SIZE - 1:0] size_n_in_forward_weighting;
-  wire [DATA_SIZE - 1:0] l_in_forward_weighting;
-  wire [DATA_SIZE - 1:0] w_in_forward_weighting;
-  wire [DATA_SIZE - 1:0] f_out_forward_weighting;
+  wire [DATA_SIZE-1:0] size_r_in_forward_weighting;
+  wire [DATA_SIZE-1:0] size_n_in_forward_weighting;
+  wire [DATA_SIZE-1:0] l_in_forward_weighting;
+  wire [DATA_SIZE-1:0] w_in_forward_weighting;
+  wire [DATA_SIZE-1:0] f_out_forward_weighting;
 
   // MEMORY MATRIX
   // CONTROL
@@ -166,13 +166,13 @@ module dnc_addressing(
   wire m_out_k_enable_memory_matrix;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_n_in_memory_matrix;
-  wire [DATA_SIZE - 1:0] size_w_in_memory_matrix;
-  wire [DATA_SIZE - 1:0] m_in_memory_matrix;
-  wire [DATA_SIZE - 1:0] w_in_memory_matrix;
-  wire [DATA_SIZE - 1:0] v_in_memory_matrix;
+  wire [DATA_SIZE-1:0] size_n_in_memory_matrix;
+  wire [DATA_SIZE-1:0] size_w_in_memory_matrix;
+  wire [DATA_SIZE-1:0] m_in_memory_matrix;
+  wire [DATA_SIZE-1:0] w_in_memory_matrix;
+  wire [DATA_SIZE-1:0] v_in_memory_matrix;
   wire e_in_memory_matrix;
-  wire [DATA_SIZE - 1:0] m_out_memory_matrix;
+  wire [DATA_SIZE-1:0] m_out_memory_matrix;
 
   // MEMORY RETENTION VECTOR
   // CONTROL
@@ -184,11 +184,11 @@ module dnc_addressing(
   wire psi_out_enable_memory_retention_vector;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_r_in_memory_retention_vector;
-  wire [DATA_SIZE - 1:0] size_n_in_memory_retention_vector;
+  wire [DATA_SIZE-1:0] size_r_in_memory_retention_vector;
+  wire [DATA_SIZE-1:0] size_n_in_memory_retention_vector;
   wire f_in_memory_retention_vector;
-  wire [DATA_SIZE - 1:0] w_in_memory_retention_vector;
-  wire [DATA_SIZE - 1:0] psi_out_memory_retention_vector;
+  wire [DATA_SIZE-1:0] w_in_memory_retention_vector;
+  wire [DATA_SIZE-1:0] psi_out_memory_retention_vector;
 
   // PRECEDENCE WEIGHTING
   // CONTROL
@@ -199,10 +199,10 @@ module dnc_addressing(
   wire p_out_enable_precedence_weighting;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_n_in_precedence_weighting;
-  wire [DATA_SIZE - 1:0] w_in_precedence_weighting;
-  wire [DATA_SIZE - 1:0] p_in_precedence_weighting;
-  wire [DATA_SIZE - 1:0] p_out_precedence_weighting;
+  wire [DATA_SIZE-1:0] size_n_in_precedence_weighting;
+  wire [DATA_SIZE-1:0] w_in_precedence_weighting;
+  wire [DATA_SIZE-1:0] p_in_precedence_weighting;
+  wire [DATA_SIZE-1:0] p_out_precedence_weighting;
 
   // READ CONTENT WEIGHTING
   // CONTROL
@@ -214,12 +214,12 @@ module dnc_addressing(
   wire c_out_enable_read_content_weighting;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_n_in_read_content_weighting;
-  wire [DATA_SIZE - 1:0] size_w_in_read_content_weighting;
-  wire [DATA_SIZE - 1:0] k_in_read_content_weighting;
-  wire [DATA_SIZE - 1:0] m_in_read_content_weighting;
-  wire [DATA_SIZE - 1:0] beta_in_read_content_weighting;
-  wire [DATA_SIZE - 1:0] c_out_read_content_weighting;
+  wire [DATA_SIZE-1:0] size_n_in_read_content_weighting;
+  wire [DATA_SIZE-1:0] size_w_in_read_content_weighting;
+  wire [DATA_SIZE-1:0] k_in_read_content_weighting;
+  wire [DATA_SIZE-1:0] m_in_read_content_weighting;
+  wire [DATA_SIZE-1:0] beta_in_read_content_weighting;
+  wire [DATA_SIZE-1:0] c_out_read_content_weighting;
 
   // READ VECTORS
   // CONTROL
@@ -233,12 +233,12 @@ module dnc_addressing(
   wire r_out_k_enable_read_vectors;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_r_in_read_vectors;
-  wire [DATA_SIZE - 1:0] size_n_in_read_vectors;
-  wire [DATA_SIZE - 1:0] size_w_in_read_vectors;
-  wire [DATA_SIZE - 1:0] m_in_read_vectors;
-  wire [DATA_SIZE - 1:0] w_in_read_vectors;
-  wire [DATA_SIZE - 1:0] r_out_read_vectors;
+  wire [DATA_SIZE-1:0] size_r_in_read_vectors;
+  wire [DATA_SIZE-1:0] size_n_in_read_vectors;
+  wire [DATA_SIZE-1:0] size_w_in_read_vectors;
+  wire [DATA_SIZE-1:0] m_in_read_vectors;
+  wire [DATA_SIZE-1:0] w_in_read_vectors;
+  wire [DATA_SIZE-1:0] r_out_read_vectors;
 
   // READ WEIGHTING
   // CONTROL
@@ -256,13 +256,13 @@ module dnc_addressing(
   wire w_out_j_enable_read_weighting;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_r_in_read_weighting;
-  wire [DATA_SIZE - 1:0] size_n_in_read_weighting;
-  wire [DATA_SIZE - 1:0] pi_in_read_weighting;
-  wire [DATA_SIZE - 1:0] b_in_read_weighting;
-  wire [DATA_SIZE - 1:0] c_in_read_weighting;
+  wire [DATA_SIZE-1:0] size_r_in_read_weighting;
+  wire [DATA_SIZE-1:0] size_n_in_read_weighting;
+  wire [DATA_SIZE-1:0] pi_in_read_weighting;
+  wire [DATA_SIZE-1:0] b_in_read_weighting;
+  wire [DATA_SIZE-1:0] c_in_read_weighting;
   wire f_in_read_weighting;
-  wire [DATA_SIZE - 1:0] w_out_read_weighting;
+  wire [DATA_SIZE-1:0] w_out_read_weighting;
 
   // SORT VECTOR
   // CONTROL
@@ -272,9 +272,9 @@ module dnc_addressing(
   wire phi_out_enable_sort_vector;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_n_in_sort_vector;
-  wire [DATA_SIZE - 1:0] u_in_sort_vector;
-  wire [DATA_SIZE - 1:0] phi_out_sort_vector;
+  wire [DATA_SIZE-1:0] size_n_in_sort_vector;
+  wire [DATA_SIZE-1:0] u_in_sort_vector;
+  wire [DATA_SIZE-1:0] phi_out_sort_vector;
 
   // TEMPORAL LINK MATRIX
   // CONTROL
@@ -288,11 +288,11 @@ module dnc_addressing(
   wire l_out_j_enable_temporal_link_matrix;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_n_in_temporal_link_matrix;
-  wire [DATA_SIZE - 1:0] l_in_temporal_link_matrix;
-  wire [DATA_SIZE - 1:0] w_in_temporal_link_matrix;
-  wire [DATA_SIZE - 1:0] p_in_temporal_link_matrix;
-  wire [DATA_SIZE - 1:0] l_out_temporal_link_matrix;
+  wire [DATA_SIZE-1:0] size_n_in_temporal_link_matrix;
+  wire [DATA_SIZE-1:0] l_in_temporal_link_matrix;
+  wire [DATA_SIZE-1:0] w_in_temporal_link_matrix;
+  wire [DATA_SIZE-1:0] p_in_temporal_link_matrix;
+  wire [DATA_SIZE-1:0] l_out_temporal_link_matrix;
 
   // USAGE VECTOR
   // CONTROL
@@ -304,11 +304,11 @@ module dnc_addressing(
   wire u_out_enable_usage_vector;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_n_in_usage_vector;
-  wire [DATA_SIZE - 1:0] u_in_usage_vector;
-  wire [DATA_SIZE - 1:0] w_in_usage_vector;
-  wire [DATA_SIZE - 1:0] psi_in_usage_vector;
-  wire [DATA_SIZE - 1:0] u_out_usage_vector;
+  wire [DATA_SIZE-1:0] size_n_in_usage_vector;
+  wire [DATA_SIZE-1:0] u_in_usage_vector;
+  wire [DATA_SIZE-1:0] w_in_usage_vector;
+  wire [DATA_SIZE-1:0] psi_in_usage_vector;
+  wire [DATA_SIZE-1:0] u_out_usage_vector;
 
   // WRITE CONTENT WEIGHTING
   // CONTROL
@@ -320,12 +320,12 @@ module dnc_addressing(
   wire c_out_enable_write_content_weighting;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_n_in_write_content_weighting;
-  wire [DATA_SIZE - 1:0] size_w_in_write_content_weighting;
-  wire [DATA_SIZE - 1:0] k_in_write_content_weighting;
-  wire [DATA_SIZE - 1:0] m_in_write_content_weighting;
-  wire [DATA_SIZE - 1:0] beta_in_write_content_weighting;
-  wire [DATA_SIZE - 1:0] c_out_content_weighting;
+  wire [DATA_SIZE-1:0] size_n_in_write_content_weighting;
+  wire [DATA_SIZE-1:0] size_w_in_write_content_weighting;
+  wire [DATA_SIZE-1:0] k_in_write_content_weighting;
+  wire [DATA_SIZE-1:0] m_in_write_content_weighting;
+  wire [DATA_SIZE-1:0] beta_in_write_content_weighting;
+  wire [DATA_SIZE-1:0] c_out_content_weighting;
 
   // WRITE WEIGHTING
   // CONTROL
@@ -336,12 +336,12 @@ module dnc_addressing(
   wire w_out_enable_write_weighting;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_n_in_write_weighting;
-  wire [DATA_SIZE - 1:0] a_in_write_weighting;
-  wire [DATA_SIZE - 1:0] c_in_write_weighting;
+  wire [DATA_SIZE-1:0] size_n_in_write_weighting;
+  wire [DATA_SIZE-1:0] a_in_write_weighting;
+  wire [DATA_SIZE-1:0] c_in_write_weighting;
   wire ga_in_write_weighting;
   wire gw_in_write_weighting;
-  wire [DATA_SIZE - 1:0] w_out_write_weighting;
+  wire [DATA_SIZE-1:0] w_out_write_weighting;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

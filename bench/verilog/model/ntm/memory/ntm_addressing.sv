@@ -60,7 +60,7 @@ module ntm_addressing(
   W_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -78,16 +78,16 @@ module ntm_addressing(
   output W_OUT_ENABLE;  // for j in 0 to N-1
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_N_IN;
-  input [DATA_SIZE - 1:0] SIZE_W_IN;
-  input [DATA_SIZE - 1:0] K_IN;
-  input [DATA_SIZE - 1:0] BETA_IN;
-  input [DATA_SIZE - 1:0] G_IN;
-  input [DATA_SIZE - 1:0] S_IN;
-  input [DATA_SIZE - 1:0] GAMMA_IN;
-  input [DATA_SIZE - 1:0] M_IN;
-  input [DATA_SIZE - 1:0] W_IN;
-  output [DATA_SIZE - 1:0] W_OUT;
+  input [DATA_SIZE-1:0] SIZE_N_IN;
+  input [DATA_SIZE-1:0] SIZE_W_IN;
+  input [DATA_SIZE-1:0] K_IN;
+  input [DATA_SIZE-1:0] BETA_IN;
+  input [DATA_SIZE-1:0] G_IN;
+  input [DATA_SIZE-1:0] S_IN;
+  input [DATA_SIZE-1:0] GAMMA_IN;
+  input [DATA_SIZE-1:0] M_IN;
+  input [DATA_SIZE-1:0] W_IN;
+  output [DATA_SIZE-1:0] W_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -112,13 +112,13 @@ module ntm_addressing(
   wire c_out_enable_vector_content_based_addressing;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_i_in_vector_content_based_addressing;
-  wire [DATA_SIZE - 1:0] size_j_in_vector_content_based_addressing;
-  wire [DATA_SIZE - 1:0] k_in_vector_content_based_addressing;
-  wire [DATA_SIZE - 1:0] beta_in_vector_content_based_addressing;
-  wire [DATA_SIZE - 1:0] m_in_vector_content_based_addressing;
-  wire [DATA_SIZE - 1:0] modulo_in_vector_content_based_addressing;
-  wire [DATA_SIZE - 1:0] c_out_vector_content_based_addressing;
+  wire [DATA_SIZE-1:0] size_i_in_vector_content_based_addressing;
+  wire [DATA_SIZE-1:0] size_j_in_vector_content_based_addressing;
+  wire [DATA_SIZE-1:0] k_in_vector_content_based_addressing;
+  wire [DATA_SIZE-1:0] beta_in_vector_content_based_addressing;
+  wire [DATA_SIZE-1:0] m_in_vector_content_based_addressing;
+  wire [DATA_SIZE-1:0] modulo_in_vector_content_based_addressing;
+  wire [DATA_SIZE-1:0] c_out_vector_content_based_addressing;
 
   // SCALAR ADDER
   // CONTROL
@@ -128,10 +128,10 @@ module ntm_addressing(
   wire operation_scalar_adder;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_scalar_adder;
-  wire [DATA_SIZE - 1:0] data_a_in_scalar_adder;
-  wire [DATA_SIZE - 1:0] data_b_in_scalar_adder;
-  wire [DATA_SIZE - 1:0] data_out_scalar_adder;
+  wire [DATA_SIZE-1:0] modulo_in_scalar_adder;
+  wire [DATA_SIZE-1:0] data_a_in_scalar_adder;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_adder;
+  wire [DATA_SIZE-1:0] data_out_scalar_adder;
 
   // VECTOR EXPONENTIATOR
   // CONTROL
@@ -143,11 +143,11 @@ module ntm_addressing(
   wire data_out_enable_vector_exponentiator;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_exponentiator;
-  wire [DATA_SIZE - 1:0] size_in_vector_exponentiator;
-  wire [DATA_SIZE - 1:0] data_a_in_vector_exponentiator;
-  wire [DATA_SIZE - 1:0] data_b_in_vector_exponentiator;
-  wire [DATA_SIZE - 1:0] data_out_vector_exponentiator;
+  wire [DATA_SIZE-1:0] modulo_in_vector_exponentiator;
+  wire [DATA_SIZE-1:0] size_in_vector_exponentiator;
+  wire [DATA_SIZE-1:0] data_a_in_vector_exponentiator;
+  wire [DATA_SIZE-1:0] data_b_in_vector_exponentiator;
+  wire [DATA_SIZE-1:0] data_out_vector_exponentiator;
 
   // VECTOR MULTIPLIER
   // CONTROL
@@ -159,11 +159,11 @@ module ntm_addressing(
   wire data_out_enable_vector_multiplier;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] size_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] data_a_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] data_b_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] data_out_vector_multiplier;
+  wire [DATA_SIZE-1:0] modulo_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] size_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_out_vector_multiplier;
 
   // VECTOR CONVOLUTION
   // CONTROL
@@ -178,12 +178,12 @@ module ntm_addressing(
   wire data_out_scalar_enable_vector_convolution;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_convolution;
-  wire [DATA_SIZE - 1:0] size_in_vector_convolution;
-  wire [DATA_SIZE - 1:0] length_in_vector_convolution;
-  wire [DATA_SIZE - 1:0] data_a_in_vector_convolution;
-  wire [DATA_SIZE - 1:0] data_b_in_vector_convolution;
-  wire [DATA_SIZE - 1:0] data_out_vector_convolution;
+  wire [DATA_SIZE-1:0] modulo_in_vector_convolution;
+  wire [DATA_SIZE-1:0] size_in_vector_convolution;
+  wire [DATA_SIZE-1:0] length_in_vector_convolution;
+  wire [DATA_SIZE-1:0] data_a_in_vector_convolution;
+  wire [DATA_SIZE-1:0] data_b_in_vector_convolution;
+  wire [DATA_SIZE-1:0] data_out_vector_convolution;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

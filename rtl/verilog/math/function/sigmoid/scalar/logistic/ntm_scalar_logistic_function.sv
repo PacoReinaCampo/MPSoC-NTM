@@ -47,7 +47,8 @@ module ntm_scalar_logistic_function(
   DATA_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
+
   // GLOBAL
   input CLK;
   input RST;
@@ -57,8 +58,8 @@ module ntm_scalar_logistic_function(
   output READY;
 
   // DATA
-  input [DATA_SIZE - 1:0] MODULO_IN;
-  input [DATA_SIZE - 1:0] DATA_IN;
+  input [DATA_SIZE-1:0] MODULO_IN;
+  input [DATA_SIZE-1:0] DATA_IN;
   output DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
@@ -81,10 +82,10 @@ module ntm_scalar_logistic_function(
   wire operation_scalar_adder;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_scalar_adder;
-  wire [DATA_SIZE - 1:0] data_a_in_scalar_adder;
-  wire [DATA_SIZE - 1:0] data_b_in_scalar_adder;
-  wire [DATA_SIZE - 1:0] data_out_scalar_adder;
+  wire [DATA_SIZE-1:0] modulo_in_scalar_adder;
+  wire [DATA_SIZE-1:0] data_a_in_scalar_adder;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_adder;
+  wire [DATA_SIZE-1:0] data_out_scalar_adder;
 
   // SCALAR INVERTER
   // CONTROL
@@ -92,9 +93,9 @@ module ntm_scalar_logistic_function(
   wire ready_scalar_inverter;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_scalar_inverter;
-  wire [DATA_SIZE - 1:0] data_in_scalar_inverter;
-  wire [DATA_SIZE - 1:0] data_out_scalar_inverter;
+  wire [DATA_SIZE-1:0] modulo_in_scalar_inverter;
+  wire [DATA_SIZE-1:0] data_in_scalar_inverter;
+  wire [DATA_SIZE-1:0] data_out_scalar_inverter;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

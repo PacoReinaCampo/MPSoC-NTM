@@ -55,7 +55,7 @@ module dnc_temporal_link_matrix(
   L_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -73,11 +73,11 @@ module dnc_temporal_link_matrix(
   output L_OUT_J_ENABLE;  // for j in 0 to N-1 (square matrix)
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_N_IN;
-  input [DATA_SIZE - 1:0] L_IN;
-  input [DATA_SIZE - 1:0] W_IN;
-  input [DATA_SIZE - 1:0] P_IN;
-  output [DATA_SIZE - 1:0] L_OUT;
+  input [DATA_SIZE-1:0] SIZE_N_IN;
+  input [DATA_SIZE-1:0] L_IN;
+  input [DATA_SIZE-1:0] W_IN;
+  input [DATA_SIZE-1:0] P_IN;
+  output [DATA_SIZE-1:0] L_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -99,20 +99,20 @@ module dnc_temporal_link_matrix(
   wire operation_scalar_adder;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_scalar_adder;
-  wire [DATA_SIZE - 1:0] data_a_in_scalar_adder;
-  wire [DATA_SIZE - 1:0] data_b_in_scalar_adder;
-  wire [DATA_SIZE - 1:0] data_out_scalar_adder;
+  wire [DATA_SIZE-1:0] modulo_in_scalar_adder;
+  wire [DATA_SIZE-1:0] data_a_in_scalar_adder;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_adder;
+  wire [DATA_SIZE-1:0] data_out_scalar_adder;
 
   // SCALAR MULTIPLIER
   // CONTROL
   wire start_scalar_multiplier;
   wire ready_scalar_multiplier;
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_scalar_multiplier;
-  wire [DATA_SIZE - 1:0] data_a_in_scalar_multiplier;
-  wire [DATA_SIZE - 1:0] data_b_in_scalar_multiplier;
-  wire [DATA_SIZE - 1:0] data_out_scalar_multiplier;
+  wire [DATA_SIZE-1:0] modulo_in_scalar_multiplier;
+  wire [DATA_SIZE-1:0] data_a_in_scalar_multiplier;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_multiplier;
+  wire [DATA_SIZE-1:0] data_out_scalar_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

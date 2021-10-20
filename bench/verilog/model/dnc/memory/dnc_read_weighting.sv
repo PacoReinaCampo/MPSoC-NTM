@@ -61,7 +61,7 @@ module dnc_read_weighting(
   W_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -83,13 +83,13 @@ module dnc_read_weighting(
   output W_OUT_J_ENABLE;  // for j in 0 to N-1
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_R_IN;
-  input [DATA_SIZE - 1:0] SIZE_N_IN;
-  input [DATA_SIZE - 1:0] PI_IN;
-  input [DATA_SIZE - 1:0] B_IN;
-  input [DATA_SIZE - 1:0] C_IN;
+  input [DATA_SIZE-1:0] SIZE_R_IN;
+  input [DATA_SIZE-1:0] SIZE_N_IN;
+  input [DATA_SIZE-1:0] PI_IN;
+  input [DATA_SIZE-1:0] B_IN;
+  input [DATA_SIZE-1:0] C_IN;
   input F_IN;
-  output [DATA_SIZE - 1:0] W_OUT;
+  output [DATA_SIZE-1:0] W_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -115,11 +115,11 @@ module dnc_read_weighting(
   wire data_out_enable_vector_adder;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_adder;
-  wire [DATA_SIZE - 1:0] size_in_vector_adder;
-  wire [DATA_SIZE - 1:0] data_a_in_vector_adder;
-  wire [DATA_SIZE - 1:0] data_b_in_vector_adder;
-  wire [DATA_SIZE - 1:0] data_out_vector_adder;
+  wire [DATA_SIZE-1:0] modulo_in_vector_adder;
+  wire [DATA_SIZE-1:0] size_in_vector_adder;
+  wire [DATA_SIZE-1:0] data_a_in_vector_adder;
+  wire [DATA_SIZE-1:0] data_b_in_vector_adder;
+  wire [DATA_SIZE-1:0] data_out_vector_adder;
 
   // VECTOR MULTIPLIER
   // CONTROL
@@ -131,11 +131,11 @@ module dnc_read_weighting(
   wire data_out_enable_vector_multiplier;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] size_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] data_a_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] data_b_in_vector_multiplier;
-  wire [DATA_SIZE - 1:0] data_out_vector_multiplier;
+  wire [DATA_SIZE-1:0] modulo_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] size_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_out_vector_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

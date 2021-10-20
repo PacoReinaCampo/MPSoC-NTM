@@ -53,7 +53,7 @@ module dnc_controller_output_vector(
   NU_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -69,11 +69,11 @@ module dnc_controller_output_vector(
   output NU_ENABLE_OUT;  // for y in 0 to Y-1
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_Y_IN;
-  input [DATA_SIZE - 1:0] SIZE_L_IN;
-  input [DATA_SIZE - 1:0] U_IN;
-  input [DATA_SIZE - 1:0] H_IN;
-  output [DATA_SIZE - 1:0] NU_OUT;
+  input [DATA_SIZE-1:0] SIZE_Y_IN;
+  input [DATA_SIZE-1:0] SIZE_L_IN;
+  input [DATA_SIZE-1:0] U_IN;
+  input [DATA_SIZE-1:0] H_IN;
+  output [DATA_SIZE-1:0] NU_OUT;
 
 
   ///////////////////////////////////////////////////////////////////////
@@ -101,14 +101,14 @@ module dnc_controller_output_vector(
   wire data_out_j_enable_matrix_product;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_a_i_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_a_j_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_b_i_in_matrix_product;
-  wire [DATA_SIZE - 1:0] size_b_j_in_matrix_product;
-  wire [DATA_SIZE - 1:0] data_a_in_matrix_product;
-  wire [DATA_SIZE - 1:0] data_b_in_matrix_product;
-  wire [DATA_SIZE - 1:0] data_out_matrix_product;
+  wire [DATA_SIZE-1:0] modulo_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_a_i_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_a_j_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_b_i_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_b_j_in_matrix_product;
+  wire [DATA_SIZE-1:0] data_a_in_matrix_product;
+  wire [DATA_SIZE-1:0] data_b_in_matrix_product;
+  wire [DATA_SIZE-1:0] data_out_matrix_product;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

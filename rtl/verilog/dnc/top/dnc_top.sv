@@ -63,7 +63,7 @@ module dnc_top(
   Y_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -83,17 +83,17 @@ module dnc_top(
   output Y_OUT_ENABLE;  // for y in 0 to Y-1
 
   // DATA
-  input [DATA_SIZE - 1:0] SIZE_X_IN;
-  input [DATA_SIZE - 1:0] SIZE_Y_IN;
-  input [DATA_SIZE - 1:0] SIZE_N_IN;
-  input [DATA_SIZE - 1:0] SIZE_W_IN;
-  input [DATA_SIZE - 1:0] SIZE_L_IN;
-  input [DATA_SIZE - 1:0] SIZE_R_IN;
-  input [DATA_SIZE - 1:0] W_IN;
-  input [DATA_SIZE - 1:0] K_IN;
-  input [DATA_SIZE - 1:0] B_IN;
-  input [DATA_SIZE - 1:0] X_IN;
-  output [DATA_SIZE - 1:0] Y_OUT;
+  input [DATA_SIZE-1:0] SIZE_X_IN;
+  input [DATA_SIZE-1:0] SIZE_Y_IN;
+  input [DATA_SIZE-1:0] SIZE_N_IN;
+  input [DATA_SIZE-1:0] SIZE_W_IN;
+  input [DATA_SIZE-1:0] SIZE_L_IN;
+  input [DATA_SIZE-1:0] SIZE_R_IN;
+  input [DATA_SIZE-1:0] W_IN;
+  input [DATA_SIZE-1:0] K_IN;
+  input [DATA_SIZE-1:0] B_IN;
+  input [DATA_SIZE-1:0] X_IN;
+  output [DATA_SIZE-1:0] Y_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -128,16 +128,16 @@ module dnc_top(
   wire h_out_enable_controller;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_x_in_controller;
-  wire [DATA_SIZE - 1:0] size_w_in_controller;
-  wire [DATA_SIZE - 1:0] size_l_in_controller;
-  wire [DATA_SIZE - 1:0] size_r_in_controller;
-  wire [DATA_SIZE - 1:0] w_in_controller;
-  wire [DATA_SIZE - 1:0] k_in_controller;
-  wire [DATA_SIZE - 1:0] b_in_controller;
-  wire [DATA_SIZE - 1:0] x_in_controller;
-  wire [DATA_SIZE - 1:0] r_in_controller;
-  wire [DATA_SIZE - 1:0] h_out_controller;
+  wire [DATA_SIZE-1:0] size_x_in_controller;
+  wire [DATA_SIZE-1:0] size_w_in_controller;
+  wire [DATA_SIZE-1:0] size_l_in_controller;
+  wire [DATA_SIZE-1:0] size_r_in_controller;
+  wire [DATA_SIZE-1:0] w_in_controller;
+  wire [DATA_SIZE-1:0] k_in_controller;
+  wire [DATA_SIZE-1:0] b_in_controller;
+  wire [DATA_SIZE-1:0] x_in_controller;
+  wire [DATA_SIZE-1:0] r_in_controller;
+  wire [DATA_SIZE-1:0] h_out_controller;
 
   // CONTROLLER OUTPUT VECTOR
   // CONTROL
@@ -150,11 +150,11 @@ module dnc_top(
   wire nu_out_enable_controller_output_vector;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_y_in_controller_output_vector;
-  wire [DATA_SIZE - 1:0] size_l_in_controller_output_vector;
-  wire [DATA_SIZE - 1:0] u_in_controller_output_vector;
-  wire [DATA_SIZE - 1:0] h_in_controller_output_vector;
-  wire [DATA_SIZE - 1:0] nu_out_controller_output_vector;
+  wire [DATA_SIZE-1:0] size_y_in_controller_output_vector;
+  wire [DATA_SIZE-1:0] size_l_in_controller_output_vector;
+  wire [DATA_SIZE-1:0] u_in_controller_output_vector;
+  wire [DATA_SIZE-1:0] h_in_controller_output_vector;
+  wire [DATA_SIZE-1:0] nu_out_controller_output_vector;
 
   // OUTPUT VECTOR
   // CONTROL
@@ -170,13 +170,13 @@ module dnc_top(
   wire y_in_enable_output_vector;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_y_in_output_vector;
-  wire [DATA_SIZE - 1:0] size_w_in_output_vector;
-  wire [DATA_SIZE - 1:0] size_r_in_output_vector;
-  wire [DATA_SIZE - 1:0] k_in_output_vector;
-  wire [DATA_SIZE - 1:0] r_in_output_vector;
-  wire [DATA_SIZE - 1:0] nu_in_output_vector;
-  wire [DATA_SIZE - 1:0] y_out_output_vector;
+  wire [DATA_SIZE-1:0] size_y_in_output_vector;
+  wire [DATA_SIZE-1:0] size_w_in_output_vector;
+  wire [DATA_SIZE-1:0] size_r_in_output_vector;
+  wire [DATA_SIZE-1:0] k_in_output_vector;
+  wire [DATA_SIZE-1:0] r_in_output_vector;
+  wire [DATA_SIZE-1:0] nu_in_output_vector;
+  wire [DATA_SIZE-1:0] y_out_output_vector;
 
   ///////////////////////////////////////////////////////////////////////
   // READ HEADS
@@ -191,8 +191,8 @@ module dnc_top(
   wire ready_free_gates;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_r_in_free_gates;
-  wire [DATA_SIZE - 1:0] f_in_free_gates;
+  wire [DATA_SIZE-1:0] size_r_in_free_gates;
+  wire [DATA_SIZE-1:0] f_in_free_gates;
   wire f_out_free_gates;
 
   // READ KEYS
@@ -206,10 +206,10 @@ module dnc_top(
   wire ready_read_keys;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_r_in_read_keys;
-  wire [DATA_SIZE - 1:0] size_w_in_read_keys;
-  wire [DATA_SIZE - 1:0] k_in_read_keys;
-  wire [DATA_SIZE - 1:0] k_out_read_keys;
+  wire [DATA_SIZE-1:0] size_r_in_read_keys;
+  wire [DATA_SIZE-1:0] size_w_in_read_keys;
+  wire [DATA_SIZE-1:0] k_in_read_keys;
+  wire [DATA_SIZE-1:0] k_out_read_keys;
 
   // READ MODES
   // CONTROL
@@ -222,9 +222,9 @@ module dnc_top(
   wire pi_out_p_enable_read_modes;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_r_in_read_modes;
-  wire [DATA_SIZE - 1:0] pi_in_read_modes;
-  wire [DATA_SIZE - 1:0] pi_out_read_modes;
+  wire [DATA_SIZE-1:0] size_r_in_read_modes;
+  wire [DATA_SIZE-1:0] pi_in_read_modes;
+  wire [DATA_SIZE-1:0] pi_out_read_modes;
 
   // READ STRENGTHS
   // CONTROL
@@ -235,9 +235,9 @@ module dnc_top(
   wire ready_read_strengths;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_r_in_read_strengths;
-  wire [DATA_SIZE - 1:0] beta_in_read_strengths;
-  wire [DATA_SIZE - 1:0] beta_out_read_strengths;
+  wire [DATA_SIZE-1:0] size_r_in_read_strengths;
+  wire [DATA_SIZE-1:0] beta_in_read_strengths;
+  wire [DATA_SIZE-1:0] beta_out_read_strengths;
 
   // READ INTERFACE VECTOR
   // CONTROL
@@ -270,18 +270,18 @@ module dnc_top(
   wire h_in_enable_read_interface_vector;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_w_in_read_interface_vector;
-  wire [DATA_SIZE - 1:0] size_l_in_read_interface_vector;
-  wire [DATA_SIZE - 1:0] size_r_in_read_interface_vector;
-  wire [DATA_SIZE - 1:0] wk_in_read_interface_vector;
-  wire [DATA_SIZE - 1:0] wbeta_in_read_interface_vector;
-  wire [DATA_SIZE - 1:0] wf_in_read_interface_vector;
-  wire [DATA_SIZE - 1:0] wpi_in_read_interface_vector;
-  wire [DATA_SIZE - 1:0] h_in_read_interface_vector;
-  wire [DATA_SIZE - 1:0] k_out_read_interface_vector;
-  wire [DATA_SIZE - 1:0] beta_out_read_interface_vector;
-  wire [DATA_SIZE - 1:0] f_out_read_interface_vector;
-  wire [DATA_SIZE - 1:0] pi_out_read_interface_vector;
+  wire [DATA_SIZE-1:0] size_w_in_read_interface_vector;
+  wire [DATA_SIZE-1:0] size_l_in_read_interface_vector;
+  wire [DATA_SIZE-1:0] size_r_in_read_interface_vector;
+  wire [DATA_SIZE-1:0] wk_in_read_interface_vector;
+  wire [DATA_SIZE-1:0] wbeta_in_read_interface_vector;
+  wire [DATA_SIZE-1:0] wf_in_read_interface_vector;
+  wire [DATA_SIZE-1:0] wpi_in_read_interface_vector;
+  wire [DATA_SIZE-1:0] h_in_read_interface_vector;
+  wire [DATA_SIZE-1:0] k_out_read_interface_vector;
+  wire [DATA_SIZE-1:0] beta_out_read_interface_vector;
+  wire [DATA_SIZE-1:0] f_out_read_interface_vector;
+  wire [DATA_SIZE-1:0] pi_out_read_interface_vector;
 
   ///////////////////////////////////////////////////////////////////////
   // WRITE HEADS
@@ -293,7 +293,7 @@ module dnc_top(
   wire ready_allocation_gate;
 
   // DATA
-  wire [DATA_SIZE - 1:0] ga_in_allocation_gate;
+  wire [DATA_SIZE-1:0] ga_in_allocation_gate;
   wire ga_out_allocation_gate;
 
   // ERASE VECTOR
@@ -305,8 +305,8 @@ module dnc_top(
   wire e_out_enable_erase_vector;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_w_in_erase_vector;
-  wire [DATA_SIZE - 1:0] e_in_erase_vector;
+  wire [DATA_SIZE-1:0] size_w_in_erase_vector;
+  wire [DATA_SIZE-1:0] e_in_erase_vector;
   wire e_out_erase_vector;
 
   // WRITE GATE
@@ -315,7 +315,7 @@ module dnc_top(
   wire ready_write_gate;
 
   // DATA
-  wire [DATA_SIZE - 1:0] gw_in_write_gate;
+  wire [DATA_SIZE-1:0] gw_in_write_gate;
   wire gw_out_write_gate;
 
   // WRITE KEY
@@ -327,9 +327,9 @@ module dnc_top(
   wire k_out_enable_write_key;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_w_in_write_key;
-  wire [DATA_SIZE - 1:0] k_in_write_key;
-  wire [DATA_SIZE - 1:0] k_out_write_key;
+  wire [DATA_SIZE-1:0] size_w_in_write_key;
+  wire [DATA_SIZE-1:0] k_in_write_key;
+  wire [DATA_SIZE-1:0] k_out_write_key;
 
   // WRITE STRENGHT
   // CONTROL
@@ -337,8 +337,8 @@ module dnc_top(
   wire ready_write_strength;
 
   // DATA
-  wire [DATA_SIZE - 1:0] beta_in_write_strength;
-  wire [DATA_SIZE - 1:0] beta_out_write_strength;
+  wire [DATA_SIZE-1:0] beta_in_write_strength;
+  wire [DATA_SIZE-1:0] beta_out_write_strength;
 
   // WRITE VECTOR
   // CONTROL
@@ -349,9 +349,9 @@ module dnc_top(
   wire v_out_enable_write_vector;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_w_in_write_vector;
-  wire [DATA_SIZE - 1:0] v_in_write_vector;
-  wire [DATA_SIZE - 1:0] v_out_write_vector;
+  wire [DATA_SIZE-1:0] size_w_in_write_vector;
+  wire [DATA_SIZE-1:0] v_in_write_vector;
+  wire [DATA_SIZE-1:0] v_out_write_vector;
 
   // WRITE INTERFACE VECTOR
   // CONTROL
@@ -386,22 +386,22 @@ module dnc_top(
   wire h_in_enable_write_interface_vector;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_w_in_write_interface_vector;
-  wire [DATA_SIZE - 1:0] size_l_in_write_interface_vector;
-  wire [DATA_SIZE - 1:0] size_r_in_write_interface_vector;
-  wire [DATA_SIZE - 1:0] wk_in_write_interface_vector;
-  wire [DATA_SIZE - 1:0] wbeta_in_write_interface_vector;
-  wire [DATA_SIZE - 1:0] we_in_write_interface_vector;
-  wire [DATA_SIZE - 1:0] wv_in_write_interface_vector;
-  wire [DATA_SIZE - 1:0] wga_in_write_interface_vector;
-  wire [DATA_SIZE - 1:0] wgw_in_write_interface_vector;
-  wire [DATA_SIZE - 1:0] h_in_write_interface_vector;
-  wire [DATA_SIZE - 1:0] k_out_write_interface_vector;
-  wire [DATA_SIZE - 1:0] beta_out_write_interface_vector;
-  wire [DATA_SIZE - 1:0] e_out_write_interface_vector;
-  wire [DATA_SIZE - 1:0] v_out_write_interface_vector;
-  wire [DATA_SIZE - 1:0] ga_out_write_interface_vector;
-  wire [DATA_SIZE - 1:0] gw_out_write_interface_vector;
+  wire [DATA_SIZE-1:0] size_w_in_write_interface_vector;
+  wire [DATA_SIZE-1:0] size_l_in_write_interface_vector;
+  wire [DATA_SIZE-1:0] size_r_in_write_interface_vector;
+  wire [DATA_SIZE-1:0] wk_in_write_interface_vector;
+  wire [DATA_SIZE-1:0] wbeta_in_write_interface_vector;
+  wire [DATA_SIZE-1:0] we_in_write_interface_vector;
+  wire [DATA_SIZE-1:0] wv_in_write_interface_vector;
+  wire [DATA_SIZE-1:0] wga_in_write_interface_vector;
+  wire [DATA_SIZE-1:0] wgw_in_write_interface_vector;
+  wire [DATA_SIZE-1:0] h_in_write_interface_vector;
+  wire [DATA_SIZE-1:0] k_out_write_interface_vector;
+  wire [DATA_SIZE-1:0] beta_out_write_interface_vector;
+  wire [DATA_SIZE-1:0] e_out_write_interface_vector;
+  wire [DATA_SIZE-1:0] v_out_write_interface_vector;
+  wire [DATA_SIZE-1:0] ga_out_write_interface_vector;
+  wire [DATA_SIZE-1:0] gw_out_write_interface_vector;
 
   ///////////////////////////////////////////////////////////////////////
   // MEMORY
@@ -421,19 +421,19 @@ module dnc_top(
   wire v_write_in_k_enable_addressing;
 
   // DATA
-  wire [DATA_SIZE - 1:0] size_r_in_addressing;
-  wire [DATA_SIZE - 1:0] size_w_in_addressing;
-  wire [DATA_SIZE - 1:0] k_read_in_addressing;
-  wire [DATA_SIZE - 1:0] beta_read_in_addressing;
-  wire [DATA_SIZE - 1:0] f_read_in_addressing;
-  wire [DATA_SIZE - 1:0] pi_read_in_addressing;
-  wire [DATA_SIZE - 1:0] k_write_in_addressing;
-  wire [DATA_SIZE - 1:0] beta_write_in_addressing;
-  wire [DATA_SIZE - 1:0] e_write_in_addressing;
-  wire [DATA_SIZE - 1:0] v_write_in_addressing;
-  wire [DATA_SIZE - 1:0] ga_write_in_addressing;
-  wire [DATA_SIZE - 1:0] gw_write_in_addressing;
-  wire [DATA_SIZE - 1:0] r_out_addressing;
+  wire [DATA_SIZE-1:0] size_r_in_addressing;
+  wire [DATA_SIZE-1:0] size_w_in_addressing;
+  wire [DATA_SIZE-1:0] k_read_in_addressing;
+  wire [DATA_SIZE-1:0] beta_read_in_addressing;
+  wire [DATA_SIZE-1:0] f_read_in_addressing;
+  wire [DATA_SIZE-1:0] pi_read_in_addressing;
+  wire [DATA_SIZE-1:0] k_write_in_addressing;
+  wire [DATA_SIZE-1:0] beta_write_in_addressing;
+  wire [DATA_SIZE-1:0] e_write_in_addressing;
+  wire [DATA_SIZE-1:0] v_write_in_addressing;
+  wire [DATA_SIZE-1:0] ga_write_in_addressing;
+  wire [DATA_SIZE-1:0] gw_write_in_addressing;
+  wire [DATA_SIZE-1:0] r_out_addressing;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

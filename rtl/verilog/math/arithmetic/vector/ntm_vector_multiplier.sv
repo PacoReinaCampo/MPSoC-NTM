@@ -52,7 +52,7 @@ module ntm_vector_multiplier(
   DATA_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -67,11 +67,11 @@ module ntm_vector_multiplier(
   output DATA_OUT_ENABLE;
 
   // DATA
-  input [DATA_SIZE - 1:0] MODULO_IN;
-  input [DATA_SIZE - 1:0] SIZE_IN;
-  input [DATA_SIZE - 1:0] DATA_A_IN;
-  input [DATA_SIZE - 1:0] DATA_B_IN;
-  output [DATA_SIZE - 1:0] DATA_OUT;
+  input [DATA_SIZE-1:0] MODULO_IN;
+  input [DATA_SIZE-1:0] SIZE_IN;
+  input [DATA_SIZE-1:0] DATA_A_IN;
+  input [DATA_SIZE-1:0] DATA_B_IN;
+  output [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -85,8 +85,8 @@ module ntm_vector_multiplier(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO = ((0));
-  parameter ONE = ((1));
+  parameter ZERO = 0;
+  parameter ONE = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -95,7 +95,7 @@ module ntm_vector_multiplier(
   // Finite State Machine
   reg [1:0] multiplier_ctrl_fsm_int;
   // Internal Signals
-  reg [DATA_SIZE - 1:0] index_loop;
+  reg [DATA_SIZE-1:0] index_loop;
 
   reg data_a_in_multiplier_int;
   reg data_b_in_multiplier_int;
@@ -105,10 +105,10 @@ module ntm_vector_multiplier(
   reg start_scalar_multiplier;
   wire ready_scalar_multiplier;
   // DATA
-  reg [DATA_SIZE - 1:0] modulo_in_scalar_multiplier;
-  reg [DATA_SIZE - 1:0] data_a_in_scalar_multiplier;
-  reg [DATA_SIZE - 1:0] data_b_in_scalar_multiplier;
-  wire [DATA_SIZE - 1:0] data_out_scalar_multiplier;
+  reg [DATA_SIZE-1:0] modulo_in_scalar_multiplier;
+  reg [DATA_SIZE-1:0] data_a_in_scalar_multiplier;
+  reg [DATA_SIZE-1:0] data_b_in_scalar_multiplier;
+  wire [DATA_SIZE-1:0] data_out_scalar_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -168,7 +168,7 @@ module ntm_vector_multiplier(
         ENDER_STATE : begin
           // STEP 2
           if((ready_scalar_multiplier == 1'b1)) begin
-            if((((index_loop)) == (((SIZE_IN)) - ((ONE))))) begin
+            if((index_loop == (SIZE_IN - ONE))) begin
               // Control Outputs
               READY <= 1'b1;
               // FSM Control
@@ -176,7 +176,7 @@ module ntm_vector_multiplier(
             end
             else begin
               // Control Internal
-              index_loop <= (((index_loop)) + ((ONE)));
+              index_loop <= (index_loop + ONE);
               // FSM Control
               multiplier_ctrl_fsm_int <= INPUT_STATE;
             end

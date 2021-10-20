@@ -49,7 +49,7 @@ module ntm_scalar_adder(
   DATA_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -62,10 +62,10 @@ module ntm_scalar_adder(
   input OPERATION;
 
   // DATA
-  input [DATA_SIZE - 1:0] MODULO_IN;
-  input [DATA_SIZE - 1:0] DATA_A_IN;
-  input [DATA_SIZE - 1:0] DATA_B_IN;
-  output [DATA_SIZE - 1:0] DATA_OUT;
+  input [DATA_SIZE-1:0] MODULO_IN;
+  input [DATA_SIZE-1:0] DATA_A_IN;
+  input [DATA_SIZE-1:0] DATA_B_IN;
+  output [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -78,7 +78,7 @@ module ntm_scalar_adder(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO = ((0));
+  parameter ZERO = 0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -102,7 +102,7 @@ module ntm_scalar_adder(
       // Control Outputs
       READY <= 1'b0;
       // Assignations
-      adder_int <= {(((DATA_SIZE))-((0))+1){1'b0}};
+      adder_int <= {(((DATA_SIZE))-0+1){1'b0}};
     end else begin
       case(adder_ctrl_fsm_int)
         STARTER_STATE : begin
@@ -128,9 +128,9 @@ module ntm_scalar_adder(
         end
         ENDER_STATE : begin
           // STEP 1
-          if((((MODULO_IN)) > ((ZERO)))) begin
+          if((MODULO_IN > ZERO)) begin
             if((((DATA_A_IN)) > ((DATA_B_IN)))) begin
-              if((((adder_int)) == {1'b0,(MODULO_IN)})) begin
+              if((((adder_int)) == {1'b0,MODULO_IN})) begin
                 // Data Outputs
                 DATA_OUT <= ZERO;
                 // Control Outputs
@@ -138,9 +138,9 @@ module ntm_scalar_adder(
                 // FSM Control
                 adder_ctrl_fsm_int <= STARTER_STATE;
               end
-              else if((((adder_int)) < {1'b0,(MODULO_IN)})) begin
+              else if((((adder_int)) < {1'b0,MODULO_IN})) begin
                 // Data Outputs
-                DATA_OUT <= adder_int[DATA_SIZE - 1:0];
+                DATA_OUT <= adder_int[DATA_SIZE-1:0];
                 // Control Outputs
                 READY <= 1'b1;
                 // FSM Control
@@ -148,7 +148,7 @@ module ntm_scalar_adder(
               end
               else begin
                 // Assignations
-                adder_int <= (((adder_int)) - ({1'b0,(MODULO_IN)}));
+                adder_int <= (((adder_int)) - {1'b0,MODULO_IN});
               end
             end
             else if((((DATA_A_IN)) == ((DATA_B_IN)))) begin
@@ -161,7 +161,7 @@ module ntm_scalar_adder(
                 adder_ctrl_fsm_int <= STARTER_STATE;
               end
               else begin
-                if((((adder_int)) == {1'b0,(MODULO_IN)})) begin
+                if((((adder_int)) == {1'b0,MODULO_IN})) begin
                   // Data Outputs
                   DATA_OUT <= ZERO;
                   // Control Outputs
@@ -169,9 +169,9 @@ module ntm_scalar_adder(
                   // FSM Control
                   adder_ctrl_fsm_int <= STARTER_STATE;
                 end
-                else if((((adder_int)) < {1'b0,(MODULO_IN)})) begin
+                else if((((adder_int)) < {1'b0,MODULO_IN})) begin
                   // Data Outputs
-                  DATA_OUT <= adder_int[DATA_SIZE - 1:0];
+                  DATA_OUT <= adder_int[DATA_SIZE-1:0];
                   // Control Outputs
                   READY <= 1'b1;
                   // FSM Control
@@ -179,13 +179,13 @@ module ntm_scalar_adder(
                 end
                 else begin
                   // Assignations
-                  adder_int <= (((adder_int)) - ({1'b0,(MODULO_IN)}));
+                  adder_int <= (((adder_int)) - {1'b0,MODULO_IN});
                 end
               end
             end
             else if((((DATA_A_IN)) < ((DATA_B_IN)))) begin
               if((OPERATION == 1'b1)) begin
-                if((((adder_int)) == {1'b0,(MODULO_IN)})) begin
+                if((((adder_int)) == {1'b0,MODULO_IN})) begin
                   // Data Outputs
                   DATA_OUT <= ZERO;
                   // Control Outputs
@@ -193,9 +193,9 @@ module ntm_scalar_adder(
                   // FSM Control
                   adder_ctrl_fsm_int <= STARTER_STATE;
                 end
-                else if((((adder_int)) < {1'b0,(MODULO_IN)})) begin
+                else if((((adder_int)) < {1'b0,MODULO_IN})) begin
                   // Data Outputs
-                  DATA_OUT <= (((MODULO_IN)) - ((adder_int[DATA_SIZE - 1:0])));
+                  DATA_OUT <= (MODULO_IN - ((adder_int[DATA_SIZE-1:0])));
                   // Control Outputs
                   READY <= 1'b1;
                   // FSM Control
@@ -203,11 +203,11 @@ module ntm_scalar_adder(
                 end
                 else begin
                   // Assignations
-                  adder_int <= (((adder_int)) - ({1'b0,(MODULO_IN)}));
+                  adder_int <= (((adder_int)) - {1'b0,MODULO_IN});
                 end
               end
               else begin
-                if((((adder_int)) == {1'b0,(MODULO_IN)})) begin
+                if((((adder_int)) == {1'b0,MODULO_IN})) begin
                   // Data Outputs
                   DATA_OUT <= ZERO;
                   // Control Outputs
@@ -215,9 +215,9 @@ module ntm_scalar_adder(
                   // FSM Control
                   adder_ctrl_fsm_int <= STARTER_STATE;
                 end
-                else if((((adder_int)) < {1'b0,(MODULO_IN)})) begin
+                else if((((adder_int)) < {1'b0,MODULO_IN})) begin
                   // Data Outputs
-                  DATA_OUT <= adder_int[DATA_SIZE - 1:0];
+                  DATA_OUT <= adder_int[DATA_SIZE-1:0];
                   // Control Outputs
                   READY <= 1'b1;
                   // FSM Control
@@ -225,14 +225,14 @@ module ntm_scalar_adder(
                 end
                 else begin
                   // Assignations
-                  adder_int <= (((adder_int)) - ({1'b0,(MODULO_IN)}));
+                  adder_int <= (((adder_int)) - {1'b0,MODULO_IN});
                 end
               end
             end
           end
-          else if((((MODULO_IN)) == ((ZERO)))) begin
+          else if((MODULO_IN == ZERO)) begin
             // Data Outputs
-            DATA_OUT <= adder_int[DATA_SIZE - 1:0];
+            DATA_OUT <= adder_int[DATA_SIZE-1:0];
             // Control Outputs
             READY <= 1'b1;
             // FSM Control

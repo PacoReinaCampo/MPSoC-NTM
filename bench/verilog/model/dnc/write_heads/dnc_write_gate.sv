@@ -46,7 +46,7 @@ module dnc_write_gate(
   GW_OUT
 );
 
-  parameter [31:0] DATA_SIZE=512;
+  parameter DATA_SIZE=512;
 
   // GLOBAL
   input CLK;
@@ -57,7 +57,7 @@ module dnc_write_gate(
   output READY;
 
   // DATA
-  input [DATA_SIZE - 1:0] GW_IN;
+  input [DATA_SIZE-1:0] GW_IN;
   output GW_OUT;
 
   ///////////////////////////////////////////////////////////////////////
@@ -78,8 +78,8 @@ module dnc_write_gate(
   wire ready_scalar_logistic;
 
   // DATA
-  wire [DATA_SIZE - 1:0] modulo_in_scalar_logistic;
-  wire [DATA_SIZE - 1:0] data_in_scalar_logistic;
+  wire [DATA_SIZE-1:0] modulo_in_scalar_logistic;
+  wire [DATA_SIZE-1:0] data_in_scalar_logistic;
   wire data_out_scalar_logistic;
 
   ///////////////////////////////////////////////////////////////////////
