@@ -65,7 +65,7 @@ entity ntm_state_gate_vector is
     S_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
-    SIZE_L_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     S_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     I_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
