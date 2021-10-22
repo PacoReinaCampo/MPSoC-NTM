@@ -40,6 +40,10 @@
 module ntm_algebra_testbench;
 
   ///////////////////////////////////////////////////////////////////////
+  // Types
+  ///////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
@@ -51,6 +55,34 @@ module ntm_algebra_testbench;
   parameter W=64;  // k in 0 to W-1
   parameter L=64;  // l in 0 to L-1
   parameter R=64;  // i in 0 to R-1
+
+  parameter SIZE_I=64;
+  parameter SIZE_J=64;
+
+  parameter SIZE=64;
+
+  // FUNCTIONALITY
+  parameter STIMULUS_NTM_MATRIX_DETERMINANT_TEST   = 0;
+  parameter STIMULUS_NTM_MATRIX_INVERSION_TEST     = 0;
+  parameter STIMULUS_NTM_MATRIX_PRODUCT_TEST       = 0;
+  parameter STIMULUS_NTM_MATRIX_RANK_TEST          = 0;
+  parameter STIMULUS_NTM_MATRIX_TRANSPOSE_TEST     = 0;
+  parameter STIMULUS_NTM_SCALAR_PRODUCT_TEST       = 0;
+  parameter STIMULUS_NTM_VECTOR_PRODUCT_TEST       = 0;
+  parameter STIMULUS_NTM_MATRIX_DETERMINANT_CASE_0 = 0;
+  parameter STIMULUS_NTM_MATRIX_INVERSION_CASE_0   = 0;
+  parameter STIMULUS_NTM_MATRIX_PRODUCT_CASE_0     = 0;
+  parameter STIMULUS_NTM_MATRIX_RANK_CASE_0        = 0;
+  parameter STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0   = 0;
+  parameter STIMULUS_NTM_SCALAR_PRODUCT_CASE_0     = 0;
+  parameter STIMULUS_NTM_VECTOR_PRODUCT_CASE_0     = 0;
+  parameter STIMULUS_NTM_MATRIX_DETERMINANT_CASE_1 = 0;
+  parameter STIMULUS_NTM_MATRIX_INVERSION_CASE_1   = 0;
+  parameter STIMULUS_NTM_MATRIX_PRODUCT_CASE_1     = 0;
+  parameter STIMULUS_NTM_MATRIX_RANK_CASE_1        = 0;
+  parameter STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1   = 0;
+  parameter STIMULUS_NTM_SCALAR_PRODUCT_CASE_1     = 0;
+  parameter STIMULUS_NTM_VECTOR_PRODUCT_CASE_1     = 0;
   
   ///////////////////////////////////////////////////////////////////////
   // Signals

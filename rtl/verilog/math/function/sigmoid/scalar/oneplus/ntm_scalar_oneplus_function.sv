@@ -55,12 +55,12 @@ module ntm_scalar_oneplus_function(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   // DATA
   input [DATA_SIZE-1:0] MODULO_IN;
   input [DATA_SIZE-1:0] DATA_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+  output reg [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types

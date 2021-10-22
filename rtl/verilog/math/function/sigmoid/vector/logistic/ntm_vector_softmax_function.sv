@@ -61,26 +61,27 @@ module ntm_vector_softmax_function(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
   input DATA_IN_VECTOR_ENABLE;
   input DATA_IN_SCALAR_ENABLE;
-  output DATA_OUT_VECTOR_ENABLE;
-  output DATA_OUT_SCALAR_ENABLE;
+  output reg DATA_OUT_VECTOR_ENABLE;
+  output reg DATA_OUT_SCALAR_ENABLE;
 
   // DATA
   input [DATA_SIZE-1:0] MODULO_IN;
   input [DATA_SIZE-1:0] SIZE_IN;
   input [DATA_SIZE-1:0] LENGTH_IN;
   input [DATA_SIZE-1:0] DATA_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+  output reg [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
   parameter [1:0] STARTER_STATE = 0;
-  parameter [1:0] INPUT_STATE = 1;
-  parameter [1:0] ENDER_STATE = 2;
+  parameter [1:0] INPUT_VECTOR_STATE = 1;
+  parameter [1:0] INPUT_SCALAR_STATE = 2;
+  parameter [1:0] ENDER_STATE = 3;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -119,7 +120,7 @@ module ntm_vector_softmax_function(
   ///////////////////////////////////////////////////////////////////////
 
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       DATA_OUT <= ZERO;
       // Control Outputs
@@ -127,7 +128,8 @@ module ntm_vector_softmax_function(
       // Assignations
       index_vector_loop <= ZERO;
       index_scalar_loop <= ZERO;
-    end else begin
+    end
+    else begin
       case(softmax_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0
@@ -147,7 +149,7 @@ module ntm_vector_softmax_function(
             // Data Inputs
             modulo_in_scalar_softmax <= MODULO_IN;
             data_in_scalar_softmax <= DATA_IN;
-            if((index_vector_loop == ZERO)) begin
+            if(index_vector_loop == ZERO) begin
               // Control Internal
               start_scalar_softmax <= 1'b1;
             end
@@ -170,7 +172,7 @@ module ntm_vector_softmax_function(
             modulo_in_scalar_softmax <= MODULO_IN;
             length_in_scalar_softmax <= LENGTH_IN;
             data_in_scalar_softmax <= DATA_IN;
-            if((index_scalar_loop == ZERO)) begin
+            if(index_scalar_loop == ZERO) begin
               // Control Internal
               start_scalar_softmax <= 1'b1;
             end

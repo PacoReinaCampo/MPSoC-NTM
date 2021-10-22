@@ -196,7 +196,7 @@ begin
           if (DATA_IN_VECTOR_ENABLE = '1') then
             -- Data Inputs
             modulo_in_vector_softmax <= MODULO_IN;
-            size_in_vector_softmax   <= SIZE_j_IN;
+            size_in_vector_softmax   <= SIZE_J_IN;
 
             data_in_vector_softmax <= DATA_IN;
 

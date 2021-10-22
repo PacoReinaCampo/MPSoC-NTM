@@ -64,14 +64,14 @@ module ntm_vector_cosine_similarity_function(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   input DATA_A_IN_VECTOR_ENABLE;
   input DATA_A_IN_SCALAR_ENABLE;
   input DATA_B_IN_VECTOR_ENABLE;
   input DATA_B_IN_SCALAR_ENABLE;
-  output DATA_OUT_VECTOR_ENABLE;
-  output DATA_OUT_SCALAR_ENABLE;
+  output reg DATA_OUT_VECTOR_ENABLE;
+  output reg DATA_OUT_SCALAR_ENABLE;
 
   // DATA
   input [DATA_SIZE-1:0] MODULO_IN;
@@ -79,15 +79,16 @@ module ntm_vector_cosine_similarity_function(
   input [DATA_SIZE-1:0] LENGTH_IN;
   input [DATA_SIZE-1:0] DATA_A_IN;
   input [DATA_SIZE-1:0] DATA_B_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+  output reg [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
   parameter [1:0] STARTER_STATE = 0;
-  parameter [1:0] INPUT_STATE = 1;
-  parameter [1:0] ENDER_STATE = 2;
+  parameter [1:0] INPUT_VECTOR_STATE = 1;
+  parameter [1:0] INPUT_SCALAR_STATE = 2;
+  parameter [1:0] ENDER_STATE = 3;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -131,7 +132,7 @@ module ntm_vector_cosine_similarity_function(
   ///////////////////////////////////////////////////////////////////////
 
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       DATA_OUT <= ZERO;
       // Control Outputs
@@ -143,7 +144,8 @@ module ntm_vector_cosine_similarity_function(
       data_a_in_scalar_cosine_similarity_int <= 1'b0;
       data_b_in_vector_cosine_similarity_int <= 1'b0;
       data_b_in_scalar_cosine_similarity_int <= 1'b0;
-    end else begin
+    end
+    else begin
       case(cosine_similarity_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0
@@ -173,7 +175,7 @@ module ntm_vector_cosine_similarity_function(
           end
           if((data_a_in_vector_cosine_similarity_int == 1'b1 && data_b_in_vector_cosine_similarity_int == 1'b1)) begin
             // Control Internal
-            if((index_vector_loop == ZERO)) begin
+            if(index_vector_loop == ZERO) begin
               start_scalar_cosine_similarity <= 1'b1;
             end
             data_in_enable_scalar_cosine_similarity <= 1'b1;
@@ -207,7 +209,7 @@ module ntm_vector_cosine_similarity_function(
           end
           if((data_a_in_scalar_cosine_similarity_int == 1'b1 && data_b_in_scalar_cosine_similarity_int == 1'b1)) begin
             // Control Internal
-            if((index_scalar_loop == ZERO)) begin
+            if(index_scalar_loop == ZERO) begin
               start_scalar_cosine_similarity <= 1'b1;
             end
             data_in_enable_scalar_cosine_similarity <= 1'b1;

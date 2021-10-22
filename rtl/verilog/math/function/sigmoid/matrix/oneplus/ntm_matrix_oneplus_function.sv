@@ -61,29 +61,28 @@ module ntm_matrix_oneplus_function(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   input DATA_IN_I_ENABLE;
   input DATA_IN_J_ENABLE;
-  output DATA_OUT_I_ENABLE;
-  output DATA_OUT_J_ENABLE;
+  output reg DATA_OUT_I_ENABLE;
+  output reg DATA_OUT_J_ENABLE;
 
   // DATA
   input [DATA_SIZE-1:0] MODULO_IN;
   input [DATA_SIZE-1:0] SIZE_I_IN;
   input [DATA_SIZE-1:0] SIZE_J_IN;
   input [DATA_SIZE-1:0] DATA_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+  output reg [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
   parameter [2:0] STARTER_STATE = 0;
-  parameter [2:0] INPUT_MATRIX_STATE = 1;
-  parameter [2:0] INPUT_VECTOR_STATE = 2;
-  parameter [2:0] INPUT_SCALAR_STATE = 3;
-  parameter [2:0] ENDER_STATE = 4;
+  parameter [2:0] INPUT_I_STATE = 1;
+  parameter [2:0] INPUT_J_STATE = 2;
+  parameter [2:0] ENDER_STATE = 3;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -130,7 +129,8 @@ module ntm_matrix_oneplus_function(
       // Assignations
       index_i_loop <= ZERO;
       index_j_loop <= ZERO;
-    end else begin
+    end
+    else begin
       case(oneplus_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0

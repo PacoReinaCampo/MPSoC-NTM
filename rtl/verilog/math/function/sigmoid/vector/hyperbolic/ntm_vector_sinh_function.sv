@@ -58,15 +58,15 @@ module ntm_vector_sinh_function(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
   input DATA_IN_ENABLE;
-  output DATA_OUT_ENABLE;
+  output reg DATA_OUT_ENABLE;
 
   // DATA
   input [DATA_SIZE-1:0] MODULO_IN;
   input [DATA_SIZE-1:0] SIZE_IN;
   input [DATA_SIZE-1:0] DATA_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+  output reg [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -108,14 +108,15 @@ module ntm_vector_sinh_function(
   ///////////////////////////////////////////////////////////////////////
 
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       DATA_OUT <= ZERO;
       // Control Outputs
       READY <= 1'b0;
       // Assignations
       index_loop <= ZERO;
-    end else begin
+    end
+    else begin
       case(sinh_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0

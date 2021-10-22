@@ -68,7 +68,7 @@ module ntm_matrix_cosine_similarity_function(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   input DATA_A_IN_MATRIX_ENABLE;
   input DATA_A_IN_VECTOR_ENABLE;
@@ -76,9 +76,9 @@ module ntm_matrix_cosine_similarity_function(
   input DATA_B_IN_MATRIX_ENABLE;
   input DATA_B_IN_VECTOR_ENABLE;
   input DATA_B_IN_SCALAR_ENABLE;
-  output DATA_OUT_MATRIX_ENABLE;
-  output DATA_OUT_VECTOR_ENABLE;
-  output DATA_OUT_SCALAR_ENABLE;
+  output reg DATA_OUT_MATRIX_ENABLE;
+  output reg DATA_OUT_VECTOR_ENABLE;
+  output reg DATA_OUT_SCALAR_ENABLE;
 
   // DATA
   input [DATA_SIZE-1:0] MODULO_IN;
@@ -87,7 +87,7 @@ module ntm_matrix_cosine_similarity_function(
   input [DATA_SIZE-1:0] LENGTH_IN;
   input [DATA_SIZE-1:0] DATA_A_IN;
   input [DATA_SIZE-1:0] DATA_B_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+  output reg [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -165,7 +165,8 @@ module ntm_matrix_cosine_similarity_function(
       data_b_in_matrix_cosine_similarity_int <= 1'b0;
       data_b_in_vector_cosine_similarity_int <= 1'b0;
       data_b_in_scalar_cosine_similarity_int <= 1'b0;
-    end else begin
+    end
+    else begin
       case(cosine_similarity_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0

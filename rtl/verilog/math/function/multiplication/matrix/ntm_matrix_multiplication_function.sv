@@ -64,14 +64,14 @@ module ntm_matrix_multiplication_function(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   input DATA_IN_MATRIX_ENABLE;
   input DATA_IN_VECTOR_ENABLE;
   input DATA_IN_SCALAR_ENABLE;
-  output DATA_OUT_MATRIX_ENABLE;
-  output DATA_OUT_VECTOR_ENABLE;
-  output DATA_OUT_SCALAR_ENABLE;
+  output reg DATA_OUT_MATRIX_ENABLE;
+  output reg DATA_OUT_VECTOR_ENABLE;
+  output reg DATA_OUT_SCALAR_ENABLE;
 
   // DATA
   input [DATA_SIZE-1:0] MODULO_IN;
@@ -79,7 +79,7 @@ module ntm_matrix_multiplication_function(
   input [DATA_SIZE-1:0] SIZE_J_IN;
   input [DATA_SIZE-1:0] LENGTH_IN;
   input [DATA_SIZE-1:0] DATA_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+  output reg [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -139,7 +139,8 @@ module ntm_matrix_multiplication_function(
       index_matrix_loop <= ZERO;
       index_vector_loop <= ZERO;
       index_scalar_loop <= ZERO;
-    end else begin
+    end
+    else begin
       case(multiplication_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0

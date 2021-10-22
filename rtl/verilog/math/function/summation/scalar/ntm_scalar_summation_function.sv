@@ -58,16 +58,16 @@ module ntm_scalar_summation_function(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   input DATA_IN_ENABLE;
-  output DATA_OUT_ENABLE;
+  output reg DATA_OUT_ENABLE;
 
   // DATA
   input [DATA_SIZE-1:0] MODULO_IN;
   input [DATA_SIZE-1:0] LENGTH_IN;
   input [DATA_SIZE-1:0] DATA_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+  output reg [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -110,12 +110,14 @@ module ntm_scalar_summation_function(
   ///////////////////////////////////////////////////////////////////////
 
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       DATA_OUT <= ZERO;
+
       // Control Outputs
       READY <= 1'b0;
       DATA_OUT_ENABLE <= 1'b0;
+
       // Assignations
       index_loop <= ZERO;
       operation_scalar_adder <= 1'b0;
@@ -126,12 +128,15 @@ module ntm_scalar_summation_function(
           // Control Outputs
           READY <= 1'b0;
           DATA_OUT_ENABLE <= 1'b0;
+
           if(START == 1'b1) begin
             // Assignations
             index_loop <= ZERO;
             operation_scalar_adder <= 1'b0;
+
             // Data Outputs
             modulo_in_scalar_adder <= MODULO_IN;
+
             // FSM Control
             summation_ctrl_fsm_int <= ENDER_STATE;
           end
@@ -139,12 +144,14 @@ module ntm_scalar_summation_function(
         ENDER_STATE : begin
           // STEP 1
           if(DATA_IN_ENABLE == 1'b1) begin
-            if((index_loop == (LENGTH_IN - ONE))) begin
+            if(index_loop == (LENGTH_IN - ONE)) begin
               // Control Outputs
               READY <= 1'b1;
               DATA_OUT_ENABLE <= 1'b1;
+
               // Data Outputs
               DATA_OUT <= data_out_scalar_adder;
+
               // FSM Control
               summation_ctrl_fsm_int <= STARTER_STATE;
             end

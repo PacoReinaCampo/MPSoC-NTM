@@ -58,16 +58,16 @@ module ntm_vector_differentiation_function(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   input DATA_IN_ENABLE;
-  output DATA_OUT_ENABLE;
+  output reg DATA_OUT_ENABLE;
 
   // DATA
   input [DATA_SIZE-1:0] MODULO_IN;
   input [DATA_SIZE-1:0] SIZE_IN;
   input [DATA_SIZE-1:0] DATA_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+  output reg [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -89,27 +89,27 @@ module ntm_vector_differentiation_function(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] cosh_ctrl_fsm_int;
+  reg [1:0] differentiation_ctrl_fsm_int;
 
   // Internal Signals
   reg [DATA_SIZE-1:0] index_loop;
 
   // ONEPLUS
   // CONTROL
-  reg start_scalar_cosh;
-  wire ready_scalar_cosh;
+  reg start_scalar_differentiation;
+  wire ready_scalar_differentiation;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_scalar_cosh;
-  reg [DATA_SIZE-1:0] data_in_scalar_cosh;
-  wire [DATA_SIZE-1:0] data_out_scalar_cosh;
+  reg [DATA_SIZE-1:0] modulo_in_scalar_differentiation;
+  reg [DATA_SIZE-1:0] data_in_scalar_differentiation;
+  wire [DATA_SIZE-1:0] data_out_scalar_differentiation;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       DATA_OUT <= ZERO;
       // Control Outputs
@@ -117,7 +117,7 @@ module ntm_vector_differentiation_function(
       // Assignations
       index_loop <= ZERO;
     end else begin
-      case(cosh_ctrl_fsm_int)
+      case(differentiation_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0
           // Control Outputs
@@ -126,53 +126,53 @@ module ntm_vector_differentiation_function(
             // Assignations
             index_loop <= ZERO;
             // FSM Control
-            cosh_ctrl_fsm_int <= INPUT_STATE;
+            differentiation_ctrl_fsm_int <= INPUT_STATE;
           end
         end
         INPUT_STATE : begin
           // STEP 1
           if(DATA_IN_ENABLE == 1'b1) begin
             // Data Inputs
-            modulo_in_scalar_cosh <= MODULO_IN;
-            data_in_scalar_cosh <= DATA_IN;
+            modulo_in_scalar_differentiation <= MODULO_IN;
+            data_in_scalar_differentiation <= DATA_IN;
             if(index_loop == ZERO) begin
               // Control Internal
-              start_scalar_cosh <= 1'b1;
+              start_scalar_differentiation <= 1'b1;
             end
             // FSM Control
-            cosh_ctrl_fsm_int <= ENDER_STATE;
+            differentiation_ctrl_fsm_int <= ENDER_STATE;
           end
           // Control Outputs
           DATA_OUT_ENABLE <= 1'b0;
         end
         ENDER_STATE : begin
           // STEP 2
-          if((ready_scalar_cosh == 1'b1)) begin
+          if((ready_scalar_differentiation == 1'b1)) begin
             if(index_loop == (SIZE_IN - ONE)) begin
               // Control Outputs
               READY <= 1'b1;
               // FSM Control
-              cosh_ctrl_fsm_int <= STARTER_STATE;
+              differentiation_ctrl_fsm_int <= STARTER_STATE;
             end
             else begin
               // Control Internal
               index_loop <= (index_loop + ONE);
               // FSM Control
-              cosh_ctrl_fsm_int <= INPUT_STATE;
+              differentiation_ctrl_fsm_int <= INPUT_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_scalar_cosh;
+            DATA_OUT <= data_out_scalar_differentiation;
             // Control Outputs
             DATA_OUT_ENABLE <= 1'b1;
           end
           else begin
             // Control Internal
-            start_scalar_cosh <= 1'b0;
+            start_scalar_differentiation <= 1'b0;
           end
         end
         default : begin
           // FSM Control
-          cosh_ctrl_fsm_int <= STARTER_STATE;
+          differentiation_ctrl_fsm_int <= STARTER_STATE;
         end
       endcase
     end
@@ -188,13 +188,13 @@ module ntm_vector_differentiation_function(
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_cosh),
-    .READY(ready_scalar_cosh),
+    .START(start_scalar_differentiation),
+    .READY(ready_scalar_differentiation),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_cosh),
-    .DATA_IN(data_in_scalar_cosh),
-    .DATA_OUT(data_out_scalar_cosh)
+    .MODULO_IN(modulo_in_scalar_differentiation),
+    .DATA_IN(data_in_scalar_differentiation),
+    .DATA_OUT(data_out_scalar_differentiation)
   );
 
 endmodule

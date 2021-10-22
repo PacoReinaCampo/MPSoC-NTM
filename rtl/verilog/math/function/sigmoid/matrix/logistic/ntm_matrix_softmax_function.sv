@@ -64,14 +64,14 @@ module ntm_matrix_softmax_function(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   input DATA_IN_MATRIX_ENABLE;
   input DATA_IN_VECTOR_ENABLE;
   input DATA_IN_SCALAR_ENABLE;
-  output DATA_OUT_MATRIX_ENABLE;
-  output DATA_OUT_VECTOR_ENABLE;
-  output DATA_OUT_SCALAR_ENABLE;
+  output reg DATA_OUT_MATRIX_ENABLE;
+  output reg DATA_OUT_VECTOR_ENABLE;
+  output reg DATA_OUT_SCALAR_ENABLE;
 
   // DATA
   input [DATA_SIZE-1:0] MODULO_IN;
@@ -79,7 +79,7 @@ module ntm_matrix_softmax_function(
   input [DATA_SIZE-1:0] SIZE_J_IN;
   input [DATA_SIZE-1:0] LENGTH_IN;
   input [DATA_SIZE-1:0] DATA_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+  output reg [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -140,7 +140,8 @@ module ntm_matrix_softmax_function(
       index_matrix_loop <= ZERO;
       index_vector_loop <= ZERO;
       index_scalar_loop <= ZERO;
-    end else begin
+    end
+    else begin
       case(softmax_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0
@@ -185,7 +186,7 @@ module ntm_matrix_softmax_function(
           if((DATA_IN_VECTOR_ENABLE == 1'b1)) begin
             // Data Inputs
             modulo_in_vector_softmax <= MODULO_IN;
-            size_in_vector_softmax <= SIZE_j_IN;
+            size_in_vector_softmax <= SIZE_J_IN;
             data_in_vector_softmax <= DATA_IN;
             if((index_vector_loop == ZERO)) begin
               // Control Internal

@@ -40,8 +40,114 @@
 module ntm_function_testbench;
 
   ///////////////////////////////////////////////////////////////////////
+  // Types
+  ///////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////////
+  // Constants
+  ///////////////////////////////////////////////////////////////////////
+
+  // SYSTEM-SIZE
+  parameter DATA_SIZE=512;
+
+  parameter X=64;
+  parameter Y=64;
+  parameter N=64;
+  parameter W=64;
+  parameter L=64;
+  parameter R=64;
+
+  // SCALAR-FUNCTIONALITY
+  parameter STIMULUS_NTM_SCALAR_CONVOLUTION_TEST=0;
+  parameter STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_TEST=0;
+  parameter STIMULUS_NTM_SCALAR_COSH_TEST=0;
+  parameter STIMULUS_NTM_SCALAR_SINH_TEST=0;
+  parameter STIMULUS_NTM_SCALAR_TANH_TEST=0;
+  parameter STIMULUS_NTM_SCALAR_LOGISTIC_TEST=0;
+  parameter STIMULUS_NTM_SCALAR_SOFTMAX_TEST=0;
+  parameter STIMULUS_NTM_SCALAR_ONEPLUS_TEST=0;
+  parameter STIMULUS_NTM_SCALAR_SUMMATION_TEST=0;
+  parameter STIMULUS_NTM_SCALAR_CONVOLUTION_CASE_0=0;
+  parameter STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_CASE_0=0;
+  parameter STIMULUS_NTM_SCALAR_COSH_CASE_0=0;
+  parameter STIMULUS_NTM_SCALAR_SINH_CASE_0=0;
+  parameter STIMULUS_NTM_SCALAR_TANH_CASE_0=0;
+  parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0=0;
+  parameter STIMULUS_NTM_SCALAR_SOFTMAX_CASE_0=0;
+  parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0=0;
+  parameter STIMULUS_NTM_SCALAR_SUMMATION_CASE_0=0;
+  parameter STIMULUS_NTM_SCALAR_CONVOLUTION_CASE_1=0;
+  parameter STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_CASE_1=0;
+  parameter STIMULUS_NTM_SCALAR_COSH_CASE_1=0;
+  parameter STIMULUS_NTM_SCALAR_SINH_CASE_1=0;
+  parameter STIMULUS_NTM_SCALAR_TANH_CASE_1=0;
+  parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1=0;
+  parameter STIMULUS_NTM_SCALAR_SOFTMAX_CASE_1=0;
+  parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1=0;
+  parameter STIMULUS_NTM_SCALAR_SUMMATION_CASE_1=0;
+
+  // VECTOR-FUNCTIONALITY
+  parameter STIMULUS_NTM_VECTOR_CONVOLUTION_TEST=0;
+  parameter STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_TEST=0;
+  parameter STIMULUS_NTM_VECTOR_COSH_TEST=0;
+  parameter STIMULUS_NTM_VECTOR_SINH_TEST=0;
+  parameter STIMULUS_NTM_VECTOR_TANH_TEST=0;
+  parameter STIMULUS_NTM_VECTOR_LOGISTIC_TEST=0;
+  parameter STIMULUS_NTM_VECTOR_SOFTMAX_TEST=0;
+  parameter STIMULUS_NTM_VECTOR_ONEPLUS_TEST=0;
+  parameter STIMULUS_NTM_VECTOR_SUMMATION_TEST=0;
+  parameter STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_0=0;
+  parameter STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_0=0;
+  parameter STIMULUS_NTM_VECTOR_COSH_CASE_0=0;
+  parameter STIMULUS_NTM_VECTOR_SINH_CASE_0=0;
+  parameter STIMULUS_NTM_VECTOR_TANH_CASE_0=0;
+  parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0=0;
+  parameter STIMULUS_NTM_VECTOR_SOFTMAX_CASE_0=0;
+  parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0=0;
+  parameter STIMULUS_NTM_VECTOR_SUMMATION_CASE_0=0;
+  parameter STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_1=0;
+  parameter STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_1=0;
+  parameter STIMULUS_NTM_VECTOR_COSH_CASE_1=0;
+  parameter STIMULUS_NTM_VECTOR_SINH_CASE_1=0;
+  parameter STIMULUS_NTM_VECTOR_TANH_CASE_1=0;
+  parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1=0;
+  parameter STIMULUS_NTM_VECTOR_SOFTMAX_CASE_1=0;
+  parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1=0;
+  parameter STIMULUS_NTM_VECTOR_SUMMATION_CASE_1=0;
+
+  // MATRIX-FUNCTIONALITY
+  parameter STIMULUS_NTM_MATRIX_CONVOLUTION_TEST=0;
+  parameter STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_TEST=0;
+  parameter STIMULUS_NTM_MATRIX_COSH_TEST=0;
+  parameter STIMULUS_NTM_MATRIX_SINH_TEST=0;
+  parameter STIMULUS_NTM_MATRIX_TANH_TEST=0;
+  parameter STIMULUS_NTM_MATRIX_LOGISTIC_TEST=0;
+  parameter STIMULUS_NTM_MATRIX_SOFTMAX_TEST=0;
+  parameter STIMULUS_NTM_MATRIX_ONEPLUS_TEST=0;
+  parameter STIMULUS_NTM_MATRIX_SUMMATION_TEST=0;
+  parameter STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_0=0;
+  parameter STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_0=0;
+  parameter STIMULUS_NTM_MATRIX_COSH_CASE_0=0;
+  parameter STIMULUS_NTM_MATRIX_SINH_CASE_0=0;
+  parameter STIMULUS_NTM_MATRIX_TANH_CASE_0=0;
+  parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0=0;
+  parameter STIMULUS_NTM_MATRIX_SOFTMAX_CASE_0=0;
+  parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0=0;
+  parameter STIMULUS_NTM_MATRIX_SUMMATION_CASE_0=0;
+  parameter STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_1=0;
+  parameter STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_1=0;
+  parameter STIMULUS_NTM_MATRIX_COSH_CASE_1=0;
+  parameter STIMULUS_NTM_MATRIX_SINH_CASE_1=0;
+  parameter STIMULUS_NTM_MATRIX_TANH_CASE_1=0;
+  parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1=0;
+  parameter STIMULUS_NTM_MATRIX_SOFTMAX_CASE_1=0;
+  parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1=0;
+  parameter STIMULUS_NTM_MATRIX_SUMMATION_CASE_1=0;
+
+  ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
   // GLOBAL
   wire CLK;
   wire RST;
@@ -1171,6 +1277,7 @@ module ntm_function_testbench;
   ///////////////////////////////////////////////////////////////////////
   // SCALAR
   ///////////////////////////////////////////////////////////////////////
+
   // SCALAR CONVOLUTION
   ntm_scalar_convolution_function #(
     .DATA_SIZE(DATA_SIZE)

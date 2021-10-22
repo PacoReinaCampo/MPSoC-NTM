@@ -57,29 +57,6 @@ package ntm_math_pkg;
   parameter L=64;
   parameter R=64;
 
-  // FUNCTIONALITY
-  parameter STIMULUS_NTM_MATRIX_DETERMINANT_TEST=0;
-  parameter STIMULUS_NTM_MATRIX_INVERSION_TEST=0;
-  parameter STIMULUS_NTM_MATRIX_PRODUCT_TEST=0;
-  parameter STIMULUS_NTM_MATRIX_RANK_TEST=0;
-  parameter STIMULUS_NTM_MATRIX_TRANSPOSE_TEST=0;
-  parameter STIMULUS_NTM_SCALAR_PRODUCT_TEST=0;
-  parameter STIMULUS_NTM_VECTOR_PRODUCT_TEST=0;
-  parameter STIMULUS_NTM_MATRIX_DETERMINANT_CASE_0=0;
-  parameter STIMULUS_NTM_MATRIX_INVERSION_CASE_0=0;
-  parameter STIMULUS_NTM_MATRIX_PRODUCT_CASE_0=0;
-  parameter STIMULUS_NTM_MATRIX_RANK_CASE_0=0;
-  parameter STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0=0;
-  parameter STIMULUS_NTM_SCALAR_PRODUCT_CASE_0=0;
-  parameter STIMULUS_NTM_VECTOR_PRODUCT_CASE_0=0;
-  parameter STIMULUS_NTM_MATRIX_DETERMINANT_CASE_1=0;
-  parameter STIMULUS_NTM_MATRIX_INVERSION_CASE_1=0;
-  parameter STIMULUS_NTM_MATRIX_PRODUCT_CASE_1=0;
-  parameter STIMULUS_NTM_MATRIX_RANK_CASE_1=0;
-  parameter STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1=0;
-  parameter STIMULUS_NTM_SCALAR_PRODUCT_CASE_1=0;
-  parameter STIMULUS_NTM_VECTOR_PRODUCT_CASE_1=0;
-
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
