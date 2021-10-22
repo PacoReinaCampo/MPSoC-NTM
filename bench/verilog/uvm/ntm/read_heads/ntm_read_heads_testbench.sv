@@ -51,6 +51,7 @@ module ntm_read_heads_testbench;
   // CONTROL
   wire start_reading;
   wire ready_reading;
+
   wire m_in_enable_reading;
   wire r_out_enable_reading;
 

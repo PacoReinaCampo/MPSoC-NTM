@@ -51,6 +51,7 @@ module ntm_convolutional_fnn_testbench;
   // CONTROL
   wire start_controller;
   wire ready_controller;
+
   wire w_in_l_enable_controller;
   wire w_in_x_enable_controller;
   wire k_in_i_enable_controller;

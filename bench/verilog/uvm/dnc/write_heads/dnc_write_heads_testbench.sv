@@ -60,6 +60,7 @@ module dnc_write_heads_testbench;
   // CONTROL
   wire start_erase_vector;
   wire ready_erase_vector;
+
   wire e_in_enable_erase_vector;
   wire e_out_enable_erase_vector;
 
@@ -81,6 +82,7 @@ module dnc_write_heads_testbench;
   // CONTROL
   wire start_write_key;
   wire ready_write_key;
+
   wire k_in_enable_write_key;
   wire k_out_enable_write_key;
 
@@ -102,6 +104,7 @@ module dnc_write_heads_testbench;
   // CONTROL
   wire start_write_vector;
   wire ready_write_vector;
+
   wire v_in_enable_write_vector;
   wire v_out_enable_write_vector;
 

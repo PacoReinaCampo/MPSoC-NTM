@@ -51,6 +51,7 @@ module ntm_memory_testbench;
   // CONTROL
   wire start_addressing;
   wire ready_addressing;
+
   wire k_in_enable_addressing;
   wire s_in_enable_addressing;
   wire m_in_j_enable_addressing;

@@ -270,6 +270,7 @@ module ntm_convolutional_lstm_testbench;
   // CONTROL
   wire start_forget_trainer;
   wire ready_forget_trainer;
+
   wire h_in_enable_forget_trainer;
   wire x_in_enable_forget_trainer;
   wire f_in_enable_forget_trainer;

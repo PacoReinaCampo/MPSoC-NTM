@@ -81,6 +81,7 @@ module ntm_top_testbench;
   ntm_top_stimulus #(
     // SYSTEM-SIZE
     .DATA_SIZE(DATA_SIZE),
+
     .X(X),
     .Y(Y),
     .N(N),

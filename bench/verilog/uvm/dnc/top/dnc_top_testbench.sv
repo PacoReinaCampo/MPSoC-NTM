@@ -51,6 +51,7 @@ module dnc_top_testbench;
   // CONTROL
   wire start_top;
   wire ready_top;
+
   wire w_in_l_enable_top;
   wire w_in_x_enable_top;
   wire k_in_i_enable_top;
@@ -79,6 +80,7 @@ module dnc_top_testbench;
   dnc_top_stimulus #(
     // SYSTEM-SIZE
     .DATA_SIZE(DATA_SIZE),
+
     .X(X),
     .Y(Y),
     .N(N),

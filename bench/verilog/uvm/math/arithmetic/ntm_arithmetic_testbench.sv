@@ -193,6 +193,7 @@ module ntm_arithmetic_testbench;
   // CONTROL
   wire start_vector_inverter;
   wire ready_vector_inverter;
+
   wire data_in_enable_vector_inverter;
   wire data_out_enable_vector_inverter;
 
@@ -539,6 +540,7 @@ module ntm_arithmetic_testbench;
     // CONTROL
     .SCALAR_ADDER_START(start_scalar_adder),
     .SCALAR_ADDER_READY(ready_scalar_adder),
+
     .SCALAR_ADDER_OPERATION(operation_scalar_adder),
 
     // DATA
@@ -730,6 +732,7 @@ module ntm_arithmetic_testbench;
     // CONTROL
     .VECTOR_LOGARITHM_START(start_vector_logarithm),
     .VECTOR_LOGARITHM_READY(ready_vector_logarithm),
+
     .VECTOR_LOGARITHM_DATA_A_IN_ENABLE(data_a_in_enable_vector_logarithm),
     .VECTOR_LOGARITHM_DATA_B_IN_ENABLE(data_b_in_enable_vector_logarithm),
     .VECTOR_LOGARITHM_DATA_OUT_ENABLE(data_out_enable_vector_logarithm),
