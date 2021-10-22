@@ -37,94 +37,51 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_exponentiator(
-  CLK,
-  RST,
-  START,
-  READY,
-  MODULO_IN,
-  DATA_A_IN,
-  DATA_B_IN,
-  DATA_OUT
-);
-
-  parameter DATA_SIZE=512;
-
-  // GLOBAL
-  input CLK;
-  input RST;
-
-  // CONTROL
-  input START;
-  output reg READY;
-
-  // DATA
-  input [DATA_SIZE-1:0] MODULO_IN;
-  input [DATA_SIZE-1:0] DATA_A_IN;
-  input [DATA_SIZE-1:0] DATA_B_IN;
-  output reg [DATA_SIZE-1:0] DATA_OUT;
+package ntm_math_pkg;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter STARTER_STATE = 0;
-  parameter ENDER_STATE = 1;
-
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO = 0;
-  parameter ONE = 1;
+  // SYSTEM-SIZE
+  parameter DATA_SIZE=512;
+
+  parameter X=64;
+  parameter Y=64;
+  parameter N=64;
+  parameter W=64;
+  parameter L=64;
+  parameter R=64;
+
+  // FUNCTIONALITY
+  parameter STIMULUS_NTM_MATRIX_DETERMINANT_TEST=0;
+  parameter STIMULUS_NTM_MATRIX_INVERSION_TEST=0;
+  parameter STIMULUS_NTM_MATRIX_PRODUCT_TEST=0;
+  parameter STIMULUS_NTM_MATRIX_RANK_TEST=0;
+  parameter STIMULUS_NTM_MATRIX_TRANSPOSE_TEST=0;
+  parameter STIMULUS_NTM_SCALAR_PRODUCT_TEST=0;
+  parameter STIMULUS_NTM_VECTOR_PRODUCT_TEST=0;
+  parameter STIMULUS_NTM_MATRIX_DETERMINANT_CASE_0=0;
+  parameter STIMULUS_NTM_MATRIX_INVERSION_CASE_0=0;
+  parameter STIMULUS_NTM_MATRIX_PRODUCT_CASE_0=0;
+  parameter STIMULUS_NTM_MATRIX_RANK_CASE_0=0;
+  parameter STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0=0;
+  parameter STIMULUS_NTM_SCALAR_PRODUCT_CASE_0=0;
+  parameter STIMULUS_NTM_VECTOR_PRODUCT_CASE_0=0;
+  parameter STIMULUS_NTM_MATRIX_DETERMINANT_CASE_1=0;
+  parameter STIMULUS_NTM_MATRIX_INVERSION_CASE_1=0;
+  parameter STIMULUS_NTM_MATRIX_PRODUCT_CASE_1=0;
+  parameter STIMULUS_NTM_MATRIX_RANK_CASE_1=0;
+  parameter STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1=0;
+  parameter STIMULUS_NTM_SCALAR_PRODUCT_CASE_1=0;
+  parameter STIMULUS_NTM_VECTOR_PRODUCT_CASE_1=0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
-  // Finite State Machine
-  reg exponentiator_ctrl_fsm_int;
-
-  // Internal Signals
-  reg [DATA_SIZE-1:0] exponentiator_int;
-
-  ///////////////////////////////////////////////////////////////////////
-  // Body
-  ///////////////////////////////////////////////////////////////////////
-
-  // DATA_OUT = exponentiator(DATA_A_IN, DATA_B_IN) mod MODULO_IN
-  always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
-      // Data Outputs
-      DATA_OUT <= ZERO;
-
-      // Control Outputs
-      READY <= 1'b0;
-
-      // Assignations
-      exponentiator_int <= ZERO;
-    end
-    else begin
-      case(exponentiator_ctrl_fsm_int)
-        STARTER_STATE : begin
-          // STEP 0
-          // Control Outputs
-          READY <= 1'b0;
-
-          // FSM Control
-          exponentiator_ctrl_fsm_int <= ENDER_STATE;
-        end
-        ENDER_STATE : begin
-          // STEP 1
-          // FSM Control
-          exponentiator_ctrl_fsm_int <= STARTER_STATE;
-        end
-        default : begin
-          // FSM Control
-          exponentiator_ctrl_fsm_int <= STARTER_STATE;
-        end
-      endcase
-    end
-  end
-
-endmodule
+endpackage

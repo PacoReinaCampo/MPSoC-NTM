@@ -74,4 +74,4 @@
 ../../../../../../../rtl/verilog/dnc/read_heads/dnc_read_modes.sv
 ../../../../../../../rtl/verilog/dnc/read_heads/dnc_read_strengths.sv
 
-../../../../../../../bench/verilog/osvvm/dnc/read_heads/dnc_read_heads_testbench.sv
+../../../../../../../bench/verilog/uvm/dnc/read_heads/dnc_read_heads_testbench.sv

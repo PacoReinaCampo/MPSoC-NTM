@@ -56,23 +56,23 @@ module ntm_scalar_divider(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   // DATA
   input [DATA_SIZE-1:0] MODULO_IN;
   input [DATA_SIZE-1:0] DATA_A_IN;
   input [DATA_SIZE-1:0] DATA_B_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+  output reg [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter [2:0] STARTER_STATE = 0;
-  parameter [2:0] ENDER_STATE = 1;
-  parameter [2:0] CHECK_U_STATE = 2;
-  parameter [2:0] CHECK_V_STATE = 3;
-  parameter [2:0] CHECK_D_STATE = 4;
+  parameter [2:0] STARTER_STATE         = 0;
+  parameter [2:0] SET_DATA_B_STATE      = 1;
+  parameter [2:0] REDUCE_DATA_B_STATE   = 2;
+  parameter [2:0] SET_PRODUCT_OUT_STATE = 3;
+  parameter [2:0] ENDER_STATE           = 4;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -87,9 +87,11 @@ module ntm_scalar_divider(
 
   // Finite State Machine
   reg [2:0] divider_ctrl_fsm_int;
+
   // Internal Signals
   reg [DATA_SIZE:0] u_int;
   reg [DATA_SIZE:0] v_int;
+
   reg [DATA_SIZE:0] divider_int;
 
   ///////////////////////////////////////////////////////////////////////
@@ -98,31 +100,38 @@ module ntm_scalar_divider(
 
   // DATA_OUT = DATA_B_IN / DATA_A_IN mod MODULO_IN
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       DATA_OUT <= ZERO;
+
       // Control Outputs
       READY <= 1'b0;
+
       // Assignation
-      u_int <= {(((DATA_SIZE))-0+1){1'b0}};
-      v_int <= {(((DATA_SIZE))-0+1){1'b0}};
-      divider_int <= {(((DATA_SIZE))-0+1){1'b0}};
-    end else begin
+      u_int <= ZERO;
+      v_int <= ZERO;
+
+      divider_int <= ZERO;
+    end
+    else begin
       case(divider_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
+
           if(START == 1'b1) begin
             // Assignation
             u_int <= {1'b0,DATA_A_IN};
             v_int <= {1'b0,DATA_B_IN};
-            if((DATA_A_IN[0] == 1'b1)) begin
+
+            if(DATA_A_IN[0] == 1'b1) begin
               divider_int <= {1'b0,DATA_B_IN};
             end
             else begin
-              divider_int <= {(((DATA_SIZE))-0+1){1'b0}};
+              divider_int <= ZERO;
             end
+
             // FSM Control
             divider_ctrl_fsm_int <= SET_DATA_B_STATE;
           end
@@ -132,8 +141,9 @@ module ntm_scalar_divider(
           // Assignation
           u_int <= u_int;
           v_int <= v_int;
+
           // FSM Control
-          if((v_int < {1'b0,MODULO_IN})) begin
+          if(v_int < {1'b0,MODULO_IN}) begin
             divider_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
           end
           else begin
@@ -142,7 +152,7 @@ module ntm_scalar_divider(
         end
         REDUCE_DATA_B_STATE : begin
           // STEP 2
-          if((v_int < {1'b0,MODULO_IN})) begin
+          if(v_int < {1'b0,MODULO_IN}) begin
             // FSM Control
             divider_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
           end
@@ -154,17 +164,17 @@ module ntm_scalar_divider(
         SET_PRODUCT_OUT_STATE : begin
           // STEP 3
           // Assignation
-          if((u_int[0] == 1'b1)) begin
-            if(((((divider_int)) + v_int) < {1'b0,MODULO_IN})) begin
-              divider_int <= (((divider_int)) + v_int);
+          if(u_int[0] == 1'b1) begin
+            if((divider_int + v_int) < {1'b0,MODULO_IN}) begin
+              divider_int <= (divider_int + v_int);
             end
             else begin
-              divider_int <= (((divider_int)) + v_int - {1'b0,MODULO_IN});
+              divider_int <= (divider_int + v_int - {1'b0,MODULO_IN});
             end
           end
           else begin
-            if((((divider_int)) >= {1'b0,MODULO_IN})) begin
-              divider_int <= (((divider_int)) - MODULO_IN);
+            if(divider_int >= {1'b0,MODULO_IN}) begin
+              divider_int <= (divider_int - MODULO_IN);
             end
           end
           // FSM Control
@@ -172,11 +182,13 @@ module ntm_scalar_divider(
         end
         ENDER_STATE : begin
           // STEP 4
-          if((u_int == {1'b0,ONE})) begin
+          if(u_int == {1'b0,ONE}) begin
             // Data Outputs
             DATA_OUT <= divider_int[DATA_SIZE-1:0];
+
             // Control Outputs
             READY <= 1'b1;
+
             // FSM Control
             divider_ctrl_fsm_int <= STARTER_STATE;
           end

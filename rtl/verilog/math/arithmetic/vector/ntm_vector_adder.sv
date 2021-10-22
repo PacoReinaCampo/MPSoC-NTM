@@ -61,20 +61,20 @@ module ntm_vector_adder(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   input OPERATION;
 
   input DATA_A_IN_ENABLE;
   input DATA_B_IN_ENABLE;
-  output DATA_OUT_ENABLE;
+  output reg DATA_OUT_ENABLE;
 
   // DATA
   input [DATA_SIZE-1:0] MODULO_IN;
   input [DATA_SIZE-1:0] SIZE_IN;
   input [DATA_SIZE-1:0] DATA_A_IN;
   input [DATA_SIZE-1:0] DATA_B_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+  output reg [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -90,8 +90,8 @@ module ntm_vector_adder(
 
   parameter ZERO = 0;
   parameter ONE = 1;
-  //////////////////////////
-  /////////////////////////////////////////////
+  
+  ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
@@ -121,43 +121,51 @@ module ntm_vector_adder(
 
   // DATA_OUT = DATA_B_IN + DATA_A_IN mod MODULO_IN
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       DATA_OUT <= ZERO;
+
       // Control Outputs
       READY <= 1'b0;
+
       // Assignations
       index_loop <= ZERO;
+
       data_a_in_adder_int <= 1'b0;
       data_b_in_adder_int <= 1'b0;
-    end else begin
+    end
+    else begin
       case(adder_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
+
           if(START == 1'b1) begin
             // Assignations
             index_loop <= ZERO;
+
             // FSM Control
             adder_ctrl_fsm_int <= INPUT_STATE;
           end
         end
         INPUT_STATE : begin
           // STEP 1
-          if((DATA_A_IN_ENABLE == 1'b1)) begin
+          if(DATA_A_IN_ENABLE == 1'b1) begin
             // Data Inputs
             data_a_in_scalar_adder <= DATA_A_IN;
+
             // Control Internal
             data_a_in_adder_int <= 1'b1;
           end
-          if((DATA_B_IN_ENABLE == 1'b1)) begin
+          if(DATA_B_IN_ENABLE == 1'b1) begin
             // Data Inputs
+
             data_b_in_scalar_adder <= DATA_B_IN;
             // Control Internal
             data_b_in_adder_int <= 1'b1;
           end
-          if((data_a_in_adder_int == 1'b1 && data_b_in_adder_int == 1'b1)) begin
+          if(data_a_in_adder_int == 1'b1 && data_b_in_adder_int == 1'b1) begin
             if(index_loop == ZERO) begin
               // Control Internal
               start_scalar_adder <= 1'b1;
@@ -165,6 +173,7 @@ module ntm_vector_adder(
             operation_scalar_adder <= OPERATION;
             // Data Inputs
             modulo_in_scalar_adder <= MODULO_IN;
+
             // FSM Control
             adder_ctrl_fsm_int <= ENDER_STATE;
           end
@@ -173,21 +182,24 @@ module ntm_vector_adder(
         end
         ENDER_STATE : begin
           // STEP 2
-          if((ready_scalar_adder == 1'b1)) begin
+          if(ready_scalar_adder == 1'b1) begin
             if(index_loop == (SIZE_IN - ONE)) begin
               // Control Outputs
               READY <= 1'b1;
+
               // FSM Control
               adder_ctrl_fsm_int <= STARTER_STATE;
             end
             else begin
               // Control Internal
               index_loop <= (index_loop + ONE);
+
               // FSM Control
               adder_ctrl_fsm_int <= INPUT_STATE;
             end
             // Data Outputs
             DATA_OUT <= data_out_scalar_adder;
+
             // Control Outputs
             DATA_OUT_ENABLE <= 1'b1;
           end

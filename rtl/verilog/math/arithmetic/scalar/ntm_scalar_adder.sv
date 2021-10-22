@@ -57,7 +57,7 @@ module ntm_scalar_adder(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   input OPERATION;
 
@@ -65,7 +65,7 @@ module ntm_scalar_adder(
   input [DATA_SIZE-1:0] MODULO_IN;
   input [DATA_SIZE-1:0] DATA_A_IN;
   input [DATA_SIZE-1:0] DATA_B_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+  output reg [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -99,142 +99,165 @@ module ntm_scalar_adder(
     if((RST == 1'b0)) begin
       // Data Outputs
       DATA_OUT <= ZERO;
+
       // Control Outputs
       READY <= 1'b0;
+
       // Assignations
-      adder_int <= {(((DATA_SIZE))-0+1){1'b0}};
+      adder_int <= ZERO;
     end else begin
       case(adder_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
+
           if(START == 1'b1) begin
             // Assignations
-            if((OPERATION == 1'b1)) begin
-              if((((DATA_A_IN)) > ((DATA_B_IN)))) begin
-                adder_int <= (({1'b0,(DATA_A_IN)}) - ({1'b0,(DATA_B_IN)}));
+            if(OPERATION == 1'b1) begin
+              if(DATA_A_IN > DATA_B_IN) begin
+                adder_int <= ({1'b0,DATA_A_IN} - {1'b0,DATA_B_IN});
               end
               else begin
-                adder_int <= (({1'b0,(DATA_B_IN)}) - ({1'b0,(DATA_A_IN)}));
+                adder_int <= ({1'b0,DATA_B_IN} - {1'b0,DATA_A_IN});
               end
             end
             else begin
-              adder_int <= (({1'b0,(DATA_A_IN)}) + ({1'b0,(DATA_B_IN)}));
+              adder_int <= ({1'b0,DATA_A_IN} + ({1'b0,DATA_B_IN}));
             end
+
             // FSM Control
             adder_ctrl_fsm_int <= ENDER_STATE;
           end
         end
         ENDER_STATE : begin
           // STEP 1
-          if((MODULO_IN > ZERO)) begin
-            if((((DATA_A_IN)) > ((DATA_B_IN)))) begin
-              if((((adder_int)) == {1'b0,MODULO_IN})) begin
+          if(MODULO_IN > ZERO) begin
+            if(DATA_A_IN > DATA_B_IN) begin
+              if(adder_int == {1'b0,MODULO_IN}) begin
                 // Data Outputs
                 DATA_OUT <= ZERO;
+
                 // Control Outputs
                 READY <= 1'b1;
                 // FSM Control
                 adder_ctrl_fsm_int <= STARTER_STATE;
               end
-              else if((((adder_int)) < {1'b0,MODULO_IN})) begin
+              else if(adder_int < {1'b0,MODULO_IN}) begin
                 // Data Outputs
                 DATA_OUT <= adder_int[DATA_SIZE-1:0];
+
                 // Control Outputs
                 READY <= 1'b1;
+
                 // FSM Control
                 adder_ctrl_fsm_int <= STARTER_STATE;
               end
               else begin
                 // Assignations
-                adder_int <= (((adder_int)) - {1'b0,MODULO_IN});
+                adder_int <= (adder_int - {1'b0,MODULO_IN});
               end
             end
-            else if((((DATA_A_IN)) == ((DATA_B_IN)))) begin
-              if((OPERATION == 1'b1)) begin
+            else if(DATA_A_IN == DATA_B_IN) begin
+              if(OPERATION == 1'b1) begin
                 // Data Outputs
                 DATA_OUT <= ZERO;
+
                 // Control Outputs
                 READY <= 1'b1;
+
                 // FSM Control
                 adder_ctrl_fsm_int <= STARTER_STATE;
               end
               else begin
-                if((((adder_int)) == {1'b0,MODULO_IN})) begin
+                if(adder_int == {1'b0,MODULO_IN}) begin
                   // Data Outputs
                   DATA_OUT <= ZERO;
+
                   // Control Outputs
                   READY <= 1'b1;
+
                   // FSM Control
                   adder_ctrl_fsm_int <= STARTER_STATE;
                 end
-                else if((((adder_int)) < {1'b0,MODULO_IN})) begin
+                else if(adder_int < {1'b0,MODULO_IN}) begin
                   // Data Outputs
                   DATA_OUT <= adder_int[DATA_SIZE-1:0];
+
                   // Control Outputs
                   READY <= 1'b1;
+
                   // FSM Control
                   adder_ctrl_fsm_int <= STARTER_STATE;
                 end
                 else begin
                   // Assignations
-                  adder_int <= (((adder_int)) - {1'b0,MODULO_IN});
+                  adder_int <= (adder_int - {1'b0,MODULO_IN});
                 end
               end
             end
-            else if((((DATA_A_IN)) < ((DATA_B_IN)))) begin
-              if((OPERATION == 1'b1)) begin
-                if((((adder_int)) == {1'b0,MODULO_IN})) begin
+            else if(DATA_A_IN < DATA_B_IN) begin
+              if(OPERATION == 1'b1) begin
+                if(adder_int == {1'b0,MODULO_IN}) begin
                   // Data Outputs
                   DATA_OUT <= ZERO;
+
                   // Control Outputs
                   READY <= 1'b1;
+
                   // FSM Control
                   adder_ctrl_fsm_int <= STARTER_STATE;
                 end
-                else if((((adder_int)) < {1'b0,MODULO_IN})) begin
+                else if(adder_int < {1'b0,MODULO_IN}) begin
                   // Data Outputs
-                  DATA_OUT <= (MODULO_IN - ((adder_int[DATA_SIZE-1:0])));
+                  DATA_OUT <= (MODULO_IN - adder_int[DATA_SIZE-1:0]);
+
                   // Control Outputs
                   READY <= 1'b1;
+
                   // FSM Control
                   adder_ctrl_fsm_int <= STARTER_STATE;
                 end
                 else begin
                   // Assignations
-                  adder_int <= (((adder_int)) - {1'b0,MODULO_IN});
+                  adder_int <= (adder_int - {1'b0,MODULO_IN});
                 end
               end
               else begin
-                if((((adder_int)) == {1'b0,MODULO_IN})) begin
+                if(adder_int == {1'b0,MODULO_IN}) begin
                   // Data Outputs
                   DATA_OUT <= ZERO;
+
                   // Control Outputs
                   READY <= 1'b1;
+
                   // FSM Control
                   adder_ctrl_fsm_int <= STARTER_STATE;
                 end
-                else if((((adder_int)) < {1'b0,MODULO_IN})) begin
+                else if(adder_int < {1'b0,MODULO_IN}) begin
                   // Data Outputs
                   DATA_OUT <= adder_int[DATA_SIZE-1:0];
+
                   // Control Outputs
                   READY <= 1'b1;
+
                   // FSM Control
                   adder_ctrl_fsm_int <= STARTER_STATE;
                 end
                 else begin
                   // Assignations
-                  adder_int <= (((adder_int)) - {1'b0,MODULO_IN});
+                  adder_int <= (adder_int - {1'b0,MODULO_IN});
                 end
               end
             end
           end
-          else if((MODULO_IN == ZERO)) begin
+          else if(MODULO_IN == ZERO) begin
             // Data Outputs
             DATA_OUT <= adder_int[DATA_SIZE-1:0];
+
             // Control Outputs
             READY <= 1'b1;
+
             // FSM Control
             adder_ctrl_fsm_int <= STARTER_STATE;
           end

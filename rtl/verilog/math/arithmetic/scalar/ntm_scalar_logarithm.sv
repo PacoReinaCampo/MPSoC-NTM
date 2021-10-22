@@ -56,13 +56,13 @@ module ntm_scalar_logarithm(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   // DATA
   input [DATA_SIZE-1:0] MODULO_IN;
   input [DATA_SIZE-1:0] DATA_A_IN;
   input [DATA_SIZE-1:0] DATA_B_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+  output reg [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -97,16 +97,19 @@ module ntm_scalar_logarithm(
     if((RST == 1'b0)) begin
       // Data Outputs
       DATA_OUT <= ZERO;
+
       // Control Outputs
       READY <= 1'b0;
+
       // Assignations
-      logarithm_int <= {(((DATA_SIZE - 1))-0+1){1'b0}};
+      logarithm_int <= ZERO;
     end else begin
       case(logarithm_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
+
           // FSM Control
           logarithm_ctrl_fsm_int <= ENDER_STATE;
         end

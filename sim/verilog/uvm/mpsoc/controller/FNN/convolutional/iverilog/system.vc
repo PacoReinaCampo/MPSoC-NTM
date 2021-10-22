@@ -72,4 +72,4 @@
 ../../../../../../../../rtl/verilog/controller/FNN/convolutional/ntm_controller.sv
 ../../../../../../../../rtl/verilog/controller/FNN/standard/ntm_trainer.sv
 
-../../../../../../../../bench/verilog/osvvm/controller/FNN/convolutional/ntm_convolutional_fnn_testbench.sv
+../../../../../../../../bench/verilog/uvm/controller/FNN/convolutional/ntm_convolutional_fnn_testbench.sv

@@ -63,6 +63,6 @@
 ../../../../../../../rtl/verilog/math/function/sigmoid/matrix/oneplus/ntm_matrix_oneplus_function.sv
 ../../../../../../../rtl/verilog/math/function/summation/matrix/ntm_matrix_summation_function.sv
 
-../../../../../../../bench/verilog/osvvm/math/function/ntm_function_pkg.sv
-../../../../../../../bench/verilog/osvvm/math/function/ntm_function_stimulus.sv
-../../../../../../../bench/verilog/osvvm/math/function/ntm_function_testbench.sv
+../../../../../../../bench/verilog/uvm/math/function/ntm_function_pkg.sv
+../../../../../../../bench/verilog/uvm/math/function/ntm_function_stimulus.sv
+../../../../../../../bench/verilog/uvm/math/function/ntm_function_testbench.sv

@@ -71,4 +71,4 @@
 
 ../../../../../../../rtl/verilog/ntm/read_heads/ntm_reading.sv
 
-../../../../../../../bench/verilog/osvvm/ntm/read_heads/ntm_read_heads_testbench.sv
+../../../../../../../bench/verilog/uvm/ntm/read_heads/ntm_read_heads_testbench.sv

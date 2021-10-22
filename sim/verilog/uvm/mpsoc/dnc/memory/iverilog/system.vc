@@ -86,4 +86,4 @@
 ../../../../../../../rtl/verilog/dnc/memory/dnc_write_weighting.sv
 ../../../../../../../rtl/verilog/dnc/memory/dnc_addressing.sv
 
-../../../../../../../bench/verilog/osvvm/dnc/memory/dnc_memory_testbench.sv
+../../../../../../../bench/verilog/uvm/dnc/memory/dnc_memory_testbench.sv

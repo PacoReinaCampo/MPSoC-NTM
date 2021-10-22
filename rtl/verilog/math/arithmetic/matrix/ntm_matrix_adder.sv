@@ -65,7 +65,7 @@ module ntm_matrix_adder(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   input OPERATION;
 
@@ -73,8 +73,8 @@ module ntm_matrix_adder(
   input DATA_A_IN_J_ENABLE;
   input DATA_B_IN_I_ENABLE;
   input DATA_B_IN_J_ENABLE;
-  output DATA_OUT_I_ENABLE;
-  output DATA_OUT_J_ENABLE;
+  output reg DATA_OUT_I_ENABLE;
+  output reg DATA_OUT_J_ENABLE;
 
   // DATA
   input [DATA_SIZE-1:0] MODULO_IN;
@@ -82,7 +82,7 @@ module ntm_matrix_adder(
   input [DATA_SIZE-1:0] SIZE_J_IN;
   input [DATA_SIZE-1:0] DATA_A_IN;
   input [DATA_SIZE-1:0] DATA_B_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+  output reg [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -150,7 +150,8 @@ module ntm_matrix_adder(
       data_a_in_j_adder_int <= 1'b0;
       data_b_in_i_adder_int <= 1'b0;
       data_b_in_j_adder_int <= 1'b0;
-    end else begin
+    end
+	else begin
       case(adder_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0
@@ -166,7 +167,7 @@ module ntm_matrix_adder(
         end
         INPUT_I_STATE : begin
           // STEP 1
-          if((DATA_A_IN_I_ENABLE == 1'b1)) begin
+          if(DATA_A_IN_I_ENABLE == 1'b1) begin
             // Data Inputs
             data_a_in_vector_adder <= DATA_A_IN;
             // Control Internal
@@ -177,7 +178,7 @@ module ntm_matrix_adder(
             // Control Internal
             data_a_in_enable_vector_adder <= 1'b0;
           end
-          if((DATA_B_IN_I_ENABLE == 1'b1)) begin
+          if(DATA_B_IN_I_ENABLE == 1'b1) begin
             // Data Inputs
             data_b_in_vector_adder <= DATA_B_IN;
             // Control Internal
@@ -189,7 +190,7 @@ module ntm_matrix_adder(
             data_b_in_enable_vector_adder <= 1'b0;
           end
           if((data_a_in_i_adder_int == 1'b1 && data_b_in_i_adder_int == 1'b1)) begin
-            if((index_i_loop == ZERO)) begin
+            if(index_i_loop == ZERO) begin
               // Control Internal
               start_vector_adder <= 1'b1;
             end
@@ -204,7 +205,7 @@ module ntm_matrix_adder(
         end
         INPUT_J_STATE : begin
           // STEP 2
-          if((DATA_A_IN_J_ENABLE == 1'b1)) begin
+          if(DATA_A_IN_J_ENABLE == 1'b1) begin
             // Data Inputs
             data_a_in_vector_adder <= DATA_A_IN;
             // Control Internal
@@ -215,7 +216,7 @@ module ntm_matrix_adder(
             // Control Internal
             data_a_in_enable_vector_adder <= 1'b0;
           end
-          if((DATA_B_IN_J_ENABLE == 1'b1)) begin
+          if(DATA_B_IN_J_ENABLE == 1'b1) begin
             // Data Inputs
             data_b_in_vector_adder <= DATA_B_IN;
             // Control Internal
@@ -227,7 +228,7 @@ module ntm_matrix_adder(
             data_b_in_enable_vector_adder <= 1'b0;
           end
           if((data_a_in_j_adder_int == 1'b1 && data_b_in_j_adder_int == 1'b1)) begin
-            if((index_j_loop == ZERO)) begin
+            if(index_j_loop == ZERO) begin
               // Control Internal
               start_vector_adder <= 1'b1;
             end

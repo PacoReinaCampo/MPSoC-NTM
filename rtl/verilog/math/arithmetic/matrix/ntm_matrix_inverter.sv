@@ -60,19 +60,19 @@ module ntm_matrix_inverter(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   input DATA_IN_I_ENABLE;
   input DATA_IN_J_ENABLE;
-  output DATA_OUT_I_ENABLE;
-  output DATA_OUT_J_ENABLE;
+  output reg DATA_OUT_I_ENABLE;
+  output reg DATA_OUT_J_ENABLE;
 
   // DATA
   input [DATA_SIZE-1:0] MODULO_IN;
   input [DATA_SIZE-1:0] SIZE_I_IN;
   input [DATA_SIZE-1:0] SIZE_J_IN;
   input [DATA_SIZE-1:0] DATA_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+  output reg [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -133,7 +133,8 @@ module ntm_matrix_inverter(
       index_j_loop <= ZERO;
       data_in_i_inverter_int <= 1'b0;
       data_in_j_inverter_int <= 1'b0;
-    end else begin
+    end
+	else begin
       case(inverter_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0
@@ -153,7 +154,7 @@ module ntm_matrix_inverter(
             // Data Inputs
             modulo_in_vector_inverter <= MODULO_IN;
             data_in_vector_inverter <= DATA_IN;
-            if((index_i_loop == ZERO)) begin
+            if(index_i_loop == ZERO) begin
               // Control Internal
               start_vector_inverter <= 1'b1;
             end
@@ -177,7 +178,7 @@ module ntm_matrix_inverter(
             modulo_in_vector_inverter <= MODULO_IN;
             size_in_vector_inverter <= SIZE_J_IN;
             data_in_vector_inverter <= DATA_IN;
-            if((index_j_loop == ZERO)) begin
+            if(index_j_loop == ZERO) begin
               // Control Internal
               start_vector_inverter <= 1'b1;
             end

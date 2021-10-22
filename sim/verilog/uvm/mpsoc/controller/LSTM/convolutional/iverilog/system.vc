@@ -81,4 +81,4 @@
 ../../../../../../../../rtl/verilog/controller/LSTM/convolutional/ntm_output_trainer.sv
 ../../../../../../../../rtl/verilog/controller/LSTM/convolutional/ntm_state_gate_vector.sv
 
-../../../../../../../../bench/verilog/osvvm/controller/LSTM/convolutional/ntm_convolutional_lstm_testbench.sv
+../../../../../../../../bench/verilog/uvm/controller/LSTM/convolutional/ntm_convolutional_lstm_testbench.sv
