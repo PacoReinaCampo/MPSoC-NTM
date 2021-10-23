@@ -69,7 +69,7 @@
 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_oneplus_function.vhd
 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_summation_function.vhd
 
-../../../../../../../../rtl/vhdl/controller/FNNal/ntm_controller.vhd
+../../../../../../../../rtl/vhdl/controller/FNN/ntm_controller.vhd
 ../../../../../../../../rtl/vhdl/controller/FNN/standard/ntm_trainer.vhd
 
-../../../../../../../../bench/vhdl/osvvm/controller/FNNal/ntm_convolutional_fnn_testbench.vhd
+../../../../../../../../bench/vhdl/osvvm/controller/FNN/ntm_convolutional_fnn_testbench.vhd

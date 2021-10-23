@@ -73,4 +73,3 @@ sv work ../../../../../../../../rtl/verilog/controller/FNN/convolutional/ntm_con
 sv work ../../../../../../../../rtl/verilog/controller/FNN/convolutional/ntm_trainer.sv
 
 sv work ../../../../../../../../bench/verilog/osvvm/controller/FNN/convolutional/ntm_convolutional_fnn_testbench.sv
-

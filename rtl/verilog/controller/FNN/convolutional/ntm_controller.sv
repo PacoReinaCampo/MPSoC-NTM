@@ -72,7 +72,7 @@ module ntm_controller(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   input W_IN_L_ENABLE;  // for l in 0 to L-1
   input W_IN_X_ENABLE;  // for x in 0 to X-1
@@ -83,7 +83,7 @@ module ntm_controller(
   input X_IN_ENABLE;  // for x in 0 to X-1
   input R_IN_I_ENABLE;  // for i in 0 to R-1 (read heads flow)
   input R_IN_K_ENABLE;  // for k in 0 to W-1
-  output H_OUT_ENABLE;  // for l in 0 to L-1
+  output reg H_OUT_ENABLE;  // for l in 0 to L-1
 
   // DATA
   input [DATA_SIZE-1:0] SIZE_X_IN;
@@ -95,7 +95,7 @@ module ntm_controller(
   input [DATA_SIZE-1:0] B_IN;
   input [DATA_SIZE-1:0] X_IN;
   input [DATA_SIZE-1:0] R_IN;
-  output [DATA_SIZE-1:0] H_OUT;
+  output reg [DATA_SIZE-1:0] H_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -225,7 +225,8 @@ module ntm_controller(
       data_b_in_i_matrix_convolution_int <= 1'b0;
       data_b_in_j_matrix_convolution_int <= 1'b0;
       data_in_vector_logistic_int <= 1'b0;
-    end else begin
+    end
+    else begin
       case(controller_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0

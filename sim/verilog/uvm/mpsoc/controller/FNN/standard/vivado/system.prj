@@ -73,4 +73,3 @@ sv work ../../../../../../../../rtl/verilog/controller/FNN/standard/ntm_controll
 sv work ../../../../../../../../rtl/verilog/controller/FNN/standard/ntm_trainer.sv
 
 sv work ../../../../../../../../bench/verilog/osvvm/controller/FNN/standard/ntm_standard_fnn_testbench.sv
-

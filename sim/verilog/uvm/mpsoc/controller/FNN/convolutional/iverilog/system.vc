@@ -69,7 +69,7 @@
 ../../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_oneplus_function.sv
 ../../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_summation_function.sv
 
-../../../../../../../../rtl/verilog/controller/FNNal/ntm_controller.sv
-../../../../../../../../rtl/verilog/controller/FNN/standard/ntm_trainer.sv
+../../../../../../../../rtl/verilog/controller/FNN/convolutional/ntm_controller.sv
+../../../../../../../../rtl/verilog/controller/FNN/convolutional/ntm_trainer.sv
 
-../../../../../../../../bench/verilog/uvm/controller/FNNal/ntm_convolutional_fnn_testbench.sv
+../../../../../../../../bench/verilog/uvm/controller/FNN/convolutional/ntm_convolutional_fnn_testbench.sv

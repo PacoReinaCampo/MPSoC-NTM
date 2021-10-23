@@ -140,21 +140,19 @@ module ntm_forget_gate_vector(
   wire start_matrix_product;
   wire ready_matrix_product;
 
-  wire data_a_in_matrix_enable_matrix_product;
-  wire data_a_in_vector_enable_matrix_product;
-  wire data_a_in_scalar_enable_matrix_product;
-  wire data_b_in_matrix_enable_matrix_product;
-  wire data_b_in_vector_enable_matrix_product;
-  wire data_b_in_scalar_enable_matrix_product;
-  wire data_out_matrix_enable_matrix_product;
-  wire data_out_vector_enable_matrix_product;
-  wire data_out_scalar_enable_matrix_product;
+  wire data_a_in_i_enable_matrix_product;
+  wire data_a_in_j_enable_matrix_product;
+  wire data_b_in_i_enable_matrix_product;
+  wire data_b_in_j_enable_matrix_product;
+  wire data_out_i_enable_matrix_product;
+  wire data_out_j_enable_matrix_product;
 
   // DATA
   wire [DATA_SIZE-1:0] modulo_in_matrix_product;
-  wire [DATA_SIZE-1:0] size_i_in_matrix_product;
-  wire [DATA_SIZE-1:0] size_j_in_matrix_product;
-  wire [DATA_SIZE-1:0] length_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_a_i_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_a_j_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_b_i_in_matrix_product;
+  wire [DATA_SIZE-1:0] size_b_j_in_matrix_product;
   wire [DATA_SIZE-1:0] data_a_in_matrix_product;
   wire [DATA_SIZE-1:0] data_b_in_matrix_product;
   wire [DATA_SIZE-1:0] data_out_matrix_product;
@@ -205,10 +203,10 @@ module ntm_forget_gate_vector(
   );
 
   // MATRIX PRODUCT
-  ntm_matrix_product_function #(
+  ntm_matrix_product #(
     .DATA_SIZE(DATA_SIZE)
   )
-  matrix_product_function(
+  matrix_product(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -217,21 +215,19 @@ module ntm_forget_gate_vector(
     .START(start_matrix_product),
     .READY(ready_matrix_product),
 
-    .DATA_A_IN_MATRIX_ENABLE(data_a_in_matrix_enable_matrix_product),
-    .DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_matrix_product),
-    .DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_matrix_product),
-    .DATA_B_IN_MATRIX_ENABLE(data_b_in_matrix_enable_matrix_product),
-    .DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_matrix_product),
-    .DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_matrix_product),
-    .DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_product),
-    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_product),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_product),
+    .DATA_A_IN_I_ENABLE(data_a_in_i_enable_matrix_product),
+    .DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_product),
+    .DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_product),
+    .DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_product),
+    .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_product),
+    .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_product),
 
     // DATA
     .MODULO_IN(modulo_in_matrix_product),
-    .SIZE_I_IN(size_i_in_matrix_product),
-    .SIZE_J_IN(size_j_in_matrix_product),
-    .LENGTH_IN(length_in_matrix_product),
+    .SIZE_A_I_IN(size_a_i_in_matrix_product),
+    .SIZE_A_J_IN(size_a_j_in_matrix_product),
+    .SIZE_B_I_IN(size_b_i_in_matrix_product),
+    .SIZE_B_J_IN(size_b_j_in_matrix_product),
     .DATA_A_IN(data_a_in_matrix_product),
     .DATA_B_IN(data_b_in_matrix_product),
     .DATA_OUT(data_out_matrix_product)

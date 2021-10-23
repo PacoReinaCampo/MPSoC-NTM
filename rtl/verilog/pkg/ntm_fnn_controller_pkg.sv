@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_standard_fnn_testbench;
+package ntm_fnn_controller_pkg;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -61,77 +61,4 @@ module ntm_standard_fnn_testbench;
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
-  // GLOBAL
-  wire CLK;
-  wire RST;
-
-  // CONTROLLER
-  // CONTROL
-  wire start_controller;
-  wire ready_controller;
-
-  wire w_in_l_enable_controller;
-  wire w_in_x_enable_controller;
-  wire k_in_i_enable_controller;
-  wire k_in_l_enable_controller;
-  wire k_in_k_enable_controller;
-  wire b_in_enable_controller;
-  wire x_in_enable_controller;
-  wire r_in_i_enable_controller;
-  wire r_in_k_enable_controller;
-  wire h_out_enable_controller;
-
-  // DATA
-  wire [DATA_SIZE-1:0] size_x_in_controller;
-  wire [DATA_SIZE-1:0] size_w_in_controller;
-  wire [DATA_SIZE-1:0] size_l_in_controller;
-  wire [DATA_SIZE-1:0] size_r_in_controller;
-  wire [DATA_SIZE-1:0] w_in_controller;
-  wire [DATA_SIZE-1:0] k_in_controller;
-  wire [DATA_SIZE-1:0] b_in_controller;
-  wire [DATA_SIZE-1:0] x_in_controller;
-  wire [DATA_SIZE-1:0] r_in_controller;
-  wire [DATA_SIZE-1:0] h_out_controller;
-
-  ///////////////////////////////////////////////////////////////////////
-  // Body
-  ///////////////////////////////////////////////////////////////////////
-
-  // CONTROLLER
-  ntm_controller #(
-    .DATA_SIZE(DATA_SIZE)
-  )
-  ntm_controller_i(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_controller),
-    .READY(ready_controller),
-
-    .W_IN_L_ENABLE(w_in_l_enable_controller),
-    .W_IN_X_ENABLE(w_in_x_enable_controller),
-    .K_IN_I_ENABLE(k_in_i_enable_controller),
-    .K_IN_L_ENABLE(k_in_l_enable_controller),
-    .K_IN_K_ENABLE(k_in_k_enable_controller),
-    .B_IN_ENABLE(b_in_enable_controller),
-    .X_IN_ENABLE(x_in_enable_controller),
-    .R_IN_I_ENABLE(r_in_i_enable_controller),
-    .R_IN_K_ENABLE(r_in_k_enable_controller),
-    .H_OUT_ENABLE(h_out_enable_controller),
-
-    // DATA
-    .SIZE_X_IN(size_x_in_controller),
-    .SIZE_W_IN(size_w_in_controller),
-    .SIZE_L_IN(size_l_in_controller),
-    .SIZE_R_IN(size_r_in_controller),
-    .W_IN(w_in_controller),
-    .K_IN(k_in_controller),
-    .B_IN(b_in_controller),
-    .X_IN(x_in_controller),
-    .R_IN(r_in_controller),
-    .H_OUT(h_out_controller)
-  );
-
-endmodule
+endpackage

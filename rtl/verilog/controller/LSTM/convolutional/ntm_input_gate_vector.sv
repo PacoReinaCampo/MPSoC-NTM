@@ -121,6 +121,7 @@ module ntm_input_gate_vector(
   // CONTROL
   wire start_vector_adder;
   wire ready_vector_adder;
+
   wire operation_vector_adder;
   wire data_a_in_enable_vector_adder;
   wire data_b_in_enable_vector_adder;
@@ -137,19 +138,22 @@ module ntm_input_gate_vector(
   // CONTROL
   wire start_matrix_convolution;
   wire ready_matrix_convolution;
-  wire data_a_in_i_enable_matrix_convolution;
-  wire data_a_in_j_enable_matrix_convolution;
-  wire data_b_in_i_enable_matrix_convolution;
-  wire data_b_in_j_enable_matrix_convolution;
-  wire data_out_i_enable_matrix_convolution;
-  wire data_out_j_enable_matrix_convolution;
+
+  wire data_a_in_matrix_enable_matrix_convolution;
+  wire data_a_in_vector_enable_matrix_convolution;
+  wire data_a_in_scalar_enable_matrix_convolution;
+  wire data_b_in_matrix_enable_matrix_convolution;
+  wire data_b_in_vector_enable_matrix_convolution;
+  wire data_b_in_scalar_enable_matrix_convolution;
+  wire data_out_matrix_enable_matrix_convolution;
+  wire data_out_vector_enable_matrix_convolution;
+  wire data_out_scalar_enable_matrix_convolution;
 
   // DATA
   wire [DATA_SIZE-1:0] modulo_in_matrix_convolution;
-  wire [DATA_SIZE-1:0] size_a_i_in_matrix_convolution;
-  wire [DATA_SIZE-1:0] size_a_j_in_matrix_convolution;
-  wire [DATA_SIZE-1:0] size_b_i_in_matrix_convolution;
-  wire [DATA_SIZE-1:0] size_b_j_in_matrix_convolution;
+  wire [DATA_SIZE-1:0] size_i_in_matrix_convolution;
+  wire [DATA_SIZE-1:0] size_j_in_matrix_convolution;
+  wire [DATA_SIZE-1:0] length_in_matrix_convolution;
   wire [DATA_SIZE-1:0] data_a_in_matrix_convolution;
   wire [DATA_SIZE-1:0] data_b_in_matrix_convolution;
   wire [DATA_SIZE-1:0] data_out_matrix_convolution;
@@ -158,6 +162,7 @@ module ntm_input_gate_vector(
   // CONTROL
   wire start_vector_logistic;
   wire ready_vector_logistic;
+
   wire data_in_enable_vector_logistic;
   wire data_out_enable_vector_logistic;
 
@@ -201,10 +206,10 @@ module ntm_input_gate_vector(
   );
 
   // MATRIX CONVOLUTION
-  ntm_matrix_convolution #(
+  ntm_matrix_convolution_function #(
     .DATA_SIZE(DATA_SIZE)
   )
-  matrix_convolution(
+  matrix_convolution_function(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -213,19 +218,21 @@ module ntm_input_gate_vector(
     .START(start_matrix_convolution),
     .READY(ready_matrix_convolution),
 
-    .DATA_A_IN_I_ENABLE(data_a_in_i_enable_matrix_convolution),
-    .DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_convolution),
-    .DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_convolution),
-    .DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_convolution),
-    .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_convolution),
-    .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_convolution),
+    .DATA_A_IN_MATRIX_ENABLE(data_a_in_matrix_enable_matrix_convolution),
+    .DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_matrix_convolution),
+    .DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_matrix_convolution),
+    .DATA_B_IN_MATRIX_ENABLE(data_b_in_matrix_enable_matrix_convolution),
+    .DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_matrix_convolution),
+    .DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_matrix_convolution),
+    .DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_convolution),
+    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_convolution),
+    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_convolution),
 
     // DATA
     .MODULO_IN(modulo_in_matrix_convolution),
-    .SIZE_A_I_IN(size_a_i_in_matrix_convolution),
-    .SIZE_A_J_IN(size_a_j_in_matrix_convolution),
-    .SIZE_B_I_IN(size_b_i_in_matrix_convolution),
-    .SIZE_B_J_IN(size_b_j_in_matrix_convolution),
+    .SIZE_I_IN(size_i_in_matrix_convolution),
+    .SIZE_J_IN(size_j_in_matrix_convolution),
+    .LENGTH_IN(length_in_matrix_convolution),
     .DATA_A_IN(data_a_in_matrix_convolution),
     .DATA_B_IN(data_b_in_matrix_convolution),
     .DATA_OUT(data_out_matrix_convolution)

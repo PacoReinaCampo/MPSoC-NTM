@@ -82,4 +82,3 @@
 ../../../../../../../../rtl/verilog/controller/LSTM/standard/ntm_state_gate_vector.sv
 
 ../../../../../../../../bench/verilog/uvm/controller/LSTM/standard/ntm_standard_lstm_testbench.sv
-

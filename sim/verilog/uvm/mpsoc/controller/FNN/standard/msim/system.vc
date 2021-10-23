@@ -73,4 +73,3 @@
 ../../../../../../../../rtl/verilog/controller/FNN/standard/ntm_trainer.sv
 
 ../../../../../../../../bench/verilog/uvm/controller/FNN/standard/ntm_standard_fnn_testbench.sv
-
