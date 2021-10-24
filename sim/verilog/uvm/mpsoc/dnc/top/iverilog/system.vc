@@ -70,17 +70,17 @@
 ../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_oneplus_function.sv
 ../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_summation_function.sv
 
-../../../../../../../rtl/verilog/controller/LSTMal/ntm_controller.sv
-../../../../../../../rtl/verilog/controller/LSTMal/ntm_activation_gate_vector.sv
-../../../../../../../rtl/verilog/controller/LSTMal/ntm_activation_trainer.sv
-../../../../../../../rtl/verilog/controller/LSTMal/ntm_forget_gate_vector.sv
-../../../../../../../rtl/verilog/controller/LSTMal/ntm_forget_trainer.sv
-../../../../../../../rtl/verilog/controller/LSTMal/ntm_hidden_gate_vector.sv
-../../../../../../../rtl/verilog/controller/LSTMal/ntm_input_gate_vector.sv
-../../../../../../../rtl/verilog/controller/LSTMal/ntm_input_trainer.sv
-../../../../../../../rtl/verilog/controller/LSTMal/ntm_output_gate_vector.sv
-../../../../../../../rtl/verilog/controller/LSTMal/ntm_output_trainer.sv
-../../../../../../../rtl/verilog/controller/LSTMal/ntm_state_gate_vector.sv
+../../../../../../../rtl/verilog/controller/LSTM/convolutional/ntm_controller.sv
+../../../../../../../rtl/verilog/controller/LSTM/convolutional/ntm_activation_gate_vector.sv
+../../../../../../../rtl/verilog/controller/LSTM/convolutional/ntm_activation_trainer.sv
+../../../../../../../rtl/verilog/controller/LSTM/convolutional/ntm_forget_gate_vector.sv
+../../../../../../../rtl/verilog/controller/LSTM/convolutional/ntm_forget_trainer.sv
+../../../../../../../rtl/verilog/controller/LSTM/convolutional/ntm_hidden_gate_vector.sv
+../../../../../../../rtl/verilog/controller/LSTM/convolutional/ntm_input_gate_vector.sv
+../../../../../../../rtl/verilog/controller/LSTM/convolutional/ntm_input_trainer.sv
+../../../../../../../rtl/verilog/controller/LSTM/convolutional/ntm_output_gate_vector.sv
+../../../../../../../rtl/verilog/controller/LSTM/convolutional/ntm_output_trainer.sv
+../../../../../../../rtl/verilog/controller/LSTM/convolutional/ntm_state_gate_vector.sv
 
 ../../../../../../../rtl/verilog/dnc/read_heads/dnc_free_gates.sv
 ../../../../../../../rtl/verilog/dnc/read_heads/dnc_read_keys.sv

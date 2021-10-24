@@ -58,16 +58,16 @@ module ntm_vector_inverter(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   input DATA_IN_ENABLE;
-  output DATA_OUT_ENABLE;
+  output reg DATA_OUT_ENABLE;
 
   // DATA
   input [DATA_SIZE-1:0] MODULO_IN;
   input [DATA_SIZE-1:0] SIZE_IN;
   input [DATA_SIZE-1:0] DATA_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+  output reg [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -110,33 +110,39 @@ module ntm_vector_inverter(
 
   // 1 = DATA_OUT · DATA_IN mod MODULO_IN
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       DATA_OUT <= ZERO;
+
       // Control Outputs
       READY <= 1'b0;
+
       // Assignations
       index_loop <= ZERO;
-    end else begin
+    end
+	else begin
       case(inverter_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
-          if((START == 1'b1)) begin
+
+          if(START == 1'b1) begin
             // Assignations
             index_loop <= ZERO;
+
             // FSM Control
             inverter_ctrl_fsm_int <= INPUT_STATE;
           end
         end
         INPUT_STATE : begin
           // STEP 1
-          if((DATA_IN_ENABLE == 1'b1)) begin
+          if(DATA_IN_ENABLE == 1'b1) begin
             // Data Inputs
             modulo_in_scalar_inverter <= MODULO_IN;
             data_in_scalar_inverter <= DATA_IN;
-            if((index_loop == ZERO)) begin
+
+            if(index_loop == ZERO) begin
               // Control Internal
               start_scalar_inverter <= 1'b1;
             end
@@ -148,21 +154,24 @@ module ntm_vector_inverter(
         end
         ENDER_STATE : begin
           // STEP 2
-          if((ready_scalar_inverter == 1'b1)) begin
-            if((index_loop == (SIZE_IN - ONE))) begin
+          if(ready_scalar_inverter == 1'b1) begin
+            if(index_loop == (SIZE_IN - ONE)) begin
               // Control Outputs
               READY <= 1'b1;
+
               // FSM Control
               inverter_ctrl_fsm_int <= STARTER_STATE;
             end
             else begin
               // Control Internal
               index_loop <= (index_loop + ONE);
+
               // FSM Control
               inverter_ctrl_fsm_int <= INPUT_STATE;
             end
             // Data Outputs
             DATA_OUT <= data_out_scalar_inverter;
+
             // Control Outputs
             DATA_OUT_ENABLE <= 1'b1;
           end

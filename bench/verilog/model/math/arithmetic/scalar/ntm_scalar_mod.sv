@@ -55,12 +55,12 @@ module ntm_scalar_mod(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   // DATA
   input [DATA_SIZE-1:0] MODULO_IN;
   input [DATA_SIZE-1:0] DATA_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+  output reg [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -94,8 +94,10 @@ module ntm_scalar_mod(
     if((RST == 1'b0)) begin
       // Data Outputs
       DATA_OUT <= ZERO;
+
       // Control Outputs
       READY <= 1'b0;
+
       // Assignations
       mod_int <= ZERO;
     end else begin
@@ -104,30 +106,35 @@ module ntm_scalar_mod(
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
-          if((START == 1'b1)) begin
+          if(START == 1'b1) begin
             // Assignations
             mod_int <= DATA_IN;
+
             // FSM Control
             mod_ctrl_fsm_int <= ENDER_STATE;
           end
         end
         ENDER_STATE : begin
           // STEP 1
-          if((MODULO_IN > ZERO)) begin
-            if((mod_int > ZERO)) begin
-              if((mod_int == MODULO_IN)) begin
+          if(MODULO_IN > ZERO) begin
+            if(mod_int > ZERO) begin
+              if(mod_int == MODULO_IN) begin
                 // Data Outputs
                 DATA_OUT <= ZERO;
+
                 // Control Outputs
                 READY <= 1'b1;
+
                 // FSM Control
                 mod_ctrl_fsm_int <= STARTER_STATE;
               end
-              else if((mod_int < MODULO_IN)) begin
+              else if(mod_int < MODULO_IN) begin
                 // Data Outputs
                 DATA_OUT <= mod_int;
+
                 // Control Outputs
                 READY <= 1'b1;
+
                 // FSM Control
                 mod_ctrl_fsm_int <= STARTER_STATE;
               end
@@ -136,20 +143,24 @@ module ntm_scalar_mod(
                 mod_int <= (mod_int - MODULO_IN);
               end
             end
-            else if((mod_int == ZERO)) begin
+            else if(mod_int == ZERO) begin
               // Data Outputs
               DATA_OUT <= ZERO;
+
               // Control Outputs
               READY <= 1'b1;
+
               // FSM Control
               mod_ctrl_fsm_int <= STARTER_STATE;
             end
           end
-          else if((MODULO_IN == ZERO)) begin
+          else if(MODULO_IN == ZERO) begin
             // Data Outputs
             DATA_OUT <= mod_int;
+
             // Control Outputs
             READY <= 1'b1;
+
             // FSM Control
             mod_ctrl_fsm_int <= STARTER_STATE;
           end

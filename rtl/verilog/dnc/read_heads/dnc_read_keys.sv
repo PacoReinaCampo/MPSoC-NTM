@@ -60,18 +60,18 @@ module dnc_read_keys(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   input K_IN_I_ENABLE;  // for i in 0 to R-1
   input K_IN_K_ENABLE;  // for k in 0 to W-1
-  output K_OUT_I_ENABLE;  // for i in 0 to R-1
-  output K_OUT_K_ENABLE;  // for k in 0 to W-1
+  output reg K_OUT_I_ENABLE;  // for i in 0 to R-1
+  output reg K_OUT_K_ENABLE;  // for k in 0 to W-1
 
   // DATA
   input [DATA_SIZE-1:0] SIZE_R_IN;
   input [DATA_SIZE-1:0] SIZE_W_IN;
   input [DATA_SIZE-1:0] K_IN;
-  output [DATA_SIZE-1:0] K_OUT;
+  output reg [DATA_SIZE-1:0] K_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -104,7 +104,7 @@ module dnc_read_keys(
 
   // k(t;i;k) = k^(t;i;k)
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       K_OUT <= ZERO;
 
@@ -133,7 +133,7 @@ module dnc_read_keys(
           // STEP 1
           if((K_IN_I_ENABLE == 1'b1)) begin
             // Control Internal
-            if((index_i_loop < (((SIZE_R_IN)) - ONE) && index_j_loop == (((SIZE_W_IN)) - ONE))) begin
+            if((index_i_loop < (SIZE_R_IN - ONE) && index_j_loop == (SIZE_W_IN - ONE))) begin
               index_i_loop <= (index_i_loop + ONE);
               index_j_loop <= ZERO;
             end
@@ -151,14 +151,14 @@ module dnc_read_keys(
             K_OUT_K_ENABLE <= 1'b0;
           end
           if((K_IN_K_ENABLE == 1'b1)) begin
-            if((index_i_loop == (((SIZE_R_IN)) - ONE) && index_j_loop == (((SIZE_W_IN)) - ONE))) begin
+            if((index_i_loop == (SIZE_R_IN - ONE) && index_j_loop == (SIZE_W_IN - ONE))) begin
               // Control Outputs
               READY <= 1'b1;
 
               // FSM Control
               read_keys_ctrl_fsm_int <= STARTER_STATE;
             end
-            else if((index_i_loop < (((SIZE_R_IN)) - ONE) && index_j_loop < (((SIZE_W_IN)) - ONE))) begin
+            else if((index_i_loop < (SIZE_R_IN - ONE) && index_j_loop < (SIZE_W_IN - ONE))) begin
               // Control Internal
               index_j_loop <= (index_j_loop + ONE);
             end

@@ -57,15 +57,15 @@ module dnc_write_vector(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   input V_IN_ENABLE;  // for k in 0 to W-1
-  output V_OUT_ENABLE;  // for k in 0 to W-1
+  output reg V_OUT_ENABLE;  // for k in 0 to W-1
 
   // DATA
   input [DATA_SIZE-1:0] SIZE_W_IN;
   input [DATA_SIZE-1:0] V_IN;
-  output [DATA_SIZE-1:0] V_OUT;
+  output reg [DATA_SIZE-1:0] V_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -97,7 +97,7 @@ module dnc_write_vector(
 
   // v(t;k) = v^(t;k)
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       V_OUT <= ZERO;
 
@@ -113,7 +113,7 @@ module dnc_write_vector(
           // Control Outputs
           READY <= 1'b0;
 
-          if((START == 1'b1)) begin
+          if(START == 1'b1) begin
             // Assignations
             index_loop <= ZERO;
 
@@ -123,8 +123,8 @@ module dnc_write_vector(
         end
         ENDER_STATE : begin
           // STEP 1
-          if((V_IN_ENABLE == 1'b1)) begin
-            if((index_loop == (((SIZE_W_IN)) - ONE))) begin
+          if(V_IN_ENABLE == 1'b1) begin
+            if(index_loop == (SIZE_W_IN - ONE)) begin
               // Control Outputs
               READY <= 1'b1;
 

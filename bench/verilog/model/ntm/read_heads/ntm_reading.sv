@@ -161,6 +161,7 @@ module ntm_reading(
 
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_multiplier),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_multiplier),
+    .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
 
     // DATA
     .MODULO_IN(modulo_in_vector_multiplier),

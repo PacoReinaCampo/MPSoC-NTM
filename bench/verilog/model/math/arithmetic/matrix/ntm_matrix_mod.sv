@@ -61,19 +61,19 @@ module ntm_matrix_mod(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
 
   input DATA_IN_I_ENABLE;
   input DATA_IN_J_ENABLE;
-  output DATA_OUT_I_ENABLE;
-  output DATA_OUT_J_ENABLE;
+  output reg DATA_OUT_I_ENABLE;
+  output reg DATA_OUT_J_ENABLE;
 
   // DATA
   input [DATA_SIZE-1:0] MODULO_IN;
   input [DATA_SIZE-1:0] SIZE_I_IN;
   input [DATA_SIZE-1:0] SIZE_J_IN;
   input [DATA_SIZE-1:0] DATA_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+  output reg [DATA_SIZE-1:0] DATA_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -133,13 +133,14 @@ module ntm_matrix_mod(
       index_j_loop <= ZERO;
       data_in_i_mod_int <= 1'b0;
       data_in_j_mod_int <= 1'b0;
-    end else begin
+    end
+	else begin
       case(mod_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
-          if((START == 1'b1)) begin
+          if(START == 1'b1) begin
             // Assignations
             index_i_loop <= ZERO;
             index_j_loop <= ZERO;
@@ -153,7 +154,7 @@ module ntm_matrix_mod(
             // Data Inputs
             modulo_in_vector_mod <= MODULO_IN;
             data_in_vector_mod <= DATA_IN;
-            if((index_i_loop == ZERO)) begin
+            if(index_i_loop == ZERO) begin
               // Control Internal
               start_vector_mod <= 1'b1;
             end
@@ -177,7 +178,7 @@ module ntm_matrix_mod(
             modulo_in_vector_mod <= MODULO_IN;
             size_in_vector_mod <= SIZE_J_IN;
             data_in_vector_mod <= DATA_IN;
-            if((index_j_loop == ZERO)) begin
+            if(index_j_loop == ZERO) begin
               // Control Internal
               start_vector_mod <= 1'b1;
             end

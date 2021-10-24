@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ecdsa_mod is
+entity ntm_scalar_mod is
   generic (
     DATA_SIZE : integer := 512
     );
@@ -58,21 +58,21 @@ entity ecdsa_mod is
     READY : out std_logic;
 
     -- DATA
-    MODULO   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
-architecture ecdsa_mod_architecture of ecdsa_mod is
+architecture ntm_scalar_mod_architecture of ntm_scalar_mod is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type mod_ctrl_fsm_type is (
-    STARTER_ST,                         -- STEP 0
-    ENDER_ST                            -- STEP 1
+  type mod_ctrl_fsm is (
+    STARTER_STATE,                      -- STEP 0
+    ENDER_STATE                         -- STEP 1
     );
 
   -----------------------------------------------------------------------
@@ -86,16 +86,18 @@ architecture ecdsa_mod_architecture of ecdsa_mod is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal mod_ctrl_fsm_st : mod_ctrl_fsm_type;
+  signal mod_ctrl_fsm_int : mod_ctrl_fsm;
 
   -- Internal Signals
-  signal arithmetic_int : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal mod_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- DATA_OUT = DATA_IN mod MODULO_IN
 
   ctrl_fsm : process(CLK, RST)
   begin
@@ -107,37 +109,73 @@ begin
       READY <= '0';
 
       -- Assignations
-      arithmetic_int <= ZERO;
+      mod_int <= ZERO;
 
     elsif (rising_edge(CLK)) then
 
-      case mod_ctrl_fsm_st is
-        when STARTER_ST =>              -- STEP 0
+      case mod_ctrl_fsm_int is
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
           if (START = '1') then
             -- Assignations
-            arithmetic_int <= DATA_IN;
+            mod_int <= DATA_IN;
 
             -- FSM Control
-            mod_ctrl_fsm_st <= ENDER_ST;
+            mod_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
-        when ENDER_ST =>                -- STEP 1
+        when ENDER_STATE =>             -- STEP 1
 
-          -- Data Outputs
-          DATA_OUT <= std_logic_vector(unsigned(arithmetic_int) mod unsigned(MODULO));
+          if (unsigned(MODULO_IN) > unsigned(ZERO)) then
+            if (unsigned(mod_int) > unsigned(ZERO)) then
+              if (unsigned(mod_int) = unsigned(MODULO_IN)) then
+                -- Data Outputs
+                DATA_OUT <= ZERO;
 
-          -- Control Outputs
-          READY <= '1';
+                -- Control Outputs
+                READY <= '1';
 
-          -- FSM Control
-          mod_ctrl_fsm_st <= STARTER_ST;
+                -- FSM Control
+                mod_ctrl_fsm_int <= STARTER_STATE;
+              elsif (unsigned(mod_int) < unsigned(MODULO_IN)) then
+                -- Data Outputs
+                DATA_OUT <= mod_int;
+
+                -- Control Outputs
+                READY <= '1';
+
+                -- FSM Control
+                mod_ctrl_fsm_int <= STARTER_STATE;
+              else
+                -- Assignations
+                mod_int <= std_logic_vector(unsigned(mod_int) - unsigned(MODULO_IN));
+              end if;
+            elsif (unsigned(mod_int) = unsigned(ZERO)) then
+              -- Data Outputs
+              DATA_OUT <= ZERO;
+
+              -- Control Outputs
+              READY <= '1';
+
+              -- FSM Control
+              mod_ctrl_fsm_int <= STARTER_STATE;
+            end if;
+          elsif (unsigned(MODULO_IN) = unsigned(ZERO)) then
+            -- Data Outputs
+            DATA_OUT <= mod_int;
+
+            -- Control Outputs
+            READY <= '1';
+
+            -- FSM Control
+            mod_ctrl_fsm_int <= STARTER_STATE;
+          end if;
 
         when others =>
           -- FSM Control
-          mod_ctrl_fsm_st <= STARTER_ST;
+          mod_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

@@ -57,15 +57,14 @@ module dnc_write_key(
 
   // CONTROL
   input START;
-  output READY;
+  output reg READY;
   input K_IN_ENABLE;  // for k in 0 to W-1
-  output K_OUT_ENABLE;  // for k in 0 to W-1
+  output reg K_OUT_ENABLE;  // for k in 0 to W-1
 
   // DATA
   input [DATA_SIZE-1:0] SIZE_W_IN;
   input [DATA_SIZE-1:0] K_IN;
-  output [DATA_SIZE-1:0] K_OUT;
-
+  output reg [DATA_SIZE-1:0] K_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -97,7 +96,7 @@ module dnc_write_key(
 
   // k(t;k) = k^(t;k)
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       K_OUT <= ZERO;
 
@@ -106,13 +105,14 @@ module dnc_write_key(
 
       // Assignations
       index_loop <= ZERO;
-    end else begin
+    end
+    else begin
       case(write_key_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
-          if((START == 1'b1)) begin
+          if(START == 1'b1) begin
             // Assignations
             index_loop <= ZERO;
 
@@ -123,7 +123,7 @@ module dnc_write_key(
         ENDER_STATE : begin
           // STEP 1
           if((K_IN_ENABLE == 1'b1)) begin
-            if((index_loop == (((SIZE_W_IN)) - ONE))) begin
+            if(index_loop == (SIZE_W_IN - ONE)) begin
               // Control Outputs
               READY <= 1'b1;
 
