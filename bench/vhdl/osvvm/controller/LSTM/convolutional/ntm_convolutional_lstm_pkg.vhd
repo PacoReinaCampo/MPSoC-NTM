@@ -39,3 +39,56 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+
+use work.ntm_math_pkg.all;
+
+package ntm_convolutional_lstm_pkg is
+
+  -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Components
+  -----------------------------------------------------------------------
+
+  component ntm_convolutional_lstm_stimulus is
+    generic (
+      DATA_SIZE : integer := 512
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      NTM_CONVOLUTIONAL_LSTM_START : out std_logic;
+      NTM_CONVOLUTIONAL_LSTM_READY : in  std_logic;
+
+      NTM_CONVOLUTIONAL_LSTM_W_IN_L_ENABLE : out std_logic;
+      NTM_CONVOLUTIONAL_LSTM_W_IN_X_ENABLE : out std_logic;
+      NTM_CONVOLUTIONAL_LSTM_K_IN_I_ENABLE : out std_logic;
+      NTM_CONVOLUTIONAL_LSTM_K_IN_L_ENABLE : out std_logic;
+      NTM_CONVOLUTIONAL_LSTM_K_IN_K_ENABLE : out std_logic;
+      NTM_CONVOLUTIONAL_LSTM_B_IN_ENABLE   : out std_logic;
+      NTM_CONVOLUTIONAL_LSTM_X_IN_ENABLE   : out std_logic;
+      NTM_CONVOLUTIONAL_LSTM_R_IN_I_ENABLE : out std_logic;
+      NTM_CONVOLUTIONAL_LSTM_R_IN_K_ENABLE : out std_logic;
+      NTM_CONVOLUTIONAL_LSTM_H_OUT_ENABLE  : in  std_logic;
+
+      -- DATA
+      NTM_CONVOLUTIONAL_LSTM_SIZE_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_CONVOLUTIONAL_LSTM_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_CONVOLUTIONAL_LSTM_SIZE_L_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_CONVOLUTIONAL_LSTM_SIZE_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+      NTM_CONVOLUTIONAL_LSTM_W_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_CONVOLUTIONAL_LSTM_K_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_CONVOLUTIONAL_LSTM_B_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_CONVOLUTIONAL_LSTM_X_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_CONVOLUTIONAL_LSTM_R_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_CONVOLUTIONAL_LSTM_H_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+end ntm_convolutional_lstm_pkg;

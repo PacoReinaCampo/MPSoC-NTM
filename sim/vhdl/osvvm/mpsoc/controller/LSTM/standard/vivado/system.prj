@@ -81,4 +81,6 @@ vhdl2008 work ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_outp
 vhdl2008 work ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_output_trainer.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_state_gate_vector.vhd
 
+vhdl2008 work ../../../../../../../../bench/vhdl/osvvm/controller/LSTM/standard/ntm_standard_lstm_pkg.vhd
+vhdl2008 work ../../../../../../../../bench/vhdl/osvvm/controller/LSTM/standard/ntm_standard_lstm_stimulus.vhd
 vhdl2008 work ../../../../../../../../bench/vhdl/osvvm/controller/LSTM/standard/ntm_standard_lstm_testbench.vhd

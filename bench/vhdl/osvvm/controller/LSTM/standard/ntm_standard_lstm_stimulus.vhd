@@ -61,8 +61,31 @@ entity ntm_standard_lstm_stimulus is
     RST : out std_logic;
 
     -- CONTROL
-    START : out std_logic;
-    READY : in  std_logic
+    NTM_STANDARD_START : out std_logic;
+    NTM_STANDARD_READY : in  std_logic;
+
+    NTM_STANDARD_LSTM_W_IN_L_ENABLE : out std_logic;
+    NTM_STANDARD_LSTM_W_IN_X_ENABLE : out std_logic;
+    NTM_STANDARD_LSTM_K_IN_I_ENABLE : out std_logic;
+    NTM_STANDARD_LSTM_K_IN_L_ENABLE : out std_logic;
+    NTM_STANDARD_LSTM_K_IN_K_ENABLE : out std_logic;
+    NTM_STANDARD_LSTM_B_IN_ENABLE   : out std_logic;
+    NTM_STANDARD_LSTM_X_IN_ENABLE   : out std_logic;
+    NTM_STANDARD_LSTM_R_IN_I_ENABLE : out std_logic;
+    NTM_STANDARD_LSTM_R_IN_K_ENABLE : out std_logic;
+    NTM_STANDARD_LSTM_H_OUT_ENABLE  : in  std_logic;
+
+    -- DATA
+    NTM_STANDARD_LSTM_SIZE_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_SIZE_L_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_SIZE_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_W_IN      : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_K_IN      : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_B_IN      : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_X_IN      : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_R_IN      : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_H_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -88,6 +111,8 @@ architecture ntm_standard_lstm_stimulus_architecture of ntm_standard_lstm_stimul
   -- GLOBAL
   signal clk_int : std_logic;
   signal rst_int : std_logic;
+
+  signal start_int : std_logic;
 
 begin
 
@@ -131,46 +156,5 @@ begin
   -----------------------------------------------------------------------
   -- STIMULUS
   -----------------------------------------------------------------------
-
-  main_test : process
-  begin
-
-    if (NTM_TEST0) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "NTM_TEST0                ";
-      -------------------------------------------------------------------
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE0                ";
-      -------------------------------------------------------------------
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE1                ";
-      -------------------------------------------------------------------
-
-    end if;
-
-    if (NTM_TEST1) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "NTM_TEST1                ";
-      -------------------------------------------------------------------
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE0                ";
-      -------------------------------------------------------------------
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE1                ";
-      -------------------------------------------------------------------
-
-    end if;
-
-    assert false
-      report "END OF TEST"
-      severity failure;
-
-  end process main_test;
 
 end architecture;

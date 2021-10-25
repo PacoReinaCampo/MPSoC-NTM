@@ -75,6 +75,8 @@ ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matri
 ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/FNN/standard/ntm_controller.vhd
 ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/FNN/standard/ntm_trainer.vhd
 
+ghdl -a --std=08 ../../../../../../../../bench/vhdl/osvvm/controller/FNN/standard/ntm_standard_fnn_pkg.vhd
+ghdl -a --std=08 ../../../../../../../../bench/vhdl/osvvm/controller/FNN/standard/ntm_standard_fnn_stimulus.vhd
 ghdl -a --std=08 ../../../../../../../../bench/vhdl/osvvm/controller/FNN/standard/ntm_standard_fnn_testbench.vhd
 
 ghdl -m --std=08 ntm_standard_fnn_testbench

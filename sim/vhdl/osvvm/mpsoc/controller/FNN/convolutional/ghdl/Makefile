@@ -72,10 +72,12 @@ build:
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_oneplus_function.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_summation_function.vhd
 
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/FNNal/ntm_controller.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/FNN/standard/ntm_trainer.vhd
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/FNN/convolutional/ntm_controller.vhd
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/FNN/convolutional/ntm_trainer.vhd
 
-	ghdl -a --std=08 ../../../../../../../../bench/vhdl/osvvm/controller/FNNal/ntm_convolutional_fnn_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../../bench/vhdl/osvvm/controller/FNN/convolutional/ntm_convolutional_fnn_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../../bench/vhdl/osvvm/controller/FNN/convolutional/ntm_convolutional_fnn_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../../bench/vhdl/osvvm/controller/FNN/convolutional/ntm_convolutional_fnn_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 ntm_convolutional_fnn_testbench

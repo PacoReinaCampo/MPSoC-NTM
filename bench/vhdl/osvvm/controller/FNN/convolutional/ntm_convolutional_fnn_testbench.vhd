@@ -42,6 +42,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 use work.ntm_fnn_controller_pkg.all;
+use work.ntm_convolutional_fnn_pkg.all;
 
 entity ntm_convolutional_fnn_testbench is
 end ntm_convolutional_fnn_testbench;
@@ -97,6 +98,52 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- STIMULUS
+  ntm_convolutional_fnn_stimulus_i : ntm_convolutional_fnn_stimulus
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      NTM_CONVOLUTIONAL_FNN_START => start_controller,
+      NTM_CONVOLUTIONAL_FNN_READY => ready_controller,
+
+      NTM_CONVOLUTIONAL_FNN_W_IN_L_ENABLE => w_in_l_enable_controller,
+      NTM_CONVOLUTIONAL_FNN_W_IN_X_ENABLE => w_in_x_enable_controller,
+
+      NTM_CONVOLUTIONAL_FNN_K_IN_I_ENABLE => k_in_i_enable_controller,
+      NTM_CONVOLUTIONAL_FNN_K_IN_L_ENABLE => k_in_l_enable_controller,
+      NTM_CONVOLUTIONAL_FNN_K_IN_K_ENABLE => k_in_k_enable_controller,
+
+      NTM_CONVOLUTIONAL_FNN_B_IN_ENABLE => b_in_enable_controller,
+
+      NTM_CONVOLUTIONAL_FNN_X_IN_ENABLE => x_in_enable_controller,
+
+      NTM_CONVOLUTIONAL_FNN_R_IN_I_ENABLE => r_in_i_enable_controller,
+      NTM_CONVOLUTIONAL_FNN_R_IN_K_ENABLE => r_in_k_enable_controller,
+
+      NTM_CONVOLUTIONAL_FNN_H_OUT_ENABLE => h_out_enable_controller,
+
+      -- DATA
+      NTM_CONVOLUTIONAL_FNN_SIZE_X_IN => size_x_in_controller,
+      NTM_CONVOLUTIONAL_FNN_SIZE_W_IN => size_w_in_controller,
+      NTM_CONVOLUTIONAL_FNN_SIZE_L_IN => size_l_in_controller,
+      NTM_CONVOLUTIONAL_FNN_SIZE_R_IN => size_r_in_controller,
+
+      NTM_CONVOLUTIONAL_FNN_W_IN => w_in_controller,
+      NTM_CONVOLUTIONAL_FNN_K_IN => k_in_controller,
+      NTM_CONVOLUTIONAL_FNN_B_IN => b_in_controller,
+
+      NTM_CONVOLUTIONAL_FNN_X_IN => x_in_controller,
+      NTM_CONVOLUTIONAL_FNN_R_IN => r_in_controller,
+
+      NTM_CONVOLUTIONAL_FNN_H_OUT => h_out_controller
+      );
 
   -- CONTROLLER
   ntm_controller_i : ntm_controller

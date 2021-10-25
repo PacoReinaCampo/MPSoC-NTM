@@ -72,5 +72,6 @@ vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/summation/matrix/nt
 vhdl2008 work ../../../../../../../../rtl/vhdl/controller/FNN/convolutional/ntm_controller.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/controller/FNN/convolutional/ntm_trainer.vhd
 
+vhdl2008 work ../../../../../../../../bench/vhdl/osvvm/controller/FNN/convolutional/ntm_convolutional_fnn_pkg.vhd
+vhdl2008 work ../../../../../../../../bench/vhdl/osvvm/controller/FNN/convolutional/ntm_convolutional_fnn_stimulus.vhd
 vhdl2008 work ../../../../../../../../bench/vhdl/osvvm/controller/FNN/convolutional/ntm_convolutional_fnn_testbench.vhd
-

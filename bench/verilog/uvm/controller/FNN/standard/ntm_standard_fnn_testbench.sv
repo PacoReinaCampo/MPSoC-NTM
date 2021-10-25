@@ -97,6 +97,43 @@ module ntm_standard_fnn_testbench;
   // Body
   ///////////////////////////////////////////////////////////////////////
 
+  // STIMULUS
+  ntm_standard_fnn_stimulus #(
+    .DATA_SIZE(DATA_SIZE)
+  )
+  standard_fnn_stimulus(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .NTM_STANDARD_FNN_START(start_controller),
+    .NTM_STANDARD_FNN_READY(ready_controller),
+
+    .NTM_STANDARD_FNN_W_IN_L_ENABLE(w_in_l_enable_controller),
+    .NTM_STANDARD_FNN_W_IN_X_ENABLE(w_in_x_enable_controller),
+    .NTM_STANDARD_FNN_K_IN_I_ENABLE(k_in_i_enable_controller),
+    .NTM_STANDARD_FNN_K_IN_L_ENABLE(k_in_l_enable_controller),
+    .NTM_STANDARD_FNN_K_IN_K_ENABLE(k_in_k_enable_controller),
+    .NTM_STANDARD_FNN_B_IN_ENABLE(b_in_enable_controller),
+    .NTM_STANDARD_FNN_X_IN_ENABLE(x_in_enable_controller),
+    .NTM_STANDARD_FNN_R_IN_I_ENABLE(r_in_i_enable_controller),
+    .NTM_STANDARD_FNN_R_IN_K_ENABLE(r_in_k_enable_controller),
+    .NTM_STANDARD_FNN_H_OUT_ENABLE(h_out_enable_controller),
+
+    // DATA
+    .NTM_STANDARD_FNN_SIZE_X_IN(size_x_in_controller),
+    .NTM_STANDARD_FNN_SIZE_W_IN(size_w_in_controller),
+    .NTM_STANDARD_FNN_SIZE_L_IN(size_l_in_controller),
+    .NTM_STANDARD_FNN_SIZE_R_IN(size_r_in_controller),
+    .NTM_STANDARD_FNN_W_IN(w_in_controller),
+    .NTM_STANDARD_FNN_K_IN(k_in_controller),
+    .NTM_STANDARD_FNN_B_IN(b_in_controller),
+    .NTM_STANDARD_FNN_X_IN(x_in_controller),
+    .NTM_STANDARD_FNN_R_IN(r_in_controller),
+    .NTM_STANDARD_FNN_H_OUT(h_out_controller)
+  );
+
   // CONTROLLER
   ntm_controller #(
     .DATA_SIZE(DATA_SIZE)

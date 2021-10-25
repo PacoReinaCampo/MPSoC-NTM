@@ -81,4 +81,5 @@ sv work ../../../../../../../../rtl/verilog/controller/LSTM/standard/ntm_output_
 sv work ../../../../../../../../rtl/verilog/controller/LSTM/standard/ntm_output_trainer.sv
 sv work ../../../../../../../../rtl/verilog/controller/LSTM/standard/ntm_state_gate_vector.sv
 
+sv work ../../../../../../../../bench/verilog/osvvm/controller/LSTM/standard/ntm_standard_lstm_stimulus.sv
 sv work ../../../../../../../../bench/verilog/osvvm/controller/LSTM/standard/ntm_standard_lstm_testbench.sv

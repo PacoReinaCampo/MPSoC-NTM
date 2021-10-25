@@ -72,19 +72,21 @@ build:
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_oneplus_function.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_summation_function.vhd
 
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTMal/ntm_controller.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTMal/ntm_activation_gate_vector.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTMal/ntm_activation_trainer.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTMal/ntm_forget_gate_vector.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTMal/ntm_forget_trainer.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTMal/ntm_hidden_gate_vector.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTMal/ntm_input_gate_vector.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTMal/ntm_input_trainer.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTMal/ntm_output_gate_vector.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTMal/ntm_output_trainer.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTMal/ntm_state_gate_vector.vhd
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_controller.vhd
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_activation_gate_vector.vhd
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_activation_trainer.vhd
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_forget_gate_vector.vhd
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_forget_trainer.vhd
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_hidden_gate_vector.vhd
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_input_gate_vector.vhd
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_input_trainer.vhd
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_output_gate_vector.vhd
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_output_trainer.vhd
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_state_gate_vector.vhd
 
-	ghdl -a --std=08 ../../../../../../../../bench/vhdl/osvvm/controller/LSTMal/ntm_convolutional_lstm_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../../bench/vhdl/osvvm/controller/LSTM/convolutional/ntm_convolutional_lstm_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../../bench/vhdl/osvvm/controller/LSTM/convolutional/ntm_convolutional_lstm_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../../bench/vhdl/osvvm/controller/LSTM/convolutional/ntm_convolutional_lstm_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 ntm_convolutional_lstm_testbench

@@ -84,6 +84,8 @@ build:
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_output_trainer.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_state_gate_vector.vhd
 
+	ghdl -a --std=08 ../../../../../../../../bench/vhdl/osvvm/controller/LSTM/standard/ntm_standard_lstm_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../../bench/vhdl/osvvm/controller/LSTM/standard/ntm_standard_lstm_stimulus.vhd
 	ghdl -a --std=08 ../../../../../../../../bench/vhdl/osvvm/controller/LSTM/standard/ntm_standard_lstm_testbench.vhd
 
 simulate:

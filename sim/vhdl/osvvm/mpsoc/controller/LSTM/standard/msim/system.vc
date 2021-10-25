@@ -81,5 +81,6 @@
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_output_trainer.vhd
 ../../../../../../../../rtl/vhdl/controller/LSTM/standard/ntm_state_gate_vector.vhd
 
+../../../../../../../../bench/vhdl/osvvm/controller/LSTM/standard/ntm_standard_lstm_pkg.vhd
+../../../../../../../../bench/vhdl/osvvm/controller/LSTM/standard/ntm_standard_lstm_stimulus.vhd
 ../../../../../../../../bench/vhdl/osvvm/controller/LSTM/standard/ntm_standard_lstm_testbench.vhd
-

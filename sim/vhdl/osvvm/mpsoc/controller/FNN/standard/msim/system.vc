@@ -72,5 +72,6 @@
 ../../../../../../../../rtl/vhdl/controller/FNN/standard/ntm_controller.vhd
 ../../../../../../../../rtl/vhdl/controller/FNN/standard/ntm_trainer.vhd
 
+../../../../../../../../bench/vhdl/osvvm/controller/FNN/standard/ntm_standard_fnn_pkg.vhd
+../../../../../../../../bench/vhdl/osvvm/controller/FNN/standard/ntm_standard_fnn_stimulus.vhd
 ../../../../../../../../bench/vhdl/osvvm/controller/FNN/standard/ntm_standard_fnn_testbench.vhd
-
