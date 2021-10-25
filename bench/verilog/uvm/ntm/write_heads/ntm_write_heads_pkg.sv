@@ -37,38 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_read_heads_stimulus #(
-  // SYSTEM-SIZE
-  parameter DATA_SIZE=512,
-
-  parameter X=64,
-  parameter Y=64,
-  parameter N=64,
-  parameter W=64,
-  parameter L=64,
-  parameter R=64,
-)
-  (
-    // GLOBAL
-    output CLK,
-    output RST,
-
-    // CONTROL
-    output NTM_READ_HEADS_START,
-    input NTM_READ_HEADS_READY,
-
-    output NTM_READ_HEADS_M_IN_ENABLE,
-    output NTM_READ_HEADS_A_IN_ENABLE,
-    input NTM_READ_HEADS_M_OUT_ENABLE,
-
-    // DATA
-    output [DATA_SIZE-1:0] NTM_READ_HEADS_SIZE_N_IN),
-    output [DATA_SIZE-1:0] NTM_READ_HEADS_SIZE_W_IN,
-    output [DATA_SIZE-1:0] NTM_READ_HEADS_M_IN,
-    output [DATA_SIZE-1:0] NTM_READ_HEADS_A_IN,
-    output [DATA_SIZE-1:0] NTM_READ_HEADS_W_IN,
-    input [DATA_SIZE-1:0] NTM_READ_HEADS_M_OUT
-  );
+package ntm_write_heads_pkg;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -78,8 +47,18 @@ module ntm_read_heads_stimulus #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  // SYSTEM-SIZE
+  parameter DATA_SIZE=512;
+
+  parameter X=64;
+  parameter Y=64;
+  parameter N=64;
+  parameter W=64;
+  parameter L=64;
+  parameter R=64;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
-endmodule
+endpackage

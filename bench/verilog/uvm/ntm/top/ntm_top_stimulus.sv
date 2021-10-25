@@ -37,74 +37,52 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_top_stimulus(
-  CLK,
-  RST,
-  NTM_TOP_START,
-  NTM_TOP_READY,
-  NTM_TOP_W_IN_L_ENABLE,
-  NTM_TOP_W_IN_X_ENABLE,
-  NTM_TOP_K_IN_I_ENABLE,
-  NTM_TOP_K_IN_L_ENABLE,
-  NTM_TOP_K_IN_K_ENABLE,
-  NTM_TOP_B_IN_ENABLE,
-  NTM_TOP_X_IN_ENABLE,
-  NTM_TOP_Y_OUT_ENABLE,
-  NTM_TOP_SIZE_X_IN,
-  NTM_TOP_SIZE_Y_IN,
-  NTM_TOP_SIZE_N_IN,
-  NTM_TOP_SIZE_W_IN,
-  NTM_TOP_SIZE_L_IN,
-  NTM_TOP_SIZE_R_IN,
-  NTM_TOP_W_IN,
-  NTM_TOP_K_IN,
-  NTM_TOP_B_IN,
-  NTM_TOP_X_IN,
-  NTM_TOP_Y_OUT
-);
-
+module ntm_top_stimulus #(
   // SYSTEM-SIZE
-  parameter DATA_SIZE=512;
+  parameter DATA_SIZE=512,
 
-  parameter [DATA_SIZE-1:0] X=64;
-  parameter [DATA_SIZE-1:0] Y=64;
-  parameter [DATA_SIZE-1:0] N=64;
-  parameter [DATA_SIZE-1:0] W=64;
-  parameter [DATA_SIZE-1:0] L=64;
-  parameter [DATA_SIZE-1:0] R=64;
+  parameter [DATA_SIZE-1:0] X=64,
+  parameter [DATA_SIZE-1:0] Y=64,
+  parameter [DATA_SIZE-1:0] N=64,
+  parameter [DATA_SIZE-1:0] W=64,
+  parameter [DATA_SIZE-1:0] L=64,
+  parameter [DATA_SIZE-1:0] R=64,
 
-  parameter STIMULUS_NTM_TOP_TEST   = 0;
-  parameter STIMULUS_NTM_TOP_CASE_0 = 0;
-  parameter STIMULUS_NTM_TOP_CASE_1 = 0;
+  parameter STIMULUS_NTM_TOP_TEST   = 0,
+  parameter STIMULUS_NTM_TOP_CASE_0 = 0,
+  parameter STIMULUS_NTM_TOP_CASE_1 = 0,
+)
+  (
+    // GLOBAL
+    output CLK,
+    output RST,
 
-  // GLOBAL
-  output CLK;
-  output RST;
+    // CONTROL
+    output NTM_TOP_START,
+    input NTM_TOP_READY,
 
-  // CONTROL
-  output NTM_TOP_START;
-  input NTM_TOP_READY;
-  output NTM_TOP_W_IN_L_ENABLE;
-  output NTM_TOP_W_IN_X_ENABLE;
-  output NTM_TOP_K_IN_I_ENABLE;
-  output NTM_TOP_K_IN_L_ENABLE;
-  output NTM_TOP_K_IN_K_ENABLE;
-  output NTM_TOP_B_IN_ENABLE;
-  output NTM_TOP_X_IN_ENABLE;
-  input NTM_TOP_Y_OUT_ENABLE;
+    output NTM_TOP_W_IN_L_ENABLE,
+    output NTM_TOP_W_IN_X_ENABLE,
+    output NTM_TOP_K_IN_I_ENABLE,
+    output NTM_TOP_K_IN_L_ENABLE,
+    output NTM_TOP_K_IN_K_ENABLE,
+    output NTM_TOP_B_IN_ENABLE,
+    output NTM_TOP_X_IN_ENABLE,
+    input NTM_TOP_Y_OUT_ENABLE,
 
-  // DATA
-  output [DATA_SIZE-1:0] NTM_TOP_SIZE_X_IN;
-  output [DATA_SIZE-1:0] NTM_TOP_SIZE_Y_IN;
-  output [DATA_SIZE-1:0] NTM_TOP_SIZE_N_IN;
-  output [DATA_SIZE-1:0] NTM_TOP_SIZE_W_IN;
-  output [DATA_SIZE-1:0] NTM_TOP_SIZE_L_IN;
-  output [DATA_SIZE-1:0] NTM_TOP_SIZE_R_IN;
-  output [DATA_SIZE-1:0] NTM_TOP_W_IN;
-  output [DATA_SIZE-1:0] NTM_TOP_K_IN;
-  output [DATA_SIZE-1:0] NTM_TOP_B_IN;
-  output [DATA_SIZE-1:0] NTM_TOP_X_IN;
-  input [DATA_SIZE-1:0] NTM_TOP_Y_OUT;
+    // DATA
+    output [DATA_SIZE-1:0] NTM_TOP_SIZE_X_IN,
+    output [DATA_SIZE-1:0] NTM_TOP_SIZE_Y_IN,
+    output [DATA_SIZE-1:0] NTM_TOP_SIZE_N_IN,
+    output [DATA_SIZE-1:0] NTM_TOP_SIZE_W_IN,
+    output [DATA_SIZE-1:0] NTM_TOP_SIZE_L_IN,
+    output [DATA_SIZE-1:0] NTM_TOP_SIZE_R_IN,
+    output [DATA_SIZE-1:0] NTM_TOP_W_IN,
+    output [DATA_SIZE-1:0] NTM_TOP_K_IN,
+    output [DATA_SIZE-1:0] NTM_TOP_B_IN,
+    output [DATA_SIZE-1:0] NTM_TOP_X_IN,
+    input [DATA_SIZE-1:0] NTM_TOP_Y_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

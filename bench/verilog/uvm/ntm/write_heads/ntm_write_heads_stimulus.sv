@@ -37,31 +37,37 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_write_heads_stimulus(
-  CLK,
-  RST,
-  NTM_WRITE_HEADS_START,
-  NTM_WRITE_HEADS_READY
-);
-
+module ntm_write_heads_stimulus #(
   // SYSTEM-SIZE
-  parameter DATA_SIZE=512;
+  parameter DATA_SIZE=512,
 
-  parameter X=64;
-  parameter Y=64;
-  parameter N=64;
-  parameter W=64;
-  parameter L=64;
-  parameter R=64;
+  parameter X=64,
+  parameter Y=64,
+  parameter N=64,
+  parameter W=64,
+  parameter L=64,
+  parameter R=64
+)
+  (
+    // GLOBAL
+    output CLK;
+    output RST;
 
-  // GLOBAL
-  output CLK;
-  output RST;
+    // MEMORY STIMULUS
+    // CONTROL
+    output NTM_WRITE_HEADS_START;
+    input NTM_WRITE_HEADS_READY;
 
-  // MEMORY STIMULUS
-  // CONTROL
-  output NTM_WRITE_HEADS_START;
-  input NTM_WRITE_HEADS_READY;
+    output [DATA_SIZE-1:0] NTM_WRITE_HEADS_M_IN_ENABLE,
+    output [DATA_SIZE-1:0] NTM_WRITE_HEADS_R_OUT_ENABLE,
+
+    // DATA
+    output [DATA_SIZE-1:0] NTM_WRITE_HEADS_SIZE_N_IN,
+    output [DATA_SIZE-1:0] NTM_WRITE_HEADS_SIZE_W_IN,
+    output [DATA_SIZE-1:0] NTM_WRITE_HEADS_W_IN,
+    output [DATA_SIZE-1:0] NTM_WRITE_HEADS_M_IN,
+    input [DATA_SIZE-1:0] NTM_WRITE_HEADS_R_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
