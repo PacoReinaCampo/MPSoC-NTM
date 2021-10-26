@@ -74,6 +74,8 @@ build:
 
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/ntm/read_heads/ntm_reading.vhd
 
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/ntm/read_heads/ntm_read_heads_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/ntm/read_heads/ntm_read_heads_stimulus.vhd
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/ntm/read_heads/ntm_read_heads_testbench.vhd
 
 simulate:

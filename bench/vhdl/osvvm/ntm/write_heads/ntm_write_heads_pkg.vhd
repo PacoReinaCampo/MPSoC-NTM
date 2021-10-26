@@ -35,9 +35,98 @@
 -- THE SOFTWARE.
 --
 --------------------------------------------------------------------------------
--- Author(s):
---   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+
+package ntm_write_heads_pkg is
+
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Signals
+  -----------------------------------------------------------------------
+
+  signal MONITOR_TEST : string(40 downto 1) := "                                        ";
+  signal MONITOR_CASE : string(40 downto 1) := "                                        ";
+
+  -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
+
+  -- SYSTEM-SIZE
+  constant DATA_SIZE : integer := 512;
+
+  constant X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+  constant Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+  constant N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+  constant W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+  constant L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+  constant R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
+
+  -- FUNCTIONALITY
+  constant STIMULUS_NTM_WRITE_HEADS_TEST   : boolean := false;
+  constant STIMULUS_NTM_WRITE_HEADS_CASE_0 : boolean := false;
+  constant STIMULUS_NTM_WRITE_HEADS_CASE_1 : boolean := false;
+
+  -----------------------------------------------------------------------
+  -- Components
+  -----------------------------------------------------------------------
+
+  component ntm_write_heads_stimulus is
+    generic (
+      -- SYSTEM-SIZE
+      DATA_SIZE : integer := 512;
+
+      X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+      Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+      N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+      W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+      L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+      R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
+
+      -- FUNCTIONALITY
+      STIMULUS_NTM_WRITE_HEADS_TEST   : boolean := false;
+      STIMULUS_NTM_WRITE_HEADS_CASE_0 : boolean := false;
+      STIMULUS_NTM_WRITE_HEADS_CASE_1 : boolean := false
+      );
+    port (
+      -- GLOBAL
+      CLK : out std_logic;
+      RST : out std_logic;
+
+      -- CONTROL
+      NTM_WRITE_HEADS_START : out std_logic;
+      NTM_WRITE_HEADS_READY : in  std_logic;
+
+      NTM_WRITE_HEADS_M_IN_ENABLE  : out std_logic;
+      NTM_WRITE_HEADS_A_IN_ENABLE  : out std_logic;
+      NTM_WRITE_HEADS_M_OUT_ENABLE : in  std_logic;
+
+      -- DATA
+      NTM_WRITE_HEADS_SIZE_N_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_WRITE_HEADS_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+      NTM_WRITE_HEADS_M_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_WRITE_HEADS_A_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_WRITE_HEADS_W_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_WRITE_HEADS_M_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  -----------------------------------------------------------------------
+  -- Functions
+  -----------------------------------------------------------------------
+
+end ntm_write_heads_pkg;
+
+package body ntm_write_heads_pkg is
+
+  -----------------------------------------------------------------------
+  -- Functions
+  -----------------------------------------------------------------------
+
+end ntm_write_heads_pkg;

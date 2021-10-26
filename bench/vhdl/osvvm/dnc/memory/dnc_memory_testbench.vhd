@@ -42,6 +42,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 use work.dnc_core_pkg.all;
+use work.dnc_memory_pkg.all;
 
 entity dnc_memory_testbench is
 end dnc_memory_testbench;
@@ -407,6 +408,52 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- STIMULUS
+  memory_stimulus : dnc_memory_stimulus
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      DNC_MEMORY_START => start_addressing,
+      DNC_MEMORY_READY => ready_addressing,
+
+      DNC_MEMORY_K_READ_IN_I_ENABLE => k_read_in_i_enable_addressing,
+      DNC_MEMORY_K_READ_IN_K_ENABLE => k_read_in_k_enable_addressing,
+
+      DNC_MEMORY_BETA_READ_IN_ENABLE => beta_read_in_enable_addressing,
+
+      DNC_MEMORY_F_READ_IN_ENABLE => f_read_in_enable_addressing,
+
+      DNC_MEMORY_PI_READ_IN_ENABLE => pi_read_in_enable_addressing,
+
+      DNC_MEMORY_K_WRITE_IN_K_ENABLE => k_write_in_k_enable_addressing,
+      DNC_MEMORY_E_WRITE_IN_K_ENABLE => e_write_in_k_enable_addressing,
+      DNC_MEMORY_V_WRITE_IN_K_ENABLE => v_write_in_k_enable_addressing,
+
+      -- DATA
+      DNC_MEMORY_SIZE_R_IN => size_r_in_addressing,
+      DNC_MEMORY_SIZE_W_IN => size_w_in_addressing,
+
+      DNC_MEMORY_K_READ_IN    => k_read_in_addressing,
+      DNC_MEMORY_BETA_READ_IN => beta_read_in_addressing,
+      DNC_MEMORY_F_READ_IN    => f_read_in_addressing,
+      DNC_MEMORY_PI_READ_IN   => pi_read_in_addressing,
+
+      DNC_MEMORY_K_WRITE_IN    => k_write_in_addressing,
+      DNC_MEMORY_BETA_WRITE_IN => beta_write_in_addressing,
+      DNC_MEMORY_E_WRITE_IN    => e_write_in_addressing,
+      DNC_MEMORY_V_WRITE_IN    => v_write_in_addressing,
+      DNC_MEMORY_GA_WRITE_IN   => ga_write_in_addressing,
+      DNC_MEMORY_GW_WRITE_IN   => gw_write_in_addressing,
+
+      DNC_MEMORY_R_OUT => r_out_addressing
+      );
 
   -- ALLOCATION WEIGHTING
   allocation_weighting : dnc_allocation_weighting

@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_write_heads_testbench;
+package dnc_write_heads_pkg;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -61,80 +61,4 @@ module ntm_write_heads_testbench;
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
-  // GLOBAL
-  wire CLK;
-  wire RST;
-
-  // WRITING
-  // CONTROL
-  wire start_writing;
-  wire ready_writing;
-  wire m_in_enable_writing;
-  wire a_in_enable_writing;
-  wire m_out_enable_writing;
-
-  // DATA
-  wire [DATA_SIZE-1:0] size_n_in_writing;
-  wire [DATA_SIZE-1:0] size_w_in_writing;
-  wire [DATA_SIZE-1:0] m_in_writing;
-  wire [DATA_SIZE-1:0] a_in_writing;
-  wire [DATA_SIZE-1:0] w_in_writing;
-  wire [DATA_SIZE-1:0] m_out_writing;
-
-  ///////////////////////////////////////////////////////////////////////
-  // Body
-  ///////////////////////////////////////////////////////////////////////
-
-  // STIMULUS
-  ntm_write_heads_stimulus #(
-    .DATA_SIZE(DATA_SIZE)
-  )
-  write_heads_stimulus(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .NTM_WRITE_HEADS_START(start_writing),
-    .NTM_WRITE_HEADS_READY(ready_writing),
-
-    .NTM_WRITE_HEADS_M_IN_ENABLE(m_in_enable_writing),
-    .NTM_WRITE_HEADS_A_IN_ENABLE(a_in_enable_writing),
-    .NTM_WRITE_HEADS_M_OUT_ENABLE(m_out_enable_writing),
-
-    // DATA
-    .NTM_WRITE_HEADS_SIZE_N_IN(size_n_in_writing),
-    .NTM_WRITE_HEADS_SIZE_W_IN(size_w_in_writing),
-    .NTM_WRITE_HEADS_M_IN(m_in_writing),
-    .NTM_WRITE_HEADS_A_IN(a_in_writing),
-    .NTM_WRITE_HEADS_W_IN(w_in_writing),
-    .NTM_WRITE_HEADS_M_OUT(m_out_writing)
-  );
-
-  // WRITING
-  ntm_writing #(
-    .DATA_SIZE(DATA_SIZE)
-  )
-  writing(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_writing),
-    .READY(ready_writing),
-
-    .M_IN_ENABLE(m_in_enable_writing),
-    .A_IN_ENABLE(a_in_enable_writing),
-    .M_OUT_ENABLE(m_out_enable_writing),
-
-    // DATA
-    .SIZE_N_IN(size_n_in_writing),
-    .SIZE_W_IN(size_w_in_writing),
-    .M_IN(m_in_writing),
-    .A_IN(a_in_writing),
-    .W_IN(w_in_writing),
-    .M_OUT(m_out_writing)
-  );
-
-endmodule
+endpackage

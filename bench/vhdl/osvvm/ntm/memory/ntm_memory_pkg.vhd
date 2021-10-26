@@ -35,9 +35,109 @@
 -- THE SOFTWARE.
 --
 --------------------------------------------------------------------------------
--- Author(s):
---   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+
+package ntm_memory_pkg is
+
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Signals
+  -----------------------------------------------------------------------
+
+  signal MONITOR_TEST : string(40 downto 1) := "                                        ";
+  signal MONITOR_CASE : string(40 downto 1) := "                                        ";
+
+  -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
+
+  -- SYSTEM-SIZE
+  constant DATA_SIZE : integer := 512;
+
+  constant X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+  constant Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+  constant N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+  constant W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+  constant L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+  constant R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
+
+  -- FUNCTIONALITY
+  constant STIMULUS_NTM_MEMORY_TEST   : boolean := false;
+  constant STIMULUS_NTM_MEMORY_CASE_0 : boolean := false;
+  constant STIMULUS_NTM_MEMORY_CASE_1 : boolean := false;
+
+  -----------------------------------------------------------------------
+  -- Components
+  -----------------------------------------------------------------------
+
+  component ntm_memory_stimulus is
+    generic (
+      -- SYSTEM-SIZE
+      DATA_SIZE : integer := 512;
+
+      X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+      Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+      N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+      W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+      L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+      R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
+
+      -- FUNCTIONALITY
+      STIMULUS_NTM_MEMORY_TEST   : boolean := false;
+      STIMULUS_NTM_MEMORY_CASE_0 : boolean := false;
+      STIMULUS_NTM_MEMORY_CASE_1 : boolean := false
+      );
+    port (
+      -- GLOBAL
+      CLK : out std_logic;
+      RST : out std_logic;
+
+      -- CONTROL
+      NTM_MEMORY_START : out std_logic;
+      NTM_MEMORY_READY : in  std_logic;
+
+      NTM_MEMORY_K_IN_ENABLE : out std_logic;
+      NTM_MEMORY_S_IN_ENABLE : out std_logic;
+
+      NTM_MEMORY_M_IN_J_ENABLE : out std_logic;
+      NTM_MEMORY_M_IN_K_ENABLE : out std_logic;
+
+      NTM_MEMORY_W_IN_ENABLE  : out std_logic;
+      NTM_MEMORY_W_OUT_ENABLE : in  std_logic;
+
+      -- DATA
+      NTM_MEMORY_SIZE_N_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_MEMORY_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+      NTM_MEMORY_K_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_MEMORY_BETA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_MEMORY_G_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_MEMORY_S_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_MEMORY_GAMMA_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      NTM_MEMORY_M_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+      NTM_MEMORY_W_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_MEMORY_W_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  -----------------------------------------------------------------------
+  -- Functions
+  -----------------------------------------------------------------------
+
+end ntm_memory_pkg;
+
+package body ntm_memory_pkg is
+
+  -----------------------------------------------------------------------
+  -- Functions
+  -----------------------------------------------------------------------
+
+end ntm_memory_pkg;

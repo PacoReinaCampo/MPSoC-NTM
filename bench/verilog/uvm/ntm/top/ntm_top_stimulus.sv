@@ -50,7 +50,7 @@ module ntm_top_stimulus #(
 
   parameter STIMULUS_NTM_TOP_TEST   = 0,
   parameter STIMULUS_NTM_TOP_CASE_0 = 0,
-  parameter STIMULUS_NTM_TOP_CASE_1 = 0,
+  parameter STIMULUS_NTM_TOP_CASE_1 = 0
 )
   (
     // GLOBAL

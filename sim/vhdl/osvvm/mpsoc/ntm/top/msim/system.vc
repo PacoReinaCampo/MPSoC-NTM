@@ -70,17 +70,17 @@
 ../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_oneplus_function.vhd
 ../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_summation_function.vhd
 
-../../../../../../../rtl/vhdl/controller/LSTMal/ntm_controller.vhd
-../../../../../../../rtl/vhdl/controller/LSTMal/ntm_activation_gate_vector.vhd
-../../../../../../../rtl/vhdl/controller/LSTMal/ntm_activation_trainer.vhd
-../../../../../../../rtl/vhdl/controller/LSTMal/ntm_forget_gate_vector.vhd
-../../../../../../../rtl/vhdl/controller/LSTMal/ntm_forget_trainer.vhd
-../../../../../../../rtl/vhdl/controller/LSTMal/ntm_hidden_gate_vector.vhd
-../../../../../../../rtl/vhdl/controller/LSTMal/ntm_input_gate_vector.vhd
-../../../../../../../rtl/vhdl/controller/LSTMal/ntm_input_trainer.vhd
-../../../../../../../rtl/vhdl/controller/LSTMal/ntm_output_gate_vector.vhd
-../../../../../../../rtl/vhdl/controller/LSTMal/ntm_output_trainer.vhd
-../../../../../../../rtl/vhdl/controller/LSTMal/ntm_state_gate_vector.vhd
+../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_controller.vhd
+../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_activation_gate_vector.vhd
+../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_activation_trainer.vhd
+../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_forget_gate_vector.vhd
+../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_forget_trainer.vhd
+../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_hidden_gate_vector.vhd
+../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_input_gate_vector.vhd
+../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_input_trainer.vhd
+../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_output_gate_vector.vhd
+../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_output_trainer.vhd
+../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_state_gate_vector.vhd
 
 ../../../../../../../rtl/vhdl/ntm/read_heads/ntm_reading.vhd
 

@@ -18,7 +18,7 @@
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
 -- of this software and associated documentation files (the "Software"), to deal
--- in the Software without restriction, including without limitation the rights
+-- out the Software without restriction, including without limitation the rights
 -- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 -- copies of the Software, and to permit persons to whom the Software is
 -- furnished to do so, subject to the following conditions:
@@ -43,17 +43,24 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
+use work.dnc_memory_pkg.all;
 
 entity dnc_memory_stimulus is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
+    -- SYSTEM-SIZE
+    DATA_SIZE : integer := 512;
 
-    DATA_SIZE : integer := 512
+    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
+
+    -- FUNCTIONALITY
+    STIMULUS_DNC_MEMORY_TEST   : boolean := false;
+    STIMULUS_DNC_MEMORY_CASE_0 : boolean := false;
+    STIMULUS_DNC_MEMORY_CASE_1 : boolean := false
     );
   port (
     -- GLOBAL
@@ -61,8 +68,39 @@ entity dnc_memory_stimulus is
     RST : out std_logic;
 
     -- CONTROL
-    START : out std_logic;
-    READY : in  std_logic
+    DNC_MEMORY_START : out std_logic;
+    DNC_MEMORY_READY : in  std_logic;
+
+    DNC_MEMORY_K_READ_IN_I_ENABLE : out std_logic;  -- for i out 0 to R-1
+    DNC_MEMORY_K_READ_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
+
+    DNC_MEMORY_BETA_READ_IN_ENABLE : out std_logic;  -- for i out 0 to R-1
+
+    DNC_MEMORY_F_READ_IN_ENABLE : out std_logic;    -- for i out 0 to R-1
+
+    DNC_MEMORY_PI_READ_IN_ENABLE : out std_logic;   -- for i out 0 to R-1
+
+    DNC_MEMORY_K_WRITE_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
+    DNC_MEMORY_E_WRITE_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
+    DNC_MEMORY_V_WRITE_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
+
+    -- DATA
+    DNC_MEMORY_SIZE_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_MEMORY_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_MEMORY_K_READ_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_MEMORY_BETA_READ_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_MEMORY_F_READ_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_MEMORY_PI_READ_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_MEMORY_K_WRITE_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_MEMORY_BETA_WRITE_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_MEMORY_E_WRITE_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_MEMORY_V_WRITE_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_MEMORY_GA_WRITE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_MEMORY_GW_WRITE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_MEMORY_R_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -88,6 +126,9 @@ architecture dnc_memory_stimulus_architecture of dnc_memory_stimulus is
   -- GLOBAL
   signal clk_int : std_logic;
   signal rst_int : std_logic;
+
+  -- CONTROL
+  signal start_int : std_logic;
 
 begin
 
@@ -135,34 +176,18 @@ begin
   main_test : process
   begin
 
-    if (NTM_TEST0) then
+    if (STIMULUS_DNC_MEMORY_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "NTM_TEST0                ";
-      -------------------------------------------------------------------
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE0                ";
+      MONITOR_TEST <= "DNC_MEMORY_TEST          ";
       -------------------------------------------------------------------
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE1                ";
-      -------------------------------------------------------------------
-
-    end if;
-
-    if (NTM_TEST1) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "NTM_TEST1                ";
+      MONITOR_CASE <= "NTM_MEMORY_CASE_0        ";
       -------------------------------------------------------------------
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE0                ";
-      -------------------------------------------------------------------
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE1                ";
+      MONITOR_CASE <= "NTM_MEMORY_CASE_1        ";
       -------------------------------------------------------------------
 
     end if;

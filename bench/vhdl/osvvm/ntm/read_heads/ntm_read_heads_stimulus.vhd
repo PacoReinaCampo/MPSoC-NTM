@@ -43,6 +43,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
+use work.ntm_read_heads_pkg.all;
 
 entity ntm_read_heads_stimulus is
   generic (
@@ -61,8 +62,19 @@ entity ntm_read_heads_stimulus is
     RST : out std_logic;
 
     -- CONTROL
-    START : out std_logic;
-    READY : in  std_logic
+    NTM_READ_HEADS_START : out std_logic;
+    NTM_READ_HEADS_READY : in  std_logic;
+
+    NTM_READ_HEADS_M_IN_ENABLE  : out std_logic;
+    NTM_READ_HEADS_R_OUT_ENABLE : in  std_logic;
+
+    -- DATA
+    NTM_READ_HEADS_SIZE_N_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_READ_HEADS_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    NTM_READ_HEADS_W_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_READ_HEADS_M_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_READ_HEADS_R_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -88,6 +100,9 @@ architecture ntm_read_heads_stimulus_architecture of ntm_read_heads_stimulus is
   -- GLOBAL
   signal clk_int : std_logic;
   signal rst_int : std_logic;
+
+  -- CONTROL
+  signal start_int : std_logic;
 
 begin
 
@@ -135,34 +150,18 @@ begin
   main_test : process
   begin
 
-    if (NTM_TEST0) then
+    if (STIMULUS_NTM_READ_HEADS_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "NTM_TEST0                ";
-      -------------------------------------------------------------------
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE0                ";
+      MONITOR_TEST <= "NTM_READ_HEADS_TEST          ";
       -------------------------------------------------------------------
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE1                ";
-      -------------------------------------------------------------------
-
-    end if;
-
-    if (NTM_TEST1) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "NTM_TEST1                ";
+      MONITOR_CASE <= "NTM_READ_HEADS_CASE_0        ";
       -------------------------------------------------------------------
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE0                ";
-      -------------------------------------------------------------------
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE1                ";
+      MONITOR_CASE <= "NTM_READ_HEADS_CASE_1        ";
       -------------------------------------------------------------------
 
     end if;

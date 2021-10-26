@@ -122,6 +122,73 @@ module dnc_read_heads_testbench;
   // Body
   ///////////////////////////////////////////////////////////////////////
 
+  // STIMULUS
+  dnc_read_heads_memory_stimulus #(
+    .DATA_SIZE(DATA_SIZE)
+  )
+  read_heads_memory_stimulus(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // FREE GATES
+    // CONTROL
+    .NTM_FREE_GATES_START(start_free_gates),
+    .NTM_FREE_GATES_READY(ready_free_gates),
+
+    .NTM_FREE_GATES_F_IN_ENABLE(f_in_enable_free_gates),
+    .NTM_FREE_GATES_F_OUT_ENABLE(f_out_enable_free_gates),
+
+    // DATA
+    .NTM_FREE_GATES_SIZE_R_IN(size_r_in_free_gates),
+    .NTM_FREE_GATES_F_IN(f_in_free_gates),
+    .NTM_FREE_GATES_F_OUT(f_out_free_gates),
+
+    // READ KEYS
+    // CONTROL
+    .NTM_READ_KEYS_START(start_read_keys),
+    .NTM_READ_KEYS_READY(ready_read_keys),
+
+    .NTM_READ_KEYS_K_IN_I_ENABLE(k_in_i_enable_read_keys),
+    .NTM_READ_KEYS_K_IN_K_ENABLE(k_in_k_enable_read_keys),
+    .NTM_READ_KEYS_K_OUT_I_ENABLE(k_out_i_enable_read_keys),
+    .NTM_READ_KEYS_K_OUT_K_ENABLE(k_out_k_enable_read_keys),
+
+    // DATA
+    .NTM_READ_KEYS_SIZE_R_IN(size_r_in_read_keys),
+    .NTM_READ_KEYS_SIZE_W_IN(size_w_in_read_keys),
+    .NTM_READ_KEYS_K_IN(k_in_read_keys),
+    .NTM_READ_KEYS_K_OUT(k_out_read_keys),
+
+    // READ MODES
+    // CONTROL
+    .NTM_READ_MODES_START(start_read_modes),
+    .NTM_READ_MODES_READY(ready_read_modes),
+
+    .NTM_READ_MODES_PI_IN_I_ENABLE(pi_in_i_enable_read_modes),
+    .NTM_READ_MODES_PI_IN_P_ENABLE(pi_in_p_enable_read_modes),
+    .NTM_READ_MODES_PI_OUT_I_ENABLE(pi_out_i_enable_read_modes),
+    .NTM_READ_MODES_PI_OUT_P_ENABLE(pi_out_p_enable_read_modes),
+
+    // DATA
+    .NTM_READ_MODES_SIZE_R_IN(size_r_in_free_gates),
+    .NTM_READ_MODES_PI_IN(pi_in_read_modes),
+    .NTM_READ_MODES_PI_OUT(pi_out_read_modes),
+
+    // READ STRENGTHS
+    // CONTROL
+    .NTM_READ_STRENGTHS_START(start_read_strengths),
+    .NTM_READ_STRENGTHS_READY(ready_read_strengths),
+
+    .NTM_READ_STRENGTHS_BETA_IN_ENABLE(beta_in_enable_read_strengths),
+    .NTM_READ_STRENGTHS_BETA_OUT_ENABLE(beta_out_enable_read_strengths),
+
+    // DATA
+    .NTM_READ_STRENGTHS_SIZE_R_IN(size_r_in_free_gates),
+    .NTM_READ_STRENGTHS_BETA_IN(beta_in_read_strengths),
+    .NTM_READ_STRENGTHS_BETA_OUT(beta_out_read_strengths)
+  );
+
   // FREE GATES
   dnc_free_gates #(
     .DATA_SIZE(DATA_SIZE)

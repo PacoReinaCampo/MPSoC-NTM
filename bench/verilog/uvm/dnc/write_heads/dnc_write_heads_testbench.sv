@@ -135,6 +135,82 @@ module dnc_write_heads_testbench;
   // Body
   ///////////////////////////////////////////////////////////////////////
 
+  // STIMULUS
+  dnc_write_heads_stimulus #(
+    .DATA_SIZE(DATA_SIZE)
+  )
+  write_heads_stimulus(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // ALLOCATION GATE
+    // CONTROL
+    .NTM_ALLOCATION_GATE_START(start_allocation_gate),
+    .NTM_ALLOCATION_GATE_READY(ready_allocation_gate),
+
+    // DATA
+    .NTM_ALLOCATION_GATE_GA_IN(ga_in_allocation_gate),
+    .NTM_ALLOCATION_GATE_GA_OUT(ga_out_allocation_gate),
+
+    // ERASE VECTOR
+    // CONTROL
+    .NTM_ERASE_VECTOR_START(start_erase_vector),
+    .NTM_ERASE_VECTOR_READY(ready_erase_vector),
+
+    .NTM_ERASE_VECTOR_E_IN_ENABLE(e_in_enable_erase_vector),
+    .NTM_ERASE_VECTOR_E_OUT_ENABLE(e_out_enable_erase_vector),
+
+    // DATA
+    .NTM_ERASE_VECTOR_SIZE_W_IN(size_w_in_erase_vector),
+    .NTM_ERASE_VECTOR_E_IN(e_in_erase_vector),
+    .NTM_ERASE_VECTOR_E_OUT(e_out_erase_vector),
+
+    //WRITE GATE
+    // CONTROL
+    .NTM_WRITE_GATE_START(start_write_gate),
+    .NTM_WRITE_GATE_READY(ready_write_gate),
+
+    // DATA
+    .NTM_WRITE_GATE_GW_IN(gw_in_write_gate),
+    .NTM_WRITE_GATE_GW_OUT(gw_out_write_gate),
+
+    // WRITE KEY
+    // CONTROL
+    .NTM_WRITE_KEY_START(start_write_key),
+    .NTM_WRITE_KEY_READY(ready_write_key),
+
+    .NTM_WRITE_KEY_K_IN_ENABLE(k_in_enable_write_key),
+    .NTM_WRITE_KEY_K_OUT_ENABLE(k_out_enable_write_key),
+
+    // DATA
+    .NTM_WRITE_KEY_SIZE_W_IN(size_w_in_write_key),
+    .NTM_WRITE_KEY_K_IN(k_in_write_key),
+    .NTM_WRITE_KEY_K_OUT(k_out_write_key),
+
+    // WRITE STRENGTH
+    // CONTROL
+    .NTM_WRITE_STRENGTH_START(start_write_strength),
+    .NTM_WRITE_STRENGTH_READY(ready_write_strength),
+
+    // DATA
+    .NTM_WRITE_STRENGTH_BETA_IN(beta_in_write_strength),
+    .NTM_WRITE_STRENGTH_BETA_OUT(beta_out_write_strength),
+
+    // WRITE VECTOR
+    // CONTROL
+    .NTM_WRITE_VECTOR_START(start_write_vector),
+    .NTM_WRITE_VECTOR_READY(ready_write_vector),
+
+    .NTM_WRITE_VECTOR_V_IN_ENABLE(v_in_enable_write_vector),
+    .NTM_WRITE_VECTOR_V_OUT_ENABLE(v_out_enable_write_vector),
+
+    // DATA
+    .NTM_WRITE_VECTOR_SIZE_W_IN(size_w_in_write_vector),
+    .NTM_WRITE_VECTOR_V_IN(v_in_write_vector),
+    .NTM_WRITE_VECTOR_V_OUT(v_out_write_vector)
+  );
+
   // ALLOCATION GATE
   dnc_allocation_gate #(
     .DATA_SIZE(DATA_SIZE)

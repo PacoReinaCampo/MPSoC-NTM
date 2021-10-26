@@ -42,8 +42,25 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 use work.ntm_core_pkg.all;
+use work.ntm_write_heads_pkg.all;
 
 entity ntm_write_heads_testbench is
+  generic (
+    -- SYSTEM-SIZE
+    DATA_SIZE : integer := 512;
+
+    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
+
+    -- FUNCTIONALITY
+    ENABLE_NTM_WRITE_HEADS_TEST   : boolean := false;
+    ENABLE_NTM_WRITE_HEADS_CASE_0 : boolean := false;
+    ENABLE_NTM_WRITE_HEADS_CASE_1 : boolean := false
+    );
 end ntm_write_heads_testbench;
 
 architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench is
@@ -79,6 +96,47 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- STIMULUS
+  write_heads_stimulus : ntm_write_heads_stimulus
+    generic map (
+      -- SYSTEM-SIZE
+      DATA_SIZE => DATA_SIZE,
+
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R,
+
+      -- FUNCTIONALITY
+      STIMULUS_NTM_WRITE_HEADS_TEST   => STIMULUS_NTM_WRITE_HEADS_TEST,
+      STIMULUS_NTM_WRITE_HEADS_CASE_0 => STIMULUS_NTM_WRITE_HEADS_CASE_0,
+      STIMULUS_NTM_WRITE_HEADS_CASE_1 => STIMULUS_NTM_WRITE_HEADS_CASE_1
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      NTM_WRITE_HEADS_START => start_writing,
+      NTM_WRITE_HEADS_READY => ready_writing,
+
+      NTM_WRITE_HEADS_M_IN_ENABLE  => m_in_enable_writing,
+      NTM_WRITE_HEADS_A_IN_ENABLE  => a_in_enable_writing,
+      NTM_WRITE_HEADS_M_OUT_ENABLE => m_out_enable_writing,
+
+      -- DATA
+      NTM_WRITE_HEADS_SIZE_N_IN => size_n_in_writing,
+      NTM_WRITE_HEADS_SIZE_W_IN => size_w_in_writing,
+
+      NTM_WRITE_HEADS_M_IN  => m_in_writing,
+      NTM_WRITE_HEADS_A_IN  => a_in_writing,
+      NTM_WRITE_HEADS_W_IN  => w_in_writing,
+      NTM_WRITE_HEADS_M_OUT => m_out_writing
+      );
 
   -- WRITING
   writing : ntm_writing

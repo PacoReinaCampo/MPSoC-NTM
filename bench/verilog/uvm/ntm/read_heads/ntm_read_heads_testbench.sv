@@ -84,6 +84,30 @@ module ntm_read_heads_testbench;
   // Body
   ///////////////////////////////////////////////////////////////////////
 
+  // STIMULUS
+  ntm_read_heads_stimulus #(
+    .DATA_SIZE(DATA_SIZE)
+  )
+  read_heads_stimulus(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .NTM_READ_HEADS_START(start_reading),
+    .NTM_READ_HEADS_READY(ready_reading),
+
+    .NTM_READ_HEADS_M_IN_ENABLE(m_in_enable_reading),
+    .NTM_READ_HEADS_R_OUT_ENABLE(r_out_enable_reading),
+
+    // DATA
+    .NTM_READ_HEADS_SIZE_N_IN(size_n_in_reading),
+    .NTM_READ_HEADS_SIZE_W_IN(size_w_in_reading),
+    .NTM_READ_HEADS_W_IN(w_in_reading),
+    .NTM_READ_HEADS_M_IN(m_in_reading),
+    .NTM_READ_HEADS_R_OUT(r_out_reading)
+  );
+
   // READING
   ntm_reading #(
     .DATA_SIZE(DATA_SIZE)

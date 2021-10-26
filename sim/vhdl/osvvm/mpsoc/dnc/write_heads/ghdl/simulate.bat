@@ -79,6 +79,8 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_key.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_strength.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_vector.vhd
 
+ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/dnc/write_heads/dnc_write_heads_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/dnc/write_heads/dnc_write_heads_stimulus.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/dnc/write_heads/dnc_write_heads_testbench.vhd
 ghdl -m --std=08 dnc_write_heads_testbench
 ghdl -r --std=08 dnc_write_heads_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > dnc_write_heads_testbench.tree

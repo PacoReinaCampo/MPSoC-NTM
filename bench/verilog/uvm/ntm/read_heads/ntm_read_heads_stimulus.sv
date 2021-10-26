@@ -58,16 +58,14 @@ module ntm_read_heads_stimulus #(
     input NTM_READ_HEADS_READY,
 
     output NTM_READ_HEADS_M_IN_ENABLE,
-    output NTM_READ_HEADS_A_IN_ENABLE,
-    input NTM_READ_HEADS_M_OUT_ENABLE,
+    input NTM_READ_HEADS_R_OUT_ENABLE,
 
     // DATA
-    output [DATA_SIZE-1:0] NTM_READ_HEADS_SIZE_N_IN),
+    output [DATA_SIZE-1:0] NTM_READ_HEADS_SIZE_N_IN,
     output [DATA_SIZE-1:0] NTM_READ_HEADS_SIZE_W_IN,
-    output [DATA_SIZE-1:0] NTM_READ_HEADS_M_IN,
-    output [DATA_SIZE-1:0] NTM_READ_HEADS_A_IN,
     output [DATA_SIZE-1:0] NTM_READ_HEADS_W_IN,
-    input [DATA_SIZE-1:0] NTM_READ_HEADS_M_OUT
+    output [DATA_SIZE-1:0] NTM_READ_HEADS_M_IN,
+    input [DATA_SIZE-1:0] NTM_READ_HEADS_R_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////

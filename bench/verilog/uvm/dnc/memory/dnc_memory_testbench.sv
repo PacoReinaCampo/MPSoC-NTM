@@ -352,6 +352,44 @@ module dnc_memory_testbench;
   // Body
   ///////////////////////////////////////////////////////////////////////
 
+  // STIMULUS
+  dnc_memory_stimulus #(
+    .DATA_SIZE(DATA_SIZE)
+  )
+  memory_stimulus(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .DNC_MEMORY_START(start_addressing),
+    .DNC_MEMORY_READY(ready_addressing),
+
+    .DNC_MEMORY_K_READ_IN_I_ENABLE(k_read_in_i_enable_addressing),
+    .DNC_MEMORY_K_READ_IN_K_ENABLE(k_read_in_k_enable_addressing),
+    .DNC_MEMORY_BETA_READ_IN_ENABLE(beta_read_in_enable_addressing),
+    .DNC_MEMORY_DNC_MEMORY_F_READ_IN_ENABLE(f_read_in_enable_addressing),
+    .PI_READ_IN_ENABLE(pi_read_in_enable_addressing),
+    .DNC_MEMORY_K_WRITE_IN_K_ENABLE(k_write_in_k_enable_addressing),
+    .DNC_MEMORY_E_WRITE_IN_K_ENABLE(e_write_in_k_enable_addressing),
+    .DNC_MEMORY_V_WRITE_IN_K_ENABLE(v_write_in_k_enable_addressing),
+
+    // DATA
+    .DNC_MEMORY_SIZE_R_IN(size_r_in_addressing),
+    .DNC_MEMORY_SIZE_W_IN(size_w_in_addressing),
+    .DNC_MEMORY_K_READ_IN(k_read_in_addressing),
+    .DNC_MEMORY_BETA_READ_IN(beta_read_in_addressing),
+    .DNC_MEMORY_F_READ_IN(f_read_in_addressing),
+    .DNC_MEMORY_PI_READ_IN(pi_read_in_addressing),
+    .DNC_MEMORY_K_WRITE_IN(k_write_in_addressing),
+    .DNC_MEMORY_BETA_WRITE_IN(beta_write_in_addressing),
+    .DNC_MEMORY_E_WRITE_IN(e_write_in_addressing),
+    .DNC_MEMORY_V_WRITE_IN(v_write_in_addressing),
+    .DNC_MEMORY_GA_WRITE_IN(ga_write_in_addressing),
+    .DNC_MEMORY_GW_WRITE_IN(gw_write_in_addressing),
+    .DNC_MEMORY_R_OUT(r_out_addressing)
+  );
+
   // ALLOCATION WEIGHTING
   dnc_allocation_weighting #(
     .DATA_SIZE(DATA_SIZE)

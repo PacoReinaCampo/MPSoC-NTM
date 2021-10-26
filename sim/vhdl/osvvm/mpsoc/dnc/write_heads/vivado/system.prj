@@ -76,4 +76,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_key.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_strength.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/dnc/write_heads/dnc_write_vector.vhd
 
+vhdl2008 work ../../../../../../../bench/vhdl/osvvm/dnc/write_heads/dnc_write_heads_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/osvvm/dnc/write_heads/dnc_write_heads_stimulus.vhd
 vhdl2008 work ../../../../../../../bench/vhdl/osvvm/dnc/write_heads/dnc_write_heads_testbench.vhd

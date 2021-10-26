@@ -72,4 +72,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/math/function/summation/matrix/ntm_m
 vhdl2008 work ../../../../../../../rtl/vhdl/ntm/write_heads/ntm_writing.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/ntm/write_heads/ntm_erasing.vhd
 
+vhdl2008 work ../../../../../../../bench/vhdl/osvvm/ntm/write_heads/ntm_write_heads_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/osvvm/ntm/write_heads/ntm_write_heads_stimulus.vhd
 vhdl2008 work ../../../../../../../bench/vhdl/osvvm/ntm/write_heads/ntm_write_heads_testbench.vhd

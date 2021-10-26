@@ -72,4 +72,6 @@
 ../../../../../../../rtl/vhdl/ntm/memory/ntm_addressing.vhd
 ../../../../../../../rtl/vhdl/ntm/memory/ntm_content_based_addressing.vhd
 
+../../../../../../../bench/vhdl/osvvm/ntm/memory/ntm_memory_pkg.vhd
+../../../../../../../bench/vhdl/osvvm/ntm/memory/ntm_memory_stimulus.vhd
 ../../../../../../../bench/vhdl/osvvm/ntm/memory/ntm_memory_testbench.vhd

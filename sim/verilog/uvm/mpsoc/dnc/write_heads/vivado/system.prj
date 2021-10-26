@@ -76,4 +76,6 @@ sv work ../../../../../../../rtl/verilog/dnc/write_heads/dnc_write_key.sv
 sv work ../../../../../../../rtl/verilog/dnc/write_heads/dnc_write_strength.sv
 sv work ../../../../../../../rtl/verilog/dnc/write_heads/dnc_write_vector.sv
 
+sv work ../../../../../../../bench/verilog/osvvm/dnc/write_heads/dnc_write_heads_pkg.sv
+sv work ../../../../../../../bench/verilog/osvvm/dnc/write_heads/dnc_write_heads_stimulus.sv
 sv work ../../../../../../../bench/verilog/osvvm/dnc/write_heads/dnc_write_heads_testbench.sv

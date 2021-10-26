@@ -42,8 +42,25 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 use work.ntm_core_pkg.all;
+use work.ntm_memory_pkg.all;
 
 entity ntm_memory_testbench is
+  generic (
+    -- SYSTEM-SIZE
+    DATA_SIZE : integer := 512;
+
+    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
+
+    -- FUNCTIONALITY
+    ENABLE_NTM_MEMORY_TEST   : boolean := false;
+    ENABLE_NTM_MEMORY_CASE_0 : boolean := false;
+    ENABLE_NTM_MEMORY_CASE_1 : boolean := false
+    );
 end ntm_memory_testbench;
 
 architecture ntm_memory_testbench_architecture of ntm_memory_testbench is
@@ -90,6 +107,58 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- STIMULUS
+  memory_stimulus : ntm_memory_stimulus
+    generic map (
+      -- SYSTEM-SIZE
+      DATA_SIZE => DATA_SIZE,
+
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R,
+
+      -- FUNCTIONALITY
+      STIMULUS_NTM_MEMORY_TEST   => STIMULUS_NTM_MEMORY_TEST,
+      STIMULUS_NTM_MEMORY_CASE_0 => STIMULUS_NTM_MEMORY_CASE_0,
+      STIMULUS_NTM_MEMORY_CASE_1 => STIMULUS_NTM_MEMORY_CASE_1
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      NTM_MEMORY_START => start_addressing,
+      NTM_MEMORY_READY => ready_addressing,
+
+      NTM_MEMORY_K_IN_ENABLE => k_in_enable_addressing,
+      NTM_MEMORY_S_IN_ENABLE => s_in_enable_addressing,
+
+      NTM_MEMORY_M_IN_J_ENABLE => m_in_j_enable_addressing,
+      NTM_MEMORY_M_IN_K_ENABLE => m_in_k_enable_addressing,
+
+      NTM_MEMORY_W_IN_ENABLE  => w_in_enable_addressing,
+      NTM_MEMORY_W_OUT_ENABLE => w_out_enable_addressing,
+
+      -- DATA
+      NTM_MEMORY_SIZE_N_IN => size_n_in_addressing,
+      NTM_MEMORY_SIZE_W_IN => size_w_in_addressing,
+
+      NTM_MEMORY_K_IN     => k_in_addressing,
+      NTM_MEMORY_BETA_IN  => beta_in_addressing,
+      NTM_MEMORY_G_IN     => g_in_addressing,
+      NTM_MEMORY_S_IN     => s_in_addressing,
+      NTM_MEMORY_GAMMA_IN => gamma_in_addressing,
+
+      NTM_MEMORY_M_IN => m_in_addressing,
+
+      NTM_MEMORY_W_IN  => w_in_addressing,
+      NTM_MEMORY_W_OUT => w_out_addressing
+      );
 
   -- ADDRESSING
   ntm_addressing_i : ntm_addressing

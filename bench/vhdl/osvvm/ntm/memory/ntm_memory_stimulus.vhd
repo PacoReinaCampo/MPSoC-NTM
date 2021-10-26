@@ -43,6 +43,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
+use work.ntm_memory_pkg.all;
 
 entity ntm_memory_stimulus is
   generic (
@@ -61,8 +62,32 @@ entity ntm_memory_stimulus is
     RST : out std_logic;
 
     -- CONTROL
-    START : out std_logic;
-    READY : in  std_logic
+    NTM_MEMORY_START : out std_logic;
+    NTM_MEMORY_READY : in  std_logic;
+
+    NTM_MEMORY_K_IN_ENABLE : out std_logic;
+    NTM_MEMORY_S_IN_ENABLE : out std_logic;
+
+    NTM_MEMORY_M_IN_J_ENABLE : out std_logic;
+    NTM_MEMORY_M_IN_K_ENABLE : out std_logic;
+
+    NTM_MEMORY_W_IN_ENABLE  : out std_logic;
+    NTM_MEMORY_W_OUT_ENABLE : in  std_logic;
+
+    -- DATA
+    NTM_MEMORY_SIZE_N_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_MEMORY_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    NTM_MEMORY_K_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_MEMORY_BETA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_MEMORY_G_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_MEMORY_S_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_MEMORY_GAMMA_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+    NTM_MEMORY_M_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    NTM_MEMORY_W_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_MEMORY_W_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -88,6 +113,9 @@ architecture ntm_memory_stimulus_architecture of ntm_memory_stimulus is
   -- GLOBAL
   signal clk_int : std_logic;
   signal rst_int : std_logic;
+
+  -- CONTROL
+  signal start_int : std_logic;
 
 begin
 
@@ -135,34 +163,18 @@ begin
   main_test : process
   begin
 
-    if (NTM_TEST0) then
+    if (STIMULUS_NTM_MEMORY_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "NTM_TEST0                ";
-      -------------------------------------------------------------------
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE0                ";
+      MONITOR_TEST <= "NTM_MEMORY_TEST          ";
       -------------------------------------------------------------------
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE1                ";
-      -------------------------------------------------------------------
-
-    end if;
-
-    if (NTM_TEST1) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "NTM_TEST1                ";
+      MONITOR_CASE <= "NTM_MEMORY_CASE_0        ";
       -------------------------------------------------------------------
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE0                ";
-      -------------------------------------------------------------------
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE1                ";
+      MONITOR_CASE <= "NTM_MEMORY_CASE_1        ";
       -------------------------------------------------------------------
 
     end if;
