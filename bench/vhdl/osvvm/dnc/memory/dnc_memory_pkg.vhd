@@ -95,6 +95,10 @@ package dnc_memory_pkg is
       );
     port (
       -- GLOBAL
+      CLK : out std_logic;
+      RST : out std_logic;
+
+      -- CONTROL
       DNC_MEMORY_START : out std_logic;
       DNC_MEMORY_READY : in  std_logic;
 

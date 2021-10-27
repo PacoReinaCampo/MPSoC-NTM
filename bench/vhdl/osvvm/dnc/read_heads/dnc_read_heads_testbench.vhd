@@ -42,8 +42,25 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 use work.dnc_core_pkg.all;
+use work.dnc_read_heads_pkg.all;
 
 entity dnc_read_heads_testbench is
+  generic (
+    -- SYSTEM-SIZE
+    DATA_SIZE : integer := 512;
+
+    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
+
+    -- FUNCTIONALITY
+    ENABLE_DNC_READ_HEADS_TEST   : boolean := false;
+    ENABLE_DNC_READ_HEADS_CASE_0 : boolean := false;
+    ENABLE_DNC_READ_HEADS_CASE_1 : boolean := false
+    );
 end dnc_read_heads_testbench;
 
 architecture dnc_read_heads_testbench_architecture of dnc_read_heads_testbench is
@@ -125,6 +142,98 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- STIMULUS
+  read_heads_stimulus : dnc_read_heads_stimulus
+    generic map (
+      -- SYSTEM-SIZE
+      DATA_SIZE => DATA_SIZE,
+
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R,
+
+      -- FUNCTIONALITY
+      STIMULUS_DNC_READ_HEADS_TEST   => STIMULUS_DNC_READ_HEADS_TEST,
+      STIMULUS_DNC_READ_HEADS_CASE_0 => STIMULUS_DNC_READ_HEADS_CASE_0,
+      STIMULUS_DNC_READ_HEADS_CASE_1 => STIMULUS_DNC_READ_HEADS_CASE_1
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- FREE GATES
+      -- CONTROL
+      DNC_FREE_GATES_START => start_free_gates,
+      DNC_FREE_GATES_READY => ready_free_gates,
+
+      DNC_FREE_GATES_F_IN_ENABLE => f_in_enable_free_gates,
+
+      DNC_FREE_GATES_F_OUT_ENABLE => f_out_enable_free_gates,
+
+      -- DATA
+      DNC_FREE_GATES_SIZE_R_IN => size_r_in_free_gates,
+
+      DNC_FREE_GATES_F_IN => f_in_free_gates,
+
+      DNC_FREE_GATES_F_OUT => f_out_free_gates,
+
+      -- READ KEYS
+      -- CONTROL
+      DNC_READ_KEYS_START => start_read_keys,
+      DNC_READ_KEYS_READY => ready_read_keys,
+
+      DNC_READ_KEYS_K_IN_I_ENABLE => k_in_i_enable_read_keys,
+      DNC_READ_KEYS_K_IN_K_ENABLE => k_in_k_enable_read_keys,
+
+      DNC_READ_KEYS_K_OUT_I_ENABLE => k_out_i_enable_read_keys,
+      DNC_READ_KEYS_K_OUT_K_ENABLE => k_out_k_enable_read_keys,
+
+      -- DATA
+      DNC_READ_KEYS_SIZE_R_IN => size_r_in_read_keys,
+      DNC_READ_KEYS_SIZE_W_IN => size_w_in_read_keys,
+
+      DNC_READ_KEYS_K_IN => k_in_read_keys,
+
+      DNC_READ_KEYS_K_OUT => k_out_read_keys,
+
+      -- READ MODES
+      -- CONTROL
+      DNC_READ_MODES_START => start_read_modes,
+      DNC_READ_MODES_READY => ready_read_modes,
+
+      DNC_READ_MODES_PI_IN_I_ENABLE => pi_in_i_enable_read_modes,
+      DNC_READ_MODES_PI_IN_P_ENABLE => pi_in_p_enable_read_modes,
+
+      DNC_READ_MODES_PI_OUT_I_ENABLE => pi_out_i_enable_read_modes,
+      DNC_READ_MODES_PI_OUT_P_ENABLE => pi_out_p_enable_read_modes,
+
+      -- DATA
+      DNC_READ_MODES_SIZE_R_IN => size_r_in_read_modes,
+
+      DNC_READ_MODES_PI_IN => pi_in_read_modes,
+
+      DNC_READ_MODES_PI_OUT => pi_out_read_modes,
+
+      -- READ STRENGTHS
+      -- CONTROL
+      DNC_READ_STRENGTHS_START => start_read_strengths,
+      DNC_READ_STRENGTHS_READY => ready_read_strengths,
+
+      DNC_READ_STRENGTHS_BETA_IN_ENABLE  => beta_in_enable_read_strengths,
+      DNC_READ_STRENGTHS_BETA_OUT_ENABLE => beta_out_enable_read_strengths,
+
+      -- DATA
+      DNC_READ_STRENGTHS_SIZE_R_IN => size_r_in_read_strengths,
+
+      DNC_READ_STRENGTHS_BETA_IN => beta_in_read_strengths,
+
+      DNC_READ_STRENGTHS_BETA_OUT => beta_out_read_strengths
+      );
+
   -- FREE GATES
   free_gates : dnc_free_gates
     generic map (
@@ -201,7 +310,7 @@ begin
       PI_OUT_P_ENABLE => pi_out_p_enable_read_modes,
 
       -- DATA
-      SIZE_R_IN => size_r_in_free_gates,
+      SIZE_R_IN => size_r_in_read_modes,
 
       PI_IN => pi_in_read_modes,
 
@@ -226,7 +335,7 @@ begin
       BETA_OUT_ENABLE => beta_out_enable_read_strengths,
 
       -- DATA
-      SIZE_R_IN => size_r_in_free_gates,
+      SIZE_R_IN => size_r_in_read_strengths,
 
       BETA_IN => beta_in_read_strengths,
 

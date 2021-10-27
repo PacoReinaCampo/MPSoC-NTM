@@ -112,6 +112,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- STIMULUS
   top_stimulus : dnc_top_stimulus
     generic map (
       -- SYSTEM-SIZE

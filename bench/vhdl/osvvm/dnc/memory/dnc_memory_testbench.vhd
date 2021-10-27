@@ -45,6 +45,22 @@ use work.dnc_core_pkg.all;
 use work.dnc_memory_pkg.all;
 
 entity dnc_memory_testbench is
+  generic (
+    -- SYSTEM-SIZE
+    DATA_SIZE : integer := 512;
+
+    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
+
+    -- FUNCTIONALITY
+    ENABLE_DNC_MEMORY_TEST   : boolean := false;
+    ENABLE_DNC_MEMORY_CASE_0 : boolean := false;
+    ENABLE_DNC_MEMORY_CASE_1 : boolean := false
+    );
 end dnc_memory_testbench;
 
 architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
@@ -412,7 +428,20 @@ begin
   -- STIMULUS
   memory_stimulus : dnc_memory_stimulus
     generic map (
-      DATA_SIZE => DATA_SIZE
+      -- SYSTEM-SIZE
+      DATA_SIZE => DATA_SIZE,
+
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R,
+
+      -- FUNCTIONALITY
+      STIMULUS_DNC_MEMORY_TEST   => STIMULUS_DNC_MEMORY_TEST,
+      STIMULUS_DNC_MEMORY_CASE_0 => STIMULUS_DNC_MEMORY_CASE_0,
+      STIMULUS_DNC_MEMORY_CASE_1 => STIMULUS_DNC_MEMORY_CASE_1
       )
     port map (
       -- GLOBAL

@@ -43,26 +43,107 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
+use work.dnc_write_heads_pkg.all;
 
 entity dnc_write_heads_stimulus is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
+    -- SYSTEM-SIZE
+    DATA_SIZE : integer := 512;
 
-    DATA_SIZE : integer := 512
+    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
+
+    -- FUNCTIONALITY
+    STIMULUS_DNC_WRITE_HEADS_TEST   : boolean := false;
+    STIMULUS_DNC_WRITE_HEADS_CASE_0 : boolean := false;
+    STIMULUS_DNC_WRITE_HEADS_CASE_1 : boolean := false
     );
   port (
     -- GLOBAL
     CLK : out std_logic;
     RST : out std_logic;
 
+    -- ALLOCATION GATE
     -- CONTROL
-    START : out std_logic;
-    READY : in  std_logic
+    DNC_ALLOCATION_GATE_START : out std_logic;
+    DNC_ALLOCATION_GATE_READY : in  std_logic;
+
+    -- DATA
+    DNC_ALLOCATION_GATE_GA_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_ALLOCATION_GATE_GA_OUT : in std_logic;
+
+    -- ERASE VECTOR
+    -- CONTROL
+    DNC_ERASE_VECTOR_START : out std_logic;
+    DNC_ERASE_VECTOR_READY : in  std_logic;
+
+    DNC_ERASE_VECTOR_E_IN_ENABLE : out std_logic;
+
+    DNC_ERASE_VECTOR_E_OUT_ENABLE : in std_logic;
+
+    -- DATA
+    DNC_ERASE_VECTOR_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_ERASE_VECTOR_E_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_ERASE_VECTOR_E_OUT : in std_logic;
+
+    -- WRITE GATE
+    -- CONTROL
+    DNC_WRITE_GATE_START : out std_logic;
+    DNC_WRITE_GATE_READY : in  std_logic;
+
+    -- DATA
+    DNC_WRITE_GATE_GW_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_WRITE_GATE_GW_OUT : in std_logic;
+
+    -- WRITE KEY
+    -- CONTROL
+    DNC_WRITE_KEY_START : out std_logic;
+    DNC_WRITE_KEY_READY : in  std_logic;
+
+    DNC_WRITE_KEY_K_IN_ENABLE : out std_logic;
+
+    DNC_WRITE_KEY_K_OUT_ENABLE : in std_logic;
+
+    -- DATA
+    DNC_WRITE_KEY_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_WRITE_KEY_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_WRITE_KEY_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- WRITE STRENGTH
+    -- CONTROL
+    DNC_WRITE_STRENGTH_START : out std_logic;
+    DNC_WRITE_STRENGTH_READY : in  std_logic;
+
+    -- DATA
+    DNC_WRITE_STRENGTH_BETA_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_WRITE_STRENGTH_BETA_OUT: in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- WRITE VECTOR
+    -- CONTROL
+    DNC_WRITE_VECTOR_START : out std_logic;
+    DNC_WRITE_VECTOR_READY : in  std_logic;
+
+    DNC_WRITE_VECTOR_V_IN_ENABLE : out std_logic;
+
+    DNC_WRITE_VECTOR_V_OUT_ENABLE : in std_logic;
+
+    -- DATA
+    DNC_WRITE_VECTOR_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_WRITE_VECTOR_V_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_WRITE_VECTOR_V_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -88,6 +169,9 @@ architecture dnc_write_heads_stimulus_architecture of dnc_write_heads_stimulus i
   -- GLOBAL
   signal clk_int : std_logic;
   signal rst_int : std_logic;
+
+  -- CONTROL
+  signal start_int : std_logic;
 
 begin
 
@@ -135,34 +219,18 @@ begin
   main_test : process
   begin
 
-    if (NTM_TEST0) then
+    if (STIMULUS_DNC_WRITE_HEADS_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "NTM_TEST0                ";
-      -------------------------------------------------------------------
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE0                ";
+      MONITOR_TEST <= "STIMULUS_DNC_WRITE_HEADS_TEST           ";
       -------------------------------------------------------------------
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE1                ";
-      -------------------------------------------------------------------
-
-    end if;
-
-    if (NTM_TEST1) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "NTM_TEST1                ";
+      MONITOR_CASE <= "STIMULUS_DNC_WRITE_HEADS_CASE_0         ";
       -------------------------------------------------------------------
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE0                ";
-      -------------------------------------------------------------------
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE1                ";
+      MONITOR_CASE <= "STIMULUS_DNC_WRITE_HEADS_CASE_1         ";
       -------------------------------------------------------------------
 
     end if;

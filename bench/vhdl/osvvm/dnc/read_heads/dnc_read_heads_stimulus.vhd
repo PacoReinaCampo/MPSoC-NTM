@@ -43,26 +43,97 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
+use work.dnc_read_heads_pkg.all;
 
 entity dnc_read_heads_stimulus is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
+    -- SYSTEM-SIZE
+    DATA_SIZE : integer := 512;
 
-    DATA_SIZE : integer := 512
+    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
+
+    -- FUNCTIONALITY
+    STIMULUS_DNC_READ_HEADS_TEST   : boolean := false;
+    STIMULUS_DNC_READ_HEADS_CASE_0 : boolean := false;
+    STIMULUS_DNC_READ_HEADS_CASE_1 : boolean := false
     );
   port (
     -- GLOBAL
     CLK : out std_logic;
     RST : out std_logic;
 
+    -- FREE GATES
     -- CONTROL
-    START : out std_logic;
-    READY : in  std_logic
+    DNC_FREE_GATES_START : out std_logic;
+    DNC_FREE_GATES_READY : in  std_logic;
+
+    DNC_FREE_GATES_F_IN_ENABLE : out std_logic;
+
+    DNC_FREE_GATES_F_OUT_ENABLE : in std_logic;
+
+    -- DATA
+    DNC_FREE_GATES_SIZE_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_FREE_GATES_F_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_FREE_GATES_F_OUT : in std_logic;
+
+    -- READ KEYS
+    -- CONTROL
+    DNC_READ_KEYS_START : out std_logic;
+    DNC_READ_KEYS_READY : in  std_logic;
+
+    DNC_READ_KEYS_K_IN_I_ENABLE : out std_logic;
+    DNC_READ_KEYS_K_IN_K_ENABLE : out std_logic;
+
+    DNC_READ_KEYS_K_OUT_I_ENABLE : in std_logic;
+    DNC_READ_KEYS_K_OUT_K_ENABLE : in std_logic;
+
+    -- DATA
+    DNC_READ_KEYS_SIZE_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_READ_KEYS_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_READ_KEYS_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_READ_KEYS_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- READ MODES
+    -- CONTROL
+    DNC_READ_MODES_START : out std_logic;
+    DNC_READ_MODES_READY : in  std_logic;
+
+    DNC_READ_MODES_PI_IN_I_ENABLE : out std_logic;
+    DNC_READ_MODES_PI_IN_P_ENABLE : out std_logic;
+
+    DNC_READ_MODES_PI_OUT_I_ENABLE : in std_logic;
+    DNC_READ_MODES_PI_OUT_P_ENABLE : in std_logic;
+
+    -- DATA
+    DNC_READ_MODES_SIZE_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_READ_MODES_PI_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_READ_MODES_PI_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- READ STRENGTHS
+    -- CONTROL
+    DNC_READ_STRENGTHS_START : out std_logic;
+    DNC_READ_STRENGTHS_READY : in  std_logic;
+
+    DNC_READ_STRENGTHS_BETA_IN_ENABLE  : out std_logic;
+    DNC_READ_STRENGTHS_BETA_OUT_ENABLE : in  std_logic;
+
+    -- DATA
+    DNC_READ_STRENGTHS_SIZE_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_READ_STRENGTHS_BETA_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_READ_STRENGTHS_BETA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -88,6 +159,9 @@ architecture dnc_read_heads_stimulus_architecture of dnc_read_heads_stimulus is
   -- GLOBAL
   signal clk_int : std_logic;
   signal rst_int : std_logic;
+
+  -- CONTROL
+  signal start_int : std_logic;
 
 begin
 
@@ -135,34 +209,18 @@ begin
   main_test : process
   begin
 
-    if (NTM_TEST0) then
+    if (STIMULUS_DNC_READ_HEADS_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "NTM_TEST0                ";
-      -------------------------------------------------------------------
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE0                ";
+      MONITOR_TEST <= "STIMULUS_DNC_READ_HEADS_TEST            ";
       -------------------------------------------------------------------
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE1                ";
-      -------------------------------------------------------------------
-
-    end if;
-
-    if (NTM_TEST1) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "NTM_TEST1                ";
+      MONITOR_CASE <= "STIMULUS_DNC_READ_HEADS_CASE_0          ";
       -------------------------------------------------------------------
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE0                ";
-      -------------------------------------------------------------------
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_CASE1                ";
+      MONITOR_CASE <= "STIMULUS_DNC_READ_HEADS_CASE_1          ";
       -------------------------------------------------------------------
 
     end if;
