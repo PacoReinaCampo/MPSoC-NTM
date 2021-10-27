@@ -112,6 +112,7 @@ architecture ntm_convolutional_fnn_stimulus_architecture of ntm_convolutional_fn
   signal clk_int : std_logic;
   signal rst_int : std_logic;
 
+  -- CONTROL
   signal start_int : std_logic;
 
 begin

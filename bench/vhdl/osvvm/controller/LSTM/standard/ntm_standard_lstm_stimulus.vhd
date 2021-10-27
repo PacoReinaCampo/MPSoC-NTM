@@ -112,6 +112,7 @@ architecture ntm_standard_lstm_stimulus_architecture of ntm_standard_lstm_stimul
   signal clk_int : std_logic;
   signal rst_int : std_logic;
 
+  -- CONTROL
   signal start_int : std_logic;
 
 begin

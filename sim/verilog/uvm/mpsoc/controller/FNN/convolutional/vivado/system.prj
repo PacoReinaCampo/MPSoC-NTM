@@ -72,5 +72,6 @@ sv work ../../../../../../../../rtl/verilog/math/function/summation/matrix/ntm_m
 sv work ../../../../../../../../rtl/verilog/controller/FNN/convolutional/ntm_controller.sv
 sv work ../../../../../../../../rtl/verilog/controller/FNN/convolutional/ntm_trainer.sv
 
+sv work ../../../../../../../../bench/verilog/osvvm/controller/FNN/convolutional/ntm_convolutional_fnn_pkg.sv
 sv work ../../../../../../../../bench/verilog/osvvm/controller/FNN/convolutional/ntm_convolutional_fnn_stimulus.sv
 sv work ../../../../../../../../bench/verilog/osvvm/controller/FNN/convolutional/ntm_convolutional_fnn_testbench.sv
