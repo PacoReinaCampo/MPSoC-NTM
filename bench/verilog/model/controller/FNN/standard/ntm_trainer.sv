@@ -119,6 +119,20 @@ module ntm_trainer(
   wire [DATA_SIZE-1:0] data_in_vector_summation;
   wire [DATA_SIZE-1:0] data_out_vector_summation;
 
+  // VECTOR DIFFERENTIATION
+  // CONTROL
+  wire start_vector_differentiation;
+  wire ready_vector_differentiation;
+
+  wire data_in_enable_vector_differentiation;
+  wire data_out_enable_vector_differentiation;
+
+  // DATA
+  wire [DATA_SIZE-1:0] modulo_in_vector_differentiation;
+  wire [DATA_SIZE-1:0] size_in_vector_differentiation;
+  wire [DATA_SIZE-1:0] data_in_vector_differentiation;
+  wire [DATA_SIZE-1:0] data_out_vector_differentiation;
+
   // MATRIX PRODUCT
   // CONTROL
   wire start_matrix_product;
@@ -172,6 +186,29 @@ module ntm_trainer(
     .LENGTH_IN(length_in_vector_summation),
     .DATA_IN(data_in_vector_summation),
     .DATA_OUT(data_out_vector_summation)
+  );
+
+  // VECTOR DIFFERENTIATION
+  ntm_vector_differentiation_function #(
+    .DATA_SIZE(DATA_SIZE)
+  )
+  vector_differentiation_function(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_vector_differentiation),
+    .READY(ready_vector_differentiation),
+
+    .DATA_IN_ENABLE(data_in_enable_vector_differentiation),
+    .DATA_OUT_ENABLE(data_out_enable_vector_differentiation),
+
+    // DATA
+    .MODULO_IN(modulo_in_vector_differentiation),
+    .SIZE_IN(size_in_vector_differentiation),
+    .DATA_IN(data_in_vector_differentiation),
+    .DATA_OUT(data_out_vector_differentiation)
   );
 
   // MATRIX PRODUCT
