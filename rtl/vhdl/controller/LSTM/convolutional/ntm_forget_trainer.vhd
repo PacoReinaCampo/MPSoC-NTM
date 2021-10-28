@@ -157,6 +157,21 @@ architecture ntm_forget_trainer_architecture of ntm_forget_trainer is
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- VECTOR DIFFERENTIATION
+  -- CONTROL
+  signal start_vector_differentiation : std_logic;
+  signal ready_vector_differentiation : std_logic;
+
+  signal data_in_enable_vector_differentiation : std_logic;
+
+  signal data_out_enable_vector_differentiation : std_logic;
+
+  -- DATA
+  signal modulo_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- MATRIX PRODUCT
   -- CONTROL
   signal start_matrix_product : std_logic;
@@ -274,6 +289,31 @@ begin
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
       DATA_OUT  => data_out_vector_adder
+      );
+
+  -- VECTOR DIFFERENTIATION
+  vector_differentiation_function : ntm_vector_differentiation_function
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_differentiation,
+      READY => ready_vector_differentiation,
+
+      DATA_IN_ENABLE => data_in_enable_vector_differentiation,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_differentiation,
+
+      -- DATA
+      MODULO_IN => modulo_in_vector_differentiation,
+      SIZE_IN   => size_in_vector_differentiation,
+      DATA_IN   => data_in_vector_differentiation,
+      DATA_OUT  => data_out_vector_differentiation
       );
 
   -- MATRIX PRODUCT

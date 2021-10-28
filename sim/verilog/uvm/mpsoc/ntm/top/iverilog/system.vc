@@ -39,6 +39,7 @@
 
 ../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_convolution_function.sv
 ../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_cosine_similarity_function.sv
+../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_differentiation_function.sv
 ../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_multiplication_function.sv
 ../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_cosh_function.sv
 ../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_sinh_function.sv
@@ -50,6 +51,7 @@
 
 ../../../../../../../rtl/verilog/math/function/vector/ntm_vector_convolution_function.sv
 ../../../../../../../rtl/verilog/math/function/vector/ntm_vector_cosine_similarity_function.sv
+../../../../../../../rtl/verilog/math/function/vector/ntm_vector_differentiation_function.sv
 ../../../../../../../rtl/verilog/math/function/vector/ntm_vector_multiplication_function.sv
 ../../../../../../../rtl/verilog/math/function/vector/ntm_vector_cosh_function.sv
 ../../../../../../../rtl/verilog/math/function/vector/ntm_vector_sinh_function.sv
@@ -61,6 +63,7 @@
 
 ../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_convolution_function.sv
 ../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_cosine_similarity_function.sv
+../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_differentiation_function.sv
 ../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_multiplication_function.sv
 ../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_cosh_function.sv
 ../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_sinh_function.sv
