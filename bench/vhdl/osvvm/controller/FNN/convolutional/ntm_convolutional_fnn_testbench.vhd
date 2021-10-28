@@ -102,7 +102,15 @@ begin
   -- STIMULUS
   ntm_convolutional_fnn_stimulus_i : ntm_convolutional_fnn_stimulus
     generic map (
-      DATA_SIZE => DATA_SIZE
+      -- SYSTEM-SIZE
+      DATA_SIZE => DATA_SIZE,
+
+      X => X,
+      Y => Y,
+      N => N,
+      W => W,
+      L => L,
+      R => R
       )
     port map (
       -- GLOBAL

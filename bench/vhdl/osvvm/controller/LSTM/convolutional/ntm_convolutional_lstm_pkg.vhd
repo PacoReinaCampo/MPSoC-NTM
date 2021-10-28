@@ -54,12 +54,20 @@ package ntm_convolutional_lstm_pkg is
 
   component ntm_convolutional_lstm_stimulus is
     generic (
-      DATA_SIZE : integer := 512
+      -- SYSTEM-SIZE
+      DATA_SIZE : integer := 512;
+
+      X : integer := 64;
+      Y : integer := 64;
+      N : integer := 64;
+      W : integer := 64;
+      L : integer := 64;
+      R : integer := 64
       );
     port (
       -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
+      CLK : out std_logic;
+      RST : out std_logic;
 
       -- CONTROL
       NTM_CONVOLUTIONAL_LSTM_START : out std_logic;

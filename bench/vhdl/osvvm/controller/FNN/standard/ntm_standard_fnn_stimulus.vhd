@@ -46,14 +46,15 @@ use work.ntm_math_pkg.all;
 
 entity ntm_standard_fnn_stimulus is
   generic (
+    -- SYSTEM-SIZE
+    DATA_SIZE : integer := 512;
+
     X : integer := 64;
     Y : integer := 64;
     N : integer := 64;
     W : integer := 64;
     L : integer := 64;
-    R : integer := 64;
-
-    DATA_SIZE : integer := 512
+    R : integer := 64
     );
   port (
     -- GLOBAL
@@ -61,8 +62,8 @@ entity ntm_standard_fnn_stimulus is
     RST : out std_logic;
 
     -- CONTROL
-    NTM_STANDARD_START : out std_logic;
-    NTM_STANDARD_READY : in  std_logic;
+    NTM_STANDARD_FNN_START : out std_logic;
+    NTM_STANDARD_FNN_READY : in  std_logic;
 
     NTM_STANDARD_FNN_W_IN_L_ENABLE : out std_logic;
     NTM_STANDARD_FNN_W_IN_X_ENABLE : out std_logic;

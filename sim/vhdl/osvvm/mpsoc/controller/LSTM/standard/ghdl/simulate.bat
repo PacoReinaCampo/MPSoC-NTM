@@ -2,7 +2,7 @@
 call ../../../../../../../../settings64_ghdl.bat
 
 ghdl -a --std=08 ../../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/pkg/ntm_fnn_controller_pkg.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/pkg/ntm_lstm_controller_pkg.vhd
 
 ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_mod.vhd
 ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_adder.vhd

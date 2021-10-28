@@ -47,14 +47,20 @@ use work.ntm_write_heads_pkg.all;
 
 entity ntm_write_heads_stimulus is
   generic (
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64;
+    -- SYSTEM-SIZE
+    DATA_SIZE : integer := 512;
 
-    DATA_SIZE : integer := 512
+    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
+    
+    -- FUNCTIONALITY
+    STIMULUS_NTM_WRITE_HEADS_TEST   : boolean := false;
+    STIMULUS_NTM_WRITE_HEADS_CASE_0 : boolean := false;
+    STIMULUS_NTM_WRITE_HEADS_CASE_1 : boolean := false
     );
   port (
     -- GLOBAL
@@ -155,15 +161,15 @@ begin
     if (STIMULUS_NTM_WRITE_HEADS_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "NTM_WRITE_HEADS_TEST     ";
+      MONITOR_TEST <= "NTM_WRITE_HEADS_TEST                    ";
       -------------------------------------------------------------------
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_WRITE_HEADS_CASE_0   ";
+      MONITOR_CASE <= "NTM_WRITE_HEADS_CASE_0                  ";
       -------------------------------------------------------------------
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "NTM_WRITE_HEADS_CASE_1   ";
+      MONITOR_CASE <= "NTM_WRITE_HEADS_CASE_1                  ";
       -------------------------------------------------------------------
 
     end if;
