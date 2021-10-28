@@ -72,4 +72,6 @@ sv work ../../../../../../../rtl/verilog/math/function/summation/matrix/ntm_matr
 sv work ../../../../../../../rtl/verilog/ntm/write_heads/ntm_writing.sv
 sv work ../../../../../../../rtl/verilog/ntm/write_heads/ntm_erasing.sv
 
+sv work ../../../../../../../bench/verilog/osvvm/ntm/write_heads/ntm_write_heads_pkg.sv
+sv work ../../../../../../../bench/verilog/osvvm/ntm/write_heads/ntm_write_heads_stimulus.sv
 sv work ../../../../../../../bench/verilog/osvvm/ntm/write_heads/ntm_write_heads_testbench.sv

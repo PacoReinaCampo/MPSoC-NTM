@@ -86,7 +86,15 @@ module ntm_read_heads_testbench;
 
   // STIMULUS
   ntm_read_heads_stimulus #(
-    .DATA_SIZE(DATA_SIZE)
+    // SYSTEM-SIZE
+    .DATA_SIZE(DATA_SIZE),
+
+    .X(X),
+    .Y(Y),
+    .N(N),
+    .W(W),
+    .L(L),
+    .R(R)
   )
   read_heads_stimulus(
     // GLOBAL

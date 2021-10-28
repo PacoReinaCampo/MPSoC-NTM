@@ -72,4 +72,6 @@ sv work ../../../../../../../rtl/verilog/math/function/summation/matrix/ntm_matr
 sv work ../../../../../../../rtl/verilog/ntm/memory/ntm_addressing.sv
 sv work ../../../../../../../rtl/verilog/ntm/memory/ntm_content_based_addressing.sv
 
+sv work ../../../../../../../bench/verilog/osvvm/ntm/memory/ntm_memory_pkg.sv
+sv work ../../../../../../../bench/verilog/osvvm/ntm/memory/ntm_memory_stimulus.sv
 sv work ../../../../../../../bench/verilog/osvvm/ntm/memory/ntm_memory_testbench.sv

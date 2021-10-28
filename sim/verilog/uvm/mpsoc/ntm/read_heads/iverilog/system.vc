@@ -71,4 +71,6 @@
 
 ../../../../../../../rtl/verilog/ntm/read_heads/ntm_reading.sv
 
+../../../../../../../bench/verilog/uvm/ntm/read_heads/ntm_read_heads_pkg.sv
+../../../../../../../bench/verilog/uvm/ntm/read_heads/ntm_read_heads_stimulus.sv
 ../../../../../../../bench/verilog/uvm/ntm/read_heads/ntm_read_heads_testbench.sv

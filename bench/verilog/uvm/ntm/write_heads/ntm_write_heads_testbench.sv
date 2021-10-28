@@ -87,7 +87,15 @@ module ntm_write_heads_testbench;
 
   // STIMULUS
   ntm_write_heads_stimulus #(
-    .DATA_SIZE(DATA_SIZE)
+    // SYSTEM-SIZE
+    .DATA_SIZE(DATA_SIZE),
+
+    .X(X),
+    .Y(Y),
+    .N(N),
+    .W(W),
+    .L(L),
+    .R(R)
   )
   write_heads_stimulus(
     // GLOBAL

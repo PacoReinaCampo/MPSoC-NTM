@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_convolutional_fnn_stimulus #(
+module ntm_standard_lstm_stimulus #(
   // SYSTEM-SIZE
   parameter DATA_SIZE=512,
 
@@ -54,8 +54,8 @@ module ntm_convolutional_fnn_stimulus #(
     output RST,
 
     // CONTROL
-    output NTM_STANDARD_LSTM_STIMULUS_START,
-    input NTM_STANDARD_LSTM_STIMULUS_READY,
+    output NTM_STANDARD_LSTM_START,
+    input NTM_STANDARD_LSTM_READY,
 
     output NTM_STANDARD_LSTM_W_IN_L_ENABLE,
     output NTM_STANDARD_LSTM_W_IN_X_ENABLE,

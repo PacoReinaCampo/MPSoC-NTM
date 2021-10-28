@@ -95,7 +95,15 @@ module ntm_memory_testbench;
 
   // STIMULUS
   ntm_memory_stimulus #(
-    .DATA_SIZE(DATA_SIZE)
+    // SYSTEM-SIZE
+    .DATA_SIZE(DATA_SIZE),
+
+    .X(X),
+    .Y(Y),
+    .N(N),
+    .W(W),
+    .L(L),
+    .R(R)
   )
   memory_stimulus(
     // GLOBAL

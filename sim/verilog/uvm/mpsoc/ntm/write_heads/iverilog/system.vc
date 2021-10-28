@@ -72,4 +72,6 @@
 ../../../../../../../rtl/verilog/ntm/write_heads/ntm_writing.sv
 ../../../../../../../rtl/verilog/ntm/write_heads/ntm_erasing.sv
 
+../../../../../../../bench/verilog/uvm/ntm/write_heads/ntm_write_heads_pkg.sv
+../../../../../../../bench/verilog/uvm/ntm/write_heads/ntm_write_heads_stimulus.sv
 ../../../../../../../bench/verilog/uvm/ntm/write_heads/ntm_write_heads_testbench.sv

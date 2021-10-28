@@ -46,7 +46,7 @@ module ntm_read_heads_stimulus #(
   parameter N=64,
   parameter W=64,
   parameter L=64,
-  parameter R=64,
+  parameter R=64
 )
   (
     // GLOBAL

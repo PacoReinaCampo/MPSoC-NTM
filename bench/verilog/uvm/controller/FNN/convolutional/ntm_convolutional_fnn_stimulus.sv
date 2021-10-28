@@ -54,8 +54,8 @@ module ntm_convolutional_fnn_stimulus #(
     output RST,
 
     // CONTROL
-    output NTM_CONVOLUTIONAL_FNN_STIMULUS_START,
-    input NTM_CONVOLUTIONAL_FNN_STIMULUS_READY,
+    output NTM_CONVOLUTIONAL_FNN_START,
+    input NTM_CONVOLUTIONAL_FNN_READY,
 
     output NTM_CONVOLUTIONAL_FNN_W_IN_L_ENABLE,
     output NTM_CONVOLUTIONAL_FNN_W_IN_X_ENABLE,

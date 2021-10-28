@@ -59,7 +59,7 @@ module dnc_write_heads_stimulus #(
   input NTM_ALLOCATION_GATE_READY,
 
   // DATA
-  output NTM_ALLOCATION_GATE_GA_IN,
+  output [DATA_SIZE-1:0] NTM_ALLOCATION_GATE_GA_IN,
   input NTM_ALLOCATION_GATE_GA_OUT,
 
   // ERASE VECTOR
@@ -73,7 +73,7 @@ module dnc_write_heads_stimulus #(
   // DATA
   output [DATA_SIZE-1:0] NTM_ERASE_VECTOR_SIZE_W_IN,
   output [DATA_SIZE-1:0] NTM_ERASE_VECTOR_E_IN,
-  input [DATA_SIZE-1:0] NTM_ERASE_VECTOR_E_OUT,
+  input NTM_ERASE_VECTOR_E_OUT,
 
   //WRITE GATE
   // CONTROL
@@ -82,7 +82,7 @@ module dnc_write_heads_stimulus #(
 
   // DATA
   output [DATA_SIZE-1:0] NTM_WRITE_GATE_GW_IN,
-  input [DATA_SIZE-1:0] NTM_WRITE_GATE_GW_OUT,
+  input NTM_WRITE_GATE_GW_OUT,
 
   // WRITE KEY
   // CONTROL

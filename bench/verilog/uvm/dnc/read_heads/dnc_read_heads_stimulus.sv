@@ -64,7 +64,7 @@ module dnc_read_heads_memory_stimulus #(
     // DATA
     output [DATA_SIZE-1:0] NTM_FREE_GATES_SIZE_R_IN,
     output [DATA_SIZE-1:0] NTM_FREE_GATES_F_IN,
-    output [DATA_SIZE-1:0] NTM_FREE_GATES_F_OUT,
+    output NTM_FREE_GATES_F_OUT,
 
     // READ KEYS
     // CONTROL
