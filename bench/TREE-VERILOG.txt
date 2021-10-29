@@ -33,7 +33,6 @@
 │   │           ├── ntm_output_trainer.sv
 │   │           └── ntm_state_gate_vector.sv
 │   ├── dnc
-│   │   ├── DNC.png
 │   │   ├── memory
 │   │   │   ├── dnc_addressing.sv
 │   │   │   ├── dnc_allocation_weighting.sv
@@ -107,72 +106,42 @@
 │   │   │       ├── ntm_vector_multiplier.sv
 │   │   │       └── ntm_vector_root.sv
 │   │   └── function
-│   │       ├── convolution
-│   │       │   ├── matrix
-│   │       │   │   └── ntm_matrix_convolution_function.sv
-│   │       │   ├── scalar
-│   │       │   │   └── ntm_scalar_convolution_function.sv
-│   │       │   └── vector
-│   │       │       └── ntm_vector_convolution_function.sv
-│   │       ├── cosine
-│   │       │   ├── matrix
-│   │       │   │   └── ntm_matrix_cosine_similarity_function.sv
-│   │       │   ├── scalar
-│   │       │   │   └── ntm_scalar_cosine_similarity_function.sv
-│   │       │   └── vector
-│   │       │       └── ntm_vector_cosine_similarity_function.sv
-│   │       ├── differentiation
-│   │       │   ├── matrix
-│   │       │   │   └── ntm_matrix_differentiation_function.sv
-│   │       │   ├── scalar
-│   │       │   │   └── ntm_scalar_differentiation_function.sv
-│   │       │   └── vector
-│   │       │       └── ntm_vector_differentiation_function.sv
-│   │       ├── multiplication
-│   │       │   ├── matrix
-│   │       │   │   └── ntm_matrix_multiplication_function.sv
-│   │       │   ├── scalar
-│   │       │   │   └── ntm_scalar_multiplication_function.sv
-│   │       │   └── vector
-│   │       │       └── ntm_vector_multiplication_function.sv
-│   │       ├── sigmoid
-│   │       │   ├── matrix
-│   │       │   │   ├── hyperbolic
-│   │       │   │   │   ├── ntm_matrix_cosh_function.sv
-│   │       │   │   │   ├── ntm_matrix_sinh_function.sv
-│   │       │   │   │   └── ntm_matrix_tanh_function.sv
-│   │       │   │   ├── logistic
-│   │       │   │   │   ├── ntm_matrix_logistic_function.sv
-│   │       │   │   │   └── ntm_matrix_softmax_function.sv
-│   │       │   │   └── oneplus
-│   │       │   │       └── ntm_matrix_oneplus_function.sv
-│   │       │   ├── scalar
-│   │       │   │   ├── hyperbolic
-│   │       │   │   │   ├── ntm_scalar_cosh_function.sv
-│   │       │   │   │   ├── ntm_scalar_sinh_function.sv
-│   │       │   │   │   └── ntm_scalar_tanh_function.sv
-│   │       │   │   ├── logistic
-│   │       │   │   │   ├── ntm_scalar_logistic_function.sv
-│   │       │   │   │   └── ntm_scalar_softmax_function.sv
-│   │       │   │   └── oneplus
-│   │       │   │       └── ntm_scalar_oneplus_function.sv
-│   │       │   └── vector
-│   │       │       ├── hyperbolic
-│   │       │       │   ├── ntm_vector_cosh_function.sv
-│   │       │       │   ├── ntm_vector_sinh_function.sv
-│   │       │       │   └── ntm_vector_tanh_function.sv
-│   │       │       ├── logistic
-│   │       │       │   ├── ntm_vector_logistic_function.sv
-│   │       │       │   └── ntm_vector_softmax_function.sv
-│   │       │       └── oneplus
-│   │       │           └── ntm_vector_oneplus_function.sv
-│   │       └── summation
-│   │           ├── matrix
-│   │           │   └── ntm_matrix_summation_function.sv
-│   │           ├── scalar
-│   │           │   └── ntm_scalar_summation_function.sv
-│   │           └── vector
-│   │               └── ntm_vector_summation_function.sv
+│   │       ├── matrix
+│   │       │   ├── ntm_matrix_convolution_function.sv
+│   │       │   ├── ntm_matrix_cosh_function.sv
+│   │       │   ├── ntm_matrix_cosine_similarity_function.sv
+│   │       │   ├── ntm_matrix_differentiation_function.sv
+│   │       │   ├── ntm_matrix_logistic_function.sv
+│   │       │   ├── ntm_matrix_multiplication_function.sv
+│   │       │   ├── ntm_matrix_oneplus_function.sv
+│   │       │   ├── ntm_matrix_sinh_function.sv
+│   │       │   ├── ntm_matrix_softmax_function.sv
+│   │       │   ├── ntm_matrix_summation_function.sv
+│   │       │   └── ntm_matrix_tanh_function.sv
+│   │       ├── scalar
+│   │       │   ├── ntm_scalar_convolution_function.sv
+│   │       │   ├── ntm_scalar_cosh_function.sv
+│   │       │   ├── ntm_scalar_cosine_similarity_function.sv
+│   │       │   ├── ntm_scalar_differentiation_function.sv
+│   │       │   ├── ntm_scalar_logistic_function.sv
+│   │       │   ├── ntm_scalar_multiplication_function.sv
+│   │       │   ├── ntm_scalar_oneplus_function.sv
+│   │       │   ├── ntm_scalar_sinh_function.sv
+│   │       │   ├── ntm_scalar_softmax_function.sv
+│   │       │   ├── ntm_scalar_summation_function.sv
+│   │       │   └── ntm_scalar_tanh_function.sv
+│   │       └── vector
+│   │           ├── ntm_vector_convolution_function.sv
+│   │           ├── ntm_vector_cosh_function.sv
+│   │           ├── ntm_vector_cosine_similarity_function.sv
+│   │           ├── ntm_vector_differentiation_function.sv
+│   │           ├── ntm_vector_logistic_function.sv
+│   │           ├── ntm_vector_multiplication_function.sv
+│   │           ├── ntm_vector_oneplus_function.sv
+│   │           ├── ntm_vector_sinh_function.sv
+│   │           ├── ntm_vector_softmax_function.sv
+│   │           ├── ntm_vector_summation_function.sv
+│   │           └── ntm_vector_tanh_function.sv
 │   ├── ntm
 │   │   ├── memory
 │   │   │   ├── ntm_addressing.sv
@@ -193,27 +162,33 @@
 │       ├── ntm_fnn_controller_pkg.sv
 │       ├── ntm_lstm_controller_pkg.sv
 │       └── ntm_math_pkg.sv
-└── osvvm
+└── uvm
     ├── controller
     │   ├── FNN
     │   │   ├── convolutional
+    │   │   │   ├── ntm_convolutional_fnn_pkg.sv
     │   │   │   ├── ntm_convolutional_fnn_stimulus.sv
     │   │   │   └── ntm_convolutional_fnn_testbench.sv
     │   │   └── standard
+    │   │       ├── ntm_standard_fnn_pkg.sv
     │   │       ├── ntm_standard_fnn_stimulus.sv
     │   │       └── ntm_standard_fnn_testbench.sv
     │   └── LSTM
     │       ├── convolutional
+    │       │   ├── ntm_convolutional_lstm_pkg.sv
     │       │   ├── ntm_convolutional_lstm_stimulus.sv
     │       │   └── ntm_convolutional_lstm_testbench.sv
     │       └── standard
+    │           ├── ntm_standard_lstm_pkg.sv
     │           ├── ntm_standard_lstm_stimulus.sv
     │           └── ntm_standard_lstm_testbench.sv
     ├── dnc
     │   ├── memory
+    │   │   ├── dnc_memory_pkg.sv
     │   │   ├── dnc_memory_stimulus.sv
     │   │   └── dnc_memory_testbench.sv
     │   ├── read_heads
+    │   │   ├── dnc_read_heads_pkg.sv
     │   │   ├── dnc_read_heads_stimulus.sv
     │   │   └── dnc_read_heads_testbench.sv
     │   ├── top
@@ -221,6 +196,7 @@
     │   │   ├── dnc_top_stimulus.sv
     │   │   └── dnc_top_testbench.sv
     │   └── write_heads
+    │       ├── dnc_write_heads_pkg.sv
     │       ├── dnc_write_heads_stimulus.sv
     │       └── dnc_write_heads_testbench.sv
     ├── math
@@ -238,9 +214,11 @@
     │       └── ntm_function_testbench.sv
     └── ntm
         ├── memory
+        │   ├── ntm_memory_pkg.sv
         │   ├── ntm_memory_stimulus.sv
         │   └── ntm_memory_testbench.sv
         ├── read_heads
+        │   ├── ntm_read_heads_pkg.sv
         │   ├── ntm_read_heads_stimulus.sv
         │   └── ntm_read_heads_testbench.sv
         ├── top
@@ -248,5 +226,6 @@
         │   ├── ntm_top_stimulus.sv
         │   └── ntm_top_testbench.sv
         └── write_heads
+            ├── ntm_write_heads_pkg.sv
             ├── ntm_write_heads_stimulus.sv
             └── ntm_write_heads_testbench.sv
