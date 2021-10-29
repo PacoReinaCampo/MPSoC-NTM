@@ -163,8 +163,10 @@ read_verilog -sv ../../../../rtl/verilog/dnc/top/dnc_controller_output_vector.sv
 read_verilog -sv ../../../../rtl/verilog/dnc/top/dnc_read_interface_vector.sv
 read_verilog -sv ../../../../rtl/verilog/dnc/top/dnc_write_interface_vector.sv
 
+read_verilog -sv dnc_top_synthesis.sv
+
 # elaborate design hierarchy
-hierarchy -check -top dnc_top
+hierarchy -check -top dnc_top_synthesis
 
 # improve design
 proc; opt; fsm; opt; memory; opt

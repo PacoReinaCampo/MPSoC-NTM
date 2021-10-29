@@ -9,14 +9,14 @@
 ##                  |_|                                                          ##
 ##                                                                               ##
 ##                                                                               ##
-##              MPSoC-SPRAM CPU                                                  ##
-##              Synthesis Test Makefile                                          ##
+##              Peripheral-NTM for MPSoC                                         ##
+##              Neural Turing Machine for MPSoC                                  ##
 ##                                                                               ##
 ###################################################################################
 
 ###################################################################################
 ##                                                                               ##
-## Copyright (c) 2018-2019 by the author(s)                                      ##
+## Copyright (c) 2021-2022 by the author(s)                                      ##
 ##                                                                               ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy  ##
 ## of this software and associated documentation files (the "Software"), to deal ##
@@ -160,9 +160,11 @@ read_verilog -sv ../../../../rtl/verilog/dnc/top/dnc_controller_output_vector.sv
 read_verilog -sv ../../../../rtl/verilog/dnc/top/dnc_read_interface_vector.sv
 read_verilog -sv ../../../../rtl/verilog/dnc/top/dnc_write_interface_vector.sv
 
+read_verilog -sv dnc_top_synthesis.sv
+
 read_xdc system.xdc
 
-synth_design -part xc7z020-clg484-1 -include_dirs ../../../../rtl/verilog/pkg -top dnc_top
+synth_design -part xc7z020-clg484-1 -include_dirs ../../../../rtl/verilog/pkg -top dnc_top_synthesis
 
 opt_design
 place_design
