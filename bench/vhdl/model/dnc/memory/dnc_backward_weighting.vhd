@@ -84,6 +84,13 @@ architecture dnc_backward_weighting_architecture of dnc_backward_weighting is
   -- Types
   -----------------------------------------------------------------------
 
+  type controller_ctrl_fsm is (
+    STARTER_STATE,                      -- STEP 0
+    MATRIX_PRODUCT_STATE,               -- STEP 1
+    MATRIX_TRANSPOSE_STATE,             -- STEP 2
+    ENDER_STATE                         -- STEP 3
+    );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
@@ -96,6 +103,9 @@ architecture dnc_backward_weighting_architecture of dnc_backward_weighting is
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- MATRIX TRANSPOSE
   -- CONTROL
@@ -143,6 +153,40 @@ begin
   -----------------------------------------------------------------------
 
   -- b(t;i;j) = transpose(L(t;g;j))·w(t-1;i;j)
+
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      B_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_ctrl_fsm_int is
+        when STARTER_STATE =>            -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          if (START = '1') then
+            -- FSM Control
+            controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+          end if;
+
+        when MATRIX_PRODUCT_STATE =>     -- STEP 1
+
+        when MATRIX_TRANSPOSE_STATE =>   -- STEP 2
+
+        when ENDER_STATE =>              -- STEP 3
+
+        when others =>
+          -- FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
   -- MATRIX TRANSPOSE
   matrix_transpose : ntm_matrix_transpose

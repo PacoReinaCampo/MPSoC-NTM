@@ -78,8 +78,8 @@ entity ntm_addressing is
     GAMMA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     M_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    W_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;

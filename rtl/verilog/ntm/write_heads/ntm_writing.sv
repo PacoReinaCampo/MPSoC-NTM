@@ -73,7 +73,7 @@ module ntm_writing(
   input [DATA_SIZE-1:0] M_IN;
   input [DATA_SIZE-1:0] A_IN;
   input [DATA_SIZE-1:0] W_IN;
-  input [DATA_SIZE-1:0] M_OUT;
+  output [DATA_SIZE-1:0] M_OUT;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
