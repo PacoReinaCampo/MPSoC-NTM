@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_top_synthesis #(
+module ntm_top_synthesis #(
   // SYSTEM-SIZE
   parameter DATA_SIZE=512,
 
@@ -96,7 +96,7 @@ module dnc_top_synthesis #(
   ///////////////////////////////////////////////////////////////////////
 
   // TOP
-  dnc_top #(
+  ntm_top #(
     .DATA_SIZE(DATA_SIZE)
   )
   top(

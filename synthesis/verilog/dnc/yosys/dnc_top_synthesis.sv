@@ -86,7 +86,6 @@ module dnc_top_synthesis #(
   parameter k_in_top = 0;
   parameter b_in_top = 0;
   parameter x_in_top = 0;
-  parameter y_out_top = 0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -129,7 +128,7 @@ module dnc_top_synthesis #(
     .K_IN(k_in_top),
     .B_IN(b_in_top),
     .X_IN(x_in_top),
-    .Y_OUT(y_out_top)
+    .Y_OUT()
   );
 
 endmodule

@@ -1,0 +1,23 @@
+ntm_top
+  ntm_addressing
+
+  ntm_erasing
+  ntm_writing
+
+  ntm_reading
+
+  ntm_interface_vector
+  ntm_output_vector
+  ntm_controller_output_vector
+
+  ntm_controller
+    ntm_hidden_gate_vector
+    ntm_state_gate_vector
+    ntm_forget_trainer
+    ntm_forget_gate_vector
+    ntm_output_trainer
+    ntm_output_gate_vector
+    ntm_input_trainer
+    ntm_input_gate_vector
+    ntm_activation_trainer
+    ntm_activation_gate_vector
