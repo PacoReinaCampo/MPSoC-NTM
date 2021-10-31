@@ -101,13 +101,27 @@ architecture ntm_forget_gate_vector_architecture of ntm_forget_gate_vector is
   -- Types
   -----------------------------------------------------------------------
 
+  type controller_ctrl_fsm is (
+    STARTER_STATE,                      -- STEP 0
+    MATRIX_PRODUCT_STATE,           -- STEP 1
+    VECTOR_ADDER_STATE,                 -- STEP 2
+    VECTOR_LOGISTIC_STATE,              -- STEP 3
+    ENDER_STATE                         -- STEP 4
+    );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- VECTOR ADDER
   -- CONTROL
@@ -133,23 +147,25 @@ architecture ntm_forget_gate_vector_architecture of ntm_forget_gate_vector is
   signal start_matrix_product : std_logic;
   signal ready_matrix_product : std_logic;
 
-  signal data_a_in_i_enable_matrix_product : std_logic;
-  signal data_a_in_j_enable_matrix_product : std_logic;
-  signal data_b_in_i_enable_matrix_product : std_logic;
-  signal data_b_in_j_enable_matrix_product : std_logic;
+  signal data_a_in_matrix_enable_matrix_product : std_logic;
+  signal data_a_in_vector_enable_matrix_product : std_logic;
+  signal data_a_in_scalar_enable_matrix_product : std_logic;
+  signal data_b_in_matrix_enable_matrix_product : std_logic;
+  signal data_b_in_vector_enable_matrix_product : std_logic;
+  signal data_b_in_scalar_enable_matrix_product : std_logic;
 
-  signal data_out_i_enable_matrix_product : std_logic;
-  signal data_out_j_enable_matrix_product : std_logic;
+  signal data_out_matrix_enable_matrix_product : std_logic;
+  signal data_out_vector_enable_matrix_product : std_logic;
+  signal data_out_scalar_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_a_i_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_a_j_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_b_i_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_b_j_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_j_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR LOGISTIC
   -- CONTROL
@@ -172,7 +188,43 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- f(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
+  -- f(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      F_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_ctrl_fsm_int is
+        when STARTER_STATE =>             -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          if (START = '1') then
+            -- FSM Control
+            controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+          end if;
+
+        when MATRIX_PRODUCT_STATE =>  -- STEP 1
+
+        when VECTOR_ADDER_STATE =>        -- STEP 2
+
+        when VECTOR_LOGISTIC_STATE =>     -- STEP 3
+
+        when ENDER_STATE =>               -- STEP 4
+
+        when others =>
+          -- FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder
@@ -204,7 +256,7 @@ begin
       );
 
   -- MATRIX PRODUCT
-  matrix_product : ntm_matrix_product
+  matrix_product_function : ntm_matrix_product_function
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -217,23 +269,25 @@ begin
       START => start_matrix_product,
       READY => ready_matrix_product,
 
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_product,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
+      DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_product,
+      DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_product,
+      DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_product,
+      DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_product,
+      DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_product,
+      DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_product,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
+      DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_product,
+      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_product,
+      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_product,
 
       -- DATA
-      MODULO_IN   => modulo_in_matrix_product,
-      SIZE_A_I_IN => size_a_i_in_matrix_product,
-      SIZE_A_J_IN => size_a_j_in_matrix_product,
-      SIZE_B_I_IN => size_b_i_in_matrix_product,
-      SIZE_B_J_IN => size_b_j_in_matrix_product,
-      DATA_A_IN   => data_a_in_matrix_product,
-      DATA_B_IN   => data_b_in_matrix_product,
-      DATA_OUT    => data_out_matrix_product
+      MODULO_IN => modulo_in_matrix_product,
+      SIZE_I_IN => size_i_in_matrix_product,
+      SIZE_J_IN => size_j_in_matrix_product,
+      LENGTH_IN => length_in_matrix_product,
+      DATA_A_IN => data_a_in_matrix_product,
+      DATA_B_IN => data_b_in_matrix_product,
+      DATA_OUT  => data_out_matrix_product
       );
 
   -- VECTOR LOGISTIC

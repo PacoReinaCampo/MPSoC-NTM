@@ -101,7 +101,8 @@ architecture ntm_controller_architecture of ntm_controller is
     STARTER_STATE,                      -- STEP 0
     VECTOR_SUMMATION_STATE,             -- STEP 1
     MATRIX_PRODUCT_STATE,               -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    VECTOR_LOGISTIC_STATE,              -- STEP 3
+    ENDER_STATE                         -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -117,18 +118,6 @@ architecture ntm_controller_architecture of ntm_controller is
 
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
-
-  -- Internal Signals
-  signal index_loop : integer;
-
-  signal data_in_vector_summation_int : std_logic;
-
-  signal data_a_in_i_matrix_product_int : std_logic;
-  signal data_a_in_j_matrix_product_int : std_logic;
-  signal data_b_in_i_matrix_product_int : std_logic;
-  signal data_b_in_j_matrix_product_int : std_logic;
-
-  signal data_in_vector_logistic_int : std_logic;
 
   -- VECTOR SUMMATION
   -- CONTROL
@@ -233,18 +222,6 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      -- Assignations
-      index_loop <= 0;
-
-      data_in_vector_summation_int <= '0';
-
-      data_a_in_i_matrix_product_int <= '0';
-      data_a_in_j_matrix_product_int <= '0';
-      data_b_in_i_matrix_product_int <= '0';
-      data_b_in_j_matrix_product_int <= '0';
-
-      data_in_vector_logistic_int <= '0';
-
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
@@ -261,7 +238,9 @@ begin
 
         when MATRIX_PRODUCT_STATE =>    -- STEP 2
 
-        when ENDER_STATE =>             -- STEP 3
+        when VECTOR_LOGISTIC_STATE =>   -- STEP 3
+
+        when ENDER_STATE =>             -- STEP 4
 
         when others =>
           -- FSM Control
