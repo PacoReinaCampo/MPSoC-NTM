@@ -70,13 +70,26 @@ architecture ntm_scalar_oneplus_function_architecture of ntm_scalar_oneplus_func
   -- Types
   -----------------------------------------------------------------------
 
+  type controller_ctrl_fsm is (
+    STARTER_STATE,                      -- STEP 0
+    VECTOR_ADDER_STATE,                 -- STEP 1
+    VECTOR_MULTIPLIER_STATE,            -- STEP 2
+    ENDER_STATE                         -- STEP 3
+    );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- SCALAR ADDER
   -- CONTROL
@@ -91,15 +104,16 @@ architecture ntm_scalar_oneplus_function_architecture of ntm_scalar_oneplus_func
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR INVERTER
+  -- SCALAR MULTIPLIER
   -- CONTROL
-  signal start_scalar_inverter : std_logic;
-  signal ready_scalar_inverter : std_logic;
+  signal start_scalar_multiplier : std_logic;
+  signal ready_scalar_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -107,6 +121,41 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      DATA_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_ctrl_fsm_int is
+        when STARTER_STATE =>            -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          if (START = '1') then
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          end if;
+
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
+
+        when VECTOR_ADDER_STATE =>       -- STEP 2
+
+        when ENDER_STATE =>              -- STEP 3
+
+        when others =>
+          -- FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
+
+  -- SCALAR ADDER
   ntm_scalar_adder_i : ntm_scalar_adder
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -129,7 +178,8 @@ begin
       DATA_OUT  => data_out_scalar_adder
       );
 
-  ntm_scalar_inverter_i : ntm_scalar_inverter
+  -- SCALAR MULTIPLIER
+  ntm_scalar_multiplier_i : ntm_scalar_multiplier
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -139,13 +189,14 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_inverter,
-      READY => ready_scalar_inverter,
+      START => start_scalar_multiplier,
+      READY => ready_scalar_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_inverter,
-      DATA_IN   => data_in_scalar_inverter,
-      DATA_OUT  => data_out_scalar_inverter
+      MODULO_IN => modulo_in_scalar_multiplier,
+      DATA_A_IN => data_a_in_scalar_multiplier,
+      DATA_B_IN => data_b_in_scalar_multiplier,
+      DATA_OUT  => data_out_scalar_multiplier
       );
 
 end architecture;

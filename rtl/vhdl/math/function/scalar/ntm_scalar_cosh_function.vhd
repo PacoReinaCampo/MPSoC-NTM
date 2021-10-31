@@ -70,13 +70,26 @@ architecture ntm_scalar_cosh_function_architecture of ntm_scalar_cosh_function i
   -- Types
   -----------------------------------------------------------------------
 
+  type controller_ctrl_fsm is (
+    STARTER_STATE,                      -- STEP 0
+    VECTOR_ADDER_STATE,                 -- STEP 1
+    VECTOR_MULTIPLIER_STATE,            -- STEP 2
+    ENDER_STATE                         -- STEP 3
+    );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- SCALAR ADDER
   -- CONTROL
@@ -108,6 +121,41 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      DATA_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_ctrl_fsm_int is
+        when STARTER_STATE =>            -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          if (START = '1') then
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          end if;
+
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
+
+        when VECTOR_ADDER_STATE =>       -- STEP 2
+
+        when ENDER_STATE =>              -- STEP 3
+
+        when others =>
+          -- FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
+
+  -- SCALAR ADDER
   ntm_scalar_adder_i : ntm_scalar_adder
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -130,6 +178,7 @@ begin
       DATA_OUT  => data_out_scalar_adder
       );
 
+  -- SCALAR MULTIPLIER
   ntm_scalar_multiplier_i : ntm_scalar_multiplier
     generic map (
       DATA_SIZE => DATA_SIZE
