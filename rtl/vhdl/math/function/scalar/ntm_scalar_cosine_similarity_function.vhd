@@ -78,7 +78,7 @@ architecture ntm_scalar_cosine_similarity_function_architecture of ntm_scalar_co
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    VECTOR_ADDER_STATE,                 -- STEP 1
+    VECTOR_DIVIDER_STATE,               -- STEP 1
     VECTOR_MULTIPLIER_STATE,            -- STEP 2
     ENDER_STATE                         -- STEP 3
     );
@@ -97,19 +97,6 @@ architecture ntm_scalar_cosine_similarity_function_architecture of ntm_scalar_co
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- SCALAR ADDER
-  -- CONTROL
-  signal start_scalar_adder : std_logic;
-  signal ready_scalar_adder : std_logic;
-
-  signal operation_scalar_adder : std_logic;
-
-  -- DATA
-  signal modulo_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
-
   -- SCALAR MULTIPLIER
   -- CONTROL
   signal start_scalar_multiplier : std_logic;
@@ -120,6 +107,34 @@ architecture ntm_scalar_cosine_similarity_function_architecture of ntm_scalar_co
   signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- SCALAR DIVIDER
+  -- CONTROL
+  signal start_scalar_divider : std_logic;
+  signal ready_scalar_divider : std_logic;
+
+  -- DATA
+  signal modulo_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- SCALAR PRODUCT
+  -- CONTROL
+  signal start_scalar_product : std_logic;
+  signal ready_scalar_product : std_logic;
+
+  signal data_a_in_enable_scalar_product : std_logic;
+  signal data_b_in_enable_scalar_product : std_logic;
+
+  signal data_out_enable_scalar_product : std_logic;
+
+  -- DATA
+  signal modulo_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_product  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -150,7 +165,7 @@ begin
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
 
-        when VECTOR_ADDER_STATE =>       -- STEP 2
+        when VECTOR_DIVIDER_STATE =>     -- STEP 2
 
         when ENDER_STATE =>              -- STEP 3
 
@@ -160,29 +175,6 @@ begin
       end case;
     end if;
   end process;
-
-  -- SCALAR ADDER
-  ntm_scalar_adder_i : ntm_scalar_adder
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_adder,
-      READY => ready_scalar_adder,
-
-      OPERATION => operation_scalar_adder,
-
-      -- DATA
-      MODULO_IN => modulo_in_scalar_adder,
-      DATA_A_IN => data_a_in_scalar_adder,
-      DATA_B_IN => data_b_in_scalar_adder,
-      DATA_OUT  => data_out_scalar_adder
-      );
 
   -- SCALAR MULTIPLIER
   ntm_scalar_multiplier_i : ntm_scalar_multiplier
@@ -203,6 +195,54 @@ begin
       DATA_A_IN => data_a_in_scalar_multiplier,
       DATA_B_IN => data_b_in_scalar_multiplier,
       DATA_OUT  => data_out_scalar_multiplier
+      );
+
+  -- SCALAR DIVIDER
+  scalar_divider : ntm_scalar_divider
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_divider,
+      READY => ready_scalar_divider,
+
+      -- DATA
+      MODULO_IN => modulo_in_scalar_divider,
+      DATA_A_IN => data_a_in_scalar_divider,
+      DATA_B_IN => data_b_in_scalar_divider,
+      DATA_OUT  => data_out_scalar_divider
+      );
+
+  -- SCALAR PRODUCT
+  scalar_product : ntm_scalar_product
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_product,
+      READY => ready_scalar_product,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_scalar_product,
+      DATA_B_IN_ENABLE => data_b_in_enable_scalar_product,
+
+      DATA_OUT_ENABLE => data_out_enable_scalar_product,
+
+      -- DATA
+      MODULO_IN => modulo_in_scalar_product,
+      LENGTH_IN => length_in_scalar_product,
+      DATA_A_IN => data_a_in_scalar_product,
+      DATA_B_IN => data_b_in_scalar_product,
+      DATA_OUT  => data_out_scalar_product
       );
 
 end architecture;

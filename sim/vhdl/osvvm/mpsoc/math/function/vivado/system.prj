@@ -27,6 +27,14 @@ vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_ex
 vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_root.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_logarithm.vhd
 
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_determinant.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_inversion.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_product.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_rank.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_transpose.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_scalar_product.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_vector_product.vhd
+
 vhdl2008 work ../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_convolution_function.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_cosine_similarity_function.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_differentiation_function.vhd
