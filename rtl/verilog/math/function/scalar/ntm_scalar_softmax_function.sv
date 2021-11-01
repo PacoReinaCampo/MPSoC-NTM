@@ -85,6 +85,7 @@ module ntm_scalar_softmax_function(
   // CONTROL
   wire start_scalar_adder;
   wire ready_scalar_adder;
+
   wire operation_scalar_adder;
 
   // DATA
@@ -93,24 +94,37 @@ module ntm_scalar_softmax_function(
   wire [DATA_SIZE-1:0] data_b_in_scalar_adder;
   wire [DATA_SIZE-1:0] data_out_scalar_adder;
 
-  // SCALAR MULTIPLIER
+  // SCALAR DIVIDER
   // CONTROL
-  wire start_scalar_multiplier;
-  wire ready_scalar_multiplier;
+  wire start_scalar_divider;
+  wire ready_scalar_divider;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_multiplier;
-  wire [DATA_SIZE-1:0] data_a_in_scalar_multiplier;
-  wire [DATA_SIZE-1:0] data_b_in_scalar_multiplier;
-  wire [DATA_SIZE-1:0] data_out_scalar_multiplier;
+  wire [DATA_SIZE-1:0] modulo_in_scalar_divider;
+  wire [DATA_SIZE-1:0] data_a_in_scalar_divider;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_divider;
+  wire [DATA_SIZE-1:0] data_out_scalar_divider;
+
+  // SCALAR EXPONENTIATOR
+  // CONTROL
+  wire start_scalar_exponentiator;
+  wire ready_scalar_exponentiator;
+
+  // DATA
+  wire [DATA_SIZE-1:0] modulo_in_scalar_exponentiator;
+  wire [DATA_SIZE-1:0] data_a_in_scalar_exponentiator;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_exponentiator;
+  wire [DATA_SIZE-1:0] data_out_scalar_exponentiator;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
+
+  // SCALAR ADDER
   ntm_scalar_adder #(
     .DATA_SIZE(DATA_SIZE)
   )
-  ntm_scalar_adder_i(
+  scalar_adder(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -128,23 +142,44 @@ module ntm_scalar_softmax_function(
     .DATA_OUT(data_out_scalar_adder)
   );
 
-  ntm_scalar_multiplier #(
+  // SCALAR DIVIDER
+  ntm_scalar_divider #(
     .DATA_SIZE(DATA_SIZE)
   )
-  ntm_scalar_multiplier_i(
+  scalar_divider(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_multiplier),
-    .READY(ready_scalar_multiplier),
+    .START(start_scalar_divider),
+    .READY(ready_scalar_divider),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_multiplier),
-    .DATA_A_IN(data_a_in_scalar_multiplier),
-    .DATA_B_IN(data_b_in_scalar_multiplier),
-    .DATA_OUT(data_out_scalar_multiplier)
+    .MODULO_IN(modulo_in_scalar_divider),
+    .DATA_A_IN(data_a_in_scalar_divider),
+    .DATA_B_IN(data_b_in_scalar_divider),
+    .DATA_OUT(data_out_scalar_divider)
+  );
+
+  // SCALAR EXPONENTIATOR
+  ntm_scalar_exponentiator #(
+    .DATA_SIZE(DATA_SIZE)
+  )
+  scalar_exponentiator(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_scalar_exponentiator),
+    .READY(ready_scalar_exponentiator),
+
+    // DATA
+    .MODULO_IN(modulo_in_scalar_exponentiator),
+    .DATA_A_IN(data_a_in_scalar_exponentiator),
+    .DATA_B_IN(data_b_in_scalar_exponentiator),
+    .DATA_OUT(data_out_scalar_exponentiator)
   );
 
 endmodule
