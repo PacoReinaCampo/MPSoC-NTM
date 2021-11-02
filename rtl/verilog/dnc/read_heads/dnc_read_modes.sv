@@ -37,40 +37,28 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_read_modes(
-  CLK,
-  RST,
-  START,
-  READY,
-  PI_IN_I_ENABLE,
-  PI_IN_P_ENABLE,
-  PI_OUT_I_ENABLE,
-  PI_OUT_P_ENABLE,
-  SIZE_R_IN,
-  PI_IN,
-  PI_OUT
-);
+module dnc_read_modes #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input PI_IN_I_ENABLE,  // for i in 0 to R-1
+    input PI_IN_P_ENABLE,  // for i in 0 to 2
+    output PI_OUT_I_ENABLE,  // for i in 0 to R-1
+    output PI_OUT_P_ENABLE,  // for i in 0 to 2
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input PI_IN_I_ENABLE;  // for i in 0 to R-1
-  input PI_IN_P_ENABLE;  // for i in 0 to 2
-  output PI_OUT_I_ENABLE;  // for i in 0 to R-1
-  output PI_OUT_P_ENABLE;  // for i in 0 to 2
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_R_IN;
-  input [DATA_SIZE-1:0] PI_IN;
-  output [DATA_SIZE-1:0] PI_OUT;
-
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_R_IN,
+    input [DATA_SIZE-1:0] PI_IN,
+    output [DATA_SIZE-1:0] PI_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

@@ -37,28 +37,22 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_write_gate(
-  CLK,
-  RST,
-  START,
-  READY,
-  GW_IN,
-  GW_OUT
-);
+module dnc_write_gate #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
-
-  // CONTROL
-  input START;
-  output READY;
-
-  // DATA
-  input [DATA_SIZE-1:0] GW_IN;
-  output GW_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] GW_IN,
+    output GW_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

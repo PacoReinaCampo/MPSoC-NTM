@@ -37,44 +37,30 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_controller_output_vector(
-  CLK,
-  RST,
-  START,
-  READY,
-  U_IN_Y_ENABLE,
-  U_IN_L_ENABLE,
-  H_IN_ENABLE,
-  NU_ENABLE_OUT,
-  SIZE_Y_IN,
-  SIZE_L_IN,
-  U_IN,
-  H_IN,
-  NU_OUT
-);
+module dnc_controller_output_vector #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input U_IN_Y_ENABLE,  // for y in 0 to Y-1
+    input U_IN_L_ENABLE,  // for l in 0 to L-1
+    input H_IN_ENABLE,  // for l in 0 to L-1
+    output NU_ENABLE_OUT,  // for y in 0 to Y-1
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input U_IN_Y_ENABLE;  // for y in 0 to Y-1
-  input U_IN_L_ENABLE;  // for l in 0 to L-1
-  input H_IN_ENABLE;  // for l in 0 to L-1
-  output NU_ENABLE_OUT;  // for y in 0 to Y-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_Y_IN;
-  input [DATA_SIZE-1:0] SIZE_L_IN;
-  input [DATA_SIZE-1:0] U_IN;
-  input [DATA_SIZE-1:0] H_IN;
-  output [DATA_SIZE-1:0] NU_OUT;
-
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_Y_IN,
+    input [DATA_SIZE-1:0] SIZE_L_IN,
+    input [DATA_SIZE-1:0] U_IN,
+    input [DATA_SIZE-1:0] H_IN,
+    output [DATA_SIZE-1:0] NU_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

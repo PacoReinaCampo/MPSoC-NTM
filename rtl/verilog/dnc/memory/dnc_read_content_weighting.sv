@@ -37,45 +37,31 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_read_content_weighting(
-  CLK,
-  RST,
-  START,
-  READY,
-  K_IN_ENABLE,
-  M_IN_J_ENABLE,
-  M_IN_K_ENABLE,
-  C_OUT_ENABLE,
-  SIZE_N_IN,
-  SIZE_W_IN,
-  K_IN,
-  M_IN,
-  BETA_IN,
-  C_OUT
-);
+module dnc_read_content_weighting #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input K_IN_ENABLE,  // for k in 0 to W-1
+    input M_IN_J_ENABLE,  // for j in 0 to N-1
+    input M_IN_K_ENABLE,  // for k in 0 to W-1
+    output C_OUT_ENABLE,  // for j in 0 to N-1
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input K_IN_ENABLE;  // for k in 0 to W-1
-  input M_IN_J_ENABLE;  // for j in 0 to N-1
-  input M_IN_K_ENABLE;  // for k in 0 to W-1
-  output C_OUT_ENABLE;  // for j in 0 to N-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_N_IN;
-  input [DATA_SIZE-1:0] SIZE_W_IN;
-  input [DATA_SIZE-1:0] K_IN;
-  input [DATA_SIZE-1:0] M_IN;
-  input [DATA_SIZE-1:0] BETA_IN;
-  output [DATA_SIZE-1:0] C_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_N_IN,
+    input [DATA_SIZE-1:0] SIZE_W_IN,
+    input [DATA_SIZE-1:0] K_IN,
+    input [DATA_SIZE-1:0] M_IN,
+    input [DATA_SIZE-1:0] BETA_IN,
+    output [DATA_SIZE-1:0] C_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

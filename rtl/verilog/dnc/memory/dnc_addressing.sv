@@ -37,67 +37,42 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_addressing(
-  CLK,
-  RST,
-  START,
-  READY,
-  K_READ_IN_I_ENABLE,
-  K_READ_IN_K_ENABLE,
-  BETA_READ_IN_ENABLE,
-  F_READ_IN_ENABLE,
-  PI_READ_IN_ENABLE,
-  K_WRITE_IN_K_ENABLE,
-  E_WRITE_IN_K_ENABLE,
-  V_WRITE_IN_K_ENABLE,
-  SIZE_R_IN,
-  SIZE_W_IN,
-  K_READ_IN,
-  BETA_READ_IN,
-  F_READ_IN,
-  PI_READ_IN,
-  K_WRITE_IN,
-  BETA_WRITE_IN,
-  E_WRITE_IN,
-  V_WRITE_IN,
-  GA_WRITE_IN,
-  GW_WRITE_IN,
-  R_OUT
-);
+module dnc_addressing #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input K_READ_IN_I_ENABLE,  // for i in 0 to R-1
+    input K_READ_IN_K_ENABLE,  // for k in 0 to W-1
+    input BETA_READ_IN_ENABLE,  // for i in 0 to R-1
+    input F_READ_IN_ENABLE,  // for i in 0 to R-1
+    input PI_READ_IN_ENABLE,  // for i in 0 to R-1
+    input K_WRITE_IN_K_ENABLE,  // for k in 0 to W-1
+    input E_WRITE_IN_K_ENABLE,  // for k in 0 to W-1
+    input V_WRITE_IN_K_ENABLE,  // for k in 0 to W-1
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input K_READ_IN_I_ENABLE;  // for i in 0 to R-1
-  input K_READ_IN_K_ENABLE;  // for k in 0 to W-1
-  input BETA_READ_IN_ENABLE;  // for i in 0 to R-1
-  input F_READ_IN_ENABLE;  // for i in 0 to R-1
-  input PI_READ_IN_ENABLE;  // for i in 0 to R-1
-  input K_WRITE_IN_K_ENABLE;  // for k in 0 to W-1
-  input E_WRITE_IN_K_ENABLE;  // for k in 0 to W-1
-  input V_WRITE_IN_K_ENABLE;  // for k in 0 to W-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_R_IN;
-  input [DATA_SIZE-1:0] SIZE_W_IN;
-  input [DATA_SIZE-1:0] K_READ_IN;
-  input [DATA_SIZE-1:0] BETA_READ_IN;
-  input [DATA_SIZE-1:0] F_READ_IN;
-  input [DATA_SIZE-1:0] PI_READ_IN;
-  input [DATA_SIZE-1:0] K_WRITE_IN;
-  input [DATA_SIZE-1:0] BETA_WRITE_IN;
-  input [DATA_SIZE-1:0] E_WRITE_IN;
-  input [DATA_SIZE-1:0] V_WRITE_IN;
-  input [DATA_SIZE-1:0] GA_WRITE_IN;
-  input [DATA_SIZE-1:0] GW_WRITE_IN;
-  output [DATA_SIZE-1:0] R_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_R_IN,
+    input [DATA_SIZE-1:0] SIZE_W_IN,
+    input [DATA_SIZE-1:0] K_READ_IN,
+    input [DATA_SIZE-1:0] BETA_READ_IN,
+    input [DATA_SIZE-1:0] F_READ_IN,
+    input [DATA_SIZE-1:0] PI_READ_IN,
+    input [DATA_SIZE-1:0] K_WRITE_IN,
+    input [DATA_SIZE-1:0] BETA_WRITE_IN,
+    input [DATA_SIZE-1:0] E_WRITE_IN,
+    input [DATA_SIZE-1:0] V_WRITE_IN,
+    input [DATA_SIZE-1:0] GA_WRITE_IN,
+    input [DATA_SIZE-1:0] GW_WRITE_IN,
+    output [DATA_SIZE-1:0] R_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Signals

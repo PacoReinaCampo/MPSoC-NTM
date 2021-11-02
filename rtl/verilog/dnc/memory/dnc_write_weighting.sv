@@ -37,43 +37,30 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_write_weighting(
-  CLK,
-  RST,
-  START,
-  READY,
-  A_IN_ENABLE,
-  C_IN_ENABLE,
-  W_OUT_ENABLE,
-  SIZE_N_IN,
-  A_IN,
-  C_IN,
-  GA_IN,
-  GW_IN,
-  W_OUT
-);
+module dnc_write_weighting #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input A_IN_ENABLE,  // for j in 0 to N-1
+    input C_IN_ENABLE,  // for j in 0 to N-1
+    output W_OUT_ENABLE,  // for j in 0 to N-1
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input A_IN_ENABLE;  // for j in 0 to N-1
-  input C_IN_ENABLE;  // for j in 0 to N-1
-  output W_OUT_ENABLE;  // for j in 0 to N-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_N_IN;
-  input [DATA_SIZE-1:0] A_IN;
-  input [DATA_SIZE-1:0] C_IN;
-  input GA_IN;
-  input GW_IN;
-  output [DATA_SIZE-1:0] W_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_N_IN,
+    input [DATA_SIZE-1:0] A_IN,
+    input [DATA_SIZE-1:0] C_IN,
+    input GA_IN,
+    input GW_IN,
+    output [DATA_SIZE-1:0] W_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

@@ -37,36 +37,26 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_read_strengths(
-  CLK,
-  RST,
-  START,
-  READY,
-  BETA_IN_ENABLE,
-  BETA_OUT_ENABLE,
-  SIZE_R_IN,
-  BETA_IN,
-  BETA_OUT
-);
+module dnc_read_strengths #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input BETA_IN_ENABLE,  // for i in 0 to R-1
+    output BETA_OUT_ENABLE,  // for i in 0 to R-1
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input BETA_IN_ENABLE;  // for i in 0 to R-1
-  output BETA_OUT_ENABLE;  // for i in 0 to R-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_R_IN;
-  input [DATA_SIZE-1:0] BETA_IN;
-  output [DATA_SIZE-1:0] BETA_OUT;
-
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_R_IN,
+    input [DATA_SIZE-1:0] BETA_IN,
+    output [DATA_SIZE-1:0] BETA_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

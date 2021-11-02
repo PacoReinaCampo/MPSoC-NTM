@@ -37,35 +37,26 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_free_gates(
-  CLK,
-  RST,
-  START,
-  READY,
-  F_IN_ENABLE,
-  F_OUT_ENABLE,
-  SIZE_R_IN,
-  F_IN,
-  F_OUT
-);
+module dnc_free_gates #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input F_IN_ENABLE,  // for i in 0 to R-1
+    output F_OUT_ENABLE,  // for i in 0 to R-1
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input F_IN_ENABLE;  // for i in 0 to R-1
-  output F_OUT_ENABLE;  // for i in 0 to R-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_R_IN;
-  input [DATA_SIZE-1:0] F_IN;
-  output F_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_R_IN,
+    input [DATA_SIZE-1:0] F_IN,
+    output F_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

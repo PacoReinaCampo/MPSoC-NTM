@@ -37,28 +37,22 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_allocation_gate(
-  CLK,
-  RST,
-  START,
-  READY,
-  GA_IN,
-  GA_OUT
-);
+module dnc_allocation_gate #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
-
-  // CONTROL
-  input START;
-  output READY;
-
-  // DATA
-  input [DATA_SIZE-1:0] GA_IN;
-  output GA_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] GA_IN,
+    output GA_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

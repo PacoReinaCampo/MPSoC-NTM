@@ -37,41 +37,29 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_read_keys(
-  CLK,
-  RST,
-  START,
-  READY,
-  K_IN_I_ENABLE,
-  K_IN_K_ENABLE,
-  K_OUT_I_ENABLE,
-  K_OUT_K_ENABLE,
-  SIZE_R_IN,
-  SIZE_W_IN,
-  K_IN,
-  K_OUT
-);
+module dnc_read_keys #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output reg READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input K_IN_I_ENABLE,  // for i in 0 to R-1
+    input K_IN_K_ENABLE,  // for k in 0 to W-1
+    output reg K_OUT_I_ENABLE,  // for i in 0 to R-1
+    output reg K_OUT_K_ENABLE,  // for k in 0 to W-1
 
-  // CONTROL
-  input START;
-  output reg READY;
-
-  input K_IN_I_ENABLE;  // for i in 0 to R-1
-  input K_IN_K_ENABLE;  // for k in 0 to W-1
-  output reg K_OUT_I_ENABLE;  // for i in 0 to R-1
-  output reg K_OUT_K_ENABLE;  // for k in 0 to W-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_R_IN;
-  input [DATA_SIZE-1:0] SIZE_W_IN;
-  input [DATA_SIZE-1:0] K_IN;
-  output reg [DATA_SIZE-1:0] K_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_R_IN,
+    input [DATA_SIZE-1:0] SIZE_W_IN,
+    input [DATA_SIZE-1:0] K_IN,
+    output reg [DATA_SIZE-1:0] K_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

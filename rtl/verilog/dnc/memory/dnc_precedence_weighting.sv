@@ -37,39 +37,28 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_precedence_weighting(
-  CLK,
-  RST,
-  START,
-  READY,
-  W_IN_ENABLE,
-  P_IN_ENABLE,
-  P_OUT_ENABLE,
-  SIZE_N_IN,
-  W_IN,
-  P_IN,
-  P_OUT
-);
+module dnc_precedence_weighting #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input W_IN_ENABLE,  // for j in 0 to N-1
+    input P_IN_ENABLE,  // for j in 0 to N-1
+    output P_OUT_ENABLE,  // for j in 0 to N-1
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input W_IN_ENABLE;  // for j in 0 to N-1
-  input P_IN_ENABLE;  // for j in 0 to N-1
-  output P_OUT_ENABLE;  // for j in 0 to N-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_N_IN;
-  input [DATA_SIZE-1:0] W_IN;
-  input [DATA_SIZE-1:0] P_IN;
-  output [DATA_SIZE-1:0] P_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_N_IN,
+    input [DATA_SIZE-1:0] W_IN,
+    input [DATA_SIZE-1:0] P_IN,
+    output [DATA_SIZE-1:0] P_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

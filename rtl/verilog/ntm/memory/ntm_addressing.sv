@@ -37,57 +37,37 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_addressing(
-  CLK,
-  RST,
-  START,
-  READY,
-  K_IN_ENABLE,
-  S_IN_ENABLE,
-  M_IN_J_ENABLE,
-  M_IN_K_ENABLE,
-  W_IN_ENABLE,
-  W_OUT_ENABLE,
-  SIZE_N_IN,
-  SIZE_W_IN,
-  K_IN,
-  BETA_IN,
-  G_IN,
-  S_IN,
-  GAMMA_IN,
-  M_IN,
-  W_IN,
-  W_OUT
-);
+module ntm_addressing #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input K_IN_ENABLE,  // for k in 0 to W-1
+    input S_IN_ENABLE,  // for k in 0 to W-1
+    input M_IN_J_ENABLE,  // for j in 0 to N-1
+    input M_IN_K_ENABLE,  // for k in 0 to W-1
+    input W_IN_ENABLE,  // for j in 0 to N-1
+    output W_OUT_ENABLE,  // for j in 0 to N-1
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input K_IN_ENABLE;  // for k in 0 to W-1
-  input S_IN_ENABLE;  // for k in 0 to W-1
-  input M_IN_J_ENABLE;  // for j in 0 to N-1
-  input M_IN_K_ENABLE;  // for k in 0 to W-1
-  input W_IN_ENABLE;  // for j in 0 to N-1
-  output W_OUT_ENABLE;  // for j in 0 to N-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_N_IN;
-  input [DATA_SIZE-1:0] SIZE_W_IN;
-  input [DATA_SIZE-1:0] K_IN;
-  input [DATA_SIZE-1:0] BETA_IN;
-  input [DATA_SIZE-1:0] G_IN;
-  input [DATA_SIZE-1:0] S_IN;
-  input [DATA_SIZE-1:0] GAMMA_IN;
-  input [DATA_SIZE-1:0] M_IN;
-  input [DATA_SIZE-1:0] W_IN;
-  output [DATA_SIZE-1:0] W_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_N_IN,
+    input [DATA_SIZE-1:0] SIZE_W_IN,
+    input [DATA_SIZE-1:0] K_IN,
+    input [DATA_SIZE-1:0] BETA_IN,
+    input [DATA_SIZE-1:0] G_IN,
+    input [DATA_SIZE-1:0] S_IN,
+    input [DATA_SIZE-1:0] GAMMA_IN,
+    input [DATA_SIZE-1:0] M_IN,
+    input [DATA_SIZE-1:0] W_IN,
+    output [DATA_SIZE-1:0] W_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
