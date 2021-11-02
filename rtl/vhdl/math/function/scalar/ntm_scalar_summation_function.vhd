@@ -77,7 +77,8 @@ architecture ntm_scalar_summation_function_architecture of ntm_scalar_summation_
 
   type summation_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    ENDER_STATE                         -- STEP 1
+    INPUT_STATE,                        -- STEP 1
+    ENDER_STATE                         -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -124,56 +125,70 @@ begin
       DATA_OUT <= ZERO;
 
       -- Control Outputs
-      READY           <= '0';
-      DATA_OUT_ENABLE <= '0';
+      READY <= '0';
 
       -- Assignations
       index_loop <= ZERO;
-
-      operation_scalar_adder <= '0';
 
     elsif (rising_edge(CLK)) then
 
       case summation_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
-          READY           <= '0';
-          DATA_OUT_ENABLE <= '0';
+          READY <= '0';
 
           if (START = '1') then
             -- Assignations
             index_loop <= ZERO;
 
-            operation_scalar_adder <= '0';
+            -- FSM Control
+            summation_ctrl_fsm_int <= INPUT_STATE;
+          end if;
 
-            -- Data Outputs
+        when INPUT_STATE =>             -- STEP 1
+
+          if (DATA_IN_ENABLE = '1') then
+            -- Data Inputs
             modulo_in_scalar_adder <= MODULO_IN;
+
+            data_a_in_scalar_adder <= DATA_IN;
+            data_b_in_scalar_adder <= data_out_scalar_adder;
+
+            -- Control Internal
+            start_scalar_adder <= '1';
 
             -- FSM Control
             summation_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
-        when ENDER_STATE =>             -- STEP 1
+          -- Control Outputs
+          DATA_OUT_ENABLE <= '0';
 
-          if (DATA_IN_ENABLE = '1') then
+        when ENDER_STATE =>             -- STEP 2
+
+          if (ready_scalar_adder = '1') then
             if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
               -- Control Outputs
-              READY           <= '1';
-              DATA_OUT_ENABLE <= '1';
-
-              -- Data Outputs
-              DATA_OUT <= data_out_scalar_adder;
+              READY <= '1';
 
               -- FSM Control
               summation_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE));
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE));
+
+              -- FSM Control
+              summation_ctrl_fsm_int <= INPUT_STATE;
             end if;
 
             -- Data Outputs
-            data_a_in_scalar_adder <= DATA_IN;
-            data_b_in_scalar_adder <= data_out_scalar_adder;
+            DATA_OUT <= data_out_scalar_adder;
+
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '1';
+          else
+            -- Control Internal
+            start_scalar_adder <= '0';
           end if;
 
         when others =>

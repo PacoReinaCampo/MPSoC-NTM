@@ -73,8 +73,9 @@ module ntm_scalar_multiplication_function(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter STARTER_STATE = 0;
-  parameter ENDER_STATE = 1;
+  parameter [1:0] STARTER_STATE = 0;
+  parameter [1:0] INPUT_STATE = 1;
+  parameter [1:0] ENDER_STATE = 2;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -88,14 +89,14 @@ module ntm_scalar_multiplication_function(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg multiplication_ctrl_fsm_int;
+  reg [1:0] multiplication_ctrl_fsm_int;
 
   // Internal Signals
   reg [DATA_SIZE-1:0] index_loop;
 
   // SCALAR MULTIPLIER
   // CONTROL
-  wire start_scalar_multiplier;
+  reg start_scalar_multiplier;
   wire ready_scalar_multiplier;
 
   // DATA
@@ -109,45 +110,52 @@ module ntm_scalar_multiplication_function(
   ///////////////////////////////////////////////////////////////////////
 
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       DATA_OUT <= ZERO;
 
       // Control Outputs
       READY <= 1'b0;
-      DATA_OUT_ENABLE <= 1'b0;
 
       // Assignations
       index_loop <= ZERO;
-    end else begin
+    end
+    else begin
       case(multiplication_ctrl_fsm_int)
-        STARTER_STATE : begin
-          // STEP 0
+        STARTER_STATE : begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
-          DATA_OUT_ENABLE <= 1'b0;
 
           if(START == 1'b1) begin
             // Assignations
             index_loop <= ZERO;
 
-            // Data Outputs
-            modulo_in_scalar_multiplier <= MODULO_IN;
-
             // FSM Control
-            multiplication_ctrl_fsm_int <= ENDER_STATE;
+            multiplication_ctrl_fsm_int <= INPUT_STATE;
           end
         end
-        ENDER_STATE : begin
-          // STEP 1
+        INPUT_STATE : begin  // STEP 1
           if(DATA_IN_ENABLE == 1'b1) begin
+            // Data Inputs
+            modulo_in_scalar_multiplier <= MODULO_IN;
+
+            data_a_in_scalar_multiplier <= DATA_IN;
+            data_b_in_scalar_multiplier <= data_out_scalar_multiplier;
+
+            // Control Internal
+            start_scalar_multiplier <= 1'b1;
+
+              // FSM Control
+            multiplication_ctrl_fsm_int <= ENDER_STATE;
+          end
+          // Control Outputs
+          DATA_OUT_ENABLE <= 1'b0;
+        end
+        ENDER_STATE : begin  // STEP 2
+          if(ready_scalar_multiplier == 1'b1) begin
             if(index_loop == (LENGTH_IN - ONE)) begin
               // Control Outputs
               READY <= 1'b1;
-              DATA_OUT_ENABLE <= 1'b1;
-
-              // Data Outputs
-              DATA_OUT <= data_out_scalar_multiplier;
 
               // FSM Control
               multiplication_ctrl_fsm_int <= STARTER_STATE;
@@ -155,10 +163,20 @@ module ntm_scalar_multiplication_function(
             else begin
               // Control Internal
               index_loop <= (index_loop + ONE);
+
+              // FSM Control
+              multiplication_ctrl_fsm_int <= INPUT_STATE;
             end
+
             // Data Outputs
-            data_a_in_scalar_multiplier <= DATA_IN;
-            data_b_in_scalar_multiplier <= data_out_scalar_multiplier;
+            DATA_OUT <= data_out_scalar_multiplier;
+
+            // Control Outputs
+            DATA_OUT_ENABLE <= 1'b1;
+          end
+          else begin
+            // Control Internal
+            start_scalar_multiplier <= 1'b0;
           end
         end
         default : begin

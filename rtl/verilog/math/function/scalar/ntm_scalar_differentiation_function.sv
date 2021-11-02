@@ -97,10 +97,22 @@ module ntm_scalar_differentiation_function(
   wire [DATA_SIZE-1:0] data_b_in_scalar_multiplier;
   wire [DATA_SIZE-1:0] data_out_scalar_multiplier;
 
+  // SCALAR DIVIDER
+  // CONTROL
+  wire start_scalar_divider;
+  wire ready_scalar_divider;
+
+  // DATA
+  wire [DATA_SIZE-1:0] modulo_in_scalar_divider;
+  wire [DATA_SIZE-1:0] data_a_in_scalar_divider;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_divider;
+  wire [DATA_SIZE-1:0] data_out_scalar_divider;
+
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
+  // SCALAR ADDER
   ntm_scalar_adder #(
     .DATA_SIZE(DATA_SIZE)
   )
@@ -122,6 +134,7 @@ module ntm_scalar_differentiation_function(
     .DATA_OUT(data_out_scalar_adder)
   );
 
+  // SCALAR MULTIPLIER
   ntm_scalar_multiplier #(
     .DATA_SIZE(DATA_SIZE)
   )
@@ -140,5 +153,26 @@ module ntm_scalar_differentiation_function(
     .DATA_B_IN(data_b_in_scalar_multiplier),
     .DATA_OUT(data_out_scalar_multiplier)
   );
+
+  // SCALAR DIVIDER
+  ntm_scalar_divider #(
+    .DATA_SIZE(DATA_SIZE)
+  )
+  scalar_divider(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_scalar_divider),
+    .READY(ready_scalar_divider),
+
+    // DATA
+    .MODULO_IN(modulo_in_scalar_divider),
+    .DATA_A_IN(data_a_in_scalar_divider),
+    .DATA_B_IN(data_b_in_scalar_divider),
+    .DATA_OUT(data_out_scalar_divider)
+  );
+
 
 endmodule
