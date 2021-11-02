@@ -37,65 +37,58 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_product(
-  CLK,
-  RST,
-  START,
-  READY,
-  DATA_A_IN_I_ENABLE,
-  DATA_A_IN_J_ENABLE,
-  DATA_B_IN_I_ENABLE,
-  DATA_B_IN_J_ENABLE,
-  DATA_OUT_I_ENABLE,
-  DATA_OUT_J_ENABLE,
-  MODULO_IN,
-  SIZE_A_I_IN,
-  SIZE_A_J_IN,
-  SIZE_B_I_IN,
-  SIZE_B_J_IN,
-  DATA_A_IN,
-  DATA_B_IN,
-  DATA_OUT
-);
+module ntm_matrix_product #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output reg READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input DATA_A_IN_I_ENABLE,
+    input DATA_A_IN_J_ENABLE,
+    input DATA_B_IN_I_ENABLE,
+    input DATA_B_IN_J_ENABLE,
+    output reg DATA_OUT_I_ENABLE,
+    output reg DATA_OUT_J_ENABLE,
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input DATA_A_IN_I_ENABLE;
-  input DATA_A_IN_J_ENABLE;
-  input DATA_B_IN_I_ENABLE;
-  input DATA_B_IN_J_ENABLE;
-  output DATA_OUT_I_ENABLE;
-  output DATA_OUT_J_ENABLE;
-
-  // DATA
-  input [DATA_SIZE-1:0] MODULO_IN;
-  input [DATA_SIZE-1:0] SIZE_A_I_IN;
-  input [DATA_SIZE-1:0] SIZE_A_J_IN;
-  input [DATA_SIZE-1:0] SIZE_B_I_IN;
-  input [DATA_SIZE-1:0] SIZE_B_J_IN;
-  input [DATA_SIZE-1:0] DATA_A_IN;
-  input [DATA_SIZE-1:0] DATA_B_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] MODULO_IN,
+    input [DATA_SIZE-1:0] SIZE_A_I_IN,
+    input [DATA_SIZE-1:0] SIZE_A_J_IN,
+    input [DATA_SIZE-1:0] SIZE_B_I_IN,
+    input [DATA_SIZE-1:0] SIZE_B_J_IN,
+    input [DATA_SIZE-1:0] DATA_A_IN,
+    input [DATA_SIZE-1:0] DATA_B_IN,
+    output reg [DATA_SIZE-1:0] DATA_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
+  parameter [1:0] STARTER_STATE = 0;
+  parameter [1:0] SCALAR_MULTIPLIER_STATE = 1;
+  parameter [1:0] SCALAR_ADDER_STATE = 2;
+  parameter [1:0] ENDER_STATE = 3;
+
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  parameter ZERO = 0;
+  parameter ONE = 1;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [1:0] algebra_ctrl_fsm_int;
 
   // SCALAR ADDER
   // CONTROL
@@ -126,6 +119,45 @@ module ntm_matrix_product(
   ///////////////////////////////////////////////////////////////////////
 
   // DATA_OUT = DATA_A_IN · DATA_B_IN
+
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      DATA_OUT <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(algebra_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // FSM Control
+            algebra_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
+          end
+        end
+
+        SCALAR_MULTIPLIER_STATE : begin  // STEP 1
+        end
+
+        SCALAR_ADDER_STATE : begin  // STEP 2
+        end
+
+        ENDER_STATE : begin  // STEP 3
+        end
+
+        default : begin
+          // FSM Control
+          algebra_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
+
+  // SCALAR ADDER
   ntm_scalar_adder #(
     .DATA_SIZE(DATA_SIZE)
   )
@@ -147,6 +179,7 @@ module ntm_matrix_product(
     .DATA_OUT(data_out_scalar_adder)
   );
 
+  // SCALAR MULTIPLIER
   ntm_scalar_multiplier #(
     .DATA_SIZE(DATA_SIZE)
   )

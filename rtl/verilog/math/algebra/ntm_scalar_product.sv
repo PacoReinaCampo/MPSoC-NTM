@@ -37,53 +37,52 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_product(
-  CLK,
-  RST,
-  START,
-  READY,
-  DATA_A_IN_ENABLE,
-  DATA_B_IN_ENABLE,
-  DATA_OUT_ENABLE,
-  MODULO_IN,
-  LENGTH_IN,
-  DATA_A_IN,
-  DATA_B_IN,
-  DATA_OUT
-);
+module ntm_scalar_product #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output reg READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input DATA_A_IN_ENABLE,
+    input DATA_B_IN_ENABLE,
+    output reg DATA_OUT_ENABLE,
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input DATA_A_IN_ENABLE;
-  input DATA_B_IN_ENABLE;
-  output DATA_OUT_ENABLE;
-
-  // DATA
-  input [DATA_SIZE-1:0] MODULO_IN;
-  input [DATA_SIZE-1:0] LENGTH_IN;
-  input [DATA_SIZE-1:0] DATA_A_IN;
-  input [DATA_SIZE-1:0] DATA_B_IN;
-  output [DATA_SIZE-1:0] DATA_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] MODULO_IN,
+    input [DATA_SIZE-1:0] LENGTH_IN,
+    input [DATA_SIZE-1:0] DATA_A_IN,
+    input [DATA_SIZE-1:0] DATA_B_IN,
+    output reg [DATA_SIZE-1:0] DATA_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
+  parameter [1:0] STARTER_STATE = 0;
+  parameter [1:0] SCALAR_MULTIPLIER_STATE = 1;
+  parameter [1:0] SCALAR_ADDER_STATE = 2;
+  parameter [1:0] ENDER_STATE = 3;
+
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  parameter ZERO = 0;
+  parameter ONE = 1;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [1:0] algebra_ctrl_fsm_int;
 
   // SCALAR ADDER
   // CONTROL
@@ -114,6 +113,45 @@ module ntm_scalar_product(
   ///////////////////////////////////////////////////////////////////////
 
   // DATA_OUT = DATA_A_IN · DATA_B_IN
+
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      DATA_OUT <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(algebra_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // FSM Control
+            algebra_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
+          end
+        end
+
+        SCALAR_MULTIPLIER_STATE : begin  // STEP 1
+        end
+
+        SCALAR_ADDER_STATE : begin  // STEP 2
+        end
+
+        ENDER_STATE : begin  // STEP 3
+        end
+
+        default : begin
+          // FSM Control
+          algebra_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
+
+  // SCALAR ADDER
   ntm_scalar_adder #(
     .DATA_SIZE(DATA_SIZE)
   )
