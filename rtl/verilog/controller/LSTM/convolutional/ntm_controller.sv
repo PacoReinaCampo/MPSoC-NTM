@@ -37,77 +37,68 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_controller(
-  CLK,
-  RST,
-  START,
-  READY,
-  W_IN_L_ENABLE,
-  W_IN_X_ENABLE,
-  K_IN_I_ENABLE,
-  K_IN_L_ENABLE,
-  K_IN_K_ENABLE,
-  B_IN_ENABLE,
-  X_IN_ENABLE,
-  R_IN_I_ENABLE,
-  R_IN_K_ENABLE,
-  H_OUT_ENABLE,
-  SIZE_X_IN,
-  SIZE_W_IN,
-  SIZE_L_IN,
-  SIZE_R_IN,
-  W_IN,
-  K_IN,
-  B_IN,
-  X_IN,
-  R_IN,
-  H_OUT
-);
+module ntm_controller #(
+  parameter [31:0] DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter [31:0] DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output reg READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input W_IN_L_ENABLE,  // for l in 0 to L-1
+    input W_IN_X_ENABLE,  // for x in 0 to X-1
+    input K_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    input K_IN_L_ENABLE,  // for l in 0 to L-1
+    input K_IN_K_ENABLE,  // for k in 0 to W-1
+    input B_IN_ENABLE,  // for l in 0 to L-1
+    input X_IN_ENABLE,  // for x in 0 to X-1
+    input R_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    input R_IN_K_ENABLE,  // for k in 0 to W-1
+    output reg H_OUT_ENABLE,  // for l in 0 to L-1
 
-  // CONTROL
-  input START;
-  output reg READY;
-
-  input W_IN_L_ENABLE;  // for l in 0 to L-1
-  input W_IN_X_ENABLE;  // for x in 0 to X-1
-  input K_IN_I_ENABLE;  // for i in 0 to R-1 (read heads flow)
-  input K_IN_L_ENABLE;  // for l in 0 to L-1
-  input K_IN_K_ENABLE;  // for k in 0 to W-1
-  input B_IN_ENABLE;  // for l in 0 to L-1
-  input X_IN_ENABLE;  // for x in 0 to X-1
-  input R_IN_I_ENABLE;  // for i in 0 to R-1 (read heads flow)
-  input R_IN_K_ENABLE;  // for k in 0 to W-1
-  output reg H_OUT_ENABLE;  // for l in 0 to L-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_X_IN;
-  input [DATA_SIZE-1:0] SIZE_W_IN;
-  input [DATA_SIZE-1:0] SIZE_L_IN;
-  input [DATA_SIZE-1:0] SIZE_R_IN;
-  input [DATA_SIZE-1:0] W_IN;
-  input [DATA_SIZE-1:0] K_IN;
-  input [DATA_SIZE-1:0] B_IN;
-  input [DATA_SIZE-1:0] X_IN;
-  input [DATA_SIZE-1:0] R_IN;
-  output reg [DATA_SIZE-1:0] H_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_X_IN,
+    input [DATA_SIZE-1:0] SIZE_W_IN,
+    input [DATA_SIZE-1:0] SIZE_L_IN,
+    input [DATA_SIZE-1:0] SIZE_R_IN,
+    input [DATA_SIZE-1:0] W_IN,
+    input [DATA_SIZE-1:0] K_IN,
+    input [DATA_SIZE-1:0] B_IN,
+    input [DATA_SIZE-1:0] X_IN,
+    input [DATA_SIZE-1:0] R_IN,
+    output reg [DATA_SIZE-1:0] H_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
+  parameter [2:0] STARTER_STATE = 0;
+  parameter [2:0] VECTOR_ACTIVATION_STATE = 1;
+  parameter [2:0] VECTOR_FORGET_STATE = 2;
+  parameter [2:0] VECTOR_INPUT_STATE = 3;
+  parameter [2:0] VECTOR_STATE_STATE = 4;
+  parameter [2:0] VECTOR_OUTPUT_GATE = 5;
+  parameter [2:0] VECTOR_HIDDEN_GATE = 6;
+  parameter [2:0] ENDER_STATE = 7;
+
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  parameter ZERO = 0;
+  parameter ONE = 1;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [2:0] controller_ctrl_fsm_int;
 
   // ACTIVATION GATE VECTOR
   // CONTROL
@@ -394,6 +385,53 @@ module ntm_controller(
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
+
+  always @(posedge CLK or posedge RST) begin
+    if((RST == 1'b0)) begin
+      // Data Outputs
+      H_OUT <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(controller_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+          if(START == 1'b1) begin
+            // FSM Control
+            controller_ctrl_fsm_int <= VECTOR_ACTIVATION_STATE;
+          end
+        end
+
+        VECTOR_ACTIVATION_STATE : begin  // STEP 1
+        end
+
+        VECTOR_FORGET_STATE : begin  // STEP 2
+        end
+
+        VECTOR_INPUT_STATE : begin  // STEP 3
+        end
+
+        VECTOR_STATE_STATE : begin  // STEP 4
+        end
+
+        VECTOR_OUTPUT_GATE : begin  // STEP 5
+        end
+
+        VECTOR_HIDDEN_GATE : begin  // STEP 6
+        end
+
+        ENDER_STATE : begin  // STEP 7
+        end
+        default : begin
+          // FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
   // ACTIVATION GATE VECTOR
   ntm_activation_gate_vector #(

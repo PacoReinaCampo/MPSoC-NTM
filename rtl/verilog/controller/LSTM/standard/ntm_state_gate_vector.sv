@@ -37,47 +37,32 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_state_gate_vector(
-  CLK,
-  RST,
-  START,
-  READY,
-  S_IN_ENABLE,
-  I_IN_ENABLE,
-  F_IN_ENABLE,
-  A_IN_ENABLE,
-  S_OUT_ENABLE,
-  SIZE_L_IN,
-  S_IN,
-  I_IN,
-  F_IN,
-  A_IN,
-  S_OUT
-);
+module ntm_state_gate_vector #(
+  parameter [31:0] DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter [31:0] DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input S_IN_ENABLE,  // for l in 0 to L-1
+    input I_IN_ENABLE,  // for l in 0 to L-1
+    input F_IN_ENABLE,  // for l in 0 to L-1
+    input A_IN_ENABLE,  // for l in 0 to L-1
+    output S_OUT_ENABLE,  // for l in 0 to L-1
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input S_IN_ENABLE;  // for l in 0 to L-1
-  input I_IN_ENABLE;  // for l in 0 to L-1
-  input F_IN_ENABLE;  // for l in 0 to L-1
-  input A_IN_ENABLE;  // for l in 0 to L-1
-  output S_OUT_ENABLE;  // for l in 0 to L-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_L_IN;
-  input [DATA_SIZE-1:0] S_IN;
-  input [DATA_SIZE-1:0] I_IN;
-  input [DATA_SIZE-1:0] F_IN;
-  input [DATA_SIZE-1:0] A_IN;
-  output [DATA_SIZE-1:0] S_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_L_IN,
+    input [DATA_SIZE-1:0] S_IN,
+    input [DATA_SIZE-1:0] I_IN,
+    input [DATA_SIZE-1:0] F_IN,
+    input [DATA_SIZE-1:0] A_IN,
+    output [DATA_SIZE-1:0] S_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

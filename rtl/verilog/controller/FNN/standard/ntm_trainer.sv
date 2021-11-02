@@ -37,59 +37,38 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_trainer(
-  CLK,
-  RST,
-  START,
-  READY,
-  H_IN_ENABLE,
-  X_IN_ENABLE,
-  W_OUT_L_ENABLE,
-  W_OUT_X_ENABLE,
-  K_OUT_I_ENABLE,
-  K_OUT_L_ENABLE,
-  K_OUT_K_ENABLE,
-  B_OUT_ENABLE,
-  SIZE_X_IN,
-  SIZE_W_IN,
-  SIZE_L_IN,
-  SIZE_R_IN,
-  H_IN,
-  X_IN,
-  W_OUT,
-  K_OUT,
-  B_OUT
-);
+module ntm_trainer #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input H_IN_ENABLE,  // for l in 0 to L-1
+    input X_IN_ENABLE,  // for l in 0 to L-1
+    output W_OUT_L_ENABLE,  // for l in 0 to L-1
+    output W_OUT_X_ENABLE,  // for x in 0 to X-1
+    output K_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    output K_OUT_L_ENABLE,  // for l in 0 to L-1
+    output K_OUT_K_ENABLE,  // for k in 0 to W-1
+    output B_OUT_ENABLE,  // for l in 0 to L-1
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input H_IN_ENABLE;  // for l in 0 to L-1
-  input X_IN_ENABLE;  // for l in 0 to L-1
-  output W_OUT_L_ENABLE;  // for l in 0 to L-1
-  output W_OUT_X_ENABLE;  // for x in 0 to X-1
-  output K_OUT_I_ENABLE;  // for i in 0 to R-1 (read heads flow)
-  output K_OUT_L_ENABLE;  // for l in 0 to L-1
-  output K_OUT_K_ENABLE;  // for k in 0 to W-1
-  output B_OUT_ENABLE;  // for l in 0 to L-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_X_IN;
-  input [DATA_SIZE-1:0] SIZE_W_IN;
-  input [DATA_SIZE-1:0] SIZE_L_IN;
-  input [DATA_SIZE-1:0] SIZE_R_IN;
-  input [DATA_SIZE-1:0] H_IN;
-  input [DATA_SIZE-1:0] X_IN;
-  output [DATA_SIZE-1:0] W_OUT;
-  output [DATA_SIZE-1:0] K_OUT;
-  output [DATA_SIZE-1:0] B_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_X_IN,
+    input [DATA_SIZE-1:0] SIZE_W_IN,
+    input [DATA_SIZE-1:0] SIZE_L_IN,
+    input [DATA_SIZE-1:0] SIZE_R_IN,
+    input [DATA_SIZE-1:0] H_IN,
+    input [DATA_SIZE-1:0] X_IN,
+    output [DATA_SIZE-1:0] W_OUT,
+    output [DATA_SIZE-1:0] K_OUT,
+    output [DATA_SIZE-1:0] B_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

@@ -97,13 +97,30 @@ architecture ntm_controller_architecture of ntm_controller is
   -- Types
   -----------------------------------------------------------------------
 
+  type controller_ctrl_fsm is (
+    STARTER_STATE,            -- STEP 0
+    VECTOR_ACTIVATION_STATE,  -- STEP 1
+    VECTOR_FORGET_STATE,      -- STEP 2
+    VECTOR_INPUT_STATE,       -- STEP 3
+    VECTOR_STATE_STATE,       -- STEP 4
+    VECTOR_OUTPUT_GATE,       -- STEP 5
+    VECTOR_HIDDEN_GATE,       -- STEP 6
+    ENDER_STATE               -- STEP 7
+    );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- ACTIVATION GATE VECTOR
   -- CONTROL
@@ -454,6 +471,48 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      H_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_ctrl_fsm_int is
+        when STARTER_STATE =>            -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          if (START = '1') then
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_ACTIVATION_STATE;
+          end if;
+
+        when VECTOR_ACTIVATION_STATE =>  -- STEP 1
+
+        when VECTOR_FORGET_STATE =>      -- STEP 2
+
+        when VECTOR_INPUT_STATE =>       -- STEP 3
+
+        when VECTOR_STATE_STATE =>       -- STEP 4
+
+        when VECTOR_OUTPUT_GATE =>       -- STEP 5
+
+        when VECTOR_HIDDEN_GATE =>       -- STEP 6
+
+        when ENDER_STATE =>              -- STEP 7
+
+        when others =>
+          -- FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
   -- ACTIVATION GATE VECTOR
   activation_gate_vector : ntm_activation_gate_vector

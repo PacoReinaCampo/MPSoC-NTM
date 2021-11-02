@@ -37,39 +37,28 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_hidden_gate_vector(
-  CLK,
-  RST,
-  START,
-  READY,
-  S_IN_ENABLE,
-  O_IN_ENABLE,
-  H_OUT_ENABLE,
-  SIZE_L_IN,
-  S_IN,
-  O_IN,
-  H_OUT
-);
+module ntm_hidden_gate_vector #(
+  parameter [31:0] DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter [31:0] DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input S_IN_ENABLE,  // for l in 0 to L-1
+    input O_IN_ENABLE,  // for l in 0 to L-1
+    output H_OUT_ENABLE,  // for l in 0 to L-1
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input S_IN_ENABLE;  // for l in 0 to L-1
-  input O_IN_ENABLE;  // for l in 0 to L-1
-  output H_OUT_ENABLE;  // for l in 0 to L-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_L_IN;
-  input [DATA_SIZE-1:0] S_IN;
-  input [DATA_SIZE-1:0] O_IN;
-  output [DATA_SIZE-1:0] H_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_L_IN,
+    input [DATA_SIZE-1:0] S_IN,
+    input [DATA_SIZE-1:0] O_IN,
+    output [DATA_SIZE-1:0] H_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
