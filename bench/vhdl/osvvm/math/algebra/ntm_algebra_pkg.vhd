@@ -62,6 +62,7 @@ package ntm_algebra_pkg is
 
   constant SIZE_I : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
   constant SIZE_J : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
+  constant SIZE_K : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
 
   constant SIZE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
 
@@ -79,7 +80,7 @@ package ntm_algebra_pkg is
   constant STIMULUS_NTM_MATRIX_RANK_TEST        : boolean := false;
   constant STIMULUS_NTM_MATRIX_TRANSPOSE_TEST   : boolean := false;
   constant STIMULUS_NTM_SCALAR_PRODUCT_TEST     : boolean := false;
-  constant STIMULUS_NTM_VECTOR_PRODUCT_TEST     : boolean := false;
+  constant STIMULUS_NTM_TENSOR_PRODUCT_TEST     : boolean := false;
 
   constant STIMULUS_NTM_MATRIX_DETERMINANT_CASE_0 : boolean := false;
   constant STIMULUS_NTM_MATRIX_INVERSION_CASE_0   : boolean := false;
@@ -87,7 +88,7 @@ package ntm_algebra_pkg is
   constant STIMULUS_NTM_MATRIX_RANK_CASE_0        : boolean := false;
   constant STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0   : boolean := false;
   constant STIMULUS_NTM_SCALAR_PRODUCT_CASE_0     : boolean := false;
-  constant STIMULUS_NTM_VECTOR_PRODUCT_CASE_0     : boolean := false;
+  constant STIMULUS_NTM_TENSOR_PRODUCT_CASE_0     : boolean := false;
 
   constant STIMULUS_NTM_MATRIX_DETERMINANT_CASE_1 : boolean := false;
   constant STIMULUS_NTM_MATRIX_INVERSION_CASE_1   : boolean := false;
@@ -95,7 +96,7 @@ package ntm_algebra_pkg is
   constant STIMULUS_NTM_MATRIX_RANK_CASE_1        : boolean := false;
   constant STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1   : boolean := false;
   constant STIMULUS_NTM_SCALAR_PRODUCT_CASE_1     : boolean := false;
-  constant STIMULUS_NTM_VECTOR_PRODUCT_CASE_1     : boolean := false;
+  constant STIMULUS_NTM_TENSOR_PRODUCT_CASE_1     : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
@@ -120,7 +121,7 @@ package ntm_algebra_pkg is
       STIMULUS_NTM_MATRIX_RANK_TEST        : boolean := false;
       STIMULUS_NTM_MATRIX_TRANSPOSE_TEST   : boolean := false;
       STIMULUS_NTM_SCALAR_PRODUCT_TEST     : boolean := false;
-      STIMULUS_NTM_VECTOR_PRODUCT_TEST     : boolean := false;
+      STIMULUS_NTM_TENSOR_PRODUCT_TEST     : boolean := false;
 
       STIMULUS_NTM_MATRIX_DETERMINANT_CASE_0 : boolean := false;
       STIMULUS_NTM_MATRIX_INVERSION_CASE_0   : boolean := false;
@@ -128,7 +129,7 @@ package ntm_algebra_pkg is
       STIMULUS_NTM_MATRIX_RANK_CASE_0        : boolean := false;
       STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0   : boolean := false;
       STIMULUS_NTM_SCALAR_PRODUCT_CASE_0     : boolean := false;
-      STIMULUS_NTM_VECTOR_PRODUCT_CASE_0     : boolean := false;
+      STIMULUS_NTM_TENSOR_PRODUCT_CASE_0     : boolean := false;
 
       STIMULUS_NTM_MATRIX_DETERMINANT_CASE_1 : boolean := false;
       STIMULUS_NTM_MATRIX_INVERSION_CASE_1   : boolean := false;
@@ -136,7 +137,7 @@ package ntm_algebra_pkg is
       STIMULUS_NTM_MATRIX_RANK_CASE_1        : boolean := false;
       STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1   : boolean := false;
       STIMULUS_NTM_SCALAR_PRODUCT_CASE_1     : boolean := false;
-      STIMULUS_NTM_VECTOR_PRODUCT_CASE_1     : boolean := false
+      STIMULUS_NTM_TENSOR_PRODUCT_CASE_1     : boolean := false
       );
     port (
       -- GLOBAL
@@ -247,21 +248,27 @@ package ntm_algebra_pkg is
       SCALAR_PRODUCT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_PRODUCT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- VECTOR PRODUCT
+      -- TENSOR PRODUCT
       -- CONTROL
-      VECTOR_PRODUCT_START : out std_logic;
-      VECTOR_PRODUCT_READY : in  std_logic;
+      TENSOR_PRODUCT_START : out std_logic;
+      TENSOR_PRODUCT_READY : in  std_logic;
 
-      VECTOR_PRODUCT_DATA_A_IN_ENABLE : out std_logic;
-      VECTOR_PRODUCT_DATA_B_IN_ENABLE : out std_logic;
+      TENSOR_PRODUCT_DATA_A_IN_I_ENABLE : out std_logic;
+      TENSOR_PRODUCT_DATA_A_IN_J_ENABLE : out std_logic;
+      TENSOR_PRODUCT_DATA_A_IN_K_ENABLE : out std_logic;
+      TENSOR_PRODUCT_DATA_B_IN_I_ENABLE : out std_logic;
+      TENSOR_PRODUCT_DATA_B_IN_J_ENABLE : out std_logic;
+      TENSOR_PRODUCT_DATA_B_IN_K_ENABLE : out std_logic;
 
-      VECTOR_PRODUCT_DATA_OUT_ENABLE : in std_logic;
+      TENSOR_PRODUCT_DATA_OUT_I_ENABLE : in std_logic;
+      TENSOR_PRODUCT_DATA_OUT_J_ENABLE : in std_logic;
+      TENSOR_PRODUCT_DATA_OUT_K_ENABLE : in std_logic;
 
       -- DATA
-      VECTOR_PRODUCT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_PRODUCT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_PRODUCT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_PRODUCT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      TENSOR_PRODUCT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_PRODUCT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_PRODUCT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_PRODUCT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

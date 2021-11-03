@@ -33,7 +33,7 @@
 ../../../../../../../rtl/verilog/math/algebra/ntm_matrix_rank.sv
 ../../../../../../../rtl/verilog/math/algebra/ntm_matrix_transpose.sv
 ../../../../../../../rtl/verilog/math/algebra/ntm_scalar_product.sv
-../../../../../../../rtl/verilog/math/algebra/ntm_vector_product.sv
+../../../../../../../rtl/verilog/math/algebra/ntm_tensor_product.sv
 
 ../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_convolution_function.sv
 ../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_cosine_similarity_function.sv

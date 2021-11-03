@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_vector_product #(
+module ntm_tensor_product #(
   parameter DATA_SIZE=512,
 
   parameter [DATA_SIZE-1:0] SIZE=64
@@ -51,9 +51,15 @@ module ntm_vector_product #(
     input START,
     output reg READY,
 
-    input DATA_A_IN_ENABLE,
-    input DATA_B_IN_ENABLE,
-    output reg DATA_OUT_ENABLE,
+    input DATA_A_IN_I_ENABLE,
+    input DATA_A_IN_J_ENABLE,
+    input DATA_A_IN_K_ENABLE,
+    input DATA_B_IN_I_ENABLE,
+    input DATA_B_IN_J_ENABLE,
+    input DATA_B_IN_K_ENABLE,
+    output reg DATA_OUT_I_ENABLE,
+    output reg DATA_OUT_J_ENABLE,
+    output reg DATA_OUT_K_ENABLE,
 
     // DATA
     input [DATA_SIZE-1:0] MODULO_IN,

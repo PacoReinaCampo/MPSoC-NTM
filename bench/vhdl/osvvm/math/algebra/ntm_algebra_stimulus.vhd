@@ -64,7 +64,7 @@ entity ntm_algebra_stimulus is
     STIMULUS_NTM_MATRIX_RANK_TEST        : boolean := false;
     STIMULUS_NTM_MATRIX_TRANSPOSE_TEST   : boolean := false;
     STIMULUS_NTM_SCALAR_PRODUCT_TEST     : boolean := false;
-    STIMULUS_NTM_VECTOR_PRODUCT_TEST     : boolean := false;
+    STIMULUS_NTM_TENSOR_PRODUCT_TEST     : boolean := false;
 
     STIMULUS_NTM_MATRIX_DETERMINANT_CASE_0 : boolean := false;
     STIMULUS_NTM_MATRIX_INVERSION_CASE_0   : boolean := false;
@@ -72,7 +72,7 @@ entity ntm_algebra_stimulus is
     STIMULUS_NTM_MATRIX_RANK_CASE_0        : boolean := false;
     STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0   : boolean := false;
     STIMULUS_NTM_SCALAR_PRODUCT_CASE_0     : boolean := false;
-    STIMULUS_NTM_VECTOR_PRODUCT_CASE_0     : boolean := false;
+    STIMULUS_NTM_TENSOR_PRODUCT_CASE_0     : boolean := false;
 
     STIMULUS_NTM_MATRIX_DETERMINANT_CASE_1 : boolean := false;
     STIMULUS_NTM_MATRIX_INVERSION_CASE_1   : boolean := false;
@@ -80,7 +80,7 @@ entity ntm_algebra_stimulus is
     STIMULUS_NTM_MATRIX_RANK_CASE_1        : boolean := false;
     STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1   : boolean := false;
     STIMULUS_NTM_SCALAR_PRODUCT_CASE_1     : boolean := false;
-    STIMULUS_NTM_VECTOR_PRODUCT_CASE_1     : boolean := false
+    STIMULUS_NTM_TENSOR_PRODUCT_CASE_1     : boolean := false
     );
   port (
     -- GLOBAL
@@ -191,21 +191,27 @@ entity ntm_algebra_stimulus is
     SCALAR_PRODUCT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_PRODUCT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-    -- VECTOR PRODUCT
+    -- TENSOR PRODUCT
     -- CONTROL
-    VECTOR_PRODUCT_START : out std_logic;
-    VECTOR_PRODUCT_READY : in  std_logic;
+    TENSOR_PRODUCT_START : out std_logic;
+    TENSOR_PRODUCT_READY : in  std_logic;
 
-    VECTOR_PRODUCT_DATA_A_IN_ENABLE : out std_logic;
-    VECTOR_PRODUCT_DATA_B_IN_ENABLE : out std_logic;
+    TENSOR_PRODUCT_DATA_A_IN_I_ENABLE : out std_logic;
+    TENSOR_PRODUCT_DATA_A_IN_J_ENABLE : out std_logic;
+    TENSOR_PRODUCT_DATA_A_IN_K_ENABLE : out std_logic;
+    TENSOR_PRODUCT_DATA_B_IN_I_ENABLE : out std_logic;
+    TENSOR_PRODUCT_DATA_B_IN_J_ENABLE : out std_logic;
+    TENSOR_PRODUCT_DATA_B_IN_K_ENABLE : out std_logic;
 
-    VECTOR_PRODUCT_DATA_OUT_ENABLE : in std_logic;
+    TENSOR_PRODUCT_DATA_OUT_I_ENABLE : in std_logic;
+    TENSOR_PRODUCT_DATA_OUT_J_ENABLE : in std_logic;
+    TENSOR_PRODUCT_DATA_OUT_K_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_PRODUCT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_PRODUCT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_PRODUCT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_PRODUCT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
+    TENSOR_PRODUCT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_PRODUCT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_PRODUCT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_PRODUCT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -239,6 +245,7 @@ architecture ntm_algebra_stimulus_architecture of ntm_algebra_stimulus is
   -- LOOP
   signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0) := ONE;
   signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0) := ONE;
+  signal index_k_loop : std_logic_vector(DATA_SIZE-1 downto 0) := ONE;
 
   -- GLOBAL
   signal clk_int : std_logic;
@@ -297,7 +304,7 @@ begin
   MATRIX_RANK_START        <= start_int;
   MATRIX_TRANSPOSE_START   <= start_int;
   SCALAR_PRODUCT_START     <= start_int;
-  VECTOR_PRODUCT_START     <= start_int;
+  TENSOR_PRODUCT_START     <= start_int;
 
   -----------------------------------------------------------------------
   -- STIMULUS
@@ -999,52 +1006,87 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_VECTOR_PRODUCT_TEST) then
+    if (STIMULUS_NTM_TENSOR_PRODUCT_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_PRODUCT_TEST        ";
+      MONITOR_TEST <= "STIMULUS_NTM_TENSOR_PRODUCT_TEST        ";
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_PRODUCT_MODULO_IN <= FULL;
+      TENSOR_PRODUCT_MODULO_IN <= FULL;
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_VECTOR_PRODUCT_CASE 0      ";
+      MONITOR_CASE <= "STIMULUS_NTM_TENSOR_PRODUCT_CASE 0      ";
       -------------------------------------------------------------------
 
-      if (STIMULUS_NTM_VECTOR_PRODUCT_CASE_0) then
+      if (STIMULUS_NTM_TENSOR_PRODUCT_CASE_0) then
         -- INITIAL CONDITIONS
         -- CONTROL
-        VECTOR_PRODUCT_DATA_A_IN_ENABLE <= '1';
-        VECTOR_PRODUCT_DATA_B_IN_ENABLE <= '1';
+        TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '0';
+        TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '0';
+        TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
+        TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '0';
+        TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '0';
+        TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
 
         -- DATA
-        VECTOR_PRODUCT_DATA_A_IN <= TWO;
-        VECTOR_PRODUCT_DATA_B_IN <= ONE;
+        TENSOR_PRODUCT_DATA_A_IN <= TWO;
+        TENSOR_PRODUCT_DATA_B_IN <= ONE;
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+        index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE));
 
         loop
-          if ((VECTOR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(SIZE)-unsigned(ONE))) then
+          if ((TENSOR_PRODUCT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE))) then
             -- CONTROL
-            VECTOR_PRODUCT_DATA_A_IN_ENABLE <= '1';
-            VECTOR_PRODUCT_DATA_B_IN_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            VECTOR_PRODUCT_DATA_A_IN <= TWO;
-            VECTOR_PRODUCT_DATA_B_IN <= ONE;
+            TENSOR_PRODUCT_DATA_A_IN <= TWO;
+            TENSOR_PRODUCT_DATA_B_IN <= ONE;
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+            index_j_loop <= ZERO;
+            index_k_loop <= ZERO;
+          elsif ((TENSOR_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE))) then
+            -- CONTROL
+            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
+
+            -- DATA
+            TENSOR_PRODUCT_DATA_A_IN <= TWO;
+            TENSOR_PRODUCT_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+            index_k_loop <= ZERO;
+          elsif ((TENSOR_PRODUCT_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) > unsigned(ONE)) and (unsigned(index_k_loop) < unsigned(SIZE_K)-unsigned(ONE))) then
+            -- CONTROL
+            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
+
+            -- DATA
+            TENSOR_PRODUCT_DATA_A_IN <= TWO;
+            TENSOR_PRODUCT_DATA_B_IN <= ONE;
+
+            -- LOOP
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE));
           else
             -- CONTROL
-            VECTOR_PRODUCT_DATA_A_IN_ENABLE <= '0';
-            VECTOR_PRODUCT_DATA_B_IN_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '0';
           end if;
 
           -- CONTROL
-          exit when VECTOR_PRODUCT_READY = '1';
+          exit when TENSOR_PRODUCT_READY = '1';
 
           -- GLOBAL
           wait until rising_edge(clk_int);
@@ -1052,42 +1094,77 @@ begin
       end if;
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_VECTOR_PRODUCT_CASE 1      ";
+      MONITOR_CASE <= "STIMULUS_NTM_TENSOR_PRODUCT_CASE 1      ";
       -------------------------------------------------------------------
 
-      if (STIMULUS_NTM_VECTOR_PRODUCT_CASE_1) then
+      if (STIMULUS_NTM_TENSOR_PRODUCT_CASE_1) then
         -- INITIAL CONDITIONS
         -- CONTROL
-        VECTOR_PRODUCT_DATA_A_IN_ENABLE <= '1';
-        VECTOR_PRODUCT_DATA_B_IN_ENABLE <= '1';
+        TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '0';
+        TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '0';
+        TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
+        TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '0';
+        TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '0';
+        TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
 
         -- DATA
-        VECTOR_PRODUCT_DATA_A_IN <= TWO;
-        VECTOR_PRODUCT_DATA_B_IN <= TWO;
+        TENSOR_PRODUCT_DATA_A_IN <= TWO;
+        TENSOR_PRODUCT_DATA_B_IN <= TWO;
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+        index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE));
 
         loop
-          if ((VECTOR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(SIZE)-unsigned(ONE))) then
+          if ((TENSOR_PRODUCT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE))) then
             -- CONTROL
-            VECTOR_PRODUCT_DATA_A_IN_ENABLE <= '1';
-            VECTOR_PRODUCT_DATA_B_IN_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            VECTOR_PRODUCT_DATA_A_IN <= TWO;
-            VECTOR_PRODUCT_DATA_B_IN <= TWO;
+            TENSOR_PRODUCT_DATA_A_IN <= TWO;
+            TENSOR_PRODUCT_DATA_B_IN <= TWO;
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+            index_j_loop <= ZERO;
+            index_k_loop <= ZERO;
+          elsif ((TENSOR_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE))) then
+            -- CONTROL
+            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
+
+            -- DATA
+            TENSOR_PRODUCT_DATA_A_IN <= TWO;
+            TENSOR_PRODUCT_DATA_B_IN <= TWO;
+
+            -- LOOP
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+            index_k_loop <= ZERO;
+          elsif ((TENSOR_PRODUCT_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) > unsigned(ONE)) and (unsigned(index_k_loop) < unsigned(SIZE_K)-unsigned(ONE))) then
+            -- CONTROL
+            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
+
+            -- DATA
+            TENSOR_PRODUCT_DATA_A_IN <= TWO;
+            TENSOR_PRODUCT_DATA_B_IN <= TWO;
+
+            -- LOOP
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE));
           else
             -- CONTROL
-            VECTOR_PRODUCT_DATA_A_IN_ENABLE <= '0';
-            VECTOR_PRODUCT_DATA_B_IN_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '0';
           end if;
 
           -- CONTROL
-          exit when VECTOR_PRODUCT_READY = '1';
+          exit when TENSOR_PRODUCT_READY = '1';
 
           -- GLOBAL
           wait until rising_edge(clk_int);

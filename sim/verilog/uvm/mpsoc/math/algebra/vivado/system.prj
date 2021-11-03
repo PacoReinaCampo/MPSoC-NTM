@@ -33,7 +33,7 @@ sv work ../../../../../../../rtl/verilog/math/algebra/ntm_matrix_product.sv
 sv work ../../../../../../../rtl/verilog/math/algebra/ntm_matrix_rank.sv
 sv work ../../../../../../../rtl/verilog/math/algebra/ntm_matrix_transpose.sv
 sv work ../../../../../../../rtl/verilog/math/algebra/ntm_scalar_product.sv
-sv work ../../../../../../../rtl/verilog/math/algebra/ntm_vector_product.sv
+sv work ../../../../../../../rtl/verilog/math/algebra/ntm_tensor_product.sv
 
 sv work ../../../../../../../bench/verilog/uvm/math/algebra/ntm_algebra_pkg.sv
 sv work ../../../../../../../bench/verilog/uvm/math/algebra/ntm_algebra_stimulus.sv

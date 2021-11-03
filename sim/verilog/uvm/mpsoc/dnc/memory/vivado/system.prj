@@ -34,7 +34,7 @@ sv work ../../../../../../../rtl/verilog/math/algebra/ntm_matrix_product.sv
 sv work ../../../../../../../rtl/verilog/math/algebra/ntm_matrix_rank.sv
 sv work ../../../../../../../rtl/verilog/math/algebra/ntm_matrix_transpose.sv
 sv work ../../../../../../../rtl/verilog/math/algebra/ntm_scalar_product.sv
-sv work ../../../../../../../rtl/verilog/math/algebra/ntm_vector_product.sv
+sv work ../../../../../../../rtl/verilog/math/algebra/ntm_tensor_product.sv
 
 sv work ../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_convolution_function.sv
 sv work ../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_cosine_similarity_function.sv

@@ -34,7 +34,7 @@
 ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_rank.vhd
 ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_transpose.vhd
 ../../../../../../../rtl/vhdl/math/algebra/ntm_scalar_product.vhd
-../../../../../../../rtl/vhdl/math/algebra/ntm_vector_product.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_tensor_product.vhd
 
 ../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_convolution_function.vhd
 ../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_cosine_similarity_function.vhd

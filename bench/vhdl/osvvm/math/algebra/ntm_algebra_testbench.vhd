@@ -62,7 +62,7 @@ entity ntm_algebra_testbench is
     ENABLE_NTM_MATRIX_RANK_TEST        : boolean := false;
     ENABLE_NTM_MATRIX_TRANSPOSE_TEST   : boolean := false;
     ENABLE_NTM_SCALAR_PRODUCT_TEST     : boolean := false;
-    ENABLE_NTM_VECTOR_PRODUCT_TEST     : boolean := false;
+    ENABLE_NTM_TENSOR_PRODUCT_TEST     : boolean := false;
 
     ENABLE_NTM_MATRIX_DETERMINANT_CASE_0 : boolean := false;
     ENABLE_NTM_MATRIX_INVERSION_CASE_0   : boolean := false;
@@ -70,7 +70,7 @@ entity ntm_algebra_testbench is
     ENABLE_NTM_MATRIX_RANK_CASE_0        : boolean := false;
     ENABLE_NTM_MATRIX_TRANSPOSE_CASE_0   : boolean := false;
     ENABLE_NTM_SCALAR_PRODUCT_CASE_0     : boolean := false;
-    ENABLE_NTM_VECTOR_PRODUCT_CASE_0     : boolean := false;
+    ENABLE_NTM_TENSOR_PRODUCT_CASE_0     : boolean := false;
 
     ENABLE_NTM_MATRIX_DETERMINANT_CASE_1 : boolean := false;
     ENABLE_NTM_MATRIX_INVERSION_CASE_1   : boolean := false;
@@ -78,7 +78,7 @@ entity ntm_algebra_testbench is
     ENABLE_NTM_MATRIX_RANK_CASE_1        : boolean := false;
     ENABLE_NTM_MATRIX_TRANSPOSE_CASE_1   : boolean := false;
     ENABLE_NTM_SCALAR_PRODUCT_CASE_1     : boolean := false;
-    ENABLE_NTM_VECTOR_PRODUCT_CASE_1     : boolean := false
+    ENABLE_NTM_TENSOR_PRODUCT_CASE_1     : boolean := false
     );
 end ntm_algebra_testbench;
 
@@ -196,21 +196,27 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_b_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_product  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR PRODUCT
+  -- TENSOR PRODUCT
   -- CONTROL
-  signal start_vector_product : std_logic;
-  signal ready_vector_product : std_logic;
+  signal start_tensor_product : std_logic;
+  signal ready_tensor_product : std_logic;
 
-  signal data_a_in_enable_vector_product : std_logic;
-  signal data_b_in_enable_vector_product : std_logic;
+  signal data_a_in_i_enable_tensor_product : std_logic;
+  signal data_a_in_j_enable_tensor_product : std_logic;
+  signal data_a_in_k_enable_tensor_product : std_logic;
+  signal data_b_in_i_enable_tensor_product : std_logic;
+  signal data_b_in_j_enable_tensor_product : std_logic;
+  signal data_b_in_k_enable_tensor_product : std_logic;
 
-  signal data_out_enable_vector_product : std_logic;
+  signal data_out_i_enable_tensor_product : std_logic;
+  signal data_out_j_enable_tensor_product : std_logic;
+  signal data_out_k_enable_tensor_product : std_logic;
 
   -- DATA
-  signal modulo_in_vector_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_product  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_product  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -237,7 +243,7 @@ begin
       STIMULUS_NTM_MATRIX_RANK_TEST        => STIMULUS_NTM_MATRIX_DETERMINANT_TEST,
       STIMULUS_NTM_MATRIX_TRANSPOSE_TEST   => STIMULUS_NTM_MATRIX_RANK_TEST,
       STIMULUS_NTM_SCALAR_PRODUCT_TEST     => STIMULUS_NTM_SCALAR_PRODUCT_TEST,
-      STIMULUS_NTM_VECTOR_PRODUCT_TEST     => STIMULUS_NTM_VECTOR_PRODUCT_TEST,
+      STIMULUS_NTM_TENSOR_PRODUCT_TEST     => STIMULUS_NTM_TENSOR_PRODUCT_TEST,
 
       STIMULUS_NTM_MATRIX_DETERMINANT_CASE_0 => STIMULUS_NTM_MATRIX_DETERMINANT_CASE_0,
       STIMULUS_NTM_MATRIX_INVERSION_CASE_0   => STIMULUS_NTM_MATRIX_INVERSION_CASE_0,
@@ -245,7 +251,7 @@ begin
       STIMULUS_NTM_MATRIX_RANK_CASE_0        => STIMULUS_NTM_MATRIX_RANK_CASE_0,
       STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0   => STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0,
       STIMULUS_NTM_SCALAR_PRODUCT_CASE_0     => STIMULUS_NTM_SCALAR_PRODUCT_CASE_0,
-      STIMULUS_NTM_VECTOR_PRODUCT_CASE_0     => STIMULUS_NTM_VECTOR_PRODUCT_CASE_0,
+      STIMULUS_NTM_TENSOR_PRODUCT_CASE_0     => STIMULUS_NTM_TENSOR_PRODUCT_CASE_0,
 
       STIMULUS_NTM_MATRIX_DETERMINANT_CASE_1 => STIMULUS_NTM_MATRIX_DETERMINANT_CASE_1,
       STIMULUS_NTM_MATRIX_INVERSION_CASE_1   => STIMULUS_NTM_MATRIX_INVERSION_CASE_1,
@@ -253,7 +259,7 @@ begin
       STIMULUS_NTM_MATRIX_RANK_CASE_1        => STIMULUS_NTM_MATRIX_RANK_CASE_1,
       STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1   => STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1,
       STIMULUS_NTM_SCALAR_PRODUCT_CASE_1     => STIMULUS_NTM_SCALAR_PRODUCT_CASE_1,
-      STIMULUS_NTM_VECTOR_PRODUCT_CASE_1     => STIMULUS_NTM_VECTOR_PRODUCT_CASE_1
+      STIMULUS_NTM_TENSOR_PRODUCT_CASE_1     => STIMULUS_NTM_TENSOR_PRODUCT_CASE_1
       )
     port map (
       -- GLOBAL
@@ -364,21 +370,27 @@ begin
       SCALAR_PRODUCT_DATA_B_IN => data_b_in_matrix_product,
       SCALAR_PRODUCT_DATA_OUT  => data_out_matrix_product,
 
-      -- VECTOR PRODUCT
+      -- TENSOR PRODUCT
       -- CONTROL
-      VECTOR_PRODUCT_START => start_vector_product,
-      VECTOR_PRODUCT_READY => ready_vector_product,
+      TENSOR_PRODUCT_START => start_tensor_product,
+      TENSOR_PRODUCT_READY => ready_tensor_product,
 
-      VECTOR_PRODUCT_DATA_A_IN_ENABLE => data_a_in_enable_vector_product,
-      VECTOR_PRODUCT_DATA_B_IN_ENABLE => data_b_in_enable_vector_product,
+      TENSOR_PRODUCT_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_product,
+      TENSOR_PRODUCT_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_product,
+      TENSOR_PRODUCT_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_product,
+      TENSOR_PRODUCT_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_product,
+      TENSOR_PRODUCT_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_product,
+      TENSOR_PRODUCT_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_product,
 
-      VECTOR_PRODUCT_DATA_OUT_ENABLE => data_out_enable_vector_product,
+      TENSOR_PRODUCT_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_product,
+      TENSOR_PRODUCT_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_product,
+      TENSOR_PRODUCT_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_product,
 
       -- DATA
-      VECTOR_PRODUCT_MODULO_IN => modulo_in_vector_product,
-      VECTOR_PRODUCT_DATA_A_IN => data_a_in_vector_product,
-      VECTOR_PRODUCT_DATA_B_IN => data_b_in_vector_product,
-      VECTOR_PRODUCT_DATA_OUT  => data_out_vector_product
+      TENSOR_PRODUCT_MODULO_IN => modulo_in_tensor_product,
+      TENSOR_PRODUCT_DATA_A_IN => data_a_in_tensor_product,
+      TENSOR_PRODUCT_DATA_B_IN => data_b_in_tensor_product,
+      TENSOR_PRODUCT_DATA_OUT  => data_out_tensor_product
       );
 
   -- MATRIX DETERMINANT
@@ -569,9 +581,9 @@ begin
         );
   end generate ntm_scalar_product_test;
 
-  -- VECTOR PRODUCT
-  ntm_vector_product_test : if (ENABLE_NTM_VECTOR_PRODUCT_TEST) generate
-    vector_product : ntm_vector_product
+  -- TENSOR PRODUCT
+  ntm_tensor_product_test : if (ENABLE_NTM_TENSOR_PRODUCT_TEST) generate
+    tensor_product : ntm_tensor_product
       generic map (
         DATA_SIZE => DATA_SIZE,
 
@@ -583,20 +595,26 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_vector_product,
-        READY => ready_vector_product,
+        START => start_tensor_product,
+        READY => ready_tensor_product,
 
-        DATA_A_IN_ENABLE => data_a_in_enable_vector_product,
-        DATA_B_IN_ENABLE => data_b_in_enable_vector_product,
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_product,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_product,
+        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_product,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_product,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_product,
+        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_product,
 
-        DATA_OUT_ENABLE => data_out_enable_vector_product,
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_product,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_product,
+        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_product,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_product,
-        DATA_A_IN => data_a_in_vector_product,
-        DATA_B_IN => data_b_in_vector_product,
-        DATA_OUT  => data_out_vector_product
+        MODULO_IN => modulo_in_tensor_product,
+        DATA_A_IN => data_a_in_tensor_product,
+        DATA_B_IN => data_b_in_tensor_product,
+        DATA_OUT  => data_out_tensor_product
         );
-  end generate ntm_vector_product_test;
+  end generate ntm_tensor_product_test;
 
 end ntm_algebra_testbench_architecture;
