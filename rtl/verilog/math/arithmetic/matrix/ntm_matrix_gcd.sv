@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_logarithm(
+module ntm_matrix_gcd(
   CLK,
   RST,
   START,
@@ -102,37 +102,37 @@ module ntm_matrix_logarithm(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] logarithm_ctrl_fsm_int;
+  reg [1:0] gcd_ctrl_fsm_int;
 
   // Internal Signals
   reg [DATA_SIZE-1:0] index_i_loop;
   reg [DATA_SIZE-1:0] index_j_loop;
 
-  reg data_a_in_i_logarithm_int;
-  reg data_a_in_j_logarithm_int;
-  reg data_b_in_i_logarithm_int;
-  reg data_b_in_j_logarithm_int;
+  reg data_a_in_i_gcd_int;
+  reg data_a_in_j_gcd_int;
+  reg data_b_in_i_gcd_int;
+  reg data_b_in_j_gcd_int;
 
-  // LOGARITHM
+  // GCD
   // CONTROL
-  reg start_vector_logarithm;
-  wire ready_vector_logarithm;
-  reg data_a_in_enable_vector_logarithm;
-  reg data_b_in_enable_vector_logarithm;
-  wire data_out_enable_vector_logarithm;
+  reg start_vector_gcd;
+  wire ready_vector_gcd;
+  reg data_a_in_enable_vector_gcd;
+  reg data_b_in_enable_vector_gcd;
+  wire data_out_enable_vector_gcd;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_logarithm;
-  reg [DATA_SIZE-1:0] size_in_vector_logarithm;
-  reg [DATA_SIZE-1:0] data_a_in_vector_logarithm;
-  reg [DATA_SIZE-1:0] data_b_in_vector_logarithm;
-  wire [DATA_SIZE-1:0] data_out_vector_logarithm;
+  reg [DATA_SIZE-1:0] modulo_in_vector_gcd;
+  reg [DATA_SIZE-1:0] size_in_vector_gcd;
+  reg [DATA_SIZE-1:0] data_a_in_vector_gcd;
+  reg [DATA_SIZE-1:0] data_b_in_vector_gcd;
+  wire [DATA_SIZE-1:0] data_out_vector_gcd;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = logarithm(DATA_A_IN, DATA_B_IN) mod MODULO_IN
+  // DATA_OUT = gcd(DATA_A_IN, DATA_B_IN) mod MODULO_IN
   always @(posedge CLK or posedge RST) begin
     if((RST == 1'b0)) begin
       // Data Outputs
@@ -142,13 +142,13 @@ module ntm_matrix_logarithm(
       // Assignations
       index_i_loop <= ZERO;
       index_j_loop <= ZERO;
-      data_a_in_i_logarithm_int <= 1'b0;
-      data_a_in_j_logarithm_int <= 1'b0;
-      data_b_in_i_logarithm_int <= 1'b0;
-      data_b_in_j_logarithm_int <= 1'b0;
+      data_a_in_i_gcd_int <= 1'b0;
+      data_a_in_j_gcd_int <= 1'b0;
+      data_b_in_i_gcd_int <= 1'b0;
+      data_b_in_j_gcd_int <= 1'b0;
     end
 	else begin
-      case(logarithm_ctrl_fsm_int)
+      case(gcd_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0
           // Control Outputs
@@ -158,42 +158,42 @@ module ntm_matrix_logarithm(
             index_i_loop <= ZERO;
             index_j_loop <= ZERO;
             // FSM Control
-            logarithm_ctrl_fsm_int <= INPUT_I_STATE;
+            gcd_ctrl_fsm_int <= INPUT_I_STATE;
           end
         end
         INPUT_I_STATE : begin
           // STEP 1
           if(DATA_A_IN_I_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_vector_logarithm <= DATA_A_IN;
+            data_a_in_vector_gcd <= DATA_A_IN;
             // Control Internal
-            data_a_in_enable_vector_logarithm <= 1'b1;
-            data_a_in_i_logarithm_int <= 1'b1;
+            data_a_in_enable_vector_gcd <= 1'b1;
+            data_a_in_i_gcd_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_a_in_enable_vector_logarithm <= 1'b0;
+            data_a_in_enable_vector_gcd <= 1'b0;
           end
           if(DATA_B_IN_I_ENABLE == 1'b1) begin
             // Data Inputs
-            data_b_in_vector_logarithm <= DATA_B_IN;
+            data_b_in_vector_gcd <= DATA_B_IN;
             // Control Internal
-            data_b_in_enable_vector_logarithm <= 1'b1;
-            data_b_in_i_logarithm_int <= 1'b1;
+            data_b_in_enable_vector_gcd <= 1'b1;
+            data_b_in_i_gcd_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_b_in_enable_vector_logarithm <= 1'b0;
+            data_b_in_enable_vector_gcd <= 1'b0;
           end
-          if((data_a_in_i_logarithm_int == 1'b1 && data_b_in_i_logarithm_int == 1'b1)) begin
+          if((data_a_in_i_gcd_int == 1'b1 && data_b_in_i_gcd_int == 1'b1)) begin
             if(index_i_loop == ZERO) begin
               // Control Internal
-              start_vector_logarithm <= 1'b1;
+              start_vector_gcd <= 1'b1;
             end
             // Data Inputs
-            modulo_in_vector_logarithm <= MODULO_IN;
+            modulo_in_vector_gcd <= MODULO_IN;
             // FSM Control
-            logarithm_ctrl_fsm_int <= ENDER_STATE;
+            gcd_ctrl_fsm_int <= ENDER_STATE;
           end
           // Control Outputs
           DATA_OUT_I_ENABLE <= 1'b0;
@@ -203,49 +203,49 @@ module ntm_matrix_logarithm(
           // STEP 2
           if(DATA_A_IN_J_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_vector_logarithm <= DATA_A_IN;
+            data_a_in_vector_gcd <= DATA_A_IN;
             // Control Internal
-            data_a_in_enable_vector_logarithm <= 1'b1;
-            data_a_in_j_logarithm_int <= 1'b1;
+            data_a_in_enable_vector_gcd <= 1'b1;
+            data_a_in_j_gcd_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_a_in_enable_vector_logarithm <= 1'b0;
+            data_a_in_enable_vector_gcd <= 1'b0;
           end
           if(DATA_B_IN_J_ENABLE == 1'b1) begin
             // Data Inputs
-            data_b_in_vector_logarithm <= DATA_B_IN;
+            data_b_in_vector_gcd <= DATA_B_IN;
             // Control Internal
-            data_b_in_enable_vector_logarithm <= 1'b1;
-            data_b_in_j_logarithm_int <= 1'b1;
+            data_b_in_enable_vector_gcd <= 1'b1;
+            data_b_in_j_gcd_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_b_in_enable_vector_logarithm <= 1'b0;
+            data_b_in_enable_vector_gcd <= 1'b0;
           end
-          if((data_a_in_j_logarithm_int == 1'b1 && data_b_in_j_logarithm_int == 1'b1)) begin
+          if((data_a_in_j_gcd_int == 1'b1 && data_b_in_j_gcd_int == 1'b1)) begin
             if(index_j_loop == ZERO) begin
               // Control Internal
-              start_vector_logarithm <= 1'b1;
+              start_vector_gcd <= 1'b1;
             end
             // Data Inputs
-            modulo_in_vector_logarithm <= MODULO_IN;
-            size_in_vector_logarithm <= SIZE_J_IN;
+            modulo_in_vector_gcd <= MODULO_IN;
+            size_in_vector_gcd <= SIZE_J_IN;
             // FSM Control
-            logarithm_ctrl_fsm_int <= ENDER_STATE;
+            gcd_ctrl_fsm_int <= ENDER_STATE;
           end
           // Control Outputs
           DATA_OUT_J_ENABLE <= 1'b0;
         end
         ENDER_STATE : begin
           // STEP 3
-          if((ready_vector_logarithm == 1'b1)) begin
+          if((ready_vector_gcd == 1'b1)) begin
             if(((index_i_loop == (SIZE_I_IN - ONE)) && (index_j_loop == (SIZE_J_IN - ONE)))) begin
               // Control Outputs
               READY <= 1'b1;
               DATA_OUT_J_ENABLE <= 1'b1;
               // FSM Control
-              logarithm_ctrl_fsm_int <= STARTER_STATE;
+              gcd_ctrl_fsm_int <= STARTER_STATE;
             end
             else if(((index_i_loop < (SIZE_I_IN - ONE)) && (index_j_loop == (SIZE_J_IN - ONE)))) begin
               // Control Internal
@@ -255,7 +255,7 @@ module ntm_matrix_logarithm(
               DATA_OUT_I_ENABLE <= 1'b1;
               DATA_OUT_J_ENABLE <= 1'b1;
               // FSM Control
-              logarithm_ctrl_fsm_int <= INPUT_I_STATE;
+              gcd_ctrl_fsm_int <= INPUT_I_STATE;
             end
             else if(((index_i_loop < (SIZE_I_IN - ONE)) && (index_j_loop < (SIZE_J_IN - ONE)))) begin
               // Control Internal
@@ -263,51 +263,51 @@ module ntm_matrix_logarithm(
               // Control Outputs
               DATA_OUT_J_ENABLE <= 1'b1;
               // FSM Control
-              logarithm_ctrl_fsm_int <= INPUT_J_STATE;
+              gcd_ctrl_fsm_int <= INPUT_J_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_vector_logarithm;
+            DATA_OUT <= data_out_vector_gcd;
           end
           else begin
             // Control Internal
-            start_vector_logarithm <= 1'b0;
-            data_a_in_i_logarithm_int <= 1'b0;
-            data_a_in_j_logarithm_int <= 1'b0;
-            data_b_in_i_logarithm_int <= 1'b0;
-            data_b_in_j_logarithm_int <= 1'b0;
+            start_vector_gcd <= 1'b0;
+            data_a_in_i_gcd_int <= 1'b0;
+            data_a_in_j_gcd_int <= 1'b0;
+            data_b_in_i_gcd_int <= 1'b0;
+            data_b_in_j_gcd_int <= 1'b0;
           end
         end
         default : begin
           // FSM Control
-          logarithm_ctrl_fsm_int <= STARTER_STATE;
+          gcd_ctrl_fsm_int <= STARTER_STATE;
         end
       endcase
     end
   end
 
-  // LOGARITHM
-  ntm_vector_logarithm #(
+  // GCD
+  ntm_vector_gcd #(
     .DATA_SIZE(DATA_SIZE)
   )
-  vector_logarithm(
+  vector_gcd(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_logarithm),
-    .READY(ready_vector_logarithm),
+    .START(start_vector_gcd),
+    .READY(ready_vector_gcd),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_logarithm),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_logarithm),
-    .DATA_OUT_ENABLE(data_out_enable_vector_logarithm),
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_gcd),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_gcd),
+    .DATA_OUT_ENABLE(data_out_enable_vector_gcd),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_logarithm),
-    .SIZE_IN(size_in_vector_logarithm),
-    .DATA_A_IN(data_a_in_vector_logarithm),
-    .DATA_B_IN(data_b_in_vector_logarithm),
-    .DATA_OUT(data_out_vector_logarithm)
+    .MODULO_IN(modulo_in_vector_gcd),
+    .SIZE_IN(size_in_vector_gcd),
+    .DATA_A_IN(data_a_in_vector_gcd),
+    .DATA_B_IN(data_b_in_vector_gcd),
+    .DATA_OUT(data_out_vector_gcd)
   );
 
 endmodule

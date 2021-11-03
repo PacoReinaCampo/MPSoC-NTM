@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_scalar_logarithm is
+entity ntm_scalar_gcd is
   generic (
     DATA_SIZE : integer := 512
     );
@@ -65,13 +65,13 @@ entity ntm_scalar_logarithm is
     );
 end entity;
 
-architecture ntm_scalar_logarithm_architecture of ntm_scalar_logarithm is
+architecture ntm_scalar_gcd_architecture of ntm_scalar_gcd is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type logarithm_ctrl_fsm is (
+  type gcd_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     ENDER_STATE                         -- STEP 1
     );
@@ -88,10 +88,10 @@ architecture ntm_scalar_logarithm_architecture of ntm_scalar_logarithm is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal logarithm_ctrl_fsm_int : logarithm_ctrl_fsm;
+  signal gcd_ctrl_fsm_int : gcd_ctrl_fsm;
 
   -- Internal Signals
-  signal logarithm_int : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal gcd_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -99,7 +99,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = logarithm(DATA_A_IN, DATA_B_IN) mod MODULO_IN
+  -- DATA_OUT = gcd(DATA_A_IN, DATA_B_IN) mod MODULO_IN
 
   ctrl_fsm : process(CLK, RST)
   begin
@@ -111,25 +111,25 @@ begin
       READY <= '0';
 
       -- Assignations
-      logarithm_int <= (others => '0');
+      gcd_int <= (others => '0');
 
     elsif (rising_edge(CLK)) then
 
-      case logarithm_ctrl_fsm_int is
+      case gcd_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
           -- FSM Control
-          logarithm_ctrl_fsm_int <= ENDER_STATE;
+          gcd_ctrl_fsm_int <= ENDER_STATE;
 
         when ENDER_STATE =>             -- STEP 1
           -- FSM Control
-          logarithm_ctrl_fsm_int <= STARTER_STATE;
+          gcd_ctrl_fsm_int <= STARTER_STATE;
 
         when others =>
           -- FSM Control
-          logarithm_ctrl_fsm_int <= STARTER_STATE;
+          gcd_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

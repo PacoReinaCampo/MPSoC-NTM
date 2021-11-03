@@ -62,8 +62,8 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_SCALAR_INVERTER_TEST      : boolean := false;
     ENABLE_NTM_SCALAR_DIVIDER_TEST       : boolean := false;
     ENABLE_NTM_SCALAR_EXPONENTIATOR_TEST : boolean := false;
-    ENABLE_NTM_SCALAR_ROOT_TEST          : boolean := false;
-    ENABLE_NTM_SCALAR_LOGARITHM_TEST     : boolean := false;
+    ENABLE_NTM_SCALAR_LCM_TEST          : boolean := false;
+    ENABLE_NTM_SCALAR_GCD_TEST     : boolean := false;
 
     ENABLE_NTM_SCALAR_MOD_CASE_0           : boolean := false;
     ENABLE_NTM_SCALAR_ADDER_CASE_0         : boolean := false;
@@ -71,8 +71,8 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_SCALAR_INVERTER_CASE_0      : boolean := false;
     ENABLE_NTM_SCALAR_DIVIDER_CASE_0       : boolean := false;
     ENABLE_NTM_SCALAR_EXPONENTIATOR_CASE_0 : boolean := false;
-    ENABLE_NTM_SCALAR_ROOT_CASE_0          : boolean := false;
-    ENABLE_NTM_SCALAR_LOGARITHM_CASE_0     : boolean := false;
+    ENABLE_NTM_SCALAR_LCM_CASE_0          : boolean := false;
+    ENABLE_NTM_SCALAR_GCD_CASE_0     : boolean := false;
 
     ENABLE_NTM_SCALAR_MOD_CASE_1           : boolean := false;
     ENABLE_NTM_SCALAR_ADDER_CASE_1         : boolean := false;
@@ -80,8 +80,8 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_SCALAR_INVERTER_CASE_1      : boolean := false;
     ENABLE_NTM_SCALAR_DIVIDER_CASE_1       : boolean := false;
     ENABLE_NTM_SCALAR_EXPONENTIATOR_CASE_1 : boolean := false;
-    ENABLE_NTM_SCALAR_ROOT_CASE_1          : boolean := false;
-    ENABLE_NTM_SCALAR_LOGARITHM_CASE_1     : boolean := false;
+    ENABLE_NTM_SCALAR_LCM_CASE_1          : boolean := false;
+    ENABLE_NTM_SCALAR_GCD_CASE_1     : boolean := false;
 
     -- VECTOR-FUNCTIONALITY
     ENABLE_NTM_VECTOR_MOD_TEST           : boolean := false;
@@ -90,8 +90,8 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_VECTOR_INVERTER_TEST      : boolean := false;
     ENABLE_NTM_VECTOR_DIVIDER_TEST       : boolean := false;
     ENABLE_NTM_VECTOR_EXPONENTIATOR_TEST : boolean := false;
-    ENABLE_NTM_VECTOR_ROOT_TEST          : boolean := false;
-    ENABLE_NTM_VECTOR_LOGARITHM_TEST     : boolean := false;
+    ENABLE_NTM_VECTOR_LCM_TEST          : boolean := false;
+    ENABLE_NTM_VECTOR_GCD_TEST     : boolean := false;
 
     ENABLE_NTM_VECTOR_MOD_CASE_0           : boolean := false;
     ENABLE_NTM_VECTOR_ADDER_CASE_0         : boolean := false;
@@ -99,8 +99,8 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_VECTOR_INVERTER_CASE_0      : boolean := false;
     ENABLE_NTM_VECTOR_DIVIDER_CASE_0       : boolean := false;
     ENABLE_NTM_VECTOR_EXPONENTIATOR_CASE_0 : boolean := false;
-    ENABLE_NTM_VECTOR_ROOT_CASE_0          : boolean := false;
-    ENABLE_NTM_VECTOR_LOGARITHM_CASE_0     : boolean := false;
+    ENABLE_NTM_VECTOR_LCM_CASE_0          : boolean := false;
+    ENABLE_NTM_VECTOR_GCD_CASE_0     : boolean := false;
 
     ENABLE_NTM_VECTOR_MOD_CASE_1           : boolean := false;
     ENABLE_NTM_VECTOR_ADDER_CASE_1         : boolean := false;
@@ -108,8 +108,8 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_VECTOR_INVERTER_CASE_1      : boolean := false;
     ENABLE_NTM_VECTOR_DIVIDER_CASE_1       : boolean := false;
     ENABLE_NTM_VECTOR_EXPONENTIATOR_CASE_1 : boolean := false;
-    ENABLE_NTM_VECTOR_ROOT_CASE_1          : boolean := false;
-    ENABLE_NTM_VECTOR_LOGARITHM_CASE_1     : boolean := false;
+    ENABLE_NTM_VECTOR_LCM_CASE_1          : boolean := false;
+    ENABLE_NTM_VECTOR_GCD_CASE_1     : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
     ENABLE_NTM_MATRIX_MOD_TEST           : boolean := false;
@@ -118,8 +118,8 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_MATRIX_INVERTER_TEST      : boolean := false;
     ENABLE_NTM_MATRIX_DIVIDER_TEST       : boolean := false;
     ENABLE_NTM_MATRIX_EXPONENTIATOR_TEST : boolean := false;
-    ENABLE_NTM_MATRIX_ROOT_TEST          : boolean := false;
-    ENABLE_NTM_MATRIX_LOGARITHM_TEST     : boolean := false;
+    ENABLE_NTM_MATRIX_LCM_TEST          : boolean := false;
+    ENABLE_NTM_MATRIX_GCD_TEST     : boolean := false;
 
     ENABLE_NTM_MATRIX_MOD_CASE_0           : boolean := false;
     ENABLE_NTM_MATRIX_ADDER_CASE_0         : boolean := false;
@@ -127,8 +127,8 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_MATRIX_INVERTER_CASE_0      : boolean := false;
     ENABLE_NTM_MATRIX_DIVIDER_CASE_0       : boolean := false;
     ENABLE_NTM_MATRIX_EXPONENTIATOR_CASE_0 : boolean := false;
-    ENABLE_NTM_MATRIX_ROOT_CASE_0          : boolean := false;
-    ENABLE_NTM_MATRIX_LOGARITHM_CASE_0     : boolean := false;
+    ENABLE_NTM_MATRIX_LCM_CASE_0          : boolean := false;
+    ENABLE_NTM_MATRIX_GCD_CASE_0     : boolean := false;
 
     ENABLE_NTM_MATRIX_MOD_CASE_1           : boolean := false;
     ENABLE_NTM_MATRIX_ADDER_CASE_1         : boolean := false;
@@ -136,8 +136,8 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_MATRIX_INVERTER_CASE_1      : boolean := false;
     ENABLE_NTM_MATRIX_DIVIDER_CASE_1       : boolean := false;
     ENABLE_NTM_MATRIX_EXPONENTIATOR_CASE_1 : boolean := false;
-    ENABLE_NTM_MATRIX_ROOT_CASE_1          : boolean := false;
-    ENABLE_NTM_MATRIX_LOGARITHM_CASE_1     : boolean := false
+    ENABLE_NTM_MATRIX_LCM_CASE_1          : boolean := false;
+    ENABLE_NTM_MATRIX_GCD_CASE_1     : boolean := false
     );
 end ntm_arithmetic_testbench;
 
@@ -221,27 +221,27 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_b_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR ROOT
+  -- SCALAR LCM
   -- CONTROL
-  signal start_scalar_root : std_logic;
-  signal ready_scalar_root : std_logic;
+  signal start_scalar_lcm : std_logic;
+  signal ready_scalar_lcm : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_root : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_root : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_root : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_root  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_lcm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_lcm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_lcm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_lcm  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR LOGARITHM
-  signal start_scalar_logarithm : std_logic;
-  signal ready_scalar_logarithm : std_logic;
+  -- SCALAR GCD
+  signal start_scalar_gcd : std_logic;
+  signal ready_scalar_gcd : std_logic;
 
   -- CONTROL
   -- DATA
-  signal modulo_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_gcd : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_gcd : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_gcd : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_gcd  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- VECTOR
@@ -347,39 +347,39 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_b_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR ROOT
+  -- VECTOR LCM
   -- CONTROL
-  signal start_vector_root : std_logic;
-  signal ready_vector_root : std_logic;
+  signal start_vector_lcm : std_logic;
+  signal ready_vector_lcm : std_logic;
 
-  signal data_a_in_enable_vector_root : std_logic;
-  signal data_b_in_enable_vector_root : std_logic;
+  signal data_a_in_enable_vector_lcm : std_logic;
+  signal data_b_in_enable_vector_lcm : std_logic;
 
-  signal data_out_enable_vector_root : std_logic;
+  signal data_out_enable_vector_lcm : std_logic;
 
   -- DATA
-  signal modulo_in_vector_root : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_root   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_root : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_root : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_root  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_lcm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_lcm   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_lcm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_lcm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_lcm  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR LOGARITHM
+  -- VECTOR GCD
   -- CONTROL
-  signal start_vector_logarithm : std_logic;
-  signal ready_vector_logarithm : std_logic;
+  signal start_vector_gcd : std_logic;
+  signal ready_vector_gcd : std_logic;
 
-  signal data_a_in_enable_vector_logarithm : std_logic;
-  signal data_b_in_enable_vector_logarithm : std_logic;
+  signal data_a_in_enable_vector_gcd : std_logic;
+  signal data_b_in_enable_vector_gcd : std_logic;
 
-  signal data_out_enable_vector_logarithm : std_logic;
+  signal data_out_enable_vector_gcd : std_logic;
 
   -- DATA
-  signal modulo_in_vector_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_gcd : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_gcd   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_gcd : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_gcd : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_gcd  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- MATRIX
@@ -507,47 +507,47 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
   signal data_b_in_matrix_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MATRIX ROOT
+  -- MATRIX LCM
   -- CONTROL
-  signal start_matrix_root : std_logic;
-  signal ready_matrix_root : std_logic;
+  signal start_matrix_lcm : std_logic;
+  signal ready_matrix_lcm : std_logic;
 
-  signal data_a_in_i_enable_matrix_root : std_logic;
-  signal data_a_in_j_enable_matrix_root : std_logic;
-  signal data_b_in_i_enable_matrix_root : std_logic;
-  signal data_b_in_j_enable_matrix_root : std_logic;
+  signal data_a_in_i_enable_matrix_lcm : std_logic;
+  signal data_a_in_j_enable_matrix_lcm : std_logic;
+  signal data_b_in_i_enable_matrix_lcm : std_logic;
+  signal data_b_in_j_enable_matrix_lcm : std_logic;
 
-  signal data_out_i_enable_matrix_root : std_logic;
-  signal data_out_j_enable_matrix_root : std_logic;
+  signal data_out_i_enable_matrix_lcm : std_logic;
+  signal data_out_j_enable_matrix_lcm : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_root : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_root : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_j_in_matrix_root : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_root : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_root : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_root  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_lcm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_lcm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_j_in_matrix_lcm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_lcm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_lcm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_lcm  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MATRIX LOGARITHM
+  -- MATRIX GCD
   -- CONTROL
-  signal start_matrix_logarithm : std_logic;
-  signal ready_matrix_logarithm : std_logic;
+  signal start_matrix_gcd : std_logic;
+  signal ready_matrix_gcd : std_logic;
 
-  signal data_a_in_i_enable_matrix_logarithm : std_logic;
-  signal data_a_in_j_enable_matrix_logarithm : std_logic;
-  signal data_b_in_i_enable_matrix_logarithm : std_logic;
-  signal data_b_in_j_enable_matrix_logarithm : std_logic;
+  signal data_a_in_i_enable_matrix_gcd : std_logic;
+  signal data_a_in_j_enable_matrix_gcd : std_logic;
+  signal data_b_in_i_enable_matrix_gcd : std_logic;
+  signal data_b_in_j_enable_matrix_gcd : std_logic;
 
-  signal data_out_i_enable_matrix_logarithm : std_logic;
-  signal data_out_j_enable_matrix_logarithm : std_logic;
+  signal data_out_i_enable_matrix_gcd : std_logic;
+  signal data_out_j_enable_matrix_gcd : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_j_in_matrix_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_gcd : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_gcd : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_j_in_matrix_gcd : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_gcd : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_gcd : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_gcd  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -574,8 +574,8 @@ begin
       STIMULUS_NTM_SCALAR_INVERTER_TEST      => STIMULUS_NTM_SCALAR_INVERTER_TEST,
       STIMULUS_NTM_SCALAR_DIVIDER_TEST       => STIMULUS_NTM_SCALAR_DIVIDER_TEST,
       STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST => STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST,
-      STIMULUS_NTM_SCALAR_ROOT_TEST          => STIMULUS_NTM_SCALAR_ROOT_TEST,
-      STIMULUS_NTM_SCALAR_LOGARITHM_TEST     => STIMULUS_NTM_SCALAR_LOGARITHM_TEST,
+      STIMULUS_NTM_SCALAR_LCM_TEST          => STIMULUS_NTM_SCALAR_LCM_TEST,
+      STIMULUS_NTM_SCALAR_GCD_TEST     => STIMULUS_NTM_SCALAR_GCD_TEST,
 
       STIMULUS_NTM_SCALAR_MOD_CASE_0           => STIMULUS_NTM_SCALAR_MOD_CASE_0,
       STIMULUS_NTM_SCALAR_ADDER_CASE_0         => STIMULUS_NTM_SCALAR_ADDER_CASE_0,
@@ -583,8 +583,8 @@ begin
       STIMULUS_NTM_SCALAR_INVERTER_CASE_0      => STIMULUS_NTM_SCALAR_INVERTER_CASE_0,
       STIMULUS_NTM_SCALAR_DIVIDER_CASE_0       => STIMULUS_NTM_SCALAR_DIVIDER_CASE_0,
       STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0 => STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0,
-      STIMULUS_NTM_SCALAR_ROOT_CASE_0          => STIMULUS_NTM_SCALAR_ROOT_CASE_0,
-      STIMULUS_NTM_SCALAR_LOGARITHM_CASE_0     => STIMULUS_NTM_SCALAR_LOGARITHM_CASE_0,
+      STIMULUS_NTM_SCALAR_LCM_CASE_0          => STIMULUS_NTM_SCALAR_LCM_CASE_0,
+      STIMULUS_NTM_SCALAR_GCD_CASE_0     => STIMULUS_NTM_SCALAR_GCD_CASE_0,
 
       STIMULUS_NTM_SCALAR_MOD_CASE_1           => STIMULUS_NTM_SCALAR_MOD_CASE_1,
       STIMULUS_NTM_SCALAR_ADDER_CASE_1         => STIMULUS_NTM_SCALAR_ADDER_CASE_1,
@@ -592,8 +592,8 @@ begin
       STIMULUS_NTM_SCALAR_INVERTER_CASE_1      => STIMULUS_NTM_SCALAR_INVERTER_CASE_1,
       STIMULUS_NTM_SCALAR_DIVIDER_CASE_1       => STIMULUS_NTM_SCALAR_DIVIDER_CASE_1,
       STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1 => STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1,
-      STIMULUS_NTM_SCALAR_ROOT_CASE_1          => STIMULUS_NTM_SCALAR_ROOT_CASE_1,
-      STIMULUS_NTM_SCALAR_LOGARITHM_CASE_1     => STIMULUS_NTM_SCALAR_LOGARITHM_CASE_1,
+      STIMULUS_NTM_SCALAR_LCM_CASE_1          => STIMULUS_NTM_SCALAR_LCM_CASE_1,
+      STIMULUS_NTM_SCALAR_GCD_CASE_1     => STIMULUS_NTM_SCALAR_GCD_CASE_1,
 
       -- VECTOR-FUNCTIONALITY
       STIMULUS_NTM_VECTOR_MOD_TEST           => STIMULUS_NTM_VECTOR_MOD_TEST,
@@ -602,8 +602,8 @@ begin
       STIMULUS_NTM_VECTOR_INVERTER_TEST      => STIMULUS_NTM_VECTOR_INVERTER_TEST,
       STIMULUS_NTM_VECTOR_DIVIDER_TEST       => STIMULUS_NTM_VECTOR_DIVIDER_TEST,
       STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST => STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST,
-      STIMULUS_NTM_VECTOR_ROOT_TEST          => STIMULUS_NTM_VECTOR_ROOT_TEST,
-      STIMULUS_NTM_VECTOR_LOGARITHM_TEST     => STIMULUS_NTM_VECTOR_LOGARITHM_TEST,
+      STIMULUS_NTM_VECTOR_LCM_TEST          => STIMULUS_NTM_VECTOR_LCM_TEST,
+      STIMULUS_NTM_VECTOR_GCD_TEST     => STIMULUS_NTM_VECTOR_GCD_TEST,
 
       STIMULUS_NTM_VECTOR_MOD_CASE_0           => STIMULUS_NTM_VECTOR_MOD_CASE_0,
       STIMULUS_NTM_VECTOR_ADDER_CASE_0         => STIMULUS_NTM_VECTOR_ADDER_CASE_0,
@@ -611,8 +611,8 @@ begin
       STIMULUS_NTM_VECTOR_INVERTER_CASE_0      => STIMULUS_NTM_VECTOR_INVERTER_CASE_0,
       STIMULUS_NTM_VECTOR_DIVIDER_CASE_0       => STIMULUS_NTM_VECTOR_DIVIDER_CASE_0,
       STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0 => STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0,
-      STIMULUS_NTM_VECTOR_ROOT_CASE_0          => STIMULUS_NTM_VECTOR_ROOT_CASE_0,
-      STIMULUS_NTM_VECTOR_LOGARITHM_CASE_0     => STIMULUS_NTM_VECTOR_LOGARITHM_CASE_0,
+      STIMULUS_NTM_VECTOR_LCM_CASE_0          => STIMULUS_NTM_VECTOR_LCM_CASE_0,
+      STIMULUS_NTM_VECTOR_GCD_CASE_0     => STIMULUS_NTM_VECTOR_GCD_CASE_0,
 
       STIMULUS_NTM_VECTOR_MOD_CASE_1           => STIMULUS_NTM_VECTOR_MOD_CASE_1,
       STIMULUS_NTM_VECTOR_ADDER_CASE_1         => STIMULUS_NTM_VECTOR_ADDER_CASE_1,
@@ -620,8 +620,8 @@ begin
       STIMULUS_NTM_VECTOR_INVERTER_CASE_1      => STIMULUS_NTM_VECTOR_INVERTER_CASE_1,
       STIMULUS_NTM_VECTOR_DIVIDER_CASE_1       => STIMULUS_NTM_VECTOR_DIVIDER_CASE_1,
       STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_1 => STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_1,
-      STIMULUS_NTM_VECTOR_ROOT_CASE_1          => STIMULUS_NTM_VECTOR_ROOT_CASE_1,
-      STIMULUS_NTM_VECTOR_LOGARITHM_CASE_1     => STIMULUS_NTM_VECTOR_LOGARITHM_CASE_1,
+      STIMULUS_NTM_VECTOR_LCM_CASE_1          => STIMULUS_NTM_VECTOR_LCM_CASE_1,
+      STIMULUS_NTM_VECTOR_GCD_CASE_1     => STIMULUS_NTM_VECTOR_GCD_CASE_1,
 
       -- MATRIX-FUNCTIONALITY
       STIMULUS_NTM_MATRIX_MOD_TEST           => STIMULUS_NTM_MATRIX_MOD_TEST,
@@ -630,8 +630,8 @@ begin
       STIMULUS_NTM_MATRIX_INVERTER_TEST      => STIMULUS_NTM_MATRIX_INVERTER_TEST,
       STIMULUS_NTM_MATRIX_DIVIDER_TEST       => STIMULUS_NTM_MATRIX_DIVIDER_TEST,
       STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST => STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST,
-      STIMULUS_NTM_MATRIX_ROOT_TEST          => STIMULUS_NTM_MATRIX_ROOT_TEST,
-      STIMULUS_NTM_MATRIX_LOGARITHM_TEST     => STIMULUS_NTM_MATRIX_LOGARITHM_TEST,
+      STIMULUS_NTM_MATRIX_LCM_TEST          => STIMULUS_NTM_MATRIX_LCM_TEST,
+      STIMULUS_NTM_MATRIX_GCD_TEST     => STIMULUS_NTM_MATRIX_GCD_TEST,
 
       STIMULUS_NTM_MATRIX_MOD_CASE_0           => STIMULUS_NTM_MATRIX_MOD_CASE_0,
       STIMULUS_NTM_MATRIX_ADDER_CASE_0         => STIMULUS_NTM_MATRIX_ADDER_CASE_0,
@@ -639,8 +639,8 @@ begin
       STIMULUS_NTM_MATRIX_INVERTER_CASE_0      => STIMULUS_NTM_MATRIX_INVERTER_CASE_0,
       STIMULUS_NTM_MATRIX_DIVIDER_CASE_0       => STIMULUS_NTM_MATRIX_DIVIDER_CASE_0,
       STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0 => STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0,
-      STIMULUS_NTM_MATRIX_ROOT_CASE_0          => STIMULUS_NTM_MATRIX_ROOT_CASE_0,
-      STIMULUS_NTM_MATRIX_LOGARITHM_CASE_0     => STIMULUS_NTM_MATRIX_LOGARITHM_CASE_0,
+      STIMULUS_NTM_MATRIX_LCM_CASE_0          => STIMULUS_NTM_MATRIX_LCM_CASE_0,
+      STIMULUS_NTM_MATRIX_GCD_CASE_0     => STIMULUS_NTM_MATRIX_GCD_CASE_0,
 
       STIMULUS_NTM_MATRIX_MOD_CASE_1           => STIMULUS_NTM_MATRIX_MOD_CASE_1,
       STIMULUS_NTM_MATRIX_ADDER_CASE_1         => STIMULUS_NTM_MATRIX_ADDER_CASE_1,
@@ -648,8 +648,8 @@ begin
       STIMULUS_NTM_MATRIX_INVERTER_CASE_1      => STIMULUS_NTM_MATRIX_INVERTER_CASE_1,
       STIMULUS_NTM_MATRIX_DIVIDER_CASE_1       => STIMULUS_NTM_MATRIX_DIVIDER_CASE_1,
       STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1 => STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1,
-      STIMULUS_NTM_MATRIX_ROOT_CASE_1          => STIMULUS_NTM_MATRIX_ROOT_CASE_1,
-      STIMULUS_NTM_MATRIX_LOGARITHM_CASE_1     => STIMULUS_NTM_MATRIX_LOGARITHM_CASE_1
+      STIMULUS_NTM_MATRIX_LCM_CASE_1          => STIMULUS_NTM_MATRIX_LCM_CASE_1,
+      STIMULUS_NTM_MATRIX_GCD_CASE_1     => STIMULUS_NTM_MATRIX_GCD_CASE_1
       )
     port map (
       -- GLOBAL
@@ -726,27 +726,27 @@ begin
       SCALAR_EXPONENTIATOR_DATA_B_IN => data_b_in_scalar_exponentiator,
       SCALAR_EXPONENTIATOR_DATA_OUT  => data_out_scalar_exponentiator,
 
-      -- SCALAR ROOT
+      -- SCALAR LCM
       -- CONTROL
-      SCALAR_ROOT_START => start_scalar_root,
-      SCALAR_ROOT_READY => ready_scalar_root,
+      SCALAR_LCM_START => start_scalar_lcm,
+      SCALAR_LCM_READY => ready_scalar_lcm,
 
       -- DATA
-      SCALAR_ROOT_MODULO_IN => modulo_in_scalar_root,
-      SCALAR_ROOT_DATA_A_IN => data_a_in_scalar_root,
-      SCALAR_ROOT_DATA_B_IN => data_b_in_scalar_root,
-      SCALAR_ROOT_DATA_OUT  => data_out_scalar_root,
+      SCALAR_LCM_MODULO_IN => modulo_in_scalar_lcm,
+      SCALAR_LCM_DATA_A_IN => data_a_in_scalar_lcm,
+      SCALAR_LCM_DATA_B_IN => data_b_in_scalar_lcm,
+      SCALAR_LCM_DATA_OUT  => data_out_scalar_lcm,
 
-      -- SCALAR LOGARITHM
+      -- SCALAR GCD
       -- CONTROL
-      SCALAR_LOGARITHM_START => start_scalar_logarithm,
-      SCALAR_LOGARITHM_READY => ready_scalar_logarithm,
+      SCALAR_GCD_START => start_scalar_gcd,
+      SCALAR_GCD_READY => ready_scalar_gcd,
 
       -- DATA
-      SCALAR_LOGARITHM_MODULO_IN => modulo_in_scalar_logarithm,
-      SCALAR_LOGARITHM_DATA_A_IN => data_a_in_scalar_logarithm,
-      SCALAR_LOGARITHM_DATA_B_IN => data_b_in_scalar_logarithm,
-      SCALAR_LOGARITHM_DATA_OUT  => data_out_scalar_logarithm,
+      SCALAR_GCD_MODULO_IN => modulo_in_scalar_gcd,
+      SCALAR_GCD_DATA_A_IN => data_a_in_scalar_gcd,
+      SCALAR_GCD_DATA_B_IN => data_b_in_scalar_gcd,
+      SCALAR_GCD_DATA_OUT  => data_out_scalar_gcd,
 
       -----------------------------------------------------------------------
       -- STIMULUS VECTOR
@@ -852,39 +852,39 @@ begin
       VECTOR_EXPONENTIATOR_DATA_B_IN => data_b_in_vector_exponentiator,
       VECTOR_EXPONENTIATOR_DATA_OUT  => data_out_vector_exponentiator,
 
-      -- VECTOR ROOT
+      -- VECTOR LCM
       -- CONTROL
-      VECTOR_ROOT_START => start_vector_root,
-      VECTOR_ROOT_READY => ready_vector_root,
+      VECTOR_LCM_START => start_vector_lcm,
+      VECTOR_LCM_READY => ready_vector_lcm,
 
-      VECTOR_ROOT_DATA_A_IN_ENABLE => data_a_in_enable_vector_root,
-      VECTOR_ROOT_DATA_B_IN_ENABLE => data_b_in_enable_vector_root,
+      VECTOR_LCM_DATA_A_IN_ENABLE => data_a_in_enable_vector_lcm,
+      VECTOR_LCM_DATA_B_IN_ENABLE => data_b_in_enable_vector_lcm,
 
-      VECTOR_ROOT_DATA_OUT_ENABLE => data_out_enable_vector_root,
+      VECTOR_LCM_DATA_OUT_ENABLE => data_out_enable_vector_lcm,
 
       -- DATA
-      VECTOR_ROOT_MODULO_IN => modulo_in_vector_root,
-      VECTOR_ROOT_SIZE_IN   => size_in_vector_root,
-      VECTOR_ROOT_DATA_A_IN => data_a_in_vector_root,
-      VECTOR_ROOT_DATA_B_IN => data_b_in_vector_root,
-      VECTOR_ROOT_DATA_OUT  => data_out_vector_root,
+      VECTOR_LCM_MODULO_IN => modulo_in_vector_lcm,
+      VECTOR_LCM_SIZE_IN   => size_in_vector_lcm,
+      VECTOR_LCM_DATA_A_IN => data_a_in_vector_lcm,
+      VECTOR_LCM_DATA_B_IN => data_b_in_vector_lcm,
+      VECTOR_LCM_DATA_OUT  => data_out_vector_lcm,
 
-      -- VECTOR LOGARITHM
+      -- VECTOR GCD
       -- CONTROL
-      VECTOR_LOGARITHM_START => start_vector_logarithm,
-      VECTOR_LOGARITHM_READY => ready_vector_logarithm,
+      VECTOR_GCD_START => start_vector_gcd,
+      VECTOR_GCD_READY => ready_vector_gcd,
 
-      VECTOR_LOGARITHM_DATA_A_IN_ENABLE => data_a_in_enable_vector_logarithm,
-      VECTOR_LOGARITHM_DATA_B_IN_ENABLE => data_b_in_enable_vector_logarithm,
+      VECTOR_GCD_DATA_A_IN_ENABLE => data_a_in_enable_vector_gcd,
+      VECTOR_GCD_DATA_B_IN_ENABLE => data_b_in_enable_vector_gcd,
 
-      VECTOR_LOGARITHM_DATA_OUT_ENABLE => data_out_enable_vector_logarithm,
+      VECTOR_GCD_DATA_OUT_ENABLE => data_out_enable_vector_gcd,
 
       -- DATA
-      VECTOR_LOGARITHM_MODULO_IN => modulo_in_vector_logarithm,
-      VECTOR_LOGARITHM_SIZE_IN   => size_in_vector_logarithm,
-      VECTOR_LOGARITHM_DATA_A_IN => data_a_in_vector_logarithm,
-      VECTOR_LOGARITHM_DATA_B_IN => data_b_in_vector_logarithm,
-      VECTOR_LOGARITHM_DATA_OUT  => data_out_vector_logarithm,
+      VECTOR_GCD_MODULO_IN => modulo_in_vector_gcd,
+      VECTOR_GCD_SIZE_IN   => size_in_vector_gcd,
+      VECTOR_GCD_DATA_A_IN => data_a_in_vector_gcd,
+      VECTOR_GCD_DATA_B_IN => data_b_in_vector_gcd,
+      VECTOR_GCD_DATA_OUT  => data_out_vector_gcd,
 
       -----------------------------------------------------------------------
       -- STIMULUS MATRIX
@@ -1012,47 +1012,47 @@ begin
       MATRIX_EXPONENTIATOR_DATA_B_IN => data_b_in_matrix_exponentiator,
       MATRIX_EXPONENTIATOR_DATA_OUT  => data_out_matrix_exponentiator,
 
-      -- MATRIX ROOT
+      -- MATRIX LCM
       -- CONTROL
-      MATRIX_ROOT_START => start_matrix_root,
-      MATRIX_ROOT_READY => ready_matrix_root,
+      MATRIX_LCM_START => start_matrix_lcm,
+      MATRIX_LCM_READY => ready_matrix_lcm,
 
-      MATRIX_ROOT_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_root,
-      MATRIX_ROOT_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_root,
-      MATRIX_ROOT_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_root,
-      MATRIX_ROOT_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_root,
+      MATRIX_LCM_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_lcm,
+      MATRIX_LCM_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_lcm,
+      MATRIX_LCM_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_lcm,
+      MATRIX_LCM_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_lcm,
 
-      MATRIX_ROOT_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_root,
-      MATRIX_ROOT_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_root,
+      MATRIX_LCM_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_lcm,
+      MATRIX_LCM_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_lcm,
 
       -- DATA
-      MATRIX_ROOT_MODULO_IN => modulo_in_matrix_root,
-      MATRIX_ROOT_SIZE_I_IN => size_i_in_matrix_root,
-      MATRIX_ROOT_SIZE_J_IN => size_j_in_matrix_root,
-      MATRIX_ROOT_DATA_A_IN => data_a_in_matrix_root,
-      MATRIX_ROOT_DATA_B_IN => data_b_in_matrix_root,
-      MATRIX_ROOT_DATA_OUT  => data_out_matrix_root,
+      MATRIX_LCM_MODULO_IN => modulo_in_matrix_lcm,
+      MATRIX_LCM_SIZE_I_IN => size_i_in_matrix_lcm,
+      MATRIX_LCM_SIZE_J_IN => size_j_in_matrix_lcm,
+      MATRIX_LCM_DATA_A_IN => data_a_in_matrix_lcm,
+      MATRIX_LCM_DATA_B_IN => data_b_in_matrix_lcm,
+      MATRIX_LCM_DATA_OUT  => data_out_matrix_lcm,
 
-      -- MATRIX LOGARITHM
+      -- MATRIX GCD
       -- CONTROL
-      MATRIX_LOGARITHM_START => start_matrix_logarithm,
-      MATRIX_LOGARITHM_READY => ready_matrix_logarithm,
+      MATRIX_GCD_START => start_matrix_gcd,
+      MATRIX_GCD_READY => ready_matrix_gcd,
 
-      MATRIX_LOGARITHM_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_logarithm,
-      MATRIX_LOGARITHM_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_logarithm,
-      MATRIX_LOGARITHM_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_logarithm,
-      MATRIX_LOGARITHM_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_logarithm,
+      MATRIX_GCD_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_gcd,
+      MATRIX_GCD_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_gcd,
+      MATRIX_GCD_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_gcd,
+      MATRIX_GCD_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_gcd,
 
-      MATRIX_LOGARITHM_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_logarithm,
-      MATRIX_LOGARITHM_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_logarithm,
+      MATRIX_GCD_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_gcd,
+      MATRIX_GCD_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_gcd,
 
       -- DATA
-      MATRIX_LOGARITHM_MODULO_IN => modulo_in_matrix_logarithm,
-      MATRIX_LOGARITHM_SIZE_I_IN => size_i_in_matrix_logarithm,
-      MATRIX_LOGARITHM_SIZE_J_IN => size_j_in_matrix_logarithm,
-      MATRIX_LOGARITHM_DATA_A_IN => data_a_in_matrix_logarithm,
-      MATRIX_LOGARITHM_DATA_B_IN => data_b_in_matrix_logarithm,
-      MATRIX_LOGARITHM_DATA_OUT  => data_out_matrix_logarithm
+      MATRIX_GCD_MODULO_IN => modulo_in_matrix_gcd,
+      MATRIX_GCD_SIZE_I_IN => size_i_in_matrix_gcd,
+      MATRIX_GCD_SIZE_J_IN => size_j_in_matrix_gcd,
+      MATRIX_GCD_DATA_A_IN => data_a_in_matrix_gcd,
+      MATRIX_GCD_DATA_B_IN => data_b_in_matrix_gcd,
+      MATRIX_GCD_DATA_OUT  => data_out_matrix_gcd
       );
 
   -----------------------------------------------------------------------
@@ -1197,9 +1197,9 @@ begin
         );
   end generate ntm_scalar_exponentiator_test;
 
-  -- SCALAR ROOT
-  ntm_scalar_root_test : if (ENABLE_NTM_SCALAR_ROOT_TEST) generate
-    scalar_root : ntm_scalar_root
+  -- SCALAR LCM
+  ntm_scalar_lcm_test : if (ENABLE_NTM_SCALAR_LCM_TEST) generate
+    scalar_lcm : ntm_scalar_lcm
       generic map (
         DATA_SIZE => DATA_SIZE
         )
@@ -1209,20 +1209,20 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_scalar_root,
-        READY => ready_scalar_root,
+        START => start_scalar_lcm,
+        READY => ready_scalar_lcm,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_root,
-        DATA_A_IN => data_a_in_scalar_root,
-        DATA_B_IN => data_b_in_scalar_root,
-        DATA_OUT  => data_out_scalar_root
+        MODULO_IN => modulo_in_scalar_lcm,
+        DATA_A_IN => data_a_in_scalar_lcm,
+        DATA_B_IN => data_b_in_scalar_lcm,
+        DATA_OUT  => data_out_scalar_lcm
         );
-  end generate ntm_scalar_root_test;
+  end generate ntm_scalar_lcm_test;
 
-  -- SCALAR LOGARITHM
-  ntm_scalar_logarithm_test : if (ENABLE_NTM_SCALAR_LOGARITHM_TEST) generate
-    scalar_logarithm : ntm_scalar_logarithm
+  -- SCALAR GCD
+  ntm_scalar_gcd_test : if (ENABLE_NTM_SCALAR_GCD_TEST) generate
+    scalar_gcd : ntm_scalar_gcd
       generic map (
         DATA_SIZE => DATA_SIZE
         )
@@ -1232,16 +1232,16 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_scalar_logarithm,
-        READY => ready_scalar_logarithm,
+        START => start_scalar_gcd,
+        READY => ready_scalar_gcd,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_logarithm,
-        DATA_A_IN => data_a_in_scalar_logarithm,
-        DATA_B_IN => data_b_in_scalar_logarithm,
-        DATA_OUT  => data_out_scalar_logarithm
+        MODULO_IN => modulo_in_scalar_gcd,
+        DATA_A_IN => data_a_in_scalar_gcd,
+        DATA_B_IN => data_b_in_scalar_gcd,
+        DATA_OUT  => data_out_scalar_gcd
         );
-  end generate ntm_scalar_logarithm_test;
+  end generate ntm_scalar_gcd_test;
 
   -----------------------------------------------------------------------
   -- VECTOR
@@ -1419,9 +1419,9 @@ begin
         );
   end generate ntm_vector_exponentiator_test;
 
-  -- VECTOR ROOT
-  ntm_vector_root_test : if (ENABLE_NTM_VECTOR_ROOT_TEST) generate
-    vector_root : ntm_vector_root
+  -- VECTOR LCM
+  ntm_vector_lcm_test : if (ENABLE_NTM_VECTOR_LCM_TEST) generate
+    vector_lcm : ntm_vector_lcm
       generic map (
         DATA_SIZE => DATA_SIZE
         )
@@ -1431,26 +1431,26 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_vector_root,
-        READY => ready_vector_root,
+        START => start_vector_lcm,
+        READY => ready_vector_lcm,
 
-        DATA_A_IN_ENABLE => data_a_in_enable_vector_root,
-        DATA_B_IN_ENABLE => data_b_in_enable_vector_root,
+        DATA_A_IN_ENABLE => data_a_in_enable_vector_lcm,
+        DATA_B_IN_ENABLE => data_b_in_enable_vector_lcm,
 
-        DATA_OUT_ENABLE => data_out_enable_vector_root,
+        DATA_OUT_ENABLE => data_out_enable_vector_lcm,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_root,
-        SIZE_IN   => size_in_vector_root,
-        DATA_A_IN => data_a_in_vector_root,
-        DATA_B_IN => data_b_in_vector_root,
-        DATA_OUT  => data_out_vector_root
+        MODULO_IN => modulo_in_vector_lcm,
+        SIZE_IN   => size_in_vector_lcm,
+        DATA_A_IN => data_a_in_vector_lcm,
+        DATA_B_IN => data_b_in_vector_lcm,
+        DATA_OUT  => data_out_vector_lcm
         );
-  end generate ntm_vector_root_test;
+  end generate ntm_vector_lcm_test;
 
-  -- VECTOR LOGARITHM
-  ntm_vector_logarithm_test : if (ENABLE_NTM_VECTOR_LOGARITHM_TEST) generate
-    vector_logarithm : ntm_vector_logarithm
+  -- VECTOR GCD
+  ntm_vector_gcd_test : if (ENABLE_NTM_VECTOR_GCD_TEST) generate
+    vector_gcd : ntm_vector_gcd
       generic map (
         DATA_SIZE => DATA_SIZE
         )
@@ -1460,22 +1460,22 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_vector_logarithm,
-        READY => ready_vector_logarithm,
+        START => start_vector_gcd,
+        READY => ready_vector_gcd,
 
-        DATA_A_IN_ENABLE => data_a_in_enable_vector_logarithm,
-        DATA_B_IN_ENABLE => data_b_in_enable_vector_logarithm,
+        DATA_A_IN_ENABLE => data_a_in_enable_vector_gcd,
+        DATA_B_IN_ENABLE => data_b_in_enable_vector_gcd,
 
-        DATA_OUT_ENABLE => data_out_enable_vector_logarithm,
+        DATA_OUT_ENABLE => data_out_enable_vector_gcd,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_logarithm,
-        SIZE_IN   => size_in_vector_logarithm,
-        DATA_A_IN => data_a_in_vector_logarithm,
-        DATA_B_IN => data_b_in_vector_logarithm,
-        DATA_OUT  => data_out_vector_logarithm
+        MODULO_IN => modulo_in_vector_gcd,
+        SIZE_IN   => size_in_vector_gcd,
+        DATA_A_IN => data_a_in_vector_gcd,
+        DATA_B_IN => data_b_in_vector_gcd,
+        DATA_OUT  => data_out_vector_gcd
         );
-  end generate ntm_vector_logarithm_test;
+  end generate ntm_vector_gcd_test;
 
   -----------------------------------------------------------------------
   -- MATRIX
@@ -1675,9 +1675,9 @@ begin
         );
   end generate ntm_matrix_exponentiator_test;
 
-  -- MATRIX ROOT
-  ntm_matrix_root_test : if (ENABLE_NTM_MATRIX_ROOT_TEST) generate
-    matrix_root : ntm_matrix_root
+  -- MATRIX LCM
+  ntm_matrix_lcm_test : if (ENABLE_NTM_MATRIX_LCM_TEST) generate
+    matrix_lcm : ntm_matrix_lcm
       generic map (
         DATA_SIZE => DATA_SIZE
         )
@@ -1687,30 +1687,30 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_matrix_root,
-        READY => ready_matrix_root,
+        START => start_matrix_lcm,
+        READY => ready_matrix_lcm,
 
-        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_root,
-        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_root,
-        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_root,
-        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_root,
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_lcm,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_lcm,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_lcm,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_lcm,
 
-        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_root,
-        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_root,
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_lcm,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_lcm,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_root,
-        SIZE_I_IN => size_i_in_matrix_root,
-        SIZE_J_IN => size_j_in_matrix_root,
-        DATA_A_IN => data_a_in_matrix_root,
-        DATA_B_IN => data_b_in_matrix_root,
-        DATA_OUT  => data_out_matrix_root
+        MODULO_IN => modulo_in_matrix_lcm,
+        SIZE_I_IN => size_i_in_matrix_lcm,
+        SIZE_J_IN => size_j_in_matrix_lcm,
+        DATA_A_IN => data_a_in_matrix_lcm,
+        DATA_B_IN => data_b_in_matrix_lcm,
+        DATA_OUT  => data_out_matrix_lcm
         );
-  end generate ntm_matrix_root_test;
+  end generate ntm_matrix_lcm_test;
 
-  -- MATRIX LOGARITHM
-  ntm_matrix_logarithm_test : if (ENABLE_NTM_MATRIX_LOGARITHM_TEST) generate
-    matrix_logarithm : ntm_matrix_logarithm
+  -- MATRIX GCD
+  ntm_matrix_gcd_test : if (ENABLE_NTM_MATRIX_GCD_TEST) generate
+    matrix_gcd : ntm_matrix_gcd
       generic map (
         DATA_SIZE => DATA_SIZE
         )
@@ -1720,25 +1720,25 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_matrix_logarithm,
-        READY => ready_matrix_logarithm,
+        START => start_matrix_gcd,
+        READY => ready_matrix_gcd,
 
-        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_logarithm,
-        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_logarithm,
-        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_logarithm,
-        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_logarithm,
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_gcd,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_gcd,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_gcd,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_gcd,
 
-        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_logarithm,
-        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_logarithm,
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_gcd,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_gcd,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_logarithm,
-        SIZE_I_IN => size_i_in_matrix_logarithm,
-        SIZE_J_IN => size_j_in_matrix_logarithm,
-        DATA_A_IN => data_a_in_matrix_logarithm,
-        DATA_B_IN => data_b_in_matrix_logarithm,
-        DATA_OUT  => data_out_matrix_logarithm
+        MODULO_IN => modulo_in_matrix_gcd,
+        SIZE_I_IN => size_i_in_matrix_gcd,
+        SIZE_J_IN => size_j_in_matrix_gcd,
+        DATA_A_IN => data_a_in_matrix_gcd,
+        DATA_B_IN => data_b_in_matrix_gcd,
+        DATA_OUT  => data_out_matrix_gcd
         );
-  end generate ntm_matrix_logarithm_test;
+  end generate ntm_matrix_gcd_test;
 
 end ntm_arithmetic_testbench_architecture;

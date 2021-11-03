@@ -6,8 +6,8 @@
 ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_inverter.vhd
 ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_divider.vhd
 ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_exponentiator.vhd
-../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_root.vhd
-../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_logarithm.vhd
+../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_lcm.vhd
+../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_gcd.vhd
 
 ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_mod.vhd
 ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_adder.vhd
@@ -15,8 +15,8 @@
 ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_inverter.vhd
 ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_divider.vhd
 ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_exponentiator.vhd
-../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_root.vhd
-../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_logarithm.vhd
+../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_lcm.vhd
+../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_gcd.vhd
 
 ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_mod.vhd
 ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_adder.vhd
@@ -24,8 +24,8 @@
 ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_inverter.vhd
 ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_divider.vhd
 ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_exponentiator.vhd
-../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_root.vhd
-../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_logarithm.vhd
+../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_lcm.vhd
+../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_gcd.vhd
 
 ../../../../../../../bench/vhdl/osvvm/math/arithmetic/ntm_arithmetic_pkg.vhd
 ../../../../../../../bench/vhdl/osvvm/math/arithmetic/ntm_arithmetic_stimulus.vhd

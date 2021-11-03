@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_vector_logarithm is
+entity ntm_vector_gcd is
   generic (
     DATA_SIZE : integer := 512
     );
@@ -71,13 +71,13 @@ entity ntm_vector_logarithm is
     );
 end entity;
 
-architecture ntm_vector_logarithm_architecture of ntm_vector_logarithm is
+architecture ntm_vector_gcd_architecture of ntm_vector_gcd is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type logarithm_ctrl_fsm is (
+  type gcd_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
     ENDER_STATE                         -- STEP 2
@@ -95,24 +95,24 @@ architecture ntm_vector_logarithm_architecture of ntm_vector_logarithm is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal logarithm_ctrl_fsm_int : logarithm_ctrl_fsm;
+  signal gcd_ctrl_fsm_int : gcd_ctrl_fsm;
 
   -- Internal Signals
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_a_in_logarithm_int : std_logic;
-  signal data_b_in_logarithm_int : std_logic;
+  signal data_a_in_gcd_int : std_logic;
+  signal data_b_in_gcd_int : std_logic;
 
-  -- LOGARITHM
+  -- GCD
   -- CONTROL
-  signal start_scalar_logarithm : std_logic;
-  signal ready_scalar_logarithm : std_logic;
+  signal start_scalar_gcd : std_logic;
+  signal ready_scalar_gcd : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_gcd : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_gcd : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_gcd : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_gcd  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -120,7 +120,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = logarithm(DATA_A_IN, DATA_B_IN) mod MODULO_IN
+  -- DATA_OUT = gcd(DATA_A_IN, DATA_B_IN) mod MODULO_IN
 
   ctrl_fsm : process(CLK, RST)
   begin
@@ -134,12 +134,12 @@ begin
       -- Assignations
       index_loop <= ZERO;
 
-      data_a_in_logarithm_int <= '0';
-      data_b_in_logarithm_int <= '0';
+      data_a_in_gcd_int <= '0';
+      data_b_in_gcd_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
-      case logarithm_ctrl_fsm_int is
+      case gcd_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -149,38 +149,38 @@ begin
             index_loop <= ZERO;
 
             -- FSM Control
-            logarithm_ctrl_fsm_int <= INPUT_STATE;
+            gcd_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
         when INPUT_STATE =>             -- STEP 1
 
           if (DATA_A_IN_ENABLE = '1') then
             -- Data Inputs
-            data_a_in_scalar_logarithm <= DATA_A_IN;
+            data_a_in_scalar_gcd <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_logarithm_int <= '1';
+            data_a_in_gcd_int <= '1';
           end if;
 
           if (DATA_B_IN_ENABLE = '1') then
             -- Data Inputs
-            data_b_in_scalar_logarithm <= DATA_B_IN;
+            data_b_in_scalar_gcd <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_logarithm_int <= '1';
+            data_b_in_gcd_int <= '1';
           end if;
 
-          if (data_a_in_logarithm_int = '1' and data_b_in_logarithm_int = '1') then
+          if (data_a_in_gcd_int = '1' and data_b_in_gcd_int = '1') then
             if (index_loop = ZERO) then
               -- Control Internal
-              start_scalar_logarithm <= '1';
+              start_scalar_gcd <= '1';
             end if;
 
             -- Data Inputs
-            modulo_in_scalar_logarithm <= MODULO_IN;
+            modulo_in_scalar_gcd <= MODULO_IN;
 
             -- FSM Control
-            logarithm_ctrl_fsm_int <= ENDER_STATE;
+            gcd_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
           -- Control Outputs
@@ -188,43 +188,43 @@ begin
 
         when ENDER_STATE =>             -- STEP 2
 
-          if (ready_scalar_logarithm = '1') then
+          if (ready_scalar_gcd = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
-              logarithm_ctrl_fsm_int <= STARTER_STATE;
+              gcd_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
               index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE));
 
               -- FSM Control
-              logarithm_ctrl_fsm_int <= INPUT_STATE;
+              gcd_ctrl_fsm_int <= INPUT_STATE;
             end if;
 
             -- Data Outputs
-            DATA_OUT <= data_out_scalar_logarithm;
+            DATA_OUT <= data_out_scalar_gcd;
 
             -- Control Outputs
             DATA_OUT_ENABLE <= '1';
           else
             -- Control Internal
-            start_scalar_logarithm <= '0';
+            start_scalar_gcd <= '0';
 
-            data_a_in_logarithm_int <= '0';
-            data_b_in_logarithm_int <= '0';
+            data_a_in_gcd_int <= '0';
+            data_b_in_gcd_int <= '0';
           end if;
 
         when others =>
           -- FSM Control
-          logarithm_ctrl_fsm_int <= STARTER_STATE;
+          gcd_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
 
-  -- LOGARITHM
-  scalar_logarithm : ntm_scalar_logarithm
+  -- GCD
+  scalar_gcd : ntm_scalar_gcd
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -234,14 +234,14 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_logarithm,
-      READY => ready_scalar_logarithm,
+      START => start_scalar_gcd,
+      READY => ready_scalar_gcd,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_logarithm,
-      DATA_A_IN => data_a_in_scalar_logarithm,
-      DATA_B_IN => data_b_in_scalar_logarithm,
-      DATA_OUT  => data_out_scalar_logarithm
+      MODULO_IN => modulo_in_scalar_gcd,
+      DATA_A_IN => data_a_in_scalar_gcd,
+      DATA_B_IN => data_b_in_scalar_gcd,
+      DATA_OUT  => data_out_scalar_gcd
       );
 
 end architecture;

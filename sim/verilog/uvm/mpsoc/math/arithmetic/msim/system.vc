@@ -6,8 +6,8 @@
 ../../../../../../../rtl/verilog/math/arithmetic/scalar/ntm_scalar_inverter.sv
 ../../../../../../../rtl/verilog/math/arithmetic/scalar/ntm_scalar_divider.sv
 ../../../../../../../rtl/verilog/math/arithmetic/scalar/ntm_scalar_exponentiator.sv
-../../../../../../../rtl/verilog/math/arithmetic/scalar/ntm_scalar_root.sv
-../../../../../../../rtl/verilog/math/arithmetic/scalar/ntm_scalar_logarithm.sv
+../../../../../../../rtl/verilog/math/arithmetic/scalar/ntm_scalar_lcm.sv
+../../../../../../../rtl/verilog/math/arithmetic/scalar/ntm_scalar_gcd.sv
 
 ../../../../../../../rtl/verilog/math/arithmetic/vector/ntm_vector_mod.sv
 ../../../../../../../rtl/verilog/math/arithmetic/vector/ntm_vector_adder.sv
@@ -15,8 +15,8 @@
 ../../../../../../../rtl/verilog/math/arithmetic/vector/ntm_vector_inverter.sv
 ../../../../../../../rtl/verilog/math/arithmetic/vector/ntm_vector_divider.sv
 ../../../../../../../rtl/verilog/math/arithmetic/vector/ntm_vector_exponentiator.sv
-../../../../../../../rtl/verilog/math/arithmetic/vector/ntm_vector_root.sv
-../../../../../../../rtl/verilog/math/arithmetic/vector/ntm_vector_logarithm.sv
+../../../../../../../rtl/verilog/math/arithmetic/vector/ntm_vector_lcm.sv
+../../../../../../../rtl/verilog/math/arithmetic/vector/ntm_vector_gcd.sv
 
 ../../../../../../../rtl/verilog/math/arithmetic/matrix/ntm_matrix_mod.sv
 ../../../../../../../rtl/verilog/math/arithmetic/matrix/ntm_matrix_adder.sv
@@ -24,8 +24,8 @@
 ../../../../../../../rtl/verilog/math/arithmetic/matrix/ntm_matrix_inverter.sv
 ../../../../../../../rtl/verilog/math/arithmetic/matrix/ntm_matrix_divider.sv
 ../../../../../../../rtl/verilog/math/arithmetic/matrix/ntm_matrix_exponentiator.sv
-../../../../../../../rtl/verilog/math/arithmetic/matrix/ntm_matrix_root.sv
-../../../../../../../rtl/verilog/math/arithmetic/matrix/ntm_matrix_logarithm.sv
+../../../../../../../rtl/verilog/math/arithmetic/matrix/ntm_matrix_lcm.sv
+../../../../../../../rtl/verilog/math/arithmetic/matrix/ntm_matrix_gcd.sv
 
 ../../../../../../../bench/verilog/uvm/math/arithmetic/ntm_arithmetic_pkg.sv
 ../../../../../../../bench/verilog/uvm/math/arithmetic/ntm_arithmetic_stimulus.sv

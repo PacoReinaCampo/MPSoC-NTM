@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_vector_root(
+module ntm_vector_lcm(
   CLK,
   RST,
   START,
@@ -93,30 +93,30 @@ module ntm_vector_root(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] root_ctrl_fsm_int;
+  reg [1:0] lcm_ctrl_fsm_int;
 
   // Internal Signals
   reg [DATA_SIZE-1:0] index_loop;
 
-  reg data_a_in_root_int;
-  reg data_b_in_root_int;
+  reg data_a_in_lcm_int;
+  reg data_b_in_lcm_int;
 
   // ROOT
   // CONTROL
-  reg start_scalar_root;
-  wire ready_scalar_root;
+  reg start_scalar_lcm;
+  wire ready_scalar_lcm;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_scalar_root;
-  reg [DATA_SIZE-1:0] data_a_in_scalar_root;
-  reg [DATA_SIZE-1:0] data_b_in_scalar_root;
-  wire [DATA_SIZE-1:0] data_out_scalar_root;
+  reg [DATA_SIZE-1:0] modulo_in_scalar_lcm;
+  reg [DATA_SIZE-1:0] data_a_in_scalar_lcm;
+  reg [DATA_SIZE-1:0] data_b_in_scalar_lcm;
+  wire [DATA_SIZE-1:0] data_out_scalar_lcm;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = root(DATA_A_IN, DATA_B_IN) mod MODULO_IN
+  // DATA_OUT = lcm(DATA_A_IN, DATA_B_IN) mod MODULO_IN
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
@@ -128,11 +128,11 @@ module ntm_vector_root(
       // Assignations
       index_loop <= ZERO;
 
-      data_a_in_root_int <= 1'b0;
-      data_b_in_root_int <= 1'b0;
+      data_a_in_lcm_int <= 1'b0;
+      data_b_in_lcm_int <= 1'b0;
     end
 	else begin
-      case(root_ctrl_fsm_int)
+      case(lcm_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0
           // Control Outputs
@@ -143,95 +143,95 @@ module ntm_vector_root(
             index_loop <= ZERO;
 
             // FSM Control
-            root_ctrl_fsm_int <= INPUT_STATE;
+            lcm_ctrl_fsm_int <= INPUT_STATE;
           end
         end
         INPUT_STATE : begin
           // STEP 1
           if(DATA_A_IN_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_scalar_root <= DATA_A_IN;
+            data_a_in_scalar_lcm <= DATA_A_IN;
 
             // Control Internal
-            data_a_in_root_int <= 1'b1;
+            data_a_in_lcm_int <= 1'b1;
           end
           if(DATA_B_IN_ENABLE == 1'b1) begin
             // Data Inputs
-            data_b_in_scalar_root <= DATA_B_IN;
+            data_b_in_scalar_lcm <= DATA_B_IN;
 
             // Control Internal
-            data_b_in_root_int <= 1'b1;
+            data_b_in_lcm_int <= 1'b1;
           end
-          if(data_a_in_root_int == 1'b1 && data_b_in_root_int == 1'b1) begin
+          if(data_a_in_lcm_int == 1'b1 && data_b_in_lcm_int == 1'b1) begin
             if(index_loop == ZERO) begin
               // Control Internal
-              start_scalar_root <= 1'b1;
+              start_scalar_lcm <= 1'b1;
             end
             // Data Inputs
-            modulo_in_scalar_root <= MODULO_IN;
+            modulo_in_scalar_lcm <= MODULO_IN;
 
             // FSM Control
-            root_ctrl_fsm_int <= ENDER_STATE;
+            lcm_ctrl_fsm_int <= ENDER_STATE;
           end
           // Control Outputs
           DATA_OUT_ENABLE <= 1'b0;
         end
         ENDER_STATE : begin
           // STEP 2
-          if(ready_scalar_root == 1'b1) begin
+          if(ready_scalar_lcm == 1'b1) begin
             if(index_loop == (SIZE_IN - ONE)) begin
               // Control Outputs
               READY <= 1'b1;
 
               // FSM Control
-              root_ctrl_fsm_int <= STARTER_STATE;
+              lcm_ctrl_fsm_int <= STARTER_STATE;
             end
             else begin
               // Control Internal
               index_loop <= (index_loop + ONE);
 
               // FSM Control
-              root_ctrl_fsm_int <= INPUT_STATE;
+              lcm_ctrl_fsm_int <= INPUT_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_scalar_root;
+            DATA_OUT <= data_out_scalar_lcm;
 
             // Control Outputs
             DATA_OUT_ENABLE <= 1'b1;
           end
           else begin
             // Control Internal
-            start_scalar_root <= 1'b0;
-            data_a_in_root_int <= 1'b0;
-            data_b_in_root_int <= 1'b0;
+            start_scalar_lcm <= 1'b0;
+            data_a_in_lcm_int <= 1'b0;
+            data_b_in_lcm_int <= 1'b0;
           end
         end
         default : begin
           // FSM Control
-          root_ctrl_fsm_int <= STARTER_STATE;
+          lcm_ctrl_fsm_int <= STARTER_STATE;
         end
       endcase
     end
   end
 
   // ROOT
-  ntm_scalar_root #(
+  ntm_scalar_lcm #(
     .DATA_SIZE(DATA_SIZE)
   )
-  scalar_root(
+  scalar_lcm(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_root),
-    .READY(ready_scalar_root),
+    .START(start_scalar_lcm),
+    .READY(ready_scalar_lcm),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_root),
-    .DATA_A_IN(data_a_in_scalar_root),
-    .DATA_B_IN(data_b_in_scalar_root),
-    .DATA_OUT(data_out_scalar_root)
+    .MODULO_IN(modulo_in_scalar_lcm),
+    .DATA_A_IN(data_a_in_scalar_lcm),
+    .DATA_B_IN(data_b_in_scalar_lcm),
+    .DATA_OUT(data_out_scalar_lcm)
   );
 
 endmodule

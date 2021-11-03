@@ -64,8 +64,8 @@ package ntm_arithmetic_pkg;
   parameter STIMULUS_NTM_SCALAR_INVERTER_TEST      = 0;
   parameter STIMULUS_NTM_SCALAR_DIVIDER_TEST       = 0;
   parameter STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST = 0;
-  parameter STIMULUS_NTM_SCALAR_ROOT_TEST          = 0;
-  parameter STIMULUS_NTM_SCALAR_LOGARITHM_TEST     = 0;
+  parameter STIMULUS_NTM_SCALAR_LCM_TEST          = 0;
+  parameter STIMULUS_NTM_SCALAR_GCD_TEST     = 0;
 
   parameter STIMULUS_NTM_SCALAR_MOD_CASE_0           = 0;
   parameter STIMULUS_NTM_SCALAR_ADDER_CASE_0         = 0;
@@ -73,8 +73,8 @@ package ntm_arithmetic_pkg;
   parameter STIMULUS_NTM_SCALAR_INVERTER_CASE_0      = 0;
   parameter STIMULUS_NTM_SCALAR_DIVIDER_CASE_0       = 0;
   parameter STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0 = 0;
-  parameter STIMULUS_NTM_SCALAR_ROOT_CASE_0          = 0;
-  parameter STIMULUS_NTM_SCALAR_LOGARITHM_CASE_0     = 0;
+  parameter STIMULUS_NTM_SCALAR_LCM_CASE_0          = 0;
+  parameter STIMULUS_NTM_SCALAR_GCD_CASE_0     = 0;
 
   parameter STIMULUS_NTM_SCALAR_MOD_CASE_1           = 0;
   parameter STIMULUS_NTM_SCALAR_ADDER_CASE_1         = 0;
@@ -82,8 +82,8 @@ package ntm_arithmetic_pkg;
   parameter STIMULUS_NTM_SCALAR_INVERTER_CASE_1      = 0;
   parameter STIMULUS_NTM_SCALAR_DIVIDER_CASE_1       = 0;
   parameter STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1 = 0;
-  parameter STIMULUS_NTM_SCALAR_ROOT_CASE_1          = 0;
-  parameter STIMULUS_NTM_SCALAR_LOGARITHM_CASE_1     = 0;
+  parameter STIMULUS_NTM_SCALAR_LCM_CASE_1          = 0;
+  parameter STIMULUS_NTM_SCALAR_GCD_CASE_1     = 0;
 
   // VECTOR-FUNCTIONALITY
   parameter STIMULUS_NTM_VECTOR_MOD_TEST           = 0;
@@ -92,8 +92,8 @@ package ntm_arithmetic_pkg;
   parameter STIMULUS_NTM_VECTOR_INVERTER_TEST      = 0;
   parameter STIMULUS_NTM_VECTOR_DIVIDER_TEST       = 0;
   parameter STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST = 0;
-  parameter STIMULUS_NTM_VECTOR_ROOT_TEST          = 0;
-  parameter STIMULUS_NTM_VECTOR_LOGARITHM_TEST     = 0;
+  parameter STIMULUS_NTM_VECTOR_LCM_TEST          = 0;
+  parameter STIMULUS_NTM_VECTOR_GCD_TEST     = 0;
 
   parameter STIMULUS_NTM_VECTOR_MOD_CASE_0           = 0;
   parameter STIMULUS_NTM_VECTOR_ADDER_CASE_0         = 0;
@@ -101,8 +101,8 @@ package ntm_arithmetic_pkg;
   parameter STIMULUS_NTM_VECTOR_INVERTER_CASE_0      = 0;
   parameter STIMULUS_NTM_VECTOR_DIVIDER_CASE_0       = 0;
   parameter STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0 = 0;
-  parameter STIMULUS_NTM_VECTOR_ROOT_CASE_0          = 0;
-  parameter STIMULUS_NTM_VECTOR_LOGARITHM_CASE_0     = 0;
+  parameter STIMULUS_NTM_VECTOR_LCM_CASE_0          = 0;
+  parameter STIMULUS_NTM_VECTOR_GCD_CASE_0     = 0;
 
   parameter STIMULUS_NTM_VECTOR_MOD_CASE_1           = 0;
   parameter STIMULUS_NTM_VECTOR_ADDER_CASE_1         = 0;
@@ -110,8 +110,8 @@ package ntm_arithmetic_pkg;
   parameter STIMULUS_NTM_VECTOR_INVERTER_CASE_1      = 0;
   parameter STIMULUS_NTM_VECTOR_DIVIDER_CASE_1       = 0;
   parameter STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_1 = 0;
-  parameter STIMULUS_NTM_VECTOR_ROOT_CASE_1          = 0;
-  parameter STIMULUS_NTM_VECTOR_LOGARITHM_CASE_1     = 0;
+  parameter STIMULUS_NTM_VECTOR_LCM_CASE_1          = 0;
+  parameter STIMULUS_NTM_VECTOR_GCD_CASE_1     = 0;
 
   // MATRIX-FUNCTIONALITY
   parameter STIMULUS_NTM_MATRIX_MOD_TEST           = 0;
@@ -120,8 +120,8 @@ package ntm_arithmetic_pkg;
   parameter STIMULUS_NTM_MATRIX_INVERTER_TEST      = 0;
   parameter STIMULUS_NTM_MATRIX_DIVIDER_TEST       = 0;
   parameter STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST = 0;
-  parameter STIMULUS_NTM_MATRIX_ROOT_TEST          = 0;
-  parameter STIMULUS_NTM_MATRIX_LOGARITHM_TEST     = 0;
+  parameter STIMULUS_NTM_MATRIX_LCM_TEST          = 0;
+  parameter STIMULUS_NTM_MATRIX_GCD_TEST     = 0;
 
   parameter STIMULUS_NTM_MATRIX_MOD_CASE_0           = 0;
   parameter STIMULUS_NTM_MATRIX_ADDER_CASE_0         = 0;
@@ -129,8 +129,8 @@ package ntm_arithmetic_pkg;
   parameter STIMULUS_NTM_MATRIX_INVERTER_CASE_0      = 0;
   parameter STIMULUS_NTM_MATRIX_DIVIDER_CASE_0       = 0;
   parameter STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0 = 0;
-  parameter STIMULUS_NTM_MATRIX_ROOT_CASE_0          = 0;
-  parameter STIMULUS_NTM_MATRIX_LOGARITHM_CASE_0     = 0;
+  parameter STIMULUS_NTM_MATRIX_LCM_CASE_0          = 0;
+  parameter STIMULUS_NTM_MATRIX_GCD_CASE_0     = 0;
 
   parameter STIMULUS_NTM_MATRIX_MOD_CASE_1           = 0;
   parameter STIMULUS_NTM_MATRIX_ADDER_CASE_1         = 0;
@@ -138,8 +138,8 @@ package ntm_arithmetic_pkg;
   parameter STIMULUS_NTM_MATRIX_INVERTER_CASE_1      = 0;
   parameter STIMULUS_NTM_MATRIX_DIVIDER_CASE_1       = 0;
   parameter STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1 = 0;
-  parameter STIMULUS_NTM_MATRIX_ROOT_CASE_1          = 0;
-  parameter STIMULUS_NTM_MATRIX_LOGARITHM_CASE_1     = 0;
+  parameter STIMULUS_NTM_MATRIX_LCM_CASE_1          = 0;
+  parameter STIMULUS_NTM_MATRIX_GCD_CASE_1     = 0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals

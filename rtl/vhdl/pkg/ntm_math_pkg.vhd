@@ -197,7 +197,7 @@ package ntm_math_pkg is
       );
   end component;
 
-  component ntm_scalar_root is
+  component ntm_scalar_lcm is
     generic (
       DATA_SIZE : integer := 512
       );
@@ -218,7 +218,7 @@ package ntm_math_pkg is
       );
   end component;
 
-  component ntm_scalar_logarithm is
+  component ntm_scalar_gcd is
     generic (
       DATA_SIZE : integer := 512
       );
@@ -400,7 +400,7 @@ package ntm_math_pkg is
       );
   end component;
 
-  component ntm_vector_root is
+  component ntm_vector_lcm is
     generic (
       DATA_SIZE : integer := 512
       );
@@ -427,7 +427,7 @@ package ntm_math_pkg is
       );
   end component;
 
-  component ntm_vector_logarithm is
+  component ntm_vector_gcd is
     generic (
       DATA_SIZE : integer := 512
       );
@@ -637,7 +637,7 @@ package ntm_math_pkg is
       );
   end component;
 
-  component ntm_matrix_root is
+  component ntm_matrix_lcm is
     generic (
       DATA_SIZE : integer := 512
       );
@@ -668,7 +668,7 @@ package ntm_math_pkg is
       );
   end component;
 
-  component ntm_matrix_logarithm is
+  component ntm_matrix_gcd is
     generic (
       DATA_SIZE : integer := 512
       );

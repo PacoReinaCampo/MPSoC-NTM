@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_root(
+module ntm_scalar_lcm(
   CLK,
   RST,
   START,
@@ -83,16 +83,16 @@ module ntm_scalar_root(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg root_ctrl_fsm_int;
+  reg lcm_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE-1:0] root_int;
+  reg [DATA_SIZE-1:0] lcm_int;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = root(DATA_A_IN, DATA_B_IN) mod MODULO_IN
+  // DATA_OUT = lcm(DATA_A_IN, DATA_B_IN) mod MODULO_IN
   always @(posedge CLK or posedge RST) begin
     if((RST == 1'b0)) begin
       // Data Outputs
@@ -102,26 +102,26 @@ module ntm_scalar_root(
       READY <= 1'b0;
 
       // Assignations
-      root_int <= ZERO;
+      lcm_int <= ZERO;
     end
     else begin
-      case(root_ctrl_fsm_int)
+      case(lcm_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
           // FSM Control
-          root_ctrl_fsm_int <= ENDER_STATE;
+          lcm_ctrl_fsm_int <= ENDER_STATE;
         end
         ENDER_STATE : begin
           // STEP 1
           // FSM Control
-          root_ctrl_fsm_int <= STARTER_STATE;
+          lcm_ctrl_fsm_int <= STARTER_STATE;
         end
         default : begin
           // FSM Control
-          root_ctrl_fsm_int <= STARTER_STATE;
+          lcm_ctrl_fsm_int <= STARTER_STATE;
         end
       endcase
     end

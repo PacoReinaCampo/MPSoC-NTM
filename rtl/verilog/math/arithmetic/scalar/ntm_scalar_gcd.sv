@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_logarithm(
+module ntm_scalar_gcd(
   CLK,
   RST,
   START,
@@ -83,16 +83,16 @@ module ntm_scalar_logarithm(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg logarithm_ctrl_fsm_int;
+  reg gcd_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE-1:0] logarithm_int;
+  reg [DATA_SIZE-1:0] gcd_int;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = logarithm(DATA_A_IN, DATA_B_IN) mod MODULO_IN
+  // DATA_OUT = gcd(DATA_A_IN, DATA_B_IN) mod MODULO_IN
   always @(posedge CLK or posedge RST) begin
     if((RST == 1'b0)) begin
       // Data Outputs
@@ -102,25 +102,25 @@ module ntm_scalar_logarithm(
       READY <= 1'b0;
 
       // Assignations
-      logarithm_int <= ZERO;
+      gcd_int <= ZERO;
     end else begin
-      case(logarithm_ctrl_fsm_int)
+      case(gcd_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
           // FSM Control
-          logarithm_ctrl_fsm_int <= ENDER_STATE;
+          gcd_ctrl_fsm_int <= ENDER_STATE;
         end
         ENDER_STATE : begin
           // STEP 1
           // FSM Control
-          logarithm_ctrl_fsm_int <= STARTER_STATE;
+          gcd_ctrl_fsm_int <= STARTER_STATE;
         end
         default : begin
           // FSM Control
-          logarithm_ctrl_fsm_int <= STARTER_STATE;
+          gcd_ctrl_fsm_int <= STARTER_STATE;
         end
       endcase
     end

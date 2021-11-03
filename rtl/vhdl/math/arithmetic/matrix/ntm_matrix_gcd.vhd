@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_matrix_logarithm is
+entity ntm_matrix_gcd is
   generic (
     DATA_SIZE : integer := 512
     );
@@ -75,13 +75,13 @@ entity ntm_matrix_logarithm is
     );
 end entity;
 
-architecture ntm_matrix_logarithm_architecture of ntm_matrix_logarithm is
+architecture ntm_matrix_gcd_architecture of ntm_matrix_gcd is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type logarithm_ctrl_fsm is (
+  type gcd_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
@@ -100,33 +100,33 @@ architecture ntm_matrix_logarithm_architecture of ntm_matrix_logarithm is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal logarithm_ctrl_fsm_int : logarithm_ctrl_fsm;
+  signal gcd_ctrl_fsm_int : gcd_ctrl_fsm;
 
   -- Internal Signals
   signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_a_in_i_logarithm_int : std_logic;
-  signal data_a_in_j_logarithm_int : std_logic;
-  signal data_b_in_i_logarithm_int : std_logic;
-  signal data_b_in_j_logarithm_int : std_logic;
+  signal data_a_in_i_gcd_int : std_logic;
+  signal data_a_in_j_gcd_int : std_logic;
+  signal data_b_in_i_gcd_int : std_logic;
+  signal data_b_in_j_gcd_int : std_logic;
 
-  -- LOGARITHM
+  -- GCD
   -- CONTROL
-  signal start_vector_logarithm : std_logic;
-  signal ready_vector_logarithm : std_logic;
+  signal start_vector_gcd : std_logic;
+  signal ready_vector_gcd : std_logic;
 
-  signal data_a_in_enable_vector_logarithm : std_logic;
-  signal data_b_in_enable_vector_logarithm : std_logic;
+  signal data_a_in_enable_vector_gcd : std_logic;
+  signal data_b_in_enable_vector_gcd : std_logic;
 
-  signal data_out_enable_vector_logarithm : std_logic;
+  signal data_out_enable_vector_gcd : std_logic;
 
   -- DATA
-  signal modulo_in_vector_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_gcd : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_gcd   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_gcd : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_gcd : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_gcd  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -134,7 +134,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = logarithm(DATA_A_IN, DATA_B_IN) mod MODULO_IN
+  -- DATA_OUT = gcd(DATA_A_IN, DATA_B_IN) mod MODULO_IN
 
   ctrl_fsm : process(CLK, RST)
   begin
@@ -149,14 +149,14 @@ begin
       index_i_loop <= ZERO;
       index_j_loop <= ZERO;
 
-      data_a_in_i_logarithm_int <= '0';
-      data_a_in_j_logarithm_int <= '0';
-      data_b_in_i_logarithm_int <= '0';
-      data_b_in_j_logarithm_int <= '0';
+      data_a_in_i_gcd_int <= '0';
+      data_a_in_j_gcd_int <= '0';
+      data_b_in_i_gcd_int <= '0';
+      data_b_in_j_gcd_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
-      case logarithm_ctrl_fsm_int is
+      case gcd_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -167,48 +167,48 @@ begin
             index_j_loop <= ZERO;
 
             -- FSM Control
-            logarithm_ctrl_fsm_int <= INPUT_I_STATE;
+            gcd_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
         when INPUT_I_STATE =>           -- STEP 1
 
           if (DATA_A_IN_I_ENABLE = '1') then
             -- Data Inputs
-            data_a_in_vector_logarithm <= DATA_A_IN;
+            data_a_in_vector_gcd <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_enable_vector_logarithm <= '1';
+            data_a_in_enable_vector_gcd <= '1';
 
-            data_a_in_i_logarithm_int <= '1';
+            data_a_in_i_gcd_int <= '1';
           else
             -- Control Internal
-            data_a_in_enable_vector_logarithm <= '0';
+            data_a_in_enable_vector_gcd <= '0';
           end if;
 
           if (DATA_B_IN_I_ENABLE = '1') then
             -- Data Inputs
-            data_b_in_vector_logarithm <= DATA_B_IN;
+            data_b_in_vector_gcd <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_enable_vector_logarithm <= '1';
+            data_b_in_enable_vector_gcd <= '1';
 
-            data_b_in_i_logarithm_int <= '1';
+            data_b_in_i_gcd_int <= '1';
           else
             -- Control Internal
-            data_b_in_enable_vector_logarithm <= '0';
+            data_b_in_enable_vector_gcd <= '0';
           end if;
 
-          if (data_a_in_i_logarithm_int = '1' and data_b_in_i_logarithm_int = '1') then
+          if (data_a_in_i_gcd_int = '1' and data_b_in_i_gcd_int = '1') then
             if (index_i_loop = ZERO) then
               -- Control Internal
-              start_vector_logarithm <= '1';
+              start_vector_gcd <= '1';
             end if;
 
             -- Data Inputs
-            modulo_in_vector_logarithm <= MODULO_IN;
+            modulo_in_vector_gcd <= MODULO_IN;
 
             -- FSM Control
-            logarithm_ctrl_fsm_int <= ENDER_STATE;
+            gcd_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
           -- Control Outputs
@@ -219,42 +219,42 @@ begin
 
           if (DATA_A_IN_J_ENABLE = '1') then
             -- Data Inputs
-            data_a_in_vector_logarithm <= DATA_A_IN;
+            data_a_in_vector_gcd <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_enable_vector_logarithm <= '1';
+            data_a_in_enable_vector_gcd <= '1';
 
-            data_a_in_j_logarithm_int <= '1';
+            data_a_in_j_gcd_int <= '1';
           else
             -- Control Internal
-            data_a_in_enable_vector_logarithm <= '0';
+            data_a_in_enable_vector_gcd <= '0';
           end if;
 
           if (DATA_B_IN_J_ENABLE = '1') then
             -- Data Inputs
-            data_b_in_vector_logarithm <= DATA_B_IN;
+            data_b_in_vector_gcd <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_enable_vector_logarithm <= '1';
+            data_b_in_enable_vector_gcd <= '1';
 
-            data_b_in_j_logarithm_int <= '1';
+            data_b_in_j_gcd_int <= '1';
           else
             -- Control Internal
-            data_b_in_enable_vector_logarithm <= '0';
+            data_b_in_enable_vector_gcd <= '0';
           end if;
 
-          if (data_a_in_j_logarithm_int = '1' and data_b_in_j_logarithm_int = '1') then
+          if (data_a_in_j_gcd_int = '1' and data_b_in_j_gcd_int = '1') then
             if (index_j_loop = ZERO) then
               -- Control Internal
-              start_vector_logarithm <= '1';
+              start_vector_gcd <= '1';
             end if;
 
             -- Data Inputs
-            modulo_in_vector_logarithm <= MODULO_IN;
-            size_in_vector_logarithm   <= SIZE_J_IN;
+            modulo_in_vector_gcd <= MODULO_IN;
+            size_in_vector_gcd   <= SIZE_J_IN;
 
             -- FSM Control
-            logarithm_ctrl_fsm_int <= ENDER_STATE;
+            gcd_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
           -- Control Outputs
@@ -262,7 +262,7 @@ begin
 
         when ENDER_STATE =>             -- STEP 3
 
-          if (ready_vector_logarithm = '1') then
+          if (ready_vector_gcd = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE)))) then
               -- Control Outputs
               READY <= '1';
@@ -270,7 +270,7 @@ begin
               DATA_OUT_J_ENABLE <= '1';
 
               -- FSM Control
-              logarithm_ctrl_fsm_int <= STARTER_STATE;
+              gcd_ctrl_fsm_int <= STARTER_STATE;
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE)))) then
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
@@ -281,7 +281,7 @@ begin
               DATA_OUT_J_ENABLE <= '1';
 
               -- FSM Control
-              logarithm_ctrl_fsm_int <= INPUT_I_STATE;
+              gcd_ctrl_fsm_int <= INPUT_I_STATE;
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE)))) then
               -- Control Internal
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
@@ -290,30 +290,30 @@ begin
               DATA_OUT_J_ENABLE <= '1';
 
               -- FSM Control
-              logarithm_ctrl_fsm_int <= INPUT_J_STATE;
+              gcd_ctrl_fsm_int <= INPUT_J_STATE;
             end if;
 
             -- Data Outputs
-            DATA_OUT <= data_out_vector_logarithm;
+            DATA_OUT <= data_out_vector_gcd;
           else
             -- Control Internal
-            start_vector_logarithm <= '0';
+            start_vector_gcd <= '0';
 
-            data_a_in_i_logarithm_int <= '0';
-            data_a_in_j_logarithm_int <= '0';
-            data_b_in_i_logarithm_int <= '0';
-            data_b_in_j_logarithm_int <= '0';
+            data_a_in_i_gcd_int <= '0';
+            data_a_in_j_gcd_int <= '0';
+            data_b_in_i_gcd_int <= '0';
+            data_b_in_j_gcd_int <= '0';
           end if;
 
         when others =>
           -- FSM Control
-          logarithm_ctrl_fsm_int <= STARTER_STATE;
+          gcd_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
 
-  -- LOGARITHM
-  vector_logarithm : ntm_vector_logarithm
+  -- GCD
+  vector_gcd : ntm_vector_gcd
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -323,20 +323,20 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_logarithm,
-      READY => ready_vector_logarithm,
+      START => start_vector_gcd,
+      READY => ready_vector_gcd,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_logarithm,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_logarithm,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_gcd,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_gcd,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_logarithm,
+      DATA_OUT_ENABLE => data_out_enable_vector_gcd,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_logarithm,
-      SIZE_IN   => size_in_vector_logarithm,
-      DATA_A_IN => data_a_in_vector_logarithm,
-      DATA_B_IN => data_b_in_vector_logarithm,
-      DATA_OUT  => data_out_vector_logarithm
+      MODULO_IN => modulo_in_vector_gcd,
+      SIZE_IN   => size_in_vector_gcd,
+      DATA_A_IN => data_a_in_vector_gcd,
+      DATA_B_IN => data_b_in_vector_gcd,
+      DATA_OUT  => data_out_vector_gcd
       );
 
 end architecture;

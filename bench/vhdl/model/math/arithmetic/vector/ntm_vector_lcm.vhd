@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_vector_root is
+entity ntm_vector_lcm is
   generic (
     DATA_SIZE : integer := 512
     );
@@ -71,13 +71,13 @@ entity ntm_vector_root is
     );
 end entity;
 
-architecture ntm_vector_root_architecture of ntm_vector_root is
+architecture ntm_vector_lcm_architecture of ntm_vector_lcm is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type root_ctrl_fsm is (
+  type lcm_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
     ENDER_STATE                         -- STEP 2
@@ -95,24 +95,24 @@ architecture ntm_vector_root_architecture of ntm_vector_root is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal root_ctrl_fsm_int : root_ctrl_fsm;
+  signal lcm_ctrl_fsm_int : lcm_ctrl_fsm;
 
   -- Internal Signals
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_a_in_root_int : std_logic;
-  signal data_b_in_root_int : std_logic;
+  signal data_a_in_lcm_int : std_logic;
+  signal data_b_in_lcm_int : std_logic;
 
   -- ROOT
   -- CONTROL
-  signal start_scalar_root : std_logic;
-  signal ready_scalar_root : std_logic;
+  signal start_scalar_lcm : std_logic;
+  signal ready_scalar_lcm : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_root : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_root : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_root : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_root  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_lcm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_lcm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_lcm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_lcm  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -120,7 +120,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = root(DATA_A_IN, DATA_B_IN) mod MODULO_IN
+  -- DATA_OUT = lcm(DATA_A_IN, DATA_B_IN) mod MODULO_IN
 
   ctrl_fsm : process(CLK, RST)
   begin
@@ -134,12 +134,12 @@ begin
       -- Assignations
       index_loop <= ZERO;
 
-      data_a_in_root_int <= '0';
-      data_b_in_root_int <= '0';
+      data_a_in_lcm_int <= '0';
+      data_b_in_lcm_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
-      case root_ctrl_fsm_int is
+      case lcm_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -149,38 +149,38 @@ begin
             index_loop <= ZERO;
 
             -- FSM Control
-            root_ctrl_fsm_int <= INPUT_STATE;
+            lcm_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
         when INPUT_STATE =>             -- STEP 1
 
           if (DATA_A_IN_ENABLE = '1') then
             -- Data Inputs
-            data_a_in_scalar_root <= DATA_A_IN;
+            data_a_in_scalar_lcm <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_root_int <= '1';
+            data_a_in_lcm_int <= '1';
           end if;
 
           if (DATA_B_IN_ENABLE = '1') then
             -- Data Inputs
-            data_b_in_scalar_root <= DATA_B_IN;
+            data_b_in_scalar_lcm <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_root_int <= '1';
+            data_b_in_lcm_int <= '1';
           end if;
 
-          if (data_a_in_root_int = '1' and data_b_in_root_int = '1') then
+          if (data_a_in_lcm_int = '1' and data_b_in_lcm_int = '1') then
             if (index_loop = ZERO) then
               -- Control Internal
-              start_scalar_root <= '1';
+              start_scalar_lcm <= '1';
             end if;
 
             -- Data Inputs
-            modulo_in_scalar_root <= MODULO_IN;
+            modulo_in_scalar_lcm <= MODULO_IN;
 
             -- FSM Control
-            root_ctrl_fsm_int <= ENDER_STATE;
+            lcm_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
           -- Control Outputs
@@ -188,43 +188,43 @@ begin
 
         when ENDER_STATE =>             -- STEP 2
 
-          if (ready_scalar_root = '1') then
+          if (ready_scalar_lcm = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
-              root_ctrl_fsm_int <= STARTER_STATE;
+              lcm_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
               index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE));
 
               -- FSM Control
-              root_ctrl_fsm_int <= INPUT_STATE;
+              lcm_ctrl_fsm_int <= INPUT_STATE;
             end if;
 
             -- Data Outputs
-            DATA_OUT <= data_out_scalar_root;
+            DATA_OUT <= data_out_scalar_lcm;
 
             -- Control Outputs
             DATA_OUT_ENABLE <= '1';
           else
             -- Control Internal
-            start_scalar_root <= '0';
+            start_scalar_lcm <= '0';
 
-            data_a_in_root_int <= '0';
-            data_b_in_root_int <= '0';
+            data_a_in_lcm_int <= '0';
+            data_b_in_lcm_int <= '0';
           end if;
 
         when others =>
           -- FSM Control
-          root_ctrl_fsm_int <= STARTER_STATE;
+          lcm_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
 
   -- ROOT
-  scalar_root : ntm_scalar_root
+  scalar_lcm : ntm_scalar_lcm
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -234,14 +234,14 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_root,
-      READY => ready_scalar_root,
+      START => start_scalar_lcm,
+      READY => ready_scalar_lcm,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_root,
-      DATA_A_IN => data_a_in_scalar_root,
-      DATA_B_IN => data_b_in_scalar_root,
-      DATA_OUT  => data_out_scalar_root
+      MODULO_IN => modulo_in_scalar_lcm,
+      DATA_A_IN => data_a_in_scalar_lcm,
+      DATA_B_IN => data_b_in_scalar_lcm,
+      DATA_OUT  => data_out_scalar_lcm
       );
 
 end architecture;

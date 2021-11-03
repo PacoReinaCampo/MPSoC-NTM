@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_root(
+module ntm_matrix_lcm(
   CLK,
   RST,
   START,
@@ -102,37 +102,37 @@ module ntm_matrix_root(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] root_ctrl_fsm_int;
+  reg [1:0] lcm_ctrl_fsm_int;
 
   // Internal Signals
   reg [DATA_SIZE-1:0] index_i_loop;
   reg [DATA_SIZE-1:0] index_j_loop;
 
-  reg data_a_in_i_root_int;
-  reg data_a_in_j_root_int;
-  reg data_b_in_i_root_int;
-  reg data_b_in_j_root_int;
+  reg data_a_in_i_lcm_int;
+  reg data_a_in_j_lcm_int;
+  reg data_b_in_i_lcm_int;
+  reg data_b_in_j_lcm_int;
 
   // ROOT
   // CONTROL
-  reg start_vector_root;
-  wire ready_vector_root;
-  reg data_a_in_enable_vector_root;
-  reg data_b_in_enable_vector_root;
-  wire data_out_enable_vector_root;
+  reg start_vector_lcm;
+  wire ready_vector_lcm;
+  reg data_a_in_enable_vector_lcm;
+  reg data_b_in_enable_vector_lcm;
+  wire data_out_enable_vector_lcm;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_root;
-  reg [DATA_SIZE-1:0] size_in_vector_root;
-  reg [DATA_SIZE-1:0] data_a_in_vector_root;
-  reg [DATA_SIZE-1:0] data_b_in_vector_root;
-  wire [DATA_SIZE-1:0] data_out_vector_root;
+  reg [DATA_SIZE-1:0] modulo_in_vector_lcm;
+  reg [DATA_SIZE-1:0] size_in_vector_lcm;
+  reg [DATA_SIZE-1:0] data_a_in_vector_lcm;
+  reg [DATA_SIZE-1:0] data_b_in_vector_lcm;
+  wire [DATA_SIZE-1:0] data_out_vector_lcm;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = root(DATA_A_IN, DATA_B_IN) mod MODULO_IN
+  // DATA_OUT = lcm(DATA_A_IN, DATA_B_IN) mod MODULO_IN
   always @(posedge CLK or posedge RST) begin
     if((RST == 1'b0)) begin
       // Data Outputs
@@ -142,13 +142,13 @@ module ntm_matrix_root(
       // Assignations
       index_i_loop <= ZERO;
       index_j_loop <= ZERO;
-      data_a_in_i_root_int <= 1'b0;
-      data_a_in_j_root_int <= 1'b0;
-      data_b_in_i_root_int <= 1'b0;
-      data_b_in_j_root_int <= 1'b0;
+      data_a_in_i_lcm_int <= 1'b0;
+      data_a_in_j_lcm_int <= 1'b0;
+      data_b_in_i_lcm_int <= 1'b0;
+      data_b_in_j_lcm_int <= 1'b0;
     end
 	else begin
-      case(root_ctrl_fsm_int)
+      case(lcm_ctrl_fsm_int)
         STARTER_STATE : begin
           // STEP 0
           // Control Outputs
@@ -158,42 +158,42 @@ module ntm_matrix_root(
             index_i_loop <= ZERO;
             index_j_loop <= ZERO;
             // FSM Control
-            root_ctrl_fsm_int <= INPUT_I_STATE;
+            lcm_ctrl_fsm_int <= INPUT_I_STATE;
           end
         end
         INPUT_I_STATE : begin
           // STEP 1
           if(DATA_A_IN_I_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_vector_root <= DATA_A_IN;
+            data_a_in_vector_lcm <= DATA_A_IN;
             // Control Internal
-            data_a_in_enable_vector_root <= 1'b1;
-            data_a_in_i_root_int <= 1'b1;
+            data_a_in_enable_vector_lcm <= 1'b1;
+            data_a_in_i_lcm_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_a_in_enable_vector_root <= 1'b0;
+            data_a_in_enable_vector_lcm <= 1'b0;
           end
           if(DATA_B_IN_I_ENABLE == 1'b1) begin
             // Data Inputs
-            data_b_in_vector_root <= DATA_B_IN;
+            data_b_in_vector_lcm <= DATA_B_IN;
             // Control Internal
-            data_b_in_enable_vector_root <= 1'b1;
-            data_b_in_i_root_int <= 1'b1;
+            data_b_in_enable_vector_lcm <= 1'b1;
+            data_b_in_i_lcm_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_b_in_enable_vector_root <= 1'b0;
+            data_b_in_enable_vector_lcm <= 1'b0;
           end
-          if((data_a_in_i_root_int == 1'b1 && data_b_in_i_root_int == 1'b1)) begin
+          if((data_a_in_i_lcm_int == 1'b1 && data_b_in_i_lcm_int == 1'b1)) begin
             if(index_i_loop == ZERO) begin
               // Control Internal
-              start_vector_root <= 1'b1;
+              start_vector_lcm <= 1'b1;
             end
             // Data Inputs
-            modulo_in_vector_root <= MODULO_IN;
+            modulo_in_vector_lcm <= MODULO_IN;
             // FSM Control
-            root_ctrl_fsm_int <= ENDER_STATE;
+            lcm_ctrl_fsm_int <= ENDER_STATE;
           end
           // Control Outputs
           DATA_OUT_I_ENABLE <= 1'b0;
@@ -203,49 +203,49 @@ module ntm_matrix_root(
           // STEP 2
           if(DATA_A_IN_J_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_vector_root <= DATA_A_IN;
+            data_a_in_vector_lcm <= DATA_A_IN;
             // Control Internal
-            data_a_in_enable_vector_root <= 1'b1;
-            data_a_in_j_root_int <= 1'b1;
+            data_a_in_enable_vector_lcm <= 1'b1;
+            data_a_in_j_lcm_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_a_in_enable_vector_root <= 1'b0;
+            data_a_in_enable_vector_lcm <= 1'b0;
           end
           if(DATA_B_IN_J_ENABLE == 1'b1) begin
             // Data Inputs
-            data_b_in_vector_root <= DATA_B_IN;
+            data_b_in_vector_lcm <= DATA_B_IN;
             // Control Internal
-            data_b_in_enable_vector_root <= 1'b1;
-            data_b_in_j_root_int <= 1'b1;
+            data_b_in_enable_vector_lcm <= 1'b1;
+            data_b_in_j_lcm_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_b_in_enable_vector_root <= 1'b0;
+            data_b_in_enable_vector_lcm <= 1'b0;
           end
-          if((data_a_in_j_root_int == 1'b1 && data_b_in_j_root_int == 1'b1)) begin
+          if((data_a_in_j_lcm_int == 1'b1 && data_b_in_j_lcm_int == 1'b1)) begin
             if(index_j_loop == ZERO) begin
               // Control Internal
-              start_vector_root <= 1'b1;
+              start_vector_lcm <= 1'b1;
             end
             // Data Inputs
-            modulo_in_vector_root <= MODULO_IN;
-            size_in_vector_root <= SIZE_J_IN;
+            modulo_in_vector_lcm <= MODULO_IN;
+            size_in_vector_lcm <= SIZE_J_IN;
             // FSM Control
-            root_ctrl_fsm_int <= ENDER_STATE;
+            lcm_ctrl_fsm_int <= ENDER_STATE;
           end
           // Control Outputs
           DATA_OUT_J_ENABLE <= 1'b0;
         end
         ENDER_STATE : begin
           // STEP 3
-          if((ready_vector_root == 1'b1)) begin
+          if((ready_vector_lcm == 1'b1)) begin
             if(((index_i_loop == (SIZE_I_IN - ONE)) && (index_j_loop == (SIZE_J_IN - ONE)))) begin
               // Control Outputs
               READY <= 1'b1;
               DATA_OUT_J_ENABLE <= 1'b1;
               // FSM Control
-              root_ctrl_fsm_int <= STARTER_STATE;
+              lcm_ctrl_fsm_int <= STARTER_STATE;
             end
             else if(((index_i_loop < (SIZE_I_IN - ONE)) && (index_j_loop == (SIZE_J_IN - ONE)))) begin
               // Control Internal
@@ -255,7 +255,7 @@ module ntm_matrix_root(
               DATA_OUT_I_ENABLE <= 1'b1;
               DATA_OUT_J_ENABLE <= 1'b1;
               // FSM Control
-              root_ctrl_fsm_int <= INPUT_I_STATE;
+              lcm_ctrl_fsm_int <= INPUT_I_STATE;
             end
             else if(((index_i_loop < (SIZE_I_IN - ONE)) && (index_j_loop < (SIZE_J_IN - ONE)))) begin
               // Control Internal
@@ -263,51 +263,51 @@ module ntm_matrix_root(
               // Control Outputs
               DATA_OUT_J_ENABLE <= 1'b1;
               // FSM Control
-              root_ctrl_fsm_int <= INPUT_J_STATE;
+              lcm_ctrl_fsm_int <= INPUT_J_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_vector_root;
+            DATA_OUT <= data_out_vector_lcm;
           end
           else begin
             // Control Internal
-            start_vector_root <= 1'b0;
-            data_a_in_i_root_int <= 1'b0;
-            data_a_in_j_root_int <= 1'b0;
-            data_b_in_i_root_int <= 1'b0;
-            data_b_in_j_root_int <= 1'b0;
+            start_vector_lcm <= 1'b0;
+            data_a_in_i_lcm_int <= 1'b0;
+            data_a_in_j_lcm_int <= 1'b0;
+            data_b_in_i_lcm_int <= 1'b0;
+            data_b_in_j_lcm_int <= 1'b0;
           end
         end
         default : begin
           // FSM Control
-          root_ctrl_fsm_int <= STARTER_STATE;
+          lcm_ctrl_fsm_int <= STARTER_STATE;
         end
       endcase
     end
   end
 
   // ROOT
-  ntm_vector_root #(
+  ntm_vector_lcm #(
     .DATA_SIZE(DATA_SIZE)
   )
-  vector_root(
+  vector_lcm(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_root),
-    .READY(ready_vector_root),
+    .START(start_vector_lcm),
+    .READY(ready_vector_lcm),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_root),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_root),
-    .DATA_OUT_ENABLE(data_out_enable_vector_root),
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_lcm),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_lcm),
+    .DATA_OUT_ENABLE(data_out_enable_vector_lcm),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_root),
-    .SIZE_IN(size_in_vector_root),
-    .DATA_A_IN(data_a_in_vector_root),
-    .DATA_B_IN(data_b_in_vector_root),
-    .DATA_OUT(data_out_vector_root)
+    .MODULO_IN(modulo_in_vector_lcm),
+    .SIZE_IN(size_in_vector_lcm),
+    .DATA_A_IN(data_a_in_vector_lcm),
+    .DATA_B_IN(data_b_in_vector_lcm),
+    .DATA_OUT(data_out_vector_lcm)
   );
 
 endmodule

@@ -74,8 +74,8 @@ package ntm_arithmetic_pkg is
   constant STIMULUS_NTM_SCALAR_INVERTER_TEST      : boolean := false;
   constant STIMULUS_NTM_SCALAR_DIVIDER_TEST       : boolean := false;
   constant STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST : boolean := false;
-  constant STIMULUS_NTM_SCALAR_ROOT_TEST          : boolean := false;
-  constant STIMULUS_NTM_SCALAR_LOGARITHM_TEST     : boolean := false;
+  constant STIMULUS_NTM_SCALAR_LCM_TEST          : boolean := false;
+  constant STIMULUS_NTM_SCALAR_GCD_TEST     : boolean := false;
 
   constant STIMULUS_NTM_SCALAR_MOD_CASE_0           : boolean := false;
   constant STIMULUS_NTM_SCALAR_ADDER_CASE_0         : boolean := false;
@@ -83,8 +83,8 @@ package ntm_arithmetic_pkg is
   constant STIMULUS_NTM_SCALAR_INVERTER_CASE_0      : boolean := false;
   constant STIMULUS_NTM_SCALAR_DIVIDER_CASE_0       : boolean := false;
   constant STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0 : boolean := false;
-  constant STIMULUS_NTM_SCALAR_ROOT_CASE_0          : boolean := false;
-  constant STIMULUS_NTM_SCALAR_LOGARITHM_CASE_0     : boolean := false;
+  constant STIMULUS_NTM_SCALAR_LCM_CASE_0          : boolean := false;
+  constant STIMULUS_NTM_SCALAR_GCD_CASE_0     : boolean := false;
 
   constant STIMULUS_NTM_SCALAR_MOD_CASE_1           : boolean := false;
   constant STIMULUS_NTM_SCALAR_ADDER_CASE_1         : boolean := false;
@@ -92,8 +92,8 @@ package ntm_arithmetic_pkg is
   constant STIMULUS_NTM_SCALAR_INVERTER_CASE_1      : boolean := false;
   constant STIMULUS_NTM_SCALAR_DIVIDER_CASE_1       : boolean := false;
   constant STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1 : boolean := false;
-  constant STIMULUS_NTM_SCALAR_ROOT_CASE_1          : boolean := false;
-  constant STIMULUS_NTM_SCALAR_LOGARITHM_CASE_1     : boolean := false;
+  constant STIMULUS_NTM_SCALAR_LCM_CASE_1          : boolean := false;
+  constant STIMULUS_NTM_SCALAR_GCD_CASE_1     : boolean := false;
 
   -- VECTOR-FUNCTIONALITY
   constant STIMULUS_NTM_VECTOR_MOD_TEST           : boolean := false;
@@ -102,8 +102,8 @@ package ntm_arithmetic_pkg is
   constant STIMULUS_NTM_VECTOR_INVERTER_TEST      : boolean := false;
   constant STIMULUS_NTM_VECTOR_DIVIDER_TEST       : boolean := false;
   constant STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST : boolean := false;
-  constant STIMULUS_NTM_VECTOR_ROOT_TEST          : boolean := false;
-  constant STIMULUS_NTM_VECTOR_LOGARITHM_TEST     : boolean := false;
+  constant STIMULUS_NTM_VECTOR_LCM_TEST          : boolean := false;
+  constant STIMULUS_NTM_VECTOR_GCD_TEST     : boolean := false;
 
   constant STIMULUS_NTM_VECTOR_MOD_CASE_0           : boolean := false;
   constant STIMULUS_NTM_VECTOR_ADDER_CASE_0         : boolean := false;
@@ -111,8 +111,8 @@ package ntm_arithmetic_pkg is
   constant STIMULUS_NTM_VECTOR_INVERTER_CASE_0      : boolean := false;
   constant STIMULUS_NTM_VECTOR_DIVIDER_CASE_0       : boolean := false;
   constant STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0 : boolean := false;
-  constant STIMULUS_NTM_VECTOR_ROOT_CASE_0          : boolean := false;
-  constant STIMULUS_NTM_VECTOR_LOGARITHM_CASE_0     : boolean := false;
+  constant STIMULUS_NTM_VECTOR_LCM_CASE_0          : boolean := false;
+  constant STIMULUS_NTM_VECTOR_GCD_CASE_0     : boolean := false;
 
   constant STIMULUS_NTM_VECTOR_MOD_CASE_1           : boolean := false;
   constant STIMULUS_NTM_VECTOR_ADDER_CASE_1         : boolean := false;
@@ -120,8 +120,8 @@ package ntm_arithmetic_pkg is
   constant STIMULUS_NTM_VECTOR_INVERTER_CASE_1      : boolean := false;
   constant STIMULUS_NTM_VECTOR_DIVIDER_CASE_1       : boolean := false;
   constant STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_1 : boolean := false;
-  constant STIMULUS_NTM_VECTOR_ROOT_CASE_1          : boolean := false;
-  constant STIMULUS_NTM_VECTOR_LOGARITHM_CASE_1     : boolean := false;
+  constant STIMULUS_NTM_VECTOR_LCM_CASE_1          : boolean := false;
+  constant STIMULUS_NTM_VECTOR_GCD_CASE_1     : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
   constant STIMULUS_NTM_MATRIX_MOD_TEST           : boolean := false;
@@ -130,8 +130,8 @@ package ntm_arithmetic_pkg is
   constant STIMULUS_NTM_MATRIX_INVERTER_TEST      : boolean := false;
   constant STIMULUS_NTM_MATRIX_DIVIDER_TEST       : boolean := false;
   constant STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST : boolean := false;
-  constant STIMULUS_NTM_MATRIX_ROOT_TEST          : boolean := false;
-  constant STIMULUS_NTM_MATRIX_LOGARITHM_TEST     : boolean := false;
+  constant STIMULUS_NTM_MATRIX_LCM_TEST          : boolean := false;
+  constant STIMULUS_NTM_MATRIX_GCD_TEST     : boolean := false;
 
   constant STIMULUS_NTM_MATRIX_MOD_CASE_0           : boolean := false;
   constant STIMULUS_NTM_MATRIX_ADDER_CASE_0         : boolean := false;
@@ -139,8 +139,8 @@ package ntm_arithmetic_pkg is
   constant STIMULUS_NTM_MATRIX_INVERTER_CASE_0      : boolean := false;
   constant STIMULUS_NTM_MATRIX_DIVIDER_CASE_0       : boolean := false;
   constant STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0 : boolean := false;
-  constant STIMULUS_NTM_MATRIX_ROOT_CASE_0          : boolean := false;
-  constant STIMULUS_NTM_MATRIX_LOGARITHM_CASE_0     : boolean := false;
+  constant STIMULUS_NTM_MATRIX_LCM_CASE_0          : boolean := false;
+  constant STIMULUS_NTM_MATRIX_GCD_CASE_0     : boolean := false;
 
   constant STIMULUS_NTM_MATRIX_MOD_CASE_1           : boolean := false;
   constant STIMULUS_NTM_MATRIX_ADDER_CASE_1         : boolean := false;
@@ -148,8 +148,8 @@ package ntm_arithmetic_pkg is
   constant STIMULUS_NTM_MATRIX_INVERTER_CASE_1      : boolean := false;
   constant STIMULUS_NTM_MATRIX_DIVIDER_CASE_1       : boolean := false;
   constant STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1 : boolean := false;
-  constant STIMULUS_NTM_MATRIX_ROOT_CASE_1          : boolean := false;
-  constant STIMULUS_NTM_MATRIX_LOGARITHM_CASE_1     : boolean := false;
+  constant STIMULUS_NTM_MATRIX_LCM_CASE_1          : boolean := false;
+  constant STIMULUS_NTM_MATRIX_GCD_CASE_1     : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
@@ -174,8 +174,8 @@ package ntm_arithmetic_pkg is
       STIMULUS_NTM_SCALAR_INVERTER_TEST      : boolean := false;
       STIMULUS_NTM_SCALAR_DIVIDER_TEST       : boolean := false;
       STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST : boolean := false;
-      STIMULUS_NTM_SCALAR_ROOT_TEST          : boolean := false;
-      STIMULUS_NTM_SCALAR_LOGARITHM_TEST     : boolean := false;
+      STIMULUS_NTM_SCALAR_LCM_TEST          : boolean := false;
+      STIMULUS_NTM_SCALAR_GCD_TEST     : boolean := false;
 
       STIMULUS_NTM_SCALAR_MOD_CASE_0           : boolean := false;
       STIMULUS_NTM_SCALAR_ADDER_CASE_0         : boolean := false;
@@ -183,8 +183,8 @@ package ntm_arithmetic_pkg is
       STIMULUS_NTM_SCALAR_INVERTER_CASE_0      : boolean := false;
       STIMULUS_NTM_SCALAR_DIVIDER_CASE_0       : boolean := false;
       STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0 : boolean := false;
-      STIMULUS_NTM_SCALAR_ROOT_CASE_0          : boolean := false;
-      STIMULUS_NTM_SCALAR_LOGARITHM_CASE_0     : boolean := false;
+      STIMULUS_NTM_SCALAR_LCM_CASE_0          : boolean := false;
+      STIMULUS_NTM_SCALAR_GCD_CASE_0     : boolean := false;
 
       STIMULUS_NTM_SCALAR_MOD_CASE_1           : boolean := false;
       STIMULUS_NTM_SCALAR_ADDER_CASE_1         : boolean := false;
@@ -192,8 +192,8 @@ package ntm_arithmetic_pkg is
       STIMULUS_NTM_SCALAR_INVERTER_CASE_1      : boolean := false;
       STIMULUS_NTM_SCALAR_DIVIDER_CASE_1       : boolean := false;
       STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1 : boolean := false;
-      STIMULUS_NTM_SCALAR_ROOT_CASE_1          : boolean := false;
-      STIMULUS_NTM_SCALAR_LOGARITHM_CASE_1     : boolean := false;
+      STIMULUS_NTM_SCALAR_LCM_CASE_1          : boolean := false;
+      STIMULUS_NTM_SCALAR_GCD_CASE_1     : boolean := false;
 
       -- VECTOR-FUNCTIONALITY
       STIMULUS_NTM_VECTOR_MOD_TEST           : boolean := false;
@@ -202,8 +202,8 @@ package ntm_arithmetic_pkg is
       STIMULUS_NTM_VECTOR_INVERTER_TEST      : boolean := false;
       STIMULUS_NTM_VECTOR_DIVIDER_TEST       : boolean := false;
       STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST : boolean := false;
-      STIMULUS_NTM_VECTOR_ROOT_TEST          : boolean := false;
-      STIMULUS_NTM_VECTOR_LOGARITHM_TEST     : boolean := false;
+      STIMULUS_NTM_VECTOR_LCM_TEST          : boolean := false;
+      STIMULUS_NTM_VECTOR_GCD_TEST     : boolean := false;
 
       STIMULUS_NTM_VECTOR_MOD_CASE_0           : boolean := false;
       STIMULUS_NTM_VECTOR_ADDER_CASE_0         : boolean := false;
@@ -211,8 +211,8 @@ package ntm_arithmetic_pkg is
       STIMULUS_NTM_VECTOR_INVERTER_CASE_0      : boolean := false;
       STIMULUS_NTM_VECTOR_DIVIDER_CASE_0       : boolean := false;
       STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0 : boolean := false;
-      STIMULUS_NTM_VECTOR_ROOT_CASE_0          : boolean := false;
-      STIMULUS_NTM_VECTOR_LOGARITHM_CASE_0     : boolean := false;
+      STIMULUS_NTM_VECTOR_LCM_CASE_0          : boolean := false;
+      STIMULUS_NTM_VECTOR_GCD_CASE_0     : boolean := false;
 
       STIMULUS_NTM_VECTOR_MOD_CASE_1           : boolean := false;
       STIMULUS_NTM_VECTOR_ADDER_CASE_1         : boolean := false;
@@ -220,8 +220,8 @@ package ntm_arithmetic_pkg is
       STIMULUS_NTM_VECTOR_INVERTER_CASE_1      : boolean := false;
       STIMULUS_NTM_VECTOR_DIVIDER_CASE_1       : boolean := false;
       STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_1 : boolean := false;
-      STIMULUS_NTM_VECTOR_ROOT_CASE_1          : boolean := false;
-      STIMULUS_NTM_VECTOR_LOGARITHM_CASE_1     : boolean := false;
+      STIMULUS_NTM_VECTOR_LCM_CASE_1          : boolean := false;
+      STIMULUS_NTM_VECTOR_GCD_CASE_1     : boolean := false;
 
       -- MATRIX-FUNCTIONALITY
       STIMULUS_NTM_MATRIX_MOD_TEST           : boolean := false;
@@ -230,8 +230,8 @@ package ntm_arithmetic_pkg is
       STIMULUS_NTM_MATRIX_INVERTER_TEST      : boolean := false;
       STIMULUS_NTM_MATRIX_DIVIDER_TEST       : boolean := false;
       STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST : boolean := false;
-      STIMULUS_NTM_MATRIX_ROOT_TEST          : boolean := false;
-      STIMULUS_NTM_MATRIX_LOGARITHM_TEST     : boolean := false;
+      STIMULUS_NTM_MATRIX_LCM_TEST          : boolean := false;
+      STIMULUS_NTM_MATRIX_GCD_TEST     : boolean := false;
 
       STIMULUS_NTM_MATRIX_MOD_CASE_0           : boolean := false;
       STIMULUS_NTM_MATRIX_ADDER_CASE_0         : boolean := false;
@@ -239,8 +239,8 @@ package ntm_arithmetic_pkg is
       STIMULUS_NTM_MATRIX_INVERTER_CASE_0      : boolean := false;
       STIMULUS_NTM_MATRIX_DIVIDER_CASE_0       : boolean := false;
       STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0 : boolean := false;
-      STIMULUS_NTM_MATRIX_ROOT_CASE_0          : boolean := false;
-      STIMULUS_NTM_MATRIX_LOGARITHM_CASE_0     : boolean := false;
+      STIMULUS_NTM_MATRIX_LCM_CASE_0          : boolean := false;
+      STIMULUS_NTM_MATRIX_GCD_CASE_0     : boolean := false;
 
       STIMULUS_NTM_MATRIX_MOD_CASE_1           : boolean := false;
       STIMULUS_NTM_MATRIX_ADDER_CASE_1         : boolean := false;
@@ -248,8 +248,8 @@ package ntm_arithmetic_pkg is
       STIMULUS_NTM_MATRIX_INVERTER_CASE_1      : boolean := false;
       STIMULUS_NTM_MATRIX_DIVIDER_CASE_1       : boolean := false;
       STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1 : boolean := false;
-      STIMULUS_NTM_MATRIX_ROOT_CASE_1          : boolean := false;
-      STIMULUS_NTM_MATRIX_LOGARITHM_CASE_1     : boolean := false
+      STIMULUS_NTM_MATRIX_LCM_CASE_1          : boolean := false;
+      STIMULUS_NTM_MATRIX_GCD_CASE_1     : boolean := false
       );
     port (
       -- GLOBAL
@@ -326,27 +326,27 @@ package ntm_arithmetic_pkg is
       SCALAR_EXPONENTIATOR_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- SCALAR ROOT
+      -- SCALAR LCM
       -- CONTROL
-      SCALAR_ROOT_START : out std_logic;
-      SCALAR_ROOT_READY : in  std_logic;
+      SCALAR_LCM_START : out std_logic;
+      SCALAR_LCM_READY : in  std_logic;
 
       -- DATA
-      SCALAR_ROOT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_ROOT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_ROOT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_ROOT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_LCM_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_LCM_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_LCM_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_LCM_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- SCALAR LOGARITHM
+      -- SCALAR GCD
       -- CONTROL
-      SCALAR_LOGARITHM_START : out std_logic;
-      SCALAR_LOGARITHM_READY : in  std_logic;
+      SCALAR_GCD_START : out std_logic;
+      SCALAR_GCD_READY : in  std_logic;
 
       -- DATA
-      SCALAR_LOGARITHM_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_LOGARITHM_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_LOGARITHM_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_LOGARITHM_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_GCD_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_GCD_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_GCD_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_GCD_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
       -- STIMULUS VECTOR
@@ -452,39 +452,39 @@ package ntm_arithmetic_pkg is
       VECTOR_EXPONENTIATOR_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- VECTOR ROOT
+      -- VECTOR LCM
       -- CONTROL
-      VECTOR_ROOT_START : out std_logic;
-      VECTOR_ROOT_READY : in  std_logic;
+      VECTOR_LCM_START : out std_logic;
+      VECTOR_LCM_READY : in  std_logic;
 
-      VECTOR_ROOT_DATA_A_IN_ENABLE : out std_logic;
-      VECTOR_ROOT_DATA_B_IN_ENABLE : out std_logic;
+      VECTOR_LCM_DATA_A_IN_ENABLE : out std_logic;
+      VECTOR_LCM_DATA_B_IN_ENABLE : out std_logic;
 
-      VECTOR_ROOT_DATA_OUT_ENABLE : in std_logic;
+      VECTOR_LCM_DATA_OUT_ENABLE : in std_logic;
 
       -- DATA
-      VECTOR_ROOT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_ROOT_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_ROOT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_ROOT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_ROOT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_LCM_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_LCM_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_LCM_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_LCM_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_LCM_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- VECTOR LOGARITHM
+      -- VECTOR GCD
       -- CONTROL
-      VECTOR_LOGARITHM_START : out std_logic;
-      VECTOR_LOGARITHM_READY : in  std_logic;
+      VECTOR_GCD_START : out std_logic;
+      VECTOR_GCD_READY : in  std_logic;
 
-      VECTOR_LOGARITHM_DATA_A_IN_ENABLE : out std_logic;
-      VECTOR_LOGARITHM_DATA_B_IN_ENABLE : out std_logic;
+      VECTOR_GCD_DATA_A_IN_ENABLE : out std_logic;
+      VECTOR_GCD_DATA_B_IN_ENABLE : out std_logic;
 
-      VECTOR_LOGARITHM_DATA_OUT_ENABLE : in std_logic;
+      VECTOR_GCD_DATA_OUT_ENABLE : in std_logic;
 
       -- DATA
-      VECTOR_LOGARITHM_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_LOGARITHM_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_LOGARITHM_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_LOGARITHM_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_LOGARITHM_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_GCD_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_GCD_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_GCD_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_GCD_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_GCD_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
       -- STIMULUS MATRIX
@@ -612,47 +612,47 @@ package ntm_arithmetic_pkg is
       MATRIX_EXPONENTIATOR_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- MATRIX ROOT
+      -- MATRIX LCM
       -- CONTROL
-      MATRIX_ROOT_START : out std_logic;
-      MATRIX_ROOT_READY : in  std_logic;
+      MATRIX_LCM_START : out std_logic;
+      MATRIX_LCM_READY : in  std_logic;
 
-      MATRIX_ROOT_DATA_A_IN_I_ENABLE : out std_logic;
-      MATRIX_ROOT_DATA_A_IN_J_ENABLE : out std_logic;
-      MATRIX_ROOT_DATA_B_IN_I_ENABLE : out std_logic;
-      MATRIX_ROOT_DATA_B_IN_J_ENABLE : out std_logic;
+      MATRIX_LCM_DATA_A_IN_I_ENABLE : out std_logic;
+      MATRIX_LCM_DATA_A_IN_J_ENABLE : out std_logic;
+      MATRIX_LCM_DATA_B_IN_I_ENABLE : out std_logic;
+      MATRIX_LCM_DATA_B_IN_J_ENABLE : out std_logic;
 
-      MATRIX_ROOT_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_ROOT_DATA_OUT_J_ENABLE : in std_logic;
+      MATRIX_LCM_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_LCM_DATA_OUT_J_ENABLE : in std_logic;
 
       -- DATA
-      MATRIX_ROOT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_ROOT_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_ROOT_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_ROOT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_ROOT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_ROOT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_LCM_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_LCM_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_LCM_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_LCM_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_LCM_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_LCM_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- MATRIX LOGARITHM
+      -- MATRIX GCD
       -- CONTROL
-      MATRIX_LOGARITHM_START : out std_logic;
-      MATRIX_LOGARITHM_READY : in  std_logic;
+      MATRIX_GCD_START : out std_logic;
+      MATRIX_GCD_READY : in  std_logic;
 
-      MATRIX_LOGARITHM_DATA_A_IN_I_ENABLE : out std_logic;
-      MATRIX_LOGARITHM_DATA_A_IN_J_ENABLE : out std_logic;
-      MATRIX_LOGARITHM_DATA_B_IN_I_ENABLE : out std_logic;
-      MATRIX_LOGARITHM_DATA_B_IN_J_ENABLE : out std_logic;
+      MATRIX_GCD_DATA_A_IN_I_ENABLE : out std_logic;
+      MATRIX_GCD_DATA_A_IN_J_ENABLE : out std_logic;
+      MATRIX_GCD_DATA_B_IN_I_ENABLE : out std_logic;
+      MATRIX_GCD_DATA_B_IN_J_ENABLE : out std_logic;
 
-      MATRIX_LOGARITHM_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_LOGARITHM_DATA_OUT_J_ENABLE : in std_logic;
+      MATRIX_GCD_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_GCD_DATA_OUT_J_ENABLE : in std_logic;
 
       -- DATA
-      MATRIX_LOGARITHM_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_LOGARITHM_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_LOGARITHM_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_LOGARITHM_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_LOGARITHM_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_LOGARITHM_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      MATRIX_GCD_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_GCD_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_GCD_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_GCD_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_GCD_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_GCD_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
