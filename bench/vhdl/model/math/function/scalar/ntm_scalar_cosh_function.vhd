@@ -115,6 +115,28 @@ architecture ntm_scalar_cosh_function_architecture of ntm_scalar_cosh_function i
   signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- SCALAR DIVIDER
+  -- CONTROL
+  signal start_scalar_divider : std_logic;
+  signal ready_scalar_divider : std_logic;
+
+  -- DATA
+  signal modulo_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- SCALAR EXPONENTIATOR
+  -- CONTROL
+  signal start_scalar_exponentiator : std_logic;
+  signal ready_scalar_exponentiator : std_logic;
+
+  -- DATA
+  signal modulo_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
@@ -199,4 +221,46 @@ begin
       DATA_OUT  => data_out_scalar_multiplier
       );
 
+  -- SCALAR DIVIDER
+  scalar_divider : ntm_scalar_divider
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_divider,
+      READY => ready_scalar_divider,
+
+      -- DATA
+      MODULO_IN => modulo_in_scalar_divider,
+      DATA_A_IN => data_a_in_scalar_divider,
+      DATA_B_IN => data_b_in_scalar_divider,
+      DATA_OUT  => data_out_scalar_divider
+      );
+
+  -- SCALAR EXPONENTIATOR
+  scalar_exponentiator : ntm_scalar_exponentiator
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_exponentiator,
+      READY => ready_scalar_exponentiator,
+
+      -- DATA
+      MODULO_IN => modulo_in_scalar_exponentiator,
+      DATA_A_IN => data_a_in_scalar_exponentiator,
+      DATA_B_IN => data_b_in_scalar_exponentiator,
+      DATA_OUT  => data_out_scalar_exponentiator
+      );
+        
 end architecture;

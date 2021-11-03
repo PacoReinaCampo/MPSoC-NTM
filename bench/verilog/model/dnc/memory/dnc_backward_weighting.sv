@@ -37,47 +37,32 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_backward_weighting(
-  CLK,
-  RST,
-  START,
-  READY,
-  L_IN_G_ENABLE,
-  L_IN_J_ENABLE,
-  W_IN_I_ENABLE,
-  W_IN_J_ENABLE,
-  B_OUT_I_ENABLE,
-  B_OUT_J_ENABLE,
-  SIZE_R_IN,
-  SIZE_N_IN,
-  L_IN,
-  W_IN,
-  B_OUT
-);
+module dnc_backward_weighting #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input L_IN_G_ENABLE,  // for g in 0 to N-1 (square matrix)
+    input L_IN_J_ENABLE,  // for j in 0 to N-1 (square matrix)
+    input W_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    input W_IN_J_ENABLE,  // for j in 0 to N-1
+    output B_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    output B_OUT_J_ENABLE,  // for j in 0 to N-1
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input L_IN_G_ENABLE;  // for g in 0 to N-1 (square matrix)
-  input L_IN_J_ENABLE;  // for j in 0 to N-1 (square matrix)
-  input W_IN_I_ENABLE;  // for i in 0 to R-1 (read heads flow)
-  input W_IN_J_ENABLE;  // for j in 0 to N-1
-  output B_OUT_I_ENABLE;  // for i in 0 to R-1 (read heads flow)
-  output B_OUT_J_ENABLE;  // for j in 0 to N-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_R_IN;
-  input [DATA_SIZE-1:0] SIZE_N_IN;
-  input [DATA_SIZE-1:0] L_IN;
-  input [DATA_SIZE-1:0] W_IN;
-  output [DATA_SIZE-1:0] B_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_R_IN,
+    input [DATA_SIZE-1:0] SIZE_N_IN,
+    input [DATA_SIZE-1:0] L_IN,
+    input [DATA_SIZE-1:0] W_IN,
+    output [DATA_SIZE-1:0] B_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

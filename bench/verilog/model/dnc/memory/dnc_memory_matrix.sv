@@ -37,53 +37,35 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_memory_matrix(
-  CLK,
-  RST,
-  START,
-  READY,
-  M_IN_J_ENABLE,
-  M_IN_K_ENABLE,
-  W_IN_J_ENABLE,
-  V_IN_K_ENABLE,
-  E_IN_K_ENABLE,
-  M_OUT_J_ENABLE,
-  M_OUT_K_ENABLE,
-  SIZE_N_IN,
-  SIZE_W_IN,
-  M_IN,
-  W_IN,
-  V_IN,
-  E_IN,
-  M_OUT
-);
+module dnc_memory_matrix #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input M_IN_J_ENABLE,  // for j in 0 to N-1
+    input M_IN_K_ENABLE,  // for k in 0 to W-1
+    input W_IN_J_ENABLE,  // for j in 0 to N-1
+    input V_IN_K_ENABLE,  // for k in 0 to W-1
+    input E_IN_K_ENABLE,  // for k in 0 to W-1
+    output M_OUT_J_ENABLE,  // for j in 0 to N-1
+    output M_OUT_K_ENABLE,  // for k in 0 to W-1
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input M_IN_J_ENABLE;  // for j in 0 to N-1
-  input M_IN_K_ENABLE;  // for k in 0 to W-1
-  input W_IN_J_ENABLE;  // for j in 0 to N-1
-  input V_IN_K_ENABLE;  // for k in 0 to W-1
-  input E_IN_K_ENABLE;  // for k in 0 to W-1
-  output M_OUT_J_ENABLE;  // for j in 0 to N-1
-  output M_OUT_K_ENABLE;  // for k in 0 to W-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_N_IN;
-  input [DATA_SIZE-1:0] SIZE_W_IN;
-  input [DATA_SIZE-1:0] M_IN;
-  input [DATA_SIZE-1:0] W_IN;
-  input [DATA_SIZE-1:0] V_IN;
-  input E_IN;
-  output [DATA_SIZE-1:0] M_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_N_IN,
+    input [DATA_SIZE-1:0] SIZE_W_IN,
+    input [DATA_SIZE-1:0] M_IN,
+    input [DATA_SIZE-1:0] W_IN,
+    input [DATA_SIZE-1:0] V_IN,
+    input E_IN,
+    output [DATA_SIZE-1:0] M_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

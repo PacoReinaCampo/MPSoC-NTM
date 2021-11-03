@@ -97,14 +97,26 @@ module ntm_scalar_logistic_function(
   wire [DATA_SIZE-1:0] data_in_scalar_inverter;
   wire [DATA_SIZE-1:0] data_out_scalar_inverter;
 
+  // SCALAR EXPONENTIATOR
+  // CONTROL
+  wire start_scalar_exponentiator;
+  wire ready_scalar_exponentiator;
+
+  // DATA
+  wire [DATA_SIZE-1:0] modulo_in_scalar_exponentiator;
+  wire [DATA_SIZE-1:0] data_a_in_scalar_exponentiator;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_exponentiator;
+  wire [DATA_SIZE-1:0] data_out_scalar_exponentiator;
+
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
+  // SCALAR ADDER
   ntm_scalar_adder #(
     .DATA_SIZE(DATA_SIZE)
   )
-  ntm_scalar_adder_i(
+  scalar_adder(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -122,10 +134,11 @@ module ntm_scalar_logistic_function(
     .DATA_OUT(data_out_scalar_adder)
   );
 
+  // SCALAR INVERTER
   ntm_scalar_inverter #(
     .DATA_SIZE(DATA_SIZE)
   )
-  ntm_scalar_inverter_i(
+  scalar_inverter(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -138,6 +151,26 @@ module ntm_scalar_logistic_function(
     .MODULO_IN(modulo_in_scalar_inverter),
     .DATA_IN(data_in_scalar_inverter),
     .DATA_OUT(data_out_scalar_inverter)
+  );
+
+  // SCALAR EXPONENTIATOR
+  ntm_scalar_exponentiator #(
+    .DATA_SIZE(DATA_SIZE)
+  )
+  scalar_exponentiator(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_scalar_exponentiator),
+    .READY(ready_scalar_exponentiator),
+
+    // DATA
+    .MODULO_IN(modulo_in_scalar_exponentiator),
+    .DATA_A_IN(data_a_in_scalar_exponentiator),
+    .DATA_B_IN(data_b_in_scalar_exponentiator),
+    .DATA_OUT(data_out_scalar_exponentiator)
   );
 
 endmodule

@@ -37,84 +37,56 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_interface_vector(
-  CLK,
-  RST,
-  START,
-  READY,
-  WK_IN_L_ENABLE,
-  WK_IN_K_ENABLE,
-  K_OUT_ENABLE,
-  WBETA_IN_ENABLE,
-  WG_IN_ENABLE,
-  WS_IN_L_ENABLE,
-  WS_IN_J_ENABLE,
-  S_OUT_ENABLE,
-  WGAMMA_IN_ENABLE,
-  H_IN_ENABLE,
-  SIZE_N_IN,
-  SIZE_W_IN,
-  SIZE_L_IN,
-  WK_IN,
-  WBETA_IN,
-  WG_IN,
-  WS_IN,
-  WGAMMA_IN,
-  H_IN,
-  K_OUT,
-  BETA_OUT,
-  G_OUT,
-  S_OUT,
-  GAMMA_OUT
-);
+module ntm_interface_vector #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    // Key Vector
+    input WK_IN_L_ENABLE,  // for l in 0 to L-1
+    input WK_IN_K_ENABLE,  // for k in 0 to W-1
+    output K_OUT_ENABLE,  // for k in 0 to W-1
 
-  // CONTROL
-  input START;
-  output READY;
+    // Key Strength
+    input WBETA_IN_ENABLE,  // for l in 0 to L-1
 
-  // Key Vector
-  input WK_IN_L_ENABLE;  // for l in 0 to L-1
-  input WK_IN_K_ENABLE;  // for k in 0 to W-1
-  output K_OUT_ENABLE;  // for k in 0 to W-1
+    // Interpolation Gate
+    input WG_IN_ENABLE,  // for l in 0 to L-1
 
-  // Key Strength
-  input WBETA_IN_ENABLE;  // for l in 0 to L-1
+    // Shift Weighting
+    input WS_IN_L_ENABLE,  // for l in 0 to L-1
+    input WS_IN_J_ENABLE,  // for j in 0 to N-1
+    output S_OUT_ENABLE,  // for j in 0 to N-1
 
-  // Interpolation Gate
-  input WG_IN_ENABLE;  // for l in 0 to L-1
+    // Sharpening
+    input WGAMMA_IN_ENABLE,  // for l in 0 to L-1
 
-  // Shift Weighting
-  input WS_IN_L_ENABLE;  // for l in 0 to L-1
-  input WS_IN_J_ENABLE;  // for j in 0 to N-1
-  output S_OUT_ENABLE;  // for j in 0 to N-1
+    // Hidden State
+    input H_IN_ENABLE,  // for l in 0 to L-1
 
-  // Sharpening
-  input WGAMMA_IN_ENABLE;  // for l in 0 to L-1
-
-  // Hidden State
-  input H_IN_ENABLE;  // for l in 0 to L-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_N_IN;
-  input [DATA_SIZE-1:0] SIZE_W_IN;
-  input [DATA_SIZE-1:0] SIZE_L_IN;
-  input [DATA_SIZE-1:0] WK_IN;
-  input [DATA_SIZE-1:0] WBETA_IN;
-  input [DATA_SIZE-1:0] WG_IN;
-  input [DATA_SIZE-1:0] WS_IN;
-  input [DATA_SIZE-1:0] WGAMMA_IN;
-  input [DATA_SIZE-1:0] H_IN;
-  output [DATA_SIZE-1:0] K_OUT;
-  output [DATA_SIZE-1:0] BETA_OUT;
-  output [DATA_SIZE-1:0] G_OUT;
-  output [DATA_SIZE-1:0] S_OUT;
-  output [DATA_SIZE-1:0] GAMMA_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_N_IN,
+    input [DATA_SIZE-1:0] SIZE_W_IN,
+    input [DATA_SIZE-1:0] SIZE_L_IN,
+    input [DATA_SIZE-1:0] WK_IN,
+    input [DATA_SIZE-1:0] WBETA_IN,
+    input [DATA_SIZE-1:0] WG_IN,
+    input [DATA_SIZE-1:0] WS_IN,
+    input [DATA_SIZE-1:0] WGAMMA_IN,
+    input [DATA_SIZE-1:0] H_IN,
+    output [DATA_SIZE-1:0] K_OUT,
+    output [DATA_SIZE-1:0] BETA_OUT,
+    output [DATA_SIZE-1:0] G_OUT,
+    output [DATA_SIZE-1:0] S_OUT,
+    output [DATA_SIZE-1:0] GAMMA_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

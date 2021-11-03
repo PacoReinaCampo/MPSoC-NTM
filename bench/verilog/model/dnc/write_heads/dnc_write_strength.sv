@@ -37,28 +37,22 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_write_strength(
-  CLK,
-  RST,
-  START,
-  READY,
-  BETA_IN,
-  BETA_OUT
-);
+module dnc_write_strength #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
-
-  // CONTROL
-  input START;
-  output READY;
-
-  // DATA
-  input [DATA_SIZE-1:0] BETA_IN;
-  output [DATA_SIZE-1:0] BETA_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] BETA_IN,
+    output [DATA_SIZE-1:0] BETA_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -99,7 +93,8 @@ module dnc_write_strength(
 
   // SCALAR ONEPLUS
   ntm_scalar_oneplus_function #(
-    .DATA_SIZE(DATA_SIZE))
+    .DATA_SIZE(DATA_SIZE)
+  )
   ntm_scalar_oneplus_function_i(
     // GLOBAL
     .CLK(CLK),

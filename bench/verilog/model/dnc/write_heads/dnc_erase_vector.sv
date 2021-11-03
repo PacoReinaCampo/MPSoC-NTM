@@ -37,34 +37,25 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_erase_vector(
-  CLK,
-  RST,
-  START,
-  READY,
-  E_IN_ENABLE,
-  E_OUT_ENABLE,
-  SIZE_W_IN,
-  E_IN,
-  E_OUT
-);
+module dnc_erase_vector #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
+    input E_IN_ENABLE,  // for k in 0 to W-1
+    output E_OUT_ENABLE,  // for k in 0 to W-1
 
-  // GLOBAL
-  input CLK;
-  input RST;
-
-  // CONTROL
-  input START;
-  output READY;
-  input E_IN_ENABLE;  // for k in 0 to W-1
-  output E_OUT_ENABLE;  // for k in 0 to W-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_W_IN;
-  input [DATA_SIZE-1:0] E_IN;
-  output E_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_W_IN,
+    input [DATA_SIZE-1:0] E_IN,
+    output E_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

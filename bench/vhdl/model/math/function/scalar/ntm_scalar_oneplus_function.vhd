@@ -73,7 +73,7 @@ architecture ntm_scalar_oneplus_function_architecture of ntm_scalar_oneplus_func
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     VECTOR_ADDER_STATE,                 -- STEP 1
-    VECTOR_MULTIPLIER_STATE,            -- STEP 2
+    VECTOR_EXPONENTIATOR_STATE,         -- STEP 2
     ENDER_STATE                         -- STEP 3
     );
 
@@ -104,16 +104,27 @@ architecture ntm_scalar_oneplus_function_architecture of ntm_scalar_oneplus_func
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR MULTIPLIER
+  -- SCALAR EXPONENTIATOR
   -- CONTROL
-  signal start_scalar_multiplier : std_logic;
-  signal ready_scalar_multiplier : std_logic;
+  signal start_scalar_exponentiator : std_logic;
+  signal ready_scalar_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- SCALAR LOGARITHM
+  signal start_scalar_logarithm : std_logic;
+  signal ready_scalar_logarithm : std_logic;
+
+  -- CONTROL
+  -- DATA
+  signal modulo_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -133,20 +144,20 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>            -- STEP 0
+        when STARTER_STATE =>               -- STEP 0
           -- Control Outputs
           READY <= '0';
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            controller_ctrl_fsm_int <= VECTOR_EXPONENTIATOR_STATE;
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
+        when VECTOR_EXPONENTIATOR_STATE =>  -- STEP 1
 
-        when VECTOR_ADDER_STATE =>       -- STEP 2
+        when VECTOR_ADDER_STATE =>          -- STEP 2
 
-        when ENDER_STATE =>              -- STEP 3
+        when ENDER_STATE =>                 -- STEP 3
 
         when others =>
           -- FSM Control
@@ -178,8 +189,8 @@ begin
       DATA_OUT  => data_out_scalar_adder
       );
 
-  -- SCALAR MULTIPLIER
-  ntm_scalar_multiplier_i : ntm_scalar_multiplier
+  -- SCALAR EXPONENTIATOR
+  ntm_scalar_exponentiator_i : ntm_scalar_exponentiator
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -189,14 +200,35 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_multiplier,
-      READY => ready_scalar_multiplier,
+      START => start_scalar_exponentiator,
+      READY => ready_scalar_exponentiator,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_multiplier,
-      DATA_A_IN => data_a_in_scalar_multiplier,
-      DATA_B_IN => data_b_in_scalar_multiplier,
-      DATA_OUT  => data_out_scalar_multiplier
+      MODULO_IN => modulo_in_scalar_exponentiator,
+      DATA_A_IN => data_a_in_scalar_exponentiator,
+      DATA_B_IN => data_b_in_scalar_exponentiator,
+      DATA_OUT  => data_out_scalar_exponentiator
+      );
+
+  -- SCALAR LOGARITHM
+  scalar_logarithm : ntm_scalar_logarithm
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_logarithm,
+      READY => ready_scalar_logarithm,
+
+      -- DATA
+      MODULO_IN => modulo_in_scalar_logarithm,
+      DATA_A_IN => data_a_in_scalar_logarithm,
+      DATA_B_IN => data_b_in_scalar_logarithm,
+      DATA_OUT  => data_out_scalar_logarithm
       );
 
 end architecture;

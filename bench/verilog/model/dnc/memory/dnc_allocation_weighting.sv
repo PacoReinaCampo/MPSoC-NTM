@@ -37,39 +37,28 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_allocation_weighting(
-  CLK,
-  RST,
-  START,
-  READY,
-  PHI_IN_ENABLE,
-  U_IN_ENABLE,
-  A_OUT_ENABLE,
-  SIZE_N_IN,
-  PHI_IN,
-  U_IN,
-  A_OUT
-);
+module dnc_allocation_weighting #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input PHI_IN_ENABLE,  // for j in 0 to N-1
+    input U_IN_ENABLE,  // for j in 0 to N-1
+    output A_OUT_ENABLE,  // for j in 0 to N-1
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input PHI_IN_ENABLE;  // for j in 0 to N-1
-  input U_IN_ENABLE;  // for j in 0 to N-1
-  output A_OUT_ENABLE;  // for j in 0 to N-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_N_IN;
-  input [DATA_SIZE-1:0] PHI_IN;
-  input [DATA_SIZE-1:0] U_IN;
-  output [DATA_SIZE-1:0] A_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_N_IN,
+    input [DATA_SIZE-1:0] PHI_IN,
+    input [DATA_SIZE-1:0] U_IN,
+    output [DATA_SIZE-1:0] A_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

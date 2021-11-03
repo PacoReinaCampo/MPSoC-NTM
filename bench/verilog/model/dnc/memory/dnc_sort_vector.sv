@@ -37,35 +37,26 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_sort_vector(
-  CLK,
-  RST,
-  START,
-  READY,
-  U_IN_ENABLE,
-  PHI_OUT_ENABLE,
-  SIZE_N_IN,
-  U_IN,
-  PHI_OUT
-);
+module dnc_sort_vector #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input U_IN_ENABLE,  // for j in 0 to N-1
+    output PHI_OUT_ENABLE,  // for j in 0 to N-1
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input U_IN_ENABLE;  // for j in 0 to N-1
-  output PHI_OUT_ENABLE;  // for j in 0 to N-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_N_IN;
-  input [DATA_SIZE-1:0] U_IN;
-  output [DATA_SIZE-1:0] PHI_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_N_IN,
+    input [DATA_SIZE-1:0] U_IN,
+    output [DATA_SIZE-1:0] PHI_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

@@ -37,49 +37,33 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_read_vectors(
-  CLK,
-  RST,
-  START,
-  READY,
-  M_IN_J_ENABLE,
-  M_IN_K_ENABLE,
-  W_IN_I_ENABLE,
-  W_IN_J_ENABLE,
-  R_OUT_I_ENABLE,
-  R_OUT_K_ENABLE,
-  SIZE_R_IN,
-  SIZE_N_IN,
-  SIZE_W_IN,
-  M_IN,
-  W_IN,
-  R_OUT
-);
+module dnc_read_vectors #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input M_IN_J_ENABLE,  // for j in 0 to N-1
+    input M_IN_K_ENABLE,  // for k in 0 to W-1
+    input W_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    input W_IN_J_ENABLE,  // for j in 0 to N-1
+    output R_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    output R_OUT_K_ENABLE,  // for k in 0 to W-1
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input M_IN_J_ENABLE;  // for j in 0 to N-1
-  input M_IN_K_ENABLE;  // for k in 0 to W-1
-  input W_IN_I_ENABLE;  // for i in 0 to R-1 (read heads flow)
-  input W_IN_J_ENABLE;  // for j in 0 to N-1
-  output R_OUT_I_ENABLE;  // for i in 0 to R-1 (read heads flow)
-  output R_OUT_K_ENABLE;  // for k in 0 to W-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_R_IN;
-  input [DATA_SIZE-1:0] SIZE_N_IN;
-  input [DATA_SIZE-1:0] SIZE_W_IN;
-  input [DATA_SIZE-1:0] M_IN;
-  input [DATA_SIZE-1:0] W_IN;
-  output [DATA_SIZE-1:0] R_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_R_IN,
+    input [DATA_SIZE-1:0] SIZE_N_IN,
+    input [DATA_SIZE-1:0] SIZE_W_IN,
+    input [DATA_SIZE-1:0] M_IN,
+    input [DATA_SIZE-1:0] W_IN,
+    output [DATA_SIZE-1:0] R_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

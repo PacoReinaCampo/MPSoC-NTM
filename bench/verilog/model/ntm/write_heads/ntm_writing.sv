@@ -37,43 +37,30 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_writing(
-  CLK,
-  RST,
-  START,
-  READY,
-  M_IN_ENABLE,
-  A_IN_ENABLE,
-  M_OUT_ENABLE,
-  SIZE_N_IN,
-  SIZE_W_IN,
-  M_IN,
-  A_IN,
-  W_IN,
-  M_OUT
-);
+module ntm_writing #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input M_IN_ENABLE,
+    input A_IN_ENABLE,
+    input M_OUT_ENABLE,
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input M_IN_ENABLE;
-  input A_IN_ENABLE;
-  input M_OUT_ENABLE;
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_N_IN;
-  input [DATA_SIZE-1:0] SIZE_W_IN;
-  input [DATA_SIZE-1:0] M_IN;
-  input [DATA_SIZE-1:0] A_IN;
-  input [DATA_SIZE-1:0] W_IN;
-  output [DATA_SIZE-1:0] M_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_N_IN,
+    input [DATA_SIZE-1:0] SIZE_W_IN,
+    input [DATA_SIZE-1:0] M_IN,
+    input [DATA_SIZE-1:0] A_IN,
+    input [DATA_SIZE-1:0] W_IN,
+    output [DATA_SIZE-1:0] M_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

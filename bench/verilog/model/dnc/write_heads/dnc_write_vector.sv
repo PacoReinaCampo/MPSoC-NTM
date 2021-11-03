@@ -37,35 +37,26 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_write_vector(
-  CLK,
-  RST,
-  START,
-  READY,
-  V_IN_ENABLE,
-  V_OUT_ENABLE,
-  SIZE_W_IN,
-  V_IN,
-  V_OUT
-);
+module dnc_write_vector #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output reg READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input V_IN_ENABLE,  // for k in 0 to W-1
+    output reg V_OUT_ENABLE,  // for k in 0 to W-1
 
-  // CONTROL
-  input START;
-  output reg READY;
-
-  input V_IN_ENABLE;  // for k in 0 to W-1
-  output reg V_OUT_ENABLE;  // for k in 0 to W-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_W_IN;
-  input [DATA_SIZE-1:0] V_IN;
-  output reg [DATA_SIZE-1:0] V_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_W_IN,
+    input [DATA_SIZE-1:0] V_IN,
+    output reg [DATA_SIZE-1:0] V_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

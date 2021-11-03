@@ -37,43 +37,30 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_usage_vector(
-  CLK,
-  RST,
-  START,
-  READY,
-  U_IN_ENABLE,
-  W_IN_ENABLE,
-  PSI_IN_ENABLE,
-  U_OUT_ENABLE,
-  SIZE_N_IN,
-  U_IN,
-  W_IN,
-  PSI_IN,
-  U_OUT
-);
+module dnc_usage_vector #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input U_IN_ENABLE,  // for j in 0 to N-1
+    input W_IN_ENABLE,  // for j in 0 to N-1
+    input PSI_IN_ENABLE,  // for j in 0 to N-1
+    output U_OUT_ENABLE,  // for j in 0 to N-1
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input U_IN_ENABLE;  // for j in 0 to N-1
-  input W_IN_ENABLE;  // for j in 0 to N-1
-  input PSI_IN_ENABLE;  // for j in 0 to N-1
-  output U_OUT_ENABLE;  // for j in 0 to N-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_N_IN;
-  input [DATA_SIZE-1:0] U_IN;
-  input [DATA_SIZE-1:0] W_IN;
-  input [DATA_SIZE-1:0] PSI_IN;
-  output [DATA_SIZE-1:0] U_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_N_IN,
+    input [DATA_SIZE-1:0] U_IN,
+    input [DATA_SIZE-1:0] W_IN,
+    input [DATA_SIZE-1:0] PSI_IN,
+    output [DATA_SIZE-1:0] U_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

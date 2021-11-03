@@ -103,7 +103,7 @@ architecture ntm_forget_gate_vector_architecture of ntm_forget_gate_vector is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    MATRIX_PRODUCT_STATE,           -- STEP 1
+    MATRIX_PRODUCT_STATE,               -- STEP 1
     VECTOR_ADDER_STATE,                 -- STEP 2
     VECTOR_LOGISTIC_STATE,              -- STEP 3
     ENDER_STATE                         -- STEP 4
@@ -147,25 +147,23 @@ architecture ntm_forget_gate_vector_architecture of ntm_forget_gate_vector is
   signal start_matrix_product : std_logic;
   signal ready_matrix_product : std_logic;
 
-  signal data_a_in_matrix_enable_matrix_product : std_logic;
-  signal data_a_in_vector_enable_matrix_product : std_logic;
-  signal data_a_in_scalar_enable_matrix_product : std_logic;
-  signal data_b_in_matrix_enable_matrix_product : std_logic;
-  signal data_b_in_vector_enable_matrix_product : std_logic;
-  signal data_b_in_scalar_enable_matrix_product : std_logic;
+  signal data_a_in_i_enable_matrix_product : std_logic;
+  signal data_a_in_j_enable_matrix_product : std_logic;
+  signal data_b_in_i_enable_matrix_product : std_logic;
+  signal data_b_in_j_enable_matrix_product : std_logic;
 
-  signal data_out_matrix_enable_matrix_product : std_logic;
-  signal data_out_vector_enable_matrix_product : std_logic;
-  signal data_out_scalar_enable_matrix_product : std_logic;
+  signal data_out_i_enable_matrix_product : std_logic;
+  signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_j_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_product  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_i_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_b_i_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_b_j_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR LOGISTIC
   -- CONTROL
@@ -256,7 +254,7 @@ begin
       );
 
   -- MATRIX PRODUCT
-  matrix_product_function : ntm_matrix_product_function
+  matrix_product : ntm_matrix_product
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -269,27 +267,24 @@ begin
       START => start_matrix_product,
       READY => ready_matrix_product,
 
-      DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_product,
-      DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_product,
-      DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_product,
-      DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_product,
-      DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_product,
-      DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_product,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_product,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
 
-      DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_product,
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_product,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_product,
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MODULO_IN => modulo_in_matrix_product,
-      SIZE_I_IN => size_i_in_matrix_product,
-      SIZE_J_IN => size_j_in_matrix_product,
-      LENGTH_IN => length_in_matrix_product,
-      DATA_A_IN => data_a_in_matrix_product,
-      DATA_B_IN => data_b_in_matrix_product,
-      DATA_OUT  => data_out_matrix_product
+      MODULO_IN   => modulo_in_matrix_product,
+      SIZE_A_I_IN => size_a_i_in_matrix_product,
+      SIZE_A_J_IN => size_a_j_in_matrix_product,
+      SIZE_B_I_IN => size_b_i_in_matrix_product,
+      SIZE_B_J_IN => size_b_j_in_matrix_product,
+      DATA_A_IN   => data_a_in_matrix_product,
+      DATA_B_IN   => data_b_in_matrix_product,
+      DATA_OUT    => data_out_matrix_product
       );
-
   -- VECTOR LOGISTIC
   vector_logistic_function : ntm_vector_logistic_function
     generic map (

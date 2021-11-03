@@ -37,59 +37,38 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_read_weighting(
-  CLK,
-  RST,
-  START,
-  READY,
-  PI_IN_I_ENABLE,
-  PI_IN_P_ENABLE,
-  B_IN_I_ENABLE,
-  B_IN_J_ENABLE,
-  C_IN_I_ENABLE,
-  C_IN_J_ENABLE,
-  F_IN_I_ENABLE,
-  F_IN_J_ENABLE,
-  W_OUT_I_ENABLE,
-  W_OUT_J_ENABLE,
-  SIZE_R_IN,
-  SIZE_N_IN,
-  PI_IN,
-  B_IN,
-  C_IN,
-  F_IN,
-  W_OUT
-);
-
-  parameter DATA_SIZE=512;
-
+module dnc_read_weighting #(
+  parameter DATA_SIZE=512
+)
+  (
   // GLOBAL
-  input CLK;
-  input RST;
+    input CLK,
+    input RST,
 
   // CONTROL
-  input START;
-  output READY;
+    input START,
+    output READY,
 
-  input PI_IN_I_ENABLE;  // for i in 0 to R-1
-  input PI_IN_P_ENABLE;  // for p in 0 to 2
-  input B_IN_I_ENABLE;  // for i in 0 to R-1
-  input B_IN_J_ENABLE;  // for j in 0 to N-1
-  input C_IN_I_ENABLE;  // for i in 0 to R-1
-  input C_IN_J_ENABLE;  // for j in 0 to N-1
-  input F_IN_I_ENABLE;  // for i in 0 to R-1
-  input F_IN_J_ENABLE;  // for j in 0 to N-1
-  output W_OUT_I_ENABLE;  // for i in 0 to R-1
-  output W_OUT_J_ENABLE;  // for j in 0 to N-1
+    input PI_IN_I_ENABLE,  // for i in 0 to R-1
+    input PI_IN_P_ENABLE,  // for p in 0 to 2
+    input B_IN_I_ENABLE,  // for i in 0 to R-1
+    input B_IN_J_ENABLE,  // for j in 0 to N-1
+    input C_IN_I_ENABLE,  // for i in 0 to R-1
+    input C_IN_J_ENABLE,  // for j in 0 to N-1
+    input F_IN_I_ENABLE,  // for i in 0 to R-1
+    input F_IN_J_ENABLE,  // for j in 0 to N-1
+    output W_OUT_I_ENABLE,  // for i in 0 to R-1
+    output W_OUT_J_ENABLE,  // for j in 0 to N-1
 
   // DATA
-  input [DATA_SIZE-1:0] SIZE_R_IN;
-  input [DATA_SIZE-1:0] SIZE_N_IN;
-  input [DATA_SIZE-1:0] PI_IN;
-  input [DATA_SIZE-1:0] B_IN;
-  input [DATA_SIZE-1:0] C_IN;
-  input F_IN;
-  output [DATA_SIZE-1:0] W_OUT;
+    input [DATA_SIZE-1:0] SIZE_R_IN,
+    input [DATA_SIZE-1:0] SIZE_N_IN,
+    input [DATA_SIZE-1:0] PI_IN,
+    input [DATA_SIZE-1:0] B_IN,
+    input [DATA_SIZE-1:0] C_IN,
+    input F_IN,
+    output [DATA_SIZE-1:0] W_OUT
+    );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

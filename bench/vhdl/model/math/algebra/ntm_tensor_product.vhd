@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_vector_product is
+entity ntm_tensor_product is
   generic (
     DATA_SIZE : integer := 512;
 
@@ -59,10 +59,16 @@ entity ntm_vector_product is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_A_IN_ENABLE : in std_logic;
-    DATA_B_IN_ENABLE : in std_logic;
+    DATA_A_IN_I_ENABLE : in std_logic;
+    DATA_A_IN_J_ENABLE : in std_logic;
+    DATA_A_IN_K_ENABLE : in std_logic;
+    DATA_B_IN_I_ENABLE : in std_logic;
+    DATA_B_IN_J_ENABLE : in std_logic;
+    DATA_B_IN_K_ENABLE : in std_logic;
 
-    DATA_OUT_ENABLE : out std_logic;
+    DATA_OUT_I_ENABLE : out std_logic;
+    DATA_OUT_J_ENABLE : out std_logic;
+    DATA_OUT_K_ENABLE : out std_logic;
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -72,7 +78,7 @@ entity ntm_vector_product is
     );
 end entity;
 
-architecture ntm_vector_product_architecture of ntm_vector_product is
+architecture ntm_tensor_product_architecture of ntm_tensor_product is
 
   -----------------------------------------------------------------------
   -- Types

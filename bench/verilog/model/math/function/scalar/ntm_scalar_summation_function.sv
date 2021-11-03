@@ -73,8 +73,9 @@ module ntm_scalar_summation_function(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter STARTER_STATE = 0;
-  parameter ENDER_STATE = 1;
+  parameter [1:0] STARTER_STATE = 0;
+  parameter [1:0] INPUT_STATE = 1;
+  parameter [1:0] ENDER_STATE = 2;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -88,15 +89,16 @@ module ntm_scalar_summation_function(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg summation_ctrl_fsm_int;
+  reg [1:0] summation_ctrl_fsm_int;
 
   // Internal Signals
   reg [DATA_SIZE-1:0] index_loop;
 
   // SCALAR ADDER
   // CONTROL
-  wire start_scalar_adder;
+  reg start_scalar_adder;
   wire ready_scalar_adder;
+
   reg operation_scalar_adder;
 
   // DATA
@@ -116,41 +118,46 @@ module ntm_scalar_summation_function(
 
       // Control Outputs
       READY <= 1'b0;
-      DATA_OUT_ENABLE <= 1'b0;
 
       // Assignations
       index_loop <= ZERO;
-      operation_scalar_adder <= 1'b0;
-    end else begin
+    end
+    else begin
       case(summation_ctrl_fsm_int)
-        STARTER_STATE : begin
-          // STEP 0
+        STARTER_STATE : begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
-          DATA_OUT_ENABLE <= 1'b0;
 
           if(START == 1'b1) begin
             // Assignations
             index_loop <= ZERO;
-            operation_scalar_adder <= 1'b0;
-
-            // Data Outputs
-            modulo_in_scalar_adder <= MODULO_IN;
 
             // FSM Control
-            summation_ctrl_fsm_int <= ENDER_STATE;
+            summation_ctrl_fsm_int <= INPUT_STATE;
           end
         end
-        ENDER_STATE : begin
-          // STEP 1
+        INPUT_STATE : begin  // STEP 1
           if(DATA_IN_ENABLE == 1'b1) begin
+            // Data Inputs
+            modulo_in_scalar_adder <= MODULO_IN;
+
+            data_a_in_scalar_adder <= DATA_IN;
+            data_b_in_scalar_adder <= data_out_scalar_adder;
+
+            // Control Internal
+            start_scalar_adder <= 1'b1;
+
+              // FSM Control
+            summation_ctrl_fsm_int <= ENDER_STATE;
+          end
+          // Control Outputs
+          DATA_OUT_ENABLE <= 1'b0;
+        end
+        ENDER_STATE : begin  // STEP 2
+          if(ready_scalar_adder == 1'b1) begin
             if(index_loop == (LENGTH_IN - ONE)) begin
               // Control Outputs
               READY <= 1'b1;
-              DATA_OUT_ENABLE <= 1'b1;
-
-              // Data Outputs
-              DATA_OUT <= data_out_scalar_adder;
 
               // FSM Control
               summation_ctrl_fsm_int <= STARTER_STATE;
@@ -158,10 +165,20 @@ module ntm_scalar_summation_function(
             else begin
               // Control Internal
               index_loop <= (index_loop + ONE);
+
+              // FSM Control
+              summation_ctrl_fsm_int <= INPUT_STATE;
             end
+
             // Data Outputs
-            data_a_in_scalar_adder <= DATA_IN;
-            data_b_in_scalar_adder <= data_out_scalar_adder;
+            DATA_OUT <= data_out_scalar_adder;
+
+            // Control Outputs
+            DATA_OUT_ENABLE <= 1'b1;
+          end
+          else begin
+            // Control Internal
+            start_scalar_adder <= 1'b0;
           end
         end
         default : begin

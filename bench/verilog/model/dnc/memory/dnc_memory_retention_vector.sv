@@ -37,43 +37,30 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_memory_retention_vector(
-  CLK,
-  RST,
-  START,
-  READY,
-  F_IN_ENABLE,
-  W_IN_I_ENABLE,
-  W_IN_J_ENABLE,
-  PSI_OUT_ENABLE,
-  SIZE_R_IN,
-  SIZE_N_IN,
-  F_IN,
-  W_IN,
-  PSI_OUT
-);
+module dnc_memory_retention_vector #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input F_IN_ENABLE,  // for i in 0 to R-1
+    input W_IN_I_ENABLE,  // for i in 0 to R-1
+    input W_IN_J_ENABLE,  // for j in 0 to N-1
+    output PSI_OUT_ENABLE,  // for j in 0 to N-1
 
-  // CONTROL
-  input START;
-  output READY;
-
-  input F_IN_ENABLE;  // for i in 0 to R-1
-  input W_IN_I_ENABLE;  // for i in 0 to R-1
-  input W_IN_J_ENABLE;  // for j in 0 to N-1
-  output PSI_OUT_ENABLE;  // for j in 0 to N-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_R_IN;
-  input [DATA_SIZE-1:0] SIZE_N_IN;
-  input F_IN;
-  input [DATA_SIZE-1:0] W_IN;
-  output [DATA_SIZE-1:0] PSI_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_R_IN,
+    input [DATA_SIZE-1:0] SIZE_N_IN,
+    input F_IN,
+    input [DATA_SIZE-1:0] W_IN,
+    output [DATA_SIZE-1:0] PSI_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types

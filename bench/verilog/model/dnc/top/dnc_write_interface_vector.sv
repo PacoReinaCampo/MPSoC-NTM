@@ -37,96 +37,63 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module dnc_write_interface_vector(
-  CLK,
-  RST,
-  START,
-  READY,
-  WK_IN_L_ENABLE,
-  WK_IN_K_ENABLE,
-  K_OUT_ENABLE,
-  WBETA_IN_ENABLE,
-  WE_IN_L_ENABLE,
-  WE_IN_K_ENABLE,
-  E_OUT_ENABLE,
-  WV_IN_L_ENABLE,
-  WV_IN_K_ENABLE,
-  V_OUT_ENABLE,
-  WGA_IN_ENABLE,
-  WGW_IN_ENABLE,
-  H_IN_ENABLE,
-  SIZE_W_IN,
-  SIZE_L_IN,
-  SIZE_R_IN,
-  WK_IN,
-  WBETA_IN,
-  WE_IN,
-  WV_IN,
-  WGA_IN,
-  WGW_IN,
-  H_IN,
-  K_OUT,
-  BETA_OUT,
-  E_OUT,
-  V_OUT,
-  GA_OUT,
-  GW_OUT
-);
+module dnc_write_interface_vector #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    // Write Key
+    input WK_IN_L_ENABLE,  // for l in 0 to L-1
+    input WK_IN_K_ENABLE,  // for k in 0 to W-1
+    output K_OUT_ENABLE,  // for k in 0 to W-1
 
-  // CONTROL
-  input START;
-  output READY;
+    // Write Strength
+    input WBETA_IN_ENABLE,  // for l in 0 to L-1
 
-  // Write Key
-  input WK_IN_L_ENABLE;  // for l in 0 to L-1
-  input WK_IN_K_ENABLE;  // for k in 0 to W-1
-  output K_OUT_ENABLE;  // for k in 0 to W-1
+    // Erase Vector
+    input WE_IN_L_ENABLE,  // for l in 0 to L-1
+    input WE_IN_K_ENABLE,  // for k in 0 to W-1
+    output E_OUT_ENABLE,  // for k in 0 to W-1
 
-  // Write Strength
-  input WBETA_IN_ENABLE;  // for l in 0 to L-1
+    // Write Vector
+    input WV_IN_L_ENABLE,  // for l in 0 to L-1
+    input WV_IN_K_ENABLE,  // for k in 0 to W-1
+    output V_OUT_ENABLE,  // for k in 0 to W-1
 
-  // Erase Vector
-  input WE_IN_L_ENABLE;  // for l in 0 to L-1
-  input WE_IN_K_ENABLE;  // for k in 0 to W-1
-  output E_OUT_ENABLE;  // for k in 0 to W-1
+    // Allocation Gate
+    input WGA_IN_ENABLE,  // for l in 0 to L-1
 
-  // Write Vector
-  input WV_IN_L_ENABLE;  // for l in 0 to L-1
-  input WV_IN_K_ENABLE;  // for k in 0 to W-1
-  output V_OUT_ENABLE;  // for k in 0 to W-1
+    // Write Gate
+    input WGW_IN_ENABLE,  // for l in 0 to L-1
 
-  // Allocation Gate
-  input WGA_IN_ENABLE;  // for l in 0 to L-1
+    // Hidden State
+    input H_IN_ENABLE,  // for l in 0 to L-1
 
-  // Write Gate
-  input WGW_IN_ENABLE;  // for l in 0 to L-1
-
-  // Hidden State
-  input H_IN_ENABLE;  // for l in 0 to L-1
-
-  // DATA
-  input [DATA_SIZE-1:0] SIZE_W_IN;
-  input [DATA_SIZE-1:0] SIZE_L_IN;
-  input [DATA_SIZE-1:0] SIZE_R_IN;
-  input [DATA_SIZE-1:0] WK_IN;
-  input [DATA_SIZE-1:0] WBETA_IN;
-  input [DATA_SIZE-1:0] WE_IN;
-  input [DATA_SIZE-1:0] WV_IN;
-  input [DATA_SIZE-1:0] WGA_IN;
-  input [DATA_SIZE-1:0] WGW_IN;
-  input [DATA_SIZE-1:0] H_IN;
-  output [DATA_SIZE-1:0] K_OUT;
-  output [DATA_SIZE-1:0] BETA_OUT;
-  output [DATA_SIZE-1:0] E_OUT;
-  output [DATA_SIZE-1:0] V_OUT;
-  output [DATA_SIZE-1:0] GA_OUT;
-  output [DATA_SIZE-1:0] GW_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] SIZE_W_IN,
+    input [DATA_SIZE-1:0] SIZE_L_IN,
+    input [DATA_SIZE-1:0] SIZE_R_IN,
+    input [DATA_SIZE-1:0] WK_IN,
+    input [DATA_SIZE-1:0] WBETA_IN,
+    input [DATA_SIZE-1:0] WE_IN,
+    input [DATA_SIZE-1:0] WV_IN,
+    input [DATA_SIZE-1:0] WGA_IN,
+    input [DATA_SIZE-1:0] WGW_IN,
+    input [DATA_SIZE-1:0] H_IN,
+    output [DATA_SIZE-1:0] K_OUT,
+    output [DATA_SIZE-1:0] BETA_OUT,
+    output [DATA_SIZE-1:0] E_OUT,
+    output [DATA_SIZE-1:0] V_OUT,
+    output [DATA_SIZE-1:0] GA_OUT,
+    output [DATA_SIZE-1:0] GW_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
