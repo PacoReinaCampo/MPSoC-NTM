@@ -185,6 +185,8 @@ module ntm_controller #(
   ///////////////////////////////////////////////////////////////////////
 
   // h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + b(t;l))
+
+  // CONTROL
   always @(posedge CLK or posedge RST) begin
     if((RST == 1'b0)) begin
       // Data Outputs

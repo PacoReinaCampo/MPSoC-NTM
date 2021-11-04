@@ -37,30 +37,23 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_mod(
-  CLK,
-  RST,
-  START,
-  READY,
-  MODULO_IN,
-  DATA_IN,
-  DATA_OUT
-);
+module ntm_scalar_mod #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output reg READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
-
-  // CONTROL
-  input START;
-  output reg READY;
-
-  // DATA
-  input [DATA_SIZE-1:0] MODULO_IN;
-  input [DATA_SIZE-1:0] DATA_IN;
-  output reg [DATA_SIZE-1:0] DATA_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] MODULO_IN,
+    input [DATA_SIZE-1:0] DATA_IN,
+    output reg [DATA_SIZE-1:0] DATA_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -90,8 +83,10 @@ module ntm_scalar_mod(
   ///////////////////////////////////////////////////////////////////////
 
   // DATA_OUT = DATA_IN mod MODULO_IN
+
+  // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       DATA_OUT <= ZERO;
 
@@ -102,8 +97,7 @@ module ntm_scalar_mod(
       mod_int <= ZERO;
     end else begin
       case(mod_ctrl_fsm_int)
-        STARTER_STATE : begin
-          // STEP 0
+        STARTER_STATE : begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
           if(START == 1'b1) begin
@@ -114,8 +108,7 @@ module ntm_scalar_mod(
             mod_ctrl_fsm_int <= ENDER_STATE;
           end
         end
-        ENDER_STATE : begin
-          // STEP 1
+        ENDER_STATE : begin  // STEP 1
           if(MODULO_IN > ZERO) begin
             if(mod_int > ZERO) begin
               if(mod_int == MODULO_IN) begin

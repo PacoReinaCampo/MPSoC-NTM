@@ -91,6 +91,8 @@ module dnc_read_keys #(
   ///////////////////////////////////////////////////////////////////////
 
   // k(t;i;k) = k^(t;i;k)
+
+  // CONTROL
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
@@ -104,8 +106,7 @@ module dnc_read_keys #(
       index_j_loop <= ZERO;
     end else begin
       case(read_keys_ctrl_fsm_int)
-        STARTER_STATE : begin
-          // STEP 0
+        STARTER_STATE : begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
           if(START == 1'b1) begin
@@ -117,9 +118,8 @@ module dnc_read_keys #(
             read_keys_ctrl_fsm_int <= ENDER_STATE;
           end
         end
-        ENDER_STATE : begin
-          // STEP 1
-          if((K_IN_I_ENABLE == 1'b1)) begin
+        ENDER_STATE : begin  // STEP 1
+          if(K_IN_I_ENABLE == 1'b1) begin
             // Control Internal
             if((index_i_loop < (SIZE_R_IN - ONE) && index_j_loop == (SIZE_W_IN - ONE))) begin
               index_i_loop <= (index_i_loop + ONE);
@@ -139,14 +139,14 @@ module dnc_read_keys #(
             K_OUT_K_ENABLE <= 1'b0;
           end
           if((K_IN_K_ENABLE == 1'b1)) begin
-            if((index_i_loop == (SIZE_R_IN - ONE) && index_j_loop == (SIZE_W_IN - ONE))) begin
+            if(index_i_loop == (SIZE_R_IN - ONE) && index_j_loop == (SIZE_W_IN - ONE)) begin
               // Control Outputs
               READY <= 1'b1;
 
               // FSM Control
               read_keys_ctrl_fsm_int <= STARTER_STATE;
             end
-            else if((index_i_loop < (SIZE_R_IN - ONE) && index_j_loop < (SIZE_W_IN - ONE))) begin
+            else if(index_i_loop < (SIZE_R_IN - ONE) && index_j_loop < (SIZE_W_IN - ONE)) begin
               // Control Internal
               index_j_loop <= (index_j_loop + ONE);
             end

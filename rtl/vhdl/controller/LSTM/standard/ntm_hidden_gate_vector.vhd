@@ -141,6 +141,7 @@ begin
 
   -- h(t=0;l) = 0; h(t;l=0) = 0
 
+  -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

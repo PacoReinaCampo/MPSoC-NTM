@@ -490,6 +490,7 @@ begin
   -- CONTROLLER
   -----------------------------------------------------------------------
 
+  -- CONTROLLER
   ntm_controller_i : ntm_controller
     generic map (
       DATA_SIZE => DATA_SIZE

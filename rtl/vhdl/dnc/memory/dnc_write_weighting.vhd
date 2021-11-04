@@ -147,6 +147,7 @@ begin
 
   -- w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - g(t))·c(t;j))
 
+  -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

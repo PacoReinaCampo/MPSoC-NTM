@@ -86,6 +86,7 @@ module dnc_write_key #(
   ///////////////////////////////////////////////////////////////////////
 
   // k(t;k) = k^(t;k)
+  // CONTROL
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
@@ -99,8 +100,7 @@ module dnc_write_key #(
     end
     else begin
       case(write_key_ctrl_fsm_int)
-        STARTER_STATE : begin
-          // STEP 0
+        STARTER_STATE : begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
           if(START == 1'b1) begin
@@ -111,9 +111,8 @@ module dnc_write_key #(
             write_key_ctrl_fsm_int <= ENDER_STATE;
           end
         end
-        ENDER_STATE : begin
-          // STEP 1
-          if((K_IN_ENABLE == 1'b1)) begin
+        ENDER_STATE : begin  // STEP 1
+          if(K_IN_ENABLE == 1'b1) begin
             if(index_loop == (SIZE_W_IN - ONE)) begin
               // Control Outputs
               READY <= 1'b1;

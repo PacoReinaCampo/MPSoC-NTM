@@ -118,8 +118,9 @@ module ntm_tensor_product #(
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = DATA_A_IN ^ DATA_B_IN
+  // DATA_OUT = DATA_A_IN · DATA_B_IN
 
+  // CONTROL
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs

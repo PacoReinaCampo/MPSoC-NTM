@@ -115,17 +115,6 @@ architecture ntm_scalar_oneplus_function_architecture of ntm_scalar_oneplus_func
   signal data_b_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR LOGARITHM
-  signal start_scalar_logarithm : std_logic;
-  signal ready_scalar_logarithm : std_logic;
-
-  -- CONTROL
-  -- DATA
-  signal modulo_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
-
 begin
 
   -----------------------------------------------------------------------
@@ -208,27 +197,6 @@ begin
       DATA_A_IN => data_a_in_scalar_exponentiator,
       DATA_B_IN => data_b_in_scalar_exponentiator,
       DATA_OUT  => data_out_scalar_exponentiator
-      );
-
-  -- SCALAR LOGARITHM
-  scalar_logarithm : ntm_scalar_logarithm
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_logarithm,
-      READY => ready_scalar_logarithm,
-
-      -- DATA
-      MODULO_IN => modulo_in_scalar_logarithm,
-      DATA_A_IN => data_a_in_scalar_logarithm,
-      DATA_B_IN => data_b_in_scalar_logarithm,
-      DATA_OUT  => data_out_scalar_logarithm
       );
 
 end architecture;

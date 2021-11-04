@@ -157,6 +157,7 @@ begin
 
   -- w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
 
+  -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

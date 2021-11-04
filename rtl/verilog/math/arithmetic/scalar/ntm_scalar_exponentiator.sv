@@ -37,32 +37,24 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_exponentiator(
-  CLK,
-  RST,
-  START,
-  READY,
-  MODULO_IN,
-  DATA_A_IN,
-  DATA_B_IN,
-  DATA_OUT
-);
+module ntm_scalar_exponentiator #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output reg READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
-
-  // CONTROL
-  input START;
-  output reg READY;
-
-  // DATA
-  input [DATA_SIZE-1:0] MODULO_IN;
-  input [DATA_SIZE-1:0] DATA_A_IN;
-  input [DATA_SIZE-1:0] DATA_B_IN;
-  output reg [DATA_SIZE-1:0] DATA_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] MODULO_IN,
+    input [DATA_SIZE-1:0] DATA_A_IN,
+    input [DATA_SIZE-1:0] DATA_B_IN,
+    output reg [DATA_SIZE-1:0] DATA_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -93,8 +85,10 @@ module ntm_scalar_exponentiator(
   ///////////////////////////////////////////////////////////////////////
 
   // DATA_OUT = exponentiator(DATA_A_IN, DATA_B_IN) mod MODULO_IN
+
+  // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       DATA_OUT <= ZERO;
 
@@ -106,16 +100,14 @@ module ntm_scalar_exponentiator(
     end
     else begin
       case(exponentiator_ctrl_fsm_int)
-        STARTER_STATE : begin
-          // STEP 0
+        STARTER_STATE : begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
           // FSM Control
           exponentiator_ctrl_fsm_int <= ENDER_STATE;
         end
-        ENDER_STATE : begin
-          // STEP 1
+        ENDER_STATE : begin  // STEP 1
           // FSM Control
           exponentiator_ctrl_fsm_int <= STARTER_STATE;
         end

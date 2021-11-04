@@ -165,6 +165,7 @@ begin
 
   -- psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
 
+  -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

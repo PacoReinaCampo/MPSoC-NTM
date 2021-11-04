@@ -37,30 +37,23 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_inverter(
-  CLK,
-  RST,
-  START,
-  READY,
-  MODULO_IN,
-  DATA_IN,
-  DATA_OUT
-);
+module ntm_scalar_inverter #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output reg READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
-
-  // CONTROL
-  input START;
-  output reg READY;
-
-  // DATA
-  input [DATA_SIZE-1:0] MODULO_IN;
-  input [DATA_SIZE-1:0] DATA_IN;
-  output reg [DATA_SIZE-1:0] DATA_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] MODULO_IN,
+    input [DATA_SIZE-1:0] DATA_IN,
+    output reg [DATA_SIZE-1:0] DATA_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -97,6 +90,8 @@ module ntm_scalar_inverter(
   ///////////////////////////////////////////////////////////////////////
 
   // 1 = DATA_OUT · DATA_IN mod MODULO_IN
+
+  // CONTROL
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
@@ -113,10 +108,10 @@ module ntm_scalar_inverter(
     end
     else begin
       case(inverter_ctrl_fsm_int)
-        STARTER_STATE : begin
-          // STEP 0
+        STARTER_STATE : begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
+
           if(START == 1'b1) begin
             // Assignation
             u_int <= {1'b0,DATA_IN};
@@ -129,8 +124,7 @@ module ntm_scalar_inverter(
             inverter_ctrl_fsm_int <= ENDER_STATE;
           end
         end
-        ENDER_STATE : begin
-          // STEP 1
+        ENDER_STATE : begin  // STEP 1
           if(u_int == ONE) begin
             if(x_int < {1'b0,MODULO_IN}) begin
               // Data Outputs
@@ -176,8 +170,7 @@ module ntm_scalar_inverter(
             inverter_ctrl_fsm_int <= CHECK_D_STATE;
           end
         end
-        CHECK_U_STATE : begin
-          // STEP 2
+        CHECK_U_STATE : begin  // STEP 2
           // Assignation
           u_int <= u_int;
           if(x_int[0] == 1'b0) begin
@@ -194,8 +187,7 @@ module ntm_scalar_inverter(
             inverter_ctrl_fsm_int <= CHECK_D_STATE;
           end
         end
-        CHECK_V_STATE : begin
-          // STEP 3
+        CHECK_V_STATE : begin  // STEP 3
           // Assignation
           v_int <= v_int;
           if(y_int[0] == 1'b0) begin
@@ -207,8 +199,7 @@ module ntm_scalar_inverter(
           // FSM Control
           inverter_ctrl_fsm_int <= CHECK_D_STATE;
         end
-        CHECK_D_STATE : begin
-          // STEP 4
+        CHECK_D_STATE : begin  // STEP 4
           // Assignation
           if(u_int < v_int) begin
             v_int <= (v_int - u_int);
