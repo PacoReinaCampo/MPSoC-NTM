@@ -162,6 +162,7 @@ begin
 
   -- y(t;y) = K(t;i;y;k)·r(t;i;k) + nu(t;y)
 
+  -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

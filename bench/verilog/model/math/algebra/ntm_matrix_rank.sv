@@ -116,6 +116,7 @@ module ntm_matrix_rank #(
 
   // DATA_OUT = rank(DATA_IN)
 
+  // CONTROL
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs

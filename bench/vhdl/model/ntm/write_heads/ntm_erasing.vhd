@@ -168,6 +168,7 @@ begin
 
   -- M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
 
+  -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

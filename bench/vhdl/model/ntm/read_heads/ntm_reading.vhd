@@ -141,6 +141,7 @@ begin
 
   -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
 
+  -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

@@ -169,6 +169,7 @@ begin
 
   -- C(M,k,beta)[i] = softmax(exponentiation(e,cosine(k,M)·beta))[i]
 
+  -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

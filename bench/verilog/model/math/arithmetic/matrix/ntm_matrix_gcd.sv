@@ -37,49 +37,33 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_gcd(
-  CLK,
-  RST,
-  START,
-  READY,
-  DATA_A_IN_I_ENABLE,
-  DATA_A_IN_J_ENABLE,
-  DATA_B_IN_I_ENABLE,
-  DATA_B_IN_J_ENABLE,
-  DATA_OUT_I_ENABLE,
-  DATA_OUT_J_ENABLE,
-  MODULO_IN,
-  SIZE_I_IN,
-  SIZE_J_IN,
-  DATA_A_IN,
-  DATA_B_IN,
-  DATA_OUT
-);
+module ntm_matrix_gcd #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output reg READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input DATA_A_IN_I_ENABLE,
+    input DATA_A_IN_J_ENABLE,
+    input DATA_B_IN_I_ENABLE,
+    input DATA_B_IN_J_ENABLE,
+    output reg DATA_OUT_I_ENABLE,
+    output reg DATA_OUT_J_ENABLE,
 
-  // CONTROL
-  input START;
-  output reg READY;
-
-  input DATA_A_IN_I_ENABLE;
-  input DATA_A_IN_J_ENABLE;
-  input DATA_B_IN_I_ENABLE;
-  input DATA_B_IN_J_ENABLE;
-  output reg DATA_OUT_I_ENABLE;
-  output reg DATA_OUT_J_ENABLE;
-
-  // DATA
-  input [DATA_SIZE-1:0] MODULO_IN;
-  input [DATA_SIZE-1:0] SIZE_I_IN;
-  input [DATA_SIZE-1:0] SIZE_J_IN;
-  input [DATA_SIZE-1:0] DATA_A_IN;
-  input [DATA_SIZE-1:0] DATA_B_IN;
-  output reg [DATA_SIZE-1:0] DATA_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] MODULO_IN,
+    input [DATA_SIZE-1:0] SIZE_I_IN,
+    input [DATA_SIZE-1:0] SIZE_J_IN,
+    input [DATA_SIZE-1:0] DATA_A_IN,
+    input [DATA_SIZE-1:0] DATA_B_IN,
+    output reg [DATA_SIZE-1:0] DATA_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -133,15 +117,20 @@ module ntm_matrix_gcd(
   ///////////////////////////////////////////////////////////////////////
 
   // DATA_OUT = gcd(DATA_A_IN, DATA_B_IN) mod MODULO_IN
+
+  // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       DATA_OUT <= ZERO;
+
       // Control Outputs
       READY <= 1'b0;
+
       // Assignations
       index_i_loop <= ZERO;
       index_j_loop <= ZERO;
+
       data_a_in_i_gcd_int <= 1'b0;
       data_a_in_j_gcd_int <= 1'b0;
       data_b_in_i_gcd_int <= 1'b0;
@@ -149,23 +138,24 @@ module ntm_matrix_gcd(
     end
 	else begin
       case(gcd_ctrl_fsm_int)
-        STARTER_STATE : begin
-          // STEP 0
+        STARTER_STATE : begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
+
           if(START == 1'b1) begin
             // Assignations
             index_i_loop <= ZERO;
             index_j_loop <= ZERO;
+
             // FSM Control
             gcd_ctrl_fsm_int <= INPUT_I_STATE;
           end
         end
-        INPUT_I_STATE : begin
-          // STEP 1
+        INPUT_I_STATE : begin  // STEP 1
           if(DATA_A_IN_I_ENABLE == 1'b1) begin
             // Data Inputs
             data_a_in_vector_gcd <= DATA_A_IN;
+
             // Control Internal
             data_a_in_enable_vector_gcd <= 1'b1;
             data_a_in_i_gcd_int <= 1'b1;
@@ -177,6 +167,7 @@ module ntm_matrix_gcd(
           if(DATA_B_IN_I_ENABLE == 1'b1) begin
             // Data Inputs
             data_b_in_vector_gcd <= DATA_B_IN;
+
             // Control Internal
             data_b_in_enable_vector_gcd <= 1'b1;
             data_b_in_i_gcd_int <= 1'b1;
@@ -185,13 +176,14 @@ module ntm_matrix_gcd(
             // Control Internal
             data_b_in_enable_vector_gcd <= 1'b0;
           end
-          if((data_a_in_i_gcd_int == 1'b1 && data_b_in_i_gcd_int == 1'b1)) begin
+          if(data_a_in_i_gcd_int == 1'b1 && data_b_in_i_gcd_int == 1'b1) begin
             if(index_i_loop == ZERO) begin
               // Control Internal
               start_vector_gcd <= 1'b1;
             end
             // Data Inputs
             modulo_in_vector_gcd <= MODULO_IN;
+
             // FSM Control
             gcd_ctrl_fsm_int <= ENDER_STATE;
           end
@@ -199,11 +191,11 @@ module ntm_matrix_gcd(
           DATA_OUT_I_ENABLE <= 1'b0;
           DATA_OUT_J_ENABLE <= 1'b0;
         end
-        INPUT_J_STATE : begin
-          // STEP 2
+        INPUT_J_STATE : begin  // STEP 2
           if(DATA_A_IN_J_ENABLE == 1'b1) begin
             // Data Inputs
             data_a_in_vector_gcd <= DATA_A_IN;
+
             // Control Internal
             data_a_in_enable_vector_gcd <= 1'b1;
             data_a_in_j_gcd_int <= 1'b1;
@@ -215,6 +207,7 @@ module ntm_matrix_gcd(
           if(DATA_B_IN_J_ENABLE == 1'b1) begin
             // Data Inputs
             data_b_in_vector_gcd <= DATA_B_IN;
+
             // Control Internal
             data_b_in_enable_vector_gcd <= 1'b1;
             data_b_in_j_gcd_int <= 1'b1;
@@ -231,37 +224,42 @@ module ntm_matrix_gcd(
             // Data Inputs
             modulo_in_vector_gcd <= MODULO_IN;
             size_in_vector_gcd <= SIZE_J_IN;
+
             // FSM Control
             gcd_ctrl_fsm_int <= ENDER_STATE;
           end
           // Control Outputs
           DATA_OUT_J_ENABLE <= 1'b0;
         end
-        ENDER_STATE : begin
-          // STEP 3
+        ENDER_STATE : begin  // STEP 3
           if((ready_vector_gcd == 1'b1)) begin
-            if(((index_i_loop == (SIZE_I_IN - ONE)) && (index_j_loop == (SIZE_J_IN - ONE)))) begin
+            if((index_i_loop == (SIZE_I_IN - ONE)) && (index_j_loop == (SIZE_J_IN - ONE))) begin
               // Control Outputs
               READY <= 1'b1;
               DATA_OUT_J_ENABLE <= 1'b1;
+
               // FSM Control
               gcd_ctrl_fsm_int <= STARTER_STATE;
             end
-            else if(((index_i_loop < (SIZE_I_IN - ONE)) && (index_j_loop == (SIZE_J_IN - ONE)))) begin
+            else if((index_i_loop < (SIZE_I_IN - ONE)) && (index_j_loop == (SIZE_J_IN - ONE))) begin
               // Control Internal
               index_i_loop <= (index_i_loop + ONE);
               index_j_loop <= ZERO;
+
               // Control Outputs
               DATA_OUT_I_ENABLE <= 1'b1;
               DATA_OUT_J_ENABLE <= 1'b1;
+
               // FSM Control
               gcd_ctrl_fsm_int <= INPUT_I_STATE;
             end
-            else if(((index_i_loop < (SIZE_I_IN - ONE)) && (index_j_loop < (SIZE_J_IN - ONE)))) begin
+            else if((index_i_loop < (SIZE_I_IN - ONE)) && (index_j_loop < (SIZE_J_IN - ONE))) begin
               // Control Internal
               index_j_loop <= (index_j_loop + ONE);
+
               // Control Outputs
               DATA_OUT_J_ENABLE <= 1'b1;
+
               // FSM Control
               gcd_ctrl_fsm_int <= INPUT_J_STATE;
             end
@@ -271,6 +269,7 @@ module ntm_matrix_gcd(
           else begin
             // Control Internal
             start_vector_gcd <= 1'b0;
+
             data_a_in_i_gcd_int <= 1'b0;
             data_a_in_j_gcd_int <= 1'b0;
             data_b_in_i_gcd_int <= 1'b0;

@@ -154,6 +154,7 @@ begin
 
   -- r(t;i;k) = transpose(M(t;j;k))·w(t;i;j)
 
+  -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

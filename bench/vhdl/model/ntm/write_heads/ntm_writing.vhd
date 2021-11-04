@@ -144,6 +144,7 @@ begin
 
   -- M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
 
+  -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

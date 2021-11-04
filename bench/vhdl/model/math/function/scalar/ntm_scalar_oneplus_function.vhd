@@ -121,6 +121,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

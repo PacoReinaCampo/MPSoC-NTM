@@ -87,6 +87,8 @@ module dnc_write_vector #(
   ///////////////////////////////////////////////////////////////////////
 
   // v(t;k) = v^(t;k)
+
+  // CONTROL
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs

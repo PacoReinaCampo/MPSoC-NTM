@@ -126,6 +126,7 @@ begin
 
   -- DATA_OUT = DATA_B_IN + DATA_A_IN mod MODULO_IN
 
+  -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

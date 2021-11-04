@@ -37,41 +37,29 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_vector_lcm(
-  CLK,
-  RST,
-  START,
-  READY,
-  DATA_A_IN_ENABLE,
-  DATA_B_IN_ENABLE,
-  DATA_OUT_ENABLE,
-  MODULO_IN,
-  SIZE_IN,
-  DATA_A_IN,
-  DATA_B_IN,
-  DATA_OUT
-);
+module ntm_vector_lcm #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output reg READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input DATA_A_IN_ENABLE,
+    input DATA_B_IN_ENABLE,
+    output reg DATA_OUT_ENABLE,
 
-  // CONTROL
-  input START;
-  output reg READY;
-
-  input DATA_A_IN_ENABLE;
-  input DATA_B_IN_ENABLE;
-  output reg DATA_OUT_ENABLE;
-
-  // DATA
-  input [DATA_SIZE-1:0] MODULO_IN;
-  input [DATA_SIZE-1:0] SIZE_IN;
-  input [DATA_SIZE-1:0] DATA_A_IN;
-  input [DATA_SIZE-1:0] DATA_B_IN;
-  output reg [DATA_SIZE-1:0] DATA_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] MODULO_IN,
+    input [DATA_SIZE-1:0] SIZE_IN,
+    input [DATA_SIZE-1:0] DATA_A_IN,
+    input [DATA_SIZE-1:0] DATA_B_IN,
+    output reg [DATA_SIZE-1:0] DATA_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -117,6 +105,8 @@ module ntm_vector_lcm(
   ///////////////////////////////////////////////////////////////////////
 
   // DATA_OUT = lcm(DATA_A_IN, DATA_B_IN) mod MODULO_IN
+
+  // CONTROL
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs

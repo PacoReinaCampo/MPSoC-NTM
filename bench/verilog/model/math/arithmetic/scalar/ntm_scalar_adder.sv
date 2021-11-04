@@ -37,35 +37,26 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_adder(
-  CLK,
-  RST,
-  START,
-  READY,
-  OPERATION,
-  MODULO_IN,
-  DATA_A_IN,
-  DATA_B_IN,
-  DATA_OUT
-);
+module ntm_scalar_adder #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output reg READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input OPERATION,
 
-  // CONTROL
-  input START;
-  output reg READY;
-
-  input OPERATION;
-
-  // DATA
-  input [DATA_SIZE-1:0] MODULO_IN;
-  input [DATA_SIZE-1:0] DATA_A_IN;
-  input [DATA_SIZE-1:0] DATA_B_IN;
-  output reg [DATA_SIZE-1:0] DATA_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] MODULO_IN,
+    input [DATA_SIZE-1:0] DATA_A_IN,
+    input [DATA_SIZE-1:0] DATA_B_IN,
+    output reg [DATA_SIZE-1:0] DATA_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -95,8 +86,10 @@ module ntm_scalar_adder(
   ///////////////////////////////////////////////////////////////////////
 
   // DATA_OUT = DATA_B_IN + DATA_A_IN mod MODULO_IN
+
+  // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       DATA_OUT <= ZERO;
 
@@ -107,8 +100,7 @@ module ntm_scalar_adder(
       adder_int <= ZERO;
     end else begin
       case(adder_ctrl_fsm_int)
-        STARTER_STATE : begin
-          // STEP 0
+        STARTER_STATE : begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
@@ -130,8 +122,7 @@ module ntm_scalar_adder(
             adder_ctrl_fsm_int <= ENDER_STATE;
           end
         end
-        ENDER_STATE : begin
-          // STEP 1
+        ENDER_STATE : begin  // STEP 1
           if(MODULO_IN > ZERO) begin
             if(DATA_A_IN > DATA_B_IN) begin
               if(adder_int == {1'b0,MODULO_IN}) begin

@@ -179,6 +179,7 @@ begin
   -- dU(t;l) = summation(dx(t+1;l) · h(t;l))[t in 0 to T-1]
   -- db(t;l) = summation(dx(t;l))[t in 0 to T]
 
+  -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

@@ -37,32 +37,24 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_gcd(
-  CLK,
-  RST,
-  START,
-  READY,
-  MODULO_IN,
-  DATA_A_IN,
-  DATA_B_IN,
-  DATA_OUT
-);
+module ntm_scalar_gcd #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output reg READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
-
-  // CONTROL
-  input START;
-  output reg READY;
-
-  // DATA
-  input [DATA_SIZE-1:0] MODULO_IN;
-  input [DATA_SIZE-1:0] DATA_A_IN;
-  input [DATA_SIZE-1:0] DATA_B_IN;
-  output reg [DATA_SIZE-1:0] DATA_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] MODULO_IN,
+    input [DATA_SIZE-1:0] DATA_A_IN,
+    input [DATA_SIZE-1:0] DATA_B_IN,
+    output reg [DATA_SIZE-1:0] DATA_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -93,8 +85,10 @@ module ntm_scalar_gcd(
   ///////////////////////////////////////////////////////////////////////
 
   // DATA_OUT = gcd(DATA_A_IN, DATA_B_IN) mod MODULO_IN
+
+  // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       DATA_OUT <= ZERO;
 
@@ -105,16 +99,14 @@ module ntm_scalar_gcd(
       gcd_int <= ZERO;
     end else begin
       case(gcd_ctrl_fsm_int)
-        STARTER_STATE : begin
-          // STEP 0
+        STARTER_STATE : begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
           // FSM Control
           gcd_ctrl_fsm_int <= ENDER_STATE;
         end
-        ENDER_STATE : begin
-          // STEP 1
+        ENDER_STATE : begin  // STEP 1
           // FSM Control
           gcd_ctrl_fsm_int <= STARTER_STATE;
         end

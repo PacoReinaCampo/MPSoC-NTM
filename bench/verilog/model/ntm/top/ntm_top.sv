@@ -283,6 +283,7 @@ module ntm_top #(
   // CONTROLLER
   ///////////////////////////////////////////////////////////////////////
 
+  // CONTROLLER
   ntm_controller #(
     .DATA_SIZE(DATA_SIZE)
   )

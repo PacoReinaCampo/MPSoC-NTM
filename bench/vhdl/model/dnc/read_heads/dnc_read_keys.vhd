@@ -110,6 +110,7 @@ begin
 
   -- k(t;i;k) = k^(t;i;k)
 
+  -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then

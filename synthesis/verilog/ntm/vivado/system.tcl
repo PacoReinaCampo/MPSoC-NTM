@@ -75,7 +75,7 @@ read_verilog -sv ../../../../rtl/verilog/math/algebra/ntm_matrix_product.sv
 read_verilog -sv ../../../../rtl/verilog/math/algebra/ntm_matrix_rank.sv
 read_verilog -sv ../../../../rtl/verilog/math/algebra/ntm_matrix_transpose.sv
 read_verilog -sv ../../../../rtl/verilog/math/algebra/ntm_scalar_product.sv
-read_verilog -sv ../../../../rtl/verilog/math/algebra/ntm_vector_product.sv
+read_verilog -sv ../../../../rtl/verilog/math/algebra/ntm_tensor_product.sv
 
 read_verilog -sv ../../../../rtl/verilog/math/function/scalar/ntm_scalar_convolution_function.sv
 read_verilog -sv ../../../../rtl/verilog/math/function/scalar/ntm_scalar_cosine_similarity_function.sv

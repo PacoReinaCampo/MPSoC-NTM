@@ -37,37 +37,27 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_multiplication_function(
-  CLK,
-  RST,
-  START,
-  READY,
-  DATA_IN_ENABLE,
-  DATA_OUT_ENABLE,
-  MODULO_IN,
-  LENGTH_IN,
-  DATA_IN,
-  DATA_OUT
-);
-
-  parameter DATA_SIZE=512;
-
+module ntm_scalar_multiplication_function #(
+  parameter DATA_SIZE=512
+)
+  (
   // GLOBAL
-  input CLK;
-  input RST;
+  input CLK,
+  input RST,
 
   // CONTROL
-  input START;
-  output reg READY;
+  input START,
+  output reg READY,
 
-  input DATA_IN_ENABLE;
-  output reg DATA_OUT_ENABLE;
+  input DATA_IN_ENABLE,
+  output reg DATA_OUT_ENABLE,
 
   // DATA
-  input [DATA_SIZE-1:0] MODULO_IN;
-  input [DATA_SIZE-1:0] LENGTH_IN;
-  input [DATA_SIZE-1:0] DATA_IN;
-  output reg [DATA_SIZE-1:0] DATA_OUT;
+  input [DATA_SIZE-1:0] MODULO_IN,
+  input [DATA_SIZE-1:0] LENGTH_IN,
+  input [DATA_SIZE-1:0] DATA_IN,
+  output reg [DATA_SIZE-1:0] DATA_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -109,6 +99,7 @@ module ntm_scalar_multiplication_function(
   // Body
   ///////////////////////////////////////////////////////////////////////
 
+  // CONTROL
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs

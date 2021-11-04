@@ -386,6 +386,7 @@ module ntm_controller #(
   // Body
   ///////////////////////////////////////////////////////////////////////
 
+  // CONTROL
   always @(posedge CLK or posedge RST) begin
     if((RST == 1'b0)) begin
       // Data Outputs
@@ -399,6 +400,7 @@ module ntm_controller #(
         STARTER_STATE : begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
+
           if(START == 1'b1) begin
             // FSM Control
             controller_ctrl_fsm_int <= VECTOR_ACTIVATION_STATE;

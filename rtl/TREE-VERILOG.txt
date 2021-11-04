@@ -75,35 +75,35 @@
 │   │   ├── ntm_matrix_rank.sv
 │   │   ├── ntm_matrix_transpose.sv
 │   │   ├── ntm_scalar_product.sv
-│   │   └── ntm_vector_product.sv
+│   │   └── ntm_tensor_product.sv
 │   ├── arithmetic
 │   │   ├── matrix
 │   │   │   ├── ntm_matrix_adder.sv
 │   │   │   ├── ntm_matrix_divider.sv
 │   │   │   ├── ntm_matrix_exponentiator.sv
 │   │   │   ├── ntm_matrix_inverter.sv
-│   │   │   ├── ntm_matrix_logarithm.sv
+│   │   │   ├── ntm_matrix_gcd.sv
 │   │   │   ├── ntm_matrix_mod.sv
 │   │   │   ├── ntm_matrix_multiplier.sv
-│   │   │   └── ntm_matrix_root.sv
+│   │   │   └── ntm_matrix_lcm.sv
 │   │   ├── scalar
 │   │   │   ├── ntm_scalar_adder.sv
 │   │   │   ├── ntm_scalar_divider.sv
 │   │   │   ├── ntm_scalar_exponentiator.sv
 │   │   │   ├── ntm_scalar_inverter.sv
-│   │   │   ├── ntm_scalar_logarithm.sv
+│   │   │   ├── ntm_scalar_gcd.sv
 │   │   │   ├── ntm_scalar_mod.sv
 │   │   │   ├── ntm_scalar_multiplier.sv
-│   │   │   └── ntm_scalar_root.sv
+│   │   │   └── ntm_scalar_lcm.sv
 │   │   └── vector
 │   │       ├── ntm_vector_adder.sv
 │   │       ├── ntm_vector_divider.sv
 │   │       ├── ntm_vector_exponentiator.sv
 │   │       ├── ntm_vector_inverter.sv
-│   │       ├── ntm_vector_logarithm.sv
+│   │       ├── ntm_vector_gcd.sv
 │   │       ├── ntm_vector_mod.sv
 │   │       ├── ntm_vector_multiplier.sv
-│   │       └── ntm_vector_root.sv
+│   │       └── ntm_vector_lcm.sv
 │   └── function
 │       ├── matrix
 │       │   ├── ntm_matrix_convolution_function.sv
