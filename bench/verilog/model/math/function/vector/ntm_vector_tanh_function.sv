@@ -37,37 +37,27 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_vector_tanh_function(
-  CLK,
-  RST,
-  START,
-  READY,
-  DATA_IN_ENABLE,
-  DATA_OUT_ENABLE,
-  MODULO_IN,
-  SIZE_IN,
-  DATA_IN,
-  DATA_OUT
-);
+module ntm_vector_tanh_function #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output reg READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input DATA_IN_ENABLE,
+    output reg DATA_OUT_ENABLE,
 
-  // CONTROL
-  input START;
-  output reg READY;
-
-  input DATA_IN_ENABLE;
-  output reg DATA_OUT_ENABLE;
-
-  // DATA
-  input [DATA_SIZE-1:0] MODULO_IN;
-  input [DATA_SIZE-1:0] SIZE_IN;
-  input [DATA_SIZE-1:0] DATA_IN;
-  output reg [DATA_SIZE-1:0] DATA_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] MODULO_IN,
+    input [DATA_SIZE-1:0] SIZE_IN,
+    input [DATA_SIZE-1:0] DATA_IN,
+    output reg [DATA_SIZE-1:0] DATA_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -108,61 +98,70 @@ module ntm_vector_tanh_function(
   // Body
   ///////////////////////////////////////////////////////////////////////
 
+  // CONTROL
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
       DATA_OUT <= ZERO;
+
       // Control Outputs
       READY <= 1'b0;
+
       // Assignations
       index_loop <= ZERO;
     end
     else begin
       case(tanh_ctrl_fsm_int)
-        STARTER_STATE : begin
-          // STEP 0
+        STARTER_STATE : begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
+
           if(START == 1'b1) begin
             // Assignations
             index_loop <= ZERO;
+
             // FSM Control
             tanh_ctrl_fsm_int <= INPUT_STATE;
           end
         end
-        INPUT_STATE : begin
-          // STEP 1
+        INPUT_STATE : begin  // STEP 1
           if(DATA_IN_ENABLE == 1'b1) begin
             // Data Inputs
             modulo_in_scalar_tanh <= MODULO_IN;
             data_in_scalar_tanh <= DATA_IN;
+
             if(index_loop == ZERO) begin
               // Control Internal
               start_scalar_tanh <= 1'b1;
             end
+
             // FSM Control
             tanh_ctrl_fsm_int <= ENDER_STATE;
           end
+
           // Control Outputs
           DATA_OUT_ENABLE <= 1'b0;
         end
-        ENDER_STATE : begin
-          // STEP 2
-          if((ready_scalar_tanh == 1'b1)) begin
+        ENDER_STATE : begin  // STEP 2
+          if(ready_scalar_tanh == 1'b1) begin
             if(index_loop == (SIZE_IN - ONE)) begin
               // Control Outputs
               READY <= 1'b1;
+
               // FSM Control
               tanh_ctrl_fsm_int <= STARTER_STATE;
             end
             else begin
               // Control Internal
               index_loop <= (index_loop + ONE);
+
               // FSM Control
               tanh_ctrl_fsm_int <= INPUT_STATE;
             end
+
             // Data Outputs
             DATA_OUT <= data_out_scalar_tanh;
+
             // Control Outputs
             DATA_OUT_ENABLE <= 1'b1;
           end
@@ -187,8 +186,8 @@ module ntm_vector_tanh_function(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
-    // CONTROL
 
+    // CONTROL
     .START(start_scalar_tanh),
     .READY(ready_scalar_tanh),
 

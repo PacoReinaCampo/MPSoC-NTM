@@ -37,49 +37,33 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_multiplication_function(
-  CLK,
-  RST,
-  START,
-  READY,
-  DATA_IN_MATRIX_ENABLE,
-  DATA_IN_VECTOR_ENABLE,
-  DATA_IN_SCALAR_ENABLE,
-  DATA_OUT_MATRIX_ENABLE,
-  DATA_OUT_VECTOR_ENABLE,
-  DATA_OUT_SCALAR_ENABLE,
-  MODULO_IN,
-  SIZE_I_IN,
-  SIZE_J_IN,
-  LENGTH_IN,
-  DATA_IN,
-  DATA_OUT
-);
+module ntm_matrix_multiplication_function #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output reg READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input DATA_IN_MATRIX_ENABLE,
+    input DATA_IN_VECTOR_ENABLE,
+    input DATA_IN_SCALAR_ENABLE,
+    output reg DATA_OUT_MATRIX_ENABLE,
+    output reg DATA_OUT_VECTOR_ENABLE,
+    output reg DATA_OUT_SCALAR_ENABLE,
 
-  // CONTROL
-  input START;
-  output reg READY;
-
-  input DATA_IN_MATRIX_ENABLE;
-  input DATA_IN_VECTOR_ENABLE;
-  input DATA_IN_SCALAR_ENABLE;
-  output reg DATA_OUT_MATRIX_ENABLE;
-  output reg DATA_OUT_VECTOR_ENABLE;
-  output reg DATA_OUT_SCALAR_ENABLE;
-
-  // DATA
-  input [DATA_SIZE-1:0] MODULO_IN;
-  input [DATA_SIZE-1:0] SIZE_I_IN;
-  input [DATA_SIZE-1:0] SIZE_J_IN;
-  input [DATA_SIZE-1:0] LENGTH_IN;
-  input [DATA_SIZE-1:0] DATA_IN;
-  output reg [DATA_SIZE-1:0] DATA_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] MODULO_IN,
+    input [DATA_SIZE-1:0] SIZE_I_IN,
+    input [DATA_SIZE-1:0] SIZE_J_IN,
+    input [DATA_SIZE-1:0] LENGTH_IN,
+    input [DATA_SIZE-1:0] DATA_IN,
+    output reg [DATA_SIZE-1:0] DATA_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -93,6 +77,8 @@ module ntm_matrix_multiplication_function(
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
+  ///////////////////////////////////////////////////////////////////////
+
   parameter ZERO = 0;
   parameter ONE = 1;
 
@@ -130,11 +116,13 @@ module ntm_matrix_multiplication_function(
   ///////////////////////////////////////////////////////////////////////
 
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       DATA_OUT <= ZERO;
+
       // Control Outputs
       READY <= 1'b0;
+
       // Assignations
       index_matrix_loop <= ZERO;
       index_vector_loop <= ZERO;
@@ -151,22 +139,25 @@ module ntm_matrix_multiplication_function(
             index_matrix_loop <= ZERO;
             index_vector_loop <= ZERO;
             index_scalar_loop <= ZERO;
+
             // FSM Control
             multiplication_ctrl_fsm_int <= INPUT_MATRIX_STATE;
           end
         end
-        INPUT_MATRIX_STATE : begin
-          // STEP 1
-          if((DATA_IN_MATRIX_ENABLE == 1'b1)) begin
+        INPUT_MATRIX_STATE : begin  // STEP 1
+          if(DATA_IN_MATRIX_ENABLE == 1'b1) begin
             // Data Inputs
             modulo_in_vector_multiplication <= MODULO_IN;
             data_in_vector_multiplication <= DATA_IN;
-            if((index_matrix_loop == ZERO)) begin
+
+            if(index_matrix_loop == ZERO) begin
               // Control Internal
               start_vector_multiplication <= 1'b1;
             end
+
             data_in_vector_enable_vector_multiplication <= 1'b1;
             data_in_scalar_enable_vector_multiplication <= 1'b1;
+
             // FSM Control
             multiplication_ctrl_fsm_int <= ENDER_STATE;
           end
@@ -175,24 +166,27 @@ module ntm_matrix_multiplication_function(
             data_in_vector_enable_vector_multiplication <= 1'b0;
             data_in_scalar_enable_vector_multiplication <= 1'b0;
           end
+
           // Control Outputs
           DATA_OUT_MATRIX_ENABLE <= 1'b0;
           DATA_OUT_VECTOR_ENABLE <= 1'b0;
           DATA_OUT_SCALAR_ENABLE <= 1'b0;
         end
-        INPUT_VECTOR_STATE : begin
-          // STEP 1
-          if((DATA_IN_VECTOR_ENABLE == 1'b1)) begin
+        INPUT_VECTOR_STATE : begin  // STEP 1
+          if(DATA_IN_VECTOR_ENABLE == 1'b1) begin
             // Data Inputs
             modulo_in_vector_multiplication <= MODULO_IN;
             size_in_vector_multiplication <= SIZE_J_IN;
             data_in_vector_multiplication <= DATA_IN;
+
             if((index_vector_loop == ZERO)) begin
               // Control Internal
               start_vector_multiplication <= 1'b1;
             end
+
             data_in_vector_enable_vector_multiplication <= 1'b1;
             data_in_scalar_enable_vector_multiplication <= 1'b1;
+
             // FSM Control
             multiplication_ctrl_fsm_int <= ENDER_STATE;
           end
@@ -201,22 +195,25 @@ module ntm_matrix_multiplication_function(
             data_in_vector_enable_vector_multiplication <= 1'b0;
             data_in_scalar_enable_vector_multiplication <= 1'b0;
           end
+
           // Control Outputs
           DATA_OUT_VECTOR_ENABLE <= 1'b0;
           DATA_OUT_SCALAR_ENABLE <= 1'b0;
         end
-        INPUT_SCALAR_STATE : begin
-          // STEP 2
-          if((DATA_IN_SCALAR_ENABLE == 1'b1)) begin
+        INPUT_SCALAR_STATE : begin  // STEP 2
+          if(DATA_IN_SCALAR_ENABLE == 1'b1) begin
             // Data Inputs
             modulo_in_vector_multiplication <= MODULO_IN;
             length_in_vector_multiplication <= LENGTH_IN;
             data_in_vector_multiplication <= DATA_IN;
+
             if((index_scalar_loop == ZERO)) begin
               // Control Internal
               start_vector_multiplication <= 1'b1;
             end
+
             data_in_scalar_enable_vector_multiplication <= 1'b1;
+
             // FSM Control
             multiplication_ctrl_fsm_int <= ENDER_STATE;
           end
@@ -227,42 +224,48 @@ module ntm_matrix_multiplication_function(
           // Control Outputs
           DATA_OUT_SCALAR_ENABLE <= 1'b0;
         end
-        ENDER_STATE : begin
-          // STEP 3
-          if((ready_vector_multiplication == 1'b1)) begin
-            if((index_matrix_loop == (SIZE_I_IN - ONE) && index_vector_loop == (SIZE_J_IN - ONE) && index_scalar_loop == (LENGTH_IN - ONE))) begin
+        ENDER_STATE : begin  // STEP 3
+          if(ready_vector_multiplication == 1'b1) begin
+            if(index_matrix_loop == (SIZE_I_IN - ONE) && index_vector_loop == (SIZE_J_IN - ONE) && index_scalar_loop == (LENGTH_IN - ONE)) begin
               // Control Outputs
               READY <= 1'b1;
               DATA_OUT_VECTOR_ENABLE <= 1'b1;
+
               // FSM Control
               multiplication_ctrl_fsm_int <= STARTER_STATE;
             end
-            else if((index_matrix_loop < (SIZE_I_IN - ONE) && index_vector_loop == (SIZE_J_IN - ONE) && index_scalar_loop == (LENGTH_IN - ONE))) begin
+            else if(index_matrix_loop < (SIZE_I_IN - ONE) && index_vector_loop == (SIZE_J_IN - ONE) && index_scalar_loop == (LENGTH_IN - ONE)) begin
               // Control Internal
               index_matrix_loop <= (index_matrix_loop + ONE);
               index_vector_loop <= ZERO;
+
               // Control Outputs
               DATA_OUT_MATRIX_ENABLE <= 1'b1;
               DATA_OUT_VECTOR_ENABLE <= 1'b1;
               DATA_OUT_SCALAR_ENABLE <= 1'b1;
+
               // FSM Control
               multiplication_ctrl_fsm_int <= INPUT_MATRIX_STATE;
             end
-            else if((index_matrix_loop < (SIZE_I_IN - ONE) && index_vector_loop < (SIZE_J_IN - ONE) && index_scalar_loop == (LENGTH_IN - ONE))) begin
+            else if(index_matrix_loop < (SIZE_I_IN - ONE) && index_vector_loop < (SIZE_J_IN - ONE) && index_scalar_loop == (LENGTH_IN - ONE)) begin
               // Control Internal
               index_vector_loop <= (index_vector_loop + ONE);
               index_scalar_loop <= ZERO;
+
               // Control Outputs
               DATA_OUT_VECTOR_ENABLE <= 1'b1;
               DATA_OUT_SCALAR_ENABLE <= 1'b1;
+
               // FSM Control
               multiplication_ctrl_fsm_int <= INPUT_VECTOR_STATE;
             end
-            else if((index_matrix_loop < (SIZE_I_IN - ONE) && index_vector_loop < (SIZE_J_IN - ONE) && index_scalar_loop < (LENGTH_IN - ONE))) begin
+            else if(index_matrix_loop < (SIZE_I_IN - ONE) && index_vector_loop < (SIZE_J_IN - ONE) && index_scalar_loop < (LENGTH_IN - ONE)) begin
               // Control Internal
               index_scalar_loop <= (index_scalar_loop + ONE);
+
               // Control Outputs
               DATA_OUT_SCALAR_ENABLE <= 1'b1;
+
               // FSM Control
               multiplication_ctrl_fsm_int <= INPUT_SCALAR_STATE;
             end

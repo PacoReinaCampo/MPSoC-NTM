@@ -37,43 +37,30 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_oneplus_function(
-  CLK,
-  RST,
-  START,
-  READY,
-  DATA_IN_I_ENABLE,
-  DATA_IN_J_ENABLE,
-  DATA_OUT_I_ENABLE,
-  DATA_OUT_J_ENABLE,
-  MODULO_IN,
-  SIZE_I_IN,
-  SIZE_J_IN,
-  DATA_IN,
-  DATA_OUT
-);
+module ntm_matrix_oneplus_function #(
+  parameter DATA_SIZE=512
+)
+  (
+    // GLOBAL
+    input CLK,
+    input RST,
 
-  parameter DATA_SIZE=512;
+    // CONTROL
+    input START,
+    output reg READY,
 
-  // GLOBAL
-  input CLK;
-  input RST;
+    input DATA_IN_I_ENABLE,
+    input DATA_IN_J_ENABLE,
+    output reg DATA_OUT_I_ENABLE,
+    output reg DATA_OUT_J_ENABLE,
 
-  // CONTROL
-  input START;
-  output reg READY;
-
-  input DATA_IN_I_ENABLE;
-  input DATA_IN_J_ENABLE;
-  output reg DATA_OUT_I_ENABLE;
-  output reg DATA_OUT_J_ENABLE;
-
-  // DATA
-  input [DATA_SIZE-1:0] MODULO_IN;
-  input [DATA_SIZE-1:0] SIZE_I_IN;
-  input [DATA_SIZE-1:0] SIZE_J_IN;
-  input [DATA_SIZE-1:0] DATA_IN;
-  output reg [DATA_SIZE-1:0] DATA_OUT;
+    // DATA
+    input [DATA_SIZE-1:0] MODULO_IN,
+    input [DATA_SIZE-1:0] SIZE_I_IN,
+    input [DATA_SIZE-1:0] SIZE_J_IN,
+    input [DATA_SIZE-1:0] DATA_IN,
+    output reg [DATA_SIZE-1:0] DATA_OUT
+  );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -102,11 +89,10 @@ module ntm_matrix_oneplus_function(
   reg [DATA_SIZE-1:0] index_i_loop;
   reg [DATA_SIZE-1:0] index_j_loop;
 
-  // TANH
+  // ONEPLUS
   // CONTROL
   reg start_vector_oneplus;
   wire ready_vector_oneplus;
-
   reg data_in_enable_vector_oneplus;
   wire data_out_enable_vector_oneplus;
 
@@ -120,41 +106,47 @@ module ntm_matrix_oneplus_function(
   // Body
   ///////////////////////////////////////////////////////////////////////
 
+  // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       DATA_OUT <= ZERO;
+
       // Control Outputs
       READY <= 1'b0;
+
       // Assignations
       index_i_loop <= ZERO;
       index_j_loop <= ZERO;
     end
     else begin
       case(oneplus_ctrl_fsm_int)
-        STARTER_STATE : begin
-          // STEP 0
+        STARTER_STATE : begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
+
           if(START == 1'b1) begin
             // Assignations
             index_i_loop <= ZERO;
             index_j_loop <= ZERO;
+
             // FSM Control
             oneplus_ctrl_fsm_int <= INPUT_I_STATE;
           end
         end
-        INPUT_I_STATE : begin
-          // STEP 1
-          if((DATA_IN_I_ENABLE == 1'b1)) begin
+        INPUT_I_STATE : begin  // STEP 1
+          if(DATA_IN_I_ENABLE == 1'b1) begin
             // Data Inputs
             modulo_in_vector_oneplus <= MODULO_IN;
             data_in_vector_oneplus <= DATA_IN;
-            if((index_i_loop == ZERO)) begin
+
+            if(index_i_loop == ZERO) begin
               // Control Internal
               start_vector_oneplus <= 1'b1;
             end
+
             data_in_enable_vector_oneplus <= 1'b1;
+
             // FSM Control
             oneplus_ctrl_fsm_int <= ENDER_STATE;
           end
@@ -162,22 +154,25 @@ module ntm_matrix_oneplus_function(
             // Control Internal
             data_in_enable_vector_oneplus <= 1'b0;
           end
+
           // Control Outputs
           DATA_OUT_I_ENABLE <= 1'b0;
           DATA_OUT_J_ENABLE <= 1'b0;
         end
-        INPUT_J_STATE : begin
-          // STEP 2
-          if((DATA_IN_J_ENABLE == 1'b1)) begin
+        INPUT_J_STATE : begin  // STEP 2
+          if(DATA_IN_J_ENABLE == 1'b1) begin
             // Data Inputs
             modulo_in_vector_oneplus <= MODULO_IN;
             size_in_vector_oneplus <= SIZE_J_IN;
             data_in_vector_oneplus <= DATA_IN;
-            if((index_j_loop == ZERO)) begin
+
+            if(index_j_loop == ZERO) begin
               // Control Internal
               start_vector_oneplus <= 1'b1;
             end
+
             data_in_enable_vector_oneplus <= 1'b1;
+
             // FSM Control
             oneplus_ctrl_fsm_int <= ENDER_STATE;
           end
@@ -185,16 +180,17 @@ module ntm_matrix_oneplus_function(
             // Control Internal
             data_in_enable_vector_oneplus <= 1'b0;
           end
+
           // Control Outputs
           DATA_OUT_J_ENABLE <= 1'b0;
         end
-        ENDER_STATE : begin
-          // STEP 3
-          if((ready_vector_oneplus == 1'b1)) begin
+        ENDER_STATE : begin  // STEP 3
+          if(ready_vector_oneplus == 1'b1) begin
             if((index_i_loop == (SIZE_I_IN - ONE)) && index_j_loop == (SIZE_J_IN - ONE)) begin
               // Control Outputs
               READY <= 1'b1;
               DATA_OUT_J_ENABLE <= 1'b1;
+
               // FSM Control
               oneplus_ctrl_fsm_int <= STARTER_STATE;
             end
@@ -202,17 +198,21 @@ module ntm_matrix_oneplus_function(
               // Control Internal
               index_i_loop <= (index_i_loop + ONE);
               index_j_loop <= ZERO;
+
               // Control Outputs
               DATA_OUT_I_ENABLE <= 1'b1;
               DATA_OUT_J_ENABLE <= 1'b1;
+
               // FSM Control
               oneplus_ctrl_fsm_int <= INPUT_I_STATE;
             end
             else if((index_i_loop < (SIZE_I_IN - ONE)) && index_j_loop < (SIZE_J_IN - ONE)) begin
               // Control Internal
               index_j_loop <= (index_j_loop + ONE);
+
               // Control Outputs
               DATA_OUT_J_ENABLE <= 1'b1;
+
               // FSM Control
               oneplus_ctrl_fsm_int <= INPUT_J_STATE;
             end

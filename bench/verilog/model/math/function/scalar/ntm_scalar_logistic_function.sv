@@ -52,7 +52,7 @@ module ntm_scalar_logistic_function #(
     // DATA
     input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] DATA_IN,
-    output reg [DATA_SIZE-1:0] DATA_OUT
+    output reg DATA_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
