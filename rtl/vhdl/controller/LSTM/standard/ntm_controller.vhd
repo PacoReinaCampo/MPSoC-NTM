@@ -98,14 +98,14 @@ architecture ntm_controller_architecture of ntm_controller is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,            -- STEP 0
-    VECTOR_ACTIVATION_STATE,  -- STEP 1
-    VECTOR_FORGET_STATE,      -- STEP 2
-    VECTOR_INPUT_STATE,       -- STEP 3
-    VECTOR_STATE_STATE,       -- STEP 4
-    VECTOR_OUTPUT_GATE,       -- STEP 5
-    VECTOR_HIDDEN_GATE,       -- STEP 6
-    ENDER_STATE               -- STEP 7
+    STARTER_STATE,                      -- STEP 0
+    VECTOR_ACTIVATION_STATE,            -- STEP 1
+    VECTOR_FORGET_STATE,                -- STEP 2
+    VECTOR_INPUT_STATE,                 -- STEP 3
+    VECTOR_STATE_STATE,                 -- STEP 4
+    VECTOR_OUTPUT_GATE,                 -- STEP 5
+    VECTOR_HIDDEN_GATE,                 -- STEP 6
+    ENDER_STATE                         -- STEP 7
     );
 
   -----------------------------------------------------------------------
@@ -485,7 +485,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>            -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -496,17 +496,17 @@ begin
 
         when VECTOR_ACTIVATION_STATE =>  -- STEP 1
 
-        when VECTOR_FORGET_STATE =>      -- STEP 2
+        when VECTOR_FORGET_STATE =>     -- STEP 2
 
-        when VECTOR_INPUT_STATE =>       -- STEP 3
+        when VECTOR_INPUT_STATE =>      -- STEP 3
 
-        when VECTOR_STATE_STATE =>       -- STEP 4
+        when VECTOR_STATE_STATE =>      -- STEP 4
 
-        when VECTOR_OUTPUT_GATE =>       -- STEP 5
+        when VECTOR_OUTPUT_GATE =>      -- STEP 5
 
-        when VECTOR_HIDDEN_GATE =>       -- STEP 6
+        when VECTOR_HIDDEN_GATE =>      -- STEP 6
 
-        when ENDER_STATE =>              -- STEP 7
+        when ENDER_STATE =>             -- STEP 7
 
         when others =>
           -- FSM Control

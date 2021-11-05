@@ -261,7 +261,7 @@ package ntm_core_pkg is
       K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      X_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
