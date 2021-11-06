@@ -78,10 +78,10 @@ architecture ntm_reading_architecture of ntm_reading is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    VECTOR_MULTIPLIER_STATE,            -- STEP 1
-    VECTOR_SUMMATION_STATE,             -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    STARTER_STATE,  -- STEP 0
+    VECTOR_MULTIPLIER_STATE,  -- STEP 1
+    VECTOR_SUMMATION_STATE,  -- STEP 2
+    ENDER_STATE  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -154,7 +154,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -167,7 +167,7 @@ begin
 
         when VECTOR_SUMMATION_STATE =>  -- STEP 2
 
-        when ENDER_STATE =>             -- STEP 3
+        when ENDER_STATE =>  -- STEP 3
 
         when others =>
           -- FSM Control

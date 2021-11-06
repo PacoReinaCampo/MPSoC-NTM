@@ -80,8 +80,8 @@ architecture dnc_read_keys_architecture of dnc_read_keys is
   -----------------------------------------------------------------------
 
   type read_keys_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    ENDER_STATE                         -- STEP 1
+    STARTER_STATE,  -- STEP 0
+    ENDER_STATE  -- STEP 1
     );
 
   -----------------------------------------------------------------------
@@ -127,7 +127,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case read_keys_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -140,7 +140,7 @@ begin
             read_keys_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
-        when ENDER_STATE =>             -- STEP 1
+        when ENDER_STATE =>  -- STEP 1
 
           if (K_IN_I_ENABLE = '1') then
             -- Control Internal

@@ -78,9 +78,9 @@ architecture ntm_vector_multiplier_architecture of ntm_vector_multiplier is
   -----------------------------------------------------------------------
 
   type multiplier_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    INPUT_STATE,                        -- STEP 1
-    ENDER_STATE                         -- STEP 2
+    STARTER_STATE,  -- STEP 0
+    INPUT_STATE,  -- STEP 1
+    ENDER_STATE  -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -141,7 +141,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case multiplier_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -153,7 +153,7 @@ begin
             multiplier_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_STATE =>             -- STEP 1
+        when INPUT_STATE =>  -- STEP 1
 
           if (DATA_A_IN_ENABLE = '1') then
             -- Data Inputs
@@ -187,7 +187,7 @@ begin
           -- Control Outputs
           DATA_OUT_ENABLE <= '0';
 
-        when ENDER_STATE =>             -- STEP 2
+        when ENDER_STATE =>  -- STEP 2
 
           if (ready_scalar_multiplier = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE)) then

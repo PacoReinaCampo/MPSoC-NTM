@@ -80,10 +80,10 @@ architecture ntm_scalar_softmax_function_architecture of ntm_scalar_softmax_func
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    VECTOR_ADDER_STATE,                 -- STEP 1
-    VECTOR_DIVIDER_STATE,               -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    STARTER_STATE,  -- STEP 0
+    VECTOR_ADDER_STATE,  -- STEP 1
+    VECTOR_DIVIDER_STATE,  -- STEP 2
+    ENDER_STATE  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -154,7 +154,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -163,11 +163,11 @@ begin
             controller_ctrl_fsm_int <= VECTOR_DIVIDER_STATE;
           end if;
 
-        when VECTOR_DIVIDER_STATE =>    -- STEP 1
+        when VECTOR_DIVIDER_STATE =>  -- STEP 1
 
-        when VECTOR_ADDER_STATE =>      -- STEP 2
+        when VECTOR_ADDER_STATE =>  -- STEP 2
 
-        when ENDER_STATE =>             -- STEP 3
+        when ENDER_STATE =>  -- STEP 3
 
         when others =>
           -- FSM Control

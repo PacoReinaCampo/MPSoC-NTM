@@ -96,11 +96,11 @@ architecture ntm_output_trainer_architecture of ntm_output_trainer is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    VECTOR_DIFFERENTIATION_STATE,       -- STEP 1
-    VECTOR_MULTIPLIER_STATE,            -- STEP 2
-    VECTOR_SUMMATION_STATE,             -- STEP 3
-    ENDER_STATE                         -- STEP 4
+    STARTER_STATE,  -- STEP 0
+    VECTOR_DIFFERENTIATION_STATE,  -- STEP 1
+    VECTOR_MULTIPLIER_STATE,  -- STEP 2
+    VECTOR_SUMMATION_STATE,  -- STEP 3
+    ENDER_STATE  -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -236,7 +236,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -251,7 +251,7 @@ begin
 
         when VECTOR_SUMMATION_STATE =>  -- STEP 3
 
-        when ENDER_STATE =>             -- STEP 4
+        when ENDER_STATE =>  -- STEP 4
 
         when others =>
           -- FSM Control

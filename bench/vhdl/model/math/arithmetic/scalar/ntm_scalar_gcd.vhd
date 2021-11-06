@@ -72,8 +72,8 @@ architecture ntm_scalar_gcd_architecture of ntm_scalar_gcd is
   -----------------------------------------------------------------------
 
   type gcd_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    ENDER_STATE                         -- STEP 1
+    STARTER_STATE,  -- STEP 0
+    ENDER_STATE  -- STEP 1
     );
 
   -----------------------------------------------------------------------
@@ -117,14 +117,14 @@ begin
     elsif (rising_edge(CLK)) then
 
       case gcd_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
           -- FSM Control
           gcd_ctrl_fsm_int <= ENDER_STATE;
 
-        when ENDER_STATE =>             -- STEP 1
+        when ENDER_STATE =>  -- STEP 1
           -- FSM Control
           gcd_ctrl_fsm_int <= STARTER_STATE;
 

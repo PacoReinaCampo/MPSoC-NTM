@@ -77,8 +77,8 @@ architecture dnc_write_key_architecture of dnc_write_key is
   -----------------------------------------------------------------------
 
   type write_key_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    ENDER_STATE                         -- STEP 1
+    STARTER_STATE,  -- STEP 0
+    ENDER_STATE  -- STEP 1
     );
 
   -----------------------------------------------------------------------
@@ -122,7 +122,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case write_key_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -134,7 +134,7 @@ begin
             write_key_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
-        when ENDER_STATE =>             -- STEP 1
+        when ENDER_STATE =>  -- STEP 1
 
           if (K_IN_ENABLE = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_W_IN)-unsigned(ONE)) then

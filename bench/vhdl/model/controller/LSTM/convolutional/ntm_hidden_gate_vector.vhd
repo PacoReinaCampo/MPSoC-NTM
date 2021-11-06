@@ -79,10 +79,10 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    VECTOR_TANH_STATE,                  -- STEP 1
-    VECTOR_MULTIPLIER_STATE,            -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    STARTER_STATE,  -- STEP 0
+    VECTOR_TANH_STATE,  -- STEP 1
+    VECTOR_MULTIPLIER_STATE,  -- STEP 2
+    ENDER_STATE  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -154,7 +154,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -163,11 +163,11 @@ begin
             controller_ctrl_fsm_int <= VECTOR_TANH_STATE;
           end if;
 
-        when VECTOR_TANH_STATE =>       -- STEP 1
+        when VECTOR_TANH_STATE =>  -- STEP 1
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
 
-        when ENDER_STATE =>             -- STEP 3
+        when ENDER_STATE =>  -- STEP 3
 
         when others =>
           -- FSM Control

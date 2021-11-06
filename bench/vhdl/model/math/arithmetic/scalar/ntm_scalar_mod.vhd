@@ -71,8 +71,8 @@ architecture ntm_scalar_mod_architecture of ntm_scalar_mod is
   -----------------------------------------------------------------------
 
   type mod_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    ENDER_STATE                         -- STEP 1
+    STARTER_STATE,  -- STEP 0
+    ENDER_STATE  -- STEP 1
     );
 
   -----------------------------------------------------------------------
@@ -115,7 +115,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case mod_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -127,7 +127,7 @@ begin
             mod_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
-        when ENDER_STATE =>             -- STEP 1
+        when ENDER_STATE =>  -- STEP 1
 
           if (unsigned(MODULO_IN) > unsigned(ZERO)) then
             if (unsigned(mod_int) > unsigned(ZERO)) then
