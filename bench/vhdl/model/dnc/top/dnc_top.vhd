@@ -94,13 +94,33 @@ architecture dnc_top_architecture of dnc_top is
   -- Types
   -----------------------------------------------------------------------
 
+  type top_ctrl_fsm is (
+    STARTER_STATE,  -- STEP 0
+    CONTROLLER_STATE,  -- STEP 1
+    INTERFACE_VECTOR_STATE,  -- STEP 2
+    CONTROLLER_OUTPUT_VECTOR_STATE,  -- STEP 3
+    ADDRESSING_STATE,  -- STEP 4
+    WRITING_STATE,  -- STEP 5
+    READING_STATE,  -- STEP 6
+    MEMORY_STATE,  -- STEP 7
+    OUTPUT_VECTOR_STATE,  -- STEP 8
+    ENDER_STATE  -- STEP 9
+    );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal top_ctrl_fsm_int : top_ctrl_fsm;
 
   -----------------------------------------------------------------------
   -- CONTROLLER
@@ -485,6 +505,53 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- CONTROL
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      Y_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case top_ctrl_fsm_int is
+        when STARTER_STATE =>  -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          if (START = '1') then
+            -- FSM Control
+            top_ctrl_fsm_int <= CONTROLLER_STATE;
+          end if;
+
+        when CONTROLLER_STATE =>  -- STEP 1
+
+        when INTERFACE_VECTOR_STATE =>  -- STEP 2
+
+        when CONTROLLER_OUTPUT_VECTOR_STATE =>  -- STEP 3
+
+        when ADDRESSING_STATE =>  -- STEP 4
+
+        when WRITING_STATE =>  -- STEP 5
+
+        when READING_STATE =>  -- STEP 6
+
+        when MEMORY_STATE =>  -- STEP 7
+
+        when OUTPUT_VECTOR_STATE =>  -- STEP 8
+
+        when ENDER_STATE =>  -- STEP 9
+
+        when others =>
+          -- FSM Control
+          top_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
   -----------------------------------------------------------------------
   -- CONTROLLER

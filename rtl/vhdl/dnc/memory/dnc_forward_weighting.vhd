@@ -145,8 +145,8 @@ begin
   modulo_in_matrix_product   <= FULL;
   size_a_i_in_matrix_product <= SIZE_N_IN;
   size_a_j_in_matrix_product <= SIZE_N_IN;
-  size_b_i_in_matrix_product <= SIZE_N_IN;
-  size_b_j_in_matrix_product <= ONE;
+  size_b_i_in_matrix_product <= SIZE_R_IN;
+  size_b_j_in_matrix_product <= SIZE_N_IN;
   data_a_in_matrix_product   <= L_IN;
   data_b_in_matrix_product   <= W_IN;
 

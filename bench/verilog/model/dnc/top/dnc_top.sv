@@ -47,7 +47,7 @@ module dnc_top #(
 
     // CONTROL
     input START,
-    output READY,
+    output reg READY,
 
     input W_IN_L_ENABLE,  // for l in 0 to L-1
     input W_IN_X_ENABLE,  // for x in 0 to X-1
@@ -56,7 +56,7 @@ module dnc_top #(
     input K_IN_K_ENABLE,  // for k in 0 to W-1
     input B_IN_ENABLE,  // for l in 0 to L-1
     input X_IN_ENABLE,  // for x in 0 to X-1
-    output Y_OUT_ENABLE,  // for y in 0 to Y-1
+    output reg Y_OUT_ENABLE,  // for y in 0 to Y-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_X_IN,
@@ -69,20 +69,37 @@ module dnc_top #(
     input [DATA_SIZE-1:0] K_IN,
     input [DATA_SIZE-1:0] B_IN,
     input [DATA_SIZE-1:0] X_IN,
-    output [DATA_SIZE-1:0] Y_OUT
+    output reg [DATA_SIZE-1:0] Y_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
+  parameter [3:0] STARTER_STATE = 0;
+  parameter [3:0] CONTROLLER_STATE = 1;
+  parameter [3:0] INTERFACE_VECTOR_STATE = 2;
+  parameter [3:0] CONTROLLER_OUTPUT_VECTOR_STATE = 3;
+  parameter [3:0] ADDRESSING_STATE = 4;
+  parameter [3:0] WRITING_STATE = 5;
+  parameter [3:0] READING_STATE = 6;
+  parameter [3:0] MEMORY_STATE = 7;
+  parameter [3:0] OUTPUT_VECTOR_STATE = 8;
+  parameter [3:0] ENDER_STATE = 9;
+
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  parameter ZERO = 0;
+  parameter ONE = 1;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [1:0] top_ctrl_fsm_int;
 
   ///////////////////////////////////////////////////////////////////////
   // CONTROLLER
@@ -415,6 +432,61 @@ module dnc_top #(
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
+
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      Y_OUT <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(top_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // FSM Control
+            top_ctrl_fsm_int <= CONTROLLER_STATE;
+          end
+        end
+
+        CONTROLLER_STATE : begin  // STEP 1
+        end
+
+        INTERFACE_VECTOR_STATE : begin  // STEP 2
+        end
+
+        CONTROLLER_OUTPUT_VECTOR_STATE : begin  // STEP 3
+        end
+
+        ADDRESSING_STATE : begin  // STEP 4
+        end
+
+        WRITING_STATE : begin  // STEP 5
+        end
+
+        READING_STATE : begin  // STEP 6
+        end
+
+        MEMORY_STATE : begin  // STEP 7
+        end
+
+        OUTPUT_VECTOR_STATE : begin  // STEP 8
+        end
+
+        ENDER_STATE : begin  // STEP 9
+        end
+        default : begin
+          // FSM Control
+          top_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
   ///////////////////////////////////////////////////////////////////////
   // CONTROLLER
@@ -851,6 +923,7 @@ module dnc_top #(
   // MEMORY
   ///////////////////////////////////////////////////////////////////////
 
+  // ADDRESSING
   dnc_addressing #(
     .DATA_SIZE(DATA_SIZE)
   )

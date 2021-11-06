@@ -70,6 +70,10 @@ module dnc_controller_output_vector #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  parameter ZERO =0;
+  parameter ONE = 1;
+  parameter FULL = 1;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
@@ -101,6 +105,30 @@ module dnc_controller_output_vector #(
   ///////////////////////////////////////////////////////////////////////
 
   // nu(t;y) = U(t;y;l)·h(t;l)
+
+  // ASSIGNATIONS
+  // CONTROL
+  assign start_matrix_product = START;
+
+  assign READY = ready_matrix_product;
+
+  assign data_a_in_i_enable_matrix_product = U_IN_Y_ENABLE;
+  assign data_a_in_j_enable_matrix_product = U_IN_L_ENABLE;
+  assign data_b_in_i_enable_matrix_product = H_IN_ENABLE;
+  assign data_b_in_j_enable_matrix_product = 1'b0;
+
+  assign NU_ENABLE_OUT = data_out_i_enable_matrix_product;
+
+  // DATA
+  assign modulo_in_matrix_product   = FULL;
+  assign size_a_i_in_matrix_product = SIZE_Y_IN;
+  assign size_a_j_in_matrix_product = SIZE_L_IN;
+  assign size_b_i_in_matrix_product = SIZE_L_IN;
+  assign size_b_j_in_matrix_product = ONE;
+  assign data_a_in_matrix_product   = U_IN;
+  assign data_b_in_matrix_product   = H_IN;
+
+  assign NU_OUT = data_out_matrix_product;
 
   // MATRIX PRODUCT
   ntm_matrix_product #(

@@ -121,8 +121,8 @@ module dnc_forward_weighting #(
   assign modulo_in_matrix_product = FULL;
   assign size_a_i_in_matrix_product = SIZE_N_IN;
   assign size_a_j_in_matrix_product = SIZE_N_IN;
-  assign size_b_i_in_matrix_product = SIZE_N_IN;
-  assign size_b_j_in_matrix_product = ONE;
+  assign size_b_i_in_matrix_product = SIZE_R_IN;
+  assign size_b_j_in_matrix_product = SIZE_N_IN;
   assign data_a_in_matrix_product = L_IN;
   assign data_b_in_matrix_product = W_IN;
   assign F_OUT = data_out_matrix_product;
