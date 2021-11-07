@@ -47,13 +47,13 @@ module ntm_state_gate_vector #(
 
     // CONTROL
     input START,
-    output READY,
+    output reg READY,
 
     input S_IN_ENABLE,  // for l in 0 to L-1
     input I_IN_ENABLE,  // for l in 0 to L-1
     input F_IN_ENABLE,  // for l in 0 to L-1
     input A_IN_ENABLE,  // for l in 0 to L-1
-    output S_OUT_ENABLE,  // for l in 0 to L-1
+    output reg S_OUT_ENABLE,  // for l in 0 to L-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_L_IN,
@@ -61,20 +61,31 @@ module ntm_state_gate_vector #(
     input [DATA_SIZE-1:0] I_IN,
     input [DATA_SIZE-1:0] F_IN,
     input [DATA_SIZE-1:0] A_IN,
-    output [DATA_SIZE-1:0] S_OUT
+    output reg [DATA_SIZE-1:0] S_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
+  parameter [1:0] STARTER_STATE = 0;
+  parameter [1:0] VECTOR_ADDER_STATE = 1;
+  parameter [1:0] VECTOR_MULTIPLIER_STATE = 2;
+  parameter [1:0] ENDER_STATE = 4;
+
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  parameter ZERO = 0;
+  parameter ONE = 1;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [1:0] controller_ctrl_fsm_int;
 
   // VECTOR ADDER
   // CONTROL
@@ -116,6 +127,44 @@ module ntm_state_gate_vector #(
 
   // s(t;l) = f(t;l) o s(t-1;l) + i(t;l) o a(t;l)
   // s(t=0;l) = 0
+
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      S_OUT <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(controller_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // FSM Control
+            controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
+          end
+        end
+
+        VECTOR_ADDER_STATE : begin  // STEP 1
+        end
+
+        VECTOR_MULTIPLIER_STATE : begin  // STEP 2
+        end
+
+        ENDER_STATE : begin  // STEP 3
+        end
+
+        default : begin
+          // FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
   // VECTOR ADDER
   ntm_vector_adder #(

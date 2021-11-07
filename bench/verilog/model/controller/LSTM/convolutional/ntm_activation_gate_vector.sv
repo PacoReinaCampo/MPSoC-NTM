@@ -47,7 +47,7 @@ module ntm_activation_gate_vector #(
 
     // CONTROL
     input START,
-    output READY,
+    output reg READY,
 
     input W_IN_L_ENABLE,  // for l in 0 to L-1
     input W_IN_X_ENABLE,  // for x in 0 to X-1
@@ -60,7 +60,7 @@ module ntm_activation_gate_vector #(
     input U_IN_ENABLE,  // for l in 0 to L-1 (square matrix)
     input H_IN_ENABLE,  // for l in 0 to L-1
     input B_IN_ENABLE,  // for l in 0 to L-1
-    output A_OUT_ENABLE,  // for l in 0 to L-1
+    output reg A_OUT_ENABLE,  // for l in 0 to L-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_X_IN,
@@ -74,20 +74,32 @@ module ntm_activation_gate_vector #(
     input [DATA_SIZE-1:0] U_IN,
     input [DATA_SIZE-1:0] H_IN,
     input [DATA_SIZE-1:0] B_IN,
-    output [DATA_SIZE-1:0] A_OUT
+    output reg [DATA_SIZE-1:0] A_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
+  parameter [2:0] STARTER_STATE = 0;
+  parameter [2:0] MATRIX_CONVOLUTION_STATE = 1;
+  parameter [2:0] VECTOR_ADDER_STATE = 2;
+  parameter [2:0] VECTOR_TANH_STATE = 3;
+  parameter [2:0] ENDER_STATE = 4;
+
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  parameter ZERO = 0;
+  parameter ONE = 1;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [2:0] controller_ctrl_fsm_int;
 
   // VECTOR ADDER
   // CONTROL
@@ -149,6 +161,47 @@ module ntm_activation_gate_vector #(
   ///////////////////////////////////////////////////////////////////////
 
   // a(t;l) = tanh(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      A_OUT <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(controller_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // FSM Control
+            controller_ctrl_fsm_int <= MATRIX_CONVOLUTION_STATE;
+          end
+        end
+
+        MATRIX_CONVOLUTION_STATE : begin  // STEP 1
+        end
+
+        VECTOR_ADDER_STATE : begin  // STEP 2
+        end
+
+        VECTOR_TANH_STATE : begin  // STEP 3
+        end
+
+        ENDER_STATE : begin  // STEP 4
+        end
+
+        default : begin
+          // FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
   // VECTOR ADDER
   ntm_vector_adder #(

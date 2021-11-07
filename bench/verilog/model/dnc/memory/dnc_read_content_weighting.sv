@@ -117,7 +117,8 @@ module dnc_read_content_weighting #(
 
   // VECTOR CONTENT BASED ADDRESSING
   dnc_content_based_addressing #(
-    .DATA_SIZE(DATA_SIZE))
+    .DATA_SIZE(DATA_SIZE)
+  )
   dnc_content_based_addressing_i(
     // GLOBAL
     .CLK(CLK),

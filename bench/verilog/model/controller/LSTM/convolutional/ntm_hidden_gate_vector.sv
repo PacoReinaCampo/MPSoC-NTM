@@ -47,30 +47,41 @@ module ntm_hidden_gate_vector #(
 
     // CONTROL
     input START,
-    output READY,
+    output reg READY,
 
     input S_IN_ENABLE,  // for l in 0 to L-1
     input O_IN_ENABLE,  // for l in 0 to L-1
-    output H_OUT_ENABLE,  // for l in 0 to L-1
+    output reg H_OUT_ENABLE,  // for l in 0 to L-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_L_IN,
     input [DATA_SIZE-1:0] S_IN,
     input [DATA_SIZE-1:0] O_IN,
-    output [DATA_SIZE-1:0] H_OUT
+    output reg [DATA_SIZE-1:0] H_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
+  parameter [1:0] STARTER_STATE = 0;
+  parameter [1:0] VECTOR_TANH_STATE = 1;
+  parameter [1:0] VECTOR_MULTIPLIER_STATE = 2;
+  parameter [1:0] ENDER_STATE = 3;
+
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  parameter ZERO = 0;
+  parameter ONE = 1;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [1:0] controller_ctrl_fsm_int;
 
   // VECTOR MULTIPLIER
   // CONTROL
@@ -108,6 +119,44 @@ module ntm_hidden_gate_vector #(
 
   // h(t;l) = o(t;l) o tanh(s(t;l))
   // h(t=0;l) = 0; h(t;l=0) = 0
+
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      H_OUT <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(controller_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // FSM Control
+            controller_ctrl_fsm_int <= VECTOR_TANH_STATE;
+          end
+        end
+
+        VECTOR_TANH_STATE : begin  // STEP 1
+        end
+
+        VECTOR_MULTIPLIER_STATE : begin  // STEP 2
+        end
+
+        ENDER_STATE : begin  // STEP 3
+        end
+
+        default : begin
+          // FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
   // VECTOR MULTIPLIER
   ntm_vector_multiplier #(

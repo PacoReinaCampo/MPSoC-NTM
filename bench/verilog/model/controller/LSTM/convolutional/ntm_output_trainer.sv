@@ -47,18 +47,18 @@ module ntm_output_trainer #(
 
     // CONTROL
     input START,
-    output READY,
+    output reg READY,
 
     input H_IN_ENABLE,  // for l in 0 to L-1
     input X_IN_ENABLE,  // for l in 0 to L-1
     input A_IN_ENABLE,  // for l in 0 to L-1
     input O_IN_ENABLE,  // for l in 0 to L-1
-    output W_OUT_L_ENABLE,  // for l in 0 to L-1
-    output W_OUT_X_ENABLE,  // for x in 0 to X-1
-    output K_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
-    output K_OUT_L_ENABLE,  // for l in 0 to L-1
-    output K_OUT_K_ENABLE,  // for k in 0 to W-1
-    output B_OUT_ENABLE,  // for l in 0 to L-1
+    output reg W_OUT_L_ENABLE,  // for l in 0 to L-1
+    output reg W_OUT_X_ENABLE,  // for x in 0 to X-1
+    output reg K_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    output reg K_OUT_L_ENABLE,  // for l in 0 to L-1
+    output reg K_OUT_K_ENABLE,  // for k in 0 to W-1
+    output reg B_OUT_ENABLE,  // for l in 0 to L-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_X_IN,
@@ -69,22 +69,34 @@ module ntm_output_trainer #(
     input [DATA_SIZE-1:0] X_IN,
     input [DATA_SIZE-1:0] A_IN,
     input [DATA_SIZE-1:0] O_IN,
-    output [DATA_SIZE-1:0] W_OUT,
-    output [DATA_SIZE-1:0] K_OUT,
-    output [DATA_SIZE-1:0] B_OUT
+    output reg [DATA_SIZE-1:0] W_OUT,
+    output reg [DATA_SIZE-1:0] K_OUT,
+    output reg [DATA_SIZE-1:0] B_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
+  parameter [2:0] STARTER_STATE = 0;
+  parameter [2:0] VECTOR_DIFFERENTIATION_STATE = 1;
+  parameter [2:0] VECTOR_MULTIPLIER_STATE = 2;
+  parameter [2:0] VECTOR_SUMMATION_STATE = 3;
+  parameter [2:0] ENDER_STATE = 4;
+
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  parameter ZERO = 0;
+  parameter ONE = 1;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [2:0] controller_ctrl_fsm_int;
 
   // VECTOR SUMMATION
   // CONTROL
@@ -176,6 +188,49 @@ module ntm_output_trainer #(
   // dW(t;l) = summation(do(t;l) · x(t;l))[t in 0 to T]
   // dU(t;l) = summation(do(t+1;l) · h(t;l))[t in 0 to T-1]
   // db(t;l) = summation(do(t;l))[t in 0 to T]
+
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      W_OUT <= ZERO;
+      K_OUT <= ZERO;
+      B_OUT <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(controller_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // FSM Control
+            controller_ctrl_fsm_int <= VECTOR_DIFFERENTIATION_STATE;
+          end
+        end
+
+        VECTOR_DIFFERENTIATION_STATE : begin  // STEP 1
+        end
+
+        VECTOR_MULTIPLIER_STATE : begin  // STEP 2
+        end
+
+        VECTOR_SUMMATION_STATE : begin  // STEP 3
+        end
+
+        ENDER_STATE : begin  // STEP 4
+        end
+
+        default : begin
+          // FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
   // VECTOR SUMMATION
   ntm_vector_summation_function #(

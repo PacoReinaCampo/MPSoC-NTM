@@ -76,11 +76,12 @@ module ntm_controller #(
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
-  
-  parameter [1:0] STARTER_STATE = 0;
-  parameter [1:0] VECTOR_SUMMATION_STATE = 1;
-  parameter [1:0] MATRIX_PRODUCT_STATE = 2;
-  parameter [1:0] ENDER_STATE = 3;
+
+  parameter [2:0] STARTER_STATE = 0;
+  parameter [2:0] VECTOR_SUMMATION_STATE = 1;
+  parameter [2:0] MATRIX_PRODUCT_STATE = 2;
+  parameter [2:0] VECTOR_LOGISTIC_STATE = 3;
+  parameter [2:0] ENDER_STATE = 4;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -94,10 +95,7 @@ module ntm_controller #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] controller_ctrl_fsm_int;
-
-  // Internal Signals
-  reg [31:0] index_loop;
+  reg [2:0] controller_ctrl_fsm_int;
 
   reg data_in_vector_summation_int;
   reg data_a_in_i_matrix_product_int;
@@ -188,40 +186,37 @@ module ntm_controller #(
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
-    if((RST == 1'b0)) begin
+    if(RST == 1'b0) begin
       // Data Outputs
       H_OUT <= ZERO;
+
       // Control Outputs
       READY <= 1'b0;
-      // Assignations
-      index_loop <= 0;
-      data_in_vector_summation_int <= 1'b0;
-      data_a_in_i_matrix_product_int <= 1'b0;
-      data_a_in_j_matrix_product_int <= 1'b0;
-      data_b_in_i_matrix_product_int <= 1'b0;
-      data_b_in_j_matrix_product_int <= 1'b0;
-      data_in_vector_logistic_int <= 1'b0;
     end
     else begin
       case(controller_ctrl_fsm_int)
-        STARTER_STATE : begin
-          // STEP 0
+        STARTER_STATE : begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
+
           if(START == 1'b1) begin
             // FSM Control
             controller_ctrl_fsm_int <= VECTOR_SUMMATION_STATE;
           end
         end
-        VECTOR_SUMMATION_STATE : begin
-          // STEP 1
+
+        VECTOR_SUMMATION_STATE : begin  // STEP 1
         end
-        MATRIX_PRODUCT_STATE : begin
-          // STEP 2
+
+        MATRIX_PRODUCT_STATE : begin  // STEP 2
         end
-        ENDER_STATE : begin
-          // STEP 3
+
+        VECTOR_LOGISTIC_STATE : begin  // STEP 3
         end
+
+        ENDER_STATE : begin  // STEP 4
+        end
+
         default : begin
           // FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
