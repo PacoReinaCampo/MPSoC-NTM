@@ -47,7 +47,7 @@ module ntm_output_vector #(
 
     // CONTROL
     input START,
-    output READY,
+    output reg READY,
 
     input K_IN_I_ENABLE,  // for i in 0 to R-1
     input K_IN_Y_ENABLE,  // for y in 0 to Y-1
@@ -55,7 +55,7 @@ module ntm_output_vector #(
     input R_IN_I_ENABLE,  // for i in 0 to R-1
     input R_IN_K_ENABLE,  // for j in 0 to W-1
     input NU_IN_ENABLE,  // for y in 0 to Y-1
-    input Y_OUT_ENABLE,  // for y in 0 to Y-1
+    output reg Y_OUT_ENABLE,  // for y in 0 to Y-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_Y_IN,
@@ -65,20 +65,31 @@ module ntm_output_vector #(
     input [DATA_SIZE-1:0] K_IN,
     input [DATA_SIZE-1:0] R_IN,
     input [DATA_SIZE-1:0] NU_IN,
-    output [DATA_SIZE-1:0] Y_OUT
+    output reg [DATA_SIZE-1:0] Y_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
+  parameter [1:0] STARTER_STATE = 0;
+  parameter [1:0] MATRIX_PRODUCT_STATE = 1;
+  parameter [1:0] VECTOR_ADDER_STATE = 2;
+  parameter [1:0] ENDER_STATE = 3;
+
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  parameter ZERO = 0;
+  parameter ONE = 1;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [1:0] output_vector_ctrl_fsm_int;
 
   // VECTOR ADDER
   // CONTROL
@@ -122,6 +133,43 @@ module ntm_output_vector #(
   ///////////////////////////////////////////////////////////////////////
 
   // y(t;y) = K(t;i;y;k)·r(t;i;k) + nu(t;y)
+
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      Y_OUT <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(output_vector_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // FSM Control
+            output_vector_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+          end
+        end
+
+        MATRIX_PRODUCT_STATE : begin  // STEP 1
+        end
+
+        VECTOR_ADDER_STATE : begin  // STEP 2
+        end
+
+        ENDER_STATE : begin  // STEP 3
+        end
+        default : begin
+          // FSM Control
+          output_vector_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
   // VECTOR ADDER
   ntm_vector_adder #(

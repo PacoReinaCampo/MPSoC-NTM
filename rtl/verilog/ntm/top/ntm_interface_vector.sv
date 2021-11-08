@@ -47,12 +47,12 @@ module ntm_interface_vector #(
 
     // CONTROL
     input START,
-    output READY,
+    output reg READY,
 
     // Key Vector
     input WK_IN_L_ENABLE,  // for l in 0 to L-1
     input WK_IN_K_ENABLE,  // for k in 0 to W-1
-    output K_OUT_ENABLE,  // for k in 0 to W-1
+    output reg K_OUT_ENABLE,  // for k in 0 to W-1
 
     // Key Strength
     input WBETA_IN_ENABLE,  // for l in 0 to L-1
@@ -63,7 +63,7 @@ module ntm_interface_vector #(
     // Shift Weighting
     input WS_IN_L_ENABLE,  // for l in 0 to L-1
     input WS_IN_J_ENABLE,  // for j in 0 to N-1
-    output S_OUT_ENABLE,  // for j in 0 to N-1
+    output reg S_OUT_ENABLE,  // for j in 0 to N-1
 
     // Sharpening
     input WGAMMA_IN_ENABLE,  // for l in 0 to L-1
@@ -81,11 +81,11 @@ module ntm_interface_vector #(
     input [DATA_SIZE-1:0] WS_IN,
     input [DATA_SIZE-1:0] WGAMMA_IN,
     input [DATA_SIZE-1:0] H_IN,
-    output [DATA_SIZE-1:0] K_OUT,
-    output [DATA_SIZE-1:0] BETA_OUT,
-    output [DATA_SIZE-1:0] G_OUT,
-    output [DATA_SIZE-1:0] S_OUT,
-    output [DATA_SIZE-1:0] GAMMA_OUT
+    output reg [DATA_SIZE-1:0] K_OUT,
+    output reg [DATA_SIZE-1:0] BETA_OUT,
+    output reg [DATA_SIZE-1:0] G_OUT,
+    output reg [DATA_SIZE-1:0] S_OUT,
+    output reg [DATA_SIZE-1:0] GAMMA_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////

@@ -90,13 +90,26 @@ architecture dnc_output_vector_architecture of dnc_output_vector is
   -- Types
   -----------------------------------------------------------------------
 
+  type output_vector_ctrl_fsm is (
+    STARTER_STATE,  -- STEP 0
+    MATRIX_PRODUCT_STATE,  -- STEP 1
+    VECTOR_ADDER_STATE,  -- STEP 2
+    ENDER_STATE  -- STEP 3
+    );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal output_vector_ctrl_fsm_int : output_vector_ctrl_fsm;
 
   -- VECTOR ADDER
   -- CONTROL
@@ -147,6 +160,41 @@ begin
   -----------------------------------------------------------------------
 
   -- y(t;y) = K(t;i;y;k)·r(t;i;k) + nu(t;y)
+
+  -- CONTROL
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      Y_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case output_vector_ctrl_fsm_int is
+        when STARTER_STATE =>  -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          if (START = '1') then
+            -- FSM Control
+            output_vector_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+          end if;
+
+        when MATRIX_PRODUCT_STATE =>  -- STEP 1
+
+        when VECTOR_ADDER_STATE =>  -- STEP 2
+
+        when ENDER_STATE =>  -- STEP 3
+
+        when others =>
+          -- FSM Control
+          output_vector_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder

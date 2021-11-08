@@ -85,6 +85,10 @@ architecture ntm_controller_output_vector_architecture of ntm_controller_output_
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
@@ -119,6 +123,30 @@ begin
   -----------------------------------------------------------------------
 
   -- nu(t;y) = U(t;y;l)·h(t;l)
+
+  -- ASSIGNATIONS
+  -- CONTROL
+  start_matrix_product <= START;
+
+  READY <= ready_matrix_product;
+
+  data_a_in_i_enable_matrix_product <= U_IN_Y_ENABLE;
+  data_a_in_j_enable_matrix_product <= U_IN_L_ENABLE;
+  data_b_in_i_enable_matrix_product <= H_IN_ENABLE;
+  data_b_in_j_enable_matrix_product <= '0';
+
+  NU_ENABLE_OUT <= data_out_i_enable_matrix_product;
+
+  -- DATA
+  modulo_in_matrix_product   <= FULL;
+  size_a_i_in_matrix_product <= SIZE_Y_IN;
+  size_a_j_in_matrix_product <= SIZE_L_IN;
+  size_b_i_in_matrix_product <= SIZE_L_IN;
+  size_b_j_in_matrix_product <= ONE;
+  data_a_in_matrix_product   <= U_IN;
+  data_b_in_matrix_product   <= H_IN;
+
+  NU_OUT <= data_out_matrix_product;
 
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product

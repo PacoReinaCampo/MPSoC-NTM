@@ -114,7 +114,6 @@ architecture dnc_top_architecture of dnc_top is
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
 
-
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------

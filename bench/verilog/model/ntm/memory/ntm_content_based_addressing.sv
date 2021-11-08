@@ -47,12 +47,12 @@ module ntm_content_based_addressing #(
 
     // CONTROL
     input START,
-    output READY,
+    output reg READY,
 
     input K_IN_ENABLE,  // for j in 0 to J-1
     input M_IN_I_ENABLE,  // for i in 0 to I-1
     input M_IN_J_ENABLE,  // for j in 0 to J-1
-    output C_OUT_ENABLE,  // for i in 0 to I-1
+    output reg C_OUT_ENABLE,  // for i in 0 to I-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_I_IN,
@@ -60,20 +60,32 @@ module ntm_content_based_addressing #(
     input [DATA_SIZE-1:0] K_IN,
     input [DATA_SIZE-1:0] BETA_IN,
     input [DATA_SIZE-1:0] M_IN,
-    output [DATA_SIZE-1:0] C_OUT
+    output reg [DATA_SIZE-1:0] C_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
+  parameter [2:0] STARTER_STATE = 0;
+  parameter [2:0] VECTOR_COSINE_SIMILARITY_STATE = 1;
+  parameter [2:0] VECTOR_EXPONENTIATOR_STATE = 2;
+  parameter [2:0] VECTOR_SOFTMAX_STATE = 3;
+  parameter [2:0] ENDER_STATE = 4;
+
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  parameter ZERO = 0;
+  parameter ONE = 1;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [2:0] controller_ctrl_fsm_int;
 
   // VECTOR EXPONENTIATOR
   // CONTROL
@@ -133,6 +145,46 @@ module ntm_content_based_addressing #(
   ///////////////////////////////////////////////////////////////////////
 
   // C(M,k,beta)[i] = softmax(exponentiation(e,cosine(k,M)·beta))[i]
+
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      C_OUT <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(controller_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // FSM Control
+            controller_ctrl_fsm_int <= VECTOR_COSINE_SIMILARITY_STATE;
+          end
+        end
+
+        VECTOR_COSINE_SIMILARITY_STATE : begin  // STEP 1
+        end
+
+        VECTOR_EXPONENTIATOR_STATE : begin  // STEP 2
+        end
+
+        VECTOR_SOFTMAX_STATE : begin  // STEP 3
+        end
+
+        ENDER_STATE : begin  // STEP 4
+        end
+        default : begin
+          // FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
   // VECTOR EXPONENTIATOR
   ntm_vector_exponentiator #(

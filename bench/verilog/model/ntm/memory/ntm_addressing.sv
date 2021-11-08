@@ -47,14 +47,14 @@ module ntm_addressing #(
 
     // CONTROL
     input START,
-    output READY,
+    output reg READY,
 
     input K_IN_ENABLE,  // for k in 0 to W-1
     input S_IN_ENABLE,  // for k in 0 to W-1
     input M_IN_J_ENABLE,  // for j in 0 to N-1
     input M_IN_K_ENABLE,  // for k in 0 to W-1
     input W_IN_ENABLE,  // for j in 0 to N-1
-    output W_OUT_ENABLE,  // for j in 0 to N-1
+    output reg W_OUT_ENABLE,  // for j in 0 to N-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_N_IN,
@@ -66,20 +66,34 @@ module ntm_addressing #(
     input [DATA_SIZE-1:0] GAMMA_IN,
     input [DATA_SIZE-1:0] M_IN,
     input [DATA_SIZE-1:0] W_IN,
-    output [DATA_SIZE-1:0] W_OUT
+    output reg [DATA_SIZE-1:0] W_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
+  parameter [2:0] STARTER_STATE = 0;
+  parameter [2:0] VECTOR_CONTENT_BASED_ADDRESSING_STATE = 1;
+  parameter [2:0] SCALAR_ADDER_STATE = 2;
+  parameter [2:0] VECTOR_EXPONENTIATOR_STATE = 3;
+  parameter [2:0] VECTOR_MULTIPLIER_STATE = 4;
+  parameter [2:0] VECTOR_CONVOLUTION_STATE = 5;
+  parameter [2:0] ENDER_STATE = 6;
+
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  parameter ZERO = 0;
+  parameter ONE = 1;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [2:0] controller_ctrl_fsm_int;
 
   // VECTOR CONTENT BASED ADDRESSING
   // CONTROL
@@ -174,6 +188,52 @@ module ntm_addressing #(
   // wg(t;j) = g(t)·wc(t;j)·(1 - g(t)·w(t-1;j)
   // w(t;j) = w(t;j)*s(t;k)
   // w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
+
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      W_OUT <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(controller_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // FSM Control
+            controller_ctrl_fsm_int <= VECTOR_CONTENT_BASED_ADDRESSING_STATE;
+          end
+        end
+
+        VECTOR_CONTENT_BASED_ADDRESSING_STATE : begin  // STEP 1
+        end
+
+        SCALAR_ADDER_STATE : begin  // STEP 2
+        end
+
+        VECTOR_EXPONENTIATOR_STATE : begin  // STEP 3
+        end
+
+        VECTOR_MULTIPLIER_STATE : begin  // STEP 4
+        end
+
+        VECTOR_CONVOLUTION_STATE : begin  // STEP 5
+        end
+
+        ENDER_STATE : begin  // STEP 6
+        end
+        default : begin
+          // FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
   // VECTOR CONTENT BASED ADDRESSING
   ntm_content_based_addressing #(

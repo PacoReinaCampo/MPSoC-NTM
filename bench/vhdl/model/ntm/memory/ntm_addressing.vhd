@@ -90,13 +90,29 @@ architecture ntm_addressing_architecture of ntm_addressing is
   -- Types
   -----------------------------------------------------------------------
 
+  type controller_ctrl_fsm is (
+    STARTER_STATE,  -- STEP 0
+    VECTOR_CONTENT_BASED_ADDRESSING_STATE,  -- STEP 1
+    SCALAR_ADDER_STATE,  -- STEP 2
+    VECTOR_EXPONENTIATOR_STATE,  -- STEP 3
+    VECTOR_MULTIPLIER_STATE,  -- STEP 4
+    VECTOR_CONVOLUTION_STATE,  -- STEP 5
+    ENDER_STATE  -- STEP 6
+    );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- VECTOR CONTENT BASED ADDRESSING
   -- CONTROL
@@ -202,6 +218,47 @@ begin
   -- w(t;j) = w(t;j)*s(t;k)
 
   -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
+
+  -- CONTROL
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      W_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_ctrl_fsm_int is
+        when STARTER_STATE =>  -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          if (START = '1') then
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_CONTENT_BASED_ADDRESSING_STATE;
+          end if;
+
+        when VECTOR_CONTENT_BASED_ADDRESSING_STATE =>  -- STEP 1
+
+        when SCALAR_ADDER_STATE =>  -- STEP 2
+
+        when VECTOR_EXPONENTIATOR_STATE =>  -- STEP 3
+
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 4
+
+        when VECTOR_CONVOLUTION_STATE =>  -- STEP 5
+
+        when ENDER_STATE =>  -- STEP 6
+
+        when others =>
+          -- FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
   -- VECTOR CONTENT BASED ADDRESSING
   ntm_content_based_addressing_i : ntm_content_based_addressing
