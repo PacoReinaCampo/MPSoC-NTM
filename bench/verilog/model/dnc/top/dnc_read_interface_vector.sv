@@ -123,6 +123,27 @@ module dnc_read_interface_vector #(
   wire [DATA_SIZE-1:0] data_b_in_matrix_product;
   wire [DATA_SIZE-1:0] data_out_matrix_product;
 
+  // TENSOR PRODUCT
+  // CONTROL
+  wire start_tensor_product;
+  wire ready_tensor_product;
+
+  wire data_a_in_i_enable_tensor_product;
+  wire data_a_in_j_enable_tensor_product;
+  wire data_a_in_k_enable_tensor_product;
+  wire data_b_in_i_enable_tensor_product;
+  wire data_b_in_j_enable_tensor_product;
+  wire data_b_in_k_enable_tensor_product;
+  wire data_out_i_enable_tensor_product;
+  wire data_out_j_enable_tensor_product;
+  wire data_out_k_enable_tensor_product;
+
+  // DATA
+  wire [DATA_SIZE-1:0] modulo_in_tensor_product;
+  wire [DATA_SIZE-1:0] data_a_in_tensor_product;
+  wire [DATA_SIZE-1:0] data_b_in_tensor_product;
+  wire [DATA_SIZE-1:0] data_out_tensor_product;
+
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
@@ -158,6 +179,36 @@ module dnc_read_interface_vector #(
     .DATA_A_IN(data_a_in_matrix_product),
     .DATA_B_IN(data_b_in_matrix_product),
     .DATA_OUT(data_out_matrix_product)
+  );
+
+  // TENSOR PRODUCT
+  ntm_tensor_product #(
+    .DATA_SIZE(DATA_SIZE)
+  )
+  tensor_product(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_tensor_product),
+    .READY(ready_tensor_product),
+
+    .DATA_A_IN_I_ENABLE(data_a_in_i_enable_tensor_product),
+    .DATA_A_IN_J_ENABLE(data_a_in_j_enable_tensor_product),
+    .DATA_A_IN_K_ENABLE(data_a_in_k_enable_tensor_product),
+    .DATA_B_IN_I_ENABLE(data_b_in_i_enable_tensor_product),
+    .DATA_B_IN_J_ENABLE(data_b_in_j_enable_tensor_product),
+    .DATA_B_IN_K_ENABLE(data_b_in_k_enable_tensor_product),
+    .DATA_OUT_I_ENABLE(data_out_i_enable_tensor_product),
+    .DATA_OUT_J_ENABLE(data_out_j_enable_tensor_product),
+    .DATA_OUT_K_ENABLE(data_out_k_enable_tensor_product),
+
+    // DATA
+    .MODULO_IN(modulo_in_tensor_product),
+    .DATA_A_IN(data_a_in_tensor_product),
+    .DATA_B_IN(data_b_in_tensor_product),
+    .DATA_OUT(data_out_tensor_product)
   );
 
 endmodule

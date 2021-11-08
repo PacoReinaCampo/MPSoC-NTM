@@ -100,6 +100,22 @@ module ntm_interface_vector #(
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
+  // SCALAR PRODUCT
+  // CONTROL
+  wire start_scalar_product;
+  wire ready_scalar_product;
+
+  wire data_a_in_enable_scalar_product;
+  wire data_b_in_enable_scalar_product;
+  wire data_out_enable_scalar_product;
+
+  // DATA
+  wire [DATA_SIZE-1:0] modulo_in_scalar_product;
+  wire [DATA_SIZE-1:0] length_in_scalar_product;
+  wire [DATA_SIZE-1:0] data_a_in_scalar_product;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_product;
+  wire [DATA_SIZE-1:0] data_out_scalar_product;
+
   // MATRIX PRODUCT
   // CONTROL
   wire start_matrix_product;
@@ -126,6 +142,31 @@ module ntm_interface_vector #(
   ///////////////////////////////////////////////////////////////////////
 
   // xi(t;?) = U(t;?;l)·h(t;l)
+
+  // SCALAR PRODUCT
+  ntm_scalar_product #(
+    .DATA_SIZE(DATA_SIZE)
+  )
+  scalar_product(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_scalar_product),
+    .READY(ready_scalar_product),
+
+    .DATA_A_IN_ENABLE(data_a_in_enable_scalar_product),
+    .DATA_B_IN_ENABLE(data_b_in_enable_scalar_product),
+    .DATA_OUT_ENABLE(data_out_enable_scalar_product),
+
+    // DATA
+    .MODULO_IN(modulo_in_scalar_product),
+    .LENGTH_IN(length_in_scalar_product),
+    .DATA_A_IN(data_a_in_scalar_product),
+    .DATA_B_IN(data_b_in_scalar_product),
+    .DATA_OUT(data_out_scalar_product)
+  );
 
   // MATRIX PRODUCT
   ntm_matrix_product #(

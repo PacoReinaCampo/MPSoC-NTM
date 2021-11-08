@@ -126,6 +126,23 @@ architecture dnc_write_interface_vector_architecture of dnc_write_interface_vect
   -- Signals
   -----------------------------------------------------------------------
 
+  -- SCALAR PRODUCT
+  -- CONTROL
+  signal start_scalar_product : std_logic;
+  signal ready_scalar_product : std_logic;
+
+  signal data_a_in_enable_scalar_product : std_logic;
+  signal data_b_in_enable_scalar_product : std_logic;
+
+  signal data_out_enable_scalar_product : std_logic;
+
+  -- DATA
+  signal modulo_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_product  : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- MATRIX PRODUCT
   -- CONTROL
   signal start_matrix_product : std_logic;
@@ -156,6 +173,33 @@ begin
   -----------------------------------------------------------------------
 
   -- xi(t;?) = U(t;?;l)·h(t;l)
+
+  -- SCALAR PRODUCT
+  scalar_product : ntm_scalar_product
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_product,
+      READY => ready_scalar_product,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_scalar_product,
+      DATA_B_IN_ENABLE => data_b_in_enable_scalar_product,
+
+      DATA_OUT_ENABLE => data_out_enable_scalar_product,
+
+      -- DATA
+      MODULO_IN => modulo_in_scalar_product,
+      LENGTH_IN => length_in_scalar_product,
+      DATA_A_IN => data_a_in_scalar_product,
+      DATA_B_IN => data_b_in_scalar_product,
+      DATA_OUT  => data_out_scalar_product
+      );
 
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
