@@ -47,12 +47,12 @@ module dnc_write_interface_vector #(
 
     // CONTROL
     input START,
-    output READY,
+    output reg READY,
 
     // Write Key
     input WK_IN_L_ENABLE,  // for l in 0 to L-1
     input WK_IN_K_ENABLE,  // for k in 0 to W-1
-    output K_OUT_ENABLE,  // for k in 0 to W-1
+    output reg K_OUT_ENABLE,  // for k in 0 to W-1
 
     // Write Strength
     input WBETA_IN_ENABLE,  // for l in 0 to L-1
@@ -60,12 +60,12 @@ module dnc_write_interface_vector #(
     // Erase Vector
     input WE_IN_L_ENABLE,  // for l in 0 to L-1
     input WE_IN_K_ENABLE,  // for k in 0 to W-1
-    output E_OUT_ENABLE,  // for k in 0 to W-1
+    output reg E_OUT_ENABLE,  // for k in 0 to W-1
 
     // Write Vector
     input WV_IN_L_ENABLE,  // for l in 0 to L-1
     input WV_IN_K_ENABLE,  // for k in 0 to W-1
-    output V_OUT_ENABLE,  // for k in 0 to W-1
+    output reg V_OUT_ENABLE,  // for k in 0 to W-1
 
     // Allocation Gate
     input WGA_IN_ENABLE,  // for l in 0 to L-1
@@ -87,12 +87,12 @@ module dnc_write_interface_vector #(
     input [DATA_SIZE-1:0] WGA_IN,
     input [DATA_SIZE-1:0] WGW_IN,
     input [DATA_SIZE-1:0] H_IN,
-    output [DATA_SIZE-1:0] K_OUT,
-    output [DATA_SIZE-1:0] BETA_OUT,
-    output [DATA_SIZE-1:0] E_OUT,
-    output [DATA_SIZE-1:0] V_OUT,
-    output [DATA_SIZE-1:0] GA_OUT,
-    output [DATA_SIZE-1:0] GW_OUT
+    output reg [DATA_SIZE-1:0] K_OUT,
+    output reg [DATA_SIZE-1:0] BETA_OUT,
+    output reg [DATA_SIZE-1:0] E_OUT,
+    output reg [DATA_SIZE-1:0] V_OUT,
+    output reg [DATA_SIZE-1:0] GA_OUT,
+    output reg [DATA_SIZE-1:0] GW_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////

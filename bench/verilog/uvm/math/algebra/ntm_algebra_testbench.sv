@@ -541,8 +541,7 @@ module ntm_algebra_testbench;
 
   // TENSOR PRODUCT
   ntm_tensor_product #(
-    .DATA_SIZE(DATA_SIZE),
-    .SIZE(SIZE)
+    .DATA_SIZE(DATA_SIZE)
   )
   tensor_product(
     // GLOBAL

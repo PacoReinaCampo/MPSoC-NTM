@@ -64,26 +64,26 @@ entity dnc_read_interface_vector is
     WK_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
     WK_IN_K_ENABLE : in std_logic;      -- for k in 0 to W-1
 
-    K_OUT_I_ENABLE : in std_logic;      -- for i in 0 to R-1
-    K_OUT_K_ENABLE : in std_logic;      -- for k in 0 to W-1
+    K_OUT_I_ENABLE : out std_logic;      -- for i in 0 to R-1
+    K_OUT_K_ENABLE : out std_logic;      -- for k in 0 to W-1
 
     -- Read Strength
     WBETA_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1
     WBETA_IN_L_ENABLE : in std_logic;   -- for l in 0 to L-1
 
-    BETA_OUT_ENABLE : in std_logic;     -- for i in 0 to R-1
+    BETA_OUT_ENABLE : out std_logic;     -- for i in 0 to R-1
 
     -- Free Gate
     WF_IN_I_ENABLE : in std_logic;      -- for i in 0 to R-1
     WF_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
 
-    F_OUT_ENABLE : in std_logic;        -- for i in 0 to R-1
+    F_OUT_ENABLE : out std_logic;        -- for i in 0 to R-1
 
     -- Read Mode
     WPI_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
     WPI_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
-    PI_OUT_ENABLE : in std_logic;       -- for i in 0 to R-1
+    PI_OUT_ENABLE : out std_logic;       -- for i in 0 to R-1
 
     -- Hidden State
     H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
@@ -144,6 +144,28 @@ architecture dnc_read_interface_vector_architecture of dnc_read_interface_vector
   signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- TENSOR PRODUCT
+  -- CONTROL
+  signal start_tensor_product : std_logic;
+  signal ready_tensor_product : std_logic;
+
+  signal data_a_in_i_enable_tensor_product : std_logic;
+  signal data_a_in_j_enable_tensor_product : std_logic;
+  signal data_a_in_k_enable_tensor_product : std_logic;
+  signal data_b_in_i_enable_tensor_product : std_logic;
+  signal data_b_in_j_enable_tensor_product : std_logic;
+  signal data_b_in_k_enable_tensor_product : std_logic;
+
+  signal data_out_i_enable_tensor_product : std_logic;
+  signal data_out_j_enable_tensor_product : std_logic;
+  signal data_out_k_enable_tensor_product : std_logic;
+
+  -- DATA
+  signal modulo_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_product  : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
@@ -183,6 +205,38 @@ begin
       DATA_A_IN   => data_a_in_matrix_product,
       DATA_B_IN   => data_b_in_matrix_product,
       DATA_OUT    => data_out_matrix_product
+      );
+
+  -- TENSOR PRODUCT
+  tensor_product : ntm_tensor_product
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_tensor_product,
+      READY => ready_tensor_product,
+
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_product,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_product,
+      DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_product,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_product,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_product,
+      DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_product,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_tensor_product,
+      DATA_OUT_J_ENABLE => data_out_j_enable_tensor_product,
+      DATA_OUT_K_ENABLE => data_out_k_enable_tensor_product,
+
+      -- DATA
+      MODULO_IN => modulo_in_tensor_product,
+      DATA_A_IN => data_a_in_tensor_product,
+      DATA_B_IN => data_b_in_tensor_product,
+      DATA_OUT  => data_out_tensor_product
       );
 
 end architecture;

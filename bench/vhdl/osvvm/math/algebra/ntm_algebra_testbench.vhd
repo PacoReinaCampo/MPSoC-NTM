@@ -585,9 +585,7 @@ begin
   ntm_tensor_product_test : if (ENABLE_NTM_TENSOR_PRODUCT_TEST) generate
     tensor_product : ntm_tensor_product
       generic map (
-        DATA_SIZE => DATA_SIZE,
-
-        SIZE => SIZE
+        DATA_SIZE => DATA_SIZE
         )
       port map (
         -- GLOBAL

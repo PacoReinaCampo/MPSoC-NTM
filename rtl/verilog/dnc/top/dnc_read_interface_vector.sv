@@ -47,29 +47,29 @@ module dnc_read_interface_vector #(
 
     // CONTROL
     input START,
-    output READY,
+    output reg READY,
 
     // Read Key
     input WK_IN_I_ENABLE,  // for i in 0 to R-1
     input WK_IN_L_ENABLE,  // for l in 0 to L-1
     input WK_IN_K_ENABLE,  // for k in 0 to W-1
-    input K_OUT_I_ENABLE,  // for i in 0 to R-1
-    input K_OUT_K_ENABLE,  // for k in 0 to W-1
+    output reg K_OUT_I_ENABLE,  // for i in 0 to R-1
+    output reg K_OUT_K_ENABLE,  // for k in 0 to W-1
 
     // Read Strength
     input WBETA_IN_I_ENABLE,  // for i in 0 to R-1
     input WBETA_IN_L_ENABLE,  // for l in 0 to L-1
-    input BETA_OUT_ENABLE,  // for i in 0 to R-1
+    output reg BETA_OUT_ENABLE,  // for i in 0 to R-1
 
     // Free Gate
     input WF_IN_I_ENABLE,  // for i in 0 to R-1
     input WF_IN_L_ENABLE,  // for l in 0 to L-1
-    input F_OUT_ENABLE,  // for i in 0 to R-1
+    output reg F_OUT_ENABLE,  // for i in 0 to R-1
 
     // Read Mode
     input WPI_IN_I_ENABLE,  // for i in 0 to R-1
     input WPI_IN_L_ENABLE,  // for l in 0 to L-1
-    input PI_OUT_ENABLE,  // for i in 0 to R-1
+    output reg PI_OUT_ENABLE,  // for i in 0 to R-1
 
     // Hidden State
     input H_IN_ENABLE,  // for l in 0 to L-1
@@ -83,10 +83,10 @@ module dnc_read_interface_vector #(
     input [DATA_SIZE-1:0] WF_IN,
     input [DATA_SIZE-1:0] WPI_IN,
     input [DATA_SIZE-1:0] H_IN,
-    output [DATA_SIZE-1:0] K_OUT,
-    output [DATA_SIZE-1:0] BETA_OUT,
-    output [DATA_SIZE-1:0] F_OUT,
-    output [DATA_SIZE-1:0] PI_OUT
+    output reg [DATA_SIZE-1:0] K_OUT,
+    output reg [DATA_SIZE-1:0] BETA_OUT,
+    output reg [DATA_SIZE-1:0] F_OUT,
+    output reg [DATA_SIZE-1:0] PI_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -123,6 +123,27 @@ module dnc_read_interface_vector #(
   wire [DATA_SIZE-1:0] data_b_in_matrix_product;
   wire [DATA_SIZE-1:0] data_out_matrix_product;
 
+  // TENSOR PRODUCT
+  // CONTROL
+  wire start_tensor_product;
+  wire ready_tensor_product;
+
+  wire data_a_in_i_enable_tensor_product;
+  wire data_a_in_j_enable_tensor_product;
+  wire data_a_in_k_enable_tensor_product;
+  wire data_b_in_i_enable_tensor_product;
+  wire data_b_in_j_enable_tensor_product;
+  wire data_b_in_k_enable_tensor_product;
+  wire data_out_i_enable_tensor_product;
+  wire data_out_j_enable_tensor_product;
+  wire data_out_k_enable_tensor_product;
+
+  // DATA
+  wire [DATA_SIZE-1:0] modulo_in_tensor_product;
+  wire [DATA_SIZE-1:0] data_a_in_tensor_product;
+  wire [DATA_SIZE-1:0] data_b_in_tensor_product;
+  wire [DATA_SIZE-1:0] data_out_tensor_product;
+
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
@@ -158,6 +179,36 @@ module dnc_read_interface_vector #(
     .DATA_A_IN(data_a_in_matrix_product),
     .DATA_B_IN(data_b_in_matrix_product),
     .DATA_OUT(data_out_matrix_product)
+  );
+
+  // TENSOR PRODUCT
+  ntm_tensor_product #(
+    .DATA_SIZE(DATA_SIZE)
+  )
+  tensor_product(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_tensor_product),
+    .READY(ready_tensor_product),
+
+    .DATA_A_IN_I_ENABLE(data_a_in_i_enable_tensor_product),
+    .DATA_A_IN_J_ENABLE(data_a_in_j_enable_tensor_product),
+    .DATA_A_IN_K_ENABLE(data_a_in_k_enable_tensor_product),
+    .DATA_B_IN_I_ENABLE(data_b_in_i_enable_tensor_product),
+    .DATA_B_IN_J_ENABLE(data_b_in_j_enable_tensor_product),
+    .DATA_B_IN_K_ENABLE(data_b_in_k_enable_tensor_product),
+    .DATA_OUT_I_ENABLE(data_out_i_enable_tensor_product),
+    .DATA_OUT_J_ENABLE(data_out_j_enable_tensor_product),
+    .DATA_OUT_K_ENABLE(data_out_k_enable_tensor_product),
+
+    // DATA
+    .MODULO_IN(modulo_in_tensor_product),
+    .DATA_A_IN(data_a_in_tensor_product),
+    .DATA_B_IN(data_b_in_tensor_product),
+    .DATA_OUT(data_out_tensor_product)
   );
 
 endmodule

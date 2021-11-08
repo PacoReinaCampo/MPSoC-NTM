@@ -38,9 +38,7 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_tensor_product #(
-  parameter DATA_SIZE=512,
-
-  parameter [DATA_SIZE-1:0] SIZE=64
+  parameter DATA_SIZE=512
 )
   (
     // GLOBAL

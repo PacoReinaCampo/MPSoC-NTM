@@ -46,9 +46,7 @@ use work.ntm_math_pkg.all;
 
 entity ntm_tensor_product is
   generic (
-    DATA_SIZE : integer := 512;
-
-    SIZE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))
+    DATA_SIZE : integer := 512
     );
   port (
     -- GLOBAL
