@@ -109,7 +109,6 @@ module ntm_erasing #(
   wire start_vector_multiplier;
   wire ready_vector_multiplier;
 
-
   wire data_a_in_enable_vector_multiplier;
   wire data_b_in_enable_vector_multiplier;
   wire data_out_enable_vector_multiplier;

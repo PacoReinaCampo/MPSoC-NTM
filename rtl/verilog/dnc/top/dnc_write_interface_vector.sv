@@ -99,13 +99,24 @@ module dnc_write_interface_vector #(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
+  parameter [1:0] STARTER_STATE = 0;
+  parameter [1:0] SCALAR_PRODUCT_STATE = 1;
+  parameter [1:0] MATRIX_PRODUCT_STATE = 2;
+  parameter [1:0] ENDER_STATE = 3;
+
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  parameter ZERO = 0;
+  parameter ONE = 1;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [1:0] controller_ctrl_fsm_int;
 
   // SCALAR PRODUCT
   // CONTROL
@@ -150,6 +161,48 @@ module dnc_write_interface_vector #(
   ///////////////////////////////////////////////////////////////////////
 
   // xi(t;?) = U(t;?;l)·h(t;l)
+
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      K_OUT    <= ZERO;
+      BETA_OUT <= ZERO;
+      E_OUT    <= ZERO;
+      V_OUT    <= ZERO;
+      GA_OUT   <= ZERO;
+      GW_OUT   <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(controller_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // FSM Control
+            controller_ctrl_fsm_int <= SCALAR_PRODUCT_STATE;
+          end
+        end
+
+        SCALAR_PRODUCT_STATE : begin  // STEP 1
+        end
+
+        MATRIX_PRODUCT_STATE : begin  // STEP 2
+        end
+
+        ENDER_STATE : begin  // STEP 3
+        end
+        default : begin
+          // FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
   // SCALAR PRODUCT
   ntm_scalar_product #(

@@ -188,7 +188,8 @@ module ntm_content_based_addressing #(
 
   // VECTOR EXPONENTIATOR
   ntm_vector_exponentiator #(
-    .DATA_SIZE(DATA_SIZE))
+    .DATA_SIZE(DATA_SIZE)
+  )
   vector_exponentiator(
     // GLOBAL
     .CLK(CLK),
