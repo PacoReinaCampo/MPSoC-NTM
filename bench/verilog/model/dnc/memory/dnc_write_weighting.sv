@@ -47,11 +47,11 @@ module dnc_write_weighting #(
 
     // CONTROL
     input START,
-    output READY,
+    output reg READY,
 
     input A_IN_ENABLE,  // for j in 0 to N-1
     input C_IN_ENABLE,  // for j in 0 to N-1
-    output W_OUT_ENABLE,  // for j in 0 to N-1
+    output reg W_OUT_ENABLE,  // for j in 0 to N-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_N_IN,
@@ -59,20 +59,32 @@ module dnc_write_weighting #(
     input [DATA_SIZE-1:0] C_IN,
     input GA_IN,
     input GW_IN,
-    output [DATA_SIZE-1:0] W_OUT
+    output reg [DATA_SIZE-1:0] W_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
+  parameter [1:0] STARTER_STATE = 0;
+  parameter [1:0] VECTOR_MULTIPLIER_STATE = 1;
+  parameter [1:0] VECTOR_ADDER_STATE = 2;
+  parameter [1:0] ENDER_STATE = 3;
+
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  parameter ZERO = 0;
+  parameter ONE = 1;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [1:0] controller_ctrl_fsm_int;
+
 
   // VECTOR ADDER
   // CONTROL
@@ -113,6 +125,43 @@ module dnc_write_weighting #(
   ///////////////////////////////////////////////////////////////////////
 
   // w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - g(t))·c(t;j))
+
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      W_OUT <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(controller_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // FSM Control
+            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          end
+        end
+
+        VECTOR_MULTIPLIER_STATE : begin  // STEP 1
+        end
+
+        VECTOR_ADDER_STATE : begin  // STEP 2
+        end
+
+        ENDER_STATE : begin  // STEP 3
+        end
+        default : begin
+          // FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
   // VECTOR ADDER
   ntm_vector_adder #(

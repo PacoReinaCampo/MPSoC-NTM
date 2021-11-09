@@ -47,32 +47,43 @@ module dnc_usage_vector #(
 
     // CONTROL
     input START,
-    output READY,
+    output reg READY,
 
     input U_IN_ENABLE,  // for j in 0 to N-1
     input W_IN_ENABLE,  // for j in 0 to N-1
     input PSI_IN_ENABLE,  // for j in 0 to N-1
-    output U_OUT_ENABLE,  // for j in 0 to N-1
+    output reg U_OUT_ENABLE,  // for j in 0 to N-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_N_IN,
     input [DATA_SIZE-1:0] U_IN,
     input [DATA_SIZE-1:0] W_IN,
     input [DATA_SIZE-1:0] PSI_IN,
-    output [DATA_SIZE-1:0] U_OUT
+    output reg [DATA_SIZE-1:0] U_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
+  parameter [1:0] STARTER_STATE = 0;
+  parameter [1:0] VECTOR_MULTIPLIER_STATE = 1;
+  parameter [1:0] VECTOR_ADDER_STATE = 2;
+  parameter [1:0] ENDER_STATE = 3;
+
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  parameter ZERO = 0;
+  parameter ONE = 1;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [1:0] controller_ctrl_fsm_int;
 
   // VECTOR ADDER
   // CONTROL
@@ -110,6 +121,43 @@ module dnc_usage_vector #(
   ///////////////////////////////////////////////////////////////////////
 
   // u(t;j) = (u(t-1;j) + w(t-1;j) - u(t-1;j) o w(t-1;j)) o psi(t;j)
+
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      U_OUT <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(controller_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // FSM Control
+            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          end
+        end
+
+        VECTOR_MULTIPLIER_STATE : begin  // STEP 1
+        end
+
+        VECTOR_ADDER_STATE : begin  // STEP 2
+        end
+
+        ENDER_STATE : begin  // STEP 3
+        end
+        default : begin
+          // FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
   // VECTOR ADDER
   ntm_vector_adder #(

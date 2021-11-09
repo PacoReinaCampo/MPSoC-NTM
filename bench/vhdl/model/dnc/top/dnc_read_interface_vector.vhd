@@ -113,13 +113,26 @@ architecture dnc_read_interface_vector_architecture of dnc_read_interface_vector
   -- Types
   -----------------------------------------------------------------------
 
+  type controller_ctrl_fsm is (
+    STARTER_STATE,  -- STEP 0
+    MATRIX_PRODUCT_STATE,  -- STEP 1
+    TENSOR_PRODUCT_STATE,  -- STEP 2
+    ENDER_STATE  -- STEP 3
+    );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- MATRIX PRODUCT
   -- CONTROL
@@ -173,6 +186,44 @@ begin
   -----------------------------------------------------------------------
 
   -- xi(t;?) = U(t;?;l)·h(t;l)
+
+  -- CONTROL
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      K_OUT    <= ZERO;
+      BETA_OUT <= ZERO;
+      F_OUT    <= ZERO;
+      PI_OUT   <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_ctrl_fsm_int is
+        when STARTER_STATE =>  -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          if (START = '1') then
+            -- FSM Control
+            controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+          end if;
+
+        when MATRIX_PRODUCT_STATE =>  -- STEP 1
+
+        when TENSOR_PRODUCT_STATE =>  -- STEP 2
+
+        when ENDER_STATE =>  -- STEP 3
+
+        when others =>
+          -- FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product

@@ -47,34 +47,45 @@ module dnc_temporal_link_matrix #(
 
     // CONTROL
     input START,
-    output READY,
+    output reg READY,
 
     input L_IN_G_ENABLE,  // for g in 0 to N-1 (square matrix)
     input L_IN_J_ENABLE,  // for j in 0 to N-1 (square matrix)
     input W_IN_ENABLE,  // for j in 0 to N-1
     input P_IN_ENABLE,  // for j in 0 to N-1
-    output L_OUT_G_ENABLE,  // for g in 0 to N-1 (square matrix)
-    output L_OUT_J_ENABLE,  // for j in 0 to N-1 (square matrix)
+    output reg L_OUT_G_ENABLE,  // for g in 0 to N-1 (square matrix)
+    output reg L_OUT_J_ENABLE,  // for j in 0 to N-1 (square matrix)
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_N_IN,
     input [DATA_SIZE-1:0] L_IN,
     input [DATA_SIZE-1:0] W_IN,
     input [DATA_SIZE-1:0] P_IN,
-    output [DATA_SIZE-1:0] L_OUT
+    output reg [DATA_SIZE-1:0] L_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
+  parameter [1:0] STARTER_STATE = 0;
+  parameter [1:0] VECTOR_MULTIPLIER_STATE = 1;
+  parameter [1:0] VECTOR_ADDER_STATE = 2;
+  parameter [1:0] ENDER_STATE = 3;
+
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  parameter ZERO = 0;
+  parameter ONE = 1;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [1:0] controller_ctrl_fsm_int;
 
   // SCALAR ADDER
   // CONTROL
@@ -105,6 +116,43 @@ module dnc_temporal_link_matrix #(
 
   // L(t)[g;j] = (1 - w(t;j)[i] - w(t;j)[j])·L(t-1)[g;j] + w(t;j)[i]·p(t-1;j)[j]
   // L(t=0)[g,j] = 0
+
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      L_OUT <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(controller_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // FSM Control
+            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          end
+        end
+
+        VECTOR_MULTIPLIER_STATE : begin  // STEP 1
+        end
+
+        VECTOR_ADDER_STATE : begin  // STEP 2
+        end
+
+        ENDER_STATE : begin  // STEP 3
+        end
+        default : begin
+          // FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
   // SCALAR ADDER
   ntm_scalar_adder #(

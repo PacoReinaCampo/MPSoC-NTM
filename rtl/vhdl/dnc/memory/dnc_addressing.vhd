@@ -94,8 +94,41 @@ end dnc_addressing;
 architecture dnc_addressing_architecture of dnc_addressing is
 
   -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  type controller_ctrl_fsm is (
+    STARTER_STATE,  -- STEP 0
+    ALLOCATION_WEIGHTING_STATE,  -- STEP 1
+    BACKWARD_WEIGHTING_STATE,  -- STEP 2
+    FORWARD_WEIGHTING_STATE,  -- STEP 3
+    MEMORY_MATRIX_STATE,  -- STEP 4
+    MEMORY_RETENTION_VECTOR_STATE,  -- STEP 5
+    PRECEDENCE_WEIGHTING_STATE,  -- STEP 6
+    READ_CONTENT_WEIGHTING_STATE,  -- STEP 7
+    READ_VECTORS_STATE,  -- STEP 8
+    READ_WEIGHTING_STATE,  -- STEP 9
+    SORT_VECTOR_STATE,  -- STEP 10
+    TEMPORAL_LINK_MATRIX_STATE,  -- STEP 11
+    USAGE_VECTOR_STATE,  -- STEP 12
+    WRITE_CONTENT_WEIGHTING_STATE,  -- STEP 13
+    WRITE_WEIGHTING_STATE,  -- STEP 14
+    ENDER_STATE  -- STEP 15
+    );
+
+  -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
+
+  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
+  -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- ALLOCATION WEIGHTING
   -- CONTROL
@@ -412,6 +445,65 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- CONTROL
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      R_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_ctrl_fsm_int is
+        when STARTER_STATE =>  -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          if (START = '1') then
+            -- FSM Control
+            controller_ctrl_fsm_int <= ALLOCATION_WEIGHTING_STATE;
+          end if;
+
+        when ALLOCATION_WEIGHTING_STATE =>  -- STEP 1
+        
+        when BACKWARD_WEIGHTING_STATE =>  -- STEP 2
+        
+        when FORWARD_WEIGHTING_STATE =>  -- STEP 3
+        
+        when MEMORY_MATRIX_STATE =>  -- STEP 4
+        
+        when MEMORY_RETENTION_VECTOR_STATE =>  -- STEP 5
+        
+        when PRECEDENCE_WEIGHTING_STATE =>  -- STEP 6
+        
+        when READ_CONTENT_WEIGHTING_STATE =>  -- STEP 7
+        
+        when READ_VECTORS_STATE =>  -- STEP 8
+        
+        when READ_WEIGHTING_STATE =>  -- STEP 9
+        
+        when SORT_VECTOR_STATE =>  -- STEP 10
+        
+        when TEMPORAL_LINK_MATRIX_STATE =>  -- STEP 11
+        
+        when USAGE_VECTOR_STATE =>  -- STEP 12
+        
+        when WRITE_CONTENT_WEIGHTING_STATE =>  -- STEP 13
+        
+        when WRITE_WEIGHTING_STATE =>  -- STEP 14
+        
+        when ENDER_STATE =>  -- STEP 15
+
+        when others =>
+          -- FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
   -- ALLOCATION WEIGHTING
   allocation_weighting : dnc_allocation_weighting

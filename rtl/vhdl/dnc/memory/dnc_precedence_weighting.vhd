@@ -78,13 +78,27 @@ architecture dnc_precedence_weighting_architecture of dnc_precedence_weighting i
   -- Types
   -----------------------------------------------------------------------
 
+  type controller_ctrl_fsm is (
+    STARTER_STATE,  -- STEP 0
+    VECTOR_MULTIPLIER_STATE,  -- STEP 1
+    VECTOR_ADDER_STATE,  -- STEP 2
+    VECTOR_SUMMATION_STATE,  -- STEP 3
+    ENDER_STATE  -- STEP 4
+    );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- VECTOR SUMMATION
   -- CONTROL
@@ -149,6 +163,43 @@ begin
   -- p(t;j) = (1 - summation(w(t;j))[i in 1 to N])·p(t-1;j) + w(t;j)
 
   -- p(t=0) = 0
+
+  -- CONTROL
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      P_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_ctrl_fsm_int is
+        when STARTER_STATE =>  -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          if (START = '1') then
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          end if;
+
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
+
+        when VECTOR_ADDER_STATE =>  -- STEP 2
+
+        when VECTOR_SUMMATION_STATE =>  -- STEP 3
+
+        when ENDER_STATE =>  -- STEP 4
+
+        when others =>
+          -- FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
   -- VECTOR SUMMATION
   vector_summation_function : ntm_vector_summation_function

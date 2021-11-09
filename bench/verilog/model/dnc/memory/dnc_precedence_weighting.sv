@@ -47,30 +47,42 @@ module dnc_precedence_weighting #(
 
     // CONTROL
     input START,
-    output READY,
+    output reg READY,
 
     input W_IN_ENABLE,  // for j in 0 to N-1
     input P_IN_ENABLE,  // for j in 0 to N-1
-    output P_OUT_ENABLE,  // for j in 0 to N-1
+    output reg P_OUT_ENABLE,  // for j in 0 to N-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_N_IN,
     input [DATA_SIZE-1:0] W_IN,
     input [DATA_SIZE-1:0] P_IN,
-    output [DATA_SIZE-1:0] P_OUT
+    output reg [DATA_SIZE-1:0] P_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
+  parameter [2:0] STARTER_STATE = 0;
+  parameter [2:0] VECTOR_MULTIPLIER_STATE = 1;
+  parameter [2:0] VECTOR_ADDER_STATE = 2;
+  parameter [2:0] VECTOR_SUMMATION_STATE = 3;
+  parameter [2:0] ENDER_STATE = 4;
+
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  parameter ZERO = 0;
+  parameter ONE = 1;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [2:0] controller_ctrl_fsm_int;
 
   // VECTOR SUMMATION
   // CONTROL
@@ -125,6 +137,46 @@ module dnc_precedence_weighting #(
 
   // p(t;j) = (1 - summation(w(t;j))[i in 1 to N])·p(t-1;j) + w(t;j)
   // p(t=0) = 0
+
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      P_OUT <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(controller_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // FSM Control
+            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          end
+        end
+
+        VECTOR_MULTIPLIER_STATE : begin  // STEP 1
+        end
+
+        VECTOR_ADDER_STATE : begin  // STEP 2
+        end
+
+        VECTOR_SUMMATION_STATE : begin  // STEP 3
+        end
+
+        ENDER_STATE : begin  // STEP 4
+        end
+        default : begin
+          // FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
   // VECTOR SUMMATION
   ntm_vector_summation_function #(

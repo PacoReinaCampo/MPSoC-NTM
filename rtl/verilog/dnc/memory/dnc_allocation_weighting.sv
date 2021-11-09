@@ -47,30 +47,42 @@ module dnc_allocation_weighting #(
 
     // CONTROL
     input START,
-    output READY,
+    output reg READY,
 
     input PHI_IN_ENABLE,  // for j in 0 to N-1
     input U_IN_ENABLE,  // for j in 0 to N-1
-    output A_OUT_ENABLE,  // for j in 0 to N-1
+    output reg A_OUT_ENABLE,  // for j in 0 to N-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_N_IN,
     input [DATA_SIZE-1:0] PHI_IN,
     input [DATA_SIZE-1:0] U_IN,
-    output [DATA_SIZE-1:0] A_OUT
+    output reg [DATA_SIZE-1:0] A_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
+  parameter [2:0] STARTER_STATE = 0;
+  parameter [2:0] VECTOR_MULTIPLIER_STATE = 1;
+  parameter [2:0] VECTOR_ADDER_STATE = 2;
+  parameter [2:0] VECTOR_MULTIPLICATION_STATE = 3;
+  parameter [2:0] ENDER_STATE = 4;
+
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  parameter ZERO = 0;
+  parameter ONE = 1;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [2:0] controller_ctrl_fsm_int;
 
   // VECTOR MULTIPLICATION
   // CONTROL
@@ -124,6 +136,46 @@ module dnc_allocation_weighting #(
   ///////////////////////////////////////////////////////////////////////
 
   // a(t)[phi(t)[j]] = (1 - u(t)[phi(t)[j]])·multiplication(u(t)[phi(t)[j]])[i in 1 to j-1]
+
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      A_OUT <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(controller_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // FSM Control
+            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          end
+        end
+
+        VECTOR_MULTIPLIER_STATE : begin  // STEP 1
+        end
+
+        VECTOR_ADDER_STATE : begin  // STEP 2
+        end
+
+        VECTOR_MULTIPLICATION_STATE : begin  // STEP 3
+        end
+
+        ENDER_STATE : begin  // STEP 4
+        end
+        default : begin
+          // FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
   // VECTOR MULTIPLICATION
   ntm_vector_multiplication_function #(

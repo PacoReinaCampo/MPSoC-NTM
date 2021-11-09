@@ -87,6 +87,13 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   -- Types
   -----------------------------------------------------------------------
 
+  type controller_ctrl_fsm is (
+    STARTER_STATE,  -- STEP 0
+    MATRIX_TRANSPOSE_STATE,  -- STEP 1
+    MATRIX_PRODUCT_STATE,  -- STEP 2
+    ENDER_STATE  -- STEP 3
+    );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
@@ -99,6 +106,9 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- MATRIX TRANSPOSE
   -- CONTROL
@@ -146,6 +156,41 @@ begin
   -----------------------------------------------------------------------
 
   -- M(t;j;k) = M(t-1;j;k) o (E - w(t;j)·transpose(e(t;k))) + w(t;j)·transpose(v(t;k))
+
+  -- CONTROL
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      M_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_ctrl_fsm_int is
+        when STARTER_STATE =>  -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          if (START = '1') then
+            -- FSM Control
+            controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_STATE;
+          end if;
+
+        when MATRIX_TRANSPOSE_STATE =>  -- STEP 1
+
+        when MATRIX_PRODUCT_STATE =>  -- STEP 2
+
+        when ENDER_STATE =>  -- STEP 3
+
+        when others =>
+          -- FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
   -- MATRIX TRANSPOSE
   ntm_matrix_transpose_i : ntm_matrix_transpose

@@ -47,26 +47,31 @@ module dnc_backward_weighting #(
 
     // CONTROL
     input START,
-    output READY,
+    output reg READY,
 
     input L_IN_G_ENABLE,  // for g in 0 to N-1 (square matrix)
     input L_IN_J_ENABLE,  // for j in 0 to N-1 (square matrix)
     input W_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     input W_IN_J_ENABLE,  // for j in 0 to N-1
-    output B_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
-    output B_OUT_J_ENABLE,  // for j in 0 to N-1
+    output reg B_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    output reg B_OUT_J_ENABLE,  // for j in 0 to N-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_R_IN,
     input [DATA_SIZE-1:0] SIZE_N_IN,
     input [DATA_SIZE-1:0] L_IN,
     input [DATA_SIZE-1:0] W_IN,
-    output [DATA_SIZE-1:0] B_OUT
+    output reg [DATA_SIZE-1:0] B_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
+
+  parameter [1:0] STARTER_STATE = 0;
+  parameter [1:0] MATRIX_PRODUCT_STATE = 1;
+  parameter [1:0] MATRIX_TRANSPOSE_STATE = 2;
+  parameter [1:0] ENDER_STATE = 3;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -80,6 +85,9 @@ module dnc_backward_weighting #(
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [1:0] controller_ctrl_fsm_int;
 
   // MATRIX TRANSPOSE
   // CONTROL
@@ -123,6 +131,43 @@ module dnc_backward_weighting #(
   ///////////////////////////////////////////////////////////////////////
 
   // b(t;i;j) = transpose(L(t;g;j))·w(t-1;i;j)
+
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      B_OUT <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(controller_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // FSM Control
+            controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+          end
+        end
+
+        MATRIX_PRODUCT_STATE : begin  // STEP 1
+        end
+
+        MATRIX_TRANSPOSE_STATE : begin  // STEP 2
+        end
+
+        ENDER_STATE : begin  // STEP 3
+        end
+        default : begin
+          // FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
   // MATRIX TRANSPOSE
   ntm_matrix_transpose #(

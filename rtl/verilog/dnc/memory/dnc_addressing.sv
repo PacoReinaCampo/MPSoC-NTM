@@ -47,7 +47,7 @@ module dnc_addressing #(
 
     // CONTROL
     input START,
-    output READY,
+    output reg READY,
 
     input K_READ_IN_I_ENABLE,  // for i in 0 to R-1
     input K_READ_IN_K_ENABLE,  // for k in 0 to W-1
@@ -71,12 +71,43 @@ module dnc_addressing #(
     input [DATA_SIZE-1:0] V_WRITE_IN,
     input [DATA_SIZE-1:0] GA_WRITE_IN,
     input [DATA_SIZE-1:0] GW_WRITE_IN,
-    output [DATA_SIZE-1:0] R_OUT
+    output reg [DATA_SIZE-1:0] R_OUT
   );
+
+  ///////////////////////////////////////////////////////////////////////
+  // Types
+  ///////////////////////////////////////////////////////////////////////
+
+  parameter [3:0] STARTER_STATE = 0;
+  parameter [3:0] ALLOCATION_WEIGHTING_STATE = 1;
+  parameter [3:0] BACKWARD_WEIGHTING_STATE = 2;
+  parameter [3:0] FORWARD_WEIGHTING_STATE = 3;
+  parameter [3:0] MEMORY_MATRIX_STATE = 4;
+  parameter [3:0] MEMORY_RETENTION_VECTOR_STATE = 5;
+  parameter [3:0] PRECEDENCE_WEIGHTING_STATE = 6;
+  parameter [3:0] READ_CONTENT_WEIGHTING_STATE = 7;
+  parameter [3:0] READ_VECTORS_STATE = 8;
+  parameter [3:0] READ_WEIGHTING_STATE = 9;
+  parameter [3:0] SORT_VECTOR_STATE = 10;
+  parameter [3:0] TEMPORAL_LINK_MATRIX_STATE = 11;
+  parameter [3:0] USAGE_VECTOR_STATE = 12;
+  parameter [3:0] WRITE_CONTENT_WEIGHTING_STATE = 13;
+  parameter [3:0] WRITE_WEIGHTING_STATE = 14;
+  parameter [3:0] ENDER_STATE = 15;
+
+  ///////////////////////////////////////////////////////////////////////
+  // Constants
+  ///////////////////////////////////////////////////////////////////////
+
+  parameter ZERO = 0;
+  parameter ONE = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [3:0] controller_ctrl_fsm_int;
 
   // ALLOCATION WEIGHTING
   // CONTROL
@@ -321,6 +352,79 @@ module dnc_addressing #(
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
+
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      R_OUT <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(controller_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // FSM Control
+            controller_ctrl_fsm_int <= ALLOCATION_WEIGHTING_STATE;
+          end
+        end
+
+        ALLOCATION_WEIGHTING_STATE : begin  // STEP 1
+        end
+
+        BACKWARD_WEIGHTING_STATE : begin  // STEP 2
+        end
+
+        FORWARD_WEIGHTING_STATE : begin  // STEP 3
+        end
+
+        MEMORY_MATRIX_STATE : begin  // STEP 4
+        end
+
+        MEMORY_RETENTION_VECTOR_STATE : begin  // STEP 5
+        end
+
+        PRECEDENCE_WEIGHTING_STATE : begin  // STEP 6
+        end
+
+        READ_CONTENT_WEIGHTING_STATE : begin  // STEP 7
+        end
+
+        READ_VECTORS_STATE : begin  // STEP 8
+        end
+
+        READ_WEIGHTING_STATE : begin  // STEP 9
+        end
+
+        SORT_VECTOR_STATE : begin  // STEP 10
+        end
+
+        TEMPORAL_LINK_MATRIX_STATE : begin  // STEP 11
+        end
+
+        USAGE_VECTOR_STATE : begin  // STEP 12
+        end
+
+        WRITE_CONTENT_WEIGHTING_STATE : begin  // STEP 13
+        end
+
+        WRITE_WEIGHTING_STATE : begin  // STEP 14
+        end
+
+        ENDER_STATE : begin  // STEP 15
+        end
+        default : begin
+          // FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
   // ALLOCATION WEIGHTING
   dnc_allocation_weighting #(

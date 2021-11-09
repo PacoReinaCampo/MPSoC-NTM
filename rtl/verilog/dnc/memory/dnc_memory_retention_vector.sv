@@ -47,32 +47,44 @@ module dnc_memory_retention_vector #(
 
     // CONTROL
     input START,
-    output READY,
+    output reg READY,
 
     input F_IN_ENABLE,  // for i in 0 to R-1
     input W_IN_I_ENABLE,  // for i in 0 to R-1
     input W_IN_J_ENABLE,  // for j in 0 to N-1
-    output PSI_OUT_ENABLE,  // for j in 0 to N-1
+    output reg PSI_OUT_ENABLE,  // for j in 0 to N-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_R_IN,
     input [DATA_SIZE-1:0] SIZE_N_IN,
     input F_IN,
     input [DATA_SIZE-1:0] W_IN,
-    output [DATA_SIZE-1:0] PSI_OUT
+    output reg [DATA_SIZE-1:0] PSI_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
   // Types
   ///////////////////////////////////////////////////////////////////////
 
+  parameter [1:0] STARTER_STATE = 0;
+  parameter [1:0] VECTOR_MULTIPLIER_STATE = 1;
+  parameter [1:0] VECTOR_ADDER_STATE = 2;
+  parameter [1:0] VECTOR_MULTIPLICATION_STATE = 2;
+  parameter [1:0] ENDER_STATE = 3;
+
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
+  parameter ZERO = 0;
+  parameter ONE = 1;
+
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
+  // Finite State Machine
+  reg [1:0] controller_ctrl_fsm_int;
 
   // VECTOR MULTIPLICATION
   // CONTROL
@@ -126,6 +138,46 @@ module dnc_memory_retention_vector #(
   ///////////////////////////////////////////////////////////////////////
 
   // psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
+
+  // CONTROL
+  always @(posedge CLK or posedge RST) begin
+    if(RST == 1'b0) begin
+      // Data Outputs
+      PSI_OUT <= ZERO;
+
+      // Control Outputs
+      READY <= 1'b0;
+    end
+    else begin
+      case(controller_ctrl_fsm_int)
+        STARTER_STATE : begin  // STEP 0
+          // Control Outputs
+          READY <= 1'b0;
+
+          if(START == 1'b1) begin
+            // FSM Control
+            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          end
+        end
+
+        VECTOR_MULTIPLIER_STATE : begin  // STEP 1
+        end
+
+        VECTOR_ADDER_STATE : begin  // STEP 2
+        end
+
+        VECTOR_MULTIPLICATION_STATE : begin  // STEP 3
+        end
+
+        ENDER_STATE : begin  // STEP 4
+        end
+        default : begin
+          // FSM Control
+          controller_ctrl_fsm_int <= STARTER_STATE;
+        end
+      endcase
+    end
+  end
 
   // VECTOR MULTIPLICATION
   ntm_vector_multiplication_function #(
