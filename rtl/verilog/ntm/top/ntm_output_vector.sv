@@ -83,6 +83,7 @@ module ntm_output_vector #(
 
   parameter ZERO = 0;
   parameter ONE = 1;
+  parameter FULL = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -170,6 +171,24 @@ module ntm_output_vector #(
       endcase
     end
   end
+
+  // DATA
+  // MATRIX PRODUCT
+  assign modulo_in_matrix_product   = FULL;
+  assign size_a_i_in_matrix_product = SIZE_Y_IN;
+  assign size_a_j_in_matrix_product = SIZE_W_IN;
+  assign size_b_i_in_matrix_product = SIZE_W_IN;
+  assign size_b_j_in_matrix_product = SIZE_R_IN;
+  assign data_a_in_matrix_product   = K_IN;
+  assign data_b_in_matrix_product   = R_IN;
+
+  // VECTOR ADDER
+  assign modulo_in_vector_adder = FULL;
+  assign size_in_vector_adder   = SIZE_Y_IN;
+  assign data_a_in_vector_adder = data_out_matrix_product;
+  assign data_b_in_vector_adder = NU_IN;
+
+  // assign Y_OUT = data_out_vector_adder;
 
   // VECTOR ADDER
   ntm_vector_adder #(
