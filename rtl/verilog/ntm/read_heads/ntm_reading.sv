@@ -75,6 +75,7 @@ module ntm_reading #(
 
   parameter ZERO = 0;
   parameter ONE = 1;
+  parameter FULL = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -156,6 +157,21 @@ module ntm_reading #(
       endcase
     end
   end
+
+  // DATA
+  // VECTOR MULTIPLIER
+  assign modulo_in_vector_multiplier = FULL;
+  assign size_in_vector_multiplier   = SIZE_N_IN;
+  assign data_a_in_vector_multiplier = W_IN;
+  assign data_b_in_vector_multiplier = M_IN;
+
+  // VECTOR SUMMATION
+  assign modulo_in_vector_summation = FULL;
+  assign size_in_vector_summation   = SIZE_N_IN;
+  assign length_in_vector_summation = SIZE_W_IN;
+  assign data_in_vector_summation   = data_out_vector_multiplier;
+
+  // assign R_OUT <= data_out_vector_summation;
 
   // VECTOR SUMMATION
   ntm_vector_summation_function #(

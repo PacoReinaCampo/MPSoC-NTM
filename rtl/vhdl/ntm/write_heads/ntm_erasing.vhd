@@ -93,6 +93,7 @@ architecture ntm_erasing_architecture of ntm_erasing is
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -204,6 +205,30 @@ begin
       end case;
     end if;
   end process;
+
+  -- DATA
+  -- VECTOR ADDER
+  modulo_in_vector_adder <= FULL;
+  size_in_vector_adder   <= SIZE_W_IN;
+  data_a_in_vector_adder <= ONE;
+  data_b_in_vector_adder <= W_IN;
+
+  -- VECTOR MULTIPLIER
+  modulo_in_vector_multiplier <= FULL;
+  size_in_vector_multiplier   <= SIZE_N_IN;
+  data_a_in_vector_multiplier <= data_out_vector_adder;
+  data_b_in_vector_multiplier <= E_IN;
+
+  -- MATRIX PRODUCT
+  modulo_in_matrix_product   <= FULL;
+  size_a_i_in_matrix_product <= SIZE_N_IN;
+  size_a_j_in_matrix_product <= SIZE_W_IN;
+  size_b_i_in_matrix_product <= SIZE_W_IN;
+  size_b_j_in_matrix_product <= SIZE_N_IN;
+  data_a_in_matrix_product   <= M_IN;
+  data_b_in_matrix_product   <= data_out_vector_multiplier;
+
+  -- M_OUT <= data_out_matrix_product;
 
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder

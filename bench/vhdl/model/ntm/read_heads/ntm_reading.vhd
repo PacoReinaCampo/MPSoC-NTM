@@ -90,6 +90,7 @@ architecture ntm_reading_architecture of ntm_reading is
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -175,6 +176,21 @@ begin
       end case;
     end if;
   end process;
+
+  -- DATA
+  -- VECTOR MULTIPLIER
+  modulo_in_vector_multiplier <= FULL;
+  size_in_vector_multiplier   <= SIZE_N_IN;
+  data_a_in_vector_multiplier <= W_IN;
+  data_b_in_vector_multiplier <= M_IN;
+
+  -- VECTOR SUMMATION
+  modulo_in_vector_summation <= FULL;
+  size_in_vector_summation   <= SIZE_N_IN;
+  length_in_vector_summation <= SIZE_W_IN;
+  data_in_vector_summation   <= data_out_vector_multiplier;
+
+  -- R_OUT <= data_out_vector_summation;
 
   -- VECTOR SUMMATION
   vector_summation_function : ntm_vector_summation_function

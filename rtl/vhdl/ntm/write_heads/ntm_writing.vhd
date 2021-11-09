@@ -92,6 +92,7 @@ architecture ntm_writing_architecture of ntm_writing is
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -178,6 +179,21 @@ begin
       end case;
     end if;
   end process;
+
+  -- DATA
+  -- VECTOR MULTIPLIER
+  modulo_in_vector_multiplier <= FULL;
+  size_in_vector_multiplier   <= SIZE_W_IN;
+  data_a_in_vector_multiplier <= W_IN;
+  data_b_in_vector_multiplier <= A_IN;
+
+  -- VECTOR ADDER
+  modulo_in_vector_adder <= FULL;
+  size_in_vector_adder   <= SIZE_N_IN;
+  data_a_in_vector_adder <= M_IN;
+  data_b_in_vector_adder <= data_out_vector_multiplier;
+
+  -- M_OUT <= data_out_vector_adder;
 
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder

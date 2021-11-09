@@ -103,6 +103,7 @@ architecture dnc_output_vector_architecture of dnc_output_vector is
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -195,6 +196,24 @@ begin
       end case;
     end if;
   end process;
+
+  -- DATA
+  -- MATRIX PRODUCT
+  modulo_in_matrix_product   <= FULL;
+  size_a_i_in_matrix_product <= SIZE_Y_IN;
+  size_a_j_in_matrix_product <= SIZE_R_IN;
+  size_b_i_in_matrix_product <= SIZE_Y_IN;
+  size_b_j_in_matrix_product <= SIZE_R_IN;
+  data_a_in_matrix_product   <= K_IN;
+  data_b_in_matrix_product   <= R_IN;
+
+  -- VECTOR ADDER
+  modulo_in_vector_adder <= FULL;
+  size_in_vector_adder   <= SIZE_Y_IN;
+  data_a_in_vector_adder <= data_out_matrix_product;
+  data_b_in_vector_adder <= NU_IN;
+
+  -- Y_OUT <= data_out_vector_adder;
 
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder

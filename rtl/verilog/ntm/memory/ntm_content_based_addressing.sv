@@ -79,6 +79,7 @@ module ntm_content_based_addressing #(
 
   parameter ZERO = 0;
   parameter ONE = 1;
+  parameter FULL = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -86,6 +87,22 @@ module ntm_content_based_addressing #(
 
   // Finite State Machine
   reg [2:0] controller_ctrl_fsm_int;
+
+  // VECTOR MULTIPLIER
+  // CONTROL
+  wire start_vector_multiplier;
+  wire ready_vector_multiplier;
+
+  wire data_a_in_enable_vector_multiplier;
+  wire data_b_in_enable_vector_multiplier;
+  wire data_out_enable_vector_multiplier;
+
+  // DATA
+  wire [DATA_SIZE-1:0] modulo_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] size_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_out_vector_multiplier;
 
   // VECTOR EXPONENTIATOR
   // CONTROL
@@ -185,6 +202,59 @@ module ntm_content_based_addressing #(
       endcase
     end
   end
+
+  // DATA
+  // VECTOR COSINE SIMILARITY
+  assign modulo_in_vector_cosine = FULL;
+  assign size_in_vector_cosine   = SIZE_I_IN;
+  assign length_in_vector_cosine = SIZE_J_IN;
+  assign data_a_in_vector_cosine = K_IN;
+  assign data_b_in_vector_cosine = M_IN;
+
+  // VECTOR MULTIPLIER
+  assign modulo_in_vector_multiplier = FULL;
+  assign size_in_vector_multiplier   = SIZE_I_IN;
+  assign data_a_in_vector_multiplier = data_out_vector_cosine;
+  assign data_b_in_vector_multiplier = BETA_IN;
+
+  // VECTOR EXPONENTIATOR
+  assign modulo_in_vector_exponentiator = FULL;
+  assign size_in_vector_exponentiator   = SIZE_I_IN;
+  assign data_a_in_vector_exponentiator = FULL;
+  assign data_b_in_vector_exponentiator = data_out_vector_multiplier;
+
+  // VECTOR SOFTMAX
+  assign modulo_in_vector_softmax = FULL;
+  assign size_in_vector_softmax   = SIZE_I_IN;
+  assign length_in_vector_softmax = SIZE_J_IN;
+  assign data_in_vector_softmax   = data_out_vector_exponentiator;
+
+  // assign C_OUT = data_out_vector_softmax;
+
+  // VECTOR MULTIPLIER
+  ntm_vector_multiplier #(
+    .DATA_SIZE(DATA_SIZE)
+  )
+  vector_multiplier(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_vector_multiplier),
+    .READY(ready_vector_multiplier),
+
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_multiplier),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_multiplier),
+    .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
+
+    // DATA
+    .MODULO_IN(modulo_in_vector_multiplier),
+    .SIZE_IN(size_in_vector_multiplier),
+    .DATA_A_IN(data_a_in_vector_multiplier),
+    .DATA_B_IN(data_b_in_vector_multiplier),
+    .DATA_OUT(data_out_vector_multiplier)
+  );
 
   // VECTOR EXPONENTIATOR
   ntm_vector_exponentiator #(

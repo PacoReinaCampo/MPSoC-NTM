@@ -77,6 +77,7 @@ module ntm_writing #(
 
   parameter ZERO = 0;
   parameter ONE = 1;
+  parameter FULL = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -158,6 +159,21 @@ module ntm_writing #(
       endcase
     end
   end
+
+  // DATA
+  // VECTOR MULTIPLIER
+  assign modulo_in_vector_multiplier = FULL;
+  assign size_in_vector_multiplier   = SIZE_W_IN;
+  assign data_a_in_vector_multiplier = W_IN;
+  assign data_b_in_vector_multiplier = A_IN;
+
+  // VECTOR ADDER
+  assign modulo_in_vector_adder = FULL;
+  assign size_in_vector_adder   = SIZE_N_IN;
+  assign data_a_in_vector_adder = M_IN;
+  assign data_b_in_vector_adder = data_out_vector_multiplier;
+
+  // assign M_OUT = data_out_vector_adder;
 
   // VECTOR ADDER
   ntm_vector_adder #(
