@@ -99,6 +99,7 @@ architecture dnc_backward_weighting_architecture of dnc_backward_weighting is
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
   constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -188,6 +189,22 @@ begin
       end case;
     end if;
   end process;
+
+  -- DATA
+  -- MATRIX TRANSPOSE
+  modulo_in_matrix_transpose <= FULL;
+  data_in_matrix_transpose   <= L_IN;
+
+  -- MATRIX PRODUCT
+  modulo_in_matrix_product   <= FULL;
+  size_a_i_in_matrix_product <= SIZE_N_IN;
+  size_a_j_in_matrix_product <= SIZE_N_IN;
+  size_b_i_in_matrix_product <= SIZE_N_IN;
+  size_b_j_in_matrix_product <= ONE;
+  data_a_in_matrix_product   <= data_out_matrix_transpose;
+  data_b_in_matrix_product   <= W_IN;
+
+  -- data_out_matrix_product <= B_OUT;
 
   -- MATRIX TRANSPOSE
   matrix_transpose : ntm_matrix_transpose

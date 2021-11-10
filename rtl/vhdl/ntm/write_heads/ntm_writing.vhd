@@ -189,7 +189,7 @@ begin
 
   -- VECTOR ADDER
   modulo_in_vector_adder <= FULL;
-  size_in_vector_adder   <= SIZE_N_IN;
+  size_in_vector_adder   <= SIZE_W_IN;
   data_a_in_vector_adder <= M_IN;
   data_b_in_vector_adder <= data_out_vector_multiplier;
 

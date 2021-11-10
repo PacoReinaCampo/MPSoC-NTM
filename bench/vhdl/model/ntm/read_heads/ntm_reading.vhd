@@ -180,14 +180,14 @@ begin
   -- DATA
   -- VECTOR MULTIPLIER
   modulo_in_vector_multiplier <= FULL;
-  size_in_vector_multiplier   <= SIZE_N_IN;
+  size_in_vector_multiplier   <= SIZE_W_IN;
   data_a_in_vector_multiplier <= W_IN;
   data_b_in_vector_multiplier <= M_IN;
 
   -- VECTOR SUMMATION
   modulo_in_vector_summation <= FULL;
-  size_in_vector_summation   <= SIZE_N_IN;
-  length_in_vector_summation <= SIZE_W_IN;
+  size_in_vector_summation   <= SIZE_W_IN;
+  length_in_vector_summation <= SIZE_N_IN;
   data_in_vector_summation   <= data_out_vector_multiplier;
 
   -- R_OUT <= data_out_vector_summation;

@@ -190,24 +190,24 @@ module ntm_erasing #(
   end
 
   // DATA
+  // VECTOR MULTIPLIER
+  assign modulo_in_vector_multiplier = FULL;
+  assign size_in_vector_multiplier   = SIZE_W_IN;
+  assign data_a_in_vector_multiplier = W_IN;
+  assign data_b_in_vector_multiplier = E_IN;
+
   // VECTOR ADDER
   assign modulo_in_vector_adder = FULL;
   assign size_in_vector_adder   = SIZE_W_IN;
   assign data_a_in_vector_adder = ONE;
-  assign data_b_in_vector_adder = W_IN;
-
-  // VECTOR MULTIPLIER
-  assign modulo_in_vector_multiplier = FULL;
-  assign size_in_vector_multiplier   = SIZE_N_IN;
-  assign data_a_in_vector_multiplier = data_out_vector_adder;
-  assign data_b_in_vector_multiplier = E_IN;
+  assign data_b_in_vector_adder = data_out_vector_adder;
 
   // MATRIX PRODUCT
   assign modulo_in_matrix_product   = FULL;
   assign size_a_i_in_matrix_product = SIZE_N_IN;
   assign size_a_j_in_matrix_product = SIZE_W_IN;
   assign size_b_i_in_matrix_product = SIZE_W_IN;
-  assign size_b_j_in_matrix_product = SIZE_N_IN;
+  assign size_b_j_in_matrix_product = ONE;
   assign data_a_in_matrix_product   = M_IN;
   assign data_b_in_matrix_product   = data_out_vector_multiplier;
 

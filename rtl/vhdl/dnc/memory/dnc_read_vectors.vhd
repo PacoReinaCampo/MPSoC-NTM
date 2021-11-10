@@ -99,6 +99,7 @@ architecture dnc_read_vectors_architecture of dnc_read_vectors is
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
   constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -188,6 +189,22 @@ begin
       end case;
     end if;
   end process;
+
+  -- DATA
+  -- MATRIX TRANSPOSE
+  modulo_in_matrix_transpose <= FULL;
+  data_in_matrix_transpose   <= M_IN;
+
+  -- MATRIX PRODUCT
+  modulo_in_matrix_product   <= FULL;
+  size_a_i_in_matrix_product <= SIZE_N_IN;
+  size_a_j_in_matrix_product <= SIZE_W_IN;
+  size_b_i_in_matrix_product <= SIZE_W_IN;
+  size_b_j_in_matrix_product <= ONE;
+  data_a_in_matrix_product   <= data_out_matrix_transpose;
+  data_b_in_matrix_product   <= W_IN;
+
+  -- data_out_matrix_product <= R_OUT;
 
   -- MATRIX TRANSPOSE
   ntm_matrix_transpose_i : ntm_matrix_transpose

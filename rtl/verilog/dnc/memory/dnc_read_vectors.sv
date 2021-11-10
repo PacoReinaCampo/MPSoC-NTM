@@ -82,6 +82,7 @@ module dnc_read_vectors #(
   parameter ONE = 1;
   parameter TWO = 2;
   parameter THREE = 3;
+  parameter FULL = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -169,6 +170,22 @@ module dnc_read_vectors #(
       endcase
     end
   end
+
+  // DATA
+  // MATRIX TRANSPOSE
+  assign modulo_in_matrix_transpose = FULL;
+  assign data_in_matrix_transpose   = M_IN;
+
+  // MATRIX PRODUCT
+  assign modulo_in_matrix_product   = FULL;
+  assign size_a_i_in_matrix_product = SIZE_N_IN;
+  assign size_a_j_in_matrix_product = SIZE_W_IN;
+  assign size_b_i_in_matrix_product = SIZE_W_IN;
+  assign size_b_j_in_matrix_product = ONE;
+  assign data_a_in_matrix_product   = data_out_matrix_transpose;
+  assign data_b_in_matrix_product   = W_IN;
+
+  // assign data_out_matrix_product = R_OUT;
 
   // MATRIX TRANSPOSE
   ntm_matrix_transpose #(

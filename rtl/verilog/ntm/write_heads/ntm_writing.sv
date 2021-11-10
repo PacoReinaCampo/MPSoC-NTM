@@ -169,7 +169,7 @@ module ntm_writing #(
 
   // VECTOR ADDER
   assign modulo_in_vector_adder = FULL;
-  assign size_in_vector_adder   = SIZE_N_IN;
+  assign size_in_vector_adder   = SIZE_W_IN;
   assign data_a_in_vector_adder = M_IN;
   assign data_b_in_vector_adder = data_out_vector_multiplier;
 
