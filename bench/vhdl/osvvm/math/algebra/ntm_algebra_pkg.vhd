@@ -265,10 +265,16 @@ package ntm_algebra_pkg is
       TENSOR_PRODUCT_DATA_OUT_K_ENABLE : in std_logic;
 
       -- DATA
-      TENSOR_PRODUCT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_PRODUCT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_PRODUCT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_PRODUCT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      TENSOR_PRODUCT_MODULO_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_PRODUCT_SIZE_A_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_PRODUCT_SIZE_A_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_PRODUCT_SIZE_A_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_PRODUCT_SIZE_B_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_PRODUCT_SIZE_B_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_PRODUCT_SIZE_B_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

@@ -115,9 +115,11 @@ architecture dnc_read_interface_vector_architecture of dnc_read_interface_vector
 
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
-    MATRIX_PRODUCT_STATE,  -- STEP 1
-    TENSOR_PRODUCT_STATE,  -- STEP 2
-    ENDER_STATE  -- STEP 3
+    TENSOR_PRODUCT_STATE,  -- STEP 1
+    MATRIX_FIRST_PRODUCT_STATE,  -- STEP 2
+    MATRIX_SECOND_PRODUCT_STATE,  -- STEP 3
+    MATRIX_THIRD_PRODUCT_STATE,  -- STEP 4
+    ENDER_STATE  -- STEP 5
     );
 
   -----------------------------------------------------------------------
@@ -174,10 +176,16 @@ architecture dnc_read_interface_vector_architecture of dnc_read_interface_vector
   signal data_out_k_enable_tensor_product : std_logic;
 
   -- DATA
-  signal modulo_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_tensor_product  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_i_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_j_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_k_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_b_i_in_tensorproduct  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_b_j_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_b_k_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_product    : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -212,11 +220,15 @@ begin
             controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
           end if;
 
-        when MATRIX_PRODUCT_STATE =>  -- STEP 1
+        when TENSOR_PRODUCT_STATE =>  -- STEP 1
 
-        when TENSOR_PRODUCT_STATE =>  -- STEP 2
+        when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 2
 
-        when ENDER_STATE =>  -- STEP 3
+        when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 3
+
+        when MATRIX_THIRD_PRODUCT_STATE =>  -- STEP 4
+
+        when ENDER_STATE =>  -- STEP 5
 
         when others =>
           -- FSM Control
@@ -284,10 +296,16 @@ begin
       DATA_OUT_K_ENABLE => data_out_k_enable_tensor_product,
 
       -- DATA
-      MODULO_IN => modulo_in_tensor_product,
-      DATA_A_IN => data_a_in_tensor_product,
-      DATA_B_IN => data_b_in_tensor_product,
-      DATA_OUT  => data_out_tensor_product
+      MODULO_IN   => modulo_in_tensor_product,
+      SIZE_A_I_IN => size_a_i_in_tensor_product,
+      SIZE_A_J_IN => size_a_j_in_tensor_product,
+      SIZE_A_K_IN => size_a_k_in_tensor_product,
+      SIZE_B_I_IN => size_b_i_in_tensorproduct,
+      SIZE_B_J_IN => size_b_j_in_tensor_product,
+      SIZE_B_K_IN => size_b_k_in_tensor_product,
+      DATA_A_IN   => data_a_in_tensor_product,
+      DATA_B_IN   => data_b_in_tensor_product,
+      DATA_OUT    => data_out_tensor_product
       );
 
 end architecture;

@@ -207,6 +207,12 @@ module ntm_algebra_testbench;
 
   // DATA
   wire [DATA_SIZE-1:0] modulo_in_tensor_product;
+  wire [DATA_SIZE-1:0] size_a_i_in_tensor_product;
+  wire [DATA_SIZE-1:0] size_a_j_in_tensor_product;
+  wire [DATA_SIZE-1:0] size_a_k_in_tensor_product;
+  wire [DATA_SIZE-1:0] size_b_i_in_tensor_product;
+  wire [DATA_SIZE-1:0] size_b_j_in_tensor_product;
+  wire [DATA_SIZE-1:0] size_b_k_in_tensor_product;
   wire [DATA_SIZE-1:0] data_a_in_tensor_product;
   wire [DATA_SIZE-1:0] data_b_in_tensor_product;
   wire [DATA_SIZE-1:0] data_out_tensor_product;
@@ -370,6 +376,12 @@ module ntm_algebra_testbench;
 
     // DATA
     .TENSOR_PRODUCT_MODULO_IN(modulo_in_tensor_product),
+    .TENSOR_PRODUCT_SIZE_A_I_IN(size_a_i_in_tensor_product),
+    .TENSOR_PRODUCT_SIZE_A_J_IN(size_a_j_in_tensor_product),
+    .TENSOR_PRODUCT_SIZE_A_K_IN(size_a_k_in_tensor_product),
+    .TENSOR_PRODUCT_SIZE_B_I_IN(size_b_i_in_tensor_product),
+    .TENSOR_PRODUCT_SIZE_B_J_IN(size_b_j_in_tensor_product),
+    .TENSOR_PRODUCT_SIZE_B_K_IN(size_b_k_in_tensor_product),
     .TENSOR_PRODUCT_DATA_A_IN(data_a_in_tensor_product),
     .TENSOR_PRODUCT_DATA_B_IN(data_b_in_tensor_product),
     .TENSOR_PRODUCT_DATA_OUT(data_out_tensor_product)
@@ -564,6 +576,12 @@ module ntm_algebra_testbench;
 
     // DATA
     .MODULO_IN(modulo_in_tensor_product),
+    .SIZE_A_I_IN(size_a_i_in_tensor_product),
+    .SIZE_A_J_IN(size_a_j_in_tensor_product),
+    .SIZE_A_K_IN(size_a_k_in_tensor_product),
+    .SIZE_B_I_IN(size_b_i_in_tensor_product),
+    .SIZE_B_J_IN(size_b_j_in_tensor_product),
+    .SIZE_B_K_IN(size_b_k_in_tensor_product),
     .DATA_A_IN(data_a_in_tensor_product),
     .DATA_B_IN(data_b_in_tensor_product),
     .DATA_OUT(data_out_tensor_product)

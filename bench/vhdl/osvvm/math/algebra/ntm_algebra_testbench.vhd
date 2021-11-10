@@ -213,10 +213,16 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_out_k_enable_tensor_product : std_logic;
 
   -- DATA
-  signal modulo_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_tensor_product  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_i_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_j_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_k_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_b_i_in_tensorproduct  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_b_j_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_b_k_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_product    : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -387,10 +393,16 @@ begin
       TENSOR_PRODUCT_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_product,
 
       -- DATA
-      TENSOR_PRODUCT_MODULO_IN => modulo_in_tensor_product,
-      TENSOR_PRODUCT_DATA_A_IN => data_a_in_tensor_product,
-      TENSOR_PRODUCT_DATA_B_IN => data_b_in_tensor_product,
-      TENSOR_PRODUCT_DATA_OUT  => data_out_tensor_product
+      TENSOR_PRODUCT_MODULO_IN   => modulo_in_tensor_product,
+      TENSOR_PRODUCT_SIZE_A_I_IN => size_a_i_in_tensor_product,
+      TENSOR_PRODUCT_SIZE_A_J_IN => size_a_j_in_tensor_product,
+      TENSOR_PRODUCT_SIZE_A_K_IN => size_a_k_in_tensor_product,
+      TENSOR_PRODUCT_SIZE_B_I_IN => size_b_i_in_tensorproduct,
+      TENSOR_PRODUCT_SIZE_B_J_IN => size_b_j_in_tensor_product,
+      TENSOR_PRODUCT_SIZE_B_K_IN => size_b_k_in_tensor_product,
+      TENSOR_PRODUCT_DATA_A_IN   => data_a_in_tensor_product,
+      TENSOR_PRODUCT_DATA_B_IN   => data_b_in_tensor_product,
+      TENSOR_PRODUCT_DATA_OUT    => data_out_tensor_product
       );
 
   -- MATRIX DETERMINANT
@@ -608,10 +620,16 @@ begin
         DATA_OUT_K_ENABLE => data_out_k_enable_tensor_product,
 
         -- DATA
-        MODULO_IN => modulo_in_tensor_product,
-        DATA_A_IN => data_a_in_tensor_product,
-        DATA_B_IN => data_b_in_tensor_product,
-        DATA_OUT  => data_out_tensor_product
+        MODULO_IN   => modulo_in_tensor_product,
+        SIZE_A_I_IN => size_a_i_in_tensor_product,
+        SIZE_A_J_IN => size_a_j_in_tensor_product,
+        SIZE_A_K_IN => size_a_k_in_tensor_product,
+        SIZE_B_I_IN => size_b_i_in_tensorproduct,
+        SIZE_B_J_IN => size_b_j_in_tensor_product,
+        SIZE_B_K_IN => size_b_k_in_tensor_product,
+        DATA_A_IN   => data_a_in_tensor_product,
+        DATA_B_IN   => data_b_in_tensor_product,
+        DATA_OUT    => data_out_tensor_product
         );
   end generate ntm_tensor_product_test;
 

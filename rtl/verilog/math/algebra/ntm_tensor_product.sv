@@ -61,6 +61,12 @@ module ntm_tensor_product #(
 
     // DATA
     input [DATA_SIZE-1:0] MODULO_IN,
+    input [DATA_SIZE-1:0] SIZE_A_I_IN,
+    input [DATA_SIZE-1:0] SIZE_A_J_IN,
+    input [DATA_SIZE-1:0] SIZE_A_K_IN,
+    input [DATA_SIZE-1:0] SIZE_B_I_IN,
+    input [DATA_SIZE-1:0] SIZE_B_J_IN,
+    input [DATA_SIZE-1:0] SIZE_B_K_IN,
     input [DATA_SIZE-1:0] DATA_A_IN,
     input [DATA_SIZE-1:0] DATA_B_IN,
     output reg [DATA_SIZE-1:0] DATA_OUT

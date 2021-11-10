@@ -112,9 +112,12 @@ architecture ntm_interface_vector_architecture of ntm_interface_vector is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
-    MATRIX_PRODUCT_STATE,  -- STEP 1
-    TENSOR_PRODUCT_STATE,  -- STEP 2
-    ENDER_STATE  -- STEP 3
+    MATRIX_FIRST_PRODUCT_STATE,  -- STEP 1
+    MATRIX_SECOND_PRODUCT_STATE,  -- STEP 2
+    SCALAR_FIRST_PRODUCT_STATE,  -- STEP 3
+    SCALAR_SECOND_PRODUCT_STATE,  -- STEP 4
+    SCALAR_THIRD_PRODUCT_STATE,  -- STEP 5
+    ENDER_STATE  -- STEP 6
     );
 
   -----------------------------------------------------------------------
@@ -123,6 +126,7 @@ architecture ntm_interface_vector_architecture of ntm_interface_vector is
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -202,14 +206,61 @@ begin
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+            controller_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_STATE;
           end if;
 
-        when MATRIX_PRODUCT_STATE =>  -- STEP 1
+        when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 1
 
-        when TENSOR_PRODUCT_STATE =>  -- STEP 2
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= SIZE_W_IN;
+          size_a_j_in_matrix_product <= SIZE_L_IN;
+          size_b_i_in_matrix_product <= SIZE_L_IN;
+          size_b_j_in_matrix_product <= ONE;
+          data_a_in_matrix_product   <= WK_IN;
+          data_b_in_matrix_product   <= H_IN;
 
-        when ENDER_STATE =>  -- STEP 3
+          K_OUT <= data_out_matrix_product;
+
+        when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 2
+
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= SIZE_N_IN;
+          size_a_j_in_matrix_product <= SIZE_L_IN;
+          size_b_i_in_matrix_product <= SIZE_L_IN;
+          size_b_j_in_matrix_product <= ONE;
+          data_a_in_matrix_product   <= WS_IN;
+          data_b_in_matrix_product   <= H_IN;
+
+          S_OUT <= data_out_matrix_product;
+
+        when SCALAR_FIRST_PRODUCT_STATE =>  -- STEP 3
+
+          modulo_in_scalar_product <= FULL;
+          length_in_scalar_product <= SIZE_L_IN;
+          data_a_in_scalar_product <= WBETA_IN;
+          data_b_in_scalar_product <= H_IN;
+
+          BETA_OUT <= data_out_scalar_product;
+
+        when SCALAR_SECOND_PRODUCT_STATE =>  -- STEP 4
+
+          modulo_in_scalar_product <= FULL;
+          length_in_scalar_product <= SIZE_L_IN;
+          data_a_in_scalar_product <= WG_IN;
+          data_b_in_scalar_product <= H_IN;
+
+          G_OUT <= data_out_scalar_product;
+
+        when SCALAR_THIRD_PRODUCT_STATE =>  -- STEP 5
+
+          modulo_in_scalar_product <= FULL;
+          length_in_scalar_product <= SIZE_L_IN;
+          data_a_in_scalar_product <= WGAMMA_IN;
+          data_b_in_scalar_product <= H_IN;
+
+          GAMMA_OUT <= data_out_scalar_product;
+
+        when ENDER_STATE =>  -- STEP 6
 
         when others =>
           -- FSM Control

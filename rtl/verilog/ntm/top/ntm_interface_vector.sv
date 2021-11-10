@@ -92,10 +92,13 @@ module ntm_interface_vector #(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter [1:0] STARTER_STATE = 0;
-  parameter [1:0] SCALAR_PRODUCT_STATE = 1;
-  parameter [1:0] MATRIX_PRODUCT_STATE = 2;
-  parameter [1:0] ENDER_STATE = 3;
+  parameter [2:0] STARTER_STATE = 0;
+  parameter [2:0] MATRIX_FIRST_PRODUCT_STATE = 1;
+  parameter [2:0] MATRIX_SECOND_PRODUCT_STATE = 2;
+  parameter [2:0] SCALAR_FIRST_PRODUCT_STATE = 3;
+  parameter [2:0] SCALAR_SECOND_PRODUCT_STATE = 4;
+  parameter [2:0] SCALAR_THIRD_PRODUCT_STATE = 5;
+  parameter [2:0] ENDER_STATE = 6;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -103,13 +106,14 @@ module ntm_interface_vector #(
 
   parameter ZERO = 0;
   parameter ONE = 1;
+  parameter FULL = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] controller_ctrl_fsm_int;
+  reg [2:0] controller_ctrl_fsm_int;
 
   // SCALAR PRODUCT
   // CONTROL
@@ -121,10 +125,10 @@ module ntm_interface_vector #(
   wire data_out_enable_scalar_product;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_product;
-  wire [DATA_SIZE-1:0] length_in_scalar_product;
-  wire [DATA_SIZE-1:0] data_a_in_scalar_product;
-  wire [DATA_SIZE-1:0] data_b_in_scalar_product;
+  reg [DATA_SIZE-1:0] modulo_in_scalar_product;
+  reg [DATA_SIZE-1:0] length_in_scalar_product;
+  reg [DATA_SIZE-1:0] data_a_in_scalar_product;
+  reg [DATA_SIZE-1:0] data_b_in_scalar_product;
   wire [DATA_SIZE-1:0] data_out_scalar_product;
 
   // MATRIX PRODUCT
@@ -139,13 +143,13 @@ module ntm_interface_vector #(
   wire data_out_j_enable_matrix_product;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_product;
-  wire [DATA_SIZE-1:0] size_a_i_in_matrix_product;
-  wire [DATA_SIZE-1:0] size_a_j_in_matrix_product;
-  wire [DATA_SIZE-1:0] size_b_i_in_matrix_product;
-  wire [DATA_SIZE-1:0] size_b_j_in_matrix_product;
-  wire [DATA_SIZE-1:0] data_a_in_matrix_product;
-  wire [DATA_SIZE-1:0] data_b_in_matrix_product;
+  reg [DATA_SIZE-1:0] modulo_in_matrix_product;
+  reg [DATA_SIZE-1:0] size_a_i_in_matrix_product;
+  reg [DATA_SIZE-1:0] size_a_j_in_matrix_product;
+  reg [DATA_SIZE-1:0] size_b_i_in_matrix_product;
+  reg [DATA_SIZE-1:0] size_b_j_in_matrix_product;
+  reg [DATA_SIZE-1:0] data_a_in_matrix_product;
+  reg [DATA_SIZE-1:0] data_b_in_matrix_product;
   wire [DATA_SIZE-1:0] data_out_matrix_product;
 
   ///////////////////////////////////////////////////////////////////////
@@ -175,17 +179,62 @@ module ntm_interface_vector #(
 
           if(START == 1'b1) begin
             // FSM Control
-            controller_ctrl_fsm_int <= SCALAR_PRODUCT_STATE;
+            controller_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_STATE;
           end
         end
 
-        SCALAR_PRODUCT_STATE : begin  // STEP 1
+        MATRIX_FIRST_PRODUCT_STATE : begin  // STEP 1
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= SIZE_W_IN;
+          size_a_j_in_matrix_product <= SIZE_L_IN;
+          size_b_i_in_matrix_product <= SIZE_L_IN;
+          size_b_j_in_matrix_product <= ONE;
+          data_a_in_matrix_product   <= WK_IN;
+          data_b_in_matrix_product   <= H_IN;
+
+          K_OUT <= data_out_matrix_product;
         end
 
-        MATRIX_PRODUCT_STATE : begin  // STEP 2
+        MATRIX_SECOND_PRODUCT_STATE : begin  // STEP 2
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= SIZE_N_IN;
+          size_a_j_in_matrix_product <= SIZE_L_IN;
+          size_b_i_in_matrix_product <= SIZE_L_IN;
+          size_b_j_in_matrix_product <= ONE;
+          data_a_in_matrix_product   <= WS_IN;
+          data_b_in_matrix_product   <= H_IN;
+
+          S_OUT <= data_out_matrix_product;
         end
 
-        ENDER_STATE : begin  // STEP 3
+        SCALAR_FIRST_PRODUCT_STATE : begin  // STEP 3
+          modulo_in_scalar_product <= FULL;
+          length_in_scalar_product <= SIZE_L_IN;
+          data_a_in_scalar_product <= WBETA_IN;
+          data_b_in_scalar_product <= H_IN;
+
+          BETA_OUT <= data_out_scalar_product;
+        end
+
+        SCALAR_SECOND_PRODUCT_STATE : begin  // STEP 4
+          modulo_in_scalar_product <= FULL;
+          length_in_scalar_product <= SIZE_L_IN;
+          data_a_in_scalar_product <= WG_IN;
+          data_b_in_scalar_product <= H_IN;
+
+          G_OUT <= data_out_scalar_product;
+        end
+
+        SCALAR_THIRD_PRODUCT_STATE : begin  // STEP 5
+          modulo_in_scalar_product <= FULL;
+          length_in_scalar_product <= SIZE_L_IN;
+          data_a_in_scalar_product <= WGAMMA_IN;
+          data_b_in_scalar_product <= H_IN;
+
+          GAMMA_OUT <= data_out_scalar_product;
+        end
+
+        ENDER_STATE : begin  // STEP 6
         end
         default : begin
           // FSM Control
