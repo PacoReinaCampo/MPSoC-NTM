@@ -93,10 +93,12 @@ module dnc_read_interface_vector #(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter [1:0] STARTER_STATE = 0;
-  parameter [1:0] MATRIX_PRODUCT_STATE = 1;
-  parameter [1:0] TENSOR_PRODUCT_STATE = 2;
-  parameter [1:0] ENDER_STATE = 3;
+  parameter [2:0] STARTER_STATE = 0;
+  parameter [2:0] TENSOR_PRODUCT_STATE = 1;
+  parameter [2:0] MATRIX_FIRST_PRODUCT_STATE = 2;
+  parameter [2:0] MATRIX_SECOND_PRODUCT_STATE = 3;
+  parameter [2:0] MATRIX_THIRD_PRODUCT_STATE = 4;
+  parameter [2:0] ENDER_STATE = 5;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -104,13 +106,14 @@ module dnc_read_interface_vector #(
 
   parameter ZERO = 0;
   parameter ONE = 1;
+  parameter FULL = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] controller_ctrl_fsm_int;
+  reg [2:0] controller_ctrl_fsm_int;
 
   // MATRIX PRODUCT
   // CONTROL
@@ -125,13 +128,13 @@ module dnc_read_interface_vector #(
   wire data_out_j_enable_matrix_product;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_product;
-  wire [DATA_SIZE-1:0] size_a_i_in_matrix_product;
-  wire [DATA_SIZE-1:0] size_a_j_in_matrix_product;
-  wire [DATA_SIZE-1:0] size_b_i_in_matrix_product;
-  wire [DATA_SIZE-1:0] size_b_j_in_matrix_product;
-  wire [DATA_SIZE-1:0] data_a_in_matrix_product;
-  wire [DATA_SIZE-1:0] data_b_in_matrix_product;
+  reg [DATA_SIZE-1:0] modulo_in_matrix_product;
+  reg [DATA_SIZE-1:0] size_a_i_in_matrix_product;
+  reg [DATA_SIZE-1:0] size_a_j_in_matrix_product;
+  reg [DATA_SIZE-1:0] size_b_i_in_matrix_product;
+  reg [DATA_SIZE-1:0] size_b_j_in_matrix_product;
+  reg [DATA_SIZE-1:0] data_a_in_matrix_product;
+  reg [DATA_SIZE-1:0] data_b_in_matrix_product;
   wire [DATA_SIZE-1:0] data_out_matrix_product;
 
   // TENSOR PRODUCT
@@ -150,9 +153,15 @@ module dnc_read_interface_vector #(
   wire data_out_k_enable_tensor_product;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_tensor_product;
-  wire [DATA_SIZE-1:0] data_a_in_tensor_product;
-  wire [DATA_SIZE-1:0] data_b_in_tensor_product;
+  reg [DATA_SIZE-1:0] modulo_in_tensor_product;
+  reg [DATA_SIZE-1:0] size_a_i_in_tensor_product;
+  reg [DATA_SIZE-1:0] size_a_j_in_tensor_product;
+  reg [DATA_SIZE-1:0] size_a_k_in_tensor_product;
+  reg [DATA_SIZE-1:0] size_b_i_in_tensor_product;
+  reg [DATA_SIZE-1:0] size_b_j_in_tensor_product;
+  reg [DATA_SIZE-1:0] size_b_k_in_tensor_product;
+  reg [DATA_SIZE-1:0] data_a_in_tensor_product;
+  reg [DATA_SIZE-1:0] data_b_in_tensor_product;
   wire [DATA_SIZE-1:0] data_out_tensor_product;
 
   ///////////////////////////////////////////////////////////////////////
@@ -181,17 +190,73 @@ module dnc_read_interface_vector #(
 
           if(START == 1'b1) begin
             // FSM Control
-            controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+            controller_ctrl_fsm_int <= TENSOR_PRODUCT_STATE;
           end
         end
 
-        MATRIX_PRODUCT_STATE : begin  // STEP 1
+        TENSOR_PRODUCT_STATE : begin  // STEP 1
+
+          // Data Inputs
+          modulo_in_tensor_product   <= FULL;
+          size_a_i_in_tensor_product <= SIZE_R_IN;
+          size_a_j_in_tensor_product <= SIZE_L_IN;
+          size_a_k_in_tensor_product <= SIZE_W_IN;
+          size_b_i_in_tensor_product <= ONE;
+          size_b_j_in_tensor_product <= SIZE_L_IN;
+          size_b_k_in_tensor_product <= ONE;
+          data_a_in_tensor_product   <= WK_IN;
+          data_b_in_tensor_product   <= H_IN;
+
+          // Data Outputs
+          K_OUT <= data_out_tensor_product;
         end
 
-        TENSOR_PRODUCT_STATE : begin  // STEP 2
+        MATRIX_FIRST_PRODUCT_STATE : begin  // STEP 2
+
+          // Data Inputs
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= SIZE_R_IN;
+          size_a_j_in_matrix_product <= SIZE_L_IN;
+          size_b_i_in_matrix_product <= SIZE_L_IN;
+          size_b_j_in_matrix_product <= ONE;
+          data_a_in_matrix_product   <= WBETA_IN;
+          data_b_in_matrix_product   <= H_IN;
+
+          // Data Outputs
+          BETA_OUT <= data_out_matrix_product;
         end
 
-        ENDER_STATE : begin  // STEP 3
+        MATRIX_SECOND_PRODUCT_STATE : begin  // STEP 3
+
+          // Data Inputs
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= SIZE_R_IN;
+          size_a_j_in_matrix_product <= SIZE_L_IN;
+          size_b_i_in_matrix_product <= SIZE_L_IN;
+          size_b_j_in_matrix_product <= ONE;
+          data_a_in_matrix_product   <= WF_IN;
+          data_b_in_matrix_product   <= H_IN;
+
+          // Data Outputs
+          F_OUT <= data_out_matrix_product;
+        end
+
+        MATRIX_THIRD_PRODUCT_STATE : begin  // STEP 4
+
+          // Data Inputs
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= SIZE_R_IN;
+          size_a_j_in_matrix_product <= SIZE_L_IN;
+          size_b_i_in_matrix_product <= SIZE_L_IN;
+          size_b_j_in_matrix_product <= ONE;
+          data_a_in_matrix_product   <= WPI_IN;
+          data_b_in_matrix_product   <= H_IN;
+
+          // Data Outputs
+          PI_OUT <= data_out_matrix_product;
+        end
+
+        ENDER_STATE : begin  // STEP 5
         end
         default : begin
           // FSM Control
@@ -257,6 +322,12 @@ module dnc_read_interface_vector #(
 
     // DATA
     .MODULO_IN(modulo_in_tensor_product),
+    .SIZE_A_I_IN(size_a_i_in_tensor_product),
+    .SIZE_A_J_IN(size_a_j_in_tensor_product),
+    .SIZE_A_K_IN(size_a_k_in_tensor_product),
+    .SIZE_B_I_IN(size_b_i_in_tensor_product),
+    .SIZE_B_J_IN(size_b_j_in_tensor_product),
+    .SIZE_B_K_IN(size_b_k_in_tensor_product),
     .DATA_A_IN(data_a_in_tensor_product),
     .DATA_B_IN(data_b_in_tensor_product),
     .DATA_OUT(data_out_tensor_product)

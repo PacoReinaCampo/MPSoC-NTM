@@ -120,9 +120,13 @@ architecture dnc_write_interface_vector_architecture of dnc_write_interface_vect
 
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
-    SCALAR_PRODUCT_STATE,  -- STEP 1
-    MATRIX_PRODUCT_STATE,  -- STEP 2
-    ENDER_STATE  -- STEP 3
+    MATRIX_FIRST_PRODUCT_STATE,  -- STEP 1
+    MATRIX_SECOND_PRODUCT_STATE,  -- STEP 2
+    MATRIX_THIRD_PRODUCT_STATE,  -- STEP 3
+    SCALAR_FIRST_PRODUCT_STATE,  -- STEP 4
+    SCALAR_SECOND_PRODUCT_STATE,  -- STEP 5
+    SCALAR_THIRD_PRODUCT_STATE,  -- STEP 6
+    ENDER_STATE  -- STEP 7
     );
 
   -----------------------------------------------------------------------
@@ -131,6 +135,7 @@ architecture dnc_write_interface_vector_architecture of dnc_write_interface_vect
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -211,14 +216,85 @@ begin
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+            controller_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_STATE;
           end if;
 
-        when SCALAR_PRODUCT_STATE =>  -- STEP 1
+        when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 1
 
-        when MATRIX_PRODUCT_STATE =>  -- STEP 2
+          -- Data Inputs
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= SIZE_W_IN;
+          size_a_j_in_matrix_product <= SIZE_L_IN;
+          size_b_i_in_matrix_product <= SIZE_L_IN;
+          size_b_j_in_matrix_product <= ONE;
+          data_a_in_matrix_product   <= WK_IN;
+          data_b_in_matrix_product   <= H_IN;
 
-        when ENDER_STATE =>  -- STEP 3
+          -- Data Outputs
+          K_OUT <= data_out_matrix_product;
+
+        when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 2
+
+          -- Data Inputs
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= SIZE_W_IN;
+          size_a_j_in_matrix_product <= SIZE_L_IN;
+          size_b_i_in_matrix_product <= SIZE_L_IN;
+          size_b_j_in_matrix_product <= ONE;
+          data_a_in_matrix_product   <= WE_IN;
+          data_b_in_matrix_product   <= H_IN;
+
+          -- Data Outputs
+          E_OUT <= data_out_matrix_product;
+
+        when MATRIX_THIRD_PRODUCT_STATE =>  -- STEP 3
+
+          -- Data Inputs
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= SIZE_W_IN;
+          size_a_j_in_matrix_product <= SIZE_L_IN;
+          size_b_i_in_matrix_product <= SIZE_L_IN;
+          size_b_j_in_matrix_product <= ONE;
+          data_a_in_matrix_product   <= WV_IN;
+          data_b_in_matrix_product   <= H_IN;
+
+          -- Data Outputs
+          V_OUT <= data_out_matrix_product;
+
+        when SCALAR_FIRST_PRODUCT_STATE =>  -- STEP 4
+
+          -- Data Inputs
+          modulo_in_scalar_product <= FULL;
+          length_in_scalar_product <= SIZE_L_IN;
+          data_a_in_scalar_product <= WBETA_IN;
+          data_b_in_scalar_product <= H_IN;
+
+          -- Data Outputs
+          BETA_OUT <= data_out_scalar_product;
+
+        when SCALAR_SECOND_PRODUCT_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          modulo_in_scalar_product <= FULL;
+          length_in_scalar_product <= SIZE_L_IN;
+          data_a_in_scalar_product <= WGA_IN;
+          data_b_in_scalar_product <= H_IN;
+
+          -- Data Outputs
+          GA_OUT <= data_out_scalar_product;
+
+        when SCALAR_THIRD_PRODUCT_STATE =>  -- STEP 6
+
+          -- Data Inputs
+          modulo_in_scalar_product <= FULL;
+          length_in_scalar_product <= SIZE_L_IN;
+          data_a_in_scalar_product <= WGW_IN;
+          data_b_in_scalar_product <= H_IN;
+
+          -- Data Outputs
+          GW_OUT <= data_out_scalar_product;
+
+        when ENDER_STATE =>  -- STEP 7
 
         when others =>
           -- FSM Control

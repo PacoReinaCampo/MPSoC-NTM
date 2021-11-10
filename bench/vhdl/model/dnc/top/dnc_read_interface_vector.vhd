@@ -128,6 +128,7 @@ architecture dnc_read_interface_vector_architecture of dnc_read_interface_vector
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -217,16 +218,66 @@ begin
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+            controller_ctrl_fsm_int <= TENSOR_PRODUCT_STATE;
           end if;
 
         when TENSOR_PRODUCT_STATE =>  -- STEP 1
 
+          -- Data Inputs
+          modulo_in_tensor_product   <= FULL;
+          size_a_i_in_tensor_product <= SIZE_R_IN;
+          size_a_j_in_tensor_product <= SIZE_L_IN;
+          size_a_k_in_tensor_product <= SIZE_W_IN;
+          size_b_i_in_tensorproduct  <= ONE;
+          size_b_j_in_tensor_product <= SIZE_L_IN;
+          size_b_k_in_tensor_product <= ONE;
+          data_a_in_tensor_product   <= WK_IN;
+          data_b_in_tensor_product   <= H_IN;
+
+          -- Data Outputs
+          K_OUT <= data_out_tensor_product;
+
         when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 2
+
+          -- Data Inputs
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= SIZE_R_IN;
+          size_a_j_in_matrix_product <= SIZE_L_IN;
+          size_b_i_in_matrix_product <= SIZE_L_IN;
+          size_b_j_in_matrix_product <= ONE;
+          data_a_in_matrix_product   <= WBETA_IN;
+          data_b_in_matrix_product   <= H_IN;
+
+          -- Data Outputs
+          BETA_OUT <= data_out_matrix_product;
 
         when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 3
 
+          -- Data Inputs
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= SIZE_R_IN;
+          size_a_j_in_matrix_product <= SIZE_L_IN;
+          size_b_i_in_matrix_product <= SIZE_L_IN;
+          size_b_j_in_matrix_product <= ONE;
+          data_a_in_matrix_product   <= WF_IN;
+          data_b_in_matrix_product   <= H_IN;
+
+          -- Data Outputs
+          F_OUT <= data_out_matrix_product;
+
         when MATRIX_THIRD_PRODUCT_STATE =>  -- STEP 4
+
+          -- Data Inputs
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= SIZE_R_IN;
+          size_a_j_in_matrix_product <= SIZE_L_IN;
+          size_b_i_in_matrix_product <= SIZE_L_IN;
+          size_b_j_in_matrix_product <= ONE;
+          data_a_in_matrix_product   <= WPI_IN;
+          data_b_in_matrix_product   <= H_IN;
+
+          -- Data Outputs
+          PI_OUT <= data_out_matrix_product;
 
         when ENDER_STATE =>  -- STEP 5
 

@@ -211,6 +211,7 @@ begin
 
         when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 1
 
+          -- Data Inputs
           modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_W_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
@@ -219,10 +220,12 @@ begin
           data_a_in_matrix_product   <= WK_IN;
           data_b_in_matrix_product   <= H_IN;
 
+          -- Data Outputs
           K_OUT <= data_out_matrix_product;
 
         when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 2
 
+          -- Data Inputs
           modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_N_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
@@ -231,10 +234,12 @@ begin
           data_a_in_matrix_product   <= WS_IN;
           data_b_in_matrix_product   <= H_IN;
 
+          -- Data Outputs
           S_OUT <= data_out_matrix_product;
 
         when SCALAR_FIRST_PRODUCT_STATE =>  -- STEP 3
 
+          -- Data Inputs
           modulo_in_scalar_product <= FULL;
           length_in_scalar_product <= SIZE_L_IN;
           data_a_in_scalar_product <= WBETA_IN;
@@ -244,20 +249,24 @@ begin
 
         when SCALAR_SECOND_PRODUCT_STATE =>  -- STEP 4
 
+          -- Data Inputs
           modulo_in_scalar_product <= FULL;
           length_in_scalar_product <= SIZE_L_IN;
           data_a_in_scalar_product <= WG_IN;
           data_b_in_scalar_product <= H_IN;
 
+          -- Data Outputs
           G_OUT <= data_out_scalar_product;
 
         when SCALAR_THIRD_PRODUCT_STATE =>  -- STEP 5
 
+          -- Data Inputs
           modulo_in_scalar_product <= FULL;
           length_in_scalar_product <= SIZE_L_IN;
           data_a_in_scalar_product <= WGAMMA_IN;
           data_b_in_scalar_product <= H_IN;
 
+          -- Data Outputs
           GAMMA_OUT <= data_out_scalar_product;
 
         when ENDER_STATE =>  -- STEP 6

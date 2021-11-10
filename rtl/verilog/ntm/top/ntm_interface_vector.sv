@@ -184,6 +184,8 @@ module ntm_interface_vector #(
         end
 
         MATRIX_FIRST_PRODUCT_STATE : begin  // STEP 1
+
+          // Data Inputs
           modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_W_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
@@ -192,10 +194,13 @@ module ntm_interface_vector #(
           data_a_in_matrix_product   <= WK_IN;
           data_b_in_matrix_product   <= H_IN;
 
+          // Data Outputs
           K_OUT <= data_out_matrix_product;
         end
 
         MATRIX_SECOND_PRODUCT_STATE : begin  // STEP 2
+
+          // Data Inputs
           modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_N_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
@@ -204,33 +209,43 @@ module ntm_interface_vector #(
           data_a_in_matrix_product   <= WS_IN;
           data_b_in_matrix_product   <= H_IN;
 
+          // Data Outputs
           S_OUT <= data_out_matrix_product;
         end
 
         SCALAR_FIRST_PRODUCT_STATE : begin  // STEP 3
+
+          // Data Inputs
           modulo_in_scalar_product <= FULL;
           length_in_scalar_product <= SIZE_L_IN;
           data_a_in_scalar_product <= WBETA_IN;
           data_b_in_scalar_product <= H_IN;
 
+          // Data Outputs
           BETA_OUT <= data_out_scalar_product;
         end
 
         SCALAR_SECOND_PRODUCT_STATE : begin  // STEP 4
+
+          // Data Inputs
           modulo_in_scalar_product <= FULL;
           length_in_scalar_product <= SIZE_L_IN;
           data_a_in_scalar_product <= WG_IN;
           data_b_in_scalar_product <= H_IN;
 
+          // Data Outputs
           G_OUT <= data_out_scalar_product;
         end
 
         SCALAR_THIRD_PRODUCT_STATE : begin  // STEP 5
+
+          // Data Inputs
           modulo_in_scalar_product <= FULL;
           length_in_scalar_product <= SIZE_L_IN;
           data_a_in_scalar_product <= WGAMMA_IN;
           data_b_in_scalar_product <= H_IN;
 
+          // Data Outputs
           GAMMA_OUT <= data_out_scalar_product;
         end
 
