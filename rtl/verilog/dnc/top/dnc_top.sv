@@ -577,6 +577,11 @@ module dnc_top #(
         end
 
         ENDER_STATE : begin  // STEP 5
+        
+          if (index_loop == SIZE_R_IN - ONE) begin
+            // FSM Control
+            top_ctrl_fsm_int <= STARTER_STATE;
+          end
         end
         default : begin
           // FSM Control

@@ -152,6 +152,9 @@ architecture dnc_top_architecture of dnc_top is
   signal read_heads_ctrl_fsm_int  : read_heads_ctrl_fsm;
   signal write_heads_ctrl_fsm_int : write_heads_ctrl_fsm;
 
+  -- Internal Signals
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -----------------------------------------------------------------------
   -- CONTROLLER
   -----------------------------------------------------------------------
@@ -628,6 +631,12 @@ begin
         when MEMORY_STATE =>  -- STEP 4
 
         when ENDER_STATE =>  -- STEP 5
+        
+          if (unsigned(index_loop) = unsigned(SIZE_R_IN) - unsigned(ONE)) then
+            -- FSM Control
+            top_ctrl_fsm_int <= STARTER_STATE;
+          else
+          end if;
 
         when others =>
           -- FSM Control

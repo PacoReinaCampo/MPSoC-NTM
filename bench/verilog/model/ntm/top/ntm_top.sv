@@ -113,6 +113,9 @@ module ntm_top #(
   reg [2:0] controller_ctrl_fsm_int;
   reg [1:0] write_heads_ctrl_fsm_int;
 
+  // Internal Signals
+  reg [DATA_SIZE-1:0] index_loop;
+
   ///////////////////////////////////////////////////////////////////////
   // CONTROLLER
   ///////////////////////////////////////////////////////////////////////
@@ -384,6 +387,11 @@ module ntm_top #(
         end
 
         ENDER_STATE : begin  // STEP 5
+        
+          if (index_loop == SIZE_R_IN - ONE) begin
+            // FSM Control
+            top_ctrl_fsm_int <= STARTER_STATE;
+          end
         end
         default : begin
           // FSM Control

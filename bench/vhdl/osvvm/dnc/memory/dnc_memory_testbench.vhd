@@ -277,7 +277,7 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
 
   signal b_in_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal c_in_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal f_in_read_weighting : std_logic;
+  signal f_in_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 

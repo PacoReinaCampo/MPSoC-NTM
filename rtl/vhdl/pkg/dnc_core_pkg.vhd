@@ -382,7 +382,7 @@ package dnc_core_pkg is
 
       B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      F_IN : in std_logic;
+      F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );

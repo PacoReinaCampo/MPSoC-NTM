@@ -80,7 +80,7 @@ entity dnc_read_weighting is
 
     B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    F_IN : in std_logic;
+    F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -94,8 +94,12 @@ architecture dnc_read_weighting_architecture of dnc_read_weighting is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
-    VECTOR_MULTIPLIER_STATE,  -- STEP 1
-    VECTOR_ADDER_STATE,  -- STEP 2
+    VECTOR_FIRST_MULTIPLIER_STATE,  -- STEP 1
+    VECTOR_FIRST_ADDER_STATE,  -- STEP 2
+    VECTOR_SECOND_MULTIPLIER_STATE,  -- STEP 3
+    VECTOR_SECOND_ADDER_STATE,  -- STEP 4
+    VECTOR_THIRD_MULTIPLIER_STATE,  -- STEP 5
+    VECTOR_THIRD_ADDER_STATE,  -- STEP 6
     ENDER_STATE  -- STEP 3
     );
 
@@ -105,6 +109,7 @@ architecture dnc_read_weighting_architecture of dnc_read_weighting is
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -112,6 +117,9 @@ architecture dnc_read_weighting_architecture of dnc_read_weighting is
 
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+
+  -- Internal Signals
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
   -- CONTROL
@@ -176,14 +184,64 @@ begin
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            controller_ctrl_fsm_int <= VECTOR_FIRST_MULTIPLIER_STATE;
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
+        when VECTOR_FIRST_MULTIPLIER_STATE =>  -- STEP 1
 
-        when VECTOR_ADDER_STATE =>  -- STEP 2
+          -- Data Inputs
+          modulo_in_vector_multiplier <= FULL;
+          size_in_vector_multiplier   <= SIZE_N_IN;
+          data_a_in_vector_multiplier <= PI_IN;
+          data_b_in_vector_multiplier <= B_IN;
 
-        when ENDER_STATE =>  -- STEP 3
+        when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
+
+          -- Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= SIZE_N_IN;
+          data_a_in_vector_adder <= ZERO;
+          data_b_in_vector_adder <= data_out_vector_multiplier;
+
+        when VECTOR_SECOND_MULTIPLIER_STATE =>  -- STEP 3
+
+          -- Data Inputs
+          modulo_in_vector_multiplier <= FULL;
+          size_in_vector_multiplier   <= SIZE_N_IN;
+          data_a_in_vector_multiplier <= PI_IN;
+          data_b_in_vector_multiplier <= C_IN;
+
+        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
+
+          -- Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= SIZE_N_IN;
+          data_a_in_vector_adder <= data_out_vector_adder;
+          data_b_in_vector_adder <= data_out_vector_multiplier;
+
+        when VECTOR_THIRD_MULTIPLIER_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          modulo_in_vector_multiplier <= FULL;
+          size_in_vector_multiplier   <= SIZE_N_IN;
+          data_a_in_vector_multiplier <= PI_IN;
+          data_b_in_vector_multiplier <= F_IN;
+
+        when VECTOR_THIRD_ADDER_STATE =>  -- STEP 6
+
+          -- Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= SIZE_N_IN;
+          data_a_in_vector_adder <= data_out_vector_adder;
+          data_b_in_vector_adder <= data_out_vector_multiplier;
+
+        when ENDER_STATE =>  -- STEP 7
+        
+          if (unsigned(index_loop) = unsigned(SIZE_R_IN) - unsigned(ONE)) then
+            -- FSM Control
+            controller_ctrl_fsm_int <= STARTER_STATE;
+          else
+          end if;
 
         when others =>
           -- FSM Control

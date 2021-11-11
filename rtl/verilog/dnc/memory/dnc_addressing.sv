@@ -267,7 +267,7 @@ module dnc_addressing #(
   wire [DATA_SIZE-1:0] pi_in_read_weighting;
   wire [DATA_SIZE-1:0] b_in_read_weighting;
   wire [DATA_SIZE-1:0] c_in_read_weighting;
-  wire f_in_read_weighting;
+  wire [DATA_SIZE-1:0] f_in_read_weighting;
   wire [DATA_SIZE-1:0] w_out_read_weighting;
 
   // SORT VECTOR

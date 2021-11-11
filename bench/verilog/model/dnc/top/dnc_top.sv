@@ -126,6 +126,9 @@ module dnc_top #(
   reg [3:0] read_heads_ctrl_fsm_int;
   reg [3:0] write_heads_ctrl_fsm_int;
 
+  // Internal Signals
+  reg [DATA_SIZE-1:0] index_loop;
+
   ///////////////////////////////////////////////////////////////////////
   // CONTROLLER
   ///////////////////////////////////////////////////////////////////////
@@ -574,6 +577,11 @@ module dnc_top #(
         end
 
         ENDER_STATE : begin  // STEP 5
+        
+          if (index_loop == SIZE_R_IN - ONE) begin
+            // FSM Control
+            top_ctrl_fsm_int <= STARTER_STATE;
+          end
         end
         default : begin
           // FSM Control
