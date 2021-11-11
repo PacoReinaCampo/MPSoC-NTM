@@ -87,6 +87,7 @@ module ntm_vector_adder #(
 
   // Internal Signals
   reg [DATA_SIZE-1:0] index_loop;
+
   reg data_a_in_adder_int;
   reg data_b_in_adder_int;
 

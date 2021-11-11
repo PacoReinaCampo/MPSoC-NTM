@@ -66,7 +66,7 @@ module dnc_read_weighting #(
     input [DATA_SIZE-1:0] PI_IN,
     input [DATA_SIZE-1:0] B_IN,
     input [DATA_SIZE-1:0] C_IN,
-    input F_IN,
+    input [DATA_SIZE-1:0] F_IN,
     output reg [DATA_SIZE-1:0] W_OUT
     );
 
@@ -74,10 +74,14 @@ module dnc_read_weighting #(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter [1:0] STARTER_STATE = 0;
-  parameter [1:0] VECTOR_MULTIPLIER_STATE = 1;
-  parameter [1:0] VECTOR_ADDER_STATE = 2;
-  parameter [1:0] ENDER_STATE = 3;
+  parameter [2:0] STARTER_STATE = 0;
+  parameter [2:0] VECTOR_FIRST_MULTIPLIER_STATE = 1;
+  parameter [2:0] VECTOR_FIRST_ADDER_STATE = 2;
+  parameter [2:0] VECTOR_SECOND_MULTIPLIER_STATE = 3;
+  parameter [2:0] VECTOR_SECOND_ADDER_STATE = 4;
+  parameter [2:0] VECTOR_THIRD_MULTIPLIER_STATE = 5;
+  parameter [2:0] VECTOR_THIRD_ADDER_STATE = 6;
+  parameter [2:0] ENDER_STATE = 7;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -85,13 +89,17 @@ module dnc_read_weighting #(
 
   parameter ZERO = 0;
   parameter ONE = 1;
+  parameter FULL = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] controller_ctrl_fsm_int;
+  reg [2:0] controller_ctrl_fsm_int;
+
+  // Internal Signals
+  reg [DATA_SIZE-1:0] index_loop;
 
   // VECTOR ADDER
   // CONTROL
@@ -105,10 +113,10 @@ module dnc_read_weighting #(
   wire data_out_enable_vector_adder;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_adder;
-  wire [DATA_SIZE-1:0] size_in_vector_adder;
-  wire [DATA_SIZE-1:0] data_a_in_vector_adder;
-  wire [DATA_SIZE-1:0] data_b_in_vector_adder;
+  reg [DATA_SIZE-1:0] modulo_in_vector_adder;
+  reg [DATA_SIZE-1:0] size_in_vector_adder;
+  reg [DATA_SIZE-1:0] data_a_in_vector_adder;
+  reg [DATA_SIZE-1:0] data_b_in_vector_adder;
   wire [DATA_SIZE-1:0] data_out_vector_adder;
 
   // VECTOR MULTIPLIER
@@ -121,10 +129,10 @@ module dnc_read_weighting #(
   wire data_out_enable_vector_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_multiplier;
-  wire [DATA_SIZE-1:0] size_in_vector_multiplier;
-  wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
-  wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
+  reg [DATA_SIZE-1:0] modulo_in_vector_multiplier;
+  reg [DATA_SIZE-1:0] size_in_vector_multiplier;
+  reg [DATA_SIZE-1:0] data_a_in_vector_multiplier;
+  reg [DATA_SIZE-1:0] data_b_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_out_vector_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
@@ -150,17 +158,65 @@ module dnc_read_weighting #(
 
           if(START == 1'b1) begin
             // FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            controller_ctrl_fsm_int <= VECTOR_FIRST_MULTIPLIER_STATE;
           end
         end
 
-        VECTOR_MULTIPLIER_STATE : begin  // STEP 1
+        VECTOR_FIRST_MULTIPLIER_STATE : begin  // STEP 1
+
+          // Data Inputs
+          modulo_in_vector_multiplier <= FULL;
+          size_in_vector_multiplier   <= SIZE_N_IN;
+          data_a_in_vector_multiplier <= PI_IN;
+          data_b_in_vector_multiplier <= B_IN;
         end
 
-        VECTOR_ADDER_STATE : begin  // STEP 2
+        VECTOR_FIRST_ADDER_STATE : begin  // STEP 2
+
+          // Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= SIZE_N_IN;
+          data_a_in_vector_adder <= ZERO;
+          data_b_in_vector_adder <= data_out_vector_multiplier;
         end
 
-        ENDER_STATE : begin  // STEP 3
+        VECTOR_SECOND_MULTIPLIER_STATE : begin  // STEP 3
+
+          // Data Inputs
+          modulo_in_vector_multiplier <= FULL;
+          size_in_vector_multiplier   <= SIZE_N_IN;
+          data_a_in_vector_multiplier <= PI_IN;
+          data_b_in_vector_multiplier <= C_IN;
+        end
+
+        VECTOR_SECOND_ADDER_STATE : begin  // STEP 4
+
+          // Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= SIZE_N_IN;
+          data_a_in_vector_adder <= data_out_vector_adder;
+          data_b_in_vector_adder <= data_out_vector_multiplier;
+        end
+
+        VECTOR_THIRD_MULTIPLIER_STATE : begin  // STEP 5
+
+          // Data Inputs
+          modulo_in_vector_multiplier <= FULL;
+          size_in_vector_multiplier   <= SIZE_N_IN;
+          data_a_in_vector_multiplier <= PI_IN;
+          data_b_in_vector_multiplier <= F_IN;
+        end
+
+        VECTOR_THIRD_ADDER_STATE : begin  // STEP 6
+
+          // Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= SIZE_N_IN;
+          data_a_in_vector_adder <= data_out_vector_adder;
+          data_b_in_vector_adder <= data_out_vector_multiplier;
+        end
+
+        ENDER_STATE : begin  // STEP 7
         end
         default : begin
           // FSM Control
