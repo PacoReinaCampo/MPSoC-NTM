@@ -104,6 +104,8 @@ module ntm_algebra_testbench;
 
   // DATA
   wire [DATA_SIZE-1:0] modulo_in_matrix_determinant;
+  wire [DATA_SIZE-1:0] size_i_in_matrix_determinant;
+  wire [DATA_SIZE-1:0] size_j_in_matrix_determinant;
   wire [DATA_SIZE-1:0] data_in_matrix_determinant;
   wire [DATA_SIZE-1:0] data_out_matrix_determinant;
 
@@ -119,6 +121,8 @@ module ntm_algebra_testbench;
 
   // DATA
   wire [DATA_SIZE-1:0] modulo_in_matrix_inversion;
+  wire [DATA_SIZE-1:0] size_i_in_matrix_inversion;
+  wire [DATA_SIZE-1:0] size_j_in_matrix_inversion;
   wire [DATA_SIZE-1:0] data_in_matrix_inversion;
   wire [DATA_SIZE-1:0] data_out_matrix_inversion;
 
@@ -156,6 +160,8 @@ module ntm_algebra_testbench;
 
   // DATA
   wire [DATA_SIZE-1:0] modulo_in_matrix_rank;
+  wire [DATA_SIZE-1:0] size_i_in_matrix_rank;
+  wire [DATA_SIZE-1:0] size_j_in_matrix_rank;
   wire [DATA_SIZE-1:0] data_in_matrix_rank;
   wire [DATA_SIZE-1:0] data_out_matrix_rank;
 
@@ -171,6 +177,8 @@ module ntm_algebra_testbench;
 
   // DATA
   wire [DATA_SIZE-1:0] modulo_in_matrix_transpose;
+  wire [DATA_SIZE-1:0] size_i_in_matrix_transpose;
+  wire [DATA_SIZE-1:0] size_j_in_matrix_transpose;
   wire [DATA_SIZE-1:0] data_in_matrix_transpose;
   wire [DATA_SIZE-1:0] data_out_matrix_transpose;
 
@@ -274,6 +282,8 @@ module ntm_algebra_testbench;
 
     // DATA
     .MATRIX_DETERMINANT_MODULO_IN(modulo_in_matrix_determinant),
+    .MATRIX_DETERMINANT_SIZE_I_IN(size_i_in_matrix_determinant),
+    .MATRIX_DETERMINANT_SIZE_J_IN(size_j_in_matrix_determinant),
     .MATRIX_DETERMINANT_DATA_IN(data_in_matrix_determinant),
     .MATRIX_DETERMINANT_DATA_OUT(data_out_matrix_determinant),
 
@@ -288,6 +298,8 @@ module ntm_algebra_testbench;
 
     // DATA
     .MATRIX_INVERSION_MODULO_IN(modulo_in_matrix_inversion),
+    .MATRIX_INVERSION_SIZE_I_IN(size_i_in_matrix_inversion),
+    .MATRIX_INVERSION_SIZE_J_IN(size_j_in_matrix_inversion),
     .MATRIX_INVERSION_DATA_IN(data_in_matrix_inversion),
     .MATRIX_INVERSION_DATA_OUT(data_out_matrix_inversion),
 
@@ -325,6 +337,8 @@ module ntm_algebra_testbench;
 
     // DATA
     .MATRIX_RANK_MODULO_IN(modulo_in_matrix_rank),
+    .MATRIX_RANK_SIZE_I_IN(size_i_in_matrix_rank),
+    .MATRIX_RANK_SIZE_J_IN(size_j_in_matrix_rank),
     .MATRIX_RANK_DATA_IN(data_in_matrix_rank),
     .MATRIX_RANK_DATA_OUT(data_out_matrix_rank),
 
@@ -340,6 +354,8 @@ module ntm_algebra_testbench;
 
     // DATA
     .MATRIX_TRANSPOSE_MODULO_IN(modulo_in_matrix_transpose),
+    .MATRIX_TRANSPOSE_SIZE_I_IN(size_i_in_matrix_transpose),
+    .MATRIX_TRANSPOSE_SIZE_J_IN(size_j_in_matrix_transpose),
     .MATRIX_TRANSPOSE_DATA_IN(data_in_matrix_transpose),
     .MATRIX_TRANSPOSE_DATA_OUT(data_out_matrix_transpose),
 
@@ -389,10 +405,7 @@ module ntm_algebra_testbench;
 
   // MATRIX DETERMINANT
   ntm_matrix_determinant #(
-    .DATA_SIZE(DATA_SIZE),
-
-    .SIZE_I(SIZE_I),
-    .SIZE_J(SIZE_J)
+    .DATA_SIZE(DATA_SIZE)
   )
   matrix_determinant(
     // GLOBAL
@@ -410,16 +423,15 @@ module ntm_algebra_testbench;
 
     // DATA
     .MODULO_IN(modulo_in_matrix_determinant),
+    .SIZE_I_IN(size_i_in_matrix_determinant),
+    .SIZE_J_IN(size_j_in_matrix_determinant),
     .DATA_IN(data_in_matrix_determinant),
     .DATA_OUT(data_out_matrix_determinant)
   );
 
   // MATRIX INVERSION
   ntm_matrix_inversion #(
-    .DATA_SIZE(DATA_SIZE),
-
-    .SIZE_I(SIZE_I),
-    .SIZE_J(SIZE_J)
+    .DATA_SIZE(DATA_SIZE)
   )
   matrix_inversion(
     // GLOBAL
@@ -437,6 +449,8 @@ module ntm_algebra_testbench;
 
     // DATA
     .MODULO_IN(modulo_in_matrix_inversion),
+    .SIZE_I_IN(size_i_in_matrix_inversion),
+    .SIZE_J_IN(size_j_in_matrix_inversion),
     .DATA_IN(data_in_matrix_inversion),
     .DATA_OUT(data_out_matrix_inversion)
   );
@@ -474,10 +488,7 @@ module ntm_algebra_testbench;
 
   // MATRIX RANK
   ntm_matrix_rank #(
-    .DATA_SIZE(DATA_SIZE),
-
-    .SIZE_I(SIZE_I),
-    .SIZE_J(SIZE_J)
+    .DATA_SIZE(DATA_SIZE)
   )
   matrix_rank(
     // GLOBAL
@@ -495,16 +506,15 @@ module ntm_algebra_testbench;
 
     // DATA
     .MODULO_IN(modulo_in_matrix_rank),
+    .SIZE_I_IN(size_i_in_matrix_rank),
+    .SIZE_J_IN(size_j_in_matrix_rank),
     .DATA_IN(data_in_matrix_rank),
     .DATA_OUT(data_out_matrix_rank)
   );
 
   // MATRIX TRANSPOSE
   ntm_matrix_transpose #(
-    .DATA_SIZE(DATA_SIZE),
-
-    .SIZE_I(SIZE_I),
-    .SIZE_J(SIZE_J)
+    .DATA_SIZE(DATA_SIZE)
   )
   matrix_transpose(
     // GLOBAL
@@ -522,6 +532,8 @@ module ntm_algebra_testbench;
 
     // DATA
     .MODULO_IN(modulo_in_matrix_transpose),
+    .SIZE_I_IN(size_i_in_matrix_transpose),
+    .SIZE_J_IN(size_j_in_matrix_transpose),
     .DATA_IN(data_in_matrix_transpose),
     .DATA_OUT(data_out_matrix_transpose)
   );

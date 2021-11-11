@@ -105,6 +105,8 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
 
   -- DATA
   signal modulo_in_matrix_determinant : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_determinant : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_j_in_matrix_determinant : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_determinant   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_determinant  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -121,6 +123,8 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
 
   -- DATA
   signal modulo_in_matrix_inversion : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_inversion : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_j_in_matrix_inversion : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_inversion   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_inversion  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -160,6 +164,8 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
 
   -- DATA
   signal modulo_in_matrix_rank : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_rank : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_j_in_matrix_rank : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_rank   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_rank  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -176,6 +182,8 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
 
   -- DATA
   signal modulo_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_j_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -285,6 +293,8 @@ begin
 
       -- DATA
       MATRIX_DETERMINANT_MODULO_IN => modulo_in_matrix_determinant,
+      MATRIX_DETERMINANT_SIZE_I_IN => size_i_in_matrix_determinant,
+      MATRIX_DETERMINANT_SIZE_J_IN => size_j_in_matrix_determinant,
       MATRIX_DETERMINANT_DATA_IN   => data_in_matrix_determinant,
       MATRIX_DETERMINANT_DATA_OUT  => data_out_matrix_determinant,
 
@@ -301,6 +311,8 @@ begin
 
       -- DATA
       MATRIX_INVERSION_MODULO_IN => modulo_in_matrix_inversion,
+      MATRIX_INVERSION_SIZE_I_IN => size_i_in_matrix_inversion,
+      MATRIX_INVERSION_SIZE_J_IN => size_j_in_matrix_inversion,
       MATRIX_INVERSION_DATA_IN   => data_in_matrix_inversion,
       MATRIX_INVERSION_DATA_OUT  => data_out_matrix_inversion,
 
@@ -340,6 +352,8 @@ begin
 
       -- DATA
       MATRIX_RANK_MODULO_IN => modulo_in_matrix_rank,
+      MATRIX_RANK_SIZE_I_IN => size_i_in_matrix_rank,
+      MATRIX_RANK_SIZE_J_IN => size_j_in_matrix_rank,
       MATRIX_RANK_DATA_IN   => data_in_matrix_rank,
       MATRIX_RANK_DATA_OUT  => data_out_matrix_rank,
 
@@ -356,6 +370,8 @@ begin
 
       -- DATA
       MATRIX_TRANSPOSE_MODULO_IN => modulo_in_matrix_transpose,
+      MATRIX_TRANSPOSE_SIZE_I_IN => size_i_in_matrix_transpose,
+      MATRIX_TRANSPOSE_SIZE_J_IN => size_j_in_matrix_transpose,
       MATRIX_TRANSPOSE_DATA_IN   => data_in_matrix_transpose,
       MATRIX_TRANSPOSE_DATA_OUT  => data_out_matrix_transpose,
 
@@ -409,10 +425,7 @@ begin
   ntm_matrix_determinant_test : if (ENABLE_NTM_MATRIX_DETERMINANT_TEST) generate
     matrix_determinant : ntm_matrix_determinant
       generic map (
-        DATA_SIZE => DATA_SIZE,
-
-        SIZE_I => SIZE_I,
-        SIZE_J => SIZE_J
+        DATA_SIZE => DATA_SIZE
         )
       port map (
         -- GLOBAL
@@ -431,6 +444,8 @@ begin
 
         -- DATA
         MODULO_IN => modulo_in_matrix_determinant,
+        SIZE_I_IN => size_i_in_matrix_determinant,
+        SIZE_J_IN => size_j_in_matrix_determinant,
         DATA_IN   => data_in_matrix_determinant,
         DATA_OUT  => data_out_matrix_determinant
         );
@@ -440,10 +455,7 @@ begin
   ntm_matrix_inversion_test : if (ENABLE_NTM_MATRIX_INVERSION_TEST) generate
     matrix_inversion : ntm_matrix_inversion
       generic map (
-        DATA_SIZE => DATA_SIZE,
-
-        SIZE_I => SIZE_I,
-        SIZE_J => SIZE_J
+        DATA_SIZE => DATA_SIZE
         )
       port map (
         -- GLOBAL
@@ -462,6 +474,8 @@ begin
 
         -- DATA
         MODULO_IN => modulo_in_matrix_inversion,
+        SIZE_I_IN => size_i_in_matrix_inversion,
+        SIZE_J_IN => size_j_in_matrix_inversion,
         DATA_IN   => data_in_matrix_inversion,
         DATA_OUT  => data_out_matrix_inversion
         );
@@ -506,10 +520,7 @@ begin
   ntm_matrix_rank_test : if (ENABLE_NTM_MATRIX_RANK_TEST) generate
     matrix_rank : ntm_matrix_rank
       generic map (
-        DATA_SIZE => DATA_SIZE,
-
-        SIZE_I => SIZE_I,
-        SIZE_J => SIZE_J
+        DATA_SIZE => DATA_SIZE
         )
       port map (
         -- GLOBAL
@@ -528,6 +539,8 @@ begin
 
         -- DATA
         MODULO_IN => modulo_in_matrix_rank,
+        SIZE_I_IN => size_i_in_matrix_rank,
+        SIZE_J_IN => size_j_in_matrix_rank,
         DATA_IN   => data_in_matrix_rank,
         DATA_OUT  => data_out_matrix_rank
         );
@@ -537,10 +550,7 @@ begin
   ntm_matrix_transpose_test : if (ENABLE_NTM_MATRIX_TRANSPOSE_TEST) generate
     matrix_transpose : ntm_matrix_transpose
       generic map (
-        DATA_SIZE => DATA_SIZE,
-
-        SIZE_I => SIZE_I,
-        SIZE_J => SIZE_J
+        DATA_SIZE => DATA_SIZE
         )
       port map (
         -- GLOBAL
@@ -559,6 +569,8 @@ begin
 
         -- DATA
         MODULO_IN => modulo_in_matrix_transpose,
+        SIZE_I_IN => size_i_in_matrix_transpose,
+        SIZE_J_IN => size_j_in_matrix_transpose,
         DATA_IN   => data_in_matrix_transpose,
         DATA_OUT  => data_out_matrix_transpose
         );

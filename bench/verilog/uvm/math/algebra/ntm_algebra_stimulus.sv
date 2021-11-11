@@ -88,6 +88,8 @@ module ntm_algebra_stimulus #(
 
     // DATA
     input [DATA_SIZE-1:0] MATRIX_DETERMINANT_MODULO_IN,
+    input [DATA_SIZE-1:0] MATRIX_DETERMINANT_SIZE_I_IN,
+    input [DATA_SIZE-1:0] MATRIX_DETERMINANT_SIZE_J_IN,
     input [DATA_SIZE-1:0] MATRIX_DETERMINANT_DATA_IN,
     output [DATA_SIZE-1:0] MATRIX_DETERMINANT_DATA_OUT,
 
@@ -103,6 +105,8 @@ module ntm_algebra_stimulus #(
 
     // DATA
     input [DATA_SIZE-1:0] MATRIX_INVERSION_MODULO_IN,
+    input [DATA_SIZE-1:0] MATRIX_INVERSION_SIZE_I_IN,
+    input [DATA_SIZE-1:0] MATRIX_INVERSION_SIZE_J_IN,
     input [DATA_SIZE-1:0] MATRIX_INVERSION_DATA_IN,
     output [DATA_SIZE-1:0] MATRIX_INVERSION_DATA_OUT,
 
@@ -140,6 +144,8 @@ module ntm_algebra_stimulus #(
 
     // DATA
     input [DATA_SIZE-1:0] MATRIX_RANK_MODULO_IN,
+    input [DATA_SIZE-1:0] MATRIX_RANK_SIZE_I_IN,
+    input [DATA_SIZE-1:0] MATRIX_RANK_SIZE_J_IN,
     input [DATA_SIZE-1:0] MATRIX_RANK_DATA_IN,
     output [DATA_SIZE-1:0] MATRIX_RANK_DATA_OUT,
 
@@ -155,6 +161,8 @@ module ntm_algebra_stimulus #(
 
     // DATA
     input [DATA_SIZE-1:0] MATRIX_TRANSPOSE_MODULO_IN,
+    input [DATA_SIZE-1:0] MATRIX_TRANSPOSE_SIZE_I_IN,
+    input [DATA_SIZE-1:0] MATRIX_TRANSPOSE_SIZE_J_IN,
     input [DATA_SIZE-1:0] MATRIX_TRANSPOSE_DATA_IN,
     output [DATA_SIZE-1:0] MATRIX_TRANSPOSE_DATA_OUT,
 

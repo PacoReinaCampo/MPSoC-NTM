@@ -157,6 +157,8 @@ package ntm_algebra_pkg is
 
       -- DATA
       MATRIX_DETERMINANT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_DETERMINANT_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_DETERMINANT_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_DETERMINANT_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_DETERMINANT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -173,6 +175,8 @@ package ntm_algebra_pkg is
 
       -- DATA
       MATRIX_INVERSION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_INVERSION_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_INVERSION_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_INVERSION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_INVERSION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -212,6 +216,8 @@ package ntm_algebra_pkg is
 
       -- DATA
       MATRIX_RANK_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_RANK_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_RANK_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_RANK_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_RANK_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -228,6 +234,8 @@ package ntm_algebra_pkg is
 
       -- DATA
       MATRIX_TRANSPOSE_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_TRANSPOSE_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_TRANSPOSE_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
