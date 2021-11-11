@@ -103,6 +103,8 @@ module dnc_read_vectors #(
 
   // DATA
   wire [DATA_SIZE-1:0] modulo_in_matrix_transpose;
+  wire [DATA_SIZE-1:0] size_i_in_matrix_transpose;
+  wire [DATA_SIZE-1:0] size_j_in_matrix_transpose;
   wire [DATA_SIZE-1:0] data_in_matrix_transpose;
   wire [DATA_SIZE-1:0] data_out_matrix_transpose;
 
@@ -174,13 +176,15 @@ module dnc_read_vectors #(
   // DATA
   // MATRIX TRANSPOSE
   assign modulo_in_matrix_transpose = FULL;
+  assign size_i_in_matrix_transpose = SIZE_N_IN;
+  assign size_j_in_matrix_transpose = SIZE_W_IN;
   assign data_in_matrix_transpose   = M_IN;
 
   // MATRIX PRODUCT
   assign modulo_in_matrix_product   = FULL;
-  assign size_a_i_in_matrix_product = SIZE_N_IN;
-  assign size_a_j_in_matrix_product = SIZE_W_IN;
-  assign size_b_i_in_matrix_product = SIZE_W_IN;
+  assign size_a_i_in_matrix_product = SIZE_W_IN;
+  assign size_a_j_in_matrix_product = SIZE_N_IN;
+  assign size_b_i_in_matrix_product = SIZE_N_IN;
   assign size_b_j_in_matrix_product = ONE;
   assign data_a_in_matrix_product   = data_out_matrix_transpose;
   assign data_b_in_matrix_product   = W_IN;
@@ -189,11 +193,9 @@ module dnc_read_vectors #(
 
   // MATRIX TRANSPOSE
   ntm_matrix_transpose #(
-    .DATA_SIZE(DATA_SIZE),
-    .SIZE_I(THREE),
-    .SIZE_J(THREE)
+    .DATA_SIZE(DATA_SIZE)
   )
-  ntm_matrix_transpose_i(
+  matrix_transpose(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -209,6 +211,8 @@ module dnc_read_vectors #(
 
     // DATA
     .MODULO_IN(modulo_in_matrix_transpose),
+    .SIZE_I_IN(size_i_in_matrix_transpose),
+    .SIZE_J_IN(size_j_in_matrix_transpose),
     .DATA_IN(data_in_matrix_transpose),
     .DATA_OUT(data_out_matrix_transpose)
   );

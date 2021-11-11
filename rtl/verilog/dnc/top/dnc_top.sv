@@ -76,16 +76,36 @@ module dnc_top #(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter [3:0] STARTER_STATE = 0;
-  parameter [3:0] CONTROLLER_STATE = 1;
-  parameter [3:0] INTERFACE_VECTOR_STATE = 2;
-  parameter [3:0] CONTROLLER_OUTPUT_VECTOR_STATE = 3;
-  parameter [3:0] ADDRESSING_STATE = 4;
-  parameter [3:0] WRITING_STATE = 5;
-  parameter [3:0] READING_STATE = 6;
-  parameter [3:0] MEMORY_STATE = 7;
-  parameter [3:0] OUTPUT_VECTOR_STATE = 8;
-  parameter [3:0] ENDER_STATE = 9;
+  parameter [2:0] STARTER_STATE = 0;
+  parameter [2:0] CONTROLLER_STATE = 1;
+  parameter [2:0] READ_HEADS_STATE = 2;
+  parameter [2:0] WRITE_HEADS_STATE = 3;
+  parameter [2:0] MEMORY_STATE = 4;
+  parameter [2:0] ENDER_STATE = 5;
+
+  parameter [2:0] STARTER_CONTROLLER_STATE = 0;
+  parameter [2:0] CONTROLLER_BODY_STATE = 1;
+  parameter [2:0] CONTROLLER_OUTPUT_VECTOR_STATE = 2;
+  parameter [2:0] OUTPUT_VECTOR_STATE = 3;
+  parameter [2:0] ENDER_CONTROLLER_STATE = 4;
+
+  parameter [3:0] STARTER_READ_HEADS_STATE = 0;
+  parameter [3:0] FREE_GATES_STATE = 1;
+  parameter [3:0] READ_KEYS_STATE = 2;
+  parameter [3:0] READ_MODES_STATE = 3;
+  parameter [3:0] READ_STRENGTHS_STATE = 4;
+  parameter [3:0] READ_INTERFACE_VECTOR_STATE = 5;
+  parameter [3:0] ENDER_READ_HEADS_STATE = 6;
+
+  parameter [3:0] STARTER_WRITE_HEADS_STATE = 0;
+  parameter [3:0] ALLOCATION_GATE_STATE = 1;
+  parameter [3:0] ERASE_VECTOR_STATE = 2;
+  parameter [3:0] WRITE_GATE_STATE = 3;
+  parameter [3:0] WRITE_KEY_STATE = 4;
+  parameter [3:0] WRITE_STRENGTH_STATE = 5;
+  parameter [3:0] WRITE_VECTOR_STATE = 6;
+  parameter [3:0] WRITE_INTERFACE_VECTOR_STATE = 7;
+  parameter [3:0] ENDER_WRITE_HEADS_STATE = 8;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -93,13 +113,18 @@ module dnc_top #(
 
   parameter ZERO = 0;
   parameter ONE = 1;
+  parameter FULL = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [3:0] top_ctrl_fsm_int;
+  reg [2:0] top_ctrl_fsm_int;
+
+  reg [2:0] controller_ctrl_fsm_int;
+  reg [3:0] read_heads_ctrl_fsm_int;
+  reg [3:0] write_heads_ctrl_fsm_int;
 
   ///////////////////////////////////////////////////////////////////////
   // CONTROLLER
@@ -401,6 +426,7 @@ module dnc_top #(
   // MEMORY
   ///////////////////////////////////////////////////////////////////////
 
+  // ADDRESSING
   // CONTROL
   wire start_addressing;
   wire ready_addressing;
@@ -455,30 +481,99 @@ module dnc_top #(
         end
 
         CONTROLLER_STATE : begin  // STEP 1
+        
+          case(controller_ctrl_fsm_int)
+            STARTER_CONTROLLER_STATE : begin  // STEP 0
+            end
+
+            CONTROLLER_BODY_STATE : begin  // STEP 1
+            end
+
+            CONTROLLER_OUTPUT_VECTOR_STATE : begin  // STEP 2
+            end
+
+            OUTPUT_VECTOR_STATE : begin  // STEP 3
+            end
+
+            ENDER_CONTROLLER_STATE : begin  // STEP 4
+            end
+            default : begin
+              // FSM Control
+              controller_ctrl_fsm_int <= STARTER_CONTROLLER_STATE;
+            end
+          endcase
         end
 
-        INTERFACE_VECTOR_STATE : begin  // STEP 2
+        READ_HEADS_STATE : begin  // STEP 2
+        
+          case(read_heads_ctrl_fsm_int)
+            STARTER_READ_HEADS_STATE : begin  // STEP 0
+            end
+
+            FREE_GATES_STATE : begin  // STEP 1
+            end
+
+            READ_KEYS_STATE : begin  // STEP 2
+            end
+
+            READ_MODES_STATE : begin  // STEP 3
+            end
+
+            READ_STRENGTHS_STATE : begin  // STEP 4
+            end
+
+            READ_INTERFACE_VECTOR_STATE : begin  // STEP 5
+            end
+
+            ENDER_READ_HEADS_STATE : begin  // STEP 6
+            end
+            default : begin
+              // FSM Control
+              read_heads_ctrl_fsm_int <= STARTER_READ_HEADS_STATE;
+            end
+          endcase
         end
 
-        CONTROLLER_OUTPUT_VECTOR_STATE : begin  // STEP 3
+        WRITE_HEADS_STATE : begin  // STEP 3
+        
+          case(write_heads_ctrl_fsm_int)
+            STARTER_WRITE_HEADS_STATE : begin  // STEP 0
+            end
+
+            ALLOCATION_GATE_STATE : begin  // STEP 1
+            end
+
+            ERASE_VECTOR_STATE : begin  // STEP 2
+            end
+
+            WRITE_GATE_STATE : begin  // STEP 3
+            end
+
+            WRITE_KEY_STATE : begin  // STEP 4
+            end
+
+            WRITE_STRENGTH_STATE : begin  // STEP 5
+            end
+
+            WRITE_VECTOR_STATE : begin  // STEP 5
+            end
+
+            WRITE_INTERFACE_VECTOR_STATE : begin  // STEP 5
+            end
+
+            ENDER_WRITE_HEADS_STATE : begin  // STEP 6
+            end
+            default : begin
+              // FSM Control
+              write_heads_ctrl_fsm_int <= STARTER_WRITE_HEADS_STATE;
+            end
+          endcase
         end
 
-        ADDRESSING_STATE : begin  // STEP 4
+        MEMORY_STATE : begin  // STEP 4
         end
 
-        WRITING_STATE : begin  // STEP 5
-        end
-
-        READING_STATE : begin  // STEP 6
-        end
-
-        MEMORY_STATE : begin  // STEP 7
-        end
-
-        OUTPUT_VECTOR_STATE : begin  // STEP 8
-        end
-
-        ENDER_STATE : begin  // STEP 9
+        ENDER_STATE : begin  // STEP 5
         end
         default : begin
           // FSM Control

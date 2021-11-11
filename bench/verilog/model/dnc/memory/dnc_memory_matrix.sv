@@ -104,6 +104,8 @@ module dnc_memory_matrix #(
 
   // DATA
   wire [DATA_SIZE-1:0] modulo_in_matrix_transpose;
+  wire [DATA_SIZE-1:0] size_i_in_matrix_transpose;
+  wire [DATA_SIZE-1:0] size_j_in_matrix_transpose;
   wire [DATA_SIZE-1:0] data_in_matrix_transpose;
   wire [DATA_SIZE-1:0] data_out_matrix_transpose;
 
@@ -174,11 +176,9 @@ module dnc_memory_matrix #(
 
   // MATRIX TRANSPOSE
   ntm_matrix_transpose #(
-    .DATA_SIZE(DATA_SIZE),
-    .SIZE_I(THREE),
-    .SIZE_J(THREE)
+    .DATA_SIZE(DATA_SIZE)
   )
-  ntm_matrix_transpose_i(
+  matrix_transpose(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -194,8 +194,11 @@ module dnc_memory_matrix #(
 
     // DATA
     .MODULO_IN(modulo_in_matrix_transpose),
+    .SIZE_I_IN(size_i_in_matrix_transpose),
+    .SIZE_J_IN(size_j_in_matrix_transpose),
     .DATA_IN(data_in_matrix_transpose),
-    .DATA_OUT(data_out_matrix_transpose));
+    .DATA_OUT(data_out_matrix_transpose)
+  );
 
   // MATRIX PRODUCT
   ntm_matrix_product #(

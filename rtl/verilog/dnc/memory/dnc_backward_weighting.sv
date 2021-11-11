@@ -102,6 +102,8 @@ module dnc_backward_weighting #(
 
   // DATA
   wire [DATA_SIZE-1:0] modulo_in_matrix_transpose;
+  wire [DATA_SIZE-1:0] size_i_in_matrix_transpose;
+  wire [DATA_SIZE-1:0] size_j_in_matrix_transpose;
   wire [DATA_SIZE-1:0] data_in_matrix_transpose;
   wire [DATA_SIZE-1:0] data_out_matrix_transpose;
 
@@ -173,6 +175,8 @@ module dnc_backward_weighting #(
   // DATA
   // MATRIX TRANSPOSE
   assign modulo_in_matrix_transpose = FULL;
+  assign size_i_in_matrix_transpose = SIZE_N_IN;
+  assign size_j_in_matrix_transpose = SIZE_N_IN;
   assign data_in_matrix_transpose   = L_IN;
 
   // MATRIX PRODUCT
@@ -188,9 +192,7 @@ module dnc_backward_weighting #(
 
   // MATRIX TRANSPOSE
   ntm_matrix_transpose #(
-    .DATA_SIZE(DATA_SIZE),
-    .SIZE_I(THREE),
-    .SIZE_J(THREE)
+    .DATA_SIZE(DATA_SIZE)
   )
   matrix_transpose(
     // GLOBAL
@@ -208,6 +210,8 @@ module dnc_backward_weighting #(
 
     // DATA
     .MODULO_IN(modulo_in_matrix_transpose),
+    .SIZE_I_IN(size_i_in_matrix_transpose),
+    .SIZE_J_IN(size_j_in_matrix_transpose),
     .DATA_IN(data_in_matrix_transpose),
     .DATA_OUT(data_out_matrix_transpose)
   );

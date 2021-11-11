@@ -123,6 +123,8 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
 
   -- DATA
   signal modulo_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_j_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -193,12 +195,9 @@ begin
   end process;
 
   -- MATRIX TRANSPOSE
-  ntm_matrix_transpose_i : ntm_matrix_transpose
+  matrix_transpose : ntm_matrix_transpose
     generic map (
-      DATA_SIZE => DATA_SIZE,
-
-      SIZE_I => THREE,
-      SIZE_J => THREE
+      DATA_SIZE => DATA_SIZE
       )
     port map (
       -- GLOBAL
@@ -217,6 +216,8 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_matrix_transpose,
+      SIZE_I_IN => size_i_in_matrix_transpose,
+      SIZE_J_IN => size_j_in_matrix_transpose,
       DATA_IN   => data_in_matrix_transpose,
       DATA_OUT  => data_out_matrix_transpose
       );

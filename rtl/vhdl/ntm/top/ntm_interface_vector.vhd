@@ -245,6 +245,7 @@ begin
           data_a_in_scalar_product <= WBETA_IN;
           data_b_in_scalar_product <= H_IN;
 
+          -- Data Outputs
           BETA_OUT <= data_out_scalar_product;
 
         when SCALAR_SECOND_PRODUCT_STATE =>  -- STEP 4

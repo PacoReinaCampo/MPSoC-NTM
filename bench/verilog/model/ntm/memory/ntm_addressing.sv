@@ -75,11 +75,23 @@ module ntm_addressing #(
 
   parameter [2:0] STARTER_STATE = 0;
   parameter [2:0] VECTOR_CONTENT_BASED_ADDRESSING_STATE = 1;
-  parameter [2:0] SCALAR_ADDER_STATE = 2;
-  parameter [2:0] VECTOR_EXPONENTIATOR_STATE = 3;
-  parameter [2:0] VECTOR_MULTIPLIER_STATE = 4;
-  parameter [2:0] VECTOR_CONVOLUTION_STATE = 5;
-  parameter [2:0] ENDER_STATE = 6;
+  parameter [2:0] VECTOR_INTERPOLATION_STATE = 2;
+  parameter [2:0] VECTOR_CONVOLUTION_STATE = 3;
+  parameter [2:0] VECTOR_SHARPENING_STATE = 4;
+  parameter [2:0] ENDER_STATE = 5;
+
+  parameter [2:0] STARTER_INTERPOLATION_STATE = 0;
+  parameter [2:0] VECTOR_FIRST_MULTIPLIER_INTERPOLATION_STATE = 1;
+  parameter [2:0] VECTOR_FIRST_ADDER_INTERPOLATION_STATE = 2;
+  parameter [2:0] VECTOR_SECOND_MULTIPLIER_INTERPOLATION_STATE = 3;
+  parameter [2:0] VECTOR_SECOND_ADDER_INTERPOLATION_STATE = 4;
+  parameter [2:0] ENDER_INTERPOLATION_STATE = 5;
+
+  parameter [2:0] STARTER_SHARPENING_STATE = 0;
+  parameter [2:0] VECTOR_EXPONENTIATOR_SHARPENING_STATE = 1;
+  parameter [2:0] VECTOR_SUMMATION_SHARPENING_STATE = 2;
+  parameter [2:0] VECTOR_DIVIDER_SHARPENING_STATE = 3;
+  parameter [2:0] ENDER_SHARPENING_STATE = 4;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -87,6 +99,7 @@ module ntm_addressing #(
 
   parameter ZERO = 0;
   parameter ONE = 1;
+  parameter FULL = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -94,6 +107,8 @@ module ntm_addressing #(
 
   // Finite State Machine
   reg [2:0] controller_ctrl_fsm_int;
+  reg [2:0] controller_ctrl_interpolation_fsm_int;
+  reg [2:0] controller_ctrl_sharpening_fsm_int;
 
   // VECTOR CONTENT BASED ADDRESSING
   // CONTROL
@@ -106,26 +121,47 @@ module ntm_addressing #(
   wire c_out_enable_vector_content_based_addressing;
 
   // DATA
-  wire [DATA_SIZE-1:0] size_i_in_vector_content_based_addressing;
-  wire [DATA_SIZE-1:0] size_j_in_vector_content_based_addressing;
-  wire [DATA_SIZE-1:0] k_in_vector_content_based_addressing;
-  wire [DATA_SIZE-1:0] beta_in_vector_content_based_addressing;
-  wire [DATA_SIZE-1:0] m_in_vector_content_based_addressing;
-  wire [DATA_SIZE-1:0] modulo_in_vector_content_based_addressing;
+  reg [DATA_SIZE-1:0] modulo_in_vector_content_based_addressing;
+  reg [DATA_SIZE-1:0] size_i_in_vector_content_based_addressing;
+  reg [DATA_SIZE-1:0] size_j_in_vector_content_based_addressing;
+  reg [DATA_SIZE-1:0] k_in_vector_content_based_addressing;
+  reg [DATA_SIZE-1:0] beta_in_vector_content_based_addressing;
+  reg [DATA_SIZE-1:0] m_in_vector_content_based_addressing;
   wire [DATA_SIZE-1:0] c_out_vector_content_based_addressing;
 
-  // SCALAR ADDER
+  // VECTOR ADDER
   // CONTROL
-  wire start_scalar_adder;
-  wire ready_scalar_adder;
+  wire start_vector_adder;
+  wire ready_vector_adder;
 
-  wire operation_scalar_adder;
+  wire operation_vector_adder;
+
+  wire data_a_in_enable_vector_adder;
+  wire data_b_in_enable_vector_adder;
+  wire data_out_enable_vector_adder;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_adder;
-  wire [DATA_SIZE-1:0] data_a_in_scalar_adder;
-  wire [DATA_SIZE-1:0] data_b_in_scalar_adder;
-  wire [DATA_SIZE-1:0] data_out_scalar_adder;
+  reg [DATA_SIZE-1:0] modulo_in_vector_adder;
+  reg [DATA_SIZE-1:0] size_in_vector_adder;
+  reg [DATA_SIZE-1:0] data_a_in_vector_adder;
+  reg [DATA_SIZE-1:0] data_b_in_vector_adder;
+  wire [DATA_SIZE-1:0] data_out_vector_adder;
+
+  // VECTOR MULTIPLIER
+  // CONTROL
+  wire start_vector_multiplier;
+  wire ready_vector_multiplier;
+
+  wire data_a_in_enable_vector_multiplier;
+  wire data_b_in_enable_vector_multiplier;
+  wire data_out_enable_vector_multiplier;
+
+  // DATA
+  reg [DATA_SIZE-1:0] modulo_in_vector_multiplier;
+  reg [DATA_SIZE-1:0] size_in_vector_multiplier;
+  reg [DATA_SIZE-1:0] data_a_in_vector_multiplier;
+  reg [DATA_SIZE-1:0] data_b_in_vector_multiplier;
+  wire [DATA_SIZE-1:0] data_out_vector_multiplier;
 
   // VECTOR EXPONENTIATOR
   // CONTROL
@@ -143,21 +179,22 @@ module ntm_addressing #(
   wire [DATA_SIZE-1:0] data_b_in_vector_exponentiator;
   wire [DATA_SIZE-1:0] data_out_vector_exponentiator;
 
-  // VECTOR MULTIPLIER
+  // VECTOR SUMMATION
   // CONTROL
-  wire start_vector_multiplier;
-  wire ready_vector_multiplier;
+  wire start_vector_summation;
+  wire ready_vector_summation;
 
-  wire data_a_in_enable_vector_multiplier;
-  wire data_b_in_enable_vector_multiplier;
-  wire data_out_enable_vector_multiplier;
+  wire data_in_vector_enable_vector_summation;
+  wire data_in_scalar_enable_vector_summation;
+  wire data_out_vector_enable_vector_summation;
+  wire data_out_scalar_enable_vector_summation;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_multiplier;
-  wire [DATA_SIZE-1:0] size_in_vector_multiplier;
-  wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
-  wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
-  wire [DATA_SIZE-1:0] data_out_vector_multiplier;
+  wire [DATA_SIZE-1:0] modulo_in_vector_summation;
+  wire [DATA_SIZE-1:0] size_in_vector_summation;
+  wire [DATA_SIZE-1:0] length_in_vector_summation;
+  wire [DATA_SIZE-1:0] data_in_vector_summation;
+  wire [DATA_SIZE-1:0] data_out_vector_summation;
 
   // VECTOR CONVOLUTION
   // CONTROL
@@ -185,7 +222,7 @@ module ntm_addressing #(
 
 
   // wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
-  // wg(t;j) = g(t)·wc(t;j)·(1 - g(t)·w(t-1;j)
+  // wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
   // w(t;j) = w(t;j)*s(t;k)
   // w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
 
@@ -211,21 +248,113 @@ module ntm_addressing #(
         end
 
         VECTOR_CONTENT_BASED_ADDRESSING_STATE : begin  // STEP 1
+
+          // Data Inputs
+          modulo_in_vector_content_based_addressing <= FULL;
+          size_i_in_vector_content_based_addressing <= SIZE_N_IN;
+          size_j_in_vector_content_based_addressing <= SIZE_W_IN;
+          k_in_vector_content_based_addressing      <= K_IN;
+          beta_in_vector_content_based_addressing   <= BETA_IN;
+          m_in_vector_content_based_addressing      <= M_IN;
         end
 
-        SCALAR_ADDER_STATE : begin  // STEP 2
+        VECTOR_INTERPOLATION_STATE : begin  // STEP 2
+
+          case(controller_ctrl_interpolation_fsm_int)
+            STARTER_INTERPOLATION_STATE : begin  // STEP 0
+            end
+
+            VECTOR_FIRST_MULTIPLIER_INTERPOLATION_STATE : begin  // STEP 1
+
+              // Data Inputs
+              modulo_in_vector_multiplier <= FULL;
+              size_in_vector_multiplier   <= FULL;
+              data_a_in_vector_multiplier <= FULL;
+              data_b_in_vector_multiplier <= FULL;
+            end
+
+            VECTOR_FIRST_ADDER_INTERPOLATION_STATE : begin  // STEP 2
+
+              // Data Inputs
+              modulo_in_vector_adder <= FULL;
+              size_in_vector_adder   <= FULL;
+              data_a_in_vector_adder <= FULL;
+              data_b_in_vector_adder <= FULL;
+            end
+
+            VECTOR_SECOND_MULTIPLIER_INTERPOLATION_STATE : begin  // STEP 3
+
+              // Data Inputs
+              modulo_in_vector_multiplier <= FULL;
+              size_in_vector_multiplier   <= FULL;
+              data_a_in_vector_multiplier <= FULL;
+              data_b_in_vector_multiplier <= FULL;
+            end
+
+            VECTOR_SECOND_ADDER_INTERPOLATION_STATE : begin  // STEP 4
+
+              // Data Inputs
+              modulo_in_vector_adder <= FULL;
+              size_in_vector_adder   <= FULL;
+              data_a_in_vector_adder <= FULL;
+              data_b_in_vector_adder <= FULL;
+            end
+
+            ENDER_INTERPOLATION_STATE : begin  // STEP 5
+            end
+            default : begin
+              // FSM Control
+              controller_ctrl_interpolation_fsm_int <= STARTER_INTERPOLATION_STATE;
+            end
+          endcase
         end
 
-        VECTOR_EXPONENTIATOR_STATE : begin  // STEP 3
+        VECTOR_CONVOLUTION_STATE : begin  // STEP 3
         end
 
-        VECTOR_MULTIPLIER_STATE : begin  // STEP 4
+        VECTOR_SHARPENING_STATE : begin  // STEP 4
+
+          case(controller_ctrl_sharpening_fsm_int)
+            STARTER_SHARPENING_STATE : begin  // STEP 0
+            end
+
+            VECTOR_EXPONENTIATOR_SHARPENING_STATE : begin  // STEP 1
+
+              // Data Inputs
+              modulo_in_vector_multiplier <= FULL;
+              size_in_vector_multiplier   <= FULL;
+              data_a_in_vector_multiplier <= FULL;
+              data_b_in_vector_multiplier <= FULL;
+            end
+
+            VECTOR_SUMMATION_SHARPENING_STATE : begin  // STEP 2
+
+              // Data Inputs
+              modulo_in_vector_adder <= FULL;
+              size_in_vector_adder   <= FULL;
+              data_a_in_vector_adder <= FULL;
+              data_b_in_vector_adder <= FULL;
+            end
+
+            VECTOR_DIVIDER_SHARPENING_STATE : begin  // STEP 3
+
+              // Data Inputs
+              modulo_in_vector_adder <= FULL;
+              size_in_vector_adder   <= FULL;
+              data_a_in_vector_adder <= FULL;
+              data_b_in_vector_adder <= FULL;
+            end
+
+            ENDER_SHARPENING_STATE : begin  // STEP 4
+            end
+            default : begin
+              // FSM Control
+              controller_ctrl_sharpening_fsm_int <= STARTER_SHARPENING_STATE;
+            end
+          endcase
         end
 
-        VECTOR_CONVOLUTION_STATE : begin  // STEP 5
-        end
-
-        ENDER_STATE : begin  // STEP 6
+        ENDER_STATE : begin  // STEP 5
         end
         default : begin
           // FSM Control
@@ -262,26 +391,56 @@ module ntm_addressing #(
     .C_OUT(c_out_vector_content_based_addressing)
   );
 
-  // SCALAR ADDER
-  ntm_scalar_adder #(
+  // VECTOR ADDER
+  ntm_vector_adder #(
     .DATA_SIZE(DATA_SIZE)
   )
-  scalar_adder(
+  vector_adder(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_adder),
-    .READY(ready_scalar_adder),
+    .START(start_vector_adder),
+    .READY(ready_vector_adder),
 
-    .OPERATION(operation_scalar_adder),
+    .OPERATION(operation_vector_adder),
+
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_adder),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_adder),
+    .DATA_OUT_ENABLE(data_out_enable_vector_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_adder),
-    .DATA_A_IN(data_a_in_scalar_adder),
-    .DATA_B_IN(data_b_in_scalar_adder),
-    .DATA_OUT(data_out_scalar_adder)
+    .MODULO_IN(modulo_in_vector_adder),
+    .SIZE_IN(size_in_vector_adder),
+    .DATA_A_IN(data_a_in_vector_adder),
+    .DATA_B_IN(data_b_in_vector_adder),
+    .DATA_OUT(data_out_vector_adder)
+  );
+
+  // VECTOR MULTIPLIER
+  ntm_vector_multiplier #(
+    .DATA_SIZE(DATA_SIZE)
+  )
+  vector_multiplier(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_vector_multiplier),
+    .READY(ready_vector_multiplier),
+
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_multiplier),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_multiplier),
+    .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
+
+    // DATA
+    .MODULO_IN(modulo_in_vector_multiplier),
+    .SIZE_IN(size_in_vector_multiplier),
+    .DATA_A_IN(data_a_in_vector_multiplier),
+    .DATA_B_IN(data_b_in_vector_multiplier),
+    .DATA_OUT(data_out_vector_multiplier)
   );
 
   // VECTOR EXPONENTIATOR
@@ -309,29 +468,30 @@ module ntm_addressing #(
     .DATA_OUT(data_out_vector_exponentiator)
   );
 
-  // VECTOR MULTIPLIER
-  ntm_vector_multiplier #(
+  // VECTOR SUMMATION
+  ntm_vector_summation_function #(
     .DATA_SIZE(DATA_SIZE)
   )
-  vector_multiplier(
+  vector_summation_function(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_multiplier),
-    .READY(ready_vector_multiplier),
+    .START(start_vector_summation),
+    .READY(ready_vector_summation),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_multiplier),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_multiplier),
-    .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
+    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_summation),
+    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_summation),
+    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_summation),
+    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_summation),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_multiplier),
-    .SIZE_IN(size_in_vector_multiplier),
-    .DATA_A_IN(data_a_in_vector_multiplier),
-    .DATA_B_IN(data_b_in_vector_multiplier),
-    .DATA_OUT(data_out_vector_multiplier)
+    .MODULO_IN(modulo_in_vector_summation),
+    .SIZE_IN(size_in_vector_summation),
+    .LENGTH_IN(length_in_vector_summation),
+    .DATA_IN(data_in_vector_summation),
+    .DATA_OUT(data_out_vector_summation)
   );
 
   // VECTOR CONVOLUTION

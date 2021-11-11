@@ -97,14 +97,26 @@ architecture ntm_top_architecture of ntm_top is
   type top_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
     CONTROLLER_STATE,  -- STEP 1
-    INTERFACE_VECTOR_STATE,  -- STEP 2
-    CONTROLLER_OUTPUT_VECTOR_STATE,  -- STEP 3
-    ADDRESSING_STATE,  -- STEP 4
-    WRITING_STATE,  -- STEP 5
-    READING_STATE,  -- STEP 6
-    MEMORY_STATE,  -- STEP 7
-    OUTPUT_VECTOR_STATE,  -- STEP 8
-    ENDER_STATE  -- STEP 9
+    READ_HEADS_STATE,  -- STEP 2
+    WRITE_HEADS_STATE,  -- STEP 3
+    MEMORY_STATE,  -- STEP 4
+    ENDER_STATE  -- STEP 5
+    );
+
+  type controller_ctrl_fsm is (
+    STARTER_CONTROLLER_STATE,  -- STEP 0
+    CONTROLLER_BODY_STATE,  -- STEP 1
+    CONTROLLER_OUTPUT_VECTOR_STATE,  -- STEP 2
+    OUTPUT_VECTOR_STATE,  -- STEP 3
+    INTERFACE_VECTOR_STATE,  -- STEP 4
+    ENDER_CONTROLLER_STATE  -- STEP 5
+    );
+
+  type write_heads_ctrl_fsm is (
+    STARTER_WRITE_HEADS_STATE,  -- STEP 0
+    WRITING_STATE,  -- STEP 1
+    ERASING_STATE,  -- STEP 2
+    ENDER_WRITE_HEADS_STATE  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -113,6 +125,7 @@ architecture ntm_top_architecture of ntm_top is
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -120,6 +133,9 @@ architecture ntm_top_architecture of ntm_top is
 
   -- Finite State Machine
   signal top_ctrl_fsm_int : top_ctrl_fsm;
+
+  signal controller_ctrl_fsm_int  : controller_ctrl_fsm;
+  signal write_heads_ctrl_fsm_int : write_heads_ctrl_fsm;
 
   -----------------------------------------------------------------------
   -- CONTROLLER
@@ -263,6 +279,7 @@ architecture ntm_top_architecture of ntm_top is
   -- READ HEADS
   -----------------------------------------------------------------------
 
+  -- READING
   -- CONTROL
   signal start_reading : std_logic;
   signal ready_reading : std_logic;
@@ -323,6 +340,7 @@ architecture ntm_top_architecture of ntm_top is
   -- MEMORY
   -----------------------------------------------------------------------
 
+  -- ADDRESSING
   -- CONTROL
   signal start_addressing : std_logic;
   signal ready_addressing : std_logic;
@@ -381,21 +399,45 @@ begin
 
         when CONTROLLER_STATE =>  -- STEP 1
 
-        when INTERFACE_VECTOR_STATE =>  -- STEP 2
+          case controller_ctrl_fsm_int is
+            when STARTER_CONTROLLER_STATE =>  -- STEP 0
 
-        when CONTROLLER_OUTPUT_VECTOR_STATE =>  -- STEP 3
+            when CONTROLLER_BODY_STATE =>  -- STEP 1
 
-        when ADDRESSING_STATE =>  -- STEP 4
+            when CONTROLLER_OUTPUT_VECTOR_STATE =>  -- STEP 2
 
-        when WRITING_STATE =>  -- STEP 5
+            when OUTPUT_VECTOR_STATE =>  -- STEP 3
 
-        when READING_STATE =>  -- STEP 6
+            when INTERFACE_VECTOR_STATE =>  -- STEP 4
 
-        when MEMORY_STATE =>  -- STEP 7
+            when ENDER_CONTROLLER_STATE =>  -- STEP 5
 
-        when OUTPUT_VECTOR_STATE =>  -- STEP 8
+            when others =>
+              -- FSM Control
+              controller_ctrl_fsm_int <= STARTER_CONTROLLER_STATE;
+          end case;
 
-        when ENDER_STATE =>  -- STEP 9
+        when READ_HEADS_STATE =>  -- STEP 2
+
+        when WRITE_HEADS_STATE =>  -- STEP 3
+
+          case write_heads_ctrl_fsm_int is
+            when STARTER_WRITE_HEADS_STATE =>  -- STEP 0
+
+            when WRITING_STATE =>  -- STEP 1
+
+            when ERASING_STATE =>  -- STEP 2
+
+            when ENDER_WRITE_HEADS_STATE =>  -- STEP 3
+
+            when others =>
+              -- FSM Control
+              write_heads_ctrl_fsm_int <= STARTER_WRITE_HEADS_STATE;
+          end case;
+
+        when MEMORY_STATE =>  -- STEP 4
+
+        when ENDER_STATE =>  -- STEP 5
 
         when others =>
           -- FSM Control

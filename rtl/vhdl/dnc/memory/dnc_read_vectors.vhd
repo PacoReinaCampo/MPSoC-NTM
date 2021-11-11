@@ -121,6 +121,8 @@ architecture dnc_read_vectors_architecture of dnc_read_vectors is
 
   -- DATA
   signal modulo_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_j_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -193,13 +195,15 @@ begin
   -- DATA
   -- MATRIX TRANSPOSE
   modulo_in_matrix_transpose <= FULL;
+  size_i_in_matrix_transpose <= SIZE_N_IN;
+  size_j_in_matrix_transpose <= SIZE_W_IN;
   data_in_matrix_transpose   <= M_IN;
 
   -- MATRIX PRODUCT
   modulo_in_matrix_product   <= FULL;
-  size_a_i_in_matrix_product <= SIZE_N_IN;
-  size_a_j_in_matrix_product <= SIZE_W_IN;
-  size_b_i_in_matrix_product <= SIZE_W_IN;
+  size_a_i_in_matrix_product <= SIZE_W_IN;
+  size_a_j_in_matrix_product <= SIZE_N_IN;
+  size_b_i_in_matrix_product <= SIZE_N_IN;
   size_b_j_in_matrix_product <= ONE;
   data_a_in_matrix_product   <= data_out_matrix_transpose;
   data_b_in_matrix_product   <= W_IN;
@@ -207,12 +211,9 @@ begin
   -- data_out_matrix_product <= R_OUT;
 
   -- MATRIX TRANSPOSE
-  ntm_matrix_transpose_i : ntm_matrix_transpose
+  matrix_transpose : ntm_matrix_transpose
     generic map (
-      DATA_SIZE => DATA_SIZE,
-
-      SIZE_I => THREE,
-      SIZE_J => THREE
+      DATA_SIZE => DATA_SIZE
       )
     port map (
       -- GLOBAL
@@ -231,6 +232,8 @@ begin
 
       -- DATA
       MODULO_IN => modulo_in_matrix_transpose,
+      SIZE_I_IN => size_i_in_matrix_transpose,
+      SIZE_J_IN => size_j_in_matrix_transpose,
       DATA_IN   => data_in_matrix_transpose,
       DATA_OUT  => data_out_matrix_transpose
       );
