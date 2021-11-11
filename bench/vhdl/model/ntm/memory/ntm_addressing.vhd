@@ -194,6 +194,23 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- VECTOR DIVIDER
+  -- CONTROL
+  signal start_vector_divider : std_logic;
+  signal ready_vector_divider : std_logic;
+
+  signal data_a_in_enable_vector_divider : std_logic;
+  signal data_b_in_enable_vector_divider : std_logic;
+
+  signal data_out_enable_vector_divider : std_logic;
+
+  -- DATA
+  signal modulo_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_divider   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- VECTOR EXPONENTIATOR
   -- CONTROL
   signal start_vector_exponentiator : std_logic;
@@ -342,6 +359,12 @@ begin
 
         when VECTOR_CONVOLUTION_STATE =>  -- STEP 3
 
+              -- Data Inputs
+              modulo_in_vector_summation <= FULL;
+              size_in_vector_summation   <= FULL;
+              length_in_vector_summation <= FULL;
+              data_in_vector_summation   <= FULL;
+
         when VECTOR_SHARPENING_STATE =>  -- STEP 4
 
           case controller_ctrl_sharpening_fsm_int is
@@ -350,26 +373,26 @@ begin
             when VECTOR_EXPONENTIATOR_SHARPENING_STATE =>  -- STEP 1
 
               -- Data Inputs
-              modulo_in_vector_multiplier <= FULL;
-              size_in_vector_multiplier   <= FULL;
-              data_a_in_vector_multiplier <= FULL;
-              data_b_in_vector_multiplier <= FULL;
+              modulo_in_vector_exponentiator <= FULL;
+              size_in_vector_exponentiator   <= FULL;
+              data_a_in_vector_exponentiator <= FULL;
+              data_b_in_vector_exponentiator <= FULL;
 
             when VECTOR_SUMMATION_SHARPENING_STATE =>  -- STEP 2
 
               -- Data Inputs
-              modulo_in_vector_multiplier <= FULL;
-              size_in_vector_multiplier   <= FULL;
-              data_a_in_vector_multiplier <= FULL;
-              data_b_in_vector_multiplier <= FULL;
+              modulo_in_vector_summation <= FULL;
+              size_in_vector_summation   <= FULL;
+              length_in_vector_summation <= FULL;
+              data_in_vector_summation   <= FULL;
 
             when VECTOR_DIVIDER_SHARPENING_STATE =>  -- STEP 3
 
               -- Data Inputs
-              modulo_in_vector_adder <= FULL;
-              size_in_vector_adder   <= FULL;
-              data_a_in_vector_adder <= FULL;
-              data_b_in_vector_adder <= FULL;
+              modulo_in_vector_divider <= FULL;
+              size_in_vector_divider   <= FULL;
+              data_a_in_vector_divider <= FULL;
+              data_b_in_vector_divider <= FULL;
 
             when ENDER_SHARPENING_STATE =>  -- STEP 4
 
@@ -473,6 +496,33 @@ begin
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
       DATA_OUT  => data_out_vector_multiplier
+      );
+
+  -- VECTOR DIVIDER
+  vector_divider : ntm_vector_divider
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_divider,
+      READY => ready_vector_divider,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_divider,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_divider,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_divider,
+
+      -- DATA
+      MODULO_IN => modulo_in_vector_divider,
+      SIZE_IN   => size_in_vector_divider,
+      DATA_A_IN => data_a_in_vector_divider,
+      DATA_B_IN => data_b_in_vector_divider,
+      DATA_OUT  => data_out_vector_divider
       );
 
   -- VECTOR EXPONENTIATOR

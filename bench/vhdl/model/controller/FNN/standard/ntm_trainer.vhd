@@ -93,10 +93,33 @@ architecture ntm_trainer_architecture of ntm_trainer is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
-    VECTOR_DIFFERENTIATION_STATE,  -- STEP 1
-    MATRIX_PRODUCT_STATE,  -- STEP 2
-    VECTOR_SUMMATION_STATE,  -- STEP 3
+    VECTOR_DIFFERENTIATION_W_STATE,  -- STEP 1
+    VECTOR_DIFFERENTIATION_K_STATE,  -- STEP 2
+    VECTOR_DIFFERENTIATION_B_STATE,  -- STEP 3
     ENDER_STATE  -- STEP 4
+    );
+
+  type differentiation_w_ctrl_fsm is (
+    STARTER_DW_STATE,  -- STEP 0
+    VECTOR_DIFFERENTIATION_DW_STATE,  -- STEP 1
+    MATRIX_PRODUCT_DW_STATE,  -- STEP 2
+    VECTOR_SUMMATION_DW_STATE,  -- STEP 3
+    ENDER_DW_STATE  -- STEP 4
+    );
+
+  type differentiation_k_ctrl_fsm is (
+    STARTER_DK_STATE,  -- STEP 0
+    VECTOR_DIFFERENTIATION_DK_STATE,  -- STEP 1
+    MATRIX_PRODUCT_DK_STATE,  -- STEP 2
+    VECTOR_SUMMATION_DK_STATE,  -- STEP 3
+    ENDER_DK_STATE  -- STEP 4
+    );
+
+  type differentiation_b_ctrl_fsm is (
+    STARTER_DB_STATE,  -- STEP 0
+    VECTOR_DIFFERENTIATION_DB_STATE,  -- STEP 1
+    VECTOR_SUMMATION_DB_STATE,  -- STEP 2
+    ENDER_DB_STATE  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -112,6 +135,10 @@ architecture ntm_trainer_architecture of ntm_trainer is
 
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+
+  signal differentiation_w_ctrl_fsm_int : differentiation_w_ctrl_fsm;
+  signal differentiation_k_ctrl_fsm_int : differentiation_k_ctrl_fsm;
+  signal differentiation_b_ctrl_fsm_int : differentiation_b_ctrl_fsm;
 
   -- VECTOR SUMMATION
   -- CONTROL
@@ -200,14 +227,14 @@ begin
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_DIFFERENTIATION_STATE;
+            controller_ctrl_fsm_int <= VECTOR_DIFFERENTIATION_W_STATE;
           end if;
 
-        when VECTOR_DIFFERENTIATION_STATE =>  -- STEP 1
+        when VECTOR_DIFFERENTIATION_W_STATE =>  -- STEP 1
 
-        when MATRIX_PRODUCT_STATE =>  -- STEP 2
+        when VECTOR_DIFFERENTIATION_K_STATE =>  -- STEP 2
 
-        when VECTOR_SUMMATION_STATE =>  -- STEP 3
+        when VECTOR_DIFFERENTIATION_B_STATE =>  -- STEP 3
 
         when ENDER_STATE =>  -- STEP 4
 
