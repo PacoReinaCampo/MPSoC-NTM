@@ -185,6 +185,9 @@ begin
 
         when ENDER_STATE =>  -- STEP 3
 
+          -- Data Outputs
+          R_OUT <= data_out_matrix_product;
+  
         when others =>
           -- FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
@@ -208,7 +211,6 @@ begin
   data_a_in_matrix_product   <= data_out_matrix_transpose;
   data_b_in_matrix_product   <= W_IN;
 
-  -- data_out_matrix_product <= R_OUT;
 
   -- MATRIX TRANSPOSE
   matrix_transpose : ntm_matrix_transpose

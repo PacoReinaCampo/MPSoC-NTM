@@ -180,6 +180,9 @@ module ntm_erasing #(
         end
 
         ENDER_STATE : begin  // STEP 4
+
+          // Data Outputs
+          M_OUT <= data_out_matrix_product;
         end
         default : begin
           // FSM Control
@@ -210,8 +213,6 @@ module ntm_erasing #(
   assign size_b_j_in_matrix_product = ONE;
   assign data_a_in_matrix_product   = M_IN;
   assign data_b_in_matrix_product   = data_out_vector_multiplier;
-
-  // assign M_OUT = data_out_matrix_product;
 
   // VECTOR ADDER
   ntm_vector_adder #(

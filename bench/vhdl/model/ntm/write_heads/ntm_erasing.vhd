@@ -199,6 +199,9 @@ begin
 
         when ENDER_STATE =>  -- STEP 4
 
+          -- Data Outputs
+          M_OUT <= data_out_matrix_product;
+
         when others =>
           -- FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
@@ -228,7 +231,6 @@ begin
   data_a_in_matrix_product   <= M_IN;
   data_b_in_matrix_product   <= data_out_vector_multiplier;
 
-  -- M_OUT <= data_out_matrix_product;
 
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder

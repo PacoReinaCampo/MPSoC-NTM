@@ -164,6 +164,9 @@ module dnc_read_vectors #(
         end
 
         ENDER_STATE : begin  // STEP 3
+
+          // Data Outputs
+          R_OUT <= data_out_matrix_product;
         end
         default : begin
           // FSM Control
@@ -188,8 +191,6 @@ module dnc_read_vectors #(
   assign size_b_j_in_matrix_product = ONE;
   assign data_a_in_matrix_product   = data_out_matrix_transpose;
   assign data_b_in_matrix_product   = W_IN;
-
-  // assign data_out_matrix_product = R_OUT;
 
   // MATRIX TRANSPOSE
   ntm_matrix_transpose #(

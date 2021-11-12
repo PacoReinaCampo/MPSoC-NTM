@@ -170,6 +170,9 @@ begin
 
         when ENDER_STATE =>  -- STEP 3
 
+          -- Data Outputs
+          R_OUT <= data_out_vector_summation;
+
         when others =>
           -- FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
@@ -189,8 +192,6 @@ begin
   size_in_vector_summation   <= SIZE_W_IN;
   length_in_vector_summation <= SIZE_N_IN;
   data_in_vector_summation   <= data_out_vector_multiplier;
-
-  -- R_OUT <= data_out_vector_summation;
 
   -- VECTOR SUMMATION
   vector_summation_function : ntm_vector_summation_function

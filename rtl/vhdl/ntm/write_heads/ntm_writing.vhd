@@ -173,6 +173,9 @@ begin
 
         when ENDER_STATE =>  -- STEP 3
 
+          -- Data Outputs
+          M_OUT <= data_out_vector_adder;
+
         when others =>
           -- FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
@@ -193,7 +196,6 @@ begin
   data_a_in_vector_adder <= M_IN;
   data_b_in_vector_adder <= data_out_vector_multiplier;
 
-  -- M_OUT <= data_out_vector_adder;
 
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder

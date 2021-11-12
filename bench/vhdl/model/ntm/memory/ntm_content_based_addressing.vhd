@@ -217,6 +217,9 @@ begin
 
         when ENDER_STATE =>  -- STEP 4
 
+          -- Data Outputs
+          C_OUT <= data_out_vector_softmax;
+
         when others =>
           -- FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
@@ -249,8 +252,6 @@ begin
   size_in_vector_softmax   <= SIZE_I_IN;
   length_in_vector_softmax <= SIZE_J_IN;
   data_in_vector_softmax   <= data_out_vector_exponentiator;
-
-  -- C_OUT <= data_out_vector_softmax;
 
   -- VECTOR MULTIPLIER
   vector_multiplier : ntm_vector_multiplier

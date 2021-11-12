@@ -97,10 +97,44 @@ architecture ntm_forget_trainer_architecture of ntm_forget_trainer is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
-    VECTOR_DIFFERENTIATION_STATE,  -- STEP 1
-    VECTOR_MULTIPLIER_STATE,  -- STEP 2
-    VECTOR_SUMMATION_STATE,  -- STEP 3
-    ENDER_STATE  -- STEP 4
+    VECTOR_DIFFERENTIATION_F_STATE,  -- STEP 1
+    VECTOR_DIFFERENTIATION_W_STATE,  -- STEP 2
+    VECTOR_DIFFERENTIATION_K_STATE,  -- STEP 3
+    VECTOR_DIFFERENTIATION_B_STATE,  -- STEP 4
+    ENDER_STATE  -- STEP 5
+    );
+
+  type differentiation_f_ctrl_fsm is (
+    STARTER_DF_STATE,  -- STEP 0
+    VECTOR_TANH_DF_STATE,  -- STEP 1
+    VECTOR_ADDER_DF_STATE,  -- STEP 2
+    VECTOR_FIRST_MULTIPLIER_DF_STATE,  -- STEP 3
+    VECTOR_SECOND_MULTIPLIER_DF_STATE,  -- STEP 4
+    VECTOR_THIRD_MULTIPLIER_DF_STATE,  -- STEP 5
+    ENDER_DF_STATE  -- STEP 6
+    );
+
+  type differentiation_w_ctrl_fsm is (
+    STARTER_DW_STATE,  -- STEP 0
+    VECTOR_DIFFERENTIATION_DW_STATE,  -- STEP 1
+    MATRIX_PRODUCT_DW_STATE,  -- STEP 2
+    VECTOR_SUMMATION_DW_STATE,  -- STEP 3
+    ENDER_DW_STATE  -- STEP 4
+    );
+
+  type differentiation_k_ctrl_fsm is (
+    STARTER_DK_STATE,  -- STEP 0
+    VECTOR_DIFFERENTIATION_DK_STATE,  -- STEP 1
+    MATRIX_PRODUCT_DK_STATE,  -- STEP 2
+    VECTOR_SUMMATION_DK_STATE,  -- STEP 3
+    ENDER_DK_STATE  -- STEP 4
+    );
+
+  type differentiation_b_ctrl_fsm is (
+    STARTER_DB_STATE,  -- STEP 0
+    VECTOR_DIFFERENTIATION_DB_STATE,  -- STEP 1
+    VECTOR_SUMMATION_DB_STATE,  -- STEP 2
+    ENDER_DB_STATE  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -109,6 +143,7 @@ architecture ntm_forget_trainer_architecture of ntm_forget_trainer is
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -116,6 +151,11 @@ architecture ntm_forget_trainer_architecture of ntm_forget_trainer is
 
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+
+  signal differentiation_f_ctrl_fsm_int : differentiation_f_ctrl_fsm;
+  signal differentiation_w_ctrl_fsm_int : differentiation_w_ctrl_fsm;
+  signal differentiation_k_ctrl_fsm_int : differentiation_k_ctrl_fsm;
+  signal differentiation_b_ctrl_fsm_int : differentiation_b_ctrl_fsm;
 
   -- VECTOR SUMMATION
   -- CONTROL
@@ -242,14 +282,82 @@ begin
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_DIFFERENTIATION_STATE;
+            controller_ctrl_fsm_int <= VECTOR_DIFFERENTIATION_F_STATE;
           end if;
 
-        when VECTOR_DIFFERENTIATION_STATE =>  -- STEP 1
+        when VECTOR_DIFFERENTIATION_F_STATE =>  -- STEP 1
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
+          case differentiation_f_ctrl_fsm_int is
+            when STARTER_DF_STATE =>  -- STEP 0
 
-        when VECTOR_SUMMATION_STATE =>  -- STEP 3
+            when VECTOR_TANH_DF_STATE =>  -- STEP 1
+
+            when VECTOR_ADDER_DF_STATE =>  -- STEP 2
+
+            when VECTOR_FIRST_MULTIPLIER_DF_STATE =>  -- STEP 3
+
+            when VECTOR_SECOND_MULTIPLIER_DF_STATE =>  -- STEP 4
+
+            when VECTOR_THIRD_MULTIPLIER_DF_STATE =>  -- STEP 5
+
+            when ENDER_DF_STATE =>  -- STEP 6
+
+            when others =>
+              -- FSM Control
+              differentiation_f_ctrl_fsm_int <= STARTER_DF_STATE;
+          end case;
+
+        when VECTOR_DIFFERENTIATION_W_STATE =>  -- STEP 1
+
+          case differentiation_w_ctrl_fsm_int is
+            when STARTER_DW_STATE =>  -- STEP 0
+
+            when VECTOR_DIFFERENTIATION_DW_STATE =>  -- STEP 1
+
+            when MATRIX_PRODUCT_DW_STATE =>  -- STEP 2
+
+            when VECTOR_SUMMATION_DW_STATE =>  -- STEP 3
+
+            when ENDER_DW_STATE =>  -- STEP 4
+
+            when others =>
+              -- FSM Control
+              differentiation_w_ctrl_fsm_int <= STARTER_DW_STATE;
+          end case;
+
+        when VECTOR_DIFFERENTIATION_K_STATE =>  -- STEP 2
+
+          case differentiation_k_ctrl_fsm_int is
+            when STARTER_DK_STATE =>  -- STEP 0
+
+            when VECTOR_DIFFERENTIATION_DK_STATE =>  -- STEP 1
+
+            when MATRIX_PRODUCT_DK_STATE =>  -- STEP 2
+
+            when VECTOR_SUMMATION_DK_STATE =>  -- STEP 3
+
+            when ENDER_DK_STATE =>  -- STEP 4
+
+            when others =>
+              -- FSM Control
+              differentiation_k_ctrl_fsm_int <= STARTER_DK_STATE;
+          end case;
+
+        when VECTOR_DIFFERENTIATION_B_STATE =>  -- STEP 3
+
+          case differentiation_b_ctrl_fsm_int is
+            when STARTER_DB_STATE =>  -- STEP 0
+
+            when VECTOR_DIFFERENTIATION_DB_STATE =>  -- STEP 1
+
+            when VECTOR_SUMMATION_DB_STATE =>  -- STEP 2
+
+            when ENDER_DB_STATE =>  -- STEP 3
+
+            when others =>
+              -- FSM Control
+              differentiation_b_ctrl_fsm_int <= STARTER_DB_STATE;
+          end case;
 
         when ENDER_STATE =>  -- STEP 4
 

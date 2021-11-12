@@ -163,6 +163,9 @@ module ntm_output_vector #(
         end
 
         ENDER_STATE : begin  // STEP 3
+
+          // Data Outputs
+          Y_OUT <= data_out_vector_adder;
         end
         default : begin
           // FSM Control
@@ -187,8 +190,6 @@ module ntm_output_vector #(
   assign size_in_vector_adder   = SIZE_Y_IN;
   assign data_a_in_vector_adder = data_out_matrix_product;
   assign data_b_in_vector_adder = NU_IN;
-
-  // assign Y_OUT = data_out_vector_adder;
 
   // VECTOR ADDER
   ntm_vector_adder #(

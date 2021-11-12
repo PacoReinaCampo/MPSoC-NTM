@@ -194,6 +194,9 @@ module ntm_content_based_addressing #(
         end
 
         ENDER_STATE : begin  // STEP 4
+
+          // Data Outputs
+          C_OUT <= data_out_vector_softmax;
         end
         default : begin
           // FSM Control
@@ -228,8 +231,6 @@ module ntm_content_based_addressing #(
   assign size_in_vector_softmax   = SIZE_I_IN;
   assign length_in_vector_softmax = SIZE_J_IN;
   assign data_in_vector_softmax   = data_out_vector_exponentiator;
-
-  // assign C_OUT = data_out_vector_softmax;
 
   // VECTOR MULTIPLIER
   ntm_vector_multiplier #(

@@ -122,13 +122,13 @@ architecture ntm_trainer_architecture of ntm_trainer is
     ENDER_DB_STATE  -- STEP 3
     );
 
-
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -233,9 +233,55 @@ begin
 
         when VECTOR_DIFFERENTIATION_W_STATE =>  -- STEP 1
 
+          case differentiation_w_ctrl_fsm_int is
+            when STARTER_DW_STATE =>  -- STEP 0
+
+            when VECTOR_DIFFERENTIATION_DW_STATE =>  -- STEP 1
+
+            when MATRIX_PRODUCT_DW_STATE =>  -- STEP 2
+
+            when VECTOR_SUMMATION_DW_STATE =>  -- STEP 3
+
+            when ENDER_DW_STATE =>  -- STEP 4
+
+            when others =>
+              -- FSM Control
+              differentiation_w_ctrl_fsm_int <= STARTER_DW_STATE;
+          end case;
+
         when VECTOR_DIFFERENTIATION_K_STATE =>  -- STEP 2
 
+          case differentiation_k_ctrl_fsm_int is
+            when STARTER_DK_STATE =>  -- STEP 0
+
+            when VECTOR_DIFFERENTIATION_DK_STATE =>  -- STEP 1
+
+            when MATRIX_PRODUCT_DK_STATE =>  -- STEP 2
+
+            when VECTOR_SUMMATION_DK_STATE =>  -- STEP 3
+
+            when ENDER_DK_STATE =>  -- STEP 4
+
+            when others =>
+              -- FSM Control
+              differentiation_k_ctrl_fsm_int <= STARTER_DK_STATE;
+          end case;
+
         when VECTOR_DIFFERENTIATION_B_STATE =>  -- STEP 3
+
+          case differentiation_b_ctrl_fsm_int is
+            when STARTER_DB_STATE =>  -- STEP 0
+
+            when VECTOR_DIFFERENTIATION_DB_STATE =>  -- STEP 1
+
+            when VECTOR_SUMMATION_DB_STATE =>  -- STEP 2
+
+            when ENDER_DB_STATE =>  -- STEP 3
+
+            when others =>
+              -- FSM Control
+              differentiation_b_ctrl_fsm_int <= STARTER_DB_STATE;
+          end case;
 
         when ENDER_STATE =>  -- STEP 4
 

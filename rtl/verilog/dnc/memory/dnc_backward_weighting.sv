@@ -163,6 +163,9 @@ module dnc_backward_weighting #(
         end
 
         ENDER_STATE : begin  // STEP 3
+
+          // Data Outputs
+          B_OUT <= data_out_matrix_product;
         end
         default : begin
           // FSM Control
@@ -187,8 +190,6 @@ module dnc_backward_weighting #(
   assign size_b_j_in_matrix_product = ONE;
   assign data_a_in_matrix_product   = data_out_matrix_transpose;
   assign data_b_in_matrix_product   = W_IN;
-
-  // assign data_out_matrix_product = B_OUT;
 
   // MATRIX TRANSPOSE
   ntm_matrix_transpose #(

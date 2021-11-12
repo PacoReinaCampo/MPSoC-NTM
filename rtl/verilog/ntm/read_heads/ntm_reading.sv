@@ -149,6 +149,9 @@ module ntm_reading #(
         end
 
         ENDER_STATE : begin  // STEP 3
+
+          // Data Outputs
+          R_OUT <= data_out_vector_summation;
         end
         default : begin
           // FSM Control
@@ -170,8 +173,6 @@ module ntm_reading #(
   assign size_in_vector_summation   = SIZE_W_IN;
   assign length_in_vector_summation = SIZE_N_IN;
   assign data_in_vector_summation   = data_out_vector_multiplier;
-
-  // assign R_OUT <= data_out_vector_summation;
 
   // VECTOR SUMMATION
   ntm_vector_summation_function #(

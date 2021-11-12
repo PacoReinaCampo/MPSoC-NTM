@@ -81,10 +81,35 @@ module ntm_activation_trainer #(
   ///////////////////////////////////////////////////////////////////////
 
   parameter [2:0] STARTER_STATE = 0;
-  parameter [2:0] VECTOR_DIFFERENTIATION_STATE = 1;
-  parameter [2:0] VECTOR_MULTIPLIER_STATE = 2;
-  parameter [2:0] VECTOR_SUMMATION_STATE = 3;
-  parameter [2:0] ENDER_STATE = 4;
+  parameter [2:0] VECTOR_DIFFERENTIATION_A_STATE = 1;
+  parameter [2:0] VECTOR_DIFFERENTIATION_W_STATE = 2;
+  parameter [2:0] VECTOR_DIFFERENTIATION_K_STATE = 3;
+  parameter [2:0] VECTOR_DIFFERENTIATION_B_STATE = 4;
+  parameter [2:0] ENDER_STATE = 5;
+
+  parameter [2:0] STARTER_DA_STATE = 0;
+  parameter [2:0] VECTOR_EXPONENTIATOR_DA_STATE = 1;
+  parameter [2:0] VECTOR_ADDER_DA_STATE = 2;
+  parameter [2:0] VECTOR_FIRST_MULTIPLIER_DA_STATE = 3;
+  parameter [2:0] VECTOR_SECOND_MULTIPLIER_DA_STATE = 4;
+  parameter [2:0] ENDER_DA_STATE = 5;
+
+  parameter [2:0] STARTER_DW_STATE = 0;
+  parameter [2:0] VECTOR_DIFFERENTIATION_DW_STATE = 1;
+  parameter [2:0] MATRIX_PRODUCT_DW_STATE = 2;
+  parameter [2:0] VECTOR_SUMMATION_DW_STATE = 3;
+  parameter [2:0] ENDER_DW_STATE = 4;
+
+  parameter [2:0] STARTER_DK_STATE = 0;
+  parameter [2:0] VECTOR_DIFFERENTIATION_DK_STATE = 1;
+  parameter [2:0] MATRIX_PRODUCT_DK_STATE = 2;
+  parameter [2:0] VECTOR_SUMMATION_DK_STATE = 3;
+  parameter [2:0] ENDER_DK_STATE = 4;
+
+  parameter [1:0] STARTER_DB_STATE = 0;
+  parameter [1:0] VECTOR_DIFFERENTIATION_DB_STATE = 1;
+  parameter [1:0] VECTOR_SUMMATION_DB_STATE = 2;
+  parameter [1:0] ENDER_DB_STATE = 3;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -92,6 +117,7 @@ module ntm_activation_trainer #(
 
   parameter ZERO = 0;
   parameter ONE = 1;
+  parameter FULL = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -99,6 +125,11 @@ module ntm_activation_trainer #(
 
   // Finite State Machine
   reg [2:0] controller_ctrl_fsm_int;
+
+  reg [2:0] differentiation_a_ctrl_fsm_int;
+  reg [2:0] differentiation_w_ctrl_fsm_int;
+  reg [2:0] differentiation_k_ctrl_fsm_int;
+  reg [1:0] differentiation_b_ctrl_fsm_int;
 
   // VECTOR SUMMATION
   // CONTROL
@@ -210,17 +241,108 @@ module ntm_activation_trainer #(
 
           if(START == 1'b1) begin
             // FSM Control
-            controller_ctrl_fsm_int <= VECTOR_DIFFERENTIATION_STATE;
+            controller_ctrl_fsm_int <= VECTOR_DIFFERENTIATION_A_STATE;
           end
         end
 
-        VECTOR_DIFFERENTIATION_STATE : begin  // STEP 1
+        VECTOR_DIFFERENTIATION_A_STATE : begin  // STEP 1
+
+          case(differentiation_a_ctrl_fsm_int)
+            STARTER_DA_STATE : begin  // STEP 0
+            end
+
+            VECTOR_EXPONENTIATOR_DA_STATE : begin  // STEP 1
+            end
+
+            VECTOR_ADDER_DA_STATE : begin  // STEP 2
+            end
+
+            VECTOR_FIRST_MULTIPLIER_DA_STATE : begin  // STEP 3
+            end
+
+            VECTOR_SECOND_MULTIPLIER_DA_STATE : begin  // STEP 4
+            end
+
+            ENDER_DA_STATE : begin  // STEP 5
+            end
+
+            default : begin
+              // FSM Control
+              differentiation_a_ctrl_fsm_int <= STARTER_DA_STATE;
+            end
+          endcase
         end
 
-        VECTOR_MULTIPLIER_STATE : begin  // STEP 2
+        VECTOR_DIFFERENTIATION_W_STATE : begin  // STEP 1
+
+          case(differentiation_w_ctrl_fsm_int)
+            STARTER_DW_STATE : begin  // STEP 0
+            end
+
+            VECTOR_DIFFERENTIATION_DW_STATE : begin  // STEP 1
+            end
+
+            MATRIX_PRODUCT_DW_STATE : begin  // STEP 2
+            end
+
+            VECTOR_SUMMATION_DW_STATE : begin  // STEP 3
+            end
+
+            ENDER_DW_STATE : begin  // STEP 4
+            end
+
+            default : begin
+              // FSM Control
+              differentiation_w_ctrl_fsm_int <= STARTER_DW_STATE;
+            end
+          endcase
         end
 
-        VECTOR_SUMMATION_STATE : begin  // STEP 3
+        VECTOR_DIFFERENTIATION_K_STATE : begin  // STEP 2
+
+          case(differentiation_k_ctrl_fsm_int)
+            STARTER_DK_STATE : begin  // STEP 0
+            end
+
+            VECTOR_DIFFERENTIATION_DK_STATE : begin  // STEP 1
+            end
+
+            MATRIX_PRODUCT_DK_STATE : begin  // STEP 2
+            end
+
+            VECTOR_SUMMATION_DK_STATE : begin  // STEP 3
+            end
+
+            ENDER_DK_STATE : begin  // STEP 4
+            end
+
+            default : begin
+              // FSM Control
+              differentiation_k_ctrl_fsm_int <= STARTER_DK_STATE;
+            end
+          endcase
+        end
+
+        VECTOR_DIFFERENTIATION_B_STATE : begin  // STEP 3
+
+          case(differentiation_b_ctrl_fsm_int)
+            STARTER_DB_STATE : begin  // STEP 0
+            end
+
+            VECTOR_DIFFERENTIATION_DB_STATE : begin  // STEP 1
+            end
+
+            VECTOR_SUMMATION_DB_STATE : begin  // STEP 2
+            end
+
+            ENDER_DB_STATE : begin  // STEP 3
+            end
+
+            default : begin
+              // FSM Control
+              differentiation_b_ctrl_fsm_int <= STARTER_DB_STATE;
+            end
+          endcase
         end
 
         ENDER_STATE : begin  // STEP 4
