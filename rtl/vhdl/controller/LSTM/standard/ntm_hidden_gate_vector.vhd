@@ -91,6 +91,7 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -169,12 +170,27 @@ begin
 
         when ENDER_STATE =>  -- STEP 3
 
+          -- Data Outputs
+          H_OUT <= data_out_vector_multiplier;
+
         when others =>
           -- FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
+
+  -- DATA
+  -- VECTOR MULTIPLIER
+  modulo_in_vector_tanh <= FULL;
+  size_in_vector_tanh   <= SIZE_L_IN;
+  data_in_vector_tanh   <= S_IN;
+
+  -- VECTOR TANH
+  modulo_in_vector_multiplier <= FULL;
+  size_in_vector_multiplier   <= SIZE_L_IN;
+  data_a_in_vector_multiplier <= O_IN;
+  data_b_in_vector_multiplier <= data_out_vector_tanh;
 
   -- VECTOR MULTIPLIER
   vector_multiplier : ntm_vector_multiplier

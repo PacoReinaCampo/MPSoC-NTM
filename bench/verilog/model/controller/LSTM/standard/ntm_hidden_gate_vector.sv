@@ -75,6 +75,7 @@ module ntm_hidden_gate_vector #(
 
   parameter ZERO = 0;
   parameter ONE = 1;
+  parameter FULL = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -148,6 +149,9 @@ module ntm_hidden_gate_vector #(
         end
 
         ENDER_STATE : begin  // STEP 3
+
+          // Data Outputs
+          H_OUT <= data_out_vector_multiplier;
         end
 
         default : begin
@@ -157,6 +161,17 @@ module ntm_hidden_gate_vector #(
       endcase
     end
   end
+
+  // VECTOR TANH
+  assign modulo_in_vector_tanh = FULL;
+  assign size_in_vector_tanh   = SIZE_L_IN;
+  assign data_in_vector_tanh   = S_IN;
+
+  // VECTOR MULTIPLIER
+  assign modulo_in_vector_multiplier = FULL;
+  assign size_in_vector_multiplier   = SIZE_L_IN;
+  assign data_a_in_vector_multiplier = O_IN;
+  assign data_b_in_vector_multiplier = data_out_vector_tanh;
 
   // VECTOR MULTIPLIER
   ntm_vector_multiplier #(
