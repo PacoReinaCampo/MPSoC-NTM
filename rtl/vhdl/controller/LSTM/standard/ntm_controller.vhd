@@ -238,7 +238,7 @@ architecture ntm_controller_architecture of ntm_controller is
 
   signal b_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal i_out_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal i_out_input_gate_vector : std_logic;
 
   -- INPUT TRAINER
   -- CONTROL
@@ -315,7 +315,7 @@ architecture ntm_controller_architecture of ntm_controller is
 
   signal b_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal o_out_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal o_out_output_gate_vector : std_logic;
 
   -- OUTPUT TRAINER
   -- CONTROL
@@ -390,7 +390,7 @@ architecture ntm_controller_architecture of ntm_controller is
 
   signal b_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal f_out_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal f_out_forget_gate_vector : std_logic;
 
   -- FORGET TRAINER
   -- CONTROL

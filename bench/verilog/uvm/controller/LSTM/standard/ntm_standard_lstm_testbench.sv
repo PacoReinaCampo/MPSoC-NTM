@@ -158,7 +158,7 @@ module ntm_standard_lstm_testbench;
   wire [DATA_SIZE-1:0] u_in_input_gate_vector;
   wire [DATA_SIZE-1:0] h_in_input_gate_vector;
   wire [DATA_SIZE-1:0] b_in_input_gate_vector;
-  wire [DATA_SIZE-1:0] i_out_input_gate_vector;
+  wire i_out_input_gate_vector;
 
   // INPUT TRAINER
   // CONTROL
@@ -221,7 +221,7 @@ module ntm_standard_lstm_testbench;
   wire [DATA_SIZE-1:0] u_in_output_gate_vector;
   wire [DATA_SIZE-1:0] h_in_output_gate_vector;
   wire [DATA_SIZE-1:0] b_in_output_gate_vector;
-  wire [DATA_SIZE-1:0] o_out_output_gate_vector;
+  wire o_out_output_gate_vector;
 
   // OUTPUT TRAINER
   // CONTROL
@@ -282,7 +282,7 @@ module ntm_standard_lstm_testbench;
   wire [DATA_SIZE-1:0] u_in_forget_gate_vector;
   wire [DATA_SIZE-1:0] h_in_forget_gate_vector;
   wire [DATA_SIZE-1:0] b_in_forget_gate_vector;
-  wire [DATA_SIZE-1:0] f_out_forget_gate_vector;
+  wire f_out_forget_gate_vector;
 
   // FORGET TRAINER
   // CONTROL

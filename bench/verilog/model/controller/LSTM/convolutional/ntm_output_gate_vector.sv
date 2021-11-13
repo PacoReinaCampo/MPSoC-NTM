@@ -38,7 +38,7 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_output_gate_vector #(
-  parameter [31:0] DATA_SIZE=512
+  parameter DATA_SIZE=512
 )
   (
     // GLOBAL
@@ -74,7 +74,7 @@ module ntm_output_gate_vector #(
     input [DATA_SIZE-1:0] U_IN,
     input [DATA_SIZE-1:0] H_IN,
     input [DATA_SIZE-1:0] B_IN,
-    output reg [DATA_SIZE-1:0] O_OUT
+    output reg O_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -173,7 +173,7 @@ module ntm_output_gate_vector #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      O_OUT <= ZERO;
+      O_OUT <= 1'b0;
 
       // Control Outputs
       READY <= 1'b0;
@@ -281,7 +281,7 @@ module ntm_output_gate_vector #(
         ENDER_STATE : begin  // STEP 10
 
           // Data Outputs
-          O_OUT <= ONE;
+          O_OUT <= data_out_vector_logistic;
         end
 
         default : begin

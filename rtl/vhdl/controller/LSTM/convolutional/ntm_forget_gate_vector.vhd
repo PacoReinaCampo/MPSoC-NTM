@@ -91,7 +91,7 @@ entity ntm_forget_gate_vector is
 
     B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    F_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    F_OUT : out std_logic
     );
 end entity;
 
@@ -202,7 +202,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      F_OUT <= ZERO;
+      F_OUT <= '0';
 
       -- Control Outputs
       READY <= '0';
@@ -301,7 +301,7 @@ begin
         when ENDER_STATE =>  -- STEP 10
 
           -- Data Outputs
-          F_OUT <= ONE;
+          F_OUT <= data_out_vector_logistic;
 
         when others =>
           -- FSM Control

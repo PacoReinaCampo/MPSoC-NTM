@@ -301,7 +301,7 @@ begin
         when ENDER_STATE =>  -- STEP 10
 
           -- Data Outputs
-          A_OUT <= ONE;
+          A_OUT <= data_out_vector_tanh;
 
         when others =>
           -- FSM Control

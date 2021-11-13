@@ -91,7 +91,7 @@ entity ntm_output_gate_vector is
 
     B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    O_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    O_OUT : out std_logic
     );
 end entity;
 
@@ -200,7 +200,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      O_OUT <= ZERO;
+      O_OUT <= '0';
 
       -- Control Outputs
       READY <= '0';
@@ -303,7 +303,7 @@ begin
         when ENDER_STATE =>  -- STEP 10
 
           -- Data Outputs
-          O_OUT <= ONE;
+          O_OUT <= data_out_vector_logistic;
 
         when others =>
           -- FSM Control

@@ -38,7 +38,7 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_forget_gate_vector #(
-  parameter [31:0] DATA_SIZE=512
+  parameter DATA_SIZE=512
 )
   (
     // GLOBAL
@@ -74,7 +74,7 @@ module ntm_forget_gate_vector #(
     input [DATA_SIZE-1:0] U_IN,
     input [DATA_SIZE-1:0] H_IN,
     input [DATA_SIZE-1:0] B_IN,
-    output reg [DATA_SIZE-1:0] F_OUT
+    output reg F_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -170,7 +170,7 @@ module ntm_forget_gate_vector #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      F_OUT <= ZERO;
+      F_OUT <= 1'b0;
 
       // Control Outputs
       READY <= 1'b0;
@@ -282,7 +282,7 @@ module ntm_forget_gate_vector #(
         ENDER_STATE : begin  // STEP 10
 
           // Data Outputs
-          F_OUT <= ONE;
+          F_OUT <= data_out_vector_logistic;
         end
 
         default : begin

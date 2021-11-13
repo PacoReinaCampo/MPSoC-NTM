@@ -255,7 +255,7 @@ begin
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
-          size_in_vector_adder   <= FULL;
+          size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_matrix_convolution;
           data_b_in_vector_adder <= B_IN;
 
@@ -273,7 +273,7 @@ begin
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
-          size_in_vector_adder   <= FULL;
+          size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_matrix_convolution;
           data_b_in_vector_adder <= data_out_vector_adder;
 
@@ -281,8 +281,8 @@ begin
 
           -- Data Inputs
           modulo_in_vector_logistic <= FULL;
-          size_in_vector_logistic   <= FULL;
-          data_in_vector_logistic   <= FULL;
+          size_in_vector_logistic   <= SIZE_L_IN;
+          data_in_vector_logistic   <= data_out_vector_adder;
 
         when ENDER_STATE =>  -- STEP 6
 

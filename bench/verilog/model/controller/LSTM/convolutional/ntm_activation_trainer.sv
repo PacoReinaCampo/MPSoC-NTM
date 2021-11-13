@@ -38,7 +38,7 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_activation_trainer #(
-  parameter [31:0] DATA_SIZE=512
+  parameter DATA_SIZE=512
 )
   (
     // GLOBAL

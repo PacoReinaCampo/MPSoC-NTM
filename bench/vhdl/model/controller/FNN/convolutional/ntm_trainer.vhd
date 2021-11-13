@@ -238,11 +238,34 @@ begin
 
             when VECTOR_DIFFERENTIATION_DW_STATE =>  -- STEP 1
 
+              -- Data Inputs
+              modulo_in_vector_differentiation <= FULL;
+              size_in_vector_differentiation   <= SIZE_X_IN;
+              data_in_vector_differentiation   <= X_IN;
+
             when MATRIX_PRODUCT_DW_STATE =>  -- STEP 2
+
+              -- Data Inputs
+              modulo_in_matrix_product   <= FULL;
+              size_a_i_in_matrix_product <= FULL;
+              size_a_j_in_matrix_product <= FULL;
+              size_b_i_in_matrix_product <= FULL;
+              size_b_j_in_matrix_product <= FULL;
+              data_a_in_matrix_product   <= FULL;
+              data_b_in_matrix_product   <= FULL;
 
             when VECTOR_SUMMATION_DW_STATE =>  -- STEP 3
 
+              -- Data Inputs
+              modulo_in_vector_summation <= FULL;
+              size_in_vector_summation   <= FULL;
+              length_in_vector_summation <= FULL;
+              data_in_vector_summation   <= FULL;
+
             when ENDER_DW_STATE =>  -- STEP 4
+
+              -- Data Outputs
+              W_OUT <= data_out_vector_summation;
 
             when others =>
               -- FSM Control
@@ -256,11 +279,34 @@ begin
 
             when VECTOR_DIFFERENTIATION_DK_STATE =>  -- STEP 1
 
+              -- Data Inputs
+              modulo_in_vector_differentiation <= FULL;
+              size_in_vector_differentiation   <= SIZE_X_IN;
+              data_in_vector_differentiation   <= X_IN;
+
             when MATRIX_PRODUCT_DK_STATE =>  -- STEP 2
+
+              -- Data Inputs
+              modulo_in_matrix_product   <= FULL;
+              size_a_i_in_matrix_product <= FULL;
+              size_a_j_in_matrix_product <= FULL;
+              size_b_i_in_matrix_product <= FULL;
+              size_b_j_in_matrix_product <= FULL;
+              data_a_in_matrix_product   <= FULL;
+              data_b_in_matrix_product   <= FULL;
 
             when VECTOR_SUMMATION_DK_STATE =>  -- STEP 3
 
+              -- Data Inputs
+              modulo_in_vector_summation <= FULL;
+              size_in_vector_summation   <= FULL;
+              length_in_vector_summation <= FULL;
+              data_in_vector_summation   <= FULL;
+
             when ENDER_DK_STATE =>  -- STEP 4
+
+              -- Data Outputs
+              K_OUT <= data_out_vector_summation;
 
             when others =>
               -- FSM Control
@@ -274,9 +320,23 @@ begin
 
             when VECTOR_DIFFERENTIATION_DB_STATE =>  -- STEP 1
 
+              -- Data Inputs
+              modulo_in_vector_differentiation <= FULL;
+              size_in_vector_differentiation   <= SIZE_X_IN;
+              data_in_vector_differentiation   <= X_IN;
+
             when VECTOR_SUMMATION_DB_STATE =>  -- STEP 2
 
+              -- Data Inputs
+              modulo_in_vector_summation <= FULL;
+              size_in_vector_summation   <= FULL;
+              length_in_vector_summation <= FULL;
+              data_in_vector_summation   <= FULL;
+
             when ENDER_DB_STATE =>  -- STEP 3
+
+              -- Data Outputs
+              B_OUT <= data_out_vector_summation;
 
             when others =>
               -- FSM Control

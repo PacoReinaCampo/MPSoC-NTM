@@ -38,7 +38,7 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_hidden_gate_vector #(
-  parameter [31:0] DATA_SIZE=512
+  parameter DATA_SIZE=512
 )
   (
     // GLOBAL

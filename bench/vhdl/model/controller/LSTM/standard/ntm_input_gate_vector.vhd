@@ -91,7 +91,7 @@ entity ntm_input_gate_vector is
 
     B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    I_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    I_OUT : out std_logic
     );
 end entity;
 
@@ -200,7 +200,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      I_OUT <= ZERO;
+      I_OUT <= '0';
 
       -- Control Outputs
       READY <= '0';
@@ -221,10 +221,10 @@ begin
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
-          size_a_i_in_matrix_product <= FULL;
-          size_a_j_in_matrix_product <= FULL;
-          size_b_i_in_matrix_product <= FULL;
-          size_b_j_in_matrix_product <= FULL;
+          size_a_i_in_matrix_product <= SIZE_L_IN;
+          size_a_j_in_matrix_product <= SIZE_X_IN;
+          size_b_i_in_matrix_product <= SIZE_X_IN;
+          size_b_j_in_matrix_product <= ONE;
           data_a_in_matrix_product   <= W_IN;
           data_b_in_matrix_product   <= X_IN;
 
@@ -232,7 +232,7 @@ begin
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
-          size_in_vector_adder   <= FULL;
+          size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_matrix_product;
           data_b_in_vector_adder <= B_IN;
 
@@ -240,10 +240,10 @@ begin
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
-          size_a_i_in_matrix_product <= FULL;
-          size_a_j_in_matrix_product <= FULL;
-          size_b_i_in_matrix_product <= FULL;
-          size_b_j_in_matrix_product <= FULL;
+          size_a_i_in_matrix_product <= SIZE_L_IN;
+          size_a_j_in_matrix_product <= SIZE_W_IN;
+          size_b_i_in_matrix_product <= SIZE_W_IN;
+          size_b_j_in_matrix_product <= ONE;
           data_a_in_matrix_product   <= K_IN;
           data_b_in_matrix_product   <= R_IN;
 
@@ -251,7 +251,7 @@ begin
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
-          size_in_vector_adder   <= FULL;
+          size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_matrix_product;
           data_b_in_vector_adder <= data_out_vector_adder;
 
@@ -259,10 +259,10 @@ begin
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
-          size_a_i_in_matrix_product <= FULL;
-          size_a_j_in_matrix_product <= FULL;
-          size_b_i_in_matrix_product <= FULL;
-          size_b_j_in_matrix_product <= FULL;
+          size_a_i_in_matrix_product <= SIZE_L_IN;
+          size_a_j_in_matrix_product <= SIZE_L_IN;
+          size_b_i_in_matrix_product <= SIZE_L_IN;
+          size_b_j_in_matrix_product <= ONE;
           data_a_in_matrix_product   <= U_IN;
           data_b_in_matrix_product   <= H_IN;
 
@@ -270,7 +270,7 @@ begin
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
-          size_in_vector_adder   <= FULL;
+          size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_matrix_product;
           data_b_in_vector_adder <= data_out_vector_adder;
 
@@ -278,10 +278,10 @@ begin
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
-          size_a_i_in_matrix_product <= FULL;
-          size_a_j_in_matrix_product <= FULL;
-          size_b_i_in_matrix_product <= FULL;
-          size_b_j_in_matrix_product <= FULL;
+          size_a_i_in_matrix_product <= SIZE_L_IN;
+          size_a_j_in_matrix_product <= SIZE_L_IN;
+          size_b_i_in_matrix_product <= SIZE_L_IN;
+          size_b_j_in_matrix_product <= ONE;
           data_a_in_matrix_product   <= U_IN;
           data_b_in_matrix_product   <= H_IN;
 
@@ -289,7 +289,7 @@ begin
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
-          size_in_vector_adder   <= FULL;
+          size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_matrix_product;
           data_b_in_vector_adder <= data_out_vector_adder;
 
@@ -297,13 +297,13 @@ begin
 
           -- Data Inputs
           modulo_in_vector_logistic <= FULL;
-          size_in_vector_logistic   <= FULL;
-          data_in_vector_logistic   <= FULL;
+          size_in_vector_logistic   <= SIZE_L_IN;
+          data_in_vector_logistic   <= data_out_vector_adder;
 
         when ENDER_STATE =>  -- STEP 10
 
           -- Data Outputs
-          I_OUT <= ONE;
+          I_OUT <= data_out_vector_logistic;
 
         when others =>
           -- FSM Control

@@ -177,6 +177,9 @@ begin
 
         when ENDER_STATE =>  -- STEP 3
 
+          -- Data Outputs
+          S_OUT <= data_out_vector_adder;
+
         when others =>
           -- FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
