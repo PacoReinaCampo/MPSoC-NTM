@@ -86,12 +86,11 @@ module ntm_forget_trainer #(
   parameter [2:0] ENDER_STATE = 5;
 
   parameter [2:0] STARTER_DF_STATE = 0;
-  parameter [2:0] VECTOR_TANH_DF_STATE = 1;
-  parameter [2:0] VECTOR_ADDER_DF_STATE = 2;
-  parameter [2:0] VECTOR_FIRST_MULTIPLIER_DF_STATE = 3;
-  parameter [2:0] VECTOR_SECOND_MULTIPLIER_DF_STATE = 4;
-  parameter [2:0] VECTOR_THIRD_MULTIPLIER_DF_STATE = 5;
-  parameter [2:0] ENDER_DF_STATE = 6;
+  parameter [2:0] VECTOR_ADDER_DF_STATE = 1;
+  parameter [2:0] VECTOR_FIRST_MULTIPLIER_DF_STATE = 2;
+  parameter [2:0] VECTOR_SECOND_MULTIPLIER_DF_STATE = 3;
+  parameter [2:0] VECTOR_THIRD_MULTIPLIER_DF_STATE = 4;
+  parameter [2:0] ENDER_DF_STATE = 5;
 
   parameter [2:0] STARTER_DW_STATE = 0;
   parameter [2:0] VECTOR_DIFFERENTIATION_DW_STATE = 1;
@@ -255,22 +254,19 @@ module ntm_forget_trainer #(
             STARTER_DF_STATE : begin  // STEP 0
             end
 
-            VECTOR_TANH_DF_STATE : begin  // STEP 1
+            VECTOR_ADDER_DF_STATE : begin  // STEP 1
             end
 
-            VECTOR_ADDER_DF_STATE : begin  // STEP 2
+            VECTOR_FIRST_MULTIPLIER_DF_STATE : begin  // STEP 2
             end
 
-            VECTOR_FIRST_MULTIPLIER_DF_STATE : begin  // STEP 3
+            VECTOR_SECOND_MULTIPLIER_DF_STATE : begin  // STEP 3
             end
 
-            VECTOR_SECOND_MULTIPLIER_DF_STATE : begin  // STEP 4
+            VECTOR_THIRD_MULTIPLIER_DF_STATE : begin  // STEP 4
             end
 
-            VECTOR_THIRD_MULTIPLIER_DF_STATE : begin  // STEP 5
-            end
-
-            ENDER_DF_STATE : begin  // STEP 6
+            ENDER_DF_STATE : begin  // STEP 5
             end
 
             default : begin

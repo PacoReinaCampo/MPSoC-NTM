@@ -214,6 +214,9 @@ module ntm_trainer #(
             end
 
             ENDER_DW_STATE : begin  // STEP 4
+
+              // Data Outputs
+              W_OUT <= data_out_vector_summation;
             end
 
             default : begin
@@ -239,6 +242,9 @@ module ntm_trainer #(
             end
 
             ENDER_DK_STATE : begin  // STEP 4
+
+              // Data Outputs
+              K_OUT <= data_out_vector_summation;
             end
 
             default : begin
@@ -261,6 +267,9 @@ module ntm_trainer #(
             end
 
             ENDER_DB_STATE : begin  // STEP 3
+
+              // Data Outputs
+              B_OUT <= data_out_vector_summation;
             end
 
             default : begin

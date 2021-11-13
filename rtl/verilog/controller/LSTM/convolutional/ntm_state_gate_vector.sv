@@ -68,10 +68,12 @@ module ntm_state_gate_vector #(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter [1:0] STARTER_STATE = 0;
-  parameter [1:0] VECTOR_ADDER_STATE = 1;
-  parameter [1:0] VECTOR_MULTIPLIER_STATE = 2;
-  parameter [1:0] ENDER_STATE = 4;
+  parameter [2:0] STARTER_STATE = 0;
+  parameter [2:0] VECTOR_FIRST_MULTIPLIER_STATE = 1;
+  parameter [2:0] VECTOR_FIRST_ADDER_STATE = 2;
+  parameter [2:0] VECTOR_SECOND_MULTIPLIER_STATE = 3;
+  parameter [2:0] VECTOR_SECOND_ADDER_STATE = 4;
+  parameter [2:0] ENDER_STATE = 5;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -79,13 +81,14 @@ module ntm_state_gate_vector #(
 
   parameter ZERO = 0;
   parameter ONE = 1;
+  parameter FULL = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] controller_ctrl_fsm_int;
+  reg [2:0] controller_ctrl_fsm_int;
 
   // VECTOR ADDER
   // CONTROL
@@ -99,10 +102,10 @@ module ntm_state_gate_vector #(
   wire data_out_enable_vector_adder;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_adder;
-  wire [DATA_SIZE-1:0] size_in_vector_adder;
-  wire [DATA_SIZE-1:0] data_a_in_vector_adder;
-  wire [DATA_SIZE-1:0] data_b_in_vector_adder;
+  reg [DATA_SIZE-1:0] modulo_in_vector_adder;
+  reg [DATA_SIZE-1:0] size_in_vector_adder;
+  reg [DATA_SIZE-1:0] data_a_in_vector_adder;
+  reg [DATA_SIZE-1:0] data_b_in_vector_adder;
   wire [DATA_SIZE-1:0] data_out_vector_adder;
 
   // VECTOR MULTIPLIER
@@ -115,10 +118,10 @@ module ntm_state_gate_vector #(
   wire data_out_enable_vector_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_multiplier;
-  wire [DATA_SIZE-1:0] size_in_vector_multiplier;
-  wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
-  wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
+  reg [DATA_SIZE-1:0] modulo_in_vector_multiplier;
+  reg [DATA_SIZE-1:0] size_in_vector_multiplier;
+  reg [DATA_SIZE-1:0] data_a_in_vector_multiplier;
+  reg [DATA_SIZE-1:0] data_b_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_out_vector_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
@@ -145,17 +148,50 @@ module ntm_state_gate_vector #(
 
           if(START == 1'b1) begin
             // FSM Control
-            controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
+            controller_ctrl_fsm_int <= VECTOR_FIRST_MULTIPLIER_STATE;
           end
         end
 
-        VECTOR_ADDER_STATE : begin  // STEP 1
+        VECTOR_FIRST_MULTIPLIER_STATE : begin  // STEP 2
+
+          // Data Outputs
+          modulo_in_vector_multiplier <= FULL;
+          size_in_vector_multiplier   <= SIZE_L_IN;
+          data_a_in_vector_multiplier <= F_IN;
+          data_b_in_vector_multiplier <= S_IN;
         end
 
-        VECTOR_MULTIPLIER_STATE : begin  // STEP 2
+        VECTOR_FIRST_ADDER_STATE : begin  // STEP 1
+
+          // Data Outputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= SIZE_L_IN;
+          data_a_in_vector_adder <= ZERO;
+          data_b_in_vector_adder <= data_out_vector_multiplier;
+        end
+
+        VECTOR_SECOND_MULTIPLIER_STATE : begin  // STEP 2
+
+          // Data Outputs
+          modulo_in_vector_multiplier <= FULL;
+          size_in_vector_multiplier   <= SIZE_L_IN;
+          data_a_in_vector_multiplier <= I_IN;
+          data_b_in_vector_multiplier <= A_IN;
+        end
+
+        VECTOR_SECOND_ADDER_STATE : begin  // STEP 1
+
+          // Data Outputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= SIZE_L_IN;
+          data_a_in_vector_adder <= data_out_vector_adder;
+          data_b_in_vector_adder <= data_out_vector_multiplier;
         end
 
         ENDER_STATE : begin  // STEP 3
+
+          // Data Outputs
+          S_OUT <= data_out_vector_adder;
         end
 
         default : begin

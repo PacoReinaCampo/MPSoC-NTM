@@ -84,9 +84,11 @@ architecture ntm_state_gate_vector_architecture of ntm_state_gate_vector is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
-    VECTOR_ADDER_STATE,  -- STEP 1
-    VECTOR_MULTIPLIER_STATE,  -- STEP 2
-    ENDER_STATE  -- STEP 3
+    VECTOR_FIRST_MULTIPLIER_STATE,  -- STEP 1
+    VECTOR_FIRST_ADDER_STATE,  -- STEP 2
+    VECTOR_SECOND_MULTIPLIER_STATE,  -- STEP 3
+    VECTOR_SECOND_ADDER_STATE,  -- STEP 4
+    ENDER_STATE  -- STEP 5
     );
 
   -----------------------------------------------------------------------
@@ -95,6 +97,7 @@ architecture ntm_state_gate_vector_architecture of ntm_state_gate_vector is
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -168,14 +171,42 @@ begin
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            controller_ctrl_fsm_int <= VECTOR_FIRST_MULTIPLIER_STATE;
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
+        when VECTOR_FIRST_MULTIPLIER_STATE =>  -- STEP 1
 
-        when VECTOR_ADDER_STATE =>  -- STEP 2
+          -- Data Outputs
+          modulo_in_vector_multiplier <= FULL;
+          size_in_vector_multiplier   <= SIZE_L_IN;
+          data_a_in_vector_multiplier <= F_IN;
+          data_b_in_vector_multiplier <= S_IN;
 
-        when ENDER_STATE =>  -- STEP 3
+        when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
+
+          -- Data Outputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= SIZE_L_IN;
+          data_a_in_vector_adder <= ZERO;
+          data_b_in_vector_adder <= data_out_vector_multiplier;
+
+        when VECTOR_SECOND_MULTIPLIER_STATE =>  -- STEP 3
+
+          -- Data Outputs
+          modulo_in_vector_multiplier <= FULL;
+          size_in_vector_multiplier   <= SIZE_L_IN;
+          data_a_in_vector_multiplier <= I_IN;
+          data_b_in_vector_multiplier <= A_IN;
+
+        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
+
+          -- Data Outputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= SIZE_L_IN;
+          data_a_in_vector_adder <= data_out_vector_adder;
+          data_b_in_vector_adder <= data_out_vector_multiplier;
+
+        when ENDER_STATE =>  -- STEP 5
 
           -- Data Outputs
           S_OUT <= data_out_vector_adder;

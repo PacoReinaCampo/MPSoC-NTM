@@ -281,7 +281,7 @@ module ntm_activation_gate_vector #(
         ENDER_STATE : begin  // STEP 10
 
           // Data Outputs
-          A_OUT <= ONE;
+          A_OUT <= data_out_vector_tanh;
         end
 
         default : begin

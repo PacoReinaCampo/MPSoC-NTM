@@ -108,8 +108,7 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
 
   type differentiation_i_ctrl_fsm is (
     STARTER_DI_STATE,  -- STEP 0
-    VECTOR_TANH_DI_STATE,  -- STEP 1
-    VECTOR_ADDER_DI_STATE,  -- STEP 2
+    VECTOR_ADDER_DI_STATE,  -- STEP 1
     VECTOR_FIRST_MULTIPLIER_DI_STATE,  -- STEP 3
     VECTOR_SECOND_MULTIPLIER_DI_STATE,  -- STEP 4
     VECTOR_THIRD_MULTIPLIER_DI_STATE,  -- STEP 5
@@ -292,17 +291,15 @@ begin
           case differentiation_i_ctrl_fsm_int is
             when STARTER_DI_STATE =>  -- STEP 0
 
-            when VECTOR_TANH_DI_STATE =>  -- STEP 1
+            when VECTOR_ADDER_DI_STATE =>  -- STEP 1
 
-            when VECTOR_ADDER_DI_STATE =>  -- STEP 2
+            when VECTOR_FIRST_MULTIPLIER_DI_STATE =>  -- STEP 2
 
-            when VECTOR_FIRST_MULTIPLIER_DI_STATE =>  -- STEP 3
+            when VECTOR_SECOND_MULTIPLIER_DI_STATE =>  -- STEP 3
 
-            when VECTOR_SECOND_MULTIPLIER_DI_STATE =>  -- STEP 4
+            when VECTOR_THIRD_MULTIPLIER_DI_STATE =>  -- STEP 4
 
-            when VECTOR_THIRD_MULTIPLIER_DI_STATE =>  -- STEP 5
-
-            when ENDER_DI_STATE =>  -- STEP 6
+            when ENDER_DI_STATE =>  -- STEP 5
 
             when others =>
               -- FSM Control

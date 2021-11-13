@@ -106,12 +106,11 @@ architecture ntm_output_trainer_architecture of ntm_output_trainer is
 
   type differentiation_o_ctrl_fsm is (
     STARTER_DO_STATE,  -- STEP 0
-    VECTOR_TANH_DO_STATE,  -- STEP 1
-    VECTOR_ADDER_DO_STATE,  -- STEP 2
-    VECTOR_FIRST_MULTIPLIER_DO_STATE,  -- STEP 3
-    VECTOR_SECOND_MULTIPLIER_DO_STATE,  -- STEP 4
-    VECTOR_THIRD_MULTIPLIER_DO_STATE,  -- STEP 5
-    ENDER_DO_STATE  -- STEP 6
+    VECTOR_ADDER_DO_STATE,  -- STEP 1
+    VECTOR_FIRST_MULTIPLIER_DO_STATE,  -- STEP 2
+    VECTOR_SECOND_MULTIPLIER_DO_STATE,  -- STEP 3
+    VECTOR_THIRD_MULTIPLIER_DO_STATE,  -- STEP 4
+    ENDER_DO_STATE  -- STEP 5
     );
             
   type differentiation_w_ctrl_fsm is (
@@ -290,17 +289,15 @@ begin
           case differentiation_o_ctrl_fsm_int is
             when STARTER_DO_STATE =>  -- STEP 0
 
-            when VECTOR_TANH_DO_STATE =>  -- STEP 1
+            when VECTOR_ADDER_DO_STATE =>  -- STEP 1
 
-            when VECTOR_ADDER_DO_STATE =>  -- STEP 2
+            when VECTOR_FIRST_MULTIPLIER_DO_STATE =>  -- STEP 2
 
-            when VECTOR_FIRST_MULTIPLIER_DO_STATE =>  -- STEP 3
+            when VECTOR_SECOND_MULTIPLIER_DO_STATE =>  -- STEP 3
 
-            when VECTOR_SECOND_MULTIPLIER_DO_STATE =>  -- STEP 4
+            when VECTOR_THIRD_MULTIPLIER_DO_STATE =>  -- STEP 4
 
-            when VECTOR_THIRD_MULTIPLIER_DO_STATE =>  -- STEP 5
-
-            when ENDER_DO_STATE =>  -- STEP 6
+            when ENDER_DO_STATE =>  -- STEP 5
 
             when others =>
               -- FSM Control

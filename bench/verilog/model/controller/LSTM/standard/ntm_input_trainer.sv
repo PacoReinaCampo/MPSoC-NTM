@@ -88,12 +88,11 @@ module ntm_input_trainer #(
   parameter [2:0] ENDER_STATE = 5;
 
   parameter [2:0] STARTER_DI_STATE = 0;
-  parameter [2:0] VECTOR_TANH_DI_STATE = 1;
-  parameter [2:0] VECTOR_ADDER_DI_STATE = 2;
-  parameter [2:0] VECTOR_FIRST_MULTIPLIER_DI_STATE = 3;
-  parameter [2:0] VECTOR_SECOND_MULTIPLIER_DI_STATE = 4;
-  parameter [2:0] VECTOR_THIRD_MULTIPLIER_DI_STATE = 5;
-  parameter [2:0] ENDER_DI_STATE = 6;
+  parameter [2:0] VECTOR_ADDER_DI_STATE = 1;
+  parameter [2:0] VECTOR_FIRST_MULTIPLIER_DI_STATE = 2;
+  parameter [2:0] VECTOR_SECOND_MULTIPLIER_DI_STATE =3;
+  parameter [2:0] VECTOR_THIRD_MULTIPLIER_DI_STATE = 4;
+  parameter [2:0] ENDER_DI_STATE = 5;
 
   parameter [2:0] STARTER_DW_STATE = 0;
   parameter [2:0] VECTOR_DIFFERENTIATION_DW_STATE = 1;
@@ -277,22 +276,19 @@ module ntm_input_trainer #(
             STARTER_DI_STATE : begin  // STEP 0
             end
 
-            VECTOR_TANH_DI_STATE : begin  // STEP 1
+            VECTOR_ADDER_DI_STATE : begin  // STEP 1
             end
 
-            VECTOR_ADDER_DI_STATE : begin  // STEP 2
+            VECTOR_FIRST_MULTIPLIER_DI_STATE : begin  // STEP 2
             end
 
-            VECTOR_FIRST_MULTIPLIER_DI_STATE : begin  // STEP 3
+            VECTOR_SECOND_MULTIPLIER_DI_STATE : begin  // STEP 3
             end
 
-            VECTOR_SECOND_MULTIPLIER_DI_STATE : begin  // STEP 4
+            VECTOR_THIRD_MULTIPLIER_DI_STATE : begin  // STEP 4
             end
 
-            VECTOR_THIRD_MULTIPLIER_DI_STATE : begin  // STEP 5
-            end
-
-            ENDER_DI_STATE : begin  // STEP 6
+            ENDER_DI_STATE : begin  // STEP 5
             end
 
             default : begin
