@@ -103,10 +103,16 @@ architecture ntm_activation_gate_vector_architecture of ntm_activation_gate_vect
 
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
-    MATRIX_CONVOLUTION_STATE,  -- STEP 1
-    VECTOR_ADDER_STATE,  -- STEP 2
-    VECTOR_TANH_STATE,  -- STEP 3
-    ENDER_STATE  -- STEP 4
+    MATRIX_FIRST_CONVOLUTION_STATE,  -- STEP 1
+    VECTOR_FIRST_ADDER_STATE,  -- STEP 2
+    MATRIX_SECOND_CONVOLUTION_STATE,  -- STEP 3
+    VECTOR_SECOND_ADDER_STATE,  -- STEP 4
+    MATRIX_THIRD_CONVOLUTION_STATE,  -- STEP 5
+    VECTOR_THIRD_ADDER_STATE,  -- STEP 6
+    MATRIX_FOURTH_CONVOLUTION_STATE,  -- STEP 7
+    VECTOR_FOURTH_ADDER_STATE,  -- STEP 8
+    VECTOR_TANH_STATE,  -- STEP 9
+    ENDER_STATE  -- STEP 10
     );
 
   -----------------------------------------------------------------------
@@ -115,6 +121,7 @@ architecture ntm_activation_gate_vector_architecture of ntm_activation_gate_vect
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -209,16 +216,92 @@ begin
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_CONVOLUTION_STATE;
+            controller_ctrl_fsm_int <= MATRIX_FIRST_CONVOLUTION_STATE;
           end if;
 
-        when MATRIX_CONVOLUTION_STATE =>  -- STEP 1
+        when MATRIX_FIRST_CONVOLUTION_STATE =>  -- STEP 1
 
-        when VECTOR_ADDER_STATE =>  -- STEP 2
+          -- Data Inputs
+          modulo_in_matrix_convolution <= FULL;
+          size_i_in_matrix_convolution <= FULL;
+          size_j_in_matrix_convolution <= FULL;
+          length_in_matrix_convolution <= FULL;
+          data_a_in_matrix_convolution <= W_IN;
+          data_b_in_matrix_convolution <= X_IN;
 
-        when VECTOR_TANH_STATE =>  -- STEP 3
+        when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
 
-        when ENDER_STATE =>  -- STEP 4
+          -- Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= FULL;
+          data_a_in_vector_adder <= data_out_matrix_convolution;
+          data_b_in_vector_adder <= B_IN;
+
+        when MATRIX_SECOND_CONVOLUTION_STATE =>  -- STEP 3
+
+          -- Data Inputs
+          modulo_in_matrix_convolution <= FULL;
+          size_i_in_matrix_convolution <= FULL;
+          size_j_in_matrix_convolution <= FULL;
+          length_in_matrix_convolution <= FULL;
+          data_a_in_matrix_convolution <= K_IN;
+          data_b_in_matrix_convolution <= R_IN;
+
+        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
+
+          -- Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= FULL;
+          data_a_in_vector_adder <= data_out_matrix_convolution;
+          data_b_in_vector_adder <= data_out_vector_adder;
+
+        when MATRIX_THIRD_CONVOLUTION_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          modulo_in_matrix_convolution <= FULL;
+          size_i_in_matrix_convolution <= FULL;
+          size_j_in_matrix_convolution <= FULL;
+          length_in_matrix_convolution <= FULL;
+          data_a_in_matrix_convolution <= U_IN;
+          data_b_in_matrix_convolution <= H_IN;
+
+        when VECTOR_THIRD_ADDER_STATE =>  -- STEP 6
+
+          -- Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= FULL;
+          data_a_in_vector_adder <= data_out_matrix_convolution;
+          data_b_in_vector_adder <= data_out_vector_adder;
+
+        when MATRIX_FOURTH_CONVOLUTION_STATE =>  -- STEP 7
+
+          -- Data Inputs
+          modulo_in_matrix_convolution <= FULL;
+          size_i_in_matrix_convolution <= FULL;
+          size_j_in_matrix_convolution <= FULL;
+          length_in_matrix_convolution <= FULL;
+          data_a_in_matrix_convolution <= U_IN;
+          data_b_in_matrix_convolution <= H_IN;
+
+        when VECTOR_FOURTH_ADDER_STATE =>  -- STEP 8
+
+          -- Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= FULL;
+          data_a_in_vector_adder <= data_out_matrix_convolution;
+          data_b_in_vector_adder <= data_out_vector_adder;
+
+        when VECTOR_TANH_STATE =>  -- STEP 9
+
+          -- Data Inputs
+          modulo_in_vector_tanh <= FULL;
+          size_in_vector_tanh   <= FULL;
+          data_in_vector_tanh   <= FULL;
+
+        when ENDER_STATE =>  -- STEP 10
+
+          -- Data Outputs
+          A_OUT <= ONE;
 
         when others =>
           -- FSM Control

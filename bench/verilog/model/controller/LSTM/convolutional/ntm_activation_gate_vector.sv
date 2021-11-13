@@ -81,11 +81,17 @@ module ntm_activation_gate_vector #(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter [2:0] STARTER_STATE = 0;
-  parameter [2:0] MATRIX_CONVOLUTION_STATE = 1;
-  parameter [2:0] VECTOR_ADDER_STATE = 2;
-  parameter [2:0] VECTOR_TANH_STATE = 3;
-  parameter [2:0] ENDER_STATE = 4;
+  parameter [3:0] STARTER_STATE = 0;
+  parameter [3:0] MATRIX_FIRST_CONVOLUTION_STATE = 1;
+  parameter [3:0] VECTOR_FIRST_ADDER_STATE = 2;
+  parameter [3:0] MATRIX_SECOND_CONVOLUTION_STATE = 3;
+  parameter [3:0] VECTOR_SECOND_ADDER_STATE = 4;
+  parameter [3:0] MATRIX_THIRD_CONVOLUTION_STATE = 5;
+  parameter [3:0] VECTOR_THIRD_ADDER_STATE = 6;
+  parameter [3:0] MATRIX_FOURTH_CONVOLUTION_STATE = 7;
+  parameter [3:0] VECTOR_FOURTH_ADDER_STATE = 8;
+  parameter [3:0] VECTOR_TANH_STATE = 9;
+  parameter [3:0] ENDER_STATE = 10;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -93,13 +99,14 @@ module ntm_activation_gate_vector #(
 
   parameter ZERO = 0;
   parameter ONE = 1;
+  parameter FULL = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [2:0] controller_ctrl_fsm_int;
+  reg [3:0] controller_ctrl_fsm_int;
 
   // VECTOR ADDER
   // CONTROL
@@ -113,10 +120,10 @@ module ntm_activation_gate_vector #(
   wire data_out_enable_vector_adder;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_adder;
-  wire [DATA_SIZE-1:0] size_in_vector_adder;
-  wire [DATA_SIZE-1:0] data_a_in_vector_adder;
-  wire [DATA_SIZE-1:0] data_b_in_vector_adder;
+  reg [DATA_SIZE-1:0] modulo_in_vector_adder;
+  reg [DATA_SIZE-1:0] size_in_vector_adder;
+  reg [DATA_SIZE-1:0] data_a_in_vector_adder;
+  reg [DATA_SIZE-1:0] data_b_in_vector_adder;
   wire [DATA_SIZE-1:0] data_out_vector_adder;
 
   // MATRIX CONVOLUTION
@@ -135,12 +142,12 @@ module ntm_activation_gate_vector #(
   wire data_out_scalar_enable_matrix_convolution;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_convolution;
-  wire [DATA_SIZE-1:0] size_i_in_matrix_convolution;
-  wire [DATA_SIZE-1:0] size_j_in_matrix_convolution;
-  wire [DATA_SIZE-1:0] length_in_matrix_convolution;
-  wire [DATA_SIZE-1:0] data_a_in_matrix_convolution;
-  wire [DATA_SIZE-1:0] data_b_in_matrix_convolution;
+  reg [DATA_SIZE-1:0] modulo_in_matrix_convolution;
+  reg [DATA_SIZE-1:0] size_i_in_matrix_convolution;
+  reg [DATA_SIZE-1:0] size_j_in_matrix_convolution;
+  reg [DATA_SIZE-1:0] length_in_matrix_convolution;
+  reg [DATA_SIZE-1:0] data_a_in_matrix_convolution;
+  reg [DATA_SIZE-1:0] data_b_in_matrix_convolution;
   wire [DATA_SIZE-1:0] data_out_matrix_convolution;
 
   // VECTOR TANH
@@ -151,9 +158,9 @@ module ntm_activation_gate_vector #(
   wire data_out_enable_vector_tanh;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_tanh;
-  wire [DATA_SIZE-1:0] size_in_vector_tanh;
-  wire [DATA_SIZE-1:0] data_in_vector_tanh;
+  reg [DATA_SIZE-1:0] modulo_in_vector_tanh;
+  reg [DATA_SIZE-1:0] size_in_vector_tanh;
+  reg [DATA_SIZE-1:0] data_in_vector_tanh;
   wire [DATA_SIZE-1:0] data_out_vector_tanh;
 
   ///////////////////////////////////////////////////////////////////////
@@ -179,20 +186,102 @@ module ntm_activation_gate_vector #(
 
           if(START == 1'b1) begin
             // FSM Control
-            controller_ctrl_fsm_int <= MATRIX_CONVOLUTION_STATE;
+            controller_ctrl_fsm_int <= MATRIX_FIRST_CONVOLUTION_STATE;
           end
         end
 
-        MATRIX_CONVOLUTION_STATE : begin  // STEP 1
+        MATRIX_FIRST_CONVOLUTION_STATE : begin  // STEP 1
+
+          // Data Inputs
+          modulo_in_matrix_convolution <= FULL;
+          size_i_in_matrix_convolution <= FULL;
+          size_j_in_matrix_convolution <= FULL;
+          length_in_matrix_convolution <= FULL;
+          data_a_in_matrix_convolution <= W_IN;
+          data_b_in_matrix_convolution <= X_IN;
         end
 
-        VECTOR_ADDER_STATE : begin  // STEP 2
+        VECTOR_FIRST_ADDER_STATE : begin  // STEP 2
+
+          // Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= FULL;
+          data_a_in_vector_adder <= data_out_matrix_convolution;
+          data_b_in_vector_adder <= B_IN;
         end
 
-        VECTOR_TANH_STATE : begin  // STEP 3
+        MATRIX_SECOND_CONVOLUTION_STATE : begin  // STEP 3
+
+          // Data Inputs
+          modulo_in_matrix_convolution <= FULL;
+          size_i_in_matrix_convolution <= FULL;
+          size_j_in_matrix_convolution <= FULL;
+          length_in_matrix_convolution <= FULL;
+          data_a_in_matrix_convolution <= K_IN;
+          data_b_in_matrix_convolution <= R_IN;
         end
 
-        ENDER_STATE : begin  // STEP 4
+        VECTOR_SECOND_ADDER_STATE : begin  // STEP 4
+
+          // Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= FULL;
+          data_a_in_vector_adder <= data_out_matrix_convolution;
+          data_b_in_vector_adder <= data_out_vector_adder;
+        end
+
+        MATRIX_THIRD_CONVOLUTION_STATE : begin  // STEP 5
+
+          // Data Inputs
+          modulo_in_matrix_convolution <= FULL;
+          size_i_in_matrix_convolution <= FULL;
+          size_j_in_matrix_convolution <= FULL;
+          length_in_matrix_convolution <= FULL;
+          data_a_in_matrix_convolution <= U_IN;
+          data_b_in_matrix_convolution <= H_IN;
+        end
+
+        VECTOR_THIRD_ADDER_STATE : begin  // STEP 6
+
+          // Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= FULL;
+          data_a_in_vector_adder <= data_out_matrix_convolution;
+          data_b_in_vector_adder <= data_out_vector_adder;
+        end
+
+        MATRIX_FOURTH_CONVOLUTION_STATE : begin  // STEP 7
+
+          // Data Inputs
+          modulo_in_matrix_convolution <= FULL;
+          size_i_in_matrix_convolution <= FULL;
+          size_j_in_matrix_convolution <= FULL;
+          length_in_matrix_convolution <= FULL;
+          data_a_in_matrix_convolution <= U_IN;
+          data_b_in_matrix_convolution <= H_IN;
+        end
+
+        VECTOR_FOURTH_ADDER_STATE : begin  // STEP 8
+
+          // Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= FULL;
+          data_a_in_vector_adder <= data_out_matrix_convolution;
+          data_b_in_vector_adder <= data_out_vector_adder;
+        end
+
+        VECTOR_TANH_STATE : begin  // STEP 9
+
+          // Data Inputs
+          modulo_in_vector_tanh <= FULL;
+          size_in_vector_tanh   <= FULL;
+          data_in_vector_tanh   <= FULL;
+        end
+
+        ENDER_STATE : begin  // STEP 10
+
+          // Data Outputs
+          A_OUT <= ONE;
         end
 
         default : begin
