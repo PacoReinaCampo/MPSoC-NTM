@@ -81,11 +81,17 @@ module ntm_forget_gate_vector #(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter [2:0] STARTER_STATE = 0;
-  parameter [2:0] MATRIX_PRODUCT_STATE = 1;
-  parameter [2:0] VECTOR_ADDER_STATE = 2;
-  parameter [2:0] VECTOR_LOGISTIC_STATE = 3;
-  parameter [2:0] ENDER_STATE = 4;
+  parameter [3:0] STARTER_STATE = 0;
+  parameter [3:0] MATRIX_FIRST_PRODUCT_STATE = 1;
+  parameter [3:0] VECTOR_FIRST_ADDER_STATE = 2;
+  parameter [3:0] MATRIX_SECOND_PRODUCT_STATE = 3;
+  parameter [3:0] VECTOR_SECOND_ADDER_STATE = 4;
+  parameter [3:0] MATRIX_THIRD_PRODUCT_STATE = 5;
+  parameter [3:0] VECTOR_THIRD_ADDER_STATE = 6;
+  parameter [3:0] MATRIX_FOURTH_PRODUCT_STATE = 7;
+  parameter [3:0] VECTOR_FOURTH_ADDER_STATE = 8;
+  parameter [3:0] VECTOR_LOGISTIC_STATE = 9;
+  parameter [3:0] ENDER_STATE = 10;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -93,13 +99,14 @@ module ntm_forget_gate_vector #(
 
   parameter ZERO = 0;
   parameter ONE = 1;
+  parameter FULL = 1;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [2:0] controller_ctrl_fsm_int;
+  reg [3:0] controller_ctrl_fsm_int;
 
   // VECTOR ADDER
   // CONTROL
@@ -113,10 +120,10 @@ module ntm_forget_gate_vector #(
   wire data_out_enable_vector_adder;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_adder;
-  wire [DATA_SIZE-1:0] size_in_vector_adder;
-  wire [DATA_SIZE-1:0] data_a_in_vector_adder;
-  wire [DATA_SIZE-1:0] data_b_in_vector_adder;
+  reg [DATA_SIZE-1:0] modulo_in_vector_adder;
+  reg [DATA_SIZE-1:0] size_in_vector_adder;
+  reg [DATA_SIZE-1:0] data_a_in_vector_adder;
+  reg [DATA_SIZE-1:0] data_b_in_vector_adder;
   wire [DATA_SIZE-1:0] data_out_vector_adder;
 
   // MATRIX PRODUCT
@@ -131,13 +138,13 @@ module ntm_forget_gate_vector #(
   wire data_out_j_enable_matrix_product;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_product;
-  wire [DATA_SIZE-1:0] size_a_i_in_matrix_product;
-  wire [DATA_SIZE-1:0] size_a_j_in_matrix_product;
-  wire [DATA_SIZE-1:0] size_b_i_in_matrix_product;
-  wire [DATA_SIZE-1:0] size_b_j_in_matrix_product;
-  wire [DATA_SIZE-1:0] data_a_in_matrix_product;
-  wire [DATA_SIZE-1:0] data_b_in_matrix_product;
+  reg [DATA_SIZE-1:0] modulo_in_matrix_product;
+  reg [DATA_SIZE-1:0] size_a_i_in_matrix_product;
+  reg [DATA_SIZE-1:0] size_a_j_in_matrix_product;
+  reg [DATA_SIZE-1:0] size_b_i_in_matrix_product;
+  reg [DATA_SIZE-1:0] size_b_j_in_matrix_product;
+  reg [DATA_SIZE-1:0] data_a_in_matrix_product;
+  reg [DATA_SIZE-1:0] data_b_in_matrix_product;
   wire [DATA_SIZE-1:0] data_out_matrix_product;
 
   // VECTOR LOGISTIC
@@ -148,9 +155,9 @@ module ntm_forget_gate_vector #(
   wire data_out_enable_vector_logistic;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_logistic;
-  wire [DATA_SIZE-1:0] size_in_vector_logistic;
-  wire [DATA_SIZE-1:0] data_in_vector_logistic;
+  reg [DATA_SIZE-1:0] modulo_in_vector_logistic;
+  reg [DATA_SIZE-1:0] size_in_vector_logistic;
+  reg [DATA_SIZE-1:0] data_in_vector_logistic;
   wire data_out_vector_logistic;
 
   ///////////////////////////////////////////////////////////////////////
@@ -176,20 +183,106 @@ module ntm_forget_gate_vector #(
 
           if(START == 1'b1) begin
             // FSM Control
-            controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+            controller_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_STATE;
           end
         end
 
-        MATRIX_PRODUCT_STATE : begin  // STEP 1
+        MATRIX_FIRST_PRODUCT_STATE : begin  // STEP 1
+
+          // Data Inputs
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= FULL;
+          size_a_j_in_matrix_product <= FULL;
+          size_b_i_in_matrix_product <= FULL;
+          size_b_j_in_matrix_product <= FULL;
+          data_a_in_matrix_product   <= W_IN;
+          data_b_in_matrix_product   <= X_IN;
         end
 
-        VECTOR_ADDER_STATE : begin  // STEP 2
+        VECTOR_FIRST_ADDER_STATE : begin  // STEP 2
+
+          // Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= FULL;
+          data_a_in_vector_adder <= data_out_matrix_product;
+          data_b_in_vector_adder <= B_IN;
         end
 
-        VECTOR_LOGISTIC_STATE : begin  // STEP 3
+        MATRIX_SECOND_PRODUCT_STATE : begin  // STEP 3
+
+          // Data Inputs
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= FULL;
+          size_a_j_in_matrix_product <= FULL;
+          size_b_i_in_matrix_product <= FULL;
+          size_b_j_in_matrix_product <= FULL;
+          data_a_in_matrix_product   <= K_IN;
+          data_b_in_matrix_product   <= R_IN;
         end
 
-        ENDER_STATE : begin  // STEP 4
+        VECTOR_SECOND_ADDER_STATE : begin  // STEP 4
+
+          // Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= FULL;
+          data_a_in_vector_adder <= data_out_matrix_product;
+          data_b_in_vector_adder <= data_out_vector_adder;
+        end
+
+        MATRIX_THIRD_PRODUCT_STATE : begin  // STEP 5
+
+          // Data Inputs
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= FULL;
+          size_a_j_in_matrix_product <= FULL;
+          size_b_i_in_matrix_product <= FULL;
+          size_b_j_in_matrix_product <= FULL;
+          data_a_in_matrix_product   <= U_IN;
+          data_b_in_matrix_product   <= H_IN;
+        end
+
+        VECTOR_THIRD_ADDER_STATE : begin  // STEP 6
+
+          // Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= FULL;
+          data_a_in_vector_adder <= data_out_matrix_product;
+          data_b_in_vector_adder <= data_out_vector_adder;
+        end
+
+        MATRIX_FOURTH_PRODUCT_STATE : begin  // STEP 7
+
+          // Data Inputs
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= FULL;
+          size_a_j_in_matrix_product <= FULL;
+          size_b_i_in_matrix_product <= FULL;
+          size_b_j_in_matrix_product <= FULL;
+          data_a_in_matrix_product   <= U_IN;
+          data_b_in_matrix_product   <= H_IN;
+        end
+
+        VECTOR_FOURTH_ADDER_STATE : begin  // STEP 8
+
+          // Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= FULL;
+          data_a_in_vector_adder <= data_out_matrix_product;
+          data_b_in_vector_adder <= data_out_vector_adder;
+        end
+
+        VECTOR_LOGISTIC_STATE : begin  // STEP 9
+
+          // Data Inputs
+          modulo_in_vector_logistic <= FULL;
+          size_in_vector_logistic   <= FULL;
+          data_in_vector_logistic   <= FULL;
+        end
+
+        ENDER_STATE : begin  // STEP 10
+
+          // Data Outputs
+          F_OUT <= ONE;
         end
 
         default : begin

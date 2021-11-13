@@ -105,14 +105,14 @@ architecture ntm_forget_gate_vector_architecture of ntm_forget_gate_vector is
     STARTER_STATE,  -- STEP 0
     MATRIX_FIRST_CONVOLUTION_STATE,  -- STEP 1
     VECTOR_FIRST_ADDER_STATE,  -- STEP 2
-    MATRIX_SECOND_CONVOLUTION_STATE,  -- STEP 1
-    VECTOR_SECOND_ADDER_STATE,  -- STEP 2
-    MATRIX_THIRD_CONVOLUTION_STATE,  -- STEP 1
-    VECTOR_THIRD_ADDER_STATE,  -- STEP 2
-    MATRIX_FOURTH_CONVOLUTION_STATE,  -- STEP 1
-    VECTOR_FOURTH_ADDER_STATE,  -- STEP 2
-    VECTOR_LOGISTIC_STATE,  -- STEP 3
-    ENDER_STATE  -- STEP 4
+    MATRIX_SECOND_CONVOLUTION_STATE,  -- STEP 3
+    VECTOR_SECOND_ADDER_STATE,  -- STEP 4
+    MATRIX_THIRD_CONVOLUTION_STATE,  -- STEP 5
+    VECTOR_THIRD_ADDER_STATE,  -- STEP 6
+    MATRIX_FOURTH_CONVOLUTION_STATE,  -- STEP 7
+    VECTOR_FOURTH_ADDER_STATE,  -- STEP 8
+    VECTOR_LOGISTIC_STATE,  -- STEP 9
+    ENDER_STATE  -- STEP 10
     );
 
   -----------------------------------------------------------------------
@@ -237,7 +237,7 @@ begin
           data_a_in_vector_adder <= data_out_matrix_convolution;
           data_b_in_vector_adder <= B_IN;
 
-        when MATRIX_SECOND_CONVOLUTION_STATE =>  -- STEP 1
+        when MATRIX_SECOND_CONVOLUTION_STATE =>  -- STEP 3
 
           -- Data Inputs
           modulo_in_matrix_convolution <= FULL;
@@ -247,7 +247,7 @@ begin
           data_a_in_matrix_convolution <= K_IN;
           data_b_in_matrix_convolution <= R_IN;
 
-        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 2
+        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
@@ -255,7 +255,7 @@ begin
           data_a_in_vector_adder <= data_out_matrix_convolution;
           data_b_in_vector_adder <= data_out_vector_adder;
 
-        when MATRIX_THIRD_CONVOLUTION_STATE =>  -- STEP 1
+        when MATRIX_THIRD_CONVOLUTION_STATE =>  -- STEP 5
 
           -- Data Inputs
           modulo_in_matrix_convolution <= FULL;
@@ -265,7 +265,7 @@ begin
           data_a_in_matrix_convolution <= U_IN;
           data_b_in_matrix_convolution <= H_IN;
 
-        when VECTOR_THIRD_ADDER_STATE =>  -- STEP 2
+        when VECTOR_THIRD_ADDER_STATE =>  -- STEP 6
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
@@ -273,7 +273,7 @@ begin
           data_a_in_vector_adder <= data_out_matrix_convolution;
           data_b_in_vector_adder <= data_out_vector_adder;
 
-        when MATRIX_FOURTH_CONVOLUTION_STATE =>  -- STEP 1
+        when MATRIX_FOURTH_CONVOLUTION_STATE =>  -- STEP 7
 
           -- Data Inputs
           modulo_in_matrix_convolution <= FULL;
@@ -283,7 +283,7 @@ begin
           data_a_in_matrix_convolution <= U_IN;
           data_b_in_matrix_convolution <= H_IN;
 
-        when VECTOR_FOURTH_ADDER_STATE =>  -- STEP 2
+        when VECTOR_FOURTH_ADDER_STATE =>  -- STEP 8
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
@@ -291,14 +291,17 @@ begin
           data_a_in_vector_adder <= data_out_matrix_convolution;
           data_b_in_vector_adder <= data_out_vector_adder;
 
-        when VECTOR_LOGISTIC_STATE =>  -- STEP 3
+        when VECTOR_LOGISTIC_STATE =>  -- STEP 9
 
           -- Data Inputs
           modulo_in_vector_logistic <= FULL;
           size_in_vector_logistic   <= FULL;
           data_in_vector_logistic   <= FULL;
 
-        when ENDER_STATE =>  -- STEP 4
+        when ENDER_STATE =>  -- STEP 10
+
+          -- Data Outputs
+          F_OUT <= ONE;
 
         when others =>
           -- FSM Control

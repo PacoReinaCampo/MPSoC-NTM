@@ -99,10 +99,12 @@ architecture ntm_controller_architecture of ntm_controller is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
-    VECTOR_SUMMATION_STATE,  -- STEP 1
-    MATRIX_PRODUCT_STATE,  -- STEP 2
-    VECTOR_LOGISTIC_STATE,  -- STEP 2
-    ENDER_STATE  -- STEP 3
+    MATRIX_FIRST_CONVOLUTION_STATE,  -- STEP 1
+    VECTOR_FIRST_ADDER_STATE,  -- STEP 2
+    MATRIX_SECOND_CONVOLUTION_STATE,  -- STEP 3
+    VECTOR_SECOND_ADDER_STATE,  -- STEP 4
+    VECTOR_LOGISTIC_STATE,  -- STEP 5
+    ENDER_STATE  -- STEP 6
     );
 
   -----------------------------------------------------------------------
@@ -111,6 +113,7 @@ architecture ntm_controller_architecture of ntm_controller is
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -119,23 +122,24 @@ architecture ntm_controller_architecture of ntm_controller is
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- VECTOR SUMMATION
+  -- VECTOR ADDER
   -- CONTROL
-  signal start_vector_summation : std_logic;
-  signal ready_vector_summation : std_logic;
+  signal start_vector_adder : std_logic;
+  signal ready_vector_adder : std_logic;
 
-  signal data_in_vector_enable_vector_summation : std_logic;
-  signal data_in_scalar_enable_vector_summation : std_logic;
+  signal operation_vector_adder : std_logic;
 
-  signal data_out_vector_enable_vector_summation : std_logic;
-  signal data_out_scalar_enable_vector_summation : std_logic;
+  signal data_a_in_enable_vector_adder : std_logic;
+  signal data_b_in_enable_vector_adder : std_logic;
+
+  signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_adder   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX CONVOLUTION
   -- CONTROL
@@ -234,16 +238,56 @@ begin
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_SUMMATION_STATE;
+            controller_ctrl_fsm_int <= MATRIX_FIRST_CONVOLUTION_STATE;
           end if;
 
-        when VECTOR_SUMMATION_STATE =>  -- STEP 1
+        when MATRIX_FIRST_CONVOLUTION_STATE =>  -- STEP 1
 
-        when MATRIX_PRODUCT_STATE =>  -- STEP 2
+          -- Data Inputs
+          modulo_in_matrix_convolution <= FULL;
+          size_i_in_matrix_convolution <= FULL;
+          size_j_in_matrix_convolution <= FULL;
+          length_in_matrix_convolution <= FULL;
+          data_a_in_matrix_convolution <= W_IN;
+          data_b_in_matrix_convolution <= X_IN;
 
-        when VECTOR_LOGISTIC_STATE =>  -- STEP 4
+        when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
 
-        when ENDER_STATE =>  -- STEP 5
+          -- Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= FULL;
+          data_a_in_vector_adder <= data_out_matrix_convolution;
+          data_b_in_vector_adder <= B_IN;
+
+        when MATRIX_SECOND_CONVOLUTION_STATE =>  -- STEP 3
+
+          -- Data Inputs
+          modulo_in_matrix_convolution <= FULL;
+          size_i_in_matrix_convolution <= FULL;
+          size_j_in_matrix_convolution <= FULL;
+          length_in_matrix_convolution <= FULL;
+          data_a_in_matrix_convolution <= K_IN;
+          data_b_in_matrix_convolution <= R_IN;
+
+        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
+
+          -- Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= FULL;
+          data_a_in_vector_adder <= data_out_matrix_convolution;
+          data_b_in_vector_adder <= data_out_vector_adder;
+
+        when VECTOR_LOGISTIC_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          modulo_in_vector_logistic <= FULL;
+          size_in_vector_logistic   <= FULL;
+          data_in_vector_logistic   <= FULL;
+
+        when ENDER_STATE =>  -- STEP 6
+
+          -- Data Outputs
+          H_OUT <= ONE;
 
         when others =>
           -- FSM Control
@@ -252,8 +296,8 @@ begin
     end if;
   end process;
 
-  -- VECTOR SUMMATION
-  vector_summation_function : ntm_vector_summation_function
+  -- VECTOR ADDER
+  vector_adder : ntm_vector_adder
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -263,21 +307,22 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_summation,
-      READY => ready_vector_summation,
+      START => start_vector_adder,
+      READY => ready_vector_adder,
 
-      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_summation,
-      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_summation,
+      OPERATION => operation_vector_adder,
 
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_summation,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_adder,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_adder,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_summation,
-      SIZE_IN   => size_in_vector_summation,
-      LENGTH_IN => length_in_vector_summation,
-      DATA_IN   => data_in_vector_summation,
-      DATA_OUT  => data_out_vector_summation
+      MODULO_IN => modulo_in_vector_adder,
+      SIZE_IN   => size_in_vector_adder,
+      DATA_A_IN => data_a_in_vector_adder,
+      DATA_B_IN => data_b_in_vector_adder,
+      DATA_OUT  => data_out_vector_adder
       );
 
   -- MATRIX CONVOLUTION
