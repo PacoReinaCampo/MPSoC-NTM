@@ -78,7 +78,7 @@ module ntm_standard_fnn_stimulus #(
     output [DATA_SIZE-1:0] NTM_STANDARD_FNN_B_IN,
     output [DATA_SIZE-1:0] NTM_STANDARD_FNN_X_IN,
     output [DATA_SIZE-1:0] NTM_STANDARD_FNN_R_IN,
-    input [DATA_SIZE-1:0] NTM_STANDARD_FNN_H_OUT
+    input NTM_STANDARD_FNN_H_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////

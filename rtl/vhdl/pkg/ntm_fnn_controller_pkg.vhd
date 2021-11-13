@@ -94,7 +94,7 @@ package ntm_fnn_controller_pkg is
       X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      H_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      H_OUT : out std_logic
       );
   end component;
 

@@ -78,7 +78,7 @@ module ntm_convolutional_fnn_stimulus #(
     output [DATA_SIZE-1:0] NTM_CONVOLUTIONAL_FNN_B_IN,
     output [DATA_SIZE-1:0] NTM_CONVOLUTIONAL_FNN_X_IN,
     output [DATA_SIZE-1:0] NTM_CONVOLUTIONAL_FNN_R_IN,
-    input [DATA_SIZE-1:0] NTM_CONVOLUTIONAL_FNN_H_OUT
+    input NTM_CONVOLUTIONAL_FNN_H_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////

@@ -91,7 +91,7 @@ architecture ntm_standard_fnn_testbench_architecture of ntm_standard_fnn_testben
   signal x_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal r_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal h_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal h_out_controller : std_logic;
 
 begin
 

@@ -91,7 +91,7 @@ module ntm_convolutional_fnn_testbench;
   wire [DATA_SIZE-1:0] b_in_controller;
   wire [DATA_SIZE-1:0] x_in_controller;
   wire [DATA_SIZE-1:0] r_in_controller;
-  wire [DATA_SIZE-1:0] h_out_controller;
+  wire h_out_controller;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

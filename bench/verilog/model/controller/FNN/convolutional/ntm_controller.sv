@@ -70,7 +70,7 @@ module ntm_controller #(
     input [DATA_SIZE-1:0] B_IN,
     input [DATA_SIZE-1:0] X_IN,
     input [DATA_SIZE-1:0] R_IN,
-    output reg [DATA_SIZE-1:0] H_OUT
+    output reg H_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -195,7 +195,7 @@ module ntm_controller #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      H_OUT <= ZERO;
+      H_OUT <= 1'b0;
 
       // Control Outputs
       READY <= 1'b0;
@@ -263,7 +263,7 @@ module ntm_controller #(
         ENDER_STATE : begin  // STEP 6
 
           // Data Outputs
-          H_OUT <= ONE;
+          H_OUT <= data_out_vector_logistic;
         end
 
         default : begin

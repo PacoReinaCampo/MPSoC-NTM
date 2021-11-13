@@ -87,7 +87,7 @@ entity ntm_controller is
     X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    H_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    H_OUT : out std_logic
     );
 end entity;
 
@@ -222,7 +222,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      H_OUT <= ZERO;
+      H_OUT <= '0';
 
       -- Control Outputs
       READY <= '0';
@@ -287,7 +287,7 @@ begin
         when ENDER_STATE =>  -- STEP 6
 
           -- Data Outputs
-          H_OUT <= ONE;
+          H_OUT <= data_out_vector_logistic;
 
         when others =>
           -- FSM Control
