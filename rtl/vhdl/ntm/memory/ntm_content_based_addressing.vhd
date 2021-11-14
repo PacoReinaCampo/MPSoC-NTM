@@ -162,7 +162,6 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
 
   -- VECTOR SOFTMAX
   -- CONTROL
-  -- CONTROL
   signal start_vector_softmax : std_logic;
   signal ready_vector_softmax : std_logic;
 

@@ -243,6 +243,9 @@ begin
           else
           end if;
 
+          -- Data Outputs
+          W_OUT <= data_out_vector_adder;
+            
         when others =>
           -- FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;

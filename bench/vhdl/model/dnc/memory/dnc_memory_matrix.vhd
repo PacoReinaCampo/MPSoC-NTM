@@ -90,8 +90,13 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
     MATRIX_TRANSPOSE_STATE,  -- STEP 1
-    MATRIX_PRODUCT_STATE,  -- STEP 2
-    ENDER_STATE  -- STEP 3
+    MATRIX_FIRST_PRODUCT_STATE,  -- STEP 2
+    MATRIX_FIRST_ADDER_STATE,  -- STEP 3
+    MATRIX_MULTIPLIER_STATE,  -- STEP 4
+    MATRIX_SECOND_TRANSPOSE_STATE,  -- STEP 5
+    MATRIX_SECOND_PRODUCT_STATE,  -- STEP 6
+    MATRIX_SECOND_ADDER_STATE,  -- STEP 7
+    ENDER_STATE  -- STEP 8
     );
 
   -----------------------------------------------------------------------
@@ -102,6 +107,7 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
   constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -109,6 +115,50 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
 
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+
+  -- MATRIX ADDER
+  -- CONTROL
+  signal start_matrix_adder : std_logic;
+  signal ready_matrix_adder : std_logic;
+
+  signal operation_matrix_adder : std_logic;
+
+  signal data_a_in_i_enable_matrix_adder : std_logic;
+  signal data_a_in_j_enable_matrix_adder : std_logic;
+  signal data_b_in_i_enable_matrix_adder : std_logic;
+  signal data_b_in_j_enable_matrix_adder : std_logic;
+
+  signal data_out_i_enable_matrix_adder : std_logic;
+  signal data_out_j_enable_matrix_adder : std_logic;
+
+  -- DATA
+  signal modulo_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_j_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- MATRIX MULTIPLIER
+  -- CONTROL
+  signal start_matrix_multiplier : std_logic;
+  signal ready_matrix_multiplier : std_logic;
+
+  signal data_a_in_i_enable_matrix_multiplier : std_logic;
+  signal data_a_in_j_enable_matrix_multiplier : std_logic;
+  signal data_b_in_i_enable_matrix_multiplier : std_logic;
+  signal data_b_in_j_enable_matrix_multiplier : std_logic;
+
+  signal data_out_i_enable_matrix_multiplier : std_logic;
+  signal data_out_j_enable_matrix_multiplier : std_logic;
+
+  -- DATA
+  signal modulo_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_j_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX TRANSPOSE
   -- CONTROL
@@ -183,9 +233,73 @@ begin
 
         when MATRIX_TRANSPOSE_STATE =>  -- STEP 1
 
-        when MATRIX_PRODUCT_STATE =>  -- STEP 2
+          -- Data Inputs
+          modulo_in_matrix_transpose <= FULL;
+          size_i_in_matrix_transpose <= SIZE_W_IN;
+          size_j_in_matrix_transpose <= ONE;
+          --data_in_matrix_transpose   <= E_IN;
 
-        when ENDER_STATE =>  -- STEP 3
+        when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 2
+
+          -- Data Inputs
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= SIZE_N_IN;
+          size_a_j_in_matrix_product <= ONE;
+          size_b_i_in_matrix_product <= ONE;
+          size_b_j_in_matrix_product <= SIZE_W_IN;
+          data_a_in_matrix_product   <= W_IN;
+          data_b_in_matrix_product   <= data_out_matrix_transpose;
+
+        when MATRIX_FIRST_ADDER_STATE =>  -- STEP 3
+
+          -- Data Inputs
+          modulo_in_matrix_adder <= FULL;
+          size_i_in_matrix_adder <= SIZE_N_IN;
+          size_j_in_matrix_adder <= SIZE_W_IN;
+          data_a_in_matrix_adder <= ONE;
+          data_b_in_matrix_adder <= data_out_matrix_product;
+
+        when MATRIX_MULTIPLIER_STATE =>  -- STEP 4
+
+          -- Data Inputs
+          modulo_in_matrix_multiplier <= FULL;
+          size_i_in_matrix_multiplier <= SIZE_N_IN;
+          size_j_in_matrix_multiplier <= SIZE_W_IN;
+          data_a_in_matrix_multiplier <= M_IN;
+          data_b_in_matrix_multiplier <= data_out_matrix_adder;
+
+        when MATRIX_SECOND_TRANSPOSE_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          modulo_in_matrix_transpose <= FULL;
+          size_i_in_matrix_transpose <= SIZE_W_IN;
+          size_j_in_matrix_transpose <= ONE;
+          data_in_matrix_transpose   <= V_IN;
+
+        when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 6
+
+          -- Data Inputs
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= SIZE_N_IN;
+          size_a_j_in_matrix_product <= ONE;
+          size_b_i_in_matrix_product <= ONE;
+          size_b_j_in_matrix_product <= SIZE_W_IN;
+          data_a_in_matrix_product   <= W_IN;
+          data_b_in_matrix_product   <= data_out_matrix_transpose;
+
+        when MATRIX_SECOND_ADDER_STATE =>  -- STEP 7
+
+          -- Data Inputs
+          modulo_in_matrix_adder <= FULL;
+          size_i_in_matrix_adder <= SIZE_N_IN;
+          size_j_in_matrix_adder <= SIZE_W_IN;
+          data_a_in_matrix_adder <= data_out_matrix_multiplier;
+          data_b_in_matrix_adder <= data_out_matrix_product;
+
+        when ENDER_STATE =>  -- STEP 8
+
+          -- Data Outputs
+          M_OUT <= data_out_matrix_adder;
 
         when others =>
           -- FSM Control
@@ -193,6 +307,70 @@ begin
       end case;
     end if;
   end process;
+
+  -- MATRIX ADDER
+  matrix_adder : ntm_matrix_adder
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_matrix_adder,
+      READY => ready_matrix_adder,
+
+      OPERATION => operation_matrix_adder,
+
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_adder,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_adder,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_adder,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_adder,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_adder,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_adder,
+
+      -- DATA
+      MODULO_IN => modulo_in_matrix_adder,
+      SIZE_I_IN => size_i_in_matrix_adder,
+      SIZE_J_IN => size_j_in_matrix_adder,
+      DATA_A_IN => data_a_in_matrix_adder,
+      DATA_B_IN => data_b_in_matrix_adder,
+      DATA_OUT  => data_out_matrix_adder
+      );
+
+  -- MATRIX MULTIPLIER
+  matrix_multiplier : ntm_matrix_multiplier
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_matrix_multiplier,
+      READY => ready_matrix_multiplier,
+
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_multiplier,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_multiplier,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_multiplier,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_multiplier,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_multiplier,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_multiplier,
+
+      -- DATA
+      MODULO_IN => modulo_in_matrix_multiplier,
+      SIZE_I_IN => size_i_in_matrix_multiplier,
+      SIZE_J_IN => size_j_in_matrix_multiplier,
+      DATA_A_IN => data_a_in_matrix_multiplier,
+      DATA_B_IN => data_b_in_matrix_multiplier,
+      DATA_OUT  => data_out_matrix_multiplier
+      );
 
   -- MATRIX TRANSPOSE
   matrix_transpose : ntm_matrix_transpose

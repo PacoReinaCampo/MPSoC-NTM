@@ -62,8 +62,8 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_SCALAR_INVERTER_TEST      : boolean := false;
     ENABLE_NTM_SCALAR_DIVIDER_TEST       : boolean := false;
     ENABLE_NTM_SCALAR_EXPONENTIATOR_TEST : boolean := false;
-    ENABLE_NTM_SCALAR_LCM_TEST          : boolean := false;
-    ENABLE_NTM_SCALAR_GCD_TEST     : boolean := false;
+    ENABLE_NTM_SCALAR_LCM_TEST           : boolean := false;
+    ENABLE_NTM_SCALAR_GCD_TEST           : boolean := false;
 
     ENABLE_NTM_SCALAR_MOD_CASE_0           : boolean := false;
     ENABLE_NTM_SCALAR_ADDER_CASE_0         : boolean := false;
@@ -90,8 +90,8 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_VECTOR_INVERTER_TEST      : boolean := false;
     ENABLE_NTM_VECTOR_DIVIDER_TEST       : boolean := false;
     ENABLE_NTM_VECTOR_EXPONENTIATOR_TEST : boolean := false;
-    ENABLE_NTM_VECTOR_LCM_TEST          : boolean := false;
-    ENABLE_NTM_VECTOR_GCD_TEST     : boolean := false;
+    ENABLE_NTM_VECTOR_LCM_TEST           : boolean := false;
+    ENABLE_NTM_VECTOR_GCD_TEST           : boolean := false;
 
     ENABLE_NTM_VECTOR_MOD_CASE_0           : boolean := false;
     ENABLE_NTM_VECTOR_ADDER_CASE_0         : boolean := false;
@@ -99,8 +99,8 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_VECTOR_INVERTER_CASE_0      : boolean := false;
     ENABLE_NTM_VECTOR_DIVIDER_CASE_0       : boolean := false;
     ENABLE_NTM_VECTOR_EXPONENTIATOR_CASE_0 : boolean := false;
-    ENABLE_NTM_VECTOR_LCM_CASE_0          : boolean := false;
-    ENABLE_NTM_VECTOR_GCD_CASE_0     : boolean := false;
+    ENABLE_NTM_VECTOR_LCM_CASE_0           : boolean := false;
+    ENABLE_NTM_VECTOR_GCD_CASE_0           : boolean := false;
 
     ENABLE_NTM_VECTOR_MOD_CASE_1           : boolean := false;
     ENABLE_NTM_VECTOR_ADDER_CASE_1         : boolean := false;
@@ -108,8 +108,8 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_VECTOR_INVERTER_CASE_1      : boolean := false;
     ENABLE_NTM_VECTOR_DIVIDER_CASE_1       : boolean := false;
     ENABLE_NTM_VECTOR_EXPONENTIATOR_CASE_1 : boolean := false;
-    ENABLE_NTM_VECTOR_LCM_CASE_1          : boolean := false;
-    ENABLE_NTM_VECTOR_GCD_CASE_1     : boolean := false;
+    ENABLE_NTM_VECTOR_LCM_CASE_1           : boolean := false;
+    ENABLE_NTM_VECTOR_GCD_CASE_1           : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
     ENABLE_NTM_MATRIX_MOD_TEST           : boolean := false;
@@ -118,8 +118,8 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_MATRIX_INVERTER_TEST      : boolean := false;
     ENABLE_NTM_MATRIX_DIVIDER_TEST       : boolean := false;
     ENABLE_NTM_MATRIX_EXPONENTIATOR_TEST : boolean := false;
-    ENABLE_NTM_MATRIX_LCM_TEST          : boolean := false;
-    ENABLE_NTM_MATRIX_GCD_TEST     : boolean := false;
+    ENABLE_NTM_MATRIX_LCM_TEST           : boolean := false;
+    ENABLE_NTM_MATRIX_GCD_TEST           : boolean := false;
 
     ENABLE_NTM_MATRIX_MOD_CASE_0           : boolean := false;
     ENABLE_NTM_MATRIX_ADDER_CASE_0         : boolean := false;
@@ -127,8 +127,8 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_MATRIX_INVERTER_CASE_0      : boolean := false;
     ENABLE_NTM_MATRIX_DIVIDER_CASE_0       : boolean := false;
     ENABLE_NTM_MATRIX_EXPONENTIATOR_CASE_0 : boolean := false;
-    ENABLE_NTM_MATRIX_LCM_CASE_0          : boolean := false;
-    ENABLE_NTM_MATRIX_GCD_CASE_0     : boolean := false;
+    ENABLE_NTM_MATRIX_LCM_CASE_0           : boolean := false;
+    ENABLE_NTM_MATRIX_GCD_CASE_0           : boolean := false;
 
     ENABLE_NTM_MATRIX_MOD_CASE_1           : boolean := false;
     ENABLE_NTM_MATRIX_ADDER_CASE_1         : boolean := false;
@@ -136,8 +136,8 @@ entity ntm_arithmetic_testbench is
     ENABLE_NTM_MATRIX_INVERTER_CASE_1      : boolean := false;
     ENABLE_NTM_MATRIX_DIVIDER_CASE_1       : boolean := false;
     ENABLE_NTM_MATRIX_EXPONENTIATOR_CASE_1 : boolean := false;
-    ENABLE_NTM_MATRIX_LCM_CASE_1          : boolean := false;
-    ENABLE_NTM_MATRIX_GCD_CASE_1     : boolean := false
+    ENABLE_NTM_MATRIX_LCM_CASE_1           : boolean := false;
+    ENABLE_NTM_MATRIX_GCD_CASE_1           : boolean := false
     );
 end ntm_arithmetic_testbench;
 

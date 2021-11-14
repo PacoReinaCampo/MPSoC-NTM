@@ -95,6 +95,7 @@ architecture dnc_memory_retention_vector_architecture of dnc_memory_retention_ve
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -195,12 +196,34 @@ begin
 
         when ENDER_STATE =>  -- STEP 4
 
+          -- Data Outputs
+          PSI_OUT <= data_out_vector_multiplication;
+
         when others =>
           -- FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
+
+  -- DATA
+  -- VECTOR MULTIPLIER
+  modulo_in_vector_multiplier <= FULL;
+  size_in_vector_multiplier   <= SIZE_N_IN;
+  -- data_a_in_vector_multiplier <= F_IN;
+  data_b_in_vector_multiplier <= W_IN;
+
+  -- VECTOR ADDER
+  modulo_in_vector_adder <= FULL;
+  size_in_vector_adder   <= SIZE_N_IN;
+  data_a_in_vector_adder <= ONE;
+  data_b_in_vector_adder <= data_out_vector_multiplication;
+
+  -- VECTOR MULTIPLICATION
+  modulo_in_vector_multiplication <= FULL;
+  length_in_vector_multiplication <= SIZE_N_IN;
+  size_in_vector_multiplication   <= SIZE_R_IN;
+  data_in_vector_multiplication   <= data_out_vector_multiplier;
 
   -- VECTOR MULTIPLICATION
   vector_multiplication_function : ntm_vector_multiplication_function

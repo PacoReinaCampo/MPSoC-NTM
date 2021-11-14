@@ -80,10 +80,11 @@ architecture dnc_precedence_weighting_architecture of dnc_precedence_weighting i
 
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
-    VECTOR_MULTIPLIER_STATE,  -- STEP 1
-    VECTOR_ADDER_STATE,  -- STEP 2
-    VECTOR_SUMMATION_STATE,  -- STEP 3
-    ENDER_STATE  -- STEP 4
+    VECTOR_SUMMATION_STATE,  -- STEP 1
+    VECTOR_FIRST_ADDER_STATE,  -- STEP 2
+    VECTOR_MULTIPLIER_STATE,  -- STEP 3
+    VECTOR_SECOND_ADDER_STATE,  -- STEP 4
+    ENDER_STATE  -- STEP 5
     );
 
   -----------------------------------------------------------------------
@@ -92,6 +93,7 @@ architecture dnc_precedence_weighting_architecture of dnc_precedence_weighting i
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -182,17 +184,37 @@ begin
           READY <= '0';
 
           if (START = '1') then
+            -- Data Outputs
+            P_OUT <= ZERO;
+
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            controller_ctrl_fsm_int <= VECTOR_SUMMATION_STATE;
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
+        when VECTOR_SUMMATION_STATE =>  -- STEP 1
 
-        when VECTOR_ADDER_STATE =>  -- STEP 2
+        when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
 
-        when VECTOR_SUMMATION_STATE =>  -- STEP 3
+          -- Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= SIZE_N_IN;
+          data_a_in_vector_adder <= ONE;
+          data_b_in_vector_adder <= data_out_vector_summation;
 
-        when ENDER_STATE =>  -- STEP 4
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 3
+
+        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
+
+          -- Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= SIZE_N_IN;
+          data_a_in_vector_adder <= data_out_vector_multiplier;
+          data_b_in_vector_adder <= W_IN;
+
+        when ENDER_STATE =>  -- STEP 5
+
+          -- Data Outputs
+          P_OUT <= data_out_vector_adder;
 
         when others =>
           -- FSM Control
@@ -200,6 +222,19 @@ begin
       end case;
     end if;
   end process;
+
+  -- DATA
+  -- VECTOR SUMMATION
+  modulo_in_vector_summation <= FULL;
+  size_in_vector_summation   <= SIZE_N_IN;
+  -- length_in_vector_summation <= SIZE_R_IN;
+  data_in_vector_summation   <= W_IN;
+
+  -- VECTOR MULTIPLIER
+  modulo_in_vector_multiplier <= FULL;
+  size_in_vector_multiplier   <= SIZE_N_IN;
+  data_a_in_vector_multiplier <= data_out_vector_adder;
+  data_b_in_vector_multiplier <= P_IN;
 
   -- VECTOR SUMMATION
   vector_summation_function : ntm_vector_summation_function

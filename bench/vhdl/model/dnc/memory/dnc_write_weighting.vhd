@@ -83,9 +83,13 @@ architecture dnc_write_weighting_architecture of dnc_write_weighting is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
-    VECTOR_MULTIPLIER_STATE,  -- STEP 1
-    VECTOR_ADDER_STATE,  -- STEP 2
-    ENDER_STATE  -- STEP 3
+    VECTOR_FIRST_ADDER_STATE,  -- STEP 1
+    VECTOR_FIRST_MULTIPLIER_STATE,  -- STEP 2
+    VECTOR_SECOND_ADDER_STATE,  -- STEP 3
+    VECTOR_SECOND_MULTIPLIER_STATE,  -- STEP 4
+    VECTOR_THIRD_ADDER_STATE,  -- STEP 5
+    VECTOR_THIRD_MULTIPLIER_STATE,  -- STEP 6
+    ENDER_STATE  -- STEP 7
     );
 
   -----------------------------------------------------------------------
@@ -94,6 +98,7 @@ architecture dnc_write_weighting_architecture of dnc_write_weighting is
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -165,14 +170,61 @@ begin
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            controller_ctrl_fsm_int <= VECTOR_FIRST_ADDER_STATE;
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
+        when VECTOR_FIRST_ADDER_STATE =>  -- STEP 1
 
-        when VECTOR_ADDER_STATE =>  -- STEP 2
+          -- Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= SIZE_N_IN;
+          data_a_in_vector_adder <= ONE;
+          --data_b_in_vector_adder <= GA_IN;
 
-        when ENDER_STATE =>  -- STEP 3
+        when VECTOR_FIRST_MULTIPLIER_STATE =>  -- STEP 2
+
+          -- Data Inputs
+          modulo_in_vector_multiplier <= FULL;
+          size_in_vector_multiplier   <= SIZE_N_IN;
+          data_a_in_vector_multiplier <= data_out_vector_adder;
+          data_b_in_vector_multiplier <= C_IN;
+
+        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 3
+
+          -- Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= SIZE_N_IN;
+          data_a_in_vector_adder <= ZERO;
+          data_b_in_vector_adder <= data_out_vector_multiplier;
+
+        when VECTOR_SECOND_MULTIPLIER_STATE =>  -- STEP 4
+
+          -- Data Inputs
+          modulo_in_vector_multiplier <= FULL;
+          size_in_vector_multiplier   <= SIZE_N_IN;
+          --data_a_in_vector_multiplier <= GA_IN;
+          data_b_in_vector_multiplier <= A_IN;
+
+        when VECTOR_THIRD_ADDER_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= SIZE_N_IN;
+          data_a_in_vector_adder <= data_out_vector_adder;
+          data_b_in_vector_adder <= data_out_vector_multiplier;
+
+        when VECTOR_THIRD_MULTIPLIER_STATE =>  -- STEP 6
+
+          -- Data Inputs
+          modulo_in_vector_multiplier <= FULL;
+          size_in_vector_multiplier   <= SIZE_N_IN;
+          data_a_in_vector_multiplier <= data_out_vector_adder;
+          --data_b_in_vector_multiplier <= GW_IN;
+
+        when ENDER_STATE =>  -- STEP 7
+
+          -- Data Outputs
+          W_OUT <= data_out_vector_multiplier;
 
         when others =>
           -- FSM Control

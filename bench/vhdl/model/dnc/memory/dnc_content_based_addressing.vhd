@@ -69,8 +69,8 @@ entity dnc_content_based_addressing is
     SIZE_J_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     K_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
-    M_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
     BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    M_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     C_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -96,6 +96,7 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -103,6 +104,23 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
 
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+
+  -- VECTOR MULTIPLIER
+  -- CONTROL
+  signal start_vector_multiplier : std_logic;
+  signal ready_vector_multiplier : std_logic;
+
+  signal data_a_in_enable_vector_multiplier : std_logic;
+  signal data_b_in_enable_vector_multiplier : std_logic;
+
+  signal data_out_enable_vector_multiplier : std_logic;
+
+  -- DATA
+  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_multiplier   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR EXPONENTIATOR
   -- CONTROL
@@ -198,12 +216,68 @@ begin
 
         when ENDER_STATE =>  -- STEP 4
 
+          -- Data Outputs
+          C_OUT <= data_out_vector_softmax;
+
         when others =>
           -- FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
+
+  -- DATA
+  -- VECTOR COSINE SIMILARITY
+  modulo_in_vector_cosine <= FULL;
+  size_in_vector_cosine   <= SIZE_I_IN;
+  length_in_vector_cosine <= SIZE_J_IN;
+  data_a_in_vector_cosine <= K_IN;
+  data_b_in_vector_cosine <= M_IN;
+
+  -- VECTOR MULTIPLIER
+  modulo_in_vector_multiplier <= FULL;
+  size_in_vector_multiplier   <= SIZE_I_IN;
+  data_a_in_vector_multiplier <= data_out_vector_cosine;
+  data_b_in_vector_multiplier <= BETA_IN;
+
+  -- VECTOR EXPONENTIATOR
+  modulo_in_vector_exponentiator <= FULL;
+  size_in_vector_exponentiator   <= SIZE_I_IN;
+  data_a_in_vector_exponentiator <= FULL;
+  data_b_in_vector_exponentiator <= data_out_vector_multiplier;
+
+  -- VECTOR SOFTMAX
+  modulo_in_vector_softmax <= FULL;
+  size_in_vector_softmax   <= SIZE_I_IN;
+  length_in_vector_softmax <= SIZE_J_IN;
+  data_in_vector_softmax   <= data_out_vector_exponentiator;
+
+  -- VECTOR MULTIPLIER
+  vector_multiplier : ntm_vector_multiplier
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_multiplier,
+      READY => ready_vector_multiplier,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplier,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplier,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
+
+      -- DATA
+      MODULO_IN => modulo_in_vector_multiplier,
+      SIZE_IN   => size_in_vector_multiplier,
+      DATA_A_IN => data_a_in_vector_multiplier,
+      DATA_B_IN => data_b_in_vector_multiplier,
+      DATA_OUT  => data_out_vector_multiplier
+      );
 
   -- VECTOR EXPONENTIATOR
   vector_exponentiator : ntm_vector_exponentiator

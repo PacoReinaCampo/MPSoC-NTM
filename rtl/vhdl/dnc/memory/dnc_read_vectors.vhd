@@ -211,7 +211,6 @@ begin
   data_a_in_matrix_product   <= data_out_matrix_transpose;
   data_b_in_matrix_product   <= W_IN;
 
-
   -- MATRIX TRANSPOSE
   matrix_transpose : ntm_matrix_transpose
     generic map (
