@@ -104,6 +104,10 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
+  -- Internal Signals
+  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- SCALAR ADDER
   -- CONTROL
   signal start_scalar_adder : std_logic;
@@ -148,12 +152,20 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      -- Control Internal
+      index_i_loop <= ZERO;
+      index_j_loop <= ZERO;
+
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
+
+          -- Control Internal
+          index_i_loop <= ZERO;
+          index_j_loop <= ZERO;
 
           if (START = '1') then
             -- FSM Control
@@ -165,6 +177,47 @@ begin
         when VECTOR_ADDER_STATE =>  -- STEP 2
 
         when ENDER_STATE =>  -- STEP 3
+
+          if (operation_scalar_adder = '1') then
+            if (unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) then
+              -- Control Outputs
+              READY <= '1';
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            end if;
+
+            -- Control Outputs
+            L_OUT_G_ENABLE <= '1';
+          end if;
+
+          if (operation_scalar_adder = '1') then
+            if (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) then
+              -- Control Outputs
+              READY <= '1';
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            end if;
+
+            -- Control Outputs
+            L_OUT_J_ENABLE <= '1';
+          end if;
+
+          -- Data Outputs
+          L_OUT <= data_out_scalar_multiplier;
 
         when others =>
           -- FSM Control

@@ -108,6 +108,10 @@ architecture dnc_backward_weighting_architecture of dnc_backward_weighting is
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
+  -- Internal Signals
+  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- MATRIX TRANSPOSE
   -- CONTROL
   signal start_matrix_transpose : std_logic;
@@ -167,12 +171,20 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      -- Control Internal
+      index_i_loop <= ZERO;
+      index_j_loop <= ZERO;
+
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
+
+          -- Control Internal
+          index_i_loop <= ZERO;
+          index_j_loop <= ZERO;
 
           if (START = '1') then
             -- FSM Control
@@ -184,6 +196,44 @@ begin
         when MATRIX_TRANSPOSE_STATE =>  -- STEP 2
 
         when ENDER_STATE =>  -- STEP 3
+
+          if (data_out_i_enable_matrix_product = '1') then
+            if (unsigned(index_i_loop) = unsigned(SIZE_R_IN) - unsigned(ONE)) then
+              -- Control Outputs
+              READY <= '1';
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+            end if;
+
+            -- Control Outputs
+            B_OUT_I_ENABLE <= '1';
+          end if;
+
+          if (data_out_j_enable_matrix_product = '1') then
+            if (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) then
+              -- Control Outputs
+              READY <= '1';
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+            end if;
+
+            -- Control Outputs
+            B_OUT_J_ENABLE <= '1';
+          end if;
 
           -- Data Outputs
           B_OUT <= data_out_matrix_product;

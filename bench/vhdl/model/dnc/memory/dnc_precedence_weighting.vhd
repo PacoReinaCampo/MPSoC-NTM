@@ -103,6 +103,9 @@ architecture dnc_precedence_weighting_architecture of dnc_precedence_weighting i
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
+  -- Internal Signals
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- VECTOR SUMMATION
   -- CONTROL
   signal start_vector_summation : std_logic;
@@ -177,12 +180,18 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      -- Control Internal
+      index_loop <= ZERO;
+
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
+
+          -- Control Internal
+          index_loop <= ZERO;
 
           if (START = '1') then
             -- Data Outputs
@@ -214,11 +223,27 @@ begin
 
         when ENDER_STATE =>  -- STEP 5
 
+          if (data_out_enable_vector_adder = '1') then
+            if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) then
+              -- Control Outputs
+              READY <= '1';
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE));
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            end if;
+
+            -- Control Outputs
+            P_OUT_ENABLE <= '1';
+          end if;
+
           -- Data Outputs
           P_OUT <= data_out_vector_adder;
-
-          -- Control Outputs
-          READY <= '1';
 
         when others =>
           -- FSM Control
