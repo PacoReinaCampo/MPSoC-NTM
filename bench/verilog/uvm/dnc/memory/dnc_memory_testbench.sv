@@ -70,13 +70,11 @@ module dnc_memory_testbench;
   wire start_allocation_weighting;
   wire ready_allocation_weighting;
 
-  wire phi_in_enable_allocation_weighting;
   wire u_in_enable_allocation_weighting;
   wire a_out_enable_allocation_weighting;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_allocation_weighting;
-  wire [DATA_SIZE-1:0] phi_in_allocation_weighting;
   wire [DATA_SIZE-1:0] u_in_allocation_weighting;
   wire [DATA_SIZE-1:0] a_out_allocation_weighting;
 
@@ -168,6 +166,7 @@ module dnc_memory_testbench;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_precedence_weighting;
+  wire [DATA_SIZE-1:0] size_r_in_precedence_weighting;
   wire [DATA_SIZE-1:0] w_in_precedence_weighting;
   wire [DATA_SIZE-1:0] p_in_precedence_weighting;
   wire [DATA_SIZE-1:0] p_out_precedence_weighting;
@@ -403,13 +402,11 @@ module dnc_memory_testbench;
     .START(start_allocation_weighting),
     .READY(ready_allocation_weighting),
 
-    .PHI_IN_ENABLE(phi_in_enable_allocation_weighting),
     .U_IN_ENABLE(u_in_enable_allocation_weighting),
     .A_OUT_ENABLE(a_out_enable_allocation_weighting),
 
     // DATA
     .SIZE_N_IN(size_n_in_allocation_weighting),
-    .PHI_IN(phi_in_allocation_weighting),
     .U_IN(u_in_allocation_weighting),
     .A_OUT(a_out_allocation_weighting)
   );
@@ -545,6 +542,7 @@ module dnc_memory_testbench;
     .P_OUT_ENABLE(p_out_enable_precedence_weighting),
 
     // DATA
+    .SIZE_R_IN(size_r_in_precedence_weighting),
     .SIZE_N_IN(size_n_in_precedence_weighting),
     .W_IN(w_in_precedence_weighting),
     .P_IN(p_in_precedence_weighting),

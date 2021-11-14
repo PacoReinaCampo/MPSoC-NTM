@@ -49,13 +49,11 @@ module dnc_allocation_weighting #(
     input START,
     output reg READY,
 
-    input PHI_IN_ENABLE,  // for j in 0 to N-1
     input U_IN_ENABLE,  // for j in 0 to N-1
     output reg A_OUT_ENABLE,  // for j in 0 to N-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_N_IN,
-    input [DATA_SIZE-1:0] PHI_IN,
     input [DATA_SIZE-1:0] U_IN,
     output reg [DATA_SIZE-1:0] A_OUT
   );
@@ -83,22 +81,6 @@ module dnc_allocation_weighting #(
 
   // Finite State Machine
   reg [2:0] controller_ctrl_fsm_int;
-
-  // VECTOR MULTIPLICATION
-  // CONTROL
-  wire start_vector_multiplication;
-  wire ready_vector_multiplication;
-  wire data_in_vector_enable_vector_multiplication;
-  wire data_in_scalar_enable_vector_multiplication;
-  wire data_out_vector_enable_vector_multiplication;
-  wire data_out_scalar_enable_vector_multiplication;
-
-  // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_multiplication;
-  wire [DATA_SIZE-1:0] length_in_vector_multiplication;
-  wire [DATA_SIZE-1:0] size_in_vector_multiplication;
-  wire [DATA_SIZE-1:0] data_in_vector_multiplication;
-  wire [DATA_SIZE-1:0] data_out_vector_multiplication;
 
   // VECTOR ADDER
   // CONTROL
@@ -130,6 +112,34 @@ module dnc_allocation_weighting #(
   wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_out_vector_multiplier;
+
+  // VECTOR MULTIPLICATION
+  // CONTROL
+  wire start_vector_multiplication;
+  wire ready_vector_multiplication;
+  wire data_in_vector_enable_vector_multiplication;
+  wire data_in_scalar_enable_vector_multiplication;
+  wire data_out_vector_enable_vector_multiplication;
+  wire data_out_scalar_enable_vector_multiplication;
+
+  // DATA
+  wire [DATA_SIZE-1:0] modulo_in_vector_multiplication;
+  wire [DATA_SIZE-1:0] length_in_vector_multiplication;
+  wire [DATA_SIZE-1:0] size_in_vector_multiplication;
+  wire [DATA_SIZE-1:0] data_in_vector_multiplication;
+  wire [DATA_SIZE-1:0] data_out_vector_multiplication;
+
+  // VECTOR SORT
+  // CONTROL
+  wire start_sort_vector;
+  wire ready_sort_vector;
+  wire u_in_enable_sort_vector;
+  wire phi_out_enable_sort_vector;
+
+  // DATA
+  wire [DATA_SIZE-1:0] size_n_in_sort_vector;
+  wire [DATA_SIZE-1:0] u_in_sort_vector;
+  wire [DATA_SIZE-1:0] phi_out_sort_vector;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -176,32 +186,6 @@ module dnc_allocation_weighting #(
       endcase
     end
   end
-
-  // VECTOR MULTIPLICATION
-  ntm_vector_multiplication_function #(
-    .DATA_SIZE(DATA_SIZE)
-  )
-  vector_multiplication_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_vector_multiplication),
-    .READY(ready_vector_multiplication),
-
-    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_multiplication),
-    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_multiplication),
-    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_multiplication),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_multiplication),
-
-    // DATA
-    .MODULO_IN(modulo_in_vector_multiplication),
-    .SIZE_IN(size_in_vector_multiplication),
-    .LENGTH_IN(length_in_vector_multiplication),
-    .DATA_IN(data_in_vector_multiplication),
-    .DATA_OUT(data_out_vector_multiplication)
-  );
 
   // VECTOR ADDER
   ntm_vector_adder #(
@@ -251,6 +235,54 @@ module dnc_allocation_weighting #(
     .DATA_A_IN(data_a_in_vector_multiplier),
     .DATA_B_IN(data_b_in_vector_multiplier),
     .DATA_OUT(data_out_vector_multiplier)
+  );
+
+  // VECTOR MULTIPLICATION
+  ntm_vector_multiplication_function #(
+    .DATA_SIZE(DATA_SIZE)
+  )
+  vector_multiplication_function(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_vector_multiplication),
+    .READY(ready_vector_multiplication),
+
+    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_multiplication),
+    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_multiplication),
+    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_multiplication),
+    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_multiplication),
+
+    // DATA
+    .MODULO_IN(modulo_in_vector_multiplication),
+    .SIZE_IN(size_in_vector_multiplication),
+    .LENGTH_IN(length_in_vector_multiplication),
+    .DATA_IN(data_in_vector_multiplication),
+    .DATA_OUT(data_out_vector_multiplication)
+  );
+
+  // VECTOR SORT
+  dnc_sort_vector #(
+    .DATA_SIZE(DATA_SIZE)
+  )
+  sort_vector(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_sort_vector),
+    .READY(ready_sort_vector),
+
+    .U_IN_ENABLE(u_in_enable_sort_vector),
+    .PHI_OUT_ENABLE(phi_out_enable_sort_vector),
+
+    // DATA
+    .SIZE_N_IN(size_n_in_sort_vector),
+    .U_IN(u_in_sort_vector),
+    .PHI_OUT(phi_out_sort_vector)
   );
 
 endmodule

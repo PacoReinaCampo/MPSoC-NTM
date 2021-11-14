@@ -238,6 +238,9 @@ begin
         when ENDER_STATE =>  -- STEP 7
         
           if (unsigned(index_loop) = unsigned(SIZE_R_IN) - unsigned(ONE)) then
+            -- Control Outputs
+            READY <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= STARTER_STATE;
           else

@@ -88,12 +88,11 @@ module dnc_addressing #(
   parameter [3:0] READ_CONTENT_WEIGHTING_STATE = 7;
   parameter [3:0] READ_VECTORS_STATE = 8;
   parameter [3:0] READ_WEIGHTING_STATE = 9;
-  parameter [3:0] SORT_VECTOR_STATE = 10;
-  parameter [3:0] TEMPORAL_LINK_MATRIX_STATE = 11;
-  parameter [3:0] USAGE_VECTOR_STATE = 12;
-  parameter [3:0] WRITE_CONTENT_WEIGHTING_STATE = 13;
-  parameter [3:0] WRITE_WEIGHTING_STATE = 14;
-  parameter [3:0] ENDER_STATE = 15;
+  parameter [3:0] TEMPORAL_LINK_MATRIX_STATE = 10;
+  parameter [3:0] USAGE_VECTOR_STATE = 11;
+  parameter [3:0] WRITE_CONTENT_WEIGHTING_STATE = 12;
+  parameter [3:0] WRITE_WEIGHTING_STATE = 13;
+  parameter [3:0] ENDER_STATE = 14;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -113,13 +112,11 @@ module dnc_addressing #(
   // CONTROL
   wire start_allocation_weighting;
   wire ready_allocation_weighting;
-  wire phi_in_enable_allocation_weighting;
   wire u_in_enable_allocation_weighting;
   wire a_out_enable_allocation_weighting;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_allocation_weighting;
-  wire [DATA_SIZE-1:0] phi_in_allocation_weighting;
   wire [DATA_SIZE-1:0] u_in_allocation_weighting;
   wire [DATA_SIZE-1:0] a_out_allocation_weighting;
 
@@ -205,6 +202,7 @@ module dnc_addressing #(
   wire p_out_enable_precedence_weighting;
 
   // DATA
+  wire [DATA_SIZE-1:0] size_r_in_precedence_weighting;
   wire [DATA_SIZE-1:0] size_n_in_precedence_weighting;
   wire [DATA_SIZE-1:0] w_in_precedence_weighting;
   wire [DATA_SIZE-1:0] p_in_precedence_weighting;
@@ -269,18 +267,6 @@ module dnc_addressing #(
   wire [DATA_SIZE-1:0] c_in_read_weighting;
   wire [DATA_SIZE-1:0] f_in_read_weighting;
   wire [DATA_SIZE-1:0] w_out_read_weighting;
-
-  // SORT VECTOR
-  // CONTROL
-  wire start_sort_vector;
-  wire ready_sort_vector;
-  wire u_in_enable_sort_vector;
-  wire phi_out_enable_sort_vector;
-
-  // DATA
-  wire [DATA_SIZE-1:0] size_n_in_sort_vector;
-  wire [DATA_SIZE-1:0] u_in_sort_vector;
-  wire [DATA_SIZE-1:0] phi_out_sort_vector;
 
   // TEMPORAL LINK MATRIX
   // CONTROL
@@ -401,22 +387,19 @@ module dnc_addressing #(
         READ_WEIGHTING_STATE : begin  // STEP 9
         end
 
-        SORT_VECTOR_STATE : begin  // STEP 10
+        TEMPORAL_LINK_MATRIX_STATE : begin  // STEP 10
         end
 
-        TEMPORAL_LINK_MATRIX_STATE : begin  // STEP 11
+        USAGE_VECTOR_STATE : begin  // STEP 11
         end
 
-        USAGE_VECTOR_STATE : begin  // STEP 12
+        WRITE_CONTENT_WEIGHTING_STATE : begin  // STEP 12
         end
 
-        WRITE_CONTENT_WEIGHTING_STATE : begin  // STEP 13
+        WRITE_WEIGHTING_STATE : begin  // STEP 13
         end
 
-        WRITE_WEIGHTING_STATE : begin  // STEP 14
-        end
-
-        ENDER_STATE : begin  // STEP 15
+        ENDER_STATE : begin  // STEP 14
         end
         default : begin
           // FSM Control
@@ -439,13 +422,11 @@ module dnc_addressing #(
     .START(start_allocation_weighting),
     .READY(ready_allocation_weighting),
 
-    .PHI_IN_ENABLE(phi_in_enable_allocation_weighting),
     .U_IN_ENABLE(u_in_enable_allocation_weighting),
     .A_OUT_ENABLE(a_out_enable_allocation_weighting),
 
     // DATA
     .SIZE_N_IN(size_n_in_allocation_weighting),
-    .PHI_IN(phi_in_allocation_weighting),
     .U_IN(u_in_allocation_weighting),
     .A_OUT(a_out_allocation_weighting)
   );
@@ -581,6 +562,7 @@ module dnc_addressing #(
     .P_OUT_ENABLE(p_out_enable_precedence_weighting),
 
     // DATA
+    .SIZE_R_IN(size_r_in_precedence_weighting),
     .SIZE_N_IN(size_n_in_precedence_weighting),
     .W_IN(w_in_precedence_weighting),
     .P_IN(p_in_precedence_weighting),
@@ -675,28 +657,6 @@ module dnc_addressing #(
     .C_IN(c_in_read_weighting),
     .F_IN(f_in_read_weighting),
     .W_OUT(w_out_read_weighting)
-  );
-
-  // SORT VECTOR
-  dnc_sort_vector #(
-    .DATA_SIZE(DATA_SIZE)
-  )
-  sort_vector(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_sort_vector),
-    .READY(ready_sort_vector),
-
-    .U_IN_ENABLE(u_in_enable_sort_vector),
-    .PHI_OUT_ENABLE(phi_out_enable_sort_vector),
-
-    // DATA
-    .SIZE_N_IN(size_n_in_sort_vector),
-    .U_IN(u_in_sort_vector),
-    .PHI_OUT(phi_out_sort_vector)
   );
 
   // TEMPORAL LINK MATRIX

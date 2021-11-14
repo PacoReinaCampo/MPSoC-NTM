@@ -63,6 +63,7 @@ entity dnc_precedence_weighting is
     P_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- DATA
+    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -216,6 +217,9 @@ begin
           -- Data Outputs
           P_OUT <= data_out_vector_adder;
 
+          -- Control Outputs
+          READY <= '1';
+
         when others =>
           -- FSM Control
           controller_ctrl_fsm_int <= STARTER_STATE;
@@ -227,7 +231,7 @@ begin
   -- VECTOR SUMMATION
   modulo_in_vector_summation <= FULL;
   size_in_vector_summation   <= SIZE_N_IN;
-  -- length_in_vector_summation <= SIZE_R_IN;
+  length_in_vector_summation <= SIZE_R_IN;
   data_in_vector_summation   <= W_IN;
 
   -- VECTOR MULTIPLIER

@@ -187,6 +187,9 @@ begin
 
           -- Data Outputs
           R_OUT <= data_out_matrix_product;
+
+          -- Control Outputs
+          READY <= '1';
   
         when others =>
           -- FSM Control

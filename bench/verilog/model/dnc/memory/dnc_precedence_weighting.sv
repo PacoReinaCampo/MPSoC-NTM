@@ -54,6 +54,7 @@ module dnc_precedence_weighting #(
     output reg P_OUT_ENABLE,  // for j in 0 to N-1
 
     // DATA
+    input [DATA_SIZE-1:0] SIZE_R_IN,
     input [DATA_SIZE-1:0] SIZE_N_IN,
     input [DATA_SIZE-1:0] W_IN,
     input [DATA_SIZE-1:0] P_IN,

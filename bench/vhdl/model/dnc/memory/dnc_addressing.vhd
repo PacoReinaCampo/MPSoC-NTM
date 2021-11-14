@@ -108,12 +108,11 @@ architecture dnc_addressing_architecture of dnc_addressing is
     READ_CONTENT_WEIGHTING_STATE,  -- STEP 7
     READ_VECTORS_STATE,  -- STEP 8
     READ_WEIGHTING_STATE,  -- STEP 9
-    SORT_VECTOR_STATE,  -- STEP 10
-    TEMPORAL_LINK_MATRIX_STATE,  -- STEP 11
-    USAGE_VECTOR_STATE,  -- STEP 12
-    WRITE_CONTENT_WEIGHTING_STATE,  -- STEP 13
-    WRITE_WEIGHTING_STATE,  -- STEP 14
-    ENDER_STATE  -- STEP 15
+    TEMPORAL_LINK_MATRIX_STATE,  -- STEP 10
+    USAGE_VECTOR_STATE,  -- STEP 11
+    WRITE_CONTENT_WEIGHTING_STATE,  -- STEP 12
+    WRITE_WEIGHTING_STATE,  -- STEP 13
+    ENDER_STATE  -- STEP 14
     );
 
   -----------------------------------------------------------------------
@@ -135,16 +134,13 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal start_allocation_weighting : std_logic;
   signal ready_allocation_weighting : std_logic;
 
-  signal phi_in_enable_allocation_weighting : std_logic;
   signal u_in_enable_allocation_weighting   : std_logic;
 
   signal a_out_enable_allocation_weighting : std_logic;
 
   -- DATA
   signal size_n_in_allocation_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal phi_in_allocation_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal u_in_allocation_weighting   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal u_in_allocation_weighting      : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal a_out_allocation_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -253,6 +249,7 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal p_out_enable_precedence_weighting : std_logic;
 
   -- DATA
+  signal size_r_in_precedence_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_n_in_precedence_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_in_precedence_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -337,22 +334,6 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal f_in_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SORT VECTOR
-  -- CONTROL
-  signal start_sort_vector : std_logic;
-  signal ready_sort_vector : std_logic;
-
-  signal u_in_enable_sort_vector : std_logic;
-
-  signal phi_out_enable_sort_vector : std_logic;
-
-  -- DATA
-  signal size_n_in_sort_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal u_in_sort_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal phi_out_sort_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- TEMPORAL LINK MATRIX
   -- CONTROL
@@ -486,17 +467,15 @@ begin
         
         when READ_WEIGHTING_STATE =>  -- STEP 9
         
-        when SORT_VECTOR_STATE =>  -- STEP 10
+        when TEMPORAL_LINK_MATRIX_STATE =>  -- STEP 10
         
-        when TEMPORAL_LINK_MATRIX_STATE =>  -- STEP 11
+        when USAGE_VECTOR_STATE =>  -- STEP 11
         
-        when USAGE_VECTOR_STATE =>  -- STEP 12
+        when WRITE_CONTENT_WEIGHTING_STATE =>  -- STEP 12
         
-        when WRITE_CONTENT_WEIGHTING_STATE =>  -- STEP 13
+        when WRITE_WEIGHTING_STATE =>  -- STEP 13
         
-        when WRITE_WEIGHTING_STATE =>  -- STEP 14
-        
-        when ENDER_STATE =>  -- STEP 15
+        when ENDER_STATE =>  -- STEP 14
 
         when others =>
           -- FSM Control
@@ -519,16 +498,13 @@ begin
       START => start_allocation_weighting,
       READY => ready_allocation_weighting,
 
-      PHI_IN_ENABLE => phi_in_enable_allocation_weighting,
       U_IN_ENABLE   => u_in_enable_allocation_weighting,
 
       A_OUT_ENABLE => a_out_enable_allocation_weighting,
 
       -- DATA
       SIZE_N_IN => size_n_in_allocation_weighting,
-
-      PHI_IN => phi_in_allocation_weighting,
-      U_IN   => u_in_allocation_weighting,
+      U_IN      => u_in_allocation_weighting,
 
       A_OUT => a_out_allocation_weighting
       );
@@ -689,6 +665,7 @@ begin
       P_OUT_ENABLE => p_out_enable_precedence_weighting,
 
       -- DATA
+      SIZE_R_IN => size_n_in_precedence_weighting,
       SIZE_N_IN => size_n_in_precedence_weighting,
 
       W_IN => w_in_precedence_weighting,
@@ -803,32 +780,6 @@ begin
       F_IN => f_in_read_weighting,
 
       W_OUT => w_out_read_weighting
-      );
-
-  -- SORT VECTOR
-  sort_vector : dnc_sort_vector
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_sort_vector,
-      READY => ready_sort_vector,
-
-      U_IN_ENABLE => u_in_enable_sort_vector,
-
-      PHI_OUT_ENABLE => phi_out_enable_sort_vector,
-
-      -- DATA
-      SIZE_N_IN => size_n_in_sort_vector,
-
-      U_IN => u_in_sort_vector,
-
-      PHI_OUT => phi_out_sort_vector
       );
 
   -- TEMPORAL LINK MATRIX

@@ -78,16 +78,13 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal start_allocation_weighting : std_logic;
   signal ready_allocation_weighting : std_logic;
 
-  signal phi_in_enable_allocation_weighting : std_logic;
-  signal u_in_enable_allocation_weighting   : std_logic;
+  signal u_in_enable_allocation_weighting : std_logic;
 
   signal a_out_enable_allocation_weighting : std_logic;
 
   -- DATA
   signal size_n_in_allocation_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal phi_in_allocation_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal u_in_allocation_weighting   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal u_in_allocation_weighting      : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal a_out_allocation_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -196,6 +193,7 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal p_out_enable_precedence_weighting : std_logic;
 
   -- DATA
+  signal size_r_in_precedence_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_n_in_precedence_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_in_precedence_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -498,16 +496,13 @@ begin
       START => start_allocation_weighting,
       READY => ready_allocation_weighting,
 
-      PHI_IN_ENABLE => phi_in_enable_allocation_weighting,
-      U_IN_ENABLE   => u_in_enable_allocation_weighting,
+      U_IN_ENABLE => u_in_enable_allocation_weighting,
 
       A_OUT_ENABLE => a_out_enable_allocation_weighting,
 
       -- DATA
       SIZE_N_IN => size_n_in_allocation_weighting,
-
-      PHI_IN => phi_in_allocation_weighting,
-      U_IN   => u_in_allocation_weighting,
+      U_IN      => u_in_allocation_weighting,
 
       A_OUT => a_out_allocation_weighting
       );
@@ -668,6 +663,7 @@ begin
       P_OUT_ENABLE => p_out_enable_precedence_weighting,
 
       -- DATA
+      SIZE_R_IN => size_r_in_precedence_weighting,
       SIZE_N_IN => size_n_in_precedence_weighting,
 
       W_IN => w_in_precedence_weighting,

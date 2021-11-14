@@ -43,6 +43,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
+use work.dnc_core_pkg.all;
 
 entity dnc_allocation_weighting is
   generic (
@@ -57,16 +58,13 @@ entity dnc_allocation_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    PHI_IN_ENABLE : in std_logic;       -- for j in 0 to N-1
     U_IN_ENABLE   : in std_logic;       -- for j in 0 to N-1
 
     A_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- DATA
     SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-    PHI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    U_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+    U_IN      : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     A_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -80,9 +78,11 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
 
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
-    VECTOR_MULTIPLIER_STATE,  -- STEP 1
+    VECTOR_FIRST_SORT_STATE,  -- STEP 1
     VECTOR_ADDER_STATE,  -- STEP 2
-    VECTOR_MULTIPLICATION_STATE,  -- STEP 3
+    VECTOR_SECOND_SORT_STATE,  -- STEP 3
+    VECTOR_MULTIPLICATION_STATE,  -- STEP 4
+    VECTOR_MULTIPLIER_STATE,  -- STEP 5
     ENDER_STATE  -- STEP 4
     );
 
@@ -92,6 +92,7 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -99,24 +100,6 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
 
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
-
-  -- VECTOR MULTIPLICATION
-  -- CONTROL
-  signal start_vector_multiplication : std_logic;
-  signal ready_vector_multiplication : std_logic;
-
-  signal data_in_vector_enable_vector_multiplication : std_logic;
-  signal data_in_scalar_enable_vector_multiplication : std_logic;
-
-  signal data_out_vector_enable_vector_multiplication : std_logic;
-  signal data_out_scalar_enable_vector_multiplication : std_logic;
-
-  -- DATA
-  signal modulo_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
   -- CONTROL
@@ -154,6 +137,38 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- VECTOR MULTIPLICATION
+  -- CONTROL
+  signal start_vector_multiplication : std_logic;
+  signal ready_vector_multiplication : std_logic;
+
+  signal data_in_vector_enable_vector_multiplication : std_logic;
+  signal data_in_scalar_enable_vector_multiplication : std_logic;
+
+  signal data_out_vector_enable_vector_multiplication : std_logic;
+  signal data_out_scalar_enable_vector_multiplication : std_logic;
+
+  -- DATA
+  signal modulo_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- SORT VECTOR
+  -- CONTROL
+  signal start_sort_vector : std_logic;
+  signal ready_sort_vector : std_logic;
+
+  signal u_in_enable_sort_vector : std_logic;
+
+  signal phi_out_enable_sort_vector : std_logic;
+
+  -- DATA
+  signal size_n_in_sort_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal u_in_sort_vector      : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal phi_out_sort_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
@@ -181,16 +196,34 @@ begin
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            controller_ctrl_fsm_int <= VECTOR_FIRST_SORT_STATE;
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
+        when VECTOR_FIRST_SORT_STATE =>  -- STEP 1
+
+          -- Data Inputs
+          size_n_in_sort_vector <= SIZE_N_IN;
+          u_in_sort_vector      <= U_IN;
 
         when VECTOR_ADDER_STATE =>  -- STEP 2
 
-        when VECTOR_MULTIPLICATION_STATE =>  -- STEP 3
+        when VECTOR_SECOND_SORT_STATE =>  -- STEP 3
+
+          -- Data Inputs
+          size_n_in_sort_vector <= SIZE_N_IN;
+          u_in_sort_vector      <= U_IN;
+
+        when VECTOR_MULTIPLICATION_STATE =>  -- STEP 4
+
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 5
 
         when ENDER_STATE =>  -- STEP 4
+
+          -- Data Outputs
+          A_OUT <= data_out_vector_multiplier;
+
+          -- Control Outputs
+          READY <= '1';
 
         when others =>
           -- FSM Control
@@ -199,33 +232,24 @@ begin
     end if;
   end process;
 
+  -- DATA
+  -- VECTOR ADDER
+  modulo_in_vector_adder <= FULL;
+  size_in_vector_adder   <= SIZE_N_IN;
+  data_a_in_vector_adder <= ONE;
+  data_b_in_vector_adder <= phi_out_sort_vector;
+
   -- VECTOR MULTIPLICATION
-  vector_multiplication_function : ntm_vector_multiplication_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  modulo_in_vector_multiplication <= FULL;
+  length_in_vector_multiplication <= FULL;
+  size_in_vector_multiplication   <= SIZE_N_IN;
+  data_in_vector_multiplication   <= phi_out_sort_vector;
 
-      -- CONTROL
-      START => start_vector_multiplication,
-      READY => ready_vector_multiplication,
-
-      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_multiplication,
-      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_multiplication,
-
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_multiplication,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_multiplication,
-
-      -- DATA
-      MODULO_IN => modulo_in_vector_multiplication,
-      SIZE_IN   => size_in_vector_multiplication,
-      LENGTH_IN => length_in_vector_multiplication,
-      DATA_IN   => data_in_vector_multiplication,
-      DATA_OUT  => data_out_vector_multiplication
-      );
+  -- VECTOR MULTIPLIER
+  modulo_in_vector_multiplier <= FULL;
+  size_in_vector_multiplier   <= SIZE_N_IN;
+  data_a_in_vector_multiplier <= data_out_vector_adder;
+  data_b_in_vector_multiplier <= data_out_vector_multiplication;
 
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder
@@ -282,5 +306,59 @@ begin
       DATA_B_IN => data_b_in_vector_multiplier,
       DATA_OUT  => data_out_vector_multiplier
       );
+
+  -- VECTOR MULTIPLICATION
+  vector_multiplication_function : ntm_vector_multiplication_function
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_multiplication,
+      READY => ready_vector_multiplication,
+
+      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_multiplication,
+      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_multiplication,
+
+      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_multiplication,
+      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_multiplication,
+
+      -- DATA
+      MODULO_IN => modulo_in_vector_multiplication,
+      SIZE_IN   => size_in_vector_multiplication,
+      LENGTH_IN => length_in_vector_multiplication,
+      DATA_IN   => data_in_vector_multiplication,
+      DATA_OUT  => data_out_vector_multiplication
+      );
+
+  -- VECTOR SORT
+  sort_vector : dnc_sort_vector
+  generic map (
+    DATA_SIZE => DATA_SIZE
+    )
+  port map (
+    -- GLOBAL
+    CLK => CLK,
+    RST => RST,
+
+    -- CONTROL
+    START => start_sort_vector,
+    READY => ready_sort_vector,
+
+    U_IN_ENABLE => u_in_enable_sort_vector,
+
+    PHI_OUT_ENABLE => phi_out_enable_sort_vector,
+
+    -- DATA
+    SIZE_N_IN => size_n_in_sort_vector,
+
+    U_IN => u_in_sort_vector,
+
+    PHI_OUT => phi_out_sort_vector
+    );
 
 end architecture;
