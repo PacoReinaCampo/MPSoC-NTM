@@ -122,6 +122,9 @@ architecture ntm_controller_architecture of ntm_controller is
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
+  -- Internal Signals
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- ACTIVATION GATE VECTOR
   -- CONTROL
   signal start_activation_gate_vector : std_logic;
@@ -482,12 +485,18 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      -- Control Internal
+      index_loop <= ZERO;
+
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
+
+          -- Control Internal
+          index_loop <= ZERO;
 
           if (START = '1') then
             -- FSM Control

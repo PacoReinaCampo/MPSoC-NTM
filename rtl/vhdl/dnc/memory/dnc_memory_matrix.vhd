@@ -311,32 +311,27 @@ begin
         when ENDER_STATE =>  -- STEP 8
 
           if (data_out_i_enable_matrix_product = '1') then
-            if (unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then
               -- Control Outputs
-              READY <= '1';
+              M_OUT_J_ENABLE <= '1';
 
-              -- FSM Control
-              controller_ctrl_fsm_int <= STARTER_STATE;
-            else
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+              index_j_loop <= ZERO;
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_STATE;
             end if;
-
-            -- Control Outputs
-            M_OUT_J_ENABLE <= '1';
           end if;
 
           if (data_out_j_enable_matrix_product = '1') then
-            if (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE)) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            else
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE))) then
               -- Control Internal
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
 

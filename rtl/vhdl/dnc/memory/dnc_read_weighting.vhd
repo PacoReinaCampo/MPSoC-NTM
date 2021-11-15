@@ -247,32 +247,27 @@ begin
         when ENDER_STATE =>  -- STEP 7
 
           if (data_out_enable_vector_multiplier = '1') then
-            if (unsigned(index_i_loop) = unsigned(SIZE_R_IN) - unsigned(ONE)) then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_R_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE))) then
               -- Control Outputs
-              READY <= '1';
+              W_OUT_I_ENABLE <= '1';
 
-              -- FSM Control
-              controller_ctrl_fsm_int <= STARTER_STATE;
-            else
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+              index_j_loop <= ZERO;
 
               -- FSM Control
               controller_ctrl_fsm_int <= VECTOR_FIRST_MULTIPLIER_STATE;
             end if;
-
-            -- Control Outputs
-            W_OUT_I_ENABLE <= '1';
           end if;
 
           if (data_out_enable_vector_multiplier = '1') then
-            if (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_R_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            else
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_R_IN) - unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(SIZE_N_IN) - unsigned(ONE))) then
               -- Control Internal
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
 
