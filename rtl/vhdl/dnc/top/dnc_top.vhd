@@ -250,11 +250,11 @@ architecture dnc_top_architecture of dnc_top is
 
   -- FREE GATES
   -- CONTROL
-  signal f_in_enable_free_gates  : std_logic;
-  signal f_out_enable_free_gates : std_logic;
-
   signal start_free_gates : std_logic;
   signal ready_free_gates : std_logic;
+
+  signal f_in_enable_free_gates  : std_logic;
+  signal f_out_enable_free_gates : std_logic;
 
   -- DATA
   signal size_r_in_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -264,14 +264,14 @@ architecture dnc_top_architecture of dnc_top is
 
   -- READ KEYS
   -- CONTROL
+  signal start_read_keys : std_logic;
+  signal ready_read_keys : std_logic;
+
   signal k_in_i_enable_read_keys : std_logic;
   signal k_in_k_enable_read_keys : std_logic;
 
   signal k_out_i_enable_read_keys : std_logic;
   signal k_out_k_enable_read_keys : std_logic;
-
-  signal start_read_keys : std_logic;
-  signal ready_read_keys : std_logic;
 
   -- DATA
   signal size_r_in_read_keys : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -299,11 +299,11 @@ architecture dnc_top_architecture of dnc_top is
 
   -- READ STRENGTHS
   -- CONTROL
-  signal beta_in_enable_read_strengths  : std_logic;
-  signal beta_out_enable_read_strengths : std_logic;
-
   signal start_read_strengths : std_logic;
   signal ready_read_strengths : std_logic;
+
+  signal beta_in_enable_read_strengths  : std_logic;
+  signal beta_out_enable_read_strengths : std_logic;
 
   -- DATA
   signal size_r_in_read_strengths : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -569,9 +569,72 @@ begin
 
             when CONTROLLER_BODY_STATE =>  -- STEP 1
 
+              -- Control Inputs
+              w_in_l_enable_controller <= '0';
+              w_in_x_enable_controller <= '0';
+
+              k_in_i_enable_controller <= '0';
+              k_in_l_enable_controller <= '0';
+              k_in_k_enable_controller <= '0';
+
+              b_in_enable_controller <= '0';
+
+              x_in_enable_controller <= '0';
+
+              r_in_i_enable_controller <= '0';
+              r_in_k_enable_controller <= '0';
+
+              -- Data Inputs
+              size_x_in_controller <= FULL;
+              size_w_in_controller <= FULL;
+              size_l_in_controller <= FULL;
+              size_r_in_controller <= FULL;
+
+              w_in_controller <= FULL;
+              k_in_controller <= FULL;
+              b_in_controller <= FULL;
+
+              x_in_controller <= FULL;
+              r_in_controller <= FULL;
+
             when CONTROLLER_OUTPUT_VECTOR_STATE =>  -- STEP 2
 
+              -- Control Inputs
+              u_in_j_enable_controller_output_vector <= '0';
+              u_in_l_enable_controller_output_vector <= '0';
+
+              h_in_enable_controller_output_vector <= '0';
+
+              -- Data Inputs
+              size_y_in_controller_output_vector <= FULL;
+              size_l_in_controller_output_vector <= FULL;
+
+              u_in_controller_output_vector <= FULL;
+              h_in_controller_output_vector <= FULL;
+
             when OUTPUT_VECTOR_STATE =>  -- STEP 3
+
+              -- Control Inputs
+              k_in_i_enable_output_vector <= '0';
+              k_in_y_enable_output_vector <= '0';
+              k_in_k_enable_output_vector <= '0';
+
+              r_in_i_enable_output_vector <= '0';
+              r_in_k_enable_output_vector <= '0';
+
+              nu_in_enable_output_vector <= '0';
+
+              y_in_enable_output_vector <= '0';
+
+              -- Data Inputs
+              size_y_in_output_vector <= FULL;
+              size_w_in_output_vector <= FULL;
+              size_r_in_output_vector <= FULL;
+
+              k_in_output_vector <= FULL;
+              r_in_output_vector <= FULL;
+
+              nu_in_output_vector <= FULL;
 
             when ENDER_CONTROLLER_STATE =>  -- STEP 4
 
@@ -587,13 +650,81 @@ begin
 
             when FREE_GATES_STATE =>  -- STEP 1
 
+              -- Control Inputs
+              f_in_enable_free_gates <= '0';
+
+              -- Data Inputs
+              size_r_in_free_gates <= FULL;
+
+              f_in_free_gates <= FULL;
+
             when READ_KEYS_STATE =>  -- STEP 2
+
+              -- Control Inputs
+              k_in_i_enable_read_keys <= '0';
+              k_in_k_enable_read_keys <= '0';
+
+              -- Data Inputs
+              size_r_in_read_keys <= FULL;
+              size_w_in_read_keys <= FULL;
+
+              k_in_read_keys <= FULL;
 
             when READ_MODES_STATE =>  -- STEP 3
 
+              -- Control Inputs
+              pi_in_i_enable_read_modes <= '0';
+              pi_in_p_enable_read_modes <= '0';
+
+              -- Data Inputs
+              size_r_in_read_modes <= FULL;
+
+              pi_in_read_modes  <= FULL;
+
             when READ_STRENGTHS_STATE =>  -- STEP 4
 
+              -- Control Inputs
+              beta_in_enable_read_strengths <= '0';
+
+              -- Data Inputs
+              size_r_in_read_strengths <= FULL;
+
+              beta_in_read_strengths <= FULL;
+
             when READ_INTERFACE_VECTOR_STATE =>  -- STEP 5
+
+              -- Control Inputs
+              -- Read Key
+              wk_in_i_enable_read_interface_vector <= '0';
+              wk_in_l_enable_read_interface_vector <= '0';
+              wk_in_k_enable_read_interface_vector <= '0';
+
+              -- Read Strength
+              wbeta_in_i_enable_read_interface_vector <= '0';
+              wbeta_in_l_enable_read_interface_vector <= '0';
+
+              -- Free Gate
+              wf_in_i_enable_read_interface_vector <= '0';
+              wf_in_l_enable_read_interface_vector <= '0';
+
+              -- Read Mode
+              wpi_in_i_enable_read_interface_vector <= '0';
+              wpi_in_l_enable_read_interface_vector <= '0';
+
+              -- Hidden State
+              h_in_enable_read_interface_vector <= '0';
+
+              -- Data Inputs
+              size_w_in_read_interface_vector <= FULL;
+              size_l_in_read_interface_vector <= FULL;
+              size_r_in_read_interface_vector <= FULL;
+
+              wk_in_read_interface_vector    <= FULL;
+              wbeta_in_read_interface_vector <= FULL;
+              wf_in_read_interface_vector    <= FULL;
+              wpi_in_read_interface_vector   <= FULL;
+
+              h_in_read_interface_vector <= FULL;
 
             when ENDER_READ_HEADS_STATE =>  -- STEP 6
 
@@ -609,17 +740,89 @@ begin
 
             when ALLOCATION_GATE_STATE =>  -- STEP 1
 
+              -- Data Inputs
+              ga_in_allocation_gate  <= FULL;
+
             when ERASE_VECTOR_STATE =>  -- STEP 2
+
+              -- Control Inputs
+              e_in_enable_erase_vector <= '0';
+
+              -- Data Inputs
+              size_w_in_erase_vector <= FULL;
+
+              e_in_erase_vector  <= FULL;
 
             when WRITE_GATE_STATE =>  -- STEP 3
 
+              -- Data Inputs
+              gw_in_write_gate  <= FULL;
+
             when WRITE_KEY_STATE =>  -- STEP 4
+
+              -- Control Inputs
+              k_in_enable_write_key <= '0';
+
+              -- Data Inputs
+              size_w_in_write_key <= FULL;
+
+              k_in_write_key  <= FULL;
 
             when WRITE_STRENGTH_STATE =>  -- STEP 5
 
+              -- Data Inputs
+              beta_in_write_strength  <= FULL;
+
             when WRITE_VECTOR_STATE =>  -- STEP 6
 
+              -- Control Inputs
+              v_in_enable_write_vector <= '0';
+
+              -- Data Inputs
+              size_w_in_write_vector <= FULL;
+
+              v_in_write_vector  <= FULL;
+
             when WRITE_INTERFACE_VECTOR_STATE =>  -- STEP 7
+
+              -- Control Inputs
+              -- Write Key
+              wk_in_l_enable_write_interface_vector <= '0';
+              wk_in_k_enable_write_interface_vector <= '0';
+
+              -- Write Strength
+              wbeta_in_enable_write_interface_vector <= '0';
+
+              -- Erase Vector
+              we_in_l_enable_write_interface_vector <= '0';
+              we_in_k_enable_write_interface_vector <= '0';
+
+              -- Write Vector
+              wv_in_l_enable_write_interface_vector <= '0';
+              wv_in_k_enable_write_interface_vector <= '0';
+
+              -- Allocation Gate
+              wga_in_enable_write_interface_vector <= '0';
+
+              -- Write Gate
+              wgw_in_enable_write_interface_vector <= '0';
+
+              -- Hidden State
+              h_in_enable_write_interface_vector <= '0';
+
+              -- Data Inputs
+              size_w_in_write_interface_vector <= FULL;
+              size_l_in_write_interface_vector <= FULL;
+              size_r_in_write_interface_vector <= FULL;
+
+              wk_in_write_interface_vector    <= FULL;
+              wbeta_in_write_interface_vector <= FULL;
+              we_in_write_interface_vector    <= FULL;
+              wv_in_write_interface_vector    <= FULL;
+              wga_in_write_interface_vector   <= FULL;
+              wgw_in_write_interface_vector   <= FULL;
+
+              h_in_write_interface_vector <= FULL;
 
             when ENDER_WRITE_HEADS_STATE =>  -- STEP 8
 
@@ -629,6 +832,36 @@ begin
           end case;
 
         when MEMORY_STATE =>  -- STEP 4
+
+          -- Control Inputs
+          k_read_in_i_enable_addressing <= '0';
+          k_read_in_k_enable_addressing <= '0';
+
+          beta_read_in_enable_addressing <= '0';
+
+          f_read_in_enable_addressing <= '0';
+
+          pi_read_in_enable_addressing <= '0';
+
+          k_write_in_k_enable_addressing <= '0';
+          e_write_in_k_enable_addressing <= '0';
+          v_write_in_k_enable_addressing <= '0';
+
+          -- Data Inputs
+          size_r_in_addressing <= FULL;
+          size_w_in_addressing <= FULL;
+
+          k_read_in_addressing    <= FULL;
+          beta_read_in_addressing <= FULL;
+          f_read_in_addressing    <= FULL;
+          pi_read_in_addressing   <= FULL;
+
+          k_write_in_addressing    <= FULL;
+          beta_write_in_addressing <= FULL;
+          e_write_in_addressing    <= FULL;
+          v_write_in_addressing    <= FULL;
+          ga_write_in_addressing   <= FULL;
+          gw_write_in_addressing   <= FULL;
 
         when ENDER_STATE =>  -- STEP 5
         

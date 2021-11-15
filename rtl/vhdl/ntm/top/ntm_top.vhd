@@ -215,7 +215,7 @@ architecture ntm_top_architecture of ntm_top is
 
   signal nu_in_enable_output_vector : std_logic;
 
-  signal y_in_enable_output_vector : std_logic;
+  signal y_out_enable_output_vector : std_logic;
 
   -- DATA
   signal size_y_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -407,11 +407,118 @@ begin
 
             when CONTROLLER_BODY_STATE =>  -- STEP 1
 
+              -- Control Inputs
+              w_in_l_enable_controller <= '0';
+              w_in_x_enable_controller <= '0';
+
+              k_in_i_enable_controller <= '0';
+              k_in_l_enable_controller <= '0';
+              k_in_k_enable_controller <= '0';
+
+              b_in_enable_controller <= '0';
+
+              x_in_enable_controller <= '0';
+
+              r_in_i_enable_controller <= '0';
+              r_in_k_enable_controller <= '0';
+
+              -- Data Inputs
+              size_x_in_controller <= FULL;
+              size_w_in_controller <= FULL;
+              size_l_in_controller <= FULL;
+              size_r_in_controller <= FULL;
+
+              w_in_controller <= FULL;
+              k_in_controller <= FULL;
+              b_in_controller <= FULL;
+
+              x_in_controller <= FULL;
+              r_in_controller <= FULL;
+
             when CONTROLLER_OUTPUT_VECTOR_STATE =>  -- STEP 2
+
+              -- Control Inputs
+              start_controller_output_vector <= '0';
+              ready_controller_output_vector <= '0';
+
+              u_in_j_enable_controller_output_vector <= '0';
+              u_in_l_enable_controller_output_vector <= '0';
+
+              h_in_enable_controller_output_vector <= '0';
+
+              nu_out_enable_controller_output_vector <= '0';
+
+              -- Data Inputs
+              size_y_in_controller_output_vector <= FULL;
+              size_l_in_controller_output_vector <= FULL;
+
+              u_in_controller_output_vector <= FULL;
+              h_in_controller_output_vector <= FULL;
+
+              nu_out_controller_output_vector <= FULL;
 
             when OUTPUT_VECTOR_STATE =>  -- STEP 3
 
+              -- Control Inputs
+              k_in_i_enable_output_vector <= '0';
+              k_in_y_enable_output_vector <= '0';
+              k_in_k_enable_output_vector <= '0';
+
+              r_in_i_enable_output_vector <= '0';
+              r_in_k_enable_output_vector <= '0';
+
+              nu_in_enable_output_vector <= '0';
+
+              -- Data Inputs
+              size_y_in_output_vector <= FULL;
+              size_w_in_output_vector <= FULL;
+              size_l_in_output_vector <= FULL;
+              size_r_in_output_vector <= FULL;
+
+              k_in_output_vector <= FULL;
+              r_in_output_vector <= FULL;
+
+              nu_in_output_vector <= FULL;
+
             when INTERFACE_VECTOR_STATE =>  -- STEP 4
+
+              -- Control Inputs
+              -- Key Vector
+              wk_in_l_enable_interface_vector <= '0';
+              wk_in_k_enable_interface_vector <= '0';
+
+              k_out_enable_interface_vector <= '0';
+
+              -- Key Strength
+              wbeta_enable_interface_vector <= '0';
+
+              -- Interpolation Gate
+              wg_in_enable_interface_vector <= '0';
+
+              -- Shift Weighting
+              ws_in_l_enable_interface_vector <= '0';
+              ws_in_j_enable_interface_vector <= '0';
+
+              s_out_enable_interface_vector <= '0';
+
+              -- Sharpening
+              wgamma_in_enable_interface_vector <= '0';
+
+              -- Hidden State
+              h_in_enable_interface_vector <= '0';
+
+              -- Data Inputs
+              size_n_in_interface_vector <= FULL;
+              size_w_in_interface_vector <= FULL;
+              size_l_in_interface_vector <= FULL;
+
+              wk_in_interface_vector     <= FULL;
+              wbeta_in_interface_vector  <= FULL;
+              wg_in_interface_vector     <= FULL;
+              ws_in_interface_vector     <= FULL;
+              wgamma_in_interface_vector <= FULL;
+
+              h_in_interface_vector <= FULL;
 
             when ENDER_CONTROLLER_STATE =>  -- STEP 5
 
@@ -429,7 +536,31 @@ begin
 
             when WRITING_STATE =>  -- STEP 1
 
+              -- Control Inputs
+              m_in_enable_writing <= '0';
+              a_in_enable_writing <= '0';
+
+              -- Data Inputs
+              size_n_in_writing <= FULL;
+              size_w_in_writing <= FULL;
+
+              m_in_writing <= FULL;
+              a_in_writing <= FULL;
+              w_in_writing <= FULL;
+
             when ERASING_STATE =>  -- STEP 2
+
+              -- Control Inputs
+              m_in_enable_erasing <= '0';
+              e_in_enable_erasing <= '0';
+
+              -- Data Inputs
+              size_n_in_erasing <= FULL;
+              size_w_in_erasing <= FULL;
+
+              m_in_erasing <= FULL;
+              e_in_erasing <= FULL;
+              w_in_erasing <= FULL;
 
             when ENDER_WRITE_HEADS_STATE =>  -- STEP 3
 
@@ -439,6 +570,30 @@ begin
           end case;
 
         when MEMORY_STATE =>  -- STEP 4
+
+          -- Control Inputs
+          k_in_enable_addressing <= '0';
+          s_in_enable_addressing <= '0';
+
+
+          m_in_j_enable_addressing <= '0';
+          m_in_k_enable_addressing <= '0';
+
+          w_in_enable_addressing <= '0';
+
+          -- Data Inputs
+          size_n_in_addressing <= FULL;
+          size_w_in_addressing <= FULL;
+
+          k_in_addressing     <= FULL;
+          beta_in_addressing  <= FULL;
+          g_in_addressing     <= FULL;
+          s_in_addressing     <= FULL;
+          gamma_in_addressing <= FULL;
+
+          m_in_addressing <= FULL;
+
+          w_in_addressing <= FULL;
 
         when ENDER_STATE =>  -- STEP 5
         
@@ -559,7 +714,7 @@ begin
 
       NU_IN_ENABLE => nu_in_enable_output_vector,
 
-      Y_OUT_ENABLE => y_in_enable_output_vector,
+      Y_OUT_ENABLE => y_out_enable_output_vector,
 
       -- DATA
       SIZE_Y_IN => size_y_in_output_vector,

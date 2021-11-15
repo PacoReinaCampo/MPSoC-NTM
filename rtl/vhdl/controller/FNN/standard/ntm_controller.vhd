@@ -349,6 +349,17 @@ begin
           data_a_in_enable_vector_adder <= '0';
           data_b_in_enable_vector_adder <= '0';
 
+          if (data_out_enable_vector_adder = '1') then
+            -- Control Internal
+            start_vector_logistic <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_LOGISTIC_STATE;
+          else
+            -- Control Internal
+            start_vector_logistic <= '0';
+          end if;
+
         when VECTOR_LOGISTIC_STATE =>  -- STEP 5
 
           -- Data Inputs
@@ -483,7 +494,7 @@ begin
       );
 
   -- TRAINER
-  ntm : ntm_trainer
+  trainer : ntm_trainer
     generic map (
       DATA_SIZE => DATA_SIZE
       )
