@@ -377,7 +377,7 @@ begin
 
         when ENDER_STATE =>  -- STEP 6
 
-          if (data_out_vector_logistic = '1') then
+          if (ready_vector_logistic = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_L_IN) - unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';

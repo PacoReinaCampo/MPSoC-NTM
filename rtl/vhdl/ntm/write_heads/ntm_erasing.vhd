@@ -59,7 +59,8 @@ entity ntm_erasing is
 
     M_IN_ENABLE  : in std_logic;
     E_IN_ENABLE  : in std_logic;
-    M_OUT_ENABLE : in std_logic;
+
+    M_OUT_ENABLE : out std_logic;
 
     -- DATA
     SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -101,6 +102,9 @@ architecture ntm_erasing_architecture of ntm_erasing is
 
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+
+  -- Internal Signals
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
   -- CONTROL
@@ -179,12 +183,18 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      -- Control Internal
+      index_loop <= ZERO;
+
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
+
+          -- Control Internal
+          index_loop <= ZERO;
 
           if (START = '1') then
             -- FSM Control
@@ -193,14 +203,60 @@ begin
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
 
+          if (data_out_enable_vector_multiplier = '1') then
+            -- Control Internal
+            start_vector_adder <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_adder <= '0';
+          end if;
+
         when VECTOR_ADDER_STATE =>  -- STEP 2
+
+          if (data_out_enable_vector_adder = '1') then
+            -- Control Internal
+            start_matrix_product <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+          else
+            -- Control Internal
+            start_matrix_product <= '0';
+          end if;
 
         when MATRIX_PRODUCT_STATE =>  -- STEP 3
 
+          if (data_out_i_enable_matrix_product = '1') then
+            -- FSM Control
+            controller_ctrl_fsm_int <= ENDER_STATE;
+          end if;
+
         when ENDER_STATE =>  -- STEP 4
 
-          -- Data Outputs
-          M_OUT <= data_out_matrix_product;
+          if (ready_matrix_product = '1') then
+            if (unsigned(index_loop) = unsigned(SIZE_W_IN) - unsigned(ONE)) then
+              -- Control Outputs
+              READY <= '1';
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE));
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            end if;
+
+            -- Data Outputs
+            M_OUT <= data_out_matrix_product;
+
+            -- Control Outputs
+            M_OUT_ENABLE <= '1';
+          end if;
 
         when others =>
           -- FSM Control
@@ -208,6 +264,22 @@ begin
       end case;
     end if;
   end process;
+
+  -- VECTOR MULTIPLIER
+  data_a_in_enable_vector_multiplier <= '0';
+  data_b_in_enable_vector_multiplier <= '0';
+
+  -- VECTOR ADDER
+  operation_vector_adder <= '0';
+
+  data_a_in_enable_vector_adder <= '0';
+  data_b_in_enable_vector_adder <= '0';
+
+  -- MATRIX PRODUCT
+  data_a_in_i_enable_matrix_product <= '0';
+  data_a_in_j_enable_matrix_product <= '0';
+  data_b_in_i_enable_matrix_product <= '0';
+  data_b_in_j_enable_matrix_product <= '0';
 
   -- DATA
   -- VECTOR MULTIPLIER
@@ -230,7 +302,6 @@ begin
   size_b_j_in_matrix_product <= ONE;
   data_a_in_matrix_product   <= M_IN;
   data_b_in_matrix_product   <= data_out_vector_multiplier;
-
 
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder

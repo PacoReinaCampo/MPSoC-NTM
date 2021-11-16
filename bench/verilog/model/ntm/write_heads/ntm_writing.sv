@@ -51,7 +51,7 @@ module ntm_writing #(
 
     input M_IN_ENABLE,
     input A_IN_ENABLE,
-    input M_OUT_ENABLE,
+    output reg M_OUT_ENABLE,
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_N_IN,

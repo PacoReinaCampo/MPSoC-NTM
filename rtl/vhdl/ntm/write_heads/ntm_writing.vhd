@@ -57,9 +57,10 @@ entity ntm_writing is
     START : in  std_logic;
     READY : out std_logic;
 
-    M_IN_ENABLE  : in std_logic;
-    A_IN_ENABLE  : in std_logic;
-    M_OUT_ENABLE : in std_logic;
+    M_IN_ENABLE : in std_logic;
+    A_IN_ENABLE : in std_logic;
+
+    M_OUT_ENABLE : out std_logic;
 
     -- DATA
     SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -100,6 +101,9 @@ architecture ntm_writing_architecture of ntm_writing is
 
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+
+  -- Internal Signals
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
   -- CONTROL
@@ -155,12 +159,18 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      -- Control Internal
+      index_loop <= ZERO;
+
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
+
+          -- Control Internal
+          index_loop <= ZERO;
 
           if (START = '1') then
             -- FSM Control
@@ -169,12 +179,47 @@ begin
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
 
+          if (data_out_enable_vector_multiplier = '1') then
+            -- Control Internal
+            start_vector_multiplier <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_multiplier <= '0';
+          end if;
+
         when VECTOR_ADDER_STATE =>  -- STEP 2
+
+          if (data_out_enable_vector_adder = '1') then
+            -- FSM Control
+            controller_ctrl_fsm_int <= ENDER_STATE;
+          end if;
 
         when ENDER_STATE =>  -- STEP 3
 
-          -- Data Outputs
-          M_OUT <= data_out_vector_adder;
+          if (ready_vector_adder = '1') then
+            if (unsigned(index_loop) = unsigned(SIZE_W_IN) - unsigned(ONE)) then
+              -- Control Outputs
+              READY <= '1';
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE));
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            end if;
+
+            -- Data Outputs
+            M_OUT <= data_out_vector_adder;
+
+            -- Control Outputs
+            M_OUT_ENABLE <= '1';
+          end if;
 
         when others =>
           -- FSM Control

@@ -102,7 +102,8 @@ package ntm_core_pkg is
 
       M_IN_ENABLE  : in std_logic;
       A_IN_ENABLE  : in std_logic;
-      M_OUT_ENABLE : in std_logic;
+
+      M_OUT_ENABLE : out std_logic;
 
       -- DATA
       SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -131,7 +132,8 @@ package ntm_core_pkg is
 
       M_IN_ENABLE  : in std_logic;
       E_IN_ENABLE  : in std_logic;
-      M_OUT_ENABLE : in std_logic;
+
+      M_OUT_ENABLE : out std_logic;
 
       -- DATA
       SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

@@ -291,11 +291,53 @@ begin
 
             when VECTOR_ADDER_DF_STATE =>  -- STEP 1
 
+              -- Control Inputs
+              operation_vector_adder <= '0';
+
+              data_a_in_enable_vector_adder <= '0';
+              data_b_in_enable_vector_adder <= '0';
+
+              -- Data Inputs
+              modulo_in_vector_adder <= FULL;
+              size_in_vector_adder   <= FULL;
+              data_a_in_vector_adder <= FULL;
+              data_b_in_vector_adder <= FULL;
+
             when VECTOR_FIRST_MULTIPLIER_DF_STATE =>  -- STEP 2
+
+              -- Control Inputs
+              data_a_in_enable_vector_multiplier <= '0';
+              data_b_in_enable_vector_multiplier <= '0';
+
+              -- Data Inputs
+              modulo_in_vector_multiplier <= FULL;
+              size_in_vector_multiplier   <= FULL;
+              data_a_in_vector_multiplier <= FULL;
+              data_b_in_vector_multiplier <= FULL;
 
             when VECTOR_SECOND_MULTIPLIER_DF_STATE =>  -- STEP 3
 
+              -- Control Inputs
+              data_a_in_enable_vector_multiplier <= '0';
+              data_b_in_enable_vector_multiplier <= '0';
+
+              -- Data Inputs
+              modulo_in_vector_multiplier <= FULL;
+              size_in_vector_multiplier   <= FULL;
+              data_a_in_vector_multiplier <= FULL;
+              data_b_in_vector_multiplier <= FULL;
+
             when VECTOR_THIRD_MULTIPLIER_DF_STATE =>  -- STEP 4
+
+              -- Control Inputs
+              data_a_in_enable_vector_multiplier <= '0';
+              data_b_in_enable_vector_multiplier <= '0';
+
+              -- Data Inputs
+              modulo_in_vector_multiplier <= FULL;
+              size_in_vector_multiplier   <= FULL;
+              data_a_in_vector_multiplier <= FULL;
+              data_b_in_vector_multiplier <= FULL;
 
             when ENDER_DF_STATE =>  -- STEP 5
 
@@ -311,9 +353,42 @@ begin
 
             when VECTOR_DIFFERENTIATION_DW_STATE =>  -- STEP 1
 
+              -- Control Inputs
+              data_in_enable_vector_differentiation <= '0';
+
+              -- Data Inputs
+              modulo_in_vector_differentiation <= FULL;
+              size_in_vector_differentiation   <= FULL;
+              data_in_vector_differentiation   <= FULL;
+
             when MATRIX_PRODUCT_DW_STATE =>  -- STEP 2
 
+              -- Control Inputs
+              data_a_in_i_enable_matrix_product <= '0';
+              data_a_in_j_enable_matrix_product <= '0';
+              data_b_in_i_enable_matrix_product <= '0';
+              data_b_in_j_enable_matrix_product <= '0';
+
+              -- Data Inputs
+              modulo_in_matrix_product   <= FULL;
+              size_a_i_in_matrix_product <= FULL;
+              size_a_j_in_matrix_product <= FULL;
+              size_b_i_in_matrix_product <= FULL;
+              size_b_j_in_matrix_product <= FULL;
+              data_a_in_matrix_product   <= FULL;
+              data_b_in_matrix_product   <= FULL;
+
             when VECTOR_SUMMATION_DW_STATE =>  -- STEP 3
+
+              -- Control Inputs
+              data_in_vector_enable_vector_summation <= '0';
+              data_in_scalar_enable_vector_summation <= '0';
+
+              -- Data Inputs
+              modulo_in_vector_summation <= FULL;
+              size_in_vector_summation   <= FULL;
+              length_in_vector_summation <= FULL;
+              data_in_vector_summation   <= FULL;
 
             when ENDER_DW_STATE =>  -- STEP 4
 
@@ -329,9 +404,42 @@ begin
 
             when VECTOR_DIFFERENTIATION_DK_STATE =>  -- STEP 1
 
+              -- Control Inputs
+              data_in_enable_vector_differentiation <= '0';
+
+              -- Data Inputs
+              modulo_in_vector_differentiation <= FULL;
+              size_in_vector_differentiation   <= FULL;
+              data_in_vector_differentiation   <= FULL;
+
             when MATRIX_PRODUCT_DK_STATE =>  -- STEP 2
 
+              -- Control Inputs
+              data_a_in_i_enable_matrix_product <= '0';
+              data_a_in_j_enable_matrix_product <= '0';
+              data_b_in_i_enable_matrix_product <= '0';
+              data_b_in_j_enable_matrix_product <= '0';
+
+              -- Data Inputs
+              modulo_in_matrix_product   <= FULL;
+              size_a_i_in_matrix_product <= FULL;
+              size_a_j_in_matrix_product <= FULL;
+              size_b_i_in_matrix_product <= FULL;
+              size_b_j_in_matrix_product <= FULL;
+              data_a_in_matrix_product   <= FULL;
+              data_b_in_matrix_product   <= FULL;
+
             when VECTOR_SUMMATION_DK_STATE =>  -- STEP 3
+
+              -- Control Inputs
+              data_in_vector_enable_vector_summation <= '0';
+              data_in_scalar_enable_vector_summation <= '0';
+
+              -- Data Inputs
+              modulo_in_vector_summation <= FULL;
+              size_in_vector_summation   <= FULL;
+              length_in_vector_summation <= FULL;
+              data_in_vector_summation   <= FULL;
 
             when ENDER_DK_STATE =>  -- STEP 4
 
@@ -347,7 +455,25 @@ begin
 
             when VECTOR_DIFFERENTIATION_DB_STATE =>  -- STEP 1
 
+              -- Control Inputs
+              data_in_enable_vector_differentiation <= '0';
+
+              -- Data Inputs
+              modulo_in_vector_differentiation <= FULL;
+              size_in_vector_differentiation   <= FULL;
+              data_in_vector_differentiation   <= FULL;
+
             when VECTOR_SUMMATION_DB_STATE =>  -- STEP 2
+
+              -- Control Inputs
+              data_in_vector_enable_vector_summation <= '0';
+              data_in_scalar_enable_vector_summation <= '0';
+
+              -- Data Inputs
+              modulo_in_vector_summation <= FULL;
+              size_in_vector_summation   <= FULL;
+              length_in_vector_summation <= FULL;
+              data_in_vector_summation   <= FULL;
 
             when ENDER_DB_STATE =>  -- STEP 3
 

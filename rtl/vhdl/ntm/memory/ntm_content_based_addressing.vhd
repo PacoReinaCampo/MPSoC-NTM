@@ -105,6 +105,9 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
+  -- Internal Signals
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- VECTOR MULTIPLIER
   -- CONTROL
   signal start_vector_multiplier : std_logic;
@@ -193,6 +196,9 @@ begin
       -- Data Outputs
       C_OUT <= ZERO;
 
+      -- Control Internal
+      index_loop <= ZERO;
+
       -- Control Outputs
       READY <= '0';
 
@@ -203,6 +209,9 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          -- Control Internal
+          index_loop <= ZERO;
+
           if (START = '1') then
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_COSINE_SIMILARITY_STATE;
@@ -210,14 +219,60 @@ begin
 
         when VECTOR_COSINE_SIMILARITY_STATE =>  -- STEP 1
 
+          if (data_out_vector_enable_vector_cosine = '1') then
+            -- Control Internal
+            start_vector_exponentiator <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_EXPONENTIATOR_STATE;
+          else
+            -- Control Internal
+            start_vector_exponentiator <= '0';
+          end if;
+
         when VECTOR_EXPONENTIATOR_STATE =>  -- STEP 2
+
+          if (data_out_enable_vector_exponentiator = '1') then
+            -- Control Internal
+            start_vector_softmax <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_SOFTMAX_STATE;
+          else
+            -- Control Internal
+            start_vector_softmax <= '0';
+          end if;
 
         when VECTOR_SOFTMAX_STATE =>  -- STEP 3
 
+          if (data_out_vector_enable_vector_softmax = '1') then
+            -- FSM Control
+            controller_ctrl_fsm_int <= ENDER_STATE;
+          end if;
+
         when ENDER_STATE =>  -- STEP 4
 
-          -- Data Outputs
-          C_OUT <= data_out_vector_softmax;
+          if (ready_vector_softmax = '1') then
+            if (unsigned(index_loop) = unsigned(SIZE_I_IN) - unsigned(ONE)) then
+              -- Control Outputs
+              READY <= '1';
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE));
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= VECTOR_COSINE_SIMILARITY_STATE;
+            end if;
+
+            -- Data Outputs
+            C_OUT <= data_out_vector_softmax;
+
+            -- Control Outputs
+            C_OUT_ENABLE <= '1';
+          end if;
 
         when others =>
           -- FSM Control
@@ -225,6 +280,24 @@ begin
       end case;
     end if;
   end process;
+
+  -- VECTOR COSINE SIMILARITY
+  data_a_in_vector_enable_vector_cosine <= '0';
+  data_a_in_scalar_enable_vector_cosine <= '0';
+  data_b_in_vector_enable_vector_cosine <= '0';
+  data_b_in_scalar_enable_vector_cosine <= '0';
+
+  -- VECTOR MULTIPLIER
+  data_a_in_enable_vector_multiplier <= '0';
+  data_b_in_enable_vector_multiplier <= '0';
+
+  -- VECTOR EXPONENTIATOR
+  data_a_in_enable_vector_exponentiator <= '0';
+  data_b_in_enable_vector_exponentiator <= '0';
+
+  -- VECTOR SOFTMAX
+  data_in_vector_enable_vector_softmax <= '0';
+  data_in_scalar_enable_vector_softmax <= '0';
 
   -- DATA
   -- VECTOR COSINE SIMILARITY
