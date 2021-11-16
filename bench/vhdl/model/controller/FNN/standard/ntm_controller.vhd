@@ -103,8 +103,7 @@ architecture ntm_controller_architecture of ntm_controller is
     VECTOR_FIRST_ADDER_STATE,  -- STEP 2
     MATRIX_SECOND_PRODUCT_STATE,  -- STEP 3
     VECTOR_SECOND_ADDER_STATE,  -- STEP 4
-    VECTOR_LOGISTIC_STATE,  -- STEP 5
-    ENDER_STATE  -- STEP 6
+    VECTOR_LOGISTIC_STATE  -- STEP 5
     );
 
   -----------------------------------------------------------------------
@@ -369,13 +368,6 @@ begin
 
           -- Control Inputs
           data_in_enable_vector_logistic <= '0';
-
-          if (data_out_enable_vector_logistic = '1') then
-            -- FSM Control
-            controller_ctrl_fsm_int <= ENDER_STATE;
-          end if;
-
-        when ENDER_STATE =>  -- STEP 6
 
           if (ready_vector_logistic = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_L_IN) - unsigned(ONE)) then

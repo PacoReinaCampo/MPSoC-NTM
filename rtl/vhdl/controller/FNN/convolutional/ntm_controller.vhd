@@ -104,7 +104,6 @@ architecture ntm_controller_architecture of ntm_controller is
     MATRIX_SECOND_CONVOLUTION_STATE,  -- STEP 3
     VECTOR_SECOND_ADDER_STATE,  -- STEP 4
     VECTOR_LOGISTIC_STATE,  -- STEP 5
-    ENDER_STATE  -- STEP 6
     );
 
   -----------------------------------------------------------------------
@@ -292,8 +291,6 @@ begin
           modulo_in_vector_logistic <= FULL;
           size_in_vector_logistic   <= SIZE_L_IN;
           data_in_vector_logistic   <= data_out_vector_adder;
-
-        when ENDER_STATE =>  -- STEP 6
 
           if (ready_vector_logistic = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_L_IN) - unsigned(ONE)) then

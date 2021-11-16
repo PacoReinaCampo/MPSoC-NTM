@@ -154,6 +154,8 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      H_OUT_ENABLE <= '0';
+
       -- Control Internal
       index_loop <= ZERO;
 
@@ -164,6 +166,8 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          H_OUT_ENABLE <= '0';
+
           -- Control Internal
           index_loop <= ZERO;
 
@@ -171,8 +175,14 @@ begin
             -- Data Outputs
             H_OUT <= ZERO;
 
+            -- Control Internal
+            start_vector_tanh <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_TANH_STATE;
+          else
+            -- Control Internal
+            start_vector_tanh <= '0';
           end if;
 
         when VECTOR_TANH_STATE =>  -- STEP 1
@@ -199,6 +209,8 @@ begin
               controller_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
+              start_vector_tanh <= '0';
+
               index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE));
 
               -- FSM Control

@@ -85,9 +85,8 @@ architecture ntm_state_gate_vector_architecture of ntm_state_gate_vector is
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
     VECTOR_FIRST_MULTIPLIER_STATE,  -- STEP 1
-    VECTOR_FIRST_ADDER_STATE,  -- STEP 2
-    VECTOR_SECOND_MULTIPLIER_STATE,  -- STEP 3
-    VECTOR_SECOND_ADDER_STATE  -- STEP 4
+    VECTOR_SECOND_MULTIPLIER_STATE,  -- STEP 2
+    VECTOR_ADDER_STATE  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -107,6 +106,8 @@ architecture ntm_state_gate_vector_architecture of ntm_state_gate_vector is
 
   -- Internal Signals
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_int_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
   -- CONTROL
@@ -164,6 +165,8 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      S_OUT_ENABLE <= '0';
+
       -- Control Internal
       index_loop <= ZERO;
 
@@ -174,6 +177,8 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          S_OUT_ENABLE <= '0';
+
           -- Control Internal
           index_loop <= ZERO;
 
@@ -181,8 +186,14 @@ begin
             -- Data Outputs
             S_OUT <= ZERO;
 
+            -- Control Internal
+            start_vector_multiplier <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_FIRST_MULTIPLIER_STATE;
+          else
+            -- Control Internal
+            start_vector_multiplier <= '0';
           end if;
 
         when VECTOR_FIRST_MULTIPLIER_STATE =>  -- STEP 1
@@ -201,30 +212,7 @@ begin
             -- Control Internal
             start_vector_multiplier <= '1';
 
-            -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_FIRST_ADDER_STATE;
-          else
-            -- Control Internal
-            start_vector_multiplier <= '0';
-          end if;
-
-        when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
-
-          -- Control Inputs
-          operation_vector_adder <= '0';
-
-          data_a_in_enable_vector_adder <= '0';
-          data_b_in_enable_vector_adder <= '0';
-
-          -- Data Inputs
-          modulo_in_vector_adder <= FULL;
-          size_in_vector_adder   <= SIZE_L_IN;
-          data_a_in_vector_adder <= ZERO;
-          data_b_in_vector_adder <= data_out_vector_multiplier;
-
-          if (data_out_enable_vector_adder = '1') then
-            -- Control Internal
-            start_vector_multiplier <= '1';
+            data_int_vector_multiplier <= data_out_vector_multiplier;
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_SECOND_MULTIPLIER_STATE;
@@ -233,7 +221,7 @@ begin
             start_vector_multiplier <= '0';
           end if;
 
-        when VECTOR_SECOND_MULTIPLIER_STATE =>  -- STEP 3
+        when VECTOR_SECOND_MULTIPLIER_STATE =>  -- STEP 2
 
           -- Control Inputs
           data_a_in_enable_vector_multiplier <= '0';
@@ -250,13 +238,13 @@ begin
             start_vector_multiplier <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_SECOND_ADDER_STATE;
+            controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
           else
             -- Control Internal
             start_vector_multiplier <= '0';
           end if;
 
-        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
+        when VECTOR_ADDER_STATE =>  -- STEP 3
 
           -- Control Inputs
           operation_vector_adder <= '0';
@@ -267,7 +255,7 @@ begin
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_L_IN;
-          data_a_in_vector_adder <= data_out_vector_adder;
+          data_a_in_vector_adder <= data_int_vector_multiplier;
           data_b_in_vector_adder <= data_out_vector_multiplier;
 
           if (data_out_enable_vector_adder = '1') then
@@ -279,6 +267,8 @@ begin
               controller_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
+              start_vector_multiplier <= '1';
+
               index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE));
 
               -- FSM Control

@@ -102,8 +102,7 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
     VECTOR_DIFFERENTIATION_I_STATE,  -- STEP 1
     VECTOR_DIFFERENTIATION_W_STATE,  -- STEP 2
     VECTOR_DIFFERENTIATION_K_STATE,  -- STEP 3
-    VECTOR_DIFFERENTIATION_B_STATE,  -- STEP 4
-    ENDER_STATE  -- STEP 5
+    VECTOR_DIFFERENTIATION_B_STATE  -- STEP 4
     );
 
   type differentiation_i_ctrl_fsm is (
@@ -111,31 +110,27 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
     VECTOR_ADDER_DI_STATE,  -- STEP 1
     VECTOR_FIRST_MULTIPLIER_DI_STATE,  -- STEP 3
     VECTOR_SECOND_MULTIPLIER_DI_STATE,  -- STEP 4
-    VECTOR_THIRD_MULTIPLIER_DI_STATE,  -- STEP 5
-    ENDER_DI_STATE  -- STEP 6
+    VECTOR_THIRD_MULTIPLIER_DI_STATE  -- STEP 5
     );
 
   type differentiation_w_ctrl_fsm is (
     STARTER_DW_STATE,  -- STEP 0
     VECTOR_DIFFERENTIATION_DW_STATE,  -- STEP 1
     MATRIX_PRODUCT_DW_STATE,  -- STEP 2
-    VECTOR_SUMMATION_DW_STATE,  -- STEP 3
-    ENDER_DW_STATE  -- STEP 4
+    VECTOR_SUMMATION_DW_STATE  -- STEP 3
     );
 
   type differentiation_k_ctrl_fsm is (
     STARTER_DK_STATE,  -- STEP 0
     VECTOR_DIFFERENTIATION_DK_STATE,  -- STEP 1
     MATRIX_PRODUCT_DK_STATE,  -- STEP 2
-    VECTOR_SUMMATION_DK_STATE,  -- STEP 3
-    ENDER_DK_STATE  -- STEP 4
+    VECTOR_SUMMATION_DK_STATE  -- STEP 3
     );
 
   type differentiation_b_ctrl_fsm is (
     STARTER_DB_STATE,  -- STEP 0
     VECTOR_DIFFERENTIATION_DB_STATE,  -- STEP 1
-    VECTOR_SUMMATION_DB_STATE,  -- STEP 2
-    ENDER_DB_STATE  -- STEP 3
+    VECTOR_SUMMATION_DB_STATE  -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -341,8 +336,6 @@ begin
               data_a_in_vector_multiplier <= FULL;
               data_b_in_vector_multiplier <= FULL;
 
-            when ENDER_DI_STATE =>  -- STEP 5
-
             when others =>
               -- FSM Control
               differentiation_i_ctrl_fsm_int <= STARTER_DI_STATE;
@@ -391,8 +384,6 @@ begin
               size_in_vector_summation   <= FULL;
               length_in_vector_summation <= FULL;
               data_in_vector_summation   <= FULL;
-
-            when ENDER_DW_STATE =>  -- STEP 4
 
             when others =>
               -- FSM Control
@@ -443,8 +434,6 @@ begin
               length_in_vector_summation <= FULL;
               data_in_vector_summation   <= FULL;
 
-            when ENDER_DK_STATE =>  -- STEP 4
-
             when others =>
               -- FSM Control
               differentiation_k_ctrl_fsm_int <= STARTER_DK_STATE;
@@ -477,14 +466,10 @@ begin
               length_in_vector_summation <= FULL;
               data_in_vector_summation   <= FULL;
 
-            when ENDER_DB_STATE =>  -- STEP 3
-
             when others =>
               -- FSM Control
               differentiation_b_ctrl_fsm_int <= STARTER_DB_STATE;
           end case;
-
-        when ENDER_STATE =>  -- STEP 4
 
         when others =>
           -- FSM Control

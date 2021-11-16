@@ -111,8 +111,7 @@ architecture ntm_input_gate_vector_architecture of ntm_input_gate_vector is
     VECTOR_THIRD_ADDER_STATE,  -- STEP 6
     MATRIX_FOURTH_PRODUCT_STATE,  -- STEP 7
     VECTOR_FOURTH_ADDER_STATE,  -- STEP 8
-    VECTOR_LOGISTIC_STATE,  -- STEP 9
-    ENDER_STATE  -- STEP 10
+    VECTOR_LOGISTIC_STATE  -- STEP 9
     );
 
   -----------------------------------------------------------------------
@@ -308,8 +307,6 @@ begin
           modulo_in_vector_logistic <= FULL;
           size_in_vector_logistic   <= SIZE_L_IN;
           data_in_vector_logistic   <= data_out_vector_adder;
-
-        when ENDER_STATE =>  -- STEP 10
 
           if (data_out_enable_vector_logistic = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_L_IN) - unsigned(ONE)) then

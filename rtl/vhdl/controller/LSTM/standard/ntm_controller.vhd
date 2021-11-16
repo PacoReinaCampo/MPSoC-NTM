@@ -104,8 +104,7 @@ architecture ntm_controller_architecture of ntm_controller is
     VECTOR_INPUT_STATE,  -- STEP 3
     VECTOR_STATE_STATE,  -- STEP 4
     VECTOR_OUTPUT_GATE,  -- STEP 5
-    VECTOR_HIDDEN_GATE,  -- STEP 6
-    ENDER_STATE  -- STEP 7
+    VECTOR_HIDDEN_GATE  -- STEP 6
     );
 
   -----------------------------------------------------------------------
@@ -514,8 +513,6 @@ begin
         when VECTOR_OUTPUT_GATE =>  -- STEP 5
 
         when VECTOR_HIDDEN_GATE =>  -- STEP 6
-
-        when ENDER_STATE =>  -- STEP 7
 
         when others =>
           -- FSM Control
