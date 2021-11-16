@@ -97,6 +97,8 @@ architecture dnc_memory_retention_vector_architecture of dnc_memory_retention_ve
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
+  constant PADDING : std_logic_vector(DATA_SIZE-1 downto 1) := (others => '1');
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
@@ -220,12 +222,12 @@ begin
               controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
             end if;
 
+            -- Data Outputs
+            PSI_OUT <= data_out_vector_multiplication;
+
             -- Control Outputs
             PSI_OUT_ENABLE <= '1';
           end if;
-
-          -- Data Outputs
-          PSI_OUT <= data_out_vector_multiplication;
 
         when others =>
           -- FSM Control
@@ -238,7 +240,7 @@ begin
   -- VECTOR MULTIPLIER
   modulo_in_vector_multiplier <= FULL;
   size_in_vector_multiplier   <= SIZE_N_IN;
-  -- data_a_in_vector_multiplier <= F_IN;
+  data_a_in_vector_multiplier <= PADDING & F_IN;
   data_b_in_vector_multiplier <= W_IN;
 
   -- VECTOR ADDER

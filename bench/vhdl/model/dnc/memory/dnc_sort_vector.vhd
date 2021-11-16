@@ -193,12 +193,12 @@ begin
               controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
             end if;
 
+            -- Data Outputs
+            PHI_OUT <= data_out_vector_multiplier;
+
             -- Control Outputs
             PHI_OUT_ENABLE <= '1';
           end if;
-
-          -- Data Outputs
-          PHI_OUT <= data_out_vector_multiplier;
 
         when others =>
           -- FSM Control

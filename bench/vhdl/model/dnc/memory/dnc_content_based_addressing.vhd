@@ -240,12 +240,12 @@ begin
               controller_ctrl_fsm_int <= VECTOR_COSINE_SIMILARITY_STATE;
             end if;
 
+            -- Data Outputs
+            C_OUT <= data_out_vector_softmax;
+
             -- Control Outputs
             C_OUT_ENABLE <= '1';
           end if;
-
-          -- Data Outputs
-          C_OUT <= data_out_vector_softmax;
 
         when others =>
           -- FSM Control

@@ -109,6 +109,8 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
+  constant PADDING : std_logic_vector(DATA_SIZE-1 downto 1) := (others => '1');
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
@@ -249,7 +251,7 @@ begin
           modulo_in_matrix_transpose <= FULL;
           size_i_in_matrix_transpose <= SIZE_W_IN;
           size_j_in_matrix_transpose <= ONE;
-          --data_in_matrix_transpose   <= E_IN;
+          data_in_matrix_transpose   <= PADDING & E_IN;
 
         when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 2
 
@@ -312,6 +314,9 @@ begin
 
           if (data_out_i_enable_matrix_product = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then
+              -- Data Outputs
+              M_OUT <= data_out_matrix_adder;
+
               -- Control Outputs
               M_OUT_J_ENABLE <= '1';
 
@@ -339,12 +344,12 @@ begin
               controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_STATE;
             end if;
 
+            -- Data Outputs
+            M_OUT <= data_out_matrix_adder;
+
             -- Control Outputs
             M_OUT_K_ENABLE <= '1';
           end if;
-
-          -- Data Outputs
-          M_OUT <= data_out_matrix_adder;
 
         when others =>
           -- FSM Control

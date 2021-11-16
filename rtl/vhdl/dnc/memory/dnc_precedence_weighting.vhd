@@ -238,12 +238,12 @@ begin
               controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
             end if;
 
+            -- Data Outputs
+            P_OUT <= data_out_vector_adder;
+
             -- Control Outputs
             P_OUT_ENABLE <= '1';
           end if;
-
-          -- Data Outputs
-          P_OUT <= data_out_vector_adder;
 
         when others =>
           -- FSM Control

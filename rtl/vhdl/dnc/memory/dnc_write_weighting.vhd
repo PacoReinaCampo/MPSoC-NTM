@@ -100,6 +100,8 @@ architecture dnc_write_weighting_architecture of dnc_write_weighting is
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
+  constant PADDIND : std_logic_vector(DATA_SIZE-1 downto 1) := (others => '1');
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
@@ -188,7 +190,7 @@ begin
           modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_N_IN;
           data_a_in_vector_adder <= ONE;
-          --data_b_in_vector_adder <= GA_IN;
+          data_b_in_vector_adder <= PADDIND & GA_IN;
 
         when VECTOR_FIRST_MULTIPLIER_STATE =>  -- STEP 2
 
@@ -211,7 +213,7 @@ begin
           -- Data Inputs
           modulo_in_vector_multiplier <= FULL;
           size_in_vector_multiplier   <= SIZE_N_IN;
-          --data_a_in_vector_multiplier <= GA_IN;
+          data_a_in_vector_multiplier <= PADDIND & GA_IN;
           data_b_in_vector_multiplier <= A_IN;
 
         when VECTOR_THIRD_ADDER_STATE =>  -- STEP 5
@@ -228,7 +230,7 @@ begin
           modulo_in_vector_multiplier <= FULL;
           size_in_vector_multiplier   <= SIZE_N_IN;
           data_a_in_vector_multiplier <= data_out_vector_adder;
-          --data_b_in_vector_multiplier <= GW_IN;
+          data_b_in_vector_multiplier <= PADDIND & GW_IN;
 
         when ENDER_STATE =>  -- STEP 7
 
@@ -247,12 +249,12 @@ begin
               controller_ctrl_fsm_int <= VECTOR_FIRST_MULTIPLIER_STATE;
             end if;
 
+            -- Data Outputs
+            W_OUT <= data_out_vector_multiplier;
+
             -- Control Outputs
             W_OUT_ENABLE <= '1';
           end if;
-
-          -- Data Outputs
-          W_OUT <= data_out_vector_multiplier;
 
         when others =>
           -- FSM Control
