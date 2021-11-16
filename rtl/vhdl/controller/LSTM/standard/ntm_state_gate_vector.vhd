@@ -87,8 +87,7 @@ architecture ntm_state_gate_vector_architecture of ntm_state_gate_vector is
     VECTOR_FIRST_MULTIPLIER_STATE,  -- STEP 1
     VECTOR_FIRST_ADDER_STATE,  -- STEP 2
     VECTOR_SECOND_MULTIPLIER_STATE,  -- STEP 3
-    VECTOR_SECOND_ADDER_STATE,  -- STEP 4
-    ENDER_STATE  -- STEP 5
+    VECTOR_SECOND_ADDER_STATE  -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -179,43 +178,97 @@ begin
           index_loop <= ZERO;
 
           if (START = '1') then
+            -- Data Outputs
+            S_OUT <= ZERO;
+
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_FIRST_MULTIPLIER_STATE;
           end if;
 
         when VECTOR_FIRST_MULTIPLIER_STATE =>  -- STEP 1
 
-          -- Data Outputs
+          -- Control Inputs
+          data_a_in_enable_vector_multiplier <= F_IN_ENABLE;
+          data_b_in_enable_vector_multiplier <= S_IN_ENABLE;
+
+          -- Data Inputs
           modulo_in_vector_multiplier <= FULL;
           size_in_vector_multiplier   <= SIZE_L_IN;
           data_a_in_vector_multiplier <= F_IN;
           data_b_in_vector_multiplier <= S_IN;
 
+          if (data_out_enable_vector_multiplier = '1') then
+            -- Control Internal
+            start_vector_multiplier <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_FIRST_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_multiplier <= '0';
+          end if;
+
         when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
 
-          -- Data Outputs
+          -- Control Inputs
+          operation_vector_adder <= '0';
+
+          data_a_in_enable_vector_adder <= '0';
+          data_b_in_enable_vector_adder <= '0';
+
+          -- Data Inputs
           modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= ZERO;
           data_b_in_vector_adder <= data_out_vector_multiplier;
 
+          if (data_out_enable_vector_adder = '1') then
+            -- Control Internal
+            start_vector_multiplier <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_SECOND_MULTIPLIER_STATE;
+          else
+            -- Control Internal
+            start_vector_multiplier <= '0';
+          end if;
+
         when VECTOR_SECOND_MULTIPLIER_STATE =>  -- STEP 3
 
-          -- Data Outputs
+          -- Control Inputs
+          data_a_in_enable_vector_multiplier <= '0';
+          data_b_in_enable_vector_multiplier <= '0';
+
+          -- Data Inputs
           modulo_in_vector_multiplier <= FULL;
           size_in_vector_multiplier   <= SIZE_L_IN;
           data_a_in_vector_multiplier <= I_IN;
           data_b_in_vector_multiplier <= A_IN;
 
+          if (data_out_enable_vector_multiplier = '1') then
+            -- Control Internal
+            start_vector_multiplier <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_SECOND_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_multiplier <= '0';
+          end if;
+
         when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
 
-          -- Data Outputs
+          -- Control Inputs
+          operation_vector_adder <= '0';
+
+          data_a_in_enable_vector_adder <= data_out_enable_vector_adder;
+          data_b_in_enable_vector_adder <= data_out_enable_vector_multiplier;
+
+          -- Data Inputs
           modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_vector_adder;
           data_b_in_vector_adder <= data_out_vector_multiplier;
-
-        when ENDER_STATE =>  -- STEP 5
 
           if (data_out_enable_vector_adder = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_L_IN) - unsigned(ONE)) then

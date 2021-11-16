@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_hidden_gate_vector is
+entity dnc_temporal_link_matrix is
   generic (
     DATA_SIZE : integer := 512
     );
@@ -57,22 +57,27 @@ entity ntm_hidden_gate_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    S_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
-    O_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+    L_IN_G_ENABLE : in std_logic;       -- for g in 0 to N-1 (square matrix)
+    L_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1 (square matrix)
 
-    H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
+    W_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
+    P_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
+
+    L_OUT_G_ENABLE : out std_logic;     -- for g in 0 to N-1 (square matrix)
+    L_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1 (square matrix)
 
     -- DATA
-    SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    S_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    O_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    P_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    H_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    L_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
-architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
+architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix is
 
   -----------------------------------------------------------------------
   -- Types
@@ -80,8 +85,9 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
-    VECTOR_TANH_STATE,  -- STEP 1
-    VECTOR_MULTIPLIER_STATE  -- STEP 2
+    VECTOR_MULTIPLIER_STATE,  -- STEP 1
+    VECTOR_ADDER_STATE,  -- STEP 2
+    ENDER_STATE  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -90,7 +96,6 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -100,39 +105,32 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR MULTIPLIER
+  -- SCALAR ADDER
   -- CONTROL
-  signal start_vector_multiplier : std_logic;
-  signal ready_vector_multiplier : std_logic;
+  signal start_scalar_adder : std_logic;
+  signal ready_scalar_adder : std_logic;
 
-  signal data_a_in_enable_vector_multiplier : std_logic;
-  signal data_b_in_enable_vector_multiplier : std_logic;
-
-  signal data_out_enable_vector_multiplier : std_logic;
+  signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_multiplier   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR TANH
+  -- SCALAR MULTIPLIER
   -- CONTROL
-  signal start_vector_tanh : std_logic;
-  signal ready_vector_tanh : std_logic;
-
-  signal data_in_enable_vector_tanh : std_logic;
-
-  signal data_out_enable_vector_tanh : std_logic;
+  signal start_scalar_multiplier : std_logic;
+  signal ready_scalar_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_vector_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -140,22 +138,23 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- h(t;l) = o(t;l) o tanh(s(t;l))
+  -- L(t)[g;j] = (1 - w(t;j)[i] - w(t;j)[j])·L(t-1)[g;j] + w(t;j)[i]·p(t-1;j)[j]
 
-  -- h(t=0;l) = 0; h(t;l=0) = 0
+  -- L(t=0)[g,j] = 0
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
       -- Data Outputs
-      H_OUT <= ZERO;
+      L_OUT <= ZERO;
 
       -- Control Outputs
       READY <= '0';
 
       -- Control Internal
-      index_loop <= ZERO;
+      index_i_loop <= ZERO;
+      index_j_loop <= ZERO;
 
     elsif (rising_edge(CLK)) then
 
@@ -165,51 +164,57 @@ begin
           READY <= '0';
 
           -- Control Internal
-          index_loop <= ZERO;
+          index_i_loop <= ZERO;
+          index_j_loop <= ZERO;
 
           if (START = '1') then
-            -- Data Outputs
-            H_OUT <= ZERO;
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_TANH_STATE;
-          end if;
-
-        when VECTOR_TANH_STATE =>  -- STEP 1
-
-          if (data_out_enable_vector_tanh = '1') then
-            -- Control Internal
-            start_vector_multiplier <= '1';
-
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
-          else
-            -- Control Internal
-            start_vector_multiplier <= '0';
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
 
-          if (data_out_enable_vector_multiplier = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_L_IN) - unsigned(ONE)) then
+        when VECTOR_ADDER_STATE =>  -- STEP 2
+
+        when ENDER_STATE =>  -- STEP 3
+
+          if (operation_scalar_adder = '1') then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE))) then
+              -- Data Outputs
+              L_OUT <= data_out_scalar_multiplier;
+
+              -- Control Outputs
+              L_OUT_G_ENABLE <= '1';
+
+              -- Control Internal
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+              index_j_loop <= ZERO;
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            end if;
+          end if;
+
+          if (operation_scalar_adder = '1') then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            else
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(SIZE_N_IN) - unsigned(ONE))) then
               -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE));
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= VECTOR_TANH_STATE;
+              controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
             end if;
 
             -- Data Outputs
-            H_OUT <= data_out_vector_multiplier;
+            L_OUT <= data_out_scalar_multiplier;
 
             -- Control Outputs
-            H_OUT_ENABLE <= '1';
+            L_OUT_J_ENABLE <= '1';
           end if;
 
         when others =>
@@ -219,27 +224,8 @@ begin
     end if;
   end process;
 
-  -- VECTOR TANH
-  data_in_enable_vector_tanh <= S_IN_ENABLE;
-
-  -- VECTOR MULTIPLIER
-  data_a_in_enable_vector_multiplier <= O_IN_ENABLE;
-  data_b_in_enable_vector_multiplier <= data_out_enable_vector_tanh;
-
-  -- DATA
-  -- VECTOR TANH
-  modulo_in_vector_tanh <= FULL;
-  size_in_vector_tanh   <= SIZE_L_IN;
-  data_in_vector_tanh   <= S_IN;
-
-  -- VECTOR MULTIPLIER
-  modulo_in_vector_multiplier <= FULL;
-  size_in_vector_multiplier   <= SIZE_L_IN;
-  data_a_in_vector_multiplier <= O_IN;
-  data_b_in_vector_multiplier <= data_out_vector_tanh;
-
-  -- VECTOR MULTIPLIER
-  vector_multiplier : ntm_vector_multiplier
+  -- SCALAR ADDER
+  scalar_adder : ntm_scalar_adder
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -249,24 +235,20 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_multiplier,
-      READY => ready_vector_multiplier,
+      START => start_scalar_adder,
+      READY => ready_scalar_adder,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplier,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplier,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
+      OPERATION => operation_scalar_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_multiplier,
-      SIZE_IN   => size_in_vector_multiplier,
-      DATA_A_IN => data_a_in_vector_multiplier,
-      DATA_B_IN => data_b_in_vector_multiplier,
-      DATA_OUT  => data_out_vector_multiplier
+      MODULO_IN => modulo_in_scalar_adder,
+      DATA_A_IN => data_a_in_scalar_adder,
+      DATA_B_IN => data_b_in_scalar_adder,
+      DATA_OUT  => data_out_scalar_adder
       );
 
-  -- VECTOR TANH
-  vector_tanh_function : ntm_vector_tanh_function
+  -- SCALAR MULTIPLIER
+  scalar_multiplier : ntm_scalar_multiplier
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -276,18 +258,14 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_tanh,
-      READY => ready_vector_tanh,
-
-      DATA_IN_ENABLE => data_in_enable_vector_tanh,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_tanh,
+      START => start_scalar_multiplier,
+      READY => ready_scalar_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_tanh,
-      SIZE_IN   => size_in_vector_tanh,
-      DATA_IN   => data_in_vector_tanh,
-      DATA_OUT  => data_out_vector_tanh
+      MODULO_IN => modulo_in_scalar_multiplier,
+      DATA_A_IN => data_a_in_scalar_multiplier,
+      DATA_B_IN => data_b_in_scalar_multiplier,
+      DATA_OUT  => data_out_scalar_multiplier
       );
 
 end architecture;

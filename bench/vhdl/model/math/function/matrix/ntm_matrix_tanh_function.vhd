@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_hidden_gate_vector is
+entity ntm_matrix_tanh_function is
   generic (
     DATA_SIZE : integer := 512
     );
@@ -57,69 +57,52 @@ entity ntm_hidden_gate_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    S_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
-    O_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+    DATA_IN_I_ENABLE : in std_logic;
+    DATA_IN_J_ENABLE : in std_logic;
 
-    H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
+    DATA_OUT_I_ENABLE : out std_logic;
+    DATA_OUT_J_ENABLE : out std_logic;
 
     -- DATA
-    SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-    S_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    O_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-    H_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_I_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_J_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
-architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
+architecture ntm_matrix_tanh_function_architecture of ntm_matrix_tanh_function is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type controller_ctrl_fsm is (
+  type tanh_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
-    VECTOR_TANH_STATE,  -- STEP 1
-    VECTOR_MULTIPLIER_STATE  -- STEP 2
+    INPUT_I_STATE,  -- STEP 1
+    INPUT_J_STATE,  -- STEP 2
+    ENDER_STATE  -- STEP 3
     );
 
   -----------------------------------------------------------------------
   -- Constants
-  -----------------------------------------------------------------------
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+  signal tanh_ctrl_fsm_int : tanh_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR MULTIPLIER
-  -- CONTROL
-  signal start_vector_multiplier : std_logic;
-  signal ready_vector_multiplier : std_logic;
-
-  signal data_a_in_enable_vector_multiplier : std_logic;
-  signal data_b_in_enable_vector_multiplier : std_logic;
-
-  signal data_out_enable_vector_multiplier : std_logic;
-
-  -- DATA
-  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_multiplier   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR TANH
+  -- TANH
   -- CONTROL
   signal start_vector_tanh : std_logic;
   signal ready_vector_tanh : std_logic;
@@ -140,132 +123,136 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- h(t;l) = o(t;l) o tanh(s(t;l))
-
-  -- h(t=0;l) = 0; h(t;l=0) = 0
-
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
       -- Data Outputs
-      H_OUT <= ZERO;
+      DATA_OUT <= ZERO;
 
       -- Control Outputs
       READY <= '0';
 
-      -- Control Internal
-      index_loop <= ZERO;
+      -- Assignations
+      index_i_loop <= ZERO;
+      index_j_loop <= ZERO;
 
     elsif (rising_edge(CLK)) then
 
-      case controller_ctrl_fsm_int is
+      case tanh_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
-          -- Control Internal
-          index_loop <= ZERO;
-
           if (START = '1') then
-            -- Data Outputs
-            H_OUT <= ZERO;
+            -- Assignations
+            index_i_loop <= ZERO;
+            index_j_loop <= ZERO;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_TANH_STATE;
+            tanh_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
-        when VECTOR_TANH_STATE =>  -- STEP 1
+        when INPUT_I_STATE =>  -- STEP 1
 
-          if (data_out_enable_vector_tanh = '1') then
-            -- Control Internal
-            start_vector_multiplier <= '1';
+          if (DATA_IN_I_ENABLE = '1') then
+            -- Data Inputs
+            modulo_in_vector_tanh <= MODULO_IN;
+
+            data_in_vector_tanh <= DATA_IN;
+
+            if (index_i_loop = ZERO) then
+              -- Control Internal
+              start_vector_tanh <= '1';
+            end if;
+
+            data_in_enable_vector_tanh <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            tanh_ctrl_fsm_int <= ENDER_STATE;
           else
             -- Control Internal
-            start_vector_multiplier <= '0';
+            data_in_enable_vector_tanh <= '0';
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
+          -- Control Outputs
+          DATA_OUT_I_ENABLE <= '0';
+          DATA_OUT_J_ENABLE <= '0';
 
-          if (data_out_enable_vector_multiplier = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_L_IN) - unsigned(ONE)) then
+        when INPUT_J_STATE =>  -- STEP 2
+
+          if (DATA_IN_J_ENABLE = '1') then
+            -- Data Inputs
+            modulo_in_vector_tanh <= MODULO_IN;
+            size_in_vector_tanh   <= SIZE_J_IN;
+
+            data_in_vector_tanh <= DATA_IN;
+
+            if (index_j_loop = ZERO) then
+              -- Control Internal
+              start_vector_tanh <= '1';
+            end if;
+
+            data_in_enable_vector_tanh <= '1';
+
+            -- FSM Control
+            tanh_ctrl_fsm_int <= ENDER_STATE;
+          else
+            -- Control Internal
+            data_in_enable_vector_tanh <= '0';
+          end if;
+
+          -- Control Outputs
+          DATA_OUT_J_ENABLE <= '0';
+
+        when ENDER_STATE =>  -- STEP 3
+
+          if (ready_vector_tanh = '1') then
+            if (unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';
 
-              -- FSM Control
-              controller_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE));
+              DATA_OUT_J_ENABLE <= '1';
 
               -- FSM Control
-              controller_ctrl_fsm_int <= VECTOR_TANH_STATE;
+              tanh_ctrl_fsm_int <= STARTER_STATE;
+            elsif (unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) then
+              -- Control Internal
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+              index_j_loop <= ZERO;
+
+              -- Control Outputs
+              DATA_OUT_I_ENABLE <= '1';
+              DATA_OUT_J_ENABLE <= '1';
+
+              -- FSM Control
+              tanh_ctrl_fsm_int <= INPUT_I_STATE;
+            elsif (unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop < std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) then
+              -- Control Internal
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+
+              -- Control Outputs
+              DATA_OUT_J_ENABLE <= '1';
+
+              -- FSM Control
+              tanh_ctrl_fsm_int <= INPUT_J_STATE;
             end if;
 
             -- Data Outputs
-            H_OUT <= data_out_vector_multiplier;
-
-            -- Control Outputs
-            H_OUT_ENABLE <= '1';
+            DATA_OUT <= data_out_vector_tanh;
+          else
+            -- Control Internal
+            start_vector_tanh <= '0';
           end if;
 
         when others =>
           -- FSM Control
-          controller_ctrl_fsm_int <= STARTER_STATE;
+          tanh_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
 
-  -- VECTOR TANH
-  data_in_enable_vector_tanh <= S_IN_ENABLE;
-
-  -- VECTOR MULTIPLIER
-  data_a_in_enable_vector_multiplier <= O_IN_ENABLE;
-  data_b_in_enable_vector_multiplier <= data_out_enable_vector_tanh;
-
-  -- DATA
-  -- VECTOR TANH
-  modulo_in_vector_tanh <= FULL;
-  size_in_vector_tanh   <= SIZE_L_IN;
-  data_in_vector_tanh   <= S_IN;
-
-  -- VECTOR MULTIPLIER
-  modulo_in_vector_multiplier <= FULL;
-  size_in_vector_multiplier   <= SIZE_L_IN;
-  data_a_in_vector_multiplier <= O_IN;
-  data_b_in_vector_multiplier <= data_out_vector_tanh;
-
-  -- VECTOR MULTIPLIER
-  vector_multiplier : ntm_vector_multiplier
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_multiplier,
-      READY => ready_vector_multiplier,
-
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplier,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplier,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
-
-      -- DATA
-      MODULO_IN => modulo_in_vector_multiplier,
-      SIZE_IN   => size_in_vector_multiplier,
-      DATA_A_IN => data_a_in_vector_multiplier,
-      DATA_B_IN => data_b_in_vector_multiplier,
-      DATA_OUT  => data_out_vector_multiplier
-      );
-
-  -- VECTOR TANH
+  -- TANH
   vector_tanh_function : ntm_vector_tanh_function
     generic map (
       DATA_SIZE => DATA_SIZE

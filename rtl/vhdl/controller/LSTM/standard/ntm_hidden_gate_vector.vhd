@@ -81,8 +81,7 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
     VECTOR_TANH_STATE,  -- STEP 1
-    VECTOR_MULTIPLIER_STATE,  -- STEP 2
-    ENDER_STATE  -- STEP 3
+    VECTOR_MULTIPLIER_STATE  -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -169,15 +168,27 @@ begin
           index_loop <= ZERO;
 
           if (START = '1') then
+            -- Data Outputs
+            H_OUT <= ZERO;
+
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_TANH_STATE;
           end if;
 
         when VECTOR_TANH_STATE =>  -- STEP 1
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
+          if (data_out_enable_vector_tanh = '1') then
+            -- Control Internal
+            start_vector_multiplier <= '1';
 
-        when ENDER_STATE =>  -- STEP 3
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          else
+            -- Control Internal
+            start_vector_multiplier <= '0';
+          end if;
+
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
 
           if (data_out_enable_vector_multiplier = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_L_IN) - unsigned(ONE)) then
@@ -208,13 +219,20 @@ begin
     end if;
   end process;
 
-  -- DATA
+  -- VECTOR TANH
+  data_in_enable_vector_tanh <= S_IN_ENABLE;
+
   -- VECTOR MULTIPLIER
+  data_a_in_enable_vector_multiplier <= O_IN_ENABLE;
+  data_b_in_enable_vector_multiplier <= data_out_enable_vector_tanh;
+
+  -- DATA
+  -- VECTOR TANH
   modulo_in_vector_tanh <= FULL;
   size_in_vector_tanh   <= SIZE_L_IN;
   data_in_vector_tanh   <= S_IN;
 
-  -- VECTOR TANH
+  -- VECTOR MULTIPLIER
   modulo_in_vector_multiplier <= FULL;
   size_in_vector_multiplier   <= SIZE_L_IN;
   data_a_in_vector_multiplier <= O_IN;
