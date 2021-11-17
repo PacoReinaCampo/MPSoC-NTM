@@ -200,6 +200,8 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      C_OUT_ENABLE <= '0';
+
       -- Control Internal
       index_loop <= ZERO;
 
@@ -210,12 +212,20 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          C_OUT_ENABLE <= '0';
+
           -- Control Internal
           index_loop <= ZERO;
 
           if (START = '1') then
+            -- Control Internal
+            start_vector_cosine <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_COSINE_SIMILARITY_STATE;
+          else
+            -- Control Internal
+            start_vector_cosine <= '0';
           end if;
 
         when VECTOR_COSINE_SIMILARITY_STATE =>  -- STEP 1

@@ -103,7 +103,7 @@ architecture ntm_controller_architecture of ntm_controller is
     VECTOR_FIRST_ADDER_STATE,  -- STEP 2
     MATRIX_SECOND_CONVOLUTION_STATE,  -- STEP 3
     VECTOR_SECOND_ADDER_STATE,  -- STEP 4
-    VECTOR_LOGISTIC_STATE,  -- STEP 5
+    VECTOR_LOGISTIC_STATE  -- STEP 5
     );
 
   -----------------------------------------------------------------------

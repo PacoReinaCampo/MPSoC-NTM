@@ -99,19 +99,19 @@ architecture dnc_addressing_architecture of dnc_addressing is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
-    ALLOCATION_WEIGHTING_STATE,  -- STEP 1
-    BACKWARD_WEIGHTING_STATE,  -- STEP 2
-    FORWARD_WEIGHTING_STATE,  -- STEP 3
-    MEMORY_MATRIX_STATE,  -- STEP 4
+    PRECEDENCE_WEIGHTING_STATE,  -- STEP 1
+    TEMPORAL_LINK_MATRIX_STATE,  -- STEP 2
+    BACKWARD_WEIGHTING_STATE,  -- STEP 3
+    FORWARD_WEIGHTING_STATE,  -- STEP 4
     MEMORY_RETENTION_VECTOR_STATE,  -- STEP 5
-    PRECEDENCE_WEIGHTING_STATE,  -- STEP 6
-    READ_CONTENT_WEIGHTING_STATE,  -- STEP 7
-    READ_VECTORS_STATE,  -- STEP 8
+    USAGE_VECTOR_STATE,  -- STEP 6
+    ALLOCATION_WEIGHTING_STATE,  -- STEP 7
+    READ_CONTENT_WEIGHTING_STATE,  -- STEP 8
     READ_WEIGHTING_STATE,  -- STEP 9
-    TEMPORAL_LINK_MATRIX_STATE,  -- STEP 10
-    USAGE_VECTOR_STATE,  -- STEP 11
-    WRITE_CONTENT_WEIGHTING_STATE,  -- STEP 12
-    WRITE_WEIGHTING_STATE  -- STEP 13
+    WRITE_CONTENT_WEIGHTING_STATE,  -- STEP 10
+    WRITE_WEIGHTING_STATE,  -- STEP 11
+    MEMORY_MATRIX_STATE,  -- STEP 12
+    READ_VECTORS_STATE  -- STEP 13
     );
 
   -----------------------------------------------------------------------
@@ -445,34 +445,62 @@ begin
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_fsm_int <= ALLOCATION_WEIGHTING_STATE;
+            controller_ctrl_fsm_int <= PRECEDENCE_WEIGHTING_STATE;
           end if;
+        
+        when PRECEDENCE_WEIGHTING_STATE =>  -- STEP 1
 
-        when ALLOCATION_WEIGHTING_STATE =>  -- STEP 1
+          -- p(t;j) = (1 - summation(w(t;j))[i in 1 to N])·p(t-1;j) + w(t;j)
+          -- p(t=0) = 0
         
-        when BACKWARD_WEIGHTING_STATE =>  -- STEP 2
+        when TEMPORAL_LINK_MATRIX_STATE =>  -- STEP 2
+
+          -- L(t)[g;j] = (1 - w(t;j)[i] - w(t;j)[j])·L(t-1)[g;j] + w(t;j)[i]·p(t-1;j)[j]
+          -- L(t=0)[g,j] = 0
         
-        when FORWARD_WEIGHTING_STATE =>  -- STEP 3
+        when BACKWARD_WEIGHTING_STATE =>  -- STEP 3
+
+          -- b(t;i;j) = transpose(L(t;g;j))·w(t-1;i;j)
         
-        when MEMORY_MATRIX_STATE =>  -- STEP 4
-        
+        when FORWARD_WEIGHTING_STATE =>  -- STEP 4
+
+          -- f(t;i;j) = L(t;g;j)·w(t-1;i;j)
+
         when MEMORY_RETENTION_VECTOR_STATE =>  -- STEP 5
+
+          -- psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
         
-        when PRECEDENCE_WEIGHTING_STATE =>  -- STEP 6
+        when USAGE_VECTOR_STATE =>  -- STEP 6
+
+          -- u(t;j) = (u(t-1;j) + w(t-1;j) - u(t-1;j) o w(t-1;j)) o psi(t;j)
+
+        when ALLOCATION_WEIGHTING_STATE =>  -- STEP 7
+
+          -- a(t)[phi(t)[j]] = (1 - u(t)[phi(t)[j]])·multiplication(u(t)[phi(t)[j]])[i in 1 to j-1]
         
-        when READ_CONTENT_WEIGHTING_STATE =>  -- STEP 7
-        
-        when READ_VECTORS_STATE =>  -- STEP 8
+        when READ_CONTENT_WEIGHTING_STATE =>  -- STEP 8
+
+          -- c(t;i;j) = C(M(t-1;j;k),k(t;i;k),beta(t;i))
         
         when READ_WEIGHTING_STATE =>  -- STEP 9
+
+          -- w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
         
-        when TEMPORAL_LINK_MATRIX_STATE =>  -- STEP 10
+        when WRITE_CONTENT_WEIGHTING_STATE =>  -- STEP 10
+
+          -- c(t;j) = C(M(t-1;j;k),k(t;k),beta(t))
         
-        when USAGE_VECTOR_STATE =>  -- STEP 11
+        when WRITE_WEIGHTING_STATE =>  -- STEP 11
+
+          -- w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - g(t))·c(t;j))
         
-        when WRITE_CONTENT_WEIGHTING_STATE =>  -- STEP 12
+        when MEMORY_MATRIX_STATE =>  -- STEP 12
+
+          -- M(t;j;k) = M(t-1;j;k) o (E - w(t;j)·transpose(e(t;k))) + w(t;j)·transpose(v(t;k))
         
-        when WRITE_WEIGHTING_STATE =>  -- STEP 13
+        when READ_VECTORS_STATE =>  -- STEP 13
+
+          -- r(t;i;k) = transpose(M(t;j;k))·w(t;i;j)
 
         when others =>
           -- FSM Control

@@ -229,6 +229,8 @@ begin
 
         when VECTOR_DIFFERENTIATION_W_STATE =>  -- STEP 1
 
+          -- dW(t;l) = summation(dx(t;l) · x(t;l))[t in 0 to T]
+
           case differentiation_w_ctrl_fsm_int is
             when STARTER_DW_STATE =>  -- STEP 0
 
@@ -268,6 +270,8 @@ begin
 
         when VECTOR_DIFFERENTIATION_K_STATE =>  -- STEP 2
 
+          -- dU(t;l) = summation(dx(t+1;l) · h(t;l))[t in 0 to T-1]
+
           case differentiation_k_ctrl_fsm_int is
             when STARTER_DK_STATE =>  -- STEP 0
 
@@ -306,6 +310,8 @@ begin
           end case;
 
         when VECTOR_DIFFERENTIATION_B_STATE =>  -- STEP 3
+
+          -- db(t;l) = summation(dx(t;l))[t in 0 to T]
 
           case differentiation_b_ctrl_fsm_int is
             when STARTER_DB_STATE =>  -- STEP 0

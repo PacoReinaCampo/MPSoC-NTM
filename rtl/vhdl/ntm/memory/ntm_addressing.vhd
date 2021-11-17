@@ -302,6 +302,8 @@ begin
 
         when VECTOR_CONTENT_BASED_ADDRESSING_STATE =>  -- STEP 1
 
+          -- wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
+
           -- Data Inputs
           modulo_in_vector_content_based_addressing <= FULL;
           size_i_in_vector_content_based_addressing <= SIZE_N_IN;
@@ -311,6 +313,8 @@ begin
           m_in_vector_content_based_addressing      <= M_IN;
 
         when VECTOR_INTERPOLATION_STATE =>  -- STEP 2
+
+          -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
 
           case controller_ctrl_interpolation_fsm_int is
             when STARTER_INTERPOLATION_STATE =>  -- STEP 0
@@ -354,13 +358,17 @@ begin
 
         when VECTOR_CONVOLUTION_STATE =>  -- STEP 3
 
-              -- Data Inputs
-              modulo_in_vector_summation <= FULL;
-              size_in_vector_summation   <= FULL;
-              length_in_vector_summation <= FULL;
-              data_in_vector_summation   <= FULL;
+          -- w(t;j) = w(t;j)*s(t;k)
+
+          -- Data Inputs
+          modulo_in_vector_summation <= FULL;
+          size_in_vector_summation   <= FULL;
+          length_in_vector_summation <= FULL;
+          data_in_vector_summation   <= FULL;
 
         when VECTOR_SHARPENING_STATE =>  -- STEP 4
+
+          -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
 
           case controller_ctrl_sharpening_fsm_int is
             when STARTER_SHARPENING_STATE =>  -- STEP 0
