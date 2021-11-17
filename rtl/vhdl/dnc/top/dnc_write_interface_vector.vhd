@@ -125,8 +125,7 @@ architecture dnc_write_interface_vector_architecture of dnc_write_interface_vect
     MATRIX_THIRD_PRODUCT_STATE,  -- STEP 3
     SCALAR_FIRST_PRODUCT_STATE,  -- STEP 4
     SCALAR_SECOND_PRODUCT_STATE,  -- STEP 5
-    SCALAR_THIRD_PRODUCT_STATE,  -- STEP 6
-    ENDER_STATE  -- STEP 7
+    SCALAR_THIRD_PRODUCT_STATE  -- STEP 6
     );
 
   -----------------------------------------------------------------------
@@ -293,8 +292,6 @@ begin
 
           -- Data Outputs
           GW_OUT <= data_out_scalar_product;
-
-        when ENDER_STATE =>  -- STEP 7
 
         when others =>
           -- FSM Control

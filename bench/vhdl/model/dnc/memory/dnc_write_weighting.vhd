@@ -88,8 +88,7 @@ architecture dnc_write_weighting_architecture of dnc_write_weighting is
     VECTOR_SECOND_ADDER_STATE,  -- STEP 3
     VECTOR_SECOND_MULTIPLIER_STATE,  -- STEP 4
     VECTOR_THIRD_ADDER_STATE,  -- STEP 5
-    VECTOR_THIRD_MULTIPLIER_STATE,  -- STEP 6
-    ENDER_STATE  -- STEP 7
+    VECTOR_THIRD_MULTIPLIER_STATE  -- STEP 6
     );
 
   -----------------------------------------------------------------------
@@ -231,8 +230,6 @@ begin
           size_in_vector_multiplier   <= SIZE_N_IN;
           data_a_in_vector_multiplier <= data_out_vector_adder;
           data_b_in_vector_multiplier <= PADDIND & GW_IN;
-
-        when ENDER_STATE =>  -- STEP 7
 
           if (data_out_enable_vector_adder = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) then

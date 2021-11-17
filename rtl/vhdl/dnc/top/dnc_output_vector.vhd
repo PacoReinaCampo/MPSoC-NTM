@@ -93,8 +93,7 @@ architecture dnc_output_vector_architecture of dnc_output_vector is
   type output_vector_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
     MATRIX_PRODUCT_STATE,  -- STEP 1
-    VECTOR_ADDER_STATE,  -- STEP 2
-    ENDER_STATE  -- STEP 3
+    VECTOR_ADDER_STATE  -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -187,8 +186,6 @@ begin
         when MATRIX_PRODUCT_STATE =>  -- STEP 1
 
         when VECTOR_ADDER_STATE =>  -- STEP 2
-
-        when ENDER_STATE =>  -- STEP 3
 
           -- Data Outputs
           Y_OUT <= data_out_vector_adder;

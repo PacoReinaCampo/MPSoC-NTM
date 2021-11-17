@@ -95,8 +95,7 @@ architecture ntm_addressing_architecture of ntm_addressing is
     VECTOR_CONTENT_BASED_ADDRESSING_STATE,  -- STEP 1
     VECTOR_INTERPOLATION_STATE,  -- STEP 2
     VECTOR_CONVOLUTION_STATE,  -- STEP 3
-    VECTOR_SHARPENING_STATE,  -- STEP 4
-    ENDER_STATE  -- STEP 5
+    VECTOR_SHARPENING_STATE  -- STEP 4
     );
 
   type controller_ctrl_interpolation_fsm is (
@@ -104,16 +103,14 @@ architecture ntm_addressing_architecture of ntm_addressing is
     VECTOR_FIRST_MULTIPLIER_INTERPOLATION_STATE,  -- STEP 1
     VECTOR_FIRST_ADDER_INTERPOLATION_STATE,  -- STEP 2
     VECTOR_SECOND_MULTIPLIER_INTERPOLATION_STATE,  -- STEP 3
-    VECTOR_SECOND_ADDER_INTERPOLATION_STATE,  -- STEP 4
-    ENDER_INTERPOLATION_STATE  -- STEP 5
+    VECTOR_SECOND_ADDER_INTERPOLATION_STATE  -- STEP 4
     );
 
   type controller_ctrl_sharpening_fsm is (
     STARTER_SHARPENING_STATE,  -- STEP 0
     VECTOR_EXPONENTIATOR_SHARPENING_STATE,  -- STEP 1
     VECTOR_SUMMATION_SHARPENING_STATE,  -- STEP 2
-    VECTOR_DIVIDER_SHARPENING_STATE,  -- STEP 3
-    ENDER_SHARPENING_STATE  -- STEP 4
+    VECTOR_DIVIDER_SHARPENING_STATE  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -350,8 +347,6 @@ begin
               data_a_in_vector_adder <= FULL;
               data_b_in_vector_adder <= FULL;
 
-            when ENDER_INTERPOLATION_STATE =>  -- STEP 5
-
             when others =>
               -- FSM Control
               controller_ctrl_interpolation_fsm_int <= STARTER_INTERPOLATION_STATE;
@@ -394,14 +389,10 @@ begin
               data_a_in_vector_divider <= FULL;
               data_b_in_vector_divider <= FULL;
 
-            when ENDER_SHARPENING_STATE =>  -- STEP 4
-
             when others =>
               -- FSM Control
               controller_ctrl_sharpening_fsm_int <= STARTER_SHARPENING_STATE;
           end case;
-
-        when ENDER_STATE =>  -- STEP 5
 
         when others =>
           -- FSM Control

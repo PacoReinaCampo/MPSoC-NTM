@@ -82,8 +82,7 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
     VECTOR_ADDER_STATE,  -- STEP 2
     VECTOR_SECOND_SORT_STATE,  -- STEP 3
     VECTOR_MULTIPLICATION_STATE,  -- STEP 4
-    VECTOR_MULTIPLIER_STATE,  -- STEP 5
-    ENDER_STATE  -- STEP 4
+    VECTOR_MULTIPLIER_STATE  -- STEP 5
     );
 
   -----------------------------------------------------------------------
@@ -225,8 +224,6 @@ begin
         when VECTOR_MULTIPLICATION_STATE =>  -- STEP 4
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 5
-
-        when ENDER_STATE =>  -- STEP 4
 
           if (data_out_enable_vector_multiplier = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) then

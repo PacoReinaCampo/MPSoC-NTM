@@ -85,8 +85,7 @@ architecture dnc_memory_retention_vector_architecture of dnc_memory_retention_ve
     STARTER_STATE,  -- STEP 0
     VECTOR_MULTIPLIER_STATE,  -- STEP 1
     VECTOR_ADDER_STATE,  -- STEP 2
-    VECTOR_MULTIPLICATION_STATE,  -- STEP 3
-    ENDER_STATE  -- STEP 4
+    VECTOR_MULTIPLICATION_STATE  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -204,8 +203,6 @@ begin
         when VECTOR_ADDER_STATE =>  -- STEP 2
 
         when VECTOR_MULTIPLICATION_STATE =>  -- STEP 3
-
-        when ENDER_STATE =>  -- STEP 4
 
           if (data_out_enable_vector_multiplier = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) then

@@ -86,8 +86,7 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
     STARTER_STATE,  -- STEP 0
     VECTOR_COSINE_SIMILARITY_STATE,  -- STEP 1
     VECTOR_EXPONENTIATOR_STATE,  -- STEP 2
-    VECTOR_SOFTMAX_STATE,  -- STEP 3
-    ENDER_STATE  -- STEP 4
+    VECTOR_SOFTMAX_STATE  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -97,6 +96,8 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+
+  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -223,8 +224,6 @@ begin
 
         when VECTOR_SOFTMAX_STATE =>  -- STEP 3
 
-        when ENDER_STATE =>  -- STEP 4
-
           if (data_out_vector_enable_vector_softmax = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_I_IN) - unsigned(ONE)) then
               -- Control Outputs
@@ -271,7 +270,7 @@ begin
   -- VECTOR EXPONENTIATOR
   modulo_in_vector_exponentiator <= FULL;
   size_in_vector_exponentiator   <= SIZE_I_IN;
-  data_a_in_vector_exponentiator <= FULL;
+  data_a_in_vector_exponentiator <= EULER;
   data_b_in_vector_exponentiator <= data_out_vector_multiplier;
 
   -- VECTOR SOFTMAX

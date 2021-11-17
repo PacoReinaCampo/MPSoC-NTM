@@ -86,8 +86,7 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
     VECTOR_MULTIPLIER_STATE,  -- STEP 1
-    VECTOR_ADDER_STATE,  -- STEP 2
-    ENDER_STATE  -- STEP 3
+    VECTOR_ADDER_STATE  -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -175,8 +174,6 @@ begin
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
 
         when VECTOR_ADDER_STATE =>  -- STEP 2
-
-        when ENDER_STATE =>  -- STEP 3
 
           if (operation_scalar_adder = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE))) then

@@ -116,8 +116,7 @@ architecture ntm_interface_vector_architecture of ntm_interface_vector is
     MATRIX_SECOND_PRODUCT_STATE,  -- STEP 2
     SCALAR_FIRST_PRODUCT_STATE,  -- STEP 3
     SCALAR_SECOND_PRODUCT_STATE,  -- STEP 4
-    SCALAR_THIRD_PRODUCT_STATE,  -- STEP 5
-    ENDER_STATE  -- STEP 6
+    SCALAR_THIRD_PRODUCT_STATE  -- STEP 5
     );
 
   -----------------------------------------------------------------------
@@ -269,8 +268,6 @@ begin
 
           -- Data Outputs
           GAMMA_OUT <= data_out_scalar_product;
-
-        when ENDER_STATE =>  -- STEP 6
 
         when others =>
           -- FSM Control

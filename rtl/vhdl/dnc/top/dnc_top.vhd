@@ -99,16 +99,14 @@ architecture dnc_top_architecture of dnc_top is
     CONTROLLER_STATE,  -- STEP 1
     READ_HEADS_STATE,  -- STEP 2
     WRITE_HEADS_STATE,  -- STEP 3
-    MEMORY_STATE,  -- STEP 4
-    ENDER_STATE  -- STEP 5
+    MEMORY_STATE  -- STEP 4
     );
 
   type controller_ctrl_fsm is (
     STARTER_CONTROLLER_STATE,  -- STEP 0
     CONTROLLER_BODY_STATE,  -- STEP 1
     CONTROLLER_OUTPUT_VECTOR_STATE,  -- STEP 2
-    OUTPUT_VECTOR_STATE,  -- STEP 3
-    ENDER_CONTROLLER_STATE  -- STEP 4
+    OUTPUT_VECTOR_STATE  -- STEP 3
     );
 
   type read_heads_ctrl_fsm is (
@@ -117,8 +115,7 @@ architecture dnc_top_architecture of dnc_top is
     READ_KEYS_STATE,  -- STEP 2
     READ_MODES_STATE,  -- STEP 3
     READ_STRENGTHS_STATE,  -- STEP 4
-    READ_INTERFACE_VECTOR_STATE,  -- STEP 5
-    ENDER_READ_HEADS_STATE  -- STEP 6
+    READ_INTERFACE_VECTOR_STATE  -- STEP 5
     );
 
   type write_heads_ctrl_fsm is (
@@ -129,8 +126,7 @@ architecture dnc_top_architecture of dnc_top is
     WRITE_KEY_STATE,  -- STEP 4
     WRITE_STRENGTH_STATE,  -- STEP 5
     WRITE_VECTOR_STATE,  -- STEP 6
-    WRITE_INTERFACE_VECTOR_STATE,  -- STEP 7
-    ENDER_WRITE_HEADS_STATE  -- STEP 8
+    WRITE_INTERFACE_VECTOR_STATE  -- STEP 7
     );
 
   -----------------------------------------------------------------------
@@ -636,8 +632,6 @@ begin
 
               nu_in_output_vector <= FULL;
 
-            when ENDER_CONTROLLER_STATE =>  -- STEP 4
-
             when others =>
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_CONTROLLER_STATE;
@@ -725,8 +719,6 @@ begin
               wpi_in_read_interface_vector   <= FULL;
 
               h_in_read_interface_vector <= FULL;
-
-            when ENDER_READ_HEADS_STATE =>  -- STEP 6
 
             when others =>
               -- FSM Control
@@ -824,8 +816,6 @@ begin
 
               h_in_write_interface_vector <= FULL;
 
-            when ENDER_WRITE_HEADS_STATE =>  -- STEP 8
-
             when others =>
               -- FSM Control
               write_heads_ctrl_fsm_int <= STARTER_WRITE_HEADS_STATE;
@@ -862,8 +852,6 @@ begin
           v_write_in_addressing    <= FULL;
           ga_write_in_addressing   <= FULL;
           gw_write_in_addressing   <= FULL;
-
-        when ENDER_STATE =>  -- STEP 5
         
           if (unsigned(index_loop) = unsigned(SIZE_R_IN) - unsigned(ONE)) then
             -- FSM Control

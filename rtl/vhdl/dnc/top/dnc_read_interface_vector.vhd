@@ -118,8 +118,7 @@ architecture dnc_read_interface_vector_architecture of dnc_read_interface_vector
     TENSOR_PRODUCT_STATE,  -- STEP 1
     MATRIX_FIRST_PRODUCT_STATE,  -- STEP 2
     MATRIX_SECOND_PRODUCT_STATE,  -- STEP 3
-    MATRIX_THIRD_PRODUCT_STATE,  -- STEP 4
-    ENDER_STATE  -- STEP 5
+    MATRIX_THIRD_PRODUCT_STATE  -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -278,8 +277,6 @@ begin
 
           -- Data Outputs
           PI_OUT <= data_out_matrix_product;
-
-        when ENDER_STATE =>  -- STEP 5
 
         when others =>
           -- FSM Control

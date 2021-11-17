@@ -99,8 +99,7 @@ architecture ntm_top_architecture of ntm_top is
     CONTROLLER_STATE,  -- STEP 1
     READ_HEADS_STATE,  -- STEP 2
     WRITE_HEADS_STATE,  -- STEP 3
-    MEMORY_STATE,  -- STEP 4
-    ENDER_STATE  -- STEP 5
+    MEMORY_STATE  -- STEP 4
     );
 
   type controller_ctrl_fsm is (
@@ -108,15 +107,13 @@ architecture ntm_top_architecture of ntm_top is
     CONTROLLER_BODY_STATE,  -- STEP 1
     CONTROLLER_OUTPUT_VECTOR_STATE,  -- STEP 2
     OUTPUT_VECTOR_STATE,  -- STEP 3
-    INTERFACE_VECTOR_STATE,  -- STEP 4
-    ENDER_CONTROLLER_STATE  -- STEP 5
+    INTERFACE_VECTOR_STATE  -- STEP 4
     );
 
   type write_heads_ctrl_fsm is (
     STARTER_WRITE_HEADS_STATE,  -- STEP 0
     WRITING_STATE,  -- STEP 1
-    ERASING_STATE,  -- STEP 2
-    ENDER_WRITE_HEADS_STATE  -- STEP 3
+    ERASING_STATE  -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -520,8 +517,6 @@ begin
 
               h_in_interface_vector <= FULL;
 
-            when ENDER_CONTROLLER_STATE =>  -- STEP 5
-
             when others =>
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_CONTROLLER_STATE;
@@ -562,8 +557,6 @@ begin
               e_in_erasing <= FULL;
               w_in_erasing <= FULL;
 
-            when ENDER_WRITE_HEADS_STATE =>  -- STEP 3
-
             when others =>
               -- FSM Control
               write_heads_ctrl_fsm_int <= STARTER_WRITE_HEADS_STATE;
@@ -594,8 +587,6 @@ begin
           m_in_addressing <= FULL;
 
           w_in_addressing <= FULL;
-
-        when ENDER_STATE =>  -- STEP 5
         
           if (unsigned(index_loop) = unsigned(SIZE_R_IN) - unsigned(ONE)) then
             -- FSM Control

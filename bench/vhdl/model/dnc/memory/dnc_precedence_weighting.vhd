@@ -84,8 +84,7 @@ architecture dnc_precedence_weighting_architecture of dnc_precedence_weighting i
     VECTOR_SUMMATION_STATE,  -- STEP 1
     VECTOR_FIRST_ADDER_STATE,  -- STEP 2
     VECTOR_MULTIPLIER_STATE,  -- STEP 3
-    VECTOR_SECOND_ADDER_STATE,  -- STEP 4
-    ENDER_STATE  -- STEP 5
+    VECTOR_SECOND_ADDER_STATE  -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -220,8 +219,6 @@ begin
           size_in_vector_adder   <= SIZE_N_IN;
           data_a_in_vector_adder <= data_out_vector_multiplier;
           data_b_in_vector_adder <= W_IN;
-
-        when ENDER_STATE =>  -- STEP 5
 
           if (data_out_enable_vector_adder = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) then

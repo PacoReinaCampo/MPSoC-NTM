@@ -83,8 +83,7 @@ architecture ntm_writing_architecture of ntm_writing is
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
     VECTOR_MULTIPLIER_STATE,  -- STEP 1
-    VECTOR_ADDER_STATE,  -- STEP 2
-    ENDER_STATE  -- STEP 3
+    VECTOR_ADDER_STATE  -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -181,25 +180,18 @@ begin
 
           if (data_out_enable_vector_multiplier = '1') then
             -- Control Internal
-            start_vector_multiplier <= '1';
+            start_vector_adder <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
           else
             -- Control Internal
-            start_vector_multiplier <= '0';
+            start_vector_adder <= '0';
           end if;
 
         when VECTOR_ADDER_STATE =>  -- STEP 2
 
           if (data_out_enable_vector_adder = '1') then
-            -- FSM Control
-            controller_ctrl_fsm_int <= ENDER_STATE;
-          end if;
-
-        when ENDER_STATE =>  -- STEP 3
-
-          if (ready_vector_adder = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_W_IN) - unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';

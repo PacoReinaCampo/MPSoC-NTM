@@ -111,8 +111,7 @@ architecture dnc_addressing_architecture of dnc_addressing is
     TEMPORAL_LINK_MATRIX_STATE,  -- STEP 10
     USAGE_VECTOR_STATE,  -- STEP 11
     WRITE_CONTENT_WEIGHTING_STATE,  -- STEP 12
-    WRITE_WEIGHTING_STATE,  -- STEP 13
-    ENDER_STATE  -- STEP 14
+    WRITE_WEIGHTING_STATE  -- STEP 13
     );
 
   -----------------------------------------------------------------------
@@ -474,8 +473,6 @@ begin
         when WRITE_CONTENT_WEIGHTING_STATE =>  -- STEP 12
         
         when WRITE_WEIGHTING_STATE =>  -- STEP 13
-        
-        when ENDER_STATE =>  -- STEP 14
 
         when others =>
           -- FSM Control

@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_content_based_addressing is
+entity dnc_content_based_addressing is
   generic (
     DATA_SIZE : integer := 512
     );
@@ -76,7 +76,7 @@ entity ntm_content_based_addressing is
     );
 end entity;
 
-architecture ntm_content_based_addressing_architecture of ntm_content_based_addressing is
+architecture dnc_content_based_addressing_architecture of dnc_content_based_addressing is
 
   -----------------------------------------------------------------------
   -- Types
@@ -86,8 +86,7 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
     STARTER_STATE,  -- STEP 0
     VECTOR_COSINE_SIMILARITY_STATE,  -- STEP 1
     VECTOR_EXPONENTIATOR_STATE,  -- STEP 2
-    VECTOR_SOFTMAX_STATE,  -- STEP 3
-    ENDER_STATE  -- STEP 4
+    VECTOR_SOFTMAX_STATE  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -97,6 +96,8 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+
+  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -196,11 +197,11 @@ begin
       -- Data Outputs
       C_OUT <= ZERO;
 
-      -- Control Internal
-      index_loop <= ZERO;
-
       -- Control Outputs
       READY <= '0';
+
+      -- Control Internal
+      index_loop <= ZERO;
 
     elsif (rising_edge(CLK)) then
 
@@ -219,40 +220,11 @@ begin
 
         when VECTOR_COSINE_SIMILARITY_STATE =>  -- STEP 1
 
-          if (data_out_vector_enable_vector_cosine = '1') then
-            -- Control Internal
-            start_vector_exponentiator <= '1';
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_EXPONENTIATOR_STATE;
-          else
-            -- Control Internal
-            start_vector_exponentiator <= '0';
-          end if;
-
         when VECTOR_EXPONENTIATOR_STATE =>  -- STEP 2
-
-          if (data_out_enable_vector_exponentiator = '1') then
-            -- Control Internal
-            start_vector_softmax <= '1';
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_SOFTMAX_STATE;
-          else
-            -- Control Internal
-            start_vector_softmax <= '0';
-          end if;
 
         when VECTOR_SOFTMAX_STATE =>  -- STEP 3
 
           if (data_out_vector_enable_vector_softmax = '1') then
-            -- FSM Control
-            controller_ctrl_fsm_int <= ENDER_STATE;
-          end if;
-
-        when ENDER_STATE =>  -- STEP 4
-
-          if (ready_vector_softmax = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_I_IN) - unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';
@@ -281,24 +253,6 @@ begin
     end if;
   end process;
 
-  -- VECTOR COSINE SIMILARITY
-  data_a_in_vector_enable_vector_cosine <= '0';
-  data_a_in_scalar_enable_vector_cosine <= '0';
-  data_b_in_vector_enable_vector_cosine <= '0';
-  data_b_in_scalar_enable_vector_cosine <= '0';
-
-  -- VECTOR MULTIPLIER
-  data_a_in_enable_vector_multiplier <= '0';
-  data_b_in_enable_vector_multiplier <= '0';
-
-  -- VECTOR EXPONENTIATOR
-  data_a_in_enable_vector_exponentiator <= '0';
-  data_b_in_enable_vector_exponentiator <= '0';
-
-  -- VECTOR SOFTMAX
-  data_in_vector_enable_vector_softmax <= '0';
-  data_in_scalar_enable_vector_softmax <= '0';
-
   -- DATA
   -- VECTOR COSINE SIMILARITY
   modulo_in_vector_cosine <= FULL;
@@ -316,7 +270,7 @@ begin
   -- VECTOR EXPONENTIATOR
   modulo_in_vector_exponentiator <= FULL;
   size_in_vector_exponentiator   <= SIZE_I_IN;
-  data_a_in_vector_exponentiator <= FULL;
+  data_a_in_vector_exponentiator <= EULER;
   data_b_in_vector_exponentiator <= data_out_vector_multiplier;
 
   -- VECTOR SOFTMAX

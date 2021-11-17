@@ -85,8 +85,7 @@ architecture dnc_usage_vector_architecture of dnc_usage_vector is
     VECTOR_FIRST_ADDER_STATE,  -- STEP 1
     VECTOR_FIRST_MULTIPLIER_STATE,  -- STEP 2
     VECTOR_SECOND_ADDER_STATE,  -- STEP 3
-    VECTOR_SECOND_MULTIPLIER_STATE,  -- STEP 4
-    ENDER_STATE  -- STEP 5
+    VECTOR_SECOND_MULTIPLIER_STATE  -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -210,8 +209,6 @@ begin
           size_in_vector_adder   <= SIZE_N_IN;
           data_a_in_vector_adder <= data_out_vector_adder;
           data_b_in_vector_adder <= PSI_IN;
-
-        when ENDER_STATE =>  -- STEP 5
 
           if (data_out_enable_vector_adder = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) then

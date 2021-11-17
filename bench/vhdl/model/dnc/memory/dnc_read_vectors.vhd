@@ -87,8 +87,7 @@ architecture dnc_read_vectors_architecture of dnc_read_vectors is
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
     MATRIX_PRODUCT_STATE,  -- STEP 1
-    MATRIX_TRANSPOSE_STATE,  -- STEP 2
-    ENDER_STATE  -- STEP 3
+    MATRIX_TRANSPOSE_STATE  -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -194,8 +193,6 @@ begin
         when MATRIX_PRODUCT_STATE =>  -- STEP 1
 
         when MATRIX_TRANSPOSE_STATE =>  -- STEP 2
-
-        when ENDER_STATE =>  -- STEP 3
 
           if (data_out_i_enable_matrix_product = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_R_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then
