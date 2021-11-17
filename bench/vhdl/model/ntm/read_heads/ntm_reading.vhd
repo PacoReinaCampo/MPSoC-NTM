@@ -154,7 +154,7 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      R_OUT_ENABLE <= '1';
+      R_OUT_ENABLE <= '0';
 
       -- Control Internal
       index_loop <= ZERO;
@@ -165,6 +165,8 @@ begin
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
+
+          R_OUT_ENABLE <= '0';
 
           -- Control Internal
           index_loop <= ZERO;

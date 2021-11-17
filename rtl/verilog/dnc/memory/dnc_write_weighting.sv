@@ -124,7 +124,7 @@ module dnc_write_weighting #(
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - g(t))·c(t;j))
+  // w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - ga(t))·c(t;j))
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin

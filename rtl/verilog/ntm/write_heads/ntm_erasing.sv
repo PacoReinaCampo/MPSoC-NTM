@@ -49,9 +49,9 @@ module ntm_erasing #(
     input START,
     output reg READY,
 
-    input M_IN_ENABLE,
-    input E_IN_ENABLE,
-    output reg M_OUT_ENABLE,
+    input M_IN_ENABLE,  // for k in 0 to W-1
+    input E_IN_ENABLE,  // for k in 0 to W-1
+    output reg M_OUT_ENABLE,  // for k in 0 to W-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_N_IN,

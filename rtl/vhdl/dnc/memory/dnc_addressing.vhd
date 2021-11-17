@@ -492,7 +492,7 @@ begin
         
         when WRITE_WEIGHTING_STATE =>  -- STEP 11
 
-          -- w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - g(t))·c(t;j))
+          -- w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - ga(t))·c(t;j))
         
         when MEMORY_MATRIX_STATE =>  -- STEP 12
 
