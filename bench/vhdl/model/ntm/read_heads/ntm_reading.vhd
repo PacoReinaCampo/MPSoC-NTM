@@ -57,8 +57,8 @@ entity ntm_reading is
     START : in  std_logic;
     READY : out std_logic;
 
-    M_IN_ENABLE  : in  std_logic;
-    R_OUT_ENABLE : out std_logic;
+    M_IN_ENABLE  : in  std_logic;  -- for k in 0 to W-1
+    R_OUT_ENABLE : out std_logic;  -- for k in 0 to W-1
 
     -- DATA
     SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -154,6 +154,8 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      R_OUT_ENABLE <= '1';
+
       -- Control Internal
       index_loop <= ZERO;
 
@@ -168,8 +170,14 @@ begin
           index_loop <= ZERO;
 
           if (START = '1') then
+            -- Control Internal
+            start_vector_multiplier <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          else
+            -- Control Internal
+            start_vector_multiplier <= '0';
           end if;
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 1

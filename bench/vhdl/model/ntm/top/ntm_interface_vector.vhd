@@ -110,13 +110,17 @@ architecture ntm_interface_vector_architecture of ntm_interface_vector is
   -- Types
   -----------------------------------------------------------------------
 
-  type controller_ctrl_fsm is (
+  type controller_ctrl_scalar_fsm is (
+    STARTER_STATE,  -- STEP 0
+    SCALAR_FIRST_PRODUCT_STATE,  -- STEP 1
+    SCALAR_SECOND_PRODUCT_STATE,  -- STEP 2
+    SCALAR_THIRD_PRODUCT_STATE  -- STEP 3
+    );
+
+  type controller_ctrl_matrix_fsm is (
     STARTER_STATE,  -- STEP 0
     MATRIX_FIRST_PRODUCT_STATE,  -- STEP 1
-    MATRIX_SECOND_PRODUCT_STATE,  -- STEP 2
-    SCALAR_FIRST_PRODUCT_STATE,  -- STEP 3
-    SCALAR_SECOND_PRODUCT_STATE,  -- STEP 4
-    SCALAR_THIRD_PRODUCT_STATE  -- STEP 5
+    MATRIX_SECOND_PRODUCT_STATE  -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -132,7 +136,8 @@ architecture ntm_interface_vector_architecture of ntm_interface_vector is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+  signal controller_ctrl_scalar_fsm_int : controller_ctrl_scalar_fsm;
+  signal controller_ctrl_matrix_fsm_int : controller_ctrl_matrix_fsm;
 
   -- SCALAR PRODUCT
   -- CONTROL
@@ -183,14 +188,12 @@ begin
   -- xi(t;?) = U(t;?;l)·h(t;l)
 
   -- CONTROL
-  ctrl_fsm : process(CLK, RST)
+  ctrl_scalar_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
       -- Data Outputs
-      K_OUT     <= ZERO;
       BETA_OUT  <= ZERO;
       G_OUT     <= ZERO;
-      S_OUT     <= ZERO;
       GAMMA_OUT <= ZERO;
 
       -- Control Outputs
@@ -198,17 +201,87 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      case controller_ctrl_fsm_int is
+      case controller_ctrl_scalar_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_STATE;
+            controller_ctrl_scalar_fsm_int <= SCALAR_FIRST_PRODUCT_STATE;
+          end if;
+
+        when SCALAR_FIRST_PRODUCT_STATE =>  -- STEP 1
+
+          -- beta(t) = Wbeta(t;l)·h(t;l)
+
+          -- Data Inputs
+          modulo_in_scalar_product <= FULL;
+          length_in_scalar_product <= SIZE_L_IN;
+          data_a_in_scalar_product <= WBETA_IN;
+          data_b_in_scalar_product <= H_IN;
+
+          -- Data Outputs
+          BETA_OUT <= data_out_scalar_product;
+
+        when SCALAR_SECOND_PRODUCT_STATE =>  -- STEP 2
+
+          -- g(t) = Wg(t;l)·h(t;l)
+
+          -- Data Inputs
+          modulo_in_scalar_product <= FULL;
+          length_in_scalar_product <= SIZE_L_IN;
+          data_a_in_scalar_product <= WG_IN;
+          data_b_in_scalar_product <= H_IN;
+
+          -- Data Outputs
+          G_OUT <= data_out_scalar_product;
+
+        when SCALAR_THIRD_PRODUCT_STATE =>  -- STEP 3
+
+          -- gamma(t) = Wgamma(t;l)·h(t;l)
+
+          -- Data Inputs
+          modulo_in_scalar_product <= FULL;
+          length_in_scalar_product <= SIZE_L_IN;
+          data_a_in_scalar_product <= WGAMMA_IN;
+          data_b_in_scalar_product <= H_IN;
+
+          -- Data Outputs
+          GAMMA_OUT <= data_out_scalar_product;
+
+        when others =>
+          -- FSM Control
+          controller_ctrl_scalar_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
+
+  ctrl_matrix_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      K_OUT <= ZERO;
+      S_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      case controller_ctrl_matrix_fsm_int is
+        when STARTER_STATE =>  -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          if (START = '1') then
+            -- FSM Control
+            controller_ctrl_matrix_fsm_int <= MATRIX_FIRST_PRODUCT_STATE;
           end if;
 
         when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 1
+
+          -- k(t;k) = Wk(t;l;k)·h(t;l)
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
@@ -224,6 +297,8 @@ begin
 
         when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 2
 
+          -- s(t;j) = Wk(t;l;j)·h(t;l)
+
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_N_IN;
@@ -236,42 +311,9 @@ begin
           -- Data Outputs
           S_OUT <= data_out_matrix_product;
 
-        when SCALAR_FIRST_PRODUCT_STATE =>  -- STEP 3
-
-          -- Data Inputs
-          modulo_in_scalar_product <= FULL;
-          length_in_scalar_product <= SIZE_L_IN;
-          data_a_in_scalar_product <= WBETA_IN;
-          data_b_in_scalar_product <= H_IN;
-
-          -- Data Outputs
-          BETA_OUT <= data_out_scalar_product;
-
-        when SCALAR_SECOND_PRODUCT_STATE =>  -- STEP 4
-
-          -- Data Inputs
-          modulo_in_scalar_product <= FULL;
-          length_in_scalar_product <= SIZE_L_IN;
-          data_a_in_scalar_product <= WG_IN;
-          data_b_in_scalar_product <= H_IN;
-
-          -- Data Outputs
-          G_OUT <= data_out_scalar_product;
-
-        when SCALAR_THIRD_PRODUCT_STATE =>  -- STEP 5
-
-          -- Data Inputs
-          modulo_in_scalar_product <= FULL;
-          length_in_scalar_product <= SIZE_L_IN;
-          data_a_in_scalar_product <= WGAMMA_IN;
-          data_b_in_scalar_product <= H_IN;
-
-          -- Data Outputs
-          GAMMA_OUT <= data_out_scalar_product;
-
         when others =>
           -- FSM Control
-          controller_ctrl_fsm_int <= STARTER_STATE;
+          controller_ctrl_matrix_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

@@ -207,6 +207,8 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      O_OUT_ENABLE <= '0';
+
       -- Control Internal
       index_loop <= ZERO;
 
@@ -217,34 +219,85 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          O_OUT_ENABLE <= '0';
+
           -- Control Internal
           index_loop <= ZERO;
 
           if (START = '1') then
+            -- Data Outputs
+            O_OUT <= '0';
+
+            -- Control Internal
+            start_matrix_product <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_STATE;
+          else
+            -- Control Internal
+            start_matrix_product <= '0';
           end if;
 
         when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 1
 
+          -- Control Inputs
+          data_a_in_i_enable_matrix_product <= W_IN_L_ENABLE;
+          data_a_in_j_enable_matrix_product <= W_IN_X_ENABLE;
+          data_b_in_i_enable_matrix_product <= X_IN_ENABLE;
+          data_b_in_j_enable_matrix_product <= '0';
+
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
-          size_a_i_in_matrix_product <= FULL;
-          size_a_j_in_matrix_product <= FULL;
-          size_b_i_in_matrix_product <= FULL;
-          size_b_j_in_matrix_product <= FULL;
+          size_a_i_in_matrix_product <= SIZE_L_IN;
+          size_a_j_in_matrix_product <= SIZE_X_IN;
+          size_b_i_in_matrix_product <= SIZE_X_IN;
+          size_b_j_in_matrix_product <= ONE;
           data_a_in_matrix_product   <= W_IN;
           data_b_in_matrix_product   <= X_IN;
 
+          if (data_out_i_enable_matrix_product = '1') then
+            -- Control Internal
+            start_vector_adder <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_FIRST_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_adder <= '0';
+          end if;
+
         when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
+
+          -- Control Inputs
+          operation_vector_adder <= '0';
+
+          data_a_in_enable_vector_adder <= '0';
+          data_b_in_enable_vector_adder <= B_IN_ENABLE;
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
-          size_in_vector_adder   <= FULL;
+          size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_matrix_product;
           data_b_in_vector_adder <= B_IN;
 
+          if (data_out_enable_vector_adder = '1') then
+            -- Control Internal
+            start_matrix_product <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= MATRIX_SECOND_PRODUCT_STATE;
+          else
+            -- Control Internal
+            start_matrix_product <= '0';
+          end if;
+
         when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 3
+
+          -- Control Inputs
+          data_a_in_i_enable_matrix_product <= '0';
+          data_a_in_j_enable_matrix_product <= '0';
+          data_b_in_i_enable_matrix_product <= '0';
+          data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
@@ -255,16 +308,50 @@ begin
           data_a_in_matrix_product   <= K_IN;
           data_b_in_matrix_product   <= R_IN;
 
+          if (data_out_i_enable_matrix_product = '1') then
+            -- Control Internal
+            start_vector_adder <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_SECOND_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_adder <= '0';
+          end if;
+
         when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
+
+          -- Control Inputs
+          operation_vector_adder <= '0';
+
+          data_a_in_enable_vector_adder <= '0';
+          data_b_in_enable_vector_adder <= '0';
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= FULL;
           data_a_in_vector_adder <= data_out_matrix_product;
           data_b_in_vector_adder <= data_out_vector_adder;
+
+          if (data_out_enable_vector_adder = '1') then
+            -- Control Internal
+            start_matrix_product <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= MATRIX_THIRD_PRODUCT_STATE;
+          else
+            -- Control Internal
+            start_matrix_product <= '0';
+          end if;
 
         when MATRIX_THIRD_PRODUCT_STATE =>  -- STEP 5
 
+          -- Control Inputs
+          data_a_in_i_enable_matrix_product <= '0';
+          data_a_in_j_enable_matrix_product <= '0';
+          data_b_in_i_enable_matrix_product <= '0';
+          data_b_in_j_enable_matrix_product <= '0';
+
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= FULL;
@@ -273,16 +360,50 @@ begin
           size_b_j_in_matrix_product <= FULL;
           data_a_in_matrix_product   <= U_IN;
           data_b_in_matrix_product   <= H_IN;
+
+          if (data_out_i_enable_matrix_product = '1') then
+            -- Control Internal
+            start_vector_adder <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_THIRD_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_adder <= '0';
+          end if;
 
         when VECTOR_THIRD_ADDER_STATE =>  -- STEP 6
 
+          -- Control Inputs
+          operation_vector_adder <= '0';
+
+          data_a_in_enable_vector_adder <= '0';
+          data_b_in_enable_vector_adder <= '0';
+
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= FULL;
           data_a_in_vector_adder <= data_out_matrix_product;
           data_b_in_vector_adder <= data_out_vector_adder;
 
+          if (data_out_enable_vector_adder = '1') then
+            -- Control Internal
+            start_matrix_product <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= MATRIX_FOURTH_PRODUCT_STATE;
+          else
+            -- Control Internal
+            start_matrix_product <= '0';
+          end if;
+
         when MATRIX_FOURTH_PRODUCT_STATE =>  -- STEP 7
+
+          -- Control Inputs
+          data_a_in_i_enable_matrix_product <= '0';
+          data_a_in_j_enable_matrix_product <= '0';
+          data_b_in_i_enable_matrix_product <= '0';
+          data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
@@ -293,7 +414,24 @@ begin
           data_a_in_matrix_product   <= U_IN;
           data_b_in_matrix_product   <= H_IN;
 
+          if (data_out_i_enable_matrix_product = '1') then
+            -- Control Internal
+            start_vector_adder <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_FOURTH_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_adder <= '0';
+          end if;
+
         when VECTOR_FOURTH_ADDER_STATE =>  -- STEP 8
+
+          -- Control Inputs
+          operation_vector_adder <= '0';
+
+          data_a_in_enable_vector_adder <= '0';
+          data_b_in_enable_vector_adder <= '0';
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
@@ -301,7 +439,21 @@ begin
           data_a_in_vector_adder <= data_out_matrix_product;
           data_b_in_vector_adder <= data_out_vector_adder;
 
+          if (data_out_enable_vector_adder = '1') then
+            -- Control Internal
+            start_vector_adder <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_LOGISTIC_STATE;
+          else
+            -- Control Internal
+            start_vector_adder <= '0';
+          end if;
+
         when VECTOR_LOGISTIC_STATE =>  -- STEP 9
+
+          -- Control Internal
+          data_in_enable_vector_logistic <= '0';
 
           -- Data Inputs
           modulo_in_vector_logistic <= FULL;

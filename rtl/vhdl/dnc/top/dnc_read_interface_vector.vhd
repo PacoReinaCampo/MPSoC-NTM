@@ -200,7 +200,6 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      K_OUT    <= ZERO;
       BETA_OUT <= ZERO;
       F_OUT    <= ZERO;
       PI_OUT   <= ZERO;
@@ -217,24 +216,8 @@ begin
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_fsm_int <= TENSOR_PRODUCT_STATE;
+            controller_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_STATE;
           end if;
-
-        when TENSOR_PRODUCT_STATE =>  -- STEP 1
-
-          -- Data Inputs
-          modulo_in_tensor_product   <= FULL;
-          size_a_i_in_tensor_product <= SIZE_R_IN;
-          size_a_j_in_tensor_product <= SIZE_L_IN;
-          size_a_k_in_tensor_product <= SIZE_W_IN;
-          size_b_i_in_tensorproduct  <= ONE;
-          size_b_j_in_tensor_product <= SIZE_L_IN;
-          size_b_k_in_tensor_product <= ONE;
-          data_a_in_tensor_product   <= WK_IN;
-          data_b_in_tensor_product   <= H_IN;
-
-          -- Data Outputs
-          K_OUT <= data_out_tensor_product;
 
         when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 2
 
@@ -284,6 +267,20 @@ begin
       end case;
     end if;
   end process;
+
+  -- DATA
+  -- TENSOR PRODUCT
+  modulo_in_tensor_product   <= FULL;
+  size_a_i_in_tensor_product <= SIZE_R_IN;
+  size_a_j_in_tensor_product <= SIZE_L_IN;
+  size_a_k_in_tensor_product <= SIZE_W_IN;
+  size_b_i_in_tensorproduct  <= ONE;
+  size_b_j_in_tensor_product <= SIZE_L_IN;
+  size_b_k_in_tensor_product <= ONE;
+  data_a_in_tensor_product   <= WK_IN;
+  data_b_in_tensor_product   <= H_IN;
+
+  K_OUT <= data_out_tensor_product;
 
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
