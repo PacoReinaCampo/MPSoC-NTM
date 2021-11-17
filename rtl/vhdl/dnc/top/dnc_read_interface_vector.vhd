@@ -115,10 +115,9 @@ architecture dnc_read_interface_vector_architecture of dnc_read_interface_vector
 
   type controller_ctrl_fsm is (
     STARTER_STATE,  -- STEP 0
-    TENSOR_PRODUCT_STATE,  -- STEP 1
-    MATRIX_FIRST_PRODUCT_STATE,  -- STEP 2
-    MATRIX_SECOND_PRODUCT_STATE,  -- STEP 3
-    MATRIX_THIRD_PRODUCT_STATE  -- STEP 4
+    MATRIX_FIRST_PRODUCT_STATE,  -- STEP 1
+    MATRIX_SECOND_PRODUCT_STATE,  -- STEP 2
+    MATRIX_THIRD_PRODUCT_STATE  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -219,7 +218,9 @@ begin
             controller_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_STATE;
           end if;
 
-        when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 2
+        when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 1
+
+          -- beta(t;i) = Wbeta(t;i;l)·h(t;l)
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
@@ -233,7 +234,9 @@ begin
           -- Data Outputs
           BETA_OUT <= data_out_matrix_product;
 
-        when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 3
+        when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 2
+
+          -- f(t;i) = Wf(t;i;l)·h(t;l)
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
@@ -247,7 +250,9 @@ begin
           -- Data Outputs
           F_OUT <= data_out_matrix_product;
 
-        when MATRIX_THIRD_PRODUCT_STATE =>  -- STEP 4
+        when MATRIX_THIRD_PRODUCT_STATE =>  -- STEP 3
+
+          -- pi(t;i) = Wpi(t;i;l)·h(t;l)
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;

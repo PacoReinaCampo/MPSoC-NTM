@@ -222,6 +222,8 @@ begin
 
         when SCALAR_FIRST_PRODUCT_STATE =>  -- STEP 1
 
+          -- beta(t) = Wbeta(t;l)·h(t;l)
+
           -- Data Inputs
           modulo_in_scalar_product <= FULL;
           length_in_scalar_product <= SIZE_L_IN;
@@ -233,6 +235,8 @@ begin
 
         when SCALAR_SECOND_PRODUCT_STATE =>  -- STEP 2
 
+          -- ga(t) = Wga(t;l)·h(t;l)
+
           -- Data Inputs
           modulo_in_scalar_product <= FULL;
           length_in_scalar_product <= SIZE_L_IN;
@@ -243,6 +247,8 @@ begin
           GA_OUT <= data_out_scalar_product;
 
         when SCALAR_THIRD_PRODUCT_STATE =>  -- STEP 3
+
+          -- gw(t) = Wgw(t;l)·h(t;l)
 
           -- Data Inputs
           modulo_in_scalar_product <= FULL;
@@ -285,6 +291,8 @@ begin
 
         when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 1
 
+          -- k(t;k) = Wk(t;l;k)·h(t;l)
+
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_W_IN;
@@ -299,6 +307,8 @@ begin
 
         when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 2
 
+          -- e(t;k) = We(t;l;k)·h(t;l)
+
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_W_IN;
@@ -312,6 +322,8 @@ begin
           E_OUT <= data_out_matrix_product;
 
         when MATRIX_THIRD_PRODUCT_STATE =>  -- STEP 3
+
+          -- v(t;k) = Wv(t;l;k)·h(t;l)
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
