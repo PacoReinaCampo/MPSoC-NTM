@@ -404,6 +404,9 @@ begin
 
             when CONTROLLER_BODY_STATE =>  -- STEP 1
 
+              -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + b(t;l))
+              -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + b(t;l))
+
               -- Control Inputs
               w_in_l_enable_controller <= '0';
               w_in_x_enable_controller <= '0';
@@ -434,6 +437,8 @@ begin
 
             when CONTROLLER_OUTPUT_VECTOR_STATE =>  -- STEP 2
 
+              -- nu(t;y) = U(t;y;l)·h(t;l)
+
               -- Control Inputs
               start_controller_output_vector <= '0';
               ready_controller_output_vector <= '0';
@@ -455,6 +460,8 @@ begin
               nu_out_controller_output_vector <= FULL;
 
             when OUTPUT_VECTOR_STATE =>  -- STEP 3
+
+              -- y(t;y) = K(t;i;y;k)·r(t;i;k) + nu(t;y)
 
               -- Control Inputs
               k_in_i_enable_output_vector <= '0';
@@ -478,6 +485,8 @@ begin
               nu_in_output_vector <= FULL;
 
             when INTERFACE_VECTOR_STATE =>  -- STEP 4
+
+              -- xi(t;?) = U(t;?;l)·h(t;l)
 
               -- Control Inputs
               -- Key Vector
@@ -524,12 +533,16 @@ begin
 
         when READ_HEADS_STATE =>  -- STEP 2
 
+         -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
+
         when WRITE_HEADS_STATE =>  -- STEP 3
 
           case write_heads_ctrl_fsm_int is
             when STARTER_WRITE_HEADS_STATE =>  -- STEP 0
 
             when WRITING_STATE =>  -- STEP 1
+
+              -- M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
 
               -- Control Inputs
               m_in_enable_writing <= '0';
@@ -544,6 +557,8 @@ begin
               w_in_writing <= FULL;
 
             when ERASING_STATE =>  -- STEP 2
+
+              -- M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
 
               -- Control Inputs
               m_in_enable_erasing <= '0';
@@ -563,6 +578,14 @@ begin
           end case;
 
         when MEMORY_STATE =>  -- STEP 4
+
+          -- wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
+
+          -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
+
+          -- w(t;j) = w(t;j)*s(t;k)
+
+          -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
 
           -- Control Inputs
           k_in_enable_addressing <= '0';

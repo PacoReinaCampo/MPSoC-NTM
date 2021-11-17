@@ -565,6 +565,9 @@ begin
 
             when CONTROLLER_BODY_STATE =>  -- STEP 1
 
+              -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + b(t;l))
+              -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + b(t;l))
+
               -- Control Inputs
               w_in_l_enable_controller <= '0';
               w_in_x_enable_controller <= '0';
@@ -595,6 +598,8 @@ begin
 
             when CONTROLLER_OUTPUT_VECTOR_STATE =>  -- STEP 2
 
+              -- nu(t;y) = U(t;y;l)·h(t;l)
+
               -- Control Inputs
               u_in_j_enable_controller_output_vector <= '0';
               u_in_l_enable_controller_output_vector <= '0';
@@ -609,6 +614,8 @@ begin
               h_in_controller_output_vector <= FULL;
 
             when OUTPUT_VECTOR_STATE =>  -- STEP 3
+
+              -- y(t;y) = K(t;i;y;k)·r(t;i;k) + nu(t;y)
 
               -- Control Inputs
               k_in_i_enable_output_vector <= '0';
@@ -644,6 +651,8 @@ begin
 
             when FREE_GATES_STATE =>  -- STEP 1
 
+              -- f(t;i) = sigmoid(f^(t;i))
+
               -- Control Inputs
               f_in_enable_free_gates <= '0';
 
@@ -653,6 +662,8 @@ begin
               f_in_free_gates <= FULL;
 
             when READ_KEYS_STATE =>  -- STEP 2
+
+              -- k(t;i;k) = k^(t;i;k)
 
               -- Control Inputs
               k_in_i_enable_read_keys <= '0';
@@ -666,6 +677,8 @@ begin
 
             when READ_MODES_STATE =>  -- STEP 3
 
+              -- pi(t;i;p) = softmax(pi^(t;i;p))
+
               -- Control Inputs
               pi_in_i_enable_read_modes <= '0';
               pi_in_p_enable_read_modes <= '0';
@@ -673,9 +686,11 @@ begin
               -- Data Inputs
               size_r_in_read_modes <= FULL;
 
-              pi_in_read_modes  <= FULL;
+              pi_in_read_modes <= FULL;
 
             when READ_STRENGTHS_STATE =>  -- STEP 4
+
+              -- beta(t;i) = oneplus(beta^(t;i))
 
               -- Control Inputs
               beta_in_enable_read_strengths <= '0';
@@ -686,6 +701,8 @@ begin
               beta_in_read_strengths <= FULL;
 
             when READ_INTERFACE_VECTOR_STATE =>  -- STEP 5
+
+              -- xi(t;?) = U(t;?;l)·h(t;l)
 
               -- Control Inputs
               -- Read Key
@@ -732,10 +749,14 @@ begin
 
             when ALLOCATION_GATE_STATE =>  -- STEP 1
 
+              -- ga(t) = sigmoid(g^(t))
+
               -- Data Inputs
               ga_in_allocation_gate  <= FULL;
 
             when ERASE_VECTOR_STATE =>  -- STEP 2
+
+              -- e(t;k) = sigmoid(e^(t;k))
 
               -- Control Inputs
               e_in_enable_erase_vector <= '0';
@@ -743,14 +764,18 @@ begin
               -- Data Inputs
               size_w_in_erase_vector <= FULL;
 
-              e_in_erase_vector  <= FULL;
+              e_in_erase_vector <= FULL;
 
             when WRITE_GATE_STATE =>  -- STEP 3
 
+              -- gw(t) = sigmoid(gw^(t))
+
               -- Data Inputs
-              gw_in_write_gate  <= FULL;
+              gw_in_write_gate <= FULL;
 
             when WRITE_KEY_STATE =>  -- STEP 4
+
+              -- k(t;k) = k^(t;k)
 
               -- Control Inputs
               k_in_enable_write_key <= '0';
@@ -758,14 +783,18 @@ begin
               -- Data Inputs
               size_w_in_write_key <= FULL;
 
-              k_in_write_key  <= FULL;
+              k_in_write_key <= FULL;
 
             when WRITE_STRENGTH_STATE =>  -- STEP 5
 
+              -- beta(t) = oneplus(beta^(t))
+
               -- Data Inputs
-              beta_in_write_strength  <= FULL;
+              beta_in_write_strength <= FULL;
 
             when WRITE_VECTOR_STATE =>  -- STEP 6
+
+              -- v(t;k) = v^(t;k)
 
               -- Control Inputs
               v_in_enable_write_vector <= '0';
@@ -773,9 +802,11 @@ begin
               -- Data Inputs
               size_w_in_write_vector <= FULL;
 
-              v_in_write_vector  <= FULL;
+              v_in_write_vector <= FULL;
 
             when WRITE_INTERFACE_VECTOR_STATE =>  -- STEP 7
+
+              -- xi(t;?) = U(t;?;l)·h(t;l)
 
               -- Control Inputs
               -- Write Key
