@@ -488,6 +488,12 @@ begin
 
               -- xi(t;?) = U(t;?;l)·h(t;l)
 
+              -- k(t;k) = Wk(t;l;k)·h(t;l)
+              -- beta(t) = Wbeta(t;l)·h(t;l)
+              -- g(t) = Wg(t;l)·h(t;l)
+              -- s(t;j) = Wk(t;l;j)·h(t;l)
+              -- gamma(t) = Wgamma(t;l)·h(t;l)
+
               -- Control Inputs
               -- Key Vector
               wk_in_l_enable_interface_vector <= '0';

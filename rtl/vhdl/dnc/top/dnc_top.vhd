@@ -704,6 +704,11 @@ begin
 
               -- xi(t;?) = U(t;?;l)·h(t;l)
 
+              -- k(t;i;k) = Wk(t;i;l;k)·h(t;l)
+              -- beta(t;i) = Wbeta(t;i;l)·h(t;l)
+              -- f(t;i) = Wf(t;i;l)·h(t;l)
+              -- pi(t;i) = Wpi(t;i;l)·h(t;l)
+
               -- Control Inputs
               -- Read Key
               wk_in_i_enable_read_interface_vector <= '0';
@@ -807,6 +812,13 @@ begin
             when WRITE_INTERFACE_VECTOR_STATE =>  -- STEP 7
 
               -- xi(t;?) = U(t;?;l)·h(t;l)
+
+              -- k(t;k) = Wk(t;l;k)·h(t;l)
+              -- beta(t) = Wbeta(t;l)·h(t;l)
+              -- e(t;k) = We(t;l;k)·h(t;l)
+              -- v(t;k) = Wv(t;l;k)·h(t;l)
+              -- ga(t) = Wga(t;l)·h(t;l)
+              -- gw(t) = Wgw(t;l)·h(t;l)
 
               -- Control Inputs
               -- Write Key
