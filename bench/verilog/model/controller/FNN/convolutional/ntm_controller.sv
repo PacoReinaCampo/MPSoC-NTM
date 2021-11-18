@@ -51,13 +51,27 @@ module ntm_controller #(
 
     input W_IN_L_ENABLE,  // for l in 0 to L-1
     input W_IN_X_ENABLE,  // for x in 0 to X-1
+
     input K_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     input K_IN_L_ENABLE,  // for l in 0 to L-1
     input K_IN_K_ENABLE,  // for k in 0 to W-1
+
     input B_IN_ENABLE,  // for l in 0 to L-1
+
     input X_IN_ENABLE,  // for x in 0 to X-1
+
     input R_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     input R_IN_K_ENABLE,  // for k in 0 to W-1
+
+    output reg W_OUT_L_ENABLE,  // for l in 0 to L-1
+    output reg W_OUT_X_ENABLE,  // for x in 0 to X-1
+
+    output reg K_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    output reg K_OUT_L_ENABLE,  // for l in 0 to L-1
+    output reg K_OUT_K_ENABLE,  // for k in 0 to W-1
+
+    output reg B_OUT_ENABLE,  // for l in 0 to L-1
+
     output reg H_OUT_ENABLE,  // for l in 0 to L-1
 
     // DATA
@@ -65,11 +79,18 @@ module ntm_controller #(
     input [DATA_SIZE-1:0] SIZE_W_IN,
     input [DATA_SIZE-1:0] SIZE_L_IN,
     input [DATA_SIZE-1:0] SIZE_R_IN,
+
     input [DATA_SIZE-1:0] W_IN,
     input [DATA_SIZE-1:0] K_IN,
     input [DATA_SIZE-1:0] B_IN,
+
     input [DATA_SIZE-1:0] X_IN,
     input [DATA_SIZE-1:0] R_IN,
+
+    output reg [DATA_SIZE-1:0] W_OUT,
+    output reg [DATA_SIZE-1:0] K_OUT,
+    output reg [DATA_SIZE-1:0] B_OUT,
+
     output reg H_OUT
   );
 
@@ -264,6 +285,9 @@ module ntm_controller #(
 
           // Data Outputs
           H_OUT <= data_out_vector_logistic;
+
+          // Control Outputs
+          H_OUT_ENABLE <= 1'b1;
         end
 
         default : begin
@@ -273,6 +297,20 @@ module ntm_controller #(
       endcase
     end
   end
+
+  // DATA
+  // TRAINER
+  assign size_x_in_trainer = SIZE_X_IN;
+  assign size_w_in_trainer = SIZE_W_IN;
+  assign size_l_in_trainer = SIZE_L_IN;
+  assign size_r_in_trainer = SIZE_R_IN;
+
+  assign x_in_trainer = X_IN;
+  assign h_in_trainer = FULL;
+
+  assign W_OUT = w_out_trainer;
+  assign K_OUT = k_out_trainer;
+  assign B_OUT = b_out_trainer;
 
   // VECTOR ADDER
   ntm_vector_adder #(
@@ -360,7 +398,7 @@ module ntm_controller #(
   ntm_trainer #(
     .DATA_SIZE(DATA_SIZE)
   )
-  ntm(
+  trainer(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),

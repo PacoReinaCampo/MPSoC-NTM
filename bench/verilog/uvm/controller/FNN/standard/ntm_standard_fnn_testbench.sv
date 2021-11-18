@@ -79,6 +79,12 @@ module ntm_standard_fnn_testbench;
   wire x_in_enable_controller;
   wire r_in_i_enable_controller;
   wire r_in_k_enable_controller;
+  wire w_out_l_enable_controller;
+  wire w_out_x_enable_controller;
+  wire k_out_i_enable_controller;
+  wire k_out_l_enable_controller;
+  wire k_out_k_enable_controller;
+  wire b_out_enable_controller;
   wire h_out_enable_controller;
 
   // DATA
@@ -91,6 +97,9 @@ module ntm_standard_fnn_testbench;
   wire [DATA_SIZE-1:0] b_in_controller;
   wire [DATA_SIZE-1:0] x_in_controller;
   wire [DATA_SIZE-1:0] r_in_controller;
+  wire [DATA_SIZE-1:0] w_out_controller;
+  wire [DATA_SIZE-1:0] k_out_controller;
+  wire [DATA_SIZE-1:0] b_out_controller;
   wire h_out_controller;
 
   ///////////////////////////////////////////////////////////////////////
@@ -98,40 +107,43 @@ module ntm_standard_fnn_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // STIMULUS
-  ntm_standard_fnn_stimulus #(
+  ntm_convolutional_fnn_stimulus #(
     .DATA_SIZE(DATA_SIZE)
   )
-  standard_fnn_stimulus(
+  convolutional_fnn_stimulus(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .NTM_STANDARD_FNN_START(start_controller),
-    .NTM_STANDARD_FNN_READY(ready_controller),
+    .NTM_CONVOLUTIONAL_FNN_START(start_controller),
+    .NTM_CONVOLUTIONAL_FNN_READY(ready_controller),
 
-    .NTM_STANDARD_FNN_W_IN_L_ENABLE(w_in_l_enable_controller),
-    .NTM_STANDARD_FNN_W_IN_X_ENABLE(w_in_x_enable_controller),
-    .NTM_STANDARD_FNN_K_IN_I_ENABLE(k_in_i_enable_controller),
-    .NTM_STANDARD_FNN_K_IN_L_ENABLE(k_in_l_enable_controller),
-    .NTM_STANDARD_FNN_K_IN_K_ENABLE(k_in_k_enable_controller),
-    .NTM_STANDARD_FNN_B_IN_ENABLE(b_in_enable_controller),
-    .NTM_STANDARD_FNN_X_IN_ENABLE(x_in_enable_controller),
-    .NTM_STANDARD_FNN_R_IN_I_ENABLE(r_in_i_enable_controller),
-    .NTM_STANDARD_FNN_R_IN_K_ENABLE(r_in_k_enable_controller),
-    .NTM_STANDARD_FNN_H_OUT_ENABLE(h_out_enable_controller),
+    .NTM_CONVOLUTIONAL_FNN_W_IN_L_ENABLE(w_in_l_enable_controller),
+    .NTM_CONVOLUTIONAL_FNN_W_IN_X_ENABLE(w_in_x_enable_controller),
+    .NTM_CONVOLUTIONAL_FNN_K_IN_I_ENABLE(k_in_i_enable_controller),
+    .NTM_CONVOLUTIONAL_FNN_K_IN_L_ENABLE(k_in_l_enable_controller),
+    .NTM_CONVOLUTIONAL_FNN_K_IN_K_ENABLE(k_in_k_enable_controller),
+    .NTM_CONVOLUTIONAL_FNN_B_IN_ENABLE(b_in_enable_controller),
+    .NTM_CONVOLUTIONAL_FNN_X_IN_ENABLE(x_in_enable_controller),
+    .NTM_CONVOLUTIONAL_FNN_R_IN_I_ENABLE(r_in_i_enable_controller),
+    .NTM_CONVOLUTIONAL_FNN_R_IN_K_ENABLE(r_in_k_enable_controller),
+    .NTM_CONVOLUTIONAL_FNN_H_OUT_ENABLE(h_out_enable_controller),
 
     // DATA
-    .NTM_STANDARD_FNN_SIZE_X_IN(size_x_in_controller),
-    .NTM_STANDARD_FNN_SIZE_W_IN(size_w_in_controller),
-    .NTM_STANDARD_FNN_SIZE_L_IN(size_l_in_controller),
-    .NTM_STANDARD_FNN_SIZE_R_IN(size_r_in_controller),
-    .NTM_STANDARD_FNN_W_IN(w_in_controller),
-    .NTM_STANDARD_FNN_K_IN(k_in_controller),
-    .NTM_STANDARD_FNN_B_IN(b_in_controller),
-    .NTM_STANDARD_FNN_X_IN(x_in_controller),
-    .NTM_STANDARD_FNN_R_IN(r_in_controller),
-    .NTM_STANDARD_FNN_H_OUT(h_out_controller)
+    .NTM_CONVOLUTIONAL_FNN_SIZE_X_IN(size_x_in_controller),
+    .NTM_CONVOLUTIONAL_FNN_SIZE_W_IN(size_w_in_controller),
+    .NTM_CONVOLUTIONAL_FNN_SIZE_L_IN(size_l_in_controller),
+    .NTM_CONVOLUTIONAL_FNN_SIZE_R_IN(size_r_in_controller),
+    .NTM_CONVOLUTIONAL_FNN_W_IN(w_in_controller),
+    .NTM_CONVOLUTIONAL_FNN_K_IN(k_in_controller),
+    .NTM_CONVOLUTIONAL_FNN_B_IN(b_in_controller),
+    .NTM_CONVOLUTIONAL_FNN_X_IN(x_in_controller),
+    .NTM_CONVOLUTIONAL_FNN_R_IN(r_in_controller),
+    .NTM_CONVOLUTIONAL_FNN_W_OUT(w_out_controller),
+    .NTM_CONVOLUTIONAL_FNN_K_OUT(k_out_controller),
+    .NTM_CONVOLUTIONAL_FNN_B_OUT(b_out_controller),
+    .NTM_CONVOLUTIONAL_FNN_H_OUT(h_out_controller)
   );
 
   // CONTROLLER
@@ -156,6 +168,12 @@ module ntm_standard_fnn_testbench;
     .X_IN_ENABLE(x_in_enable_controller),
     .R_IN_I_ENABLE(r_in_i_enable_controller),
     .R_IN_K_ENABLE(r_in_k_enable_controller),
+    .W_OUT_L_ENABLE(w_out_l_enable_controller),
+    .W_OUT_X_ENABLE(w_out_x_enable_controller),
+    .K_OUT_I_ENABLE(k_out_i_enable_controller),
+    .K_OUT_L_ENABLE(k_out_l_enable_controller),
+    .K_OUT_K_ENABLE(k_out_k_enable_controller),
+    .B_OUT_ENABLE(b_out_enable_controller),
     .H_OUT_ENABLE(h_out_enable_controller),
 
     // DATA
@@ -168,6 +186,9 @@ module ntm_standard_fnn_testbench;
     .B_IN(b_in_controller),
     .X_IN(x_in_controller),
     .R_IN(r_in_controller),
+    .W_OUT(w_out_controller),
+    .K_OUT(k_out_controller),
+    .B_OUT(b_out_controller),
     .H_OUT(h_out_controller)
   );
 

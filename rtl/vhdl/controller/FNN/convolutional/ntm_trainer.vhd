@@ -59,7 +59,7 @@ entity ntm_trainer is
     READY : out std_logic;
 
     H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
-    X_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+    X_IN_ENABLE : in std_logic;         -- for x in 0 to X-1
 
     W_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
     W_OUT_X_ENABLE : out std_logic;     -- for x in 0 to X-1

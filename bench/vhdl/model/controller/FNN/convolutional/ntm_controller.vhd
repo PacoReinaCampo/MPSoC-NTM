@@ -72,6 +72,15 @@ entity ntm_controller is
     R_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
     R_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
+    W_OUT_L_ENABLE : out std_logic;       -- for l in 0 to L-1
+    W_OUT_X_ENABLE : out std_logic;       -- for x in 0 to X-1
+
+    K_OUT_I_ENABLE : out std_logic;       -- for i in 0 to R-1 (read heads flow)
+    K_OUT_L_ENABLE : out std_logic;       -- for l in 0 to L-1
+    K_OUT_K_ENABLE : out std_logic;       -- for k in 0 to W-1
+
+    B_OUT_ENABLE : out std_logic;         -- for l in 0 to L-1
+
     H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
@@ -86,6 +95,10 @@ entity ntm_controller is
 
     X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
 
     H_OUT : out std_logic
     );
@@ -321,6 +334,20 @@ begin
     end if;
   end process;
 
+  -- DATA
+  -- TRAINER
+  size_x_in_trainer <= SIZE_X_IN;
+  size_w_in_trainer <= SIZE_W_IN;
+  size_l_in_trainer <= SIZE_L_IN;
+  size_r_in_trainer <= SIZE_R_IN;
+
+  x_in_trainer <= X_IN;
+  h_in_trainer <= FULL;
+
+  W_OUT <= w_out_trainer;
+  K_OUT <= k_out_trainer;
+  B_OUT <= b_out_trainer;
+
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder
     generic map (
@@ -411,7 +438,7 @@ begin
       );
 
   -- TRAINER
-  ntm : ntm_trainer
+  trainer : ntm_trainer
     generic map (
       DATA_SIZE => DATA_SIZE
       )
