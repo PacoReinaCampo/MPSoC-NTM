@@ -83,31 +83,26 @@ module ntm_forget_trainer #(
   parameter [2:0] VECTOR_DIFFERENTIATION_W_STATE = 2;
   parameter [2:0] VECTOR_DIFFERENTIATION_K_STATE = 3;
   parameter [2:0] VECTOR_DIFFERENTIATION_B_STATE = 4;
-  parameter [2:0] ENDER_STATE = 5;
 
   parameter [2:0] STARTER_DF_STATE = 0;
   parameter [2:0] VECTOR_ADDER_DF_STATE = 1;
   parameter [2:0] VECTOR_FIRST_MULTIPLIER_DF_STATE = 2;
   parameter [2:0] VECTOR_SECOND_MULTIPLIER_DF_STATE = 3;
   parameter [2:0] VECTOR_THIRD_MULTIPLIER_DF_STATE = 4;
-  parameter [2:0] ENDER_DF_STATE = 5;
 
   parameter [2:0] STARTER_DW_STATE = 0;
   parameter [2:0] VECTOR_DIFFERENTIATION_DW_STATE = 1;
   parameter [2:0] MATRIX_PRODUCT_DW_STATE = 2;
   parameter [2:0] VECTOR_SUMMATION_DW_STATE = 3;
-  parameter [2:0] ENDER_DW_STATE = 4;
 
   parameter [2:0] STARTER_DK_STATE = 0;
   parameter [2:0] VECTOR_DIFFERENTIATION_DK_STATE = 1;
   parameter [2:0] MATRIX_PRODUCT_DK_STATE = 2;
   parameter [2:0] VECTOR_SUMMATION_DK_STATE = 3;
-  parameter [2:0] ENDER_DK_STATE = 4;
 
   parameter [1:0] STARTER_DB_STATE = 0;
   parameter [1:0] VECTOR_DIFFERENTIATION_DB_STATE = 1;
   parameter [1:0] VECTOR_SUMMATION_DB_STATE = 2;
-  parameter [1:0] ENDER_DB_STATE = 3;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -266,9 +261,6 @@ module ntm_forget_trainer #(
             VECTOR_THIRD_MULTIPLIER_DF_STATE : begin  // STEP 4
             end
 
-            ENDER_DF_STATE : begin  // STEP 5
-            end
-
             default : begin
               // FSM Control
               differentiation_f_ctrl_fsm_int <= STARTER_DF_STATE;
@@ -289,9 +281,6 @@ module ntm_forget_trainer #(
             end
 
             VECTOR_SUMMATION_DW_STATE : begin  // STEP 3
-            end
-
-            ENDER_DW_STATE : begin  // STEP 4
             end
 
             default : begin
@@ -316,9 +305,6 @@ module ntm_forget_trainer #(
             VECTOR_SUMMATION_DK_STATE : begin  // STEP 3
             end
 
-            ENDER_DK_STATE : begin  // STEP 4
-            end
-
             default : begin
               // FSM Control
               differentiation_k_ctrl_fsm_int <= STARTER_DK_STATE;
@@ -338,17 +324,11 @@ module ntm_forget_trainer #(
             VECTOR_SUMMATION_DB_STATE : begin  // STEP 2
             end
 
-            ENDER_DB_STATE : begin  // STEP 3
-            end
-
             default : begin
               // FSM Control
               differentiation_b_ctrl_fsm_int <= STARTER_DB_STATE;
             end
           endcase
-        end
-
-        ENDER_STATE : begin  // STEP 4
         end
 
         default : begin

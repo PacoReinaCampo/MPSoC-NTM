@@ -174,6 +174,15 @@ architecture dnc_top_architecture of dnc_top is
   signal r_in_i_enable_controller : std_logic;
   signal r_in_k_enable_controller : std_logic;
 
+  signal w_out_l_enable_controller : std_logic;
+  signal w_out_x_enable_controller : std_logic;
+
+  signal k_out_i_enable_controller : std_logic;
+  signal k_out_l_enable_controller : std_logic;
+  signal k_out_k_enable_controller : std_logic;
+
+  signal b_out_enable_controller : std_logic;
+
   signal h_out_enable_controller : std_logic;
 
   -- DATA
@@ -188,6 +197,10 @@ architecture dnc_top_architecture of dnc_top is
 
   signal x_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal r_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal w_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal k_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal b_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal h_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -941,6 +954,15 @@ begin
       R_IN_I_ENABLE => r_in_i_enable_controller,
       R_IN_K_ENABLE => r_in_k_enable_controller,
 
+      W_OUT_L_ENABLE => w_out_l_enable_controller,
+      W_OUT_X_ENABLE => w_out_x_enable_controller,
+
+      K_OUT_I_ENABLE => k_out_i_enable_controller,
+      K_OUT_L_ENABLE => k_out_l_enable_controller,
+      K_OUT_K_ENABLE => k_out_k_enable_controller,
+
+      B_OUT_ENABLE => b_out_enable_controller,
+
       H_OUT_ENABLE => h_out_enable_controller,
 
       -- DATA
@@ -955,6 +977,10 @@ begin
 
       X_IN => x_in_controller,
       R_IN => r_in_controller,
+
+      W_OUT => w_out_controller,
+      K_OUT => k_out_controller,
+      B_OUT => b_out_controller,
 
       H_OUT => h_out_controller
       );

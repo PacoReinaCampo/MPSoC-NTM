@@ -92,7 +92,6 @@ module dnc_addressing #(
   parameter [3:0] USAGE_VECTOR_STATE = 11;
   parameter [3:0] WRITE_CONTENT_WEIGHTING_STATE = 12;
   parameter [3:0] WRITE_WEIGHTING_STATE = 13;
-  parameter [3:0] ENDER_STATE = 14;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -397,9 +396,6 @@ module dnc_addressing #(
         end
 
         WRITE_WEIGHTING_STATE : begin  // STEP 13
-        end
-
-        ENDER_STATE : begin  // STEP 14
         end
         default : begin
           // FSM Control

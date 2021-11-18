@@ -98,7 +98,6 @@ module ntm_interface_vector #(
   parameter [2:0] SCALAR_FIRST_PRODUCT_STATE = 3;
   parameter [2:0] SCALAR_SECOND_PRODUCT_STATE = 4;
   parameter [2:0] SCALAR_THIRD_PRODUCT_STATE = 5;
-  parameter [2:0] ENDER_STATE = 6;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -247,9 +246,6 @@ module ntm_interface_vector #(
 
           // Data Outputs
           GAMMA_OUT <= data_out_scalar_product;
-        end
-
-        ENDER_STATE : begin  // STEP 6
         end
         default : begin
           // FSM Control

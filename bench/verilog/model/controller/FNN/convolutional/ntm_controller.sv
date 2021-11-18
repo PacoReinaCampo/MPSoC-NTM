@@ -104,7 +104,6 @@ module ntm_controller #(
   parameter [2:0] MATRIX_SECOND_CONVOLUTION_STATE = 3;
   parameter [2:0] VECTOR_SECOND_ADDER_STATE = 4;
   parameter [2:0] VECTOR_LOGISTIC_STATE = 5;
-  parameter [2:0] ENDER_STATE = 6;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -279,9 +278,6 @@ module ntm_controller #(
           modulo_in_vector_logistic <= FULL;
           size_in_vector_logistic   <= FULL;
           data_in_vector_logistic   <= FULL;
-        end
-
-        ENDER_STATE : begin  // STEP 6
 
           // Data Outputs
           H_OUT <= data_out_vector_logistic;

@@ -256,8 +256,10 @@ begin
           data_b_in_matrix_product   <= X_IN;
 
           if (data_out_i_enable_matrix_product = '1') then
-            -- Control Internal
-            start_vector_adder <= '1';
+            if (unsigned(index_loop) = unsigned(ZERO)) then
+              -- Control Internal
+              start_vector_adder <= '1';
+            end if;
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_FIRST_ADDER_STATE;
@@ -281,8 +283,10 @@ begin
           data_b_in_vector_adder <= B_IN;
 
           if (data_out_enable_vector_adder = '1') then
-            -- Control Internal
-            start_matrix_product <= '1';
+            if (unsigned(index_loop) = unsigned(ZERO)) then
+              -- Control Internal
+              start_matrix_product <= '1';
+            end if;
 
             -- FSM Control
             controller_ctrl_fsm_int <= MATRIX_SECOND_PRODUCT_STATE;
@@ -309,8 +313,10 @@ begin
           data_b_in_matrix_product   <= R_IN;
 
           if (data_out_i_enable_matrix_product = '1') then
-            -- Control Internal
-            start_vector_adder <= '1';
+            if (unsigned(index_loop) = unsigned(ZERO)) then
+              -- Control Internal
+              start_vector_adder <= '1';
+            end if;
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_SECOND_ADDER_STATE;
@@ -334,8 +340,10 @@ begin
           data_b_in_vector_adder <= data_out_vector_adder;
 
           if (data_out_enable_vector_adder = '1') then
-            -- Control Internal
-            start_matrix_product <= '1';
+            if (unsigned(index_loop) = unsigned(ZERO)) then
+              -- Control Internal
+              start_matrix_product <= '1';
+            end if;
 
             -- FSM Control
             controller_ctrl_fsm_int <= MATRIX_THIRD_PRODUCT_STATE;
@@ -362,8 +370,10 @@ begin
           data_b_in_matrix_product   <= H_IN;
 
           if (data_out_i_enable_matrix_product = '1') then
-            -- Control Internal
-            start_vector_adder <= '1';
+            if (unsigned(index_loop) = unsigned(ZERO)) then
+              -- Control Internal
+              start_vector_adder <= '1';
+            end if;
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_THIRD_ADDER_STATE;
@@ -387,8 +397,10 @@ begin
           data_b_in_vector_adder <= data_out_vector_adder;
 
           if (data_out_enable_vector_adder = '1') then
-            -- Control Internal
-            start_matrix_product <= '1';
+            if (unsigned(index_loop) = unsigned(ZERO)) then
+              -- Control Internal
+              start_matrix_product <= '1';
+            end if;
 
             -- FSM Control
             controller_ctrl_fsm_int <= MATRIX_FOURTH_PRODUCT_STATE;
@@ -415,8 +427,10 @@ begin
           data_b_in_matrix_product   <= H_IN;
 
           if (data_out_i_enable_matrix_product = '1') then
-            -- Control Internal
-            start_vector_adder <= '1';
+            if (unsigned(index_loop) = unsigned(ZERO)) then
+              -- Control Internal
+              start_vector_adder <= '1';
+            end if;
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_FOURTH_ADDER_STATE;
@@ -440,8 +454,10 @@ begin
           data_b_in_vector_adder <= data_out_vector_adder;
 
           if (data_out_enable_vector_adder = '1') then
-            -- Control Internal
-            start_vector_adder <= '1';
+            if (unsigned(index_loop) = unsigned(ZERO)) then
+              -- Control Internal
+              start_vector_adder <= '1';
+            end if;
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_LOGISTIC_STATE;

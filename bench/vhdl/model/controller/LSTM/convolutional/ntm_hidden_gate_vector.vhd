@@ -175,8 +175,10 @@ begin
             -- Data Outputs
             H_OUT <= ZERO;
 
-            -- Control Internal
-            start_vector_tanh <= '1';
+            if (unsigned(index_loop) = unsigned(ZERO)) then
+              -- Control Internal
+              start_vector_tanh <= '1';
+            end if;
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_TANH_STATE;
@@ -188,8 +190,10 @@ begin
         when VECTOR_TANH_STATE =>  -- STEP 1
 
           if (data_out_enable_vector_tanh = '1') then
-            -- Control Internal
-            start_vector_multiplier <= '1';
+            if (unsigned(index_loop) = unsigned(ZERO)) then
+              -- Control Internal
+              start_vector_multiplier <= '1';
+            end if;
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;

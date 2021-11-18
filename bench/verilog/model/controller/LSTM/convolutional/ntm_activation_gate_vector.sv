@@ -91,7 +91,6 @@ module ntm_activation_gate_vector #(
   parameter [3:0] MATRIX_FOURTH_CONVOLUTION_STATE = 7;
   parameter [3:0] VECTOR_FOURTH_ADDER_STATE = 8;
   parameter [3:0] VECTOR_TANH_STATE = 9;
-  parameter [3:0] ENDER_STATE = 10;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -276,9 +275,6 @@ module ntm_activation_gate_vector #(
           modulo_in_vector_tanh <= FULL;
           size_in_vector_tanh   <= FULL;
           data_in_vector_tanh   <= FULL;
-        end
-
-        ENDER_STATE : begin  // STEP 10
 
           // Data Outputs
           A_OUT <= data_out_vector_tanh;

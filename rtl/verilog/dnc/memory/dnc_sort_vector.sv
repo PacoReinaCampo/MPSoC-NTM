@@ -65,7 +65,6 @@ module dnc_sort_vector #(
   parameter [1:0] STARTER_STATE = 0;
   parameter [1:0] VECTOR_MULTIPLIER_STATE = 1;
   parameter [1:0] VECTOR_ADDER_STATE = 2;
-  parameter [1:0] ENDER_STATE = 3;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -143,9 +142,6 @@ module dnc_sort_vector #(
         end
 
         VECTOR_ADDER_STATE : begin  // STEP 2
-        end
-
-        ENDER_STATE : begin  // STEP 3
         end
         default : begin
           // FSM Control

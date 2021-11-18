@@ -98,7 +98,6 @@ module dnc_read_interface_vector #(
   parameter [2:0] MATRIX_FIRST_PRODUCT_STATE = 2;
   parameter [2:0] MATRIX_SECOND_PRODUCT_STATE = 3;
   parameter [2:0] MATRIX_THIRD_PRODUCT_STATE = 4;
-  parameter [2:0] ENDER_STATE = 5;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -254,9 +253,6 @@ module dnc_read_interface_vector #(
 
           // Data Outputs
           PI_OUT <= data_out_matrix_product;
-        end
-
-        ENDER_STATE : begin  // STEP 5
         end
         default : begin
           // FSM Control

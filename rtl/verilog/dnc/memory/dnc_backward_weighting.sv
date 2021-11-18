@@ -71,7 +71,6 @@ module dnc_backward_weighting #(
   parameter [1:0] STARTER_STATE = 0;
   parameter [1:0] MATRIX_PRODUCT_STATE = 1;
   parameter [1:0] MATRIX_TRANSPOSE_STATE = 2;
-  parameter [1:0] ENDER_STATE = 3;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -160,9 +159,6 @@ module dnc_backward_weighting #(
         end
 
         MATRIX_TRANSPOSE_STATE : begin  // STEP 2
-        end
-
-        ENDER_STATE : begin  // STEP 3
 
           // Data Outputs
           B_OUT <= data_out_matrix_product;

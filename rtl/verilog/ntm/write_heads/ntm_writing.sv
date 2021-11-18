@@ -69,7 +69,6 @@ module ntm_writing #(
   parameter [1:0] STARTER_STATE = 0;
   parameter [1:0] VECTOR_MULTIPLIER_STATE = 1;
   parameter [1:0] VECTOR_ADDER_STATE = 2;
-  parameter [1:0] ENDER_STATE = 3;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -148,9 +147,6 @@ module ntm_writing #(
         end
 
         VECTOR_ADDER_STATE : begin  // STEP 2
-        end
-
-        ENDER_STATE : begin  // STEP 3
 
           // Data Outputs
           M_OUT <= data_out_vector_adder;

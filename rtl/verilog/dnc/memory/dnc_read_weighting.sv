@@ -81,7 +81,6 @@ module dnc_read_weighting #(
   parameter [2:0] VECTOR_SECOND_ADDER_STATE = 4;
   parameter [2:0] VECTOR_THIRD_MULTIPLIER_STATE = 5;
   parameter [2:0] VECTOR_THIRD_ADDER_STATE = 6;
-  parameter [2:0] ENDER_STATE = 7;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -214,9 +213,6 @@ module dnc_read_weighting #(
           size_in_vector_adder   <= SIZE_N_IN;
           data_a_in_vector_adder <= data_out_vector_adder;
           data_b_in_vector_adder <= data_out_vector_multiplier;
-        end
-
-        ENDER_STATE : begin  // STEP 7
         end
         default : begin
           // FSM Control

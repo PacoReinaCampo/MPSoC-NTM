@@ -105,7 +105,6 @@ module ntm_controller #(
   parameter [2:0] VECTOR_STATE_STATE = 4;
   parameter [2:0] VECTOR_OUTPUT_GATE = 5;
   parameter [2:0] VECTOR_HIDDEN_GATE = 6;
-  parameter [2:0] ENDER_STATE = 7;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -443,9 +442,6 @@ module ntm_controller #(
         end
 
         VECTOR_HIDDEN_GATE : begin  // STEP 6
-        end
-
-        ENDER_STATE : begin  // STEP 7
         end
         default : begin
           // FSM Control

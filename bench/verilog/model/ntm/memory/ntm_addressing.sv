@@ -78,20 +78,17 @@ module ntm_addressing #(
   parameter [2:0] VECTOR_INTERPOLATION_STATE = 2;
   parameter [2:0] VECTOR_CONVOLUTION_STATE = 3;
   parameter [2:0] VECTOR_SHARPENING_STATE = 4;
-  parameter [2:0] ENDER_STATE = 5;
 
   parameter [2:0] STARTER_INTERPOLATION_STATE = 0;
   parameter [2:0] VECTOR_FIRST_MULTIPLIER_INTERPOLATION_STATE = 1;
   parameter [2:0] VECTOR_FIRST_ADDER_INTERPOLATION_STATE = 2;
   parameter [2:0] VECTOR_SECOND_MULTIPLIER_INTERPOLATION_STATE = 3;
   parameter [2:0] VECTOR_SECOND_ADDER_INTERPOLATION_STATE = 4;
-  parameter [2:0] ENDER_INTERPOLATION_STATE = 5;
 
   parameter [2:0] STARTER_SHARPENING_STATE = 0;
   parameter [2:0] VECTOR_EXPONENTIATOR_SHARPENING_STATE = 1;
   parameter [2:0] VECTOR_SUMMATION_SHARPENING_STATE = 2;
   parameter [2:0] VECTOR_DIVIDER_SHARPENING_STATE = 3;
-  parameter [2:0] ENDER_SHARPENING_STATE = 4;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -315,9 +312,6 @@ module ntm_addressing #(
               data_a_in_vector_adder <= FULL;
               data_b_in_vector_adder <= FULL;
             end
-
-            ENDER_INTERPOLATION_STATE : begin  // STEP 5
-            end
             default : begin
               // FSM Control
               controller_ctrl_interpolation_fsm_int <= STARTER_INTERPOLATION_STATE;
@@ -367,17 +361,11 @@ module ntm_addressing #(
               data_a_in_vector_divider <= FULL;
               data_b_in_vector_divider <= FULL;
             end
-
-            ENDER_SHARPENING_STATE : begin  // STEP 4
-            end
             default : begin
               // FSM Control
               controller_ctrl_sharpening_fsm_int <= STARTER_SHARPENING_STATE;
             end
           endcase
-        end
-
-        ENDER_STATE : begin  // STEP 5
         end
         default : begin
           // FSM Control

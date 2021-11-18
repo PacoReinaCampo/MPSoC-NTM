@@ -81,19 +81,16 @@ module ntm_top #(
   parameter [2:0] READ_HEADS_STATE = 2;
   parameter [2:0] WRITE_HEADS_STATE = 3;
   parameter [2:0] MEMORY_STATE = 4;
-  parameter [2:0] ENDER_STATE = 5;
 
   parameter [2:0] STARTER_CONTROLLER_STATE = 0;
   parameter [2:0] CONTROLLER_BODY_STATE = 1;
   parameter [2:0] CONTROLLER_OUTPUT_VECTOR_STATE = 2;
   parameter [2:0] OUTPUT_VECTOR_STATE = 3;
   parameter [2:0] INTERFACE_VECTOR_STATE = 4;
-  parameter [2:0] ENDER_CONTROLLER_STATE = 5;
 
   parameter [1:0] STARTER_WRITE_HEADS_STATE = 0;
   parameter [1:0] WRITING_STATE = 1;
   parameter [1:0] ERASING_STATE = 2;
-  parameter [1:0] ENDER_WRITE_HEADS_STATE = 3;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -124,6 +121,7 @@ module ntm_top #(
   // CONTROL
   wire start_controller;
   wire ready_controller;
+
   wire w_in_l_enable_controller;
   wire w_in_x_enable_controller;
   wire k_in_i_enable_controller;
@@ -133,6 +131,12 @@ module ntm_top #(
   wire x_in_enable_controller;
   wire r_in_i_enable_controller;
   wire r_in_k_enable_controller;
+  wire w_out_l_enable_controller;
+  wire w_out_x_enable_controller;
+  wire k_out_i_enable_controller;
+  wire k_out_l_enable_controller;
+  wire k_out_k_enable_controller;
+  wire b_out_enable_controller;
   wire h_out_enable_controller;
 
   // DATA
@@ -145,6 +149,9 @@ module ntm_top #(
   wire [DATA_SIZE-1:0] b_in_controller;
   wire [DATA_SIZE-1:0] x_in_controller;
   wire [DATA_SIZE-1:0] r_in_controller;
+  wire [DATA_SIZE-1:0] w_out_controller;
+  wire [DATA_SIZE-1:0] k_out_controller;
+  wire [DATA_SIZE-1:0] b_out_controller;
   wire [DATA_SIZE-1:0] h_out_controller;
 
   // CONTROLLER OUTPUT VECTOR
@@ -350,9 +357,6 @@ module ntm_top #(
 
             INTERFACE_VECTOR_STATE : begin  // STEP 4
             end
-
-            ENDER_WRITE_HEADS_STATE : begin  // STEP 5
-            end
             default : begin
               // FSM Control
               controller_ctrl_fsm_int <= STARTER_CONTROLLER_STATE;
@@ -373,9 +377,6 @@ module ntm_top #(
 
             ERASING_STATE : begin  // STEP 2
             end
-
-            ENDER_WRITE_HEADS_STATE : begin  // STEP 3
-            end
             default : begin
               // FSM Control
               write_heads_ctrl_fsm_int <= STARTER_WRITE_HEADS_STATE;
@@ -384,9 +385,6 @@ module ntm_top #(
         end
 
         MEMORY_STATE : begin  // STEP 4
-        end
-
-        ENDER_STATE : begin  // STEP 5
         
           if (index_loop == SIZE_R_IN - ONE) begin
             // FSM Control
@@ -427,6 +425,12 @@ module ntm_top #(
     .X_IN_ENABLE(x_in_enable_controller),
     .R_IN_I_ENABLE(r_in_i_enable_controller),
     .R_IN_K_ENABLE(r_in_k_enable_controller),
+    .W_OUT_L_ENABLE(w_out_l_enable_controller),
+    .W_OUT_X_ENABLE(w_out_x_enable_controller),
+    .K_OUT_I_ENABLE(k_out_i_enable_controller),
+    .K_OUT_L_ENABLE(k_out_l_enable_controller),
+    .K_OUT_K_ENABLE(k_out_k_enable_controller),
+    .B_OUT_ENABLE(b_out_enable_controller),
     .H_OUT_ENABLE(h_out_enable_controller),
 
     // DATA
@@ -439,6 +443,9 @@ module ntm_top #(
     .B_IN(b_in_controller),
     .X_IN(x_in_controller),
     .R_IN(r_in_controller),
+    .W_OUT(w_out_controller),
+    .K_OUT(k_out_controller),
+    .B_OUT(b_out_controller),
     .H_OUT(h_out_controller)
   );
 

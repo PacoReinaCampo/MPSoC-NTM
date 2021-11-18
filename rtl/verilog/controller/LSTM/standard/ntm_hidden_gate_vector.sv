@@ -67,7 +67,6 @@ module ntm_hidden_gate_vector #(
   parameter [1:0] STARTER_STATE = 0;
   parameter [1:0] VECTOR_TANH_STATE = 1;
   parameter [1:0] VECTOR_MULTIPLIER_STATE = 2;
-  parameter [1:0] ENDER_STATE = 3;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -146,9 +145,6 @@ module ntm_hidden_gate_vector #(
         end
 
         VECTOR_MULTIPLIER_STATE : begin  // STEP 2
-        end
-
-        ENDER_STATE : begin  // STEP 3
 
           // Data Outputs
           H_OUT <= data_out_vector_multiplier;

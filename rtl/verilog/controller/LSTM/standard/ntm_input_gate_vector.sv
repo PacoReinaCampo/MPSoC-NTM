@@ -91,7 +91,6 @@ module ntm_input_gate_vector #(
   parameter [3:0] MATRIX_FOURTH_PRODUCT_STATE = 7;
   parameter [3:0] VECTOR_FOURTH_ADDER_STATE = 8;
   parameter [3:0] VECTOR_LOGISTIC_STATE = 9;
-  parameter [3:0] ENDER_STATE = 10;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -277,9 +276,6 @@ module ntm_input_gate_vector #(
           modulo_in_vector_logistic <= FULL;
           size_in_vector_logistic   <= FULL;
           data_in_vector_logistic   <= FULL;
-        end
-
-        ENDER_STATE : begin  // STEP 10
 
           // Data Outputs
           I_OUT <= data_out_vector_logistic;

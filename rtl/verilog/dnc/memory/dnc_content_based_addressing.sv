@@ -71,7 +71,6 @@ module dnc_content_based_addressing #(
   parameter [2:0] VECTOR_COSINE_SIMILARITY_STATE = 1;
   parameter [2:0] VECTOR_EXPONENTIATOR_STATE = 2;
   parameter [2:0] VECTOR_SOFTMAX_STATE = 3;
-  parameter [2:0] ENDER_STATE = 4;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -173,8 +172,6 @@ module dnc_content_based_addressing #(
         end
 
         VECTOR_SOFTMAX_STATE : begin  // STEP 3
-        end
-        ENDER_STATE : begin  // STEP 4
         end
         default : begin
           // FSM Control

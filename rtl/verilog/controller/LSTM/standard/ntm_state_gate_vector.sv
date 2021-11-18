@@ -73,7 +73,6 @@ module ntm_state_gate_vector #(
   parameter [2:0] VECTOR_FIRST_ADDER_STATE = 2;
   parameter [2:0] VECTOR_SECOND_MULTIPLIER_STATE = 3;
   parameter [2:0] VECTOR_SECOND_ADDER_STATE = 4;
-  parameter [2:0] ENDER_STATE = 5;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -152,7 +151,7 @@ module ntm_state_gate_vector #(
           end
         end
 
-        VECTOR_FIRST_MULTIPLIER_STATE : begin  // STEP 2
+        VECTOR_FIRST_MULTIPLIER_STATE : begin  // STEP 1
 
           // Data Outputs
           modulo_in_vector_multiplier <= FULL;
@@ -161,7 +160,7 @@ module ntm_state_gate_vector #(
           data_b_in_vector_multiplier <= S_IN;
         end
 
-        VECTOR_FIRST_ADDER_STATE : begin  // STEP 1
+        VECTOR_FIRST_ADDER_STATE : begin  // STEP 2
 
           // Data Outputs
           modulo_in_vector_adder <= FULL;
@@ -170,7 +169,7 @@ module ntm_state_gate_vector #(
           data_b_in_vector_adder <= data_out_vector_multiplier;
         end
 
-        VECTOR_SECOND_MULTIPLIER_STATE : begin  // STEP 2
+        VECTOR_SECOND_MULTIPLIER_STATE : begin  // STEP 3
 
           // Data Outputs
           modulo_in_vector_multiplier <= FULL;
@@ -179,16 +178,13 @@ module ntm_state_gate_vector #(
           data_b_in_vector_multiplier <= A_IN;
         end
 
-        VECTOR_SECOND_ADDER_STATE : begin  // STEP 1
+        VECTOR_SECOND_ADDER_STATE : begin  // STEP 4
 
           // Data Outputs
           modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_vector_adder;
           data_b_in_vector_adder <= data_out_vector_multiplier;
-        end
-
-        ENDER_STATE : begin  // STEP 3
 
           // Data Outputs
           S_OUT <= data_out_vector_adder;

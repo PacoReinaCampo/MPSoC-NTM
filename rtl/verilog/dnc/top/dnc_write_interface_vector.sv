@@ -106,7 +106,6 @@ module dnc_write_interface_vector #(
   parameter [2:0] SCALAR_FIRST_PRODUCT_STATE = 4;
   parameter [2:0] SCALAR_SECOND_PRODUCT_STATE = 5;
   parameter [2:0] SCALAR_THIRD_PRODUCT_STATE = 6;
-  parameter [2:0] ENDER_STATE = 7;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -272,9 +271,6 @@ module dnc_write_interface_vector #(
 
           // Data Outputs
           GW_OUT <= data_out_scalar_product;
-        end
-
-        ENDER_STATE : begin  // STEP 7
         end
         default : begin
           // FSM Control

@@ -70,7 +70,6 @@ module ntm_erasing #(
   parameter [2:0] VECTOR_MULTIPLIER_STATE = 1;
   parameter [2:0] VECTOR_ADDER_STATE = 2;
   parameter [2:0] MATRIX_PRODUCT_STATE = 3;
-  parameter [2:0] ENDER_STATE = 4;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -177,9 +176,6 @@ module ntm_erasing #(
         end
 
         MATRIX_PRODUCT_STATE : begin  // STEP 3
-        end
-
-        ENDER_STATE : begin  // STEP 4
 
           // Data Outputs
           M_OUT <= data_out_matrix_product;
