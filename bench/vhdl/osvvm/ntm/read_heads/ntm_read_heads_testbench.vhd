@@ -78,7 +78,9 @@ architecture ntm_read_heads_testbench_architecture of ntm_read_heads_testbench i
   signal start_reading : std_logic;
   signal ready_reading : std_logic;
 
-  signal m_in_enable_reading  : std_logic;
+  signal m_in_j_enable_reading : std_logic;
+  signal m_in_k_enable_reading : std_logic;
+
   signal r_out_enable_reading : std_logic;
 
   -- DATA
@@ -122,7 +124,9 @@ begin
       NTM_READ_HEADS_START => start_reading,
       NTM_READ_HEADS_READY => ready_reading,
 
-      NTM_READ_HEADS_M_IN_ENABLE  => m_in_enable_reading,
+      NTM_READ_HEADS_M_IN_J_ENABLE => m_in_j_enable_reading,
+      NTM_READ_HEADS_M_IN_K_ENABLE => m_in_k_enable_reading,
+
       NTM_READ_HEADS_R_OUT_ENABLE => r_out_enable_reading,
 
       -- DATA
@@ -148,7 +152,9 @@ begin
       START => start_reading,
       READY => ready_reading,
 
-      M_IN_ENABLE  => m_in_enable_reading,
+      M_IN_J_ENABLE => m_in_j_enable_reading,
+      M_IN_K_ENABLE => m_in_k_enable_reading,
+      
       R_OUT_ENABLE => r_out_enable_reading,
 
       -- DATA

@@ -71,9 +71,13 @@ entity ntm_write_heads_stimulus is
     NTM_WRITE_HEADS_START : out std_logic;
     NTM_WRITE_HEADS_READY : in  std_logic;
 
-    NTM_WRITE_HEADS_M_IN_ENABLE  : out std_logic;
-    NTM_WRITE_HEADS_A_IN_ENABLE  : out std_logic;
-    NTM_WRITE_HEADS_M_OUT_ENABLE : in  std_logic;
+    NTM_WRITE_HEADS_M_IN_J_ENABLE : out std_logic;
+    NTM_WRITE_HEADS_M_IN_K_ENABLE : out std_logic;
+    
+    NTM_WRITE_HEADS_A_IN_ENABLE : out std_logic;
+    
+    NTM_WRITE_HEADS_M_OUT_J_ENABLE : in std_logic;
+    NTM_WRITE_HEADS_M_OUT_K_ENABLE : in std_logic;
 
     -- DATA
     NTM_WRITE_HEADS_SIZE_N_IN : out std_logic_vector(DATA_SIZE-1 downto 0);

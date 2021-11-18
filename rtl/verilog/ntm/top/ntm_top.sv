@@ -243,7 +243,8 @@ module ntm_top #(
   // CONTROL
   wire start_reading;
   wire ready_reading;
-  wire m_in_enable_reading;
+  wire m_in_j_enable_reading;
+  wire m_in_k_enable_reading;
   wire r_out_enable_reading;
 
   // DATA
@@ -261,9 +262,11 @@ module ntm_top #(
   // CONTROL
   wire start_writing;
   wire ready_writing;
-  wire m_in_enable_writing;
+  wire m_in_j_enable_writing;
+  wire m_in_k_enable_writing;
   wire a_in_enable_writing;
-  wire m_out_enable_writing;
+  wire m_out_j_enable_writing;
+  wire m_out_k_enable_writing;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_writing;
@@ -277,9 +280,11 @@ module ntm_top #(
   // CONTROL
   wire start_erasing;
   wire ready_erasing;
-  wire m_in_enable_erasing;
+  wire m_in_j_enable_erasing;
+  wire m_in_k_enable_erasing;
   wire e_in_enable_erasing;
-  wire m_out_enable_erasing;
+  wire m_out_j_enable_erasing;
+  wire m_out_k_enable_erasing;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_erasing;
@@ -575,7 +580,9 @@ module ntm_top #(
     .START(start_reading),
     .READY(ready_reading),
 
-    .M_IN_ENABLE(m_in_enable_reading),
+    .M_IN_J_ENABLE(m_in_j_enable_reading),
+    .M_IN_K_ENABLE(m_in_k_enable_reading),
+
     .R_OUT_ENABLE(r_out_enable_reading),
 
     // DATA
@@ -601,9 +608,13 @@ module ntm_top #(
     .START(start_writing),
     .READY(ready_writing),
 
-    .M_IN_ENABLE(m_in_enable_writing),
+    .M_IN_J_ENABLE(m_in_j_enable_writing),
+    .M_IN_K_ENABLE(m_in_k_enable_writing),
+
     .A_IN_ENABLE(a_in_enable_writing),
-    .M_OUT_ENABLE(m_out_enable_writing),
+
+    .M_OUT_J_ENABLE(m_out_j_enable_writing),
+    .M_OUT_K_ENABLE(m_out_k_enable_writing),
 
     // DATA
     .SIZE_N_IN(size_n_in_writing),
@@ -626,9 +637,14 @@ module ntm_top #(
     // CONTROL
     .START(start_erasing),
     .READY(ready_erasing),
-    .M_IN_ENABLE(m_in_enable_erasing),
+    
+    .M_IN_J_ENABLE(m_in_j_enable_erasing),
+    .M_IN_K_ENABLE(m_in_k_enable_erasing),
+
     .E_IN_ENABLE(e_in_enable_erasing),
-    .M_OUT_ENABLE(m_out_enable_erasing),
+
+    .M_OUT_J_ENABLE(m_out_j_enable_erasing),
+    .M_OUT_K_ENABLE(m_out_k_enable_erasing),
 
     // DATA
     .SIZE_N_IN(size_n_in_erasing),

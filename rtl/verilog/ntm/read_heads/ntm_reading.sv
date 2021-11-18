@@ -49,7 +49,9 @@ module ntm_reading #(
     input START,
     output reg READY,
 
-    input M_IN_ENABLE,  // for k in 0 to W-1
+    input M_IN_J_ENABLE,  // for j in 0 to N-1
+    input M_IN_K_ENABLE,  // for k in 0 to W-1
+
     output reg R_OUT_ENABLE,  // for k in 0 to W-1
 
     // DATA

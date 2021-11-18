@@ -71,8 +71,10 @@ entity ntm_read_heads_stimulus is
     NTM_READ_HEADS_START : out std_logic;
     NTM_READ_HEADS_READY : in  std_logic;
 
-    NTM_READ_HEADS_M_IN_ENABLE  : out std_logic;
-    NTM_READ_HEADS_R_OUT_ENABLE : in  std_logic;
+    NTM_READ_HEADS_M_IN_J_ENABLE : out std_logic;
+    NTM_READ_HEADS_M_IN_K_ENABLE : out std_logic;
+
+    NTM_READ_HEADS_R_OUT_ENABLE : in std_logic;
 
     -- DATA
     NTM_READ_HEADS_SIZE_N_IN : out std_logic_vector(DATA_SIZE-1 downto 0);

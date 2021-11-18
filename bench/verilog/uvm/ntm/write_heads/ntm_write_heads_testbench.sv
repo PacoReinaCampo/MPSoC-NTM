@@ -69,9 +69,14 @@ module ntm_write_heads_testbench;
   // CONTROL
   wire start_writing;
   wire ready_writing;
-  wire m_in_enable_writing;
+
+  wire m_in_j_enable_writing;
+  wire m_in_k_enable_writing;
+
   wire a_in_enable_writing;
-  wire m_out_enable_writing;
+
+  wire m_out_j_enable_writing;
+  wire m_out_k_enable_writing;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_writing;
@@ -106,9 +111,13 @@ module ntm_write_heads_testbench;
     .NTM_WRITE_HEADS_START(start_writing),
     .NTM_WRITE_HEADS_READY(ready_writing),
 
-    .NTM_WRITE_HEADS_M_IN_ENABLE(m_in_enable_writing),
+    .NTM_WRITE_HEADS_M_IN_J_ENABLE(m_in_j_enable_writing),
+    .NTM_WRITE_HEADS_M_IN_K_ENABLE(m_in_k_enable_writing),
+
     .NTM_WRITE_HEADS_A_IN_ENABLE(a_in_enable_writing),
-    .NTM_WRITE_HEADS_M_OUT_ENABLE(m_out_enable_writing),
+
+    .NTM_WRITE_HEADS_M_OUT_J_ENABLE(m_out_j_enable_writing),
+    .NTM_WRITE_HEADS_M_OUT_K_ENABLE(m_out_k_enable_writing),
 
     // DATA
     .NTM_WRITE_HEADS_SIZE_N_IN(size_n_in_writing),
@@ -132,9 +141,13 @@ module ntm_write_heads_testbench;
     .START(start_writing),
     .READY(ready_writing),
 
-    .M_IN_ENABLE(m_in_enable_writing),
+    .M_IN_J_ENABLE(m_in_j_enable_writing),
+    .M_IN_K_ENABLE(m_in_k_enable_writing),
+
     .A_IN_ENABLE(a_in_enable_writing),
-    .M_OUT_ENABLE(m_out_enable_writing),
+
+    .M_OUT_J_ENABLE(m_out_j_enable_writing),
+    .M_OUT_K_ENABLE(m_out_k_enable_writing),
 
     // DATA
     .SIZE_N_IN(size_n_in_writing),

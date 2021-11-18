@@ -57,10 +57,13 @@ entity ntm_erasing is
     START : in  std_logic;
     READY : out std_logic;
 
-    M_IN_ENABLE  : in std_logic;  -- for k in 0 to W-1
-    E_IN_ENABLE  : in std_logic;  -- for k in 0 to W-1
+    M_IN_J_ENABLE : in std_logic;  -- for j in 0 to N-1
+    M_IN_K_ENABLE : in std_logic;  -- for k in 0 to W-1
 
-    M_OUT_ENABLE : out std_logic;  -- for k in 0 to W-1
+    E_IN_ENABLE : in std_logic;  -- for k in 0 to W-1
+
+    M_OUT_J_ENABLE : out std_logic;  -- for j in 0 to N-1
+    M_OUT_K_ENABLE : out std_logic;  -- for k in 0 to W-1
 
     -- DATA
     SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -182,7 +185,8 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      M_OUT_ENABLE <= '0';
+      M_OUT_J_ENABLE <= '0';
+      M_OUT_K_ENABLE <= '0';
 
       -- Control Internal
       index_loop <= ZERO;
@@ -194,7 +198,8 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          M_OUT_ENABLE <= '0';
+          M_OUT_J_ENABLE <= '0';
+          M_OUT_K_ENABLE <= '0';
 
           -- Control Internal
           index_loop <= ZERO;
@@ -257,7 +262,8 @@ begin
             M_OUT <= data_out_matrix_product;
 
             -- Control Outputs
-            M_OUT_ENABLE <= '1';
+            M_OUT_J_ENABLE <= '1';
+            M_OUT_K_ENABLE <= '1';
           end if;
 
         when others =>

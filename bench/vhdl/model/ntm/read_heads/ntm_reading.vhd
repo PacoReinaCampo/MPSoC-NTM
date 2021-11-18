@@ -57,7 +57,9 @@ entity ntm_reading is
     START : in  std_logic;
     READY : out std_logic;
 
-    M_IN_ENABLE  : in  std_logic;  -- for k in 0 to W-1
+    M_IN_J_ENABLE : in std_logic;  -- for j in 0 to N-1
+    M_IN_K_ENABLE : in std_logic;  -- for k in 0 to W-1
+
     R_OUT_ENABLE : out std_logic;  -- for k in 0 to W-1
 
     -- DATA

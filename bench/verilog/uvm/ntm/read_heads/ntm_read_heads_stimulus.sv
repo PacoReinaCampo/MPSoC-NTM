@@ -57,7 +57,9 @@ module ntm_read_heads_stimulus #(
     output NTM_READ_HEADS_START,
     input NTM_READ_HEADS_READY,
 
-    output NTM_READ_HEADS_M_IN_ENABLE,
+    output NTM_READ_HEADS_M_IN_J_ENABLE,
+    output NTM_READ_HEADS_M_IN_K_ENABLE,
+
     input NTM_READ_HEADS_R_OUT_ENABLE,
 
     // DATA

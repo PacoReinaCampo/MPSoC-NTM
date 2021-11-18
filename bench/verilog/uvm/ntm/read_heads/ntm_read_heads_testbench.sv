@@ -70,7 +70,9 @@ module ntm_read_heads_testbench;
   wire start_reading;
   wire ready_reading;
 
-  wire m_in_enable_reading;
+  wire m_in_j_enable_reading;
+  wire m_in_k_enable_reading;
+
   wire r_out_enable_reading;
 
   // DATA
@@ -105,7 +107,9 @@ module ntm_read_heads_testbench;
     .NTM_READ_HEADS_START(start_reading),
     .NTM_READ_HEADS_READY(ready_reading),
 
-    .NTM_READ_HEADS_M_IN_ENABLE(m_in_enable_reading),
+    .NTM_READ_HEADS_M_IN_J_ENABLE(m_in_j_enable_reading),
+    .NTM_READ_HEADS_M_IN_K_ENABLE(m_in_k_enable_reading),
+
     .NTM_READ_HEADS_R_OUT_ENABLE(r_out_enable_reading),
 
     // DATA
@@ -129,7 +133,9 @@ module ntm_read_heads_testbench;
     .START(start_reading),
     .READY(ready_reading),
 
-    .M_IN_ENABLE(m_in_enable_reading),
+    .M_IN_J_ENABLE(m_in_j_enable_reading),
+    .M_IN_K_ENABLE(m_in_k_enable_reading),
+
     .R_OUT_ENABLE(r_out_enable_reading),
 
     // DATA

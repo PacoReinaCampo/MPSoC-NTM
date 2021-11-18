@@ -297,7 +297,9 @@ architecture ntm_top_architecture of ntm_top is
   signal start_reading : std_logic;
   signal ready_reading : std_logic;
 
-  signal m_in_enable_reading  : std_logic;
+  signal m_in_j_enable_reading : std_logic;
+  signal m_in_k_enable_reading : std_logic;
+
   signal r_out_enable_reading : std_logic;
 
   -- DATA
@@ -317,9 +319,13 @@ architecture ntm_top_architecture of ntm_top is
   signal start_writing : std_logic;
   signal ready_writing : std_logic;
 
-  signal m_in_enable_writing  : std_logic;
-  signal a_in_enable_writing  : std_logic;
-  signal m_out_enable_writing : std_logic;
+  signal m_in_j_enable_writing : std_logic;
+  signal m_in_k_enable_writing : std_logic;
+
+  signal a_in_enable_writing : std_logic;
+
+  signal m_out_j_enable_writing : std_logic;
+  signal m_out_k_enable_writing : std_logic;
 
   -- DATA
   signal size_n_in_writing : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -335,9 +341,13 @@ architecture ntm_top_architecture of ntm_top is
   signal start_erasing : std_logic;
   signal ready_erasing : std_logic;
 
-  signal m_in_enable_erasing  : std_logic;
-  signal e_in_enable_erasing  : std_logic;
-  signal m_out_enable_erasing : std_logic;
+  signal m_in_j_enable_erasing : std_logic;
+  signal m_in_k_enable_erasing : std_logic;
+  
+  signal e_in_enable_erasing : std_logic;
+  
+  signal m_out_j_enable_erasing : std_logic;
+  signal m_out_k_enable_erasing : std_logic;
 
   -- DATA
   signal size_n_in_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -848,12 +858,14 @@ begin
       CLK => CLK,
       RST => RST,
 
-      M_IN_ENABLE  => m_in_enable_reading,
-      R_OUT_ENABLE => r_out_enable_reading,
-
       -- CONTROL
       START => start_reading,
       READY => ready_reading,
+
+      M_IN_J_ENABLE  => m_in_j_enable_reading,
+      M_IN_K_ENABLE  => m_in_k_enable_reading,
+
+      R_OUT_ENABLE => r_out_enable_reading,
 
       -- DATA
       SIZE_N_IN => size_n_in_reading,
@@ -882,9 +894,13 @@ begin
       START => start_writing,
       READY => ready_writing,
 
-      M_IN_ENABLE  => m_in_enable_writing,
-      A_IN_ENABLE  => a_in_enable_writing,
-      M_OUT_ENABLE => m_out_enable_writing,
+      M_IN_J_ENABLE => m_in_j_enable_writing,
+      M_IN_K_ENABLE => m_in_k_enable_writing,
+
+      A_IN_ENABLE => a_in_enable_writing,
+
+      M_OUT_J_ENABLE => m_out_j_enable_writing,
+      M_OUT_K_ENABLE => m_out_k_enable_writing,
 
       -- DATA
       SIZE_N_IN => size_n_in_writing,
@@ -910,9 +926,13 @@ begin
       START => start_erasing,
       READY => ready_erasing,
 
-      M_IN_ENABLE  => m_in_enable_erasing,
-      E_IN_ENABLE  => e_in_enable_erasing,
-      M_OUT_ENABLE => m_out_enable_erasing,
+      M_IN_J_ENABLE => m_in_j_enable_erasing,
+      M_IN_K_ENABLE => m_in_k_enable_erasing,
+
+      E_IN_ENABLE => e_in_enable_erasing,
+
+      M_OUT_J_ENABLE => m_out_j_enable_erasing,
+      M_OUT_K_ENABLE => m_out_k_enable_erasing,
 
       -- DATA
       SIZE_N_IN => size_n_in_erasing,
