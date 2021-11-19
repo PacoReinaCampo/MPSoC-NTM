@@ -274,7 +274,7 @@ begin
 
   -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
 
-  -- w(t;j) = w(t;j)*s(t;k)
+  -- w(t;j) = wg(t;j)*s(t;k)
 
   -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
 
@@ -288,6 +288,8 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      W_OUT_ENABLE <= '0';
+
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
@@ -295,22 +297,22 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          W_OUT_ENABLE <= '0';
+
           if (START = '1') then
+            -- Control Internal
+            start_vector_content_based_addressing <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_CONTENT_BASED_ADDRESSING_STATE;
+          else
+            -- Control Internal
+            start_vector_content_based_addressing <= '0';
           end if;
 
         when VECTOR_CONTENT_BASED_ADDRESSING_STATE =>  -- STEP 1
 
           -- wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
-
-          -- Data Inputs
-          modulo_in_vector_content_based_addressing <= FULL;
-          size_i_in_vector_content_based_addressing <= SIZE_N_IN;
-          size_j_in_vector_content_based_addressing <= SIZE_W_IN;
-          k_in_vector_content_based_addressing      <= K_IN;
-          beta_in_vector_content_based_addressing   <= BETA_IN;
-          m_in_vector_content_based_addressing      <= M_IN;
 
         when VECTOR_INTERPOLATION_STATE =>  -- STEP 2
 
@@ -358,13 +360,7 @@ begin
 
         when VECTOR_CONVOLUTION_STATE =>  -- STEP 3
 
-          -- w(t;j) = w(t;j)*s(t;k)
-
-          -- Data Inputs
-          modulo_in_vector_summation <= FULL;
-          size_in_vector_summation   <= FULL;
-          length_in_vector_summation <= FULL;
-          data_in_vector_summation   <= FULL;
+          -- w(t;j) = wg(t;j)*s(t;k)
 
         when VECTOR_SHARPENING_STATE =>  -- STEP 4
 
@@ -375,27 +371,9 @@ begin
 
             when VECTOR_EXPONENTIATOR_SHARPENING_STATE =>  -- STEP 1
 
-              -- Data Inputs
-              modulo_in_vector_exponentiator <= FULL;
-              size_in_vector_exponentiator   <= FULL;
-              data_a_in_vector_exponentiator <= FULL;
-              data_b_in_vector_exponentiator <= FULL;
-
             when VECTOR_SUMMATION_SHARPENING_STATE =>  -- STEP 2
 
-              -- Data Inputs
-              modulo_in_vector_summation <= FULL;
-              size_in_vector_summation   <= FULL;
-              length_in_vector_summation <= FULL;
-              data_in_vector_summation   <= FULL;
-
             when VECTOR_DIVIDER_SHARPENING_STATE =>  -- STEP 3
-
-              -- Data Inputs
-              modulo_in_vector_divider <= FULL;
-              size_in_vector_divider   <= FULL;
-              data_a_in_vector_divider <= FULL;
-              data_b_in_vector_divider <= FULL;
 
             when others =>
               -- FSM Control
@@ -408,6 +386,64 @@ begin
       end case;
     end if;
   end process;
+
+  -- VECTOR CONTENT BASED ADDRESSING
+  k_in_enable_vector_content_based_addressing <= '0';
+
+  m_in_i_enable_vector_content_based_addressing <= '0';
+  m_in_j_enable_vector_content_based_addressing <= '0';
+
+  -- VECTOR CONVOLUTION
+  data_a_in_vector_enable_vector_convolution <= '0';
+  data_a_in_scalar_enable_vector_convolution <= '0';
+  data_b_in_vector_enable_vector_convolution <= '0';
+  data_b_in_scalar_enable_vector_convolution <= '0';
+
+  -- VECTOR EXPONENTIATOR
+  data_a_in_enable_vector_exponentiator <= '0';
+  data_b_in_enable_vector_exponentiator <= '0';
+
+  -- VECTOR SUMMATION
+  data_in_vector_enable_vector_summation <= '0';
+  data_in_scalar_enable_vector_summation <= '0';
+
+  -- VECTOR DIVIDER
+  data_a_in_enable_vector_divider <= '0';
+  data_b_in_enable_vector_divider <= '0';
+
+  -- DATA
+  -- VECTOR CONTENT BASED ADDRESSING
+  modulo_in_vector_content_based_addressing <= FULL;
+  size_i_in_vector_content_based_addressing <= SIZE_N_IN;
+  size_j_in_vector_content_based_addressing <= SIZE_W_IN;
+  k_in_vector_content_based_addressing      <= K_IN;
+  beta_in_vector_content_based_addressing   <= BETA_IN;
+  m_in_vector_content_based_addressing      <= M_IN;
+
+  -- VECTOR CONVOLUTION
+  modulo_in_vector_convolution <= FULL;
+  size_in_vector_convolution   <= FULL;
+  length_in_vector_convolution <= FULL;
+  data_a_in_vector_convolution <= FULL;
+  data_b_in_vector_convolution <= FULL;
+
+  -- VECTOR EXPONENTIATOR
+  modulo_in_vector_exponentiator <= FULL;
+  size_in_vector_exponentiator   <= FULL;
+  data_a_in_vector_exponentiator <= FULL;
+  data_b_in_vector_exponentiator <= FULL;
+
+  -- VECTOR SUMMATION
+  modulo_in_vector_summation <= FULL;
+  size_in_vector_summation   <= FULL;
+  length_in_vector_summation <= FULL;
+  data_in_vector_summation   <= FULL;
+
+  -- VECTOR DIVIDER
+  modulo_in_vector_divider <= FULL;
+  size_in_vector_divider   <= FULL;
+  data_a_in_vector_divider <= FULL;
+  data_b_in_vector_divider <= FULL;
 
   -- VECTOR CONTENT BASED ADDRESSING
   ntm_content_based_addressing_i : ntm_content_based_addressing

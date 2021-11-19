@@ -101,17 +101,14 @@ architecture dnc_addressing_architecture of dnc_addressing is
     STARTER_STATE,  -- STEP 0
     PRECEDENCE_WEIGHTING_STATE,  -- STEP 1
     TEMPORAL_LINK_MATRIX_STATE,  -- STEP 2
-    BACKWARD_WEIGHTING_STATE,  -- STEP 3
-    FORWARD_WEIGHTING_STATE,  -- STEP 4
-    MEMORY_RETENTION_VECTOR_STATE,  -- STEP 5
-    USAGE_VECTOR_STATE,  -- STEP 6
-    ALLOCATION_WEIGHTING_STATE,  -- STEP 7
-    READ_CONTENT_WEIGHTING_STATE,  -- STEP 8
-    READ_WEIGHTING_STATE,  -- STEP 9
-    WRITE_CONTENT_WEIGHTING_STATE,  -- STEP 10
-    WRITE_WEIGHTING_STATE,  -- STEP 11
-    MEMORY_MATRIX_STATE,  -- STEP 12
-    READ_VECTORS_STATE  -- STEP 13
+    BACKWARD_FORWARD_WEIGHTING_STATE,  -- STEP 3
+    MEMORY_RETENTION_VECTOR_STATE,  -- STEP 4
+    USAGE_VECTOR_STATE,  -- STEP 5
+    ALLOCATION_WEIGHTING_STATE,  -- STEP 6
+    READ_WRITE_CONTENT_WEIGHTING_STATE,  -- STEP 7
+    READ_WRITE_WEIGHTING_STATE,  -- STEP 8
+    MEMORY_MATRIX_STATE,  -- STEP 9
+    READ_VECTORS_STATE  -- STEP 10
     );
 
   -----------------------------------------------------------------------
@@ -120,6 +117,7 @@ architecture dnc_addressing_architecture of dnc_addressing is
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -458,47 +456,41 @@ begin
           -- L(t)[g;j] = (1 - w(t;j)[i] - w(t;j)[j])·L(t-1)[g;j] + w(t;j)[i]·p(t-1;j)[j]
           -- L(t=0)[g,j] = 0
         
-        when BACKWARD_WEIGHTING_STATE =>  -- STEP 3
+        when BACKWARD_FORWARD_WEIGHTING_STATE =>  -- STEP 3
 
           -- b(t;i;j) = transpose(L(t;g;j))·w(t-1;i;j)
-        
-        when FORWARD_WEIGHTING_STATE =>  -- STEP 4
 
           -- f(t;i;j) = L(t;g;j)·w(t-1;i;j)
 
-        when MEMORY_RETENTION_VECTOR_STATE =>  -- STEP 5
+        when MEMORY_RETENTION_VECTOR_STATE =>  -- STEP 4
 
           -- psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
         
-        when USAGE_VECTOR_STATE =>  -- STEP 6
+        when USAGE_VECTOR_STATE =>  -- STEP 5
 
           -- u(t;j) = (u(t-1;j) + w(t-1;j) - u(t-1;j) o w(t-1;j)) o psi(t;j)
 
-        when ALLOCATION_WEIGHTING_STATE =>  -- STEP 7
+        when ALLOCATION_WEIGHTING_STATE =>  -- STEP 6
 
           -- a(t)[phi(t)[j]] = (1 - u(t)[phi(t)[j]])·multiplication(u(t)[phi(t)[j]])[i in 1 to j-1]
         
-        when READ_CONTENT_WEIGHTING_STATE =>  -- STEP 8
+        when READ_WRITE_CONTENT_WEIGHTING_STATE =>  -- STEP 7
 
           -- c(t;i;j) = C(M(t-1;j;k),k(t;i;k),beta(t;i))
-        
-        when READ_WEIGHTING_STATE =>  -- STEP 9
-
-          -- w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
-        
-        when WRITE_CONTENT_WEIGHTING_STATE =>  -- STEP 10
 
           -- c(t;j) = C(M(t-1;j;k),k(t;k),beta(t))
         
-        when WRITE_WEIGHTING_STATE =>  -- STEP 11
+        when READ_WRITE_WEIGHTING_STATE =>  -- STEP 8
+
+          -- w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
 
           -- w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - ga(t))·c(t;j))
         
-        when MEMORY_MATRIX_STATE =>  -- STEP 12
+        when MEMORY_MATRIX_STATE =>  -- STEP 9
 
           -- M(t;j;k) = M(t-1;j;k) o (E - w(t;j)·transpose(e(t;k))) + w(t;j)·transpose(v(t;k))
         
-        when READ_VECTORS_STATE =>  -- STEP 13
+        when READ_VECTORS_STATE =>  -- STEP 10
 
           -- r(t;i;k) = transpose(M(t;j;k))·w(t;i;j)
 
@@ -508,6 +500,219 @@ begin
       end case;
     end if;
   end process;
+
+  -- ALLOCATION WEIGHTING
+  u_in_enable_allocation_weighting <= '0';
+
+  -- BACKWARD WEIGHTING
+  l_in_g_enable_backward_weighting <= '0';
+  l_in_j_enable_backward_weighting <= '0';
+
+  w_in_i_enable_backward_weighting <= '0';
+  w_in_j_enable_backward_weighting <= '0';
+
+  -- FORWARD WEIGHTING
+  l_in_g_enable_forward_weighting <= '0';
+  l_in_j_enable_forward_weighting <= '0';
+
+  w_in_i_enable_forward_weighting <= '0';
+  w_in_j_enable_forward_weighting <= '0';
+
+  -- MEMORY MATRIX
+  m_in_j_enable_memory_matrix <= '0';
+  m_in_k_enable_memory_matrix <= '0';
+
+  w_in_j_enable_memory_matrix <= '0';
+  v_in_k_enable_memory_matrix <= '0';
+  e_in_k_enable_memory_matrix <= '0';
+
+  -- MEMORY RETENTION VECTOR
+  f_in_enable_memory_retention_vector <= '0';
+
+  w_in_i_enable_memory_retention_vector <= '0';
+  w_in_j_enable_memory_retention_vector <= '0';
+
+  -- DATA
+  size_r_in_memory_retention_vector <= FULL;
+  size_n_in_memory_retention_vector <= FULL;
+
+  f_in_memory_retention_vector <= '0';
+  w_in_memory_retention_vector <= FULL;
+
+  -- PRECEDENCE WEIGHTING
+  w_in_enable_precedence_weighting <= '0';
+  p_in_enable_precedence_weighting <= '0';
+
+  -- READ CONTENT WEIGHTING
+  k_in_enable_read_content_weighting <= '0';
+
+  m_in_j_enable_read_content_weighting <= '0';
+  m_in_k_enable_read_content_weighting <= '0';
+
+  -- READ VECTORS
+  m_in_j_enable_read_vectors <= '0';
+  m_in_k_enable_read_vectors <= '0';
+
+  w_in_i_enable_read_vectors <= '0';
+  w_in_j_enable_read_vectors <= '0';
+
+  -- READ WEIGHTING
+  pi_in_i_enable_read_weighting <= '0';
+  pi_in_p_enable_read_weighting <= '0';
+
+  b_in_i_enable_read_weighting <= '0';
+  b_in_j_enable_read_weighting <= '0';
+
+  c_in_i_enable_read_weighting <= '0';
+  c_in_j_enable_read_weighting <= '0';
+
+  f_in_i_enable_read_weighting <= '0';
+  f_in_j_enable_read_weighting <= '0';
+
+  -- TEMPORAL LINK MATRIX
+  l_in_g_enable_temporal_link_matrix <= '0';
+  l_in_j_enable_temporal_link_matrix <= '0';
+
+  w_in_enable_temporal_link_matrix <= '0';
+  p_in_enable_temporal_link_matrix <= '0';
+
+  -- USAGE VECTOR
+  u_in_enable_usage_vector   <= '0';
+  w_in_enable_usage_vector   <= '0';
+  psi_in_enable_usage_vector <= '0';
+
+  -- WRITE CONTENT WEIGHTING
+  k_in_enable_write_content_weighting <= '0';
+
+  m_in_j_enable_write_content_weighting <= '0';
+  m_in_k_enable_write_content_weighting <= '0';
+
+  -- WRITE WEIGHTING
+  a_in_enable_write_weighting <= '0';
+  c_in_enable_write_weighting <= '0';
+
+  -- DATA
+  -- ALLOCATION WEIGHTING
+  size_n_in_allocation_weighting <= FULL;
+  u_in_allocation_weighting      <= FULL;
+
+  a_out_allocation_weighting <= FULL;
+
+  -- BACKWARD WEIGHTING
+  size_r_in_backward_weighting <= FULL;
+  size_n_in_backward_weighting <= FULL;
+
+  l_in_backward_weighting  <= FULL;
+  w_in_backward_weighting  <= FULL;
+  b_out_backward_weighting <= FULL;
+
+  -- FORWARD WEIGHTING
+  l_in_forward_weighting <= FULL;
+
+  w_in_forward_weighting <= FULL;
+
+  f_out_forward_weighting <= FULL;
+
+  -- MEMORY MATRIX
+  size_n_in_memory_matrix <= FULL;
+  size_w_in_memory_matrix <= FULL;
+
+  m_in_memory_matrix <= FULL;
+
+  w_in_memory_matrix <= FULL;
+  v_in_memory_matrix <= FULL;
+  e_in_memory_matrix <= '0';
+
+  m_out_memory_matrix <= FULL;
+
+  -- MEMORY RETENTION VECTOR
+  size_r_in_memory_retention_vector <= FULL;
+  size_n_in_memory_retention_vector <= FULL;
+
+  f_in_memory_retention_vector <= '0';
+  w_in_memory_retention_vector <= FULL;
+
+  psi_out_memory_retention_vector <= FULL;
+
+  -- PRECEDENCE WEIGHTING
+  size_r_in_precedence_weighting <= FULL;
+  size_n_in_precedence_weighting <= FULL;
+
+  w_in_precedence_weighting <= FULL;
+  p_in_precedence_weighting <= FULL;
+
+  p_out_precedence_weighting <= FULL;
+
+  -- READ CONTENT WEIGHTING
+  size_n_in_read_content_weighting <= FULL;
+  size_w_in_read_content_weighting <= FULL;
+
+  k_in_read_content_weighting    <= FULL;
+  m_in_read_content_weighting    <= FULL;
+  beta_in_read_content_weighting <= FULL;
+
+  c_out_read_content_weighting <= FULL;
+
+  -- READ VECTORS
+  size_r_in_read_vectors <= FULL;
+  size_n_in_read_vectors <= FULL;
+  size_w_in_read_vectors <= FULL;
+
+  m_in_read_vectors <= FULL;
+  w_in_read_vectors <= FULL;
+
+  r_out_read_vectors <= FULL;
+
+  -- READ WEIGHTING
+  size_r_in_read_weighting <= FULL;
+  size_n_in_read_weighting <= FULL;
+
+  pi_in_read_weighting <= FULL;
+
+  b_in_read_weighting <= FULL;
+  c_in_read_weighting <= FULL;
+  f_in_read_weighting <= FULL;
+
+  w_out_read_weighting <= FULL;
+
+  -- TEMPORAL LINK MATRIX
+  size_n_in_temporal_link_matrix <= FULL;
+
+  l_in_temporal_link_matrix <= FULL;
+  w_in_temporal_link_matrix <= FULL;
+  p_in_temporal_link_matrix <= FULL;
+
+  l_out_temporal_link_matrix <= FULL;
+
+  -- USAGE VECTOR
+  size_n_in_usage_vector <= FULL;
+
+  u_in_usage_vector   <= FULL;
+  w_in_usage_vector   <= FULL;
+  psi_in_usage_vector <= FULL;
+
+  u_out_usage_vector <= FULL;
+
+  -- WRITE CONTENT WEIGHTING
+  size_n_in_write_content_weighting <= FULL;
+  size_w_in_write_content_weighting <= FULL;
+
+  k_in_write_content_weighting    <= FULL;
+  m_in_write_content_weighting    <= FULL;
+  beta_in_write_content_weighting <= FULL;
+
+  c_out_content_weighting <= FULL;
+
+  -- WRITE WEIGHTING
+  size_n_in_write_weighting <= FULL;
+
+  a_in_write_weighting <= FULL;
+  c_in_write_weighting <= FULL;
+
+  ga_in_write_weighting <= '0';
+  gw_in_write_weighting <= '0';
+
+  w_out_write_weighting <= FULL;
 
   -- ALLOCATION WEIGHTING
   allocation_weighting : dnc_allocation_weighting
