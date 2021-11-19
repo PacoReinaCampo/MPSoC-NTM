@@ -399,6 +399,9 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal e_write_in_k_enable_addressing : std_logic;
   signal v_write_in_k_enable_addressing : std_logic;
 
+  signal r_out_i_enable_addressing : std_logic;
+  signal r_out_k_enable_addressing : std_logic;
+
   -- DATA
   signal size_r_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_w_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -462,6 +465,9 @@ begin
       DNC_MEMORY_K_WRITE_IN_K_ENABLE => k_write_in_k_enable_addressing,
       DNC_MEMORY_E_WRITE_IN_K_ENABLE => e_write_in_k_enable_addressing,
       DNC_MEMORY_V_WRITE_IN_K_ENABLE => v_write_in_k_enable_addressing,
+
+      DNC_MEMORY_R_OUT_I_ENABLE => r_out_i_enable_addressing,
+      DNC_MEMORY_R_OUT_K_ENABLE => r_out_k_enable_addressing,
 
       -- DATA
       DNC_MEMORY_SIZE_R_IN => size_r_in_addressing,
@@ -958,6 +964,9 @@ begin
       K_WRITE_IN_K_ENABLE => k_write_in_k_enable_addressing,
       E_WRITE_IN_K_ENABLE => e_write_in_k_enable_addressing,
       V_WRITE_IN_K_ENABLE => v_write_in_k_enable_addressing,
+
+      R_OUT_I_ENABLE => r_out_i_enable_addressing,
+      R_OUT_K_ENABLE => r_out_k_enable_addressing,
 
       -- DATA
       SIZE_R_IN => size_r_in_addressing,

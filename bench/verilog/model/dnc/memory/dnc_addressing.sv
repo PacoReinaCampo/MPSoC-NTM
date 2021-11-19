@@ -57,6 +57,8 @@ module dnc_addressing #(
     input K_WRITE_IN_K_ENABLE,  // for k in 0 to W-1
     input E_WRITE_IN_K_ENABLE,  // for k in 0 to W-1
     input V_WRITE_IN_K_ENABLE,  // for k in 0 to W-1
+    output reg R_OUT_I_ENABLE,  // for i in 0 to R-1
+    output reg R_OUT_K_ENABLE,  // for k in 0 to W-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_R_IN,

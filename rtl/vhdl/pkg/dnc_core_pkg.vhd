@@ -551,18 +551,21 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      K_READ_IN_I_ENABLE : in std_logic;  -- for i in 0 to R-1
+      K_READ_IN_I_ENABLE : in std_logic;  -- for i in 0 to R-1 (read heads flow)
       K_READ_IN_K_ENABLE : in std_logic;  -- for k in 0 to W-1
 
-      BETA_READ_IN_ENABLE : in std_logic;  -- for i in 0 to R-1
+      BETA_READ_IN_ENABLE : in std_logic;  -- for i in 0 to R-1 (read heads flow)
 
-      F_READ_IN_ENABLE : in std_logic;  -- for i in 0 to R-1
+      F_READ_IN_ENABLE : in std_logic;    -- for i in 0 to R-1 (read heads flow)
 
-      PI_READ_IN_ENABLE : in std_logic;  -- for i in 0 to R-1
+      PI_READ_IN_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
 
       K_WRITE_IN_K_ENABLE : in std_logic;  -- for k in 0 to W-1
       E_WRITE_IN_K_ENABLE : in std_logic;  -- for k in 0 to W-1
       V_WRITE_IN_K_ENABLE : in std_logic;  -- for k in 0 to W-1
+
+      R_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
+      R_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
       -- DATA
       SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

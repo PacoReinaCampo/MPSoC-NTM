@@ -65,6 +65,8 @@ module dnc_memory_stimulus #(
     output DNC_MEMORY_K_WRITE_IN_K_ENABLE,
     output DNC_MEMORY_E_WRITE_IN_K_ENABLE,
     input DNC_MEMORY_V_WRITE_IN_K_ENABLE,
+    output reg DNC_MEMORY_R_OUT_I_ENABLE,
+    output reg DNC_MEMORY_R_OUT_K_ENABLE,
 
     // DATA
     output [DATA_SIZE-1:0] DNC_MEMORY_SIZE_R_IN,

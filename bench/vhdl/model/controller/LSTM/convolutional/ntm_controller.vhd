@@ -126,6 +126,7 @@ architecture ntm_controller_architecture of ntm_controller is
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -497,6 +498,8 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      H_OUT_ENABLE <= '0';
+
       -- Control Internal
       index_loop <= ZERO;
 
@@ -507,12 +510,20 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          H_OUT_ENABLE <= '0';
+
           -- Control Internal
           index_loop <= ZERO;
 
           if (START = '1') then
+            -- Control Internal
+            start_activation_gate_vector <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_ACTIVATION_STATE;
+          else
+            -- Control Internal
+            start_activation_gate_vector <= '0';
           end if;
 
         when VECTOR_ACTIVATION_STATE =>  -- STEP 1
@@ -547,6 +558,263 @@ begin
       end case;
     end if;
   end process;
+
+  -- ACTIVATION GATE VECTOR
+  w_in_l_enable_activation_gate_vector <= '0';
+  w_in_x_enable_activation_gate_vector <= '0';
+  x_in_enable_activation_gate_vector   <= '0';
+
+  k_in_i_enable_activation_gate_vector <= '0';
+  k_in_l_enable_activation_gate_vector <= '0';
+  k_in_k_enable_activation_gate_vector <= '0';
+  r_in_i_enable_activation_gate_vector <= '0';
+  r_in_k_enable_activation_gate_vector <= '0';
+
+  u_in_enable_activation_gate_vector <= '0';
+  h_in_enable_activation_gate_vector <= '0';
+
+  b_in_enable_activation_gate_vector <= '0';
+
+  -- ACTIVATION TRAINER
+  h_in_enable_activation_trainer <= '0';
+  x_in_enable_activation_trainer <= '0';
+  a_in_enable_activation_trainer <= '0';
+  i_in_enable_activation_trainer <= '0';
+  s_in_enable_activation_trainer <= '0';
+
+  -- INTPUT GATE VECTOR
+  w_in_l_enable_input_gate_vector <= '0';
+  w_in_x_enable_input_gate_vector <= '0';
+  x_in_enable_input_gate_vector   <= '0';
+
+  k_in_i_enable_input_gate_vector <= '0';
+  k_in_l_enable_input_gate_vector <= '0';
+  k_in_k_enable_input_gate_vector <= '0';
+  r_in_i_enable_input_gate_vector <= '0';
+  r_in_k_enable_input_gate_vector <= '0';
+
+  u_in_enable_input_gate_vector <= '0';
+  h_in_enable_input_gate_vector <= '0';
+
+  b_in_enable_input_gate_vector <= '0';
+
+  -- INPUT TRAINER
+  h_in_enable_input_trainer <= '0';
+  x_in_enable_input_trainer <= '0';
+  a_in_enable_input_trainer <= '0';
+  i_in_enable_input_trainer <= '0';
+  s_in_enable_input_trainer <= '0';
+
+  -- OUTPUT GATE VECTOR
+  w_in_l_enable_output_gate_vector <= '0';
+  w_in_x_enable_output_gate_vector <= '0';
+  x_in_enable_output_gate_vector   <= '0';
+
+  k_in_i_enable_output_gate_vector <= '0';
+  k_in_l_enable_output_gate_vector <= '0';
+  k_in_k_enable_output_gate_vector <= '0';
+  r_in_i_enable_output_gate_vector <= '0';
+  r_in_k_enable_output_gate_vector <= '0';
+
+  u_in_enable_output_gate_vector <= '0';
+  h_in_enable_output_gate_vector <= '0';
+
+  b_in_enable_output_gate_vector <= '0';
+
+  -- OUTPUT TRAINER
+  h_in_enable_output_trainer <= '0';
+  x_in_enable_output_trainer <= '0';
+  a_in_enable_output_trainer <= '0';
+  o_in_enable_output_trainer <= '0';
+
+  -- FORGET GATE VECTOR
+  w_in_l_enable_forget_gate_vector <= '0';
+  w_in_x_enable_forget_gate_vector <= '0';
+  x_in_enable_forget_gate_vector   <= '0';
+
+  k_in_i_enable_forget_gate_vector <= '0';
+  k_in_l_enable_forget_gate_vector <= '0';
+  k_in_k_enable_forget_gate_vector <= '0';
+  r_in_i_enable_forget_gate_vector <= '0';
+  r_in_k_enable_forget_gate_vector <= '0';
+
+  u_in_enable_forget_gate_vector <= '0';
+  h_in_enable_forget_gate_vector <= '0';
+
+  b_in_enable_forget_gate_vector <= '0';
+
+  -- FORGET TRAINER
+  h_in_enable_forget_trainer <= '0';
+  x_in_enable_forget_trainer <= '0';
+  f_in_enable_forget_trainer <= '0';
+  s_in_enable_forget_trainer <= '0';
+
+  -- STATE GATE VECTOR
+  s_in_enable_state_gate_vector <= '0';
+  i_in_enable_state_gate_vector <= '0';
+  f_in_enable_state_gate_vector <= '0';
+  a_in_enable_state_gate_vector <= '0';
+
+  -- HIDDEN GATE VECTOR
+  s_in_enable_hidden_gate_vector <= '0';
+  o_in_enable_hidden_gate_vector <= '0';
+
+  -- DATA
+  -- ACTIVATION GATE VECTOR
+  size_x_in_activation_gate_vector <= FULL;
+  size_w_in_activation_gate_vector <= FULL;
+  size_l_in_activation_gate_vector <= FULL;
+  size_r_in_activation_gate_vector <= FULL;
+
+  w_in_activation_gate_vector <= FULL;
+  x_in_activation_gate_vector <= FULL;
+
+  k_in_activation_gate_vector <= FULL;
+  r_in_activation_gate_vector <= FULL;
+
+  u_in_activation_gate_vector <= FULL;
+  h_in_activation_gate_vector <= FULL;
+
+  b_in_activation_gate_vector <= FULL;
+
+  a_out_activation_gate_vector <= FULL;
+
+  -- ACTIVATION TRAINER
+  size_x_in_activation_trainer <= FULL;
+  size_w_in_activation_trainer <= FULL;
+  size_l_in_activation_trainer <= FULL;
+  size_r_in_activation_trainer <= FULL;
+
+  h_in_activation_trainer <= FULL;
+  x_in_activation_trainer <= FULL;
+  a_in_activation_trainer <= FULL;
+  i_in_activation_trainer <= FULL;
+  s_in_activation_trainer <= FULL;
+
+  w_out_activation_trainer <= FULL;
+  k_out_activation_trainer <= FULL;
+  b_out_activation_trainer <= FULL;
+
+  -- INTPUT GATE VECTOR
+  size_x_in_input_gate_vector <= FULL;
+  size_w_in_input_gate_vector <= FULL;
+  size_l_in_input_gate_vector <= FULL;
+  size_r_in_input_gate_vector <= FULL;
+
+  w_in_input_gate_vector <= FULL;
+  x_in_input_gate_vector <= FULL;
+
+  k_in_input_gate_vector <= FULL;
+  r_in_input_gate_vector <= FULL;
+
+  u_in_input_gate_vector <= FULL;
+  h_in_input_gate_vector <= FULL;
+
+  b_in_input_gate_vector <= FULL;
+
+  i_out_input_gate_vector <= '0';
+
+  -- INPUT TRAINER
+  size_x_in_input_trainer <= FULL;
+  size_w_in_input_trainer <= FULL;
+  size_l_in_input_trainer <= FULL;
+  size_r_in_input_trainer <= FULL;
+
+  h_in_input_trainer <= FULL;
+  x_in_input_trainer <= FULL;
+  a_in_input_trainer <= FULL;
+  i_in_input_trainer <= FULL;
+  s_in_input_trainer <= FULL;
+
+  w_out_input_trainer <= FULL;
+  k_out_input_trainer <= FULL;
+  b_out_input_trainer <= FULL;
+
+  -- OUTPUT GATE VECTOR
+  size_x_in_output_gate_vector <= FULL;
+  size_w_in_output_gate_vector <= FULL;
+  size_l_in_output_gate_vector <= FULL;
+  size_r_in_output_gate_vector <= FULL;
+
+  w_in_output_gate_vector <= FULL;
+  x_in_output_gate_vector <= FULL;
+
+  k_in_output_gate_vector <= FULL;
+  r_in_output_gate_vector <= FULL;
+
+  u_in_output_gate_vector <= FULL;
+  h_in_output_gate_vector <= FULL;
+
+  b_in_output_gate_vector <= FULL;
+
+  o_out_output_gate_vector <= '0';
+
+  -- OUTPUT TRAINER
+  size_x_in_output_trainer <= FULL;
+  size_w_in_output_trainer <= FULL;
+  size_l_in_output_trainer <= FULL;
+  size_r_in_output_trainer <= FULL;
+
+  h_in_output_trainer <= FULL;
+  x_in_output_trainer <= FULL;
+  a_in_output_trainer <= FULL;
+  o_in_output_trainer <= FULL;
+
+  w_out_output_trainer <= FULL;
+  k_out_output_trainer <= FULL;
+  b_out_output_trainer <= FULL;
+
+  -- FORGET GATE VECTOR
+  size_x_in_forget_gate_vector <= FULL;
+  size_w_in_forget_gate_vector <= FULL;
+  size_l_in_forget_gate_vector <= FULL;
+  size_r_in_forget_gate_vector <= FULL;
+
+  w_in_forget_gate_vector <= FULL;
+  x_in_forget_gate_vector <= FULL;
+
+  k_in_forget_gate_vector <= FULL;
+  r_in_forget_gate_vector <= FULL;
+
+  u_in_forget_gate_vector <= FULL;
+  h_in_forget_gate_vector <= FULL;
+
+  b_in_forget_gate_vector <= FULL;
+
+  f_out_forget_gate_vector <= '0';
+
+  -- FORGET TRAINER
+  size_x_in_forget_trainer <= FULL;
+  size_w_in_forget_trainer <= FULL;
+  size_l_in_forget_trainer <= FULL;
+  size_r_in_forget_trainer <= FULL;
+
+  h_in_forget_trainer <= FULL;
+  x_in_forget_trainer <= FULL;
+  f_in_forget_trainer <= FULL;
+  s_in_forget_trainer <= FULL;
+
+  w_out_forget_trainer <= FULL;
+  k_out_forget_trainer <= FULL;
+  b_out_forget_trainer <= FULL;
+
+  -- STATE GATE VECTOR
+  size_l_in_state_gate_vector <= FULL;
+
+  s_in_state_gate_vector <= FULL;
+  i_in_state_gate_vector <= FULL;
+  f_in_state_gate_vector <= FULL;
+  a_in_state_gate_vector <= FULL;
+
+  s_out_state_gate_vector <= FULL;
+
+  -- HIDDEN GATE VECTOR
+  size_l_in_hidden_gate_vector <= FULL;
+
+  s_in_hidden_gate_vector <= FULL;
+  o_in_hidden_gate_vector <= FULL;
+
+  h_out_hidden_gate_vector <= FULL;
 
   -- ACTIVATION GATE VECTOR
   activation_gate_vector : ntm_activation_gate_vector

@@ -331,6 +331,8 @@ module dnc_memory_testbench;
   wire k_write_in_k_enable_addressing;
   wire e_write_in_k_enable_addressing;
   wire v_write_in_k_enable_addressing;
+  wire r_out_i_enable_addressing;
+  wire r_out_k_enable_addressing;
 
   // DATA
   wire [DATA_SIZE-1:0] size_r_in_addressing;
@@ -372,6 +374,8 @@ module dnc_memory_testbench;
     .DNC_MEMORY_K_WRITE_IN_K_ENABLE(k_write_in_k_enable_addressing),
     .DNC_MEMORY_E_WRITE_IN_K_ENABLE(e_write_in_k_enable_addressing),
     .DNC_MEMORY_V_WRITE_IN_K_ENABLE(v_write_in_k_enable_addressing),
+    .DNC_MEMORY_R_OUT_I_ENABLE(r_out_i_enable_addressing),
+    .DNC_MEMORY_R_OUT_K_ENABLE(r_out_k_enable_addressing),
 
     // DATA
     .DNC_MEMORY_SIZE_R_IN(size_r_in_addressing),
@@ -787,6 +791,8 @@ module dnc_memory_testbench;
     .K_WRITE_IN_K_ENABLE(k_write_in_k_enable_addressing),
     .E_WRITE_IN_K_ENABLE(e_write_in_k_enable_addressing),
     .V_WRITE_IN_K_ENABLE(v_write_in_k_enable_addressing),
+    .R_OUT_I_ENABLE(r_out_i_enable_addressing),
+    .R_OUT_K_ENABLE(r_out_k_enable_addressing),
 
     // DATA
     .SIZE_R_IN(size_r_in_addressing),

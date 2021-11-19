@@ -58,18 +58,21 @@ entity dnc_addressing is
     START : in  std_logic;
     READY : out std_logic;
 
-    K_READ_IN_I_ENABLE : in std_logic;  -- for i in 0 to R-1
+    K_READ_IN_I_ENABLE : in std_logic;  -- for i in 0 to R-1 (read heads flow)
     K_READ_IN_K_ENABLE : in std_logic;  -- for k in 0 to W-1
 
-    BETA_READ_IN_ENABLE : in std_logic;  -- for i in 0 to R-1
+    BETA_READ_IN_ENABLE : in std_logic;  -- for i in 0 to R-1 (read heads flow)
 
-    F_READ_IN_ENABLE : in std_logic;    -- for i in 0 to R-1
+    F_READ_IN_ENABLE : in std_logic;    -- for i in 0 to R-1 (read heads flow)
 
-    PI_READ_IN_ENABLE : in std_logic;   -- for i in 0 to R-1
+    PI_READ_IN_ENABLE : in std_logic;   -- for i in 0 to R-1 (read heads flow)
 
     K_WRITE_IN_K_ENABLE : in std_logic;  -- for k in 0 to W-1
     E_WRITE_IN_K_ENABLE : in std_logic;  -- for k in 0 to W-1
     V_WRITE_IN_K_ENABLE : in std_logic;  -- for k in 0 to W-1
+
+    R_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
+    R_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     -- DATA
     SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -131,7 +134,7 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal start_allocation_weighting : std_logic;
   signal ready_allocation_weighting : std_logic;
 
-  signal u_in_enable_allocation_weighting   : std_logic;
+  signal u_in_enable_allocation_weighting : std_logic;
 
   signal a_out_enable_allocation_weighting : std_logic;
 
@@ -431,6 +434,9 @@ begin
       -- Data Outputs
       R_OUT <= ZERO;
 
+      R_OUT_I_ENABLE <= '0';
+      R_OUT_K_ENABLE <= '0';
+
       -- Control Outputs
       READY <= '0';
 
@@ -441,9 +447,18 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          R_OUT_I_ENABLE <= '0';
+          R_OUT_K_ENABLE <= '0';
+
           if (START = '1') then
+            -- Control Internal
+            start_precedence_weighting <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= PRECEDENCE_WEIGHTING_STATE;
+          else
+            -- Control Internal
+            start_precedence_weighting <= '0';
           end if;
         
         when PRECEDENCE_WEIGHTING_STATE =>  -- STEP 1

@@ -244,6 +244,8 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      H_OUT_ENABLE <= '0';
+
       -- Control Internal
       index_loop <= ZERO;
 
@@ -254,12 +256,20 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          H_OUT_ENABLE <= '0';
+
           -- Control Internal
           index_loop <= ZERO;
 
           if (START = '1') then
+            -- Control Internal
+            start_matrix_convolution <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= MATRIX_FIRST_CONVOLUTION_STATE;
+          else
+            -- Control Internal
+            start_matrix_convolution <= '0';
           end if;
 
         when MATRIX_FIRST_CONVOLUTION_STATE =>  -- STEP 1

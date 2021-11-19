@@ -525,6 +525,9 @@ architecture dnc_top_architecture of dnc_top is
   signal e_write_in_k_enable_addressing : std_logic;
   signal v_write_in_k_enable_addressing : std_logic;
 
+  signal r_out_i_enable_addressing : std_logic;
+  signal r_out_k_enable_addressing : std_logic;
+
   -- DATA
   signal size_r_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_w_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -1725,6 +1728,9 @@ begin
       K_WRITE_IN_K_ENABLE => k_write_in_k_enable_addressing,
       E_WRITE_IN_K_ENABLE => e_write_in_k_enable_addressing,
       V_WRITE_IN_K_ENABLE => v_write_in_k_enable_addressing,
+
+      R_OUT_I_ENABLE => r_out_i_enable_addressing,
+      R_OUT_K_ENABLE => r_out_k_enable_addressing,
 
       -- DATA
       SIZE_R_IN => size_r_in_addressing,
