@@ -972,26 +972,26 @@ package dnc_core_pkg is
       WK_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
       WK_IN_K_ENABLE : in std_logic;    -- for k in 0 to W-1
 
-      K_OUT_I_ENABLE : in std_logic;    -- for i in 0 to R-1
-      K_OUT_K_ENABLE : in std_logic;    -- for k in 0 to W-1
+      K_OUT_I_ENABLE : out std_logic;    -- for i in 0 to R-1
+      K_OUT_K_ENABLE : out std_logic;    -- for k in 0 to W-1
 
       -- Read Strength
       WBETA_IN_I_ENABLE : in std_logic;  -- for i in 0 to R-1
       WBETA_IN_L_ENABLE : in std_logic;  -- for l in 0 to L-1
 
-      BETA_OUT_ENABLE : in std_logic;   -- for i in 0 to R-1
+      BETA_OUT_ENABLE : out std_logic;   -- for i in 0 to R-1
 
       -- Free Gate
       WF_IN_I_ENABLE : in std_logic;    -- for i in 0 to R-1
       WF_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
 
-      F_OUT_ENABLE : in std_logic;      -- for i in 0 to R-1
+      F_OUT_ENABLE : out std_logic;      -- for i in 0 to R-1
 
       -- Read Mode
       WPI_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1
       WPI_IN_L_ENABLE : in std_logic;   -- for l in 0 to L-1
 
-      PI_OUT_ENABLE : in std_logic;     -- for i in 0 to R-1
+      PI_OUT_ENABLE : out std_logic;     -- for i in 0 to R-1
 
       -- Hidden State
       H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1

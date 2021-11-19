@@ -106,7 +106,8 @@ architecture ntm_erasing_architecture of ntm_erasing is
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
   -- CONTROL
@@ -189,7 +190,8 @@ begin
       M_OUT_K_ENABLE <= '0';
 
       -- Control Internal
-      index_loop <= ZERO;
+      index_i_loop <= ZERO;
+      index_j_loop <= ZERO;
 
     elsif (rising_edge(CLK)) then
 
@@ -202,7 +204,8 @@ begin
           M_OUT_K_ENABLE <= '0';
 
           -- Control Internal
-          index_loop <= ZERO;
+          index_i_loop <= ZERO;
+          index_j_loop <= ZERO;
 
           if (START = '1') then
             -- Control Internal
@@ -244,25 +247,41 @@ begin
         when MATRIX_PRODUCT_STATE =>  -- STEP 3
 
           if (data_out_i_enable_matrix_product = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_W_IN) - unsigned(ONE)) then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then
+              -- Data Outputs
+              M_OUT <= data_out_vector_adder;
+
+              -- Control Outputs
+              M_OUT_J_ENABLE <= '1';
+
+              -- Control Internal
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+              index_j_loop <= ZERO;
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            end if;
+          end if;
+
+          if (data_out_j_enable_matrix_product = '1') then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            else
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE))) then
               -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE));
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
 
               -- FSM Control
               controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
             end if;
 
             -- Data Outputs
-            M_OUT <= data_out_matrix_product;
+            M_OUT <= data_out_vector_adder;
 
             -- Control Outputs
-            M_OUT_J_ENABLE <= '1';
             M_OUT_K_ENABLE <= '1';
           end if;
 

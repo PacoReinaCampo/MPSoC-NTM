@@ -559,6 +559,8 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      Y_OUT_ENABLE <= '0';
+
     elsif (rising_edge(CLK)) then
 
       case top_ctrl_fsm_int is
@@ -566,9 +568,17 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          Y_OUT_ENABLE <= '0';
+
           if (START = '1') then
+            -- Control Internal
+		    start_controller <= '1';
+
             -- FSM Control
             top_ctrl_fsm_int <= CONTROLLER_STATE;
+          else
+            -- Control Internal
+		    start_controller <= '0';
           end if;
 
         when CONTROLLER_STATE =>  -- STEP 1
@@ -921,6 +931,256 @@ begin
       end case;
     end if;
   end process;
+
+  -- CONTROLLER
+  w_in_l_enable_controller <= '0';
+  w_in_x_enable_controller <= '0';
+
+  k_in_i_enable_controller <= '0';
+  k_in_l_enable_controller <= '0';
+  k_in_k_enable_controller <= '0';
+
+  b_in_enable_controller <= '0';
+
+  x_in_enable_controller <= '0';
+
+  r_in_i_enable_controller <= '0';
+  r_in_k_enable_controller <= '0';
+
+  w_out_l_enable_controller <= '0';
+  w_out_x_enable_controller <= '0';
+
+  k_out_i_enable_controller <= '0';
+  k_out_l_enable_controller <= '0';
+  k_out_k_enable_controller <= '0';
+
+  b_out_enable_controller <= '0';
+
+  h_out_enable_controller <= '0';
+
+  -- CONTROLLER OUTPUT VECTOR
+  u_in_j_enable_controller_output_vector <= '0';
+  u_in_l_enable_controller_output_vector <= '0';
+
+  h_in_enable_controller_output_vector <= '0';
+
+  nu_out_enable_controller_output_vector <= '0';
+
+  -- OUTPUT VECTOR
+  k_in_i_enable_output_vector <= '0';
+  k_in_y_enable_output_vector <= '0';
+  k_in_k_enable_output_vector <= '0';
+
+  r_in_i_enable_output_vector <= '0';
+  r_in_k_enable_output_vector <= '0';
+
+  nu_in_enable_output_vector <= '0';
+
+  y_in_enable_output_vector <= '0';
+
+  -- FREE GATES
+  f_in_enable_free_gates  <= '0';
+  f_out_enable_free_gates <= '0';
+
+  -- READ KEYS
+  k_in_i_enable_read_keys <= '0';
+  k_in_k_enable_read_keys <= '0';
+
+  k_out_i_enable_read_keys <= '0';
+  k_out_k_enable_read_keys <= '0';
+
+  -- READ MODES
+  pi_in_i_enable_read_modes <= '0';
+  pi_in_p_enable_read_modes <= '0';
+
+  pi_out_i_enable_read_modes <= '0';
+  pi_out_p_enable_read_modes <= '0';
+
+  -- READ STRENGTHS
+  beta_in_enable_read_strengths  <= '0';
+  beta_out_enable_read_strengths <= '0';
+
+  -- READ INTERFACE VECTOR
+  -- Read Key
+  wk_in_i_enable_read_interface_vector <= '0';
+  wk_in_l_enable_read_interface_vector <= '0';
+  wk_in_k_enable_read_interface_vector <= '0';
+
+  k_out_i_enable_read_interface_vector <= '0';
+  k_out_k_enable_read_interface_vector <= '0';
+
+  -- Read Strength
+  wbeta_in_i_enable_read_interface_vector <= '0';
+  wbeta_in_l_enable_read_interface_vector <= '0';
+
+  beta_out_enable_read_interface_vector <= '0';
+
+  -- Free Gate
+  wf_in_i_enable_read_interface_vector <= '0';
+  wf_in_l_enable_read_interface_vector <= '0';
+
+  f_out_enable_read_interface_vector <= '0';
+
+  -- Read Mode
+  wpi_in_i_enable_read_interface_vector <= '0';
+  wpi_in_l_enable_read_interface_vector <= '0';
+
+  pi_out_enable_read_interface_vector <= '0';
+
+  -- Hidden State
+  h_in_enable_read_interface_vector <= '0';
+
+  -- DATA
+  -- CONTROLLER
+  size_x_in_controller <= FULL;
+  size_w_in_controller <= FULL;
+  size_l_in_controller <= FULL;
+  size_r_in_controller <= FULL;
+
+  w_in_controller <= FULL;
+  k_in_controller <= FULL;
+  b_in_controller <= FULL;
+
+  x_in_controller <= FULL;
+  r_in_controller <= FULL;
+
+  w_out_controller <= FULL;
+  k_out_controller <= FULL;
+  b_out_controller <= FULL;
+
+  h_out_controller <= FULL;
+
+  -- CONTROLLER OUTPUT VECTOR
+  size_y_in_controller_output_vector <= FULL;
+  size_l_in_controller_output_vector <= FULL;
+
+  u_in_controller_output_vector <= FULL;
+  h_in_controller_output_vector <= FULL;
+
+  nu_out_controller_output_vector <= FULL;
+
+  -- OUTPUT VECTOR
+  size_y_in_output_vector <= FULL;
+  size_w_in_output_vector <= FULL;
+  size_r_in_output_vector <= FULL;
+
+  k_in_output_vector <= FULL;
+  r_in_output_vector <= FULL;
+
+  nu_in_output_vector <= FULL;
+
+  y_out_output_vector <= FULL;
+
+  -- FREE GATES
+  size_r_in_free_gates <= FULL;
+
+  f_in_free_gates  <= FULL;
+  f_out_free_gates <= '0';
+
+  -- READ KEYS
+  size_r_in_read_keys <= FULL;
+  size_w_in_read_keys <= FULL;
+
+  k_in_read_keys  <= FULL;
+  k_out_read_keys <= FULL;
+
+  -- READ MODES
+  size_r_in_read_modes <= FULL;
+
+  pi_in_read_modes  <= FULL;
+  pi_out_read_modes <= FULL;
+
+  -- READ STRENGTHS
+  size_r_in_read_strengths <= FULL;
+
+  beta_in_read_strengths  <= FULL;
+  beta_out_read_strengths <= FULL;
+
+  -- READ INTERFACE VECTOR
+  size_w_in_read_interface_vector <= FULL;
+  size_l_in_read_interface_vector <= FULL;
+  size_r_in_read_interface_vector <= FULL;
+
+  wk_in_read_interface_vector    <= FULL;
+  wbeta_in_read_interface_vector <= FULL;
+  wf_in_read_interface_vector    <= FULL;
+  wpi_in_read_interface_vector   <= FULL;
+
+  h_in_read_interface_vector <= FULL;
+
+  k_out_read_interface_vector    <= FULL;
+  beta_out_read_interface_vector <= FULL;
+  f_out_read_interface_vector    <= FULL;
+  pi_out_read_interface_vector   <= FULL;
+
+  -- ALLOCATION GATE
+  ga_in_allocation_gate  <= FULL;
+  ga_out_allocation_gate <= '0';
+
+  -- ERASE VECTOR
+  size_w_in_erase_vector <= FULL;
+
+  e_in_erase_vector  <= FULL;
+  e_out_erase_vector <= '0';
+
+  -- WRITE GATE
+  gw_in_write_gate  <= FULL;
+  gw_out_write_gate <= '0';
+
+  -- WRITE KEY
+  size_w_in_write_key <= FULL;
+
+  k_in_write_key  <= FULL;
+  k_out_write_key <= FULL;
+
+  -- WRITE STRENGHT
+  beta_in_write_strength  <= FULL;
+  beta_out_write_strength <= FULL;
+
+  -- WRITE VECTOR
+  size_w_in_write_vector <= FULL;
+
+  v_in_write_vector  <= FULL;
+  v_out_write_vector <= FULL;
+
+  -- WRITE INTERFACE VECTOR
+  size_w_in_write_interface_vector <= FULL;
+  size_l_in_write_interface_vector <= FULL;
+  size_r_in_write_interface_vector <= FULL;
+
+  wk_in_write_interface_vector    <= FULL;
+  wbeta_in_write_interface_vector <= FULL;
+  we_in_write_interface_vector    <= FULL;
+  wv_in_write_interface_vector    <= FULL;
+  wga_in_write_interface_vector   <= FULL;
+  wgw_in_write_interface_vector   <= FULL;
+
+  h_in_write_interface_vector <= FULL;
+
+  k_out_write_interface_vector    <= FULL;
+  beta_out_write_interface_vector <= FULL;
+  e_out_write_interface_vector    <= FULL;
+  v_out_write_interface_vector    <= FULL;
+  ga_out_write_interface_vector   <= FULL;
+  gw_out_write_interface_vector   <= FULL;
+
+  -- ADDRESSING
+  size_r_in_addressing <= FULL;
+  size_w_in_addressing <= FULL;
+
+  k_read_in_addressing    <= FULL;
+  beta_read_in_addressing <= FULL;
+  f_read_in_addressing    <= FULL;
+  pi_read_in_addressing   <= FULL;
+
+  k_write_in_addressing    <= FULL;
+  beta_write_in_addressing <= FULL;
+  e_write_in_addressing    <= FULL;
+  v_write_in_addressing    <= FULL;
+  ga_write_in_addressing   <= FULL;
+  gw_write_in_addressing   <= FULL;
+
+  r_out_addressing <= FULL;
 
   -----------------------------------------------------------------------
   -- CONTROLLER

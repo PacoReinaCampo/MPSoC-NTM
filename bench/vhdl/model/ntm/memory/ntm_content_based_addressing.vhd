@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity dnc_content_based_addressing is
+entity ntm_content_based_addressing is
   generic (
     DATA_SIZE : integer := 512
     );
@@ -76,7 +76,7 @@ entity dnc_content_based_addressing is
     );
 end entity;
 
-architecture dnc_content_based_addressing_architecture of dnc_content_based_addressing is
+architecture ntm_content_based_addressing_architecture of ntm_content_based_addressing is
 
   -----------------------------------------------------------------------
   -- Types

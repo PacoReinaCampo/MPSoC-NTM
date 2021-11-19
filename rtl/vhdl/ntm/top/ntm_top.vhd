@@ -408,6 +408,8 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      Y_OUT_ENABLE <= '0';
+
     elsif (rising_edge(CLK)) then
 
       case top_ctrl_fsm_int is
@@ -415,9 +417,17 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          Y_OUT_ENABLE <= '0';
+
           if (START = '1') then
+            -- Control Internal
+		    start_controller <= '1';
+
             -- FSM Control
             top_ctrl_fsm_int <= CONTROLLER_STATE;
+          else
+            -- Control Internal
+		    start_controller <= '0';
           end if;
 
         when CONTROLLER_STATE =>  -- STEP 1
@@ -574,7 +584,9 @@ begin
               -- M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
 
               -- Control Inputs
-              m_in_enable_writing <= '0';
+              m_in_j_enable_writing <= '0';
+              m_in_k_enable_writing <= '0';
+
               a_in_enable_writing <= '0';
 
               -- Data Inputs
@@ -590,7 +602,9 @@ begin
               -- M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
 
               -- Control Inputs
-              m_in_enable_erasing <= '0';
+              m_in_j_enable_erasing <= '0';
+              m_in_k_enable_erasing <= '0';
+
               e_in_enable_erasing <= '0';
 
               -- Data Inputs
@@ -652,6 +666,214 @@ begin
       end case;
     end if;
   end process;
+
+  -- CONTROLLER
+  w_in_l_enable_controller <= '0';
+  w_in_x_enable_controller <= '0';
+
+  k_in_i_enable_controller <= '0';
+  k_in_l_enable_controller <= '0';
+  k_in_k_enable_controller <= '0';
+
+  b_in_enable_controller <= '0';
+
+  x_in_enable_controller <= '0';
+
+  r_in_i_enable_controller <= '0';
+  r_in_k_enable_controller <= '0';
+
+  w_out_l_enable_controller <= '0';
+  w_out_x_enable_controller <= '0';
+
+  k_out_i_enable_controller <= '0';
+  k_out_l_enable_controller <= '0';
+  k_out_k_enable_controller <= '0';
+
+  b_out_enable_controller <= '0';
+
+  h_out_enable_controller <= '0';
+
+  -- CONTROLLER OUTPUT VECTOR
+  u_in_j_enable_controller_output_vector <= '0';
+  u_in_l_enable_controller_output_vector <= '0';
+
+  h_in_enable_controller_output_vector <= '0';
+
+  nu_out_enable_controller_output_vector <= '0';
+
+  -- OUTPUT VECTOR
+  k_in_i_enable_output_vector <= '0';
+  k_in_y_enable_output_vector <= '0';
+  k_in_k_enable_output_vector <= '0';
+
+  r_in_i_enable_output_vector <= '0';
+  r_in_k_enable_output_vector <= '0';
+
+  nu_in_enable_output_vector <= '0';
+
+  y_out_enable_output_vector <= '0';
+
+  -- INTERFACE VECTOR
+  -- Key Vector
+  wk_in_l_enable_interface_vector <= '0';
+  wk_in_k_enable_interface_vector <= '0';
+
+  k_out_enable_interface_vector <= '0';
+
+  -- Key Strength
+  wbeta_enable_interface_vector <= '0';
+
+  -- Interpolation Gate
+  wg_in_enable_interface_vector <= '0';
+
+  -- Shift Weighting
+  ws_in_l_enable_interface_vector <= '0';
+  ws_in_j_enable_interface_vector <= '0';
+
+  s_out_enable_interface_vector <= '0';
+
+  -- Sharpening
+  wgamma_in_enable_interface_vector <= '0';
+
+  -- Hidden State
+  h_in_enable_interface_vector <= '0';
+
+  -- READING
+  m_in_j_enable_reading <= '0';
+  m_in_k_enable_reading <= '0';
+
+  r_out_enable_reading <= '0';
+
+  -- WRITING
+  m_in_j_enable_writing <= '0';
+  m_in_k_enable_writing <= '0';
+
+  a_in_enable_writing <= '0';
+
+  m_out_j_enable_writing <= '0';
+  m_out_k_enable_writing <= '0';
+
+  -- ERASING
+  m_in_j_enable_erasing <= '0';
+  m_in_k_enable_erasing <= '0';
+  
+  e_in_enable_erasing <= '0';
+  
+  m_out_j_enable_erasing <= '0';
+  m_out_k_enable_erasing <= '0';
+
+  -- ADDRESSING
+  k_in_enable_addressing <= '0';
+  s_in_enable_addressing <= '0';
+
+  m_in_j_enable_addressing <= '0';
+  m_in_k_enable_addressing <= '0';
+
+  w_in_enable_addressing  <= '0';
+  w_out_enable_addressing <= '0';
+
+  -- DATA
+  -- CONTROLLER
+  size_x_in_controller <= FULL;
+  size_w_in_controller <= FULL;
+  size_l_in_controller <= FULL;
+  size_r_in_controller <= FULL;
+
+  w_in_controller <= FULL;
+  k_in_controller <= FULL;
+  b_in_controller <= FULL;
+
+  x_in_controller <= FULL;
+  r_in_controller <= FULL;
+
+  w_out_controller <= FULL;
+  k_out_controller <= FULL;
+  b_out_controller <= FULL;
+
+  h_out_controller <= FULL;
+
+  -- CONTROLLER OUTPUT VECTOR
+  size_y_in_controller_output_vector <= FULL;
+  size_l_in_controller_output_vector <= FULL;
+
+  u_in_controller_output_vector <= FULL;
+  h_in_controller_output_vector <= FULL;
+
+  nu_out_controller_output_vector <= FULL;
+
+  -- OUTPUT VECTOR
+  size_y_in_output_vector <= FULL;
+  size_w_in_output_vector <= FULL;
+  size_l_in_output_vector <= FULL;
+  size_r_in_output_vector <= FULL;
+
+  k_in_output_vector <= FULL;
+  r_in_output_vector <= FULL;
+
+  nu_in_output_vector <= FULL;
+
+  y_out_output_vector <= FULL;
+
+  -- INTERFACE VECTOR
+  size_n_in_interface_vector <= FULL;
+  size_w_in_interface_vector <= FULL;
+  size_l_in_interface_vector <= FULL;
+
+  wk_in_interface_vector     <= FULL;
+  wbeta_in_interface_vector  <= FULL;
+  wg_in_interface_vector     <= FULL;
+  ws_in_interface_vector     <= FULL;
+  wgamma_in_interface_vector <= FULL;
+
+  h_in_interface_vector <= FULL;
+
+  k_out_interface_vector     <= FULL;
+  beta_out_interface_vector  <= FULL;
+  g_out_interface_vector     <= FULL;
+  s_out_interface_vector     <= FULL;
+  gamma_out_interface_vector <= FULL;
+
+  -- READING
+  size_n_in_reading <= FULL;
+  size_w_in_reading <= FULL;
+
+  w_in_reading  <= FULL;
+  m_in_reading  <= FULL;
+  r_out_reading <= FULL;
+
+  -- WRITING
+  size_n_in_writing <= FULL;
+  size_w_in_writing <= FULL;
+
+  m_in_writing  <= FULL;
+  a_in_writing  <= FULL;
+  w_in_writing  <= FULL;
+  m_out_writing <= FULL;
+
+  -- ERASING
+  size_n_in_erasing <= FULL;
+  size_w_in_erasing <= FULL;
+
+  m_in_erasing <= FULL;
+  e_in_erasing <= FULL;
+  w_in_erasing <= FULL;
+
+  m_out_erasing <= FULL;
+
+  -- ADDRESSING
+  size_n_in_addressing <= FULL;
+  size_w_in_addressing <= FULL;
+
+  k_in_addressing     <= FULL;
+  beta_in_addressing  <= FULL;
+  g_in_addressing     <= FULL;
+  s_in_addressing     <= FULL;
+  gamma_in_addressing <= FULL;
+
+  m_in_addressing <= FULL;
+
+  w_in_addressing  <= FULL;
+  w_out_addressing <= FULL;
 
   -----------------------------------------------------------------------
   -- CONTROLLER

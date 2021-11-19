@@ -184,8 +184,8 @@ package ntm_core_pkg is
       SIZE_J_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       K_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
-      M_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
       BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      M_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       C_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );

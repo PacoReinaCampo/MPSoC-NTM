@@ -197,6 +197,20 @@ begin
     end if;
   end process;
 
+  -- VECTOR ADDER
+  operation_vector_adder <= '0';
+
+  data_a_in_enable_vector_adder <= '0';
+  data_b_in_enable_vector_adder <= '0';
+
+  data_out_enable_vector_adder <= '0';
+
+  -- MATRIX PRODUCT
+  data_a_in_i_enable_matrix_product <= '0';
+  data_a_in_j_enable_matrix_product <= '0';
+  data_b_in_i_enable_matrix_product <= '0';
+  data_b_in_j_enable_matrix_product <= '0';
+
   -- DATA
   -- MATRIX PRODUCT
   modulo_in_matrix_product   <= FULL;
