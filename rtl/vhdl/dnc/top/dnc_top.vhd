@@ -149,7 +149,8 @@ architecture dnc_top_architecture of dnc_top is
   signal write_heads_ctrl_fsm_int : write_heads_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- CONTROLLER
@@ -564,6 +565,10 @@ begin
 
       Y_OUT_ENABLE <= '0';
 
+      -- Control Internal
+      index_i_loop <= ZERO;
+      index_j_loop <= ZERO;
+
     elsif (rising_edge(CLK)) then
 
       case top_ctrl_fsm_int is
@@ -573,15 +578,19 @@ begin
 
           Y_OUT_ENABLE <= '0';
 
+          -- Control Internal
+          index_i_loop <= ZERO;
+          index_j_loop <= ZERO;
+
           if (START = '1') then
             -- Control Internal
-		    start_controller <= '1';
+            start_controller <= '1';
 
             -- FSM Control
             top_ctrl_fsm_int <= CONTROLLER_STATE;
           else
             -- Control Internal
-		    start_controller <= '0';
+            start_controller <= '0';
           end if;
 
         when CONTROLLER_STATE =>  -- STEP 1
@@ -594,76 +603,13 @@ begin
               -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + b(t;l))
               -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + b(t;l))
 
-              -- Control Inputs
-              w_in_l_enable_controller <= '0';
-              w_in_x_enable_controller <= '0';
-
-              k_in_i_enable_controller <= '0';
-              k_in_l_enable_controller <= '0';
-              k_in_k_enable_controller <= '0';
-
-              b_in_enable_controller <= '0';
-
-              x_in_enable_controller <= '0';
-
-              r_in_i_enable_controller <= '0';
-              r_in_k_enable_controller <= '0';
-
-              -- Data Inputs
-              size_x_in_controller <= FULL;
-              size_w_in_controller <= FULL;
-              size_l_in_controller <= FULL;
-              size_r_in_controller <= FULL;
-
-              w_in_controller <= FULL;
-              k_in_controller <= FULL;
-              b_in_controller <= FULL;
-
-              x_in_controller <= FULL;
-              r_in_controller <= FULL;
-
             when CONTROLLER_OUTPUT_VECTOR_STATE =>  -- STEP 2
 
               -- nu(t;y) = U(t;y;l)·h(t;l)
 
-              -- Control Inputs
-              u_in_j_enable_controller_output_vector <= '0';
-              u_in_l_enable_controller_output_vector <= '0';
-
-              h_in_enable_controller_output_vector <= '0';
-
-              -- Data Inputs
-              size_y_in_controller_output_vector <= FULL;
-              size_l_in_controller_output_vector <= FULL;
-
-              u_in_controller_output_vector <= FULL;
-              h_in_controller_output_vector <= FULL;
-
             when OUTPUT_VECTOR_STATE =>  -- STEP 3
 
               -- y(t;y) = K(t;i;y;k)·r(t;i;k) + nu(t;y)
-
-              -- Control Inputs
-              k_in_i_enable_output_vector <= '0';
-              k_in_y_enable_output_vector <= '0';
-              k_in_k_enable_output_vector <= '0';
-
-              r_in_i_enable_output_vector <= '0';
-              r_in_k_enable_output_vector <= '0';
-
-              nu_in_enable_output_vector <= '0';
-
-              y_in_enable_output_vector <= '0';
-
-              -- Data Inputs
-              size_y_in_output_vector <= FULL;
-              size_w_in_output_vector <= FULL;
-              size_r_in_output_vector <= FULL;
-
-              k_in_output_vector <= FULL;
-              r_in_output_vector <= FULL;
-
-              nu_in_output_vector <= FULL;
 
             when others =>
               -- FSM Control
@@ -679,52 +625,17 @@ begin
 
               -- f(t;i) = sigmoid(f^(t;i))
 
-              -- Control Inputs
-              f_in_enable_free_gates <= '0';
-
-              -- Data Inputs
-              size_r_in_free_gates <= FULL;
-
-              f_in_free_gates <= FULL;
-
             when READ_KEYS_STATE =>  -- STEP 2
 
               -- k(t;i;k) = k^(t;i;k)
-
-              -- Control Inputs
-              k_in_i_enable_read_keys <= '0';
-              k_in_k_enable_read_keys <= '0';
-
-              -- Data Inputs
-              size_r_in_read_keys <= FULL;
-              size_w_in_read_keys <= FULL;
-
-              k_in_read_keys <= FULL;
 
             when READ_MODES_STATE =>  -- STEP 3
 
               -- pi(t;i;p) = softmax(pi^(t;i;p))
 
-              -- Control Inputs
-              pi_in_i_enable_read_modes <= '0';
-              pi_in_p_enable_read_modes <= '0';
-
-              -- Data Inputs
-              size_r_in_read_modes <= FULL;
-
-              pi_in_read_modes <= FULL;
-
             when READ_STRENGTHS_STATE =>  -- STEP 4
 
               -- beta(t;i) = oneplus(beta^(t;i))
-
-              -- Control Inputs
-              beta_in_enable_read_strengths <= '0';
-
-              -- Data Inputs
-              size_r_in_read_strengths <= FULL;
-
-              beta_in_read_strengths <= FULL;
 
             when READ_INTERFACE_VECTOR_STATE =>  -- STEP 5
 
@@ -734,39 +645,6 @@ begin
               -- beta(t;i) = Wbeta(t;i;l)·h(t;l)
               -- f(t;i) = Wf(t;i;l)·h(t;l)
               -- pi(t;i) = Wpi(t;i;l)·h(t;l)
-
-              -- Control Inputs
-              -- Read Key
-              wk_in_i_enable_read_interface_vector <= '0';
-              wk_in_l_enable_read_interface_vector <= '0';
-              wk_in_k_enable_read_interface_vector <= '0';
-
-              -- Read Strength
-              wbeta_in_i_enable_read_interface_vector <= '0';
-              wbeta_in_l_enable_read_interface_vector <= '0';
-
-              -- Free Gate
-              wf_in_i_enable_read_interface_vector <= '0';
-              wf_in_l_enable_read_interface_vector <= '0';
-
-              -- Read Mode
-              wpi_in_i_enable_read_interface_vector <= '0';
-              wpi_in_l_enable_read_interface_vector <= '0';
-
-              -- Hidden State
-              h_in_enable_read_interface_vector <= '0';
-
-              -- Data Inputs
-              size_w_in_read_interface_vector <= FULL;
-              size_l_in_read_interface_vector <= FULL;
-              size_r_in_read_interface_vector <= FULL;
-
-              wk_in_read_interface_vector    <= FULL;
-              wbeta_in_read_interface_vector <= FULL;
-              wf_in_read_interface_vector    <= FULL;
-              wpi_in_read_interface_vector   <= FULL;
-
-              h_in_read_interface_vector <= FULL;
 
             when others =>
               -- FSM Control
@@ -782,58 +660,25 @@ begin
 
               -- ga(t) = sigmoid(g^(t))
 
-              -- Data Inputs
-              ga_in_allocation_gate  <= FULL;
-
             when ERASE_VECTOR_STATE =>  -- STEP 2
 
               -- e(t;k) = sigmoid(e^(t;k))
-
-              -- Control Inputs
-              e_in_enable_erase_vector <= '0';
-
-              -- Data Inputs
-              size_w_in_erase_vector <= FULL;
-
-              e_in_erase_vector <= FULL;
 
             when WRITE_GATE_STATE =>  -- STEP 3
 
               -- gw(t) = sigmoid(gw^(t))
 
-              -- Data Inputs
-              gw_in_write_gate <= FULL;
-
             when WRITE_KEY_STATE =>  -- STEP 4
 
               -- k(t;k) = k^(t;k)
-
-              -- Control Inputs
-              k_in_enable_write_key <= '0';
-
-              -- Data Inputs
-              size_w_in_write_key <= FULL;
-
-              k_in_write_key <= FULL;
 
             when WRITE_STRENGTH_STATE =>  -- STEP 5
 
               -- beta(t) = oneplus(beta^(t))
 
-              -- Data Inputs
-              beta_in_write_strength <= FULL;
-
             when WRITE_VECTOR_STATE =>  -- STEP 6
 
               -- v(t;k) = v^(t;k)
-
-              -- Control Inputs
-              v_in_enable_write_vector <= '0';
-
-              -- Data Inputs
-              size_w_in_write_vector <= FULL;
-
-              v_in_write_vector <= FULL;
 
             when WRITE_INTERFACE_VECTOR_STATE =>  -- STEP 7
 
@@ -846,45 +691,6 @@ begin
               -- ga(t) = Wga(t;l)·h(t;l)
               -- gw(t) = Wgw(t;l)·h(t;l)
 
-              -- Control Inputs
-              -- Write Key
-              wk_in_l_enable_write_interface_vector <= '0';
-              wk_in_k_enable_write_interface_vector <= '0';
-
-              -- Write Strength
-              wbeta_in_enable_write_interface_vector <= '0';
-
-              -- Erase Vector
-              we_in_l_enable_write_interface_vector <= '0';
-              we_in_k_enable_write_interface_vector <= '0';
-
-              -- Write Vector
-              wv_in_l_enable_write_interface_vector <= '0';
-              wv_in_k_enable_write_interface_vector <= '0';
-
-              -- Allocation Gate
-              wga_in_enable_write_interface_vector <= '0';
-
-              -- Write Gate
-              wgw_in_enable_write_interface_vector <= '0';
-
-              -- Hidden State
-              h_in_enable_write_interface_vector <= '0';
-
-              -- Data Inputs
-              size_w_in_write_interface_vector <= FULL;
-              size_l_in_write_interface_vector <= FULL;
-              size_r_in_write_interface_vector <= FULL;
-
-              wk_in_write_interface_vector    <= FULL;
-              wbeta_in_write_interface_vector <= FULL;
-              we_in_write_interface_vector    <= FULL;
-              wv_in_write_interface_vector    <= FULL;
-              wga_in_write_interface_vector   <= FULL;
-              wgw_in_write_interface_vector   <= FULL;
-
-              h_in_write_interface_vector <= FULL;
-
             when others =>
               -- FSM Control
               write_heads_ctrl_fsm_int <= STARTER_WRITE_HEADS_STATE;
@@ -892,40 +698,28 @@ begin
 
         when MEMORY_STATE =>  -- STEP 4
 
-          -- Control Inputs
-          k_read_in_i_enable_addressing <= '0';
-          k_read_in_k_enable_addressing <= '0';
+          if (r_out_i_enable_addressing = '1') then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then
+              -- Control Internal
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+              index_j_loop <= ZERO;
 
-          beta_read_in_enable_addressing <= '0';
+              -- FSM Control
+              top_ctrl_fsm_int <= CONTROLLER_STATE;
+            end if;
+          end if;
 
-          f_read_in_enable_addressing <= '0';
+          if (r_out_k_enable_addressing = '1') then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then
+              -- FSM Control
+              top_ctrl_fsm_int <= STARTER_STATE;
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE))) then
+              -- Control Internal
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
 
-          pi_read_in_enable_addressing <= '0';
-
-          k_write_in_k_enable_addressing <= '0';
-          e_write_in_k_enable_addressing <= '0';
-          v_write_in_k_enable_addressing <= '0';
-
-          -- Data Inputs
-          size_r_in_addressing <= FULL;
-          size_w_in_addressing <= FULL;
-
-          k_read_in_addressing    <= FULL;
-          beta_read_in_addressing <= FULL;
-          f_read_in_addressing    <= FULL;
-          pi_read_in_addressing   <= FULL;
-
-          k_write_in_addressing    <= FULL;
-          beta_write_in_addressing <= FULL;
-          e_write_in_addressing    <= FULL;
-          v_write_in_addressing    <= FULL;
-          ga_write_in_addressing   <= FULL;
-          gw_write_in_addressing   <= FULL;
-        
-          if (unsigned(index_loop) = unsigned(SIZE_R_IN) - unsigned(ONE)) then
-            -- FSM Control
-            top_ctrl_fsm_int <= STARTER_STATE;
-          else
+              -- FSM Control
+              top_ctrl_fsm_int <= CONTROLLER_STATE;
+            end if;
           end if;
 
         when others =>
