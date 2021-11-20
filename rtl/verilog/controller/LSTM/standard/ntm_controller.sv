@@ -56,6 +56,9 @@ module ntm_controller #(
     input K_IN_L_ENABLE,  // for l in 0 to L-1
     input K_IN_K_ENABLE,  // for k in 0 to W-1
 
+    input U_IN_L_ENABLE,  // for l in 0 to L-1
+    input U_IN_P_ENABLE,  // for p in 0 to L-1
+
     input B_IN_ENABLE,  // for l in 0 to L-1
 
     input X_IN_ENABLE,  // for x in 0 to X-1
@@ -63,12 +66,17 @@ module ntm_controller #(
     input R_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     input R_IN_K_ENABLE,  // for k in 0 to W-1
 
+    input H_IN_ENABLE,  // for l in 0 to L-1
+
     output reg W_OUT_L_ENABLE,  // for l in 0 to L-1
     output reg W_OUT_X_ENABLE,  // for x in 0 to X-1
 
     output reg K_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     output reg K_OUT_L_ENABLE,  // for l in 0 to L-1
     output reg K_OUT_K_ENABLE,  // for k in 0 to W-1
+
+    output reg U_OUT_L_ENABLE,  // for l in 0 to L-1
+    output reg U_OUT_P_ENABLE,  // for p in 0 to L-1
 
     output reg B_OUT_ENABLE,  // for l in 0 to L-1
 
@@ -82,13 +90,16 @@ module ntm_controller #(
 
     input [DATA_SIZE-1:0] W_IN,
     input [DATA_SIZE-1:0] K_IN,
+    input [DATA_SIZE-1:0] U_IN,
     input [DATA_SIZE-1:0] B_IN,
 
     input [DATA_SIZE-1:0] X_IN,
     input [DATA_SIZE-1:0] R_IN,
+    input [DATA_SIZE-1:0] H_IN,
 
     output reg [DATA_SIZE-1:0] W_OUT,
     output reg [DATA_SIZE-1:0] K_OUT,
+    output reg [DATA_SIZE-1:0] U_OUT,
     output reg [DATA_SIZE-1:0] B_OUT,
 
     output reg [DATA_SIZE-1:0] H_OUT
@@ -157,16 +168,27 @@ module ntm_controller #(
   wire start_activation_trainer;
   wire ready_activation_trainer;
 
-  wire h_in_enable_activation_trainer;
   wire x_in_enable_activation_trainer;
+
+  wire r_in_i_enable_activation_trainer;
+  wire r_in_k_enable_activation_trainer;
+
+  wire h_in_enable_activation_trainer;
+
   wire a_in_enable_activation_trainer;
   wire i_in_enable_activation_trainer;
   wire s_in_enable_activation_trainer;
+
   wire w_out_l_enable_activation_trainer;
   wire w_out_x_enable_activation_trainer;
+
   wire k_out_i_enable_activation_trainer;
   wire k_out_l_enable_activation_trainer;
   wire k_out_k_enable_activation_trainer;
+
+  wire u_out_l_enable_activation_trainer;
+  wire u_out_p_enable_activation_trainer;
+
   wire b_out_enable_activation_trainer;
 
   // DATA
@@ -174,13 +196,18 @@ module ntm_controller #(
   wire [DATA_SIZE-1:0] size_w_in_activation_trainer;
   wire [DATA_SIZE-1:0] size_l_in_activation_trainer;
   wire [DATA_SIZE-1:0] size_r_in_activation_trainer;
-  wire [DATA_SIZE-1:0] h_in_activation_trainer;
+
   wire [DATA_SIZE-1:0] x_in_activation_trainer;
+  wire [DATA_SIZE-1:0] r_in_activation_trainer;
+  wire [DATA_SIZE-1:0] h_in_activation_trainer;
+
   wire [DATA_SIZE-1:0] a_in_activation_trainer;
   wire [DATA_SIZE-1:0] i_in_activation_trainer;
   wire [DATA_SIZE-1:0] s_in_activation_trainer;
+
   wire [DATA_SIZE-1:0] w_out_activation_trainer;
   wire [DATA_SIZE-1:0] k_out_activation_trainer;
+  wire [DATA_SIZE-1:0] u_out_activation_trainer;
   wire [DATA_SIZE-1:0] b_out_activation_trainer;
 
   // INTPUT GATE VECTOR
@@ -220,16 +247,27 @@ module ntm_controller #(
   wire start_input_trainer;
   wire ready_input_trainer;
 
-  wire h_in_enable_input_trainer;
   wire x_in_enable_input_trainer;
+
+  wire r_in_i_enable_input_trainer;
+  wire r_in_k_enable_input_trainer;
+
+  wire h_in_enable_input_trainer;
+
   wire a_in_enable_input_trainer;
   wire i_in_enable_input_trainer;
   wire s_in_enable_input_trainer;
+
   wire w_out_l_enable_input_trainer;
   wire w_out_x_enable_input_trainer;
+
   wire k_out_i_enable_input_trainer;
   wire k_out_l_enable_input_trainer;
   wire k_out_k_enable_input_trainer;
+
+  wire u_out_l_enable_input_trainer;
+  wire u_out_p_enable_input_trainer;
+
   wire b_out_enable_input_trainer;
 
   // DATA
@@ -237,13 +275,18 @@ module ntm_controller #(
   wire [DATA_SIZE-1:0] size_w_in_input_trainer;
   wire [DATA_SIZE-1:0] size_l_in_input_trainer;
   wire [DATA_SIZE-1:0] size_r_in_input_trainer;
-  wire [DATA_SIZE-1:0] h_in_input_trainer;
+
   wire [DATA_SIZE-1:0] x_in_input_trainer;
+  wire [DATA_SIZE-1:0] r_in_input_trainer;
+  wire [DATA_SIZE-1:0] h_in_input_trainer;
+
   wire [DATA_SIZE-1:0] a_in_input_trainer;
   wire [DATA_SIZE-1:0] i_in_input_trainer;
   wire [DATA_SIZE-1:0] s_in_input_trainer;
+
   wire [DATA_SIZE-1:0] w_out_input_trainer;
   wire [DATA_SIZE-1:0] k_out_input_trainer;
+  wire [DATA_SIZE-1:0] u_out_input_trainer;
   wire [DATA_SIZE-1:0] b_out_input_trainer;
 
   // OUTPUT GATE VECTOR
@@ -283,15 +326,26 @@ module ntm_controller #(
   wire start_output_trainer;
   wire ready_output_trainer;
 
-  wire h_in_enable_output_trainer;
   wire x_in_enable_output_trainer;
+
+  wire r_in_i_enable_output_trainer;
+  wire r_in_k_enable_output_trainer;
+
+  wire h_in_enable_output_trainer;
+
   wire a_in_enable_output_trainer;
   wire o_in_enable_output_trainer;
+
   wire w_out_l_enable_output_trainer;
   wire w_out_x_enable_output_trainer;
+
   wire k_out_i_enable_output_trainer;
   wire k_out_l_enable_output_trainer;
   wire k_out_k_enable_output_trainer;
+
+  wire u_out_l_enable_output_trainer;
+  wire u_out_p_enable_output_trainer;
+
   wire b_out_enable_output_trainer;
 
   // DATA
@@ -299,12 +353,17 @@ module ntm_controller #(
   wire [DATA_SIZE-1:0] size_w_in_output_trainer;
   wire [DATA_SIZE-1:0] size_l_in_output_trainer;
   wire [DATA_SIZE-1:0] size_r_in_output_trainer;
-  wire [DATA_SIZE-1:0] h_in_output_trainer;
+
   wire [DATA_SIZE-1:0] x_in_output_trainer;
+  wire [DATA_SIZE-1:0] r_in_output_trainer;
+  wire [DATA_SIZE-1:0] h_in_output_trainer;
+
   wire [DATA_SIZE-1:0] a_in_output_trainer;
   wire [DATA_SIZE-1:0] o_in_output_trainer;
+
   wire [DATA_SIZE-1:0] w_out_output_trainer;
   wire [DATA_SIZE-1:0] k_out_output_trainer;
+  wire [DATA_SIZE-1:0] u_out_output_trainer;
   wire [DATA_SIZE-1:0] b_out_output_trainer;
 
   // FORGET GATE VECTOR
@@ -344,15 +403,26 @@ module ntm_controller #(
   wire start_forget_trainer;
   wire ready_forget_trainer;
 
-  wire h_in_enable_forget_trainer;
   wire x_in_enable_forget_trainer;
+
+  wire r_in_i_enable_forget_trainer;
+  wire r_in_k_enable_forget_trainer;
+
+  wire h_in_enable_forget_trainer;
+
   wire f_in_enable_forget_trainer;
   wire s_in_enable_forget_trainer;
+
   wire w_out_l_enable_forget_trainer;
   wire w_out_x_enable_forget_trainer;
+
   wire k_out_i_enable_forget_trainer;
   wire k_out_l_enable_forget_trainer;
   wire k_out_k_enable_forget_trainer;
+
+  wire u_out_l_enable_forget_trainer;
+  wire u_out_p_enable_forget_trainer;
+
   wire b_out_enable_forget_trainer;
 
   // DATA
@@ -360,12 +430,17 @@ module ntm_controller #(
   wire [DATA_SIZE-1:0] size_w_in_forget_trainer;
   wire [DATA_SIZE-1:0] size_l_in_forget_trainer;
   wire [DATA_SIZE-1:0] size_r_in_forget_trainer;
-  wire [DATA_SIZE-1:0] h_in_forget_trainer;
+
   wire [DATA_SIZE-1:0] x_in_forget_trainer;
+  wire [DATA_SIZE-1:0] r_in_forget_trainer;
+  wire [DATA_SIZE-1:0] h_in_forget_trainer;
+
   wire [DATA_SIZE-1:0] f_in_forget_trainer;
   wire [DATA_SIZE-1:0] s_in_forget_trainer;
+
   wire [DATA_SIZE-1:0] w_out_forget_trainer;
   wire [DATA_SIZE-1:0] k_out_forget_trainer;
+  wire [DATA_SIZE-1:0] u_out_forget_trainer;
   wire [DATA_SIZE-1:0] b_out_forget_trainer;
 
   // STATE GATE VECTOR
@@ -506,16 +581,27 @@ module ntm_controller #(
     .START(start_activation_trainer),
     .READY(ready_activation_trainer),
 
-    .H_IN_ENABLE(h_in_enable_activation_trainer),
     .X_IN_ENABLE(x_in_enable_activation_trainer),
+
+    .R_IN_I_ENABLE(r_in_i_enable_activation_trainer),
+    .R_IN_K_ENABLE(r_in_k_enable_activation_trainer),
+
+    .H_IN_ENABLE(h_in_enable_activation_trainer),
+
     .A_IN_ENABLE(a_in_enable_activation_trainer),
     .I_IN_ENABLE(i_in_enable_activation_trainer),
     .S_IN_ENABLE(s_in_enable_activation_trainer),
+
     .W_OUT_L_ENABLE(w_out_l_enable_activation_trainer),
     .W_OUT_X_ENABLE(w_out_x_enable_activation_trainer),
+
     .K_OUT_I_ENABLE(k_out_i_enable_activation_trainer),
     .K_OUT_L_ENABLE(k_out_l_enable_activation_trainer),
     .K_OUT_K_ENABLE(k_out_k_enable_activation_trainer),
+
+    .U_OUT_L_ENABLE(u_out_l_enable_activation_trainer),
+    .U_OUT_P_ENABLE(u_out_p_enable_activation_trainer),
+
     .B_OUT_ENABLE(b_out_enable_activation_trainer),
 
     // DATA
@@ -523,13 +609,18 @@ module ntm_controller #(
     .SIZE_W_IN(size_w_in_activation_trainer),
     .SIZE_L_IN(size_l_in_activation_trainer),
     .SIZE_R_IN(size_r_in_activation_trainer),
-    .H_IN(h_in_activation_trainer),
+
     .X_IN(x_in_activation_trainer),
+    .R_IN(r_in_activation_trainer),
+    .H_IN(h_in_activation_trainer),
+
     .A_IN(a_in_activation_trainer),
     .I_IN(i_in_activation_trainer),
     .S_IN(s_in_activation_trainer),
+
     .W_OUT(w_out_activation_trainer),
     .K_OUT(k_out_activation_trainer),
+    .U_OUT(u_out_activation_trainer),
     .B_OUT(b_out_activation_trainer)
   );
 
@@ -587,16 +678,27 @@ module ntm_controller #(
     .START(start_input_trainer),
     .READY(ready_input_trainer),
 
-    .H_IN_ENABLE(h_in_enable_input_trainer),
     .X_IN_ENABLE(x_in_enable_input_trainer),
+
+    .R_IN_I_ENABLE(r_in_i_enable_input_trainer),
+    .R_IN_K_ENABLE(r_in_k_enable_input_trainer),
+
+    .H_IN_ENABLE(h_in_enable_input_trainer),
+
     .A_IN_ENABLE(a_in_enable_input_trainer),
     .I_IN_ENABLE(i_in_enable_input_trainer),
     .S_IN_ENABLE(s_in_enable_input_trainer),
+
     .W_OUT_L_ENABLE(w_out_l_enable_input_trainer),
     .W_OUT_X_ENABLE(w_out_x_enable_input_trainer),
+
     .K_OUT_I_ENABLE(k_out_i_enable_input_trainer),
     .K_OUT_L_ENABLE(k_out_l_enable_input_trainer),
     .K_OUT_K_ENABLE(k_out_k_enable_input_trainer),
+
+    .U_OUT_L_ENABLE(u_out_l_enable_input_trainer),
+    .U_OUT_P_ENABLE(u_out_p_enable_input_trainer),
+
     .B_OUT_ENABLE(b_out_enable_input_trainer),
 
     // DATA
@@ -604,13 +706,18 @@ module ntm_controller #(
     .SIZE_W_IN(size_w_in_input_trainer),
     .SIZE_L_IN(size_l_in_input_trainer),
     .SIZE_R_IN(size_r_in_input_trainer),
-    .H_IN(h_in_input_trainer),
+
     .X_IN(x_in_input_trainer),
+    .R_IN(r_in_input_trainer),
+    .H_IN(h_in_input_trainer),
+
     .A_IN(a_in_input_trainer),
     .I_IN(i_in_input_trainer),
     .S_IN(s_in_input_trainer),
+
     .W_OUT(w_out_input_trainer),
     .K_OUT(k_out_input_trainer),
+    .U_OUT(u_out_input_trainer),
     .B_OUT(b_out_input_trainer)
   );
 
@@ -668,15 +775,26 @@ module ntm_controller #(
     .START(start_output_trainer),
     .READY(ready_output_trainer),
 
-    .H_IN_ENABLE(h_in_enable_output_trainer),
     .X_IN_ENABLE(x_in_enable_output_trainer),
+
+    .R_IN_I_ENABLE(r_in_i_enable_output_trainer),
+    .R_IN_K_ENABLE(u_in_p_enable_output_trainer),
+
+    .H_IN_ENABLE(h_in_enable_output_trainer),
+
     .A_IN_ENABLE(a_in_enable_output_trainer),
     .O_IN_ENABLE(o_in_enable_output_trainer),
+
     .W_OUT_L_ENABLE(w_out_l_enable_output_trainer),
     .W_OUT_X_ENABLE(w_out_x_enable_output_trainer),
+
     .K_OUT_I_ENABLE(k_out_i_enable_output_trainer),
     .K_OUT_L_ENABLE(k_out_l_enable_output_trainer),
     .K_OUT_K_ENABLE(k_out_k_enable_output_trainer),
+
+    .U_OUT_L_ENABLE(u_out_l_enable_output_trainer),
+    .U_OUT_P_ENABLE(u_out_p_enable_output_trainer),
+
     .B_OUT_ENABLE(b_out_enable_output_trainer),
 
     // DATA
@@ -684,18 +802,24 @@ module ntm_controller #(
     .SIZE_W_IN(size_w_in_output_trainer),
     .SIZE_L_IN(size_l_in_output_trainer),
     .SIZE_R_IN(size_r_in_output_trainer),
-    .H_IN(h_in_output_trainer),
+
     .X_IN(x_in_output_trainer),
+    .R_IN(r_in_output_trainer),
+    .H_IN(h_in_output_trainer),
+
     .A_IN(a_in_output_trainer),
     .O_IN(o_in_output_trainer),
+
     .W_OUT(w_out_output_trainer),
     .K_OUT(k_out_output_trainer),
+    .U_OUT(u_out_output_trainer),
     .B_OUT(b_out_output_trainer)
   );
 
   // FORGET GATE VECTOR
   ntm_forget_gate_vector #(
-    .DATA_SIZE(DATA_SIZE))
+    .DATA_SIZE(DATA_SIZE)
+  )
   forget_gate_vector(
     // GLOBAL
     .CLK(CLK),
@@ -746,15 +870,26 @@ module ntm_controller #(
     .START(start_forget_trainer),
     .READY(ready_forget_trainer),
 
-    .H_IN_ENABLE(h_in_enable_forget_trainer),
     .X_IN_ENABLE(x_in_enable_forget_trainer),
+
+    .R_IN_I_ENABLE(r_in_i_enable_forget_trainer),
+    .R_IN_K_ENABLE(r_in_k_enable_forget_trainer),
+
+    .H_IN_ENABLE(h_in_enable_forget_trainer),
+
     .F_IN_ENABLE(f_in_enable_forget_trainer),
     .S_IN_ENABLE(s_in_enable_forget_trainer),
+
     .W_OUT_L_ENABLE(w_out_l_enable_forget_trainer),
     .W_OUT_X_ENABLE(w_out_x_enable_forget_trainer),
+
     .K_OUT_I_ENABLE(k_out_i_enable_forget_trainer),
     .K_OUT_L_ENABLE(k_out_l_enable_forget_trainer),
     .K_OUT_K_ENABLE(k_out_k_enable_forget_trainer),
+
+    .U_OUT_L_ENABLE(u_out_l_enable_forget_trainer),
+    .U_OUT_P_ENABLE(u_out_p_enable_forget_trainer),
+
     .B_OUT_ENABLE(b_out_enable_forget_trainer),
 
     // DATA
@@ -762,12 +897,17 @@ module ntm_controller #(
     .SIZE_W_IN(size_w_in_forget_trainer),
     .SIZE_L_IN(size_l_in_forget_trainer),
     .SIZE_R_IN(size_r_in_forget_trainer),
-    .H_IN(h_in_forget_trainer),
+
     .X_IN(x_in_forget_trainer),
+    .R_IN(r_in_forget_trainer),
+    .H_IN(h_in_forget_trainer),
+
     .F_IN(f_in_forget_trainer),
     .S_IN(s_in_forget_trainer),
+
     .W_OUT(w_out_forget_trainer),
     .K_OUT(k_out_forget_trainer),
+    .U_OUT(u_out_forget_trainer),
     .B_OUT(b_out_forget_trainer)
   );
 

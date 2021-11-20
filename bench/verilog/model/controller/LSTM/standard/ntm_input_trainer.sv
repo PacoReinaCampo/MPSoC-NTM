@@ -49,16 +49,27 @@ module ntm_input_trainer #(
     input START,
     output reg READY,
 
+    input X_IN_ENABLE,  // for x in 0 to X-1
+
+    input R_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    input R_IN_K_ENABLE,  // for k in 0 to W-1
+
     input H_IN_ENABLE,  // for l in 0 to L-1
-    input X_IN_ENABLE,  // for l in 0 to L-1
+
     input A_IN_ENABLE,  // for l in 0 to L-1
     input I_IN_ENABLE,  // for l in 0 to L-1
     input S_IN_ENABLE,  // for l in 0 to L-1
+
     output reg W_OUT_L_ENABLE,  // for l in 0 to L-1
     output reg W_OUT_X_ENABLE,  // for x in 0 to X-1
+
     output reg K_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     output reg K_OUT_L_ENABLE,  // for l in 0 to L-1
     output reg K_OUT_K_ENABLE,  // for k in 0 to W-1
+
+    output reg U_OUT_L_ENABLE,  // for l in 0 to L-1
+    output reg U_OUT_P_ENABLE,  // for p in 0 to L-1
+
     output reg B_OUT_ENABLE,  // for l in 0 to L-1
 
     // DATA
@@ -66,13 +77,18 @@ module ntm_input_trainer #(
     input [DATA_SIZE-1:0] SIZE_W_IN,
     input [DATA_SIZE-1:0] SIZE_L_IN,
     input [DATA_SIZE-1:0] SIZE_R_IN,
-    input [DATA_SIZE-1:0] H_IN,
+
     input [DATA_SIZE-1:0] X_IN,
+    input [DATA_SIZE-1:0] R_IN,
+    input [DATA_SIZE-1:0] H_IN,
+
     input [DATA_SIZE-1:0] A_IN,
     input [DATA_SIZE-1:0] I_IN,
     input [DATA_SIZE-1:0] S_IN,
+
     output reg [DATA_SIZE-1:0] W_OUT,
     output reg [DATA_SIZE-1:0] K_OUT,
+    output reg [DATA_SIZE-1:0] U_OUT,
     output reg [DATA_SIZE-1:0] B_OUT
   );
 
@@ -84,7 +100,8 @@ module ntm_input_trainer #(
   parameter [2:0] VECTOR_DIFFERENTIATION_I_STATE = 1;
   parameter [2:0] VECTOR_DIFFERENTIATION_W_STATE = 2;
   parameter [2:0] VECTOR_DIFFERENTIATION_K_STATE = 3;
-  parameter [2:0] VECTOR_DIFFERENTIATION_B_STATE = 4;
+  parameter [2:0] VECTOR_DIFFERENTIATION_U_STATE = 4;
+  parameter [2:0] VECTOR_DIFFERENTIATION_B_STATE = 5;
 
   parameter [2:0] STARTER_DI_STATE = 0;
   parameter [2:0] VECTOR_ADDER_DI_STATE = 1;
@@ -101,6 +118,11 @@ module ntm_input_trainer #(
   parameter [2:0] VECTOR_DIFFERENTIATION_DK_STATE = 1;
   parameter [2:0] MATRIX_PRODUCT_DK_STATE = 2;
   parameter [2:0] VECTOR_SUMMATION_DK_STATE = 3;
+
+  parameter [2:0] STARTER_DU_STATE = 0;
+  parameter [2:0] VECTOR_DIFFERENTIATION_DU_STATE = 1;
+  parameter [2:0] MATRIX_PRODUCT_DU_STATE = 2;
+  parameter [2:0] VECTOR_SUMMATION_DU_STATE = 3;
 
   parameter [1:0] STARTER_DB_STATE = 0;
   parameter [1:0] VECTOR_DIFFERENTIATION_DB_STATE = 1;
@@ -124,6 +146,7 @@ module ntm_input_trainer #(
   reg [2:0] differentiation_i_ctrl_fsm_int;
   reg [2:0] differentiation_w_ctrl_fsm_int;
   reg [2:0] differentiation_k_ctrl_fsm_int;
+  reg [2:0] differentiation_u_ctrl_fsm_int;
   reg [1:0] differentiation_b_ctrl_fsm_int;
 
   // VECTOR SUMMATION
@@ -213,7 +236,9 @@ module ntm_input_trainer #(
   ///////////////////////////////////////////////////////////////////////
 
   // di(t;l) = ds(t;l) o a(t;l) o i(t;l) o (1 - i(t;l))
-  // dW(t;l) = summation(di(t;l) · x(t;l))[t in 0 to T]
+
+  // dW(t;l) = summation(di(t;l) · x(t;x))[t in 0 to T]
+  // dK(t;l) = summation(di(t;l) · r(t;i;k))[t in 0 to T-1]
   // dU(t;l) = summation(di(t+1;l) · h(t;l))[t in 0 to T-1]
   // db(t;l) = summation(di(t;l))[t in 0 to T]
 
@@ -223,6 +248,7 @@ module ntm_input_trainer #(
       // Data Outputs
       W_OUT <= ZERO;
       K_OUT <= ZERO;
+      U_OUT <= ZERO;
       B_OUT <= ZERO;
 
       // Control Outputs
@@ -309,7 +335,29 @@ module ntm_input_trainer #(
           endcase
         end
 
-        VECTOR_DIFFERENTIATION_B_STATE : begin  // STEP 3
+        VECTOR_DIFFERENTIATION_U_STATE : begin  // STEP 3
+
+          case(differentiation_u_ctrl_fsm_int)
+            STARTER_DU_STATE : begin  // STEP 0
+            end
+
+            VECTOR_DIFFERENTIATION_DU_STATE : begin  // STEP 1
+            end
+
+            MATRIX_PRODUCT_DU_STATE : begin  // STEP 2
+            end
+
+            VECTOR_SUMMATION_DU_STATE : begin  // STEP 3
+            end
+
+            default : begin
+              // FSM Control
+              differentiation_u_ctrl_fsm_int <= STARTER_DU_STATE;
+            end
+          endcase
+        end
+
+        VECTOR_DIFFERENTIATION_B_STATE : begin  // STEP 4
 
           case(differentiation_b_ctrl_fsm_int)
             STARTER_DB_STATE : begin  // STEP 0
