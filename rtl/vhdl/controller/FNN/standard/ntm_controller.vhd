@@ -65,6 +65,9 @@ entity ntm_controller is
     K_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
     K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
+    U_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+    U_IN_P_ENABLE : in std_logic;       -- for p in 0 to L-1
+
     B_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
     X_IN_ENABLE : in std_logic;         -- for x in 0 to X-1
@@ -72,12 +75,17 @@ entity ntm_controller is
     R_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
     R_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
+    H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+
     W_OUT_L_ENABLE : out std_logic;       -- for l in 0 to L-1
     W_OUT_X_ENABLE : out std_logic;       -- for x in 0 to X-1
 
     K_OUT_I_ENABLE : out std_logic;       -- for i in 0 to R-1 (read heads flow)
     K_OUT_L_ENABLE : out std_logic;       -- for l in 0 to L-1
     K_OUT_K_ENABLE : out std_logic;       -- for k in 0 to W-1
+
+    U_OUT_L_ENABLE : out std_logic;       -- for l in 0 to L-1
+    U_OUT_P_ENABLE : out std_logic;       -- for p in 0 to L-1
 
     B_OUT_ENABLE : out std_logic;         -- for l in 0 to L-1
 
@@ -91,13 +99,16 @@ entity ntm_controller is
 
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    U_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
 
     H_OUT : out std_logic
@@ -116,7 +127,9 @@ architecture ntm_controller_architecture of ntm_controller is
     VECTOR_FIRST_ADDER_STATE,  -- STEP 2
     MATRIX_SECOND_PRODUCT_STATE,  -- STEP 3
     VECTOR_SECOND_ADDER_STATE,  -- STEP 4
-    VECTOR_LOGISTIC_STATE  -- STEP 5
+    MATRIX_THIRD_PRODUCT_STATE,  -- STEP 5
+    VECTOR_THIRD_ADDER_STATE,  -- STEP 6
+    VECTOR_LOGISTIC_STATE  -- STEP 7
     );
 
   -----------------------------------------------------------------------
@@ -199,8 +212,12 @@ architecture ntm_controller_architecture of ntm_controller is
   signal start_trainer : std_logic;
   signal ready_trainer : std_logic;
 
-  signal h_in_enable_trainer : std_logic;
   signal x_in_enable_trainer : std_logic;
+
+  signal r_in_i_enable_trainer : std_logic;
+  signal r_in_k_enable_trainer : std_logic;
+
+  signal h_in_enable_trainer : std_logic;
 
   signal w_out_l_enable_trainer : std_logic;
   signal w_out_x_enable_trainer : std_logic;
@@ -208,6 +225,9 @@ architecture ntm_controller_architecture of ntm_controller is
   signal k_out_i_enable_trainer : std_logic;
   signal k_out_l_enable_trainer : std_logic;
   signal k_out_k_enable_trainer : std_logic;
+
+  signal u_out_l_enable_trainer : std_logic;
+  signal u_out_p_enable_trainer : std_logic;
 
   signal b_out_enable_trainer : std_logic;
 
@@ -217,11 +237,13 @@ architecture ntm_controller_architecture of ntm_controller is
   signal size_l_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_r_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal h_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal x_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal r_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal h_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_out_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal u_out_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal b_out_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -230,7 +252,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + b(t;l))
+  -- h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + b(t;l))
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -328,11 +350,11 @@ begin
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_L_IN;
-          size_a_j_in_matrix_product <= SIZE_W_IN;
-          size_b_i_in_matrix_product <= SIZE_W_IN;
+          size_a_j_in_matrix_product <= SIZE_X_IN;
+          size_b_i_in_matrix_product <= SIZE_X_IN;
           size_b_j_in_matrix_product <= ONE;
-          data_a_in_matrix_product   <= K_IN;
-          data_b_in_matrix_product   <= R_IN;
+          data_a_in_matrix_product   <= W_IN;
+          data_b_in_matrix_product   <= X_IN;
 
           -- Control Inputs
           data_a_in_i_enable_matrix_product <= W_IN_L_ENABLE;
@@ -357,6 +379,59 @@ begin
           modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_matrix_product;
+          data_b_in_vector_adder <= B_IN;
+
+          -- Control Inputs
+          operation_vector_adder <= '0';
+
+          data_a_in_enable_vector_adder <= '0';
+          data_b_in_enable_vector_adder <= '0';
+
+          if (data_out_enable_vector_adder = '1') then
+            -- Control Internal
+            start_matrix_product <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= MATRIX_THIRD_PRODUCT_STATE;
+          else
+            -- Control Internal
+            start_matrix_product <= '0';
+          end if;
+
+        when MATRIX_THIRD_PRODUCT_STATE =>  -- STEP 5
+
+          -- Data Inputs
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= SIZE_L_IN;
+          size_a_j_in_matrix_product <= SIZE_W_IN;
+          size_b_i_in_matrix_product <= SIZE_W_IN;
+          size_b_j_in_matrix_product <= ONE;
+          data_a_in_matrix_product   <= K_IN;
+          data_b_in_matrix_product   <= R_IN;
+
+          -- Control Inputs
+          data_a_in_i_enable_matrix_product <= W_IN_L_ENABLE;
+          data_a_in_j_enable_matrix_product <= W_IN_X_ENABLE;
+          data_b_in_i_enable_matrix_product <= X_IN_ENABLE;
+          data_b_in_j_enable_matrix_product <= '0';
+
+          if (data_out_i_enable_matrix_product = '1') then
+            -- Control Internal
+            start_vector_adder <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_THIRD_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_adder <= '0';
+          end if;
+
+        when VECTOR_THIRD_ADDER_STATE =>  -- STEP 6
+
+          -- Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= SIZE_L_IN;
+          data_a_in_vector_adder <= data_out_matrix_product;
           data_b_in_vector_adder <= data_out_vector_adder;
 
           -- Control Inputs
@@ -376,7 +451,7 @@ begin
             start_vector_logistic <= '0';
           end if;
 
-        when VECTOR_LOGISTIC_STATE =>  -- STEP 5
+        when VECTOR_LOGISTIC_STATE =>  -- STEP 7
 
           -- Data Inputs
           modulo_in_vector_logistic <= FULL;
@@ -427,6 +502,7 @@ begin
 
   W_OUT <= w_out_trainer;
   K_OUT <= k_out_trainer;
+  U_OUT <= u_out_trainer;
   B_OUT <= b_out_trainer;
 
   -- VECTOR ADDER
@@ -530,8 +606,12 @@ begin
       START => start_trainer,
       READY => ready_trainer,
 
-      H_IN_ENABLE => h_in_enable_trainer,
       X_IN_ENABLE => x_in_enable_trainer,
+
+      R_IN_I_ENABLE => r_in_i_enable_trainer,
+      R_IN_K_ENABLE => r_in_k_enable_trainer,
+
+      H_IN_ENABLE => h_in_enable_trainer,
 
       W_OUT_L_ENABLE => w_out_l_enable_trainer,
       W_OUT_X_ENABLE => w_out_x_enable_trainer,
@@ -539,6 +619,9 @@ begin
       K_OUT_I_ENABLE => k_out_i_enable_trainer,
       K_OUT_L_ENABLE => k_out_l_enable_trainer,
       K_OUT_K_ENABLE => k_out_k_enable_trainer,
+
+      U_OUT_L_ENABLE => u_out_l_enable_trainer,
+      U_OUT_P_ENABLE => u_out_p_enable_trainer,
 
       B_OUT_ENABLE => b_out_enable_trainer,
 
@@ -548,11 +631,13 @@ begin
       SIZE_L_IN => size_l_in_trainer,
       SIZE_R_IN => size_r_in_trainer,
 
-      H_IN => h_in_trainer,
       X_IN => x_in_trainer,
+      R_IN => h_in_trainer,
+      H_IN => h_in_trainer,
 
       W_OUT => w_out_trainer,
       K_OUT => k_out_trainer,
+      U_OUT => u_out_trainer,
       B_OUT => b_out_trainer
       );
 

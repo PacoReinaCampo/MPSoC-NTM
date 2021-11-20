@@ -70,15 +70,20 @@ entity ntm_convolutional_fnn_stimulus is
     NTM_CONVOLUTIONAL_FNN_K_IN_I_ENABLE  : out std_logic;
     NTM_CONVOLUTIONAL_FNN_K_IN_L_ENABLE  : out std_logic;
     NTM_CONVOLUTIONAL_FNN_K_IN_K_ENABLE  : out std_logic;
+    NTM_CONVOLUTIONAL_FNN_U_IN_L_ENABLE  : out std_logic;
+    NTM_CONVOLUTIONAL_FNN_U_IN_P_ENABLE  : out std_logic;
     NTM_CONVOLUTIONAL_FNN_B_IN_ENABLE    : out std_logic;
     NTM_CONVOLUTIONAL_FNN_X_IN_ENABLE    : out std_logic;
     NTM_CONVOLUTIONAL_FNN_R_IN_I_ENABLE  : out std_logic;
     NTM_CONVOLUTIONAL_FNN_R_IN_K_ENABLE  : out std_logic;
+    NTM_CONVOLUTIONAL_FNN_H_IN_ENABLE    : out std_logic;
     NTM_CONVOLUTIONAL_FNN_W_OUT_L_ENABLE : in  std_logic;
     NTM_CONVOLUTIONAL_FNN_W_OUT_X_ENABLE : in  std_logic;
     NTM_CONVOLUTIONAL_FNN_K_OUT_I_ENABLE : in  std_logic;
     NTM_CONVOLUTIONAL_FNN_K_OUT_L_ENABLE : in  std_logic;
     NTM_CONVOLUTIONAL_FNN_K_OUT_K_ENABLE : in  std_logic;
+    NTM_CONVOLUTIONAL_FNN_U_OUT_L_ENABLE : in  std_logic;
+    NTM_CONVOLUTIONAL_FNN_U_OUT_P_ENABLE : in  std_logic;
     NTM_CONVOLUTIONAL_FNN_B_OUT_ENABLE   : in  std_logic;
     NTM_CONVOLUTIONAL_FNN_H_OUT_ENABLE   : in  std_logic;
 
@@ -90,11 +95,14 @@ entity ntm_convolutional_fnn_stimulus is
 
     NTM_CONVOLUTIONAL_FNN_W_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_CONVOLUTIONAL_FNN_K_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_CONVOLUTIONAL_FNN_U_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_CONVOLUTIONAL_FNN_B_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_CONVOLUTIONAL_FNN_X_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_CONVOLUTIONAL_FNN_R_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_CONVOLUTIONAL_FNN_H_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_CONVOLUTIONAL_FNN_W_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_CONVOLUTIONAL_FNN_K_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_CONVOLUTIONAL_FNN_U_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_CONVOLUTIONAL_FNN_B_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_CONVOLUTIONAL_FNN_H_OUT : in  std_logic
     );
