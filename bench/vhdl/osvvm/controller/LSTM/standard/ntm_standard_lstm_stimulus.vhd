@@ -65,37 +65,59 @@ entity ntm_standard_lstm_stimulus is
     NTM_STANDARD_LSTM_START : out std_logic;
     NTM_STANDARD_LSTM_READY : in  std_logic;
 
-    NTM_STANDARD_FNN_W_IN_L_ENABLE  : out std_logic;
-    NTM_STANDARD_FNN_W_IN_X_ENABLE  : out std_logic;
-    NTM_STANDARD_FNN_K_IN_I_ENABLE  : out std_logic;
-    NTM_STANDARD_FNN_K_IN_L_ENABLE  : out std_logic;
-    NTM_STANDARD_FNN_K_IN_K_ENABLE  : out std_logic;
-    NTM_STANDARD_FNN_B_IN_ENABLE    : out std_logic;
-    NTM_STANDARD_FNN_X_IN_ENABLE    : out std_logic;
-    NTM_STANDARD_FNN_R_IN_I_ENABLE  : out std_logic;
-    NTM_STANDARD_FNN_R_IN_K_ENABLE  : out std_logic;
-    NTM_STANDARD_FNN_W_OUT_L_ENABLE : in  std_logic;
-    NTM_STANDARD_FNN_W_OUT_X_ENABLE : in  std_logic;
-    NTM_STANDARD_FNN_K_OUT_I_ENABLE : in  std_logic;
-    NTM_STANDARD_FNN_K_OUT_L_ENABLE : in  std_logic;
-    NTM_STANDARD_FNN_K_OUT_K_ENABLE : in  std_logic;
-    NTM_STANDARD_FNN_B_OUT_ENABLE   : in  std_logic;
-    NTM_STANDARD_FNN_H_OUT_ENABLE   : in  std_logic;
+    NTM_STANDARD_LSTM_W_IN_L_ENABLE : out std_logic;
+    NTM_STANDARD_LSTM_W_IN_X_ENABLE : out std_logic;
+
+    NTM_STANDARD_LSTM_K_IN_I_ENABLE : out std_logic;
+    NTM_STANDARD_LSTM_K_IN_L_ENABLE : out std_logic;
+    NTM_STANDARD_LSTM_K_IN_K_ENABLE : out std_logic;
+
+    NTM_STANDARD_LSTM_U_IN_L_ENABLE : out std_logic;
+    NTM_STANDARD_LSTM_U_IN_P_ENABLE : out std_logic;
+
+    NTM_STANDARD_LSTM_B_IN_ENABLE : out std_logic;
+
+    NTM_STANDARD_LSTM_X_IN_ENABLE : out std_logic;
+
+    NTM_STANDARD_LSTM_R_IN_I_ENABLE : out std_logic;
+    NTM_STANDARD_LSTM_R_IN_K_ENABLE : out std_logic;
+
+    NTM_STANDARD_LSTM_H_IN_ENABLE : out std_logic;
+
+    NTM_STANDARD_LSTM_W_OUT_L_ENABLE : in std_logic;
+    NTM_STANDARD_LSTM_W_OUT_X_ENABLE : in  std_logic;
+
+    NTM_STANDARD_LSTM_K_OUT_I_ENABLE : in std_logic;
+    NTM_STANDARD_LSTM_K_OUT_L_ENABLE : in std_logic;
+    NTM_STANDARD_LSTM_K_OUT_K_ENABLE : in std_logic;
+
+    NTM_STANDARD_LSTM_U_OUT_L_ENABLE : in std_logic;
+    NTM_STANDARD_LSTM_U_OUT_P_ENABLE : in std_logic;
+
+    NTM_STANDARD_LSTM_B_OUT_ENABLE : in std_logic;
+
+    NTM_STANDARD_LSTM_H_OUT_ENABLE : in std_logic;
 
       -- DATA
-    NTM_STANDARD_FNN_SIZE_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_STANDARD_FNN_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_STANDARD_FNN_SIZE_L_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_STANDARD_FNN_SIZE_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_SIZE_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_SIZE_L_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_SIZE_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    NTM_STANDARD_FNN_W_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_STANDARD_FNN_K_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_STANDARD_FNN_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_STANDARD_FNN_X_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_STANDARD_FNN_R_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_STANDARD_FNN_W_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_STANDARD_FNN_K_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_STANDARD_FNN_B_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_W_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_K_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_U_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_B_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    NTM_STANDARD_LSTM_X_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_R_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_H_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    NTM_STANDARD_LSTM_W_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_K_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_U_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STANDARD_LSTM_B_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
     NTM_STANDARD_LSTM_H_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;

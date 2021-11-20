@@ -69,6 +69,9 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal k_in_l_enable_controller : std_logic;
   signal k_in_k_enable_controller : std_logic;
 
+  signal u_in_l_enable_controller : std_logic;
+  signal u_in_p_enable_controller : std_logic;
+
   signal b_in_enable_controller : std_logic;
 
   signal x_in_enable_controller : std_logic;
@@ -76,12 +79,17 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
   signal r_in_i_enable_controller : std_logic;
   signal r_in_k_enable_controller : std_logic;
 
+  signal h_in_enable_controller : std_logic;
+
   signal w_out_l_enable_controller : std_logic;
   signal w_out_x_enable_controller : std_logic;
 
   signal k_out_i_enable_controller : std_logic;
   signal k_out_l_enable_controller : std_logic;
   signal k_out_k_enable_controller : std_logic;
+
+  signal u_out_l_enable_controller : std_logic;
+  signal u_out_p_enable_controller : std_logic;
 
   signal b_out_enable_controller : std_logic;
 
@@ -95,13 +103,16 @@ architecture ntm_convolutional_lstm_testbench_architecture of ntm_convolutional_
 
   signal w_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal u_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal b_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal x_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal r_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal h_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal u_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal b_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal h_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -141,6 +152,9 @@ begin
       NTM_CONVOLUTIONAL_LSTM_K_IN_L_ENABLE => k_in_l_enable_controller,
       NTM_CONVOLUTIONAL_LSTM_K_IN_K_ENABLE => k_in_k_enable_controller,
 
+      NTM_CONVOLUTIONAL_LSTM_U_IN_L_ENABLE => u_in_l_enable_controller,
+      NTM_CONVOLUTIONAL_LSTM_U_IN_P_ENABLE => u_in_p_enable_controller,
+
       NTM_CONVOLUTIONAL_LSTM_B_IN_ENABLE => b_in_enable_controller,
 
       NTM_CONVOLUTIONAL_LSTM_X_IN_ENABLE => x_in_enable_controller,
@@ -148,12 +162,17 @@ begin
       NTM_CONVOLUTIONAL_LSTM_R_IN_I_ENABLE => r_in_i_enable_controller,
       NTM_CONVOLUTIONAL_LSTM_R_IN_K_ENABLE => r_in_k_enable_controller,
 
+      NTM_CONVOLUTIONAL_LSTM_H_IN_ENABLE => h_in_enable_controller,
+
       NTM_CONVOLUTIONAL_LSTM_W_OUT_L_ENABLE => w_out_l_enable_controller,
       NTM_CONVOLUTIONAL_LSTM_W_OUT_X_ENABLE => w_out_x_enable_controller,
 
       NTM_CONVOLUTIONAL_LSTM_K_OUT_I_ENABLE => k_out_i_enable_controller,
       NTM_CONVOLUTIONAL_LSTM_K_OUT_L_ENABLE => k_out_l_enable_controller,
       NTM_CONVOLUTIONAL_LSTM_K_OUT_K_ENABLE => k_out_k_enable_controller,
+
+      NTM_CONVOLUTIONAL_LSTM_U_OUT_L_ENABLE => u_out_l_enable_controller,
+      NTM_CONVOLUTIONAL_LSTM_U_OUT_P_ENABLE => u_out_p_enable_controller,
 
       NTM_CONVOLUTIONAL_LSTM_B_OUT_ENABLE => b_out_enable_controller,
 
@@ -167,13 +186,16 @@ begin
 
       NTM_CONVOLUTIONAL_LSTM_W_IN => w_in_controller,
       NTM_CONVOLUTIONAL_LSTM_K_IN => k_in_controller,
+      NTM_CONVOLUTIONAL_LSTM_U_IN => u_in_controller,
       NTM_CONVOLUTIONAL_LSTM_B_IN => b_in_controller,
 
       NTM_CONVOLUTIONAL_LSTM_X_IN => x_in_controller,
       NTM_CONVOLUTIONAL_LSTM_R_IN => r_in_controller,
+      NTM_CONVOLUTIONAL_LSTM_H_IN => h_in_controller,
 
       NTM_CONVOLUTIONAL_LSTM_W_OUT => w_out_controller,
       NTM_CONVOLUTIONAL_LSTM_K_OUT => k_out_controller,
+      NTM_CONVOLUTIONAL_LSTM_U_OUT => u_out_controller,
       NTM_CONVOLUTIONAL_LSTM_B_OUT => b_out_controller,
 
       NTM_CONVOLUTIONAL_LSTM_H_OUT => h_out_controller
@@ -200,6 +222,9 @@ begin
       K_IN_L_ENABLE => k_in_l_enable_controller,
       K_IN_K_ENABLE => k_in_k_enable_controller,
 
+      U_IN_L_ENABLE => u_in_l_enable_controller,
+      U_IN_P_ENABLE => u_in_p_enable_controller,
+
       B_IN_ENABLE => b_in_enable_controller,
 
       X_IN_ENABLE => x_in_enable_controller,
@@ -207,12 +232,17 @@ begin
       R_IN_I_ENABLE => r_in_i_enable_controller,
       R_IN_K_ENABLE => r_in_k_enable_controller,
 
+      H_IN_ENABLE => h_in_enable_controller,
+
       W_OUT_L_ENABLE => w_out_l_enable_controller,
       W_OUT_X_ENABLE => w_out_x_enable_controller,
 
       K_OUT_I_ENABLE => k_out_i_enable_controller,
       K_OUT_L_ENABLE => k_out_l_enable_controller,
       K_OUT_K_ENABLE => k_out_k_enable_controller,
+
+      U_OUT_L_ENABLE => u_out_l_enable_controller,
+      U_OUT_P_ENABLE => u_out_p_enable_controller,
 
       B_OUT_ENABLE => b_out_enable_controller,
 
@@ -226,13 +256,16 @@ begin
 
       W_IN => w_in_controller,
       K_IN => k_in_controller,
+      U_IN => u_in_controller,
       B_IN => b_in_controller,
 
       X_IN => x_in_controller,
       R_IN => r_in_controller,
+      H_IN => h_in_controller,
 
       W_OUT => w_out_controller,
       K_OUT => k_out_controller,
+      U_OUT => u_out_controller,
       B_OUT => b_out_controller,
 
       H_OUT => h_out_controller

@@ -58,8 +58,13 @@ entity ntm_forget_trainer is
     START : in  std_logic;
     READY : out std_logic;
 
+    X_IN_ENABLE : in std_logic;         -- for x in 0 to X-1
+
+    R_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
+    R_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
+
     H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
-    X_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+
     F_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
     S_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
@@ -70,6 +75,9 @@ entity ntm_forget_trainer is
     K_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
     K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
+    U_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    U_OUT_P_ENABLE : out std_logic;     -- for p in 0 to L-1
+
     B_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
@@ -78,13 +86,16 @@ entity ntm_forget_trainer is
     SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
     F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     S_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    U_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
@@ -100,7 +111,8 @@ architecture ntm_forget_trainer_architecture of ntm_forget_trainer is
     VECTOR_DIFFERENTIATION_F_STATE,  -- STEP 1
     VECTOR_DIFFERENTIATION_W_STATE,  -- STEP 2
     VECTOR_DIFFERENTIATION_K_STATE,  -- STEP 3
-    VECTOR_DIFFERENTIATION_B_STATE  -- STEP 4
+    VECTOR_DIFFERENTIATION_U_STATE,  -- STEP 4
+    VECTOR_DIFFERENTIATION_B_STATE  -- STEP 5
     );
 
   type differentiation_f_ctrl_fsm is (
@@ -123,6 +135,13 @@ architecture ntm_forget_trainer_architecture of ntm_forget_trainer is
     VECTOR_DIFFERENTIATION_DK_STATE,  -- STEP 1
     MATRIX_PRODUCT_DK_STATE,  -- STEP 2
     VECTOR_SUMMATION_DK_STATE  -- STEP 3
+    );
+
+  type differentiation_u_ctrl_fsm is (
+    STARTER_DU_STATE,  -- STEP 0
+    VECTOR_DIFFERENTIATION_DU_STATE,  -- STEP 1
+    MATRIX_PRODUCT_DU_STATE,  -- STEP 2
+    VECTOR_SUMMATION_DU_STATE  -- STEP 3
     );
 
   type differentiation_b_ctrl_fsm is (
@@ -149,6 +168,7 @@ architecture ntm_forget_trainer_architecture of ntm_forget_trainer is
   signal differentiation_f_ctrl_fsm_int : differentiation_f_ctrl_fsm;
   signal differentiation_w_ctrl_fsm_int : differentiation_w_ctrl_fsm;
   signal differentiation_k_ctrl_fsm_int : differentiation_k_ctrl_fsm;
+  signal differentiation_u_ctrl_fsm_int : differentiation_u_ctrl_fsm;
   signal differentiation_b_ctrl_fsm_int : differentiation_b_ctrl_fsm;
 
   -- VECTOR SUMMATION
@@ -251,7 +271,8 @@ begin
 
   -- df(t;l) = ds(t;l) o s(t-1;l) o f(t;l) o (1 - f(t;l))
 
-  -- dW(t;l) = summation(df(t;l) · x(t;l))[t in 0 to T]
+  -- dW(t;l) = summation(df(t;l) · x(t;x))[t in 0 to T]
+  -- dK(t;l) = summation(df(t;l) · r(t;i;k))[t in 0 to T-1]
   -- dU(t;l) = summation(df(t+1;l) · h(t;l))[t in 0 to T-1]
   -- db(t;l) = summation(df(t;l))[t in 0 to T]
 
@@ -262,6 +283,7 @@ begin
       -- Data Outputs
       W_OUT <= ZERO;
       K_OUT <= ZERO;
+      U_OUT <= ZERO;
       B_OUT <= ZERO;
 
       -- Control Outputs
@@ -343,7 +365,7 @@ begin
 
         when VECTOR_DIFFERENTIATION_W_STATE =>  -- STEP 1
 
-          -- dW(t;l) = summation(df(t;l) · x(t;l))[t in 0 to T]
+          -- dW(t;l) = summation(df(t;l) · x(t;x))[t in 0 to T]
 
           case differentiation_w_ctrl_fsm_int is
             when STARTER_DW_STATE =>  -- STEP 0
@@ -394,7 +416,7 @@ begin
 
         when VECTOR_DIFFERENTIATION_K_STATE =>  -- STEP 2
 
-          -- dU(t;l) = summation(df(t+1;l) · h(t;l))[t in 0 to T-1]
+          -- dK(t;l) = summation(df(t;i;l) · r(t;i;k))[t in 0 to T-1]
 
           case differentiation_k_ctrl_fsm_int is
             when STARTER_DK_STATE =>  -- STEP 0
@@ -443,7 +465,58 @@ begin
               differentiation_k_ctrl_fsm_int <= STARTER_DK_STATE;
           end case;
 
-        when VECTOR_DIFFERENTIATION_B_STATE =>  -- STEP 3
+        when VECTOR_DIFFERENTIATION_U_STATE =>  -- STEP 3
+
+          -- dU(t;l) = summation(df(t+1;l) · h(t;l))[t in 0 to T-1]
+
+          case differentiation_u_ctrl_fsm_int is
+            when STARTER_DU_STATE =>  -- STEP 0
+
+            when VECTOR_DIFFERENTIATION_DU_STATE =>  -- STEP 1
+
+              -- Control Inputs
+              data_in_enable_vector_differentiation <= '0';
+
+              -- Data Inputs
+              modulo_in_vector_differentiation <= FULL;
+              size_in_vector_differentiation   <= FULL;
+              data_in_vector_differentiation   <= FULL;
+
+            when MATRIX_PRODUCT_DU_STATE =>  -- STEP 2
+
+              -- Control Inputs
+              data_a_in_i_enable_matrix_product <= '0';
+              data_a_in_j_enable_matrix_product <= '0';
+              data_b_in_i_enable_matrix_product <= '0';
+              data_b_in_j_enable_matrix_product <= '0';
+
+              -- Data Inputs
+              modulo_in_matrix_product   <= FULL;
+              size_a_i_in_matrix_product <= FULL;
+              size_a_j_in_matrix_product <= FULL;
+              size_b_i_in_matrix_product <= FULL;
+              size_b_j_in_matrix_product <= FULL;
+              data_a_in_matrix_product   <= FULL;
+              data_b_in_matrix_product   <= FULL;
+
+            when VECTOR_SUMMATION_DU_STATE =>  -- STEP 3
+
+              -- Control Inputs
+              data_in_vector_enable_vector_summation <= '0';
+              data_in_scalar_enable_vector_summation <= '0';
+
+              -- Data Inputs
+              modulo_in_vector_summation <= FULL;
+              size_in_vector_summation   <= FULL;
+              length_in_vector_summation <= FULL;
+              data_in_vector_summation   <= FULL;
+
+            when others =>
+              -- FSM Control
+              differentiation_u_ctrl_fsm_int <= STARTER_DU_STATE;
+          end case;
+
+        when VECTOR_DIFFERENTIATION_B_STATE =>  -- STEP 4
 
           -- db(t;l) = summation(df(t;l))[t in 0 to T]
 
