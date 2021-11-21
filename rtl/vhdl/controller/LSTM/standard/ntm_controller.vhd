@@ -58,38 +58,38 @@ entity ntm_controller is
     START : in  std_logic;
     READY : out std_logic;
 
-    W_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
-    W_IN_X_ENABLE : in std_logic;     -- for x in 0 to X-1
+    W_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+    W_IN_X_ENABLE : in std_logic;       -- for x in 0 to X-1
 
-    K_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
-    K_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
-    K_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
+    K_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
+    K_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+    K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    U_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
-    U_IN_P_ENABLE : in std_logic;     -- for p in 0 to L-1
+    U_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+    U_IN_P_ENABLE : in std_logic;       -- for p in 0 to L-1
 
-    B_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+    B_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
-    X_IN_ENABLE : in std_logic;       -- for x in 0 to X-1
+    X_IN_ENABLE : in std_logic;         -- for x in 0 to X-1
 
-    R_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
-    R_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
+    R_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
+    R_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+    H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
-    W_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
-    W_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
+    W_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    W_OUT_X_ENABLE : out std_logic;     -- for x in 0 to X-1
 
-    K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
-    K_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
-    K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
+    K_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
+    K_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
-    U_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
-    U_OUT_P_ENABLE : out std_logic;   -- for p in 0 to L-1
+    U_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    U_OUT_P_ENABLE : out std_logic;     -- for p in 0 to L-1
 
-    B_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+    B_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
-    H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+    H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
     SIZE_X_IN : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -122,13 +122,13 @@ architecture ntm_controller_architecture of ntm_controller is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
-    VECTOR_ACTIVATION_STATE,  -- STEP 1
-    VECTOR_FORGET_STATE,  -- STEP 2
-    VECTOR_INPUT_STATE,  -- STEP 3
-    VECTOR_STATE_STATE,  -- STEP 4
-    VECTOR_OUTPUT_GATE,  -- STEP 5
-    VECTOR_HIDDEN_GATE  -- STEP 6
+    STARTER_STATE,                      -- STEP 0
+    VECTOR_ACTIVATION_STATE,            -- STEP 1
+    VECTOR_FORGET_STATE,                -- STEP 2
+    VECTOR_INPUT_STATE,                 -- STEP 3
+    VECTOR_STATE_STATE,                 -- STEP 4
+    VECTOR_OUTPUT_GATE,                 -- STEP 5
+    VECTOR_HIDDEN_GATE                  -- STEP 6
     );
 
   -----------------------------------------------------------------------
@@ -561,7 +561,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -585,24 +585,24 @@ begin
 
           -- a(t;l) = tanh(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
 
-        when VECTOR_FORGET_STATE =>  -- STEP 2
+        when VECTOR_FORGET_STATE =>     -- STEP 2
 
           -- f(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
 
-        when VECTOR_INPUT_STATE =>  -- STEP 3
+        when VECTOR_INPUT_STATE =>      -- STEP 3
 
           -- i(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
 
-        when VECTOR_STATE_STATE =>  -- STEP 4
+        when VECTOR_STATE_STATE =>      -- STEP 4
 
           -- s(t;l) = f(t;l) o s(t-1;l) + i(t;l) o a(t;l)
           -- s(t=0;l) = 0
 
-        when VECTOR_OUTPUT_GATE =>  -- STEP 5
+        when VECTOR_OUTPUT_GATE =>      -- STEP 5
 
           -- o(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
 
-        when VECTOR_HIDDEN_GATE =>  -- STEP 6
+        when VECTOR_HIDDEN_GATE =>      -- STEP 6
 
           -- h(t;l) = o(t;l) o tanh(s(t;l))
           -- h(t=0;l) = 0; h(t;l=0) = 0

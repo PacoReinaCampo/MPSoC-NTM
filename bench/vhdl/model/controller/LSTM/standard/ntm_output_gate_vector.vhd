@@ -102,16 +102,16 @@ architecture ntm_output_gate_vector_architecture of ntm_output_gate_vector is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
-    MATRIX_FIRST_PRODUCT_STATE,  -- STEP 1
-    VECTOR_FIRST_ADDER_STATE,  -- STEP 2
-    MATRIX_SECOND_PRODUCT_STATE,  -- STEP 3
-    VECTOR_SECOND_ADDER_STATE,  -- STEP 4
-    MATRIX_THIRD_PRODUCT_STATE,  -- STEP 5
-    VECTOR_THIRD_ADDER_STATE,  -- STEP 6
-    MATRIX_FOURTH_PRODUCT_STATE,  -- STEP 7
-    VECTOR_FOURTH_ADDER_STATE,  -- STEP 8
-    VECTOR_LOGISTIC_STATE  -- STEP 9
+    STARTER_STATE,                      -- STEP 0
+    MATRIX_FIRST_PRODUCT_STATE,         -- STEP 1
+    VECTOR_FIRST_ADDER_STATE,           -- STEP 2
+    MATRIX_SECOND_PRODUCT_STATE,        -- STEP 3
+    VECTOR_SECOND_ADDER_STATE,          -- STEP 4
+    MATRIX_THIRD_PRODUCT_STATE,         -- STEP 5
+    VECTOR_THIRD_ADDER_STATE,           -- STEP 6
+    MATRIX_FOURTH_PRODUCT_STATE,        -- STEP 7
+    VECTOR_FOURTH_ADDER_STATE,          -- STEP 8
+    VECTOR_LOGISTIC_STATE               -- STEP 9
     );
 
   -----------------------------------------------------------------------
@@ -215,7 +215,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -466,7 +466,7 @@ begin
             start_vector_adder <= '0';
           end if;
 
-        when VECTOR_LOGISTIC_STATE =>  -- STEP 9
+        when VECTOR_LOGISTIC_STATE =>   -- STEP 9
 
           -- Control Internal
           data_in_enable_vector_logistic <= '0';

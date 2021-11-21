@@ -79,9 +79,9 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
-    VECTOR_TANH_STATE,  -- STEP 1
-    VECTOR_MULTIPLIER_STATE  -- STEP 2
+    STARTER_STATE,                      -- STEP 0
+    VECTOR_TANH_STATE,                  -- STEP 1
+    VECTOR_MULTIPLIER_STATE             -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -162,7 +162,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -187,7 +187,7 @@ begin
             start_vector_tanh <= '0';
           end if;
 
-        when VECTOR_TANH_STATE =>  -- STEP 1
+        when VECTOR_TANH_STATE =>       -- STEP 1
 
           if (data_out_enable_vector_tanh = '1') then
             if (unsigned(index_loop) = unsigned(ZERO)) then
@@ -199,7 +199,7 @@ begin
             controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
           else
             -- Control Internal
-            start_vector_multiplier <= '0';
+            start_vector_tanh <= '0';
           end if;
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
@@ -213,8 +213,6 @@ begin
               controller_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              start_vector_tanh <= '0';
-
               index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE));
 
               -- FSM Control
@@ -226,6 +224,9 @@ begin
 
             -- Control Outputs
             H_OUT_ENABLE <= '1';
+          else
+            -- Control Internal
+            start_vector_multiplier <= '0';
           end if;
 
         when others =>

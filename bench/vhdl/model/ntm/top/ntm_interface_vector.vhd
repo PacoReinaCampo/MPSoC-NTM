@@ -111,16 +111,16 @@ architecture ntm_interface_vector_architecture of ntm_interface_vector is
   -----------------------------------------------------------------------
 
   type controller_ctrl_scalar_fsm is (
-    STARTER_STATE,  -- STEP 0
-    SCALAR_FIRST_PRODUCT_STATE,  -- STEP 1
-    SCALAR_SECOND_PRODUCT_STATE,  -- STEP 2
-    SCALAR_THIRD_PRODUCT_STATE  -- STEP 3
+    STARTER_STATE,                      -- STEP 0
+    SCALAR_FIRST_PRODUCT_STATE,         -- STEP 1
+    SCALAR_SECOND_PRODUCT_STATE,        -- STEP 2
+    SCALAR_THIRD_PRODUCT_STATE          -- STEP 3
     );
 
   type controller_ctrl_matrix_fsm is (
-    STARTER_STATE,  -- STEP 0
-    MATRIX_FIRST_PRODUCT_STATE,  -- STEP 1
-    MATRIX_SECOND_PRODUCT_STATE  -- STEP 2
+    STARTER_STATE,                      -- STEP 0
+    MATRIX_FIRST_PRODUCT_STATE,         -- STEP 1
+    MATRIX_SECOND_PRODUCT_STATE         -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -202,7 +202,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_scalar_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -270,7 +270,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_matrix_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 

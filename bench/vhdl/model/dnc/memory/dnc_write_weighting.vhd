@@ -82,13 +82,13 @@ architecture dnc_write_weighting_architecture of dnc_write_weighting is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
-    VECTOR_FIRST_ADDER_STATE,  -- STEP 1
-    VECTOR_FIRST_MULTIPLIER_STATE,  -- STEP 2
-    VECTOR_SECOND_ADDER_STATE,  -- STEP 3
-    VECTOR_SECOND_MULTIPLIER_STATE,  -- STEP 4
-    VECTOR_THIRD_ADDER_STATE,  -- STEP 5
-    VECTOR_THIRD_MULTIPLIER_STATE  -- STEP 6
+    STARTER_STATE,                      -- STEP 0
+    VECTOR_FIRST_ADDER_STATE,           -- STEP 1
+    VECTOR_FIRST_MULTIPLIER_STATE,      -- STEP 2
+    VECTOR_SECOND_ADDER_STATE,          -- STEP 3
+    VECTOR_SECOND_MULTIPLIER_STATE,     -- STEP 4
+    VECTOR_THIRD_ADDER_STATE,           -- STEP 5
+    VECTOR_THIRD_MULTIPLIER_STATE       -- STEP 6
     );
 
   -----------------------------------------------------------------------
@@ -171,7 +171,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 

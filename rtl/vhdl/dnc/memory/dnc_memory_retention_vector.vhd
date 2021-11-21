@@ -82,10 +82,10 @@ architecture dnc_memory_retention_vector_architecture of dnc_memory_retention_ve
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
-    VECTOR_MULTIPLIER_STATE,  -- STEP 1
-    VECTOR_ADDER_STATE,  -- STEP 2
-    VECTOR_MULTIPLICATION_STATE  -- STEP 3
+    STARTER_STATE,                      -- STEP 0
+    VECTOR_MULTIPLIER_STATE,            -- STEP 1
+    VECTOR_ADDER_STATE,                 -- STEP 2
+    VECTOR_MULTIPLICATION_STATE         -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -186,7 +186,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -200,7 +200,7 @@ begin
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
 
-        when VECTOR_ADDER_STATE =>  -- STEP 2
+        when VECTOR_ADDER_STATE =>      -- STEP 2
 
         when VECTOR_MULTIPLICATION_STATE =>  -- STEP 3
 

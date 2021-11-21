@@ -83,10 +83,10 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
-    VECTOR_COSINE_SIMILARITY_STATE,  -- STEP 1
-    VECTOR_EXPONENTIATOR_STATE,  -- STEP 2
-    VECTOR_SOFTMAX_STATE  -- STEP 3
+    STARTER_STATE,                      -- STEP 0
+    VECTOR_COSINE_SIMILARITY_STATE,     -- STEP 1
+    VECTOR_EXPONENTIATOR_STATE,         -- STEP 2
+    VECTOR_SOFTMAX_STATE                -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -208,7 +208,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -232,7 +232,7 @@ begin
 
         when VECTOR_EXPONENTIATOR_STATE =>  -- STEP 2
 
-        when VECTOR_SOFTMAX_STATE =>  -- STEP 3
+        when VECTOR_SOFTMAX_STATE =>    -- STEP 3
 
           if (data_out_vector_enable_vector_softmax = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_I_IN) - unsigned(ONE)) then

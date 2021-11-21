@@ -57,13 +57,13 @@ entity ntm_writing is
     START : in  std_logic;
     READY : out std_logic;
 
-    M_IN_J_ENABLE : in std_logic;  -- for j in 0 to N-1
-    M_IN_K_ENABLE : in std_logic;  -- for k in 0 to W-1
+    M_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
+    M_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    A_IN_ENABLE : in std_logic;  -- for k in 0 to W-1
+    A_IN_ENABLE : in std_logic;         -- for k in 0 to W-1
 
-    M_OUT_J_ENABLE : out std_logic;  -- for j in 0 to N-1
-    M_OUT_K_ENABLE : out std_logic;  -- for k in 0 to W-1
+    M_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
+    M_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     -- DATA
     SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -84,9 +84,9 @@ architecture ntm_writing_architecture of ntm_writing is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
-    VECTOR_MULTIPLIER_STATE,  -- STEP 1
-    VECTOR_ADDER_STATE  -- STEP 2
+    STARTER_STATE,                      -- STEP 0
+    VECTOR_MULTIPLIER_STATE,            -- STEP 1
+    VECTOR_ADDER_STATE                  -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -170,7 +170,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -204,7 +204,7 @@ begin
             start_vector_adder <= '0';
           end if;
 
-        when VECTOR_ADDER_STATE =>  -- STEP 2
+        when VECTOR_ADDER_STATE =>      -- STEP 2
 
           if (data_out_enable_vector_adder = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_W_IN) - unsigned(ONE)) then

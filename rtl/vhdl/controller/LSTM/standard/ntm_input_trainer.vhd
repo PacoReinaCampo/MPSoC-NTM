@@ -109,47 +109,47 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
-    VECTOR_DIFFERENTIATION_I_STATE,  -- STEP 1
-    VECTOR_DIFFERENTIATION_W_STATE,  -- STEP 2
-    VECTOR_DIFFERENTIATION_K_STATE,  -- STEP 3
-    VECTOR_DIFFERENTIATION_U_STATE,  -- STEP 4
-    VECTOR_DIFFERENTIATION_B_STATE  -- STEP 5
+    STARTER_STATE,                      -- STEP 0
+    VECTOR_DIFFERENTIATION_I_STATE,     -- STEP 1
+    VECTOR_DIFFERENTIATION_W_STATE,     -- STEP 2
+    VECTOR_DIFFERENTIATION_K_STATE,     -- STEP 3
+    VECTOR_DIFFERENTIATION_U_STATE,     -- STEP 4
+    VECTOR_DIFFERENTIATION_B_STATE      -- STEP 5
     );
 
   type differentiation_i_ctrl_fsm is (
-    STARTER_DI_STATE,  -- STEP 0
-    VECTOR_ADDER_DI_STATE,  -- STEP 1
-    VECTOR_FIRST_MULTIPLIER_DI_STATE,  -- STEP 3
+    STARTER_DI_STATE,                   -- STEP 0
+    VECTOR_ADDER_DI_STATE,              -- STEP 1
+    VECTOR_FIRST_MULTIPLIER_DI_STATE,   -- STEP 3
     VECTOR_SECOND_MULTIPLIER_DI_STATE,  -- STEP 4
-    VECTOR_THIRD_MULTIPLIER_DI_STATE  -- STEP 5
+    VECTOR_THIRD_MULTIPLIER_DI_STATE    -- STEP 5
     );
 
   type differentiation_w_ctrl_fsm is (
-    STARTER_DW_STATE,  -- STEP 0
-    VECTOR_DIFFERENTIATION_DW_STATE,  -- STEP 1
-    MATRIX_PRODUCT_DW_STATE,  -- STEP 2
-    VECTOR_SUMMATION_DW_STATE  -- STEP 3
+    STARTER_DW_STATE,                   -- STEP 0
+    VECTOR_DIFFERENTIATION_DW_STATE,    -- STEP 1
+    MATRIX_PRODUCT_DW_STATE,            -- STEP 2
+    VECTOR_SUMMATION_DW_STATE           -- STEP 3
     );
 
   type differentiation_k_ctrl_fsm is (
-    STARTER_DK_STATE,  -- STEP 0
-    VECTOR_DIFFERENTIATION_DK_STATE,  -- STEP 1
-    MATRIX_PRODUCT_DK_STATE,  -- STEP 2
-    VECTOR_SUMMATION_DK_STATE  -- STEP 3
+    STARTER_DK_STATE,                   -- STEP 0
+    VECTOR_DIFFERENTIATION_DK_STATE,    -- STEP 1
+    MATRIX_PRODUCT_DK_STATE,            -- STEP 2
+    VECTOR_SUMMATION_DK_STATE           -- STEP 3
     );
 
   type differentiation_u_ctrl_fsm is (
-    STARTER_DU_STATE,  -- STEP 0
-    VECTOR_DIFFERENTIATION_DU_STATE,  -- STEP 1
-    MATRIX_PRODUCT_DU_STATE,  -- STEP 2
-    VECTOR_SUMMATION_DU_STATE  -- STEP 3
+    STARTER_DU_STATE,                   -- STEP 0
+    VECTOR_DIFFERENTIATION_DU_STATE,    -- STEP 1
+    MATRIX_PRODUCT_DU_STATE,            -- STEP 2
+    VECTOR_SUMMATION_DU_STATE           -- STEP 3
     );
 
   type differentiation_b_ctrl_fsm is (
-    STARTER_DB_STATE,  -- STEP 0
-    VECTOR_DIFFERENTIATION_DB_STATE,  -- STEP 1
-    VECTOR_SUMMATION_DB_STATE  -- STEP 2
+    STARTER_DB_STATE,                   -- STEP 0
+    VECTOR_DIFFERENTIATION_DB_STATE,    -- STEP 1
+    VECTOR_SUMMATION_DB_STATE           -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -294,7 +294,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -308,7 +308,7 @@ begin
           -- di(t;l) = ds(t;l) o a(t;l) o i(t;l) o (1 - i(t;l))
 
           case differentiation_i_ctrl_fsm_int is
-            when STARTER_DI_STATE =>  -- STEP 0
+            when STARTER_DI_STATE =>    -- STEP 0
 
             when VECTOR_ADDER_DI_STATE =>  -- STEP 1
 
@@ -370,7 +370,7 @@ begin
           -- dW(t;l) = summation(di(t;l) · x(t;x))[t in 0 to T]
 
           case differentiation_w_ctrl_fsm_int is
-            when STARTER_DW_STATE =>  -- STEP 0
+            when STARTER_DW_STATE =>    -- STEP 0
 
             when VECTOR_DIFFERENTIATION_DW_STATE =>  -- STEP 1
 
@@ -421,7 +421,7 @@ begin
           -- dK(t;l) = summation(do(t;i;l) · r(t;i;k))[t in 0 to T-1]
 
           case differentiation_k_ctrl_fsm_int is
-            when STARTER_DK_STATE =>  -- STEP 0
+            when STARTER_DK_STATE =>    -- STEP 0
 
             when VECTOR_DIFFERENTIATION_DK_STATE =>  -- STEP 1
 
@@ -472,7 +472,7 @@ begin
           -- dU(t;l) = summation(di(t+1;l) · h(t;l))[t in 0 to T-1]
 
           case differentiation_u_ctrl_fsm_int is
-            when STARTER_DU_STATE =>  -- STEP 0
+            when STARTER_DU_STATE =>    -- STEP 0
 
             when VECTOR_DIFFERENTIATION_DU_STATE =>  -- STEP 1
 
@@ -523,7 +523,7 @@ begin
           -- db(t;l) = summation(di(t;l))[t in 0 to T]
 
           case differentiation_b_ctrl_fsm_int is
-            when STARTER_DB_STATE =>  -- STEP 0
+            when STARTER_DB_STATE =>    -- STEP 0
 
             when VECTOR_DIFFERENTIATION_DB_STATE =>  -- STEP 1
 

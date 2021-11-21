@@ -91,26 +91,26 @@ architecture ntm_addressing_architecture of ntm_addressing is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
+    STARTER_STATE,                          -- STEP 0
     VECTOR_CONTENT_BASED_ADDRESSING_STATE,  -- STEP 1
-    VECTOR_INTERPOLATION_STATE,  -- STEP 2
-    VECTOR_CONVOLUTION_STATE,  -- STEP 3
-    VECTOR_SHARPENING_STATE  -- STEP 4
+    VECTOR_INTERPOLATION_STATE,             -- STEP 2
+    VECTOR_CONVOLUTION_STATE,               -- STEP 3
+    VECTOR_SHARPENING_STATE                 -- STEP 4
     );
 
   type controller_ctrl_interpolation_fsm is (
-    STARTER_INTERPOLATION_STATE,  -- STEP 0
-    VECTOR_FIRST_MULTIPLIER_INTERPOLATION_STATE,  -- STEP 1
-    VECTOR_FIRST_ADDER_INTERPOLATION_STATE,  -- STEP 2
+    STARTER_INTERPOLATION_STATE,                   -- STEP 0
+    VECTOR_FIRST_MULTIPLIER_INTERPOLATION_STATE,   -- STEP 1
+    VECTOR_FIRST_ADDER_INTERPOLATION_STATE,        -- STEP 2
     VECTOR_SECOND_MULTIPLIER_INTERPOLATION_STATE,  -- STEP 3
-    VECTOR_SECOND_ADDER_INTERPOLATION_STATE  -- STEP 4
+    VECTOR_SECOND_ADDER_INTERPOLATION_STATE        -- STEP 4
     );
 
   type controller_ctrl_sharpening_fsm is (
-    STARTER_SHARPENING_STATE,  -- STEP 0
+    STARTER_SHARPENING_STATE,               -- STEP 0
     VECTOR_EXPONENTIATOR_SHARPENING_STATE,  -- STEP 1
-    VECTOR_SUMMATION_SHARPENING_STATE,  -- STEP 2
-    VECTOR_DIVIDER_SHARPENING_STATE  -- STEP 3
+    VECTOR_SUMMATION_SHARPENING_STATE,      -- STEP 2
+    VECTOR_DIVIDER_SHARPENING_STATE         -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -293,7 +293,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -594,7 +594,7 @@ begin
       )
     port map (
       -- GLOBAL
-        CLK => CLK,
+      CLK => CLK,
       RST => RST,
 
       -- CONTROL

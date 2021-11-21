@@ -99,25 +99,25 @@ architecture ntm_top_architecture of ntm_top is
   -----------------------------------------------------------------------
 
   type top_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
-    CONTROLLER_STATE,  -- STEP 1
-    READ_HEADS_STATE,  -- STEP 2
-    WRITE_HEADS_STATE,  -- STEP 3
-    MEMORY_STATE  -- STEP 4
+    STARTER_STATE,                      -- STEP 0
+    CONTROLLER_STATE,                   -- STEP 1
+    READ_HEADS_STATE,                   -- STEP 2
+    WRITE_HEADS_STATE,                  -- STEP 3
+    MEMORY_STATE                        -- STEP 4
     );
 
   type controller_ctrl_fsm is (
-    STARTER_CONTROLLER_STATE,  -- STEP 0
-    CONTROLLER_BODY_STATE,  -- STEP 1
-    CONTROLLER_OUTPUT_VECTOR_STATE,  -- STEP 2
-    OUTPUT_VECTOR_STATE,  -- STEP 3
-    INTERFACE_VECTOR_STATE  -- STEP 4
+    STARTER_CONTROLLER_STATE,           -- STEP 0
+    CONTROLLER_BODY_STATE,              -- STEP 1
+    CONTROLLER_OUTPUT_VECTOR_STATE,     -- STEP 2
+    OUTPUT_VECTOR_STATE,                -- STEP 3
+    INTERFACE_VECTOR_STATE              -- STEP 4
     );
 
   type write_heads_ctrl_fsm is (
-    STARTER_WRITE_HEADS_STATE,  -- STEP 0
-    WRITING_STATE,  -- STEP 1
-    ERASING_STATE  -- STEP 2
+    STARTER_WRITE_HEADS_STATE,          -- STEP 0
+    WRITING_STATE,                      -- STEP 1
+    ERASING_STATE                       -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -358,9 +358,9 @@ architecture ntm_top_architecture of ntm_top is
 
   signal m_in_j_enable_erasing : std_logic;
   signal m_in_k_enable_erasing : std_logic;
-  
+
   signal e_in_enable_erasing : std_logic;
-  
+
   signal m_out_j_enable_erasing : std_logic;
   signal m_out_k_enable_erasing : std_logic;
 
@@ -431,7 +431,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case top_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -451,7 +451,7 @@ begin
             start_controller <= '0';
           end if;
 
-        when CONTROLLER_STATE =>  -- STEP 1
+        when CONTROLLER_STATE =>        -- STEP 1
 
           case controller_ctrl_fsm_int is
             when STARTER_CONTROLLER_STATE =>  -- STEP 0
@@ -484,20 +484,20 @@ begin
               controller_ctrl_fsm_int <= STARTER_CONTROLLER_STATE;
           end case;
 
-        when READ_HEADS_STATE =>  -- STEP 2
+        when READ_HEADS_STATE =>        -- STEP 2
 
-         -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
+          -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
 
-        when WRITE_HEADS_STATE =>  -- STEP 3
+        when WRITE_HEADS_STATE =>       -- STEP 3
 
           case write_heads_ctrl_fsm_int is
             when STARTER_WRITE_HEADS_STATE =>  -- STEP 0
 
-            when WRITING_STATE =>  -- STEP 1
+            when WRITING_STATE =>       -- STEP 1
 
               -- M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
 
-            when ERASING_STATE =>  -- STEP 2
+            when ERASING_STATE =>       -- STEP 2
 
               -- M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
 
@@ -506,7 +506,7 @@ begin
               write_heads_ctrl_fsm_int <= STARTER_WRITE_HEADS_STATE;
           end case;
 
-        when MEMORY_STATE =>  -- STEP 4
+        when MEMORY_STATE =>            -- STEP 4
 
           -- wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
 
@@ -625,9 +625,9 @@ begin
   -- ERASING
   m_in_j_enable_erasing <= '0';
   m_in_k_enable_erasing <= '0';
-  
+
   e_in_enable_erasing <= '0';
-  
+
   m_out_j_enable_erasing <= '0';
   m_out_k_enable_erasing <= '0';
 
@@ -964,8 +964,8 @@ begin
       START => start_reading,
       READY => ready_reading,
 
-      M_IN_J_ENABLE  => m_in_j_enable_reading,
-      M_IN_K_ENABLE  => m_in_k_enable_reading,
+      M_IN_J_ENABLE => m_in_j_enable_reading,
+      M_IN_K_ENABLE => m_in_k_enable_reading,
 
       R_OUT_ENABLE => r_out_enable_reading,
 

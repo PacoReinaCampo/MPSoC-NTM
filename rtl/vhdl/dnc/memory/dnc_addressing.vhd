@@ -101,17 +101,17 @@ architecture dnc_addressing_architecture of dnc_addressing is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
-    PRECEDENCE_WEIGHTING_STATE,  -- STEP 1
-    TEMPORAL_LINK_MATRIX_STATE,  -- STEP 2
-    BACKWARD_FORWARD_WEIGHTING_STATE,  -- STEP 3
-    MEMORY_RETENTION_VECTOR_STATE,  -- STEP 4
-    USAGE_VECTOR_STATE,  -- STEP 5
-    ALLOCATION_WEIGHTING_STATE,  -- STEP 6
+    STARTER_STATE,                       -- STEP 0
+    PRECEDENCE_WEIGHTING_STATE,          -- STEP 1
+    TEMPORAL_LINK_MATRIX_STATE,          -- STEP 2
+    BACKWARD_FORWARD_WEIGHTING_STATE,    -- STEP 3
+    MEMORY_RETENTION_VECTOR_STATE,       -- STEP 4
+    USAGE_VECTOR_STATE,                  -- STEP 5
+    ALLOCATION_WEIGHTING_STATE,          -- STEP 6
     READ_WRITE_CONTENT_WEIGHTING_STATE,  -- STEP 7
-    READ_WRITE_WEIGHTING_STATE,  -- STEP 8
-    MEMORY_MATRIX_STATE,  -- STEP 9
-    READ_VECTORS_STATE  -- STEP 10
+    READ_WRITE_WEIGHTING_STATE,          -- STEP 8
+    MEMORY_MATRIX_STATE,                 -- STEP 9
+    READ_VECTORS_STATE                   -- STEP 10
     );
 
   -----------------------------------------------------------------------
@@ -443,7 +443,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -460,17 +460,17 @@ begin
             -- Control Internal
             start_precedence_weighting <= '0';
           end if;
-        
+
         when PRECEDENCE_WEIGHTING_STATE =>  -- STEP 1
 
           -- p(t;j) = (1 - summation(w(t;j))[i in 1 to N])·p(t-1;j) + w(t;j)
           -- p(t=0) = 0
-        
+
         when TEMPORAL_LINK_MATRIX_STATE =>  -- STEP 2
 
           -- L(t)[g;j] = (1 - w(t;j)[i] - w(t;j)[j])·L(t-1)[g;j] + w(t;j)[i]·p(t-1;j)[j]
           -- L(t=0)[g,j] = 0
-        
+
         when BACKWARD_FORWARD_WEIGHTING_STATE =>  -- STEP 3
 
           -- b(t;i;j) = transpose(L(t;g;j))·w(t-1;i;j)
@@ -480,32 +480,32 @@ begin
         when MEMORY_RETENTION_VECTOR_STATE =>  -- STEP 4
 
           -- psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
-        
-        when USAGE_VECTOR_STATE =>  -- STEP 5
+
+        when USAGE_VECTOR_STATE =>      -- STEP 5
 
           -- u(t;j) = (u(t-1;j) + w(t-1;j) - u(t-1;j) o w(t-1;j)) o psi(t;j)
 
         when ALLOCATION_WEIGHTING_STATE =>  -- STEP 6
 
           -- a(t)[phi(t)[j]] = (1 - u(t)[phi(t)[j]])·multiplication(u(t)[phi(t)[j]])[i in 1 to j-1]
-        
+
         when READ_WRITE_CONTENT_WEIGHTING_STATE =>  -- STEP 7
 
           -- c(t;i;j) = C(M(t-1;j;k),k(t;i;k),beta(t;i))
 
           -- c(t;j) = C(M(t-1;j;k),k(t;k),beta(t))
-        
+
         when READ_WRITE_WEIGHTING_STATE =>  -- STEP 8
 
           -- w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
 
           -- w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - ga(t))·c(t;j))
-        
-        when MEMORY_MATRIX_STATE =>  -- STEP 9
+
+        when MEMORY_MATRIX_STATE =>     -- STEP 9
 
           -- M(t;j;k) = M(t-1;j;k) o (E - w(t;j)·transpose(e(t;k))) + w(t;j)·transpose(v(t;k))
-        
-        when READ_VECTORS_STATE =>  -- STEP 10
+
+        when READ_VECTORS_STATE =>      -- STEP 10
 
           -- r(t;i;k) = transpose(M(t;j;k))·w(t;i;j)
 
@@ -743,7 +743,7 @@ begin
       START => start_allocation_weighting,
       READY => ready_allocation_weighting,
 
-      U_IN_ENABLE   => u_in_enable_allocation_weighting,
+      U_IN_ENABLE => u_in_enable_allocation_weighting,
 
       A_OUT_ENABLE => a_out_enable_allocation_weighting,
 

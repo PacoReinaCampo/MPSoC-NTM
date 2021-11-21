@@ -58,7 +58,7 @@ entity dnc_allocation_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    U_IN_ENABLE   : in std_logic;       -- for j in 0 to N-1
+    U_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
 
     A_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
@@ -77,12 +77,12 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
-    VECTOR_FIRST_SORT_STATE,  -- STEP 1
-    VECTOR_ADDER_STATE,  -- STEP 2
-    VECTOR_SECOND_SORT_STATE,  -- STEP 3
-    VECTOR_MULTIPLICATION_STATE,  -- STEP 4
-    VECTOR_MULTIPLIER_STATE  -- STEP 5
+    STARTER_STATE,                      -- STEP 0
+    VECTOR_FIRST_SORT_STATE,            -- STEP 1
+    VECTOR_ADDER_STATE,                 -- STEP 2
+    VECTOR_SECOND_SORT_STATE,           -- STEP 3
+    VECTOR_MULTIPLICATION_STATE,        -- STEP 4
+    VECTOR_MULTIPLIER_STATE             -- STEP 5
     );
 
   -----------------------------------------------------------------------
@@ -195,7 +195,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -213,7 +213,7 @@ begin
           size_n_in_sort_vector <= SIZE_N_IN;
           u_in_sort_vector      <= U_IN;
 
-        when VECTOR_ADDER_STATE =>  -- STEP 2
+        when VECTOR_ADDER_STATE =>      -- STEP 2
 
         when VECTOR_SECOND_SORT_STATE =>  -- STEP 3
 
@@ -359,28 +359,28 @@ begin
 
   -- VECTOR SORT
   sort_vector : dnc_sort_vector
-  generic map (
-    DATA_SIZE => DATA_SIZE
-    )
-  port map (
-    -- GLOBAL
-    CLK => CLK,
-    RST => RST,
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
 
-    -- CONTROL
-    START => start_sort_vector,
-    READY => ready_sort_vector,
+      -- CONTROL
+      START => start_sort_vector,
+      READY => ready_sort_vector,
 
-    U_IN_ENABLE => u_in_enable_sort_vector,
+      U_IN_ENABLE => u_in_enable_sort_vector,
 
-    PHI_OUT_ENABLE => phi_out_enable_sort_vector,
+      PHI_OUT_ENABLE => phi_out_enable_sort_vector,
 
-    -- DATA
-    SIZE_N_IN => size_n_in_sort_vector,
+      -- DATA
+      SIZE_N_IN => size_n_in_sort_vector,
 
-    U_IN => u_in_sort_vector,
+      U_IN => u_in_sort_vector,
 
-    PHI_OUT => phi_out_sort_vector
-    );
+      PHI_OUT => phi_out_sort_vector
+      );
 
 end architecture;

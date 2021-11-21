@@ -92,9 +92,9 @@ architecture ntm_output_vector_architecture of ntm_output_vector is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
-    MATRIX_PRODUCT_STATE,  -- STEP 1
-    VECTOR_ADDER_STATE  -- STEP 2
+    STARTER_STATE,                      -- STEP 0
+    MATRIX_PRODUCT_STATE,               -- STEP 1
+    VECTOR_ADDER_STATE                  -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -175,7 +175,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -184,9 +184,9 @@ begin
             controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
           end if;
 
-        when MATRIX_PRODUCT_STATE =>  -- STEP 1
+        when MATRIX_PRODUCT_STATE =>    -- STEP 1
 
-        when VECTOR_ADDER_STATE =>  -- STEP 2
+        when VECTOR_ADDER_STATE =>      -- STEP 2
 
           -- Data Outputs
           Y_OUT <= data_out_vector_adder;

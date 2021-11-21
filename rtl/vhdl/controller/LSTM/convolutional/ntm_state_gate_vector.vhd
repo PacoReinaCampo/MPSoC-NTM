@@ -83,10 +83,10 @@ architecture ntm_state_gate_vector_architecture of ntm_state_gate_vector is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
-    VECTOR_FIRST_MULTIPLIER_STATE,  -- STEP 1
-    VECTOR_SECOND_MULTIPLIER_STATE,  -- STEP 2
-    VECTOR_ADDER_STATE  -- STEP 3
+    STARTER_STATE,                      -- STEP 0
+    VECTOR_FIRST_MULTIPLIER_STATE,      -- STEP 1
+    VECTOR_SECOND_MULTIPLIER_STATE,     -- STEP 2
+    VECTOR_ADDER_STATE                  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -173,7 +173,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -244,7 +244,7 @@ begin
             start_vector_multiplier <= '0';
           end if;
 
-        when VECTOR_ADDER_STATE =>  -- STEP 3
+        when VECTOR_ADDER_STATE =>      -- STEP 3
 
           -- Control Inputs
           operation_vector_adder <= '0';

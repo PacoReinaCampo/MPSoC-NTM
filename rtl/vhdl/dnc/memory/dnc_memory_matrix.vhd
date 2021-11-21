@@ -88,15 +88,15 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
-    MATRIX_TRANSPOSE_STATE,  -- STEP 1
-    MATRIX_FIRST_PRODUCT_STATE,  -- STEP 2
-    MATRIX_FIRST_ADDER_STATE,  -- STEP 3
-    MATRIX_MULTIPLIER_STATE,  -- STEP 4
-    MATRIX_SECOND_TRANSPOSE_STATE,  -- STEP 5
-    MATRIX_SECOND_PRODUCT_STATE,  -- STEP 6
-    MATRIX_SECOND_ADDER_STATE,  -- STEP 7
-    ENDER_STATE  -- STEP 8
+    STARTER_STATE,                      -- STEP 0
+    MATRIX_TRANSPOSE_STATE,             -- STEP 1
+    MATRIX_FIRST_PRODUCT_STATE,         -- STEP 2
+    MATRIX_FIRST_ADDER_STATE,           -- STEP 3
+    MATRIX_MULTIPLIER_STATE,            -- STEP 4
+    MATRIX_SECOND_TRANSPOSE_STATE,      -- STEP 5
+    MATRIX_SECOND_PRODUCT_STATE,        -- STEP 6
+    MATRIX_SECOND_ADDER_STATE,          -- STEP 7
+    ENDER_STATE                         -- STEP 8
     );
 
   -----------------------------------------------------------------------
@@ -232,7 +232,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -310,7 +310,7 @@ begin
           data_a_in_matrix_adder <= data_out_matrix_multiplier;
           data_b_in_matrix_adder <= data_out_matrix_product;
 
-        when ENDER_STATE =>  -- STEP 8
+        when ENDER_STATE =>             -- STEP 8
 
           if (data_out_i_enable_matrix_product = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then

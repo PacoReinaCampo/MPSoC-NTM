@@ -77,17 +77,17 @@ entity ntm_controller is
 
     H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
-    W_OUT_L_ENABLE : out std_logic;       -- for l in 0 to L-1
-    W_OUT_X_ENABLE : out std_logic;       -- for x in 0 to X-1
+    W_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    W_OUT_X_ENABLE : out std_logic;     -- for x in 0 to X-1
 
-    K_OUT_I_ENABLE : out std_logic;       -- for i in 0 to R-1 (read heads flow)
-    K_OUT_L_ENABLE : out std_logic;       -- for l in 0 to L-1
-    K_OUT_K_ENABLE : out std_logic;       -- for k in 0 to W-1
+    K_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
+    K_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
-    U_OUT_L_ENABLE : out std_logic;       -- for l in 0 to L-1
-    U_OUT_P_ENABLE : out std_logic;       -- for p in 0 to L-1
+    U_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    U_OUT_P_ENABLE : out std_logic;     -- for p in 0 to L-1
 
-    B_OUT_ENABLE : out std_logic;         -- for l in 0 to L-1
+    B_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
@@ -122,14 +122,14 @@ architecture ntm_controller_architecture of ntm_controller is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
-    MATRIX_FIRST_PRODUCT_STATE,  -- STEP 1
-    VECTOR_FIRST_ADDER_STATE,  -- STEP 2
-    MATRIX_SECOND_PRODUCT_STATE,  -- STEP 3
-    VECTOR_SECOND_ADDER_STATE,  -- STEP 4
-    MATRIX_THIRD_PRODUCT_STATE,  -- STEP 5
-    VECTOR_THIRD_ADDER_STATE,  -- STEP 6
-    VECTOR_LOGISTIC_STATE  -- STEP 7
+    STARTER_STATE,                      -- STEP 0
+    MATRIX_FIRST_PRODUCT_STATE,         -- STEP 1
+    VECTOR_FIRST_ADDER_STATE,           -- STEP 2
+    MATRIX_SECOND_PRODUCT_STATE,        -- STEP 3
+    VECTOR_SECOND_ADDER_STATE,          -- STEP 4
+    MATRIX_THIRD_PRODUCT_STATE,         -- STEP 5
+    VECTOR_THIRD_ADDER_STATE,           -- STEP 6
+    VECTOR_LOGISTIC_STATE               -- STEP 7
     );
 
   -----------------------------------------------------------------------
@@ -272,7 +272,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -451,7 +451,7 @@ begin
             start_vector_logistic <= '0';
           end if;
 
-        when VECTOR_LOGISTIC_STATE =>  -- STEP 7
+        when VECTOR_LOGISTIC_STATE =>   -- STEP 7
 
           -- Data Inputs
           modulo_in_vector_logistic <= FULL;
