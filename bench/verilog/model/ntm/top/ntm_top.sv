@@ -51,10 +51,16 @@ module ntm_top #(
 
     input W_IN_L_ENABLE,  // for l in 0 to L-1
     input W_IN_X_ENABLE,  // for x in 0 to X-1
+
     input K_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     input K_IN_L_ENABLE,  // for l in 0 to L-1
     input K_IN_K_ENABLE,  // for k in 0 to W-1
+
+    input U_IN_L_ENABLE,  // for l in 0 to L-1
+    input U_IN_P_ENABLE,  // for p in 0 to L-1
+
     input B_IN_ENABLE,  // for l in 0 to L-1
+
     input X_IN_ENABLE,  // for x in 0 to X-1
     output reg Y_OUT_ENABLE,  // for y in 0 to Y-1
 
@@ -65,9 +71,12 @@ module ntm_top #(
     input [DATA_SIZE-1:0] SIZE_W_IN,
     input [DATA_SIZE-1:0] SIZE_L_IN,
     input [DATA_SIZE-1:0] SIZE_R_IN,
+
     input [DATA_SIZE-1:0] W_IN,
     input [DATA_SIZE-1:0] K_IN,
+    input [DATA_SIZE-1:0] U_IN,
     input [DATA_SIZE-1:0] B_IN,
+
     input [DATA_SIZE-1:0] X_IN,
     output reg [DATA_SIZE-1:0] Y_OUT
   );
@@ -375,15 +384,26 @@ module ntm_top #(
             end
 
             CONTROLLER_BODY_STATE : begin  // STEP 1
+              // FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(t;l))
+              // FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + b(t;l))
             end
 
             CONTROLLER_OUTPUT_VECTOR_STATE : begin  // STEP 2
+              // nu(t;y) = U(t;y;l)·h(t;l)
             end
 
             OUTPUT_VECTOR_STATE : begin  // STEP 3
+              // y(t;y) = K(t;i;y;k)·r(t;i;k) + nu(t;y)
             end
 
             INTERFACE_VECTOR_STATE : begin  // STEP 4
+              // xi(t;?) = U(t;?;l)·h(t;l)
+
+              // k(t;k) = Wk(t;l;k)·h(t;l)
+              // beta(t) = Wbeta(t;l)·h(t;l)
+              // g(t) = Wg(t;l)·h(t;l)
+              // s(t;j) = Wk(t;l;j)·h(t;l)
+              // gamma(t) = Wgamma(t;l)·h(t;l)
             end
             default : begin
               // FSM Control
@@ -393,6 +413,7 @@ module ntm_top #(
         end
 
         READ_HEADS_STATE : begin  // STEP 2
+         // r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
         end
 
         WRITE_HEADS_STATE : begin  // STEP 3
@@ -401,9 +422,11 @@ module ntm_top #(
             end
 
             WRITING_STATE : begin  // STEP 1
+              // M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
             end
 
             ERASING_STATE : begin  // STEP 2
+              // M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
             end
             default : begin
               // FSM Control
@@ -413,6 +436,14 @@ module ntm_top #(
         end
 
         MEMORY_STATE : begin  // STEP 4
+
+          // wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
+
+          // wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
+
+          // w(t;j) = w(t;j)*s(t;k)
+
+          // w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
         
           if (index_loop == SIZE_R_IN - ONE) begin
             // FSM Control

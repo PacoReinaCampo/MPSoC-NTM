@@ -66,6 +66,9 @@ entity ntm_top is
     K_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
     K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
+    U_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+    U_IN_P_ENABLE : in std_logic;       -- for p in 0 to L-1
+
     B_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
     X_IN_ENABLE  : in  std_logic;       -- for x in 0 to X-1
@@ -81,6 +84,7 @@ entity ntm_top is
 
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     X_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -454,8 +458,8 @@ begin
 
             when CONTROLLER_BODY_STATE =>  -- STEP 1
 
-              -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + b(t;l))
-              -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + b(t;l))
+              -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(t;l))
+              -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + b(t;l))
 
             when CONTROLLER_OUTPUT_VECTOR_STATE =>  -- STEP 2
 

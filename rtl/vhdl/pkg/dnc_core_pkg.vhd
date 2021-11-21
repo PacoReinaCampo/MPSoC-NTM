@@ -866,6 +866,9 @@ package dnc_core_pkg is
       K_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
       K_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
+      U_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+      U_IN_P_ENABLE : in std_logic;     -- for p in 0 to L-1
+
       B_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
       X_IN_ENABLE  : in  std_logic;     -- for x in 0 to X-1
@@ -881,6 +884,7 @@ package dnc_core_pkg is
 
       W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       X_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);

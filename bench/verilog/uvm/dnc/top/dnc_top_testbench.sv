@@ -77,10 +77,16 @@ module dnc_top_testbench;
 
   wire w_in_l_enable_top;
   wire w_in_x_enable_top;
+
   wire k_in_i_enable_top;
   wire k_in_l_enable_top;
   wire k_in_k_enable_top;
+
+  wire u_in_l_enable_top;
+  wire u_in_p_enable_top;
+
   wire b_in_enable_top;
+
   wire x_in_enable_top;
   wire y_out_enable_top;
 
@@ -91,9 +97,12 @@ module dnc_top_testbench;
   wire [DATA_SIZE-1:0] size_w_in_top;
   wire [DATA_SIZE-1:0] size_l_in_top;
   wire [DATA_SIZE-1:0] size_r_in_top;
+
   wire [DATA_SIZE-1:0] w_in_top;
   wire [DATA_SIZE-1:0] k_in_top;
+  wire [DATA_SIZE-1:0] u_in_top;
   wire [DATA_SIZE-1:0] b_in_top;
+
   wire [DATA_SIZE-1:0] x_in_top;
   wire [DATA_SIZE-1:0] y_out_top;
 
@@ -129,10 +138,16 @@ module dnc_top_testbench;
 
     .DNC_TOP_W_IN_L_ENABLE(w_in_l_enable_top),
     .DNC_TOP_W_IN_X_ENABLE(w_in_x_enable_top),
+
     .DNC_TOP_K_IN_I_ENABLE(k_in_i_enable_top),
     .DNC_TOP_K_IN_L_ENABLE(k_in_l_enable_top),
     .DNC_TOP_K_IN_K_ENABLE(k_in_k_enable_top),
+
+    .DNC_TOP_U_IN_L_ENABLE(u_in_l_enable_top),
+    .DNC_TOP_U_IN_P_ENABLE(u_in_p_enable_top),
+
     .DNC_TOP_B_IN_ENABLE(b_in_enable_top),
+
     .DNC_TOP_X_IN_ENABLE(x_in_enable_top),
     .DNC_TOP_Y_OUT_ENABLE(y_out_enable_top),
 
@@ -143,9 +158,12 @@ module dnc_top_testbench;
     .DNC_TOP_SIZE_W_IN(size_w_in_top),
     .DNC_TOP_SIZE_L_IN(size_l_in_top),
     .DNC_TOP_SIZE_R_IN(size_r_in_top),
+
     .DNC_TOP_W_IN(w_in_top),
     .DNC_TOP_K_IN(k_in_top),
+    .DNC_TOP_U_IN(u_in_top),
     .DNC_TOP_B_IN(b_in_top),
+
     .DNC_TOP_X_IN(x_in_top),
     .DNC_TOP_Y_OUT(y_out_top)
   );
@@ -165,10 +183,16 @@ module dnc_top_testbench;
 
     .W_IN_L_ENABLE(w_in_l_enable_top),
     .W_IN_X_ENABLE(w_in_x_enable_top),
+
     .K_IN_I_ENABLE(k_in_i_enable_top),
     .K_IN_L_ENABLE(k_in_l_enable_top),
     .K_IN_K_ENABLE(k_in_k_enable_top),
+
+    .U_IN_L_ENABLE(u_in_l_enable_top),
+    .U_IN_P_ENABLE(u_in_p_enable_top),
+
     .B_IN_ENABLE(b_in_enable_top),
+
     .X_IN_ENABLE(x_in_enable_top),
     .Y_OUT_ENABLE(y_out_enable_top),
 
@@ -179,9 +203,12 @@ module dnc_top_testbench;
     .SIZE_W_IN(size_w_in_top),
     .SIZE_L_IN(size_l_in_top),
     .SIZE_R_IN(size_r_in_top),
+
     .W_IN(w_in_top),
     .K_IN(k_in_top),
+    .U_IN(u_in_top),
     .B_IN(b_in_top),
+
     .X_IN(x_in_top),
     .Y_OUT(y_out_top)
   );
