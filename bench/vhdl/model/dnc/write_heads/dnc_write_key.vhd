@@ -113,6 +113,8 @@ begin
       -- Data Outputs
       K_OUT <= ZERO;
 
+      K_OUT_ENABLE <= '0';
+
       -- Control Outputs
       READY <= '0';
 
@@ -125,6 +127,8 @@ begin
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
+
+          K_OUT_ENABLE <= '0';
 
           if (START = '1') then
             -- Assignations

@@ -296,6 +296,14 @@ begin
 
         when MATRIX_FIRST_CONVOLUTION_STATE =>  -- STEP 1
 
+          -- Control Inputs
+          data_a_in_matrix_enable_matrix_convolution <= '0';
+          data_a_in_vector_enable_matrix_convolution <= '0';
+          data_a_in_scalar_enable_matrix_convolution <= '0';
+          data_b_in_matrix_enable_matrix_convolution <= '0';
+          data_b_in_vector_enable_matrix_convolution <= '0';
+          data_b_in_scalar_enable_matrix_convolution <= '0';
+
           -- Data Inputs
           modulo_in_matrix_convolution <= FULL;
           size_i_in_matrix_convolution <= FULL;
@@ -306,6 +314,12 @@ begin
 
         when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
 
+          -- Control Inputs
+          operation_vector_adder <= '0';
+
+          data_a_in_enable_vector_adder <= '0';
+          data_b_in_enable_vector_adder <= '0';
+
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_L_IN;
@@ -313,6 +327,14 @@ begin
           data_b_in_vector_adder <= B_IN;
 
         when MATRIX_SECOND_CONVOLUTION_STATE =>  -- STEP 3
+
+          -- Control Inputs
+          data_a_in_matrix_enable_matrix_convolution <= '0';
+          data_a_in_vector_enable_matrix_convolution <= '0';
+          data_a_in_scalar_enable_matrix_convolution <= '0';
+          data_b_in_matrix_enable_matrix_convolution <= '0';
+          data_b_in_vector_enable_matrix_convolution <= '0';
+          data_b_in_scalar_enable_matrix_convolution <= '0';
 
           -- Data Inputs
           modulo_in_matrix_convolution <= FULL;
@@ -324,6 +346,12 @@ begin
 
         when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
 
+          -- Control Inputs
+          operation_vector_adder <= '0';
+
+          data_a_in_enable_vector_adder <= '0';
+          data_b_in_enable_vector_adder <= '0';
+
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_L_IN;
@@ -331,6 +359,14 @@ begin
           data_b_in_vector_adder <= data_out_vector_adder;
 
         when MATRIX_THIRD_CONVOLUTION_STATE =>  -- STEP 5
+
+          -- Control Inputs
+          data_a_in_matrix_enable_matrix_convolution <= '0';
+          data_a_in_vector_enable_matrix_convolution <= '0';
+          data_a_in_scalar_enable_matrix_convolution <= '0';
+          data_b_in_matrix_enable_matrix_convolution <= '0';
+          data_b_in_vector_enable_matrix_convolution <= '0';
+          data_b_in_scalar_enable_matrix_convolution <= '0';
 
           -- Data Inputs
           modulo_in_matrix_convolution <= FULL;
@@ -342,6 +378,12 @@ begin
 
         when VECTOR_THIRD_ADDER_STATE =>  -- STEP 6
 
+          -- Control Inputs
+          operation_vector_adder <= '0';
+
+          data_a_in_enable_vector_adder <= '0';
+          data_b_in_enable_vector_adder <= '0';
+
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_L_IN;
@@ -349,6 +391,9 @@ begin
           data_b_in_vector_adder <= data_out_vector_adder;
 
         when VECTOR_LOGISTIC_STATE =>  -- STEP 7
+
+          -- Control Inputs
+          data_in_enable_vector_logistic <= '0';
 
           -- Data Inputs
           modulo_in_vector_logistic <= FULL;
@@ -384,6 +429,24 @@ begin
     end if;
   end process;
 
+  -- TRAINER
+  signal x_in_enable_trainer : std_logic;
+
+  signal r_in_i_enable_trainer : std_logic;
+  signal r_in_k_enable_trainer : std_logic;
+
+  signal h_in_enable_trainer : std_logic;
+
+  signal w_out_l_enable_trainer : std_logic;
+  signal w_out_x_enable_trainer : std_logic;
+
+  signal k_out_i_enable_trainer : std_logic;
+  signal k_out_l_enable_trainer : std_logic;
+  signal k_out_k_enable_trainer : std_logic;
+
+  signal u_out_l_enable_trainer : std_logic;
+  signal u_out_p_enable_trainer : std_logic;
+
   -- DATA
   -- TRAINER
   size_x_in_trainer <= SIZE_X_IN;
@@ -392,7 +455,8 @@ begin
   size_r_in_trainer <= SIZE_R_IN;
 
   x_in_trainer <= X_IN;
-  h_in_trainer <= FULL;
+  r_in_trainer <= R_IN;
+  h_in_trainer <= H_IN;
 
   W_OUT <= w_out_trainer;
   K_OUT <= k_out_trainer;

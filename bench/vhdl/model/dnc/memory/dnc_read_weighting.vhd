@@ -245,12 +245,6 @@ begin
 
           if (data_out_enable_vector_multiplier = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_R_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE))) then
-              -- Data Outputs
-              W_OUT <= data_out_vector_adder;
-
-              -- Control Outputs
-              W_OUT_I_ENABLE <= '1';
-
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
               index_j_loop <= ZERO;
@@ -258,6 +252,16 @@ begin
               -- FSM Control
               controller_ctrl_fsm_int <= VECTOR_FIRST_MULTIPLIER_STATE;
             end if;
+
+            -- Data Outputs
+            W_OUT <= data_out_vector_adder;
+
+            -- Control Outputs
+            W_OUT_I_ENABLE <= '1';
+
+          else
+            -- Control Outputs
+            W_OUT_I_ENABLE <= '0';
           end if;
 
           if (data_out_enable_vector_multiplier = '1') then
@@ -280,6 +284,9 @@ begin
 
             -- Control Outputs
             W_OUT_J_ENABLE <= '1';
+          else
+            -- Control Outputs
+            W_OUT_J_ENABLE <= '0';
           end if;
             
         when others =>

@@ -120,6 +120,9 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      K_OUT_I_ENABLE <= '0';
+      K_OUT_K_ENABLE <= '0';
+
       -- Assignations
       index_i_loop <= ZERO;
       index_j_loop <= ZERO;
@@ -130,6 +133,9 @@ begin
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
+          
+          K_OUT_I_ENABLE <= '0';
+          K_OUT_K_ENABLE <= '0';
 
           if (START = '1') then
             -- Assignations
@@ -154,11 +160,9 @@ begin
 
             -- Control Outputs
             K_OUT_I_ENABLE <= '1';
-            K_OUT_K_ENABLE <= '1';
           else
             -- Control Outputs
             K_OUT_I_ENABLE <= '0';
-            K_OUT_K_ENABLE <= '0';
           end if;
 
           if (K_IN_K_ENABLE = '1') then

@@ -498,7 +498,8 @@ begin
   size_r_in_trainer <= SIZE_R_IN;
 
   x_in_trainer <= X_IN;
-  h_in_trainer <= FULL;
+  r_in_trainer <= R_IN;
+  h_in_trainer <= H_IN;
 
   W_OUT <= w_out_trainer;
   K_OUT <= k_out_trainer;

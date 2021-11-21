@@ -314,12 +314,6 @@ begin
 
           if (data_out_i_enable_matrix_product = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then
-              -- Data Outputs
-              M_OUT <= data_out_matrix_adder;
-
-              -- Control Outputs
-              M_OUT_J_ENABLE <= '1';
-
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
               index_j_loop <= ZERO;
@@ -327,6 +321,15 @@ begin
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_STATE;
             end if;
+
+            -- Data Outputs
+            M_OUT <= data_out_matrix_adder;
+
+            -- Control Outputs
+            M_OUT_J_ENABLE <= '1';
+          else
+            -- Control Outputs
+            M_OUT_J_ENABLE <= '0';
           end if;
 
           if (data_out_j_enable_matrix_product = '1') then
@@ -349,6 +352,9 @@ begin
 
             -- Control Outputs
             M_OUT_K_ENABLE <= '1';
+          else
+            -- Control Outputs
+            M_OUT_K_ENABLE <= '0';
           end if;
 
         when others =>

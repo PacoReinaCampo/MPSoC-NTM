@@ -177,12 +177,6 @@ begin
 
           if (operation_scalar_adder = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE))) then
-              -- Data Outputs
-              L_OUT <= data_out_scalar_multiplier;
-
-              -- Control Outputs
-              L_OUT_G_ENABLE <= '1';
-
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
               index_j_loop <= ZERO;
@@ -190,6 +184,15 @@ begin
               -- FSM Control
               controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
             end if;
+
+            -- Data Outputs
+            L_OUT <= data_out_scalar_multiplier;
+
+            -- Control Outputs
+            L_OUT_G_ENABLE <= '1';
+          else
+            -- Control Outputs
+            L_OUT_G_ENABLE <= '0';
           end if;
 
           if (operation_scalar_adder = '1') then
@@ -212,6 +215,9 @@ begin
 
             -- Control Outputs
             L_OUT_J_ENABLE <= '1';
+          else
+            -- Control Outputs
+            L_OUT_J_ENABLE <= '0';
           end if;
 
         when others =>

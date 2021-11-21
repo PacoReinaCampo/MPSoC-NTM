@@ -116,6 +116,8 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      V_OUT_ENABLE <= '0';
+
       -- Assignations
       index_loop <= ZERO;
 
@@ -125,6 +127,8 @@ begin
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
+
+          V_OUT_ENABLE <= '0';
 
           if (START = '1') then
             -- Assignations
