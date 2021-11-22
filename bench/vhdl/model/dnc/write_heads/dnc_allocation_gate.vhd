@@ -60,7 +60,7 @@ entity dnc_allocation_gate is
     -- DATA
     GA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    GA_OUT : out std_logic
+    GA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -88,7 +88,7 @@ architecture dnc_allocation_gate_architecture of dnc_allocation_gate is
   -- DATA
   signal modulo_in_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logistic  : std_logic;
+  signal data_out_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 

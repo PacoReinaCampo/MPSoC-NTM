@@ -1091,7 +1091,7 @@ package ntm_math_pkg is
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -1377,7 +1377,7 @@ package ntm_math_pkg is
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -1700,7 +1700,7 @@ package ntm_math_pkg is
       SIZE_I_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       SIZE_J_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

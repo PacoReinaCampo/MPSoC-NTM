@@ -54,7 +54,7 @@ module dnc_erase_vector #(
     // DATA
     input [DATA_SIZE-1:0] SIZE_W_IN,
     input [DATA_SIZE-1:0] E_IN,
-    output E_OUT
+    output reg [DATA_SIZE-1:0] E_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -82,7 +82,7 @@ module dnc_erase_vector #(
   wire [DATA_SIZE-1:0] modulo_in_vector_logistic;
   wire [DATA_SIZE-1:0] size_in_vector_logistic;
   wire [DATA_SIZE-1:0] data_in_vector_logistic;
-  wire data_out_vector_logistic;
+  wire [DATA_SIZE-1:0] data_out_vector_logistic;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

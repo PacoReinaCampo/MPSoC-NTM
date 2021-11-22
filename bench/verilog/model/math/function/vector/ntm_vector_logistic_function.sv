@@ -56,7 +56,7 @@ module ntm_vector_logistic_function #(
     input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] SIZE_IN,
     input [DATA_SIZE-1:0] DATA_IN,
-    output reg DATA_OUT
+    output reg [DATA_SIZE-1:0] DATA_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -92,7 +92,7 @@ module ntm_vector_logistic_function #(
   // DATA
   reg [DATA_SIZE-1:0] modulo_in_scalar_logistic;
   reg [DATA_SIZE-1:0] data_in_scalar_logistic;
-  wire data_out_scalar_logistic;
+  wire [DATA_SIZE-1:0] data_out_scalar_logistic;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -102,7 +102,7 @@ module ntm_vector_logistic_function #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      DATA_OUT <= 1'b0;
+      DATA_OUT <= ZERO;
 
       // Control Outputs
       READY <= 1'b0;

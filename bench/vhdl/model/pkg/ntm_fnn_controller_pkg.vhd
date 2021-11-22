@@ -118,7 +118,7 @@ package ntm_fnn_controller_pkg is
       U_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
       B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      H_OUT : out std_logic
+      H_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

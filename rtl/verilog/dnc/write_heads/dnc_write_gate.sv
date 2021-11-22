@@ -51,7 +51,7 @@ module dnc_write_gate #(
 
     // DATA
     input [DATA_SIZE-1:0] GW_IN,
-    output GW_OUT
+    output reg [DATA_SIZE-1:0] GW_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -74,7 +74,7 @@ module dnc_write_gate #(
   // DATA
   wire [DATA_SIZE-1:0] modulo_in_scalar_logistic;
   wire [DATA_SIZE-1:0] data_in_scalar_logistic;
-  wire data_out_scalar_logistic;
+  wire [DATA_SIZE-1:0] data_out_scalar_logistic;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

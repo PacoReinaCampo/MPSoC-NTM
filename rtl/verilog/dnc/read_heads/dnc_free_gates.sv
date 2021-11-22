@@ -55,7 +55,7 @@ module dnc_free_gates #(
     // DATA
     input [DATA_SIZE-1:0] SIZE_R_IN,
     input [DATA_SIZE-1:0] F_IN,
-    output F_OUT
+    output reg [DATA_SIZE-1:0] F_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -84,7 +84,7 @@ module dnc_free_gates #(
   wire [DATA_SIZE-1:0] modulo_in_vector_logistic;
   wire [DATA_SIZE-1:0] size_in_vector_logistic;
   wire [DATA_SIZE-1:0] data_in_vector_logistic;
-  wire data_out_vector_logistic;
+  wire [DATA_SIZE-1:0] data_out_vector_logistic;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

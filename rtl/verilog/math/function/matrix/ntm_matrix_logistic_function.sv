@@ -59,7 +59,7 @@ module ntm_matrix_logistic_function #(
     input [DATA_SIZE-1:0] SIZE_I_IN,
     input [DATA_SIZE-1:0] SIZE_J_IN,
     input [DATA_SIZE-1:0] DATA_IN,
-    output reg DATA_OUT
+    output reg [DATA_SIZE-1:0] DATA_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -100,7 +100,7 @@ module ntm_matrix_logistic_function #(
   reg [DATA_SIZE-1:0] modulo_in_vector_logistic;
   reg [DATA_SIZE-1:0] size_in_vector_logistic;
   reg [DATA_SIZE-1:0] data_in_vector_logistic;
-  wire data_out_vector_logistic;
+  wire [DATA_SIZE-1:0] data_out_vector_logistic;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

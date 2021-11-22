@@ -207,7 +207,7 @@ package ntm_lstm_controller_pkg is
 
       B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      I_OUT : out std_logic
+      I_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -315,7 +315,7 @@ package ntm_lstm_controller_pkg is
 
       B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      O_OUT : out std_logic
+      O_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -421,7 +421,7 @@ package ntm_lstm_controller_pkg is
 
       B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      F_OUT : out std_logic
+      F_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

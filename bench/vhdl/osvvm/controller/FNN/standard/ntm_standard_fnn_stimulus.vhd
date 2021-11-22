@@ -104,7 +104,7 @@ entity ntm_standard_fnn_stimulus is
     NTM_STANDARD_FNN_K_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_STANDARD_FNN_U_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_STANDARD_FNN_B_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_STANDARD_FNN_H_OUT : in  std_logic
+    NTM_STANDARD_FNN_H_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 

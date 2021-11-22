@@ -102,7 +102,7 @@ module ntm_controller #(
     output reg [DATA_SIZE-1:0] U_OUT,
     output reg [DATA_SIZE-1:0] B_OUT,
 
-    output reg H_OUT
+    output reg [DATA_SIZE-1:0] H_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -192,7 +192,7 @@ module ntm_controller #(
   reg [DATA_SIZE-1:0] modulo_in_vector_logistic;
   reg [DATA_SIZE-1:0] size_in_vector_logistic;
   reg [DATA_SIZE-1:0] data_in_vector_logistic;
-  wire data_out_vector_logistic;
+  wire [DATA_SIZE-1:0] data_out_vector_logistic;
 
   // TRAINER
   // CONTROL

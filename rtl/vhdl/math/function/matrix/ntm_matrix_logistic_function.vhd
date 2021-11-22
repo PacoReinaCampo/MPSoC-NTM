@@ -68,7 +68,7 @@ entity ntm_matrix_logistic_function is
     SIZE_I_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_J_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -115,7 +115,7 @@ architecture ntm_matrix_logistic_function_architecture of ntm_matrix_logistic_fu
   signal modulo_in_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_logistic  : std_logic;
+  signal data_out_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -128,7 +128,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= '0';
+      DATA_OUT <= ZERO;
 
       -- Control Outputs
       READY <= '0';

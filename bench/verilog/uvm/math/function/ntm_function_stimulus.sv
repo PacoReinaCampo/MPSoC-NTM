@@ -225,7 +225,7 @@ module ntm_function_stimulus #(
     // DATA
     output [DATA_SIZE-1:0] SCALAR_LOGISTIC_MODULO_IN,
     output [DATA_SIZE-1:0] SCALAR_LOGISTIC_DATA_IN,
-    input SCALAR_LOGISTIC_DATA_OUT,
+    input [DATA_SIZE-1:0] SCALAR_LOGISTIC_DATA_OUT,
 
     // SCALAR SOFTMAX
     // CONTROL
@@ -380,7 +380,7 @@ module ntm_function_stimulus #(
     output [DATA_SIZE-1:0] VECTOR_LOGISTIC_MODULO_IN,
     output [DATA_SIZE-1:0] VECTOR_LOGISTIC_SIZE_IN,
     output [DATA_SIZE-1:0] VECTOR_LOGISTIC_DATA_IN,
-    input VECTOR_LOGISTIC_DATA_OUT,
+    input [DATA_SIZE-1:0] VECTOR_LOGISTIC_DATA_OUT,
 
     // VECTOR SOFTMAX
     // CONTROL
@@ -567,7 +567,7 @@ module ntm_function_stimulus #(
     output [DATA_SIZE-1:0] MATRIX_LOGISTIC_SIZE_I_IN,
     output [DATA_SIZE-1:0] MATRIX_LOGISTIC_SIZE_J_IN,
     output [DATA_SIZE-1:0] MATRIX_LOGISTIC_DATA_IN,
-    input MATRIX_LOGISTIC_DATA_OUT,
+    input [DATA_SIZE-1:0] MATRIX_LOGISTIC_DATA_OUT,
 
     // MATRIX SOFTMAX
     // CONTROL

@@ -276,7 +276,7 @@ architecture ntm_controller_architecture of ntm_controller is
 
   signal b_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal i_out_input_gate_vector : std_logic;
+  signal i_out_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- INPUT TRAINER
   -- CONTROL
@@ -364,7 +364,7 @@ architecture ntm_controller_architecture of ntm_controller is
 
   signal b_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal o_out_output_gate_vector : std_logic;
+  signal o_out_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- OUTPUT TRAINER
   -- CONTROL
@@ -450,7 +450,7 @@ architecture ntm_controller_architecture of ntm_controller is
 
   signal b_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal f_out_forget_gate_vector : std_logic;
+  signal f_out_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- FORGET TRAINER
   -- CONTROL
@@ -767,7 +767,7 @@ begin
 
   b_in_input_gate_vector <= FULL;
 
-  i_out_input_gate_vector <= '0';
+  i_out_input_gate_vector <= FULL;
 
   -- INPUT TRAINER
   size_x_in_input_trainer <= FULL;
@@ -802,7 +802,7 @@ begin
 
   b_in_output_gate_vector <= FULL;
 
-  o_out_output_gate_vector <= '0';
+  o_out_output_gate_vector <= FULL;
 
   -- OUTPUT TRAINER
   size_x_in_output_trainer <= FULL;
@@ -836,7 +836,7 @@ begin
 
   b_in_forget_gate_vector <= FULL;
 
-  f_out_forget_gate_vector <= '0';
+  f_out_forget_gate_vector <= FULL;
 
   -- FORGET TRAINER
   size_x_in_forget_trainer <= FULL;

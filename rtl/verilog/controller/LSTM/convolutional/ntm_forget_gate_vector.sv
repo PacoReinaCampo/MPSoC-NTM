@@ -74,7 +74,7 @@ module ntm_forget_gate_vector #(
     input [DATA_SIZE-1:0] U_IN,
     input [DATA_SIZE-1:0] H_IN,
     input [DATA_SIZE-1:0] B_IN,
-    output reg F_OUT
+    output reg [DATA_SIZE-1:0] F_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -160,7 +160,7 @@ module ntm_forget_gate_vector #(
   reg [DATA_SIZE-1:0] modulo_in_vector_logistic;
   reg [DATA_SIZE-1:0] size_in_vector_logistic;
   reg [DATA_SIZE-1:0] data_in_vector_logistic;
-  wire data_out_vector_logistic;
+  wire [DATA_SIZE-1:0] data_out_vector_logistic;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -172,7 +172,7 @@ module ntm_forget_gate_vector #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      F_OUT <= 1'b0;
+      F_OUT <= ZERO;
 
       // Control Outputs
       READY <= 1'b0;

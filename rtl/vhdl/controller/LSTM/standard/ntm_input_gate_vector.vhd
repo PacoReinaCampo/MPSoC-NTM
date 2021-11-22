@@ -91,7 +91,7 @@ entity ntm_input_gate_vector is
 
     B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    I_OUT : out std_logic
+    I_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -187,7 +187,7 @@ architecture ntm_input_gate_vector_architecture of ntm_input_gate_vector is
   signal modulo_in_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_logistic  : std_logic;
+  signal data_out_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -202,7 +202,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      I_OUT <= '0';
+      I_OUT <= ZERO;
 
       -- Control Outputs
       READY <= '0';

@@ -112,7 +112,7 @@ package ntm_convolutional_fnn_pkg is
       NTM_CONVOLUTIONAL_FNN_K_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
       NTM_CONVOLUTIONAL_FNN_U_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
       NTM_CONVOLUTIONAL_FNN_B_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_CONVOLUTIONAL_FNN_H_OUT : in  std_logic
+      NTM_CONVOLUTIONAL_FNN_H_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

@@ -74,7 +74,7 @@ module ntm_output_gate_vector #(
     input [DATA_SIZE-1:0] U_IN,
     input [DATA_SIZE-1:0] H_IN,
     input [DATA_SIZE-1:0] B_IN,
-    output reg O_OUT
+    output reg [DATA_SIZE-1:0] O_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -160,7 +160,7 @@ module ntm_output_gate_vector #(
   reg [DATA_SIZE-1:0] modulo_in_vector_logistic;
   reg [DATA_SIZE-1:0] size_in_vector_logistic;
   reg [DATA_SIZE-1:0] data_in_vector_logistic;
-  wire data_out_vector_logistic;
+  wire [DATA_SIZE-1:0] data_out_vector_logistic;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

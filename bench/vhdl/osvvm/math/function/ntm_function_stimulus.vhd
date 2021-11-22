@@ -243,7 +243,7 @@ entity ntm_function_stimulus is
     -- DATA
     SCALAR_LOGISTIC_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_LOGISTIC_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_LOGISTIC_DATA_OUT  : in  std_logic;
+    SCALAR_LOGISTIC_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- SCALAR SOFTMAX
     -- CONTROL
@@ -407,7 +407,7 @@ entity ntm_function_stimulus is
     VECTOR_LOGISTIC_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_LOGISTIC_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_LOGISTIC_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_LOGISTIC_DATA_OUT  : in  std_logic;
+    VECTOR_LOGISTIC_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- VECTOR SOFTMAX
     -- CONTROL
@@ -605,7 +605,7 @@ entity ntm_function_stimulus is
     MATRIX_LOGISTIC_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_LOGISTIC_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_LOGISTIC_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_LOGISTIC_DATA_OUT  : in  std_logic;
+    MATRIX_LOGISTIC_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- MATRIX SOFTMAX
     -- CONTROL

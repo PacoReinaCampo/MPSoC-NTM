@@ -60,7 +60,7 @@ entity ntm_scalar_logistic_function is
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -136,7 +136,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= '0';
+      DATA_OUT <= ZERO;
 
       -- Control Outputs
       READY <= '0';

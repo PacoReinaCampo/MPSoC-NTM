@@ -362,7 +362,7 @@ package ntm_function_pkg is
       -- DATA
       SCALAR_LOGISTIC_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_LOGISTIC_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_LOGISTIC_DATA_OUT  : in  std_logic;
+      SCALAR_LOGISTIC_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- SCALAR SOFTMAX
       -- CONTROL
@@ -526,7 +526,7 @@ package ntm_function_pkg is
       VECTOR_LOGISTIC_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_LOGISTIC_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_LOGISTIC_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_LOGISTIC_DATA_OUT  : in  std_logic;
+      VECTOR_LOGISTIC_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- VECTOR SOFTMAX
       -- CONTROL
@@ -724,7 +724,7 @@ package ntm_function_pkg is
       MATRIX_LOGISTIC_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_LOGISTIC_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_LOGISTIC_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_LOGISTIC_DATA_OUT  : in  std_logic;
+      MATRIX_LOGISTIC_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- MATRIX SOFTMAX
       -- CONTROL

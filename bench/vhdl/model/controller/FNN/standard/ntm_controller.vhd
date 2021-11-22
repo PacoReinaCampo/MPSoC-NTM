@@ -111,7 +111,7 @@ entity ntm_controller is
     U_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    H_OUT : out std_logic
+    H_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -205,7 +205,7 @@ architecture ntm_controller_architecture of ntm_controller is
   signal modulo_in_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_logistic  : std_logic;
+  signal data_out_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- TRAINER
   -- CONTROL
@@ -259,7 +259,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      H_OUT <= '0';
+      H_OUT <= ZERO;
 
       -- Control Outputs
       READY <= '0';
@@ -489,6 +489,14 @@ begin
       end case;
     end if;
   end process;
+
+  -- TRAINER
+  x_in_enable_trainer <= '0';
+
+  r_in_i_enable_trainer <= '0';
+  r_in_k_enable_trainer <= '0';
+
+  h_in_enable_trainer <= '0';
 
   -- DATA
   -- TRAINER

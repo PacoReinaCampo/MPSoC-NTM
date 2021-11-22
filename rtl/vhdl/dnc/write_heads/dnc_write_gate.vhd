@@ -60,7 +60,7 @@ entity dnc_write_gate is
     -- DATA
     GW_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    GW_OUT : out std_logic
+    GW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -86,7 +86,7 @@ architecture dnc_write_gate_architecture of dnc_write_gate is
   -- DATA
   signal modulo_in_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logistic  : std_logic;
+  signal data_out_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 

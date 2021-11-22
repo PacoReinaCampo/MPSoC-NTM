@@ -248,7 +248,7 @@ module ntm_function_testbench;
   // DATA
   wire [DATA_SIZE-1:0] modulo_in_scalar_logistic;
   wire [DATA_SIZE-1:0] data_in_scalar_logistic;
-  wire data_out_scalar_logistic;
+  wire [DATA_SIZE-1:0] data_out_scalar_logistic;
 
   // SCALAR SOFTMAX
   // CONTROL
@@ -417,7 +417,7 @@ module ntm_function_testbench;
   wire [DATA_SIZE-1:0] modulo_in_vector_logistic;
   wire [DATA_SIZE-1:0] size_in_vector_logistic;
   wire [DATA_SIZE-1:0] data_in_vector_logistic;
-  wire data_out_vector_logistic;
+  wire [DATA_SIZE-1:0] data_out_vector_logistic;
 
   // VECTOR SOFTMAX
   // CONTROL
@@ -622,7 +622,7 @@ module ntm_function_testbench;
   wire [DATA_SIZE-1:0] size_i_in_matrix_logistic;
   wire [DATA_SIZE-1:0] size_j_in_matrix_logistic;
   wire [DATA_SIZE-1:0] data_in_matrix_logistic;
-  wire data_out_matrix_logistic;
+  wire [DATA_SIZE-1:0] data_out_matrix_logistic;
 
   // MATRIX SOFTMAX
   // CONTROL
