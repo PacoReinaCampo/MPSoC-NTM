@@ -619,265 +619,265 @@ begin
   end process;
 
   -- ACTIVATION GATE VECTOR
-  w_in_l_enable_activation_gate_vector <= '0';
-  w_in_x_enable_activation_gate_vector <= '0';
-  x_in_enable_activation_gate_vector   <= '0';
+  w_in_l_enable_activation_gate_vector <= W_IN_L_ENABLE;
+  w_in_x_enable_activation_gate_vector <= W_IN_X_ENABLE;
+  x_in_enable_activation_gate_vector   <= X_IN_ENABLE;
 
-  k_in_i_enable_activation_gate_vector <= '0';
-  k_in_l_enable_activation_gate_vector <= '0';
-  k_in_k_enable_activation_gate_vector <= '0';
-  r_in_i_enable_activation_gate_vector <= '0';
-  r_in_k_enable_activation_gate_vector <= '0';
+  k_in_i_enable_activation_gate_vector <= K_IN_I_ENABLE;
+  k_in_l_enable_activation_gate_vector <= K_IN_L_ENABLE;
+  k_in_k_enable_activation_gate_vector <= K_IN_K_ENABLE;
+  r_in_i_enable_activation_gate_vector <= R_IN_I_ENABLE;
+  r_in_k_enable_activation_gate_vector <= R_IN_K_ENABLE;
 
-  u_in_l_enable_activation_gate_vector <= '0';
-  u_in_p_enable_activation_gate_vector <= '0';
-  h_in_enable_activation_gate_vector   <= '0';
+  u_in_l_enable_activation_gate_vector <= U_IN_L_ENABLE;
+  u_in_p_enable_activation_gate_vector <= U_IN_P_ENABLE;
+  h_in_enable_activation_gate_vector   <= H_IN_ENABLE;
 
-  b_in_enable_activation_gate_vector <= '0';
+  b_in_enable_activation_gate_vector <= B_IN_ENABLE;
 
   -- ACTIVATION TRAINER
-  h_in_enable_activation_trainer <= '0';
-  x_in_enable_activation_trainer <= '0';
-  a_in_enable_activation_trainer <= '0';
-  i_in_enable_activation_trainer <= '0';
-  s_in_enable_activation_trainer <= '0';
+  x_in_enable_activation_trainer <= X_IN_ENABLE;
+
+  r_in_i_enable_activation_trainer <= R_IN_I_ENABLE;
+  r_in_k_enable_activation_trainer <= R_IN_K_ENABLE;
+
+  h_in_enable_activation_trainer <= H_IN_ENABLE;
+
+  a_in_enable_activation_trainer <= a_out_enable_activation_gate_vector;
+  i_in_enable_activation_trainer <= i_out_enable_input_gate_vector;
+  s_in_enable_activation_trainer <= s_out_enable_state_gate_vector;
 
   -- INTPUT GATE VECTOR
-  w_in_l_enable_input_gate_vector <= '0';
-  w_in_x_enable_input_gate_vector <= '0';
-  x_in_enable_input_gate_vector   <= '0';
+  w_in_l_enable_input_gate_vector <= W_IN_L_ENABLE;
+  w_in_x_enable_input_gate_vector <= W_IN_X_ENABLE;
+  x_in_enable_input_gate_vector   <= X_IN_ENABLE;
 
-  k_in_i_enable_input_gate_vector <= '0';
-  k_in_l_enable_input_gate_vector <= '0';
-  k_in_k_enable_input_gate_vector <= '0';
-  r_in_i_enable_input_gate_vector <= '0';
-  r_in_k_enable_input_gate_vector <= '0';
+  k_in_i_enable_input_gate_vector <= K_IN_I_ENABLE;
+  k_in_l_enable_input_gate_vector <= K_IN_L_ENABLE;
+  k_in_k_enable_input_gate_vector <= K_IN_K_ENABLE;
+  r_in_i_enable_input_gate_vector <= R_IN_I_ENABLE;
+  r_in_k_enable_input_gate_vector <= R_IN_K_ENABLE;
 
-  u_in_l_enable_input_gate_vector <= '0';
-  u_in_p_enable_input_gate_vector <= '0';
-  h_in_enable_input_gate_vector   <= '0';
+  u_in_l_enable_input_gate_vector <= U_IN_L_ENABLE;
+  u_in_p_enable_input_gate_vector <= U_IN_P_ENABLE;
+  h_in_enable_input_gate_vector   <= H_IN_ENABLE;
 
-  b_in_enable_input_gate_vector <= '0';
+  b_in_enable_input_gate_vector <= B_IN_ENABLE;
 
   -- INPUT TRAINER
-  h_in_enable_input_trainer <= '0';
-  x_in_enable_input_trainer <= '0';
-  a_in_enable_input_trainer <= '0';
-  i_in_enable_input_trainer <= '0';
-  s_in_enable_input_trainer <= '0';
+  x_in_enable_input_trainer <= X_IN_ENABLE;
+
+  r_in_i_enable_input_trainer <= R_IN_I_ENABLE;
+  r_in_k_enable_input_trainer <= R_IN_K_ENABLE;
+
+  h_in_enable_input_trainer <= H_IN_ENABLE;
+
+  a_in_enable_input_trainer <= a_out_enable_activation_gate_vector;
+  i_in_enable_input_trainer <= i_out_enable_input_gate_vector;
+  s_in_enable_input_trainer <= s_out_enable_state_gate_vector;
 
   -- OUTPUT GATE VECTOR
-  w_in_l_enable_output_gate_vector <= '0';
-  w_in_x_enable_output_gate_vector <= '0';
-  x_in_enable_output_gate_vector   <= '0';
+  w_in_l_enable_output_gate_vector <= W_IN_L_ENABLE;
+  w_in_x_enable_output_gate_vector <= W_IN_X_ENABLE;
+  x_in_enable_output_gate_vector   <= X_IN_ENABLE;
 
-  k_in_i_enable_output_gate_vector <= '0';
-  k_in_l_enable_output_gate_vector <= '0';
-  k_in_k_enable_output_gate_vector <= '0';
-  r_in_i_enable_output_gate_vector <= '0';
-  r_in_k_enable_output_gate_vector <= '0';
+  k_in_i_enable_output_gate_vector <= K_IN_I_ENABLE;
+  k_in_l_enable_output_gate_vector <= K_IN_L_ENABLE;
+  k_in_k_enable_output_gate_vector <= K_IN_K_ENABLE;
+  r_in_i_enable_output_gate_vector <= R_IN_I_ENABLE;
+  r_in_k_enable_output_gate_vector <= R_IN_K_ENABLE;
 
-  u_in_l_enable_output_gate_vector <= '0';
-  u_in_p_enable_output_gate_vector <= '0';
-  h_in_enable_output_gate_vector   <= '0';
+  u_in_l_enable_output_gate_vector <= U_IN_L_ENABLE;
+  u_in_p_enable_output_gate_vector <= U_IN_P_ENABLE;
+  h_in_enable_output_gate_vector   <= H_IN_ENABLE;
 
-  b_in_enable_output_gate_vector <= '0';
+  b_in_enable_output_gate_vector <= B_IN_ENABLE;
 
   -- OUTPUT TRAINER
-  h_in_enable_output_trainer <= '0';
-  x_in_enable_output_trainer <= '0';
-  a_in_enable_output_trainer <= '0';
-  o_in_enable_output_trainer <= '0';
+  x_in_enable_output_trainer <= X_IN_ENABLE;
+
+  r_in_i_enable_input_trainer <= R_IN_I_ENABLE;
+  r_in_k_enable_input_trainer <= R_IN_K_ENABLE;
+
+  h_in_enable_output_trainer <= H_IN_ENABLE;
+
+  a_in_enable_output_trainer <= a_out_enable_activation_gate_vector;
+  o_in_enable_output_trainer <= o_out_enable_output_gate_vector;
 
   -- FORGET GATE VECTOR
-  w_in_l_enable_forget_gate_vector <= '0';
-  w_in_x_enable_forget_gate_vector <= '0';
-  x_in_enable_forget_gate_vector   <= '0';
+  w_in_l_enable_forget_gate_vector <= W_IN_L_ENABLE;
+  w_in_x_enable_forget_gate_vector <= W_IN_X_ENABLE;
+  x_in_enable_forget_gate_vector   <= X_IN_ENABLE;
 
-  k_in_i_enable_forget_gate_vector <= '0';
-  k_in_l_enable_forget_gate_vector <= '0';
-  k_in_k_enable_forget_gate_vector <= '0';
-  r_in_i_enable_forget_gate_vector <= '0';
-  r_in_k_enable_forget_gate_vector <= '0';
+  k_in_i_enable_forget_gate_vector <= K_IN_I_ENABLE;
+  k_in_l_enable_forget_gate_vector <= K_IN_L_ENABLE;
+  k_in_k_enable_forget_gate_vector <= K_IN_K_ENABLE;
+  r_in_i_enable_forget_gate_vector <= R_IN_I_ENABLE;
+  r_in_k_enable_forget_gate_vector <= R_IN_K_ENABLE;
 
-  u_in_l_enable_forget_gate_vector <= '0';
-  u_in_p_enable_forget_gate_vector <= '0';
-  h_in_enable_forget_gate_vector   <= '0';
+  u_in_l_enable_forget_gate_vector <= U_IN_L_ENABLE;
+  u_in_p_enable_forget_gate_vector <= U_IN_P_ENABLE;
+  h_in_enable_forget_gate_vector   <= H_IN_ENABLE;
 
-  b_in_enable_forget_gate_vector <= '0';
+  b_in_enable_forget_gate_vector <= B_IN_ENABLE;
 
   -- FORGET TRAINER
-  h_in_enable_forget_trainer <= '0';
-  x_in_enable_forget_trainer <= '0';
-  f_in_enable_forget_trainer <= '0';
-  s_in_enable_forget_trainer <= '0';
+  x_in_enable_forget_trainer <= X_IN_ENABLE;
+
+  r_in_i_enable_forget_trainer <= R_IN_I_ENABLE;
+  r_in_k_enable_forget_trainer <= R_IN_K_ENABLE;
+
+  h_in_enable_forget_trainer <= H_IN_ENABLE;
+
+  f_in_enable_forget_trainer <= f_out_enable_forget_gate_vector;
+  s_in_enable_forget_trainer <= s_out_enable_state_gate_vector;
 
   -- STATE GATE VECTOR
-  s_in_enable_state_gate_vector <= '0';
-  i_in_enable_state_gate_vector <= '0';
-  f_in_enable_state_gate_vector <= '0';
-  a_in_enable_state_gate_vector <= '0';
+  s_in_enable_state_gate_vector <= s_out_enable_state_gate_vector;
+  i_in_enable_state_gate_vector <= i_out_enable_input_gate_vector;
+  f_in_enable_state_gate_vector <= f_out_enable_forget_gate_vector;
+  a_in_enable_state_gate_vector <= a_out_enable_activation_gate_vector;
 
   -- HIDDEN GATE VECTOR
-  s_in_enable_hidden_gate_vector <= '0';
-  o_in_enable_hidden_gate_vector <= '0';
+  s_in_enable_hidden_gate_vector <= s_out_enable_state_gate_vector;
+  o_in_enable_hidden_gate_vector <= o_out_enable_output_gate_vector;
 
   -- DATA
   -- ACTIVATION GATE VECTOR
-  size_x_in_activation_gate_vector <= FULL;
-  size_w_in_activation_gate_vector <= FULL;
-  size_l_in_activation_gate_vector <= FULL;
-  size_r_in_activation_gate_vector <= FULL;
+  size_x_in_activation_gate_vector <= SIZE_X_IN;
+  size_w_in_activation_gate_vector <= SIZE_W_IN;
+  size_l_in_activation_gate_vector <= SIZE_L_IN;
+  size_r_in_activation_gate_vector <= SIZE_R_IN;
 
-  w_in_activation_gate_vector <= FULL;
-  x_in_activation_gate_vector <= FULL;
+  w_in_activation_gate_vector <= W_IN;
+  x_in_activation_gate_vector <= X_IN;
 
-  k_in_activation_gate_vector <= FULL;
-  r_in_activation_gate_vector <= FULL;
+  k_in_activation_gate_vector <= K_IN;
+  r_in_activation_gate_vector <= R_IN;
 
-  u_in_activation_gate_vector <= FULL;
-  h_in_activation_gate_vector <= FULL;
+  u_in_activation_gate_vector <= U_IN;
+  h_in_activation_gate_vector <= H_IN;
 
-  b_in_activation_gate_vector <= FULL;
-
-  a_out_activation_gate_vector <= FULL;
+  b_in_activation_gate_vector <= B_IN;
 
   -- ACTIVATION TRAINER
-  size_x_in_activation_trainer <= FULL;
-  size_w_in_activation_trainer <= FULL;
-  size_l_in_activation_trainer <= FULL;
-  size_r_in_activation_trainer <= FULL;
+  size_x_in_activation_trainer <= SIZE_X_IN;
+  size_w_in_activation_trainer <= SIZE_W_IN;
+  size_l_in_activation_trainer <= SIZE_L_IN;
+  size_r_in_activation_trainer <= SIZE_R_IN;
 
-  h_in_activation_trainer <= FULL;
-  x_in_activation_trainer <= FULL;
-  a_in_activation_trainer <= FULL;
-  i_in_activation_trainer <= FULL;
-  s_in_activation_trainer <= FULL;
+  x_in_activation_trainer <= X_IN;
+  r_in_activation_trainer <= R_IN;
+  h_in_activation_trainer <= H_IN;
 
-  w_out_activation_trainer <= FULL;
-  k_out_activation_trainer <= FULL;
-  b_out_activation_trainer <= FULL;
+  a_in_activation_trainer <= a_out_activation_gate_vector;
+  i_in_activation_trainer <= i_out_input_gate_vector;
+  s_in_activation_trainer <= s_out_state_gate_vector;
 
   -- INTPUT GATE VECTOR
-  size_x_in_input_gate_vector <= FULL;
-  size_w_in_input_gate_vector <= FULL;
-  size_l_in_input_gate_vector <= FULL;
-  size_r_in_input_gate_vector <= FULL;
+  size_x_in_input_gate_vector <= SIZE_X_IN;
+  size_w_in_input_gate_vector <= SIZE_W_IN;
+  size_l_in_input_gate_vector <= SIZE_L_IN;
+  size_r_in_input_gate_vector <= SIZE_R_IN;
 
-  w_in_input_gate_vector <= FULL;
-  x_in_input_gate_vector <= FULL;
+  w_in_input_gate_vector <= W_IN;
+  x_in_input_gate_vector <= X_IN;
 
-  k_in_input_gate_vector <= FULL;
-  r_in_input_gate_vector <= FULL;
+  k_in_input_gate_vector <= K_IN;
+  r_in_input_gate_vector <= R_IN;
 
-  u_in_input_gate_vector <= FULL;
-  h_in_input_gate_vector <= FULL;
+  u_in_input_gate_vector <= U_IN;
+  h_in_input_gate_vector <= H_IN;
 
-  b_in_input_gate_vector <= FULL;
-
-  i_out_input_gate_vector <= FULL;
+  b_in_input_gate_vector <= B_IN;
 
   -- INPUT TRAINER
-  size_x_in_input_trainer <= FULL;
-  size_w_in_input_trainer <= FULL;
-  size_l_in_input_trainer <= FULL;
-  size_r_in_input_trainer <= FULL;
+  size_x_in_input_trainer <= SIZE_X_IN;
+  size_w_in_input_trainer <= SIZE_W_IN;
+  size_l_in_input_trainer <= SIZE_L_IN;
+  size_r_in_input_trainer <= SIZE_R_IN;
 
-  h_in_input_trainer <= FULL;
-  x_in_input_trainer <= FULL;
-  a_in_input_trainer <= FULL;
-  i_in_input_trainer <= FULL;
-  s_in_input_trainer <= FULL;
+  x_in_input_trainer <= X_IN;
+  r_in_input_trainer <= R_IN;
+  h_in_input_trainer <= H_IN;
 
-  w_out_input_trainer <= FULL;
-  k_out_input_trainer <= FULL;
-  b_out_input_trainer <= FULL;
+  a_in_input_trainer <= a_out_activation_gate_vector;
+  i_in_input_trainer <= i_out_input_gate_vector;
+  s_in_input_trainer <= s_out_state_gate_vector;
 
   -- OUTPUT GATE VECTOR
-  size_x_in_output_gate_vector <= FULL;
-  size_w_in_output_gate_vector <= FULL;
-  size_l_in_output_gate_vector <= FULL;
-  size_r_in_output_gate_vector <= FULL;
+  size_x_in_output_gate_vector <= SIZE_X_IN;
+  size_w_in_output_gate_vector <= SIZE_W_IN;
+  size_l_in_output_gate_vector <= SIZE_L_IN;
+  size_r_in_output_gate_vector <= SIZE_R_IN;
 
-  w_in_output_gate_vector <= FULL;
-  x_in_output_gate_vector <= FULL;
+  w_in_output_gate_vector <= W_IN;
+  x_in_output_gate_vector <= X_IN;
 
-  k_in_output_gate_vector <= FULL;
-  r_in_output_gate_vector <= FULL;
+  k_in_output_gate_vector <= K_IN;
+  r_in_output_gate_vector <= R_IN;
 
-  u_in_output_gate_vector <= FULL;
-  h_in_output_gate_vector <= FULL;
+  u_in_output_gate_vector <= U_IN;
+  h_in_output_gate_vector <= H_IN;
 
-  b_in_output_gate_vector <= FULL;
-
-  o_out_output_gate_vector <= FULL;
+  b_in_output_gate_vector <= B_IN;
 
   -- OUTPUT TRAINER
-  size_x_in_output_trainer <= FULL;
-  size_w_in_output_trainer <= FULL;
-  size_l_in_output_trainer <= FULL;
-  size_r_in_output_trainer <= FULL;
+  size_x_in_output_trainer <= SIZE_X_IN;
+  size_w_in_output_trainer <= SIZE_W_IN;
+  size_l_in_output_trainer <= SIZE_L_IN;
+  size_r_in_output_trainer <= SIZE_R_IN;
 
-  h_in_output_trainer <= FULL;
-  x_in_output_trainer <= FULL;
-  a_in_output_trainer <= FULL;
-  o_in_output_trainer <= FULL;
+  x_in_output_trainer <= X_IN;
+  r_in_output_trainer <= R_IN;
+  h_in_output_trainer <= H_IN;
 
-  w_out_output_trainer <= FULL;
-  k_out_output_trainer <= FULL;
-  b_out_output_trainer <= FULL;
+  a_in_output_trainer <= a_out_activation_gate_vector;
+  o_in_output_trainer <= o_out_output_gate_vector;
 
   -- FORGET GATE VECTOR
-  size_x_in_forget_gate_vector <= FULL;
-  size_w_in_forget_gate_vector <= FULL;
-  size_l_in_forget_gate_vector <= FULL;
-  size_r_in_forget_gate_vector <= FULL;
+  size_x_in_forget_gate_vector <= SIZE_X_IN;
+  size_w_in_forget_gate_vector <= SIZE_W_IN;
+  size_l_in_forget_gate_vector <= SIZE_L_IN;
+  size_r_in_forget_gate_vector <= SIZE_R_IN;
 
-  w_in_forget_gate_vector <= FULL;
-  x_in_forget_gate_vector <= FULL;
+  w_in_forget_gate_vector <= W_IN;
+  x_in_forget_gate_vector <= X_IN;
 
-  k_in_forget_gate_vector <= FULL;
-  r_in_forget_gate_vector <= FULL;
+  k_in_forget_gate_vector <= K_IN;
+  r_in_forget_gate_vector <= R_IN;
 
-  u_in_forget_gate_vector <= FULL;
-  h_in_forget_gate_vector <= FULL;
+  u_in_forget_gate_vector <= U_IN;
+  h_in_forget_gate_vector <= H_IN;
 
-  b_in_forget_gate_vector <= FULL;
-
-  f_out_forget_gate_vector <= FULL;
+  b_in_forget_gate_vector <= B_IN;
 
   -- FORGET TRAINER
-  size_x_in_forget_trainer <= FULL;
-  size_w_in_forget_trainer <= FULL;
-  size_l_in_forget_trainer <= FULL;
-  size_r_in_forget_trainer <= FULL;
+  size_x_in_forget_trainer <= SIZE_X_IN;
+  size_w_in_forget_trainer <= SIZE_W_IN;
+  size_l_in_forget_trainer <= SIZE_L_IN;
+  size_r_in_forget_trainer <= SIZE_R_IN;
 
-  h_in_forget_trainer <= FULL;
-  x_in_forget_trainer <= FULL;
-  f_in_forget_trainer <= FULL;
-  s_in_forget_trainer <= FULL;
+  x_in_forget_trainer <= X_IN;
+  r_in_forget_trainer <= R_IN;
+  h_in_forget_trainer <= H_IN;
 
-  w_out_forget_trainer <= FULL;
-  k_out_forget_trainer <= FULL;
-  b_out_forget_trainer <= FULL;
+  f_in_forget_trainer <= f_out_forget_gate_vector;
+  s_in_forget_trainer <= s_out_state_gate_vector;
 
   -- STATE GATE VECTOR
-  size_l_in_state_gate_vector <= FULL;
+  size_l_in_state_gate_vector <= SIZE_L_IN;
 
-  s_in_state_gate_vector <= FULL;
-  i_in_state_gate_vector <= FULL;
-  f_in_state_gate_vector <= FULL;
-  a_in_state_gate_vector <= FULL;
-
-  s_out_state_gate_vector <= FULL;
+  s_in_state_gate_vector <= s_out_state_gate_vector;
+  i_in_state_gate_vector <= i_out_input_gate_vector;
+  f_in_state_gate_vector <= f_out_forget_gate_vector;
+  a_in_state_gate_vector <= a_out_activation_gate_vector;
 
   -- HIDDEN GATE VECTOR
-  size_l_in_hidden_gate_vector <= FULL;
+  size_l_in_hidden_gate_vector <= SIZE_L_IN;
 
-  s_in_hidden_gate_vector <= FULL;
-  o_in_hidden_gate_vector <= FULL;
-
-  h_out_hidden_gate_vector <= FULL;
+  s_in_hidden_gate_vector <= s_out_state_gate_vector;
+  o_in_hidden_gate_vector <= o_out_output_gate_vector;
 
   -- ACTIVATION GATE VECTOR
   activation_gate_vector : ntm_activation_gate_vector

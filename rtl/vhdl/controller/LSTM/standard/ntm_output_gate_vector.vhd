@@ -299,17 +299,17 @@ begin
         when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 3
 
           -- Control Inputs
-          data_a_in_i_enable_matrix_product <= '0';
-          data_a_in_j_enable_matrix_product <= '0';
-          data_b_in_i_enable_matrix_product <= '0';
+          data_a_in_i_enable_matrix_product <= K_IN_L_ENABLE;
+          data_a_in_j_enable_matrix_product <= K_IN_K_ENABLE;
+          data_b_in_i_enable_matrix_product <= R_IN_K_ENABLE;
           data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
-          size_a_i_in_matrix_product <= FULL;
-          size_a_j_in_matrix_product <= FULL;
-          size_b_i_in_matrix_product <= FULL;
-          size_b_j_in_matrix_product <= FULL;
+          size_a_i_in_matrix_product <= SIZE_L_IN;
+          size_a_j_in_matrix_product <= SIZE_W_IN;
+          size_b_i_in_matrix_product <= SIZE_W_IN;
+          size_b_j_in_matrix_product <= ONE;
           data_a_in_matrix_product   <= K_IN;
           data_b_in_matrix_product   <= R_IN;
 
@@ -331,12 +331,12 @@ begin
           -- Control Inputs
           operation_vector_adder <= '0';
 
-          data_a_in_enable_vector_adder <= '0';
-          data_b_in_enable_vector_adder <= '0';
+          data_a_in_enable_vector_adder <= data_out_enable_matrix_product;
+          data_b_in_enable_vector_adder <= data_out_enable_vector_adder;
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
-          size_in_vector_adder   <= FULL;
+          size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_matrix_product;
           data_b_in_vector_adder <= data_out_vector_adder;
 
@@ -356,17 +356,17 @@ begin
         when MATRIX_THIRD_PRODUCT_STATE =>  -- STEP 5
 
           -- Control Inputs
-          data_a_in_i_enable_matrix_product <= '0';
-          data_a_in_j_enable_matrix_product <= '0';
-          data_b_in_i_enable_matrix_product <= '0';
+          data_a_in_i_enable_matrix_product <= U_IN_L_ENABLE;
+          data_a_in_j_enable_matrix_product <= U_IN_P_ENABLE;
+          data_b_in_i_enable_matrix_product <= H_IN_ENABLE;
           data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
-          size_a_i_in_matrix_product <= FULL;
-          size_a_j_in_matrix_product <= FULL;
-          size_b_i_in_matrix_product <= FULL;
-          size_b_j_in_matrix_product <= FULL;
+          size_a_i_in_matrix_product <= SIZE_L_IN;
+          size_a_j_in_matrix_product <= SIZE_L_IN;
+          size_b_i_in_matrix_product <= SIZE_L_IN;
+          size_b_j_in_matrix_product <= ONE;
           data_a_in_matrix_product   <= U_IN;
           data_b_in_matrix_product   <= H_IN;
 
@@ -393,7 +393,7 @@ begin
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
-          size_in_vector_adder   <= FULL;
+          size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_matrix_product;
           data_b_in_vector_adder <= data_out_vector_adder;
 
@@ -413,17 +413,17 @@ begin
         when MATRIX_FOURTH_PRODUCT_STATE =>  -- STEP 7
 
           -- Control Inputs
-          data_a_in_i_enable_matrix_product <= '0';
-          data_a_in_j_enable_matrix_product <= '0';
-          data_b_in_i_enable_matrix_product <= '0';
+          data_a_in_i_enable_matrix_product <= U_IN_L_ENABLE;
+          data_a_in_j_enable_matrix_product <= U_IN_P_ENABLE;
+          data_b_in_i_enable_matrix_product <= H_IN_ENABLE;
           data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
-          size_a_i_in_matrix_product <= FULL;
-          size_a_j_in_matrix_product <= FULL;
-          size_b_i_in_matrix_product <= FULL;
-          size_b_j_in_matrix_product <= FULL;
+          size_a_i_in_matrix_product <= SIZE_L_IN;
+          size_a_j_in_matrix_product <= SIZE_L_IN;
+          size_b_i_in_matrix_product <= SIZE_L_IN;
+          size_b_j_in_matrix_product <= ONE;
           data_a_in_matrix_product   <= U_IN;
           data_b_in_matrix_product   <= H_IN;
 
@@ -450,7 +450,7 @@ begin
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
-          size_in_vector_adder   <= FULL;
+          size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_matrix_product;
           data_b_in_vector_adder <= data_out_vector_adder;
 
@@ -474,8 +474,8 @@ begin
 
           -- Data Inputs
           modulo_in_vector_logistic <= FULL;
-          size_in_vector_logistic   <= FULL;
-          data_in_vector_logistic   <= FULL;
+          size_in_vector_logistic   <= SIZE_L_IN;
+          data_in_vector_logistic   <= data_out_vector_adder;
 
           if (data_out_enable_vector_logistic = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_L_IN) - unsigned(ONE)) then
