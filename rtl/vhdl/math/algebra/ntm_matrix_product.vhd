@@ -195,7 +195,7 @@ begin
 
           if (data_out_enable_vector_multiplier = '1') then
             -- Control Internal
-            if (index_i_loop = ZERO and index_j_loop = ZERO) then
+            if ((index_i_loop = ZERO) and (index_j_loop = ZERO)) then
               start_vector_adder <= '1';
             end if;
 
@@ -223,7 +223,6 @@ begin
 
             -- Control Outputs
             DATA_OUT_I_ENABLE <= '1';
-
           else
             -- Control Outputs
             DATA_OUT_I_ENABLE <= '0';

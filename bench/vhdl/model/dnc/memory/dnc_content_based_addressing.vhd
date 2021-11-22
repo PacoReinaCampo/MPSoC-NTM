@@ -85,8 +85,9 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     VECTOR_COSINE_SIMILARITY_STATE,     -- STEP 1
-    VECTOR_EXPONENTIATOR_STATE,         -- STEP 2
-    VECTOR_SOFTMAX_STATE                -- STEP 3
+    VECTOR_MULTIPLIER_STATE,            -- STEP 2
+    VECTOR_EXPONENTIATOR_STATE,         -- STEP 3
+    VECTOR_SOFTMAX_STATE                -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -218,8 +219,10 @@ begin
           index_loop <= ZERO;
 
           if (START = '1') then
-            -- Control Internal
-            start_vector_cosine <= '1';
+            if (index_loop = ZERO) then
+              -- Control Internal
+              start_vector_cosine <= '1';
+            end if;
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_COSINE_SIMILARITY_STATE;
@@ -230,9 +233,11 @@ begin
 
         when VECTOR_COSINE_SIMILARITY_STATE =>  -- STEP 1
 
-        when VECTOR_EXPONENTIATOR_STATE =>  -- STEP 2
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
 
-        when VECTOR_SOFTMAX_STATE =>    -- STEP 3
+        when VECTOR_EXPONENTIATOR_STATE =>  -- STEP 3
+
+        when VECTOR_SOFTMAX_STATE =>    -- STEP 4
 
           if (data_out_vector_enable_vector_softmax = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_I_IN) - unsigned(ONE)) then
@@ -254,6 +259,9 @@ begin
 
             -- Control Outputs
             C_OUT_ENABLE <= '1';
+          else
+            -- Control Outputs
+            C_OUT_ENABLE <= '0';
           end if;
 
         when others =>
