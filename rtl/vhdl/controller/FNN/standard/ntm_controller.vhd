@@ -331,8 +331,8 @@ begin
           -- Control Inputs
           operation_vector_adder <= '0';
 
-          data_a_in_enable_vector_adder <= '0';
-          data_b_in_enable_vector_adder <= '0';
+          data_a_in_enable_vector_adder <= data_out_enable_vector_adder;
+          data_b_in_enable_vector_adder <= B_IN_ENABLE;
 
           if (data_out_enable_vector_adder = '1') then
             -- Control Internal
@@ -350,15 +350,15 @@ begin
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_L_IN;
-          size_a_j_in_matrix_product <= SIZE_X_IN;
-          size_b_i_in_matrix_product <= SIZE_X_IN;
+          size_a_j_in_matrix_product <= SIZE_W_IN;
+          size_b_i_in_matrix_product <= SIZE_W_IN;
           size_b_j_in_matrix_product <= ONE;
-          data_a_in_matrix_product   <= W_IN;
-          data_b_in_matrix_product   <= X_IN;
+          data_a_in_matrix_product   <= K_IN;
+          data_b_in_matrix_product   <= R_IN;
 
           -- Control Inputs
-          data_a_in_i_enable_matrix_product <= W_IN_L_ENABLE;
-          data_a_in_j_enable_matrix_product <= W_IN_X_ENABLE;
+          data_a_in_i_enable_matrix_product <= K_IN_L_ENABLE;
+          data_a_in_j_enable_matrix_product <= K_IN_K_ENABLE;
           data_b_in_i_enable_matrix_product <= X_IN_ENABLE;
           data_b_in_j_enable_matrix_product <= '0';
 
@@ -379,13 +379,13 @@ begin
           modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_matrix_product;
-          data_b_in_vector_adder <= B_IN;
+          data_b_in_vector_adder <= data_out_vector_adder;
 
           -- Control Inputs
           operation_vector_adder <= '0';
 
-          data_a_in_enable_vector_adder <= '0';
-          data_b_in_enable_vector_adder <= '0';
+          data_a_in_enable_vector_adder <= data_out_j_enable_matrix_product;
+          data_b_in_enable_vector_adder <= data_out_enable_vector_adder;
 
           if (data_out_enable_vector_adder = '1') then
             -- Control Internal
