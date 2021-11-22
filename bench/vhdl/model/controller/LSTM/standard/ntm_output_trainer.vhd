@@ -106,21 +106,13 @@ architecture ntm_output_trainer_architecture of ntm_output_trainer is
   -- Types
   -----------------------------------------------------------------------
 
-  type controller_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    VECTOR_DIFFERENTIATION_O_STATE,     -- STEP 1
-    VECTOR_DIFFERENTIATION_W_STATE,     -- STEP 2
-    VECTOR_DIFFERENTIATION_K_STATE,     -- STEP 3
-    VECTOR_DIFFERENTIATION_U_STATE,     -- STEP 4
-    VECTOR_DIFFERENTIATION_B_STATE      -- STEP 5
-    );
-
   type differentiation_o_ctrl_fsm is (
     STARTER_DO_STATE,                   -- STEP 0
-    VECTOR_ADDER_DO_STATE,              -- STEP 1
-    VECTOR_FIRST_MULTIPLIER_DO_STATE,   -- STEP 2
-    VECTOR_SECOND_MULTIPLIER_DO_STATE,  -- STEP 3
-    VECTOR_THIRD_MULTIPLIER_DO_STATE    -- STEP 4
+    VECTOR_DIFFERENTIATION_DO_STATE,    -- STEP 1
+    VECTOR_ADDER_DO_STATE,              -- STEP 2
+    VECTOR_FIRST_MULTIPLIER_DO_STATE,   -- STEP 3
+    VECTOR_SECOND_MULTIPLIER_DO_STATE,  -- STEP 4
+    VECTOR_THIRD_MULTIPLIER_DO_STATE    -- STEP 5
     );
 
   type differentiation_w_ctrl_fsm is (
@@ -163,13 +155,16 @@ architecture ntm_output_trainer_architecture of ntm_output_trainer is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
-
   signal differentiation_o_ctrl_fsm_int : differentiation_o_ctrl_fsm;
   signal differentiation_w_ctrl_fsm_int : differentiation_w_ctrl_fsm;
   signal differentiation_k_ctrl_fsm_int : differentiation_k_ctrl_fsm;
   signal differentiation_u_ctrl_fsm_int : differentiation_u_ctrl_fsm;
   signal differentiation_b_ctrl_fsm_int : differentiation_b_ctrl_fsm;
+
+  -- Internal Signals
+  signal pipeline_vector_differentiation : std_logic;
+  signal pipeline_matrix_product         : std_logic;
+  signal pipeline_vector_summation       : std_logic;
 
   -- VECTOR SUMMATION
   -- CONTROL
@@ -291,268 +286,389 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
-          -- Control Outputs
-          READY <= '0';
+      -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
 
-          if (START = '1') then
-            -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_DIFFERENTIATION_O_STATE;
-          end if;
+      case differentiation_o_ctrl_fsm_int is
+        when STARTER_DO_STATE =>        -- STEP 0
 
-        when VECTOR_DIFFERENTIATION_O_STATE =>  -- STEP 1
+        when VECTOR_DIFFERENTIATION_DO_STATE =>  -- STEP 1
 
-          -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
+          -- Control Inputs
+          data_in_enable_vector_differentiation <= '0';
 
-          case differentiation_o_ctrl_fsm_int is
-            when STARTER_DO_STATE =>    -- STEP 0
+          -- Data Inputs
+          modulo_in_vector_differentiation <= FULL;
+          size_in_vector_differentiation   <= FULL;
+          data_in_vector_differentiation   <= FULL;
 
-            when VECTOR_ADDER_DO_STATE =>  -- STEP 1
+        when VECTOR_ADDER_DO_STATE =>   -- STEP 2
 
-              -- Control Inputs
-              operation_vector_adder <= '0';
+          -- Control Inputs
+          operation_vector_adder <= '0';
 
-              data_a_in_enable_vector_adder <= '0';
-              data_b_in_enable_vector_adder <= '0';
+          data_a_in_enable_vector_adder <= '0';
+          data_b_in_enable_vector_adder <= '0';
 
-              -- Data Inputs
-              modulo_in_vector_adder <= FULL;
-              size_in_vector_adder   <= FULL;
-              data_a_in_vector_adder <= FULL;
-              data_b_in_vector_adder <= FULL;
+          -- Data Inputs
+          modulo_in_vector_adder <= FULL;
+          size_in_vector_adder   <= FULL;
+          data_a_in_vector_adder <= FULL;
+          data_b_in_vector_adder <= FULL;
 
-            when VECTOR_FIRST_MULTIPLIER_DO_STATE =>  -- STEP 2
+        when VECTOR_FIRST_MULTIPLIER_DO_STATE =>  -- STEP 3
 
-              -- Control Inputs
-              data_a_in_enable_vector_multiplier <= '0';
-              data_b_in_enable_vector_multiplier <= '0';
+          -- Control Inputs
+          data_a_in_enable_vector_multiplier <= '0';
+          data_b_in_enable_vector_multiplier <= '0';
 
-              -- Data Inputs
-              modulo_in_vector_multiplier <= FULL;
-              size_in_vector_multiplier   <= FULL;
-              data_a_in_vector_multiplier <= FULL;
-              data_b_in_vector_multiplier <= FULL;
+          -- Data Inputs
+          modulo_in_vector_multiplier <= FULL;
+          size_in_vector_multiplier   <= FULL;
+          data_a_in_vector_multiplier <= FULL;
+          data_b_in_vector_multiplier <= FULL;
 
-            when VECTOR_SECOND_MULTIPLIER_DO_STATE =>  -- STEP 3
+        when VECTOR_SECOND_MULTIPLIER_DO_STATE =>  -- STEP 4
 
-              -- Control Inputs
-              data_a_in_enable_vector_multiplier <= '0';
-              data_b_in_enable_vector_multiplier <= '0';
+          -- Control Inputs
+          data_a_in_enable_vector_multiplier <= '0';
+          data_b_in_enable_vector_multiplier <= '0';
 
-              -- Data Inputs
-              modulo_in_vector_multiplier <= FULL;
-              size_in_vector_multiplier   <= FULL;
-              data_a_in_vector_multiplier <= FULL;
-              data_b_in_vector_multiplier <= FULL;
+          -- Data Inputs
+          modulo_in_vector_multiplier <= FULL;
+          size_in_vector_multiplier   <= FULL;
+          data_a_in_vector_multiplier <= FULL;
+          data_b_in_vector_multiplier <= FULL;
 
-            when VECTOR_THIRD_MULTIPLIER_DO_STATE =>  -- STEP 4
+        when VECTOR_THIRD_MULTIPLIER_DO_STATE =>  -- STEP 5
 
-              -- Control Inputs
-              data_a_in_enable_vector_multiplier <= '0';
-              data_b_in_enable_vector_multiplier <= '0';
+          -- Control Inputs
+          data_a_in_enable_vector_multiplier <= '0';
+          data_b_in_enable_vector_multiplier <= '0';
 
-              -- Data Inputs
-              modulo_in_vector_multiplier <= FULL;
-              size_in_vector_multiplier   <= FULL;
-              data_a_in_vector_multiplier <= FULL;
-              data_b_in_vector_multiplier <= FULL;
-
-            when others =>
-              -- FSM Control
-              differentiation_o_ctrl_fsm_int <= STARTER_DO_STATE;
-          end case;
-
-        when VECTOR_DIFFERENTIATION_W_STATE =>  -- STEP 1
-
-          -- dW(t;l) = summation(do(t;l) · x(t;x))[t in 0 to T]
-
-          case differentiation_w_ctrl_fsm_int is
-            when STARTER_DW_STATE =>    -- STEP 0
-
-            when VECTOR_DIFFERENTIATION_DW_STATE =>  -- STEP 1
-
-              -- Control Inputs
-              data_in_enable_vector_differentiation <= '0';
-
-              -- Data Inputs
-              modulo_in_vector_differentiation <= FULL;
-              size_in_vector_differentiation   <= FULL;
-              data_in_vector_differentiation   <= FULL;
-
-            when MATRIX_PRODUCT_DW_STATE =>  -- STEP 2
-
-              -- Control Inputs
-              data_a_in_i_enable_matrix_product <= '0';
-              data_a_in_j_enable_matrix_product <= '0';
-              data_b_in_i_enable_matrix_product <= '0';
-              data_b_in_j_enable_matrix_product <= '0';
-
-              -- Data Inputs
-              modulo_in_matrix_product   <= FULL;
-              size_a_i_in_matrix_product <= FULL;
-              size_a_j_in_matrix_product <= FULL;
-              size_b_i_in_matrix_product <= FULL;
-              size_b_j_in_matrix_product <= FULL;
-              data_a_in_matrix_product   <= FULL;
-              data_b_in_matrix_product   <= FULL;
-
-            when VECTOR_SUMMATION_DW_STATE =>  -- STEP 3
-
-              -- Control Inputs
-              data_in_vector_enable_vector_summation <= '0';
-              data_in_scalar_enable_vector_summation <= '0';
-
-              -- Data Inputs
-              modulo_in_vector_summation <= FULL;
-              size_in_vector_summation   <= FULL;
-              length_in_vector_summation <= FULL;
-              data_in_vector_summation   <= FULL;
-
-            when others =>
-              -- FSM Control
-              differentiation_w_ctrl_fsm_int <= STARTER_DW_STATE;
-          end case;
-
-        when VECTOR_DIFFERENTIATION_K_STATE =>  -- STEP 2
-
-          -- dK(t;l) = summation(do(t;i;l) · r(t;i;k))[t in 0 to T-1]
-
-          case differentiation_k_ctrl_fsm_int is
-            when STARTER_DK_STATE =>    -- STEP 0
-
-            when VECTOR_DIFFERENTIATION_DK_STATE =>  -- STEP 1
-
-              -- Control Inputs
-              data_in_enable_vector_differentiation <= '0';
-
-              -- Data Inputs
-              modulo_in_vector_differentiation <= FULL;
-              size_in_vector_differentiation   <= FULL;
-              data_in_vector_differentiation   <= FULL;
-
-            when MATRIX_PRODUCT_DK_STATE =>  -- STEP 2
-
-              -- Control Inputs
-              data_a_in_i_enable_matrix_product <= '0';
-              data_a_in_j_enable_matrix_product <= '0';
-              data_b_in_i_enable_matrix_product <= '0';
-              data_b_in_j_enable_matrix_product <= '0';
-
-              -- Data Inputs
-              modulo_in_matrix_product   <= FULL;
-              size_a_i_in_matrix_product <= FULL;
-              size_a_j_in_matrix_product <= FULL;
-              size_b_i_in_matrix_product <= FULL;
-              size_b_j_in_matrix_product <= FULL;
-              data_a_in_matrix_product   <= FULL;
-              data_b_in_matrix_product   <= FULL;
-
-            when VECTOR_SUMMATION_DK_STATE =>  -- STEP 3
-
-              -- Control Inputs
-              data_in_vector_enable_vector_summation <= '0';
-              data_in_scalar_enable_vector_summation <= '0';
-
-              -- Data Inputs
-              modulo_in_vector_summation <= FULL;
-              size_in_vector_summation   <= FULL;
-              length_in_vector_summation <= FULL;
-              data_in_vector_summation   <= FULL;
-
-            when others =>
-              -- FSM Control
-              differentiation_k_ctrl_fsm_int <= STARTER_DK_STATE;
-          end case;
-
-        when VECTOR_DIFFERENTIATION_U_STATE =>  -- STEP 3
-
-          -- dU(t;l) = summation(do(t+1;l) · h(t;l))[t in 0 to T-1]
-
-          case differentiation_u_ctrl_fsm_int is
-            when STARTER_DU_STATE =>    -- STEP 0
-
-            when VECTOR_DIFFERENTIATION_DU_STATE =>  -- STEP 1
-
-              -- Control Inputs
-              data_in_enable_vector_differentiation <= '0';
-
-              -- Data Inputs
-              modulo_in_vector_differentiation <= FULL;
-              size_in_vector_differentiation   <= FULL;
-              data_in_vector_differentiation   <= FULL;
-
-            when MATRIX_PRODUCT_DU_STATE =>  -- STEP 2
-
-              -- Control Inputs
-              data_a_in_i_enable_matrix_product <= '0';
-              data_a_in_j_enable_matrix_product <= '0';
-              data_b_in_i_enable_matrix_product <= '0';
-              data_b_in_j_enable_matrix_product <= '0';
-
-              -- Data Inputs
-              modulo_in_matrix_product   <= FULL;
-              size_a_i_in_matrix_product <= FULL;
-              size_a_j_in_matrix_product <= FULL;
-              size_b_i_in_matrix_product <= FULL;
-              size_b_j_in_matrix_product <= FULL;
-              data_a_in_matrix_product   <= FULL;
-              data_b_in_matrix_product   <= FULL;
-
-            when VECTOR_SUMMATION_DU_STATE =>  -- STEP 3
-
-              -- Control Inputs
-              data_in_vector_enable_vector_summation <= '0';
-              data_in_scalar_enable_vector_summation <= '0';
-
-              -- Data Inputs
-              modulo_in_vector_summation <= FULL;
-              size_in_vector_summation   <= FULL;
-              length_in_vector_summation <= FULL;
-              data_in_vector_summation   <= FULL;
-
-            when others =>
-              -- FSM Control
-              differentiation_u_ctrl_fsm_int <= STARTER_DU_STATE;
-          end case;
-
-        when VECTOR_DIFFERENTIATION_B_STATE =>  -- STEP 4
-
-          -- db(t;l) = summation(do(t;l))[t in 0 to T]
-
-          case differentiation_b_ctrl_fsm_int is
-            when STARTER_DB_STATE =>    -- STEP 0
-
-            when VECTOR_DIFFERENTIATION_DB_STATE =>  -- STEP 1
-
-              -- Control Inputs
-              data_in_enable_vector_differentiation <= '0';
-
-              -- Data Inputs
-              modulo_in_vector_differentiation <= FULL;
-              size_in_vector_differentiation   <= FULL;
-              data_in_vector_differentiation   <= FULL;
-
-            when VECTOR_SUMMATION_DB_STATE =>  -- STEP 2
-
-              -- Control Inputs
-              data_in_vector_enable_vector_summation <= '0';
-              data_in_scalar_enable_vector_summation <= '0';
-
-              -- Data Inputs
-              modulo_in_vector_summation <= FULL;
-              size_in_vector_summation   <= FULL;
-              length_in_vector_summation <= FULL;
-              data_in_vector_summation   <= FULL;
-
-            when others =>
-              -- FSM Control
-              differentiation_b_ctrl_fsm_int <= STARTER_DB_STATE;
-          end case;
+          -- Data Inputs
+          modulo_in_vector_multiplier <= FULL;
+          size_in_vector_multiplier   <= FULL;
+          data_a_in_vector_multiplier <= FULL;
+          data_b_in_vector_multiplier <= FULL;
 
         when others =>
           -- FSM Control
-          controller_ctrl_fsm_int <= STARTER_STATE;
+          differentiation_o_ctrl_fsm_int <= STARTER_DO_STATE;
+      end case;
+    end if;
+  end process;
+
+  ctrl_w_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      W_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      -- dW(t;l) = summation(d*(t;l) · x(t;x))[t in 0 to T]
+
+      case differentiation_w_ctrl_fsm_int is
+        when STARTER_DW_STATE =>    -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          -- Control Internal
+          pipeline_vector_differentiation <= '0';
+          pipeline_matrix_product         <= '0';
+          pipeline_vector_summation       <= '0';
+
+          if (START = '1') then
+            -- Control Internal
+            start_vector_differentiation <= '1';
+
+            -- FSM Control
+            differentiation_w_ctrl_fsm_int <= VECTOR_DIFFERENTIATION_DW_STATE;
+          else
+            -- Control Internal
+            start_vector_differentiation <= '0';
+          end if;
+
+        when VECTOR_DIFFERENTIATION_DW_STATE =>  -- STEP 1
+
+          -- Control Inputs
+          data_in_enable_vector_differentiation <= '0';
+
+          -- Data Inputs
+          modulo_in_vector_differentiation <= FULL;
+          size_in_vector_differentiation   <= SIZE_X_IN;
+          data_in_vector_differentiation   <= X_IN;
+
+        when MATRIX_PRODUCT_DW_STATE =>  -- STEP 2
+
+          -- Control Inputs
+          data_a_in_i_enable_matrix_product <= '0';
+          data_a_in_j_enable_matrix_product <= '0';
+          data_b_in_i_enable_matrix_product <= '0';
+          data_b_in_j_enable_matrix_product <= '0';
+
+          -- Data Inputs
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= FULL;
+          size_a_j_in_matrix_product <= FULL;
+          size_b_i_in_matrix_product <= FULL;
+          size_b_j_in_matrix_product <= FULL;
+          data_a_in_matrix_product   <= FULL;
+          data_b_in_matrix_product   <= FULL;
+
+        when VECTOR_SUMMATION_DW_STATE =>  -- STEP 3
+
+          -- Control Inputs
+          data_in_vector_enable_vector_summation <= '0';
+          data_in_scalar_enable_vector_summation <= '0';
+
+          -- Data Inputs
+          modulo_in_vector_summation <= FULL;
+          size_in_vector_summation   <= FULL;
+          length_in_vector_summation <= FULL;
+          data_in_vector_summation   <= FULL;
+
+          -- Data Outputs
+          W_OUT <= data_out_vector_summation;
+
+        when others =>
+          -- FSM Control
+          differentiation_w_ctrl_fsm_int <= STARTER_DW_STATE;
+      end case;
+    end if;
+  end process;
+
+  ctrl_k_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      K_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      -- dK(t;l) = summation(d*(t;l) · r(t;i;k))[t in 0 to T-1]
+
+      case differentiation_k_ctrl_fsm_int is
+        when STARTER_DK_STATE =>    -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          -- Control Internal
+          pipeline_vector_differentiation <= '0';
+          pipeline_matrix_product         <= '0';
+          pipeline_vector_summation       <= '0';
+
+          if (START = '1') then
+            -- Control Internal
+            start_vector_differentiation <= '1';
+
+            -- FSM Control
+            differentiation_k_ctrl_fsm_int <= VECTOR_DIFFERENTIATION_DK_STATE;
+          else
+            -- Control Internal
+            start_vector_differentiation <= '0';
+          end if;
+
+        when VECTOR_DIFFERENTIATION_DK_STATE =>  -- STEP 1
+
+          -- Control Inputs
+          data_in_enable_vector_differentiation <= '0';
+
+          -- Data Inputs
+          modulo_in_vector_differentiation <= FULL;
+          size_in_vector_differentiation   <= SIZE_X_IN;
+          data_in_vector_differentiation   <= X_IN;
+
+        when MATRIX_PRODUCT_DK_STATE =>  -- STEP 2
+
+          -- Control Inputs
+          data_a_in_i_enable_matrix_product <= '0';
+          data_a_in_j_enable_matrix_product <= '0';
+          data_b_in_i_enable_matrix_product <= '0';
+          data_b_in_j_enable_matrix_product <= '0';
+
+          -- Data Inputs
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= FULL;
+          size_a_j_in_matrix_product <= FULL;
+          size_b_i_in_matrix_product <= FULL;
+          size_b_j_in_matrix_product <= FULL;
+          data_a_in_matrix_product   <= FULL;
+          data_b_in_matrix_product   <= FULL;
+
+        when VECTOR_SUMMATION_DK_STATE =>  -- STEP 3
+
+          -- Control Inputs
+          data_in_vector_enable_vector_summation <= '0';
+          data_in_scalar_enable_vector_summation <= '0';
+
+          -- Data Inputs
+          modulo_in_vector_summation <= FULL;
+          size_in_vector_summation   <= FULL;
+          length_in_vector_summation <= FULL;
+          data_in_vector_summation   <= FULL;
+
+          -- Data Outputs
+          K_OUT <= data_out_vector_summation;
+
+        when others =>
+          -- FSM Control
+          differentiation_k_ctrl_fsm_int <= STARTER_DK_STATE;
+      end case;
+    end if;
+  end process;
+
+  ctrl_u_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      U_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      -- dU(t;l) = summation(d*(t+1;l) · h(t;l))[t in 0 to T-1]
+
+      case differentiation_u_ctrl_fsm_int is
+        when STARTER_DU_STATE =>    -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          -- Control Internal
+          pipeline_vector_differentiation <= '0';
+          pipeline_matrix_product         <= '0';
+          pipeline_vector_summation       <= '0';
+
+          if (START = '1') then
+            -- Control Internal
+            start_vector_differentiation <= '1';
+
+            -- FSM Control
+            differentiation_u_ctrl_fsm_int <= VECTOR_DIFFERENTIATION_DU_STATE;
+          else
+            -- Control Internal
+            start_vector_differentiation <= '0';
+          end if;
+
+        when VECTOR_DIFFERENTIATION_DU_STATE =>  -- STEP 1
+
+          -- Control Inputs
+          data_in_enable_vector_differentiation <= '0';
+
+          -- Data Inputs
+          modulo_in_vector_differentiation <= FULL;
+          size_in_vector_differentiation   <= SIZE_X_IN;
+          data_in_vector_differentiation   <= X_IN;
+
+        when MATRIX_PRODUCT_DU_STATE =>  -- STEP 2
+
+          -- Control Inputs
+          data_a_in_i_enable_matrix_product <= '0';
+          data_a_in_j_enable_matrix_product <= '0';
+          data_b_in_i_enable_matrix_product <= '0';
+          data_b_in_j_enable_matrix_product <= '0';
+
+          -- Data Inputs
+          modulo_in_matrix_product   <= FULL;
+          size_a_i_in_matrix_product <= FULL;
+          size_a_j_in_matrix_product <= FULL;
+          size_b_i_in_matrix_product <= FULL;
+          size_b_j_in_matrix_product <= FULL;
+          data_a_in_matrix_product   <= FULL;
+          data_b_in_matrix_product   <= FULL;
+
+        when VECTOR_SUMMATION_DU_STATE =>  -- STEP 3
+
+          -- Control Inputs
+          data_in_vector_enable_vector_summation <= '0';
+          data_in_scalar_enable_vector_summation <= '0';
+
+          -- Data Inputs
+          modulo_in_vector_summation <= FULL;
+          size_in_vector_summation   <= FULL;
+          length_in_vector_summation <= FULL;
+          data_in_vector_summation   <= FULL;
+
+          -- Data Outputs
+          U_OUT <= data_out_vector_summation;
+
+        when others =>
+          -- FSM Control
+          differentiation_u_ctrl_fsm_int <= STARTER_DU_STATE;
+      end case;
+    end if;
+  end process;
+
+  ctrl_b_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      B_OUT <= ZERO;
+
+      -- Control Outputs
+      READY <= '0';
+
+    elsif (rising_edge(CLK)) then
+
+      -- db(t;l) = summation(d*(t;l))[t in 0 to T]
+
+      case differentiation_b_ctrl_fsm_int is
+        when STARTER_DB_STATE =>    -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          -- Control Internal
+          pipeline_vector_differentiation <= '0';
+          pipeline_matrix_product         <= '0';
+          pipeline_vector_summation       <= '0';
+
+          if (START = '1') then
+            -- Control Internal
+            start_vector_differentiation <= '1';
+
+            -- FSM Control
+            differentiation_b_ctrl_fsm_int <= VECTOR_DIFFERENTIATION_DB_STATE;
+          else
+            -- Control Internal
+            start_vector_differentiation <= '0';
+          end if;
+
+        when VECTOR_DIFFERENTIATION_DB_STATE =>  -- STEP 1
+
+          -- Control Inputs
+          data_in_enable_vector_differentiation <= '0';
+
+          -- Data Inputs
+          modulo_in_vector_differentiation <= FULL;
+          size_in_vector_differentiation   <= SIZE_X_IN;
+          data_in_vector_differentiation   <= X_IN;
+
+        when VECTOR_SUMMATION_DB_STATE =>  -- STEP 2
+
+          -- Control Inputs
+          data_in_vector_enable_vector_summation <= '0';
+          data_in_scalar_enable_vector_summation <= '0';
+
+          -- Data Inputs
+          modulo_in_vector_summation <= FULL;
+          size_in_vector_summation   <= FULL;
+          length_in_vector_summation <= FULL;
+          data_in_vector_summation   <= FULL;
+
+          -- Data Outputs
+          B_OUT <= data_out_vector_summation;
+
+        when others =>
+          -- FSM Control
+          differentiation_b_ctrl_fsm_int <= STARTER_DB_STATE;
       end case;
     end if;
   end process;

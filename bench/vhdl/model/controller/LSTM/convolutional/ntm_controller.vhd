@@ -164,8 +164,9 @@ architecture ntm_controller_architecture of ntm_controller is
   signal r_in_i_enable_activation_gate_vector : std_logic;
   signal r_in_k_enable_activation_gate_vector : std_logic;
 
-  signal u_in_enable_activation_gate_vector : std_logic;
-  signal h_in_enable_activation_gate_vector : std_logic;
+  signal u_in_l_enable_activation_gate_vector : std_logic;
+  signal u_in_p_enable_activation_gate_vector : std_logic;
+  signal h_in_enable_activation_gate_vector   : std_logic;
 
   signal b_in_enable_activation_gate_vector : std_logic;
 
@@ -252,8 +253,9 @@ architecture ntm_controller_architecture of ntm_controller is
   signal r_in_i_enable_input_gate_vector : std_logic;
   signal r_in_k_enable_input_gate_vector : std_logic;
 
-  signal u_in_enable_input_gate_vector : std_logic;
-  signal h_in_enable_input_gate_vector : std_logic;
+  signal u_in_l_enable_input_gate_vector : std_logic;
+  signal u_in_p_enable_input_gate_vector : std_logic;
+  signal h_in_enable_input_gate_vector   : std_logic;
 
   signal b_in_enable_input_gate_vector : std_logic;
 
@@ -340,8 +342,9 @@ architecture ntm_controller_architecture of ntm_controller is
   signal r_in_i_enable_output_gate_vector : std_logic;
   signal r_in_k_enable_output_gate_vector : std_logic;
 
-  signal u_in_enable_output_gate_vector : std_logic;
-  signal h_in_enable_output_gate_vector : std_logic;
+  signal u_in_l_enable_output_gate_vector : std_logic;
+  signal u_in_p_enable_output_gate_vector : std_logic;
+  signal h_in_enable_output_gate_vector   : std_logic;
 
   signal b_in_enable_output_gate_vector : std_logic;
 
@@ -426,8 +429,9 @@ architecture ntm_controller_architecture of ntm_controller is
   signal r_in_i_enable_forget_gate_vector : std_logic;
   signal r_in_k_enable_forget_gate_vector : std_logic;
 
-  signal u_in_enable_forget_gate_vector : std_logic;
-  signal h_in_enable_forget_gate_vector : std_logic;
+  signal u_in_l_enable_forget_gate_vector : std_logic;
+  signal u_in_p_enable_forget_gate_vector : std_logic;
+  signal h_in_enable_forget_gate_vector   : std_logic;
 
   signal b_in_enable_forget_gate_vector : std_logic;
 
@@ -625,14 +629,20 @@ begin
   r_in_i_enable_activation_gate_vector <= '0';
   r_in_k_enable_activation_gate_vector <= '0';
 
-  u_in_enable_activation_gate_vector <= '0';
-  h_in_enable_activation_gate_vector <= '0';
+  u_in_l_enable_activation_gate_vector <= '0';
+  u_in_p_enable_activation_gate_vector <= '0';
+  h_in_enable_activation_gate_vector   <= '0';
 
   b_in_enable_activation_gate_vector <= '0';
 
   -- ACTIVATION TRAINER
-  h_in_enable_activation_trainer <= '0';
   x_in_enable_activation_trainer <= '0';
+
+  r_in_i_enable_activation_trainer <= '0';
+  r_in_k_enable_activation_trainer <= '0';
+
+  h_in_enable_activation_trainer <= '0';
+
   a_in_enable_activation_trainer <= '0';
   i_in_enable_activation_trainer <= '0';
   s_in_enable_activation_trainer <= '0';
@@ -648,14 +658,20 @@ begin
   r_in_i_enable_input_gate_vector <= '0';
   r_in_k_enable_input_gate_vector <= '0';
 
-  u_in_enable_input_gate_vector <= '0';
-  h_in_enable_input_gate_vector <= '0';
+  u_in_l_enable_input_gate_vector <= '0';
+  u_in_p_enable_input_gate_vector <= '0';
+  h_in_enable_input_gate_vector   <= '0';
 
   b_in_enable_input_gate_vector <= '0';
 
   -- INPUT TRAINER
-  h_in_enable_input_trainer <= '0';
   x_in_enable_input_trainer <= '0';
+
+  r_in_i_enable_input_trainer <= '0';
+  r_in_k_enable_input_trainer <= '0';
+
+  h_in_enable_input_trainer <= '0';
+
   a_in_enable_input_trainer <= '0';
   i_in_enable_input_trainer <= '0';
   s_in_enable_input_trainer <= '0';
@@ -671,8 +687,9 @@ begin
   r_in_i_enable_output_gate_vector <= '0';
   r_in_k_enable_output_gate_vector <= '0';
 
-  u_in_enable_output_gate_vector <= '0';
-  h_in_enable_output_gate_vector <= '0';
+  u_in_l_enable_output_gate_vector <= '0';
+  u_in_p_enable_output_gate_vector <= '0';
+  h_in_enable_output_gate_vector   <= '0';
 
   b_in_enable_output_gate_vector <= '0';
 
@@ -693,8 +710,9 @@ begin
   r_in_i_enable_forget_gate_vector <= '0';
   r_in_k_enable_forget_gate_vector <= '0';
 
-  u_in_enable_forget_gate_vector <= '0';
-  h_in_enable_forget_gate_vector <= '0';
+  u_in_l_enable_forget_gate_vector <= '0';
+  u_in_p_enable_forget_gate_vector <= '0';
+  h_in_enable_forget_gate_vector   <= '0';
 
   b_in_enable_forget_gate_vector <= '0';
 
@@ -732,23 +750,19 @@ begin
 
   b_in_activation_gate_vector <= FULL;
 
-  a_out_activation_gate_vector <= FULL;
-
   -- ACTIVATION TRAINER
   size_x_in_activation_trainer <= FULL;
   size_w_in_activation_trainer <= FULL;
   size_l_in_activation_trainer <= FULL;
   size_r_in_activation_trainer <= FULL;
 
-  h_in_activation_trainer <= FULL;
   x_in_activation_trainer <= FULL;
+  r_in_activation_trainer <= FULL;
+  h_in_activation_trainer <= FULL;
+
   a_in_activation_trainer <= FULL;
   i_in_activation_trainer <= FULL;
   s_in_activation_trainer <= FULL;
-
-  w_out_activation_trainer <= FULL;
-  k_out_activation_trainer <= FULL;
-  b_out_activation_trainer <= FULL;
 
   -- INTPUT GATE VECTOR
   size_x_in_input_gate_vector <= FULL;
@@ -767,8 +781,6 @@ begin
 
   b_in_input_gate_vector <= FULL;
 
-  i_out_input_gate_vector <= FULL;
-
   -- INPUT TRAINER
   size_x_in_input_trainer <= FULL;
   size_w_in_input_trainer <= FULL;
@@ -780,10 +792,6 @@ begin
   a_in_input_trainer <= FULL;
   i_in_input_trainer <= FULL;
   s_in_input_trainer <= FULL;
-
-  w_out_input_trainer <= FULL;
-  k_out_input_trainer <= FULL;
-  b_out_input_trainer <= FULL;
 
   -- OUTPUT GATE VECTOR
   size_x_in_output_gate_vector <= FULL;
@@ -802,8 +810,6 @@ begin
 
   b_in_output_gate_vector <= FULL;
 
-  o_out_output_gate_vector <= FULL;
-
   -- OUTPUT TRAINER
   size_x_in_output_trainer <= FULL;
   size_w_in_output_trainer <= FULL;
@@ -814,10 +820,6 @@ begin
   x_in_output_trainer <= FULL;
   a_in_output_trainer <= FULL;
   o_in_output_trainer <= FULL;
-
-  w_out_output_trainer <= FULL;
-  k_out_output_trainer <= FULL;
-  b_out_output_trainer <= FULL;
 
   -- FORGET GATE VECTOR
   size_x_in_forget_gate_vector <= FULL;
@@ -836,8 +838,6 @@ begin
 
   b_in_forget_gate_vector <= FULL;
 
-  f_out_forget_gate_vector <= FULL;
-
   -- FORGET TRAINER
   size_x_in_forget_trainer <= FULL;
   size_w_in_forget_trainer <= FULL;
@@ -849,10 +849,6 @@ begin
   f_in_forget_trainer <= FULL;
   s_in_forget_trainer <= FULL;
 
-  w_out_forget_trainer <= FULL;
-  k_out_forget_trainer <= FULL;
-  b_out_forget_trainer <= FULL;
-
   -- STATE GATE VECTOR
   size_l_in_state_gate_vector <= FULL;
 
@@ -861,15 +857,11 @@ begin
   f_in_state_gate_vector <= FULL;
   a_in_state_gate_vector <= FULL;
 
-  s_out_state_gate_vector <= FULL;
-
   -- HIDDEN GATE VECTOR
   size_l_in_hidden_gate_vector <= FULL;
 
   s_in_hidden_gate_vector <= FULL;
   o_in_hidden_gate_vector <= FULL;
-
-  h_out_hidden_gate_vector <= FULL;
 
   -- ACTIVATION GATE VECTOR
   activation_gate_vector : ntm_activation_gate_vector
@@ -895,8 +887,9 @@ begin
       R_IN_I_ENABLE => r_in_i_enable_activation_gate_vector,
       R_IN_K_ENABLE => r_in_k_enable_activation_gate_vector,
 
-      U_IN_ENABLE => u_in_enable_activation_gate_vector,
-      H_IN_ENABLE => h_in_enable_activation_gate_vector,
+      U_IN_L_ENABLE => u_in_l_enable_activation_gate_vector,
+      U_IN_P_ENABLE => u_in_p_enable_activation_gate_vector,
+      H_IN_ENABLE   => h_in_enable_activation_gate_vector,
 
       B_IN_ENABLE => b_in_enable_activation_gate_vector,
 
@@ -1003,8 +996,9 @@ begin
       R_IN_I_ENABLE => r_in_i_enable_input_gate_vector,
       R_IN_K_ENABLE => r_in_k_enable_input_gate_vector,
 
-      U_IN_ENABLE => u_in_enable_input_gate_vector,
-      H_IN_ENABLE => h_in_enable_input_gate_vector,
+      U_IN_L_ENABLE => u_in_l_enable_input_gate_vector,
+      U_IN_P_ENABLE => u_in_p_enable_input_gate_vector,
+      H_IN_ENABLE   => h_in_enable_input_gate_vector,
 
       B_IN_ENABLE => b_in_enable_input_gate_vector,
 
@@ -1111,8 +1105,9 @@ begin
       R_IN_I_ENABLE => r_in_i_enable_output_gate_vector,
       R_IN_K_ENABLE => r_in_k_enable_output_gate_vector,
 
-      U_IN_ENABLE => u_in_enable_output_gate_vector,
-      H_IN_ENABLE => h_in_enable_output_gate_vector,
+      U_IN_L_ENABLE => u_in_l_enable_output_gate_vector,
+      U_IN_P_ENABLE => u_in_p_enable_output_gate_vector,
+      H_IN_ENABLE   => h_in_enable_output_gate_vector,
 
       B_IN_ENABLE => b_in_enable_output_gate_vector,
 
@@ -1217,8 +1212,9 @@ begin
       R_IN_I_ENABLE => r_in_i_enable_forget_gate_vector,
       R_IN_K_ENABLE => r_in_k_enable_forget_gate_vector,
 
-      U_IN_ENABLE => u_in_enable_forget_gate_vector,
-      H_IN_ENABLE => h_in_enable_forget_gate_vector,
+      U_IN_L_ENABLE => u_in_l_enable_forget_gate_vector,
+      U_IN_P_ENABLE => u_in_p_enable_forget_gate_vector,
+      H_IN_ENABLE   => h_in_enable_forget_gate_vector,
 
       B_IN_ENABLE => b_in_enable_forget_gate_vector,
 

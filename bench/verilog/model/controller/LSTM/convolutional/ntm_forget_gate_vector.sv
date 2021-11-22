@@ -57,7 +57,8 @@ module ntm_forget_gate_vector #(
     input K_IN_K_ENABLE,  // for k in 0 to W-1
     input R_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     input R_IN_K_ENABLE,  // for k in 0 to W-1
-    input U_IN_ENABLE,  // for l in 0 to L-1 (square matrix)
+    input U_IN_L_ENABLE,  // for l in 0 to L-1
+    input U_IN_P_ENABLE,  // for p in 0 to L-1
     input H_IN_ENABLE,  // for l in 0 to L-1
     input B_IN_ENABLE,  // for l in 0 to L-1
     output reg F_OUT_ENABLE,  // for l in 0 to L-1

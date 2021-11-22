@@ -236,7 +236,7 @@ module ntm_addressing #(
 
   // wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
   // wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
-  // w(t;j) = w(t;j)*s(t;k)
+  // w(t;j) = wg(t;j)*s(t;k)
   // w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
 
   // CONTROL

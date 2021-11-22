@@ -67,8 +67,9 @@ entity ntm_input_gate_vector is
     R_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
     R_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-    U_IN_ENABLE : in std_logic;         -- for l in 0 to L-1 (square matrix)
-    H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+    U_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+    U_IN_P_ENABLE : in std_logic;       -- for p in 0 to L-1
+    H_IN_ENABLE   : in std_logic;       -- for l in 0 to L-1
 
     B_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 

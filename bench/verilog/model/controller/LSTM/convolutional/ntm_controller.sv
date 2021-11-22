@@ -144,7 +144,8 @@ module ntm_controller #(
   wire k_in_k_enable_activation_gate_vector;
   wire r_in_i_enable_activation_gate_vector;
   wire r_in_k_enable_activation_gate_vector;
-  wire u_in_enable_activation_gate_vector;
+  wire u_in_l_enable_activation_gate_vector;
+  wire u_in_p_enable_activation_gate_vector;
   wire h_in_enable_activation_gate_vector;
   wire b_in_enable_activation_gate_vector;
   wire a_out_enable_activation_gate_vector;
@@ -223,7 +224,8 @@ module ntm_controller #(
   wire k_in_k_enable_input_gate_vector;
   wire r_in_i_enable_input_gate_vector;
   wire r_in_k_enable_input_gate_vector;
-  wire u_in_enable_input_gate_vector;
+  wire u_in_l_enable_input_gate_vector;
+  wire u_in_p_enable_input_gate_vector;
   wire h_in_enable_input_gate_vector;
   wire b_in_enable_input_gate_vector;
   wire i_out_enable_input_gate_vector;
@@ -547,7 +549,8 @@ module ntm_controller #(
     .K_IN_K_ENABLE(k_in_k_enable_activation_gate_vector),
     .R_IN_I_ENABLE(r_in_i_enable_activation_gate_vector),
     .R_IN_K_ENABLE(r_in_k_enable_activation_gate_vector),
-    .U_IN_ENABLE(u_in_enable_activation_gate_vector),
+    .U_IN_L_ENABLE(u_in_l_enable_activation_gate_vector),
+    .U_IN_P_ENABLE(u_in_p_enable_activation_gate_vector),
     .H_IN_ENABLE(h_in_enable_activation_gate_vector),
     .B_IN_ENABLE(b_in_enable_activation_gate_vector),
     .A_OUT_ENABLE(a_out_enable_activation_gate_vector),
@@ -644,7 +647,8 @@ module ntm_controller #(
     .K_IN_K_ENABLE(k_in_k_enable_input_gate_vector),
     .R_IN_I_ENABLE(r_in_i_enable_input_gate_vector),
     .R_IN_K_ENABLE(r_in_k_enable_input_gate_vector),
-    .U_IN_ENABLE(u_in_enable_input_gate_vector),
+    .U_IN_L_ENABLE(u_in_l_enable_input_gate_vector),
+    .U_IN_P_ENABLE(u_in_p_enable_input_gate_vector),
     .H_IN_ENABLE(h_in_enable_input_gate_vector),
     .B_IN_ENABLE(b_in_enable_input_gate_vector),
     .I_OUT_ENABLE(i_out_enable_input_gate_vector),
@@ -741,7 +745,8 @@ module ntm_controller #(
     .K_IN_K_ENABLE(k_in_k_enable_output_gate_vector),
     .R_IN_I_ENABLE(r_in_i_enable_output_gate_vector),
     .R_IN_K_ENABLE(r_in_k_enable_output_gate_vector),
-    .U_IN_ENABLE(u_in_enable_output_gate_vector),
+    .U_IN_L_ENABLE(u_in_l_enable_output_gate_vector),
+    .U_IN_P_ENABLE(u_in_p_enable_output_gate_vector),
     .H_IN_ENABLE(h_in_enable_output_gate_vector),
     .B_IN_ENABLE(b_in_enable_output_gate_vector),
     .O_OUT_ENABLE(o_out_enable_output_gate_vector),
@@ -817,7 +822,8 @@ module ntm_controller #(
 
   // FORGET GATE VECTOR
   ntm_forget_gate_vector #(
-    .DATA_SIZE(DATA_SIZE))
+    .DATA_SIZE(DATA_SIZE)
+  )
   forget_gate_vector(
     // GLOBAL
     .CLK(CLK),
@@ -835,7 +841,8 @@ module ntm_controller #(
     .K_IN_K_ENABLE(k_in_k_enable_forget_gate_vector),
     .R_IN_I_ENABLE(r_in_i_enable_forget_gate_vector),
     .R_IN_K_ENABLE(r_in_k_enable_forget_gate_vector),
-    .U_IN_ENABLE(u_in_enable_forget_gate_vector),
+    .U_IN_L_ENABLE(u_in_l_enable_forget_gate_vector),
+    .U_IN_P_ENABLE(u_in_p_enable_forget_gate_vector),
     .H_IN_ENABLE(h_in_enable_forget_gate_vector),
     .B_IN_ENABLE(b_in_enable_forget_gate_vector),
     .F_OUT_ENABLE(f_out_enable_forget_gate_vector),

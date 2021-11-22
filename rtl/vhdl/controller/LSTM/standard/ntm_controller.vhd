@@ -164,8 +164,9 @@ architecture ntm_controller_architecture of ntm_controller is
   signal r_in_i_enable_activation_gate_vector : std_logic;
   signal r_in_k_enable_activation_gate_vector : std_logic;
 
-  signal u_in_enable_activation_gate_vector : std_logic;
-  signal h_in_enable_activation_gate_vector : std_logic;
+  signal u_in_l_enable_activation_gate_vector : std_logic;
+  signal u_in_p_enable_activation_gate_vector : std_logic;
+  signal h_in_enable_activation_gate_vector   : std_logic;
 
   signal b_in_enable_activation_gate_vector : std_logic;
 
@@ -252,8 +253,9 @@ architecture ntm_controller_architecture of ntm_controller is
   signal r_in_i_enable_input_gate_vector : std_logic;
   signal r_in_k_enable_input_gate_vector : std_logic;
 
-  signal u_in_enable_input_gate_vector : std_logic;
-  signal h_in_enable_input_gate_vector : std_logic;
+  signal u_in_l_enable_input_gate_vector : std_logic;
+  signal u_in_p_enable_input_gate_vector : std_logic;
+  signal h_in_enable_input_gate_vector   : std_logic;
 
   signal b_in_enable_input_gate_vector : std_logic;
 
@@ -340,8 +342,9 @@ architecture ntm_controller_architecture of ntm_controller is
   signal r_in_i_enable_output_gate_vector : std_logic;
   signal r_in_k_enable_output_gate_vector : std_logic;
 
-  signal u_in_enable_output_gate_vector : std_logic;
-  signal h_in_enable_output_gate_vector : std_logic;
+  signal u_in_l_enable_output_gate_vector : std_logic;
+  signal u_in_p_enable_output_gate_vector : std_logic;
+  signal h_in_enable_output_gate_vector   : std_logic;
 
   signal b_in_enable_output_gate_vector : std_logic;
 
@@ -426,8 +429,9 @@ architecture ntm_controller_architecture of ntm_controller is
   signal r_in_i_enable_forget_gate_vector : std_logic;
   signal r_in_k_enable_forget_gate_vector : std_logic;
 
-  signal u_in_enable_forget_gate_vector : std_logic;
-  signal h_in_enable_forget_gate_vector : std_logic;
+  signal u_in_l_enable_forget_gate_vector : std_logic;
+  signal u_in_p_enable_forget_gate_vector : std_logic;
+  signal h_in_enable_forget_gate_vector   : std_logic;
 
   signal b_in_enable_forget_gate_vector : std_logic;
 
@@ -625,8 +629,9 @@ begin
   r_in_i_enable_activation_gate_vector <= '0';
   r_in_k_enable_activation_gate_vector <= '0';
 
-  u_in_enable_activation_gate_vector <= '0';
-  h_in_enable_activation_gate_vector <= '0';
+  u_in_l_enable_activation_gate_vector <= '0';
+  u_in_p_enable_activation_gate_vector <= '0';
+  h_in_enable_activation_gate_vector   <= '0';
 
   b_in_enable_activation_gate_vector <= '0';
 
@@ -648,8 +653,9 @@ begin
   r_in_i_enable_input_gate_vector <= '0';
   r_in_k_enable_input_gate_vector <= '0';
 
-  u_in_enable_input_gate_vector <= '0';
-  h_in_enable_input_gate_vector <= '0';
+  u_in_l_enable_input_gate_vector <= '0';
+  u_in_p_enable_input_gate_vector <= '0';
+  h_in_enable_input_gate_vector   <= '0';
 
   b_in_enable_input_gate_vector <= '0';
 
@@ -671,8 +677,9 @@ begin
   r_in_i_enable_output_gate_vector <= '0';
   r_in_k_enable_output_gate_vector <= '0';
 
-  u_in_enable_output_gate_vector <= '0';
-  h_in_enable_output_gate_vector <= '0';
+  u_in_l_enable_output_gate_vector <= '0';
+  u_in_p_enable_output_gate_vector <= '0';
+  h_in_enable_output_gate_vector   <= '0';
 
   b_in_enable_output_gate_vector <= '0';
 
@@ -693,8 +700,9 @@ begin
   r_in_i_enable_forget_gate_vector <= '0';
   r_in_k_enable_forget_gate_vector <= '0';
 
-  u_in_enable_forget_gate_vector <= '0';
-  h_in_enable_forget_gate_vector <= '0';
+  u_in_l_enable_forget_gate_vector <= '0';
+  u_in_p_enable_forget_gate_vector <= '0';
+  h_in_enable_forget_gate_vector   <= '0';
 
   b_in_enable_forget_gate_vector <= '0';
 
@@ -895,8 +903,9 @@ begin
       R_IN_I_ENABLE => r_in_i_enable_activation_gate_vector,
       R_IN_K_ENABLE => r_in_k_enable_activation_gate_vector,
 
-      U_IN_ENABLE => u_in_enable_activation_gate_vector,
-      H_IN_ENABLE => h_in_enable_activation_gate_vector,
+      U_IN_L_ENABLE => u_in_l_enable_activation_gate_vector,
+      U_IN_P_ENABLE => u_in_p_enable_activation_gate_vector,
+      H_IN_ENABLE   => h_in_enable_activation_gate_vector,
 
       B_IN_ENABLE => b_in_enable_activation_gate_vector,
 
@@ -1003,8 +1012,9 @@ begin
       R_IN_I_ENABLE => r_in_i_enable_input_gate_vector,
       R_IN_K_ENABLE => r_in_k_enable_input_gate_vector,
 
-      U_IN_ENABLE => u_in_enable_input_gate_vector,
-      H_IN_ENABLE => h_in_enable_input_gate_vector,
+      U_IN_L_ENABLE => u_in_l_enable_input_gate_vector,
+      U_IN_P_ENABLE => u_in_p_enable_input_gate_vector,
+      H_IN_ENABLE   => h_in_enable_input_gate_vector,
 
       B_IN_ENABLE => b_in_enable_input_gate_vector,
 
@@ -1111,8 +1121,9 @@ begin
       R_IN_I_ENABLE => r_in_i_enable_output_gate_vector,
       R_IN_K_ENABLE => r_in_k_enable_output_gate_vector,
 
-      U_IN_ENABLE => u_in_enable_output_gate_vector,
-      H_IN_ENABLE => h_in_enable_output_gate_vector,
+      U_IN_L_ENABLE => u_in_l_enable_output_gate_vector,
+      U_IN_P_ENABLE => u_in_p_enable_output_gate_vector,
+      H_IN_ENABLE   => h_in_enable_output_gate_vector,
 
       B_IN_ENABLE => b_in_enable_output_gate_vector,
 
@@ -1217,8 +1228,9 @@ begin
       R_IN_I_ENABLE => r_in_i_enable_forget_gate_vector,
       R_IN_K_ENABLE => r_in_k_enable_forget_gate_vector,
 
-      U_IN_ENABLE => u_in_enable_forget_gate_vector,
-      H_IN_ENABLE => h_in_enable_forget_gate_vector,
+      U_IN_L_ENABLE => u_in_l_enable_forget_gate_vector,
+      U_IN_P_ENABLE => u_in_p_enable_forget_gate_vector,
+      H_IN_ENABLE   => h_in_enable_forget_gate_vector,
 
       B_IN_ENABLE => b_in_enable_forget_gate_vector,
 
