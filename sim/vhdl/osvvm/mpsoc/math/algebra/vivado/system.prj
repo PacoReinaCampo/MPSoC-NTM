@@ -6,8 +6,8 @@ vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_mu
 vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_inverter.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_divider.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_exponentiator.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_root.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_logarithm.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_lcm.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/scalar/ntm_scalar_gcd.vhd
 
 vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_mod.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_adder.vhd
@@ -15,8 +15,8 @@ vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_mu
 vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_inverter.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_divider.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_exponentiator.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_root.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_logarithm.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_lcm.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/vector/ntm_vector_gcd.vhd
 
 vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_mod.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_adder.vhd
@@ -24,8 +24,8 @@ vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_mu
 vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_inverter.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_divider.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_exponentiator.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_root.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_logarithm.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_lcm.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/arithmetic/matrix/ntm_matrix_gcd.vhd
 
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_determinant.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_inversion.vhd

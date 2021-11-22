@@ -85,9 +85,8 @@ architecture ntm_matrix_product_architecture of ntm_matrix_product is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    VECTOR_ADDER_STATE,                 -- STEP 1
-    VECTOR_MULTIPLIER_STATE,            -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    VECTOR_MULTIPLIER_STATE,            -- STEP 1
+    VECTOR_ADDER_STATE                  -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -96,6 +95,7 @@ architecture ntm_matrix_product_architecture of ntm_matrix_product is
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -104,29 +104,45 @@ architecture ntm_matrix_product_architecture of ntm_matrix_product is
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- SCALAR ADDER
-  -- CONTROL
-  signal start_scalar_adder : std_logic;
-  signal ready_scalar_adder : std_logic;
+  -- Internal Signals
+  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal operation_scalar_adder : std_logic;
+  -- VECTOR ADDER
+  -- CONTROL
+  signal start_vector_adder : std_logic;
+  signal ready_vector_adder : std_logic;
+
+  signal operation_vector_adder : std_logic;
+
+  signal data_a_in_enable_vector_adder : std_logic;
+  signal data_b_in_enable_vector_adder : std_logic;
+
+  signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_adder   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR MULTIPLIER
+  -- VECTOR MULTIPLIER
   -- CONTROL
-  signal start_scalar_multiplier : std_logic;
-  signal ready_scalar_multiplier : std_logic;
+  signal start_vector_multiplier : std_logic;
+  signal ready_vector_multiplier : std_logic;
+
+  signal data_a_in_enable_vector_multiplier : std_logic;
+  signal data_b_in_enable_vector_multiplier : std_logic;
+
+  signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_multiplier   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -146,23 +162,97 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      -- Control Internal
+      index_i_loop <= ZERO;
+      index_j_loop <= ZERO;
+
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
+          -- Data Outputs
+          DATA_OUT <= ZERO;
+
           -- Control Outputs
           READY <= '0';
 
+          -- Control Internal
+          index_i_loop <= ZERO;
+          index_j_loop <= ZERO;
+
           if (START = '1') then
+            -- Control Internal
+            start_vector_multiplier <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          else
+            -- Control Internal
+            start_vector_multiplier <= '0';
           end if;
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
 
+          if (data_out_enable_vector_multiplier = '1') then
+            -- Control Internal
+            if (index_i_loop = ZERO and index_j_loop = ZERO) then
+              start_vector_adder <= '1';
+            end if;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_adder <= '0';
+          end if;
+
         when VECTOR_ADDER_STATE =>      -- STEP 2
 
-        when ENDER_STATE =>             -- STEP 3
+          if (data_out_enable_vector_multiplier = '1') then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN) - unsigned(ONE))) then
+              -- Control Internal
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+              index_j_loop <= ZERO;
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            end if;
+
+            -- Data Outputs
+            DATA_OUT <= data_out_vector_multiplier;
+
+            -- Control Outputs
+            DATA_OUT_I_ENABLE <= '1';
+
+          else
+            -- Control Outputs
+            DATA_OUT_I_ENABLE <= '0';
+          end if;
+
+          if (data_out_enable_vector_multiplier = '1') then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN) - unsigned(ONE))) then
+              -- Control Outputs
+              READY <= '1';
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= STARTER_STATE;
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN) - unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(SIZE_B_J_IN) - unsigned(ONE))) then
+              -- Control Internal
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            end if;
+
+            -- Data Outputs
+            DATA_OUT <= data_out_vector_multiplier;
+
+            -- Control Outputs
+            DATA_OUT_J_ENABLE <= '1';
+          else
+            -- Control Outputs
+            DATA_OUT_J_ENABLE <= '0';
+          end if;
 
         when others =>
           -- FSM Control
@@ -171,8 +261,31 @@ begin
     end if;
   end process;
 
-  -- SCALAR ADDER
-  ntm_scalar_adder_i : ntm_scalar_adder
+  -- VECTOR ADDER
+  operation_vector_adder <= '0';
+
+  data_a_in_enable_vector_adder <= DATA_A_IN_J_ENABLE;
+  data_b_in_enable_vector_adder <= DATA_B_IN_I_ENABLE;
+
+  -- VECTOR MULTIPLIER
+  data_a_in_enable_vector_adder <= data_out_enable_vector_adder;
+  data_b_in_enable_vector_adder <= data_out_enable_vector_multiplier;
+
+  -- DATA
+  -- VECTOR ADDER
+  modulo_in_vector_adder <= FULL;
+  size_in_vector_adder   <= SIZE_A_J_IN;
+  data_a_in_vector_adder <= data_out_vector_adder;
+  data_b_in_vector_adder <= data_out_vector_multiplier;
+
+  -- VECTOR MULTIPLIER
+  modulo_in_vector_multiplier <= FULL;
+  size_in_vector_multiplier   <= SIZE_A_J_IN;
+  data_a_in_vector_multiplier <= DATA_A_IN;
+  data_b_in_vector_multiplier <= DATA_B_IN;
+
+  -- VECTOR ADDER
+  vector_adder : ntm_vector_adder
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -182,20 +295,26 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_adder,
-      READY => ready_scalar_adder,
+      START => start_vector_adder,
+      READY => ready_vector_adder,
 
-      OPERATION => operation_scalar_adder,
+      OPERATION => operation_vector_adder,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_adder,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_adder,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_adder,
-      DATA_A_IN => data_a_in_scalar_adder,
-      DATA_B_IN => data_b_in_scalar_adder,
-      DATA_OUT  => data_out_scalar_adder
+      MODULO_IN => modulo_in_vector_adder,
+      SIZE_IN   => size_in_vector_adder,
+      DATA_A_IN => data_a_in_vector_adder,
+      DATA_B_IN => data_b_in_vector_adder,
+      DATA_OUT  => data_out_vector_adder
       );
 
-  -- SCALAR MULTIPLIER
-  ntm_scalar_multiplier_i : ntm_scalar_multiplier
+  -- VECTOR MULTIPLIER
+  vector_multiplier : ntm_vector_multiplier
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -205,14 +324,20 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_multiplier,
-      READY => ready_scalar_multiplier,
+      START => start_vector_multiplier,
+      READY => ready_vector_multiplier,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplier,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplier,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_multiplier,
-      DATA_A_IN => data_a_in_scalar_multiplier,
-      DATA_B_IN => data_b_in_scalar_multiplier,
-      DATA_OUT  => data_out_scalar_multiplier
+      MODULO_IN => modulo_in_vector_multiplier,
+      SIZE_IN   => size_in_vector_multiplier,
+      DATA_A_IN => data_a_in_vector_multiplier,
+      DATA_B_IN => data_b_in_vector_multiplier,
+      DATA_OUT  => data_out_vector_multiplier
       );
 
 end architecture;
