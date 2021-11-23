@@ -102,7 +102,7 @@ architecture ntm_vector_softmax_function_architecture of ntm_vector_softmax_func
   signal index_vector_loop : std_logic_vector(DATA_SIZE-1 downto 0);
   signal index_scalar_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MULTIPLICATION
+  -- SCALAR SOFTMAX
   -- CONTROL
   signal start_scalar_softmax : std_logic;
   signal ready_scalar_softmax : std_logic;

@@ -57,8 +57,6 @@ entity ntm_matrix_softmax_function is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_INPUT : in std_logic;
-
     DATA_IN_MATRIX_ENABLE : in std_logic;
     DATA_IN_VECTOR_ENABLE : in std_logic;
     DATA_IN_SCALAR_ENABLE : in std_logic;
@@ -113,8 +111,6 @@ architecture ntm_matrix_softmax_function_architecture of ntm_matrix_softmax_func
   -- CONTROL
   signal start_vector_softmax : std_logic;
   signal ready_vector_softmax : std_logic;
-
-  signal data_input_vector_softmax : std_logic;
 
   signal data_in_vector_enable_vector_softmax : std_logic;
   signal data_in_scalar_enable_vector_softmax : std_logic;
@@ -326,8 +322,6 @@ begin
       -- CONTROL
       START => start_vector_softmax,
       READY => ready_vector_softmax,
-
-      DATA_INPUT => data_input_vector_softmax,
 
       DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_softmax,
       DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_softmax,

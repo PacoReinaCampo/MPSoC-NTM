@@ -285,7 +285,7 @@ architecture dnc_top_architecture of dnc_top is
   signal size_r_in_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal f_in_free_gates  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal f_out_free_gates : std_logic;
+  signal f_out_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- READ KEYS
   -- CONTROL
@@ -398,7 +398,7 @@ architecture dnc_top_architecture of dnc_top is
 
   -- DATA
   signal ga_in_allocation_gate  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal ga_out_allocation_gate : std_logic;
+  signal ga_out_allocation_gate : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- ERASE VECTOR
   -- CONTROL
@@ -413,7 +413,7 @@ architecture dnc_top_architecture of dnc_top is
   signal size_w_in_erase_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal e_in_erase_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal e_out_erase_vector : std_logic;
+  signal e_out_erase_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE GATE
   -- CONTROL
@@ -422,7 +422,7 @@ architecture dnc_top_architecture of dnc_top is
 
   -- DATA
   signal gw_in_write_gate  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal gw_out_write_gate : std_logic;
+  signal gw_out_write_gate : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE KEY
   -- CONTROL
@@ -887,7 +887,7 @@ begin
   size_r_in_free_gates <= FULL;
 
   f_in_free_gates  <= FULL;
-  f_out_free_gates <= '0';
+  f_out_free_gates <= FULL;
 
   -- READ KEYS
   size_r_in_read_keys <= FULL;
@@ -927,17 +927,17 @@ begin
 
   -- ALLOCATION GATE
   ga_in_allocation_gate  <= FULL;
-  ga_out_allocation_gate <= '0';
+  ga_out_allocation_gate <= FULL;
 
   -- ERASE VECTOR
   size_w_in_erase_vector <= FULL;
 
   e_in_erase_vector  <= FULL;
-  e_out_erase_vector <= '0';
+  e_out_erase_vector <= FULL;
 
   -- WRITE GATE
   gw_in_write_gate  <= FULL;
-  gw_out_write_gate <= '0';
+  gw_out_write_gate <= FULL;
 
   -- WRITE KEY
   size_w_in_write_key <= FULL;

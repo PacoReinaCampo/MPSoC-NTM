@@ -49,8 +49,6 @@ module ntm_vector_softmax_function #(
     input START,
     output reg READY,
 
-    input DATA_INPUT,
-
     input DATA_IN_VECTOR_ENABLE,
     input DATA_IN_SCALAR_ENABLE,
 
@@ -96,8 +94,6 @@ module ntm_vector_softmax_function #(
   // CONTROL
   reg start_scalar_softmax;
   wire ready_scalar_softmax;
-
-  wire data_input_scalar_softmax;
 
   reg data_in_enable_scalar_softmax;
   wire data_out_enable_scalar_softmax;
@@ -251,8 +247,6 @@ module ntm_vector_softmax_function #(
     // CONTROL
     .START(start_scalar_softmax),
     .READY(ready_scalar_softmax),
-
-    .DATA_INPUT(data_input_scalar_softmax),
 
     .DATA_IN_ENABLE(data_in_enable_scalar_softmax),
     .DATA_OUT_ENABLE(data_out_enable_scalar_softmax),

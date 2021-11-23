@@ -223,7 +223,9 @@ begin
             controller_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
           else
             -- Control Internal
-            start_scalar_multiplier <= '0';
+            start_scalar_product_ab <= '0';
+            start_scalar_product_aa <= '0';
+            start_scalar_product_bb <= '0';
           end if;
 
         when SCALAR_MULTIPLIER_STATE =>      -- STEP 2
@@ -236,7 +238,7 @@ begin
             controller_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;
           else
             -- Control Internal
-            start_scalar_divider <= '0';
+            start_scalar_multiplier <= '0';
           end if;
 
         when SCALAR_DIVIDER_STATE =>         -- STEP 3
@@ -250,6 +252,9 @@ begin
 
             -- FSM Control
             controller_ctrl_fsm_int <= STARTER_STATE;
+          else
+            -- Control Internal
+            start_scalar_multiplier <= '0';
           end if;
 
         when others =>

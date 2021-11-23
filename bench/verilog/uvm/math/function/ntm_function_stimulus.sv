@@ -232,8 +232,6 @@ module ntm_function_stimulus #(
     output SCALAR_SOFTMAX_START,
     input SCALAR_SOFTMAX_READY,
 
-    output SCALAR_SOFTMAX_DATA_INPUT,
-
     output SCALAR_SOFTMAX_DATA_IN_ENABLE,
     input SCALAR_SOFTMAX_DATA_OUT_ENABLE,
 
@@ -388,8 +386,6 @@ module ntm_function_stimulus #(
     // CONTROL
     output VECTOR_SOFTMAX_START,
     input VECTOR_SOFTMAX_READY,
-
-    output VECTOR_SOFTMAX_DATA_INPUT,
 
     output VECTOR_SOFTMAX_DATA_IN_VECTOR_ENABLE,
     output VECTOR_SOFTMAX_DATA_IN_SCALAR_ENABLE,
@@ -577,8 +573,6 @@ module ntm_function_stimulus #(
     // CONTROL
     output MATRIX_SOFTMAX_START,
     input MATRIX_SOFTMAX_READY,
-
-    output MATRIX_SOFTMAX_DATA_INPUT,
 
     output MATRIX_SOFTMAX_DATA_IN_MATRIX_ENABLE,
     output MATRIX_SOFTMAX_DATA_IN_VECTOR_ENABLE,

@@ -146,7 +146,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = (exponentiator(DATA_IN) + inverter(exponentiator(DATA_IN)))/2
+  -- DATA_OUT = (exponentiation(EULER,DATA_IN) + inverter(exponentiation(EULER,DATA_IN)))/2
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -186,7 +186,7 @@ begin
             controller_ctrl_fsm_int <= SCALAR_INVERTER_STATE;
           else
             -- Control Internal
-            start_scalar_inverter <= '0';
+            start_scalar_exponentiator <= '0';
           end if;
 
         when SCALAR_INVERTER_STATE =>        -- STEP 2
@@ -199,7 +199,7 @@ begin
             controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
           else
             -- Control Internal
-            start_scalar_adder <= '0';
+            start_scalar_inverter <= '0';
           end if;
 
         when SCALAR_ADDER_STATE =>           -- STEP 3
@@ -212,7 +212,7 @@ begin
             controller_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;
           else
             -- Control Internal
-            start_scalar_divider <= '0';
+            start_scalar_adder <= '0';
           end if;
 
         when SCALAR_DIVIDER_STATE =>         -- STEP 4
@@ -226,6 +226,9 @@ begin
 
             -- FSM Control
             controller_ctrl_fsm_int <= STARTER_STATE;
+          else
+            -- Control Internal
+            start_scalar_divider <= '0';
           end if;
 
         when others =>

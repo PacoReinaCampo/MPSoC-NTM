@@ -57,8 +57,6 @@ entity ntm_scalar_softmax_function is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_INPUT : in std_logic;
-
     DATA_IN_ENABLE : in std_logic;
 
     DATA_OUT_ENABLE : out std_logic;
@@ -83,9 +81,10 @@ architecture ntm_scalar_softmax_function_architecture of ntm_scalar_softmax_func
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    SCALAR_EXPONENTIATOR_STATE,         -- STEP 1
-    SCALAR_ADDER_STATE,                 -- STEP 2
-    SCALAR_DIVIDER_STATE                -- STEP 3
+    INPUT_STATE,                        -- STEP 1
+    SCALAR_EXPONENTIATOR_STATE,         -- STEP 2
+    SCALAR_ADDER_STATE,                 -- STEP 3
+    SCALAR_DIVIDER_STATE                -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -104,10 +103,8 @@ architecture ntm_scalar_softmax_function_architecture of ntm_scalar_softmax_func
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- Internal Signals
+  -- Control Internal
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal data_int_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR ADDER
   -- CONTROL
@@ -150,6 +147,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- DATA_OUT = exponentiation(EULER,DATA_IN)/summation(exponentiation(EULER,DATA_IN))
+
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
@@ -160,6 +159,9 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      -- Control Internal
+      index_loop <= ZERO;
+
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
@@ -168,15 +170,93 @@ begin
           READY <= '0';
 
           if (START = '1') then
+            -- Control Internal
+            index_loop <= ZERO;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= INPUT_STATE;
+          end if;
+
+        when INPUT_STATE =>                 -- STEP 1
+
+          if (DATA_IN_ENABLE = '1') then
+            -- Data Inputs
+            modulo_in_scalar_exponentiator <= MODULO_IN;
+            data_a_in_scalar_exponentiator <= EULER;
+            data_b_in_scalar_exponentiator <= DATA_IN;
+
+            -- Control Internal
+            start_scalar_exponentiator <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_EXPONENTIATOR_STATE;
           end if;
 
         when SCALAR_EXPONENTIATOR_STATE =>  -- STEP 1
 
+          if (ready_scalar_exponentiator = '1') then
+            -- Control Internal
+            start_scalar_adder <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
+          else
+            -- Control Internal
+            start_scalar_exponentiator <= '0';
+          end if;
+
         when SCALAR_ADDER_STATE =>          -- STEP 2
 
+          if (ready_scalar_adder = '1') then
+            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
+              -- Control Internal
+              start_scalar_divider <= '1';
+
+              index_loop <= ZERO;
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;
+            else
+              -- Control Internal
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE));
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= INPUT_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_scalar_adder <= '0';
+          end if;
+
         when SCALAR_DIVIDER_STATE =>        -- STEP 3
+
+          if (ready_scalar_divider = '1') then
+            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
+              -- Control Outputs
+              READY <= '1';
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE));
+
+              -- Control Internal
+              start_scalar_divider <= '1';
+            end if;
+
+            -- Data Outputs
+            DATA_OUT <= data_out_scalar_divider;
+
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '1';
+          else
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '0';
+
+            -- Control Internal
+            start_scalar_divider <= '0';
+          end if;
 
         when others =>
           -- FSM Control
@@ -188,6 +268,7 @@ begin
   -- SCALAR ADDER
   operation_scalar_adder <='0';
 
+  -- DATA
   -- SCALAR ADDER
   modulo_in_scalar_adder <= MODULO_IN;
   data_a_in_scalar_adder <= data_out_scalar_exponentiator;
@@ -195,13 +276,8 @@ begin
 
   -- SCALAR DIVIDER
   modulo_in_scalar_divider <= MODULO_IN;
-  data_a_in_scalar_divider <= data_int_scalar_exponentiator;
+  data_a_in_scalar_divider <= DATA_IN;
   data_b_in_scalar_divider <= data_out_scalar_adder;
-
-  -- SCALAR EXPONENTIATOR
-  modulo_in_scalar_exponentiator <= MODULO_IN;
-  data_a_in_scalar_exponentiator <= EULER;
-  data_b_in_scalar_exponentiator <= DATA_IN;
 
   -- SCALAR ADDER
   ntm_scalar_adder_i : ntm_scalar_adder

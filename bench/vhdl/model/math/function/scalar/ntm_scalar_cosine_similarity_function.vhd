@@ -77,10 +77,10 @@ architecture ntm_scalar_cosine_similarity_function_architecture of ntm_scalar_co
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    VECTOR_DIVIDER_STATE,               -- STEP 1
-    VECTOR_MULTIPLIER_STATE,            -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    STARTER_STATE,                -- STEP 0
+    SCALAR_PRODUCT_STATE,         -- STEP 1
+    SCALAR_MULTIPLIER_STATE,      -- STEP 2
+    SCALAR_DIVIDER_STATE          -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -96,6 +96,9 @@ architecture ntm_scalar_cosine_similarity_function_architecture of ntm_scalar_co
 
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+
+  -- Internal Signals
+  signal data_int_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR MULTIPLIER
   -- CONTROL
@@ -119,28 +122,64 @@ architecture ntm_scalar_cosine_similarity_function_architecture of ntm_scalar_co
   signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR PRODUCT
+  -- SCALAR PRODUCT AB
   -- CONTROL
-  signal start_scalar_product : std_logic;
-  signal ready_scalar_product : std_logic;
+  signal start_scalar_product_ab : std_logic;
+  signal ready_scalar_product_ab : std_logic;
 
-  signal data_a_in_enable_scalar_product : std_logic;
-  signal data_b_in_enable_scalar_product : std_logic;
+  signal data_a_in_enable_scalar_product_ab : std_logic;
+  signal data_b_in_enable_scalar_product_ab : std_logic;
 
-  signal data_out_enable_scalar_product : std_logic;
+  signal data_out_enable_scalar_product_ab : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_product  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_product_ab : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_scalar_product_ab : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_product_ab : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_product_ab : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_product_ab  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- SCALAR PRODUCT AA
+  -- CONTROL
+  signal start_scalar_product_aa : std_logic;
+  signal ready_scalar_product_aa : std_logic;
+
+  signal data_a_in_enable_scalar_product_aa : std_logic;
+  signal data_b_in_enable_scalar_product_aa : std_logic;
+
+  signal data_out_enable_scalar_product_aa : std_logic;
+
+  -- DATA
+  signal modulo_in_scalar_product_aa : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_scalar_product_aa : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_product_aa : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_product_aa : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_product_aa  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- SCALAR PRODUCT BB
+  -- CONTROL
+  signal start_scalar_product_bb : std_logic;
+  signal ready_scalar_product_bb : std_logic;
+
+  signal data_a_in_enable_scalar_product_bb : std_logic;
+  signal data_b_in_enable_scalar_product_bb : std_logic;
+
+  signal data_out_enable_scalar_product_bb : std_logic;
+
+  -- DATA
+  signal modulo_in_scalar_product_bb : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_scalar_product_bb : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_product_bb : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_product_bb : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_product_bb  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- DATA_OUT = (DATA_A_IN · DATA_B_IN)/((DATA_A_IN · DATA_A_IN)(DATA_B_IN · DATA_B_IN))
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -155,20 +194,68 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>                -- STEP 0
           -- Control Outputs
           READY <= '0';
 
           if (START = '1') then
+            -- Control Internal
+            start_scalar_product_ab <= '1';
+            start_scalar_product_aa <= '1';
+            start_scalar_product_bb <= '1';
+
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            controller_ctrl_fsm_int <= SCALAR_PRODUCT_STATE;
+          else
+            -- Control Internal
+            start_scalar_product_ab <= '0';
+            start_scalar_product_aa <= '0';
+            start_scalar_product_bb <= '0';
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
+        when SCALAR_PRODUCT_STATE =>         -- STEP 1
 
-        when VECTOR_DIVIDER_STATE =>    -- STEP 2
+          if (ready_scalar_product_ab = '1' and ready_scalar_product_aa = '1' and ready_scalar_product_bb = '1') then
+            -- Control Internal
+            start_scalar_multiplier <= '1';
 
-        when ENDER_STATE =>             -- STEP 3
+            -- FSM Control
+            controller_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
+          else
+            -- Control Internal
+            start_scalar_product_ab <= '0';
+            start_scalar_product_aa <= '0';
+            start_scalar_product_bb <= '0';
+          end if;
+
+        when SCALAR_MULTIPLIER_STATE =>      -- STEP 2
+
+          if (ready_scalar_multiplier = '1') then
+            -- Control Internal
+            start_scalar_divider <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;
+          else
+            -- Control Internal
+            start_scalar_multiplier <= '0';
+          end if;
+
+        when SCALAR_DIVIDER_STATE =>         -- STEP 3
+
+          if (ready_scalar_divider = '1') then
+            -- Data Outputs
+            DATA_OUT <= data_out_scalar_divider;
+
+            -- Control Outputs
+            READY <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= STARTER_STATE;
+          else
+            -- Control Internal
+            start_scalar_multiplier <= '0';
+          end if;
 
         when others =>
           -- FSM Control
@@ -177,8 +264,49 @@ begin
     end if;
   end process;
 
+  -- SCALAR PRODUCT AB
+  data_a_in_enable_scalar_product_ab <= DATA_IN_ENABLE;
+  data_b_in_enable_scalar_product_ab <= DATA_IN_ENABLE;
+
+  -- SCALAR PRODUCT AA
+  data_a_in_enable_scalar_product_aa <= DATA_IN_ENABLE;
+  data_b_in_enable_scalar_product_aa <= DATA_IN_ENABLE;
+
+  -- SCALAR PRODUCT BB
+  data_a_in_enable_scalar_product_bb <= DATA_IN_ENABLE;
+  data_b_in_enable_scalar_product_bb <= DATA_IN_ENABLE;
+
+  -- DATA
+  -- SCALAR MULTIPLIER AB
+  modulo_in_scalar_product_ab <= MODULO_IN;
+  length_in_scalar_product_ab <= LENGTH_IN;
+  data_a_in_scalar_product_ab <= DATA_A_IN;
+  data_b_in_scalar_product_ab <= DATA_B_IN;
+
+  -- SCALAR MULTIPLIER AA
+  modulo_in_scalar_product_ab <= MODULO_IN;
+  length_in_scalar_product_ab <= LENGTH_IN;
+  data_a_in_scalar_product_ab <= DATA_A_IN;
+  data_b_in_scalar_product_ab <= DATA_A_IN;
+
+  -- SCALAR MULTIPLIER BB
+  modulo_in_scalar_product_ab <= MODULO_IN;
+  length_in_scalar_product_ab <= LENGTH_IN;
+  data_a_in_scalar_product_ab <= DATA_B_IN;
+  data_b_in_scalar_product_ab <= DATA_B_IN;
+
   -- SCALAR MULTIPLIER
-  ntm_scalar_multiplier_i : ntm_scalar_multiplier
+  modulo_in_scalar_multiplier <= MODULO_IN;
+  data_a_in_scalar_multiplier <= data_out_scalar_product_aa;
+  data_b_in_scalar_multiplier <= data_out_scalar_product_bb;
+
+  -- SCALAR DIVIDER
+  modulo_in_scalar_divider <= MODULO_IN;
+  data_a_in_scalar_divider <= data_out_scalar_product_ab;
+  data_b_in_scalar_divider <= data_out_scalar_multiplier;
+
+  -- SCALAR MULTIPLIER
+  scalar_multiplier : ntm_scalar_multiplier
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -219,8 +347,8 @@ begin
       DATA_OUT  => data_out_scalar_divider
       );
 
-  -- SCALAR PRODUCT
-  scalar_product : ntm_scalar_product
+  -- SCALAR PRODUCT AB
+  scalar_product_ab : ntm_scalar_product
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -230,20 +358,74 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_product,
-      READY => ready_scalar_product,
+      START => start_scalar_product_ab,
+      READY => ready_scalar_product_ab,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_scalar_product,
-      DATA_B_IN_ENABLE => data_b_in_enable_scalar_product,
+      DATA_A_IN_ENABLE => data_a_in_enable_scalar_product_ab,
+      DATA_B_IN_ENABLE => data_b_in_enable_scalar_product_ab,
 
-      DATA_OUT_ENABLE => data_out_enable_scalar_product,
+      DATA_OUT_ENABLE => data_out_enable_scalar_product_ab,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_product,
-      LENGTH_IN => length_in_scalar_product,
-      DATA_A_IN => data_a_in_scalar_product,
-      DATA_B_IN => data_b_in_scalar_product,
-      DATA_OUT  => data_out_scalar_product
+      MODULO_IN => modulo_in_scalar_product_ab,
+      LENGTH_IN => length_in_scalar_product_ab,
+      DATA_A_IN => data_a_in_scalar_product_ab,
+      DATA_B_IN => data_b_in_scalar_product_ab,
+      DATA_OUT  => data_out_scalar_product_ab
+      );
+
+  -- SCALAR PRODUCT AA
+  scalar_product_aa : ntm_scalar_product
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_product_aa,
+      READY => ready_scalar_product_aa,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_scalar_product_aa,
+      DATA_B_IN_ENABLE => data_b_in_enable_scalar_product_aa,
+
+      DATA_OUT_ENABLE => data_out_enable_scalar_product_aa,
+
+      -- DATA
+      MODULO_IN => modulo_in_scalar_product_aa,
+      LENGTH_IN => length_in_scalar_product_aa,
+      DATA_A_IN => data_a_in_scalar_product_aa,
+      DATA_B_IN => data_b_in_scalar_product_aa,
+      DATA_OUT  => data_out_scalar_product_aa
+      );
+
+  -- SCALAR PRODUCT BB
+  scalar_product_bb : ntm_scalar_product
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_product_bb,
+      READY => ready_scalar_product_bb,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_scalar_product_bb,
+      DATA_B_IN_ENABLE => data_b_in_enable_scalar_product_bb,
+
+      DATA_OUT_ENABLE => data_out_enable_scalar_product_bb,
+
+      -- DATA
+      MODULO_IN => modulo_in_scalar_product_bb,
+      LENGTH_IN => length_in_scalar_product_bb,
+      DATA_A_IN => data_a_in_scalar_product_bb,
+      DATA_B_IN => data_b_in_scalar_product_bb,
+      DATA_OUT  => data_out_scalar_product_bb
       );
 
 end architecture;

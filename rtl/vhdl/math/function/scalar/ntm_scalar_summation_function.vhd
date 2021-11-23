@@ -98,7 +98,6 @@ architecture ntm_scalar_summation_function_architecture of ntm_scalar_summation_
   -- Internal Signals
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
-
   -- SCALAR ADDER
   -- CONTROL
   signal start_scalar_adder : std_logic;

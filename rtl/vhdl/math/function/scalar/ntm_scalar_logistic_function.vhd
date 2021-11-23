@@ -176,7 +176,7 @@ begin
             controller_ctrl_fsm_int <= SCALAR_FIRST_INVERTER_STATE;
           else
             -- Control Internal
-            start_scalar_inverter <= '0';
+            start_scalar_exponentiator <= '0';
           end if;
 
         when SCALAR_FIRST_INVERTER_STATE =>    -- STEP 3
@@ -193,7 +193,7 @@ begin
             controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
           else
             -- Control Internal
-            start_scalar_adder <= '0';
+            start_scalar_inverter <= '0';
           end if;
 
         when SCALAR_ADDER_STATE =>             -- STEP 4
@@ -206,7 +206,7 @@ begin
             controller_ctrl_fsm_int <= SCALAR_SECOND_INVERTER_STATE;
           else
             -- Control Internal
-            start_scalar_inverter <= '0';
+            start_scalar_adder <= '0';
           end if;
 
         when SCALAR_SECOND_INVERTER_STATE =>   -- STEP 5
@@ -224,6 +224,9 @@ begin
 
             -- FSM Control
             controller_ctrl_fsm_int <= STARTER_STATE;
+          else
+            -- Control Internal
+            start_scalar_inverter <= '0';
           end if;
 
         when others =>

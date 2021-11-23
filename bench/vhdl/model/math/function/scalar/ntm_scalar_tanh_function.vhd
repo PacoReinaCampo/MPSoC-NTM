@@ -96,7 +96,7 @@ architecture ntm_scalar_tanh_function_architecture of ntm_scalar_tanh_function i
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal data_int_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR ADDER
@@ -151,7 +151,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = (exponentiator(2*DATA_IN) - 1)/(exponentiator(2*DATA_IN) + 1)
+  -- DATA_OUT = (exponentiation(EULER,2*DATA_IN) - 1)/(exponentiation(EULER,2*DATA_IN) + 1)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -191,7 +191,7 @@ begin
             controller_ctrl_fsm_int <= SCALAR_EXPONENTIATOR_STATE;
           else
             -- Control Internal
-            start_scalar_exponentiator <= '0';
+            start_scalar_multiplier <= '0';
           end if;
 
         when SCALAR_EXPONENTIATOR_STATE =>  -- STEP 1
@@ -204,13 +204,13 @@ begin
             controller_ctrl_fsm_int <= SCALAR_FIRST_ADDER_STATE;
           else
             -- Control Internal
-            start_scalar_adder <= '0';
+            start_scalar_exponentiator <= '0';
           end if;
 
         when SCALAR_FIRST_ADDER_STATE =>    -- STEP 3
 
           -- Control Inputs
-         operation_scalar_adder <= '1';
+          operation_scalar_adder <= '0';
 
           -- Data Inputs
           modulo_in_scalar_adder <= MODULO_IN;
@@ -249,7 +249,7 @@ begin
             controller_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;
           else
             -- Control Internal
-            start_scalar_divider <= '0';
+            start_scalar_adder <= '0';
           end if;
 
         when SCALAR_DIVIDER_STATE =>        -- STEP 5
@@ -263,6 +263,9 @@ begin
 
             -- FSM Control
             controller_ctrl_fsm_int <= STARTER_STATE;
+          else
+            -- Control Internal
+            start_scalar_divider <= '0';
           end if;
 
         when others =>

@@ -94,8 +94,6 @@ architecture dnc_read_modes_architecture of dnc_read_modes is
   signal start_vector_softmax : std_logic;
   signal ready_vector_softmax : std_logic;
 
-  signal data_input_vector_softmax : std_logic;
-
   signal data_in_vector_enable_vector_softmax : std_logic;
   signal data_in_scalar_enable_vector_softmax : std_logic;
 
@@ -151,8 +149,6 @@ begin
       -- CONTROL
       START => start_vector_softmax,
       READY => ready_vector_softmax,
-
-      DATA_INPUT => data_input_vector_softmax,
 
       DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_softmax,
       DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_softmax,
