@@ -176,7 +176,7 @@ begin
             controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
           else
             -- Control Internal
-            start_scalar_adder <= '0';
+            start_vector_multiplier <= '0';
           end if;
 
         when SCALAR_ADDER_STATE =>       -- STEP 2

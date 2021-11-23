@@ -236,10 +236,10 @@ begin
             B_OUT <= data_out_matrix_product;
 
             -- Control Outputs
-            B_OUT_J_ENABLE <= '0';
+            B_OUT_J_ENABLE <= '1';
           else
             -- Control Outputs
-            B_OUT_J_ENABLE <= '1';
+            B_OUT_J_ENABLE <= '0';
           end if;
 
         when others =>

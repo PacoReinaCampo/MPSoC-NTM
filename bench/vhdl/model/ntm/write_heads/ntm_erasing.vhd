@@ -228,7 +228,7 @@ begin
             controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
           else
             -- Control Internal
-            start_vector_adder <= '0';
+            start_vector_multiplier <= '0';
           end if;
 
         when VECTOR_ADDER_STATE =>      -- STEP 2
@@ -241,7 +241,7 @@ begin
             controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
           else
             -- Control Internal
-            start_matrix_product <= '0';
+            start_vector_adder <= '0';
           end if;
 
         when MATRIX_PRODUCT_STATE =>    -- STEP 3

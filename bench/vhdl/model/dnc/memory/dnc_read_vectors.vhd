@@ -237,7 +237,7 @@ begin
             R_OUT_K_ENABLE <= '1';
           else
             -- Control Outputs
-            R_OUT_K_ENABLE <= '1';
+            R_OUT_K_ENABLE <= '0';
           end if;
 
         when others =>

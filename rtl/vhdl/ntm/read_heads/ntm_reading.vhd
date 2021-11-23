@@ -219,6 +219,9 @@ begin
 
             -- Control Outputs
             R_OUT_ENABLE <= '1';
+          else
+            -- Control Outputs
+            R_OUT_ENABLE <= '0';
           end if;
 
         when others =>
