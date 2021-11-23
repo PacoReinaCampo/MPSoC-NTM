@@ -63,7 +63,7 @@ module dnc_memory_matrix #(
     input [DATA_SIZE-1:0] M_IN,
     input [DATA_SIZE-1:0] W_IN,
     input [DATA_SIZE-1:0] V_IN,
-    input E_IN,
+    input [DATA_SIZE-1:0] E_IN,
     output reg [DATA_SIZE-1:0] M_OUT
   );
 

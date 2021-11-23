@@ -89,6 +89,11 @@ module ntm_state_gate_vector #(
   // Finite State Machine
   reg [2:0] controller_ctrl_fsm_int;
 
+  // Internal Signals
+  wire [DATA_SIZE-1:0] index_loop;
+
+  wire [DATA_SIZE-1:0] data_int_vector_multiplier;
+
   // VECTOR ADDER
   // CONTROL
   wire start_vector_adder;

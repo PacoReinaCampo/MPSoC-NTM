@@ -57,8 +57,8 @@ module dnc_write_weighting #(
     input [DATA_SIZE-1:0] SIZE_N_IN,
     input [DATA_SIZE-1:0] A_IN,
     input [DATA_SIZE-1:0] C_IN,
-    input GA_IN,
-    input GW_IN,
+    input [DATA_SIZE-1:0] GA_IN,
+    input [DATA_SIZE-1:0] GW_IN,
     output reg [DATA_SIZE-1:0] W_OUT
   );
 

@@ -75,7 +75,7 @@ entity dnc_memory_matrix is
 
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     V_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    E_IN : in std_logic;
+    E_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     M_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -108,8 +108,6 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
   constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
-
-  constant PADDING : std_logic_vector(DATA_SIZE-1 downto 1) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -251,7 +249,7 @@ begin
           modulo_in_matrix_transpose <= FULL;
           size_i_in_matrix_transpose <= SIZE_W_IN;
           size_j_in_matrix_transpose <= ONE;
-          data_in_matrix_transpose   <= PADDING & E_IN;
+          data_in_matrix_transpose   <= E_IN;
 
         when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 2
 

@@ -212,6 +212,7 @@ begin
             -- Control Internal
             start_vector_multiplier <= '1';
 
+            -- Data Internal
             data_int_vector_multiplier <= data_out_vector_multiplier;
 
             -- FSM Control

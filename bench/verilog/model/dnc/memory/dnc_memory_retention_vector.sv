@@ -57,7 +57,7 @@ module dnc_memory_retention_vector #(
     // DATA
     input [DATA_SIZE-1:0] SIZE_R_IN,
     input [DATA_SIZE-1:0] SIZE_N_IN,
-    input F_IN,
+    input [DATA_SIZE-1:0] F_IN,
     input [DATA_SIZE-1:0] W_IN,
     output reg [DATA_SIZE-1:0] PSI_OUT
   );

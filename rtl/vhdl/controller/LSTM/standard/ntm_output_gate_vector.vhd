@@ -331,7 +331,7 @@ begin
           -- Control Inputs
           operation_vector_adder <= '0';
 
-          data_a_in_enable_vector_adder <= data_out_enable_matrix_product;
+          data_a_in_enable_vector_adder <= data_out_i_enable_matrix_product;
           data_b_in_enable_vector_adder <= data_out_enable_vector_adder;
 
           -- Data Inputs

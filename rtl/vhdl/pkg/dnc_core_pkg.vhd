@@ -212,7 +212,7 @@ package dnc_core_pkg is
 
       W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       V_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      E_IN : in std_logic;
+      E_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       M_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -242,7 +242,7 @@ package dnc_core_pkg is
       SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      F_IN : in std_logic;
+      F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       PSI_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -531,8 +531,8 @@ package dnc_core_pkg is
       A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      GA_IN : in std_logic;
-      GW_IN : in std_logic;
+      GA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      GW_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );

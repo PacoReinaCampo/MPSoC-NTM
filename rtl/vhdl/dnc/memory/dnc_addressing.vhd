@@ -213,7 +213,7 @@ architecture dnc_addressing_architecture of dnc_addressing is
 
   signal w_in_memory_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
   signal v_in_memory_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal e_in_memory_matrix : std_logic;
+  signal e_in_memory_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal m_out_memory_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -233,7 +233,7 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal size_r_in_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_n_in_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal f_in_memory_retention_vector : std_logic;
+  signal f_in_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_in_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal psi_out_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -416,8 +416,8 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal a_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal c_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal ga_in_write_weighting : std_logic;
-  signal gw_in_write_weighting : std_logic;
+  signal ga_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal gw_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -547,13 +547,6 @@ begin
   w_in_i_enable_memory_retention_vector <= '0';
   w_in_j_enable_memory_retention_vector <= '0';
 
-  -- DATA
-  size_r_in_memory_retention_vector <= FULL;
-  size_n_in_memory_retention_vector <= FULL;
-
-  f_in_memory_retention_vector <= '0';
-  w_in_memory_retention_vector <= FULL;
-
   -- PRECEDENCE WEIGHTING
   w_in_enable_precedence_weighting <= '0';
   p_in_enable_precedence_weighting <= '0';
@@ -636,7 +629,7 @@ begin
 
   w_in_memory_matrix <= FULL;
   v_in_memory_matrix <= FULL;
-  e_in_memory_matrix <= '0';
+  e_in_memory_matrix <= FULL;
 
   m_out_memory_matrix <= FULL;
 
@@ -644,7 +637,7 @@ begin
   size_r_in_memory_retention_vector <= FULL;
   size_n_in_memory_retention_vector <= FULL;
 
-  f_in_memory_retention_vector <= '0';
+  f_in_memory_retention_vector <= FULL;
   w_in_memory_retention_vector <= FULL;
 
   psi_out_memory_retention_vector <= FULL;
@@ -724,8 +717,8 @@ begin
   a_in_write_weighting <= FULL;
   c_in_write_weighting <= FULL;
 
-  ga_in_write_weighting <= '0';
-  gw_in_write_weighting <= '0';
+  ga_in_write_weighting <= FULL;
+  gw_in_write_weighting <= FULL;
 
   w_out_write_weighting <= FULL;
 

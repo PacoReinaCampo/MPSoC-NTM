@@ -68,7 +68,7 @@ entity dnc_memory_retention_vector is
     SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    F_IN : in std_logic;
+    F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     PSI_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -95,8 +95,6 @@ architecture dnc_memory_retention_vector_architecture of dnc_memory_retention_ve
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
-
-  constant PADDING : std_logic_vector(DATA_SIZE-1 downto 1) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -237,7 +235,7 @@ begin
   -- VECTOR MULTIPLIER
   modulo_in_vector_multiplier <= FULL;
   size_in_vector_multiplier   <= SIZE_N_IN;
-  data_a_in_vector_multiplier <= PADDING & F_IN;
+  data_a_in_vector_multiplier <= F_IN;
   data_b_in_vector_multiplier <= W_IN;
 
   -- VECTOR ADDER

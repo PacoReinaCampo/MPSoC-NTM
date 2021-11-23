@@ -135,7 +135,7 @@ module dnc_memory_testbench;
   wire [DATA_SIZE-1:0] m_in_memory_matrix;
   wire [DATA_SIZE-1:0] w_in_memory_matrix;
   wire [DATA_SIZE-1:0] v_in_memory_matrix;
-  wire e_in_memory_matrix;
+  wire [DATA_SIZE-1:0] e_in_memory_matrix;
   wire [DATA_SIZE-1:0] m_out_memory_matrix;
 
   // MEMORY RETENTION VECTOR
@@ -151,7 +151,7 @@ module dnc_memory_testbench;
   // DATA
   wire [DATA_SIZE-1:0] size_r_in_memory_retention_vector;
   wire [DATA_SIZE-1:0] size_n_in_memory_retention_vector;
-  wire f_in_memory_retention_vector;
+  wire [DATA_SIZE-1:0] f_in_memory_retention_vector;
   wire [DATA_SIZE-1:0] w_in_memory_retention_vector;
   wire [DATA_SIZE-1:0] psi_out_memory_retention_vector;
 
@@ -314,8 +314,8 @@ module dnc_memory_testbench;
   wire [DATA_SIZE-1:0] size_n_in_write_weighting;
   wire [DATA_SIZE-1:0] a_in_write_weighting;
   wire [DATA_SIZE-1:0] c_in_write_weighting;
-  wire ga_in_write_weighting;
-  wire gw_in_write_weighting;
+  wire [DATA_SIZE-1:0] ga_in_write_weighting;
+  wire [DATA_SIZE-1:0] gw_in_write_weighting;
   wire [DATA_SIZE-1:0] w_out_write_weighting;
 
   // ADDRESSING

@@ -157,7 +157,7 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
 
   signal w_in_memory_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
   signal v_in_memory_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal e_in_memory_matrix : std_logic;
+  signal e_in_memory_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal m_out_memory_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -177,7 +177,7 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal size_r_in_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_n_in_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal f_in_memory_retention_vector : std_logic;
+  signal f_in_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_in_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal psi_out_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -376,8 +376,8 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal a_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal c_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal ga_in_write_weighting : std_logic;
-  signal gw_in_write_weighting : std_logic;
+  signal ga_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal gw_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal w_out_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
