@@ -284,6 +284,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal start_scalar_softmax : std_logic;
   signal ready_scalar_softmax : std_logic;
 
+  signal data_input_scalar_softmax : std_logic;
+
   signal data_in_enable_scalar_softmax : std_logic;
 
   signal data_out_enable_scalar_softmax : std_logic;
@@ -462,6 +464,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   -- CONTROL
   signal start_vector_softmax : std_logic;
   signal ready_vector_softmax : std_logic;
+
+  signal data_input_vector_softmax : std_logic;
 
   signal data_in_vector_enable_vector_softmax : std_logic;
   signal data_in_scalar_enable_vector_softmax : std_logic;
@@ -678,6 +682,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   -- CONTROL
   signal start_matrix_softmax : std_logic;
   signal ready_matrix_softmax : std_logic;
+
+  signal data_input_matrix_softmax : std_logic;
 
   signal data_in_matrix_enable_matrix_softmax : std_logic;
   signal data_in_vector_enable_matrix_softmax : std_logic;
@@ -946,6 +952,8 @@ begin
       SCALAR_SOFTMAX_START => start_scalar_softmax,
       SCALAR_SOFTMAX_READY => ready_scalar_softmax,
 
+      SCALAR_SOFTMAX_DATA_INPUT => data_input_scalar_softmax,
+
       SCALAR_SOFTMAX_DATA_IN_ENABLE => data_in_enable_scalar_softmax,
 
       SCALAR_SOFTMAX_DATA_OUT_ENABLE => data_out_enable_scalar_softmax,
@@ -1109,6 +1117,8 @@ begin
       -- CONTROL
       VECTOR_SOFTMAX_START => start_vector_softmax,
       VECTOR_SOFTMAX_READY => ready_vector_softmax,
+
+      VECTOR_SOFTMAX_DATA_INPUT => data_input_vector_softmax,
 
       VECTOR_SOFTMAX_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_softmax,
       VECTOR_SOFTMAX_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_softmax,
@@ -1307,6 +1317,8 @@ begin
       -- CONTROL
       MATRIX_SOFTMAX_START => start_matrix_softmax,
       MATRIX_SOFTMAX_READY => ready_matrix_softmax,
+
+      MATRIX_SOFTMAX_DATA_INPUT => data_input_matrix_softmax,
 
       MATRIX_SOFTMAX_DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_softmax,
       MATRIX_SOFTMAX_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_softmax,
@@ -1575,6 +1587,8 @@ begin
         -- CONTROL
         START => start_scalar_softmax,
         READY => ready_scalar_softmax,
+
+        DATA_INPUT => data_input_scalar_softmax,
 
         DATA_IN_ENABLE => data_in_enable_scalar_softmax,
 
@@ -1886,6 +1900,8 @@ begin
         -- CONTROL
         START => start_vector_softmax,
         READY => ready_vector_softmax,
+
+        DATA_INPUT => data_input_vector_softmax,
 
         DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_softmax,
         DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_softmax,
@@ -2235,6 +2251,8 @@ begin
         -- CONTROL
         START => start_matrix_softmax,
         READY => ready_matrix_softmax,
+
+        DATA_INPUT => data_input_matrix_softmax,
 
         DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_softmax,
         DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_softmax,

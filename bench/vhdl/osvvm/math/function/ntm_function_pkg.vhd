@@ -369,6 +369,8 @@ package ntm_function_pkg is
       SCALAR_SOFTMAX_START : out std_logic;
       SCALAR_SOFTMAX_READY : in  std_logic;
 
+      SCALAR_SOFTMAX_DATA_INPUT : out std_logic;
+
       SCALAR_SOFTMAX_DATA_IN_ENABLE : out std_logic;
 
       SCALAR_SOFTMAX_DATA_OUT_ENABLE : in std_logic;
@@ -532,6 +534,8 @@ package ntm_function_pkg is
       -- CONTROL
       VECTOR_SOFTMAX_START : out std_logic;
       VECTOR_SOFTMAX_READY : in  std_logic;
+
+      VECTOR_SOFTMAX_DATA_INPUT : out std_logic;
 
       VECTOR_SOFTMAX_DATA_IN_VECTOR_ENABLE : out std_logic;
       VECTOR_SOFTMAX_DATA_IN_SCALAR_ENABLE : out std_logic;
@@ -730,6 +734,8 @@ package ntm_function_pkg is
       -- CONTROL
       MATRIX_SOFTMAX_START : out std_logic;
       MATRIX_SOFTMAX_READY : in  std_logic;
+
+      MATRIX_SOFTMAX_DATA_INPUT : out std_logic;
 
       MATRIX_SOFTMAX_DATA_IN_MATRIX_ENABLE : out std_logic;
       MATRIX_SOFTMAX_DATA_IN_VECTOR_ENABLE : out std_logic;

@@ -57,6 +57,8 @@ entity ntm_scalar_softmax_function is
     START : in  std_logic;
     READY : out std_logic;
 
+    DATA_INPUT : in std_logic;
+
     DATA_IN_ENABLE : in std_logic;
 
     DATA_OUT_ENABLE : out std_logic;
@@ -81,9 +83,9 @@ architecture ntm_scalar_softmax_function_architecture of ntm_scalar_softmax_func
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    VECTOR_ADDER_STATE,                 -- STEP 1
-    VECTOR_DIVIDER_STATE,               -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    SCALAR_EXPONENTIATOR_STATE,         -- STEP 1
+    SCALAR_ADDER_STATE,                 -- STEP 2
+    SCALAR_DIVIDER_STATE                -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -93,12 +95,19 @@ architecture ntm_scalar_softmax_function_architecture of ntm_scalar_softmax_func
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
 
+  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
 
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+
+  -- Internal Signals
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_int_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR ADDER
   -- CONTROL
@@ -154,20 +163,20 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>               -- STEP 0
           -- Control Outputs
           READY <= '0';
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_DIVIDER_STATE;
+            controller_ctrl_fsm_int <= SCALAR_EXPONENTIATOR_STATE;
           end if;
 
-        when VECTOR_DIVIDER_STATE =>    -- STEP 1
+        when SCALAR_EXPONENTIATOR_STATE =>  -- STEP 1
 
-        when VECTOR_ADDER_STATE =>      -- STEP 2
+        when SCALAR_ADDER_STATE =>          -- STEP 2
 
-        when ENDER_STATE =>             -- STEP 3
+        when SCALAR_DIVIDER_STATE =>        -- STEP 3
 
         when others =>
           -- FSM Control
@@ -175,6 +184,24 @@ begin
       end case;
     end if;
   end process;
+
+  -- SCALAR ADDER
+  operation_scalar_adder <='0';
+
+  -- SCALAR ADDER
+  modulo_in_scalar_adder <= MODULO_IN;
+  data_a_in_scalar_adder <= data_out_scalar_exponentiator;
+  data_b_in_scalar_adder <= data_out_scalar_adder;
+
+  -- SCALAR DIVIDER
+  modulo_in_scalar_divider <= MODULO_IN;
+  data_a_in_scalar_divider <= data_int_scalar_exponentiator;
+  data_b_in_scalar_divider <= data_out_scalar_adder;
+
+  -- SCALAR EXPONENTIATOR
+  modulo_in_scalar_exponentiator <= MODULO_IN;
+  data_a_in_scalar_exponentiator <= EULER;
+  data_b_in_scalar_exponentiator <= DATA_IN;
 
   -- SCALAR ADDER
   ntm_scalar_adder_i : ntm_scalar_adder

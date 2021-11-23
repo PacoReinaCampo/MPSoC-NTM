@@ -49,6 +49,8 @@ module ntm_scalar_softmax_function #(
     input START,
     output reg READY,
 
+    input DATA_INPUT,
+
     input DATA_IN_ENABLE,
     output reg DATA_OUT_ENABLE,
 

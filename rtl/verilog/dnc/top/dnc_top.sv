@@ -243,16 +243,16 @@ module dnc_top #(
 
   // FREE GATES
   // CONTROL
-  wire f_in_enable_free_gates;
-  wire f_out_enable_free_gates;
-
   wire start_free_gates;
   wire ready_free_gates;
+
+  wire f_in_enable_free_gates;
+  wire f_out_enable_free_gates;
 
   // DATA
   wire [DATA_SIZE-1:0] size_r_in_free_gates;
   wire [DATA_SIZE-1:0] f_in_free_gates;
-  wire f_out_free_gates;
+  wire [DATA_SIZE-1:0] f_out_free_gates;
 
   // READ KEYS
   // CONTROL
@@ -353,7 +353,7 @@ module dnc_top #(
 
   // DATA
   wire [DATA_SIZE-1:0] ga_in_allocation_gate;
-  wire ga_out_allocation_gate;
+  wire [DATA_SIZE-1:0] ga_out_allocation_gate;
 
   // ERASE VECTOR
   // CONTROL
@@ -366,7 +366,7 @@ module dnc_top #(
   // DATA
   wire [DATA_SIZE-1:0] size_w_in_erase_vector;
   wire [DATA_SIZE-1:0] e_in_erase_vector;
-  wire e_out_erase_vector;
+  wire [DATA_SIZE-1:0] e_out_erase_vector;
 
   // WRITE GATE
   // CONTROL
@@ -375,7 +375,7 @@ module dnc_top #(
 
   // DATA
   wire [DATA_SIZE-1:0] gw_in_write_gate;
-  wire gw_out_write_gate;
+  wire [DATA_SIZE-1:0] gw_out_write_gate;
 
   // WRITE KEY
   // CONTROL

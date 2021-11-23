@@ -170,6 +170,8 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
   signal start_vector_softmax : std_logic;
   signal ready_vector_softmax : std_logic;
 
+  signal data_input_vector_softmax : std_logic;
+
   signal data_in_vector_enable_vector_softmax : std_logic;
   signal data_in_scalar_enable_vector_softmax : std_logic;
 
@@ -189,7 +191,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- C(M,k,beta)[i] = softmax(exponentiation(e,cosine(k,M)·beta))[i]
+  -- C(M,k,beta)[i] = softmax(exponentiation(EULER,cosine(k,M)·beta))[i]
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -395,6 +397,8 @@ begin
       -- CONTROL
       START => start_vector_softmax,
       READY => ready_vector_softmax,
+
+      DATA_INPUT => data_input_vector_softmax,
 
       DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_softmax,
       DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_softmax,

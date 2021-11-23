@@ -1108,6 +1108,8 @@ package ntm_math_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
+      DATA_INPUT : in std_logic;
+
       DATA_IN_ENABLE : in std_logic;
 
       DATA_OUT_ENABLE : out std_logic;
@@ -1393,6 +1395,8 @@ package ntm_math_pkg is
       -- CONTROL
       START : in  std_logic;
       READY : out std_logic;
+
+      DATA_INPUT : in std_logic;
 
       DATA_IN_VECTOR_ENABLE : in std_logic;
       DATA_IN_SCALAR_ENABLE : in std_logic;
@@ -1716,6 +1720,8 @@ package ntm_math_pkg is
       -- CONTROL
       START : in  std_logic;
       READY : out std_logic;
+
+      DATA_INPUT : in std_logic;
 
       DATA_IN_MATRIX_ENABLE : in std_logic;
       DATA_IN_VECTOR_ENABLE : in std_logic;

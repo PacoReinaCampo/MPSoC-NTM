@@ -79,7 +79,7 @@ entity dnc_top_stimulus is
     DNC_TOP_K_IN_K_ENABLE : out std_logic;
 
     DNC_TOP_U_IN_L_ENABLE : out std_logic;
-    DNC_TOP_U_IN_X_ENABLE : out std_logic;
+    DNC_TOP_U_IN_P_ENABLE : out std_logic;
 
     DNC_TOP_B_IN_ENABLE : out std_logic;
 

@@ -189,7 +189,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- C(M,k,beta)[i] = softmax(exponentiation(e,cosine(k,M)·beta))[i]
+  -- C(M,k,beta)[i] = softmax(exponentiation(EULER,cosine(k,M)·beta))[i]
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
