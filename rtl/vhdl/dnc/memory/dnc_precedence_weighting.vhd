@@ -252,6 +252,14 @@ begin
     end if;
   end process;
 
+  -- VECTOR SUMMATION
+  data_in_vector_enable_vector_summation <= '0';
+  data_in_scalar_enable_vector_summation <= W_IN_ENABLE;
+
+  -- VECTOR MULTIPLIER
+  data_a_in_enable_vector_multiplier <= data_out_enable_vector_adder;
+  data_b_in_enable_vector_multiplier <= P_IN_ENABLE;
+
   -- DATA
   -- VECTOR SUMMATION
   modulo_in_vector_summation <= FULL;

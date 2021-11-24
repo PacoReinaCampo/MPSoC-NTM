@@ -79,8 +79,8 @@ architecture ntm_scalar_product_architecture of ntm_scalar_product is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    SCALAR_ADDER_STATE,                 -- STEP 1
-    VECTOR_MULTIPLIER_STATE             -- STEP 2
+    VECTOR_MULTIPLIER_STATE,            -- STEP 1
+    SCALAR_ADDER_STATE                  -- STEP 2
     );
 
   -----------------------------------------------------------------------

@@ -249,6 +249,16 @@ begin
     end if;
   end process;
 
+  -- MATRIX TRANSPOSE
+  data_in_i_enable_matrix_transpose <= L_IN_G_ENABLE;
+  data_in_j_enable_matrix_transpose <= L_IN_J_ENABLE;
+
+  -- MATRIX PRODUCT
+  data_a_in_i_enable_matrix_product <= data_out_i_enable_matrix_transpose;
+  data_a_in_j_enable_matrix_product <= data_out_j_enable_matrix_transpose;
+  data_b_in_i_enable_matrix_product <= W_IN_J_ENABLE;
+  data_b_in_j_enable_matrix_product <= '0';
+
   -- DATA
   -- MATRIX TRANSPOSE
   modulo_in_matrix_transpose <= FULL;

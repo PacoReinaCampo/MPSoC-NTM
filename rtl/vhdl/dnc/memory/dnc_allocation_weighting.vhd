@@ -266,7 +266,7 @@ begin
 
   -- VECTOR MULTIPLICATION
   modulo_in_vector_multiplication <= FULL;
-  length_in_vector_multiplication <= FULL;
+  length_in_vector_multiplication <= SIZE_N_IN;
   size_in_vector_multiplication   <= SIZE_N_IN;
   data_in_vector_multiplication   <= phi_out_sort_vector;
 
