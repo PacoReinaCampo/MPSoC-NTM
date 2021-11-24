@@ -103,7 +103,7 @@ architecture dnc_memory_retention_vector_architecture of dnc_memory_retention_ve
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- Internal Signals
+  -- Control Internal
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR MULTIPLICATION

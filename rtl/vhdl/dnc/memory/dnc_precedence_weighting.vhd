@@ -102,7 +102,7 @@ architecture dnc_precedence_weighting_architecture of dnc_precedence_weighting i
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- Internal Signals
+  -- Control Internal
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR SUMMATION

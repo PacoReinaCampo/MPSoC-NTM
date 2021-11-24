@@ -106,7 +106,7 @@ architecture dnc_write_weighting_architecture of dnc_write_weighting is
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- Internal Signals
+  -- Control Internal
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
