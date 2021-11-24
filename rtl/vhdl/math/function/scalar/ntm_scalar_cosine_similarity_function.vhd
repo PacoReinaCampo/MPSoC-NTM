@@ -77,10 +77,10 @@ architecture ntm_scalar_cosine_similarity_function_architecture of ntm_scalar_co
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,                -- STEP 0
-    SCALAR_PRODUCT_STATE,         -- STEP 1
-    SCALAR_MULTIPLIER_STATE,      -- STEP 2
-    SCALAR_DIVIDER_STATE          -- STEP 3
+    STARTER_STATE,                      -- STEP 0
+    SCALAR_PRODUCT_STATE,               -- STEP 1
+    SCALAR_MULTIPLIER_STATE,            -- STEP 2
+    SCALAR_DIVIDER_STATE                -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -194,7 +194,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>                -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -213,7 +213,7 @@ begin
             start_scalar_product_bb <= '0';
           end if;
 
-        when SCALAR_PRODUCT_STATE =>         -- STEP 1
+        when SCALAR_PRODUCT_STATE =>    -- STEP 1
 
           if (ready_scalar_product_ab = '1' and ready_scalar_product_aa = '1' and ready_scalar_product_bb = '1') then
             -- Control Internal
@@ -228,7 +228,7 @@ begin
             start_scalar_product_bb <= '0';
           end if;
 
-        when SCALAR_MULTIPLIER_STATE =>      -- STEP 2
+        when SCALAR_MULTIPLIER_STATE =>  -- STEP 2
 
           if (ready_scalar_multiplier = '1') then
             -- Control Internal
@@ -241,7 +241,7 @@ begin
             start_scalar_multiplier <= '0';
           end if;
 
-        when SCALAR_DIVIDER_STATE =>         -- STEP 3
+        when SCALAR_DIVIDER_STATE =>    -- STEP 3
 
           if (ready_scalar_divider = '1') then
             -- Data Outputs
@@ -254,7 +254,7 @@ begin
             controller_ctrl_fsm_int <= STARTER_STATE;
           else
             -- Control Internal
-            start_scalar_multiplier <= '0';
+            start_scalar_divider <= '0';
           end if;
 
         when others =>

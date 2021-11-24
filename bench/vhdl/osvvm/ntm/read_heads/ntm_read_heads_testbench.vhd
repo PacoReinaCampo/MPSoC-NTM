@@ -154,7 +154,7 @@ begin
 
       M_IN_J_ENABLE => m_in_j_enable_reading,
       M_IN_K_ENABLE => m_in_k_enable_reading,
-      
+
       R_OUT_ENABLE => r_out_enable_reading,
 
       -- DATA

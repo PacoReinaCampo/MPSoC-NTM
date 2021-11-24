@@ -87,7 +87,7 @@ entity ntm_convolutional_fnn_stimulus is
     NTM_CONVOLUTIONAL_FNN_B_OUT_ENABLE   : in  std_logic;
     NTM_CONVOLUTIONAL_FNN_H_OUT_ENABLE   : in  std_logic;
 
-      -- DATA
+    -- DATA
     NTM_CONVOLUTIONAL_FNN_SIZE_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_CONVOLUTIONAL_FNN_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_CONVOLUTIONAL_FNN_SIZE_L_IN : out std_logic_vector(DATA_SIZE-1 downto 0);

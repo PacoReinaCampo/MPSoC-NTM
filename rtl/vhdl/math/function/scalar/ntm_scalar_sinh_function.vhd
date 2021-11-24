@@ -71,11 +71,11 @@ architecture ntm_scalar_sinh_function_architecture of ntm_scalar_sinh_function i
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,                -- STEP 0
-    SCALAR_EXPONENTIATOR_STATE,   -- STEP 1
-    SCALAR_INVERTER_STATE,        -- STEP 2
-    SCALAR_ADDER_STATE,           -- STEP 3
-    SCALAR_DIVIDER_STATE          -- STEP 4
+    STARTER_STATE,                      -- STEP 0
+    SCALAR_EXPONENTIATOR_STATE,         -- STEP 1
+    SCALAR_INVERTER_STATE,              -- STEP 2
+    SCALAR_ADDER_STATE,                 -- STEP 3
+    SCALAR_DIVIDER_STATE                -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -161,7 +161,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>                -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -176,7 +176,7 @@ begin
             start_scalar_exponentiator <= '0';
           end if;
 
-        when SCALAR_EXPONENTIATOR_STATE =>   -- STEP 1
+        when SCALAR_EXPONENTIATOR_STATE =>  -- STEP 1
 
           if (ready_scalar_exponentiator = '1') then
             -- Control Internal
@@ -189,7 +189,7 @@ begin
             start_scalar_exponentiator <= '0';
           end if;
 
-        when SCALAR_INVERTER_STATE =>        -- STEP 2
+        when SCALAR_INVERTER_STATE =>   -- STEP 2
 
           if (ready_scalar_inverter = '1') then
             -- Control Internal
@@ -202,7 +202,7 @@ begin
             start_scalar_inverter <= '0';
           end if;
 
-        when SCALAR_ADDER_STATE =>           -- STEP 3
+        when SCALAR_ADDER_STATE =>      -- STEP 3
 
           if (ready_scalar_adder = '1') then
             -- Control Internal
@@ -215,7 +215,7 @@ begin
             start_scalar_adder <= '0';
           end if;
 
-        when SCALAR_DIVIDER_STATE =>         -- STEP 4
+        when SCALAR_DIVIDER_STATE =>    -- STEP 4
 
           if (ready_scalar_divider = '1') then
             -- Data Outputs

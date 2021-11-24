@@ -49,8 +49,14 @@ module ntm_scalar_differentiation_function #(
     input START,
     output reg READY,
 
+    input DATA_IN_ENABLE,
+
+    output reg DATA_OUT_ENABLE,
+
     // DATA
     input [DATA_SIZE-1:0] MODULO_IN,
+    input [DATA_SIZE-1:0] PERIOD_IN,
+    input [DATA_SIZE-1:0] LENGTH_IN,
     input [DATA_SIZE-1:0] DATA_IN,
     output reg [DATA_SIZE-1:0] DATA_OUT
   );

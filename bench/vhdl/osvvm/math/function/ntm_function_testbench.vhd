@@ -219,8 +219,13 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal start_scalar_differentiation : std_logic;
   signal ready_scalar_differentiation : std_logic;
 
+  signal data_in_enable_scalar_differentiation  : std_logic;
+  signal data_out_enable_scalar_differentiation : std_logic;
+
   -- DATA
   signal modulo_in_scalar_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_scalar_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_scalar_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -362,13 +367,17 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal start_vector_differentiation : std_logic;
   signal ready_vector_differentiation : std_logic;
 
-  signal data_in_enable_vector_differentiation : std_logic;
+  signal data_in_vector_enable_vector_differentiation : std_logic;
+  signal data_in_scalar_enable_vector_differentiation : std_logic;
 
-  signal data_out_enable_vector_differentiation : std_logic;
+  signal data_out_vector_enable_vector_differentiation : std_logic;
+  signal data_out_scalar_enable_vector_differentiation : std_logic;
 
   -- DATA
   signal modulo_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal period_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal lenth_in_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -568,16 +577,20 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal start_matrix_differentiation : std_logic;
   signal ready_matrix_differentiation : std_logic;
 
-  signal data_in_i_enable_matrix_differentiation : std_logic;
-  signal data_in_j_enable_matrix_differentiation : std_logic;
+  signal data_in_matrix_enable_matrix_differentiation : std_logic;
+  signal data_in_vector_enable_matrix_differentiation : std_logic;
+  signal data_in_scalar_enable_matrix_differentiation : std_logic;
 
-  signal data_out_i_enable_matrix_differentiation : std_logic;
-  signal data_out_j_enable_matrix_differentiation : std_logic;
+  signal data_out_matrix_enable_matrix_differentiation : std_logic;
+  signal data_out_vector_enable_matrix_differentiation : std_logic;
+  signal data_out_scalar_enable_matrix_differentiation : std_logic;
 
   -- DATA
   signal modulo_in_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_j_in_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal period_in_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -1439,8 +1452,14 @@ begin
         START => start_scalar_differentiation,
         READY => ready_scalar_differentiation,
 
+        DATA_IN_ENABLE => data_in_enable_scalar_differentiation,
+
+        DATA_OUT_ENABLE => data_out_enable_scalar_differentiation,
+
         -- DATA
         MODULO_IN => modulo_in_scalar_differentiation,
+        PERIOD_IN => period_in_scalar_differentiation,
+        LENGTH_IN => length_in_scalar_differentiation,
         DATA_IN   => data_in_scalar_differentiation,
         DATA_OUT  => data_out_scalar_differentiation
         );
@@ -1722,13 +1741,17 @@ begin
         START => start_vector_differentiation,
         READY => ready_vector_differentiation,
 
-        DATA_IN_ENABLE => data_in_enable_vector_differentiation,
+        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_differentiation,
+        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_differentiation,
 
-        DATA_OUT_ENABLE => data_out_enable_vector_differentiation,
+        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_differentiation,
+        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_differentiation,
 
         -- DATA
         MODULO_IN => modulo_in_vector_differentiation,
         SIZE_IN   => size_in_vector_differentiation,
+        PERIOD_IN => length_in_vector_differentiation,
+        LENGTH_IN => length_in_vector_differentiation,
         DATA_IN   => data_in_vector_differentiation,
         DATA_OUT  => data_out_vector_differentiation
         );
@@ -2053,16 +2076,20 @@ begin
         START => start_matrix_differentiation,
         READY => ready_matrix_differentiation,
 
-        DATA_IN_I_ENABLE => data_in_i_enable_matrix_differentiation,
-        DATA_IN_J_ENABLE => data_in_j_enable_matrix_differentiation,
+        DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_differentiation,
+        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_differentiation,
+        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_differentiation,
 
-        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_differentiation,
-        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_differentiation,
+        DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_differentiation,
+        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_differentiation,
+        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_differentiation,
 
         -- DATA
         MODULO_IN => modulo_in_matrix_differentiation,
         SIZE_I_IN => size_i_in_matrix_differentiation,
         SIZE_J_IN => size_j_in_matrix_differentiation,
+        PERIOD_IN => period_in_matrix_differentiation,
+        LENGTH_IN => length_in_matrix_differentiation,
         DATA_IN   => data_in_matrix_differentiation,
         DATA_OUT  => data_out_matrix_differentiation
         );

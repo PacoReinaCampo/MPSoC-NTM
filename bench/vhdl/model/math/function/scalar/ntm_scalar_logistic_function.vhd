@@ -151,7 +151,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>                  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -166,7 +166,7 @@ begin
             start_scalar_exponentiator <= '0';
           end if;
 
-        when SCALAR_EXPONENTIATOR_STATE =>     -- STEP 1
+        when SCALAR_EXPONENTIATOR_STATE =>  -- STEP 1
 
           if (ready_scalar_exponentiator = '1') then
             -- Control Internal
@@ -179,7 +179,7 @@ begin
             start_scalar_exponentiator <= '0';
           end if;
 
-        when SCALAR_FIRST_INVERTER_STATE =>    -- STEP 3
+        when SCALAR_FIRST_INVERTER_STATE =>  -- STEP 3
 
           -- Data Inputs
           modulo_in_scalar_inverter <= MODULO_IN;
@@ -196,7 +196,7 @@ begin
             start_scalar_inverter <= '0';
           end if;
 
-        when SCALAR_ADDER_STATE =>             -- STEP 4
+        when SCALAR_ADDER_STATE =>      -- STEP 4
 
           if (ready_scalar_adder = '1') then
             -- Control Internal
@@ -209,7 +209,7 @@ begin
             start_scalar_adder <= '0';
           end if;
 
-        when SCALAR_SECOND_INVERTER_STATE =>   -- STEP 5
+        when SCALAR_SECOND_INVERTER_STATE =>  -- STEP 5
 
           -- Data Inputs
           modulo_in_scalar_inverter <= MODULO_IN;

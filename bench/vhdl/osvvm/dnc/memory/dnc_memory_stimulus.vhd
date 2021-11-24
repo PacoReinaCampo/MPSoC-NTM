@@ -76,9 +76,9 @@ entity dnc_memory_stimulus is
 
     DNC_MEMORY_BETA_READ_IN_ENABLE : out std_logic;  -- for i out 0 to R-1
 
-    DNC_MEMORY_F_READ_IN_ENABLE : out std_logic;    -- for i out 0 to R-1
+    DNC_MEMORY_F_READ_IN_ENABLE : out std_logic;  -- for i out 0 to R-1
 
-    DNC_MEMORY_PI_READ_IN_ENABLE : out std_logic;   -- for i out 0 to R-1
+    DNC_MEMORY_PI_READ_IN_ENABLE : out std_logic;  -- for i out 0 to R-1
 
     DNC_MEMORY_K_WRITE_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1
     DNC_MEMORY_E_WRITE_IN_K_ENABLE : out std_logic;  -- for k out 0 to W-1

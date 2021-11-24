@@ -56,7 +56,7 @@ entity ntm_read_heads_stimulus is
     W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
     L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
-    
+
     -- FUNCTIONALITY
     STIMULUS_NTM_READ_HEADS_TEST   : boolean := false;
     STIMULUS_NTM_READ_HEADS_CASE_0 : boolean := false;

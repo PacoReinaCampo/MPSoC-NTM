@@ -71,12 +71,12 @@ architecture ntm_scalar_tanh_function_architecture of ntm_scalar_tanh_function i
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,               -- STEP 0
-    SCALAR_MULTIPLIER_STATE,     -- STEP 1
-    SCALAR_EXPONENTIATOR_STATE,  -- STEP 2
-    SCALAR_FIRST_ADDER_STATE,    -- STEP 3
-    SCALAR_SECOND_ADDER_STATE,   -- STEP 4
-    SCALAR_DIVIDER_STATE         -- STEP 5
+    STARTER_STATE,                      -- STEP 0
+    SCALAR_MULTIPLIER_STATE,            -- STEP 1
+    SCALAR_EXPONENTIATOR_STATE,         -- STEP 2
+    SCALAR_FIRST_ADDER_STATE,           -- STEP 3
+    SCALAR_SECOND_ADDER_STATE,          -- STEP 4
+    SCALAR_DIVIDER_STATE                -- STEP 5
     );
 
   -----------------------------------------------------------------------
@@ -166,7 +166,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>               -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -181,7 +181,7 @@ begin
             start_scalar_multiplier <= '0';
           end if;
 
-        when SCALAR_MULTIPLIER_STATE =>     -- STEP 1
+        when SCALAR_MULTIPLIER_STATE =>  -- STEP 1
 
           if (ready_scalar_multiplier = '1') then
             -- Control Internal
@@ -207,7 +207,7 @@ begin
             start_scalar_exponentiator <= '0';
           end if;
 
-        when SCALAR_FIRST_ADDER_STATE =>    -- STEP 3
+        when SCALAR_FIRST_ADDER_STATE =>  -- STEP 3
 
           -- Control Inputs
           operation_scalar_adder <= '0';
@@ -228,10 +228,10 @@ begin
             start_scalar_adder <= '0';
           end if;
 
-        when SCALAR_SECOND_ADDER_STATE =>   -- STEP 4
+        when SCALAR_SECOND_ADDER_STATE =>  -- STEP 4
 
           -- Control Inputs
-         operation_scalar_adder <= '0';
+          operation_scalar_adder <= '0';
 
           -- Data Inputs
           modulo_in_scalar_adder <= MODULO_IN;
@@ -252,7 +252,7 @@ begin
             start_scalar_adder <= '0';
           end if;
 
-        when SCALAR_DIVIDER_STATE =>        -- STEP 5
+        when SCALAR_DIVIDER_STATE =>    -- STEP 5
 
           if (ready_scalar_divider = '1') then
             -- Data Outputs

@@ -57,8 +57,14 @@ entity ntm_scalar_differentiation_function is
     START : in  std_logic;
     READY : out std_logic;
 
+    DATA_IN_ENABLE : in std_logic;
+
+    DATA_OUT_ENABLE : out std_logic;
+
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -145,7 +151,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>            -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -156,9 +162,9 @@ begin
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
 
-        when VECTOR_ADDER_STATE =>       -- STEP 2
+        when VECTOR_ADDER_STATE =>      -- STEP 2
 
-        when ENDER_STATE =>              -- STEP 3
+        when ENDER_STATE =>             -- STEP 3
 
         when others =>
           -- FSM Control

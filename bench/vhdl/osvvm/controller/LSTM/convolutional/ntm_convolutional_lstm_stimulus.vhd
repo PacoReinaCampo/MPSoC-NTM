@@ -85,7 +85,7 @@ entity ntm_convolutional_lstm_stimulus is
     NTM_CONVOLUTIONAL_LSTM_H_IN_ENABLE : out std_logic;
 
     NTM_CONVOLUTIONAL_LSTM_W_OUT_L_ENABLE : in std_logic;
-    NTM_CONVOLUTIONAL_LSTM_W_OUT_X_ENABLE : in  std_logic;
+    NTM_CONVOLUTIONAL_LSTM_W_OUT_X_ENABLE : in std_logic;
 
     NTM_CONVOLUTIONAL_LSTM_K_OUT_I_ENABLE : in std_logic;
     NTM_CONVOLUTIONAL_LSTM_K_OUT_L_ENABLE : in std_logic;
@@ -98,27 +98,27 @@ entity ntm_convolutional_lstm_stimulus is
 
     NTM_CONVOLUTIONAL_LSTM_H_OUT_ENABLE : in std_logic;
 
-      -- DATA
+    -- DATA
     NTM_CONVOLUTIONAL_LSTM_SIZE_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_CONVOLUTIONAL_LSTM_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_CONVOLUTIONAL_LSTM_SIZE_L_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_CONVOLUTIONAL_LSTM_SIZE_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    NTM_CONVOLUTIONAL_LSTM_W_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_CONVOLUTIONAL_LSTM_K_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_CONVOLUTIONAL_LSTM_U_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_CONVOLUTIONAL_LSTM_B_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_CONVOLUTIONAL_LSTM_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_CONVOLUTIONAL_LSTM_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_CONVOLUTIONAL_LSTM_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_CONVOLUTIONAL_LSTM_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    NTM_CONVOLUTIONAL_LSTM_X_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_CONVOLUTIONAL_LSTM_R_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_CONVOLUTIONAL_LSTM_H_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_CONVOLUTIONAL_LSTM_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_CONVOLUTIONAL_LSTM_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_CONVOLUTIONAL_LSTM_H_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    NTM_CONVOLUTIONAL_LSTM_W_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_CONVOLUTIONAL_LSTM_K_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_CONVOLUTIONAL_LSTM_U_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_CONVOLUTIONAL_LSTM_B_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_CONVOLUTIONAL_LSTM_W_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_CONVOLUTIONAL_LSTM_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_CONVOLUTIONAL_LSTM_U_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_CONVOLUTIONAL_LSTM_B_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    NTM_CONVOLUTIONAL_LSTM_H_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
+    NTM_CONVOLUTIONAL_LSTM_H_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 

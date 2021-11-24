@@ -57,16 +57,20 @@ entity ntm_matrix_differentiation_function is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_IN_I_ENABLE : in std_logic;
-    DATA_IN_J_ENABLE : in std_logic;
+    DATA_IN_MATRIX_ENABLE : in std_logic;
+    DATA_IN_VECTOR_ENABLE : in std_logic;
+    DATA_IN_SCALAR_ENABLE : in std_logic;
 
-    DATA_OUT_I_ENABLE : out std_logic;
-    DATA_OUT_J_ENABLE : out std_logic;
+    DATA_OUT_MATRIX_ENABLE : out std_logic;
+    DATA_OUT_VECTOR_ENABLE : out std_logic;
+    DATA_OUT_SCALAR_ENABLE : out std_logic;
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_I_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_J_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -78,7 +82,7 @@ architecture ntm_matrix_differentiation_function_architecture of ntm_matrix_diff
   -- Types
   -----------------------------------------------------------------------
 
-  type cosh_ctrl_fsm is (
+  type differentiation_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
@@ -96,27 +100,30 @@ architecture ntm_matrix_differentiation_function_architecture of ntm_matrix_diff
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal cosh_ctrl_fsm_int : cosh_ctrl_fsm;
+  signal differentiation_ctrl_fsm_int : differentiation_ctrl_fsm;
 
   -- Internal Signals
   signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- TANH
+  -- VECTOR DIFFERENTIATION
   -- CONTROL
-  signal start_vector_cosh : std_logic;
-  signal ready_vector_cosh : std_logic;
+  signal start_vector_differentiation : std_logic;
+  signal ready_vector_differentiation : std_logic;
 
-  signal data_in_enable_vector_cosh : std_logic;
+  signal data_in_vector_enable_vector_differentiation : std_logic;
+  signal data_in_scalar_enable_vector_differentiation : std_logic;
 
-  signal data_out_enable_vector_cosh : std_logic;
+  signal data_out_vector_enable_vector_differentiation : std_logic;
+  signal data_out_scalar_enable_vector_differentiation : std_logic;
 
   -- DATA
-  signal modulo_in_vector_cosh : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_vector_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
-
+  signal modulo_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal period_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 begin
 
   -----------------------------------------------------------------------
@@ -139,7 +146,7 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      case cosh_ctrl_fsm_int is
+      case differentiation_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -150,29 +157,29 @@ begin
             index_j_loop <= ZERO;
 
             -- FSM Control
-            cosh_ctrl_fsm_int <= INPUT_I_STATE;
+            differentiation_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
         when INPUT_I_STATE =>           -- STEP 1
 
           if (DATA_IN_I_ENABLE = '1') then
             -- Data Inputs
-            modulo_in_vector_cosh <= MODULO_IN;
+            modulo_in_vector_differentiation <= MODULO_IN;
 
-            data_in_vector_cosh <= DATA_IN;
+            data_in_vector_differentiation <= DATA_IN;
 
             if (index_i_loop = ZERO) then
               -- Control Internal
-              start_vector_cosh <= '1';
+              start_vector_differentiation <= '1';
             end if;
 
-            data_in_enable_vector_cosh <= '1';
+            data_in_enable_vector_differentiation <= '1';
 
             -- FSM Control
-            cosh_ctrl_fsm_int <= ENDER_STATE;
+            differentiation_ctrl_fsm_int <= ENDER_STATE;
           else
             -- Control Internal
-            data_in_enable_vector_cosh <= '0';
+            data_in_enable_vector_differentiation <= '0';
           end if;
 
           -- Control Outputs
@@ -183,23 +190,23 @@ begin
 
           if (DATA_IN_J_ENABLE = '1') then
             -- Data Inputs
-            modulo_in_vector_cosh <= MODULO_IN;
-            size_in_vector_cosh   <= SIZE_J_IN;
+            modulo_in_vector_differentiation <= MODULO_IN;
+            size_in_vector_differentiation   <= SIZE_J_IN;
 
-            data_in_vector_cosh <= DATA_IN;
+            data_in_vector_differentiation <= DATA_IN;
 
             if (index_j_loop = ZERO) then
               -- Control Internal
-              start_vector_cosh <= '1';
+              start_vector_differentiation <= '1';
             end if;
 
-            data_in_enable_vector_cosh <= '1';
+            data_in_enable_vector_differentiation <= '1';
 
             -- FSM Control
-            cosh_ctrl_fsm_int <= ENDER_STATE;
+            differentiation_ctrl_fsm_int <= ENDER_STATE;
           else
             -- Control Internal
-            data_in_enable_vector_cosh <= '0';
+            data_in_enable_vector_differentiation <= '0';
           end if;
 
           -- Control Outputs
@@ -207,7 +214,7 @@ begin
 
         when ENDER_STATE =>             -- STEP 3
 
-          if (ready_vector_cosh = '1') then
+          if (ready_vector_differentiation = '1') then
             if (unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';
@@ -215,7 +222,7 @@ begin
               DATA_OUT_J_ENABLE <= '1';
 
               -- FSM Control
-              cosh_ctrl_fsm_int <= STARTER_STATE;
+              differentiation_ctrl_fsm_int <= STARTER_STATE;
             elsif (unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) then
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
@@ -226,7 +233,7 @@ begin
               DATA_OUT_J_ENABLE <= '1';
 
               -- FSM Control
-              cosh_ctrl_fsm_int <= INPUT_I_STATE;
+              differentiation_ctrl_fsm_int <= INPUT_I_STATE;
             elsif (unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop < std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) then
               -- Control Internal
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
@@ -235,24 +242,24 @@ begin
               DATA_OUT_J_ENABLE <= '1';
 
               -- FSM Control
-              cosh_ctrl_fsm_int <= INPUT_J_STATE;
+              differentiation_ctrl_fsm_int <= INPUT_J_STATE;
             end if;
 
             -- Data Outputs
-            DATA_OUT <= data_out_vector_cosh;
+            DATA_OUT <= data_out_vector_differentiation;
           else
             -- Control Internal
-            start_vector_cosh <= '0';
+            start_vector_differentiation <= '0';
           end if;
 
         when others =>
           -- FSM Control
-          cosh_ctrl_fsm_int <= STARTER_STATE;
+          differentiation_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
 
-  -- COSH
+  -- VECTOR DIFFERENTIATION
   vector_differentiation_function : ntm_vector_differentiation_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -263,18 +270,22 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_cosh,
-      READY => ready_vector_cosh,
+      START => start_vector_differentiation,
+      READY => ready_vector_differentiation,
 
-      DATA_IN_ENABLE => data_in_enable_vector_cosh,
+      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_differentiation,
+      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_differentiation,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_cosh,
+      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_differentiation,
+      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_differentiation,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_cosh,
-      SIZE_IN   => size_in_vector_cosh,
-      DATA_IN   => data_in_vector_cosh,
-      DATA_OUT  => data_out_vector_cosh
+      MODULO_IN => modulo_in_vector_differentiation,
+      SIZE_IN   => size_in_vector_differentiation,
+      PERIOD_IN => period_in_vector_differentiation,
+      LENGTH_IN => length_in_vector_differentiation,
+      DATA_IN   => data_in_vector_differentiation,
+      DATA_OUT  => data_out_vector_differentiation
       );
 
 end architecture;

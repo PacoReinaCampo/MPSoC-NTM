@@ -69,7 +69,7 @@ entity ntm_input_gate_vector is
 
     U_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
     U_IN_P_ENABLE : in std_logic;       -- for p in 0 to L-1
-    H_IN_ENABLE    : in std_logic;      -- for l in 0 to L-1
+    H_IN_ENABLE   : in std_logic;       -- for l in 0 to L-1
 
     B_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 

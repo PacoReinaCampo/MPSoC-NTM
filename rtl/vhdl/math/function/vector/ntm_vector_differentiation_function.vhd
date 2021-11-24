@@ -57,13 +57,17 @@ entity ntm_vector_differentiation_function is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_IN_ENABLE : in std_logic;
+    DATA_IN_VECTOR_ENABLE : in std_logic;
+    DATA_IN_SCALAR_ENABLE : in std_logic;
 
-    DATA_OUT_ENABLE : out std_logic;
+    DATA_OUT_VECTOR_ENABLE : out std_logic;
+    DATA_OUT_SCALAR_ENABLE : out std_logic;
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -75,7 +79,7 @@ architecture ntm_vector_differentiation_function_architecture of ntm_vector_diff
   -- Types
   -----------------------------------------------------------------------
 
-  type cosh_ctrl_fsm is (
+  type differentiation_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
     ENDER_STATE                         -- STEP 2
@@ -93,20 +97,26 @@ architecture ntm_vector_differentiation_function_architecture of ntm_vector_diff
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal cosh_ctrl_fsm_int : cosh_ctrl_fsm;
+  signal differentiation_ctrl_fsm_int : differentiation_ctrl_fsm;
 
   -- Internal Signals
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- ONEPLUS
+  -- SCALAR DIFFERENTIATION
   -- CONTROL
-  signal start_scalar_cosh : std_logic;
-  signal ready_scalar_cosh : std_logic;
+  signal start_scalar_differentiation : std_logic;
+  signal ready_scalar_differentiation : std_logic;
+
+  signal data_in_scalar_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- DATA
-  signal modulo_in_scalar_cosh : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal period_in_scalar_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_scalar_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -129,7 +139,7 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      case cosh_ctrl_fsm_int is
+      case differentiation_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -139,24 +149,24 @@ begin
             index_loop <= ZERO;
 
             -- FSM Control
-            cosh_ctrl_fsm_int <= INPUT_STATE;
+            differentiation_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
         when INPUT_STATE =>             -- STEP 1
 
           if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
-            modulo_in_scalar_cosh <= MODULO_IN;
+            modulo_in_scalar_differentiation <= MODULO_IN;
 
-            data_in_scalar_cosh <= DATA_IN;
+            data_in_scalar_differentiation <= DATA_IN;
 
             if (index_loop = ZERO) then
               -- Control Internal
-              start_scalar_cosh <= '1';
+              start_scalar_differentiation <= '1';
             end if;
 
             -- FSM Control
-            cosh_ctrl_fsm_int <= ENDER_STATE;
+            differentiation_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
           -- Control Outputs
@@ -164,39 +174,39 @@ begin
 
         when ENDER_STATE =>             -- STEP 2
 
-          if (ready_scalar_cosh = '1') then
+          if (ready_scalar_differentiation = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
-              cosh_ctrl_fsm_int <= STARTER_STATE;
+              differentiation_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
               index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE));
 
               -- FSM Control
-              cosh_ctrl_fsm_int <= INPUT_STATE;
+              differentiation_ctrl_fsm_int <= INPUT_STATE;
             end if;
 
             -- Data Outputs
-            DATA_OUT <= data_out_scalar_cosh;
+            DATA_OUT <= data_out_scalar_differentiation;
 
             -- Control Outputs
             DATA_OUT_ENABLE <= '1';
           else
             -- Control Internal
-            start_scalar_cosh <= '0';
+            start_scalar_differentiation <= '0';
           end if;
 
         when others =>
           -- FSM Control
-          cosh_ctrl_fsm_int <= STARTER_STATE;
+          differentiation_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
 
-  -- COSH
+  -- SCALAR DIFFERENTIATION
   scalar_differentiation_function : ntm_scalar_differentiation_function
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -207,13 +217,19 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_cosh,
-      READY => ready_scalar_cosh,
+      START => start_scalar_differentiation,
+      READY => ready_scalar_differentiation,
+
+      DATA_IN_ENABLE => data_in_scalar_differentiation,
+
+      DATA_OUT_ENABLE => data_out_scalar_differentiation,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_cosh,
-      DATA_IN   => data_in_scalar_cosh,
-      DATA_OUT  => data_out_scalar_cosh
+      MODULO_IN => modulo_in_scalar_differentiation,
+      PERIOD_IN => period_in_scalar_differentiation,
+      LENGTH_IN => length_in_scalar_differentiation,
+      DATA_IN   => data_in_scalar_differentiation,
+      DATA_OUT  => data_out_scalar_differentiation
       );
 
 end architecture;

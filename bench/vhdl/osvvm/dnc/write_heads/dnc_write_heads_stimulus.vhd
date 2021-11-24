@@ -127,7 +127,7 @@ entity dnc_write_heads_stimulus is
     -- DATA
     DNC_WRITE_STRENGTH_BETA_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DNC_WRITE_STRENGTH_BETA_OUT: in std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_WRITE_STRENGTH_BETA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- WRITE VECTOR
     -- CONTROL

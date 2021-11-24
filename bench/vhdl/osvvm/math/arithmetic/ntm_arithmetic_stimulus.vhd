@@ -634,8 +634,8 @@ begin
   SCALAR_INVERTER_START      <= start_int;
   SCALAR_DIVIDER_START       <= start_int;
   SCALAR_EXPONENTIATOR_START <= start_int;
-  SCALAR_LCM_START          <= start_int;
-  SCALAR_GCD_START     <= start_int;
+  SCALAR_LCM_START           <= start_int;
+  SCALAR_GCD_START           <= start_int;
 
   -- VECTOR-FUNCTIONALITY
   VECTOR_MOD_START           <= start_int;
@@ -644,8 +644,8 @@ begin
   VECTOR_INVERTER_START      <= start_int;
   VECTOR_DIVIDER_START       <= start_int;
   VECTOR_EXPONENTIATOR_START <= start_int;
-  VECTOR_LCM_START          <= start_int;
-  VECTOR_GCD_START     <= start_int;
+  VECTOR_LCM_START           <= start_int;
+  VECTOR_GCD_START           <= start_int;
 
   -- MATRIX-FUNCTIONALITY
   MATRIX_MOD_START           <= start_int;
@@ -654,8 +654,8 @@ begin
   MATRIX_INVERTER_START      <= start_int;
   MATRIX_DIVIDER_START       <= start_int;
   MATRIX_EXPONENTIATOR_START <= start_int;
-  MATRIX_LCM_START          <= start_int;
-  MATRIX_GCD_START     <= start_int;
+  MATRIX_LCM_START           <= start_int;
+  MATRIX_GCD_START           <= start_int;
 
   -----------------------------------------------------------------------
   -- STIMULUS
