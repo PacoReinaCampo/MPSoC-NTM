@@ -317,7 +317,8 @@ begin
         when VECTOR_DIFFERENTIATION_DA_STATE =>  -- STEP 1
 
           -- Control Inputs
-          data_in_enable_vector_differentiation <= '0';
+          data_in_vector_enable_vector_differentiation <= '0';
+          data_in_scalar_enable_vector_differentiation <= '0';
 
           -- Data Inputs
           modulo_in_vector_differentiation <= FULL;
@@ -418,7 +419,8 @@ begin
         when VECTOR_DIFFERENTIATION_DW_STATE =>  -- STEP 1
 
           -- Control Inputs
-          data_in_enable_vector_differentiation <= '0';
+          data_in_vector_enable_vector_differentiation <= '0';
+          data_in_scalar_enable_vector_differentiation <= '0';
 
           -- Data Inputs
           modulo_in_vector_differentiation <= FULL;
@@ -501,7 +503,8 @@ begin
         when VECTOR_DIFFERENTIATION_DK_STATE =>  -- STEP 1
 
           -- Control Inputs
-          data_in_enable_vector_differentiation <= '0';
+          data_in_vector_enable_vector_differentiation <= '0';
+          data_in_scalar_enable_vector_differentiation <= '0';
 
           -- Data Inputs
           modulo_in_vector_differentiation <= FULL;
@@ -584,7 +587,8 @@ begin
         when VECTOR_DIFFERENTIATION_DU_STATE =>  -- STEP 1
 
           -- Control Inputs
-          data_in_enable_vector_differentiation <= '0';
+          data_in_vector_enable_vector_differentiation <= '0';
+          data_in_scalar_enable_vector_differentiation <= '0';
 
           -- Data Inputs
           modulo_in_vector_differentiation <= FULL;
@@ -667,7 +671,8 @@ begin
         when VECTOR_DIFFERENTIATION_DB_STATE =>  -- STEP 1
 
           -- Control Inputs
-          data_in_enable_vector_differentiation <= '0';
+          data_in_vector_enable_vector_differentiation <= '0';
+          data_in_scalar_enable_vector_differentiation <= '0';
 
           -- Data Inputs
           modulo_in_vector_differentiation <= FULL;

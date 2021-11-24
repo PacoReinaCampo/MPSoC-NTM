@@ -100,7 +100,8 @@ module ntm_vector_differentiation_function #(
 
   // DATA
   reg [DATA_SIZE-1:0] modulo_in_scalar_differentiation;
-  wire [DATA_SIZE-1:0] size_in_scalar_differentiation;
+  reg [DATA_SIZE-1:0] size_in_scalar_differentiation;
+  reg [DATA_SIZE-1:0] period_in_scalar_differentiation;
   reg [DATA_SIZE-1:0] length_in_scalar_differentiation;
   reg [DATA_SIZE-1:0] data_in_scalar_differentiation;
   wire [DATA_SIZE-1:0] data_out_scalar_differentiation;
@@ -248,9 +249,9 @@ module ntm_vector_differentiation_function #(
     .START(start_scalar_differentiation),
     .READY(ready_scalar_differentiation),
 
-    .DATA_IN_ENABLE(data_in_scalar_differentiation),
+    .DATA_IN_ENABLE(data_in_enable_scalar_differentiation),
 
-    .DATA_OUT_ENABLE(data_out_scalar_differentiation),
+    .DATA_OUT_ENABLE(data_out_enable_scalar_differentiation),
 
     // DATA
     .MODULO_IN(modulo_in_scalar_differentiation),

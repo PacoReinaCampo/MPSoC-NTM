@@ -191,8 +191,13 @@ module ntm_function_testbench;
   wire start_scalar_differentiation;
   wire ready_scalar_differentiation;
 
+  wire data_in_enable_scalar_differentiation;
+  wire data_out_enable_scalar_differentiation;
+
   // DATA
   wire [DATA_SIZE-1:0] modulo_in_scalar_differentiation;
+  wire [DATA_SIZE-1:0] period_in_scalar_differentiation;
+  wire [DATA_SIZE-1:0] length_in_scalar_differentiation;
   wire [DATA_SIZE-1:0] data_in_scalar_differentiation;
   wire [DATA_SIZE-1:0] data_out_scalar_differentiation;
 
@@ -324,20 +329,6 @@ module ntm_function_testbench;
   wire data_out_vector_enable_vector_cosine;
   wire data_out_scalar_enable_vector_cosine;
 
-  // VECTOR DIFFERENTIATION
-  // CONTROL
-  wire start_vector_differentiation;
-  wire ready_vector_differentiation;
-
-  wire data_in_enable_vector_differentiation;
-  wire data_out_enable_vector_differentiation;
-
-  // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_differentiation;
-  wire [DATA_SIZE-1:0] size_in_vector_differentiation;
-  wire [DATA_SIZE-1:0] data_in_vector_differentiation;
-  wire [DATA_SIZE-1:0] data_out_vector_differentiation;
-
   // DATA
   wire [DATA_SIZE-1:0] modulo_in_vector_cosine;
   wire [DATA_SIZE-1:0] size_in_vector_cosine;
@@ -345,6 +336,25 @@ module ntm_function_testbench;
   wire [DATA_SIZE-1:0] data_a_in_vector_cosine;
   wire [DATA_SIZE-1:0] data_b_in_vector_cosine;
   wire [DATA_SIZE-1:0] data_out_vector_cosine;
+
+
+  // VECTOR DIFFERENTIATION
+  // CONTROL
+  wire start_vector_differentiation;
+  wire ready_vector_differentiation;
+
+  wire data_in_vector_enable_vector_differentiation;
+  wire data_in_scalar_enable_vector_differentiation;
+  wire data_out_vector_enable_vector_differentiation;
+  wire data_out_scalar_enable_vector_differentiation;
+
+  // DATA
+  wire [DATA_SIZE-1:0] modulo_in_vector_differentiation;
+  wire [DATA_SIZE-1:0] period_in_vector_differentiation;
+  wire [DATA_SIZE-1:0] length_in_vector_differentiation;
+  wire [DATA_SIZE-1:0] size_in_vector_differentiation;
+  wire [DATA_SIZE-1:0] data_in_vector_differentiation;
+  wire [DATA_SIZE-1:0] data_out_vector_differentiation;
 
   // VECTOR MULTIPLICATION
   // CONTROL
@@ -525,15 +535,19 @@ module ntm_function_testbench;
   wire start_matrix_differentiation;
   wire ready_matrix_differentiation;
 
-  wire data_in_i_enable_matrix_differentiation;
-  wire data_in_j_enable_matrix_differentiation;
-  wire data_out_i_enable_matrix_differentiation;
-  wire data_out_j_enable_matrix_differentiation;
+  wire data_in_matrix_enable_matrix_differentiation;
+  wire data_in_vector_enable_matrix_differentiation;
+  wire data_in_scalar_enable_matrix_differentiation;
+  wire data_out_matrix_enable_matrix_differentiation;
+  wire data_out_vector_enable_matrix_differentiation;
+  wire data_out_scalar_enable_matrix_differentiation;
 
   // DATA
   wire [DATA_SIZE-1:0] modulo_in_matrix_differentiation;
   wire [DATA_SIZE-1:0] size_i_in_matrix_differentiation;
   wire [DATA_SIZE-1:0] size_j_in_matrix_differentiation;
+  wire [DATA_SIZE-1:0] period_in_matrix_differentiation;
+  wire [DATA_SIZE-1:0] length_in_matrix_differentiation;
   wire [DATA_SIZE-1:0] data_in_matrix_differentiation;
   wire [DATA_SIZE-1:0] data_out_matrix_differentiation;
 

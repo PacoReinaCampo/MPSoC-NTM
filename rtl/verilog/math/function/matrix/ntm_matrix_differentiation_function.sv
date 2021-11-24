@@ -49,9 +49,9 @@ module ntm_matrix_differentiation_function #(
     input START,
     output reg READY,
 
-    input [DATA_SIZE-1:0] DATA_IN_MATRIX_ENABLE,
-    input [DATA_SIZE-1:0] DATA_IN_VECTOR_ENABLE,
-    input [DATA_SIZE-1:0] DATA_IN_SCALAR_ENABLE,
+    input DATA_IN_MATRIX_ENABLE,
+    input DATA_IN_VECTOR_ENABLE,
+    input DATA_IN_SCALAR_ENABLE,
 
     output reg DATA_OUT_MATRIX_ENABLE,
     output reg DATA_OUT_VECTOR_ENABLE,
@@ -109,6 +109,7 @@ module ntm_matrix_differentiation_function #(
   // DATA
   reg [DATA_SIZE-1:0] modulo_in_vector_differentiation;
   reg [DATA_SIZE-1:0] size_in_vector_differentiation;
+  reg [DATA_SIZE-1:0] period_in_vector_differentiation;
   reg [DATA_SIZE-1:0] length_in_vector_differentiation;
   reg [DATA_SIZE-1:0] data_in_vector_differentiation;
   wire [DATA_SIZE-1:0] data_out_vector_differentiation;

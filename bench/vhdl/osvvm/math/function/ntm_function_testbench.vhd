@@ -225,6 +225,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   -- DATA
   signal modulo_in_scalar_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_scalar_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal period_in_scalar_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_scalar_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -377,7 +378,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal modulo_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal period_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal lenth_in_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -1750,7 +1751,7 @@ begin
         -- DATA
         MODULO_IN => modulo_in_vector_differentiation,
         SIZE_IN   => size_in_vector_differentiation,
-        PERIOD_IN => length_in_vector_differentiation,
+        PERIOD_IN => period_in_vector_differentiation,
         LENGTH_IN => length_in_vector_differentiation,
         DATA_IN   => data_in_vector_differentiation,
         DATA_OUT  => data_out_vector_differentiation

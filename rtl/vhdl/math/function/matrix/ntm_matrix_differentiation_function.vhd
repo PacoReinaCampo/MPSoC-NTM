@@ -84,9 +84,10 @@ architecture ntm_matrix_differentiation_function_architecture of ntm_matrix_diff
 
   type differentiation_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    INPUT_I_STATE,                      -- STEP 1
-    INPUT_J_STATE,                      -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    INPUT_MATRIX_STATE,                 -- STEP 1
+    INPUT_VECTOR_STATE,                 -- STEP 2
+    INPUT_SCALAR_STATE,                 -- STEP 3
+    ENDER_STATE                         -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -103,10 +104,11 @@ architecture ntm_matrix_differentiation_function_architecture of ntm_matrix_diff
   signal differentiation_ctrl_fsm_int : differentiation_ctrl_fsm;
 
   -- Internal Signals
-  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_matrix_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_vector_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_scalar_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR DIFFERENTIATION
+  -- SOFTMAX
   -- CONTROL
   signal start_vector_differentiation : std_logic;
   signal ready_vector_differentiation : std_logic;
@@ -124,6 +126,7 @@ architecture ntm_matrix_differentiation_function_architecture of ntm_matrix_diff
   signal length_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
@@ -141,8 +144,9 @@ begin
       READY <= '0';
 
       -- Assignations
-      index_i_loop <= ZERO;
-      index_j_loop <= ZERO;
+      index_matrix_loop <= ZERO;
+      index_vector_loop <= ZERO;
+      index_scalar_loop <= ZERO;
 
     elsif (rising_edge(CLK)) then
 
@@ -153,96 +157,141 @@ begin
 
           if (START = '1') then
             -- Assignations
-            index_i_loop <= ZERO;
-            index_j_loop <= ZERO;
+            index_matrix_loop <= ZERO;
+            index_vector_loop <= ZERO;
+            index_scalar_loop <= ZERO;
 
             -- FSM Control
-            differentiation_ctrl_fsm_int <= INPUT_I_STATE;
+            differentiation_ctrl_fsm_int <= INPUT_MATRIX_STATE;
           end if;
 
-        when INPUT_I_STATE =>           -- STEP 1
+        when INPUT_MATRIX_STATE =>      -- STEP 1
 
-          if (DATA_IN_I_ENABLE = '1') then
+          if (DATA_IN_MATRIX_ENABLE = '1') then
             -- Data Inputs
             modulo_in_vector_differentiation <= MODULO_IN;
 
             data_in_vector_differentiation <= DATA_IN;
 
-            if (index_i_loop = ZERO) then
+            if (index_matrix_loop = ZERO) then
               -- Control Internal
               start_vector_differentiation <= '1';
             end if;
 
-            data_in_enable_vector_differentiation <= '1';
+            data_in_vector_enable_vector_differentiation <= '1';
+            data_in_scalar_enable_vector_differentiation <= '1';
 
             -- FSM Control
             differentiation_ctrl_fsm_int <= ENDER_STATE;
           else
             -- Control Internal
-            data_in_enable_vector_differentiation <= '0';
+            data_in_vector_enable_vector_differentiation <= '0';
+            data_in_scalar_enable_vector_differentiation <= '0';
           end if;
 
           -- Control Outputs
-          DATA_OUT_I_ENABLE <= '0';
-          DATA_OUT_J_ENABLE <= '0';
+          DATA_OUT_MATRIX_ENABLE <= '0';
+          DATA_OUT_VECTOR_ENABLE <= '0';
+          DATA_OUT_SCALAR_ENABLE <= '0';
 
-        when INPUT_J_STATE =>           -- STEP 2
+        when INPUT_VECTOR_STATE =>      -- STEP 1
 
-          if (DATA_IN_J_ENABLE = '1') then
+          if (DATA_IN_VECTOR_ENABLE = '1') then
             -- Data Inputs
             modulo_in_vector_differentiation <= MODULO_IN;
             size_in_vector_differentiation   <= SIZE_J_IN;
 
             data_in_vector_differentiation <= DATA_IN;
 
-            if (index_j_loop = ZERO) then
+            if (index_vector_loop = ZERO) then
               -- Control Internal
               start_vector_differentiation <= '1';
             end if;
 
-            data_in_enable_vector_differentiation <= '1';
+            data_in_vector_enable_vector_differentiation <= '1';
+            data_in_scalar_enable_vector_differentiation <= '1';
 
             -- FSM Control
             differentiation_ctrl_fsm_int <= ENDER_STATE;
           else
             -- Control Internal
-            data_in_enable_vector_differentiation <= '0';
+            data_in_vector_enable_vector_differentiation <= '0';
+            data_in_scalar_enable_vector_differentiation <= '0';
           end if;
 
           -- Control Outputs
-          DATA_OUT_J_ENABLE <= '0';
+          DATA_OUT_VECTOR_ENABLE <= '0';
+          DATA_OUT_SCALAR_ENABLE <= '0';
+
+        when INPUT_SCALAR_STATE =>      -- STEP 2
+
+          if (DATA_IN_SCALAR_ENABLE = '1') then
+            -- Data Inputs
+            modulo_in_vector_differentiation <= MODULO_IN;
+            length_in_vector_differentiation <= LENGTH_IN;
+
+            data_in_vector_differentiation <= DATA_IN;
+
+            if (index_scalar_loop = ZERO) then
+              -- Control Internal
+              start_vector_differentiation <= '1';
+            end if;
+
+            data_in_scalar_enable_vector_differentiation <= '1';
+
+            -- FSM Control
+            differentiation_ctrl_fsm_int <= ENDER_STATE;
+          else
+            -- Control Internal
+            data_in_scalar_enable_vector_differentiation <= '0';
+          end if;
+
+          -- Control Outputs
+          DATA_OUT_SCALAR_ENABLE <= '0';
 
         when ENDER_STATE =>             -- STEP 3
 
           if (ready_vector_differentiation = '1') then
-            if (unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) then
+            if (unsigned(index_matrix_loop) = unsigned(SIZE_I_IN)-unsigned(ONE) and unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';
 
-              DATA_OUT_J_ENABLE <= '1';
+              DATA_OUT_VECTOR_ENABLE <= '1';
 
               -- FSM Control
               differentiation_ctrl_fsm_int <= STARTER_STATE;
-            elsif (unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) then
+            elsif (unsigned(index_matrix_loop) < unsigned(SIZE_I_IN)-unsigned(ONE) and unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
               -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
-              index_j_loop <= ZERO;
+              index_matrix_loop <= std_logic_vector(unsigned(index_matrix_loop) + unsigned(ONE));
+              index_vector_loop <= ZERO;
 
               -- Control Outputs
-              DATA_OUT_I_ENABLE <= '1';
-              DATA_OUT_J_ENABLE <= '1';
+              DATA_OUT_MATRIX_ENABLE <= '1';
+              DATA_OUT_VECTOR_ENABLE <= '1';
+              DATA_OUT_SCALAR_ENABLE <= '1';
 
               -- FSM Control
-              differentiation_ctrl_fsm_int <= INPUT_I_STATE;
-            elsif (unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE)) and index_j_loop < std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE)) then
+              differentiation_ctrl_fsm_int <= INPUT_MATRIX_STATE;
+            elsif (unsigned(index_matrix_loop) < unsigned(SIZE_I_IN)-unsigned(ONE) and unsigned(index_vector_loop) < unsigned(SIZE_J_IN)-unsigned(ONE) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+              index_vector_loop <= std_logic_vector(unsigned(index_vector_loop) + unsigned(ONE));
+              index_scalar_loop <= ZERO;
 
               -- Control Outputs
-              DATA_OUT_J_ENABLE <= '1';
+              DATA_OUT_VECTOR_ENABLE <= '1';
+              DATA_OUT_SCALAR_ENABLE <= '1';
 
               -- FSM Control
-              differentiation_ctrl_fsm_int <= INPUT_J_STATE;
+              differentiation_ctrl_fsm_int <= INPUT_VECTOR_STATE;
+            elsif (unsigned(index_matrix_loop) < unsigned(SIZE_I_IN)-unsigned(ONE) and unsigned(index_vector_loop) < unsigned(SIZE_J_IN)-unsigned(ONE) and unsigned(index_scalar_loop) < unsigned(LENGTH_IN)-unsigned(ONE)) then
+              -- Control Internal
+              index_scalar_loop <= std_logic_vector(unsigned(index_scalar_loop) + unsigned(ONE));
+
+              -- Control Outputs
+              DATA_OUT_SCALAR_ENABLE <= '1';
+
+              -- FSM Control
+              differentiation_ctrl_fsm_int <= INPUT_SCALAR_STATE;
             end if;
 
             -- Data Outputs
@@ -250,6 +299,9 @@ begin
           else
             -- Control Internal
             start_vector_differentiation <= '0';
+
+            data_in_vector_enable_vector_differentiation <= '0';
+            data_in_scalar_enable_vector_differentiation <= '0';
           end if;
 
         when others =>
