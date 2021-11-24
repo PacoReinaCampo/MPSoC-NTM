@@ -147,7 +147,7 @@ architecture ntm_controller_architecture of ntm_controller is
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- Internal Signals
+  -- Control Internal
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
@@ -272,7 +272,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -317,7 +317,7 @@ begin
             controller_ctrl_fsm_int <= VECTOR_FIRST_ADDER_STATE;
           else
             -- Control Internal
-            start_vector_adder <= '0';
+            start_matrix_product <= '0';
           end if;
 
         when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
@@ -342,7 +342,7 @@ begin
             controller_ctrl_fsm_int <= MATRIX_SECOND_PRODUCT_STATE;
           else
             -- Control Internal
-            start_matrix_product <= '0';
+            start_vector_adder <= '0';
           end if;
 
         when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 3
@@ -370,7 +370,7 @@ begin
             controller_ctrl_fsm_int <= VECTOR_SECOND_ADDER_STATE;
           else
             -- Control Internal
-            start_vector_adder <= '0';
+            start_matrix_product <= '0';
           end if;
 
         when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
@@ -395,7 +395,7 @@ begin
             controller_ctrl_fsm_int <= MATRIX_THIRD_PRODUCT_STATE;
           else
             -- Control Internal
-            start_matrix_product <= '0';
+            start_vector_adder <= '0';
           end if;
 
         when MATRIX_THIRD_PRODUCT_STATE =>  -- STEP 5
@@ -423,7 +423,7 @@ begin
             controller_ctrl_fsm_int <= VECTOR_THIRD_ADDER_STATE;
           else
             -- Control Internal
-            start_vector_adder <= '0';
+            start_matrix_product <= '0';
           end if;
 
         when VECTOR_THIRD_ADDER_STATE =>  -- STEP 6
@@ -437,7 +437,7 @@ begin
           -- Control Inputs
           operation_vector_adder <= '0';
 
-          data_a_in_enable_vector_adder <= data_out_enable_matrix_product;
+          data_a_in_enable_vector_adder <= data_out_i_enable_matrix_product;
           data_b_in_enable_vector_adder <= data_out_enable_vector_adder;
 
           if (data_out_enable_vector_adder = '1') then
@@ -448,10 +448,10 @@ begin
             controller_ctrl_fsm_int <= VECTOR_LOGISTIC_STATE;
           else
             -- Control Internal
-            start_vector_logistic <= '0';
+            start_vector_adder <= '0';
           end if;
 
-        when VECTOR_LOGISTIC_STATE =>   -- STEP 7
+        when VECTOR_LOGISTIC_STATE =>  -- STEP 7
 
           -- Data Inputs
           modulo_in_vector_logistic <= FULL;
@@ -481,6 +481,9 @@ begin
 
             -- Control Outputs
             H_OUT_ENABLE <= '1';
+          else
+            -- Control Outputs
+            H_OUT_ENABLE <= '0';
           end if;
 
         when others =>

@@ -146,7 +146,7 @@ architecture ntm_controller_architecture of ntm_controller is
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- Internal Signals
+  -- Control Internal
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- ACTIVATION GATE VECTOR
@@ -565,7 +565,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -589,15 +589,15 @@ begin
 
           -- a(t;l) = tanh(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
 
-        when VECTOR_FORGET_STATE =>     -- STEP 2
+        when VECTOR_FORGET_STATE =>  -- STEP 2
 
           -- f(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
 
-        when VECTOR_INPUT_STATE =>      -- STEP 3
+        when VECTOR_INPUT_STATE =>  -- STEP 3
 
           -- i(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
 
-        when VECTOR_STATE_STATE =>      -- STEP 4
+        when VECTOR_STATE_STATE =>  -- STEP 4
 
           -- s(t;l) = f(t;l) o s(t-1;l) + i(t;l) o a(t;l)
           -- s(t=0;l) = 0

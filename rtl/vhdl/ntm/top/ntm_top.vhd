@@ -431,7 +431,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case top_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -451,7 +451,7 @@ begin
             start_controller <= '0';
           end if;
 
-        when CONTROLLER_STATE =>        -- STEP 1
+        when CONTROLLER_STATE =>  -- STEP 1
 
           case controller_ctrl_fsm_int is
             when STARTER_CONTROLLER_STATE =>  -- STEP 0
@@ -484,20 +484,20 @@ begin
               controller_ctrl_fsm_int <= STARTER_CONTROLLER_STATE;
           end case;
 
-        when READ_HEADS_STATE =>        -- STEP 2
+        when READ_HEADS_STATE =>  -- STEP 2
 
           -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
 
-        when WRITE_HEADS_STATE =>       -- STEP 3
+        when WRITE_HEADS_STATE =>  -- STEP 3
 
           case write_heads_ctrl_fsm_int is
             when STARTER_WRITE_HEADS_STATE =>  -- STEP 0
 
-            when WRITING_STATE =>       -- STEP 1
+            when WRITING_STATE =>  -- STEP 1
 
               -- M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
 
-            when ERASING_STATE =>       -- STEP 2
+            when ERASING_STATE =>  -- STEP 2
 
               -- M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
 
@@ -506,7 +506,7 @@ begin
               write_heads_ctrl_fsm_int <= STARTER_WRITE_HEADS_STATE;
           end case;
 
-        when MEMORY_STATE =>            -- STEP 4
+        when MEMORY_STATE =>  -- STEP 4
 
           -- wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
 

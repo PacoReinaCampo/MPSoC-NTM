@@ -152,6 +152,8 @@ module ntm_trainer #(
   // DATA
   wire [DATA_SIZE-1:0] modulo_in_vector_differentiation;
   wire [DATA_SIZE-1:0] size_in_vector_differentiation;
+  wire [DATA_SIZE-1:0] period_in_vector_differentiation;
+  wire [DATA_SIZE-1:0] length_in_vector_differentiation;
   wire [DATA_SIZE-1:0] data_in_vector_differentiation;
   wire [DATA_SIZE-1:0] data_out_vector_differentiation;
 
@@ -359,6 +361,8 @@ module ntm_trainer #(
     // DATA
     .MODULO_IN(modulo_in_vector_differentiation),
     .SIZE_IN(size_in_vector_differentiation),
+    .PERIOD_IN(period_in_vector_differentiation),
+    .LENGTH_IN(length_in_vector_differentiation),
     .DATA_IN(data_in_vector_differentiation),
     .DATA_OUT(data_out_vector_differentiation)
   );

@@ -230,7 +230,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -308,7 +308,7 @@ begin
           data_a_in_matrix_adder <= data_out_matrix_multiplier;
           data_b_in_matrix_adder <= data_out_matrix_product;
 
-        when ENDER_STATE =>             -- STEP 8
+        when ENDER_STATE =>  -- STEP 8
 
           if (data_out_i_enable_matrix_product = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then

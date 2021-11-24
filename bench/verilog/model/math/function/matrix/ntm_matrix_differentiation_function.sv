@@ -49,15 +49,20 @@ module ntm_matrix_differentiation_function #(
     input START,
     output reg READY,
 
-    input DATA_IN_I_ENABLE,
-    input DATA_IN_J_ENABLE,
-    output reg DATA_OUT_I_ENABLE,
-    output reg DATA_OUT_J_ENABLE,
+    input DATA_IN_MATRIX_ENABLE,
+    input DATA_IN_VECTOR_ENABLE,
+    input DATA_IN_SCALAR_ENABLE,
+
+    output reg DATA_OUT_MATRIX_ENABLE,
+    output reg DATA_OUT_VECTOR_ENABLE,
+    output reg DATA_OUT_SCALAR_ENABLE,
 
     // DATA
     input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] SIZE_I_IN,
     input [DATA_SIZE-1:0] SIZE_J_IN,
+    input [DATA_SIZE-1:0] PERIOD_IN,
+    input [DATA_SIZE-1:0] LENGTH_IN,
     input [DATA_SIZE-1:0] DATA_IN,
     output reg [DATA_SIZE-1:0] DATA_OUT
   );
@@ -67,9 +72,10 @@ module ntm_matrix_differentiation_function #(
   ///////////////////////////////////////////////////////////////////////
 
   parameter [2:0] STARTER_STATE = 0;
-  parameter [2:0] INPUT_I_STATE = 1;
-  parameter [2:0] INPUT_J_STATE = 2;
-  parameter [2:0] ENDER_STATE = 3;
+  parameter [2:0] INPUT_MATRIX_STATE = 1;
+  parameter [2:0] INPUT_VECTOR_STATE = 2;
+  parameter [2:0] INPUT_SCALAR_STATE = 3;
+  parameter [2:0] ENDER_STATE = 4;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -83,23 +89,28 @@ module ntm_matrix_differentiation_function #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] differentiation_ctrl_fsm_int;
+  reg [2:0] differentiation_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE-1:0] index_i_loop;
-  reg [DATA_SIZE-1:0] index_j_loop;
+  reg [DATA_SIZE-1:0] index_matrix_loop;
+  reg [DATA_SIZE-1:0] index_vector_loop;
+  reg [DATA_SIZE-1:0] index_scalar_loop;
 
-  // TANH
+  // SOFTMAX
   // CONTROL
   reg start_vector_differentiation;
   wire ready_vector_differentiation;
 
-  reg data_in_enable_vector_differentiation;
-  wire data_out_enable_vector_differentiation;
+  reg data_in_vector_enable_vector_differentiation;
+  reg data_in_scalar_enable_vector_differentiation;
+  wire data_out_vector_enable_vector_differentiation;
+  wire data_out_scalar_enable_vector_differentiation;
 
   // DATA
   reg [DATA_SIZE-1:0] modulo_in_vector_differentiation;
   reg [DATA_SIZE-1:0] size_in_vector_differentiation;
+  reg [DATA_SIZE-1:0] period_in_vector_differentiation;
+  reg [DATA_SIZE-1:0] length_in_vector_differentiation;
   reg [DATA_SIZE-1:0] data_in_vector_differentiation;
   wire [DATA_SIZE-1:0] data_out_vector_differentiation;
 
@@ -116,114 +127,159 @@ module ntm_matrix_differentiation_function #(
       READY <= 1'b0;
 
       // Assignations
-      index_i_loop <= ZERO;
-      index_j_loop <= ZERO;
+      index_matrix_loop <= ZERO;
+      index_vector_loop <= ZERO;
+      index_scalar_loop <= ZERO;
     end
     else begin
       case(differentiation_ctrl_fsm_int)
-        STARTER_STATE : begin  // STEP 0
+        STARTER_STATE : begin
+          // STEP 0
           // Control Outputs
           READY <= 1'b0;
-
           if(START == 1'b1) begin
             // Assignations
-            index_i_loop <= ZERO;
-            index_j_loop <= ZERO;
+            index_matrix_loop <= ZERO;
+            index_vector_loop <= ZERO;
+            index_scalar_loop <= ZERO;
 
             // FSM Control
-            differentiation_ctrl_fsm_int <= INPUT_I_STATE;
+            differentiation_ctrl_fsm_int <= INPUT_MATRIX_STATE;
           end
         end
-        INPUT_I_STATE : begin  // STEP 1
-          if(DATA_IN_I_ENABLE == 1'b1) begin
+        INPUT_MATRIX_STATE : begin  // STEP 1
+          if(DATA_IN_MATRIX_ENABLE == 1'b1) begin
             // Data Inputs
             modulo_in_vector_differentiation <= MODULO_IN;
             data_in_vector_differentiation <= DATA_IN;
 
-            if(index_i_loop == ZERO) begin
+            if(index_matrix_loop == ZERO) begin
               // Control Internal
               start_vector_differentiation <= 1'b1;
-
             end
 
-            data_in_enable_vector_differentiation <= 1'b1;
+            data_in_vector_enable_vector_differentiation <= 1'b1;
+            data_in_scalar_enable_vector_differentiation <= 1'b1;
 
             // FSM Control
             differentiation_ctrl_fsm_int <= ENDER_STATE;
           end
           else begin
             // Control Internal
-            data_in_enable_vector_differentiation <= 1'b0;
+            data_in_vector_enable_vector_differentiation <= 1'b0;
+            data_in_scalar_enable_vector_differentiation <= 1'b0;
           end
 
           // Control Outputs
-          DATA_OUT_I_ENABLE <= 1'b0;
-          DATA_OUT_J_ENABLE <= 1'b0;
+          DATA_OUT_MATRIX_ENABLE <= 1'b0;
+          DATA_OUT_VECTOR_ENABLE <= 1'b0;
+          DATA_OUT_SCALAR_ENABLE <= 1'b0;
         end
-        INPUT_J_STATE : begin  // STEP 2
-          if(DATA_IN_J_ENABLE == 1'b1) begin
+        INPUT_VECTOR_STATE : begin  // STEP 1
+          if(DATA_IN_VECTOR_ENABLE == 1'b1) begin
             // Data Inputs
             modulo_in_vector_differentiation <= MODULO_IN;
             size_in_vector_differentiation <= SIZE_J_IN;
             data_in_vector_differentiation <= DATA_IN;
 
-            if(index_j_loop == ZERO) begin
+            if((index_vector_loop == ZERO)) begin
               // Control Internal
               start_vector_differentiation <= 1'b1;
             end
 
-            data_in_enable_vector_differentiation <= 1'b1;
+            data_in_vector_enable_vector_differentiation <= 1'b1;
+            data_in_scalar_enable_vector_differentiation <= 1'b1;
 
             // FSM Control
             differentiation_ctrl_fsm_int <= ENDER_STATE;
           end
           else begin
             // Control Internal
-            data_in_enable_vector_differentiation <= 1'b0;
+            data_in_vector_enable_vector_differentiation <= 1'b0;
+            data_in_scalar_enable_vector_differentiation <= 1'b0;
           end
 
           // Control Outputs
-          DATA_OUT_J_ENABLE <= 1'b0;
+          DATA_OUT_VECTOR_ENABLE <= 1'b0;
+          DATA_OUT_SCALAR_ENABLE <= 1'b0;
+        end
+        INPUT_SCALAR_STATE : begin  // STEP 2
+          if(DATA_IN_SCALAR_ENABLE == 1'b1) begin
+            // Data Inputs
+            modulo_in_vector_differentiation <= MODULO_IN;
+            length_in_vector_differentiation <= LENGTH_IN;
+            data_in_vector_differentiation <= DATA_IN;
+
+            if((index_scalar_loop == ZERO)) begin
+              // Control Internal
+              start_vector_differentiation <= 1'b1;
+            end
+
+            data_in_scalar_enable_vector_differentiation <= 1'b1;
+
+            // FSM Control
+            differentiation_ctrl_fsm_int <= ENDER_STATE;
+          end
+          else begin
+            // Control Internal
+            data_in_scalar_enable_vector_differentiation <= 1'b0;
+          end
+          // Control Outputs
+          DATA_OUT_SCALAR_ENABLE <= 1'b0;
         end
         ENDER_STATE : begin  // STEP 3
           if(ready_vector_differentiation == 1'b1) begin
-            if((index_i_loop == (SIZE_I_IN - ONE)) && index_j_loop == (SIZE_J_IN - ONE)) begin
+            if(index_matrix_loop == (SIZE_I_IN - ONE) && index_vector_loop == (SIZE_J_IN - ONE) && index_scalar_loop == (LENGTH_IN - ONE)) begin
               // Control Outputs
               READY <= 1'b1;
-              DATA_OUT_J_ENABLE <= 1'b1;
+              DATA_OUT_VECTOR_ENABLE <= 1'b1;
 
               // FSM Control
               differentiation_ctrl_fsm_int <= STARTER_STATE;
             end
-            else if((index_i_loop < (SIZE_I_IN - ONE)) && index_j_loop == (SIZE_J_IN - ONE)) begin
+            else if(index_matrix_loop < (SIZE_I_IN - ONE) && index_vector_loop == (SIZE_J_IN - ONE) && index_scalar_loop == (LENGTH_IN - ONE)) begin
               // Control Internal
-              index_i_loop <= (index_i_loop + ONE);
-              index_j_loop <= ZERO;
+              index_matrix_loop <= (index_matrix_loop + ONE);
+              index_vector_loop <= ZERO;
 
               // Control Outputs
-              DATA_OUT_I_ENABLE <= 1'b1;
-              DATA_OUT_J_ENABLE <= 1'b1;
+              DATA_OUT_MATRIX_ENABLE <= 1'b1;
+              DATA_OUT_VECTOR_ENABLE <= 1'b1;
+              DATA_OUT_SCALAR_ENABLE <= 1'b1;
 
               // FSM Control
-              differentiation_ctrl_fsm_int <= INPUT_I_STATE;
+              differentiation_ctrl_fsm_int <= INPUT_MATRIX_STATE;
             end
-            else if((index_i_loop < (SIZE_I_IN - ONE)) && index_j_loop < (SIZE_J_IN - ONE)) begin
+            else if(index_matrix_loop < (SIZE_I_IN - ONE) && index_vector_loop < (SIZE_J_IN - ONE) && index_scalar_loop == (LENGTH_IN - ONE)) begin
               // Control Internal
-              index_j_loop <= (index_j_loop + ONE);
+              index_vector_loop <= (index_vector_loop + ONE);
+              index_scalar_loop <= ZERO;
 
               // Control Outputs
-              DATA_OUT_J_ENABLE <= 1'b1;
+              DATA_OUT_VECTOR_ENABLE <= 1'b1;
+              DATA_OUT_SCALAR_ENABLE <= 1'b1;
 
               // FSM Control
-              differentiation_ctrl_fsm_int <= INPUT_J_STATE;
+              differentiation_ctrl_fsm_int <= INPUT_VECTOR_STATE;
             end
+            else if(index_matrix_loop < (SIZE_I_IN - ONE) && index_vector_loop < (SIZE_J_IN - ONE) && index_scalar_loop < (LENGTH_IN - ONE)) begin
+              // Control Internal
+              index_scalar_loop <= (index_scalar_loop + ONE);
 
+              // Control Outputs
+              DATA_OUT_SCALAR_ENABLE <= 1'b1;
+
+              // FSM Control
+              differentiation_ctrl_fsm_int <= INPUT_SCALAR_STATE;
+            end
             // Data Outputs
             DATA_OUT <= data_out_vector_differentiation;
           end
           else begin
             // Control Internal
             start_vector_differentiation <= 1'b0;
+            data_in_vector_enable_vector_differentiation <= 1'b0;
+            data_in_scalar_enable_vector_differentiation <= 1'b0;
           end
         end
         default : begin
@@ -234,7 +290,7 @@ module ntm_matrix_differentiation_function #(
     end
   end
 
-  // DIFFERENTIATION
+  // VECTOR DIFFERENTIATION
   ntm_vector_differentiation_function #(
     .DATA_SIZE(DATA_SIZE)
   )
@@ -247,12 +303,17 @@ module ntm_matrix_differentiation_function #(
     .START(start_vector_differentiation),
     .READY(ready_vector_differentiation),
 
-    .DATA_IN_ENABLE(data_in_enable_vector_differentiation),
-    .DATA_OUT_ENABLE(data_out_enable_vector_differentiation),
+    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_differentiation),
+    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_differentiation),
+
+    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_differentiation),
+    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_differentiation),
 
     // DATA
     .MODULO_IN(modulo_in_vector_differentiation),
     .SIZE_IN(size_in_vector_differentiation),
+    .PERIOD_IN(period_in_vector_differentiation),
+    .LENGTH_IN(length_in_vector_differentiation),
     .DATA_IN(data_in_vector_differentiation),
     .DATA_OUT(data_out_vector_differentiation)
   );

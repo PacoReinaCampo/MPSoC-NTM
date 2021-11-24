@@ -195,7 +195,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -213,7 +213,7 @@ begin
           size_n_in_sort_vector <= SIZE_N_IN;
           u_in_sort_vector      <= U_IN;
 
-        when VECTOR_ADDER_STATE =>      -- STEP 2
+        when VECTOR_ADDER_STATE =>  -- STEP 2
 
         when VECTOR_SECOND_SORT_STATE =>  -- STEP 3
 

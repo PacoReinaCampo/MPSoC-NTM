@@ -130,7 +130,7 @@ architecture ntm_output_gate_vector_architecture of ntm_output_gate_vector is
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- Internal Signals
+  -- Control Internal
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
@@ -216,7 +216,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -467,7 +467,7 @@ begin
             start_vector_adder <= '0';
           end if;
 
-        when VECTOR_LOGISTIC_STATE =>   -- STEP 9
+        when VECTOR_LOGISTIC_STATE =>  -- STEP 9
 
           -- Control Internal
           data_in_enable_vector_logistic <= '0';
@@ -497,6 +497,9 @@ begin
 
             -- Control Outputs
             O_OUT_ENABLE <= '1';
+          else
+            -- Control Outputs
+            O_OUT_ENABLE <= '0';
           end if;
 
         when others =>

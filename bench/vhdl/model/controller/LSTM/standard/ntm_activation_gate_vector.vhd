@@ -130,7 +130,7 @@ architecture ntm_activation_gate_vector_architecture of ntm_activation_gate_vect
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- Internal Signals
+  -- Control Internal
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
@@ -207,6 +207,8 @@ begin
 
       -- Control Outputs
       READY <= '0';
+      
+      A_OUT_ENABLE <= '0';
 
       -- Control Internal
       index_loop <= ZERO;
@@ -214,9 +216,11 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
+      
+          A_OUT_ENABLE <= '0';
 
           -- Control Internal
           index_loop <= ZERO;
@@ -302,7 +306,7 @@ begin
           data_a_in_vector_adder <= data_out_matrix_product;
           data_b_in_vector_adder <= data_out_vector_adder;
 
-        when VECTOR_TANH_STATE =>       -- STEP 9
+        when VECTOR_TANH_STATE =>  -- STEP 9
 
           -- Data Inputs
           modulo_in_vector_tanh <= FULL;
@@ -329,6 +333,9 @@ begin
 
             -- Control Outputs
             A_OUT_ENABLE <= '1';
+          else
+            -- Control Outputs
+            A_OUT_ENABLE <= '0';
           end if;
 
         when others =>

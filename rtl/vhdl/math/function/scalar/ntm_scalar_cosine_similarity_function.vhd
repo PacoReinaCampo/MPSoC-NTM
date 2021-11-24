@@ -194,7 +194,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -213,7 +213,7 @@ begin
             start_scalar_product_bb <= '0';
           end if;
 
-        when SCALAR_PRODUCT_STATE =>    -- STEP 1
+        when SCALAR_PRODUCT_STATE =>  -- STEP 1
 
           if (ready_scalar_product_ab = '1' and ready_scalar_product_aa = '1' and ready_scalar_product_bb = '1') then
             -- Control Internal
@@ -241,7 +241,7 @@ begin
             start_scalar_multiplier <= '0';
           end if;
 
-        when SCALAR_DIVIDER_STATE =>    -- STEP 3
+        when SCALAR_DIVIDER_STATE =>  -- STEP 3
 
           if (ready_scalar_divider = '1') then
             -- Data Outputs

@@ -175,7 +175,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -184,9 +184,9 @@ begin
             controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
           end if;
 
-        when MATRIX_PRODUCT_STATE =>    -- STEP 1
+        when MATRIX_PRODUCT_STATE =>  -- STEP 1
 
-        when VECTOR_ADDER_STATE =>      -- STEP 2
+        when VECTOR_ADDER_STATE =>  -- STEP 2
 
           -- Data Outputs
           Y_OUT <= data_out_vector_adder;
@@ -201,13 +201,13 @@ begin
   -- VECTOR ADDER
   operation_vector_adder <= '0';
 
-  data_a_in_enable_vector_adder <= '0';
-  data_b_in_enable_vector_adder <= '0';
+  data_a_in_enable_vector_adder <= data_out_i_enable_matrix_product;
+  data_b_in_enable_vector_adder <= NU_IN_ENABLE;
 
   -- MATRIX PRODUCT
-  data_a_in_i_enable_matrix_product <= '0';
-  data_a_in_j_enable_matrix_product <= '0';
-  data_b_in_i_enable_matrix_product <= '0';
+  data_a_in_i_enable_matrix_product <= K_IN_Y_ENABLE;
+  data_a_in_j_enable_matrix_product <= K_IN_K_ENABLE;
+  data_b_in_i_enable_matrix_product <= R_IN_K_ENABLE;
   data_b_in_j_enable_matrix_product <= '0';
 
   -- DATA

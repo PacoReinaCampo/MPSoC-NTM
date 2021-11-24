@@ -78,9 +78,10 @@ architecture ntm_scalar_differentiation_function_architecture of ntm_scalar_diff
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    VECTOR_ADDER_STATE,                 -- STEP 1
-    VECTOR_MULTIPLIER_STATE,            -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    INPUT_INITIAL_STATE,                -- STEP 1
+    INPUT_STATE,                        -- STEP 2
+    SCALAR_ADDER_STATE,                 -- STEP 3
+    SCALAR_DIVIDER_STATE                -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -97,6 +98,12 @@ architecture ntm_scalar_differentiation_function_architecture of ntm_scalar_diff
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
+  -- Control Internal
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- Data Internal
+  signal data_int_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- SCALAR ADDER
   -- CONTROL
   signal start_scalar_adder : std_logic;
@@ -109,17 +116,6 @@ architecture ntm_scalar_differentiation_function_architecture of ntm_scalar_diff
   signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR MULTIPLIER
-  -- CONTROL
-  signal start_scalar_multiplier : std_logic;
-  signal ready_scalar_multiplier : std_logic;
-
-  -- DATA
-  signal modulo_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR DIVIDER
   -- CONTROL
@@ -138,6 +134,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- DATA_OUT(t) = (DATA_IN(t+1) - DATA_IN(t))/PERIOD_IN
+
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
@@ -148,23 +146,95 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      DATA_OUT_ENABLE <= '0';
+
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
+          DATA_OUT_ENABLE <= '0';
+            
           if (START = '1') then
+            -- Control Internal
+            index_loop <= ZERO;
+
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            controller_ctrl_fsm_int <= INPUT_INITIAL_STATE;
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
+        when INPUT_INITIAL_STATE =>  -- STEP 1
 
-        when VECTOR_ADDER_STATE =>      -- STEP 2
+          if (DATA_IN_ENABLE = '1') then
+            -- Data Internal
+            data_int_scalar_adder <= DATA_IN;
 
-        when ENDER_STATE =>             -- STEP 3
+            -- FSM Control
+            controller_ctrl_fsm_int <= INPUT_STATE;
+          end if;
+
+        when INPUT_STATE =>  -- STEP 1
+
+          if (DATA_IN_ENABLE = '1') then
+            -- Control Inputs
+            operation_scalar_adder <= '1';
+
+            -- Data Inputs
+            modulo_in_scalar_adder <= MODULO_IN;
+            data_a_in_scalar_adder <= DATA_IN;
+            data_b_in_scalar_adder <= data_int_scalar_adder;
+
+            -- Data Internal
+            data_int_scalar_adder <= DATA_IN;
+
+            -- Control Internal
+            start_scalar_adder <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
+          end if;
+
+        when SCALAR_ADDER_STATE =>  -- STEP 2
+
+          if (ready_scalar_adder = '1') then
+            -- Control Internal
+            start_scalar_divider <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;
+          else
+            -- Control Internal
+            start_scalar_adder <= '0';
+          end if;
+
+        when SCALAR_DIVIDER_STATE =>  -- STEP 3
+
+          if (ready_scalar_divider = '1') then
+            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
+              -- Control Outputs
+              READY <= '1';
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE));
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= INPUT_STATE;
+            end if;
+
+            -- Data Outputs
+            DATA_OUT <= data_out_scalar_divider;
+
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '1';
+          else
+            -- Control Internal
+            start_scalar_divider <= '0';
+          end if;
 
         when others =>
           -- FSM Control
@@ -173,8 +243,14 @@ begin
     end if;
   end process;
 
+  -- SCALAR DIVIDER
+  modulo_in_scalar_divider <= MODULO_IN;
+  data_a_in_scalar_divider <= data_out_scalar_adder;
+  data_b_in_scalar_divider <= PERIOD_IN;
+  data_out_scalar_divider  <= DATA_OUT;
+
   -- SCALAR ADDER
-  ntm_scalar_adder_i : ntm_scalar_adder
+  scalar_adder : ntm_scalar_adder
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -194,27 +270,6 @@ begin
       DATA_A_IN => data_a_in_scalar_adder,
       DATA_B_IN => data_b_in_scalar_adder,
       DATA_OUT  => data_out_scalar_adder
-      );
-
-  -- SCALAR MULTIPLIER
-  ntm_scalar_multiplier_i : ntm_scalar_multiplier
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_multiplier,
-      READY => ready_scalar_multiplier,
-
-      -- DATA
-      MODULO_IN => modulo_in_scalar_multiplier,
-      DATA_A_IN => data_a_in_scalar_multiplier,
-      DATA_B_IN => data_b_in_scalar_multiplier,
-      DATA_OUT  => data_out_scalar_multiplier
       );
 
   -- SCALAR DIVIDER

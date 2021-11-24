@@ -163,7 +163,7 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
   signal differentiation_u_ctrl_fsm_int : differentiation_u_ctrl_fsm;
   signal differentiation_b_ctrl_fsm_int : differentiation_b_ctrl_fsm;
 
-  -- Internal Signals
+  -- Control Internal
   signal pipeline_vector_differentiation : std_logic;
   signal pipeline_matrix_product         : std_logic;
   signal pipeline_vector_summation       : std_logic;
@@ -227,13 +227,17 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
   signal start_vector_differentiation : std_logic;
   signal ready_vector_differentiation : std_logic;
 
-  signal data_in_enable_vector_differentiation : std_logic;
+  signal data_in_vector_enable_vector_differentiation : std_logic;
+  signal data_in_scalar_enable_vector_differentiation : std_logic;
 
-  signal data_out_enable_vector_differentiation : std_logic;
+  signal data_out_vector_enable_vector_differentiation : std_logic;
+  signal data_out_scalar_enable_vector_differentiation : std_logic;
 
   -- DATA
   signal modulo_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal period_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -291,19 +295,20 @@ begin
       -- di(t;l) = ds(t;l) o a(t;l) o i(t;l) o (1 - i(t;l))
 
       case differentiation_i_ctrl_fsm_int is
-        when STARTER_DI_STATE =>        -- STEP 0
+        when STARTER_DI_STATE =>  -- STEP 0
 
         when VECTOR_DIFFERENTIATION_DI_STATE =>  -- STEP 1
 
           -- Control Inputs
-          data_in_enable_vector_differentiation <= '0';
+          data_in_vector_enable_vector_differentiation <= '0';
+          data_in_scalar_enable_vector_differentiation <= '0';
 
           -- Data Inputs
           modulo_in_vector_differentiation <= FULL;
           size_in_vector_differentiation   <= FULL;
           data_in_vector_differentiation   <= FULL;
 
-        when VECTOR_ADDER_DI_STATE =>   -- STEP 2
+        when VECTOR_ADDER_DI_STATE =>  -- STEP 2
 
           -- Control Inputs
           operation_vector_adder <= '0';
@@ -374,7 +379,7 @@ begin
       -- dW(t;l) = summation(d*(t;l) · x(t;x))[t in 0 to T]
 
       case differentiation_w_ctrl_fsm_int is
-        when STARTER_DW_STATE =>    -- STEP 0
+        when STARTER_DW_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -397,7 +402,8 @@ begin
         when VECTOR_DIFFERENTIATION_DW_STATE =>  -- STEP 1
 
           -- Control Inputs
-          data_in_enable_vector_differentiation <= '0';
+          data_in_vector_enable_vector_differentiation <= '0';
+          data_in_scalar_enable_vector_differentiation <= '0';
 
           -- Data Inputs
           modulo_in_vector_differentiation <= FULL;
@@ -457,7 +463,7 @@ begin
       -- dK(t;l) = summation(d*(t;l) · r(t;i;k))[t in 0 to T-1]
 
       case differentiation_k_ctrl_fsm_int is
-        when STARTER_DK_STATE =>    -- STEP 0
+        when STARTER_DK_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -480,7 +486,8 @@ begin
         when VECTOR_DIFFERENTIATION_DK_STATE =>  -- STEP 1
 
           -- Control Inputs
-          data_in_enable_vector_differentiation <= '0';
+          data_in_vector_enable_vector_differentiation <= '0';
+          data_in_scalar_enable_vector_differentiation <= '0';
 
           -- Data Inputs
           modulo_in_vector_differentiation <= FULL;
@@ -540,7 +547,7 @@ begin
       -- dU(t;l) = summation(d*(t+1;l) · h(t;l))[t in 0 to T-1]
 
       case differentiation_u_ctrl_fsm_int is
-        when STARTER_DU_STATE =>    -- STEP 0
+        when STARTER_DU_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -563,7 +570,8 @@ begin
         when VECTOR_DIFFERENTIATION_DU_STATE =>  -- STEP 1
 
           -- Control Inputs
-          data_in_enable_vector_differentiation <= '0';
+          data_in_vector_enable_vector_differentiation <= '0';
+          data_in_scalar_enable_vector_differentiation <= '0';
 
           -- Data Inputs
           modulo_in_vector_differentiation <= FULL;
@@ -623,7 +631,7 @@ begin
       -- db(t;l) = summation(d*(t;l))[t in 0 to T]
 
       case differentiation_b_ctrl_fsm_int is
-        when STARTER_DB_STATE =>    -- STEP 0
+        when STARTER_DB_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -646,7 +654,8 @@ begin
         when VECTOR_DIFFERENTIATION_DB_STATE =>  -- STEP 1
 
           -- Control Inputs
-          data_in_enable_vector_differentiation <= '0';
+          data_in_vector_enable_vector_differentiation <= '0';
+          data_in_scalar_enable_vector_differentiation <= '0';
 
           -- Data Inputs
           modulo_in_vector_differentiation <= FULL;
@@ -773,13 +782,17 @@ begin
       START => start_vector_differentiation,
       READY => ready_vector_differentiation,
 
-      DATA_IN_ENABLE => data_in_enable_vector_differentiation,
+      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_differentiation,
+      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_differentiation,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_differentiation,
+      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_differentiation,
+      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_differentiation,
 
       -- DATA
       MODULO_IN => modulo_in_vector_differentiation,
       SIZE_IN   => size_in_vector_differentiation,
+      PERIOD_IN => period_in_vector_differentiation,
+      LENGTH_IN => length_in_vector_differentiation,
       DATA_IN   => data_in_vector_differentiation,
       DATA_OUT  => data_out_vector_differentiation
       );

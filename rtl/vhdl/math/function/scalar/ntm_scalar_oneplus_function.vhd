@@ -72,9 +72,9 @@ architecture ntm_scalar_oneplus_function_architecture of ntm_scalar_oneplus_func
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    VECTOR_ADDER_STATE,                 -- STEP 1
-    VECTOR_EXPONENTIATOR_STATE,         -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    SCALAR_ADDER_STATE,                 -- STEP 1
+    SCALAR_EXPONENTIATOR_STATE,         -- STEP 2
+    SCALAR_LOGARITHM_STATE              -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -83,6 +83,8 @@ architecture ntm_scalar_oneplus_function_architecture of ntm_scalar_oneplus_func
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
+  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -121,6 +123,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- DATA_OUT = logarithm(1 + (exponentiation(EULER,DATA_IN)))
+
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
@@ -134,20 +138,42 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
           if (START = '1') then
+            -- Control Internal
+            start_scalar_exponentiator <= '1';
+
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_EXPONENTIATOR_STATE;
+            controller_ctrl_fsm_int <= SCALAR_EXPONENTIATOR_STATE;
+          else
+            -- Control Internal
+            start_scalar_exponentiator <= '0';
           end if;
 
-        when VECTOR_EXPONENTIATOR_STATE =>  -- STEP 1
+        when SCALAR_EXPONENTIATOR_STATE =>  -- STEP 1
 
-        when VECTOR_ADDER_STATE =>      -- STEP 2
+          if (ready_scalar_exponentiator = '1') then
+            -- Control Internal
+            start_scalar_adder <= '1';
 
-        when ENDER_STATE =>             -- STEP 3
+            -- FSM Control
+            controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
+          else
+            -- Control Internal
+            start_scalar_exponentiator <= '0';
+          end if;
+
+        when SCALAR_ADDER_STATE =>  -- STEP 2
+
+          if (ready_scalar_adder = '1') then
+            -- FSM Control
+            controller_ctrl_fsm_int <= SCALAR_LOGARITHM_STATE;
+          end if;
+
+        when SCALAR_LOGARITHM_STATE =>  -- STEP 3
 
         when others =>
           -- FSM Control
@@ -157,7 +183,21 @@ begin
   end process;
 
   -- SCALAR ADDER
-  ntm_scalar_adder_i : ntm_scalar_adder
+  operation_scalar_adder <= '0';
+
+  -- DATA
+  -- SCALAR ADDER
+  modulo_in_scalar_adder <= MODULO_IN;
+  data_a_in_scalar_adder <= ONE;
+  data_b_in_scalar_adder <= data_out_scalar_exponentiator;
+
+  -- SCALAR EXPONENTIATOR
+  modulo_in_scalar_exponentiator <= MODULO_IN;
+  data_a_in_scalar_exponentiator <= EULER;
+  data_b_in_scalar_exponentiator <= DATA_IN;
+
+  -- SCALAR ADDER
+  scalar_adder : ntm_scalar_adder
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -180,7 +220,7 @@ begin
       );
 
   -- SCALAR EXPONENTIATOR
-  ntm_scalar_exponentiator_i : ntm_scalar_exponentiator
+  scalar_exponentiator : ntm_scalar_exponentiator
     generic map (
       DATA_SIZE => DATA_SIZE
       )

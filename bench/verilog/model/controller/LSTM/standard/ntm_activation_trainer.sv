@@ -201,12 +201,17 @@ module ntm_activation_trainer #(
   wire start_vector_differentiation;
   wire ready_vector_differentiation;
 
-  wire data_in_enable_vector_differentiation;
-  wire data_out_enable_vector_differentiation;
+  wire data_in_vector_enable_vector_differentiation;
+  wire data_in_scalar_enable_vector_differentiation;
+
+  wire data_out_vector_enable_vector_differentiation;
+  wire data_out_scalar_enable_vector_differentiation;
 
   // DATA
   wire [DATA_SIZE-1:0] modulo_in_vector_differentiation;
   wire [DATA_SIZE-1:0] size_in_vector_differentiation;
+  wire [DATA_SIZE-1:0] period_in_vector_differentiation;
+  wire [DATA_SIZE-1:0] length_in_vector_differentiation;
   wire [DATA_SIZE-1:0] data_in_vector_differentiation;
   wire [DATA_SIZE-1:0] data_out_vector_differentiation;
 
@@ -473,12 +478,17 @@ module ntm_activation_trainer #(
     .START(start_vector_differentiation),
     .READY(ready_vector_differentiation),
 
-    .DATA_IN_ENABLE(data_in_enable_vector_differentiation),
-    .DATA_OUT_ENABLE(data_out_enable_vector_differentiation),
+    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_differentiation),
+    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_differentiation),
+
+    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_differentiation),
+    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_differentiation),
 
     // DATA
     .MODULO_IN(modulo_in_vector_differentiation),
     .SIZE_IN(size_in_vector_differentiation),
+    .PERIOD_IN(period_in_vector_differentiation),
+    .LENGTH_IN(length_in_vector_differentiation),
     .DATA_IN(data_in_vector_differentiation),
     .DATA_OUT(data_out_vector_differentiation)
   );

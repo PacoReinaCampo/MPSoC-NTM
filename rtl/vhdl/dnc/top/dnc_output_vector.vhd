@@ -174,7 +174,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case output_vector_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -183,9 +183,9 @@ begin
             output_vector_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
           end if;
 
-        when MATRIX_PRODUCT_STATE =>    -- STEP 1
+        when MATRIX_PRODUCT_STATE =>  -- STEP 1
 
-        when VECTOR_ADDER_STATE =>      -- STEP 2
+        when VECTOR_ADDER_STATE =>  -- STEP 2
 
           -- Data Outputs
           Y_OUT <= data_out_vector_adder;

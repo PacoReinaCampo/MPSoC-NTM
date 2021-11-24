@@ -118,7 +118,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case adder_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -138,7 +138,7 @@ begin
             adder_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
-        when ENDER_STATE =>             -- STEP 1
+        when ENDER_STATE =>  -- STEP 1
 
           if (unsigned(MODULO_IN) > unsigned(ZERO)) then
             if (unsigned(DATA_A_IN) > unsigned(DATA_B_IN)) then

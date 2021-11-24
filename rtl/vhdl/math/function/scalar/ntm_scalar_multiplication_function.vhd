@@ -95,7 +95,7 @@ architecture ntm_scalar_multiplication_function_architecture of ntm_scalar_multi
   -- Finite State Machine
   signal multiplication_ctrl_fsm_int : multiplication_ctrl_fsm;
 
-  -- Internal Signals
+  -- Control Internal
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR MULTIPLIER
@@ -125,25 +125,25 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      -- Assignations
+      -- Control Internal
       index_loop <= ZERO;
 
     elsif (rising_edge(CLK)) then
 
       case multiplication_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
           if (START = '1') then
-            -- Assignations
+            -- Control Internal
             index_loop <= ZERO;
 
             -- FSM Control
             multiplication_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_STATE =>             -- STEP 1
+        when INPUT_STATE =>  -- STEP 1
 
           if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
@@ -163,7 +163,7 @@ begin
           end if;
 
 
-        when ENDER_STATE =>             -- STEP 2
+        when ENDER_STATE =>  -- STEP 2
 
           if (ready_scalar_multiplier = '1') then
             if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
@@ -198,7 +198,7 @@ begin
   end process;
 
   -- SCALAR MULTIPLIER
-  ntm_scalar_multiplier_i : ntm_scalar_multiplier
+  scalar_multiplier : ntm_scalar_multiplier
     generic map (
       DATA_SIZE => DATA_SIZE
       )

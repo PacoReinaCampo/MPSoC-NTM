@@ -99,7 +99,7 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- Internal Signals
+  -- Control Internal
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR MULTIPLIER
@@ -162,7 +162,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -187,7 +187,7 @@ begin
             start_vector_tanh <= '0';
           end if;
 
-        when VECTOR_TANH_STATE =>       -- STEP 1
+        when VECTOR_TANH_STATE =>  -- STEP 1
 
           if (data_out_enable_vector_tanh = '1') then
             if (unsigned(index_loop) = unsigned(ZERO)) then
@@ -225,6 +225,9 @@ begin
             -- Control Outputs
             H_OUT_ENABLE <= '1';
           else
+            -- Control Outputs
+            H_OUT_ENABLE <= '0';
+
             -- Control Internal
             start_vector_multiplier <= '0';
           end if;

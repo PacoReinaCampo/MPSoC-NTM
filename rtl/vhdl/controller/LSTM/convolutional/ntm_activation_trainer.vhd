@@ -163,7 +163,7 @@ architecture ntm_activation_trainer_architecture of ntm_activation_trainer is
   signal differentiation_u_ctrl_fsm_int : differentiation_u_ctrl_fsm;
   signal differentiation_b_ctrl_fsm_int : differentiation_b_ctrl_fsm;
 
-  -- Internal Signals
+  -- Control Internal
   signal pipeline_vector_differentiation : std_logic;
   signal pipeline_matrix_product         : std_logic;
   signal pipeline_vector_summation       : std_logic;
@@ -312,7 +312,7 @@ begin
       -- da(t;l) = ds(t;l) o i(t;l) o (1 - a(t;l)^2)
 
       case differentiation_a_ctrl_fsm_int is
-        when STARTER_DA_STATE =>        -- STEP 0
+        when STARTER_DA_STATE =>  -- STEP 0
 
         when VECTOR_DIFFERENTIATION_DA_STATE =>  -- STEP 1
 
@@ -337,7 +337,7 @@ begin
           data_a_in_vector_exponentiator <= FULL;
           data_b_in_vector_exponentiator <= FULL;
 
-        when VECTOR_ADDER_DA_STATE =>   -- STEP 3
+        when VECTOR_ADDER_DA_STATE =>  -- STEP 3
 
           -- Control Inputs
           operation_vector_adder <= '0';
@@ -396,7 +396,7 @@ begin
       -- dW(t;l) = summation(d*(t;l) · x(t;x))[t in 0 to T]
 
       case differentiation_w_ctrl_fsm_int is
-        when STARTER_DW_STATE =>        -- STEP 0
+        when STARTER_DW_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -480,7 +480,7 @@ begin
       -- dK(t;l) = summation(d*(t;l) · r(t;i;k))[t in 0 to T-1]
 
       case differentiation_k_ctrl_fsm_int is
-        when STARTER_DK_STATE =>        -- STEP 0
+        when STARTER_DK_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -564,7 +564,7 @@ begin
       -- dU(t;l) = summation(d*(t+1;l) · h(t;l))[t in 0 to T-1]
 
       case differentiation_u_ctrl_fsm_int is
-        when STARTER_DU_STATE =>        -- STEP 0
+        when STARTER_DU_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -648,7 +648,7 @@ begin
       -- db(t;l) = summation(d*(t;l))[t in 0 to T]
 
       case differentiation_b_ctrl_fsm_int is
-        when STARTER_DB_STATE =>        -- STEP 0
+        when STARTER_DB_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 

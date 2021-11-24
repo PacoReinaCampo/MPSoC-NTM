@@ -169,7 +169,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Data Outputs
           DATA_OUT <= ZERO;
 
@@ -206,7 +206,7 @@ begin
             start_vector_adder <= '0';
           end if;
 
-        when VECTOR_ADDER_STATE =>      -- STEP 2
+        when VECTOR_ADDER_STATE =>  -- STEP 2
 
           if (data_out_enable_vector_multiplier = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN) - unsigned(ONE))) then

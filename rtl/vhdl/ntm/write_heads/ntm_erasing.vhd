@@ -196,7 +196,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -231,7 +231,7 @@ begin
             start_vector_multiplier <= '0';
           end if;
 
-        when VECTOR_ADDER_STATE =>      -- STEP 2
+        when VECTOR_ADDER_STATE =>  -- STEP 2
 
           if (data_out_enable_vector_adder = '1') then
             -- Control Internal
@@ -244,7 +244,7 @@ begin
             start_vector_adder <= '0';
           end if;
 
-        when MATRIX_PRODUCT_STATE =>    -- STEP 3
+        when MATRIX_PRODUCT_STATE =>  -- STEP 3
 
           if (data_out_i_enable_matrix_product = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then

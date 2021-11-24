@@ -166,7 +166,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -252,7 +252,7 @@ begin
             start_scalar_adder <= '0';
           end if;
 
-        when SCALAR_DIVIDER_STATE =>    -- STEP 5
+        when SCALAR_DIVIDER_STATE =>  -- STEP 5
 
           if (ready_scalar_divider = '1') then
             -- Data Outputs
@@ -292,7 +292,7 @@ begin
   data_b_in_scalar_exponentiator <= DATA_IN;
 
   -- SCALAR ADDER
-  ntm_scalar_adder_i : ntm_scalar_adder
+  scalar_adder : ntm_scalar_adder
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -315,7 +315,7 @@ begin
       );
 
   -- SCALAR MULTIPLIER
-  ntm_scalar_multiplier_i : ntm_scalar_multiplier
+  scalar_multiplier : ntm_scalar_multiplier
     generic map (
       DATA_SIZE => DATA_SIZE
       )
