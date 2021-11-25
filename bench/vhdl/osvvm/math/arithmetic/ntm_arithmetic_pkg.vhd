@@ -68,88 +68,88 @@ package ntm_arithmetic_pkg is
   constant R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
   -- SCALAR-FUNCTIONALITY
-  constant STIMULUS_NTM_SCALAR_MOD_TEST           : boolean := false;
-  constant STIMULUS_NTM_SCALAR_ADDER_TEST         : boolean := false;
-  constant STIMULUS_NTM_SCALAR_MULTIPLIER_TEST    : boolean := false;
-  constant STIMULUS_NTM_SCALAR_INVERTER_TEST      : boolean := false;
-  constant STIMULUS_NTM_SCALAR_DIVIDER_TEST       : boolean := false;
-  constant STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST : boolean := false;
-  constant STIMULUS_NTM_SCALAR_LCM_TEST           : boolean := false;
-  constant STIMULUS_NTM_SCALAR_GCD_TEST           : boolean := false;
+  signal STIMULUS_NTM_SCALAR_MOD_TEST           : boolean := false;
+  signal STIMULUS_NTM_SCALAR_ADDER_TEST         : boolean := false;
+  signal STIMULUS_NTM_SCALAR_MULTIPLIER_TEST    : boolean := false;
+  signal STIMULUS_NTM_SCALAR_INVERTER_TEST      : boolean := false;
+  signal STIMULUS_NTM_SCALAR_DIVIDER_TEST       : boolean := false;
+  signal STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST : boolean := false;
+  signal STIMULUS_NTM_SCALAR_LCM_TEST           : boolean := false;
+  signal STIMULUS_NTM_SCALAR_GCD_TEST           : boolean := false;
 
-  constant STIMULUS_NTM_SCALAR_MOD_CASE_0           : boolean := false;
-  constant STIMULUS_NTM_SCALAR_ADDER_CASE_0         : boolean := false;
-  constant STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0    : boolean := false;
-  constant STIMULUS_NTM_SCALAR_INVERTER_CASE_0      : boolean := false;
-  constant STIMULUS_NTM_SCALAR_DIVIDER_CASE_0       : boolean := false;
-  constant STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0 : boolean := false;
-  constant STIMULUS_NTM_SCALAR_LCM_CASE_0           : boolean := false;
-  constant STIMULUS_NTM_SCALAR_GCD_CASE_0           : boolean := false;
+  signal STIMULUS_NTM_SCALAR_MOD_CASE_0           : boolean := false;
+  signal STIMULUS_NTM_SCALAR_ADDER_CASE_0         : boolean := false;
+  signal STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0    : boolean := false;
+  signal STIMULUS_NTM_SCALAR_INVERTER_CASE_0      : boolean := false;
+  signal STIMULUS_NTM_SCALAR_DIVIDER_CASE_0       : boolean := false;
+  signal STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_SCALAR_LCM_CASE_0           : boolean := false;
+  signal STIMULUS_NTM_SCALAR_GCD_CASE_0           : boolean := false;
 
-  constant STIMULUS_NTM_SCALAR_MOD_CASE_1           : boolean := false;
-  constant STIMULUS_NTM_SCALAR_ADDER_CASE_1         : boolean := false;
-  constant STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1    : boolean := false;
-  constant STIMULUS_NTM_SCALAR_INVERTER_CASE_1      : boolean := false;
-  constant STIMULUS_NTM_SCALAR_DIVIDER_CASE_1       : boolean := false;
-  constant STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1 : boolean := false;
-  constant STIMULUS_NTM_SCALAR_LCM_CASE_1           : boolean := false;
-  constant STIMULUS_NTM_SCALAR_GCD_CASE_1           : boolean := false;
+  signal STIMULUS_NTM_SCALAR_MOD_CASE_1           : boolean := false;
+  signal STIMULUS_NTM_SCALAR_ADDER_CASE_1         : boolean := false;
+  signal STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1    : boolean := false;
+  signal STIMULUS_NTM_SCALAR_INVERTER_CASE_1      : boolean := false;
+  signal STIMULUS_NTM_SCALAR_DIVIDER_CASE_1       : boolean := false;
+  signal STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_SCALAR_LCM_CASE_1           : boolean := false;
+  signal STIMULUS_NTM_SCALAR_GCD_CASE_1           : boolean := false;
 
   -- VECTOR-FUNCTIONALITY
-  constant STIMULUS_NTM_VECTOR_MOD_TEST           : boolean := false;
-  constant STIMULUS_NTM_VECTOR_ADDER_TEST         : boolean := false;
-  constant STIMULUS_NTM_VECTOR_MULTIPLIER_TEST    : boolean := false;
-  constant STIMULUS_NTM_VECTOR_INVERTER_TEST      : boolean := false;
-  constant STIMULUS_NTM_VECTOR_DIVIDER_TEST       : boolean := false;
-  constant STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST : boolean := false;
-  constant STIMULUS_NTM_VECTOR_LCM_TEST           : boolean := false;
-  constant STIMULUS_NTM_VECTOR_GCD_TEST           : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MOD_TEST           : boolean := false;
+  signal STIMULUS_NTM_VECTOR_ADDER_TEST         : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MULTIPLIER_TEST    : boolean := false;
+  signal STIMULUS_NTM_VECTOR_INVERTER_TEST      : boolean := false;
+  signal STIMULUS_NTM_VECTOR_DIVIDER_TEST       : boolean := false;
+  signal STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST : boolean := false;
+  signal STIMULUS_NTM_VECTOR_LCM_TEST           : boolean := false;
+  signal STIMULUS_NTM_VECTOR_GCD_TEST           : boolean := false;
 
-  constant STIMULUS_NTM_VECTOR_MOD_CASE_0           : boolean := false;
-  constant STIMULUS_NTM_VECTOR_ADDER_CASE_0         : boolean := false;
-  constant STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_0    : boolean := false;
-  constant STIMULUS_NTM_VECTOR_INVERTER_CASE_0      : boolean := false;
-  constant STIMULUS_NTM_VECTOR_DIVIDER_CASE_0       : boolean := false;
-  constant STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0 : boolean := false;
-  constant STIMULUS_NTM_VECTOR_LCM_CASE_0           : boolean := false;
-  constant STIMULUS_NTM_VECTOR_GCD_CASE_0           : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MOD_CASE_0           : boolean := false;
+  signal STIMULUS_NTM_VECTOR_ADDER_CASE_0         : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_0    : boolean := false;
+  signal STIMULUS_NTM_VECTOR_INVERTER_CASE_0      : boolean := false;
+  signal STIMULUS_NTM_VECTOR_DIVIDER_CASE_0       : boolean := false;
+  signal STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_VECTOR_LCM_CASE_0           : boolean := false;
+  signal STIMULUS_NTM_VECTOR_GCD_CASE_0           : boolean := false;
 
-  constant STIMULUS_NTM_VECTOR_MOD_CASE_1           : boolean := false;
-  constant STIMULUS_NTM_VECTOR_ADDER_CASE_1         : boolean := false;
-  constant STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_1    : boolean := false;
-  constant STIMULUS_NTM_VECTOR_INVERTER_CASE_1      : boolean := false;
-  constant STIMULUS_NTM_VECTOR_DIVIDER_CASE_1       : boolean := false;
-  constant STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_1 : boolean := false;
-  constant STIMULUS_NTM_VECTOR_LCM_CASE_1           : boolean := false;
-  constant STIMULUS_NTM_VECTOR_GCD_CASE_1           : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MOD_CASE_1           : boolean := false;
+  signal STIMULUS_NTM_VECTOR_ADDER_CASE_1         : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_1    : boolean := false;
+  signal STIMULUS_NTM_VECTOR_INVERTER_CASE_1      : boolean := false;
+  signal STIMULUS_NTM_VECTOR_DIVIDER_CASE_1       : boolean := false;
+  signal STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_VECTOR_LCM_CASE_1           : boolean := false;
+  signal STIMULUS_NTM_VECTOR_GCD_CASE_1           : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
-  constant STIMULUS_NTM_MATRIX_MOD_TEST           : boolean := false;
-  constant STIMULUS_NTM_MATRIX_ADDER_TEST         : boolean := false;
-  constant STIMULUS_NTM_MATRIX_MULTIPLIER_TEST    : boolean := false;
-  constant STIMULUS_NTM_MATRIX_INVERTER_TEST      : boolean := false;
-  constant STIMULUS_NTM_MATRIX_DIVIDER_TEST       : boolean := false;
-  constant STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST : boolean := false;
-  constant STIMULUS_NTM_MATRIX_LCM_TEST           : boolean := false;
-  constant STIMULUS_NTM_MATRIX_GCD_TEST           : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MOD_TEST           : boolean := false;
+  signal STIMULUS_NTM_MATRIX_ADDER_TEST         : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MULTIPLIER_TEST    : boolean := false;
+  signal STIMULUS_NTM_MATRIX_INVERTER_TEST      : boolean := false;
+  signal STIMULUS_NTM_MATRIX_DIVIDER_TEST       : boolean := false;
+  signal STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST : boolean := false;
+  signal STIMULUS_NTM_MATRIX_LCM_TEST           : boolean := false;
+  signal STIMULUS_NTM_MATRIX_GCD_TEST           : boolean := false;
 
-  constant STIMULUS_NTM_MATRIX_MOD_CASE_0           : boolean := false;
-  constant STIMULUS_NTM_MATRIX_ADDER_CASE_0         : boolean := false;
-  constant STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_0    : boolean := false;
-  constant STIMULUS_NTM_MATRIX_INVERTER_CASE_0      : boolean := false;
-  constant STIMULUS_NTM_MATRIX_DIVIDER_CASE_0       : boolean := false;
-  constant STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0 : boolean := false;
-  constant STIMULUS_NTM_MATRIX_LCM_CASE_0           : boolean := false;
-  constant STIMULUS_NTM_MATRIX_GCD_CASE_0           : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MOD_CASE_0           : boolean := false;
+  signal STIMULUS_NTM_MATRIX_ADDER_CASE_0         : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_0    : boolean := false;
+  signal STIMULUS_NTM_MATRIX_INVERTER_CASE_0      : boolean := false;
+  signal STIMULUS_NTM_MATRIX_DIVIDER_CASE_0       : boolean := false;
+  signal STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_MATRIX_LCM_CASE_0           : boolean := false;
+  signal STIMULUS_NTM_MATRIX_GCD_CASE_0           : boolean := false;
 
-  constant STIMULUS_NTM_MATRIX_MOD_CASE_1           : boolean := false;
-  constant STIMULUS_NTM_MATRIX_ADDER_CASE_1         : boolean := false;
-  constant STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_1    : boolean := false;
-  constant STIMULUS_NTM_MATRIX_INVERTER_CASE_1      : boolean := false;
-  constant STIMULUS_NTM_MATRIX_DIVIDER_CASE_1       : boolean := false;
-  constant STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1 : boolean := false;
-  constant STIMULUS_NTM_MATRIX_LCM_CASE_1           : boolean := false;
-  constant STIMULUS_NTM_MATRIX_GCD_CASE_1           : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MOD_CASE_1           : boolean := false;
+  signal STIMULUS_NTM_MATRIX_ADDER_CASE_1         : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_1    : boolean := false;
+  signal STIMULUS_NTM_MATRIX_INVERTER_CASE_1      : boolean := false;
+  signal STIMULUS_NTM_MATRIX_DIVIDER_CASE_1       : boolean := false;
+  signal STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_MATRIX_LCM_CASE_1           : boolean := false;
+  signal STIMULUS_NTM_MATRIX_GCD_CASE_1           : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
@@ -165,91 +165,7 @@ package ntm_arithmetic_pkg is
       N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
       W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
       L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
-      R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
-
-      -- SCALAR-FUNCTIONALITY
-      STIMULUS_NTM_SCALAR_MOD_TEST           : boolean := false;
-      STIMULUS_NTM_SCALAR_ADDER_TEST         : boolean := false;
-      STIMULUS_NTM_SCALAR_MULTIPLIER_TEST    : boolean := false;
-      STIMULUS_NTM_SCALAR_INVERTER_TEST      : boolean := false;
-      STIMULUS_NTM_SCALAR_DIVIDER_TEST       : boolean := false;
-      STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST : boolean := false;
-      STIMULUS_NTM_SCALAR_LCM_TEST           : boolean := false;
-      STIMULUS_NTM_SCALAR_GCD_TEST           : boolean := false;
-
-      STIMULUS_NTM_SCALAR_MOD_CASE_0           : boolean := false;
-      STIMULUS_NTM_SCALAR_ADDER_CASE_0         : boolean := false;
-      STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0    : boolean := false;
-      STIMULUS_NTM_SCALAR_INVERTER_CASE_0      : boolean := false;
-      STIMULUS_NTM_SCALAR_DIVIDER_CASE_0       : boolean := false;
-      STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0 : boolean := false;
-      STIMULUS_NTM_SCALAR_LCM_CASE_0           : boolean := false;
-      STIMULUS_NTM_SCALAR_GCD_CASE_0           : boolean := false;
-
-      STIMULUS_NTM_SCALAR_MOD_CASE_1           : boolean := false;
-      STIMULUS_NTM_SCALAR_ADDER_CASE_1         : boolean := false;
-      STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1    : boolean := false;
-      STIMULUS_NTM_SCALAR_INVERTER_CASE_1      : boolean := false;
-      STIMULUS_NTM_SCALAR_DIVIDER_CASE_1       : boolean := false;
-      STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1 : boolean := false;
-      STIMULUS_NTM_SCALAR_LCM_CASE_1           : boolean := false;
-      STIMULUS_NTM_SCALAR_GCD_CASE_1           : boolean := false;
-
-      -- VECTOR-FUNCTIONALITY
-      STIMULUS_NTM_VECTOR_MOD_TEST           : boolean := false;
-      STIMULUS_NTM_VECTOR_ADDER_TEST         : boolean := false;
-      STIMULUS_NTM_VECTOR_MULTIPLIER_TEST    : boolean := false;
-      STIMULUS_NTM_VECTOR_INVERTER_TEST      : boolean := false;
-      STIMULUS_NTM_VECTOR_DIVIDER_TEST       : boolean := false;
-      STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST : boolean := false;
-      STIMULUS_NTM_VECTOR_LCM_TEST           : boolean := false;
-      STIMULUS_NTM_VECTOR_GCD_TEST           : boolean := false;
-
-      STIMULUS_NTM_VECTOR_MOD_CASE_0           : boolean := false;
-      STIMULUS_NTM_VECTOR_ADDER_CASE_0         : boolean := false;
-      STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_0    : boolean := false;
-      STIMULUS_NTM_VECTOR_INVERTER_CASE_0      : boolean := false;
-      STIMULUS_NTM_VECTOR_DIVIDER_CASE_0       : boolean := false;
-      STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0 : boolean := false;
-      STIMULUS_NTM_VECTOR_LCM_CASE_0           : boolean := false;
-      STIMULUS_NTM_VECTOR_GCD_CASE_0           : boolean := false;
-
-      STIMULUS_NTM_VECTOR_MOD_CASE_1           : boolean := false;
-      STIMULUS_NTM_VECTOR_ADDER_CASE_1         : boolean := false;
-      STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_1    : boolean := false;
-      STIMULUS_NTM_VECTOR_INVERTER_CASE_1      : boolean := false;
-      STIMULUS_NTM_VECTOR_DIVIDER_CASE_1       : boolean := false;
-      STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_1 : boolean := false;
-      STIMULUS_NTM_VECTOR_LCM_CASE_1           : boolean := false;
-      STIMULUS_NTM_VECTOR_GCD_CASE_1           : boolean := false;
-
-      -- MATRIX-FUNCTIONALITY
-      STIMULUS_NTM_MATRIX_MOD_TEST           : boolean := false;
-      STIMULUS_NTM_MATRIX_ADDER_TEST         : boolean := false;
-      STIMULUS_NTM_MATRIX_MULTIPLIER_TEST    : boolean := false;
-      STIMULUS_NTM_MATRIX_INVERTER_TEST      : boolean := false;
-      STIMULUS_NTM_MATRIX_DIVIDER_TEST       : boolean := false;
-      STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST : boolean := false;
-      STIMULUS_NTM_MATRIX_LCM_TEST           : boolean := false;
-      STIMULUS_NTM_MATRIX_GCD_TEST           : boolean := false;
-
-      STIMULUS_NTM_MATRIX_MOD_CASE_0           : boolean := false;
-      STIMULUS_NTM_MATRIX_ADDER_CASE_0         : boolean := false;
-      STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_0    : boolean := false;
-      STIMULUS_NTM_MATRIX_INVERTER_CASE_0      : boolean := false;
-      STIMULUS_NTM_MATRIX_DIVIDER_CASE_0       : boolean := false;
-      STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0 : boolean := false;
-      STIMULUS_NTM_MATRIX_LCM_CASE_0           : boolean := false;
-      STIMULUS_NTM_MATRIX_GCD_CASE_0           : boolean := false;
-
-      STIMULUS_NTM_MATRIX_MOD_CASE_1           : boolean := false;
-      STIMULUS_NTM_MATRIX_ADDER_CASE_1         : boolean := false;
-      STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_1    : boolean := false;
-      STIMULUS_NTM_MATRIX_INVERTER_CASE_1      : boolean := false;
-      STIMULUS_NTM_MATRIX_DIVIDER_CASE_1       : boolean := false;
-      STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1 : boolean := false;
-      STIMULUS_NTM_MATRIX_LCM_CASE_1           : boolean := false;
-      STIMULUS_NTM_MATRIX_GCD_CASE_1           : boolean := false
+      R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))   -- i in 0 to R-1
       );
     port (
       -- GLOBAL
