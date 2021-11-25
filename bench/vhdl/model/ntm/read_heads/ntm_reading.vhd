@@ -232,12 +232,12 @@ begin
   end process;
 
   -- VECTOR MULTIPLIER
-  data_a_in_enable_vector_multiplier <= '0';
-  data_b_in_enable_vector_multiplier <= '0';
+  data_a_in_enable_vector_multiplier <= M_IN_K_ENABLE;
+  data_b_in_enable_vector_multiplier <= M_IN_K_ENABLE;
 
   -- VECTOR SUMMATION
-  data_in_vector_enable_vector_summation <= '0';
-  data_in_scalar_enable_vector_summation <= '0';
+  data_in_vector_enable_vector_summation <= data_out_enable_vector_multiplier;
+  data_in_scalar_enable_vector_summation <= M_IN_J_ENABLE;
 
   -- DATA
   -- VECTOR MULTIPLIER

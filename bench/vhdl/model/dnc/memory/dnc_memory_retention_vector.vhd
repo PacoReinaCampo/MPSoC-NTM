@@ -103,7 +103,7 @@ architecture dnc_memory_retention_vector_architecture of dnc_memory_retention_ve
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- Internal Signals
+  -- Control Internal
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR MULTIPLICATION
@@ -192,13 +192,41 @@ begin
           index_loop <= ZERO;
 
           if (START = '1') then
+            -- Control Internal
+            start_vector_multiplier <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          else
+            -- Control Internal
+            start_vector_multiplier <= '0';
           end if;
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
 
+          if (data_out_enable_vector_multiplier = '1') then
+            -- Control Internal
+            start_vector_adder <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_multiplier <= '0';
+          end if;
+
         when VECTOR_ADDER_STATE =>  -- STEP 2
+
+          if (data_out_enable_vector_adder = '1') then
+            -- Control Internal
+            start_vector_multiplier <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_adder <= '0';
+          end if;
 
         when VECTOR_MULTIPLICATION_STATE =>  -- STEP 3
 
@@ -225,6 +253,9 @@ begin
           else
             -- Control Outputs
             PSI_OUT_ENABLE <= '0';
+
+            -- Control Internal
+            start_vector_multiplier <= '0';
           end if;
 
         when others =>
@@ -234,52 +265,38 @@ begin
     end if;
   end process;
 
+  -- VECTOR ADDER
+  operation_vector_adder <= '0';
+
+  data_a_in_enable_vector_adder <= data_out_enable_vector_multiplier;
+  data_b_in_enable_vector_adder <= data_out_enable_vector_multiplier;
+
+  -- VECTOR MULTIPLIER
+  data_a_in_enable_vector_multiplier <= F_IN_ENABLE;
+  data_b_in_enable_vector_multiplier <= W_IN_I_ENABLE;
+
+  -- VECTOR MULTIPLICATION
+  data_in_vector_enable_vector_multiplication <= data_out_vector_enable_vector_multiplication;
+  data_in_scalar_enable_vector_multiplication <= data_out_scalar_enable_vector_multiplication;
+
   -- DATA
+  -- VECTOR ADDER
+  modulo_in_vector_adder <= FULL;
+  size_in_vector_adder   <= SIZE_N_IN;
+  data_a_in_vector_adder <= ONE;
+  data_b_in_vector_adder <= data_out_vector_multiplier;
+
   -- VECTOR MULTIPLIER
   modulo_in_vector_multiplier <= FULL;
   size_in_vector_multiplier   <= SIZE_N_IN;
   data_a_in_vector_multiplier <= F_IN;
   data_b_in_vector_multiplier <= W_IN;
 
-  -- VECTOR ADDER
-  modulo_in_vector_adder <= FULL;
-  size_in_vector_adder   <= SIZE_N_IN;
-  data_a_in_vector_adder <= ONE;
-  data_b_in_vector_adder <= data_out_vector_multiplication;
-
   -- VECTOR MULTIPLICATION
   modulo_in_vector_multiplication <= FULL;
   length_in_vector_multiplication <= SIZE_N_IN;
   size_in_vector_multiplication   <= SIZE_R_IN;
-  data_in_vector_multiplication   <= data_out_vector_multiplier;
-
-  -- VECTOR MULTIPLICATION
-  vector_multiplication_function : ntm_vector_multiplication_function
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_vector_multiplication,
-      READY => ready_vector_multiplication,
-
-      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_multiplication,
-      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_multiplication,
-
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_multiplication,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_multiplication,
-
-      -- DATA
-      MODULO_IN => modulo_in_vector_multiplication,
-      SIZE_IN   => size_in_vector_multiplication,
-      LENGTH_IN => length_in_vector_multiplication,
-      DATA_IN   => data_in_vector_multiplication,
-      DATA_OUT  => data_out_vector_multiplication
-      );
+  data_in_vector_multiplication   <= data_out_vector_multiplication;
 
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder
@@ -335,6 +352,34 @@ begin
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
       DATA_OUT  => data_out_vector_multiplier
+      );
+
+  -- VECTOR MULTIPLICATION
+  vector_multiplication_function : ntm_vector_multiplication_function
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_vector_multiplication,
+      READY => ready_vector_multiplication,
+
+      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_multiplication,
+      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_multiplication,
+
+      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_multiplication,
+      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_multiplication,
+
+      -- DATA
+      MODULO_IN => modulo_in_vector_multiplication,
+      SIZE_IN   => size_in_vector_multiplication,
+      LENGTH_IN => length_in_vector_multiplication,
+      DATA_IN   => data_in_vector_multiplication,
+      DATA_OUT  => data_out_vector_multiplication
       );
 
 end architecture;

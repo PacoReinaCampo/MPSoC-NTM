@@ -224,6 +224,10 @@ begin
 
           -- beta(t) = Wbeta(t;l)·h(t;l)
 
+          -- Control Inputs
+         data_a_in_enable_scalar_product <= WBETA_IN_ENABLE;
+         data_b_in_enable_scalar_product <= H_IN_ENABLE;
+
           -- Data Inputs
           modulo_in_scalar_product <= FULL;
           length_in_scalar_product <= SIZE_L_IN;
@@ -237,6 +241,10 @@ begin
 
           -- ga(t) = Wga(t;l)·h(t;l)
 
+          -- Control Inputs
+         data_a_in_enable_scalar_product <= WGA_IN_ENABLE;
+         data_b_in_enable_scalar_product <= H_IN_ENABLE;
+
           -- Data Inputs
           modulo_in_scalar_product <= FULL;
           length_in_scalar_product <= SIZE_L_IN;
@@ -249,6 +257,10 @@ begin
         when SCALAR_THIRD_PRODUCT_STATE =>  -- STEP 3
 
           -- gw(t) = Wgw(t;l)·h(t;l)
+
+          -- Control Inputs
+         data_a_in_enable_scalar_product <= WGW_IN_ENABLE;
+         data_b_in_enable_scalar_product <= H_IN_ENABLE;
 
           -- Data Inputs
           modulo_in_scalar_product <= FULL;
@@ -285,13 +297,25 @@ begin
           READY <= '0';
 
           if (START = '1') then
+            -- Control Internal
+            start_matrix_product <= '1';
+
             -- FSM Control
             controller_ctrl_matrix_fsm_int <= MATRIX_FIRST_PRODUCT_STATE;
+          else
+            -- Control Internal
+            start_matrix_product <= '0';
           end if;
 
         when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 1
 
           -- k(t;k) = Wk(t;l;k)·h(t;l)
+
+          -- Control Inputs
+          data_a_in_i_enable_matrix_product <= WK_IN_L_ENABLE;
+          data_a_in_j_enable_matrix_product <= WK_IN_K_ENABLE;
+          data_b_in_i_enable_matrix_product <= H_IN_ENABLE;
+          data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
@@ -309,6 +333,12 @@ begin
 
           -- e(t;k) = We(t;l;k)·h(t;l)
 
+          -- Control Inputs
+          data_a_in_i_enable_matrix_product <= WE_IN_L_ENABLE;
+          data_a_in_j_enable_matrix_product <= WE_IN_K_ENABLE;
+          data_b_in_i_enable_matrix_product <= H_IN_ENABLE;
+          data_b_in_j_enable_matrix_product <= '0';
+
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_W_IN;
@@ -324,6 +354,12 @@ begin
         when MATRIX_THIRD_PRODUCT_STATE =>  -- STEP 3
 
           -- v(t;k) = Wv(t;l;k)·h(t;l)
+
+          -- Control Inputs
+          data_a_in_i_enable_matrix_product <= WV_IN_L_ENABLE;
+          data_a_in_j_enable_matrix_product <= WV_IN_K_ENABLE;
+          data_b_in_i_enable_matrix_product <= H_IN_ENABLE;
+          data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;

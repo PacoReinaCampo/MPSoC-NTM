@@ -214,13 +214,25 @@ begin
           READY <= '0';
 
           if (START = '1') then
+            -- Control Internal
+            start_matrix_product <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_STATE;
+          else
+            -- Control Internal
+            start_matrix_product <= '0';
           end if;
 
         when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 1
 
           -- beta(t;i) = Wbeta(t;i;l)·h(t;l)
+
+          -- Control Inputs
+          data_a_in_i_enable_matrix_product <= WBETA_IN_I_ENABLE;
+          data_a_in_j_enable_matrix_product <= WBETA_IN_L_ENABLE;
+          data_b_in_i_enable_matrix_product <= H_IN_ENABLE;
+          data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
@@ -238,6 +250,12 @@ begin
 
           -- f(t;i) = Wf(t;i;l)·h(t;l)
 
+          -- Control Inputs
+          data_a_in_i_enable_matrix_product <= WF_IN_I_ENABLE;
+          data_a_in_j_enable_matrix_product <= WF_IN_L_ENABLE;
+          data_b_in_i_enable_matrix_product <= H_IN_ENABLE;
+          data_b_in_j_enable_matrix_product <= '0';
+
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_R_IN;
@@ -253,6 +271,12 @@ begin
         when MATRIX_THIRD_PRODUCT_STATE =>  -- STEP 3
 
           -- pi(t;i) = Wpi(t;i;l)·h(t;l)
+
+          -- Control Inputs
+          data_a_in_i_enable_matrix_product <= WPI_IN_I_ENABLE;
+          data_a_in_j_enable_matrix_product <= WPI_IN_L_ENABLE;
+          data_b_in_i_enable_matrix_product <= H_IN_ENABLE;
+          data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;

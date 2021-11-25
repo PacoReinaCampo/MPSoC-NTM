@@ -100,7 +100,7 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- Internal Signals
+  -- Control Internal
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
@@ -266,7 +266,7 @@ begin
 
   -- VECTOR MULTIPLICATION
   modulo_in_vector_multiplication <= FULL;
-  length_in_vector_multiplication <= FULL;
+  length_in_vector_multiplication <= SIZE_N_IN;
   size_in_vector_multiplication   <= SIZE_N_IN;
   data_in_vector_multiplication   <= phi_out_sort_vector;
 

@@ -239,8 +239,14 @@ begin
           index_j_loop <= ZERO;
 
           if (START = '1') then
+            -- Control Internal
+            start_matrix_transpose <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_STATE;
+          else
+            -- Control Internal
+            start_matrix_transpose <= '0';
           end if;
 
         when MATRIX_TRANSPOSE_STATE =>  -- STEP 1

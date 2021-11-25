@@ -266,7 +266,7 @@ begin
             controller_ctrl_fsm_int <= VECTOR_FIRST_ADDER_STATE;
           else
             -- Control Internal
-            start_vector_adder <= '0';
+            start_matrix_product <= '0';
           end if;
 
         when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
@@ -293,7 +293,7 @@ begin
             controller_ctrl_fsm_int <= MATRIX_SECOND_PRODUCT_STATE;
           else
             -- Control Internal
-            start_matrix_product <= '0';
+            start_vector_adder <= '0';
           end if;
 
         when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 3
@@ -323,7 +323,7 @@ begin
             controller_ctrl_fsm_int <= VECTOR_SECOND_ADDER_STATE;
           else
             -- Control Internal
-            start_vector_adder <= '0';
+            start_matrix_product <= '0';
           end if;
 
         when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
@@ -350,7 +350,7 @@ begin
             controller_ctrl_fsm_int <= MATRIX_THIRD_PRODUCT_STATE;
           else
             -- Control Internal
-            start_matrix_product <= '0';
+            start_vector_adder <= '0';
           end if;
 
         when MATRIX_THIRD_PRODUCT_STATE =>  -- STEP 5
@@ -380,7 +380,7 @@ begin
             controller_ctrl_fsm_int <= VECTOR_THIRD_ADDER_STATE;
           else
             -- Control Internal
-            start_vector_adder <= '0';
+            start_matrix_product <= '0';
           end if;
 
         when VECTOR_THIRD_ADDER_STATE =>  -- STEP 6
@@ -407,7 +407,7 @@ begin
             controller_ctrl_fsm_int <= MATRIX_FOURTH_PRODUCT_STATE;
           else
             -- Control Internal
-            start_matrix_product <= '0';
+            start_vector_adder <= '0';
           end if;
 
         when MATRIX_FOURTH_PRODUCT_STATE =>  -- STEP 7
@@ -437,7 +437,7 @@ begin
             controller_ctrl_fsm_int <= VECTOR_FOURTH_ADDER_STATE;
           else
             -- Control Internal
-            start_vector_adder <= '0';
+            start_matrix_product <= '0';
           end if;
 
         when VECTOR_FOURTH_ADDER_STATE =>  -- STEP 8
@@ -457,7 +457,7 @@ begin
           if (data_out_enable_vector_adder = '1') then
             if (unsigned(index_loop) = unsigned(ZERO)) then
               -- Control Internal
-              start_vector_adder <= '1';
+              start_vector_logistic <= '1';
             end if;
 
             -- FSM Control
@@ -500,6 +500,9 @@ begin
           else
             -- Control Outputs
             O_OUT_ENABLE <= '0';
+
+            -- Control Internal
+            start_vector_logistic <= '0';
           end if;
 
         when others =>

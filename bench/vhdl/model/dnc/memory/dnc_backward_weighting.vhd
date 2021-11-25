@@ -86,9 +86,8 @@ architecture dnc_backward_weighting_architecture of dnc_backward_weighting is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    MATRIX_PRODUCT_STATE,               -- STEP 1
-    MATRIX_TRANSPOSE_STATE,             -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    MATRIX_TRANSPOSE_STATE,             -- STEP 1
+    MATRIX_PRODUCT_STATE                -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -108,7 +107,7 @@ architecture dnc_backward_weighting_architecture of dnc_backward_weighting is
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- Internal Signals
+  -- Control Internal
   signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -171,6 +170,9 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      B_OUT_I_ENABLE <= '0';
+      B_OUT_J_ENABLE <= '0';
+
       -- Control Internal
       index_i_loop <= ZERO;
       index_j_loop <= ZERO;
@@ -182,20 +184,27 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          B_OUT_I_ENABLE <= '0';
+          B_OUT_J_ENABLE <= '0';
+
           -- Control Internal
           index_i_loop <= ZERO;
           index_j_loop <= ZERO;
 
           if (START = '1') then
+            -- Control Internal
+            start_matrix_product <= '1';
+
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+            controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_STATE;
+          else
+            -- Control Internal
+            start_matrix_product <= '0';
           end if;
 
-        when MATRIX_PRODUCT_STATE =>  -- STEP 1
+        when MATRIX_TRANSPOSE_STATE =>  -- STEP 1
 
-        when MATRIX_TRANSPOSE_STATE =>  -- STEP 2
-
-        when ENDER_STATE =>  -- STEP 3
+        when MATRIX_PRODUCT_STATE =>  -- STEP 2
 
           if (data_out_i_enable_matrix_product = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_R_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE))) then
@@ -204,7 +213,7 @@ begin
               index_j_loop <= ZERO;
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+              controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_STATE;
             end if;
 
             -- Data Outputs
@@ -248,6 +257,16 @@ begin
       end case;
     end if;
   end process;
+
+  -- MATRIX TRANSPOSE
+  data_in_i_enable_matrix_transpose <= L_IN_G_ENABLE;
+  data_in_j_enable_matrix_transpose <= L_IN_J_ENABLE;
+
+  -- MATRIX PRODUCT
+  data_a_in_i_enable_matrix_product <= data_out_i_enable_matrix_transpose;
+  data_a_in_j_enable_matrix_product <= data_out_j_enable_matrix_transpose;
+  data_b_in_i_enable_matrix_product <= W_IN_J_ENABLE;
+  data_b_in_j_enable_matrix_product <= '0';
 
   -- DATA
   -- MATRIX TRANSPOSE

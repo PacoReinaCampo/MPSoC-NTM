@@ -85,8 +85,10 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    VECTOR_MULTIPLIER_STATE,            -- STEP 1
-    VECTOR_ADDER_STATE                  -- STEP 2
+    SCALAR_MULTIPLIER_ADDER_STATE,      -- STEP 1
+    SCALAR_FIRST_ADDER_STATE,           -- STEP 2
+    SCALAR_MULTIPLIER_STATE,            -- STEP 3
+    SCALAR_SECOND_ADDER_STATE           -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -95,6 +97,7 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
 
   constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -103,9 +106,12 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- Internal Signals
+  -- Control Internal
   signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- Data Internal
+  signal data_int_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR ADDER
   -- CONTROL
@@ -168,57 +174,52 @@ begin
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            controller_ctrl_fsm_int <= SCALAR_MULTIPLIER_ADDER_STATE;
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
+        when SCALAR_MULTIPLIER_ADDER_STATE =>  -- STEP 1
 
-        when VECTOR_ADDER_STATE =>  -- STEP 2
+          -- Control Input
+          operation_scalar_adder <= '1';
 
-          if (operation_scalar_adder = '1') then
-            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE))) then
-              -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
-              index_j_loop <= ZERO;
+          -- Data Input
+          modulo_in_scalar_adder <= FULL;
+          data_a_in_scalar_adder <= ONE;
+          data_b_in_scalar_adder <= W_IN;
 
-              -- FSM Control
-              controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
-            end if;
+          modulo_in_scalar_multiplier <= FULL;
+          data_a_in_scalar_multiplier <= W_IN;
+          data_b_in_scalar_multiplier <= P_IN;
 
-            -- Data Outputs
-            L_OUT <= data_out_scalar_multiplier;
+          -- Data Internal
+          data_int_scalar_multiplier <= data_out_scalar_multiplier;
 
-            -- Control Outputs
-            L_OUT_G_ENABLE <= '1';
-          else
-            -- Control Outputs
-            L_OUT_G_ENABLE <= '0';
-          end if;
+        when SCALAR_FIRST_ADDER_STATE =>  -- STEP 2
 
-          if (operation_scalar_adder = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE))) then
-              -- Control Outputs
-              READY <= '1';
+          -- Control Input
+          operation_scalar_adder <= '1';
 
-              -- FSM Control
-              controller_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(SIZE_N_IN) - unsigned(ONE))) then
-              -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+          -- Data Input
+          modulo_in_scalar_adder <= FULL;
+          data_a_in_scalar_adder <= data_out_scalar_adder;
+          data_b_in_scalar_adder <= W_IN;
 
-              -- FSM Control
-              controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
-            end if;
+        when SCALAR_MULTIPLIER_STATE =>  -- STEP 3
 
-            -- Data Outputs
-            L_OUT <= data_out_scalar_multiplier;
+          -- Data Input
+          modulo_in_scalar_multiplier <= FULL;
+          data_a_in_scalar_multiplier <= data_out_scalar_adder;
+          data_b_in_scalar_multiplier <= L_OUT;
 
-            -- Control Outputs
-            L_OUT_J_ENABLE <= '1';
-          else
-            -- Control Outputs
-            L_OUT_J_ENABLE <= '0';
-          end if;
+        when SCALAR_SECOND_ADDER_STATE =>  -- STEP 4
+
+          -- Control Input
+          operation_scalar_adder <= '0';
+
+          -- Data Input
+          modulo_in_scalar_adder <= FULL;
+          data_a_in_scalar_adder <= data_out_scalar_multiplier;
+          data_b_in_scalar_adder <= data_int_scalar_multiplier;
 
         when others =>
           -- FSM Control

@@ -81,11 +81,10 @@ architecture dnc_usage_vector_architecture of dnc_usage_vector is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    VECTOR_FIRST_ADDER_STATE,           -- STEP 1
-    VECTOR_FIRST_MULTIPLIER_STATE,      -- STEP 2
-    VECTOR_SECOND_ADDER_STATE,          -- STEP 3
-    VECTOR_SECOND_MULTIPLIER_STATE      -- STEP 4
+    STARTER_STATE,                  -- STEP 0
+    VECTOR_ADDER_MULTIPLIER_STATE,  -- STEP 1
+    VECTOR_ADDER_STATE,             -- STEP 3
+    VECTOR_MULTIPLIER_STATE         -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -103,7 +102,7 @@ architecture dnc_usage_vector_architecture of dnc_usage_vector is
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- Internal Signals
+  -- Control Internal
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
@@ -160,6 +159,8 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      U_OUT_ENABLE <= '0';
+
       -- Control Internal
       index_loop <= ZERO;
 
@@ -174,11 +175,28 @@ begin
           index_loop <= ZERO;
 
           if (START = '1') then
+            -- Control Internal
+            start_vector_adder      <= '1';
+            start_vector_multiplier <= '1';
+
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_FIRST_ADDER_STATE;
+            controller_ctrl_fsm_int <= VECTOR_ADDER_MULTIPLIER_STATE;
+          else
+            -- Control Internal
+            start_vector_adder      <= '0';
+            start_vector_multiplier <= '0';
           end if;
 
-        when VECTOR_FIRST_ADDER_STATE =>  -- STEP 1
+        when VECTOR_ADDER_MULTIPLIER_STATE =>  -- STEP 1
+
+          -- Control Inputs
+          operation_vector_adder <= '0';
+
+          data_a_in_enable_vector_adder <= U_IN_ENABLE;
+          data_b_in_enable_vector_adder <= W_IN_ENABLE;
+
+          data_a_in_enable_vector_multiplier <= U_IN_ENABLE;
+          data_b_in_enable_vector_multiplier <= W_IN_ENABLE;
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
@@ -186,15 +204,18 @@ begin
           data_a_in_vector_adder <= U_IN;
           data_b_in_vector_adder <= W_IN;
 
-        when VECTOR_FIRST_MULTIPLIER_STATE =>  -- STEP 2
-
-          -- Data Inputs
           modulo_in_vector_multiplier <= FULL;
           size_in_vector_multiplier   <= SIZE_N_IN;
           data_a_in_vector_multiplier <= U_IN;
           data_b_in_vector_multiplier <= W_IN;
 
-        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 3
+        when VECTOR_ADDER_STATE =>  -- STEP 2
+
+          -- Control Inputs
+          operation_vector_adder <= '0';
+
+          data_a_in_enable_vector_adder <= data_out_enable_vector_adder;
+          data_b_in_enable_vector_adder <= data_out_enable_vector_multiplier;
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
@@ -202,7 +223,13 @@ begin
           data_a_in_vector_adder <= data_out_vector_adder;
           data_b_in_vector_adder <= data_out_vector_multiplier;
 
-        when VECTOR_SECOND_MULTIPLIER_STATE =>  -- STEP 4
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 3
+
+          -- Control Inputs
+          operation_vector_adder <= '0';
+
+          data_a_in_enable_vector_adder <= data_out_enable_vector_adder;
+          data_b_in_enable_vector_adder <= PSI_IN_ENABLE;
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
@@ -222,7 +249,7 @@ begin
               index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= VECTOR_FIRST_MULTIPLIER_STATE;
+              controller_ctrl_fsm_int <= VECTOR_ADDER_MULTIPLIER_STATE;
             end if;
 
             -- Data Outputs
@@ -233,6 +260,9 @@ begin
           else
             -- Control Outputs
             U_OUT_ENABLE <= '0';
+
+            -- Control Internal
+            start_vector_multiplier <= '0';
           end if;
 
         when others =>

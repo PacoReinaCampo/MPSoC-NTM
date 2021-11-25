@@ -163,6 +163,8 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      W_OUT_ENABLE <= '0';
+
       -- Control Internal
       index_loop <= ZERO;
 
@@ -173,15 +175,29 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          W_OUT_ENABLE <= '0';
+
           -- Control Internal
           index_loop <= ZERO;
 
           if (START = '1') then
+            -- Control Internal
+            start_vector_adder <= '0';
+
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_FIRST_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_adder <= '0';
           end if;
 
         when VECTOR_FIRST_ADDER_STATE =>  -- STEP 1
+
+          -- Control Inputs
+          operation_vector_adder <= '1';
+
+          data_a_in_enable_vector_adder <= '0';
+          data_b_in_enable_vector_adder <= '0';
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
@@ -191,6 +207,10 @@ begin
 
         when VECTOR_FIRST_MULTIPLIER_STATE =>  -- STEP 2
 
+          -- Control Inputs
+          data_a_in_enable_vector_multiplier <= data_out_enable_vector_adder;
+          data_a_in_enable_vector_multiplier <= C_IN_ENABLE;
+
           -- Data Inputs
           modulo_in_vector_multiplier <= FULL;
           size_in_vector_multiplier   <= SIZE_N_IN;
@@ -198,6 +218,12 @@ begin
           data_b_in_vector_multiplier <= C_IN;
 
         when VECTOR_SECOND_ADDER_STATE =>  -- STEP 3
+
+          -- Control Inputs
+          operation_vector_adder <= '0';
+
+          data_a_in_enable_vector_adder <= data_out_enable_vector_multiplier;
+          data_b_in_enable_vector_adder <= data_out_enable_vector_multiplier;
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
@@ -207,6 +233,10 @@ begin
 
         when VECTOR_SECOND_MULTIPLIER_STATE =>  -- STEP 4
 
+          -- Control Inputs
+          data_a_in_enable_vector_multiplier <= A_IN_ENABLE;
+          data_a_in_enable_vector_multiplier <= A_IN_ENABLE;
+
           -- Data Inputs
           modulo_in_vector_multiplier <= FULL;
           size_in_vector_multiplier   <= SIZE_N_IN;
@@ -215,6 +245,12 @@ begin
 
         when VECTOR_THIRD_ADDER_STATE =>  -- STEP 5
 
+          -- Control Inputs
+          operation_vector_adder <= '0';
+
+          data_a_in_enable_vector_adder <= data_out_enable_vector_adder;
+          data_b_in_enable_vector_adder <= data_out_enable_vector_multiplier;
+
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_N_IN;
@@ -222,6 +258,10 @@ begin
           data_b_in_vector_adder <= data_out_vector_multiplier;
 
         when VECTOR_THIRD_MULTIPLIER_STATE =>  -- STEP 6
+
+          -- Control Inputs
+          data_a_in_enable_vector_multiplier <= data_out_enable_vector_adder;
+          data_a_in_enable_vector_multiplier <= data_out_enable_vector_adder;
 
           -- Data Inputs
           modulo_in_vector_multiplier <= FULL;
@@ -252,6 +292,9 @@ begin
           else
             -- Control Outputs
             W_OUT_ENABLE <= '0';
+
+            -- Control Internal
+            start_vector_adder <= '0';
           end if;
 
         when others =>

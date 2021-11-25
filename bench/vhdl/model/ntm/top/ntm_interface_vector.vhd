@@ -207,13 +207,23 @@ begin
           READY <= '0';
 
           if (START = '1') then
+            -- Control Internal
+            start_scalar_product <= '1';
+
             -- FSM Control
             controller_ctrl_scalar_fsm_int <= SCALAR_FIRST_PRODUCT_STATE;
+          else
+            -- Control Internal
+            start_scalar_product <= '0';
           end if;
 
         when SCALAR_FIRST_PRODUCT_STATE =>  -- STEP 1
 
           -- beta(t) = Wbeta(t;l)·h(t;l)
+
+          -- Control Inputs
+         data_a_in_enable_scalar_product <= WBETA_IN_ENABLE;
+         data_b_in_enable_scalar_product <= H_IN_ENABLE;
 
           -- Data Inputs
           modulo_in_scalar_product <= FULL;
@@ -228,6 +238,10 @@ begin
 
           -- g(t) = Wg(t;l)·h(t;l)
 
+          -- Control Inputs
+         data_a_in_enable_scalar_product <= WG_IN_ENABLE;
+         data_b_in_enable_scalar_product <= H_IN_ENABLE;
+
           -- Data Inputs
           modulo_in_scalar_product <= FULL;
           length_in_scalar_product <= SIZE_L_IN;
@@ -241,6 +255,10 @@ begin
 
           -- gamma(t) = Wgamma(t;l)·h(t;l)
 
+          -- Control Inputs
+         data_a_in_enable_scalar_product <= WGAMMA_IN_ENABLE;
+         data_b_in_enable_scalar_product <= H_IN_ENABLE;
+      
           -- Data Inputs
           modulo_in_scalar_product <= FULL;
           length_in_scalar_product <= SIZE_L_IN;
@@ -283,6 +301,12 @@ begin
 
           -- k(t;k) = Wk(t;l;k)·h(t;l)
 
+          -- Control Inputs
+          data_a_in_i_enable_matrix_product <= WK_IN_L_ENABLE;
+          data_a_in_j_enable_matrix_product <= WK_IN_K_ENABLE;
+          data_b_in_i_enable_matrix_product <= H_IN_ENABLE;
+          data_b_in_j_enable_matrix_product <= '0';
+
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_W_IN;
@@ -298,6 +322,12 @@ begin
         when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 2
 
           -- s(t;j) = Wk(t;l;j)·h(t;l)
+
+          -- Control Inputs
+          data_a_in_i_enable_matrix_product <= WS_IN_L_ENABLE;
+          data_a_in_j_enable_matrix_product <= WS_IN_J_ENABLE;
+          data_b_in_i_enable_matrix_product <= H_IN_ENABLE;
+          data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;

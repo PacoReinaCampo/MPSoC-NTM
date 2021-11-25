@@ -225,8 +225,8 @@ begin
         when VECTOR_SECOND_MULTIPLIER_STATE =>  -- STEP 2
 
           -- Control Inputs
-          data_a_in_enable_vector_multiplier <= '0';
-          data_b_in_enable_vector_multiplier <= '0';
+          data_a_in_enable_vector_multiplier <= I_IN_ENABLE;
+          data_b_in_enable_vector_multiplier <= A_IN_ENABLE;
 
           -- Data Inputs
           modulo_in_vector_multiplier <= FULL;

@@ -116,7 +116,7 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- Internal Signals
+  -- Control Internal
   signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -239,11 +239,21 @@ begin
           index_j_loop <= ZERO;
 
           if (START = '1') then
+            -- Control Internal
+            start_matrix_transpose <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_STATE;
+          else
+            -- Control Internal
+            start_matrix_transpose <= '0';
           end if;
 
         when MATRIX_TRANSPOSE_STATE =>  -- STEP 1
+
+          -- Control Inputs
+          data_in_i_enable_matrix_transpose <= E_IN_K_ENABLE;
+          data_in_j_enable_matrix_transpose <= '0';
 
           -- Data Inputs
           modulo_in_matrix_transpose <= FULL;
@@ -252,6 +262,12 @@ begin
           data_in_matrix_transpose   <= E_IN;
 
         when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 2
+
+          -- Control Inputs
+          data_a_in_i_enable_matrix_product <= W_IN_J_ENABLE;
+          data_a_in_j_enable_matrix_product <= '0';
+          data_b_in_i_enable_matrix_product <= data_out_i_enable_matrix_transpose;
+          data_b_in_j_enable_matrix_product <= data_out_j_enable_matrix_transpose;
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
@@ -264,6 +280,14 @@ begin
 
         when MATRIX_FIRST_ADDER_STATE =>  -- STEP 3
 
+          -- Control Inputs
+          operation_matrix_adder <= '0';
+
+          data_a_in_i_enable_matrix_adder <= data_a_in_i_enable_matrix_product;
+          data_a_in_j_enable_matrix_adder <= data_a_in_j_enable_matrix_product;
+          data_b_in_i_enable_matrix_adder <= data_b_in_i_enable_matrix_product;
+          data_b_in_j_enable_matrix_adder <= data_b_in_j_enable_matrix_product;
+
           -- Data Inputs
           modulo_in_matrix_adder <= FULL;
           size_i_in_matrix_adder <= SIZE_N_IN;
@@ -272,6 +296,12 @@ begin
           data_b_in_matrix_adder <= data_out_matrix_product;
 
         when MATRIX_MULTIPLIER_STATE =>  -- STEP 4
+
+          -- Control Inputs
+          data_a_in_i_enable_matrix_multiplier <= M_IN_J_ENABLE;
+          data_a_in_j_enable_matrix_multiplier <= M_IN_K_ENABLE;
+          data_b_in_i_enable_matrix_multiplier <= data_out_i_enable_matrix_adder;
+          data_b_in_j_enable_matrix_multiplier <= data_out_j_enable_matrix_adder;
 
           -- Data Inputs
           modulo_in_matrix_multiplier <= FULL;
@@ -282,6 +312,10 @@ begin
 
         when MATRIX_SECOND_TRANSPOSE_STATE =>  -- STEP 5
 
+          -- Control Inputs
+          data_in_i_enable_matrix_transpose <= V_IN_K_ENABLE;
+          data_in_j_enable_matrix_transpose <= '0';
+
           -- Data Inputs
           modulo_in_matrix_transpose <= FULL;
           size_i_in_matrix_transpose <= SIZE_W_IN;
@@ -289,6 +323,12 @@ begin
           data_in_matrix_transpose   <= V_IN;
 
         when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 6
+
+          -- Control Inputs
+          data_a_in_i_enable_matrix_product <= W_IN_J_ENABLE;
+          data_a_in_j_enable_matrix_product <= '0';
+          data_b_in_i_enable_matrix_product <= data_out_i_enable_matrix_transpose;
+          data_b_in_j_enable_matrix_product <= data_out_j_enable_matrix_transpose;
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
@@ -300,6 +340,14 @@ begin
           data_b_in_matrix_product   <= data_out_matrix_transpose;
 
         when MATRIX_SECOND_ADDER_STATE =>  -- STEP 7
+
+          -- Control Inputs
+          operation_matrix_adder <= '1';
+
+          data_a_in_i_enable_matrix_adder <= data_a_in_i_enable_matrix_multiplier;
+          data_a_in_j_enable_matrix_adder <= data_a_in_j_enable_matrix_multiplier;
+          data_b_in_i_enable_matrix_adder <= data_b_in_i_enable_matrix_product;
+          data_b_in_j_enable_matrix_adder <= data_b_in_j_enable_matrix_product;
 
           -- Data Inputs
           modulo_in_matrix_adder <= FULL;

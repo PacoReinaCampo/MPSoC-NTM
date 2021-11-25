@@ -566,6 +566,9 @@ begin
 
       case controller_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
+          -- Data Outputs
+          H_OUT <= ZERO;
+
           -- Control Outputs
           READY <= '0';
 
@@ -589,27 +592,90 @@ begin
 
           -- a(t;l) = tanh(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
 
+          if (ready_activation_gate_vector = '1') then
+              -- Control Internal
+              start_forget_gate_vector <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_FORGET_STATE;
+          else
+            -- Control Internal
+            start_activation_gate_vector <= '0';
+          end if;
+
         when VECTOR_FORGET_STATE =>  -- STEP 2
 
           -- f(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
 
+          if (ready_forget_gate_vector = '1') then
+              -- Control Internal
+              start_input_gate_vector <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_INPUT_STATE;
+          else
+            -- Control Internal
+            start_forget_gate_vector <= '0';
+          end if;
+
         when VECTOR_INPUT_STATE =>  -- STEP 3
 
           -- i(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+
+          if (ready_input_gate_vector = '1') then
+              -- Control Internal
+              start_state_gate_vector <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_STATE_STATE;
+          else
+            -- Control Internal
+            start_input_gate_vector <= '0';
+          end if;
 
         when VECTOR_STATE_STATE =>  -- STEP 4
 
           -- s(t;l) = f(t;l) o s(t-1;l) + i(t;l) o a(t;l)
           -- s(t=0;l) = 0
 
+          if (ready_state_gate_vector = '1') then
+              -- Control Internal
+              start_output_gate_vector <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_OUTPUT_GATE;
+          else
+            -- Control Internal
+            start_state_gate_vector <= '0';
+          end if;
+
         when VECTOR_OUTPUT_GATE =>      -- STEP 5
 
           -- o(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+
+          if (ready_output_gate_vector = '1') then
+              -- Control Internal
+              start_hidden_gate_vector <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_HIDDEN_GATE;
+          else
+            -- Control Internal
+            start_output_gate_vector <= '0';
+          end if;
 
         when VECTOR_HIDDEN_GATE =>      -- STEP 6
 
           -- h(t;l) = o(t;l) o tanh(s(t;l))
           -- h(t=0;l) = 0; h(t;l=0) = 0
+
+          if (ready_hidden_gate_vector = '1') then
+            -- FSM Control
+            controller_ctrl_fsm_int <= STARTER_STATE;
+          else
+            -- Control Internal
+            start_hidden_gate_vector <= '0';
+          end if;
 
         when others =>
           -- FSM Control

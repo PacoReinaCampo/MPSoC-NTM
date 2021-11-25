@@ -86,9 +86,8 @@ architecture dnc_backward_weighting_architecture of dnc_backward_weighting is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    MATRIX_PRODUCT_STATE,               -- STEP 1
-    MATRIX_TRANSPOSE_STATE,             -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    MATRIX_TRANSPOSE_STATE,             -- STEP 1
+    MATRIX_PRODUCT_STATE                -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -171,6 +170,9 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      B_OUT_I_ENABLE <= '0';
+      B_OUT_J_ENABLE <= '0';
+
       -- Control Internal
       index_i_loop <= ZERO;
       index_j_loop <= ZERO;
@@ -182,20 +184,27 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          B_OUT_I_ENABLE <= '0';
+          B_OUT_J_ENABLE <= '0';
+
           -- Control Internal
           index_i_loop <= ZERO;
           index_j_loop <= ZERO;
 
           if (START = '1') then
+            -- Control Internal
+            start_matrix_product <= '1';
+
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+            controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_STATE;
+          else
+            -- Control Internal
+            start_matrix_product <= '0';
           end if;
 
-        when MATRIX_PRODUCT_STATE =>  -- STEP 1
+        when MATRIX_TRANSPOSE_STATE =>  -- STEP 1
 
-        when MATRIX_TRANSPOSE_STATE =>  -- STEP 2
-
-        when ENDER_STATE =>  -- STEP 3
+        when MATRIX_PRODUCT_STATE =>  -- STEP 2
 
           if (data_out_i_enable_matrix_product = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_R_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE))) then
@@ -204,7 +213,7 @@ begin
               index_j_loop <= ZERO;
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+              controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_STATE;
             end if;
 
             -- Data Outputs

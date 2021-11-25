@@ -164,7 +164,6 @@ begin
             DATA_OUT_ENABLE <= '0';
           end if;
 
-
         when ENDER_STATE =>  -- STEP 2
 
           if (ready_scalar_adder = '1') then
