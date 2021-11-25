@@ -75,8 +75,7 @@ architecture ntm_scalar_logistic_function_architecture of ntm_scalar_logistic_fu
     SCALAR_EXPONENTIATOR_STATE,         -- STEP 1
     SCALAR_FIRST_INVERTER_STATE,        -- STEP 2
     SCALAR_ADDER_STATE,                 -- STEP 3
-    SCALAR_SECOND_INVERTER_STATE,       -- STEP 4
-    ENDER_STATE                         -- STEP 5
+    SCALAR_SECOND_INVERTER_STATE        -- STEP 4
     );
 
   -----------------------------------------------------------------------

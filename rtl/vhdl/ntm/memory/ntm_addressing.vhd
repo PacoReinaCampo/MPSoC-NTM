@@ -323,6 +323,10 @@ begin
 
             when VECTOR_FIRST_MULTIPLIER_INTERPOLATION_STATE =>  -- STEP 1
 
+              -- Control Inputs
+              data_a_in_enable_vector_multiplier <= '0';
+              data_b_in_enable_vector_multiplier <= '0';
+
               -- Data Inputs
               modulo_in_vector_multiplier <= FULL;
               size_in_vector_multiplier   <= FULL;
@@ -330,6 +334,12 @@ begin
               data_b_in_vector_multiplier <= FULL;
 
             when VECTOR_FIRST_ADDER_INTERPOLATION_STATE =>  -- STEP 2
+
+              -- Control Inputs
+              operation_vector_adder <= '0';
+
+              data_a_in_enable_vector_adder <= '0';
+              data_b_in_enable_vector_adder <= '0';
 
               -- Data Inputs
               modulo_in_vector_adder <= FULL;
@@ -339,6 +349,10 @@ begin
 
             when VECTOR_SECOND_MULTIPLIER_INTERPOLATION_STATE =>  -- STEP 3
 
+              -- Control Inputs
+              data_a_in_enable_vector_multiplier <= '0';
+              data_b_in_enable_vector_multiplier <= '0';
+
               -- Data Inputs
               modulo_in_vector_multiplier <= FULL;
               size_in_vector_multiplier   <= FULL;
@@ -346,6 +360,12 @@ begin
               data_b_in_vector_multiplier <= FULL;
 
             when VECTOR_SECOND_ADDER_INTERPOLATION_STATE =>  -- STEP 4
+
+              -- Control Inputs
+              operation_vector_adder <= '0';
+
+              data_a_in_enable_vector_adder <= '0';
+              data_b_in_enable_vector_adder <= '0';
 
               -- Data Inputs
               modulo_in_vector_adder <= FULL;

@@ -78,7 +78,7 @@ architecture ntm_scalar_multiplication_function_architecture of ntm_scalar_multi
   type multiplication_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
-    ENDER_STATE                         -- STEP 2
+    SCALAR_MULTIPLIER_STATE             -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -156,14 +156,14 @@ begin
             start_scalar_multiplier <= '1';
 
             -- FSM Control
-            multiplication_ctrl_fsm_int <= ENDER_STATE;
+            multiplication_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
           else
             -- Control Outputs
             DATA_OUT_ENABLE <= '0';
           end if;
 
 
-        when ENDER_STATE =>  -- STEP 2
+        when SCALAR_MULTIPLIER_STATE =>  -- STEP 2
 
           if (ready_scalar_multiplier = '1') then
             if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then

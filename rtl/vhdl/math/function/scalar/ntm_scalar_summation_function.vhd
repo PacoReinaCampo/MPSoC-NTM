@@ -78,7 +78,7 @@ architecture ntm_scalar_summation_function_architecture of ntm_scalar_summation_
   type summation_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
-    ENDER_STATE                         -- STEP 2
+    SCALAR_ADDER_STATE                  -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -158,13 +158,13 @@ begin
             start_scalar_adder <= '1';
 
             -- FSM Control
-            summation_ctrl_fsm_int <= ENDER_STATE;
+            summation_ctrl_fsm_int <= SCALAR_ADDER_STATE;
           else
             -- Control Outputs
             DATA_OUT_ENABLE <= '0';
           end if;
 
-        when ENDER_STATE =>  -- STEP 2
+        when SCALAR_ADDER_STATE =>  -- STEP 2
 
           if (ready_scalar_adder = '1') then
             if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
