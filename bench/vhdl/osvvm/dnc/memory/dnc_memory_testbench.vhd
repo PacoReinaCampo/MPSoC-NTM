@@ -437,12 +437,7 @@ begin
       N => N,
       W => W,
       L => L,
-      R => R,
-
-      -- FUNCTIONALITY
-      STIMULUS_DNC_MEMORY_TEST   => STIMULUS_DNC_MEMORY_TEST,
-      STIMULUS_DNC_MEMORY_CASE_0 => STIMULUS_DNC_MEMORY_CASE_0,
-      STIMULUS_DNC_MEMORY_CASE_1 => STIMULUS_DNC_MEMORY_CASE_1
+      R => R
       )
     port map (
       -- GLOBAL

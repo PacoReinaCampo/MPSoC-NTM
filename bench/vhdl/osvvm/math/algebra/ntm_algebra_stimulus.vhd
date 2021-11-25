@@ -55,32 +55,7 @@ entity ntm_algebra_stimulus is
     N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
     W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
     L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
-    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
-
-    -- FUNCTIONALITY
-    STIMULUS_NTM_MATRIX_DETERMINANT_TEST : boolean := false;
-    STIMULUS_NTM_MATRIX_INVERSION_TEST   : boolean := false;
-    STIMULUS_NTM_MATRIX_PRODUCT_TEST     : boolean := false;
-    STIMULUS_NTM_MATRIX_RANK_TEST        : boolean := false;
-    STIMULUS_NTM_MATRIX_TRANSPOSE_TEST   : boolean := false;
-    STIMULUS_NTM_SCALAR_PRODUCT_TEST     : boolean := false;
-    STIMULUS_NTM_TENSOR_PRODUCT_TEST     : boolean := false;
-
-    STIMULUS_NTM_MATRIX_DETERMINANT_CASE_0 : boolean := false;
-    STIMULUS_NTM_MATRIX_INVERSION_CASE_0   : boolean := false;
-    STIMULUS_NTM_MATRIX_PRODUCT_CASE_0     : boolean := false;
-    STIMULUS_NTM_MATRIX_RANK_CASE_0        : boolean := false;
-    STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0   : boolean := false;
-    STIMULUS_NTM_SCALAR_PRODUCT_CASE_0     : boolean := false;
-    STIMULUS_NTM_TENSOR_PRODUCT_CASE_0     : boolean := false;
-
-    STIMULUS_NTM_MATRIX_DETERMINANT_CASE_1 : boolean := false;
-    STIMULUS_NTM_MATRIX_INVERSION_CASE_1   : boolean := false;
-    STIMULUS_NTM_MATRIX_PRODUCT_CASE_1     : boolean := false;
-    STIMULUS_NTM_MATRIX_RANK_CASE_1        : boolean := false;
-    STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1   : boolean := false;
-    STIMULUS_NTM_SCALAR_PRODUCT_CASE_1     : boolean := false;
-    STIMULUS_NTM_TENSOR_PRODUCT_CASE_1     : boolean := false
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))   -- i in 0 to R-1
     );
   port (
     -- GLOBAL

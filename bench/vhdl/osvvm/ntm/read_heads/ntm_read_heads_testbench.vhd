@@ -108,12 +108,7 @@ begin
       N => N,
       W => W,
       L => L,
-      R => R,
-
-      -- FUNCTIONALITY
-      STIMULUS_NTM_READ_HEADS_TEST   => STIMULUS_NTM_READ_HEADS_TEST,
-      STIMULUS_NTM_READ_HEADS_CASE_0 => STIMULUS_NTM_READ_HEADS_CASE_0,
-      STIMULUS_NTM_READ_HEADS_CASE_1 => STIMULUS_NTM_READ_HEADS_CASE_1
+      R => R
       )
     port map (
       -- GLOBAL

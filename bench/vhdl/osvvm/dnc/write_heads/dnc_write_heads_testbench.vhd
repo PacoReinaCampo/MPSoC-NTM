@@ -162,12 +162,7 @@ begin
       N => N,
       W => W,
       L => L,
-      R => R,
-
-      -- FUNCTIONALITY
-      STIMULUS_DNC_WRITE_HEADS_TEST   => STIMULUS_DNC_WRITE_HEADS_TEST,
-      STIMULUS_DNC_WRITE_HEADS_CASE_0 => STIMULUS_DNC_WRITE_HEADS_CASE_0,
-      STIMULUS_DNC_WRITE_HEADS_CASE_1 => STIMULUS_DNC_WRITE_HEADS_CASE_1
+      R => R
       )
     port map (
       -- GLOBAL
