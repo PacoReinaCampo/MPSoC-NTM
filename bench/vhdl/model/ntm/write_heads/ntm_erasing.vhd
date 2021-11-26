@@ -87,7 +87,8 @@ architecture ntm_erasing_architecture of ntm_erasing is
     STARTER_STATE,                      -- STEP 0
     VECTOR_MULTIPLIER_STATE,            -- STEP 1
     VECTOR_ADDER_STATE,                 -- STEP 2
-    MATRIX_PRODUCT_STATE                -- STEP 3
+    MATRIX_PRODUCT_I_STATE,             -- STEP 3
+    MATRIX_PRODUCT_J_STATE              -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -238,13 +239,13 @@ begin
             start_matrix_product <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+            controller_ctrl_fsm_int <= MATRIX_PRODUCT_I_STATE;
           else
             -- Control Internal
             start_vector_adder <= '0';
           end if;
 
-        when MATRIX_PRODUCT_STATE =>  -- STEP 3
+        when MATRIX_PRODUCT_I_STATE =>  -- STEP 3
 
           if (data_out_i_enable_matrix_product = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then
@@ -265,6 +266,8 @@ begin
             -- Control Outputs
             M_OUT_J_ENABLE <= '0';
           end if;
+
+        when MATRIX_PRODUCT_J_STATE =>  -- STEP 4
 
           if (data_out_j_enable_matrix_product = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then

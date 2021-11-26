@@ -123,13 +123,16 @@ architecture ntm_controller_architecture of ntm_controller is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    MATRIX_FIRST_CONVOLUTION_STATE,     -- STEP 1
-    VECTOR_FIRST_ADDER_STATE,           -- STEP 2
-    MATRIX_SECOND_CONVOLUTION_STATE,    -- STEP 3
-    VECTOR_SECOND_ADDER_STATE,          -- STEP 4
-    MATRIX_THIRD_CONVOLUTION_STATE,     -- STEP 5
-    VECTOR_THIRD_ADDER_STATE,           -- STEP 6
-    VECTOR_LOGISTIC_STATE               -- STEP 7
+    MATRIX_FIRST_CONVOLUTION_I_STATE,   -- STEP 1
+    MATRIX_FIRST_CONVOLUTION_J_STATE,   -- STEP 2
+    VECTOR_FIRST_ADDER_STATE,           -- STEP 3
+    MATRIX_SECOND_CONVOLUTION_I_STATE,  -- STEP 4
+    MATRIX_SECOND_CONVOLUTION_J_STATE,  -- STEP 5
+    VECTOR_SECOND_ADDER_STATE,          -- STEP 6
+    MATRIX_THIRD_CONVOLUTION_I_STATE,   -- STEP 7
+    MATRIX_THIRD_CONVOLUTION_J_STATE,   -- STEP 8
+    VECTOR_THIRD_ADDER_STATE,           -- STEP 9
+    VECTOR_LOGISTIC_STATE               -- STEP 10
     );
 
   -----------------------------------------------------------------------
@@ -148,7 +151,8 @@ architecture ntm_controller_architecture of ntm_controller is
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Control Internal
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
   -- CONTROL
@@ -269,7 +273,8 @@ begin
       H_OUT_ENABLE <= '0';
 
       -- Control Internal
-      index_loop <= ZERO;
+      index_i_loop <= ZERO;
+      index_j_loop <= ZERO;
 
     elsif (rising_edge(CLK)) then
 
@@ -281,20 +286,21 @@ begin
           H_OUT_ENABLE <= '0';
 
           -- Control Internal
-          index_loop <= ZERO;
+          index_i_loop <= ZERO;
+          index_j_loop <= ZERO;
 
           if (START = '1') then
             -- Control Internal
             start_matrix_convolution <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_FIRST_CONVOLUTION_STATE;
+            controller_ctrl_fsm_int <= MATRIX_FIRST_CONVOLUTION_I_STATE;
           else
             -- Control Internal
             start_matrix_convolution <= '0';
           end if;
 
-        when MATRIX_FIRST_CONVOLUTION_STATE =>  -- STEP 1
+        when MATRIX_FIRST_CONVOLUTION_I_STATE =>  -- STEP 1
 
           -- Control Inputs
           data_a_in_matrix_enable_matrix_convolution <= '0';
@@ -312,7 +318,29 @@ begin
           data_a_in_matrix_convolution <= W_IN;
           data_b_in_matrix_convolution <= X_IN;
 
-        when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
+          if (data_out_matrix_enable_matrix_convolution = '1') then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(ONE) - unsigned(ONE))) then
+              -- Control Internal
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+              index_j_loop <= ZERO;
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= MATRIX_FIRST_CONVOLUTION_J_STATE;
+            end if;
+
+            -- Data Outputs
+            data_a_in_vector_adder <= data_out_matrix_convolution;
+
+            -- Control Outputs
+            data_a_in_enable_vector_adder <= '1';
+          else
+            -- Control Outputs
+            data_a_in_enable_vector_adder <= '0';
+          end if;
+
+        when MATRIX_FIRST_CONVOLUTION_J_STATE =>  -- STEP 2
+
+        when VECTOR_FIRST_ADDER_STATE =>  -- STEP 3
 
           -- Control Inputs
           operation_vector_adder <= '0';
@@ -326,7 +354,7 @@ begin
           data_a_in_vector_adder <= data_out_matrix_convolution;
           data_b_in_vector_adder <= B_IN;
 
-        when MATRIX_SECOND_CONVOLUTION_STATE =>  -- STEP 3
+        when MATRIX_SECOND_CONVOLUTION_I_STATE =>  -- STEP 4
 
           -- Control Inputs
           data_a_in_matrix_enable_matrix_convolution <= '0';
@@ -344,7 +372,29 @@ begin
           data_a_in_matrix_convolution <= K_IN;
           data_b_in_matrix_convolution <= R_IN;
 
-        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
+          if (data_out_matrix_enable_matrix_convolution = '1') then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(ONE) - unsigned(ONE))) then
+              -- Control Internal
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+              index_j_loop <= ZERO;
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= MATRIX_FIRST_CONVOLUTION_J_STATE;
+            end if;
+
+            -- Data Outputs
+            data_a_in_vector_adder <= data_out_matrix_convolution;
+
+            -- Control Outputs
+            data_a_in_enable_vector_adder <= '1';
+          else
+            -- Control Outputs
+            data_a_in_enable_vector_adder <= '0';
+          end if;
+
+        when MATRIX_SECOND_CONVOLUTION_J_STATE =>  -- STEP 5
+
+        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 6
 
           -- Control Inputs
           operation_vector_adder <= '0';
@@ -358,7 +408,7 @@ begin
           data_a_in_vector_adder <= data_out_matrix_convolution;
           data_b_in_vector_adder <= data_out_vector_adder;
 
-        when MATRIX_THIRD_CONVOLUTION_STATE =>  -- STEP 5
+        when MATRIX_THIRD_CONVOLUTION_I_STATE =>  -- STEP 7
 
           -- Control Inputs
           data_a_in_matrix_enable_matrix_convolution <= '0';
@@ -376,7 +426,29 @@ begin
           data_a_in_matrix_convolution <= K_IN;
           data_b_in_matrix_convolution <= R_IN;
 
-        when VECTOR_THIRD_ADDER_STATE =>  -- STEP 6
+          if (data_out_matrix_enable_matrix_convolution = '1') then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(ONE) - unsigned(ONE))) then
+              -- Control Internal
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+              index_j_loop <= ZERO;
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= MATRIX_FIRST_CONVOLUTION_J_STATE;
+            end if;
+
+            -- Data Outputs
+            data_a_in_vector_adder <= data_out_matrix_convolution;
+
+            -- Control Outputs
+            data_a_in_enable_vector_adder <= '1';
+          else
+            -- Control Outputs
+            data_a_in_enable_vector_adder <= '0';
+          end if;
+
+        when MATRIX_THIRD_CONVOLUTION_J_STATE =>  -- STEP 8
+
+        when VECTOR_THIRD_ADDER_STATE =>  -- STEP 9
 
           -- Control Inputs
           operation_vector_adder <= '0';
@@ -390,7 +462,7 @@ begin
           data_a_in_vector_adder <= data_out_matrix_convolution;
           data_b_in_vector_adder <= data_out_vector_adder;
 
-        when VECTOR_LOGISTIC_STATE =>  -- STEP 7
+        when VECTOR_LOGISTIC_STATE =>  -- STEP 10
 
           -- Control Inputs
           data_in_enable_vector_logistic <= '0';
@@ -401,7 +473,7 @@ begin
           data_in_vector_logistic   <= data_out_vector_adder;
 
           if (ready_vector_logistic = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_L_IN) - unsigned(ONE)) then
+            if (unsigned(index_i_loop) = unsigned(SIZE_L_IN) - unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';
 
@@ -409,10 +481,10 @@ begin
               controller_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE));
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_FIRST_CONVOLUTION_STATE;
+              controller_ctrl_fsm_int <= MATRIX_FIRST_CONVOLUTION_I_STATE;
             end if;
 
             -- Data Outputs
