@@ -121,7 +121,7 @@ architecture ntm_convolutional_fnn_stimulus_architecture of ntm_convolutional_fn
   constant PERIOD : time := 10 ns;
 
   constant WAITING : time := 50 ns;
-  constant WORKING : time := 1000 ms;
+  constant WORKING : time := 1 ms;
 
   -----------------------------------------------------------------------
   -- Signals

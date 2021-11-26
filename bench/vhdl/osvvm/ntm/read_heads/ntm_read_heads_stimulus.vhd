@@ -94,7 +94,7 @@ architecture ntm_read_heads_stimulus_architecture of ntm_read_heads_stimulus is
   constant PERIOD : time := 10 ns;
 
   constant WAITING : time := 50 ns;
-  constant WORKING : time := 1000 ms;
+  constant WORKING : time := 1 ms;
 
   -----------------------------------------------------------------------
   -- Signals

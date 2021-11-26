@@ -191,8 +191,16 @@ begin
           index_j_loop <= ZERO;
 
           if (START = '1') then
+            if ((index_i_loop = ZERO) and (index_j_loop <= ZERO)) then
+              -- Control Internal
+              start_vector_multiplier <= '1';
+            end if;
+
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_FIRST_MULTIPLIER_STATE;
+          else
+            -- Control Internal
+            start_vector_multiplier <= '0';
           end if;
 
         when VECTOR_FIRST_MULTIPLIER_STATE =>  -- STEP 1

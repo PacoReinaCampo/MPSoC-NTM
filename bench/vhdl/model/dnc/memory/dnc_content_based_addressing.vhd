@@ -233,9 +233,48 @@ begin
 
         when VECTOR_COSINE_SIMILARITY_STATE =>  -- STEP 1
 
+          if (data_out_vector_enable_vector_cosine = '1') then
+            if (unsigned(index_loop) = unsigned(ZERO)) then
+              -- Control Internal
+              start_vector_multiplier <= '1';
+            end if;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          else
+            -- Control Internal
+            start_vector_cosine <= '0';
+          end if;
+
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
 
+          if (data_out_enable_vector_multiplier = '1') then
+            if (unsigned(index_loop) = unsigned(ZERO)) then
+              -- Control Internal
+              start_vector_exponentiator <= '1';
+            end if;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_EXPONENTIATOR_STATE;
+          else
+            -- Control Internal
+            start_vector_multiplier <= '0';
+          end if;
+
         when VECTOR_EXPONENTIATOR_STATE =>  -- STEP 3
+
+          if (data_out_enable_vector_exponentiator = '1') then
+            if (unsigned(index_loop) = unsigned(ZERO)) then
+              -- Control Internal
+              start_vector_softmax <= '1';
+            end if;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_SOFTMAX_STATE;
+          else
+            -- Control Internal
+            start_vector_exponentiator <= '0';
+          end if;
 
         when VECTOR_SOFTMAX_STATE =>  -- STEP 4
 
@@ -262,6 +301,9 @@ begin
           else
             -- Control Outputs
             C_OUT_ENABLE <= '0';
+
+            -- Control Internal
+            start_vector_softmax <= '0';
           end if;
 
         when others =>

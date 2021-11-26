@@ -98,7 +98,7 @@ architecture ntm_write_heads_stimulus_architecture of ntm_write_heads_stimulus i
   constant PERIOD : time := 10 ns;
 
   constant WAITING : time := 50 ns;
-  constant WORKING : time := 1000 ms;
+  constant WORKING : time := 1 ms;
 
   -----------------------------------------------------------------------
   -- Signals

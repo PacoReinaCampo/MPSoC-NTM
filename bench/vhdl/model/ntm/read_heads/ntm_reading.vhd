@@ -194,7 +194,7 @@ begin
             controller_ctrl_fsm_int <= VECTOR_SUMMATION_STATE;
           else
             -- Control Internal
-            start_vector_summation <= '0';
+            start_vector_multiplier <= '0';
           end if;
 
         when VECTOR_SUMMATION_STATE =>  -- STEP 2
@@ -222,6 +222,9 @@ begin
           else
             -- Control Outputs
             R_OUT_ENABLE <= '0';
+
+            -- Control Internal
+            start_vector_summation <= '0';
           end if;
 
         when others =>

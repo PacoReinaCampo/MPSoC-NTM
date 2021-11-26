@@ -115,7 +115,7 @@ architecture dnc_memory_stimulus_architecture of dnc_memory_stimulus is
   constant PERIOD : time := 10 ns;
 
   constant WAITING : time := 50 ns;
-  constant WORKING : time := 1000 ms;
+  constant WORKING : time := 1 ms;
 
   -----------------------------------------------------------------------
   -- Signals

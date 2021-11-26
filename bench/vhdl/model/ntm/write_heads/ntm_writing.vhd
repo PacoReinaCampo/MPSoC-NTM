@@ -229,6 +229,9 @@ begin
           else
             -- Control Outputs
             M_OUT_K_ENABLE <= '0';
+
+            -- Control Internal
+            start_vector_adder <= '0';
           end if;
 
         when others =>

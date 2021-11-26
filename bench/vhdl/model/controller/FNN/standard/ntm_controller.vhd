@@ -484,6 +484,9 @@ begin
           else
             -- Control Outputs
             H_OUT_ENABLE <= '0';
+
+            -- Control Internal
+            start_vector_logistic <= '0';
           end if;
 
         when others =>
@@ -494,12 +497,12 @@ begin
   end process;
 
   -- TRAINER
-  x_in_enable_trainer <= '0';
+  x_in_enable_trainer <= X_IN_ENABLE;
 
-  r_in_i_enable_trainer <= '0';
-  r_in_k_enable_trainer <= '0';
+  r_in_i_enable_trainer <= R_IN_I_ENABLE;
+  r_in_k_enable_trainer <= R_IN_K_ENABLE;
 
-  h_in_enable_trainer <= '0';
+  h_in_enable_trainer <= H_IN_ENABLE;
 
   -- DATA
   -- TRAINER

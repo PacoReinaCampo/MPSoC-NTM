@@ -209,6 +209,20 @@ begin
           data_a_in_vector_multiplier <= U_IN;
           data_b_in_vector_multiplier <= W_IN;
 
+          if (data_out_enable_vector_multiplier = '1') then
+            if (unsigned(index_loop) = unsigned(ZERO)) then
+              -- Control Internal
+              start_vector_adder <= '1';
+            end if;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_adder      <= '0';
+            start_vector_multiplier <= '0';
+          end if;
+
         when VECTOR_ADDER_STATE =>  -- STEP 2
 
           -- Control Inputs
@@ -222,6 +236,19 @@ begin
           size_in_vector_adder   <= SIZE_N_IN;
           data_a_in_vector_adder <= data_out_vector_adder;
           data_b_in_vector_adder <= data_out_vector_multiplier;
+
+          if (data_out_enable_vector_adder = '1') then
+            if (unsigned(index_loop) = unsigned(ZERO)) then
+              -- Control Internal
+              start_vector_multiplier <= '1';
+            end if;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          else
+            -- Control Internal
+            start_vector_adder <= '0';
+          end if;
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 3
 

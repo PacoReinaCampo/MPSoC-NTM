@@ -423,6 +423,9 @@ begin
           else
             -- Control Outputs
             H_OUT_ENABLE <= '0';
+
+            -- Control Internal
+            start_vector_logistic <= '0';
           end if;
 
         when others =>

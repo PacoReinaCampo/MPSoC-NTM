@@ -196,11 +196,32 @@ begin
             -- Data Outputs
             P_OUT <= ZERO;
 
+            if (index_loop = ZERO) then
+              -- Control Internal
+              start_vector_summation <= '1';
+            end if;
+
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_SUMMATION_STATE;
+          else
+            -- Control Internal
+            start_vector_summation <= '0';
           end if;
 
         when VECTOR_SUMMATION_STATE =>  -- STEP 1
+
+          if (data_out_vector_enable_vector_summation = '1') then
+            if (unsigned(index_loop) = unsigned(ZERO)) then
+              -- Control Internal
+              start_vector_adder <= '1';
+            end if;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_FIRST_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_summation <= '0';
+          end if;
 
         when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
 
@@ -210,7 +231,33 @@ begin
           data_a_in_vector_adder <= ONE;
           data_b_in_vector_adder <= data_out_vector_summation;
 
+          if (data_out_enable_vector_adder = '1') then
+            if (unsigned(index_loop) = unsigned(ZERO)) then
+              -- Control Internal
+              start_vector_multiplier <= '1';
+            end if;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          else
+            -- Control Internal
+            start_vector_adder <= '0';
+          end if;
+
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 3
+
+          if (data_out_enable_vector_adder = '1') then
+            if (unsigned(index_loop) = unsigned(ZERO)) then
+              -- Control Internal
+              start_vector_adder <= '1';
+            end if;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_SECOND_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_multiplier <= '0';
+          end if;
 
         when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
 
@@ -243,6 +290,9 @@ begin
           else
             -- Control Outputs
             P_OUT_ENABLE <= '0';
+
+            -- Control Internal
+            start_vector_adder <= '0';
           end if;
 
         when others =>

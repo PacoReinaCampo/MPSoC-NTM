@@ -289,6 +289,9 @@ begin
           else
             -- Control Outputs
             M_OUT_K_ENABLE <= '0';
+
+            -- Control Internal
+            start_matrix_product <= '0';
           end if;
 
         when others =>
