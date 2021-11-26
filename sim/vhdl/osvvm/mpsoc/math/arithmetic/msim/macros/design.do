@@ -36,6 +36,51 @@ alias ntm_scalar_multiplier_design_compilation {
 }
 
 ##################################################################################################
+# ntm_scalar_inverter_design_compilation #########################################################
+##################################################################################################
+
+alias ntm_scalar_inverter_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/arithmetic/scalar/ntm_scalar_inverter.vhd
+}
+
+##################################################################################################
+# ntm_scalar_divider_design_compilation ##########################################################
+##################################################################################################
+
+alias ntm_scalar_divider_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/arithmetic/scalar/ntm_scalar_divider.vhd
+}
+
+##################################################################################################
+# ntm_scalar_exponentiator_design_compilation ####################################################
+##################################################################################################
+
+alias ntm_scalar_exponentiator_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/arithmetic/scalar/ntm_scalar_exponentiator.vhd
+}
+
+##################################################################################################
+# ntm_scalar_lcm_design_compilation ##############################################################
+##################################################################################################
+
+alias ntm_scalar_lcm_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/arithmetic/scalar/ntm_scalar_lcm.vhd
+}
+
+##################################################################################################
+# ntm_scalar_gcd_design_compilation ##############################################################
+##################################################################################################
+
+alias ntm_scalar_gcd_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/arithmetic/scalar/ntm_scalar_gcd.vhd
+}
+
+##################################################################################################
 
 alias d01 {
   ntm_scalar_mod_design_compilation 

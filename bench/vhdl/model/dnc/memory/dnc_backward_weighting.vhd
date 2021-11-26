@@ -86,8 +86,10 @@ architecture dnc_backward_weighting_architecture of dnc_backward_weighting is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    MATRIX_TRANSPOSE_STATE,             -- STEP 1
-    MATRIX_PRODUCT_STATE                -- STEP 2
+    MATRIX_TRANSPOSE_I_STATE,           -- STEP 1
+    MATRIX_TRANSPOSE_J_STATE,           -- STEP 2
+    MATRIX_PRODUCT_I_STATE,             -- STEP 3
+    MATRIX_PRODUCT_J_STATE              -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -196,15 +198,17 @@ begin
             start_matrix_product <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_STATE;
+            controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_I_STATE;
           else
             -- Control Internal
             start_matrix_product <= '0';
           end if;
 
-        when MATRIX_TRANSPOSE_STATE =>  -- STEP 1
+        when MATRIX_TRANSPOSE_I_STATE =>  -- STEP 1
 
-        when MATRIX_PRODUCT_STATE =>  -- STEP 2
+        when MATRIX_TRANSPOSE_J_STATE =>  -- STEP 2
+
+        when MATRIX_PRODUCT_I_STATE =>  -- STEP 3
 
           if (data_out_i_enable_matrix_product = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_R_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE))) then
@@ -213,7 +217,7 @@ begin
               index_j_loop <= ZERO;
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_STATE;
+              controller_ctrl_fsm_int <= MATRIX_PRODUCT_J_STATE;
             end if;
 
             -- Data Outputs
@@ -225,6 +229,8 @@ begin
             -- Control Outputs
             B_OUT_I_ENABLE <= '0';
           end if;
+
+        when MATRIX_PRODUCT_J_STATE =>  -- STEP 4
 
           if (data_out_j_enable_matrix_product = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_R_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE))) then
@@ -238,7 +244,7 @@ begin
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+              controller_ctrl_fsm_int <= MATRIX_PRODUCT_I_STATE;
             end if;
 
             -- Data Outputs

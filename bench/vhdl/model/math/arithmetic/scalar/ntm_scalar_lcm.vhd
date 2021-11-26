@@ -73,7 +73,10 @@ architecture ntm_scalar_lcm_architecture of ntm_scalar_lcm is
 
   type lcm_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    ENDER_STATE                         -- STEP 1
+    SET_DATA_B_STATE,                   -- STEP 1
+    REDUCE_DATA_B_STATE,                -- STEP 2
+    SET_PRODUCT_OUT_STATE,              -- STEP 3
+    ENDER_STATE                         -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -91,7 +94,10 @@ architecture ntm_scalar_lcm_architecture of ntm_scalar_lcm is
   signal lcm_ctrl_fsm_int : lcm_ctrl_fsm;
 
   -- Internal Signals
-  signal lcm_int : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal u_int : std_logic_vector(DATA_SIZE downto 0);
+  signal v_int : std_logic_vector(DATA_SIZE downto 0);
+
+  signal lcm_int : std_logic_vector(DATA_SIZE downto 0);
 
 begin
 
@@ -111,7 +117,10 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      -- Assignations
+      -- Assignation
+      u_int <= (others => '0');
+      v_int <= (others => '0');
+
       lcm_int <= (others => '0');
 
     elsif (rising_edge(CLK)) then
@@ -121,12 +130,77 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          if (START = '1') then
+            -- Assignation
+            u_int <= '0' & DATA_A_IN;
+            v_int <= '0' & DATA_B_IN;
+
+            if (DATA_A_IN(0) = '1') then
+              lcm_int <= '0' & DATA_B_IN;
+            else
+              lcm_int <= (others => '0');
+            end if;
+
+            -- FSM Control
+            lcm_ctrl_fsm_int <= SET_DATA_B_STATE;
+          end if;
+
+        when SET_DATA_B_STATE =>  -- STEP 1
+
+          -- Assignation
+          u_int <= std_logic_vector(unsigned(u_int) srl 1);
+          v_int <= std_logic_vector(unsigned(v_int) sll 1);
+
+          -- FSM Control
+          if ((unsigned(v_int) sll 1) < '0' & unsigned(MODULO_IN)) then
+            lcm_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
+          else
+            lcm_ctrl_fsm_int <= REDUCE_DATA_B_STATE;
+          end if;
+
+        when REDUCE_DATA_B_STATE =>  -- STEP 2
+
+          if (unsigned(v_int) < '0' & unsigned(MODULO_IN)) then
+            -- FSM Control
+            lcm_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
+          else
+            -- Assignation
+            v_int <= std_logic_vector(unsigned(v_int) - ('0' & unsigned(MODULO_IN)));
+          end if;
+
+        when SET_PRODUCT_OUT_STATE =>  -- STEP 3
+
+          -- Assignation
+          if (u_int(0) = '1') then
+            if (unsigned(lcm_int) + unsigned(v_int) < '0' & unsigned(MODULO_IN)) then
+              lcm_int <= std_logic_vector(unsigned(lcm_int) + unsigned(v_int));
+            else
+              lcm_int <= std_logic_vector(unsigned(lcm_int) + unsigned(v_int) - ('0' & unsigned(MODULO_IN)));
+            end if;
+          else
+            if (unsigned(lcm_int) >= '0' & unsigned(MODULO_IN)) then
+              lcm_int <= std_logic_vector(unsigned(lcm_int) - unsigned(MODULO_IN));
+            end if;
+          end if;
+
           -- FSM Control
           lcm_ctrl_fsm_int <= ENDER_STATE;
 
-        when ENDER_STATE =>  -- STEP 1
-          -- FSM Control
-          lcm_ctrl_fsm_int <= STARTER_STATE;
+        when ENDER_STATE =>  -- STEP 4
+
+          if (unsigned(u_int) = '0' & unsigned(ONE)) then
+            -- Data Outputs
+            DATA_OUT <= lcm_int(DATA_SIZE-1 downto 0);
+
+            -- Control Outputs
+            READY <= '1';
+
+            -- FSM Control
+            lcm_ctrl_fsm_int <= STARTER_STATE;
+          else
+            -- FSM Control
+            lcm_ctrl_fsm_int <= SET_DATA_B_STATE;
+          end if;
 
         when others =>
           -- FSM Control

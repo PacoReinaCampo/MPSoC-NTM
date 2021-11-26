@@ -118,8 +118,7 @@ architecture dnc_read_weighting_architecture of dnc_read_weighting is
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Control Internal
-  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
   -- CONTROL
@@ -176,8 +175,7 @@ begin
       READY <= '0';
 
       -- Control Internal
-      index_i_loop <= ZERO;
-      index_j_loop <= ZERO;
+      index_loop <= ZERO;
 
     elsif (rising_edge(CLK)) then
 
@@ -187,11 +185,10 @@ begin
           READY <= '0';
 
           -- Control Internal
-          index_i_loop <= ZERO;
-          index_j_loop <= ZERO;
+          index_loop <= ZERO;
 
           if (START = '1') then
-            if ((index_i_loop = ZERO) and (index_j_loop <= ZERO)) then
+            if (index_loop = ZERO) then
               -- Control Internal
               start_vector_multiplier <= '1';
             end if;
@@ -251,37 +248,16 @@ begin
           data_a_in_vector_adder <= data_out_vector_adder;
           data_b_in_vector_adder <= data_out_vector_multiplier;
 
-          if (data_out_enable_vector_multiplier = '1') then
-            if ((unsigned(index_i_loop) < unsigned(SIZE_R_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE))) then
-              -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
-              index_j_loop <= ZERO;
-
-              -- FSM Control
-              controller_ctrl_fsm_int <= VECTOR_FIRST_MULTIPLIER_STATE;
-            end if;
-
-            -- Data Outputs
-            W_OUT <= data_out_vector_adder;
-
-            -- Control Outputs
-            W_OUT_I_ENABLE <= '1';
-
-          else
-            -- Control Outputs
-            W_OUT_I_ENABLE <= '0';
-          end if;
-
-          if (data_out_enable_vector_multiplier = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_R_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE))) then
+          if (data_out_enable_vector_adder = '1') then
+            if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_R_IN) - unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(SIZE_N_IN) - unsigned(ONE))) then
+            else
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE));
 
               -- FSM Control
               controller_ctrl_fsm_int <= VECTOR_FIRST_MULTIPLIER_STATE;
@@ -295,6 +271,9 @@ begin
           else
             -- Control Outputs
             W_OUT_J_ENABLE <= '0';
+
+            -- Control Internal
+            start_vector_adder <= '0';
           end if;
 
         when others =>
