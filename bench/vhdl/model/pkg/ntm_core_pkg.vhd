@@ -365,7 +365,6 @@ package ntm_core_pkg is
       -- DATA
       SIZE_Y_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

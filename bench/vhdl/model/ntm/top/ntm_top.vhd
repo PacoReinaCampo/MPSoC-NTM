@@ -245,7 +245,6 @@ architecture ntm_top_architecture of ntm_top is
   -- DATA
   signal size_y_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_w_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_l_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_r_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal k_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -673,7 +672,6 @@ begin
   -- OUTPUT VECTOR
   size_y_in_output_vector <= FULL;
   size_w_in_output_vector <= FULL;
-  size_l_in_output_vector <= FULL;
   size_r_in_output_vector <= FULL;
 
   k_in_output_vector <= FULL;
@@ -877,7 +875,6 @@ begin
       -- DATA
       SIZE_Y_IN => size_y_in_output_vector,
       SIZE_W_IN => size_w_in_output_vector,
-      SIZE_L_IN => size_l_in_output_vector,
       SIZE_R_IN => size_r_in_output_vector,
 
       K_IN => k_in_output_vector,
