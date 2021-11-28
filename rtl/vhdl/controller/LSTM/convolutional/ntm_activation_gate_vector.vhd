@@ -104,13 +104,13 @@ architecture ntm_activation_gate_vector_architecture of ntm_activation_gate_vect
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    MATRIX_FIRST_CONVOLUTION_STATE,     -- STEP 1
+    VECTOR_FIRST_CONVOLUTION_STATE,     -- STEP 1
     VECTOR_FIRST_ADDER_STATE,           -- STEP 2
-    MATRIX_SECOND_CONVOLUTION_STATE,    -- STEP 3
+    VECTOR_SECOND_CONVOLUTION_STATE,    -- STEP 3
     VECTOR_SECOND_ADDER_STATE,          -- STEP 4
-    MATRIX_THIRD_CONVOLUTION_STATE,     -- STEP 5
+    VECTOR_THIRD_CONVOLUTION_STATE,     -- STEP 5
     VECTOR_THIRD_ADDER_STATE,           -- STEP 6
-    MATRIX_FOURTH_CONVOLUTION_STATE,    -- STEP 7
+    VECTOR_FOURTH_CONVOLUTION_STATE,    -- STEP 7
     VECTOR_FOURTH_ADDER_STATE,          -- STEP 8
     VECTOR_TANH_STATE                   -- STEP 9
     );
@@ -152,30 +152,26 @@ architecture ntm_activation_gate_vector_architecture of ntm_activation_gate_vect
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MATRIX CONVOLUTION
+  -- VECTOR CONVOLUTION
   -- CONTROL
-  signal start_matrix_convolution : std_logic;
-  signal ready_matrix_convolution : std_logic;
+  signal start_vector_convolution : std_logic;
+  signal ready_vector_convolution : std_logic;
 
-  signal data_a_in_matrix_enable_matrix_convolution : std_logic;
-  signal data_a_in_vector_enable_matrix_convolution : std_logic;
-  signal data_a_in_scalar_enable_matrix_convolution : std_logic;
-  signal data_b_in_matrix_enable_matrix_convolution : std_logic;
-  signal data_b_in_vector_enable_matrix_convolution : std_logic;
-  signal data_b_in_scalar_enable_matrix_convolution : std_logic;
+  signal data_a_in_vector_enable_vector_convolution : std_logic;
+  signal data_a_in_scalar_enable_vector_convolution : std_logic;
+  signal data_b_in_vector_enable_vector_convolution : std_logic;
+  signal data_b_in_scalar_enable_vector_convolution : std_logic;
 
-  signal data_out_matrix_enable_matrix_convolution : std_logic;
-  signal data_out_vector_enable_matrix_convolution : std_logic;
-  signal data_out_scalar_enable_matrix_convolution : std_logic;
+  signal data_out_vector_enable_vector_convolution : std_logic;
+  signal data_out_scalar_enable_vector_convolution : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_j_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR TANH
   -- CONTROL
@@ -224,80 +220,82 @@ begin
           index_loop <= ZERO;
 
           if (START = '1') then
+            -- Control Internal
+            start_vector_convolution <= '1';
+
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_FIRST_CONVOLUTION_STATE;
+            controller_ctrl_fsm_int <= VECTOR_FIRST_CONVOLUTION_STATE;
+          else
+            -- Control Internal
+            start_vector_convolution <= '0';
           end if;
 
-        when MATRIX_FIRST_CONVOLUTION_STATE =>  -- STEP 1
+        when VECTOR_FIRST_CONVOLUTION_STATE =>  -- STEP 1
 
           -- Data Inputs
-          modulo_in_matrix_convolution <= FULL;
-          size_i_in_matrix_convolution <= FULL;
-          size_j_in_matrix_convolution <= FULL;
-          length_in_matrix_convolution <= FULL;
-          data_a_in_matrix_convolution <= W_IN;
-          data_b_in_matrix_convolution <= X_IN;
+          modulo_in_vector_convolution <= FULL;
+          size_in_vector_convolution   <= FULL;
+          length_in_vector_convolution <= FULL;
+          data_a_in_vector_convolution <= W_IN;
+          data_b_in_vector_convolution <= X_IN;
 
         when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= FULL;
-          data_a_in_vector_adder <= data_out_matrix_convolution;
+          data_a_in_vector_adder <= data_out_vector_convolution;
           data_b_in_vector_adder <= B_IN;
 
-        when MATRIX_SECOND_CONVOLUTION_STATE =>  -- STEP 3
+        when VECTOR_SECOND_CONVOLUTION_STATE =>  -- STEP 3
 
           -- Data Inputs
-          modulo_in_matrix_convolution <= FULL;
-          size_i_in_matrix_convolution <= FULL;
-          size_j_in_matrix_convolution <= FULL;
-          length_in_matrix_convolution <= FULL;
-          data_a_in_matrix_convolution <= K_IN;
-          data_b_in_matrix_convolution <= R_IN;
+          modulo_in_vector_convolution <= FULL;
+          size_in_vector_convolution   <= FULL;
+          length_in_vector_convolution <= FULL;
+          data_a_in_vector_convolution <= K_IN;
+          data_b_in_vector_convolution <= R_IN;
 
         when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= FULL;
-          data_a_in_vector_adder <= data_out_matrix_convolution;
+          data_a_in_vector_adder <= data_out_vector_convolution;
           data_b_in_vector_adder <= data_out_vector_adder;
 
-        when MATRIX_THIRD_CONVOLUTION_STATE =>  -- STEP 5
+        when VECTOR_THIRD_CONVOLUTION_STATE =>  -- STEP 5
 
           -- Data Inputs
-          modulo_in_matrix_convolution <= FULL;
-          size_i_in_matrix_convolution <= FULL;
-          size_j_in_matrix_convolution <= FULL;
-          length_in_matrix_convolution <= FULL;
-          data_a_in_matrix_convolution <= U_IN;
-          data_b_in_matrix_convolution <= H_IN;
+          modulo_in_vector_convolution <= FULL;
+          size_in_vector_convolution   <= FULL;
+          length_in_vector_convolution <= FULL;
+          data_a_in_vector_convolution <= U_IN;
+          data_b_in_vector_convolution <= H_IN;
 
         when VECTOR_THIRD_ADDER_STATE =>  -- STEP 6
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= FULL;
-          data_a_in_vector_adder <= data_out_matrix_convolution;
+          data_a_in_vector_adder <= data_out_vector_convolution;
           data_b_in_vector_adder <= data_out_vector_adder;
 
-        when MATRIX_FOURTH_CONVOLUTION_STATE =>  -- STEP 7
+        when VECTOR_FOURTH_CONVOLUTION_STATE =>  -- STEP 7
 
           -- Data Inputs
-          modulo_in_matrix_convolution <= FULL;
-          size_i_in_matrix_convolution <= FULL;
-          size_j_in_matrix_convolution <= FULL;
-          length_in_matrix_convolution <= FULL;
-          data_a_in_matrix_convolution <= U_IN;
-          data_b_in_matrix_convolution <= H_IN;
+          modulo_in_vector_convolution <= FULL;
+          size_in_vector_convolution   <= FULL;
+          length_in_vector_convolution <= FULL;
+          data_a_in_vector_convolution <= U_IN;
+          data_b_in_vector_convolution <= H_IN;
 
         when VECTOR_FOURTH_ADDER_STATE =>  -- STEP 8
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= FULL;
-          data_a_in_vector_adder <= data_out_matrix_convolution;
+          data_a_in_vector_adder <= data_out_vector_convolution;
           data_b_in_vector_adder <= data_out_vector_adder;
 
         when VECTOR_TANH_STATE =>  -- STEP 9
@@ -319,7 +317,7 @@ begin
               index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_FIRST_CONVOLUTION_STATE;
+              controller_ctrl_fsm_int <= VECTOR_FIRST_CONVOLUTION_STATE;
             end if;
 
             -- Data Outputs
@@ -327,6 +325,9 @@ begin
 
             -- Control Outputs
             A_OUT_ENABLE <= '1';
+
+            -- Control Internal
+            start_vector_convolution <= '0';
           end if;
 
         when others =>
@@ -365,8 +366,8 @@ begin
       DATA_OUT  => data_out_vector_adder
       );
 
-  -- MATRIX CONVOLUTION
-  matrix_convolution_function : ntm_matrix_convolution_function
+  -- VECTOR CONVOLUTION
+  vector_convolution_function : ntm_vector_convolution_function
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -376,28 +377,24 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_convolution,
-      READY => ready_matrix_convolution,
+      START => start_vector_convolution,
+      READY => ready_vector_convolution,
 
-      DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_convolution,
-      DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_convolution,
-      DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_convolution,
-      DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_convolution,
-      DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_convolution,
-      DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_convolution,
+      DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_convolution,
+      DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_convolution,
+      DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_convolution,
+      DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_convolution,
 
-      DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_convolution,
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_convolution,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_convolution,
+      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_convolution,
+      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_convolution,
 
       -- DATA
-      MODULO_IN => modulo_in_matrix_convolution,
-      SIZE_I_IN => size_i_in_matrix_convolution,
-      SIZE_J_IN => size_j_in_matrix_convolution,
-      LENGTH_IN => length_in_matrix_convolution,
-      DATA_A_IN => data_a_in_matrix_convolution,
-      DATA_B_IN => data_b_in_matrix_convolution,
-      DATA_OUT  => data_out_matrix_convolution
+      MODULO_IN => modulo_in_vector_convolution,
+      SIZE_IN   => size_in_vector_convolution,
+      LENGTH_IN => length_in_vector_convolution,
+      DATA_A_IN => data_a_in_vector_convolution,
+      DATA_B_IN => data_b_in_vector_convolution,
+      DATA_OUT  => data_out_vector_convolution
       );
 
   -- VECTOR TANH

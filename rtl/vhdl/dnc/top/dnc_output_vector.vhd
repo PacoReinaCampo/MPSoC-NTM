@@ -101,7 +101,8 @@ architecture dnc_output_vector_architecture of dnc_output_vector is
     MATRIX_FIRST_PRODUCT_J_STATE,       -- STEP 2
     MATRIX_SECOND_PRODUCT_I_STATE,      -- STEP 3
     MATRIX_SECOND_PRODUCT_J_STATE,      -- STEP 4
-    MATRIX_SUMMATION_STATE              -- STEP 5
+    VECTOR_SUMMATION_STATE,             -- STEP 5
+    SCALAR_SUMMATION_STATE              -- STEP 6
     );
 
   -----------------------------------------------------------------------
@@ -244,17 +245,17 @@ begin
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_SUMMATION_STATE;
+              controller_ctrl_fsm_int <= VECTOR_SUMMATION_STATE;
             end if;
 
             -- Data Outputs
             data_in_vector_summation <= data_out_matrix_product;
 
             -- Control Outputs
-            data_in_vector_enable_vector_summation <= '1';
+            data_in_scalar_enable_vector_summation <= '1';
           else
             -- Control Outputs
-            data_in_vector_enable_vector_summation <= '0';
+            data_in_scalar_enable_vector_summation <= '0';
           end if;
 
         when MATRIX_SECOND_PRODUCT_I_STATE =>  -- STEP 3
@@ -293,7 +294,29 @@ begin
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_SUMMATION_STATE;
+              controller_ctrl_fsm_int <= VECTOR_SUMMATION_STATE;
+            end if;
+
+            -- Data Outputs
+            data_in_vector_summation <= data_out_matrix_product;
+
+            -- Control Outputs
+            data_in_scalar_enable_vector_summation <= '1';
+          else
+            -- Control Outputs
+            data_in_scalar_enable_vector_summation <= '0';
+          end if;
+
+        when VECTOR_SUMMATION_STATE =>  -- STEP 5
+
+          if (data_out_vector_enable_vector_summation = '1') then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_Y_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then
+              -- Control Internal
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+              index_j_loop <= ZERO;
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= SCALAR_SUMMATION_STATE;
             end if;
 
             -- Data Outputs
@@ -306,25 +329,31 @@ begin
             data_in_vector_enable_vector_summation <= '0';
           end if;
 
-        when MATRIX_SUMMATION_STATE =>  -- STEP 5
+        when SCALAR_SUMMATION_STATE =>  -- STEP 6
 
-          if (data_out_vector_enable_vector_summation = '1') then
-            if (unsigned(index_i_loop) = unsigned(SIZE_Y_IN) - unsigned(ONE)) then
+          if (data_out_scalar_enable_vector_summation = '1') then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_Y_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            else
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_Y_IN) - unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE))) then
               -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_SECOND_PRODUCT_I_STATE;
+              controller_ctrl_fsm_int <= VECTOR_SUMMATION_STATE;
             end if;
+
+            -- Data Outputs
+            data_in_vector_summation <= data_out_matrix_product;
+
+            -- Control Outputs
+            data_in_scalar_enable_vector_summation <= '1';
           else
-            -- Control Internal
-            start_vector_summation <= '0';
+            -- Control Outputs
+            data_in_scalar_enable_vector_summation <= '0';
           end if;
 
         when others =>
