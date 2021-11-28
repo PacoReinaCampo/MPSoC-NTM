@@ -173,8 +173,14 @@ begin
           index_j_loop <= ZERO;
 
           if (START = '1') then
+            -- Control Internal
+            start_scalar_adder <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_MULTIPLIER_ADDER_STATE;
+          else
+            -- Control Internal
+            start_scalar_adder <= '0';
           end if;
 
         when SCALAR_MULTIPLIER_ADDER_STATE =>  -- STEP 1

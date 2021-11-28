@@ -266,17 +266,28 @@ begin
             data_in_vector_summation <= data_out_matrix_product;
 
             -- Control Outputs
-            data_in_vector_enable_vector_summation <= '1';
+            data_in_scalar_enable_vector_summation <= '1';
           else
             -- Control Outputs
-            data_in_vector_enable_vector_summation <= '0';
+            data_in_scalar_enable_vector_summation <= '0';
           end if;
 
         when MATRIX_SUMMATION_STATE =>  -- STEP 4
 
           if (data_out_vector_enable_vector_summation = '1') then
-            -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_PRODUCT_I_STATE;
+            if (unsigned(index_i_loop) = unsigned(SIZE_Y_IN) - unsigned(ONE)) then
+              -- Control Outputs
+              READY <= '1';
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= MATRIX_PRODUCT_I_STATE;
+            end if;
           else
             -- Control Internal
             start_vector_summation <= '0';

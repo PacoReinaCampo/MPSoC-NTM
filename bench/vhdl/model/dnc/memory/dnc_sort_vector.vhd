@@ -167,8 +167,14 @@ begin
           index_loop <= ZERO;
 
           if (START = '1') then
+            -- Control Internal
+            start_vector_multiplier <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          else
+            -- Control Internal
+            start_vector_multiplier <= '0';
           end if;
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
@@ -198,6 +204,9 @@ begin
           else
             -- Control Outputs
             PHI_OUT_ENABLE <= '0';
+
+            -- Control Internal
+            start_vector_multiplier <= '0';
           end if;
 
         when others =>

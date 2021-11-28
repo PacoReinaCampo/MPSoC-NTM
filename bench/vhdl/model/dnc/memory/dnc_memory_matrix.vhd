@@ -624,6 +624,9 @@ begin
           else
             -- Control Outputs
             M_OUT_K_ENABLE <= '0';
+
+            -- Control Internal
+            start_matrix_transpose <= '0';
           end if;
 
         when MATRIX_SECOND_PRODUCT_I_STATE =>  -- STEP 11

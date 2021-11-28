@@ -188,8 +188,14 @@ begin
           index_j_loop <= ZERO;
 
           if (START = '1') then
+            -- Control Internal
+            start_matrix_transpose <= '1';
+
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_PRODUCT_I_STATE;
+            controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_I_STATE;
+          else
+            -- Control Internal
+            start_matrix_transpose <= '0';
           end if;
 
         when MATRIX_TRANSPOSE_I_STATE =>  -- STEP 1
@@ -244,6 +250,9 @@ begin
           else
             -- Control Outputs
             R_OUT_K_ENABLE <= '0';
+
+            -- Control Internal
+            start_matrix_product <= '0';
           end if;
 
         when others =>

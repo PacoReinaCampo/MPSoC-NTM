@@ -60,7 +60,6 @@ module ntm_output_vector #(
     // DATA
     input [DATA_SIZE-1:0] SIZE_Y_IN,
     input [DATA_SIZE-1:0] SIZE_W_IN,
-    input [DATA_SIZE-1:0] SIZE_L_IN,
     input [DATA_SIZE-1:0] SIZE_R_IN,
     input [DATA_SIZE-1:0] K_IN,
     input [DATA_SIZE-1:0] R_IN,

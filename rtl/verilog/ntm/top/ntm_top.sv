@@ -217,7 +217,6 @@ module ntm_top #(
   // DATA
   wire [DATA_SIZE-1:0] size_y_in_output_vector;
   wire [DATA_SIZE-1:0] size_w_in_output_vector;
-  wire [DATA_SIZE-1:0] size_l_in_output_vector;
   wire [DATA_SIZE-1:0] size_r_in_output_vector;
   wire [DATA_SIZE-1:0] k_in_output_vector;
   wire [DATA_SIZE-1:0] r_in_output_vector;
@@ -580,7 +579,6 @@ module ntm_top #(
     // DATA
     .SIZE_Y_IN(size_y_in_output_vector),
     .SIZE_W_IN(size_w_in_output_vector),
-    .SIZE_L_IN(size_l_in_output_vector),
     .SIZE_R_IN(size_r_in_output_vector),
     .K_IN(k_in_output_vector),
     .R_IN(r_in_output_vector),
