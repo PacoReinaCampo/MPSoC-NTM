@@ -109,9 +109,8 @@ architecture ntm_top_architecture of ntm_top is
   type controller_ctrl_fsm is (
     STARTER_CONTROLLER_STATE,           -- STEP 0
     CONTROLLER_BODY_STATE,              -- STEP 1
-    CONTROLLER_OUTPUT_VECTOR_STATE,     -- STEP 2
-    OUTPUT_VECTOR_STATE,                -- STEP 3
-    INTERFACE_VECTOR_STATE              -- STEP 4
+    OUTPUT_VECTOR_STATE,                -- STEP 2
+    INTERFACE_VECTOR_STATE              -- STEP 3
     );
 
   type write_heads_ctrl_fsm is (
@@ -205,27 +204,6 @@ architecture ntm_top_architecture of ntm_top is
 
   signal h_out_controller : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- CONTROLLER OUTPUT VECTOR
-  -- CONTROL
-  signal start_controller_output_vector : std_logic;
-  signal ready_controller_output_vector : std_logic;
-
-  signal u_in_j_enable_controller_output_vector : std_logic;
-  signal u_in_l_enable_controller_output_vector : std_logic;
-
-  signal h_in_enable_controller_output_vector : std_logic;
-
-  signal nu_out_enable_controller_output_vector : std_logic;
-
-  -- DATA
-  signal size_y_in_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_l_in_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal u_in_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal h_in_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal nu_out_controller_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
   -- OUTPUT VECTOR
   -- CONTROL
   signal start_output_vector : std_logic;
@@ -238,19 +216,24 @@ architecture ntm_top_architecture of ntm_top is
   signal r_in_i_enable_output_vector : std_logic;
   signal r_in_k_enable_output_vector : std_logic;
 
-  signal nu_in_enable_output_vector : std_logic;
+  signal u_in_y_enable_output_vector : std_logic;
+  signal u_in_l_enable_output_vector : std_logic;
 
-  signal y_out_enable_output_vector : std_logic;
+  signal h_in_enable_output_vector : std_logic;
+
+  signal y_in_enable_output_vector : std_logic;
 
   -- DATA
   signal size_y_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_w_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_r_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal k_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal r_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal nu_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal u_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal h_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal y_out_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -460,15 +443,11 @@ begin
               -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(t;l))
               -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + b(t;l))
 
-            when CONTROLLER_OUTPUT_VECTOR_STATE =>  -- STEP 2
+            when OUTPUT_VECTOR_STATE =>  -- STEP 2
 
-              -- nu(t;y) = U(t;y;l)·h(t;l)
+              -- y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
 
-            when OUTPUT_VECTOR_STATE =>  -- STEP 3
-
-              -- y(t;y) = K(t;i;y;k)·r(t;i;k) + nu(t;y)
-
-            when INTERFACE_VECTOR_STATE =>  -- STEP 4
+            when INTERFACE_VECTOR_STATE =>  -- STEP 3
 
               -- xi(t;?) = U(t;?;l)·h(t;l)
 
@@ -561,14 +540,6 @@ begin
 
   h_out_enable_controller <= '0';
 
-  -- CONTROLLER OUTPUT VECTOR
-  u_in_j_enable_controller_output_vector <= '0';
-  u_in_l_enable_controller_output_vector <= '0';
-
-  h_in_enable_controller_output_vector <= '0';
-
-  nu_out_enable_controller_output_vector <= '0';
-
   -- OUTPUT VECTOR
   k_in_i_enable_output_vector <= '0';
   k_in_y_enable_output_vector <= '0';
@@ -577,9 +548,12 @@ begin
   r_in_i_enable_output_vector <= '0';
   r_in_k_enable_output_vector <= '0';
 
-  nu_in_enable_output_vector <= '0';
+  u_in_y_enable_output_vector <= '0';
+  u_in_l_enable_output_vector <= '0';
 
-  y_out_enable_output_vector <= '0';
+  h_in_enable_output_vector <= '0';
+
+  y_in_enable_output_vector <= '0';
 
   -- INTERFACE VECTOR
   -- Key Vector
@@ -660,24 +634,17 @@ begin
 
   h_out_controller <= FULL;
 
-  -- CONTROLLER OUTPUT VECTOR
-  size_y_in_controller_output_vector <= FULL;
-  size_l_in_controller_output_vector <= FULL;
-
-  u_in_controller_output_vector <= FULL;
-  h_in_controller_output_vector <= FULL;
-
-  nu_out_controller_output_vector <= FULL;
-
   -- OUTPUT VECTOR
   size_y_in_output_vector <= FULL;
+  size_l_in_output_vector <= FULL;
   size_w_in_output_vector <= FULL;
   size_r_in_output_vector <= FULL;
 
   k_in_output_vector <= FULL;
   r_in_output_vector <= FULL;
 
-  nu_in_output_vector <= FULL;
+  u_in_output_vector <= FULL;
+  h_in_output_vector <= FULL;
 
   y_out_output_vector <= FULL;
 
@@ -816,37 +783,6 @@ begin
       H_OUT => h_out_controller
       );
 
-  -- CONTROLLER OUTPUT VECTOR
-  controller_output_vector : ntm_controller_output_vector
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_controller_output_vector,
-      READY => ready_controller_output_vector,
-
-      U_IN_Y_ENABLE => u_in_j_enable_controller_output_vector,
-      U_IN_L_ENABLE => u_in_l_enable_controller_output_vector,
-
-      H_IN_ENABLE => h_in_enable_controller_output_vector,
-
-      NU_ENABLE_OUT => nu_out_enable_controller_output_vector,
-
-      -- DATA
-      SIZE_Y_IN => size_y_in_controller_output_vector,
-      SIZE_L_IN => size_l_in_controller_output_vector,
-
-      U_IN => u_in_controller_output_vector,
-      H_IN => h_in_controller_output_vector,
-
-      NU_OUT => nu_out_controller_output_vector
-      );
-
   -- OUTPUT VECTOR
   output_vector_i : ntm_output_vector
     generic map (
@@ -868,19 +804,24 @@ begin
       R_IN_I_ENABLE => r_in_i_enable_output_vector,
       R_IN_K_ENABLE => r_in_k_enable_output_vector,
 
-      NU_IN_ENABLE => nu_in_enable_output_vector,
+      U_IN_Y_ENABLE => u_in_y_enable_output_vector,
+      U_IN_L_ENABLE => u_in_l_enable_output_vector,
 
-      Y_OUT_ENABLE => y_out_enable_output_vector,
+      H_IN_ENABLE => h_in_enable_output_vector,
+
+      Y_OUT_ENABLE => y_in_enable_output_vector,
 
       -- DATA
       SIZE_Y_IN => size_y_in_output_vector,
+      SIZE_L_IN => size_l_in_output_vector,
       SIZE_W_IN => size_w_in_output_vector,
       SIZE_R_IN => size_r_in_output_vector,
 
       K_IN => k_in_output_vector,
       R_IN => r_in_output_vector,
 
-      NU_IN => nu_in_output_vector,
+      U_IN => u_in_output_vector,
+      H_IN => h_in_output_vector,
 
       Y_OUT => y_out_output_vector
       );

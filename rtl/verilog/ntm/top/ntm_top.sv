@@ -93,9 +93,8 @@ module ntm_top #(
 
   parameter [2:0] STARTER_CONTROLLER_STATE = 0;
   parameter [2:0] CONTROLLER_BODY_STATE = 1;
-  parameter [2:0] CONTROLLER_OUTPUT_VECTOR_STATE = 2;
-  parameter [2:0] OUTPUT_VECTOR_STATE = 3;
-  parameter [2:0] INTERFACE_VECTOR_STATE = 4;
+  parameter [2:0] OUTPUT_VECTOR_STATE = 2;
+  parameter [2:0] INTERFACE_VECTOR_STATE = 3;
 
   parameter [1:0] STARTER_WRITE_HEADS_STATE = 0;
   parameter [1:0] WRITING_STATE = 1;
@@ -186,41 +185,37 @@ module ntm_top #(
 
   wire [DATA_SIZE-1:0] h_out_controller;
 
-  // CONTROLLER OUTPUT VECTOR
-  // CONTROL
-  wire start_controller_output_vector;
-  wire ready_controller_output_vector;
-  wire u_in_j_enable_controller_output_vector;
-  wire u_in_l_enable_controller_output_vector;
-  wire h_in_enable_controller_output_vector;
-  wire nu_out_enable_controller_output_vector;
-
-  // DATA
-  wire [DATA_SIZE-1:0] size_y_in_controller_output_vector;
-  wire [DATA_SIZE-1:0] size_l_in_controller_output_vector;
-  wire [DATA_SIZE-1:0] u_in_controller_output_vector;
-  wire [DATA_SIZE-1:0] h_in_controller_output_vector;
-  wire [DATA_SIZE-1:0] nu_out_controller_output_vector;
-
   // OUTPUT VECTOR
   // CONTROL
   wire start_output_vector;
   wire ready_output_vector;
+
   wire k_in_i_enable_output_vector;
   wire k_in_y_enable_output_vector;
   wire k_in_k_enable_output_vector;
+
   wire r_in_i_enable_output_vector;
   wire r_in_k_enable_output_vector;
-  wire nu_in_enable_output_vector;
+
+  wire u_in_y_enable_output_vector;
+  wire u_in_l_enable_output_vector;
+
+  wire h_in_enable_output_vector;
+
   wire y_in_enable_output_vector;
 
   // DATA
   wire [DATA_SIZE-1:0] size_y_in_output_vector;
+  wire [DATA_SIZE-1:0] size_l_in_output_vector;
   wire [DATA_SIZE-1:0] size_w_in_output_vector;
   wire [DATA_SIZE-1:0] size_r_in_output_vector;
+
   wire [DATA_SIZE-1:0] k_in_output_vector;
   wire [DATA_SIZE-1:0] r_in_output_vector;
-  wire [DATA_SIZE-1:0] nu_in_output_vector;
+
+  wire [DATA_SIZE-1:0] u_in_output_vector;
+  wire [DATA_SIZE-1:0] h_in_output_vector;
+
   wire [DATA_SIZE-1:0] y_out_output_vector;
 
   // INTERFACE VECTOR
@@ -387,15 +382,11 @@ module ntm_top #(
               // FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + b(t;l))
             end
 
-            CONTROLLER_OUTPUT_VECTOR_STATE : begin  // STEP 2
-              // nu(t;y) = U(t;y;l)·h(t;l)
+            OUTPUT_VECTOR_STATE : begin  // STEP 2
+              // y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
             end
 
-            OUTPUT_VECTOR_STATE : begin  // STEP 3
-              // y(t;y) = K(t;i;y;k)·r(t;i;k) + nu(t;y)
-            end
-
-            INTERFACE_VECTOR_STATE : begin  // STEP 4
+            INTERFACE_VECTOR_STATE : begin  // STEP 3
               // xi(t;?) = U(t;?;l)·h(t;l)
 
               // k(t;k) = Wk(t;l;k)·h(t;l)
@@ -530,32 +521,6 @@ module ntm_top #(
     .H_OUT(h_out_controller)
   );
 
-  // CONTROLLER OUTPUT VECTOR
-  ntm_controller_output_vector #(
-    .DATA_SIZE(DATA_SIZE)
-  )
-  controller_output_vector(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_controller_output_vector),
-    .READY(ready_controller_output_vector),
-
-    .U_IN_Y_ENABLE(u_in_j_enable_controller_output_vector),
-    .U_IN_L_ENABLE(u_in_l_enable_controller_output_vector),
-    .H_IN_ENABLE(h_in_enable_controller_output_vector),
-    .NU_ENABLE_OUT(nu_out_enable_controller_output_vector),
-
-    // DATA
-    .SIZE_Y_IN(size_y_in_controller_output_vector),
-    .SIZE_L_IN(size_l_in_controller_output_vector),
-    .U_IN(u_in_controller_output_vector),
-    .H_IN(h_in_controller_output_vector),
-    .NU_OUT(nu_out_controller_output_vector)
-  );
-
   // OUTPUT VECTOR
   ntm_output_vector #(
     .DATA_SIZE(DATA_SIZE)
@@ -568,21 +533,33 @@ module ntm_top #(
     // CONTROL
     .START(start_output_vector),
     .READY(ready_output_vector),
+
     .K_IN_I_ENABLE(k_in_i_enable_output_vector),
     .K_IN_Y_ENABLE(k_in_y_enable_output_vector),
     .K_IN_K_ENABLE(k_in_k_enable_output_vector),
+
     .R_IN_I_ENABLE(r_in_i_enable_output_vector),
     .R_IN_K_ENABLE(r_in_k_enable_output_vector),
-    .NU_IN_ENABLE(nu_in_enable_output_vector),
+
+    .U_IN_Y_ENABLE(u_in_y_enable_output_vector),
+    .U_IN_L_ENABLE(u_in_l_enable_output_vector),
+
+    .H_IN_ENABLE(h_in_enable_output_vector),
+
     .Y_OUT_ENABLE(y_in_enable_output_vector),
 
     // DATA
     .SIZE_Y_IN(size_y_in_output_vector),
+    .SIZE_L_IN(size_l_in_output_vector),
     .SIZE_W_IN(size_w_in_output_vector),
     .SIZE_R_IN(size_r_in_output_vector),
+
     .K_IN(k_in_output_vector),
     .R_IN(r_in_output_vector),
-    .NU_IN(nu_in_output_vector),
+
+    .U_IN(u_in_output_vector),
+    .H_IN(h_in_output_vector),
+
     .Y_OUT(y_out_output_vector)
   );
 

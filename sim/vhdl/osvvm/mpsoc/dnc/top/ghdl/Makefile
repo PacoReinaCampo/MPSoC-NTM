@@ -119,7 +119,6 @@ build:
 
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/top/dnc_top.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/top/dnc_output_vector.vhd
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/top/dnc_controller_output_vector.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/top/dnc_read_interface_vector.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/top/dnc_write_interface_vector.vhd
 

@@ -912,52 +912,26 @@ package dnc_core_pkg is
       R_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
       R_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
-      NU_IN_ENABLE : in std_logic;      -- for y in 0 to Y-1
+      U_IN_Y_ENABLE : in std_logic;     -- for y in 0 to Y-1
+      U_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
       Y_OUT_ENABLE : in std_logic;      -- for y in 0 to Y-1
 
       -- DATA
       SIZE_Y_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NU_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component dnc_controller_output_vector is
-    generic (
-      DATA_SIZE : integer := 512
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      U_IN_Y_ENABLE : in std_logic;     -- for y in 0 to Y-1
-      U_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
-
-      H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
-
-      NU_ENABLE_OUT : out std_logic;    -- for j in 0 to Y-1
-
-      -- DATA
-      SIZE_Y_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
       U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NU_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

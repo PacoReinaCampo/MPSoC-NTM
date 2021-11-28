@@ -94,7 +94,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/ntm/memory/ntm_addressing.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/ntm/memory/ntm_content_based_addressing.vhd
 
 vhdl2008 work ../../../../../../../rtl/vhdl/ntm/top/ntm_interface_vector.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/ntm/top/ntm_controller_output_vector.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/ntm/top/ntm_output_vector.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/ntm/top/ntm_top.vhd
 

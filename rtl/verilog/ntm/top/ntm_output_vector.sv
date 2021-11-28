@@ -52,18 +52,29 @@ module ntm_output_vector #(
     input K_IN_I_ENABLE,  // for i in 0 to R-1
     input K_IN_Y_ENABLE,  // for y in 0 to Y-1
     input K_IN_K_ENABLE,  // for k in 0 to W-1
+
     input R_IN_I_ENABLE,  // for i in 0 to R-1
     input R_IN_K_ENABLE,  // for j in 0 to W-1
-    input NU_IN_ENABLE,  // for y in 0 to Y-1
+
+    input U_IN_Y_ENABLE,  // for y in 0 to Y-1
+    input U_IN_L_ENABLE,  // for l in 0 to L-1
+
+    input H_IN_ENABLE,  // for l in 0 to L-1
+
     output reg Y_OUT_ENABLE,  // for y in 0 to Y-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_Y_IN,
+    input [DATA_SIZE-1:0] SIZE_L_IN,
     input [DATA_SIZE-1:0] SIZE_W_IN,
     input [DATA_SIZE-1:0] SIZE_R_IN,
+
     input [DATA_SIZE-1:0] K_IN,
     input [DATA_SIZE-1:0] R_IN,
-    input [DATA_SIZE-1:0] NU_IN,
+
+    input [DATA_SIZE-1:0] U_IN,
+    input [DATA_SIZE-1:0] H_IN,
+
     output reg [DATA_SIZE-1:0] Y_OUT
   );
 
@@ -94,6 +105,7 @@ module ntm_output_vector #(
   // CONTROL
   wire start_vector_adder;
   wire ready_vector_adder;
+
   wire operation_vector_adder;
   wire data_a_in_enable_vector_adder;
   wire data_b_in_enable_vector_adder;
@@ -110,6 +122,7 @@ module ntm_output_vector #(
   // CONTROL
   wire start_matrix_product;
   wire ready_matrix_product;
+
   wire data_a_in_i_enable_matrix_product;
   wire data_a_in_j_enable_matrix_product;
   wire data_b_in_i_enable_matrix_product;
@@ -131,7 +144,7 @@ module ntm_output_vector #(
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // y(t;y) = K(t;i;y;k)·r(t;i;k) + nu(t;y)
+  // y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
@@ -181,12 +194,6 @@ module ntm_output_vector #(
   assign data_b_in_matrix_product   = R_IN;
 
   // VECTOR ADDER
-  assign modulo_in_vector_adder = FULL;
-  assign size_in_vector_adder   = SIZE_Y_IN;
-  assign data_a_in_vector_adder = data_out_matrix_product;
-  assign data_b_in_vector_adder = NU_IN;
-
-  // VECTOR ADDER
   ntm_vector_adder #(
     .DATA_SIZE(DATA_SIZE)
   )
@@ -198,6 +205,7 @@ module ntm_output_vector #(
     // CONTROL
     .START(start_vector_adder),
     .READY(ready_vector_adder),
+
     .OPERATION(operation_vector_adder),
     .DATA_A_IN_ENABLE(data_a_in_enable_vector_adder),
     .DATA_B_IN_ENABLE(data_b_in_enable_vector_adder),
@@ -223,6 +231,7 @@ module ntm_output_vector #(
     // CONTROL
     .START(start_matrix_product),
     .READY(ready_matrix_product),
+
     .DATA_A_IN_I_ENABLE(data_a_in_i_enable_matrix_product),
     .DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_product),
     .DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_product),

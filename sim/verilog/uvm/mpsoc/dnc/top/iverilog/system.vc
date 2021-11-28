@@ -116,7 +116,6 @@
 
 ../../../../../../../rtl/verilog/dnc/top/dnc_top.sv
 ../../../../../../../rtl/verilog/dnc/top/dnc_output_vector.sv
-../../../../../../../rtl/verilog/dnc/top/dnc_controller_output_vector.sv
 ../../../../../../../rtl/verilog/dnc/top/dnc_read_interface_vector.sv
 ../../../../../../../rtl/verilog/dnc/top/dnc_write_interface_vector.sv
 
