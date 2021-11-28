@@ -82,9 +82,12 @@ module dnc_output_vector #(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter [1:0] STARTER_STATE = 0;
-  parameter [1:0] MATRIX_PRODUCT_STATE = 1;
-  parameter [1:0] VECTOR_ADDER_STATE = 2;
+  parameter [2:0] STARTER_STATE = 0;
+  parameter [2:0] MATRIX_FIRST_PRODUCT_I_STATE = 1;
+  parameter [2:0] MATRIX_FIRST_PRODUCT_J_STATE = 2;
+  parameter [2:0] MATRIX_SECOND_PRODUCT_I_STATE = 3;
+  parameter [2:0] MATRIX_SECOND_PRODUCT_J_STATE = 4;
+  parameter [2:0] VECTOR_SUMMATION_STATE = 5;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -100,23 +103,6 @@ module dnc_output_vector #(
 
   // Finite State Machine
   reg [1:0] output_vector_ctrl_fsm_int;
-
-  // VECTOR ADDER
-  // CONTROL
-  wire start_vector_adder;
-  wire ready_vector_adder;
-
-  wire operation_vector_adder;
-  wire data_a_in_enable_vector_adder;
-  wire data_b_in_enable_vector_adder;
-  wire data_out_enable_vector_adder;
-
-  // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_adder;
-  wire [DATA_SIZE-1:0] size_in_vector_adder;
-  wire [DATA_SIZE-1:0] data_a_in_vector_adder;
-  wire [DATA_SIZE-1:0] data_b_in_vector_adder;
-  wire [DATA_SIZE-1:0] data_out_vector_adder;
 
   // MATRIX PRODUCT
   // CONTROL
@@ -139,6 +125,23 @@ module dnc_output_vector #(
   wire [DATA_SIZE-1:0] data_a_in_matrix_product;
   wire [DATA_SIZE-1:0] data_b_in_matrix_product;
   wire [DATA_SIZE-1:0] data_out_matrix_product;
+
+  // VECTOR SUMMATION
+  // CONTROL
+  wire start_vector_summation;
+  wire ready_vector_summation;
+
+  wire data_in_vector_enable_vector_summation;
+  wire data_in_scalar_enable_vector_summation;
+  wire data_out_vector_enable_vector_summation;
+  wire data_out_scalar_enable_vector_summation;
+
+  // DATA
+  wire [DATA_SIZE-1:0] modulo_in_vector_summation;
+  wire [DATA_SIZE-1:0] size_in_vector_summation;
+  wire [DATA_SIZE-1:0] length_in_vector_summation;
+  wire [DATA_SIZE-1:0] data_in_vector_summation;
+  wire [DATA_SIZE-1:0] data_out_vector_summation;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -163,17 +166,26 @@ module dnc_output_vector #(
 
           if(START == 1'b1) begin
             // FSM Control
-            output_vector_ctrl_fsm_int <= MATRIX_PRODUCT_STATE;
+            output_vector_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_I_STATE;
           end
         end
 
-        MATRIX_PRODUCT_STATE : begin  // STEP 1
+        MATRIX_FIRST_PRODUCT_I_STATE : begin  // STEP 1
         end
 
-        VECTOR_ADDER_STATE : begin  // STEP 2
+        MATRIX_FIRST_PRODUCT_J_STATE : begin  // STEP 2
+        end
+
+        MATRIX_SECOND_PRODUCT_I_STATE : begin  // STEP 3
+        end
+
+        MATRIX_SECOND_PRODUCT_J_STATE : begin  // STEP 4
+        end
+
+        VECTOR_SUMMATION_STATE : begin  // STEP 5
 
           // Data Outputs
-          Y_OUT <= data_out_vector_adder;
+          Y_OUT <= data_out_vector_summation;
         end
         default : begin
           // FSM Control
@@ -192,32 +204,6 @@ module dnc_output_vector #(
   assign size_b_j_in_matrix_product = SIZE_R_IN;
   assign data_a_in_matrix_product   = K_IN;
   assign data_b_in_matrix_product   = R_IN;
-
-  // VECTOR ADDER
-  ntm_vector_adder #(
-    .DATA_SIZE(DATA_SIZE)
-  )
-  vector_adder(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_vector_adder),
-    .READY(ready_vector_adder),
-
-    .OPERATION(operation_vector_adder),
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_adder),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_adder),
-    .DATA_OUT_ENABLE(data_out_enable_vector_adder),
-
-    // DATA
-    .MODULO_IN(modulo_in_vector_adder),
-    .SIZE_IN(size_in_vector_adder),
-    .DATA_A_IN(data_a_in_vector_adder),
-    .DATA_B_IN(data_b_in_vector_adder),
-    .DATA_OUT(data_out_vector_adder)
-  );
 
   // MATRIX PRODUCT
   ntm_matrix_product #(
@@ -248,6 +234,32 @@ module dnc_output_vector #(
     .DATA_A_IN(data_a_in_matrix_product),
     .DATA_B_IN(data_b_in_matrix_product),
     .DATA_OUT(data_out_matrix_product)
+  );
+
+  // VECTOR SUMMATION
+  ntm_vector_summation_function #(
+    .DATA_SIZE(DATA_SIZE)
+  )
+  vector_summation_function(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_vector_summation),
+    .READY(ready_vector_summation),
+
+    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_summation),
+    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_summation),
+    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_summation),
+    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_summation),
+
+    // DATA
+    .MODULO_IN(modulo_in_vector_summation),
+    .SIZE_IN(size_in_vector_summation),
+    .LENGTH_IN(length_in_vector_summation),
+    .DATA_IN(data_in_vector_summation),
+    .DATA_OUT(data_out_vector_summation)
   );
 
 endmodule

@@ -466,7 +466,7 @@ begin
   data_b_in_vector_divider <= FULL;
 
   -- VECTOR CONTENT BASED ADDRESSING
-  ntm_content_based_addressing_i : ntm_content_based_addressing
+  content_based_addressing : ntm_content_based_addressing
     generic map (
       DATA_SIZE => DATA_SIZE
       )
