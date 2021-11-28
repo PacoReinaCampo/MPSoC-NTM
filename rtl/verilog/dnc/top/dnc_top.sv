@@ -89,7 +89,8 @@ module dnc_top #(
   parameter [2:0] CONTROLLER_STATE = 1;
   parameter [2:0] READ_HEADS_STATE = 2;
   parameter [2:0] WRITE_HEADS_STATE = 3;
-  parameter [2:0] MEMORY_STATE = 4;
+  parameter [2:0] MEMORY_I_STATE = 4;
+  parameter [2:0] MEMORY_J_STATE = 5;
 
   parameter [2:0] STARTER_CONTROLLER_STATE = 0;
   parameter [2:0] CONTROLLER_BODY_STATE = 1;
@@ -130,8 +131,9 @@ module dnc_top #(
   reg [3:0] read_heads_ctrl_fsm_int;
   reg [3:0] write_heads_ctrl_fsm_int;
 
-  // Internal Signals
-  reg [DATA_SIZE-1:0] index_loop;
+  // Control Internal
+  reg [DATA_SIZE-1:0] index_i_loop;
+  reg [DATA_SIZE-1:0] index_j_loop;
 
   ///////////////////////////////////////////////////////////////////////
   // CONTROLLER
@@ -593,9 +595,17 @@ module dnc_top #(
           endcase
         end
 
-        MEMORY_STATE : begin  // STEP 4
+        MEMORY_I_STATE : begin  // STEP 4
         
-          if (index_loop == SIZE_R_IN - ONE) begin
+          if (index_i_loop == SIZE_R_IN - ONE) begin
+            // FSM Control
+            top_ctrl_fsm_int <= STARTER_STATE;
+          end
+        end
+
+        MEMORY_J_STATE : begin  // STEP 5
+        
+          if (index_j_loop == SIZE_R_IN - ONE) begin
             // FSM Control
             top_ctrl_fsm_int <= STARTER_STATE;
           end

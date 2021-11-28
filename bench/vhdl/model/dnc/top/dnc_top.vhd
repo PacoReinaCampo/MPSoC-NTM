@@ -103,7 +103,8 @@ architecture dnc_top_architecture of dnc_top is
     CONTROLLER_STATE,                   -- STEP 1
     READ_HEADS_STATE,                   -- STEP 2
     WRITE_HEADS_STATE,                  -- STEP 3
-    MEMORY_STATE                        -- STEP 4
+    MEMORY_I_STATE,                     -- STEP 4
+    MEMORY_J_STATE                      -- STEP 5
     );
 
   type controller_ctrl_fsm is (
@@ -151,7 +152,7 @@ architecture dnc_top_architecture of dnc_top is
   signal read_heads_ctrl_fsm_int  : read_heads_ctrl_fsm;
   signal write_heads_ctrl_fsm_int : write_heads_ctrl_fsm;
 
-  -- Internal Signals
+  -- Control Internal
   signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -690,7 +691,7 @@ begin
               write_heads_ctrl_fsm_int <= STARTER_WRITE_HEADS_STATE;
           end case;
 
-        when MEMORY_STATE =>  -- STEP 4
+        when MEMORY_I_STATE =>  -- STEP 4
 
           if (r_out_i_enable_addressing = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then
@@ -702,6 +703,8 @@ begin
               top_ctrl_fsm_int <= CONTROLLER_STATE;
             end if;
           end if;
+
+        when MEMORY_J_STATE =>  -- STEP 5
 
           if (r_out_k_enable_addressing = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then
