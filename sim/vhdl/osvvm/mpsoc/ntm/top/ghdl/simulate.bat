@@ -97,7 +97,6 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/ntm/memory/ntm_addressing.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/ntm/memory/ntm_content_based_addressing.vhd
 
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/ntm/top/ntm_interface_vector.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/ntm/top/ntm_controller_output_vector.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/ntm/top/ntm_output_vector.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/ntm/top/ntm_top.vhd
 

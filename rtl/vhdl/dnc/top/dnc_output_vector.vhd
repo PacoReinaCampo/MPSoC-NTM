@@ -387,13 +387,13 @@ begin
           if (data_out_scalar_enable_vector_summation = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_Y_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_R_IN) - unsigned(ONE))) then
               -- FSM Control
-              controller_ctrl_fsm_int <= STARTER_STATE;
+              controller_ctrl_fsm_int <= MATRIX_ADDER_J_STATE;
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_Y_IN) - unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(SIZE_R_IN) - unsigned(ONE))) then
               -- Control Internal
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= INPUT_FIRST_J_STATE;
+              controller_ctrl_fsm_int <= MATRIX_ADDER_J_STATE;
             end if;
 
             -- Data Outputs
