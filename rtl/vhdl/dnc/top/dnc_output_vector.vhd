@@ -261,7 +261,7 @@ begin
             data_a_int_i_product <= '1';
           else
             -- Control Internal
-            data_a_in_i_enable_matrix_adder <= '0';
+            data_a_in_i_enable_matrix_product <= '0';
           end if;
 
           if (R_IN_K_ENABLE = '1') then
@@ -274,7 +274,7 @@ begin
             data_b_int_i_product <= '1';
           else
             -- Control Internal
-            data_b_in_i_enable_matrix_adder <= '0';
+            data_b_in_i_enable_matrix_product <= '0';
           end if;
 
           if (data_a_int_i_product = '1' and data_b_int_i_product = '1') then
@@ -316,7 +316,7 @@ begin
             controller_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_J_STATE;
           else
             -- Control Internal
-            data_a_in_j_enable_matrix_adder <= '0';
+            data_a_in_j_enable_matrix_product <= '0';
           end if;
 
         when MATRIX_FIRST_PRODUCT_I_STATE =>  -- STEP 3
@@ -335,7 +335,8 @@ begin
             controller_ctrl_fsm_int <= VECTOR_SUMMATION_STATE;
           else
             -- Control Outputs
-            data_in_vector_enable_vector_summation <= '0';
+            data_a_in_i_enable_matrix_product <= '0';
+            data_b_in_i_enable_matrix_product <= '0';
           end if;
 
         when MATRIX_FIRST_PRODUCT_J_STATE =>  -- STEP 4
@@ -353,7 +354,7 @@ begin
             controller_ctrl_fsm_int <= SCALAR_SUMMATION_STATE;
           else
             -- Control Outputs
-            data_in_scalar_enable_vector_summation <= '0';
+            data_a_in_j_enable_matrix_product <= '0';
           end if;
 
         when VECTOR_SUMMATION_STATE =>  -- STEP 5
@@ -471,13 +472,16 @@ begin
             data_b_in_matrix_adder <= data_out_matrix_product;
 
             -- Control Outputs
+            U_OUT_Y_ENABLE <= '1';
+            H_OUT_ENABLE   <= '1';
+
             data_b_in_i_enable_matrix_adder <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_SUMMATION_STATE;
+            controller_ctrl_fsm_int <= MATRIX_ADDER_I_STATE;
           else
             -- Control Outputs
-            data_b_in_i_enable_matrix_adder <= '0';
+            data_b_in_i_enable_matrix_product <= '0';
           end if;
 
         when MATRIX_SECOND_PRODUCT_J_STATE =>  -- STEP 10
@@ -487,10 +491,12 @@ begin
             data_b_in_matrix_adder <= data_out_matrix_product;
 
             -- Control Outputs
+            U_OUT_L_ENABLE <= '1';
+
             data_b_in_j_enable_matrix_adder <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_SUMMATION_STATE;
+            controller_ctrl_fsm_int <= MATRIX_ADDER_J_STATE;
           else
             -- Control Outputs
             data_b_in_j_enable_matrix_product <= '0';
@@ -515,10 +521,10 @@ begin
             Y_OUT_ENABLE <= '1';
           else
             -- Control Outputs
-            data_b_in_i_enable_matrix_product <= '0';
+            U_OUT_Y_ENABLE <= '0';
+            H_OUT_ENABLE   <= '0';
 
-            -- Control Outputs
-            Y_OUT_ENABLE <= '0';
+            data_b_in_i_enable_matrix_product <= '0';
           end if;
 
         when MATRIX_ADDER_J_STATE =>  -- STEP 12
@@ -534,6 +540,9 @@ begin
               -- FSM Control
               controller_ctrl_fsm_int <= INPUT_SECOND_J_STATE;
             end if;
+          else
+            -- Control Outputs
+            U_OUT_L_ENABLE <= '0';
           end if;
 
         when others =>

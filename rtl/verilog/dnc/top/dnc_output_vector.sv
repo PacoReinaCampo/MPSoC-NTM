@@ -53,13 +53,25 @@ module dnc_output_vector #(
     input K_IN_Y_ENABLE,  // for y in 0 to Y-1
     input K_IN_K_ENABLE,  // for k in 0 to W-1
 
+    output reg K_OUT_I_ENABLE,  // for i in 0 to R-1
+    output reg K_OUT_Y_ENABLE,  // for y in 0 to Y-1
+    output reg K_OUT_K_ENABLE,  // for k in 0 to W-1
+
     input R_IN_I_ENABLE,  // for i in 0 to R-1
     input R_IN_K_ENABLE,  // for j in 0 to W-1
+
+    output reg R_OUT_I_ENABLE,  // for i in 0 to R-1
+    output reg R_OUT_K_ENABLE,  // for j in 0 to W-1
 
     input U_IN_Y_ENABLE,  // for y in 0 to Y-1
     input U_IN_L_ENABLE,  // for l in 0 to L-1
 
+    output reg U_OUT_Y_ENABLE,  // for y in 0 to Y-1
+    output reg U_OUT_L_ENABLE,  // for l in 0 to L-1
+
     input H_IN_ENABLE,  // for l in 0 to L-1
+
+    output reg H_OUT_ENABLE,  // for l in 0 to L-1
 
     output reg Y_OUT_ENABLE,  // for y in 0 to Y-1
 
