@@ -355,15 +355,27 @@ package ntm_core_pkg is
       K_IN_Y_ENABLE : in std_logic;     -- for y in 0 to Y-1
       K_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
+      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
+      K_OUT_Y_ENABLE : out std_logic;   -- for y in 0 to Y-1
+      K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
+
       R_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
       R_IN_K_ENABLE : in std_logic;     -- for j in 0 to W-1
+
+      R_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
+      R_OUT_K_ENABLE : out std_logic;   -- for j in 0 to W-1
 
       U_IN_Y_ENABLE : in std_logic;     -- for y in 0 to Y-1
       U_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
+      U_OUT_Y_ENABLE : out std_logic;   -- for y in 0 to Y-1
+      U_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
       H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
-      Y_OUT_ENABLE : in std_logic;      -- for y in 0 to Y-1
+      H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+
+      Y_OUT_ENABLE : out std_logic;     -- for y in 0 to Y-1
 
       -- DATA
       SIZE_Y_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

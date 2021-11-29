@@ -229,13 +229,25 @@ architecture dnc_top_architecture of dnc_top is
   signal k_in_y_enable_output_vector : std_logic;
   signal k_in_k_enable_output_vector : std_logic;
 
+  signal k_out_i_enable_output_vector : std_logic;
+  signal k_out_y_enable_output_vector : std_logic;
+  signal k_out_k_enable_output_vector : std_logic;
+
   signal r_in_i_enable_output_vector : std_logic;
   signal r_in_k_enable_output_vector : std_logic;
+
+  signal r_out_i_enable_output_vector : std_logic;
+  signal r_out_k_enable_output_vector : std_logic;
 
   signal u_in_y_enable_output_vector : std_logic;
   signal u_in_l_enable_output_vector : std_logic;
 
+  signal u_out_y_enable_output_vector : std_logic;
+  signal u_out_l_enable_output_vector : std_logic;
+
   signal h_in_enable_output_vector : std_logic;
+
+  signal h_out_enable_output_vector : std_logic;
 
   signal y_in_enable_output_vector : std_logic;
 
@@ -1056,13 +1068,25 @@ begin
       K_IN_Y_ENABLE => k_in_y_enable_output_vector,
       K_IN_K_ENABLE => k_in_k_enable_output_vector,
 
+      K_OUT_I_ENABLE => k_out_i_enable_output_vector,
+      K_OUT_Y_ENABLE => k_out_y_enable_output_vector,
+      K_OUT_K_ENABLE => k_out_k_enable_output_vector,
+
       R_IN_I_ENABLE => r_in_i_enable_output_vector,
       R_IN_K_ENABLE => r_in_k_enable_output_vector,
+
+      R_OUT_I_ENABLE => r_out_i_enable_output_vector,
+      R_OUT_K_ENABLE => r_out_k_enable_output_vector,
 
       U_IN_Y_ENABLE => u_in_y_enable_output_vector,
       U_IN_L_ENABLE => u_in_l_enable_output_vector,
 
+      U_OUT_Y_ENABLE => u_out_y_enable_output_vector,
+      U_OUT_L_ENABLE => u_out_l_enable_output_vector,
+
       H_IN_ENABLE => h_in_enable_output_vector,
+
+      H_OUT_ENABLE => h_out_enable_output_vector,
 
       Y_OUT_ENABLE => y_in_enable_output_vector,
 
