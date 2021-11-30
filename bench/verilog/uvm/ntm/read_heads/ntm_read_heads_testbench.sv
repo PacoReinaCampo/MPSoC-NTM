@@ -73,13 +73,18 @@ module ntm_read_heads_testbench;
   wire m_in_j_enable_reading;
   wire m_in_k_enable_reading;
 
+  wire m_out_j_enable_reading;
+  wire m_out_k_enable_reading;
+
   wire r_out_enable_reading;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_reading;
   wire [DATA_SIZE-1:0] size_w_in_reading;
+
   wire [DATA_SIZE-1:0] w_in_reading;
   wire [DATA_SIZE-1:0] m_in_reading;
+
   wire [DATA_SIZE-1:0] r_out_reading;
 
   ///////////////////////////////////////////////////////////////////////
@@ -110,13 +115,18 @@ module ntm_read_heads_testbench;
     .NTM_READ_HEADS_M_IN_J_ENABLE(m_in_j_enable_reading),
     .NTM_READ_HEADS_M_IN_K_ENABLE(m_in_k_enable_reading),
 
+    .NTM_READ_HEADS_M_OUT_J_ENABLE(m_out_j_enable_reading),
+    .NTM_READ_HEADS_M_OUT_K_ENABLE(m_out_k_enable_reading),
+
     .NTM_READ_HEADS_R_OUT_ENABLE(r_out_enable_reading),
 
     // DATA
     .NTM_READ_HEADS_SIZE_N_IN(size_n_in_reading),
     .NTM_READ_HEADS_SIZE_W_IN(size_w_in_reading),
+
     .NTM_READ_HEADS_W_IN(w_in_reading),
     .NTM_READ_HEADS_M_IN(m_in_reading),
+
     .NTM_READ_HEADS_R_OUT(r_out_reading)
   );
 
@@ -136,13 +146,18 @@ module ntm_read_heads_testbench;
     .M_IN_J_ENABLE(m_in_j_enable_reading),
     .M_IN_K_ENABLE(m_in_k_enable_reading),
 
+    .M_OUT_J_ENABLE(m_out_j_enable_reading),
+    .M_OUT_K_ENABLE(m_out_k_enable_reading),
+
     .R_OUT_ENABLE(r_out_enable_reading),
 
     // DATA
     .SIZE_N_IN(size_n_in_reading),
     .SIZE_W_IN(size_w_in_reading),
+
     .W_IN(w_in_reading),
     .M_IN(m_in_reading),
+
     .R_OUT(r_out_reading)
   );
 

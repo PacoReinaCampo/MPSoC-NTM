@@ -72,21 +72,32 @@ module ntm_memory_testbench;
 
   wire k_in_enable_addressing;
   wire s_in_enable_addressing;
+
+  wire k_out_enable_addressing;
+  wire s_out_enable_addressing;
+
   wire m_in_j_enable_addressing;
   wire m_in_k_enable_addressing;
+
+  wire m_out_j_enable_addressing;
+  wire m_out_k_enable_addressing;
+
   wire w_in_enable_addressing;
   wire w_out_enable_addressing;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_addressing;
   wire [DATA_SIZE-1:0] size_w_in_addressing;
+
   wire [DATA_SIZE-1:0] k_in_addressing;
   wire [DATA_SIZE-1:0] beta_in_addressing;
   wire [DATA_SIZE-1:0] g_in_addressing;
   wire [DATA_SIZE-1:0] s_in_addressing;
   wire [DATA_SIZE-1:0] gamma_in_addressing;
+
   wire [DATA_SIZE-1:0] m_in_addressing;
   wire [DATA_SIZE-1:0] w_in_addressing;
+
   wire [DATA_SIZE-1:0] w_out_addressing;
 
   ///////////////////////////////////////////////////////////////////////
@@ -116,21 +127,32 @@ module ntm_memory_testbench;
 
     .NTM_MEMORY_K_IN_ENABLE(k_in_enable_addressing),
     .NTM_MEMORY_S_IN_ENABLE(s_in_enable_addressing),
+
+    .NTM_MEMORY_K_OUT_ENABLE(k_out_enable_addressing),
+    .NTM_MEMORY_S_OUT_ENABLE(s_out_enable_addressing),
+
     .NTM_MEMORY_M_IN_J_ENABLE(m_in_j_enable_addressing),
     .NTM_MEMORY_M_IN_K_ENABLE(m_in_k_enable_addressing),
+
+    .NTM_MEMORY_M_OUT_J_ENABLE(m_out_j_enable_addressing),
+    .NTM_MEMORY_M_OUT_K_ENABLE(m_out_k_enable_addressing),
+
     .NTM_MEMORY_W_IN_ENABLE(w_in_enable_addressing),
     .NTM_MEMORY_W_OUT_ENABLE(w_out_enable_addressing),
 
     // DATA
     .NTM_MEMORY_SIZE_N_IN(size_n_in_addressing),
     .NTM_MEMORY_SIZE_W_IN(size_w_in_addressing),
+
     .NTM_MEMORY_K_IN(k_in_addressing),
     .NTM_MEMORY_BETA_IN(beta_in_addressing),
     .NTM_MEMORY_G_IN(g_in_addressing),
     .NTM_MEMORY_S_IN(s_in_addressing),
     .NTM_MEMORY_GAMMA_IN(gamma_in_addressing),
+
     .NTM_MEMORY_M_IN(m_in_addressing),
     .NTM_MEMORY_W_IN(w_in_addressing),
+
     .NTM_MEMORY_W_OUT(w_out_addressing)
   );
 
@@ -138,7 +160,7 @@ module ntm_memory_testbench;
   ntm_addressing #(
     .DATA_SIZE(DATA_SIZE)
   )
-  ntm_addressing_i(
+  addressing(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -149,21 +171,32 @@ module ntm_memory_testbench;
 
     .K_IN_ENABLE(k_in_enable_addressing),
     .S_IN_ENABLE(s_in_enable_addressing),
+
+    .K_OUT_ENABLE(k_out_enable_addressing),
+    .S_OUT_ENABLE(s_out_enable_addressing),
+
     .M_IN_J_ENABLE(m_in_j_enable_addressing),
     .M_IN_K_ENABLE(m_in_k_enable_addressing),
+
+    .M_OUT_J_ENABLE(m_out_j_enable_addressing),
+    .M_OUT_K_ENABLE(m_out_k_enable_addressing),
+
     .W_IN_ENABLE(w_in_enable_addressing),
     .W_OUT_ENABLE(w_out_enable_addressing),
 
     // DATA
     .SIZE_N_IN(size_n_in_addressing),
     .SIZE_W_IN(size_w_in_addressing),
+
     .K_IN(k_in_addressing),
     .BETA_IN(beta_in_addressing),
     .G_IN(g_in_addressing),
     .S_IN(s_in_addressing),
     .GAMMA_IN(gamma_in_addressing),
+
     .M_IN(m_in_addressing),
     .W_IN(w_in_addressing),
+
     .W_OUT(w_out_addressing)
   );
 

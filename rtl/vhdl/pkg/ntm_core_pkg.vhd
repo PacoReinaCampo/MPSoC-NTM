@@ -72,6 +72,9 @@ package ntm_core_pkg is
       M_IN_J_ENABLE : in std_logic;
       M_IN_K_ENABLE : in std_logic;
 
+      M_OUT_J_ENABLE : out std_logic;
+      M_OUT_K_ENABLE : out std_logic;
+
       R_OUT_ENABLE : out std_logic;
 
       -- DATA
@@ -107,6 +110,8 @@ package ntm_core_pkg is
 
       A_IN_ENABLE : in std_logic;
 
+      A_OUT_ENABLE : out std_logic;
+
       M_OUT_J_ENABLE : out std_logic;
       M_OUT_K_ENABLE : out std_logic;
 
@@ -140,6 +145,8 @@ package ntm_core_pkg is
 
       E_IN_ENABLE : in std_logic;
 
+      E_OUT_ENABLE : in std_logic;
+
       M_OUT_J_ENABLE : out std_logic;
       M_OUT_K_ENABLE : out std_logic;
 
@@ -172,12 +179,17 @@ package ntm_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      K_IN_ENABLE : in std_logic;       -- for j in 0 to J-1
+      K_IN_ENABLE : in std_logic;
 
-      M_IN_I_ENABLE : in std_logic;     -- for i in 0 to I-1
-      M_IN_J_ENABLE : in std_logic;     -- for j in 0 to J-1
+      K_OUT_ENABLE : out std_logic;
 
-      C_OUT_ENABLE : out std_logic;     -- for i in 0 to I-1
+      M_IN_I_ENABLE : in std_logic;
+      M_IN_J_ENABLE : in std_logic;
+
+      M_OUT_I_ENABLE : out std_logic;
+      M_OUT_J_ENABLE : out std_logic;
+
+      C_OUT_ENABLE : out std_logic;
 
       -- DATA
       SIZE_I_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -204,14 +216,20 @@ package ntm_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      K_IN_ENABLE : in std_logic;       -- for k in 0 to W-1
-      S_IN_ENABLE : in std_logic;       -- for k in 0 to W-1
+      K_IN_ENABLE : in std_logic;         -- for k in 0 to W-1
+      S_IN_ENABLE : in std_logic;         -- for k in 0 to W-1
 
-      M_IN_J_ENABLE : in std_logic;     -- for j in 0 to N-1
-      M_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
+      K_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
+      S_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
 
-      W_IN_ENABLE  : in  std_logic;     -- for j in 0 to N-1
-      W_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
+      M_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
+      M_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
+
+      M_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
+      M_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
+
+      W_IN_ENABLE  : in  std_logic;       -- for j in 0 to N-1
+      W_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
       -- DATA
       SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -247,20 +265,35 @@ package ntm_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      W_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
-      W_IN_X_ENABLE : in std_logic;     -- for x in 0 to X-1
+      W_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+      W_IN_X_ENABLE : in std_logic;       -- for x in 0 to X-1
 
-      K_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
-      K_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
-      K_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
+      W_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+      W_OUT_X_ENABLE : out std_logic;     -- for x in 0 to X-1
 
-      U_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
-      U_IN_P_ENABLE : in std_logic;     -- for p in 0 to L-1
+      K_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
+      K_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+      K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-      B_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      K_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
+      K_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+      K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
-      X_IN_ENABLE  : in  std_logic;     -- for x in 0 to X-1
-      Y_OUT_ENABLE : out std_logic;     -- for y in 0 to Y-1
+      U_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
+      U_IN_P_ENABLE : in std_logic;       -- for p in 0 to L-1
+
+      U_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+      U_OUT_P_ENABLE : out std_logic;     -- for p in 0 to L-1
+
+      B_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+
+      B_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
+
+      X_IN_ENABLE : in std_logic;         -- for x in 0 to X-1
+
+      X_OUT_ENABLE : out std_logic;       -- for x in 0 to X-1
+
+      Y_OUT_ENABLE : out std_logic;       -- for y in 0 to Y-1
 
       -- DATA
       SIZE_X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -294,28 +327,40 @@ package ntm_core_pkg is
       READY : out std_logic;
 
       -- Key Vector
-      WK_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
-      WK_IN_K_ENABLE : in std_logic;    -- for k in 0 to W-1
+      WK_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+      WK_IN_K_ENABLE : in std_logic;      -- for k in 0 to W-1
 
-      K_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
+      WK_OUT_L_ENABLE : out std_logic;    -- for l in 0 to L-1
+      WK_OUT_K_ENABLE : out std_logic;    -- for k in 0 to W-1
+
+      K_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
 
       -- Key Strength
-      WBETA_IN_ENABLE : in std_logic;   -- for l in 0 to L-1
+      WBETA_IN_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      WBETA_OUT_ENABLE : out std_logic;   -- for l in 0 to L-1
 
       -- Interpolation Gate
-      WG_IN_ENABLE : in std_logic;      -- for l in 0 to L-1
+      WG_IN_ENABLE : in std_logic;        -- for l in 0 to L-1
+
+      WG_OUT_ENABLE : out std_logic;      -- for l in 0 to L-1
 
       -- Shift Weighting
-      WS_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
-      WS_IN_J_ENABLE : in std_logic;    -- for j in 0 to N-1
+      WS_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+      WS_IN_J_ENABLE : in std_logic;      -- for j in 0 to N-1
 
-      S_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
+      WS_OUT_L_ENABLE : out std_logic;    -- for l in 0 to L-1
+      WS_OUT_J_ENABLE : out std_logic;    -- for j in 0 to N-1
+
+      S_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
       -- Sharpening
-      WGAMMA_IN_ENABLE : in std_logic;  -- for l in 0 to L-1
+      WGAMMA_IN_ENABLE : in std_logic;    -- for l in 0 to L-1
+
+      WGAMMA_OUT_ENABLE : out std_logic;  -- for l in 0 to L-1
 
       -- Hidden State
-      H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+      H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
       -- DATA
       SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

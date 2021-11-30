@@ -75,16 +75,45 @@ module ntm_write_heads_testbench;
 
   wire a_in_enable_writing;
 
+  wire a_out_enable_writing;
+
   wire m_out_j_enable_writing;
   wire m_out_k_enable_writing;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_writing;
   wire [DATA_SIZE-1:0] size_w_in_writing;
+
   wire [DATA_SIZE-1:0] m_in_writing;
   wire [DATA_SIZE-1:0] a_in_writing;
   wire [DATA_SIZE-1:0] w_in_writing;
+
   wire [DATA_SIZE-1:0] m_out_writing;
+
+  // ERASING
+  // CONTROL
+  wire start_erasing;
+  wire ready_erasing;
+
+  wire m_in_j_enable_erasing;
+  wire m_in_k_enable_erasing;
+  
+  wire e_in_enable_erasing;
+  
+  wire e_out_enable_erasing;
+  
+  wire m_out_j_enable_erasing;
+  wire m_out_k_enable_erasing;
+
+  // DATA
+  wire [DATA_SIZE-1:0] size_n_in_erasing;
+  wire [DATA_SIZE-1:0] size_w_in_erasing;
+
+  wire [DATA_SIZE-1:0] m_in_erasing;
+  wire [DATA_SIZE-1:0] e_in_erasing;
+  wire [DATA_SIZE-1:0] w_in_erasing;
+
+  wire [DATA_SIZE-1:0] m_out_erasing;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -116,6 +145,8 @@ module ntm_write_heads_testbench;
 
     .NTM_WRITE_HEADS_A_IN_ENABLE(a_in_enable_writing),
 
+    .NTM_WRITE_HEADS_A_OUT_ENABLE(a_out_enable_writing),
+
     .NTM_WRITE_HEADS_M_OUT_J_ENABLE(m_out_j_enable_writing),
     .NTM_WRITE_HEADS_M_OUT_K_ENABLE(m_out_k_enable_writing),
 
@@ -146,16 +177,54 @@ module ntm_write_heads_testbench;
 
     .A_IN_ENABLE(a_in_enable_writing),
 
+    .A_OUT_ENABLE(a_out_enable_writing),
+
     .M_OUT_J_ENABLE(m_out_j_enable_writing),
     .M_OUT_K_ENABLE(m_out_k_enable_writing),
 
     // DATA
     .SIZE_N_IN(size_n_in_writing),
     .SIZE_W_IN(size_w_in_writing),
+
     .M_IN(m_in_writing),
     .A_IN(a_in_writing),
     .W_IN(w_in_writing),
+
     .M_OUT(m_out_writing)
+  );
+
+  // ERASING
+  ntm_erasing #(
+    .DATA_SIZE(DATA_SIZE)
+  )
+  erasing(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_erasing),
+    .READY(ready_erasing),
+    
+    .M_IN_J_ENABLE(m_in_j_enable_erasing),
+    .M_IN_K_ENABLE(m_in_k_enable_erasing),
+
+    .E_IN_ENABLE(e_in_enable_erasing),
+
+    .E_OUT_ENABLE(e_out_enable_erasing),
+
+    .M_OUT_J_ENABLE(m_out_j_enable_erasing),
+    .M_OUT_K_ENABLE(m_out_k_enable_erasing),
+
+    // DATA
+    .SIZE_N_IN(size_n_in_erasing),
+    .SIZE_W_IN(size_w_in_erasing),
+
+    .M_IN(m_in_erasing),
+    .E_IN(e_in_erasing),
+    .W_IN(w_in_erasing),
+
+    .M_OUT(m_out_erasing)
   );
 
 endmodule

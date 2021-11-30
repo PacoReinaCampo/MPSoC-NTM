@@ -52,21 +52,35 @@ module ntm_interface_vector #(
     // Key Vector
     input WK_IN_L_ENABLE,  // for l in 0 to L-1
     input WK_IN_K_ENABLE,  // for k in 0 to W-1
+
+    output reg WK_OUT_L_ENABLE,  // for l in 0 to L-1
+    output reg WK_OUT_K_ENABLE,  // for k in 0 to W-1
+
     output reg K_OUT_ENABLE,  // for k in 0 to W-1
 
     // Key Strength
     input WBETA_IN_ENABLE,  // for l in 0 to L-1
 
+    output reg WBETA_OUT_ENABLE,  // for l in 0 to L-1
+
     // Interpolation Gate
     input WG_IN_ENABLE,  // for l in 0 to L-1
+
+    output reg WG_OUT_ENABLE,  // for l in 0 to L-1
 
     // Shift Weighting
     input WS_IN_L_ENABLE,  // for l in 0 to L-1
     input WS_IN_J_ENABLE,  // for j in 0 to N-1
+
+    output reg WS_OUT_L_ENABLE,  // for l in 0 to L-1
+    output reg WS_OUT_J_ENABLE,  // for j in 0 to N-1
+
     output reg S_OUT_ENABLE,  // for j in 0 to N-1
 
     // Sharpening
     input WGAMMA_IN_ENABLE,  // for l in 0 to L-1
+
+    output reg WGAMMA_OUT_ENABLE,  // for l in 0 to L-1
 
     // Hidden State
     input H_IN_ENABLE,  // for l in 0 to L-1
@@ -75,12 +89,14 @@ module ntm_interface_vector #(
     input [DATA_SIZE-1:0] SIZE_N_IN,
     input [DATA_SIZE-1:0] SIZE_W_IN,
     input [DATA_SIZE-1:0] SIZE_L_IN,
+
     input [DATA_SIZE-1:0] WK_IN,
     input [DATA_SIZE-1:0] WBETA_IN,
     input [DATA_SIZE-1:0] WG_IN,
     input [DATA_SIZE-1:0] WS_IN,
     input [DATA_SIZE-1:0] WGAMMA_IN,
     input [DATA_SIZE-1:0] H_IN,
+
     output reg [DATA_SIZE-1:0] K_OUT,
     output reg [DATA_SIZE-1:0] BETA_OUT,
     output reg [DATA_SIZE-1:0] G_OUT,

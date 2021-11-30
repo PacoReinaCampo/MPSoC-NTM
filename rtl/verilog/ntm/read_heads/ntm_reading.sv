@@ -52,13 +52,18 @@ module ntm_reading #(
     input M_IN_J_ENABLE,  // for j in 0 to N-1
     input M_IN_K_ENABLE,  // for k in 0 to W-1
 
+    output reg M_OUT_J_ENABLE,  // for j in 0 to N-1
+    output reg M_OUT_K_ENABLE,  // for k in 0 to W-1
+
     output reg R_OUT_ENABLE,  // for k in 0 to W-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_N_IN,
     input [DATA_SIZE-1:0] SIZE_W_IN,
+
     input [DATA_SIZE-1:0] W_IN,
     input [DATA_SIZE-1:0] M_IN,
+
     output reg [DATA_SIZE-1:0] R_OUT
   );
 

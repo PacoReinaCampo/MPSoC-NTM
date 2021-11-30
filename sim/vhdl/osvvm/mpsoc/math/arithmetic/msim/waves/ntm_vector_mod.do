@@ -22,7 +22,6 @@ add wave -noupdate /ntm_arithmetic_testbench/ntm_vector_mod_test/vector_mod/DATA
 
 add wave -noupdate /ntm_arithmetic_testbench/ntm_vector_mod_test/vector_mod/mod_ctrl_fsm_int
 add wave -noupdate /ntm_arithmetic_testbench/ntm_vector_mod_test/vector_mod/index_loop
-add wave -noupdate /ntm_arithmetic_testbench/ntm_vector_mod_test/vector_mod/data_in_mod_int
 
 add wave -noupdate /ntm_arithmetic_testbench/ntm_vector_mod_test/vector_mod/start_scalar_mod
 add wave -noupdate /ntm_arithmetic_testbench/ntm_vector_mod_test/vector_mod/modulo_in_scalar_mod

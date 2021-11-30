@@ -63,22 +63,34 @@ entity ntm_interface_vector is
     WK_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
     WK_IN_K_ENABLE : in std_logic;      -- for k in 0 to W-1
 
+    WK_OUT_L_ENABLE : out std_logic;    -- for l in 0 to L-1
+    WK_OUT_K_ENABLE : out std_logic;    -- for k in 0 to W-1
+
     K_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
 
     -- Key Strength
     WBETA_IN_ENABLE : in std_logic;     -- for l in 0 to L-1
 
+    WBETA_OUT_ENABLE : out std_logic;   -- for l in 0 to L-1
+
     -- Interpolation Gate
     WG_IN_ENABLE : in std_logic;        -- for l in 0 to L-1
+
+    WG_OUT_ENABLE : out std_logic;      -- for l in 0 to L-1
 
     -- Shift Weighting
     WS_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
     WS_IN_J_ENABLE : in std_logic;      -- for j in 0 to N-1
 
+    WS_OUT_L_ENABLE : out std_logic;    -- for l in 0 to L-1
+    WS_OUT_J_ENABLE : out std_logic;    -- for j in 0 to N-1
+
     S_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- Sharpening
     WGAMMA_IN_ENABLE : in std_logic;    -- for l in 0 to L-1
+
+    WGAMMA_OUT_ENABLE : out std_logic;  -- for l in 0 to L-1
 
     -- Hidden State
     H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1

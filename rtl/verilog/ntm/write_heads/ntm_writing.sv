@@ -54,6 +54,8 @@ module ntm_writing #(
 
     input A_IN_ENABLE,  // for k in 0 to W-1
 
+    output reg A_OUT_ENABLE,  // for k in 0 to W-1
+
     output reg M_OUT_J_ENABLE,  // for j in 0 to N-1
     output reg M_OUT_K_ENABLE,  // for k in 0 to W-1
 

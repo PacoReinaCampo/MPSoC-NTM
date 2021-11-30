@@ -83,6 +83,8 @@ architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench
 
   signal a_in_enable_writing : std_logic;
 
+  signal a_out_enable_writing : std_logic;
+
   signal m_out_j_enable_writing : std_logic;
   signal m_out_k_enable_writing : std_logic;
 
@@ -94,6 +96,30 @@ architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench
   signal a_in_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_in_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal m_out_writing : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- ERASING
+  -- CONTROL
+  signal start_erasing : std_logic;
+  signal ready_erasing : std_logic;
+
+  signal m_in_j_enable_erasing : std_logic;
+  signal m_in_k_enable_erasing : std_logic;
+
+  signal e_in_enable_erasing : std_logic;
+
+  signal e_out_enable_erasing : std_logic;
+
+  signal m_out_j_enable_erasing : std_logic;
+  signal m_out_k_enable_erasing : std_logic;
+
+  -- DATA
+  signal size_n_in_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal m_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal e_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal m_out_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -128,6 +154,8 @@ begin
 
       NTM_WRITE_HEADS_A_IN_ENABLE => a_in_enable_writing,
 
+      NTM_WRITE_HEADS_A_OUT_ENABLE => a_out_enable_writing,
+
       NTM_WRITE_HEADS_M_OUT_J_ENABLE => m_out_j_enable_writing,
       NTM_WRITE_HEADS_M_OUT_K_ENABLE => m_out_k_enable_writing,
 
@@ -160,6 +188,8 @@ begin
 
       A_IN_ENABLE => a_in_enable_writing,
 
+      A_OUT_ENABLE => a_out_enable_writing,
+
       M_OUT_J_ENABLE => m_out_j_enable_writing,
       M_OUT_K_ENABLE => m_out_k_enable_writing,
 
@@ -171,6 +201,40 @@ begin
       A_IN  => a_in_writing,
       W_IN  => w_in_writing,
       M_OUT => m_out_writing
+      );
+
+  -- ERASING
+  erasing : ntm_erasing
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_erasing,
+      READY => ready_erasing,
+
+      M_IN_J_ENABLE => m_in_j_enable_erasing,
+      M_IN_K_ENABLE => m_in_k_enable_erasing,
+
+      E_IN_ENABLE => e_in_enable_erasing,
+
+      E_OUT_ENABLE => e_out_enable_erasing,
+
+      M_OUT_J_ENABLE => m_out_j_enable_erasing,
+      M_OUT_K_ENABLE => m_out_k_enable_erasing,
+
+      -- DATA
+      SIZE_N_IN => size_n_in_erasing,
+      SIZE_W_IN => size_w_in_erasing,
+
+      M_IN  => m_in_erasing,
+      E_IN  => e_in_erasing,
+      W_IN  => w_in_erasing,
+      M_OUT => m_out_erasing
       );
 
 end ntm_write_heads_testbench_architecture;

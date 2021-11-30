@@ -62,6 +62,8 @@ entity ntm_writing is
 
     A_IN_ENABLE : in std_logic;         -- for k in 0 to W-1
 
+    A_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
+
     M_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
     M_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 

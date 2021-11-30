@@ -63,15 +63,19 @@ module ntm_write_heads_stimulus #(
 
     output NTM_WRITE_HEADS_A_IN_ENABLE,
 
+    input NTM_WRITE_HEADS_A_OUT_ENABLE,
+
     input NTM_WRITE_HEADS_M_OUT_J_ENABLE,
     input NTM_WRITE_HEADS_M_OUT_K_ENABLE,
 
     // DATA
     output [DATA_SIZE-1:0] NTM_WRITE_HEADS_SIZE_N_IN,
     output [DATA_SIZE-1:0] NTM_WRITE_HEADS_SIZE_W_IN,
+
     output [DATA_SIZE-1:0] NTM_WRITE_HEADS_M_IN,
     output [DATA_SIZE-1:0] NTM_WRITE_HEADS_A_IN,
     output [DATA_SIZE-1:0] NTM_WRITE_HEADS_W_IN,
+
     input [DATA_SIZE-1:0] NTM_WRITE_HEADS_M_OUT
   );
 

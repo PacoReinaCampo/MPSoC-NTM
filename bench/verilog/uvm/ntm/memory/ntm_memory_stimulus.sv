@@ -60,21 +60,32 @@ module ntm_memory_stimulus #(
 
     output NTM_MEMORY_K_IN_ENABLE,
     output NTM_MEMORY_S_IN_ENABLE,
+
+    input NTM_MEMORY_K_OUT_ENABLE,
+    input NTM_MEMORY_S_OUT_ENABLE,
+
     output NTM_MEMORY_M_IN_J_ENABLE,
     output NTM_MEMORY_M_IN_K_ENABLE,
+
+    input NTM_MEMORY_M_OUT_J_ENABLE,
+    input NTM_MEMORY_M_OUT_K_ENABLE,
+
     output NTM_MEMORY_W_IN_ENABLE,
     input NTM_MEMORY_W_OUT_ENABLE,
 
     // DATA
     output [DATA_SIZE-1:0] NTM_MEMORY_SIZE_N_IN,
     output [DATA_SIZE-1:0] NTM_MEMORY_SIZE_W_IN,
+
     output [DATA_SIZE-1:0] NTM_MEMORY_K_IN,
     output [DATA_SIZE-1:0] NTM_MEMORY_BETA_IN,
     output [DATA_SIZE-1:0] NTM_MEMORY_G_IN,
     output [DATA_SIZE-1:0] NTM_MEMORY_S_IN,
     output [DATA_SIZE-1:0] NTM_MEMORY_GAMMA_IN,
+
     output [DATA_SIZE-1:0] NTM_MEMORY_M_IN,
     output [DATA_SIZE-1:0] NTM_MEMORY_W_IN,
+
     input [DATA_SIZE-1:0] NTM_MEMORY_W_OUT
   );
 

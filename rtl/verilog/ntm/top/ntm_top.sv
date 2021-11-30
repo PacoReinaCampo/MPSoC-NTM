@@ -52,16 +52,31 @@ module ntm_top #(
     input W_IN_L_ENABLE,  // for l in 0 to L-1
     input W_IN_X_ENABLE,  // for x in 0 to X-1
 
+    input W_OUT_L_ENABLE,  // for l in 0 to L-1
+    input W_OUT_X_ENABLE,  // for x in 0 to X-1
+
     input K_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     input K_IN_L_ENABLE,  // for l in 0 to L-1
     input K_IN_K_ENABLE,  // for k in 0 to W-1
 
+    input K_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    input K_OUT_L_ENABLE,  // for l in 0 to L-1
+    input K_OUT_K_ENABLE,  // for k in 0 to W-1
+
     input U_IN_L_ENABLE,  // for l in 0 to L-1
     input U_IN_P_ENABLE,  // for p in 0 to L-1
 
+    input U_OUT_L_ENABLE,  // for l in 0 to L-1
+    input U_OUT_P_ENABLE,  // for p in 0 to L-1
+
     input B_IN_ENABLE,  // for l in 0 to L-1
 
+    input B_OUT_ENABLE,  // for l in 0 to L-1
+
     input X_IN_ENABLE,  // for x in 0 to X-1
+
+    input X_OUT_ENABLE,  // for x in 0 to X-1
+
     output reg Y_OUT_ENABLE,  // for y in 0 to Y-1
 
     // DATA
@@ -238,21 +253,35 @@ module ntm_top #(
   // Key Vector
   wire wk_in_l_enable_interface_vector;
   wire wk_in_k_enable_interface_vector;
+
+  wire wk_out_l_enable_interface_vector;
+  wire wk_out_k_enable_interface_vector;
+
   wire k_out_enable_interface_vector;
 
   // Key Strength
-  wire wbeta_enable_interface_vector;
+  wire wbeta_in_enable_interface_vector;
+
+  wire wbeta_out_enable_interface_vector;
 
   // Interpolation Gate
   wire wg_in_enable_interface_vector;
 
+  wire wg_out_enable_interface_vector;
+
   // Shift Weighting
   wire ws_in_l_enable_interface_vector;
   wire ws_in_j_enable_interface_vector;
+
+  wire ws_out_l_enable_interface_vector;
+  wire ws_out_j_enable_interface_vector;
+
   wire s_out_enable_interface_vector;
 
   // Sharpening
   wire wgamma_in_enable_interface_vector;
+
+  wire wgamma_out_enable_interface_vector;
 
   // Hidden State
   wire h_in_enable_interface_vector;
@@ -261,12 +290,14 @@ module ntm_top #(
   wire [DATA_SIZE-1:0] size_n_in_interface_vector;
   wire [DATA_SIZE-1:0] size_w_in_interface_vector;
   wire [DATA_SIZE-1:0] size_l_in_interface_vector;
+
   wire [DATA_SIZE-1:0] wk_in_interface_vector;
   wire [DATA_SIZE-1:0] wbeta_in_interface_vector;
   wire [DATA_SIZE-1:0] wg_in_interface_vector;
   wire [DATA_SIZE-1:0] ws_in_interface_vector;
   wire [DATA_SIZE-1:0] wgamma_in_interface_vector;
   wire [DATA_SIZE-1:0] h_in_interface_vector;
+
   wire [DATA_SIZE-1:0] k_out_interface_vector;
   wire [DATA_SIZE-1:0] beta_out_interface_vector;
   wire [DATA_SIZE-1:0] g_out_interface_vector;
@@ -281,15 +312,22 @@ module ntm_top #(
   // CONTROL
   wire start_reading;
   wire ready_reading;
+
   wire m_in_j_enable_reading;
   wire m_in_k_enable_reading;
+
+  wire m_out_j_enable_reading;
+  wire m_out_k_enable_reading;
+
   wire r_out_enable_reading;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_reading;
   wire [DATA_SIZE-1:0] size_w_in_reading;
+
   wire [DATA_SIZE-1:0] w_in_reading;
   wire [DATA_SIZE-1:0] m_in_reading;
+
   wire [DATA_SIZE-1:0] r_out_reading;
 
   ///////////////////////////////////////////////////////////////////////
@@ -300,36 +338,50 @@ module ntm_top #(
   // CONTROL
   wire start_writing;
   wire ready_writing;
+
   wire m_in_j_enable_writing;
   wire m_in_k_enable_writing;
+
   wire a_in_enable_writing;
+
+  wire a_out_enable_writing;
+
   wire m_out_j_enable_writing;
   wire m_out_k_enable_writing;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_writing;
   wire [DATA_SIZE-1:0] size_w_in_writing;
+
   wire [DATA_SIZE-1:0] m_in_writing;
   wire [DATA_SIZE-1:0] a_in_writing;
   wire [DATA_SIZE-1:0] w_in_writing;
+
   wire [DATA_SIZE-1:0] m_out_writing;
 
   // ERASING
   // CONTROL
   wire start_erasing;
   wire ready_erasing;
+
   wire m_in_j_enable_erasing;
   wire m_in_k_enable_erasing;
+  
   wire e_in_enable_erasing;
+  
+  wire e_out_enable_erasing;
+  
   wire m_out_j_enable_erasing;
   wire m_out_k_enable_erasing;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_erasing;
   wire [DATA_SIZE-1:0] size_w_in_erasing;
+
   wire [DATA_SIZE-1:0] m_in_erasing;
   wire [DATA_SIZE-1:0] e_in_erasing;
   wire [DATA_SIZE-1:0] w_in_erasing;
+
   wire [DATA_SIZE-1:0] m_out_erasing;
 
   ///////////////////////////////////////////////////////////////////////
@@ -340,23 +392,35 @@ module ntm_top #(
   // CONTROL
   wire start_addressing;
   wire ready_addressing;
+
   wire k_in_enable_addressing;
   wire s_in_enable_addressing;
+
+  wire k_out_enable_addressing;
+  wire s_out_enable_addressing;
+
   wire m_in_j_enable_addressing;
   wire m_in_k_enable_addressing;
+
+  wire m_out_j_enable_addressing;
+  wire m_out_k_enable_addressing;
+
   wire w_in_enable_addressing;
   wire w_out_enable_addressing;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_addressing;
   wire [DATA_SIZE-1:0] size_w_in_addressing;
+
   wire [DATA_SIZE-1:0] k_in_addressing;
   wire [DATA_SIZE-1:0] beta_in_addressing;
   wire [DATA_SIZE-1:0] g_in_addressing;
   wire [DATA_SIZE-1:0] s_in_addressing;
   wire [DATA_SIZE-1:0] gamma_in_addressing;
+
   wire [DATA_SIZE-1:0] m_in_addressing;
   wire [DATA_SIZE-1:0] w_in_addressing;
+
   wire [DATA_SIZE-1:0] w_out_addressing;
 
   ///////////////////////////////////////////////////////////////////////
@@ -603,21 +667,35 @@ module ntm_top #(
     // Key Vector
     .WK_IN_L_ENABLE(wk_in_l_enable_interface_vector),
     .WK_IN_K_ENABLE(wk_in_k_enable_interface_vector),
+
+    .WK_OUT_L_ENABLE(wk_out_l_enable_interface_vector),
+    .WK_OUT_K_ENABLE(wk_out_k_enable_interface_vector),
+
     .K_OUT_ENABLE(k_out_enable_interface_vector),
 
     // Key Strength
-    .WBETA_IN_ENABLE(wbeta_enable_interface_vector),
+    .WBETA_IN_ENABLE(wbeta_in_enable_interface_vector),
+
+    .WBETA_OUT_ENABLE(wbeta_out_enable_interface_vector),
 
     // Interpolation Gate
     .WG_IN_ENABLE(wg_in_enable_interface_vector),
 
+    .WG_OUT_ENABLE(wg_out_enable_interface_vector),
+
     // Shift Weighting
     .WS_IN_L_ENABLE(ws_in_l_enable_interface_vector),
     .WS_IN_J_ENABLE(ws_in_j_enable_interface_vector),
+
+    .WS_OUT_L_ENABLE(ws_out_l_enable_interface_vector),
+    .WS_OUT_J_ENABLE(ws_out_j_enable_interface_vector),
+
     .S_OUT_ENABLE(s_out_enable_interface_vector),
 
     // Sharpening
     .WGAMMA_IN_ENABLE(wgamma_in_enable_interface_vector),
+
+    .WGAMMA_OUT_ENABLE(wgamma_out_enable_interface_vector),
 
     // Hidden State
     .H_IN_ENABLE(h_in_enable_interface_vector),
@@ -626,12 +704,14 @@ module ntm_top #(
     .SIZE_N_IN(size_n_in_interface_vector),
     .SIZE_W_IN(size_w_in_interface_vector),
     .SIZE_L_IN(size_l_in_interface_vector),
+
     .WK_IN(wk_in_interface_vector),
     .WBETA_IN(wbeta_in_interface_vector),
     .WG_IN(wg_in_interface_vector),
     .WS_IN(ws_in_interface_vector),
     .WGAMMA_IN(wgamma_in_interface_vector),
     .H_IN(h_in_interface_vector),
+
     .K_OUT(k_out_interface_vector),
     .BETA_OUT(beta_out_interface_vector),
     .G_OUT(g_out_interface_vector),
@@ -659,13 +739,18 @@ module ntm_top #(
     .M_IN_J_ENABLE(m_in_j_enable_reading),
     .M_IN_K_ENABLE(m_in_k_enable_reading),
 
+    .M_OUT_J_ENABLE(m_out_j_enable_reading),
+    .M_OUT_K_ENABLE(m_out_k_enable_reading),
+
     .R_OUT_ENABLE(r_out_enable_reading),
 
     // DATA
     .SIZE_N_IN(size_n_in_reading),
     .SIZE_W_IN(size_w_in_reading),
+
     .W_IN(w_in_reading),
     .M_IN(m_in_reading),
+
     .R_OUT(r_out_reading)
   );
 
@@ -675,11 +760,13 @@ module ntm_top #(
 
   // WRITING
   ntm_writing #(
-    .DATA_SIZE(DATA_SIZE))
+    .DATA_SIZE(DATA_SIZE)
+  )
   writing(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
+
     // CONTROL
     .START(start_writing),
     .READY(ready_writing),
@@ -689,15 +776,19 @@ module ntm_top #(
 
     .A_IN_ENABLE(a_in_enable_writing),
 
+    .A_OUT_ENABLE(a_out_enable_writing),
+
     .M_OUT_J_ENABLE(m_out_j_enable_writing),
     .M_OUT_K_ENABLE(m_out_k_enable_writing),
 
     // DATA
     .SIZE_N_IN(size_n_in_writing),
     .SIZE_W_IN(size_w_in_writing),
+
     .M_IN(m_in_writing),
     .A_IN(a_in_writing),
     .W_IN(w_in_writing),
+
     .M_OUT(m_out_writing)
   );
 
@@ -719,15 +810,19 @@ module ntm_top #(
 
     .E_IN_ENABLE(e_in_enable_erasing),
 
+    .E_OUT_ENABLE(e_out_enable_erasing),
+
     .M_OUT_J_ENABLE(m_out_j_enable_erasing),
     .M_OUT_K_ENABLE(m_out_k_enable_erasing),
 
     // DATA
     .SIZE_N_IN(size_n_in_erasing),
     .SIZE_W_IN(size_w_in_erasing),
+
     .M_IN(m_in_erasing),
     .E_IN(e_in_erasing),
     .W_IN(w_in_erasing),
+
     .M_OUT(m_out_erasing)
   );
 
@@ -739,7 +834,7 @@ module ntm_top #(
   ntm_addressing #(
     .DATA_SIZE(DATA_SIZE)
   )
-  ntm_addressing_i(
+  addressing(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
@@ -750,21 +845,32 @@ module ntm_top #(
 
     .K_IN_ENABLE(k_in_enable_addressing),
     .S_IN_ENABLE(s_in_enable_addressing),
+
+    .K_OUT_ENABLE(k_out_enable_addressing),
+    .S_OUT_ENABLE(s_out_enable_addressing),
+
     .M_IN_J_ENABLE(m_in_j_enable_addressing),
     .M_IN_K_ENABLE(m_in_k_enable_addressing),
+
+    .M_OUT_J_ENABLE(m_out_j_enable_addressing),
+    .M_OUT_K_ENABLE(m_out_k_enable_addressing),
+
     .W_IN_ENABLE(w_in_enable_addressing),
     .W_OUT_ENABLE(w_out_enable_addressing),
 
     // DATA
     .SIZE_N_IN(size_n_in_addressing),
     .SIZE_W_IN(size_w_in_addressing),
+
     .K_IN(k_in_addressing),
     .BETA_IN(beta_in_addressing),
     .G_IN(g_in_addressing),
     .S_IN(s_in_addressing),
     .GAMMA_IN(gamma_in_addressing),
+
     .M_IN(m_in_addressing),
     .W_IN(w_in_addressing),
+
     .W_OUT(w_out_addressing)
   );
 

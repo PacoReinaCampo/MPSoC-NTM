@@ -51,21 +51,32 @@ module ntm_addressing #(
 
     input K_IN_ENABLE,  // for k in 0 to W-1
     input S_IN_ENABLE,  // for k in 0 to W-1
+
+    input K_OUT_ENABLE,  // for k in 0 to W-1
+    input S_OUT_ENABLE,  // for k in 0 to W-1
+
     input M_IN_J_ENABLE,  // for j in 0 to N-1
     input M_IN_K_ENABLE,  // for k in 0 to W-1
+
+    input M_OUT_J_ENABLE,  // for j in 0 to N-1
+    input M_OUT_K_ENABLE,  // for k in 0 to W-1
+
     input W_IN_ENABLE,  // for j in 0 to N-1
     output reg W_OUT_ENABLE,  // for j in 0 to N-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_N_IN,
     input [DATA_SIZE-1:0] SIZE_W_IN,
+
     input [DATA_SIZE-1:0] K_IN,
     input [DATA_SIZE-1:0] BETA_IN,
     input [DATA_SIZE-1:0] G_IN,
     input [DATA_SIZE-1:0] S_IN,
     input [DATA_SIZE-1:0] GAMMA_IN,
+
     input [DATA_SIZE-1:0] M_IN,
     input [DATA_SIZE-1:0] W_IN,
+
     output reg [DATA_SIZE-1:0] W_OUT
   );
 
@@ -113,17 +124,25 @@ module ntm_addressing #(
   wire ready_vector_content_based_addressing;
 
   wire k_in_enable_vector_content_based_addressing;
+
+  wire k_out_enable_vector_content_based_addressing;
+
   wire m_in_i_enable_vector_content_based_addressing;
   wire m_in_j_enable_vector_content_based_addressing;
+
+  wire m_out_i_enable_vector_content_based_addressing;
+  wire m_out_j_enable_vector_content_based_addressing;
+
   wire c_out_enable_vector_content_based_addressing;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_content_based_addressing;
   reg [DATA_SIZE-1:0] size_i_in_vector_content_based_addressing;
   reg [DATA_SIZE-1:0] size_j_in_vector_content_based_addressing;
+
   reg [DATA_SIZE-1:0] k_in_vector_content_based_addressing;
   reg [DATA_SIZE-1:0] beta_in_vector_content_based_addressing;
   reg [DATA_SIZE-1:0] m_in_vector_content_based_addressing;
+
   wire [DATA_SIZE-1:0] c_out_vector_content_based_addressing;
 
   // VECTOR ADDER
@@ -263,7 +282,6 @@ module ntm_addressing #(
         VECTOR_CONTENT_BASED_ADDRESSING_STATE : begin  // STEP 1
 
           // Data Inputs
-          modulo_in_vector_content_based_addressing <= FULL;
           size_i_in_vector_content_based_addressing <= SIZE_N_IN;
           size_j_in_vector_content_based_addressing <= SIZE_W_IN;
           k_in_vector_content_based_addressing      <= K_IN;
@@ -389,16 +407,25 @@ module ntm_addressing #(
     .READY(ready_vector_content_based_addressing),
 
     .K_IN_ENABLE(k_in_enable_vector_content_based_addressing),
+
+    .K_OUT_ENABLE(k_out_enable_vector_content_based_addressing),
+
     .M_IN_I_ENABLE(m_in_i_enable_vector_content_based_addressing),
     .M_IN_J_ENABLE(m_in_j_enable_vector_content_based_addressing),
+
+    .M_OUT_I_ENABLE(m_out_i_enable_vector_content_based_addressing),
+    .M_OUT_J_ENABLE(m_out_j_enable_vector_content_based_addressing),
+
     .C_OUT_ENABLE(c_out_enable_vector_content_based_addressing),
 
     // DATA
     .SIZE_I_IN(size_i_in_vector_content_based_addressing),
     .SIZE_J_IN(size_j_in_vector_content_based_addressing),
+
     .K_IN(k_in_vector_content_based_addressing),
     .BETA_IN(beta_in_vector_content_based_addressing),
     .M_IN(m_in_vector_content_based_addressing),
+
     .C_OUT(c_out_vector_content_based_addressing)
   );
 
