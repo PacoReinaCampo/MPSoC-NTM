@@ -140,6 +140,8 @@ begin
       -- Control Internal
       start_scalar_adder <= '0';
 
+      operation_scalar_adder <= '0';
+
       index_loop <= ZERO;
 
       data_a_in_adder_int <= '0';

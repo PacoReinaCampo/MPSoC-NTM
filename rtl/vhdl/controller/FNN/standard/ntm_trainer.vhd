@@ -60,10 +60,17 @@ entity ntm_trainer is
 
     X_IN_ENABLE : in std_logic;         -- for x in 0 to X-1
 
+    X_OUT_ENABLE : out std_logic;       -- for x in 0 to X-1
+
     R_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
     R_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
+    R_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
+    R_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
+
     H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+
+    H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     W_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
     W_OUT_X_ENABLE : out std_logic;     -- for x in 0 to X-1
