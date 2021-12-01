@@ -111,7 +111,7 @@ architecture ntm_matrix_lcm_architecture of ntm_matrix_lcm is
   signal data_b_in_i_lcm_int : std_logic;
   signal data_b_in_j_lcm_int : std_logic;
 
-  -- ROOT
+  -- LCM
   -- CONTROL
   signal start_vector_lcm : std_logic;
   signal ready_vector_lcm : std_logic;
@@ -134,7 +134,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = lcm(DATA_A_IN, DATA_B_IN) mod MODULO_IN
+  -- DATA_OUT = DATA_B_IN + DATA_A_IN mod MODULO_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -146,6 +146,9 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      DATA_OUT_I_ENABLE <= '0';
+      DATA_OUT_J_ENABLE <= '0';
+
       -- Assignations
       index_i_loop <= ZERO;
       index_j_loop <= ZERO;
@@ -154,6 +157,11 @@ begin
       data_a_in_j_lcm_int <= '0';
       data_b_in_i_lcm_int <= '0';
       data_b_in_j_lcm_int <= '0';
+
+      -- Data Internal
+      modulo_in_vector_lcm <= ZERO;
+      data_a_in_vector_lcm <= ZERO;
+      data_b_in_vector_lcm <= ZERO;
 
     elsif (rising_edge(CLK)) then
 
@@ -182,6 +190,9 @@ begin
 
             data_a_in_i_lcm_int <= '1';
           else
+            -- Control Outputs
+            DATA_OUT_I_ENABLE <= '0';
+
             -- Control Internal
             data_a_in_enable_vector_lcm <= '0';
           end if;
@@ -195,6 +206,9 @@ begin
 
             data_b_in_i_lcm_int <= '1';
           else
+            -- Control Outputs
+            DATA_OUT_J_ENABLE <= '0';
+
             -- Control Internal
             data_b_in_enable_vector_lcm <= '0';
           end if;
@@ -205,16 +219,15 @@ begin
               start_vector_lcm <= '1';
             end if;
 
+            data_a_in_i_lcm_int <= '0';
+            data_b_in_i_lcm_int <= '0';
+
             -- Data Inputs
             modulo_in_vector_lcm <= MODULO_IN;
 
             -- FSM Control
             lcm_ctrl_fsm_int <= ENDER_STATE;
           end if;
-
-          -- Control Outputs
-          DATA_OUT_I_ENABLE <= '0';
-          DATA_OUT_J_ENABLE <= '0';
 
         when INPUT_J_STATE =>  -- STEP 2
 
@@ -240,6 +253,9 @@ begin
 
             data_b_in_j_lcm_int <= '1';
           else
+            -- Control Outputs
+            DATA_OUT_J_ENABLE <= '0';
+
             -- Control Internal
             data_b_in_enable_vector_lcm <= '0';
           end if;
@@ -250,6 +266,9 @@ begin
               start_vector_lcm <= '1';
             end if;
 
+            data_a_in_j_lcm_int <= '0';
+            data_b_in_j_lcm_int <= '0';
+
             -- Data Inputs
             modulo_in_vector_lcm <= MODULO_IN;
             size_in_vector_lcm   <= SIZE_J_IN;
@@ -257,9 +276,6 @@ begin
             -- FSM Control
             lcm_ctrl_fsm_int <= ENDER_STATE;
           end if;
-
-          -- Control Outputs
-          DATA_OUT_J_ENABLE <= '0';
 
         when ENDER_STATE =>  -- STEP 3
 
@@ -313,7 +329,7 @@ begin
     end if;
   end process;
 
-  -- ROOT
+  -- LCM
   vector_lcm : ntm_vector_lcm
     generic map (
       DATA_SIZE => DATA_SIZE

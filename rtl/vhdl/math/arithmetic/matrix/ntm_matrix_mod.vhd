@@ -138,12 +138,19 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      -- Assignations
+      DATA_OUT_I_ENABLE <= '0';
+      DATA_OUT_J_ENABLE <= '0';
+
+      -- Control Internal
       index_i_loop <= ZERO;
       index_j_loop <= ZERO;
 
       data_in_i_mod_int <= '0';
       data_in_j_mod_int <= '0';
+
+      -- Data Internal
+      modulo_in_vector_mod <= ZERO;
+      data_in_vector_mod   <= ZERO;
 
     elsif (rising_edge(CLK)) then
 
@@ -152,8 +159,11 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          DATA_OUT_I_ENABLE <= '0';
+          DATA_OUT_J_ENABLE <= '0';
+
           if (START = '1') then
-            -- Assignations
+            -- Control Internal
             index_i_loop <= ZERO;
             index_j_loop <= ZERO;
 
@@ -163,7 +173,7 @@ begin
 
         when INPUT_I_STATE =>  -- STEP 1
 
-          if (DATA_IN_I_ENABLE = '1') then
+          if ((DATA_IN_I_ENABLE = '1') or (index_i_loop = ZERO)) then
             -- Data Inputs
             modulo_in_vector_mod <= MODULO_IN;
 
@@ -181,17 +191,17 @@ begin
             -- FSM Control
             mod_ctrl_fsm_int <= ENDER_STATE;
           else
+            -- Control Outputs
+            DATA_OUT_I_ENABLE <= '0';
+            DATA_OUT_J_ENABLE <= '0';
+
             -- Control Internal
             data_in_enable_vector_mod <= '0';
           end if;
 
-          -- Control Outputs
-          DATA_OUT_I_ENABLE <= '0';
-          DATA_OUT_J_ENABLE <= '0';
-
         when INPUT_J_STATE =>  -- STEP 2
 
-          if (DATA_IN_J_ENABLE = '1') then
+          if ((DATA_IN_J_ENABLE = '1') or (index_j_loop = ZERO)) then
             -- Data Inputs
             modulo_in_vector_mod <= MODULO_IN;
             size_in_vector_mod   <= SIZE_J_IN;
@@ -210,12 +220,12 @@ begin
             -- FSM Control
             mod_ctrl_fsm_int <= ENDER_STATE;
           else
+            -- Control Outputs
+            DATA_OUT_J_ENABLE <= '0';
+
             -- Control Internal
             data_in_enable_vector_mod <= '0';
           end if;
-
-          -- Control Outputs
-          DATA_OUT_J_ENABLE <= '0';
 
         when ENDER_STATE =>  -- STEP 3
 
