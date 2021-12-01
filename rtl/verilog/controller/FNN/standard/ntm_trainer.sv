@@ -50,16 +50,29 @@ module ntm_trainer #(
     output reg READY,
 
     input X_IN_ENABLE,  // for l in 0 to L-1
+
+    output reg X_OUT_ENABLE,  // for l in 0 to L-1
+
     input R_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     input R_IN_K_ENABLE,  // for k in 0 to W-1
+
+    output reg R_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    output reg R_OUT_K_ENABLE,  // for k in 0 to W-1
+
     input H_IN_ENABLE,  // for l in 0 to L-1
+
+    output reg H_OUT_ENABLE,  // for l in 0 to L-1
+
     output reg W_OUT_L_ENABLE,  // for l in 0 to L-1
     output reg W_OUT_X_ENABLE,  // for x in 0 to X-1
+
     output reg K_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     output reg K_OUT_L_ENABLE,  // for l in 0 to L-1
     output reg K_OUT_K_ENABLE,  // for k in 0 to W-1
+
     output reg U_OUT_L_ENABLE,  // for l in 0 to L-1
     output reg U_OUT_P_ENABLE,  // for p in 0 to L-1
+
     output reg B_OUT_ENABLE,  // for l in 0 to L-1
 
     // DATA
@@ -67,9 +80,11 @@ module ntm_trainer #(
     input [DATA_SIZE-1:0] SIZE_W_IN,
     input [DATA_SIZE-1:0] SIZE_L_IN,
     input [DATA_SIZE-1:0] SIZE_R_IN,
+
     input [DATA_SIZE-1:0] X_IN,
     input [DATA_SIZE-1:0] R_IN,
     input [DATA_SIZE-1:0] H_IN,
+
     output reg [DATA_SIZE-1:0] W_OUT,
     output reg [DATA_SIZE-1:0] K_OUT,
     output reg [DATA_SIZE-1:0] U_OUT,
@@ -146,8 +161,11 @@ module ntm_trainer #(
   wire start_vector_differentiation;
   wire ready_vector_differentiation;
 
-  wire data_in_enable_vector_differentiation;
-  wire data_out_enable_vector_differentiation;
+  wire data_in_vector_enable_vector_differentiation;
+  wire data_in_scalar_enable_vector_differentiation;
+
+  wire data_out_vector_enable_vector_differentiation;
+  wire data_out_scalar_enable_vector_differentiation;
 
   // DATA
   wire [DATA_SIZE-1:0] modulo_in_vector_differentiation;
@@ -355,8 +373,11 @@ module ntm_trainer #(
     .START(start_vector_differentiation),
     .READY(ready_vector_differentiation),
 
-    .DATA_IN_ENABLE(data_in_enable_vector_differentiation),
-    .DATA_OUT_ENABLE(data_out_enable_vector_differentiation),
+    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_differentiation),
+    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_differentiation),
+
+    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_differentiation),
+    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_differentiation),
 
     // DATA
     .MODULO_IN(modulo_in_vector_differentiation),

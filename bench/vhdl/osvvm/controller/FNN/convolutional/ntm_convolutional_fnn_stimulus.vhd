@@ -58,6 +58,10 @@ entity ntm_convolutional_fnn_stimulus is
     );
   port (
     -- GLOBAL
+    CLK : out std_logic;
+    RST : out std_logic;
+
+    -- CONTROL
     NTM_CONVOLUTIONAL_FNN_START : out std_logic;
     NTM_CONVOLUTIONAL_FNN_READY : in  std_logic;
 
