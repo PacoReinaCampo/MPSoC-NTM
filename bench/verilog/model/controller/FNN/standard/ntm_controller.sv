@@ -63,10 +63,15 @@ module ntm_controller #(
 
     input X_IN_ENABLE,  // for x in 0 to X-1
 
+    output reg X_OUT_ENABLE,  // for x in 0 to X-1
+
     input R_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     input R_IN_K_ENABLE,  // for k in 0 to W-1
 
-    input H_IN_ENABLE,  // for x in 0 to X-1
+    output reg R_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    output reg R_OUT_K_ENABLE,  // for k in 0 to W-1
+
+    input H_IN_ENABLE,  // for l in 0 to L-1
 
     output reg W_OUT_L_ENABLE,  // for l in 0 to L-1
     output reg W_OUT_X_ENABLE,  // for x in 0 to X-1
@@ -196,17 +201,31 @@ module ntm_controller #(
   // CONTROL
   wire start_trainer;
   wire ready_trainer;
+
   wire x_in_enable_trainer;
+
+  wire x_out_enable_trainer;
+
   wire r_in_i_enable_trainer;
   wire r_in_k_enable_trainer;
+
+  wire r_out_i_enable_trainer;
+  wire r_out_k_enable_trainer;
+
   wire h_in_enable_trainer;
+
+  wire h_out_enable_trainer;
+
   wire w_out_l_enable_trainer;
   wire w_out_x_enable_trainer;
+
   wire k_out_i_enable_trainer;
   wire k_out_l_enable_trainer;
   wire k_out_k_enable_trainer;
+
   wire u_out_l_enable_trainer;
   wire u_out_p_enable_trainer;
+
   wire b_out_enable_trainer;
 
   // DATA
@@ -214,9 +233,11 @@ module ntm_controller #(
   wire [DATA_SIZE-1:0] size_w_in_trainer;
   wire [DATA_SIZE-1:0] size_l_in_trainer;
   wire [DATA_SIZE-1:0] size_r_in_trainer;
+
   wire [DATA_SIZE-1:0] x_in_trainer;
   wire [DATA_SIZE-1:0] r_in_trainer;
   wire [DATA_SIZE-1:0] h_in_trainer;
+
   wire [DATA_SIZE-1:0] w_out_trainer;
   wire [DATA_SIZE-1:0] k_out_trainer;
   wire [DATA_SIZE-1:0] u_out_trainer;
@@ -441,17 +462,30 @@ module ntm_controller #(
     .START(start_trainer),
     .READY(ready_trainer),
 
-    .H_IN_ENABLE(h_in_enable_trainer),
+    .X_IN_ENABLE(x_in_enable_trainer),
+
+    .X_OUT_ENABLE(x_out_enable_trainer),
+
     .R_IN_I_ENABLE(r_in_i_enable_trainer),
     .R_IN_K_ENABLE(r_in_k_enable_trainer),
-    .X_IN_ENABLE(x_in_enable_trainer),
+
+    .R_OUT_I_ENABLE(r_out_i_enable_trainer),
+    .R_OUT_K_ENABLE(r_out_k_enable_trainer),
+
+    .H_IN_ENABLE(h_in_enable_trainer),
+
+    .H_OUT_ENABLE(h_out_enable_trainer),
+
     .W_OUT_L_ENABLE(w_out_l_enable_trainer),
     .W_OUT_X_ENABLE(w_out_x_enable_trainer),
+
     .K_OUT_I_ENABLE(k_out_i_enable_trainer),
     .K_OUT_L_ENABLE(k_out_l_enable_trainer),
     .K_OUT_K_ENABLE(k_out_k_enable_trainer),
+
     .U_OUT_L_ENABLE(u_out_l_enable_trainer),
     .U_OUT_P_ENABLE(u_out_p_enable_trainer),
+
     .B_OUT_ENABLE(b_out_enable_trainer),
 
     // DATA
@@ -459,9 +493,11 @@ module ntm_controller #(
     .SIZE_W_IN(size_w_in_trainer),
     .SIZE_L_IN(size_l_in_trainer),
     .SIZE_R_IN(size_r_in_trainer),
+
     .X_IN(x_in_trainer),
     .R_IN(r_in_trainer),
     .H_IN(h_in_trainer),
+
     .W_OUT(w_out_trainer),
     .K_OUT(k_out_trainer),
     .U_OUT(u_out_trainer),

@@ -57,10 +57,15 @@ entity ntm_state_gate_vector is
     START : in  std_logic;
     READY : out std_logic;
 
-    S_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
     I_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
     F_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
     A_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+
+    I_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
+    F_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
+    A_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
+
+    S_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
     S_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 

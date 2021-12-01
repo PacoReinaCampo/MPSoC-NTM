@@ -62,16 +62,31 @@ entity ntm_top is
     W_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
     W_IN_X_ENABLE : in std_logic;       -- for x in 0 to X-1
 
+    W_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    W_OUT_X_ENABLE : out std_logic;     -- for x in 0 to X-1
+
     K_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
     K_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
     K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
+    K_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
+    K_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
+
     U_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
     U_IN_P_ENABLE : in std_logic;       -- for p in 0 to L-1
 
+    U_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    U_OUT_P_ENABLE : out std_logic;     -- for p in 0 to L-1
+
     B_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
-    X_IN_ENABLE  : in  std_logic;       -- for x in 0 to X-1
+    B_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
+
+    X_IN_ENABLE : in std_logic;         -- for x in 0 to X-1
+
+    X_OUT_ENABLE : out std_logic;       -- for x in 0 to X-1
+
     Y_OUT_ENABLE : out std_logic;       -- for y in 0 to Y-1
 
     -- DATA
@@ -258,22 +273,34 @@ architecture ntm_top_architecture of ntm_top is
   signal wk_in_l_enable_interface_vector : std_logic;
   signal wk_in_k_enable_interface_vector : std_logic;
 
+  signal wk_out_l_enable_interface_vector : std_logic;
+  signal wk_out_k_enable_interface_vector : std_logic;
+
   signal k_out_enable_interface_vector : std_logic;
 
   -- Key Strength
-  signal wbeta_enable_interface_vector : std_logic;
+  signal wbeta_in_enable_interface_vector : std_logic;
+
+  signal wbeta_out_enable_interface_vector : std_logic;
 
   -- Interpolation Gate
   signal wg_in_enable_interface_vector : std_logic;
+
+  signal wg_out_enable_interface_vector : std_logic;
 
   -- Shift Weighting
   signal ws_in_l_enable_interface_vector : std_logic;
   signal ws_in_j_enable_interface_vector : std_logic;
 
+  signal ws_out_l_enable_interface_vector : std_logic;
+  signal ws_out_j_enable_interface_vector : std_logic;
+
   signal s_out_enable_interface_vector : std_logic;
 
   -- Sharpening
   signal wgamma_in_enable_interface_vector : std_logic;
+
+  signal wgamma_out_enable_interface_vector : std_logic;
 
   -- Hidden State
   signal h_in_enable_interface_vector : std_logic;
@@ -309,6 +336,9 @@ architecture ntm_top_architecture of ntm_top is
   signal m_in_j_enable_reading : std_logic;
   signal m_in_k_enable_reading : std_logic;
 
+  signal m_out_j_enable_reading : std_logic;
+  signal m_out_k_enable_reading : std_logic;
+
   signal r_out_enable_reading : std_logic;
 
   -- DATA
@@ -333,6 +363,8 @@ architecture ntm_top_architecture of ntm_top is
 
   signal a_in_enable_writing : std_logic;
 
+  signal a_out_enable_writing : std_logic;
+
   signal m_out_j_enable_writing : std_logic;
   signal m_out_k_enable_writing : std_logic;
 
@@ -355,6 +387,8 @@ architecture ntm_top_architecture of ntm_top is
 
   signal e_in_enable_erasing : std_logic;
 
+  signal e_out_enable_erasing : std_logic;
+
   signal m_out_j_enable_erasing : std_logic;
   signal m_out_k_enable_erasing : std_logic;
 
@@ -362,10 +396,9 @@ architecture ntm_top_architecture of ntm_top is
   signal size_n_in_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_w_in_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal m_in_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal e_in_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_in_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
-
+  signal m_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal e_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal m_out_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
@@ -380,8 +413,14 @@ architecture ntm_top_architecture of ntm_top is
   signal k_in_enable_addressing : std_logic;
   signal s_in_enable_addressing : std_logic;
 
+  signal k_out_enable_addressing : std_logic;
+  signal s_out_enable_addressing : std_logic;
+
   signal m_in_j_enable_addressing : std_logic;
   signal m_in_k_enable_addressing : std_logic;
+
+  signal m_out_j_enable_addressing : std_logic;
+  signal m_out_k_enable_addressing : std_logic;
 
   signal w_in_enable_addressing  : std_logic;
   signal w_out_enable_addressing : std_logic;
@@ -400,6 +439,7 @@ architecture ntm_top_architecture of ntm_top is
 
   signal w_in_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_out_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+
 
 begin
 
@@ -575,7 +615,7 @@ begin
   k_out_enable_interface_vector <= '0';
 
   -- Key Strength
-  wbeta_enable_interface_vector <= '0';
+  wbeta_in_enable_interface_vector <= '0';
 
   -- Interpolation Gate
   wg_in_enable_interface_vector <= '0';
@@ -726,7 +766,7 @@ begin
   -----------------------------------------------------------------------
 
   -- CONTROLLER
-  ntm_controller_i : ntm_controller
+  controller : ntm_controller
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -796,7 +836,7 @@ begin
       );
 
   -- OUTPUT VECTOR
-  output_vector_i : ntm_output_vector
+  output_vector : ntm_output_vector
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -851,7 +891,7 @@ begin
       );
 
   -- INTERFACE VECTOR
-  ntm_interface_vector_i : ntm_interface_vector
+  interface_vector : ntm_interface_vector
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -868,22 +908,34 @@ begin
       WK_IN_L_ENABLE => wk_in_l_enable_interface_vector,
       WK_IN_K_ENABLE => wk_in_k_enable_interface_vector,
 
+      WK_OUT_L_ENABLE => wk_out_l_enable_interface_vector,
+      WK_OUT_K_ENABLE => wk_out_k_enable_interface_vector,
+
       K_OUT_ENABLE => k_out_enable_interface_vector,
 
       -- Key Strength
-      WBETA_IN_ENABLE => wbeta_enable_interface_vector,
+      WBETA_IN_ENABLE => wbeta_in_enable_interface_vector,
+
+      WBETA_OUT_ENABLE => wbeta_out_enable_interface_vector,
 
       -- Interpolation Gate
       WG_IN_ENABLE => wg_in_enable_interface_vector,
+
+      WG_OUT_ENABLE => wg_out_enable_interface_vector,
 
       -- Shift Weighting
       WS_IN_L_ENABLE => ws_in_l_enable_interface_vector,
       WS_IN_J_ENABLE => ws_in_j_enable_interface_vector,
 
+      WS_OUT_L_ENABLE => ws_out_l_enable_interface_vector,
+      WS_OUT_J_ENABLE => ws_out_j_enable_interface_vector,
+
       S_OUT_ENABLE => s_out_enable_interface_vector,
 
       -- Sharpening
       WGAMMA_IN_ENABLE => wgamma_in_enable_interface_vector,
+
+      WGAMMA_OUT_ENABLE => wgamma_out_enable_interface_vector,
 
       -- Hidden State
       H_IN_ENABLE => h_in_enable_interface_vector,
@@ -929,6 +981,9 @@ begin
       M_IN_J_ENABLE => m_in_j_enable_reading,
       M_IN_K_ENABLE => m_in_k_enable_reading,
 
+      M_OUT_J_ENABLE => m_out_j_enable_reading,
+      M_OUT_K_ENABLE => m_out_k_enable_reading,
+
       R_OUT_ENABLE => r_out_enable_reading,
 
       -- DATA
@@ -963,6 +1018,8 @@ begin
 
       A_IN_ENABLE => a_in_enable_writing,
 
+      A_OUT_ENABLE => a_out_enable_writing,
+
       M_OUT_J_ENABLE => m_out_j_enable_writing,
       M_OUT_K_ENABLE => m_out_k_enable_writing,
 
@@ -995,6 +1052,8 @@ begin
 
       E_IN_ENABLE => e_in_enable_erasing,
 
+      E_OUT_ENABLE => e_out_enable_erasing,
+
       M_OUT_J_ENABLE => m_out_j_enable_erasing,
       M_OUT_K_ENABLE => m_out_k_enable_erasing,
 
@@ -1002,10 +1061,9 @@ begin
       SIZE_N_IN => size_n_in_erasing,
       SIZE_W_IN => size_w_in_erasing,
 
-      M_IN => m_in_erasing,
-      E_IN => e_in_erasing,
-      W_IN => w_in_erasing,
-
+      M_IN  => m_in_erasing,
+      E_IN  => e_in_erasing,
+      W_IN  => w_in_erasing,
       M_OUT => m_out_erasing
       );
 
@@ -1014,7 +1072,7 @@ begin
   -----------------------------------------------------------------------
 
   -- ADDRESSING
-  ntm_addressing_i : ntm_addressing
+  addressing : ntm_addressing
     generic map (
       DATA_SIZE => DATA_SIZE
       )
@@ -1030,8 +1088,14 @@ begin
       K_IN_ENABLE => k_in_enable_addressing,
       S_IN_ENABLE => s_in_enable_addressing,
 
+      K_OUT_ENABLE => k_out_enable_addressing,
+      S_OUT_ENABLE => s_out_enable_addressing,
+
       M_IN_J_ENABLE => m_in_j_enable_addressing,
       M_IN_K_ENABLE => m_in_k_enable_addressing,
+
+      M_OUT_J_ENABLE => m_out_j_enable_addressing,
+      M_OUT_K_ENABLE => m_out_k_enable_addressing,
 
       W_IN_ENABLE  => w_in_enable_addressing,
       W_OUT_ENABLE => w_out_enable_addressing,

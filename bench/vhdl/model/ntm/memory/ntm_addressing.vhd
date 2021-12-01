@@ -61,8 +61,14 @@ entity ntm_addressing is
     K_IN_ENABLE : in std_logic;         -- for k in 0 to W-1
     S_IN_ENABLE : in std_logic;         -- for k in 0 to W-1
 
+    K_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
+    S_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
+
     M_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
     M_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
+
+    M_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
+    M_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     W_IN_ENABLE  : in  std_logic;       -- for j in 0 to N-1
     W_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
@@ -139,8 +145,13 @@ architecture ntm_addressing_architecture of ntm_addressing is
 
   signal k_in_enable_vector_content_based_addressing : std_logic;
 
+  signal k_out_enable_vector_content_based_addressing : std_logic;
+
   signal m_in_i_enable_vector_content_based_addressing : std_logic;
   signal m_in_j_enable_vector_content_based_addressing : std_logic;
+
+  signal m_out_i_enable_vector_content_based_addressing : std_logic;
+  signal m_out_j_enable_vector_content_based_addressing : std_logic;
 
   signal c_out_enable_vector_content_based_addressing : std_logic;
 
@@ -152,8 +163,7 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal beta_in_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
   signal m_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal modulo_in_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal c_out_vector_content_based_addressing     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal c_out_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR ADDER
   -- CONTROL
@@ -433,7 +443,6 @@ begin
 
   -- DATA
   -- VECTOR CONTENT BASED ADDRESSING
-  modulo_in_vector_content_based_addressing <= FULL;
   size_i_in_vector_content_based_addressing <= SIZE_N_IN;
   size_j_in_vector_content_based_addressing <= SIZE_W_IN;
   k_in_vector_content_based_addressing      <= K_IN;
@@ -481,8 +490,13 @@ begin
 
       K_IN_ENABLE => k_in_enable_vector_content_based_addressing,
 
+      K_OUT_ENABLE => k_out_enable_vector_content_based_addressing,
+
       M_IN_I_ENABLE => m_in_i_enable_vector_content_based_addressing,
       M_IN_J_ENABLE => m_in_j_enable_vector_content_based_addressing,
+
+      M_OUT_I_ENABLE => m_out_i_enable_vector_content_based_addressing,
+      M_OUT_J_ENABLE => m_out_j_enable_vector_content_based_addressing,
 
       C_OUT_ENABLE => c_out_enable_vector_content_based_addressing,
 

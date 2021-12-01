@@ -130,23 +130,32 @@ begin
       DATA_OUT <= ZERO;
 
       -- Control Outputs
-      READY <= '0';
+      READY           <= '0';
+      DATA_OUT_ENABLE <= '0';
 
-      -- Assignations
+      -- Control Internal
+      index_loop <= ZERO;
+
       index_loop <= ZERO;
 
       data_a_in_gcd_int <= '0';
       data_b_in_gcd_int <= '0';
+
+      -- Data Internal
+      modulo_in_scalar_gcd <= ZERO;
+      data_a_in_scalar_gcd <= ZERO;
+      data_b_in_scalar_gcd <= ZERO;
 
     elsif (rising_edge(CLK)) then
 
       case gcd_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
-          READY <= '0';
+          READY           <= '0';
+          DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
-            -- Assignations
+            -- Control Internal
             index_loop <= ZERO;
 
             -- FSM Control
@@ -155,7 +164,7 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          if (DATA_A_IN_ENABLE = '1') then
+          if ((DATA_A_IN_ENABLE = '1') or (index_loop = ZERO)) then
             -- Data Inputs
             data_a_in_scalar_gcd <= DATA_A_IN;
 
@@ -163,7 +172,7 @@ begin
             data_a_in_gcd_int <= '1';
           end if;
 
-          if (DATA_B_IN_ENABLE = '1') then
+          if ((DATA_B_IN_ENABLE = '1') or (index_loop = ZERO)) then
             -- Data Inputs
             data_b_in_scalar_gcd <= DATA_B_IN;
 
@@ -177,15 +186,18 @@ begin
               start_scalar_gcd <= '1';
             end if;
 
+            data_a_in_gcd_int <= '0';
+            data_b_in_gcd_int <= '0';
+
             -- Data Inputs
             modulo_in_scalar_gcd <= MODULO_IN;
 
             -- FSM Control
             gcd_ctrl_fsm_int <= ENDER_STATE;
+          else
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '0';
           end if;
-
-          -- Control Outputs
-          DATA_OUT_ENABLE <= '0';
 
         when ENDER_STATE =>  -- STEP 2
 

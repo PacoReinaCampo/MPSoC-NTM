@@ -164,7 +164,7 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          if ((DATA_A_IN_ENABLE = '1') or (index_loop <= ZERO)) then
+          if ((DATA_A_IN_ENABLE = '1') or (index_loop = ZERO)) then
             -- Data Inputs
             data_a_in_scalar_lcm <= DATA_A_IN;
 
@@ -172,7 +172,7 @@ begin
             data_a_in_lcm_int <= '1';
           end if;
 
-          if ((DATA_B_IN_ENABLE = '1') or (index_loop <= ZERO)) then
+          if ((DATA_B_IN_ENABLE = '1') or (index_loop = ZERO)) then
             -- Data Inputs
             data_b_in_scalar_lcm <= DATA_B_IN;
 

@@ -60,6 +60,9 @@ entity ntm_hidden_gate_vector is
     S_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
     O_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
+    S_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
+    O_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
+
     H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA

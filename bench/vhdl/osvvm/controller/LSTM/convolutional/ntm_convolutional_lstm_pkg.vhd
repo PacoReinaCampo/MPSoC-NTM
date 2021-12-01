@@ -87,8 +87,13 @@ package ntm_convolutional_lstm_pkg is
 
       NTM_CONVOLUTIONAL_LSTM_X_IN_ENABLE : out std_logic;
 
+      NTM_CONVOLUTIONAL_LSTM_X_OUT_ENABLE : in std_logic;
+
       NTM_CONVOLUTIONAL_LSTM_R_IN_I_ENABLE : out std_logic;
       NTM_CONVOLUTIONAL_LSTM_R_IN_K_ENABLE : out std_logic;
+
+      NTM_CONVOLUTIONAL_LSTM_R_OUT_I_ENABLE : in std_logic;
+      NTM_CONVOLUTIONAL_LSTM_R_OUT_K_ENABLE : in std_logic;
 
       NTM_CONVOLUTIONAL_LSTM_H_IN_ENABLE : out std_logic;
 

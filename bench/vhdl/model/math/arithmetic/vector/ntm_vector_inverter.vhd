@@ -124,20 +124,28 @@ begin
       DATA_OUT <= ZERO;
 
       -- Control Outputs
-      READY <= '0';
+      READY           <= '0';
+      DATA_OUT_ENABLE <= '0';
 
-      -- Assignations
+      -- Control Internal
+      start_scalar_inverter <= '0';
+
       index_loop <= ZERO;
+
+      -- Data Internal
+      modulo_in_scalar_inverter <= ZERO;
+      data_in_scalar_inverter   <= ZERO;
 
     elsif (rising_edge(CLK)) then
 
       case inverter_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
-          READY <= '0';
+          READY           <= '0';
+          DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
-            -- Assignations
+            -- Control Internal
             index_loop <= ZERO;
 
             -- FSM Control
@@ -146,7 +154,7 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          if (DATA_IN_ENABLE = '1') then
+          if ((DATA_IN_ENABLE = '1') or (index_loop = ZERO)) then
             -- Data Inputs
             modulo_in_scalar_inverter <= MODULO_IN;
 
@@ -159,10 +167,10 @@ begin
 
             -- FSM Control
             inverter_ctrl_fsm_int <= ENDER_STATE;
+          else
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '0';
           end if;
-
-          -- Control Outputs
-          DATA_OUT_ENABLE <= '0';
 
         when ENDER_STATE =>  -- STEP 2
 

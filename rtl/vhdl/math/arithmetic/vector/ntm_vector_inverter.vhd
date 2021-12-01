@@ -154,7 +154,7 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          if ((DATA_IN_ENABLE = '1') or (index_loop <= ZERO)) then
+          if ((DATA_IN_ENABLE = '1') or (index_loop = ZERO)) then
             -- Data Inputs
             modulo_in_scalar_inverter <= MODULO_IN;
 
