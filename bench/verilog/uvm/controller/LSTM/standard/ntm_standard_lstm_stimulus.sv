@@ -71,8 +71,13 @@ module ntm_standard_lstm_stimulus #(
 
     output NTM_STANDARD_LSTM_X_IN_ENABLE,
 
+    input NTM_STANDARD_LSTM_X_OUT_ENABLE,
+
     output NTM_STANDARD_LSTM_R_IN_I_ENABLE,
     output NTM_STANDARD_LSTM_R_IN_K_ENABLE,
+
+    input NTM_STANDARD_LSTM_R_OUT_I_ENABLE,
+    input NTM_STANDARD_LSTM_R_OUT_K_ENABLE,
 
     output NTM_STANDARD_LSTM_H_IN_ENABLE,
 

@@ -51,13 +51,23 @@ module ntm_output_trainer #(
 
     input X_IN_ENABLE,  // for x in 0 to X-1
 
+    output reg X_OUT_ENABLE,  // for x in 0 to X-1
+
     input R_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     input R_IN_K_ENABLE,  // for k in 0 to W-1
 
+    output reg R_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    output reg R_OUT_K_ENABLE,  // for k in 0 to W-1
+
     input H_IN_ENABLE,  // for l in 0 to L-1
+
+    output reg H_OUT_ENABLE,  // for l in 0 to L-1
 
     input A_IN_ENABLE,  // for l in 0 to L-1
     input O_IN_ENABLE,  // for l in 0 to L-1
+
+    output reg A_OUT_ENABLE,  // for l in 0 to L-1
+    output reg O_OUT_ENABLE,  // for l in 0 to L-1
 
     output reg W_OUT_L_ENABLE,  // for l in 0 to L-1
     output reg W_OUT_X_ENABLE,  // for x in 0 to X-1

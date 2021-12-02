@@ -49,18 +49,27 @@ module ntm_state_gate_vector #(
     input START,
     output reg READY,
 
-    input S_IN_ENABLE,  // for l in 0 to L-1
     input I_IN_ENABLE,  // for l in 0 to L-1
     input F_IN_ENABLE,  // for l in 0 to L-1
     input A_IN_ENABLE,  // for l in 0 to L-1
+
+    output reg I_OUT_ENABLE,  // for l in 0 to L-1
+    output reg F_OUT_ENABLE,  // for l in 0 to L-1
+    output reg A_OUT_ENABLE,  // for l in 0 to L-1
+
+    input S_IN_ENABLE,  // for l in 0 to L-1
+
     output reg S_OUT_ENABLE,  // for l in 0 to L-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_L_IN,
-    input [DATA_SIZE-1:0] S_IN,
+
     input [DATA_SIZE-1:0] I_IN,
     input [DATA_SIZE-1:0] F_IN,
     input [DATA_SIZE-1:0] A_IN,
+
+    input [DATA_SIZE-1:0] S_IN,
+
     output reg [DATA_SIZE-1:0] S_OUT
   );
 

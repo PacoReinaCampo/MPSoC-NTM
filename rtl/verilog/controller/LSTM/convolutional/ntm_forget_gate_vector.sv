@@ -51,16 +51,42 @@ module ntm_forget_gate_vector #(
 
     input W_IN_L_ENABLE,  // for l in 0 to L-1
     input W_IN_X_ENABLE,  // for x in 0 to X-1
+
+    output reg W_OUT_L_ENABLE,  // for l in 0 to L-1
+    output reg W_OUT_X_ENABLE,  // for x in 0 to X-1
+
     input X_IN_ENABLE,  // for x in 0 to X-1
+
+    output reg X_OUT_ENABLE,  // for x in 0 to X-1
+
     input K_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     input K_IN_L_ENABLE,  // for l in 0 to L-1
     input K_IN_K_ENABLE,  // for k in 0 to W-1
+
+    output reg K_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    output reg K_OUT_L_ENABLE,  // for l in 0 to L-1
+    output reg K_OUT_K_ENABLE,  // for k in 0 to W-1
+
     input R_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     input R_IN_K_ENABLE,  // for k in 0 to W-1
+
+    output reg R_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    output reg R_OUT_K_ENABLE,  // for k in 0 to W-1
+
     input U_IN_L_ENABLE,  // for l in 0 to L-1
     input U_IN_P_ENABLE,  // for p in 0 to L-1
+
+    output reg U_OUT_L_ENABLE,  // for l in 0 to L-1
+    output reg U_OUT_P_ENABLE,  // for p in 0 to L-1
+
     input H_IN_ENABLE,  // for l in 0 to L-1
+
+    output reg H_OUT_ENABLE,  // for l in 0 to L-1
+
     input B_IN_ENABLE,  // for l in 0 to L-1
+
+    output reg B_OUT_ENABLE,  // for l in 0 to L-1
+
     output reg F_OUT_ENABLE,  // for l in 0 to L-1
 
     // DATA
@@ -68,6 +94,7 @@ module ntm_forget_gate_vector #(
     input [DATA_SIZE-1:0] SIZE_W_IN,
     input [DATA_SIZE-1:0] SIZE_L_IN,
     input [DATA_SIZE-1:0] SIZE_R_IN,
+
     input [DATA_SIZE-1:0] W_IN,
     input [DATA_SIZE-1:0] X_IN,
     input [DATA_SIZE-1:0] K_IN,
@@ -75,6 +102,7 @@ module ntm_forget_gate_vector #(
     input [DATA_SIZE-1:0] U_IN,
     input [DATA_SIZE-1:0] H_IN,
     input [DATA_SIZE-1:0] B_IN,
+
     output reg [DATA_SIZE-1:0] F_OUT
   );
 

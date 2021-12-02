@@ -159,8 +159,13 @@ module ntm_top #(
 
   wire x_in_enable_controller;
 
+  wire x_out_enable_controller;
+
   wire r_in_i_enable_controller;
   wire r_in_k_enable_controller;
+
+  wire r_out_i_enable_controller;
+  wire r_out_k_enable_controller;
 
   wire h_in_enable_controller;
 
@@ -555,8 +560,13 @@ module ntm_top #(
 
     .X_IN_ENABLE(x_in_enable_controller),
 
+    .X_OUT_ENABLE(x_out_enable_controller),
+
     .R_IN_I_ENABLE(r_in_i_enable_controller),
     .R_IN_K_ENABLE(r_in_k_enable_controller),
+
+    .R_OUT_I_ENABLE(r_out_i_enable_controller),
+    .R_OUT_K_ENABLE(r_out_k_enable_controller),
 
     .H_IN_ENABLE(h_in_enable_controller),
 

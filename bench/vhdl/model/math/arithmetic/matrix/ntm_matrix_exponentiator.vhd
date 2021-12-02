@@ -231,7 +231,7 @@ begin
 
         when INPUT_J_STATE =>  -- STEP 2
 
-          if (DATA_A_IN_J_ENABLE = '1') then
+          if ((DATA_A_IN_J_ENABLE = '1') or (index_j_loop = ZERO)) then
             -- Data Inputs
             data_a_in_vector_exponentiator <= DATA_A_IN;
 
@@ -244,7 +244,7 @@ begin
             data_a_in_enable_vector_exponentiator <= '0';
           end if;
 
-          if (DATA_B_IN_J_ENABLE = '1') then
+          if ((DATA_B_IN_J_ENABLE = '1') or (index_j_loop = ZERO)) then
             -- Data Inputs
             data_b_in_vector_exponentiator <= DATA_B_IN;
 

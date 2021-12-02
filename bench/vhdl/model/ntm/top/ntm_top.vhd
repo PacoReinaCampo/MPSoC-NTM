@@ -178,8 +178,13 @@ architecture ntm_top_architecture of ntm_top is
 
   signal x_in_enable_controller : std_logic;
 
+  signal x_out_enable_controller : std_logic;
+
   signal r_in_i_enable_controller : std_logic;
   signal r_in_k_enable_controller : std_logic;
+
+  signal r_out_i_enable_controller : std_logic;
+  signal r_out_k_enable_controller : std_logic;
 
   signal h_in_enable_controller : std_logic;
 
@@ -793,8 +798,13 @@ begin
 
       X_IN_ENABLE => x_in_enable_controller,
 
+      X_IN_ENABLE => x_out_enable_controller,
+
       R_IN_I_ENABLE => r_in_i_enable_controller,
       R_IN_K_ENABLE => r_in_k_enable_controller,
+
+      R_OUT_I_ENABLE => r_out_i_enable_controller,
+      R_OUT_K_ENABLE => r_out_k_enable_controller,
 
       H_IN_ENABLE => h_in_enable_controller,
 

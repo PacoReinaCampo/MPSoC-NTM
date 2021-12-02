@@ -199,7 +199,6 @@ begin
             DATA_OUT_ENABLE <= '0';
           end if;
 
-
         when ENDER_STATE =>  -- STEP 2
 
           if (ready_scalar_exponentiator = '1') then
