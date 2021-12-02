@@ -532,19 +532,31 @@ architecture dnc_top_architecture of dnc_top is
   signal k_read_in_i_enable_addressing : std_logic;
   signal k_read_in_k_enable_addressing : std_logic;
 
+  signal k_read_out_i_enable_addressing : std_logic;
+  signal k_read_out_k_enable_addressing : std_logic;
+
   signal beta_read_in_enable_addressing : std_logic;
+
+  signal beta_read_out_enable_addressing : std_logic;
 
   signal f_read_in_enable_addressing : std_logic;
 
+  signal f_read_out_enable_addressing : std_logic;
+
   signal pi_read_in_enable_addressing : std_logic;
+
+  signal pi_read_out_enable_addressing : std_logic;
 
   signal k_write_in_k_enable_addressing : std_logic;
   signal e_write_in_k_enable_addressing : std_logic;
   signal v_write_in_k_enable_addressing : std_logic;
 
+  signal k_write_out_k_enable_addressing : std_logic;
+  signal e_write_out_k_enable_addressing : std_logic;
+  signal v_write_out_k_enable_addressing : std_logic;
+
   signal r_out_i_enable_addressing : std_logic;
   signal r_out_k_enable_addressing : std_logic;
-
   -- DATA
   signal size_r_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_w_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -1517,15 +1529,28 @@ begin
       K_READ_IN_I_ENABLE => k_read_in_i_enable_addressing,
       K_READ_IN_K_ENABLE => k_read_in_k_enable_addressing,
 
+      K_READ_OUT_I_ENABLE => k_read_out_i_enable_addressing,
+      K_READ_OUT_K_ENABLE => k_read_out_k_enable_addressing,
+
       BETA_READ_IN_ENABLE => beta_read_in_enable_addressing,
+
+      BETA_READ_OUT_ENABLE => beta_read_out_enable_addressing,
 
       F_READ_IN_ENABLE => f_read_in_enable_addressing,
 
+      F_READ_OUT_ENABLE => f_read_out_enable_addressing,
+
       PI_READ_IN_ENABLE => pi_read_in_enable_addressing,
+
+      PI_READ_OUT_ENABLE => pi_read_out_enable_addressing,
 
       K_WRITE_IN_K_ENABLE => k_write_in_k_enable_addressing,
       E_WRITE_IN_K_ENABLE => e_write_in_k_enable_addressing,
       V_WRITE_IN_K_ENABLE => v_write_in_k_enable_addressing,
+
+      K_WRITE_OUT_K_ENABLE => k_write_out_k_enable_addressing,
+      E_WRITE_OUT_K_ENABLE => e_write_out_k_enable_addressing,
+      V_WRITE_OUT_K_ENABLE => v_write_out_k_enable_addressing,
 
       R_OUT_I_ENABLE => r_out_i_enable_addressing,
       R_OUT_K_ENABLE => r_out_k_enable_addressing,

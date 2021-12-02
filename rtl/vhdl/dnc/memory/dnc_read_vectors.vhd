@@ -60,8 +60,14 @@ entity dnc_read_vectors is
     M_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
     M_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
+    M_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
+    M_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
+
     W_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
     W_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
+
+    W_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
+    W_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     R_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
     R_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1

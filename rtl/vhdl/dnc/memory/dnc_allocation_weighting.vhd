@@ -60,11 +60,14 @@ entity dnc_allocation_weighting is
 
     U_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
 
+    U_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
+
     A_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- DATA
     SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    U_IN      : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     A_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -163,6 +166,8 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   signal ready_sort_vector : std_logic;
 
   signal u_in_enable_sort_vector : std_logic;
+
+  signal u_out_enable_sort_vector : std_logic;
 
   signal phi_out_enable_sort_vector : std_logic;
 
@@ -384,6 +389,8 @@ begin
       READY => ready_sort_vector,
 
       U_IN_ENABLE => u_in_enable_sort_vector,
+
+      U_OUT_ENABLE => u_out_enable_sort_vector,
 
       PHI_OUT_ENABLE => phi_out_enable_sort_vector,
 

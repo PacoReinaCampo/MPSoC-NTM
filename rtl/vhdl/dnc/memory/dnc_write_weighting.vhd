@@ -60,6 +60,9 @@ entity dnc_write_weighting is
     A_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
     C_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
 
+    A_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
+    C_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
+
     W_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- DATA

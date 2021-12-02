@@ -60,14 +60,26 @@ entity dnc_read_weighting is
     PI_IN_I_ENABLE : in std_logic;      -- for i in 0 to R-1
     PI_IN_P_ENABLE : in std_logic;      -- for p in 0 to 2
 
+    PI_OUT_I_ENABLE : out std_logic;    -- for i in 0 to R-1
+    PI_OUT_P_ENABLE : out std_logic;    -- for p in 0 to 2
+
     B_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
     B_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
+
+    B_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
+    B_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     C_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
     C_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
 
+    C_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
+    C_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
+
     F_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1
     F_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
+
+    F_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
+    F_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     W_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
     W_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1

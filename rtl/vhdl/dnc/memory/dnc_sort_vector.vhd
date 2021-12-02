@@ -59,6 +59,8 @@ entity dnc_sort_vector is
 
     U_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
 
+    U_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
+
     PHI_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     -- DATA

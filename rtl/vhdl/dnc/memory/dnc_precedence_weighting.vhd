@@ -60,6 +60,7 @@ entity dnc_precedence_weighting is
     W_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
     P_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
 
+    W_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
     P_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- DATA

@@ -80,6 +80,8 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
 
   signal u_in_enable_allocation_weighting : std_logic;
 
+  signal u_out_enable_allocation_weighting : std_logic;
+
   signal a_out_enable_allocation_weighting : std_logic;
 
   -- DATA
@@ -96,8 +98,14 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal l_in_g_enable_backward_weighting : std_logic;
   signal l_in_j_enable_backward_weighting : std_logic;
 
+  signal l_out_g_enable_backward_weighting : std_logic;
+  signal l_out_j_enable_backward_weighting : std_logic;
+
   signal w_in_i_enable_backward_weighting : std_logic;
   signal w_in_j_enable_backward_weighting : std_logic;
+
+  signal w_out_i_enable_backward_weighting : std_logic;
+  signal w_out_j_enable_backward_weighting : std_logic;
 
   signal b_out_i_enable_backward_weighting : std_logic;
   signal b_out_j_enable_backward_weighting : std_logic;
@@ -118,8 +126,14 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal l_in_g_enable_forward_weighting : std_logic;
   signal l_in_j_enable_forward_weighting : std_logic;
 
+  signal l_out_g_enable_forward_weighting : std_logic;
+  signal l_out_j_enable_forward_weighting : std_logic;
+
   signal w_in_i_enable_forward_weighting : std_logic;
   signal w_in_j_enable_forward_weighting : std_logic;
+
+  signal w_out_i_enable_forward_weighting : std_logic;
+  signal w_out_j_enable_forward_weighting : std_logic;
 
   signal f_out_i_enable_forward_weighting : std_logic;
   signal f_out_j_enable_forward_weighting : std_logic;
@@ -146,6 +160,10 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal v_in_k_enable_memory_matrix : std_logic;
   signal e_in_k_enable_memory_matrix : std_logic;
 
+  signal w_out_j_enable_memory_matrix : std_logic;
+  signal v_out_k_enable_memory_matrix : std_logic;
+  signal e_out_k_enable_memory_matrix : std_logic;
+
   signal m_out_j_enable_memory_matrix : std_logic;
   signal m_out_k_enable_memory_matrix : std_logic;
 
@@ -168,8 +186,13 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
 
   signal f_in_enable_memory_retention_vector : std_logic;
 
+  signal f_out_enable_memory_retention_vector : std_logic;
+
   signal w_in_i_enable_memory_retention_vector : std_logic;
   signal w_in_j_enable_memory_retention_vector : std_logic;
+
+  signal w_out_i_enable_memory_retention_vector : std_logic;
+  signal w_out_j_enable_memory_retention_vector : std_logic;
 
   signal psi_out_enable_memory_retention_vector : std_logic;
 
@@ -190,6 +213,7 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal w_in_enable_precedence_weighting : std_logic;
   signal p_in_enable_precedence_weighting : std_logic;
 
+  signal w_out_enable_precedence_weighting : std_logic;
   signal p_out_enable_precedence_weighting : std_logic;
 
   -- DATA
@@ -208,8 +232,13 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
 
   signal k_in_enable_read_content_weighting : std_logic;
 
+  signal k_out_enable_read_content_weighting : std_logic;
+
   signal m_in_j_enable_read_content_weighting : std_logic;
   signal m_in_k_enable_read_content_weighting : std_logic;
+
+  signal m_out_j_enable_read_content_weighting : std_logic;
+  signal m_out_k_enable_read_content_weighting : std_logic;
 
   signal c_out_enable_read_content_weighting : std_logic;
 
@@ -231,8 +260,14 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal m_in_j_enable_read_vectors : std_logic;
   signal m_in_k_enable_read_vectors : std_logic;
 
+  signal m_out_j_enable_read_vectors : std_logic;
+  signal m_out_k_enable_read_vectors : std_logic;
+
   signal w_in_i_enable_read_vectors : std_logic;
   signal w_in_j_enable_read_vectors : std_logic;
+
+  signal w_out_i_enable_read_vectors : std_logic;
+  signal w_out_j_enable_read_vectors : std_logic;
 
   signal r_out_i_enable_read_vectors : std_logic;
   signal r_out_k_enable_read_vectors : std_logic;
@@ -255,14 +290,26 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal pi_in_i_enable_read_weighting : std_logic;
   signal pi_in_p_enable_read_weighting : std_logic;
 
+  signal pi_out_i_enable_read_weighting : std_logic;
+  signal pi_out_p_enable_read_weighting : std_logic;
+
   signal b_in_i_enable_read_weighting : std_logic;
   signal b_in_j_enable_read_weighting : std_logic;
+
+  signal b_out_i_enable_read_weighting : std_logic;
+  signal b_out_j_enable_read_weighting : std_logic;
 
   signal c_in_i_enable_read_weighting : std_logic;
   signal c_in_j_enable_read_weighting : std_logic;
 
+  signal c_out_i_enable_read_weighting : std_logic;
+  signal c_out_j_enable_read_weighting : std_logic;
+
   signal f_in_i_enable_read_weighting : std_logic;
   signal f_in_j_enable_read_weighting : std_logic;
+
+  signal f_out_i_enable_read_weighting : std_logic;
+  signal f_out_j_enable_read_weighting : std_logic;
 
   signal w_out_i_enable_read_weighting : std_logic;
   signal w_out_j_enable_read_weighting : std_logic;
@@ -279,22 +326,6 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
 
   signal w_out_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SORT VECTOR
-  -- CONTROL
-  signal start_sort_vector : std_logic;
-  signal ready_sort_vector : std_logic;
-
-  signal u_in_enable_sort_vector : std_logic;
-
-  signal phi_out_enable_sort_vector : std_logic;
-
-  -- DATA
-  signal size_n_in_sort_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal u_in_sort_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal phi_out_sort_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-
   -- TEMPORAL LINK MATRIX
   -- CONTROL
   signal start_temporal_link_matrix : std_logic;
@@ -303,11 +334,14 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal l_in_g_enable_temporal_link_matrix : std_logic;
   signal l_in_j_enable_temporal_link_matrix : std_logic;
 
+  signal l_out_g_enable_temporal_link_matrix : std_logic;
+  signal l_out_j_enable_temporal_link_matrix : std_logic;
+
   signal w_in_enable_temporal_link_matrix : std_logic;
   signal p_in_enable_temporal_link_matrix : std_logic;
 
-  signal l_out_g_enable_temporal_link_matrix : std_logic;
-  signal l_out_j_enable_temporal_link_matrix : std_logic;
+  signal w_out_enable_temporal_link_matrix : std_logic;
+  signal p_out_enable_temporal_link_matrix : std_logic;
 
   -- DATA
   signal size_n_in_temporal_link_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -327,7 +361,9 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal w_in_enable_usage_vector   : std_logic;
   signal psi_in_enable_usage_vector : std_logic;
 
-  signal u_out_enable_usage_vector : std_logic;
+  signal u_out_enable_usage_vector   : std_logic;
+  signal w_out_enable_usage_vector   : std_logic;
+  signal psi_out_enable_usage_vector : std_logic;
 
   -- DATA
   signal size_n_in_usage_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -345,8 +381,13 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
 
   signal k_in_enable_write_content_weighting : std_logic;
 
+  signal k_out_enable_write_content_weighting : std_logic;
+
   signal m_in_j_enable_write_content_weighting : std_logic;
   signal m_in_k_enable_write_content_weighting : std_logic;
+
+  signal m_out_j_enable_write_content_weighting : std_logic;
+  signal m_out_k_enable_write_content_weighting : std_logic;
 
   signal c_out_enable_write_content_weighting : std_logic;
 
@@ -358,7 +399,7 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal m_in_write_content_weighting    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_in_write_content_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal c_out_write_content_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal c_out_content_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE WEIGHTING
   -- CONTROL
@@ -367,6 +408,9 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
 
   signal a_in_enable_write_weighting : std_logic;
   signal c_in_enable_write_weighting : std_logic;
+
+  signal a_out_enable_write_weighting : std_logic;
+  signal c_out_enable_write_weighting : std_logic;
 
   signal w_out_enable_write_weighting : std_logic;
 
@@ -389,15 +433,28 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal k_read_in_i_enable_addressing : std_logic;
   signal k_read_in_k_enable_addressing : std_logic;
 
+  signal k_read_out_i_enable_addressing : std_logic;
+  signal k_read_out_k_enable_addressing : std_logic;
+
   signal beta_read_in_enable_addressing : std_logic;
+
+  signal beta_read_out_enable_addressing : std_logic;
 
   signal f_read_in_enable_addressing : std_logic;
 
+  signal f_read_out_enable_addressing : std_logic;
+
   signal pi_read_in_enable_addressing : std_logic;
+
+  signal pi_read_out_enable_addressing : std_logic;
 
   signal k_write_in_k_enable_addressing : std_logic;
   signal e_write_in_k_enable_addressing : std_logic;
   signal v_write_in_k_enable_addressing : std_logic;
+
+  signal k_write_out_k_enable_addressing : std_logic;
+  signal e_write_out_k_enable_addressing : std_logic;
+  signal v_write_out_k_enable_addressing : std_logic;
 
   signal r_out_i_enable_addressing : std_logic;
   signal r_out_k_enable_addressing : std_logic;
@@ -451,15 +508,28 @@ begin
       DNC_MEMORY_K_READ_IN_I_ENABLE => k_read_in_i_enable_addressing,
       DNC_MEMORY_K_READ_IN_K_ENABLE => k_read_in_k_enable_addressing,
 
+      DNC_MEMORY_K_READ_OUT_I_ENABLE => k_read_out_i_enable_addressing,
+      DNC_MEMORY_K_READ_OUT_K_ENABLE => k_read_out_k_enable_addressing,
+
       DNC_MEMORY_BETA_READ_IN_ENABLE => beta_read_in_enable_addressing,
+
+      DNC_MEMORY_BETA_READ_OUT_ENABLE => beta_read_out_enable_addressing,
 
       DNC_MEMORY_F_READ_IN_ENABLE => f_read_in_enable_addressing,
 
+      DNC_MEMORY_F_READ_OUT_ENABLE => f_read_out_enable_addressing,
+
       DNC_MEMORY_PI_READ_IN_ENABLE => pi_read_in_enable_addressing,
+
+      DNC_MEMORY_PI_READ_OUT_ENABLE => pi_read_out_enable_addressing,
 
       DNC_MEMORY_K_WRITE_IN_K_ENABLE => k_write_in_k_enable_addressing,
       DNC_MEMORY_E_WRITE_IN_K_ENABLE => e_write_in_k_enable_addressing,
       DNC_MEMORY_V_WRITE_IN_K_ENABLE => v_write_in_k_enable_addressing,
+
+      DNC_MEMORY_K_WRITE_OUT_K_ENABLE => k_write_out_k_enable_addressing,
+      DNC_MEMORY_E_WRITE_OUT_K_ENABLE => e_write_out_k_enable_addressing,
+      DNC_MEMORY_V_WRITE_OUT_K_ENABLE => v_write_out_k_enable_addressing,
 
       DNC_MEMORY_R_OUT_I_ENABLE => r_out_i_enable_addressing,
       DNC_MEMORY_R_OUT_K_ENABLE => r_out_k_enable_addressing,
@@ -499,11 +569,14 @@ begin
 
       U_IN_ENABLE => u_in_enable_allocation_weighting,
 
+      U_OUT_ENABLE => u_out_enable_allocation_weighting,
+
       A_OUT_ENABLE => a_out_enable_allocation_weighting,
 
       -- DATA
       SIZE_N_IN => size_n_in_allocation_weighting,
-      U_IN      => u_in_allocation_weighting,
+
+      U_IN => u_in_allocation_weighting,
 
       A_OUT => a_out_allocation_weighting
       );
@@ -525,8 +598,14 @@ begin
       L_IN_G_ENABLE => l_in_g_enable_backward_weighting,
       L_IN_J_ENABLE => l_in_j_enable_backward_weighting,
 
+      L_OUT_G_ENABLE => l_out_g_enable_backward_weighting,
+      L_OUT_J_ENABLE => l_out_j_enable_backward_weighting,
+
       W_IN_I_ENABLE => w_in_i_enable_backward_weighting,
       W_IN_J_ENABLE => w_in_j_enable_backward_weighting,
+
+      W_OUT_I_ENABLE => w_out_i_enable_backward_weighting,
+      W_OUT_J_ENABLE => w_out_j_enable_backward_weighting,
 
       B_OUT_I_ENABLE => b_out_i_enable_backward_weighting,
       B_OUT_J_ENABLE => b_out_j_enable_backward_weighting,
@@ -559,8 +638,14 @@ begin
       L_IN_G_ENABLE => l_in_g_enable_forward_weighting,
       L_IN_J_ENABLE => l_in_j_enable_forward_weighting,
 
+      L_OUT_G_ENABLE => l_out_g_enable_forward_weighting,
+      L_OUT_J_ENABLE => l_out_j_enable_forward_weighting,
+
       W_IN_I_ENABLE => w_in_i_enable_forward_weighting,
       W_IN_J_ENABLE => w_in_j_enable_forward_weighting,
+
+      W_OUT_I_ENABLE => w_out_i_enable_forward_weighting,
+      W_OUT_J_ENABLE => w_out_j_enable_forward_weighting,
 
       F_OUT_I_ENABLE => f_out_i_enable_forward_weighting,
       F_OUT_J_ENABLE => f_out_j_enable_forward_weighting,
@@ -597,6 +682,10 @@ begin
       V_IN_K_ENABLE => v_in_k_enable_memory_matrix,
       E_IN_K_ENABLE => e_in_k_enable_memory_matrix,
 
+      W_OUT_J_ENABLE => w_out_j_enable_memory_matrix,
+      V_OUT_K_ENABLE => v_out_k_enable_memory_matrix,
+      E_OUT_K_ENABLE => e_out_k_enable_memory_matrix,
+
       M_OUT_J_ENABLE => m_out_j_enable_memory_matrix,
       M_OUT_K_ENABLE => m_out_k_enable_memory_matrix,
 
@@ -629,8 +718,13 @@ begin
 
       F_IN_ENABLE => f_in_enable_memory_retention_vector,
 
+      F_OUT_ENABLE => f_out_enable_memory_retention_vector,
+
       W_IN_I_ENABLE => w_in_i_enable_memory_retention_vector,
       W_IN_J_ENABLE => w_in_j_enable_memory_retention_vector,
+
+      W_OUT_I_ENABLE => w_out_i_enable_memory_retention_vector,
+      W_OUT_J_ENABLE => w_out_j_enable_memory_retention_vector,
 
       PSI_OUT_ENABLE => psi_out_enable_memory_retention_vector,
 
@@ -661,10 +755,11 @@ begin
       W_IN_ENABLE => w_in_enable_precedence_weighting,
       P_IN_ENABLE => p_in_enable_precedence_weighting,
 
+      W_OUT_ENABLE => w_out_enable_precedence_weighting,
       P_OUT_ENABLE => p_out_enable_precedence_weighting,
 
       -- DATA
-      SIZE_R_IN => size_r_in_precedence_weighting,
+      SIZE_R_IN => size_n_in_precedence_weighting,
       SIZE_N_IN => size_n_in_precedence_weighting,
 
       W_IN => w_in_precedence_weighting,
@@ -689,8 +784,13 @@ begin
 
       K_IN_ENABLE => k_in_enable_read_content_weighting,
 
+      K_OUT_ENABLE => k_out_enable_read_content_weighting,
+
       M_IN_J_ENABLE => m_in_j_enable_read_content_weighting,
       M_IN_K_ENABLE => m_in_k_enable_read_content_weighting,
+
+      M_OUT_J_ENABLE => m_out_j_enable_read_content_weighting,
+      M_OUT_K_ENABLE => m_out_k_enable_read_content_weighting,
 
       C_OUT_ENABLE => c_out_enable_read_content_weighting,
 
@@ -722,8 +822,14 @@ begin
       M_IN_J_ENABLE => m_in_j_enable_read_vectors,
       M_IN_K_ENABLE => m_in_k_enable_read_vectors,
 
+      M_OUT_J_ENABLE => m_out_j_enable_read_vectors,
+      M_OUT_K_ENABLE => m_out_k_enable_read_vectors,
+
       W_IN_I_ENABLE => w_in_i_enable_read_vectors,
       W_IN_J_ENABLE => w_in_j_enable_read_vectors,
+
+      W_OUT_I_ENABLE => w_out_i_enable_read_vectors,
+      W_OUT_J_ENABLE => w_out_j_enable_read_vectors,
 
       R_OUT_I_ENABLE => r_out_i_enable_read_vectors,
       R_OUT_K_ENABLE => r_out_k_enable_read_vectors,
@@ -756,14 +862,26 @@ begin
       PI_IN_I_ENABLE => pi_in_i_enable_read_weighting,
       PI_IN_P_ENABLE => pi_in_p_enable_read_weighting,
 
+      PI_OUT_I_ENABLE => pi_out_i_enable_read_weighting,
+      PI_OUT_P_ENABLE => pi_out_p_enable_read_weighting,
+
       B_IN_I_ENABLE => b_in_i_enable_read_weighting,
       B_IN_J_ENABLE => b_in_j_enable_read_weighting,
+
+      B_OUT_I_ENABLE => b_out_i_enable_read_weighting,
+      B_OUT_J_ENABLE => b_out_j_enable_read_weighting,
 
       C_IN_I_ENABLE => c_in_i_enable_read_weighting,
       C_IN_J_ENABLE => c_in_j_enable_read_weighting,
 
+      C_OUT_I_ENABLE => c_out_i_enable_read_weighting,
+      C_OUT_J_ENABLE => c_out_j_enable_read_weighting,
+
       F_IN_I_ENABLE => f_in_i_enable_read_weighting,
       F_IN_J_ENABLE => f_in_j_enable_read_weighting,
+
+      F_OUT_I_ENABLE => f_out_i_enable_read_weighting,
+      F_OUT_J_ENABLE => f_out_j_enable_read_weighting,
 
       W_OUT_I_ENABLE => w_out_i_enable_read_weighting,
       W_OUT_J_ENABLE => w_out_j_enable_read_weighting,
@@ -779,32 +897,6 @@ begin
       F_IN => f_in_read_weighting,
 
       W_OUT => w_out_read_weighting
-      );
-
-  -- SORT VECTOR
-  sort_vector : dnc_sort_vector
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_sort_vector,
-      READY => ready_sort_vector,
-
-      U_IN_ENABLE => u_in_enable_sort_vector,
-
-      PHI_OUT_ENABLE => phi_out_enable_sort_vector,
-
-      -- DATA
-      SIZE_N_IN => size_n_in_sort_vector,
-
-      U_IN => u_in_sort_vector,
-
-      PHI_OUT => phi_out_sort_vector
       );
 
   -- TEMPORAL LINK MATRIX
@@ -824,11 +916,14 @@ begin
       L_IN_G_ENABLE => l_in_g_enable_temporal_link_matrix,
       L_IN_J_ENABLE => l_in_j_enable_temporal_link_matrix,
 
+      L_OUT_G_ENABLE => l_out_g_enable_temporal_link_matrix,
+      L_OUT_J_ENABLE => l_out_j_enable_temporal_link_matrix,
+
       W_IN_ENABLE => w_in_enable_temporal_link_matrix,
       P_IN_ENABLE => p_in_enable_temporal_link_matrix,
 
-      L_OUT_G_ENABLE => l_out_g_enable_temporal_link_matrix,
-      L_OUT_J_ENABLE => l_out_j_enable_temporal_link_matrix,
+      W_OUT_ENABLE => w_out_enable_temporal_link_matrix,
+      P_OUT_ENABLE => p_out_enable_temporal_link_matrix,
 
       -- DATA
       SIZE_N_IN => size_n_in_temporal_link_matrix,
@@ -858,7 +953,9 @@ begin
       W_IN_ENABLE   => w_in_enable_usage_vector,
       PSI_IN_ENABLE => psi_in_enable_usage_vector,
 
-      U_OUT_ENABLE => u_out_enable_usage_vector,
+      U_OUT_ENABLE   => u_out_enable_usage_vector,
+      W_OUT_ENABLE   => w_out_enable_usage_vector,
+      PSI_OUT_ENABLE => psi_out_enable_usage_vector,
 
       -- DATA
       SIZE_N_IN => size_n_in_usage_vector,
@@ -889,6 +986,9 @@ begin
       M_IN_J_ENABLE => m_in_j_enable_write_content_weighting,
       M_IN_K_ENABLE => m_in_k_enable_write_content_weighting,
 
+      M_OUT_J_ENABLE => m_out_j_enable_write_content_weighting,
+      M_OUT_K_ENABLE => m_out_k_enable_write_content_weighting,
+
       C_OUT_ENABLE => c_out_enable_write_content_weighting,
 
       -- DATA
@@ -899,7 +999,7 @@ begin
       M_IN    => m_in_write_content_weighting,
       BETA_IN => beta_in_write_content_weighting,
 
-      C_OUT => c_out_write_content_weighting
+      C_OUT => c_out_content_weighting
       );
 
   -- WRITE WEIGHTING
@@ -918,6 +1018,9 @@ begin
 
       A_IN_ENABLE => a_in_enable_write_weighting,
       C_IN_ENABLE => c_in_enable_write_weighting,
+
+      A_OUT_ENABLE => a_out_enable_write_weighting,
+      C_OUT_ENABLE => c_out_enable_write_weighting,
 
       W_OUT_ENABLE => w_out_enable_write_weighting,
 
@@ -950,15 +1053,28 @@ begin
       K_READ_IN_I_ENABLE => k_read_in_i_enable_addressing,
       K_READ_IN_K_ENABLE => k_read_in_k_enable_addressing,
 
+      K_READ_OUT_I_ENABLE => k_read_out_i_enable_addressing,
+      K_READ_OUT_K_ENABLE => k_read_out_k_enable_addressing,
+
       BETA_READ_IN_ENABLE => beta_read_in_enable_addressing,
+
+      BETA_READ_OUT_ENABLE => beta_read_out_enable_addressing,
 
       F_READ_IN_ENABLE => f_read_in_enable_addressing,
 
+      F_READ_OUT_ENABLE => f_read_out_enable_addressing,
+
       PI_READ_IN_ENABLE => pi_read_in_enable_addressing,
+
+      PI_READ_OUT_ENABLE => pi_read_out_enable_addressing,
 
       K_WRITE_IN_K_ENABLE => k_write_in_k_enable_addressing,
       E_WRITE_IN_K_ENABLE => e_write_in_k_enable_addressing,
       V_WRITE_IN_K_ENABLE => v_write_in_k_enable_addressing,
+
+      K_WRITE_OUT_K_ENABLE => k_write_out_k_enable_addressing,
+      E_WRITE_OUT_K_ENABLE => e_write_out_k_enable_addressing,
+      V_WRITE_OUT_K_ENABLE => v_write_out_k_enable_addressing,
 
       R_OUT_I_ENABLE => r_out_i_enable_addressing,
       R_OUT_K_ENABLE => r_out_k_enable_addressing,
