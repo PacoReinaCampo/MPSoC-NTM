@@ -63,6 +63,9 @@ entity dnc_temporal_link_matrix is
     W_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
     P_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
 
+    W_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
+    P_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
+
     L_OUT_G_ENABLE : out std_logic;     -- for g in 0 to N-1 (square matrix)
     L_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1 (square matrix)
 

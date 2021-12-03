@@ -63,14 +63,22 @@ entity dnc_write_interface_vector is
     WK_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
     WK_IN_K_ENABLE : in std_logic;      -- for k in 0 to W-1
 
+    WK_OUT_L_ENABLE : out std_logic;    -- for l in 0 to L-1
+    WK_OUT_K_ENABLE : out std_logic;    -- for k in 0 to W-1
+
     K_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
 
     -- Write Strength
     WBETA_IN_ENABLE : in std_logic;     -- for l in 0 to L-1
 
+    WBETA_OUT_ENABLE : out std_logic;   -- for l in 0 to L-1
+
     -- Erase Vector
     WE_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
     WE_IN_K_ENABLE : in std_logic;      -- for k in 0 to W-1
+
+    WE_OUT_L_ENABLE : out std_logic;    -- for l in 0 to L-1
+    WE_OUT_K_ENABLE : out std_logic;    -- for k in 0 to W-1
 
     E_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
 
@@ -78,16 +86,25 @@ entity dnc_write_interface_vector is
     WV_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
     WV_IN_K_ENABLE : in std_logic;      -- for k in 0 to W-1
 
+    WV_OUT_L_ENABLE : out std_logic;    -- for l in 0 to L-1
+    WV_OUT_K_ENABLE : out std_logic;    -- for k in 0 to W-1
+
     V_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
 
     -- Allocation Gate
     WGA_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
+    WGA_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+
     -- Write Gate
     WGW_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
+    WGW_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+
     -- Hidden State
     H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+
+    H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
     SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -211,7 +228,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_scalar_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -225,8 +242,8 @@ begin
           -- beta(t) = Wbeta(t;l)·h(t;l)
 
           -- Control Inputs
-         data_a_in_enable_scalar_product <= WBETA_IN_ENABLE;
-         data_b_in_enable_scalar_product <= H_IN_ENABLE;
+          data_a_in_enable_scalar_product <= WBETA_IN_ENABLE;
+          data_b_in_enable_scalar_product <= H_IN_ENABLE;
 
           -- Data Inputs
           modulo_in_scalar_product <= FULL;
@@ -242,8 +259,8 @@ begin
           -- ga(t) = Wga(t;l)·h(t;l)
 
           -- Control Inputs
-         data_a_in_enable_scalar_product <= WGA_IN_ENABLE;
-         data_b_in_enable_scalar_product <= H_IN_ENABLE;
+          data_a_in_enable_scalar_product <= WGA_IN_ENABLE;
+          data_b_in_enable_scalar_product <= H_IN_ENABLE;
 
           -- Data Inputs
           modulo_in_scalar_product <= FULL;
@@ -259,8 +276,8 @@ begin
           -- gw(t) = Wgw(t;l)·h(t;l)
 
           -- Control Inputs
-         data_a_in_enable_scalar_product <= WGW_IN_ENABLE;
-         data_b_in_enable_scalar_product <= H_IN_ENABLE;
+          data_a_in_enable_scalar_product <= WGW_IN_ENABLE;
+          data_b_in_enable_scalar_product <= H_IN_ENABLE;
 
           -- Data Inputs
           modulo_in_scalar_product <= FULL;
@@ -292,7 +309,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_matrix_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 

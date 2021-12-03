@@ -52,41 +52,64 @@ module dnc_write_interface_vector #(
     // Write Key
     input WK_IN_L_ENABLE,  // for l in 0 to L-1
     input WK_IN_K_ENABLE,  // for k in 0 to W-1
+
+    output reg WK_OUT_L_ENABLE,  // for l in 0 to L-1
+    output reg WK_OUT_K_ENABLE,  // for k in 0 to W-1
+
     output reg K_OUT_ENABLE,  // for k in 0 to W-1
 
     // Write Strength
     input WBETA_IN_ENABLE,  // for l in 0 to L-1
 
+    output reg WBETA_OUT_ENABLE,  // for l in 0 to L-1
+
     // Erase Vector
     input WE_IN_L_ENABLE,  // for l in 0 to L-1
     input WE_IN_K_ENABLE,  // for k in 0 to W-1
+
+    output reg WE_OUT_L_ENABLE,  // for l in 0 to L-1
+    output reg WE_OUT_K_ENABLE,  // for k in 0 to W-1
+
     output reg E_OUT_ENABLE,  // for k in 0 to W-1
 
     // Write Vector
     input WV_IN_L_ENABLE,  // for l in 0 to L-1
     input WV_IN_K_ENABLE,  // for k in 0 to W-1
+
+    output reg WV_OUT_L_ENABLE,  // for l in 0 to L-1
+    output reg WV_OUT_K_ENABLE,  // for k in 0 to W-1
+
     output reg V_OUT_ENABLE,  // for k in 0 to W-1
 
     // Allocation Gate
     input WGA_IN_ENABLE,  // for l in 0 to L-1
 
+    output reg WGA_OUT_ENABLE,  // for l in 0 to L-1
+
     // Write Gate
     input WGW_IN_ENABLE,  // for l in 0 to L-1
 
+    output reg WGW_OUT_ENABLE,  // for l in 0 to L-1
+
     // Hidden State
     input H_IN_ENABLE,  // for l in 0 to L-1
+
+    output reg H_OUT_ENABLE,  // for l in 0 to L-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_W_IN,
     input [DATA_SIZE-1:0] SIZE_L_IN,
     input [DATA_SIZE-1:0] SIZE_R_IN,
+
     input [DATA_SIZE-1:0] WK_IN,
     input [DATA_SIZE-1:0] WBETA_IN,
     input [DATA_SIZE-1:0] WE_IN,
     input [DATA_SIZE-1:0] WV_IN,
     input [DATA_SIZE-1:0] WGA_IN,
     input [DATA_SIZE-1:0] WGW_IN,
+
     input [DATA_SIZE-1:0] H_IN,
+
     output reg [DATA_SIZE-1:0] K_OUT,
     output reg [DATA_SIZE-1:0] BETA_OUT,
     output reg [DATA_SIZE-1:0] E_OUT,

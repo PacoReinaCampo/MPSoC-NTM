@@ -51,22 +51,41 @@ module dnc_read_weighting #(
 
     input PI_IN_I_ENABLE,  // for i in 0 to R-1
     input PI_IN_P_ENABLE,  // for p in 0 to 2
+
+    output reg PI_OUT_I_ENABLE,  // for i in 0 to R-1
+    output reg PI_OUT_P_ENABLE,  // for p in 0 to 2
+
     input B_IN_I_ENABLE,  // for i in 0 to R-1
     input B_IN_J_ENABLE,  // for j in 0 to N-1
+
+    output reg B_OUT_I_ENABLE,  // for i in 0 to R-1
+    output reg B_OUT_J_ENABLE,  // for j in 0 to N-1
+
     input C_IN_I_ENABLE,  // for i in 0 to R-1
     input C_IN_J_ENABLE,  // for j in 0 to N-1
+
+    output reg C_OUT_I_ENABLE,  // for i in 0 to R-1
+    output reg C_OUT_J_ENABLE,  // for j in 0 to N-1
+
     input F_IN_I_ENABLE,  // for i in 0 to R-1
     input F_IN_J_ENABLE,  // for j in 0 to N-1
+
+    output reg F_OUT_I_ENABLE,  // for i in 0 to R-1
+    output reg F_OUT_J_ENABLE,  // for j in 0 to N-1
+
     output reg W_OUT_I_ENABLE,  // for i in 0 to R-1
     output reg W_OUT_J_ENABLE,  // for j in 0 to N-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_R_IN,
     input [DATA_SIZE-1:0] SIZE_N_IN,
+
     input [DATA_SIZE-1:0] PI_IN,
+
     input [DATA_SIZE-1:0] B_IN,
     input [DATA_SIZE-1:0] C_IN,
     input [DATA_SIZE-1:0] F_IN,
+
     output reg [DATA_SIZE-1:0] W_OUT
     );
 

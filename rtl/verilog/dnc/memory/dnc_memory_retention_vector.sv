@@ -50,15 +50,24 @@ module dnc_memory_retention_vector #(
     output reg READY,
 
     input F_IN_ENABLE,  // for i in 0 to R-1
+
+    output reg F_OUT_ENABLE,  // for i in 0 to R-1
+
     input W_IN_I_ENABLE,  // for i in 0 to R-1
     input W_IN_J_ENABLE,  // for j in 0 to N-1
+
+    output reg W_OUT_I_ENABLE,  // for i in 0 to R-1
+    output reg W_OUT_J_ENABLE,  // for j in 0 to N-1
+
     output reg PSI_OUT_ENABLE,  // for j in 0 to N-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_R_IN,
     input [DATA_SIZE-1:0] SIZE_N_IN,
+
     input [DATA_SIZE-1:0] F_IN,
     input [DATA_SIZE-1:0] W_IN,
+
     output reg [DATA_SIZE-1:0] PSI_OUT
   );
 

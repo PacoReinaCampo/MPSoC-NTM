@@ -60,8 +60,13 @@ entity dnc_read_content_weighting is
 
     K_IN_ENABLE : in std_logic;         -- for k in 0 to W-1
 
+    K_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
+
     M_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
     M_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
+
+    M_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
+    M_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     C_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
@@ -98,8 +103,13 @@ architecture dnc_read_content_weighting_architecture of dnc_read_content_weighti
 
   signal k_in_enable_vector_content_based_addressing : std_logic;
 
+  signal k_out_enable_vector_content_based_addressing : std_logic;
+
   signal m_in_i_enable_vector_content_based_addressing : std_logic;
   signal m_in_j_enable_vector_content_based_addressing : std_logic;
+
+  signal m_out_i_enable_vector_content_based_addressing : std_logic;
+  signal m_out_j_enable_vector_content_based_addressing : std_logic;
 
   signal c_out_enable_vector_content_based_addressing : std_logic;
 
@@ -129,8 +139,13 @@ begin
 
   k_in_enable_vector_content_based_addressing <= K_IN_ENABLE;
 
+  K_OUT_ENABLE <= k_out_enable_vector_content_based_addressing;
+
   m_in_i_enable_vector_content_based_addressing <= M_IN_J_ENABLE;
   m_in_j_enable_vector_content_based_addressing <= M_IN_K_ENABLE;
+
+  M_OUT_J_ENABLE <= m_out_i_enable_vector_content_based_addressing;
+  M_OUT_K_ENABLE <= m_out_j_enable_vector_content_based_addressing;
 
   C_OUT_ENABLE <= c_out_enable_vector_content_based_addressing;
 
@@ -160,8 +175,13 @@ begin
 
       K_IN_ENABLE => k_in_enable_vector_content_based_addressing,
 
+      K_OUT_ENABLE => k_out_enable_vector_content_based_addressing,
+
       M_IN_I_ENABLE => m_in_i_enable_vector_content_based_addressing,
       M_IN_J_ENABLE => m_in_j_enable_vector_content_based_addressing,
+
+      M_OUT_I_ENABLE => m_out_i_enable_vector_content_based_addressing,
+      M_OUT_J_ENABLE => m_out_j_enable_vector_content_based_addressing,
 
       C_OUT_ENABLE => c_out_enable_vector_content_based_addressing,
 

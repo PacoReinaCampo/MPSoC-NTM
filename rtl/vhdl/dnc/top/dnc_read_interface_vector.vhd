@@ -64,6 +64,10 @@ entity dnc_read_interface_vector is
     WK_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
     WK_IN_K_ENABLE : in std_logic;      -- for k in 0 to W-1
 
+    WK_OUT_I_ENABLE : in std_logic;     -- for i in 0 to R-1
+    WK_OUT_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+    WK_OUT_K_ENABLE : in std_logic;     -- for k in 0 to W-1
+
     K_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1
     K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
@@ -71,11 +75,17 @@ entity dnc_read_interface_vector is
     WBETA_IN_I_ENABLE : in std_logic;   -- for i in 0 to R-1
     WBETA_IN_L_ENABLE : in std_logic;   -- for l in 0 to L-1
 
+    WBETA_OUT_I_ENABLE : in std_logic;  -- for i in 0 to R-1
+    WBETA_OUT_L_ENABLE : in std_logic;  -- for l in 0 to L-1
+
     BETA_OUT_ENABLE : out std_logic;    -- for i in 0 to R-1
 
     -- Free Gate
     WF_IN_I_ENABLE : in std_logic;      -- for i in 0 to R-1
     WF_IN_L_ENABLE : in std_logic;      -- for l in 0 to L-1
+
+    WF_OUT_I_ENABLE : in std_logic;     -- for i in 0 to R-1
+    WF_OUT_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
     F_OUT_ENABLE : out std_logic;       -- for i in 0 to R-1
 
@@ -83,10 +93,15 @@ entity dnc_read_interface_vector is
     WPI_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
     WPI_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
 
+    WPI_OUT_I_ENABLE : in std_logic;    -- for i in 0 to R-1
+    WPI_OUT_L_ENABLE : in std_logic;    -- for l in 0 to L-1
+
     PI_OUT_ENABLE : out std_logic;      -- for i in 0 to R-1
 
     -- Hidden State
     H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+
+    H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
     SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -209,7 +224,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 

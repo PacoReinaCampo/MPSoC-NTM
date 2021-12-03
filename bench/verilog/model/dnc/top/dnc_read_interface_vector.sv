@@ -53,36 +53,58 @@ module dnc_read_interface_vector #(
     input WK_IN_I_ENABLE,  // for i in 0 to R-1
     input WK_IN_L_ENABLE,  // for l in 0 to L-1
     input WK_IN_K_ENABLE,  // for k in 0 to W-1
+
+    output reg WK_OUT_I_ENABLE,  // for i in 0 to R-1
+    output reg WK_OUT_L_ENABLE,  // for l in 0 to L-1
+    output reg WK_OUT_K_ENABLE,  // for k in 0 to W-1
+
     output reg K_OUT_I_ENABLE,  // for i in 0 to R-1
     output reg K_OUT_K_ENABLE,  // for k in 0 to W-1
 
     // Read Strength
     input WBETA_IN_I_ENABLE,  // for i in 0 to R-1
     input WBETA_IN_L_ENABLE,  // for l in 0 to L-1
+
+    output reg WBETA_OUT_I_ENABLE,  // for i in 0 to R-1
+    output reg WBETA_OUT_L_ENABLE,  // for l in 0 to L-1
+
     output reg BETA_OUT_ENABLE,  // for i in 0 to R-1
 
     // Free Gate
     input WF_IN_I_ENABLE,  // for i in 0 to R-1
     input WF_IN_L_ENABLE,  // for l in 0 to L-1
+
+    output reg WF_OUT_I_ENABLE,  // for i in 0 to R-1
+    output reg WF_OUT_L_ENABLE,  // for l in 0 to L-1
+
     output reg F_OUT_ENABLE,  // for i in 0 to R-1
 
     // Read Mode
     input WPI_IN_I_ENABLE,  // for i in 0 to R-1
     input WPI_IN_L_ENABLE,  // for l in 0 to L-1
+
+    output reg WPI_OUT_I_ENABLE,  // for i in 0 to R-1
+    output reg WPI_OUT_L_ENABLE,  // for l in 0 to L-1
+
     output reg PI_OUT_ENABLE,  // for i in 0 to R-1
 
     // Hidden State
     input H_IN_ENABLE,  // for l in 0 to L-1
 
+    output reg H_OUT_ENABLE,  // for l in 0 to L-1
+
     // DATA
     input [DATA_SIZE-1:0] SIZE_W_IN,
     input [DATA_SIZE-1:0] SIZE_L_IN,
     input [DATA_SIZE-1:0] SIZE_R_IN,
+
     input [DATA_SIZE-1:0] WK_IN,
     input [DATA_SIZE-1:0] WBETA_IN,
     input [DATA_SIZE-1:0] WF_IN,
     input [DATA_SIZE-1:0] WPI_IN,
+
     input [DATA_SIZE-1:0] H_IN,
+
     output reg [DATA_SIZE-1:0] K_OUT,
     output reg [DATA_SIZE-1:0] BETA_OUT,
     output reg [DATA_SIZE-1:0] F_OUT,

@@ -64,6 +64,10 @@ entity dnc_memory_matrix is
     V_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
     E_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
+    W_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
+    V_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
+    E_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
+
     M_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
     M_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 

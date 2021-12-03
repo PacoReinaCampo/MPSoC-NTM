@@ -61,7 +61,9 @@ entity dnc_usage_vector is
     W_IN_ENABLE   : in std_logic;       -- for j in 0 to N-1
     PSI_IN_ENABLE : in std_logic;       -- for j in 0 to N-1
 
-    U_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
+    U_OUT_ENABLE   : out std_logic;     -- for j in 0 to N-1
+    W_OUT_ENABLE   : out std_logic;     -- for j in 0 to N-1
+    PSI_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     -- DATA
     SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

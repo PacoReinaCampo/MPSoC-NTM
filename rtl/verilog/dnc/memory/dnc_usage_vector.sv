@@ -52,13 +52,18 @@ module dnc_usage_vector #(
     input U_IN_ENABLE,  // for j in 0 to N-1
     input W_IN_ENABLE,  // for j in 0 to N-1
     input PSI_IN_ENABLE,  // for j in 0 to N-1
+
     output reg U_OUT_ENABLE,  // for j in 0 to N-1
+    output reg W_OUT_ENABLE,  // for j in 0 to N-1
+    output reg PSI_OUT_ENABLE,  // for j in 0 to N-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_N_IN,
+
     input [DATA_SIZE-1:0] U_IN,
     input [DATA_SIZE-1:0] W_IN,
     input [DATA_SIZE-1:0] PSI_IN,
+
     output reg [DATA_SIZE-1:0] U_OUT
   );
 

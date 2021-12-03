@@ -51,14 +51,20 @@ module dnc_write_weighting #(
 
     input A_IN_ENABLE,  // for j in 0 to N-1
     input C_IN_ENABLE,  // for j in 0 to N-1
+
+    output reg A_OUT_ENABLE,  // for j in 0 to N-1
+    output reg C_OUT_ENABLE,  // for j in 0 to N-1
+
     output reg W_OUT_ENABLE,  // for j in 0 to N-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_N_IN,
+
     input [DATA_SIZE-1:0] A_IN,
     input [DATA_SIZE-1:0] C_IN,
     input [DATA_SIZE-1:0] GA_IN,
     input [DATA_SIZE-1:0] GW_IN,
+
     output reg [DATA_SIZE-1:0] W_OUT
   );
 

@@ -155,7 +155,8 @@ architecture dnc_addressing_architecture of dnc_addressing is
 
   -- DATA
   signal size_n_in_allocation_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal u_in_allocation_weighting      : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal u_in_allocation_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal a_out_allocation_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -183,8 +184,9 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal size_r_in_backward_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_n_in_backward_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal l_in_backward_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal w_in_backward_weighting  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal l_in_backward_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal w_in_backward_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
+
   signal b_out_backward_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- FORWARD WEIGHTING

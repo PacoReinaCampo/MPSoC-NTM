@@ -82,14 +82,26 @@ architecture dnc_top_testbench_architecture of dnc_top_testbench is
   signal w_in_l_enable_top : std_logic;
   signal w_in_x_enable_top : std_logic;
 
+  signal w_out_l_enable_top : std_logic;
+  signal w_out_x_enable_top : std_logic;
+
   signal k_in_i_enable_top : std_logic;
   signal k_in_l_enable_top : std_logic;
   signal k_in_k_enable_top : std_logic;
 
+  signal k_out_i_enable_top : std_logic;
+  signal k_out_l_enable_top : std_logic;
+  signal k_out_k_enable_top : std_logic;
+
   signal u_in_l_enable_top : std_logic;
   signal u_in_p_enable_top : std_logic;
 
+  signal u_out_l_enable_top : std_logic;
+  signal u_out_p_enable_top : std_logic;
+
   signal b_in_enable_top : std_logic;
+
+  signal b_out_enable_top : std_logic;
 
   signal x_in_enable_top  : std_logic;
   signal y_out_enable_top : std_logic;
@@ -141,14 +153,26 @@ begin
       DNC_TOP_W_IN_L_ENABLE => w_in_l_enable_top,
       DNC_TOP_W_IN_X_ENABLE => w_in_x_enable_top,
 
+      DNC_TOP_W_OUT_L_ENABLE => w_out_l_enable_top,
+      DNC_TOP_W_OUT_X_ENABLE => w_out_x_enable_top,
+
       DNC_TOP_K_IN_I_ENABLE => k_in_i_enable_top,
       DNC_TOP_K_IN_L_ENABLE => k_in_l_enable_top,
       DNC_TOP_K_IN_K_ENABLE => k_in_k_enable_top,
 
+      DNC_TOP_K_OUT_I_ENABLE => k_out_i_enable_top,
+      DNC_TOP_K_OUT_L_ENABLE => k_out_l_enable_top,
+      DNC_TOP_K_OUT_K_ENABLE => k_out_k_enable_top,
+
       DNC_TOP_U_IN_L_ENABLE => u_in_l_enable_top,
       DNC_TOP_U_IN_P_ENABLE => u_in_p_enable_top,
 
+      DNC_TOP_U_OUT_L_ENABLE => u_out_l_enable_top,
+      DNC_TOP_U_OUT_P_ENABLE => u_out_p_enable_top,
+
       DNC_TOP_B_IN_ENABLE => b_in_enable_top,
+
+      DNC_TOP_B_OUT_ENABLE => b_out_enable_top,
 
       DNC_TOP_X_IN_ENABLE  => x_in_enable_top,
       DNC_TOP_Y_OUT_ENABLE => y_out_enable_top,
@@ -188,14 +212,26 @@ begin
         W_IN_L_ENABLE => w_in_l_enable_top,
         W_IN_X_ENABLE => w_in_x_enable_top,
 
+        W_OUT_L_ENABLE => w_out_l_enable_top,
+        W_OUT_X_ENABLE => w_out_x_enable_top,
+
         K_IN_I_ENABLE => k_in_i_enable_top,
         K_IN_L_ENABLE => k_in_l_enable_top,
         K_IN_K_ENABLE => k_in_k_enable_top,
 
+        K_OUT_I_ENABLE => k_out_i_enable_top,
+        K_OUT_L_ENABLE => k_out_l_enable_top,
+        K_OUT_K_ENABLE => k_out_k_enable_top,
+
         U_IN_L_ENABLE => u_in_l_enable_top,
         U_IN_P_ENABLE => u_in_p_enable_top,
 
+        U_OUT_L_ENABLE => u_out_l_enable_top,
+        U_OUT_P_ENABLE => u_out_p_enable_top,
+
         B_IN_ENABLE => b_in_enable_top,
+
+        B_OUT_ENABLE => b_in_enable_top,
 
         X_IN_ENABLE  => x_in_enable_top,
         Y_OUT_ENABLE => y_out_enable_top,

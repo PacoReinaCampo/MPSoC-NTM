@@ -64,14 +64,26 @@ module dnc_top_stimulus #(
     output DNC_TOP_W_IN_L_ENABLE,
     output DNC_TOP_W_IN_X_ENABLE,
 
+    input DNC_TOP_W_OUT_L_ENABLE,
+    input DNC_TOP_W_OUT_X_ENABLE,
+
     output DNC_TOP_K_IN_I_ENABLE,
     output DNC_TOP_K_IN_L_ENABLE,
     output DNC_TOP_K_IN_K_ENABLE,
 
+    input DNC_TOP_K_OUT_I_ENABLE,
+    input DNC_TOP_K_OUT_L_ENABLE,
+    input DNC_TOP_K_OUT_K_ENABLE,
+
     output DNC_TOP_U_IN_L_ENABLE,
     output DNC_TOP_U_IN_P_ENABLE,
 
+    input DNC_TOP_U_OUT_L_ENABLE,
+    input DNC_TOP_U_OUT_P_ENABLE,
+
     output DNC_TOP_B_IN_ENABLE,
+
+    input DNC_TOP_B_OUT_ENABLE,
 
     output DNC_TOP_X_IN_ENABLE,
     input DNC_TOP_Y_OUT_ENABLE,

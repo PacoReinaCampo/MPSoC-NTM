@@ -62,14 +62,26 @@ entity dnc_top is
     W_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
     W_IN_X_ENABLE : in std_logic;       -- for x in 0 to X-1
 
+    W_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    W_OUT_X_ENABLE : out std_logic;     -- for x in 0 to X-1
+
     K_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
     K_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
     K_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
+    K_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
+    K_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
+
     U_IN_L_ENABLE : in std_logic;       -- for l in 0 to L-1
     U_IN_P_ENABLE : in std_logic;       -- for p in 0 to L-1
 
+    U_OUT_L_ENABLE : out std_logic;     -- for l in 0 to L-1
+    U_OUT_P_ENABLE : out std_logic;     -- for p in 0 to L-1
+
     B_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
+
+    B_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     X_IN_ENABLE  : in  std_logic;       -- for x in 0 to X-1
     Y_OUT_ENABLE : out std_logic;       -- for y in 0 to Y-1
@@ -347,6 +359,10 @@ architecture dnc_top_architecture of dnc_top is
   signal wk_in_l_enable_read_interface_vector : std_logic;
   signal wk_in_k_enable_read_interface_vector : std_logic;
 
+  signal wk_out_i_enable_read_interface_vector : std_logic;
+  signal wk_out_l_enable_read_interface_vector : std_logic;
+  signal wk_out_k_enable_read_interface_vector : std_logic;
+
   signal k_out_i_enable_read_interface_vector : std_logic;
   signal k_out_k_enable_read_interface_vector : std_logic;
 
@@ -354,11 +370,17 @@ architecture dnc_top_architecture of dnc_top is
   signal wbeta_in_i_enable_read_interface_vector : std_logic;
   signal wbeta_in_l_enable_read_interface_vector : std_logic;
 
+  signal wbeta_out_i_enable_read_interface_vector : std_logic;
+  signal wbeta_out_l_enable_read_interface_vector : std_logic;
+
   signal beta_out_enable_read_interface_vector : std_logic;
 
   -- Free Gate
   signal wf_in_i_enable_read_interface_vector : std_logic;
   signal wf_in_l_enable_read_interface_vector : std_logic;
+
+  signal wf_out_i_enable_read_interface_vector : std_logic;
+  signal wf_out_l_enable_read_interface_vector : std_logic;
 
   signal f_out_enable_read_interface_vector : std_logic;
 
@@ -366,10 +388,15 @@ architecture dnc_top_architecture of dnc_top is
   signal wpi_in_i_enable_read_interface_vector : std_logic;
   signal wpi_in_l_enable_read_interface_vector : std_logic;
 
+  signal wpi_out_i_enable_read_interface_vector : std_logic;
+  signal wpi_out_l_enable_read_interface_vector : std_logic;
+
   signal pi_out_enable_read_interface_vector : std_logic;
 
   -- Hidden State
   signal h_in_enable_read_interface_vector : std_logic;
+
+  signal h_out_enable_read_interface_vector : std_logic;
 
   -- DATA
   signal size_w_in_read_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -473,14 +500,22 @@ architecture dnc_top_architecture of dnc_top is
   signal wk_in_l_enable_write_interface_vector : std_logic;
   signal wk_in_k_enable_write_interface_vector : std_logic;
 
+  signal wk_out_l_enable_write_interface_vector : std_logic;
+  signal wk_out_k_enable_write_interface_vector : std_logic;
+
   signal k_out_enable_write_interface_vector : std_logic;
 
   -- Write Strength
   signal wbeta_in_enable_write_interface_vector : std_logic;
 
+  signal wbeta_out_enable_write_interface_vector : std_logic;
+
   -- Erase Vector
   signal we_in_l_enable_write_interface_vector : std_logic;
   signal we_in_k_enable_write_interface_vector : std_logic;
+
+  signal we_out_l_enable_write_interface_vector : std_logic;
+  signal we_out_k_enable_write_interface_vector : std_logic;
 
   signal e_out_enable_write_interface_vector : std_logic;
 
@@ -488,16 +523,25 @@ architecture dnc_top_architecture of dnc_top is
   signal wv_in_l_enable_write_interface_vector : std_logic;
   signal wv_in_k_enable_write_interface_vector : std_logic;
 
+  signal wv_out_l_enable_write_interface_vector : std_logic;
+  signal wv_out_k_enable_write_interface_vector : std_logic;
+
   signal v_out_enable_write_interface_vector : std_logic;
 
   -- Allocation Gate
   signal wga_in_enable_write_interface_vector : std_logic;
 
+  signal wga_out_enable_write_interface_vector : std_logic;
+
   -- Write Gate
   signal wgw_in_enable_write_interface_vector : std_logic;
 
+  signal wgw_out_enable_write_interface_vector : std_logic;
+
   -- Hidden State
   signal h_in_enable_write_interface_vector : std_logic;
+
+  signal h_out_enable_write_interface_vector : std_logic;
 
   -- DATA
   signal size_w_in_write_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -532,19 +576,31 @@ architecture dnc_top_architecture of dnc_top is
   signal k_read_in_i_enable_addressing : std_logic;
   signal k_read_in_k_enable_addressing : std_logic;
 
+  signal k_read_out_i_enable_addressing : std_logic;
+  signal k_read_out_k_enable_addressing : std_logic;
+
   signal beta_read_in_enable_addressing : std_logic;
+
+  signal beta_read_out_enable_addressing : std_logic;
 
   signal f_read_in_enable_addressing : std_logic;
 
+  signal f_read_out_enable_addressing : std_logic;
+
   signal pi_read_in_enable_addressing : std_logic;
+
+  signal pi_read_out_enable_addressing : std_logic;
 
   signal k_write_in_k_enable_addressing : std_logic;
   signal e_write_in_k_enable_addressing : std_logic;
   signal v_write_in_k_enable_addressing : std_logic;
 
+  signal k_write_out_k_enable_addressing : std_logic;
+  signal e_write_out_k_enable_addressing : std_logic;
+  signal v_write_out_k_enable_addressing : std_logic;
+
   signal r_out_i_enable_addressing : std_logic;
   signal r_out_k_enable_addressing : std_logic;
-
   -- DATA
   signal size_r_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_w_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -1246,6 +1302,10 @@ begin
       WK_IN_L_ENABLE => wk_in_l_enable_read_interface_vector,
       WK_IN_K_ENABLE => wk_in_k_enable_read_interface_vector,
 
+      WK_OUT_I_ENABLE => wk_out_i_enable_read_interface_vector,
+      WK_OUT_L_ENABLE => wk_out_l_enable_read_interface_vector,
+      WK_OUT_K_ENABLE => wk_out_k_enable_read_interface_vector,
+
       K_OUT_I_ENABLE => k_out_i_enable_read_interface_vector,
       K_OUT_K_ENABLE => k_out_k_enable_read_interface_vector,
 
@@ -1253,11 +1313,17 @@ begin
       WBETA_IN_I_ENABLE => wbeta_in_i_enable_read_interface_vector,
       WBETA_IN_L_ENABLE => wbeta_in_l_enable_read_interface_vector,
 
+      WBETA_OUT_I_ENABLE => wbeta_out_i_enable_read_interface_vector,
+      WBETA_OUT_L_ENABLE => wbeta_out_l_enable_read_interface_vector,
+
       BETA_OUT_ENABLE => beta_out_enable_read_interface_vector,
 
       -- Free Gate
       WF_IN_I_ENABLE => wf_in_i_enable_read_interface_vector,
       WF_IN_L_ENABLE => wf_in_l_enable_read_interface_vector,
+
+      WF_OUT_I_ENABLE => wf_out_i_enable_read_interface_vector,
+      WF_OUT_L_ENABLE => wf_out_l_enable_read_interface_vector,
 
       F_OUT_ENABLE => f_out_enable_read_interface_vector,
 
@@ -1265,10 +1331,15 @@ begin
       WPI_IN_I_ENABLE => wpi_in_i_enable_read_interface_vector,
       WPI_IN_L_ENABLE => wpi_in_l_enable_read_interface_vector,
 
+      WPI_OUT_I_ENABLE => wpi_out_i_enable_read_interface_vector,
+      WPI_OUT_L_ENABLE => wpi_out_l_enable_read_interface_vector,
+
       PI_OUT_ENABLE => pi_out_enable_read_interface_vector,
 
       -- Hidden State
       H_IN_ENABLE => h_in_enable_read_interface_vector,
+
+      H_OUT_ENABLE => h_out_enable_read_interface_vector,
 
       -- DATA
       SIZE_W_IN => size_w_in_read_interface_vector,
@@ -1448,14 +1519,22 @@ begin
       WK_IN_L_ENABLE => wk_in_l_enable_write_interface_vector,
       WK_IN_K_ENABLE => wk_in_k_enable_write_interface_vector,
 
+      WK_OUT_L_ENABLE => wk_out_l_enable_write_interface_vector,
+      WK_OUT_K_ENABLE => wk_out_k_enable_write_interface_vector,
+
       K_OUT_ENABLE => k_out_enable_write_interface_vector,
 
       -- Write Strength
       WBETA_IN_ENABLE => wbeta_in_enable_write_interface_vector,
 
+      WBETA_OUT_ENABLE => wbeta_out_enable_write_interface_vector,
+
       -- Erase Vector
       WE_IN_L_ENABLE => we_in_l_enable_write_interface_vector,
       WE_IN_K_ENABLE => we_in_k_enable_write_interface_vector,
+
+      WE_OUT_L_ENABLE => we_out_l_enable_write_interface_vector,
+      WE_OUT_K_ENABLE => we_out_k_enable_write_interface_vector,
 
       E_OUT_ENABLE => e_out_enable_write_interface_vector,
 
@@ -1463,16 +1542,25 @@ begin
       WV_IN_L_ENABLE => wv_in_l_enable_write_interface_vector,
       WV_IN_K_ENABLE => wv_in_k_enable_write_interface_vector,
 
+      WV_OUT_L_ENABLE => wv_out_l_enable_write_interface_vector,
+      WV_OUT_K_ENABLE => wv_out_k_enable_write_interface_vector,
+
       V_OUT_ENABLE => v_out_enable_write_interface_vector,
 
       -- Allocation Gate
       WGA_IN_ENABLE => wga_in_enable_write_interface_vector,
 
+      WGA_OUT_ENABLE => wga_out_enable_write_interface_vector,
+
       -- Write Gate
       WGW_IN_ENABLE => wgw_in_enable_write_interface_vector,
 
+      WGW_OUT_ENABLE => wgw_out_enable_write_interface_vector,
+
       -- Hidden State
       H_IN_ENABLE => h_in_enable_write_interface_vector,
+
+      H_OUT_ENABLE => h_out_enable_write_interface_vector,
 
       -- DATA
       SIZE_W_IN => size_w_in_write_interface_vector,
@@ -1517,15 +1605,28 @@ begin
       K_READ_IN_I_ENABLE => k_read_in_i_enable_addressing,
       K_READ_IN_K_ENABLE => k_read_in_k_enable_addressing,
 
+      K_READ_OUT_I_ENABLE => k_read_out_i_enable_addressing,
+      K_READ_OUT_K_ENABLE => k_read_out_k_enable_addressing,
+
       BETA_READ_IN_ENABLE => beta_read_in_enable_addressing,
+
+      BETA_READ_OUT_ENABLE => beta_read_out_enable_addressing,
 
       F_READ_IN_ENABLE => f_read_in_enable_addressing,
 
+      F_READ_OUT_ENABLE => f_read_out_enable_addressing,
+
       PI_READ_IN_ENABLE => pi_read_in_enable_addressing,
+
+      PI_READ_OUT_ENABLE => pi_read_out_enable_addressing,
 
       K_WRITE_IN_K_ENABLE => k_write_in_k_enable_addressing,
       E_WRITE_IN_K_ENABLE => e_write_in_k_enable_addressing,
       V_WRITE_IN_K_ENABLE => v_write_in_k_enable_addressing,
+
+      K_WRITE_OUT_K_ENABLE => k_write_out_k_enable_addressing,
+      E_WRITE_OUT_K_ENABLE => e_write_out_k_enable_addressing,
+      V_WRITE_OUT_K_ENABLE => v_write_out_k_enable_addressing,
 
       R_OUT_I_ENABLE => r_out_i_enable_addressing,
       R_OUT_K_ENABLE => r_out_k_enable_addressing,

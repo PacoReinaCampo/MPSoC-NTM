@@ -48,18 +48,29 @@ module dnc_forward_weighting #(
     // CONTROL
     input START,
     output reg READY,
+
     input L_IN_G_ENABLE,  // for g in 0 to N-1 (square matrix)
     input L_IN_J_ENABLE,  // for j in 0 to N-1 (square matrix)
+
+    output reg L_OUT_G_ENABLE,  // for g in 0 to N-1 (square matrix)
+    output reg L_OUT_J_ENABLE,  // for j in 0 to N-1 (square matrix)
+
     input W_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     input W_IN_J_ENABLE,  // for j in 0 to N-1
+
+    output reg W_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    output reg W_OUT_J_ENABLE,  // for j in 0 to N-1
+
     output reg F_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     output reg F_OUT_J_ENABLE,  // for j in 0 to N-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_R_IN,
     input [DATA_SIZE-1:0] SIZE_N_IN,
+
     input [DATA_SIZE-1:0] L_IN,
     input [DATA_SIZE-1:0] W_IN,
+
     output reg [DATA_SIZE-1:0] F_OUT
   );
 

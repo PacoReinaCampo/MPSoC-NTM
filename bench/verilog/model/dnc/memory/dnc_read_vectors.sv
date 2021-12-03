@@ -51,8 +51,16 @@ module dnc_read_vectors #(
 
     input M_IN_J_ENABLE,  // for j in 0 to N-1
     input M_IN_K_ENABLE,  // for k in 0 to W-1
+
+    output reg M_OUT_J_ENABLE,  // for j in 0 to N-1
+    output reg M_OUT_K_ENABLE,  // for k in 0 to W-1
+
     input W_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     input W_IN_J_ENABLE,  // for j in 0 to N-1
+
+    output reg W_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    output reg W_OUT_J_ENABLE,  // for j in 0 to N-1
+
     output reg R_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     output reg R_OUT_K_ENABLE,  // for k in 0 to W-1
 
@@ -60,8 +68,10 @@ module dnc_read_vectors #(
     input [DATA_SIZE-1:0] SIZE_R_IN,
     input [DATA_SIZE-1:0] SIZE_N_IN,
     input [DATA_SIZE-1:0] SIZE_W_IN,
+
     input [DATA_SIZE-1:0] M_IN,
     input [DATA_SIZE-1:0] W_IN,
+
     output reg [DATA_SIZE-1:0] R_OUT
   );
 

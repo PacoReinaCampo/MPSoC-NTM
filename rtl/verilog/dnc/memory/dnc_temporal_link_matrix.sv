@@ -51,16 +51,23 @@ module dnc_temporal_link_matrix #(
 
     input L_IN_G_ENABLE,  // for g in 0 to N-1 (square matrix)
     input L_IN_J_ENABLE,  // for j in 0 to N-1 (square matrix)
+
     input W_IN_ENABLE,  // for j in 0 to N-1
     input P_IN_ENABLE,  // for j in 0 to N-1
+
+    output reg W_OUT_ENABLE,  // for j in 0 to N-1
+    output reg P_OUT_ENABLE,  // for j in 0 to N-1
+
     output reg L_OUT_G_ENABLE,  // for g in 0 to N-1 (square matrix)
     output reg L_OUT_J_ENABLE,  // for j in 0 to N-1 (square matrix)
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_N_IN,
+
     input [DATA_SIZE-1:0] L_IN,
     input [DATA_SIZE-1:0] W_IN,
     input [DATA_SIZE-1:0] P_IN,
+
     output reg [DATA_SIZE-1:0] L_OUT
   );
 

@@ -50,16 +50,25 @@ module dnc_content_based_addressing #(
     output reg READY,
 
     input K_IN_ENABLE,  // for j in 0 to J-1
+
+    output reg K_OUT_ENABLE,  // for j in 0 to J-1
+
     input M_IN_I_ENABLE,  // for i in 0 to I-1
     input M_IN_J_ENABLE,  // for j in 0 to J-1
+
+    output reg M_OUT_I_ENABLE,  // for i in 0 to I-1
+    output reg M_OUT_J_ENABLE,  // for j in 0 to J-1
+
     output reg C_OUT_ENABLE,  // for i in 0 to I-1
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_I_IN,
     input [DATA_SIZE-1:0] SIZE_J_IN,
+
     input [DATA_SIZE-1:0] K_IN,
     input [DATA_SIZE-1:0] M_IN,
     input [DATA_SIZE-1:0] BETA_IN,
+
     output reg [DATA_SIZE-1:0] C_OUT
   );
 
