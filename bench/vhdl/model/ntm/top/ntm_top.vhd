@@ -139,9 +139,15 @@ architecture ntm_top_architecture of ntm_top is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant FULL : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
+  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+
+  constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
+  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+
+  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -445,7 +451,6 @@ architecture ntm_top_architecture of ntm_top is
 
   signal w_in_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_out_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
-
 
 begin
 
@@ -800,7 +805,7 @@ begin
 
       X_IN_ENABLE => x_in_enable_controller,
 
-      X_IN_ENABLE => x_out_enable_controller,
+      X_OUT_ENABLE => x_out_enable_controller,
 
       R_IN_I_ENABLE => r_in_i_enable_controller,
       R_IN_K_ENABLE => r_in_k_enable_controller,

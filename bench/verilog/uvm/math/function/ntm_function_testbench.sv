@@ -338,7 +338,6 @@ module ntm_function_testbench;
   wire [DATA_SIZE-1:0] data_b_in_vector_cosine;
   wire [DATA_SIZE-1:0] data_out_vector_cosine;
 
-
   // VECTOR DIFFERENTIATION
   // CONTROL
   wire start_vector_differentiation;

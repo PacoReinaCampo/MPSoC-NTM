@@ -106,9 +106,15 @@ module ntm_addressing #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO = 0;
-  parameter ONE = 1;
-  parameter FULL = 1;
+  parameter ZERO  = 0;
+  parameter ONE   = 1;
+  parameter TWO   = 2;
+  parameter THREE = 3;
+
+  parameter FULL  = 1;
+  parameter EMPTY = 0;
+
+  parameter EULER = 0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -252,7 +258,6 @@ module ntm_addressing #(
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
-
 
   // wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
   // wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)

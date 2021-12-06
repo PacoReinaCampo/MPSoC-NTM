@@ -135,9 +135,15 @@ module dnc_write_interface_vector #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO = 0;
-  parameter ONE = 1;
-  parameter FULL = 1;
+  parameter ZERO  = 0;
+  parameter ONE   = 1;
+  parameter TWO   = 2;
+  parameter THREE = 3;
+
+  parameter FULL  = 1;
+  parameter EMPTY = 0;
+
+  parameter EULER = 0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals

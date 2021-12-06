@@ -79,7 +79,6 @@ entity ntm_memory_stimulus is
     NTM_MEMORY_M_OUT_J_ENABLE : in std_logic;
     NTM_MEMORY_M_OUT_K_ENABLE : in std_logic;
 
-
     NTM_MEMORY_W_IN_ENABLE  : out std_logic;
     NTM_MEMORY_W_OUT_ENABLE : in  std_logic;
 

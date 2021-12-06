@@ -81,8 +81,15 @@ module dnc_write_weighting #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO = 0;
-  parameter ONE = 1;
+  parameter ZERO  = 0;
+  parameter ONE   = 1;
+  parameter TWO   = 2;
+  parameter THREE = 3;
+
+  parameter FULL  = 1;
+  parameter EMPTY = 0;
+
+  parameter EULER = 0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -90,7 +97,6 @@ module dnc_write_weighting #(
 
   // Finite State Machine
   reg [1:0] controller_ctrl_fsm_int;
-
 
   // VECTOR ADDER
   // CONTROL
