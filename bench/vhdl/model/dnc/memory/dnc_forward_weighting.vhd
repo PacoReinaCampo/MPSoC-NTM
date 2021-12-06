@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity dnc_forward_weighting is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -161,7 +162,8 @@ begin
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

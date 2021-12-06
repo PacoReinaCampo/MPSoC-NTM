@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_scalar_cosine_similarity_function is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -308,7 +309,8 @@ begin
   -- SCALAR MULTIPLIER
   scalar_multiplier : ntm_scalar_multiplier
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -329,7 +331,8 @@ begin
   -- SCALAR DIVIDER
   scalar_divider : ntm_scalar_divider
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -350,7 +353,8 @@ begin
   -- SCALAR PRODUCT AB
   scalar_product_ab : ntm_scalar_product
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -377,7 +381,8 @@ begin
   -- SCALAR PRODUCT AA
   scalar_product_aa : ntm_scalar_product
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -404,7 +409,8 @@ begin
   -- SCALAR PRODUCT BB
   scalar_product_bb : ntm_scalar_product
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

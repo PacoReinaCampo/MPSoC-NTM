@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module dnc_sort_vector #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -158,7 +159,8 @@ module dnc_sort_vector #(
 
   // VECTOR ADDER
   ntm_vector_adder #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_adder(
     // GLOBAL
@@ -185,7 +187,8 @@ module dnc_sort_vector #(
 
   // VECTOR MULTIPLIER
   ntm_vector_multiplier #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_multiplier(
     // GLOBAL

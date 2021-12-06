@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_content_based_addressing #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -239,7 +240,8 @@ module ntm_content_based_addressing #(
 
   // VECTOR MULTIPLIER
   ntm_vector_multiplier #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_multiplier(
     // GLOBAL
@@ -264,7 +266,8 @@ module ntm_content_based_addressing #(
 
   // VECTOR EXPONENTIATOR
   ntm_vector_exponentiator #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_exponentiator(
     // GLOBAL
@@ -289,7 +292,8 @@ module ntm_content_based_addressing #(
 
   // VECTOR COSINE SIMILARITY
   ntm_vector_cosine_similarity_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_cosine_similarity_function(
     // GLOBAL
@@ -318,7 +322,8 @@ module ntm_content_based_addressing #(
 
   // VECTOR SOFTMAX
   ntm_vector_softmax_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_softmax_function(
     // GLOBAL

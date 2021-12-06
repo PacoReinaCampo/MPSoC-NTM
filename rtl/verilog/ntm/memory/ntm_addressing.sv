@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_addressing #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -395,7 +396,8 @@ module ntm_addressing #(
 
   // VECTOR CONTENT BASED ADDRESSING
   ntm_content_based_addressing #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   ntm_content_based_addressing_i(
     // GLOBAL
@@ -431,7 +433,8 @@ module ntm_addressing #(
 
   // VECTOR ADDER
   ntm_vector_adder #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_adder(
     // GLOBAL
@@ -458,7 +461,8 @@ module ntm_addressing #(
 
   // VECTOR MULTIPLIER
   ntm_vector_multiplier #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_multiplier(
     // GLOBAL
@@ -483,7 +487,8 @@ module ntm_addressing #(
 
   // VECTOR DIVIDER
   ntm_vector_divider #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_divider(
     // GLOBAL
@@ -508,7 +513,8 @@ module ntm_addressing #(
 
   // VECTOR EXPONENTIATOR
   ntm_vector_exponentiator #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_exponentiator(
     // GLOBAL
@@ -533,7 +539,8 @@ module ntm_addressing #(
 
   // VECTOR SUMMATION
   ntm_vector_summation_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_summation_function(
     // GLOBAL
@@ -559,7 +566,8 @@ module ntm_addressing #(
 
   // VECTOR CONVOLUTION
   ntm_vector_convolution_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_convolution_function(
     // GLOBAL

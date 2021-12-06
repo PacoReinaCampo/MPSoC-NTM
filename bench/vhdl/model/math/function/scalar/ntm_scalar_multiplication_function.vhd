@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_scalar_multiplication_function is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -96,7 +97,7 @@ architecture ntm_scalar_multiplication_function_architecture of ntm_scalar_multi
   signal multiplication_ctrl_fsm_int : multiplication_ctrl_fsm;
 
   -- Control Internal
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   -- SCALAR MULTIPLIER
   -- CONTROL
@@ -200,7 +201,8 @@ begin
   -- SCALAR MULTIPLIER
   scalar_multiplier : ntm_scalar_multiplier
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

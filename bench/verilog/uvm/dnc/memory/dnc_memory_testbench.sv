@@ -49,6 +49,7 @@ module dnc_memory_testbench;
 
   // SYSTEM-SIZE
   parameter DATA_SIZE=512;
+  parameter INDEX_SIZE=512;
 
   parameter X=64;
   parameter Y=64;
@@ -481,7 +482,8 @@ module dnc_memory_testbench;
 
   // STIMULUS
   dnc_memory_stimulus #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   memory_stimulus(
     // GLOBAL
@@ -546,7 +548,8 @@ module dnc_memory_testbench;
 
   // ALLOCATION WEIGHTING
   dnc_allocation_weighting #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   allocation_weighting(
     // GLOBAL
@@ -573,7 +576,8 @@ module dnc_memory_testbench;
 
   // BACKWARD WEIGHTING
   dnc_backward_weighting #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   backward_weighting(
     // GLOBAL
@@ -612,7 +616,8 @@ module dnc_memory_testbench;
 
   // FORWARD WEIGHTING
   dnc_forward_weighting #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   forward_weighting(
     // GLOBAL
@@ -648,7 +653,8 @@ module dnc_memory_testbench;
 
   // MEMORY MATRIX
   dnc_memory_matrix #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   memory_matrix(
     // GLOBAL
@@ -688,7 +694,8 @@ module dnc_memory_testbench;
 
   // MEMORY RETENTION VECTOR
   dnc_memory_retention_vector #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   memory_retention_vector(
     // GLOBAL
@@ -723,7 +730,8 @@ module dnc_memory_testbench;
 
   // PRECEDENCE WEIGHTING
   dnc_precedence_weighting #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   precedence_weighting(
     // GLOBAL
@@ -752,7 +760,8 @@ module dnc_memory_testbench;
 
   // READ CONTENT WEIGHTING
   dnc_read_content_weighting #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   read_content_weighting(
     // GLOBAL
@@ -788,7 +797,8 @@ module dnc_memory_testbench;
 
   // READ VECTORS
   dnc_read_vectors #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   read_vectors(
     // GLOBAL
@@ -827,7 +837,8 @@ module dnc_memory_testbench;
 
   // READ WEIGHTING
   dnc_read_weighting #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   read_weighting(
     // GLOBAL
@@ -880,7 +891,8 @@ module dnc_memory_testbench;
 
   // TEMPORAL LINK MATRIX
   dnc_temporal_link_matrix #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   temporal_link_matrix(
     // GLOBAL
@@ -915,7 +927,8 @@ module dnc_memory_testbench;
 
   // USAGE VECTOR
   dnc_usage_vector #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   usage_vector(
     // GLOBAL
@@ -946,7 +959,8 @@ module dnc_memory_testbench;
 
   // WRITE CONTENT WEIGHTING
   dnc_write_content_weighting #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   write_content_weighting(
     // GLOBAL
@@ -982,7 +996,8 @@ module dnc_memory_testbench;
 
   // WRITE WEIGHTING
   dnc_write_weighting #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   write_weighting(
     // GLOBAL
@@ -1015,7 +1030,8 @@ module dnc_memory_testbench;
 
   // ADDRESSING
   dnc_addressing #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   addressing(
     // GLOBAL

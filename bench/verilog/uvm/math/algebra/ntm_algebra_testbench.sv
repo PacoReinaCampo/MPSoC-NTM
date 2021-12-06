@@ -48,6 +48,7 @@ module ntm_algebra_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   parameter DATA_SIZE=512;
+  parameter INDEX_SIZE=512;
 
   parameter X=64;  // x in 0 to X-1
   parameter Y=64;  // y in 0 to Y-1
@@ -232,6 +233,7 @@ module ntm_algebra_testbench;
   ntm_algebra_stimulus #(
     // SYSTEM-SIZE
     .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE),
 
     .X(X),
     .Y(Y),
@@ -405,7 +407,8 @@ module ntm_algebra_testbench;
 
   // MATRIX DETERMINANT
   ntm_matrix_determinant #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_determinant(
     // GLOBAL
@@ -431,7 +434,8 @@ module ntm_algebra_testbench;
 
   // MATRIX INVERSION
   ntm_matrix_inversion #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_inversion(
     // GLOBAL
@@ -457,7 +461,8 @@ module ntm_algebra_testbench;
 
   // MATRIX PRODUCT
   ntm_matrix_product #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_product(
     // GLOBAL
@@ -488,7 +493,8 @@ module ntm_algebra_testbench;
 
   // MATRIX RANK
   ntm_matrix_rank #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_rank(
     // GLOBAL
@@ -514,7 +520,8 @@ module ntm_algebra_testbench;
 
   // MATRIX TRANSPOSE
   ntm_matrix_transpose #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_transpose(
     // GLOBAL
@@ -540,7 +547,8 @@ module ntm_algebra_testbench;
 
   // SCALAR PRODUCT
   ntm_scalar_product #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_product(
     // GLOBAL
@@ -565,7 +573,8 @@ module ntm_algebra_testbench;
 
   // TENSOR PRODUCT
   ntm_tensor_product #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   tensor_product(
     // GLOBAL

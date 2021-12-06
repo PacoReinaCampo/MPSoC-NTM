@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_vector_divider #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -84,7 +85,7 @@ module ntm_vector_divider #(
   reg [1:0] divider_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE-1:0] index_loop;
+  reg [INDEX_SIZE-1:0] index_loop;
 
   reg data_a_in_divider_int;
   reg data_b_in_divider_int;
@@ -207,7 +208,8 @@ module ntm_vector_divider #(
 
   // DIVIDER
   ntm_scalar_divider #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_divider(
     // GLOBAL

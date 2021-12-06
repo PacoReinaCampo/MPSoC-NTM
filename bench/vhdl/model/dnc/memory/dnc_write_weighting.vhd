@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity dnc_write_weighting is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -110,7 +111,7 @@ architecture dnc_write_weighting_architecture of dnc_write_weighting is
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Control Internal
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   -- VECTOR ADDER
   -- CONTROL
@@ -310,7 +311,8 @@ begin
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -339,7 +341,8 @@ begin
   -- VECTOR MULTIPLIER
   vector_multiplier : ntm_vector_multiplier
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

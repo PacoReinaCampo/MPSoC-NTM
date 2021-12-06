@@ -73,7 +73,8 @@ package ntm_math_pkg is
   -- SCALAR
   component ntm_scalar_mod is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -93,7 +94,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_adder is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -116,7 +118,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_multiplier is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -137,7 +140,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_inverter is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -157,7 +161,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_divider is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -178,7 +183,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_exponentiator is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -199,7 +205,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_lcm is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -220,7 +227,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_gcd is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -242,7 +250,8 @@ package ntm_math_pkg is
   -- VECTOR
   component ntm_vector_mod is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -267,7 +276,8 @@ package ntm_math_pkg is
 
   component ntm_vector_adder is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -296,7 +306,8 @@ package ntm_math_pkg is
 
   component ntm_vector_multiplier is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -323,7 +334,8 @@ package ntm_math_pkg is
 
   component ntm_vector_inverter is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -348,7 +360,8 @@ package ntm_math_pkg is
 
   component ntm_vector_divider is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -375,7 +388,8 @@ package ntm_math_pkg is
 
   component ntm_vector_exponentiator is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -402,7 +416,8 @@ package ntm_math_pkg is
 
   component ntm_vector_lcm is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -429,7 +444,8 @@ package ntm_math_pkg is
 
   component ntm_vector_gcd is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -457,7 +473,8 @@ package ntm_math_pkg is
   -- MATRIX
   component ntm_matrix_mod is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -485,7 +502,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_adder is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -518,7 +536,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_multiplier is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -549,7 +568,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_inverter is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -577,7 +597,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_divider is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -608,7 +629,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_exponentiator is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -639,7 +661,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_lcm is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -670,7 +693,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_gcd is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -705,7 +729,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_determinant is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -733,7 +758,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_inversion is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -761,7 +787,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_product is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -794,7 +821,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_rank is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -822,7 +850,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_transpose is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -850,7 +879,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_product is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -877,7 +907,8 @@ package ntm_math_pkg is
 
   component ntm_tensor_product is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -920,7 +951,8 @@ package ntm_math_pkg is
   -- SCALAR
   component ntm_scalar_convolution_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -946,7 +978,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_cosine_similarity_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -972,7 +1005,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_differentiation_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -998,7 +1032,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_multiplication_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1023,7 +1058,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_cosh_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1043,7 +1079,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_sinh_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1063,7 +1100,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_tanh_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1083,7 +1121,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_logistic_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1103,7 +1142,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_softmax_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1128,7 +1168,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_oneplus_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1148,7 +1189,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_summation_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1174,7 +1216,8 @@ package ntm_math_pkg is
   -- VECTOR
   component ntm_vector_convolution_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1205,7 +1248,8 @@ package ntm_math_pkg is
 
   component ntm_vector_cosine_similarity_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1236,7 +1280,8 @@ package ntm_math_pkg is
 
   component ntm_vector_differentiation_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1265,7 +1310,8 @@ package ntm_math_pkg is
 
   component ntm_vector_multiplication_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1293,7 +1339,8 @@ package ntm_math_pkg is
 
   component ntm_vector_cosh_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1318,7 +1365,8 @@ package ntm_math_pkg is
 
   component ntm_vector_sinh_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1343,7 +1391,8 @@ package ntm_math_pkg is
 
   component ntm_vector_tanh_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1368,7 +1417,8 @@ package ntm_math_pkg is
 
   component ntm_vector_logistic_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1393,7 +1443,8 @@ package ntm_math_pkg is
 
   component ntm_vector_softmax_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1421,7 +1472,8 @@ package ntm_math_pkg is
 
   component ntm_vector_oneplus_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1446,7 +1498,8 @@ package ntm_math_pkg is
 
   component ntm_vector_summation_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1475,7 +1528,8 @@ package ntm_math_pkg is
   -- MATRIX
   component ntm_matrix_convolution_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1510,7 +1564,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_cosine_similarity_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1545,7 +1600,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_differentiation_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1577,7 +1633,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_multiplication_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1608,7 +1665,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_cosh_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1636,7 +1694,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_sinh_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1664,7 +1723,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_tanh_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1692,7 +1752,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_logistic_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1720,7 +1781,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_softmax_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1751,7 +1813,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_oneplus_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL
@@ -1779,7 +1842,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_summation_function is
     generic (
-      DATA_SIZE : integer := 512
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512
       );
     port (
       -- GLOBAL

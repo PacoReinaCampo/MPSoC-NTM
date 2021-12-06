@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_scalar_differentiation_function is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -99,7 +100,7 @@ architecture ntm_scalar_differentiation_function_architecture of ntm_scalar_diff
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Control Internal
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   -- Data Internal
   signal data_int_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -252,7 +253,8 @@ begin
   -- SCALAR ADDER
   scalar_adder : ntm_scalar_adder
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -275,7 +277,8 @@ begin
   -- SCALAR DIVIDER
   scalar_divider : ntm_scalar_divider
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

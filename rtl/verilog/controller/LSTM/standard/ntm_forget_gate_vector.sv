@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_forget_gate_vector #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -320,7 +321,8 @@ module ntm_forget_gate_vector #(
 
   // VECTOR ADDER
   ntm_vector_adder #(
-    .DATA_SIZE(DATA_SIZE))
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE))
   vector_adder(
     // GLOBAL
     .CLK(CLK),
@@ -346,7 +348,8 @@ module ntm_forget_gate_vector #(
 
   // MATRIX PRODUCT
   ntm_matrix_product #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_product(
     // GLOBAL
@@ -377,7 +380,8 @@ module ntm_forget_gate_vector #(
 
   // VECTOR LOGISTIC
   ntm_vector_logistic_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_logistic_function(
     // GLOBAL

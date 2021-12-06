@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_state_gate_vector #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -99,7 +100,7 @@ module ntm_state_gate_vector #(
   reg [2:0] controller_ctrl_fsm_int;
 
   // Internal Signals
-  wire [DATA_SIZE-1:0] index_loop;
+  wire [INDEX_SIZE-1:0] index_loop;
 
   wire [DATA_SIZE-1:0] data_int_vector_multiplier;
 
@@ -214,7 +215,8 @@ module ntm_state_gate_vector #(
 
   // VECTOR ADDER
   ntm_vector_adder #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_adder(
     // GLOBAL
@@ -241,7 +243,8 @@ module ntm_state_gate_vector #(
 
   // VECTOR MULTIPLIER
   ntm_vector_multiplier #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_multiplier(
     // GLOBAL

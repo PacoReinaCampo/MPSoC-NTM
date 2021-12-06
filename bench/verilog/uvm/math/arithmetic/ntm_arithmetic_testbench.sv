@@ -49,6 +49,7 @@ module ntm_arithmetic_testbench;
 
   // SYSTEM-SIZE
   parameter DATA_SIZE=512;
+  parameter INDEX_SIZE=512;
 
   parameter X=64;
   parameter Y=64;
@@ -535,6 +536,7 @@ module ntm_arithmetic_testbench;
   ntm_arithmetic_stimulus #(
     // SYSTEM-SIZE
     .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE),
 
     .X(X),
     .Y(Y),
@@ -1014,7 +1016,8 @@ module ntm_arithmetic_testbench;
 
   // SCALAR MOD
   ntm_scalar_mod #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_mod(
     // GLOBAL
@@ -1033,7 +1036,8 @@ module ntm_arithmetic_testbench;
 
   // SCALAR ADDER
   ntm_scalar_adder #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_adder(
     // GLOBAL
@@ -1055,7 +1059,8 @@ module ntm_arithmetic_testbench;
 
   // SCALAR MULTIPLIER
   ntm_scalar_multiplier #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_multiplier(
     // GLOBAL
@@ -1075,7 +1080,8 @@ module ntm_arithmetic_testbench;
 
   // SCALAR INVERTER
   ntm_scalar_inverter #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_inverter(
     // GLOBAL
@@ -1094,7 +1100,8 @@ module ntm_arithmetic_testbench;
 
   // SCALAR DIVIDER
   ntm_scalar_divider #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_divider(
     // GLOBAL
@@ -1114,7 +1121,8 @@ module ntm_arithmetic_testbench;
 
   // SCALAR EXPONENTIATOR
   ntm_scalar_exponentiator #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_exponentiator(
     // GLOBAL
@@ -1134,7 +1142,8 @@ module ntm_arithmetic_testbench;
 
   // SCALAR LCM
   ntm_scalar_lcm #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_lcm(
     // GLOBAL
@@ -1154,7 +1163,8 @@ module ntm_arithmetic_testbench;
 
   // SCALAR GCD
   ntm_scalar_gcd #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_gcd(
     // GLOBAL
@@ -1178,7 +1188,8 @@ module ntm_arithmetic_testbench;
 
   // VECTOR MOD
   ntm_vector_mod #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_mod(
     // GLOBAL
@@ -1201,7 +1212,8 @@ module ntm_arithmetic_testbench;
 
   // VECTOR ADDER
   ntm_vector_adder #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_adder(
     // GLOBAL
@@ -1228,7 +1240,8 @@ module ntm_arithmetic_testbench;
 
   // VECTOR MULTIPLIER
   ntm_vector_multiplier #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_multiplier(
     // GLOBAL
@@ -1253,7 +1266,8 @@ module ntm_arithmetic_testbench;
 
   // VECTOR INVERTER
   ntm_vector_inverter #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_inverter(
     // GLOBAL
@@ -1276,7 +1290,8 @@ module ntm_arithmetic_testbench;
 
   // VECTOR DIVIDER
   ntm_vector_divider #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_divider(
     // GLOBAL
@@ -1301,7 +1316,8 @@ module ntm_arithmetic_testbench;
 
   // VECTOR EXPONENTIATOR
   ntm_vector_exponentiator #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_exponentiator(
     // GLOBAL
@@ -1326,7 +1342,8 @@ module ntm_arithmetic_testbench;
 
   // VECTOR LCM
   ntm_vector_lcm #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_lcm(
     // GLOBAL
@@ -1351,7 +1368,8 @@ module ntm_arithmetic_testbench;
 
   // VECTOR GCD
   ntm_vector_gcd #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_gcd(
     // GLOBAL
@@ -1380,7 +1398,8 @@ module ntm_arithmetic_testbench;
 
   // MATRIX MOD
   ntm_matrix_mod #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_mod(
     // GLOBAL
@@ -1406,7 +1425,8 @@ module ntm_arithmetic_testbench;
 
   // MATRIX ADDER
   ntm_matrix_adder #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_adder(
     // GLOBAL
@@ -1437,7 +1457,8 @@ module ntm_arithmetic_testbench;
 
   // MATRIX MULTIPLIER
   ntm_matrix_multiplier #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_multiplier(
     // GLOBAL
@@ -1466,7 +1487,8 @@ module ntm_arithmetic_testbench;
 
   // MATRIX INVERTER
   ntm_matrix_inverter #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_inverter(
     // GLOBAL
@@ -1492,7 +1514,8 @@ module ntm_arithmetic_testbench;
 
   // MATRIX DIVIDER
   ntm_matrix_divider #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_divider(
     // GLOBAL
@@ -1521,7 +1544,8 @@ module ntm_arithmetic_testbench;
 
   // MATRIX EXPONENTIATOR
   ntm_matrix_exponentiator #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_exponentiator(
     // GLOBAL
@@ -1550,7 +1574,8 @@ module ntm_arithmetic_testbench;
 
   // MATRIX LCM
   ntm_matrix_lcm #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_lcm(
     // GLOBAL
@@ -1579,7 +1604,8 @@ module ntm_arithmetic_testbench;
 
   // MATRIX GCD
   ntm_matrix_gcd #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_gcd(
     // GLOBAL

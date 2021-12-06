@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_scalar_softmax_function is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -104,7 +105,7 @@ architecture ntm_scalar_softmax_function_architecture of ntm_scalar_softmax_func
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Control Internal
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   -- SCALAR ADDER
   -- CONTROL
@@ -282,7 +283,8 @@ begin
   -- SCALAR ADDER
   scalar_adder : ntm_scalar_adder
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -305,7 +307,8 @@ begin
   -- SCALAR DIVIDER
   ntm_scalar_divider_i : ntm_scalar_divider
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -326,7 +329,8 @@ begin
   -- SCALAR EXPONENTIATOR
   scalar_exponentiator : ntm_scalar_exponentiator
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

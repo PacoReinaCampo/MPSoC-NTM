@@ -49,6 +49,7 @@ module ntm_function_testbench;
 
   // SYSTEM-SIZE
   parameter DATA_SIZE=512;
+  parameter INDEX_SIZE=512;
 
   parameter X=64;
   parameter Y=64;
@@ -703,6 +704,7 @@ module ntm_function_testbench;
   ntm_function_stimulus #(
     // SYSTEM-SIZE
     .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE),
 
     .X(X),
     .Y(Y),
@@ -1296,7 +1298,8 @@ module ntm_function_testbench;
 
   // SCALAR CONVOLUTION
   ntm_scalar_convolution_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_convolution_function(
     // GLOBAL
@@ -1320,7 +1323,8 @@ module ntm_function_testbench;
 
   // SCALAR COSINE SIMILARITY
   ntm_scalar_cosine_similarity_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_cosine_similarity_function(
     // GLOBAL
@@ -1344,7 +1348,8 @@ module ntm_function_testbench;
 
   // SCALAR DIFFERENTIATION
   ntm_scalar_differentiation_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_differentiation_function(
     // GLOBAL
@@ -1368,7 +1373,8 @@ module ntm_function_testbench;
 
   // SCALAR MULTIPLICATION
   ntm_scalar_multiplication_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_multiplication_function(
     // GLOBAL
@@ -1391,7 +1397,8 @@ module ntm_function_testbench;
 
   // SCALAR COSH
   ntm_scalar_cosh_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_cosh_function(
     // GLOBAL
@@ -1410,7 +1417,8 @@ module ntm_function_testbench;
 
   // SCALAR SINH
   ntm_scalar_sinh_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_sinh_function(
     // GLOBAL
@@ -1429,7 +1437,8 @@ module ntm_function_testbench;
 
   // SCALAR TANH
   ntm_scalar_tanh_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_tanh_function(
     // GLOBAL
@@ -1448,7 +1457,8 @@ module ntm_function_testbench;
 
   // SCALAR LOGISTIC
   ntm_scalar_logistic_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_logistic_function(
     // GLOBAL
@@ -1467,7 +1477,8 @@ module ntm_function_testbench;
 
   // SCALAR SOFTMAX
   ntm_scalar_softmax_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_softmax_function(
     // GLOBAL
@@ -1490,7 +1501,8 @@ module ntm_function_testbench;
 
   // SCALAR ONEPLUS
   ntm_scalar_oneplus_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_oneplus_function(
     // GLOBAL
@@ -1509,7 +1521,8 @@ module ntm_function_testbench;
 
   // SCALAR SUMMATION
   ntm_scalar_summation_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_summation_function(
     // GLOBAL
@@ -1536,7 +1549,8 @@ module ntm_function_testbench;
 
   // VECTOR CONVOLUTION
   ntm_vector_convolution_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_convolution_function(
     // GLOBAL
@@ -1565,7 +1579,8 @@ module ntm_function_testbench;
 
   // VECTOR COSINE SIMILARITY
   ntm_vector_cosine_similarity_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_cosine_similarity_function(
     // GLOBAL
@@ -1594,7 +1609,8 @@ module ntm_function_testbench;
 
   // VECTOR DIFFERENTIATION
   ntm_vector_differentiation_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_differentiation_function(
     // GLOBAL
@@ -1621,7 +1637,8 @@ module ntm_function_testbench;
 
   // VECTOR MULTIPLICATION
   ntm_vector_multiplication_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_multiplication_function(
     // GLOBAL
@@ -1647,7 +1664,8 @@ module ntm_function_testbench;
 
   // VECTOR COSH
   ntm_vector_cosh_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_cosh_function(
     // GLOBAL
@@ -1670,7 +1688,8 @@ module ntm_function_testbench;
 
   // VECTOR SINH
   ntm_vector_sinh_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_sinh_function(
     // GLOBAL
@@ -1693,7 +1712,8 @@ module ntm_function_testbench;
 
   // VECTOR TANH
   ntm_vector_tanh_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_tanh_function(
     // GLOBAL
@@ -1716,7 +1736,8 @@ module ntm_function_testbench;
 
   // VECTOR LOGISTIC
   ntm_vector_logistic_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_logistic_function(
     // GLOBAL
@@ -1739,7 +1760,8 @@ module ntm_function_testbench;
 
   // VECTOR SOFTMAX
   ntm_vector_softmax_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_softmax_function(
     // GLOBAL
@@ -1765,7 +1787,8 @@ module ntm_function_testbench;
 
   // VECTOR ONEPLUS
   ntm_vector_oneplus_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_oneplus_function(
     // GLOBAL
@@ -1788,7 +1811,8 @@ module ntm_function_testbench;
 
   // VECTOR SUMMATION
   ntm_vector_summation_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_summation_function(
     // GLOBAL
@@ -1818,7 +1842,8 @@ module ntm_function_testbench;
 
   // MATRIX CONVOLUTION
   ntm_matrix_convolution_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_convolution_function(
     // GLOBAL
@@ -1851,7 +1876,8 @@ module ntm_function_testbench;
 
   // MATRIX COSINE SIMILARITY
   ntm_matrix_cosine_similarity_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_cosine_similarity_function(
     // GLOBAL
@@ -1884,7 +1910,8 @@ module ntm_function_testbench;
 
   // MATRIX DIFFERENTIATION
   ntm_matrix_differentiation_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_differentiation_function(
     // GLOBAL
@@ -1914,7 +1941,8 @@ module ntm_function_testbench;
 
   // MATRIX MULTIPLICATION
   ntm_matrix_multiplication_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_multiplication_function(
     // GLOBAL
@@ -1943,7 +1971,8 @@ module ntm_function_testbench;
 
   // MATRIX COSH
   ntm_matrix_cosh_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_cosh_function(
     // GLOBAL
@@ -1969,7 +1998,8 @@ module ntm_function_testbench;
 
   // MATRIX SINH
   ntm_matrix_sinh_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_sinh_function(
     // GLOBAL
@@ -1995,7 +2025,8 @@ module ntm_function_testbench;
 
   // MATRIX TANH
   ntm_matrix_tanh_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_tanh_function(
     // GLOBAL
@@ -2021,7 +2052,8 @@ module ntm_function_testbench;
 
   // MATRIX LOGISTIC
   ntm_matrix_logistic_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_logistic_function(
     // GLOBAL
@@ -2047,7 +2079,8 @@ module ntm_function_testbench;
 
   // MATRIX SOFTMAX
   ntm_matrix_softmax_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_softmax_function(
     // GLOBAL
@@ -2076,7 +2109,8 @@ module ntm_function_testbench;
 
   // MATRIX ONEPLUS
   ntm_matrix_oneplus_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_oneplus_function(
     // GLOBAL
@@ -2102,7 +2136,8 @@ module ntm_function_testbench;
 
   // MATRIX SUMMATION
   ntm_matrix_summation_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_summation_function(
     // GLOBAL

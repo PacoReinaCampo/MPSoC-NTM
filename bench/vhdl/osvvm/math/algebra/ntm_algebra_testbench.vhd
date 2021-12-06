@@ -46,7 +46,8 @@ use work.ntm_algebra_pkg.all;
 entity ntm_algebra_testbench is
   generic (
     -- SYSTEM-SIZE
-    DATA_SIZE : integer := 512;
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -241,7 +242,8 @@ begin
   algebra_stimulus : ntm_algebra_stimulus
     generic map (
       -- SYSTEM-SIZE
-      DATA_SIZE => DATA_SIZE,
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE,
 
       X => X,
       Y => Y,
@@ -400,7 +402,8 @@ begin
   ntm_matrix_determinant_test : if (ENABLE_NTM_MATRIX_DETERMINANT_TEST) generate
     matrix_determinant : ntm_matrix_determinant
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -430,7 +433,8 @@ begin
   ntm_matrix_inversion_test : if (ENABLE_NTM_MATRIX_INVERSION_TEST) generate
     matrix_inversion : ntm_matrix_inversion
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -460,7 +464,8 @@ begin
   ntm_matrix_product_test : if (ENABLE_NTM_MATRIX_PRODUCT_TEST) generate
     matrix_product : ntm_matrix_product
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -495,7 +500,8 @@ begin
   ntm_matrix_rank_test : if (ENABLE_NTM_MATRIX_RANK_TEST) generate
     matrix_rank : ntm_matrix_rank
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -525,7 +531,8 @@ begin
   ntm_matrix_transpose_test : if (ENABLE_NTM_MATRIX_TRANSPOSE_TEST) generate
     matrix_transpose : ntm_matrix_transpose
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -555,7 +562,8 @@ begin
   ntm_scalar_product_test : if (ENABLE_NTM_SCALAR_PRODUCT_TEST) generate
     scalar_product : ntm_scalar_product
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -584,7 +592,8 @@ begin
   ntm_tensor_product_test : if (ENABLE_NTM_TENSOR_PRODUCT_TEST) generate
     tensor_product : ntm_tensor_product
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL

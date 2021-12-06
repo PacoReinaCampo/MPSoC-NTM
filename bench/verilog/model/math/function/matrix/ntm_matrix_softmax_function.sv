@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_matrix_softmax_function #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -90,9 +91,9 @@ module ntm_matrix_softmax_function #(
   reg [2:0] softmax_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE-1:0] index_matrix_loop;
-  reg [DATA_SIZE-1:0] index_vector_loop;
-  reg [DATA_SIZE-1:0] index_scalar_loop;
+  reg [INDEX_SIZE-1:0] index_matrix_loop;
+  reg [INDEX_SIZE-1:0] index_vector_loop;
+  reg [INDEX_SIZE-1:0] index_scalar_loop;
 
   // SOFTMAX
   // CONTROL
@@ -289,7 +290,8 @@ module ntm_matrix_softmax_function #(
 
   // SOFTMAX
   ntm_vector_softmax_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_softmax_function(
     // GLOBAL

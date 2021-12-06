@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_vector_convolution_function #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -89,8 +90,8 @@ module ntm_vector_convolution_function #(
   reg [1:0] convolution_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE-1:0] index_vector_loop;
-  reg [DATA_SIZE-1:0] index_scalar_loop;
+  reg [INDEX_SIZE-1:0] index_vector_loop;
+  reg [INDEX_SIZE-1:0] index_scalar_loop;
 
   reg data_a_in_vector_convolution_int;
   reg data_a_in_scalar_convolution_int;
@@ -280,7 +281,8 @@ module ntm_vector_convolution_function #(
 
   // CONVOLUTION
   ntm_scalar_convolution_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_convolution_function(
     // GLOBAL

@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_vector_mod is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -96,7 +97,7 @@ architecture ntm_vector_mod_architecture of ntm_vector_mod is
   signal mod_ctrl_fsm_int : mod_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   -- MOD
   -- CONTROL
@@ -209,7 +210,8 @@ begin
   -- MOD
   scalar_mod : ntm_scalar_mod
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_vector_tanh_function is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -96,7 +97,7 @@ architecture ntm_vector_tanh_function_architecture of ntm_vector_tanh_function i
   signal tanh_ctrl_fsm_int : tanh_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   -- ONEPLUS
   -- CONTROL
@@ -199,7 +200,8 @@ begin
   -- TANH
   scalar_tanh_function : ntm_scalar_tanh_function
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

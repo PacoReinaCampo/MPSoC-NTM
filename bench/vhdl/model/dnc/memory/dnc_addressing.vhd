@@ -47,7 +47,8 @@ use work.dnc_core_pkg.all;
 
 entity dnc_addressing is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -800,7 +801,8 @@ begin
   -- ALLOCATION WEIGHTING
   allocation_weighting : dnc_allocation_weighting
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -828,7 +830,8 @@ begin
   -- BACKWARD WEIGHTING
   backward_weighting : dnc_backward_weighting
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -868,7 +871,8 @@ begin
   -- FORWARD WEIGHTING
   forward_weighting : dnc_forward_weighting
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -908,7 +912,8 @@ begin
   -- MEMORY MATRIX
   memory_matrix : dnc_memory_matrix
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -949,7 +954,8 @@ begin
   -- MEMORY RETENTION VECTOR
   memory_retention_vector : dnc_memory_retention_vector
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -985,7 +991,8 @@ begin
   -- PRECEDENCE WEIGHTING
   precedence_weighting : dnc_precedence_weighting
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1015,7 +1022,8 @@ begin
   -- READ CONTENT WEIGHTING
   read_content_weighting : dnc_read_content_weighting
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1052,7 +1060,8 @@ begin
   -- READ VECTORS
   read_vectors : dnc_read_vectors
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1092,7 +1101,8 @@ begin
   -- READ WEIGHTING
   read_weighting : dnc_read_weighting
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1146,7 +1156,8 @@ begin
   -- TEMPORAL LINK MATRIX
   temporal_link_matrix : dnc_temporal_link_matrix
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1182,7 +1193,8 @@ begin
   -- USAGE VECTOR
   usage_vector : dnc_usage_vector
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1214,7 +1226,8 @@ begin
   -- WRITE CONTENT WEIGHTING
   write_content_weighting : dnc_write_content_weighting
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1249,7 +1262,8 @@ begin
   -- WRITE WEIGHTING
   write_weighting : dnc_write_weighting
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

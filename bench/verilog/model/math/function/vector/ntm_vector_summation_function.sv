@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_vector_summation_function #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -85,8 +86,8 @@ module ntm_vector_summation_function #(
   reg [1:0] summation_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE-1:0] index_vector_loop;
-  reg [DATA_SIZE-1:0] index_scalar_loop;
+  reg [INDEX_SIZE-1:0] index_vector_loop;
+  reg [INDEX_SIZE-1:0] index_scalar_loop;
 
   // MULTIPLICATION
   // CONTROL
@@ -234,7 +235,8 @@ module ntm_vector_summation_function #(
 
   // SUMMATION
   ntm_scalar_summation_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_summation_function(
     // GLOBAL

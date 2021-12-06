@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module dnc_write_key #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -79,7 +80,7 @@ module dnc_write_key #(
   reg write_key_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE-1:0] index_loop;
+  reg [INDEX_SIZE-1:0] index_loop;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

@@ -49,6 +49,7 @@ module ntm_convolutional_lstm_testbench;
 
   // SYSTEM-SIZE
   parameter DATA_SIZE=512;
+  parameter INDEX_SIZE=512;
 
   parameter X=64;
   parameter Y=64;
@@ -136,7 +137,8 @@ module ntm_convolutional_lstm_testbench;
 
   // STIMULUS
   ntm_convolutional_lstm_stimulus #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   convolutional_lstm_stimulus(
     // GLOBAL
@@ -210,7 +212,8 @@ module ntm_convolutional_lstm_testbench;
 
   // CONTROLLER
   ntm_controller #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   ntm_controller_i(
     // GLOBAL

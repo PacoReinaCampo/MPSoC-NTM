@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity dnc_allocation_gate is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -114,7 +115,8 @@ begin
   -- SCALAR LOGISTIC
   ntm_scalar_logistic_function_i : ntm_scalar_logistic_function
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_scalar_oneplus_function #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -97,7 +98,8 @@ module ntm_scalar_oneplus_function #(
 
   // SCALAR ADDER
   ntm_scalar_adder #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_adder(
     // GLOBAL
@@ -119,7 +121,8 @@ module ntm_scalar_oneplus_function #(
 
   // SCALAR EXPONENTIATOR
   ntm_scalar_exponentiator #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_exponentiator(
     // GLOBAL

@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity dnc_read_keys is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -99,8 +100,8 @@ architecture dnc_read_keys_architecture of dnc_read_keys is
   signal read_keys_ctrl_fsm_int : read_keys_ctrl_fsm;
 
   -- Internal Signals
-  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
 begin
 

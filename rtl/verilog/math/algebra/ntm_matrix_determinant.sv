@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_matrix_determinant #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -155,7 +156,8 @@ module ntm_matrix_determinant #(
 
   // SCALAR ADDER
   ntm_scalar_adder #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   ntm_scalar_adder_i(
     // GLOBAL
@@ -177,7 +179,8 @@ module ntm_matrix_determinant #(
 
   // SCALAR MULTIPLIER
   ntm_scalar_multiplier #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   ntm_scalar_multiplier_i(
     // GLOBAL

@@ -48,7 +48,8 @@ use work.ntm_lstm_controller_pkg.all;
 
 entity dnc_output_vector is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -139,8 +140,8 @@ architecture dnc_output_vector_architecture of dnc_output_vector is
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Control Internal
-  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal data_a_int_i_product : std_logic;
   signal data_a_int_j_product : std_logic;
@@ -555,7 +556,8 @@ begin
   -- MATRIX ADDER
   matrix_adder : ntm_matrix_adder
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -588,7 +590,8 @@ begin
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -621,7 +624,8 @@ begin
   -- VECTOR SUMMATION
   vector_summation_function : ntm_vector_summation_function
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

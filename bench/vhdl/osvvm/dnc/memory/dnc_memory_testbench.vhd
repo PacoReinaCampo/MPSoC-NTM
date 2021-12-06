@@ -47,7 +47,8 @@ use work.dnc_memory_pkg.all;
 entity dnc_memory_testbench is
   generic (
     -- SYSTEM-SIZE
-    DATA_SIZE : integer := 512;
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -487,7 +488,8 @@ begin
   memory_stimulus : dnc_memory_stimulus
     generic map (
       -- SYSTEM-SIZE
-      DATA_SIZE => DATA_SIZE,
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE,
 
       X => X,
       Y => Y,
@@ -556,7 +558,8 @@ begin
   -- ALLOCATION WEIGHTING
   allocation_weighting : dnc_allocation_weighting
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -584,7 +587,8 @@ begin
   -- BACKWARD WEIGHTING
   backward_weighting : dnc_backward_weighting
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -624,7 +628,8 @@ begin
   -- FORWARD WEIGHTING
   forward_weighting : dnc_forward_weighting
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -664,7 +669,8 @@ begin
   -- MEMORY MATRIX
   memory_matrix : dnc_memory_matrix
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -705,7 +711,8 @@ begin
   -- MEMORY RETENTION VECTOR
   memory_retention_vector : dnc_memory_retention_vector
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -741,7 +748,8 @@ begin
   -- PRECEDENCE WEIGHTING
   precedence_weighting : dnc_precedence_weighting
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -771,7 +779,8 @@ begin
   -- READ CONTENT WEIGHTING
   read_content_weighting : dnc_read_content_weighting
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -808,7 +817,8 @@ begin
   -- READ VECTORS
   read_vectors : dnc_read_vectors
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -848,7 +858,8 @@ begin
   -- READ WEIGHTING
   read_weighting : dnc_read_weighting
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -902,7 +913,8 @@ begin
   -- TEMPORAL LINK MATRIX
   temporal_link_matrix : dnc_temporal_link_matrix
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -938,7 +950,8 @@ begin
   -- USAGE VECTOR
   usage_vector : dnc_usage_vector
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -970,7 +983,8 @@ begin
   -- WRITE CONTENT WEIGHTING
   write_content_weighting : dnc_write_content_weighting
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1005,7 +1019,8 @@ begin
   -- WRITE WEIGHTING
   write_weighting : dnc_write_weighting
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1039,7 +1054,8 @@ begin
   -- ADDRESSING
   addressing : dnc_addressing
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

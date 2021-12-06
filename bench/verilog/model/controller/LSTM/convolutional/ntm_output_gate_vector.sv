@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_output_gate_vector #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -319,7 +320,8 @@ module ntm_output_gate_vector #(
 
   // VECTOR ADDER
   ntm_vector_adder #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_adder(
     // GLOBAL
@@ -346,7 +348,8 @@ module ntm_output_gate_vector #(
 
   // MATRIX CONVOLUTION
   ntm_matrix_convolution_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_convolution_function(
     // GLOBAL
@@ -379,7 +382,8 @@ module ntm_output_gate_vector #(
 
   // VECTOR LOGISTIC
   ntm_vector_logistic_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_logistic_function(
     // GLOBAL

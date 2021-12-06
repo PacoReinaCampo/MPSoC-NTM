@@ -48,7 +48,8 @@ use work.ntm_lstm_controller_pkg.all;
 
 entity ntm_top is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -153,7 +154,7 @@ architecture ntm_top_architecture of ntm_top is
   signal write_heads_ctrl_fsm_int : write_heads_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- CONTROLLER
@@ -773,7 +774,8 @@ begin
   -- CONTROLLER
   controller : ntm_controller
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -848,7 +850,8 @@ begin
   -- OUTPUT VECTOR
   output_vector : ntm_output_vector
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -903,7 +906,8 @@ begin
   -- INTERFACE VECTOR
   interface_vector : ntm_interface_vector
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -977,7 +981,8 @@ begin
   -- READING
   reading : ntm_reading
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1012,7 +1017,8 @@ begin
   -- WRITING
   writing : ntm_writing
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1046,7 +1052,8 @@ begin
   -- ERASING
   erasing : ntm_erasing
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1084,7 +1091,8 @@ begin
   -- ADDRESSING
   addressing : ntm_addressing
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

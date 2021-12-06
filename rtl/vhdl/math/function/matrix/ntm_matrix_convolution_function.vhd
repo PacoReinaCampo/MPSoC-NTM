@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_matrix_convolution_function is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -108,9 +109,9 @@ architecture ntm_matrix_convolution_function_architecture of ntm_matrix_convolut
   signal convolution_ctrl_fsm_int : convolution_ctrl_fsm;
 
   -- Internal Signals
-  signal index_matrix_loop : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal index_vector_loop : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal index_scalar_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_matrix_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_vector_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_scalar_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal data_a_in_matrix_convolution_int : std_logic;
   signal data_a_in_vector_convolution_int : std_logic;
@@ -396,7 +397,8 @@ begin
   -- CONVOLUTION
   vector_convolution_function : ntm_vector_convolution_function
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

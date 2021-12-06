@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module dnc_memory_matrix #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -180,7 +181,8 @@ module dnc_memory_matrix #(
 
   // MATRIX TRANSPOSE
   ntm_matrix_transpose #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_transpose(
     // GLOBAL
@@ -206,7 +208,8 @@ module dnc_memory_matrix #(
 
   // MATRIX PRODUCT
   ntm_matrix_product #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   matrix_product(
     // GLOBAL

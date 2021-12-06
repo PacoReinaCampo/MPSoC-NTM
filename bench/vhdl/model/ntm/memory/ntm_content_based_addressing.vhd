@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_content_based_addressing is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -113,7 +114,7 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   -- VECTOR MULTIPLIER
   -- CONTROL
@@ -305,7 +306,8 @@ begin
   -- VECTOR MULTIPLIER
   vector_multiplier : ntm_vector_multiplier
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -332,7 +334,8 @@ begin
   -- VECTOR EXPONENTIATOR
   vector_exponentiator : ntm_vector_exponentiator
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -359,7 +362,8 @@ begin
   -- VECTOR COSINE SIMILARITY
   vector_cosine_similarity_function : ntm_vector_cosine_similarity_function
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -390,7 +394,8 @@ begin
   -- VECTOR SOFTMAX
   vector_softmax_function : ntm_vector_softmax_function
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module dnc_top #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -144,8 +145,8 @@ module dnc_top #(
   reg [3:0] write_heads_ctrl_fsm_int;
 
   // Control Internal
-  reg [DATA_SIZE-1:0] index_i_loop;
-  reg [DATA_SIZE-1:0] index_j_loop;
+  reg [INDEX_SIZE-1:0] index_i_loop;
+  reg [INDEX_SIZE-1:0] index_j_loop;
 
   ///////////////////////////////////////////////////////////////////////
   // CONTROLLER
@@ -722,7 +723,8 @@ module dnc_top #(
 
   // CONTROLLER
   ntm_controller #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   ntm_controller_i(
     // GLOBAL
@@ -796,7 +798,8 @@ module dnc_top #(
 
   // OUTPUT VECTOR
   dnc_output_vector #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   output_vector_i(
     // GLOBAL
@@ -854,7 +857,8 @@ module dnc_top #(
 
   // FREE GATES
   dnc_free_gates #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   free_gates(
     // GLOBAL
@@ -876,7 +880,8 @@ module dnc_top #(
 
   // READ KEYS
   dnc_read_keys #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   read_keys(
     // GLOBAL
@@ -901,7 +906,8 @@ module dnc_top #(
 
   // READ MODES
   dnc_read_modes #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   read_modes(
     // GLOBAL
@@ -925,7 +931,8 @@ module dnc_top #(
 
   // READ STRENGTHS
   dnc_read_strengths #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   read_strengths(
     // GLOBAL
@@ -947,7 +954,8 @@ module dnc_top #(
 
   // READ INTERFACE VECTOR
   dnc_read_interface_vector #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   read_interface_vector(
     // GLOBAL
@@ -1026,7 +1034,8 @@ module dnc_top #(
 
   // ALLOCATION GATE
   dnc_allocation_gate #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   allocation_gate(
     // GLOBAL
@@ -1044,7 +1053,8 @@ module dnc_top #(
 
   // ERASE VECTOR
   dnc_erase_vector #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   erase_vector(
     // GLOBAL
@@ -1066,7 +1076,8 @@ module dnc_top #(
 
   // WRITE GATE
   dnc_write_gate #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   write_gate(
     // GLOBAL
@@ -1084,7 +1095,8 @@ module dnc_top #(
 
   // WRITE KEY
   dnc_write_key #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   write_key(
     // GLOBAL
@@ -1106,7 +1118,8 @@ module dnc_top #(
 
   // WRITE STRENGTH
   dnc_write_strength #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   write_strength(
     // GLOBAL
@@ -1124,7 +1137,8 @@ module dnc_top #(
 
   // WRITE VECTOR
   dnc_write_vector #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   write_vector(
     // GLOBAL
@@ -1146,7 +1160,8 @@ module dnc_top #(
 
   // WRITE INTERFACE VECTOR
   dnc_write_interface_vector #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   write_interface_vector(
     // GLOBAL
@@ -1232,7 +1247,8 @@ module dnc_top #(
 
   // ADDRESSING
   dnc_addressing #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   addressing(
     // GLOBAL

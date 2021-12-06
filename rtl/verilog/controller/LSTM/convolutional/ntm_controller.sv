@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_controller #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -403,9 +404,11 @@ module ntm_controller #(
   wire r_out_i_enable_output_gate_vector;
   wire r_out_k_enable_output_gate_vector;
 
-  wire u_in_enable_output_gate_vector;
+  wire u_in_l_enable_output_gate_vector;
+  wire u_in_p_enable_output_gate_vector;
 
-  wire u_out_enable_output_gate_vector;
+  wire u_out_l_enable_output_gate_vector;
+  wire u_out_p_enable_output_gate_vector;
 
   wire h_in_enable_output_gate_vector;
 
@@ -698,7 +701,8 @@ module ntm_controller #(
 
   // ACTIVATION GATE VECTOR
   ntm_activation_gate_vector #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   activation_gate_vector(
     // GLOBAL
@@ -768,7 +772,8 @@ module ntm_controller #(
 
   // ACTIVATION TRAINER
   ntm_activation_trainer #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   activation_trainer(
     // GLOBAL
@@ -835,7 +840,8 @@ module ntm_controller #(
 
   // INTPUT GATE VECTOR
   ntm_input_gate_vector #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   input_gate_vector(
     // GLOBAL
@@ -905,7 +911,8 @@ module ntm_controller #(
 
   // INPUT TRAINER
   ntm_input_trainer #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   input_trainer(
     // GLOBAL
@@ -972,7 +979,8 @@ module ntm_controller #(
 
   // OUTPUT GATE VECTOR
   ntm_output_gate_vector #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   output_gate_vector(
     // GLOBAL
@@ -1010,6 +1018,9 @@ module ntm_controller #(
     .U_IN_L_ENABLE(u_in_l_enable_output_gate_vector),
     .U_IN_P_ENABLE(u_in_p_enable_output_gate_vector),
 
+    .U_OUT_L_ENABLE(u_out_l_enable_output_gate_vector),
+    .U_OUT_P_ENABLE(u_out_p_enable_output_gate_vector),
+
     .H_IN_ENABLE(h_in_enable_output_gate_vector),
 
     .H_OUT_ENABLE(h_out_enable_output_gate_vector),
@@ -1039,7 +1050,8 @@ module ntm_controller #(
 
   // OUTPUT TRAINER
   ntm_output_trainer #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   output_trainer(
     // GLOBAL
@@ -1103,7 +1115,8 @@ module ntm_controller #(
 
   // FORGET GATE VECTOR
   ntm_forget_gate_vector #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   forget_gate_vector(
     // GLOBAL
@@ -1173,7 +1186,8 @@ module ntm_controller #(
 
   // FORGET TRAINER
   ntm_forget_trainer #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   forget_trainer(
     // GLOBAL
@@ -1237,7 +1251,8 @@ module ntm_controller #(
 
   // STATE GATE VECTOR
   ntm_state_gate_vector #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   state_gate_vector(
     // GLOBAL
@@ -1273,7 +1288,8 @@ module ntm_controller #(
 
   // HIDDEN GATE VECTOR
   ntm_hidden_gate_vector #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   hidden_gate_vector(
     // GLOBAL

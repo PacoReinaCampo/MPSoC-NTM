@@ -55,7 +55,8 @@ package ntm_convolutional_lstm_pkg is
   component ntm_convolutional_lstm_stimulus is
     generic (
       -- SYSTEM-SIZE
-      DATA_SIZE : integer := 512;
+      DATA_SIZE  : integer := 512;
+      INDEX_SIZE : integer := 512;
 
       X : integer := 64;
       Y : integer := 64;

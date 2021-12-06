@@ -49,6 +49,7 @@ package ntm_memory_pkg;
 
   // SYSTEM-SIZE
   parameter DATA_SIZE=512;
+  parameter INDEX_SIZE=512;
 
   parameter X=64;
   parameter Y=64;

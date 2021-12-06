@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_vector_logistic_function #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -82,7 +83,7 @@ module ntm_vector_logistic_function #(
   reg [1:0] logistic_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE-1:0] index_loop;
+  reg [INDEX_SIZE-1:0] index_loop;
 
   // ONEPLUS
   // CONTROL
@@ -179,7 +180,8 @@ module ntm_vector_logistic_function #(
 
   // LOGISTIC
   ntm_scalar_logistic_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_logistic_function(
     // GLOBAL

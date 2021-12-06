@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module dnc_allocation_weighting #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -137,12 +138,18 @@ module dnc_allocation_weighting #(
   // CONTROL
   wire start_sort_vector;
   wire ready_sort_vector;
+
   wire u_in_enable_sort_vector;
+
+  wire u_out_enable_sort_vector;
+
   wire phi_out_enable_sort_vector;
 
   // DATA
   wire [DATA_SIZE-1:0] size_n_in_sort_vector;
+
   wire [DATA_SIZE-1:0] u_in_sort_vector;
+
   wire [DATA_SIZE-1:0] phi_out_sort_vector;
 
   ///////////////////////////////////////////////////////////////////////
@@ -190,7 +197,8 @@ module dnc_allocation_weighting #(
 
   // VECTOR ADDER
   ntm_vector_adder #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_adder(
     // GLOBAL
@@ -215,7 +223,8 @@ module dnc_allocation_weighting #(
 
   // VECTOR MULTIPLIER
   ntm_vector_multiplier #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_multiplier(
     // GLOBAL
@@ -240,7 +249,8 @@ module dnc_allocation_weighting #(
 
   // VECTOR MULTIPLICATION
   ntm_vector_multiplication_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_multiplication_function(
     // GLOBAL
@@ -266,7 +276,8 @@ module dnc_allocation_weighting #(
 
   // VECTOR SORT
   dnc_sort_vector #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   sort_vector(
     // GLOBAL
@@ -278,11 +289,16 @@ module dnc_allocation_weighting #(
     .READY(ready_sort_vector),
 
     .U_IN_ENABLE(u_in_enable_sort_vector),
+
+    .U_OUT_ENABLE(u_out_enable_sort_vector),
+
     .PHI_OUT_ENABLE(phi_out_enable_sort_vector),
 
     // DATA
     .SIZE_N_IN(size_n_in_sort_vector),
+
     .U_IN(u_in_sort_vector),
+
     .PHI_OUT(phi_out_sort_vector)
   );
 

@@ -47,7 +47,8 @@ use work.ntm_core_pkg.all;
 
 entity ntm_addressing is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -477,7 +478,8 @@ begin
   -- VECTOR CONTENT BASED ADDRESSING
   content_based_addressing : ntm_content_based_addressing
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -514,7 +516,8 @@ begin
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -543,7 +546,8 @@ begin
   -- VECTOR MULTIPLIER
   vector_multiplier : ntm_vector_multiplier
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -570,7 +574,8 @@ begin
   -- VECTOR DIVIDER
   vector_divider : ntm_vector_divider
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -597,7 +602,8 @@ begin
   -- VECTOR EXPONENTIATOR
   vector_exponentiator : ntm_vector_exponentiator
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -624,7 +630,8 @@ begin
   -- VECTOR SUMMATION
   vector_summation_function : ntm_vector_summation_function
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -652,7 +659,8 @@ begin
   -- VECTOR CONVOLUTION
   vector_convolution_function : ntm_vector_convolution_function
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

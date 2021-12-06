@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_matrix_multiplier #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -89,8 +90,8 @@ module ntm_matrix_multiplier #(
   reg [1:0] multiplier_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE-1:0] index_i_loop;
-  reg [DATA_SIZE-1:0] index_j_loop;
+  reg [INDEX_SIZE-1:0] index_i_loop;
+  reg [INDEX_SIZE-1:0] index_j_loop;
 
   reg data_a_in_i_multiplier_int;
   reg data_a_in_j_multiplier_int;
@@ -286,7 +287,8 @@ module ntm_matrix_multiplier #(
 
   // MULTIPLIER
   ntm_vector_multiplier #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_multiplier(
     // GLOBAL

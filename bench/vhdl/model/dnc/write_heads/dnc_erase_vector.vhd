@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity dnc_erase_vector is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -130,7 +131,8 @@ begin
   -- VECTOR LOGISTIC
   vector_logistic_function : ntm_vector_logistic_function
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_scalar_cosine_similarity_function #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -116,7 +117,8 @@ module ntm_scalar_cosine_similarity_function #(
 
   // SCALAR MULTIPLIER
   ntm_scalar_multiplier #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_multiplier(
     // GLOBAL
@@ -136,7 +138,8 @@ module ntm_scalar_cosine_similarity_function #(
 
   // SCALAR DIVIDER
   ntm_scalar_divider #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_divider(
     // GLOBAL
@@ -156,7 +159,8 @@ module ntm_scalar_cosine_similarity_function #(
 
   // SCALAR PRODUCT
   ntm_scalar_product #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_product(
     // GLOBAL

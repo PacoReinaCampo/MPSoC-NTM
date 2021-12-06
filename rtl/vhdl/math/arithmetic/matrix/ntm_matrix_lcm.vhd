@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_matrix_lcm is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -103,8 +104,8 @@ architecture ntm_matrix_lcm_architecture of ntm_matrix_lcm is
   signal lcm_ctrl_fsm_int : lcm_ctrl_fsm;
 
   -- Internal Signals
-  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal data_a_in_i_lcm_int : std_logic;
   signal data_a_in_j_lcm_int : std_logic;
@@ -332,7 +333,8 @@ begin
   -- LCM
   vector_lcm : ntm_vector_lcm
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

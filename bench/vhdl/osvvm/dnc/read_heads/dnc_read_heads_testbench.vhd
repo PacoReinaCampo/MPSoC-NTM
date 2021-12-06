@@ -47,7 +47,8 @@ use work.dnc_read_heads_pkg.all;
 entity dnc_read_heads_testbench is
   generic (
     -- SYSTEM-SIZE
-    DATA_SIZE : integer := 512;
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -146,7 +147,8 @@ begin
   read_heads_stimulus : dnc_read_heads_stimulus
     generic map (
       -- SYSTEM-SIZE
-      DATA_SIZE => DATA_SIZE,
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE,
 
       X => X,
       Y => Y,
@@ -232,7 +234,8 @@ begin
   -- FREE GATES
   free_gates : dnc_free_gates
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -258,7 +261,8 @@ begin
   -- READ KEYS
   read_keys : dnc_read_keys
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -287,7 +291,8 @@ begin
   -- READ MODES
   read_modes : dnc_read_modes
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -315,7 +320,8 @@ begin
   -- READ STRENGTHS
   read_strengths : dnc_read_strengths
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

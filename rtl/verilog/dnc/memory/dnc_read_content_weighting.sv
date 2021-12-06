@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module dnc_read_content_weighting #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -147,7 +148,8 @@ module dnc_read_content_weighting #(
 
   // VECTOR CONTENT BASED ADDRESSING
   dnc_content_based_addressing #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   dnc_content_based_addressing_i(
     // GLOBAL
@@ -159,16 +161,25 @@ module dnc_read_content_weighting #(
     .READY(ready_vector_content_based_addressing),
 
     .K_IN_ENABLE(k_in_enable_vector_content_based_addressing),
+
+    .K_OUT_ENABLE(k_out_enable_vector_content_based_addressing),
+
     .M_IN_I_ENABLE(m_in_i_enable_vector_content_based_addressing),
     .M_IN_J_ENABLE(m_in_j_enable_vector_content_based_addressing),
+
+    .M_OUT_I_ENABLE(m_out_i_enable_vector_content_based_addressing),
+    .M_OUT_J_ENABLE(m_out_j_enable_vector_content_based_addressing),
+
     .C_OUT_ENABLE(c_out_enable_vector_content_based_addressing),
 
     // DATA
     .SIZE_I_IN(size_i_in_vector_content_based_addressing),
     .SIZE_J_IN(size_j_in_vector_content_based_addressing),
+
     .K_IN(k_in_vector_content_based_addressing),
     .M_IN(m_in_vector_content_based_addressing),
     .BETA_IN(beta_in_vector_content_based_addressing),
+
     .C_OUT(c_out_vector_content_based_addressing)
   );
 

@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_matrix_cosh_function is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -99,8 +100,8 @@ architecture ntm_matrix_cosh_function_architecture of ntm_matrix_cosh_function i
   signal cosh_ctrl_fsm_int : cosh_ctrl_fsm;
 
   -- Internal Signals
-  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   -- TANH
   -- CONTROL
@@ -255,7 +256,8 @@ begin
   -- COSH
   vector_cosh_function : ntm_vector_cosh_function
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

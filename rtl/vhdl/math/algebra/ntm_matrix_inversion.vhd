@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_matrix_inversion is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -169,7 +170,8 @@ begin
   -- SCALAR ADDER
   ntm_scalar_adder_i : ntm_scalar_adder
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -192,7 +194,8 @@ begin
   -- SCALAR MULTIPLIER
   ntm_scalar_multiplier_i : ntm_scalar_multiplier
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

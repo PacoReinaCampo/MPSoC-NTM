@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module dnc_write_vector #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -80,7 +81,7 @@ module dnc_write_vector #(
   reg write_vector_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE-1:0] index_loop;
+  reg [INDEX_SIZE-1:0] index_loop;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

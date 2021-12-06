@@ -47,7 +47,8 @@ use work.ntm_lstm_controller_pkg.all;
 
 entity ntm_controller is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -152,7 +153,7 @@ architecture ntm_controller_architecture of ntm_controller is
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Control Internal
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   -- ACTIVATION GATE VECTOR
   -- CONTROL
@@ -1091,7 +1092,8 @@ begin
   -- ACTIVATION GATE VECTOR
   activation_gate_vector : ntm_activation_gate_vector
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1165,7 +1167,8 @@ begin
   -- ACTIVATION TRAINER
   activation_trainer : ntm_activation_trainer
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1233,7 +1236,8 @@ begin
   -- INTPUT GATE VECTOR
   input_gate_vector : ntm_input_gate_vector
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1307,7 +1311,8 @@ begin
   -- INPUT TRAINER
   input_trainer : ntm_input_trainer
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1375,7 +1380,8 @@ begin
   -- OUTPUT GATE VECTOR
   output_gate_vector : ntm_output_gate_vector
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1449,7 +1455,8 @@ begin
   -- OUTPUT TRAINER
   output_trainer : ntm_output_trainer
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1514,7 +1521,8 @@ begin
   -- FORGET GATE VECTOR
   forget_gate_vector : ntm_forget_gate_vector
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1588,7 +1596,8 @@ begin
   -- FORGET TRAINER
   forget_trainer : ntm_forget_trainer
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1653,7 +1662,8 @@ begin
   -- STATE GATE VECTOR
   state_gate_vector : ntm_state_gate_vector
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1690,7 +1700,8 @@ begin
   -- HIDDEN GATE VECTOR
   hidden_gate_vector : ntm_hidden_gate_vector
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

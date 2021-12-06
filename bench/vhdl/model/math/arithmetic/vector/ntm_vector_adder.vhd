@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_vector_adder is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -100,7 +101,7 @@ architecture ntm_vector_adder_architecture of ntm_vector_adder is
   signal adder_ctrl_fsm_int : adder_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal data_a_in_adder_int : std_logic;
   signal data_b_in_adder_int : std_logic;
@@ -247,7 +248,8 @@ begin
   -- ADDER
   scalar_adder : ntm_scalar_adder
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

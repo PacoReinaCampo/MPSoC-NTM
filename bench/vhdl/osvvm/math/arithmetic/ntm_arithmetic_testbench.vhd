@@ -46,7 +46,8 @@ use work.ntm_arithmetic_pkg.all;
 entity ntm_arithmetic_testbench is
   generic (
     -- SYSTEM-SIZE
-    DATA_SIZE : integer := 512;
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -558,7 +559,8 @@ begin
   arithmetic_stimulus : ntm_arithmetic_stimulus
     generic map (
       -- SYSTEM-SIZE
-      DATA_SIZE => DATA_SIZE,
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE,
 
       X => X,
       Y => Y,
@@ -979,7 +981,8 @@ begin
   ntm_scalar_mod_test : if (ENABLE_NTM_SCALAR_MOD_TEST) generate
     scalar_mod : ntm_scalar_mod
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1001,7 +1004,8 @@ begin
   ntm_scalar_adder_test : if (ENABLE_NTM_SCALAR_ADDER_TEST) generate
     scalar_adder : ntm_scalar_adder
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1026,7 +1030,8 @@ begin
   ntm_scalar_multiplier_test : if (ENABLE_NTM_SCALAR_MULTIPLIER_TEST) generate
     scalar_multiplier : ntm_scalar_multiplier
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1049,7 +1054,8 @@ begin
   ntm_scalar_inverter_test : if (ENABLE_NTM_SCALAR_INVERTER_TEST) generate
     scalar_inverter : ntm_scalar_inverter
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1071,7 +1077,8 @@ begin
   ntm_scalar_divider_test : if (ENABLE_NTM_SCALAR_DIVIDER_TEST) generate
     scalar_divider : ntm_scalar_divider
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1094,7 +1101,8 @@ begin
   ntm_scalar_exponentiator_test : if (ENABLE_NTM_SCALAR_EXPONENTIATOR_TEST) generate
     scalar_exponentiator : ntm_scalar_exponentiator
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1117,7 +1125,8 @@ begin
   ntm_scalar_lcm_test : if (ENABLE_NTM_SCALAR_LCM_TEST) generate
     scalar_lcm : ntm_scalar_lcm
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1140,7 +1149,8 @@ begin
   ntm_scalar_gcd_test : if (ENABLE_NTM_SCALAR_GCD_TEST) generate
     scalar_gcd : ntm_scalar_gcd
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1167,7 +1177,8 @@ begin
   ntm_vector_mod_test : if (ENABLE_NTM_VECTOR_MOD_TEST) generate
     vector_mod : ntm_vector_mod
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1194,7 +1205,8 @@ begin
   ntm_vector_adder_test : if (ENABLE_NTM_VECTOR_ADDER_TEST) generate
     vector_adder : ntm_vector_adder
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1225,7 +1237,8 @@ begin
   ntm_vector_multiplier_test : if (ENABLE_NTM_VECTOR_MULTIPLIER_TEST) generate
     vector_multiplier : ntm_vector_multiplier
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1254,7 +1267,8 @@ begin
   ntm_vector_inverter_test : if (ENABLE_NTM_VECTOR_INVERTER_TEST) generate
     vector_inverter : ntm_vector_inverter
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1281,7 +1295,8 @@ begin
   ntm_vector_divider_test : if (ENABLE_NTM_VECTOR_DIVIDER_TEST) generate
     vector_divider : ntm_vector_divider
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1310,7 +1325,8 @@ begin
   ntm_vector_exponentiator_test : if (ENABLE_NTM_VECTOR_EXPONENTIATOR_TEST) generate
     vector_exponentiator : ntm_vector_exponentiator
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1339,7 +1355,8 @@ begin
   ntm_vector_lcm_test : if (ENABLE_NTM_VECTOR_LCM_TEST) generate
     vector_lcm : ntm_vector_lcm
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1368,7 +1385,8 @@ begin
   ntm_vector_gcd_test : if (ENABLE_NTM_VECTOR_GCD_TEST) generate
     vector_gcd : ntm_vector_gcd
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1401,7 +1419,8 @@ begin
   ntm_matrix_mod_test : if (ENABLE_NTM_MATRIX_MOD_TEST) generate
     matrix_mod : ntm_matrix_mod
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1431,7 +1450,8 @@ begin
   ntm_matrix_adder_test : if (ENABLE_NTM_MATRIX_ADDER_TEST) generate
     matrix_adder : ntm_matrix_adder
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1466,7 +1486,8 @@ begin
   ntm_matrix_multiplier_test : if (ENABLE_NTM_MATRIX_MULTIPLIER_TEST) generate
     matrix_multiplier : ntm_matrix_multiplier
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1499,7 +1520,8 @@ begin
   ntm_matrix_inverter_test : if (ENABLE_NTM_MATRIX_INVERTER_TEST) generate
     matrix_inverter : ntm_matrix_inverter
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1529,7 +1551,8 @@ begin
   ntm_matrix_divider_test : if (ENABLE_NTM_MATRIX_DIVIDER_TEST) generate
     matrix_divider : ntm_matrix_divider
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1562,7 +1585,8 @@ begin
   ntm_matrix_exponentiator_test : if (ENABLE_NTM_MATRIX_EXPONENTIATOR_TEST) generate
     matrix_exponentiator : ntm_matrix_exponentiator
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1595,7 +1619,8 @@ begin
   ntm_matrix_lcm_test : if (ENABLE_NTM_MATRIX_LCM_TEST) generate
     matrix_lcm : ntm_matrix_lcm
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -1628,7 +1653,8 @@ begin
   ntm_matrix_gcd_test : if (ENABLE_NTM_MATRIX_GCD_TEST) generate
     matrix_gcd : ntm_matrix_gcd
       generic map (
-        DATA_SIZE => DATA_SIZE
+        DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL

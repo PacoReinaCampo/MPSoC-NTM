@@ -47,7 +47,8 @@ use work.dnc_core_pkg.all;
 
 entity dnc_read_content_weighting is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -162,7 +163,8 @@ begin
   -- VECTOR CONTENT BASED ADDRESSING
   dnc_content_based_addressing_i : dnc_content_based_addressing
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

@@ -132,7 +132,8 @@ begin
   ntm_standard_lstm_stimulus_i : ntm_standard_lstm_stimulus
     generic map (
       -- SYSTEM-SIZE
-      DATA_SIZE => DATA_SIZE,
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE,
 
       X => X,
       Y => Y,
@@ -214,7 +215,8 @@ begin
   -- CONTROLLER
   ntm_controller_i : ntm_controller
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

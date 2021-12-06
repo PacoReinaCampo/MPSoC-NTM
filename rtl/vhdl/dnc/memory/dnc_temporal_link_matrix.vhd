@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity dnc_temporal_link_matrix is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -110,8 +111,8 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Control Internal
-  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   -- Data Internal
   signal data_int_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -240,7 +241,8 @@ begin
   -- SCALAR ADDER
   scalar_adder : ntm_scalar_adder
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -263,7 +265,8 @@ begin
   -- SCALAR MULTIPLIER
   scalar_multiplier : ntm_scalar_multiplier
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

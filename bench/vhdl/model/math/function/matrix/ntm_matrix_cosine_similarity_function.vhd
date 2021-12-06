@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_matrix_cosine_similarity_function is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -108,9 +109,9 @@ architecture ntm_matrix_cosine_similarity_function_architecture of ntm_matrix_co
   signal cosine_similarity_ctrl_fsm_int : cosine_similarity_ctrl_fsm;
 
   -- Internal Signals
-  signal index_matrix_loop : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal index_vector_loop : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal index_scalar_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_matrix_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_vector_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_scalar_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal data_a_in_matrix_cosine_similarity_int : std_logic;
   signal data_a_in_vector_cosine_similarity_int : std_logic;
@@ -396,7 +397,8 @@ begin
   -- COSINE SIMILARITY
   vector_cosine_similarity_function : ntm_vector_cosine_similarity_function
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

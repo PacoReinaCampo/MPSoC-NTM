@@ -48,7 +48,8 @@ use work.ntm_lstm_controller_pkg.all;
 
 entity dnc_top is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -165,8 +166,8 @@ architecture dnc_top_architecture of dnc_top is
   signal write_heads_ctrl_fsm_int : write_heads_ctrl_fsm;
 
   -- Control Internal
-  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- CONTROLLER
@@ -1044,7 +1045,8 @@ begin
   -- CONTROLLER
   ntm_controller_i : ntm_controller
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1119,7 +1121,8 @@ begin
   -- OUTPUT VECTOR
   output_vector_i : dnc_output_vector
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1178,7 +1181,8 @@ begin
   -- FREE GATES
   free_gates : dnc_free_gates
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1204,7 +1208,8 @@ begin
   -- READ KEYS
   read_keys : dnc_read_keys
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1233,7 +1238,8 @@ begin
   -- READ MODES
   read_modes : dnc_read_modes
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1261,7 +1267,8 @@ begin
   -- READ STRENGTHS
   read_strengths : dnc_read_strengths
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1286,7 +1293,8 @@ begin
   -- READ INTERFACE VECTOR
   read_interface_vector : dnc_read_interface_vector
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1366,7 +1374,8 @@ begin
   -- ALLOCATION GATE
   allocation_gate : dnc_allocation_gate
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1386,7 +1395,8 @@ begin
   -- ERASE VECTOR
   erase_vector : dnc_erase_vector
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1412,7 +1422,8 @@ begin
   -- WRITE GATE
   write_gate : dnc_write_gate
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1432,7 +1443,8 @@ begin
   -- WRITE KEY
   write_key : dnc_write_key
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1458,7 +1470,8 @@ begin
   -- WRITE STRENGTH
   write_strength : dnc_write_strength
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1478,7 +1491,8 @@ begin
   -- WRITE VECTOR
   write_vector : dnc_write_vector
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1504,7 +1518,8 @@ begin
   -- WRITE INTERFACE VECTOR
   write_interface_vector : dnc_write_interface_vector
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -1591,7 +1606,8 @@ begin
   -- ADDRESSING
   addressing : dnc_addressing
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

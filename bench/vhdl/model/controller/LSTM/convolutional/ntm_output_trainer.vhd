@@ -47,7 +47,8 @@ use work.ntm_lstm_controller_pkg.all;
 
 entity ntm_output_trainer is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -695,7 +696,8 @@ begin
   -- VECTOR SUMMATION
   vector_summation_function : ntm_vector_summation_function
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -723,7 +725,8 @@ begin
   -- VECTOR MULTIPLIER
   vector_multiplier : ntm_vector_multiplier
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -750,7 +753,8 @@ begin
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -779,7 +783,8 @@ begin
   -- VECTOR DIFFERENTIATION
   vector_differentiation_function : ntm_vector_differentiation_function
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -808,7 +813,8 @@ begin
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

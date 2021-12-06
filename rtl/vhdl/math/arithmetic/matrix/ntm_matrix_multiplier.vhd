@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_matrix_multiplier is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -103,8 +104,8 @@ architecture ntm_matrix_multiplier_architecture of ntm_matrix_multiplier is
   signal multiplier_ctrl_fsm_int : multiplier_ctrl_fsm;
 
   -- Internal Signals
-  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal data_a_in_i_multiplier_int : std_logic;
   signal data_a_in_j_multiplier_int : std_logic;
@@ -332,7 +333,8 @@ begin
   -- MULTIPLIER
   vector_multiplier : ntm_vector_multiplier
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

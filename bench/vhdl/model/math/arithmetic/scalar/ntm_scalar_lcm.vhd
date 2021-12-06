@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_scalar_lcm is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL

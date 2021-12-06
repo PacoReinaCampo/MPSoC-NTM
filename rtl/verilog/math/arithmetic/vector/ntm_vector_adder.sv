@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_vector_adder #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -86,7 +87,7 @@ module ntm_vector_adder #(
   reg [1:0] adder_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE-1:0] index_loop;
+  reg [INDEX_SIZE-1:0] index_loop;
 
   reg data_a_in_adder_int;
   reg data_b_in_adder_int;
@@ -210,7 +211,8 @@ module ntm_vector_adder #(
 
   // ADDER
   ntm_scalar_adder #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   scalar_adder(
     // GLOBAL

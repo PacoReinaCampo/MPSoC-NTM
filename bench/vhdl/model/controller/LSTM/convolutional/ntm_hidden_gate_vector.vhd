@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_hidden_gate_vector is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -103,7 +104,7 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Control Internal
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   -- VECTOR MULTIPLIER
   -- CONTROL
@@ -264,7 +265,8 @@ begin
   -- VECTOR MULTIPLIER
   vector_multiplier : ntm_vector_multiplier
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -291,7 +293,8 @@ begin
   -- VECTOR TANH
   vector_tanh_function : ntm_vector_tanh_function
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity dnc_write_key is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -96,7 +97,7 @@ architecture dnc_write_key_architecture of dnc_write_key is
   signal write_key_ctrl_fsm_int : write_key_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
 begin
 

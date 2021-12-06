@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module dnc_read_keys #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -83,8 +84,8 @@ module dnc_read_keys #(
   reg read_keys_ctrl_fsm_int;
   
   // Internal Signals
-  reg [DATA_SIZE-1:0] index_i_loop;
-  reg [DATA_SIZE-1:0] index_j_loop;
+  reg [INDEX_SIZE-1:0] index_i_loop;
+  reg [INDEX_SIZE-1:0] index_j_loop;
 
   ///////////////////////////////////////////////////////////////////////
   // Body

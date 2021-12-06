@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_scalar_multiplication_function #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
   // GLOBAL
@@ -82,7 +83,7 @@ module ntm_scalar_multiplication_function #(
   reg [1:0] multiplication_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE-1:0] index_loop;
+  reg [INDEX_SIZE-1:0] index_loop;
 
   // SCALAR MULTIPLIER
   // CONTROL
@@ -180,7 +181,8 @@ module ntm_scalar_multiplication_function #(
 
   // SCALAR MULTIPLIER
   ntm_scalar_multiplier #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   ntm_scalar_multiplier_i(
     // GLOBAL

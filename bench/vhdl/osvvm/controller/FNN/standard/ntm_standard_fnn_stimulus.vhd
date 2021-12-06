@@ -47,7 +47,8 @@ use work.ntm_math_pkg.all;
 entity ntm_standard_fnn_stimulus is
   generic (
     -- SYSTEM-SIZE
-    DATA_SIZE : integer := 512;
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512;
 
     X : integer := 64;
     Y : integer := 64;

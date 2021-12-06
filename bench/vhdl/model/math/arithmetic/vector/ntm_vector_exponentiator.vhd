@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_vector_exponentiator is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -98,7 +99,7 @@ architecture ntm_vector_exponentiator_architecture of ntm_vector_exponentiator i
   signal exponentiator_ctrl_fsm_int : exponentiator_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal data_a_in_exponentiator_int : std_logic;
   signal data_b_in_exponentiator_int : std_logic;
@@ -239,7 +240,8 @@ begin
   -- EXPONENTIATOR
   scalar_exponentiator : ntm_scalar_exponentiator
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

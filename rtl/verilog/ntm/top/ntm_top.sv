@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_top #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -134,7 +135,7 @@ module ntm_top #(
   reg [1:0] write_heads_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE-1:0] index_loop;
+  reg [INDEX_SIZE-1:0] index_loop;
 
   ///////////////////////////////////////////////////////////////////////
   // CONTROLLER
@@ -535,7 +536,8 @@ module ntm_top #(
 
   // CONTROLLER
   ntm_controller #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   ntm_controller_i(
     // GLOBAL
@@ -609,7 +611,8 @@ module ntm_top #(
 
   // OUTPUT VECTOR
   ntm_output_vector #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   output_vector_i(
     // GLOBAL
@@ -663,7 +666,8 @@ module ntm_top #(
 
   // INTERFACE VECTOR
   ntm_interface_vector #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   ntm_interface_vector_i(
     // GLOBAL
@@ -735,7 +739,8 @@ module ntm_top #(
 
   // READING
   ntm_reading #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   reading(
     // GLOBAL
@@ -770,7 +775,8 @@ module ntm_top #(
 
   // WRITING
   ntm_writing #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   writing(
     // GLOBAL
@@ -804,7 +810,8 @@ module ntm_top #(
 
   // ERASING
   ntm_erasing #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   erasing(
     // GLOBAL
@@ -842,7 +849,8 @@ module ntm_top #(
 
   // ADDRESSING
   ntm_addressing #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   addressing(
     // GLOBAL

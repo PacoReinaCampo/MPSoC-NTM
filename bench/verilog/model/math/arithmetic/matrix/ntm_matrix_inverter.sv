@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_matrix_inverter #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -86,8 +87,8 @@ module ntm_matrix_inverter #(
   reg [1:0] inverter_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE-1:0] index_i_loop;
-  reg [DATA_SIZE-1:0] index_j_loop;
+  reg [INDEX_SIZE-1:0] index_i_loop;
+  reg [INDEX_SIZE-1:0] index_j_loop;
 
   reg data_in_i_inverter_int;
   reg data_in_j_inverter_int;
@@ -246,7 +247,8 @@ module ntm_matrix_inverter #(
 
   // INVERTER
   ntm_vector_inverter #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_inverter(
     // GLOBAL

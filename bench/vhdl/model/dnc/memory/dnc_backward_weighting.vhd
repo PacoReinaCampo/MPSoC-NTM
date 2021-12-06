@@ -46,7 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity dnc_backward_weighting is
   generic (
-    DATA_SIZE : integer := 512
+    DATA_SIZE  : integer := 512;
+    INDEX_SIZE : integer := 512
     );
   port (
     -- GLOBAL
@@ -116,8 +117,8 @@ architecture dnc_backward_weighting_architecture of dnc_backward_weighting is
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Control Internal
-  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   -- MATRIX TRANSPOSE
   -- CONTROL
@@ -299,7 +300,8 @@ begin
   -- MATRIX TRANSPOSE
   matrix_transpose : ntm_matrix_transpose
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL
@@ -327,7 +329,8 @@ begin
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
     generic map (
-      DATA_SIZE => DATA_SIZE
+      DATA_SIZE  => DATA_SIZE,
+      INDEX_SIZE => INDEX_SIZE
       )
     port map (
       -- GLOBAL

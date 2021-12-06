@@ -38,7 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_matrix_tanh_function #(
-  parameter DATA_SIZE=512
+  parameter DATA_SIZE=512,
+  parameter INDEX_SIZE=512
 )
   (
     // GLOBAL
@@ -86,8 +87,8 @@ module ntm_matrix_tanh_function #(
   reg [1:0] tanh_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE-1:0] index_i_loop;
-  reg [DATA_SIZE-1:0] index_j_loop;
+  reg [INDEX_SIZE-1:0] index_i_loop;
+  reg [INDEX_SIZE-1:0] index_j_loop;
 
   // TANH
   // CONTROL
@@ -234,7 +235,8 @@ module ntm_matrix_tanh_function #(
 
   // TANH
   ntm_vector_tanh_function #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .INDEX_SIZE(INDEX_SIZE)
   )
   vector_tanh_function(
     // GLOBAL
