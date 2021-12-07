@@ -91,9 +91,17 @@ architecture ntm_tensor_product_architecture of ntm_tensor_product is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    VECTOR_ADDER_STATE,                 -- STEP 1
-    VECTOR_MULTIPLIER_STATE,            -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    TENSOR_INITIAL_I_STATE,             -- STEP 1
+    TENSOR_INITIAL_J_STATE,             -- STEP 2
+    TENSOR_INITIAL_K_STATE,             -- STEP 3
+    TENSOR_INPUT_I_STATE,               -- STEP 4
+    TENSOR_INPUT_J_STATE,               -- STEP 5
+    TENSOR_INPUT_K_STATE,               -- STEP 6
+    VECTOR_MULTIPLIER_STATE,            -- STEP 7
+    SCALAR_ADDER_STATE,                 -- STEP 8
+    TENSOR_UPDATE_I_STATE,              -- STEP 9
+    TENSOR_UPDATE_J_STATE,              -- STEP 10
+    TENSOR_UPDATE_K_STATE               -- STEP 11
     );
 
   -----------------------------------------------------------------------
@@ -119,6 +127,11 @@ architecture ntm_tensor_product_architecture of ntm_tensor_product is
 
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+
+  -- Internal Signals
+  signal index_i_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_k_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   -- SCALAR ADDER
   -- CONTROL
@@ -171,14 +184,23 @@ begin
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            controller_ctrl_fsm_int <= TENSOR_INITIAL_I_STATE;
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
+        when TENSOR_INITIAL_I_STATE =>  -- STEP 1
+        when TENSOR_INITIAL_J_STATE =>  -- STEP 2
+        when TENSOR_INITIAL_K_STATE =>  -- STEP 3
 
-        when VECTOR_ADDER_STATE =>  -- STEP 2
+        when TENSOR_INPUT_I_STATE =>  -- STEP 4
+        when TENSOR_INPUT_J_STATE =>  -- STEP 5
+        when TENSOR_INPUT_K_STATE =>  -- STEP 6
 
-        when ENDER_STATE =>  -- STEP 3
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 7
+        when SCALAR_ADDER_STATE =>  -- STEP 8
+
+        when TENSOR_UPDATE_I_STATE =>  -- STEP 9
+        when TENSOR_UPDATE_J_STATE =>  -- STEP 10
+        when TENSOR_UPDATE_K_STATE =>  -- STEP 11
 
         when others =>
           -- FSM Control

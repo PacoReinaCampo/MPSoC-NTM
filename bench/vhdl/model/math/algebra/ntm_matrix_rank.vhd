@@ -81,9 +81,14 @@ architecture ntm_matrix_rank_architecture of ntm_matrix_rank is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    VECTOR_ADDER_STATE,                 -- STEP 1
-    VECTOR_MULTIPLIER_STATE,            -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    MATRIX_INITIAL_I_STATE,             -- STEP 1
+    MATRIX_INITIAL_J_STATE,             -- STEP 2
+    MATRIX_INPUT_I_STATE,               -- STEP 3
+    MATRIX_INPUT_J_STATE,               -- STEP 4
+    VECTOR_MULTIPLIER_STATE,            -- STEP 5
+    SCALAR_ADDER_STATE,                 -- STEP 6
+    MATRIX_UPDATE_I_STATE,              -- STEP 7
+    MATRIX_UPDATE_J_STATE               -- STEP 8
     );
 
   -----------------------------------------------------------------------
@@ -109,6 +114,10 @@ architecture ntm_matrix_rank_architecture of ntm_matrix_rank is
 
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+
+  -- Internal Signals
+  signal index_i_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   -- SCALAR ADDER
   -- CONTROL
@@ -161,14 +170,20 @@ begin
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            controller_ctrl_fsm_int <= MATRIX_INITIAL_I_STATE;
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
+        when MATRIX_INITIAL_I_STATE =>  -- STEP 1
+        when MATRIX_INITIAL_J_STATE =>  -- STEP 2
 
-        when VECTOR_ADDER_STATE =>  -- STEP 2
+        when MATRIX_INPUT_I_STATE =>  -- STEP 3
+        when MATRIX_INPUT_J_STATE =>  -- STEP 4
 
-        when ENDER_STATE =>  -- STEP 3
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 5
+        when SCALAR_ADDER_STATE =>  -- STEP 6
+
+        when MATRIX_UPDATE_I_STATE =>  -- STEP 7
+        when MATRIX_UPDATE_J_STATE =>  -- STEP 8
 
         when others =>
           -- FSM Control

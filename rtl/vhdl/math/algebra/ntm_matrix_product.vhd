@@ -86,8 +86,14 @@ architecture ntm_matrix_product_architecture of ntm_matrix_product is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    VECTOR_MULTIPLIER_STATE,            -- STEP 1
-    SCALAR_ADDER_STATE                  -- STEP 2
+    MATRIX_INITIAL_I_STATE,             -- STEP 1
+    MATRIX_INITIAL_J_STATE,             -- STEP 2
+    MATRIX_INPUT_I_STATE,               -- STEP 3
+    MATRIX_INPUT_J_STATE,               -- STEP 4
+    VECTOR_MULTIPLIER_STATE,            -- STEP 5
+    SCALAR_ADDER_STATE,                 -- STEP 6
+    MATRIX_UPDATE_I_STATE,              -- STEP 7
+    MATRIX_UPDATE_J_STATE               -- STEP 8
     );
 
   -----------------------------------------------------------------------
@@ -185,77 +191,21 @@ begin
           index_j_loop <= ZERO_INDEX;
 
           if (START = '1') then
-            -- Control Internal
-            start_vector_multiplier <= '1';
-
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
-          else
-            -- Control Internal
-            start_vector_multiplier <= '0';
+            controller_ctrl_fsm_int <= MATRIX_INITIAL_I_STATE;
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
+        when MATRIX_INITIAL_I_STATE =>  -- STEP 1
+        when MATRIX_INITIAL_J_STATE =>  -- STEP 2
 
-          if (data_out_enable_vector_multiplier = '1') then
-            -- Control Internal
-            if ((index_i_loop = ZERO) and (index_j_loop = ZERO)) then
-              start_scalar_adder <= '1';
-            end if;
+        when MATRIX_INPUT_I_STATE =>  -- STEP 3
+        when MATRIX_INPUT_J_STATE =>  -- STEP 4
 
-            -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
-          else
-            -- Control Internal
-            start_vector_multiplier <= '0';
-          end if;
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 5
+        when SCALAR_ADDER_STATE =>  -- STEP 6
 
-        when SCALAR_ADDER_STATE =>  -- STEP 2
-
-          if (data_out_enable_vector_multiplier = '1') then
-            if ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN) - unsigned(ONE_INDEX))) then
-              -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-              index_j_loop <= ZERO_INDEX;
-
-              -- FSM Control
-              controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
-            end if;
-
-            -- Data Outputs
-            DATA_OUT <= data_out_vector_multiplier;
-
-            -- Control Outputs
-            DATA_OUT_I_ENABLE <= '1';
-          else
-            -- Control Outputs
-            DATA_OUT_I_ENABLE <= '0';
-          end if;
-
-          if (data_out_enable_vector_multiplier = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN) - unsigned(ONE_INDEX))) then
-              -- Control Outputs
-              READY <= '1';
-
-              -- FSM Control
-              controller_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_B_J_IN) - unsigned(ONE_INDEX))) then
-              -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
-
-              -- FSM Control
-              controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
-            end if;
-
-            -- Data Outputs
-            DATA_OUT <= data_out_vector_multiplier;
-
-            -- Control Outputs
-            DATA_OUT_J_ENABLE <= '1';
-          else
-            -- Control Outputs
-            DATA_OUT_J_ENABLE <= '0';
-          end if;
+        when MATRIX_UPDATE_I_STATE =>  -- STEP 7
+        when MATRIX_UPDATE_J_STATE =>  -- STEP 8
 
         when others =>
           -- FSM Control
