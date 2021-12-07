@@ -70,10 +70,15 @@ module ntm_matrix_transpose #(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter [1:0] STARTER_STATE = 0;
-  parameter [1:0] SCALAR_MULTIPLIER_STATE = 1;
-  parameter [1:0] SCALAR_ADDER_STATE = 2;
-  parameter [1:0] ENDER_STATE = 3;
+  parameter [3:0] STARTER_STATE           = 0;
+  parameter [3:0] MATRIX_INITIAL_I_STATE  = 1;
+  parameter [3:0] MATRIX_INITIAL_J_STATE  = 2;
+  parameter [3:0] MATRIX_INPUT_I_STATE    = 3;
+  parameter [3:0] MATRIX_INPUT_J_STATE    = 4;
+  parameter [3:0] VECTOR_MULTIPLIER_STATE = 5;
+  parameter [3:0] SCALAR_ADDER_STATE      = 6;
+  parameter [3:0] MATRIX_UPDATE_I_STATE   = 7;
+  parameter [3:0] MATRIX_UPDATE_J_STATE   = 8;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -143,17 +148,28 @@ module ntm_matrix_transpose #(
 
           if(START == 1'b1) begin
             // FSM Control
-            algebra_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
+            algebra_ctrl_fsm_int <= MATRIX_INITIAL_I_STATE;
           end
         end
 
-        SCALAR_MULTIPLIER_STATE : begin  // STEP 1
+        MATRIX_INITIAL_I_STATE : begin  // STEP 1
+        end
+        MATRIX_INITIAL_J_STATE : begin  // STEP 2
         end
 
-        SCALAR_ADDER_STATE : begin  // STEP 2
+        MATRIX_INPUT_I_STATE : begin  // STEP 3
+        end
+        MATRIX_INPUT_J_STATE : begin  // STEP 4
         end
 
-        ENDER_STATE : begin  // STEP 3
+        VECTOR_MULTIPLIER_STATE : begin  // STEP 5
+        end
+        SCALAR_ADDER_STATE : begin  // STEP 6
+        end
+
+        MATRIX_UPDATE_I_STATE : begin  // STEP 7
+        end
+        MATRIX_UPDATE_J_STATE : begin  // STEP 8
         end
 
         default : begin

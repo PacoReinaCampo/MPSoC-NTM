@@ -66,10 +66,12 @@ module ntm_scalar_product #(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter [1:0] STARTER_STATE = 0;
-  parameter [1:0] SCALAR_MULTIPLIER_STATE = 1;
-  parameter [1:0] SCALAR_ADDER_STATE = 2;
-  parameter [1:0] ENDER_STATE = 3;
+  parameter [2:0] STARTER_STATE           = 0;
+  parameter [2:0] VECTOR_INITIAL_I_STATE  = 1;
+  parameter [2:0] VECTOR_INPUT_I_STATE    = 2;
+  parameter [2:0] VECTOR_MULTIPLIER_STATE = 3;
+  parameter [2:0] SCALAR_ADDER_STATE      = 4;
+  parameter [2:0] VECTOR_UPDATE_I_STATE   = 5;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -139,17 +141,23 @@ module ntm_scalar_product #(
 
           if(START == 1'b1) begin
             // FSM Control
-            algebra_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
+            algebra_ctrl_fsm_int <= VECTOR_INITIAL_I_STATE;
           end
         end
 
-        SCALAR_MULTIPLIER_STATE : begin  // STEP 1
+        VECTOR_INITIAL_I_STATE : begin  // STEP 1
         end
 
-        SCALAR_ADDER_STATE : begin  // STEP 2
+        VECTOR_INPUT_I_STATE : begin  // STEP 2
         end
 
-        ENDER_STATE : begin  // STEP 3
+        VECTOR_MULTIPLIER_STATE : begin  // STEP 3
+        end
+
+        SCALAR_ADDER_STATE : begin  // STEP 4
+        end
+
+        VECTOR_UPDATE_I_STATE : begin  // STEP 5
         end
 
         default : begin

@@ -81,9 +81,10 @@ architecture ntm_scalar_product_architecture of ntm_scalar_product is
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     VECTOR_INITIAL_I_STATE,             -- STEP 1
-    VECTOR_MULTIPLIER_STATE,            -- STEP 2
-    SCALAR_ADDER_STATE,                 -- STEP 3
-    VECTOR_UPDATE_I_STATE               -- STEP 4
+    VECTOR_INPUT_I_STATE,               -- STEP 2
+    VECTOR_MULTIPLIER_STATE,            -- STEP 3
+    SCALAR_ADDER_STATE,                 -- STEP 4
+    VECTOR_UPDATE_I_STATE               -- STEP 5
     );
 
   -----------------------------------------------------------------------
@@ -179,9 +180,11 @@ begin
             start_vector_multiplier <= '0';
           end if;
 
-        when VECTOR_INITIAL_I_STATE =>  -- STEP 1
+        when VECTOR_INPUT_I_STATE =>  -- STEP 1
+    
+        when VECTOR_INITIAL_I_STATE =>  -- STEP 2
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 3
 
           if (data_out_enable_vector_multiplier = '1') then
             -- Control Internal
@@ -194,7 +197,7 @@ begin
             start_vector_multiplier <= '0';
           end if;
 
-        when SCALAR_ADDER_STATE =>  -- STEP 3
+        when SCALAR_ADDER_STATE =>  -- STEP 4
 
           if (ready_scalar_adder = '1') then
             if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_INDEX)) then
