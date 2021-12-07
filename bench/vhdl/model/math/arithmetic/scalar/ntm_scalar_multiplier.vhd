@@ -84,6 +84,9 @@ architecture ntm_scalar_multiplier_architecture of ntm_scalar_multiplier is
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
@@ -196,7 +199,7 @@ begin
 
         when ENDER_STATE =>  -- STEP 4
 
-          if (unsigned(u_int) = '0' & unsigned(ONE)) then
+          if (unsigned(u_int) = '0' & unsigned(ONE_INDEX)) then
             -- Data Outputs
             DATA_OUT <= multiplier_int(DATA_SIZE-1 downto 0);
 

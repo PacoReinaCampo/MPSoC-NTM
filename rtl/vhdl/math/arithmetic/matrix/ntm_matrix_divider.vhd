@@ -93,6 +93,9 @@ architecture ntm_matrix_divider_architecture of ntm_matrix_divider is
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
@@ -158,8 +161,8 @@ begin
       DATA_OUT_J_ENABLE <= '0';
 
       -- Assignations
-      index_i_loop <= ZERO;
-      index_j_loop <= ZERO;
+      index_i_loop <= ZERO_INDEX;
+      index_j_loop <= ZERO_INDEX;
 
       data_a_in_i_divider_int <= '0';
       data_a_in_j_divider_int <= '0';
@@ -180,8 +183,8 @@ begin
 
           if (START = '1') then
             -- Assignations
-            index_i_loop <= ZERO;
-            index_j_loop <= ZERO;
+            index_i_loop <= ZERO_INDEX;
+            index_j_loop <= ZERO_INDEX;
 
             -- FSM Control
             divider_ctrl_fsm_int <= INPUT_I_STATE;
@@ -288,7 +291,7 @@ begin
         when ENDER_STATE =>  -- STEP 3
 
           if (ready_vector_divider = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE)))) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_INDEX)))) then
               -- Control Outputs
               READY <= '1';
 
@@ -296,10 +299,10 @@ begin
 
               -- FSM Control
               divider_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE)))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_INDEX)))) then
               -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
-              index_j_loop <= ZERO;
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+              index_j_loop <= ZERO_INDEX;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -307,9 +310,9 @@ begin
 
               -- FSM Control
               divider_ctrl_fsm_int <= INPUT_I_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE)))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_INDEX)))) then
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';

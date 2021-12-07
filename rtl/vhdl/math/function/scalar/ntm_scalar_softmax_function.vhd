@@ -92,6 +92,9 @@ architecture ntm_scalar_softmax_function_architecture of ntm_scalar_softmax_func
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
@@ -166,7 +169,7 @@ begin
       READY <= '0';
 
       -- Control Internal
-      index_loop <= ZERO;
+      index_loop <= ZERO_INDEX;
 
     elsif (rising_edge(CLK)) then
 
@@ -177,7 +180,7 @@ begin
 
           if (START = '1') then
             -- Control Internal
-            index_loop <= ZERO;
+            index_loop <= ZERO_INDEX;
 
             -- FSM Control
             controller_ctrl_fsm_int <= INPUT_STATE;
@@ -214,17 +217,17 @@ begin
         when SCALAR_ADDER_STATE =>  -- STEP 2
 
           if (ready_scalar_adder = '1') then
-            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
+            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_INDEX)) then
               -- Control Internal
               start_scalar_divider <= '1';
 
-              index_loop <= ZERO;
+              index_loop <= ZERO_INDEX;
 
               -- FSM Control
               controller_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;
             else
               -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE));
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_INDEX));
 
               -- FSM Control
               controller_ctrl_fsm_int <= INPUT_STATE;
@@ -237,7 +240,7 @@ begin
         when SCALAR_DIVIDER_STATE =>  -- STEP 3
 
           if (ready_scalar_divider = '1') then
-            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
+            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_INDEX)) then
               -- Control Outputs
               READY <= '1';
 
@@ -245,7 +248,7 @@ begin
               controller_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE));
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_INDEX));
 
               -- Control Internal
               start_scalar_divider <= '1';

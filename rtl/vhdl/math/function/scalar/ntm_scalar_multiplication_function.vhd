@@ -86,6 +86,9 @@ architecture ntm_scalar_multiplication_function_architecture of ntm_scalar_multi
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
@@ -134,7 +137,7 @@ begin
       READY <= '0';
 
       -- Control Internal
-      index_loop <= ZERO;
+      index_loop <= ZERO_INDEX;
 
     elsif (rising_edge(CLK)) then
 
@@ -145,7 +148,7 @@ begin
 
           if (START = '1') then
             -- Control Internal
-            index_loop <= ZERO;
+            index_loop <= ZERO_INDEX;
 
             -- FSM Control
             multiplication_ctrl_fsm_int <= INPUT_STATE;
@@ -173,7 +176,7 @@ begin
         when SCALAR_MULTIPLIER_STATE =>  -- STEP 2
 
           if (ready_scalar_multiplier = '1') then
-            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE)) then
+            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_INDEX)) then
               -- Control Outputs
               READY <= '1';
 
@@ -181,7 +184,7 @@ begin
               multiplication_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE));
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_INDEX));
 
               -- FSM Control
               multiplication_ctrl_fsm_int <= INPUT_STATE;

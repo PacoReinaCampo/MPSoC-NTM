@@ -139,6 +139,9 @@ architecture ntm_top_architecture of ntm_top is
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
@@ -471,7 +474,7 @@ begin
       Y_OUT_ENABLE <= '0';
 
       -- Control Internal
-      index_loop <= ZERO;
+      index_loop <= ZERO_INDEX;
 
     elsif (rising_edge(CLK)) then
 
@@ -483,7 +486,7 @@ begin
           Y_OUT_ENABLE <= '0';
 
           -- Control Internal
-          index_loop <= ZERO;
+          index_loop <= ZERO_INDEX;
 
           if (START = '1') then
             -- Control Internal
@@ -558,12 +561,12 @@ begin
           -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
 
           if (w_out_enable_addressing = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE)) then
+            if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) then
               -- FSM Control
               top_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE));
+              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE_INDEX));
 
               -- FSM Control
               top_ctrl_fsm_int <= CONTROLLER_STATE;

@@ -93,6 +93,9 @@ architecture dnc_write_content_weighting_architecture of dnc_write_content_weigh
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
@@ -114,8 +117,13 @@ architecture dnc_write_content_weighting_architecture of dnc_write_content_weigh
 
   signal k_in_enable_vector_content_based_addressing : std_logic;
 
+  signal k_out_enable_vector_content_based_addressing : std_logic;
+
   signal m_in_i_enable_vector_content_based_addressing : std_logic;
   signal m_in_j_enable_vector_content_based_addressing : std_logic;
+
+  signal m_out_i_enable_vector_content_based_addressing : std_logic;
+  signal m_out_j_enable_vector_content_based_addressing : std_logic;
 
   signal c_out_enable_vector_content_based_addressing : std_logic;
 
@@ -145,8 +153,13 @@ begin
 
   k_in_enable_vector_content_based_addressing <= K_IN_ENABLE;
 
+  K_OUT_ENABLE <= k_out_enable_vector_content_based_addressing;
+
   m_in_i_enable_vector_content_based_addressing <= M_IN_J_ENABLE;
   m_in_j_enable_vector_content_based_addressing <= M_IN_K_ENABLE;
+
+  M_OUT_J_ENABLE <= m_out_i_enable_vector_content_based_addressing;
+  M_OUT_K_ENABLE <= m_out_j_enable_vector_content_based_addressing;
 
   C_OUT_ENABLE <= c_out_enable_vector_content_based_addressing;
 
@@ -177,8 +190,13 @@ begin
 
       K_IN_ENABLE => k_in_enable_vector_content_based_addressing,
 
+      K_OUT_ENABLE => k_out_enable_vector_content_based_addressing,
+
       M_IN_I_ENABLE => m_in_i_enable_vector_content_based_addressing,
       M_IN_J_ENABLE => m_in_j_enable_vector_content_based_addressing,
+
+      M_OUT_I_ENABLE => m_out_i_enable_vector_content_based_addressing,
+      M_OUT_J_ENABLE => m_out_j_enable_vector_content_based_addressing,
 
       C_OUT_ENABLE => c_out_enable_vector_content_based_addressing,
 

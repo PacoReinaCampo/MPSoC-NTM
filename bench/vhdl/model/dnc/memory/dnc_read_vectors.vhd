@@ -103,6 +103,9 @@ architecture dnc_read_vectors_architecture of dnc_read_vectors is
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
@@ -181,8 +184,8 @@ begin
       R_OUT <= ZERO;
 
       -- Control Internal
-      index_i_loop <= ZERO;
-      index_j_loop <= ZERO;
+      index_i_loop <= ZERO_INDEX;
+      index_j_loop <= ZERO_INDEX;
 
       -- Control Outputs
       READY <= '0';
@@ -195,8 +198,8 @@ begin
           READY <= '0';
 
           -- Control Internal
-          index_i_loop <= ZERO;
-          index_j_loop <= ZERO;
+          index_i_loop <= ZERO_INDEX;
+          index_j_loop <= ZERO_INDEX;
 
           if (START = '1') then
             -- Control Internal
@@ -216,11 +219,11 @@ begin
         when MATRIX_PRODUCT_I_STATE =>  -- STEP 3
 
           if (data_out_i_enable_matrix_product = '1') then
-            if ((unsigned(index_i_loop) < unsigned(SIZE_R_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_R_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
 
               -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
-              index_j_loop <= ZERO;
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+              index_j_loop <= ZERO_INDEX;
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_PRODUCT_I_STATE;
@@ -239,15 +242,15 @@ begin
         when MATRIX_PRODUCT_J_STATE =>  -- STEP 4
 
           if (data_out_j_enable_matrix_product = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_R_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_R_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_R_IN) - unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_R_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_PRODUCT_I_STATE;

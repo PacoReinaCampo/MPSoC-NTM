@@ -145,6 +145,9 @@ architecture ntm_controller_architecture of ntm_controller is
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
@@ -288,8 +291,8 @@ begin
       H_OUT_ENABLE <= '0';
 
       -- Control Internal
-      index_i_loop <= ZERO;
-      index_j_loop <= ZERO;
+      index_i_loop <= ZERO_INDEX;
+      index_j_loop <= ZERO_INDEX;
 
     elsif (rising_edge(CLK)) then
 
@@ -301,8 +304,8 @@ begin
           H_OUT_ENABLE <= '0';
 
           -- Control Internal
-          index_i_loop <= ZERO;
-          index_j_loop <= ZERO;
+          index_i_loop <= ZERO_INDEX;
+          index_j_loop <= ZERO_INDEX;
 
           if (START = '1') then
             -- Control Internal
@@ -331,10 +334,10 @@ begin
           data_b_in_vector_convolution <= X_IN;
 
           if (data_out_vector_enable_vector_convolution = '1') then
-            if ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(ONE) - unsigned(ONE))) then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(ONE_INDEX) - unsigned(ONE_INDEX))) then
               -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
-              index_j_loop <= ZERO;
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+              index_j_loop <= ZERO_INDEX;
 
               -- FSM Control
               controller_ctrl_fsm_int <= SCALAR_FIRST_CONVOLUTION_STATE;
@@ -353,15 +356,15 @@ begin
         when SCALAR_FIRST_CONVOLUTION_STATE =>  -- STEP 2
 
           if (data_out_scalar_enable_vector_convolution = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_L_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_L_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
 
               -- FSM Control
               controller_ctrl_fsm_int <= VECTOR_THIRD_CONVOLUTION_STATE;
@@ -407,10 +410,10 @@ begin
           data_b_in_vector_convolution <= R_IN;
 
           if (data_out_vector_enable_vector_convolution = '1') then
-            if ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(ONE) - unsigned(ONE))) then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(ONE_INDEX) - unsigned(ONE_INDEX))) then
               -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
-              index_j_loop <= ZERO;
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+              index_j_loop <= ZERO_INDEX;
 
               -- FSM Control
               controller_ctrl_fsm_int <= SCALAR_FIRST_CONVOLUTION_STATE;
@@ -429,15 +432,15 @@ begin
         when SCALAR_SECOND_CONVOLUTION_STATE =>  -- STEP 5
 
           if (data_out_scalar_enable_vector_convolution = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_L_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_L_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
 
               -- FSM Control
               controller_ctrl_fsm_int <= VECTOR_THIRD_CONVOLUTION_STATE;
@@ -483,10 +486,10 @@ begin
           data_b_in_vector_convolution <= R_IN;
 
           if (data_out_vector_enable_vector_convolution = '1') then
-            if ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(ONE) - unsigned(ONE))) then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(ONE_INDEX) - unsigned(ONE_INDEX))) then
               -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
-              index_j_loop <= ZERO;
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+              index_j_loop <= ZERO_INDEX;
 
               -- FSM Control
               controller_ctrl_fsm_int <= SCALAR_FIRST_CONVOLUTION_STATE;
@@ -505,15 +508,15 @@ begin
         when SCALAR_THIRD_CONVOLUTION_STATE =>  -- STEP 8
 
           if (data_out_scalar_enable_vector_convolution = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_L_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE))) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_L_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_L_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
 
               -- FSM Control
               controller_ctrl_fsm_int <= VECTOR_THIRD_CONVOLUTION_STATE;
@@ -554,7 +557,7 @@ begin
           data_in_vector_logistic   <= data_out_vector_adder;
 
           if (ready_vector_logistic = '1') then
-            if (unsigned(index_i_loop) = unsigned(SIZE_L_IN) - unsigned(ONE)) then
+            if (unsigned(index_i_loop) = unsigned(SIZE_L_IN) - unsigned(ONE_INDEX)) then
               -- Control Outputs
               READY <= '1';
 
@@ -562,7 +565,7 @@ begin
               controller_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
 
               -- FSM Control
               controller_ctrl_fsm_int <= VECTOR_FIRST_CONVOLUTION_STATE;

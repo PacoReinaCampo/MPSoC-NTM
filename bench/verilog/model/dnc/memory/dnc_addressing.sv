@@ -106,20 +106,17 @@ module dnc_addressing #(
   // Types
   ///////////////////////////////////////////////////////////////////////
 
-  parameter [3:0] STARTER_STATE = 0;
-  parameter [3:0] ALLOCATION_WEIGHTING_STATE = 1;
-  parameter [3:0] BACKWARD_WEIGHTING_STATE = 2;
-  parameter [3:0] FORWARD_WEIGHTING_STATE = 3;
-  parameter [3:0] MEMORY_MATRIX_STATE = 4;
-  parameter [3:0] MEMORY_RETENTION_VECTOR_STATE = 5;
-  parameter [3:0] PRECEDENCE_WEIGHTING_STATE = 6;
-  parameter [3:0] READ_CONTENT_WEIGHTING_STATE = 7;
-  parameter [3:0] READ_VECTORS_STATE = 8;
-  parameter [3:0] READ_WEIGHTING_STATE = 9;
-  parameter [3:0] TEMPORAL_LINK_MATRIX_STATE = 10;
-  parameter [3:0] USAGE_VECTOR_STATE = 11;
-  parameter [3:0] WRITE_CONTENT_WEIGHTING_STATE = 12;
-  parameter [3:0] WRITE_WEIGHTING_STATE = 13;
+  parameter [3:0] STARTER_STATE                       = 0;
+  parameter [3:0] PRECEDENCE_WEIGHTING_STATE          = 1;
+  parameter [3:0] TEMPORAL_LINK_MATRIX_STATE          = 2;
+  parameter [3:0] BACKWARD_FORWARD_WEIGHTING_STATE    = 3;
+  parameter [3:0] MEMORY_RETENTION_VECTOR_STATE       = 4;
+  parameter [3:0] USAGE_VECTOR_STATE                  = 5;
+  parameter [3:0] ALLOCATION_WEIGHTING_STATE          = 6;
+  parameter [3:0] READ_WRITE_CONTENT_WEIGHTING_STATE  = 7;
+  parameter [3:0] READ_WRITE_WEIGHTING_STATE          = 8;
+  parameter [3:0] MEMORY_MATRIX_STATE                 = 9;
+  parameter [3:0] READ_VECTORS_STATE                  = 10;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
@@ -278,7 +275,7 @@ module dnc_addressing #(
 
   // PRECEDENCE WEIGHTING
   // CONTROL
-  wire start_precedence_weighting;
+  reg start_precedence_weighting;
   wire ready_precedence_weighting;
 
   wire w_in_enable_precedence_weighting;
@@ -516,48 +513,74 @@ module dnc_addressing #(
           READY <= 1'b0;
 
           if(START == 1'b1) begin
+            // Control Internal
+            start_precedence_weighting <= 1'b1;
+
             // FSM Control
-            controller_ctrl_fsm_int <= ALLOCATION_WEIGHTING_STATE;
+            controller_ctrl_fsm_int <= PRECEDENCE_WEIGHTING_STATE;
+          end
+          else begin
+            // Control Internal
+            start_precedence_weighting <= 1'b0;
           end
         end
 
-        ALLOCATION_WEIGHTING_STATE : begin  // STEP 1
+        PRECEDENCE_WEIGHTING_STATE : begin  // STEP 1
+
+          // p(t;j) = (1 - summation(w(t;j))[i in 1 to N])·p(t-1;j) + w(t;j)
+          // p(t=0) = 0
         end
 
-        BACKWARD_WEIGHTING_STATE : begin  // STEP 2
+        TEMPORAL_LINK_MATRIX_STATE : begin  // STEP 2
+
+          // L(t)[g;j] = (1 - w(t;j)[i] - w(t;j)[j])·L(t-1)[g;j] + w(t;j)[i]·p(t-1;j)[j]
+          // L(t=0)[g,j] = 0
         end
 
-        FORWARD_WEIGHTING_STATE : begin  // STEP 3
+        BACKWARD_FORWARD_WEIGHTING_STATE : begin  // STEP 3
+
+          // b(t;i;j) = transpose(L(t;g;j))·w(t-1;i;j)
+
+          // f(t;i;j) = L(t;g;j)·w(t-1;i;j)
         end
 
-        MEMORY_MATRIX_STATE : begin  // STEP 4
+        MEMORY_RETENTION_VECTOR_STATE : begin  // STEP 4
+
+          // psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
         end
 
-        MEMORY_RETENTION_VECTOR_STATE : begin  // STEP 5
+        USAGE_VECTOR_STATE : begin  // STEP 5
+
+          // u(t;j) = (u(t-1;j) + w(t-1;j) - u(t-1;j) o w(t-1;j)) o psi(t;j)
         end
 
-        PRECEDENCE_WEIGHTING_STATE : begin  // STEP 6
+        ALLOCATION_WEIGHTING_STATE : begin  // STEP 6
+
+          // a(t)[phi(t)[j]] = (1 - u(t)[phi(t)[j]])·multiplication(u(t)[phi(t)[j]])[i in 1 to j-1]
         end
 
-        READ_CONTENT_WEIGHTING_STATE : begin  // STEP 7
+        READ_WRITE_CONTENT_WEIGHTING_STATE : begin  // STEP 7
+
+          // c(t;i;j) = C(M(t-1;j;k),k(t;i;k),beta(t;i))
+
+          // c(t;j) = C(M(t-1;j;k),k(t;k),beta(t))
         end
 
-        READ_VECTORS_STATE : begin  // STEP 8
+        READ_WRITE_WEIGHTING_STATE : begin  // STEP 8
+
+          // w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
+
+          // w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - ga(t))·c(t;j))
         end
 
-        READ_WEIGHTING_STATE : begin  // STEP 9
+        MEMORY_MATRIX_STATE : begin  // STEP 9
+
+          // M(t;j;k) = M(t-1;j;k) o (E - w(t;j)·transpose(e(t;k))) + w(t;j)·transpose(v(t;k))
         end
 
-        TEMPORAL_LINK_MATRIX_STATE : begin  // STEP 10
-        end
+        READ_VECTORS_STATE : begin  // STEP 10
 
-        USAGE_VECTOR_STATE : begin  // STEP 11
-        end
-
-        WRITE_CONTENT_WEIGHTING_STATE : begin  // STEP 12
-        end
-
-        WRITE_WEIGHTING_STATE : begin  // STEP 13
+          // r(t;i;k) = transpose(M(t;j;k))·w(t;i;j)
         end
         default : begin
           // FSM Control

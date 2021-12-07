@@ -94,6 +94,9 @@ architecture ntm_matrix_product_architecture of ntm_matrix_product is
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
@@ -164,8 +167,8 @@ begin
       READY <= '0';
 
       -- Control Internal
-      index_i_loop <= ZERO;
-      index_j_loop <= ZERO;
+      index_i_loop <= ZERO_INDEX;
+      index_j_loop <= ZERO_INDEX;
 
     elsif (rising_edge(CLK)) then
 
@@ -178,8 +181,8 @@ begin
           READY <= '0';
 
           -- Control Internal
-          index_i_loop <= ZERO;
-          index_j_loop <= ZERO;
+          index_i_loop <= ZERO_INDEX;
+          index_j_loop <= ZERO_INDEX;
 
           if (START = '1') then
             -- Control Internal
@@ -210,10 +213,10 @@ begin
         when SCALAR_ADDER_STATE =>  -- STEP 2
 
           if (data_out_enable_vector_multiplier = '1') then
-            if ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN) - unsigned(ONE))) then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN) - unsigned(ONE_INDEX))) then
               -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
-              index_j_loop <= ZERO;
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+              index_j_loop <= ZERO_INDEX;
 
               -- FSM Control
               controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
@@ -230,15 +233,15 @@ begin
           end if;
 
           if (data_out_enable_vector_multiplier = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN) - unsigned(ONE)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN) - unsigned(ONE))) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN) - unsigned(ONE_INDEX))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN) - unsigned(ONE)) and (unsigned(index_j_loop) < unsigned(SIZE_B_J_IN) - unsigned(ONE))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_B_J_IN) - unsigned(ONE_INDEX))) then
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
 
               -- FSM Control
               controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;

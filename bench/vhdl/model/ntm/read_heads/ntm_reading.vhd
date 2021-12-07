@@ -93,6 +93,9 @@ architecture ntm_reading_architecture of ntm_reading is
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
@@ -169,7 +172,7 @@ begin
       R_OUT_ENABLE <= '0';
 
       -- Control Internal
-      index_loop <= ZERO;
+      index_loop <= ZERO_INDEX;
 
     elsif (rising_edge(CLK)) then
 
@@ -181,7 +184,7 @@ begin
           R_OUT_ENABLE <= '0';
 
           -- Control Internal
-          index_loop <= ZERO;
+          index_loop <= ZERO_INDEX;
 
           if (START = '1') then
             -- Control Internal
@@ -210,7 +213,7 @@ begin
         when VECTOR_SUMMATION_STATE =>  -- STEP 2
 
           if (data_out_vector_enable_vector_summation = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_W_IN) - unsigned(ONE)) then
+            if (unsigned(index_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX)) then
               -- Control Outputs
               READY <= '1';
 
@@ -218,7 +221,7 @@ begin
               controller_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE));
+              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE_INDEX));
 
               -- FSM Control
               controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;

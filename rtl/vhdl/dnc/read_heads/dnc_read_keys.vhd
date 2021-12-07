@@ -89,6 +89,9 @@ architecture dnc_read_keys_architecture of dnc_read_keys is
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
@@ -132,8 +135,8 @@ begin
       K_OUT_K_ENABLE <= '0';
 
       -- Assignations
-      index_i_loop <= ZERO;
-      index_j_loop <= ZERO;
+      index_i_loop <= ZERO_INDEX;
+      index_j_loop <= ZERO_INDEX;
 
     elsif (rising_edge(CLK)) then
 
@@ -147,8 +150,8 @@ begin
 
           if (START = '1') then
             -- Assignations
-            index_i_loop <= ZERO;
-            index_j_loop <= ZERO;
+            index_i_loop <= ZERO_INDEX;
+            index_j_loop <= ZERO_INDEX;
 
             -- FSM Control
             read_keys_ctrl_fsm_int <= ENDER_STATE;
@@ -158,9 +161,9 @@ begin
 
           if (K_IN_I_ENABLE = '1') then
             -- Control Internal
-            if (unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE) and unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE)) then
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE));
-              index_j_loop <= ZERO;
+            if (unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_INDEX) and unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_INDEX)) then
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+              index_j_loop <= ZERO_INDEX;
             end if;
 
             -- Data Outputs
@@ -174,15 +177,15 @@ begin
           end if;
 
           if (K_IN_K_ENABLE = '1') then
-            if (unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE) and unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE)) then
+            if (unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_INDEX) and unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_INDEX)) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               read_keys_ctrl_fsm_int <= STARTER_STATE;
-            elsif (unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE) and unsigned(index_j_loop) < unsigned(SIZE_W_IN)-unsigned(ONE)) then
+            elsif (unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_INDEX) and unsigned(index_j_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_INDEX)) then
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE));
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
             end if;
 
             -- Data Outputs

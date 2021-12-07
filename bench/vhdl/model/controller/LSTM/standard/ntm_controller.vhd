@@ -141,6 +141,9 @@ architecture ntm_controller_architecture of ntm_controller is
   -- Constants
   -----------------------------------------------------------------------
 
+  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
   constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
@@ -710,7 +713,7 @@ begin
       H_OUT_ENABLE <= '0';
 
       -- Control Internal
-      index_loop <= ZERO;
+      index_loop <= ZERO_INDEX;
 
     elsif (rising_edge(CLK)) then
 
@@ -725,7 +728,7 @@ begin
           H_OUT_ENABLE <= '0';
 
           -- Control Internal
-          index_loop <= ZERO;
+          index_loop <= ZERO_INDEX;
 
           if (START = '1') then
             -- Control Internal
