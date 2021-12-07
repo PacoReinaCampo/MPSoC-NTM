@@ -66,8 +66,8 @@ entity ntm_matrix_inverter is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_I_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_J_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -178,13 +178,13 @@ begin
 
         when INPUT_I_STATE =>  -- STEP 1
 
-          if ((DATA_IN_I_ENABLE = '1') or (index_i_loop = ZERO)) then
+          if ((DATA_IN_I_ENABLE = '1') or (index_i_loop = ZERO_INDEX)) then
             -- Data Inputs
             modulo_in_vector_inverter <= MODULO_IN;
 
             data_in_vector_inverter <= DATA_IN;
 
-            if (index_i_loop = ZERO) then
+            if (index_i_loop = ZERO_INDEX) then
               -- Control Internal
               start_vector_inverter <= '1';
             end if;
@@ -204,14 +204,14 @@ begin
 
         when INPUT_J_STATE =>  -- STEP 2
 
-          if ((DATA_IN_J_ENABLE = '1') or (index_j_loop = ZERO)) then
+          if ((DATA_IN_J_ENABLE = '1') or (index_j_loop = ZERO_INDEX)) then
             -- Data Inputs
             modulo_in_vector_inverter <= MODULO_IN;
             size_in_vector_inverter   <= SIZE_J_IN;
 
             data_in_vector_inverter <= DATA_IN;
 
-            if (index_j_loop = ZERO) then
+            if (index_j_loop = ZERO_INDEX) then
               -- Control Internal
               start_vector_inverter <= '1';
             end if;

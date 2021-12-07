@@ -68,10 +68,10 @@ entity ntm_matrix_product is
 
     -- DATA
     MODULO_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_A_I_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_A_J_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_B_I_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_B_J_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_A_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_A_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_B_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_B_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
     DATA_A_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0)

@@ -68,8 +68,8 @@ entity ntm_matrix_exponentiator is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_I_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_J_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -225,7 +225,7 @@ begin
           end if;
 
           if (data_a_in_i_exponentiator_int = '1' and data_b_in_i_exponentiator_int = '1') then
-            if (index_i_loop = ZERO) then
+            if (index_i_loop = ZERO_INDEX) then
               -- Control Internal
               start_vector_exponentiator <= '1';
             end if;
@@ -242,7 +242,7 @@ begin
 
         when INPUT_J_STATE =>  -- STEP 2
 
-          if ((DATA_A_IN_J_ENABLE = '1') or (index_j_loop = ZERO)) then
+          if ((DATA_A_IN_J_ENABLE = '1') or (index_j_loop = ZERO_INDEX)) then
             -- Data Inputs
             data_a_in_vector_exponentiator <= DATA_A_IN;
 
@@ -255,7 +255,7 @@ begin
             data_a_in_enable_vector_exponentiator <= '0';
           end if;
 
-          if ((DATA_B_IN_J_ENABLE = '1') or (index_j_loop = ZERO)) then
+          if ((DATA_B_IN_J_ENABLE = '1') or (index_j_loop = ZERO_INDEX)) then
             -- Data Inputs
             data_b_in_vector_exponentiator <= DATA_B_IN;
 
@@ -272,7 +272,7 @@ begin
           end if;
 
           if (data_a_in_j_exponentiator_int = '1' and data_b_in_j_exponentiator_int = '1') then
-            if (index_j_loop = ZERO) then
+            if (index_j_loop = ZERO_INDEX) then
               -- Control Internal
               start_vector_exponentiator <= '1';
             end if;

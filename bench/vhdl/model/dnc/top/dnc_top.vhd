@@ -88,12 +88,12 @@ entity dnc_top is
     Y_OUT_ENABLE : out std_logic;       -- for y in 0 to Y-1
 
     -- DATA
-    SIZE_X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_Y_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_X_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_Y_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

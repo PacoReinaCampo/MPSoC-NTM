@@ -152,7 +152,7 @@ begin
 
         when ENDER_STATE =>  -- STEP 1
 
-          if (unsigned(MODULO_IN) > unsigned(ZERO)) then
+          if (unsigned(MODULO_IN) > unsigned(ZERO_INDEX)) then
             if (unsigned(DATA_A_IN) > unsigned(DATA_B_IN)) then
               if (unsigned(adder_int) = '0' & unsigned(MODULO_IN)) then
                 -- Data Outputs
@@ -259,7 +259,7 @@ begin
                 end if;
               end if;
             end if;
-          elsif (unsigned(MODULO_IN) = unsigned(ZERO)) then
+          elsif (unsigned(MODULO_IN) = unsigned(ZERO_INDEX)) then
             -- Data Outputs
             DATA_OUT <= adder_int(DATA_SIZE-1 downto 0);
 

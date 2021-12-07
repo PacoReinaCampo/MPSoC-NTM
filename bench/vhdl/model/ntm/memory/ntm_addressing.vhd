@@ -75,8 +75,8 @@ entity ntm_addressing is
     W_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- DATA
-    SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
     K_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
     BETA_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);

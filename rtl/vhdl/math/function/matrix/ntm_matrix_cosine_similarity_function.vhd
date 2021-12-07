@@ -71,9 +71,9 @@ entity ntm_matrix_cosine_similarity_function is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_I_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_J_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+    LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -225,7 +225,7 @@ begin
           end if;
 
           if (data_a_in_matrix_cosine_similarity_int = '1' and data_b_in_matrix_cosine_similarity_int = '1') then
-            if (index_matrix_loop = ZERO) then
+            if (index_matrix_loop = ZERO_INDEX) then
               -- Control Internal
               start_vector_cosine_similarity <= '1';
             end if;
@@ -271,7 +271,7 @@ begin
           end if;
 
           if (data_a_in_vector_cosine_similarity_int = '1' and data_b_in_vector_cosine_similarity_int = '1') then
-            if (index_vector_loop = ZERO) then
+            if (index_vector_loop = ZERO_INDEX) then
               -- Control Internal
               start_vector_cosine_similarity <= '1';
             end if;
@@ -317,7 +317,7 @@ begin
           end if;
 
           if (data_a_in_scalar_cosine_similarity_int = '1' and data_b_in_scalar_cosine_similarity_int = '1') then
-            if (index_vector_loop = ZERO) then
+            if (index_vector_loop = ZERO_INDEX) then
               -- Control Internal
               start_vector_cosine_similarity <= '1';
             end if;

@@ -74,9 +74,9 @@ entity dnc_read_vectors is
     R_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     -- DATA
-    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
     M_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

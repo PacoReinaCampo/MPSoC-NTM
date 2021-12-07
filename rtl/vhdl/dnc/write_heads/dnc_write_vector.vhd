@@ -63,7 +63,7 @@ entity dnc_write_vector is
     V_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
 
     -- DATA
-    SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
     V_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 

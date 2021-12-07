@@ -64,7 +64,7 @@ entity ntm_vector_mod is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -165,13 +165,13 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          if ((DATA_IN_ENABLE = '1') or (index_loop = ZERO)) then
+          if ((DATA_IN_ENABLE = '1') or (index_loop = ZERO_INDEX)) then
             -- Data Inputs
             modulo_in_scalar_mod <= MODULO_IN;
 
             data_in_scalar_mod <= DATA_IN;
 
-            if (index_loop = ZERO) then
+            if (index_loop = ZERO_INDEX) then
               -- Control Internal
               start_scalar_mod <= '1';
             end if;

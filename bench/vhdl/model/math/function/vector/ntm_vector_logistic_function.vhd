@@ -64,7 +64,7 @@ entity ntm_vector_logistic_function is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -161,7 +161,7 @@ begin
 
             data_in_scalar_logistic <= DATA_IN;
 
-            if (index_loop = ZERO) then
+            if (index_loop = ZERO_INDEX) then
               -- Control Internal
               start_scalar_logistic <= '1';
             end if;

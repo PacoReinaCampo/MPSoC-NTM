@@ -141,8 +141,8 @@ begin
 
         when ENDER_STATE =>  -- STEP 1
 
-          if (unsigned(MODULO_IN) > unsigned(ZERO)) then
-            if (unsigned(mod_int) > unsigned(ZERO)) then
+          if (unsigned(MODULO_IN) > unsigned(ZERO_INDEX)) then
+            if (unsigned(mod_int) > unsigned(ZERO_INDEX)) then
               if (unsigned(mod_int) = unsigned(MODULO_IN)) then
                 -- Data Outputs
                 DATA_OUT <= ZERO;
@@ -165,7 +165,7 @@ begin
                 -- Assignations
                 mod_int <= std_logic_vector(unsigned(mod_int) - unsigned(MODULO_IN));
               end if;
-            elsif (unsigned(mod_int) = unsigned(ZERO)) then
+            elsif (unsigned(mod_int) = unsigned(ZERO_INDEX)) then
               -- Data Outputs
               DATA_OUT <= ZERO;
 
@@ -175,7 +175,7 @@ begin
               -- FSM Control
               mod_ctrl_fsm_int <= STARTER_STATE;
             end if;
-          elsif (unsigned(MODULO_IN) = unsigned(ZERO)) then
+          elsif (unsigned(MODULO_IN) = unsigned(ZERO_INDEX)) then
             -- Data Outputs
             DATA_OUT <= mod_int;
 

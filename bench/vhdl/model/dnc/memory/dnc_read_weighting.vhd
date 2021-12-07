@@ -86,8 +86,8 @@ entity dnc_read_weighting is
     W_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     -- DATA
-    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
     PI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -210,7 +210,7 @@ begin
           index_loop <= ZERO_INDEX;
 
           if (START = '1') then
-            if (index_loop = ZERO) then
+            if (index_loop = ZERO_INDEX) then
               -- Control Internal
               start_vector_multiplier <= '1';
             end if;

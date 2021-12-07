@@ -65,8 +65,8 @@ entity dnc_precedence_weighting is
     P_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- DATA
-    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     P_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -207,7 +207,7 @@ begin
             -- Data Outputs
             P_OUT <= ZERO;
 
-            if (index_loop = ZERO) then
+            if (index_loop = ZERO_INDEX) then
               -- Control Internal
               start_vector_summation <= '1';
             end if;
@@ -222,7 +222,7 @@ begin
         when VECTOR_SUMMATION_STATE =>  -- STEP 1
 
           if (data_out_vector_enable_vector_summation = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO)) then
+            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
               -- Control Internal
               start_vector_adder <= '1';
             end if;
@@ -243,7 +243,7 @@ begin
           data_b_in_vector_adder <= data_out_vector_summation;
 
           if (data_out_enable_vector_adder = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO)) then
+            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
               -- Control Internal
               start_vector_multiplier <= '1';
             end if;
@@ -258,7 +258,7 @@ begin
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 3
 
           if (data_out_enable_vector_adder = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO)) then
+            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
               -- Control Internal
               start_vector_adder <= '1';
             end if;

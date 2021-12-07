@@ -107,10 +107,10 @@ package ntm_lstm_controller_pkg is
       A_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
       -- DATA
-      SIZE_X_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_W_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_L_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_R_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_X_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
       W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -176,10 +176,10 @@ package ntm_lstm_controller_pkg is
       B_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
       -- DATA
-      SIZE_X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_X_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
       X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -251,10 +251,10 @@ package ntm_lstm_controller_pkg is
       I_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
       -- DATA
-      SIZE_X_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_W_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_L_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_R_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_X_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
       W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -320,10 +320,10 @@ package ntm_lstm_controller_pkg is
       B_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
       -- DATA
-      SIZE_X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_X_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
       X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -395,10 +395,10 @@ package ntm_lstm_controller_pkg is
       O_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
       -- DATA
-      SIZE_X_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_W_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_L_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_R_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_X_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
       W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -462,10 +462,10 @@ package ntm_lstm_controller_pkg is
       B_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
       -- DATA
-      SIZE_X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_X_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
       X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -536,10 +536,10 @@ package ntm_lstm_controller_pkg is
       F_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
       -- DATA
-      SIZE_X_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_W_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_L_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_R_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_X_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
       W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -603,10 +603,10 @@ package ntm_lstm_controller_pkg is
       B_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
       -- DATA
-      SIZE_X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_X_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
       X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -649,7 +649,7 @@ package ntm_lstm_controller_pkg is
       S_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
       -- DATA
-      SIZE_L_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
       S_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       I_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -683,7 +683,7 @@ package ntm_lstm_controller_pkg is
       H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
       -- DATA
-      SIZE_L_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
       S_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       O_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -745,10 +745,10 @@ package ntm_lstm_controller_pkg is
       H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
       -- DATA
-      SIZE_X_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_W_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_L_IN : std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_R_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_X_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
       W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

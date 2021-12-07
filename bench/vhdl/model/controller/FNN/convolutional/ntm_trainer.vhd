@@ -86,10 +86,10 @@ entity ntm_trainer is
     B_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
-    SIZE_X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_X_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
     X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

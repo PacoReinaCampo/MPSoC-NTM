@@ -87,10 +87,10 @@ entity dnc_output_vector is
     Y_OUT_ENABLE : out std_logic;       -- for y in 0 to Y-1
 
     -- DATA
-    SIZE_Y_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_Y_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -288,7 +288,7 @@ begin
           end if;
 
           if (data_a_int_i_product = '1' and data_b_int_i_product = '1') then
-            if (index_i_loop = ZERO) then
+            if (index_i_loop = ZERO_INDEX) then
               -- Control Internal
               start_matrix_product <= '1';
             end if;
@@ -315,7 +315,7 @@ begin
 
             data_a_in_matrix_product <= K_IN;
 
-            if (index_j_loop = ZERO) then
+            if (index_j_loop = ZERO_INDEX) then
               -- Control Internal
               start_matrix_product <= '1';
             end if;
@@ -428,7 +428,7 @@ begin
 
             data_a_in_matrix_product <= U_IN;
 
-            if (index_i_loop = ZERO) then
+            if (index_i_loop = ZERO_INDEX) then
               -- Control Internal
               start_matrix_product <= '1';
             end if;
@@ -458,7 +458,7 @@ begin
           end if;
 
           if (data_a_int_j_product = '1' and data_b_int_j_product = '1') then
-            if (index_j_loop = ZERO) then
+            if (index_j_loop = ZERO_INDEX) then
               -- Control Internal
               start_matrix_product <= '1';
             end if;

@@ -99,10 +99,10 @@ entity ntm_output_gate_vector is
     O_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
-    SIZE_X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_X_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -289,7 +289,7 @@ begin
           data_b_in_matrix_product   <= X_IN;
 
           if (data_out_i_enable_matrix_product = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO)) then
+            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
               -- Control Internal
               start_vector_adder <= '1';
             end if;
@@ -316,7 +316,7 @@ begin
           data_b_in_vector_adder <= B_IN;
 
           if (data_out_enable_vector_adder = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO)) then
+            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
               -- Control Internal
               start_matrix_product <= '1';
             end if;
@@ -346,7 +346,7 @@ begin
           data_b_in_matrix_product   <= R_IN;
 
           if (data_out_i_enable_matrix_product = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO)) then
+            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
               -- Control Internal
               start_vector_adder <= '1';
             end if;
@@ -373,7 +373,7 @@ begin
           data_b_in_vector_adder <= data_out_vector_adder;
 
           if (data_out_enable_vector_adder = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO)) then
+            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
               -- Control Internal
               start_matrix_product <= '1';
             end if;
@@ -403,7 +403,7 @@ begin
           data_b_in_matrix_product   <= H_IN;
 
           if (data_out_i_enable_matrix_product = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO)) then
+            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
               -- Control Internal
               start_vector_adder <= '1';
             end if;
@@ -430,7 +430,7 @@ begin
           data_b_in_vector_adder <= data_out_vector_adder;
 
           if (data_out_enable_vector_adder = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO)) then
+            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
               -- Control Internal
               start_matrix_product <= '1';
             end if;
@@ -460,7 +460,7 @@ begin
           data_b_in_matrix_product   <= H_IN;
 
           if (data_out_i_enable_matrix_product = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO)) then
+            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
               -- Control Internal
               start_vector_adder <= '1';
             end if;
@@ -487,7 +487,7 @@ begin
           data_b_in_vector_adder <= data_out_vector_adder;
 
           if (data_out_enable_vector_adder = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO)) then
+            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
               -- Control Internal
               start_vector_logistic <= '1';
             end if;

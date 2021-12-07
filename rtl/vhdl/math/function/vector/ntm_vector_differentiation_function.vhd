@@ -66,9 +66,9 @@ entity ntm_vector_differentiation_function is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
     PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -175,7 +175,7 @@ begin
 
             data_in_scalar_differentiation <= DATA_IN;
 
-            if (index_vector_loop = ZERO) then
+            if (index_vector_loop = ZERO_INDEX) then
               -- Control Internal
               start_scalar_differentiation <= '1';
             end if;
@@ -202,7 +202,7 @@ begin
 
             data_in_scalar_differentiation <= DATA_IN;
 
-            if (index_scalar_loop = ZERO) then
+            if (index_scalar_loop = ZERO_INDEX) then
               -- Control Internal
               start_scalar_differentiation <= '1';
             end if;

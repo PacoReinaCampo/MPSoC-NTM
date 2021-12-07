@@ -232,7 +232,7 @@ begin
           index_loop <= ZERO_INDEX;
 
           if (START = '1') then
-            if (index_loop = ZERO) then
+            if (index_loop = ZERO_INDEX) then
               -- Control Internal
               start_vector_cosine <= '1';
             end if;
@@ -247,7 +247,7 @@ begin
         when VECTOR_COSINE_SIMILARITY_STATE =>  -- STEP 1
 
           if (data_out_vector_enable_vector_cosine = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO)) then
+            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
               -- Control Internal
               start_vector_multiplier <= '1';
             end if;
@@ -262,7 +262,7 @@ begin
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
 
           if (data_out_enable_vector_multiplier = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO)) then
+            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
               -- Control Internal
               start_vector_exponentiator <= '1';
             end if;
@@ -277,7 +277,7 @@ begin
         when VECTOR_EXPONENTIATOR_STATE =>  -- STEP 3
 
           if (data_out_enable_vector_exponentiator = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO)) then
+            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
               -- Control Internal
               start_vector_softmax <= '1';
             end if;

@@ -63,7 +63,7 @@ entity dnc_read_strengths is
     BETA_OUT_ENABLE : out std_logic;    -- for i in 0 to R-1
 
     -- DATA
-    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
     BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 

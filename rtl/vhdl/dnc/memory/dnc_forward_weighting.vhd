@@ -74,8 +74,8 @@ entity dnc_forward_weighting is
     F_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     -- DATA
-    SIZE_R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
     L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 

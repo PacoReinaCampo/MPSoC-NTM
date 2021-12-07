@@ -65,7 +65,7 @@ entity ntm_vector_multiplier is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -175,7 +175,7 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          if ((DATA_A_IN_ENABLE = '1') or (index_loop = ZERO)) then
+          if ((DATA_A_IN_ENABLE = '1') or (index_loop = ZERO_INDEX)) then
             -- Data Inputs
             data_a_in_scalar_multiplier <= DATA_A_IN;
 
@@ -183,7 +183,7 @@ begin
             data_a_in_multiplier_int <= '1';
           end if;
 
-          if ((DATA_B_IN_ENABLE = '1') or (index_loop = ZERO)) then
+          if ((DATA_B_IN_ENABLE = '1') or (index_loop = ZERO_INDEX)) then
             -- Data Inputs
             data_b_in_scalar_multiplier <= DATA_B_IN;
 
@@ -192,7 +192,7 @@ begin
           end if;
 
           if (data_a_in_multiplier_int = '1' and data_b_in_multiplier_int = '1') then
-            if (index_loop = ZERO) then
+            if (index_loop = ZERO_INDEX) then
               -- Control Internal
               start_scalar_multiplier <= '1';
             end if;

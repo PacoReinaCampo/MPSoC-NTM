@@ -68,8 +68,8 @@ entity ntm_vector_convolution_function is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+    LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -199,7 +199,7 @@ begin
 
           if (data_a_in_vector_convolution_int = '1' and data_b_in_vector_convolution_int = '1') then
             -- Control Internal
-            if (index_vector_loop = ZERO) then
+            if (index_vector_loop = ZERO_INDEX) then
               start_scalar_convolution <= '1';
             end if;
 
@@ -240,7 +240,7 @@ begin
 
           if (data_a_in_scalar_convolution_int = '1' and data_b_in_scalar_convolution_int = '1') then
             -- Control Internal
-            if (index_scalar_loop = ZERO) then
+            if (index_scalar_loop = ZERO_INDEX) then
               start_scalar_convolution <= '1';
             end if;
 

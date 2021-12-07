@@ -67,7 +67,7 @@ entity dnc_usage_vector is
     PSI_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     -- DATA
-    SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
     U_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
     W_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -222,7 +222,7 @@ begin
           data_b_in_vector_multiplier <= W_IN;
 
           if (data_out_enable_vector_multiplier = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO)) then
+            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
               -- Control Internal
               start_vector_adder <= '1';
             end if;
@@ -250,7 +250,7 @@ begin
           data_b_in_vector_adder <= data_out_vector_multiplier;
 
           if (data_out_enable_vector_adder = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO)) then
+            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
               -- Control Internal
               start_vector_multiplier <= '1';
             end if;

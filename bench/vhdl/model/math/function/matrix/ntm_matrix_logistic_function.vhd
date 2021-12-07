@@ -66,8 +66,8 @@ entity ntm_matrix_logistic_function is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_I_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_J_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -172,7 +172,7 @@ begin
 
             data_in_vector_logistic <= DATA_IN;
 
-            if (index_i_loop = ZERO) then
+            if (index_i_loop = ZERO_INDEX) then
               -- Control Internal
               start_vector_logistic <= '1';
             end if;
@@ -199,7 +199,7 @@ begin
 
             data_in_vector_logistic <= DATA_IN;
 
-            if (index_j_loop = ZERO) then
+            if (index_j_loop = ZERO_INDEX) then
               -- Control Internal
               start_vector_logistic <= '1';
             end if;
@@ -219,7 +219,7 @@ begin
         when ENDER_STATE =>  -- STEP 3
 
           if (ready_vector_logistic = '1') then
-            if (unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_INDEX)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE_INDEX)) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_INDEX))) then
               -- Control Outputs
               READY <= '1';
 
@@ -227,7 +227,7 @@ begin
 
               -- FSM Control
               logistic_ctrl_fsm_int <= STARTER_STATE;
-            elsif (unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_INDEX)) and index_j_loop = std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE_INDEX)) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_INDEX))) then
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
               index_j_loop <= ZERO_INDEX;
@@ -238,7 +238,7 @@ begin
 
               -- FSM Control
               logistic_ctrl_fsm_int <= INPUT_I_STATE;
-            elsif (unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_INDEX)) and index_j_loop < std_logic_vector(unsigned(SIZE_J_IN)-unsigned(ONE_INDEX)) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_INDEX))) then
               -- Control Internal
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
 

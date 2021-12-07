@@ -232,7 +232,7 @@ begin
           index_loop <= ZERO_INDEX;
 
           if (START = '1') then
-            if (index_loop = ZERO) then
+            if (index_loop = ZERO_INDEX) then
               -- Control Internal
               start_vector_cosine <= '1';
             end if;

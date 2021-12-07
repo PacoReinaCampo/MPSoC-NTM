@@ -67,7 +67,7 @@ entity ntm_hidden_gate_vector is
     H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
-    SIZE_L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
     S_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     O_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -188,7 +188,7 @@ begin
             -- Data Outputs
             H_OUT <= ZERO;
 
-            if (unsigned(index_loop) = unsigned(ZERO)) then
+            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
               -- Control Internal
               start_vector_tanh <= '1';
             end if;
@@ -203,7 +203,7 @@ begin
         when VECTOR_TANH_STATE =>  -- STEP 1
 
           if (data_out_enable_vector_tanh = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO)) then
+            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
               -- Control Internal
               start_vector_multiplier <= '1';
             end if;

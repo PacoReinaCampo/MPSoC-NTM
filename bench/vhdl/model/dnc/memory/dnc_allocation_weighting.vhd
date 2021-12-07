@@ -66,7 +66,7 @@ entity dnc_allocation_weighting is
     A_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- DATA
-    SIZE_N_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
     U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
