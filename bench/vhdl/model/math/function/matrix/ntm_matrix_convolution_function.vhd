@@ -145,8 +145,8 @@ architecture ntm_matrix_convolution_function_architecture of ntm_matrix_convolut
 
   -- DATA
   signal modulo_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_convolution   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_vector_convolution : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);

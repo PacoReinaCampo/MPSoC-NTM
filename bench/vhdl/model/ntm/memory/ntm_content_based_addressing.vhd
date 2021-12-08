@@ -135,7 +135,7 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
 
   -- DATA
   signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_multiplier   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_multiplier   : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -152,7 +152,7 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
 
   -- DATA
   signal modulo_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_exponentiator   : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_a_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);

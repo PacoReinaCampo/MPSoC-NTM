@@ -175,10 +175,10 @@ architecture dnc_read_interface_vector_architecture of dnc_read_interface_vector
 
   -- DATA
   signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_a_i_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_a_j_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_b_i_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_b_j_in_matrix_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_i_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_b_i_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_b_j_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_a_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);

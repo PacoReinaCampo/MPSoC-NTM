@@ -277,7 +277,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
 
   -- DATA
   signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_adder   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_adder   : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -294,7 +294,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
 
   -- DATA
   signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_multiplier   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_multiplier   : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -343,7 +343,7 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
 
   -- DATA
   signal modulo_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_exponentiator   : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_a_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -421,8 +421,8 @@ architecture ntm_arithmetic_testbench_architecture of ntm_arithmetic_testbench i
 
   -- DATA
   signal modulo_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_j_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_adder : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_j_in_matrix_adder : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_a_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_adder  : std_logic_vector(DATA_SIZE-1 downto 0);

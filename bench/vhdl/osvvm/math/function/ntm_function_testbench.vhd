@@ -194,7 +194,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_scalar_convolution : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_a_in_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -345,8 +345,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_convolution   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_vector_convolution : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -435,7 +435,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_vector_sinh : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_sinh   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_sinh   : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_in_vector_sinh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_sinh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -450,7 +450,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_vector_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_tanh   : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_in_vector_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -465,7 +465,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_logistic   : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -498,7 +498,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_vector_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_oneplus   : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_in_vector_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -515,8 +515,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_summation   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_vector_summation : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 

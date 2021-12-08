@@ -109,7 +109,7 @@ architecture dnc_read_strengths_architecture of dnc_read_strengths is
 
   -- DATA
   signal modulo_in_vector_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_oneplus   : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_in_vector_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
 

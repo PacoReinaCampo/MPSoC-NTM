@@ -124,7 +124,7 @@ architecture ntm_matrix_logistic_function_architecture of ntm_matrix_logistic_fu
 
   -- DATA
   signal modulo_in_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_logistic   : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
 
