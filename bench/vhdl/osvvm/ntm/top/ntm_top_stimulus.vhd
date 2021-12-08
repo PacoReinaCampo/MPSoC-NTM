@@ -49,7 +49,7 @@ entity ntm_top_stimulus is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 512;
+    INDEX_SIZE : integer := 128;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -98,12 +98,12 @@ entity ntm_top_stimulus is
     NTM_TOP_Y_OUT_ENABLE : in  std_logic;
 
     -- DATA
-    NTM_TOP_SIZE_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_TOP_SIZE_Y_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_TOP_SIZE_N_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_TOP_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_TOP_SIZE_L_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_TOP_SIZE_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TOP_SIZE_X_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    NTM_TOP_SIZE_Y_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    NTM_TOP_SIZE_N_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    NTM_TOP_SIZE_W_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    NTM_TOP_SIZE_L_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    NTM_TOP_SIZE_R_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
 
     NTM_TOP_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_TOP_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -130,8 +130,8 @@ architecture ntm_top_stimulus_architecture of ntm_top_stimulus is
   constant WAITING : time := 50 ns;
   constant WORKING : time := 1 ms;
 
-  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
+  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
 
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
@@ -214,12 +214,12 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_TOP_CASE_0) then
-        NTM_TOP_SIZE_X_IN <= EMPTY;
-        NTM_TOP_SIZE_Y_IN <= EMPTY;
-        NTM_TOP_SIZE_N_IN <= EMPTY;
-        NTM_TOP_SIZE_W_IN <= EMPTY;
-        NTM_TOP_SIZE_L_IN <= EMPTY;
-        NTM_TOP_SIZE_R_IN <= EMPTY;
+        NTM_TOP_SIZE_X_IN <= ONE_INDEX;
+        NTM_TOP_SIZE_Y_IN <= ONE_INDEX;
+        NTM_TOP_SIZE_N_IN <= ONE_INDEX;
+        NTM_TOP_SIZE_W_IN <= ONE_INDEX;
+        NTM_TOP_SIZE_L_IN <= ONE_INDEX;
+        NTM_TOP_SIZE_R_IN <= ONE_INDEX;
 
         NTM_TOP_W_IN <= EMPTY;
         NTM_TOP_K_IN <= EMPTY;
@@ -234,12 +234,12 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_TOP_CASE_1) then
-        NTM_TOP_SIZE_X_IN <= FULL;
-        NTM_TOP_SIZE_Y_IN <= FULL;
-        NTM_TOP_SIZE_N_IN <= FULL;
-        NTM_TOP_SIZE_W_IN <= FULL;
-        NTM_TOP_SIZE_L_IN <= FULL;
-        NTM_TOP_SIZE_R_IN <= FULL;
+        NTM_TOP_SIZE_X_IN <= ONE_INDEX;
+        NTM_TOP_SIZE_Y_IN <= ONE_INDEX;
+        NTM_TOP_SIZE_N_IN <= ONE_INDEX;
+        NTM_TOP_SIZE_W_IN <= ONE_INDEX;
+        NTM_TOP_SIZE_L_IN <= ONE_INDEX;
+        NTM_TOP_SIZE_R_IN <= ONE_INDEX;
 
         NTM_TOP_W_IN <= FULL;
         NTM_TOP_K_IN <= FULL;

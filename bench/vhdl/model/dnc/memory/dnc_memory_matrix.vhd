@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 entity dnc_memory_matrix is
   generic (
     DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 512
+    INDEX_SIZE : integer := 128
     );
   port (
     -- GLOBAL
@@ -114,8 +114,8 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
+  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
 
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
@@ -176,8 +176,8 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
 
   -- DATA
   signal modulo_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_j_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_multiplier : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_j_in_matrix_multiplier : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_a_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -195,8 +195,8 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
 
   -- DATA
   signal modulo_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_j_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_j_in_matrix_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_in_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
 

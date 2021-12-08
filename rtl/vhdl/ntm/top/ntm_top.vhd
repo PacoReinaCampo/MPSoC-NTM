@@ -49,7 +49,7 @@ use work.ntm_lstm_controller_pkg.all;
 entity ntm_top is
   generic (
     DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 512
+    INDEX_SIZE : integer := 128
     );
   port (
     -- GLOBAL
@@ -139,8 +139,8 @@ architecture ntm_top_architecture of ntm_top is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
+  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
 
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
@@ -266,10 +266,10 @@ architecture ntm_top_architecture of ntm_top is
   signal y_in_enable_output_vector : std_logic;
 
   -- DATA
-  signal size_y_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_l_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_r_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_y_in_output_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_l_in_output_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_output_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_r_in_output_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal k_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal r_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -321,9 +321,9 @@ architecture ntm_top_architecture of ntm_top is
   signal h_in_enable_interface_vector : std_logic;
 
   -- DATA
-  signal size_n_in_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_l_in_interface_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_n_in_interface_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_interface_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_l_in_interface_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal wk_in_interface_vector     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal wbeta_in_interface_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -357,8 +357,8 @@ architecture ntm_top_architecture of ntm_top is
   signal r_out_enable_reading : std_logic;
 
   -- DATA
-  signal size_n_in_reading : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_reading : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_n_in_reading : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_reading : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal w_in_reading  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal m_in_reading  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -384,8 +384,8 @@ architecture ntm_top_architecture of ntm_top is
   signal m_out_k_enable_writing : std_logic;
 
   -- DATA
-  signal size_n_in_writing : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_writing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_n_in_writing : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_writing : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal m_in_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal a_in_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -408,8 +408,8 @@ architecture ntm_top_architecture of ntm_top is
   signal m_out_k_enable_erasing : std_logic;
 
   -- DATA
-  signal size_n_in_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_erasing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_n_in_erasing : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_erasing : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal m_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal e_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -441,8 +441,8 @@ architecture ntm_top_architecture of ntm_top is
   signal w_out_enable_addressing : std_logic;
 
   -- DATA
-  signal size_n_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_n_in_addressing : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_addressing : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal k_in_addressing     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_in_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);

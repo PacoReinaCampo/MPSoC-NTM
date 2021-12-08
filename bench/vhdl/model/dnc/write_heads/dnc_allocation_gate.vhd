@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 entity dnc_allocation_gate is
   generic (
     DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 512
+    INDEX_SIZE : integer := 128
     );
   port (
     -- GLOBAL
@@ -75,8 +75,8 @@ architecture dnc_allocation_gate_architecture of dnc_allocation_gate is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
+  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
 
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));

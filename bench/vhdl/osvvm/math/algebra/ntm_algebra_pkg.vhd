@@ -106,7 +106,7 @@ package ntm_algebra_pkg is
     generic (
       -- SYSTEM-SIZE
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512;
+      INDEX_SIZE : integer := 128;
 
       X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
       Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -133,8 +133,8 @@ package ntm_algebra_pkg is
 
       -- DATA
       MATRIX_DETERMINANT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_DETERMINANT_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_DETERMINANT_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_DETERMINANT_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_DETERMINANT_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       MATRIX_DETERMINANT_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_DETERMINANT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -151,8 +151,8 @@ package ntm_algebra_pkg is
 
       -- DATA
       MATRIX_INVERSION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INVERSION_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INVERSION_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_INVERSION_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_INVERSION_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       MATRIX_INVERSION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_INVERSION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -171,10 +171,10 @@ package ntm_algebra_pkg is
 
       -- DATA
       MATRIX_PRODUCT_MODULO_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_PRODUCT_SIZE_A_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_PRODUCT_SIZE_A_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_PRODUCT_SIZE_B_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_PRODUCT_SIZE_B_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_PRODUCT_SIZE_A_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_PRODUCT_SIZE_A_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_PRODUCT_SIZE_B_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_PRODUCT_SIZE_B_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       MATRIX_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -192,8 +192,8 @@ package ntm_algebra_pkg is
 
       -- DATA
       MATRIX_RANK_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_RANK_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_RANK_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_RANK_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_RANK_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       MATRIX_RANK_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_RANK_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -210,8 +210,8 @@ package ntm_algebra_pkg is
 
       -- DATA
       MATRIX_TRANSPOSE_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_TRANSPOSE_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_TRANSPOSE_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_TRANSPOSE_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_TRANSPOSE_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       MATRIX_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -227,7 +227,7 @@ package ntm_algebra_pkg is
 
       -- DATA
       SCALAR_PRODUCT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_PRODUCT_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_PRODUCT_LENGTH_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       SCALAR_PRODUCT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_PRODUCT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_PRODUCT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -250,11 +250,11 @@ package ntm_algebra_pkg is
 
       -- DATA
       TENSOR_PRODUCT_MODULO_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_PRODUCT_SIZE_A_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_PRODUCT_SIZE_A_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_PRODUCT_SIZE_A_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      TENSOR_PRODUCT_SIZE_A_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       TENSOR_PRODUCT_SIZE_A_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_PRODUCT_SIZE_B_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_PRODUCT_SIZE_B_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_PRODUCT_SIZE_B_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      TENSOR_PRODUCT_SIZE_B_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       TENSOR_PRODUCT_SIZE_B_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);

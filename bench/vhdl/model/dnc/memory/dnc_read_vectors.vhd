@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 entity dnc_read_vectors is
   generic (
     DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 512
+    INDEX_SIZE : integer := 128
     );
   port (
     -- GLOBAL
@@ -103,8 +103,8 @@ architecture dnc_read_vectors_architecture of dnc_read_vectors is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
+  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
 
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
@@ -140,8 +140,8 @@ architecture dnc_read_vectors_architecture of dnc_read_vectors is
 
   -- DATA
   signal modulo_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_j_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_j_in_matrix_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_in_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -288,7 +288,7 @@ begin
   size_a_i_in_matrix_product <= SIZE_W_IN;
   size_a_j_in_matrix_product <= SIZE_N_IN;
   size_b_i_in_matrix_product <= SIZE_N_IN;
-  size_b_j_in_matrix_product <= ONE;
+  size_b_j_in_matrix_product <= ONE_INDEX;
   data_a_in_matrix_product   <= data_out_matrix_transpose;
   data_b_in_matrix_product   <= W_IN;
 

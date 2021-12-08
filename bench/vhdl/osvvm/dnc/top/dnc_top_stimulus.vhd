@@ -49,7 +49,7 @@ entity dnc_top_stimulus is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 512;
+    INDEX_SIZE : integer := 128;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -95,12 +95,12 @@ entity dnc_top_stimulus is
     DNC_TOP_Y_OUT_ENABLE : in  std_logic;
 
     -- DATA
-    DNC_TOP_SIZE_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    DNC_TOP_SIZE_Y_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    DNC_TOP_SIZE_N_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    DNC_TOP_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    DNC_TOP_SIZE_L_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    DNC_TOP_SIZE_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_TOP_SIZE_X_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    DNC_TOP_SIZE_Y_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    DNC_TOP_SIZE_N_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    DNC_TOP_SIZE_W_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    DNC_TOP_SIZE_L_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    DNC_TOP_SIZE_R_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
 
     DNC_TOP_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     DNC_TOP_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -127,8 +127,8 @@ architecture dnc_top_stimulus_architecture of dnc_top_stimulus is
   constant WAITING : time := 50 ns;
   constant WORKING : time := 1 ms;
 
-  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
+  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
 
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));

@@ -48,7 +48,7 @@ use work.ntm_lstm_controller_pkg.all;
 entity ntm_input_trainer is
   generic (
     DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 512
+    INDEX_SIZE : integer := 128
     );
   port (
     -- GLOBAL
@@ -160,8 +160,8 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
+  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
 
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
@@ -256,9 +256,9 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
 
   -- DATA
   signal modulo_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_differentiation   : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal period_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_differentiation : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -326,7 +326,7 @@ begin
 
           -- Data Inputs
           modulo_in_vector_differentiation <= FULL;
-          size_in_vector_differentiation   <= FULL;
+          size_in_vector_differentiation   <= ONE_INDEX;
           data_in_vector_differentiation   <= FULL;
 
         when VECTOR_ADDER_DI_STATE =>  -- STEP 2
@@ -339,7 +339,7 @@ begin
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
-          size_in_vector_adder   <= FULL;
+          size_in_vector_adder   <= ONE_INDEX;
           data_a_in_vector_adder <= FULL;
           data_b_in_vector_adder <= FULL;
 
@@ -351,7 +351,7 @@ begin
 
           -- Data Inputs
           modulo_in_vector_multiplier <= FULL;
-          size_in_vector_multiplier   <= FULL;
+          size_in_vector_multiplier   <= ONE_INDEX;
           data_a_in_vector_multiplier <= FULL;
           data_b_in_vector_multiplier <= FULL;
 
@@ -363,7 +363,7 @@ begin
 
           -- Data Inputs
           modulo_in_vector_multiplier <= FULL;
-          size_in_vector_multiplier   <= FULL;
+          size_in_vector_multiplier   <= ONE_INDEX;
           data_a_in_vector_multiplier <= FULL;
           data_b_in_vector_multiplier <= FULL;
 
@@ -375,7 +375,7 @@ begin
 
           -- Data Inputs
           modulo_in_vector_multiplier <= FULL;
-          size_in_vector_multiplier   <= FULL;
+          size_in_vector_multiplier   <= ONE_INDEX;
           data_a_in_vector_multiplier <= FULL;
           data_b_in_vector_multiplier <= FULL;
 
@@ -441,10 +441,10 @@ begin
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
-          size_a_i_in_matrix_product <= FULL;
-          size_a_j_in_matrix_product <= FULL;
-          size_b_i_in_matrix_product <= FULL;
-          size_b_j_in_matrix_product <= FULL;
+          size_a_i_in_matrix_product <= ONE_INDEX;
+          size_a_j_in_matrix_product <= ONE_INDEX;
+          size_b_i_in_matrix_product <= ONE_INDEX;
+          size_b_j_in_matrix_product <= ONE_INDEX;
           data_a_in_matrix_product   <= FULL;
           data_b_in_matrix_product   <= FULL;
 
@@ -525,10 +525,10 @@ begin
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
-          size_a_i_in_matrix_product <= FULL;
-          size_a_j_in_matrix_product <= FULL;
-          size_b_i_in_matrix_product <= FULL;
-          size_b_j_in_matrix_product <= FULL;
+          size_a_i_in_matrix_product <= ONE_INDEX;
+          size_a_j_in_matrix_product <= ONE_INDEX;
+          size_b_i_in_matrix_product <= ONE_INDEX;
+          size_b_j_in_matrix_product <= ONE_INDEX;
           data_a_in_matrix_product   <= FULL;
           data_b_in_matrix_product   <= FULL;
 
@@ -609,10 +609,10 @@ begin
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
-          size_a_i_in_matrix_product <= FULL;
-          size_a_j_in_matrix_product <= FULL;
-          size_b_i_in_matrix_product <= FULL;
-          size_b_j_in_matrix_product <= FULL;
+          size_a_i_in_matrix_product <= ONE_INDEX;
+          size_a_j_in_matrix_product <= ONE_INDEX;
+          size_b_i_in_matrix_product <= ONE_INDEX;
+          size_b_j_in_matrix_product <= ONE_INDEX;
           data_a_in_matrix_product   <= FULL;
           data_b_in_matrix_product   <= FULL;
 

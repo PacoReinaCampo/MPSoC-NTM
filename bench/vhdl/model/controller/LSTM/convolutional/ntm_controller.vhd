@@ -48,7 +48,7 @@ use work.ntm_lstm_controller_pkg.all;
 entity ntm_controller is
   generic (
     DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 512
+    INDEX_SIZE : integer := 128
     );
   port (
     -- GLOBAL
@@ -141,8 +141,8 @@ architecture ntm_controller_architecture of ntm_controller is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
+  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
 
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
@@ -210,10 +210,10 @@ architecture ntm_controller_architecture of ntm_controller is
   signal a_out_enable_activation_gate_vector : std_logic;
 
   -- DATA
-  signal size_x_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_l_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_r_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_x_in_activation_gate_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_activation_gate_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_l_in_activation_gate_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_r_in_activation_gate_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal w_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal x_in_activation_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -268,10 +268,10 @@ architecture ntm_controller_architecture of ntm_controller is
   signal b_out_enable_activation_trainer : std_logic;
 
   -- DATA
-  signal size_x_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_l_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_r_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_x_in_activation_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_activation_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_l_in_activation_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_r_in_activation_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal x_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal r_in_activation_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -332,10 +332,10 @@ architecture ntm_controller_architecture of ntm_controller is
   signal i_out_enable_input_gate_vector : std_logic;
 
   -- DATA
-  signal size_x_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_l_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_r_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_x_in_input_gate_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_input_gate_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_l_in_input_gate_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_r_in_input_gate_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal w_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal x_in_input_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -390,10 +390,10 @@ architecture ntm_controller_architecture of ntm_controller is
   signal b_out_enable_input_trainer : std_logic;
 
   -- DATA
-  signal size_x_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_l_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_r_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_x_in_input_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_input_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_l_in_input_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_r_in_input_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal x_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal r_in_input_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -454,10 +454,10 @@ architecture ntm_controller_architecture of ntm_controller is
   signal o_out_enable_output_gate_vector : std_logic;
 
   -- DATA
-  signal size_x_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_l_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_r_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_x_in_output_gate_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_output_gate_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_l_in_output_gate_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_r_in_output_gate_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal w_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal x_in_output_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -510,10 +510,10 @@ architecture ntm_controller_architecture of ntm_controller is
   signal b_out_enable_output_trainer : std_logic;
 
   -- DATA
-  signal size_x_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_l_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_r_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_x_in_output_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_output_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_l_in_output_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_r_in_output_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal x_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal r_in_output_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -538,9 +538,9 @@ architecture ntm_controller_architecture of ntm_controller is
   signal w_out_l_enable_forget_gate_vector : std_logic;
   signal w_out_x_enable_forget_gate_vector : std_logic;
 
-  signal x_in_enable_forget_gate_vector   : std_logic;
+  signal x_in_enable_forget_gate_vector : std_logic;
 
-  signal x_out_enable_forget_gate_vector   : std_logic;
+  signal x_out_enable_forget_gate_vector : std_logic;
 
   signal k_in_i_enable_forget_gate_vector : std_logic;
   signal k_in_l_enable_forget_gate_vector : std_logic;
@@ -573,10 +573,10 @@ architecture ntm_controller_architecture of ntm_controller is
   signal f_out_enable_forget_gate_vector : std_logic;
 
   -- DATA
-  signal size_x_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_l_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_r_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_x_in_forget_gate_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_forget_gate_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_l_in_forget_gate_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_r_in_forget_gate_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal w_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal x_in_forget_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -629,10 +629,10 @@ architecture ntm_controller_architecture of ntm_controller is
   signal b_out_enable_forget_trainer : std_logic;
 
   -- DATA
-  signal size_x_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_l_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_r_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_x_in_forget_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_forget_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_l_in_forget_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_r_in_forget_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal x_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal r_in_forget_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -664,7 +664,7 @@ architecture ntm_controller_architecture of ntm_controller is
   signal s_out_enable_state_gate_vector : std_logic;
 
   -- DATA
-  signal size_l_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_state_gate_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal s_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal i_in_state_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -687,7 +687,7 @@ architecture ntm_controller_architecture of ntm_controller is
   signal h_out_enable_hidden_gate_vector : std_logic;
 
   -- DATA
-  signal size_l_in_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_l_in_hidden_gate_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal s_in_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal o_in_hidden_gate_vector : std_logic_vector(DATA_SIZE-1 downto 0);

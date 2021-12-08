@@ -55,7 +55,7 @@ package ntm_lstm_controller_pkg is
   component ntm_activation_gate_vector is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL
@@ -130,7 +130,7 @@ package ntm_lstm_controller_pkg is
   component ntm_activation_trainer is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL
@@ -199,7 +199,7 @@ package ntm_lstm_controller_pkg is
   component ntm_input_gate_vector is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL
@@ -274,7 +274,7 @@ package ntm_lstm_controller_pkg is
   component ntm_input_trainer is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL
@@ -343,7 +343,7 @@ package ntm_lstm_controller_pkg is
   component ntm_output_gate_vector is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL
@@ -418,7 +418,7 @@ package ntm_lstm_controller_pkg is
   component ntm_output_trainer is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL
@@ -484,7 +484,7 @@ package ntm_lstm_controller_pkg is
   component ntm_forget_gate_vector is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL
@@ -559,7 +559,7 @@ package ntm_lstm_controller_pkg is
   component ntm_forget_trainer is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL
@@ -625,7 +625,7 @@ package ntm_lstm_controller_pkg is
   component ntm_state_gate_vector is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL
@@ -663,7 +663,7 @@ package ntm_lstm_controller_pkg is
   component ntm_hidden_gate_vector is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL
@@ -695,7 +695,7 @@ package ntm_lstm_controller_pkg is
   component ntm_controller is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL

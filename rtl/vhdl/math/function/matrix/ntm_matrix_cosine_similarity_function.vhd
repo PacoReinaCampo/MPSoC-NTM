@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 entity ntm_matrix_cosine_similarity_function is
   generic (
     DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 512
+    INDEX_SIZE : integer := 128
     );
   port (
     -- GLOBAL
@@ -98,8 +98,8 @@ architecture ntm_matrix_cosine_similarity_function_architecture of ntm_matrix_co
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
+  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
 
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
@@ -145,8 +145,8 @@ architecture ntm_matrix_cosine_similarity_function_architecture of ntm_matrix_co
 
   -- DATA
   signal modulo_in_vector_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_cosine_similarity   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_vector_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_cosine_similarity   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_vector_cosine_similarity : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_a_in_vector_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_cosine_similarity  : std_logic_vector(DATA_SIZE-1 downto 0);

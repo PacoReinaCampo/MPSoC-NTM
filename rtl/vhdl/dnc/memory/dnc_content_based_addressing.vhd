@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 entity dnc_content_based_addressing is
   generic (
     DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 512
+    INDEX_SIZE : integer := 128
     );
   port (
     -- GLOBAL
@@ -71,8 +71,8 @@ entity dnc_content_based_addressing is
     C_OUT_ENABLE : out std_logic;       -- for i in 0 to I-1
 
     -- DATA
-    SIZE_I_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_J_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_I_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_J_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
 
     K_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
     BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -100,8 +100,8 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
+  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
 
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
@@ -172,8 +172,8 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
 
   -- DATA
   signal modulo_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_cosine   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_cosine   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_vector_cosine : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_a_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -191,8 +191,8 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
 
   -- DATA
   signal modulo_in_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_softmax : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_softmax   : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
 

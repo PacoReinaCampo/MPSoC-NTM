@@ -49,7 +49,7 @@ entity ntm_algebra_stimulus is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 512;
+    INDEX_SIZE : integer := 128;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -76,8 +76,8 @@ entity ntm_algebra_stimulus is
 
     -- DATA
     MATRIX_DETERMINANT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_DETERMINANT_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_DETERMINANT_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_DETERMINANT_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_DETERMINANT_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
     MATRIX_DETERMINANT_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_DETERMINANT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -94,8 +94,8 @@ entity ntm_algebra_stimulus is
 
     -- DATA
     MATRIX_INVERSION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_INVERSION_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_INVERSION_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_INVERSION_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_INVERSION_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
     MATRIX_INVERSION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_INVERSION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -114,10 +114,10 @@ entity ntm_algebra_stimulus is
 
     -- DATA
     MATRIX_PRODUCT_MODULO_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_PRODUCT_SIZE_A_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_PRODUCT_SIZE_A_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_PRODUCT_SIZE_B_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_PRODUCT_SIZE_B_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_PRODUCT_SIZE_A_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_PRODUCT_SIZE_A_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_PRODUCT_SIZE_B_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_PRODUCT_SIZE_B_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
     MATRIX_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -135,8 +135,8 @@ entity ntm_algebra_stimulus is
 
     -- DATA
     MATRIX_RANK_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_RANK_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_RANK_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_RANK_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_RANK_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
     MATRIX_RANK_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_RANK_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -153,8 +153,8 @@ entity ntm_algebra_stimulus is
 
     -- DATA
     MATRIX_TRANSPOSE_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_TRANSPOSE_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_TRANSPOSE_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_TRANSPOSE_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_TRANSPOSE_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
     MATRIX_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -170,7 +170,7 @@ entity ntm_algebra_stimulus is
 
     -- DATA
     SCALAR_PRODUCT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_PRODUCT_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_PRODUCT_LENGTH_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
     SCALAR_PRODUCT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_PRODUCT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_PRODUCT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -193,12 +193,12 @@ entity ntm_algebra_stimulus is
 
     -- DATA
     TENSOR_PRODUCT_MODULO_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_PRODUCT_SIZE_A_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_PRODUCT_SIZE_A_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_PRODUCT_SIZE_A_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_PRODUCT_SIZE_B_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_PRODUCT_SIZE_B_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_PRODUCT_SIZE_B_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_PRODUCT_SIZE_A_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    TENSOR_PRODUCT_SIZE_A_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    TENSOR_PRODUCT_SIZE_A_K_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    TENSOR_PRODUCT_SIZE_B_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    TENSOR_PRODUCT_SIZE_B_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    TENSOR_PRODUCT_SIZE_B_K_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
     TENSOR_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0)
@@ -220,8 +220,8 @@ architecture ntm_algebra_stimulus_architecture of ntm_algebra_stimulus is
   constant WAITING : time := 50 ns;
   constant WORKING : time := 1 ms;
 
-  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
+  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
 
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
@@ -238,9 +238,9 @@ architecture ntm_algebra_stimulus_architecture of ntm_algebra_stimulus is
   -----------------------------------------------------------------------
 
   -- LOOP
-  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0) := ONE;
-  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0) := ONE;
-  signal index_k_loop : std_logic_vector(DATA_SIZE-1 downto 0) := ONE;
+  signal index_i_loop : std_logic_vector(INDEX_SIZE-1 downto 0) := ONE_INDEX;
+  signal index_j_loop : std_logic_vector(INDEX_SIZE-1 downto 0) := ONE_INDEX;
+  signal index_k_loop : std_logic_vector(INDEX_SIZE-1 downto 0) := ONE_INDEX;
 
   -- GLOBAL
   signal clk_int : std_logic;

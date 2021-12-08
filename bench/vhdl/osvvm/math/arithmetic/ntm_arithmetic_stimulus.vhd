@@ -49,7 +49,7 @@ entity ntm_arithmetic_stimulus is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 512;
+    INDEX_SIZE : integer := 128;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -170,7 +170,7 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     VECTOR_MOD_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_MOD_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_MOD_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
     VECTOR_MOD_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_MOD_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -188,7 +188,7 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     VECTOR_ADDER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_ADDER_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_ADDER_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
     VECTOR_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_ADDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -205,7 +205,7 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     VECTOR_MULTIPLIER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_MULTIPLIER_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_MULTIPLIER_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
     VECTOR_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -221,7 +221,7 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     VECTOR_INVERTER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_INVERTER_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_INVERTER_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
     VECTOR_INVERTER_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_INVERTER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -237,7 +237,7 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     VECTOR_DIVIDER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_DIVIDER_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_DIVIDER_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
     VECTOR_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -254,7 +254,7 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     VECTOR_EXPONENTIATOR_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_EXPONENTIATOR_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_EXPONENTIATOR_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
     VECTOR_EXPONENTIATOR_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_EXPONENTIATOR_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -271,7 +271,7 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     VECTOR_LCM_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_LCM_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_LCM_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
     VECTOR_LCM_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_LCM_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_LCM_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -288,7 +288,7 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     VECTOR_GCD_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_GCD_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_GCD_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
     VECTOR_GCD_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_GCD_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_GCD_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -310,8 +310,8 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     MATRIX_MOD_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_MOD_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_MOD_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_MOD_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_MOD_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
     MATRIX_MOD_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_MOD_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -332,8 +332,8 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     MATRIX_ADDER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_ADDER_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_ADDER_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_ADDER_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_ADDER_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
     MATRIX_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_ADDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -353,8 +353,8 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     MATRIX_MULTIPLIER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_MULTIPLIER_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_MULTIPLIER_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_MULTIPLIER_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_MULTIPLIER_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
     MATRIX_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -372,8 +372,8 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     MATRIX_INVERTER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_INVERTER_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_INVERTER_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_INVERTER_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_INVERTER_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
     MATRIX_INVERTER_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_INVERTER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -392,8 +392,8 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     MATRIX_DIVIDER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_DIVIDER_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_DIVIDER_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_DIVIDER_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_DIVIDER_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
     MATRIX_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -413,8 +413,8 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     MATRIX_EXPONENTIATOR_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_EXPONENTIATOR_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_EXPONENTIATOR_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_EXPONENTIATOR_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_EXPONENTIATOR_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
     MATRIX_EXPONENTIATOR_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_EXPONENTIATOR_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -434,8 +434,8 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     MATRIX_LCM_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_LCM_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_LCM_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_LCM_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_LCM_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
     MATRIX_LCM_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_LCM_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_LCM_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -455,8 +455,8 @@ entity ntm_arithmetic_stimulus is
 
     -- DATA
     MATRIX_GCD_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_GCD_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_GCD_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_GCD_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_GCD_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
     MATRIX_GCD_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_GCD_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_GCD_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
@@ -478,8 +478,8 @@ architecture ntm_arithmetic_stimulus_architecture of ntm_arithmetic_stimulus is
   constant WAITING : time := 50 ns;
   constant WORKING : time := 1 ms;
 
-  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
+  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
 
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
@@ -496,8 +496,8 @@ architecture ntm_arithmetic_stimulus_architecture of ntm_arithmetic_stimulus is
   -----------------------------------------------------------------------
 
   -- LOOP
-  signal index_i_loop : std_logic_vector(DATA_SIZE-1 downto 0) := ONE;
-  signal index_j_loop : std_logic_vector(DATA_SIZE-1 downto 0) := ONE;
+  signal index_i_loop : std_logic_vector(INDEX_SIZE-1 downto 0) := ONE_INDEX;
+  signal index_j_loop : std_logic_vector(INDEX_SIZE-1 downto 0) := ONE_INDEX;
 
   -- GLOBAL
   signal clk_int : std_logic;

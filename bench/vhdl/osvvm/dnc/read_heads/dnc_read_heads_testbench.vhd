@@ -48,7 +48,7 @@ entity dnc_read_heads_testbench is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 512;
+    INDEX_SIZE : integer := 128;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -83,10 +83,10 @@ architecture dnc_read_heads_testbench_architecture of dnc_read_heads_testbench i
   signal ready_free_gates : std_logic;
 
   -- DATA
-  signal size_r_in_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_free_gates : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal f_in_free_gates  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal f_out_free_gates : std_logic;
+  signal f_out_free_gates : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- READ KEYS
   -- CONTROL
@@ -100,8 +100,8 @@ architecture dnc_read_heads_testbench_architecture of dnc_read_heads_testbench i
   signal ready_read_keys : std_logic;
 
   -- DATA
-  signal size_r_in_read_keys : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_read_keys : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_read_keys : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_read_keys : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal k_in_read_keys  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_out_read_keys : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -118,7 +118,7 @@ architecture dnc_read_heads_testbench_architecture of dnc_read_heads_testbench i
   signal ready_read_modes : std_logic;
 
   -- DATA
-  signal size_r_in_read_modes : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_read_modes : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal pi_in_read_modes  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal pi_out_read_modes : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -132,7 +132,7 @@ architecture dnc_read_heads_testbench_architecture of dnc_read_heads_testbench i
   signal ready_read_strengths : std_logic;
 
   -- DATA
-  signal size_r_in_read_strengths : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_r_in_read_strengths : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal beta_in_read_strengths  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_out_read_strengths : std_logic_vector(DATA_SIZE-1 downto 0);

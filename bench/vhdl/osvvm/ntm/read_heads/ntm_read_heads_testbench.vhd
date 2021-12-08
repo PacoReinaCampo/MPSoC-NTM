@@ -48,7 +48,7 @@ entity ntm_read_heads_testbench is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 512;
+    INDEX_SIZE : integer := 128;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -88,8 +88,8 @@ architecture ntm_read_heads_testbench_architecture of ntm_read_heads_testbench i
   signal r_out_enable_reading : std_logic;
 
   -- DATA
-  signal size_n_in_reading : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_reading : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_n_in_reading : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_reading : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal w_in_reading  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal m_in_reading  : std_logic_vector(DATA_SIZE-1 downto 0);

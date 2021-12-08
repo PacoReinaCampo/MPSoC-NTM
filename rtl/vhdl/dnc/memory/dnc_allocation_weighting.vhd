@@ -48,7 +48,7 @@ use work.dnc_core_pkg.all;
 entity dnc_allocation_weighting is
   generic (
     DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 512
+    INDEX_SIZE : integer := 128
     );
   port (
     -- GLOBAL
@@ -93,8 +93,8 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
+  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
 
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
@@ -165,8 +165,8 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
 
   -- DATA
   signal modulo_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_multiplication : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_multiplication   : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -182,9 +182,10 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   signal phi_out_enable_sort_vector : std_logic;
 
   -- DATA
-  signal size_n_in_sort_vector : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal u_in_sort_vector      : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal phi_out_sort_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_n_in_sort_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+
+  signal u_in_sort_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal phi_out_sort_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 

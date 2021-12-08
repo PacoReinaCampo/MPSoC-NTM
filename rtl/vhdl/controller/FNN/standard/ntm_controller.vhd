@@ -48,7 +48,7 @@ use work.ntm_fnn_controller_pkg.all;
 entity ntm_controller is
   generic (
     DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 512
+    INDEX_SIZE : integer := 128
     );
   port (
     -- GLOBAL
@@ -145,8 +145,8 @@ architecture ntm_controller_architecture of ntm_controller is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_INDEX  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
+  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
 
   constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
@@ -258,10 +258,10 @@ architecture ntm_controller_architecture of ntm_controller is
   signal b_out_enable_trainer : std_logic;
 
   -- DATA
-  signal size_x_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_w_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_l_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_r_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_x_in_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_l_in_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_r_in_trainer : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal x_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);
   signal r_in_trainer : std_logic_vector(DATA_SIZE-1 downto 0);

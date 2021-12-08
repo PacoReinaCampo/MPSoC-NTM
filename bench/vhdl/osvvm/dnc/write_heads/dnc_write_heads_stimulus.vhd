@@ -49,7 +49,7 @@ entity dnc_write_heads_stimulus is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 512;
+    INDEX_SIZE : integer := 128;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -71,7 +71,7 @@ entity dnc_write_heads_stimulus is
     -- DATA
     DNC_ALLOCATION_GATE_GA_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DNC_ALLOCATION_GATE_GA_OUT : in std_logic;
+    DNC_ALLOCATION_GATE_GA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- ERASE VECTOR
     -- CONTROL
@@ -83,11 +83,11 @@ entity dnc_write_heads_stimulus is
     DNC_ERASE_VECTOR_E_OUT_ENABLE : in std_logic;
 
     -- DATA
-    DNC_ERASE_VECTOR_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_ERASE_VECTOR_SIZE_W_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
 
     DNC_ERASE_VECTOR_E_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DNC_ERASE_VECTOR_E_OUT : in std_logic;
+    DNC_ERASE_VECTOR_E_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- WRITE GATE
     -- CONTROL
@@ -97,7 +97,7 @@ entity dnc_write_heads_stimulus is
     -- DATA
     DNC_WRITE_GATE_GW_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DNC_WRITE_GATE_GW_OUT : in std_logic;
+    DNC_WRITE_GATE_GW_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- WRITE KEY
     -- CONTROL
@@ -109,7 +109,7 @@ entity dnc_write_heads_stimulus is
     DNC_WRITE_KEY_K_OUT_ENABLE : in std_logic;
 
     -- DATA
-    DNC_WRITE_KEY_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_WRITE_KEY_SIZE_W_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
 
     DNC_WRITE_KEY_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -135,7 +135,7 @@ entity dnc_write_heads_stimulus is
     DNC_WRITE_VECTOR_V_OUT_ENABLE : in std_logic;
 
     -- DATA
-    DNC_WRITE_VECTOR_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DNC_WRITE_VECTOR_SIZE_W_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
 
     DNC_WRITE_VECTOR_V_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 

@@ -59,7 +59,7 @@ package ntm_core_pkg is
   component ntm_reading is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL
@@ -96,7 +96,7 @@ package ntm_core_pkg is
   component ntm_writing is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL
@@ -132,7 +132,7 @@ package ntm_core_pkg is
   component ntm_erasing is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL
@@ -172,7 +172,7 @@ package ntm_core_pkg is
   component ntm_content_based_addressing is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL
@@ -210,7 +210,7 @@ package ntm_core_pkg is
   component ntm_addressing is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL
@@ -260,7 +260,7 @@ package ntm_core_pkg is
   component ntm_top is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL
@@ -322,7 +322,7 @@ package ntm_core_pkg is
   component ntm_interface_vector is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL
@@ -393,7 +393,7 @@ package ntm_core_pkg is
   component ntm_output_vector is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL

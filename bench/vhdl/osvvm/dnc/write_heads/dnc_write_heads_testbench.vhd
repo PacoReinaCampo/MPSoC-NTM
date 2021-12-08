@@ -48,7 +48,7 @@ entity dnc_write_heads_testbench is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 512;
+    INDEX_SIZE : integer := 128;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -81,7 +81,7 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
 
   -- DATA
   signal ga_in_allocation_gate  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal ga_out_allocation_gate : std_logic;
+  signal ga_out_allocation_gate : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- ERASE VECTOR
   -- CONTROL
@@ -93,10 +93,10 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
   signal e_out_enable_erase_vector : std_logic;
 
   -- DATA
-  signal size_w_in_erase_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_erase_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal e_in_erase_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal e_out_erase_vector : std_logic;
+  signal e_out_erase_vector : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE GATE
   -- CONTROL
@@ -105,7 +105,7 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
 
   -- DATA
   signal gw_in_write_gate  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal gw_out_write_gate : std_logic;
+  signal gw_out_write_gate : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- WRITE KEY
   -- CONTROL
@@ -117,7 +117,7 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
   signal k_out_enable_write_key : std_logic;
 
   -- DATA
-  signal size_w_in_write_key : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_write_key : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal k_in_write_key  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_out_write_key : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -141,7 +141,7 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
   signal v_out_enable_write_vector : std_logic;
 
   -- DATA
-  signal size_w_in_write_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_w_in_write_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
 
   signal v_in_write_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal v_out_write_vector : std_logic_vector(DATA_SIZE-1 downto 0);

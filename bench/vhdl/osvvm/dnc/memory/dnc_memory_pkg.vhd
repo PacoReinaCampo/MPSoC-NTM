@@ -80,7 +80,7 @@ package dnc_memory_pkg is
     generic (
       -- SYSTEM-SIZE
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512;
+      INDEX_SIZE : integer := 128;
 
       X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
       Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -128,8 +128,8 @@ package dnc_memory_pkg is
       DNC_MEMORY_R_OUT_K_ENABLE : in std_logic;  -- for k out 0 to W-1
 
       -- DATA
-      DNC_MEMORY_SIZE_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      DNC_MEMORY_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DNC_MEMORY_SIZE_R_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      DNC_MEMORY_SIZE_W_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
 
       DNC_MEMORY_K_READ_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
       DNC_MEMORY_BETA_READ_IN : out std_logic_vector(DATA_SIZE-1 downto 0);

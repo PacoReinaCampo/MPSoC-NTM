@@ -168,7 +168,7 @@ package ntm_function_pkg is
     generic (
       -- SYSTEM-SIZE
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512;
+      INDEX_SIZE : integer := 128;
 
       X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x out 0 to X-1
       Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y out 0 to Y-1
@@ -197,7 +197,7 @@ package ntm_function_pkg is
 
       -- DATA
       SCALAR_CONVOLUTION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_CONVOLUTION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_CONVOLUTION_LENGTH_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       SCALAR_CONVOLUTION_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_CONVOLUTION_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_CONVOLUTION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -213,7 +213,7 @@ package ntm_function_pkg is
 
       -- DATA
       SCALAR_COSINE_SIMILARITY_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_COSINE_SIMILARITY_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_COSINE_SIMILARITY_LENGTH_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       SCALAR_COSINE_SIMILARITY_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_COSINE_SIMILARITY_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_COSINE_SIMILARITY_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -229,7 +229,7 @@ package ntm_function_pkg is
 
       -- DATA
       SCALAR_MULTIPLICATION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_MULTIPLICATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_MULTIPLICATION_LENGTH_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       SCALAR_MULTIPLICATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_MULTIPLICATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -283,7 +283,7 @@ package ntm_function_pkg is
 
       -- DATA
       SCALAR_SOFTMAX_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_SOFTMAX_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_SOFTMAX_LENGTH_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       SCALAR_SOFTMAX_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_SOFTMAX_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -308,7 +308,7 @@ package ntm_function_pkg is
 
       -- DATA
       SCALAR_SUMMATION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_SUMMATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_SUMMATION_LENGTH_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       SCALAR_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -331,8 +331,8 @@ package ntm_function_pkg is
 
       -- DATA
       VECTOR_CONVOLUTION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_CONVOLUTION_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_CONVOLUTION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_CONVOLUTION_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      VECTOR_CONVOLUTION_LENGTH_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       VECTOR_CONVOLUTION_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_CONVOLUTION_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_CONVOLUTION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -352,8 +352,8 @@ package ntm_function_pkg is
 
       -- DATA
       VECTOR_COSINE_SIMILARITY_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_COSINE_SIMILARITY_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_COSINE_SIMILARITY_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_COSINE_SIMILARITY_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      VECTOR_COSINE_SIMILARITY_LENGTH_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       VECTOR_COSINE_SIMILARITY_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_COSINE_SIMILARITY_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_COSINE_SIMILARITY_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -371,8 +371,8 @@ package ntm_function_pkg is
 
       -- DATA
       VECTOR_MULTIPLICATION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_MULTIPLICATION_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_MULTIPLICATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_MULTIPLICATION_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      VECTOR_MULTIPLICATION_LENGTH_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       VECTOR_MULTIPLICATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_MULTIPLICATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -387,7 +387,7 @@ package ntm_function_pkg is
 
       -- DATA
       VECTOR_COSH_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_COSH_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_COSH_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
       VECTOR_COSH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_COSH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -402,7 +402,7 @@ package ntm_function_pkg is
 
       -- DATA
       VECTOR_SINH_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_SINH_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_SINH_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
       VECTOR_SINH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_SINH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -417,7 +417,7 @@ package ntm_function_pkg is
 
       -- DATA
       VECTOR_TANH_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_TANH_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_TANH_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
       VECTOR_TANH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_TANH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -432,7 +432,7 @@ package ntm_function_pkg is
 
       -- DATA
       VECTOR_LOGISTIC_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_LOGISTIC_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_LOGISTIC_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
       VECTOR_LOGISTIC_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_LOGISTIC_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -449,8 +449,8 @@ package ntm_function_pkg is
 
       -- DATA
       VECTOR_SOFTMAX_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_SOFTMAX_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_SOFTMAX_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_SOFTMAX_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      VECTOR_SOFTMAX_LENGTH_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       VECTOR_SOFTMAX_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_SOFTMAX_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -465,7 +465,7 @@ package ntm_function_pkg is
 
       -- DATA
       VECTOR_ONEPLUS_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_ONEPLUS_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_ONEPLUS_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
       VECTOR_ONEPLUS_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_ONEPLUS_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -482,8 +482,8 @@ package ntm_function_pkg is
 
       -- DATA
       VECTOR_SUMMATION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_SUMMATION_SIZE_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_SUMMATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_SUMMATION_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      VECTOR_SUMMATION_LENGTH_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       VECTOR_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -509,9 +509,9 @@ package ntm_function_pkg is
 
       -- DATA
       MATRIX_CONVOLUTION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_CONVOLUTION_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_CONVOLUTION_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_CONVOLUTION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_CONVOLUTION_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_CONVOLUTION_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_CONVOLUTION_LENGTH_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       MATRIX_CONVOLUTION_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_CONVOLUTION_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_CONVOLUTION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -534,9 +534,9 @@ package ntm_function_pkg is
 
       -- DATA
       MATRIX_COSINE_SIMILARITY_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_COSINE_SIMILARITY_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_COSINE_SIMILARITY_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_COSINE_SIMILARITY_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_COSINE_SIMILARITY_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_COSINE_SIMILARITY_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_COSINE_SIMILARITY_LENGTH_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       MATRIX_COSINE_SIMILARITY_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_COSINE_SIMILARITY_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_COSINE_SIMILARITY_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -556,9 +556,9 @@ package ntm_function_pkg is
 
       -- DATA
       MATRIX_MULTIPLICATION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_MULTIPLICATION_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_MULTIPLICATION_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_MULTIPLICATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_MULTIPLICATION_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_MULTIPLICATION_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_MULTIPLICATION_LENGTH_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       MATRIX_MULTIPLICATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_MULTIPLICATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -575,8 +575,8 @@ package ntm_function_pkg is
 
       -- DATA
       MATRIX_COSH_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_COSH_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_COSH_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_COSH_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_COSH_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       MATRIX_COSH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_COSH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -593,8 +593,8 @@ package ntm_function_pkg is
 
       -- DATA
       MATRIX_SINH_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_SINH_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_SINH_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_SINH_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_SINH_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       MATRIX_SINH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_SINH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -611,8 +611,8 @@ package ntm_function_pkg is
 
       -- DATA
       MATRIX_TANH_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_TANH_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_TANH_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_TANH_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_TANH_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       MATRIX_TANH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_TANH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -629,8 +629,8 @@ package ntm_function_pkg is
 
       -- DATA
       MATRIX_LOGISTIC_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_LOGISTIC_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_LOGISTIC_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_LOGISTIC_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_LOGISTIC_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       MATRIX_LOGISTIC_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_LOGISTIC_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -649,9 +649,9 @@ package ntm_function_pkg is
 
       -- DATA
       MATRIX_SOFTMAX_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_SOFTMAX_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_SOFTMAX_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_SOFTMAX_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_SOFTMAX_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_SOFTMAX_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_SOFTMAX_LENGTH_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       MATRIX_SOFTMAX_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_SOFTMAX_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -668,8 +668,8 @@ package ntm_function_pkg is
 
       -- DATA
       MATRIX_ONEPLUS_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_ONEPLUS_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_ONEPLUS_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_ONEPLUS_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_ONEPLUS_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       MATRIX_ONEPLUS_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_ONEPLUS_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -688,9 +688,9 @@ package ntm_function_pkg is
 
       -- DATA
       MATRIX_SUMMATION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_SUMMATION_SIZE_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_SUMMATION_SIZE_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_SUMMATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_SUMMATION_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_SUMMATION_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_SUMMATION_LENGTH_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
       MATRIX_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
       );

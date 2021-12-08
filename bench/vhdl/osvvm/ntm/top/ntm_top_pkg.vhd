@@ -80,7 +80,7 @@ package ntm_top_pkg is
     generic (
       -- SYSTEM-SIZE
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512;
+      INDEX_SIZE : integer := 128;
 
       X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
       Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -129,12 +129,12 @@ package ntm_top_pkg is
       NTM_TOP_Y_OUT_ENABLE : in  std_logic;
 
       -- DATA
-      NTM_TOP_SIZE_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_TOP_SIZE_Y_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_TOP_SIZE_N_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_TOP_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_TOP_SIZE_L_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_TOP_SIZE_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_TOP_SIZE_X_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      NTM_TOP_SIZE_Y_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      NTM_TOP_SIZE_N_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      NTM_TOP_SIZE_W_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      NTM_TOP_SIZE_L_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      NTM_TOP_SIZE_R_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
 
       NTM_TOP_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       NTM_TOP_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);

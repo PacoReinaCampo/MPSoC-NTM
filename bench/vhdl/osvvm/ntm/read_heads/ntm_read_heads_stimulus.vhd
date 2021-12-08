@@ -49,7 +49,7 @@ entity ntm_read_heads_stimulus is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 512;
+    INDEX_SIZE : integer := 128;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -76,8 +76,8 @@ entity ntm_read_heads_stimulus is
     NTM_READ_HEADS_R_OUT_ENABLE : in std_logic;
 
     -- DATA
-    NTM_READ_HEADS_SIZE_N_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_READ_HEADS_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_READ_HEADS_SIZE_N_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    NTM_READ_HEADS_SIZE_W_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
 
     NTM_READ_HEADS_W_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_READ_HEADS_M_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);

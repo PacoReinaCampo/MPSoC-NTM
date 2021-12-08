@@ -56,7 +56,7 @@ package ntm_standard_fnn_pkg is
     generic (
       -- SYSTEM-SIZE
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512;
+      INDEX_SIZE : integer := 128;
 
       X : integer := 64;
       Y : integer := 64;
@@ -113,10 +113,10 @@ package ntm_standard_fnn_pkg is
       NTM_STANDARD_FNN_H_OUT_ENABLE   : in  std_logic;
 
       -- DATA
-      NTM_STANDARD_FNN_SIZE_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_STANDARD_FNN_SIZE_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_STANDARD_FNN_SIZE_L_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_STANDARD_FNN_SIZE_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_STANDARD_FNN_SIZE_X_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      NTM_STANDARD_FNN_SIZE_W_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      NTM_STANDARD_FNN_SIZE_L_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      NTM_STANDARD_FNN_SIZE_R_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
 
       NTM_STANDARD_FNN_W_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
       NTM_STANDARD_FNN_K_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);

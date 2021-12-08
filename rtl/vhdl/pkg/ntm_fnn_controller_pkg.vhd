@@ -55,7 +55,7 @@ package ntm_fnn_controller_pkg is
   component ntm_controller is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL
@@ -131,7 +131,7 @@ package ntm_fnn_controller_pkg is
   component ntm_trainer is
     generic (
       DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 512
+      INDEX_SIZE : integer := 128
       );
     port (
       -- GLOBAL
