@@ -63,24 +63,18 @@ module ntm_algebra_testbench;
   parameter SIZE=64;
 
   // FUNCTIONALITY
-  parameter STIMULUS_NTM_MATRIX_DETERMINANT_TEST   = 0;
-  parameter STIMULUS_NTM_MATRIX_INVERSION_TEST     = 0;
   parameter STIMULUS_NTM_MATRIX_PRODUCT_TEST       = 0;
-  parameter STIMULUS_NTM_MATRIX_RANK_TEST          = 0;
+  parameter STIMULUS_NTM_TENSOR_TRANSPOSE_TEST     = 0;
   parameter STIMULUS_NTM_MATRIX_TRANSPOSE_TEST     = 0;
   parameter STIMULUS_NTM_SCALAR_PRODUCT_TEST       = 0;
   parameter STIMULUS_NTM_TENSOR_PRODUCT_TEST       = 0;
-  parameter STIMULUS_NTM_MATRIX_DETERMINANT_CASE_0 = 0;
-  parameter STIMULUS_NTM_MATRIX_INVERSION_CASE_0   = 0;
   parameter STIMULUS_NTM_MATRIX_PRODUCT_CASE_0     = 0;
-  parameter STIMULUS_NTM_MATRIX_RANK_CASE_0        = 0;
+  parameter STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_0   = 0;
   parameter STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0   = 0;
   parameter STIMULUS_NTM_SCALAR_PRODUCT_CASE_0     = 0;
   parameter STIMULUS_NTM_TENSOR_PRODUCT_CASE_0     = 0;
-  parameter STIMULUS_NTM_MATRIX_DETERMINANT_CASE_1 = 0;
-  parameter STIMULUS_NTM_MATRIX_INVERSION_CASE_1   = 0;
   parameter STIMULUS_NTM_MATRIX_PRODUCT_CASE_1     = 0;
-  parameter STIMULUS_NTM_MATRIX_RANK_CASE_1        = 0;
+  parameter STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_1   = 0;
   parameter STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1   = 0;
   parameter STIMULUS_NTM_SCALAR_PRODUCT_CASE_1     = 0;
   parameter STIMULUS_NTM_TENSOR_PRODUCT_CASE_1     = 0;
@@ -92,40 +86,6 @@ module ntm_algebra_testbench;
   // GLOBAL
   wire CLK;
   wire RST;
-
-  // MATRIX DETERMINANT
-  // CONTROL
-  wire start_matrix_determinant;
-  wire ready_matrix_determinant;
-
-  wire data_in_i_enable_matrix_determinant;
-  wire data_in_j_enable_matrix_determinant;
-  wire data_out_i_enable_matrix_determinant;
-  wire data_out_j_enable_matrix_determinant;
-
-  // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_determinant;
-  wire [DATA_SIZE-1:0] size_i_in_matrix_determinant;
-  wire [DATA_SIZE-1:0] size_j_in_matrix_determinant;
-  wire [DATA_SIZE-1:0] data_in_matrix_determinant;
-  wire [DATA_SIZE-1:0] data_out_matrix_determinant;
-
-  // MATRIX INVERSION
-  // CONTROL
-  wire start_matrix_inversion;
-  wire ready_matrix_inversion;
-
-  wire data_in_i_enable_matrix_inversion;
-  wire data_in_j_enable_matrix_inversion;
-  wire data_out_i_enable_matrix_inversion;
-  wire data_out_j_enable_matrix_inversion;
-
-  // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_inversion;
-  wire [DATA_SIZE-1:0] size_i_in_matrix_inversion;
-  wire [DATA_SIZE-1:0] size_j_in_matrix_inversion;
-  wire [DATA_SIZE-1:0] data_in_matrix_inversion;
-  wire [DATA_SIZE-1:0] data_out_matrix_inversion;
 
   // MATRIX PRODUCT
   // CONTROL
@@ -149,22 +109,32 @@ module ntm_algebra_testbench;
   wire [DATA_SIZE-1:0] data_b_in_matrix_product;
   wire [DATA_SIZE-1:0] data_out_matrix_product;
 
-  // MATRIX RANK
+  // TENSOR TRANSPOSE
   // CONTROL
-  wire start_matrix_rank;
-  wire ready_matrix_rank;
+  wire start_tensor_transpose;
+  wire ready_tensor_transpose;
 
-  wire data_in_i_enable_matrix_rank;
-  wire data_in_j_enable_matrix_rank;
-  wire data_out_i_enable_matrix_rank;
-  wire data_out_j_enable_matrix_rank;
+  wire data_a_in_i_enable_tensor_transpose;
+  wire data_a_in_j_enable_tensor_transpose;
+  wire data_a_in_k_enable_tensor_transpose;
+  wire data_b_in_i_enable_tensor_transpose;
+  wire data_b_in_j_enable_tensor_transpose;
+  wire data_b_in_k_enable_tensor_transpose;
+  wire data_out_i_enable_tensor_transpose;
+  wire data_out_j_enable_tensor_transpose;
+  wire data_out_k_enable_tensor_transpose;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_rank;
-  wire [DATA_SIZE-1:0] size_i_in_matrix_rank;
-  wire [DATA_SIZE-1:0] size_j_in_matrix_rank;
-  wire [DATA_SIZE-1:0] data_in_matrix_rank;
-  wire [DATA_SIZE-1:0] data_out_matrix_rank;
+  wire [DATA_SIZE-1:0] modulo_in_tensor_transpose;
+  wire [DATA_SIZE-1:0] size_a_i_in_tensor_transpose;
+  wire [DATA_SIZE-1:0] size_a_j_in_tensor_transpose;
+  wire [DATA_SIZE-1:0] size_a_k_in_tensor_transpose;
+  wire [DATA_SIZE-1:0] size_b_i_in_tensor_transpose;
+  wire [DATA_SIZE-1:0] size_b_j_in_tensor_transpose;
+  wire [DATA_SIZE-1:0] size_b_k_in_tensor_transpose;
+  wire [DATA_SIZE-1:0] data_a_in_tensor_transpose;
+  wire [DATA_SIZE-1:0] data_b_in_tensor_transpose;
+  wire [DATA_SIZE-1:0] data_out_tensor_transpose;
 
   // MATRIX TRANSPOSE
   // CONTROL
@@ -243,26 +213,20 @@ module ntm_algebra_testbench;
     .R(R),
 
     // FUNCTIONALITY
-    .STIMULUS_NTM_MATRIX_DETERMINANT_TEST(STIMULUS_NTM_MATRIX_DETERMINANT_TEST),
-    .STIMULUS_NTM_MATRIX_INVERSION_TEST(STIMULUS_NTM_MATRIX_INVERSION_TEST),
     .STIMULUS_NTM_MATRIX_PRODUCT_TEST(STIMULUS_NTM_MATRIX_PRODUCT_TEST),
-    .STIMULUS_NTM_MATRIX_RANK_TEST(STIMULUS_NTM_MATRIX_RANK_TEST),
+    .STIMULUS_NTM_TENSOR_TRANSPOSE_TEST(STIMULUS_NTM_TENSOR_TRANSPOSE_TEST),
     .STIMULUS_NTM_MATRIX_TRANSPOSE_TEST(STIMULUS_NTM_MATRIX_TRANSPOSE_TEST),
     .STIMULUS_NTM_SCALAR_PRODUCT_TEST(STIMULUS_NTM_SCALAR_PRODUCT_TEST),
     .STIMULUS_NTM_TENSOR_PRODUCT_TEST(STIMULUS_NTM_TENSOR_PRODUCT_TEST),
 
-    .STIMULUS_NTM_MATRIX_DETERMINANT_CASE_0(STIMULUS_NTM_MATRIX_DETERMINANT_CASE_0),
-    .STIMULUS_NTM_MATRIX_INVERSION_CASE_0(STIMULUS_NTM_MATRIX_INVERSION_CASE_0),
     .STIMULUS_NTM_MATRIX_PRODUCT_CASE_0(STIMULUS_NTM_MATRIX_PRODUCT_CASE_0),
-    .STIMULUS_NTM_MATRIX_RANK_CASE_0(STIMULUS_NTM_MATRIX_RANK_CASE_0),
+    .STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_0(STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_0),
     .STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0(STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0),
     .STIMULUS_NTM_SCALAR_PRODUCT_CASE_0(STIMULUS_NTM_SCALAR_PRODUCT_CASE_0),
     .STIMULUS_NTM_TENSOR_PRODUCT_CASE_0(STIMULUS_NTM_TENSOR_PRODUCT_CASE_0),
 
-    .STIMULUS_NTM_MATRIX_DETERMINANT_CASE_1(STIMULUS_NTM_MATRIX_DETERMINANT_CASE_1),
-    .STIMULUS_NTM_MATRIX_INVERSION_CASE_1(STIMULUS_NTM_MATRIX_INVERSION_CASE_1),
     .STIMULUS_NTM_MATRIX_PRODUCT_CASE_1(STIMULUS_NTM_MATRIX_PRODUCT_CASE_1),
-    .STIMULUS_NTM_MATRIX_RANK_CASE_1(STIMULUS_NTM_MATRIX_RANK_CASE_1),
+    .STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_1(STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_1),
     .STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1(STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1),
     .STIMULUS_NTM_SCALAR_PRODUCT_CASE_1(STIMULUS_NTM_SCALAR_PRODUCT_CASE_1),
     .STIMULUS_NTM_TENSOR_PRODUCT_CASE_1(STIMULUS_NTM_TENSOR_PRODUCT_CASE_1)
@@ -271,39 +235,6 @@ module ntm_algebra_testbench;
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
-
-    // MATRIX DETERMINANT
-    // CONTROL
-    .MATRIX_DETERMINANT_START(start_matrix_determinant),
-    .MATRIX_DETERMINANT_READY(ready_matrix_determinant),
-
-    .MATRIX_DETERMINANT_DATA_IN_I_ENABLE(data_in_i_enable_matrix_determinant),
-    .MATRIX_DETERMINANT_DATA_IN_J_ENABLE(data_in_j_enable_matrix_determinant),
-    .MATRIX_DETERMINANT_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_determinant),
-    .MATRIX_DETERMINANT_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_determinant),
-
-    // DATA
-    .MATRIX_DETERMINANT_MODULO_IN(modulo_in_matrix_determinant),
-    .MATRIX_DETERMINANT_SIZE_I_IN(size_i_in_matrix_determinant),
-    .MATRIX_DETERMINANT_SIZE_J_IN(size_j_in_matrix_determinant),
-    .MATRIX_DETERMINANT_DATA_IN(data_in_matrix_determinant),
-    .MATRIX_DETERMINANT_DATA_OUT(data_out_matrix_determinant),
-
-    // MATRIX INVERSION
-    // CONTROL
-    .MATRIX_INVERSION_START(start_matrix_inversion),
-    .MATRIX_INVERSION_READY(ready_matrix_inversion),
-    .MATRIX_INVERSION_DATA_IN_I_ENABLE(data_in_i_enable_matrix_inversion),
-    .MATRIX_INVERSION_DATA_IN_J_ENABLE(data_in_j_enable_matrix_inversion),
-    .MATRIX_INVERSION_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_inversion),
-    .MATRIX_INVERSION_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_inversion),
-
-    // DATA
-    .MATRIX_INVERSION_MODULO_IN(modulo_in_matrix_inversion),
-    .MATRIX_INVERSION_SIZE_I_IN(size_i_in_matrix_inversion),
-    .MATRIX_INVERSION_SIZE_J_IN(size_j_in_matrix_inversion),
-    .MATRIX_INVERSION_DATA_IN(data_in_matrix_inversion),
-    .MATRIX_INVERSION_DATA_OUT(data_out_matrix_inversion),
 
     // MATRIX PRODUCT
     // CONTROL
@@ -327,22 +258,32 @@ module ntm_algebra_testbench;
     .MATRIX_PRODUCT_DATA_B_IN(data_b_in_matrix_product),
     .MATRIX_PRODUCT_DATA_OUT(data_out_matrix_product),
 
-    // MATRIX RANK
+    // TENSOR TRANSPOSE
     // CONTROL
-    .MATRIX_RANK_START(start_matrix_rank),
-    .MATRIX_RANK_READY(ready_matrix_rank),
+    .TENSOR_transpose_START(start_tensor_transpose),
+    .TENSOR_transpose_READY(ready_tensor_transpose),
 
-    .MATRIX_RANK_DATA_IN_I_ENABLE(data_in_i_enable_matrix_rank),
-    .MATRIX_RANK_DATA_IN_J_ENABLE(data_in_j_enable_matrix_rank),
-    .MATRIX_RANK_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_rank),
-    .MATRIX_RANK_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_rank),
+    .TENSOR_transpose_DATA_A_IN_I_ENABLE(data_a_in_i_enable_tensor_transpose),
+    .TENSOR_transpose_DATA_A_IN_J_ENABLE(data_a_in_j_enable_tensor_transpose),
+    .TENSOR_transpose_DATA_A_IN_K_ENABLE(data_a_in_k_enable_tensor_transpose),
+    .TENSOR_transpose_DATA_B_IN_I_ENABLE(data_b_in_i_enable_tensor_transpose),
+    .TENSOR_transpose_DATA_B_IN_J_ENABLE(data_b_in_j_enable_tensor_transpose),
+    .TENSOR_transpose_DATA_B_IN_K_ENABLE(data_b_in_k_enable_tensor_transpose),
+    .TENSOR_transpose_DATA_OUT_I_ENABLE(data_out_i_enable_tensor_transpose),
+    .TENSOR_transpose_DATA_OUT_J_ENABLE(data_out_j_enable_tensor_transpose),
+    .TENSOR_transpose_DATA_OUT_K_ENABLE(data_out_k_enable_tensor_transpose),
 
     // DATA
-    .MATRIX_RANK_MODULO_IN(modulo_in_matrix_rank),
-    .MATRIX_RANK_SIZE_I_IN(size_i_in_matrix_rank),
-    .MATRIX_RANK_SIZE_J_IN(size_j_in_matrix_rank),
-    .MATRIX_RANK_DATA_IN(data_in_matrix_rank),
-    .MATRIX_RANK_DATA_OUT(data_out_matrix_rank),
+    .TENSOR_transpose_MODULO_IN(modulo_in_tensor_transpose),
+    .TENSOR_transpose_SIZE_A_I_IN(size_a_i_in_tensor_transpose),
+    .TENSOR_transpose_SIZE_A_J_IN(size_a_j_in_tensor_transpose),
+    .TENSOR_transpose_SIZE_A_K_IN(size_a_k_in_tensor_transpose),
+    .TENSOR_transpose_SIZE_B_I_IN(size_b_i_in_tensor_transpose),
+    .TENSOR_transpose_SIZE_B_J_IN(size_b_j_in_tensor_transpose),
+    .TENSOR_transpose_SIZE_B_K_IN(size_b_k_in_tensor_transpose),
+    .TENSOR_transpose_DATA_A_IN(data_a_in_tensor_transpose),
+    .TENSOR_transpose_DATA_B_IN(data_b_in_tensor_transpose),
+    .TENSOR_transpose_DATA_OUT(data_out_tensor_transpose),
 
     // MATRIX TRANSPOSE
     // CONTROL
@@ -405,60 +346,6 @@ module ntm_algebra_testbench;
     .TENSOR_PRODUCT_DATA_OUT(data_out_tensor_product)
   );
 
-  // MATRIX DETERMINANT
-  ntm_matrix_determinant #(
-    .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
-  )
-  matrix_determinant(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_matrix_determinant),
-    .READY(ready_matrix_determinant),
-
-    .DATA_IN_I_ENABLE(data_in_i_enable_matrix_determinant),
-    .DATA_IN_J_ENABLE(data_in_j_enable_matrix_determinant),
-    .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_determinant),
-    .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_determinant),
-
-    // DATA
-    .MODULO_IN(modulo_in_matrix_determinant),
-    .SIZE_I_IN(size_i_in_matrix_determinant),
-    .SIZE_J_IN(size_j_in_matrix_determinant),
-    .DATA_IN(data_in_matrix_determinant),
-    .DATA_OUT(data_out_matrix_determinant)
-  );
-
-  // MATRIX INVERSION
-  ntm_matrix_inversion #(
-    .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
-  )
-  matrix_inversion(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_matrix_inversion),
-    .READY(ready_matrix_inversion),
-
-    .DATA_IN_I_ENABLE(data_in_i_enable_matrix_inversion),
-    .DATA_IN_J_ENABLE(data_in_j_enable_matrix_inversion),
-    .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_inversion),
-    .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_inversion),
-
-    // DATA
-    .MODULO_IN(modulo_in_matrix_inversion),
-    .SIZE_I_IN(size_i_in_matrix_inversion),
-    .SIZE_J_IN(size_j_in_matrix_inversion),
-    .DATA_IN(data_in_matrix_inversion),
-    .DATA_OUT(data_out_matrix_inversion)
-  );
-
   // MATRIX PRODUCT
   ntm_matrix_product #(
     .DATA_SIZE(DATA_SIZE),
@@ -491,31 +378,41 @@ module ntm_algebra_testbench;
     .DATA_OUT(data_out_matrix_product)
   );
 
-  // MATRIX RANK
-  ntm_matrix_rank #(
+  // TENSOR TRANSPOSE
+  ntm_TENSOR_TRANSPOSE #(
     .DATA_SIZE(DATA_SIZE),
     .INDEX_SIZE(INDEX_SIZE)
   )
-  matrix_rank(
+  TENSOR_TRANSPOSE(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_matrix_rank),
-    .READY(ready_matrix_rank),
+    .START(start_tensor_transpose),
+    .READY(ready_tensor_transpose),
 
-    .DATA_IN_I_ENABLE(data_in_i_enable_matrix_rank),
-    .DATA_IN_J_ENABLE(data_in_j_enable_matrix_rank),
-    .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_rank),
-    .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_rank),
+    .DATA_A_IN_I_ENABLE(data_a_in_i_enable_tensor_transpose),
+    .DATA_A_IN_J_ENABLE(data_a_in_j_enable_tensor_transpose),
+    .DATA_A_IN_K_ENABLE(data_a_in_k_enable_tensor_transpose),
+    .DATA_B_IN_I_ENABLE(data_b_in_i_enable_tensor_transpose),
+    .DATA_B_IN_J_ENABLE(data_b_in_j_enable_tensor_transpose),
+    .DATA_B_IN_K_ENABLE(data_b_in_k_enable_tensor_transpose),
+    .DATA_OUT_I_ENABLE(data_out_i_enable_tensor_transpose),
+    .DATA_OUT_J_ENABLE(data_out_j_enable_tensor_transpose),
+    .DATA_OUT_K_ENABLE(data_out_k_enable_tensor_transpose),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_rank),
-    .SIZE_I_IN(size_i_in_matrix_rank),
-    .SIZE_J_IN(size_j_in_matrix_rank),
-    .DATA_IN(data_in_matrix_rank),
-    .DATA_OUT(data_out_matrix_rank)
+    .MODULO_IN(modulo_in_tensor_transpose),
+    .SIZE_A_I_IN(size_a_i_in_tensor_transpose),
+    .SIZE_A_J_IN(size_a_j_in_tensor_transpose),
+    .SIZE_A_K_IN(size_a_k_in_tensor_transpose),
+    .SIZE_B_I_IN(size_b_i_in_tensor_transpose),
+    .SIZE_B_J_IN(size_b_j_in_tensor_transpose),
+    .SIZE_B_K_IN(size_b_k_in_tensor_transpose),
+    .DATA_A_IN(data_a_in_tensor_transpose),
+    .DATA_B_IN(data_b_in_tensor_transpose),
+    .DATA_OUT(data_out_tensor_transpose)
   );
 
   // MATRIX TRANSPOSE

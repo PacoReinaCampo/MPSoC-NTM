@@ -74,26 +74,20 @@ package ntm_algebra_pkg is
   constant R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
   -- FUNCTIONALITY
-  signal STIMULUS_NTM_MATRIX_DETERMINANT_TEST : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INVERSION_TEST   : boolean := false;
   signal STIMULUS_NTM_MATRIX_PRODUCT_TEST     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_RANK_TEST        : boolean := false;
+  signal STIMULUS_NTM_TENSOR_TRANSPOSE_TEST   : boolean := false;
   signal STIMULUS_NTM_MATRIX_TRANSPOSE_TEST   : boolean := false;
   signal STIMULUS_NTM_SCALAR_PRODUCT_TEST     : boolean := false;
   signal STIMULUS_NTM_TENSOR_PRODUCT_TEST     : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_DETERMINANT_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INVERSION_CASE_0   : boolean := false;
   signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_0     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_RANK_CASE_0        : boolean := false;
+  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_0   : boolean := false;
   signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0   : boolean := false;
   signal STIMULUS_NTM_SCALAR_PRODUCT_CASE_0     : boolean := false;
   signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_0     : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_DETERMINANT_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INVERSION_CASE_1   : boolean := false;
   signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_1     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_RANK_CASE_1        : boolean := false;
+  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_1   : boolean := false;
   signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1   : boolean := false;
   signal STIMULUS_NTM_SCALAR_PRODUCT_CASE_1     : boolean := false;
   signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_1     : boolean := false;
@@ -120,42 +114,6 @@ package ntm_algebra_pkg is
       CLK : out std_logic;
       RST : out std_logic;
 
-      -- MATRIX DETERMINANT
-      -- CONTROL
-      MATRIX_DETERMINANT_START : out std_logic;
-      MATRIX_DETERMINANT_READY : in  std_logic;
-
-      MATRIX_DETERMINANT_DATA_IN_I_ENABLE : out std_logic;
-      MATRIX_DETERMINANT_DATA_IN_J_ENABLE : out std_logic;
-
-      MATRIX_DETERMINANT_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_DETERMINANT_DATA_OUT_J_ENABLE : in std_logic;
-
-      -- DATA
-      MATRIX_DETERMINANT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_DETERMINANT_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-      MATRIX_DETERMINANT_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-      MATRIX_DETERMINANT_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_DETERMINANT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- MATRIX INVERSION
-      -- CONTROL
-      MATRIX_INVERSION_START : out std_logic;
-      MATRIX_INVERSION_READY : in  std_logic;
-
-      MATRIX_INVERSION_DATA_IN_I_ENABLE : out std_logic;
-      MATRIX_INVERSION_DATA_IN_J_ENABLE : out std_logic;
-
-      MATRIX_INVERSION_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_INVERSION_DATA_OUT_J_ENABLE : in std_logic;
-
-      -- DATA
-      MATRIX_INVERSION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INVERSION_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-      MATRIX_INVERSION_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-      MATRIX_INVERSION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INVERSION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
       -- MATRIX PRODUCT
       -- CONTROL
       MATRIX_PRODUCT_START : out std_logic;
@@ -179,23 +137,33 @@ package ntm_algebra_pkg is
       MATRIX_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- MATRIX RANK
+      -- TENSOR TRANSPOSE
       -- CONTROL
-      MATRIX_RANK_START : out std_logic;
-      MATRIX_RANK_READY : in  std_logic;
+      TENSOR_TRANSPOSE_START : out std_logic;
+      TENSOR_TRANSPOSE_READY : in  std_logic;
 
-      MATRIX_RANK_DATA_IN_I_ENABLE : out std_logic;
-      MATRIX_RANK_DATA_IN_J_ENABLE : out std_logic;
+      TENSOR_TRANSPOSE_DATA_A_IN_I_ENABLE : out std_logic;
+      TENSOR_TRANSPOSE_DATA_A_IN_J_ENABLE : out std_logic;
+      TENSOR_TRANSPOSE_DATA_A_IN_K_ENABLE : out std_logic;
+      TENSOR_TRANSPOSE_DATA_B_IN_I_ENABLE : out std_logic;
+      TENSOR_TRANSPOSE_DATA_B_IN_J_ENABLE : out std_logic;
+      TENSOR_TRANSPOSE_DATA_B_IN_K_ENABLE : out std_logic;
 
-      MATRIX_RANK_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_RANK_DATA_OUT_J_ENABLE : in std_logic;
+      TENSOR_TRANSPOSE_DATA_OUT_I_ENABLE : in std_logic;
+      TENSOR_TRANSPOSE_DATA_OUT_J_ENABLE : in std_logic;
+      TENSOR_TRANSPOSE_DATA_OUT_K_ENABLE : in std_logic;
 
       -- DATA
-      MATRIX_RANK_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_RANK_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-      MATRIX_RANK_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-      MATRIX_RANK_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_RANK_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_MODULO_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_SIZE_A_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_SIZE_A_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_SIZE_A_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_SIZE_B_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_SIZE_B_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_SIZE_B_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- MATRIX TRANSPOSE
       -- CONTROL

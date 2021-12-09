@@ -57,26 +57,20 @@ entity ntm_algebra_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- FUNCTIONALITY
-    ENABLE_NTM_MATRIX_DETERMINANT_TEST : boolean := false;
-    ENABLE_NTM_MATRIX_INVERSION_TEST   : boolean := false;
     ENABLE_NTM_MATRIX_PRODUCT_TEST     : boolean := false;
-    ENABLE_NTM_MATRIX_RANK_TEST        : boolean := false;
+    ENABLE_NTM_TENSOR_TRANSPOSE_TEST   : boolean := false;
     ENABLE_NTM_MATRIX_TRANSPOSE_TEST   : boolean := false;
     ENABLE_NTM_SCALAR_PRODUCT_TEST     : boolean := false;
     ENABLE_NTM_TENSOR_PRODUCT_TEST     : boolean := false;
 
-    ENABLE_NTM_MATRIX_DETERMINANT_CASE_0 : boolean := false;
-    ENABLE_NTM_MATRIX_INVERSION_CASE_0   : boolean := false;
     ENABLE_NTM_MATRIX_PRODUCT_CASE_0     : boolean := false;
-    ENABLE_NTM_MATRIX_RANK_CASE_0        : boolean := false;
+    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_0   : boolean := false;
     ENABLE_NTM_MATRIX_TRANSPOSE_CASE_0   : boolean := false;
     ENABLE_NTM_SCALAR_PRODUCT_CASE_0     : boolean := false;
     ENABLE_NTM_TENSOR_PRODUCT_CASE_0     : boolean := false;
 
-    ENABLE_NTM_MATRIX_DETERMINANT_CASE_1 : boolean := false;
-    ENABLE_NTM_MATRIX_INVERSION_CASE_1   : boolean := false;
     ENABLE_NTM_MATRIX_PRODUCT_CASE_1     : boolean := false;
-    ENABLE_NTM_MATRIX_RANK_CASE_1        : boolean := false;
+    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_1   : boolean := false;
     ENABLE_NTM_MATRIX_TRANSPOSE_CASE_1   : boolean := false;
     ENABLE_NTM_SCALAR_PRODUCT_CASE_1     : boolean := false;
     ENABLE_NTM_TENSOR_PRODUCT_CASE_1     : boolean := false
@@ -92,42 +86,6 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   -- GLOBAL
   signal CLK : std_logic;
   signal RST : std_logic;
-
-  -- MATRIX DETERMINANT
-  -- CONTROL
-  signal start_matrix_determinant : std_logic;
-  signal ready_matrix_determinant : std_logic;
-
-  signal data_in_i_enable_matrix_determinant : std_logic;
-  signal data_in_j_enable_matrix_determinant : std_logic;
-
-  signal data_out_i_enable_matrix_determinant : std_logic;
-  signal data_out_j_enable_matrix_determinant : std_logic;
-
-  -- DATA
-  signal modulo_in_matrix_determinant : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_determinant : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_determinant : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal data_in_matrix_determinant   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_determinant  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- MATRIX INVERSION
-  -- CONTROL
-  signal start_matrix_inversion : std_logic;
-  signal ready_matrix_inversion : std_logic;
-
-  signal data_in_i_enable_matrix_inversion : std_logic;
-  signal data_in_j_enable_matrix_inversion : std_logic;
-
-  signal data_out_i_enable_matrix_inversion : std_logic;
-  signal data_out_j_enable_matrix_inversion : std_logic;
-
-  -- DATA
-  signal modulo_in_matrix_inversion : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_inversion : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_inversion : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal data_in_matrix_inversion   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_inversion  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX PRODUCT
   -- CONTROL
@@ -152,23 +110,33 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MATRIX RANK
+  -- TENSOR TRANSPOSE
   -- CONTROL
-  signal start_matrix_rank : std_logic;
-  signal ready_matrix_rank : std_logic;
+  signal start_tensor_transpose : std_logic;
+  signal ready_tensor_transpose : std_logic;
 
-  signal data_in_i_enable_matrix_rank : std_logic;
-  signal data_in_j_enable_matrix_rank : std_logic;
+  signal data_a_in_i_enable_tensor_transpose : std_logic;
+  signal data_a_in_j_enable_tensor_transpose : std_logic;
+  signal data_a_in_k_enable_tensor_transpose : std_logic;
+  signal data_b_in_i_enable_tensor_transpose : std_logic;
+  signal data_b_in_j_enable_tensor_transpose : std_logic;
+  signal data_b_in_k_enable_tensor_transpose : std_logic;
 
-  signal data_out_i_enable_matrix_rank : std_logic;
-  signal data_out_j_enable_matrix_rank : std_logic;
+  signal data_out_i_enable_tensor_transpose : std_logic;
+  signal data_out_j_enable_tensor_transpose : std_logic;
+  signal data_out_k_enable_tensor_transpose : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_rank : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_rank : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_rank : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal data_in_matrix_rank   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_rank  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_tensor_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_i_in_tensor_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_a_j_in_tensor_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_a_k_in_tensor_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_b_i_in_tensor_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_b_j_in_tensor_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_b_k_in_tensor_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal data_a_in_tensor_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_transpose    : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX TRANSPOSE
   -- CONTROL
@@ -226,7 +194,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal size_a_i_in_tensor_product : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal size_a_j_in_tensor_product : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal size_a_k_in_tensor_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_b_i_in_tensorproduct  : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_b_i_in_tensor_product  : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal size_b_j_in_tensor_product : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal size_b_k_in_tensor_product : std_logic_vector(INDEX_SIZE-1 downto 0);
   signal data_a_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -243,7 +211,7 @@ begin
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE,
+        INDEX_SIZE => INDEX_SIZE,
 
       X => X,
       Y => Y,
@@ -256,42 +224,6 @@ begin
       -- GLOBAL
       CLK => CLK,
       RST => RST,
-
-      -- MATRIX DETERMINANT
-      -- CONTROL
-      MATRIX_DETERMINANT_START => start_matrix_determinant,
-      MATRIX_DETERMINANT_READY => ready_matrix_determinant,
-
-      MATRIX_DETERMINANT_DATA_IN_I_ENABLE => data_in_i_enable_matrix_determinant,
-      MATRIX_DETERMINANT_DATA_IN_J_ENABLE => data_in_j_enable_matrix_determinant,
-
-      MATRIX_DETERMINANT_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_determinant,
-      MATRIX_DETERMINANT_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_determinant,
-
-      -- DATA
-      MATRIX_DETERMINANT_MODULO_IN => modulo_in_matrix_determinant,
-      MATRIX_DETERMINANT_SIZE_I_IN => size_i_in_matrix_determinant,
-      MATRIX_DETERMINANT_SIZE_J_IN => size_j_in_matrix_determinant,
-      MATRIX_DETERMINANT_DATA_IN   => data_in_matrix_determinant,
-      MATRIX_DETERMINANT_DATA_OUT  => data_out_matrix_determinant,
-
-      -- MATRIX INVERSION
-      -- CONTROL
-      MATRIX_INVERSION_START => start_matrix_inversion,
-      MATRIX_INVERSION_READY => ready_matrix_inversion,
-
-      MATRIX_INVERSION_DATA_IN_I_ENABLE => data_in_i_enable_matrix_inversion,
-      MATRIX_INVERSION_DATA_IN_J_ENABLE => data_in_j_enable_matrix_inversion,
-
-      MATRIX_INVERSION_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_inversion,
-      MATRIX_INVERSION_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_inversion,
-
-      -- DATA
-      MATRIX_INVERSION_MODULO_IN => modulo_in_matrix_inversion,
-      MATRIX_INVERSION_SIZE_I_IN => size_i_in_matrix_inversion,
-      MATRIX_INVERSION_SIZE_J_IN => size_j_in_matrix_inversion,
-      MATRIX_INVERSION_DATA_IN   => data_in_matrix_inversion,
-      MATRIX_INVERSION_DATA_OUT  => data_out_matrix_inversion,
 
       -- MATRIX PRODUCT
       -- CONTROL
@@ -316,23 +248,33 @@ begin
       MATRIX_PRODUCT_DATA_B_IN   => data_b_in_matrix_product,
       MATRIX_PRODUCT_DATA_OUT    => data_out_matrix_product,
 
-      -- MATRIX RANK
+      -- TENSOR TRANSPOSE
       -- CONTROL
-      MATRIX_RANK_START => start_matrix_rank,
-      MATRIX_RANK_READY => ready_matrix_rank,
+      TENSOR_TRANSPOSE_START => start_tensor_transpose,
+      TENSOR_TRANSPOSE_READY => ready_tensor_transpose,
 
-      MATRIX_RANK_DATA_IN_I_ENABLE => data_in_i_enable_matrix_rank,
-      MATRIX_RANK_DATA_IN_J_ENABLE => data_in_j_enable_matrix_rank,
+      TENSOR_TRANSPOSE_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_transpose,
+      TENSOR_TRANSPOSE_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_transpose,
+      TENSOR_TRANSPOSE_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_transpose,
+      TENSOR_TRANSPOSE_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_transpose,
+      TENSOR_TRANSPOSE_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_transpose,
+      TENSOR_TRANSPOSE_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_transpose,
 
-      MATRIX_RANK_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_rank,
-      MATRIX_RANK_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_rank,
+      TENSOR_TRANSPOSE_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_transpose,
+      TENSOR_TRANSPOSE_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_transpose,
+      TENSOR_TRANSPOSE_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_transpose,
 
       -- DATA
-      MATRIX_RANK_MODULO_IN => modulo_in_matrix_rank,
-      MATRIX_RANK_SIZE_I_IN => size_i_in_matrix_rank,
-      MATRIX_RANK_SIZE_J_IN => size_j_in_matrix_rank,
-      MATRIX_RANK_DATA_IN   => data_in_matrix_rank,
-      MATRIX_RANK_DATA_OUT  => data_out_matrix_rank,
+      TENSOR_TRANSPOSE_MODULO_IN   => modulo_in_tensor_transpose,
+      TENSOR_TRANSPOSE_SIZE_A_I_IN => size_a_i_in_tensor_transpose,
+      TENSOR_TRANSPOSE_SIZE_A_J_IN => size_a_j_in_tensor_transpose,
+      TENSOR_TRANSPOSE_SIZE_A_K_IN => size_a_k_in_tensor_transpose,
+      TENSOR_TRANSPOSE_SIZE_B_I_IN => size_b_i_in_tensor_transpose,
+      TENSOR_TRANSPOSE_SIZE_B_J_IN => size_b_j_in_tensor_transpose,
+      TENSOR_TRANSPOSE_SIZE_B_K_IN => size_b_k_in_tensor_transpose,
+      TENSOR_TRANSPOSE_DATA_A_IN   => data_a_in_tensor_transpose,
+      TENSOR_TRANSPOSE_DATA_B_IN   => data_b_in_tensor_transpose,
+      TENSOR_TRANSPOSE_DATA_OUT    => data_out_tensor_transpose,
 
       -- MATRIX TRANSPOSE
       -- CONTROL
@@ -390,7 +332,7 @@ begin
       TENSOR_PRODUCT_SIZE_A_I_IN => size_a_i_in_tensor_product,
       TENSOR_PRODUCT_SIZE_A_J_IN => size_a_j_in_tensor_product,
       TENSOR_PRODUCT_SIZE_A_K_IN => size_a_k_in_tensor_product,
-      TENSOR_PRODUCT_SIZE_B_I_IN => size_b_i_in_tensorproduct,
+      TENSOR_PRODUCT_SIZE_B_I_IN => size_b_i_in_tensor_product,
       TENSOR_PRODUCT_SIZE_B_J_IN => size_b_j_in_tensor_product,
       TENSOR_PRODUCT_SIZE_B_K_IN => size_b_k_in_tensor_product,
       TENSOR_PRODUCT_DATA_A_IN   => data_a_in_tensor_product,
@@ -398,74 +340,12 @@ begin
       TENSOR_PRODUCT_DATA_OUT    => data_out_tensor_product
       );
 
-  -- MATRIX DETERMINANT
-  ntm_matrix_determinant_test : if (ENABLE_NTM_MATRIX_DETERMINANT_TEST) generate
-    matrix_determinant : ntm_matrix_determinant
-      generic map (
-        DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_matrix_determinant,
-        READY => ready_matrix_determinant,
-
-        DATA_IN_I_ENABLE => data_in_i_enable_matrix_determinant,
-        DATA_IN_J_ENABLE => data_in_j_enable_matrix_determinant,
-
-        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_determinant,
-        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_determinant,
-
-        -- DATA
-        MODULO_IN => modulo_in_matrix_determinant,
-        SIZE_I_IN => size_i_in_matrix_determinant,
-        SIZE_J_IN => size_j_in_matrix_determinant,
-        DATA_IN   => data_in_matrix_determinant,
-        DATA_OUT  => data_out_matrix_determinant
-        );
-  end generate ntm_matrix_determinant_test;
-
-  -- MATRIX INVERSION
-  ntm_matrix_inversion_test : if (ENABLE_NTM_MATRIX_INVERSION_TEST) generate
-    matrix_inversion : ntm_matrix_inversion
-      generic map (
-        DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_matrix_inversion,
-        READY => ready_matrix_inversion,
-
-        DATA_IN_I_ENABLE => data_in_i_enable_matrix_inversion,
-        DATA_IN_J_ENABLE => data_in_j_enable_matrix_inversion,
-
-        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_inversion,
-        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_inversion,
-
-        -- DATA
-        MODULO_IN => modulo_in_matrix_inversion,
-        SIZE_I_IN => size_i_in_matrix_inversion,
-        SIZE_J_IN => size_j_in_matrix_inversion,
-        DATA_IN   => data_in_matrix_inversion,
-        DATA_OUT  => data_out_matrix_inversion
-        );
-  end generate ntm_matrix_inversion_test;
-
   -- MATRIX PRODUCT
   ntm_matrix_product_test : if (ENABLE_NTM_MATRIX_PRODUCT_TEST) generate
     matrix_product : ntm_matrix_product
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+        INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -496,12 +376,12 @@ begin
         );
   end generate ntm_matrix_product_test;
 
-  -- MATRIX RANK
-  ntm_matrix_rank_test : if (ENABLE_NTM_MATRIX_RANK_TEST) generate
-    matrix_rank : ntm_matrix_rank
+  -- TENSOR TRANSPOSE
+  ntm_tensor_transpose_test : if (ENABLE_NTM_TENSOR_PRODUCT_TEST) generate
+    tensor_transpose : ntm_tensor_transpose
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+        INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -509,30 +389,40 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_matrix_rank,
-        READY => ready_matrix_rank,
+        START => start_tensor_transpose,
+        READY => ready_tensor_transpose,
 
-        DATA_IN_I_ENABLE => data_in_i_enable_matrix_rank,
-        DATA_IN_J_ENABLE => data_in_j_enable_matrix_rank,
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_transpose,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_transpose,
+        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_transpose,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_transpose,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_transpose,
+        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_transpose,
 
-        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_rank,
-        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_rank,
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_transpose,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_transpose,
+        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_transpose,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_rank,
-        SIZE_I_IN => size_i_in_matrix_rank,
-        SIZE_J_IN => size_j_in_matrix_rank,
-        DATA_IN   => data_in_matrix_rank,
-        DATA_OUT  => data_out_matrix_rank
+        MODULO_IN   => modulo_in_tensor_transpose,
+        SIZE_A_I_IN => size_a_i_in_tensor_transpose,
+        SIZE_A_J_IN => size_a_j_in_tensor_transpose,
+        SIZE_A_K_IN => size_a_k_in_tensor_transpose,
+        SIZE_B_I_IN => size_b_i_in_tensor_transpose,
+        SIZE_B_J_IN => size_b_j_in_tensor_transpose,
+        SIZE_B_K_IN => size_b_k_in_tensor_transpose,
+        DATA_A_IN   => data_a_in_tensor_transpose,
+        DATA_B_IN   => data_b_in_tensor_transpose,
+        DATA_OUT    => data_out_tensor_transpose
         );
-  end generate ntm_matrix_rank_test;
+  end generate ntm_tensor_transpose_test;
 
   -- MATRIX TRANSPOSE
   ntm_matrix_transpose_test : if (ENABLE_NTM_MATRIX_TRANSPOSE_TEST) generate
     matrix_transpose : ntm_matrix_transpose
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+        INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -563,7 +453,7 @@ begin
     scalar_product : ntm_scalar_product
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+        INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -593,7 +483,7 @@ begin
     tensor_product : ntm_tensor_product
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+        INDEX_SIZE => INDEX_SIZE
         )
       port map (
         -- GLOBAL
@@ -620,7 +510,7 @@ begin
         SIZE_A_I_IN => size_a_i_in_tensor_product,
         SIZE_A_J_IN => size_a_j_in_tensor_product,
         SIZE_A_K_IN => size_a_k_in_tensor_product,
-        SIZE_B_I_IN => size_b_i_in_tensorproduct,
+        SIZE_B_I_IN => size_b_i_in_tensor_product,
         SIZE_B_J_IN => size_b_j_in_tensor_product,
         SIZE_B_K_IN => size_b_k_in_tensor_product,
         DATA_A_IN   => data_a_in_tensor_product,

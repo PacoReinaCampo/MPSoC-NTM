@@ -1,0 +1,4 @@
+cd C:/Users/Us1/GitHub/MPSoC-NTM/sim/vhdl/osvvm/mpsoc/math/function/msim
+
+do C:/Users/Us1/GitHub/MPSoC-NTM/sim/vhdl/osvvm/mpsoc/math/function/msim/macros/design.do
+do C:/Users/Us1/GitHub/MPSoC-NTM/sim/vhdl/osvvm/mpsoc/math/function/msim/macros/verification.do
