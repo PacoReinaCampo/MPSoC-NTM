@@ -103,7 +103,7 @@ module ntm_scalar_multiplier #(
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = DATA_B_IN · DATA_A_IN mod MODULO_IN
+  // DATA_OUT = DATA_A_IN · DATA_B_IN mod MODULO_IN
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin

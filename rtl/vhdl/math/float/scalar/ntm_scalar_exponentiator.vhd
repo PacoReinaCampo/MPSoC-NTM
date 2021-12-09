@@ -118,7 +118,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = exponentiator(DATA_A_IN, DATA_B_IN) mod MODULO_IN
+  -- DATA_OUT = exponentiator(M_A_IN · 2^(E_A_IN), M_B_IN · 2^(E_B_IN))
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)

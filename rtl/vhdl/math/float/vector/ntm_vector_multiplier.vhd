@@ -133,7 +133,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_B_IN · DATA_A_IN mod MODULO_IN
+  -- DATA_OUT = DATA_A_IN · DATA_B_IN = M_A_IN · M_B_IN · 2^(E_A_IN + E_B_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)

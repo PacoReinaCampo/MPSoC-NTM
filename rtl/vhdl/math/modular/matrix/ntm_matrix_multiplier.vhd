@@ -147,7 +147,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_B_IN + DATA_A_IN mod MODULO_IN
+  -- DATA_OUT = DATA_A_IN · DATA_B_IN mod MODULO_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)

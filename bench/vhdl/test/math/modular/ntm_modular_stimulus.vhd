@@ -679,7 +679,7 @@ begin
 
       -- DATA
       VECTOR_MOD_MODULO_IN <= FULL;
-      VECTOR_MOD_SIZE_IN   <= THREE_DATA;
+      VECTOR_MOD_SIZE_IN   <= THREE_CONTROL;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_MOD_CASE 0          ";
@@ -772,7 +772,7 @@ begin
 
       -- DATA
       VECTOR_ADDER_MODULO_IN <= FULL;
-      VECTOR_ADDER_SIZE_IN   <= THREE_DATA;
+      VECTOR_ADDER_SIZE_IN   <= THREE_CONTROL;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_ADDER_CASE 0        ";
@@ -872,7 +872,7 @@ begin
 
       -- DATA
       VECTOR_MULTIPLIER_MODULO_IN <= FULL;
-      VECTOR_MULTIPLIER_SIZE_IN   <= THREE_DATA;
+      VECTOR_MULTIPLIER_SIZE_IN   <= THREE_CONTROL;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_MULTIPLIER_CASE 0   ";
@@ -972,7 +972,7 @@ begin
 
       -- DATA
       VECTOR_INVERTER_MODULO_IN <= FULL;
-      VECTOR_INVERTER_SIZE_IN   <= THREE_DATA;
+      VECTOR_INVERTER_SIZE_IN   <= THREE_CONTROL;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_INVERTER_CASE 0     ";
@@ -1062,7 +1062,7 @@ begin
 
       -- DATA
       VECTOR_DIVIDER_MODULO_IN <= FULL;
-      VECTOR_DIVIDER_SIZE_IN   <= THREE_DATA;
+      VECTOR_DIVIDER_SIZE_IN   <= THREE_CONTROL;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_DIVIDER_CASE 0      ";
@@ -1162,7 +1162,7 @@ begin
 
       -- DATA
       VECTOR_EXPONENTIATOR_MODULO_IN <= FULL;
-      VECTOR_EXPONENTIATOR_SIZE_IN   <= THREE_DATA;
+      VECTOR_EXPONENTIATOR_SIZE_IN   <= THREE_CONTROL;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE 0";
@@ -1266,8 +1266,8 @@ begin
 
       -- DATA
       MATRIX_MOD_MODULO_IN <= FULL;
-      MATRIX_MOD_SIZE_I_IN <= THREE_DATA;
-      MATRIX_MOD_SIZE_J_IN <= THREE_DATA;
+      MATRIX_MOD_SIZE_I_IN <= THREE_CONTROL;
+      MATRIX_MOD_SIZE_J_IN <= THREE_CONTROL;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_MATRIX_MOD_CASE 0          ";
@@ -1386,8 +1386,8 @@ begin
 
       -- DATA
       MATRIX_ADDER_MODULO_IN <= FULL;
-      MATRIX_ADDER_SIZE_I_IN <= THREE_DATA;
-      MATRIX_ADDER_SIZE_J_IN <= THREE_DATA;
+      MATRIX_ADDER_SIZE_I_IN <= THREE_CONTROL;
+      MATRIX_ADDER_SIZE_J_IN <= THREE_CONTROL;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_MATRIX_ADDER_CASE 0        ";
@@ -1521,8 +1521,8 @@ begin
 
       -- DATA
       MATRIX_MULTIPLIER_MODULO_IN <= FULL;
-      MATRIX_MULTIPLIER_SIZE_I_IN <= THREE_DATA;
-      MATRIX_MULTIPLIER_SIZE_J_IN <= THREE_DATA;
+      MATRIX_MULTIPLIER_SIZE_I_IN <= THREE_CONTROL;
+      MATRIX_MULTIPLIER_SIZE_J_IN <= THREE_CONTROL;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_MATRIX_MULTIPLIER_CASE 0   ";
@@ -1656,8 +1656,8 @@ begin
 
       -- DATA
       MATRIX_INVERTER_MODULO_IN <= FULL;
-      MATRIX_INVERTER_SIZE_I_IN <= THREE_DATA;
-      MATRIX_INVERTER_SIZE_J_IN <= THREE_DATA;
+      MATRIX_INVERTER_SIZE_I_IN <= THREE_CONTROL;
+      MATRIX_INVERTER_SIZE_J_IN <= THREE_CONTROL;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_MATRIX_INVERTER_CASE 0     ";
@@ -1773,8 +1773,8 @@ begin
 
       -- DATA
       MATRIX_DIVIDER_MODULO_IN <= FULL;
-      MATRIX_DIVIDER_SIZE_I_IN <= THREE_DATA;
-      MATRIX_DIVIDER_SIZE_J_IN <= THREE_DATA;
+      MATRIX_DIVIDER_SIZE_I_IN <= THREE_CONTROL;
+      MATRIX_DIVIDER_SIZE_J_IN <= THREE_CONTROL;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_MATRIX_DIVIDER_CASE 0      ";
@@ -1908,8 +1908,8 @@ begin
 
       -- DATA
       MATRIX_EXPONENTIATOR_MODULO_IN <= FULL;
-      MATRIX_EXPONENTIATOR_SIZE_I_IN <= THREE_DATA;
-      MATRIX_EXPONENTIATOR_SIZE_J_IN <= THREE_DATA;
+      MATRIX_EXPONENTIATOR_SIZE_I_IN <= THREE_CONTROL;
+      MATRIX_EXPONENTIATOR_SIZE_J_IN <= THREE_CONTROL;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE 0";

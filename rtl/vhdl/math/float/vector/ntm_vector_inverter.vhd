@@ -127,7 +127,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- 1 = DATA_OUT · DATA_IN mod MODULO_IN
+  -- DATA_OUT = 1 / DATA_IN  = 1 / M_IN · 2^(E_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
