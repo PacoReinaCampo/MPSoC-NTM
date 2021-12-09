@@ -69,10 +69,8 @@
 │       └── dnc_write_vector.vhd
 ├── math
 │   ├── algebra
-│   │   ├── ntm_matrix_determinant.vhd
-│   │   ├── ntm_matrix_inversion.vhd
 │   │   ├── ntm_matrix_product.vhd
-│   │   ├── ntm_matrix_rank.vhd
+│   │   ├── ntm_tensor_transpose.vhd
 │   │   ├── ntm_matrix_transpose.vhd
 │   │   ├── ntm_scalar_product.vhd
 │   │   └── ntm_tensor_product.vhd
@@ -82,56 +80,41 @@
 │   │   │   ├── ntm_matrix_divider.vhd
 │   │   │   ├── ntm_matrix_exponentiator.vhd
 │   │   │   ├── ntm_matrix_inverter.vhd
-│   │   │   ├── ntm_matrix_gcd.vhd
 │   │   │   ├── ntm_matrix_mod.vhd
-│   │   │   ├── ntm_matrix_multiplier.vhd
-│   │   │   └── ntm_matrix_lcm.vhd
+│   │   │   └── ntm_matrix_multiplier.vhd
 │   │   ├── scalar
 │   │   │   ├── ntm_scalar_adder.vhd
 │   │   │   ├── ntm_scalar_divider.vhd
 │   │   │   ├── ntm_scalar_exponentiator.vhd
 │   │   │   ├── ntm_scalar_inverter.vhd
-│   │   │   ├── ntm_scalar_gcd.vhd
 │   │   │   ├── ntm_scalar_mod.vhd
-│   │   │   ├── ntm_scalar_multiplier.vhd
-│   │   │   └── ntm_scalar_lcm.vhd
+│   │   │   └── ntm_scalar_multiplier.vhd
 │   │   └── vector
 │   │       ├── ntm_vector_adder.vhd
 │   │       ├── ntm_vector_divider.vhd
 │   │       ├── ntm_vector_exponentiator.vhd
 │   │       ├── ntm_vector_inverter.vhd
-│   │       ├── ntm_vector_gcd.vhd
 │   │       ├── ntm_vector_mod.vhd
-│   │       ├── ntm_vector_multiplier.vhd
-│   │       └── ntm_vector_lcm.vhd
+│   │       └── ntm_vector_multiplier.vhd
 │   ├── float
 │   │   ├── matrix
 │   │   │   ├── ntm_matrix_adder.vhd
 │   │   │   ├── ntm_matrix_divider.vhd
 │   │   │   ├── ntm_matrix_exponentiator.vhd
 │   │   │   ├── ntm_matrix_inverter.vhd
-│   │   │   ├── ntm_matrix_gcd.vhd
-│   │   │   ├── ntm_matrix_mod.vhd
-│   │   │   ├── ntm_matrix_multiplier.vhd
-│   │   │   └── ntm_matrix_lcm.vhd
+│   │   │   └── ntm_matrix_multiplier.vhd
 │   │   ├── scalar
 │   │   │   ├── ntm_scalar_adder.vhd
 │   │   │   ├── ntm_scalar_divider.vhd
 │   │   │   ├── ntm_scalar_exponentiator.vhd
 │   │   │   ├── ntm_scalar_inverter.vhd
-│   │   │   ├── ntm_scalar_gcd.vhd
-│   │   │   ├── ntm_scalar_mod.vhd
-│   │   │   ├── ntm_scalar_multiplier.vhd
-│   │   │   └── ntm_scalar_lcm.vhd
+│   │   │   └── ntm_scalar_multiplier.vhd
 │   │   └── vector
 │   │       ├── ntm_vector_adder.vhd
 │   │       ├── ntm_vector_divider.vhd
 │   │       ├── ntm_vector_exponentiator.vhd
 │   │       ├── ntm_vector_inverter.vhd
-│   │       ├── ntm_vector_gcd.vhd
-│   │       ├── ntm_vector_mod.vhd
-│   │       ├── ntm_vector_multiplier.vhd
-│   │       └── ntm_vector_lcm.vhd
+│   │       └── ntm_vector_multiplier.vhd
 │   └── function
 │       ├── matrix
 │       │   ├── ntm_matrix_convolution_function.vhd
