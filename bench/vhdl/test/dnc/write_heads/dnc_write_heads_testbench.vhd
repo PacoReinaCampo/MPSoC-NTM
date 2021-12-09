@@ -47,8 +47,8 @@ use work.dnc_write_heads_pkg.all;
 entity dnc_write_heads_testbench is
   generic (
     -- SYSTEM-SIZE
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128;
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -93,7 +93,7 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
   signal e_out_enable_erase_vector : std_logic;
 
   -- DATA
-  signal size_w_in_erase_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_erase_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal e_in_erase_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal e_out_erase_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -117,7 +117,7 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
   signal k_out_enable_write_key : std_logic;
 
   -- DATA
-  signal size_w_in_write_key : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_write_key : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal k_in_write_key  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_out_write_key : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -141,7 +141,7 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
   signal v_out_enable_write_vector : std_logic;
 
   -- DATA
-  signal size_w_in_write_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_w_in_write_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal v_in_write_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal v_out_write_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -157,7 +157,7 @@ begin
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE,
 
       X => X,
       Y => Y,
@@ -254,7 +254,7 @@ begin
   allocation_gate : dnc_allocation_gate
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -275,7 +275,7 @@ begin
   erase_vector : dnc_erase_vector
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -302,7 +302,7 @@ begin
   write_gate : dnc_write_gate
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -323,7 +323,7 @@ begin
   write_key : dnc_write_key
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -350,7 +350,7 @@ begin
   write_strength : dnc_write_strength
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -371,7 +371,7 @@ begin
   write_vector : dnc_write_vector
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

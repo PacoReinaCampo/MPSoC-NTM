@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_scalar_inverter is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -83,8 +83,8 @@ architecture ntm_scalar_inverter_architecture of ntm_scalar_inverter is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO : std_logic_vector(DATA_SIZE downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE+1));
-  constant ONE  : std_logic_vector(DATA_SIZE downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE+1));
+  constant ZERO_DATA : std_logic_vector(DATA_SIZE downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE+1));
+  constant ONE_DATA  : std_logic_vector(DATA_SIZE downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE+1));
 
   -----------------------------------------------------------------------
   -- Signals
@@ -119,11 +119,11 @@ begin
       READY <= '0';
 
       -- Assignation
-      u_int <= ZERO;
-      v_int <= ZERO;
+      u_int <= ZERO_DATA;
+      v_int <= ZERO_DATA;
 
-      x_int <= ZERO;
-      y_int <= ZERO;
+      x_int <= ZERO_DATA;
+      y_int <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -137,8 +137,8 @@ begin
             u_int <= '0' & DATA_IN;
             v_int <= '0' & MODULO_IN;
 
-            x_int <= ONE;
-            y_int <= ZERO;
+            x_int <= ONE_DATA;
+            y_int <= ZERO_DATA;
 
             -- FSM Control
             inverter_ctrl_fsm_int <= ENDER_STATE;
@@ -146,7 +146,7 @@ begin
 
         when ENDER_STATE =>  -- STEP 1
 
-          if(unsigned(u_int) = unsigned(ONE)) then
+          if(unsigned(u_int) = unsigned(ONE_DATA)) then
             if (unsigned(x_int) < '0' & unsigned(MODULO_IN)) then
               -- Data Outputs
               DATA_OUT <= x_int(DATA_SIZE-1 downto 0);
@@ -160,7 +160,7 @@ begin
               -- Assignations
               x_int <= std_logic_vector(unsigned(x_int) - ('0' & unsigned(MODULO_IN)));
             end if;
-          elsif(unsigned(v_int) = unsigned(ONE)) then
+          elsif(unsigned(v_int) = unsigned(ONE_DATA)) then
             if (unsigned(y_int) < '0' & unsigned(MODULO_IN)) then
               -- Data Outputs
               DATA_OUT <= y_int(DATA_SIZE-1 downto 0);

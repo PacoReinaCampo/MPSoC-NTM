@@ -48,8 +48,8 @@ module dnc_write_heads_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=512;
-  parameter INDEX_SIZE=512;
+  parameter DATA_SIZE=128;
+  parameter CONTROL_SIZE=64;
 
   parameter X=64;
   parameter Y=64;
@@ -139,7 +139,7 @@ module dnc_write_heads_testbench;
   // STIMULUS
   dnc_write_heads_stimulus #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   write_heads_stimulus(
     // GLOBAL
@@ -216,7 +216,7 @@ module dnc_write_heads_testbench;
   // ALLOCATION GATE
   dnc_allocation_gate #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   allocation_gate(
     // GLOBAL
@@ -235,7 +235,7 @@ module dnc_write_heads_testbench;
   // ERASE VECTOR
   dnc_erase_vector #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   erase_vector(
     // GLOBAL
@@ -258,7 +258,7 @@ module dnc_write_heads_testbench;
   // WRITE GATE
   dnc_write_gate #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   write_gate(
     // GLOBAL
@@ -277,7 +277,7 @@ module dnc_write_heads_testbench;
   // WRITE KEY
   dnc_write_key #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   write_key(
     // GLOBAL
@@ -300,7 +300,7 @@ module dnc_write_heads_testbench;
   // WRITE STRENGTH
   dnc_write_strength #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   write_strength(
     // GLOBAL
@@ -319,7 +319,7 @@ module dnc_write_heads_testbench;
   // WRITE VECTOR
   dnc_write_vector #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   write_vector(
     // GLOBAL

@@ -47,8 +47,8 @@ use work.dnc_core_pkg.all;
 
 entity dnc_addressing is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -89,8 +89,8 @@ entity dnc_addressing is
     R_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     -- DATA
-    SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     K_READ_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
     BETA_READ_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -132,13 +132,15 @@ architecture dnc_addressing_architecture of dnc_addressing is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -164,7 +166,7 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal a_out_enable_allocation_weighting : std_logic;
 
   -- DATA
-  signal size_n_in_allocation_weighting : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_n_in_allocation_weighting : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal u_in_allocation_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -191,8 +193,8 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal b_out_j_enable_backward_weighting : std_logic;
 
   -- DATA
-  signal size_r_in_backward_weighting : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_n_in_backward_weighting : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_r_in_backward_weighting : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_n_in_backward_weighting : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal l_in_backward_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_in_backward_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -220,8 +222,8 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal f_out_j_enable_forward_weighting : std_logic;
 
   -- DATA
-  signal size_r_in_forward_weighting : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_n_in_forward_weighting : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_r_in_forward_weighting : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_n_in_forward_weighting : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal l_in_forward_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -249,8 +251,8 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal m_out_k_enable_memory_matrix : std_logic;
 
   -- DATA
-  signal size_n_in_memory_matrix : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_w_in_memory_matrix : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_n_in_memory_matrix : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_memory_matrix : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal m_in_memory_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -278,8 +280,8 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal psi_out_enable_memory_retention_vector : std_logic;
 
   -- DATA
-  signal size_r_in_memory_retention_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_n_in_memory_retention_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_r_in_memory_retention_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_n_in_memory_retention_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal f_in_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_in_memory_retention_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -298,8 +300,8 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal p_out_enable_precedence_weighting : std_logic;
 
   -- DATA
-  signal size_r_in_precedence_weighting : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_n_in_precedence_weighting : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_r_in_precedence_weighting : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_n_in_precedence_weighting : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal w_in_precedence_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal p_in_precedence_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -324,8 +326,8 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal c_out_enable_read_content_weighting : std_logic;
 
   -- DATA
-  signal size_n_in_read_content_weighting : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_w_in_read_content_weighting : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_n_in_read_content_weighting : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_read_content_weighting : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal k_in_read_content_weighting    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal m_in_read_content_weighting    : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -354,9 +356,9 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal r_out_k_enable_read_vectors : std_logic;
 
   -- DATA
-  signal size_r_in_read_vectors : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_n_in_read_vectors : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_w_in_read_vectors : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_r_in_read_vectors : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_n_in_read_vectors : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_read_vectors : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal m_in_read_vectors : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_in_read_vectors : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -396,8 +398,8 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal w_out_j_enable_read_weighting : std_logic;
 
   -- DATA
-  signal size_r_in_read_weighting : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_n_in_read_weighting : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_r_in_read_weighting : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_n_in_read_weighting : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal pi_in_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -425,7 +427,7 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal l_out_j_enable_temporal_link_matrix : std_logic;
 
   -- DATA
-  signal size_n_in_temporal_link_matrix : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_n_in_temporal_link_matrix : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal l_in_temporal_link_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_in_temporal_link_matrix : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -447,7 +449,7 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal psi_out_enable_usage_vector : std_logic;
 
   -- DATA
-  signal size_n_in_usage_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_n_in_usage_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal u_in_usage_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal w_in_usage_vector   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -473,8 +475,8 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal c_out_enable_write_content_weighting : std_logic;
 
   -- DATA
-  signal size_n_in_write_content_weighting : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_w_in_write_content_weighting : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_n_in_write_content_weighting : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_write_content_weighting : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal k_in_write_content_weighting    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal m_in_write_content_weighting    : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -496,7 +498,7 @@ architecture dnc_addressing_architecture of dnc_addressing is
   signal w_out_enable_write_weighting : std_logic;
 
   -- DATA
-  signal size_n_in_write_weighting : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_n_in_write_weighting : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal a_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
   signal c_in_write_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -517,7 +519,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      R_OUT <= ZERO;
+      R_OUT <= ZERO_DATA;
 
       R_OUT_I_ENABLE <= '0';
       R_OUT_K_ENABLE <= '0';
@@ -686,15 +688,15 @@ begin
 
   -- DATA
   -- ALLOCATION WEIGHTING
-  size_n_in_allocation_weighting <= ONE_INDEX;
+  size_n_in_allocation_weighting <= ONE_CONTROL;
 
   u_in_allocation_weighting <= FULL;
 
   a_out_allocation_weighting <= FULL;
 
   -- BACKWARD WEIGHTING
-  size_r_in_backward_weighting <= ONE_INDEX;
-  size_n_in_backward_weighting <= ONE_INDEX;
+  size_r_in_backward_weighting <= ONE_CONTROL;
+  size_n_in_backward_weighting <= ONE_CONTROL;
 
   l_in_backward_weighting  <= FULL;
   w_in_backward_weighting  <= FULL;
@@ -708,8 +710,8 @@ begin
   f_out_forward_weighting <= FULL;
 
   -- MEMORY MATRIX
-  size_n_in_memory_matrix <= ONE_INDEX;
-  size_w_in_memory_matrix <= ONE_INDEX;
+  size_n_in_memory_matrix <= ONE_CONTROL;
+  size_w_in_memory_matrix <= ONE_CONTROL;
 
   m_in_memory_matrix <= FULL;
 
@@ -720,8 +722,8 @@ begin
   m_out_memory_matrix <= FULL;
 
   -- MEMORY RETENTION VECTOR
-  size_r_in_memory_retention_vector <= ONE_INDEX;
-  size_n_in_memory_retention_vector <= ONE_INDEX;
+  size_r_in_memory_retention_vector <= ONE_CONTROL;
+  size_n_in_memory_retention_vector <= ONE_CONTROL;
 
   f_in_memory_retention_vector <= FULL;
   w_in_memory_retention_vector <= FULL;
@@ -729,8 +731,8 @@ begin
   psi_out_memory_retention_vector <= FULL;
 
   -- PRECEDENCE WEIGHTING
-  size_r_in_precedence_weighting <= ONE_INDEX;
-  size_n_in_precedence_weighting <= ONE_INDEX;
+  size_r_in_precedence_weighting <= ONE_CONTROL;
+  size_n_in_precedence_weighting <= ONE_CONTROL;
 
   w_in_precedence_weighting <= FULL;
   p_in_precedence_weighting <= FULL;
@@ -738,8 +740,8 @@ begin
   p_out_precedence_weighting <= FULL;
 
   -- READ CONTENT WEIGHTING
-  size_n_in_read_content_weighting <= ONE_INDEX;
-  size_w_in_read_content_weighting <= ONE_INDEX;
+  size_n_in_read_content_weighting <= ONE_CONTROL;
+  size_w_in_read_content_weighting <= ONE_CONTROL;
 
   k_in_read_content_weighting    <= FULL;
   m_in_read_content_weighting    <= FULL;
@@ -748,9 +750,9 @@ begin
   c_out_read_content_weighting <= FULL;
 
   -- READ VECTORS
-  size_r_in_read_vectors <= ONE_INDEX;
-  size_n_in_read_vectors <= ONE_INDEX;
-  size_w_in_read_vectors <= ONE_INDEX;
+  size_r_in_read_vectors <= ONE_CONTROL;
+  size_n_in_read_vectors <= ONE_CONTROL;
+  size_w_in_read_vectors <= ONE_CONTROL;
 
   m_in_read_vectors <= FULL;
   w_in_read_vectors <= FULL;
@@ -758,8 +760,8 @@ begin
   r_out_read_vectors <= FULL;
 
   -- READ WEIGHTING
-  size_r_in_read_weighting <= ONE_INDEX;
-  size_n_in_read_weighting <= ONE_INDEX;
+  size_r_in_read_weighting <= ONE_CONTROL;
+  size_n_in_read_weighting <= ONE_CONTROL;
 
   pi_in_read_weighting <= FULL;
 
@@ -770,7 +772,7 @@ begin
   w_out_read_weighting <= FULL;
 
   -- TEMPORAL LINK MATRIX
-  size_n_in_temporal_link_matrix <= ONE_INDEX;
+  size_n_in_temporal_link_matrix <= ONE_CONTROL;
 
   l_in_temporal_link_matrix <= FULL;
   w_in_temporal_link_matrix <= FULL;
@@ -779,7 +781,7 @@ begin
   l_out_temporal_link_matrix <= FULL;
 
   -- USAGE VECTOR
-  size_n_in_usage_vector <= ONE_INDEX;
+  size_n_in_usage_vector <= ONE_CONTROL;
 
   u_in_usage_vector   <= FULL;
   w_in_usage_vector   <= FULL;
@@ -788,8 +790,8 @@ begin
   u_out_usage_vector <= FULL;
 
   -- WRITE CONTENT WEIGHTING
-  size_n_in_write_content_weighting <= ONE_INDEX;
-  size_w_in_write_content_weighting <= ONE_INDEX;
+  size_n_in_write_content_weighting <= ONE_CONTROL;
+  size_w_in_write_content_weighting <= ONE_CONTROL;
 
   k_in_write_content_weighting    <= FULL;
   m_in_write_content_weighting    <= FULL;
@@ -798,7 +800,7 @@ begin
   c_out_content_weighting <= FULL;
 
   -- WRITE WEIGHTING
-  size_n_in_write_weighting <= ONE_INDEX;
+  size_n_in_write_weighting <= ONE_CONTROL;
 
   a_in_write_weighting <= FULL;
   c_in_write_weighting <= FULL;
@@ -812,7 +814,7 @@ begin
   allocation_weighting : dnc_allocation_weighting
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -841,7 +843,7 @@ begin
   backward_weighting : dnc_backward_weighting
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -882,7 +884,7 @@ begin
   forward_weighting : dnc_forward_weighting
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -923,7 +925,7 @@ begin
   memory_matrix : dnc_memory_matrix
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -965,7 +967,7 @@ begin
   memory_retention_vector : dnc_memory_retention_vector
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -1002,7 +1004,7 @@ begin
   precedence_weighting : dnc_precedence_weighting
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -1033,7 +1035,7 @@ begin
   read_content_weighting : dnc_read_content_weighting
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -1071,7 +1073,7 @@ begin
   read_vectors : dnc_read_vectors
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -1112,7 +1114,7 @@ begin
   read_weighting : dnc_read_weighting
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -1167,7 +1169,7 @@ begin
   temporal_link_matrix : dnc_temporal_link_matrix
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -1204,7 +1206,7 @@ begin
   usage_vector : dnc_usage_vector
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -1237,7 +1239,7 @@ begin
   write_content_weighting : dnc_write_content_weighting
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -1273,7 +1275,7 @@ begin
   write_weighting : dnc_write_weighting
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

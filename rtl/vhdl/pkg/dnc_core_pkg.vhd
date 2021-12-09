@@ -58,8 +58,8 @@ package dnc_core_pkg is
 
   component dnc_content_based_addressing is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -96,8 +96,8 @@ package dnc_core_pkg is
 
   component dnc_allocation_weighting is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -115,7 +115,7 @@ package dnc_core_pkg is
       A_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
 
       -- DATA
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       U_IN      : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       A_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -124,8 +124,8 @@ package dnc_core_pkg is
 
   component dnc_backward_weighting is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -152,8 +152,8 @@ package dnc_core_pkg is
       B_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1
 
       -- DATA
-      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -165,8 +165,8 @@ package dnc_core_pkg is
 
   component dnc_forward_weighting is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -193,8 +193,8 @@ package dnc_core_pkg is
       F_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1
 
       -- DATA
-      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -206,8 +206,8 @@ package dnc_core_pkg is
 
   component dnc_memory_matrix is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -233,8 +233,8 @@ package dnc_core_pkg is
       M_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
       -- DATA
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       M_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -248,8 +248,8 @@ package dnc_core_pkg is
 
   component dnc_memory_retention_vector is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -273,8 +273,8 @@ package dnc_core_pkg is
       PSI_OUT_ENABLE : out std_logic;   -- for j in 0 to N-1
 
       -- DATA
-      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -285,8 +285,8 @@ package dnc_core_pkg is
 
   component dnc_precedence_weighting is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -304,8 +304,8 @@ package dnc_core_pkg is
       P_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
 
       -- DATA
-      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       P_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -316,8 +316,8 @@ package dnc_core_pkg is
 
   component dnc_read_content_weighting is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -341,8 +341,8 @@ package dnc_core_pkg is
       C_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
 
       -- DATA
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       K_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
       M_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -354,8 +354,8 @@ package dnc_core_pkg is
 
   component dnc_read_vectors is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -382,9 +382,9 @@ package dnc_core_pkg is
       R_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
       -- DATA
-      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       M_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -395,8 +395,8 @@ package dnc_core_pkg is
 
   component dnc_read_weighting is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -435,8 +435,8 @@ package dnc_core_pkg is
       W_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1
 
       -- DATA
-      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       PI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -450,8 +450,8 @@ package dnc_core_pkg is
 
   component dnc_sort_vector is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -469,7 +469,7 @@ package dnc_core_pkg is
       PHI_OUT_ENABLE : out std_logic;   -- for j in 0 to N-1
 
       -- DATA
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -479,8 +479,8 @@ package dnc_core_pkg is
 
   component dnc_temporal_link_matrix is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -504,7 +504,7 @@ package dnc_core_pkg is
       L_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1 (square matrix)
 
       -- DATA
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -516,8 +516,8 @@ package dnc_core_pkg is
 
   component dnc_usage_vector is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -537,7 +537,7 @@ package dnc_core_pkg is
       PSI_OUT_ENABLE : out std_logic;   -- for j in 0 to N-1
 
       -- DATA
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       U_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
       W_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -549,8 +549,8 @@ package dnc_core_pkg is
 
   component dnc_write_content_weighting is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -574,8 +574,8 @@ package dnc_core_pkg is
       C_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
 
       -- DATA
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       K_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
       M_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -587,8 +587,8 @@ package dnc_core_pkg is
 
   component dnc_write_weighting is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -608,7 +608,7 @@ package dnc_core_pkg is
       W_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
 
       -- DATA
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -622,8 +622,8 @@ package dnc_core_pkg is
 
   component dnc_addressing is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -664,8 +664,8 @@ package dnc_core_pkg is
       R_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
       -- DATA
-      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       K_READ_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
       BETA_READ_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -689,8 +689,8 @@ package dnc_core_pkg is
 
   component dnc_free_gates is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -706,7 +706,7 @@ package dnc_core_pkg is
       F_OUT_ENABLE : out std_logic;     -- for i in 0 to R-1
 
       -- DATA
-      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -716,8 +716,8 @@ package dnc_core_pkg is
 
   component dnc_read_keys is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -735,8 +735,8 @@ package dnc_core_pkg is
       K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
       -- DATA
-      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -746,8 +746,8 @@ package dnc_core_pkg is
 
   component dnc_read_modes is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -765,7 +765,7 @@ package dnc_core_pkg is
       PI_OUT_P_ENABLE : out std_logic;  -- for i in 0 to 2
 
       -- DATA
-      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       PI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -775,8 +775,8 @@ package dnc_core_pkg is
 
   component dnc_read_strengths is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -792,7 +792,7 @@ package dnc_core_pkg is
       BETA_OUT_ENABLE : out std_logic;  -- for i in 0 to R-1
 
       -- DATA
-      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -806,8 +806,8 @@ package dnc_core_pkg is
 
   component dnc_allocation_gate is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -827,8 +827,8 @@ package dnc_core_pkg is
 
   component dnc_erase_vector is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -844,7 +844,7 @@ package dnc_core_pkg is
       E_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
 
       -- DATA
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       E_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -854,8 +854,8 @@ package dnc_core_pkg is
 
   component dnc_write_gate is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -875,8 +875,8 @@ package dnc_core_pkg is
 
   component dnc_write_key is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -892,7 +892,7 @@ package dnc_core_pkg is
       K_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
 
       -- DATA
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -902,8 +902,8 @@ package dnc_core_pkg is
 
   component dnc_write_strength is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -923,8 +923,8 @@ package dnc_core_pkg is
 
   component dnc_write_vector is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -940,7 +940,7 @@ package dnc_core_pkg is
       V_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
 
       -- DATA
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       V_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -954,8 +954,8 @@ package dnc_core_pkg is
 
   component dnc_top is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -994,12 +994,12 @@ package dnc_core_pkg is
       Y_OUT_ENABLE : out std_logic;     -- for y in 0 to Y-1
 
       -- DATA
-      SIZE_X_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_Y_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -1013,8 +1013,8 @@ package dnc_core_pkg is
 
   component dnc_output_vector is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1052,10 +1052,10 @@ package dnc_core_pkg is
       Y_OUT_ENABLE : out std_logic;     -- for y in 0 to Y-1
 
       -- DATA
-      SIZE_Y_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -1069,8 +1069,8 @@ package dnc_core_pkg is
 
   component dnc_read_interface_vector is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1126,9 +1126,9 @@ package dnc_core_pkg is
       H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
       -- DATA
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       WK_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
       WBETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -1146,8 +1146,8 @@ package dnc_core_pkg is
 
   component dnc_write_interface_vector is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1206,9 +1206,9 @@ package dnc_core_pkg is
       H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
       -- DATA
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       WK_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
       WBETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

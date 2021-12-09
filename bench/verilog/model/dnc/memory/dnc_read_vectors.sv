@@ -38,8 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module dnc_read_vectors #(
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -88,10 +88,15 @@ module dnc_read_vectors #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO  = 0;
-  parameter ONE   = 1;
-  parameter TWO   = 2;
-  parameter THREE = 3;
+  parameter ZERO_CONTROL  = 0;
+  parameter ONE_CONTROL   = 1;
+  parameter TWO_CONTROL   = 2;
+  parameter THREE_CONTROL = 3;
+
+  parameter ZERO_DATA  = 0;
+  parameter ONE_DATA   = 1;
+  parameter TWO_DATA   = 2;
+  parameter THREE_DATA = 3;
 
   parameter FULL  = 1;
   parameter EMPTY = 0;
@@ -154,7 +159,7 @@ module dnc_read_vectors #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      R_OUT <= ZERO;
+      R_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
@@ -199,14 +204,14 @@ module dnc_read_vectors #(
   assign size_a_i_in_matrix_product = SIZE_W_IN;
   assign size_a_j_in_matrix_product = SIZE_N_IN;
   assign size_b_i_in_matrix_product = SIZE_N_IN;
-  assign size_b_j_in_matrix_product = ONE;
+  assign size_b_j_in_matrix_product = ONE_CONTROL;
   assign data_a_in_matrix_product   = data_out_matrix_transpose;
   assign data_b_in_matrix_product   = W_IN;
 
   // MATRIX TRANSPOSE
   ntm_matrix_transpose #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   matrix_transpose(
     // GLOBAL
@@ -233,7 +238,7 @@ module dnc_read_vectors #(
   // MATRIX PRODUCT
   ntm_matrix_product #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   matrix_product(
     // GLOBAL

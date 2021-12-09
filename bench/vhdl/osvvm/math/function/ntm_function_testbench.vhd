@@ -46,8 +46,8 @@ use work.ntm_function_pkg.all;
 entity ntm_function_testbench is
   generic (
     -- SYSTEM-SIZE
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128;
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -194,7 +194,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_scalar_convolution : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_scalar_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -210,7 +210,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_scalar_cosine : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_scalar_cosine : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -225,9 +225,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_scalar_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_scalar_differentiation   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_scalar_differentiation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal period_in_scalar_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_scalar_differentiation : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_scalar_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_scalar_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -242,7 +242,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_scalar_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_scalar_multiplication : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_scalar_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_scalar_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -297,7 +297,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_scalar_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_scalar_softmax : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_scalar_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_scalar_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -322,7 +322,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_scalar_summation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_scalar_summation : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_scalar_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_scalar_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -345,8 +345,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_convolution   : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal length_in_vector_convolution : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_convolution   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -377,16 +377,16 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_differentiation   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_differentiation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal period_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_vector_differentiation : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_vector_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- DATA
   signal modulo_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_cosine   : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal length_in_vector_cosine : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_cosine   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_cosine : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -404,8 +404,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_vector_multiplication : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_in_vector_multiplication   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_vector_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_in_vector_multiplication   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -420,7 +420,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_vector_cosh : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_cosh   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_cosh   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -435,7 +435,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_vector_sinh : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_sinh   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_sinh   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_sinh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_sinh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -450,7 +450,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_vector_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_tanh   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_tanh   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -465,7 +465,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_logistic   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_logistic   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -482,8 +482,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_vector_softmax : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_in_vector_softmax   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_vector_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_in_vector_softmax   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -498,7 +498,7 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_vector_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_oneplus   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_oneplus   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -515,8 +515,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_summation   : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal length_in_vector_summation : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -542,9 +542,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_convolution : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_convolution : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal length_in_matrix_convolution : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -567,9 +567,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_matrix_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_cosine : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_cosine : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal length_in_matrix_cosine : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_cosine : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_cosine : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_matrix_cosine : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -589,10 +589,10 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_differentiation : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_differentiation : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal period_in_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_matrix_differentiation : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_matrix_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -611,9 +611,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_matrix_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_multiplication : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_multiplication : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal length_in_matrix_multiplication : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_matrix_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -630,8 +630,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_matrix_cosh : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_cosh : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_cosh : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_cosh : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_cosh : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -648,8 +648,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_matrix_sinh : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_sinh : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_sinh : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_sinh : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_sinh : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_sinh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_sinh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -666,8 +666,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_matrix_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_tanh : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_tanh : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_tanh : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_tanh : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -684,8 +684,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_matrix_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_logistic : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_logistic : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_logistic : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_logistic : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -704,9 +704,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_matrix_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_softmax : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_softmax : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal length_in_matrix_softmax : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_matrix_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -723,8 +723,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_matrix_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_oneplus : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_oneplus : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_oneplus : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_oneplus : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -743,9 +743,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- DATA
   signal modulo_in_matrix_summation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_summation : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_summation : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal length_in_matrix_summation : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -759,7 +759,7 @@ begin
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE,
 
       X => X,
       Y => Y,
@@ -1296,7 +1296,7 @@ begin
     scalar_convolution_function : ntm_scalar_convolution_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1325,7 +1325,7 @@ begin
     scalar_cosine_similarity_function : ntm_scalar_cosine_similarity_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1354,7 +1354,7 @@ begin
     scalar_differentiation_function : ntm_scalar_differentiation_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1383,7 +1383,7 @@ begin
     scalar_multiplication_function : ntm_scalar_multiplication_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1411,7 +1411,7 @@ begin
     scalar_cosh_function : ntm_scalar_cosh_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1434,7 +1434,7 @@ begin
     scalar_sinh_function : ntm_scalar_sinh_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1457,7 +1457,7 @@ begin
     scalar_tanh_function : ntm_scalar_tanh_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1480,7 +1480,7 @@ begin
     scalar_logistic_function : ntm_scalar_logistic_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1503,7 +1503,7 @@ begin
     scalar_softmax_function : ntm_scalar_softmax_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1531,7 +1531,7 @@ begin
     scalar_oneplus_function : ntm_scalar_oneplus_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1554,7 +1554,7 @@ begin
     scalar_summation_function : ntm_scalar_summation_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1586,7 +1586,7 @@ begin
     vector_convolution_function : ntm_vector_convolution_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1620,7 +1620,7 @@ begin
     vector_cosine_similarity_function : ntm_vector_cosine_similarity_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1654,7 +1654,7 @@ begin
     vector_differentiation_function : ntm_vector_differentiation_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1686,7 +1686,7 @@ begin
     vector_multiplication_function : ntm_vector_multiplication_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1717,7 +1717,7 @@ begin
     vector_cosh_function : ntm_vector_cosh_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1745,7 +1745,7 @@ begin
     vector_sinh_function : ntm_vector_sinh_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1773,7 +1773,7 @@ begin
     vector_tanh_function : ntm_vector_tanh_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1801,7 +1801,7 @@ begin
     vector_logistic_function : ntm_vector_logistic_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1829,7 +1829,7 @@ begin
     vector_softmax_function : ntm_vector_softmax_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1861,7 +1861,7 @@ begin
       generic map (
 
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1889,7 +1889,7 @@ begin
     vector_summation_function : ntm_vector_summation_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1924,7 +1924,7 @@ begin
     matrix_convolution_function : ntm_matrix_convolution_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1962,7 +1962,7 @@ begin
     matrix_cosine_similarity_function : ntm_matrix_cosine_similarity_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -2000,7 +2000,7 @@ begin
     matrix_differentiation_function : ntm_matrix_differentiation_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -2035,7 +2035,7 @@ begin
     matrix_multiplication_function : ntm_matrix_multiplication_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -2069,7 +2069,7 @@ begin
     matrix_cosh_function : ntm_matrix_cosh_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -2100,7 +2100,7 @@ begin
     matrix_sinh_function : ntm_matrix_sinh_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -2131,7 +2131,7 @@ begin
     matrix_tanh_function : ntm_matrix_tanh_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -2162,7 +2162,7 @@ begin
     matrix_logistic_function : ntm_matrix_logistic_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -2193,7 +2193,7 @@ begin
     matrix_softmax_function : ntm_matrix_softmax_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -2227,7 +2227,7 @@ begin
     matrix_oneplus_function : ntm_matrix_oneplus_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -2258,7 +2258,7 @@ begin
     matrix_summation_function : ntm_matrix_summation_function
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL

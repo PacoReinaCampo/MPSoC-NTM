@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity dnc_read_keys is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -65,8 +65,8 @@ entity dnc_read_keys is
     K_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     -- DATA
-    SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -89,13 +89,15 @@ architecture dnc_read_keys_architecture of dnc_read_keys is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -110,8 +112,8 @@ architecture dnc_read_keys_architecture of dnc_read_keys is
   signal read_keys_ctrl_fsm_int : read_keys_ctrl_fsm;
 
   -- Internal Signals
-  signal index_i_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal index_j_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
 begin
 
@@ -126,7 +128,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      K_OUT <= ZERO;
+      K_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -135,8 +137,8 @@ begin
       K_OUT_K_ENABLE <= '0';
 
       -- Assignations
-      index_i_loop <= ZERO_INDEX;
-      index_j_loop <= ZERO_INDEX;
+      index_i_loop <= ZERO_CONTROL;
+      index_j_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
@@ -150,8 +152,8 @@ begin
 
           if (START = '1') then
             -- Assignations
-            index_i_loop <= ZERO_INDEX;
-            index_j_loop <= ZERO_INDEX;
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
             read_keys_ctrl_fsm_int <= ENDER_STATE;
@@ -161,9 +163,9 @@ begin
 
           if (K_IN_I_ENABLE = '1') then
             -- Control Internal
-            if (unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_INDEX) and unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_INDEX)) then
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-              index_j_loop <= ZERO_INDEX;
+            if (unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL) and unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+              index_j_loop <= ZERO_CONTROL;
             end if;
 
             -- Data Outputs
@@ -177,15 +179,15 @@ begin
           end if;
 
           if (K_IN_K_ENABLE = '1') then
-            if (unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_INDEX) and unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_INDEX)) then
+            if (unsigned(index_i_loop) = unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL) and unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               read_keys_ctrl_fsm_int <= STARTER_STATE;
-            elsif (unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_INDEX) and unsigned(index_j_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_INDEX)) then
+            elsif (unsigned(index_i_loop) < unsigned(SIZE_R_IN)-unsigned(ONE_CONTROL) and unsigned(index_j_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
             end if;
 
             -- Data Outputs

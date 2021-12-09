@@ -46,8 +46,8 @@ use work.ntm_modular_pkg.all;
 entity ntm_modular_testbench is
   generic (
     -- SYSTEM-SIZE
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128;
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -219,7 +219,7 @@ architecture ntm_modular_testbench_architecture of ntm_modular_testbench is
 
   -- DATA
   signal modulo_in_vector_mod : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_mod   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_mod   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_mod  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -237,7 +237,7 @@ architecture ntm_modular_testbench_architecture of ntm_modular_testbench is
 
   -- DATA
   signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_adder   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -254,7 +254,7 @@ architecture ntm_modular_testbench_architecture of ntm_modular_testbench is
 
   -- DATA
   signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_multiplier   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -270,7 +270,7 @@ architecture ntm_modular_testbench_architecture of ntm_modular_testbench is
 
   -- DATA
   signal modulo_in_vector_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_inverter   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_inverter   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -286,7 +286,7 @@ architecture ntm_modular_testbench_architecture of ntm_modular_testbench is
 
   -- DATA
   signal modulo_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_divider   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_divider   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -303,7 +303,7 @@ architecture ntm_modular_testbench_architecture of ntm_modular_testbench is
 
   -- DATA
   signal modulo_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_exponentiator   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_exponentiator   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -325,8 +325,8 @@ architecture ntm_modular_testbench_architecture of ntm_modular_testbench is
 
   -- DATA
   signal modulo_in_matrix_mod : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_mod : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_mod : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_mod : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_mod : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_mod  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -347,8 +347,8 @@ architecture ntm_modular_testbench_architecture of ntm_modular_testbench is
 
   -- DATA
   signal modulo_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_adder : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_adder : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -368,8 +368,8 @@ architecture ntm_modular_testbench_architecture of ntm_modular_testbench is
 
   -- DATA
   signal modulo_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_multiplier : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_multiplier : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -387,8 +387,8 @@ architecture ntm_modular_testbench_architecture of ntm_modular_testbench is
 
   -- DATA
   signal modulo_in_matrix_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_inverter : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_inverter : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_inverter : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_inverter : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -407,8 +407,8 @@ architecture ntm_modular_testbench_architecture of ntm_modular_testbench is
 
   -- DATA
   signal modulo_in_matrix_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_divider : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_divider : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -428,8 +428,8 @@ architecture ntm_modular_testbench_architecture of ntm_modular_testbench is
 
   -- DATA
   signal modulo_in_matrix_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_exponentiator : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_exponentiator : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -444,7 +444,7 @@ begin
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE,
 
       X => X,
       Y => Y,
@@ -768,7 +768,7 @@ begin
     scalar_mod : ntm_scalar_mod
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -791,7 +791,7 @@ begin
     scalar_adder : ntm_scalar_adder
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -817,7 +817,7 @@ begin
     scalar_multiplier : ntm_scalar_multiplier
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -841,7 +841,7 @@ begin
     scalar_inverter : ntm_scalar_inverter
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -864,7 +864,7 @@ begin
     scalar_divider : ntm_scalar_divider
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -888,7 +888,7 @@ begin
     scalar_exponentiator : ntm_scalar_exponentiator
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -916,7 +916,7 @@ begin
     vector_mod : ntm_vector_mod
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -944,7 +944,7 @@ begin
     vector_adder : ntm_vector_adder
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -976,7 +976,7 @@ begin
     vector_multiplier : ntm_vector_multiplier
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1006,7 +1006,7 @@ begin
     vector_inverter : ntm_vector_inverter
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1034,7 +1034,7 @@ begin
     vector_divider : ntm_vector_divider
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1064,7 +1064,7 @@ begin
     vector_exponentiator : ntm_vector_exponentiator
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1098,7 +1098,7 @@ begin
     matrix_mod : ntm_matrix_mod
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1129,7 +1129,7 @@ begin
     matrix_adder : ntm_matrix_adder
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1165,7 +1165,7 @@ begin
     matrix_multiplier : ntm_matrix_multiplier
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1199,7 +1199,7 @@ begin
     matrix_inverter : ntm_matrix_inverter
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1230,7 +1230,7 @@ begin
     matrix_divider : ntm_matrix_divider
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1264,7 +1264,7 @@ begin
     matrix_exponentiator : ntm_matrix_exponentiator
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL

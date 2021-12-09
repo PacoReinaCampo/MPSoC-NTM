@@ -38,8 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_top #(
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -120,10 +120,15 @@ module ntm_top #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO  = 0;
-  parameter ONE   = 1;
-  parameter TWO   = 2;
-  parameter THREE = 3;
+  parameter ZERO_CONTROL  = 0;
+  parameter ONE_CONTROL   = 1;
+  parameter TWO_CONTROL   = 2;
+  parameter THREE_CONTROL = 3;
+
+  parameter ZERO_DATA  = 0;
+  parameter ONE_DATA   = 1;
+  parameter TWO_DATA   = 2;
+  parameter THREE_DATA = 3;
 
   parameter FULL  = 1;
   parameter EMPTY = 0;
@@ -141,7 +146,7 @@ module ntm_top #(
   reg [1:0] write_heads_ctrl_fsm_int;
 
   // Internal Signals
-  reg [INDEX_SIZE-1:0] index_loop;
+  reg [CONTROL_SIZE-1:0] index_loop;
 
   ///////////////////////////////////////////////////////////////////////
   // CONTROLLER
@@ -443,7 +448,7 @@ module ntm_top #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      Y_OUT <= ZERO;
+      Y_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
@@ -523,7 +528,7 @@ module ntm_top #(
 
           // w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
         
-          if (index_loop == SIZE_R_IN - ONE) begin
+          if (index_loop == SIZE_R_IN - ONE_CONTROL) begin
             // FSM Control
             top_ctrl_fsm_int <= STARTER_STATE;
           end
@@ -543,7 +548,7 @@ module ntm_top #(
   // CONTROLLER
   ntm_controller #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   ntm_controller_i(
     // GLOBAL
@@ -618,7 +623,7 @@ module ntm_top #(
   // OUTPUT VECTOR
   ntm_output_vector #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   output_vector_i(
     // GLOBAL
@@ -673,7 +678,7 @@ module ntm_top #(
   // INTERFACE VECTOR
   ntm_interface_vector #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   ntm_interface_vector_i(
     // GLOBAL
@@ -746,7 +751,7 @@ module ntm_top #(
   // READING
   ntm_reading #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   reading(
     // GLOBAL
@@ -782,7 +787,7 @@ module ntm_top #(
   // WRITING
   ntm_writing #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   writing(
     // GLOBAL
@@ -817,7 +822,7 @@ module ntm_top #(
   // ERASING
   ntm_erasing #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   erasing(
     // GLOBAL
@@ -856,7 +861,7 @@ module ntm_top #(
   // ADDRESSING
   ntm_addressing #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   addressing(
     // GLOBAL

@@ -48,8 +48,8 @@ module ntm_write_heads_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=512;
-  parameter INDEX_SIZE=512;
+  parameter DATA_SIZE=128;
+  parameter CONTROL_SIZE=64;
 
   parameter X=64;
   parameter Y=64;
@@ -124,7 +124,7 @@ module ntm_write_heads_testbench;
   ntm_write_heads_stimulus #(
     // SYSTEM-SIZE
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE),
+    .CONTROL_SIZE(CONTROL_SIZE),
 
     .X(X),
     .Y(Y),
@@ -164,7 +164,7 @@ module ntm_write_heads_testbench;
   // WRITING
   ntm_writing #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   writing(
     // GLOBAL
@@ -199,7 +199,7 @@ module ntm_write_heads_testbench;
   // ERASING
   ntm_erasing #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   erasing(
     // GLOBAL

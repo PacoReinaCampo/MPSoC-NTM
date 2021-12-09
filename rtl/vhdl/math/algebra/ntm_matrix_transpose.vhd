@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_matrix_transpose is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -66,8 +66,8 @@ entity ntm_matrix_transpose is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -95,13 +95,15 @@ architecture ntm_matrix_transpose_architecture of ntm_matrix_transpose is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -116,8 +118,8 @@ architecture ntm_matrix_transpose_architecture of ntm_matrix_transpose is
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Internal Signals
-  signal index_i_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal index_j_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- SCALAR ADDER
   -- CONTROL
@@ -156,7 +158,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO;
+      DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -196,7 +198,7 @@ begin
   ntm_scalar_adder_i : ntm_scalar_adder
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -220,7 +222,7 @@ begin
   ntm_scalar_multiplier_i : ntm_scalar_multiplier
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

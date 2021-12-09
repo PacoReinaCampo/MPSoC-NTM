@@ -38,8 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_scalar_sinh_function #(
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -102,7 +102,7 @@ module ntm_scalar_sinh_function #(
   wire [DATA_SIZE-1:0] data_b_in_scalar_divider;
   wire [DATA_SIZE-1:0] data_out_scalar_divider;
 
-  // SCALAR EXPONENTIATOR
+  // SCALAR EXPONE_CONTROLNTIATOR
   // CONTROL
   wire start_scalar_exponentiator;
   wire ready_scalar_exponentiator;
@@ -120,7 +120,7 @@ module ntm_scalar_sinh_function #(
   // SCALAR ADDER
   ntm_scalar_adder #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   ntm_scalar_adder_i(
     // GLOBAL
@@ -143,7 +143,7 @@ module ntm_scalar_sinh_function #(
   // SCALAR MULTIPLIER
   ntm_scalar_multiplier #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   ntm_scalar_multiplier_i(
     // GLOBAL
@@ -164,7 +164,7 @@ module ntm_scalar_sinh_function #(
   // SCALAR DIVIDER
   ntm_scalar_divider #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   scalar_divider(
     // GLOBAL
@@ -182,10 +182,10 @@ module ntm_scalar_sinh_function #(
     .DATA_OUT(data_out_scalar_divider)
   );
 
-  // SCALAR EXPONENTIATOR
+  // SCALAR EXPONE_CONTROLNTIATOR
   ntm_scalar_exponentiator #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   scalar_exponentiator(
     // GLOBAL

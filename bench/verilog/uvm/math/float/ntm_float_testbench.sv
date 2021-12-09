@@ -48,8 +48,8 @@ module ntm_float_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=512;
-  parameter INDEX_SIZE=512;
+  parameter DATA_SIZE=128;
+  parameter CONTROL_SIZE=64;
 
   parameter X=64;
   parameter Y=64;
@@ -63,57 +63,57 @@ module ntm_float_testbench;
   parameter STIMULUS_NTM_SCALAR_MULTIPLIER_TEST    = 0;
   parameter STIMULUS_NTM_SCALAR_INVERTER_TEST      = 0;
   parameter STIMULUS_NTM_SCALAR_DIVIDER_TEST       = 0;
-  parameter STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST = 0;
+  parameter STIMULUS_NTM_SCALAR_EXPONE_CONTROLNTIATOR_TEST = 0;
 
   parameter STIMULUS_NTM_SCALAR_ADDER_CASE_0         = 0;
   parameter STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0    = 0;
   parameter STIMULUS_NTM_SCALAR_INVERTER_CASE_0      = 0;
   parameter STIMULUS_NTM_SCALAR_DIVIDER_CASE_0       = 0;
-  parameter STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0 = 0;
+  parameter STIMULUS_NTM_SCALAR_EXPONE_CONTROLNTIATOR_CASE_0 = 0;
 
   parameter STIMULUS_NTM_SCALAR_ADDER_CASE_1         = 0;
   parameter STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1    = 0;
   parameter STIMULUS_NTM_SCALAR_INVERTER_CASE_1      = 0;
   parameter STIMULUS_NTM_SCALAR_DIVIDER_CASE_1       = 0;
-  parameter STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1 = 0;
+  parameter STIMULUS_NTM_SCALAR_EXPONE_CONTROLNTIATOR_CASE_1 = 0;
 
   // VECTOR-FUNCTIONALITY
   parameter STIMULUS_NTM_VECTOR_ADDER_TEST         = 0;
   parameter STIMULUS_NTM_VECTOR_MULTIPLIER_TEST    = 0;
   parameter STIMULUS_NTM_VECTOR_INVERTER_TEST      = 0;
   parameter STIMULUS_NTM_VECTOR_DIVIDER_TEST       = 0;
-  parameter STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST = 0;
+  parameter STIMULUS_NTM_VECTOR_EXPONE_CONTROLNTIATOR_TEST = 0;
 
   parameter STIMULUS_NTM_VECTOR_ADDER_CASE_0         = 0;
   parameter STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_0    = 0;
   parameter STIMULUS_NTM_VECTOR_INVERTER_CASE_0      = 0;
   parameter STIMULUS_NTM_VECTOR_DIVIDER_CASE_0       = 0;
-  parameter STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0 = 0;
+  parameter STIMULUS_NTM_VECTOR_EXPONE_CONTROLNTIATOR_CASE_0 = 0;
 
   parameter STIMULUS_NTM_VECTOR_ADDER_CASE_1         = 0;
   parameter STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_1    = 0;
   parameter STIMULUS_NTM_VECTOR_INVERTER_CASE_1      = 0;
   parameter STIMULUS_NTM_VECTOR_DIVIDER_CASE_1       = 0;
-  parameter STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_1 = 0;
+  parameter STIMULUS_NTM_VECTOR_EXPONE_CONTROLNTIATOR_CASE_1 = 0;
 
   // MATRIX-FUNCTIONALITY
   parameter STIMULUS_NTM_MATRIX_ADDER_TEST         = 0;
   parameter STIMULUS_NTM_MATRIX_MULTIPLIER_TEST    = 0;
   parameter STIMULUS_NTM_MATRIX_INVERTER_TEST      = 0;
   parameter STIMULUS_NTM_MATRIX_DIVIDER_TEST       = 0;
-  parameter STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST = 0;
+  parameter STIMULUS_NTM_MATRIX_EXPONE_CONTROLNTIATOR_TEST = 0;
 
   parameter STIMULUS_NTM_MATRIX_ADDER_CASE_0         = 0;
   parameter STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_0    = 0;
   parameter STIMULUS_NTM_MATRIX_INVERTER_CASE_0      = 0;
   parameter STIMULUS_NTM_MATRIX_DIVIDER_CASE_0       = 0;
-  parameter STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0 = 0;
+  parameter STIMULUS_NTM_MATRIX_EXPONE_CONTROLNTIATOR_CASE_0 = 0;
 
   parameter STIMULUS_NTM_MATRIX_ADDER_CASE_1         = 0;
   parameter STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_1    = 0;
   parameter STIMULUS_NTM_MATRIX_INVERTER_CASE_1      = 0;
   parameter STIMULUS_NTM_MATRIX_DIVIDER_CASE_1       = 0;
-  parameter STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1 = 0;
+  parameter STIMULUS_NTM_MATRIX_EXPONE_CONTROLNTIATOR_CASE_1 = 0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -172,7 +172,7 @@ module ntm_float_testbench;
   wire [DATA_SIZE-1:0] data_b_in_scalar_divider;
   wire [DATA_SIZE-1:0] data_out_scalar_divider;
 
-  // SCALAR EXPONENTIATOR
+  // SCALAR EXPONE_CONTROLNTIATOR
   // CONTROL
   wire start_scalar_exponentiator;
   wire ready_scalar_exponentiator;
@@ -251,7 +251,7 @@ module ntm_float_testbench;
   wire [DATA_SIZE-1:0] data_b_in_vector_divider;
   wire [DATA_SIZE-1:0] data_out_vector_divider;
 
-  // VECTOR EXPONENTIATOR
+  // VECTOR EXPONE_CONTROLNTIATOR
   // CONTROL
   wire start_vector_exponentiator;
   wire ready_vector_exponentiator;
@@ -350,7 +350,7 @@ module ntm_float_testbench;
   wire [DATA_SIZE-1:0] data_b_in_matrix_divider;
   wire [DATA_SIZE-1:0] data_out_matrix_divider;
 
-  // MATRIX EXPONENTIATOR
+  // MATRIX EXPONE_CONTROLNTIATOR
   // CONTROL
   wire start_matrix_exponentiator;
   wire ready_matrix_exponentiator;
@@ -376,7 +376,7 @@ module ntm_float_testbench;
   ntm_float_stimulus #(
     // SYSTEM-SIZE
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE),
+    .CONTROL_SIZE(CONTROL_SIZE),
 
     .X(X),
     .Y(Y),
@@ -390,51 +390,51 @@ module ntm_float_testbench;
     .STIMULUS_NTM_SCALAR_MULTIPLIER_TEST(STIMULUS_NTM_SCALAR_MULTIPLIER_TEST),
     .STIMULUS_NTM_SCALAR_INVERTER_TEST(STIMULUS_NTM_SCALAR_INVERTER_TEST),
     .STIMULUS_NTM_SCALAR_DIVIDER_TEST(STIMULUS_NTM_SCALAR_DIVIDER_TEST),
-    .STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST(STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST),
+    .STIMULUS_NTM_SCALAR_EXPONE_CONTROLNTIATOR_TEST(STIMULUS_NTM_SCALAR_EXPONE_CONTROLNTIATOR_TEST),
     .STIMULUS_NTM_SCALAR_ADDER_CASE_0(STIMULUS_NTM_SCALAR_ADDER_CASE_0),
     .STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0(STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0),
     .STIMULUS_NTM_SCALAR_INVERTER_CASE_0(STIMULUS_NTM_SCALAR_INVERTER_CASE_0),
     .STIMULUS_NTM_SCALAR_DIVIDER_CASE_0(STIMULUS_NTM_SCALAR_DIVIDER_CASE_0),
-    .STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0(STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0),
+    .STIMULUS_NTM_SCALAR_EXPONE_CONTROLNTIATOR_CASE_0(STIMULUS_NTM_SCALAR_EXPONE_CONTROLNTIATOR_CASE_0),
     .STIMULUS_NTM_SCALAR_ADDER_CASE_1(STIMULUS_NTM_SCALAR_ADDER_CASE_1),
     .STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1(STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1),
     .STIMULUS_NTM_SCALAR_INVERTER_CASE_1(STIMULUS_NTM_SCALAR_INVERTER_CASE_1),
     .STIMULUS_NTM_SCALAR_DIVIDER_CASE_1(STIMULUS_NTM_SCALAR_DIVIDER_CASE_1),
-    .STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1(STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1),
+    .STIMULUS_NTM_SCALAR_EXPONE_CONTROLNTIATOR_CASE_1(STIMULUS_NTM_SCALAR_EXPONE_CONTROLNTIATOR_CASE_1),
 
     // VECTOR-FUNCTIONALITY
     .STIMULUS_NTM_VECTOR_ADDER_TEST(STIMULUS_NTM_VECTOR_ADDER_TEST),
     .STIMULUS_NTM_VECTOR_MULTIPLIER_TEST(STIMULUS_NTM_VECTOR_MULTIPLIER_TEST),
     .STIMULUS_NTM_VECTOR_INVERTER_TEST(STIMULUS_NTM_VECTOR_INVERTER_TEST),
     .STIMULUS_NTM_VECTOR_DIVIDER_TEST(STIMULUS_NTM_VECTOR_DIVIDER_TEST),
-    .STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST(STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST),
+    .STIMULUS_NTM_VECTOR_EXPONE_CONTROLNTIATOR_TEST(STIMULUS_NTM_VECTOR_EXPONE_CONTROLNTIATOR_TEST),
     .STIMULUS_NTM_VECTOR_ADDER_CASE_0(STIMULUS_NTM_VECTOR_ADDER_CASE_0),
     .STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_0(STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_0),
     .STIMULUS_NTM_VECTOR_INVERTER_CASE_0(STIMULUS_NTM_VECTOR_INVERTER_CASE_0),
     .STIMULUS_NTM_VECTOR_DIVIDER_CASE_0(STIMULUS_NTM_VECTOR_DIVIDER_CASE_0),
-    .STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0(STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0),
+    .STIMULUS_NTM_VECTOR_EXPONE_CONTROLNTIATOR_CASE_0(STIMULUS_NTM_VECTOR_EXPONE_CONTROLNTIATOR_CASE_0),
     .STIMULUS_NTM_VECTOR_ADDER_CASE_1(STIMULUS_NTM_VECTOR_ADDER_CASE_1),
     .STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_1(STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_1),
     .STIMULUS_NTM_VECTOR_INVERTER_CASE_1(STIMULUS_NTM_VECTOR_INVERTER_CASE_1),
     .STIMULUS_NTM_VECTOR_DIVIDER_CASE_1(STIMULUS_NTM_VECTOR_DIVIDER_CASE_1),
-    .STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_1(STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_1),
+    .STIMULUS_NTM_VECTOR_EXPONE_CONTROLNTIATOR_CASE_1(STIMULUS_NTM_VECTOR_EXPONE_CONTROLNTIATOR_CASE_1),
 
     // MATRIX-FUNCTIONALITY
     .STIMULUS_NTM_MATRIX_ADDER_TEST(STIMULUS_NTM_MATRIX_ADDER_TEST),
     .STIMULUS_NTM_MATRIX_MULTIPLIER_TEST(STIMULUS_NTM_MATRIX_MULTIPLIER_TEST),
     .STIMULUS_NTM_MATRIX_INVERTER_TEST(STIMULUS_NTM_MATRIX_INVERTER_TEST),
     .STIMULUS_NTM_MATRIX_DIVIDER_TEST(STIMULUS_NTM_MATRIX_DIVIDER_TEST),
-    .STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST(STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST),
+    .STIMULUS_NTM_MATRIX_EXPONE_CONTROLNTIATOR_TEST(STIMULUS_NTM_MATRIX_EXPONE_CONTROLNTIATOR_TEST),
     .STIMULUS_NTM_MATRIX_ADDER_CASE_0(STIMULUS_NTM_MATRIX_ADDER_CASE_0),
     .STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_0(STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_0),
     .STIMULUS_NTM_MATRIX_INVERTER_CASE_0(STIMULUS_NTM_MATRIX_INVERTER_CASE_0),
     .STIMULUS_NTM_MATRIX_DIVIDER_CASE_0(STIMULUS_NTM_MATRIX_DIVIDER_CASE_0),
-    .STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0(STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0),
+    .STIMULUS_NTM_MATRIX_EXPONE_CONTROLNTIATOR_CASE_0(STIMULUS_NTM_MATRIX_EXPONE_CONTROLNTIATOR_CASE_0),
     .STIMULUS_NTM_MATRIX_ADDER_CASE_1(STIMULUS_NTM_MATRIX_ADDER_CASE_1),
     .STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_1(STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_1),
     .STIMULUS_NTM_MATRIX_INVERTER_CASE_1(STIMULUS_NTM_MATRIX_INVERTER_CASE_1),
     .STIMULUS_NTM_MATRIX_DIVIDER_CASE_1(STIMULUS_NTM_MATRIX_DIVIDER_CASE_1),
-    .STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1(STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1)
+    .STIMULUS_NTM_MATRIX_EXPONE_CONTROLNTIATOR_CASE_1(STIMULUS_NTM_MATRIX_EXPONE_CONTROLNTIATOR_CASE_1)
   )
   float_stimulus(
     // GLOBAL
@@ -486,15 +486,15 @@ module ntm_float_testbench;
     .SCALAR_DIVIDER_DATA_B_IN(data_b_in_scalar_divider),
     .SCALAR_DIVIDER_DATA_OUT(data_out_scalar_divider),
 
-    // SCALAR EXPONENTIATOR
+    // SCALAR EXPONE_CONTROLNTIATOR
     // CONTROL
-    .SCALAR_EXPONENTIATOR_START(start_scalar_exponentiator),
-    .SCALAR_EXPONENTIATOR_READY(ready_scalar_exponentiator),
+    .SCALAR_EXPONE_CONTROLNTIATOR_START(start_scalar_exponentiator),
+    .SCALAR_EXPONE_CONTROLNTIATOR_READY(ready_scalar_exponentiator),
 
     // DATA
-    .SCALAR_EXPONENTIATOR_DATA_A_IN(data_a_in_scalar_exponentiator),
-    .SCALAR_EXPONENTIATOR_DATA_B_IN(data_b_in_scalar_exponentiator),
-    .SCALAR_EXPONENTIATOR_DATA_OUT(data_out_scalar_exponentiator),
+    .SCALAR_EXPONE_CONTROLNTIATOR_DATA_A_IN(data_a_in_scalar_exponentiator),
+    .SCALAR_EXPONE_CONTROLNTIATOR_DATA_B_IN(data_b_in_scalar_exponentiator),
+    .SCALAR_EXPONE_CONTROLNTIATOR_DATA_OUT(data_out_scalar_exponentiator),
 
     ///////////////////////////////////////////////////////////////////////
     // STIMULUS VECTOR
@@ -560,20 +560,20 @@ module ntm_float_testbench;
     .VECTOR_DIVIDER_DATA_B_IN(data_b_in_vector_divider),
     .VECTOR_DIVIDER_DATA_OUT(data_out_vector_divider),
 
-    // VECTOR EXPONENTIATOR
+    // VECTOR EXPONE_CONTROLNTIATOR
     // CONTROL
-    .VECTOR_EXPONENTIATOR_START(start_vector_exponentiator),
-    .VECTOR_EXPONENTIATOR_READY(ready_vector_exponentiator),
+    .VECTOR_EXPONE_CONTROLNTIATOR_START(start_vector_exponentiator),
+    .VECTOR_EXPONE_CONTROLNTIATOR_READY(ready_vector_exponentiator),
 
-    .VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE(data_a_in_enable_vector_exponentiator),
-    .VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE(data_b_in_enable_vector_exponentiator),
-    .VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE(data_out_enable_vector_exponentiator),
+    .VECTOR_EXPONE_CONTROLNTIATOR_DATA_A_IN_ENABLE(data_a_in_enable_vector_exponentiator),
+    .VECTOR_EXPONE_CONTROLNTIATOR_DATA_B_IN_ENABLE(data_b_in_enable_vector_exponentiator),
+    .VECTOR_EXPONE_CONTROLNTIATOR_DATA_OUT_ENABLE(data_out_enable_vector_exponentiator),
 
     // DATA
-    .VECTOR_EXPONENTIATOR_SIZE_IN(size_in_vector_exponentiator),
-    .VECTOR_EXPONENTIATOR_DATA_A_IN(data_a_in_vector_exponentiator),
-    .VECTOR_EXPONENTIATOR_DATA_B_IN(data_b_in_vector_exponentiator),
-    .VECTOR_EXPONENTIATOR_DATA_OUT(data_out_vector_exponentiator),
+    .VECTOR_EXPONE_CONTROLNTIATOR_SIZE_IN(size_in_vector_exponentiator),
+    .VECTOR_EXPONE_CONTROLNTIATOR_DATA_A_IN(data_a_in_vector_exponentiator),
+    .VECTOR_EXPONE_CONTROLNTIATOR_DATA_B_IN(data_b_in_vector_exponentiator),
+    .VECTOR_EXPONE_CONTROLNTIATOR_DATA_OUT(data_out_vector_exponentiator),
 
     ///////////////////////////////////////////////////////////////////////
     // STIMULUS MATRIX
@@ -654,24 +654,24 @@ module ntm_float_testbench;
     .MATRIX_DIVIDER_DATA_B_IN(data_b_in_matrix_divider),
     .MATRIX_DIVIDER_DATA_OUT(data_out_matrix_divider),
 
-    // MATRIX EXPONENTIATOR
+    // MATRIX EXPONE_CONTROLNTIATOR
     // CONTROL
-    .MATRIX_EXPONENTIATOR_START(start_matrix_exponentiator),
-    .MATRIX_EXPONENTIATOR_READY(ready_matrix_exponentiator),
+    .MATRIX_EXPONE_CONTROLNTIATOR_START(start_matrix_exponentiator),
+    .MATRIX_EXPONE_CONTROLNTIATOR_READY(ready_matrix_exponentiator),
 
-    .MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE(data_a_in_i_enable_matrix_exponentiator),
-    .MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_exponentiator),
-    .MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_exponentiator),
-    .MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_exponentiator),
-    .MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_exponentiator),
-    .MATRIX_EXPONENTIATOR_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_exponentiator),
+    .MATRIX_EXPONE_CONTROLNTIATOR_DATA_A_IN_I_ENABLE(data_a_in_i_enable_matrix_exponentiator),
+    .MATRIX_EXPONE_CONTROLNTIATOR_DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_exponentiator),
+    .MATRIX_EXPONE_CONTROLNTIATOR_DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_exponentiator),
+    .MATRIX_EXPONE_CONTROLNTIATOR_DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_exponentiator),
+    .MATRIX_EXPONE_CONTROLNTIATOR_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_exponentiator),
+    .MATRIX_EXPONE_CONTROLNTIATOR_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_exponentiator),
 
     // DATA
-    .MATRIX_EXPONENTIATOR_SIZE_I_IN(size_i_in_matrix_exponentiator),
-    .MATRIX_EXPONENTIATOR_SIZE_J_IN(size_j_in_matrix_exponentiator),
-    .MATRIX_EXPONENTIATOR_DATA_A_IN(data_a_in_matrix_exponentiator),
-    .MATRIX_EXPONENTIATOR_DATA_B_IN(data_b_in_matrix_exponentiator),
-    .MATRIX_EXPONENTIATOR_DATA_OUT(data_out_matrix_exponentiator)
+    .MATRIX_EXPONE_CONTROLNTIATOR_SIZE_I_IN(size_i_in_matrix_exponentiator),
+    .MATRIX_EXPONE_CONTROLNTIATOR_SIZE_J_IN(size_j_in_matrix_exponentiator),
+    .MATRIX_EXPONE_CONTROLNTIATOR_DATA_A_IN(data_a_in_matrix_exponentiator),
+    .MATRIX_EXPONE_CONTROLNTIATOR_DATA_B_IN(data_b_in_matrix_exponentiator),
+    .MATRIX_EXPONE_CONTROLNTIATOR_DATA_OUT(data_out_matrix_exponentiator)
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -681,7 +681,7 @@ module ntm_float_testbench;
   // SCALAR ADDER
   ntm_scalar_adder #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   scalar_adder(
     // GLOBAL
@@ -704,7 +704,7 @@ module ntm_float_testbench;
   // SCALAR MULTIPLIER
   ntm_scalar_multiplier #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   scalar_multiplier(
     // GLOBAL
@@ -725,7 +725,7 @@ module ntm_float_testbench;
   // SCALAR INVERTER
   ntm_scalar_inverter #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   scalar_inverter(
     // GLOBAL
@@ -745,7 +745,7 @@ module ntm_float_testbench;
   // SCALAR DIVIDER
   ntm_scalar_divider #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   scalar_divider(
     // GLOBAL
@@ -763,10 +763,10 @@ module ntm_float_testbench;
     .DATA_OUT(data_out_scalar_divider)
   );
 
-  // SCALAR EXPONENTIATOR
+  // SCALAR EXPONE_CONTROLNTIATOR
   ntm_scalar_exponentiator #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   scalar_exponentiator(
     // GLOBAL
@@ -791,7 +791,7 @@ module ntm_float_testbench;
   // VECTOR ADDER
   ntm_vector_adder #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_adder(
     // GLOBAL
@@ -819,7 +819,7 @@ module ntm_float_testbench;
   // VECTOR MULTIPLIER
   ntm_vector_multiplier #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_multiplier(
     // GLOBAL
@@ -845,7 +845,7 @@ module ntm_float_testbench;
   // VECTOR INVERTER
   ntm_vector_inverter #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_inverter(
     // GLOBAL
@@ -869,7 +869,7 @@ module ntm_float_testbench;
   // VECTOR DIVIDER
   ntm_vector_divider #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_divider(
     // GLOBAL
@@ -892,10 +892,10 @@ module ntm_float_testbench;
     .DATA_OUT(data_out_vector_divider)
   );
 
-  // VECTOR EXPONENTIATOR
+  // VECTOR EXPONE_CONTROLNTIATOR
   ntm_vector_exponentiator #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_exponentiator(
     // GLOBAL
@@ -925,7 +925,7 @@ module ntm_float_testbench;
   // MATRIX ADDER
   ntm_matrix_adder #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   matrix_adder(
     // GLOBAL
@@ -957,7 +957,7 @@ module ntm_float_testbench;
   // MATRIX MULTIPLIER
   ntm_matrix_multiplier #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   matrix_multiplier(
     // GLOBAL
@@ -987,7 +987,7 @@ module ntm_float_testbench;
   // MATRIX INVERTER
   ntm_matrix_inverter #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   matrix_inverter(
     // GLOBAL
@@ -1014,7 +1014,7 @@ module ntm_float_testbench;
   // MATRIX DIVIDER
   ntm_matrix_divider #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   matrix_divider(
     // GLOBAL
@@ -1041,10 +1041,10 @@ module ntm_float_testbench;
     .DATA_OUT(data_out_matrix_divider)
   );
 
-  // MATRIX EXPONENTIATOR
+  // MATRIX EXPONE_CONTROLNTIATOR
   ntm_matrix_exponentiator #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   matrix_exponentiator(
     // GLOBAL

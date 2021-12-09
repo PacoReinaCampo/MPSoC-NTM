@@ -38,8 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module dnc_content_based_addressing #(
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -79,17 +79,22 @@ module dnc_content_based_addressing #(
 
   parameter [2:0] STARTER_STATE = 0;
   parameter [2:0] VECTOR_COSINE_SIMILARITY_STATE = 1;
-  parameter [2:0] VECTOR_EXPONENTIATOR_STATE = 2;
+  parameter [2:0] VECTOR_EXPONE_CONTROLNTIATOR_STATE = 2;
   parameter [2:0] VECTOR_SOFTMAX_STATE = 3;
 
   ///////////////////////////////////////////////////////////////////////
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO  = 0;
-  parameter ONE   = 1;
-  parameter TWO   = 2;
-  parameter THREE = 3;
+  parameter ZERO_CONTROL  = 0;
+  parameter ONE_CONTROL   = 1;
+  parameter TWO_CONTROL   = 2;
+  parameter THREE_CONTROL = 3;
+
+  parameter ZERO_DATA  = 0;
+  parameter ONE_DATA   = 1;
+  parameter TWO_DATA   = 2;
+  parameter THREE_DATA = 3;
 
   parameter FULL  = 1;
   parameter EMPTY = 0;
@@ -103,7 +108,7 @@ module dnc_content_based_addressing #(
   // Finite State Machine
   reg [2:0] controller_ctrl_fsm_int;
 
-  // VECTOR EXPONENTIATOR
+  // VECTOR EXPONE_CONTROLNTIATOR
   // CONTROL
   wire start_vector_exponentiator;
   wire ready_vector_exponentiator;
@@ -165,7 +170,7 @@ module dnc_content_based_addressing #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      C_OUT <= ZERO;
+      C_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
@@ -185,7 +190,7 @@ module dnc_content_based_addressing #(
         VECTOR_COSINE_SIMILARITY_STATE : begin  // STEP 1
         end
 
-        VECTOR_EXPONENTIATOR_STATE : begin  // STEP 2
+        VECTOR_EXPONE_CONTROLNTIATOR_STATE : begin  // STEP 2
         end
 
         VECTOR_SOFTMAX_STATE : begin  // STEP 3
@@ -198,10 +203,10 @@ module dnc_content_based_addressing #(
     end
   end
 
-  // VECTOR EXPONENTIATOR
+  // VECTOR EXPONE_CONTROLNTIATOR
   ntm_vector_exponentiator #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_exponentiator(
     // GLOBAL
@@ -227,7 +232,7 @@ module dnc_content_based_addressing #(
   // VECTOR COSINE SIMILARITY
   ntm_vector_cosine_similarity_function #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_cosine_similarity_function(
     // GLOBAL
@@ -257,7 +262,7 @@ module dnc_content_based_addressing #(
   // VECTOR SOFTMAX
   ntm_vector_softmax_function #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_softmax_function(
     // GLOBAL

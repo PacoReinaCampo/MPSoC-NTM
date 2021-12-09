@@ -38,8 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module dnc_read_modes #(
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -69,10 +69,15 @@ module dnc_read_modes #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO  = 0;
-  parameter ONE   = 1;
-  parameter TWO   = 2;
-  parameter THREE = 3;
+  parameter ZERO_CONTROL  = 0;
+  parameter ONE_CONTROL   = 1;
+  parameter TWO_CONTROL   = 2;
+  parameter THREE_CONTROL = 3;
+
+  parameter ZERO_DATA  = 0;
+  parameter ONE_DATA   = 1;
+  parameter TWO_DATA   = 2;
+  parameter THREE_DATA = 3;
 
   parameter FULL  = 1;
   parameter EMPTY = 0;
@@ -117,7 +122,7 @@ module dnc_read_modes #(
 
   // DATA
   assign modulo_in_vector_softmax = FULL;
-  assign length_in_vector_softmax = THREE;
+  assign length_in_vector_softmax = THREE_DATA;
   assign size_in_vector_softmax = SIZE_R_IN;
   assign data_in_vector_softmax = PI_IN;
   assign PI_OUT = data_out_vector_softmax;
@@ -125,7 +130,7 @@ module dnc_read_modes #(
   // VECTOR SOFTMAX
   ntm_vector_softmax_function #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_softmax_function(
     // GLOBAL

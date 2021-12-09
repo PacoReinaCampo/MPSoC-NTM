@@ -8,7 +8,6 @@ ntm_top
 
   ntm_interface_vector
   ntm_output_vector
-  ntm_controller_output_vector
 
   ntm_controller
     ntm_hidden_gate_vector

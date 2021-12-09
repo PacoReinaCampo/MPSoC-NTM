@@ -38,8 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module dnc_read_content_weighting #(
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -149,7 +149,7 @@ module dnc_read_content_weighting #(
   // VECTOR CONTENT BASED ADDRESSING
   dnc_content_based_addressing #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   dnc_content_based_addressing_i(
     // GLOBAL

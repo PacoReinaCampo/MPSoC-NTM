@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_input_gate_vector is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -99,10 +99,10 @@ entity ntm_input_gate_vector is
     I_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
-    SIZE_X_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -142,13 +142,15 @@ architecture ntm_input_gate_vector_architecture of ntm_input_gate_vector is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -163,7 +165,7 @@ architecture ntm_input_gate_vector_architecture of ntm_input_gate_vector is
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Control Internal
-  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- VECTOR ADDER
   -- CONTROL
@@ -179,7 +181,7 @@ architecture ntm_input_gate_vector_architecture of ntm_input_gate_vector is
 
   -- DATA
   signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_adder   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -199,10 +201,10 @@ architecture ntm_input_gate_vector_architecture of ntm_input_gate_vector is
 
   -- DATA
   signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_a_i_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_a_j_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_b_i_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_b_j_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -218,7 +220,7 @@ architecture ntm_input_gate_vector_architecture of ntm_input_gate_vector is
 
   -- DATA
   signal modulo_in_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_logistic   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_logistic   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -235,7 +237,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      I_OUT <= ZERO;
+      I_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -243,7 +245,7 @@ begin
       I_OUT_ENABLE <= '0';
 
       -- Control Internal
-      index_loop <= ZERO_INDEX;
+      index_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
@@ -255,11 +257,11 @@ begin
           I_OUT_ENABLE <= '0';
 
           -- Control Internal
-          index_loop <= ZERO_INDEX;
+          index_loop <= ZERO_CONTROL;
 
           if (START = '1') then
             -- Data Outputs
-            I_OUT <= ZERO;
+            I_OUT <= ZERO_DATA;
 
             -- Control Internal
             start_matrix_product <= '1';
@@ -284,12 +286,12 @@ begin
           size_a_i_in_matrix_product <= SIZE_L_IN;
           size_a_j_in_matrix_product <= SIZE_X_IN;
           size_b_i_in_matrix_product <= SIZE_X_IN;
-          size_b_j_in_matrix_product <= ONE;
+          size_b_j_in_matrix_product <= ONE_DATA;
           data_a_in_matrix_product   <= W_IN;
           data_b_in_matrix_product   <= X_IN;
 
           if (data_out_i_enable_matrix_product = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_adder <= '1';
             end if;
@@ -316,7 +318,7 @@ begin
           data_b_in_vector_adder <= B_IN;
 
           if (data_out_enable_vector_adder = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_matrix_product <= '1';
             end if;
@@ -341,12 +343,12 @@ begin
           size_a_i_in_matrix_product <= SIZE_L_IN;
           size_a_j_in_matrix_product <= SIZE_W_IN;
           size_b_i_in_matrix_product <= SIZE_W_IN;
-          size_b_j_in_matrix_product <= ONE;
+          size_b_j_in_matrix_product <= ONE_DATA;
           data_a_in_matrix_product   <= K_IN;
           data_b_in_matrix_product   <= R_IN;
 
           if (data_out_i_enable_matrix_product = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_adder <= '1';
             end if;
@@ -373,7 +375,7 @@ begin
           data_b_in_vector_adder <= data_out_vector_adder;
 
           if (data_out_enable_vector_adder = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_matrix_product <= '1';
             end if;
@@ -398,12 +400,12 @@ begin
           size_a_i_in_matrix_product <= SIZE_L_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
           size_b_i_in_matrix_product <= SIZE_L_IN;
-          size_b_j_in_matrix_product <= ONE;
+          size_b_j_in_matrix_product <= ONE_DATA;
           data_a_in_matrix_product   <= U_IN;
           data_b_in_matrix_product   <= H_IN;
 
           if (data_out_i_enable_matrix_product = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_adder <= '1';
             end if;
@@ -430,7 +432,7 @@ begin
           data_b_in_vector_adder <= data_out_vector_adder;
 
           if (data_out_enable_vector_adder = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_matrix_product <= '1';
             end if;
@@ -455,12 +457,12 @@ begin
           size_a_i_in_matrix_product <= SIZE_L_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
           size_b_i_in_matrix_product <= SIZE_L_IN;
-          size_b_j_in_matrix_product <= ONE;
+          size_b_j_in_matrix_product <= ONE_DATA;
           data_a_in_matrix_product   <= U_IN;
           data_b_in_matrix_product   <= H_IN;
 
           if (data_out_i_enable_matrix_product = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_adder <= '1';
             end if;
@@ -487,7 +489,7 @@ begin
           data_b_in_vector_adder <= data_out_vector_adder;
 
           if (data_out_enable_vector_adder = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_logistic <= '1';
             end if;
@@ -510,7 +512,7 @@ begin
           data_in_vector_logistic   <= data_out_vector_adder;
 
           if (data_out_enable_vector_logistic = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_L_IN) - unsigned(ONE_INDEX)) then
+            if (unsigned(index_loop) = unsigned(SIZE_L_IN) - unsigned(ONE_CONTROL)) then
               -- Control Outputs
               READY <= '1';
 
@@ -518,7 +520,7 @@ begin
               controller_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE_INDEX));
+              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_STATE;
@@ -548,7 +550,7 @@ begin
   vector_adder : ntm_vector_adder
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -578,7 +580,7 @@ begin
   matrix_product : ntm_matrix_product
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -612,7 +614,7 @@ begin
   vector_logistic_function : ntm_vector_logistic_function
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_matrix_softmax_function is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -68,9 +68,9 @@ entity ntm_matrix_softmax_function is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-    LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -93,13 +93,15 @@ architecture ntm_matrix_softmax_function_architecture of ntm_matrix_softmax_func
   -----------------------------------------------------------------------
   -- Constants
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -114,9 +116,9 @@ architecture ntm_matrix_softmax_function_architecture of ntm_matrix_softmax_func
   signal softmax_ctrl_fsm_int : softmax_ctrl_fsm;
 
   -- Internal Signals
-  signal index_matrix_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal index_vector_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal index_scalar_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_matrix_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_vector_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_scalar_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- SOFTMAX
   -- CONTROL
@@ -131,8 +133,8 @@ architecture ntm_matrix_softmax_function_architecture of ntm_matrix_softmax_func
 
   -- DATA
   signal modulo_in_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_softmax   : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal length_in_vector_softmax : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_softmax   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -147,15 +149,15 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO;
+      DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
 
       -- Assignations
-      index_matrix_loop <= ZERO_INDEX;
-      index_vector_loop <= ZERO_INDEX;
-      index_scalar_loop <= ZERO_INDEX;
+      index_matrix_loop <= ZERO_CONTROL;
+      index_vector_loop <= ZERO_CONTROL;
+      index_scalar_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
@@ -166,9 +168,9 @@ begin
 
           if (START = '1') then
             -- Assignations
-            index_matrix_loop <= ZERO_INDEX;
-            index_vector_loop <= ZERO_INDEX;
-            index_scalar_loop <= ZERO_INDEX;
+            index_matrix_loop <= ZERO_CONTROL;
+            index_vector_loop <= ZERO_CONTROL;
+            index_scalar_loop <= ZERO_CONTROL;
 
             -- FSM Control
             softmax_ctrl_fsm_int <= INPUT_MATRIX_STATE;
@@ -182,7 +184,7 @@ begin
 
             data_in_vector_softmax <= DATA_IN;
 
-            if (index_matrix_loop = ZERO_INDEX) then
+            if (index_matrix_loop = ZERO_CONTROL) then
               -- Control Internal
               start_vector_softmax <= '1';
             end if;
@@ -212,7 +214,7 @@ begin
 
             data_in_vector_softmax <= DATA_IN;
 
-            if (index_vector_loop = ZERO_INDEX) then
+            if (index_vector_loop = ZERO_CONTROL) then
               -- Control Internal
               start_vector_softmax <= '1';
             end if;
@@ -241,7 +243,7 @@ begin
 
             data_in_vector_softmax <= DATA_IN;
 
-            if (index_scalar_loop = ZERO_INDEX) then
+            if (index_scalar_loop = ZERO_CONTROL) then
               -- Control Internal
               start_vector_softmax <= '1';
             end if;
@@ -261,7 +263,7 @@ begin
         when ENDER_STATE =>  -- STEP 3
 
           if (ready_vector_softmax = '1') then
-            if (unsigned(index_matrix_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_INDEX) and unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_INDEX) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_INDEX)) then
+            if (unsigned(index_matrix_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL) and unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
               -- Control Outputs
               READY <= '1';
 
@@ -269,10 +271,10 @@ begin
 
               -- FSM Control
               softmax_ctrl_fsm_int <= STARTER_STATE;
-            elsif (unsigned(index_matrix_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_INDEX) and unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_INDEX) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_INDEX)) then
+            elsif (unsigned(index_matrix_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL) and unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
               -- Control Internal
-              index_matrix_loop <= std_logic_vector(unsigned(index_matrix_loop) + unsigned(ONE_INDEX));
-              index_vector_loop <= ZERO_INDEX;
+              index_matrix_loop <= std_logic_vector(unsigned(index_matrix_loop) + unsigned(ONE_CONTROL));
+              index_vector_loop <= ZERO_CONTROL;
 
               -- Control Outputs
               DATA_OUT_MATRIX_ENABLE <= '1';
@@ -281,10 +283,10 @@ begin
 
               -- FSM Control
               softmax_ctrl_fsm_int <= INPUT_MATRIX_STATE;
-            elsif (unsigned(index_matrix_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_INDEX) and unsigned(index_vector_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_INDEX) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_INDEX)) then
+            elsif (unsigned(index_matrix_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL) and unsigned(index_vector_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
               -- Control Internal
-              index_vector_loop <= std_logic_vector(unsigned(index_vector_loop) + unsigned(ONE_INDEX));
-              index_scalar_loop <= ZERO_INDEX;
+              index_vector_loop <= std_logic_vector(unsigned(index_vector_loop) + unsigned(ONE_CONTROL));
+              index_scalar_loop <= ZERO_CONTROL;
 
               -- Control Outputs
               DATA_OUT_VECTOR_ENABLE <= '1';
@@ -292,9 +294,9 @@ begin
 
               -- FSM Control
               softmax_ctrl_fsm_int <= INPUT_VECTOR_STATE;
-            elsif (unsigned(index_matrix_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_INDEX) and unsigned(index_vector_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_INDEX) and unsigned(index_scalar_loop) < unsigned(LENGTH_IN)-unsigned(ONE_INDEX)) then
+            elsif (unsigned(index_matrix_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL) and unsigned(index_vector_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL) and unsigned(index_scalar_loop) < unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
               -- Control Internal
-              index_scalar_loop <= std_logic_vector(unsigned(index_scalar_loop) + unsigned(ONE_INDEX));
+              index_scalar_loop <= std_logic_vector(unsigned(index_scalar_loop) + unsigned(ONE_CONTROL));
 
               -- Control Outputs
               DATA_OUT_SCALAR_ENABLE <= '1';
@@ -324,7 +326,7 @@ begin
   vector_softmax_function : ntm_vector_softmax_function
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

@@ -38,8 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module dnc_write_key #(
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -69,10 +69,15 @@ module dnc_write_key #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO  = 0;
-  parameter ONE   = 1;
-  parameter TWO   = 2;
-  parameter THREE = 3;
+  parameter ZERO_CONTROL  = 0;
+  parameter ONE_CONTROL   = 1;
+  parameter TWO_CONTROL   = 2;
+  parameter THREE_CONTROL = 3;
+
+  parameter ZERO_DATA  = 0;
+  parameter ONE_DATA   = 1;
+  parameter TWO_DATA   = 2;
+  parameter THREE_DATA = 3;
 
   parameter FULL  = 1;
   parameter EMPTY = 0;
@@ -87,7 +92,7 @@ module dnc_write_key #(
   reg write_key_ctrl_fsm_int;
 
   // Internal Signals
-  reg [INDEX_SIZE-1:0] index_loop;
+  reg [CONTROL_SIZE-1:0] index_loop;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -98,13 +103,13 @@ module dnc_write_key #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      K_OUT <= ZERO;
+      K_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
 
       // Assignations
-      index_loop <= ZERO;
+      index_loop <= ZERO_DATA;
     end
     else begin
       case(write_key_ctrl_fsm_int)
@@ -113,7 +118,7 @@ module dnc_write_key #(
           READY <= 1'b0;
           if(START == 1'b1) begin
             // Assignations
-            index_loop <= ZERO;
+            index_loop <= ZERO_DATA;
 
             // FSM Control
             write_key_ctrl_fsm_int <= ENDER_STATE;
@@ -121,7 +126,7 @@ module dnc_write_key #(
         end
         ENDER_STATE : begin  // STEP 1
           if(K_IN_ENABLE == 1'b1) begin
-            if(index_loop == (SIZE_W_IN - ONE)) begin
+            if(index_loop == (SIZE_W_IN - ONE_CONTROL)) begin
               // Control Outputs
               READY <= 1'b1;
 
@@ -130,7 +135,7 @@ module dnc_write_key #(
             end
             else begin
               // Control Internal
-              index_loop <= (index_loop + ONE);
+              index_loop <= (index_loop + ONE_CONTROL);
             end
             // Data Outputs
             K_OUT <= K_IN;

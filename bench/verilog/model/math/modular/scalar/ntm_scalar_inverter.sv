@@ -38,8 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_scalar_inverter #(
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -70,10 +70,15 @@ module ntm_scalar_inverter #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO  = 0;
-  parameter ONE   = 1;
-  parameter TWO   = 2;
-  parameter THREE = 3;
+  parameter ZERO_CONTROL  = 0;
+  parameter ONE_CONTROL   = 1;
+  parameter TWO_CONTROL   = 2;
+  parameter THREE_CONTROL = 3;
+
+  parameter ZERO_DATA  = 0;
+  parameter ONE_DATA   = 1;
+  parameter TWO_DATA   = 2;
+  parameter THREE_DATA = 3;
 
   parameter FULL  = 1;
   parameter EMPTY = 0;
@@ -103,16 +108,16 @@ module ntm_scalar_inverter #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      DATA_OUT <= ZERO;
+      DATA_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
 
       // Assignation
-      u_int <= ZERO;
-      v_int <= ZERO;
-      x_int <= ZERO;
-      y_int <= ZERO;
+      u_int <= ZERO_DATA;
+      v_int <= ZERO_DATA;
+      x_int <= ZERO_DATA;
+      y_int <= ZERO_DATA;
     end
     else begin
       case(inverter_ctrl_fsm_int)
@@ -125,15 +130,15 @@ module ntm_scalar_inverter #(
             u_int <= {1'b0,DATA_IN};
             v_int <= {1'b0,MODULO_IN};
 
-            x_int <= ONE;
-            y_int <= ZERO;
+            x_int <= ONE_CONTROL;
+            y_int <= ZERO_DATA;
 
             // FSM Control
             inverter_ctrl_fsm_int <= ENDER_STATE;
           end
         end
         ENDER_STATE : begin  // STEP 1
-          if(u_int == ONE) begin
+          if(u_int == ONE_CONTROL) begin
             if(x_int < {1'b0,MODULO_IN}) begin
               // Data Outputs
               DATA_OUT <= x_int[DATA_SIZE-1:0];
@@ -149,7 +154,7 @@ module ntm_scalar_inverter #(
               x_int <= (x_int - {1'b0,MODULO_IN});
             end
           end
-          else if(v_int == ONE) begin
+          else if(v_int == ONE_CONTROL) begin
             if(y_int < {1'b0,MODULO_IN}) begin
               // Data Outputs
               DATA_OUT <= y_int[DATA_SIZE-1:0];

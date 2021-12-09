@@ -48,8 +48,8 @@ use work.ntm_lstm_controller_pkg.all;
 
 entity ntm_top is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -91,12 +91,12 @@ entity ntm_top is
     Y_OUT_ENABLE : out std_logic;       -- for y in 0 to Y-1
 
     -- DATA
-    SIZE_X_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_Y_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -139,13 +139,15 @@ architecture ntm_top_architecture of ntm_top is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -163,7 +165,7 @@ architecture ntm_top_architecture of ntm_top is
   signal write_heads_ctrl_fsm_int : write_heads_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- CONTROLLER
@@ -266,10 +268,10 @@ architecture ntm_top_architecture of ntm_top is
   signal y_in_enable_output_vector : std_logic;
 
   -- DATA
-  signal size_y_in_output_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_l_in_output_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_w_in_output_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_r_in_output_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_y_in_output_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_l_in_output_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_output_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_r_in_output_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal k_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
   signal r_in_output_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -321,9 +323,9 @@ architecture ntm_top_architecture of ntm_top is
   signal h_in_enable_interface_vector : std_logic;
 
   -- DATA
-  signal size_n_in_interface_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_w_in_interface_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_l_in_interface_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_n_in_interface_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_interface_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_l_in_interface_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal wk_in_interface_vector     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal wbeta_in_interface_vector  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -357,8 +359,8 @@ architecture ntm_top_architecture of ntm_top is
   signal r_out_enable_reading : std_logic;
 
   -- DATA
-  signal size_n_in_reading : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_w_in_reading : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_n_in_reading : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_reading : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal w_in_reading  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal m_in_reading  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -384,8 +386,8 @@ architecture ntm_top_architecture of ntm_top is
   signal m_out_k_enable_writing : std_logic;
 
   -- DATA
-  signal size_n_in_writing : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_w_in_writing : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_n_in_writing : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_writing : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal m_in_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal a_in_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -408,8 +410,8 @@ architecture ntm_top_architecture of ntm_top is
   signal m_out_k_enable_erasing : std_logic;
 
   -- DATA
-  signal size_n_in_erasing : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_w_in_erasing : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_n_in_erasing : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_erasing : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal m_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal e_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -441,8 +443,8 @@ architecture ntm_top_architecture of ntm_top is
   signal w_out_enable_addressing : std_logic;
 
   -- DATA
-  signal size_n_in_addressing : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_w_in_addressing : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_n_in_addressing : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_addressing : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal k_in_addressing     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_in_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -466,7 +468,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      Y_OUT <= ZERO;
+      Y_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -474,7 +476,7 @@ begin
       Y_OUT_ENABLE <= '0';
 
       -- Control Internal
-      index_loop <= ZERO_INDEX;
+      index_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
@@ -486,7 +488,7 @@ begin
           Y_OUT_ENABLE <= '0';
 
           -- Control Internal
-          index_loop <= ZERO_INDEX;
+          index_loop <= ZERO_CONTROL;
 
           if (START = '1') then
             -- Control Internal
@@ -561,12 +563,12 @@ begin
           -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
 
           if (w_out_enable_addressing = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) then
+            if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) then
               -- FSM Control
               top_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE_INDEX));
+              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
               top_ctrl_fsm_int <= CONTROLLER_STATE;
@@ -783,7 +785,7 @@ begin
   controller : ntm_controller
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -859,7 +861,7 @@ begin
   output_vector : ntm_output_vector
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -915,7 +917,7 @@ begin
   interface_vector : ntm_interface_vector
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -990,7 +992,7 @@ begin
   reading : ntm_reading
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -1026,7 +1028,7 @@ begin
   writing : ntm_writing
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -1061,7 +1063,7 @@ begin
   erasing : ntm_erasing
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -1100,7 +1102,7 @@ begin
   addressing : ntm_addressing
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

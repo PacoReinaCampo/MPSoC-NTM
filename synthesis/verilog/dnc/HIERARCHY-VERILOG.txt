@@ -30,7 +30,6 @@ dnc_top
   dnc_write_interface_vector
   dnc_read_interface_vector
   dnc_output_vector
-  dnc_controller_output_vector
 
   ntm_controller
     ntm_hidden_gate_vector

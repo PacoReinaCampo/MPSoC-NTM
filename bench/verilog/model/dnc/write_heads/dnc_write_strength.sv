@@ -38,8 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module dnc_write_strength #(
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -63,10 +63,15 @@ module dnc_write_strength #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO  = 0;
-  parameter ONE   = 1;
-  parameter TWO   = 2;
-  parameter THREE = 3;
+  parameter ZERO_CONTROL  = 0;
+  parameter ONE_CONTROL   = 1;
+  parameter TWO_CONTROL   = 2;
+  parameter THREE_CONTROL = 3;
+
+  parameter ZERO_DATA  = 0;
+  parameter ONE_DATA   = 1;
+  parameter TWO_DATA   = 2;
+  parameter THREE_DATA = 3;
 
   parameter FULL  = 1;
   parameter EMPTY = 0;
@@ -77,7 +82,7 @@ module dnc_write_strength #(
   // Signals
   ///////////////////////////////////////////////////////////////////////
 
-  // SCALAR ONEPLUS
+  // SCALAR ONE_CONTROLPLUS
   // CONTROL
   wire start_scalar_oneplus;
   wire ready_scalar_oneplus;
@@ -102,10 +107,10 @@ module dnc_write_strength #(
   assign data_in_scalar_oneplus = BETA_IN;
   assign BETA_OUT = data_out_scalar_oneplus;
 
-  // SCALAR ONEPLUS
+  // SCALAR ONE_CONTROLPLUS
   ntm_scalar_oneplus_function #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   ntm_scalar_oneplus_function_i(
     // GLOBAL

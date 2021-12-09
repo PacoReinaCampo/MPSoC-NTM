@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_scalar_tanh_function is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -84,13 +84,15 @@ architecture ntm_scalar_tanh_function_architecture of ntm_scalar_tanh_function i
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -166,7 +168,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO;
+      DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -223,7 +225,7 @@ begin
           -- Data Inputs
           modulo_in_scalar_adder <= MODULO_IN;
           data_a_in_scalar_adder <= data_out_scalar_exponentiator;
-          data_b_in_scalar_adder <= ONE;
+          data_b_in_scalar_adder <= ONE_DATA;
 
           if (ready_scalar_adder = '1') then
             -- Control Internal
@@ -244,7 +246,7 @@ begin
           -- Data Inputs
           modulo_in_scalar_adder <= MODULO_IN;
           data_a_in_scalar_adder <= data_out_scalar_exponentiator;
-          data_b_in_scalar_adder <= ONE;
+          data_b_in_scalar_adder <= ONE_DATA;
 
           -- Data Internal
           data_int_scalar_adder <= data_out_scalar_adder;
@@ -286,7 +288,7 @@ begin
   -- DATA
   -- SCALAR MULTIPLIER
   modulo_in_scalar_multiplier <= MODULO_IN;
-  data_a_in_scalar_multiplier <= TWO;
+  data_a_in_scalar_multiplier <= TWO_DATA;
   data_b_in_scalar_multiplier <= DATA_IN;
 
   -- SCALAR DIVIDER
@@ -303,7 +305,7 @@ begin
   scalar_adder : ntm_scalar_adder
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -327,7 +329,7 @@ begin
   scalar_multiplier : ntm_scalar_multiplier
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -349,7 +351,7 @@ begin
   scalar_divider : ntm_scalar_divider
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -371,7 +373,7 @@ begin
   scalar_exponentiator : ntm_scalar_exponentiator
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

@@ -48,8 +48,8 @@ module dnc_read_heads_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=512;
-  parameter INDEX_SIZE=512;
+  parameter DATA_SIZE=128;
+  parameter CONTROL_SIZE=64;
 
   parameter X=64;
   parameter Y=64;
@@ -126,7 +126,7 @@ module dnc_read_heads_testbench;
   // STIMULUS
   dnc_read_heads_memory_stimulus #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   read_heads_memory_stimulus(
     // GLOBAL
@@ -194,7 +194,7 @@ module dnc_read_heads_testbench;
   // FREE GATES
   dnc_free_gates #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   free_gates(
     // GLOBAL
@@ -217,7 +217,7 @@ module dnc_read_heads_testbench;
   // READ KEYS
   dnc_read_keys #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   read_keys(
     // GLOBAL
@@ -243,7 +243,7 @@ module dnc_read_heads_testbench;
   // READ MODES
   dnc_read_modes #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   read_modes(
     // GLOBAL
@@ -268,7 +268,7 @@ module dnc_read_heads_testbench;
   // READ STRENGTHS
   dnc_read_strengths #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   read_strengths(
     // GLOBAL

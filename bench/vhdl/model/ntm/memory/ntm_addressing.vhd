@@ -47,8 +47,8 @@ use work.ntm_core_pkg.all;
 
 entity ntm_addressing is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -75,8 +75,8 @@ entity ntm_addressing is
     W_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- DATA
-    SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     K_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
     BETA_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -124,13 +124,15 @@ architecture ntm_addressing_architecture of ntm_addressing is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -166,8 +168,8 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal c_out_enable_vector_content_based_addressing : std_logic;
 
   -- DATA
-  signal size_i_in_vector_content_based_addressing : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_vector_content_based_addressing : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_vector_content_based_addressing : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_vector_content_based_addressing : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal k_in_vector_content_based_addressing    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_in_vector_content_based_addressing : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -189,7 +191,7 @@ architecture ntm_addressing_architecture of ntm_addressing is
 
   -- DATA
   signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_adder   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -206,7 +208,7 @@ architecture ntm_addressing_architecture of ntm_addressing is
 
   -- DATA
   signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_multiplier   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -223,7 +225,7 @@ architecture ntm_addressing_architecture of ntm_addressing is
 
   -- DATA
   signal modulo_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_divider   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_divider   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -240,7 +242,7 @@ architecture ntm_addressing_architecture of ntm_addressing is
 
   -- DATA
   signal modulo_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_exponentiator   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_exponentiator   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -258,8 +260,8 @@ architecture ntm_addressing_architecture of ntm_addressing is
 
   -- DATA
   signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_summation   : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal length_in_vector_summation : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -278,8 +280,8 @@ architecture ntm_addressing_architecture of ntm_addressing is
 
   -- DATA
   signal modulo_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_convolution   : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal length_in_vector_convolution : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_convolution   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -303,7 +305,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      W_OUT <= ZERO;
+      W_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -488,7 +490,7 @@ begin
   content_based_addressing : ntm_content_based_addressing
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -526,7 +528,7 @@ begin
   vector_adder : ntm_vector_adder
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -556,7 +558,7 @@ begin
   vector_multiplier : ntm_vector_multiplier
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -584,7 +586,7 @@ begin
   vector_divider : ntm_vector_divider
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -612,7 +614,7 @@ begin
   vector_exponentiator : ntm_vector_exponentiator
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -640,7 +642,7 @@ begin
   vector_summation_function : ntm_vector_summation_function
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -669,7 +671,7 @@ begin
   vector_convolution_function : ntm_vector_convolution_function
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

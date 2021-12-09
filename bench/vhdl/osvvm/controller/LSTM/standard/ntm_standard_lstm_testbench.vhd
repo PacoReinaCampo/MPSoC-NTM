@@ -101,10 +101,10 @@ architecture ntm_standard_lstm_testbench_architecture of ntm_standard_lstm_testb
   signal h_out_enable_controller : std_logic;
 
   -- DATA
-  signal size_x_in_controller : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_w_in_controller : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_l_in_controller : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_r_in_controller : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_x_in_controller : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_controller : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_l_in_controller : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_r_in_controller : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal w_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
   signal k_in_controller : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -133,7 +133,7 @@ begin
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE,
 
       X => X,
       Y => Y,
@@ -216,7 +216,7 @@ begin
   ntm_controller_i : ntm_controller
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

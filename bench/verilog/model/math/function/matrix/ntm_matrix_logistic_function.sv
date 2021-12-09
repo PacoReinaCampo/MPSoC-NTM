@@ -38,8 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_matrix_logistic_function #(
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -76,10 +76,15 @@ module ntm_matrix_logistic_function #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO  = 0;
-  parameter ONE   = 1;
-  parameter TWO   = 2;
-  parameter THREE = 3;
+  parameter ZERO_CONTROL  = 0;
+  parameter ONE_CONTROL   = 1;
+  parameter TWO_CONTROL   = 2;
+  parameter THREE_CONTROL = 3;
+
+  parameter ZERO_DATA  = 0;
+  parameter ONE_DATA   = 1;
+  parameter TWO_DATA   = 2;
+  parameter THREE_DATA = 3;
 
   parameter FULL  = 1;
   parameter EMPTY = 0;
@@ -94,8 +99,8 @@ module ntm_matrix_logistic_function #(
   reg [1:0] logistic_ctrl_fsm_int;
 
   // Internal Signals
-  reg [INDEX_SIZE-1:0] index_i_loop;
-  reg [INDEX_SIZE-1:0] index_j_loop;
+  reg [CONTROL_SIZE-1:0] index_i_loop;
+  reg [CONTROL_SIZE-1:0] index_j_loop;
 
   // LOGISTIC
   // CONTROL
@@ -118,14 +123,14 @@ module ntm_matrix_logistic_function #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      DATA_OUT <= ZERO;
+      DATA_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
 
       // Assignations
-      index_i_loop <= ZERO;
-      index_j_loop <= ZERO;
+      index_i_loop <= ZERO_DATA;
+      index_j_loop <= ZERO_DATA;
     end
     else begin
       case(logistic_ctrl_fsm_int)
@@ -135,8 +140,8 @@ module ntm_matrix_logistic_function #(
 
           if(START == 1'b1) begin
             // Assignations
-            index_i_loop <= ZERO;
-            index_j_loop <= ZERO;
+            index_i_loop <= ZERO_DATA;
+            index_j_loop <= ZERO_DATA;
 
             // FSM Control
             logistic_ctrl_fsm_int <= INPUT_I_STATE;
@@ -148,7 +153,7 @@ module ntm_matrix_logistic_function #(
             modulo_in_vector_logistic <= MODULO_IN;
             data_in_vector_logistic <= DATA_IN;
 
-            if(index_i_loop == ZERO) begin
+            if(index_i_loop == ZERO_DATA) begin
               // Control Internal
               start_vector_logistic <= 1'b1;
             end
@@ -174,7 +179,7 @@ module ntm_matrix_logistic_function #(
             size_in_vector_logistic <= SIZE_J_IN;
             data_in_vector_logistic <= DATA_IN;
 
-            if(index_j_loop == ZERO) begin
+            if(index_j_loop == ZERO_DATA) begin
               // Control Internal
               start_vector_logistic <= 1'b1;
             end
@@ -194,7 +199,7 @@ module ntm_matrix_logistic_function #(
         end
         ENDER_STATE : begin  // STEP 3
           if(ready_vector_logistic == 1'b1) begin
-            if((index_i_loop == (SIZE_I_IN - ONE)) && index_j_loop == (SIZE_J_IN - ONE)) begin
+            if((index_i_loop == (SIZE_I_IN - ONE_CONTROL)) && index_j_loop == (SIZE_J_IN - ONE_CONTROL)) begin
               // Control Outputs
               READY <= 1'b1;
               DATA_OUT_J_ENABLE <= 1'b1;
@@ -202,10 +207,10 @@ module ntm_matrix_logistic_function #(
               // FSM Control
               logistic_ctrl_fsm_int <= STARTER_STATE;
             end
-            else if((index_i_loop < (SIZE_I_IN - ONE)) && index_j_loop == (SIZE_J_IN - ONE)) begin
+            else if((index_i_loop < (SIZE_I_IN - ONE_CONTROL)) && index_j_loop == (SIZE_J_IN - ONE_CONTROL)) begin
               // Control Internal
-              index_i_loop <= (index_i_loop + ONE);
-              index_j_loop <= ZERO;
+              index_i_loop <= (index_i_loop + ONE_CONTROL);
+              index_j_loop <= ZERO_DATA;
 
               // Control Outputs
               DATA_OUT_I_ENABLE <= 1'b1;
@@ -214,9 +219,9 @@ module ntm_matrix_logistic_function #(
               // FSM Control
               logistic_ctrl_fsm_int <= INPUT_I_STATE;
             end
-            else if((index_i_loop < (SIZE_I_IN - ONE)) && index_j_loop < (SIZE_J_IN - ONE)) begin
+            else if((index_i_loop < (SIZE_I_IN - ONE_CONTROL)) && index_j_loop < (SIZE_J_IN - ONE_CONTROL)) begin
               // Control Internal
-              index_j_loop <= (index_j_loop + ONE);
+              index_j_loop <= (index_j_loop + ONE_CONTROL);
 
               // Control Outputs
               DATA_OUT_J_ENABLE <= 1'b1;
@@ -243,7 +248,7 @@ module ntm_matrix_logistic_function #(
   // LOGISTIC
   ntm_vector_logistic_function #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_logistic_function(
     // GLOBAL

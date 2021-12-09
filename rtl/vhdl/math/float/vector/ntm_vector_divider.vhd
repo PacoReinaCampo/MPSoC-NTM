@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_vector_divider is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -65,7 +65,7 @@ entity ntm_vector_divider is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -88,13 +88,15 @@ architecture ntm_vector_divider_architecture of ntm_vector_divider is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -109,7 +111,7 @@ architecture ntm_vector_divider_architecture of ntm_vector_divider is
   signal divider_ctrl_fsm_int : divider_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal data_a_in_divider_int : std_logic;
   signal data_b_in_divider_int : std_logic;
@@ -138,7 +140,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO;
+      DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY           <= '0';
@@ -147,15 +149,15 @@ begin
       -- Control Internal
       start_scalar_divider <= '0';
 
-      index_loop <= ZERO_INDEX;
+      index_loop <= ZERO_CONTROL;
 
       data_a_in_divider_int <= '0';
       data_b_in_divider_int <= '0';
 
       -- Data Internal
-      modulo_in_scalar_divider <= ZERO;
-      data_a_in_scalar_divider <= ZERO;
-      data_b_in_scalar_divider <= ZERO;
+      modulo_in_scalar_divider <= ZERO_DATA;
+      data_a_in_scalar_divider <= ZERO_DATA;
+      data_b_in_scalar_divider <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -167,7 +169,7 @@ begin
 
           if (START = '1') then
             -- Control Internal
-            index_loop <= ZERO_INDEX;
+            index_loop <= ZERO_CONTROL;
 
             -- FSM Control
             divider_ctrl_fsm_int <= INPUT_STATE;
@@ -175,7 +177,7 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          if ((DATA_A_IN_ENABLE = '1') or (index_loop = ZERO_INDEX)) then
+          if ((DATA_A_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
             -- Data Inputs
             data_a_in_scalar_divider <= DATA_A_IN;
 
@@ -183,7 +185,7 @@ begin
             data_a_in_divider_int <= '1';
           end if;
 
-          if ((DATA_B_IN_ENABLE = '1') or (index_loop = ZERO_INDEX)) then
+          if ((DATA_B_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
             -- Data Inputs
             data_b_in_scalar_divider <= DATA_B_IN;
 
@@ -192,7 +194,7 @@ begin
           end if;
 
           if (data_a_in_divider_int = '1' and data_b_in_divider_int = '1') then
-            if (index_loop = ZERO_INDEX) then
+            if (index_loop = ZERO_CONTROL) then
               -- Control Internal
               start_scalar_divider <= '1';
             end if;
@@ -213,7 +215,7 @@ begin
         when ENDER_STATE =>  -- STEP 2
 
           if (ready_scalar_divider = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_INDEX)) then
+            if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
               -- Control Outputs
               READY <= '1';
 
@@ -221,7 +223,7 @@ begin
               divider_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_INDEX));
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
               -- FSM Control
               divider_ctrl_fsm_int <= INPUT_STATE;
@@ -251,7 +253,7 @@ begin
   scalar_divider : ntm_scalar_divider
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

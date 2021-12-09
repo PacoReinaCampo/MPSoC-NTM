@@ -38,8 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_scalar_logistic_function #(
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -91,7 +91,7 @@ module ntm_scalar_logistic_function #(
   wire [DATA_SIZE-1:0] data_in_scalar_inverter;
   wire [DATA_SIZE-1:0] data_out_scalar_inverter;
 
-  // SCALAR EXPONENTIATOR
+  // SCALAR EXPONE_CONTROLNTIATOR
   // CONTROL
   wire start_scalar_exponentiator;
   wire ready_scalar_exponentiator;
@@ -109,7 +109,7 @@ module ntm_scalar_logistic_function #(
   // SCALAR ADDER
   ntm_scalar_adder #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   scalar_adder(
     // GLOBAL
@@ -132,7 +132,7 @@ module ntm_scalar_logistic_function #(
   // SCALAR INVERTER
   ntm_scalar_inverter #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   scalar_inverter(
     // GLOBAL
@@ -149,10 +149,10 @@ module ntm_scalar_logistic_function #(
     .DATA_OUT(data_out_scalar_inverter)
   );
 
-  // SCALAR EXPONENTIATOR
+  // SCALAR EXPONE_CONTROLNTIATOR
   ntm_scalar_exponentiator #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   scalar_exponentiator(
     // GLOBAL

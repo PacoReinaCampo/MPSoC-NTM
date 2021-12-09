@@ -38,8 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_state_gate_vector #(
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -88,10 +88,15 @@ module ntm_state_gate_vector #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO  = 0;
-  parameter ONE   = 1;
-  parameter TWO   = 2;
-  parameter THREE = 3;
+  parameter ZERO_CONTROL  = 0;
+  parameter ONE_CONTROL   = 1;
+  parameter TWO_CONTROL   = 2;
+  parameter THREE_CONTROL = 3;
+
+  parameter ZERO_DATA  = 0;
+  parameter ONE_DATA   = 1;
+  parameter TWO_DATA   = 2;
+  parameter THREE_DATA = 3;
 
   parameter FULL  = 1;
   parameter EMPTY = 0;
@@ -106,7 +111,7 @@ module ntm_state_gate_vector #(
   reg [2:0] controller_ctrl_fsm_int;
 
   // Internal Signals
-  wire [INDEX_SIZE-1:0] index_loop;
+  wire [CONTROL_SIZE-1:0] index_loop;
 
   wire [DATA_SIZE-1:0] data_int_vector_multiplier;
 
@@ -155,7 +160,7 @@ module ntm_state_gate_vector #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      S_OUT <= ZERO;
+      S_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
@@ -186,7 +191,7 @@ module ntm_state_gate_vector #(
           // Data Outputs
           modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_L_IN;
-          data_a_in_vector_adder <= ZERO;
+          data_a_in_vector_adder <= ZERO_DATA;
           data_b_in_vector_adder <= data_out_vector_multiplier;
         end
 
@@ -222,7 +227,7 @@ module ntm_state_gate_vector #(
   // VECTOR ADDER
   ntm_vector_adder #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_adder(
     // GLOBAL
@@ -250,7 +255,7 @@ module ntm_state_gate_vector #(
   // VECTOR MULTIPLIER
   ntm_vector_multiplier #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_multiplier(
     // GLOBAL

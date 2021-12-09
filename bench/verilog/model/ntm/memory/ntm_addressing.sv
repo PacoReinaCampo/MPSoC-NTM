@@ -38,8 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_addressing #(
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -98,7 +98,7 @@ module ntm_addressing #(
   parameter [2:0] VECTOR_SECOND_ADDER_INTERPOLATION_STATE = 4;
 
   parameter [2:0] STARTER_SHARPENING_STATE = 0;
-  parameter [2:0] VECTOR_EXPONENTIATOR_SHARPENING_STATE = 1;
+  parameter [2:0] VECTOR_EXPONE_CONTROLNTIATOR_SHARPENING_STATE = 1;
   parameter [2:0] VECTOR_SUMMATION_SHARPENING_STATE = 2;
   parameter [2:0] VECTOR_DIVIDER_SHARPENING_STATE = 3;
 
@@ -106,10 +106,15 @@ module ntm_addressing #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO  = 0;
-  parameter ONE   = 1;
-  parameter TWO   = 2;
-  parameter THREE = 3;
+  parameter ZERO_CONTROL  = 0;
+  parameter ONE_CONTROL   = 1;
+  parameter TWO_CONTROL   = 2;
+  parameter THREE_CONTROL = 3;
+
+  parameter ZERO_DATA  = 0;
+  parameter ONE_DATA   = 1;
+  parameter TWO_DATA   = 2;
+  parameter THREE_DATA = 3;
 
   parameter FULL  = 1;
   parameter EMPTY = 0;
@@ -202,7 +207,7 @@ module ntm_addressing #(
   reg [DATA_SIZE-1:0] data_b_in_vector_divider;
   wire [DATA_SIZE-1:0] data_out_vector_divider;
 
-  // VECTOR EXPONENTIATOR
+  // VECTOR EXPONE_CONTROLNTIATOR
   // CONTROL
   wire start_vector_exponentiator;
   wire ready_vector_exponentiator;
@@ -268,7 +273,7 @@ module ntm_addressing #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      W_OUT <= ZERO;
+      W_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
@@ -359,7 +364,7 @@ module ntm_addressing #(
             STARTER_SHARPENING_STATE : begin  // STEP 0
             end
 
-            VECTOR_EXPONENTIATOR_SHARPENING_STATE : begin  // STEP 1
+            VECTOR_EXPONE_CONTROLNTIATOR_SHARPENING_STATE : begin  // STEP 1
 
               // Data Inputs
               modulo_in_vector_exponentiator <= FULL;
@@ -402,7 +407,7 @@ module ntm_addressing #(
   // VECTOR CONTENT BASED ADDRESSING
   ntm_content_based_addressing #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   ntm_content_based_addressing_i(
     // GLOBAL
@@ -439,7 +444,7 @@ module ntm_addressing #(
   // VECTOR ADDER
   ntm_vector_adder #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_adder(
     // GLOBAL
@@ -467,7 +472,7 @@ module ntm_addressing #(
   // VECTOR MULTIPLIER
   ntm_vector_multiplier #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_multiplier(
     // GLOBAL
@@ -493,7 +498,7 @@ module ntm_addressing #(
   // VECTOR DIVIDER
   ntm_vector_divider #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_divider(
     // GLOBAL
@@ -516,10 +521,10 @@ module ntm_addressing #(
     .DATA_OUT(data_out_vector_divider)
   );
 
-  // VECTOR EXPONENTIATOR
+  // VECTOR EXPONE_CONTROLNTIATOR
   ntm_vector_exponentiator #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_exponentiator(
     // GLOBAL
@@ -545,7 +550,7 @@ module ntm_addressing #(
   // VECTOR SUMMATION
   ntm_vector_summation_function #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_summation_function(
     // GLOBAL
@@ -572,7 +577,7 @@ module ntm_addressing #(
   // VECTOR CONVOLUTION
   ntm_vector_convolution_function #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_convolution_function(
     // GLOBAL

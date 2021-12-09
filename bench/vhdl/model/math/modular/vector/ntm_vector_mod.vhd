@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_vector_mod is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -64,7 +64,7 @@ entity ntm_vector_mod is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -86,13 +86,15 @@ architecture ntm_vector_mod_architecture of ntm_vector_mod is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -107,7 +109,7 @@ architecture ntm_vector_mod_architecture of ntm_vector_mod is
   signal mod_ctrl_fsm_int : mod_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- MOD
   -- CONTROL
@@ -132,7 +134,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO;
+      DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY           <= '0';
@@ -141,11 +143,11 @@ begin
       -- Control Internal
       start_scalar_mod <= '0';
 
-      index_loop <= ZERO_INDEX;
+      index_loop <= ZERO_CONTROL;
 
       -- Data Internal
-      modulo_in_scalar_mod <= ZERO;
-      data_in_scalar_mod   <= ZERO;
+      modulo_in_scalar_mod <= ZERO_DATA;
+      data_in_scalar_mod   <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -157,7 +159,7 @@ begin
 
           if (START = '1') then
             -- Control Internal
-            index_loop <= ZERO_INDEX;
+            index_loop <= ZERO_CONTROL;
 
             -- FSM Control
             mod_ctrl_fsm_int <= INPUT_STATE;
@@ -165,13 +167,13 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          if ((DATA_IN_ENABLE = '1') or (index_loop = ZERO_INDEX)) then
+          if ((DATA_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
             -- Data Inputs
             modulo_in_scalar_mod <= MODULO_IN;
 
             data_in_scalar_mod <= DATA_IN;
 
-            if (index_loop = ZERO_INDEX) then
+            if (index_loop = ZERO_CONTROL) then
               -- Control Internal
               start_scalar_mod <= '1';
             end if;
@@ -186,7 +188,7 @@ begin
         when ENDER_STATE =>  -- STEP 2
 
           if (ready_scalar_mod = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_INDEX)) then
+            if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
               -- Control Outputs
               READY <= '1';
 
@@ -194,7 +196,7 @@ begin
               mod_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_INDEX));
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
               -- FSM Control
               mod_ctrl_fsm_int <= INPUT_STATE;
@@ -221,7 +223,7 @@ begin
   scalar_mod : ntm_scalar_mod
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

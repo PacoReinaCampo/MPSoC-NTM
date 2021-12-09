@@ -58,8 +58,8 @@ package ntm_core_pkg is
 
   component ntm_reading is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -79,8 +79,8 @@ package ntm_core_pkg is
       R_OUT_ENABLE : out std_logic;
 
       -- DATA
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       M_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -95,8 +95,8 @@ package ntm_core_pkg is
 
   component ntm_writing is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -118,8 +118,8 @@ package ntm_core_pkg is
       M_OUT_K_ENABLE : out std_logic;
 
       -- DATA
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       M_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -131,8 +131,8 @@ package ntm_core_pkg is
 
   component ntm_erasing is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -154,8 +154,8 @@ package ntm_core_pkg is
       M_OUT_K_ENABLE : out std_logic;
 
       -- DATA
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       M_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       E_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -171,8 +171,8 @@ package ntm_core_pkg is
 
   component ntm_content_based_addressing is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -209,8 +209,8 @@ package ntm_core_pkg is
 
   component ntm_addressing is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -237,8 +237,8 @@ package ntm_core_pkg is
       W_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
       -- DATA
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       K_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
       BETA_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -259,8 +259,8 @@ package ntm_core_pkg is
 
   component ntm_top is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -302,12 +302,12 @@ package ntm_core_pkg is
       Y_OUT_ENABLE : out std_logic;       -- for y in 0 to Y-1
 
       -- DATA
-      SIZE_X_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_Y_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -321,8 +321,8 @@ package ntm_core_pkg is
 
   component ntm_interface_vector is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -370,9 +370,9 @@ package ntm_core_pkg is
       H_IN_ENABLE : in std_logic;         -- for l in 0 to L-1
 
       -- DATA
-      SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       WK_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
       WBETA_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -392,8 +392,8 @@ package ntm_core_pkg is
 
   component ntm_output_vector is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -431,10 +431,10 @@ package ntm_core_pkg is
       Y_OUT_ENABLE : out std_logic;     -- for y in 0 to Y-1
 
       -- DATA
-      SIZE_Y_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

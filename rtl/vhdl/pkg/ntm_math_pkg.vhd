@@ -60,8 +60,8 @@ package ntm_math_pkg is
   constant L : integer := 64;           -- l in 0 to L-1
   constant R : integer := 64;           -- i in 0 to R-1
 
-  constant DATA_SIZE  : integer := 512;
-  constant INDEX_SIZE : integer := 128;
+  constant DATA_SIZE    : integer := 128;
+  constant CONTROL_SIZE : integer := 64;
 
   -----------------------------------------------------------------------
   -- Components
@@ -74,8 +74,8 @@ package ntm_math_pkg is
   -- SCALAR
   component ntm_scalar_mod is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -95,8 +95,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_adder is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -119,8 +119,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_multiplier is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -141,8 +141,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_inverter is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -162,8 +162,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_divider is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -184,8 +184,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_exponentiator is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -207,8 +207,8 @@ package ntm_math_pkg is
   -- VECTOR
   component ntm_vector_mod is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -225,7 +225,7 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -233,8 +233,8 @@ package ntm_math_pkg is
 
   component ntm_vector_adder is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -254,7 +254,7 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -263,8 +263,8 @@ package ntm_math_pkg is
 
   component ntm_vector_multiplier is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -282,7 +282,7 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -291,8 +291,8 @@ package ntm_math_pkg is
 
   component ntm_vector_inverter is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -309,7 +309,7 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -317,8 +317,8 @@ package ntm_math_pkg is
 
   component ntm_vector_divider is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -336,7 +336,7 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -345,8 +345,8 @@ package ntm_math_pkg is
 
   component ntm_vector_exponentiator is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -364,7 +364,7 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -374,8 +374,8 @@ package ntm_math_pkg is
   -- MATRIX
   component ntm_matrix_mod is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -394,8 +394,8 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -403,8 +403,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_adder is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -427,8 +427,8 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -437,8 +437,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_multiplier is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -459,8 +459,8 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -469,8 +469,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_inverter is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -489,8 +489,8 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -498,8 +498,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_divider is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -520,8 +520,8 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -530,8 +530,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_exponentiator is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -552,8 +552,8 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -566,8 +566,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_product is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -588,10 +588,10 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_A_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_A_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_B_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_B_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_A_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_A_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -600,8 +600,8 @@ package ntm_math_pkg is
 
   component ntm_tensor_transpose is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -625,12 +625,12 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_A_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_A_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_A_K_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_B_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_B_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_B_K_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_A_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_A_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_A_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -639,8 +639,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_transpose is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -659,8 +659,8 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -668,8 +668,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_product is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -687,7 +687,7 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -696,8 +696,8 @@ package ntm_math_pkg is
 
   component ntm_tensor_product is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -721,12 +721,12 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_A_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_A_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_A_K_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_B_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_B_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_B_K_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_A_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_A_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_A_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -740,8 +740,8 @@ package ntm_math_pkg is
   -- SCALAR
   component ntm_scalar_convolution_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -758,7 +758,7 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -767,8 +767,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_cosine_similarity_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -785,7 +785,7 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -794,8 +794,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_differentiation_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -813,7 +813,7 @@ package ntm_math_pkg is
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -821,8 +821,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_multiplication_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -839,7 +839,7 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -847,8 +847,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_cosh_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -868,8 +868,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_sinh_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -889,8 +889,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_tanh_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -910,8 +910,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_logistic_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -931,8 +931,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_softmax_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -949,7 +949,7 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -957,8 +957,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_oneplus_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -978,8 +978,8 @@ package ntm_math_pkg is
 
   component ntm_scalar_summation_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -996,7 +996,7 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1005,8 +1005,8 @@ package ntm_math_pkg is
   -- VECTOR
   component ntm_vector_convolution_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1027,8 +1027,8 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -1037,8 +1037,8 @@ package ntm_math_pkg is
 
   component ntm_vector_cosine_similarity_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1059,8 +1059,8 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -1069,8 +1069,8 @@ package ntm_math_pkg is
 
   component ntm_vector_differentiation_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1089,9 +1089,9 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1099,8 +1099,8 @@ package ntm_math_pkg is
 
   component ntm_vector_multiplication_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1119,8 +1119,8 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1128,8 +1128,8 @@ package ntm_math_pkg is
 
   component ntm_vector_cosh_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1146,7 +1146,7 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1154,8 +1154,8 @@ package ntm_math_pkg is
 
   component ntm_vector_sinh_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1172,7 +1172,7 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1180,8 +1180,8 @@ package ntm_math_pkg is
 
   component ntm_vector_tanh_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1198,7 +1198,7 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1206,8 +1206,8 @@ package ntm_math_pkg is
 
   component ntm_vector_logistic_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1224,7 +1224,7 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1232,8 +1232,8 @@ package ntm_math_pkg is
 
   component ntm_vector_softmax_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1252,8 +1252,8 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1261,8 +1261,8 @@ package ntm_math_pkg is
 
   component ntm_vector_oneplus_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1279,7 +1279,7 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1287,8 +1287,8 @@ package ntm_math_pkg is
 
   component ntm_vector_summation_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1307,8 +1307,8 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1317,8 +1317,8 @@ package ntm_math_pkg is
   -- MATRIX
   component ntm_matrix_convolution_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1342,9 +1342,9 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -1353,8 +1353,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_cosine_similarity_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1378,9 +1378,9 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -1389,8 +1389,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_differentiation_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1411,10 +1411,10 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1422,8 +1422,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_multiplication_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1444,9 +1444,9 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1454,8 +1454,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_cosh_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1474,8 +1474,8 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1483,8 +1483,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_sinh_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1503,8 +1503,8 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1512,8 +1512,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_tanh_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1532,8 +1532,8 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1541,8 +1541,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_logistic_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1561,8 +1561,8 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1570,8 +1570,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_softmax_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1592,9 +1592,9 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1602,8 +1602,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_oneplus_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1622,8 +1622,8 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1631,8 +1631,8 @@ package ntm_math_pkg is
 
   component ntm_matrix_summation_function is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -1653,9 +1653,9 @@ package ntm_math_pkg is
 
       -- DATA
       MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );

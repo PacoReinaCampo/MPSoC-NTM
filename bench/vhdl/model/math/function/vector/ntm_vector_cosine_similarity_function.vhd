@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_vector_cosine_similarity_function is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -68,8 +68,8 @@ entity ntm_vector_cosine_similarity_function is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_IN   : in  std_logic_vector(INDEX_SIZE-1 downto 0);
-    LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -93,13 +93,15 @@ architecture ntm_vector_cosine_similarity_function_architecture of ntm_vector_co
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -114,8 +116,8 @@ architecture ntm_vector_cosine_similarity_function_architecture of ntm_vector_co
   signal cosine_similarity_ctrl_fsm_int : cosine_similarity_ctrl_fsm;
 
   -- Internal Signals
-  signal index_vector_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal index_scalar_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_vector_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_scalar_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal data_a_in_vector_cosine_similarity_int : std_logic;
   signal data_a_in_scalar_cosine_similarity_int : std_logic;
@@ -133,7 +135,7 @@ architecture ntm_vector_cosine_similarity_function_architecture of ntm_vector_co
 
   -- DATA
   signal modulo_in_scalar_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_scalar_cosine_similarity : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_scalar_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_scalar_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_cosine_similarity  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -149,14 +151,14 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO;
+      DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
 
       -- Assignations
-      index_vector_loop <= ZERO_INDEX;
-      index_scalar_loop <= ZERO_INDEX;
+      index_vector_loop <= ZERO_CONTROL;
+      index_scalar_loop <= ZERO_CONTROL;
 
       data_a_in_vector_cosine_similarity_int <= '0';
       data_a_in_scalar_cosine_similarity_int <= '0';
@@ -172,8 +174,8 @@ begin
 
           if (START = '1') then
             -- Assignations
-            index_vector_loop <= ZERO_INDEX;
-            index_scalar_loop <= ZERO_INDEX;
+            index_vector_loop <= ZERO_CONTROL;
+            index_scalar_loop <= ZERO_CONTROL;
 
             -- FSM Control
             cosine_similarity_ctrl_fsm_int <= INPUT_VECTOR_STATE;
@@ -199,7 +201,7 @@ begin
 
           if (data_a_in_vector_cosine_similarity_int = '1' and data_b_in_vector_cosine_similarity_int = '1') then
             -- Control Internal
-            if (index_vector_loop = ZERO_INDEX) then
+            if (index_vector_loop = ZERO_CONTROL) then
               start_scalar_cosine_similarity <= '1';
             end if;
 
@@ -240,7 +242,7 @@ begin
 
           if (data_a_in_scalar_cosine_similarity_int = '1' and data_b_in_scalar_cosine_similarity_int = '1') then
             -- Control Internal
-            if (index_scalar_loop = ZERO_INDEX) then
+            if (index_scalar_loop = ZERO_CONTROL) then
               start_scalar_cosine_similarity <= '1';
             end if;
 
@@ -263,7 +265,7 @@ begin
         when ENDER_STATE =>  -- STEP 3
 
           if (ready_scalar_cosine_similarity = '1') then
-            if (unsigned(index_vector_loop) = unsigned(SIZE_IN)-unsigned(ONE_INDEX) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_INDEX)) then
+            if (unsigned(index_vector_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
               -- Control Outputs
               READY <= '1';
 
@@ -271,10 +273,10 @@ begin
 
               -- FSM Control
               cosine_similarity_ctrl_fsm_int <= STARTER_STATE;
-            elsif (unsigned(index_vector_loop) < unsigned(SIZE_IN)-unsigned(ONE_INDEX) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_INDEX)) then
+            elsif (unsigned(index_vector_loop) < unsigned(SIZE_IN)-unsigned(ONE_CONTROL) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
               -- Control Internal
-              index_vector_loop <= std_logic_vector(unsigned(index_vector_loop) + unsigned(ONE_INDEX));
-              index_scalar_loop <= ZERO_INDEX;
+              index_vector_loop <= std_logic_vector(unsigned(index_vector_loop) + unsigned(ONE_CONTROL));
+              index_scalar_loop <= ZERO_CONTROL;
 
               -- Control Outputs
               DATA_OUT_VECTOR_ENABLE <= '1';
@@ -282,9 +284,9 @@ begin
 
               -- FSM Control
               cosine_similarity_ctrl_fsm_int <= INPUT_VECTOR_STATE;
-            elsif (unsigned(index_vector_loop) < unsigned(SIZE_IN)-unsigned(ONE_INDEX) and unsigned(index_scalar_loop) < unsigned(LENGTH_IN)-unsigned(ONE_INDEX)) then
+            elsif (unsigned(index_vector_loop) < unsigned(SIZE_IN)-unsigned(ONE_CONTROL) and unsigned(index_scalar_loop) < unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
               -- Control Internal
-              index_scalar_loop <= std_logic_vector(unsigned(index_scalar_loop) + unsigned(ONE_INDEX));
+              index_scalar_loop <= std_logic_vector(unsigned(index_scalar_loop) + unsigned(ONE_CONTROL));
 
               -- Control Outputs
               DATA_OUT_SCALAR_ENABLE <= '1';
@@ -316,7 +318,7 @@ begin
   scalar_cosine_similarity_function : ntm_scalar_cosine_similarity_function
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

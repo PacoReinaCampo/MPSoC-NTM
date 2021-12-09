@@ -48,8 +48,8 @@ module ntm_top_testbench;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=512;
-  parameter INDEX_SIZE=512;
+  parameter DATA_SIZE=128;
+  parameter CONTROL_SIZE=64;
 
   parameter X=64;
   parameter Y=64;
@@ -129,7 +129,7 @@ module ntm_top_testbench;
   ntm_top_stimulus #(
     // SYSTEM-SIZE
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE),
+    .CONTROL_SIZE(CONTROL_SIZE),
 
     .X(X),
     .Y(Y),
@@ -202,7 +202,7 @@ module ntm_top_testbench;
   // TOP
   ntm_top #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   top(
     // GLOBAL

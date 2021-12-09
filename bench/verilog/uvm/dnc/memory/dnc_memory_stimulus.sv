@@ -39,8 +39,8 @@
 
 module dnc_memory_stimulus #(
   // SYSTEM-SIZE
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512,
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64,
 
   parameter X=64,
   parameter Y=64,

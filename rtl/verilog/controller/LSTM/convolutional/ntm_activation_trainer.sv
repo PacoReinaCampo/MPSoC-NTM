@@ -38,8 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_activation_trainer #(
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -116,7 +116,7 @@ module ntm_activation_trainer #(
   parameter [2:0] VECTOR_DIFFERENTIATION_B_STATE = 5;
 
   parameter [2:0] STARTER_DA_STATE = 0;
-  parameter [2:0] VECTOR_EXPONENTIATOR_DA_STATE = 1;
+  parameter [2:0] VECTOR_EXPONE_CONTROLNTIATOR_DA_STATE = 1;
   parameter [2:0] VECTOR_ADDER_DA_STATE = 2;
   parameter [2:0] VECTOR_FIRST_MULTIPLIER_DA_STATE = 3;
   parameter [2:0] VECTOR_SECOND_MULTIPLIER_DA_STATE = 4;
@@ -144,10 +144,15 @@ module ntm_activation_trainer #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO  = 0;
-  parameter ONE   = 1;
-  parameter TWO   = 2;
-  parameter THREE = 3;
+  parameter ZERO_CONTROL  = 0;
+  parameter ONE_CONTROL   = 1;
+  parameter TWO_CONTROL   = 2;
+  parameter THREE_CONTROL = 3;
+
+  parameter ZERO_DATA  = 0;
+  parameter ONE_DATA   = 1;
+  parameter TWO_DATA   = 2;
+  parameter THREE_DATA = 3;
 
   parameter FULL  = 1;
   parameter EMPTY = 0;
@@ -198,7 +203,7 @@ module ntm_activation_trainer #(
   wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_out_vector_multiplier;
 
-  // VECTOR EXPONENTIATOR
+  // VECTOR EXPONE_CONTROLNTIATOR
   // CONTROL
   wire start_vector_exponentiator;
   wire ready_vector_exponentiator;
@@ -269,10 +274,10 @@ module ntm_activation_trainer #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      W_OUT <= ZERO;
-      K_OUT <= ZERO;
-      U_OUT <= ZERO;
-      B_OUT <= ZERO;
+      W_OUT <= ZERO_DATA;
+      K_OUT <= ZERO_DATA;
+      U_OUT <= ZERO_DATA;
+      B_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
@@ -295,7 +300,7 @@ module ntm_activation_trainer #(
             STARTER_DA_STATE : begin  // STEP 0
             end
 
-            VECTOR_EXPONENTIATOR_DA_STATE : begin  // STEP 1
+            VECTOR_EXPONE_CONTROLNTIATOR_DA_STATE : begin  // STEP 1
             end
 
             VECTOR_ADDER_DA_STATE : begin  // STEP 2
@@ -410,7 +415,7 @@ module ntm_activation_trainer #(
   // VECTOR SUMMATION
   ntm_vector_summation_function #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_summation_function(
     // GLOBAL
@@ -437,7 +442,7 @@ module ntm_activation_trainer #(
   // VECTOR MULTIPLIER
   ntm_vector_multiplier #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_multiplier(
     // GLOBAL
@@ -460,10 +465,10 @@ module ntm_activation_trainer #(
     .DATA_OUT(data_out_vector_multiplier)
   );
 
-  // VECTOR EXPONENTIATOR
+  // VECTOR EXPONE_CONTROLNTIATOR
   ntm_vector_exponentiator #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_exponentiator(
     // GLOBAL
@@ -489,7 +494,7 @@ module ntm_activation_trainer #(
   // VECTOR DIFFERENTIATION
   ntm_vector_differentiation_function #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   vector_differentiation_function(
     // GLOBAL
@@ -518,7 +523,7 @@ module ntm_activation_trainer #(
   // MATRIX PRODUCT
   ntm_matrix_product #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   matrix_product(
     // GLOBAL

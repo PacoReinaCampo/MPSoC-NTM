@@ -48,8 +48,8 @@ package ntm_modular_pkg;
   ///////////////////////////////////////////////////////////////////////
 
   // SYSTEM-SIZE
-  parameter DATA_SIZE=512;
-  parameter INDEX_SIZE=512;
+  parameter DATA_SIZE=128;
+  parameter CONTROL_SIZE=64;
 
   parameter X=64;
   parameter Y=64;
@@ -64,21 +64,21 @@ package ntm_modular_pkg;
   parameter STIMULUS_NTM_SCALAR_MULTIPLIER_TEST    = 0;
   parameter STIMULUS_NTM_SCALAR_INVERTER_TEST      = 0;
   parameter STIMULUS_NTM_SCALAR_DIVIDER_TEST       = 0;
-  parameter STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST = 0;
+  parameter STIMULUS_NTM_SCALAR_EXPONE_CONTROLNTIATOR_TEST = 0;
 
   parameter STIMULUS_NTM_SCALAR_MOD_CASE_0           = 0;
   parameter STIMULUS_NTM_SCALAR_ADDER_CASE_0         = 0;
   parameter STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0    = 0;
   parameter STIMULUS_NTM_SCALAR_INVERTER_CASE_0      = 0;
   parameter STIMULUS_NTM_SCALAR_DIVIDER_CASE_0       = 0;
-  parameter STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0 = 0;
+  parameter STIMULUS_NTM_SCALAR_EXPONE_CONTROLNTIATOR_CASE_0 = 0;
 
   parameter STIMULUS_NTM_SCALAR_MOD_CASE_1           = 0;
   parameter STIMULUS_NTM_SCALAR_ADDER_CASE_1         = 0;
   parameter STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1    = 0;
   parameter STIMULUS_NTM_SCALAR_INVERTER_CASE_1      = 0;
   parameter STIMULUS_NTM_SCALAR_DIVIDER_CASE_1       = 0;
-  parameter STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1 = 0;
+  parameter STIMULUS_NTM_SCALAR_EXPONE_CONTROLNTIATOR_CASE_1 = 0;
 
   // VECTOR-FUNCTIONALITY
   parameter STIMULUS_NTM_VECTOR_MOD_TEST           = 0;
@@ -86,21 +86,21 @@ package ntm_modular_pkg;
   parameter STIMULUS_NTM_VECTOR_MULTIPLIER_TEST    = 0;
   parameter STIMULUS_NTM_VECTOR_INVERTER_TEST      = 0;
   parameter STIMULUS_NTM_VECTOR_DIVIDER_TEST       = 0;
-  parameter STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST = 0;
+  parameter STIMULUS_NTM_VECTOR_EXPONE_CONTROLNTIATOR_TEST = 0;
 
   parameter STIMULUS_NTM_VECTOR_MOD_CASE_0           = 0;
   parameter STIMULUS_NTM_VECTOR_ADDER_CASE_0         = 0;
   parameter STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_0    = 0;
   parameter STIMULUS_NTM_VECTOR_INVERTER_CASE_0      = 0;
   parameter STIMULUS_NTM_VECTOR_DIVIDER_CASE_0       = 0;
-  parameter STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0 = 0;
+  parameter STIMULUS_NTM_VECTOR_EXPONE_CONTROLNTIATOR_CASE_0 = 0;
 
   parameter STIMULUS_NTM_VECTOR_MOD_CASE_1           = 0;
   parameter STIMULUS_NTM_VECTOR_ADDER_CASE_1         = 0;
   parameter STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_1    = 0;
   parameter STIMULUS_NTM_VECTOR_INVERTER_CASE_1      = 0;
   parameter STIMULUS_NTM_VECTOR_DIVIDER_CASE_1       = 0;
-  parameter STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_1 = 0;
+  parameter STIMULUS_NTM_VECTOR_EXPONE_CONTROLNTIATOR_CASE_1 = 0;
 
   // MATRIX-FUNCTIONALITY
   parameter STIMULUS_NTM_MATRIX_MOD_TEST           = 0;
@@ -108,21 +108,21 @@ package ntm_modular_pkg;
   parameter STIMULUS_NTM_MATRIX_MULTIPLIER_TEST    = 0;
   parameter STIMULUS_NTM_MATRIX_INVERTER_TEST      = 0;
   parameter STIMULUS_NTM_MATRIX_DIVIDER_TEST       = 0;
-  parameter STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST = 0;
+  parameter STIMULUS_NTM_MATRIX_EXPONE_CONTROLNTIATOR_TEST = 0;
 
   parameter STIMULUS_NTM_MATRIX_MOD_CASE_0           = 0;
   parameter STIMULUS_NTM_MATRIX_ADDER_CASE_0         = 0;
   parameter STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_0    = 0;
   parameter STIMULUS_NTM_MATRIX_INVERTER_CASE_0      = 0;
   parameter STIMULUS_NTM_MATRIX_DIVIDER_CASE_0       = 0;
-  parameter STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0 = 0;
+  parameter STIMULUS_NTM_MATRIX_EXPONE_CONTROLNTIATOR_CASE_0 = 0;
 
   parameter STIMULUS_NTM_MATRIX_MOD_CASE_1           = 0;
   parameter STIMULUS_NTM_MATRIX_ADDER_CASE_1         = 0;
   parameter STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_1    = 0;
   parameter STIMULUS_NTM_MATRIX_INVERTER_CASE_1      = 0;
   parameter STIMULUS_NTM_MATRIX_DIVIDER_CASE_1       = 0;
-  parameter STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1 = 0;
+  parameter STIMULUS_NTM_MATRIX_EXPONE_CONTROLNTIATOR_CASE_1 = 0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals

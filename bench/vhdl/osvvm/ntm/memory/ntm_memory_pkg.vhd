@@ -79,8 +79,8 @@ package ntm_memory_pkg is
   component ntm_memory_stimulus is
     generic (
       -- SYSTEM-SIZE
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128;
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64;
 
       X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
       Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -114,8 +114,8 @@ package ntm_memory_pkg is
       NTM_MEMORY_W_OUT_ENABLE : in  std_logic;
 
       -- DATA
-      NTM_MEMORY_SIZE_N_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-      NTM_MEMORY_SIZE_W_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      NTM_MEMORY_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      NTM_MEMORY_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       NTM_MEMORY_K_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
       NTM_MEMORY_BETA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);

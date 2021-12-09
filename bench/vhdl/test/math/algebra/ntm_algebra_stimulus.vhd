@@ -48,8 +48,8 @@ use work.ntm_algebra_pkg.all;
 entity ntm_algebra_stimulus is
   generic (
     -- SYSTEM-SIZE
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128;
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -78,10 +78,10 @@ entity ntm_algebra_stimulus is
 
     -- DATA
     MATRIX_PRODUCT_MODULO_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_PRODUCT_SIZE_A_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    MATRIX_PRODUCT_SIZE_A_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    MATRIX_PRODUCT_SIZE_B_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    MATRIX_PRODUCT_SIZE_B_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_PRODUCT_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_PRODUCT_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_PRODUCT_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_PRODUCT_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -105,12 +105,12 @@ entity ntm_algebra_stimulus is
 
     -- DATA
     TENSOR_TRANSPOSE_MODULO_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_TRANSPOSE_SIZE_A_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    TENSOR_TRANSPOSE_SIZE_A_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    TENSOR_TRANSPOSE_SIZE_A_K_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    TENSOR_TRANSPOSE_SIZE_B_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    TENSOR_TRANSPOSE_SIZE_B_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    TENSOR_TRANSPOSE_SIZE_B_K_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    TENSOR_TRANSPOSE_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_TRANSPOSE_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_TRANSPOSE_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_TRANSPOSE_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_TRANSPOSE_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_TRANSPOSE_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     TENSOR_TRANSPOSE_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_TRANSPOSE_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_TRANSPOSE_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -128,8 +128,8 @@ entity ntm_algebra_stimulus is
 
     -- DATA
     MATRIX_TRANSPOSE_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_TRANSPOSE_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    MATRIX_TRANSPOSE_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_TRANSPOSE_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_TRANSPOSE_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -145,7 +145,7 @@ entity ntm_algebra_stimulus is
 
     -- DATA
     SCALAR_PRODUCT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_PRODUCT_LENGTH_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    SCALAR_PRODUCT_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     SCALAR_PRODUCT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_PRODUCT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_PRODUCT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -168,12 +168,12 @@ entity ntm_algebra_stimulus is
 
     -- DATA
     TENSOR_PRODUCT_MODULO_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_PRODUCT_SIZE_A_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    TENSOR_PRODUCT_SIZE_A_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    TENSOR_PRODUCT_SIZE_A_K_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    TENSOR_PRODUCT_SIZE_B_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    TENSOR_PRODUCT_SIZE_B_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    TENSOR_PRODUCT_SIZE_B_K_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    TENSOR_PRODUCT_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_PRODUCT_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_PRODUCT_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_PRODUCT_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_PRODUCT_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_PRODUCT_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     TENSOR_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0)
@@ -195,13 +195,15 @@ architecture ntm_algebra_stimulus_architecture of ntm_algebra_stimulus is
   constant WAITING : time := 50 ns;
   constant WORKING : time := 1 ms;
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -213,9 +215,9 @@ architecture ntm_algebra_stimulus_architecture of ntm_algebra_stimulus is
   -----------------------------------------------------------------------
 
   -- LOOP
-  signal index_i_loop : std_logic_vector(INDEX_SIZE-1 downto 0) := ONE_INDEX;
-  signal index_j_loop : std_logic_vector(INDEX_SIZE-1 downto 0) := ONE_INDEX;
-  signal index_k_loop : std_logic_vector(INDEX_SIZE-1 downto 0) := ONE_INDEX;
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0) := ONE_CONTROL;
+  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0) := ONE_CONTROL;
+  signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0) := ONE_CONTROL;
 
   -- GLOBAL
   signal clk_int : std_logic;
@@ -303,37 +305,37 @@ begin
         MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_PRODUCT_DATA_A_IN <= ONE;
-        MATRIX_PRODUCT_DATA_B_IN <= ONE;
+        MATRIX_PRODUCT_DATA_A_IN <= ONE_DATA;
+        MATRIX_PRODUCT_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_PRODUCT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_INDEX))) then
+          if ((MATRIX_PRODUCT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_PRODUCT_DATA_A_IN <= ONE;
-            MATRIX_PRODUCT_DATA_B_IN <= ONE;
+            MATRIX_PRODUCT_DATA_A_IN <= ONE_DATA;
+            MATRIX_PRODUCT_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-            index_j_loop <= ZERO_INDEX;
-          elsif ((MATRIX_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_INDEX))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_PRODUCT_DATA_A_IN <= ONE;
-            MATRIX_PRODUCT_DATA_B_IN <= ONE;
+            MATRIX_PRODUCT_DATA_A_IN <= ONE_DATA;
+            MATRIX_PRODUCT_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '0';
@@ -363,37 +365,37 @@ begin
         MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_PRODUCT_DATA_A_IN <= TWO;
-        MATRIX_PRODUCT_DATA_B_IN <= ONE;
+        MATRIX_PRODUCT_DATA_A_IN <= TWO_DATA;
+        MATRIX_PRODUCT_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_PRODUCT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_INDEX))) then
+          if ((MATRIX_PRODUCT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_PRODUCT_DATA_A_IN <= TWO;
-            MATRIX_PRODUCT_DATA_B_IN <= ONE;
+            MATRIX_PRODUCT_DATA_A_IN <= TWO_DATA;
+            MATRIX_PRODUCT_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-            index_j_loop <= ZERO_INDEX;
-          elsif ((MATRIX_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_INDEX))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_PRODUCT_DATA_A_IN <= TWO;
-            MATRIX_PRODUCT_DATA_B_IN <= ONE;
+            MATRIX_PRODUCT_DATA_A_IN <= TWO_DATA;
+            MATRIX_PRODUCT_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '0';
@@ -438,51 +440,51 @@ begin
         TENSOR_TRANSPOSE_DATA_B_IN_K_ENABLE <= '1';
 
         -- DATA
-        TENSOR_TRANSPOSE_DATA_A_IN <= TWO;
-        TENSOR_TRANSPOSE_DATA_B_IN <= ONE;
+        TENSOR_TRANSPOSE_DATA_A_IN <= TWO_DATA;
+        TENSOR_TRANSPOSE_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
-        index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((TENSOR_TRANSPOSE_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_INDEX))) then
+          if ((TENSOR_TRANSPOSE_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_TRANSPOSE_DATA_A_IN_I_ENABLE <= '1';
             TENSOR_TRANSPOSE_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            TENSOR_TRANSPOSE_DATA_A_IN <= TWO;
-            TENSOR_TRANSPOSE_DATA_B_IN <= ONE;
+            TENSOR_TRANSPOSE_DATA_A_IN <= TWO_DATA;
+            TENSOR_TRANSPOSE_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-            index_j_loop <= ZERO_INDEX;
-            index_k_loop <= ZERO_INDEX;
-          elsif ((TENSOR_TRANSPOSE_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_INDEX))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_TRANSPOSE_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_TRANSPOSE_DATA_A_IN_J_ENABLE <= '1';
             TENSOR_TRANSPOSE_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            TENSOR_TRANSPOSE_DATA_A_IN <= TWO;
-            TENSOR_TRANSPOSE_DATA_B_IN <= ONE;
+            TENSOR_TRANSPOSE_DATA_A_IN <= TWO_DATA;
+            TENSOR_TRANSPOSE_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
-            index_k_loop <= ZERO_INDEX;
-          elsif ((TENSOR_TRANSPOSE_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) > unsigned(ONE_INDEX)) and (unsigned(index_k_loop) < unsigned(SIZE_K)-unsigned(ONE_INDEX))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_TRANSPOSE_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) < unsigned(SIZE_K)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_TRANSPOSE_DATA_A_IN_K_ENABLE <= '1';
             TENSOR_TRANSPOSE_DATA_B_IN_K_ENABLE <= '1';
 
             -- DATA
-            TENSOR_TRANSPOSE_DATA_A_IN <= TWO;
-            TENSOR_TRANSPOSE_DATA_B_IN <= ONE;
+            TENSOR_TRANSPOSE_DATA_A_IN <= TWO_DATA;
+            TENSOR_TRANSPOSE_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_INDEX));
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             TENSOR_TRANSPOSE_DATA_A_IN_I_ENABLE <= '0';
@@ -516,51 +518,51 @@ begin
         TENSOR_TRANSPOSE_DATA_B_IN_K_ENABLE <= '1';
 
         -- DATA
-        TENSOR_TRANSPOSE_DATA_A_IN <= TWO;
-        TENSOR_TRANSPOSE_DATA_B_IN <= TWO;
+        TENSOR_TRANSPOSE_DATA_A_IN <= TWO_DATA;
+        TENSOR_TRANSPOSE_DATA_B_IN <= TWO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
-        index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((TENSOR_TRANSPOSE_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_INDEX))) then
+          if ((TENSOR_TRANSPOSE_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_TRANSPOSE_DATA_A_IN_I_ENABLE <= '1';
             TENSOR_TRANSPOSE_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            TENSOR_TRANSPOSE_DATA_A_IN <= TWO;
-            TENSOR_TRANSPOSE_DATA_B_IN <= TWO;
+            TENSOR_TRANSPOSE_DATA_A_IN <= TWO_DATA;
+            TENSOR_TRANSPOSE_DATA_B_IN <= TWO_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-            index_j_loop <= ZERO_INDEX;
-            index_k_loop <= ZERO_INDEX;
-          elsif ((TENSOR_TRANSPOSE_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_INDEX))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_TRANSPOSE_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_TRANSPOSE_DATA_A_IN_J_ENABLE <= '1';
             TENSOR_TRANSPOSE_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            TENSOR_TRANSPOSE_DATA_A_IN <= TWO;
-            TENSOR_TRANSPOSE_DATA_B_IN <= TWO;
+            TENSOR_TRANSPOSE_DATA_A_IN <= TWO_DATA;
+            TENSOR_TRANSPOSE_DATA_B_IN <= TWO_DATA;
 
             -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
-            index_k_loop <= ZERO_INDEX;
-          elsif ((TENSOR_TRANSPOSE_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) > unsigned(ONE_INDEX)) and (unsigned(index_k_loop) < unsigned(SIZE_K)-unsigned(ONE_INDEX))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_TRANSPOSE_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) < unsigned(SIZE_K)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_TRANSPOSE_DATA_A_IN_K_ENABLE <= '1';
             TENSOR_TRANSPOSE_DATA_B_IN_K_ENABLE <= '1';
 
             -- DATA
-            TENSOR_TRANSPOSE_DATA_A_IN <= TWO;
-            TENSOR_TRANSPOSE_DATA_B_IN <= TWO;
+            TENSOR_TRANSPOSE_DATA_A_IN <= TWO_DATA;
+            TENSOR_TRANSPOSE_DATA_B_IN <= TWO_DATA;
 
             -- LOOP
-            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_INDEX));
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             TENSOR_TRANSPOSE_DATA_A_IN_I_ENABLE <= '0';
@@ -603,32 +605,32 @@ begin
         MATRIX_TRANSPOSE_DATA_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_TRANSPOSE_DATA_IN <= ONE;
+        MATRIX_TRANSPOSE_DATA_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_TRANSPOSE_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_INDEX))) then
+          if ((MATRIX_TRANSPOSE_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_TRANSPOSE_DATA_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_TRANSPOSE_DATA_IN <= ONE;
+            MATRIX_TRANSPOSE_DATA_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-            index_j_loop <= ZERO_INDEX;
-          elsif ((MATRIX_TRANSPOSE_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_INDEX))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_TRANSPOSE_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_TRANSPOSE_DATA_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_TRANSPOSE_DATA_IN <= ONE;
+            MATRIX_TRANSPOSE_DATA_IN <= ONE_DATA;
 
             -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_TRANSPOSE_DATA_IN_I_ENABLE <= '0';
@@ -654,32 +656,32 @@ begin
         MATRIX_TRANSPOSE_DATA_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_TRANSPOSE_DATA_IN <= ONE;
+        MATRIX_TRANSPOSE_DATA_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_TRANSPOSE_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_INDEX))) then
+          if ((MATRIX_TRANSPOSE_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_TRANSPOSE_DATA_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_TRANSPOSE_DATA_IN <= TWO;
+            MATRIX_TRANSPOSE_DATA_IN <= TWO_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-            index_j_loop <= ZERO_INDEX;
-          elsif ((MATRIX_TRANSPOSE_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_INDEX))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_TRANSPOSE_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_TRANSPOSE_DATA_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_TRANSPOSE_DATA_IN <= TWO;
+            MATRIX_TRANSPOSE_DATA_IN <= TWO_DATA;
 
             -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_TRANSPOSE_DATA_IN_I_ENABLE <= '0';
@@ -706,7 +708,7 @@ begin
 
       -- DATA
       SCALAR_PRODUCT_MODULO_IN <= FULL;
-      SCALAR_PRODUCT_LENGTH_IN <= THREE;
+      SCALAR_PRODUCT_LENGTH_IN <= THREE_DATA;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_SCALAR_PRODUCT_CASE 0      ";
@@ -719,24 +721,24 @@ begin
         SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        SCALAR_PRODUCT_DATA_A_IN <= ONE;
-        SCALAR_PRODUCT_DATA_B_IN <= ONE;
+        SCALAR_PRODUCT_DATA_A_IN <= ONE_DATA;
+        SCALAR_PRODUCT_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((SCALAR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(SCALAR_PRODUCT_LENGTH_IN)-unsigned(ONE_INDEX))) then
+          if ((SCALAR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SCALAR_PRODUCT_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '1';
             SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            SCALAR_PRODUCT_DATA_A_IN <= TWO;
-            SCALAR_PRODUCT_DATA_B_IN <= ONE;
+            SCALAR_PRODUCT_DATA_A_IN <= TWO_DATA;
+            SCALAR_PRODUCT_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '0';
@@ -762,24 +764,24 @@ begin
         SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        SCALAR_PRODUCT_DATA_A_IN <= TWO;
-        SCALAR_PRODUCT_DATA_B_IN <= ONE;
+        SCALAR_PRODUCT_DATA_A_IN <= TWO_DATA;
+        SCALAR_PRODUCT_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((SCALAR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(SCALAR_PRODUCT_LENGTH_IN)-unsigned(ONE_INDEX))) then
+          if ((SCALAR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SCALAR_PRODUCT_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '1';
             SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            SCALAR_PRODUCT_DATA_B_IN <= TWO;
-            SCALAR_PRODUCT_DATA_B_IN <= ONE;
+            SCALAR_PRODUCT_DATA_B_IN <= TWO_DATA;
+            SCALAR_PRODUCT_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '0';
@@ -822,51 +824,51 @@ begin
         TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
 
         -- DATA
-        TENSOR_PRODUCT_DATA_A_IN <= TWO;
-        TENSOR_PRODUCT_DATA_B_IN <= ONE;
+        TENSOR_PRODUCT_DATA_A_IN <= TWO_DATA;
+        TENSOR_PRODUCT_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
-        index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((TENSOR_PRODUCT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_INDEX))) then
+          if ((TENSOR_PRODUCT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
             TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            TENSOR_PRODUCT_DATA_A_IN <= TWO;
-            TENSOR_PRODUCT_DATA_B_IN <= ONE;
+            TENSOR_PRODUCT_DATA_A_IN <= TWO_DATA;
+            TENSOR_PRODUCT_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-            index_j_loop <= ZERO_INDEX;
-            index_k_loop <= ZERO_INDEX;
-          elsif ((TENSOR_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_INDEX))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
             TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            TENSOR_PRODUCT_DATA_A_IN <= TWO;
-            TENSOR_PRODUCT_DATA_B_IN <= ONE;
+            TENSOR_PRODUCT_DATA_A_IN <= TWO_DATA;
+            TENSOR_PRODUCT_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
-            index_k_loop <= ZERO_INDEX;
-          elsif ((TENSOR_PRODUCT_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) > unsigned(ONE_INDEX)) and (unsigned(index_k_loop) < unsigned(SIZE_K)-unsigned(ONE_INDEX))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_PRODUCT_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) < unsigned(SIZE_K)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
             TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
 
             -- DATA
-            TENSOR_PRODUCT_DATA_A_IN <= TWO;
-            TENSOR_PRODUCT_DATA_B_IN <= ONE;
+            TENSOR_PRODUCT_DATA_A_IN <= TWO_DATA;
+            TENSOR_PRODUCT_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_INDEX));
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '0';
@@ -900,51 +902,51 @@ begin
         TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
 
         -- DATA
-        TENSOR_PRODUCT_DATA_A_IN <= TWO;
-        TENSOR_PRODUCT_DATA_B_IN <= TWO;
+        TENSOR_PRODUCT_DATA_A_IN <= TWO_DATA;
+        TENSOR_PRODUCT_DATA_B_IN <= TWO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
-        index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((TENSOR_PRODUCT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_INDEX))) then
+          if ((TENSOR_PRODUCT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
             TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            TENSOR_PRODUCT_DATA_A_IN <= TWO;
-            TENSOR_PRODUCT_DATA_B_IN <= TWO;
+            TENSOR_PRODUCT_DATA_A_IN <= TWO_DATA;
+            TENSOR_PRODUCT_DATA_B_IN <= TWO_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-            index_j_loop <= ZERO_INDEX;
-            index_k_loop <= ZERO_INDEX;
-          elsif ((TENSOR_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_INDEX))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
             TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            TENSOR_PRODUCT_DATA_A_IN <= TWO;
-            TENSOR_PRODUCT_DATA_B_IN <= TWO;
+            TENSOR_PRODUCT_DATA_A_IN <= TWO_DATA;
+            TENSOR_PRODUCT_DATA_B_IN <= TWO_DATA;
 
             -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
-            index_k_loop <= ZERO_INDEX;
-          elsif ((TENSOR_PRODUCT_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) > unsigned(ONE_INDEX)) and (unsigned(index_k_loop) < unsigned(SIZE_K)-unsigned(ONE_INDEX))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_PRODUCT_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) < unsigned(SIZE_K)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
             TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
 
             -- DATA
-            TENSOR_PRODUCT_DATA_A_IN <= TWO;
-            TENSOR_PRODUCT_DATA_B_IN <= TWO;
+            TENSOR_PRODUCT_DATA_A_IN <= TWO_DATA;
+            TENSOR_PRODUCT_DATA_B_IN <= TWO_DATA;
 
             -- LOOP
-            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_INDEX));
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '0';

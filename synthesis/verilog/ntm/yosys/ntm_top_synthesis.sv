@@ -39,7 +39,8 @@
 
 module ntm_top_synthesis #(
   // SYSTEM-SIZE
-  parameter DATA_SIZE=512,
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64,
 
   parameter X=64,
   parameter Y=64,
@@ -59,10 +60,22 @@ module ntm_top_synthesis #(
 
     input W_IN_L_ENABLE,  // for l in 0 to L-1
     input W_IN_X_ENABLE,  // for x in 0 to X-1
+
+    output W_OUT_L_ENABLE,  // for l in 0 to L-1
+    output W_OUT_X_ENABLE,  // for x in 0 to X-1
+
     input K_IN_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
     input K_IN_L_ENABLE,  // for l in 0 to L-1
     input K_IN_K_ENABLE,  // for k in 0 to W-1
+
+    output K_OUT_I_ENABLE,  // for i in 0 to R-1 (read heads flow)
+    output K_OUT_L_ENABLE,  // for l in 0 to L-1
+    output K_OUT_K_ENABLE,  // for k in 0 to W-1
+
     input B_IN_ENABLE,  // for l in 0 to L-1
+
+    input B_OUT_ENABLE,  // for l in 0 to L-1
+
     input X_IN_ENABLE,  // for x in 0 to X-1
     output Y_OUT_ENABLE  // for y in 0 to Y-1
   );
@@ -82,8 +95,10 @@ module ntm_top_synthesis #(
   parameter size_w_in_top = 0;
   parameter size_l_in_top = 0;
   parameter size_r_in_top = 0;
+
   parameter w_in_top = 0;
   parameter k_in_top = 0;
+  parameter u_in_top = 0;
   parameter b_in_top = 0;
   parameter x_in_top = 0;
 
@@ -97,7 +112,8 @@ module ntm_top_synthesis #(
 
   // TOP
   ntm_top #(
-    .DATA_SIZE(DATA_SIZE)
+    .DATA_SIZE(DATA_SIZE),
+    .DATA_CONTROL(DATA_CONTROL)
   )
   top(
     // GLOBAL
@@ -108,12 +124,38 @@ module ntm_top_synthesis #(
     .START(START),
     .READY(READY),
 
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_top),
+    .READY(ready_top),
+
     .W_IN_L_ENABLE(W_IN_L_ENABLE),
     .W_IN_X_ENABLE(W_IN_X_ENABLE),
+
+    .W_OUT_L_ENABLE(W_OUT_L_ENABLE),
+    .W_OUT_X_ENABLE(W_OUT_X_ENABLE),
+
     .K_IN_I_ENABLE(K_IN_I_ENABLE),
     .K_IN_L_ENABLE(K_IN_L_ENABLE),
     .K_IN_K_ENABLE(K_IN_K_ENABLE),
+
+    .K_OUT_I_ENABLE(K_OUT_I_ENABLE),
+    .K_OUT_L_ENABLE(K_OUT_L_ENABLE),
+    .K_OUT_K_ENABLE(K_OUT_K_ENABLE),
+
+    .U_IN_L_ENABLE(U_IN_L_ENABLE),
+    .U_IN_P_ENABLE(U_IN_P_ENABLE),
+
+    .U_OUT_L_ENABLE(U_OUT_L_ENABLE),
+    .U_OUT_P_ENABLE(U_OUT_P_ENABLE),
+
     .B_IN_ENABLE(B_IN_ENABLE),
+
+    .B_OUT_ENABLE(B_OUT_ENABLE),
+
     .X_IN_ENABLE(X_IN_ENABLE),
     .Y_OUT_ENABLE(Y_OUT_ENABLE),
 
@@ -124,9 +166,12 @@ module ntm_top_synthesis #(
     .SIZE_W_IN(size_w_in_top),
     .SIZE_L_IN(size_l_in_top),
     .SIZE_R_IN(size_r_in_top),
+
     .W_IN(w_in_top),
     .K_IN(k_in_top),
+    .U_IN(u_in_top),
     .B_IN(b_in_top),
+
     .X_IN(x_in_top),
     .Y_OUT()
   );

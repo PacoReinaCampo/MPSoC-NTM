@@ -38,8 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module dnc_top #(
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -129,10 +129,15 @@ module dnc_top #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO  = 0;
-  parameter ONE   = 1;
-  parameter TWO   = 2;
-  parameter THREE = 3;
+  parameter ZERO_CONTROL  = 0;
+  parameter ONE_CONTROL   = 1;
+  parameter TWO_CONTROL   = 2;
+  parameter THREE_CONTROL = 3;
+
+  parameter ZERO_DATA  = 0;
+  parameter ONE_DATA   = 1;
+  parameter TWO_DATA   = 2;
+  parameter THREE_DATA = 3;
 
   parameter FULL  = 1;
   parameter EMPTY = 0;
@@ -151,8 +156,8 @@ module dnc_top #(
   reg [3:0] write_heads_ctrl_fsm_int;
 
   // Control Internal
-  reg [INDEX_SIZE-1:0] index_i_loop;
-  reg [INDEX_SIZE-1:0] index_j_loop;
+  reg [CONTROL_SIZE-1:0] index_i_loop;
+  reg [CONTROL_SIZE-1:0] index_j_loop;
 
   ///////////////////////////////////////////////////////////////////////
   // CONTROLLER
@@ -605,7 +610,7 @@ module dnc_top #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      Y_OUT <= ZERO;
+      Y_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
@@ -702,7 +707,7 @@ module dnc_top #(
 
         MEMORY_I_STATE : begin  // STEP 4
         
-          if (index_i_loop == SIZE_R_IN - ONE) begin
+          if (index_i_loop == SIZE_R_IN - ONE_CONTROL) begin
             // FSM Control
             top_ctrl_fsm_int <= STARTER_STATE;
           end
@@ -710,7 +715,7 @@ module dnc_top #(
 
         MEMORY_J_STATE : begin  // STEP 5
         
-          if (index_j_loop == SIZE_R_IN - ONE) begin
+          if (index_j_loop == SIZE_R_IN - ONE_CONTROL) begin
             // FSM Control
             top_ctrl_fsm_int <= STARTER_STATE;
           end
@@ -730,7 +735,7 @@ module dnc_top #(
   // CONTROLLER
   ntm_controller #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   ntm_controller_i(
     // GLOBAL
@@ -805,7 +810,7 @@ module dnc_top #(
   // OUTPUT VECTOR
   dnc_output_vector #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   output_vector_i(
     // GLOBAL
@@ -864,7 +869,7 @@ module dnc_top #(
   // FREE GATES
   dnc_free_gates #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   free_gates(
     // GLOBAL
@@ -887,7 +892,7 @@ module dnc_top #(
   // READ KEYS
   dnc_read_keys #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   read_keys(
     // GLOBAL
@@ -913,7 +918,7 @@ module dnc_top #(
   // READ MODES
   dnc_read_modes #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   read_modes(
     // GLOBAL
@@ -938,7 +943,7 @@ module dnc_top #(
   // READ STRENGTHS
   dnc_read_strengths #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   read_strengths(
     // GLOBAL
@@ -961,7 +966,7 @@ module dnc_top #(
   // READ INTERFACE VECTOR
   dnc_read_interface_vector #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   read_interface_vector(
     // GLOBAL
@@ -1041,7 +1046,7 @@ module dnc_top #(
   // ALLOCATION GATE
   dnc_allocation_gate #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   allocation_gate(
     // GLOBAL
@@ -1060,7 +1065,7 @@ module dnc_top #(
   // ERASE VECTOR
   dnc_erase_vector #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   erase_vector(
     // GLOBAL
@@ -1083,7 +1088,7 @@ module dnc_top #(
   // WRITE GATE
   dnc_write_gate #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   write_gate(
     // GLOBAL
@@ -1102,7 +1107,7 @@ module dnc_top #(
   // WRITE KEY
   dnc_write_key #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   write_key(
     // GLOBAL
@@ -1125,7 +1130,7 @@ module dnc_top #(
   // WRITE STRENGTH
   dnc_write_strength #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   write_strength(
     // GLOBAL
@@ -1144,7 +1149,7 @@ module dnc_top #(
   // WRITE VECTOR
   dnc_write_vector #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   write_vector(
     // GLOBAL
@@ -1167,7 +1172,7 @@ module dnc_top #(
   // WRITE INTERFACE VECTOR
   dnc_write_interface_vector #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   write_interface_vector(
     // GLOBAL
@@ -1254,7 +1259,7 @@ module dnc_top #(
   // ADDRESSING
   dnc_addressing #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   addressing(
     // GLOBAL

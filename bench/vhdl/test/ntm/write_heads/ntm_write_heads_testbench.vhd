@@ -47,8 +47,8 @@ use work.ntm_write_heads_pkg.all;
 entity ntm_write_heads_testbench is
   generic (
     -- SYSTEM-SIZE
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128;
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -90,8 +90,8 @@ architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench
   signal m_out_k_enable_writing : std_logic;
 
   -- DATA
-  signal size_n_in_writing : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_w_in_writing : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_n_in_writing : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_writing : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal m_in_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal a_in_writing  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -114,8 +114,8 @@ architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench
   signal m_out_k_enable_erasing : std_logic;
 
   -- DATA
-  signal size_n_in_erasing : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_w_in_erasing : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_n_in_erasing : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_erasing : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal m_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal e_in_erasing  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -133,7 +133,7 @@ begin
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE,
 
       X => X,
       Y => Y,
@@ -175,7 +175,7 @@ begin
   writing : ntm_writing
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -210,7 +210,7 @@ begin
   erasing : ntm_erasing
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

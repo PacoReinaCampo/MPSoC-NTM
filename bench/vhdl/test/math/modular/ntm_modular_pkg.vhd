@@ -140,8 +140,8 @@ package ntm_modular_pkg is
   component ntm_modular_stimulus is
     generic (
       -- SYSTEM-SIZE
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128;
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64;
 
       X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
       Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -240,7 +240,7 @@ package ntm_modular_pkg is
 
       -- DATA
       VECTOR_MOD_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_MOD_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      VECTOR_MOD_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       VECTOR_MOD_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_MOD_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -258,7 +258,7 @@ package ntm_modular_pkg is
 
       -- DATA
       VECTOR_ADDER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_ADDER_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      VECTOR_ADDER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       VECTOR_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_ADDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -275,7 +275,7 @@ package ntm_modular_pkg is
 
       -- DATA
       VECTOR_MULTIPLIER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_MULTIPLIER_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      VECTOR_MULTIPLIER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       VECTOR_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -291,7 +291,7 @@ package ntm_modular_pkg is
 
       -- DATA
       VECTOR_INVERTER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_INVERTER_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      VECTOR_INVERTER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       VECTOR_INVERTER_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_INVERTER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -307,7 +307,7 @@ package ntm_modular_pkg is
 
       -- DATA
       VECTOR_DIVIDER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_DIVIDER_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      VECTOR_DIVIDER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       VECTOR_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -324,7 +324,7 @@ package ntm_modular_pkg is
 
       -- DATA
       VECTOR_EXPONENTIATOR_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_EXPONENTIATOR_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      VECTOR_EXPONENTIATOR_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       VECTOR_EXPONENTIATOR_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_EXPONENTIATOR_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -346,8 +346,8 @@ package ntm_modular_pkg is
 
       -- DATA
       MATRIX_MOD_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_MOD_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-      MATRIX_MOD_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_MOD_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_MOD_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_MOD_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_MOD_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -368,8 +368,8 @@ package ntm_modular_pkg is
 
       -- DATA
       MATRIX_ADDER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_ADDER_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-      MATRIX_ADDER_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_ADDER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_ADDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_ADDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -389,8 +389,8 @@ package ntm_modular_pkg is
 
       -- DATA
       MATRIX_MULTIPLIER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_MULTIPLIER_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-      MATRIX_MULTIPLIER_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_MULTIPLIER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_MULTIPLIER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -408,8 +408,8 @@ package ntm_modular_pkg is
 
       -- DATA
       MATRIX_INVERTER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INVERTER_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-      MATRIX_INVERTER_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_INVERTER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_INVERTER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_INVERTER_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_INVERTER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -428,8 +428,8 @@ package ntm_modular_pkg is
 
       -- DATA
       MATRIX_DIVIDER_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_DIVIDER_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-      MATRIX_DIVIDER_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_DIVIDER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_DIVIDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -449,8 +449,8 @@ package ntm_modular_pkg is
 
       -- DATA
       MATRIX_EXPONENTIATOR_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_EXPONENTIATOR_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-      MATRIX_EXPONENTIATOR_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+      MATRIX_EXPONENTIATOR_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_EXPONENTIATOR_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_EXPONENTIATOR_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_EXPONENTIATOR_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)

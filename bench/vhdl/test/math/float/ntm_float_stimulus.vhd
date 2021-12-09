@@ -48,8 +48,8 @@ use work.ntm_float_pkg.all;
 entity ntm_float_stimulus is
   generic (
     -- SYSTEM-SIZE
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128;
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -140,7 +140,7 @@ entity ntm_float_stimulus is
     VECTOR_ADDER_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_ADDER_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    VECTOR_ADDER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_ADDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -156,7 +156,7 @@ entity ntm_float_stimulus is
     VECTOR_MULTIPLIER_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_MULTIPLIER_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    VECTOR_MULTIPLIER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -171,7 +171,7 @@ entity ntm_float_stimulus is
     VECTOR_INVERTER_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_INVERTER_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    VECTOR_INVERTER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_INVERTER_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_INVERTER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -186,7 +186,7 @@ entity ntm_float_stimulus is
     VECTOR_DIVIDER_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_DIVIDER_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    VECTOR_DIVIDER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -202,7 +202,7 @@ entity ntm_float_stimulus is
     VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_EXPONENTIATOR_SIZE_IN   : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    VECTOR_EXPONENTIATOR_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_EXPONENTIATOR_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_EXPONENTIATOR_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -227,8 +227,8 @@ entity ntm_float_stimulus is
     MATRIX_ADDER_DATA_OUT_J_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_ADDER_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    MATRIX_ADDER_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_ADDER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_ADDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_ADDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -247,8 +247,8 @@ entity ntm_float_stimulus is
     MATRIX_MULTIPLIER_DATA_OUT_J_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_MULTIPLIER_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    MATRIX_MULTIPLIER_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_MULTIPLIER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_MULTIPLIER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -265,8 +265,8 @@ entity ntm_float_stimulus is
     MATRIX_INVERTER_DATA_OUT_J_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_INVERTER_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    MATRIX_INVERTER_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_INVERTER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_INVERTER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_INVERTER_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_INVERTER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -284,8 +284,8 @@ entity ntm_float_stimulus is
     MATRIX_DIVIDER_DATA_OUT_J_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_DIVIDER_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    MATRIX_DIVIDER_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_DIVIDER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_DIVIDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -304,8 +304,8 @@ entity ntm_float_stimulus is
     MATRIX_EXPONENTIATOR_DATA_OUT_J_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_EXPONENTIATOR_SIZE_I_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    MATRIX_EXPONENTIATOR_SIZE_J_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    MATRIX_EXPONENTIATOR_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_EXPONENTIATOR_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_EXPONENTIATOR_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_EXPONENTIATOR_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
@@ -327,13 +327,15 @@ architecture ntm_float_stimulus_architecture of ntm_float_stimulus is
   constant WAITING : time := 50 ns;
   constant WORKING : time := 1 ms;
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -345,8 +347,8 @@ architecture ntm_float_stimulus_architecture of ntm_float_stimulus is
   -----------------------------------------------------------------------
 
   -- LOOP
-  signal index_i_loop : std_logic_vector(INDEX_SIZE-1 downto 0) := ONE_INDEX;
-  signal index_j_loop : std_logic_vector(INDEX_SIZE-1 downto 0) := ONE_INDEX;
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0) := ONE_CONTROL;
+  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0) := ONE_CONTROL;
 
   -- GLOBAL
   signal clk_int : std_logic;
@@ -444,8 +446,8 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_SCALAR_ADDER_CASE_0) then
-        SCALAR_ADDER_DATA_A_IN <= TWO;
-        SCALAR_ADDER_DATA_B_IN <= ONE;
+        SCALAR_ADDER_DATA_A_IN <= TWO_DATA;
+        SCALAR_ADDER_DATA_B_IN <= ONE_DATA;
       end if;
 
       -------------------------------------------------------------------
@@ -453,8 +455,8 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_SCALAR_ADDER_CASE_1) then
-        SCALAR_ADDER_DATA_A_IN <= TWO;
-        SCALAR_ADDER_DATA_B_IN <= TWO;
+        SCALAR_ADDER_DATA_A_IN <= TWO_DATA;
+        SCALAR_ADDER_DATA_B_IN <= TWO_DATA;
       end if;
 
       wait for WORKING;
@@ -472,8 +474,8 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0) then
-        SCALAR_MULTIPLIER_DATA_A_IN <= TWO;
-        SCALAR_MULTIPLIER_DATA_B_IN <= ONE;
+        SCALAR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
+        SCALAR_MULTIPLIER_DATA_B_IN <= ONE_DATA;
       end if;
 
       -------------------------------------------------------------------
@@ -481,8 +483,8 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1) then
-        SCALAR_MULTIPLIER_DATA_A_IN <= TWO;
-        SCALAR_MULTIPLIER_DATA_B_IN <= TWO;
+        SCALAR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
+        SCALAR_MULTIPLIER_DATA_B_IN <= TWO_DATA;
       end if;
 
       wait for WORKING;
@@ -500,7 +502,7 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_SCALAR_INVERTER_CASE_0) then
-        SCALAR_INVERTER_DATA_IN   <= ONE;
+        SCALAR_INVERTER_DATA_IN   <= ONE_DATA;
       end if;
 
       -------------------------------------------------------------------
@@ -508,7 +510,7 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_SCALAR_INVERTER_CASE_1) then
-        SCALAR_INVERTER_DATA_IN   <= ONE;
+        SCALAR_INVERTER_DATA_IN   <= ONE_DATA;
       end if;
 
       wait for WORKING;
@@ -526,8 +528,8 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_SCALAR_DIVIDER_CASE_0) then
-        SCALAR_DIVIDER_DATA_A_IN <= TWO;
-        SCALAR_DIVIDER_DATA_B_IN <= ONE;
+        SCALAR_DIVIDER_DATA_A_IN <= TWO_DATA;
+        SCALAR_DIVIDER_DATA_B_IN <= ONE_DATA;
       end if;
 
       -------------------------------------------------------------------
@@ -535,8 +537,8 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_SCALAR_DIVIDER_CASE_1) then
-        SCALAR_DIVIDER_DATA_A_IN <= TWO;
-        SCALAR_DIVIDER_DATA_B_IN <= TWO;
+        SCALAR_DIVIDER_DATA_A_IN <= TWO_DATA;
+        SCALAR_DIVIDER_DATA_B_IN <= TWO_DATA;
       end if;
 
       wait for WORKING;
@@ -554,8 +556,8 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0) then
-        SCALAR_EXPONENTIATOR_DATA_A_IN <= TWO;
-        SCALAR_EXPONENTIATOR_DATA_B_IN <= ONE;
+        SCALAR_EXPONENTIATOR_DATA_A_IN <= TWO_DATA;
+        SCALAR_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
       end if;
 
       -------------------------------------------------------------------
@@ -563,8 +565,8 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1) then
-        SCALAR_EXPONENTIATOR_DATA_A_IN <= TWO;
-        SCALAR_EXPONENTIATOR_DATA_B_IN <= TWO;
+        SCALAR_EXPONENTIATOR_DATA_A_IN <= TWO_DATA;
+        SCALAR_EXPONENTIATOR_DATA_B_IN <= TWO_DATA;
       end if;
 
       wait for WORKING;
@@ -585,7 +587,7 @@ begin
       VECTOR_ADDER_OPERATION <= '0';
 
       -- DATA
-      VECTOR_ADDER_SIZE_IN   <= THREE;
+      VECTOR_ADDER_SIZE_IN   <= THREE_DATA;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_ADDER_CASE 0        ";
@@ -598,24 +600,24 @@ begin
         VECTOR_ADDER_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_ADDER_DATA_A_IN <= TWO;
-        VECTOR_ADDER_DATA_B_IN <= ONE;
+        VECTOR_ADDER_DATA_A_IN <= TWO_DATA;
+        VECTOR_ADDER_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_ADDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(VECTOR_ADDER_SIZE_IN)-unsigned(ONE_INDEX))) then
+          if ((VECTOR_ADDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(VECTOR_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_ADDER_DATA_A_IN_ENABLE <= '1';
             VECTOR_ADDER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_ADDER_DATA_A_IN <= TWO;
-            VECTOR_ADDER_DATA_B_IN <= ONE;
+            VECTOR_ADDER_DATA_A_IN <= TWO_DATA;
+            VECTOR_ADDER_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             VECTOR_ADDER_DATA_A_IN_ENABLE <= '0';
@@ -641,24 +643,24 @@ begin
         VECTOR_ADDER_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_ADDER_DATA_A_IN <= TWO;
-        VECTOR_ADDER_DATA_B_IN <= TWO;
+        VECTOR_ADDER_DATA_A_IN <= TWO_DATA;
+        VECTOR_ADDER_DATA_B_IN <= TWO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_ADDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(VECTOR_ADDER_SIZE_IN)-unsigned(ONE_INDEX))) then
+          if ((VECTOR_ADDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(VECTOR_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_ADDER_DATA_A_IN_ENABLE <= '1';
             VECTOR_ADDER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_ADDER_DATA_A_IN <= TWO;
-            VECTOR_ADDER_DATA_B_IN <= TWO;
+            VECTOR_ADDER_DATA_A_IN <= TWO_DATA;
+            VECTOR_ADDER_DATA_B_IN <= TWO_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             VECTOR_ADDER_DATA_A_IN_ENABLE <= '0';
@@ -684,7 +686,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_MULTIPLIER_SIZE_IN   <= THREE;
+      VECTOR_MULTIPLIER_SIZE_IN   <= THREE_DATA;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_MULTIPLIER_CASE 0   ";
@@ -697,24 +699,24 @@ begin
         VECTOR_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_MULTIPLIER_DATA_A_IN <= TWO;
-        VECTOR_MULTIPLIER_DATA_B_IN <= ONE;
+        VECTOR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
+        VECTOR_MULTIPLIER_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_MULTIPLIER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(VECTOR_MULTIPLIER_SIZE_IN)-unsigned(ONE_INDEX))) then
+          if ((VECTOR_MULTIPLIER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(VECTOR_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
             VECTOR_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_MULTIPLIER_DATA_A_IN <= TWO;
-            VECTOR_MULTIPLIER_DATA_B_IN <= ONE;
+            VECTOR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
+            VECTOR_MULTIPLIER_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             VECTOR_MULTIPLIER_DATA_A_IN_ENABLE <= '0';
@@ -740,24 +742,24 @@ begin
         VECTOR_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_MULTIPLIER_DATA_A_IN <= TWO;
-        VECTOR_MULTIPLIER_DATA_B_IN <= TWO;
+        VECTOR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
+        VECTOR_MULTIPLIER_DATA_B_IN <= TWO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_MULTIPLIER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(VECTOR_MULTIPLIER_SIZE_IN)-unsigned(ONE_INDEX))) then
+          if ((VECTOR_MULTIPLIER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(VECTOR_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
             VECTOR_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_MULTIPLIER_DATA_A_IN <= TWO;
-            VECTOR_MULTIPLIER_DATA_B_IN <= TWO;
+            VECTOR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
+            VECTOR_MULTIPLIER_DATA_B_IN <= TWO_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             VECTOR_MULTIPLIER_DATA_A_IN_ENABLE <= '0';
@@ -783,7 +785,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_INVERTER_SIZE_IN   <= THREE;
+      VECTOR_INVERTER_SIZE_IN   <= THREE_DATA;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_INVERTER_CASE 0     ";
@@ -795,21 +797,21 @@ begin
         VECTOR_INVERTER_DATA_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_INVERTER_DATA_IN <= ONE;
+        VECTOR_INVERTER_DATA_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_INVERTER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(VECTOR_INVERTER_SIZE_IN)-unsigned(ONE_INDEX))) then
+          if ((VECTOR_INVERTER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(VECTOR_INVERTER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_INVERTER_DATA_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_INVERTER_DATA_IN <= ONE;
+            VECTOR_INVERTER_DATA_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             VECTOR_INVERTER_DATA_IN_ENABLE <= '0';
@@ -833,21 +835,21 @@ begin
         VECTOR_INVERTER_DATA_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_INVERTER_DATA_IN <= TWO;
+        VECTOR_INVERTER_DATA_IN <= TWO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_INVERTER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(VECTOR_INVERTER_SIZE_IN)-unsigned(ONE_INDEX))) then
+          if ((VECTOR_INVERTER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(VECTOR_INVERTER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_INVERTER_DATA_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_INVERTER_DATA_IN <= TWO;
+            VECTOR_INVERTER_DATA_IN <= TWO_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             VECTOR_INVERTER_DATA_IN_ENABLE <= '0';
@@ -872,7 +874,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_DIVIDER_SIZE_IN   <= THREE;
+      VECTOR_DIVIDER_SIZE_IN   <= THREE_DATA;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_DIVIDER_CASE 0      ";
@@ -885,24 +887,24 @@ begin
         VECTOR_DIVIDER_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_DIVIDER_DATA_A_IN <= TWO;
-        VECTOR_DIVIDER_DATA_B_IN <= ONE;
+        VECTOR_DIVIDER_DATA_A_IN <= TWO_DATA;
+        VECTOR_DIVIDER_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_DIVIDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(VECTOR_DIVIDER_SIZE_IN)-unsigned(ONE_INDEX))) then
+          if ((VECTOR_DIVIDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(VECTOR_DIVIDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_DIVIDER_DATA_A_IN_ENABLE <= '1';
             VECTOR_DIVIDER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_DIVIDER_DATA_A_IN <= TWO;
-            VECTOR_DIVIDER_DATA_B_IN <= ONE;
+            VECTOR_DIVIDER_DATA_A_IN <= TWO_DATA;
+            VECTOR_DIVIDER_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             VECTOR_DIVIDER_DATA_A_IN_ENABLE <= '0';
@@ -928,24 +930,24 @@ begin
         VECTOR_DIVIDER_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_DIVIDER_DATA_A_IN <= TWO;
-        VECTOR_DIVIDER_DATA_B_IN <= TWO;
+        VECTOR_DIVIDER_DATA_A_IN <= TWO_DATA;
+        VECTOR_DIVIDER_DATA_B_IN <= TWO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_DIVIDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(VECTOR_DIVIDER_SIZE_IN)-unsigned(ONE_INDEX))) then
+          if ((VECTOR_DIVIDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(VECTOR_DIVIDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_DIVIDER_DATA_A_IN_ENABLE <= '1';
             VECTOR_DIVIDER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_DIVIDER_DATA_A_IN <= TWO;
-            VECTOR_DIVIDER_DATA_B_IN <= TWO;
+            VECTOR_DIVIDER_DATA_A_IN <= TWO_DATA;
+            VECTOR_DIVIDER_DATA_B_IN <= TWO_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             VECTOR_DIVIDER_DATA_A_IN_ENABLE <= '0';
@@ -971,7 +973,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_EXPONENTIATOR_SIZE_IN   <= THREE;
+      VECTOR_EXPONENTIATOR_SIZE_IN   <= THREE_DATA;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE 0";
@@ -984,24 +986,24 @@ begin
         VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_EXPONENTIATOR_DATA_A_IN <= TWO;
-        VECTOR_EXPONENTIATOR_DATA_B_IN <= ONE;
+        VECTOR_EXPONENTIATOR_DATA_A_IN <= TWO_DATA;
+        VECTOR_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(VECTOR_EXPONENTIATOR_SIZE_IN)-unsigned(ONE_INDEX))) then
+          if ((VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(VECTOR_EXPONENTIATOR_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE <= '1';
             VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_EXPONENTIATOR_DATA_A_IN <= TWO;
-            VECTOR_EXPONENTIATOR_DATA_B_IN <= ONE;
+            VECTOR_EXPONENTIATOR_DATA_A_IN <= TWO_DATA;
+            VECTOR_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE <= '0';
@@ -1027,24 +1029,24 @@ begin
         VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_EXPONENTIATOR_DATA_A_IN <= TWO;
-        VECTOR_EXPONENTIATOR_DATA_B_IN <= TWO;
+        VECTOR_EXPONENTIATOR_DATA_A_IN <= TWO_DATA;
+        VECTOR_EXPONENTIATOR_DATA_B_IN <= TWO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(VECTOR_EXPONENTIATOR_SIZE_IN)-unsigned(ONE_INDEX))) then
+          if ((VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(VECTOR_EXPONENTIATOR_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE <= '1';
             VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_EXPONENTIATOR_DATA_A_IN <= TWO;
-            VECTOR_EXPONENTIATOR_DATA_B_IN <= TWO;
+            VECTOR_EXPONENTIATOR_DATA_A_IN <= TWO_DATA;
+            VECTOR_EXPONENTIATOR_DATA_B_IN <= TWO_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE <= '0';
@@ -1077,8 +1079,8 @@ begin
       MATRIX_ADDER_OPERATION <= '0';
 
       -- DATA
-      MATRIX_ADDER_SIZE_I_IN <= THREE;
-      MATRIX_ADDER_SIZE_J_IN <= THREE;
+      MATRIX_ADDER_SIZE_I_IN <= THREE_DATA;
+      MATRIX_ADDER_SIZE_J_IN <= THREE_DATA;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_MATRIX_ADDER_CASE 0        ";
@@ -1093,37 +1095,37 @@ begin
         MATRIX_ADDER_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_ADDER_DATA_A_IN <= ONE;
-        MATRIX_ADDER_DATA_B_IN <= ONE;
+        MATRIX_ADDER_DATA_A_IN <= ONE_DATA;
+        MATRIX_ADDER_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_ADDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(MATRIX_ADDER_SIZE_I_IN)-unsigned(ONE_INDEX))) then
+          if ((MATRIX_ADDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(MATRIX_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_ADDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_ADDER_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_ADDER_DATA_A_IN <= ONE;
-            MATRIX_ADDER_DATA_B_IN <= ONE;
+            MATRIX_ADDER_DATA_A_IN <= ONE_DATA;
+            MATRIX_ADDER_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-            index_j_loop <= ZERO_INDEX;
-          elsif ((MATRIX_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(MATRIX_ADDER_SIZE_J_IN)-unsigned(ONE_INDEX))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_ADDER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_ADDER_DATA_A_IN <= ONE;
-            MATRIX_ADDER_DATA_B_IN <= ONE;
+            MATRIX_ADDER_DATA_A_IN <= ONE_DATA;
+            MATRIX_ADDER_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_ADDER_DATA_A_IN_I_ENABLE <= '0';
@@ -1153,37 +1155,37 @@ begin
         MATRIX_ADDER_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_ADDER_DATA_A_IN <= TWO;
-        MATRIX_ADDER_DATA_B_IN <= ONE;
+        MATRIX_ADDER_DATA_A_IN <= TWO_DATA;
+        MATRIX_ADDER_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_ADDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(MATRIX_ADDER_SIZE_I_IN)-unsigned(ONE_INDEX))) then
+          if ((MATRIX_ADDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(MATRIX_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_ADDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_ADDER_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_ADDER_DATA_A_IN <= TWO;
-            MATRIX_ADDER_DATA_B_IN <= ONE;
+            MATRIX_ADDER_DATA_A_IN <= TWO_DATA;
+            MATRIX_ADDER_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-            index_j_loop <= ZERO_INDEX;
-          elsif ((MATRIX_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(MATRIX_ADDER_SIZE_J_IN)-unsigned(ONE_INDEX))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_ADDER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_ADDER_DATA_A_IN <= TWO;
-            MATRIX_ADDER_DATA_B_IN <= ONE;
+            MATRIX_ADDER_DATA_A_IN <= TWO_DATA;
+            MATRIX_ADDER_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_ADDER_DATA_A_IN_I_ENABLE <= '0';
@@ -1211,8 +1213,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_MULTIPLIER_SIZE_I_IN <= THREE;
-      MATRIX_MULTIPLIER_SIZE_J_IN <= THREE;
+      MATRIX_MULTIPLIER_SIZE_I_IN <= THREE_DATA;
+      MATRIX_MULTIPLIER_SIZE_J_IN <= THREE_DATA;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_MATRIX_MULTIPLIER_CASE 0   ";
@@ -1227,37 +1229,37 @@ begin
         MATRIX_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_MULTIPLIER_DATA_A_IN <= ONE;
-        MATRIX_MULTIPLIER_DATA_B_IN <= ONE;
+        MATRIX_MULTIPLIER_DATA_A_IN <= ONE_DATA;
+        MATRIX_MULTIPLIER_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_MULTIPLIER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(MATRIX_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_INDEX))) then
+          if ((MATRIX_MULTIPLIER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(MATRIX_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_MULTIPLIER_DATA_A_IN <= ONE;
-            MATRIX_MULTIPLIER_DATA_B_IN <= ONE;
+            MATRIX_MULTIPLIER_DATA_A_IN <= ONE_DATA;
+            MATRIX_MULTIPLIER_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-            index_j_loop <= ZERO_INDEX;
-          elsif ((MATRIX_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(MATRIX_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_INDEX))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_MULTIPLIER_DATA_A_IN <= ONE;
-            MATRIX_MULTIPLIER_DATA_B_IN <= ONE;
+            MATRIX_MULTIPLIER_DATA_A_IN <= ONE_DATA;
+            MATRIX_MULTIPLIER_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
@@ -1287,37 +1289,37 @@ begin
         MATRIX_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_MULTIPLIER_DATA_A_IN <= TWO;
-        MATRIX_MULTIPLIER_DATA_B_IN <= ONE;
+        MATRIX_MULTIPLIER_DATA_A_IN <= TWO_DATA;
+        MATRIX_MULTIPLIER_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_MULTIPLIER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(MATRIX_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_INDEX))) then
+          if ((MATRIX_MULTIPLIER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(MATRIX_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_MULTIPLIER_DATA_A_IN <= TWO;
-            MATRIX_MULTIPLIER_DATA_B_IN <= ONE;
+            MATRIX_MULTIPLIER_DATA_A_IN <= TWO_DATA;
+            MATRIX_MULTIPLIER_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-            index_j_loop <= ZERO_INDEX;
-          elsif ((MATRIX_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(MATRIX_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_INDEX))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_MULTIPLIER_DATA_A_IN <= TWO;
-            MATRIX_MULTIPLIER_DATA_B_IN <= ONE;
+            MATRIX_MULTIPLIER_DATA_A_IN <= TWO_DATA;
+            MATRIX_MULTIPLIER_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
@@ -1345,8 +1347,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_INVERTER_SIZE_I_IN <= THREE;
-      MATRIX_INVERTER_SIZE_J_IN <= THREE;
+      MATRIX_INVERTER_SIZE_I_IN <= THREE_DATA;
+      MATRIX_INVERTER_SIZE_J_IN <= THREE_DATA;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_MATRIX_INVERTER_CASE 0     ";
@@ -1359,32 +1361,32 @@ begin
         MATRIX_INVERTER_DATA_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_INVERTER_DATA_IN <= ONE;
+        MATRIX_INVERTER_DATA_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_INVERTER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(MATRIX_INVERTER_SIZE_I_IN)-unsigned(ONE_INDEX))) then
+          if ((MATRIX_INVERTER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(MATRIX_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_INVERTER_DATA_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_INVERTER_DATA_IN <= ONE;
+            MATRIX_INVERTER_DATA_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-            index_j_loop <= ZERO_INDEX;
-          elsif ((MATRIX_INVERTER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(MATRIX_INVERTER_SIZE_J_IN)-unsigned(ONE_INDEX))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_INVERTER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_INVERTER_DATA_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_INVERTER_DATA_IN <= ONE;
+            MATRIX_INVERTER_DATA_IN <= ONE_DATA;
 
             -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_INVERTER_DATA_IN_I_ENABLE <= '0';
@@ -1410,32 +1412,32 @@ begin
         MATRIX_INVERTER_DATA_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_INVERTER_DATA_IN <= ONE;
+        MATRIX_INVERTER_DATA_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_INVERTER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(MATRIX_INVERTER_SIZE_I_IN)-unsigned(ONE_INDEX))) then
+          if ((MATRIX_INVERTER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(MATRIX_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_INVERTER_DATA_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_INVERTER_DATA_IN <= TWO;
+            MATRIX_INVERTER_DATA_IN <= TWO_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-            index_j_loop <= ZERO_INDEX;
-          elsif ((MATRIX_INVERTER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(MATRIX_INVERTER_SIZE_J_IN)-unsigned(ONE_INDEX))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_INVERTER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_INVERTER_DATA_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_INVERTER_DATA_IN <= TWO;
+            MATRIX_INVERTER_DATA_IN <= TWO_DATA;
 
             -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_INVERTER_DATA_IN_I_ENABLE <= '0';
@@ -1461,8 +1463,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_DIVIDER_SIZE_I_IN <= THREE;
-      MATRIX_DIVIDER_SIZE_J_IN <= THREE;
+      MATRIX_DIVIDER_SIZE_I_IN <= THREE_DATA;
+      MATRIX_DIVIDER_SIZE_J_IN <= THREE_DATA;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_MATRIX_DIVIDER_CASE 0      ";
@@ -1477,37 +1479,37 @@ begin
         MATRIX_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_DIVIDER_DATA_A_IN <= ONE;
-        MATRIX_DIVIDER_DATA_B_IN <= ONE;
+        MATRIX_DIVIDER_DATA_A_IN <= ONE_DATA;
+        MATRIX_DIVIDER_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_DIVIDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(MATRIX_DIVIDER_SIZE_I_IN)-unsigned(ONE_INDEX))) then
+          if ((MATRIX_DIVIDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(MATRIX_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_DIVIDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_DIVIDER_DATA_A_IN <= ONE;
-            MATRIX_DIVIDER_DATA_B_IN <= ONE;
+            MATRIX_DIVIDER_DATA_A_IN <= ONE_DATA;
+            MATRIX_DIVIDER_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-            index_j_loop <= ZERO_INDEX;
-          elsif ((MATRIX_DIVIDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(MATRIX_DIVIDER_SIZE_J_IN)-unsigned(ONE_INDEX))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_DIVIDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_DIVIDER_DATA_A_IN <= ONE;
-            MATRIX_DIVIDER_DATA_B_IN <= ONE;
+            MATRIX_DIVIDER_DATA_A_IN <= ONE_DATA;
+            MATRIX_DIVIDER_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_DIVIDER_DATA_A_IN_I_ENABLE <= '0';
@@ -1537,37 +1539,37 @@ begin
         MATRIX_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_DIVIDER_DATA_A_IN <= TWO;
-        MATRIX_DIVIDER_DATA_B_IN <= ONE;
+        MATRIX_DIVIDER_DATA_A_IN <= TWO_DATA;
+        MATRIX_DIVIDER_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_DIVIDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(MATRIX_DIVIDER_SIZE_I_IN)-unsigned(ONE_INDEX))) then
+          if ((MATRIX_DIVIDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(MATRIX_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_DIVIDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_DIVIDER_DATA_A_IN <= TWO;
-            MATRIX_DIVIDER_DATA_B_IN <= ONE;
+            MATRIX_DIVIDER_DATA_A_IN <= TWO_DATA;
+            MATRIX_DIVIDER_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-            index_j_loop <= ZERO_INDEX;
-          elsif ((MATRIX_DIVIDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(MATRIX_DIVIDER_SIZE_J_IN)-unsigned(ONE_INDEX))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_DIVIDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_DIVIDER_DATA_A_IN <= TWO;
-            MATRIX_DIVIDER_DATA_B_IN <= ONE;
+            MATRIX_DIVIDER_DATA_A_IN <= TWO_DATA;
+            MATRIX_DIVIDER_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_DIVIDER_DATA_A_IN_I_ENABLE <= '0';
@@ -1595,8 +1597,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_EXPONENTIATOR_SIZE_I_IN <= THREE;
-      MATRIX_EXPONENTIATOR_SIZE_J_IN <= THREE;
+      MATRIX_EXPONENTIATOR_SIZE_I_IN <= THREE_DATA;
+      MATRIX_EXPONENTIATOR_SIZE_J_IN <= THREE_DATA;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE 0";
@@ -1611,37 +1613,37 @@ begin
         MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_EXPONENTIATOR_DATA_A_IN <= ONE;
-        MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE;
+        MATRIX_EXPONENTIATOR_DATA_A_IN <= ONE_DATA;
+        MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(MATRIX_EXPONENTIATOR_SIZE_I_IN)-unsigned(ONE_INDEX))) then
+          if ((MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(MATRIX_EXPONENTIATOR_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_EXPONENTIATOR_DATA_A_IN <= ONE;
-            MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE;
+            MATRIX_EXPONENTIATOR_DATA_A_IN <= ONE_DATA;
+            MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-            index_j_loop <= ZERO_INDEX;
-          elsif ((MATRIX_EXPONENTIATOR_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(MATRIX_EXPONENTIATOR_SIZE_J_IN)-unsigned(ONE_INDEX))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_EXPONENTIATOR_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_EXPONENTIATOR_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_EXPONENTIATOR_DATA_A_IN <= ONE;
-            MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE;
+            MATRIX_EXPONENTIATOR_DATA_A_IN <= ONE_DATA;
+            MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE <= '0';
@@ -1671,37 +1673,37 @@ begin
         MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_EXPONENTIATOR_DATA_A_IN <= TWO;
-        MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE;
+        MATRIX_EXPONENTIATOR_DATA_A_IN <= TWO_DATA;
+        MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_INDEX)) and (unsigned(index_i_loop) < unsigned(MATRIX_EXPONENTIATOR_SIZE_I_IN)-unsigned(ONE_INDEX))) then
+          if ((MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(MATRIX_EXPONENTIATOR_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_EXPONENTIATOR_DATA_A_IN <= TWO;
-            MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE;
+            MATRIX_EXPONENTIATOR_DATA_A_IN <= TWO_DATA;
+            MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-            index_j_loop <= ZERO_INDEX;
-          elsif ((MATRIX_EXPONENTIATOR_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(MATRIX_EXPONENTIATOR_SIZE_J_IN)-unsigned(ONE_INDEX))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_EXPONENTIATOR_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_EXPONENTIATOR_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_EXPONENTIATOR_DATA_A_IN <= TWO;
-            MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE;
+            MATRIX_EXPONENTIATOR_DATA_A_IN <= TWO_DATA;
+            MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
 
             -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE <= '0';

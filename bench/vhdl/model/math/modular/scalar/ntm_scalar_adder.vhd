@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_scalar_adder is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -83,13 +83,15 @@ architecture ntm_scalar_adder_architecture of ntm_scalar_adder is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -119,7 +121,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO;
+      DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -152,11 +154,11 @@ begin
 
         when ENDER_STATE =>  -- STEP 1
 
-          if (unsigned(MODULO_IN) > unsigned(ZERO_INDEX)) then
+          if (unsigned(MODULO_IN) > unsigned(ZERO_CONTROL)) then
             if (unsigned(DATA_A_IN) > unsigned(DATA_B_IN)) then
               if (unsigned(adder_int) = '0' & unsigned(MODULO_IN)) then
                 -- Data Outputs
-                DATA_OUT <= ZERO;
+                DATA_OUT <= ZERO_DATA;
 
                 -- Control Outputs
                 READY <= '1';
@@ -179,7 +181,7 @@ begin
             elsif (unsigned(DATA_A_IN) = unsigned(DATA_B_IN)) then
               if (OPERATION = '1') then
                 -- Data Outputs
-                DATA_OUT <= ZERO;
+                DATA_OUT <= ZERO_DATA;
 
                 -- Control Outputs
                 READY <= '1';
@@ -189,7 +191,7 @@ begin
               else
                 if (unsigned(adder_int) = '0' & unsigned(MODULO_IN)) then
                   -- Data Outputs
-                  DATA_OUT <= ZERO;
+                  DATA_OUT <= ZERO_DATA;
 
                   -- Control Outputs
                   READY <= '1';
@@ -214,7 +216,7 @@ begin
               if (OPERATION = '1') then
                 if (unsigned(adder_int) = '0' & unsigned(MODULO_IN)) then
                   -- Data Outputs
-                  DATA_OUT <= ZERO;
+                  DATA_OUT <= ZERO_DATA;
 
                   -- Control Outputs
                   READY <= '1';
@@ -237,7 +239,7 @@ begin
               else
                 if (unsigned(adder_int) = '0' & unsigned(MODULO_IN)) then
                   -- Data Outputs
-                  DATA_OUT <= ZERO;
+                  DATA_OUT <= ZERO_DATA;
 
                   -- Control Outputs
                   READY <= '1';
@@ -259,7 +261,7 @@ begin
                 end if;
               end if;
             end if;
-          elsif (unsigned(MODULO_IN) = unsigned(ZERO_INDEX)) then
+          elsif (unsigned(MODULO_IN) = unsigned(ZERO_CONTROL)) then
             -- Data Outputs
             DATA_OUT <= adder_int(DATA_SIZE-1 downto 0);
 

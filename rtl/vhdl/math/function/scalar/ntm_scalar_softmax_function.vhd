@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_scalar_softmax_function is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -64,7 +64,7 @@ entity ntm_scalar_softmax_function is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    LENGTH_IN : in  std_logic_vector(INDEX_SIZE-1 downto 0);
+    LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -92,13 +92,15 @@ architecture ntm_scalar_softmax_function_architecture of ntm_scalar_softmax_func
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -113,7 +115,7 @@ architecture ntm_scalar_softmax_function_architecture of ntm_scalar_softmax_func
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Control Internal
-  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- SCALAR ADDER
   -- CONTROL
@@ -163,13 +165,13 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO;
+      DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
 
       -- Control Internal
-      index_loop <= ZERO_INDEX;
+      index_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
@@ -180,7 +182,7 @@ begin
 
           if (START = '1') then
             -- Control Internal
-            index_loop <= ZERO_INDEX;
+            index_loop <= ZERO_CONTROL;
 
             -- FSM Control
             controller_ctrl_fsm_int <= INPUT_STATE;
@@ -217,17 +219,17 @@ begin
         when SCALAR_ADDER_STATE =>  -- STEP 2
 
           if (ready_scalar_adder = '1') then
-            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_INDEX)) then
+            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
               -- Control Internal
               start_scalar_divider <= '1';
 
-              index_loop <= ZERO_INDEX;
+              index_loop <= ZERO_CONTROL;
 
               -- FSM Control
               controller_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;
             else
               -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_INDEX));
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
               -- FSM Control
               controller_ctrl_fsm_int <= INPUT_STATE;
@@ -240,7 +242,7 @@ begin
         when SCALAR_DIVIDER_STATE =>  -- STEP 3
 
           if (ready_scalar_divider = '1') then
-            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_INDEX)) then
+            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
               -- Control Outputs
               READY <= '1';
 
@@ -248,7 +250,7 @@ begin
               controller_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_INDEX));
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
               -- Control Internal
               start_scalar_divider <= '1';
@@ -292,7 +294,7 @@ begin
   scalar_adder : ntm_scalar_adder
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -316,7 +318,7 @@ begin
   ntm_scalar_divider_i : ntm_scalar_divider
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -338,7 +340,7 @@ begin
   scalar_exponentiator : ntm_scalar_exponentiator
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

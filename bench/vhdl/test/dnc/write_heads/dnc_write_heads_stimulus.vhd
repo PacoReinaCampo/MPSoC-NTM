@@ -48,8 +48,8 @@ use work.dnc_write_heads_pkg.all;
 entity dnc_write_heads_stimulus is
   generic (
     -- SYSTEM-SIZE
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128;
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -83,7 +83,7 @@ entity dnc_write_heads_stimulus is
     DNC_ERASE_VECTOR_E_OUT_ENABLE : in std_logic;
 
     -- DATA
-    DNC_ERASE_VECTOR_SIZE_W_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    DNC_ERASE_VECTOR_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     DNC_ERASE_VECTOR_E_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -109,7 +109,7 @@ entity dnc_write_heads_stimulus is
     DNC_WRITE_KEY_K_OUT_ENABLE : in std_logic;
 
     -- DATA
-    DNC_WRITE_KEY_SIZE_W_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    DNC_WRITE_KEY_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     DNC_WRITE_KEY_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -135,7 +135,7 @@ entity dnc_write_heads_stimulus is
     DNC_WRITE_VECTOR_V_OUT_ENABLE : in std_logic;
 
     -- DATA
-    DNC_WRITE_VECTOR_SIZE_W_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    DNC_WRITE_VECTOR_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     DNC_WRITE_VECTOR_V_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 

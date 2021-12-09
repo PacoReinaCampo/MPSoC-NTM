@@ -38,8 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_scalar_adder #(
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -70,10 +70,15 @@ module ntm_scalar_adder #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO  = 0;
-  parameter ONE   = 1;
-  parameter TWO   = 2;
-  parameter THREE = 3;
+  parameter ZERO_CONTROL  = 0;
+  parameter ONE_CONTROL   = 1;
+  parameter TWO_CONTROL   = 2;
+  parameter THREE_CONTROL = 3;
+
+  parameter ZERO_DATA  = 0;
+  parameter ONE_DATA   = 1;
+  parameter TWO_DATA   = 2;
+  parameter THREE_DATA = 3;
 
   parameter FULL  = 1;
   parameter EMPTY = 0;
@@ -100,13 +105,13 @@ module ntm_scalar_adder #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      DATA_OUT <= ZERO;
+      DATA_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
 
       // Assignations
-      adder_int <= ZERO;
+      adder_int <= ZERO_DATA;
     end else begin
       case(adder_ctrl_fsm_int)
         STARTER_STATE : begin  // STEP 0
@@ -132,11 +137,11 @@ module ntm_scalar_adder #(
           end
         end
         ENDER_STATE : begin  // STEP 1
-          if(MODULO_IN > ZERO) begin
+          if(MODULO_IN > ZERO_DATA) begin
             if(DATA_A_IN > DATA_B_IN) begin
               if(adder_int == {1'b0,MODULO_IN}) begin
                 // Data Outputs
-                DATA_OUT <= ZERO;
+                DATA_OUT <= ZERO_DATA;
 
                 // Control Outputs
                 READY <= 1'b1;
@@ -161,7 +166,7 @@ module ntm_scalar_adder #(
             else if(DATA_A_IN == DATA_B_IN) begin
               if(OPERATION == 1'b1) begin
                 // Data Outputs
-                DATA_OUT <= ZERO;
+                DATA_OUT <= ZERO_DATA;
 
                 // Control Outputs
                 READY <= 1'b1;
@@ -172,7 +177,7 @@ module ntm_scalar_adder #(
               else begin
                 if(adder_int == {1'b0,MODULO_IN}) begin
                   // Data Outputs
-                  DATA_OUT <= ZERO;
+                  DATA_OUT <= ZERO_DATA;
 
                   // Control Outputs
                   READY <= 1'b1;
@@ -200,7 +205,7 @@ module ntm_scalar_adder #(
               if(OPERATION == 1'b1) begin
                 if(adder_int == {1'b0,MODULO_IN}) begin
                   // Data Outputs
-                  DATA_OUT <= ZERO;
+                  DATA_OUT <= ZERO_DATA;
 
                   // Control Outputs
                   READY <= 1'b1;
@@ -226,7 +231,7 @@ module ntm_scalar_adder #(
               else begin
                 if(adder_int == {1'b0,MODULO_IN}) begin
                   // Data Outputs
-                  DATA_OUT <= ZERO;
+                  DATA_OUT <= ZERO_DATA;
 
                   // Control Outputs
                   READY <= 1'b1;
@@ -251,7 +256,7 @@ module ntm_scalar_adder #(
               end
             end
           end
-          else if(MODULO_IN == ZERO) begin
+          else if(MODULO_IN == ZERO_DATA) begin
             // Data Outputs
             DATA_OUT <= adder_int[DATA_SIZE-1:0];
 

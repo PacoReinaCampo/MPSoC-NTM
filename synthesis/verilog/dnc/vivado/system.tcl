@@ -42,37 +42,26 @@
 ##                                                                               ##
 ###################################################################################
 
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/scalar/ntm_scalar_mod.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/scalar/ntm_scalar_adder.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/scalar/ntm_scalar_multiplier.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/scalar/ntm_scalar_inverter.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/scalar/ntm_scalar_divider.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/scalar/ntm_scalar_exponentiator.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/scalar/ntm_scalar_lcm.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/scalar/ntm_scalar_gcd.sv
+read_verilog -sv ../../../../rtl/verilog/math/float/scalar/ntm_scalar_adder.sv
+read_verilog -sv ../../../../rtl/verilog/math/float/scalar/ntm_scalar_multiplier.sv
+read_verilog -sv ../../../../rtl/verilog/math/float/scalar/ntm_scalar_inverter.sv
+read_verilog -sv ../../../../rtl/verilog/math/float/scalar/ntm_scalar_divider.sv
+read_verilog -sv ../../../../rtl/verilog/math/float/scalar/ntm_scalar_exponentiator.sv
 
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/vector/ntm_vector_mod.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/vector/ntm_vector_adder.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/vector/ntm_vector_multiplier.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/vector/ntm_vector_inverter.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/vector/ntm_vector_divider.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/vector/ntm_vector_exponentiator.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/vector/ntm_vector_lcm.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/vector/ntm_vector_gcd.sv
+read_verilog -sv ../../../../rtl/verilog/math/float/vector/ntm_vector_adder.sv
+read_verilog -sv ../../../../rtl/verilog/math/float/vector/ntm_vector_multiplier.sv
+read_verilog -sv ../../../../rtl/verilog/math/float/vector/ntm_vector_inverter.sv
+read_verilog -sv ../../../../rtl/verilog/math/float/vector/ntm_vector_divider.sv
+read_verilog -sv ../../../../rtl/verilog/math/float/vector/ntm_vector_exponentiator.sv
 
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/matrix/ntm_matrix_mod.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/matrix/ntm_matrix_adder.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/matrix/ntm_matrix_multiplier.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/matrix/ntm_matrix_inverter.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/matrix/ntm_matrix_divider.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/matrix/ntm_matrix_exponentiator.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/matrix/ntm_matrix_lcm.sv
-read_verilog -sv ../../../../rtl/verilog/math/arithmetic/matrix/ntm_matrix_gcd.sv
+read_verilog -sv ../../../../rtl/verilog/math/float/matrix/ntm_matrix_adder.sv
+read_verilog -sv ../../../../rtl/verilog/math/float/matrix/ntm_matrix_multiplier.sv
+read_verilog -sv ../../../../rtl/verilog/math/float/matrix/ntm_matrix_inverter.sv
+read_verilog -sv ../../../../rtl/verilog/math/float/matrix/ntm_matrix_divider.sv
+read_verilog -sv ../../../../rtl/verilog/math/float/matrix/ntm_matrix_exponentiator.sv
 
-read_verilog -sv ../../../../rtl/verilog/math/algebra/ntm_matrix_determinant.sv
-read_verilog -sv ../../../../rtl/verilog/math/algebra/ntm_matrix_inversion.sv
 read_verilog -sv ../../../../rtl/verilog/math/algebra/ntm_matrix_product.sv
-read_verilog -sv ../../../../rtl/verilog/math/algebra/ntm_matrix_rank.sv
+read_verilog -sv ../../../../rtl/verilog/math/algebra/ntm_tensor_transpose.sv
 read_verilog -sv ../../../../rtl/verilog/math/algebra/ntm_matrix_transpose.sv
 read_verilog -sv ../../../../rtl/verilog/math/algebra/ntm_scalar_product.sv
 read_verilog -sv ../../../../rtl/verilog/math/algebra/ntm_tensor_product.sv
@@ -127,7 +116,6 @@ read_verilog -sv ../../../../rtl/verilog/controller/LSTM/convolutional/ntm_state
 
 read_verilog -sv ../../../../rtl/verilog/dnc/read_heads/dnc_free_gates.sv
 read_verilog -sv ../../../../rtl/verilog/dnc/read_heads/dnc_read_keys.sv
-read_verilog -sv ../../../../rtl/verilog/dnc/read_heads/dnc_read_modes.sv
 read_verilog -sv ../../../../rtl/verilog/dnc/read_heads/dnc_read_strengths.sv
 
 read_verilog -sv ../../../../rtl/verilog/dnc/write_heads/dnc_allocation_gate.sv
@@ -156,7 +144,6 @@ read_verilog -sv ../../../../rtl/verilog/dnc/memory/dnc_addressing.sv
 
 read_verilog -sv ../../../../rtl/verilog/dnc/top/dnc_top.sv
 read_verilog -sv ../../../../rtl/verilog/dnc/top/dnc_output_vector.sv
-read_verilog -sv ../../../../rtl/verilog/dnc/top/dnc_controller_output_vector.sv
 read_verilog -sv ../../../../rtl/verilog/dnc/top/dnc_read_interface_vector.sv
 read_verilog -sv ../../../../rtl/verilog/dnc/top/dnc_write_interface_vector.sv
 

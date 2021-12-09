@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity dnc_memory_matrix is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -73,8 +73,8 @@ entity dnc_memory_matrix is
     M_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
 
     -- DATA
-    SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     M_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -114,13 +114,15 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -135,8 +137,8 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Control Internal
-  signal index_i_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal index_j_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- MATRIX ADDER
   -- CONTROL
@@ -155,8 +157,8 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
 
   -- DATA
   signal modulo_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_adder : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_adder : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -176,8 +178,8 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
 
   -- DATA
   signal modulo_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_multiplier : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_multiplier : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -195,8 +197,8 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
 
   -- DATA
   signal modulo_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -215,10 +217,10 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
 
   -- DATA
   signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_a_i_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_a_j_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_b_i_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_b_j_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -236,14 +238,14 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      M_OUT <= ZERO;
+      M_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
 
       -- Control Internal
-      index_i_loop <= ZERO_INDEX;
-      index_j_loop <= ZERO_INDEX;
+      index_i_loop <= ZERO_CONTROL;
+      index_j_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
@@ -253,8 +255,8 @@ begin
           READY <= '0';
 
           -- Control Internal
-          index_i_loop <= ZERO_INDEX;
-          index_j_loop <= ZERO_INDEX;
+          index_i_loop <= ZERO_CONTROL;
+          index_j_loop <= ZERO_CONTROL;
 
           if (START = '1') then
             -- Control Internal
@@ -276,14 +278,14 @@ begin
           -- Data Inputs
           modulo_in_matrix_transpose <= FULL;
           size_i_in_matrix_transpose <= SIZE_W_IN;
-          size_j_in_matrix_transpose <= ONE;
+          size_j_in_matrix_transpose <= ONE_DATA;
           data_in_matrix_transpose   <= E_IN;
 
           if (data_out_i_enable_matrix_transpose = '1') then
-            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-              index_j_loop <= ZERO_INDEX;
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+              index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_J_STATE;
@@ -308,19 +310,19 @@ begin
           -- Data Inputs
           modulo_in_matrix_transpose <= FULL;
           size_i_in_matrix_transpose <= SIZE_W_IN;
-          size_j_in_matrix_transpose <= ONE;
+          size_j_in_matrix_transpose <= ONE_DATA;
           data_in_matrix_transpose   <= E_IN;
 
           if (data_out_j_enable_matrix_transpose = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_I_STATE;
@@ -347,17 +349,17 @@ begin
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_N_IN;
-          size_a_j_in_matrix_product <= ONE;
-          size_b_i_in_matrix_product <= ONE;
+          size_a_j_in_matrix_product <= ONE_DATA;
+          size_b_i_in_matrix_product <= ONE_DATA;
           size_b_j_in_matrix_product <= SIZE_W_IN;
           data_a_in_matrix_product   <= W_IN;
           data_b_in_matrix_product   <= data_out_matrix_transpose;
 
           if (data_out_i_enable_matrix_product = '1') then
-            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-              index_j_loop <= ZERO_INDEX;
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+              index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_J_STATE;
@@ -384,22 +386,22 @@ begin
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_N_IN;
-          size_a_j_in_matrix_product <= ONE;
-          size_b_i_in_matrix_product <= ONE;
+          size_a_j_in_matrix_product <= ONE_DATA;
+          size_b_i_in_matrix_product <= ONE_DATA;
           size_b_j_in_matrix_product <= SIZE_W_IN;
           data_a_in_matrix_product   <= W_IN;
           data_b_in_matrix_product   <= data_out_matrix_transpose;
 
           if (data_out_j_enable_matrix_product = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_I_STATE;
@@ -429,14 +431,14 @@ begin
           modulo_in_matrix_adder <= FULL;
           size_i_in_matrix_adder <= SIZE_N_IN;
           size_j_in_matrix_adder <= SIZE_W_IN;
-          data_a_in_matrix_adder <= ONE;
+          data_a_in_matrix_adder <= ONE_DATA;
           data_b_in_matrix_adder <= data_out_matrix_product;
 
           if (data_out_i_enable_matrix_adder = '1') then
-            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-              index_j_loop <= ZERO_INDEX;
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+              index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_J_STATE;
@@ -466,19 +468,19 @@ begin
           modulo_in_matrix_adder <= FULL;
           size_i_in_matrix_adder <= SIZE_N_IN;
           size_j_in_matrix_adder <= SIZE_W_IN;
-          data_a_in_matrix_adder <= ONE;
+          data_a_in_matrix_adder <= ONE_DATA;
           data_b_in_matrix_adder <= data_out_matrix_product;
 
           if (data_out_j_enable_matrix_adder = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_I_STATE;
@@ -510,10 +512,10 @@ begin
           data_b_in_matrix_multiplier <= data_out_matrix_adder;
 
           if (data_out_i_enable_matrix_multiplier = '1') then
-            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-              index_j_loop <= ZERO_INDEX;
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+              index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_J_STATE;
@@ -545,15 +547,15 @@ begin
           data_b_in_matrix_multiplier <= data_out_matrix_adder;
 
           if (data_out_j_enable_matrix_multiplier = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_I_STATE;
@@ -578,14 +580,14 @@ begin
           -- Data Inputs
           modulo_in_matrix_transpose <= FULL;
           size_i_in_matrix_transpose <= SIZE_W_IN;
-          size_j_in_matrix_transpose <= ONE;
+          size_j_in_matrix_transpose <= ONE_DATA;
           data_in_matrix_transpose   <= V_IN;
 
           if (data_out_i_enable_matrix_transpose = '1') then
-            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-              index_j_loop <= ZERO_INDEX;
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+              index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_J_STATE;
@@ -610,19 +612,19 @@ begin
           -- Data Inputs
           modulo_in_matrix_transpose <= FULL;
           size_i_in_matrix_transpose <= SIZE_W_IN;
-          size_j_in_matrix_transpose <= ONE;
+          size_j_in_matrix_transpose <= ONE_DATA;
           data_in_matrix_transpose   <= V_IN;
 
           if (data_out_j_enable_matrix_transpose = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_I_STATE;
@@ -652,17 +654,17 @@ begin
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_N_IN;
-          size_a_j_in_matrix_product <= ONE;
-          size_b_i_in_matrix_product <= ONE;
+          size_a_j_in_matrix_product <= ONE_DATA;
+          size_b_i_in_matrix_product <= ONE_DATA;
           size_b_j_in_matrix_product <= SIZE_W_IN;
           data_a_in_matrix_product   <= W_IN;
           data_b_in_matrix_product   <= data_out_matrix_transpose;
 
           if (data_out_i_enable_matrix_product = '1') then
-            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-              index_j_loop <= ZERO_INDEX;
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+              index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_J_STATE;
@@ -689,22 +691,22 @@ begin
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_N_IN;
-          size_a_j_in_matrix_product <= ONE;
-          size_b_i_in_matrix_product <= ONE;
+          size_a_j_in_matrix_product <= ONE_DATA;
+          size_b_i_in_matrix_product <= ONE_DATA;
           size_b_j_in_matrix_product <= SIZE_W_IN;
           data_a_in_matrix_product   <= W_IN;
           data_b_in_matrix_product   <= data_out_matrix_transpose;
 
           if (data_out_j_enable_matrix_product = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_I_STATE;
@@ -738,10 +740,10 @@ begin
           data_b_in_matrix_adder <= data_out_matrix_product;
 
           if (data_out_i_enable_matrix_adder = '1') then
-            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-              index_j_loop <= ZERO_INDEX;
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+              index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_J_STATE;
@@ -775,15 +777,15 @@ begin
           data_b_in_matrix_adder <= data_out_matrix_product;
 
           if (data_out_j_enable_matrix_adder = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_INDEX))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_I_STATE;
@@ -810,7 +812,7 @@ begin
   matrix_adder : ntm_matrix_adder
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -844,7 +846,7 @@ begin
   matrix_multiplier : ntm_matrix_multiplier
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -876,7 +878,7 @@ begin
   matrix_transpose : ntm_matrix_transpose
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -905,7 +907,7 @@ begin
   matrix_product : ntm_matrix_product
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

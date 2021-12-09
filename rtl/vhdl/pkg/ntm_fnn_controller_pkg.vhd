@@ -54,8 +54,8 @@ package ntm_fnn_controller_pkg is
 
   component ntm_controller is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -105,10 +105,10 @@ package ntm_fnn_controller_pkg is
       H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
       -- DATA
-      SIZE_X_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -130,8 +130,8 @@ package ntm_fnn_controller_pkg is
 
   component ntm_trainer is
     generic (
-      DATA_SIZE  : integer := 512;
-      INDEX_SIZE : integer := 128
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
@@ -169,10 +169,10 @@ package ntm_fnn_controller_pkg is
       B_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
       -- DATA
-      SIZE_X_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-      SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+      SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

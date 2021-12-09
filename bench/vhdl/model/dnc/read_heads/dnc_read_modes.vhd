@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity dnc_read_modes is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -65,7 +65,7 @@ entity dnc_read_modes is
     PI_OUT_P_ENABLE : out std_logic;    -- for i in 0 to 2
 
     -- DATA
-    SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     PI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -83,13 +83,15 @@ architecture dnc_read_modes_architecture of dnc_read_modes is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -113,8 +115,8 @@ architecture dnc_read_modes_architecture of dnc_read_modes is
 
   -- DATA
   signal modulo_in_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_vector_softmax : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_in_vector_softmax   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_vector_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_in_vector_softmax   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -140,7 +142,7 @@ begin
 
   -- DATA
   modulo_in_vector_softmax <= FULL;
-  length_in_vector_softmax <= ONE_INDEX;
+  length_in_vector_softmax <= ONE_CONTROL;
   size_in_vector_softmax   <= SIZE_R_IN;
 
   data_in_vector_softmax <= PI_IN;
@@ -151,7 +153,7 @@ begin
   vector_softmax_function : ntm_vector_softmax_function
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

@@ -38,8 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_scalar_multiplier #(
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -71,10 +71,15 @@ module ntm_scalar_multiplier #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO  = 0;
-  parameter ONE   = 1;
-  parameter TWO   = 2;
-  parameter THREE = 3;
+  parameter ZERO_CONTROL  = 0;
+  parameter ONE_CONTROL   = 1;
+  parameter TWO_CONTROL   = 2;
+  parameter THREE_CONTROL = 3;
+
+  parameter ZERO_DATA  = 0;
+  parameter ONE_DATA   = 1;
+  parameter TWO_DATA   = 2;
+  parameter THREE_DATA = 3;
 
   parameter FULL  = 1;
   parameter EMPTY = 0;
@@ -104,16 +109,16 @@ module ntm_scalar_multiplier #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      DATA_OUT <= ZERO;
+      DATA_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
 
       // Assignation
-      u_int <= ZERO;
-      v_int <= ZERO;
+      u_int <= ZERO_DATA;
+      v_int <= ZERO_DATA;
 
-      multiplier_int <= ZERO;
+      multiplier_int <= ZERO_DATA;
     end
     else begin
       case(multiplier_ctrl_fsm_int)
@@ -130,7 +135,7 @@ module ntm_scalar_multiplier #(
               multiplier_int <= {1'b0,DATA_B_IN};
             end
             else begin
-              multiplier_int <= ZERO;
+              multiplier_int <= ZERO_DATA;
             end
 
             // FSM Control
@@ -179,7 +184,7 @@ module ntm_scalar_multiplier #(
           multiplier_ctrl_fsm_int <= ENDER_STATE;
         end
         ENDER_STATE : begin  // STEP 4
-          if(u_int == {1'b0,ONE}) begin
+          if(u_int == {1'b0,ONE_CONTROL}) begin
             // Data Outputs
             DATA_OUT <= multiplier_int[DATA_SIZE-1:0];
 

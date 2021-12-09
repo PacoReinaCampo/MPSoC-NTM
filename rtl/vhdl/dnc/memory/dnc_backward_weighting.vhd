@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity dnc_backward_weighting is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -74,8 +74,8 @@ entity dnc_backward_weighting is
     B_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
 
     -- DATA
-    SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -103,13 +103,15 @@ architecture dnc_backward_weighting_architecture of dnc_backward_weighting is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -124,8 +126,8 @@ architecture dnc_backward_weighting_architecture of dnc_backward_weighting is
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Control Internal
-  signal index_i_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal index_j_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- MATRIX TRANSPOSE
   -- CONTROL
@@ -140,8 +142,8 @@ architecture dnc_backward_weighting_architecture of dnc_backward_weighting is
 
   -- DATA
   signal modulo_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -160,10 +162,10 @@ architecture dnc_backward_weighting_architecture of dnc_backward_weighting is
 
   -- DATA
   signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_a_i_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_a_j_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_b_i_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_b_j_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -181,7 +183,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      B_OUT <= ZERO;
+      B_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -190,8 +192,8 @@ begin
       B_OUT_J_ENABLE <= '0';
 
       -- Control Internal
-      index_i_loop <= ZERO_INDEX;
-      index_j_loop <= ZERO_INDEX;
+      index_i_loop <= ZERO_CONTROL;
+      index_j_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
@@ -204,8 +206,8 @@ begin
           B_OUT_J_ENABLE <= '0';
 
           -- Control Internal
-          index_i_loop <= ZERO_INDEX;
-          index_j_loop <= ZERO_INDEX;
+          index_i_loop <= ZERO_CONTROL;
+          index_j_loop <= ZERO_CONTROL;
 
           if (START = '1') then
             -- Control Internal
@@ -225,10 +227,10 @@ begin
         when MATRIX_PRODUCT_I_STATE =>  -- STEP 3
 
           if (data_out_i_enable_matrix_product = '1') then
-            if ((unsigned(index_i_loop) < unsigned(SIZE_R_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_INDEX))) then
+            if ((unsigned(index_i_loop) < unsigned(SIZE_R_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL))) then
               -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_INDEX));
-              index_j_loop <= ZERO_INDEX;
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+              index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_PRODUCT_J_STATE;
@@ -247,15 +249,15 @@ begin
         when MATRIX_PRODUCT_J_STATE =>  -- STEP 4
 
           if (data_out_j_enable_matrix_product = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_R_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_INDEX))) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_R_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL))) then
               -- Control Outputs
               READY <= '1';
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_R_IN) - unsigned(ONE_INDEX)) and (unsigned(index_j_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_INDEX))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_R_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL))) then
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_INDEX));
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
               controller_ctrl_fsm_int <= MATRIX_PRODUCT_I_STATE;
@@ -300,7 +302,7 @@ begin
   size_a_i_in_matrix_product <= SIZE_N_IN;
   size_a_j_in_matrix_product <= SIZE_N_IN;
   size_b_i_in_matrix_product <= SIZE_N_IN;
-  size_b_j_in_matrix_product <= ONE_INDEX;
+  size_b_j_in_matrix_product <= ONE_CONTROL;
   data_a_in_matrix_product   <= data_out_matrix_transpose;
   data_b_in_matrix_product   <= W_IN;
 
@@ -308,7 +310,7 @@ begin
   matrix_transpose : ntm_matrix_transpose
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -337,7 +339,7 @@ begin
   matrix_product : ntm_matrix_product
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

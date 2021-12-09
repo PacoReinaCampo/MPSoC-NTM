@@ -46,8 +46,8 @@ use work.ntm_algebra_pkg.all;
 entity ntm_algebra_testbench is
   generic (
     -- SYSTEM-SIZE
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128;
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -102,10 +102,10 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
 
   -- DATA
   signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_a_i_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_a_j_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_b_i_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_b_j_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -128,12 +128,12 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
 
   -- DATA
   signal modulo_in_tensor_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_a_i_in_tensor_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_a_j_in_tensor_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_a_k_in_tensor_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_b_i_in_tensor_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_b_j_in_tensor_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_b_k_in_tensor_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_a_i_in_tensor_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_tensor_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_k_in_tensor_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_tensor_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_tensor_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_k_in_tensor_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_tensor_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_tensor_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_tensor_transpose    : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -151,8 +151,8 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
 
   -- DATA
   signal modulo_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_j_in_matrix_transpose : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_i_in_matrix_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -168,7 +168,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
 
   -- DATA
   signal modulo_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_scalar_product : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_scalar_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_product  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -191,12 +191,12 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
 
   -- DATA
   signal modulo_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_a_i_in_tensor_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_a_j_in_tensor_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_a_k_in_tensor_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_b_i_in_tensor_product  : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_b_j_in_tensor_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_b_k_in_tensor_product : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_a_i_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_k_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_tensor_product  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_k_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_tensor_product    : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -211,7 +211,7 @@ begin
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE  => DATA_SIZE,
-        INDEX_SIZE => INDEX_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE,
 
       X => X,
       Y => Y,
@@ -345,7 +345,7 @@ begin
     matrix_product : ntm_matrix_product
       generic map (
         DATA_SIZE  => DATA_SIZE,
-        INDEX_SIZE => INDEX_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -381,7 +381,7 @@ begin
     tensor_transpose : ntm_tensor_transpose
       generic map (
         DATA_SIZE  => DATA_SIZE,
-        INDEX_SIZE => INDEX_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -422,7 +422,7 @@ begin
     matrix_transpose : ntm_matrix_transpose
       generic map (
         DATA_SIZE  => DATA_SIZE,
-        INDEX_SIZE => INDEX_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -453,7 +453,7 @@ begin
     scalar_product : ntm_scalar_product
       generic map (
         DATA_SIZE  => DATA_SIZE,
-        INDEX_SIZE => INDEX_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -483,7 +483,7 @@ begin
     tensor_product : ntm_tensor_product
       generic map (
         DATA_SIZE  => DATA_SIZE,
-        INDEX_SIZE => INDEX_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL

@@ -38,8 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module ntm_vector_multiplier #(
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -74,10 +74,15 @@ module ntm_vector_multiplier #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO  = 0;
-  parameter ONE   = 1;
-  parameter TWO   = 2;
-  parameter THREE = 3;
+  parameter ZERO_CONTROL  = 0;
+  parameter ONE_CONTROL   = 1;
+  parameter TWO_CONTROL   = 2;
+  parameter THREE_CONTROL = 3;
+
+  parameter ZERO_DATA  = 0;
+  parameter ONE_DATA   = 1;
+  parameter TWO_DATA   = 2;
+  parameter THREE_DATA = 3;
 
   parameter FULL  = 1;
   parameter EMPTY = 0;
@@ -92,7 +97,7 @@ module ntm_vector_multiplier #(
   reg [1:0] multiplier_ctrl_fsm_int;
 
   // Internal Signals
-  reg [INDEX_SIZE-1:0] index_loop;
+  reg [CONTROL_SIZE-1:0] index_loop;
 
   reg data_a_in_multiplier_int;
   reg data_b_in_multiplier_int;
@@ -118,13 +123,13 @@ module ntm_vector_multiplier #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      DATA_OUT <= ZERO;
+      DATA_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
 
       // Assignations
-      index_loop <= ZERO;
+      index_loop <= ZERO_DATA;
 
       data_a_in_multiplier_int <= 1'b0;
       data_b_in_multiplier_int <= 1'b0;
@@ -138,7 +143,7 @@ module ntm_vector_multiplier #(
 
           if(START == 1'b1) begin
             // Assignations
-            index_loop <= ZERO;
+            index_loop <= ZERO_DATA;
 
             // FSM Control
             multiplier_ctrl_fsm_int <= INPUT_STATE;
@@ -161,7 +166,7 @@ module ntm_vector_multiplier #(
             data_b_in_multiplier_int <= 1'b1;
           end
           if(data_a_in_multiplier_int == 1'b1 && data_b_in_multiplier_int == 1'b1) begin
-            if(index_loop == ZERO) begin
+            if(index_loop == ZERO_DATA) begin
               // Control Internal
               start_scalar_multiplier <= 1'b1;
             end
@@ -177,7 +182,7 @@ module ntm_vector_multiplier #(
         ENDER_STATE : begin
           // STEP 2
           if(ready_scalar_multiplier == 1'b1) begin
-            if(index_loop == (SIZE_IN - ONE)) begin
+            if(index_loop == (SIZE_IN - ONE_CONTROL)) begin
               // Control Outputs
               READY <= 1'b1;
 
@@ -186,7 +191,7 @@ module ntm_vector_multiplier #(
             end
             else begin
               // Control Internal
-              index_loop <= (index_loop + ONE);
+              index_loop <= (index_loop + ONE_CONTROL);
 
               // FSM Control
               multiplier_ctrl_fsm_int <= INPUT_STATE;
@@ -215,7 +220,7 @@ module ntm_vector_multiplier #(
   // MULTIPLIER
   ntm_scalar_multiplier #(
     .DATA_SIZE(DATA_SIZE),
-    .INDEX_SIZE(INDEX_SIZE)
+    .CONTROL_SIZE(CONTROL_SIZE)
   )
   scalar_multiplier(
     // GLOBAL

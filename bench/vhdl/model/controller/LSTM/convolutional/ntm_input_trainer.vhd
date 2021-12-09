@@ -47,8 +47,8 @@ use work.ntm_lstm_controller_pkg.all;
 
 entity ntm_input_trainer is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -94,10 +94,10 @@ entity ntm_input_trainer is
     B_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
-    SIZE_X_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -160,13 +160,15 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -202,8 +204,8 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
 
   -- DATA
   signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_summation   : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal length_in_vector_summation : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -219,7 +221,7 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
 
   -- DATA
   signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_multiplier   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -238,7 +240,7 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
 
   -- DATA
   signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_adder   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -256,9 +258,9 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
 
   -- DATA
   signal modulo_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_differentiation   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_differentiation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal period_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_vector_differentiation : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_vector_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -277,10 +279,10 @@ architecture ntm_input_trainer_architecture of ntm_input_trainer is
 
   -- DATA
   signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_a_i_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_a_j_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_b_i_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_b_j_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -303,10 +305,10 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      W_OUT <= ZERO;
-      K_OUT <= ZERO;
-      U_OUT <= ZERO;
-      B_OUT <= ZERO;
+      W_OUT <= ZERO_DATA;
+      K_OUT <= ZERO_DATA;
+      U_OUT <= ZERO_DATA;
+      B_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -326,7 +328,7 @@ begin
 
           -- Data Inputs
           modulo_in_vector_differentiation <= FULL;
-          size_in_vector_differentiation   <= ONE_INDEX;
+          size_in_vector_differentiation   <= ONE_CONTROL;
           data_in_vector_differentiation   <= FULL;
 
         when VECTOR_ADDER_DI_STATE =>  -- STEP 2
@@ -339,7 +341,7 @@ begin
 
           -- Data Inputs
           modulo_in_vector_adder <= FULL;
-          size_in_vector_adder   <= ONE_INDEX;
+          size_in_vector_adder   <= ONE_CONTROL;
           data_a_in_vector_adder <= FULL;
           data_b_in_vector_adder <= FULL;
 
@@ -351,7 +353,7 @@ begin
 
           -- Data Inputs
           modulo_in_vector_multiplier <= FULL;
-          size_in_vector_multiplier   <= ONE_INDEX;
+          size_in_vector_multiplier   <= ONE_CONTROL;
           data_a_in_vector_multiplier <= FULL;
           data_b_in_vector_multiplier <= FULL;
 
@@ -363,7 +365,7 @@ begin
 
           -- Data Inputs
           modulo_in_vector_multiplier <= FULL;
-          size_in_vector_multiplier   <= ONE_INDEX;
+          size_in_vector_multiplier   <= ONE_CONTROL;
           data_a_in_vector_multiplier <= FULL;
           data_b_in_vector_multiplier <= FULL;
 
@@ -375,7 +377,7 @@ begin
 
           -- Data Inputs
           modulo_in_vector_multiplier <= FULL;
-          size_in_vector_multiplier   <= ONE_INDEX;
+          size_in_vector_multiplier   <= ONE_CONTROL;
           data_a_in_vector_multiplier <= FULL;
           data_b_in_vector_multiplier <= FULL;
 
@@ -390,7 +392,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      W_OUT <= ZERO;
+      W_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -441,10 +443,10 @@ begin
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
-          size_a_i_in_matrix_product <= ONE_INDEX;
-          size_a_j_in_matrix_product <= ONE_INDEX;
-          size_b_i_in_matrix_product <= ONE_INDEX;
-          size_b_j_in_matrix_product <= ONE_INDEX;
+          size_a_i_in_matrix_product <= ONE_CONTROL;
+          size_a_j_in_matrix_product <= ONE_CONTROL;
+          size_b_i_in_matrix_product <= ONE_CONTROL;
+          size_b_j_in_matrix_product <= ONE_CONTROL;
           data_a_in_matrix_product   <= FULL;
           data_b_in_matrix_product   <= FULL;
 
@@ -474,7 +476,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      K_OUT <= ZERO;
+      K_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -525,10 +527,10 @@ begin
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
-          size_a_i_in_matrix_product <= ONE_INDEX;
-          size_a_j_in_matrix_product <= ONE_INDEX;
-          size_b_i_in_matrix_product <= ONE_INDEX;
-          size_b_j_in_matrix_product <= ONE_INDEX;
+          size_a_i_in_matrix_product <= ONE_CONTROL;
+          size_a_j_in_matrix_product <= ONE_CONTROL;
+          size_b_i_in_matrix_product <= ONE_CONTROL;
+          size_b_j_in_matrix_product <= ONE_CONTROL;
           data_a_in_matrix_product   <= FULL;
           data_b_in_matrix_product   <= FULL;
 
@@ -558,7 +560,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      U_OUT <= ZERO;
+      U_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -609,10 +611,10 @@ begin
 
           -- Data Inputs
           modulo_in_matrix_product   <= FULL;
-          size_a_i_in_matrix_product <= ONE_INDEX;
-          size_a_j_in_matrix_product <= ONE_INDEX;
-          size_b_i_in_matrix_product <= ONE_INDEX;
-          size_b_j_in_matrix_product <= ONE_INDEX;
+          size_a_i_in_matrix_product <= ONE_CONTROL;
+          size_a_j_in_matrix_product <= ONE_CONTROL;
+          size_b_i_in_matrix_product <= ONE_CONTROL;
+          size_b_j_in_matrix_product <= ONE_CONTROL;
           data_a_in_matrix_product   <= FULL;
           data_b_in_matrix_product   <= FULL;
 
@@ -642,7 +644,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      B_OUT <= ZERO;
+      B_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -709,7 +711,7 @@ begin
   vector_summation_function : ntm_vector_summation_function
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -738,7 +740,7 @@ begin
   vector_multiplier : ntm_vector_multiplier
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -766,7 +768,7 @@ begin
   vector_adder : ntm_vector_adder
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -796,7 +798,7 @@ begin
   vector_differentiation_function : ntm_vector_differentiation_function
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -826,7 +828,7 @@ begin
   matrix_product : ntm_matrix_product
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

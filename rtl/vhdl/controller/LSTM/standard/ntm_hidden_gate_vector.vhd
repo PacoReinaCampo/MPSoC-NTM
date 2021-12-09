@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity ntm_hidden_gate_vector is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -67,7 +67,7 @@ entity ntm_hidden_gate_vector is
     H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
-    SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     S_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     O_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -92,13 +92,15 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -113,7 +115,7 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Control Internal
-  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- VECTOR MULTIPLIER
   -- CONTROL
@@ -127,7 +129,7 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
 
   -- DATA
   signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_multiplier   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -143,7 +145,7 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
 
   -- DATA
   signal modulo_in_vector_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_tanh   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_tanh   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -162,7 +164,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      H_OUT <= ZERO;
+      H_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -170,7 +172,7 @@ begin
       H_OUT_ENABLE <= '0';
 
       -- Control Internal
-      index_loop <= ZERO_INDEX;
+      index_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
@@ -182,13 +184,13 @@ begin
           H_OUT_ENABLE <= '0';
 
           -- Control Internal
-          index_loop <= ZERO_INDEX;
+          index_loop <= ZERO_CONTROL;
 
           if (START = '1') then
             -- Data Outputs
-            H_OUT <= ZERO;
+            H_OUT <= ZERO_DATA;
 
-            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_tanh <= '1';
             end if;
@@ -203,7 +205,7 @@ begin
         when VECTOR_TANH_STATE =>  -- STEP 1
 
           if (data_out_enable_vector_tanh = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO_INDEX)) then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_multiplier <= '1';
             end if;
@@ -218,7 +220,7 @@ begin
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
 
           if (data_out_enable_vector_multiplier = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_L_IN) - unsigned(ONE_INDEX)) then
+            if (unsigned(index_loop) = unsigned(SIZE_L_IN) - unsigned(ONE_CONTROL)) then
               -- Control Outputs
               READY <= '1';
 
@@ -226,7 +228,7 @@ begin
               controller_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE_INDEX));
+              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
               controller_ctrl_fsm_int <= VECTOR_TANH_STATE;
@@ -275,7 +277,7 @@ begin
   vector_multiplier : ntm_vector_multiplier
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -303,7 +305,7 @@ begin
   vector_tanh_function : ntm_vector_tanh_function
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

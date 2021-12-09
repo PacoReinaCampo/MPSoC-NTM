@@ -46,8 +46,8 @@ use work.ntm_math_pkg.all;
 
 entity dnc_temporal_link_matrix is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -71,7 +71,7 @@ entity dnc_temporal_link_matrix is
     L_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1 (square matrix)
 
     -- DATA
-    SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     L_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -99,13 +99,15 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -120,8 +122,8 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Control Internal
-  signal index_i_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal index_j_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- Data Internal
   signal data_int_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -165,14 +167,14 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      L_OUT <= ZERO;
+      L_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
 
       -- Control Internal
-      index_i_loop <= ZERO_INDEX;
-      index_j_loop <= ZERO_INDEX;
+      index_i_loop <= ZERO_CONTROL;
+      index_j_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
@@ -182,8 +184,8 @@ begin
           READY <= '0';
 
           -- Control Internal
-          index_i_loop <= ZERO_INDEX;
-          index_j_loop <= ZERO_INDEX;
+          index_i_loop <= ZERO_CONTROL;
+          index_j_loop <= ZERO_CONTROL;
 
           if (START = '1') then
             -- Control Internal
@@ -203,7 +205,7 @@ begin
 
           -- Data Input
           modulo_in_scalar_adder <= FULL;
-          data_a_in_scalar_adder <= ONE;
+          data_a_in_scalar_adder <= ONE_DATA;
           data_b_in_scalar_adder <= W_IN;
 
           modulo_in_scalar_multiplier <= FULL;
@@ -251,7 +253,7 @@ begin
   scalar_adder : ntm_scalar_adder
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -275,7 +277,7 @@ begin
   scalar_multiplier : ntm_scalar_multiplier
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

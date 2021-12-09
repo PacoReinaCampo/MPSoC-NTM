@@ -48,8 +48,8 @@ use work.dnc_read_heads_pkg.all;
 entity dnc_read_heads_stimulus is
   generic (
     -- SYSTEM-SIZE
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128;
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -73,7 +73,7 @@ entity dnc_read_heads_stimulus is
     DNC_FREE_GATES_F_OUT_ENABLE : in std_logic;
 
     -- DATA
-    DNC_FREE_GATES_SIZE_R_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    DNC_FREE_GATES_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     DNC_FREE_GATES_F_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -91,8 +91,8 @@ entity dnc_read_heads_stimulus is
     DNC_READ_KEYS_K_OUT_K_ENABLE : in std_logic;
 
     -- DATA
-    DNC_READ_KEYS_SIZE_R_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
-    DNC_READ_KEYS_SIZE_W_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    DNC_READ_KEYS_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DNC_READ_KEYS_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     DNC_READ_KEYS_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -110,7 +110,7 @@ entity dnc_read_heads_stimulus is
     DNC_READ_MODES_PI_OUT_P_ENABLE : in std_logic;
 
     -- DATA
-    DNC_READ_MODES_SIZE_R_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    DNC_READ_MODES_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     DNC_READ_MODES_PI_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -125,7 +125,7 @@ entity dnc_read_heads_stimulus is
     DNC_READ_STRENGTHS_BETA_OUT_ENABLE : in  std_logic;
 
     -- DATA
-    DNC_READ_STRENGTHS_SIZE_R_IN : out std_logic_vector(INDEX_SIZE-1 downto 0);
+    DNC_READ_STRENGTHS_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     DNC_READ_STRENGTHS_BETA_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 

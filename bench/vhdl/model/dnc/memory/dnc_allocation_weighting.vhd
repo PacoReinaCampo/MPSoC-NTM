@@ -47,8 +47,8 @@ use work.dnc_core_pkg.all;
 
 entity dnc_allocation_weighting is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -66,7 +66,7 @@ entity dnc_allocation_weighting is
     A_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     -- DATA
-    SIZE_N_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -93,13 +93,15 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -114,7 +116,7 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Control Internal
-  signal index_loop : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- VECTOR ADDER
   -- CONTROL
@@ -130,7 +132,7 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
 
   -- DATA
   signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_adder   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -147,7 +149,7 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
 
   -- DATA
   signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_multiplier   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -165,8 +167,8 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
 
   -- DATA
   signal modulo_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_vector_multiplication : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_in_vector_multiplication   : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal length_in_vector_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_in_vector_multiplication   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -182,7 +184,7 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   signal phi_out_enable_sort_vector : std_logic;
 
   -- DATA
-  signal size_n_in_sort_vector : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_n_in_sort_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal u_in_sort_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
   signal phi_out_sort_vector : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -200,13 +202,13 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      A_OUT <= ZERO;
+      A_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
 
       -- Control Internal
-      index_loop <= ZERO_INDEX;
+      index_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
@@ -216,7 +218,7 @@ begin
           READY <= '0';
 
           -- Control Internal
-          index_loop <= ZERO_INDEX;
+          index_loop <= ZERO_CONTROL;
 
           if (START = '1') then
             -- Control Internal
@@ -248,7 +250,7 @@ begin
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 5
 
           if (data_out_enable_vector_multiplier = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_INDEX)) then
+            if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) then
               -- Control Outputs
               READY <= '1';
 
@@ -256,7 +258,7 @@ begin
               controller_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE_INDEX));
+              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
               controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
@@ -286,7 +288,7 @@ begin
   -- VECTOR ADDER
   modulo_in_vector_adder <= FULL;
   size_in_vector_adder   <= SIZE_N_IN;
-  data_a_in_vector_adder <= ONE;
+  data_a_in_vector_adder <= ONE_DATA;
   data_b_in_vector_adder <= phi_out_sort_vector;
 
   -- VECTOR MULTIPLICATION
@@ -305,7 +307,7 @@ begin
   vector_adder : ntm_vector_adder
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -335,7 +337,7 @@ begin
   vector_multiplier : ntm_vector_multiplier
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -363,7 +365,7 @@ begin
   vector_multiplication_function : ntm_vector_multiplication_function
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -392,7 +394,7 @@ begin
   sort_vector : dnc_sort_vector
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

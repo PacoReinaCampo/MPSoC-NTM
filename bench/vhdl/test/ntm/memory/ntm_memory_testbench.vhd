@@ -47,8 +47,8 @@ use work.ntm_memory_pkg.all;
 entity ntm_memory_testbench is
   generic (
     -- SYSTEM-SIZE
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128;
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
     Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -95,8 +95,8 @@ architecture ntm_memory_testbench_architecture of ntm_memory_testbench is
   signal w_out_enable_addressing : std_logic;
 
   -- DATA
-  signal size_n_in_addressing : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_w_in_addressing : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_n_in_addressing : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_w_in_addressing : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal k_in_addressing     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal beta_in_addressing  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -120,7 +120,7 @@ begin
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE,
 
       X => X,
       Y => Y,
@@ -173,7 +173,7 @@ begin
   addressing : ntm_addressing
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

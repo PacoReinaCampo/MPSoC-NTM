@@ -48,8 +48,8 @@ use work.ntm_lstm_controller_pkg.all;
 
 entity dnc_write_interface_vector is
   generic (
-    DATA_SIZE  : integer := 512;
-    INDEX_SIZE : integer := 128
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64
     );
   port (
     -- GLOBAL
@@ -108,9 +108,9 @@ entity dnc_write_interface_vector is
     H_OUT_ENABLE : out std_logic;       -- for l in 0 to L-1
 
     -- DATA
-    SIZE_W_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_L_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
-    SIZE_R_IN : in std_logic_vector(INDEX_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     WK_IN    : in std_logic_vector(DATA_SIZE-1 downto 0);
     WBETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -154,13 +154,15 @@ architecture dnc_write_interface_vector_architecture of dnc_write_interface_vect
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_INDEX : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, INDEX_SIZE));
-  constant ONE_INDEX  : std_logic_vector(INDEX_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, INDEX_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -207,10 +209,10 @@ architecture dnc_write_interface_vector_architecture of dnc_write_interface_vect
 
   -- DATA
   signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_a_i_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_a_j_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_b_i_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
-  signal size_b_j_in_matrix_product : std_logic_vector(INDEX_SIZE-1 downto 0);
+  signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -228,9 +230,9 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      BETA_OUT <= ZERO;
-      GA_OUT   <= ZERO;
-      GW_OUT   <= ZERO;
+      BETA_OUT <= ZERO_DATA;
+      GA_OUT   <= ZERO_DATA;
+      GW_OUT   <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -309,9 +311,9 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      K_OUT <= ZERO;
-      E_OUT <= ZERO;
-      V_OUT <= ZERO;
+      K_OUT <= ZERO_DATA;
+      E_OUT <= ZERO_DATA;
+      V_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -349,7 +351,7 @@ begin
           size_a_i_in_matrix_product <= SIZE_W_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
           size_b_i_in_matrix_product <= SIZE_L_IN;
-          size_b_j_in_matrix_product <= ONE;
+          size_b_j_in_matrix_product <= ONE_DATA;
           data_a_in_matrix_product   <= WK_IN;
           data_b_in_matrix_product   <= H_IN;
 
@@ -371,7 +373,7 @@ begin
           size_a_i_in_matrix_product <= SIZE_W_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
           size_b_i_in_matrix_product <= SIZE_L_IN;
-          size_b_j_in_matrix_product <= ONE;
+          size_b_j_in_matrix_product <= ONE_DATA;
           data_a_in_matrix_product   <= WE_IN;
           data_b_in_matrix_product   <= H_IN;
 
@@ -393,7 +395,7 @@ begin
           size_a_i_in_matrix_product <= SIZE_W_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
           size_b_i_in_matrix_product <= SIZE_L_IN;
-          size_b_j_in_matrix_product <= ONE;
+          size_b_j_in_matrix_product <= ONE_DATA;
           data_a_in_matrix_product   <= WV_IN;
           data_b_in_matrix_product   <= H_IN;
 
@@ -411,7 +413,7 @@ begin
   scalar_product : ntm_scalar_product
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL
@@ -439,7 +441,7 @@ begin
   matrix_product : ntm_matrix_product
     generic map (
       DATA_SIZE  => DATA_SIZE,
-      INDEX_SIZE => INDEX_SIZE
+      CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
       -- GLOBAL

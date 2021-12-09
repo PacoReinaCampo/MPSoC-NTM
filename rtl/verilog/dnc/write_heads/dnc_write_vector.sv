@@ -38,8 +38,8 @@
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
 module dnc_write_vector #(
-  parameter DATA_SIZE=512,
-  parameter INDEX_SIZE=512
+  parameter DATA_SIZE=128,
+  parameter CONTROL_SIZE=64
 )
   (
     // GLOBAL
@@ -70,10 +70,15 @@ module dnc_write_vector #(
   // Constants
   ///////////////////////////////////////////////////////////////////////
 
-  parameter ZERO  = 0;
-  parameter ONE   = 1;
-  parameter TWO   = 2;
-  parameter THREE = 3;
+  parameter ZERO_CONTROL  = 0;
+  parameter ONE_CONTROL   = 1;
+  parameter TWO_CONTROL   = 2;
+  parameter THREE_CONTROL = 3;
+
+  parameter ZERO_DATA  = 0;
+  parameter ONE_DATA   = 1;
+  parameter TWO_DATA   = 2;
+  parameter THREE_DATA = 3;
 
   parameter FULL  = 1;
   parameter EMPTY = 0;
@@ -88,7 +93,7 @@ module dnc_write_vector #(
   reg write_vector_ctrl_fsm_int;
 
   // Internal Signals
-  reg [INDEX_SIZE-1:0] index_loop;
+  reg [CONTROL_SIZE-1:0] index_loop;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -100,13 +105,13 @@ module dnc_write_vector #(
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      V_OUT <= ZERO;
+      V_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
 
       // Assignations
-      index_loop <= ZERO;
+      index_loop <= ZERO_DATA;
     end else begin
       case(write_vector_ctrl_fsm_int)
         STARTER_STATE : begin
@@ -116,7 +121,7 @@ module dnc_write_vector #(
 
           if(START == 1'b1) begin
             // Assignations
-            index_loop <= ZERO;
+            index_loop <= ZERO_DATA;
 
             // FSM Control
             write_vector_ctrl_fsm_int <= ENDER_STATE;
@@ -125,7 +130,7 @@ module dnc_write_vector #(
         ENDER_STATE : begin
           // STEP 1
           if(V_IN_ENABLE == 1'b1) begin
-            if(index_loop == (SIZE_W_IN - ONE)) begin
+            if(index_loop == (SIZE_W_IN - ONE_CONTROL)) begin
               // Control Outputs
               READY <= 1'b1;
 
@@ -134,7 +139,7 @@ module dnc_write_vector #(
             end
             else begin
               // Control Internal
-              index_loop <= (index_loop + ONE);
+              index_loop <= (index_loop + ONE_CONTROL);
             end
             // Data Outputs
             V_OUT <= V_IN;
