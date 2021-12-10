@@ -11,17 +11,17 @@ do ./variables.do
 ##################################################################################################
 
 ##################################################################################################
-# NTM_SCALAR_MOD_TEST 
+# NTM_SCALAR_MODULAR_MOD_TEST 
 ##################################################################################################
 
 alias ntm_scalar_modular_mod_verification_compilation {
-  echo "TEST: NTM_SCALAR_MOD_TEST"
+  echo "TEST: NTM_SCALAR_MODULAR_MOD_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_testbench.vhd
 
-  vsim -g /ntm_modular_testbench/ENABLE_NTM_SCALAR_MOD_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
+  vsim -g /ntm_modular_testbench/ENABLE_NTM_SCALAR_MODULAR_MOD_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
 
   #MACROS
   add log -r sim:/ntm_modular_testbench/*
@@ -30,8 +30,8 @@ alias ntm_scalar_modular_mod_verification_compilation {
   view -title ntm_scalar_modular_mod wave
   do $simulation_path/mpsoc/math/modular/msim/waves/ntm_scalar_modular_mod.do
 
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_MOD_TEST true 0
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_MOD_CASE_0 true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_MOD_TEST true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_MOD_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -40,17 +40,17 @@ alias ntm_scalar_modular_mod_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_SCALAR_ADDER_TEST 
+# NTM_SCALAR_MODULAR_ADDER_TEST 
 ##################################################################################################
 
 alias ntm_scalar_modular_adder_verification_compilation {
-  echo "TEST: NTM_SCALAR_ADDER_TEST"
+  echo "TEST: NTM_SCALAR_MODULAR_ADDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_testbench.vhd
 
-  vsim -g /ntm_modular_testbench/ENABLE_NTM_SCALAR_ADDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
+  vsim -g /ntm_modular_testbench/ENABLE_NTM_SCALAR_MODULAR_ADDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
 
   #MACROS
   add log -r sim:/ntm_modular_testbench/*
@@ -59,8 +59,8 @@ alias ntm_scalar_modular_adder_verification_compilation {
   view -title ntm_scalar_modular_adder wave
   do $simulation_path/mpsoc/math/modular/msim/waves/ntm_scalar_modular_adder.do
 
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_ADDER_TEST true 0
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_ADDER_CASE_0 true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_ADDER_TEST true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -69,17 +69,17 @@ alias ntm_scalar_modular_adder_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_SCALAR_MULTIPLIER_TEST 
+# NTM_SCALAR_MODULAR_MULTIPLIER_TEST 
 ##################################################################################################
 
 alias ntm_scalar_modular_multiplier_verification_compilation {
-  echo "TEST: NTM_SCALAR_MULTIPLIER_TEST"
+  echo "TEST: NTM_SCALAR_MODULAR_MULTIPLIER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_testbench.vhd
 
-  vsim -g /ntm_modular_testbench/ENABLE_NTM_SCALAR_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
+  vsim -g /ntm_modular_testbench/ENABLE_NTM_SCALAR_MODULAR_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
 
   #MACROS
   add log -r sim:/ntm_modular_testbench/*
@@ -88,8 +88,8 @@ alias ntm_scalar_modular_multiplier_verification_compilation {
   view -title ntm_scalar_modular_multiplier wave
   do $simulation_path/mpsoc/math/modular/msim/waves/ntm_scalar_modular_multiplier.do
 
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_MULTIPLIER_TEST true 0
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0 true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_TEST true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -98,17 +98,17 @@ alias ntm_scalar_modular_multiplier_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_SCALAR_INVERTER_TEST 
+# NTM_SCALAR_MODULAR_INVERTER_TEST 
 ##################################################################################################
 
 alias ntm_scalar_modular_inverter_verification_compilation {
-  echo "TEST: NTM_SCALAR_INVERTER_TEST"
+  echo "TEST: NTM_SCALAR_MODULAR_INVERTER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_testbench.vhd
 
-  vsim -g /ntm_modular_testbench/ENABLE_NTM_SCALAR_INVERTER_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
+  vsim -g /ntm_modular_testbench/ENABLE_NTM_SCALAR_MODULAR_INVERTER_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
 
   #MACROS
   add log -r sim:/ntm_modular_testbench/*
@@ -117,8 +117,8 @@ alias ntm_scalar_modular_inverter_verification_compilation {
   view -title ntm_scalar_modular_inverter wave
   do $simulation_path/mpsoc/math/modular/msim/waves/ntm_scalar_modular_inverter.do
 
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_INVERTER_TEST true 0
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_INVERTER_CASE_0 true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_INVERTER_TEST true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_INVERTER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -127,17 +127,17 @@ alias ntm_scalar_modular_inverter_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_SCALAR_DIVIDER_TEST 
+# NTM_SCALAR_MODULAR_DIVIDER_TEST 
 ##################################################################################################
 
 alias ntm_scalar_modular_divider_verification_compilation {
-  echo "TEST: NTM_SCALAR_DIVIDER_TEST"
+  echo "TEST: NTM_SCALAR_MODULAR_DIVIDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_testbench.vhd
 
-  vsim -g /ntm_modular_testbench/ENABLE_NTM_SCALAR_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
+  vsim -g /ntm_modular_testbench/ENABLE_NTM_SCALAR_MODULAR_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
 
   #MACROS
   add log -r sim:/ntm_modular_testbench/*
@@ -146,8 +146,8 @@ alias ntm_scalar_modular_divider_verification_compilation {
   view -title ntm_scalar_modular_divider wave
   do $simulation_path/mpsoc/math/modular/msim/waves/ntm_scalar_modular_divider.do
 
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_DIVIDER_TEST true 0
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_DIVIDER_CASE_0 true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_DIVIDER_TEST true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -156,17 +156,17 @@ alias ntm_scalar_modular_divider_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_SCALAR_EXPONENTIATOR_TEST 
+# NTM_SCALAR_MODULAR_EXPONENTIATOR_TEST 
 ##################################################################################################
 
 alias ntm_scalar_modular_exponentiator_verification_compilation {
-  echo "TEST: NTM_SCALAR_EXPONENTIATOR_TEST"
+  echo "TEST: NTM_SCALAR_MODULAR_EXPONENTIATOR_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_testbench.vhd
 
-  vsim -g /ntm_modular_testbench/ENABLE_NTM_SCALAR_EXPONENTIATOR_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
+  vsim -g /ntm_modular_testbench/ENABLE_NTM_SCALAR_MODULAR_EXPONENTIATOR_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
 
   #MACROS
   add log -r sim:/ntm_modular_testbench/*
@@ -175,8 +175,8 @@ alias ntm_scalar_modular_exponentiator_verification_compilation {
   view -title ntm_scalar_modular_exponentiator wave
   do $simulation_path/mpsoc/math/modular/msim/waves/ntm_scalar_modular_exponentiator.do
 
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST true 0
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0 true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_EXPONENTIATOR_TEST true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_SCALAR_MODULAR_EXPONENTIATOR_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -185,17 +185,17 @@ alias ntm_scalar_modular_exponentiator_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_VECTOR_MOD_TEST 
+# NTM_VECTOR_MODULAR_MOD_TEST 
 ##################################################################################################
 
 alias ntm_vector_modular_mod_verification_compilation {
-  echo "TEST: NTM_VECTOR_MOD_TEST"
+  echo "TEST: NTM_VECTOR_MODULAR_MOD_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_testbench.vhd
 
-  vsim -g /ntm_modular_testbench/ENABLE_NTM_VECTOR_MOD_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
+  vsim -g /ntm_modular_testbench/ENABLE_NTM_VECTOR_MODULAR_MOD_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
 
   #MACROS
   add log -r sim:/ntm_modular_testbench/*
@@ -204,8 +204,8 @@ alias ntm_vector_modular_mod_verification_compilation {
   view -title ntm_vector_modular_mod wave
   do $simulation_path/mpsoc/math/modular/msim/waves/ntm_vector_modular_mod.do
 
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_MOD_TEST true 0
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_MOD_CASE_0 true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_MOD_TEST true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_MOD_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -214,17 +214,17 @@ alias ntm_vector_modular_mod_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_VECTOR_ADDER_TEST 
+# NTM_VECTOR_MODULAR_ADDER_TEST 
 ##################################################################################################
 
 alias ntm_vector_modular_adder_verification_compilation {
-  echo "TEST: NTM_VECTOR_ADDER_TEST"
+  echo "TEST: NTM_VECTOR_MODULAR_ADDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_testbench.vhd
 
-  vsim -g /ntm_modular_testbench/ENABLE_NTM_VECTOR_ADDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
+  vsim -g /ntm_modular_testbench/ENABLE_NTM_VECTOR_MODULAR_ADDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
 
   #MACROS
   add log -r sim:/ntm_modular_testbench/*
@@ -233,8 +233,8 @@ alias ntm_vector_modular_adder_verification_compilation {
   view -title ntm_vector_modular_adder wave
   do $simulation_path/mpsoc/math/modular/msim/waves/ntm_vector_modular_adder.do
 
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_ADDER_TEST true 0
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_ADDER_CASE_0 true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_ADDER_TEST true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_ADDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -243,17 +243,17 @@ alias ntm_vector_modular_adder_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_VECTOR_MULTIPLIER_TEST 
+# NTM_VECTOR_MODULAR_MULTIPLIER_TEST 
 ##################################################################################################
 
 alias ntm_vector_modular_multiplier_verification_compilation {
-  echo "TEST: NTM_VECTOR_MULTIPLIER_TEST"
+  echo "TEST: NTM_VECTOR_MODULAR_MULTIPLIER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_testbench.vhd
 
-  vsim -g /ntm_modular_testbench/ENABLE_NTM_VECTOR_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
+  vsim -g /ntm_modular_testbench/ENABLE_NTM_VECTOR_MODULAR_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
 
   #MACROS
   add log -r sim:/ntm_modular_testbench/*
@@ -262,8 +262,8 @@ alias ntm_vector_modular_multiplier_verification_compilation {
   view -title ntm_vector_modular_multiplier wave
   do $simulation_path/mpsoc/math/modular/msim/waves/ntm_vector_modular_multiplier.do
 
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_MULTIPLIER_TEST true 0
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_0 true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_TEST true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -272,17 +272,17 @@ alias ntm_vector_modular_multiplier_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_VECTOR_INVERTER_TEST 
+# NTM_VECTOR_MODULAR_INVERTER_TEST 
 ##################################################################################################
 
 alias ntm_vector_modular_inverter_verification_compilation {
-  echo "TEST: NTM_VECTOR_INVERTER_TEST"
+  echo "TEST: NTM_VECTOR_MODULAR_INVERTER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_testbench.vhd
 
-  vsim -g /ntm_modular_testbench/ENABLE_NTM_VECTOR_INVERTER_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
+  vsim -g /ntm_modular_testbench/ENABLE_NTM_VECTOR_MODULAR_INVERTER_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
 
   #MACROS
   add log -r sim:/ntm_modular_testbench/*
@@ -291,8 +291,8 @@ alias ntm_vector_modular_inverter_verification_compilation {
   view -title ntm_vector_modular_inverter wave
   do $simulation_path/mpsoc/math/modular/msim/waves/ntm_vector_modular_inverter.do
 
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_INVERTER_TEST true 0
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_INVERTER_CASE_0 true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_INVERTER_TEST true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_INVERTER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -301,17 +301,17 @@ alias ntm_vector_modular_inverter_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_VECTOR_DIVIDER_TEST 
+# NTM_VECTOR_MODULAR_DIVIDER_TEST 
 ##################################################################################################
 
 alias ntm_vector_modular_divider_verification_compilation {
-  echo "TEST: NTM_VECTOR_DIVIDER_TEST"
+  echo "TEST: NTM_VECTOR_MODULAR_DIVIDER_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_testbench.vhd
 
-  vsim -g /ntm_modular_testbench/ENABLE_NTM_VECTOR_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
+  vsim -g /ntm_modular_testbench/ENABLE_NTM_VECTOR_MODULAR_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
 
   #MACROS
   add log -r sim:/ntm_modular_testbench/*
@@ -320,8 +320,8 @@ alias ntm_vector_modular_divider_verification_compilation {
   view -title ntm_vector_modular_divider wave
   do $simulation_path/mpsoc/math/modular/msim/waves/ntm_vector_modular_divider.do
 
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_DIVIDER_TEST true 0
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_DIVIDER_CASE_0 true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_DIVIDER_TEST true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_DIVIDER_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -330,17 +330,17 @@ alias ntm_vector_modular_divider_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_VECTOR_EXPONENTIATOR_TEST 
+# NTM_VECTOR_MODULAR_EXPONENTIATOR_TEST 
 ##################################################################################################
 
 alias ntm_vector_modular_exponentiator_verification_compilation {
-  echo "TEST: NTM_VECTOR_EXPONENTIATOR_TEST"
+  echo "TEST: NTM_VECTOR_MODULAR_EXPONENTIATOR_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/modular/ntm_modular_testbench.vhd
 
-  vsim -g /ntm_modular_testbench/ENABLE_NTM_VECTOR_EXPONENTIATOR_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
+  vsim -g /ntm_modular_testbench/ENABLE_NTM_VECTOR_MODULAR_EXPONENTIATOR_TEST=true -t ps +notimingchecks -L unisim work.ntm_modular_testbench
 
   #MACROS
   add log -r sim:/ntm_modular_testbench/*
@@ -349,8 +349,8 @@ alias ntm_vector_modular_exponentiator_verification_compilation {
   view -title ntm_vector_modular_exponentiator wave
   do $simulation_path/mpsoc/math/modular/msim/waves/ntm_vector_modular_exponentiator.do
 
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST true 0
-  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0 true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_EXPONENTIATOR_TEST true 0
+  force -freeze sim:/ntm_modular_pkg/STIMULUS_NTM_VECTOR_MODULAR_EXPONENTIATOR_CASE_0 true 0
 
   onbreak {resume}
   run -all

@@ -76,10 +76,6 @@ architecture ntm_scalar_softmax_function_architecture of ntm_scalar_softmax_func
   -- Types
   -----------------------------------------------------------------------
 
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
-
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1

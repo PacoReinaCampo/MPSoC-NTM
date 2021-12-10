@@ -88,6 +88,7 @@ architecture ntm_matrix_cosh_function_architecture of ntm_matrix_cosh_function i
 
   -----------------------------------------------------------------------
   -- Constants
+  -----------------------------------------------------------------------
 
   constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
   constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));

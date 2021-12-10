@@ -67,11 +67,6 @@ entity ntm_float_stimulus is
     -- STIMULUS SCALAR
     -----------------------------------------------------------------------
 
-    -- SCALAR MOD
-    -- CONTROL
-
-    -- DATA
-
     -- SCALAR ADDER
     -- CONTROL
     SCALAR_ADDER_START : out std_logic;
@@ -607,7 +602,7 @@ begin
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_ADDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+          if ((VECTOR_ADDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_ADDER_DATA_A_IN_ENABLE <= '1';
             VECTOR_ADDER_DATA_B_IN_ENABLE <= '1';
@@ -650,7 +645,7 @@ begin
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_ADDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+          if ((VECTOR_ADDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_ADDER_DATA_A_IN_ENABLE <= '1';
             VECTOR_ADDER_DATA_B_IN_ENABLE <= '1';
@@ -706,7 +701,7 @@ begin
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_MULTIPLIER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+          if ((VECTOR_MULTIPLIER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
             VECTOR_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
@@ -749,7 +744,7 @@ begin
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_MULTIPLIER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+          if ((VECTOR_MULTIPLIER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
             VECTOR_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
@@ -803,7 +798,7 @@ begin
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_INVERTER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_INVERTER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+          if ((VECTOR_INVERTER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_INVERTER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_INVERTER_DATA_IN_ENABLE <= '1';
 
@@ -841,7 +836,7 @@ begin
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_INVERTER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_INVERTER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+          if ((VECTOR_INVERTER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_INVERTER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_INVERTER_DATA_IN_ENABLE <= '1';
 
@@ -894,7 +889,7 @@ begin
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_DIVIDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_DIVIDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+          if ((VECTOR_DIVIDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_DIVIDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_DIVIDER_DATA_A_IN_ENABLE <= '1';
             VECTOR_DIVIDER_DATA_B_IN_ENABLE <= '1';
@@ -937,7 +932,7 @@ begin
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_DIVIDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_DIVIDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+          if ((VECTOR_DIVIDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_DIVIDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_DIVIDER_DATA_A_IN_ENABLE <= '1';
             VECTOR_DIVIDER_DATA_B_IN_ENABLE <= '1';
@@ -993,7 +988,7 @@ begin
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_EXPONENTIATOR_SIZE_IN)-unsigned(ONE_CONTROL))) then
+          if ((VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_EXPONENTIATOR_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE <= '1';
             VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE <= '1';
@@ -1036,7 +1031,7 @@ begin
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_EXPONENTIATOR_SIZE_IN)-unsigned(ONE_CONTROL))) then
+          if ((VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_EXPONENTIATOR_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE <= '1';
             VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE <= '1';
@@ -1103,7 +1098,7 @@ begin
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_ADDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+          if ((MATRIX_ADDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_ADDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_ADDER_DATA_B_IN_I_ENABLE <= '1';
@@ -1163,7 +1158,7 @@ begin
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_ADDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+          if ((MATRIX_ADDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_ADDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_ADDER_DATA_B_IN_I_ENABLE <= '1';
@@ -1237,7 +1232,7 @@ begin
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_MULTIPLIER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+          if ((MATRIX_MULTIPLIER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
@@ -1297,7 +1292,7 @@ begin
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_MULTIPLIER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+          if ((MATRIX_MULTIPLIER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
@@ -1368,7 +1363,7 @@ begin
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_INVERTER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+          if ((MATRIX_INVERTER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_INVERTER_DATA_IN_I_ENABLE <= '1';
 
@@ -1419,7 +1414,7 @@ begin
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_INVERTER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+          if ((MATRIX_INVERTER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_INVERTER_DATA_IN_I_ENABLE <= '1';
 
@@ -1487,7 +1482,7 @@ begin
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_DIVIDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+          if ((MATRIX_DIVIDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_DIVIDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
@@ -1547,7 +1542,7 @@ begin
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_DIVIDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+          if ((MATRIX_DIVIDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_DIVIDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
@@ -1621,7 +1616,7 @@ begin
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_EXPONENTIATOR_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+          if ((MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_EXPONENTIATOR_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE <= '1';
@@ -1681,7 +1676,7 @@ begin
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >== unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_EXPONENTIATOR_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+          if ((MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_EXPONENTIATOR_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE <= '1';
