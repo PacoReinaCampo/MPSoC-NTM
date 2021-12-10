@@ -1283,7 +1283,6 @@ begin
         MATRIX_MODULAR_MOD_DATA_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
@@ -1297,7 +1296,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
 
@@ -1334,7 +1333,6 @@ begin
         MATRIX_MODULAR_MOD_DATA_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
@@ -1348,7 +1346,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
 
@@ -1406,7 +1404,6 @@ begin
         MATRIX_MODULAR_ADDER_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
@@ -1422,7 +1419,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
@@ -1466,7 +1463,6 @@ begin
         MATRIX_MODULAR_ADDER_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
@@ -1482,7 +1478,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
@@ -1541,7 +1537,6 @@ begin
         MATRIX_MODULAR_MULTIPLIER_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
@@ -1557,7 +1552,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MODULAR_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
@@ -1601,7 +1596,6 @@ begin
         MATRIX_MODULAR_MULTIPLIER_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
@@ -1617,7 +1611,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MODULAR_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
@@ -1673,7 +1667,6 @@ begin
         MATRIX_MODULAR_INVERTER_DATA_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
@@ -1687,7 +1680,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';
 
@@ -1724,7 +1717,6 @@ begin
         MATRIX_MODULAR_INVERTER_DATA_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
@@ -1738,7 +1730,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';
 
@@ -1793,7 +1785,6 @@ begin
         MATRIX_MODULAR_DIVIDER_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
@@ -1809,7 +1800,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_DIVIDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_MODULAR_DIVIDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MODULAR_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MODULAR_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
@@ -1853,7 +1844,6 @@ begin
         MATRIX_MODULAR_DIVIDER_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
@@ -1869,7 +1859,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_DIVIDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_MODULAR_DIVIDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MODULAR_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MODULAR_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
@@ -1928,7 +1918,6 @@ begin
         MATRIX_MODULAR_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
@@ -1944,7 +1933,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_EXPONENTIATOR_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_EXPONENTIATOR_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_MODULAR_EXPONENTIATOR_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_EXPONENTIATOR_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MODULAR_EXPONENTIATOR_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MODULAR_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '1';
@@ -1988,7 +1977,6 @@ begin
         MATRIX_MODULAR_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
@@ -2004,7 +1992,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_EXPONENTIATOR_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_EXPONENTIATOR_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_MODULAR_EXPONENTIATOR_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_EXPONENTIATOR_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MODULAR_EXPONENTIATOR_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MODULAR_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '1';
