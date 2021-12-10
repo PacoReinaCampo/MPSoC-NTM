@@ -194,10 +194,8 @@ begin
           end if;
 
           if (data_a_in_divider_int = '1' and data_b_in_divider_int = '1') then
-            if (index_loop = ZERO_CONTROL) then
-              -- Control Internal
-              start_scalar_divider <= '1';
-            end if;
+            -- Control Internal
+            start_scalar_divider <= '1';
 
             data_a_in_divider_int <= '0';
             data_b_in_divider_int <= '0';
@@ -252,7 +250,7 @@ begin
   -- DIVIDER
   scalar_divider : ntm_scalar_modular_divider
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

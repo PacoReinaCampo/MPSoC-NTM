@@ -186,23 +186,21 @@ begin
 
             data_in_vector_inverter <= DATA_IN;
 
-            if (index_i_loop = ZERO_CONTROL) then
-              -- Control Internal
-              start_vector_inverter <= '1';
-            end if;
+            -- Control Internal
+            start_vector_inverter <= '1';
 
             data_in_enable_vector_inverter <= '1';
 
             -- FSM Control
             mod_ctrl_fsm_int <= ENDER_STATE;
           else
-            -- Control Outputs
-            DATA_OUT_I_ENABLE <= '0';
-            DATA_OUT_J_ENABLE <= '0';
-
             -- Control Internal
             data_in_enable_vector_inverter <= '0';
           end if;
+
+          -- Control Outputs
+          DATA_OUT_I_ENABLE <= '0';
+          DATA_OUT_J_ENABLE <= '0';
 
         when INPUT_J_STATE =>  -- STEP 2
 
@@ -213,22 +211,20 @@ begin
 
             data_in_vector_inverter <= DATA_IN;
 
-            if (index_j_loop = ZERO_CONTROL) then
-              -- Control Internal
-              start_vector_inverter <= '1';
-            end if;
+            -- Control Internal
+            start_vector_inverter <= '1';
 
             data_in_enable_vector_inverter <= '1';
 
             -- FSM Control
             mod_ctrl_fsm_int <= ENDER_STATE;
           else
-            -- Control Outputs
-            DATA_OUT_J_ENABLE <= '0';
-
             -- Control Internal
             data_in_enable_vector_inverter <= '0';
           end if;
+
+          -- Control Outputs
+          DATA_OUT_J_ENABLE <= '0';
 
         when ENDER_STATE =>  -- STEP 3
 
@@ -280,7 +276,7 @@ begin
   -- INVERTER
   vector_inverter : ntm_vector_modular_inverter
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

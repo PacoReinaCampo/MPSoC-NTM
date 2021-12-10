@@ -374,7 +374,7 @@ begin
   -- VECTOR ADDER
   vector_adder : ntm_vector_adder
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -404,7 +404,7 @@ begin
   -- VECTOR CONVOLUTION
   vector_convolution_function : ntm_vector_convolution_function
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -436,7 +436,7 @@ begin
   -- VECTOR LOGISTIC
   vector_logistic_function : ntm_vector_logistic_function
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

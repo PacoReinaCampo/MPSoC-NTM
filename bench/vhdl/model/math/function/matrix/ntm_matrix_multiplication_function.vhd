@@ -326,7 +326,7 @@ begin
   -- MULTIPLICATION
   vector_multiplication_function : ntm_vector_multiplication_function
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

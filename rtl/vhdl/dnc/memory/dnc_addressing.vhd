@@ -813,7 +813,7 @@ begin
   -- ALLOCATION WEIGHTING
   allocation_weighting : dnc_allocation_weighting
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -842,7 +842,7 @@ begin
   -- BACKWARD WEIGHTING
   backward_weighting : dnc_backward_weighting
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -883,7 +883,7 @@ begin
   -- FORWARD WEIGHTING
   forward_weighting : dnc_forward_weighting
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -924,7 +924,7 @@ begin
   -- MEMORY MATRIX
   memory_matrix : dnc_memory_matrix
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -966,7 +966,7 @@ begin
   -- MEMORY RETENTION VECTOR
   memory_retention_vector : dnc_memory_retention_vector
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1003,7 +1003,7 @@ begin
   -- PRECEDENCE WEIGHTING
   precedence_weighting : dnc_precedence_weighting
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1034,7 +1034,7 @@ begin
   -- READ CONTENT WEIGHTING
   read_content_weighting : dnc_read_content_weighting
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1072,7 +1072,7 @@ begin
   -- READ VECTORS
   read_vectors : dnc_read_vectors
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1113,7 +1113,7 @@ begin
   -- READ WEIGHTING
   read_weighting : dnc_read_weighting
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1168,7 +1168,7 @@ begin
   -- TEMPORAL LINK MATRIX
   temporal_link_matrix : dnc_temporal_link_matrix
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1205,7 +1205,7 @@ begin
   -- USAGE VECTOR
   usage_vector : dnc_usage_vector
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1238,7 +1238,7 @@ begin
   -- WRITE CONTENT WEIGHTING
   write_content_weighting : dnc_write_content_weighting
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1274,7 +1274,7 @@ begin
   -- WRITE WEIGHTING
   write_weighting : dnc_write_weighting
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

@@ -22,10 +22,9 @@ add wave -noupdate /ntm_float_testbench/ntm_vector_inverter_test/vector_inverter
 
 add wave -noupdate /ntm_float_testbench/ntm_vector_inverter_test/vector_inverter/inverter_ctrl_fsm_int
 add wave -noupdate /ntm_float_testbench/ntm_vector_inverter_test/vector_inverter/index_loop
-add wave -noupdate /ntm_float_testbench/ntm_vector_inverter_test/vector_inverter/data_in_inverter_int
 
 add wave -noupdate /ntm_float_testbench/ntm_vector_inverter_test/vector_inverter/start_scalar_inverter
-add wave -noupdate /ntm_float_testbench/ntm_vector_inverter_test/vector_inverter/inverterulo_in_scalar_inverter
+add wave -noupdate /ntm_float_testbench/ntm_vector_inverter_test/vector_inverter/modulo_in_scalar_inverter
 add wave -noupdate /ntm_float_testbench/ntm_vector_inverter_test/vector_inverter/data_in_scalar_inverter
 add wave -noupdate /ntm_float_testbench/ntm_vector_inverter_test/vector_inverter/ready_scalar_inverter
 add wave -noupdate /ntm_float_testbench/ntm_vector_inverter_test/vector_inverter/data_out_scalar_inverter

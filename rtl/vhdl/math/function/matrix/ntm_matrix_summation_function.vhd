@@ -326,7 +326,7 @@ begin
   -- SUMMATION
   vector_summation_function : ntm_vector_summation_function
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

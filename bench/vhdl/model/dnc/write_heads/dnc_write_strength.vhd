@@ -126,7 +126,7 @@ begin
   -- SCALAR ONEPLUS
   ntm_scalar_oneplus_function_i : ntm_scalar_oneplus_function
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

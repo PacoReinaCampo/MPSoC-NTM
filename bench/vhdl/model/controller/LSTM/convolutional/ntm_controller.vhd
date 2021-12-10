@@ -1103,7 +1103,7 @@ begin
   -- ACTIVATION GATE VECTOR
   activation_gate_vector : ntm_activation_gate_vector
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1178,7 +1178,7 @@ begin
   -- ACTIVATION TRAINER
   activation_trainer : ntm_activation_trainer
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1247,7 +1247,7 @@ begin
   -- INTPUT GATE VECTOR
   input_gate_vector : ntm_input_gate_vector
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1322,7 +1322,7 @@ begin
   -- INPUT TRAINER
   input_trainer : ntm_input_trainer
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1391,7 +1391,7 @@ begin
   -- OUTPUT GATE VECTOR
   output_gate_vector : ntm_output_gate_vector
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1466,7 +1466,7 @@ begin
   -- OUTPUT TRAINER
   output_trainer : ntm_output_trainer
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1532,7 +1532,7 @@ begin
   -- FORGET GATE VECTOR
   forget_gate_vector : ntm_forget_gate_vector
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1607,7 +1607,7 @@ begin
   -- FORGET TRAINER
   forget_trainer : ntm_forget_trainer
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1673,7 +1673,7 @@ begin
   -- STATE GATE VECTOR
   state_gate_vector : ntm_state_gate_vector
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1711,7 +1711,7 @@ begin
   -- HIDDEN GATE VECTOR
   hidden_gate_vector : ntm_hidden_gate_vector
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

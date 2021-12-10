@@ -317,7 +317,7 @@ begin
   -- COSINE SIMILARITY
   scalar_cosine_similarity_function : ntm_scalar_cosine_similarity_function
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

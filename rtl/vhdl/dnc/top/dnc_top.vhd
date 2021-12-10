@@ -1056,7 +1056,7 @@ begin
   -- CONTROLLER
   ntm_controller_i : ntm_controller
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1132,7 +1132,7 @@ begin
   -- OUTPUT VECTOR
   output_vector_i : dnc_output_vector
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1192,7 +1192,7 @@ begin
   -- FREE GATES
   free_gates : dnc_free_gates
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1219,7 +1219,7 @@ begin
   -- READ KEYS
   read_keys : dnc_read_keys
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1249,7 +1249,7 @@ begin
   -- READ MODES
   read_modes : dnc_read_modes
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1278,7 +1278,7 @@ begin
   -- READ STRENGTHS
   read_strengths : dnc_read_strengths
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1304,7 +1304,7 @@ begin
   -- READ INTERFACE VECTOR
   read_interface_vector : dnc_read_interface_vector
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1385,7 +1385,7 @@ begin
   -- ALLOCATION GATE
   allocation_gate : dnc_allocation_gate
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1406,7 +1406,7 @@ begin
   -- ERASE VECTOR
   erase_vector : dnc_erase_vector
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1433,7 +1433,7 @@ begin
   -- WRITE GATE
   write_gate : dnc_write_gate
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1454,7 +1454,7 @@ begin
   -- WRITE KEY
   write_key : dnc_write_key
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1481,7 +1481,7 @@ begin
   -- WRITE STRENGTH
   write_strength : dnc_write_strength
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1502,7 +1502,7 @@ begin
   -- WRITE VECTOR
   write_vector : dnc_write_vector
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1529,7 +1529,7 @@ begin
   -- WRITE INTERFACE VECTOR
   write_interface_vector : dnc_write_interface_vector
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1617,7 +1617,7 @@ begin
   -- ADDRESSING
   addressing : dnc_addressing
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

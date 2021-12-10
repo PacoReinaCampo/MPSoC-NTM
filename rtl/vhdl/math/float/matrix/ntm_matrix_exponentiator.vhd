@@ -203,12 +203,12 @@ begin
 
             data_a_in_i_exponentiator_int <= '1';
           else
-            -- Control Outputs
-            DATA_OUT_I_ENABLE <= '0';
-
             -- Control Internal
             data_a_in_enable_vector_exponentiator <= '0';
           end if;
+
+          -- Control Outputs
+          DATA_OUT_I_ENABLE <= '0';
 
           if (DATA_B_IN_I_ENABLE = '1') then
             -- Data Inputs
@@ -219,18 +219,16 @@ begin
 
             data_b_in_i_exponentiator_int <= '1';
           else
-            -- Control Outputs
-            DATA_OUT_J_ENABLE <= '0';
-
             -- Control Internal
             data_b_in_enable_vector_exponentiator <= '0';
           end if;
 
+          -- Control Outputs
+          DATA_OUT_J_ENABLE <= '0';
+
           if (data_a_in_i_exponentiator_int = '1' and data_b_in_i_exponentiator_int = '1') then
-            if (index_i_loop = ZERO_CONTROL) then
-              -- Control Internal
-              start_vector_exponentiator <= '1';
-            end if;
+            -- Control Internal
+            start_vector_exponentiator <= '1';
 
             data_a_in_i_exponentiator_int <= '0';
             data_b_in_i_exponentiator_int <= '0';
@@ -266,18 +264,16 @@ begin
 
             data_b_in_j_exponentiator_int <= '1';
           else
-            -- Control Outputs
-            DATA_OUT_J_ENABLE <= '0';
-
             -- Control Internal
             data_b_in_enable_vector_exponentiator <= '0';
           end if;
 
+          -- Control Outputs
+          DATA_OUT_J_ENABLE <= '0';
+
           if (data_a_in_j_exponentiator_int = '1' and data_b_in_j_exponentiator_int = '1') then
-            if (index_j_loop = ZERO_CONTROL) then
-              -- Control Internal
-              start_vector_exponentiator <= '1';
-            end if;
+            -- Control Internal
+            start_vector_exponentiator <= '1';
 
             data_a_in_j_exponentiator_int <= '0';
             data_b_in_j_exponentiator_int <= '0';
@@ -345,7 +341,7 @@ begin
   -- EXPONENTIATOR
   vector_exponentiator : ntm_vector_exponentiator
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

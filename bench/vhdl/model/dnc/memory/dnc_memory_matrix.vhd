@@ -811,7 +811,7 @@ begin
   -- MATRIX ADDER
   matrix_adder : ntm_matrix_adder
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -845,7 +845,7 @@ begin
   -- MATRIX MULTIPLIER
   matrix_multiplier : ntm_matrix_multiplier
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -877,7 +877,7 @@ begin
   -- MATRIX TRANSPOSE
   matrix_transpose : ntm_matrix_transpose
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -906,7 +906,7 @@ begin
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

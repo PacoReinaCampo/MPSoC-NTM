@@ -25,7 +25,7 @@ add wave -noupdate /ntm_float_testbench/ntm_matrix_inverter_test/matrix_inverter
 add wave -noupdate /ntm_float_testbench/ntm_matrix_inverter_test/matrix_inverter/data_in_inverter_int
 
 add wave -noupdate /ntm_float_testbench/ntm_matrix_inverter_test/matrix_inverter/start_scalar_inverter
-add wave -noupdate /ntm_float_testbench/ntm_matrix_inverter_test/matrix_inverter/inverterulo_in_scalar_inverter
+add wave -noupdate /ntm_float_testbench/ntm_matrix_inverter_test/matrix_inverter/modulo_in_scalar_inverter
 add wave -noupdate /ntm_float_testbench/ntm_matrix_inverter_test/matrix_inverter/data_in_scalar_inverter
 add wave -noupdate /ntm_float_testbench/ntm_matrix_inverter_test/matrix_inverter/ready_scalar_inverter
 add wave -noupdate /ntm_float_testbench/ntm_matrix_inverter_test/matrix_inverter/data_out_scalar_inverter

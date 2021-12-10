@@ -197,7 +197,7 @@ begin
   -- SCALAR ADDER
   ntm_scalar_adder_i : ntm_scalar_adder
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -221,7 +221,7 @@ begin
   -- SCALAR MULTIPLIER
   ntm_scalar_multiplier_i : ntm_scalar_multiplier
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

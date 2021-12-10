@@ -784,7 +784,7 @@ begin
   -- CONTROLLER
   controller : ntm_controller
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -860,7 +860,7 @@ begin
   -- OUTPUT VECTOR
   output_vector : ntm_output_vector
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -916,7 +916,7 @@ begin
   -- INTERFACE VECTOR
   interface_vector : ntm_interface_vector
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -991,7 +991,7 @@ begin
   -- READING
   reading : ntm_reading
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1027,7 +1027,7 @@ begin
   -- WRITING
   writing : ntm_writing
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1062,7 +1062,7 @@ begin
   -- ERASING
   erasing : ntm_erasing
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -1101,7 +1101,7 @@ begin
   -- ADDRESSING
   addressing : ntm_addressing
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

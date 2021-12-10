@@ -152,7 +152,7 @@ begin
   -- VECTOR SOFTMAX
   vector_softmax_function : ntm_vector_softmax_function
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

@@ -192,10 +192,8 @@ begin
 
             data_in_vector_mod <= DATA_IN;
 
-            if (index_i_loop = ZERO_CONTROL) then
-              -- Control Internal
-              start_vector_mod <= '1';
-            end if;
+            -- Control Internal
+            start_vector_mod <= '1';
 
             data_in_enable_vector_mod <= '1';
 
@@ -204,13 +202,13 @@ begin
             -- FSM Control
             mod_ctrl_fsm_int <= ENDER_STATE;
           else
-            -- Control Outputs
-            DATA_OUT_I_ENABLE <= '0';
-            DATA_OUT_J_ENABLE <= '0';
-
             -- Control Internal
             data_in_enable_vector_mod <= '0';
           end if;
+
+          -- Control Outputs
+          DATA_OUT_I_ENABLE <= '0';
+          DATA_OUT_J_ENABLE <= '0';
 
         when INPUT_J_STATE =>  -- STEP 2
 
@@ -221,10 +219,8 @@ begin
 
             data_in_vector_mod <= DATA_IN;
 
-            if (index_j_loop = ZERO_CONTROL) then
-              -- Control Internal
-              start_vector_mod <= '1';
-            end if;
+            -- Control Internal
+            start_vector_mod <= '1';
 
             data_in_enable_vector_mod <= '1';
 
@@ -233,12 +229,12 @@ begin
             -- FSM Control
             mod_ctrl_fsm_int <= ENDER_STATE;
           else
-            -- Control Outputs
-            DATA_OUT_J_ENABLE <= '0';
-
             -- Control Internal
             data_in_enable_vector_mod <= '0';
           end if;
+
+          -- Control Outputs
+          DATA_OUT_J_ENABLE <= '0';
 
         when ENDER_STATE =>  -- STEP 3
 
@@ -293,7 +289,7 @@ begin
   -- MOD
   vector_mod : ntm_vector_modular_mod
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

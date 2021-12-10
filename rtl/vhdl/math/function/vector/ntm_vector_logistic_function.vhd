@@ -212,7 +212,7 @@ begin
   -- LOGISTIC
   scalar_logistic_function : ntm_scalar_logistic_function
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

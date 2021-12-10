@@ -173,10 +173,8 @@ begin
 
             data_in_scalar_mod <= DATA_IN;
 
-            if (index_loop = ZERO_CONTROL) then
-              -- Control Internal
-              start_scalar_mod <= '1';
-            end if;
+            -- Control Internal
+            start_scalar_mod <= '1';
 
             -- FSM Control
             mod_ctrl_fsm_int <= ENDER_STATE;
@@ -222,7 +220,7 @@ begin
   -- MOD
   scalar_mod : ntm_scalar_modular_mod
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

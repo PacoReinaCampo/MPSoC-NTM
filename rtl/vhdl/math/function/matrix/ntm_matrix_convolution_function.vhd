@@ -409,7 +409,7 @@ begin
   -- CONVOLUTION
   vector_convolution_function : ntm_vector_convolution_function
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

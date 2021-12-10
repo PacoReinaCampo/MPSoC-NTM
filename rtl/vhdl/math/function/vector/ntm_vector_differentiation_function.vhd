@@ -272,7 +272,7 @@ begin
   -- SCALAR DIFFERENTIATION
   scalar_differentiation_function : ntm_scalar_differentiation_function
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

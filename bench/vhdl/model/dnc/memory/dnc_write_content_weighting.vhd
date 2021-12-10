@@ -178,7 +178,7 @@ begin
   -- VECTOR CONTENT BASED ADDRESSING
   dnc_content_based_addressing_i : dnc_content_based_addressing
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

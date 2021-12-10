@@ -328,7 +328,7 @@ begin
   -- VECTOR DIFFERENTIATION
   vector_differentiation_function : ntm_vector_differentiation_function
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

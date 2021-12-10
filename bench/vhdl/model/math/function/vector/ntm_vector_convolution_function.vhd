@@ -317,7 +317,7 @@ begin
   -- CONVOLUTION
   scalar_convolution_function : ntm_scalar_convolution_function
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

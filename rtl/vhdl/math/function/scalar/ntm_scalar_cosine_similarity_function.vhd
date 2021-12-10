@@ -321,7 +321,7 @@ begin
   -- SCALAR MULTIPLIER
   scalar_multiplier : ntm_scalar_multiplier
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -343,7 +343,7 @@ begin
   -- SCALAR DIVIDER
   scalar_divider : ntm_scalar_divider
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -365,7 +365,7 @@ begin
   -- SCALAR PRODUCT AB
   scalar_product_ab : ntm_scalar_product
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -393,7 +393,7 @@ begin
   -- SCALAR PRODUCT AA
   scalar_product_aa : ntm_scalar_product
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -421,7 +421,7 @@ begin
   -- SCALAR PRODUCT BB
   scalar_product_bb : ntm_scalar_product
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
