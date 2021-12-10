@@ -9,32 +9,32 @@ add wave -noupdate -divider {=========================================}
 add wave -noupdate -divider {NTM MATRIX ADDER TEST}
 add wave -noupdate -divider {=========================================}
 
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/CLK
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/RST
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/START
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/OPERATION
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/MODULO_IN
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/SIZE_IN
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/DATA_A_IN_ENABLE
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/DATA_A_IN
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/DATA_B_IN_ENABLE
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/DATA_B_IN
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/READY
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/DATA_OUT_ENABLE
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/DATA_OUT
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/CLK
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/RST
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/START
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/OPERATION
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/MODULO_IN
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/SIZE_IN
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/DATA_A_IN_ENABLE
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/DATA_A_IN
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/DATA_B_IN_ENABLE
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/DATA_B_IN
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/READY
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/DATA_OUT_ENABLE
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/DATA_OUT
 
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/adder_ctrl_fsm_int
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/index_loop
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/data_a_in_adder_int
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/data_b_in_adder_int
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/adder_ctrl_fsm_int
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/index_loop
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/data_a_in_adder_int
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/data_b_in_adder_int
 
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/start_scalar_adder
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/operation_scalar_adder
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/modulo_in_scalar_adder
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/data_a_in_scalar_adder
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/data_b_in_scalar_adder
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/ready_scalar_adder
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_adder_test/matrix_adder/data_out_scalar_adder
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/start_scalar_adder
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/operation_scalar_adder
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/modulo_in_scalar_adder
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/data_a_in_scalar_adder
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/data_b_in_scalar_adder
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/ready_scalar_adder
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_adder/data_out_scalar_adder
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

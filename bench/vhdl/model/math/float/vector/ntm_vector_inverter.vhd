@@ -127,7 +127,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- 1 = DATA_OUT · DATA_IN mod MODULO_IN
+  -- DATA_OUT = 1 / DATA_IN  = 1 / M_IN · 2^(E_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -180,10 +180,10 @@ begin
 
             -- FSM Control
             inverter_ctrl_fsm_int <= ENDER_STATE;
-          else
-            -- Control Outputs
-            DATA_OUT_ENABLE <= '0';
           end if;
+
+          -- Control Outputs
+          DATA_OUT_ENABLE <= '0';
 
         when ENDER_STATE =>  -- STEP 2
 

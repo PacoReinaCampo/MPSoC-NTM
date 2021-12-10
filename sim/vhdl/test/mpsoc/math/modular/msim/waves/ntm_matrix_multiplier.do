@@ -9,30 +9,30 @@ add wave -noupdate -divider {=========================================}
 add wave -noupdate -divider {NTM MATRIX MULTIPLIER TEST}
 add wave -noupdate -divider {=========================================}
 
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/CLK
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/RST
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/START
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/MODULO_IN
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/SIZE_IN
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/DATA_A_IN_ENABLE
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/DATA_A_IN
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/DATA_B_IN_ENABLE
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/DATA_B_IN
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/READY
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/DATA_OUT_ENABLE
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/DATA_OUT
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/CLK
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/RST
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/START
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/MODULO_IN
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/SIZE_IN
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/DATA_A_IN_ENABLE
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/DATA_A_IN
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/DATA_B_IN_ENABLE
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/DATA_B_IN
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/READY
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/DATA_OUT_ENABLE
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/DATA_OUT
 
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/multiplier_ctrl_fsm_int
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/index_loop
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/data_a_in_multiplier_int
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/data_b_in_multiplier_int
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/multiplier_ctrl_fsm_int
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/index_loop
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/data_a_in_multiplier_int
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/data_b_in_multiplier_int
 
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/start_scalar_multiplier
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/modulo_in_scalar_multiplier
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/data_a_in_scalar_multiplier
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/data_b_in_scalar_multiplier
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/ready_scalar_multiplier
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_multiplier_test/matrix_multiplier/data_out_scalar_multiplier
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/start_scalar_multiplier
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/modulo_in_scalar_multiplier
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/data_a_in_scalar_multiplier
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/data_b_in_scalar_multiplier
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/ready_scalar_multiplier
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_multiplier_test/matrix_multiplier/data_out_scalar_multiplier
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

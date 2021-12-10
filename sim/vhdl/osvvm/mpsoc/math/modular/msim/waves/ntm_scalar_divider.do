@@ -9,19 +9,19 @@ add wave -noupdate -divider {=========================================}
 add wave -noupdate -divider {NTM SCALAR DIVIDER TEST}
 add wave -noupdate -divider {=========================================}
 
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_divider_test/scalar_divider/CLK
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_divider_test/scalar_divider/RST
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_divider_test/scalar_divider/START
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_divider_test/scalar_divider/MODULO_IN
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_divider_test/scalar_divider/DATA_A_IN
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_divider_test/scalar_divider/DATA_B_IN
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_divider_test/scalar_divider/READY
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_divider_test/scalar_divider/DATA_OUT
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_divider_test/scalar_divider/CLK
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_divider_test/scalar_divider/RST
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_divider_test/scalar_divider/START
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_divider_test/scalar_divider/MODULO_IN
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_divider_test/scalar_divider/DATA_A_IN
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_divider_test/scalar_divider/DATA_B_IN
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_divider_test/scalar_divider/READY
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_divider_test/scalar_divider/DATA_OUT
 
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_divider_test/scalar_divider/divider_ctrl_fsm_int
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_divider_test/scalar_divider/u_int
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_divider_test/scalar_divider/v_int
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_divider_test/scalar_divider/divider_int
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_divider_test/scalar_divider/divider_ctrl_fsm_int
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_divider_test/scalar_divider/u_int
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_divider_test/scalar_divider/v_int
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_divider_test/scalar_divider/divider_int
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

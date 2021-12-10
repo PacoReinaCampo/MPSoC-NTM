@@ -9,16 +9,16 @@ add wave -noupdate -divider {=========================================}
 add wave -noupdate -divider {NTM SCALAR MOD TEST}
 add wave -noupdate -divider {=========================================}
 
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_mod_test/scalar_mod/CLK
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_mod_test/scalar_mod/RST
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_mod_test/scalar_mod/START
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_mod_test/scalar_mod/MODULO_IN
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_mod_test/scalar_mod/DATA_IN
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_mod_test/scalar_mod/READY
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_mod_test/scalar_mod/DATA_OUT
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_mod_test/scalar_mod/CLK
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_mod_test/scalar_mod/RST
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_mod_test/scalar_mod/START
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_mod_test/scalar_mod/MODULO_IN
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_mod_test/scalar_mod/DATA_IN
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_mod_test/scalar_mod/READY
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_mod_test/scalar_mod/DATA_OUT
 
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_mod_test/scalar_mod/mod_ctrl_fsm_int
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_mod_test/scalar_mod/mod_int
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_mod_test/scalar_mod/mod_ctrl_fsm_int
+add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_mod_test/scalar_mod/mod_int
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

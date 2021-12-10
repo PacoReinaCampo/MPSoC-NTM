@@ -137,7 +137,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_B_IN + DATA_A_IN mod MODULO_IN
+  -- DATA_OUT = DATA_A_IN ± DATA_B_IN = M_A_IN · 2^(E_A_IN) ± M_B_IN · 2^(E_B_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -215,10 +215,10 @@ begin
 
             -- FSM Control
             adder_ctrl_fsm_int <= ENDER_STATE;
-          else
-            -- Control Outputs
-            DATA_OUT_ENABLE <= '0';
           end if;
+
+          -- Control Outputs
+          DATA_OUT_ENABLE <= '0';
 
         when ENDER_STATE =>  -- STEP 2
 

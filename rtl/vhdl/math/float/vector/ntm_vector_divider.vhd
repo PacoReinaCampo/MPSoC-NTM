@@ -207,10 +207,10 @@ begin
 
             -- FSM Control
             divider_ctrl_fsm_int <= ENDER_STATE;
-          else
-            -- Control Outputs
-            DATA_OUT_ENABLE <= '0';
           end if;
+
+          -- Control Outputs
+          DATA_OUT_ENABLE <= '0';
 
         when ENDER_STATE =>  -- STEP 2
 
