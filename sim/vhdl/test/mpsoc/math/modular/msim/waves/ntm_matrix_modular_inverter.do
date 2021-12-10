@@ -13,7 +13,8 @@ add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_inverter_test/matri
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_inverter_test/matrix_modular_inverter/RST
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_inverter_test/matrix_modular_inverter/START
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_inverter_test/matrix_modular_inverter/MODULO_IN
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_inverter_test/matrix_modular_inverter/SIZE_IN
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_inverter_test/matrix_modular_inverter/SIZE_I_IN
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_inverter_test/matrix_modular_inverter/SIZE_J_IN
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_inverter_test/matrix_modular_inverter/DATA_IN_I_ENABLE
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_inverter_test/matrix_modular_inverter/DATA_IN_J_ENABLE
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_inverter_test/matrix_modular_inverter/DATA_IN

@@ -155,14 +155,19 @@ begin
       DATA_OUT_J_ENABLE <= '0';
 
       -- Control Internal
+      start_vector_mod <= '0';
+
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
+
+      data_in_enable_vector_mod <= '0';
 
       data_in_i_mod_int <= '0';
       data_in_j_mod_int <= '0';
 
       -- Data Internal
       modulo_in_vector_mod <= ZERO_DATA;
+      size_in_vector_mod   <= ZERO_CONTROL;
       data_in_vector_mod   <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
@@ -181,12 +186,12 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            mod_ctrl_fsm_int <= INPUT_I_STATE;
+            mod_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
         when INPUT_I_STATE =>  -- STEP 1
 
-          if ((DATA_IN_I_ENABLE = '1') or (index_i_loop = ZERO_CONTROL)) then
+          if (DATA_IN_I_ENABLE = '1') then
             -- Data Inputs
             modulo_in_vector_mod <= MODULO_IN;
 
