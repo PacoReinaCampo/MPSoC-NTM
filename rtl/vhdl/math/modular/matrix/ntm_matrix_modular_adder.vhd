@@ -247,6 +247,9 @@ begin
 
             operation_vector_adder <= OPERATION;
 
+            data_a_in_enable_vector_adder <= '0';
+            data_b_in_enable_vector_adder <= '0';
+
             data_a_in_i_adder_int <= '0';
             data_b_in_i_adder_int <= '0';
 
@@ -294,6 +297,9 @@ begin
 
             operation_vector_adder <= OPERATION;
 
+            data_a_in_enable_vector_adder <= '0';
+            data_b_in_enable_vector_adder <= '0';
+
             data_a_in_j_adder_int <= '0';
             data_b_in_j_adder_int <= '0';
 
@@ -307,7 +313,7 @@ begin
 
         when ENDER_STATE =>  -- STEP 3
 
-          if (ready_vector_adder = '1') then
+          if (data_out_enable_vector_adder = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
               -- Control Outputs
               READY <= '1';

@@ -198,9 +198,6 @@ begin
 
             -- FSM Control
             mod_ctrl_fsm_int <= ENDER_STATE;
-          else
-            -- Control Internal
-            data_in_enable_vector_mod <= '0';
           end if;
 
           -- Control Outputs
@@ -223,9 +220,6 @@ begin
 
             -- FSM Control
             mod_ctrl_fsm_int <= ENDER_STATE;
-          else
-            -- Control Internal
-            data_in_enable_vector_mod <= '0';
           end if;
 
           -- Control Outputs
@@ -233,7 +227,7 @@ begin
 
         when ENDER_STATE =>  -- STEP 3
 
-          if (ready_vector_mod = '1') then
+          if (data_out_enable_vector_mod = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
               -- Control Outputs
               READY <= '1';
@@ -269,6 +263,8 @@ begin
           else
             -- Control Internal
             start_vector_mod <= '0';
+
+            data_in_enable_vector_mod <= '0';
           end if;
 
         when others =>
