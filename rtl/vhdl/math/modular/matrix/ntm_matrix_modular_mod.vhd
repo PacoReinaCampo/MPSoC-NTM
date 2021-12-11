@@ -115,9 +115,6 @@ architecture ntm_matrix_modular_mod_architecture of ntm_matrix_modular_mod is
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_in_i_mod_int : std_logic;
-  signal data_in_j_mod_int : std_logic;
-
   -- MOD
   -- CONTROL
   signal start_vector_mod : std_logic;
@@ -162,9 +159,6 @@ begin
 
       data_in_enable_vector_mod <= '0';
 
-      data_in_i_mod_int <= '0';
-      data_in_j_mod_int <= '0';
-
       -- Data Internal
       modulo_in_vector_mod <= ZERO_DATA;
       size_in_vector_mod   <= ZERO_CONTROL;
@@ -202,8 +196,6 @@ begin
 
             data_in_enable_vector_mod <= '1';
 
-            data_in_i_mod_int <= '1';
-
             -- FSM Control
             mod_ctrl_fsm_int <= ENDER_STATE;
           else
@@ -228,8 +220,6 @@ begin
             start_vector_mod <= '1';
 
             data_in_enable_vector_mod <= '1';
-
-            data_in_j_mod_int <= '1';
 
             -- FSM Control
             mod_ctrl_fsm_int <= ENDER_STATE;
@@ -279,9 +269,6 @@ begin
           else
             -- Control Internal
             start_vector_mod <= '0';
-
-            data_in_i_mod_int <= '0';
-            data_in_j_mod_int <= '0';
           end if;
 
         when others =>

@@ -166,9 +166,16 @@ begin
       DATA_OUT_I_ENABLE <= '0';
       DATA_OUT_J_ENABLE <= '0';
 
-      -- Assignations
+      -- Control Internal
+      start_vector_adder <= '0';
+
+      operation_vector_adder <= '0';
+
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
+
+      data_a_in_enable_vector_adder <= '0';
+      data_b_in_enable_vector_adder <= '0';
 
       data_a_in_i_adder_int <= '0';
       data_a_in_j_adder_int <= '0';
@@ -177,6 +184,7 @@ begin
 
       -- Data Internal
       modulo_in_vector_adder <= ZERO_DATA;
+      size_in_vector_adder   <= ZERO_CONTROL;
       data_a_in_vector_adder <= ZERO_DATA;
       data_b_in_vector_adder <= ZERO_DATA;
 
@@ -187,13 +195,16 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          DATA_OUT_I_ENABLE <= '0';
+          DATA_OUT_J_ENABLE <= '0';
+
           if (START = '1') then
             -- Assignations
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            adder_ctrl_fsm_int <= INPUT_I_STATE;
+            adder_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
         when INPUT_I_STATE =>  -- STEP 1
@@ -233,6 +244,8 @@ begin
           if (data_a_in_i_adder_int = '1' and data_b_in_i_adder_int = '1') then
             -- Control Internal
             start_vector_adder <= '1';
+
+            operation_vector_adder <= OPERATION;
 
             data_a_in_i_adder_int <= '0';
             data_b_in_i_adder_int <= '0';
@@ -278,6 +291,8 @@ begin
           if (data_a_in_j_adder_int = '1' and data_b_in_j_adder_int = '1') then
             -- Control Internal
             start_vector_adder <= '1';
+
+            operation_vector_adder <= OPERATION;
 
             data_a_in_j_adder_int <= '0';
             data_b_in_j_adder_int <= '0';

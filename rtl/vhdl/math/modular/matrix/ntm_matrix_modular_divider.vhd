@@ -162,9 +162,14 @@ begin
       DATA_OUT_I_ENABLE <= '0';
       DATA_OUT_J_ENABLE <= '0';
 
-      -- Assignations
+      -- Control Internal
+      start_vector_divider <= '0';
+
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
+
+      data_a_in_enable_vector_divider <= '0';
+      data_b_in_enable_vector_divider <= '0';
 
       data_a_in_i_divider_int <= '0';
       data_a_in_j_divider_int <= '0';
@@ -173,6 +178,7 @@ begin
 
       -- Data Internal
       modulo_in_vector_divider <= ZERO_DATA;
+      size_in_vector_divider   <= ZERO_CONTROL;
       data_a_in_vector_divider <= ZERO_DATA;
       data_b_in_vector_divider <= ZERO_DATA;
 
@@ -183,13 +189,16 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          DATA_OUT_I_ENABLE <= '0';
+          DATA_OUT_J_ENABLE <= '0';
+
           if (START = '1') then
             -- Assignations
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            divider_ctrl_fsm_int <= INPUT_I_STATE;
+            divider_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
         when INPUT_I_STATE =>  -- STEP 1
@@ -264,12 +273,12 @@ begin
 
             data_b_in_j_divider_int <= '1';
           else
-            -- Control Outputs
-            DATA_OUT_J_ENABLE <= '0';
-
             -- Control Internal
             data_b_in_enable_vector_divider <= '0';
           end if;
+
+          -- Control Outputs
+          DATA_OUT_J_ENABLE <= '0';
 
           if (data_a_in_j_divider_int = '1' and data_b_in_j_divider_int = '1') then
             -- Control Internal
