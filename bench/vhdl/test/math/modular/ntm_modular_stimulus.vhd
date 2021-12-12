@@ -1325,7 +1325,7 @@ begin
       MONITOR_CASE <= "STIMULUS_NTM_MATRIX_MOD_CASE 1          ";
       -------------------------------------------------------------------
 
-      if (STIMULUS_NTM_MATRIX_MODULAR_MOD_CASE_0) then
+      if (STIMULUS_NTM_MATRIX_MODULAR_MOD_CASE_1) then
         -- INITIAL CONDITIONS
         -- CONTROL
         MATRIX_MODULAR_MOD_DATA_IN_I_ENABLE <= '1';
