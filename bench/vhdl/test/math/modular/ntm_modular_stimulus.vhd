@@ -1276,13 +1276,14 @@ begin
       if (STIMULUS_NTM_MATRIX_MODULAR_MOD_CASE_0) then
         -- INITIAL CONDITIONS
         -- CONTROL
-        MATRIX_MODULAR_MOD_DATA_IN_I_ENABLE <= '0';
+        MATRIX_MODULAR_MOD_DATA_IN_I_ENABLE <= '1';
         MATRIX_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
 
         -- DATA
         MATRIX_MODULAR_MOD_DATA_IN <= ONE_DATA;
 
         -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
@@ -1297,7 +1298,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_MODULAR_MOD_DATA_OUT_I_ENABLE = '0') and (MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
 
@@ -1327,17 +1328,18 @@ begin
       if (STIMULUS_NTM_MATRIX_MODULAR_MOD_CASE_0) then
         -- INITIAL CONDITIONS
         -- CONTROL
-        MATRIX_MODULAR_MOD_DATA_IN_I_ENABLE <= '0';
+        MATRIX_MODULAR_MOD_DATA_IN_I_ENABLE <= '1';
         MATRIX_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
 
         -- DATA
         MATRIX_MODULAR_MOD_DATA_IN <= ONE_DATA;
 
         -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_MODULAR_MOD_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_MODULAR_MOD_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+          if ((MATRIX_MODULAR_MOD_DATA_OUT_I_ENABLE = '1') and (MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_MODULAR_MOD_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MODULAR_MOD_DATA_IN_I_ENABLE <= '1';
 
@@ -1347,7 +1349,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_MODULAR_MOD_DATA_OUT_I_ENABLE = '0') and (MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
 
