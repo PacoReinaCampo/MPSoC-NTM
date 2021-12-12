@@ -20,10 +20,10 @@ add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_divider_test/vector
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_divider_test/vector_modular_divider/DATA_B_IN
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_divider_test/vector_modular_divider/READY
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_divider_test/vector_modular_divider/DATA_OUT_ENABLE
+add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_divider_test/vector_modular_divider/index_loop
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_divider_test/vector_modular_divider/DATA_OUT
 
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_divider_test/vector_modular_divider/divider_ctrl_fsm_int
-add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_divider_test/vector_modular_divider/index_loop
 
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_divider_test/vector_modular_divider/start_scalar_divider
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_divider_test/vector_modular_divider/modulo_in_scalar_divider

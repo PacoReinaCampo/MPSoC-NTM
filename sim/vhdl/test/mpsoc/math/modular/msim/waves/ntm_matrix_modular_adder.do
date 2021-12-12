@@ -24,12 +24,12 @@ add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_m
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_modular_adder/DATA_B_IN
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_modular_adder/READY
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_modular_adder/DATA_OUT_I_ENABLE
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_modular_adder/index_i_loop
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_modular_adder/DATA_OUT_J_ENABLE
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_modular_adder/index_j_loop
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_modular_adder/DATA_OUT
 
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_modular_adder/adder_ctrl_fsm_int
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_modular_adder/index_i_loop
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_modular_adder/index_j_loop
 
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_modular_adder/start_vector_adder
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_adder_test/matrix_modular_adder/operation_vector_adder

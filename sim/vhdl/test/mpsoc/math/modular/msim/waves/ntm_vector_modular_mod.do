@@ -18,10 +18,10 @@ add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_mod_test/vector_mod
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_mod_test/vector_modular_mod/DATA_IN
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_mod_test/vector_modular_mod/READY
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_mod_test/vector_modular_mod/DATA_OUT_ENABLE
+add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_mod_test/vector_modular_mod/index_loop
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_mod_test/vector_modular_mod/DATA_OUT
 
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_mod_test/vector_modular_mod/mod_ctrl_fsm_int
-add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_mod_test/vector_modular_mod/index_loop
 
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_mod_test/vector_modular_mod/start_scalar_mod
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_mod_test/vector_modular_mod/modulo_in_scalar_mod

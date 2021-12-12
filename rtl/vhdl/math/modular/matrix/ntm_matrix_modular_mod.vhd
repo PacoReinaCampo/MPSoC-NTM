@@ -176,6 +176,8 @@ begin
 
           if (START = '1') then
             -- Control Internal
+            start_vector_mod <= '1';
+
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
 
@@ -185,7 +187,7 @@ begin
 
         when INPUT_I_STATE =>  -- STEP 1
 
-          if (DATA_IN_I_ENABLE = '1') then
+          if ((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) then
             -- Data Inputs
             modulo_in_vector_mod <= MODULO_IN;
 
@@ -214,8 +216,6 @@ begin
             data_in_vector_mod <= DATA_IN;
 
             -- Control Internal
-            start_vector_mod <= '1';
-
             data_in_enable_vector_mod <= '1';
 
             -- FSM Control
@@ -224,6 +224,9 @@ begin
 
           -- Control Outputs
           DATA_OUT_J_ENABLE <= '0';
+
+          -- Control Internal
+          start_vector_mod <= '0';
 
         when ENDER_STATE =>  -- STEP 3
 

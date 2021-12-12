@@ -18,10 +18,10 @@ add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_inverter_test/vecto
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_inverter_test/vector_modular_inverter/DATA_IN
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_inverter_test/vector_modular_inverter/READY
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_inverter_test/vector_modular_inverter/DATA_OUT_ENABLE
+add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_inverter_test/vector_modular_inverter/index_loop
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_inverter_test/vector_modular_inverter/DATA_OUT
 
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_inverter_test/vector_modular_inverter/inverter_ctrl_fsm_int
-add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_inverter_test/vector_modular_inverter/index_loop
 
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_inverter_test/vector_modular_inverter/start_scalar_inverter
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_inverter_test/vector_modular_inverter/modulo_in_scalar_inverter

@@ -20,12 +20,12 @@ add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_mod
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/DATA_IN
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/READY
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/DATA_OUT_I_ENABLE
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/index_i_loop
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/DATA_OUT_J_ENABLE
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/index_j_loop
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/DATA_OUT
 
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/mod_ctrl_fsm_int
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/index_i_loop
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/index_j_loop
 
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/start_vector_mod
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/modulo_in_vector_mod
