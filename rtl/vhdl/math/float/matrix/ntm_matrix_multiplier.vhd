@@ -58,6 +58,8 @@ entity ntm_matrix_multiplier is
     START : in  std_logic;
     READY : out std_logic;
 
+    OPERATION : in std_logic;
+
     DATA_A_IN_I_ENABLE : in std_logic;
     DATA_A_IN_J_ENABLE : in std_logic;
     DATA_B_IN_I_ENABLE : in std_logic;
@@ -119,27 +121,26 @@ architecture ntm_matrix_multiplier_architecture of ntm_matrix_multiplier is
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_a_in_i_multiplier_int : std_logic;
-  signal data_a_in_j_multiplier_int : std_logic;
-  signal data_b_in_i_multiplier_int : std_logic;
-  signal data_b_in_j_multiplier_int : std_logic;
-
-  -- MULTIPLIER
+  -- ADDER
   -- CONTROL
-  signal start_vector_multiplier : std_logic;
-  signal ready_vector_multiplier : std_logic;
+  signal start_matrix_multiplier : std_logic;
+  signal ready_matrix_multiplier : std_logic;
 
-  signal data_a_in_enable_vector_multiplier : std_logic;
-  signal data_b_in_enable_vector_multiplier : std_logic;
+  signal data_a_in_i_enable_matrix_multiplier : std_logic;
+  signal data_a_in_j_enable_matrix_multiplier : std_logic;
+  signal data_b_in_i_enable_matrix_multiplier : std_logic;
+  signal data_b_in_j_enable_matrix_multiplier : std_logic;
 
-  signal data_out_enable_vector_multiplier : std_logic;
+  signal data_out_i_enable_matrix_multiplier : std_logic;
+  signal data_out_j_enable_matrix_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -166,15 +167,10 @@ begin
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
 
-      data_a_in_i_multiplier_int <= '0';
-      data_a_in_j_multiplier_int <= '0';
-      data_b_in_i_multiplier_int <= '0';
-      data_b_in_j_multiplier_int <= '0';
-
       -- Data Internal
-      modulo_in_vector_multiplier <= ZERO_DATA;
-      data_a_in_vector_multiplier <= ZERO_DATA;
-      data_b_in_vector_multiplier <= ZERO_DATA;
+      modulo_in_matrix_multiplier <= ZERO_DATA;
+      data_a_in_matrix_multiplier <= ZERO_DATA;
+      data_b_in_matrix_multiplier <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -189,106 +185,16 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            multiplier_ctrl_fsm_int <= INPUT_I_STATE;
+            multiplier_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
         when INPUT_I_STATE =>  -- STEP 1
 
-          if (DATA_A_IN_I_ENABLE = '1') then
-            -- Data Inputs
-            data_a_in_vector_multiplier <= DATA_A_IN;
-
-            -- Control Internal
-            data_a_in_enable_vector_multiplier <= '1';
-
-            data_a_in_i_multiplier_int <= '1';
-          else
-            -- Control Internal
-            data_a_in_enable_vector_multiplier <= '0';
-          end if;
-
-          -- Control Outputs
-          DATA_OUT_I_ENABLE <= '0';
-
-          if (DATA_B_IN_I_ENABLE = '1') then
-            -- Data Inputs
-            data_b_in_vector_multiplier <= DATA_B_IN;
-
-            -- Control Internal
-            data_b_in_enable_vector_multiplier <= '1';
-
-            data_b_in_i_multiplier_int <= '1';
-          else
-            -- Control Internal
-            data_b_in_enable_vector_multiplier <= '0';
-          end if;
-
-          -- Control Outputs
-          DATA_OUT_J_ENABLE <= '0';
-
-          if (data_a_in_i_multiplier_int = '1' and data_b_in_i_multiplier_int = '1') then
-            -- Control Internal
-              start_vector_multiplier <= '1';
-
-            data_a_in_i_multiplier_int <= '0';
-            data_b_in_i_multiplier_int <= '0';
-
-            -- Data Inputs
-            modulo_in_vector_multiplier <= MODULO_IN;
-
-            -- FSM Control
-            multiplier_ctrl_fsm_int <= ENDER_STATE;
-          end if;
-
         when INPUT_J_STATE =>  -- STEP 2
-
-          if ((DATA_A_IN_J_ENABLE = '1') or (index_j_loop = ZERO_CONTROL)) then
-            -- Data Inputs
-            data_a_in_vector_multiplier <= DATA_A_IN;
-
-            -- Control Internal
-            data_a_in_enable_vector_multiplier <= '1';
-
-            data_a_in_j_multiplier_int <= '1';
-          else
-            -- Control Internal
-            data_a_in_enable_vector_multiplier <= '0';
-          end if;
-
-          if ((DATA_B_IN_J_ENABLE = '1') or (index_j_loop = ZERO_CONTROL)) then
-            -- Data Inputs
-            data_b_in_vector_multiplier <= DATA_B_IN;
-
-            -- Control Internal
-            data_b_in_enable_vector_multiplier <= '1';
-
-            data_b_in_j_multiplier_int <= '1';
-          else
-            -- Control Internal
-            data_b_in_enable_vector_multiplier <= '0';
-          end if;
-
-          -- Control Outputs
-          DATA_OUT_J_ENABLE <= '0';
-
-          if (data_a_in_j_multiplier_int = '1' and data_b_in_j_multiplier_int = '1') then
-            -- Control Internal
-            start_vector_multiplier <= '1';
-
-            data_a_in_j_multiplier_int <= '0';
-            data_b_in_j_multiplier_int <= '0';
-
-            -- Data Inputs
-            modulo_in_vector_multiplier <= MODULO_IN;
-            size_in_vector_multiplier   <= SIZE_J_IN;
-
-            -- FSM Control
-            multiplier_ctrl_fsm_int <= ENDER_STATE;
-          end if;
 
         when ENDER_STATE =>  -- STEP 3
 
-          if (ready_vector_multiplier = '1') then
+          if (data_out_j_enable_matrix_multiplier = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
               -- Control Outputs
               READY <= '1';
@@ -320,15 +226,10 @@ begin
             end if;
 
             -- Data Outputs
-            DATA_OUT <= data_out_vector_multiplier;
+            DATA_OUT <= data_out_matrix_multiplier;
           else
             -- Control Internal
-            start_vector_multiplier <= '0';
-
-            data_a_in_i_multiplier_int <= '0';
-            data_a_in_j_multiplier_int <= '0';
-            data_b_in_i_multiplier_int <= '0';
-            data_b_in_j_multiplier_int <= '0';
+            start_matrix_multiplier <= '0';
           end if;
 
         when others =>
@@ -338,10 +239,10 @@ begin
     end if;
   end process;
 
-  -- MULTIPLIER
-  vector_multiplier : ntm_vector_multiplier
+  -- ADDER
+  matrix_multiplier : ntm_matrix_modular_multiplier
     generic map (
-      DATA_SIZE    => DATA_SIZE,
+      DATA_SIZE  => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -350,20 +251,24 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_multiplier,
-      READY => ready_vector_multiplier,
+      START => start_matrix_multiplier,
+      READY => ready_matrix_multiplier,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplier,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplier,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_multiplier,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_multiplier,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_multiplier,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_multiplier,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_multiplier,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_multiplier,
-      SIZE_IN   => size_in_vector_multiplier,
-      DATA_A_IN => data_a_in_vector_multiplier,
-      DATA_B_IN => data_b_in_vector_multiplier,
-      DATA_OUT  => data_out_vector_multiplier
+      MODULO_IN => modulo_in_matrix_multiplier,
+      SIZE_I_IN => size_i_in_matrix_multiplier,
+      SIZE_J_IN => size_j_in_matrix_multiplier,
+      DATA_A_IN => data_a_in_matrix_multiplier,
+      DATA_B_IN => data_b_in_matrix_multiplier,
+      DATA_OUT  => data_out_matrix_multiplier
       );
 
 end architecture;

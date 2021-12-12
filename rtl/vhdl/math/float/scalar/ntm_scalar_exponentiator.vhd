@@ -74,10 +74,8 @@ architecture ntm_scalar_exponentiator_architecture of ntm_scalar_exponentiator i
 
   type exponentiator_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    SET_DATA_B_STATE,                   -- STEP 1
-    REDUCE_DATA_B_STATE,                -- STEP 2
-    SET_PRODUCT_OUT_STATE,              -- STEP 3
-    ENDER_STATE                         -- STEP 4
+    INPUT_STATE,                        -- STEP 1
+    ENDER_STATE                         -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -106,11 +104,16 @@ architecture ntm_scalar_exponentiator_architecture of ntm_scalar_exponentiator i
   -- Finite State Machine
   signal exponentiator_ctrl_fsm_int : exponentiator_ctrl_fsm;
 
-  -- Internal Signals
-  signal u_int : std_logic_vector(DATA_SIZE downto 0);
-  signal v_int : std_logic_vector(DATA_SIZE downto 0);
+  -- EXPONENTIATOR
+  -- CONTROL
+  signal start_scalar_exponentiator : std_logic;
+  signal ready_scalar_exponentiator : std_logic;
 
-  signal exponentiator_int : std_logic_vector(DATA_SIZE downto 0);
+  -- DATA
+  signal modulo_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -130,11 +133,13 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      -- Assignation
-      u_int <= (others => '0');
-      v_int <= (others => '0');
+      -- Control Internal
+      start_scalar_exponentiator <= '0';
 
-      exponentiator_int <= (others => '0');
+      -- Data Internal
+      modulo_in_scalar_exponentiator <= ZERO_DATA;
+      data_a_in_scalar_exponentiator <= ZERO_DATA;
+      data_b_in_scalar_exponentiator <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -144,75 +149,20 @@ begin
           READY <= '0';
 
           if (START = '1') then
-            -- Assignation
-            u_int <= '0' & DATA_A_IN;
-            v_int <= '0' & DATA_B_IN;
-
-            if (DATA_A_IN(0) = '1') then
-              exponentiator_int <= '0' & DATA_B_IN;
-            else
-              exponentiator_int <= (others => '0');
-            end if;
-
             -- FSM Control
-            exponentiator_ctrl_fsm_int <= SET_DATA_B_STATE;
+            exponentiator_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when SET_DATA_B_STATE =>  -- STEP 1
+        when INPUT_STATE =>  -- STEP 1
 
-          -- Assignation
-          u_int <= std_logic_vector(unsigned(u_int) srl 1);
-          v_int <= std_logic_vector(unsigned(v_int) sll 1);
+        when ENDER_STATE =>  -- STEP 2
 
-          -- FSM Control
-          if ((unsigned(v_int) sll 1) < '0' & unsigned(MODULO_IN)) then
-            exponentiator_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
-          else
-            exponentiator_ctrl_fsm_int <= REDUCE_DATA_B_STATE;
-          end if;
-
-        when REDUCE_DATA_B_STATE =>  -- STEP 2
-
-          if (unsigned(v_int) < '0' & unsigned(MODULO_IN)) then
-            -- FSM Control
-            exponentiator_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
-          else
-            -- Assignation
-            v_int <= std_logic_vector(unsigned(v_int) - ('0' & unsigned(MODULO_IN)));
-          end if;
-
-        when SET_PRODUCT_OUT_STATE =>  -- STEP 3
-
-          -- Assignation
-          if (u_int(0) = '1') then
-            if (unsigned(exponentiator_int) + unsigned(v_int) < '0' & unsigned(MODULO_IN)) then
-              exponentiator_int <= std_logic_vector(unsigned(exponentiator_int) + unsigned(v_int));
-            else
-              exponentiator_int <= std_logic_vector(unsigned(exponentiator_int) + unsigned(v_int) - ('0' & unsigned(MODULO_IN)));
-            end if;
-          else
-            if (unsigned(exponentiator_int) >= '0' & unsigned(MODULO_IN)) then
-              exponentiator_int <= std_logic_vector(unsigned(exponentiator_int) - unsigned(MODULO_IN));
-            end if;
-          end if;
-
-          -- FSM Control
-          exponentiator_ctrl_fsm_int <= ENDER_STATE;
-
-        when ENDER_STATE =>  -- STEP 4
-
-          if (unsigned(u_int) = '0' & unsigned(ONE_CONTROL)) then
+          if (ready_scalar_exponentiator = '1') then
             -- Data Outputs
-            DATA_OUT <= exponentiator_int(DATA_SIZE-1 downto 0);
-
-            -- Control Outputs
-            READY <= '1';
-
-            -- FSM Control
-            exponentiator_ctrl_fsm_int <= STARTER_STATE;
+            DATA_OUT <= data_out_scalar_exponentiator;
           else
-            -- FSM Control
-            exponentiator_ctrl_fsm_int <= SET_DATA_B_STATE;
+            -- Control Internal
+            start_scalar_exponentiator <= '0';
           end if;
 
         when others =>
@@ -221,5 +171,27 @@ begin
       end case;
     end if;
   end process;
+
+  -- EXPONENTIATOR
+  scalar_exponentiator : ntm_scalar_modular_exponentiator
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_exponentiator,
+      READY => ready_scalar_exponentiator,
+
+      -- DATA
+      MODULO_IN => modulo_in_scalar_exponentiator,
+      DATA_A_IN => data_a_in_scalar_exponentiator,
+      DATA_B_IN => data_b_in_scalar_exponentiator,
+      DATA_OUT  => data_out_scalar_exponentiator
+      );
 
 end architecture;

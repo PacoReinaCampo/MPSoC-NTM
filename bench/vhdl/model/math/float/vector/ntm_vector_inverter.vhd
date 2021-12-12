@@ -113,13 +113,20 @@ architecture ntm_vector_inverter_architecture of ntm_vector_inverter is
 
   -- INVERTER
   -- CONTROL
-  signal start_scalar_inverter : std_logic;
-  signal ready_scalar_inverter : std_logic;
+  signal start_vector_inverter : std_logic;
+  signal ready_vector_inverter : std_logic;
+
+  signal operation_vector_inverter : std_logic;
+
+  signal data_in_enable_vector_inverter : std_logic;
+
+  signal data_out_enable_vector_inverter : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_inverter   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -127,7 +134,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = 1 / DATA_IN  = 1 / M_IN · 2^(E_IN)
+  -- DATA_OUT = 1 / DATA_IN  = 1 / M_IN · 2^(-E_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -137,24 +144,29 @@ begin
       DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
-      READY           <= '0';
+      READY <= '0';
+
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
-      start_scalar_inverter <= '0';
-
       index_loop <= ZERO_CONTROL;
 
+      -- Control Internal
+      start_vector_inverter <= '0';
+
+      operation_vector_inverter <= '0';
+
       -- Data Internal
-      modulo_in_scalar_inverter <= ZERO_DATA;
-      data_in_scalar_inverter   <= ZERO_DATA;
+      modulo_in_vector_inverter <= ZERO_DATA;
+      data_in_vector_inverter   <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
       case inverter_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
-          READY           <= '0';
+          READY <= '0';
+
           DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
@@ -167,47 +179,14 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          if ((DATA_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
-            -- Data Inputs
-            modulo_in_scalar_inverter <= MODULO_IN;
-
-            data_in_scalar_inverter <= DATA_IN;
-
-            -- Control Internal
-            start_scalar_inverter <= '1';
-
-            -- FSM Control
-            inverter_ctrl_fsm_int <= ENDER_STATE;
-          end if;
-
-          -- Control Outputs
-          DATA_OUT_ENABLE <= '0';
-
         when ENDER_STATE =>  -- STEP 2
 
-          if (ready_scalar_inverter = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
-              -- Control Outputs
-              READY <= '1';
-
-              -- FSM Control
-              inverter_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
-
-              -- FSM Control
-              inverter_ctrl_fsm_int <= INPUT_STATE;
-            end if;
-
+          if (data_out_enable_vector_inverter = '1') then
             -- Data Outputs
-            DATA_OUT <= data_out_scalar_inverter;
-
-            -- Control Outputs
-            DATA_OUT_ENABLE <= '1';
+            DATA_OUT <= data_out_vector_inverter;
           else
             -- Control Internal
-            start_scalar_inverter <= '0';
+            start_vector_inverter <= '0';
           end if;
 
         when others =>
@@ -218,7 +197,7 @@ begin
   end process;
 
   -- INVERTER
-  scalar_inverter : ntm_scalar_inverter
+  vector_inverter : ntm_vector_modular_inverter
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -229,13 +208,18 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_inverter,
-      READY => ready_scalar_inverter,
+      START => start_vector_inverter,
+      READY => ready_vector_inverter,
+
+      DATA_IN_ENABLE => data_in_enable_vector_inverter,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_inverter,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_inverter,
-      DATA_IN   => data_in_scalar_inverter,
-      DATA_OUT  => data_out_scalar_inverter
+      MODULO_IN => modulo_in_vector_inverter,
+      SIZE_IN   => size_in_vector_inverter,
+      DATA_IN   => data_in_vector_inverter,
+      DATA_OUT  => data_out_vector_inverter
       );
 
 end architecture;

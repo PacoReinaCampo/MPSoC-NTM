@@ -113,19 +113,24 @@ architecture ntm_vector_divider_architecture of ntm_vector_divider is
   -- Internal Signals
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_a_in_divider_int : std_logic;
-  signal data_b_in_divider_int : std_logic;
-
   -- DIVIDER
   -- CONTROL
-  signal start_scalar_divider : std_logic;
-  signal ready_scalar_divider : std_logic;
+  signal start_vector_divider : std_logic;
+  signal ready_vector_divider : std_logic;
+
+  signal operation_vector_divider : std_logic;
+
+  signal data_a_in_enable_vector_divider : std_logic;
+  signal data_b_in_enable_vector_divider : std_logic;
+
+  signal data_out_enable_vector_divider : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_divider   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -143,28 +148,30 @@ begin
       DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
-      READY           <= '0';
+      READY <= '0';
+
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
-      start_scalar_divider <= '0';
-
       index_loop <= ZERO_CONTROL;
 
-      data_a_in_divider_int <= '0';
-      data_b_in_divider_int <= '0';
+      -- Control Internal
+      start_vector_divider <= '0';
+
+      operation_vector_divider <= '0';
 
       -- Data Internal
-      modulo_in_scalar_divider <= ZERO_DATA;
-      data_a_in_scalar_divider <= ZERO_DATA;
-      data_b_in_scalar_divider <= ZERO_DATA;
+      modulo_in_vector_divider <= ZERO_DATA;
+      data_a_in_vector_divider <= ZERO_DATA;
+      data_b_in_vector_divider <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
       case divider_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
-          READY           <= '0';
+          READY <= '0';
+
           DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
@@ -177,67 +184,14 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          if ((DATA_A_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
-            -- Data Inputs
-            data_a_in_scalar_divider <= DATA_A_IN;
-
-            -- Control Internal
-            data_a_in_divider_int <= '1';
-          end if;
-
-          if ((DATA_B_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
-            -- Data Inputs
-            data_b_in_scalar_divider <= DATA_B_IN;
-
-            -- Control Internal
-            data_b_in_divider_int <= '1';
-          end if;
-
-          if (data_a_in_divider_int = '1' and data_b_in_divider_int = '1') then
-            -- Control Internal
-            start_scalar_divider <= '1';
-
-            data_a_in_divider_int <= '0';
-            data_b_in_divider_int <= '0';
-
-            -- Data Inputs
-            modulo_in_scalar_divider <= MODULO_IN;
-
-            -- FSM Control
-            divider_ctrl_fsm_int <= ENDER_STATE;
-          end if;
-
-          -- Control Outputs
-          DATA_OUT_ENABLE <= '0';
-
         when ENDER_STATE =>  -- STEP 2
 
-          if (ready_scalar_divider = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
-              -- Control Outputs
-              READY <= '1';
-
-              -- FSM Control
-              divider_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
-
-              -- FSM Control
-              divider_ctrl_fsm_int <= INPUT_STATE;
-            end if;
-
+          if (data_out_enable_vector_divider = '1') then
             -- Data Outputs
-            DATA_OUT <= data_out_scalar_divider;
-
-            -- Control Outputs
-            DATA_OUT_ENABLE <= '1';
+            DATA_OUT <= data_out_vector_divider;
           else
             -- Control Internal
-            start_scalar_divider <= '0';
-
-            data_a_in_divider_int <= '0';
-            data_b_in_divider_int <= '0';
+            start_vector_divider <= '0';
           end if;
 
         when others =>
@@ -248,7 +202,7 @@ begin
   end process;
 
   -- DIVIDER
-  scalar_divider : ntm_scalar_divider
+  vector_divider : ntm_vector_modular_divider
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -259,14 +213,20 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_divider,
-      READY => ready_scalar_divider,
+      START => start_vector_divider,
+      READY => ready_vector_divider,
+
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_divider,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_divider,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_divider,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_divider,
-      DATA_A_IN => data_a_in_scalar_divider,
-      DATA_B_IN => data_b_in_scalar_divider,
-      DATA_OUT  => data_out_scalar_divider
+      MODULO_IN => modulo_in_vector_divider,
+      SIZE_IN   => size_in_vector_divider,
+      DATA_A_IN => data_a_in_vector_divider,
+      DATA_B_IN => data_b_in_vector_divider,
+      DATA_OUT  => data_out_vector_divider
       );
 
 end architecture;

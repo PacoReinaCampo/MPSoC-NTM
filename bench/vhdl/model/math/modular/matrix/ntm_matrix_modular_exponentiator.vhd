@@ -162,9 +162,14 @@ begin
       DATA_OUT_I_ENABLE <= '0';
       DATA_OUT_J_ENABLE <= '0';
 
-      -- Assignations
+      -- Control Internal
+      start_vector_exponentiator <= '0';
+
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
+
+      data_a_in_enable_vector_exponentiator <= '0';
+      data_b_in_enable_vector_exponentiator <= '0';
 
       data_a_in_i_exponentiator_int <= '0';
       data_a_in_j_exponentiator_int <= '0';
@@ -173,6 +178,7 @@ begin
 
       -- Data Internal
       modulo_in_vector_exponentiator <= ZERO_DATA;
+      size_in_vector_exponentiator   <= ZERO_CONTROL;
       data_a_in_vector_exponentiator <= ZERO_DATA;
       data_b_in_vector_exponentiator <= ZERO_DATA;
 
@@ -183,13 +189,16 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          DATA_OUT_I_ENABLE <= '0';
+          DATA_OUT_J_ENABLE <= '0';
+
           if (START = '1') then
             -- Assignations
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            exponentiator_ctrl_fsm_int <= INPUT_I_STATE;
+            exponentiator_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
         when INPUT_I_STATE =>  -- STEP 1
@@ -229,6 +238,9 @@ begin
           if (data_a_in_i_exponentiator_int = '1' and data_b_in_i_exponentiator_int = '1') then
             -- Control Internal
             start_vector_exponentiator <= '1';
+
+            data_a_in_enable_vector_exponentiator <= '0';
+            data_b_in_enable_vector_exponentiator <= '0';
 
             data_a_in_i_exponentiator_int <= '0';
             data_b_in_i_exponentiator_int <= '0';
@@ -275,6 +287,9 @@ begin
             -- Control Internal
             start_vector_exponentiator <= '1';
 
+            data_a_in_enable_vector_exponentiator <= '0';
+            data_b_in_enable_vector_exponentiator <= '0';
+
             data_a_in_j_exponentiator_int <= '0';
             data_b_in_j_exponentiator_int <= '0';
 
@@ -288,7 +303,7 @@ begin
 
         when ENDER_STATE =>  -- STEP 3
 
-          if (ready_vector_exponentiator = '1') then
+          if (data_out_enable_vector_exponentiator = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
               -- Control Outputs
               READY <= '1';

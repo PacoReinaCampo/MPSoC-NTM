@@ -60,7 +60,8 @@ entity ntm_scalar_inverter is
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
@@ -73,18 +74,28 @@ architecture ntm_scalar_inverter_architecture of ntm_scalar_inverter is
 
   type inverter_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    ENDER_STATE,                        -- STEP 1
-    CHECK_U_STATE,                      -- STEP 2
-    CHECK_V_STATE,                      -- STEP 3
-    CHECK_D_STATE                       -- STEP 4
+    INPUT_STATE,                        -- STEP 1
+    ENDER_STATE                         -- STEP 2
     );
 
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_DATA : std_logic_vector(DATA_SIZE downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE+1));
-  constant ONE_DATA  : std_logic_vector(DATA_SIZE downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE+1));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
+
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+
+  constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
+  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+
+  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -93,12 +104,15 @@ architecture ntm_scalar_inverter_architecture of ntm_scalar_inverter is
   -- Finite State Machine
   signal inverter_ctrl_fsm_int : inverter_ctrl_fsm;
 
-  -- Internal Signals
-  signal u_int : std_logic_vector(DATA_SIZE downto 0);
-  signal v_int : std_logic_vector(DATA_SIZE downto 0);
+  -- INVERTER
+  -- CONTROL
+  signal start_scalar_inverter : std_logic;
+  signal ready_scalar_inverter : std_logic;
 
-  signal x_int : std_logic_vector(DATA_SIZE downto 0);
-  signal y_int : std_logic_vector(DATA_SIZE downto 0);
+  -- DATA
+  signal modulo_in_scalar_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -106,24 +120,24 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = 1 / DATA_IN  = 1 / M_IN · 2^(E_IN)
+  -- DATA_OUT = 1 / DATA_IN  = 1 / M_IN · 2^(-E_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= (others => '0');
+      DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
 
-      -- Assignation
-      u_int <= ZERO_DATA;
-      v_int <= ZERO_DATA;
+      -- Control Internal
+      start_scalar_inverter <= '0';
 
-      x_int <= ZERO_DATA;
-      y_int <= ZERO_DATA;
+      -- Data Internal
+      modulo_in_scalar_inverter <= ZERO_DATA;
+      data_in_scalar_inverter   <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -133,113 +147,21 @@ begin
           READY <= '0';
 
           if (START = '1') then
-            -- Assignation
-            u_int <= '0' & DATA_IN;
-            v_int <= '0' & MODULO_IN;
-
-            x_int <= ONE_DATA;
-            y_int <= ZERO_DATA;
-
             -- FSM Control
-            inverter_ctrl_fsm_int <= ENDER_STATE;
+            inverter_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when ENDER_STATE =>  -- STEP 1
+        when INPUT_STATE =>  -- STEP 1
 
-          if(unsigned(u_int) = unsigned(ONE_DATA)) then
-            if (unsigned(x_int) < '0' & unsigned(MODULO_IN)) then
-              -- Data Outputs
-              DATA_OUT <= x_int(DATA_SIZE-1 downto 0);
+        when ENDER_STATE =>  -- STEP 2
 
-              -- Control Outputs
-              READY <= '1';
-
-              -- FSM Control
-              inverter_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Assignations
-              x_int <= std_logic_vector(unsigned(x_int) - ('0' & unsigned(MODULO_IN)));
-            end if;
-          elsif(unsigned(v_int) = unsigned(ONE_DATA)) then
-            if (unsigned(y_int) < '0' & unsigned(MODULO_IN)) then
-              -- Data Outputs
-              DATA_OUT <= y_int(DATA_SIZE-1 downto 0);
-
-              -- Control Outputs
-              READY <= '1';
-
-              -- FSM Control
-              inverter_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Assignations
-              y_int <= std_logic_vector(unsigned(y_int) - ('0' & unsigned(MODULO_IN)));
-            end if;
-          elsif(u_int(0) = '0') then
-            -- FSM Control
-            inverter_ctrl_fsm_int <= CHECK_U_STATE;
-          elsif(v_int(0) = '0') then
-            -- FSM Control
-            inverter_ctrl_fsm_int <= CHECK_V_STATE;
+          if (ready_scalar_inverter = '1') then
+            -- Data Outputs
+            DATA_OUT <= data_out_scalar_inverter;
           else
-            -- FSM Control
-            inverter_ctrl_fsm_int <= CHECK_D_STATE;
+            -- Control Internal
+            start_scalar_inverter <= '0';
           end if;
-
-        when CHECK_U_STATE =>  -- STEP 2
-
-          -- Assignation
-          u_int <= std_logic_vector(unsigned(u_int) srl 1);
-
-          if(x_int(0) = '0') then
-            x_int <= std_logic_vector(unsigned(x_int) srl 1);
-          else
-            x_int <= std_logic_vector(unsigned(x_int) + ('0' & unsigned(MODULO_IN)) srl 1);
-          end if;
-
-          -- FSM Control
-          if(v_int(0) = '0') then
-            inverter_ctrl_fsm_int <= CHECK_V_STATE;
-          else
-            inverter_ctrl_fsm_int <= CHECK_D_STATE;
-          end if;
-
-        when CHECK_V_STATE =>  -- STEP 3
-
-          -- Assignation
-          v_int <= std_logic_vector(unsigned(v_int) srl 1);
-
-          if(y_int(0) = '0') then
-            y_int <= std_logic_vector(unsigned(y_int) srl 1);
-          else
-            y_int <= std_logic_vector(unsigned(y_int) + ('0' & unsigned(MODULO_IN)) srl 1);
-          end if;
-
-          -- FSM Control
-          inverter_ctrl_fsm_int <= CHECK_D_STATE;
-
-        when CHECK_D_STATE =>  -- STEP 4
-
-          -- Assignation
-          if(unsigned(u_int) < unsigned(v_int)) then
-            v_int <= std_logic_vector(unsigned(v_int) - unsigned(u_int));
-
-            if (unsigned(y_int) > unsigned(x_int)) then
-              y_int <= std_logic_vector(unsigned(y_int) - unsigned(x_int));
-            else
-              y_int <= std_logic_vector(unsigned(y_int) - unsigned(x_int) + ('0' & unsigned(MODULO_IN)));
-            end if;
-          else
-            u_int <= std_logic_vector(unsigned(u_int) - unsigned(v_int));
-
-            if (unsigned(x_int) > unsigned(y_int)) then
-              x_int <= std_logic_vector(unsigned(x_int) - unsigned(y_int));
-            else
-              x_int <= std_logic_vector(unsigned(x_int) - unsigned(y_int) + ('0' & unsigned(MODULO_IN)));
-            end if;
-          end if;
-
-          -- FSM Control
-          inverter_ctrl_fsm_int <= ENDER_STATE;
 
         when others =>
           -- FSM Control
@@ -247,5 +169,26 @@ begin
       end case;
     end if;
   end process;
+
+  -- INVERTER
+  scalar_inverter : ntm_scalar_modular_inverter
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_inverter,
+      READY => ready_scalar_inverter,
+
+      -- DATA
+      MODULO_IN => modulo_in_scalar_inverter,
+      DATA_IN   => data_in_scalar_inverter,
+      DATA_OUT  => data_out_scalar_inverter
+      );
 
 end architecture;

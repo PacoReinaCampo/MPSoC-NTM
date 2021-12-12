@@ -136,7 +136,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- 1 = DATA_OUT · DATA_IN mod MODULO_IN
+  -- DATA_OUT = DATA_IN mod MODULO_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -152,11 +152,16 @@ begin
       DATA_OUT_J_ENABLE <= '0';
 
       -- Control Internal
+      start_vector_inverter <= '0';
+
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
 
+      data_in_enable_vector_inverter <= '0';
+
       -- Data Internal
       modulo_in_vector_inverter <= ZERO_DATA;
+      size_in_vector_inverter   <= ZERO_CONTROL;
       data_in_vector_inverter   <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
@@ -175,12 +180,12 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            mod_ctrl_fsm_int <= INPUT_I_STATE;
+            mod_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
         when INPUT_I_STATE =>  -- STEP 1
 
-          if ((DATA_IN_I_ENABLE = '1') or (index_i_loop = ZERO_CONTROL)) then
+          if (DATA_IN_I_ENABLE = '1') then
             -- Data Inputs
             modulo_in_vector_inverter <= MODULO_IN;
 
@@ -193,9 +198,6 @@ begin
 
             -- FSM Control
             mod_ctrl_fsm_int <= ENDER_STATE;
-          else
-            -- Control Internal
-            data_in_enable_vector_inverter <= '0';
           end if;
 
           -- Control Outputs
@@ -218,9 +220,6 @@ begin
 
             -- FSM Control
             mod_ctrl_fsm_int <= ENDER_STATE;
-          else
-            -- Control Internal
-            data_in_enable_vector_inverter <= '0';
           end if;
 
           -- Control Outputs
@@ -228,7 +227,7 @@ begin
 
         when ENDER_STATE =>  -- STEP 3
 
-          if (ready_vector_inverter = '1') then
+          if (data_out_enable_vector_inverter = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
               -- Control Outputs
               READY <= '1';
@@ -264,6 +263,8 @@ begin
           else
             -- Control Internal
             start_vector_inverter <= '0';
+
+            data_in_enable_vector_inverter <= '0';
           end if;
 
         when others =>
