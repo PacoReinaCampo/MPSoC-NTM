@@ -190,6 +190,9 @@ begin
               -- Control Outputs
               READY <= '1';
 
+              -- Control Internal
+              index_loop <= ZERO_CONTROL;
+
               -- FSM Control
               inverter_ctrl_fsm_int <= STARTER_STATE;
             else

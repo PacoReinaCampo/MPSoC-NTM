@@ -211,6 +211,9 @@ begin
             data_a_in_enable_vector_divider <= '1';
 
             data_a_in_i_divider_int <= '1';
+          else
+            -- Control Internal
+            data_a_in_enable_vector_divider <= '0';
           end if;
 
           -- Control Outputs
@@ -224,6 +227,9 @@ begin
             data_b_in_enable_vector_divider <= '1';
 
             data_b_in_i_divider_int <= '1';
+          else
+            -- Control Internal
+            data_b_in_enable_vector_divider <= '0';
           end if;
 
           -- Control Outputs
@@ -257,6 +263,9 @@ begin
             data_a_in_enable_vector_divider <= '1';
 
             data_a_in_j_divider_int <= '1';
+          else
+            -- Control Internal
+            data_a_in_enable_vector_divider <= '0';
           end if;
 
           if (DATA_B_IN_J_ENABLE = '1') then
@@ -267,6 +276,9 @@ begin
             data_b_in_enable_vector_divider <= '1';
 
             data_b_in_j_divider_int <= '1';
+          else
+            -- Control Internal
+            data_b_in_enable_vector_divider <= '0';
           end if;
 
           -- Control Outputs
@@ -279,9 +291,6 @@ begin
 
             data_a_in_j_divider_int <= '0';
             data_b_in_j_divider_int <= '0';
-
-            -- Data Inputs
-            modulo_in_vector_divider <= MODULO_IN;
 
             -- FSM Control
             divider_ctrl_fsm_int <= ENDER_STATE;
@@ -336,14 +345,6 @@ begin
           else
             -- Control Internal
             start_vector_divider <= '0';
-
-            data_a_in_enable_vector_divider <= '0';
-            data_b_in_enable_vector_divider <= '0';
-
-            data_a_in_i_divider_int <= '0';
-            data_a_in_j_divider_int <= '0';
-            data_b_in_i_divider_int <= '0';
-            data_b_in_j_divider_int <= '0';
           end if;
 
         when others =>

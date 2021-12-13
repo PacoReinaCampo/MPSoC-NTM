@@ -88,6 +88,7 @@ architecture ntm_matrix_modular_inverter_architecture of ntm_matrix_modular_inve
 
   -----------------------------------------------------------------------
   -- Constants
+  -----------------------------------------------------------------------
 
   constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
   constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
@@ -224,37 +225,48 @@ begin
 
           if (data_out_enable_vector_inverter = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
-              -- Control Outputs
-              READY <= '1';
-
-              DATA_OUT_J_ENABLE <= '1';
-
-              -- FSM Control
-              inverter_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
-              -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-              index_j_loop <= ZERO_CONTROL;
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_inverter;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
               DATA_OUT_J_ENABLE <= '1';
 
+              READY <= '1';
+
+              -- Control Internal
+              index_i_loop <= ZERO_CONTROL;
+              index_j_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              inverter_ctrl_fsm_int <= STARTER_STATE;
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_inverter;
+
+              -- Control Outputs
+              DATA_OUT_I_ENABLE <= '1';
+              DATA_OUT_J_ENABLE <= '1';
+
+              -- Control Internal
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+              index_j_loop <= ZERO_CONTROL;
+
               -- FSM Control
               inverter_ctrl_fsm_int <= INPUT_I_STATE;
             elsif ((unsigned(index_i_loop) <= unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
-              -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_inverter;
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';
 
+              -- Control Internal
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+
               -- FSM Control
               inverter_ctrl_fsm_int <= INPUT_J_STATE;
             end if;
-
-            -- Data Outputs
-            DATA_OUT <= data_out_vector_inverter;
           else
             -- Control Internal
             start_vector_inverter <= '0';

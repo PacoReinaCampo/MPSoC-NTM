@@ -1441,7 +1441,9 @@ begin
           if ((MATRIX_MODULAR_ADDER_DATA_OUT_I_ENABLE = '1') and (MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_MODULAR_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MODULAR_ADDER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MODULAR_ADDER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
             MATRIX_MODULAR_ADDER_DATA_A_IN <= ONE_DATA;
@@ -1477,11 +1479,12 @@ begin
         end loop;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_ADDER_CASE 1        ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_MATRIX_MODULAR_ADDER_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_ADDER_CASE 1        ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         MATRIX_MODULAR_ADDER_DATA_A_IN_I_ENABLE <= '0';
@@ -1500,7 +1503,9 @@ begin
           if ((MATRIX_MODULAR_ADDER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_MODULAR_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MODULAR_ADDER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MODULAR_ADDER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
             MATRIX_MODULAR_ADDER_DATA_A_IN <= TWO_DATA;
