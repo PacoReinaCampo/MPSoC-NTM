@@ -198,12 +198,12 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            divider_ctrl_fsm_int <= INPUT_J_STATE;
+            divider_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
         when INPUT_I_STATE =>  -- STEP 1
 
-          if (DATA_A_IN_I_ENABLE = '1') then
+          if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
             -- Data Inputs
             data_a_in_vector_divider <= DATA_A_IN;
 
@@ -211,15 +211,12 @@ begin
             data_a_in_enable_vector_divider <= '1';
 
             data_a_in_i_divider_int <= '1';
-          else
-            -- Control Internal
-            data_a_in_enable_vector_divider <= '0';
           end if;
 
           -- Control Outputs
           DATA_OUT_I_ENABLE <= '0';
 
-          if (DATA_B_IN_I_ENABLE = '1') then
+          if (((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
             -- Data Inputs
             data_b_in_vector_divider <= DATA_B_IN;
 
@@ -227,15 +224,16 @@ begin
             data_b_in_enable_vector_divider <= '1';
 
             data_b_in_i_divider_int <= '1';
-          else
-            -- Control Internal
-            data_b_in_enable_vector_divider <= '0';
           end if;
 
           -- Control Outputs
           DATA_OUT_J_ENABLE <= '0';
 
           if (data_a_in_i_divider_int = '1' and data_b_in_i_divider_int = '1') then
+            -- Data Inputs
+            modulo_in_vector_divider <= MODULO_IN;
+            size_in_vector_divider   <= SIZE_J_IN;
+
             -- Control Internal
             start_vector_divider <= '1';
 
@@ -245,16 +243,13 @@ begin
             data_a_in_i_divider_int <= '0';
             data_b_in_i_divider_int <= '0';
 
-            -- Data Inputs
-            modulo_in_vector_divider <= MODULO_IN;
-
             -- FSM Control
             divider_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
         when INPUT_J_STATE =>  -- STEP 2
 
-          if ((DATA_A_IN_J_ENABLE = '1') or (index_j_loop = ZERO_CONTROL)) then
+          if (DATA_A_IN_J_ENABLE = '1') then
             -- Data Inputs
             data_a_in_vector_divider <= DATA_A_IN;
 
@@ -262,12 +257,9 @@ begin
             data_a_in_enable_vector_divider <= '1';
 
             data_a_in_j_divider_int <= '1';
-          else
-            -- Control Internal
-            data_a_in_enable_vector_divider <= '0';
           end if;
 
-          if ((DATA_B_IN_J_ENABLE = '1') or (index_j_loop = ZERO_CONTROL)) then
+          if (DATA_B_IN_J_ENABLE = '1') then
             -- Data Inputs
             data_b_in_vector_divider <= DATA_B_IN;
 
@@ -275,9 +267,6 @@ begin
             data_b_in_enable_vector_divider <= '1';
 
             data_b_in_j_divider_int <= '1';
-          else
-            -- Control Internal
-            data_b_in_enable_vector_divider <= '0';
           end if;
 
           -- Control Outputs
@@ -285,8 +274,6 @@ begin
 
           if (data_a_in_j_divider_int = '1' and data_b_in_j_divider_int = '1') then
             -- Control Internal
-            start_vector_divider <= '1';
-
             data_a_in_enable_vector_divider <= '0';
             data_b_in_enable_vector_divider <= '0';
 
@@ -295,7 +282,6 @@ begin
 
             -- Data Inputs
             modulo_in_vector_divider <= MODULO_IN;
-            size_in_vector_divider   <= SIZE_J_IN;
 
             -- FSM Control
             divider_ctrl_fsm_int <= ENDER_STATE;
@@ -305,40 +291,54 @@ begin
 
           if (data_out_enable_vector_divider = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
-              -- Control Outputs
-              READY <= '1';
-
-              DATA_OUT_J_ENABLE <= '1';
-
-              -- FSM Control
-              divider_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
-              -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-              index_j_loop <= ZERO_CONTROL;
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_divider;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
               DATA_OUT_J_ENABLE <= '1';
 
+              READY <= '1';
+
+              -- Control Internal
+              index_i_loop <= ZERO_CONTROL;
+              index_j_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              divider_ctrl_fsm_int <= STARTER_STATE;
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_divider;
+
+              -- Control Outputs
+              DATA_OUT_I_ENABLE <= '1';
+              DATA_OUT_J_ENABLE <= '1';
+
+              -- Control Internal
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+              index_j_loop <= ZERO_CONTROL;
+
               -- FSM Control
               divider_ctrl_fsm_int <= INPUT_I_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
-              -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            elsif ((unsigned(index_i_loop) <= unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_divider;
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';
 
+              -- Control Internal
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+
               -- FSM Control
               divider_ctrl_fsm_int <= INPUT_J_STATE;
             end if;
-
-            -- Data Outputs
-            DATA_OUT <= data_out_vector_divider;
           else
             -- Control Internal
             start_vector_divider <= '0';
+
+            data_a_in_enable_vector_divider <= '0';
+            data_b_in_enable_vector_divider <= '0';
 
             data_a_in_i_divider_int <= '0';
             data_a_in_j_divider_int <= '0';
