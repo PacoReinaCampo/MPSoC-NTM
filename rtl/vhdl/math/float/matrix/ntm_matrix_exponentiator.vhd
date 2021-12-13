@@ -121,7 +121,7 @@ architecture ntm_matrix_exponentiator_architecture of ntm_matrix_exponentiator i
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- ADDER
+  -- EXPONENTIATOR
   -- CONTROL
   signal start_matrix_exponentiator : std_logic;
   signal ready_matrix_exponentiator : std_logic;
@@ -239,7 +239,7 @@ begin
     end if;
   end process;
 
-  -- ADDER
+  -- EXPONENTIATOR
   matrix_exponentiator : ntm_matrix_modular_exponentiator
     generic map (
       DATA_SIZE  => DATA_SIZE,

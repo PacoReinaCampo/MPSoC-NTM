@@ -211,6 +211,7 @@ begin
             data_a_in_enable_vector_multiplier <= '1';
 
             data_a_in_i_multiplier_int <= '1';
+            data_a_in_j_multiplier_int <= '1';
           else
             -- Control Internal
             data_a_in_enable_vector_multiplier <= '0';
@@ -227,6 +228,7 @@ begin
             data_b_in_enable_vector_multiplier <= '1';
 
             data_b_in_i_multiplier_int <= '1';
+            data_b_in_j_multiplier_int <= '1';
           else
             -- Control Internal
             data_b_in_enable_vector_multiplier <= '0';
@@ -235,7 +237,7 @@ begin
           -- Control Outputs
           DATA_OUT_J_ENABLE <= '0';
 
-          if (data_a_in_i_multiplier_int = '1' and data_b_in_i_multiplier_int = '1') then
+          if (data_a_in_i_multiplier_int = '1' and data_a_in_j_multiplier_int = '1' and data_b_in_i_multiplier_int = '1' and data_b_in_j_multiplier_int = '1') then
             -- Data Inputs
             modulo_in_vector_multiplier <= MODULO_IN;
             size_in_vector_multiplier   <= SIZE_J_IN;
@@ -247,7 +249,9 @@ begin
             data_b_in_enable_vector_multiplier <= '0';
 
             data_a_in_i_multiplier_int <= '0';
+            data_a_in_j_multiplier_int <= '0';
             data_b_in_i_multiplier_int <= '0';
+            data_b_in_j_multiplier_int <= '0';
 
             -- FSM Control
             multiplier_ctrl_fsm_int <= ENDER_STATE;

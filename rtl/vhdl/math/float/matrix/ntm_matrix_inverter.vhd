@@ -118,7 +118,7 @@ architecture ntm_matrix_inverter_architecture of ntm_matrix_inverter is
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- ADDER
+  -- INVERTER
   -- CONTROL
   signal start_matrix_inverter : std_logic;
   signal ready_matrix_inverter : std_logic;
@@ -232,7 +232,7 @@ begin
     end if;
   end process;
 
-  -- ADDER
+  -- INVERTER
   matrix_inverter : ntm_matrix_modular_inverter
     generic map (
       DATA_SIZE  => DATA_SIZE,

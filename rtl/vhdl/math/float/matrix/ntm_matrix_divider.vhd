@@ -123,6 +123,29 @@ architecture ntm_matrix_divider_architecture of ntm_matrix_divider is
 
   -- ADDER
   -- CONTROL
+  signal start_matrix_adder : std_logic;
+  signal ready_matrix_adder : std_logic;
+
+  signal operation_matrix_adder : std_logic;
+
+  signal data_a_in_i_enable_matrix_adder : std_logic;
+  signal data_a_in_j_enable_matrix_adder : std_logic;
+  signal data_b_in_i_enable_matrix_adder : std_logic;
+  signal data_b_in_j_enable_matrix_adder : std_logic;
+
+  signal data_out_i_enable_matrix_adder : std_logic;
+  signal data_out_j_enable_matrix_adder : std_logic;
+
+  -- DATA
+  signal modulo_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- DIVIDER
+  -- CONTROL
   signal start_matrix_divider : std_logic;
   signal ready_matrix_divider : std_logic;
 
@@ -240,6 +263,40 @@ begin
   end process;
 
   -- ADDER
+  matrix_adder : ntm_matrix_modular_adder
+    generic map (
+      DATA_SIZE  => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_matrix_adder,
+      READY => ready_matrix_adder,
+
+      OPERATION => operation_matrix_adder,
+
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_adder,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_adder,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_adder,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_adder,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_adder,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_adder,
+
+      -- DATA
+      MODULO_IN => modulo_in_matrix_adder,
+      SIZE_I_IN => size_i_in_matrix_adder,
+      SIZE_J_IN => size_j_in_matrix_adder,
+      DATA_A_IN => data_a_in_matrix_adder,
+      DATA_B_IN => data_b_in_matrix_adder,
+      DATA_OUT  => data_out_matrix_adder
+      );
+
+  -- DIVIDER
   matrix_divider : ntm_matrix_modular_divider
     generic map (
       DATA_SIZE  => DATA_SIZE,

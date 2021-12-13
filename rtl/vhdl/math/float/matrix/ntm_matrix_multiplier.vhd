@@ -121,7 +121,30 @@ architecture ntm_matrix_multiplier_architecture of ntm_matrix_multiplier is
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- ADDER
+  -- MULTIPLIER
+  -- CONTROL
+  signal start_matrix_adder : std_logic;
+  signal ready_matrix_adder : std_logic;
+
+  signal operation_matrix_adder : std_logic;
+
+  signal data_a_in_i_enable_matrix_adder : std_logic;
+  signal data_a_in_j_enable_matrix_adder : std_logic;
+  signal data_b_in_i_enable_matrix_adder : std_logic;
+  signal data_b_in_j_enable_matrix_adder : std_logic;
+
+  signal data_out_i_enable_matrix_adder : std_logic;
+  signal data_out_j_enable_matrix_adder : std_logic;
+
+  -- DATA
+  signal modulo_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- MULTIPLIER
   -- CONTROL
   signal start_matrix_multiplier : std_logic;
   signal ready_matrix_multiplier : std_logic;
@@ -239,7 +262,41 @@ begin
     end if;
   end process;
 
-  -- ADDER
+  -- MULTIPLIER
+  matrix_adder : ntm_matrix_modular_adder
+    generic map (
+      DATA_SIZE  => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_matrix_adder,
+      READY => ready_matrix_adder,
+
+      OPERATION => operation_matrix_adder,
+
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_adder,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_adder,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_adder,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_adder,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_adder,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_adder,
+
+      -- DATA
+      MODULO_IN => modulo_in_matrix_adder,
+      SIZE_I_IN => size_i_in_matrix_adder,
+      SIZE_J_IN => size_j_in_matrix_adder,
+      DATA_A_IN => data_a_in_matrix_adder,
+      DATA_B_IN => data_b_in_matrix_adder,
+      DATA_OUT  => data_out_matrix_adder
+      );
+
+  -- MULTIPLIER
   matrix_multiplier : ntm_matrix_modular_multiplier
     generic map (
       DATA_SIZE  => DATA_SIZE,
