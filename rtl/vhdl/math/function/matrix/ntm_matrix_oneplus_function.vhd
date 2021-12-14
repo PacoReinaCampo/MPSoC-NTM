@@ -79,7 +79,7 @@ architecture ntm_matrix_oneplus_function_architecture of ntm_matrix_oneplus_func
   -- Types
   -----------------------------------------------------------------------
 
-  type oneplus_ctrl_fsm is (
+  type oneplus_function_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
@@ -110,26 +110,26 @@ architecture ntm_matrix_oneplus_function_architecture of ntm_matrix_oneplus_func
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal oneplus_ctrl_fsm_int : oneplus_ctrl_fsm;
+  signal oneplus_function_ctrl_fsm_int : oneplus_function_ctrl_fsm;
 
   -- Internal Signals
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- TANH
+  -- ONEPLUS
   -- CONTROL
-  signal start_vector_oneplus : std_logic;
-  signal ready_vector_oneplus : std_logic;
+  signal start_vector_oneplus_function : std_logic;
+  signal ready_vector_oneplus_function : std_logic;
 
-  signal data_in_enable_vector_oneplus : std_logic;
+  signal data_in_enable_vector_oneplus_function : std_logic;
 
-  signal data_out_enable_vector_oneplus : std_logic;
+  signal data_out_enable_vector_oneplus_function : std_logic;
 
   -- DATA
-  signal modulo_in_vector_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_oneplus   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_oneplus_function : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_oneplus_function   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_oneplus_function   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_oneplus_function  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -147,46 +147,56 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      -- Assignations
+      DATA_OUT_I_ENABLE <= '0';
+      DATA_OUT_J_ENABLE <= '0';
+
+      -- Control Internal
+      start_vector_oneplus_function <= '0';
+
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
 
+      data_in_enable_vector_oneplus_function <= '0';
+
+      -- Data Internal
+      modulo_in_vector_oneplus_function <= ZERO_DATA;
+      size_in_vector_oneplus_function   <= ZERO_CONTROL;
+      data_in_vector_oneplus_function   <= ZERO_DATA;
+
     elsif (rising_edge(CLK)) then
 
-      case oneplus_ctrl_fsm_int is
+      case oneplus_function_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
+          DATA_OUT_I_ENABLE <= '0';
+          DATA_OUT_J_ENABLE <= '0';
+
           if (START = '1') then
-            -- Assignations
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            oneplus_ctrl_fsm_int <= INPUT_I_STATE;
+            oneplus_function_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
         when INPUT_I_STATE =>  -- STEP 1
 
-          if (DATA_IN_I_ENABLE = '1') then
+          if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
             -- Data Inputs
-            modulo_in_vector_oneplus <= MODULO_IN;
+            modulo_in_vector_oneplus_function <= MODULO_IN;
+            size_in_vector_oneplus_function   <= SIZE_J_IN;
 
-            data_in_vector_oneplus <= DATA_IN;
+            data_in_vector_oneplus_function <= DATA_IN;
 
-            if (index_i_loop = ZERO_CONTROL) then
-              -- Control Internal
-              start_vector_oneplus <= '1';
-            end if;
+            -- Control Internal
+            start_vector_oneplus_function <= '1';
 
-            data_in_enable_vector_oneplus <= '1';
+            data_in_enable_vector_oneplus_function <= '1';
 
             -- FSM Control
-            oneplus_ctrl_fsm_int <= ENDER_STATE;
-          else
-            -- Control Internal
-            data_in_enable_vector_oneplus <= '0';
+            oneplus_function_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
           -- Control Outputs
@@ -197,23 +207,13 @@ begin
 
           if (DATA_IN_J_ENABLE = '1') then
             -- Data Inputs
-            modulo_in_vector_oneplus <= MODULO_IN;
-            size_in_vector_oneplus   <= SIZE_J_IN;
+            data_in_vector_oneplus_function <= DATA_IN;
 
-            data_in_vector_oneplus <= DATA_IN;
-
-            if (index_j_loop = ZERO_CONTROL) then
-              -- Control Internal
-              start_vector_oneplus <= '1';
-            end if;
-
-            data_in_enable_vector_oneplus <= '1';
+            -- Control Internal
+            data_in_enable_vector_oneplus_function <= '1';
 
             -- FSM Control
-            oneplus_ctrl_fsm_int <= ENDER_STATE;
-          else
-            -- Control Internal
-            data_in_enable_vector_oneplus <= '0';
+            oneplus_function_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
           -- Control Outputs
@@ -221,47 +221,60 @@ begin
 
         when ENDER_STATE =>  -- STEP 3
 
-          if (ready_vector_oneplus = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-              -- Control Outputs
-              READY <= '1';
-
-              DATA_OUT_J_ENABLE <= '1';
-
-              -- FSM Control
-              oneplus_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-              -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-              index_j_loop <= ZERO_CONTROL;
+          if (data_out_enable_vector_oneplus_function = '1') then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_oneplus_function;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
               DATA_OUT_J_ENABLE <= '1';
 
-              -- FSM Control
-              oneplus_ctrl_fsm_int <= INPUT_I_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+              READY <= '1';
+
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+              index_i_loop <= ZERO_CONTROL;
+              index_j_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              oneplus_function_ctrl_fsm_int <= STARTER_STATE;
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_oneplus_function;
+
+              -- Control Outputs
+              DATA_OUT_I_ENABLE <= '1';
+              DATA_OUT_J_ENABLE <= '1';
+
+              -- Control Internal
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+              index_j_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              oneplus_function_ctrl_fsm_int <= INPUT_I_STATE;
+            elsif ((unsigned(index_i_loop) <= unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_oneplus_function;
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';
 
-              -- FSM Control
-              oneplus_ctrl_fsm_int <= INPUT_J_STATE;
-            end if;
+              -- Control Internal
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
-            -- Data Outputs
-            DATA_OUT <= data_out_vector_oneplus;
+              -- FSM Control
+              oneplus_function_ctrl_fsm_int <= INPUT_J_STATE;
+            end if;
           else
             -- Control Internal
-            start_vector_oneplus <= '0';
+            start_vector_oneplus_function <= '0';
+
+            data_in_enable_vector_oneplus_function <= '0';
           end if;
 
         when others =>
           -- FSM Control
-          oneplus_ctrl_fsm_int <= STARTER_STATE;
+          oneplus_function_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
@@ -278,18 +291,18 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_oneplus,
-      READY => ready_vector_oneplus,
+      START => start_vector_oneplus_function,
+      READY => ready_vector_oneplus_function,
 
-      DATA_IN_ENABLE => data_in_enable_vector_oneplus,
+      DATA_IN_ENABLE => data_in_enable_vector_oneplus_function,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_oneplus,
+      DATA_OUT_ENABLE => data_out_enable_vector_oneplus_function,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_oneplus,
-      SIZE_IN   => size_in_vector_oneplus,
-      DATA_IN   => data_in_vector_oneplus,
-      DATA_OUT  => data_out_vector_oneplus
+      MODULO_IN => modulo_in_vector_oneplus_function,
+      SIZE_IN   => size_in_vector_oneplus_function,
+      DATA_IN   => data_in_vector_oneplus_function,
+      DATA_OUT  => data_out_vector_oneplus_function
       );
 
 end architecture;

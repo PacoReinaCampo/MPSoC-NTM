@@ -58,8 +58,6 @@ entity ntm_matrix_divider is
     START : in  std_logic;
     READY : out std_logic;
 
-    OPERATION : in std_logic;
-
     DATA_A_IN_I_ENABLE : in std_logic;
     DATA_A_IN_J_ENABLE : in std_logic;
     DATA_B_IN_I_ENABLE : in std_logic;
@@ -121,49 +119,27 @@ architecture ntm_matrix_divider_architecture of ntm_matrix_divider is
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- ADDER
-  -- CONTROL
-  signal start_matrix_adder : std_logic;
-  signal ready_matrix_adder : std_logic;
-
-  signal operation_matrix_adder : std_logic;
-
-  signal data_a_in_i_enable_matrix_adder : std_logic;
-  signal data_a_in_j_enable_matrix_adder : std_logic;
-  signal data_b_in_i_enable_matrix_adder : std_logic;
-  signal data_b_in_j_enable_matrix_adder : std_logic;
-
-  signal data_out_i_enable_matrix_adder : std_logic;
-  signal data_out_j_enable_matrix_adder : std_logic;
-
-  -- DATA
-  signal modulo_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_i_divider_int : std_logic;
+  signal data_a_in_j_divider_int : std_logic;
+  signal data_b_in_i_divider_int : std_logic;
+  signal data_b_in_j_divider_int : std_logic;
 
   -- DIVIDER
   -- CONTROL
-  signal start_matrix_divider : std_logic;
-  signal ready_matrix_divider : std_logic;
+  signal start_vector_divider : std_logic;
+  signal ready_vector_divider : std_logic;
 
-  signal data_a_in_i_enable_matrix_divider : std_logic;
-  signal data_a_in_j_enable_matrix_divider : std_logic;
-  signal data_b_in_i_enable_matrix_divider : std_logic;
-  signal data_b_in_j_enable_matrix_divider : std_logic;
+  signal data_a_in_enable_vector_divider : std_logic;
+  signal data_b_in_enable_vector_divider : std_logic;
 
-  signal data_out_i_enable_matrix_divider : std_logic;
-  signal data_out_j_enable_matrix_divider : std_logic;
+  signal data_out_enable_vector_divider : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_divider   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -171,7 +147,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN / DATA_B_IN = M_A_IN / M_B_IN · 2^(E_A_IN - E_B_IN)
+  -- DATA_OUT = DATA_A_IN / DATA_B_IN mod MODULO_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -186,14 +162,25 @@ begin
       DATA_OUT_I_ENABLE <= '0';
       DATA_OUT_J_ENABLE <= '0';
 
-      -- Assignations
+      -- Control Internal
+      start_vector_divider <= '0';
+
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
 
+      data_a_in_enable_vector_divider <= '0';
+      data_b_in_enable_vector_divider <= '0';
+
+      data_a_in_i_divider_int <= '0';
+      data_a_in_j_divider_int <= '0';
+      data_b_in_i_divider_int <= '0';
+      data_b_in_j_divider_int <= '0';
+
       -- Data Internal
-      modulo_in_matrix_divider <= ZERO_DATA;
-      data_a_in_matrix_divider <= ZERO_DATA;
-      data_b_in_matrix_divider <= ZERO_DATA;
+      modulo_in_vector_divider <= ZERO_DATA;
+      size_in_vector_divider   <= ZERO_CONTROL;
+      data_a_in_vector_divider <= ZERO_DATA;
+      data_b_in_vector_divider <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -202,57 +189,166 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          DATA_OUT_I_ENABLE <= '0';
+          DATA_OUT_J_ENABLE <= '0';
+
           if (START = '1') then
             -- Assignations
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            divider_ctrl_fsm_int <= INPUT_J_STATE;
+            divider_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
         when INPUT_I_STATE =>  -- STEP 1
 
+          if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
+            -- Data Inputs
+            data_a_in_vector_divider <= DATA_A_IN;
+
+            -- Control Internal
+            data_a_in_enable_vector_divider <= '1';
+
+            data_a_in_i_divider_int <= '1';
+            data_a_in_j_divider_int <= '1';
+          else
+            -- Control Internal
+            data_a_in_enable_vector_divider <= '0';
+          end if;
+
+          -- Control Outputs
+          DATA_OUT_I_ENABLE <= '0';
+
+          if (((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
+            -- Data Inputs
+            data_b_in_vector_divider <= DATA_B_IN;
+
+            -- Control Internal
+            data_b_in_enable_vector_divider <= '1';
+
+            data_b_in_i_divider_int <= '1';
+            data_b_in_j_divider_int <= '1';
+          else
+            -- Control Internal
+            data_b_in_enable_vector_divider <= '0';
+          end if;
+
+          -- Control Outputs
+          DATA_OUT_J_ENABLE <= '0';
+
+          if (data_a_in_i_divider_int = '1' and data_a_in_j_divider_int = '1' and data_b_in_i_divider_int = '1' and data_b_in_j_divider_int = '1') then
+            -- Data Inputs
+            modulo_in_vector_divider <= MODULO_IN;
+            size_in_vector_divider   <= SIZE_J_IN;
+
+            -- Control Internal
+            start_vector_divider <= '1';
+
+            data_a_in_enable_vector_divider <= '0';
+            data_b_in_enable_vector_divider <= '0';
+
+            data_a_in_i_divider_int <= '0';
+            data_a_in_j_divider_int <= '0';
+            data_b_in_i_divider_int <= '0';
+            data_b_in_j_divider_int <= '0';
+
+            -- FSM Control
+            divider_ctrl_fsm_int <= ENDER_STATE;
+          end if;
+
         when INPUT_J_STATE =>  -- STEP 2
+
+          if (DATA_A_IN_J_ENABLE = '1') then
+            -- Data Inputs
+            data_a_in_vector_divider <= DATA_A_IN;
+
+            -- Control Internal
+            data_a_in_enable_vector_divider <= '1';
+
+            data_a_in_j_divider_int <= '1';
+          else
+            -- Control Internal
+            data_a_in_enable_vector_divider <= '0';
+          end if;
+
+          if (DATA_B_IN_J_ENABLE = '1') then
+            -- Data Inputs
+            data_b_in_vector_divider <= DATA_B_IN;
+
+            -- Control Internal
+            data_b_in_enable_vector_divider <= '1';
+
+            data_b_in_j_divider_int <= '1';
+          else
+            -- Control Internal
+            data_b_in_enable_vector_divider <= '0';
+          end if;
+
+          -- Control Outputs
+          DATA_OUT_J_ENABLE <= '0';
+
+          if (data_a_in_j_divider_int = '1' and data_b_in_j_divider_int = '1') then
+            -- Control Internal
+            data_a_in_enable_vector_divider <= '0';
+            data_b_in_enable_vector_divider <= '0';
+
+            data_a_in_j_divider_int <= '0';
+            data_b_in_j_divider_int <= '0';
+
+            -- FSM Control
+            divider_ctrl_fsm_int <= ENDER_STATE;
+          end if;
 
         when ENDER_STATE =>  -- STEP 3
 
-          if (data_out_j_enable_matrix_divider = '1') then
+          if (data_out_enable_vector_divider = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
-              -- Control Outputs
-              READY <= '1';
-
-              DATA_OUT_J_ENABLE <= '1';
-
-              -- FSM Control
-              divider_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
-              -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-              index_j_loop <= ZERO_CONTROL;
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_divider;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
               DATA_OUT_J_ENABLE <= '1';
 
+              READY <= '1';
+
+              -- Control Internal
+              index_i_loop <= ZERO_CONTROL;
+              index_j_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              divider_ctrl_fsm_int <= STARTER_STATE;
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_divider;
+
+              -- Control Outputs
+              DATA_OUT_I_ENABLE <= '1';
+              DATA_OUT_J_ENABLE <= '1';
+
+              -- Control Internal
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+              index_j_loop <= ZERO_CONTROL;
+
               -- FSM Control
               divider_ctrl_fsm_int <= INPUT_I_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
-              -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            elsif ((unsigned(index_i_loop) <= unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_divider;
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';
 
+              -- Control Internal
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+
               -- FSM Control
               divider_ctrl_fsm_int <= INPUT_J_STATE;
             end if;
-
-            -- Data Outputs
-            DATA_OUT <= data_out_matrix_divider;
           else
             -- Control Internal
-            start_matrix_divider <= '0';
+            start_vector_divider <= '0';
           end if;
 
         when others =>
@@ -262,44 +358,10 @@ begin
     end if;
   end process;
 
-  -- ADDER
-  matrix_adder : ntm_matrix_modular_adder
-    generic map (
-      DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_matrix_adder,
-      READY => ready_matrix_adder,
-
-      OPERATION => operation_matrix_adder,
-
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_adder,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_adder,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_adder,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_adder,
-
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_adder,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_adder,
-
-      -- DATA
-      MODULO_IN => modulo_in_matrix_adder,
-      SIZE_I_IN => size_i_in_matrix_adder,
-      SIZE_J_IN => size_j_in_matrix_adder,
-      DATA_A_IN => data_a_in_matrix_adder,
-      DATA_B_IN => data_b_in_matrix_adder,
-      DATA_OUT  => data_out_matrix_adder
-      );
-
   -- DIVIDER
-  matrix_divider : ntm_matrix_modular_divider
+  vector_divider : ntm_vector_divider
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -308,24 +370,20 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_divider,
-      READY => ready_matrix_divider,
+      START => start_vector_divider,
+      READY => ready_vector_divider,
 
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_divider,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_divider,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_divider,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_divider,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_divider,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_divider,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_divider,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_divider,
+      DATA_OUT_ENABLE => data_out_enable_vector_divider,
 
       -- DATA
-      MODULO_IN => modulo_in_matrix_divider,
-      SIZE_I_IN => size_i_in_matrix_divider,
-      SIZE_J_IN => size_j_in_matrix_divider,
-      DATA_A_IN => data_a_in_matrix_divider,
-      DATA_B_IN => data_b_in_matrix_divider,
-      DATA_OUT  => data_out_matrix_divider
+      MODULO_IN => modulo_in_vector_divider,
+      SIZE_IN   => size_in_vector_divider,
+      DATA_A_IN => data_a_in_vector_divider,
+      DATA_B_IN => data_b_in_vector_divider,
+      DATA_OUT  => data_out_vector_divider
       );
 
 end architecture;

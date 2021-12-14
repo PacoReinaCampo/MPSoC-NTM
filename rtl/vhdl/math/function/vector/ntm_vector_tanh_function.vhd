@@ -111,15 +111,15 @@ architecture ntm_vector_tanh_function_architecture of ntm_vector_tanh_function i
   -- Internal Signals
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- ONEPLUS
+  -- TANH
   -- CONTROL
-  signal start_scalar_tanh : std_logic;
-  signal ready_scalar_tanh : std_logic;
+  signal start_scalar_tanh_function : std_logic;
+  signal ready_scalar_tanh_function : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_tanh_function : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_tanh_function   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_tanh_function  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -135,20 +135,28 @@ begin
       DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
-      READY <= '0';
+      READY           <= '0';
+      DATA_OUT_ENABLE <= '0';
 
-      -- Assignations
+      -- Control Internal
+      start_scalar_tanh_function <= '0';
+
       index_loop <= ZERO_CONTROL;
+
+      -- Data Internal
+      modulo_in_scalar_tanh_function <= ZERO_DATA;
+      data_in_scalar_tanh_function   <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
       case tanh_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
-          READY <= '0';
+          READY           <= '0';
+          DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
-            -- Assignations
+            -- Control Internal
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
@@ -157,16 +165,14 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          if (DATA_IN_ENABLE = '1') then
+          if ((DATA_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
             -- Data Inputs
-            modulo_in_scalar_tanh <= MODULO_IN;
+            modulo_in_scalar_tanh_function <= MODULO_IN;
 
-            data_in_scalar_tanh <= DATA_IN;
+            data_in_scalar_tanh_function <= DATA_IN;
 
-            if (index_loop = ZERO_CONTROL) then
-              -- Control Internal
-              start_scalar_tanh <= '1';
-            end if;
+            -- Control Internal
+            start_scalar_tanh_function <= '1';
 
             -- FSM Control
             tanh_ctrl_fsm_int <= ENDER_STATE;
@@ -177,10 +183,13 @@ begin
 
         when ENDER_STATE =>  -- STEP 2
 
-          if (ready_scalar_tanh = '1') then
+          if (ready_scalar_tanh_function = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
               -- Control Outputs
               READY <= '1';
+
+              -- Control Internal
+              index_loop <= ZERO_CONTROL;
 
               -- FSM Control
               tanh_ctrl_fsm_int <= STARTER_STATE;
@@ -193,13 +202,13 @@ begin
             end if;
 
             -- Data Outputs
-            DATA_OUT <= data_out_scalar_tanh;
+            DATA_OUT <= data_out_scalar_tanh_function;
 
             -- Control Outputs
             DATA_OUT_ENABLE <= '1';
           else
             -- Control Internal
-            start_scalar_tanh <= '0';
+            start_scalar_tanh_function <= '0';
           end if;
 
         when others =>
@@ -221,13 +230,13 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_tanh,
-      READY => ready_scalar_tanh,
+      START => start_scalar_tanh_function,
+      READY => ready_scalar_tanh_function,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_tanh,
-      DATA_IN   => data_in_scalar_tanh,
-      DATA_OUT  => data_out_scalar_tanh
+      MODULO_IN => modulo_in_scalar_tanh_function,
+      DATA_IN   => data_in_scalar_tanh_function,
+      DATA_OUT  => data_out_scalar_tanh_function
       );
 
 end architecture;

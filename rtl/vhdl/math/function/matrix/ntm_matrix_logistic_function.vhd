@@ -79,7 +79,7 @@ architecture ntm_matrix_logistic_function_architecture of ntm_matrix_logistic_fu
   -- Types
   -----------------------------------------------------------------------
 
-  type logistic_ctrl_fsm is (
+  type logistic_function_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
@@ -110,26 +110,26 @@ architecture ntm_matrix_logistic_function_architecture of ntm_matrix_logistic_fu
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal logistic_ctrl_fsm_int : logistic_ctrl_fsm;
+  signal logistic_function_ctrl_fsm_int : logistic_function_ctrl_fsm;
 
   -- Internal Signals
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- TANH
+  -- LOGISTIC
   -- CONTROL
-  signal start_vector_logistic : std_logic;
-  signal ready_vector_logistic : std_logic;
+  signal start_vector_logistic_function : std_logic;
+  signal ready_vector_logistic_function : std_logic;
 
-  signal data_in_enable_vector_logistic : std_logic;
+  signal data_in_enable_vector_logistic_function : std_logic;
 
-  signal data_out_enable_vector_logistic : std_logic;
+  signal data_out_enable_vector_logistic_function : std_logic;
 
   -- DATA
-  signal modulo_in_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_logistic   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_logistic_function : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_logistic_function   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_logistic_function   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_logistic_function  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -147,46 +147,56 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      -- Assignations
+      DATA_OUT_I_ENABLE <= '0';
+      DATA_OUT_J_ENABLE <= '0';
+
+      -- Control Internal
+      start_vector_logistic_function <= '0';
+
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
 
+      data_in_enable_vector_logistic_function <= '0';
+
+      -- Data Internal
+      modulo_in_vector_logistic_function <= ZERO_DATA;
+      size_in_vector_logistic_function   <= ZERO_CONTROL;
+      data_in_vector_logistic_function   <= ZERO_DATA;
+
     elsif (rising_edge(CLK)) then
 
-      case logistic_ctrl_fsm_int is
+      case logistic_function_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
+          DATA_OUT_I_ENABLE <= '0';
+          DATA_OUT_J_ENABLE <= '0';
+
           if (START = '1') then
-            -- Assignations
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            logistic_ctrl_fsm_int <= INPUT_I_STATE;
+            logistic_function_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
         when INPUT_I_STATE =>  -- STEP 1
 
-          if (DATA_IN_I_ENABLE = '1') then
+          if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
             -- Data Inputs
-            modulo_in_vector_logistic <= MODULO_IN;
+            modulo_in_vector_logistic_function <= MODULO_IN;
+            size_in_vector_logistic_function   <= SIZE_J_IN;
 
-            data_in_vector_logistic <= DATA_IN;
+            data_in_vector_logistic_function <= DATA_IN;
 
-            if (index_i_loop = ZERO_CONTROL) then
-              -- Control Internal
-              start_vector_logistic <= '1';
-            end if;
+            -- Control Internal
+            start_vector_logistic_function <= '1';
 
-            data_in_enable_vector_logistic <= '1';
+            data_in_enable_vector_logistic_function <= '1';
 
             -- FSM Control
-            logistic_ctrl_fsm_int <= ENDER_STATE;
-          else
-            -- Control Internal
-            data_in_enable_vector_logistic <= '0';
+            logistic_function_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
           -- Control Outputs
@@ -197,23 +207,13 @@ begin
 
           if (DATA_IN_J_ENABLE = '1') then
             -- Data Inputs
-            modulo_in_vector_logistic <= MODULO_IN;
-            size_in_vector_logistic   <= SIZE_J_IN;
+            data_in_vector_logistic_function <= DATA_IN;
 
-            data_in_vector_logistic <= DATA_IN;
-
-            if (index_j_loop = ZERO_CONTROL) then
-              -- Control Internal
-              start_vector_logistic <= '1';
-            end if;
-
-            data_in_enable_vector_logistic <= '1';
+            -- Control Internal
+            data_in_enable_vector_logistic_function <= '1';
 
             -- FSM Control
-            logistic_ctrl_fsm_int <= ENDER_STATE;
-          else
-            -- Control Internal
-            data_in_enable_vector_logistic <= '0';
+            logistic_function_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
           -- Control Outputs
@@ -221,47 +221,60 @@ begin
 
         when ENDER_STATE =>  -- STEP 3
 
-          if (ready_vector_logistic = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-              -- Control Outputs
-              READY <= '1';
-
-              DATA_OUT_J_ENABLE <= '1';
-
-              -- FSM Control
-              logistic_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-              -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-              index_j_loop <= ZERO_CONTROL;
+          if (data_out_enable_vector_logistic_function = '1') then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_logistic_function;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
               DATA_OUT_J_ENABLE <= '1';
 
-              -- FSM Control
-              logistic_ctrl_fsm_int <= INPUT_I_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+              READY <= '1';
+
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+              index_i_loop <= ZERO_CONTROL;
+              index_j_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              logistic_function_ctrl_fsm_int <= STARTER_STATE;
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_logistic_function;
+
+              -- Control Outputs
+              DATA_OUT_I_ENABLE <= '1';
+              DATA_OUT_J_ENABLE <= '1';
+
+              -- Control Internal
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+              index_j_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              logistic_function_ctrl_fsm_int <= INPUT_I_STATE;
+            elsif ((unsigned(index_i_loop) <= unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_logistic_function;
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';
 
-              -- FSM Control
-              logistic_ctrl_fsm_int <= INPUT_J_STATE;
-            end if;
+              -- Control Internal
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
-            -- Data Outputs
-            DATA_OUT <= data_out_vector_logistic;
+              -- FSM Control
+              logistic_function_ctrl_fsm_int <= INPUT_J_STATE;
+            end if;
           else
             -- Control Internal
-            start_vector_logistic <= '0';
+            start_vector_logistic_function <= '0';
+
+            data_in_enable_vector_logistic_function <= '0';
           end if;
 
         when others =>
           -- FSM Control
-          logistic_ctrl_fsm_int <= STARTER_STATE;
+          logistic_function_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
@@ -278,18 +291,18 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_logistic,
-      READY => ready_vector_logistic,
+      START => start_vector_logistic_function,
+      READY => ready_vector_logistic_function,
 
-      DATA_IN_ENABLE => data_in_enable_vector_logistic,
+      DATA_IN_ENABLE => data_in_enable_vector_logistic_function,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_logistic,
+      DATA_OUT_ENABLE => data_out_enable_vector_logistic_function,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_logistic,
-      SIZE_IN   => size_in_vector_logistic,
-      DATA_IN   => data_in_vector_logistic,
-      DATA_OUT  => data_out_vector_logistic
+      MODULO_IN => modulo_in_vector_logistic_function,
+      SIZE_IN   => size_in_vector_logistic_function,
+      DATA_IN   => data_in_vector_logistic_function,
+      DATA_OUT  => data_out_vector_logistic_function
       );
 
 end architecture;

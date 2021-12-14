@@ -217,6 +217,7 @@ begin
             data_a_in_enable_vector_adder <= '1';
 
             data_a_in_i_adder_int <= '1';
+            data_a_in_j_adder_int <= '1';
           else
             -- Control Internal
             data_a_in_enable_vector_adder <= '0';
@@ -233,6 +234,7 @@ begin
             data_b_in_enable_vector_adder <= '1';
 
             data_b_in_i_adder_int <= '1';
+            data_b_in_j_adder_int <= '1';
           else
             -- Control Internal
             data_b_in_enable_vector_adder <= '0';
@@ -241,7 +243,7 @@ begin
           -- Control Outputs
           DATA_OUT_J_ENABLE <= '0';
 
-          if (data_a_in_i_adder_int = '1' and data_b_in_i_adder_int = '1') then
+          if (data_a_in_i_adder_int = '1' and data_a_in_j_adder_int = '1' and data_b_in_i_adder_int = '1' and data_b_in_j_adder_int = '1') then
             -- Data Inputs
             modulo_in_vector_adder <= MODULO_IN;
             size_in_vector_adder   <= SIZE_J_IN;
@@ -255,7 +257,9 @@ begin
             data_b_in_enable_vector_adder <= '0';
 
             data_a_in_i_adder_int <= '0';
+            data_a_in_j_adder_int <= '0';
             data_b_in_i_adder_int <= '0';
+            data_b_in_j_adder_int <= '0';
 
             -- FSM Control
             adder_ctrl_fsm_int <= ENDER_STATE;

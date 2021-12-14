@@ -104,6 +104,19 @@ architecture ntm_scalar_divider_architecture of ntm_scalar_divider is
   -- Finite State Machine
   signal divider_ctrl_fsm_int : divider_ctrl_fsm;
 
+  -- ADDER
+  -- CONTROL
+  signal start_scalar_adder : std_logic;
+  signal ready_scalar_adder : std_logic;
+
+  signal operation_scalar_adder : std_logic;
+
+  -- DATA
+  signal modulo_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- DIVIDER
   -- CONTROL
   signal start_scalar_divider : std_logic;
@@ -171,6 +184,30 @@ begin
       end case;
     end if;
   end process;
+
+  -- ADDER
+  scalar_adder : ntm_scalar_modular_adder
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_adder,
+      READY => ready_scalar_adder,
+
+      OPERATION => operation_scalar_adder,
+
+      -- DATA
+      MODULO_IN => modulo_in_scalar_adder,
+      DATA_A_IN => data_a_in_scalar_adder,
+      DATA_B_IN => data_b_in_scalar_adder,
+      DATA_OUT  => data_out_scalar_adder
+      );
 
   -- DIVIDER
   scalar_divider : ntm_scalar_modular_divider
