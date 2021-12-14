@@ -188,7 +188,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal start_scalar_convolution : std_logic;
   signal ready_scalar_convolution : std_logic;
 
-  signal data_in_enable_scalar_convolution : std_logic;
+  signal data_a_in_enable_scalar_convolution : std_logic;
+  signal data_b_in_enable_scalar_convolution : std_logic;
 
   signal data_out_enable_scalar_convolution : std_logic;
 
@@ -204,7 +205,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal start_scalar_cosine : std_logic;
   signal ready_scalar_cosine : std_logic;
 
-  signal data_in_enable_scalar_cosine : std_logic;
+  signal data_a_in_enable_scalar_cosine : std_logic;
+  signal data_b_in_enable_scalar_cosine : std_logic;
 
   signal data_out_enable_scalar_cosine : std_logic;
 
@@ -782,7 +784,8 @@ begin
       SCALAR_CONVOLUTION_START => start_scalar_convolution,
       SCALAR_CONVOLUTION_READY => ready_scalar_convolution,
 
-      SCALAR_CONVOLUTION_DATA_IN_ENABLE => data_in_enable_scalar_convolution,
+      SCALAR_CONVOLUTION_DATA_A_IN_ENABLE => data_a_in_enable_scalar_convolution,
+      SCALAR_CONVOLUTION_DATA_B_IN_ENABLE => data_b_in_enable_scalar_convolution,
 
       SCALAR_CONVOLUTION_DATA_OUT_ENABLE => data_out_enable_scalar_convolution,
 
@@ -798,7 +801,8 @@ begin
       SCALAR_COSINE_SIMILARITY_START => start_scalar_cosine,
       SCALAR_COSINE_SIMILARITY_READY => ready_scalar_cosine,
 
-      SCALAR_COSINE_SIMILARITY_DATA_IN_ENABLE => data_in_enable_scalar_cosine,
+      SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE => data_a_in_enable_scalar_cosine,
+      SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE => data_b_in_enable_scalar_cosine,
 
       SCALAR_COSINE_SIMILARITY_DATA_OUT_ENABLE => data_out_enable_scalar_cosine,
 
@@ -1307,7 +1311,8 @@ begin
         START => start_scalar_convolution,
         READY => ready_scalar_convolution,
 
-        DATA_IN_ENABLE => data_in_enable_scalar_convolution,
+        DATA_A_IN_ENABLE => data_a_in_enable_scalar_convolution,
+        DATA_B_IN_ENABLE => data_b_in_enable_scalar_convolution,
 
         DATA_OUT_ENABLE => data_out_enable_scalar_convolution,
 
@@ -1336,7 +1341,8 @@ begin
         START => start_scalar_cosine,
         READY => ready_scalar_cosine,
 
-        DATA_IN_ENABLE => data_in_enable_scalar_cosine,
+        DATA_A_IN_ENABLE => data_a_in_enable_scalar_cosine,
+        DATA_B_IN_ENABLE => data_b_in_enable_scalar_cosine,
 
         DATA_OUT_ENABLE => data_out_enable_scalar_cosine,
 

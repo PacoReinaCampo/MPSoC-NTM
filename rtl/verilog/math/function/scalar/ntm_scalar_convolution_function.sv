@@ -50,7 +50,9 @@ module ntm_scalar_convolution_function #(
     input START,
     output reg READY,
 
-    input DATA_IN_ENABLE,
+    input DATA_A_IN_ENABLE,
+    input DATA_B_IN_ENABLE,
+
     output reg DATA_OUT_ENABLE,
 
     // DATA

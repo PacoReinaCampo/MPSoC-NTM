@@ -58,7 +58,8 @@ entity ntm_scalar_convolution_function is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_IN_ENABLE : in std_logic;
+    DATA_A_IN_ENABLE : in std_logic;
+    DATA_B_IN_ENABLE : in std_logic;
 
     DATA_OUT_ENABLE : out std_logic;
 
@@ -229,8 +230,8 @@ begin
   operation_scalar_adder <= '0';
 
   -- VECTOR MULTIPLIER
-  data_a_in_enable_vector_multiplier <= DATA_IN_ENABLE;
-  data_b_in_enable_vector_multiplier <= DATA_IN_ENABLE;
+  data_a_in_enable_vector_multiplier <= DATA_A_IN_ENABLE;
+  data_b_in_enable_vector_multiplier <= DATA_B_IN_ENABLE;
 
   -- DATA
   -- SCALAR ADDER

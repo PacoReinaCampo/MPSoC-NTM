@@ -58,7 +58,8 @@ entity ntm_scalar_cosine_similarity_function is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_IN_ENABLE : in std_logic;
+    DATA_A_IN_ENABLE : in std_logic;
+    DATA_B_IN_ENABLE : in std_logic;
 
     DATA_OUT_ENABLE : out std_logic;
 
@@ -278,16 +279,16 @@ begin
   end process;
 
   -- SCALAR PRODUCT AB
-  data_a_in_enable_scalar_product_ab <= DATA_IN_ENABLE;
-  data_b_in_enable_scalar_product_ab <= DATA_IN_ENABLE;
+  data_a_in_enable_scalar_product_ab <= DATA_A_IN_ENABLE;
+  data_b_in_enable_scalar_product_ab <= DATA_B_IN_ENABLE;
 
   -- SCALAR PRODUCT AA
-  data_a_in_enable_scalar_product_aa <= DATA_IN_ENABLE;
-  data_b_in_enable_scalar_product_aa <= DATA_IN_ENABLE;
+  data_a_in_enable_scalar_product_aa <= DATA_A_IN_ENABLE;
+  data_b_in_enable_scalar_product_aa <= DATA_B_IN_ENABLE;
 
   -- SCALAR PRODUCT BB
-  data_a_in_enable_scalar_product_bb <= DATA_IN_ENABLE;
-  data_b_in_enable_scalar_product_bb <= DATA_IN_ENABLE;
+  data_a_in_enable_scalar_product_bb <= DATA_A_IN_ENABLE;
+  data_b_in_enable_scalar_product_bb <= DATA_B_IN_ENABLE;
 
   -- DATA
   -- SCALAR MULTIPLIER AB
