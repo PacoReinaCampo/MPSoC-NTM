@@ -211,6 +211,7 @@ begin
             -- Control Internal
             start_vector_transpose <= '1';
 
+            data_in_i_enable_vector_transpose <= '1';
             data_in_j_enable_vector_transpose <= '1';
 
             -- FSM Control
@@ -311,6 +312,7 @@ begin
             -- Control Internal
             start_vector_transpose <= '0';
 
+            data_in_i_enable_vector_transpose <= '0';
             data_in_j_enable_vector_transpose <= '0';
           end if;
 
@@ -325,14 +327,13 @@ begin
               DATA_OUT_J_ENABLE <= '1';
               DATA_OUT_K_ENABLE <= '1';
 
-              READY <= '1';
-
               -- Control Internal
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
               index_j_loop <= ZERO_CONTROL;
               index_k_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              transpose_ctrl_fsm_int <= STARTER_STATE;
+              transpose_ctrl_fsm_int <= INPUT_I_STATE;
             elsif ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
               DATA_OUT <= data_out_vector_transpose;
@@ -364,6 +365,7 @@ begin
             -- Control Internal
             start_vector_transpose <= '0';
 
+            data_in_i_enable_vector_transpose <= '0';
             data_in_j_enable_vector_transpose <= '0';
           end if;
 
