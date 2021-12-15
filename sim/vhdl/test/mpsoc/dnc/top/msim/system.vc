@@ -2,26 +2,26 @@
 ../../../../../../../rtl/vhdl/pkg/dnc_core_pkg.vhd
 ../../../../../../../rtl/vhdl/pkg/ntm_lstm_controller_pkg.vhd
 
-../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_mod.vhd
-../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_adder.vhd
-../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_multiplier.vhd
-../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_inverter.vhd
-../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_divider.vhd
-../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_exponentiator.vhd
+../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_mod.vhd
+../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_adder.vhd
+../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_multiplier.vhd
+../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_inverter.vhd
+../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_divider.vhd
+../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_exponentiator.vhd
 
-../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_mod.vhd
-../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_adder.vhd
-../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_multiplier.vhd
-../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_inverter.vhd
-../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_divider.vhd
-../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_exponentiator.vhd
+../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_mod.vhd
+../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_adder.vhd
+../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_multiplier.vhd
+../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_inverter.vhd
+../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_divider.vhd
+../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_exponentiator.vhd
 
-../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_mod.vhd
-../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_adder.vhd
-../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_multiplier.vhd
-../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_inverter.vhd
-../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_divider.vhd
-../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_exponentiator.vhd
+../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_mod.vhd
+../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_adder.vhd
+../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_multiplier.vhd
+../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_inverter.vhd
+../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_divider.vhd
+../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_exponentiator.vhd
 
 ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_product.vhd
 ../../../../../../../rtl/vhdl/math/algebra/ntm_tensor_transpose.vhd

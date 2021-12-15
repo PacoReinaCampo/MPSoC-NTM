@@ -15,11 +15,11 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/vector/ntm_vector_inve
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/vector/ntm_vector_divider.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/vector/ntm_vector_exponentiator.vhd
 
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_adder.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_multiplier.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_inverter.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_divider.vhd
-ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_exponentiator.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_modular_adder.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_modular_multiplier.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_modular_inverter.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_modular_divider.vhd
+ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_modular_exponentiator.vhd
 
 ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/math/float/ntm_float_pkg.vhd
 ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/math/float/ntm_float_stimulus.vhd

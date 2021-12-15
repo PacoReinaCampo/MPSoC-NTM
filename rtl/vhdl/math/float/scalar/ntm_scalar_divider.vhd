@@ -74,13 +74,28 @@ architecture ntm_scalar_divider_architecture of ntm_scalar_divider is
 
   type divider_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    INPUT_STATE,                        -- STEP 1
-    ENDER_STATE                         -- STEP 2
+    ARITHMETIC_STATE,                   -- STEP 1
+    ADAPTATION_STATE,                   -- STEP 2
+    NORMALIZATION_STATE,                -- STEP 3
+    ENDER_STATE                         -- STEP 4
     );
 
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
+
+  constant MANTISSA_SIZE : integer := 112;
+  constant EXPONENT_SIZE : integer := 15;
+
+  constant ZERO_MANTISSA  : std_logic_vector(MANTISSA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, MANTISSA_SIZE));
+  constant ONE_MANTISSA   : std_logic_vector(MANTISSA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, MANTISSA_SIZE));
+  constant TWO_MANTISSA   : std_logic_vector(MANTISSA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, MANTISSA_SIZE));
+  constant THREE_MANTISSA : std_logic_vector(MANTISSA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, MANTISSA_SIZE));
+
+  constant ZERO_EXPONENT  : std_logic_vector(EXPONENT_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, EXPONENT_SIZE));
+  constant ONE_EXPONENT   : std_logic_vector(EXPONENT_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, EXPONENT_SIZE));
+  constant TWO_EXPONENT   : std_logic_vector(EXPONENT_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, EXPONENT_SIZE));
+  constant THREE_EXPONENT : std_logic_vector(EXPONENT_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, EXPONENT_SIZE));
 
   constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
   constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
@@ -94,6 +109,12 @@ architecture ntm_scalar_divider_architecture of ntm_scalar_divider is
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+
+  constant FULL_MANTISSA  : std_logic_vector(MANTISSA_SIZE-1 downto 0) := (others => '1');
+  constant EMPTY_MANTISSA : std_logic_vector(MANTISSA_SIZE-1 downto 0) := (others => '0');
+
+  constant FULL_EXPONENT  : std_logic_vector(EXPONENT_SIZE-1 downto 0) := (others => '1');
+  constant EMPTY_EXPONENT : std_logic_vector(EXPONENT_SIZE-1 downto 0) := (others => '0');
 
   constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
@@ -112,10 +133,10 @@ architecture ntm_scalar_divider_architecture of ntm_scalar_divider is
   signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_adder : std_logic_vector(EXPONENT_SIZE-1 downto 0);
+  signal data_a_in_scalar_adder : std_logic_vector(EXPONENT_SIZE-1 downto 0);
+  signal data_b_in_scalar_adder : std_logic_vector(EXPONENT_SIZE-1 downto 0);
+  signal data_out_scalar_adder  : std_logic_vector(EXPONENT_SIZE-1 downto 0);
 
   -- DIVIDER
   -- CONTROL
@@ -123,10 +144,16 @@ architecture ntm_scalar_divider_architecture of ntm_scalar_divider is
   signal ready_scalar_divider : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_divider : std_logic_vector(MANTISSA_SIZE-1 downto 0);
+  signal data_a_in_scalar_divider : std_logic_vector(MANTISSA_SIZE-1 downto 0);
+  signal data_b_in_scalar_divider : std_logic_vector(MANTISSA_SIZE-1 downto 0);
+  signal data_out_scalar_divider  : std_logic_vector(MANTISSA_SIZE-1 downto 0);
+
+  -- OUTPUT
+  signal mantissa_int_scalar_divider : std_logic_vector(MANTISSA_SIZE-1 downto 0);
+  signal exponent_int_scalar_divider : std_logic_vector(EXPONENT_SIZE-1 downto 0);
+
+  signal sign_int_scalar_divider : std_logic;
 
 begin
 
@@ -147,12 +174,21 @@ begin
       READY <= '0';
 
       -- Control Internal
+      start_scalar_adder   <= '0';
       start_scalar_divider <= '0';
 
+      operation_scalar_adder <= '0';
+
       -- Data Internal
-      modulo_in_scalar_divider <= ZERO_DATA;
-      data_a_in_scalar_divider <= ZERO_DATA;
-      data_b_in_scalar_divider <= ZERO_DATA;
+      modulo_in_scalar_adder <= ZERO_EXPONENT;
+      data_a_in_scalar_adder <= ZERO_EXPONENT;
+      data_b_in_scalar_adder <= ZERO_EXPONENT;
+
+      modulo_in_scalar_divider <= ZERO_MANTISSA;
+      data_a_in_scalar_divider <= ZERO_MANTISSA;
+      data_b_in_scalar_divider <= ZERO_MANTISSA;
+
+      sign_int_scalar_divider <= '0';
 
     elsif (rising_edge(CLK)) then
 
@@ -162,21 +198,56 @@ begin
           READY <= '0';
 
           if (START = '1') then
+            -- Control Internal
+            start_scalar_adder   <= '1';
+            start_scalar_divider <= '1';
+
+            operation_scalar_adder <= '1';
+
+            -- Data Internal
+            modulo_in_scalar_adder <= FULL_EXPONENT;
+            data_a_in_scalar_adder <= DATA_A_IN(DATA_SIZE-2 downto MANTISSA_SIZE);
+            data_b_in_scalar_adder <= DATA_B_IN(DATA_SIZE-2 downto MANTISSA_SIZE);
+
+            modulo_in_scalar_divider <= FULL_MANTISSA;
+            data_a_in_scalar_divider <= DATA_A_IN(MANTISSA_SIZE-1 downto 0);
+            data_b_in_scalar_divider <= DATA_B_IN(MANTISSA_SIZE-1 downto 0);
+
+            sign_int_scalar_divider <= DATA_A_IN(DATA_SIZE-1) xor DATA_B_IN(DATA_SIZE-1);
+
             -- FSM Control
-            divider_ctrl_fsm_int <= INPUT_STATE;
+            divider_ctrl_fsm_int <= ARITHMETIC_STATE;
           end if;
 
-        when INPUT_STATE =>  -- STEP 1
-
-        when ENDER_STATE =>  -- STEP 2
+        when ARITHMETIC_STATE =>  -- STEP 1
 
           if (ready_scalar_divider = '1') then
             -- Data Outputs
-            DATA_OUT <= data_out_scalar_divider;
+            mantissa_int_scalar_divider <= data_out_scalar_divider;
           else
             -- Control Internal
             start_scalar_divider <= '0';
           end if;
+
+          if (ready_scalar_adder = '1') then
+            -- Data Outputs
+            exponent_int_scalar_divider <= data_out_scalar_adder;
+          else
+            -- Control Internal
+            start_scalar_adder <= '0';
+          end if;
+
+        when ADAPTATION_STATE =>  -- STEP 2
+
+        when NORMALIZATION_STATE =>  -- STEP 3
+
+        when ENDER_STATE =>  -- STEP 4
+
+          -- Control Outputs
+          READY <= '1';
+
+          -- Data Outputs
+          DATA_OUT <= sign_int_scalar_divider & exponent_int_scalar_divider & mantissa_int_scalar_divider;
 
         when others =>
           -- FSM Control
@@ -185,10 +256,10 @@ begin
     end if;
   end process;
 
-  -- ADDER
+  -- SCALAR ADDER
   scalar_adder : ntm_scalar_modular_adder
     generic map (
-      DATA_SIZE    => DATA_SIZE,
+      DATA_SIZE    => EXPONENT_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -209,10 +280,10 @@ begin
       DATA_OUT  => data_out_scalar_adder
       );
 
-  -- DIVIDER
+  -- SCALAR DIVIDER
   scalar_divider : ntm_scalar_modular_divider
     generic map (
-      DATA_SIZE    => DATA_SIZE,
+      DATA_SIZE    => MANTISSA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
