@@ -79,16 +79,11 @@ architecture ntm_matrix_transpose_architecture of ntm_matrix_transpose is
   -- Types
   -----------------------------------------------------------------------
 
-  type controller_ctrl_fsm is (
+  type transpose_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    MATRIX_INITIAL_I_STATE,             -- STEP 1
-    MATRIX_INITIAL_J_STATE,             -- STEP 2
-    MATRIX_INPUT_I_STATE,               -- STEP 3
-    MATRIX_INPUT_J_STATE,               -- STEP 4
-    VECTOR_MULTIPLIER_STATE,            -- STEP 5
-    SCALAR_ADDER_STATE,                 -- STEP 6
-    MATRIX_UPDATE_I_STATE,              -- STEP 7
-    MATRIX_UPDATE_J_STATE               -- STEP 8
+    INPUT_I_STATE,                      -- STEP 1
+    INPUT_J_STATE,                      -- STEP 2
+    ENDER_STATE                         -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -115,35 +110,25 @@ architecture ntm_matrix_transpose_architecture of ntm_matrix_transpose is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+  signal transpose_ctrl_fsm_int : transpose_ctrl_fsm;
 
   -- Internal Signals
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- SCALAR ADDER
   -- CONTROL
-  signal start_scalar_adder : std_logic;
-  signal ready_scalar_adder : std_logic;
+  signal start_vector_transpose : std_logic;
+  signal ready_vector_transpose : std_logic;
 
-  signal operation_scalar_adder : std_logic;
+  signal data_in_enable_vector_transpose : std_logic;
+
+  signal data_out_enable_vector_transpose : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR MULTIPLIER
-  -- CONTROL
-  signal start_scalar_multiplier : std_logic;
-  signal ready_scalar_multiplier : std_logic;
-
-  -- DATA
-  signal modulo_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_vector_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_transpose   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -163,81 +148,136 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      DATA_OUT_I_ENABLE <= '0';
+      DATA_OUT_J_ENABLE <= '0';
+
+      -- Control Internal
+      start_vector_transpose <= '0';
+
+      index_i_loop <= ZERO_CONTROL;
+      index_j_loop <= ZERO_CONTROL;
+
+      data_in_enable_vector_transpose <= '0';
+
+      -- Data Internal
+      modulo_in_vector_transpose <= ZERO_DATA;
+      size_in_vector_transpose   <= ZERO_CONTROL;
+      data_in_vector_transpose   <= ZERO_DATA;
+
     elsif (rising_edge(CLK)) then
 
-      case controller_ctrl_fsm_int is
+      case transpose_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
+          DATA_OUT_I_ENABLE <= '0';
+          DATA_OUT_J_ENABLE <= '0';
+
           if (START = '1') then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_INITIAL_I_STATE;
+            transpose_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
-        when MATRIX_INITIAL_I_STATE =>  -- STEP 1
-        when MATRIX_INITIAL_J_STATE =>  -- STEP 2
+        when INPUT_I_STATE =>  -- STEP 1
 
-        when MATRIX_INPUT_I_STATE =>  -- STEP 3
-        when MATRIX_INPUT_J_STATE =>  -- STEP 4
+          if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
+            -- Data Inputs
+            modulo_in_vector_transpose <= MODULO_IN;
+            size_in_vector_transpose   <= SIZE_J_IN;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 5
-        when SCALAR_ADDER_STATE =>  -- STEP 6
+            data_in_vector_transpose <= DATA_IN;
 
-        when MATRIX_UPDATE_I_STATE =>  -- STEP 7
-        when MATRIX_UPDATE_J_STATE =>  -- STEP 8
+            -- Control Internal
+            start_vector_transpose <= '1';
+
+            data_in_enable_vector_transpose <= '1';
+
+            -- FSM Control
+            transpose_ctrl_fsm_int <= ENDER_STATE;
+          end if;
+
+          -- Control Outputs
+          DATA_OUT_I_ENABLE <= '0';
+          DATA_OUT_J_ENABLE <= '0';
+
+        when INPUT_J_STATE =>  -- STEP 2
+
+          if (DATA_IN_J_ENABLE = '1') then
+            -- Data Inputs
+            data_in_vector_transpose <= DATA_IN;
+
+            -- Control Internal
+            data_in_enable_vector_transpose <= '1';
+
+            -- FSM Control
+            transpose_ctrl_fsm_int <= ENDER_STATE;
+          end if;
+
+          -- Control Outputs
+          DATA_OUT_J_ENABLE <= '0';
+
+        when ENDER_STATE =>  -- STEP 3
+
+          if (data_out_enable_vector_transpose = '1') then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_transpose;
+
+              -- Control Outputs
+              DATA_OUT_I_ENABLE <= '1';
+              DATA_OUT_J_ENABLE <= '1';
+
+              READY <= '1';
+
+              -- Control Internal
+              index_i_loop <= ZERO_CONTROL;
+              index_j_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              transpose_ctrl_fsm_int <= STARTER_STATE;
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_transpose;
+
+              -- Control Outputs
+              DATA_OUT_I_ENABLE <= '1';
+              DATA_OUT_J_ENABLE <= '1';
+
+              -- Control Internal
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+              index_j_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              transpose_ctrl_fsm_int <= INPUT_I_STATE;
+            elsif ((unsigned(index_i_loop) <= unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_transpose;
+
+              -- Control Outputs
+              DATA_OUT_J_ENABLE <= '1';
+
+              -- Control Internal
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              transpose_ctrl_fsm_int <= INPUT_J_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_vector_transpose <= '0';
+
+            data_in_enable_vector_transpose <= '0';
+          end if;
 
         when others =>
           -- FSM Control
-          controller_ctrl_fsm_int <= STARTER_STATE;
+          transpose_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
-
-  -- SCALAR ADDER
-  ntm_scalar_adder_i : ntm_scalar_adder
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_adder,
-      READY => ready_scalar_adder,
-
-      OPERATION => operation_scalar_adder,
-
-      -- DATA
-      MODULO_IN => modulo_in_scalar_adder,
-      DATA_A_IN => data_a_in_scalar_adder,
-      DATA_B_IN => data_b_in_scalar_adder,
-      DATA_OUT  => data_out_scalar_adder
-      );
-
-  -- SCALAR MULTIPLIER
-  ntm_scalar_multiplier_i : ntm_scalar_multiplier
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_multiplier,
-      READY => ready_scalar_multiplier,
-
-      -- DATA
-      MODULO_IN => modulo_in_scalar_multiplier,
-      DATA_A_IN => data_a_in_scalar_multiplier,
-      DATA_B_IN => data_b_in_scalar_multiplier,
-      DATA_OUT  => data_out_scalar_multiplier
-      );
 
 end architecture;

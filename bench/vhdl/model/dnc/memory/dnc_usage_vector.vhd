@@ -190,15 +190,10 @@ begin
 
           if (START = '1') then
             -- Control Internal
-            start_vector_adder      <= '1';
             start_vector_multiplier <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_ADDER_MULTIPLIER_STATE;
-          else
-            -- Control Internal
-            start_vector_adder      <= '0';
-            start_vector_multiplier <= '0';
           end if;
 
         when VECTOR_ADDER_MULTIPLIER_STATE =>  -- STEP 1

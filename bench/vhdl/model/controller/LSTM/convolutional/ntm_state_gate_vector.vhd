@@ -208,9 +208,6 @@ begin
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_FIRST_MULTIPLIER_STATE;
-          else
-            -- Control Internal
-            start_vector_multiplier <= '0';
           end if;
 
         when VECTOR_FIRST_MULTIPLIER_STATE =>  -- STEP 1
@@ -226,8 +223,10 @@ begin
           data_b_in_vector_multiplier <= S_IN;
 
           if (data_out_enable_vector_multiplier = '1') then
-            -- Control Internal
-            start_vector_multiplier <= '1';
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+              -- Control Internal
+              start_vector_multiplier <= '1';
+            end if;
 
             -- Data Internal
             data_int_vector_multiplier <= data_out_vector_multiplier;
@@ -252,8 +251,10 @@ begin
           data_b_in_vector_multiplier <= A_IN;
 
           if (data_out_enable_vector_multiplier = '1') then
-            -- Control Internal
-            start_vector_adder <= '1';
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+              -- Control Internal
+              start_vector_adder <= '1';
+            end if;
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;

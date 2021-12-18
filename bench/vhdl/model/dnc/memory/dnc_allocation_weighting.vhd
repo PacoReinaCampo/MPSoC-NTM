@@ -174,20 +174,20 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
 
   -- SORT VECTOR
   -- CONTROL
-  signal start_sort_vector : std_logic;
-  signal ready_sort_vector : std_logic;
+  signal start_vector_sort : std_logic;
+  signal ready_vector_sort : std_logic;
 
-  signal u_in_enable_sort_vector : std_logic;
+  signal u_in_enable_vector_sort : std_logic;
 
-  signal u_out_enable_sort_vector : std_logic;
+  signal u_out_enable_vector_sort : std_logic;
 
-  signal phi_out_enable_sort_vector : std_logic;
+  signal phi_out_enable_vector_sort : std_logic;
 
   -- DATA
-  signal size_n_in_sort_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_n_in_vector_sort : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal u_in_sort_vector    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal phi_out_sort_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal u_in_vector_sort    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal phi_out_vector_sort : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -222,30 +222,79 @@ begin
 
           if (START = '1') then
             -- Control Internal
-            start_sort_vector <= '1';
+            start_vector_sort <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_FIRST_SORT_STATE;
-          else
-            -- Control Internal
-            start_sort_vector <= '0';
           end if;
 
         when VECTOR_FIRST_SORT_STATE =>  -- STEP 1
 
           -- Data Inputs
-          size_n_in_sort_vector <= SIZE_N_IN;
-          u_in_sort_vector      <= U_IN;
+          size_n_in_vector_sort <= SIZE_N_IN;
+          u_in_vector_sort      <= U_IN;
+
+          if (phi_out_enable_vector_sort = '1') then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+              -- Control Internal
+              start_vector_adder <= '1';
+            end if;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_sort <= '0';
+          end if;
 
         when VECTOR_ADDER_STATE =>  -- STEP 2
+
+          if (data_out_enable_vector_adder = '1') then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+              -- Control Internal
+              start_vector_sort <= '1';
+            end if;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_SECOND_SORT_STATE;
+          else
+            -- Control Internal
+            start_vector_adder <= '0';
+          end if;
 
         when VECTOR_SECOND_SORT_STATE =>  -- STEP 3
 
           -- Data Inputs
-          size_n_in_sort_vector <= SIZE_N_IN;
-          u_in_sort_vector      <= U_IN;
+          size_n_in_vector_sort <= SIZE_N_IN;
+          u_in_vector_sort      <= U_IN;
+
+          if (phi_out_enable_vector_sort = '1') then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+              -- Control Internal
+              start_vector_multiplication <= '1';
+            end if;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_MULTIPLICATION_STATE;
+          else
+            -- Control Internal
+            start_vector_sort <= '0';
+          end if;
 
         when VECTOR_MULTIPLICATION_STATE =>  -- STEP 4
+
+          if (data_out_vector_enable_vector_multiplication = '1') then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+              -- Control Internal
+              start_vector_multiplier <= '1';
+            end if;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          else
+            -- Control Internal
+            start_vector_multiplication <= '0';
+          end if;
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 5
 
@@ -261,7 +310,7 @@ begin
               index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+              controller_ctrl_fsm_int <= VECTOR_FIRST_SORT_STATE;
             end if;
 
             -- Data Outputs
@@ -289,13 +338,13 @@ begin
   modulo_in_vector_adder <= FULL;
   size_in_vector_adder   <= SIZE_N_IN;
   data_a_in_vector_adder <= ONE_DATA;
-  data_b_in_vector_adder <= phi_out_sort_vector;
+  data_b_in_vector_adder <= phi_out_vector_sort;
 
   -- VECTOR MULTIPLICATION
   modulo_in_vector_multiplication <= FULL;
   length_in_vector_multiplication <= SIZE_N_IN;
   size_in_vector_multiplication   <= SIZE_N_IN;
-  data_in_vector_multiplication   <= phi_out_sort_vector;
+  data_in_vector_multiplication   <= phi_out_vector_sort;
 
   -- VECTOR MULTIPLIER
   modulo_in_vector_multiplier <= FULL;
@@ -402,21 +451,21 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_sort_vector,
-      READY => ready_sort_vector,
+      START => start_vector_sort,
+      READY => ready_vector_sort,
 
-      U_IN_ENABLE => u_in_enable_sort_vector,
+      U_IN_ENABLE => u_in_enable_vector_sort,
 
-      U_OUT_ENABLE => u_out_enable_sort_vector,
+      U_OUT_ENABLE => u_out_enable_vector_sort,
 
-      PHI_OUT_ENABLE => phi_out_enable_sort_vector,
+      PHI_OUT_ENABLE => phi_out_enable_vector_sort,
 
       -- DATA
-      SIZE_N_IN => size_n_in_sort_vector,
+      SIZE_N_IN => size_n_in_vector_sort,
 
-      U_IN => u_in_sort_vector,
+      U_IN => u_in_vector_sort,
 
-      PHI_OUT => phi_out_sort_vector
+      PHI_OUT => phi_out_vector_sort
       );
 
 end architecture;
