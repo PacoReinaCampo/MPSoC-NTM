@@ -219,9 +219,6 @@ begin
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_FIRST_MULTIPLIER_STATE;
-          else
-            -- Control Internal
-            start_vector_multiplier <= '0';
           end if;
 
         when VECTOR_FIRST_MULTIPLIER_STATE =>  -- STEP 1
@@ -232,6 +229,19 @@ begin
           data_a_in_vector_multiplier <= PI_IN;
           data_b_in_vector_multiplier <= B_IN;
 
+          if (data_out_enable_vector_multiplier = '1') then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+              -- Control Internal
+              start_vector_adder <= '1';
+            end if;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_FIRST_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_multiplier <= '0';
+          end if;
+
         when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
 
           -- Data Inputs
@@ -239,6 +249,19 @@ begin
           size_in_vector_adder   <= SIZE_N_IN;
           data_a_in_vector_adder <= ZERO_DATA;
           data_b_in_vector_adder <= data_out_vector_multiplier;
+
+          if (data_out_enable_vector_adder = '1') then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+              -- Control Internal
+              start_vector_multiplier <= '1';
+            end if;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_SECOND_MULTIPLIER_STATE;
+          else
+            -- Control Internal
+            start_vector_adder <= '0';
+          end if;
 
         when VECTOR_SECOND_MULTIPLIER_STATE =>  -- STEP 3
 
@@ -248,6 +271,19 @@ begin
           data_a_in_vector_multiplier <= PI_IN;
           data_b_in_vector_multiplier <= C_IN;
 
+          if (data_out_enable_vector_multiplier = '1') then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+              -- Control Internal
+              start_vector_adder <= '1';
+            end if;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_SECOND_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_multiplier <= '0';
+          end if;
+
         when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
 
           -- Data Inputs
@@ -256,6 +292,19 @@ begin
           data_a_in_vector_adder <= data_out_vector_adder;
           data_b_in_vector_adder <= data_out_vector_multiplier;
 
+          if (data_out_enable_vector_adder = '1') then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+              -- Control Internal
+              start_vector_multiplier <= '1';
+            end if;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_THIRD_MULTIPLIER_STATE;
+          else
+            -- Control Internal
+            start_vector_adder <= '0';
+          end if;
+
         when VECTOR_THIRD_MULTIPLIER_STATE =>  -- STEP 5
 
           -- Data Inputs
@@ -263,6 +312,19 @@ begin
           size_in_vector_multiplier   <= SIZE_N_IN;
           data_a_in_vector_multiplier <= PI_IN;
           data_b_in_vector_multiplier <= F_IN;
+
+          if (data_out_enable_vector_multiplier = '1') then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+              -- Control Internal
+              start_vector_adder <= '1';
+            end if;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_THIRD_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_multiplier <= '0';
+          end if;
 
         when VECTOR_THIRD_ADDER_STATE =>  -- STEP 6
 

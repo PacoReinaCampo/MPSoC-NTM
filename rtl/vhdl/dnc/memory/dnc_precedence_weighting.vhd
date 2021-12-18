@@ -216,9 +216,6 @@ begin
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_SUMMATION_STATE;
-          else
-            -- Control Internal
-            start_vector_summation <= '0';
           end if;
 
         when VECTOR_SUMMATION_STATE =>  -- STEP 1
@@ -259,7 +256,7 @@ begin
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 3
 
-          if (data_out_enable_vector_adder = '1') then
+          if (data_out_enable_vector_multiplier = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_adder <= '1';

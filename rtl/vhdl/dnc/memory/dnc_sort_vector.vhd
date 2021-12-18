@@ -187,12 +187,22 @@ begin
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          end if;
+
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
+
+          if (data_out_enable_vector_multiplier = '1') then
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+              -- Control Internal
+              start_vector_adder <= '1';
+            end if;
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
           else
             -- Control Internal
             start_vector_multiplier <= '0';
           end if;
-
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
 
         when VECTOR_ADDER_STATE =>  -- STEP 2
 
