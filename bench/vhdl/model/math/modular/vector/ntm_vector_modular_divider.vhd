@@ -116,7 +116,7 @@ architecture ntm_vector_modular_divider_architecture of ntm_vector_modular_divid
   signal data_a_in_divider_int : std_logic;
   signal data_b_in_divider_int : std_logic;
 
-  -- DIVIDER
+  -- VECTOR DIVIDER
   -- CONTROL
   signal start_scalar_divider : std_logic;
   signal ready_scalar_divider : std_logic;
@@ -143,7 +143,8 @@ begin
       DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
-      READY           <= '0';
+      READY <= '0';
+
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
@@ -250,7 +251,7 @@ begin
     end if;
   end process;
 
-  -- DIVIDER
+  -- VECTOR DIVIDER
   scalar_divider : ntm_scalar_modular_divider
     generic map (
       DATA_SIZE    => DATA_SIZE,

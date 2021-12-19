@@ -83,7 +83,8 @@ architecture ntm_matrix_modular_mod_architecture of ntm_matrix_modular_mod is
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    ENDER_I_STATE,                      -- STEP 3
+    ENDER_J_STATE                       -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -116,7 +117,7 @@ architecture ntm_matrix_modular_mod_architecture of ntm_matrix_modular_mod is
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- MOD
+  -- VECTOR MOD
   -- CONTROL
   signal start_vector_mod : std_logic;
   signal ready_vector_mod : std_logic;
@@ -198,7 +199,7 @@ begin
             data_in_enable_vector_mod <= '1';
 
             -- FSM Control
-            mod_ctrl_fsm_int <= ENDER_STATE;
+            mod_ctrl_fsm_int <= ENDER_J_STATE;
           end if;
 
           -- Control Outputs
@@ -215,13 +216,17 @@ begin
             data_in_enable_vector_mod <= '1';
 
             -- FSM Control
-            mod_ctrl_fsm_int <= ENDER_STATE;
+            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              mod_ctrl_fsm_int <= ENDER_I_STATE;
+            else
+              mod_ctrl_fsm_int <= ENDER_J_STATE;
+            end if;
           end if;
 
           -- Control Outputs
           DATA_OUT_J_ENABLE <= '0';
 
-        when ENDER_STATE =>  -- STEP 3
+        when ENDER_I_STATE =>  -- STEP 3
 
           if (data_out_enable_vector_mod = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
@@ -254,7 +259,18 @@ begin
 
               -- FSM Control
               mod_ctrl_fsm_int <= INPUT_I_STATE;
-            elsif ((unsigned(index_i_loop) <= unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+            end if;
+          else
+            -- Control Internal
+            start_vector_mod <= '0';
+
+            data_in_enable_vector_mod <= '0';
+          end if;
+
+        when ENDER_J_STATE =>  -- STEP 4
+
+          if (data_out_enable_vector_mod = '1') then
+            if ((unsigned(index_i_loop) <= unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
               DATA_OUT <= data_out_vector_mod;
 
@@ -281,7 +297,7 @@ begin
     end if;
   end process;
 
-  -- MOD
+  -- VECTOR MOD
   vector_mod : ntm_vector_modular_mod
     generic map (
       DATA_SIZE    => DATA_SIZE,

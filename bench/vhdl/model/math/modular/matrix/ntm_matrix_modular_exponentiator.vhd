@@ -86,7 +86,8 @@ architecture ntm_matrix_modular_exponentiator_architecture of ntm_matrix_modular
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    ENDER_I_STATE,                      -- STEP 3
+    ENDER_J_STATE                       -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -124,7 +125,7 @@ architecture ntm_matrix_modular_exponentiator_architecture of ntm_matrix_modular
   signal data_b_in_i_exponentiator_int : std_logic;
   signal data_b_in_j_exponentiator_int : std_logic;
 
-  -- EXPONENTIATOR
+  -- VECTOR EXPONENTIATOR
   -- CONTROL
   signal start_vector_exponentiator : std_logic;
   signal ready_vector_exponentiator : std_logic;
@@ -217,9 +218,6 @@ begin
             data_a_in_enable_vector_exponentiator <= '0';
           end if;
 
-          -- Control Outputs
-          DATA_OUT_I_ENABLE <= '0';
-
           if (((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
             -- Data Inputs
             data_b_in_vector_exponentiator <= DATA_B_IN;
@@ -235,6 +233,7 @@ begin
           end if;
 
           -- Control Outputs
+          DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
 
           if (data_a_in_i_exponentiator_int = '1' and data_a_in_j_exponentiator_int = '1' and data_b_in_i_exponentiator_int = '1' and data_b_in_j_exponentiator_int = '1') then
@@ -254,7 +253,7 @@ begin
             data_b_in_j_exponentiator_int <= '0';
 
             -- FSM Control
-            exponentiator_ctrl_fsm_int <= ENDER_STATE;
+            exponentiator_ctrl_fsm_int <= ENDER_J_STATE;
           end if;
 
         when INPUT_J_STATE =>  -- STEP 2
@@ -297,10 +296,14 @@ begin
             data_b_in_j_exponentiator_int <= '0';
 
             -- FSM Control
-            exponentiator_ctrl_fsm_int <= ENDER_STATE;
+            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              exponentiator_ctrl_fsm_int <= ENDER_I_STATE;
+            else
+              exponentiator_ctrl_fsm_int <= ENDER_J_STATE;
+            end if;
           end if;
 
-        when ENDER_STATE =>  -- STEP 3
+        when ENDER_I_STATE =>  -- STEP 3
 
           if (data_out_enable_vector_exponentiator = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
@@ -333,7 +336,16 @@ begin
 
               -- FSM Control
               exponentiator_ctrl_fsm_int <= INPUT_I_STATE;
-            elsif ((unsigned(index_i_loop) <= unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+            end if;
+          else
+            -- Control Internal
+            start_vector_exponentiator <= '0';
+          end if;
+
+        when ENDER_J_STATE =>  -- STEP 3
+
+          if (data_out_enable_vector_exponentiator = '1') then
+            if ((unsigned(index_i_loop) <= unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
               DATA_OUT <= data_out_vector_exponentiator;
 
@@ -358,7 +370,7 @@ begin
     end if;
   end process;
 
-  -- EXPONENTIATOR
+  -- VECTOR EXPONENTIATOR
   vector_exponentiator : ntm_vector_modular_exponentiator
     generic map (
       DATA_SIZE    => DATA_SIZE,
