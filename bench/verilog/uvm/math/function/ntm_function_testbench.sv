@@ -162,7 +162,9 @@ module ntm_function_testbench;
   wire start_scalar_convolution;
   wire ready_scalar_convolution;
 
-  wire data_in_enable_scalar_convolution;
+  wire data_a_in_enable_scalar_convolution;
+  wire data_b_in_enable_scalar_convolution;
+
   wire data_out_enable_scalar_convolution;
 
   // DATA
@@ -177,7 +179,9 @@ module ntm_function_testbench;
   wire start_scalar_cosine;
   wire ready_scalar_cosine;
 
-  wire data_in_enable_scalar_cosine;
+  wire data_a_in_enable_scalar_cosine;
+  wire data_b_in_enable_scalar_cosine;
+
   wire data_out_enable_scalar_cosine;
 
   // DATA
@@ -813,7 +817,9 @@ module ntm_function_testbench;
     .SCALAR_CONVOLUTION_START(start_scalar_convolution),
     .SCALAR_CONVOLUTION_READY(ready_scalar_convolution),
 
-    .SCALAR_CONVOLUTION_DATA_IN_ENABLE(data_in_enable_scalar_convolution),
+    .SCALAR_CONVOLUTION_DATA_A_IN_ENABLE(data_a_in_enable_scalar_convolution),
+    .SCALAR_CONVOLUTION_DATA_B_IN_ENABLE(data_b_in_enable_scalar_convolution),
+
     .SCALAR_CONVOLUTION_DATA_OUT_ENABLE(data_out_enable_scalar_convolution),
 
     // DATA
@@ -828,7 +834,9 @@ module ntm_function_testbench;
     .SCALAR_COSINE_SIMILARITY_START(start_scalar_cosine),
     .SCALAR_COSINE_SIMILARITY_READY(ready_scalar_cosine),
 
-    .SCALAR_COSINE_SIMILARITY_DATA_IN_ENABLE(data_in_enable_scalar_cosine),
+    .SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE(data_a_in_enable_scalar_cosine),
+    .SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE(data_b_in_enable_scalar_cosine),
+
     .SCALAR_COSINE_SIMILARITY_DATA_OUT_ENABLE(data_out_enable_scalar_cosine),
 
     // DATA
@@ -1309,7 +1317,9 @@ module ntm_function_testbench;
     .START(start_scalar_convolution),
     .READY(ready_scalar_convolution),
 
-    .DATA_IN_ENABLE(data_in_enable_scalar_convolution),
+    .DATA_A_IN_ENABLE(data_a_in_enable_scalar_convolution),
+    .DATA_B_IN_ENABLE(data_b_in_enable_scalar_convolution),
+
     .DATA_OUT_ENABLE(data_out_enable_scalar_convolution),
 
     // DATA
@@ -1334,7 +1344,9 @@ module ntm_function_testbench;
     .START(start_scalar_cosine),
     .READY(ready_scalar_cosine),
 
-    .DATA_IN_ENABLE(data_in_enable_scalar_cosine),
+    .DATA_A_IN_ENABLE(data_a_in_enable_scalar_cosine),
+    .DATA_B_IN_ENABLE(data_b_in_enable_scalar_cosine),
+
     .DATA_OUT_ENABLE(data_out_enable_scalar_cosine),
 
     // DATA

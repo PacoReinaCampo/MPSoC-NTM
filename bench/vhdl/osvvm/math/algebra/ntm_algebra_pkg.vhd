@@ -142,28 +142,21 @@ package ntm_algebra_pkg is
       TENSOR_TRANSPOSE_START : out std_logic;
       TENSOR_TRANSPOSE_READY : in  std_logic;
 
-      TENSOR_TRANSPOSE_DATA_A_IN_I_ENABLE : out std_logic;
-      TENSOR_TRANSPOSE_DATA_A_IN_J_ENABLE : out std_logic;
-      TENSOR_TRANSPOSE_DATA_A_IN_K_ENABLE : out std_logic;
-      TENSOR_TRANSPOSE_DATA_B_IN_I_ENABLE : out std_logic;
-      TENSOR_TRANSPOSE_DATA_B_IN_J_ENABLE : out std_logic;
-      TENSOR_TRANSPOSE_DATA_B_IN_K_ENABLE : out std_logic;
+      TENSOR_TRANSPOSE_DATA_IN_I_ENABLE : out std_logic;
+      TENSOR_TRANSPOSE_DATA_IN_J_ENABLE : out std_logic;
+      TENSOR_TRANSPOSE_DATA_IN_K_ENABLE : out std_logic;
 
       TENSOR_TRANSPOSE_DATA_OUT_I_ENABLE : in std_logic;
       TENSOR_TRANSPOSE_DATA_OUT_J_ENABLE : in std_logic;
       TENSOR_TRANSPOSE_DATA_OUT_K_ENABLE : in std_logic;
 
       -- DATA
-      TENSOR_TRANSPOSE_MODULO_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_TRANSPOSE_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_TRANSPOSE_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_TRANSPOSE_SIZE_A_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_TRANSPOSE_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_TRANSPOSE_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_TRANSPOSE_SIZE_B_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_TRANSPOSE_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_TRANSPOSE_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_TRANSPOSE_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- MATRIX TRANSPOSE
       -- CONTROL
@@ -220,10 +213,10 @@ package ntm_algebra_pkg is
       TENSOR_PRODUCT_MODULO_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_PRODUCT_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       TENSOR_PRODUCT_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_PRODUCT_SIZE_A_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_PRODUCT_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       TENSOR_PRODUCT_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       TENSOR_PRODUCT_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_PRODUCT_SIZE_B_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_PRODUCT_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       TENSOR_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0)

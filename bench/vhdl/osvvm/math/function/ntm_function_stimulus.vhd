@@ -72,7 +72,8 @@ entity ntm_function_stimulus is
     SCALAR_CONVOLUTION_START : out std_logic;
     SCALAR_CONVOLUTION_READY : in  std_logic;
 
-    SCALAR_CONVOLUTION_DATA_IN_ENABLE : out std_logic;
+    SCALAR_CONVOLUTION_DATA_A_IN_ENABLE : out std_logic;
+    SCALAR_CONVOLUTION_DATA_B_IN_ENABLE : out std_logic;
 
     SCALAR_CONVOLUTION_DATA_OUT_ENABLE : in std_logic;
 
@@ -88,7 +89,8 @@ entity ntm_function_stimulus is
     SCALAR_COSINE_SIMILARITY_START : out std_logic;
     SCALAR_COSINE_SIMILARITY_READY : in  std_logic;
 
-    SCALAR_COSINE_SIMILARITY_DATA_IN_ENABLE : out std_logic;
+    SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE : out std_logic;
+    SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE : out std_logic;
 
     SCALAR_COSINE_SIMILARITY_DATA_OUT_ENABLE : in std_logic;
 

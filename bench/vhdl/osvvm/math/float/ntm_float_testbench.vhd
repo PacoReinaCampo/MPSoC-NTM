@@ -392,7 +392,7 @@ begin
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE,
 
       X => X,
       Y => Y,
@@ -657,7 +657,7 @@ begin
     scalar_adder : ntm_scalar_adder
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -683,7 +683,7 @@ begin
     scalar_multiplier : ntm_scalar_multiplier
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -707,7 +707,7 @@ begin
     scalar_inverter : ntm_scalar_inverter
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -730,7 +730,7 @@ begin
     scalar_divider : ntm_scalar_divider
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -754,7 +754,7 @@ begin
     scalar_exponentiator : ntm_scalar_exponentiator
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -782,7 +782,7 @@ begin
     vector_adder : ntm_vector_adder
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -814,7 +814,7 @@ begin
     vector_multiplier : ntm_vector_multiplier
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -844,7 +844,7 @@ begin
     vector_inverter : ntm_vector_inverter
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -872,7 +872,7 @@ begin
     vector_divider : ntm_vector_divider
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -902,7 +902,7 @@ begin
     vector_exponentiator : ntm_vector_exponentiator
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -936,7 +936,7 @@ begin
     matrix_adder : ntm_matrix_adder
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -972,7 +972,7 @@ begin
     matrix_multiplier : ntm_matrix_multiplier
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1006,7 +1006,7 @@ begin
     matrix_inverter : ntm_matrix_inverter
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1037,7 +1037,7 @@ begin
     matrix_divider : ntm_matrix_divider
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1071,7 +1071,7 @@ begin
     matrix_exponentiator : ntm_matrix_exponentiator
       generic map (
         DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL

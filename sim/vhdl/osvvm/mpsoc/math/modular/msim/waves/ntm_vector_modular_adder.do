@@ -21,10 +21,10 @@ add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_adder_test/vector_m
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_adder_test/vector_modular_adder/DATA_B_IN
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_adder_test/vector_modular_adder/READY
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_adder_test/vector_modular_adder/DATA_OUT_ENABLE
+add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_adder_test/vector_modular_adder/index_loop
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_adder_test/vector_modular_adder/DATA_OUT
 
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_adder_test/vector_modular_adder/adder_ctrl_fsm_int
-add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_adder_test/vector_modular_adder/index_loop
 
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_adder_test/vector_modular_adder/start_scalar_adder
 add wave -noupdate /ntm_modular_testbench/ntm_vector_modular_adder_test/vector_modular_adder/operation_scalar_adder
