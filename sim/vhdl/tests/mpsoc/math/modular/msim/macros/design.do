@@ -189,6 +189,78 @@ alias ntm_matrix_modular_exponentiator_design_compilation {
 }
 
 ##################################################################################################
+# ntm_tensor_modular_mod_design_compilation ######################################################
+##################################################################################################
+
+alias ntm_tensor_modular_mod_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/scalar/ntm_scalar_modular_mod.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/vector/ntm_vector_modular_mod.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/matrix/ntm_matrix_modular_mod.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/tensor/ntm_tensor_modular_mod.vhd
+}
+
+##################################################################################################
+# ntm_tensor_modular_adder_design_compilation ####################################################
+##################################################################################################
+
+alias ntm_tensor_modular_adder_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/scalar/ntm_scalar_modular_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/vector/ntm_vector_modular_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/matrix/ntm_matrix_modular_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/tensor/ntm_tensor_modular_adder.vhd
+}
+
+##################################################################################################
+# ntm_tensor_modular_multiplier_design_compilation ###############################################
+##################################################################################################
+
+alias ntm_tensor_modular_multiplier_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/scalar/ntm_scalar_modular_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/vector/ntm_vector_modular_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/matrix/ntm_matrix_modular_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/tensor/ntm_tensor_modular_multiplier.vhd
+}
+
+##################################################################################################
+# ntm_tensor_modular_inverter_design_compilation #################################################
+##################################################################################################
+
+alias ntm_tensor_modular_inverter_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/scalar/ntm_scalar_modular_inverter.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/vector/ntm_vector_modular_inverter.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/matrix/ntm_matrix_modular_inverter.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/tensor/ntm_tensor_modular_inverter.vhd
+}
+
+##################################################################################################
+# ntm_tensor_modular_divider_design_compilation ##################################################
+##################################################################################################
+
+alias ntm_tensor_modular_divider_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/scalar/ntm_scalar_modular_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/vector/ntm_vector_modular_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/matrix/ntm_matrix_modular_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/tensor/ntm_tensor_modular_divider.vhd
+}
+
+##################################################################################################
+# ntm_tensor_modular_exponentiator_design_compilation ############################################
+##################################################################################################
+
+alias ntm_tensor_modular_exponentiator_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/scalar/ntm_scalar_modular_exponentiator.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/vector/ntm_vector_modular_exponentiator.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/matrix/ntm_matrix_modular_exponentiator.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/modular/tensor/ntm_tensor_modular_exponentiator.vhd
+}
+
+##################################################################################################
 
 alias d01 {
   ntm_scalar_modular_mod_design_compilation 
@@ -262,6 +334,30 @@ alias d18 {
   ntm_matrix_modular_exponentiator_design_compilation 
 }
 
+alias d19 {
+  ntm_tensor_modular_mod_design_compilation 
+}
+
+alias d20 {
+  ntm_tensor_modular_adder_design_compilation 
+}
+
+alias d21 {
+  ntm_tensor_modular_multiplier_design_compilation 
+}
+
+alias d22 {
+  ntm_tensor_modular_inverter_design_compilation 
+}
+
+alias d23 {
+  ntm_tensor_modular_divider_design_compilation 
+}
+
+alias d24 {
+  ntm_tensor_modular_exponentiator_design_compilation 
+}
+
 echo "****************************************"
 echo "d01 . NTM-SCALAR-MOD-TEST"
 echo "d02 . NTM-SCALAR-ADDER-TEST"
@@ -281,4 +377,10 @@ echo "d15 . NTM-MATRIX-MULTIPLIER-TEST"
 echo "d16 . NTM-MATRIX-INVERTER-TEST"
 echo "d17 . NTM-MATRIX-DIVIDER-TEST"
 echo "d18 . NTM-MATRIX-EXPONENTIATOR-TEST"
+echo "d19 . NTM-TENSOR-MOD-TEST"
+echo "d20 . NTM-TENSOR-ADDER-TEST"
+echo "d21 . NTM-TENSOR-MULTIPLIER-TEST"
+echo "d22 . NTM-TENSOR-INVERTER-TEST"
+echo "d23 . NTM-TENSOR-DIVIDER-TEST"
+echo "d24 . NTM-TENSOR-EXPONENTIATOR-TEST"
 echo "****************************************"

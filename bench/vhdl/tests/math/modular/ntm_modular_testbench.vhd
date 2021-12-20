@@ -122,7 +122,29 @@ entity ntm_modular_testbench is
     ENABLE_NTM_MATRIX_MODULAR_MULTIPLIER_CASE_1    : boolean := false;
     ENABLE_NTM_MATRIX_MODULAR_INVERTER_CASE_1      : boolean := false;
     ENABLE_NTM_MATRIX_MODULAR_DIVIDER_CASE_1       : boolean := false;
-    ENABLE_NTM_MATRIX_MODULAR_EXPONENTIATOR_CASE_1 : boolean := false
+    ENABLE_NTM_MATRIX_MODULAR_EXPONENTIATOR_CASE_1 : boolean := false;
+
+    -- TENSOR-FUNCTIONALITY
+    ENABLE_NTM_TENSOR_MODULAR_MOD_TEST           : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_ADDER_TEST         : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_MULTIPLIER_TEST    : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_INVERTER_TEST      : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_DIVIDER_TEST       : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_EXPONENTIATOR_TEST : boolean := false;
+
+    ENABLE_NTM_TENSOR_MODULAR_MOD_CASE_0           : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_ADDER_CASE_0         : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_MULTIPLIER_CASE_0    : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_INVERTER_CASE_0      : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_DIVIDER_CASE_0       : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_EXPONENTIATOR_CASE_0 : boolean := false;
+
+    ENABLE_NTM_TENSOR_MODULAR_MOD_CASE_1           : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_ADDER_CASE_1         : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_MULTIPLIER_CASE_1    : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_INVERTER_CASE_1      : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_DIVIDER_CASE_1       : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_EXPONENTIATOR_CASE_1 : boolean := false
     );
 end ntm_modular_testbench;
 
@@ -436,6 +458,154 @@ architecture ntm_modular_testbench_architecture of ntm_modular_testbench is
   signal data_b_in_matrix_modular_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_modular_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -----------------------------------------------------------------------
+  -- TENSOR
+  -----------------------------------------------------------------------
+
+  -- TENSOR MOD
+  -- CONTROL
+  signal start_tensor_modular_mod : std_logic;
+  signal ready_tensor_modular_mod : std_logic;
+
+  signal data_in_i_enable_tensor_modular_mod : std_logic;
+  signal data_in_j_enable_tensor_modular_mod : std_logic;
+  signal data_in_k_enable_tensor_modular_mod : std_logic;
+
+  signal data_out_i_enable_tensor_modular_mod : std_logic;
+  signal data_out_j_enable_tensor_modular_mod : std_logic;
+  signal data_out_k_enable_tensor_modular_mod : std_logic;
+
+  -- DATA
+  signal modulo_in_tensor_modular_mod : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_tensor_modular_mod : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_tensor_modular_mod : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_k_in_tensor_modular_mod : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_tensor_modular_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_modular_mod  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- TENSOR ADDER
+  -- CONTROL
+  signal start_tensor_modular_adder : std_logic;
+  signal ready_tensor_modular_adder : std_logic;
+
+  signal operation_tensor_modular_adder : std_logic;
+
+  signal data_a_in_i_enable_tensor_modular_adder : std_logic;
+  signal data_a_in_j_enable_tensor_modular_adder : std_logic;
+  signal data_a_in_k_enable_tensor_modular_adder : std_logic;
+  signal data_b_in_i_enable_tensor_modular_adder : std_logic;
+  signal data_b_in_j_enable_tensor_modular_adder : std_logic;
+  signal data_b_in_k_enable_tensor_modular_adder : std_logic;
+
+  signal data_out_i_enable_tensor_modular_adder : std_logic;
+  signal data_out_j_enable_tensor_modular_adder : std_logic;
+  signal data_out_k_enable_tensor_modular_adder : std_logic;
+
+  -- DATA
+  signal modulo_in_tensor_modular_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_tensor_modular_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_tensor_modular_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_k_in_tensor_modular_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_tensor_modular_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_modular_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_modular_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- TENSOR MULTIPLIER
+  -- CONTROL
+  signal start_tensor_modular_multiplier : std_logic;
+  signal ready_tensor_modular_multiplier : std_logic;
+
+  signal data_a_in_i_enable_tensor_modular_multiplier : std_logic;
+  signal data_a_in_j_enable_tensor_modular_multiplier : std_logic;
+  signal data_a_in_k_enable_tensor_modular_multiplier : std_logic;
+  signal data_b_in_i_enable_tensor_modular_multiplier : std_logic;
+  signal data_b_in_j_enable_tensor_modular_multiplier : std_logic;
+  signal data_b_in_k_enable_tensor_modular_multiplier : std_logic;
+
+  signal data_out_i_enable_tensor_modular_multiplier : std_logic;
+  signal data_out_j_enable_tensor_modular_multiplier : std_logic;
+  signal data_out_k_enable_tensor_modular_multiplier : std_logic;
+
+  -- DATA
+  signal modulo_in_tensor_modular_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_tensor_modular_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_tensor_modular_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_k_in_tensor_modular_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_tensor_modular_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_modular_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_modular_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- TENSOR INVERTER
+  -- CONTROL
+  signal start_tensor_modular_inverter : std_logic;
+  signal ready_tensor_modular_inverter : std_logic;
+
+  signal data_in_i_enable_tensor_modular_inverter : std_logic;
+  signal data_in_j_enable_tensor_modular_inverter : std_logic;
+  signal data_in_k_enable_tensor_modular_inverter : std_logic;
+
+  signal data_out_i_enable_tensor_modular_inverter : std_logic;
+  signal data_out_j_enable_tensor_modular_inverter : std_logic;
+  signal data_out_k_enable_tensor_modular_inverter : std_logic;
+
+  -- DATA
+  signal modulo_in_tensor_modular_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_tensor_modular_inverter : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_tensor_modular_inverter : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_k_in_tensor_modular_inverter : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_tensor_modular_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_modular_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- TENSOR DIVIDER
+  -- CONTROL
+  signal start_tensor_modular_divider : std_logic;
+  signal ready_tensor_modular_divider : std_logic;
+
+  signal data_a_in_i_enable_tensor_modular_divider : std_logic;
+  signal data_a_in_j_enable_tensor_modular_divider : std_logic;
+  signal data_a_in_k_enable_tensor_modular_divider : std_logic;
+  signal data_b_in_i_enable_tensor_modular_divider : std_logic;
+  signal data_b_in_j_enable_tensor_modular_divider : std_logic;
+  signal data_b_in_k_enable_tensor_modular_divider : std_logic;
+
+  signal data_out_i_enable_tensor_modular_divider : std_logic;
+  signal data_out_j_enable_tensor_modular_divider : std_logic;
+  signal data_out_k_enable_tensor_modular_divider : std_logic;
+
+  -- DATA
+  signal modulo_in_tensor_modular_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_tensor_modular_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_tensor_modular_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_k_in_tensor_modular_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_tensor_modular_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_modular_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_modular_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- TENSOR EXPONENTIATOR
+  -- CONTROL
+  signal start_tensor_modular_exponentiator : std_logic;
+  signal ready_tensor_modular_exponentiator : std_logic;
+
+  signal data_a_in_i_enable_tensor_modular_exponentiator : std_logic;
+  signal data_a_in_j_enable_tensor_modular_exponentiator : std_logic;
+  signal data_a_in_k_enable_tensor_modular_exponentiator : std_logic;
+  signal data_b_in_i_enable_tensor_modular_exponentiator : std_logic;
+  signal data_b_in_j_enable_tensor_modular_exponentiator : std_logic;
+  signal data_b_in_k_enable_tensor_modular_exponentiator : std_logic;
+
+  signal data_out_i_enable_tensor_modular_exponentiator : std_logic;
+  signal data_out_j_enable_tensor_modular_exponentiator : std_logic;
+  signal data_out_k_enable_tensor_modular_exponentiator : std_logic;
+
+  -- DATA
+  signal modulo_in_tensor_modular_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_tensor_modular_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_tensor_modular_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_k_in_tensor_modular_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_tensor_modular_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_modular_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_modular_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
@@ -446,7 +616,7 @@ begin
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE,
 
       X => X,
       Y => Y,
@@ -758,7 +928,155 @@ begin
       MATRIX_MODULAR_EXPONENTIATOR_SIZE_J_IN => size_j_in_matrix_modular_exponentiator,
       MATRIX_MODULAR_EXPONENTIATOR_DATA_A_IN => data_a_in_matrix_modular_exponentiator,
       MATRIX_MODULAR_EXPONENTIATOR_DATA_B_IN => data_b_in_matrix_modular_exponentiator,
-      MATRIX_MODULAR_EXPONENTIATOR_DATA_OUT  => data_out_matrix_modular_exponentiator
+      MATRIX_MODULAR_EXPONENTIATOR_DATA_OUT  => data_out_matrix_modular_exponentiator,
+
+      -----------------------------------------------------------------------
+      -- STIMULUS TENSOR
+      -----------------------------------------------------------------------
+
+      -- TENSOR MOD
+      -- CONTROL
+      TENSOR_MODULAR_MOD_START => start_tensor_modular_mod,
+      TENSOR_MODULAR_MOD_READY => ready_tensor_modular_mod,
+
+      TENSOR_MODULAR_MOD_DATA_IN_I_ENABLE => data_in_i_enable_tensor_modular_mod,
+      TENSOR_MODULAR_MOD_DATA_IN_J_ENABLE => data_in_j_enable_tensor_modular_mod,
+      TENSOR_MODULAR_MOD_DATA_IN_K_ENABLE => data_in_k_enable_tensor_modular_mod,
+
+      TENSOR_MODULAR_MOD_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_modular_mod,
+      TENSOR_MODULAR_MOD_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_modular_mod,
+      TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_modular_mod,
+
+      -- DATA
+      TENSOR_MODULAR_MOD_MODULO_IN => modulo_in_tensor_modular_mod,
+      TENSOR_MODULAR_MOD_SIZE_I_IN => size_i_in_tensor_modular_mod,
+      TENSOR_MODULAR_MOD_SIZE_J_IN => size_j_in_tensor_modular_mod,
+      TENSOR_MODULAR_MOD_SIZE_K_IN => size_k_in_tensor_modular_mod,
+      TENSOR_MODULAR_MOD_DATA_IN   => data_in_tensor_modular_mod,
+      TENSOR_MODULAR_MOD_DATA_OUT  => data_out_tensor_modular_mod,
+
+      -- TENSOR ADDER
+      -- CONTROL
+      TENSOR_MODULAR_ADDER_START => start_tensor_modular_adder,
+      TENSOR_MODULAR_ADDER_READY => ready_tensor_modular_adder,
+
+      TENSOR_MODULAR_ADDER_OPERATION => operation_tensor_modular_adder,
+
+      TENSOR_MODULAR_ADDER_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_modular_adder,
+      TENSOR_MODULAR_ADDER_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_modular_adder,
+      TENSOR_MODULAR_ADDER_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_modular_adder,
+      TENSOR_MODULAR_ADDER_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_modular_adder,
+      TENSOR_MODULAR_ADDER_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_modular_adder,
+      TENSOR_MODULAR_ADDER_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_modular_adder,
+
+      TENSOR_MODULAR_ADDER_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_modular_adder,
+      TENSOR_MODULAR_ADDER_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_modular_adder,
+      TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_modular_adder,
+
+      -- DATA
+      TENSOR_MODULAR_ADDER_MODULO_IN => modulo_in_tensor_modular_adder,
+      TENSOR_MODULAR_ADDER_SIZE_I_IN => size_i_in_tensor_modular_adder,
+      TENSOR_MODULAR_ADDER_SIZE_J_IN => size_j_in_tensor_modular_adder,
+      TENSOR_MODULAR_ADDER_SIZE_K_IN => size_k_in_tensor_modular_adder,
+      TENSOR_MODULAR_ADDER_DATA_A_IN => data_a_in_tensor_modular_adder,
+      TENSOR_MODULAR_ADDER_DATA_B_IN => data_b_in_tensor_modular_adder,
+      TENSOR_MODULAR_ADDER_DATA_OUT  => data_out_tensor_modular_adder,
+
+      -- TENSOR MULTIPLIER
+      -- CONTROL
+      TENSOR_MODULAR_MULTIPLIER_START => start_tensor_modular_multiplier,
+      TENSOR_MODULAR_MULTIPLIER_READY => ready_tensor_modular_multiplier,
+
+      TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_modular_multiplier,
+      TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_modular_multiplier,
+      TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_modular_multiplier,
+      TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_modular_multiplier,
+      TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_modular_multiplier,
+      TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_modular_multiplier,
+
+      TENSOR_MODULAR_MULTIPLIER_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_modular_multiplier,
+      TENSOR_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_modular_multiplier,
+      TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_modular_multiplier,
+
+      -- DATA
+      TENSOR_MODULAR_MULTIPLIER_MODULO_IN => modulo_in_tensor_modular_multiplier,
+      TENSOR_MODULAR_MULTIPLIER_SIZE_I_IN => size_i_in_tensor_modular_multiplier,
+      TENSOR_MODULAR_MULTIPLIER_SIZE_J_IN => size_j_in_tensor_modular_multiplier,
+      TENSOR_MODULAR_MULTIPLIER_SIZE_K_IN => size_k_in_tensor_modular_multiplier,
+      TENSOR_MODULAR_MULTIPLIER_DATA_A_IN => data_a_in_tensor_modular_multiplier,
+      TENSOR_MODULAR_MULTIPLIER_DATA_B_IN => data_b_in_tensor_modular_multiplier,
+      TENSOR_MODULAR_MULTIPLIER_DATA_OUT  => data_out_tensor_modular_multiplier,
+
+      -- TENSOR INVERTER
+      -- CONTROL
+      TENSOR_MODULAR_INVERTER_START => start_tensor_modular_inverter,
+      TENSOR_MODULAR_INVERTER_READY => ready_tensor_modular_inverter,
+
+      TENSOR_MODULAR_INVERTER_DATA_IN_I_ENABLE => data_in_i_enable_tensor_modular_inverter,
+      TENSOR_MODULAR_INVERTER_DATA_IN_J_ENABLE => data_in_j_enable_tensor_modular_inverter,
+      TENSOR_MODULAR_INVERTER_DATA_IN_K_ENABLE => data_in_k_enable_tensor_modular_inverter,
+
+      TENSOR_MODULAR_INVERTER_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_modular_inverter,
+      TENSOR_MODULAR_INVERTER_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_modular_inverter,
+      TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_modular_inverter,
+
+      -- DATA
+      TENSOR_MODULAR_INVERTER_MODULO_IN => modulo_in_tensor_modular_inverter,
+      TENSOR_MODULAR_INVERTER_SIZE_I_IN => size_i_in_tensor_modular_inverter,
+      TENSOR_MODULAR_INVERTER_SIZE_J_IN => size_j_in_tensor_modular_inverter,
+      TENSOR_MODULAR_INVERTER_SIZE_K_IN => size_k_in_tensor_modular_inverter,
+      TENSOR_MODULAR_INVERTER_DATA_IN   => data_in_tensor_modular_inverter,
+      TENSOR_MODULAR_INVERTER_DATA_OUT  => data_out_tensor_modular_inverter,
+
+      -- TENSOR DIVIDER
+      -- CONTROL
+      TENSOR_MODULAR_DIVIDER_START => start_tensor_modular_divider,
+      TENSOR_MODULAR_DIVIDER_READY => ready_tensor_modular_divider,
+
+      TENSOR_MODULAR_DIVIDER_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_modular_divider,
+      TENSOR_MODULAR_DIVIDER_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_modular_divider,
+      TENSOR_MODULAR_DIVIDER_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_modular_divider,
+      TENSOR_MODULAR_DIVIDER_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_modular_divider,
+      TENSOR_MODULAR_DIVIDER_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_modular_divider,
+      TENSOR_MODULAR_DIVIDER_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_modular_divider,
+
+      TENSOR_MODULAR_DIVIDER_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_modular_divider,
+      TENSOR_MODULAR_DIVIDER_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_modular_divider,
+      TENSOR_MODULAR_DIVIDER_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_modular_divider,
+
+      -- DATA
+      TENSOR_MODULAR_DIVIDER_MODULO_IN => modulo_in_tensor_modular_divider,
+      TENSOR_MODULAR_DIVIDER_SIZE_I_IN => size_i_in_tensor_modular_divider,
+      TENSOR_MODULAR_DIVIDER_SIZE_J_IN => size_j_in_tensor_modular_divider,
+      TENSOR_MODULAR_DIVIDER_SIZE_K_IN => size_k_in_tensor_modular_divider,
+      TENSOR_MODULAR_DIVIDER_DATA_A_IN => data_a_in_tensor_modular_divider,
+      TENSOR_MODULAR_DIVIDER_DATA_B_IN => data_b_in_tensor_modular_divider,
+      TENSOR_MODULAR_DIVIDER_DATA_OUT  => data_out_tensor_modular_divider,
+
+      -- TENSOR EXPONENTIATOR
+      -- CONTROL
+      TENSOR_MODULAR_EXPONENTIATOR_START => start_tensor_modular_exponentiator,
+      TENSOR_MODULAR_EXPONENTIATOR_READY => ready_tensor_modular_exponentiator,
+
+      TENSOR_MODULAR_EXPONENTIATOR_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_modular_exponentiator,
+      TENSOR_MODULAR_EXPONENTIATOR_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_modular_exponentiator,
+      TENSOR_MODULAR_EXPONENTIATOR_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_modular_exponentiator,
+      TENSOR_MODULAR_EXPONENTIATOR_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_modular_exponentiator,
+      TENSOR_MODULAR_EXPONENTIATOR_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_modular_exponentiator,
+      TENSOR_MODULAR_EXPONENTIATOR_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_modular_exponentiator,
+
+      TENSOR_MODULAR_EXPONENTIATOR_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_modular_exponentiator,
+      TENSOR_MODULAR_EXPONENTIATOR_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_modular_exponentiator,
+      TENSOR_MODULAR_EXPONENTIATOR_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_modular_exponentiator,
+
+      -- DATA
+      TENSOR_MODULAR_EXPONENTIATOR_MODULO_IN => modulo_in_tensor_modular_exponentiator,
+      TENSOR_MODULAR_EXPONENTIATOR_SIZE_I_IN => size_i_in_tensor_modular_exponentiator,
+      TENSOR_MODULAR_EXPONENTIATOR_SIZE_J_IN => size_j_in_tensor_modular_exponentiator,
+      TENSOR_MODULAR_EXPONENTIATOR_SIZE_K_IN => size_k_in_tensor_modular_exponentiator,
+      TENSOR_MODULAR_EXPONENTIATOR_DATA_A_IN => data_a_in_tensor_modular_exponentiator,
+      TENSOR_MODULAR_EXPONENTIATOR_DATA_B_IN => data_b_in_tensor_modular_exponentiator,
+      TENSOR_MODULAR_EXPONENTIATOR_DATA_OUT  => data_out_tensor_modular_exponentiator
       );
 
   -----------------------------------------------------------------------
@@ -769,8 +1087,8 @@ begin
   ntm_scalar_modular_mod_test : if (ENABLE_NTM_SCALAR_MODULAR_MOD_TEST) generate
     scalar_modular_mod : ntm_scalar_modular_mod
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -792,8 +1110,8 @@ begin
   ntm_scalar_modular_adder_test : if (ENABLE_NTM_SCALAR_MODULAR_ADDER_TEST) generate
     scalar_modular_adder : ntm_scalar_modular_adder
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -818,8 +1136,8 @@ begin
   ntm_scalar_modular_multiplier_test : if (ENABLE_NTM_SCALAR_MODULAR_MULTIPLIER_TEST) generate
     scalar_modular_multiplier : ntm_scalar_modular_multiplier
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -842,8 +1160,8 @@ begin
   ntm_scalar_modular_inverter_test : if (ENABLE_NTM_SCALAR_MODULAR_INVERTER_TEST) generate
     scalar_modular_inverter : ntm_scalar_modular_inverter
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -865,8 +1183,8 @@ begin
   ntm_scalar_modular_divider_test : if (ENABLE_NTM_SCALAR_MODULAR_DIVIDER_TEST) generate
     scalar_modular_divider : ntm_scalar_modular_divider
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -889,8 +1207,8 @@ begin
   ntm_scalar_modular_exponentiator_test : if (ENABLE_NTM_SCALAR_MODULAR_EXPONENTIATOR_TEST) generate
     scalar_modular_exponentiator : ntm_scalar_modular_exponentiator
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -917,8 +1235,8 @@ begin
   ntm_vector_modular_mod_test : if (ENABLE_NTM_VECTOR_MODULAR_MOD_TEST) generate
     vector_modular_mod : ntm_vector_modular_mod
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -945,8 +1263,8 @@ begin
   ntm_vector_modular_adder_test : if (ENABLE_NTM_VECTOR_MODULAR_ADDER_TEST) generate
     vector_modular_adder : ntm_vector_modular_adder
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -977,8 +1295,8 @@ begin
   ntm_vector_modular_multiplier_test : if (ENABLE_NTM_VECTOR_MODULAR_MULTIPLIER_TEST) generate
     vector_modular_multiplier : ntm_vector_modular_multiplier
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1007,8 +1325,8 @@ begin
   ntm_vector_modular_inverter_test : if (ENABLE_NTM_VECTOR_MODULAR_INVERTER_TEST) generate
     vector_modular_inverter : ntm_vector_modular_inverter
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1035,8 +1353,8 @@ begin
   ntm_vector_modular_divider_test : if (ENABLE_NTM_VECTOR_MODULAR_DIVIDER_TEST) generate
     vector_modular_divider : ntm_vector_modular_divider
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1065,8 +1383,8 @@ begin
   ntm_vector_modular_exponentiator_test : if (ENABLE_NTM_VECTOR_MODULAR_EXPONENTIATOR_TEST) generate
     vector_modular_exponentiator : ntm_vector_modular_exponentiator
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1099,8 +1417,8 @@ begin
   ntm_matrix_modular_mod_test : if (ENABLE_NTM_MATRIX_MODULAR_MOD_TEST) generate
     matrix_modular_mod : ntm_matrix_modular_mod
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1130,8 +1448,8 @@ begin
   ntm_matrix_modular_adder_test : if (ENABLE_NTM_MATRIX_MODULAR_ADDER_TEST) generate
     matrix_modular_adder : ntm_matrix_modular_adder
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1166,8 +1484,8 @@ begin
   ntm_matrix_modular_multiplier_test : if (ENABLE_NTM_MATRIX_MODULAR_MULTIPLIER_TEST) generate
     matrix_modular_multiplier : ntm_matrix_modular_multiplier
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1200,8 +1518,8 @@ begin
   ntm_matrix_modular_inverter_test : if (ENABLE_NTM_MATRIX_MODULAR_INVERTER_TEST) generate
     matrix_modular_inverter : ntm_matrix_modular_inverter
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1231,8 +1549,8 @@ begin
   ntm_matrix_modular_divider_test : if (ENABLE_NTM_MATRIX_MODULAR_DIVIDER_TEST) generate
     matrix_modular_divider : ntm_matrix_modular_divider
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1265,8 +1583,8 @@ begin
   ntm_matrix_modular_exponentiator_test : if (ENABLE_NTM_MATRIX_MODULAR_EXPONENTIATOR_TEST) generate
     matrix_modular_exponentiator : ntm_matrix_modular_exponentiator
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -1294,5 +1612,231 @@ begin
         DATA_OUT  => data_out_matrix_modular_exponentiator
         );
   end generate ntm_matrix_modular_exponentiator_test;
+
+  -----------------------------------------------------------------------
+  -- TENSOR
+  -----------------------------------------------------------------------
+
+  -- TENSOR MOD
+  ntm_tensor_modular_mod_test : if (ENABLE_NTM_TENSOR_MODULAR_MOD_TEST) generate
+    tensor_modular_mod : ntm_tensor_modular_mod
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_tensor_modular_mod,
+        READY => ready_tensor_modular_mod,
+
+        DATA_IN_I_ENABLE => data_in_i_enable_tensor_modular_mod,
+        DATA_IN_J_ENABLE => data_in_j_enable_tensor_modular_mod,
+        DATA_IN_K_ENABLE => data_in_k_enable_tensor_modular_mod,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_modular_mod,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_modular_mod,
+        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_modular_mod,
+
+        -- DATA
+        MODULO_IN => modulo_in_tensor_modular_mod,
+        SIZE_I_IN => size_i_in_tensor_modular_mod,
+        SIZE_J_IN => size_j_in_tensor_modular_mod,
+        SIZE_K_IN => size_k_in_tensor_modular_mod,
+        DATA_IN   => data_in_tensor_modular_mod,
+        DATA_OUT  => data_out_tensor_modular_mod
+        );
+  end generate ntm_tensor_modular_mod_test;
+
+  -- TENSOR ADDER
+  ntm_tensor_modular_adder_test : if (ENABLE_NTM_TENSOR_MODULAR_ADDER_TEST) generate
+    tensor_modular_adder : ntm_tensor_modular_adder
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_tensor_modular_adder,
+        READY => ready_tensor_modular_adder,
+
+        OPERATION => operation_tensor_modular_adder,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_modular_adder,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_modular_adder,
+        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_modular_adder,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_modular_adder,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_modular_adder,
+        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_modular_adder,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_modular_adder,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_modular_adder,
+        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_modular_adder,
+
+        -- DATA
+        MODULO_IN => modulo_in_tensor_modular_adder,
+        SIZE_I_IN => size_i_in_tensor_modular_adder,
+        SIZE_J_IN => size_j_in_tensor_modular_adder,
+        SIZE_K_IN => size_k_in_tensor_modular_adder,
+        DATA_A_IN => data_a_in_tensor_modular_adder,
+        DATA_B_IN => data_b_in_tensor_modular_adder,
+        DATA_OUT  => data_out_tensor_modular_adder
+        );
+  end generate ntm_tensor_modular_adder_test;
+
+  -- TENSOR MULTIPLIER
+  ntm_tensor_modular_multiplier_test : if (ENABLE_NTM_TENSOR_MODULAR_MULTIPLIER_TEST) generate
+    tensor_modular_multiplier : ntm_tensor_modular_multiplier
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_tensor_modular_multiplier,
+        READY => ready_tensor_modular_multiplier,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_modular_multiplier,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_modular_multiplier,
+        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_modular_multiplier,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_modular_multiplier,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_modular_multiplier,
+        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_modular_multiplier,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_modular_multiplier,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_modular_multiplier,
+        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_modular_multiplier,
+
+        -- DATA
+        MODULO_IN => modulo_in_tensor_modular_multiplier,
+        SIZE_I_IN => size_i_in_tensor_modular_multiplier,
+        SIZE_J_IN => size_j_in_tensor_modular_multiplier,
+        SIZE_K_IN => size_k_in_tensor_modular_multiplier,
+        DATA_A_IN => data_a_in_tensor_modular_multiplier,
+        DATA_B_IN => data_b_in_tensor_modular_multiplier,
+        DATA_OUT  => data_out_tensor_modular_multiplier
+        );
+  end generate ntm_tensor_modular_multiplier_test;
+
+  -- TENSOR INVERTER
+  ntm_tensor_modular_inverter_test : if (ENABLE_NTM_TENSOR_MODULAR_INVERTER_TEST) generate
+    tensor_modular_inverter : ntm_tensor_modular_inverter
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_tensor_modular_inverter,
+        READY => ready_tensor_modular_inverter,
+
+        DATA_IN_I_ENABLE => data_in_i_enable_tensor_modular_inverter,
+        DATA_IN_J_ENABLE => data_in_j_enable_tensor_modular_inverter,
+        DATA_IN_K_ENABLE => data_in_k_enable_tensor_modular_inverter,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_modular_inverter,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_modular_inverter,
+        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_modular_inverter,
+
+        -- DATA
+        MODULO_IN => modulo_in_tensor_modular_inverter,
+        SIZE_I_IN => size_i_in_tensor_modular_inverter,
+        SIZE_J_IN => size_j_in_tensor_modular_inverter,
+        SIZE_K_IN => size_k_in_tensor_modular_inverter,
+        DATA_IN   => data_in_tensor_modular_inverter,
+        DATA_OUT  => data_out_tensor_modular_inverter
+        );
+  end generate ntm_tensor_modular_inverter_test;
+
+  -- TENSOR DIVIDER
+  ntm_tensor_modular_divider_test : if (ENABLE_NTM_TENSOR_MODULAR_DIVIDER_TEST) generate
+    tensor_modular_divider : ntm_tensor_modular_divider
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_tensor_modular_divider,
+        READY => ready_tensor_modular_divider,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_modular_divider,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_modular_divider,
+        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_modular_divider,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_modular_divider,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_modular_divider,
+        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_modular_divider,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_modular_divider,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_modular_divider,
+        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_modular_divider,
+
+        -- DATA
+        MODULO_IN => modulo_in_tensor_modular_divider,
+        SIZE_I_IN => size_i_in_tensor_modular_divider,
+        SIZE_J_IN => size_j_in_tensor_modular_divider,
+        SIZE_K_IN => size_k_in_tensor_modular_divider,
+        DATA_A_IN => data_a_in_tensor_modular_divider,
+        DATA_B_IN => data_b_in_tensor_modular_divider,
+        DATA_OUT  => data_out_tensor_modular_divider
+        );
+  end generate ntm_tensor_modular_divider_test;
+
+  -- TENSOR EXPONENTIATOR
+  ntm_tensor_modular_exponentiator_test : if (ENABLE_NTM_TENSOR_MODULAR_EXPONENTIATOR_TEST) generate
+    tensor_modular_exponentiator : ntm_tensor_modular_exponentiator
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_tensor_modular_exponentiator,
+        READY => ready_tensor_modular_exponentiator,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_modular_exponentiator,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_modular_exponentiator,
+        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_modular_exponentiator,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_modular_exponentiator,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_modular_exponentiator,
+        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_modular_exponentiator,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_modular_exponentiator,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_modular_exponentiator,
+        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_modular_exponentiator,
+
+        -- DATA
+        MODULO_IN => modulo_in_tensor_modular_exponentiator,
+        SIZE_I_IN => size_i_in_tensor_modular_exponentiator,
+        SIZE_J_IN => size_j_in_tensor_modular_exponentiator,
+        SIZE_K_IN => size_k_in_tensor_modular_exponentiator,
+        DATA_A_IN => data_a_in_tensor_modular_exponentiator,
+        DATA_B_IN => data_b_in_tensor_modular_exponentiator,
+        DATA_OUT  => data_out_tensor_modular_exponentiator
+        );
+  end generate ntm_tensor_modular_exponentiator_test;
 
 end ntm_modular_testbench_architecture;

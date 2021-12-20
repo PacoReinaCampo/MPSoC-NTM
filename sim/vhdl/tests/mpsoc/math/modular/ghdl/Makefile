@@ -24,6 +24,13 @@ build:
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_divider.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_exponentiator.vhd
 
+	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/modular/tensor/ntm_tensor_modular_mod.vhd
+	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/modular/tensor/ntm_tensor_modular_adder.vhd
+	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/modular/tensor/ntm_tensor_modular_multiplier.vhd
+	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/modular/tensor/ntm_tensor_modular_inverter.vhd
+	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/modular/tensor/ntm_tensor_modular_divider.vhd
+	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/modular/tensor/ntm_tensor_modular_exponentiator.vhd
+
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/math/modular/ntm_modular_pkg.vhd
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/math/modular/ntm_modular_stimulus.vhd
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/math/modular/ntm_modular_testbench.vhd

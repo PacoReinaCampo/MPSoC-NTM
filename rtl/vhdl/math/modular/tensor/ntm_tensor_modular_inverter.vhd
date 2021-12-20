@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_tensor_transpose is
+entity ntm_tensor_modular_inverter is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -76,13 +76,13 @@ entity ntm_tensor_transpose is
     );
 end entity;
 
-architecture ntm_tensor_transpose_architecture of ntm_tensor_transpose is
+architecture ntm_tensor_modular_inverter_architecture of ntm_tensor_modular_inverter is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type transpose_ctrl_fsm is (
+  type inverter_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
@@ -116,29 +116,30 @@ architecture ntm_tensor_transpose_architecture of ntm_tensor_transpose is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal transpose_ctrl_fsm_int : transpose_ctrl_fsm;
+  signal inverter_ctrl_fsm_int : inverter_ctrl_fsm;
 
   -- Internal Signals
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- MATRIX INVERTER
   -- CONTROL
-  signal start_vector_transpose : std_logic;
-  signal ready_vector_transpose : std_logic;
+  signal start_matrix_modular_inverter : std_logic;
+  signal ready_matrix_modular_inverter : std_logic;
 
-  signal data_in_i_enable_vector_transpose : std_logic;
-  signal data_in_j_enable_vector_transpose : std_logic;
+  signal data_in_i_enable_matrix_modular_inverter : std_logic;
+  signal data_in_j_enable_matrix_modular_inverter : std_logic;
 
-  signal data_out_i_enable_vector_transpose : std_logic;
-  signal data_out_j_enable_vector_transpose : std_logic;
+  signal data_out_i_enable_matrix_modular_inverter : std_logic;
+  signal data_out_j_enable_matrix_modular_inverter : std_logic;
 
   -- DATA
-  signal modulo_in_vector_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_vector_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_vector_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_modular_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_modular_inverter : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_modular_inverter : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_matrix_modular_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_modular_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -146,7 +147,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = transpose(DATA_IN)
+  -- 1 = DATA_OUT · DATA_IN mod MODULO_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -163,24 +164,24 @@ begin
       DATA_OUT_K_ENABLE <= '0';
 
       -- Control Internal
-      start_vector_transpose <= '0';
+      start_matrix_modular_inverter <= '0';
 
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
       index_k_loop <= ZERO_CONTROL;
 
-      data_in_i_enable_vector_transpose <= '0';
-      data_in_j_enable_vector_transpose <= '0';
+      data_in_i_enable_matrix_modular_inverter <= '0';
+      data_in_j_enable_matrix_modular_inverter <= '0';
 
       -- Data Internal
-      modulo_in_vector_transpose <= ZERO_DATA;
-      size_i_in_vector_transpose <= ZERO_CONTROL;
-      size_j_in_vector_transpose <= ZERO_CONTROL;
-      data_in_vector_transpose   <= ZERO_DATA;
+      modulo_in_matrix_modular_inverter <= ZERO_DATA;
+      size_i_in_matrix_modular_inverter <= ZERO_CONTROL;
+      size_j_in_matrix_modular_inverter <= ZERO_CONTROL;
+      data_in_matrix_modular_inverter   <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
-      case transpose_ctrl_fsm_int is
+      case inverter_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -190,33 +191,32 @@ begin
           DATA_OUT_K_ENABLE <= '0';
 
           if (START = '1') then
-            -- Control Internal
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
             index_k_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            transpose_ctrl_fsm_int <= INPUT_I_STATE;
+            inverter_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
         when INPUT_I_STATE =>  -- STEP 1
 
           if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1') and (DATA_IN_K_ENABLE = '1')) or ((index_i_loop = ZERO_CONTROL) and (index_j_loop = ZERO_CONTROL))) then
             -- Data Inputs
-            modulo_in_vector_transpose <= MODULO_IN;
-            size_i_in_vector_transpose <= SIZE_J_IN;
-            size_j_in_vector_transpose <= SIZE_K_IN;
+            modulo_in_matrix_modular_inverter <= MODULO_IN;
+            size_i_in_matrix_modular_inverter <= SIZE_J_IN;
+            size_j_in_matrix_modular_inverter <= SIZE_K_IN;
 
-            data_in_vector_transpose <= DATA_IN;
+            data_in_matrix_modular_inverter <= DATA_IN;
 
             -- Control Internal
-            start_vector_transpose <= '1';
+            start_matrix_modular_inverter <= '1';
 
-            data_in_i_enable_vector_transpose <= '1';
-            data_in_j_enable_vector_transpose <= '1';
+            data_in_i_enable_matrix_modular_inverter <= '1';
+            data_in_j_enable_matrix_modular_inverter <= '1';
 
             -- FSM Control
-            transpose_ctrl_fsm_int <= ENDER_J_STATE;
+            inverter_ctrl_fsm_int <= ENDER_J_STATE;
           end if;
 
           -- Control Outputs
@@ -228,16 +228,16 @@ begin
 
           if (((DATA_IN_J_ENABLE = '1') and (DATA_IN_K_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
             -- Data Inputs
-            data_in_vector_transpose <= DATA_IN;
+            data_in_matrix_modular_inverter <= DATA_IN;
 
             -- Control Internal
-            data_in_j_enable_vector_transpose <= '1';
+            data_in_j_enable_matrix_modular_inverter <= '1';
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              transpose_ctrl_fsm_int <= ENDER_I_STATE;
+              inverter_ctrl_fsm_int <= ENDER_I_STATE;
             else
-              transpose_ctrl_fsm_int <= ENDER_J_STATE;
+              inverter_ctrl_fsm_int <= ENDER_J_STATE;
             end if;
           end if;
 
@@ -249,23 +249,23 @@ begin
 
           if (DATA_IN_K_ENABLE = '1') then
             -- Data Inputs
-            data_in_vector_transpose <= DATA_IN;
+            data_in_matrix_modular_inverter <= DATA_IN;
 
             -- Control Internal
-            data_in_j_enable_vector_transpose <= '1';
+            data_in_j_enable_matrix_modular_inverter <= '1';
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
               if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
-                transpose_ctrl_fsm_int <= ENDER_I_STATE;
+                inverter_ctrl_fsm_int <= ENDER_I_STATE;
               else
-                transpose_ctrl_fsm_int <= ENDER_J_STATE;
+                inverter_ctrl_fsm_int <= ENDER_J_STATE;
               end if;
             else
               if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
-                transpose_ctrl_fsm_int <= ENDER_J_STATE;
+                inverter_ctrl_fsm_int <= ENDER_J_STATE;
               else
-                transpose_ctrl_fsm_int <= ENDER_K_STATE;
+                inverter_ctrl_fsm_int <= ENDER_K_STATE;
               end if;
             end if;
           end if;
@@ -275,10 +275,10 @@ begin
 
         when ENDER_I_STATE =>  -- STEP 4
 
-          if (data_out_i_enable_vector_transpose = '1' and data_out_j_enable_vector_transpose = '1') then
+          if (data_out_i_enable_matrix_modular_inverter = '1' and data_out_j_enable_matrix_modular_inverter = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_transpose;
+              DATA_OUT <= data_out_matrix_modular_inverter;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -293,10 +293,10 @@ begin
               index_k_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              transpose_ctrl_fsm_int <= STARTER_STATE;
+              inverter_ctrl_fsm_int <= STARTER_STATE;
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_transpose;
+              DATA_OUT <= data_out_matrix_modular_inverter;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -309,22 +309,22 @@ begin
               index_k_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              transpose_ctrl_fsm_int <= INPUT_I_STATE;
+              inverter_ctrl_fsm_int <= INPUT_I_STATE;
             end if;
           else
             -- Control Internal
-            start_vector_transpose <= '0';
+            start_matrix_modular_inverter <= '0';
 
-            data_in_i_enable_vector_transpose <= '0';
-            data_in_j_enable_vector_transpose <= '0';
+            data_in_i_enable_matrix_modular_inverter <= '0';
+            data_in_j_enable_matrix_modular_inverter <= '0';
           end if;
 
         when ENDER_J_STATE =>  -- STEP 5
 
-          if (data_out_j_enable_vector_transpose = '1') then
+          if (data_out_j_enable_matrix_modular_inverter = '1') then
             if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_transpose;
+              DATA_OUT <= data_out_matrix_modular_inverter;
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';
@@ -335,10 +335,10 @@ begin
               index_k_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              transpose_ctrl_fsm_int <= INPUT_I_STATE;
+              inverter_ctrl_fsm_int <= STARTER_STATE;
             elsif ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_transpose;
+              DATA_OUT <= data_out_matrix_modular_inverter;
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';
@@ -349,22 +349,21 @@ begin
               index_k_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              transpose_ctrl_fsm_int <= INPUT_J_STATE;
+              inverter_ctrl_fsm_int <= INPUT_J_STATE;
             end if;
           else
             -- Control Internal
-            start_vector_transpose <= '0';
+            start_matrix_modular_inverter <= '0';
 
-            data_in_i_enable_vector_transpose <= '0';
-            data_in_j_enable_vector_transpose <= '0';
+            data_in_i_enable_matrix_modular_inverter <= '0';
           end if;
 
         when ENDER_K_STATE =>  -- STEP 6
 
-          if (data_out_j_enable_vector_transpose = '1') then
+          if (data_out_j_enable_matrix_modular_inverter = '1') then
             if ((unsigned(index_j_loop) <= unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) < unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_transpose;
+              DATA_OUT <= data_out_matrix_modular_inverter;
 
               -- Control Outputs
               DATA_OUT_K_ENABLE <= '1';
@@ -373,21 +372,49 @@ begin
               index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
-              transpose_ctrl_fsm_int <= INPUT_K_STATE;
+              inverter_ctrl_fsm_int <= INPUT_K_STATE;
             end if;
           else
             -- Control Internal
-            start_vector_transpose <= '0';
+            start_matrix_modular_inverter <= '0';
 
-            data_in_i_enable_vector_transpose <= '0';
-            data_in_j_enable_vector_transpose <= '0';
+            data_in_i_enable_matrix_modular_inverter <= '0';
           end if;
 
         when others =>
           -- FSM Control
-          transpose_ctrl_fsm_int <= STARTER_STATE;
+          inverter_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
+
+  -- MATRIX INVERTER
+    matrix_modular_inverter : ntm_matrix_modular_inverter
+      generic map (
+        DATA_SIZE  => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_matrix_modular_inverter,
+        READY => ready_matrix_modular_inverter,
+
+        DATA_IN_I_ENABLE => data_in_i_enable_matrix_modular_inverter,
+        DATA_IN_J_ENABLE => data_in_j_enable_matrix_modular_inverter,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_modular_inverter,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_modular_inverter,
+
+        -- DATA
+        MODULO_IN => modulo_in_matrix_modular_inverter,
+        SIZE_I_IN => size_i_in_matrix_modular_inverter,
+        SIZE_J_IN => size_j_in_matrix_modular_inverter,
+        DATA_IN   => data_in_matrix_modular_inverter,
+        DATA_OUT  => data_out_matrix_modular_inverter
+        );
 
 end architecture;
