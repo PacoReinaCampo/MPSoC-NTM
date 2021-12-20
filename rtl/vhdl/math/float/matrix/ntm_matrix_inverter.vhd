@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_matrix_inverter is
+entity ntm_matrix_modular_inverter is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -73,7 +73,7 @@ entity ntm_matrix_inverter is
     );
 end entity;
 
-architecture ntm_matrix_inverter_architecture of ntm_matrix_inverter is
+architecture ntm_matrix_modular_inverter_architecture of ntm_matrix_modular_inverter is
 
   -----------------------------------------------------------------------
   -- Types
@@ -83,7 +83,8 @@ architecture ntm_matrix_inverter_architecture of ntm_matrix_inverter is
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    ENDER_I_STATE,                      -- STEP 3
+    ENDER_J_STATE                       -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -116,7 +117,7 @@ architecture ntm_matrix_inverter_architecture of ntm_matrix_inverter is
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- INVERTER
+  -- VECTOR INVERTER
   -- CONTROL
   signal start_vector_inverter : std_logic;
   signal ready_vector_inverter : std_logic;
@@ -137,7 +138,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- 1 = DATA_OUT · DATA_IN mod MODULO_IN
+  -- DATA_OUT = 1 / DATA_IN  = 1 / M_IN · 2^(-E_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -198,7 +199,7 @@ begin
             data_in_enable_vector_inverter <= '1';
 
             -- FSM Control
-            inverter_ctrl_fsm_int <= ENDER_STATE;
+            inverter_ctrl_fsm_int <= ENDER_J_STATE;
           end if;
 
           -- Control Outputs
@@ -215,13 +216,17 @@ begin
             data_in_enable_vector_inverter <= '1';
 
             -- FSM Control
-            inverter_ctrl_fsm_int <= ENDER_STATE;
+            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              inverter_ctrl_fsm_int <= ENDER_I_STATE;
+            else
+              inverter_ctrl_fsm_int <= ENDER_J_STATE;
+            end if;
           end if;
 
           -- Control Outputs
           DATA_OUT_J_ENABLE <= '0';
 
-        when ENDER_STATE =>  -- STEP 3
+        when ENDER_I_STATE =>  -- STEP 3
 
           if (data_out_enable_vector_inverter = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
@@ -254,7 +259,18 @@ begin
 
               -- FSM Control
               inverter_ctrl_fsm_int <= INPUT_I_STATE;
-            elsif ((unsigned(index_i_loop) <= unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+            end if;
+          else
+            -- Control Internal
+            start_vector_inverter <= '0';
+
+            data_in_enable_vector_inverter <= '0';
+          end if;
+
+        when ENDER_J_STATE =>  -- STEP 4
+
+          if (data_out_enable_vector_inverter = '1') then
+            if ((unsigned(index_i_loop) <= unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
               DATA_OUT <= data_out_vector_inverter;
 
@@ -281,8 +297,8 @@ begin
     end if;
   end process;
 
-  -- INVERTER
-  vector_inverter : ntm_vector_inverter
+  -- VECTOR INVERTER
+  vector_inverter : ntm_vector_modular_inverter
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE

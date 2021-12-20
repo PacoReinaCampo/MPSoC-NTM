@@ -116,7 +116,7 @@ architecture ntm_vector_modular_exponentiator_architecture of ntm_vector_modular
   signal data_a_in_exponentiator_int : std_logic;
   signal data_b_in_exponentiator_int : std_logic;
 
-  -- VECTOR EXPONENTIATOR
+  -- SCALAR EXPONENTIATOR
   -- CONTROL
   signal start_scalar_exponentiator : std_logic;
   signal ready_scalar_exponentiator : std_logic;
@@ -251,7 +251,7 @@ begin
     end if;
   end process;
 
-  -- VECTOR EXPONENTIATOR
+  -- SCALAR EXPONENTIATOR
   scalar_exponentiator : ntm_scalar_modular_exponentiator
     generic map (
       DATA_SIZE    => DATA_SIZE,

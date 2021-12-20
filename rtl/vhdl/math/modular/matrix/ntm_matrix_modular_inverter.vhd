@@ -79,7 +79,7 @@ architecture ntm_matrix_modular_inverter_architecture of ntm_matrix_modular_inve
   -- Types
   -----------------------------------------------------------------------
 
-  type mod_ctrl_fsm is (
+  type inverter_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
@@ -111,7 +111,7 @@ architecture ntm_matrix_modular_inverter_architecture of ntm_matrix_modular_inve
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal mod_ctrl_fsm_int : mod_ctrl_fsm;
+  signal inverter_ctrl_fsm_int : inverter_ctrl_fsm;
 
   -- Internal Signals
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -168,7 +168,7 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      case mod_ctrl_fsm_int is
+      case inverter_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -181,7 +181,7 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            mod_ctrl_fsm_int <= INPUT_I_STATE;
+            inverter_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
         when INPUT_I_STATE =>  -- STEP 1
@@ -199,7 +199,7 @@ begin
             data_in_enable_vector_inverter <= '1';
 
             -- FSM Control
-            mod_ctrl_fsm_int <= ENDER_J_STATE;
+            inverter_ctrl_fsm_int <= ENDER_J_STATE;
           end if;
 
           -- Control Outputs
@@ -217,9 +217,9 @@ begin
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              mod_ctrl_fsm_int <= ENDER_I_STATE;
+              inverter_ctrl_fsm_int <= ENDER_I_STATE;
             else
-              mod_ctrl_fsm_int <= ENDER_J_STATE;
+              inverter_ctrl_fsm_int <= ENDER_J_STATE;
             end if;
           end if;
 
@@ -244,7 +244,7 @@ begin
               index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              mod_ctrl_fsm_int <= STARTER_STATE;
+              inverter_ctrl_fsm_int <= STARTER_STATE;
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
               DATA_OUT <= data_out_vector_inverter;
@@ -258,7 +258,7 @@ begin
               index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              mod_ctrl_fsm_int <= INPUT_I_STATE;
+              inverter_ctrl_fsm_int <= INPUT_I_STATE;
             end if;
           else
             -- Control Internal
@@ -281,7 +281,7 @@ begin
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
-              mod_ctrl_fsm_int <= INPUT_J_STATE;
+              inverter_ctrl_fsm_int <= INPUT_J_STATE;
             end if;
           else
             -- Control Internal
@@ -292,7 +292,7 @@ begin
 
         when others =>
           -- FSM Control
-          mod_ctrl_fsm_int <= STARTER_STATE;
+          inverter_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

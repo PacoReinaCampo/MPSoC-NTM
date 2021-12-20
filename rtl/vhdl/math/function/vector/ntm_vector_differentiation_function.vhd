@@ -117,7 +117,7 @@ architecture ntm_vector_differentiation_function_architecture of ntm_vector_diff
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- DIFFERENTIATION
+  -- SCALAR DIFFERENTIATION
   -- CONTROL
   signal start_scalar_differentiation_function : std_logic;
   signal ready_scalar_differentiation_function : std_logic;
@@ -138,6 +138,8 @@ begin
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- DATA_OUT(t) = (DATA_IN(t+1) - DATA_IN(t))/PERIOD_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -283,7 +285,7 @@ begin
     end if;
   end process;
 
-  -- DIFFERENTIATION
+  -- SCALAR DIFFERENTIATION
   scalar_differentiation_function : ntm_scalar_differentiation_function
     generic map (
       DATA_SIZE    => DATA_SIZE,

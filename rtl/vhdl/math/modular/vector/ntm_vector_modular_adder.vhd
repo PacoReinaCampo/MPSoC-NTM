@@ -118,7 +118,7 @@ architecture ntm_vector_modular_adder_architecture of ntm_vector_modular_adder i
   signal data_a_in_adder_int : std_logic;
   signal data_b_in_adder_int : std_logic;
 
-  -- VECTOR ADDER
+  -- SCALAR ADDER
   -- CONTROL
   signal start_scalar_adder : std_logic;
   signal ready_scalar_adder : std_logic;
@@ -259,7 +259,7 @@ begin
     end if;
   end process;
 
-  -- VECTOR ADDER
+  -- SCALAR ADDER
   scalar_adder : ntm_scalar_modular_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,

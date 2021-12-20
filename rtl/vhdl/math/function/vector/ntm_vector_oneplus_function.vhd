@@ -111,7 +111,7 @@ architecture ntm_vector_oneplus_function_architecture of ntm_vector_oneplus_func
   -- Internal Signals
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- ONEPLUS
+  -- SCALAR ONEPLUS
   -- CONTROL
   signal start_scalar_oneplus_function : std_logic;
   signal ready_scalar_oneplus_function : std_logic;
@@ -127,6 +127,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- DATA_OUT = 1 + logarithm(1 + (exponentiation(EULER,DATA_IN)))
+
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
@@ -135,7 +137,8 @@ begin
       DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
-      READY           <= '0';
+      READY <= '0';
+
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
@@ -218,7 +221,7 @@ begin
     end if;
   end process;
 
-  -- ONEPLUS
+  -- SCALAR ONEPLUS
   scalar_oneplus_function : ntm_scalar_oneplus_function
     generic map (
       DATA_SIZE    => DATA_SIZE,

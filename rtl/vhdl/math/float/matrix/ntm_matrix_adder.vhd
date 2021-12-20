@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_matrix_adder is
+entity ntm_matrix_modular_adder is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -78,7 +78,7 @@ entity ntm_matrix_adder is
     );
 end entity;
 
-architecture ntm_matrix_adder_architecture of ntm_matrix_adder is
+architecture ntm_matrix_modular_adder_architecture of ntm_matrix_modular_adder is
 
   -----------------------------------------------------------------------
   -- Types
@@ -88,7 +88,8 @@ architecture ntm_matrix_adder_architecture of ntm_matrix_adder is
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    ENDER_I_STATE,                      -- STEP 3
+    ENDER_J_STATE                       -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -126,7 +127,7 @@ architecture ntm_matrix_adder_architecture of ntm_matrix_adder is
   signal data_b_in_i_adder_int : std_logic;
   signal data_b_in_j_adder_int : std_logic;
 
-  -- ADDER
+  -- VECTOR ADDER
   -- CONTROL
   signal start_vector_adder : std_logic;
   signal ready_vector_adder : std_logic;
@@ -151,7 +152,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN ± DATA_B_IN mod MODULO_IN
+  -- DATA_OUT = DATA_A_IN ± DATA_B_IN = M_A_IN · 2^(E_A_IN) ± M_B_IN · 2^(E_B_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -169,10 +170,10 @@ begin
       -- Control Internal
       start_vector_adder <= '0';
 
+      operation_vector_adder <= '0';
+
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
-
-      operation_vector_adder <= '0';
 
       data_a_in_enable_vector_adder <= '0';
       data_b_in_enable_vector_adder <= '0';
@@ -223,9 +224,6 @@ begin
             data_a_in_enable_vector_adder <= '0';
           end if;
 
-          -- Control Outputs
-          DATA_OUT_I_ENABLE <= '0';
-
           if (((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
             -- Data Inputs
             data_b_in_vector_adder <= DATA_B_IN;
@@ -241,6 +239,7 @@ begin
           end if;
 
           -- Control Outputs
+          DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
 
           if (data_a_in_i_adder_int = '1' and data_a_in_j_adder_int = '1' and data_b_in_i_adder_int = '1' and data_b_in_j_adder_int = '1') then
@@ -262,7 +261,7 @@ begin
             data_b_in_j_adder_int <= '0';
 
             -- FSM Control
-            adder_ctrl_fsm_int <= ENDER_STATE;
+            adder_ctrl_fsm_int <= ENDER_J_STATE;
           end if;
 
         when INPUT_J_STATE =>  -- STEP 2
@@ -305,10 +304,14 @@ begin
             data_b_in_j_adder_int <= '0';
 
             -- FSM Control
-            adder_ctrl_fsm_int <= ENDER_STATE;
+            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              adder_ctrl_fsm_int <= ENDER_I_STATE;
+            else
+              adder_ctrl_fsm_int <= ENDER_J_STATE;
+            end if;
           end if;
 
-        when ENDER_STATE =>  -- STEP 3
+        when ENDER_I_STATE =>  -- STEP 3
 
           if (data_out_enable_vector_adder = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
@@ -341,7 +344,16 @@ begin
 
               -- FSM Control
               adder_ctrl_fsm_int <= INPUT_I_STATE;
-            elsif ((unsigned(index_i_loop) <= unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+            end if;
+          else
+            -- Control Internal
+            start_vector_adder <= '0';
+          end if;
+
+        when ENDER_J_STATE =>  -- STEP 3
+
+          if (data_out_enable_vector_adder = '1') then
+            if ((unsigned(index_i_loop) <= unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
               DATA_OUT <= data_out_vector_adder;
 
@@ -366,8 +378,8 @@ begin
     end if;
   end process;
 
-  -- ADDER
-  vector_adder : ntm_vector_adder
+  -- VECTOR ADDER
+  vector_adder : ntm_vector_modular_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
