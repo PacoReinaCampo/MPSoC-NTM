@@ -216,7 +216,7 @@ begin
             data_in_j_enable_matrix_modular_mod <= '1';
 
             -- FSM Control
-            mod_ctrl_fsm_int <= ENDER_J_STATE;
+            mod_ctrl_fsm_int <= ENDER_K_STATE;
           end if;
 
           -- Control Outputs
@@ -234,11 +234,7 @@ begin
             data_in_j_enable_matrix_modular_mod <= '1';
 
             -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              mod_ctrl_fsm_int <= ENDER_I_STATE;
-            else
-              mod_ctrl_fsm_int <= ENDER_J_STATE;
-            end if;
+            mod_ctrl_fsm_int <= ENDER_K_STATE;
           end if;
 
           -- Control Outputs
@@ -255,18 +251,14 @@ begin
             data_in_j_enable_matrix_modular_mod <= '1';
 
             -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+            if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+              if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
                 mod_ctrl_fsm_int <= ENDER_I_STATE;
               else
                 mod_ctrl_fsm_int <= ENDER_J_STATE;
               end if;
             else
-              if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
-                mod_ctrl_fsm_int <= ENDER_J_STATE;
-              else
-                mod_ctrl_fsm_int <= ENDER_K_STATE;
-              end if;
+              mod_ctrl_fsm_int <= ENDER_K_STATE;
             end if;
           end if;
 
@@ -356,6 +348,7 @@ begin
             start_matrix_modular_mod <= '0';
 
             data_in_i_enable_matrix_modular_mod <= '0';
+            data_in_j_enable_matrix_modular_mod <= '0';
           end if;
 
         when ENDER_K_STATE =>  -- STEP 6
@@ -379,6 +372,7 @@ begin
             start_matrix_modular_mod <= '0';
 
             data_in_i_enable_matrix_modular_mod <= '0';
+            data_in_j_enable_matrix_modular_mod <= '0';
           end if;
 
         when others =>

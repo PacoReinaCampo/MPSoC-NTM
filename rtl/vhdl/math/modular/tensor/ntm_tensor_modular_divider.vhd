@@ -161,7 +161,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN / DATA_B_IN mod MODULO_IN
+  -- DATA_OUT = divider(DATA_A_IN, DATA_B_IN) mod MODULO_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -287,7 +287,7 @@ begin
             data_b_in_k_modular_divider_int <= '0';
 
             -- FSM Control
-           divider_ctrl_fsm_int <= ENDER_J_STATE;
+           divider_ctrl_fsm_int <= ENDER_K_STATE;
           end if;
 
         when INPUT_J_STATE =>  -- STEP 2
@@ -335,11 +335,7 @@ begin
             data_b_in_k_modular_divider_int <= '0';
 
             -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-             divider_ctrl_fsm_int <= ENDER_I_STATE;
-            else
-             divider_ctrl_fsm_int <= ENDER_J_STATE;
-            end if;
+            divider_ctrl_fsm_int <= ENDER_K_STATE;
           end if;
 
         when INPUT_K_STATE =>  -- STEP 3
@@ -382,18 +378,14 @@ begin
             data_b_in_k_modular_divider_int <= '0';
 
             -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
-               divider_ctrl_fsm_int <= ENDER_I_STATE;
+            if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+              if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+                divider_ctrl_fsm_int <= ENDER_I_STATE;
               else
-               divider_ctrl_fsm_int <= ENDER_J_STATE;
+                divider_ctrl_fsm_int <= ENDER_J_STATE;
               end if;
             else
-              if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
-               divider_ctrl_fsm_int <= ENDER_J_STATE;
-              else
-               divider_ctrl_fsm_int <= ENDER_K_STATE;
-              end if;
+              divider_ctrl_fsm_int <= ENDER_K_STATE;
             end if;
           end if;
 

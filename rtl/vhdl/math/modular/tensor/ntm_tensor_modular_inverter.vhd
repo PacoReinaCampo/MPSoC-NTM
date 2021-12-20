@@ -123,7 +123,7 @@ architecture ntm_tensor_modular_inverter_architecture of ntm_tensor_modular_inve
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- MATRIX INVERTER
+  -- MATRIX MOD
   -- CONTROL
   signal start_matrix_modular_inverter : std_logic;
   signal ready_matrix_modular_inverter : std_logic;
@@ -147,7 +147,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- 1 = DATA_OUT · DATA_IN mod MODULO_IN
+  -- DATA_OUT = DATA_IN mod MODULO_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -216,7 +216,7 @@ begin
             data_in_j_enable_matrix_modular_inverter <= '1';
 
             -- FSM Control
-            inverter_ctrl_fsm_int <= ENDER_J_STATE;
+            inverter_ctrl_fsm_int <= ENDER_K_STATE;
           end if;
 
           -- Control Outputs
@@ -234,11 +234,7 @@ begin
             data_in_j_enable_matrix_modular_inverter <= '1';
 
             -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              inverter_ctrl_fsm_int <= ENDER_I_STATE;
-            else
-              inverter_ctrl_fsm_int <= ENDER_J_STATE;
-            end if;
+            inverter_ctrl_fsm_int <= ENDER_K_STATE;
           end if;
 
           -- Control Outputs
@@ -255,18 +251,14 @@ begin
             data_in_j_enable_matrix_modular_inverter <= '1';
 
             -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+            if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+              if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
                 inverter_ctrl_fsm_int <= ENDER_I_STATE;
               else
                 inverter_ctrl_fsm_int <= ENDER_J_STATE;
               end if;
             else
-              if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
-                inverter_ctrl_fsm_int <= ENDER_J_STATE;
-              else
-                inverter_ctrl_fsm_int <= ENDER_K_STATE;
-              end if;
+              inverter_ctrl_fsm_int <= ENDER_K_STATE;
             end if;
           end if;
 
@@ -356,6 +348,7 @@ begin
             start_matrix_modular_inverter <= '0';
 
             data_in_i_enable_matrix_modular_inverter <= '0';
+            data_in_j_enable_matrix_modular_inverter <= '0';
           end if;
 
         when ENDER_K_STATE =>  -- STEP 6
@@ -379,6 +372,7 @@ begin
             start_matrix_modular_inverter <= '0';
 
             data_in_i_enable_matrix_modular_inverter <= '0';
+            data_in_j_enable_matrix_modular_inverter <= '0';
           end if;
 
         when others =>
@@ -388,7 +382,7 @@ begin
     end if;
   end process;
 
-  -- MATRIX INVERTER
+  -- MATRIX MOD
     matrix_modular_inverter : ntm_matrix_modular_inverter
       generic map (
         DATA_SIZE  => DATA_SIZE,
