@@ -305,12 +305,14 @@ begin
             data_a_in_matrix_modular_adder <= DATA_A_IN;
 
             -- Control Internal
+            data_a_in_i_enable_matrix_modular_adder <= '1';
             data_a_in_j_enable_matrix_modular_adder <= '1';
 
             data_a_in_j_modular_adder_int <= '1';
             data_a_in_k_modular_adder_int <= '1';
           else
             -- Control Internal
+            data_a_in_i_enable_matrix_modular_adder <= '0';
             data_a_in_j_enable_matrix_modular_adder <= '0';
           end if;
 
@@ -319,12 +321,14 @@ begin
             data_b_in_matrix_modular_adder <= DATA_B_IN;
 
             -- Control Internal
+            data_b_in_i_enable_matrix_modular_adder <= '1';
             data_b_in_j_enable_matrix_modular_adder <= '1';
 
             data_b_in_j_modular_adder_int <= '1';
             data_b_in_k_modular_adder_int <= '1';
           else
             -- Control Internal
+            data_b_in_i_enable_matrix_modular_adder <= '0';
             data_b_in_j_enable_matrix_modular_adder <= '0';
           end if;
 
@@ -334,7 +338,9 @@ begin
 
           if (data_a_in_j_modular_adder_int = '1' and data_a_in_k_modular_adder_int = '1' and data_b_in_j_modular_adder_int = '1' and data_b_in_k_modular_adder_int = '1') then
             -- Data Inputs
+            data_a_in_i_enable_matrix_modular_adder <= '0';
             data_a_in_j_enable_matrix_modular_adder <= '0';
+            data_b_in_i_enable_matrix_modular_adder <= '0';
             data_b_in_j_enable_matrix_modular_adder <= '0';
 
             data_a_in_j_modular_adder_int <= '0';

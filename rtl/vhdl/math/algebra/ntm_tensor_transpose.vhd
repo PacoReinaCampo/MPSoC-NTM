@@ -231,6 +231,7 @@ begin
             data_in_vector_transpose <= DATA_IN;
 
             -- Control Internal
+            data_in_i_enable_vector_transpose <= '1';
             data_in_j_enable_vector_transpose <= '1';
 
             -- FSM Control

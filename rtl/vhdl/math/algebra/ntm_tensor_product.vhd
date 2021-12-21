@@ -319,12 +319,14 @@ begin
             data_a_in_matrix_multiplier <= DATA_A_IN;
 
             -- Control Internal
+            data_a_in_i_enable_matrix_multiplier <= '1';
             data_a_in_j_enable_matrix_multiplier <= '1';
 
             data_a_in_j_multiplier_int <= '1';
             data_a_in_k_multiplier_int <= '1';
           else
             -- Control Internal
+            data_a_in_i_enable_matrix_multiplier <= '0';
             data_a_in_j_enable_matrix_multiplier <= '0';
           end if;
 
@@ -348,7 +350,9 @@ begin
 
           if (data_a_in_j_multiplier_int = '1' and data_a_in_k_multiplier_int = '1' and data_b_in_j_multiplier_int = '1' and data_b_in_k_multiplier_int = '1') then
             -- Control Internal
+            data_a_in_i_enable_matrix_multiplier <= '0';
             data_a_in_j_enable_matrix_multiplier <= '0';
+            data_b_in_i_enable_matrix_multiplier <= '0';
             data_b_in_j_enable_matrix_multiplier <= '0';
 
             data_a_in_j_multiplier_int <= '0';

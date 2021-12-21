@@ -269,7 +269,7 @@ begin
         when ENDER_J_STATE =>  -- STEP 4
 
           if (data_out_enable_vector_transpose = '1') then
-            if (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
               DATA_OUT <= data_out_vector_transpose;
 

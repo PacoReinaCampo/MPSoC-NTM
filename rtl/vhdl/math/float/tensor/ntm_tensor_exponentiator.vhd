@@ -297,12 +297,14 @@ begin
             data_a_in_matrix_exponentiator <= DATA_A_IN;
 
             -- Control Internal
+            data_a_in_i_enable_matrix_exponentiator <= '1';
             data_a_in_j_enable_matrix_exponentiator <= '1';
 
             data_a_in_j_exponentiator_int <= '1';
             data_a_in_k_exponentiator_int <= '1';
           else
             -- Control Internal
+            data_a_in_i_enable_matrix_exponentiator <= '0';
             data_a_in_j_enable_matrix_exponentiator <= '0';
           end if;
 
@@ -311,23 +313,26 @@ begin
             data_b_in_matrix_exponentiator <= DATA_B_IN;
 
             -- Control Internal
+            data_b_in_i_enable_matrix_exponentiator <= '1';
             data_b_in_j_enable_matrix_exponentiator <= '1';
 
             data_b_in_j_exponentiator_int <= '1';
             data_b_in_k_exponentiator_int <= '1';
           else
             -- Control Internal
+            data_b_in_i_enable_matrix_exponentiator <= '0';
             data_b_in_j_enable_matrix_exponentiator <= '0';
           end if;
 
           -- Control Outputs
-          DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
           DATA_OUT_K_ENABLE <= '0';
 
           if (data_a_in_j_exponentiator_int = '1' and data_a_in_k_exponentiator_int = '1' and data_b_in_j_exponentiator_int = '1' and data_b_in_k_exponentiator_int = '1') then
             -- Data Inputs
+            data_a_in_i_enable_matrix_exponentiator <= '0';
             data_a_in_j_enable_matrix_exponentiator <= '0';
+            data_b_in_i_enable_matrix_exponentiator <= '0';
             data_b_in_j_enable_matrix_exponentiator <= '0';
 
             data_a_in_j_exponentiator_int <= '0';
