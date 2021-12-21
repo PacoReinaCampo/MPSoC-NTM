@@ -231,6 +231,7 @@ begin
             data_in_matrix_modular_inverter <= DATA_IN;
 
             -- Control Internal
+            data_in_i_enable_matrix_modular_inverter <= '1';
             data_in_j_enable_matrix_modular_inverter <= '1';
 
             -- FSM Control

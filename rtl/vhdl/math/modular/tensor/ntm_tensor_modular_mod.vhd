@@ -231,6 +231,7 @@ begin
             data_in_matrix_modular_mod <= DATA_IN;
 
             -- Control Internal
+            data_in_i_enable_matrix_modular_mod <= '1';
             data_in_j_enable_matrix_modular_mod <= '1';
 
             -- FSM Control

@@ -321,6 +321,7 @@ begin
           end if;
 
           -- Control Outputs
+          DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
           DATA_OUT_K_ENABLE <= '0';
 

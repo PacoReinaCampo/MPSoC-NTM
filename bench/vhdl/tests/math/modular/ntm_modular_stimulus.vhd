@@ -881,11 +881,11 @@ begin
             VECTOR_MODULAR_MOD_DATA_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_MODULAR_MOD_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when VECTOR_MODULAR_MOD_READY = '1';
         end loop;
       end if;
 
@@ -920,11 +920,11 @@ begin
             VECTOR_MODULAR_MOD_DATA_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_MODULAR_MOD_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when VECTOR_MODULAR_MOD_READY = '1';
         end loop;
       end if;
 
@@ -981,11 +981,11 @@ begin
             VECTOR_MODULAR_ADDER_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_MODULAR_ADDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when VECTOR_MODULAR_ADDER_READY = '1';
         end loop;
       end if;
 
@@ -1025,11 +1025,11 @@ begin
             VECTOR_MODULAR_ADDER_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_MODULAR_ADDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when VECTOR_MODULAR_ADDER_READY = '1';
         end loop;
       end if;
 
@@ -1083,11 +1083,11 @@ begin
             VECTOR_MODULAR_MULTIPLIER_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_MODULAR_MULTIPLIER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when VECTOR_MODULAR_MULTIPLIER_READY = '1';
         end loop;
       end if;
 
@@ -1127,11 +1127,11 @@ begin
             VECTOR_MODULAR_MULTIPLIER_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_MODULAR_MULTIPLIER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when VECTOR_MODULAR_MULTIPLIER_READY = '1';
         end loop;
       end if;
 
@@ -1180,11 +1180,11 @@ begin
             VECTOR_MODULAR_INVERTER_DATA_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_MODULAR_INVERTER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when VECTOR_MODULAR_INVERTER_READY = '1';
         end loop;
       end if;
 
@@ -1219,11 +1219,11 @@ begin
             VECTOR_MODULAR_INVERTER_DATA_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_MODULAR_INVERTER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when VECTOR_MODULAR_INVERTER_READY = '1';
         end loop;
       end if;
 
@@ -1277,11 +1277,11 @@ begin
             VECTOR_MODULAR_DIVIDER_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_MODULAR_DIVIDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when VECTOR_MODULAR_DIVIDER_READY = '1';
         end loop;
       end if;
 
@@ -1321,11 +1321,11 @@ begin
             VECTOR_MODULAR_DIVIDER_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_MODULAR_DIVIDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when VECTOR_MODULAR_DIVIDER_READY = '1';
         end loop;
       end if;
 
@@ -1379,11 +1379,11 @@ begin
             VECTOR_MODULAR_EXPONENTIATOR_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_MODULAR_EXPONENTIATOR_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when VECTOR_MODULAR_EXPONENTIATOR_READY = '1';
         end loop;
       end if;
 
@@ -1423,11 +1423,11 @@ begin
             VECTOR_MODULAR_EXPONENTIATOR_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_MODULAR_EXPONENTIATOR_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when VECTOR_MODULAR_EXPONENTIATOR_READY = '1';
         end loop;
       end if;
 
@@ -1495,11 +1495,11 @@ begin
             MATRIX_MODULAR_MOD_DATA_IN_J_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when MATRIX_MODULAR_MOD_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when MATRIX_MODULAR_MOD_READY = '1';
         end loop;
       end if;
 
@@ -1547,11 +1547,11 @@ begin
             MATRIX_MODULAR_MOD_DATA_IN_J_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when MATRIX_MODULAR_MOD_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when MATRIX_MODULAR_MOD_READY = '1';
         end loop;
       end if;
 
@@ -1628,11 +1628,11 @@ begin
             MATRIX_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when MATRIX_MODULAR_ADDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when MATRIX_MODULAR_ADDER_READY = '1';
         end loop;
       end if;
 
@@ -1692,11 +1692,11 @@ begin
             MATRIX_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when MATRIX_MODULAR_ADDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when MATRIX_MODULAR_ADDER_READY = '1';
         end loop;
       end if;
 
@@ -1770,11 +1770,11 @@ begin
             MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when MATRIX_MODULAR_MULTIPLIER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when MATRIX_MODULAR_MULTIPLIER_READY = '1';
         end loop;
       end if;
 
@@ -1832,11 +1832,11 @@ begin
             MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when MATRIX_MODULAR_MULTIPLIER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when MATRIX_MODULAR_MULTIPLIER_READY = '1';
         end loop;
       end if;
 
@@ -1900,11 +1900,11 @@ begin
             MATRIX_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when MATRIX_MODULAR_INVERTER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when MATRIX_MODULAR_INVERTER_READY = '1';
         end loop;
       end if;
 
@@ -1953,11 +1953,11 @@ begin
             MATRIX_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when MATRIX_MODULAR_INVERTER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when MATRIX_MODULAR_INVERTER_READY = '1';
         end loop;
       end if;
 
@@ -2031,11 +2031,11 @@ begin
             MATRIX_MODULAR_DIVIDER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when MATRIX_MODULAR_DIVIDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when MATRIX_MODULAR_DIVIDER_READY = '1';
         end loop;
       end if;
 
@@ -2094,11 +2094,11 @@ begin
             MATRIX_MODULAR_DIVIDER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when MATRIX_MODULAR_DIVIDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when MATRIX_MODULAR_DIVIDER_READY = '1';
         end loop;
       end if;
 
@@ -2171,11 +2171,11 @@ begin
             MATRIX_MODULAR_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when MATRIX_MODULAR_EXPONENTIATOR_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when MATRIX_MODULAR_EXPONENTIATOR_READY = '1';
         end loop;
       end if;
 
@@ -2233,11 +2233,11 @@ begin
             MATRIX_MODULAR_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when MATRIX_MODULAR_EXPONENTIATOR_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when MATRIX_MODULAR_EXPONENTIATOR_READY = '1';
         end loop;
       end if;
 
@@ -2322,11 +2322,11 @@ begin
             TENSOR_MODULAR_MOD_DATA_IN_K_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when TENSOR_MODULAR_MOD_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when TENSOR_MODULAR_MOD_READY = '1';
         end loop;
       end if;
 
@@ -2391,11 +2391,11 @@ begin
             TENSOR_MODULAR_MOD_DATA_IN_K_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when TENSOR_MODULAR_MOD_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when TENSOR_MODULAR_MOD_READY = '1';
         end loop;
       end if;
 
@@ -2495,11 +2495,11 @@ begin
             TENSOR_MODULAR_ADDER_DATA_B_IN_K_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when TENSOR_MODULAR_ADDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when TENSOR_MODULAR_ADDER_READY = '1';
         end loop;
       end if;
 
@@ -2580,11 +2580,11 @@ begin
             TENSOR_MODULAR_ADDER_DATA_B_IN_K_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when TENSOR_MODULAR_ADDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when TENSOR_MODULAR_ADDER_READY = '1';
         end loop;
       end if;
 
@@ -2681,11 +2681,11 @@ begin
             TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_K_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when TENSOR_MODULAR_MULTIPLIER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when TENSOR_MODULAR_MULTIPLIER_READY = '1';
         end loop;
       end if;
 
@@ -2766,11 +2766,11 @@ begin
             TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_K_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when TENSOR_MODULAR_MULTIPLIER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when TENSOR_MODULAR_MULTIPLIER_READY = '1';
         end loop;
       end if;
 
@@ -2851,11 +2851,11 @@ begin
             TENSOR_MODULAR_INVERTER_DATA_IN_K_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when TENSOR_MODULAR_INVERTER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when TENSOR_MODULAR_INVERTER_READY = '1';
         end loop;
       end if;
 
@@ -2920,11 +2920,11 @@ begin
             TENSOR_MODULAR_INVERTER_DATA_IN_K_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when TENSOR_MODULAR_INVERTER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when TENSOR_MODULAR_INVERTER_READY = '1';
         end loop;
       end if;
 
@@ -3021,11 +3021,11 @@ begin
             TENSOR_MODULAR_DIVIDER_DATA_B_IN_K_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when TENSOR_MODULAR_DIVIDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when TENSOR_MODULAR_DIVIDER_READY = '1';
         end loop;
       end if;
 
@@ -3106,11 +3106,11 @@ begin
             TENSOR_MODULAR_DIVIDER_DATA_B_IN_K_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when TENSOR_MODULAR_DIVIDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when TENSOR_MODULAR_DIVIDER_READY = '1';
         end loop;
       end if;
 
@@ -3207,11 +3207,11 @@ begin
             TENSOR_MODULAR_EXPONENTIATOR_DATA_B_IN_K_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when TENSOR_MODULAR_EXPONENTIATOR_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when TENSOR_MODULAR_EXPONENTIATOR_READY = '1';
         end loop;
       end if;
 
@@ -3292,11 +3292,11 @@ begin
             TENSOR_MODULAR_EXPONENTIATOR_DATA_B_IN_K_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when TENSOR_MODULAR_EXPONENTIATOR_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when TENSOR_MODULAR_EXPONENTIATOR_READY = '1';
         end loop;
       end if;
 
