@@ -19,8 +19,6 @@ add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_divider_test/scalar
 add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_divider_test/scalar_modular_divider/DATA_OUT
 
 add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_divider_test/scalar_modular_divider/divider_ctrl_fsm_int
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_divider_test/scalar_modular_divider/u_int
-add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_divider_test/scalar_modular_divider/v_int
 add wave -noupdate /ntm_modular_testbench/ntm_scalar_modular_divider_test/scalar_modular_divider/divider_int
 
 TreeUpdate [SetDefaultTree]

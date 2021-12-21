@@ -127,15 +127,21 @@ architecture ntm_activation_gate_vector_architecture of ntm_activation_gate_vect
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    MATRIX_FIRST_PRODUCT_STATE,         -- STEP 1
-    VECTOR_FIRST_ADDER_STATE,           -- STEP 2
-    MATRIX_SECOND_PRODUCT_STATE,        -- STEP 3
-    VECTOR_SECOND_ADDER_STATE,          -- STEP 4
-    MATRIX_THIRD_PRODUCT_STATE,         -- STEP 5
-    VECTOR_THIRD_ADDER_STATE,           -- STEP 6
-    MATRIX_FOURTH_PRODUCT_STATE,        -- STEP 7
-    VECTOR_FOURTH_ADDER_STATE,          -- STEP 8
-    VECTOR_TANH_STATE                   -- STEP 9
+    INPUT_I_STATE,                      -- STEP 1
+    INPUT_J_STATE,                      -- STEP 2
+    MATRIX_I_FIRST_PRODUCT_STATE,       -- STEP 3
+    MATRIX_J_FIRST_PRODUCT_STATE,       -- STEP 4
+    VECTOR_FIRST_ADDER_STATE,           -- STEP 5
+    MATRIX_I_SECOND_PRODUCT_STATE,      -- STEP 6
+    MATRIX_J_SECOND_PRODUCT_STATE,      -- STEP 7
+    VECTOR_SECOND_ADDER_STATE,          -- STEP 8
+    MATRIX_I_THIRD_PRODUCT_STATE,       -- STEP 9
+    MATRIX_J_THIRD_PRODUCT_STATE,       -- STEP 10
+    VECTOR_THIRD_ADDER_STATE,           -- STEP 11
+    MATRIX_I_FOURTH_PRODUCT_STATE,      -- STEP 12
+    MATRIX_J_FOURTH_PRODUCT_STATE,      -- STEP 13
+    VECTOR_FOURTH_ADDER_STATE,          -- STEP 14
+    VECTOR_TANH_STATE                   -- STEP 15
     );
 
   -----------------------------------------------------------------------
@@ -267,13 +273,17 @@ begin
             start_matrix_product <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_STATE;
+            controller_ctrl_fsm_int <= INPUT_I_STATE;
           else
             -- Control Internal
             start_matrix_product <= '0';
           end if;
 
-        when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 1
+        when INPUT_I_STATE =>  -- STEP 1
+
+        when INPUT_J_STATE =>  -- STEP 2
+
+        when MATRIX_I_FIRST_PRODUCT_STATE =>  -- STEP 3
 
           -- Control Inputs
           data_a_in_i_enable_matrix_product <= W_IN_L_ENABLE;
@@ -303,7 +313,9 @@ begin
             start_matrix_product <= '0';
           end if;
 
-        when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
+        when MATRIX_J_FIRST_PRODUCT_STATE =>  -- STEP 4
+
+        when VECTOR_FIRST_ADDER_STATE =>  -- STEP 5
 
           -- Control Inputs
           operation_vector_adder <= '0';
@@ -324,13 +336,13 @@ begin
             end if;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_SECOND_PRODUCT_STATE;
+            controller_ctrl_fsm_int <= MATRIX_I_SECOND_PRODUCT_STATE;
           else
             -- Control Internal
             start_vector_adder <= '0';
           end if;
 
-        when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 3
+        when MATRIX_I_SECOND_PRODUCT_STATE =>  -- STEP 6
 
           -- Control Inputs
           data_a_in_i_enable_matrix_product <= K_IN_L_ENABLE;
@@ -360,7 +372,9 @@ begin
             start_matrix_product <= '0';
           end if;
 
-        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
+        when MATRIX_J_SECOND_PRODUCT_STATE =>  -- STEP 7
+
+        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 8
 
           -- Control Inputs
           operation_vector_adder <= '0';
@@ -381,13 +395,13 @@ begin
             end if;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_THIRD_PRODUCT_STATE;
+            controller_ctrl_fsm_int <= MATRIX_I_THIRD_PRODUCT_STATE;
           else
             -- Control Internal
             start_vector_adder <= '0';
           end if;
 
-        when MATRIX_THIRD_PRODUCT_STATE =>  -- STEP 5
+        when MATRIX_I_THIRD_PRODUCT_STATE =>  -- STEP 9
 
           -- Control Inputs
           data_a_in_i_enable_matrix_product <= U_IN_L_ENABLE;
@@ -417,7 +431,9 @@ begin
             start_matrix_product <= '0';
           end if;
 
-        when VECTOR_THIRD_ADDER_STATE =>  -- STEP 6
+        when MATRIX_J_THIRD_PRODUCT_STATE =>  -- STEP 10
+
+        when VECTOR_THIRD_ADDER_STATE =>  -- STEP 11
 
           -- Control Inputs
           operation_vector_adder <= '0';
@@ -438,13 +454,13 @@ begin
             end if;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_FOURTH_PRODUCT_STATE;
+            controller_ctrl_fsm_int <= MATRIX_I_FOURTH_PRODUCT_STATE;
           else
             -- Control Internal
             start_vector_adder <= '0';
           end if;
 
-        when MATRIX_FOURTH_PRODUCT_STATE =>  -- STEP 7
+        when MATRIX_I_FOURTH_PRODUCT_STATE =>  -- STEP 12
 
           -- Control Inputs
           data_a_in_i_enable_matrix_product <= U_IN_L_ENABLE;
@@ -474,7 +490,9 @@ begin
             start_matrix_product <= '0';
           end if;
 
-        when VECTOR_FOURTH_ADDER_STATE =>  -- STEP 8
+        when MATRIX_J_FOURTH_PRODUCT_STATE =>  -- STEP 13
+
+        when VECTOR_FOURTH_ADDER_STATE =>  -- STEP 14
 
           -- Control Inputs
           operation_vector_adder <= '0';
@@ -501,7 +519,7 @@ begin
             start_vector_adder <= '0';
           end if;
 
-        when VECTOR_TANH_STATE =>  -- STEP 9
+        when VECTOR_TANH_STATE =>  -- STEP 15
 
           -- Control Internal
           data_in_enable_vector_tanh <= data_out_enable_vector_adder;
@@ -523,7 +541,7 @@ begin
               index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_STATE;
+              controller_ctrl_fsm_int <= MATRIX_I_FIRST_PRODUCT_STATE;
             end if;
 
             -- Data Outputs

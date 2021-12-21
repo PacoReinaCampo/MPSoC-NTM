@@ -74,10 +74,7 @@ architecture ntm_scalar_modular_exponentiator_architecture of ntm_scalar_modular
 
   type exponentiator_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    SET_DATA_B_STATE,                   -- STEP 1
-    REDUCE_DATA_B_STATE,                -- STEP 2
-    SET_PRODUCT_OUT_STATE,              -- STEP 3
-    ENDER_STATE                         -- STEP 4
+    ENDER_STATE                         -- STEP 1
     );
 
   -----------------------------------------------------------------------
@@ -107,10 +104,7 @@ architecture ntm_scalar_modular_exponentiator_architecture of ntm_scalar_modular
   signal exponentiator_ctrl_fsm_int : exponentiator_ctrl_fsm;
 
   -- Internal Signals
-  signal u_int : std_logic_vector(DATA_SIZE downto 0);
-  signal v_int : std_logic_vector(DATA_SIZE downto 0);
-
-  signal exponentiator_int : std_logic_vector(DATA_SIZE downto 0);
+  signal exponentiator_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -130,11 +124,8 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      -- Assignation
-      u_int <= (others => '0');
-      v_int <= (others => '0');
-
-      exponentiator_int <= (others => '0');
+      -- Assignations
+      exponentiator_int <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -144,75 +135,94 @@ begin
           READY <= '0';
 
           if (START = '1') then
-            -- Assignation
-            u_int <= '0' & DATA_A_IN;
-            v_int <= '0' & DATA_B_IN;
-
-            if (DATA_A_IN(0) = '1') then
-              exponentiator_int <= '0' & DATA_B_IN;
-            else
-              exponentiator_int <= (others => '0');
-            end if;
+            exponentiator_int <= std_logic_vector(to_unsigned(to_integer(unsigned(DATA_A_IN)) ** to_integer(unsigned(DATA_B_IN)), DATA_SIZE));
 
             -- FSM Control
-            exponentiator_ctrl_fsm_int <= SET_DATA_B_STATE;
+            exponentiator_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
-        when SET_DATA_B_STATE =>  -- STEP 1
+        when ENDER_STATE =>  -- STEP 1
 
-          -- Assignation
-          u_int <= std_logic_vector(unsigned(u_int) srl 1);
-          v_int <= std_logic_vector(unsigned(v_int) sll 1);
+          if (unsigned(MODULO_IN) > unsigned(ZERO_DATA)) then
+            if (unsigned(DATA_A_IN) > unsigned(DATA_B_IN)) then
+              if (unsigned(exponentiator_int) = unsigned(MODULO_IN)) then
+                -- Data Outputs
+                DATA_OUT <= ZERO_DATA;
 
-          -- FSM Control
-          if ((unsigned(v_int) sll 1) < '0' & unsigned(MODULO_IN)) then
-            exponentiator_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
-          else
-            exponentiator_ctrl_fsm_int <= REDUCE_DATA_B_STATE;
-          end if;
+                -- Control Outputs
+                READY <= '1';
 
-        when REDUCE_DATA_B_STATE =>  -- STEP 2
+                -- FSM Control
+                exponentiator_ctrl_fsm_int <= STARTER_STATE;
+              elsif (unsigned(exponentiator_int) < unsigned(MODULO_IN)) then
+                -- Data Outputs
+                DATA_OUT <= exponentiator_int;
 
-          if (unsigned(v_int) < '0' & unsigned(MODULO_IN)) then
-            -- FSM Control
-            exponentiator_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
-          else
-            -- Assignation
-            v_int <= std_logic_vector(unsigned(v_int) - ('0' & unsigned(MODULO_IN)));
-          end if;
+                -- Control Outputs
+                READY <= '1';
 
-        when SET_PRODUCT_OUT_STATE =>  -- STEP 3
+                -- FSM Control
+                exponentiator_ctrl_fsm_int <= STARTER_STATE;
+              else
+                -- Assignations
+                exponentiator_int <= std_logic_vector(unsigned(exponentiator_int) - (unsigned(MODULO_IN)));
+              end if;
+            elsif (unsigned(DATA_A_IN) = unsigned(DATA_B_IN)) then
+              if (unsigned(exponentiator_int) = unsigned(MODULO_IN)) then
+                -- Data Outputs
+                DATA_OUT <= ZERO_DATA;
 
-          -- Assignation
-          if (u_int(0) = '1') then
-            if (unsigned(exponentiator_int) + unsigned(v_int) < '0' & unsigned(MODULO_IN)) then
-              exponentiator_int <= std_logic_vector(unsigned(exponentiator_int) + unsigned(v_int));
-            else
-              exponentiator_int <= std_logic_vector(unsigned(exponentiator_int) + unsigned(v_int) - ('0' & unsigned(MODULO_IN)));
+                -- Control Outputs
+                READY <= '1';
+
+                -- FSM Control
+                exponentiator_ctrl_fsm_int <= STARTER_STATE;
+              elsif (unsigned(exponentiator_int) < unsigned(MODULO_IN)) then
+                -- Data Outputs
+                DATA_OUT <= exponentiator_int;
+
+                -- Control Outputs
+                READY <= '1';
+
+                -- FSM Control
+                exponentiator_ctrl_fsm_int <= STARTER_STATE;
+              else
+                -- Assignations
+                exponentiator_int <= std_logic_vector(unsigned(exponentiator_int) - (unsigned(MODULO_IN)));
+              end if;
+            elsif (unsigned(DATA_A_IN) < unsigned(DATA_B_IN)) then
+              if (unsigned(exponentiator_int) = unsigned(MODULO_IN)) then
+                -- Data Outputs
+                DATA_OUT <= ZERO_DATA;
+
+                -- Control Outputs
+                READY <= '1';
+
+                -- FSM Control
+                exponentiator_ctrl_fsm_int <= STARTER_STATE;
+              elsif (unsigned(exponentiator_int) < unsigned(MODULO_IN)) then
+                -- Data Outputs
+                DATA_OUT <= exponentiator_int;
+
+                -- Control Outputs
+                READY <= '1';
+
+                -- FSM Control
+                exponentiator_ctrl_fsm_int <= STARTER_STATE;
+              else
+                -- Assignations
+                exponentiator_int <= std_logic_vector(unsigned(exponentiator_int) - (unsigned(MODULO_IN)));
+              end if;
             end if;
-          else
-            if (unsigned(exponentiator_int) >= '0' & unsigned(MODULO_IN)) then
-              exponentiator_int <= std_logic_vector(unsigned(exponentiator_int) - unsigned(MODULO_IN));
-            end if;
-          end if;
-
-          -- FSM Control
-          exponentiator_ctrl_fsm_int <= ENDER_STATE;
-
-        when ENDER_STATE =>  -- STEP 4
-
-          if (unsigned(u_int) = '0' & unsigned(ONE_CONTROL)) then
+          elsif (unsigned(MODULO_IN) = unsigned(ZERO_DATA)) then
             -- Data Outputs
-            DATA_OUT <= exponentiator_int(DATA_SIZE-1 downto 0);
+            DATA_OUT <= exponentiator_int;
 
             -- Control Outputs
             READY <= '1';
 
             -- FSM Control
             exponentiator_ctrl_fsm_int <= STARTER_STATE;
-          else
-            -- FSM Control
-            exponentiator_ctrl_fsm_int <= SET_DATA_B_STATE;
           end if;
 
         when others =>
