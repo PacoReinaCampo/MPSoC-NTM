@@ -227,7 +227,7 @@ begin
         when ENDER_VECTOR_STATE =>  -- STEP 3
 
           if (data_out_enable_scalar_summation_function = '1') then
-            if ((unsigned(index_vector_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)))) then
+            if ((unsigned(index_vector_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
               DATA_OUT <= data_out_scalar_summation_function;
 
@@ -243,7 +243,7 @@ begin
 
               -- FSM Control
               summation_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_vector_loop) < unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)))) then
+            elsif ((unsigned(index_vector_loop) < unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
               DATA_OUT <= data_out_scalar_summation_function;
 
@@ -268,7 +268,7 @@ begin
         when ENDER_SCALAR_STATE =>  -- STEP 4
 
           if (data_out_enable_scalar_summation_function = '1') then
-            if ((unsigned(index_vector_loop) <= unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) < unsigned(unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)))) then
+            if (unsigned(index_scalar_loop) < unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
               DATA_OUT <= data_out_scalar_summation_function;
 

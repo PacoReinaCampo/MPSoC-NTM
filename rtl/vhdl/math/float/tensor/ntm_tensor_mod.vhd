@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_matrix_modular_inverter is
+entity ntm_tensor_mod is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -60,31 +60,36 @@ entity ntm_matrix_modular_inverter is
 
     DATA_IN_I_ENABLE : in std_logic;
     DATA_IN_J_ENABLE : in std_logic;
+    DATA_IN_K_ENABLE : in std_logic;
 
     DATA_OUT_I_ENABLE : out std_logic;
     DATA_OUT_J_ENABLE : out std_logic;
+    DATA_OUT_K_ENABLE : out std_logic;
 
     -- DATA
     MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
-architecture ntm_matrix_modular_inverter_architecture of ntm_matrix_modular_inverter is
+architecture ntm_tensor_mod_architecture of ntm_tensor_mod is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type inverter_ctrl_fsm is (
+  type mod_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
-    ENDER_I_STATE,                      -- STEP 3
-    ENDER_J_STATE                       -- STEP 4
+    INPUT_K_STATE,                      -- STEP 3
+    ENDER_I_STATE,                      -- STEP 4
+    ENDER_J_STATE,                      -- STEP 5
+    ENDER_K_STATE                       -- STEP 6
     );
 
   -----------------------------------------------------------------------
@@ -111,26 +116,30 @@ architecture ntm_matrix_modular_inverter_architecture of ntm_matrix_modular_inve
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal inverter_ctrl_fsm_int : inverter_ctrl_fsm;
+  signal mod_ctrl_fsm_int : mod_ctrl_fsm;
 
   -- Internal Signals
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- VECTOR INVERTER
+  -- MATRIX MOD
   -- CONTROL
-  signal start_vector_inverter : std_logic;
-  signal ready_vector_inverter : std_logic;
+  signal start_matrix_mod : std_logic;
+  signal ready_matrix_mod : std_logic;
 
-  signal data_in_enable_vector_inverter : std_logic;
+  signal data_in_i_enable_matrix_mod : std_logic;
+  signal data_in_j_enable_matrix_mod : std_logic;
 
-  signal data_out_enable_vector_inverter : std_logic;
+  signal data_out_i_enable_matrix_mod : std_logic;
+  signal data_out_j_enable_matrix_mod : std_logic;
 
   -- DATA
-  signal modulo_in_vector_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_inverter   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_mod : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_mod : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_mod : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_matrix_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_mod  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -138,7 +147,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = 1 / DATA_IN  = 1 / M_IN · 2^(-E_IN)
+  -- DATA_OUT = DATA_IN mod MODULO_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -152,175 +161,241 @@ begin
 
       DATA_OUT_I_ENABLE <= '0';
       DATA_OUT_J_ENABLE <= '0';
+      DATA_OUT_K_ENABLE <= '0';
 
       -- Control Internal
-      start_vector_inverter <= '0';
+      start_matrix_mod <= '0';
 
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
+      index_k_loop <= ZERO_CONTROL;
 
-      data_in_enable_vector_inverter <= '0';
+      data_in_i_enable_matrix_mod <= '0';
+      data_in_j_enable_matrix_mod <= '0';
 
       -- Data Internal
-      modulo_in_vector_inverter <= ZERO_DATA;
-      size_in_vector_inverter   <= ZERO_CONTROL;
-      data_in_vector_inverter   <= ZERO_DATA;
+      modulo_in_matrix_mod <= ZERO_DATA;
+      size_i_in_matrix_mod <= ZERO_CONTROL;
+      size_j_in_matrix_mod <= ZERO_CONTROL;
+      data_in_matrix_mod   <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
-      case inverter_ctrl_fsm_int is
+      case mod_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
           DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
+          DATA_OUT_K_ENABLE <= '0';
 
           if (START = '1') then
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            inverter_ctrl_fsm_int <= INPUT_I_STATE;
+            mod_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
         when INPUT_I_STATE =>  -- STEP 1
 
-          if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
+          if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1') and (DATA_IN_K_ENABLE = '1')) or ((index_i_loop = ZERO_CONTROL) and (index_j_loop = ZERO_CONTROL))) then
             -- Data Inputs
-            modulo_in_vector_inverter <= MODULO_IN;
-            size_in_vector_inverter   <= SIZE_J_IN;
+            modulo_in_matrix_mod <= MODULO_IN;
+            size_i_in_matrix_mod <= SIZE_J_IN;
+            size_j_in_matrix_mod <= SIZE_K_IN;
 
-            data_in_vector_inverter <= DATA_IN;
+            data_in_matrix_mod <= DATA_IN;
 
             -- Control Internal
-            start_vector_inverter <= '1';
+            start_matrix_mod <= '1';
 
-            data_in_enable_vector_inverter <= '1';
+            data_in_i_enable_matrix_mod <= '1';
+            data_in_j_enable_matrix_mod <= '1';
 
             -- FSM Control
-            inverter_ctrl_fsm_int <= ENDER_J_STATE;
+            mod_ctrl_fsm_int <= ENDER_K_STATE;
           end if;
 
           -- Control Outputs
           DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
+          DATA_OUT_K_ENABLE <= '0';
 
         when INPUT_J_STATE =>  -- STEP 2
 
-          if (DATA_IN_J_ENABLE = '1') then
+          if (((DATA_IN_J_ENABLE = '1') and (DATA_IN_K_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
             -- Data Inputs
-            data_in_vector_inverter <= DATA_IN;
+            data_in_matrix_mod <= DATA_IN;
 
             -- Control Internal
-            data_in_enable_vector_inverter <= '1';
+            data_in_i_enable_matrix_mod <= '1';
+            data_in_j_enable_matrix_mod <= '1';
 
             -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              inverter_ctrl_fsm_int <= ENDER_I_STATE;
-            else
-              inverter_ctrl_fsm_int <= ENDER_J_STATE;
-            end if;
+            mod_ctrl_fsm_int <= ENDER_K_STATE;
           end if;
 
           -- Control Outputs
           DATA_OUT_J_ENABLE <= '0';
+          DATA_OUT_K_ENABLE <= '0';
 
-        when ENDER_I_STATE =>  -- STEP 3
+        when INPUT_K_STATE =>  -- STEP 3
 
-          if (data_out_enable_vector_inverter = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          if (DATA_IN_K_ENABLE = '1') then
+            -- Data Inputs
+            data_in_matrix_mod <= DATA_IN;
+
+            -- Control Internal
+            data_in_j_enable_matrix_mod <= '1';
+
+            -- FSM Control
+            if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+              if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+                mod_ctrl_fsm_int <= ENDER_I_STATE;
+              else
+                mod_ctrl_fsm_int <= ENDER_J_STATE;
+              end if;
+            else
+              mod_ctrl_fsm_int <= ENDER_K_STATE;
+            end if;
+          end if;
+
+          -- Control Outputs
+          DATA_OUT_K_ENABLE <= '0';
+
+        when ENDER_I_STATE =>  -- STEP 4
+
+          if (data_out_i_enable_matrix_mod = '1' and data_out_j_enable_matrix_mod = '1') then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_inverter;
+              DATA_OUT <= data_out_matrix_mod;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
               DATA_OUT_J_ENABLE <= '1';
+              DATA_OUT_K_ENABLE <= '1';
 
               READY <= '1';
 
               -- Control Internal
               index_i_loop <= ZERO_CONTROL;
               index_j_loop <= ZERO_CONTROL;
+              index_k_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              inverter_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+              mod_ctrl_fsm_int <= STARTER_STATE;
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_inverter;
+              DATA_OUT <= data_out_matrix_mod;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
               DATA_OUT_J_ENABLE <= '1';
+              DATA_OUT_K_ENABLE <= '1';
 
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
               index_j_loop <= ZERO_CONTROL;
+              index_k_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              inverter_ctrl_fsm_int <= INPUT_I_STATE;
+              mod_ctrl_fsm_int <= INPUT_I_STATE;
             end if;
           else
             -- Control Internal
-            start_vector_inverter <= '0';
+            start_matrix_mod <= '0';
 
-            data_in_enable_vector_inverter <= '0';
+            data_in_i_enable_matrix_mod <= '0';
+            data_in_j_enable_matrix_mod <= '0';
           end if;
 
-        when ENDER_J_STATE =>  -- STEP 4
+        when ENDER_J_STATE =>  -- STEP 5
 
-          if (data_out_enable_vector_inverter = '1') then
-            if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+          if (data_out_j_enable_matrix_mod = '1') then
+            if ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_inverter;
+              DATA_OUT <= data_out_matrix_mod;
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';
+              DATA_OUT_K_ENABLE <= '1';
 
               -- Control Internal
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+              index_k_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              inverter_ctrl_fsm_int <= INPUT_J_STATE;
+              mod_ctrl_fsm_int <= INPUT_J_STATE;
             end if;
           else
             -- Control Internal
-            start_vector_inverter <= '0';
+            start_matrix_mod <= '0';
 
-            data_in_enable_vector_inverter <= '0';
+            data_in_i_enable_matrix_mod <= '0';
+            data_in_j_enable_matrix_mod <= '0';
+          end if;
+
+        when ENDER_K_STATE =>  -- STEP 6
+
+          if (data_out_j_enable_matrix_mod = '1') then
+            if (unsigned(index_k_loop) < unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Outputs
+              DATA_OUT <= data_out_matrix_mod;
+
+              -- Control Outputs
+              DATA_OUT_K_ENABLE <= '1';
+
+              -- Control Internal
+              index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              mod_ctrl_fsm_int <= INPUT_K_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_matrix_mod <= '0';
+
+            data_in_i_enable_matrix_mod <= '0';
+            data_in_j_enable_matrix_mod <= '0';
           end if;
 
         when others =>
           -- FSM Control
-          inverter_ctrl_fsm_int <= STARTER_STATE;
+          mod_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
 
-  -- VECTOR INVERTER
-  vector_inverter : ntm_vector_modular_inverter
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
+  -- MATRIX MOD
+    matrix_mod : ntm_matrix_mod
+      generic map (
+        DATA_SIZE  => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_vector_inverter,
-      READY => ready_vector_inverter,
+        -- CONTROL
+        START => start_matrix_mod,
+        READY => ready_matrix_mod,
 
-      DATA_IN_ENABLE => data_in_enable_vector_inverter,
+        DATA_IN_I_ENABLE => data_in_i_enable_matrix_mod,
+        DATA_IN_J_ENABLE => data_in_j_enable_matrix_mod,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_inverter,
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_mod,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_mod,
 
-      -- DATA
-      MODULO_IN => modulo_in_vector_inverter,
-      SIZE_IN   => size_in_vector_inverter,
-      DATA_IN   => data_in_vector_inverter,
-      DATA_OUT  => data_out_vector_inverter
-      );
+        -- DATA
+        MODULO_IN => modulo_in_matrix_mod,
+        SIZE_I_IN => size_i_in_matrix_mod,
+        SIZE_J_IN => size_j_in_matrix_mod,
+        DATA_IN   => data_in_matrix_mod,
+        DATA_OUT  => data_out_matrix_mod
+        );
 
 end architecture;

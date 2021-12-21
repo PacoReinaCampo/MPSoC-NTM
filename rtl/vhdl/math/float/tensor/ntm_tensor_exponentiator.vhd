@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_tensor_modular_exponentiator is
+entity ntm_tensor_exponentiator is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -80,7 +80,7 @@ entity ntm_tensor_modular_exponentiator is
     );
 end entity;
 
-architecture ntm_tensor_modular_exponentiator_architecture of ntm_tensor_modular_exponentiator is
+architecture ntm_tensor_exponentiator_architecture of ntm_tensor_exponentiator is
 
   -----------------------------------------------------------------------
   -- Types
@@ -127,33 +127,33 @@ architecture ntm_tensor_modular_exponentiator_architecture of ntm_tensor_modular
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_a_in_i_modular_exponentiator_int : std_logic;
-  signal data_a_in_j_modular_exponentiator_int : std_logic;
-  signal data_a_in_k_modular_exponentiator_int : std_logic;
-  signal data_b_in_i_modular_exponentiator_int : std_logic;
-  signal data_b_in_j_modular_exponentiator_int : std_logic;
-  signal data_b_in_k_modular_exponentiator_int : std_logic;
+  signal data_a_in_i_exponentiator_int : std_logic;
+  signal data_a_in_j_exponentiator_int : std_logic;
+  signal data_a_in_k_exponentiator_int : std_logic;
+  signal data_b_in_i_exponentiator_int : std_logic;
+  signal data_b_in_j_exponentiator_int : std_logic;
+  signal data_b_in_k_exponentiator_int : std_logic;
 
   -- MATRIX EXPONENTIATOR
   -- CONTROL
-  signal start_matrix_modular_exponentiator : std_logic;
-  signal ready_matrix_modular_exponentiator : std_logic;
+  signal start_matrix_exponentiator : std_logic;
+  signal ready_matrix_exponentiator : std_logic;
 
-  signal data_a_in_i_enable_matrix_modular_exponentiator : std_logic;
-  signal data_a_in_j_enable_matrix_modular_exponentiator : std_logic;
-  signal data_b_in_i_enable_matrix_modular_exponentiator : std_logic;
-  signal data_b_in_j_enable_matrix_modular_exponentiator : std_logic;
+  signal data_a_in_i_enable_matrix_exponentiator : std_logic;
+  signal data_a_in_j_enable_matrix_exponentiator : std_logic;
+  signal data_b_in_i_enable_matrix_exponentiator : std_logic;
+  signal data_b_in_j_enable_matrix_exponentiator : std_logic;
 
-  signal data_out_i_enable_matrix_modular_exponentiator : std_logic;
-  signal data_out_j_enable_matrix_modular_exponentiator : std_logic;
+  signal data_out_i_enable_matrix_exponentiator : std_logic;
+  signal data_out_j_enable_matrix_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_modular_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_modular_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_modular_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_modular_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_modular_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_modular_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_matrix_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -178,30 +178,30 @@ begin
       DATA_OUT_K_ENABLE <= '0';
 
       -- Control Internal
-      start_matrix_modular_exponentiator <= '0';
+      start_matrix_exponentiator <= '0';
 
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
       index_k_loop <= ZERO_CONTROL;
 
-      data_a_in_i_enable_matrix_modular_exponentiator <= '0';
-      data_a_in_j_enable_matrix_modular_exponentiator <= '0';
-      data_b_in_i_enable_matrix_modular_exponentiator <= '0';
-      data_b_in_j_enable_matrix_modular_exponentiator <= '0';
+      data_a_in_i_enable_matrix_exponentiator <= '0';
+      data_a_in_j_enable_matrix_exponentiator <= '0';
+      data_b_in_i_enable_matrix_exponentiator <= '0';
+      data_b_in_j_enable_matrix_exponentiator <= '0';
 
-      data_a_in_i_modular_exponentiator_int <= '0';
-      data_a_in_j_modular_exponentiator_int <= '0';
-      data_a_in_k_modular_exponentiator_int <= '0';
-      data_b_in_i_modular_exponentiator_int <= '0';
-      data_b_in_j_modular_exponentiator_int <= '0';
-      data_b_in_k_modular_exponentiator_int <= '0';
+      data_a_in_i_exponentiator_int <= '0';
+      data_a_in_j_exponentiator_int <= '0';
+      data_a_in_k_exponentiator_int <= '0';
+      data_b_in_i_exponentiator_int <= '0';
+      data_b_in_j_exponentiator_int <= '0';
+      data_b_in_k_exponentiator_int <= '0';
 
       -- Data Internal
-      modulo_in_matrix_modular_exponentiator <= ZERO_DATA;
-      size_i_in_matrix_modular_exponentiator <= ZERO_CONTROL;
-      size_j_in_matrix_modular_exponentiator <= ZERO_CONTROL;
-      data_a_in_matrix_modular_exponentiator <= ZERO_DATA;
-      data_b_in_matrix_modular_exponentiator <= ZERO_DATA;
+      modulo_in_matrix_exponentiator <= ZERO_DATA;
+      size_i_in_matrix_exponentiator <= ZERO_CONTROL;
+      size_j_in_matrix_exponentiator <= ZERO_CONTROL;
+      data_a_in_matrix_exponentiator <= ZERO_DATA;
+      data_b_in_matrix_exponentiator <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -228,36 +228,36 @@ begin
 
           if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) or ((index_j_loop = ZERO_CONTROL) and (index_k_loop = ZERO_CONTROL))) then
             -- Data Inputs
-            data_a_in_matrix_modular_exponentiator <= DATA_A_IN;
+            data_a_in_matrix_exponentiator <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_i_enable_matrix_modular_exponentiator <= '1';
-            data_a_in_j_enable_matrix_modular_exponentiator <= '1';
+            data_a_in_i_enable_matrix_exponentiator <= '1';
+            data_a_in_j_enable_matrix_exponentiator <= '1';
 
-            data_a_in_i_modular_exponentiator_int <= '1';
-            data_a_in_j_modular_exponentiator_int <= '1';
-            data_a_in_k_modular_exponentiator_int <= '1';
+            data_a_in_i_exponentiator_int <= '1';
+            data_a_in_j_exponentiator_int <= '1';
+            data_a_in_k_exponentiator_int <= '1';
           else
             -- Control Internal
-            data_a_in_i_enable_matrix_modular_exponentiator <= '0';
-            data_a_in_j_enable_matrix_modular_exponentiator <= '0';
+            data_a_in_i_enable_matrix_exponentiator <= '0';
+            data_a_in_j_enable_matrix_exponentiator <= '0';
           end if;
 
           if (((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1') and (DATA_B_IN_K_ENABLE = '1')) or ((index_j_loop = ZERO_CONTROL) and (index_k_loop = ZERO_CONTROL))) then
             -- Data Inputs
-            data_b_in_matrix_modular_exponentiator <= DATA_B_IN;
+            data_b_in_matrix_exponentiator <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_i_enable_matrix_modular_exponentiator <= '1';
-            data_b_in_j_enable_matrix_modular_exponentiator <= '1';
+            data_b_in_i_enable_matrix_exponentiator <= '1';
+            data_b_in_j_enable_matrix_exponentiator <= '1';
 
-            data_b_in_i_modular_exponentiator_int <= '1';
-            data_b_in_j_modular_exponentiator_int <= '1';
-            data_b_in_k_modular_exponentiator_int <= '1';
+            data_b_in_i_exponentiator_int <= '1';
+            data_b_in_j_exponentiator_int <= '1';
+            data_b_in_k_exponentiator_int <= '1';
           else
             -- Control Internal
-            data_b_in_i_enable_matrix_modular_exponentiator <= '0';
-            data_b_in_j_enable_matrix_modular_exponentiator <= '0';
+            data_b_in_i_enable_matrix_exponentiator <= '0';
+            data_b_in_j_enable_matrix_exponentiator <= '0';
           end if;
 
           -- Control Outputs
@@ -265,26 +265,26 @@ begin
           DATA_OUT_J_ENABLE <= '0';
           DATA_OUT_K_ENABLE <= '0';
 
-          if (data_a_in_i_modular_exponentiator_int = '1' and data_a_in_j_modular_exponentiator_int = '1' and data_a_in_k_modular_exponentiator_int = '1' and data_b_in_i_modular_exponentiator_int = '1' and data_b_in_j_modular_exponentiator_int = '1' and data_b_in_k_modular_exponentiator_int = '1') then
+          if (data_a_in_i_exponentiator_int = '1' and data_a_in_j_exponentiator_int = '1' and data_a_in_k_exponentiator_int = '1' and data_b_in_i_exponentiator_int = '1' and data_b_in_j_exponentiator_int = '1' and data_b_in_k_exponentiator_int = '1') then
             -- Data Inputs
-            modulo_in_matrix_modular_exponentiator <= MODULO_IN;
-            size_i_in_matrix_modular_exponentiator <= SIZE_J_IN;
-            size_j_in_matrix_modular_exponentiator <= SIZE_K_IN;
+            modulo_in_matrix_exponentiator <= MODULO_IN;
+            size_i_in_matrix_exponentiator <= SIZE_J_IN;
+            size_j_in_matrix_exponentiator <= SIZE_K_IN;
 
             -- Control Internal
-            start_matrix_modular_exponentiator <= '1';
+            start_matrix_exponentiator <= '1';
 
-            data_a_in_i_enable_matrix_modular_exponentiator <= '0';
-            data_a_in_j_enable_matrix_modular_exponentiator <= '0';
-            data_b_in_i_enable_matrix_modular_exponentiator <= '0';
-            data_b_in_j_enable_matrix_modular_exponentiator <= '0';
+            data_a_in_i_enable_matrix_exponentiator <= '0';
+            data_a_in_j_enable_matrix_exponentiator <= '0';
+            data_b_in_i_enable_matrix_exponentiator <= '0';
+            data_b_in_j_enable_matrix_exponentiator <= '0';
 
-            data_a_in_i_modular_exponentiator_int <= '0';
-            data_a_in_j_modular_exponentiator_int <= '0';
-            data_a_in_k_modular_exponentiator_int <= '0';
-            data_b_in_i_modular_exponentiator_int <= '0';
-            data_b_in_j_modular_exponentiator_int <= '0';
-            data_b_in_k_modular_exponentiator_int <= '0';
+            data_a_in_i_exponentiator_int <= '0';
+            data_a_in_j_exponentiator_int <= '0';
+            data_a_in_k_exponentiator_int <= '0';
+            data_b_in_i_exponentiator_int <= '0';
+            data_b_in_j_exponentiator_int <= '0';
+            data_b_in_k_exponentiator_int <= '0';
 
             -- FSM Control
            exponentiator_ctrl_fsm_int <= ENDER_K_STATE;
@@ -294,30 +294,30 @@ begin
 
           if (((DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) or (index_k_loop = ZERO_CONTROL)) then
             -- Data Inputs
-            data_a_in_matrix_modular_exponentiator <= DATA_A_IN;
+            data_a_in_matrix_exponentiator <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_j_enable_matrix_modular_exponentiator <= '1';
+            data_a_in_j_enable_matrix_exponentiator <= '1';
 
-            data_a_in_j_modular_exponentiator_int <= '1';
-            data_a_in_k_modular_exponentiator_int <= '1';
+            data_a_in_j_exponentiator_int <= '1';
+            data_a_in_k_exponentiator_int <= '1';
           else
             -- Control Internal
-            data_a_in_j_enable_matrix_modular_exponentiator <= '0';
+            data_a_in_j_enable_matrix_exponentiator <= '0';
           end if;
 
           if (((DATA_B_IN_J_ENABLE = '1') and (DATA_B_IN_K_ENABLE = '1')) or (index_k_loop = ZERO_CONTROL)) then
             -- Data Inputs
-            data_b_in_matrix_modular_exponentiator <= DATA_B_IN;
+            data_b_in_matrix_exponentiator <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_j_enable_matrix_modular_exponentiator <= '1';
+            data_b_in_j_enable_matrix_exponentiator <= '1';
 
-            data_b_in_j_modular_exponentiator_int <= '1';
-            data_b_in_k_modular_exponentiator_int <= '1';
+            data_b_in_j_exponentiator_int <= '1';
+            data_b_in_k_exponentiator_int <= '1';
           else
             -- Control Internal
-            data_b_in_j_enable_matrix_modular_exponentiator <= '0';
+            data_b_in_j_enable_matrix_exponentiator <= '0';
           end if;
 
           -- Control Outputs
@@ -325,15 +325,15 @@ begin
           DATA_OUT_J_ENABLE <= '0';
           DATA_OUT_K_ENABLE <= '0';
 
-          if (data_a_in_j_modular_exponentiator_int = '1' and data_a_in_k_modular_exponentiator_int = '1' and data_b_in_j_modular_exponentiator_int = '1' and data_b_in_k_modular_exponentiator_int = '1') then
+          if (data_a_in_j_exponentiator_int = '1' and data_a_in_k_exponentiator_int = '1' and data_b_in_j_exponentiator_int = '1' and data_b_in_k_exponentiator_int = '1') then
             -- Data Inputs
-            data_a_in_j_enable_matrix_modular_exponentiator <= '0';
-            data_b_in_j_enable_matrix_modular_exponentiator <= '0';
+            data_a_in_j_enable_matrix_exponentiator <= '0';
+            data_b_in_j_enable_matrix_exponentiator <= '0';
 
-            data_a_in_j_modular_exponentiator_int <= '0';
-            data_a_in_k_modular_exponentiator_int <= '0';
-            data_b_in_j_modular_exponentiator_int <= '0';
-            data_b_in_k_modular_exponentiator_int <= '0';
+            data_a_in_j_exponentiator_int <= '0';
+            data_a_in_k_exponentiator_int <= '0';
+            data_b_in_j_exponentiator_int <= '0';
+            data_b_in_k_exponentiator_int <= '0';
 
             -- FSM Control
            exponentiator_ctrl_fsm_int <= ENDER_K_STATE;
@@ -343,40 +343,40 @@ begin
 
           if (DATA_A_IN_K_ENABLE = '1') then
             -- Data Inputs
-            data_a_in_matrix_modular_exponentiator <= DATA_A_IN;
+            data_a_in_matrix_exponentiator <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_j_enable_matrix_modular_exponentiator <= '1';
+            data_a_in_j_enable_matrix_exponentiator <= '1';
 
-            data_a_in_k_modular_exponentiator_int <= '1';
+            data_a_in_k_exponentiator_int <= '1';
           else
             -- Control Internal
-            data_a_in_j_enable_matrix_modular_exponentiator <= '0';
+            data_a_in_j_enable_matrix_exponentiator <= '0';
           end if;
 
           if (DATA_B_IN_K_ENABLE = '1') then
             -- Data Inputs
-            data_b_in_matrix_modular_exponentiator <= DATA_B_IN;
+            data_b_in_matrix_exponentiator <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_j_enable_matrix_modular_exponentiator <= '1';
+            data_b_in_j_enable_matrix_exponentiator <= '1';
 
-            data_b_in_k_modular_exponentiator_int <= '1';
+            data_b_in_k_exponentiator_int <= '1';
           else
             -- Control Internal
-            data_b_in_j_enable_matrix_modular_exponentiator <= '0';
+            data_b_in_j_enable_matrix_exponentiator <= '0';
           end if;
 
           -- Control Outputs
           DATA_OUT_K_ENABLE <= '0';
 
-          if (data_a_in_k_modular_exponentiator_int = '1' and data_b_in_k_modular_exponentiator_int = '1') then
+          if (data_a_in_k_exponentiator_int = '1' and data_b_in_k_exponentiator_int = '1') then
             -- Control Internal
-            data_a_in_j_enable_matrix_modular_exponentiator <= '0';
-            data_b_in_j_enable_matrix_modular_exponentiator <= '0';
+            data_a_in_j_enable_matrix_exponentiator <= '0';
+            data_b_in_j_enable_matrix_exponentiator <= '0';
 
-            data_a_in_k_modular_exponentiator_int <= '0';
-            data_b_in_k_modular_exponentiator_int <= '0';
+            data_a_in_k_exponentiator_int <= '0';
+            data_b_in_k_exponentiator_int <= '0';
 
             -- FSM Control
             if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
@@ -392,10 +392,10 @@ begin
 
         when ENDER_I_STATE =>  -- STEP 4
 
-          if (data_out_i_enable_matrix_modular_exponentiator = '1' and data_out_j_enable_matrix_modular_exponentiator = '1') then
+          if (data_out_i_enable_matrix_exponentiator = '1' and data_out_j_enable_matrix_exponentiator = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_modular_exponentiator;
+              DATA_OUT <= data_out_matrix_exponentiator;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -413,7 +413,7 @@ begin
              exponentiator_ctrl_fsm_int <= STARTER_STATE;
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_modular_exponentiator;
+              DATA_OUT <= data_out_matrix_exponentiator;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -430,15 +430,15 @@ begin
             end if;
           else
             -- Control Internal
-            start_matrix_modular_exponentiator <= '0';
+            start_matrix_exponentiator <= '0';
           end if;
 
         when ENDER_J_STATE =>  -- STEP 5
 
-          if (data_out_j_enable_matrix_modular_exponentiator = '1') then
+          if (data_out_j_enable_matrix_exponentiator = '1') then
             if ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_modular_exponentiator;
+              DATA_OUT <= data_out_matrix_exponentiator;
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';
@@ -453,15 +453,15 @@ begin
             end if;
           else
             -- Control Internal
-            start_matrix_modular_exponentiator <= '0';
+            start_matrix_exponentiator <= '0';
           end if;
 
         when ENDER_K_STATE =>  -- STEP 6
 
-          if (data_out_j_enable_matrix_modular_exponentiator = '1') then
+          if (data_out_j_enable_matrix_exponentiator = '1') then
             if (unsigned(index_k_loop) < unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_modular_exponentiator;
+              DATA_OUT <= data_out_matrix_exponentiator;
 
               -- Control Outputs
               DATA_OUT_K_ENABLE <= '1';
@@ -474,7 +474,7 @@ begin
             end if;
           else
             -- Control Internal
-            start_matrix_modular_exponentiator <= '0';
+            start_matrix_exponentiator <= '0';
           end if;
 
         when others =>
@@ -485,7 +485,7 @@ begin
   end process;
 
   -- MATRIX EXPONENTIATOR
-    matrix_modular_exponentiator : ntm_matrix_modular_exponentiator
+    matrix_exponentiator : ntm_matrix_exponentiator
       generic map (
         DATA_SIZE  => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -496,24 +496,24 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_matrix_modular_exponentiator,
-        READY => ready_matrix_modular_exponentiator,
+        START => start_matrix_exponentiator,
+        READY => ready_matrix_exponentiator,
 
-        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_modular_exponentiator,
-        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_modular_exponentiator,
-        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_modular_exponentiator,
-        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_modular_exponentiator,
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_exponentiator,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_exponentiator,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_exponentiator,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_exponentiator,
 
-        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_modular_exponentiator,
-        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_modular_exponentiator,
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_exponentiator,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_exponentiator,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_modular_exponentiator,
-        SIZE_I_IN => size_i_in_matrix_modular_exponentiator,
-        SIZE_J_IN => size_j_in_matrix_modular_exponentiator,
-        DATA_A_IN => data_a_in_matrix_modular_exponentiator,
-        DATA_B_IN => data_b_in_matrix_modular_exponentiator,
-        DATA_OUT  => data_out_matrix_modular_exponentiator
+        MODULO_IN => modulo_in_matrix_exponentiator,
+        SIZE_I_IN => size_i_in_matrix_exponentiator,
+        SIZE_J_IN => size_j_in_matrix_exponentiator,
+        DATA_A_IN => data_a_in_matrix_exponentiator,
+        DATA_B_IN => data_b_in_matrix_exponentiator,
+        DATA_OUT  => data_out_matrix_exponentiator
         );
 
 end architecture;

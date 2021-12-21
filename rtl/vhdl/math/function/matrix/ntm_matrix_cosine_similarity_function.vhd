@@ -91,7 +91,9 @@ architecture ntm_matrix_cosine_similarity_function_architecture of ntm_matrix_co
     INPUT_MATRIX_STATE,                 -- STEP 1
     INPUT_VECTOR_STATE,                 -- STEP 2
     INPUT_SCALAR_STATE,                 -- STEP 3
-    ENDER_STATE                         -- STEP 4
+    ENDER_MATRIX_STATE,                 -- STEP 4
+    ENDER_VECTOR_STATE,                 -- STEP 5
+    ENDER_SCALAR_STATE                  -- STEP 6
     );
 
   -----------------------------------------------------------------------
@@ -132,7 +134,7 @@ architecture ntm_matrix_cosine_similarity_function_architecture of ntm_matrix_co
   signal data_b_in_vector_cosine_similarity_int : std_logic;
   signal data_b_in_scalar_cosine_similarity_int : std_logic;
 
-  -- COSINE SIMILARITY
+  -- VECTOR COSINE SIMILARITY
   -- CONTROL
   signal start_vector_cosine_similarity : std_logic;
   signal ready_vector_cosine_similarity : std_logic;
@@ -200,43 +202,38 @@ begin
 
         when INPUT_MATRIX_STATE =>  -- STEP 1
 
-          if (DATA_A_IN_MATRIX_ENABLE = '1') then
+          if (((DATA_A_IN_MATRIX_ENABLE = '1') and (DATA_A_IN_VECTOR_ENABLE = '1') and (DATA_A_IN_SCALAR_ENABLE = '1')) or ((index_vector_loop = ZERO_CONTROL) and (index_scalar_loop = ZERO_CONTROL))) then
             -- Data Inputs
             data_a_in_vector_cosine_similarity <= DATA_A_IN;
 
             -- Control Internal
             data_a_in_vector_enable_vector_cosine_similarity <= '1';
+            data_a_in_scalar_enable_vector_cosine_similarity <= '1';
 
             data_a_in_matrix_cosine_similarity_int <= '1';
+            data_a_in_vector_cosine_similarity_int <= '1';
+            data_a_in_scalar_cosine_similarity_int <= '1';
           else
             -- Control Internal
             data_a_in_vector_enable_vector_cosine_similarity <= '0';
+            data_a_in_scalar_enable_vector_cosine_similarity <= '0';
           end if;
 
-          if (DATA_B_IN_MATRIX_ENABLE = '1') then
+          if (((DATA_B_IN_MATRIX_ENABLE = '1') and (DATA_B_IN_VECTOR_ENABLE = '1') and (DATA_B_IN_SCALAR_ENABLE = '1')) or ((index_vector_loop = ZERO_CONTROL) and (index_scalar_loop = ZERO_CONTROL))) then
             -- Data Inputs
             data_b_in_vector_cosine_similarity <= DATA_B_IN;
 
             -- Control Internal
             data_b_in_vector_enable_vector_cosine_similarity <= '1';
+            data_b_in_scalar_enable_vector_cosine_similarity <= '1';
 
             data_b_in_matrix_cosine_similarity_int <= '1';
+            data_a_in_vector_cosine_similarity_int <= '1';
+            data_a_in_scalar_cosine_similarity_int <= '1';
           else
             -- Control Internal
             data_b_in_vector_enable_vector_cosine_similarity <= '0';
-          end if;
-
-          if (data_a_in_matrix_cosine_similarity_int = '1' and data_b_in_matrix_cosine_similarity_int = '1') then
-            if (index_matrix_loop = ZERO_CONTROL) then
-              -- Control Internal
-              start_vector_cosine_similarity <= '1';
-            end if;
-
-            -- Data Inputs
-            modulo_in_vector_cosine_similarity <= MODULO_IN;
-
-            -- FSM Control
-            cosine_similarity_ctrl_fsm_int <= ENDER_STATE;
+            data_b_in_scalar_enable_vector_cosine_similarity <= '0';
           end if;
 
           -- Control Outputs
@@ -244,65 +241,93 @@ begin
           DATA_OUT_VECTOR_ENABLE <= '0';
           DATA_OUT_SCALAR_ENABLE <= '0';
 
+          if (data_a_in_matrix_cosine_similarity_int = '1' and data_a_in_vector_cosine_similarity_int = '1' and data_a_in_scalar_cosine_similarity_int = '1' and data_b_in_matrix_cosine_similarity_int = '1' and data_a_in_vector_cosine_similarity_int = '1' and data_a_in_scalar_cosine_similarity_int = '1') then
+            -- Data Inputs
+            modulo_in_vector_cosine_similarity <= MODULO_IN;
+            size_in_vector_cosine_similarity   <= SIZE_J_IN;
+            length_in_vector_cosine_similarity <= LENGTH_IN;
+
+            -- Control Internal
+            start_vector_cosine_similarity <= '1';
+
+            data_a_in_vector_enable_vector_cosine_similarity <= '0';
+            data_a_in_scalar_enable_vector_cosine_similarity <= '0';
+            data_b_in_vector_enable_vector_cosine_similarity <= '0';
+            data_b_in_scalar_enable_vector_cosine_similarity <= '0';
+
+            data_a_in_matrix_cosine_similarity_int <= '0';
+            data_a_in_vector_cosine_similarity_int <= '0';
+            data_a_in_scalar_cosine_similarity_int <= '0';
+            data_b_in_matrix_cosine_similarity_int <= '0';
+            data_a_in_vector_cosine_similarity_int <= '0';
+            data_a_in_scalar_cosine_similarity_int <= '0';
+
+            -- FSM Control
+           cosine_similarity_ctrl_fsm_int <= ENDER_SCALAR_STATE;
+          end if;
+
         when INPUT_VECTOR_STATE =>  -- STEP 2
 
-          if (DATA_A_IN_VECTOR_ENABLE = '1') then
+          if (((DATA_A_IN_VECTOR_ENABLE = '1') and (DATA_A_IN_SCALAR_ENABLE = '1')) or (index_scalar_loop = ZERO_CONTROL)) then
             -- Data Inputs
             data_a_in_vector_cosine_similarity <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_vector_enable_vector_cosine_similarity <= '1';
+            data_a_in_scalar_enable_vector_cosine_similarity <= '1';
 
             data_a_in_vector_cosine_similarity_int <= '1';
+            data_a_in_scalar_cosine_similarity_int <= '1';
           else
             -- Control Internal
-            data_a_in_vector_enable_vector_cosine_similarity <= '0';
+            data_a_in_scalar_enable_vector_cosine_similarity <= '0';
           end if;
 
-          if (DATA_B_IN_VECTOR_ENABLE = '1') then
+          if (((DATA_B_IN_VECTOR_ENABLE = '1') and (DATA_B_IN_SCALAR_ENABLE = '1')) or (index_scalar_loop = ZERO_CONTROL)) then
             -- Data Inputs
             data_b_in_vector_cosine_similarity <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_vector_enable_vector_cosine_similarity <= '1';
+            data_b_in_scalar_enable_vector_cosine_similarity <= '1';
 
-            data_b_in_vector_cosine_similarity_int <= '1';
+            data_a_in_vector_cosine_similarity_int <= '1';
+            data_a_in_scalar_cosine_similarity_int <= '1';
           else
             -- Control Internal
-            data_b_in_vector_enable_vector_cosine_similarity <= '0';
-          end if;
-
-          if (data_a_in_vector_cosine_similarity_int = '1' and data_b_in_vector_cosine_similarity_int = '1') then
-            if (index_vector_loop = ZERO_CONTROL) then
-              -- Control Internal
-              start_vector_cosine_similarity <= '1';
-            end if;
-
-            -- Data Inputs
-            modulo_in_vector_cosine_similarity <= MODULO_IN;
-            size_in_vector_cosine_similarity   <= SIZE_J_IN;
-
-            -- FSM Control
-            cosine_similarity_ctrl_fsm_int <= ENDER_STATE;
+            data_b_in_scalar_enable_vector_cosine_similarity <= '0';
           end if;
 
           -- Control Outputs
+          DATA_OUT_MATRIX_ENABLE <= '0';
           DATA_OUT_VECTOR_ENABLE <= '0';
           DATA_OUT_SCALAR_ENABLE <= '0';
 
-        when INPUT_SCALAR_STATE =>  -- STEP 2
+          if (data_a_in_vector_cosine_similarity_int = '1' and data_a_in_scalar_cosine_similarity_int = '1' and data_a_in_vector_cosine_similarity_int = '1' and data_a_in_scalar_cosine_similarity_int = '1') then
+            -- Data Inputs
+            data_a_in_scalar_enable_vector_cosine_similarity <= '0';
+            data_b_in_scalar_enable_vector_cosine_similarity <= '0';
+
+            data_a_in_vector_cosine_similarity_int <= '0';
+            data_a_in_scalar_cosine_similarity_int <= '0';
+            data_a_in_vector_cosine_similarity_int <= '0';
+            data_a_in_scalar_cosine_similarity_int <= '0';
+
+            -- FSM Control
+           cosine_similarity_ctrl_fsm_int <= ENDER_SCALAR_STATE;
+          end if;
+
+        when INPUT_SCALAR_STATE =>  -- STEP 3
 
           if (DATA_A_IN_SCALAR_ENABLE = '1') then
             -- Data Inputs
             data_a_in_vector_cosine_similarity <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_vector_enable_vector_cosine_similarity <= '1';
+            data_a_in_scalar_enable_vector_cosine_similarity <= '1';
 
             data_a_in_scalar_cosine_similarity_int <= '1';
           else
             -- Control Internal
-            data_a_in_vector_enable_vector_cosine_similarity <= '0';
+            data_a_in_scalar_enable_vector_cosine_similarity <= '0';
           end if;
 
           if (DATA_B_IN_SCALAR_ENABLE = '1') then
@@ -310,93 +335,122 @@ begin
             data_b_in_vector_cosine_similarity <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_vector_enable_vector_cosine_similarity <= '1';
+            data_b_in_scalar_enable_vector_cosine_similarity <= '1';
 
-            data_b_in_scalar_cosine_similarity_int <= '1';
+            data_a_in_scalar_cosine_similarity_int <= '1';
           else
             -- Control Internal
-            data_b_in_vector_enable_vector_cosine_similarity <= '0';
-          end if;
-
-          if (data_a_in_scalar_cosine_similarity_int = '1' and data_b_in_scalar_cosine_similarity_int = '1') then
-            if (index_vector_loop = ZERO_CONTROL) then
-              -- Control Internal
-              start_vector_cosine_similarity <= '1';
-            end if;
-
-            -- Data Inputs
-            modulo_in_vector_cosine_similarity <= MODULO_IN;
-            length_in_vector_cosine_similarity <= LENGTH_IN;
-
-            -- FSM Control
-            cosine_similarity_ctrl_fsm_int <= ENDER_STATE;
+            data_b_in_scalar_enable_vector_cosine_similarity <= '0';
           end if;
 
           -- Control Outputs
           DATA_OUT_SCALAR_ENABLE <= '0';
 
-        when ENDER_STATE =>  -- STEP 4
+          if (data_a_in_scalar_cosine_similarity_int = '1' and data_a_in_scalar_cosine_similarity_int = '1') then
+            -- Control Internal
+            data_a_in_scalar_enable_vector_cosine_similarity <= '0';
+            data_b_in_scalar_enable_vector_cosine_similarity <= '0';
 
-          if (ready_vector_cosine_similarity = '1') then
-            if (unsigned(index_matrix_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL) and unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              -- Control Outputs
-              READY <= '1';
+            data_a_in_scalar_cosine_similarity_int <= '0';
+            data_a_in_scalar_cosine_similarity_int <= '0';
 
-              DATA_OUT_VECTOR_ENABLE <= '1';
+            -- FSM Control
+            if (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+              if (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+                cosine_similarity_ctrl_fsm_int <= ENDER_MATRIX_STATE;
+              else
+                cosine_similarity_ctrl_fsm_int <= ENDER_VECTOR_STATE;
+              end if;
+            else
+              cosine_similarity_ctrl_fsm_int <= ENDER_SCALAR_STATE;
+            end if;
+          end if;
 
-              -- FSM Control
-              cosine_similarity_ctrl_fsm_int <= STARTER_STATE;
-            elsif (unsigned(index_matrix_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL) and unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              -- Control Internal
-              index_matrix_loop <= std_logic_vector(unsigned(index_matrix_loop) + unsigned(ONE_CONTROL));
-              index_vector_loop <= ZERO_CONTROL;
+        when ENDER_MATRIX_STATE =>  -- STEP 4
+
+          if (data_out_vector_enable_vector_cosine_similarity = '1' and data_out_scalar_enable_vector_cosine_similarity = '1') then
+            if ((unsigned(index_matrix_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_cosine_similarity;
 
               -- Control Outputs
               DATA_OUT_MATRIX_ENABLE <= '1';
               DATA_OUT_VECTOR_ENABLE <= '1';
               DATA_OUT_SCALAR_ENABLE <= '1';
 
-              -- FSM Control
-              cosine_similarity_ctrl_fsm_int <= INPUT_MATRIX_STATE;
-            elsif (unsigned(index_matrix_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL) and unsigned(index_vector_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL) and unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+              READY <= '1';
+
               -- Control Internal
-              index_vector_loop <= std_logic_vector(unsigned(index_vector_loop) + unsigned(ONE_CONTROL));
+              index_matrix_loop <= ZERO_CONTROL;
               index_vector_loop <= ZERO_CONTROL;
+              index_scalar_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+             cosine_similarity_ctrl_fsm_int <= STARTER_STATE;
+            elsif ((unsigned(index_matrix_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_cosine_similarity;
+
+              -- Control Outputs
+              DATA_OUT_MATRIX_ENABLE <= '1';
+              DATA_OUT_VECTOR_ENABLE <= '1';
+              DATA_OUT_SCALAR_ENABLE <= '1';
+
+              -- Control Internal
+              index_matrix_loop <= std_logic_vector(unsigned(index_matrix_loop) + unsigned(ONE_CONTROL));
+              index_vector_loop <= ZERO_CONTROL;
+              index_scalar_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+             cosine_similarity_ctrl_fsm_int <= INPUT_MATRIX_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_vector_cosine_similarity <= '0';
+          end if;
+
+        when ENDER_VECTOR_STATE =>  -- STEP 5
+
+          if (data_out_scalar_enable_vector_cosine_similarity = '1') then
+            if ((unsigned(index_vector_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_cosine_similarity;
 
               -- Control Outputs
               DATA_OUT_VECTOR_ENABLE <= '1';
               DATA_OUT_SCALAR_ENABLE <= '1';
 
+              -- Control Internal
+              index_vector_loop <= std_logic_vector(unsigned(index_vector_loop) + unsigned(ONE_CONTROL));
+              index_scalar_loop <= ZERO_CONTROL;
+
               -- FSM Control
               cosine_similarity_ctrl_fsm_int <= INPUT_VECTOR_STATE;
-            elsif (unsigned(index_matrix_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL) and unsigned(index_vector_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL) and unsigned(index_scalar_loop) < unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              -- Control Internal
-              index_scalar_loop <= std_logic_vector(unsigned(index_scalar_loop) + unsigned(ONE_CONTROL));
+            end if;
+          else
+            -- Control Internal
+            start_vector_cosine_similarity <= '0';
+          end if;
+
+        when ENDER_SCALAR_STATE =>  -- STEP 6
+
+          if (data_out_scalar_enable_vector_cosine_similarity = '1') then
+            if (unsigned(index_scalar_loop) < unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Outputs
+              DATA_OUT <= data_out_vector_cosine_similarity;
 
               -- Control Outputs
               DATA_OUT_SCALAR_ENABLE <= '1';
 
+              -- Control Internal
+              index_scalar_loop <= std_logic_vector(unsigned(index_scalar_loop) + unsigned(ONE_CONTROL));
+
               -- FSM Control
               cosine_similarity_ctrl_fsm_int <= INPUT_SCALAR_STATE;
             end if;
-
-            -- Data Outputs
-            DATA_OUT <= data_out_vector_cosine_similarity;
           else
             -- Control Internal
             start_vector_cosine_similarity <= '0';
-
-            data_a_in_matrix_cosine_similarity_int <= '0';
-            data_a_in_vector_cosine_similarity_int <= '0';
-            data_a_in_scalar_cosine_similarity_int <= '0';
-            data_b_in_matrix_cosine_similarity_int <= '0';
-            data_b_in_vector_cosine_similarity_int <= '0';
-            data_b_in_scalar_cosine_similarity_int <= '0';
-
-            data_a_in_vector_enable_vector_cosine_similarity <= '0';
-            data_a_in_scalar_enable_vector_cosine_similarity <= '0';
-            data_b_in_vector_enable_vector_cosine_similarity <= '0';
-            data_b_in_scalar_enable_vector_cosine_similarity <= '0';
           end if;
 
         when others =>
@@ -406,7 +460,7 @@ begin
     end if;
   end process;
 
-  -- COSINE SIMILARITY
+  -- VECTOR COSINE SIMILARITY
   vector_cosine_similarity_function : ntm_vector_cosine_similarity_function
     generic map (
       DATA_SIZE    => DATA_SIZE,

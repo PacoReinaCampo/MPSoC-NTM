@@ -80,11 +80,12 @@ architecture ntm_vector_differentiation_function_architecture of ntm_vector_diff
   -- Types
   -----------------------------------------------------------------------
 
-  type differentiation_function_ctrl_fsm is (
+  type differentiation_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    INPUT_I_STATE,                      -- STEP 1
-    INPUT_J_STATE,                      -- STEP 2
-    ENDER_STATE                         -- STEP 3
+    INPUT_VECTOR_STATE,                 -- STEP 1
+    INPUT_SCALAR_STATE,                 -- STEP 2
+    ENDER_VECTOR_STATE,                 -- STEP 3
+    ENDER_SCALAR_STATE                  -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -111,11 +112,11 @@ architecture ntm_vector_differentiation_function_architecture of ntm_vector_diff
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal differentiation_function_ctrl_fsm_int : differentiation_function_ctrl_fsm;
+  signal differentiation_ctrl_fsm_int : differentiation_ctrl_fsm;
 
   -- Internal Signals
-  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_vector_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_scalar_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- SCALAR DIFFERENTIATION
   -- CONTROL
@@ -157,8 +158,8 @@ begin
       -- Control Internal
       start_scalar_differentiation_function <= '0';
 
-      index_i_loop <= ZERO_CONTROL;
-      index_j_loop <= ZERO_CONTROL;
+      index_vector_loop <= ZERO_CONTROL;
+      index_scalar_loop <= ZERO_CONTROL;
 
       data_in_enable_scalar_differentiation_function <= '0';
 
@@ -170,7 +171,7 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      case differentiation_function_ctrl_fsm_int is
+      case differentiation_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -179,16 +180,16 @@ begin
           DATA_OUT_SCALAR_ENABLE <= '0';
 
           if (START = '1') then
-            index_i_loop <= ZERO_CONTROL;
-            index_j_loop <= ZERO_CONTROL;
+            index_vector_loop <= ZERO_CONTROL;
+            index_scalar_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            differentiation_function_ctrl_fsm_int <= INPUT_I_STATE;
+            differentiation_ctrl_fsm_int <= INPUT_VECTOR_STATE;
           end if;
 
-        when INPUT_I_STATE =>  -- STEP 1
+        when INPUT_VECTOR_STATE =>  -- STEP 1
 
-          if (((DATA_IN_VECTOR_ENABLE = '1') and (DATA_IN_SCALAR_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
+          if (((DATA_IN_VECTOR_ENABLE = '1') and (DATA_IN_SCALAR_ENABLE = '1')) or (index_scalar_loop = ZERO_CONTROL)) then
             -- Data Inputs
             modulo_in_scalar_differentiation_function <= MODULO_IN;
             period_in_scalar_differentiation_function <= PERIOD_IN;
@@ -202,14 +203,14 @@ begin
             data_in_enable_scalar_differentiation_function <= '1';
 
             -- FSM Control
-            differentiation_function_ctrl_fsm_int <= ENDER_STATE;
+            differentiation_ctrl_fsm_int <= ENDER_SCALAR_STATE;
           end if;
 
           -- Control Outputs
           DATA_OUT_VECTOR_ENABLE <= '0';
           DATA_OUT_SCALAR_ENABLE <= '0';
 
-        when INPUT_J_STATE =>  -- STEP 2
+        when INPUT_SCALAR_STATE =>  -- STEP 2
 
           if (DATA_IN_SCALAR_ENABLE = '1') then
             -- Data Inputs
@@ -219,16 +220,20 @@ begin
             data_in_enable_scalar_differentiation_function <= '1';
 
             -- FSM Control
-            differentiation_function_ctrl_fsm_int <= ENDER_STATE;
+            if (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+              differentiation_ctrl_fsm_int <= ENDER_VECTOR_STATE;
+            else
+              differentiation_ctrl_fsm_int <= ENDER_SCALAR_STATE;
+            end if;
           end if;
 
           -- Control Outputs
           DATA_OUT_SCALAR_ENABLE <= '0';
 
-        when ENDER_STATE =>  -- STEP 3
+        when ENDER_VECTOR_STATE =>  -- STEP 3
 
           if (data_out_enable_scalar_differentiation_function = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)))) then
+            if ((unsigned(index_vector_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
               DATA_OUT <= data_out_scalar_differentiation_function;
 
@@ -239,12 +244,12 @@ begin
               READY <= '1';
 
               -- Control Internal
-              index_i_loop <= ZERO_CONTROL;
-              index_j_loop <= ZERO_CONTROL;
+              index_vector_loop <= ZERO_CONTROL;
+              index_scalar_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              differentiation_function_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)))) then
+              differentiation_ctrl_fsm_int <= STARTER_STATE;
+            elsif ((unsigned(index_vector_loop) < unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
               DATA_OUT <= data_out_scalar_differentiation_function;
 
@@ -253,12 +258,23 @@ begin
               DATA_OUT_SCALAR_ENABLE <= '1';
 
               -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-              index_j_loop <= ZERO_CONTROL;
+              index_vector_loop <= std_logic_vector(unsigned(index_vector_loop) + unsigned(ONE_CONTROL));
+              index_scalar_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              differentiation_function_ctrl_fsm_int <= INPUT_I_STATE;
-            elsif ((unsigned(index_i_loop) <= unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)))) then
+              differentiation_ctrl_fsm_int <= INPUT_VECTOR_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_scalar_differentiation_function <= '0';
+
+            data_in_enable_scalar_differentiation_function <= '0';
+          end if;
+
+        when ENDER_SCALAR_STATE =>  -- STEP 4
+
+          if (data_out_enable_scalar_differentiation_function = '1') then
+            if (unsigned(index_scalar_loop) < unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
               DATA_OUT <= data_out_scalar_differentiation_function;
 
@@ -266,10 +282,10 @@ begin
               DATA_OUT_SCALAR_ENABLE <= '1';
 
               -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+              index_scalar_loop <= std_logic_vector(unsigned(index_scalar_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
-              differentiation_function_ctrl_fsm_int <= INPUT_J_STATE;
+              differentiation_ctrl_fsm_int <= INPUT_SCALAR_STATE;
             end if;
           else
             -- Control Internal
@@ -280,7 +296,7 @@ begin
 
         when others =>
           -- FSM Control
-          differentiation_function_ctrl_fsm_int <= STARTER_STATE;
+          differentiation_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
