@@ -4,23 +4,17 @@
 ../../../../../../../rtl/verilog/math/modular/scalar/ntm_scalar_modular_adder.sv
 ../../../../../../../rtl/verilog/math/modular/scalar/ntm_scalar_modular_multiplier.sv
 ../../../../../../../rtl/verilog/math/modular/scalar/ntm_scalar_modular_inverter.sv
-../../../../../../../rtl/verilog/math/modular/scalar/ntm_scalar_modular_divider.sv
-../../../../../../../rtl/verilog/math/modular/scalar/ntm_scalar_modular_exponentiator.sv
 
 ../../../../../../../rtl/verilog/math/modular/vector/ntm_vector_modular_mod.sv
 ../../../../../../../rtl/verilog/math/modular/vector/ntm_vector_modular_adder.sv
 ../../../../../../../rtl/verilog/math/modular/vector/ntm_vector_modular_multiplier.sv
 ../../../../../../../rtl/verilog/math/modular/vector/ntm_vector_modular_inverter.sv
-../../../../../../../rtl/verilog/math/modular/vector/ntm_vector_modular_divider.sv
-../../../../../../../rtl/verilog/math/modular/vector/ntm_vector_modular_exponentiator.sv
 
 ../../../../../../../rtl/verilog/math/modular/matrix/ntm_matrix_modular_mod.sv
 ../../../../../../../rtl/verilog/math/modular/matrix/ntm_matrix_modular_adder.sv
 ../../../../../../../rtl/verilog/math/modular/matrix/ntm_matrix_modular_multiplier.sv
 ../../../../../../../rtl/verilog/math/modular/matrix/ntm_matrix_modular_inverter.sv
-../../../../../../../rtl/verilog/math/modular/matrix/ntm_matrix_modular_divider.sv
-../../../../../../../rtl/verilog/math/modular/matrix/ntm_matrix_modular_exponentiator.sv
 
-../../../../../../../bench/verilog/uvm/math/modular/ntm_modular_pkg.sv
-../../../../../../../bench/verilog/uvm/math/modular/ntm_modular_stimulus.sv
-../../../../../../../bench/verilog/uvm/math/modular/ntm_modular_testbench.sv
+../../../../../../../bench/verilog/tests/math/modular/ntm_modular_pkg.sv
+../../../../../../../bench/verilog/tests/math/modular/ntm_modular_stimulus.sv
+../../../../../../../bench/verilog/tests/math/modular/ntm_modular_testbench.sv

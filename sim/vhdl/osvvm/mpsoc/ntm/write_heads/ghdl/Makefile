@@ -70,9 +70,9 @@ build:
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/ntm/write_heads/ntm_writing.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/ntm/write_heads/ntm_erasing.vhd
 
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/ntm/write_heads/ntm_write_heads_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/ntm/write_heads/ntm_write_heads_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/ntm/write_heads/ntm_write_heads_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/ntm/write_heads/ntm_write_heads_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/ntm/write_heads/ntm_write_heads_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/ntm/write_heads/ntm_write_heads_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 ntm_write_heads_testbench

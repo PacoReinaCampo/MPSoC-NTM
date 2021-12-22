@@ -64,6 +64,7 @@ module ntm_tensor_transpose #(
     input [DATA_SIZE-1:0] SIZE_J_IN,
     input [DATA_SIZE-1:0] SIZE_K_IN,
     input [DATA_SIZE-1:0] DATA_IN,
+
     output reg [DATA_SIZE-1:0] DATA_OUT
   );
 

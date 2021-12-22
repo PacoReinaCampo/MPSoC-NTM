@@ -78,6 +78,6 @@ sv work ../../../../../../../rtl/verilog/dnc/memory/dnc_write_content_weighting.
 sv work ../../../../../../../rtl/verilog/dnc/memory/dnc_write_weighting.sv
 sv work ../../../../../../../rtl/verilog/dnc/memory/dnc_addressing.sv
 
-sv work ../../../../../../../bench/verilog/uvm/dnc/memory/dnc_memory_pkg.sv
-sv work ../../../../../../../bench/verilog/uvm/dnc/memory/dnc_memory_stimulus.sv
-sv work ../../../../../../../bench/verilog/uvm/dnc/memory/dnc_memory_testbench.sv
+sv work ../../../../../../../bench/verilog/tests/dnc/memory/dnc_memory_pkg.sv
+sv work ../../../../../../../bench/verilog/tests/dnc/memory/dnc_memory_stimulus.sv
+sv work ../../../../../../../bench/verilog/tests/dnc/memory/dnc_memory_testbench.sv

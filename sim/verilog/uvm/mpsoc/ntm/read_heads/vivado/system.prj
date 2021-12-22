@@ -63,6 +63,6 @@ sv work ../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_summati
 
 sv work ../../../../../../../rtl/verilog/ntm/read_heads/ntm_reading.sv
 
-sv work ../../../../../../../bench/verilog/uvm/ntm/read_heads/ntm_read_heads_pkg.sv
-sv work ../../../../../../../bench/verilog/uvm/ntm/read_heads/ntm_read_heads_stimulus.sv
-sv work ../../../../../../../bench/verilog/uvm/ntm/read_heads/ntm_read_heads_testbench.sv
+sv work ../../../../../../../bench/verilog/tests/ntm/read_heads/ntm_read_heads_pkg.sv
+sv work ../../../../../../../bench/verilog/tests/ntm/read_heads/ntm_read_heads_stimulus.sv
+sv work ../../../../../../../bench/verilog/tests/ntm/read_heads/ntm_read_heads_testbench.sv

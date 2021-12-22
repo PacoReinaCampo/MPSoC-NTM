@@ -1,26 +1,21 @@
 ../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
 
-../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_mod.vhd
-../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_adder.vhd
-../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_multiplier.vhd
-../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_inverter.vhd
-../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_divider.vhd
-../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_exponentiator.vhd
+../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_adder.vhd
+../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_multiplier.vhd
+../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_divider.vhd
 
-../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_mod.vhd
-../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_adder.vhd
-../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_multiplier.vhd
-../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_inverter.vhd
-../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_divider.vhd
-../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_exponentiator.vhd
+../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_adder.vhd
+../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_multiplier.vhd
+../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_divider.vhd
 
-../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_mod.vhd
-../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_adder.vhd
-../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_multiplier.vhd
-../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_inverter.vhd
-../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_divider.vhd
-../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_exponentiator.vhd
+../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_adder.vhd
+../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_multiplier.vhd
+../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_divider.vhd
 
-../../../../../../../bench/vhdl/osvvm/math/modular/ntm_modular_pkg.vhd
-../../../../../../../bench/vhdl/osvvm/math/modular/ntm_modular_stimulus.vhd
-../../../../../../../bench/vhdl/osvvm/math/modular/ntm_modular_testbench.vhd
+../../../../../../../rtl/vhdl/math/integer/tensor/ntm_tensor_integer_adder.vhd
+../../../../../../../rtl/vhdl/math/integer/tensor/ntm_tensor_integer_multiplier.vhd
+../../../../../../../rtl/vhdl/math/integer/tensor/ntm_tensor_integer_divider.vhd
+
+../../../../../../../bench/vhdl/tests/math/integer/ntm_integer_pkg.vhd
+../../../../../../../bench/vhdl/tests/math/integer/ntm_integer_stimulus.vhd
+../../../../../../../bench/vhdl/tests/math/integer/ntm_integer_testbench.vhd

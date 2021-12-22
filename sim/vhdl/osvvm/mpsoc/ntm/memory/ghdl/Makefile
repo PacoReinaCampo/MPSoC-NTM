@@ -70,9 +70,9 @@ build:
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/ntm/memory/ntm_addressing.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/ntm/memory/ntm_content_based_addressing.vhd
 
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/ntm/memory/ntm_memory_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/ntm/memory/ntm_memory_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/ntm/memory/ntm_memory_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/ntm/memory/ntm_memory_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/ntm/memory/ntm_memory_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/ntm/memory/ntm_memory_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 ntm_memory_testbench

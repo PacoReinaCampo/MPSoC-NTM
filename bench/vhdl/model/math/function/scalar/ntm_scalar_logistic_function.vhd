@@ -74,9 +74,9 @@ architecture ntm_scalar_logistic_function_architecture of ntm_scalar_logistic_fu
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     SCALAR_EXPONENTIATOR_STATE,         -- STEP 1
-    SCALAR_FIRST_INVERTER_STATE,        -- STEP 2
+    SCALAR_FIRST_DIVIDER_STATE,        -- STEP 2
     SCALAR_ADDER_STATE,                 -- STEP 3
-    SCALAR_SECOND_INVERTER_STATE        -- STEP 4
+    SCALAR_SECOND_DIVIDER_STATE        -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -118,15 +118,16 @@ architecture ntm_scalar_logistic_function_architecture of ntm_scalar_logistic_fu
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR INVERTER
+  -- SCALAR DIVIDER
   -- CONTROL
-  signal start_scalar_inverter : std_logic;
-  signal ready_scalar_inverter : std_logic;
+  signal start_scalar_divider : std_logic;
+  signal ready_scalar_divider : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR EXPONENTIATOR
   -- CONTROL
@@ -145,7 +146,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = 1/(1 + inverter(exponentiation(EULER,DATA_IN)))
+  -- DATA_OUT = 1/(1 + 1/exponentiation(EULER,DATA_IN))
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -179,22 +180,23 @@ begin
 
           if (ready_scalar_exponentiator = '1') then
             -- Control Internal
-            start_scalar_inverter <= '1';
+            start_scalar_divider <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_FIRST_INVERTER_STATE;
+            controller_ctrl_fsm_int <= SCALAR_FIRST_DIVIDER_STATE;
           else
             -- Control Internal
             start_scalar_exponentiator <= '0';
           end if;
 
-        when SCALAR_FIRST_INVERTER_STATE =>  -- STEP 3
+        when SCALAR_FIRST_DIVIDER_STATE =>  -- STEP 3
 
           -- Data Inputs
-          modulo_in_scalar_inverter <= MODULO_IN;
-          data_in_scalar_inverter   <= DATA_IN;
+          modulo_in_scalar_divider <= MODULO_IN;
+          data_a_in_scalar_divider <= ONE_DATA;
+          data_b_in_scalar_divider <= DATA_IN;
 
-          if (ready_scalar_inverter = '1') then
+          if (ready_scalar_divider = '1') then
             -- Control Internal
             start_scalar_adder <= '1';
 
@@ -202,31 +204,32 @@ begin
             controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
           else
             -- Control Internal
-            start_scalar_inverter <= '0';
+            start_scalar_divider <= '0';
           end if;
 
         when SCALAR_ADDER_STATE =>  -- STEP 4
 
           if (ready_scalar_adder = '1') then
             -- Control Internal
-            start_scalar_inverter <= '1';
+            start_scalar_divider <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_SECOND_INVERTER_STATE;
+            controller_ctrl_fsm_int <= SCALAR_SECOND_DIVIDER_STATE;
           else
             -- Control Internal
             start_scalar_adder <= '0';
           end if;
 
-        when SCALAR_SECOND_INVERTER_STATE =>  -- STEP 5
+        when SCALAR_SECOND_DIVIDER_STATE =>  -- STEP 5
 
           -- Data Inputs
-          modulo_in_scalar_inverter <= MODULO_IN;
-          data_in_scalar_inverter   <= data_out_scalar_adder;
+          modulo_in_scalar_divider <= MODULO_IN;
+          data_a_in_scalar_divider <= ONE_DATA;
+          data_b_in_scalar_divider <= data_out_scalar_adder;
 
-          if (ready_scalar_inverter = '1') then
+          if (ready_scalar_divider = '1') then
             -- Data Outputs
-            DATA_OUT <= data_out_scalar_inverter;
+            DATA_OUT <= data_out_scalar_divider;
 
             -- Control Outputs
             READY <= '1';
@@ -235,7 +238,7 @@ begin
             controller_ctrl_fsm_int <= STARTER_STATE;
           else
             -- Control Internal
-            start_scalar_inverter <= '0';
+            start_scalar_divider <= '0';
           end if;
 
         when others =>
@@ -252,7 +255,7 @@ begin
   -- SCALAR ADDER
   modulo_in_scalar_adder <= MODULO_IN;
   data_a_in_scalar_adder <= ONE_DATA;
-  data_b_in_scalar_adder <= data_out_scalar_inverter;
+  data_b_in_scalar_adder <= data_out_scalar_divider;
 
   -- SCALAR EXPONENTIATOR
   modulo_in_scalar_exponentiator <= MODULO_IN;
@@ -283,8 +286,8 @@ begin
       DATA_OUT  => data_out_scalar_adder
       );
 
-  -- SCALAR INVERTER
-  scalar_inverter : ntm_scalar_inverter
+  -- SCALAR DIVIDER
+  scalar_divider : ntm_scalar_divider
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -295,13 +298,14 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_inverter,
-      READY => ready_scalar_inverter,
+      START => start_scalar_divider,
+      READY => ready_scalar_divider,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_inverter,
-      DATA_IN   => data_in_scalar_inverter,
-      DATA_OUT  => data_out_scalar_inverter
+      MODULO_IN => modulo_in_scalar_divider,
+      DATA_A_IN => data_a_in_scalar_divider,
+      DATA_B_IN => data_b_in_scalar_divider,
+      DATA_OUT  => data_out_scalar_divider
       );
 
   -- SCALAR EXPONENTIATOR

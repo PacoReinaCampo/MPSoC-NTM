@@ -3,21 +3,15 @@ sv work ../../../../../../../../rtl/verilog/pkg/ntm_lstm_controller_pkg.sv
 
 sv work ../../../../../../../../rtl/verilog/math/float/scalar/ntm_scalar_adder.sv
 sv work ../../../../../../../../rtl/verilog/math/float/scalar/ntm_scalar_multiplier.sv
-sv work ../../../../../../../../rtl/verilog/math/float/scalar/ntm_scalar_inverter.sv
 sv work ../../../../../../../../rtl/verilog/math/float/scalar/ntm_scalar_divider.sv
-sv work ../../../../../../../../rtl/verilog/math/float/scalar/ntm_scalar_exponentiator.sv
 
 sv work ../../../../../../../../rtl/verilog/math/float/vector/ntm_vector_adder.sv
 sv work ../../../../../../../../rtl/verilog/math/float/vector/ntm_vector_multiplier.sv
-sv work ../../../../../../../../rtl/verilog/math/float/vector/ntm_vector_inverter.sv
 sv work ../../../../../../../../rtl/verilog/math/float/vector/ntm_vector_divider.sv
-sv work ../../../../../../../../rtl/verilog/math/float/vector/ntm_vector_exponentiator.sv
 
 sv work ../../../../../../../../rtl/verilog/math/float/matrix/ntm_matrix_adder.sv
 sv work ../../../../../../../../rtl/verilog/math/float/matrix/ntm_matrix_multiplier.sv
-sv work ../../../../../../../../rtl/verilog/math/float/matrix/ntm_matrix_inverter.sv
 sv work ../../../../../../../../rtl/verilog/math/float/matrix/ntm_matrix_divider.sv
-sv work ../../../../../../../../rtl/verilog/math/float/matrix/ntm_matrix_exponentiator.sv
 
 sv work ../../../../../../../../rtl/verilog/math/algebra/ntm_matrix_product.sv
 sv work ../../../../../../../../rtl/verilog/math/algebra/ntm_tensor_transpose.sv
@@ -73,6 +67,6 @@ sv work ../../../../../../../../rtl/verilog/controller/LSTM/standard/ntm_output_
 sv work ../../../../../../../../rtl/verilog/controller/LSTM/standard/ntm_output_trainer.sv
 sv work ../../../../../../../../rtl/verilog/controller/LSTM/standard/ntm_state_gate_vector.sv
 
-sv work ../../../../../../../../bench/verilog/uvm/controller/LSTM/standard/ntm_standard_lstm_pkg.sv
-sv work ../../../../../../../../bench/verilog/uvm/controller/LSTM/standard/ntm_standard_lstm_stimulus.sv
-sv work ../../../../../../../../bench/verilog/uvm/controller/LSTM/standard/ntm_standard_lstm_testbench.sv
+sv work ../../../../../../../../bench/verilog/tests/controller/LSTM/standard/ntm_standard_lstm_pkg.sv
+sv work ../../../../../../../../bench/verilog/tests/controller/LSTM/standard/ntm_standard_lstm_stimulus.sv
+sv work ../../../../../../../../bench/verilog/tests/controller/LSTM/standard/ntm_standard_lstm_testbench.sv

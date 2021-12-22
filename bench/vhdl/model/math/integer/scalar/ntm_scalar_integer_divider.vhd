@@ -81,15 +81,15 @@ architecture ntm_scalar_integer_divider_architecture of ntm_scalar_integer_divid
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
-  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
-  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
-  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(3, CONTROL_SIZE));
 
-  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -112,7 +112,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN / DATA_B_IN mod MODULO_IN
+  -- DATA_OUT = DATA_A_IN / DATA_B_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -135,7 +135,7 @@ begin
           READY <= '0';
 
           if (START = '1') then
-            divider_int <= std_logic_vector(unsigned(DATA_A_IN) / unsigned(DATA_B_IN));
+            divider_int <= std_logic_vector(signed(DATA_A_IN) / signed(DATA_B_IN));
 
             -- FSM Control
             divider_ctrl_fsm_int <= ENDER_STATE;
@@ -143,87 +143,14 @@ begin
 
         when ENDER_STATE =>  -- STEP 1
 
-          if (unsigned(MODULO_IN) > unsigned(ZERO_DATA)) then
-            if (unsigned(DATA_A_IN) > unsigned(DATA_B_IN)) then
-              if (unsigned(divider_int) = unsigned(MODULO_IN)) then
-                -- Data Outputs
-                DATA_OUT <= ZERO_DATA;
+          -- Data Outputs
+          DATA_OUT <= divider_int;
 
-                -- Control Outputs
-                READY <= '1';
+          -- Control Outputs
+          READY <= '1';
 
-                -- FSM Control
-                divider_ctrl_fsm_int <= STARTER_STATE;
-              elsif (unsigned(divider_int) < unsigned(MODULO_IN)) then
-                -- Data Outputs
-                DATA_OUT <= divider_int;
-
-                -- Control Outputs
-                READY <= '1';
-
-                -- FSM Control
-                divider_ctrl_fsm_int <= STARTER_STATE;
-              else
-                -- Assignations
-                divider_int <= std_logic_vector(unsigned(divider_int) - (unsigned(MODULO_IN)));
-              end if;
-            elsif (unsigned(DATA_A_IN) = unsigned(DATA_B_IN)) then
-              if (unsigned(divider_int) = unsigned(MODULO_IN)) then
-                -- Data Outputs
-                DATA_OUT <= ZERO_DATA;
-
-                -- Control Outputs
-                READY <= '1';
-
-                -- FSM Control
-                divider_ctrl_fsm_int <= STARTER_STATE;
-              elsif (unsigned(divider_int) < unsigned(MODULO_IN)) then
-                -- Data Outputs
-                DATA_OUT <= divider_int;
-
-                -- Control Outputs
-                READY <= '1';
-
-                -- FSM Control
-                divider_ctrl_fsm_int <= STARTER_STATE;
-              else
-                -- Assignations
-                divider_int <= std_logic_vector(unsigned(divider_int) - (unsigned(MODULO_IN)));
-              end if;
-            elsif (unsigned(DATA_A_IN) < unsigned(DATA_B_IN)) then
-              if (unsigned(divider_int) = unsigned(MODULO_IN)) then
-                -- Data Outputs
-                DATA_OUT <= ZERO_DATA;
-
-                -- Control Outputs
-                READY <= '1';
-
-                -- FSM Control
-                divider_ctrl_fsm_int <= STARTER_STATE;
-              elsif (unsigned(divider_int) < unsigned(MODULO_IN)) then
-                -- Data Outputs
-                DATA_OUT <= divider_int;
-
-                -- Control Outputs
-                READY <= '1';
-
-                -- FSM Control
-                divider_ctrl_fsm_int <= STARTER_STATE;
-              else
-                -- Assignations
-                divider_int <= std_logic_vector(unsigned(divider_int) - (unsigned(MODULO_IN)));
-              end if;
-            end if;
-          elsif (unsigned(MODULO_IN) = unsigned(ZERO_DATA)) then
-            -- Data Outputs
-            DATA_OUT <= divider_int;
-
-            -- Control Outputs
-            READY <= '1';
-
-            -- FSM Control
-            divider_ctrl_fsm_int <= STARTER_STATE;
-          end if;
+          -- FSM Control
+          divider_ctrl_fsm_int <= STARTER_STATE;
 
         when others =>
           -- FSM Control

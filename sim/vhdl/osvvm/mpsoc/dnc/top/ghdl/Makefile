@@ -114,9 +114,9 @@ build:
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/top/dnc_read_interface_vector.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/dnc/top/dnc_write_interface_vector.vhd
 
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/dnc/top/dnc_top_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/dnc/top/dnc_top_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/dnc/top/dnc_top_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/top/dnc_top_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/top/dnc_top_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/dnc/top/dnc_top_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 dnc_top_testbench

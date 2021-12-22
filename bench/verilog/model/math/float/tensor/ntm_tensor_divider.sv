@@ -52,17 +52,26 @@ module ntm_matrix_divider #(
 
     input DATA_A_IN_I_ENABLE,
     input DATA_A_IN_J_ENABLE,
+    input DATA_A_IN_K_ENABLE,
     input DATA_B_IN_I_ENABLE,
     input DATA_B_IN_J_ENABLE,
+    input DATA_B_IN_K_ENABLE,
+
     output reg DATA_OUT_I_ENABLE,
     output reg DATA_OUT_J_ENABLE,
+    output reg DATA_OUT_K_ENABLE,
 
     // DATA
     input [DATA_SIZE-1:0] MODULO_IN,
-    input [DATA_SIZE-1:0] SIZE_I_IN,
-    input [DATA_SIZE-1:0] SIZE_J_IN,
+    input [DATA_SIZE-1:0] SIZE_A_I_IN,
+    input [DATA_SIZE-1:0] SIZE_A_J_IN,
+    input [DATA_SIZE-1:0] SIZE_A_K_IN,
+    input [DATA_SIZE-1:0] SIZE_B_I_IN,
+    input [DATA_SIZE-1:0] SIZE_B_J_IN,
+    input [DATA_SIZE-1:0] SIZE_B_K_IN,
     input [DATA_SIZE-1:0] DATA_A_IN,
     input [DATA_SIZE-1:0] DATA_B_IN,
+
     output reg [DATA_SIZE-1:0] DATA_OUT
   );
 

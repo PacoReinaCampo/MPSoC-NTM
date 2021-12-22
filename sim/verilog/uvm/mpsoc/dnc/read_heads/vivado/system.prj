@@ -65,6 +65,6 @@ sv work ../../../../../../../rtl/verilog/dnc/read_heads/dnc_free_gates.sv
 sv work ../../../../../../../rtl/verilog/dnc/read_heads/dnc_read_keys.sv
 sv work ../../../../../../../rtl/verilog/dnc/read_heads/dnc_read_strengths.sv
 
-sv work ../../../../../../../bench/verilog/uvm/dnc/read_heads/dnc_read_heads_pkg.sv
-sv work ../../../../../../../bench/verilog/uvm/dnc/read_heads/dnc_read_heads_stimulus.sv
-sv work ../../../../../../../bench/verilog/uvm/dnc/read_heads/dnc_read_heads_testbench.sv
+sv work ../../../../../../../bench/verilog/tests/dnc/read_heads/dnc_read_heads_pkg.sv
+sv work ../../../../../../../bench/verilog/tests/dnc/read_heads/dnc_read_heads_stimulus.sv
+sv work ../../../../../../../bench/verilog/tests/dnc/read_heads/dnc_read_heads_testbench.sv

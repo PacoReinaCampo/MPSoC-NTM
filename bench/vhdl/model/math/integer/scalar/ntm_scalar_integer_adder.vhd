@@ -114,7 +114,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN ± DATA_B_IN mod MODULO_IN
+  -- DATA_OUT = DATA_A_IN ± DATA_B_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -139,13 +139,9 @@ begin
           if (START = '1') then
             -- Assignations
             if (OPERATION = '1') then
-              if (unsigned(DATA_A_IN) > unsigned(DATA_B_IN)) then
-                adder_int <= std_logic_vector(('0' & unsigned(DATA_A_IN)) - ('0' & unsigned(DATA_B_IN)));
-              else
-                adder_int <= std_logic_vector(('0' & unsigned(DATA_B_IN)) - ('0' & unsigned(DATA_A_IN)));
-              end if;
+              adder_int <= std_logic_vector(('0' & signed(DATA_A_IN)) - ('0' & signed(DATA_B_IN)));
             else
-              adder_int <= std_logic_vector(('0' & unsigned(DATA_A_IN)) + ('0' & unsigned(DATA_B_IN)));
+              adder_int <= std_logic_vector(('0' & signed(DATA_A_IN)) + ('0' & signed(DATA_B_IN)));
             end if;
 
             -- FSM Control
@@ -154,123 +150,14 @@ begin
 
         when ENDER_STATE =>  -- STEP 1
 
-          if (unsigned(MODULO_IN) > unsigned(ZERO_DATA)) then
-            if (unsigned(DATA_A_IN) > unsigned(DATA_B_IN)) then
-              if (unsigned(adder_int) = '0' & unsigned(MODULO_IN)) then
-                -- Data Outputs
-                DATA_OUT <= ZERO_DATA;
+          -- Data Outputs
+          DATA_OUT <= adder_int(DATA_SIZE-1 downto 0);
 
-                -- Control Outputs
-                READY <= '1';
+          -- Control Outputs
+          READY <= '1';
 
-                -- FSM Control
-                adder_ctrl_fsm_int <= STARTER_STATE;
-              elsif (unsigned(adder_int) < '0' & unsigned(MODULO_IN)) then
-                -- Data Outputs
-                DATA_OUT <= adder_int(DATA_SIZE-1 downto 0);
-
-                -- Control Outputs
-                READY <= '1';
-
-                -- FSM Control
-                adder_ctrl_fsm_int <= STARTER_STATE;
-              else
-                -- Assignations
-                adder_int <= std_logic_vector(unsigned(adder_int) - ('0' & unsigned(MODULO_IN)));
-              end if;
-            elsif (unsigned(DATA_A_IN) = unsigned(DATA_B_IN)) then
-              if (OPERATION = '1') then
-                -- Data Outputs
-                DATA_OUT <= ZERO_DATA;
-
-                -- Control Outputs
-                READY <= '1';
-
-                -- FSM Control
-                adder_ctrl_fsm_int <= STARTER_STATE;
-              else
-                if (unsigned(adder_int) = '0' & unsigned(MODULO_IN)) then
-                  -- Data Outputs
-                  DATA_OUT <= ZERO_DATA;
-
-                  -- Control Outputs
-                  READY <= '1';
-
-                  -- FSM Control
-                  adder_ctrl_fsm_int <= STARTER_STATE;
-                elsif (unsigned(adder_int) < '0' & unsigned(MODULO_IN)) then
-                  -- Data Outputs
-                  DATA_OUT <= adder_int(DATA_SIZE-1 downto 0);
-
-                  -- Control Outputs
-                  READY <= '1';
-
-                  -- FSM Control
-                  adder_ctrl_fsm_int <= STARTER_STATE;
-                else
-                  -- Assignations
-                  adder_int <= std_logic_vector(unsigned(adder_int) - ('0' & unsigned(MODULO_IN)));
-                end if;
-              end if;
-            elsif (unsigned(DATA_A_IN) < unsigned(DATA_B_IN)) then
-              if (OPERATION = '1') then
-                if (unsigned(adder_int) = '0' & unsigned(MODULO_IN)) then
-                  -- Data Outputs
-                  DATA_OUT <= ZERO_DATA;
-
-                  -- Control Outputs
-                  READY <= '1';
-
-                  -- FSM Control
-                  adder_ctrl_fsm_int <= STARTER_STATE;
-                elsif (unsigned(adder_int) < '0' & unsigned(MODULO_IN)) then
-                  -- Data Outputs
-                  DATA_OUT <= std_logic_vector(unsigned(MODULO_IN) - unsigned(adder_int(DATA_SIZE-1 downto 0)));
-
-                  -- Control Outputs
-                  READY <= '1';
-
-                  -- FSM Control
-                  adder_ctrl_fsm_int <= STARTER_STATE;
-                else
-                  -- Assignations
-                  adder_int <= std_logic_vector(unsigned(adder_int) - ('0' & unsigned(MODULO_IN)));
-                end if;
-              else
-                if (unsigned(adder_int) = '0' & unsigned(MODULO_IN)) then
-                  -- Data Outputs
-                  DATA_OUT <= ZERO_DATA;
-
-                  -- Control Outputs
-                  READY <= '1';
-
-                  -- FSM Control
-                  adder_ctrl_fsm_int <= STARTER_STATE;
-                elsif (unsigned(adder_int) < '0' & unsigned(MODULO_IN)) then
-                  -- Data Outputs
-                  DATA_OUT <= adder_int(DATA_SIZE-1 downto 0);
-
-                  -- Control Outputs
-                  READY <= '1';
-
-                  -- FSM Control
-                  adder_ctrl_fsm_int <= STARTER_STATE;
-                else
-                  -- Assignations
-                  adder_int <= std_logic_vector(unsigned(adder_int) - ('0' & unsigned(MODULO_IN)));
-                end if;
-              end if;
-            end if;
-          elsif (unsigned(MODULO_IN) = unsigned(ZERO_DATA)) then
-            -- Data Outputs
-            DATA_OUT <= adder_int(DATA_SIZE-1 downto 0);
-
-            -- Control Outputs
-            READY <= '1';
-
-            -- FSM Control
-            adder_ctrl_fsm_int <= STARTER_STATE;
-          end if;
+          -- FSM Control
+          adder_ctrl_fsm_int <= STARTER_STATE;
 
         when others =>
           -- FSM Control

@@ -69,6 +69,6 @@
 ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_modes.vhd
 ../../../../../../../rtl/vhdl/dnc/read_heads/dnc_read_strengths.vhd
 
-../../../../../../../bench/vhdl/osvvm/dnc/read_heads/dnc_read_heads_pkg.vhd
-../../../../../../../bench/vhdl/osvvm/dnc/read_heads/dnc_read_heads_stimulus.vhd
-../../../../../../../bench/vhdl/osvvm/dnc/read_heads/dnc_read_heads_testbench.vhd
+../../../../../../../bench/vhdl/tests/dnc/read_heads/dnc_read_heads_pkg.vhd
+../../../../../../../bench/vhdl/tests/dnc/read_heads/dnc_read_heads_stimulus.vhd
+../../../../../../../bench/vhdl/tests/dnc/read_heads/dnc_read_heads_testbench.vhd

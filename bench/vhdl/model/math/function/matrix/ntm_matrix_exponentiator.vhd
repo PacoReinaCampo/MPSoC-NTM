@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_matrix_modular_exponentiator is
+entity ntm_matrix_exponentiator is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -371,7 +371,7 @@ begin
   end process;
 
   -- VECTOR EXPONENTIATOR
-  vector_exponentiator : ntm_vector_modular_exponentiator
+  vector_exponentiator : ntm_vector_exponentiator
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE

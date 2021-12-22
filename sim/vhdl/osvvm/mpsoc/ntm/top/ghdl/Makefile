@@ -92,9 +92,9 @@ build:
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/ntm/top/ntm_output_vector.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/ntm/top/ntm_top.vhd
 
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/ntm/top/ntm_top_pkg.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/ntm/top/ntm_top_stimulus.vhd
-	ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/ntm/top/ntm_top_testbench.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/ntm/top/ntm_top_pkg.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/ntm/top/ntm_top_stimulus.vhd
+	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/ntm/top/ntm_top_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 ntm_top_testbench

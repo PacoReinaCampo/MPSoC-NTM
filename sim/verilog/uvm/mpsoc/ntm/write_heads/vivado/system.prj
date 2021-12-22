@@ -64,6 +64,6 @@ sv work ../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_summati
 sv work ../../../../../../../rtl/verilog/ntm/write_heads/ntm_writing.sv
 sv work ../../../../../../../rtl/verilog/ntm/write_heads/ntm_erasing.sv
 
-sv work ../../../../../../../bench/verilog/uvm/ntm/write_heads/ntm_write_heads_pkg.sv
-sv work ../../../../../../../bench/verilog/uvm/ntm/write_heads/ntm_write_heads_stimulus.sv
-sv work ../../../../../../../bench/verilog/uvm/ntm/write_heads/ntm_write_heads_testbench.sv
+sv work ../../../../../../../bench/verilog/tests/ntm/write_heads/ntm_write_heads_pkg.sv
+sv work ../../../../../../../bench/verilog/tests/ntm/write_heads/ntm_write_heads_stimulus.sv
+sv work ../../../../../../../bench/verilog/tests/ntm/write_heads/ntm_write_heads_testbench.sv

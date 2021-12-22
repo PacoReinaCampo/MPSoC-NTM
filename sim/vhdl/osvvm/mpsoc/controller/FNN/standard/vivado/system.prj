@@ -1,26 +1,17 @@
 vhdl2008 work ../../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/pkg/ntm_fnn_controller_pkg.vhd
 
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_mod.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_adder.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_multiplier.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_inverter.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_divider.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_exponentiator.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_adder.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_multiplier.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_divider.vhd
 
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_mod.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_adder.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_multiplier.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_inverter.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_divider.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_exponentiator.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_adder.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_multiplier.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_divider.vhd
 
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_mod.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_adder.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_multiplier.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_inverter.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_divider.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_exponentiator.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_adder.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_multiplier.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_divider.vhd
 
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_product.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/ntm_tensor_transpose.vhd
@@ -67,6 +58,6 @@ vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_s
 vhdl2008 work ../../../../../../../../rtl/vhdl/controller/FNN/standard/ntm_controller.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/controller/FNN/standard/ntm_trainer.vhd
 
-vhdl2008 work ../../../../../../../../bench/vhdl/osvvm/controller/FNN/standard/ntm_standard_fnn_pkg.vhd
-vhdl2008 work ../../../../../../../../bench/vhdl/osvvm/controller/FNN/standard/ntm_standard_fnn_stimulus.vhd
-vhdl2008 work ../../../../../../../../bench/vhdl/osvvm/controller/FNN/standard/ntm_standard_fnn_testbench.vhd
+vhdl2008 work ../../../../../../../../bench/vhdl/tests/controller/FNN/standard/ntm_standard_fnn_pkg.vhd
+vhdl2008 work ../../../../../../../../bench/vhdl/tests/controller/FNN/standard/ntm_standard_fnn_stimulus.vhd
+vhdl2008 work ../../../../../../../../bench/vhdl/tests/controller/FNN/standard/ntm_standard_fnn_testbench.vhd

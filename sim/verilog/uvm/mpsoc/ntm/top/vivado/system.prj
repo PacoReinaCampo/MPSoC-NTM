@@ -86,6 +86,6 @@ sv work ../../../../../../../rtl/verilog/ntm/top/ntm_interface_vector.sv
 sv work ../../../../../../../rtl/verilog/ntm/top/ntm_output_vector.sv
 sv work ../../../../../../../rtl/verilog/ntm/top/ntm_top.sv
 
-sv work ../../../../../../../bench/verilog/uvm/ntm/top/ntm_top_pkg.sv
-sv work ../../../../../../../bench/verilog/uvm/ntm/top/ntm_top_stimulus.sv
-sv work ../../../../../../../bench/verilog/uvm/ntm/top/ntm_top_testbench.sv
+sv work ../../../../../../../bench/verilog/tests/ntm/top/ntm_top_pkg.sv
+sv work ../../../../../../../bench/verilog/tests/ntm/top/ntm_top_stimulus.sv
+sv work ../../../../../../../bench/verilog/tests/ntm/top/ntm_top_testbench.sv

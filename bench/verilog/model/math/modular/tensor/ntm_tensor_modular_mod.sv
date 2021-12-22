@@ -52,14 +52,19 @@ module ntm_matrix_modular_mod #(
 
     input DATA_IN_I_ENABLE,
     input DATA_IN_J_ENABLE,
+    input DATA_IN_K_ENABLE,
+
     output reg DATA_OUT_I_ENABLE,
     output reg DATA_OUT_J_ENABLE,
+    output reg DATA_OUT_K_ENABLE,
 
     // DATA
     input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] SIZE_I_IN,
     input [DATA_SIZE-1:0] SIZE_J_IN,
+    input [DATA_SIZE-1:0] SIZE_K_IN,
     input [DATA_SIZE-1:0] DATA_IN,
+
     output reg [DATA_SIZE-1:0] DATA_OUT
   );
 
