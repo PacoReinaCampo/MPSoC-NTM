@@ -111,7 +111,7 @@ architecture ntm_vector_modular_mod_architecture of ntm_vector_modular_mod is
   -- Internal Signals
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- VECTOR MOD
+  -- SCALAR MOD
   -- CONTROL
   signal start_scalar_mod : std_logic;
   signal ready_scalar_mod : std_logic;
@@ -221,7 +221,7 @@ begin
     end if;
   end process;
 
-  -- VECTOR MOD
+  -- SCALAR MOD
   scalar_mod : ntm_scalar_modular_mod
     generic map (
       DATA_SIZE    => DATA_SIZE,

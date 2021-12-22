@@ -4,26 +4,17 @@ call ../../../../../../../../settings64_ghdl.bat
 ghdl -a --std=08 ../../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
 ghdl -a --std=08 ../../../../../../../../rtl/vhdl/pkg/ntm_lstm_controller_pkg.vhd
 
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_mod.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_adder.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_multiplier.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_inverter.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_divider.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_exponentiator.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_adder.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_multiplier.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_divider.vhd
 
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_mod.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_adder.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_multiplier.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_inverter.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_divider.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_exponentiator.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_adder.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_multiplier.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_divider.vhd
 
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_mod.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_adder.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_multiplier.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_inverter.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_divider.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_exponentiator.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_adder.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_multiplier.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_divider.vhd
 
 ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_product.vhd
 ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/algebra/ntm_tensor_transpose.vhd
@@ -55,17 +46,17 @@ ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vecto
 ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_oneplus_function.vhd
 ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_summation_function.vhd
 
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_modular_convolution_function.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_modular_cosine_similarity_function.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_modular_differentiation_function.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_modular_multiplication_function.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_modular_cosh_function.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_modular_sinh_function.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_modular_tanh_function.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_modular_logistic_function.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_modular_softmax_function.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_modular_oneplus_function.vhd
-ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_modular_summation_function.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_integer_convolution_function.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_integer_cosine_similarity_function.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_integer_differentiation_function.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_integer_multiplication_function.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_integer_cosh_function.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_integer_sinh_function.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_integer_tanh_function.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_integer_logistic_function.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_integer_softmax_function.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_integer_oneplus_function.vhd
+ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_integer_summation_function.vhd
 
 ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_controller.vhd
 ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/LSTM/convolutional/ntm_activation_gate_vector.vhd

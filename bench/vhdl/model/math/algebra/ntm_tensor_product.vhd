@@ -95,7 +95,8 @@ architecture ntm_matrix_product_architecture of ntm_matrix_product is
     INPUT_J_STATE,                      -- STEP 2
     INPUT_K_STATE,                      -- STEP 3
     ENDER_I_STATE,                      -- STEP 4
-    ENDER_J_STATE                       -- STEP 5
+    ENDER_J_STATE,                      -- STEP 5
+    ENDER_K_STATE                       -- STEP 6
     );
 
   -----------------------------------------------------------------------
@@ -318,12 +319,14 @@ begin
             data_a_in_matrix_multiplier <= DATA_A_IN;
 
             -- Control Internal
+            data_a_in_i_enable_matrix_multiplier <= '1';
             data_a_in_j_enable_matrix_multiplier <= '1';
 
             data_a_in_j_multiplier_int <= '1';
             data_a_in_k_multiplier_int <= '1';
           else
             -- Control Internal
+            data_a_in_i_enable_matrix_multiplier <= '0';
             data_a_in_j_enable_matrix_multiplier <= '0';
           end if;
 
@@ -347,7 +350,9 @@ begin
 
           if (data_a_in_j_multiplier_int = '1' and data_a_in_k_multiplier_int = '1' and data_b_in_j_multiplier_int = '1' and data_b_in_k_multiplier_int = '1') then
             -- Control Internal
+            data_a_in_i_enable_matrix_multiplier <= '0';
             data_a_in_j_enable_matrix_multiplier <= '0';
+            data_b_in_i_enable_matrix_multiplier <= '0';
             data_b_in_j_enable_matrix_multiplier <= '0';
 
             data_a_in_j_multiplier_int <= '0';
@@ -356,7 +361,11 @@ begin
             data_b_in_k_multiplier_int <= '0';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= ENDER_J_STATE;
+            if (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) then
+              controller_ctrl_fsm_int <= ENDER_I_STATE;
+            else
+              controller_ctrl_fsm_int <= ENDER_J_STATE;
+            end if;
           end if;
 
         when INPUT_K_STATE =>  -- STEP 3
@@ -399,13 +408,25 @@ begin
             data_b_in_k_multiplier_int <= '0';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= ENDER_J_STATE;
+            if (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) then
+              if (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
+                controller_ctrl_fsm_int <= ENDER_I_STATE;
+              else
+                controller_ctrl_fsm_int <= ENDER_J_STATE;
+              end if;
+            else
+              if (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
+                controller_ctrl_fsm_int <= ENDER_J_STATE;
+              else
+                controller_ctrl_fsm_int <= ENDER_K_STATE;
+              end if;
+            end if;
           end if;
 
         when ENDER_I_STATE =>  -- STEP 4
 
-          if (data_out_i_enable_matrix_multiplier = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)))) then
+          if (data_out_i_enable_matrix_multiplier = '1' and data_out_j_enable_matrix_multiplier = '1') then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
               DATA_OUT <= data_out_matrix_multiplier;
 
@@ -423,7 +444,7 @@ begin
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
               DATA_OUT <= data_out_matrix_multiplier;
 
@@ -434,25 +455,11 @@ begin
 
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+              index_j_loop <= ZERO_CONTROL;
               index_k_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              controller_ctrl_fsm_int <= INPUT_J_STATE;
-            elsif ((unsigned(index_i_loop) <= unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) <= unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) < unsigned(unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)))) then
-              -- Data Outputs
-              DATA_OUT <= data_out_matrix_multiplier;
-
-              -- Control Outputs
-              DATA_OUT_J_ENABLE <= '1';
-              DATA_OUT_K_ENABLE <= '1';
-
-              -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-              index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
-
-              -- FSM Control
-              controller_ctrl_fsm_int <= INPUT_K_STATE;
+              controller_ctrl_fsm_int <= INPUT_I_STATE;
             end if;
           else
             -- Control Internal
@@ -462,23 +469,7 @@ begin
         when ENDER_J_STATE =>  -- STEP 5
 
           if (data_out_j_enable_matrix_multiplier = '1') then
-            if ((unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)))) then
-              -- Data Outputs
-              DATA_OUT <= data_out_matrix_multiplier;
-
-              -- Control Outputs
-              DATA_OUT_J_ENABLE <= '1';
-              DATA_OUT_K_ENABLE <= '1';
-
-              READY <= '1';
-
-              -- Control Internal
-              index_j_loop <= ZERO_CONTROL;
-              index_k_loop <= ZERO_CONTROL;
-
-              -- FSM Control
-              controller_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_j_loop) < unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)))) then
+            if ((unsigned(index_j_loop) < unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
               DATA_OUT <= data_out_matrix_multiplier;
 
@@ -492,7 +483,16 @@ begin
 
               -- FSM Control
               controller_ctrl_fsm_int <= INPUT_J_STATE;
-            elsif ((unsigned(index_j_loop) <= unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) < unsigned(unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)))) then
+            end if;
+          else
+            -- Control Internal
+            start_matrix_multiplier <= '0';
+          end if;
+
+        when ENDER_K_STATE =>  -- STEP 6
+
+          if (data_out_j_enable_matrix_multiplier = '1') then
+            if (unsigned(index_k_loop) < unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
               DATA_OUT <= data_out_matrix_multiplier;
 

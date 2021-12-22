@@ -5,21 +5,15 @@ build:
 
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/scalar/ntm_scalar_adder.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/scalar/ntm_scalar_multiplier.vhd
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/scalar/ntm_scalar_inverter.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/scalar/ntm_scalar_divider.vhd
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/scalar/ntm_scalar_exponentiator.vhd
 
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/vector/ntm_vector_adder.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/vector/ntm_vector_multiplier.vhd
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/vector/ntm_vector_inverter.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/vector/ntm_vector_divider.vhd
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/vector/ntm_vector_exponentiator.vhd
 
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_adder.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_multiplier.vhd
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_inverter.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_divider.vhd
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_exponentiator.vhd
 
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/math/float/ntm_float_pkg.vhd
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/math/float/ntm_float_stimulus.vhd

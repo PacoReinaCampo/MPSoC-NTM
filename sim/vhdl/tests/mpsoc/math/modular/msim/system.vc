@@ -4,29 +4,21 @@
 ../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_adder.vhd
 ../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_multiplier.vhd
 ../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_inverter.vhd
-../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_divider.vhd
-../../../../../../../rtl/vhdl/math/modular/scalar/ntm_scalar_modular_exponentiator.vhd
 
 ../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_mod.vhd
 ../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_adder.vhd
 ../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_multiplier.vhd
 ../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_inverter.vhd
-../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_divider.vhd
-../../../../../../../rtl/vhdl/math/modular/vector/ntm_vector_modular_exponentiator.vhd
 
 ../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_mod.vhd
 ../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_adder.vhd
 ../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_multiplier.vhd
 ../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_inverter.vhd
-../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_divider.vhd
-../../../../../../../rtl/vhdl/math/modular/matrix/ntm_matrix_modular_exponentiator.vhd
 
 ../../../../../../../rtl/vhdl/math/modular/tensor/ntm_tensor_modular_mod.vhd
 ../../../../../../../rtl/vhdl/math/modular/tensor/ntm_tensor_modular_adder.vhd
 ../../../../../../../rtl/vhdl/math/modular/tensor/ntm_tensor_modular_multiplier.vhd
 ../../../../../../../rtl/vhdl/math/modular/tensor/ntm_tensor_modular_inverter.vhd
-../../../../../../../rtl/vhdl/math/modular/tensor/ntm_tensor_modular_divider.vhd
-../../../../../../../rtl/vhdl/math/modular/tensor/ntm_tensor_modular_exponentiator.vhd
 
 ../../../../../../../bench/vhdl/tests/math/modular/ntm_modular_pkg.vhd
 ../../../../../../../bench/vhdl/tests/math/modular/ntm_modular_stimulus.vhd

@@ -59,59 +59,41 @@ entity ntm_float_testbench is
     -- SCALAR-FUNCTIONALITY
     ENABLE_NTM_SCALAR_ADDER_TEST         : boolean := false;
     ENABLE_NTM_SCALAR_MULTIPLIER_TEST    : boolean := false;
-    ENABLE_NTM_SCALAR_INVERTER_TEST      : boolean := false;
     ENABLE_NTM_SCALAR_DIVIDER_TEST       : boolean := false;
-    ENABLE_NTM_SCALAR_EXPONENTIATOR_TEST : boolean := false;
 
     ENABLE_NTM_SCALAR_ADDER_CASE_0         : boolean := false;
     ENABLE_NTM_SCALAR_MULTIPLIER_CASE_0    : boolean := false;
-    ENABLE_NTM_SCALAR_INVERTER_CASE_0      : boolean := false;
     ENABLE_NTM_SCALAR_DIVIDER_CASE_0       : boolean := false;
-    ENABLE_NTM_SCALAR_EXPONENTIATOR_CASE_0 : boolean := false;
 
     ENABLE_NTM_SCALAR_ADDER_CASE_1         : boolean := false;
     ENABLE_NTM_SCALAR_MULTIPLIER_CASE_1    : boolean := false;
-    ENABLE_NTM_SCALAR_INVERTER_CASE_1      : boolean := false;
     ENABLE_NTM_SCALAR_DIVIDER_CASE_1       : boolean := false;
-    ENABLE_NTM_SCALAR_EXPONENTIATOR_CASE_1 : boolean := false;
 
     -- VECTOR-FUNCTIONALITY
     ENABLE_NTM_VECTOR_ADDER_TEST         : boolean := false;
     ENABLE_NTM_VECTOR_MULTIPLIER_TEST    : boolean := false;
-    ENABLE_NTM_VECTOR_INVERTER_TEST      : boolean := false;
     ENABLE_NTM_VECTOR_DIVIDER_TEST       : boolean := false;
-    ENABLE_NTM_VECTOR_EXPONENTIATOR_TEST : boolean := false;
 
     ENABLE_NTM_VECTOR_ADDER_CASE_0         : boolean := false;
     ENABLE_NTM_VECTOR_MULTIPLIER_CASE_0    : boolean := false;
-    ENABLE_NTM_VECTOR_INVERTER_CASE_0      : boolean := false;
     ENABLE_NTM_VECTOR_DIVIDER_CASE_0       : boolean := false;
-    ENABLE_NTM_VECTOR_EXPONENTIATOR_CASE_0 : boolean := false;
 
     ENABLE_NTM_VECTOR_ADDER_CASE_1         : boolean := false;
     ENABLE_NTM_VECTOR_MULTIPLIER_CASE_1    : boolean := false;
-    ENABLE_NTM_VECTOR_INVERTER_CASE_1      : boolean := false;
     ENABLE_NTM_VECTOR_DIVIDER_CASE_1       : boolean := false;
-    ENABLE_NTM_VECTOR_EXPONENTIATOR_CASE_1 : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
     ENABLE_NTM_MATRIX_ADDER_TEST         : boolean := false;
     ENABLE_NTM_MATRIX_MULTIPLIER_TEST    : boolean := false;
-    ENABLE_NTM_MATRIX_INVERTER_TEST      : boolean := false;
     ENABLE_NTM_MATRIX_DIVIDER_TEST       : boolean := false;
-    ENABLE_NTM_MATRIX_EXPONENTIATOR_TEST : boolean := false;
 
     ENABLE_NTM_MATRIX_ADDER_CASE_0         : boolean := false;
     ENABLE_NTM_MATRIX_MULTIPLIER_CASE_0    : boolean := false;
-    ENABLE_NTM_MATRIX_INVERTER_CASE_0      : boolean := false;
     ENABLE_NTM_MATRIX_DIVIDER_CASE_0       : boolean := false;
-    ENABLE_NTM_MATRIX_EXPONENTIATOR_CASE_0 : boolean := false;
 
     ENABLE_NTM_MATRIX_ADDER_CASE_1         : boolean := false;
     ENABLE_NTM_MATRIX_MULTIPLIER_CASE_1    : boolean := false;
-    ENABLE_NTM_MATRIX_INVERTER_CASE_1      : boolean := false;
-    ENABLE_NTM_MATRIX_DIVIDER_CASE_1       : boolean := false;
-    ENABLE_NTM_MATRIX_EXPONENTIATOR_CASE_1 : boolean := false
+    ENABLE_NTM_MATRIX_DIVIDER_CASE_1       : boolean := false
     );
 end ntm_float_testbench;
 
@@ -153,16 +135,6 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR INVERTER
-  -- CONTROL
-  signal start_scalar_inverter : std_logic;
-  signal ready_scalar_inverter : std_logic;
-
-  -- DATA
-  signal modulo_in_scalar_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_in_scalar_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
-
   -- SCALAR DIVIDER
   -- CONTROL
   signal start_scalar_divider : std_logic;
@@ -173,17 +145,6 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal data_a_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR EXPONENTIATOR
-  -- CONTROL
-  signal start_scalar_exponentiator : std_logic;
-  signal ready_scalar_exponentiator : std_logic;
-
-  -- DATA
-  signal modulo_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- VECTOR
@@ -225,21 +186,6 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR INVERTER
-  -- CONTROL
-  signal start_vector_inverter : std_logic;
-  signal ready_vector_inverter : std_logic;
-
-  signal data_in_enable_vector_inverter : std_logic;
-
-  signal data_out_enable_vector_inverter : std_logic;
-
-  -- DATA
-  signal modulo_in_vector_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_inverter   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
-
   -- VECTOR DIVIDER
   -- CONTROL
   signal start_vector_divider : std_logic;
@@ -256,23 +202,6 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal data_a_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR EXPONENTIATOR
-  -- CONTROL
-  signal start_vector_exponentiator : std_logic;
-  signal ready_vector_exponentiator : std_logic;
-
-  signal data_a_in_enable_vector_exponentiator : std_logic;
-  signal data_b_in_enable_vector_exponentiator : std_logic;
-
-  signal data_out_enable_vector_exponentiator : std_logic;
-
-  -- DATA
-  signal modulo_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_exponentiator   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- MATRIX
@@ -322,24 +251,6 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal data_b_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MATRIX INVERTER
-  -- CONTROL
-  signal start_matrix_inverter : std_logic;
-  signal ready_matrix_inverter : std_logic;
-
-  signal data_in_i_enable_matrix_inverter : std_logic;
-  signal data_in_j_enable_matrix_inverter : std_logic;
-
-  signal data_out_i_enable_matrix_inverter : std_logic;
-  signal data_out_j_enable_matrix_inverter : std_logic;
-
-  -- DATA
-  signal modulo_in_matrix_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_inverter : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_inverter : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_matrix_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
-
   -- MATRIX DIVIDER
   -- CONTROL
   signal start_matrix_divider : std_logic;
@@ -360,27 +271,6 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal data_a_in_matrix_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- MATRIX EXPONENTIATOR
-  -- CONTROL
-  signal start_matrix_exponentiator : std_logic;
-  signal ready_matrix_exponentiator : std_logic;
-
-  signal data_a_in_i_enable_matrix_exponentiator : std_logic;
-  signal data_a_in_j_enable_matrix_exponentiator : std_logic;
-  signal data_b_in_i_enable_matrix_exponentiator : std_logic;
-  signal data_b_in_j_enable_matrix_exponentiator : std_logic;
-
-  signal data_out_i_enable_matrix_exponentiator : std_logic;
-  signal data_out_j_enable_matrix_exponentiator : std_logic;
-
-  -- DATA
-  signal modulo_in_matrix_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -432,15 +322,6 @@ begin
       SCALAR_MULTIPLIER_DATA_B_IN => data_b_in_scalar_multiplier,
       SCALAR_MULTIPLIER_DATA_OUT  => data_out_scalar_multiplier,
 
-      -- SCALAR INVERTER
-      -- CONTROL
-      SCALAR_INVERTER_START => start_scalar_inverter,
-      SCALAR_INVERTER_READY => ready_scalar_inverter,
-
-      -- DATA
-      SCALAR_INVERTER_DATA_IN   => data_in_scalar_inverter,
-      SCALAR_INVERTER_DATA_OUT  => data_out_scalar_inverter,
-
       -- SCALAR DIVIDER
       -- CONTROL
       SCALAR_DIVIDER_START => start_scalar_divider,
@@ -451,15 +332,6 @@ begin
       SCALAR_DIVIDER_DATA_B_IN => data_b_in_scalar_divider,
       SCALAR_DIVIDER_DATA_OUT  => data_out_scalar_divider,
 
-      -- SCALAR EXPONENTIATOR
-      -- CONTROL
-      SCALAR_EXPONENTIATOR_START => start_scalar_exponentiator,
-      SCALAR_EXPONENTIATOR_READY => ready_scalar_exponentiator,
-
-      -- DATA
-      SCALAR_EXPONENTIATOR_DATA_A_IN => data_a_in_scalar_exponentiator,
-      SCALAR_EXPONENTIATOR_DATA_B_IN => data_b_in_scalar_exponentiator,
-      SCALAR_EXPONENTIATOR_DATA_OUT  => data_out_scalar_exponentiator,
       -----------------------------------------------------------------------
       -- STIMULUS VECTOR
       -----------------------------------------------------------------------
@@ -498,20 +370,6 @@ begin
       VECTOR_MULTIPLIER_DATA_B_IN => data_b_in_vector_multiplier,
       VECTOR_MULTIPLIER_DATA_OUT  => data_out_vector_multiplier,
 
-      -- VECTOR INVERTER
-      -- CONTROL
-      VECTOR_INVERTER_START => start_vector_inverter,
-      VECTOR_INVERTER_READY => ready_vector_inverter,
-
-      VECTOR_INVERTER_DATA_IN_ENABLE => data_in_enable_vector_inverter,
-
-      VECTOR_INVERTER_DATA_OUT_ENABLE => data_out_enable_vector_inverter,
-
-      -- DATA
-      VECTOR_INVERTER_SIZE_IN   => size_in_vector_inverter,
-      VECTOR_INVERTER_DATA_IN   => data_in_vector_inverter,
-      VECTOR_INVERTER_DATA_OUT  => data_out_vector_inverter,
-
       -- VECTOR DIVIDER
       -- CONTROL
       VECTOR_DIVIDER_START => start_vector_divider,
@@ -527,22 +385,6 @@ begin
       VECTOR_DIVIDER_DATA_A_IN => data_a_in_vector_divider,
       VECTOR_DIVIDER_DATA_B_IN => data_b_in_vector_divider,
       VECTOR_DIVIDER_DATA_OUT  => data_out_vector_divider,
-
-      -- VECTOR EXPONENTIATOR
-      -- CONTROL
-      VECTOR_EXPONENTIATOR_START => start_vector_exponentiator,
-      VECTOR_EXPONENTIATOR_READY => ready_vector_exponentiator,
-
-      VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE => data_a_in_enable_vector_exponentiator,
-      VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE => data_b_in_enable_vector_exponentiator,
-
-      VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
-
-      -- DATA
-      VECTOR_EXPONENTIATOR_SIZE_IN   => size_in_vector_exponentiator,
-      VECTOR_EXPONENTIATOR_DATA_A_IN => data_a_in_vector_exponentiator,
-      VECTOR_EXPONENTIATOR_DATA_B_IN => data_b_in_vector_exponentiator,
-      VECTOR_EXPONENTIATOR_DATA_OUT  => data_out_vector_exponentiator,
 
       -----------------------------------------------------------------------
       -- STIMULUS MATRIX
@@ -590,23 +432,6 @@ begin
       MATRIX_MULTIPLIER_DATA_B_IN => data_b_in_matrix_multiplier,
       MATRIX_MULTIPLIER_DATA_OUT  => data_out_matrix_multiplier,
 
-      -- MATRIX INVERTER
-      -- CONTROL
-      MATRIX_INVERTER_START => start_matrix_inverter,
-      MATRIX_INVERTER_READY => ready_matrix_inverter,
-
-      MATRIX_INVERTER_DATA_IN_I_ENABLE => data_in_i_enable_matrix_inverter,
-      MATRIX_INVERTER_DATA_IN_J_ENABLE => data_in_j_enable_matrix_inverter,
-
-      MATRIX_INVERTER_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_inverter,
-      MATRIX_INVERTER_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_inverter,
-
-      -- DATA
-      MATRIX_INVERTER_SIZE_I_IN => size_i_in_matrix_inverter,
-      MATRIX_INVERTER_SIZE_J_IN => size_j_in_matrix_inverter,
-      MATRIX_INVERTER_DATA_IN   => data_in_matrix_inverter,
-      MATRIX_INVERTER_DATA_OUT  => data_out_matrix_inverter,
-
       -- MATRIX DIVIDER
       -- CONTROL
       MATRIX_DIVIDER_START => start_matrix_divider,
@@ -625,27 +450,7 @@ begin
       MATRIX_DIVIDER_SIZE_J_IN => size_j_in_matrix_divider,
       MATRIX_DIVIDER_DATA_A_IN => data_a_in_matrix_divider,
       MATRIX_DIVIDER_DATA_B_IN => data_b_in_matrix_divider,
-      MATRIX_DIVIDER_DATA_OUT  => data_out_matrix_divider,
-
-      -- MATRIX EXPONENTIATOR
-      -- CONTROL
-      MATRIX_EXPONENTIATOR_START => start_matrix_exponentiator,
-      MATRIX_EXPONENTIATOR_READY => ready_matrix_exponentiator,
-
-      MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_exponentiator,
-      MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_exponentiator,
-      MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_exponentiator,
-      MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_exponentiator,
-
-      MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_exponentiator,
-      MATRIX_EXPONENTIATOR_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_exponentiator,
-
-      -- DATA
-      MATRIX_EXPONENTIATOR_SIZE_I_IN => size_i_in_matrix_exponentiator,
-      MATRIX_EXPONENTIATOR_SIZE_J_IN => size_j_in_matrix_exponentiator,
-      MATRIX_EXPONENTIATOR_DATA_A_IN => data_a_in_matrix_exponentiator,
-      MATRIX_EXPONENTIATOR_DATA_B_IN => data_b_in_matrix_exponentiator,
-      MATRIX_EXPONENTIATOR_DATA_OUT  => data_out_matrix_exponentiator
+      MATRIX_DIVIDER_DATA_OUT  => data_out_matrix_divider
       );
 
   -----------------------------------------------------------------------
@@ -702,29 +507,6 @@ begin
         );
   end generate ntm_scalar_multiplier_test;
 
-  -- SCALAR INVERTER
-  ntm_scalar_inverter_test : if (ENABLE_NTM_SCALAR_INVERTER_TEST) generate
-    scalar_inverter : ntm_scalar_inverter
-      generic map (
-        DATA_SIZE  => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_scalar_inverter,
-        READY => ready_scalar_inverter,
-
-        -- DATA
-        MODULO_IN => modulo_in_scalar_inverter,
-        DATA_IN   => data_in_scalar_inverter,
-        DATA_OUT  => data_out_scalar_inverter
-        );
-  end generate ntm_scalar_inverter_test;
-
   -- SCALAR DIVIDER
   ntm_scalar_divider_test : if (ENABLE_NTM_SCALAR_DIVIDER_TEST) generate
     scalar_divider : ntm_scalar_divider
@@ -748,30 +530,6 @@ begin
         DATA_OUT  => data_out_scalar_divider
         );
   end generate ntm_scalar_divider_test;
-
-  -- SCALAR EXPONENTIATOR
-  ntm_scalar_exponentiator_test : if (ENABLE_NTM_SCALAR_EXPONENTIATOR_TEST) generate
-    scalar_exponentiator : ntm_scalar_exponentiator
-      generic map (
-        DATA_SIZE  => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_scalar_exponentiator,
-        READY => ready_scalar_exponentiator,
-
-        -- DATA
-        MODULO_IN => modulo_in_scalar_exponentiator,
-        DATA_A_IN => data_a_in_scalar_exponentiator,
-        DATA_B_IN => data_b_in_scalar_exponentiator,
-        DATA_OUT  => data_out_scalar_exponentiator
-        );
-  end generate ntm_scalar_exponentiator_test;
 
   -----------------------------------------------------------------------
   -- VECTOR
@@ -839,34 +597,6 @@ begin
         );
   end generate ntm_vector_multiplier_test;
 
-  -- VECTOR INVERTER
-  ntm_vector_inverter_test : if (ENABLE_NTM_VECTOR_INVERTER_TEST) generate
-    vector_inverter : ntm_vector_inverter
-      generic map (
-        DATA_SIZE  => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_vector_inverter,
-        READY => ready_vector_inverter,
-
-        DATA_IN_ENABLE => data_in_enable_vector_inverter,
-
-        DATA_OUT_ENABLE => data_out_enable_vector_inverter,
-
-        -- DATA
-        MODULO_IN => modulo_in_vector_inverter,
-        SIZE_IN   => size_in_vector_inverter,
-        DATA_IN   => data_in_vector_inverter,
-        DATA_OUT  => data_out_vector_inverter
-        );
-  end generate ntm_vector_inverter_test;
-
   -- VECTOR DIVIDER
   ntm_vector_divider_test : if (ENABLE_NTM_VECTOR_DIVIDER_TEST) generate
     vector_divider : ntm_vector_divider
@@ -896,36 +626,6 @@ begin
         DATA_OUT  => data_out_vector_divider
         );
   end generate ntm_vector_divider_test;
-
-  -- VECTOR EXPONENTIATOR
-  ntm_vector_exponentiator_test : if (ENABLE_NTM_VECTOR_EXPONENTIATOR_TEST) generate
-    vector_exponentiator : ntm_vector_exponentiator
-      generic map (
-        DATA_SIZE  => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_vector_exponentiator,
-        READY => ready_vector_exponentiator,
-
-        DATA_A_IN_ENABLE => data_a_in_enable_vector_exponentiator,
-        DATA_B_IN_ENABLE => data_b_in_enable_vector_exponentiator,
-
-        DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
-
-        -- DATA
-        MODULO_IN => modulo_in_vector_exponentiator,
-        SIZE_IN   => size_in_vector_exponentiator,
-        DATA_A_IN => data_a_in_vector_exponentiator,
-        DATA_B_IN => data_b_in_vector_exponentiator,
-        DATA_OUT  => data_out_vector_exponentiator
-        );
-  end generate ntm_vector_exponentiator_test;
 
   -----------------------------------------------------------------------
   -- MATRIX
@@ -1001,37 +701,6 @@ begin
         );
   end generate ntm_matrix_multiplier_test;
 
-  -- MATRIX INVERTER
-  ntm_matrix_inverter_test : if (ENABLE_NTM_MATRIX_INVERTER_TEST) generate
-    matrix_inverter : ntm_matrix_inverter
-      generic map (
-        DATA_SIZE  => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_matrix_inverter,
-        READY => ready_matrix_inverter,
-
-        DATA_IN_I_ENABLE => data_in_i_enable_matrix_inverter,
-        DATA_IN_J_ENABLE => data_in_j_enable_matrix_inverter,
-
-        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_inverter,
-        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_inverter,
-
-        -- DATA
-        MODULO_IN => modulo_in_matrix_inverter,
-        SIZE_I_IN => size_i_in_matrix_inverter,
-        SIZE_J_IN => size_j_in_matrix_inverter,
-        DATA_IN   => data_in_matrix_inverter,
-        DATA_OUT  => data_out_matrix_inverter
-        );
-  end generate ntm_matrix_inverter_test;
-
   -- MATRIX DIVIDER
   ntm_matrix_divider_test : if (ENABLE_NTM_MATRIX_DIVIDER_TEST) generate
     matrix_divider : ntm_matrix_divider
@@ -1065,39 +734,5 @@ begin
         DATA_OUT  => data_out_matrix_divider
         );
   end generate ntm_matrix_divider_test;
-
-  -- MATRIX EXPONENTIATOR
-  ntm_matrix_exponentiator_test : if (ENABLE_NTM_MATRIX_EXPONENTIATOR_TEST) generate
-    matrix_exponentiator : ntm_matrix_exponentiator
-      generic map (
-        DATA_SIZE  => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_matrix_exponentiator,
-        READY => ready_matrix_exponentiator,
-
-        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_exponentiator,
-        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_exponentiator,
-        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_exponentiator,
-        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_exponentiator,
-
-        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_exponentiator,
-        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_exponentiator,
-
-        -- DATA
-        MODULO_IN => modulo_in_matrix_exponentiator,
-        SIZE_I_IN => size_i_in_matrix_exponentiator,
-        SIZE_J_IN => size_j_in_matrix_exponentiator,
-        DATA_A_IN => data_a_in_matrix_exponentiator,
-        DATA_B_IN => data_b_in_matrix_exponentiator,
-        DATA_OUT  => data_out_matrix_exponentiator
-        );
-  end generate ntm_matrix_exponentiator_test;
 
 end ntm_float_testbench_architecture;

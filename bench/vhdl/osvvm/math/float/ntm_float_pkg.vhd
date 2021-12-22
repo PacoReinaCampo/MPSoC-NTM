@@ -70,59 +70,41 @@ package ntm_float_pkg is
   -- SCALAR-FUNCTIONALITY
   signal STIMULUS_NTM_SCALAR_ADDER_TEST         : boolean := false;
   signal STIMULUS_NTM_SCALAR_MULTIPLIER_TEST    : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INVERTER_TEST      : boolean := false;
   signal STIMULUS_NTM_SCALAR_DIVIDER_TEST       : boolean := false;
-  signal STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST : boolean := false;
 
   signal STIMULUS_NTM_SCALAR_ADDER_CASE_0         : boolean := false;
   signal STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0    : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INVERTER_CASE_0      : boolean := false;
   signal STIMULUS_NTM_SCALAR_DIVIDER_CASE_0       : boolean := false;
-  signal STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0 : boolean := false;
 
   signal STIMULUS_NTM_SCALAR_ADDER_CASE_1         : boolean := false;
   signal STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1    : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INVERTER_CASE_1      : boolean := false;
   signal STIMULUS_NTM_SCALAR_DIVIDER_CASE_1       : boolean := false;
-  signal STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1 : boolean := false;
 
   -- VECTOR-FUNCTIONALITY
   signal STIMULUS_NTM_VECTOR_ADDER_TEST         : boolean := false;
   signal STIMULUS_NTM_VECTOR_MULTIPLIER_TEST    : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INVERTER_TEST      : boolean := false;
   signal STIMULUS_NTM_VECTOR_DIVIDER_TEST       : boolean := false;
-  signal STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST : boolean := false;
 
   signal STIMULUS_NTM_VECTOR_ADDER_CASE_0         : boolean := false;
   signal STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_0    : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INVERTER_CASE_0      : boolean := false;
   signal STIMULUS_NTM_VECTOR_DIVIDER_CASE_0       : boolean := false;
-  signal STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0 : boolean := false;
 
   signal STIMULUS_NTM_VECTOR_ADDER_CASE_1         : boolean := false;
   signal STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_1    : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INVERTER_CASE_1      : boolean := false;
   signal STIMULUS_NTM_VECTOR_DIVIDER_CASE_1       : boolean := false;
-  signal STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_1 : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
   signal STIMULUS_NTM_MATRIX_ADDER_TEST         : boolean := false;
   signal STIMULUS_NTM_MATRIX_MULTIPLIER_TEST    : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INVERTER_TEST      : boolean := false;
   signal STIMULUS_NTM_MATRIX_DIVIDER_TEST       : boolean := false;
-  signal STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST : boolean := false;
 
   signal STIMULUS_NTM_MATRIX_ADDER_CASE_0         : boolean := false;
   signal STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_0    : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INVERTER_CASE_0      : boolean := false;
   signal STIMULUS_NTM_MATRIX_DIVIDER_CASE_0       : boolean := false;
-  signal STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0 : boolean := false;
 
   signal STIMULUS_NTM_MATRIX_ADDER_CASE_1         : boolean := false;
   signal STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_1    : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INVERTER_CASE_1      : boolean := false;
   signal STIMULUS_NTM_MATRIX_DIVIDER_CASE_1       : boolean := false;
-  signal STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1 : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
@@ -172,15 +154,6 @@ package ntm_float_pkg is
       SCALAR_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- SCALAR INVERTER
-      -- CONTROL
-      SCALAR_INVERTER_START : out std_logic;
-      SCALAR_INVERTER_READY : in  std_logic;
-
-      -- DATA
-      SCALAR_INVERTER_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_INVERTER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
       -- SCALAR DIVIDER
       -- CONTROL
       SCALAR_DIVIDER_START : out std_logic;
@@ -190,16 +163,6 @@ package ntm_float_pkg is
       SCALAR_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- SCALAR EXPONENTIATOR
-      -- CONTROL
-      SCALAR_EXPONENTIATOR_START : out std_logic;
-      SCALAR_EXPONENTIATOR_READY : in  std_logic;
-
-      -- DATA
-      SCALAR_EXPONENTIATOR_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_EXPONENTIATOR_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
       -- STIMULUS VECTOR
@@ -239,20 +202,6 @@ package ntm_float_pkg is
       VECTOR_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- VECTOR INVERTER
-      -- CONTROL
-      VECTOR_INVERTER_START : out std_logic;
-      VECTOR_INVERTER_READY : in  std_logic;
-
-      VECTOR_INVERTER_DATA_IN_ENABLE : out std_logic;
-
-      VECTOR_INVERTER_DATA_OUT_ENABLE : in std_logic;
-
-      -- DATA
-      VECTOR_INVERTER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_INVERTER_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_INVERTER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
       -- VECTOR DIVIDER
       -- CONTROL
       VECTOR_DIVIDER_START : out std_logic;
@@ -268,22 +217,6 @@ package ntm_float_pkg is
       VECTOR_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- VECTOR EXPONENTIATOR
-      -- CONTROL
-      VECTOR_EXPONENTIATOR_START : out std_logic;
-      VECTOR_EXPONENTIATOR_READY : in  std_logic;
-
-      VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE : out std_logic;
-      VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE : out std_logic;
-
-      VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE : in std_logic;
-
-      -- DATA
-      VECTOR_EXPONENTIATOR_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_EXPONENTIATOR_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_EXPONENTIATOR_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
       -- STIMULUS MATRIX
@@ -331,23 +264,6 @@ package ntm_float_pkg is
       MATRIX_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- MATRIX INVERTER
-      -- CONTROL
-      MATRIX_INVERTER_START : out std_logic;
-      MATRIX_INVERTER_READY : in  std_logic;
-
-      MATRIX_INVERTER_DATA_IN_I_ENABLE : out std_logic;
-      MATRIX_INVERTER_DATA_IN_J_ENABLE : out std_logic;
-
-      MATRIX_INVERTER_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_INVERTER_DATA_OUT_J_ENABLE : in std_logic;
-
-      -- DATA
-      MATRIX_INVERTER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_INVERTER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_INVERTER_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INVERTER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
       -- MATRIX DIVIDER
       -- CONTROL
       MATRIX_DIVIDER_START : out std_logic;
@@ -366,27 +282,7 @@ package ntm_float_pkg is
       MATRIX_DIVIDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- MATRIX EXPONENTIATOR
-      -- CONTROL
-      MATRIX_EXPONENTIATOR_START : out std_logic;
-      MATRIX_EXPONENTIATOR_READY : in  std_logic;
-
-      MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE : out std_logic;
-      MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE : out std_logic;
-      MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE : out std_logic;
-      MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE : out std_logic;
-
-      MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_EXPONENTIATOR_DATA_OUT_J_ENABLE : in std_logic;
-
-      -- DATA
-      MATRIX_EXPONENTIATOR_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_EXPONENTIATOR_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_EXPONENTIATOR_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_EXPONENTIATOR_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      MATRIX_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

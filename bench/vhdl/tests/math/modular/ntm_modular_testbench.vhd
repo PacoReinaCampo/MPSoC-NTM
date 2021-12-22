@@ -63,88 +63,64 @@ entity ntm_modular_testbench is
     ENABLE_NTM_SCALAR_MODULAR_ADDER_TEST         : boolean := false;
     ENABLE_NTM_SCALAR_MODULAR_MULTIPLIER_TEST    : boolean := false;
     ENABLE_NTM_SCALAR_MODULAR_INVERTER_TEST      : boolean := false;
-    ENABLE_NTM_SCALAR_MODULAR_DIVIDER_TEST       : boolean := false;
-    ENABLE_NTM_SCALAR_MODULAR_EXPONENTIATOR_TEST : boolean := false;
 
     ENABLE_NTM_SCALAR_MODULAR_MOD_CASE_0           : boolean := false;
     ENABLE_NTM_SCALAR_MODULAR_ADDER_CASE_0         : boolean := false;
     ENABLE_NTM_SCALAR_MODULAR_MULTIPLIER_CASE_0    : boolean := false;
     ENABLE_NTM_SCALAR_MODULAR_INVERTER_CASE_0      : boolean := false;
-    ENABLE_NTM_SCALAR_MODULAR_DIVIDER_CASE_0       : boolean := false;
-    ENABLE_NTM_SCALAR_MODULAR_EXPONENTIATOR_CASE_0 : boolean := false;
 
     ENABLE_NTM_SCALAR_MODULAR_MOD_CASE_1           : boolean := false;
     ENABLE_NTM_SCALAR_MODULAR_ADDER_CASE_1         : boolean := false;
     ENABLE_NTM_SCALAR_MODULAR_MULTIPLIER_CASE_1    : boolean := false;
     ENABLE_NTM_SCALAR_MODULAR_INVERTER_CASE_1      : boolean := false;
-    ENABLE_NTM_SCALAR_MODULAR_DIVIDER_CASE_1       : boolean := false;
-    ENABLE_NTM_SCALAR_MODULAR_EXPONENTIATOR_CASE_1 : boolean := false;
 
     -- VECTOR-FUNCTIONALITY
     ENABLE_NTM_VECTOR_MODULAR_MOD_TEST           : boolean := false;
     ENABLE_NTM_VECTOR_MODULAR_ADDER_TEST         : boolean := false;
     ENABLE_NTM_VECTOR_MODULAR_MULTIPLIER_TEST    : boolean := false;
     ENABLE_NTM_VECTOR_MODULAR_INVERTER_TEST      : boolean := false;
-    ENABLE_NTM_VECTOR_MODULAR_DIVIDER_TEST       : boolean := false;
-    ENABLE_NTM_VECTOR_MODULAR_EXPONENTIATOR_TEST : boolean := false;
 
     ENABLE_NTM_VECTOR_MODULAR_MOD_CASE_0           : boolean := false;
     ENABLE_NTM_VECTOR_MODULAR_ADDER_CASE_0         : boolean := false;
     ENABLE_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_0    : boolean := false;
     ENABLE_NTM_VECTOR_MODULAR_INVERTER_CASE_0      : boolean := false;
-    ENABLE_NTM_VECTOR_MODULAR_DIVIDER_CASE_0       : boolean := false;
-    ENABLE_NTM_VECTOR_MODULAR_EXPONENTIATOR_CASE_0 : boolean := false;
 
     ENABLE_NTM_VECTOR_MODULAR_MOD_CASE_1           : boolean := false;
     ENABLE_NTM_VECTOR_MODULAR_ADDER_CASE_1         : boolean := false;
     ENABLE_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_1    : boolean := false;
     ENABLE_NTM_VECTOR_MODULAR_INVERTER_CASE_1      : boolean := false;
-    ENABLE_NTM_VECTOR_MODULAR_DIVIDER_CASE_1       : boolean := false;
-    ENABLE_NTM_VECTOR_MODULAR_EXPONENTIATOR_CASE_1 : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
     ENABLE_NTM_MATRIX_MODULAR_MOD_TEST           : boolean := false;
     ENABLE_NTM_MATRIX_MODULAR_ADDER_TEST         : boolean := false;
     ENABLE_NTM_MATRIX_MODULAR_MULTIPLIER_TEST    : boolean := false;
     ENABLE_NTM_MATRIX_MODULAR_INVERTER_TEST      : boolean := false;
-    ENABLE_NTM_MATRIX_MODULAR_DIVIDER_TEST       : boolean := false;
-    ENABLE_NTM_MATRIX_MODULAR_EXPONENTIATOR_TEST : boolean := false;
 
     ENABLE_NTM_MATRIX_MODULAR_MOD_CASE_0           : boolean := false;
     ENABLE_NTM_MATRIX_MODULAR_ADDER_CASE_0         : boolean := false;
     ENABLE_NTM_MATRIX_MODULAR_MULTIPLIER_CASE_0    : boolean := false;
     ENABLE_NTM_MATRIX_MODULAR_INVERTER_CASE_0      : boolean := false;
-    ENABLE_NTM_MATRIX_MODULAR_DIVIDER_CASE_0       : boolean := false;
-    ENABLE_NTM_MATRIX_MODULAR_EXPONENTIATOR_CASE_0 : boolean := false;
 
     ENABLE_NTM_MATRIX_MODULAR_MOD_CASE_1           : boolean := false;
     ENABLE_NTM_MATRIX_MODULAR_ADDER_CASE_1         : boolean := false;
     ENABLE_NTM_MATRIX_MODULAR_MULTIPLIER_CASE_1    : boolean := false;
     ENABLE_NTM_MATRIX_MODULAR_INVERTER_CASE_1      : boolean := false;
-    ENABLE_NTM_MATRIX_MODULAR_DIVIDER_CASE_1       : boolean := false;
-    ENABLE_NTM_MATRIX_MODULAR_EXPONENTIATOR_CASE_1 : boolean := false;
 
     -- TENSOR-FUNCTIONALITY
     ENABLE_NTM_TENSOR_MODULAR_MOD_TEST           : boolean := false;
     ENABLE_NTM_TENSOR_MODULAR_ADDER_TEST         : boolean := false;
     ENABLE_NTM_TENSOR_MODULAR_MULTIPLIER_TEST    : boolean := false;
     ENABLE_NTM_TENSOR_MODULAR_INVERTER_TEST      : boolean := false;
-    ENABLE_NTM_TENSOR_MODULAR_DIVIDER_TEST       : boolean := false;
-    ENABLE_NTM_TENSOR_MODULAR_EXPONENTIATOR_TEST : boolean := false;
 
     ENABLE_NTM_TENSOR_MODULAR_MOD_CASE_0           : boolean := false;
     ENABLE_NTM_TENSOR_MODULAR_ADDER_CASE_0         : boolean := false;
     ENABLE_NTM_TENSOR_MODULAR_MULTIPLIER_CASE_0    : boolean := false;
     ENABLE_NTM_TENSOR_MODULAR_INVERTER_CASE_0      : boolean := false;
-    ENABLE_NTM_TENSOR_MODULAR_DIVIDER_CASE_0       : boolean := false;
-    ENABLE_NTM_TENSOR_MODULAR_EXPONENTIATOR_CASE_0 : boolean := false;
 
     ENABLE_NTM_TENSOR_MODULAR_MOD_CASE_1           : boolean := false;
     ENABLE_NTM_TENSOR_MODULAR_ADDER_CASE_1         : boolean := false;
     ENABLE_NTM_TENSOR_MODULAR_MULTIPLIER_CASE_1    : boolean := false;
-    ENABLE_NTM_TENSOR_MODULAR_INVERTER_CASE_1      : boolean := false;
-    ENABLE_NTM_TENSOR_MODULAR_DIVIDER_CASE_1       : boolean := false;
-    ENABLE_NTM_TENSOR_MODULAR_EXPONENTIATOR_CASE_1 : boolean := false
+    ENABLE_NTM_TENSOR_MODULAR_INVERTER_CASE_1      : boolean := false
     );
 end ntm_modular_testbench;
 
@@ -205,28 +181,6 @@ architecture ntm_modular_testbench_architecture of ntm_modular_testbench is
   signal modulo_in_scalar_modular_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_modular_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_modular_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR DIVIDER
-  -- CONTROL
-  signal start_scalar_modular_divider : std_logic;
-  signal ready_scalar_modular_divider : std_logic;
-
-  -- DATA
-  signal modulo_in_scalar_modular_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_modular_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_modular_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_modular_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR EXPONENTIATOR
-  -- CONTROL
-  signal start_scalar_modular_exponentiator : std_logic;
-  signal ready_scalar_modular_exponentiator : std_logic;
-
-  -- DATA
-  signal modulo_in_scalar_modular_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_modular_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_modular_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_modular_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- VECTOR
@@ -297,40 +251,6 @@ architecture ntm_modular_testbench_architecture of ntm_modular_testbench is
   signal size_in_vector_modular_inverter   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_modular_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_modular_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR DIVIDER
-  -- CONTROL
-  signal start_vector_modular_divider : std_logic;
-  signal ready_vector_modular_divider : std_logic;
-
-  signal data_a_in_enable_vector_modular_divider : std_logic;
-  signal data_b_in_enable_vector_modular_divider : std_logic;
-
-  signal data_out_enable_vector_modular_divider : std_logic;
-
-  -- DATA
-  signal modulo_in_vector_modular_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_modular_divider   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_modular_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_modular_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_modular_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR EXPONENTIATOR
-  -- CONTROL
-  signal start_vector_modular_exponentiator : std_logic;
-  signal ready_vector_modular_exponentiator : std_logic;
-
-  signal data_a_in_enable_vector_modular_exponentiator : std_logic;
-  signal data_b_in_enable_vector_modular_exponentiator : std_logic;
-
-  signal data_out_enable_vector_modular_exponentiator : std_logic;
-
-  -- DATA
-  signal modulo_in_vector_modular_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_modular_exponentiator   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_modular_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_modular_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_modular_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- MATRIX
@@ -415,48 +335,6 @@ architecture ntm_modular_testbench_architecture of ntm_modular_testbench is
   signal size_j_in_matrix_modular_inverter : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_modular_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_modular_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- MATRIX DIVIDER
-  -- CONTROL
-  signal start_matrix_modular_divider : std_logic;
-  signal ready_matrix_modular_divider : std_logic;
-
-  signal data_a_in_i_enable_matrix_modular_divider : std_logic;
-  signal data_a_in_j_enable_matrix_modular_divider : std_logic;
-  signal data_b_in_i_enable_matrix_modular_divider : std_logic;
-  signal data_b_in_j_enable_matrix_modular_divider : std_logic;
-
-  signal data_out_i_enable_matrix_modular_divider : std_logic;
-  signal data_out_j_enable_matrix_modular_divider : std_logic;
-
-  -- DATA
-  signal modulo_in_matrix_modular_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_modular_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_modular_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_modular_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_modular_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_modular_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- MATRIX EXPONENTIATOR
-  -- CONTROL
-  signal start_matrix_modular_exponentiator : std_logic;
-  signal ready_matrix_modular_exponentiator : std_logic;
-
-  signal data_a_in_i_enable_matrix_modular_exponentiator : std_logic;
-  signal data_a_in_j_enable_matrix_modular_exponentiator : std_logic;
-  signal data_b_in_i_enable_matrix_modular_exponentiator : std_logic;
-  signal data_b_in_j_enable_matrix_modular_exponentiator : std_logic;
-
-  signal data_out_i_enable_matrix_modular_exponentiator : std_logic;
-  signal data_out_j_enable_matrix_modular_exponentiator : std_logic;
-
-  -- DATA
-  signal modulo_in_matrix_modular_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_modular_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_modular_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_modular_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_modular_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_modular_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- TENSOR
@@ -556,56 +434,6 @@ architecture ntm_modular_testbench_architecture of ntm_modular_testbench is
   signal data_in_tensor_modular_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_tensor_modular_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- TENSOR DIVIDER
-  -- CONTROL
-  signal start_tensor_modular_divider : std_logic;
-  signal ready_tensor_modular_divider : std_logic;
-
-  signal data_a_in_i_enable_tensor_modular_divider : std_logic;
-  signal data_a_in_j_enable_tensor_modular_divider : std_logic;
-  signal data_a_in_k_enable_tensor_modular_divider : std_logic;
-  signal data_b_in_i_enable_tensor_modular_divider : std_logic;
-  signal data_b_in_j_enable_tensor_modular_divider : std_logic;
-  signal data_b_in_k_enable_tensor_modular_divider : std_logic;
-
-  signal data_out_i_enable_tensor_modular_divider : std_logic;
-  signal data_out_j_enable_tensor_modular_divider : std_logic;
-  signal data_out_k_enable_tensor_modular_divider : std_logic;
-
-  -- DATA
-  signal modulo_in_tensor_modular_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_tensor_modular_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_tensor_modular_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_k_in_tensor_modular_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_tensor_modular_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_tensor_modular_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_tensor_modular_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- TENSOR EXPONENTIATOR
-  -- CONTROL
-  signal start_tensor_modular_exponentiator : std_logic;
-  signal ready_tensor_modular_exponentiator : std_logic;
-
-  signal data_a_in_i_enable_tensor_modular_exponentiator : std_logic;
-  signal data_a_in_j_enable_tensor_modular_exponentiator : std_logic;
-  signal data_a_in_k_enable_tensor_modular_exponentiator : std_logic;
-  signal data_b_in_i_enable_tensor_modular_exponentiator : std_logic;
-  signal data_b_in_j_enable_tensor_modular_exponentiator : std_logic;
-  signal data_b_in_k_enable_tensor_modular_exponentiator : std_logic;
-
-  signal data_out_i_enable_tensor_modular_exponentiator : std_logic;
-  signal data_out_j_enable_tensor_modular_exponentiator : std_logic;
-  signal data_out_k_enable_tensor_modular_exponentiator : std_logic;
-
-  -- DATA
-  signal modulo_in_tensor_modular_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_tensor_modular_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_tensor_modular_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_k_in_tensor_modular_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_tensor_modular_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_tensor_modular_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_tensor_modular_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
-
 begin
 
   -----------------------------------------------------------------------
@@ -678,28 +506,6 @@ begin
       SCALAR_MODULAR_INVERTER_DATA_IN   => data_in_scalar_modular_inverter,
       SCALAR_MODULAR_INVERTER_DATA_OUT  => data_out_scalar_modular_inverter,
 
-      -- SCALAR DIVIDER
-      -- CONTROL
-      SCALAR_MODULAR_DIVIDER_START => start_scalar_modular_divider,
-      SCALAR_MODULAR_DIVIDER_READY => ready_scalar_modular_divider,
-
-      -- DATA
-      SCALAR_MODULAR_DIVIDER_MODULO_IN => modulo_in_scalar_modular_divider,
-      SCALAR_MODULAR_DIVIDER_DATA_A_IN => data_a_in_scalar_modular_divider,
-      SCALAR_MODULAR_DIVIDER_DATA_B_IN => data_b_in_scalar_modular_divider,
-      SCALAR_MODULAR_DIVIDER_DATA_OUT  => data_out_scalar_modular_divider,
-
-      -- SCALAR EXPONENTIATOR
-      -- CONTROL
-      SCALAR_MODULAR_EXPONENTIATOR_START => start_scalar_modular_exponentiator,
-      SCALAR_MODULAR_EXPONENTIATOR_READY => ready_scalar_modular_exponentiator,
-
-      -- DATA
-      SCALAR_MODULAR_EXPONENTIATOR_MODULO_IN => modulo_in_scalar_modular_exponentiator,
-      SCALAR_MODULAR_EXPONENTIATOR_DATA_A_IN => data_a_in_scalar_modular_exponentiator,
-      SCALAR_MODULAR_EXPONENTIATOR_DATA_B_IN => data_b_in_scalar_modular_exponentiator,
-      SCALAR_MODULAR_EXPONENTIATOR_DATA_OUT  => data_out_scalar_modular_exponentiator,
-
       -----------------------------------------------------------------------
       -- STIMULUS VECTOR
       -----------------------------------------------------------------------
@@ -769,40 +575,6 @@ begin
       VECTOR_MODULAR_INVERTER_SIZE_IN   => size_in_vector_modular_inverter,
       VECTOR_MODULAR_INVERTER_DATA_IN   => data_in_vector_modular_inverter,
       VECTOR_MODULAR_INVERTER_DATA_OUT  => data_out_vector_modular_inverter,
-
-      -- VECTOR DIVIDER
-      -- CONTROL
-      VECTOR_MODULAR_DIVIDER_START => start_vector_modular_divider,
-      VECTOR_MODULAR_DIVIDER_READY => ready_vector_modular_divider,
-
-      VECTOR_MODULAR_DIVIDER_DATA_A_IN_ENABLE => data_a_in_enable_vector_modular_divider,
-      VECTOR_MODULAR_DIVIDER_DATA_B_IN_ENABLE => data_b_in_enable_vector_modular_divider,
-
-      VECTOR_MODULAR_DIVIDER_DATA_OUT_ENABLE => data_out_enable_vector_modular_divider,
-
-      -- DATA
-      VECTOR_MODULAR_DIVIDER_MODULO_IN => modulo_in_vector_modular_divider,
-      VECTOR_MODULAR_DIVIDER_SIZE_IN   => size_in_vector_modular_divider,
-      VECTOR_MODULAR_DIVIDER_DATA_A_IN => data_a_in_vector_modular_divider,
-      VECTOR_MODULAR_DIVIDER_DATA_B_IN => data_b_in_vector_modular_divider,
-      VECTOR_MODULAR_DIVIDER_DATA_OUT  => data_out_vector_modular_divider,
-
-      -- VECTOR EXPONENTIATOR
-      -- CONTROL
-      VECTOR_MODULAR_EXPONENTIATOR_START => start_vector_modular_exponentiator,
-      VECTOR_MODULAR_EXPONENTIATOR_READY => ready_vector_modular_exponentiator,
-
-      VECTOR_MODULAR_EXPONENTIATOR_DATA_A_IN_ENABLE => data_a_in_enable_vector_modular_exponentiator,
-      VECTOR_MODULAR_EXPONENTIATOR_DATA_B_IN_ENABLE => data_b_in_enable_vector_modular_exponentiator,
-
-      VECTOR_MODULAR_EXPONENTIATOR_DATA_OUT_ENABLE => data_out_enable_vector_modular_exponentiator,
-
-      -- DATA
-      VECTOR_MODULAR_EXPONENTIATOR_MODULO_IN => modulo_in_vector_modular_exponentiator,
-      VECTOR_MODULAR_EXPONENTIATOR_SIZE_IN   => size_in_vector_modular_exponentiator,
-      VECTOR_MODULAR_EXPONENTIATOR_DATA_A_IN => data_a_in_vector_modular_exponentiator,
-      VECTOR_MODULAR_EXPONENTIATOR_DATA_B_IN => data_b_in_vector_modular_exponentiator,
-      VECTOR_MODULAR_EXPONENTIATOR_DATA_OUT  => data_out_vector_modular_exponentiator,
 
       -----------------------------------------------------------------------
       -- STIMULUS MATRIX
@@ -887,48 +659,6 @@ begin
       MATRIX_MODULAR_INVERTER_SIZE_J_IN => size_j_in_matrix_modular_inverter,
       MATRIX_MODULAR_INVERTER_DATA_IN   => data_in_matrix_modular_inverter,
       MATRIX_MODULAR_INVERTER_DATA_OUT  => data_out_matrix_modular_inverter,
-
-      -- MATRIX DIVIDER
-      -- CONTROL
-      MATRIX_MODULAR_DIVIDER_START => start_matrix_modular_divider,
-      MATRIX_MODULAR_DIVIDER_READY => ready_matrix_modular_divider,
-
-      MATRIX_MODULAR_DIVIDER_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_modular_divider,
-      MATRIX_MODULAR_DIVIDER_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_modular_divider,
-      MATRIX_MODULAR_DIVIDER_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_modular_divider,
-      MATRIX_MODULAR_DIVIDER_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_modular_divider,
-
-      MATRIX_MODULAR_DIVIDER_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_modular_divider,
-      MATRIX_MODULAR_DIVIDER_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_modular_divider,
-
-      -- DATA
-      MATRIX_MODULAR_DIVIDER_MODULO_IN => modulo_in_matrix_modular_divider,
-      MATRIX_MODULAR_DIVIDER_SIZE_I_IN => size_i_in_matrix_modular_divider,
-      MATRIX_MODULAR_DIVIDER_SIZE_J_IN => size_j_in_matrix_modular_divider,
-      MATRIX_MODULAR_DIVIDER_DATA_A_IN => data_a_in_matrix_modular_divider,
-      MATRIX_MODULAR_DIVIDER_DATA_B_IN => data_b_in_matrix_modular_divider,
-      MATRIX_MODULAR_DIVIDER_DATA_OUT  => data_out_matrix_modular_divider,
-
-      -- MATRIX EXPONENTIATOR
-      -- CONTROL
-      MATRIX_MODULAR_EXPONENTIATOR_START => start_matrix_modular_exponentiator,
-      MATRIX_MODULAR_EXPONENTIATOR_READY => ready_matrix_modular_exponentiator,
-
-      MATRIX_MODULAR_EXPONENTIATOR_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_modular_exponentiator,
-      MATRIX_MODULAR_EXPONENTIATOR_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_modular_exponentiator,
-      MATRIX_MODULAR_EXPONENTIATOR_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_modular_exponentiator,
-      MATRIX_MODULAR_EXPONENTIATOR_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_modular_exponentiator,
-
-      MATRIX_MODULAR_EXPONENTIATOR_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_modular_exponentiator,
-      MATRIX_MODULAR_EXPONENTIATOR_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_modular_exponentiator,
-
-      -- DATA
-      MATRIX_MODULAR_EXPONENTIATOR_MODULO_IN => modulo_in_matrix_modular_exponentiator,
-      MATRIX_MODULAR_EXPONENTIATOR_SIZE_I_IN => size_i_in_matrix_modular_exponentiator,
-      MATRIX_MODULAR_EXPONENTIATOR_SIZE_J_IN => size_j_in_matrix_modular_exponentiator,
-      MATRIX_MODULAR_EXPONENTIATOR_DATA_A_IN => data_a_in_matrix_modular_exponentiator,
-      MATRIX_MODULAR_EXPONENTIATOR_DATA_B_IN => data_b_in_matrix_modular_exponentiator,
-      MATRIX_MODULAR_EXPONENTIATOR_DATA_OUT  => data_out_matrix_modular_exponentiator,
 
       -----------------------------------------------------------------------
       -- STIMULUS TENSOR
@@ -1026,57 +756,7 @@ begin
       TENSOR_MODULAR_INVERTER_SIZE_J_IN => size_j_in_tensor_modular_inverter,
       TENSOR_MODULAR_INVERTER_SIZE_K_IN => size_k_in_tensor_modular_inverter,
       TENSOR_MODULAR_INVERTER_DATA_IN   => data_in_tensor_modular_inverter,
-      TENSOR_MODULAR_INVERTER_DATA_OUT  => data_out_tensor_modular_inverter,
-
-      -- TENSOR DIVIDER
-      -- CONTROL
-      TENSOR_MODULAR_DIVIDER_START => start_tensor_modular_divider,
-      TENSOR_MODULAR_DIVIDER_READY => ready_tensor_modular_divider,
-
-      TENSOR_MODULAR_DIVIDER_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_modular_divider,
-      TENSOR_MODULAR_DIVIDER_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_modular_divider,
-      TENSOR_MODULAR_DIVIDER_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_modular_divider,
-      TENSOR_MODULAR_DIVIDER_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_modular_divider,
-      TENSOR_MODULAR_DIVIDER_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_modular_divider,
-      TENSOR_MODULAR_DIVIDER_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_modular_divider,
-
-      TENSOR_MODULAR_DIVIDER_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_modular_divider,
-      TENSOR_MODULAR_DIVIDER_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_modular_divider,
-      TENSOR_MODULAR_DIVIDER_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_modular_divider,
-
-      -- DATA
-      TENSOR_MODULAR_DIVIDER_MODULO_IN => modulo_in_tensor_modular_divider,
-      TENSOR_MODULAR_DIVIDER_SIZE_I_IN => size_i_in_tensor_modular_divider,
-      TENSOR_MODULAR_DIVIDER_SIZE_J_IN => size_j_in_tensor_modular_divider,
-      TENSOR_MODULAR_DIVIDER_SIZE_K_IN => size_k_in_tensor_modular_divider,
-      TENSOR_MODULAR_DIVIDER_DATA_A_IN => data_a_in_tensor_modular_divider,
-      TENSOR_MODULAR_DIVIDER_DATA_B_IN => data_b_in_tensor_modular_divider,
-      TENSOR_MODULAR_DIVIDER_DATA_OUT  => data_out_tensor_modular_divider,
-
-      -- TENSOR EXPONENTIATOR
-      -- CONTROL
-      TENSOR_MODULAR_EXPONENTIATOR_START => start_tensor_modular_exponentiator,
-      TENSOR_MODULAR_EXPONENTIATOR_READY => ready_tensor_modular_exponentiator,
-
-      TENSOR_MODULAR_EXPONENTIATOR_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_modular_exponentiator,
-      TENSOR_MODULAR_EXPONENTIATOR_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_modular_exponentiator,
-      TENSOR_MODULAR_EXPONENTIATOR_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_modular_exponentiator,
-      TENSOR_MODULAR_EXPONENTIATOR_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_modular_exponentiator,
-      TENSOR_MODULAR_EXPONENTIATOR_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_modular_exponentiator,
-      TENSOR_MODULAR_EXPONENTIATOR_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_modular_exponentiator,
-
-      TENSOR_MODULAR_EXPONENTIATOR_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_modular_exponentiator,
-      TENSOR_MODULAR_EXPONENTIATOR_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_modular_exponentiator,
-      TENSOR_MODULAR_EXPONENTIATOR_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_modular_exponentiator,
-
-      -- DATA
-      TENSOR_MODULAR_EXPONENTIATOR_MODULO_IN => modulo_in_tensor_modular_exponentiator,
-      TENSOR_MODULAR_EXPONENTIATOR_SIZE_I_IN => size_i_in_tensor_modular_exponentiator,
-      TENSOR_MODULAR_EXPONENTIATOR_SIZE_J_IN => size_j_in_tensor_modular_exponentiator,
-      TENSOR_MODULAR_EXPONENTIATOR_SIZE_K_IN => size_k_in_tensor_modular_exponentiator,
-      TENSOR_MODULAR_EXPONENTIATOR_DATA_A_IN => data_a_in_tensor_modular_exponentiator,
-      TENSOR_MODULAR_EXPONENTIATOR_DATA_B_IN => data_b_in_tensor_modular_exponentiator,
-      TENSOR_MODULAR_EXPONENTIATOR_DATA_OUT  => data_out_tensor_modular_exponentiator
+      TENSOR_MODULAR_INVERTER_DATA_OUT  => data_out_tensor_modular_inverter
       );
 
   -----------------------------------------------------------------------
@@ -1178,54 +858,6 @@ begin
         DATA_OUT  => data_out_scalar_modular_inverter
         );
   end generate ntm_scalar_modular_inverter_test;
-
-  -- SCALAR DIVIDER
-  ntm_scalar_modular_divider_test : if (ENABLE_NTM_SCALAR_MODULAR_DIVIDER_TEST) generate
-    scalar_modular_divider : ntm_scalar_modular_divider
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_scalar_modular_divider,
-        READY => ready_scalar_modular_divider,
-
-        -- DATA
-        MODULO_IN => modulo_in_scalar_modular_divider,
-        DATA_A_IN => data_a_in_scalar_modular_divider,
-        DATA_B_IN => data_b_in_scalar_modular_divider,
-        DATA_OUT  => data_out_scalar_modular_divider
-        );
-  end generate ntm_scalar_modular_divider_test;
-
-  -- SCALAR EXPONENTIATOR
-  ntm_scalar_modular_exponentiator_test : if (ENABLE_NTM_SCALAR_MODULAR_EXPONENTIATOR_TEST) generate
-    scalar_modular_exponentiator : ntm_scalar_modular_exponentiator
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_scalar_modular_exponentiator,
-        READY => ready_scalar_modular_exponentiator,
-
-        -- DATA
-        MODULO_IN => modulo_in_scalar_modular_exponentiator,
-        DATA_A_IN => data_a_in_scalar_modular_exponentiator,
-        DATA_B_IN => data_b_in_scalar_modular_exponentiator,
-        DATA_OUT  => data_out_scalar_modular_exponentiator
-        );
-  end generate ntm_scalar_modular_exponentiator_test;
 
   -----------------------------------------------------------------------
   -- VECTOR
@@ -1348,66 +980,6 @@ begin
         DATA_OUT  => data_out_vector_modular_inverter
         );
   end generate ntm_vector_modular_inverter_test;
-
-  -- VECTOR DIVIDER
-  ntm_vector_modular_divider_test : if (ENABLE_NTM_VECTOR_MODULAR_DIVIDER_TEST) generate
-    vector_modular_divider : ntm_vector_modular_divider
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_vector_modular_divider,
-        READY => ready_vector_modular_divider,
-
-        DATA_A_IN_ENABLE => data_a_in_enable_vector_modular_divider,
-        DATA_B_IN_ENABLE => data_b_in_enable_vector_modular_divider,
-
-        DATA_OUT_ENABLE => data_out_enable_vector_modular_divider,
-
-        -- DATA
-        MODULO_IN => modulo_in_vector_modular_divider,
-        SIZE_IN   => size_in_vector_modular_divider,
-        DATA_A_IN => data_a_in_vector_modular_divider,
-        DATA_B_IN => data_b_in_vector_modular_divider,
-        DATA_OUT  => data_out_vector_modular_divider
-        );
-  end generate ntm_vector_modular_divider_test;
-
-  -- VECTOR EXPONENTIATOR
-  ntm_vector_modular_exponentiator_test : if (ENABLE_NTM_VECTOR_MODULAR_EXPONENTIATOR_TEST) generate
-    vector_modular_exponentiator : ntm_vector_modular_exponentiator
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_vector_modular_exponentiator,
-        READY => ready_vector_modular_exponentiator,
-
-        DATA_A_IN_ENABLE => data_a_in_enable_vector_modular_exponentiator,
-        DATA_B_IN_ENABLE => data_b_in_enable_vector_modular_exponentiator,
-
-        DATA_OUT_ENABLE => data_out_enable_vector_modular_exponentiator,
-
-        -- DATA
-        MODULO_IN => modulo_in_vector_modular_exponentiator,
-        SIZE_IN   => size_in_vector_modular_exponentiator,
-        DATA_A_IN => data_a_in_vector_modular_exponentiator,
-        DATA_B_IN => data_b_in_vector_modular_exponentiator,
-        DATA_OUT  => data_out_vector_modular_exponentiator
-        );
-  end generate ntm_vector_modular_exponentiator_test;
 
   -----------------------------------------------------------------------
   -- MATRIX
@@ -1544,74 +1116,6 @@ begin
         DATA_OUT  => data_out_matrix_modular_inverter
         );
   end generate ntm_matrix_modular_inverter_test;
-
-  -- MATRIX DIVIDER
-  ntm_matrix_modular_divider_test : if (ENABLE_NTM_MATRIX_MODULAR_DIVIDER_TEST) generate
-    matrix_modular_divider : ntm_matrix_modular_divider
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_matrix_modular_divider,
-        READY => ready_matrix_modular_divider,
-
-        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_modular_divider,
-        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_modular_divider,
-        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_modular_divider,
-        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_modular_divider,
-
-        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_modular_divider,
-        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_modular_divider,
-
-        -- DATA
-        MODULO_IN => modulo_in_matrix_modular_divider,
-        SIZE_I_IN => size_i_in_matrix_modular_divider,
-        SIZE_J_IN => size_j_in_matrix_modular_divider,
-        DATA_A_IN => data_a_in_matrix_modular_divider,
-        DATA_B_IN => data_b_in_matrix_modular_divider,
-        DATA_OUT  => data_out_matrix_modular_divider
-        );
-  end generate ntm_matrix_modular_divider_test;
-
-  -- MATRIX EXPONENTIATOR
-  ntm_matrix_modular_exponentiator_test : if (ENABLE_NTM_MATRIX_MODULAR_EXPONENTIATOR_TEST) generate
-    matrix_modular_exponentiator : ntm_matrix_modular_exponentiator
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_matrix_modular_exponentiator,
-        READY => ready_matrix_modular_exponentiator,
-
-        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_modular_exponentiator,
-        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_modular_exponentiator,
-        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_modular_exponentiator,
-        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_modular_exponentiator,
-
-        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_modular_exponentiator,
-        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_modular_exponentiator,
-
-        -- DATA
-        MODULO_IN => modulo_in_matrix_modular_exponentiator,
-        SIZE_I_IN => size_i_in_matrix_modular_exponentiator,
-        SIZE_J_IN => size_j_in_matrix_modular_exponentiator,
-        DATA_A_IN => data_a_in_matrix_modular_exponentiator,
-        DATA_B_IN => data_b_in_matrix_modular_exponentiator,
-        DATA_OUT  => data_out_matrix_modular_exponentiator
-        );
-  end generate ntm_matrix_modular_exponentiator_test;
 
   -----------------------------------------------------------------------
   -- TENSOR
@@ -1762,81 +1266,5 @@ begin
         DATA_OUT  => data_out_tensor_modular_inverter
         );
   end generate ntm_tensor_modular_inverter_test;
-
-  -- TENSOR DIVIDER
-  ntm_tensor_modular_divider_test : if (ENABLE_NTM_TENSOR_MODULAR_DIVIDER_TEST) generate
-    tensor_modular_divider : ntm_tensor_modular_divider
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_tensor_modular_divider,
-        READY => ready_tensor_modular_divider,
-
-        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_modular_divider,
-        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_modular_divider,
-        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_modular_divider,
-        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_modular_divider,
-        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_modular_divider,
-        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_modular_divider,
-
-        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_modular_divider,
-        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_modular_divider,
-        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_modular_divider,
-
-        -- DATA
-        MODULO_IN => modulo_in_tensor_modular_divider,
-        SIZE_I_IN => size_i_in_tensor_modular_divider,
-        SIZE_J_IN => size_j_in_tensor_modular_divider,
-        SIZE_K_IN => size_k_in_tensor_modular_divider,
-        DATA_A_IN => data_a_in_tensor_modular_divider,
-        DATA_B_IN => data_b_in_tensor_modular_divider,
-        DATA_OUT  => data_out_tensor_modular_divider
-        );
-  end generate ntm_tensor_modular_divider_test;
-
-  -- TENSOR EXPONENTIATOR
-  ntm_tensor_modular_exponentiator_test : if (ENABLE_NTM_TENSOR_MODULAR_EXPONENTIATOR_TEST) generate
-    tensor_modular_exponentiator : ntm_tensor_modular_exponentiator
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_tensor_modular_exponentiator,
-        READY => ready_tensor_modular_exponentiator,
-
-        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_modular_exponentiator,
-        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_modular_exponentiator,
-        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_modular_exponentiator,
-        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_modular_exponentiator,
-        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_modular_exponentiator,
-        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_modular_exponentiator,
-
-        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_modular_exponentiator,
-        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_modular_exponentiator,
-        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_modular_exponentiator,
-
-        -- DATA
-        MODULO_IN => modulo_in_tensor_modular_exponentiator,
-        SIZE_I_IN => size_i_in_tensor_modular_exponentiator,
-        SIZE_J_IN => size_j_in_tensor_modular_exponentiator,
-        SIZE_K_IN => size_k_in_tensor_modular_exponentiator,
-        DATA_A_IN => data_a_in_tensor_modular_exponentiator,
-        DATA_B_IN => data_b_in_tensor_modular_exponentiator,
-        DATA_OUT  => data_out_tensor_modular_exponentiator
-        );
-  end generate ntm_tensor_modular_exponentiator_test;
 
 end ntm_modular_testbench_architecture;

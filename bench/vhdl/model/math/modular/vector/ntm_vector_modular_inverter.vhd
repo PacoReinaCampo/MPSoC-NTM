@@ -111,7 +111,7 @@ architecture ntm_vector_modular_inverter_architecture of ntm_vector_modular_inve
   -- Internal Signals
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- VECTOR INVERTER
+  -- SCALAR INVERTER
   -- CONTROL
   signal start_scalar_inverter : std_logic;
   signal ready_scalar_inverter : std_logic;
@@ -221,7 +221,7 @@ begin
     end if;
   end process;
 
-  -- VECTOR INVERTER
+  -- SCALAR INVERTER
   scalar_inverter : ntm_scalar_modular_inverter
     generic map (
       DATA_SIZE    => DATA_SIZE,

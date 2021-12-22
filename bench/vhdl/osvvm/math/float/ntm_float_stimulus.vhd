@@ -89,15 +89,6 @@ entity ntm_float_stimulus is
     SCALAR_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-    -- SCALAR INVERTER
-    -- CONTROL
-    SCALAR_INVERTER_START : out std_logic;
-    SCALAR_INVERTER_READY : in  std_logic;
-
-    -- DATA
-    SCALAR_INVERTER_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_INVERTER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
     -- SCALAR DIVIDER
     -- CONTROL
     SCALAR_DIVIDER_START : out std_logic;
@@ -107,16 +98,6 @@ entity ntm_float_stimulus is
     SCALAR_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- SCALAR EXPONENTIATOR
-    -- CONTROL
-    SCALAR_EXPONENTIATOR_START : out std_logic;
-    SCALAR_EXPONENTIATOR_READY : in  std_logic;
-
-    -- DATA
-    SCALAR_EXPONENTIATOR_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_EXPONENTIATOR_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -----------------------------------------------------------------------
     -- STIMULUS VECTOR
@@ -156,20 +137,6 @@ entity ntm_float_stimulus is
     VECTOR_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-    -- VECTOR INVERTER
-    -- CONTROL
-    VECTOR_INVERTER_START : out std_logic;
-    VECTOR_INVERTER_READY : in  std_logic;
-
-    VECTOR_INVERTER_DATA_IN_ENABLE : out std_logic;
-
-    VECTOR_INVERTER_DATA_OUT_ENABLE : in std_logic;
-
-    -- DATA
-    VECTOR_INVERTER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_INVERTER_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_INVERTER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
     -- VECTOR DIVIDER
     -- CONTROL
     VECTOR_DIVIDER_START : out std_logic;
@@ -185,22 +152,6 @@ entity ntm_float_stimulus is
     VECTOR_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- VECTOR EXPONENTIATOR
-    -- CONTROL
-    VECTOR_EXPONENTIATOR_START : out std_logic;
-    VECTOR_EXPONENTIATOR_READY : in  std_logic;
-
-    VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE : out std_logic;
-    VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE : out std_logic;
-
-    VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE : in std_logic;
-
-    -- DATA
-    VECTOR_EXPONENTIATOR_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_EXPONENTIATOR_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_EXPONENTIATOR_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -----------------------------------------------------------------------
     -- STIMULUS MATRIX
@@ -248,23 +199,6 @@ entity ntm_float_stimulus is
     MATRIX_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-    -- MATRIX INVERTER
-    -- CONTROL
-    MATRIX_INVERTER_START : out std_logic;
-    MATRIX_INVERTER_READY : in  std_logic;
-
-    MATRIX_INVERTER_DATA_IN_I_ENABLE : out std_logic;
-    MATRIX_INVERTER_DATA_IN_J_ENABLE : out std_logic;
-
-    MATRIX_INVERTER_DATA_OUT_I_ENABLE : in std_logic;
-    MATRIX_INVERTER_DATA_OUT_J_ENABLE : in std_logic;
-
-    -- DATA
-    MATRIX_INVERTER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_INVERTER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_INVERTER_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_INVERTER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
     -- MATRIX DIVIDER
     -- CONTROL
     MATRIX_DIVIDER_START : out std_logic;
@@ -283,27 +217,7 @@ entity ntm_float_stimulus is
     MATRIX_DIVIDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- MATRIX EXPONENTIATOR
-    -- CONTROL
-    MATRIX_EXPONENTIATOR_START : out std_logic;
-    MATRIX_EXPONENTIATOR_READY : in  std_logic;
-
-    MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE : out std_logic;
-    MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE : out std_logic;
-    MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE : out std_logic;
-    MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE : out std_logic;
-
-    MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE : in std_logic;
-    MATRIX_EXPONENTIATOR_DATA_OUT_J_ENABLE : in std_logic;
-
-    -- DATA
-    MATRIX_EXPONENTIATOR_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_EXPONENTIATOR_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_EXPONENTIATOR_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_EXPONENTIATOR_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
+    MATRIX_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -398,23 +312,17 @@ begin
   -- SCALAR-FUNCTIONALITY
   SCALAR_ADDER_START         <= start_int;
   SCALAR_MULTIPLIER_START    <= start_int;
-  SCALAR_INVERTER_START      <= start_int;
   SCALAR_DIVIDER_START       <= start_int;
-  SCALAR_EXPONENTIATOR_START <= start_int;
 
   -- VECTOR-FUNCTIONALITY
   VECTOR_ADDER_START         <= start_int;
   VECTOR_MULTIPLIER_START    <= start_int;
-  VECTOR_INVERTER_START      <= start_int;
   VECTOR_DIVIDER_START       <= start_int;
-  VECTOR_EXPONENTIATOR_START <= start_int;
 
   -- MATRIX-FUNCTIONALITY
   MATRIX_ADDER_START         <= start_int;
   MATRIX_MULTIPLIER_START    <= start_int;
-  MATRIX_INVERTER_START      <= start_int;
   MATRIX_DIVIDER_START       <= start_int;
-  MATRIX_EXPONENTIATOR_START <= start_int;
 
   -----------------------------------------------------------------------
   -- STIMULUS
@@ -486,32 +394,6 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_SCALAR_INVERTER_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_INVERTER_TEST       ";
-      -------------------------------------------------------------------
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_INVERTER_CASE 0     ";
-      -------------------------------------------------------------------
-
-      if (STIMULUS_NTM_SCALAR_INVERTER_CASE_0) then
-        SCALAR_INVERTER_DATA_IN   <= ONE_DATA;
-      end if;
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_INVERTER_CASE 1     ";
-      -------------------------------------------------------------------
-
-      if (STIMULUS_NTM_SCALAR_INVERTER_CASE_1) then
-        SCALAR_INVERTER_DATA_IN   <= ONE_DATA;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
     if (STIMULUS_NTM_SCALAR_DIVIDER_TEST) then
 
       -------------------------------------------------------------------
@@ -534,34 +416,6 @@ begin
       if (STIMULUS_NTM_SCALAR_DIVIDER_CASE_1) then
         SCALAR_DIVIDER_DATA_A_IN <= TWO_DATA;
         SCALAR_DIVIDER_DATA_B_IN <= TWO_DATA;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST  ";
-      -------------------------------------------------------------------
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE 0";
-      -------------------------------------------------------------------
-
-      if (STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0) then
-        SCALAR_EXPONENTIATOR_DATA_A_IN <= TWO_DATA;
-        SCALAR_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
-      end if;
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE 1";
-      -------------------------------------------------------------------
-
-      if (STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1) then
-        SCALAR_EXPONENTIATOR_DATA_A_IN <= TWO_DATA;
-        SCALAR_EXPONENTIATOR_DATA_B_IN <= TWO_DATA;
       end if;
 
       wait for WORKING;
@@ -773,95 +627,6 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_VECTOR_INVERTER_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_INVERTER_TEST       ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      VECTOR_INVERTER_SIZE_IN   <= THREE_CONTROL;
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_VECTOR_INVERTER_CASE 0     ";
-      -------------------------------------------------------------------
-
-      if (STIMULUS_NTM_VECTOR_INVERTER_CASE_0) then
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_INVERTER_DATA_IN_ENABLE <= '1';
-
-        -- DATA
-        VECTOR_INVERTER_DATA_IN <= ONE_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((VECTOR_INVERTER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_INVERTER_SIZE_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            VECTOR_INVERTER_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            VECTOR_INVERTER_DATA_IN <= ONE_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            VECTOR_INVERTER_DATA_IN_ENABLE <= '0';
-          end if;
-
-          -- CONTROL
-          exit when VECTOR_INVERTER_READY = '1';
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-        end loop;
-      end if;
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_VECTOR_INVERTER_CASE 1     ";
-      -------------------------------------------------------------------
-
-      if (STIMULUS_NTM_VECTOR_INVERTER_CASE_1) then
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_INVERTER_DATA_IN_ENABLE <= '1';
-
-        -- DATA
-        VECTOR_INVERTER_DATA_IN <= TWO_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((VECTOR_INVERTER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_INVERTER_SIZE_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            VECTOR_INVERTER_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            VECTOR_INVERTER_DATA_IN <= TWO_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            VECTOR_INVERTER_DATA_IN_ENABLE <= '0';
-          end if;
-
-          -- CONTROL
-          exit when VECTOR_INVERTER_READY = '1';
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-        end loop;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
     if (STIMULUS_NTM_VECTOR_DIVIDER_TEST) then
 
       -------------------------------------------------------------------
@@ -951,105 +716,6 @@ begin
 
           -- CONTROL
           exit when VECTOR_DIVIDER_READY = '1';
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-        end loop;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST  ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      VECTOR_EXPONENTIATOR_SIZE_IN   <= THREE_CONTROL;
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE 0";
-      -------------------------------------------------------------------
-
-      if (STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0) then
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE <= '1';
-        VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE <= '1';
-
-        -- DATA
-        VECTOR_EXPONENTIATOR_DATA_A_IN <= TWO_DATA;
-        VECTOR_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_EXPONENTIATOR_SIZE_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE <= '1';
-            VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE <= '1';
-
-            -- DATA
-            VECTOR_EXPONENTIATOR_DATA_A_IN <= TWO_DATA;
-            VECTOR_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE <= '0';
-            VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE <= '0';
-          end if;
-
-          -- CONTROL
-          exit when VECTOR_EXPONENTIATOR_READY = '1';
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-        end loop;
-      end if;
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE 1";
-      -------------------------------------------------------------------
-
-      if (STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_1) then
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE <= '1';
-        VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE <= '1';
-
-        -- DATA
-        VECTOR_EXPONENTIATOR_DATA_A_IN <= TWO_DATA;
-        VECTOR_EXPONENTIATOR_DATA_B_IN <= TWO_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_EXPONENTIATOR_SIZE_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE <= '1';
-            VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE <= '1';
-
-            -- DATA
-            VECTOR_EXPONENTIATOR_DATA_A_IN <= TWO_DATA;
-            VECTOR_EXPONENTIATOR_DATA_B_IN <= TWO_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            VECTOR_EXPONENTIATOR_DATA_A_IN_ENABLE <= '0';
-            VECTOR_EXPONENTIATOR_DATA_B_IN_ENABLE <= '0';
-          end if;
-
-          -- CONTROL
-          exit when VECTOR_EXPONENTIATOR_READY = '1';
 
           -- GLOBAL
           wait until rising_edge(clk_int);
@@ -1335,122 +1001,6 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_MATRIX_INVERTER_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_INVERTER_TEST       ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      MATRIX_INVERTER_SIZE_I_IN <= THREE_CONTROL;
-      MATRIX_INVERTER_SIZE_J_IN <= THREE_CONTROL;
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_INVERTER_CASE 0     ";
-      -------------------------------------------------------------------
-
-      if (STIMULUS_NTM_MATRIX_INVERTER_CASE_0) then
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_INVERTER_DATA_IN_I_ENABLE <= '0';
-        MATRIX_INVERTER_DATA_IN_J_ENABLE <= '1';
-
-        -- DATA
-        MATRIX_INVERTER_DATA_IN <= ONE_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((MATRIX_INVERTER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            MATRIX_INVERTER_DATA_IN_I_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_INVERTER_DATA_IN <= ONE_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_INVERTER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            MATRIX_INVERTER_DATA_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_INVERTER_DATA_IN <= ONE_DATA;
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            MATRIX_INVERTER_DATA_IN_I_ENABLE <= '0';
-            MATRIX_INVERTER_DATA_IN_J_ENABLE <= '0';
-          end if;
-
-          -- CONTROL
-          exit when MATRIX_INVERTER_READY = '1';
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-        end loop;
-      end if;
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_INVERTER_CASE 1     ";
-      -------------------------------------------------------------------
-
-      if (STIMULUS_NTM_MATRIX_INVERTER_CASE_1) then
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_INVERTER_DATA_IN_I_ENABLE <= '0';
-        MATRIX_INVERTER_DATA_IN_J_ENABLE <= '1';
-
-        -- DATA
-        MATRIX_INVERTER_DATA_IN <= ONE_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((MATRIX_INVERTER_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            MATRIX_INVERTER_DATA_IN_I_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_INVERTER_DATA_IN <= TWO_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_INVERTER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            MATRIX_INVERTER_DATA_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_INVERTER_DATA_IN <= TWO_DATA;
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            MATRIX_INVERTER_DATA_IN_I_ENABLE <= '0';
-            MATRIX_INVERTER_DATA_IN_J_ENABLE <= '0';
-          end if;
-
-          -- CONTROL
-          exit when MATRIX_INVERTER_READY = '1';
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-        end loop;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
     if (STIMULUS_NTM_MATRIX_DIVIDER_TEST) then
 
       -------------------------------------------------------------------
@@ -1575,140 +1125,6 @@ begin
 
           -- CONTROL
           exit when MATRIX_DIVIDER_READY = '1';
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-        end loop;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST  ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      MATRIX_EXPONENTIATOR_SIZE_I_IN <= THREE_CONTROL;
-      MATRIX_EXPONENTIATOR_SIZE_J_IN <= THREE_CONTROL;
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE 0";
-      -------------------------------------------------------------------
-
-      if (STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0) then
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE <= '0';
-        MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE <= '0';
-        MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '1';
-
-        -- DATA
-        MATRIX_EXPONENTIATOR_DATA_A_IN <= ONE_DATA;
-        MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_EXPONENTIATOR_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE <= '1';
-            MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_EXPONENTIATOR_DATA_A_IN <= ONE_DATA;
-            MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_EXPONENTIATOR_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_EXPONENTIATOR_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_EXPONENTIATOR_DATA_A_IN <= ONE_DATA;
-            MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE <= '0';
-            MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE <= '0';
-            MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE <= '0';
-            MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '0';
-          end if;
-
-          -- CONTROL
-          exit when MATRIX_EXPONENTIATOR_READY = '1';
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-        end loop;
-      end if;
-
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE 1";
-      -------------------------------------------------------------------
-
-      if (STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1) then
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE <= '0';
-        MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE <= '0';
-        MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '1';
-
-        -- DATA
-        MATRIX_EXPONENTIATOR_DATA_A_IN <= TWO_DATA;
-        MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_EXPONENTIATOR_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE <= '1';
-            MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_EXPONENTIATOR_DATA_A_IN <= TWO_DATA;
-            MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_EXPONENTIATOR_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(MATRIX_EXPONENTIATOR_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_EXPONENTIATOR_DATA_A_IN <= TWO_DATA;
-            MATRIX_EXPONENTIATOR_DATA_B_IN <= ONE_DATA;
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            MATRIX_EXPONENTIATOR_DATA_A_IN_I_ENABLE <= '0';
-            MATRIX_EXPONENTIATOR_DATA_A_IN_J_ENABLE <= '0';
-            MATRIX_EXPONENTIATOR_DATA_B_IN_I_ENABLE <= '0';
-            MATRIX_EXPONENTIATOR_DATA_B_IN_J_ENABLE <= '0';
-          end if;
-
-          -- CONTROL
-          exit when MATRIX_EXPONENTIATOR_READY = '1';
 
           -- GLOBAL
           wait until rising_edge(clk_int);

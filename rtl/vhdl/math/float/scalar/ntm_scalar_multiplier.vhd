@@ -265,7 +265,7 @@ begin
   end process;
 
   -- SCALAR ADDER
-  scalar_adder : ntm_scalar_modular_adder
+  scalar_adder : ntm_scalar_integer_adder
     generic map (
       DATA_SIZE    => EXPONENT_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -289,7 +289,7 @@ begin
       );
 
   -- SCALAR MULTIPLIER
-  scalar_multiplier : ntm_scalar_modular_multiplier
+  scalar_multiplier : ntm_scalar_integer_multiplier
     generic map (
       DATA_SIZE    => MANTISSA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE

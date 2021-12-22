@@ -63,70 +63,53 @@ module ntm_modular_testbench;
   parameter STIMULUS_NTM_SCALAR_MODULAR_ADDER_TEST         = 0;
   parameter STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_TEST    = 0;
   parameter STIMULUS_NTM_SCALAR_MODULAR_INVERTER_TEST      = 0;
-  parameter STIMULUS_NTM_SCALAR_MODULAR_DIVIDER_TEST       = 0;
-  parameter STIMULUS_NTM_SCALAR_MODULAR_EXPONENTIATOR_TEST = 0;
 
   parameter STIMULUS_NTM_SCALAR_MODULAR_MOD_CASE_0           = 0;
   parameter STIMULUS_NTM_SCALAR_MODULAR_ADDER_CASE_0         = 0;
   parameter STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_CASE_0    = 0;
   parameter STIMULUS_NTM_SCALAR_MODULAR_INVERTER_CASE_0      = 0;
-  parameter STIMULUS_NTM_SCALAR_MODULAR_DIVIDER_CASE_0       = 0;
-  parameter STIMULUS_NTM_SCALAR_MODULAR_EXPONENTIATOR_CASE_0 = 0;
 
   parameter STIMULUS_NTM_SCALAR_MODULAR_MOD_CASE_1           = 0;
   parameter STIMULUS_NTM_SCALAR_MODULAR_ADDER_CASE_1         = 0;
   parameter STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_CASE_1    = 0;
   parameter STIMULUS_NTM_SCALAR_MODULAR_INVERTER_CASE_1      = 0;
-  parameter STIMULUS_NTM_SCALAR_MODULAR_DIVIDER_CASE_1       = 0;
-  parameter STIMULUS_NTM_SCALAR_MODULAR_EXPONENTIATOR_CASE_1 = 0;
 
   // VECTOR-FUNCTIONALITY
   parameter STIMULUS_NTM_VECTOR_MODULAR_MOD_TEST           = 0;
   parameter STIMULUS_NTM_VECTOR_MODULAR_ADDER_TEST         = 0;
   parameter STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_TEST    = 0;
   parameter STIMULUS_NTM_VECTOR_MODULAR_INVERTER_TEST      = 0;
-  parameter STIMULUS_NTM_VECTOR_MODULAR_DIVIDER_TEST       = 0;
-  parameter STIMULUS_NTM_VECTOR_MODULAR_EXPONENTIATOR_TEST = 0;
 
   parameter STIMULUS_NTM_VECTOR_MODULAR_MOD_CASE_0           = 0;
   parameter STIMULUS_NTM_VECTOR_MODULAR_ADDER_CASE_0         = 0;
   parameter STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_0    = 0;
   parameter STIMULUS_NTM_VECTOR_MODULAR_INVERTER_CASE_0      = 0;
-  parameter STIMULUS_NTM_VECTOR_MODULAR_DIVIDER_CASE_0       = 0;
-  parameter STIMULUS_NTM_VECTOR_MODULAR_EXPONENTIATOR_CASE_0 = 0;
 
   parameter STIMULUS_NTM_VECTOR_MODULAR_MOD_CASE_1           = 0;
   parameter STIMULUS_NTM_VECTOR_MODULAR_ADDER_CASE_1         = 0;
   parameter STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_1    = 0;
   parameter STIMULUS_NTM_VECTOR_MODULAR_INVERTER_CASE_1      = 0;
-  parameter STIMULUS_NTM_VECTOR_MODULAR_DIVIDER_CASE_1       = 0;
-  parameter STIMULUS_NTM_VECTOR_MODULAR_EXPONENTIATOR_CASE_1 = 0;
 
   // MATRIX-FUNCTIONALITY
   parameter STIMULUS_NTM_MATRIX_MODULAR_MOD_TEST           = 0;
   parameter STIMULUS_NTM_MATRIX_MODULAR_ADDER_TEST         = 0;
   parameter STIMULUS_NTM_MATRIX_MODULAR_MULTIPLIER_TEST    = 0;
   parameter STIMULUS_NTM_MATRIX_MODULAR_INVERTER_TEST      = 0;
-  parameter STIMULUS_NTM_MATRIX_MODULAR_DIVIDER_TEST       = 0;
-  parameter STIMULUS_NTM_MATRIX_MODULAR_EXPONENTIATOR_TEST = 0;
 
   parameter STIMULUS_NTM_MATRIX_MODULAR_MOD_CASE_0           = 0;
   parameter STIMULUS_NTM_MATRIX_MODULAR_ADDER_CASE_0         = 0;
   parameter STIMULUS_NTM_MATRIX_MODULAR_MULTIPLIER_CASE_0    = 0;
   parameter STIMULUS_NTM_MATRIX_MODULAR_INVERTER_CASE_0      = 0;
-  parameter STIMULUS_NTM_MATRIX_MODULAR_DIVIDER_CASE_0       = 0;
-  parameter STIMULUS_NTM_MATRIX_MODULAR_EXPONENTIATOR_CASE_0 = 0;
 
   parameter STIMULUS_NTM_MATRIX_MODULAR_MOD_CASE_1           = 0;
   parameter STIMULUS_NTM_MATRIX_MODULAR_ADDER_CASE_1         = 0;
   parameter STIMULUS_NTM_MATRIX_MODULAR_MULTIPLIER_CASE_1    = 0;
   parameter STIMULUS_NTM_MATRIX_MODULAR_INVERTER_CASE_1      = 0;
-  parameter STIMULUS_NTM_MATRIX_MODULAR_DIVIDER_CASE_1       = 0;
-  parameter STIMULUS_NTM_MATRIX_MODULAR_EXPONENTIATOR_CASE_1 = 0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
   ///////////////////////////////////////////////////////////////////////
+
   // GLOBAL
   wire CLK;
   wire RST;
@@ -178,28 +161,6 @@ module ntm_modular_testbench;
   wire [DATA_SIZE-1:0] modulo_in_scalar_modular_inverter;
   wire [DATA_SIZE-1:0] data_in_scalar_modular_inverter;
   wire [DATA_SIZE-1:0] data_out_scalar_modular_inverter;
-
-  // SCALAR DIVIDER
-  // CONTROL
-  wire start_scalar_modular_divider;
-  wire ready_scalar_modular_divider;
-
-  // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_modular_divider;
-  wire [DATA_SIZE-1:0] data_a_in_scalar_modular_divider;
-  wire [DATA_SIZE-1:0] data_b_in_scalar_modular_divider;
-  wire [DATA_SIZE-1:0] data_out_scalar_modular_divider;
-
-  // SCALAR EXPONENTIATOR
-  // CONTROL
-  wire start_scalar_modular_exponentiator;
-  wire ready_scalar_modular_exponentiator;
-
-  // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_modular_exponentiator;
-  wire [DATA_SIZE-1:0] data_a_in_scalar_modular_exponentiator;
-  wire [DATA_SIZE-1:0] data_b_in_scalar_modular_exponentiator;
-  wire [DATA_SIZE-1:0] data_out_scalar_modular_exponentiator;
 
   ///////////////////////////////////////////////////////////////////////
   // VECTOR
@@ -266,38 +227,6 @@ module ntm_modular_testbench;
   wire [DATA_SIZE-1:0] size_in_vector_modular_inverter;
   wire [DATA_SIZE-1:0] data_in_vector_modular_inverter;
   wire [DATA_SIZE-1:0] data_out_vector_modular_inverter;
-
-  // VECTOR DIVIDER
-  // CONTROL
-  wire start_vector_modular_divider;
-  wire ready_vector_modular_divider;
-
-  wire data_a_in_enable_vector_modular_divider;
-  wire data_b_in_enable_vector_modular_divider;
-  wire data_out_enable_vector_modular_divider;
-
-  // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_modular_divider;
-  wire [DATA_SIZE-1:0] size_in_vector_modular_divider;
-  wire [DATA_SIZE-1:0] data_a_in_vector_modular_divider;
-  wire [DATA_SIZE-1:0] data_b_in_vector_modular_divider;
-  wire [DATA_SIZE-1:0] data_out_vector_modular_divider;
-
-  // VECTOR EXPONENTIATOR
-  // CONTROL
-  wire start_vector_modular_exponentiator;
-  wire ready_vector_modular_exponentiator;
-
-  wire data_a_in_enable_vector_modular_exponentiator;
-  wire data_b_in_enable_vector_modular_exponentiator;
-  wire data_out_enable_vector_modular_exponentiator;
-
-  // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_modular_exponentiator;
-  wire [DATA_SIZE-1:0] size_in_vector_modular_exponentiator;
-  wire [DATA_SIZE-1:0] data_a_in_vector_modular_exponentiator;
-  wire [DATA_SIZE-1:0] data_b_in_vector_modular_exponentiator;
-  wire [DATA_SIZE-1:0] data_out_vector_modular_exponentiator;
 
   ///////////////////////////////////////////////////////////////////////
   // MATRIX
@@ -379,46 +308,6 @@ module ntm_modular_testbench;
   wire [DATA_SIZE-1:0] data_in_matrix_modular_inverter;
   wire [DATA_SIZE-1:0] data_out_matrix_modular_inverter;
 
-  // MATRIX DIVIDER
-  // CONTROL
-  wire start_matrix_modular_divider;
-  wire ready_matrix_modular_divider;
-
-  wire data_a_in_i_enable_matrix_modular_divider;
-  wire data_a_in_j_enable_matrix_modular_divider;
-  wire data_b_in_i_enable_matrix_modular_divider;
-  wire data_b_in_j_enable_matrix_modular_divider;
-  wire data_out_i_enable_matrix_modular_divider;
-  wire data_out_j_enable_matrix_modular_divider;
-
-  // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_modular_divider;
-  wire [DATA_SIZE-1:0] size_i_in_matrix_modular_divider;
-  wire [DATA_SIZE-1:0] size_j_in_matrix_modular_divider;
-  wire [DATA_SIZE-1:0] data_a_in_matrix_modular_divider;
-  wire [DATA_SIZE-1:0] data_b_in_matrix_modular_divider;
-  wire [DATA_SIZE-1:0] data_out_matrix_modular_divider;
-
-  // MATRIX EXPONENTIATOR
-  // CONTROL
-  wire start_matrix_modular_exponentiator;
-  wire ready_matrix_modular_exponentiator;
-
-  wire data_a_in_i_enable_matrix_modular_exponentiator;
-  wire data_a_in_j_enable_matrix_modular_exponentiator;
-  wire data_b_in_i_enable_matrix_modular_exponentiator;
-  wire data_b_in_j_enable_matrix_modular_exponentiator;
-  wire data_out_i_enable_matrix_modular_exponentiator;
-  wire data_out_j_enable_matrix_modular_exponentiator;
-
-  // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_modular_exponentiator;
-  wire [DATA_SIZE-1:0] size_i_in_matrix_modular_exponentiator;
-  wire [DATA_SIZE-1:0] size_j_in_matrix_modular_exponentiator;
-  wire [DATA_SIZE-1:0] data_a_in_matrix_modular_exponentiator;
-  wire [DATA_SIZE-1:0] data_b_in_matrix_modular_exponentiator;
-  wire [DATA_SIZE-1:0] data_out_matrix_modular_exponentiator;
-
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
@@ -439,60 +328,42 @@ module ntm_modular_testbench;
     .STIMULUS_NTM_SCALAR_MODULAR_ADDER_TEST(STIMULUS_NTM_SCALAR_MODULAR_ADDER_TEST),
     .STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_TEST(STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_TEST),
     .STIMULUS_NTM_SCALAR_MODULAR_INVERTER_TEST(STIMULUS_NTM_SCALAR_MODULAR_INVERTER_TEST),
-    .STIMULUS_NTM_SCALAR_MODULAR_DIVIDER_TEST(STIMULUS_NTM_SCALAR_MODULAR_DIVIDER_TEST),
-    .STIMULUS_NTM_SCALAR_MODULAR_EXPONENTIATOR_TEST(STIMULUS_NTM_SCALAR_MODULAR_EXPONENTIATOR_TEST),
     .STIMULUS_NTM_SCALAR_MODULAR_MOD_CASE_0(STIMULUS_NTM_SCALAR_MODULAR_MOD_CASE_0),
     .STIMULUS_NTM_SCALAR_MODULAR_ADDER_CASE_0(STIMULUS_NTM_SCALAR_MODULAR_ADDER_CASE_0),
     .STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_CASE_0(STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_CASE_0),
     .STIMULUS_NTM_SCALAR_MODULAR_INVERTER_CASE_0(STIMULUS_NTM_SCALAR_MODULAR_INVERTER_CASE_0),
-    .STIMULUS_NTM_SCALAR_MODULAR_DIVIDER_CASE_0(STIMULUS_NTM_SCALAR_MODULAR_DIVIDER_CASE_0),
-    .STIMULUS_NTM_SCALAR_MODULAR_EXPONENTIATOR_CASE_0(STIMULUS_NTM_SCALAR_MODULAR_EXPONENTIATOR_CASE_0),
     .STIMULUS_NTM_SCALAR_MODULAR_MOD_CASE_1(STIMULUS_NTM_SCALAR_MODULAR_MOD_CASE_1),
     .STIMULUS_NTM_SCALAR_MODULAR_ADDER_CASE_1(STIMULUS_NTM_SCALAR_MODULAR_ADDER_CASE_1),
     .STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_CASE_1(STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_CASE_1),
     .STIMULUS_NTM_SCALAR_MODULAR_INVERTER_CASE_1(STIMULUS_NTM_SCALAR_MODULAR_INVERTER_CASE_1),
-    .STIMULUS_NTM_SCALAR_MODULAR_DIVIDER_CASE_1(STIMULUS_NTM_SCALAR_MODULAR_DIVIDER_CASE_1),
-    .STIMULUS_NTM_SCALAR_MODULAR_EXPONENTIATOR_CASE_1(STIMULUS_NTM_SCALAR_MODULAR_EXPONENTIATOR_CASE_1),
 
     // VECTOR-FUNCTIONALITY
     .STIMULUS_NTM_VECTOR_MODULAR_MOD_TEST(STIMULUS_NTM_VECTOR_MODULAR_MOD_TEST),
     .STIMULUS_NTM_VECTOR_MODULAR_ADDER_TEST(STIMULUS_NTM_VECTOR_MODULAR_ADDER_TEST),
     .STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_TEST(STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_TEST),
     .STIMULUS_NTM_VECTOR_MODULAR_INVERTER_TEST(STIMULUS_NTM_VECTOR_MODULAR_INVERTER_TEST),
-    .STIMULUS_NTM_VECTOR_MODULAR_DIVIDER_TEST(STIMULUS_NTM_VECTOR_MODULAR_DIVIDER_TEST),
-    .STIMULUS_NTM_VECTOR_MODULAR_EXPONENTIATOR_TEST(STIMULUS_NTM_VECTOR_MODULAR_EXPONENTIATOR_TEST),
     .STIMULUS_NTM_VECTOR_MODULAR_MOD_CASE_0(STIMULUS_NTM_VECTOR_MODULAR_MOD_CASE_0),
     .STIMULUS_NTM_VECTOR_MODULAR_ADDER_CASE_0(STIMULUS_NTM_VECTOR_MODULAR_ADDER_CASE_0),
     .STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_0(STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_0),
     .STIMULUS_NTM_VECTOR_MODULAR_INVERTER_CASE_0(STIMULUS_NTM_VECTOR_MODULAR_INVERTER_CASE_0),
-    .STIMULUS_NTM_VECTOR_MODULAR_DIVIDER_CASE_0(STIMULUS_NTM_VECTOR_MODULAR_DIVIDER_CASE_0),
-    .STIMULUS_NTM_VECTOR_MODULAR_EXPONENTIATOR_CASE_0(STIMULUS_NTM_VECTOR_MODULAR_EXPONENTIATOR_CASE_0),
     .STIMULUS_NTM_VECTOR_MODULAR_MOD_CASE_1(STIMULUS_NTM_VECTOR_MODULAR_MOD_CASE_1),
     .STIMULUS_NTM_VECTOR_MODULAR_ADDER_CASE_1(STIMULUS_NTM_VECTOR_MODULAR_ADDER_CASE_1),
     .STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_1(STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_1),
     .STIMULUS_NTM_VECTOR_MODULAR_INVERTER_CASE_1(STIMULUS_NTM_VECTOR_MODULAR_INVERTER_CASE_1),
-    .STIMULUS_NTM_VECTOR_MODULAR_DIVIDER_CASE_1(STIMULUS_NTM_VECTOR_MODULAR_DIVIDER_CASE_1),
-    .STIMULUS_NTM_VECTOR_MODULAR_EXPONENTIATOR_CASE_1(STIMULUS_NTM_VECTOR_MODULAR_EXPONENTIATOR_CASE_1),
 
     // MATRIX-FUNCTIONALITY
     .STIMULUS_NTM_MATRIX_MODULAR_MOD_TEST(STIMULUS_NTM_MATRIX_MODULAR_MOD_TEST),
     .STIMULUS_NTM_MATRIX_MODULAR_ADDER_TEST(STIMULUS_NTM_MATRIX_MODULAR_ADDER_TEST),
     .STIMULUS_NTM_MATRIX_MODULAR_MULTIPLIER_TEST(STIMULUS_NTM_MATRIX_MODULAR_MULTIPLIER_TEST),
     .STIMULUS_NTM_MATRIX_MODULAR_INVERTER_TEST(STIMULUS_NTM_MATRIX_MODULAR_INVERTER_TEST),
-    .STIMULUS_NTM_MATRIX_MODULAR_DIVIDER_TEST(STIMULUS_NTM_MATRIX_MODULAR_DIVIDER_TEST),
-    .STIMULUS_NTM_MATRIX_MODULAR_EXPONENTIATOR_TEST(STIMULUS_NTM_MATRIX_MODULAR_EXPONENTIATOR_TEST),
     .STIMULUS_NTM_MATRIX_MODULAR_MOD_CASE_0(STIMULUS_NTM_MATRIX_MODULAR_MOD_CASE_0),
     .STIMULUS_NTM_MATRIX_MODULAR_ADDER_CASE_0(STIMULUS_NTM_MATRIX_MODULAR_ADDER_CASE_0),
     .STIMULUS_NTM_MATRIX_MODULAR_MULTIPLIER_CASE_0(STIMULUS_NTM_MATRIX_MODULAR_MULTIPLIER_CASE_0),
     .STIMULUS_NTM_MATRIX_MODULAR_INVERTER_CASE_0(STIMULUS_NTM_MATRIX_MODULAR_INVERTER_CASE_0),
-    .STIMULUS_NTM_MATRIX_MODULAR_DIVIDER_CASE_0(STIMULUS_NTM_MATRIX_MODULAR_DIVIDER_CASE_0),
-    .STIMULUS_NTM_MATRIX_MODULAR_EXPONENTIATOR_CASE_0(STIMULUS_NTM_MATRIX_MODULAR_EXPONENTIATOR_CASE_0),
     .STIMULUS_NTM_MATRIX_MODULAR_MOD_CASE_1(STIMULUS_NTM_MATRIX_MODULAR_MOD_CASE_1),
     .STIMULUS_NTM_MATRIX_MODULAR_ADDER_CASE_1(STIMULUS_NTM_MATRIX_MODULAR_ADDER_CASE_1),
     .STIMULUS_NTM_MATRIX_MODULAR_MULTIPLIER_CASE_1(STIMULUS_NTM_MATRIX_MODULAR_MULTIPLIER_CASE_1),
     .STIMULUS_NTM_MATRIX_MODULAR_INVERTER_CASE_1(STIMULUS_NTM_MATRIX_MODULAR_INVERTER_CASE_1),
-    .STIMULUS_NTM_MATRIX_MODULAR_DIVIDER_CASE_1(STIMULUS_NTM_MATRIX_MODULAR_DIVIDER_CASE_1),
-    .STIMULUS_NTM_MATRIX_MODULAR_EXPONENTIATOR_CASE_1(STIMULUS_NTM_MATRIX_MODULAR_EXPONENTIATOR_CASE_1)
   )
   modular_stimulus(
     // GLOBAL
@@ -546,28 +417,6 @@ module ntm_modular_testbench;
     .SCALAR_MODULAR_INVERTER_MODULO_IN(modulo_in_scalar_modular_inverter),
     .SCALAR_MODULAR_INVERTER_DATA_IN(data_in_scalar_modular_inverter),
     .SCALAR_MODULAR_INVERTER_DATA_OUT(data_out_scalar_modular_inverter),
-
-    // SCALAR DIVIDER
-    // CONTROL
-    .SCALAR_MODULAR_DIVIDER_START(start_scalar_modular_divider),
-    .SCALAR_MODULAR_DIVIDER_READY(ready_scalar_modular_divider),
-
-    // DATA
-    .SCALAR_MODULAR_DIVIDER_MODULO_IN(modulo_in_scalar_modular_divider),
-    .SCALAR_MODULAR_DIVIDER_DATA_A_IN(data_a_in_scalar_modular_divider),
-    .SCALAR_MODULAR_DIVIDER_DATA_B_IN(data_b_in_scalar_modular_divider),
-    .SCALAR_MODULAR_DIVIDER_DATA_OUT(data_out_scalar_modular_divider),
-
-    // SCALAR EXPONENTIATOR
-    // CONTROL
-    .SCALAR_MODULAR_EXPONENTIATOR_START(start_scalar_modular_exponentiator),
-    .SCALAR_MODULAR_EXPONENTIATOR_READY(ready_scalar_modular_exponentiator),
-
-    // DATA
-    .SCALAR_MODULAR_EXPONENTIATOR_MODULO_IN(modulo_in_scalar_modular_exponentiator),
-    .SCALAR_MODULAR_EXPONENTIATOR_DATA_A_IN(data_a_in_scalar_modular_exponentiator),
-    .SCALAR_MODULAR_EXPONENTIATOR_DATA_B_IN(data_b_in_scalar_modular_exponentiator),
-    .SCALAR_MODULAR_EXPONENTIATOR_DATA_OUT(data_out_scalar_modular_exponentiator),
 
     ///////////////////////////////////////////////////////////////////////
     // STIMULUS VECTOR
@@ -634,38 +483,6 @@ module ntm_modular_testbench;
     .VECTOR_MODULAR_INVERTER_SIZE_IN(size_in_vector_modular_inverter),
     .VECTOR_MODULAR_INVERTER_DATA_IN(data_in_vector_modular_inverter),
     .VECTOR_MODULAR_INVERTER_DATA_OUT(data_out_vector_modular_inverter),
-
-    // VECTOR DIVIDER
-    // CONTROL
-    .VECTOR_MODULAR_DIVIDER_START(start_vector_modular_divider),
-    .VECTOR_MODULAR_DIVIDER_READY(ready_vector_modular_divider),
-
-    .VECTOR_MODULAR_DIVIDER_DATA_A_IN_ENABLE(data_a_in_enable_vector_modular_divider),
-    .VECTOR_MODULAR_DIVIDER_DATA_B_IN_ENABLE(data_b_in_enable_vector_modular_divider),
-    .VECTOR_MODULAR_DIVIDER_DATA_OUT_ENABLE(data_out_enable_vector_modular_divider),
-
-    // DATA
-    .VECTOR_MODULAR_DIVIDER_MODULO_IN(modulo_in_vector_modular_divider),
-    .VECTOR_MODULAR_DIVIDER_SIZE_IN(size_in_vector_modular_divider),
-    .VECTOR_MODULAR_DIVIDER_DATA_A_IN(data_a_in_vector_modular_divider),
-    .VECTOR_MODULAR_DIVIDER_DATA_B_IN(data_b_in_vector_modular_divider),
-    .VECTOR_MODULAR_DIVIDER_DATA_OUT(data_out_vector_modular_divider),
-
-    // VECTOR EXPONENTIATOR
-    // CONTROL
-    .VECTOR_MODULAR_EXPONENTIATOR_START(start_vector_modular_exponentiator),
-    .VECTOR_MODULAR_EXPONENTIATOR_READY(ready_vector_modular_exponentiator),
-
-    .VECTOR_MODULAR_EXPONENTIATOR_DATA_A_IN_ENABLE(data_a_in_enable_vector_modular_exponentiator),
-    .VECTOR_MODULAR_EXPONENTIATOR_DATA_B_IN_ENABLE(data_b_in_enable_vector_modular_exponentiator),
-    .VECTOR_MODULAR_EXPONENTIATOR_DATA_OUT_ENABLE(data_out_enable_vector_modular_exponentiator),
-
-    // DATA
-    .VECTOR_MODULAR_EXPONENTIATOR_MODULO_IN(modulo_in_vector_modular_exponentiator),
-    .VECTOR_MODULAR_EXPONENTIATOR_SIZE_IN(size_in_vector_modular_exponentiator),
-    .VECTOR_MODULAR_EXPONENTIATOR_DATA_A_IN(data_a_in_vector_modular_exponentiator),
-    .VECTOR_MODULAR_EXPONENTIATOR_DATA_B_IN(data_b_in_vector_modular_exponentiator),
-    .VECTOR_MODULAR_EXPONENTIATOR_DATA_OUT(data_out_vector_modular_exponentiator),
 
     ///////////////////////////////////////////////////////////////////////
     // STIMULUS MATRIX
@@ -745,47 +562,7 @@ module ntm_modular_testbench;
     .MATRIX_MODULAR_INVERTER_SIZE_I_IN(size_i_in_matrix_modular_inverter),
     .MATRIX_MODULAR_INVERTER_SIZE_J_IN(size_j_in_matrix_modular_inverter),
     .MATRIX_MODULAR_INVERTER_DATA_IN(data_in_matrix_modular_inverter),
-    .MATRIX_MODULAR_INVERTER_DATA_OUT(data_out_matrix_modular_inverter),
-
-    // MATRIX DIVIDER
-    // CONTROL
-    .MATRIX_MODULAR_DIVIDER_START(start_matrix_modular_divider),
-    .MATRIX_MODULAR_DIVIDER_READY(ready_matrix_modular_divider),
-
-    .MATRIX_MODULAR_DIVIDER_DATA_A_IN_I_ENABLE(data_a_in_i_enable_matrix_modular_divider),
-    .MATRIX_MODULAR_DIVIDER_DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_modular_divider),
-    .MATRIX_MODULAR_DIVIDER_DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_modular_divider),
-    .MATRIX_MODULAR_DIVIDER_DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_modular_divider),
-    .MATRIX_MODULAR_DIVIDER_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_modular_divider),
-    .MATRIX_MODULAR_DIVIDER_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_modular_divider),
-
-    // DATA
-    .MATRIX_MODULAR_DIVIDER_MODULO_IN(modulo_in_matrix_modular_divider),
-    .MATRIX_MODULAR_DIVIDER_SIZE_I_IN(size_i_in_matrix_modular_divider),
-    .MATRIX_MODULAR_DIVIDER_SIZE_J_IN(size_j_in_matrix_modular_divider),
-    .MATRIX_MODULAR_DIVIDER_DATA_A_IN(data_a_in_matrix_modular_divider),
-    .MATRIX_MODULAR_DIVIDER_DATA_B_IN(data_b_in_matrix_modular_divider),
-    .MATRIX_MODULAR_DIVIDER_DATA_OUT(data_out_matrix_modular_divider),
-
-    // MATRIX EXPONENTIATOR
-    // CONTROL
-    .MATRIX_MODULAR_EXPONENTIATOR_START(start_matrix_modular_exponentiator),
-    .MATRIX_MODULAR_EXPONENTIATOR_READY(ready_matrix_modular_exponentiator),
-
-    .MATRIX_MODULAR_EXPONENTIATOR_DATA_A_IN_I_ENABLE(data_a_in_i_enable_matrix_modular_exponentiator),
-    .MATRIX_MODULAR_EXPONENTIATOR_DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_modular_exponentiator),
-    .MATRIX_MODULAR_EXPONENTIATOR_DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_modular_exponentiator),
-    .MATRIX_MODULAR_EXPONENTIATOR_DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_modular_exponentiator),
-    .MATRIX_MODULAR_EXPONENTIATOR_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_modular_exponentiator),
-    .MATRIX_MODULAR_EXPONENTIATOR_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_modular_exponentiator),
-
-    // DATA
-    .MATRIX_MODULAR_EXPONENTIATOR_MODULO_IN(modulo_in_matrix_modular_exponentiator),
-    .MATRIX_MODULAR_EXPONENTIATOR_SIZE_I_IN(size_i_in_matrix_modular_exponentiator),
-    .MATRIX_MODULAR_EXPONENTIATOR_SIZE_J_IN(size_j_in_matrix_modular_exponentiator),
-    .MATRIX_MODULAR_EXPONENTIATOR_DATA_A_IN(data_a_in_matrix_modular_exponentiator),
-    .MATRIX_MODULAR_EXPONENTIATOR_DATA_B_IN(data_b_in_matrix_modular_exponentiator),
-    .MATRIX_MODULAR_EXPONENTIATOR_DATA_OUT(data_out_matrix_modular_exponentiator)
+    .MATRIX_MODULAR_INVERTER_DATA_OUT(data_out_matrix_modular_inverter)
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -874,48 +651,6 @@ module ntm_modular_testbench;
     .MODULO_IN(modulo_in_scalar_modular_inverter),
     .DATA_IN(data_in_scalar_modular_inverter),
     .DATA_OUT(data_out_scalar_modular_inverter)
-  );
-
-  // SCALAR DIVIDER
-  ntm_scalar_modular_divider #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_modular_divider(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_scalar_modular_divider),
-    .READY(ready_scalar_modular_divider),
-
-    // DATA
-    .MODULO_IN(modulo_in_scalar_modular_divider),
-    .DATA_A_IN(data_a_in_scalar_modular_divider),
-    .DATA_B_IN(data_b_in_scalar_modular_divider),
-    .DATA_OUT(data_out_scalar_modular_divider)
-  );
-
-  // SCALAR EXPONENTIATOR
-  ntm_scalar_modular_exponentiator #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_modular_exponentiator(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_scalar_modular_exponentiator),
-    .READY(ready_scalar_modular_exponentiator),
-
-    // DATA
-    .MODULO_IN(modulo_in_scalar_modular_exponentiator),
-    .DATA_A_IN(data_a_in_scalar_modular_exponentiator),
-    .DATA_B_IN(data_b_in_scalar_modular_exponentiator),
-    .DATA_OUT(data_out_scalar_modular_exponentiator)
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -1022,58 +757,6 @@ module ntm_modular_testbench;
     .SIZE_IN(size_in_vector_modular_inverter),
     .DATA_IN(data_in_vector_modular_inverter),
     .DATA_OUT(data_out_vector_modular_inverter)
-  );
-
-  // VECTOR DIVIDER
-  ntm_vector_modular_divider #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_modular_divider(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_vector_modular_divider),
-    .READY(ready_vector_modular_divider),
-
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_modular_divider),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_modular_divider),
-    .DATA_OUT_ENABLE(data_out_enable_vector_modular_divider),
-
-    // DATA
-    .MODULO_IN(modulo_in_vector_modular_divider),
-    .SIZE_IN(size_in_vector_modular_divider),
-    .DATA_A_IN(data_a_in_vector_modular_divider),
-    .DATA_B_IN(data_b_in_vector_modular_divider),
-    .DATA_OUT(data_out_vector_modular_divider)
-  );
-
-  // VECTOR EXPONENTIATOR
-  ntm_vector_modular_exponentiator #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_modular_exponentiator(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_vector_modular_exponentiator),
-    .READY(ready_vector_modular_exponentiator),
-
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_modular_exponentiator),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_modular_exponentiator),
-    .DATA_OUT_ENABLE(data_out_enable_vector_modular_exponentiator),
-
-    // DATA
-    .MODULO_IN(modulo_in_vector_modular_exponentiator),
-    .SIZE_IN(size_in_vector_modular_exponentiator),
-    .DATA_A_IN(data_a_in_vector_modular_exponentiator),
-    .DATA_B_IN(data_b_in_vector_modular_exponentiator),
-    .DATA_OUT(data_out_vector_modular_exponentiator)
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -1194,66 +877,6 @@ module ntm_modular_testbench;
     .SIZE_J_IN(size_j_in_matrix_modular_inverter),
     .DATA_IN(data_in_matrix_modular_inverter),
     .DATA_OUT(data_out_matrix_modular_inverter)
-  );
-
-  // MATRIX DIVIDER
-  ntm_matrix_modular_divider #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_modular_divider(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_matrix_modular_divider),
-    .READY(ready_matrix_modular_divider),
-
-    .DATA_A_IN_I_ENABLE(data_a_in_i_enable_matrix_modular_divider),
-    .DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_modular_divider),
-    .DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_modular_divider),
-    .DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_modular_divider),
-    .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_modular_divider),
-    .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_modular_divider),
-
-    // DATA
-    .MODULO_IN(modulo_in_matrix_modular_divider),
-    .SIZE_I_IN(size_i_in_matrix_modular_divider),
-    .SIZE_J_IN(size_j_in_matrix_modular_divider),
-    .DATA_A_IN(data_a_in_matrix_modular_divider),
-    .DATA_B_IN(data_b_in_matrix_modular_divider),
-    .DATA_OUT(data_out_matrix_modular_divider)
-  );
-
-  // MATRIX EXPONENTIATOR
-  ntm_matrix_modular_exponentiator #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_modular_exponentiator(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_matrix_modular_exponentiator),
-    .READY(ready_matrix_modular_exponentiator),
-
-    .DATA_A_IN_I_ENABLE(data_a_in_i_enable_matrix_modular_exponentiator),
-    .DATA_A_IN_J_ENABLE(data_a_in_j_enable_matrix_modular_exponentiator),
-    .DATA_B_IN_I_ENABLE(data_b_in_i_enable_matrix_modular_exponentiator),
-    .DATA_B_IN_J_ENABLE(data_b_in_j_enable_matrix_modular_exponentiator),
-    .DATA_OUT_I_ENABLE(data_out_i_enable_matrix_modular_exponentiator),
-    .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_modular_exponentiator),
-
-    // DATA
-    .MODULO_IN(modulo_in_matrix_modular_exponentiator),
-    .SIZE_I_IN(size_i_in_matrix_modular_exponentiator),
-    .SIZE_J_IN(size_j_in_matrix_modular_exponentiator),
-    .DATA_A_IN(data_a_in_matrix_modular_exponentiator),
-    .DATA_B_IN(data_b_in_matrix_modular_exponentiator),
-    .DATA_OUT(data_out_matrix_modular_exponentiator)
   );
 
 endmodule

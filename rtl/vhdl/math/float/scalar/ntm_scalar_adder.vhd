@@ -271,7 +271,7 @@ begin
   end process;
 
   -- EXPONENT SCALAR ADDER
-  exponent_scalar_adder : ntm_scalar_modular_adder
+  exponent_scalar_adder : ntm_scalar_integer_adder
     generic map (
       DATA_SIZE    => EXPONENT_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -295,7 +295,7 @@ begin
       );
 
   -- MANTISSA SCALAR ADDER
-  mantissa_scalar_adder : ntm_scalar_modular_adder
+  mantissa_scalar_adder : ntm_scalar_integer_adder
     generic map (
       DATA_SIZE    => MANTISSA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE

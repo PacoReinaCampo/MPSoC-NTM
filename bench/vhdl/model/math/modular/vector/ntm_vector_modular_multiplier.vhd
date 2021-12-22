@@ -116,7 +116,7 @@ architecture ntm_vector_modular_multiplier_architecture of ntm_vector_modular_mu
   signal data_a_in_multiplier_int : std_logic;
   signal data_b_in_multiplier_int : std_logic;
 
-  -- VECTOR MULTIPLIER
+  -- SCALAR MULTIPLIER
   -- CONTROL
   signal start_scalar_multiplier : std_logic;
   signal ready_scalar_multiplier : std_logic;
@@ -251,7 +251,7 @@ begin
     end if;
   end process;
 
-  -- VECTOR MULTIPLIER
+  -- SCALAR MULTIPLIER
   scalar_multiplier : ntm_scalar_modular_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,

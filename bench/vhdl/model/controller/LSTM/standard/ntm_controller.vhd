@@ -129,12 +129,13 @@ architecture ntm_controller_architecture of ntm_controller is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    VECTOR_ACTIVATION_STATE,            -- STEP 1
-    VECTOR_FORGET_STATE,                -- STEP 2
-    VECTOR_INPUT_STATE,                 -- STEP 3
-    VECTOR_STATE_STATE,                 -- STEP 4
-    VECTOR_OUTPUT_GATE,                 -- STEP 5
-    VECTOR_HIDDEN_GATE                  -- STEP 6
+    INPUT_STATE,                        -- STEP 1
+    VECTOR_ACTIVATION_STATE,            -- STEP 2
+    VECTOR_FORGET_STATE,                -- STEP 3
+    VECTOR_INPUT_STATE,                 -- STEP 4
+    VECTOR_STATE_STATE,                 -- STEP 5
+    VECTOR_OUTPUT_GATE,                 -- STEP 6
+    VECTOR_HIDDEN_GATE                  -- STEP 7
     );
 
   -----------------------------------------------------------------------
@@ -737,13 +738,15 @@ begin
             start_activation_gate_vector <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_ACTIVATION_STATE;
+            controller_ctrl_fsm_int <= INPUT_STATE;
           else
             -- Control Internal
             start_activation_gate_vector <= '0';
           end if;
 
-        when VECTOR_ACTIVATION_STATE =>  -- STEP 1
+        when INPUT_STATE =>  -- STEP 1
+    
+        when VECTOR_ACTIVATION_STATE =>  -- STEP 2
 
           -- a(t;l) = tanh(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
 
@@ -758,7 +761,7 @@ begin
             start_activation_gate_vector <= '0';
           end if;
 
-        when VECTOR_FORGET_STATE =>  -- STEP 2
+        when VECTOR_FORGET_STATE =>  -- STEP 3
 
           -- f(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
 
@@ -773,7 +776,7 @@ begin
             start_forget_gate_vector <= '0';
           end if;
 
-        when VECTOR_INPUT_STATE =>  -- STEP 3
+        when VECTOR_INPUT_STATE =>  -- STEP 4
 
           -- i(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
 
@@ -788,7 +791,7 @@ begin
             start_input_gate_vector <= '0';
           end if;
 
-        when VECTOR_STATE_STATE =>  -- STEP 4
+        when VECTOR_STATE_STATE =>  -- STEP 5
 
           -- s(t;l) = f(t;l) o s(t-1;l) + i(t;l) o a(t;l)
           -- s(t=0;l) = 0
@@ -804,7 +807,7 @@ begin
             start_state_gate_vector <= '0';
           end if;
 
-        when VECTOR_OUTPUT_GATE =>      -- STEP 5
+        when VECTOR_OUTPUT_GATE =>      -- STEP 6
 
           -- o(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
 
@@ -819,7 +822,7 @@ begin
             start_output_gate_vector <= '0';
           end if;
 
-        when VECTOR_HIDDEN_GATE =>      -- STEP 6
+        when VECTOR_HIDDEN_GATE =>      -- STEP 7
 
           -- h(t;l) = o(t;l) o tanh(s(t;l))
           -- h(t=0;l) = 0; h(t;l=0) = 0

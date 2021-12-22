@@ -148,7 +148,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN * DATA_B_IN mod MODULO_IN
+  -- DATA_OUT = DATA_A_IN · DATA_B_IN mod MODULO_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -306,7 +306,7 @@ begin
         when ENDER_I_STATE =>  -- STEP 3
 
           if (data_out_enable_vector_multiplier = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
               DATA_OUT <= data_out_vector_multiplier;
 
@@ -322,7 +322,7 @@ begin
 
               -- FSM Control
               multiplier_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
               DATA_OUT <= data_out_vector_multiplier;
 
@@ -345,7 +345,7 @@ begin
         when ENDER_J_STATE =>  -- STEP 3
 
           if (data_out_enable_vector_multiplier = '1') then
-            if ((unsigned(index_i_loop) <= unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)))) then
+            if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
               DATA_OUT <= data_out_vector_multiplier;
 
