@@ -93,7 +93,7 @@ entity ntm_float_testbench is
 
     ENABLE_NTM_MATRIX_ADDER_CASE_1         : boolean := false;
     ENABLE_NTM_MATRIX_MULTIPLIER_CASE_1    : boolean := false;
-    ENABLE_NTM_MATRIX_DIVIDER_CASE_1       : boolean := false;
+    ENABLE_NTM_MATRIX_DIVIDER_CASE_1       : boolean := false
     );
 end ntm_float_testbench;
 

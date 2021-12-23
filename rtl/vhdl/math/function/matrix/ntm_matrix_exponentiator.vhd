@@ -76,7 +76,7 @@ entity ntm_matrix_exponentiator is
     );
 end entity;
 
-architecture ntm_matrix_modular_exponentiator_architecture of ntm_matrix_modular_exponentiator is
+architecture ntm_matrix_exponentiator_architecture of ntm_matrix_exponentiator is
 
   -----------------------------------------------------------------------
   -- Types

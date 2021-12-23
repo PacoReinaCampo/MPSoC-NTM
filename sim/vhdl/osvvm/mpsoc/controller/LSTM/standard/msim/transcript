@@ -1,0 +1,8 @@
+# vsim -c -do "run.do" work.ntm_standard_lstm_testbench 
+# Start time: 00:04:16 on Dec 23,2021
+# ** Error: (vsim-3170) Could not find 'ntm_standard_lstm_testbench'.
+#         Searched libraries:
+#             D:/GitHub/MPSoC-NTM/sim/vhdl/tests/mpsoc/controller/LSTM/standard/msim/work
+# Error loading design
+# End time: 00:04:16 on Dec 23,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
