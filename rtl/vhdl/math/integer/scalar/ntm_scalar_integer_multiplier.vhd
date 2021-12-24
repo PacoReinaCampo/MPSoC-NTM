@@ -103,8 +103,11 @@ architecture ntm_scalar_integer_multiplier_architecture of ntm_scalar_integer_mu
   -- Finite State Machine
   signal multiplier_ctrl_fsm_int : multiplier_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal multiplier_int : std_logic_vector(2*DATA_SIZE-1 downto 0);
+
+  -- Control Internal
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -124,18 +127,28 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      -- Assignations
+      -- Data Internal
       multiplier_int <= (others => '0');
+
+      -- Control Internal
+      index_loop <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
       case multiplier_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
+          -- Data Outputs
+          DATA_OUT <= ZERO_DATA;
+
           -- Control Outputs
           READY <= '0';
 
           if (START = '1') then
-            multiplier_int <= std_logic_vector(signed(DATA_A_IN) * signed(DATA_B_IN));
+            -- Data Internal
+            multiplier_int <= (others => '0');
+
+            -- Control Internal
+            index_loop <= ZERO_DATA;
 
             -- FSM Control
             multiplier_ctrl_fsm_int <= ENDER_STATE;
@@ -143,14 +156,22 @@ begin
 
         when ENDER_STATE =>  -- STEP 1
 
-          -- Data Outputs
-          DATA_OUT <= multiplier_int(DATA_SIZE-1 downto 0);
+          if (unsigned(index_loop) = unsigned(DATA_B_IN)) then
+            -- Data Outputs
+            DATA_OUT <= multiplier_int(DATA_SIZE-1 downto 0);
 
-          -- Control Outputs
-          READY <= '1';
+            -- Control Outputs
+            READY <= '1';
 
-          -- FSM Control
-          multiplier_ctrl_fsm_int <= STARTER_STATE;
+            -- FSM Control
+            multiplier_ctrl_fsm_int <= STARTER_STATE;
+          else
+            -- Data Internal
+            multiplier_int <= std_logic_vector(unsigned(multiplier_int) + (unsigned(ZERO_DATA) & unsigned(DATA_A_IN)));
+
+            -- Control Internal
+            index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE_DATA));
+          end if;
 
         when others =>
           -- FSM Control

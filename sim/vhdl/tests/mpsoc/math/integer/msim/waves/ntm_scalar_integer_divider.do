@@ -19,6 +19,7 @@ add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar
 
 add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/divider_ctrl_fsm_int
 add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/divider_int
+add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/index_loop
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}
