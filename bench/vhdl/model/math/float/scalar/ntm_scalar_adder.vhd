@@ -187,8 +187,6 @@ begin
       operation_mantissa_scalar_adder <= '0';
 
       -- Data Internal
-      sign_int_scalar_adder <= '0';
-
       modulo_in_exponent_scalar_adder <= ZERO_EXPONENT;
       data_a_in_exponent_scalar_adder <= ZERO_EXPONENT;
       data_b_in_exponent_scalar_adder <= ZERO_EXPONENT;
@@ -196,6 +194,11 @@ begin
       modulo_in_mantissa_scalar_adder <= ZERO_MANTISSA;
       data_a_in_mantissa_scalar_adder <= ZERO_MANTISSA;
       data_b_in_mantissa_scalar_adder <= ZERO_MANTISSA;
+
+      sign_int_scalar_adder <= '0';
+
+      exponent_int_scalar_adder <= ZERO_EXPONENT;
+      mantissa_int_scalar_adder <= ZERO_MANTISSA;
 
     elsif (rising_edge(CLK)) then
 

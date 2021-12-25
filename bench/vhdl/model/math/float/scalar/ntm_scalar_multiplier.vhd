@@ -182,8 +182,6 @@ begin
       operation_scalar_adder <= '0';
 
       -- Data Internal
-      sign_int_scalar_multiplier <= '0';
-
       modulo_in_scalar_adder <= ZERO_EXPONENT;
       data_a_in_scalar_adder <= ZERO_EXPONENT;
       data_b_in_scalar_adder <= ZERO_EXPONENT;
@@ -191,6 +189,11 @@ begin
       modulo_in_scalar_multiplier <= ZERO_MANTISSA;
       data_a_in_scalar_multiplier <= ZERO_MANTISSA;
       data_b_in_scalar_multiplier <= ZERO_MANTISSA;
+
+      sign_int_scalar_multiplier <= '0';
+
+      exponent_int_scalar_multiplier <= ZERO_EXPONENT;
+      mantissa_int_scalar_multiplier <= ZERO_MANTISSA;
 
     elsif (rising_edge(CLK)) then
 

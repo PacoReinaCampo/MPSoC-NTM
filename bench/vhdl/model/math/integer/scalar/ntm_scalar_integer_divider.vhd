@@ -81,15 +81,15 @@ architecture ntm_scalar_integer_divider_architecture of ntm_scalar_integer_divid
   -- Constants
   -----------------------------------------------------------------------
 
-  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(0, CONTROL_SIZE));
-  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(1, CONTROL_SIZE));
-  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(2, CONTROL_SIZE));
-  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_signed(3, CONTROL_SIZE));
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(0, DATA_SIZE));
-  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(1, DATA_SIZE));
-  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(2, DATA_SIZE));
-  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -103,8 +103,11 @@ architecture ntm_scalar_integer_divider_architecture of ntm_scalar_integer_divid
   -- Finite State Machine
   signal divider_ctrl_fsm_int : divider_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal divider_int : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- Control Internal
+  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -112,7 +115,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN / DATA_B_IN
+  -- DATA_OUT = DATA_A_IN · DATA_B_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -124,8 +127,11 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      -- Assignations
+      -- Data Internal
       divider_int <= ZERO_DATA;
+
+      -- Control Internal
+      index_loop <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -135,7 +141,11 @@ begin
           READY <= '0';
 
           if (START = '1') then
-            divider_int <= std_logic_vector(signed(DATA_A_IN) / signed(DATA_B_IN));
+            -- Data Internal
+            divider_int <= ZERO_DATA;
+
+            -- Control Internal
+            index_loop <= DATA_A_IN;
 
             -- FSM Control
             divider_ctrl_fsm_int <= ENDER_STATE;
@@ -143,14 +153,22 @@ begin
 
         when ENDER_STATE =>  -- STEP 1
 
-          -- Data Outputs
-          DATA_OUT <= divider_int;
+          if (unsigned(DATA_B_IN) > unsigned(index_loop)) then
+            -- Data Outputs
+            DATA_OUT <= divider_int;
 
-          -- Control Outputs
-          READY <= '1';
+            -- Control Outputs
+            READY <= '1';
 
-          -- FSM Control
-          divider_ctrl_fsm_int <= STARTER_STATE;
+            -- FSM Control
+            divider_ctrl_fsm_int <= STARTER_STATE;
+          else
+            -- Data Internal
+            divider_int <= std_logic_vector(unsigned(divider_int) + unsigned(ONE_DATA));
+
+            -- Control Internal
+            index_loop <= std_logic_vector(unsigned(index_loop) - unsigned(DATA_B_IN));
+          end if;
 
         when others =>
           -- FSM Control

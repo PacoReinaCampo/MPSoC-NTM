@@ -192,6 +192,9 @@ begin
 
       sign_int_scalar_divider <= '0';
 
+      exponent_int_scalar_divider <= ZERO_EXPONENT;
+      mantissa_int_scalar_divider <= ZERO_MANTISSA;
+
     elsif (rising_edge(CLK)) then
 
       case divider_ctrl_fsm_int is
