@@ -1,5 +1,17 @@
 ../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
 
+ ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_adder.vhd
+ ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_multiplier.vhd
+ ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_divider.vhd
+
+ ../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_adder.vhd
+ ../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_multiplier.vhd
+ ../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_divider.vhd
+
+ ../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_adder.vhd
+ ../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_multiplier.vhd
+ ../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_divider.vhd
+
 ../../../../../../../rtl/vhdl/math/float/scalar/ntm_scalar_adder.vhd
 ../../../../../../../rtl/vhdl/math/float/scalar/ntm_scalar_multiplier.vhd
 ../../../../../../../rtl/vhdl/math/float/scalar/ntm_scalar_divider.vhd

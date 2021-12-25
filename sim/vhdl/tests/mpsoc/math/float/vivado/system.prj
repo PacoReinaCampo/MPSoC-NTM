@@ -1,5 +1,17 @@
 vhdl2008 work ../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
 
+vhdl2008 work ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_adder.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_multiplier.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_divider.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_adder.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_multiplier.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_divider.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_adder.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_multiplier.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_divider.vhd
+
 vhdl2008 work ../../../../../../../rtl/vhdl/math/float/scalar/ntm_scalar_adder.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/float/scalar/ntm_scalar_multiplier.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/float/scalar/ntm_scalar_divider.vhd

@@ -13,7 +13,6 @@ add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/CLK
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/RST
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/START
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/OPERATION
-add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/MODULO_IN
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/DATA_A_IN
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/DATA_B_IN
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/READY

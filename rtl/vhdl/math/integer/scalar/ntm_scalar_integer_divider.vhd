@@ -137,9 +137,6 @@ begin
 
       case divider_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
-          -- Data Outputs
-          DATA_OUT <= ZERO_DATA;
-
           -- Control Outputs
           READY <= '0';
 

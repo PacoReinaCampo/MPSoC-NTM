@@ -12,7 +12,6 @@ add wave -noupdate -divider {=========================================}
 add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/CLK
 add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/RST
 add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/START
-add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/MODULO_IN
 add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/SIZE_IN
 add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/DATA_A_IN_ENABLE
 add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/DATA_A_IN
@@ -20,16 +19,15 @@ add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multip
 add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/DATA_B_IN
 add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/READY
 add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/DATA_OUT_ENABLE
+add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/index_loop
 add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/DATA_OUT
 
 add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/multiplier_ctrl_fsm_int
-add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/index_loop
-add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/data_a_in_multiplier_int
-add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/data_b_in_multiplier_int
 
 add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/start_scalar_multiplier
-add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/modulo_in_scalar_multiplier
+add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/data_a_in_multiplier_int
 add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/data_a_in_scalar_multiplier
+add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/data_b_in_multiplier_int
 add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/data_b_in_scalar_multiplier
 add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/ready_scalar_multiplier
 add wave -noupdate /ntm_float_testbench/ntm_vector_multiplier_test/vector_multiplier/data_out_scalar_multiplier

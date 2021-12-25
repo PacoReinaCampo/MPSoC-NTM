@@ -12,16 +12,14 @@ add wave -noupdate -divider {=========================================}
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/CLK
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/RST
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/START
-add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/MODULO_IN
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/DATA_A_IN
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/DATA_B_IN
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/READY
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/DATA_OUT
 
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/multiplier_ctrl_fsm_int
-add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/u_int
-add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/v_int
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/multiplier_int
+add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/index_loop
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}
