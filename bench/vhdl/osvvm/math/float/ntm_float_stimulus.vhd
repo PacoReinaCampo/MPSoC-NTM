@@ -236,6 +236,19 @@ architecture ntm_float_stimulus_architecture of ntm_float_stimulus is
   constant WAITING : time := 50 ns;
   constant WORKING : time := 1 ms;
 
+  constant EXPONENT_SIZE : integer := 15;
+  constant MANTISSA_SIZE : integer := 112;
+
+  constant ZERO_EXPONENT  : std_logic_vector(EXPONENT_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, EXPONENT_SIZE));
+  constant ONE_EXPONENT   : std_logic_vector(EXPONENT_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, EXPONENT_SIZE));
+  constant TWO_EXPONENT   : std_logic_vector(EXPONENT_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, EXPONENT_SIZE));
+  constant THREE_EXPONENT : std_logic_vector(EXPONENT_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, EXPONENT_SIZE));
+
+  constant ZERO_MANTISSA  : std_logic_vector(MANTISSA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, MANTISSA_SIZE));
+  constant ONE_MANTISSA   : std_logic_vector(MANTISSA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, MANTISSA_SIZE));
+  constant TWO_MANTISSA   : std_logic_vector(MANTISSA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, MANTISSA_SIZE));
+  constant THREE_MANTISSA : std_logic_vector(MANTISSA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, MANTISSA_SIZE));
+
   constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
   constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
   constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
@@ -349,8 +362,8 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_SCALAR_ADDER_CASE_0) then
-        SCALAR_ADDER_DATA_A_IN <= TWO_DATA;
-        SCALAR_ADDER_DATA_B_IN <= ONE_DATA;
+        SCALAR_ADDER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+        SCALAR_ADDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
       end if;
 
       -------------------------------------------------------------------
@@ -358,8 +371,8 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_SCALAR_ADDER_CASE_1) then
-        SCALAR_ADDER_DATA_A_IN <= TWO_DATA;
-        SCALAR_ADDER_DATA_B_IN <= TWO_DATA;
+        SCALAR_ADDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+        SCALAR_ADDER_DATA_B_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
       end if;
 
       wait for WORKING;
@@ -377,8 +390,8 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0) then
-        SCALAR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-        SCALAR_MULTIPLIER_DATA_B_IN <= ONE_DATA;
+        SCALAR_MULTIPLIER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+        SCALAR_MULTIPLIER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
       end if;
 
       -------------------------------------------------------------------
@@ -386,8 +399,8 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1) then
-        SCALAR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-        SCALAR_MULTIPLIER_DATA_B_IN <= TWO_DATA;
+        SCALAR_MULTIPLIER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+        SCALAR_MULTIPLIER_DATA_B_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
       end if;
 
       wait for WORKING;
@@ -405,8 +418,8 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_SCALAR_DIVIDER_CASE_0) then
-        SCALAR_DIVIDER_DATA_A_IN <= TWO_DATA;
-        SCALAR_DIVIDER_DATA_B_IN <= ONE_DATA;
+        SCALAR_DIVIDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+        SCALAR_DIVIDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
       end if;
 
       -------------------------------------------------------------------
@@ -414,8 +427,8 @@ begin
       -------------------------------------------------------------------
 
       if (STIMULUS_NTM_SCALAR_DIVIDER_CASE_1) then
-        SCALAR_DIVIDER_DATA_A_IN <= TWO_DATA;
-        SCALAR_DIVIDER_DATA_B_IN <= TWO_DATA;
+        SCALAR_DIVIDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+        SCALAR_DIVIDER_DATA_B_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
       end if;
 
       wait for WORKING;
@@ -449,8 +462,8 @@ begin
         VECTOR_ADDER_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_ADDER_DATA_A_IN <= TWO_DATA;
-        VECTOR_ADDER_DATA_B_IN <= ONE_DATA;
+        VECTOR_ADDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+        VECTOR_ADDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -462,8 +475,8 @@ begin
             VECTOR_ADDER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_ADDER_DATA_A_IN <= TWO_DATA;
-            VECTOR_ADDER_DATA_B_IN <= ONE_DATA;
+            VECTOR_ADDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+            VECTOR_ADDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -492,8 +505,8 @@ begin
         VECTOR_ADDER_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_ADDER_DATA_A_IN <= TWO_DATA;
-        VECTOR_ADDER_DATA_B_IN <= TWO_DATA;
+        VECTOR_ADDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+        VECTOR_ADDER_DATA_B_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -505,8 +518,8 @@ begin
             VECTOR_ADDER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_ADDER_DATA_A_IN <= TWO_DATA;
-            VECTOR_ADDER_DATA_B_IN <= TWO_DATA;
+            VECTOR_ADDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+            VECTOR_ADDER_DATA_B_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -548,8 +561,8 @@ begin
         VECTOR_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-        VECTOR_MULTIPLIER_DATA_B_IN <= ONE_DATA;
+        VECTOR_MULTIPLIER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+        VECTOR_MULTIPLIER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -561,8 +574,8 @@ begin
             VECTOR_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-            VECTOR_MULTIPLIER_DATA_B_IN <= ONE_DATA;
+            VECTOR_MULTIPLIER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+            VECTOR_MULTIPLIER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -591,8 +604,8 @@ begin
         VECTOR_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-        VECTOR_MULTIPLIER_DATA_B_IN <= TWO_DATA;
+        VECTOR_MULTIPLIER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+        VECTOR_MULTIPLIER_DATA_B_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -604,8 +617,8 @@ begin
             VECTOR_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-            VECTOR_MULTIPLIER_DATA_B_IN <= TWO_DATA;
+            VECTOR_MULTIPLIER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+            VECTOR_MULTIPLIER_DATA_B_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -647,8 +660,8 @@ begin
         VECTOR_DIVIDER_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_DIVIDER_DATA_A_IN <= TWO_DATA;
-        VECTOR_DIVIDER_DATA_B_IN <= ONE_DATA;
+        VECTOR_DIVIDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+        VECTOR_DIVIDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -660,8 +673,8 @@ begin
             VECTOR_DIVIDER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_DIVIDER_DATA_A_IN <= TWO_DATA;
-            VECTOR_DIVIDER_DATA_B_IN <= ONE_DATA;
+            VECTOR_DIVIDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+            VECTOR_DIVIDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -690,8 +703,8 @@ begin
         VECTOR_DIVIDER_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_DIVIDER_DATA_A_IN <= TWO_DATA;
-        VECTOR_DIVIDER_DATA_B_IN <= TWO_DATA;
+        VECTOR_DIVIDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+        VECTOR_DIVIDER_DATA_B_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -703,8 +716,8 @@ begin
             VECTOR_DIVIDER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_DIVIDER_DATA_A_IN <= TWO_DATA;
-            VECTOR_DIVIDER_DATA_B_IN <= TWO_DATA;
+            VECTOR_DIVIDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+            VECTOR_DIVIDER_DATA_B_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -756,8 +769,8 @@ begin
         MATRIX_ADDER_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_ADDER_DATA_A_IN <= ONE_DATA;
-        MATRIX_ADDER_DATA_B_IN <= ONE_DATA;
+        MATRIX_ADDER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+        MATRIX_ADDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -770,8 +783,8 @@ begin
             MATRIX_ADDER_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_ADDER_DATA_A_IN <= ONE_DATA;
-            MATRIX_ADDER_DATA_B_IN <= ONE_DATA;
+            MATRIX_ADDER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            MATRIX_ADDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -782,8 +795,8 @@ begin
             MATRIX_ADDER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_ADDER_DATA_A_IN <= ONE_DATA;
-            MATRIX_ADDER_DATA_B_IN <= ONE_DATA;
+            MATRIX_ADDER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            MATRIX_ADDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
             -- LOOP
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
@@ -816,8 +829,8 @@ begin
         MATRIX_ADDER_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_ADDER_DATA_A_IN <= TWO_DATA;
-        MATRIX_ADDER_DATA_B_IN <= ONE_DATA;
+        MATRIX_ADDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+        MATRIX_ADDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -830,8 +843,8 @@ begin
             MATRIX_ADDER_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_ADDER_DATA_A_IN <= TWO_DATA;
-            MATRIX_ADDER_DATA_B_IN <= ONE_DATA;
+            MATRIX_ADDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+            MATRIX_ADDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -842,8 +855,8 @@ begin
             MATRIX_ADDER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_ADDER_DATA_A_IN <= TWO_DATA;
-            MATRIX_ADDER_DATA_B_IN <= ONE_DATA;
+            MATRIX_ADDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+            MATRIX_ADDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
             -- LOOP
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
@@ -890,8 +903,8 @@ begin
         MATRIX_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_MULTIPLIER_DATA_A_IN <= ONE_DATA;
-        MATRIX_MULTIPLIER_DATA_B_IN <= ONE_DATA;
+        MATRIX_MULTIPLIER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+        MATRIX_MULTIPLIER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -904,8 +917,8 @@ begin
             MATRIX_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_MULTIPLIER_DATA_A_IN <= ONE_DATA;
-            MATRIX_MULTIPLIER_DATA_B_IN <= ONE_DATA;
+            MATRIX_MULTIPLIER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            MATRIX_MULTIPLIER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -916,8 +929,8 @@ begin
             MATRIX_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_MULTIPLIER_DATA_A_IN <= ONE_DATA;
-            MATRIX_MULTIPLIER_DATA_B_IN <= ONE_DATA;
+            MATRIX_MULTIPLIER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            MATRIX_MULTIPLIER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
             -- LOOP
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
@@ -950,8 +963,8 @@ begin
         MATRIX_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-        MATRIX_MULTIPLIER_DATA_B_IN <= ONE_DATA;
+        MATRIX_MULTIPLIER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+        MATRIX_MULTIPLIER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -964,8 +977,8 @@ begin
             MATRIX_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-            MATRIX_MULTIPLIER_DATA_B_IN <= ONE_DATA;
+            MATRIX_MULTIPLIER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+            MATRIX_MULTIPLIER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -976,8 +989,8 @@ begin
             MATRIX_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-            MATRIX_MULTIPLIER_DATA_B_IN <= ONE_DATA;
+            MATRIX_MULTIPLIER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+            MATRIX_MULTIPLIER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
             -- LOOP
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
@@ -1024,8 +1037,8 @@ begin
         MATRIX_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_DIVIDER_DATA_A_IN <= ONE_DATA;
-        MATRIX_DIVIDER_DATA_B_IN <= ONE_DATA;
+        MATRIX_DIVIDER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+        MATRIX_DIVIDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -1038,8 +1051,8 @@ begin
             MATRIX_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_DIVIDER_DATA_A_IN <= ONE_DATA;
-            MATRIX_DIVIDER_DATA_B_IN <= ONE_DATA;
+            MATRIX_DIVIDER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            MATRIX_DIVIDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -1050,8 +1063,8 @@ begin
             MATRIX_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_DIVIDER_DATA_A_IN <= ONE_DATA;
-            MATRIX_DIVIDER_DATA_B_IN <= ONE_DATA;
+            MATRIX_DIVIDER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            MATRIX_DIVIDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
             -- LOOP
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
@@ -1084,8 +1097,8 @@ begin
         MATRIX_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_DIVIDER_DATA_A_IN <= TWO_DATA;
-        MATRIX_DIVIDER_DATA_B_IN <= ONE_DATA;
+        MATRIX_DIVIDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+        MATRIX_DIVIDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -1098,8 +1111,8 @@ begin
             MATRIX_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
 
             -- DATA
-            MATRIX_DIVIDER_DATA_A_IN <= TWO_DATA;
-            MATRIX_DIVIDER_DATA_B_IN <= ONE_DATA;
+            MATRIX_DIVIDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+            MATRIX_DIVIDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -1110,8 +1123,8 @@ begin
             MATRIX_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_DIVIDER_DATA_A_IN <= TWO_DATA;
-            MATRIX_DIVIDER_DATA_B_IN <= ONE_DATA;
+            MATRIX_DIVIDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+            MATRIX_DIVIDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
 
             -- LOOP
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));

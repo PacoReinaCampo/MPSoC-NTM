@@ -174,6 +174,7 @@ begin
     if (RST = '0') then
       -- Data Outputs
       DATA_OUT <= ZERO_DATA;
+      REST_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';

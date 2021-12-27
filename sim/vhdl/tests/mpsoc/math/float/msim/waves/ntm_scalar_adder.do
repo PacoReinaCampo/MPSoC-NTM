@@ -23,7 +23,6 @@ add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/adder
 
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/start_exponent_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/operation_exponent_scalar_adder
-add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/modulo_in_exponent_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/data_a_in_exponent_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/data_b_in_exponent_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/ready_exponent_scalar_adder
@@ -32,7 +31,6 @@ add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/overf
 
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/start_mantissa_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/operation_mantissa_scalar_adder
-add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/modulo_in_mantissa_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/data_a_in_mantissa_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/data_b_in_mantissa_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/ready_mantissa_scalar_adder

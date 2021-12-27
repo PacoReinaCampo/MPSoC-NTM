@@ -26,6 +26,7 @@ add wave -noupdate /ntm_float_testbench/ntm_matrix_multiplier_test/matrix_multip
 add wave -noupdate /ntm_float_testbench/ntm_matrix_multiplier_test/matrix_multiplier/DATA_OUT_J_ENABLE
 add wave -noupdate /ntm_float_testbench/ntm_matrix_multiplier_test/matrix_multiplier/index_j_loop
 add wave -noupdate /ntm_float_testbench/ntm_matrix_multiplier_test/matrix_multiplier/DATA_OUT
+add wave -noupdate /ntm_float_testbench/ntm_matrix_multiplier_test/matrix_multiplier/OVERFLOW_OUT
 
 add wave -noupdate /ntm_float_testbench/ntm_matrix_multiplier_test/matrix_multiplier/multiplier_ctrl_fsm_int
 
@@ -42,6 +43,7 @@ add wave -noupdate /ntm_float_testbench/ntm_matrix_multiplier_test/matrix_multip
 add wave -noupdate /ntm_float_testbench/ntm_matrix_multiplier_test/matrix_multiplier/ready_vector_multiplier
 add wave -noupdate /ntm_float_testbench/ntm_matrix_multiplier_test/matrix_multiplier/data_out_enable_vector_multiplier
 add wave -noupdate /ntm_float_testbench/ntm_matrix_multiplier_test/matrix_multiplier/data_out_vector_multiplier
+add wave -noupdate /ntm_float_testbench/ntm_matrix_multiplier_test/matrix_multiplier/overflow_out_vector_multiplier
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

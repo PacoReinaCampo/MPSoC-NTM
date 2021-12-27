@@ -31,6 +31,7 @@ add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_multiplier_test/ten
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_multiplier_test/tensor_integer_multiplier/DATA_OUT_K_ENABLE
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_multiplier_test/tensor_integer_multiplier/index_k_loop
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_multiplier_test/tensor_integer_multiplier/DATA_OUT
+add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_multiplier_test/tensor_integer_multiplier/OVERFLOW_OUT
 
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_multiplier_test/tensor_integer_multiplier/multiplier_ctrl_fsm_int
 
@@ -53,6 +54,7 @@ add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_multiplier_test/ten
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_multiplier_test/tensor_integer_multiplier/data_out_i_enable_matrix_integer_multiplier
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_multiplier_test/tensor_integer_multiplier/data_out_j_enable_matrix_integer_multiplier
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_multiplier_test/tensor_integer_multiplier/data_out_matrix_integer_multiplier
+add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_multiplier_test/tensor_integer_multiplier/overflow_out_matrix_integer_multiplier
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

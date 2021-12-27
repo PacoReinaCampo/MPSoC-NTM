@@ -119,10 +119,11 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_scalar_adder : std_logic;
 
   -- SCALAR MULTIPLIER
   -- CONTROL
@@ -130,10 +131,11 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal ready_scalar_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR DIVIDER
   -- CONTROL
@@ -141,10 +143,11 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal ready_scalar_divider : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rest_out_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- VECTOR
@@ -163,11 +166,12 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_vector_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_vector_adder : std_logic;
 
   -- VECTOR MULTIPLIER
   -- CONTROL
@@ -180,11 +184,12 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_vector_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR DIVIDER
   -- CONTROL
@@ -197,11 +202,12 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal data_out_enable_vector_divider : std_logic;
 
   -- DATA
-  signal modulo_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_divider   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rest_out_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- MATRIX
@@ -223,12 +229,13 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal data_out_j_enable_matrix_adder : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_matrix_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_matrix_adder : std_logic;
 
   -- MATRIX MULTIPLIER
   -- CONTROL
@@ -244,12 +251,13 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal data_out_j_enable_matrix_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_matrix_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX DIVIDER
   -- CONTROL
@@ -265,12 +273,13 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal data_out_j_enable_matrix_divider : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_matrix_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rest_out_matrix_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -476,10 +485,11 @@ begin
         OPERATION => operation_scalar_adder,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_adder,
         DATA_A_IN => data_a_in_scalar_adder,
         DATA_B_IN => data_b_in_scalar_adder,
-        DATA_OUT  => data_out_scalar_adder
+
+        DATA_OUT     => data_out_scalar_adder,
+        OVERFLOW_OUT => overflow_out_scalar_adder
         );
   end generate ntm_scalar_adder_test;
 
@@ -500,10 +510,11 @@ begin
         READY => ready_scalar_adder,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_multiplier,
         DATA_A_IN => data_a_in_scalar_multiplier,
         DATA_B_IN => data_b_in_scalar_multiplier,
-        DATA_OUT  => data_out_scalar_multiplier
+
+        DATA_OUT     => data_out_scalar_multiplier,
+        OVERFLOW_OUT => overflow_out_scalar_multiplier
         );
   end generate ntm_scalar_multiplier_test;
 
@@ -524,10 +535,11 @@ begin
         READY => ready_scalar_divider,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_divider,
         DATA_A_IN => data_a_in_scalar_divider,
         DATA_B_IN => data_b_in_scalar_divider,
-        DATA_OUT  => data_out_scalar_divider
+
+        DATA_OUT => data_out_scalar_divider,
+        REST_OUT => rest_out_scalar_divider
         );
   end generate ntm_scalar_divider_test;
 
@@ -559,11 +571,12 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_adder,
         SIZE_IN   => size_in_vector_adder,
         DATA_A_IN => data_a_in_vector_adder,
         DATA_B_IN => data_b_in_vector_adder,
-        DATA_OUT  => data_out_vector_adder
+
+        DATA_OUT     => data_out_vector_adder,
+        OVERFLOW_OUT => overflow_out_vector_adder
         );
   end generate ntm_vector_adder_test;
 
@@ -589,11 +602,12 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_multiplier,
         SIZE_IN   => size_in_vector_multiplier,
         DATA_A_IN => data_a_in_vector_multiplier,
         DATA_B_IN => data_b_in_vector_multiplier,
-        DATA_OUT  => data_out_vector_multiplier
+
+        DATA_OUT     => data_out_vector_multiplier,
+        OVERFLOW_OUT => overflow_out_vector_multiplier
         );
   end generate ntm_vector_multiplier_test;
 
@@ -619,11 +633,12 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_divider,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_divider,
         SIZE_IN   => size_in_vector_divider,
         DATA_A_IN => data_a_in_vector_divider,
         DATA_B_IN => data_b_in_vector_divider,
-        DATA_OUT  => data_out_vector_divider
+
+        DATA_OUT => data_out_vector_divider,
+        REST_OUT => rest_out_vector_divider
         );
   end generate ntm_vector_divider_test;
 
@@ -658,12 +673,13 @@ begin
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_adder,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_adder,
         SIZE_I_IN => size_i_in_matrix_adder,
         SIZE_J_IN => size_j_in_matrix_adder,
         DATA_A_IN => data_a_in_matrix_adder,
         DATA_B_IN => data_b_in_matrix_adder,
-        DATA_OUT  => data_out_matrix_adder
+
+        DATA_OUT     => data_out_matrix_adder,
+        OVERFLOW_OUT => overflow_out_matrix_adder
         );
   end generate ntm_matrix_adder_test;
 
@@ -692,12 +708,13 @@ begin
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_multiplier,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_multiplier,
         SIZE_I_IN => size_i_in_matrix_multiplier,
         SIZE_J_IN => size_j_in_matrix_multiplier,
         DATA_A_IN => data_a_in_matrix_multiplier,
         DATA_B_IN => data_b_in_matrix_multiplier,
-        DATA_OUT  => data_out_matrix_multiplier
+
+        DATA_OUT     => data_out_matrix_multiplier,
+        OVERFLOW_OUT => overflow_out_matrix_multiplier
         );
   end generate ntm_matrix_multiplier_test;
 
@@ -726,12 +743,13 @@ begin
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_divider,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_divider,
         SIZE_I_IN => size_i_in_matrix_divider,
         SIZE_J_IN => size_j_in_matrix_divider,
         DATA_A_IN => data_a_in_matrix_divider,
         DATA_B_IN => data_b_in_matrix_divider,
-        DATA_OUT  => data_out_matrix_divider
+
+        DATA_OUT => data_out_matrix_divider,
+        REST_OUT => rest_out_matrix_divider
         );
   end generate ntm_matrix_divider_test;
 

@@ -61,10 +61,11 @@ entity ntm_scalar_adder is
     OPERATION : in std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+
+    DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    OVERFLOW_OUT : out std_logic
     );
 end entity;
 
@@ -137,10 +138,11 @@ architecture ntm_scalar_adder_architecture of ntm_scalar_adder is
   signal operation_exponent_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_in_exponent_scalar_adder : std_logic_vector(EXPONENT_SIZE-1 downto 0);
   signal data_a_in_exponent_scalar_adder : std_logic_vector(EXPONENT_SIZE-1 downto 0);
   signal data_b_in_exponent_scalar_adder : std_logic_vector(EXPONENT_SIZE-1 downto 0);
-  signal data_out_exponent_scalar_adder  : std_logic_vector(EXPONENT_SIZE-1 downto 0);
+
+  signal data_out_exponent_scalar_adder     : std_logic_vector(EXPONENT_SIZE-1 downto 0);
+  signal overflow_out_exponent_scalar_adder : std_logic;
 
   -- MANTISSA SCALAR ADDER
   -- CONTROL
@@ -150,10 +152,11 @@ architecture ntm_scalar_adder_architecture of ntm_scalar_adder is
   signal operation_mantissa_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_in_mantissa_scalar_adder : std_logic_vector(MANTISSA_SIZE-1 downto 0);
   signal data_a_in_mantissa_scalar_adder : std_logic_vector(MANTISSA_SIZE-1 downto 0);
   signal data_b_in_mantissa_scalar_adder : std_logic_vector(MANTISSA_SIZE-1 downto 0);
-  signal data_out_mantissa_scalar_adder  : std_logic_vector(MANTISSA_SIZE-1 downto 0);
+
+  signal data_out_mantissa_scalar_adder     : std_logic_vector(MANTISSA_SIZE-1 downto 0);
+  signal overflow_out_mantissa_scalar_adder : std_logic;
 
   -- OUTPUT
   signal sign_int_scalar_adder : std_logic;
@@ -174,8 +177,9 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO_DATA;
-
+      DATA_OUT     <= ZERO_DATA;
+      OVERFLOW_OUT <= '0';
+      
       -- Control Outputs
       READY <= '0';
 
@@ -187,11 +191,9 @@ begin
       operation_mantissa_scalar_adder <= '0';
 
       -- Data Internal
-      modulo_in_exponent_scalar_adder <= ZERO_EXPONENT;
       data_a_in_exponent_scalar_adder <= ZERO_EXPONENT;
       data_b_in_exponent_scalar_adder <= ZERO_EXPONENT;
 
-      modulo_in_mantissa_scalar_adder <= ZERO_MANTISSA;
       data_a_in_mantissa_scalar_adder <= ZERO_MANTISSA;
       data_b_in_mantissa_scalar_adder <= ZERO_MANTISSA;
 
@@ -218,11 +220,9 @@ begin
             -- Data Internal
             sign_int_scalar_adder <= DATA_A_IN(DATA_SIZE-1) xor DATA_B_IN(DATA_SIZE-1);
 
-            modulo_in_exponent_scalar_adder <= FULL_EXPONENT;
             data_a_in_exponent_scalar_adder <= DATA_A_IN(DATA_SIZE-2 downto MANTISSA_SIZE);
             data_b_in_exponent_scalar_adder <= DATA_B_IN(DATA_SIZE-2 downto MANTISSA_SIZE);
 
-            modulo_in_mantissa_scalar_adder <= FULL_MANTISSA;
             data_a_in_mantissa_scalar_adder <= DATA_A_IN(MANTISSA_SIZE-1 downto 0);
             data_b_in_mantissa_scalar_adder <= DATA_B_IN(MANTISSA_SIZE-1 downto 0);
 
@@ -291,10 +291,11 @@ begin
       OPERATION => operation_exponent_scalar_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_exponent_scalar_adder,
       DATA_A_IN => data_a_in_exponent_scalar_adder,
       DATA_B_IN => data_b_in_exponent_scalar_adder,
-      DATA_OUT  => data_out_exponent_scalar_adder
+
+      DATA_OUT     => data_out_exponent_scalar_adder,
+      OVERFLOW_OUT => overflow_out_exponent_scalar_adder
       );
 
   -- MANTISSA SCALAR ADDER
@@ -315,10 +316,11 @@ begin
       OPERATION => operation_mantissa_scalar_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_mantissa_scalar_adder,
       DATA_A_IN => data_a_in_mantissa_scalar_adder,
       DATA_B_IN => data_b_in_mantissa_scalar_adder,
-      DATA_OUT  => data_out_mantissa_scalar_adder
+
+      DATA_OUT     => data_out_mantissa_scalar_adder,
+      OVERFLOW_OUT => overflow_out_mantissa_scalar_adder
       );
 
 end architecture;

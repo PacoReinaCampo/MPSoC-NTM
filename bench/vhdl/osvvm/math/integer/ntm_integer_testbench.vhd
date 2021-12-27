@@ -134,10 +134,11 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
   signal operation_scalar_integer_adder : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_integer_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_integer_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_scalar_integer_adder : std_logic;
 
   -- SCALAR MULTIPLIER
   -- CONTROL
@@ -145,10 +146,11 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
   signal ready_scalar_integer_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_integer_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_integer_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_scalar_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR DIVIDER
   -- CONTROL
@@ -156,10 +158,11 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
   signal ready_scalar_integer_divider : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_integer_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rest_out_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- VECTOR
@@ -178,11 +181,12 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
   signal data_out_enable_vector_integer_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_integer_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_integer_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_vector_integer_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_vector_integer_adder : std_logic;
 
   -- VECTOR MULTIPLIER
   -- CONTROL
@@ -195,11 +199,12 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
   signal data_out_enable_vector_integer_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_integer_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_integer_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_vector_integer_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_vector_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR DIVIDER
   -- CONTROL
@@ -212,11 +217,12 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
   signal data_out_enable_vector_integer_divider : std_logic;
 
   -- DATA
-  signal modulo_in_vector_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_integer_divider   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_integer_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_vector_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rest_out_vector_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- MATRIX
@@ -238,12 +244,13 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
   signal data_out_j_enable_matrix_integer_adder : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_integer_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_integer_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_integer_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_matrix_integer_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_matrix_integer_adder : std_logic;
 
   -- MATRIX MULTIPLIER
   -- CONTROL
@@ -259,12 +266,13 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
   signal data_out_j_enable_matrix_integer_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_integer_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_integer_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_integer_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_matrix_integer_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_matrix_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX DIVIDER
   -- CONTROL
@@ -280,12 +288,13 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
   signal data_out_j_enable_matrix_integer_divider : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_integer_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_integer_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_integer_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_matrix_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rest_out_matrix_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- TENSOR
@@ -310,13 +319,14 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
   signal data_out_k_enable_tensor_integer_adder : std_logic;
 
   -- DATA
-  signal modulo_in_tensor_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_tensor_integer_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_tensor_integer_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_k_in_tensor_integer_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_tensor_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_tensor_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_tensor_integer_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_tensor_integer_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_tensor_integer_adder : std_logic;
 
   -- TENSOR MULTIPLIER
   -- CONTROL
@@ -335,13 +345,14 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
   signal data_out_k_enable_tensor_integer_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_tensor_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_tensor_integer_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_tensor_integer_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_k_in_tensor_integer_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_tensor_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_tensor_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_tensor_integer_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_tensor_integer_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_tensor_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- TENSOR DIVIDER
   -- CONTROL
@@ -360,13 +371,14 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
   signal data_out_k_enable_tensor_integer_divider : std_logic;
 
   -- DATA
-  signal modulo_in_tensor_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_tensor_integer_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_tensor_integer_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_k_in_tensor_integer_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_tensor_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_tensor_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_tensor_integer_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_tensor_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rest_out_tensor_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -406,7 +418,9 @@ begin
       -- DATA
       SCALAR_INTEGER_ADDER_DATA_A_IN => data_a_in_scalar_integer_adder,
       SCALAR_INTEGER_ADDER_DATA_B_IN => data_b_in_scalar_integer_adder,
-      SCALAR_INTEGER_ADDER_DATA_OUT  => data_out_scalar_integer_adder,
+
+      SCALAR_INTEGER_ADDER_DATA_OUT     => data_out_scalar_integer_adder,
+      SCALAR_INTEGER_ADDER_OVERFLOW_OUT => overflow_out_scalar_integer_adder,
 
       -- SCALAR MULTIPLIER
       -- CONTROL
@@ -416,7 +430,9 @@ begin
       -- DATA
       SCALAR_INTEGER_MULTIPLIER_DATA_A_IN => data_a_in_scalar_integer_multiplier,
       SCALAR_INTEGER_MULTIPLIER_DATA_B_IN => data_b_in_scalar_integer_multiplier,
-      SCALAR_INTEGER_MULTIPLIER_DATA_OUT  => data_out_scalar_integer_multiplier,
+
+      SCALAR_INTEGER_MULTIPLIER_DATA_OUT     => data_out_scalar_integer_multiplier,
+      SCALAR_INTEGER_MULTIPLIER_OVERFLOW_OUT => overflow_out_scalar_integer_multiplier,
 
       -- SCALAR DIVIDER
       -- CONTROL
@@ -426,7 +442,9 @@ begin
       -- DATA
       SCALAR_INTEGER_DIVIDER_DATA_A_IN => data_a_in_scalar_integer_divider,
       SCALAR_INTEGER_DIVIDER_DATA_B_IN => data_b_in_scalar_integer_divider,
+
       SCALAR_INTEGER_DIVIDER_DATA_OUT  => data_out_scalar_integer_divider,
+      SCALAR_INTEGER_DIVIDER_REST_OUT  => rest_out_scalar_integer_divider,
 
       -----------------------------------------------------------------------
       -- STIMULUS VECTOR
@@ -448,7 +466,9 @@ begin
       VECTOR_INTEGER_ADDER_SIZE_IN   => size_in_vector_integer_adder,
       VECTOR_INTEGER_ADDER_DATA_A_IN => data_a_in_vector_integer_adder,
       VECTOR_INTEGER_ADDER_DATA_B_IN => data_b_in_vector_integer_adder,
-      VECTOR_INTEGER_ADDER_DATA_OUT  => data_out_vector_integer_adder,
+
+      VECTOR_INTEGER_ADDER_DATA_OUT     => data_out_vector_integer_adder,
+      VECTOR_INTEGER_ADDER_OVERFLOW_OUT => overflow_out_vector_integer_adder,
 
       -- VECTOR MULTIPLIER
       -- CONTROL
@@ -464,7 +484,9 @@ begin
       VECTOR_INTEGER_MULTIPLIER_SIZE_IN   => size_in_vector_integer_multiplier,
       VECTOR_INTEGER_MULTIPLIER_DATA_A_IN => data_a_in_vector_integer_multiplier,
       VECTOR_INTEGER_MULTIPLIER_DATA_B_IN => data_b_in_vector_integer_multiplier,
-      VECTOR_INTEGER_MULTIPLIER_DATA_OUT  => data_out_vector_integer_multiplier,
+
+      VECTOR_INTEGER_MULTIPLIER_DATA_OUT     => data_out_vector_integer_multiplier,
+      VECTOR_INTEGER_MULTIPLIER_OVERFLOW_OUT => overflow_out_vector_integer_multiplier,
 
       -- VECTOR DIVIDER
       -- CONTROL
@@ -480,7 +502,9 @@ begin
       VECTOR_INTEGER_DIVIDER_SIZE_IN   => size_in_vector_integer_divider,
       VECTOR_INTEGER_DIVIDER_DATA_A_IN => data_a_in_vector_integer_divider,
       VECTOR_INTEGER_DIVIDER_DATA_B_IN => data_b_in_vector_integer_divider,
+
       VECTOR_INTEGER_DIVIDER_DATA_OUT  => data_out_vector_integer_divider,
+      VECTOR_INTEGER_DIVIDER_REST_OUT  => rest_out_vector_integer_divider,
 
       -----------------------------------------------------------------------
       -- STIMULUS MATRIX
@@ -506,7 +530,9 @@ begin
       MATRIX_INTEGER_ADDER_SIZE_J_IN => size_j_in_matrix_integer_adder,
       MATRIX_INTEGER_ADDER_DATA_A_IN => data_a_in_matrix_integer_adder,
       MATRIX_INTEGER_ADDER_DATA_B_IN => data_b_in_matrix_integer_adder,
-      MATRIX_INTEGER_ADDER_DATA_OUT  => data_out_matrix_integer_adder,
+
+      MATRIX_INTEGER_ADDER_DATA_OUT     => data_out_matrix_integer_adder,
+      MATRIX_INTEGER_ADDER_OVERFLOW_OUT => overflow_out_matrix_integer_adder,
 
       -- MATRIX MULTIPLIER
       -- CONTROL
@@ -526,7 +552,9 @@ begin
       MATRIX_INTEGER_MULTIPLIER_SIZE_J_IN => size_j_in_matrix_integer_multiplier,
       MATRIX_INTEGER_MULTIPLIER_DATA_A_IN => data_a_in_matrix_integer_multiplier,
       MATRIX_INTEGER_MULTIPLIER_DATA_B_IN => data_b_in_matrix_integer_multiplier,
-      MATRIX_INTEGER_MULTIPLIER_DATA_OUT  => data_out_matrix_integer_multiplier,
+
+      MATRIX_INTEGER_MULTIPLIER_DATA_OUT     => data_out_matrix_integer_multiplier,
+      MATRIX_INTEGER_MULTIPLIER_OVERFLOW_OUT => overflow_out_matrix_integer_multiplier,
 
       -- MATRIX DIVIDER
       -- CONTROL
@@ -546,7 +574,9 @@ begin
       MATRIX_INTEGER_DIVIDER_SIZE_J_IN => size_j_in_matrix_integer_divider,
       MATRIX_INTEGER_DIVIDER_DATA_A_IN => data_a_in_matrix_integer_divider,
       MATRIX_INTEGER_DIVIDER_DATA_B_IN => data_b_in_matrix_integer_divider,
+
       MATRIX_INTEGER_DIVIDER_DATA_OUT  => data_out_matrix_integer_divider,
+      MATRIX_INTEGER_DIVIDER_REST_OUT  => rest_out_matrix_integer_divider,
 
       -----------------------------------------------------------------------
       -- STIMULUS TENSOR
@@ -576,7 +606,9 @@ begin
       TENSOR_INTEGER_ADDER_SIZE_K_IN => size_k_in_tensor_integer_adder,
       TENSOR_INTEGER_ADDER_DATA_A_IN => data_a_in_tensor_integer_adder,
       TENSOR_INTEGER_ADDER_DATA_B_IN => data_b_in_tensor_integer_adder,
-      TENSOR_INTEGER_ADDER_DATA_OUT  => data_out_tensor_integer_adder,
+
+      TENSOR_INTEGER_ADDER_DATA_OUT     => data_out_tensor_integer_adder,
+      TENSOR_INTEGER_ADDER_OVERFLOW_OUT => overflow_out_tensor_integer_adder,
 
       -- TENSOR MULTIPLIER
       -- CONTROL
@@ -600,7 +632,9 @@ begin
       TENSOR_INTEGER_MULTIPLIER_SIZE_K_IN => size_k_in_tensor_integer_multiplier,
       TENSOR_INTEGER_MULTIPLIER_DATA_A_IN => data_a_in_tensor_integer_multiplier,
       TENSOR_INTEGER_MULTIPLIER_DATA_B_IN => data_b_in_tensor_integer_multiplier,
-      TENSOR_INTEGER_MULTIPLIER_DATA_OUT  => data_out_tensor_integer_multiplier,
+
+      TENSOR_INTEGER_MULTIPLIER_DATA_OUT     => data_out_tensor_integer_multiplier,
+      TENSOR_INTEGER_MULTIPLIER_OVERFLOW_OUT => overflow_out_tensor_integer_multiplier,
 
       -- TENSOR DIVIDER
       -- CONTROL
@@ -624,7 +658,9 @@ begin
       TENSOR_INTEGER_DIVIDER_SIZE_K_IN => size_k_in_tensor_integer_divider,
       TENSOR_INTEGER_DIVIDER_DATA_A_IN => data_a_in_tensor_integer_divider,
       TENSOR_INTEGER_DIVIDER_DATA_B_IN => data_b_in_tensor_integer_divider,
-      TENSOR_INTEGER_DIVIDER_DATA_OUT  => data_out_tensor_integer_divider
+
+      TENSOR_INTEGER_DIVIDER_DATA_OUT => data_out_tensor_integer_divider,
+      TENSOR_INTEGER_DIVIDER_REST_OUT => rest_out_tensor_integer_divider
       );
 
   -----------------------------------------------------------------------
@@ -650,10 +686,11 @@ begin
         OPERATION => operation_scalar_integer_adder,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_integer_adder,
         DATA_A_IN => data_a_in_scalar_integer_adder,
         DATA_B_IN => data_b_in_scalar_integer_adder,
-        DATA_OUT  => data_out_scalar_integer_adder
+
+        DATA_OUT     => data_out_scalar_integer_adder,
+        OVERFLOW_OUT => overflow_out_scalar_integer_adder
         );
   end generate ntm_scalar_integer_adder_test;
 
@@ -674,10 +711,11 @@ begin
         READY => ready_scalar_integer_adder,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_integer_multiplier,
         DATA_A_IN => data_a_in_scalar_integer_multiplier,
         DATA_B_IN => data_b_in_scalar_integer_multiplier,
-        DATA_OUT  => data_out_scalar_integer_multiplier
+
+        DATA_OUT     => data_out_scalar_integer_multiplier,
+        OVERFLOW_OUT => overflow_out_scalar_integer_multiplier
         );
   end generate ntm_scalar_integer_multiplier_test;
 
@@ -698,10 +736,11 @@ begin
         READY => ready_scalar_integer_divider,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_integer_divider,
         DATA_A_IN => data_a_in_scalar_integer_divider,
         DATA_B_IN => data_b_in_scalar_integer_divider,
-        DATA_OUT  => data_out_scalar_integer_divider
+
+        DATA_OUT => data_out_scalar_integer_divider,
+        REST_OUT => rest_out_scalar_integer_divider
         );
   end generate ntm_scalar_integer_divider_test;
 
@@ -733,11 +772,12 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_integer_adder,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_integer_adder,
         SIZE_IN   => size_in_vector_integer_adder,
         DATA_A_IN => data_a_in_vector_integer_adder,
         DATA_B_IN => data_b_in_vector_integer_adder,
-        DATA_OUT  => data_out_vector_integer_adder
+
+        DATA_OUT     => data_out_vector_integer_adder,
+        OVERFLOW_OUT => overflow_out_vector_integer_adder
         );
   end generate ntm_vector_integer_adder_test;
 
@@ -763,11 +803,12 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_integer_multiplier,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_integer_multiplier,
         SIZE_IN   => size_in_vector_integer_multiplier,
         DATA_A_IN => data_a_in_vector_integer_multiplier,
         DATA_B_IN => data_b_in_vector_integer_multiplier,
-        DATA_OUT  => data_out_vector_integer_multiplier
+
+        DATA_OUT     => data_out_vector_integer_multiplier,
+        OVERFLOW_OUT => overflow_out_vector_integer_multiplier
         );
   end generate ntm_vector_integer_multiplier_test;
 
@@ -793,11 +834,12 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_integer_divider,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_integer_divider,
         SIZE_IN   => size_in_vector_integer_divider,
         DATA_A_IN => data_a_in_vector_integer_divider,
         DATA_B_IN => data_b_in_vector_integer_divider,
-        DATA_OUT  => data_out_vector_integer_divider
+
+        DATA_OUT  => data_out_vector_integer_divider,
+        REST_OUT  => rest_out_vector_integer_divider
         );
   end generate ntm_vector_integer_divider_test;
 
@@ -832,12 +874,13 @@ begin
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_integer_adder,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_integer_adder,
         SIZE_I_IN => size_i_in_matrix_integer_adder,
         SIZE_J_IN => size_j_in_matrix_integer_adder,
         DATA_A_IN => data_a_in_matrix_integer_adder,
         DATA_B_IN => data_b_in_matrix_integer_adder,
-        DATA_OUT  => data_out_matrix_integer_adder
+
+        DATA_OUT     => data_out_matrix_integer_adder,
+        OVERFLOW_OUT => overflow_out_matrix_integer_adder
         );
   end generate ntm_matrix_integer_adder_test;
 
@@ -866,12 +909,13 @@ begin
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_integer_multiplier,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_integer_multiplier,
         SIZE_I_IN => size_i_in_matrix_integer_multiplier,
         SIZE_J_IN => size_j_in_matrix_integer_multiplier,
         DATA_A_IN => data_a_in_matrix_integer_multiplier,
         DATA_B_IN => data_b_in_matrix_integer_multiplier,
-        DATA_OUT  => data_out_matrix_integer_multiplier
+
+        DATA_OUT     => data_out_matrix_integer_multiplier,
+        OVERFLOW_OUT => overflow_out_matrix_integer_multiplier
         );
   end generate ntm_matrix_integer_multiplier_test;
 
@@ -900,12 +944,13 @@ begin
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_integer_divider,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_integer_divider,
         SIZE_I_IN => size_i_in_matrix_integer_divider,
         SIZE_J_IN => size_j_in_matrix_integer_divider,
         DATA_A_IN => data_a_in_matrix_integer_divider,
         DATA_B_IN => data_b_in_matrix_integer_divider,
-        DATA_OUT  => data_out_matrix_integer_divider
+
+        DATA_OUT => data_out_matrix_integer_divider,
+        REST_OUT => rest_out_matrix_integer_divider
         );
   end generate ntm_matrix_integer_divider_test;
 
@@ -943,13 +988,14 @@ begin
         DATA_OUT_K_ENABLE => data_out_k_enable_tensor_integer_adder,
 
         -- DATA
-        MODULO_IN => modulo_in_tensor_integer_adder,
         SIZE_I_IN => size_i_in_tensor_integer_adder,
         SIZE_J_IN => size_j_in_tensor_integer_adder,
         SIZE_K_IN => size_k_in_tensor_integer_adder,
         DATA_A_IN => data_a_in_tensor_integer_adder,
         DATA_B_IN => data_b_in_tensor_integer_adder,
-        DATA_OUT  => data_out_tensor_integer_adder
+
+        DATA_OUT     => data_out_tensor_integer_adder,
+        OVERFLOW_OUT => overflow_out_tensor_integer_adder
         );
   end generate ntm_tensor_integer_adder_test;
 
@@ -981,13 +1027,14 @@ begin
         DATA_OUT_K_ENABLE => data_out_k_enable_tensor_integer_multiplier,
 
         -- DATA
-        MODULO_IN => modulo_in_tensor_integer_multiplier,
         SIZE_I_IN => size_i_in_tensor_integer_multiplier,
         SIZE_J_IN => size_j_in_tensor_integer_multiplier,
         SIZE_K_IN => size_k_in_tensor_integer_multiplier,
         DATA_A_IN => data_a_in_tensor_integer_multiplier,
         DATA_B_IN => data_b_in_tensor_integer_multiplier,
-        DATA_OUT  => data_out_tensor_integer_multiplier
+
+        DATA_OUT     => data_out_tensor_integer_multiplier,
+        OVERFLOW_OUT => overflow_out_tensor_integer_multiplier
         );
   end generate ntm_tensor_integer_multiplier_test;
 
@@ -1019,13 +1066,14 @@ begin
         DATA_OUT_K_ENABLE => data_out_k_enable_tensor_integer_divider,
 
         -- DATA
-        MODULO_IN => modulo_in_tensor_integer_divider,
         SIZE_I_IN => size_i_in_tensor_integer_divider,
         SIZE_J_IN => size_j_in_tensor_integer_divider,
         SIZE_K_IN => size_k_in_tensor_integer_divider,
         DATA_A_IN => data_a_in_tensor_integer_divider,
         DATA_B_IN => data_b_in_tensor_integer_divider,
-        DATA_OUT  => data_out_tensor_integer_divider
+
+        DATA_OUT => data_out_tensor_integer_divider,
+        REST_OUT => rest_out_tensor_integer_divider
         );
   end generate ntm_tensor_integer_divider_test;
 

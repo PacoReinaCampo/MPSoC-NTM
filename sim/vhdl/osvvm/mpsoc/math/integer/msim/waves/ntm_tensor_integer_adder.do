@@ -32,6 +32,7 @@ add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_i
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/DATA_OUT_K_ENABLE
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/index_k_loop
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/DATA_OUT
+add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/OVERFLOW_OUT
 
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/adder_ctrl_fsm_int
 
@@ -55,6 +56,7 @@ add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_i
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_out_i_enable_matrix_integer_adder
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_out_j_enable_matrix_integer_adder
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_out_matrix_integer_adder
+add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/overflow_out_matrix_integer_adder
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

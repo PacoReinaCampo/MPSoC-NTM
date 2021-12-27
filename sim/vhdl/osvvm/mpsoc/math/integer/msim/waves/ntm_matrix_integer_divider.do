@@ -26,6 +26,7 @@ add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_divider_test/matrix
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_divider_test/matrix_integer_divider/DATA_OUT_J_ENABLE
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_divider_test/matrix_integer_divider/index_j_loop
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_divider_test/matrix_integer_divider/DATA_OUT
+add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_divider_test/matrix_integer_divider/REST_OUT
 
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_divider_test/matrix_integer_divider/divider_ctrl_fsm_int
 
@@ -42,6 +43,7 @@ add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_divider_test/matrix
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_divider_test/matrix_integer_divider/ready_vector_divider
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_divider_test/matrix_integer_divider/data_out_enable_vector_divider
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_divider_test/matrix_integer_divider/data_out_vector_divider
+add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_divider_test/matrix_integer_divider/rest_out_vector_divider
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

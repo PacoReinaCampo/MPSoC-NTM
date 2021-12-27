@@ -22,6 +22,7 @@ add wave -noupdate /ntm_float_testbench/ntm_vector_adder_test/vector_adder/READY
 add wave -noupdate /ntm_float_testbench/ntm_vector_adder_test/vector_adder/DATA_OUT_ENABLE
 add wave -noupdate /ntm_float_testbench/ntm_vector_adder_test/vector_adder/index_loop
 add wave -noupdate /ntm_float_testbench/ntm_vector_adder_test/vector_adder/DATA_OUT
+add wave -noupdate /ntm_float_testbench/ntm_vector_adder_test/vector_adder/OVERFLOW_OUT
 
 add wave -noupdate /ntm_float_testbench/ntm_vector_adder_test/vector_adder/adder_ctrl_fsm_int
 
@@ -33,6 +34,7 @@ add wave -noupdate /ntm_float_testbench/ntm_vector_adder_test/vector_adder/data_
 add wave -noupdate /ntm_float_testbench/ntm_vector_adder_test/vector_adder/data_b_in_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_vector_adder_test/vector_adder/ready_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_vector_adder_test/vector_adder/data_out_scalar_adder
+add wave -noupdate /ntm_float_testbench/ntm_vector_adder_test/vector_adder/overflow_out_scalar_adder
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

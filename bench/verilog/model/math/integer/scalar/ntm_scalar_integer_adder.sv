@@ -53,10 +53,10 @@ module ntm_scalar_integer_adder #(
     input OPERATION,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] DATA_A_IN,
     input [DATA_SIZE-1:0] DATA_B_IN,
-    output reg [DATA_SIZE-1:0] DATA_OUT
+    output reg [DATA_SIZE-1:0] DATA_OUT,
+    output reg OVERFLOW_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -99,7 +99,7 @@ module ntm_scalar_integer_adder #(
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = DATA_A_IN ± DATA_B_IN mod MODULO_IN
+  // DATA_OUT = DATA_A_IN ± DATA_B_IN
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
@@ -137,9 +137,9 @@ module ntm_scalar_integer_adder #(
           end
         end
         ENDER_STATE : begin  // STEP 1
-          if(MODULO_IN > ZERO_DATA) begin
+          if(OVERFLOW_OUT > ZERO_DATA) begin
             if(DATA_A_IN > DATA_B_IN) begin
-              if(adder_int == {1'b0,MODULO_IN}) begin
+              if(adder_int == {1'b0,OVERFLOW_OUT}) begin
                 // Data Outputs
                 DATA_OUT <= ZERO_DATA;
 
@@ -148,7 +148,7 @@ module ntm_scalar_integer_adder #(
                 // FSM Control
                 adder_ctrl_fsm_int <= STARTER_STATE;
               end
-              else if(adder_int < {1'b0,MODULO_IN}) begin
+              else if(adder_int < {1'b0,OVERFLOW_OUT}) begin
                 // Data Outputs
                 DATA_OUT <= adder_int[DATA_SIZE-1:0];
 
@@ -160,7 +160,7 @@ module ntm_scalar_integer_adder #(
               end
               else begin
                 // Assignations
-                adder_int <= (adder_int - {1'b0,MODULO_IN});
+                adder_int <= (adder_int - {1'b0,OVERFLOW_OUT});
               end
             end
             else if(DATA_A_IN == DATA_B_IN) begin
@@ -175,7 +175,7 @@ module ntm_scalar_integer_adder #(
                 adder_ctrl_fsm_int <= STARTER_STATE;
               end
               else begin
-                if(adder_int == {1'b0,MODULO_IN}) begin
+                if(adder_int == {1'b0,OVERFLOW_OUT}) begin
                   // Data Outputs
                   DATA_OUT <= ZERO_DATA;
 
@@ -185,7 +185,7 @@ module ntm_scalar_integer_adder #(
                   // FSM Control
                   adder_ctrl_fsm_int <= STARTER_STATE;
                 end
-                else if(adder_int < {1'b0,MODULO_IN}) begin
+                else if(adder_int < {1'b0,OVERFLOW_OUT}) begin
                   // Data Outputs
                   DATA_OUT <= adder_int[DATA_SIZE-1:0];
 
@@ -197,13 +197,13 @@ module ntm_scalar_integer_adder #(
                 end
                 else begin
                   // Assignations
-                  adder_int <= (adder_int - {1'b0,MODULO_IN});
+                  adder_int <= (adder_int - {1'b0,OVERFLOW_OUT});
                 end
               end
             end
             else if(DATA_A_IN < DATA_B_IN) begin
               if(OPERATION == 1'b1) begin
-                if(adder_int == {1'b0,MODULO_IN}) begin
+                if(adder_int == {1'b0,OVERFLOW_OUT}) begin
                   // Data Outputs
                   DATA_OUT <= ZERO_DATA;
 
@@ -213,9 +213,9 @@ module ntm_scalar_integer_adder #(
                   // FSM Control
                   adder_ctrl_fsm_int <= STARTER_STATE;
                 end
-                else if(adder_int < {1'b0,MODULO_IN}) begin
+                else if(adder_int < {1'b0,OVERFLOW_OUT}) begin
                   // Data Outputs
-                  DATA_OUT <= (MODULO_IN - adder_int[DATA_SIZE-1:0]);
+                  DATA_OUT <= (OVERFLOW_OUT - adder_int[DATA_SIZE-1:0]);
 
                   // Control Outputs
                   READY <= 1'b1;
@@ -225,11 +225,11 @@ module ntm_scalar_integer_adder #(
                 end
                 else begin
                   // Assignations
-                  adder_int <= (adder_int - {1'b0,MODULO_IN});
+                  adder_int <= (adder_int - {1'b0,OVERFLOW_OUT});
                 end
               end
               else begin
-                if(adder_int == {1'b0,MODULO_IN}) begin
+                if(adder_int == {1'b0,OVERFLOW_OUT}) begin
                   // Data Outputs
                   DATA_OUT <= ZERO_DATA;
 
@@ -239,7 +239,7 @@ module ntm_scalar_integer_adder #(
                   // FSM Control
                   adder_ctrl_fsm_int <= STARTER_STATE;
                 end
-                else if(adder_int < {1'b0,MODULO_IN}) begin
+                else if(adder_int < {1'b0,OVERFLOW_OUT}) begin
                   // Data Outputs
                   DATA_OUT <= adder_int[DATA_SIZE-1:0];
 
@@ -251,12 +251,12 @@ module ntm_scalar_integer_adder #(
                 end
                 else begin
                   // Assignations
-                  adder_int <= (adder_int - {1'b0,MODULO_IN});
+                  adder_int <= (adder_int - {1'b0,OVERFLOW_OUT});
                 end
               end
             end
           end
-          else if(MODULO_IN == ZERO_DATA) begin
+          else if(OVERFLOW_OUT == ZERO_DATA) begin
             // Data Outputs
             DATA_OUT <= adder_int[DATA_SIZE-1:0];
 

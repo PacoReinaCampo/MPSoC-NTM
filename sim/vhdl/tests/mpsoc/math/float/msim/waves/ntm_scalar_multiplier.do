@@ -22,7 +22,6 @@ add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multip
 
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/start_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/operation_scalar_adder
-add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/modulo_in_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/data_a_in_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/data_b_in_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/ready_scalar_adder
@@ -30,7 +29,6 @@ add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multip
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/overflow_out_scalar_adder
 
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/start_scalar_multiplier
-add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/modulo_in_scalar_multiplier
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/data_a_in_scalar_multiplier
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/data_b_in_scalar_multiplier
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/ready_scalar_multiplier

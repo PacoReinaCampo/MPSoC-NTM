@@ -16,6 +16,7 @@ add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_multiplier_test/sca
 add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_multiplier_test/scalar_integer_multiplier/DATA_B_IN
 add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_multiplier_test/scalar_integer_multiplier/READY
 add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_multiplier_test/scalar_integer_multiplier/DATA_OUT
+add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_multiplier_test/scalar_integer_multiplier/OVERFLOW_OUT
 
 add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_multiplier_test/scalar_integer_multiplier/multiplier_ctrl_fsm_int
 add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_multiplier_test/scalar_integer_multiplier/multiplier_int

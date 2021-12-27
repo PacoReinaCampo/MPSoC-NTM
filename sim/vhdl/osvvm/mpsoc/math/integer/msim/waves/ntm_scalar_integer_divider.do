@@ -16,6 +16,7 @@ add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar
 add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/DATA_B_IN
 add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/READY
 add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/DATA_OUT
+add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/REST_OUT
 
 add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/divider_ctrl_fsm_int
 add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_divider_test/scalar_integer_divider/divider_int

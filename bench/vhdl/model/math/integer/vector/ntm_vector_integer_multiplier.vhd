@@ -64,11 +64,12 @@ entity ntm_vector_integer_multiplier is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    OVERFLOW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -122,10 +123,11 @@ architecture ntm_vector_integer_multiplier_architecture of ntm_vector_integer_mu
   signal ready_scalar_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -140,7 +142,8 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO_DATA;
+      DATA_OUT     <= ZERO_DATA;
+      OVERFLOW_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -156,7 +159,6 @@ begin
       data_b_in_multiplier_int <= '0';
 
       -- Data Internal
-      modulo_in_scalar_multiplier <= ZERO_DATA;
       data_a_in_scalar_multiplier <= ZERO_DATA;
       data_b_in_scalar_multiplier <= ZERO_DATA;
 
@@ -201,9 +203,6 @@ begin
             data_a_in_multiplier_int <= '0';
             data_b_in_multiplier_int <= '0';
 
-            -- Data Inputs
-            modulo_in_scalar_multiplier <= MODULO_IN;
-
             -- FSM Control
             multiplier_ctrl_fsm_int <= ENDER_STATE;
           end if;
@@ -232,7 +231,8 @@ begin
             end if;
 
             -- Data Outputs
-            DATA_OUT <= data_out_scalar_multiplier;
+            DATA_OUT     <= data_out_scalar_multiplier;
+            OVERFLOW_OUT <= overflow_out_scalar_multiplier;
 
             -- Control Outputs
             DATA_OUT_ENABLE <= '1';
@@ -267,10 +267,11 @@ begin
       READY => ready_scalar_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_multiplier,
       DATA_A_IN => data_a_in_scalar_multiplier,
       DATA_B_IN => data_b_in_scalar_multiplier,
-      DATA_OUT  => data_out_scalar_multiplier
+
+      DATA_OUT  => data_out_scalar_multiplier,
+      OVERFLOW_OUT => overflow_out_scalar_multiplier
       );
 
 end architecture;

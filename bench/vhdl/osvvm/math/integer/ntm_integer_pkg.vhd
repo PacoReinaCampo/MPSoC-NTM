@@ -157,7 +157,9 @@ package ntm_integer_pkg is
       -- DATA
       SCALAR_INTEGER_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_INTEGER_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_INTEGER_ADDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      SCALAR_INTEGER_ADDER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_INTEGER_ADDER_OVERFLOW_OUT : in std_logic;
 
       -- SCALAR MULTIPLIER
       -- CONTROL
@@ -167,7 +169,9 @@ package ntm_integer_pkg is
       -- DATA
       SCALAR_INTEGER_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_INTEGER_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_INTEGER_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      SCALAR_INTEGER_MULTIPLIER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_INTEGER_MULTIPLIER_OVERFLOW_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- SCALAR DIVIDER
       -- CONTROL
@@ -177,7 +181,9 @@ package ntm_integer_pkg is
       -- DATA
       SCALAR_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_INTEGER_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      SCALAR_INTEGER_DIVIDER_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_INTEGER_DIVIDER_REST_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
       -- STIMULUS VECTOR
@@ -199,7 +205,9 @@ package ntm_integer_pkg is
       VECTOR_INTEGER_ADDER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       VECTOR_INTEGER_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_INTEGER_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_INTEGER_ADDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      VECTOR_INTEGER_ADDER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_INTEGER_ADDER_OVERFLOW_OUT : in std_logic;
 
       -- VECTOR MULTIPLIER
       -- CONTROL
@@ -215,7 +223,9 @@ package ntm_integer_pkg is
       VECTOR_INTEGER_MULTIPLIER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       VECTOR_INTEGER_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_INTEGER_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_INTEGER_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      VECTOR_INTEGER_MULTIPLIER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_INTEGER_MULTIPLIER_OVERFLOW_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- VECTOR DIVIDER
       -- CONTROL
@@ -231,7 +241,9 @@ package ntm_integer_pkg is
       VECTOR_INTEGER_DIVIDER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       VECTOR_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_INTEGER_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      VECTOR_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
       -- STIMULUS MATRIX
@@ -257,7 +269,9 @@ package ntm_integer_pkg is
       MATRIX_INTEGER_ADDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_INTEGER_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_INTEGER_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INTEGER_ADDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      MATRIX_INTEGER_ADDER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_INTEGER_ADDER_OVERFLOW_OUT : in std_logic;
 
       -- MATRIX MULTIPLIER
       -- CONTROL
@@ -277,7 +291,9 @@ package ntm_integer_pkg is
       MATRIX_INTEGER_MULTIPLIER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_INTEGER_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_INTEGER_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INTEGER_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      MATRIX_INTEGER_MULTIPLIER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_INTEGER_MULTIPLIER_OVERFLOW_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- MATRIX DIVIDER
       -- CONTROL
@@ -297,7 +313,9 @@ package ntm_integer_pkg is
       MATRIX_INTEGER_DIVIDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INTEGER_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      MATRIX_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
       -- STIMULUS TENSOR
@@ -327,7 +345,9 @@ package ntm_integer_pkg is
       TENSOR_INTEGER_ADDER_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       TENSOR_INTEGER_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_INTEGER_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_INTEGER_ADDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      TENSOR_INTEGER_ADDER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_INTEGER_ADDER_OVERFLOW_OUT : in std_logic;
 
       -- TENSOR MULTIPLIER
       -- CONTROL
@@ -351,7 +371,9 @@ package ntm_integer_pkg is
       TENSOR_INTEGER_MULTIPLIER_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       TENSOR_INTEGER_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_INTEGER_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_INTEGER_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      TENSOR_INTEGER_MULTIPLIER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_INTEGER_MULTIPLIER_OVERFLOW_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- TENSOR DIVIDER
       -- CONTROL
@@ -375,7 +397,9 @@ package ntm_integer_pkg is
       TENSOR_INTEGER_DIVIDER_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       TENSOR_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_INTEGER_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      
+      TENSOR_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

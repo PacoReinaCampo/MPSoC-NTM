@@ -22,7 +22,6 @@ add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/d
 
 add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/start_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/operation_scalar_adder
-add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/modulo_in_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/data_a_in_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/data_b_in_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/ready_scalar_adder
@@ -30,7 +29,6 @@ add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/d
 add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/overflow_out_scalar_adder
 
 add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/start_scalar_divider
-add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/modulo_in_scalar_divider
 add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/data_a_in_scalar_divider
 add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/data_b_in_scalar_divider
 add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/ready_scalar_divider
