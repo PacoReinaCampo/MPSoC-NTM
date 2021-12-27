@@ -152,10 +152,10 @@ architecture ntm_scalar_divider_architecture of ntm_scalar_divider is
   signal data_out_scalar_divider  : std_logic_vector(MANTISSA_SIZE-1 downto 0);
 
   -- OUTPUT
+  signal sign_int_scalar_divider : std_logic;
+
   signal exponent_int_scalar_divider : std_logic_vector(EXPONENT_SIZE-1 downto 0);
   signal mantissa_int_scalar_divider : std_logic_vector(MANTISSA_SIZE-1 downto 0);
-
-  signal sign_int_scalar_divider : std_logic;
 
 begin
 

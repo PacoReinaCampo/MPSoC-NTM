@@ -152,10 +152,10 @@ architecture ntm_scalar_multiplier_architecture of ntm_scalar_multiplier is
   signal data_out_scalar_multiplier  : std_logic_vector(MANTISSA_SIZE-1 downto 0);
 
   -- OUTPUT
+  signal sign_int_scalar_multiplier : std_logic;
+
   signal exponent_int_scalar_multiplier : std_logic_vector(EXPONENT_SIZE-1 downto 0);
   signal mantissa_int_scalar_multiplier : std_logic_vector(MANTISSA_SIZE-1 downto 0);
-
-  signal sign_int_scalar_multiplier : std_logic;
 
 begin
 

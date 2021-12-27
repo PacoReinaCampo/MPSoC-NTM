@@ -62,7 +62,6 @@ module ntm_matrix_integer_multiplier #(
     output reg DATA_OUT_K_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] SIZE_A_I_IN,
     input [DATA_SIZE-1:0] SIZE_A_J_IN,
     input [DATA_SIZE-1:0] SIZE_A_K_IN,
@@ -72,7 +71,8 @@ module ntm_matrix_integer_multiplier #(
     input [DATA_SIZE-1:0] DATA_A_IN,
     input [DATA_SIZE-1:0] DATA_B_IN,
 
-    output reg [DATA_SIZE-1:0] DATA_OUT
+    output reg [DATA_SIZE-1:0] DATA_OUT,
+    output reg [DATA_SIZE-1:0] OVERFLOW_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -128,17 +128,18 @@ module ntm_matrix_integer_multiplier #(
   wire data_out_enable_vector_multiplier;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_multiplier;
   reg [DATA_SIZE-1:0] size_in_vector_multiplier;
   reg [DATA_SIZE-1:0] data_a_in_vector_multiplier;
   reg [DATA_SIZE-1:0] data_b_in_vector_multiplier;
+
+  wire [DATA_SIZE-1:0] overflow_out_vector_multiplier;
   wire [DATA_SIZE-1:0] data_out_vector_multiplier;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = DATA_A_IN · DATA_B_IN mod MODULO_IN
+  // DATA_OUT = DATA_A_IN · DATA_B_IN
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
@@ -203,8 +204,6 @@ module ntm_matrix_integer_multiplier #(
               // Control Internal
               start_vector_multiplier <= 1'b1;
             end
-            // Data Inputs
-            modulo_in_vector_multiplier <= MODULO_IN;
 
             // FSM Control
             multiplier_ctrl_fsm_int <= ENDER_STATE;
@@ -244,7 +243,6 @@ module ntm_matrix_integer_multiplier #(
               start_vector_multiplier <= 1'b1;
             end
             // Data Inputs
-            modulo_in_vector_multiplier <= MODULO_IN;
             size_in_vector_multiplier <= SIZE_J_IN;
 
             // FSM Control
@@ -325,11 +323,12 @@ module ntm_matrix_integer_multiplier #(
     .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_multiplier),
     .SIZE_IN(size_in_vector_multiplier),
     .DATA_A_IN(data_a_in_vector_multiplier),
     .DATA_B_IN(data_b_in_vector_multiplier),
-    .DATA_OUT(data_out_vector_multiplier)
+
+    .DATA_OUT(data_out_vector_multiplier),
+    .OVERFLOW_OUT(overflow_out_vector_multiplier)
   );
 
 endmodule

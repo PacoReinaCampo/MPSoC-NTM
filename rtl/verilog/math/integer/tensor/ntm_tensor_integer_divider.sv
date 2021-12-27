@@ -62,7 +62,6 @@ module ntm_matrix_integer_divider #(
     output reg DATA_OUT_K_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] SIZE_A_I_IN,
     input [DATA_SIZE-1:0] SIZE_A_J_IN,
     input [DATA_SIZE-1:0] SIZE_A_K_IN,
@@ -71,7 +70,9 @@ module ntm_matrix_integer_divider #(
     input [DATA_SIZE-1:0] SIZE_B_K_IN,
     input [DATA_SIZE-1:0] DATA_A_IN,
     input [DATA_SIZE-1:0] DATA_B_IN,
-    output reg [DATA_SIZE-1:0] DATA_OUT
+
+    output reg [DATA_SIZE-1:0] DATA_OUT,
+    output reg [DATA_SIZE-1:0] REST_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -127,17 +128,18 @@ module ntm_matrix_integer_divider #(
   wire data_out_enable_vector_divider;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_divider;
   reg [DATA_SIZE-1:0] size_in_vector_divider;
   reg [DATA_SIZE-1:0] data_a_in_vector_divider;
   reg [DATA_SIZE-1:0] data_b_in_vector_divider;
+
   wire [DATA_SIZE-1:0] data_out_vector_divider;
+  wire [DATA_SIZE-1:0] rest_out_vector_divider;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = DATA_A_IN / DATA_B_IN mod MODULO_IN
+  // DATA_OUT = DATA_A_IN / DATA_B_IN
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
@@ -202,8 +204,6 @@ module ntm_matrix_integer_divider #(
               // Control Internal
               start_vector_divider <= 1'b1;
             end
-            // Data Inputs
-            modulo_in_vector_divider <= MODULO_IN;
 
             // FSM Control
             divider_ctrl_fsm_int <= ENDER_STATE;
@@ -243,7 +243,6 @@ module ntm_matrix_integer_divider #(
               start_vector_divider <= 1'b1;
             end
             // Data Inputs
-            modulo_in_vector_divider <= MODULO_IN;
             size_in_vector_divider <= SIZE_J_IN;
 
             // FSM Control
@@ -323,11 +322,12 @@ module ntm_matrix_integer_divider #(
     .DATA_OUT_ENABLE(data_out_enable_vector_divider),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_divider),
     .SIZE_IN(size_in_vector_divider),
     .DATA_A_IN(data_a_in_vector_divider),
     .DATA_B_IN(data_b_in_vector_divider),
-    .DATA_OUT(data_out_vector_divider)
+
+    .DATA_OUT(data_out_vector_divider),
+    .REST_OUT(rest_out_vector_divider)
   );
 
 endmodule

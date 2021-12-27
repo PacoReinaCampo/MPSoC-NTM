@@ -66,11 +66,12 @@ entity ntm_vector_integer_adder is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    OVERFLOW_OUT : out std_logic
     );
 end entity;
 
@@ -126,10 +127,11 @@ architecture ntm_vector_integer_adder_architecture of ntm_vector_integer_adder i
   signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_scalar_adder : std_logic;
 
 begin
 
@@ -144,7 +146,8 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO_DATA;
+      DATA_OUT     <= ZERO_DATA;
+      OVERFLOW_OUT <= '0';
 
       -- Control Outputs
       READY <= '0';
@@ -162,7 +165,6 @@ begin
       data_b_in_adder_int <= '0';
 
       -- Data Internal
-      modulo_in_scalar_adder <= ZERO_DATA;
       data_a_in_scalar_adder <= ZERO_DATA;
       data_b_in_scalar_adder <= ZERO_DATA;
 
@@ -209,9 +211,6 @@ begin
 
             operation_scalar_adder <= OPERATION;
 
-            -- Data Inputs
-            modulo_in_scalar_adder <= MODULO_IN;
-
             -- FSM Control
             adder_ctrl_fsm_int <= ENDER_STATE;
           end if;
@@ -240,7 +239,8 @@ begin
             end if;
 
             -- Data Outputs
-            DATA_OUT <= data_out_scalar_adder;
+            DATA_OUT     <= data_out_scalar_adder;
+            OVERFLOW_OUT <= overflow_out_scalar_adder;
 
             -- Control Outputs
             DATA_OUT_ENABLE <= '1';
@@ -277,10 +277,11 @@ begin
       OPERATION => operation_scalar_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_adder,
       DATA_A_IN => data_a_in_scalar_adder,
       DATA_B_IN => data_b_in_scalar_adder,
-      DATA_OUT  => data_out_scalar_adder
+
+      DATA_OUT     => data_out_scalar_adder,
+      OVERFLOW_OUT => overflow_out_scalar_adder
       );
 
 end architecture;

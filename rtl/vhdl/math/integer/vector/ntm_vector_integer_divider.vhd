@@ -64,11 +64,12 @@ entity ntm_vector_integer_divider is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    REST_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -122,7 +123,7 @@ architecture ntm_vector_integer_divider_architecture of ntm_vector_integer_divid
   signal ready_scalar_divider : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rest_out_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -141,6 +142,7 @@ begin
     if (RST = '0') then
       -- Data Outputs
       DATA_OUT <= ZERO_DATA;
+      REST_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -156,7 +158,6 @@ begin
       data_b_in_divider_int <= '0';
 
       -- Data Internal
-      modulo_in_scalar_divider <= ZERO_DATA;
       data_a_in_scalar_divider <= ZERO_DATA;
       data_b_in_scalar_divider <= ZERO_DATA;
 
@@ -201,9 +202,6 @@ begin
             data_a_in_divider_int <= '0';
             data_b_in_divider_int <= '0';
 
-            -- Data Inputs
-            modulo_in_scalar_divider <= MODULO_IN;
-
             -- FSM Control
             divider_ctrl_fsm_int <= ENDER_STATE;
           end if;
@@ -233,6 +231,7 @@ begin
 
             -- Data Outputs
             DATA_OUT <= data_out_scalar_divider;
+            REST_OUT <= rest_out_scalar_divider;
 
             -- Control Outputs
             DATA_OUT_ENABLE <= '1';
@@ -267,10 +266,11 @@ begin
       READY => ready_scalar_divider,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_divider,
       DATA_A_IN => data_a_in_scalar_divider,
       DATA_B_IN => data_b_in_scalar_divider,
-      DATA_OUT  => data_out_scalar_divider
+
+      DATA_OUT => data_out_scalar_divider,
+      REST_OUT => rest_out_scalar_divider
       );
 
 end architecture;

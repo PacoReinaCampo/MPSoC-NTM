@@ -51,10 +51,11 @@ module ntm_scalar_integer_multiplier #(
     output reg READY,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] DATA_A_IN,
     input [DATA_SIZE-1:0] DATA_B_IN,
-    output reg [DATA_SIZE-1:0] DATA_OUT
+
+    output reg [DATA_SIZE-1:0] DATA_OUT,
+    output reg [DATA_SIZE-1:0] OVERFLOW_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -103,7 +104,7 @@ module ntm_scalar_integer_multiplier #(
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = DATA_A_IN · DATA_B_IN mod MODULO_IN
+  // DATA_OUT = DATA_A_IN · DATA_B_IN
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
@@ -148,7 +149,7 @@ module ntm_scalar_integer_multiplier #(
           v_int <= v_int;
 
           // FSM Control
-          if(v_int < {1'b0,MODULO_IN}) begin
+          if(v_int < {1'b0,OVERFLOW_OUT}) begin
             multiplier_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
           end
           else begin
@@ -156,28 +157,28 @@ module ntm_scalar_integer_multiplier #(
           end
         end
         REDUCE_DATA_B_STATE : begin  // STEP 2
-          if(v_int < {1'b0,MODULO_IN}) begin
+          if(v_int < {1'b0,OVERFLOW_OUT}) begin
             // FSM Control
             multiplier_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
           end
           else begin
             // Assignation
-            v_int <= (v_int - {1'b0,MODULO_IN});
+            v_int <= (v_int - {1'b0,OVERFLOW_OUT});
           end
         end
         SET_PRODUCT_OUT_STATE : begin  // STEP 3
           // Assignation
           if(u_int[0] == 1'b1) begin
-            if((multiplier_int + v_int) < {1'b0,MODULO_IN}) begin
+            if((multiplier_int + v_int) < {1'b0,OVERFLOW_OUT}) begin
               multiplier_int <= (multiplier_int + v_int);
             end
             else begin
-              multiplier_int <= (multiplier_int + v_int - {1'b0,MODULO_IN});
+              multiplier_int <= (multiplier_int + v_int - {1'b0,OVERFLOW_OUT});
             end
           end
           else begin
-            if(multiplier_int >= {1'b0,MODULO_IN}) begin
-              multiplier_int <= (multiplier_int - MODULO_IN);
+            if(multiplier_int >= {1'b0,OVERFLOW_OUT}) begin
+              multiplier_int <= (multiplier_int - OVERFLOW_OUT);
             end
           end
           // FSM Control

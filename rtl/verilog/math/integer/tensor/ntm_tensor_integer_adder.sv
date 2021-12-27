@@ -64,7 +64,6 @@ module ntm_matrix_integer_adder #(
     output reg DATA_OUT_K_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] SIZE_A_I_IN,
     input [DATA_SIZE-1:0] SIZE_A_J_IN,
     input [DATA_SIZE-1:0] SIZE_A_K_IN,
@@ -74,7 +73,8 @@ module ntm_matrix_integer_adder #(
     input [DATA_SIZE-1:0] DATA_A_IN,
     input [DATA_SIZE-1:0] DATA_B_IN,
 
-    output reg [DATA_SIZE-1:0] DATA_OUT
+    output reg [DATA_SIZE-1:0] DATA_OUT,
+    output reg OVERFLOW_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -133,17 +133,17 @@ module ntm_matrix_integer_adder #(
   wire data_out_enable_vector_adder;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_adder;
   reg [DATA_SIZE-1:0] size_in_vector_adder;
   reg [DATA_SIZE-1:0] data_a_in_vector_adder;
   reg [DATA_SIZE-1:0] data_b_in_vector_adder;
   wire [DATA_SIZE-1:0] data_out_vector_adder;
+  wire overflow_out_vector_adder;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = DATA_A_IN ± DATA_B_IN mod MODULO_IN
+  // DATA_OUT = DATA_A_IN ± DATA_B_IN
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
@@ -210,8 +210,6 @@ module ntm_matrix_integer_adder #(
 
               operation_vector_adder <= OPERATION;
             end
-            // Data Inputs
-            modulo_in_vector_adder <= MODULO_IN;
 
             // FSM Control
             adder_ctrl_fsm_int <= ENDER_STATE;
@@ -253,7 +251,6 @@ module ntm_matrix_integer_adder #(
               operation_vector_adder <= OPERATION;
             end
             // Data Inputs
-            modulo_in_vector_adder <= MODULO_IN;
             size_in_vector_adder <= SIZE_J_IN;
 
             // FSM Control
@@ -335,11 +332,11 @@ module ntm_matrix_integer_adder #(
     .DATA_OUT_ENABLE(data_out_enable_vector_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_adder),
     .SIZE_IN(size_in_vector_adder),
     .DATA_A_IN(data_a_in_vector_adder),
     .DATA_B_IN(data_b_in_vector_adder),
-    .DATA_OUT(data_out_vector_adder)
+    .DATA_OUT(data_out_vector_adder),
+    .OVERFLOW_OUT(overflow_out_vector_adder)
   );
 
 endmodule

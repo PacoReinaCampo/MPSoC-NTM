@@ -59,10 +59,11 @@ entity ntm_scalar_integer_multiplier is
     READY : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    OVERFLOW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -122,7 +123,8 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO_DATA;
+      DATA_OUT     <= ZERO_DATA;
+      OVERFLOW_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -155,7 +157,8 @@ begin
 
           if (unsigned(index_loop) = unsigned(DATA_B_IN)) then
             -- Data Outputs
-            DATA_OUT <= multiplier_int(DATA_SIZE-1 downto 0);
+            DATA_OUT     <= multiplier_int(DATA_SIZE-1 downto 0);
+            OVERFLOW_OUT <= multiplier_int(2*DATA_SIZE-1 downto DATA_SIZE);
 
             -- Control Outputs
             READY <= '1';

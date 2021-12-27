@@ -61,10 +61,11 @@ entity ntm_scalar_integer_adder is
     OPERATION : in std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    OVERFLOW_OUT : out std_logic
     );
 end entity;
 
@@ -121,7 +122,8 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO_DATA;
+      DATA_OUT     <= ZERO_DATA;
+      OVERFLOW_OUT <= '0';
 
       -- Control Outputs
       READY <= '0';
@@ -151,7 +153,8 @@ begin
         when ENDER_STATE =>  -- STEP 1
 
           -- Data Outputs
-          DATA_OUT <= adder_int(DATA_SIZE-1 downto 0);
+          DATA_OUT     <= adder_int(DATA_SIZE-1 downto 0);
+          OVERFLOW_OUT <= adder_int(DATA_SIZE);
 
           -- Control Outputs
           READY <= '1';

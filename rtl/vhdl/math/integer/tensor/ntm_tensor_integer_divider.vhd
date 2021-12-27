@@ -70,13 +70,14 @@ entity ntm_tensor_integer_divider is
     DATA_OUT_K_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    REST_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -148,12 +149,13 @@ architecture ntm_tensor_integer_divider_architecture of ntm_tensor_integer_divid
   signal data_out_j_enable_matrix_integer_divider : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_integer_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_integer_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_integer_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_matrix_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rest_out_matrix_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -169,6 +171,7 @@ begin
     if (RST = '0') then
       -- Data Outputs
       DATA_OUT <= ZERO_DATA;
+      REST_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -197,7 +200,6 @@ begin
       data_b_in_k_integer_divider_int <= '0';
 
       -- Data Internal
-      modulo_in_matrix_integer_divider <= ZERO_DATA;
       size_i_in_matrix_integer_divider <= ZERO_CONTROL;
       size_j_in_matrix_integer_divider <= ZERO_CONTROL;
       data_a_in_matrix_integer_divider <= ZERO_DATA;
@@ -267,7 +269,6 @@ begin
 
           if (data_a_in_i_integer_divider_int = '1' and data_a_in_j_integer_divider_int = '1' and data_a_in_k_integer_divider_int = '1' and data_b_in_i_integer_divider_int = '1' and data_b_in_j_integer_divider_int = '1' and data_b_in_k_integer_divider_int = '1') then
             -- Data Inputs
-            modulo_in_matrix_integer_divider <= MODULO_IN;
             size_i_in_matrix_integer_divider <= SIZE_J_IN;
             size_j_in_matrix_integer_divider <= SIZE_K_IN;
 
@@ -401,6 +402,7 @@ begin
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
               DATA_OUT <= data_out_matrix_integer_divider;
+              REST_OUT <= rest_out_matrix_integer_divider;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -419,6 +421,7 @@ begin
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
               DATA_OUT <= data_out_matrix_integer_divider;
+              REST_OUT <= rest_out_matrix_integer_divider;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -444,6 +447,7 @@ begin
             if ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
               DATA_OUT <= data_out_matrix_integer_divider;
+              REST_OUT <= rest_out_matrix_integer_divider;
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';
@@ -467,6 +471,7 @@ begin
             if (unsigned(index_k_loop) < unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
               DATA_OUT <= data_out_matrix_integer_divider;
+              REST_OUT <= rest_out_matrix_integer_divider;
 
               -- Control Outputs
               DATA_OUT_K_ENABLE <= '1';
@@ -513,12 +518,13 @@ begin
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_integer_divider,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_integer_divider,
         SIZE_I_IN => size_i_in_matrix_integer_divider,
         SIZE_J_IN => size_j_in_matrix_integer_divider,
         DATA_A_IN => data_a_in_matrix_integer_divider,
         DATA_B_IN => data_b_in_matrix_integer_divider,
-        DATA_OUT  => data_out_matrix_integer_divider
+
+        DATA_OUT => data_out_matrix_integer_divider,
+        REST_OUT => rest_out_matrix_integer_divider
         );
 
 end architecture;
