@@ -59,10 +59,11 @@ entity ntm_scalar_multiplier is
     READY : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+
+    DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    OVERFLOW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -135,10 +136,11 @@ architecture ntm_scalar_multiplier_architecture of ntm_scalar_multiplier is
   signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_adder : std_logic_vector(EXPONENT_SIZE-1 downto 0);
   signal data_a_in_scalar_adder : std_logic_vector(EXPONENT_SIZE-1 downto 0);
   signal data_b_in_scalar_adder : std_logic_vector(EXPONENT_SIZE-1 downto 0);
-  signal data_out_scalar_adder  : std_logic_vector(EXPONENT_SIZE-1 downto 0);
+
+  signal data_out_scalar_adder     : std_logic_vector(EXPONENT_SIZE-1 downto 0);
+  signal overflow_out_scalar_adder : std_logic;
 
   -- SCALAR MULTIPLIER
   -- CONTROL
@@ -146,10 +148,11 @@ architecture ntm_scalar_multiplier_architecture of ntm_scalar_multiplier is
   signal ready_scalar_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_multiplier : std_logic_vector(MANTISSA_SIZE-1 downto 0);
   signal data_a_in_scalar_multiplier : std_logic_vector(MANTISSA_SIZE-1 downto 0);
   signal data_b_in_scalar_multiplier : std_logic_vector(MANTISSA_SIZE-1 downto 0);
-  signal data_out_scalar_multiplier  : std_logic_vector(MANTISSA_SIZE-1 downto 0);
+
+  signal data_out_scalar_multiplier     : std_logic_vector(MANTISSA_SIZE-1 downto 0);
+  signal overflow_out_scalar_multiplier : std_logic_vector(MANTISSA_SIZE-1 downto 0);
 
   -- OUTPUT
   signal sign_int_scalar_multiplier : std_logic;
@@ -182,11 +185,9 @@ begin
       operation_scalar_adder <= '0';
 
       -- Data Internal
-      modulo_in_scalar_adder <= ZERO_EXPONENT;
       data_a_in_scalar_adder <= ZERO_EXPONENT;
       data_b_in_scalar_adder <= ZERO_EXPONENT;
 
-      modulo_in_scalar_multiplier <= ZERO_MANTISSA;
       data_a_in_scalar_multiplier <= ZERO_MANTISSA;
       data_b_in_scalar_multiplier <= ZERO_MANTISSA;
 
@@ -212,11 +213,9 @@ begin
             -- Data Internal
             sign_int_scalar_multiplier <= DATA_A_IN(DATA_SIZE-1) xor DATA_B_IN(DATA_SIZE-1);
 
-            modulo_in_scalar_adder <= FULL_EXPONENT;
             data_a_in_scalar_adder <= DATA_A_IN(DATA_SIZE-2 downto MANTISSA_SIZE);
             data_b_in_scalar_adder <= DATA_B_IN(DATA_SIZE-2 downto MANTISSA_SIZE);
 
-            modulo_in_scalar_multiplier <= FULL_MANTISSA;
             data_a_in_scalar_multiplier <= DATA_A_IN(MANTISSA_SIZE-1 downto 0);
             data_b_in_scalar_multiplier <= DATA_B_IN(MANTISSA_SIZE-1 downto 0);
 
@@ -285,10 +284,11 @@ begin
       OPERATION => operation_scalar_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_adder,
       DATA_A_IN => data_a_in_scalar_adder,
       DATA_B_IN => data_b_in_scalar_adder,
-      DATA_OUT  => data_out_scalar_adder
+
+      DATA_OUT     => data_out_scalar_adder,
+      OVERFLOW_OUT => overflow_out_scalar_adder
       );
 
   -- SCALAR MULTIPLIER
@@ -307,10 +307,11 @@ begin
       READY => ready_scalar_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_multiplier,
       DATA_A_IN => data_a_in_scalar_multiplier,
       DATA_B_IN => data_b_in_scalar_multiplier,
-      DATA_OUT  => data_out_scalar_multiplier
+
+      DATA_OUT     => data_out_scalar_multiplier,
+      OVERFLOW_OUT => overflow_out_scalar_multiplier
       );
 
 end architecture;

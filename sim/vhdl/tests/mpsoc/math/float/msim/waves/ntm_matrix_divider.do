@@ -26,6 +26,7 @@ add wave -noupdate /ntm_float_testbench/ntm_matrix_divider_test/matrix_divider/i
 add wave -noupdate /ntm_float_testbench/ntm_matrix_divider_test/matrix_divider/DATA_OUT_J_ENABLE
 add wave -noupdate /ntm_float_testbench/ntm_matrix_divider_test/matrix_divider/index_j_loop
 add wave -noupdate /ntm_float_testbench/ntm_matrix_divider_test/matrix_divider/DATA_OUT
+add wave -noupdate /ntm_float_testbench/ntm_matrix_divider_test/matrix_divider/REST_OUT
 
 add wave -noupdate /ntm_float_testbench/ntm_matrix_divider_test/matrix_divider/divider_ctrl_fsm_int
 
@@ -42,6 +43,7 @@ add wave -noupdate /ntm_float_testbench/ntm_matrix_divider_test/matrix_divider/d
 add wave -noupdate /ntm_float_testbench/ntm_matrix_divider_test/matrix_divider/ready_vector_divider
 add wave -noupdate /ntm_float_testbench/ntm_matrix_divider_test/matrix_divider/data_out_enable_vector_divider
 add wave -noupdate /ntm_float_testbench/ntm_matrix_divider_test/matrix_divider/data_out_vector_divider
+add wave -noupdate /ntm_float_testbench/ntm_matrix_divider_test/matrix_divider/rest_out_vector_divider
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

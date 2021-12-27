@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_matrix_modular_multiplier is
+entity ntm_matrix_multiplier is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -67,16 +67,17 @@ entity ntm_matrix_modular_multiplier is
     DATA_OUT_J_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+
+    DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    OVERFLOW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
-architecture ntm_matrix_modular_multiplier_architecture of ntm_matrix_modular_multiplier is
+architecture ntm_matrix_multiplier_architecture of ntm_matrix_multiplier is
 
   -----------------------------------------------------------------------
   -- Types
@@ -136,11 +137,12 @@ architecture ntm_matrix_modular_multiplier_architecture of ntm_matrix_modular_mu
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_vector_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -178,7 +180,6 @@ begin
       data_b_in_j_multiplier_int <= '0';
 
       -- Data Internal
-      modulo_in_vector_multiplier <= ZERO_DATA;
       size_in_vector_multiplier   <= ZERO_CONTROL;
       data_a_in_vector_multiplier <= ZERO_DATA;
       data_b_in_vector_multiplier <= ZERO_DATA;
@@ -238,8 +239,7 @@ begin
 
           if (data_a_in_i_multiplier_int = '1' and data_a_in_j_multiplier_int = '1' and data_b_in_i_multiplier_int = '1' and data_b_in_j_multiplier_int = '1') then
             -- Data Inputs
-            modulo_in_vector_multiplier <= MODULO_IN;
-            size_in_vector_multiplier   <= SIZE_J_IN;
+            size_in_vector_multiplier <= SIZE_J_IN;
 
             -- Control Internal
             start_vector_multiplier <= '1';
@@ -371,7 +371,7 @@ begin
   end process;
 
   -- VECTOR MULTIPLIER
-  vector_multiplier : ntm_vector_modular_multiplier
+  vector_multiplier : ntm_vector_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -391,11 +391,12 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_multiplier,
       SIZE_IN   => size_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
-      DATA_OUT  => data_out_vector_multiplier
+
+      DATA_OUT     => data_out_vector_multiplier,
+      OVERFLOW_OUT => overflow_out_vector_multiplier
       );
 
 end architecture;

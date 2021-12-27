@@ -72,13 +72,14 @@ entity ntm_tensor_adder is
     DATA_OUT_K_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+
+    DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    OVERFLOW_OUT : out std_logic
     );
 end entity;
 
@@ -152,12 +153,13 @@ architecture ntm_tensor_adder_architecture of ntm_tensor_adder is
   signal data_out_j_enable_matrix_adder : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_matrix_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_matrix_adder : std_logic;
 
 begin
 
@@ -165,7 +167,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN ± DATA_B_IN mod MODULO_IN
+  -- DATA_OUT = DATA_A_IN ± DATA_B_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -203,7 +205,6 @@ begin
       data_b_in_k_adder_int <= '0';
 
       -- Data Internal
-      modulo_in_matrix_adder <= ZERO_DATA;
       size_i_in_matrix_adder <= ZERO_CONTROL;
       size_j_in_matrix_adder <= ZERO_CONTROL;
       data_a_in_matrix_adder <= ZERO_DATA;
@@ -273,7 +274,6 @@ begin
 
           if (data_a_in_i_adder_int = '1' and data_a_in_j_adder_int = '1' and data_a_in_k_adder_int = '1' and data_b_in_i_adder_int = '1' and data_b_in_j_adder_int = '1' and data_b_in_k_adder_int = '1') then
             -- Data Inputs
-            modulo_in_matrix_adder <= MODULO_IN;
             size_i_in_matrix_adder <= SIZE_J_IN;
             size_j_in_matrix_adder <= SIZE_K_IN;
 
@@ -523,12 +523,13 @@ begin
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_adder,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_adder,
         SIZE_I_IN => size_i_in_matrix_adder,
         SIZE_J_IN => size_j_in_matrix_adder,
         DATA_A_IN => data_a_in_matrix_adder,
         DATA_B_IN => data_b_in_matrix_adder,
-        DATA_OUT  => data_out_matrix_adder
+        
+        DATA_OUT     => data_out_matrix_adder,
+        OVERFLOW_OUT => overflow_out_matrix_adder
         );
 
 end architecture;

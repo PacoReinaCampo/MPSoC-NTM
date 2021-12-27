@@ -16,6 +16,7 @@ add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multip
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/DATA_B_IN
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/READY
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/DATA_OUT
+add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/OVERFLOW_OUT
 
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/multiplier_ctrl_fsm_int
 
@@ -26,6 +27,7 @@ add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multip
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/data_b_in_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/ready_scalar_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/data_out_scalar_adder
+add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/overflow_out_scalar_adder
 
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/start_scalar_multiplier
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/modulo_in_scalar_multiplier
@@ -33,6 +35,7 @@ add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multip
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/data_b_in_scalar_multiplier
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/ready_scalar_multiplier
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/data_out_scalar_multiplier
+add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/overflow_out_scalar_multiplier
 
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/sign_int_scalar_multiplier
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/exponent_int_scalar_multiplier

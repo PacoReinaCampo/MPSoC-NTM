@@ -962,7 +962,6 @@ package ntm_math_pkg is
       READY : out std_logic;
 
       -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
