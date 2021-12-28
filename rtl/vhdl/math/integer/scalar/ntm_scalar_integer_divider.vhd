@@ -155,7 +155,17 @@ begin
 
         when ENDER_STATE =>  -- STEP 1
 
-          if (unsigned(DATA_B_IN) > unsigned(index_loop)) then
+          if (unsigned(DATA_B_IN) = unsigned(ZERO_DATA)) then
+            -- Data Outputs
+            DATA_OUT <= FULL;
+            REST_OUT <= FULL;
+
+            -- Control Outputs
+            READY <= '1';
+
+            -- FSM Control
+            divider_ctrl_fsm_int <= STARTER_STATE;
+          elsif (unsigned(DATA_B_IN) > unsigned(index_loop)) then
             -- Data Outputs
             DATA_OUT <= divider_int;
             REST_OUT <= index_loop;

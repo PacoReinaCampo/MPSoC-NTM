@@ -157,8 +157,11 @@ architecture ntm_scalar_multiplier_architecture of ntm_scalar_multiplier is
   -- OUTPUT
   signal sign_int_scalar_multiplier : std_logic;
 
-  signal exponent_int_scalar_multiplier : std_logic_vector(EXPONENT_SIZE-1 downto 0);
-  signal mantissa_int_scalar_multiplier : std_logic_vector(MANTISSA_SIZE-1 downto 0);
+  signal data_exponent_int_scalar_multiplier : std_logic_vector(EXPONENT_SIZE-1 downto 0);
+  signal data_mantissa_int_scalar_multiplier : std_logic_vector(MANTISSA_SIZE-1 downto 0);
+
+  signal overflow_exponent_int_scalar_multiplier : std_logic;
+  signal overflow_mantissa_int_scalar_multiplier : std_logic_vector(MANTISSA_SIZE-1 downto 0);
 
 begin
 
@@ -194,8 +197,11 @@ begin
 
       sign_int_scalar_multiplier <= '0';
 
-      exponent_int_scalar_multiplier <= ZERO_EXPONENT;
-      mantissa_int_scalar_multiplier <= ZERO_MANTISSA;
+      data_exponent_int_scalar_multiplier <= ZERO_EXPONENT;
+      data_mantissa_int_scalar_multiplier <= ZERO_MANTISSA;
+
+      overflow_exponent_int_scalar_multiplier <= '0';
+      overflow_mantissa_int_scalar_multiplier <= ZERO_MANTISSA;
 
     elsif (rising_edge(CLK)) then
 
@@ -228,7 +234,8 @@ begin
 
           if (ready_scalar_adder = '1') then
             -- Data Outputs
-            exponent_int_scalar_multiplier <= data_out_scalar_adder;
+            data_exponent_int_scalar_multiplier     <= data_out_scalar_adder;
+            overflow_exponent_int_scalar_multiplier <= overflow_out_scalar_adder;
           else
             -- Control Internal
             start_scalar_adder <= '0';
@@ -236,7 +243,8 @@ begin
 
           if (ready_scalar_multiplier = '1') then
             -- Data Outputs
-            mantissa_int_scalar_multiplier <= data_out_scalar_multiplier;
+            data_mantissa_int_scalar_multiplier     <= data_out_scalar_multiplier;
+            overflow_mantissa_int_scalar_multiplier <= overflow_out_scalar_multiplier;
           else
             -- Control Internal
             start_scalar_multiplier <= '0';
@@ -244,10 +252,10 @@ begin
 
         when ADAPTATION_STATE =>  -- STEP 2
 
-          if (exponent_int_scalar_multiplier(EXPONENT_SIZE-1) = '1') then
+          if (overflow_exponent_int_scalar_multiplier = '1') then
             -- Data Outputs
-            exponent_int_scalar_multiplier <= std_logic_vector(unsigned(exponent_int_scalar_multiplier) - unsigned(ONE_EXPONENT));
-            mantissa_int_scalar_multiplier <= std_logic_vector(unsigned(mantissa_int_scalar_multiplier) sll 1);
+            data_exponent_int_scalar_multiplier <= std_logic_vector(unsigned(data_exponent_int_scalar_multiplier) - unsigned(ONE_EXPONENT));
+            data_mantissa_int_scalar_multiplier <= std_logic_vector(unsigned(data_mantissa_int_scalar_multiplier) sll 1);
           end if;
 
         when NORMALIZATION_STATE =>  -- STEP 3
@@ -258,7 +266,7 @@ begin
           READY <= '1';
 
           -- Data Outputs
-          DATA_OUT <= sign_int_scalar_multiplier & exponent_int_scalar_multiplier & mantissa_int_scalar_multiplier;
+          DATA_OUT <= sign_int_scalar_multiplier & data_exponent_int_scalar_multiplier & data_mantissa_int_scalar_multiplier;
 
         when others =>
           -- FSM Control
