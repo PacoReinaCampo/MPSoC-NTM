@@ -36,10 +36,8 @@ add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multip
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/overflow_out_scalar_multiplier
 
 add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/sign_int_scalar_multiplier
-add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/data_exponent_int_scalar_multiplier
-add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/data_mantissa_int_scalar_multiplier
-add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/overflow_exponent_int_scalar_multiplier
-add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/overflow_mantissa_int_scalar_multiplier
+add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/exponent_int_scalar_multiplier
+add wave -noupdate /ntm_float_testbench/ntm_scalar_multiplier_test/scalar_multiplier/mantissa_int_scalar_multiplier
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

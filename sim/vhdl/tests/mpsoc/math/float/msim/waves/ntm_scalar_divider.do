@@ -36,9 +36,8 @@ add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/d
 add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/rest_out_scalar_divider
 
 add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/sign_int_scalar_divider
-add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/data_exponent_int_scalar_divider
+add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/exponent_int_scalar_divider
 add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/data_mantissa_int_scalar_divider
-add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/overflow_exponent_int_scalar_divider
 add wave -noupdate /ntm_float_testbench/ntm_scalar_divider_test/scalar_divider/rest_mantissa_int_scalar_divider
 
 TreeUpdate [SetDefaultTree]

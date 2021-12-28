@@ -38,10 +38,8 @@ add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/data_
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/overflow_out_mantissa_scalar_adder
 
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/sign_int_scalar_adder
-add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/data_exponent_int_scalar_adder
-add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/data_mantissa_int_scalar_adder
-add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/overflow_exponent_int_scalar_adder
-add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/overflow_mantissa_int_scalar_adder
+add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/exponent_int_scalar_adder
+add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/mantissa_int_scalar_adder
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}
