@@ -611,6 +611,29 @@ package ntm_math_pkg is
       );
   end component;
 
+  component ntm_scalar_integer_full_divider is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_INTEGER_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_FRACTIONAL_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
   -- VECTOR
   component ntm_vector_integer_adder is
     generic (

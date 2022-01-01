@@ -3,6 +3,7 @@ vhdl2008 work ../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_adder.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_multiplier.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_divider.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_full_divider.vhd
 
 vhdl2008 work ../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_adder.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_multiplier.vhd

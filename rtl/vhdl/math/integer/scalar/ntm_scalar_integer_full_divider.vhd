@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_scalar_integer_divider is
+entity ntm_scalar_integer_full_divider is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -62,12 +62,12 @@ entity ntm_scalar_integer_divider is
     DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-    REST_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    DATA_INTEGER_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_FRACTIONAL_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
-architecture ntm_scalar_integer_divider_architecture of ntm_scalar_integer_divider is
+architecture ntm_scalar_integer_full_divider_architecture of ntm_scalar_integer_full_divider is
 
   -----------------------------------------------------------------------
   -- Types
@@ -75,7 +75,8 @@ architecture ntm_scalar_integer_divider_architecture of ntm_scalar_integer_divid
 
   type divider_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    ENDER_STATE                         -- STEP 1
+    ARITHMETIC_STATE,                   -- STEP 1
+    ENDER_STATE                         -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -108,7 +109,8 @@ architecture ntm_scalar_integer_divider_architecture of ntm_scalar_integer_divid
   signal divider_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- Control Internal
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_integer_loop    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_fractional_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -116,15 +118,15 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN / DATA_B_IN
+  -- DATA_INTEGER_OUT.DATA_FRACTIONAL_OUT = DATA_A_IN / DATA_B_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO_DATA;
-      REST_OUT <= ZERO_DATA;
+      DATA_INTEGER_OUT    <= ZERO_DATA;
+      DATA_FRACTIONAL_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -133,7 +135,8 @@ begin
       divider_int <= ZERO_DATA;
 
       -- Control Internal
-      index_loop <= ZERO_DATA;
+      index_integer_loop    <= ZERO_DATA;
+      index_fractional_loop <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -147,41 +150,51 @@ begin
             divider_int <= ZERO_DATA;
 
             -- Control Internal
-            index_loop <= DATA_A_IN;
+            index_integer_loop <= DATA_A_IN;
 
             -- FSM Control
-            divider_ctrl_fsm_int <= ENDER_STATE;
+            divider_ctrl_fsm_int <= ARITHMETIC_STATE;
           end if;
 
-        when ENDER_STATE =>  -- STEP 1
+        when ARITHMETIC_STATE =>  -- STEP 2
 
           if (unsigned(DATA_B_IN) = unsigned(ZERO_DATA)) then
             -- Data Outputs
-            DATA_OUT <= FULL;
-            REST_OUT <= FULL;
+            DATA_INTEGER_OUT    <= FULL;
+            DATA_FRACTIONAL_OUT <= FULL;
 
             -- Control Outputs
             READY <= '1';
 
             -- FSM Control
             divider_ctrl_fsm_int <= STARTER_STATE;
-          elsif (unsigned(DATA_B_IN) > unsigned(index_loop)) then
+          elsif (unsigned(DATA_B_IN) > unsigned(index_integer_loop)) then
             -- Data Outputs
-            DATA_OUT <= divider_int;
-            REST_OUT <= index_loop;
+            DATA_INTEGER_OUT <= divider_int;
 
-            -- Control Outputs
-            READY <= '1';
+            -- Control Internal
+            index_fractional_loop <= index_integer_loop;
 
             -- FSM Control
-            divider_ctrl_fsm_int <= STARTER_STATE;
+            divider_ctrl_fsm_int <= ENDER_STATE;
           else
             -- Data Internal
             divider_int <= std_logic_vector(unsigned(divider_int) + unsigned(ONE_DATA));
 
             -- Control Internal
-            index_loop <= std_logic_vector(unsigned(index_loop) - unsigned(DATA_B_IN));
+            index_integer_loop <= std_logic_vector(unsigned(index_integer_loop) - unsigned(DATA_B_IN));
           end if;
+
+        when ENDER_STATE =>  -- STEP 2
+		
+		  if (unsigned(index_fractional_loop) = unsigned(ZERO_DATA)) then
+            -- Data Outputs
+            DATA_FRACTIONAL_OUT <= index_fractional_loop;
+
+            -- Control Outputs
+            READY <= '1';
+          else
+		  end if;
 
         when others =>
           -- FSM Control

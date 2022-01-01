@@ -3,6 +3,7 @@
 ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_adder.vhd
 ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_multiplier.vhd
 ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_divider.vhd
+../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_full_divider.vhd
 
 ../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_adder.vhd
 ../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_multiplier.vhd
