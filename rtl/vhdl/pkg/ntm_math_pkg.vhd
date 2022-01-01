@@ -724,6 +724,35 @@ package ntm_math_pkg is
       );
   end component;
 
+  component ntm_vector_integer_full_divider is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
+
+      DATA_OUT_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_INTEGER_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_FRACTIONAL_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
   -- MATRIX
   component ntm_matrix_integer_adder is
     generic (
@@ -826,6 +855,39 @@ package ntm_math_pkg is
       );
   end component;
 
+  component ntm_matrix_integer_full_divider is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_INTEGER_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_FRACTIONAL_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
   -- TENSOR
   component ntm_tensor_integer_adder is
     generic (
@@ -900,6 +962,43 @@ package ntm_math_pkg is
 
       DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
       OVERFLOW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_tensor_integer_full_divider is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_K_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_K_ENABLE : in std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+      DATA_OUT_K_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_INTEGER_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_FRACTIONAL_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
