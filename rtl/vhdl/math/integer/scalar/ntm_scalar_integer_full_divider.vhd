@@ -106,7 +106,8 @@ architecture ntm_scalar_integer_full_divider_architecture of ntm_scalar_integer_
   signal divider_ctrl_fsm_int : divider_ctrl_fsm;
 
   -- Data Internal
-  signal divider_int : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal divider_integer_int    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal divider_fractional_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- Control Internal
   signal index_integer_loop    : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -132,7 +133,8 @@ begin
       READY <= '0';
 
       -- Data Internal
-      divider_int <= ZERO_DATA;
+      divider_integer_int    <= ZERO_DATA;
+      divider_fractional_int <= ZERO_DATA;
 
       -- Control Internal
       index_integer_loop    <= ZERO_DATA;
@@ -147,7 +149,8 @@ begin
 
           if (START = '1') then
             -- Data Internal
-            divider_int <= ZERO_DATA;
+            divider_integer_int    <= ZERO_DATA;
+            divider_fractional_int <= ZERO_DATA;
 
             -- Control Internal
             index_integer_loop <= DATA_A_IN;
@@ -169,9 +172,6 @@ begin
             -- FSM Control
             divider_ctrl_fsm_int <= STARTER_STATE;
           elsif (unsigned(DATA_B_IN) > unsigned(index_integer_loop)) then
-            -- Data Outputs
-            DATA_INTEGER_OUT <= divider_int;
-
             -- Control Internal
             index_fractional_loop <= index_integer_loop;
 
@@ -179,7 +179,7 @@ begin
             divider_ctrl_fsm_int <= ENDER_STATE;
           else
             -- Data Internal
-            divider_int <= std_logic_vector(unsigned(divider_int) + unsigned(ONE_DATA));
+            divider_integer_int <= std_logic_vector(unsigned(divider_integer_int) + unsigned(ONE_DATA));
 
             -- Control Internal
             index_integer_loop <= std_logic_vector(unsigned(index_integer_loop) - unsigned(DATA_B_IN));
@@ -189,13 +189,15 @@ begin
 
           if (unsigned(index_fractional_loop) = unsigned(ZERO_DATA)) then
             -- Data Outputs
-            DATA_FRACTIONAL_OUT <= divider_int;
+            DATA_INTEGER_OUT    <= divider_integer_int;
+            DATA_FRACTIONAL_OUT <= divider_fractional_int;
           else
             -- Data Internal
-            divider_int <= std_logic_vector(unsigned(divider_int) + unsigned(ONE_DATA));
+            divider_fractional_int <= std_logic_vector(unsigned(divider_fractional_int) + unsigned(ONE_DATA));
 
             -- Control Internal
-            index_integer_loop <= std_logic_vector(unsigned(index_integer_loop) - unsigned(DATA_B_IN));
+            index_fractional_loop <= std_logic_vector(unsigned(index_fractional_loop) srl 1);
+            index_fractional_loop <= std_logic_vector(unsigned(index_fractional_loop) - unsigned(DATA_B_IN));
           end if;
 
           -- Control Outputs
