@@ -240,7 +240,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_scalar_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -321,7 +321,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_matrix_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 

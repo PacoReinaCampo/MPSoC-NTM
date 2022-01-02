@@ -246,7 +246,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -433,7 +433,7 @@ begin
             start_vector_adder <= '0';
           end if;
 
-        when VECTOR_TANH_STATE =>       -- STEP 9
+        when VECTOR_TANH_STATE =>  -- STEP 9
 
           -- Data Inputs
           modulo_in_vector_tanh <= FULL;

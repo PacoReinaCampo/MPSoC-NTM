@@ -141,7 +141,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case divider_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -156,7 +156,7 @@ begin
             divider_ctrl_fsm_int <= ARITHMETIC_STATE;
           end if;
 
-        when ARITHMETIC_STATE =>        -- STEP 2
+        when ARITHMETIC_STATE =>  -- STEP 2
 
           if (unsigned(DATA_B_IN) = unsigned(ZERO_DATA)) then
             -- Data Outputs
@@ -185,7 +185,7 @@ begin
             index_integer_loop <= std_logic_vector(unsigned(index_integer_loop) - unsigned(DATA_B_IN));
           end if;
 
-        when ENDER_STATE =>             -- STEP 2
+        when ENDER_STATE =>  -- STEP 2
 
           if (unsigned(index_fractional_loop) = unsigned(ZERO_DATA)) then
             -- Data Outputs

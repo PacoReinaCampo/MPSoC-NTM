@@ -138,7 +138,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case divider_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -153,7 +153,7 @@ begin
             divider_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
-        when ENDER_STATE =>             -- STEP 1
+        when ENDER_STATE =>  -- STEP 1
 
           if (unsigned(DATA_B_IN) = unsigned(ZERO_DATA)) then
             -- Data Outputs

@@ -164,7 +164,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -192,7 +192,7 @@ begin
             start_vector_multiplier <= '0';
           end if;
 
-        when SCALAR_ADDER_STATE =>      -- STEP 2
+        when SCALAR_ADDER_STATE =>  -- STEP 2
 
           if (ready_scalar_adder = '1') then
             if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then

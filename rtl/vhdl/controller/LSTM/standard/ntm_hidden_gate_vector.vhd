@@ -178,7 +178,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -203,9 +203,9 @@ begin
             start_vector_tanh <= '0';
           end if;
 
-        when INPUT_STATE =>             -- STEP 1
+        when INPUT_STATE =>  -- STEP 1
 
-        when VECTOR_TANH_STATE =>       -- STEP 2
+        when VECTOR_TANH_STATE =>  -- STEP 2
 
           if (data_out_enable_vector_tanh = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then

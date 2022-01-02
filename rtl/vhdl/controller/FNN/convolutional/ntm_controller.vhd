@@ -299,7 +299,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -548,7 +548,7 @@ begin
           data_a_in_vector_adder <= data_out_vector_convolution;
           data_b_in_vector_adder <= data_out_vector_adder;
 
-        when VECTOR_LOGISTIC_STATE =>   -- STEP 10
+        when VECTOR_LOGISTIC_STATE =>  -- STEP 10
 
           -- Control Inputs
           data_in_enable_vector_logistic <= '0';

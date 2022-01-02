@@ -204,7 +204,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case divider_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -228,7 +228,7 @@ begin
             divider_ctrl_fsm_int <= ARITHMETIC_STATE;
           end if;
 
-        when ARITHMETIC_STATE =>        -- STEP 1
+        when ARITHMETIC_STATE =>  -- STEP 1
 
           if (ready_scalar_adder = '1') then
             -- Data Outputs
@@ -247,7 +247,7 @@ begin
             start_scalar_divider <= '0';
           end if;
 
-        when ADAPTATION_STATE =>        -- STEP 2
+        when ADAPTATION_STATE =>  -- STEP 2
 
           if (unsigned(rest_mantissa_int_scalar_divider) = unsigned(ZERO_MANTISSA)) then
             -- Data Outputs
@@ -257,9 +257,9 @@ begin
             rest_mantissa_int_scalar_divider <= std_logic_vector(unsigned(rest_mantissa_int_scalar_divider) sll 1);
           end if;
 
-        when NORMALIZATION_STATE =>     -- STEP 3
+        when NORMALIZATION_STATE =>  -- STEP 3
 
-        when ENDER_STATE =>             -- STEP 4
+        when ENDER_STATE =>  -- STEP 4
 
           -- Control Outputs
           READY <= '1';

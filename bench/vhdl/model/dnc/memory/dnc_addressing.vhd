@@ -530,7 +530,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -568,7 +568,7 @@ begin
 
           -- psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
 
-        when USAGE_VECTOR_STATE =>      -- STEP 5
+        when USAGE_VECTOR_STATE =>  -- STEP 5
 
           -- u(t;j) = (u(t-1;j) + w(t-1;j) - u(t-1;j) o w(t-1;j)) o psi(t;j)
 
@@ -588,11 +588,11 @@ begin
 
           -- w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - ga(t))·c(t;j))
 
-        when MEMORY_MATRIX_STATE =>     -- STEP 9
+        when MEMORY_MATRIX_STATE =>  -- STEP 9
 
           -- M(t;j;k) = M(t-1;j;k) o (E - w(t;j)·transpose(e(t;k))) + w(t;j)·transpose(v(t;k))
 
-        when READ_VECTORS_STATE =>      -- STEP 10
+        when READ_VECTORS_STATE =>  -- STEP 10
 
           -- r(t;i;k) = transpose(M(t;j;k))·w(t;i;j)
 

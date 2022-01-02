@@ -146,7 +146,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case summation_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -158,7 +158,7 @@ begin
             summation_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_STATE =>             -- STEP 1
+        when INPUT_STATE =>  -- STEP 1
 
           if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
@@ -177,7 +177,7 @@ begin
             DATA_OUT_ENABLE <= '0';
           end if;
 
-        when SCALAR_ADDER_STATE =>      -- STEP 2
+        when SCALAR_ADDER_STATE =>  -- STEP 2
 
           if (ready_scalar_adder = '1') then
             if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then

@@ -656,7 +656,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case top_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -677,7 +677,7 @@ begin
             start_controller <= '0';
           end if;
 
-        when CONTROLLER_STATE =>        -- STEP 1
+        when CONTROLLER_STATE =>  -- STEP 1
 
           case controller_ctrl_fsm_int is
             when STARTER_CONTROLLER_STATE =>  -- STEP 0
@@ -696,20 +696,20 @@ begin
               controller_ctrl_fsm_int <= STARTER_CONTROLLER_STATE;
           end case;
 
-        when READ_HEADS_STATE =>        -- STEP 2
+        when READ_HEADS_STATE =>  -- STEP 2
 
           case read_heads_ctrl_fsm_int is
             when STARTER_READ_HEADS_STATE =>  -- STEP 0
 
-            when FREE_GATES_STATE =>    -- STEP 1
+            when FREE_GATES_STATE =>  -- STEP 1
 
               -- f(t;i) = sigmoid(f^(t;i))
 
-            when READ_KEYS_STATE =>     -- STEP 2
+            when READ_KEYS_STATE =>  -- STEP 2
 
               -- k(t;i;k) = k^(t;i;k)
 
-            when READ_MODES_STATE =>    -- STEP 3
+            when READ_MODES_STATE =>  -- STEP 3
 
               -- pi(t;i;p) = softmax(pi^(t;i;p))
 
@@ -731,7 +731,7 @@ begin
               read_heads_ctrl_fsm_int <= STARTER_READ_HEADS_STATE;
           end case;
 
-        when WRITE_HEADS_STATE =>       -- STEP 3
+        when WRITE_HEADS_STATE =>  -- STEP 3
 
           case write_heads_ctrl_fsm_int is
             when STARTER_WRITE_HEADS_STATE =>  -- STEP 0
@@ -744,11 +744,11 @@ begin
 
               -- e(t;k) = sigmoid(e^(t;k))
 
-            when WRITE_GATE_STATE =>    -- STEP 3
+            when WRITE_GATE_STATE =>  -- STEP 3
 
               -- gw(t) = sigmoid(gw^(t))
 
-            when WRITE_KEY_STATE =>     -- STEP 4
+            when WRITE_KEY_STATE =>  -- STEP 4
 
               -- k(t;k) = k^(t;k)
 
@@ -776,7 +776,7 @@ begin
               write_heads_ctrl_fsm_int <= STARTER_WRITE_HEADS_STATE;
           end case;
 
-        when MEMORY_I_STATE =>          -- STEP 4
+        when MEMORY_I_STATE =>  -- STEP 4
 
           if (r_out_i_enable_addressing = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
@@ -789,7 +789,7 @@ begin
             end if;
           end if;
 
-        when MEMORY_J_STATE =>          -- STEP 5
+        when MEMORY_J_STATE =>  -- STEP 5
 
           if (r_out_k_enable_addressing = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
