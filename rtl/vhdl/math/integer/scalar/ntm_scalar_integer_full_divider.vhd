@@ -189,12 +189,20 @@ begin
     
           if (unsigned(index_fractional_loop) = unsigned(ZERO_DATA)) then
             -- Data Outputs
-            DATA_FRACTIONAL_OUT <= index_fractional_loop;
-
-            -- Control Outputs
-            READY <= '1';
+            DATA_FRACTIONAL_OUT <= divider_int;
           else
+            -- Data Internal
+            divider_int <= std_logic_vector(unsigned(divider_int) + unsigned(ONE_DATA));
+
+            -- Control Internal
+            index_integer_loop <= std_logic_vector(unsigned(index_integer_loop) - unsigned(DATA_B_IN));
           end if;
+
+          -- Control Outputs
+          READY <= '1';
+
+          -- FSM Control
+          divider_ctrl_fsm_int <= STARTER_STATE;
 
         when others =>
           -- FSM Control
