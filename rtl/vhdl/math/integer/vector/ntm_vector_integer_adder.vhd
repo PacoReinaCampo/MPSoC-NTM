@@ -121,17 +121,17 @@ architecture ntm_vector_integer_adder_architecture of ntm_vector_integer_adder i
 
   -- SCALAR ADDER
   -- CONTROL
-  signal start_scalar_adder : std_logic;
-  signal ready_scalar_adder : std_logic;
+  signal start_scalar_integer_adder : std_logic;
+  signal ready_scalar_integer_adder : std_logic;
 
-  signal operation_scalar_adder : std_logic;
+  signal operation_scalar_integer_adder : std_logic;
 
   -- DATA
-  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_scalar_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal overflow_out_scalar_adder : std_logic;
+  signal data_out_scalar_integer_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_scalar_integer_adder : std_logic;
 
 begin
 
@@ -155,9 +155,9 @@ begin
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
-      start_scalar_adder <= '0';
+      start_scalar_integer_adder <= '0';
 
-      operation_scalar_adder <= '0';
+      operation_scalar_integer_adder <= '0';
 
       index_loop <= ZERO_CONTROL;
 
@@ -165,8 +165,8 @@ begin
       data_b_in_adder_int <= '0';
 
       -- Data Internal
-      data_a_in_scalar_adder <= ZERO_DATA;
-      data_b_in_scalar_adder <= ZERO_DATA;
+      data_a_in_scalar_integer_adder <= ZERO_DATA;
+      data_b_in_scalar_integer_adder <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -188,7 +188,7 @@ begin
 
           if ((DATA_A_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
             -- Data Inputs
-            data_a_in_scalar_adder <= DATA_A_IN;
+            data_a_in_scalar_integer_adder <= DATA_A_IN;
 
             -- Control Internal
             data_a_in_adder_int <= '1';
@@ -196,7 +196,7 @@ begin
 
           if ((DATA_B_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
             -- Data Inputs
-            data_b_in_scalar_adder <= DATA_B_IN;
+            data_b_in_scalar_integer_adder <= DATA_B_IN;
 
             -- Control Internal
             data_b_in_adder_int <= '1';
@@ -204,12 +204,12 @@ begin
 
           if (data_a_in_adder_int = '1' and data_b_in_adder_int = '1') then
             -- Control Internal
-            start_scalar_adder <= '1';
+            start_scalar_integer_adder <= '1';
 
             data_a_in_adder_int <= '0';
             data_b_in_adder_int <= '0';
 
-            operation_scalar_adder <= OPERATION;
+            operation_scalar_integer_adder <= OPERATION;
 
             -- FSM Control
             adder_ctrl_fsm_int <= ENDER_STATE;
@@ -220,7 +220,7 @@ begin
 
         when ENDER_STATE =>  -- STEP 2
 
-          if (ready_scalar_adder = '1') then
+          if (ready_scalar_integer_adder = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
               -- Control Outputs
               READY <= '1';
@@ -239,14 +239,14 @@ begin
             end if;
 
             -- Data Outputs
-            DATA_OUT     <= data_out_scalar_adder;
-            OVERFLOW_OUT <= overflow_out_scalar_adder;
+            DATA_OUT     <= data_out_scalar_integer_adder;
+            OVERFLOW_OUT <= overflow_out_scalar_integer_adder;
 
             -- Control Outputs
             DATA_OUT_ENABLE <= '1';
           else
             -- Control Internal
-            start_scalar_adder <= '0';
+            start_scalar_integer_adder <= '0';
 
             data_a_in_adder_int <= '0';
             data_b_in_adder_int <= '0';
@@ -260,7 +260,7 @@ begin
   end process;
 
   -- SCALAR ADDER
-  scalar_adder : ntm_scalar_integer_adder
+  scalar_integer_adder : ntm_scalar_integer_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -271,17 +271,17 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_adder,
-      READY => ready_scalar_adder,
+      START => start_scalar_integer_adder,
+      READY => ready_scalar_integer_adder,
 
-      OPERATION => operation_scalar_adder,
+      OPERATION => operation_scalar_integer_adder,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_adder,
-      DATA_B_IN => data_b_in_scalar_adder,
+      DATA_A_IN => data_a_in_scalar_integer_adder,
+      DATA_B_IN => data_b_in_scalar_integer_adder,
 
-      DATA_OUT     => data_out_scalar_adder,
-      OVERFLOW_OUT => overflow_out_scalar_adder
+      DATA_OUT     => data_out_scalar_integer_adder,
+      OVERFLOW_OUT => overflow_out_scalar_integer_adder
       );
 
 end architecture;

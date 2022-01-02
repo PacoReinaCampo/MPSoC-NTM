@@ -186,15 +186,15 @@ begin
           end if;
 
         when ENDER_STATE =>  -- STEP 2
-		
-		  if (unsigned(index_fractional_loop) = unsigned(ZERO_DATA)) then
+    
+          if (unsigned(index_fractional_loop) = unsigned(ZERO_DATA)) then
             -- Data Outputs
             DATA_FRACTIONAL_OUT <= index_fractional_loop;
 
             -- Control Outputs
             READY <= '1';
           else
-		  end if;
+          end if;
 
         when others =>
           -- FSM Control
