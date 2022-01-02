@@ -119,7 +119,7 @@ begin
   memory_stimulus : ntm_memory_stimulus
     generic map (
       -- SYSTEM-SIZE
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE,
 
       X => X,
@@ -172,7 +172,7 @@ begin
   -- ADDRESSING
   addressing : ntm_addressing
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

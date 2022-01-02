@@ -123,7 +123,7 @@ architecture ntm_vector_integer_divider_architecture of ntm_vector_integer_divid
   signal ready_scalar_integer_divider : std_logic;
 
   -- DATA
-  signal rest_out_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rest_out_scalar_integer_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_integer_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -164,7 +164,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case divider_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY           <= '0';
           DATA_OUT_ENABLE <= '0';
@@ -177,7 +177,7 @@ begin
             divider_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_STATE =>  -- STEP 1
+        when INPUT_STATE =>             -- STEP 1
 
           if ((DATA_A_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
             -- Data Inputs
@@ -209,7 +209,7 @@ begin
           -- Control Outputs
           DATA_OUT_ENABLE <= '0';
 
-        when ENDER_STATE =>  -- STEP 2
+        when ENDER_STATE =>             -- STEP 2
 
           if (ready_scalar_integer_divider = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then

@@ -3,18 +3,22 @@
 ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_adder.vhd
 ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_multiplier.vhd
 ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_divider.vhd
+../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_full_divider.vhd
 
 ../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_adder.vhd
 ../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_multiplier.vhd
 ../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_divider.vhd
+../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_full_divider.vhd
 
-../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_adder.vhd
+../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_divider.vhd
 ../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_multiplier.vhd
 ../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_divider.vhd
+../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_full_divider.vhd
 
 ../../../../../../../rtl/vhdl/math/integer/tensor/ntm_tensor_integer_adder.vhd
 ../../../../../../../rtl/vhdl/math/integer/tensor/ntm_tensor_integer_multiplier.vhd
 ../../../../../../../rtl/vhdl/math/integer/tensor/ntm_tensor_integer_divider.vhd
+../../../../../../../rtl/vhdl/math/integer/tensor/ntm_tensor_integer_full_divider.vhd
 
 ../../../../../../../bench/vhdl/tests/math/integer/ntm_integer_pkg.vhd
 ../../../../../../../bench/vhdl/tests/math/integer/ntm_integer_stimulus.vhd

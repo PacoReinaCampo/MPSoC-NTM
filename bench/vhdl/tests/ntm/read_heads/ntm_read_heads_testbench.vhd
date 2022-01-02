@@ -105,7 +105,7 @@ begin
   read_heads_stimulus : ntm_read_heads_stimulus
     generic map (
       -- SYSTEM-SIZE
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE,
 
       X => X,
@@ -144,7 +144,7 @@ begin
   -- READING
   reading : ntm_reading
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

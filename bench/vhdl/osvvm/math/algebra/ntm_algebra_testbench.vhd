@@ -57,23 +57,23 @@ entity ntm_algebra_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- FUNCTIONALITY
-    ENABLE_NTM_MATRIX_PRODUCT_TEST     : boolean := false;
-    ENABLE_NTM_TENSOR_TRANSPOSE_TEST   : boolean := false;
-    ENABLE_NTM_MATRIX_TRANSPOSE_TEST   : boolean := false;
-    ENABLE_NTM_SCALAR_PRODUCT_TEST     : boolean := false;
-    ENABLE_NTM_TENSOR_PRODUCT_TEST     : boolean := false;
+    ENABLE_NTM_MATRIX_PRODUCT_TEST   : boolean := false;
+    ENABLE_NTM_TENSOR_TRANSPOSE_TEST : boolean := false;
+    ENABLE_NTM_MATRIX_TRANSPOSE_TEST : boolean := false;
+    ENABLE_NTM_SCALAR_PRODUCT_TEST   : boolean := false;
+    ENABLE_NTM_TENSOR_PRODUCT_TEST   : boolean := false;
 
-    ENABLE_NTM_MATRIX_PRODUCT_CASE_0     : boolean := false;
-    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_0   : boolean := false;
-    ENABLE_NTM_MATRIX_TRANSPOSE_CASE_0   : boolean := false;
-    ENABLE_NTM_SCALAR_PRODUCT_CASE_0     : boolean := false;
-    ENABLE_NTM_TENSOR_PRODUCT_CASE_0     : boolean := false;
+    ENABLE_NTM_MATRIX_PRODUCT_CASE_0   : boolean := false;
+    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_0 : boolean := false;
+    ENABLE_NTM_MATRIX_TRANSPOSE_CASE_0 : boolean := false;
+    ENABLE_NTM_SCALAR_PRODUCT_CASE_0   : boolean := false;
+    ENABLE_NTM_TENSOR_PRODUCT_CASE_0   : boolean := false;
 
-    ENABLE_NTM_MATRIX_PRODUCT_CASE_1     : boolean := false;
-    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_1   : boolean := false;
-    ENABLE_NTM_MATRIX_TRANSPOSE_CASE_1   : boolean := false;
-    ENABLE_NTM_SCALAR_PRODUCT_CASE_1     : boolean := false;
-    ENABLE_NTM_TENSOR_PRODUCT_CASE_1     : boolean := false
+    ENABLE_NTM_MATRIX_PRODUCT_CASE_1   : boolean := false;
+    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_1 : boolean := false;
+    ENABLE_NTM_MATRIX_TRANSPOSE_CASE_1 : boolean := false;
+    ENABLE_NTM_SCALAR_PRODUCT_CASE_1   : boolean := false;
+    ENABLE_NTM_TENSOR_PRODUCT_CASE_1   : boolean := false
     );
 end ntm_algebra_testbench;
 
@@ -187,7 +187,7 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal size_a_i_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_a_j_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_a_k_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_i_in_tensor_product  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_b_j_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_b_k_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -203,8 +203,8 @@ begin
   algebra_stimulus : ntm_algebra_stimulus
     generic map (
       -- SYSTEM-SIZE
-      DATA_SIZE  => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE,
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE,
 
       X => X,
       Y => Y,
@@ -330,7 +330,7 @@ begin
   ntm_matrix_product_test : if (ENABLE_NTM_MATRIX_PRODUCT_TEST) generate
     matrix_product : ntm_matrix_product
       generic map (
-        DATA_SIZE  => DATA_SIZE,
+        DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
@@ -366,7 +366,7 @@ begin
   ntm_tensor_transpose_test : if (ENABLE_NTM_TENSOR_PRODUCT_TEST) generate
     tensor_transpose : ntm_tensor_transpose
       generic map (
-        DATA_SIZE  => DATA_SIZE,
+        DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
@@ -400,7 +400,7 @@ begin
   ntm_matrix_transpose_test : if (ENABLE_NTM_MATRIX_TRANSPOSE_TEST) generate
     matrix_transpose : ntm_matrix_transpose
       generic map (
-        DATA_SIZE  => DATA_SIZE,
+        DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
@@ -431,7 +431,7 @@ begin
   ntm_scalar_product_test : if (ENABLE_NTM_SCALAR_PRODUCT_TEST) generate
     scalar_product : ntm_scalar_product
       generic map (
-        DATA_SIZE  => DATA_SIZE,
+        DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
@@ -461,7 +461,7 @@ begin
   ntm_tensor_product_test : if (ENABLE_NTM_TENSOR_PRODUCT_TEST) generate
     tensor_product : ntm_tensor_product
       generic map (
-        DATA_SIZE  => DATA_SIZE,
+        DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
         )
       port map (

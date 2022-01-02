@@ -57,43 +57,43 @@ entity ntm_float_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- SCALAR-FUNCTIONALITY
-    ENABLE_NTM_SCALAR_ADDER_TEST         : boolean := false;
-    ENABLE_NTM_SCALAR_MULTIPLIER_TEST    : boolean := false;
-    ENABLE_NTM_SCALAR_DIVIDER_TEST       : boolean := false;
+    ENABLE_NTM_SCALAR_ADDER_TEST      : boolean := false;
+    ENABLE_NTM_SCALAR_MULTIPLIER_TEST : boolean := false;
+    ENABLE_NTM_SCALAR_DIVIDER_TEST    : boolean := false;
 
-    ENABLE_NTM_SCALAR_ADDER_CASE_0         : boolean := false;
-    ENABLE_NTM_SCALAR_MULTIPLIER_CASE_0    : boolean := false;
-    ENABLE_NTM_SCALAR_DIVIDER_CASE_0       : boolean := false;
+    ENABLE_NTM_SCALAR_ADDER_CASE_0      : boolean := false;
+    ENABLE_NTM_SCALAR_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_NTM_SCALAR_DIVIDER_CASE_0    : boolean := false;
 
-    ENABLE_NTM_SCALAR_ADDER_CASE_1         : boolean := false;
-    ENABLE_NTM_SCALAR_MULTIPLIER_CASE_1    : boolean := false;
-    ENABLE_NTM_SCALAR_DIVIDER_CASE_1       : boolean := false;
+    ENABLE_NTM_SCALAR_ADDER_CASE_1      : boolean := false;
+    ENABLE_NTM_SCALAR_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_NTM_SCALAR_DIVIDER_CASE_1    : boolean := false;
 
     -- VECTOR-FUNCTIONALITY
-    ENABLE_NTM_VECTOR_ADDER_TEST         : boolean := false;
-    ENABLE_NTM_VECTOR_MULTIPLIER_TEST    : boolean := false;
-    ENABLE_NTM_VECTOR_DIVIDER_TEST       : boolean := false;
+    ENABLE_NTM_VECTOR_ADDER_TEST      : boolean := false;
+    ENABLE_NTM_VECTOR_MULTIPLIER_TEST : boolean := false;
+    ENABLE_NTM_VECTOR_DIVIDER_TEST    : boolean := false;
 
-    ENABLE_NTM_VECTOR_ADDER_CASE_0         : boolean := false;
-    ENABLE_NTM_VECTOR_MULTIPLIER_CASE_0    : boolean := false;
-    ENABLE_NTM_VECTOR_DIVIDER_CASE_0       : boolean := false;
+    ENABLE_NTM_VECTOR_ADDER_CASE_0      : boolean := false;
+    ENABLE_NTM_VECTOR_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_NTM_VECTOR_DIVIDER_CASE_0    : boolean := false;
 
-    ENABLE_NTM_VECTOR_ADDER_CASE_1         : boolean := false;
-    ENABLE_NTM_VECTOR_MULTIPLIER_CASE_1    : boolean := false;
-    ENABLE_NTM_VECTOR_DIVIDER_CASE_1       : boolean := false;
+    ENABLE_NTM_VECTOR_ADDER_CASE_1      : boolean := false;
+    ENABLE_NTM_VECTOR_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_NTM_VECTOR_DIVIDER_CASE_1    : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
-    ENABLE_NTM_MATRIX_ADDER_TEST         : boolean := false;
-    ENABLE_NTM_MATRIX_MULTIPLIER_TEST    : boolean := false;
-    ENABLE_NTM_MATRIX_DIVIDER_TEST       : boolean := false;
+    ENABLE_NTM_MATRIX_ADDER_TEST      : boolean := false;
+    ENABLE_NTM_MATRIX_MULTIPLIER_TEST : boolean := false;
+    ENABLE_NTM_MATRIX_DIVIDER_TEST    : boolean := false;
 
-    ENABLE_NTM_MATRIX_ADDER_CASE_0         : boolean := false;
-    ENABLE_NTM_MATRIX_MULTIPLIER_CASE_0    : boolean := false;
-    ENABLE_NTM_MATRIX_DIVIDER_CASE_0       : boolean := false;
+    ENABLE_NTM_MATRIX_ADDER_CASE_0      : boolean := false;
+    ENABLE_NTM_MATRIX_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_NTM_MATRIX_DIVIDER_CASE_0    : boolean := false;
 
-    ENABLE_NTM_MATRIX_ADDER_CASE_1         : boolean := false;
-    ENABLE_NTM_MATRIX_MULTIPLIER_CASE_1    : boolean := false;
-    ENABLE_NTM_MATRIX_DIVIDER_CASE_1       : boolean := false
+    ENABLE_NTM_MATRIX_ADDER_CASE_1      : boolean := false;
+    ENABLE_NTM_MATRIX_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_NTM_MATRIX_DIVIDER_CASE_1    : boolean := false
     );
 end ntm_float_testbench;
 
@@ -290,8 +290,8 @@ begin
   float_stimulus : ntm_float_stimulus
     generic map (
       -- SYSTEM-SIZE
-      DATA_SIZE  => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE,
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE,
 
       X => X,
       Y => Y,
@@ -470,7 +470,7 @@ begin
   ntm_scalar_adder_test : if (ENABLE_NTM_SCALAR_ADDER_TEST) generate
     scalar_adder : ntm_scalar_adder
       generic map (
-        DATA_SIZE  => DATA_SIZE,
+        DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
@@ -497,7 +497,7 @@ begin
   ntm_scalar_multiplier_test : if (ENABLE_NTM_SCALAR_MULTIPLIER_TEST) generate
     scalar_multiplier : ntm_scalar_multiplier
       generic map (
-        DATA_SIZE  => DATA_SIZE,
+        DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
@@ -522,7 +522,7 @@ begin
   ntm_scalar_divider_test : if (ENABLE_NTM_SCALAR_DIVIDER_TEST) generate
     scalar_divider : ntm_scalar_divider
       generic map (
-        DATA_SIZE  => DATA_SIZE,
+        DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
@@ -551,7 +551,7 @@ begin
   ntm_vector_adder_test : if (ENABLE_NTM_VECTOR_ADDER_TEST) generate
     vector_adder : ntm_vector_adder
       generic map (
-        DATA_SIZE  => DATA_SIZE,
+        DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
@@ -584,7 +584,7 @@ begin
   ntm_vector_multiplier_test : if (ENABLE_NTM_VECTOR_MULTIPLIER_TEST) generate
     vector_multiplier : ntm_vector_multiplier
       generic map (
-        DATA_SIZE  => DATA_SIZE,
+        DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
@@ -615,7 +615,7 @@ begin
   ntm_vector_divider_test : if (ENABLE_NTM_VECTOR_DIVIDER_TEST) generate
     vector_divider : ntm_vector_divider
       generic map (
-        DATA_SIZE  => DATA_SIZE,
+        DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
@@ -650,7 +650,7 @@ begin
   ntm_matrix_adder_test : if (ENABLE_NTM_MATRIX_ADDER_TEST) generate
     matrix_adder : ntm_matrix_adder
       generic map (
-        DATA_SIZE  => DATA_SIZE,
+        DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
@@ -687,7 +687,7 @@ begin
   ntm_matrix_multiplier_test : if (ENABLE_NTM_MATRIX_MULTIPLIER_TEST) generate
     matrix_multiplier : ntm_matrix_multiplier
       generic map (
-        DATA_SIZE  => DATA_SIZE,
+        DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
@@ -722,7 +722,7 @@ begin
   ntm_matrix_divider_test : if (ENABLE_NTM_MATRIX_DIVIDER_TEST) generate
     matrix_divider : ntm_matrix_divider
       generic map (
-        DATA_SIZE  => DATA_SIZE,
+        DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
         )
       port map (

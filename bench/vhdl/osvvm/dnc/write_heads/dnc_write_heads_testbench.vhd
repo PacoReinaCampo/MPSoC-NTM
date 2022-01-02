@@ -156,7 +156,7 @@ begin
   write_heads_stimulus : dnc_write_heads_stimulus
     generic map (
       -- SYSTEM-SIZE
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE,
 
       X => X,
@@ -253,7 +253,7 @@ begin
   -- ALLOCATION GATE
   allocation_gate : dnc_allocation_gate
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -274,7 +274,7 @@ begin
   -- ERASE VECTOR
   erase_vector : dnc_erase_vector
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -301,7 +301,7 @@ begin
   -- WRITE GATE
   write_gate : dnc_write_gate
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -322,7 +322,7 @@ begin
   -- WRITE KEY
   write_key : dnc_write_key
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -349,7 +349,7 @@ begin
   -- WRITE STRENGTH
   write_strength : dnc_write_strength
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -370,7 +370,7 @@ begin
   -- WRITE VECTOR
   write_vector : dnc_write_vector
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

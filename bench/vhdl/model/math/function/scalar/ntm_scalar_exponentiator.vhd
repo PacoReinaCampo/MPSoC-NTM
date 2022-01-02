@@ -195,7 +195,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case multiplier_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -221,7 +221,7 @@ begin
             multiplier_ctrl_fsm_int <= ARITHMETIC_STATE;
           end if;
 
-        when ARITHMETIC_STATE =>  -- STEP 1
+        when ARITHMETIC_STATE =>        -- STEP 1
 
           if (ready_scalar_adder = '1') then
             -- Data Outputs
@@ -239,7 +239,7 @@ begin
             start_scalar_multiplier <= '0';
           end if;
 
-        when ADAPTATION_STATE =>  -- STEP 2
+        when ADAPTATION_STATE =>        -- STEP 2
 
           if (exponent_int_scalar_multiplier(EXPONENT_SIZE-1) = '1') then
             -- Data Outputs
@@ -247,9 +247,9 @@ begin
             mantissa_int_scalar_multiplier <= std_logic_vector(unsigned(mantissa_int_scalar_multiplier) sll 1);
           end if;
 
-        when NORMALIZATION_STATE =>  -- STEP 3
+        when NORMALIZATION_STATE =>     -- STEP 3
 
-        when ENDER_STATE =>  -- STEP 4
+        when ENDER_STATE =>             -- STEP 4
 
           -- Control Outputs
           READY <= '1';

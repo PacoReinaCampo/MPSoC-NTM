@@ -70,68 +70,68 @@ package ntm_modular_pkg is
   constant R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
   -- SCALAR-FUNCTIONALITY
-  signal STIMULUS_NTM_SCALAR_MODULAR_MOD_TEST           : boolean := false;
-  signal STIMULUS_NTM_SCALAR_MODULAR_ADDER_TEST         : boolean := false;
-  signal STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_TEST    : boolean := false;
-  signal STIMULUS_NTM_SCALAR_MODULAR_INVERTER_TEST      : boolean := false;
+  signal STIMULUS_NTM_SCALAR_MODULAR_MOD_TEST        : boolean := false;
+  signal STIMULUS_NTM_SCALAR_MODULAR_ADDER_TEST      : boolean := false;
+  signal STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_NTM_SCALAR_MODULAR_INVERTER_TEST   : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_MODULAR_MOD_CASE_0           : boolean := false;
-  signal STIMULUS_NTM_SCALAR_MODULAR_ADDER_CASE_0         : boolean := false;
-  signal STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_CASE_0    : boolean := false;
-  signal STIMULUS_NTM_SCALAR_MODULAR_INVERTER_CASE_0      : boolean := false;
+  signal STIMULUS_NTM_SCALAR_MODULAR_MOD_CASE_0        : boolean := false;
+  signal STIMULUS_NTM_SCALAR_MODULAR_ADDER_CASE_0      : boolean := false;
+  signal STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_SCALAR_MODULAR_INVERTER_CASE_0   : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_MODULAR_MOD_CASE_1           : boolean := false;
-  signal STIMULUS_NTM_SCALAR_MODULAR_ADDER_CASE_1         : boolean := false;
-  signal STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_CASE_1    : boolean := false;
-  signal STIMULUS_NTM_SCALAR_MODULAR_INVERTER_CASE_1      : boolean := false;
+  signal STIMULUS_NTM_SCALAR_MODULAR_MOD_CASE_1        : boolean := false;
+  signal STIMULUS_NTM_SCALAR_MODULAR_ADDER_CASE_1      : boolean := false;
+  signal STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_SCALAR_MODULAR_INVERTER_CASE_1   : boolean := false;
 
   -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_NTM_VECTOR_MODULAR_MOD_TEST           : boolean := false;
-  signal STIMULUS_NTM_VECTOR_MODULAR_ADDER_TEST         : boolean := false;
-  signal STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_TEST    : boolean := false;
-  signal STIMULUS_NTM_VECTOR_MODULAR_INVERTER_TEST      : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MODULAR_MOD_TEST        : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MODULAR_ADDER_TEST      : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MODULAR_INVERTER_TEST   : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_MODULAR_MOD_CASE_0           : boolean := false;
-  signal STIMULUS_NTM_VECTOR_MODULAR_ADDER_CASE_0         : boolean := false;
-  signal STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_0    : boolean := false;
-  signal STIMULUS_NTM_VECTOR_MODULAR_INVERTER_CASE_0      : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MODULAR_MOD_CASE_0        : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MODULAR_ADDER_CASE_0      : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MODULAR_INVERTER_CASE_0   : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_MODULAR_MOD_CASE_1           : boolean := false;
-  signal STIMULUS_NTM_VECTOR_MODULAR_ADDER_CASE_1         : boolean := false;
-  signal STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_1    : boolean := false;
-  signal STIMULUS_NTM_VECTOR_MODULAR_INVERTER_CASE_1      : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MODULAR_MOD_CASE_1        : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MODULAR_ADDER_CASE_1      : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MODULAR_INVERTER_CASE_1   : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
-  signal STIMULUS_NTM_MATRIX_MODULAR_MOD_TEST           : boolean := false;
-  signal STIMULUS_NTM_MATRIX_MODULAR_ADDER_TEST         : boolean := false;
-  signal STIMULUS_NTM_MATRIX_MODULAR_MULTIPLIER_TEST    : boolean := false;
-  signal STIMULUS_NTM_MATRIX_MODULAR_INVERTER_TEST      : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MODULAR_MOD_TEST        : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MODULAR_ADDER_TEST      : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MODULAR_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MODULAR_INVERTER_TEST   : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_MODULAR_MOD_CASE_0           : boolean := false;
-  signal STIMULUS_NTM_MATRIX_MODULAR_ADDER_CASE_0         : boolean := false;
-  signal STIMULUS_NTM_MATRIX_MODULAR_MULTIPLIER_CASE_0    : boolean := false;
-  signal STIMULUS_NTM_MATRIX_MODULAR_INVERTER_CASE_0      : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MODULAR_MOD_CASE_0        : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MODULAR_ADDER_CASE_0      : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MODULAR_MULTIPLIER_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MODULAR_INVERTER_CASE_0   : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_MODULAR_MOD_CASE_1           : boolean := false;
-  signal STIMULUS_NTM_MATRIX_MODULAR_ADDER_CASE_1         : boolean := false;
-  signal STIMULUS_NTM_MATRIX_MODULAR_MULTIPLIER_CASE_1    : boolean := false;
-  signal STIMULUS_NTM_MATRIX_MODULAR_INVERTER_CASE_1      : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MODULAR_MOD_CASE_1        : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MODULAR_ADDER_CASE_1      : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MODULAR_MULTIPLIER_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MODULAR_INVERTER_CASE_1   : boolean := false;
 
   -- TENSOR-FUNCTIONALITY
-  signal STIMULUS_NTM_TENSOR_MODULAR_MOD_TEST           : boolean := false;
-  signal STIMULUS_NTM_TENSOR_MODULAR_ADDER_TEST         : boolean := false;
-  signal STIMULUS_NTM_TENSOR_MODULAR_MULTIPLIER_TEST    : boolean := false;
-  signal STIMULUS_NTM_TENSOR_MODULAR_INVERTER_TEST      : boolean := false;
+  signal STIMULUS_NTM_TENSOR_MODULAR_MOD_TEST        : boolean := false;
+  signal STIMULUS_NTM_TENSOR_MODULAR_ADDER_TEST      : boolean := false;
+  signal STIMULUS_NTM_TENSOR_MODULAR_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_NTM_TENSOR_MODULAR_INVERTER_TEST   : boolean := false;
 
-  signal STIMULUS_NTM_TENSOR_MODULAR_MOD_CASE_0           : boolean := false;
-  signal STIMULUS_NTM_TENSOR_MODULAR_ADDER_CASE_0         : boolean := false;
-  signal STIMULUS_NTM_TENSOR_MODULAR_MULTIPLIER_CASE_0    : boolean := false;
-  signal STIMULUS_NTM_TENSOR_MODULAR_INVERTER_CASE_0      : boolean := false;
+  signal STIMULUS_NTM_TENSOR_MODULAR_MOD_CASE_0        : boolean := false;
+  signal STIMULUS_NTM_TENSOR_MODULAR_ADDER_CASE_0      : boolean := false;
+  signal STIMULUS_NTM_TENSOR_MODULAR_MULTIPLIER_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_TENSOR_MODULAR_INVERTER_CASE_0   : boolean := false;
 
-  signal STIMULUS_NTM_TENSOR_MODULAR_MOD_CASE_1           : boolean := false;
-  signal STIMULUS_NTM_TENSOR_MODULAR_ADDER_CASE_1         : boolean := false;
-  signal STIMULUS_NTM_TENSOR_MODULAR_MULTIPLIER_CASE_1    : boolean := false;
-  signal STIMULUS_NTM_TENSOR_MODULAR_INVERTER_CASE_1      : boolean := false;
+  signal STIMULUS_NTM_TENSOR_MODULAR_MOD_CASE_1        : boolean := false;
+  signal STIMULUS_NTM_TENSOR_MODULAR_ADDER_CASE_1      : boolean := false;
+  signal STIMULUS_NTM_TENSOR_MODULAR_MULTIPLIER_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_TENSOR_MODULAR_INVERTER_CASE_1   : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
@@ -148,7 +148,7 @@ package ntm_modular_pkg is
       N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
       W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
       L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
-      R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))   -- i in 0 to R-1
+      R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i in 0 to R-1
       );
     port (
       -- GLOBAL

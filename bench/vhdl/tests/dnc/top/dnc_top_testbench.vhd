@@ -133,7 +133,7 @@ begin
   top_stimulus : dnc_top_stimulus
     generic map (
       -- SYSTEM-SIZE
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE,
 
       X => X,
@@ -200,8 +200,8 @@ begin
   dnc_top_test : if (ENABLE_DNC_TOP_TEST) generate
     top : dnc_top
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL

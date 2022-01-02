@@ -56,7 +56,7 @@ entity ntm_float_stimulus is
     N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
     W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
     L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
-    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))   -- i in 0 to R-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i in 0 to R-1
     );
   port (
     -- GLOBAL
@@ -323,19 +323,19 @@ begin
   end process;
 
   -- SCALAR-FUNCTIONALITY
-  SCALAR_ADDER_START         <= start_int;
-  SCALAR_MULTIPLIER_START    <= start_int;
-  SCALAR_DIVIDER_START       <= start_int;
+  SCALAR_ADDER_START      <= start_int;
+  SCALAR_MULTIPLIER_START <= start_int;
+  SCALAR_DIVIDER_START    <= start_int;
 
   -- VECTOR-FUNCTIONALITY
-  VECTOR_ADDER_START         <= start_int;
-  VECTOR_MULTIPLIER_START    <= start_int;
-  VECTOR_DIVIDER_START       <= start_int;
+  VECTOR_ADDER_START      <= start_int;
+  VECTOR_MULTIPLIER_START <= start_int;
+  VECTOR_DIVIDER_START    <= start_int;
 
   -- MATRIX-FUNCTIONALITY
-  MATRIX_ADDER_START         <= start_int;
-  MATRIX_MULTIPLIER_START    <= start_int;
-  MATRIX_DIVIDER_START       <= start_int;
+  MATRIX_ADDER_START      <= start_int;
+  MATRIX_MULTIPLIER_START <= start_int;
+  MATRIX_DIVIDER_START    <= start_int;
 
   -----------------------------------------------------------------------
   -- STIMULUS
@@ -449,7 +449,7 @@ begin
       VECTOR_ADDER_OPERATION <= '0';
 
       -- DATA
-      VECTOR_ADDER_SIZE_IN   <= THREE_CONTROL;
+      VECTOR_ADDER_SIZE_IN <= THREE_CONTROL;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_ADDER_CASE 0        ";
@@ -548,7 +548,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_MULTIPLIER_SIZE_IN   <= THREE_CONTROL;
+      VECTOR_MULTIPLIER_SIZE_IN <= THREE_CONTROL;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_MULTIPLIER_CASE 0   ";
@@ -647,7 +647,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_DIVIDER_SIZE_IN   <= THREE_CONTROL;
+      VECTOR_DIVIDER_SIZE_IN <= THREE_CONTROL;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_VECTOR_DIVIDER_CASE 0      ";

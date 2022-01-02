@@ -56,7 +56,7 @@ entity ntm_modular_stimulus is
     N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
     W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
     L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
-    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))   -- i in 0 to R-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i in 0 to R-1
     );
   port (
     -- GLOBAL
@@ -455,28 +455,28 @@ begin
   end process;
 
   -- SCALAR-FUNCTIONALITY
-  SCALAR_MODULAR_MOD_START           <= start_int;
-  SCALAR_MODULAR_ADDER_START         <= start_int;
-  SCALAR_MODULAR_MULTIPLIER_START    <= start_int;
-  SCALAR_MODULAR_INVERTER_START      <= start_int;
+  SCALAR_MODULAR_MOD_START        <= start_int;
+  SCALAR_MODULAR_ADDER_START      <= start_int;
+  SCALAR_MODULAR_MULTIPLIER_START <= start_int;
+  SCALAR_MODULAR_INVERTER_START   <= start_int;
 
   -- VECTOR-FUNCTIONALITY
-  VECTOR_MODULAR_MOD_START           <= start_int;
-  VECTOR_MODULAR_ADDER_START         <= start_int;
-  VECTOR_MODULAR_MULTIPLIER_START    <= start_int;
-  VECTOR_MODULAR_INVERTER_START      <= start_int;
+  VECTOR_MODULAR_MOD_START        <= start_int;
+  VECTOR_MODULAR_ADDER_START      <= start_int;
+  VECTOR_MODULAR_MULTIPLIER_START <= start_int;
+  VECTOR_MODULAR_INVERTER_START   <= start_int;
 
   -- MATRIX-FUNCTIONALITY
-  MATRIX_MODULAR_MOD_START           <= start_int;
-  MATRIX_MODULAR_ADDER_START         <= start_int;
-  MATRIX_MODULAR_MULTIPLIER_START    <= start_int;
-  MATRIX_MODULAR_INVERTER_START      <= start_int;
+  MATRIX_MODULAR_MOD_START        <= start_int;
+  MATRIX_MODULAR_ADDER_START      <= start_int;
+  MATRIX_MODULAR_MULTIPLIER_START <= start_int;
+  MATRIX_MODULAR_INVERTER_START   <= start_int;
 
   -- TENSOR-FUNCTIONALITY
-  TENSOR_MODULAR_MOD_START           <= start_int;
-  TENSOR_MODULAR_ADDER_START         <= start_int;
-  TENSOR_MODULAR_MULTIPLIER_START    <= start_int;
-  TENSOR_MODULAR_INVERTER_START      <= start_int;
+  TENSOR_MODULAR_MOD_START        <= start_int;
+  TENSOR_MODULAR_ADDER_START      <= start_int;
+  TENSOR_MODULAR_MULTIPLIER_START <= start_int;
+  TENSOR_MODULAR_INVERTER_START   <= start_int;
 
   -----------------------------------------------------------------------
   -- STIMULUS
@@ -1437,7 +1437,7 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_MATRIX_INVERTER_CASE 0     ";
         -------------------------------------------------------------------
 
-      -- INITIAL CONDITIONS
+        -- INITIAL CONDITIONS
         -- CONTROL
         MATRIX_MODULAR_INVERTER_DATA_IN_I_ENABLE <= '1';
         MATRIX_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';

@@ -67,10 +67,10 @@ entity ntm_matrix_divider is
     DATA_OUT_J_ENABLE : out std_logic;
 
     -- DATA
-    SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     REST_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -141,7 +141,7 @@ architecture ntm_matrix_divider_architecture of ntm_matrix_divider is
   signal data_a_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_vector_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal rest_out_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -188,7 +188,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case divider_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -204,7 +204,7 @@ begin
             divider_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
-        when INPUT_I_STATE =>  -- STEP 1
+        when INPUT_I_STATE =>           -- STEP 1
 
           if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
             -- Data Inputs
@@ -257,7 +257,7 @@ begin
             divider_ctrl_fsm_int <= ENDER_J_STATE;
           end if;
 
-        when INPUT_J_STATE =>  -- STEP 2
+        when INPUT_J_STATE =>           -- STEP 2
 
           if (DATA_A_IN_J_ENABLE = '1') then
             -- Data Inputs
@@ -304,7 +304,7 @@ begin
             end if;
           end if;
 
-        when ENDER_I_STATE =>  -- STEP 3
+        when ENDER_I_STATE =>           -- STEP 3
 
           if (data_out_enable_vector_divider = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
@@ -345,7 +345,7 @@ begin
             start_vector_divider <= '0';
           end if;
 
-        when ENDER_J_STATE =>  -- STEP 3
+        when ENDER_J_STATE =>           -- STEP 3
 
           if (data_out_enable_vector_divider = '1') then
             if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then

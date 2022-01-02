@@ -132,7 +132,7 @@ begin
   ntm_standard_fnn_stimulus_i : ntm_standard_fnn_stimulus
     generic map (
       -- SYSTEM-SIZE
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE,
 
       X => X,
@@ -215,7 +215,7 @@ begin
   -- CONTROLLER
   ntm_controller_i : ntm_controller
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

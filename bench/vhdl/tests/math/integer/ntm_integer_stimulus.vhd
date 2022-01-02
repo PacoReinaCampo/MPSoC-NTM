@@ -56,7 +56,7 @@ entity ntm_integer_stimulus is
     N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
     W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
     L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
-    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))   -- i in 0 to R-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i in 0 to R-1
     );
   port (
     -- GLOBAL
@@ -78,8 +78,8 @@ entity ntm_integer_stimulus is
     SCALAR_INTEGER_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_INTEGER_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    SCALAR_INTEGER_ADDER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_INTEGER_ADDER_OVERFLOW_OUT : in  std_logic;
+    SCALAR_INTEGER_ADDER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_INTEGER_ADDER_OVERFLOW_OUT : in std_logic;
 
     -- SCALAR MULTIPLIER
     -- CONTROL
@@ -90,8 +90,8 @@ entity ntm_integer_stimulus is
     SCALAR_INTEGER_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_INTEGER_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    SCALAR_INTEGER_MULTIPLIER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_INTEGER_MULTIPLIER_OVERFLOW_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_INTEGER_MULTIPLIER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_INTEGER_MULTIPLIER_OVERFLOW_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- SCALAR DIVIDER
     -- CONTROL
@@ -102,8 +102,8 @@ entity ntm_integer_stimulus is
     SCALAR_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    SCALAR_INTEGER_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_INTEGER_DIVIDER_REST_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- SCALAR FULL DIVIDER
     -- CONTROL
@@ -114,8 +114,8 @@ entity ntm_integer_stimulus is
     SCALAR_INTEGER_FULL_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_INTEGER_FULL_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    SCALAR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_INTEGER_FULL_DIVIDER_DATA_FRACTIONAL_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_INTEGER_FULL_DIVIDER_DATA_FRACTIONAL_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -----------------------------------------------------------------------
     -- STIMULUS VECTOR
@@ -138,8 +138,8 @@ entity ntm_integer_stimulus is
     VECTOR_INTEGER_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_INTEGER_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    VECTOR_INTEGER_ADDER_DATA_OUT      : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_INTEGER_ADDER_OVERFLOW_OUT  : in  std_logic;
+    VECTOR_INTEGER_ADDER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_INTEGER_ADDER_OVERFLOW_OUT : in std_logic;
 
     -- VECTOR MULTIPLIER
     -- CONTROL
@@ -156,8 +156,8 @@ entity ntm_integer_stimulus is
     VECTOR_INTEGER_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_INTEGER_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    VECTOR_INTEGER_MULTIPLIER_DATA_OUT      : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_INTEGER_MULTIPLIER_OVERFLOW_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_INTEGER_MULTIPLIER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_INTEGER_MULTIPLIER_OVERFLOW_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- VECTOR DIVIDER
     -- CONTROL
@@ -174,8 +174,8 @@ entity ntm_integer_stimulus is
     VECTOR_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    VECTOR_INTEGER_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_INTEGER_DIVIDER_REST_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- VECTOR FULL DIVIDER
     -- CONTROL
@@ -192,8 +192,8 @@ entity ntm_integer_stimulus is
     VECTOR_INTEGER_FULL_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_INTEGER_FULL_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    VECTOR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_INTEGER_FULL_DIVIDER_DATA_FRACTIONAL_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_INTEGER_FULL_DIVIDER_DATA_FRACTIONAL_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -----------------------------------------------------------------------
     -- STIMULUS MATRIX
@@ -220,8 +220,8 @@ entity ntm_integer_stimulus is
     MATRIX_INTEGER_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_INTEGER_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    MATRIX_INTEGER_ADDER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_INTEGER_ADDER_OVERFLOW_OUT : in  std_logic;
+    MATRIX_INTEGER_ADDER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_INTEGER_ADDER_OVERFLOW_OUT : in std_logic;
 
     -- MATRIX MULTIPLIER
     -- CONTROL
@@ -242,8 +242,8 @@ entity ntm_integer_stimulus is
     MATRIX_INTEGER_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_INTEGER_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    MATRIX_INTEGER_MULTIPLIER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_INTEGER_MULTIPLIER_OVERFLOW_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_INTEGER_MULTIPLIER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_INTEGER_MULTIPLIER_OVERFLOW_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- MATRIX DIVIDER
     -- CONTROL
@@ -264,8 +264,8 @@ entity ntm_integer_stimulus is
     MATRIX_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    MATRIX_INTEGER_DIVIDER_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_INTEGER_DIVIDER_REST_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- MATRIX FULL DIVIDER
     -- CONTROL
@@ -286,8 +286,8 @@ entity ntm_integer_stimulus is
     MATRIX_INTEGER_FULL_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_INTEGER_FULL_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    MATRIX_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_INTEGER_FULL_DIVIDER_DATA_FRACTIONAL_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_INTEGER_FULL_DIVIDER_DATA_FRACTIONAL_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -----------------------------------------------------------------------
     -- STIMULUS TENSOR
@@ -318,8 +318,8 @@ entity ntm_integer_stimulus is
     TENSOR_INTEGER_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_INTEGER_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    TENSOR_INTEGER_ADDER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_INTEGER_ADDER_OVERFLOW_OUT : in  std_logic;
+    TENSOR_INTEGER_ADDER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_INTEGER_ADDER_OVERFLOW_OUT : in std_logic;
 
     -- TENSOR MULTIPLIER
     -- CONTROL
@@ -344,8 +344,8 @@ entity ntm_integer_stimulus is
     TENSOR_INTEGER_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_INTEGER_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    TENSOR_INTEGER_MULTIPLIER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_INTEGER_MULTIPLIER_OVERFLOW_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_INTEGER_MULTIPLIER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_INTEGER_MULTIPLIER_OVERFLOW_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- TENSOR DIVIDER
     -- CONTROL
@@ -370,8 +370,8 @@ entity ntm_integer_stimulus is
     TENSOR_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    TENSOR_INTEGER_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_INTEGER_DIVIDER_REST_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- TENSOR FULL DIVIDER
     -- CONTROL
@@ -396,8 +396,8 @@ entity ntm_integer_stimulus is
     TENSOR_INTEGER_FULL_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_INTEGER_FULL_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    TENSOR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_INTEGER_FULL_DIVIDER_DATA_FRACTIONAL_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
+    TENSOR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_INTEGER_FULL_DIVIDER_DATA_FRACTIONAL_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -491,28 +491,28 @@ begin
   end process;
 
   -- SCALAR-FUNCTIONALITY
-  SCALAR_INTEGER_ADDER_START         <= start_int;
-  SCALAR_INTEGER_MULTIPLIER_START    <= start_int;
-  SCALAR_INTEGER_DIVIDER_START       <= start_int;
-  SCALAR_INTEGER_FULL_DIVIDER_START  <= start_int;
+  SCALAR_INTEGER_ADDER_START        <= start_int;
+  SCALAR_INTEGER_MULTIPLIER_START   <= start_int;
+  SCALAR_INTEGER_DIVIDER_START      <= start_int;
+  SCALAR_INTEGER_FULL_DIVIDER_START <= start_int;
 
   -- VECTOR-FUNCTIONALITY
-  VECTOR_INTEGER_ADDER_START         <= start_int;
-  VECTOR_INTEGER_MULTIPLIER_START    <= start_int;
-  VECTOR_INTEGER_DIVIDER_START       <= start_int;
-  VECTOR_INTEGER_FULL_DIVIDER_START  <= start_int;
+  VECTOR_INTEGER_ADDER_START        <= start_int;
+  VECTOR_INTEGER_MULTIPLIER_START   <= start_int;
+  VECTOR_INTEGER_DIVIDER_START      <= start_int;
+  VECTOR_INTEGER_FULL_DIVIDER_START <= start_int;
 
   -- MATRIX-FUNCTIONALITY
-  MATRIX_INTEGER_ADDER_START         <= start_int;
-  MATRIX_INTEGER_MULTIPLIER_START    <= start_int;
-  MATRIX_INTEGER_DIVIDER_START       <= start_int;
-  MATRIX_INTEGER_FULL_DIVIDER_START  <= start_int;
+  MATRIX_INTEGER_ADDER_START        <= start_int;
+  MATRIX_INTEGER_MULTIPLIER_START   <= start_int;
+  MATRIX_INTEGER_DIVIDER_START      <= start_int;
+  MATRIX_INTEGER_FULL_DIVIDER_START <= start_int;
 
   -- TENSOR-FUNCTIONALITY
-  TENSOR_INTEGER_ADDER_START         <= start_int;
-  TENSOR_INTEGER_MULTIPLIER_START    <= start_int;
-  TENSOR_INTEGER_DIVIDER_START       <= start_int;
-  TENSOR_INTEGER_FULL_DIVIDER_START  <= start_int;
+  TENSOR_INTEGER_ADDER_START        <= start_int;
+  TENSOR_INTEGER_MULTIPLIER_START   <= start_int;
+  TENSOR_INTEGER_DIVIDER_START      <= start_int;
+  TENSOR_INTEGER_FULL_DIVIDER_START <= start_int;
 
   -----------------------------------------------------------------------
   -- STIMULUS
@@ -662,7 +662,7 @@ begin
       VECTOR_INTEGER_ADDER_OPERATION <= '0';
 
       -- DATA
-      VECTOR_INTEGER_ADDER_SIZE_IN   <= THREE_CONTROL;
+      VECTOR_INTEGER_ADDER_SIZE_IN <= THREE_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_0) then
 
@@ -763,7 +763,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_INTEGER_MULTIPLIER_SIZE_IN   <= THREE_CONTROL;
+      VECTOR_INTEGER_MULTIPLIER_SIZE_IN <= THREE_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_0) then
 
@@ -864,7 +864,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_INTEGER_DIVIDER_SIZE_IN   <= THREE_CONTROL;
+      VECTOR_INTEGER_DIVIDER_SIZE_IN <= THREE_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_0) then
 
@@ -965,7 +965,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_INTEGER_FULL_DIVIDER_SIZE_IN   <= THREE_CONTROL;
+      VECTOR_INTEGER_FULL_DIVIDER_SIZE_IN <= THREE_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_INTEGER_FULL_DIVIDER_CASE_0) then
 
@@ -2186,7 +2186,8 @@ begin
 
       wait for WORKING;
 
-    end if;    if (STIMULUS_NTM_TENSOR_INTEGER_FULL_DIVIDER_TEST) then
+    end if;
+    if (STIMULUS_NTM_TENSOR_INTEGER_FULL_DIVIDER_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_NTM_TENSOR_FULL_DIVIDER_TEST   ";

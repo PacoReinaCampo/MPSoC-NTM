@@ -59,8 +59,8 @@ entity ntm_scalar_multiplier is
     READY : out std_logic;
 
     -- DATA
-    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
     OVERFLOW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -205,7 +205,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case multiplier_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -229,7 +229,7 @@ begin
             multiplier_ctrl_fsm_int <= ARITHMETIC_STATE;
           end if;
 
-        when ARITHMETIC_STATE =>  -- STEP 1
+        when ARITHMETIC_STATE =>        -- STEP 1
 
           if (ready_scalar_adder = '1') then
             -- Data Outputs
@@ -247,7 +247,7 @@ begin
             start_scalar_multiplier <= '0';
           end if;
 
-        when ADAPTATION_STATE =>  -- STEP 2
+        when ADAPTATION_STATE =>        -- STEP 2
 
           if (unsigned(overflow_out_scalar_multiplier) = unsigned(ZERO_MANTISSA)) then
             -- Data Outputs
@@ -255,7 +255,7 @@ begin
             mantissa_int_scalar_multiplier <= std_logic_vector(unsigned(mantissa_int_scalar_multiplier) srl 1);
           end if;
 
-        when NORMALIZATION_STATE =>  -- STEP 3
+        when NORMALIZATION_STATE =>     -- STEP 3
 
           if (overflow_out_scalar_multiplier(0) = '0') then
             -- Data Outputs
@@ -263,7 +263,7 @@ begin
             mantissa_int_scalar_multiplier <= std_logic_vector(unsigned(mantissa_int_scalar_multiplier) sll 1);
           end if;
 
-        when ENDER_STATE =>  -- STEP 4
+        when ENDER_STATE =>             -- STEP 4
 
           -- Control Outputs
           READY <= '1';

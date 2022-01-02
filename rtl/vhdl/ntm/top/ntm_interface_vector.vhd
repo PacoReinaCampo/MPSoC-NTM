@@ -226,7 +226,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_scalar_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -246,8 +246,8 @@ begin
           -- beta(t) = Wbeta(t;l)·h(t;l)
 
           -- Control Inputs
-         data_a_in_enable_scalar_product <= WBETA_IN_ENABLE;
-         data_b_in_enable_scalar_product <= H_IN_ENABLE;
+          data_a_in_enable_scalar_product <= WBETA_IN_ENABLE;
+          data_b_in_enable_scalar_product <= H_IN_ENABLE;
 
           -- Data Inputs
           modulo_in_scalar_product <= FULL;
@@ -263,8 +263,8 @@ begin
           -- g(t) = Wg(t;l)·h(t;l)
 
           -- Control Inputs
-         data_a_in_enable_scalar_product <= WG_IN_ENABLE;
-         data_b_in_enable_scalar_product <= H_IN_ENABLE;
+          data_a_in_enable_scalar_product <= WG_IN_ENABLE;
+          data_b_in_enable_scalar_product <= H_IN_ENABLE;
 
           -- Data Inputs
           modulo_in_scalar_product <= FULL;
@@ -280,9 +280,9 @@ begin
           -- gamma(t) = Wgamma(t;l)·h(t;l)
 
           -- Control Inputs
-         data_a_in_enable_scalar_product <= WGAMMA_IN_ENABLE;
-         data_b_in_enable_scalar_product <= H_IN_ENABLE;
-      
+          data_a_in_enable_scalar_product <= WGAMMA_IN_ENABLE;
+          data_b_in_enable_scalar_product <= H_IN_ENABLE;
+
           -- Data Inputs
           modulo_in_scalar_product <= FULL;
           length_in_scalar_product <= SIZE_L_IN;
@@ -312,7 +312,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_matrix_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 

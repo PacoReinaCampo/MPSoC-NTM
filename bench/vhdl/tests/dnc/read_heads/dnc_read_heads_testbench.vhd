@@ -147,7 +147,7 @@ begin
   read_heads_stimulus : dnc_read_heads_stimulus
     generic map (
       -- SYSTEM-SIZE
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE,
 
       X => X,
@@ -234,7 +234,7 @@ begin
   -- FREE GATES
   free_gates : dnc_free_gates
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -261,7 +261,7 @@ begin
   -- READ KEYS
   read_keys : dnc_read_keys
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -291,7 +291,7 @@ begin
   -- READ MODES
   read_modes : dnc_read_modes
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (
@@ -320,7 +320,7 @@ begin
   -- READ STRENGTHS
   read_strengths : dnc_read_strengths
     generic map (
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
       )
     port map (

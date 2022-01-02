@@ -255,7 +255,7 @@ begin
       -- dW(t;l) = summation(d*(t;l) · x(t;x))[t in 0 to T]
 
       case differentiation_w_ctrl_fsm_int is
-        when STARTER_DW_STATE =>  -- STEP 0
+        when STARTER_DW_STATE =>        -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -339,7 +339,7 @@ begin
       -- dK(t;l) = summation(d*(t;l) · r(t;i;k))[t in 0 to T-1]
 
       case differentiation_k_ctrl_fsm_int is
-        when STARTER_DK_STATE =>  -- STEP 0
+        when STARTER_DK_STATE =>        -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -423,7 +423,7 @@ begin
       -- dU(t;l) = summation(d*(t+1;l) · h(t;l))[t in 0 to T-1]
 
       case differentiation_u_ctrl_fsm_int is
-        when STARTER_DU_STATE =>  -- STEP 0
+        when STARTER_DU_STATE =>        -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -507,7 +507,7 @@ begin
       -- db(t;l) = summation(d*(t;l))[t in 0 to T]
 
       case differentiation_b_ctrl_fsm_int is
-        when STARTER_DB_STATE =>  -- STEP 0
+        when STARTER_DB_STATE =>        -- STEP 0
           -- Control Outputs
           READY <= '0';
 

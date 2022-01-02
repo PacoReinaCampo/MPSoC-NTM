@@ -1,221 +1,193 @@
-├───controller
-│   ├───FNN
-│   │   ├───convolutional
-│   │   │       ntm_controller.sv
-│   │   │       ntm_trainer.sv
-│   │   │
-│   │   └───standard
-│   │           ntm_controller.sv
-│   │           ntm_trainer.sv
-│   │
-│   └───LSTM
-│       ├───convolutional
-│       │       ntm_activation_gate_vector.sv
-│       │       ntm_activation_trainer.sv
-│       │       ntm_controller.sv
-│       │       ntm_forget_gate_vector.sv
-│       │       ntm_forget_trainer.sv
-│       │       ntm_hidden_gate_vector.sv
-│       │       ntm_input_gate_vector.sv
-│       │       ntm_input_trainer.sv
-│       │       ntm_output_gate_vector.sv
-│       │       ntm_output_trainer.sv
-│       │       ntm_state_gate_vector.sv
-│       │
-│       └───standard
-│               ntm_activation_gate_vector.sv
-│               ntm_activation_trainer.sv
-│               ntm_controller.sv
-│               ntm_forget_gate_vector.sv
-│               ntm_forget_trainer.sv
-│               ntm_hidden_gate_vector.sv
-│               ntm_input_gate_vector.sv
-│               ntm_input_trainer.sv
-│               ntm_output_gate_vector.sv
-│               ntm_output_trainer.sv
-│               ntm_state_gate_vector.sv
-│
-├───dnc
-│   ├───memory
-│   │       dnc_addressing.sv
-│   │       dnc_allocation_weighting.sv
-│   │       dnc_backward_weighting.sv
-│   │       dnc_content_based_addressing.sv
-│   │       dnc_forward_weighting.sv
-│   │       dnc_memory_matrix.sv
-│   │       dnc_memory_retention_vector.sv
-│   │       dnc_precedence_weighting.sv
-│   │       dnc_read_content_weighting.sv
-│   │       dnc_read_vectors.sv
-│   │       dnc_read_weighting.sv
-│   │       dnc_sort_vector.sv
-│   │       dnc_temporal_link_matrix.sv
-│   │       dnc_usage_vector.sv
-│   │       dnc_write_content_weighting.sv
-│   │       dnc_write_weighting.sv
-│   │
-│   ├───read_heads
-│   │       dnc_free_gates.sv
-│   │       dnc_read_keys.sv
-│   │       dnc_read_modes.sv
-│   │       dnc_read_strengths.sv
-│   │
-│   ├───top
-│   │       dnc_output_vector.sv
-│   │       dnc_read_interface_vector.sv
-│   │       dnc_top.sv
-│   │       dnc_write_interface_vector.sv
-│   │
-│   └───write_heads
-│           dnc_allocation_gate.sv
-│           dnc_erase_vector.sv
-│           dnc_write_gate.sv
-│           dnc_write_key.sv
-│           dnc_write_strength.sv
-│           dnc_write_vector.sv
-│
-├───math
-│   ├───algebra
-│   │       ntm_matrix_product.sv
-│   │       ntm_matrix_transpose.sv
-│   │       ntm_scalar_product.sv
-│   │       ntm_tensor_product.sv
-│   │       ntm_tensor_transpose.sv
-│   │
-│   ├───float
-│   │   ├───matrix
-│   │   │       ntm_matrix_adder.sv
-│   │   │       ntm_matrix_divider.sv
-│   │   │       ntm_matrix_multiplier.sv
-│   │   │
-│   │   ├───scalar
-│   │   │       ntm_scalar_adder.sv
-│   │   │       ntm_scalar_divider.sv
-│   │   │       ntm_scalar_multiplier.sv
-│   │   │
-│   │   ├───tensor
-│   │   │       ntm_tensor_adder.sv
-│   │   │       ntm_tensor_divider.sv
-│   │   │       ntm_tensor_multiplier.sv
-│   │   │
-│   │   └───vector
-│   │           ntm_vector_adder.sv
-│   │           ntm_vector_divider.sv
-│   │           ntm_vector_multiplier.sv
-│   │
-│   ├───function
-│   │   ├───matrix
-│   │   │       ntm_matrix_convolution_function.sv
-│   │   │       ntm_matrix_cosh_function.sv
-│   │   │       ntm_matrix_cosine_similarity_function.sv
-│   │   │       ntm_matrix_differentiation_function.sv
-│   │   │       ntm_matrix_exponentiator.sv
-│   │   │       ntm_matrix_logistic_function.sv
-│   │   │       ntm_matrix_multiplication_function.sv
-│   │   │       ntm_matrix_oneplus_function.sv
-│   │   │       ntm_matrix_sinh_function.sv
-│   │   │       ntm_matrix_softmax_function.sv
-│   │   │       ntm_matrix_summation_function.sv
-│   │   │       ntm_matrix_tanh_function.sv
-│   │   │
-│   │   ├───scalar
-│   │   │       ntm_scalar_convolution_function.sv
-│   │   │       ntm_scalar_cosh_function.sv
-│   │   │       ntm_scalar_cosine_similarity_function.sv
-│   │   │       ntm_scalar_differentiation_function.sv
-│   │   │       ntm_scalar_exponentiator.sv
-│   │   │       ntm_scalar_logistic_function.sv
-│   │   │       ntm_scalar_multiplication_function.sv
-│   │   │       ntm_scalar_oneplus_function.sv
-│   │   │       ntm_scalar_sinh_function.sv
-│   │   │       ntm_scalar_softmax_function.sv
-│   │   │       ntm_scalar_summation_function.sv
-│   │   │       ntm_scalar_tanh_function.sv
-│   │   │
-│   │   └───vector
-│   │           ntm_vector_convolution_function.sv
-│   │           ntm_vector_cosh_function.sv
-│   │           ntm_vector_cosine_similarity_function.sv
-│   │           ntm_vector_differentiation_function.sv
-│   │           ntm_vector_exponentiator.sv
-│   │           ntm_vector_logistic_function.sv
-│   │           ntm_vector_multiplication_function.sv
-│   │           ntm_vector_oneplus_function.sv
-│   │           ntm_vector_sinh_function.sv
-│   │           ntm_vector_softmax_function.sv
-│   │           ntm_vector_summation_function.sv
-│   │           ntm_vector_tanh_function.sv
-│   │
-│   ├───integer
-│   │   ├───matrix
-│   │   │       ntm_matrix_integer_adder.sv
-│   │   │       ntm_matrix_integer_divider.sv
-│   │   │       ntm_matrix_integer_multiplier.sv
-│   │   │
-│   │   ├───scalar
-│   │   │       ntm_scalar_integer_adder.sv
-│   │   │       ntm_scalar_integer_divider.sv
-│   │   │       ntm_scalar_integer_multiplier.sv
-│   │   │
-│   │   ├───tensor
-│   │   │       ntm_tensor_integer_adder.sv
-│   │   │       ntm_tensor_integer_divider.sv
-│   │   │       ntm_tensor_integer_multiplier.sv
-│   │   │
-│   │   └───vector
-│   │           ntm_vector_integer_adder.sv
-│   │           ntm_vector_integer_divider.sv
-│   │           ntm_vector_integer_multiplier.sv
-│   │
-│   └───modular
-│       ├───matrix
-│       │       ntm_matrix_modular_adder.sv
-│       │       ntm_matrix_modular_inverter.sv
-│       │       ntm_matrix_modular_mod.sv
-│       │       ntm_matrix_modular_multiplier.sv
-│       │
-│       ├───scalar
-│       │       ntm_scalar_modular_adder.sv
-│       │       ntm_scalar_modular_inverter.sv
-│       │       ntm_scalar_modular_mod.sv
-│       │       ntm_scalar_modular_multiplier.sv
-│       │
-│       ├───tensor
-│       │       ntm_tensor_modular_adder.sv
-│       │       ntm_tensor_modular_inverter.sv
-│       │       ntm_tensor_modular_mod.sv
-│       │       ntm_tensor_modular_multiplier.sv
-│       │
-│       └───vector
-│               ntm_vector_modular_adder.sv
-│               ntm_vector_modular_inverter.sv
-│               ntm_vector_modular_mod.sv
-│               ntm_vector_modular_multiplier.sv
-│
-├───ntm
-│   ├───memory
-│   │       ntm_addressing.jpg
-│   │       ntm_addressing.sv
-│   │       ntm_content_based_addressing.sv
-│   │
-│   ├───read_heads
-│   │       ntm_heads.jpg
-│   │       ntm_reading.sv
-│   │
-│   ├───top
-│   │       ntm_interface_vector.sv
-│   │       ntm_output_vector.sv
-│   │       ntm_top.jpg
-│   │       ntm_top.sv
-│   │
-│   └───write_heads
-│           ntm_erasing.sv
-│           ntm_heads.jpg
-│           ntm_writing.sv
-│
-└───pkg
-        dnc_core_pkg.sv
-        ntm_core_pkg.sv
-        ntm_fnn_controller_pkg.sv
-        ntm_lstm_controller_pkg.sv
-        ntm_math_pkg.sv
+├── controller
+│   ├── FNN
+│   │   ├── convolutional
+│   │   │   ├── ntm_controller.sv
+│   │   │   └── ntm_trainer.sv
+│   │   └── standard
+│   │       ├── ntm_controller.sv
+│   │       └── ntm_trainer.sv
+│   └── LSTM
+│       ├── convolutional
+│       │   ├── ntm_activation_gate_vector.sv
+│       │   ├── ntm_activation_trainer.sv
+│       │   ├── ntm_controller.sv
+│       │   ├── ntm_forget_gate_vector.sv
+│       │   ├── ntm_forget_trainer.sv
+│       │   ├── ntm_hidden_gate_vector.sv
+│       │   ├── ntm_input_gate_vector.sv
+│       │   ├── ntm_input_trainer.sv
+│       │   ├── ntm_output_gate_vector.sv
+│       │   ├── ntm_output_trainer.sv
+│       │   └── ntm_state_gate_vector.sv
+│       └── standard
+│           ├── ntm_activation_gate_vector.sv
+│           ├── ntm_activation_trainer.sv
+│           ├── ntm_controller.sv
+│           ├── ntm_forget_gate_vector.sv
+│           ├── ntm_forget_trainer.sv
+│           ├── ntm_hidden_gate_vector.sv
+│           ├── ntm_input_gate_vector.sv
+│           ├── ntm_input_trainer.sv
+│           ├── ntm_output_gate_vector.sv
+│           ├── ntm_output_trainer.sv
+│           └── ntm_state_gate_vector.sv
+├── dnc
+│   ├── memory
+│   │   ├── dnc_addressing.sv
+│   │   ├── dnc_allocation_weighting.sv
+│   │   ├── dnc_backward_weighting.sv
+│   │   ├── dnc_content_based_addressing.sv
+│   │   ├── dnc_forward_weighting.sv
+│   │   ├── dnc_memory_matrix.sv
+│   │   ├── dnc_memory_retention_vector.sv
+│   │   ├── dnc_precedence_weighting.sv
+│   │   ├── dnc_read_content_weighting.sv
+│   │   ├── dnc_read_vectors.sv
+│   │   ├── dnc_read_weighting.sv
+│   │   ├── dnc_sort_vector.sv
+│   │   ├── dnc_temporal_link_matrix.sv
+│   │   ├── dnc_usage_vector.sv
+│   │   ├── dnc_write_content_weighting.sv
+│   │   └── dnc_write_weighting.sv
+│   ├── read_heads
+│   │   ├── dnc_free_gates.sv
+│   │   ├── dnc_read_keys.sv
+│   │   ├── dnc_read_modes.sv
+│   │   └── dnc_read_strengths.sv
+│   ├── top
+│   │   ├── dnc_output_vector.sv
+│   │   ├── dnc_read_interface_vector.sv
+│   │   ├── dnc_top.sv
+│   │   └── dnc_write_interface_vector.sv
+│   └── write_heads
+│       ├── dnc_allocation_gate.sv
+│       ├── dnc_erase_vector.sv
+│       ├── dnc_write_gate.sv
+│       ├── dnc_write_key.sv
+│       ├── dnc_write_strength.sv
+│       └── dnc_write_vector.sv
+├── math
+│   ├── algebra
+│   │   ├── ntm_matrix_product.sv
+│   │   ├── ntm_matrix_transpose.sv
+│   │   ├── ntm_scalar_product.sv
+│   │   ├── ntm_tensor_product.sv
+│   │   └── ntm_tensor_transpose.sv
+│   ├── float
+│   │   ├── matrix
+│   │   │   ├── ntm_matrix_adder.sv
+│   │   │   ├── ntm_matrix_divider.sv
+│   │   │   └── ntm_matrix_multiplier.sv
+│   │   ├── scalar
+│   │   │   ├── ntm_scalar_adder.sv
+│   │   │   ├── ntm_scalar_divider.sv
+│   │   │   └── ntm_scalar_multiplier.sv
+│   │   ├── tensor
+│   │   │   ├── ntm_tensor_adder.sv
+│   │   │   ├── ntm_tensor_divider.sv
+│   │   │   └── ntm_tensor_multiplier.sv
+│   │   └── vector
+│   │       ├── ntm_vector_adder.sv
+│   │       ├── ntm_vector_divider.sv
+│   │       └── ntm_vector_multiplier.sv
+│   ├── function
+│   │   ├── matrix
+│   │   │   ├── ntm_matrix_convolution_function.sv
+│   │   │   ├── ntm_matrix_cosh_function.sv
+│   │   │   ├── ntm_matrix_cosine_similarity_function.sv
+│   │   │   ├── ntm_matrix_differentiation_function.sv
+│   │   │   ├── ntm_matrix_exponentiator.sv
+│   │   │   ├── ntm_matrix_logistic_function.sv
+│   │   │   ├── ntm_matrix_multiplication_function.sv
+│   │   │   ├── ntm_matrix_oneplus_function.sv
+│   │   │   ├── ntm_matrix_sinh_function.sv
+│   │   │   ├── ntm_matrix_softmax_function.sv
+│   │   │   ├── ntm_matrix_summation_function.sv
+│   │   │   └── ntm_matrix_tanh_function.sv
+│   │   ├── scalar
+│   │   │   ├── ntm_scalar_convolution_function.sv
+│   │   │   ├── ntm_scalar_cosh_function.sv
+│   │   │   ├── ntm_scalar_cosine_similarity_function.sv
+│   │   │   ├── ntm_scalar_differentiation_function.sv
+│   │   │   ├── ntm_scalar_exponentiator.sv
+│   │   │   ├── ntm_scalar_logistic_function.sv
+│   │   │   ├── ntm_scalar_multiplication_function.sv
+│   │   │   ├── ntm_scalar_oneplus_function.sv
+│   │   │   ├── ntm_scalar_sinh_function.sv
+│   │   │   ├── ntm_scalar_softmax_function.sv
+│   │   │   ├── ntm_scalar_summation_function.sv
+│   │   │   └── ntm_scalar_tanh_function.sv
+│   │   └── vector
+│   │       ├── ntm_vector_convolution_function.sv
+│   │       ├── ntm_vector_cosh_function.sv
+│   │       ├── ntm_vector_cosine_similarity_function.sv
+│   │       ├── ntm_vector_differentiation_function.sv
+│   │       ├── ntm_vector_exponentiator.sv
+│   │       ├── ntm_vector_logistic_function.sv
+│   │       ├── ntm_vector_multiplication_function.sv
+│   │       ├── ntm_vector_oneplus_function.sv
+│   │       ├── ntm_vector_sinh_function.sv
+│   │       ├── ntm_vector_softmax_function.sv
+│   │       ├── ntm_vector_summation_function.sv
+│   │       └── ntm_vector_tanh_function.sv
+│   ├── integer
+│   │   ├── matrix
+│   │   │   ├── ntm_matrix_integer_adder.sv
+│   │   │   ├── ntm_matrix_integer_divider.sv
+│   │   │   ├── ntm_matrix_integer_full_divider.sv
+│   │   │   └── ntm_matrix_integer_multiplier.sv
+│   │   ├── scalar
+│   │   │   ├── ntm_scalar_integer_adder.sv
+│   │   │   ├── ntm_scalar_integer_divider.sv
+│   │   │   ├── ntm_scalar_integer_full_divider.sv
+│   │   │   └── ntm_scalar_integer_multiplier.sv
+│   │   ├── tensor
+│   │   │   ├── ntm_tensor_integer_adder.sv
+│   │   │   ├── ntm_tensor_integer_divider.sv
+│   │   │   ├── ntm_tensor_integer_full_divider.sv
+│   │   │   └── ntm_tensor_integer_multiplier.sv
+│   │   └── vector
+│   │       ├── ntm_vector_integer_adder.sv
+│   │       ├── ntm_vector_integer_divider.sv
+│   │       ├── ntm_vector_integer_full_divider.sv
+│   │       └── ntm_vector_integer_multiplier.sv
+│   └── modular
+│       ├── matrix
+│       │   ├── ntm_matrix_modular_adder.sv
+│       │   ├── ntm_matrix_modular_inverter.sv
+│       │   ├── ntm_matrix_modular_mod.sv
+│       │   └── ntm_matrix_modular_multiplier.sv
+│       ├── scalar
+│       │   ├── ntm_scalar_modular_adder.sv
+│       │   ├── ntm_scalar_modular_inverter.sv
+│       │   ├── ntm_scalar_modular_mod.sv
+│       │   └── ntm_scalar_modular_multiplier.sv
+│       ├── tensor
+│       │   ├── ntm_tensor_modular_adder.sv
+│       │   ├── ntm_tensor_modular_inverter.sv
+│       │   ├── ntm_tensor_modular_mod.sv
+│       │   └── ntm_tensor_modular_multiplier.sv
+│       └── vector
+│           ├── ntm_vector_modular_adder.sv
+│           ├── ntm_vector_modular_inverter.sv
+│           ├── ntm_vector_modular_mod.sv
+│           └── ntm_vector_modular_multiplier.sv
+├── ntm
+│   ├── memory
+│   │   ├── ntm_addressing.sv
+│   │   └── ntm_content_based_addressing.sv
+│   ├── read_heads
+│   │   └── ntm_reading.sv
+│   ├── top
+│   │   ├── ntm_interface_vector.sv
+│   │   ├── ntm_output_vector.sv
+│   │   └── ntm_top.sv
+│   └── write_heads
+│       ├── ntm_erasing.sv
+│       └── ntm_writing.sv
+└── pkg
+    ├── dnc_core_pkg.sv
+    ├── ntm_core_pkg.sv
+    ├── ntm_fnn_controller_pkg.sv
+    ├── ntm_lstm_controller_pkg.sv
+    └── ntm_math_pkg.sv

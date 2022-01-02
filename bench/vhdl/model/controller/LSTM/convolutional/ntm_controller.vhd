@@ -299,9 +299,9 @@ architecture ntm_controller_architecture of ntm_controller is
   signal w_out_l_enable_input_gate_vector : std_logic;
   signal w_out_x_enable_input_gate_vector : std_logic;
 
-  signal x_in_enable_input_gate_vector   : std_logic;
+  signal x_in_enable_input_gate_vector : std_logic;
 
-  signal x_out_enable_input_gate_vector   : std_logic;
+  signal x_out_enable_input_gate_vector : std_logic;
 
   signal k_in_i_enable_input_gate_vector : std_logic;
   signal k_in_l_enable_input_gate_vector : std_logic;
@@ -323,9 +323,9 @@ architecture ntm_controller_architecture of ntm_controller is
   signal u_out_l_enable_input_gate_vector : std_logic;
   signal u_out_p_enable_input_gate_vector : std_logic;
 
-  signal h_in_enable_input_gate_vector   : std_logic;
+  signal h_in_enable_input_gate_vector : std_logic;
 
-  signal h_out_enable_input_gate_vector   : std_logic;
+  signal h_out_enable_input_gate_vector : std_logic;
 
   signal b_in_enable_input_gate_vector : std_logic;
 
@@ -421,9 +421,9 @@ architecture ntm_controller_architecture of ntm_controller is
   signal w_out_l_enable_output_gate_vector : std_logic;
   signal w_out_x_enable_output_gate_vector : std_logic;
 
-  signal x_in_enable_output_gate_vector   : std_logic;
+  signal x_in_enable_output_gate_vector : std_logic;
 
-  signal x_out_enable_output_gate_vector   : std_logic;
+  signal x_out_enable_output_gate_vector : std_logic;
 
   signal k_in_i_enable_output_gate_vector : std_logic;
   signal k_in_l_enable_output_gate_vector : std_logic;
@@ -445,9 +445,9 @@ architecture ntm_controller_architecture of ntm_controller is
   signal u_out_l_enable_output_gate_vector : std_logic;
   signal u_out_p_enable_output_gate_vector : std_logic;
 
-  signal h_in_enable_output_gate_vector   : std_logic;
+  signal h_in_enable_output_gate_vector : std_logic;
 
-  signal h_out_enable_output_gate_vector   : std_logic;
+  signal h_out_enable_output_gate_vector : std_logic;
 
   signal b_in_enable_output_gate_vector : std_logic;
 
@@ -564,9 +564,9 @@ architecture ntm_controller_architecture of ntm_controller is
   signal u_out_l_enable_forget_gate_vector : std_logic;
   signal u_out_p_enable_forget_gate_vector : std_logic;
 
-  signal h_in_enable_forget_gate_vector   : std_logic;
+  signal h_in_enable_forget_gate_vector : std_logic;
 
-  signal h_out_enable_forget_gate_vector   : std_logic;
+  signal h_out_enable_forget_gate_vector : std_logic;
 
   signal b_in_enable_forget_gate_vector : std_logic;
 
@@ -720,7 +720,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Data Outputs
           H_OUT <= ZERO_DATA;
 
@@ -748,8 +748,8 @@ begin
           -- a(t;l) = tanh(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
 
           if (ready_activation_gate_vector = '1') then
-              -- Control Internal
-              start_forget_gate_vector <= '1';
+            -- Control Internal
+            start_forget_gate_vector <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_FORGET_STATE;
@@ -758,13 +758,13 @@ begin
             start_activation_gate_vector <= '0';
           end if;
 
-        when VECTOR_FORGET_STATE =>  -- STEP 2
+        when VECTOR_FORGET_STATE =>     -- STEP 2
 
           -- f(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
 
           if (ready_forget_gate_vector = '1') then
-              -- Control Internal
-              start_input_gate_vector <= '1';
+            -- Control Internal
+            start_input_gate_vector <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_INPUT_STATE;
@@ -773,13 +773,13 @@ begin
             start_forget_gate_vector <= '0';
           end if;
 
-        when VECTOR_INPUT_STATE =>  -- STEP 3
+        when VECTOR_INPUT_STATE =>      -- STEP 3
 
           -- i(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
 
           if (ready_input_gate_vector = '1') then
-              -- Control Internal
-              start_state_gate_vector <= '1';
+            -- Control Internal
+            start_state_gate_vector <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_STATE_STATE;
@@ -788,14 +788,14 @@ begin
             start_input_gate_vector <= '0';
           end if;
 
-        when VECTOR_STATE_STATE =>  -- STEP 4
+        when VECTOR_STATE_STATE =>      -- STEP 4
 
           -- s(t;l) = f(t;l) o s(t-1;l) + i(t;l) o a(t;l)
           -- s(t=0;l) = 0
 
           if (ready_state_gate_vector = '1') then
-              -- Control Internal
-              start_output_gate_vector <= '1';
+            -- Control Internal
+            start_output_gate_vector <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_OUTPUT_GATE;
@@ -809,8 +809,8 @@ begin
           -- o(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
 
           if (ready_output_gate_vector = '1') then
-              -- Control Internal
-              start_hidden_gate_vector <= '1';
+            -- Control Internal
+            start_hidden_gate_vector <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_HIDDEN_GATE;
@@ -1145,9 +1145,9 @@ begin
       U_OUT_L_ENABLE => u_out_l_enable_activation_gate_vector,
       U_OUT_P_ENABLE => u_out_p_enable_activation_gate_vector,
 
-      H_IN_ENABLE   => h_in_enable_activation_gate_vector,
+      H_IN_ENABLE => h_in_enable_activation_gate_vector,
 
-      H_OUT_ENABLE   => h_out_enable_activation_gate_vector,
+      H_OUT_ENABLE => h_out_enable_activation_gate_vector,
 
       B_IN_ENABLE => b_in_enable_activation_gate_vector,
 
@@ -1265,9 +1265,9 @@ begin
       W_OUT_L_ENABLE => w_out_l_enable_input_gate_vector,
       W_OUT_X_ENABLE => w_out_x_enable_input_gate_vector,
 
-      X_IN_ENABLE   => x_in_enable_input_gate_vector,
+      X_IN_ENABLE => x_in_enable_input_gate_vector,
 
-      X_OUT_ENABLE   => x_out_enable_input_gate_vector,
+      X_OUT_ENABLE => x_out_enable_input_gate_vector,
 
       K_IN_I_ENABLE => k_in_i_enable_input_gate_vector,
       K_IN_L_ENABLE => k_in_l_enable_input_gate_vector,
@@ -1289,9 +1289,9 @@ begin
       U_OUT_L_ENABLE => u_out_l_enable_input_gate_vector,
       U_OUT_P_ENABLE => u_out_p_enable_input_gate_vector,
 
-      H_IN_ENABLE   => h_in_enable_input_gate_vector,
+      H_IN_ENABLE => h_in_enable_input_gate_vector,
 
-      H_OUT_ENABLE   => h_out_enable_input_gate_vector,
+      H_OUT_ENABLE => h_out_enable_input_gate_vector,
 
       B_IN_ENABLE => b_in_enable_input_gate_vector,
 
@@ -1409,9 +1409,9 @@ begin
       W_OUT_L_ENABLE => w_out_l_enable_output_gate_vector,
       W_OUT_X_ENABLE => w_out_x_enable_output_gate_vector,
 
-      X_IN_ENABLE   => x_in_enable_output_gate_vector,
+      X_IN_ENABLE => x_in_enable_output_gate_vector,
 
-      X_OUT_ENABLE   => x_out_enable_output_gate_vector,
+      X_OUT_ENABLE => x_out_enable_output_gate_vector,
 
       K_IN_I_ENABLE => k_in_i_enable_output_gate_vector,
       K_IN_L_ENABLE => k_in_l_enable_output_gate_vector,
@@ -1433,9 +1433,9 @@ begin
       U_OUT_L_ENABLE => u_out_l_enable_output_gate_vector,
       U_OUT_P_ENABLE => u_out_p_enable_output_gate_vector,
 
-      H_IN_ENABLE   => h_in_enable_output_gate_vector,
+      H_IN_ENABLE => h_in_enable_output_gate_vector,
 
-      H_OUT_ENABLE   => h_out_enable_output_gate_vector,
+      H_OUT_ENABLE => h_out_enable_output_gate_vector,
 
       B_IN_ENABLE => b_in_enable_output_gate_vector,
 

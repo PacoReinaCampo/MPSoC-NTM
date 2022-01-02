@@ -128,7 +128,7 @@ architecture ntm_scalar_product_architecture of ntm_scalar_product is
   signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
-  
+
   -- SCALAR MULTIPLIER
   -- CONTROL
   signal start_scalar_multiplier : std_logic;
@@ -175,7 +175,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case multiplier_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY           <= '0';
           DATA_OUT_ENABLE <= '0';
@@ -188,7 +188,7 @@ begin
             multiplier_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_STATE =>  -- STEP 1
+        when INPUT_STATE =>             -- STEP 1
 
           if ((DATA_A_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
             -- Data Inputs
@@ -223,7 +223,7 @@ begin
           -- Control Outputs
           DATA_OUT_ENABLE <= '0';
 
-        when ENDER_STATE =>  -- STEP 2
+        when ENDER_STATE =>             -- STEP 2
 
           if (ready_scalar_multiplier = '1') then
             if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then

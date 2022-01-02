@@ -56,7 +56,6 @@
 │   │   │   ├── dnc_read_modes.vhd
 │   │   │   └── dnc_read_strengths.vhd
 │   │   ├── top
-│   │   │   ├── dnc_controller_output_vector.vhd
 │   │   │   ├── dnc_output_vector.vhd
 │   │   │   ├── dnc_read_interface_vector.vhd
 │   │   │   ├── dnc_top.vhd
@@ -70,78 +69,110 @@
 │   │       └── dnc_write_vector.vhd
 │   ├── math
 │   │   ├── algebra
-│   │   │   ├── ntm_matrix_determinant.vhd
-│   │   │   ├── ntm_matrix_inversion.vhd
 │   │   │   ├── ntm_matrix_product.vhd
-│   │   │   ├── ntm_matrix_rank.vhd
 │   │   │   ├── ntm_matrix_transpose.vhd
 │   │   │   ├── ntm_scalar_product.vhd
-│   │   │   └── ntm_vector_product.vhd
-│   │   ├── arithmetic
+│   │   │   ├── ntm_tensor_product.vhd
+│   │   │   └── ntm_tensor_transpose.vhd
+│   │   ├── float
 │   │   │   ├── matrix
 │   │   │   │   ├── ntm_matrix_adder.vhd
 │   │   │   │   ├── ntm_matrix_divider.vhd
-│   │   │   │   ├── ntm_matrix_exponentiator.vhd
-│   │   │   │   ├── ntm_matrix_inverter.vhd
-│   │   │   │   ├── ntm_matrix_logarithm.vhd
-│   │   │   │   ├── ntm_matrix_mod.vhd
-│   │   │   │   ├── ntm_matrix_multiplier.vhd
-│   │   │   │   └── ntm_matrix_root.vhd
+│   │   │   │   └── ntm_matrix_multiplier.vhd
 │   │   │   ├── scalar
 │   │   │   │   ├── ntm_scalar_adder.vhd
 │   │   │   │   ├── ntm_scalar_divider.vhd
-│   │   │   │   ├── ntm_scalar_exponentiator.vhd
-│   │   │   │   ├── ntm_scalar_inverter.vhd
-│   │   │   │   ├── ntm_scalar_logarithm.vhd
-│   │   │   │   ├── ntm_scalar_mod.vhd
-│   │   │   │   ├── ntm_scalar_multiplier.vhd
-│   │   │   │   └── ntm_scalar_root.vhd
+│   │   │   │   └── ntm_scalar_multiplier.vhd
+│   │   │   ├── tensor
+│   │   │   │   ├── ntm_tensor_adder.vhd
+│   │   │   │   ├── ntm_tensor_divider.vhd
+│   │   │   │   └── ntm_tensor_multiplier.vhd
 │   │   │   └── vector
 │   │   │       ├── ntm_vector_adder.vhd
 │   │   │       ├── ntm_vector_divider.vhd
+│   │   │       └── ntm_vector_multiplier.vhd
+│   │   ├── function
+│   │   │   ├── matrix
+│   │   │   │   ├── ntm_matrix_convolution_function.vhd
+│   │   │   │   ├── ntm_matrix_cosh_function.vhd
+│   │   │   │   ├── ntm_matrix_cosine_similarity_function.vhd
+│   │   │   │   ├── ntm_matrix_differentiation_function.vhd
+│   │   │   │   ├── ntm_matrix_exponentiator.vhd
+│   │   │   │   ├── ntm_matrix_logistic_function.vhd
+│   │   │   │   ├── ntm_matrix_multiplication_function.vhd
+│   │   │   │   ├── ntm_matrix_oneplus_function.vhd
+│   │   │   │   ├── ntm_matrix_sinh_function.vhd
+│   │   │   │   ├── ntm_matrix_softmax_function.vhd
+│   │   │   │   ├── ntm_matrix_summation_function.vhd
+│   │   │   │   └── ntm_matrix_tanh_function.vhd
+│   │   │   ├── scalar
+│   │   │   │   ├── ntm_scalar_convolution_function.vhd
+│   │   │   │   ├── ntm_scalar_cosh_function.vhd
+│   │   │   │   ├── ntm_scalar_cosine_similarity_function.vhd
+│   │   │   │   ├── ntm_scalar_differentiation_function.vhd
+│   │   │   │   ├── ntm_scalar_exponentiator.vhd
+│   │   │   │   ├── ntm_scalar_logistic_function.vhd
+│   │   │   │   ├── ntm_scalar_multiplication_function.vhd
+│   │   │   │   ├── ntm_scalar_oneplus_function.vhd
+│   │   │   │   ├── ntm_scalar_sinh_function.vhd
+│   │   │   │   ├── ntm_scalar_softmax_function.vhd
+│   │   │   │   ├── ntm_scalar_summation_function.vhd
+│   │   │   │   └── ntm_scalar_tanh_function.vhd
+│   │   │   └── vector
+│   │   │       ├── ntm_vector_convolution_function.vhd
+│   │   │       ├── ntm_vector_cosh_function.vhd
+│   │   │       ├── ntm_vector_cosine_similarity_function.vhd
+│   │   │       ├── ntm_vector_differentiation_function.vhd
 │   │   │       ├── ntm_vector_exponentiator.vhd
-│   │   │       ├── ntm_vector_inverter.vhd
-│   │   │       ├── ntm_vector_logarithm.vhd
-│   │   │       ├── ntm_vector_mod.vhd
-│   │   │       ├── ntm_vector_multiplier.vhd
-│   │   │       └── ntm_vector_root.vhd
-│   │   └── function
+│   │   │       ├── ntm_vector_logistic_function.vhd
+│   │   │       ├── ntm_vector_multiplication_function.vhd
+│   │   │       ├── ntm_vector_oneplus_function.vhd
+│   │   │       ├── ntm_vector_sinh_function.vhd
+│   │   │       ├── ntm_vector_softmax_function.vhd
+│   │   │       ├── ntm_vector_summation_function.vhd
+│   │   │       └── ntm_vector_tanh_function.vhd
+│   │   ├── integer
+│   │   │   ├── matrix
+│   │   │   │   ├── ntm_matrix_integer_adder.vhd
+│   │   │   │   ├── ntm_matrix_integer_divider.vhd
+│   │   │   │   ├── ntm_matrix_integer_full_divider.vhd
+│   │   │   │   └── ntm_matrix_integer_multiplier.vhd
+│   │   │   ├── scalar
+│   │   │   │   ├── ntm_scalar_integer_adder.vhd
+│   │   │   │   ├── ntm_scalar_integer_divider.vhd
+│   │   │   │   ├── ntm_scalar_integer_full_divider.vhd
+│   │   │   │   └── ntm_scalar_integer_multiplier.vhd
+│   │   │   ├── tensor
+│   │   │   │   ├── ntm_tensor_integer_adder.vhd
+│   │   │   │   ├── ntm_tensor_integer_divider.vhd
+│   │   │   │   ├── ntm_tensor_integer_full_divider.vhd
+│   │   │   │   └── ntm_tensor_integer_multiplier.vhd
+│   │   │   └── vector
+│   │   │       ├── ntm_vector_integer_adder.vhd
+│   │   │       ├── ntm_vector_integer_divider.vhd
+│   │   │       ├── ntm_vector_integer_full_divider.vhd
+│   │   │       └── ntm_vector_integer_multiplier.vhd
+│   │   └── modular
 │   │       ├── matrix
-│   │       │   ├── ntm_matrix_convolution_function.vhd
-│   │       │   ├── ntm_matrix_cosh_function.vhd
-│   │       │   ├── ntm_matrix_cosine_similarity_function.vhd
-│   │       │   ├── ntm_matrix_differentiation_function.vhd
-│   │       │   ├── ntm_matrix_logistic_function.vhd
-│   │       │   ├── ntm_matrix_multiplication_function.vhd
-│   │       │   ├── ntm_matrix_oneplus_function.vhd
-│   │       │   ├── ntm_matrix_sinh_function.vhd
-│   │       │   ├── ntm_matrix_softmax_function.vhd
-│   │       │   ├── ntm_matrix_summation_function.vhd
-│   │       │   └── ntm_matrix_tanh_function.vhd
+│   │       │   ├── ntm_matrix_modular_adder.vhd
+│   │       │   ├── ntm_matrix_modular_inverter.vhd
+│   │       │   ├── ntm_matrix_modular_mod.vhd
+│   │       │   └── ntm_matrix_modular_multiplier.vhd
 │   │       ├── scalar
-│   │       │   ├── ntm_scalar_convolution_function.vhd
-│   │       │   ├── ntm_scalar_cosh_function.vhd
-│   │       │   ├── ntm_scalar_cosine_similarity_function.vhd
-│   │       │   ├── ntm_scalar_differentiation_function.vhd
-│   │       │   ├── ntm_scalar_logistic_function.vhd
-│   │       │   ├── ntm_scalar_multiplication_function.vhd
-│   │       │   ├── ntm_scalar_oneplus_function.vhd
-│   │       │   ├── ntm_scalar_sinh_function.vhd
-│   │       │   ├── ntm_scalar_softmax_function.vhd
-│   │       │   ├── ntm_scalar_summation_function.vhd
-│   │       │   └── ntm_scalar_tanh_function.vhd
+│   │       │   ├── ntm_scalar_modular_adder.vhd
+│   │       │   ├── ntm_scalar_modular_inverter.vhd
+│   │       │   ├── ntm_scalar_modular_mod.vhd
+│   │       │   └── ntm_scalar_modular_multiplier.vhd
+│   │       ├── tensor
+│   │       │   ├── ntm_tensor_modular_adder.vhd
+│   │       │   ├── ntm_tensor_modular_inverter.vhd
+│   │       │   ├── ntm_tensor_modular_mod.vhd
+│   │       │   └── ntm_tensor_modular_multiplier.vhd
 │   │       └── vector
-│   │           ├── ntm_vector_convolution_function.vhd
-│   │           ├── ntm_vector_cosh_function.vhd
-│   │           ├── ntm_vector_cosine_similarity_function.vhd
-│   │           ├── ntm_vector_differentiation_function.vhd
-│   │           ├── ntm_vector_logistic_function.vhd
-│   │           ├── ntm_vector_multiplication_function.vhd
-│   │           ├── ntm_vector_oneplus_function.vhd
-│   │           ├── ntm_vector_sinh_function.vhd
-│   │           ├── ntm_vector_softmax_function.vhd
-│   │           ├── ntm_vector_summation_function.vhd
-│   │           └── ntm_vector_tanh_function.vhd
+│   │           ├── ntm_vector_modular_adder.vhd
+│   │           ├── ntm_vector_modular_inverter.vhd
+│   │           ├── ntm_vector_modular_mod.vhd
+│   │           └── ntm_vector_modular_multiplier.vhd
 │   ├── ntm
 │   │   ├── memory
 │   │   │   ├── ntm_addressing.vhd
@@ -149,7 +180,6 @@
 │   │   ├── read_heads
 │   │   │   └── ntm_reading.vhd
 │   │   ├── top
-│   │   │   ├── ntm_controller_output_vector.vhd
 │   │   │   ├── ntm_interface_vector.vhd
 │   │   │   ├── ntm_output_vector.vhd
 │   │   │   └── ntm_top.vhd
@@ -162,7 +192,82 @@
 │       ├── ntm_fnn_controller_pkg.vhd
 │       ├── ntm_lstm_controller_pkg.vhd
 │       └── ntm_math_pkg.vhd
-└── osvvm
+├── osvvm
+│   ├── controller
+│   │   ├── FNN
+│   │   │   ├── convolutional
+│   │   │   │   ├── ntm_convolutional_fnn_pkg.vhd
+│   │   │   │   ├── ntm_convolutional_fnn_stimulus.vhd
+│   │   │   │   └── ntm_convolutional_fnn_testbench.vhd
+│   │   │   └── standard
+│   │   │       ├── ntm_standard_fnn_pkg.vhd
+│   │   │       ├── ntm_standard_fnn_stimulus.vhd
+│   │   │       └── ntm_standard_fnn_testbench.vhd
+│   │   └── LSTM
+│   │       ├── convolutional
+│   │       │   ├── ntm_convolutional_lstm_pkg.vhd
+│   │       │   ├── ntm_convolutional_lstm_stimulus.vhd
+│   │       │   └── ntm_convolutional_lstm_testbench.vhd
+│   │       └── standard
+│   │           ├── ntm_standard_lstm_pkg.vhd
+│   │           ├── ntm_standard_lstm_stimulus.vhd
+│   │           └── ntm_standard_lstm_testbench.vhd
+│   ├── dnc
+│   │   ├── memory
+│   │   │   ├── dnc_memory_pkg.vhd
+│   │   │   ├── dnc_memory_stimulus.vhd
+│   │   │   └── dnc_memory_testbench.vhd
+│   │   ├── read_heads
+│   │   │   ├── dnc_read_heads_pkg.vhd
+│   │   │   ├── dnc_read_heads_stimulus.vhd
+│   │   │   └── dnc_read_heads_testbench.vhd
+│   │   ├── top
+│   │   │   ├── dnc_top_pkg.vhd
+│   │   │   ├── dnc_top_stimulus.vhd
+│   │   │   └── dnc_top_testbench.vhd
+│   │   └── write_heads
+│   │       ├── dnc_write_heads_pkg.vhd
+│   │       ├── dnc_write_heads_stimulus.vhd
+│   │       └── dnc_write_heads_testbench.vhd
+│   ├── math
+│   │   ├── algebra
+│   │   │   ├── ntm_algebra_pkg.vhd
+│   │   │   ├── ntm_algebra_stimulus.vhd
+│   │   │   └── ntm_algebra_testbench.vhd
+│   │   ├── float
+│   │   │   ├── ntm_float_pkg.vhd
+│   │   │   ├── ntm_float_stimulus.vhd
+│   │   │   └── ntm_float_testbench.vhd
+│   │   ├── function
+│   │   │   ├── ntm_function_pkg.vhd
+│   │   │   ├── ntm_function_stimulus.vhd
+│   │   │   └── ntm_function_testbench.vhd
+│   │   ├── integer
+│   │   │   ├── ntm_integer_pkg.vhd
+│   │   │   ├── ntm_integer_stimulus.vhd
+│   │   │   └── ntm_integer_testbench.vhd
+│   │   └── modular
+│   │       ├── ntm_modular_pkg.vhd
+│   │       ├── ntm_modular_stimulus.vhd
+│   │       └── ntm_modular_testbench.vhd
+│   └── ntm
+│       ├── memory
+│       │   ├── ntm_memory_pkg.vhd
+│       │   ├── ntm_memory_stimulus.vhd
+│       │   └── ntm_memory_testbench.vhd
+│       ├── read_heads
+│       │   ├── ntm_read_heads_pkg.vhd
+│       │   ├── ntm_read_heads_stimulus.vhd
+│       │   └── ntm_read_heads_testbench.vhd
+│       ├── top
+│       │   ├── ntm_top_pkg.vhd
+│       │   ├── ntm_top_stimulus.vhd
+│       │   └── ntm_top_testbench.vhd
+│       └── write_heads
+│           ├── ntm_write_heads_pkg.vhd
+│           ├── ntm_write_heads_stimulus.vhd
+│           └── ntm_write_heads_testbench.vhd
+└── tests
     ├── controller
     │   ├── FNN
     │   │   ├── convolutional
@@ -204,14 +309,22 @@
     │   │   ├── ntm_algebra_pkg.vhd
     │   │   ├── ntm_algebra_stimulus.vhd
     │   │   └── ntm_algebra_testbench.vhd
-    │   ├── arithmetic
-    │   │   ├── ntm_arithmetic_pkg.vhd
-    │   │   ├── ntm_arithmetic_stimulus.vhd
-    │   │   └── ntm_arithmetic_testbench.vhd
-    │   └── function
-    │       ├── ntm_function_pkg.vhd
-    │       ├── ntm_function_stimulus.vhd
-    │       └── ntm_function_testbench.vhd
+    │   ├── float
+    │   │   ├── ntm_float_pkg.vhd
+    │   │   ├── ntm_float_stimulus.vhd
+    │   │   └── ntm_float_testbench.vhd
+    │   ├── function
+    │   │   ├── ntm_function_pkg.vhd
+    │   │   ├── ntm_function_stimulus.vhd
+    │   │   └── ntm_function_testbench.vhd
+    │   ├── integer
+    │   │   ├── ntm_integer_pkg.vhd
+    │   │   ├── ntm_integer_stimulus.vhd
+    │   │   └── ntm_integer_testbench.vhd
+    │   └── modular
+    │       ├── ntm_modular_pkg.vhd
+    │       ├── ntm_modular_stimulus.vhd
+    │       └── ntm_modular_testbench.vhd
     └── ntm
         ├── memory
         │   ├── ntm_memory_pkg.vhd

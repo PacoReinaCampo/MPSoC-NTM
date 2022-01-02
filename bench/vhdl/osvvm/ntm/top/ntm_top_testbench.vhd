@@ -135,7 +135,7 @@ begin
   top_stimulus : ntm_top_stimulus
     generic map (
       -- SYSTEM-SIZE
-      DATA_SIZE  => DATA_SIZE,
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE,
 
       X => X,
@@ -178,9 +178,9 @@ begin
 
       NTM_TOP_B_OUT_ENABLE => b_out_enable_top,
 
-      NTM_TOP_X_IN_ENABLE  => x_in_enable_top,
+      NTM_TOP_X_IN_ENABLE => x_in_enable_top,
 
-      NTM_TOP_X_OUT_ENABLE  => x_out_enable_top,
+      NTM_TOP_X_OUT_ENABLE => x_out_enable_top,
 
       NTM_TOP_Y_OUT_ENABLE => y_out_enable_top,
 
@@ -205,8 +205,8 @@ begin
   ntm_top_test : if (ENABLE_NTM_TOP_TEST) generate
     top : ntm_top
       generic map (
-        DATA_SIZE  => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
         )
       port map (
         -- GLOBAL
@@ -241,9 +241,9 @@ begin
 
         B_OUT_ENABLE => b_out_enable_top,
 
-        X_IN_ENABLE  => x_in_enable_top,
+        X_IN_ENABLE => x_in_enable_top,
 
-        X_OUT_ENABLE  => x_out_enable_top,
+        X_OUT_ENABLE => x_out_enable_top,
 
         Y_OUT_ENABLE => y_out_enable_top,
 

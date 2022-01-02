@@ -119,14 +119,14 @@ architecture ntm_vector_integer_divider_architecture of ntm_vector_integer_divid
 
   -- SCALAR DIVIDER
   -- CONTROL
-  signal start_scalar_divider : std_logic;
-  signal ready_scalar_divider : std_logic;
+  signal start_scalar_integer_divider : std_logic;
+  signal ready_scalar_integer_divider : std_logic;
 
   -- DATA
-  signal rest_out_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rest_out_scalar_integer_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_integer_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -150,7 +150,7 @@ begin
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
-      start_scalar_divider <= '0';
+      start_scalar_integer_divider <= '0';
 
       index_loop <= ZERO_CONTROL;
 
@@ -158,13 +158,13 @@ begin
       data_b_in_divider_int <= '0';
 
       -- Data Internal
-      data_a_in_scalar_divider <= ZERO_DATA;
-      data_b_in_scalar_divider <= ZERO_DATA;
+      data_a_in_scalar_integer_divider <= ZERO_DATA;
+      data_b_in_scalar_integer_divider <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
       case divider_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY           <= '0';
           DATA_OUT_ENABLE <= '0';
@@ -177,11 +177,11 @@ begin
             divider_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_STATE =>  -- STEP 1
+        when INPUT_STATE =>             -- STEP 1
 
           if ((DATA_A_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
             -- Data Inputs
-            data_a_in_scalar_divider <= DATA_A_IN;
+            data_a_in_scalar_integer_divider <= DATA_A_IN;
 
             -- Control Internal
             data_a_in_divider_int <= '1';
@@ -189,7 +189,7 @@ begin
 
           if ((DATA_B_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
             -- Data Inputs
-            data_b_in_scalar_divider <= DATA_B_IN;
+            data_b_in_scalar_integer_divider <= DATA_B_IN;
 
             -- Control Internal
             data_b_in_divider_int <= '1';
@@ -197,7 +197,7 @@ begin
 
           if (data_a_in_divider_int = '1' and data_b_in_divider_int = '1') then
             -- Control Internal
-            start_scalar_divider <= '1';
+            start_scalar_integer_divider <= '1';
 
             data_a_in_divider_int <= '0';
             data_b_in_divider_int <= '0';
@@ -209,9 +209,9 @@ begin
           -- Control Outputs
           DATA_OUT_ENABLE <= '0';
 
-        when ENDER_STATE =>  -- STEP 2
+        when ENDER_STATE =>             -- STEP 2
 
-          if (ready_scalar_divider = '1') then
+          if (ready_scalar_integer_divider = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
               -- Control Outputs
               READY <= '1';
@@ -230,14 +230,14 @@ begin
             end if;
 
             -- Data Outputs
-            DATA_OUT <= data_out_scalar_divider;
-            REST_OUT <= rest_out_scalar_divider;
+            DATA_OUT <= data_out_scalar_integer_divider;
+            REST_OUT <= rest_out_scalar_integer_divider;
 
             -- Control Outputs
             DATA_OUT_ENABLE <= '1';
           else
             -- Control Internal
-            start_scalar_divider <= '0';
+            start_scalar_integer_divider <= '0';
 
             data_a_in_divider_int <= '0';
             data_b_in_divider_int <= '0';
@@ -251,7 +251,7 @@ begin
   end process;
 
   -- SCALAR DIVIDER
-  scalar_divider : ntm_scalar_integer_divider
+  scalar_integer_divider : ntm_scalar_integer_divider
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -262,15 +262,15 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_divider,
-      READY => ready_scalar_divider,
+      START => start_scalar_integer_divider,
+      READY => ready_scalar_integer_divider,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_divider,
-      DATA_B_IN => data_b_in_scalar_divider,
+      DATA_A_IN => data_a_in_scalar_integer_divider,
+      DATA_B_IN => data_b_in_scalar_integer_divider,
 
-      DATA_OUT => data_out_scalar_divider,
-      REST_OUT => rest_out_scalar_divider
+      DATA_OUT => data_out_scalar_integer_divider,
+      REST_OUT => rest_out_scalar_integer_divider
       );
 
 end architecture;

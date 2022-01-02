@@ -164,12 +164,12 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
           DATA_OUT_ENABLE <= '0';
-            
+
           if (START = '1') then
             -- Control Internal
             index_loop <= ZERO_CONTROL;
@@ -178,7 +178,7 @@ begin
             controller_ctrl_fsm_int <= INPUT_INITIAL_STATE;
           end if;
 
-        when INPUT_INITIAL_STATE =>  -- STEP 1
+        when INPUT_INITIAL_STATE =>     -- STEP 1
 
           if (DATA_IN_ENABLE = '1') then
             -- Data Internal
@@ -188,7 +188,7 @@ begin
             controller_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_STATE =>  -- STEP 1
+        when INPUT_STATE =>             -- STEP 1
 
           if (DATA_IN_ENABLE = '1') then
             -- Control Inputs
@@ -209,7 +209,7 @@ begin
             controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
           end if;
 
-        when SCALAR_ADDER_STATE =>  -- STEP 2
+        when SCALAR_ADDER_STATE =>      -- STEP 2
 
           if (ready_scalar_adder = '1') then
             -- Control Internal
@@ -222,7 +222,7 @@ begin
             start_scalar_adder <= '0';
           end if;
 
-        when SCALAR_DIVIDER_STATE =>  -- STEP 3
+        when SCALAR_DIVIDER_STATE =>    -- STEP 3
 
           if (ready_scalar_divider = '1') then
             if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then

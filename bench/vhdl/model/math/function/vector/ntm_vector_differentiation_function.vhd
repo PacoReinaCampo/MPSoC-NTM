@@ -172,7 +172,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case differentiation_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -187,7 +187,7 @@ begin
             differentiation_ctrl_fsm_int <= INPUT_VECTOR_STATE;
           end if;
 
-        when INPUT_VECTOR_STATE =>  -- STEP 1
+        when INPUT_VECTOR_STATE =>      -- STEP 1
 
           if (((DATA_IN_VECTOR_ENABLE = '1') and (DATA_IN_SCALAR_ENABLE = '1')) or (index_scalar_loop = ZERO_CONTROL)) then
             -- Data Inputs
@@ -210,7 +210,7 @@ begin
           DATA_OUT_VECTOR_ENABLE <= '0';
           DATA_OUT_SCALAR_ENABLE <= '0';
 
-        when INPUT_SCALAR_STATE =>  -- STEP 2
+        when INPUT_SCALAR_STATE =>      -- STEP 2
 
           if (DATA_IN_SCALAR_ENABLE = '1') then
             -- Data Inputs
@@ -230,7 +230,7 @@ begin
           -- Control Outputs
           DATA_OUT_SCALAR_ENABLE <= '0';
 
-        when ENDER_VECTOR_STATE =>  -- STEP 3
+        when ENDER_VECTOR_STATE =>      -- STEP 3
 
           if (data_out_enable_scalar_differentiation_function = '1') then
             if ((unsigned(index_vector_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
@@ -271,7 +271,7 @@ begin
             data_in_enable_scalar_differentiation_function <= '0';
           end if;
 
-        when ENDER_SCALAR_STATE =>  -- STEP 4
+        when ENDER_SCALAR_STATE =>      -- STEP 4
 
           if (data_out_enable_scalar_differentiation_function = '1') then
             if (unsigned(index_scalar_loop) < unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then

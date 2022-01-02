@@ -214,7 +214,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case adder_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -232,7 +232,7 @@ begin
             adder_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
-        when INPUT_I_STATE =>  -- STEP 1
+        when INPUT_I_STATE =>           -- STEP 1
 
           if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) or ((index_j_loop = ZERO_CONTROL) and (index_k_loop = ZERO_CONTROL))) then
             -- Data Inputs
@@ -296,10 +296,10 @@ begin
             data_b_in_k_integer_adder_int <= '0';
 
             -- FSM Control
-           adder_ctrl_fsm_int <= ENDER_K_STATE;
+            adder_ctrl_fsm_int <= ENDER_K_STATE;
           end if;
 
-        when INPUT_J_STATE =>  -- STEP 2
+        when INPUT_J_STATE =>           -- STEP 2
 
           if (((DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) or (index_k_loop = ZERO_CONTROL)) then
             -- Data Inputs
@@ -350,10 +350,10 @@ begin
             data_b_in_k_integer_adder_int <= '0';
 
             -- FSM Control
-           adder_ctrl_fsm_int <= ENDER_K_STATE;
+            adder_ctrl_fsm_int <= ENDER_K_STATE;
           end if;
 
-        when INPUT_K_STATE =>  -- STEP 3
+        when INPUT_K_STATE =>           -- STEP 3
 
           if (DATA_A_IN_K_ENABLE = '1') then
             -- Data Inputs
@@ -404,7 +404,7 @@ begin
             end if;
           end if;
 
-        when ENDER_I_STATE =>  -- STEP 4
+        when ENDER_I_STATE =>           -- STEP 4
 
           if (data_out_i_enable_matrix_integer_adder = '1' and data_out_j_enable_matrix_integer_adder = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
@@ -425,7 +425,7 @@ begin
               index_k_loop <= ZERO_CONTROL;
 
               -- FSM Control
-             adder_ctrl_fsm_int <= STARTER_STATE;
+              adder_ctrl_fsm_int <= STARTER_STATE;
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
               DATA_OUT     <= data_out_matrix_integer_adder;
@@ -442,14 +442,14 @@ begin
               index_k_loop <= ZERO_CONTROL;
 
               -- FSM Control
-             adder_ctrl_fsm_int <= INPUT_I_STATE;
+              adder_ctrl_fsm_int <= INPUT_I_STATE;
             end if;
           else
             -- Control Internal
             start_matrix_integer_adder <= '0';
           end if;
 
-        when ENDER_J_STATE =>  -- STEP 5
+        when ENDER_J_STATE =>           -- STEP 5
 
           if (data_out_j_enable_matrix_integer_adder = '1') then
             if ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
@@ -473,7 +473,7 @@ begin
             start_matrix_integer_adder <= '0';
           end if;
 
-        when ENDER_K_STATE =>  -- STEP 6
+        when ENDER_K_STATE =>           -- STEP 6
 
           if (data_out_j_enable_matrix_integer_adder = '1') then
             if (unsigned(index_k_loop) < unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
@@ -503,38 +503,38 @@ begin
   end process;
 
   -- MATRIX ADDER
-    matrix_integer_adder : ntm_matrix_integer_adder
-      generic map (
-        DATA_SIZE  => DATA_SIZE,
+  matrix_integer_adder : ntm_matrix_integer_adder
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
 
-        -- CONTROL
-        START => start_matrix_integer_adder,
-        READY => ready_matrix_integer_adder,
+      -- CONTROL
+      START => start_matrix_integer_adder,
+      READY => ready_matrix_integer_adder,
 
-        OPERATION => operation_matrix_integer_adder,
+      OPERATION => operation_matrix_integer_adder,
 
-        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_integer_adder,
-        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_integer_adder,
-        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_integer_adder,
-        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_integer_adder,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_integer_adder,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_integer_adder,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_integer_adder,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_integer_adder,
 
-        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_integer_adder,
-        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_integer_adder,
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_integer_adder,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_integer_adder,
 
-        -- DATA
-        SIZE_I_IN => size_i_in_matrix_integer_adder,
-        SIZE_J_IN => size_j_in_matrix_integer_adder,
-        DATA_A_IN => data_a_in_matrix_integer_adder,
-        DATA_B_IN => data_b_in_matrix_integer_adder,
+      -- DATA
+      SIZE_I_IN => size_i_in_matrix_integer_adder,
+      SIZE_J_IN => size_j_in_matrix_integer_adder,
+      DATA_A_IN => data_a_in_matrix_integer_adder,
+      DATA_B_IN => data_b_in_matrix_integer_adder,
 
-        DATA_OUT     => data_out_matrix_integer_adder,
-        OVERFLOW_OUT => overflow_out_matrix_integer_adder
-        );
+      DATA_OUT     => data_out_matrix_integer_adder,
+      OVERFLOW_OUT => overflow_out_matrix_integer_adder
+      );
 
 end architecture;

@@ -93,21 +93,21 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,                        -- STEP 0
-    MATRIX_TRANSPOSE_I_STATE,             -- STEP 1
-    MATRIX_TRANSPOSE_J_STATE,             -- STEP 2
-    MATRIX_FIRST_PRODUCT_I_STATE,         -- STEP 3
-    MATRIX_FIRST_PRODUCT_J_STATE,         -- STEP 4
-    MATRIX_FIRST_ADDER_I_STATE,           -- STEP 5
-    MATRIX_FIRST_ADDER_J_STATE,           -- STEP 6
-    MATRIX_MULTIPLIER_I_STATE,            -- STEP 7
-    MATRIX_MULTIPLIER_J_STATE,            -- STEP 8
-    MATRIX_SECOND_TRANSPOSE_I_STATE,      -- STEP 9
-    MATRIX_SECOND_TRANSPOSE_J_STATE,      -- STEP 10
-    MATRIX_SECOND_PRODUCT_I_STATE,        -- STEP 11
-    MATRIX_SECOND_PRODUCT_J_STATE,        -- STEP 12
-    MATRIX_SECOND_ADDER_I_STATE,          -- STEP 13
-    MATRIX_SECOND_ADDER_J_STATE           -- STEP 14
+    STARTER_STATE,                      -- STEP 0
+    MATRIX_TRANSPOSE_I_STATE,           -- STEP 1
+    MATRIX_TRANSPOSE_J_STATE,           -- STEP 2
+    MATRIX_FIRST_PRODUCT_I_STATE,       -- STEP 3
+    MATRIX_FIRST_PRODUCT_J_STATE,       -- STEP 4
+    MATRIX_FIRST_ADDER_I_STATE,         -- STEP 5
+    MATRIX_FIRST_ADDER_J_STATE,         -- STEP 6
+    MATRIX_MULTIPLIER_I_STATE,          -- STEP 7
+    MATRIX_MULTIPLIER_J_STATE,          -- STEP 8
+    MATRIX_SECOND_TRANSPOSE_I_STATE,    -- STEP 9
+    MATRIX_SECOND_TRANSPOSE_J_STATE,    -- STEP 10
+    MATRIX_SECOND_PRODUCT_I_STATE,      -- STEP 11
+    MATRIX_SECOND_PRODUCT_J_STATE,      -- STEP 12
+    MATRIX_SECOND_ADDER_I_STATE,        -- STEP 13
+    MATRIX_SECOND_ADDER_J_STATE         -- STEP 14
     );
 
   -----------------------------------------------------------------------
@@ -250,7 +250,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 

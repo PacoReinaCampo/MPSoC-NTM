@@ -64,7 +64,7 @@ entity ntm_vector_integer_multiplier is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -165,7 +165,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case multiplier_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY           <= '0';
           DATA_OUT_ENABLE <= '0';
@@ -178,7 +178,7 @@ begin
             multiplier_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_STATE =>  -- STEP 1
+        when INPUT_STATE =>             -- STEP 1
 
           if ((DATA_A_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
             -- Data Inputs
@@ -210,7 +210,7 @@ begin
           -- Control Outputs
           DATA_OUT_ENABLE <= '0';
 
-        when ENDER_STATE =>  -- STEP 2
+        when ENDER_STATE =>             -- STEP 2
 
           if (ready_scalar_integer_multiplier = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
@@ -270,7 +270,7 @@ begin
       DATA_A_IN => data_a_in_scalar_integer_multiplier,
       DATA_B_IN => data_b_in_scalar_integer_multiplier,
 
-      DATA_OUT  => data_out_scalar_integer_multiplier,
+      DATA_OUT     => data_out_scalar_integer_multiplier,
       OVERFLOW_OUT => overflow_out_scalar_integer_multiplier
       );
 

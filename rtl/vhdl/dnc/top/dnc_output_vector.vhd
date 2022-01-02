@@ -248,7 +248,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -261,7 +261,7 @@ begin
             controller_ctrl_fsm_int <= INPUT_FIRST_I_STATE;
           end if;
 
-        when INPUT_FIRST_I_STATE =>  -- STEP 1
+        when INPUT_FIRST_I_STATE =>     -- STEP 1
 
           if (K_IN_Y_ENABLE = '1') then
             -- Data Inputs
@@ -307,7 +307,7 @@ begin
             controller_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_I_STATE;
           end if;
 
-        when INPUT_FIRST_J_STATE =>  -- STEP 2
+        when INPUT_FIRST_J_STATE =>     -- STEP 2
 
           if (K_IN_K_ENABLE = '1') then
             -- Data Inputs
@@ -420,7 +420,7 @@ begin
             data_in_scalar_enable_vector_summation <= '0';
           end if;
 
-        when INPUT_SECOND_I_STATE =>  -- STEP 7
+        when INPUT_SECOND_I_STATE =>    -- STEP 7
 
           if (U_IN_Y_ENABLE = '1') then
             -- Data Inputs
@@ -444,7 +444,7 @@ begin
             data_a_in_i_enable_matrix_product <= '0';
           end if;
 
-        when INPUT_SECOND_J_STATE =>  -- STEP 8
+        when INPUT_SECOND_J_STATE =>    -- STEP 8
 
           if (K_IN_K_ENABLE = '1') then
             -- Data Inputs
@@ -514,7 +514,7 @@ begin
             data_b_in_j_enable_matrix_product <= '0';
           end if;
 
-        when MATRIX_ADDER_I_STATE =>  -- STEP 11
+        when MATRIX_ADDER_I_STATE =>    -- STEP 11
 
           if (data_out_i_enable_matrix_adder = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_Y_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_R_IN))) then
@@ -539,7 +539,7 @@ begin
             data_b_in_i_enable_matrix_product <= '0';
           end if;
 
-        when MATRIX_ADDER_J_STATE =>  -- STEP 12
+        when MATRIX_ADDER_J_STATE =>    -- STEP 12
 
           if (data_out_j_enable_matrix_adder = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_Y_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_R_IN))) then

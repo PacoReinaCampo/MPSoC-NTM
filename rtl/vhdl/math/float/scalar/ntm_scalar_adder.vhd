@@ -61,8 +61,8 @@ entity ntm_scalar_adder is
     OPERATION : in std_logic;
 
     -- DATA
-    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
     OVERFLOW_OUT : out std_logic
@@ -184,7 +184,7 @@ begin
       -- Data Outputs
       DATA_OUT     <= ZERO_DATA;
       OVERFLOW_OUT <= '0';
-      
+
       -- Control Outputs
       READY <= '0';
 
@@ -210,7 +210,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case adder_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -235,7 +235,7 @@ begin
             adder_ctrl_fsm_int <= ARITHMETIC_STATE;
           end if;
 
-        when ARITHMETIC_STATE =>  -- STEP 1
+        when ARITHMETIC_STATE =>        -- STEP 1
 
           if (ready_exponent_scalar_adder = '1') then
             -- Data Outputs
@@ -253,7 +253,7 @@ begin
             start_mantissa_scalar_adder <= '0';
           end if;
 
-        when ADAPTATION_STATE =>  -- STEP 2
+        when ADAPTATION_STATE =>        -- STEP 2
 
           if (overflow_out_mantissa_scalar_adder = '1') then
             -- Data Outputs
@@ -261,7 +261,7 @@ begin
             mantissa_int_scalar_adder <= std_logic_vector(unsigned(mantissa_int_scalar_adder) srl 1);
           end if;
 
-        when NORMALIZATION_STATE =>  -- STEP 3
+        when NORMALIZATION_STATE =>     -- STEP 3
 
           if (overflow_out_mantissa_scalar_adder = '1') then
             -- Data Outputs
@@ -269,7 +269,7 @@ begin
             mantissa_int_scalar_adder <= std_logic_vector(unsigned(mantissa_int_scalar_adder) sll 1);
           end if;
 
-        when ENDER_STATE =>  -- STEP 4
+        when ENDER_STATE =>             -- STEP 4
 
           -- Control Outputs
           READY <= '1';

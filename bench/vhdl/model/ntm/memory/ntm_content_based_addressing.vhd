@@ -60,13 +60,13 @@ entity ntm_content_based_addressing is
 
     K_IN_ENABLE : in std_logic;         -- for j in 0 to J-1
 
-    K_OUT_ENABLE : out std_logic;        -- for j in 0 to J-1
+    K_OUT_ENABLE : out std_logic;       -- for j in 0 to J-1
 
     M_IN_I_ENABLE : in std_logic;       -- for i in 0 to I-1
     M_IN_J_ENABLE : in std_logic;       -- for j in 0 to J-1
 
-    M_OUT_I_ENABLE : out std_logic;      -- for i in 0 to I-1
-    M_OUT_J_ENABLE : out std_logic;      -- for j in 0 to J-1
+    M_OUT_I_ENABLE : out std_logic;     -- for i in 0 to I-1
+    M_OUT_J_ENABLE : out std_logic;     -- for j in 0 to J-1
 
     C_OUT_ENABLE : out std_logic;       -- for i in 0 to I-1
 
@@ -224,7 +224,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -252,7 +252,7 @@ begin
 
         when VECTOR_EXPONENTIATOR_STATE =>  -- STEP 3
 
-        when VECTOR_SOFTMAX_STATE =>  -- STEP 4
+        when VECTOR_SOFTMAX_STATE =>    -- STEP 4
 
           if (data_out_vector_enable_vector_softmax = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_I_IN) - unsigned(ONE_CONTROL)) then

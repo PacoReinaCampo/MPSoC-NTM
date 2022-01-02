@@ -59,68 +59,68 @@ entity ntm_modular_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- SCALAR-FUNCTIONALITY
-    ENABLE_NTM_SCALAR_MODULAR_MOD_TEST           : boolean := false;
-    ENABLE_NTM_SCALAR_MODULAR_ADDER_TEST         : boolean := false;
-    ENABLE_NTM_SCALAR_MODULAR_MULTIPLIER_TEST    : boolean := false;
-    ENABLE_NTM_SCALAR_MODULAR_INVERTER_TEST      : boolean := false;
+    ENABLE_NTM_SCALAR_MODULAR_MOD_TEST        : boolean := false;
+    ENABLE_NTM_SCALAR_MODULAR_ADDER_TEST      : boolean := false;
+    ENABLE_NTM_SCALAR_MODULAR_MULTIPLIER_TEST : boolean := false;
+    ENABLE_NTM_SCALAR_MODULAR_INVERTER_TEST   : boolean := false;
 
-    ENABLE_NTM_SCALAR_MODULAR_MOD_CASE_0           : boolean := false;
-    ENABLE_NTM_SCALAR_MODULAR_ADDER_CASE_0         : boolean := false;
-    ENABLE_NTM_SCALAR_MODULAR_MULTIPLIER_CASE_0    : boolean := false;
-    ENABLE_NTM_SCALAR_MODULAR_INVERTER_CASE_0      : boolean := false;
+    ENABLE_NTM_SCALAR_MODULAR_MOD_CASE_0        : boolean := false;
+    ENABLE_NTM_SCALAR_MODULAR_ADDER_CASE_0      : boolean := false;
+    ENABLE_NTM_SCALAR_MODULAR_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_NTM_SCALAR_MODULAR_INVERTER_CASE_0   : boolean := false;
 
-    ENABLE_NTM_SCALAR_MODULAR_MOD_CASE_1           : boolean := false;
-    ENABLE_NTM_SCALAR_MODULAR_ADDER_CASE_1         : boolean := false;
-    ENABLE_NTM_SCALAR_MODULAR_MULTIPLIER_CASE_1    : boolean := false;
-    ENABLE_NTM_SCALAR_MODULAR_INVERTER_CASE_1      : boolean := false;
+    ENABLE_NTM_SCALAR_MODULAR_MOD_CASE_1        : boolean := false;
+    ENABLE_NTM_SCALAR_MODULAR_ADDER_CASE_1      : boolean := false;
+    ENABLE_NTM_SCALAR_MODULAR_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_NTM_SCALAR_MODULAR_INVERTER_CASE_1   : boolean := false;
 
     -- VECTOR-FUNCTIONALITY
-    ENABLE_NTM_VECTOR_MODULAR_MOD_TEST           : boolean := false;
-    ENABLE_NTM_VECTOR_MODULAR_ADDER_TEST         : boolean := false;
-    ENABLE_NTM_VECTOR_MODULAR_MULTIPLIER_TEST    : boolean := false;
-    ENABLE_NTM_VECTOR_MODULAR_INVERTER_TEST      : boolean := false;
+    ENABLE_NTM_VECTOR_MODULAR_MOD_TEST        : boolean := false;
+    ENABLE_NTM_VECTOR_MODULAR_ADDER_TEST      : boolean := false;
+    ENABLE_NTM_VECTOR_MODULAR_MULTIPLIER_TEST : boolean := false;
+    ENABLE_NTM_VECTOR_MODULAR_INVERTER_TEST   : boolean := false;
 
-    ENABLE_NTM_VECTOR_MODULAR_MOD_CASE_0           : boolean := false;
-    ENABLE_NTM_VECTOR_MODULAR_ADDER_CASE_0         : boolean := false;
-    ENABLE_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_0    : boolean := false;
-    ENABLE_NTM_VECTOR_MODULAR_INVERTER_CASE_0      : boolean := false;
+    ENABLE_NTM_VECTOR_MODULAR_MOD_CASE_0        : boolean := false;
+    ENABLE_NTM_VECTOR_MODULAR_ADDER_CASE_0      : boolean := false;
+    ENABLE_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_NTM_VECTOR_MODULAR_INVERTER_CASE_0   : boolean := false;
 
-    ENABLE_NTM_VECTOR_MODULAR_MOD_CASE_1           : boolean := false;
-    ENABLE_NTM_VECTOR_MODULAR_ADDER_CASE_1         : boolean := false;
-    ENABLE_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_1    : boolean := false;
-    ENABLE_NTM_VECTOR_MODULAR_INVERTER_CASE_1      : boolean := false;
+    ENABLE_NTM_VECTOR_MODULAR_MOD_CASE_1        : boolean := false;
+    ENABLE_NTM_VECTOR_MODULAR_ADDER_CASE_1      : boolean := false;
+    ENABLE_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_NTM_VECTOR_MODULAR_INVERTER_CASE_1   : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
-    ENABLE_NTM_MATRIX_MODULAR_MOD_TEST           : boolean := false;
-    ENABLE_NTM_MATRIX_MODULAR_ADDER_TEST         : boolean := false;
-    ENABLE_NTM_MATRIX_MODULAR_MULTIPLIER_TEST    : boolean := false;
-    ENABLE_NTM_MATRIX_MODULAR_INVERTER_TEST      : boolean := false;
+    ENABLE_NTM_MATRIX_MODULAR_MOD_TEST        : boolean := false;
+    ENABLE_NTM_MATRIX_MODULAR_ADDER_TEST      : boolean := false;
+    ENABLE_NTM_MATRIX_MODULAR_MULTIPLIER_TEST : boolean := false;
+    ENABLE_NTM_MATRIX_MODULAR_INVERTER_TEST   : boolean := false;
 
-    ENABLE_NTM_MATRIX_MODULAR_MOD_CASE_0           : boolean := false;
-    ENABLE_NTM_MATRIX_MODULAR_ADDER_CASE_0         : boolean := false;
-    ENABLE_NTM_MATRIX_MODULAR_MULTIPLIER_CASE_0    : boolean := false;
-    ENABLE_NTM_MATRIX_MODULAR_INVERTER_CASE_0      : boolean := false;
+    ENABLE_NTM_MATRIX_MODULAR_MOD_CASE_0        : boolean := false;
+    ENABLE_NTM_MATRIX_MODULAR_ADDER_CASE_0      : boolean := false;
+    ENABLE_NTM_MATRIX_MODULAR_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_NTM_MATRIX_MODULAR_INVERTER_CASE_0   : boolean := false;
 
-    ENABLE_NTM_MATRIX_MODULAR_MOD_CASE_1           : boolean := false;
-    ENABLE_NTM_MATRIX_MODULAR_ADDER_CASE_1         : boolean := false;
-    ENABLE_NTM_MATRIX_MODULAR_MULTIPLIER_CASE_1    : boolean := false;
-    ENABLE_NTM_MATRIX_MODULAR_INVERTER_CASE_1      : boolean := false;
+    ENABLE_NTM_MATRIX_MODULAR_MOD_CASE_1        : boolean := false;
+    ENABLE_NTM_MATRIX_MODULAR_ADDER_CASE_1      : boolean := false;
+    ENABLE_NTM_MATRIX_MODULAR_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_NTM_MATRIX_MODULAR_INVERTER_CASE_1   : boolean := false;
 
     -- TENSOR-FUNCTIONALITY
-    ENABLE_NTM_TENSOR_MODULAR_MOD_TEST           : boolean := false;
-    ENABLE_NTM_TENSOR_MODULAR_ADDER_TEST         : boolean := false;
-    ENABLE_NTM_TENSOR_MODULAR_MULTIPLIER_TEST    : boolean := false;
-    ENABLE_NTM_TENSOR_MODULAR_INVERTER_TEST      : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_MOD_TEST        : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_ADDER_TEST      : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_MULTIPLIER_TEST : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_INVERTER_TEST   : boolean := false;
 
-    ENABLE_NTM_TENSOR_MODULAR_MOD_CASE_0           : boolean := false;
-    ENABLE_NTM_TENSOR_MODULAR_ADDER_CASE_0         : boolean := false;
-    ENABLE_NTM_TENSOR_MODULAR_MULTIPLIER_CASE_0    : boolean := false;
-    ENABLE_NTM_TENSOR_MODULAR_INVERTER_CASE_0      : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_MOD_CASE_0        : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_ADDER_CASE_0      : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_INVERTER_CASE_0   : boolean := false;
 
-    ENABLE_NTM_TENSOR_MODULAR_MOD_CASE_1           : boolean := false;
-    ENABLE_NTM_TENSOR_MODULAR_ADDER_CASE_1         : boolean := false;
-    ENABLE_NTM_TENSOR_MODULAR_MULTIPLIER_CASE_1    : boolean := false;
-    ENABLE_NTM_TENSOR_MODULAR_INVERTER_CASE_1      : boolean := false
+    ENABLE_NTM_TENSOR_MODULAR_MOD_CASE_1        : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_ADDER_CASE_1      : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_NTM_TENSOR_MODULAR_INVERTER_CASE_1   : boolean := false
     );
 end ntm_modular_testbench;
 
@@ -443,8 +443,8 @@ begin
   modular_stimulus : ntm_modular_stimulus
     generic map (
       -- SYSTEM-SIZE
-      DATA_SIZE  => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE,
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE,
 
       X => X,
       Y => Y,
