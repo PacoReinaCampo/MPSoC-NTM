@@ -145,9 +145,12 @@ architecture dnc_write_interface_vector_architecture of dnc_write_interface_vect
 
   type controller_ctrl_matrix_fsm is (
     STARTER_STATE,                      -- STEP 0
-    MATRIX_FIRST_PRODUCT_STATE,         -- STEP 1
-    MATRIX_SECOND_PRODUCT_STATE,        -- STEP 2
-    MATRIX_THIRD_PRODUCT_STATE          -- STEP 3
+    MATRIX_I_FIRST_PRODUCT_STATE,       -- STEP 1
+    MATRIX_J_FIRST_PRODUCT_STATE,       -- STEP 2
+    MATRIX_I_SECOND_PRODUCT_STATE,      -- STEP 3
+    MATRIX_J_SECOND_PRODUCT_STATE,      -- STEP 4
+    MATRIX_I_THIRD_PRODUCT_STATE,       -- STEP 5
+    MATRIX_J_THIRD_PRODUCT_STATE        -- STEP 6
     );
 
   -----------------------------------------------------------------------
@@ -325,13 +328,15 @@ begin
             start_matrix_product <= '1';
 
             -- FSM Control
-            controller_ctrl_matrix_fsm_int <= MATRIX_FIRST_PRODUCT_STATE;
+            controller_ctrl_matrix_fsm_int <= MATRIX_I_FIRST_PRODUCT_STATE;
           else
             -- Control Internal
             start_matrix_product <= '0';
           end if;
 
-        when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 1
+        when MATRIX_I_FIRST_PRODUCT_STATE =>  -- STEP 1
+
+        when MATRIX_J_FIRST_PRODUCT_STATE =>  -- STEP 2
 
           -- k(t;k) = Wk(t;l;k)·h(t;l)
 
@@ -352,7 +357,9 @@ begin
           -- Data Outputs
           K_OUT <= data_out_matrix_product;
 
-        when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 2
+        when MATRIX_I_SECOND_PRODUCT_STATE =>  -- STEP 3
+
+        when MATRIX_J_SECOND_PRODUCT_STATE =>  -- STEP 4
 
           -- e(t;k) = We(t;l;k)·h(t;l)
 
@@ -373,7 +380,9 @@ begin
           -- Data Outputs
           E_OUT <= data_out_matrix_product;
 
-        when MATRIX_THIRD_PRODUCT_STATE =>  -- STEP 3
+        when MATRIX_I_THIRD_PRODUCT_STATE =>  -- STEP 5
+
+        when MATRIX_J_THIRD_PRODUCT_STATE =>  -- STEP 6
 
           -- v(t;k) = Wv(t;l;k)·h(t;l)
 
