@@ -188,42 +188,36 @@ begin
 
         when FRACTIONAL_STATE =>  -- STEP 2
 
-          if (unsigned(index_fractional_loop) = unsigned(ZERO_DATA)) then
-            -- Data Outputs
-            DATA_INTEGER_OUT    <= divider_integer_int;
-            DATA_FRACTIONAL_OUT <= divider_fractional_int;
+          if (unsigned(DATA_B_IN) > unsigned(index_fractional_loop)) then
+            -- FSM Control
+            divider_ctrl_fsm_int <= ENDER_STATE;
           else
             -- Data Internal
             divider_fractional_int <= std_logic_vector(unsigned(divider_fractional_int) + unsigned(ONE_DATA));
 
             -- Control Internal
-            index_fractional_loop <= std_logic_vector(unsigned(index_fractional_loop) srl 1);
             index_fractional_loop <= std_logic_vector(unsigned(index_fractional_loop) - unsigned(DATA_B_IN));
           end if;
 
-          -- FSM Control
-          divider_ctrl_fsm_int <= ENDER_STATE;
-
-        when ENDER_STATE =>  -- STEP 2
+        when ENDER_STATE =>  -- STEP 3
 
           if (unsigned(index_fractional_loop) = unsigned(ZERO_DATA)) then
             -- Data Outputs
             DATA_INTEGER_OUT    <= divider_integer_int;
             DATA_FRACTIONAL_OUT <= divider_fractional_int;
+
+            -- Control Outputs
+            READY <= '1';
+
+            -- FSM Control
+            divider_ctrl_fsm_int <= STARTER_STATE;
           else
-            -- Data Internal
-            divider_fractional_int <= std_logic_vector(unsigned(divider_fractional_int) + unsigned(ONE_DATA));
-
             -- Control Internal
-            index_fractional_loop <= std_logic_vector(unsigned(index_fractional_loop) srl 1);
-            index_fractional_loop <= std_logic_vector(unsigned(index_fractional_loop) - unsigned(DATA_B_IN));
+            index_fractional_loop <= std_logic_vector(unsigned(index_fractional_loop) sll 1);
+
+            -- FSM Control
+            divider_ctrl_fsm_int <= FRACTIONAL_STATE;
           end if;
-
-          -- Control Outputs
-          READY <= '1';
-
-          -- FSM Control
-          divider_ctrl_fsm_int <= STARTER_STATE;
 
         when others =>
           -- FSM Control
