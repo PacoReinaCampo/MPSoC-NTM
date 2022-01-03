@@ -114,7 +114,6 @@ module dnc_forward_weighting #(
   wire data_out_j_enable_matrix_product;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_product;
   wire [DATA_SIZE-1:0] size_a_i_in_matrix_product;
   wire [DATA_SIZE-1:0] size_a_j_in_matrix_product;
   wire [DATA_SIZE-1:0] size_b_i_in_matrix_product;
@@ -141,7 +140,6 @@ module dnc_forward_weighting #(
   assign F_OUT_J_ENABLE = data_out_j_enable_matrix_product;
 
   // DATA
-  assign modulo_in_matrix_product = FULL;
   assign size_a_i_in_matrix_product = SIZE_N_IN;
   assign size_a_j_in_matrix_product = SIZE_N_IN;
   assign size_b_i_in_matrix_product = SIZE_R_IN;
@@ -172,7 +170,6 @@ module dnc_forward_weighting #(
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_product),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_product),
     .SIZE_A_I_IN(size_a_i_in_matrix_product),
     .SIZE_A_J_IN(size_a_j_in_matrix_product),
     .SIZE_B_I_IN(size_b_i_in_matrix_product),

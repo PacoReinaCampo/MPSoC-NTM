@@ -130,7 +130,6 @@ architecture dnc_precedence_weighting_architecture of dnc_precedence_weighting i
   signal data_out_scalar_enable_vector_summation : std_logic;
 
   -- DATA
-  signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -149,7 +148,6 @@ architecture dnc_precedence_weighting_architecture of dnc_precedence_weighting i
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -166,7 +164,6 @@ architecture dnc_precedence_weighting_architecture of dnc_precedence_weighting i
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -236,7 +233,6 @@ begin
         when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
 
           -- Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_N_IN;
           data_a_in_vector_adder <= ONE_DATA;
           data_b_in_vector_adder <= data_out_vector_summation;
@@ -272,7 +268,6 @@ begin
         when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
 
           -- Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_N_IN;
           data_a_in_vector_adder <= data_out_vector_multiplier;
           data_b_in_vector_adder <= W_IN;
@@ -322,13 +317,11 @@ begin
 
   -- DATA
   -- VECTOR SUMMATION
-  modulo_in_vector_summation <= FULL;
   size_in_vector_summation   <= SIZE_N_IN;
   length_in_vector_summation <= SIZE_R_IN;
   data_in_vector_summation   <= W_IN;
 
   -- VECTOR MULTIPLIER
-  modulo_in_vector_multiplier <= FULL;
   size_in_vector_multiplier   <= SIZE_N_IN;
   data_a_in_vector_multiplier <= data_out_vector_adder;
   data_b_in_vector_multiplier <= P_IN;
@@ -355,7 +348,6 @@ begin
       DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_summation,
       SIZE_IN   => size_in_vector_summation,
       LENGTH_IN => length_in_vector_summation,
       DATA_IN   => data_in_vector_summation,
@@ -385,7 +377,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_adder,
       SIZE_IN   => size_in_vector_adder,
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
@@ -413,7 +404,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_multiplier,
       SIZE_IN   => size_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,

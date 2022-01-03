@@ -55,7 +55,6 @@ module ntm_vector_multiplier #(
     output reg DATA_OUT_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] SIZE_IN,
     input [DATA_SIZE-1:0] DATA_A_IN,
     input [DATA_SIZE-1:0] DATA_B_IN,
@@ -108,7 +107,6 @@ module ntm_vector_multiplier #(
   wire ready_scalar_multiplier;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_scalar_multiplier;
   reg [DATA_SIZE-1:0] data_a_in_scalar_multiplier;
   reg [DATA_SIZE-1:0] data_b_in_scalar_multiplier;
   wire [DATA_SIZE-1:0] data_out_scalar_multiplier;
@@ -171,7 +169,6 @@ module ntm_vector_multiplier #(
               start_scalar_multiplier <= 1'b1;
             end
             // Data Inputs
-            modulo_in_scalar_multiplier <= MODULO_IN;
 
             // FSM Control
             multiplier_ctrl_fsm_int <= ENDER_STATE;
@@ -232,7 +229,6 @@ module ntm_vector_multiplier #(
     .READY(ready_scalar_multiplier),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_multiplier),
     .DATA_A_IN(data_a_in_scalar_multiplier),
     .DATA_B_IN(data_b_in_scalar_multiplier),
     .DATA_OUT(data_out_scalar_multiplier)

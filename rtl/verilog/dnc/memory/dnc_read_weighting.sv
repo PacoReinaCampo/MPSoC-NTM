@@ -143,7 +143,6 @@ module dnc_read_weighting #(
   wire data_out_enable_vector_adder;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_adder;
   reg [DATA_SIZE-1:0] size_in_vector_adder;
   reg [DATA_SIZE-1:0] data_a_in_vector_adder;
   reg [DATA_SIZE-1:0] data_b_in_vector_adder;
@@ -159,7 +158,6 @@ module dnc_read_weighting #(
   wire data_out_enable_vector_multiplier;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_multiplier;
   reg [DATA_SIZE-1:0] size_in_vector_multiplier;
   reg [DATA_SIZE-1:0] data_a_in_vector_multiplier;
   reg [DATA_SIZE-1:0] data_b_in_vector_multiplier;
@@ -195,7 +193,6 @@ module dnc_read_weighting #(
         VECTOR_FIRST_MULTIPLIER_STATE : begin  // STEP 1
 
           // Data Inputs
-          modulo_in_vector_multiplier <= FULL;
           size_in_vector_multiplier   <= SIZE_N_IN;
           data_a_in_vector_multiplier <= PI_IN;
           data_b_in_vector_multiplier <= B_IN;
@@ -204,7 +201,6 @@ module dnc_read_weighting #(
         VECTOR_FIRST_ADDER_STATE : begin  // STEP 2
 
           // Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_N_IN;
           data_a_in_vector_adder <= ZERO_DATA;
           data_b_in_vector_adder <= data_out_vector_multiplier;
@@ -213,7 +209,6 @@ module dnc_read_weighting #(
         VECTOR_SECOND_MULTIPLIER_STATE : begin  // STEP 3
 
           // Data Inputs
-          modulo_in_vector_multiplier <= FULL;
           size_in_vector_multiplier   <= SIZE_N_IN;
           data_a_in_vector_multiplier <= PI_IN;
           data_b_in_vector_multiplier <= C_IN;
@@ -222,7 +217,6 @@ module dnc_read_weighting #(
         VECTOR_SECOND_ADDER_STATE : begin  // STEP 4
 
           // Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_N_IN;
           data_a_in_vector_adder <= data_out_vector_adder;
           data_b_in_vector_adder <= data_out_vector_multiplier;
@@ -231,7 +225,6 @@ module dnc_read_weighting #(
         VECTOR_THIRD_MULTIPLIER_STATE : begin  // STEP 5
 
           // Data Inputs
-          modulo_in_vector_multiplier <= FULL;
           size_in_vector_multiplier   <= SIZE_N_IN;
           data_a_in_vector_multiplier <= PI_IN;
           data_b_in_vector_multiplier <= F_IN;
@@ -240,7 +233,6 @@ module dnc_read_weighting #(
         VECTOR_THIRD_ADDER_STATE : begin  // STEP 6
 
           // Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_N_IN;
           data_a_in_vector_adder <= data_out_vector_adder;
           data_b_in_vector_adder <= data_out_vector_multiplier;
@@ -274,7 +266,6 @@ module dnc_read_weighting #(
     .DATA_OUT_ENABLE(data_out_enable_vector_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_adder),
     .SIZE_IN(size_in_vector_adder),
     .DATA_A_IN(data_a_in_vector_adder),
     .DATA_B_IN(data_b_in_vector_adder),
@@ -300,7 +291,6 @@ module dnc_read_weighting #(
     .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_multiplier),
     .SIZE_IN(size_in_vector_multiplier),
     .DATA_A_IN(data_a_in_vector_multiplier),
     .DATA_B_IN(data_b_in_vector_multiplier),

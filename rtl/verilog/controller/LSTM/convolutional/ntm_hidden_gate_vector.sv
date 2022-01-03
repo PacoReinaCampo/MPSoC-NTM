@@ -111,7 +111,6 @@ module ntm_hidden_gate_vector #(
   wire data_out_enable_vector_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_multiplier;
   wire [DATA_SIZE-1:0] size_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
@@ -126,7 +125,6 @@ module ntm_hidden_gate_vector #(
   wire data_out_enable_vector_tanh;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_tanh;
   wire [DATA_SIZE-1:0] size_in_vector_tanh;
   wire [DATA_SIZE-1:0] data_in_vector_tanh;
   wire [DATA_SIZE-1:0] data_out_vector_tanh;
@@ -177,12 +175,10 @@ module ntm_hidden_gate_vector #(
   end
 
   // VECTOR TANH
-  assign modulo_in_vector_tanh = FULL;
   assign size_in_vector_tanh   = SIZE_L_IN;
   assign data_in_vector_tanh   = S_IN;
 
   // VECTOR MULTIPLIER
-  assign modulo_in_vector_multiplier = FULL;
   assign size_in_vector_multiplier   = SIZE_L_IN;
   assign data_a_in_vector_multiplier = O_IN;
   assign data_b_in_vector_multiplier = data_out_vector_tanh;
@@ -206,7 +202,6 @@ module ntm_hidden_gate_vector #(
     .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_multiplier),
     .SIZE_IN(size_in_vector_multiplier),
     .DATA_A_IN(data_a_in_vector_multiplier),
     .DATA_B_IN(data_b_in_vector_multiplier),
@@ -231,7 +226,6 @@ module ntm_hidden_gate_vector #(
     .DATA_OUT_ENABLE(data_out_enable_vector_tanh),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_tanh),
     .SIZE_IN(size_in_vector_tanh),
     .DATA_IN(data_in_vector_tanh),
     .DATA_OUT(data_out_vector_tanh)

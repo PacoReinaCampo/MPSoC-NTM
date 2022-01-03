@@ -63,7 +63,6 @@ entity ntm_scalar_differentiation_function is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -125,7 +124,6 @@ architecture ntm_scalar_differentiation_function_architecture of ntm_scalar_diff
   signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -136,7 +134,6 @@ architecture ntm_scalar_differentiation_function_architecture of ntm_scalar_diff
   signal ready_scalar_divider : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -195,7 +192,6 @@ begin
             operation_scalar_adder <= '1';
 
             -- Data Inputs
-            modulo_in_scalar_adder <= MODULO_IN;
             data_a_in_scalar_adder <= DATA_IN;
             data_b_in_scalar_adder <= data_int_scalar_adder;
 
@@ -257,7 +253,6 @@ begin
   end process;
 
   -- SCALAR DIVIDER
-  modulo_in_scalar_divider <= MODULO_IN;
   data_a_in_scalar_divider <= data_out_scalar_adder;
   data_b_in_scalar_divider <= PERIOD_IN;
   data_out_scalar_divider  <= DATA_OUT;
@@ -280,7 +275,6 @@ begin
       OPERATION => operation_scalar_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_adder,
       DATA_A_IN => data_a_in_scalar_adder,
       DATA_B_IN => data_b_in_scalar_adder,
       DATA_OUT  => data_out_scalar_adder
@@ -302,7 +296,6 @@ begin
       READY => ready_scalar_divider,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_divider,
       DATA_A_IN => data_a_in_scalar_divider,
       DATA_B_IN => data_b_in_scalar_divider,
       DATA_OUT  => data_out_scalar_divider

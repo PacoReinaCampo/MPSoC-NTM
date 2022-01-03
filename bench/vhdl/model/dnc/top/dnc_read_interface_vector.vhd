@@ -131,9 +131,12 @@ architecture dnc_read_interface_vector_architecture of dnc_read_interface_vector
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    MATRIX_FIRST_PRODUCT_STATE,         -- STEP 1
-    MATRIX_SECOND_PRODUCT_STATE,        -- STEP 2
-    MATRIX_THIRD_PRODUCT_STATE          -- STEP 3
+    MATRIX_I_FIRST_PRODUCT_STATE,       -- STEP 1
+    MATRIX_J_FIRST_PRODUCT_STATE,       -- STEP 2
+    MATRIX_I_SECOND_PRODUCT_STATE,      -- STEP 3
+    MATRIX_J_SECOND_PRODUCT_STATE,      -- STEP 4
+    MATRIX_I_THIRD_PRODUCT_STATE,       -- STEP 5
+    MATRIX_J_THIRD_PRODUCT_STATE        -- STEP 6
     );
 
   -----------------------------------------------------------------------
@@ -176,7 +179,6 @@ architecture dnc_read_interface_vector_architecture of dnc_read_interface_vector
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -202,7 +204,6 @@ architecture dnc_read_interface_vector_architecture of dnc_read_interface_vector
   signal data_out_k_enable_tensor_product : std_logic;
 
   -- DATA
-  signal modulo_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_a_i_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_a_j_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_a_k_in_tensor_product : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -245,13 +246,15 @@ begin
             start_matrix_product <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_STATE;
+            controller_ctrl_fsm_int <= MATRIX_I_FIRST_PRODUCT_STATE;
           else
             -- Control Internal
             start_matrix_product <= '0';
           end if;
 
-        when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 1
+        when MATRIX_I_FIRST_PRODUCT_STATE =>  -- STEP 1
+
+        when MATRIX_J_FIRST_PRODUCT_STATE =>  -- STEP 2
 
           -- beta(t;i) = Wbeta(t;i;l)·h(t;l)
 
@@ -262,7 +265,6 @@ begin
           data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_R_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
           size_b_i_in_matrix_product <= SIZE_L_IN;
@@ -273,7 +275,9 @@ begin
           -- Data Outputs
           BETA_OUT <= data_out_matrix_product;
 
-        when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 2
+        when MATRIX_I_SECOND_PRODUCT_STATE =>  -- STEP 3
+
+        when MATRIX_J_SECOND_PRODUCT_STATE =>  -- STEP 4
 
           -- f(t;i) = Wf(t;i;l)·h(t;l)
 
@@ -284,7 +288,6 @@ begin
           data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_R_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
           size_b_i_in_matrix_product <= SIZE_L_IN;
@@ -295,7 +298,9 @@ begin
           -- Data Outputs
           F_OUT <= data_out_matrix_product;
 
-        when MATRIX_THIRD_PRODUCT_STATE =>  -- STEP 3
+        when MATRIX_I_THIRD_PRODUCT_STATE =>  -- STEP 5
+
+        when MATRIX_J_THIRD_PRODUCT_STATE =>  -- STEP 6
 
           -- pi(t;i) = Wpi(t;i;l)·h(t;l)
 
@@ -306,7 +311,6 @@ begin
           data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_R_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
           size_b_i_in_matrix_product <= SIZE_L_IN;
@@ -326,7 +330,6 @@ begin
 
   -- DATA
   -- TENSOR PRODUCT
-  modulo_in_tensor_product   <= FULL;
   size_a_i_in_tensor_product <= SIZE_R_IN;
   size_a_j_in_tensor_product <= SIZE_L_IN;
   size_a_k_in_tensor_product <= SIZE_W_IN;
@@ -362,7 +365,6 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MODULO_IN   => modulo_in_matrix_product,
       SIZE_A_I_IN => size_a_i_in_matrix_product,
       SIZE_A_J_IN => size_a_j_in_matrix_product,
       SIZE_B_I_IN => size_b_i_in_matrix_product,
@@ -399,7 +401,6 @@ begin
       DATA_OUT_K_ENABLE => data_out_k_enable_tensor_product,
 
       -- DATA
-      MODULO_IN   => modulo_in_tensor_product,
       SIZE_A_I_IN => size_a_i_in_tensor_product,
       SIZE_A_J_IN => size_a_j_in_tensor_product,
       SIZE_A_K_IN => size_a_k_in_tensor_product,

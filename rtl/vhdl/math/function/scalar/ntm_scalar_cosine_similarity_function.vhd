@@ -64,7 +64,6 @@ entity ntm_scalar_cosine_similarity_function is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -120,7 +119,6 @@ architecture ntm_scalar_cosine_similarity_function_architecture of ntm_scalar_co
   signal ready_scalar_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -131,7 +129,6 @@ architecture ntm_scalar_cosine_similarity_function_architecture of ntm_scalar_co
   signal ready_scalar_divider : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -147,7 +144,6 @@ architecture ntm_scalar_cosine_similarity_function_architecture of ntm_scalar_co
   signal data_out_enable_scalar_product_ab : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_product_ab : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_scalar_product_ab : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_scalar_product_ab : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_product_ab : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -164,7 +160,6 @@ architecture ntm_scalar_cosine_similarity_function_architecture of ntm_scalar_co
   signal data_out_enable_scalar_product_aa : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_product_aa : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_scalar_product_aa : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_scalar_product_aa : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_product_aa : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -181,7 +176,6 @@ architecture ntm_scalar_cosine_similarity_function_architecture of ntm_scalar_co
   signal data_out_enable_scalar_product_bb : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_product_bb : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_scalar_product_bb : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_scalar_product_bb : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_product_bb : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -292,30 +286,25 @@ begin
 
   -- DATA
   -- SCALAR MULTIPLIER AB
-  modulo_in_scalar_product_ab <= MODULO_IN;
   length_in_scalar_product_ab <= LENGTH_IN;
   data_a_in_scalar_product_ab <= DATA_A_IN;
   data_b_in_scalar_product_ab <= DATA_B_IN;
 
   -- SCALAR MULTIPLIER AA
-  modulo_in_scalar_product_ab <= MODULO_IN;
   length_in_scalar_product_ab <= LENGTH_IN;
   data_a_in_scalar_product_ab <= DATA_A_IN;
   data_b_in_scalar_product_ab <= DATA_A_IN;
 
   -- SCALAR MULTIPLIER BB
-  modulo_in_scalar_product_ab <= MODULO_IN;
   length_in_scalar_product_ab <= LENGTH_IN;
   data_a_in_scalar_product_ab <= DATA_B_IN;
   data_b_in_scalar_product_ab <= DATA_B_IN;
 
   -- SCALAR MULTIPLIER
-  modulo_in_scalar_multiplier <= MODULO_IN;
   data_a_in_scalar_multiplier <= data_out_scalar_product_aa;
   data_b_in_scalar_multiplier <= data_out_scalar_product_bb;
 
   -- SCALAR DIVIDER
-  modulo_in_scalar_divider <= MODULO_IN;
   data_a_in_scalar_divider <= data_out_scalar_product_ab;
   data_b_in_scalar_divider <= data_out_scalar_multiplier;
 
@@ -335,7 +324,6 @@ begin
       READY => ready_scalar_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_multiplier,
       DATA_A_IN => data_a_in_scalar_multiplier,
       DATA_B_IN => data_b_in_scalar_multiplier,
       DATA_OUT  => data_out_scalar_multiplier
@@ -357,7 +345,6 @@ begin
       READY => ready_scalar_divider,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_divider,
       DATA_A_IN => data_a_in_scalar_divider,
       DATA_B_IN => data_b_in_scalar_divider,
       DATA_OUT  => data_out_scalar_divider
@@ -384,7 +371,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_scalar_product_ab,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_product_ab,
       LENGTH_IN => length_in_scalar_product_ab,
       DATA_A_IN => data_a_in_scalar_product_ab,
       DATA_B_IN => data_b_in_scalar_product_ab,
@@ -412,7 +398,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_scalar_product_aa,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_product_aa,
       LENGTH_IN => length_in_scalar_product_aa,
       DATA_A_IN => data_a_in_scalar_product_aa,
       DATA_B_IN => data_b_in_scalar_product_aa,
@@ -440,7 +425,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_scalar_product_bb,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_product_bb,
       LENGTH_IN => length_in_scalar_product_bb,
       DATA_A_IN => data_a_in_scalar_product_bb,
       DATA_B_IN => data_b_in_scalar_product_bb,

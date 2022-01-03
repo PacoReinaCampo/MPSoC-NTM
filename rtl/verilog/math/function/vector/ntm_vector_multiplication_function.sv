@@ -55,7 +55,6 @@ module ntm_vector_multiplication_function #(
     output reg DATA_OUT_SCALAR_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] SIZE_IN,
     input [DATA_SIZE-1:0] LENGTH_IN,
     input [DATA_SIZE-1:0] DATA_IN,
@@ -109,7 +108,6 @@ module ntm_vector_multiplication_function #(
   wire data_out_enable_scalar_multiplication;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_scalar_multiplication;
   wire [DATA_SIZE-1:0] size_in_scalar_multiplication;
   reg [DATA_SIZE-1:0] length_in_scalar_multiplication;
   reg [DATA_SIZE-1:0] data_in_scalar_multiplication;
@@ -150,7 +148,6 @@ module ntm_vector_multiplication_function #(
         INPUT_VECTOR_STATE : begin  // STEP 1
           if(DATA_IN_VECTOR_ENABLE == 1'b1) begin
             // Data Inputs
-            modulo_in_scalar_multiplication <= MODULO_IN;
             data_in_scalar_multiplication <= DATA_IN;
 
             if(index_vector_loop == ZERO_DATA) begin
@@ -175,7 +172,6 @@ module ntm_vector_multiplication_function #(
         INPUT_SCALAR_STATE : begin  // STEP 2
           if(DATA_IN_SCALAR_ENABLE == 1'b1) begin
             // Data Inputs
-            modulo_in_scalar_multiplication <= MODULO_IN;
             length_in_scalar_multiplication <= LENGTH_IN;
             data_in_scalar_multiplication <= DATA_IN;
 
@@ -262,7 +258,6 @@ module ntm_vector_multiplication_function #(
     .DATA_OUT_ENABLE(data_out_enable_scalar_multiplication),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_multiplication),
     .LENGTH_IN(length_in_scalar_multiplication),
     .DATA_IN(data_in_scalar_multiplication),
     .DATA_OUT(data_out_scalar_multiplication)

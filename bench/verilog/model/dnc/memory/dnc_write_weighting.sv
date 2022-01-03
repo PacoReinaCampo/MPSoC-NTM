@@ -115,7 +115,6 @@ module dnc_write_weighting #(
   wire data_out_enable_vector_adder;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_adder;
   wire [DATA_SIZE-1:0] size_in_vector_adder;
   wire [DATA_SIZE-1:0] data_a_in_vector_adder;
   wire [DATA_SIZE-1:0] data_b_in_vector_adder;
@@ -131,7 +130,6 @@ module dnc_write_weighting #(
   wire data_out_enable_vector_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_multiplier;
   wire [DATA_SIZE-1:0] size_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
@@ -198,7 +196,6 @@ module dnc_write_weighting #(
     .DATA_OUT_ENABLE(data_out_enable_vector_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_adder),
     .SIZE_IN(size_in_vector_adder),
     .DATA_A_IN(data_a_in_vector_adder),
     .DATA_B_IN(data_b_in_vector_adder),
@@ -224,7 +221,6 @@ module dnc_write_weighting #(
     .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_multiplier),
     .SIZE_IN(size_in_vector_multiplier),
     .DATA_A_IN(data_a_in_vector_multiplier),
     .DATA_B_IN(data_b_in_vector_multiplier),

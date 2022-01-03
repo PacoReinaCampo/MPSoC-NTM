@@ -118,7 +118,6 @@ module ntm_erasing #(
   wire data_out_enable_vector_adder;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_adder;
   wire [DATA_SIZE-1:0] size_in_vector_adder;
   wire [DATA_SIZE-1:0] data_a_in_vector_adder;
   wire [DATA_SIZE-1:0] data_b_in_vector_adder;
@@ -134,7 +133,6 @@ module ntm_erasing #(
   wire data_out_enable_vector_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_multiplier;
   wire [DATA_SIZE-1:0] size_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
@@ -153,7 +151,6 @@ module ntm_erasing #(
   wire data_out_j_enable_matrix_product;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_product;
   wire [DATA_SIZE-1:0] size_a_i_in_matrix_product;
   wire [DATA_SIZE-1:0] size_a_j_in_matrix_product;
   wire [DATA_SIZE-1:0] size_b_i_in_matrix_product;
@@ -210,19 +207,16 @@ module ntm_erasing #(
 
   // DATA
   // VECTOR MULTIPLIER
-  assign modulo_in_vector_multiplier = FULL;
   assign size_in_vector_multiplier   = SIZE_W_IN;
   assign data_a_in_vector_multiplier = W_IN;
   assign data_b_in_vector_multiplier = E_IN;
 
   // VECTOR ADDER
-  assign modulo_in_vector_adder = FULL;
   assign size_in_vector_adder   = SIZE_W_IN;
   assign data_a_in_vector_adder = ONE_CONTROL;
   assign data_b_in_vector_adder = data_out_vector_adder;
 
   // MATRIX PRODUCT
-  assign modulo_in_matrix_product   = FULL;
   assign size_a_i_in_matrix_product = SIZE_N_IN;
   assign size_a_j_in_matrix_product = SIZE_W_IN;
   assign size_b_i_in_matrix_product = SIZE_W_IN;
@@ -251,7 +245,6 @@ module ntm_erasing #(
     .DATA_OUT_ENABLE(data_out_enable_vector_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_adder),
     .SIZE_IN(size_in_vector_adder),
     .DATA_A_IN(data_a_in_vector_adder),
     .DATA_B_IN(data_b_in_vector_adder),
@@ -277,7 +270,6 @@ module ntm_erasing #(
     .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_multiplier),
     .SIZE_IN(size_in_vector_multiplier),
     .DATA_A_IN(data_a_in_vector_multiplier),
     .DATA_B_IN(data_b_in_vector_multiplier),
@@ -306,7 +298,6 @@ module ntm_erasing #(
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_product),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_product),
     .SIZE_A_I_IN(size_a_i_in_matrix_product),
     .SIZE_A_J_IN(size_a_j_in_matrix_product),
     .SIZE_B_I_IN(size_b_i_in_matrix_product),

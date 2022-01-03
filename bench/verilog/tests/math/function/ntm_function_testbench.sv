@@ -168,7 +168,6 @@ module ntm_function_testbench;
   wire data_out_enable_scalar_convolution;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_convolution;
   wire [DATA_SIZE-1:0] length_in_scalar_convolution;
   wire [DATA_SIZE-1:0] data_a_in_scalar_convolution;
   wire [DATA_SIZE-1:0] data_b_in_scalar_convolution;
@@ -185,7 +184,6 @@ module ntm_function_testbench;
   wire data_out_enable_scalar_cosine;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_cosine;
   wire [DATA_SIZE-1:0] length_in_scalar_cosine;
   wire [DATA_SIZE-1:0] data_a_in_scalar_cosine;
   wire [DATA_SIZE-1:0] data_b_in_scalar_cosine;
@@ -200,7 +198,6 @@ module ntm_function_testbench;
   wire data_out_enable_scalar_differentiation;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_differentiation;
   wire [DATA_SIZE-1:0] period_in_scalar_differentiation;
   wire [DATA_SIZE-1:0] length_in_scalar_differentiation;
   wire [DATA_SIZE-1:0] data_in_scalar_differentiation;
@@ -215,7 +212,6 @@ module ntm_function_testbench;
   wire data_out_enable_scalar_multiplication;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_multiplication;
   wire [DATA_SIZE-1:0] length_in_scalar_multiplication;
   wire [DATA_SIZE-1:0] data_in_scalar_multiplication;
   wire [DATA_SIZE-1:0] data_out_scalar_multiplication;
@@ -226,7 +222,6 @@ module ntm_function_testbench;
   wire ready_scalar_cosh;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_cosh;
   wire [DATA_SIZE-1:0] data_in_scalar_cosh;
   wire [DATA_SIZE-1:0] data_out_scalar_cosh;
 
@@ -236,7 +231,6 @@ module ntm_function_testbench;
   wire ready_scalar_sinh;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_sinh;
   wire [DATA_SIZE-1:0] data_in_scalar_sinh;
   wire [DATA_SIZE-1:0] data_out_scalar_sinh;
 
@@ -246,7 +240,6 @@ module ntm_function_testbench;
   wire ready_scalar_tanh;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_tanh;
   wire [DATA_SIZE-1:0] data_in_scalar_tanh;
   wire [DATA_SIZE-1:0] data_out_scalar_tanh;
 
@@ -256,7 +249,6 @@ module ntm_function_testbench;
   wire ready_scalar_logistic;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_logistic;
   wire [DATA_SIZE-1:0] data_in_scalar_logistic;
   wire [DATA_SIZE-1:0] data_out_scalar_logistic;
 
@@ -269,7 +261,6 @@ module ntm_function_testbench;
   wire data_out_enable_scalar_softmax;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_softmax;
   wire [DATA_SIZE-1:0] length_in_scalar_softmax;
   wire [DATA_SIZE-1:0] data_in_scalar_softmax;
   wire [DATA_SIZE-1:0] data_out_scalar_softmax;
@@ -280,7 +271,6 @@ module ntm_function_testbench;
   wire ready_scalar_oneplus;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_oneplus;
   wire [DATA_SIZE-1:0] data_in_scalar_oneplus;
   wire [DATA_SIZE-1:0] data_out_scalar_oneplus;
 
@@ -293,7 +283,6 @@ module ntm_function_testbench;
   wire data_out_enable_scalar_summation;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_summation;
   wire [DATA_SIZE-1:0] length_in_scalar_summation;
   wire [DATA_SIZE-1:0] data_in_scalar_summation;
   wire [DATA_SIZE-1:0] data_out_scalar_summation;
@@ -315,7 +304,6 @@ module ntm_function_testbench;
   wire data_out_scalar_enable_vector_convolution;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_convolution;
   wire [DATA_SIZE-1:0] size_in_vector_convolution;
   wire [DATA_SIZE-1:0] length_in_vector_convolution;
   wire [DATA_SIZE-1:0] data_a_in_vector_convolution;
@@ -335,7 +323,6 @@ module ntm_function_testbench;
   wire data_out_scalar_enable_vector_cosine;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_cosine;
   wire [DATA_SIZE-1:0] size_in_vector_cosine;
   wire [DATA_SIZE-1:0] length_in_vector_cosine;
   wire [DATA_SIZE-1:0] data_a_in_vector_cosine;
@@ -353,7 +340,6 @@ module ntm_function_testbench;
   wire data_out_scalar_enable_vector_differentiation;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_differentiation;
   wire [DATA_SIZE-1:0] period_in_vector_differentiation;
   wire [DATA_SIZE-1:0] length_in_vector_differentiation;
   wire [DATA_SIZE-1:0] size_in_vector_differentiation;
@@ -371,7 +357,6 @@ module ntm_function_testbench;
   wire data_out_scalar_enable_vector_multiplication;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_multiplication;
   wire [DATA_SIZE-1:0] length_in_vector_multiplication;
   wire [DATA_SIZE-1:0] size_in_vector_multiplication;
   wire [DATA_SIZE-1:0] data_in_vector_multiplication;
@@ -386,7 +371,6 @@ module ntm_function_testbench;
   wire data_out_enable_vector_cosh;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_cosh;
   wire [DATA_SIZE-1:0] size_in_vector_cosh;
   wire [DATA_SIZE-1:0] data_in_vector_cosh;
   wire [DATA_SIZE-1:0] data_out_vector_cosh;
@@ -400,7 +384,6 @@ module ntm_function_testbench;
   wire data_out_enable_vector_sinh;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_sinh;
   wire [DATA_SIZE-1:0] size_in_vector_sinh;
   wire [DATA_SIZE-1:0] data_in_vector_sinh;
   wire [DATA_SIZE-1:0] data_out_vector_sinh;
@@ -414,7 +397,6 @@ module ntm_function_testbench;
   wire data_out_enable_vector_tanh;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_tanh;
   wire [DATA_SIZE-1:0] size_in_vector_tanh;
   wire [DATA_SIZE-1:0] data_in_vector_tanh;
   wire [DATA_SIZE-1:0] data_out_vector_tanh;
@@ -428,7 +410,6 @@ module ntm_function_testbench;
   wire data_out_enable_vector_logistic;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_logistic;
   wire [DATA_SIZE-1:0] size_in_vector_logistic;
   wire [DATA_SIZE-1:0] data_in_vector_logistic;
   wire [DATA_SIZE-1:0] data_out_vector_logistic;
@@ -445,7 +426,6 @@ module ntm_function_testbench;
   wire data_out_scalar_enable_vector_softmax;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_softmax;
   wire [DATA_SIZE-1:0] length_in_vector_softmax;
   wire [DATA_SIZE-1:0] size_in_vector_softmax;
   wire [DATA_SIZE-1:0] data_in_vector_softmax;
@@ -460,7 +440,6 @@ module ntm_function_testbench;
   wire data_out_enable_vector_oneplus;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_oneplus;
   wire [DATA_SIZE-1:0] size_in_vector_oneplus;
   wire [DATA_SIZE-1:0] data_in_vector_oneplus;
   wire [DATA_SIZE-1:0] data_out_vector_oneplus;
@@ -476,7 +455,6 @@ module ntm_function_testbench;
   wire data_out_scalar_enable_vector_summation;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_summation;
   wire [DATA_SIZE-1:0] size_in_vector_summation;
   wire [DATA_SIZE-1:0] length_in_vector_summation;
   wire [DATA_SIZE-1:0] data_in_vector_summation;
@@ -502,7 +480,6 @@ module ntm_function_testbench;
   wire data_out_scalar_enable_matrix_convolution;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_convolution;
   wire [DATA_SIZE-1:0] size_i_in_matrix_convolution;
   wire [DATA_SIZE-1:0] size_j_in_matrix_convolution;
   wire [DATA_SIZE-1:0] length_in_matrix_convolution;
@@ -526,7 +503,6 @@ module ntm_function_testbench;
   wire data_out_scalar_enable_matrix_cosine;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_cosine;
   wire [DATA_SIZE-1:0] size_i_in_matrix_cosine;
   wire [DATA_SIZE-1:0] size_j_in_matrix_cosine;
   wire [DATA_SIZE-1:0] length_in_matrix_cosine;
@@ -547,7 +523,6 @@ module ntm_function_testbench;
   wire data_out_scalar_enable_matrix_differentiation;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_differentiation;
   wire [DATA_SIZE-1:0] size_i_in_matrix_differentiation;
   wire [DATA_SIZE-1:0] size_j_in_matrix_differentiation;
   wire [DATA_SIZE-1:0] period_in_matrix_differentiation;
@@ -568,7 +543,6 @@ module ntm_function_testbench;
   wire data_out_scalar_enable_matrix_multiplication;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_multiplication;
   wire [DATA_SIZE-1:0] size_i_in_matrix_multiplication;
   wire [DATA_SIZE-1:0] size_j_in_matrix_multiplication;
   wire [DATA_SIZE-1:0] length_in_matrix_multiplication;
@@ -586,7 +560,6 @@ module ntm_function_testbench;
   wire data_out_j_enable_matrix_cosh;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_cosh;
   wire [DATA_SIZE-1:0] size_i_in_matrix_cosh;
   wire [DATA_SIZE-1:0] size_j_in_matrix_cosh;
   wire [DATA_SIZE-1:0] data_in_matrix_cosh;
@@ -603,7 +576,6 @@ module ntm_function_testbench;
   wire data_out_j_enable_matrix_sinh;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_sinh;
   wire [DATA_SIZE-1:0] size_i_in_matrix_sinh;
   wire [DATA_SIZE-1:0] size_j_in_matrix_sinh;
   wire [DATA_SIZE-1:0] data_in_matrix_sinh;
@@ -620,7 +592,6 @@ module ntm_function_testbench;
   wire data_out_j_enable_matrix_tanh;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_tanh;
   wire [DATA_SIZE-1:0] size_i_in_matrix_tanh;
   wire [DATA_SIZE-1:0] size_j_in_matrix_tanh;
   wire [DATA_SIZE-1:0] data_in_matrix_tanh;
@@ -637,7 +608,6 @@ module ntm_function_testbench;
   wire data_out_j_enable_matrix_logistic;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_logistic;
   wire [DATA_SIZE-1:0] size_i_in_matrix_logistic;
   wire [DATA_SIZE-1:0] size_j_in_matrix_logistic;
   wire [DATA_SIZE-1:0] data_in_matrix_logistic;
@@ -657,7 +627,6 @@ module ntm_function_testbench;
   wire data_out_scalar_enable_matrix_softmax;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_softmax;
   wire [DATA_SIZE-1:0] size_i_in_matrix_softmax;
   wire [DATA_SIZE-1:0] size_j_in_matrix_softmax;
   wire [DATA_SIZE-1:0] length_in_matrix_softmax;
@@ -675,7 +644,6 @@ module ntm_function_testbench;
   wire data_out_j_enable_matrix_oneplus;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_oneplus;
   wire [DATA_SIZE-1:0] size_i_in_matrix_oneplus;
   wire [DATA_SIZE-1:0] size_j_in_matrix_oneplus;
   wire [DATA_SIZE-1:0] data_in_matrix_oneplus;
@@ -694,7 +662,6 @@ module ntm_function_testbench;
   wire data_out_scalar_enable_matrix_summation;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_summation;
   wire [DATA_SIZE-1:0] size_i_in_matrix_summation;
   wire [DATA_SIZE-1:0] size_j_in_matrix_summation;
   wire [DATA_SIZE-1:0] length_in_matrix_summation;
@@ -823,7 +790,6 @@ module ntm_function_testbench;
     .SCALAR_CONVOLUTION_DATA_OUT_ENABLE(data_out_enable_scalar_convolution),
 
     // DATA
-    .SCALAR_CONVOLUTION_MODULO_IN(modulo_in_scalar_convolution),
     .SCALAR_CONVOLUTION_LENGTH_IN(length_in_scalar_convolution),
     .SCALAR_CONVOLUTION_DATA_A_IN(data_a_in_scalar_convolution),
     .SCALAR_CONVOLUTION_DATA_B_IN(data_b_in_scalar_convolution),
@@ -840,7 +806,6 @@ module ntm_function_testbench;
     .SCALAR_COSINE_SIMILARITY_DATA_OUT_ENABLE(data_out_enable_scalar_cosine),
 
     // DATA
-    .SCALAR_COSINE_SIMILARITY_MODULO_IN(modulo_in_scalar_cosine),
     .SCALAR_COSINE_SIMILARITY_LENGTH_IN(length_in_scalar_cosine),
     .SCALAR_COSINE_SIMILARITY_DATA_A_IN(data_a_in_scalar_cosine),
     .SCALAR_COSINE_SIMILARITY_DATA_B_IN(data_b_in_scalar_cosine),
@@ -855,7 +820,6 @@ module ntm_function_testbench;
     .SCALAR_MULTIPLICATION_DATA_OUT_ENABLE(data_out_enable_scalar_multiplication),
 
     // DATA
-    .SCALAR_MULTIPLICATION_MODULO_IN(modulo_in_scalar_multiplication),
     .SCALAR_MULTIPLICATION_LENGTH_IN(length_in_scalar_multiplication),
     .SCALAR_MULTIPLICATION_DATA_IN(data_in_scalar_multiplication),
     .SCALAR_MULTIPLICATION_DATA_OUT(data_out_scalar_multiplication),
@@ -866,7 +830,6 @@ module ntm_function_testbench;
     .SCALAR_COSH_READY(ready_scalar_cosh),
 
     // DATA
-    .SCALAR_COSH_MODULO_IN(modulo_in_scalar_cosh),
     .SCALAR_COSH_DATA_IN(data_in_scalar_cosh),
     .SCALAR_COSH_DATA_OUT(data_out_scalar_cosh),
 
@@ -876,7 +839,6 @@ module ntm_function_testbench;
     .SCALAR_SINH_READY(ready_scalar_sinh),
 
     // DATA
-    .SCALAR_SINH_MODULO_IN(modulo_in_scalar_sinh),
     .SCALAR_SINH_DATA_IN(data_in_scalar_sinh),
     .SCALAR_SINH_DATA_OUT(data_out_scalar_sinh),
 
@@ -886,7 +848,6 @@ module ntm_function_testbench;
     .SCALAR_TANH_READY(ready_scalar_tanh),
 
     // DATA
-    .SCALAR_TANH_MODULO_IN(modulo_in_scalar_tanh),
     .SCALAR_TANH_DATA_IN(data_in_scalar_tanh),
     .SCALAR_TANH_DATA_OUT(data_out_scalar_tanh),
 
@@ -896,7 +857,6 @@ module ntm_function_testbench;
     .SCALAR_LOGISTIC_READY(ready_scalar_logistic),
 
     // DATA
-    .SCALAR_LOGISTIC_MODULO_IN(modulo_in_scalar_logistic),
     .SCALAR_LOGISTIC_DATA_IN(data_in_scalar_logistic),
     .SCALAR_LOGISTIC_DATA_OUT(data_out_scalar_logistic),
 
@@ -909,7 +869,6 @@ module ntm_function_testbench;
     .SCALAR_SOFTMAX_DATA_OUT_ENABLE(data_out_enable_scalar_softmax),
 
     // DATA
-    .SCALAR_SOFTMAX_MODULO_IN(modulo_in_scalar_softmax),
     .SCALAR_SOFTMAX_LENGTH_IN(length_in_scalar_softmax),
     .SCALAR_SOFTMAX_DATA_IN(data_in_scalar_softmax),
     .SCALAR_SOFTMAX_DATA_OUT(data_out_scalar_softmax),
@@ -920,7 +879,6 @@ module ntm_function_testbench;
     .SCALAR_ONE_CONTROLPLUS_READY(ready_scalar_oneplus),
 
     // DATA
-    .SCALAR_ONE_CONTROLPLUS_MODULO_IN(modulo_in_scalar_oneplus),
     .SCALAR_ONE_CONTROLPLUS_DATA_IN(data_in_scalar_oneplus),
     .SCALAR_ONE_CONTROLPLUS_DATA_OUT(data_out_scalar_oneplus),
 
@@ -933,7 +891,6 @@ module ntm_function_testbench;
     .SCALAR_SUMMATION_DATA_OUT_ENABLE(data_out_enable_scalar_summation),
 
     // DATA
-    .SCALAR_SUMMATION_MODULO_IN(modulo_in_scalar_summation),
     .SCALAR_SUMMATION_LENGTH_IN(length_in_scalar_summation),
     .SCALAR_SUMMATION_DATA_IN(data_in_scalar_summation),
     .SCALAR_SUMMATION_DATA_OUT(data_out_scalar_summation),
@@ -955,7 +912,6 @@ module ntm_function_testbench;
     .VECTOR_CONVOLUTION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_convolution),
 
     // DATA
-    .VECTOR_CONVOLUTION_MODULO_IN(modulo_in_vector_convolution),
     .VECTOR_CONVOLUTION_SIZE_IN(size_in_vector_convolution),
     .VECTOR_CONVOLUTION_LENGTH_IN(length_in_vector_convolution),
     .VECTOR_CONVOLUTION_DATA_A_IN(data_a_in_vector_convolution),
@@ -975,7 +931,6 @@ module ntm_function_testbench;
     .VECTOR_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_cosine),
 
     // DATA
-    .VECTOR_COSINE_SIMILARITY_MODULO_IN(modulo_in_vector_cosine),
     .VECTOR_COSINE_SIMILARITY_SIZE_IN(size_in_vector_cosine),
     .VECTOR_COSINE_SIMILARITY_LENGTH_IN(length_in_vector_cosine),
     .VECTOR_COSINE_SIMILARITY_DATA_A_IN(data_a_in_vector_cosine),
@@ -991,7 +946,6 @@ module ntm_function_testbench;
     .VECTOR_COSH_DATA_OUT_ENABLE(data_out_enable_vector_cosh),
 
     // DATA
-    .VECTOR_COSH_MODULO_IN(modulo_in_vector_cosh),
     .VECTOR_COSH_SIZE_IN(size_in_vector_cosh),
     .VECTOR_COSH_DATA_IN(data_in_vector_cosh),
     .VECTOR_COSH_DATA_OUT(data_out_vector_cosh),
@@ -1005,7 +959,6 @@ module ntm_function_testbench;
     .VECTOR_SINH_DATA_OUT_ENABLE(data_out_enable_vector_sinh),
 
     // DATA
-    .VECTOR_SINH_MODULO_IN(modulo_in_vector_sinh),
     .VECTOR_SINH_SIZE_IN(size_in_vector_sinh),
     .VECTOR_SINH_DATA_IN(data_in_vector_sinh),
     .VECTOR_SINH_DATA_OUT(data_out_vector_sinh),
@@ -1018,7 +971,6 @@ module ntm_function_testbench;
     .VECTOR_TANH_DATA_OUT_ENABLE(data_out_enable_vector_tanh),
 
     // DATA
-    .VECTOR_TANH_MODULO_IN(modulo_in_vector_tanh),
     .VECTOR_TANH_SIZE_IN(size_in_vector_tanh),
     .VECTOR_TANH_DATA_IN(data_in_vector_tanh),
     .VECTOR_TANH_DATA_OUT(data_out_vector_tanh),
@@ -1033,7 +985,6 @@ module ntm_function_testbench;
     .VECTOR_MULTIPLICATION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_multiplication),
 
     // DATA
-    .VECTOR_MULTIPLICATION_MODULO_IN(modulo_in_vector_multiplication),
     .VECTOR_MULTIPLICATION_SIZE_IN(size_in_vector_multiplication),
     .VECTOR_MULTIPLICATION_LENGTH_IN(length_in_vector_multiplication),
     .VECTOR_MULTIPLICATION_DATA_IN(data_in_vector_multiplication),
@@ -1048,7 +999,6 @@ module ntm_function_testbench;
     .VECTOR_LOGISTIC_DATA_OUT_ENABLE(data_out_enable_vector_logistic),
 
     // DATA
-    .VECTOR_LOGISTIC_MODULO_IN(modulo_in_vector_logistic),
     .VECTOR_LOGISTIC_SIZE_IN(size_in_vector_logistic),
     .VECTOR_LOGISTIC_DATA_IN(data_in_vector_logistic),
     .VECTOR_LOGISTIC_DATA_OUT(data_out_vector_logistic),
@@ -1064,7 +1014,6 @@ module ntm_function_testbench;
     .VECTOR_SOFTMAX_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_softmax),
 
     // DATA
-    .VECTOR_SOFTMAX_MODULO_IN(modulo_in_vector_softmax),
     .VECTOR_SOFTMAX_SIZE_IN(size_in_vector_softmax),
     .VECTOR_SOFTMAX_LENGTH_IN(length_in_vector_softmax),
     .VECTOR_SOFTMAX_DATA_IN(data_in_vector_softmax),
@@ -1079,7 +1028,6 @@ module ntm_function_testbench;
     .VECTOR_ONE_CONTROLPLUS_DATA_OUT_ENABLE(data_out_enable_vector_oneplus),
 
     // DATA
-    .VECTOR_ONE_CONTROLPLUS_MODULO_IN(modulo_in_vector_oneplus),
     .VECTOR_ONE_CONTROLPLUS_SIZE_IN(size_in_vector_oneplus),
     .VECTOR_ONE_CONTROLPLUS_DATA_IN(data_in_vector_oneplus),
     .VECTOR_ONE_CONTROLPLUS_DATA_OUT(data_out_vector_oneplus),
@@ -1095,7 +1043,6 @@ module ntm_function_testbench;
     .VECTOR_SUMMATION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_summation),
 
     // DATA
-    .VECTOR_SUMMATION_MODULO_IN(modulo_in_vector_summation),
     .VECTOR_SUMMATION_SIZE_IN(size_in_vector_summation),
     .VECTOR_SUMMATION_LENGTH_IN(length_in_vector_summation),
     .VECTOR_SUMMATION_DATA_IN(data_in_vector_summation),
@@ -1121,7 +1068,6 @@ module ntm_function_testbench;
     .MATRIX_CONVOLUTION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_convolution),
 
     // DATA
-    .MATRIX_CONVOLUTION_MODULO_IN(modulo_in_matrix_convolution),
     .MATRIX_CONVOLUTION_SIZE_I_IN(size_i_in_matrix_convolution),
     .MATRIX_CONVOLUTION_SIZE_J_IN(size_j_in_matrix_convolution),
     .MATRIX_CONVOLUTION_LENGTH_IN(length_in_matrix_convolution),
@@ -1145,7 +1091,6 @@ module ntm_function_testbench;
     .MATRIX_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_cosine),
 
     // DATA
-    .MATRIX_COSINE_SIMILARITY_MODULO_IN(modulo_in_matrix_cosine),
     .MATRIX_COSINE_SIMILARITY_SIZE_I_IN(size_i_in_matrix_cosine),
     .MATRIX_COSINE_SIMILARITY_SIZE_J_IN(size_j_in_matrix_cosine),
     .MATRIX_COSINE_SIMILARITY_LENGTH_IN(length_in_matrix_cosine),
@@ -1166,7 +1111,6 @@ module ntm_function_testbench;
     .MATRIX_MULTIPLICATION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_multiplication),
 
     // DATA
-    .MATRIX_MULTIPLICATION_MODULO_IN(modulo_in_matrix_multiplication),
     .MATRIX_MULTIPLICATION_SIZE_I_IN(size_i_in_matrix_multiplication),
     .MATRIX_MULTIPLICATION_SIZE_J_IN(size_j_in_matrix_multiplication),
     .MATRIX_MULTIPLICATION_LENGTH_IN(length_in_matrix_multiplication),
@@ -1184,7 +1128,6 @@ module ntm_function_testbench;
     .MATRIX_COSH_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_cosh),
 
     // DATA
-    .MATRIX_COSH_MODULO_IN(modulo_in_matrix_cosh),
     .MATRIX_COSH_SIZE_I_IN(size_i_in_matrix_cosh),
     .MATRIX_COSH_SIZE_J_IN(size_j_in_matrix_cosh),
     .MATRIX_COSH_DATA_IN(data_in_matrix_cosh),
@@ -1201,7 +1144,6 @@ module ntm_function_testbench;
     .MATRIX_SINH_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_sinh),
 
     // DATA
-    .MATRIX_SINH_MODULO_IN(modulo_in_matrix_sinh),
     .MATRIX_SINH_SIZE_I_IN(size_i_in_matrix_sinh),
     .MATRIX_SINH_SIZE_J_IN(size_j_in_matrix_sinh),
     .MATRIX_SINH_DATA_IN(data_in_matrix_sinh),
@@ -1218,7 +1160,6 @@ module ntm_function_testbench;
     .MATRIX_TANH_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_tanh),
 
     // DATA
-    .MATRIX_TANH_MODULO_IN(modulo_in_matrix_tanh),
     .MATRIX_TANH_SIZE_I_IN(size_i_in_matrix_tanh),
     .MATRIX_TANH_SIZE_J_IN(size_j_in_matrix_tanh),
     .MATRIX_TANH_DATA_IN(data_in_matrix_tanh),
@@ -1235,7 +1176,6 @@ module ntm_function_testbench;
     .MATRIX_LOGISTIC_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_logistic),
 
     // DATA
-    .MATRIX_LOGISTIC_MODULO_IN(modulo_in_matrix_logistic),
     .MATRIX_LOGISTIC_SIZE_I_IN(size_i_in_matrix_logistic),
     .MATRIX_LOGISTIC_SIZE_J_IN(size_j_in_matrix_logistic),
     .MATRIX_LOGISTIC_DATA_IN(data_in_matrix_logistic),
@@ -1254,7 +1194,6 @@ module ntm_function_testbench;
     .MATRIX_SOFTMAX_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_softmax),
 
     // DATA
-    .MATRIX_SOFTMAX_MODULO_IN(modulo_in_matrix_softmax),
     .MATRIX_SOFTMAX_SIZE_I_IN(size_i_in_matrix_softmax),
     .MATRIX_SOFTMAX_SIZE_J_IN(size_j_in_matrix_softmax),
     .MATRIX_SOFTMAX_LENGTH_IN(length_in_matrix_softmax),
@@ -1272,7 +1211,6 @@ module ntm_function_testbench;
     .MATRIX_ONE_CONTROLPLUS_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_oneplus),
 
     // DATA
-    .MATRIX_ONE_CONTROLPLUS_MODULO_IN(modulo_in_matrix_oneplus),
     .MATRIX_ONE_CONTROLPLUS_SIZE_I_IN(size_i_in_matrix_oneplus),
     .MATRIX_ONE_CONTROLPLUS_SIZE_J_IN(size_j_in_matrix_oneplus),
     .MATRIX_ONE_CONTROLPLUS_DATA_IN(data_in_matrix_oneplus),
@@ -1291,7 +1229,6 @@ module ntm_function_testbench;
     .MATRIX_SUMMATION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_summation),
 
     // DATA
-    .MATRIX_SUMMATION_MODULO_IN(modulo_in_matrix_summation),
     .MATRIX_SUMMATION_SIZE_I_IN(size_i_in_matrix_summation),
     .MATRIX_SUMMATION_SIZE_J_IN(size_j_in_matrix_summation),
     .MATRIX_SUMMATION_LENGTH_IN(length_in_matrix_summation),
@@ -1323,7 +1260,6 @@ module ntm_function_testbench;
     .DATA_OUT_ENABLE(data_out_enable_scalar_convolution),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_convolution),
     .LENGTH_IN(length_in_scalar_convolution),
     .DATA_A_IN(data_a_in_scalar_convolution),
     .DATA_B_IN(data_b_in_scalar_convolution),
@@ -1350,7 +1286,6 @@ module ntm_function_testbench;
     .DATA_OUT_ENABLE(data_out_enable_scalar_cosine),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_cosine),
     .LENGTH_IN(length_in_scalar_cosine),
     .DATA_A_IN(data_a_in_scalar_cosine),
     .DATA_B_IN(data_b_in_scalar_cosine),
@@ -1375,7 +1310,6 @@ module ntm_function_testbench;
     .DATA_OUT_ENABLE(data_out_enable_scalar_differentiation),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_differentiation),
     .PERIOD_IN(period_in_scalar_differentiation),
     .LENGTH_IN(length_in_scalar_differentiation),
     .DATA_IN(data_in_scalar_differentiation),
@@ -1400,7 +1334,6 @@ module ntm_function_testbench;
     .DATA_OUT_ENABLE(data_out_enable_scalar_multiplication),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_multiplication),
     .LENGTH_IN(length_in_scalar_multiplication),
     .DATA_IN(data_in_scalar_multiplication),
     .DATA_OUT(data_out_scalar_multiplication)
@@ -1421,7 +1354,6 @@ module ntm_function_testbench;
     .READY(ready_scalar_cosh),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_cosh),
     .DATA_IN(data_in_scalar_cosh),
     .DATA_OUT(data_out_scalar_cosh)
   );
@@ -1441,7 +1373,6 @@ module ntm_function_testbench;
     .READY(ready_scalar_sinh),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_sinh),
     .DATA_IN(data_in_scalar_sinh),
     .DATA_OUT(data_out_scalar_sinh)
   );
@@ -1461,7 +1392,6 @@ module ntm_function_testbench;
     .READY(ready_scalar_tanh),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_tanh),
     .DATA_IN(data_in_scalar_tanh),
     .DATA_OUT(data_out_scalar_tanh)
   );
@@ -1481,7 +1411,6 @@ module ntm_function_testbench;
     .READY(ready_scalar_logistic),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_logistic),
     .DATA_IN(data_in_scalar_logistic),
     .DATA_OUT(data_out_scalar_logistic)
   );
@@ -1504,7 +1433,6 @@ module ntm_function_testbench;
     .DATA_OUT_ENABLE(data_out_enable_scalar_softmax),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_softmax),
     .LENGTH_IN(length_in_scalar_softmax),
     .DATA_IN(data_in_scalar_softmax),
     .DATA_OUT(data_out_scalar_softmax)
@@ -1525,7 +1453,6 @@ module ntm_function_testbench;
     .READY(ready_scalar_oneplus),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_oneplus),
     .DATA_IN(data_in_scalar_oneplus),
     .DATA_OUT(data_out_scalar_oneplus)
   );
@@ -1548,7 +1475,6 @@ module ntm_function_testbench;
     .DATA_OUT_ENABLE(data_out_enable_scalar_summation),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_summation),
     .LENGTH_IN(length_in_scalar_summation),
     .DATA_IN(data_in_scalar_summation),
     .DATA_OUT(data_out_scalar_summation)
@@ -1580,7 +1506,6 @@ module ntm_function_testbench;
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_convolution),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_convolution),
     .SIZE_IN(size_in_vector_convolution),
     .LENGTH_IN(length_in_vector_convolution),
     .DATA_A_IN(data_a_in_vector_convolution),
@@ -1610,7 +1535,6 @@ module ntm_function_testbench;
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_cosine),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_cosine),
     .SIZE_IN(size_in_vector_cosine),
     .LENGTH_IN(length_in_vector_cosine),
     .DATA_A_IN(data_a_in_vector_cosine),
@@ -1638,7 +1562,6 @@ module ntm_function_testbench;
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_differentiation),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_differentiation),
     .SIZE_IN(size_in_vector_differentiation),
     .PERIOD_IN(period_in_vector_differentiation),
     .LENGTH_IN(length_in_vector_differentiation),
@@ -1666,7 +1589,6 @@ module ntm_function_testbench;
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_multiplication),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_multiplication),
     .SIZE_IN(size_in_vector_multiplication),
     .LENGTH_IN(length_in_vector_multiplication),
     .DATA_IN(data_in_vector_multiplication),
@@ -1691,7 +1613,6 @@ module ntm_function_testbench;
     .DATA_OUT_ENABLE(data_out_enable_vector_cosh),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_cosh),
     .SIZE_IN(size_in_vector_cosh),
     .DATA_IN(data_in_vector_cosh),
     .DATA_OUT(data_out_vector_cosh)
@@ -1715,7 +1636,6 @@ module ntm_function_testbench;
     .DATA_OUT_ENABLE(data_out_enable_vector_sinh),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_sinh),
     .SIZE_IN(size_in_vector_sinh),
     .DATA_IN(data_in_vector_sinh),
     .DATA_OUT(data_out_vector_sinh)
@@ -1739,7 +1659,6 @@ module ntm_function_testbench;
     .DATA_OUT_ENABLE(data_out_enable_vector_tanh),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_tanh),
     .SIZE_IN(size_in_vector_tanh),
     .DATA_IN(data_in_vector_tanh),
     .DATA_OUT(data_out_vector_tanh)
@@ -1763,7 +1682,6 @@ module ntm_function_testbench;
     .DATA_OUT_ENABLE(data_out_enable_vector_logistic),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_logistic),
     .SIZE_IN(size_in_vector_logistic),
     .DATA_IN(data_in_vector_logistic),
     .DATA_OUT(data_out_vector_logistic)
@@ -1789,7 +1707,6 @@ module ntm_function_testbench;
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_softmax),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_softmax),
     .SIZE_IN(size_in_vector_softmax),
     .LENGTH_IN(length_in_vector_softmax),
     .DATA_IN(data_in_vector_softmax),
@@ -1814,7 +1731,6 @@ module ntm_function_testbench;
     .DATA_OUT_ENABLE(data_out_enable_vector_oneplus),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_oneplus),
     .SIZE_IN(size_in_vector_oneplus),
     .DATA_IN(data_in_vector_oneplus),
     .DATA_OUT(data_out_vector_oneplus)
@@ -1840,7 +1756,6 @@ module ntm_function_testbench;
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_summation),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_summation),
     .SIZE_IN(size_in_vector_summation),
     .LENGTH_IN(length_in_vector_summation),
     .DATA_IN(data_in_vector_summation),
@@ -1876,7 +1791,6 @@ module ntm_function_testbench;
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_convolution),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_convolution),
     .SIZE_I_IN(size_i_in_matrix_convolution),
     .SIZE_J_IN(size_j_in_matrix_convolution),
     .LENGTH_IN(length_in_matrix_convolution),
@@ -1910,7 +1824,6 @@ module ntm_function_testbench;
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_cosine),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_cosine),
     .SIZE_I_IN(size_i_in_matrix_cosine),
     .SIZE_J_IN(size_j_in_matrix_cosine),
     .LENGTH_IN(length_in_matrix_cosine),
@@ -1941,7 +1854,6 @@ module ntm_function_testbench;
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_differentiation),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_differentiation),
     .SIZE_I_IN(size_i_in_matrix_differentiation),
     .SIZE_J_IN(size_j_in_matrix_differentiation),
     .PERIOD_IN(period_in_matrix_differentiation),
@@ -1972,7 +1884,6 @@ module ntm_function_testbench;
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_multiplication),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_multiplication),
     .SIZE_I_IN(size_i_in_matrix_multiplication),
     .SIZE_J_IN(size_j_in_matrix_multiplication),
     .LENGTH_IN(length_in_matrix_multiplication),
@@ -2000,7 +1911,6 @@ module ntm_function_testbench;
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_cosh),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_cosh),
     .SIZE_I_IN(size_i_in_matrix_cosh),
     .SIZE_J_IN(size_j_in_matrix_cosh),
     .DATA_IN(data_in_matrix_cosh),
@@ -2027,7 +1937,6 @@ module ntm_function_testbench;
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_sinh),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_sinh),
     .SIZE_I_IN(size_i_in_matrix_sinh),
     .SIZE_J_IN(size_j_in_matrix_sinh),
     .DATA_IN(data_in_matrix_sinh),
@@ -2054,7 +1963,6 @@ module ntm_function_testbench;
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_tanh),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_tanh),
     .SIZE_I_IN(size_i_in_matrix_tanh),
     .SIZE_J_IN(size_j_in_matrix_tanh),
     .DATA_IN(data_in_matrix_tanh),
@@ -2081,7 +1989,6 @@ module ntm_function_testbench;
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_logistic),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_logistic),
     .SIZE_I_IN(size_i_in_matrix_logistic),
     .SIZE_J_IN(size_j_in_matrix_logistic),
     .DATA_IN(data_in_matrix_logistic),
@@ -2110,7 +2017,6 @@ module ntm_function_testbench;
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_softmax),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_softmax),
     .SIZE_I_IN(size_i_in_matrix_softmax),
     .SIZE_J_IN(size_j_in_matrix_softmax),
     .LENGTH_IN(length_in_matrix_softmax),
@@ -2138,7 +2044,6 @@ module ntm_function_testbench;
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_oneplus),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_oneplus),
     .SIZE_I_IN(size_i_in_matrix_oneplus),
     .SIZE_J_IN(size_j_in_matrix_oneplus),
     .DATA_IN(data_in_matrix_oneplus),
@@ -2167,7 +2072,6 @@ module ntm_function_testbench;
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_summation),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_summation),
     .SIZE_I_IN(size_i_in_matrix_summation),
     .SIZE_J_IN(size_j_in_matrix_summation),
     .LENGTH_IN(length_in_matrix_summation),

@@ -203,7 +203,6 @@ architecture ntm_activation_trainer_architecture of ntm_activation_trainer is
   signal data_out_scalar_enable_vector_summation : std_logic;
 
   -- DATA
-  signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -220,7 +219,6 @@ architecture ntm_activation_trainer_architecture of ntm_activation_trainer is
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -239,7 +237,6 @@ architecture ntm_activation_trainer_architecture of ntm_activation_trainer is
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -256,7 +253,6 @@ architecture ntm_activation_trainer_architecture of ntm_activation_trainer is
   signal data_out_enable_vector_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_exponentiator   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -274,7 +270,6 @@ architecture ntm_activation_trainer_architecture of ntm_activation_trainer is
   signal data_out_scalar_enable_vector_differentiation : std_logic;
 
   -- DATA
-  signal modulo_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_differentiation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal period_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_vector_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -295,7 +290,6 @@ architecture ntm_activation_trainer_architecture of ntm_activation_trainer is
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -344,7 +338,6 @@ begin
           data_in_scalar_enable_vector_differentiation <= '0';
 
           -- Data Inputs
-          modulo_in_vector_differentiation <= FULL;
           size_in_vector_differentiation   <= ONE_CONTROL;
           data_in_vector_differentiation   <= FULL;
 
@@ -355,7 +348,6 @@ begin
           data_b_in_enable_vector_exponentiator <= '0';
 
           -- Data Inputs
-          modulo_in_vector_exponentiator <= FULL;
           size_in_vector_exponentiator   <= ONE_CONTROL;
           data_a_in_vector_exponentiator <= FULL;
           data_b_in_vector_exponentiator <= FULL;
@@ -369,7 +361,6 @@ begin
           data_b_in_enable_vector_adder <= '0';
 
           -- Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= ONE_CONTROL;
           data_a_in_vector_adder <= FULL;
           data_b_in_vector_adder <= FULL;
@@ -381,7 +372,6 @@ begin
           data_b_in_enable_vector_multiplier <= '0';
 
           -- Data Inputs
-          modulo_in_vector_multiplier <= FULL;
           size_in_vector_multiplier   <= ONE_CONTROL;
           data_a_in_vector_multiplier <= FULL;
           data_b_in_vector_multiplier <= FULL;
@@ -393,7 +383,6 @@ begin
           data_b_in_enable_vector_multiplier <= '0';
 
           -- Data Inputs
-          modulo_in_vector_multiplier <= FULL;
           size_in_vector_multiplier   <= ONE_CONTROL;
           data_a_in_vector_multiplier <= FULL;
           data_b_in_vector_multiplier <= FULL;
@@ -446,7 +435,6 @@ begin
           data_in_scalar_enable_vector_differentiation <= '0';
 
           -- Data Inputs
-          modulo_in_vector_differentiation <= FULL;
           size_in_vector_differentiation   <= SIZE_X_IN;
           data_in_vector_differentiation   <= X_IN;
 
@@ -459,7 +447,6 @@ begin
           data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= ONE_CONTROL;
           size_a_j_in_matrix_product <= ONE_CONTROL;
           size_b_i_in_matrix_product <= ONE_CONTROL;
@@ -474,7 +461,6 @@ begin
           data_in_scalar_enable_vector_summation <= '0';
 
           -- Data Inputs
-          modulo_in_vector_summation <= FULL;
           size_in_vector_summation   <= ONE_CONTROL;
           length_in_vector_summation <= ONE_CONTROL;
           data_in_vector_summation   <= FULL;
@@ -530,7 +516,6 @@ begin
           data_in_scalar_enable_vector_differentiation <= '0';
 
           -- Data Inputs
-          modulo_in_vector_differentiation <= FULL;
           size_in_vector_differentiation   <= SIZE_X_IN;
           data_in_vector_differentiation   <= X_IN;
 
@@ -543,7 +528,6 @@ begin
           data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= ONE_CONTROL;
           size_a_j_in_matrix_product <= ONE_CONTROL;
           size_b_i_in_matrix_product <= ONE_CONTROL;
@@ -558,7 +542,6 @@ begin
           data_in_scalar_enable_vector_summation <= '0';
 
           -- Data Inputs
-          modulo_in_vector_summation <= FULL;
           size_in_vector_summation   <= FULL;
           length_in_vector_summation <= FULL;
           data_in_vector_summation   <= FULL;
@@ -614,7 +597,6 @@ begin
           data_in_scalar_enable_vector_differentiation <= '0';
 
           -- Data Inputs
-          modulo_in_vector_differentiation <= FULL;
           size_in_vector_differentiation   <= SIZE_X_IN;
           data_in_vector_differentiation   <= X_IN;
 
@@ -627,7 +609,6 @@ begin
           data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= ONE_CONTROL;
           size_a_j_in_matrix_product <= ONE_CONTROL;
           size_b_i_in_matrix_product <= ONE_CONTROL;
@@ -642,7 +623,6 @@ begin
           data_in_scalar_enable_vector_summation <= '0';
 
           -- Data Inputs
-          modulo_in_vector_summation <= FULL;
           size_in_vector_summation   <= FULL;
           length_in_vector_summation <= FULL;
           data_in_vector_summation   <= FULL;
@@ -698,7 +678,6 @@ begin
           data_in_scalar_enable_vector_differentiation <= '0';
 
           -- Data Inputs
-          modulo_in_vector_differentiation <= FULL;
           size_in_vector_differentiation   <= SIZE_X_IN;
           data_in_vector_differentiation   <= X_IN;
 
@@ -709,7 +688,6 @@ begin
           data_in_scalar_enable_vector_summation <= '0';
 
           -- Data Inputs
-          modulo_in_vector_summation <= FULL;
           size_in_vector_summation   <= FULL;
           length_in_vector_summation <= FULL;
           data_in_vector_summation   <= FULL;
@@ -746,7 +724,6 @@ begin
       DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_summation,
       SIZE_IN   => size_in_vector_summation,
       LENGTH_IN => length_in_vector_summation,
       DATA_IN   => data_in_vector_summation,
@@ -774,7 +751,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_multiplier,
       SIZE_IN   => size_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
@@ -804,7 +780,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_adder,
       SIZE_IN   => size_in_vector_adder,
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
@@ -832,7 +807,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_exponentiator,
       SIZE_IN   => size_in_vector_exponentiator,
       DATA_A_IN => data_a_in_vector_exponentiator,
       DATA_B_IN => data_b_in_vector_exponentiator,
@@ -861,7 +835,6 @@ begin
       DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_differentiation,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_differentiation,
       SIZE_IN   => size_in_vector_differentiation,
       PERIOD_IN => period_in_vector_differentiation,
       LENGTH_IN => length_in_vector_differentiation,
@@ -893,7 +866,6 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MODULO_IN   => modulo_in_matrix_product,
       SIZE_A_I_IN => size_a_i_in_matrix_product,
       SIZE_A_J_IN => size_a_j_in_matrix_product,
       SIZE_B_I_IN => size_b_i_in_matrix_product,

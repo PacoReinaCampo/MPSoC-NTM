@@ -134,7 +134,6 @@ architecture ntm_writing_architecture of ntm_writing is
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -151,7 +150,6 @@ architecture ntm_writing_architecture of ntm_writing is
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -257,13 +255,11 @@ begin
 
   -- DATA
   -- VECTOR MULTIPLIER
-  modulo_in_vector_multiplier <= FULL;
   size_in_vector_multiplier   <= SIZE_W_IN;
   data_a_in_vector_multiplier <= W_IN;
   data_b_in_vector_multiplier <= A_IN;
 
   -- VECTOR ADDER
-  modulo_in_vector_adder <= FULL;
   size_in_vector_adder   <= SIZE_W_IN;
   data_a_in_vector_adder <= M_IN;
   data_b_in_vector_adder <= data_out_vector_multiplier;
@@ -291,7 +287,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_adder,
       SIZE_IN   => size_in_vector_adder,
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
@@ -319,7 +314,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_multiplier,
       SIZE_IN   => size_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,

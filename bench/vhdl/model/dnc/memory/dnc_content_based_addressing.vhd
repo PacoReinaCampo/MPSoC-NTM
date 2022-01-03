@@ -136,7 +136,6 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -153,7 +152,6 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
   signal data_out_enable_vector_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_exponentiator   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -173,7 +171,6 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
   signal data_out_scalar_enable_vector_cosine : std_logic;
 
   -- DATA
-  signal modulo_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_cosine   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_vector_cosine : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -192,7 +189,6 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
   signal data_out_scalar_enable_vector_softmax : std_logic;
 
   -- DATA
-  signal modulo_in_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_vector_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_in_vector_softmax   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -330,26 +326,22 @@ begin
 
   -- DATA
   -- VECTOR COSINE SIMILARITY
-  modulo_in_vector_cosine <= FULL;
   size_in_vector_cosine   <= SIZE_I_IN;
   length_in_vector_cosine <= SIZE_J_IN;
   data_a_in_vector_cosine <= K_IN;
   data_b_in_vector_cosine <= M_IN;
 
   -- VECTOR MULTIPLIER
-  modulo_in_vector_multiplier <= FULL;
   size_in_vector_multiplier   <= SIZE_I_IN;
   data_a_in_vector_multiplier <= data_out_vector_cosine;
   data_b_in_vector_multiplier <= BETA_IN;
 
   -- VECTOR EXPONENTIATOR
-  modulo_in_vector_exponentiator <= FULL;
   size_in_vector_exponentiator   <= SIZE_I_IN;
   data_a_in_vector_exponentiator <= EULER;
   data_b_in_vector_exponentiator <= data_out_vector_multiplier;
 
   -- VECTOR SOFTMAX
-  modulo_in_vector_softmax <= FULL;
   size_in_vector_softmax   <= SIZE_I_IN;
   length_in_vector_softmax <= SIZE_J_IN;
   data_in_vector_softmax   <= data_out_vector_exponentiator;
@@ -375,7 +367,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_multiplier,
       SIZE_IN   => size_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
@@ -403,7 +394,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_exponentiator,
       SIZE_IN   => size_in_vector_exponentiator,
       DATA_A_IN => data_a_in_vector_exponentiator,
       DATA_B_IN => data_b_in_vector_exponentiator,
@@ -434,7 +424,6 @@ begin
       DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_cosine,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_cosine,
       SIZE_IN   => size_in_vector_cosine,
       LENGTH_IN => length_in_vector_cosine,
       DATA_A_IN => data_a_in_vector_cosine,
@@ -464,7 +453,6 @@ begin
       DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_softmax,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_softmax,
       SIZE_IN   => size_in_vector_softmax,
       LENGTH_IN => length_in_vector_softmax,
       DATA_IN   => data_in_vector_softmax,

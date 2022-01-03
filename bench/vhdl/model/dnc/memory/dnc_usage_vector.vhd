@@ -132,7 +132,6 @@ architecture dnc_usage_vector_architecture of dnc_usage_vector is
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -149,7 +148,6 @@ architecture dnc_usage_vector_architecture of dnc_usage_vector is
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -208,12 +206,10 @@ begin
           data_b_in_enable_vector_multiplier <= W_IN_ENABLE;
 
           -- Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_N_IN;
           data_a_in_vector_adder <= U_IN;
           data_b_in_vector_adder <= W_IN;
 
-          modulo_in_vector_multiplier <= FULL;
           size_in_vector_multiplier   <= SIZE_N_IN;
           data_a_in_vector_multiplier <= U_IN;
           data_b_in_vector_multiplier <= W_IN;
@@ -241,7 +237,6 @@ begin
           data_b_in_enable_vector_adder <= data_out_enable_vector_multiplier;
 
           -- Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_N_IN;
           data_a_in_vector_adder <= data_out_vector_adder;
           data_b_in_vector_adder <= data_out_vector_multiplier;
@@ -268,7 +263,6 @@ begin
           data_b_in_enable_vector_adder <= PSI_IN_ENABLE;
 
           -- Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_N_IN;
           data_a_in_vector_adder <= data_out_vector_adder;
           data_b_in_vector_adder <= PSI_IN;
@@ -331,7 +325,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_adder,
       SIZE_IN   => size_in_vector_adder,
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
@@ -359,7 +352,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_multiplier,
       SIZE_IN   => size_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,

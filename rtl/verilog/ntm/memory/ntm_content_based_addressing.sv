@@ -118,7 +118,6 @@ module ntm_content_based_addressing #(
   wire data_out_enable_vector_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_multiplier;
   wire [DATA_SIZE-1:0] size_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
@@ -134,7 +133,6 @@ module ntm_content_based_addressing #(
   wire data_out_enable_vector_exponentiator;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_exponentiator;
   wire [DATA_SIZE-1:0] size_in_vector_exponentiator;
   wire [DATA_SIZE-1:0] data_a_in_vector_exponentiator;
   wire [DATA_SIZE-1:0] data_b_in_vector_exponentiator;
@@ -153,7 +151,6 @@ module ntm_content_based_addressing #(
   wire data_out_scalar_enable_vector_cosine;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_cosine;
   wire [DATA_SIZE-1:0] size_in_vector_cosine;
   wire [DATA_SIZE-1:0] length_in_vector_cosine;
   wire [DATA_SIZE-1:0] data_a_in_vector_cosine;
@@ -171,7 +168,6 @@ module ntm_content_based_addressing #(
   wire data_out_scalar_enable_vector_softmax;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_softmax;
   wire [DATA_SIZE-1:0] length_in_vector_softmax;
   wire [DATA_SIZE-1:0] size_in_vector_softmax;
   wire [DATA_SIZE-1:0] data_in_vector_softmax;
@@ -225,26 +221,22 @@ module ntm_content_based_addressing #(
 
   // DATA
   // VECTOR COSINE SIMILARITY
-  assign modulo_in_vector_cosine = FULL;
   assign size_in_vector_cosine   = SIZE_I_IN;
   assign length_in_vector_cosine = SIZE_J_IN;
   assign data_a_in_vector_cosine = K_IN;
   assign data_b_in_vector_cosine = M_IN;
 
   // VECTOR MULTIPLIER
-  assign modulo_in_vector_multiplier = FULL;
   assign size_in_vector_multiplier   = SIZE_I_IN;
   assign data_a_in_vector_multiplier = data_out_vector_cosine;
   assign data_b_in_vector_multiplier = BETA_IN;
 
   // VECTOR EXPONE_CONTROLNTIATOR
-  assign modulo_in_vector_exponentiator = FULL;
   assign size_in_vector_exponentiator   = SIZE_I_IN;
   assign data_a_in_vector_exponentiator = FULL;
   assign data_b_in_vector_exponentiator = data_out_vector_multiplier;
 
   // VECTOR SOFTMAX
-  assign modulo_in_vector_softmax = FULL;
   assign size_in_vector_softmax   = SIZE_I_IN;
   assign length_in_vector_softmax = SIZE_J_IN;
   assign data_in_vector_softmax   = data_out_vector_exponentiator;
@@ -268,7 +260,6 @@ module ntm_content_based_addressing #(
     .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_multiplier),
     .SIZE_IN(size_in_vector_multiplier),
     .DATA_A_IN(data_a_in_vector_multiplier),
     .DATA_B_IN(data_b_in_vector_multiplier),
@@ -294,7 +285,6 @@ module ntm_content_based_addressing #(
     .DATA_OUT_ENABLE(data_out_enable_vector_exponentiator),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_exponentiator),
     .SIZE_IN(size_in_vector_exponentiator),
     .DATA_A_IN(data_a_in_vector_exponentiator),
     .DATA_B_IN(data_b_in_vector_exponentiator),
@@ -323,7 +313,6 @@ module ntm_content_based_addressing #(
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_cosine),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_cosine),
     .SIZE_IN(size_in_vector_cosine),
     .LENGTH_IN(length_in_vector_cosine),
     .DATA_A_IN(data_a_in_vector_cosine),
@@ -351,7 +340,6 @@ module ntm_content_based_addressing #(
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_softmax),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_softmax),
     .SIZE_IN(size_in_vector_softmax),
     .LENGTH_IN(length_in_vector_softmax),
     .DATA_IN(data_in_vector_softmax),

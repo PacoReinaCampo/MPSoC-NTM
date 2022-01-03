@@ -129,7 +129,6 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -145,7 +144,6 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
   signal data_out_enable_vector_tanh : std_logic;
 
   -- DATA
-  signal modulo_in_vector_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_tanh   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -266,12 +264,10 @@ begin
 
   -- DATA
   -- VECTOR TANH
-  modulo_in_vector_tanh <= FULL;
   size_in_vector_tanh   <= SIZE_L_IN;
   data_in_vector_tanh   <= S_IN;
 
   -- VECTOR MULTIPLIER
-  modulo_in_vector_multiplier <= FULL;
   size_in_vector_multiplier   <= SIZE_L_IN;
   data_a_in_vector_multiplier <= O_IN;
   data_b_in_vector_multiplier <= data_out_vector_tanh;
@@ -297,7 +293,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_multiplier,
       SIZE_IN   => size_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
@@ -324,7 +319,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_tanh,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_tanh,
       SIZE_IN   => size_in_vector_tanh,
       DATA_IN   => data_in_vector_tanh,
       DATA_OUT  => data_out_vector_tanh

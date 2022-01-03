@@ -78,7 +78,6 @@ entity ntm_function_stimulus is
     SCALAR_CONVOLUTION_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    SCALAR_CONVOLUTION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_CONVOLUTION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     SCALAR_CONVOLUTION_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_CONVOLUTION_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -95,7 +94,6 @@ entity ntm_function_stimulus is
     SCALAR_COSINE_SIMILARITY_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    SCALAR_COSINE_SIMILARITY_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_COSINE_SIMILARITY_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     SCALAR_COSINE_SIMILARITY_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_COSINE_SIMILARITY_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -111,7 +109,6 @@ entity ntm_function_stimulus is
     SCALAR_MULTIPLICATION_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    SCALAR_MULTIPLICATION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_MULTIPLICATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     SCALAR_MULTIPLICATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_MULTIPLICATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -122,7 +119,6 @@ entity ntm_function_stimulus is
     SCALAR_COSH_READY : in  std_logic;
 
     -- DATA
-    SCALAR_COSH_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_COSH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_COSH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -132,7 +128,6 @@ entity ntm_function_stimulus is
     SCALAR_SINH_READY : in  std_logic;
 
     -- DATA
-    SCALAR_SINH_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_SINH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_SINH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -142,7 +137,6 @@ entity ntm_function_stimulus is
     SCALAR_TANH_READY : in  std_logic;
 
     -- DATA
-    SCALAR_TANH_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_TANH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_TANH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -151,7 +145,6 @@ entity ntm_function_stimulus is
     SCALAR_LOGISTIC_READY : in  std_logic;
 
     -- DATA
-    SCALAR_LOGISTIC_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_LOGISTIC_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_LOGISTIC_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -165,7 +158,6 @@ entity ntm_function_stimulus is
     SCALAR_SOFTMAX_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    SCALAR_SOFTMAX_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_SOFTMAX_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     SCALAR_SOFTMAX_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_SOFTMAX_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -176,7 +168,6 @@ entity ntm_function_stimulus is
     SCALAR_ONEPLUS_READY : in  std_logic;
 
     -- DATA
-    SCALAR_ONEPLUS_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_ONEPLUS_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_ONEPLUS_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -190,7 +181,6 @@ entity ntm_function_stimulus is
     SCALAR_SUMMATION_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    SCALAR_SUMMATION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_SUMMATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     SCALAR_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -213,7 +203,6 @@ entity ntm_function_stimulus is
     VECTOR_CONVOLUTION_DATA_OUT_SCALAR_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_CONVOLUTION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_CONVOLUTION_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_CONVOLUTION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_CONVOLUTION_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -234,7 +223,6 @@ entity ntm_function_stimulus is
     VECTOR_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_COSINE_SIMILARITY_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_COSINE_SIMILARITY_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_COSINE_SIMILARITY_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_COSINE_SIMILARITY_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -253,7 +241,6 @@ entity ntm_function_stimulus is
     VECTOR_MULTIPLICATION_DATA_OUT_SCALAR_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_MULTIPLICATION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_MULTIPLICATION_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_MULTIPLICATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_MULTIPLICATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -269,7 +256,6 @@ entity ntm_function_stimulus is
     VECTOR_COSH_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_COSH_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_COSH_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_COSH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_COSH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -284,7 +270,6 @@ entity ntm_function_stimulus is
     VECTOR_SINH_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_SINH_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_SINH_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_SINH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_SINH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -299,7 +284,6 @@ entity ntm_function_stimulus is
     VECTOR_TANH_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_TANH_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_TANH_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_TANH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_TANH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -314,7 +298,6 @@ entity ntm_function_stimulus is
     VECTOR_LOGISTIC_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_LOGISTIC_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_LOGISTIC_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_LOGISTIC_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_LOGISTIC_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -331,7 +314,6 @@ entity ntm_function_stimulus is
     VECTOR_SOFTMAX_DATA_OUT_SCALAR_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_SOFTMAX_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_SOFTMAX_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_SOFTMAX_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_SOFTMAX_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -347,7 +329,6 @@ entity ntm_function_stimulus is
     VECTOR_ONEPLUS_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_ONEPLUS_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_ONEPLUS_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_ONEPLUS_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_ONEPLUS_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -364,7 +345,6 @@ entity ntm_function_stimulus is
     VECTOR_SUMMATION_DATA_OUT_SCALAR_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_SUMMATION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_SUMMATION_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_SUMMATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -391,7 +371,6 @@ entity ntm_function_stimulus is
     MATRIX_CONVOLUTION_DATA_OUT_SCALAR_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_CONVOLUTION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_CONVOLUTION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_CONVOLUTION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_CONVOLUTION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -416,7 +395,6 @@ entity ntm_function_stimulus is
     MATRIX_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_COSINE_SIMILARITY_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_COSINE_SIMILARITY_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_COSINE_SIMILARITY_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_COSINE_SIMILARITY_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -438,7 +416,6 @@ entity ntm_function_stimulus is
     MATRIX_MULTIPLICATION_DATA_OUT_SCALAR_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_MULTIPLICATION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_MULTIPLICATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_MULTIPLICATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_MULTIPLICATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -457,7 +434,6 @@ entity ntm_function_stimulus is
     MATRIX_COSH_DATA_OUT_J_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_COSH_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_COSH_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_COSH_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_COSH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -475,7 +451,6 @@ entity ntm_function_stimulus is
     MATRIX_SINH_DATA_OUT_J_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_SINH_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_SINH_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_SINH_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_SINH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -493,7 +468,6 @@ entity ntm_function_stimulus is
     MATRIX_TANH_DATA_OUT_J_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_TANH_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_TANH_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_TANH_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_TANH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -511,7 +485,6 @@ entity ntm_function_stimulus is
     MATRIX_LOGISTIC_DATA_OUT_J_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_LOGISTIC_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_LOGISTIC_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_LOGISTIC_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_LOGISTIC_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -531,7 +504,6 @@ entity ntm_function_stimulus is
     MATRIX_SOFTMAX_DATA_OUT_SCALAR_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_SOFTMAX_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_SOFTMAX_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_SOFTMAX_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_SOFTMAX_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -550,7 +522,6 @@ entity ntm_function_stimulus is
     MATRIX_ONEPLUS_DATA_OUT_J_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_ONEPLUS_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_ONEPLUS_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_ONEPLUS_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_ONEPLUS_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -570,7 +541,6 @@ entity ntm_function_stimulus is
     MATRIX_SUMMATION_DATA_OUT_SCALAR_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_SUMMATION_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_SUMMATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_SUMMATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_SUMMATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);

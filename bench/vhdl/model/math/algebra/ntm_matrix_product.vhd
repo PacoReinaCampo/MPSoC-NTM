@@ -135,7 +135,6 @@ architecture ntm_matrix_product_architecture of ntm_matrix_product is
   signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -151,7 +150,6 @@ architecture ntm_matrix_product_architecture of ntm_matrix_product is
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -193,7 +191,6 @@ begin
       data_b_in_j_multiplier_int <= '0';
 
       -- Data Internal
-      modulo_in_vector_multiplier <= ZERO_DATA;
       size_in_vector_multiplier   <= ZERO_CONTROL;
       data_a_in_vector_multiplier <= ZERO_DATA;
       data_b_in_vector_multiplier <= ZERO_DATA;
@@ -255,8 +252,7 @@ begin
 
           if (data_a_in_i_multiplier_int = '1' and data_a_in_j_multiplier_int = '1' and data_b_in_i_multiplier_int = '1' and data_b_in_j_multiplier_int = '1') then
             -- Data Inputs
-            modulo_in_vector_multiplier <= MODULO_IN;
-            size_in_vector_multiplier   <= SIZE_B_J_IN;
+            size_in_vector_multiplier <= SIZE_B_J_IN;
 
             -- Control Internal
             start_vector_multiplier <= '1';
@@ -405,7 +401,6 @@ begin
       OPERATION => operation_scalar_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_adder,
       DATA_A_IN => data_a_in_scalar_adder,
       DATA_B_IN => data_b_in_scalar_adder,
       DATA_OUT  => data_out_scalar_adder
@@ -432,7 +427,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_multiplier,
       SIZE_IN   => size_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,

@@ -169,7 +169,6 @@ module ntm_controller #(
   wire data_out_enable_vector_adder;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_adder;
   reg [DATA_SIZE-1:0] size_in_vector_adder;
   reg [DATA_SIZE-1:0] data_a_in_vector_adder;
   reg [DATA_SIZE-1:0] data_b_in_vector_adder;
@@ -190,7 +189,6 @@ module ntm_controller #(
   wire data_out_scalar_enable_matrix_convolution;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_matrix_convolution;
   reg [DATA_SIZE-1:0] size_i_in_matrix_convolution;
   reg [DATA_SIZE-1:0] size_j_in_matrix_convolution;
   reg [DATA_SIZE-1:0] length_in_matrix_convolution;
@@ -206,7 +204,6 @@ module ntm_controller #(
   wire data_out_enable_vector_logistic;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_logistic;
   reg [DATA_SIZE-1:0] size_in_vector_logistic;
   reg [DATA_SIZE-1:0] data_in_vector_logistic;
   wire [DATA_SIZE-1:0] data_out_vector_logistic;
@@ -287,7 +284,6 @@ module ntm_controller #(
         MATRIX_FIRST_CONVOLUTION_STATE : begin  // STEP 1
 
           // Data Inputs
-          modulo_in_matrix_convolution <= FULL;
           size_i_in_matrix_convolution <= FULL;
           size_j_in_matrix_convolution <= FULL;
           length_in_matrix_convolution <= FULL;
@@ -298,7 +294,6 @@ module ntm_controller #(
         VECTOR_FIRST_ADDER_STATE : begin  // STEP 2
 
           // Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= FULL;
           data_a_in_vector_adder <= data_out_matrix_convolution;
           data_b_in_vector_adder <= B_IN;
@@ -307,7 +302,6 @@ module ntm_controller #(
         MATRIX_SECOND_CONVOLUTION_STATE : begin  // STEP 3
 
           // Data Inputs
-          modulo_in_matrix_convolution <= FULL;
           size_i_in_matrix_convolution <= FULL;
           size_j_in_matrix_convolution <= FULL;
           length_in_matrix_convolution <= FULL;
@@ -318,7 +312,6 @@ module ntm_controller #(
         VECTOR_SECOND_ADDER_STATE : begin  // STEP 4
 
           // Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= FULL;
           data_a_in_vector_adder <= data_out_matrix_convolution;
           data_b_in_vector_adder <= data_out_vector_adder;
@@ -327,7 +320,6 @@ module ntm_controller #(
         MATRIX_THIRD_CONVOLUTION_STATE : begin  // STEP 5
 
           // Data Inputs
-          modulo_in_matrix_convolution <= FULL;
           size_i_in_matrix_convolution <= FULL;
           size_j_in_matrix_convolution <= FULL;
           length_in_matrix_convolution <= FULL;
@@ -338,7 +330,6 @@ module ntm_controller #(
         VECTOR_THIRD_ADDER_STATE : begin  // STEP 6
 
           // Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= FULL;
           data_a_in_vector_adder <= data_out_matrix_convolution;
           data_b_in_vector_adder <= data_out_vector_adder;
@@ -347,7 +338,6 @@ module ntm_controller #(
         VECTOR_LOGISTIC_STATE : begin  // STEP 7
 
           // Data Inputs
-          modulo_in_vector_logistic <= FULL;
           size_in_vector_logistic   <= FULL;
           data_in_vector_logistic   <= FULL;
 
@@ -402,7 +392,6 @@ module ntm_controller #(
     .DATA_OUT_ENABLE(data_out_enable_vector_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_adder),
     .SIZE_IN(size_in_vector_adder),
     .DATA_A_IN(data_a_in_vector_adder),
     .DATA_B_IN(data_b_in_vector_adder),
@@ -434,7 +423,6 @@ module ntm_controller #(
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_convolution),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_convolution),
     .SIZE_I_IN(size_i_in_matrix_convolution),
     .SIZE_J_IN(size_j_in_matrix_convolution),
     .LENGTH_IN(length_in_matrix_convolution),
@@ -461,7 +449,6 @@ module ntm_controller #(
     .DATA_OUT_ENABLE(data_out_enable_vector_logistic),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_logistic),
     .SIZE_IN(size_in_vector_logistic),
     .DATA_IN(data_in_vector_logistic),
     .DATA_OUT(data_out_vector_logistic)

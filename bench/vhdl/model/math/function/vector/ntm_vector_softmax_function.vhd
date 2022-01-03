@@ -65,7 +65,6 @@ entity ntm_vector_softmax_function is
     DATA_OUT_SCALAR_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -127,7 +126,6 @@ architecture ntm_vector_softmax_function_architecture of ntm_vector_softmax_func
   signal data_out_enable_scalar_softmax_function : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_softmax_function : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_scalar_softmax_function : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_scalar_softmax_function   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_softmax_function  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -162,7 +160,6 @@ begin
       data_in_enable_scalar_softmax_function <= '0';
 
       -- Data Internal
-      modulo_in_scalar_softmax_function <= ZERO_DATA;
       length_in_scalar_softmax_function <= ZERO_CONTROL;
       data_in_scalar_softmax_function   <= ZERO_DATA;
 
@@ -188,7 +185,6 @@ begin
 
           if (((DATA_IN_VECTOR_ENABLE = '1') and (DATA_IN_SCALAR_ENABLE = '1')) or (index_scalar_loop = ZERO_CONTROL)) then
             -- Data Inputs
-            modulo_in_scalar_softmax_function <= MODULO_IN;
             length_in_scalar_softmax_function <= LENGTH_IN;
 
             data_in_scalar_softmax_function <= DATA_IN;
@@ -317,7 +313,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_scalar_softmax_function,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_softmax_function,
       LENGTH_IN => length_in_scalar_softmax_function,
       DATA_IN   => data_in_scalar_softmax_function,
       DATA_OUT  => data_out_scalar_softmax_function

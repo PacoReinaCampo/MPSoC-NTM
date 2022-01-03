@@ -67,7 +67,6 @@ entity ntm_matrix_multiplication_function is
     DATA_OUT_SCALAR_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -135,7 +134,6 @@ architecture ntm_matrix_multiplication_function_architecture of ntm_matrix_multi
   signal data_out_scalar_enable_vector_multiplication : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_multiplication   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_vector_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -183,7 +181,6 @@ begin
 
           if (((DATA_IN_MATRIX_ENABLE = '1') and (DATA_IN_VECTOR_ENABLE = '1') and (DATA_IN_SCALAR_ENABLE = '1')) or ((index_matrix_loop = ZERO_CONTROL) and (index_vector_loop = ZERO_CONTROL))) then
             -- Data Inputs
-            modulo_in_vector_multiplication <= MODULO_IN;
             size_in_vector_multiplication   <= SIZE_J_IN;
             length_in_vector_multiplication <= LENGTH_IN;
 
@@ -371,7 +368,6 @@ begin
       DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_multiplication,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_multiplication,
       SIZE_IN   => size_in_vector_multiplication,
       LENGTH_IN => length_in_vector_multiplication,
       DATA_IN   => data_in_vector_multiplication,

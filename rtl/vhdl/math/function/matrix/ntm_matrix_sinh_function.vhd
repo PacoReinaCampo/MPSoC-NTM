@@ -65,7 +65,6 @@ entity ntm_matrix_sinh_function is
     DATA_OUT_J_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -127,7 +126,6 @@ architecture ntm_matrix_sinh_function_architecture of ntm_matrix_sinh_function i
   signal data_out_enable_vector_sinh_function : std_logic;
 
   -- DATA
-  signal modulo_in_vector_sinh_function : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_sinh_function   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_sinh_function   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_sinh_function  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -138,7 +136,6 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- 1 = DATA_OUT · DATA_IN mod MODULO_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -162,7 +159,6 @@ begin
       data_in_enable_vector_sinh_function <= '0';
 
       -- Data Internal
-      modulo_in_vector_sinh_function <= ZERO_DATA;
       size_in_vector_sinh_function   <= ZERO_CONTROL;
       data_in_vector_sinh_function   <= ZERO_DATA;
 
@@ -188,7 +184,6 @@ begin
 
           if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
             -- Data Inputs
-            modulo_in_vector_sinh_function <= MODULO_IN;
             size_in_vector_sinh_function   <= SIZE_J_IN;
 
             data_in_vector_sinh_function <= DATA_IN;
@@ -317,7 +312,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_sinh_function,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_sinh_function,
       SIZE_IN   => size_in_vector_sinh_function,
       DATA_IN   => data_in_vector_sinh_function,
       DATA_OUT  => data_out_vector_sinh_function

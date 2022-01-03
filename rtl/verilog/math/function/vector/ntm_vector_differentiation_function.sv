@@ -57,7 +57,6 @@ module ntm_vector_differentiation_function #(
     output reg DATA_OUT_SCALAR_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] SIZE_IN,
     input [DATA_SIZE-1:0] PERIOD_IN,
     input [DATA_SIZE-1:0] LENGTH_IN,
@@ -112,7 +111,6 @@ module ntm_vector_differentiation_function #(
   wire data_out_enable_scalar_differentiation;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_scalar_differentiation;
   reg [DATA_SIZE-1:0] size_in_scalar_differentiation;
   reg [DATA_SIZE-1:0] period_in_scalar_differentiation;
   reg [DATA_SIZE-1:0] length_in_scalar_differentiation;
@@ -154,7 +152,6 @@ module ntm_vector_differentiation_function #(
         INPUT_VECTOR_STATE : begin  // STEP 1
           if(DATA_IN_VECTOR_ENABLE == 1'b1) begin
             // Data Inputs
-            modulo_in_scalar_differentiation <= MODULO_IN;
             data_in_scalar_differentiation <= DATA_IN;
 
             if(index_vector_loop == ZERO_DATA) begin
@@ -179,7 +176,6 @@ module ntm_vector_differentiation_function #(
         INPUT_SCALAR_STATE : begin  // STEP 2
           if(DATA_IN_SCALAR_ENABLE == 1'b1) begin
             // Data Inputs
-            modulo_in_scalar_differentiation <= MODULO_IN;
             length_in_scalar_differentiation <= LENGTH_IN;
             data_in_scalar_differentiation <= DATA_IN;
 
@@ -268,7 +264,6 @@ module ntm_vector_differentiation_function #(
     .DATA_OUT_ENABLE(data_out_enable_scalar_differentiation),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_differentiation),
     .PERIOD_IN(period_in_scalar_differentiation),
     .LENGTH_IN(length_in_scalar_differentiation),
     .DATA_IN(data_in_scalar_differentiation),

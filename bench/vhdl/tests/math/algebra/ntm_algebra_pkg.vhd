@@ -128,7 +128,6 @@ package ntm_algebra_pkg is
       MATRIX_PRODUCT_DATA_OUT_J_ENABLE : in std_logic;
 
       -- DATA
-      MATRIX_PRODUCT_MODULO_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_PRODUCT_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_PRODUCT_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_PRODUCT_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -151,7 +150,6 @@ package ntm_algebra_pkg is
       TENSOR_TRANSPOSE_DATA_OUT_K_ENABLE : in std_logic;
 
       -- DATA
-      TENSOR_TRANSPOSE_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_TRANSPOSE_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       TENSOR_TRANSPOSE_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       TENSOR_TRANSPOSE_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -170,7 +168,6 @@ package ntm_algebra_pkg is
       MATRIX_TRANSPOSE_DATA_OUT_J_ENABLE : in std_logic;
 
       -- DATA
-      MATRIX_TRANSPOSE_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_TRANSPOSE_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_TRANSPOSE_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -187,7 +184,6 @@ package ntm_algebra_pkg is
       SCALAR_PRODUCT_DATA_OUT_ENABLE : in std_logic;
 
       -- DATA
-      SCALAR_PRODUCT_MODULO_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_PRODUCT_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       SCALAR_PRODUCT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_PRODUCT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -210,7 +206,6 @@ package ntm_algebra_pkg is
       TENSOR_PRODUCT_DATA_OUT_K_ENABLE : in std_logic;
 
       -- DATA
-      TENSOR_PRODUCT_MODULO_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_PRODUCT_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       TENSOR_PRODUCT_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       TENSOR_PRODUCT_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);

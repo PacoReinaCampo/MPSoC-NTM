@@ -93,7 +93,6 @@ module dnc_erase_vector #(
   wire data_out_enable_vector_logistic;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_logistic;
   wire [DATA_SIZE-1:0] size_in_vector_logistic;
   wire [DATA_SIZE-1:0] data_in_vector_logistic;
   wire [DATA_SIZE-1:0] data_out_vector_logistic;
@@ -112,7 +111,6 @@ module dnc_erase_vector #(
   assign E_OUT_ENABLE = data_out_enable_vector_logistic;
 
   // DATA
-  assign modulo_in_vector_logistic = FULL;
   assign size_in_vector_logistic = SIZE_W_IN;
   assign data_in_vector_logistic = E_IN;
   assign E_OUT = data_out_vector_logistic;
@@ -134,7 +132,6 @@ module dnc_erase_vector #(
     .DATA_OUT_ENABLE(data_out_enable_vector_logistic),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_logistic),
     .SIZE_IN(size_in_vector_logistic),
     .DATA_IN(data_in_vector_logistic),
     .DATA_OUT(data_out_vector_logistic)

@@ -117,7 +117,6 @@ module dnc_content_based_addressing #(
   wire data_out_enable_vector_exponentiator;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_exponentiator;
   wire [DATA_SIZE-1:0] size_in_vector_exponentiator;
   wire [DATA_SIZE-1:0] data_a_in_vector_exponentiator;
   wire [DATA_SIZE-1:0] data_b_in_vector_exponentiator;
@@ -136,7 +135,6 @@ module dnc_content_based_addressing #(
   wire data_out_scalar_enable_vector_cosine;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_cosine;
   wire [DATA_SIZE-1:0] size_in_vector_cosine;
   wire [DATA_SIZE-1:0] length_in_vector_cosine;
   wire [DATA_SIZE-1:0] data_a_in_vector_cosine;
@@ -154,7 +152,6 @@ module dnc_content_based_addressing #(
   wire data_out_scalar_enable_vector_softmax;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_softmax;
   wire [DATA_SIZE-1:0] length_in_vector_softmax;
   wire [DATA_SIZE-1:0] size_in_vector_softmax;
   wire [DATA_SIZE-1:0] data_in_vector_softmax;
@@ -222,7 +219,6 @@ module dnc_content_based_addressing #(
     .DATA_OUT_ENABLE(data_out_enable_vector_exponentiator),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_exponentiator),
     .SIZE_IN(size_in_vector_exponentiator),
     .DATA_A_IN(data_a_in_vector_exponentiator),
     .DATA_B_IN(data_b_in_vector_exponentiator),
@@ -251,7 +247,6 @@ module dnc_content_based_addressing #(
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_cosine),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_cosine),
     .SIZE_IN(size_in_vector_cosine),
     .LENGTH_IN(length_in_vector_cosine),
     .DATA_A_IN(data_a_in_vector_cosine),
@@ -279,7 +274,6 @@ module dnc_content_based_addressing #(
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_softmax),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_softmax),
     .SIZE_IN(size_in_vector_softmax),
     .LENGTH_IN(length_in_vector_softmax),
     .DATA_IN(data_in_vector_softmax),

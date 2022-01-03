@@ -54,7 +54,6 @@ module ntm_vector_logistic_function #(
     output reg DATA_OUT_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] SIZE_IN,
     input [DATA_SIZE-1:0] DATA_IN,
     output reg [DATA_SIZE-1:0] DATA_OUT
@@ -103,7 +102,6 @@ module ntm_vector_logistic_function #(
   wire ready_scalar_logistic;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_scalar_logistic;
   reg [DATA_SIZE-1:0] data_in_scalar_logistic;
   wire [DATA_SIZE-1:0] data_out_scalar_logistic;
 
@@ -140,7 +138,6 @@ module ntm_vector_logistic_function #(
         INPUT_STATE : begin  // STEP 1
           if(DATA_IN_ENABLE == 1'b1) begin
             // Data Inputs
-            modulo_in_scalar_logistic <= MODULO_IN;
             data_in_scalar_logistic <= DATA_IN;
 
             if(index_loop == ZERO_DATA) begin
@@ -205,7 +202,6 @@ module ntm_vector_logistic_function #(
     .READY(ready_scalar_logistic),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_logistic),
     .DATA_IN(data_in_scalar_logistic),
     .DATA_OUT(data_out_scalar_logistic)
   );

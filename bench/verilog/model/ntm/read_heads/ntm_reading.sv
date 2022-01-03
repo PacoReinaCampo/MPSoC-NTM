@@ -112,7 +112,6 @@ module ntm_reading #(
   wire data_out_scalar_enable_vector_summation;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_summation;
   wire [DATA_SIZE-1:0] size_in_vector_summation;
   wire [DATA_SIZE-1:0] length_in_vector_summation;
   wire [DATA_SIZE-1:0] data_in_vector_summation;
@@ -127,7 +126,6 @@ module ntm_reading #(
   wire data_out_enable_vector_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_multiplier;
   wire [DATA_SIZE-1:0] size_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
@@ -178,13 +176,11 @@ module ntm_reading #(
 
   // DATA
   // VECTOR MULTIPLIER
-  assign modulo_in_vector_multiplier = FULL;
   assign size_in_vector_multiplier   = SIZE_W_IN;
   assign data_a_in_vector_multiplier = W_IN;
   assign data_b_in_vector_multiplier = M_IN;
 
   // VECTOR SUMMATION
-  assign modulo_in_vector_summation = FULL;
   assign size_in_vector_summation   = SIZE_W_IN;
   assign length_in_vector_summation = SIZE_N_IN;
   assign data_in_vector_summation   = data_out_vector_multiplier;
@@ -209,7 +205,6 @@ module ntm_reading #(
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_summation),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_summation),
     .SIZE_IN(size_in_vector_summation),
     .LENGTH_IN(length_in_vector_summation),
     .DATA_IN(data_in_vector_summation),
@@ -235,7 +230,6 @@ module ntm_reading #(
     .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_multiplier),
     .SIZE_IN(size_in_vector_multiplier),
     .DATA_A_IN(data_a_in_vector_multiplier),
     .DATA_B_IN(data_b_in_vector_multiplier),

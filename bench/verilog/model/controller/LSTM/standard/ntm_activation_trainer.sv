@@ -182,7 +182,6 @@ module ntm_activation_trainer #(
   wire data_out_scalar_enable_vector_summation;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_summation;
   wire [DATA_SIZE-1:0] size_in_vector_summation;
   wire [DATA_SIZE-1:0] length_in_vector_summation;
   wire [DATA_SIZE-1:0] data_in_vector_summation;
@@ -197,7 +196,6 @@ module ntm_activation_trainer #(
   wire data_out_enable_vector_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_multiplier;
   wire [DATA_SIZE-1:0] size_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
@@ -213,7 +211,6 @@ module ntm_activation_trainer #(
   wire data_out_enable_vector_exponentiator;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_exponentiator;
   wire [DATA_SIZE-1:0] size_in_vector_exponentiator;
   wire [DATA_SIZE-1:0] data_a_in_vector_exponentiator;
   wire [DATA_SIZE-1:0] data_b_in_vector_exponentiator;
@@ -231,7 +228,6 @@ module ntm_activation_trainer #(
   wire data_out_scalar_enable_vector_differentiation;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_differentiation;
   wire [DATA_SIZE-1:0] size_in_vector_differentiation;
   wire [DATA_SIZE-1:0] period_in_vector_differentiation;
   wire [DATA_SIZE-1:0] length_in_vector_differentiation;
@@ -250,7 +246,6 @@ module ntm_activation_trainer #(
   wire data_out_j_enable_matrix_product;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_product;
   wire [DATA_SIZE-1:0] size_a_i_in_matrix_product;
   wire [DATA_SIZE-1:0] size_a_j_in_matrix_product;
   wire [DATA_SIZE-1:0] size_b_i_in_matrix_product;
@@ -432,7 +427,6 @@ module ntm_activation_trainer #(
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_summation),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_summation),
     .SIZE_IN(size_in_vector_summation),
     .LENGTH_IN(length_in_vector_summation),
     .DATA_IN(data_in_vector_summation),
@@ -458,7 +452,6 @@ module ntm_activation_trainer #(
     .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_multiplier),
     .SIZE_IN(size_in_vector_multiplier),
     .DATA_A_IN(data_a_in_vector_multiplier),
     .DATA_B_IN(data_b_in_vector_multiplier),
@@ -484,7 +477,6 @@ module ntm_activation_trainer #(
     .DATA_OUT_ENABLE(data_out_enable_vector_exponentiator),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_exponentiator),
     .SIZE_IN(size_in_vector_exponentiator),
     .DATA_A_IN(data_a_in_vector_exponentiator),
     .DATA_B_IN(data_b_in_vector_exponentiator),
@@ -512,7 +504,6 @@ module ntm_activation_trainer #(
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_differentiation),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_differentiation),
     .SIZE_IN(size_in_vector_differentiation),
     .PERIOD_IN(period_in_vector_differentiation),
     .LENGTH_IN(length_in_vector_differentiation),
@@ -542,7 +533,6 @@ module ntm_activation_trainer #(
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_product),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_product),
     .SIZE_A_I_IN(size_a_i_in_matrix_product),
     .SIZE_A_J_IN(size_a_j_in_matrix_product),
     .SIZE_B_I_IN(size_b_i_in_matrix_product),

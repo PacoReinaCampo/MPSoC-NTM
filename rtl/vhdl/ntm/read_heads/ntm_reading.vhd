@@ -130,7 +130,6 @@ architecture ntm_reading_architecture of ntm_reading is
   signal data_out_scalar_enable_vector_summation : std_logic;
 
   -- DATA
-  signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -147,7 +146,6 @@ architecture ntm_reading_architecture of ntm_reading is
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -259,13 +257,11 @@ begin
 
   -- DATA
   -- VECTOR MULTIPLIER
-  modulo_in_vector_multiplier <= FULL;
   size_in_vector_multiplier   <= SIZE_W_IN;
   data_a_in_vector_multiplier <= W_IN;
   data_b_in_vector_multiplier <= M_IN;
 
   -- VECTOR SUMMATION
-  modulo_in_vector_summation <= FULL;
   size_in_vector_summation   <= SIZE_W_IN;
   length_in_vector_summation <= SIZE_N_IN;
   data_in_vector_summation   <= data_out_vector_multiplier;
@@ -292,7 +288,6 @@ begin
       DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_summation,
       SIZE_IN   => size_in_vector_summation,
       LENGTH_IN => length_in_vector_summation,
       DATA_IN   => data_in_vector_summation,
@@ -320,7 +315,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_multiplier,
       SIZE_IN   => size_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,

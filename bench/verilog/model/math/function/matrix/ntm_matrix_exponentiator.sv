@@ -58,7 +58,6 @@ module ntm_matrix_exponentiator #(
     output reg DATA_OUT_J_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] SIZE_I_IN,
     input [DATA_SIZE-1:0] SIZE_J_IN,
     input [DATA_SIZE-1:0] DATA_A_IN,
@@ -119,7 +118,6 @@ module ntm_matrix_exponentiator #(
   wire data_out_enable_vector_exponentiator;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_exponentiator;
   reg [DATA_SIZE-1:0] size_in_vector_exponentiator;
   reg [DATA_SIZE-1:0] data_a_in_vector_exponentiator;
   reg [DATA_SIZE-1:0] data_b_in_vector_exponentiator;
@@ -195,7 +193,6 @@ module ntm_matrix_exponentiator #(
               start_vector_exponentiator <= 1'b1;
             end
             // Data Inputs
-            modulo_in_vector_exponentiator <= MODULO_IN;
 
             // FSM Control
             exponentiator_ctrl_fsm_int <= ENDER_STATE;
@@ -235,7 +232,6 @@ module ntm_matrix_exponentiator #(
               start_vector_exponentiator <= 1'b1;
             end
             // Data Inputs
-            modulo_in_vector_exponentiator <= MODULO_IN;
             size_in_vector_exponentiator <= SIZE_J_IN;
 
             // FSM Control
@@ -316,7 +312,6 @@ module ntm_matrix_exponentiator #(
     .DATA_OUT_ENABLE(data_out_enable_vector_exponentiator),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_exponentiator),
     .SIZE_IN(size_in_vector_exponentiator),
     .DATA_A_IN(data_a_in_vector_exponentiator),
     .DATA_B_IN(data_b_in_vector_exponentiator),

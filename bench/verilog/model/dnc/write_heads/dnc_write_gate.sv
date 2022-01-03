@@ -88,7 +88,6 @@ module dnc_write_gate #(
   wire ready_scalar_logistic;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_logistic;
   wire [DATA_SIZE-1:0] data_in_scalar_logistic;
   wire [DATA_SIZE-1:0] data_out_scalar_logistic;
 
@@ -122,7 +121,6 @@ module dnc_write_gate #(
     .READY(ready_scalar_logistic),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_logistic),
     .DATA_IN(data_in_scalar_logistic),
     .DATA_OUT(data_out_scalar_logistic)
   );

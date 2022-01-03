@@ -56,7 +56,6 @@ module ntm_scalar_cosine_similarity_function #(
     output reg DATA_OUT_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] LENGTH_IN,
     input [DATA_SIZE-1:0] DATA_A_IN,
     input [DATA_SIZE-1:0] DATA_B_IN,
@@ -81,7 +80,6 @@ module ntm_scalar_cosine_similarity_function #(
   wire ready_scalar_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_multiplier;
   wire [DATA_SIZE-1:0] data_a_in_scalar_multiplier;
   wire [DATA_SIZE-1:0] data_b_in_scalar_multiplier;
   wire [DATA_SIZE-1:0] data_out_scalar_multiplier;
@@ -92,7 +90,6 @@ module ntm_scalar_cosine_similarity_function #(
   wire ready_scalar_divider;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_divider;
   wire [DATA_SIZE-1:0] data_a_in_scalar_divider;
   wire [DATA_SIZE-1:0] data_b_in_scalar_divider;
   wire [DATA_SIZE-1:0] data_out_scalar_divider;
@@ -107,7 +104,6 @@ module ntm_scalar_cosine_similarity_function #(
   wire data_out_enable_scalar_product;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_product;
   wire [DATA_SIZE-1:0] length_in_scalar_product;
   wire [DATA_SIZE-1:0] data_a_in_scalar_product;
   wire [DATA_SIZE-1:0] data_b_in_scalar_product;
@@ -132,7 +128,6 @@ module ntm_scalar_cosine_similarity_function #(
     .READY(ready_scalar_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_multiplier),
     .DATA_A_IN(data_a_in_scalar_multiplier),
     .DATA_B_IN(data_b_in_scalar_multiplier),
     .DATA_OUT(data_out_scalar_multiplier)
@@ -153,7 +148,6 @@ module ntm_scalar_cosine_similarity_function #(
     .READY(ready_scalar_divider),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_divider),
     .DATA_A_IN(data_a_in_scalar_divider),
     .DATA_B_IN(data_b_in_scalar_divider),
     .DATA_OUT(data_out_scalar_divider)
@@ -178,7 +172,6 @@ module ntm_scalar_cosine_similarity_function #(
     .DATA_OUT_ENABLE(data_out_enable_scalar_product),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_product),
     .LENGTH_IN(length_in_scalar_product),
     .DATA_A_IN(data_a_in_scalar_product),
     .DATA_B_IN(data_b_in_scalar_product),

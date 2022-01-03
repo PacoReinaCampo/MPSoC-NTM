@@ -59,7 +59,6 @@ entity ntm_scalar_logistic_function is
     READY : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -113,7 +112,6 @@ architecture ntm_scalar_logistic_function_architecture of ntm_scalar_logistic_fu
   signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -124,7 +122,6 @@ architecture ntm_scalar_logistic_function_architecture of ntm_scalar_logistic_fu
   signal ready_scalar_divider : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -135,7 +132,6 @@ architecture ntm_scalar_logistic_function_architecture of ntm_scalar_logistic_fu
   signal ready_scalar_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -192,7 +188,6 @@ begin
         when SCALAR_FIRST_DIVIDER_STATE =>  -- STEP 3
 
           -- Data Inputs
-          modulo_in_scalar_divider <= MODULO_IN;
           data_a_in_scalar_divider <= ONE_DATA;
           data_b_in_scalar_divider <= DATA_IN;
 
@@ -223,7 +218,6 @@ begin
         when SCALAR_SECOND_DIVIDER_STATE =>  -- STEP 5
 
           -- Data Inputs
-          modulo_in_scalar_divider <= MODULO_IN;
           data_a_in_scalar_divider <= ONE_DATA;
           data_b_in_scalar_divider <= data_out_scalar_adder;
 
@@ -253,12 +247,10 @@ begin
 
   -- DATA
   -- SCALAR ADDER
-  modulo_in_scalar_adder <= MODULO_IN;
   data_a_in_scalar_adder <= ONE_DATA;
   data_b_in_scalar_adder <= data_out_scalar_divider;
 
   -- SCALAR EXPONENTIATOR
-  modulo_in_scalar_exponentiator <= MODULO_IN;
   data_a_in_scalar_exponentiator <= EULER;
   data_b_in_scalar_exponentiator <= DATA_IN;
 
@@ -280,7 +272,6 @@ begin
       OPERATION => operation_scalar_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_adder,
       DATA_A_IN => data_a_in_scalar_adder,
       DATA_B_IN => data_b_in_scalar_adder,
       DATA_OUT  => data_out_scalar_adder
@@ -302,7 +293,6 @@ begin
       READY => ready_scalar_divider,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_divider,
       DATA_A_IN => data_a_in_scalar_divider,
       DATA_B_IN => data_b_in_scalar_divider,
       DATA_OUT  => data_out_scalar_divider
@@ -324,7 +314,6 @@ begin
       READY => ready_scalar_exponentiator,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_exponentiator,
       DATA_A_IN => data_a_in_scalar_exponentiator,
       DATA_B_IN => data_b_in_scalar_exponentiator,
       DATA_OUT  => data_out_scalar_exponentiator

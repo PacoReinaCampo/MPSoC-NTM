@@ -141,7 +141,6 @@ module dnc_output_vector #(
   wire data_out_j_enable_matrix_product;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_product;
   wire [DATA_SIZE-1:0] size_a_i_in_matrix_product;
   wire [DATA_SIZE-1:0] size_a_j_in_matrix_product;
   wire [DATA_SIZE-1:0] size_b_i_in_matrix_product;
@@ -161,7 +160,6 @@ module dnc_output_vector #(
   wire data_out_scalar_enable_vector_summation;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_summation;
   wire [DATA_SIZE-1:0] size_in_vector_summation;
   wire [DATA_SIZE-1:0] length_in_vector_summation;
   wire [DATA_SIZE-1:0] data_in_vector_summation;
@@ -221,7 +219,6 @@ module dnc_output_vector #(
 
   // DATA
   // MATRIX PRODUCT
-  assign modulo_in_matrix_product   = FULL;
   assign size_a_i_in_matrix_product = SIZE_Y_IN;
   assign size_a_j_in_matrix_product = SIZE_R_IN;
   assign size_b_i_in_matrix_product = SIZE_Y_IN;
@@ -251,7 +248,6 @@ module dnc_output_vector #(
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_product),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_product),
     .SIZE_A_I_IN(size_a_i_in_matrix_product),
     .SIZE_A_J_IN(size_a_j_in_matrix_product),
     .SIZE_B_I_IN(size_b_i_in_matrix_product),
@@ -281,7 +277,6 @@ module dnc_output_vector #(
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_summation),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_summation),
     .SIZE_IN(size_in_vector_summation),
     .LENGTH_IN(length_in_vector_summation),
     .DATA_IN(data_in_vector_summation),

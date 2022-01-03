@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_integer_divider #(
+module ntm_matrix_integer_full_divider #(
   parameter DATA_SIZE=128,
   parameter CONTROL_SIZE=64
 )
@@ -63,8 +63,8 @@ module ntm_matrix_integer_divider #(
     input [DATA_SIZE-1:0] DATA_A_IN,
     input [DATA_SIZE-1:0] DATA_B_IN,
 
-    output reg [DATA_SIZE-1:0] DATA_OUT,
-    output reg [DATA_SIZE-1:0] REST_OUT
+    output reg [DATA_SIZE-1:0] DATA_INTEGER_OUT,
+    output reg [DATA_SIZE-1:0] DATA_FRACTIONAL_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -113,30 +113,30 @@ module ntm_matrix_integer_divider #(
 
   // DIVIDER
   // CONTROL
-  reg start_vector_divider;
-  wire ready_vector_divider;
-  reg data_a_in_enable_vector_divider;
-  reg data_b_in_enable_vector_divider;
-  wire data_out_enable_vector_divider;
+  reg start_vector_integer_full_divider;
+  wire ready_vector_integer_full_divider;
+  reg data_a_in_enable_vector_integer_full_divider;
+  reg data_b_in_enable_vector_integer_full_divider;
+  wire data_out_enable_vector_integer_full_divider;
 
   // DATA
-  wire [DATA_SIZE-1:0] rest_out_vector_divider;
-  reg [DATA_SIZE-1:0] size_in_vector_divider;
-  reg [DATA_SIZE-1:0] data_a_in_vector_divider;
-  reg [DATA_SIZE-1:0] data_b_in_vector_divider;
-  wire [DATA_SIZE-1:0] data_out_vector_divider;
+  wire [DATA_SIZE-1:0] rest_out_vector_integer_full_divider;
+  reg [DATA_SIZE-1:0] size_in_vector_integer_full_divider;
+  reg [DATA_SIZE-1:0] data_a_in_vector_integer_full_divider;
+  reg [DATA_SIZE-1:0] data_b_in_vector_integer_full_divider;
+  wire [DATA_SIZE-1:0] data_out_vector_integer_full_divider;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = DATA_A_IN / DATA_B_IN
+  // DATA_INTEGER_OUT = DATA_A_IN / DATA_B_IN
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      DATA_OUT <= ZERO_DATA;
+      DATA_INTEGER_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
@@ -168,32 +168,32 @@ module ntm_matrix_integer_divider #(
         INPUT_I_STATE : begin  // STEP 1
           if(DATA_A_IN_I_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_vector_divider <= DATA_A_IN;
+            data_a_in_vector_integer_full_divider <= DATA_A_IN;
 
             // Control Internal
-            data_a_in_enable_vector_divider <= 1'b1;
+            data_a_in_enable_vector_integer_full_divider <= 1'b1;
             data_a_in_i_divider_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_a_in_enable_vector_divider <= 1'b0;
+            data_a_in_enable_vector_integer_full_divider <= 1'b0;
           end
           if(DATA_B_IN_I_ENABLE == 1'b1) begin
             // Data Inputs
-            data_b_in_vector_divider <= DATA_B_IN;
+            data_b_in_vector_integer_full_divider <= DATA_B_IN;
 
             // Control Internal
-            data_b_in_enable_vector_divider <= 1'b1;
+            data_b_in_enable_vector_integer_full_divider <= 1'b1;
             data_b_in_i_divider_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_b_in_enable_vector_divider <= 1'b0;
+            data_b_in_enable_vector_integer_full_divider <= 1'b0;
           end
           if(data_a_in_i_divider_int == 1'b1 && data_b_in_i_divider_int == 1'b1) begin
             if(index_i_loop == ZERO_DATA) begin
               // Control Internal
-              start_vector_divider <= 1'b1;
+              start_vector_integer_full_divider <= 1'b1;
             end
 
             // FSM Control
@@ -206,36 +206,36 @@ module ntm_matrix_integer_divider #(
         INPUT_J_STATE : begin  // STEP 2
           if(DATA_A_IN_J_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_vector_divider <= DATA_A_IN;
+            data_a_in_vector_integer_full_divider <= DATA_A_IN;
 
             // Control Internal
-            data_a_in_enable_vector_divider <= 1'b1;
+            data_a_in_enable_vector_integer_full_divider <= 1'b1;
             data_a_in_j_divider_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_a_in_enable_vector_divider <= 1'b0;
+            data_a_in_enable_vector_integer_full_divider <= 1'b0;
           end
           if(DATA_B_IN_J_ENABLE == 1'b1) begin
             // Data Inputs
-            data_b_in_vector_divider <= DATA_B_IN;
+            data_b_in_vector_integer_full_divider <= DATA_B_IN;
 
             // Control Internal
-            data_b_in_enable_vector_divider <= 1'b1;
+            data_b_in_enable_vector_integer_full_divider <= 1'b1;
             data_b_in_j_divider_int <= 1'b1;
           end
           else begin
             // Control Internal
-            data_b_in_enable_vector_divider <= 1'b0;
+            data_b_in_enable_vector_integer_full_divider <= 1'b0;
           end
           if((data_a_in_j_divider_int == 1'b1 && data_b_in_j_divider_int == 1'b1)) begin
             if(index_j_loop == ZERO_DATA) begin
               // Control Internal
-              start_vector_divider <= 1'b1;
+              start_vector_integer_full_divider <= 1'b1;
             end
 
             // Data Inputs
-            size_in_vector_divider <= SIZE_J_IN;
+            size_in_vector_integer_full_divider <= SIZE_J_IN;
 
             // FSM Control
             divider_ctrl_fsm_int <= ENDER_STATE;
@@ -244,7 +244,7 @@ module ntm_matrix_integer_divider #(
           DATA_OUT_J_ENABLE <= 1'b0;
         end
         ENDER_STATE : begin  // STEP 3
-          if((ready_vector_divider == 1'b1)) begin
+          if((ready_vector_integer_full_divider == 1'b1)) begin
             if((index_i_loop == (SIZE_I_IN - ONE_CONTROL)) && (index_j_loop == (SIZE_J_IN - ONE_CONTROL))) begin
               // Control Outputs
               READY <= 1'b1;
@@ -276,11 +276,11 @@ module ntm_matrix_integer_divider #(
               divider_ctrl_fsm_int <= INPUT_J_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_vector_divider;
+            DATA_INTEGER_OUT <= data_out_vector_integer_full_divider;
           end
           else begin
             // Control Internal
-            start_vector_divider <= 1'b0;
+            start_vector_integer_full_divider <= 1'b0;
 
             data_a_in_i_divider_int <= 1'b0;
             data_a_in_j_divider_int <= 1'b0;
@@ -297,29 +297,29 @@ module ntm_matrix_integer_divider #(
   end
 
   // DIVIDER
-  ntm_vector_integer_divider #(
+  ntm_vector_integer_full_divider #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_divider(
+  vector_integer_full_divider(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_divider),
-    .READY(ready_vector_divider),
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_divider),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_divider),
-    .DATA_OUT_ENABLE(data_out_enable_vector_divider),
+    .START(start_vector_integer_full_divider),
+    .READY(ready_vector_integer_full_divider),
+    .DATA_A_IN_ENABLE(data_a_in_enable_vector_integer_full_divider),
+    .DATA_B_IN_ENABLE(data_b_in_enable_vector_integer_full_divider),
+    .DATA_OUT_ENABLE(data_out_enable_vector_integer_full_divider),
 
     // DATA
-    .SIZE_IN(size_in_vector_divider),
-    .DATA_A_IN(data_a_in_vector_divider),
-    .DATA_B_IN(data_b_in_vector_divider),
+    .SIZE_IN(size_in_vector_integer_full_divider),
+    .DATA_A_IN(data_a_in_vector_integer_full_divider),
+    .DATA_B_IN(data_b_in_vector_integer_full_divider),
 
-    .DATA_OUT(data_out_vector_divider),
-    .REST_OUT(rest_out_vector_divider)
+    .DATA_INTEGER_OUT(data_out_vector_integer_full_divider),
+    .DATA_FRACTIONAL_OUT(rest_out_vector_integer_full_divider)
   );
 
 endmodule

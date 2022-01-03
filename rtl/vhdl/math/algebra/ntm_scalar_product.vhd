@@ -124,7 +124,6 @@ architecture ntm_scalar_product_architecture of ntm_scalar_product is
   signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -135,7 +134,6 @@ architecture ntm_scalar_product_architecture of ntm_scalar_product is
   signal ready_scalar_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -168,7 +166,6 @@ begin
       data_b_in_multiplier_int <= '0';
 
       -- Data Internal
-      modulo_in_scalar_multiplier <= ZERO_DATA;
       data_a_in_scalar_multiplier <= ZERO_DATA;
       data_b_in_scalar_multiplier <= ZERO_DATA;
 
@@ -212,9 +209,6 @@ begin
 
             data_a_in_multiplier_int <= '0';
             data_b_in_multiplier_int <= '0';
-
-            -- Data Inputs
-            modulo_in_scalar_multiplier <= MODULO_IN;
 
             -- FSM Control
             multiplier_ctrl_fsm_int <= ENDER_STATE;
@@ -280,7 +274,6 @@ begin
       OPERATION => operation_scalar_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_adder,
       DATA_A_IN => data_a_in_scalar_adder,
       DATA_B_IN => data_b_in_scalar_adder,
       DATA_OUT  => data_out_scalar_adder
@@ -302,7 +295,6 @@ begin
       READY => ready_scalar_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_multiplier,
       DATA_A_IN => data_a_in_scalar_multiplier,
       DATA_B_IN => data_b_in_scalar_multiplier,
       DATA_OUT  => data_out_scalar_multiplier

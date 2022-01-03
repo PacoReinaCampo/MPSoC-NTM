@@ -117,7 +117,6 @@ module ntm_float_testbench;
   wire operation_scalar_adder;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_adder;
   wire [DATA_SIZE-1:0] data_a_in_scalar_adder;
   wire [DATA_SIZE-1:0] data_b_in_scalar_adder;
   wire [DATA_SIZE-1:0] data_out_scalar_adder;
@@ -128,7 +127,6 @@ module ntm_float_testbench;
   wire ready_scalar_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_multiplier;
   wire [DATA_SIZE-1:0] data_a_in_scalar_multiplier;
   wire [DATA_SIZE-1:0] data_b_in_scalar_multiplier;
   wire [DATA_SIZE-1:0] data_out_scalar_multiplier;
@@ -139,7 +137,6 @@ module ntm_float_testbench;
   wire ready_scalar_divider;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_divider;
   wire [DATA_SIZE-1:0] data_a_in_scalar_divider;
   wire [DATA_SIZE-1:0] data_b_in_scalar_divider;
   wire [DATA_SIZE-1:0] data_out_scalar_divider;
@@ -149,7 +146,6 @@ module ntm_float_testbench;
   wire ready_scalar_exponentiator;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_exponentiator;
   wire [DATA_SIZE-1:0] data_a_in_scalar_exponentiator;
   wire [DATA_SIZE-1:0] data_b_in_scalar_exponentiator;
   wire [DATA_SIZE-1:0] data_out_scalar_exponentiator;
@@ -170,7 +166,6 @@ module ntm_float_testbench;
   wire data_out_enable_vector_adder;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_adder;
   wire [DATA_SIZE-1:0] size_in_vector_adder;
   wire [DATA_SIZE-1:0] data_a_in_vector_adder;
   wire [DATA_SIZE-1:0] data_b_in_vector_adder;
@@ -186,7 +181,6 @@ module ntm_float_testbench;
   wire data_out_enable_vector_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_multiplier;
   wire [DATA_SIZE-1:0] size_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_a_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
@@ -202,7 +196,6 @@ module ntm_float_testbench;
   wire data_out_enable_vector_divider;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_divider;
   wire [DATA_SIZE-1:0] size_in_vector_divider;
   wire [DATA_SIZE-1:0] data_a_in_vector_divider;
   wire [DATA_SIZE-1:0] data_b_in_vector_divider;
@@ -217,7 +210,6 @@ module ntm_float_testbench;
   wire data_out_enable_vector_exponentiator;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_exponentiator;
   wire [DATA_SIZE-1:0] size_in_vector_exponentiator;
   wire [DATA_SIZE-1:0] data_a_in_vector_exponentiator;
   wire [DATA_SIZE-1:0] data_b_in_vector_exponentiator;
@@ -242,7 +234,6 @@ module ntm_float_testbench;
   wire data_out_j_enable_matrix_adder;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_adder;
   wire [DATA_SIZE-1:0] size_i_in_matrix_adder;
   wire [DATA_SIZE-1:0] size_j_in_matrix_adder;
   wire [DATA_SIZE-1:0] data_a_in_matrix_adder;
@@ -262,7 +253,6 @@ module ntm_float_testbench;
   wire data_out_j_enable_matrix_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_multiplier;
   wire [DATA_SIZE-1:0] size_i_in_matrix_multiplier;
   wire [DATA_SIZE-1:0] size_j_in_matrix_multiplier;
   wire [DATA_SIZE-1:0] data_a_in_matrix_multiplier;
@@ -282,7 +272,6 @@ module ntm_float_testbench;
   wire data_out_j_enable_matrix_divider;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_divider;
   wire [DATA_SIZE-1:0] size_i_in_matrix_divider;
   wire [DATA_SIZE-1:0] size_j_in_matrix_divider;
   wire [DATA_SIZE-1:0] data_a_in_matrix_divider;
@@ -301,7 +290,6 @@ module ntm_float_testbench;
   wire data_out_j_enable_matrix_exponentiator;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_exponentiator;
   wire [DATA_SIZE-1:0] size_i_in_matrix_exponentiator;
   wire [DATA_SIZE-1:0] size_j_in_matrix_exponentiator;
   wire [DATA_SIZE-1:0] data_a_in_matrix_exponentiator;
@@ -354,7 +342,7 @@ module ntm_float_testbench;
     .STIMULUS_NTM_MATRIX_DIVIDER_CASE_0(STIMULUS_NTM_MATRIX_DIVIDER_CASE_0),
     .STIMULUS_NTM_MATRIX_ADDER_CASE_1(STIMULUS_NTM_MATRIX_ADDER_CASE_1),
     .STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_1(STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_1),
-    .STIMULUS_NTM_MATRIX_DIVIDER_CASE_1(STIMULUS_NTM_MATRIX_DIVIDER_CASE_1),
+    .STIMULUS_NTM_MATRIX_DIVIDER_CASE_1(STIMULUS_NTM_MATRIX_DIVIDER_CASE_1)
   )
   float_stimulus(
     // GLOBAL
@@ -533,7 +521,6 @@ module ntm_float_testbench;
     .OPERATION(operation_scalar_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_adder),
     .DATA_A_IN(data_a_in_scalar_adder),
     .DATA_B_IN(data_b_in_scalar_adder),
     .DATA_OUT(data_out_scalar_adder)
@@ -554,7 +541,6 @@ module ntm_float_testbench;
     .READY(ready_scalar_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_multiplier),
     .DATA_A_IN(data_a_in_scalar_multiplier),
     .DATA_B_IN(data_b_in_scalar_multiplier),
     .DATA_OUT(data_out_scalar_multiplier)
@@ -575,7 +561,6 @@ module ntm_float_testbench;
     .READY(ready_scalar_divider),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_divider),
     .DATA_A_IN(data_a_in_scalar_divider),
     .DATA_B_IN(data_b_in_scalar_divider),
     .DATA_OUT(data_out_scalar_divider)
@@ -595,7 +580,6 @@ module ntm_float_testbench;
     .READY(ready_scalar_exponentiator),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_exponentiator),
     .DATA_A_IN(data_a_in_scalar_exponentiator),
     .DATA_B_IN(data_b_in_scalar_exponentiator),
     .DATA_OUT(data_out_scalar_exponentiator)
@@ -626,7 +610,6 @@ module ntm_float_testbench;
     .DATA_OUT_ENABLE(data_out_enable_vector_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_adder),
     .SIZE_IN(size_in_vector_adder),
     .DATA_A_IN(data_a_in_vector_adder),
     .DATA_B_IN(data_b_in_vector_adder),
@@ -652,7 +635,6 @@ module ntm_float_testbench;
     .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_multiplier),
     .SIZE_IN(size_in_vector_multiplier),
     .DATA_A_IN(data_a_in_vector_multiplier),
     .DATA_B_IN(data_b_in_vector_multiplier),
@@ -678,7 +660,6 @@ module ntm_float_testbench;
     .DATA_OUT_ENABLE(data_out_enable_vector_divider),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_divider),
     .SIZE_IN(size_in_vector_divider),
     .DATA_A_IN(data_a_in_vector_divider),
     .DATA_B_IN(data_b_in_vector_divider),
@@ -703,7 +684,6 @@ module ntm_float_testbench;
     .DATA_OUT_ENABLE(data_out_enable_vector_exponentiator),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_exponentiator),
     .SIZE_IN(size_in_vector_exponentiator),
     .DATA_A_IN(data_a_in_vector_exponentiator),
     .DATA_B_IN(data_b_in_vector_exponentiator),
@@ -738,7 +718,6 @@ module ntm_float_testbench;
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_adder),
     .SIZE_I_IN(size_i_in_matrix_adder),
     .SIZE_J_IN(size_j_in_matrix_adder),
     .DATA_A_IN(data_a_in_matrix_adder),
@@ -768,7 +747,6 @@ module ntm_float_testbench;
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_multiplier),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_multiplier),
     .SIZE_I_IN(size_i_in_matrix_multiplier),
     .SIZE_J_IN(size_j_in_matrix_multiplier),
     .DATA_A_IN(data_a_in_matrix_multiplier),
@@ -798,7 +776,6 @@ module ntm_float_testbench;
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_divider),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_divider),
     .SIZE_I_IN(size_i_in_matrix_divider),
     .SIZE_J_IN(size_j_in_matrix_divider),
     .DATA_A_IN(data_a_in_matrix_divider),
@@ -827,7 +804,6 @@ module ntm_float_testbench;
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_exponentiator),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_exponentiator),
     .SIZE_I_IN(size_i_in_matrix_exponentiator),
     .SIZE_J_IN(size_j_in_matrix_exponentiator),
     .DATA_A_IN(data_a_in_matrix_exponentiator),

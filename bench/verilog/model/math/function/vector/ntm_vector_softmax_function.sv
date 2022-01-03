@@ -57,7 +57,6 @@ module ntm_vector_softmax_function #(
     output reg DATA_OUT_SCALAR_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] SIZE_IN,
     input [DATA_SIZE-1:0] LENGTH_IN,
     input [DATA_SIZE-1:0] DATA_IN,
@@ -112,7 +111,6 @@ module ntm_vector_softmax_function #(
   wire data_out_enable_scalar_softmax;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_scalar_softmax;
   wire [DATA_SIZE-1:0] size_in_scalar_softmax;
   reg [DATA_SIZE-1:0] length_in_scalar_softmax;
   reg [DATA_SIZE-1:0] data_in_scalar_softmax;
@@ -153,7 +151,6 @@ module ntm_vector_softmax_function #(
         INPUT_VECTOR_STATE : begin  // STEP 1
           if(DATA_IN_VECTOR_ENABLE == 1'b1) begin
             // Data Inputs
-            modulo_in_scalar_softmax <= MODULO_IN;
             data_in_scalar_softmax <= DATA_IN;
 
             if(index_vector_loop == ZERO_DATA) begin
@@ -178,7 +175,6 @@ module ntm_vector_softmax_function #(
         INPUT_SCALAR_STATE : begin  // STEP 2
           if(DATA_IN_SCALAR_ENABLE == 1'b1) begin
             // Data Inputs
-            modulo_in_scalar_softmax <= MODULO_IN;
             length_in_scalar_softmax <= LENGTH_IN;
             data_in_scalar_softmax <= DATA_IN;
 
@@ -266,7 +262,6 @@ module ntm_vector_softmax_function #(
     .DATA_OUT_ENABLE(data_out_enable_scalar_softmax),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_softmax),
     .LENGTH_IN(length_in_scalar_softmax),
     .DATA_IN(data_in_scalar_softmax),
     .DATA_OUT(data_out_scalar_softmax)

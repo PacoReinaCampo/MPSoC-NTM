@@ -150,7 +150,6 @@ architecture ntm_matrix_product_architecture of ntm_matrix_product is
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -170,7 +169,6 @@ architecture ntm_matrix_product_architecture of ntm_matrix_product is
   signal data_out_j_enable_matrix_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -219,7 +217,6 @@ begin
       data_b_in_k_multiplier_int <= '0';
 
       -- Data Internal
-      modulo_in_matrix_multiplier <= ZERO_DATA;
       size_i_in_matrix_multiplier <= ZERO_CONTROL;
       size_j_in_matrix_multiplier <= ZERO_CONTROL;
       data_a_in_matrix_multiplier <= ZERO_DATA;
@@ -289,7 +286,6 @@ begin
 
           if (data_a_in_i_multiplier_int = '1' and data_a_in_j_multiplier_int = '1' and data_a_in_k_multiplier_int = '1' and data_b_in_i_multiplier_int = '1' and data_b_in_j_multiplier_int = '1' and data_b_in_k_multiplier_int = '1') then
             -- Data Inputs
-            modulo_in_matrix_multiplier <= MODULO_IN;
             size_i_in_matrix_multiplier <= SIZE_B_J_IN;
             size_j_in_matrix_multiplier <= SIZE_B_K_IN;
 
@@ -540,7 +536,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_adder,
       SIZE_IN   => size_in_vector_adder,
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
@@ -571,7 +566,6 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_matrix_multiplier,
       SIZE_I_IN => size_i_in_matrix_multiplier,
       SIZE_J_IN => size_j_in_matrix_multiplier,
       DATA_A_IN => data_a_in_matrix_multiplier,

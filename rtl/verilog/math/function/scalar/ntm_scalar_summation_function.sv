@@ -54,7 +54,6 @@ module ntm_scalar_summation_function #(
     output reg DATA_OUT_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] LENGTH_IN,
     input [DATA_SIZE-1:0] DATA_IN,
     output reg [DATA_SIZE-1:0] DATA_OUT
@@ -105,7 +104,6 @@ module ntm_scalar_summation_function #(
   reg operation_scalar_adder;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_scalar_adder;
   reg [DATA_SIZE-1:0] data_a_in_scalar_adder;
   reg [DATA_SIZE-1:0] data_b_in_scalar_adder;
   wire [DATA_SIZE-1:0] data_out_scalar_adder;
@@ -143,7 +141,6 @@ module ntm_scalar_summation_function #(
         INPUT_STATE : begin  // STEP 1
           if(DATA_IN_ENABLE == 1'b1) begin
             // Data Inputs
-            modulo_in_scalar_adder <= MODULO_IN;
 
             data_a_in_scalar_adder <= DATA_IN;
             data_b_in_scalar_adder <= data_out_scalar_adder;
@@ -210,7 +207,6 @@ module ntm_scalar_summation_function #(
     .OPERATION(operation_scalar_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_adder),
     .DATA_A_IN(data_a_in_scalar_adder),
     .DATA_B_IN(data_b_in_scalar_adder),
     .DATA_OUT(data_out_scalar_adder)

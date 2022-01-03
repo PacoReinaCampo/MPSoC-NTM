@@ -161,7 +161,6 @@ module dnc_read_interface_vector #(
   wire data_out_j_enable_matrix_product;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_matrix_product;
   reg [DATA_SIZE-1:0] size_a_i_in_matrix_product;
   reg [DATA_SIZE-1:0] size_a_j_in_matrix_product;
   reg [DATA_SIZE-1:0] size_b_i_in_matrix_product;
@@ -186,7 +185,6 @@ module dnc_read_interface_vector #(
   wire data_out_k_enable_tensor_product;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_tensor_product;
   reg [DATA_SIZE-1:0] size_a_i_in_tensor_product;
   reg [DATA_SIZE-1:0] size_a_j_in_tensor_product;
   reg [DATA_SIZE-1:0] size_a_k_in_tensor_product;
@@ -230,7 +228,6 @@ module dnc_read_interface_vector #(
         TENSOR_PRODUCT_STATE : begin  // STEP 1
 
           // Data Inputs
-          modulo_in_tensor_product   <= FULL;
           size_a_i_in_tensor_product <= SIZE_R_IN;
           size_a_j_in_tensor_product <= SIZE_L_IN;
           size_a_k_in_tensor_product <= SIZE_W_IN;
@@ -247,7 +244,6 @@ module dnc_read_interface_vector #(
         MATRIX_FIRST_PRODUCT_STATE : begin  // STEP 2
 
           // Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_R_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
           size_b_i_in_matrix_product <= SIZE_L_IN;
@@ -262,7 +258,6 @@ module dnc_read_interface_vector #(
         MATRIX_SECOND_PRODUCT_STATE : begin  // STEP 3
 
           // Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_R_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
           size_b_i_in_matrix_product <= SIZE_L_IN;
@@ -277,7 +272,6 @@ module dnc_read_interface_vector #(
         MATRIX_THIRD_PRODUCT_STATE : begin  // STEP 4
 
           // Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_R_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
           size_b_i_in_matrix_product <= SIZE_L_IN;
@@ -318,7 +312,6 @@ module dnc_read_interface_vector #(
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_product),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_product),
     .SIZE_A_I_IN(size_a_i_in_matrix_product),
     .SIZE_A_J_IN(size_a_j_in_matrix_product),
     .SIZE_B_I_IN(size_b_i_in_matrix_product),
@@ -353,7 +346,6 @@ module dnc_read_interface_vector #(
     .DATA_OUT_K_ENABLE(data_out_k_enable_tensor_product),
 
     // DATA
-    .MODULO_IN(modulo_in_tensor_product),
     .SIZE_A_I_IN(size_a_i_in_tensor_product),
     .SIZE_A_J_IN(size_a_j_in_tensor_product),
     .SIZE_A_K_IN(size_a_k_in_tensor_product),

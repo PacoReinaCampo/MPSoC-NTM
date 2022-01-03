@@ -94,7 +94,6 @@ module dnc_read_strengths #(
   wire data_out_enable_vector_oneplus;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_oneplus;
   wire [DATA_SIZE-1:0] size_in_vector_oneplus;
   wire [DATA_SIZE-1:0] data_in_vector_oneplus;
   wire [DATA_SIZE-1:0] data_out_vector_oneplus;
@@ -113,7 +112,6 @@ module dnc_read_strengths #(
   assign BETA_OUT_ENABLE = data_out_enable_vector_oneplus;
 
   // DATA
-  assign modulo_in_vector_oneplus = FULL;
   assign size_in_vector_oneplus = SIZE_R_IN;
   assign data_in_vector_oneplus = BETA_IN;
   assign BETA_OUT = data_out_vector_oneplus;
@@ -136,7 +134,6 @@ module dnc_read_strengths #(
     .DATA_OUT_ENABLE(data_out_enable_vector_oneplus),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_oneplus),
     .SIZE_IN(size_in_vector_oneplus),
     .DATA_IN(data_in_vector_oneplus),
     .DATA_OUT(data_out_vector_oneplus)

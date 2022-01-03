@@ -139,7 +139,6 @@ architecture ntm_state_gate_vector_architecture of ntm_state_gate_vector is
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -156,7 +155,6 @@ architecture ntm_state_gate_vector_architecture of ntm_state_gate_vector is
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -217,7 +215,6 @@ begin
           data_b_in_enable_vector_multiplier <= S_IN_ENABLE;
 
           -- Data Inputs
-          modulo_in_vector_multiplier <= FULL;
           size_in_vector_multiplier   <= SIZE_L_IN;
           data_a_in_vector_multiplier <= F_IN;
           data_b_in_vector_multiplier <= S_IN;
@@ -245,7 +242,6 @@ begin
           data_b_in_enable_vector_multiplier <= A_IN_ENABLE;
 
           -- Data Inputs
-          modulo_in_vector_multiplier <= FULL;
           size_in_vector_multiplier   <= SIZE_L_IN;
           data_a_in_vector_multiplier <= I_IN;
           data_b_in_vector_multiplier <= A_IN;
@@ -272,7 +268,6 @@ begin
           data_b_in_enable_vector_adder <= data_out_enable_vector_multiplier;
 
           -- Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_int_vector_multiplier;
           data_b_in_vector_adder <= data_out_vector_multiplier;
@@ -337,7 +332,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_adder,
       SIZE_IN   => size_in_vector_adder,
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
@@ -365,7 +359,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_multiplier,
       SIZE_IN   => size_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,

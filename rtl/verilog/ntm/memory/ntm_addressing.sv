@@ -169,7 +169,6 @@ module ntm_addressing #(
   wire data_out_enable_vector_adder;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_adder;
   reg [DATA_SIZE-1:0] size_in_vector_adder;
   reg [DATA_SIZE-1:0] data_a_in_vector_adder;
   reg [DATA_SIZE-1:0] data_b_in_vector_adder;
@@ -185,7 +184,6 @@ module ntm_addressing #(
   wire data_out_enable_vector_multiplier;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_multiplier;
   reg [DATA_SIZE-1:0] size_in_vector_multiplier;
   reg [DATA_SIZE-1:0] data_a_in_vector_multiplier;
   reg [DATA_SIZE-1:0] data_b_in_vector_multiplier;
@@ -201,7 +199,6 @@ module ntm_addressing #(
   wire data_out_enable_vector_divider;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_divider;
   reg [DATA_SIZE-1:0] size_in_vector_divider;
   reg [DATA_SIZE-1:0] data_a_in_vector_divider;
   reg [DATA_SIZE-1:0] data_b_in_vector_divider;
@@ -217,7 +214,6 @@ module ntm_addressing #(
   wire data_out_enable_vector_exponentiator;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_exponentiator;
   reg [DATA_SIZE-1:0] size_in_vector_exponentiator;
   reg [DATA_SIZE-1:0] data_a_in_vector_exponentiator;
   reg [DATA_SIZE-1:0] data_b_in_vector_exponentiator;
@@ -234,7 +230,6 @@ module ntm_addressing #(
   wire data_out_scalar_enable_vector_summation;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_summation;
   reg [DATA_SIZE-1:0] size_in_vector_summation;
   reg [DATA_SIZE-1:0] length_in_vector_summation;
   reg [DATA_SIZE-1:0] data_in_vector_summation;
@@ -253,7 +248,6 @@ module ntm_addressing #(
   wire data_out_scalar_enable_vector_convolution;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_convolution;
   reg [DATA_SIZE-1:0] size_in_vector_convolution;
   reg [DATA_SIZE-1:0] length_in_vector_convolution;
   reg [DATA_SIZE-1:0] data_a_in_vector_convolution;
@@ -309,7 +303,6 @@ module ntm_addressing #(
             VECTOR_FIRST_MULTIPLIER_INTERPOLATION_STATE : begin  // STEP 1
 
               // Data Inputs
-              modulo_in_vector_multiplier <= FULL;
               size_in_vector_multiplier   <= FULL;
               data_a_in_vector_multiplier <= FULL;
               data_b_in_vector_multiplier <= FULL;
@@ -318,7 +311,6 @@ module ntm_addressing #(
             VECTOR_FIRST_ADDER_INTERPOLATION_STATE : begin  // STEP 2
 
               // Data Inputs
-              modulo_in_vector_adder <= FULL;
               size_in_vector_adder   <= FULL;
               data_a_in_vector_adder <= FULL;
               data_b_in_vector_adder <= FULL;
@@ -327,7 +319,6 @@ module ntm_addressing #(
             VECTOR_SECOND_MULTIPLIER_INTERPOLATION_STATE : begin  // STEP 3
 
               // Data Inputs
-              modulo_in_vector_multiplier <= FULL;
               size_in_vector_multiplier   <= FULL;
               data_a_in_vector_multiplier <= FULL;
               data_b_in_vector_multiplier <= FULL;
@@ -336,7 +327,6 @@ module ntm_addressing #(
             VECTOR_SECOND_ADDER_INTERPOLATION_STATE : begin  // STEP 4
 
               // Data Inputs
-              modulo_in_vector_adder <= FULL;
               size_in_vector_adder   <= FULL;
               data_a_in_vector_adder <= FULL;
               data_b_in_vector_adder <= FULL;
@@ -351,7 +341,6 @@ module ntm_addressing #(
         VECTOR_CONVOLUTION_STATE : begin  // STEP 3
 
           // Data Inputs
-          modulo_in_vector_convolution <= FULL;
           size_in_vector_convolution   <= FULL;
           length_in_vector_convolution <= FULL;
           data_a_in_vector_convolution <= FULL;
@@ -367,7 +356,6 @@ module ntm_addressing #(
             VECTOR_EXPONE_CONTROLNTIATOR_SHARPENING_STATE : begin  // STEP 1
 
               // Data Inputs
-              modulo_in_vector_exponentiator <= FULL;
               size_in_vector_exponentiator   <= FULL;
               data_a_in_vector_exponentiator <= FULL;
               data_b_in_vector_exponentiator <= FULL;
@@ -376,7 +364,6 @@ module ntm_addressing #(
             VECTOR_SUMMATION_SHARPENING_STATE : begin  // STEP 2
 
               // Data Inputs
-              modulo_in_vector_summation <= FULL;
               size_in_vector_summation   <= FULL;
               length_in_vector_summation <= FULL;
               data_in_vector_summation   <= FULL;
@@ -385,7 +372,6 @@ module ntm_addressing #(
             VECTOR_DIVIDER_SHARPENING_STATE : begin  // STEP 3
 
               // Data Inputs
-              modulo_in_vector_divider <= FULL;
               size_in_vector_divider   <= FULL;
               data_a_in_vector_divider <= FULL;
               data_b_in_vector_divider <= FULL;
@@ -462,7 +448,6 @@ module ntm_addressing #(
     .DATA_OUT_ENABLE(data_out_enable_vector_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_adder),
     .SIZE_IN(size_in_vector_adder),
     .DATA_A_IN(data_a_in_vector_adder),
     .DATA_B_IN(data_b_in_vector_adder),
@@ -488,7 +473,6 @@ module ntm_addressing #(
     .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_multiplier),
     .SIZE_IN(size_in_vector_multiplier),
     .DATA_A_IN(data_a_in_vector_multiplier),
     .DATA_B_IN(data_b_in_vector_multiplier),
@@ -514,7 +498,6 @@ module ntm_addressing #(
     .DATA_OUT_ENABLE(data_out_enable_vector_divider),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_divider),
     .SIZE_IN(size_in_vector_divider),
     .DATA_A_IN(data_a_in_vector_divider),
     .DATA_B_IN(data_b_in_vector_divider),
@@ -540,7 +523,6 @@ module ntm_addressing #(
     .DATA_OUT_ENABLE(data_out_enable_vector_exponentiator),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_exponentiator),
     .SIZE_IN(size_in_vector_exponentiator),
     .DATA_A_IN(data_a_in_vector_exponentiator),
     .DATA_B_IN(data_b_in_vector_exponentiator),
@@ -567,7 +549,6 @@ module ntm_addressing #(
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_summation),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_summation),
     .SIZE_IN(size_in_vector_summation),
     .LENGTH_IN(length_in_vector_summation),
     .DATA_IN(data_in_vector_summation),
@@ -596,7 +577,6 @@ module ntm_addressing #(
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_convolution),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_convolution),
     .SIZE_IN(size_in_vector_convolution),
     .LENGTH_IN(length_in_vector_convolution),
     .DATA_A_IN(data_a_in_vector_convolution),

@@ -67,7 +67,6 @@ entity ntm_vector_convolution_function is
     DATA_OUT_SCALAR_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -136,7 +135,6 @@ architecture ntm_vector_convolution_function_architecture of ntm_vector_convolut
   signal data_out_enable_scalar_convolution_function : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_convolution_function : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_scalar_convolution_function : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_scalar_convolution_function : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_convolution_function : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -178,7 +176,6 @@ begin
       data_b_in_scalar_convolution_function_int <= '0';
 
       -- Data Internal
-      modulo_in_scalar_convolution_function <= ZERO_DATA;
       length_in_scalar_convolution_function <= ZERO_CONTROL;
       data_a_in_scalar_convolution_function <= ZERO_DATA;
       data_b_in_scalar_convolution_function <= ZERO_DATA;
@@ -238,7 +235,6 @@ begin
 
           if (data_a_in_vector_convolution_function_int = '1' and data_a_in_scalar_convolution_function_int = '1' and data_b_in_vector_convolution_function_int = '1' and data_b_in_scalar_convolution_function_int = '1') then
             -- Data Inputs
-            modulo_in_scalar_convolution_function <= MODULO_IN;
             length_in_scalar_convolution_function <= LENGTH_IN;
 
             -- Control Internal
@@ -391,7 +387,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_scalar_convolution_function,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_convolution_function,
       LENGTH_IN => length_in_scalar_convolution_function,
       DATA_A_IN => data_a_in_scalar_convolution_function,
       DATA_B_IN => data_b_in_scalar_convolution_function,

@@ -131,7 +131,6 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -148,7 +147,6 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -166,7 +164,6 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
   signal data_out_scalar_enable_vector_multiplication : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_vector_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_in_vector_multiplication   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -335,19 +332,16 @@ begin
 
   -- DATA
   -- VECTOR ADDER
-  modulo_in_vector_adder <= FULL;
   size_in_vector_adder   <= SIZE_N_IN;
   data_a_in_vector_adder <= ONE_DATA;
   data_b_in_vector_adder <= phi_out_vector_sort;
 
   -- VECTOR MULTIPLICATION
-  modulo_in_vector_multiplication <= FULL;
   length_in_vector_multiplication <= SIZE_N_IN;
   size_in_vector_multiplication   <= SIZE_N_IN;
   data_in_vector_multiplication   <= phi_out_vector_sort;
 
   -- VECTOR MULTIPLIER
-  modulo_in_vector_multiplier <= FULL;
   size_in_vector_multiplier   <= SIZE_N_IN;
   data_a_in_vector_multiplier <= data_out_vector_adder;
   data_b_in_vector_multiplier <= data_out_vector_multiplication;
@@ -375,7 +369,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_adder,
       SIZE_IN   => size_in_vector_adder,
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
@@ -403,7 +396,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_multiplier,
       SIZE_IN   => size_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
@@ -432,7 +424,6 @@ begin
       DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_multiplication,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_multiplication,
       SIZE_IN   => size_in_vector_multiplication,
       LENGTH_IN => length_in_vector_multiplication,
       DATA_IN   => data_in_vector_multiplication,

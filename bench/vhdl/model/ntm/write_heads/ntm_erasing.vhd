@@ -137,7 +137,6 @@ architecture ntm_erasing_architecture of ntm_erasing is
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -154,7 +153,6 @@ architecture ntm_erasing_architecture of ntm_erasing is
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -174,7 +172,6 @@ architecture ntm_erasing_architecture of ntm_erasing is
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -336,19 +333,16 @@ begin
 
   -- DATA
   -- VECTOR MULTIPLIER
-  modulo_in_vector_multiplier <= FULL;
   size_in_vector_multiplier   <= SIZE_W_IN;
   data_a_in_vector_multiplier <= W_IN;
   data_b_in_vector_multiplier <= E_IN;
 
   -- VECTOR ADDER
-  modulo_in_vector_adder <= FULL;
   size_in_vector_adder   <= SIZE_W_IN;
   data_a_in_vector_adder <= ONE_DATA;
   data_b_in_vector_adder <= data_out_vector_adder;
 
   -- MATRIX PRODUCT
-  modulo_in_matrix_product   <= FULL;
   size_a_i_in_matrix_product <= SIZE_N_IN;
   size_a_j_in_matrix_product <= SIZE_W_IN;
   size_b_i_in_matrix_product <= SIZE_W_IN;
@@ -379,7 +373,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_adder,
       SIZE_IN   => size_in_vector_adder,
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
@@ -407,7 +400,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_multiplier,
       SIZE_IN   => size_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
@@ -438,7 +430,6 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MODULO_IN   => modulo_in_matrix_product,
       SIZE_A_I_IN => size_a_i_in_matrix_product,
       SIZE_A_J_IN => size_a_j_in_matrix_product,
       SIZE_B_I_IN => size_b_i_in_matrix_product,

@@ -57,7 +57,6 @@ module ntm_vector_adder #(
     output reg DATA_OUT_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] SIZE_IN,
     input [DATA_SIZE-1:0] DATA_A_IN,
     input [DATA_SIZE-1:0] DATA_B_IN,
@@ -112,7 +111,6 @@ module ntm_vector_adder #(
   reg operation_scalar_adder;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_scalar_adder;
   reg [DATA_SIZE-1:0] data_a_in_scalar_adder;
   reg [DATA_SIZE-1:0] data_b_in_scalar_adder;
   wire [DATA_SIZE-1:0] data_out_scalar_adder;
@@ -176,7 +174,6 @@ module ntm_vector_adder #(
             end
             operation_scalar_adder <= OPERATION;
             // Data Inputs
-            modulo_in_scalar_adder <= MODULO_IN;
 
             // FSM Control
             adder_ctrl_fsm_int <= ENDER_STATE;
@@ -239,7 +236,6 @@ module ntm_vector_adder #(
     .OPERATION(operation_scalar_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_adder),
     .DATA_A_IN(data_a_in_scalar_adder),
     .DATA_B_IN(data_b_in_scalar_adder),
     .DATA_OUT(data_out_scalar_adder)

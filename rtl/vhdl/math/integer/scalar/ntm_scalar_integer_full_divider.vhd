@@ -192,9 +192,6 @@ begin
             -- FSM Control
             divider_ctrl_fsm_int <= ENDER_STATE;
           else
-            -- Data Internal
-            divider_fractional_int <= std_logic_vector(unsigned(divider_fractional_int) + unsigned(ONE_DATA));
-
             -- Control Internal
             index_fractional_loop <= std_logic_vector(unsigned(index_fractional_loop) - unsigned(DATA_B_IN));
           end if;
@@ -212,6 +209,9 @@ begin
             -- FSM Control
             divider_ctrl_fsm_int <= STARTER_STATE;
           else
+            -- Data Internal
+            divider_fractional_int <= std_logic_vector(unsigned(divider_fractional_int) + unsigned(ONE_DATA));
+
             -- Control Internal
             index_fractional_loop <= std_logic_vector(unsigned(index_fractional_loop) sll 1);
 

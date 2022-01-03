@@ -84,7 +84,6 @@ module ntm_algebra_stimulus #(
     output MATRIX_PRODUCT_DATA_OUT_J_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] MATRIX_PRODUCT_MODULO_IN,
     input [DATA_SIZE-1:0] MATRIX_PRODUCT_SIZE_A_I_IN,
     input [DATA_SIZE-1:0] MATRIX_PRODUCT_SIZE_A_J_IN,
     input [DATA_SIZE-1:0] MATRIX_PRODUCT_SIZE_B_I_IN,
@@ -107,7 +106,6 @@ module ntm_algebra_stimulus #(
     output TENSOR_TRANSPOSE_DATA_OUT_K_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] TENSOR_TRANSPOSE_MODULO_IN,
     input [DATA_SIZE-1:0] TENSOR_TRANSPOSE_SIZE_I_IN,
     input [DATA_SIZE-1:0] TENSOR_TRANSPOSE_SIZE_J_IN,
     input [DATA_SIZE-1:0] TENSOR_TRANSPOSE_SIZE_K_IN,
@@ -125,7 +123,6 @@ module ntm_algebra_stimulus #(
     output MATRIX_TRANSPOSE_DATA_OUT_J_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] MATRIX_TRANSPOSE_MODULO_IN,
     input [DATA_SIZE-1:0] MATRIX_TRANSPOSE_SIZE_I_IN,
     input [DATA_SIZE-1:0] MATRIX_TRANSPOSE_SIZE_J_IN,
     input [DATA_SIZE-1:0] MATRIX_TRANSPOSE_DATA_IN,
@@ -141,7 +138,6 @@ module ntm_algebra_stimulus #(
     output SCALAR_PRODUCT_DATA_OUT_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] SCALAR_PRODUCT_MODULO_IN,
     input [DATA_SIZE-1:0] SCALAR_PRODUCT_LENGTH_IN,
     input [DATA_SIZE-1:0] SCALAR_PRODUCT_DATA_A_IN,
     input [DATA_SIZE-1:0] SCALAR_PRODUCT_DATA_B_IN,
@@ -163,7 +159,6 @@ module ntm_algebra_stimulus #(
     output TENSOR_PRODUCT_DATA_OUT_K_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] TENSOR_PRODUCT_MODULO_IN,
     input [DATA_SIZE-1:0] TENSOR_PRODUCT_SIZE_A_I_IN,
     input [DATA_SIZE-1:0] TENSOR_PRODUCT_SIZE_A_J_IN,
     input [DATA_SIZE-1:0] TENSOR_PRODUCT_SIZE_A_K_IN,

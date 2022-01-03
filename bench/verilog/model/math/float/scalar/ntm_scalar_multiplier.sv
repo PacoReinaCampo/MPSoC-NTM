@@ -51,7 +51,6 @@ module ntm_scalar_multiplier #(
     output reg READY,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] DATA_A_IN,
     input [DATA_SIZE-1:0] DATA_B_IN,
     output reg [DATA_SIZE-1:0] DATA_OUT
@@ -106,105 +105,5 @@ module ntm_scalar_multiplier #(
   // DATA_OUT = DATA_A_IN · DATA_B_IN = M_A_IN · M_B_IN · 2^(E_A_IN + E_B_IN)
 
   // CONTROL
-  always @(posedge CLK or posedge RST) begin
-    if(RST == 1'b0) begin
-      // Data Outputs
-      DATA_OUT <= ZERO_DATA;
-
-      // Control Outputs
-      READY <= 1'b0;
-
-      // Assignation
-      u_int <= ZERO_DATA;
-      v_int <= ZERO_DATA;
-
-      multiplier_int <= ZERO_DATA;
-    end
-    else begin
-      case(multiplier_ctrl_fsm_int)
-        STARTER_STATE : begin  // STEP 0
-          // Control Outputs
-          READY <= 1'b0;
-
-          if(START == 1'b1) begin
-            // Assignation
-            u_int <= {1'b0,DATA_A_IN};
-            v_int <= {1'b0,DATA_B_IN};
-
-            if(DATA_A_IN[0] == 1'b1) begin
-              multiplier_int <= {1'b0,DATA_B_IN};
-            end
-            else begin
-              multiplier_int <= ZERO_DATA;
-            end
-
-            // FSM Control
-            multiplier_ctrl_fsm_int <= SET_DATA_B_STATE;
-          end
-        end
-        SET_DATA_B_STATE : begin  // STEP 1
-          // Assignation
-          u_int <= u_int;
-          v_int <= v_int;
-
-          // FSM Control
-          if(v_int < {1'b0,MODULO_IN}) begin
-            multiplier_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
-          end
-          else begin
-            multiplier_ctrl_fsm_int <= REDUCE_DATA_B_STATE;
-          end
-        end
-        REDUCE_DATA_B_STATE : begin  // STEP 2
-          if(v_int < {1'b0,MODULO_IN}) begin
-            // FSM Control
-            multiplier_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
-          end
-          else begin
-            // Assignation
-            v_int <= (v_int - {1'b0,MODULO_IN});
-          end
-        end
-        SET_PRODUCT_OUT_STATE : begin  // STEP 3
-          // Assignation
-          if(u_int[0] == 1'b1) begin
-            if((multiplier_int + v_int) < {1'b0,MODULO_IN}) begin
-              multiplier_int <= (multiplier_int + v_int);
-            end
-            else begin
-              multiplier_int <= (multiplier_int + v_int - {1'b0,MODULO_IN});
-            end
-          end
-          else begin
-            if(multiplier_int >= {1'b0,MODULO_IN}) begin
-              multiplier_int <= (multiplier_int - MODULO_IN);
-            end
-          end
-          // FSM Control
-          multiplier_ctrl_fsm_int <= ENDER_STATE;
-        end
-        ENDER_STATE : begin  // STEP 4
-          if(u_int == {1'b0,ONE_CONTROL}) begin
-            // Data Outputs
-            DATA_OUT <= multiplier_int[DATA_SIZE-1:0];
-
-            // Control Outputs
-            READY <= 1'b1;
-
-            // FSM Control
-            multiplier_ctrl_fsm_int <= STARTER_STATE;
-          end
-          else begin
-            // FSM Control
-            multiplier_ctrl_fsm_int <= SET_DATA_B_STATE;
-          end
-        end
-        default : begin
-          // FSM Control
-          multiplier_ctrl_fsm_int <= STARTER_STATE;
-        end
-      endcase
-    end
-  end
 
 endmodule

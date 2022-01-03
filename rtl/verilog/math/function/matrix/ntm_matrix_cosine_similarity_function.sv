@@ -61,7 +61,6 @@ module ntm_matrix_cosine_similarity_function #(
     output reg DATA_OUT_SCALAR_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] SIZE_I_IN,
     input [DATA_SIZE-1:0] SIZE_J_IN,
     input [DATA_SIZE-1:0] LENGTH_IN,
@@ -131,7 +130,6 @@ module ntm_matrix_cosine_similarity_function #(
   wire data_out_scalar_enable_vector_cosine_similarity;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_cosine_similarity;
   reg [DATA_SIZE-1:0] size_in_vector_cosine_similarity;
   reg [DATA_SIZE-1:0] length_in_vector_cosine_similarity;
   reg [DATA_SIZE-1:0] data_a_in_vector_cosine_similarity;
@@ -211,7 +209,6 @@ module ntm_matrix_cosine_similarity_function #(
             end
 
             // Data Inputs
-            modulo_in_vector_cosine_similarity <= MODULO_IN;
 
             // FSM Control
             cosine_similarity_ctrl_fsm_int <= ENDER_STATE;
@@ -255,7 +252,6 @@ module ntm_matrix_cosine_similarity_function #(
             end
 
             // Data Inputs
-            modulo_in_vector_cosine_similarity <= MODULO_IN;
             size_in_vector_cosine_similarity <= SIZE_J_IN;
 
             // FSM Control
@@ -300,7 +296,6 @@ module ntm_matrix_cosine_similarity_function #(
             end
 
             // Data Inputs
-            modulo_in_vector_cosine_similarity <= MODULO_IN;
             length_in_vector_cosine_similarity <= LENGTH_IN;
 
             // FSM Control
@@ -406,7 +401,6 @@ module ntm_matrix_cosine_similarity_function #(
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_cosine_similarity),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_cosine_similarity),
     .SIZE_IN(size_in_vector_cosine_similarity),
     .LENGTH_IN(length_in_vector_cosine_similarity),
     .DATA_A_IN(data_a_in_vector_cosine_similarity),

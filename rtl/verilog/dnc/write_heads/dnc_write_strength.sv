@@ -88,7 +88,6 @@ module dnc_write_strength #(
   wire ready_scalar_oneplus;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_oneplus;
   wire [DATA_SIZE-1:0] data_in_scalar_oneplus;
   wire [DATA_SIZE-1:0] data_out_scalar_oneplus;
 
@@ -122,7 +121,6 @@ module dnc_write_strength #(
     .READY(ready_scalar_oneplus),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_oneplus),
     .DATA_IN(data_in_scalar_oneplus),
     .DATA_OUT(data_out_scalar_oneplus)
   );

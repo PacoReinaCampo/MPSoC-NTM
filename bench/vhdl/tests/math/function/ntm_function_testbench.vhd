@@ -194,7 +194,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_enable_scalar_convolution : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_scalar_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -211,7 +210,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_enable_scalar_cosine : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_scalar_cosine : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -226,7 +224,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_enable_scalar_differentiation : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_scalar_differentiation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal period_in_scalar_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_scalar_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -243,7 +240,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_enable_scalar_multiplication : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_scalar_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_scalar_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -254,7 +250,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_scalar_cosh : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_cosh : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -264,7 +259,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_scalar_sinh : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_sinh : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_sinh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_sinh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -274,7 +268,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_scalar_tanh : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -284,7 +277,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_scalar_logistic : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -298,7 +290,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_enable_scalar_softmax : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_scalar_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_scalar_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -309,7 +300,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_scalar_oneplus : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -323,7 +313,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_enable_scalar_summation : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_scalar_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_scalar_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -346,7 +335,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_scalar_enable_vector_convolution : std_logic;
 
   -- DATA
-  signal modulo_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_convolution   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_vector_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -378,7 +366,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_scalar_enable_vector_differentiation : std_logic;
 
   -- DATA
-  signal modulo_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_differentiation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal period_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_vector_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -386,7 +373,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- DATA
-  signal modulo_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_cosine   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_vector_cosine : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -405,7 +391,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_scalar_enable_vector_multiplication : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_vector_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_in_vector_multiplication   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -421,7 +406,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_enable_vector_cosh : std_logic;
 
   -- DATA
-  signal modulo_in_vector_cosh : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_cosh   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -436,7 +420,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_enable_vector_sinh : std_logic;
 
   -- DATA
-  signal modulo_in_vector_sinh : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_sinh   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_sinh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_sinh  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -451,7 +434,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_enable_vector_tanh : std_logic;
 
   -- DATA
-  signal modulo_in_vector_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_tanh   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -466,7 +448,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_enable_vector_logistic : std_logic;
 
   -- DATA
-  signal modulo_in_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_logistic   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -483,7 +464,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_scalar_enable_vector_softmax : std_logic;
 
   -- DATA
-  signal modulo_in_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_vector_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_in_vector_softmax   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -499,7 +479,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_enable_vector_oneplus : std_logic;
 
   -- DATA
-  signal modulo_in_vector_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_oneplus   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -516,7 +495,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_scalar_enable_vector_summation : std_logic;
 
   -- DATA
-  signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -543,7 +521,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_scalar_enable_matrix_convolution : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -568,7 +545,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_scalar_enable_matrix_cosine : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_cosine : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_cosine : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_matrix_cosine : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -590,7 +566,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_scalar_enable_matrix_differentiation : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal period_in_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -612,7 +587,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_scalar_enable_matrix_multiplication : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_multiplication : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_matrix_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -631,7 +605,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_j_enable_matrix_cosh : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_cosh : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_cosh : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_cosh : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -649,7 +622,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_j_enable_matrix_sinh : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_sinh : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_sinh : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_sinh : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_sinh   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -667,7 +639,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_j_enable_matrix_tanh : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_tanh : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_tanh : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -685,7 +656,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_j_enable_matrix_logistic : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_logistic : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_logistic : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -705,7 +675,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_scalar_enable_matrix_softmax : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_matrix_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -724,7 +693,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_j_enable_matrix_oneplus : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_oneplus : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_oneplus : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -744,7 +712,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_scalar_enable_matrix_summation : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -790,7 +757,6 @@ begin
       SCALAR_CONVOLUTION_DATA_OUT_ENABLE => data_out_enable_scalar_convolution,
 
       -- DATA
-      SCALAR_CONVOLUTION_MODULO_IN => modulo_in_scalar_convolution,
       SCALAR_CONVOLUTION_LENGTH_IN => length_in_scalar_convolution,
       SCALAR_CONVOLUTION_DATA_A_IN => data_a_in_scalar_convolution,
       SCALAR_CONVOLUTION_DATA_B_IN => data_b_in_scalar_convolution,
@@ -807,7 +773,6 @@ begin
       SCALAR_COSINE_SIMILARITY_DATA_OUT_ENABLE => data_out_enable_scalar_cosine,
 
       -- DATA
-      SCALAR_COSINE_SIMILARITY_MODULO_IN => modulo_in_scalar_cosine,
       SCALAR_COSINE_SIMILARITY_LENGTH_IN => length_in_scalar_cosine,
       SCALAR_COSINE_SIMILARITY_DATA_A_IN => data_a_in_scalar_cosine,
       SCALAR_COSINE_SIMILARITY_DATA_B_IN => data_b_in_scalar_cosine,
@@ -823,7 +788,6 @@ begin
       SCALAR_MULTIPLICATION_DATA_OUT_ENABLE => data_out_enable_scalar_multiplication,
 
       -- DATA
-      SCALAR_MULTIPLICATION_MODULO_IN => modulo_in_scalar_multiplication,
       SCALAR_MULTIPLICATION_LENGTH_IN => length_in_scalar_multiplication,
       SCALAR_MULTIPLICATION_DATA_IN   => data_in_scalar_multiplication,
       SCALAR_MULTIPLICATION_DATA_OUT  => data_out_scalar_multiplication,
@@ -834,7 +798,6 @@ begin
       SCALAR_COSH_READY => ready_scalar_cosh,
 
       -- DATA
-      SCALAR_COSH_MODULO_IN => modulo_in_scalar_cosh,
       SCALAR_COSH_DATA_IN   => data_in_scalar_cosh,
       SCALAR_COSH_DATA_OUT  => data_out_scalar_cosh,
 
@@ -844,7 +807,6 @@ begin
       SCALAR_SINH_READY => ready_scalar_sinh,
 
       -- DATA
-      SCALAR_SINH_MODULO_IN => modulo_in_scalar_sinh,
       SCALAR_SINH_DATA_IN   => data_in_scalar_sinh,
       SCALAR_SINH_DATA_OUT  => data_out_scalar_sinh,
 
@@ -854,7 +816,6 @@ begin
       SCALAR_TANH_READY => ready_scalar_tanh,
 
       -- DATA
-      SCALAR_TANH_MODULO_IN => modulo_in_scalar_tanh,
       SCALAR_TANH_DATA_IN   => data_in_scalar_tanh,
       SCALAR_TANH_DATA_OUT  => data_out_scalar_tanh,
 
@@ -864,7 +825,6 @@ begin
       SCALAR_LOGISTIC_READY => ready_scalar_logistic,
 
       -- DATA
-      SCALAR_LOGISTIC_MODULO_IN => modulo_in_scalar_logistic,
       SCALAR_LOGISTIC_DATA_IN   => data_in_scalar_logistic,
       SCALAR_LOGISTIC_DATA_OUT  => data_out_scalar_logistic,
 
@@ -878,7 +838,6 @@ begin
       SCALAR_SOFTMAX_DATA_OUT_ENABLE => data_out_enable_scalar_softmax,
 
       -- DATA
-      SCALAR_SOFTMAX_MODULO_IN => modulo_in_scalar_softmax,
       SCALAR_SOFTMAX_LENGTH_IN => length_in_scalar_softmax,
       SCALAR_SOFTMAX_DATA_IN   => data_in_scalar_softmax,
       SCALAR_SOFTMAX_DATA_OUT  => data_out_scalar_softmax,
@@ -889,7 +848,6 @@ begin
       SCALAR_ONEPLUS_READY => ready_scalar_oneplus,
 
       -- DATA
-      SCALAR_ONEPLUS_MODULO_IN => modulo_in_scalar_oneplus,
       SCALAR_ONEPLUS_DATA_IN   => data_in_scalar_oneplus,
       SCALAR_ONEPLUS_DATA_OUT  => data_out_scalar_oneplus,
 
@@ -903,7 +861,6 @@ begin
       SCALAR_SUMMATION_DATA_OUT_ENABLE => data_out_enable_scalar_summation,
 
       -- DATA
-      SCALAR_SUMMATION_MODULO_IN => modulo_in_scalar_summation,
       SCALAR_SUMMATION_LENGTH_IN => length_in_scalar_summation,
       SCALAR_SUMMATION_DATA_IN   => data_in_scalar_summation,
       SCALAR_SUMMATION_DATA_OUT  => data_out_scalar_summation,
@@ -926,7 +883,6 @@ begin
       VECTOR_CONVOLUTION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_convolution,
 
       -- DATA
-      VECTOR_CONVOLUTION_MODULO_IN => modulo_in_vector_convolution,
       VECTOR_CONVOLUTION_SIZE_IN   => size_in_vector_convolution,
       VECTOR_CONVOLUTION_LENGTH_IN => length_in_vector_convolution,
       VECTOR_CONVOLUTION_DATA_A_IN => data_a_in_vector_convolution,
@@ -947,7 +903,6 @@ begin
       VECTOR_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_cosine,
 
       -- DATA
-      VECTOR_COSINE_SIMILARITY_MODULO_IN => modulo_in_vector_cosine,
       VECTOR_COSINE_SIMILARITY_SIZE_IN   => size_in_vector_cosine,
       VECTOR_COSINE_SIMILARITY_LENGTH_IN => length_in_vector_cosine,
       VECTOR_COSINE_SIMILARITY_DATA_A_IN => data_a_in_vector_cosine,
@@ -964,7 +919,6 @@ begin
       VECTOR_COSH_DATA_OUT_ENABLE => data_out_enable_vector_cosh,
 
       -- DATA
-      VECTOR_COSH_MODULO_IN => modulo_in_vector_cosh,
       VECTOR_COSH_SIZE_IN   => size_in_vector_cosh,
       VECTOR_COSH_DATA_IN   => data_in_vector_cosh,
       VECTOR_COSH_DATA_OUT  => data_out_vector_cosh,
@@ -979,7 +933,6 @@ begin
       VECTOR_SINH_DATA_OUT_ENABLE => data_out_enable_vector_sinh,
 
       -- DATA
-      VECTOR_SINH_MODULO_IN => modulo_in_vector_sinh,
       VECTOR_SINH_SIZE_IN   => size_in_vector_sinh,
       VECTOR_SINH_DATA_IN   => data_in_vector_sinh,
       VECTOR_SINH_DATA_OUT  => data_out_vector_sinh,
@@ -994,7 +947,6 @@ begin
       VECTOR_TANH_DATA_OUT_ENABLE => data_out_enable_vector_tanh,
 
       -- DATA
-      VECTOR_TANH_MODULO_IN => modulo_in_vector_tanh,
       VECTOR_TANH_SIZE_IN   => size_in_vector_tanh,
       VECTOR_TANH_DATA_IN   => data_in_vector_tanh,
       VECTOR_TANH_DATA_OUT  => data_out_vector_tanh,
@@ -1011,7 +963,6 @@ begin
       VECTOR_MULTIPLICATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_multiplication,
 
       -- DATA
-      VECTOR_MULTIPLICATION_MODULO_IN => modulo_in_vector_multiplication,
       VECTOR_MULTIPLICATION_SIZE_IN   => size_in_vector_multiplication,
       VECTOR_MULTIPLICATION_LENGTH_IN => length_in_vector_multiplication,
       VECTOR_MULTIPLICATION_DATA_IN   => data_in_vector_multiplication,
@@ -1027,7 +978,6 @@ begin
       VECTOR_LOGISTIC_DATA_OUT_ENABLE => data_out_enable_vector_logistic,
 
       -- DATA
-      VECTOR_LOGISTIC_MODULO_IN => modulo_in_vector_logistic,
       VECTOR_LOGISTIC_SIZE_IN   => size_in_vector_logistic,
       VECTOR_LOGISTIC_DATA_IN   => data_in_vector_logistic,
       VECTOR_LOGISTIC_DATA_OUT  => data_out_vector_logistic,
@@ -1044,7 +994,6 @@ begin
       VECTOR_SOFTMAX_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_softmax,
 
       -- DATA
-      VECTOR_SOFTMAX_MODULO_IN => modulo_in_vector_softmax,
       VECTOR_SOFTMAX_SIZE_IN   => size_in_vector_softmax,
       VECTOR_SOFTMAX_LENGTH_IN => length_in_vector_softmax,
       VECTOR_SOFTMAX_DATA_IN   => data_in_vector_softmax,
@@ -1060,7 +1009,6 @@ begin
       VECTOR_ONEPLUS_DATA_OUT_ENABLE => data_out_enable_vector_oneplus,
 
       -- DATA
-      VECTOR_ONEPLUS_MODULO_IN => modulo_in_vector_oneplus,
       VECTOR_ONEPLUS_SIZE_IN   => size_in_vector_oneplus,
       VECTOR_ONEPLUS_DATA_IN   => data_in_vector_oneplus,
       VECTOR_ONEPLUS_DATA_OUT  => data_out_vector_oneplus,
@@ -1077,7 +1025,6 @@ begin
       VECTOR_SUMMATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
 
       -- DATA
-      VECTOR_SUMMATION_MODULO_IN => modulo_in_vector_summation,
       VECTOR_SUMMATION_SIZE_IN   => size_in_vector_summation,
       VECTOR_SUMMATION_LENGTH_IN => length_in_vector_summation,
       VECTOR_SUMMATION_DATA_IN   => data_in_vector_summation,
@@ -1104,7 +1051,6 @@ begin
       MATRIX_CONVOLUTION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_convolution,
 
       -- DATA
-      MATRIX_CONVOLUTION_MODULO_IN => modulo_in_matrix_convolution,
       MATRIX_CONVOLUTION_SIZE_I_IN => size_i_in_matrix_convolution,
       MATRIX_CONVOLUTION_SIZE_J_IN => size_j_in_matrix_convolution,
       MATRIX_CONVOLUTION_LENGTH_IN => length_in_matrix_convolution,
@@ -1129,7 +1075,6 @@ begin
       MATRIX_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_cosine,
 
       -- DATA
-      MATRIX_COSINE_SIMILARITY_MODULO_IN => modulo_in_matrix_cosine,
       MATRIX_COSINE_SIMILARITY_SIZE_I_IN => size_i_in_matrix_cosine,
       MATRIX_COSINE_SIMILARITY_SIZE_J_IN => size_j_in_matrix_cosine,
       MATRIX_COSINE_SIMILARITY_LENGTH_IN => length_in_matrix_cosine,
@@ -1151,7 +1096,6 @@ begin
       MATRIX_MULTIPLICATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_multiplication,
 
       -- DATA
-      MATRIX_MULTIPLICATION_MODULO_IN => modulo_in_matrix_multiplication,
       MATRIX_MULTIPLICATION_SIZE_I_IN => size_i_in_matrix_multiplication,
       MATRIX_MULTIPLICATION_SIZE_J_IN => size_j_in_matrix_multiplication,
       MATRIX_MULTIPLICATION_LENGTH_IN => length_in_matrix_multiplication,
@@ -1170,7 +1114,6 @@ begin
       MATRIX_COSH_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_cosh,
 
       -- DATA
-      MATRIX_COSH_MODULO_IN => modulo_in_matrix_cosh,
       MATRIX_COSH_SIZE_I_IN => size_i_in_matrix_cosh,
       MATRIX_COSH_SIZE_J_IN => size_j_in_matrix_cosh,
       MATRIX_COSH_DATA_IN   => data_in_matrix_cosh,
@@ -1188,7 +1131,6 @@ begin
       MATRIX_SINH_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_sinh,
 
       -- DATA
-      MATRIX_SINH_MODULO_IN => modulo_in_matrix_sinh,
       MATRIX_SINH_SIZE_I_IN => size_i_in_matrix_sinh,
       MATRIX_SINH_SIZE_J_IN => size_j_in_matrix_sinh,
       MATRIX_SINH_DATA_IN   => data_in_matrix_sinh,
@@ -1206,7 +1148,6 @@ begin
       MATRIX_TANH_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_tanh,
 
       -- DATA
-      MATRIX_TANH_MODULO_IN => modulo_in_matrix_tanh,
       MATRIX_TANH_SIZE_I_IN => size_i_in_matrix_tanh,
       MATRIX_TANH_SIZE_J_IN => size_j_in_matrix_tanh,
       MATRIX_TANH_DATA_IN   => data_in_matrix_tanh,
@@ -1224,7 +1165,6 @@ begin
       MATRIX_LOGISTIC_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_logistic,
 
       -- DATA
-      MATRIX_LOGISTIC_MODULO_IN => modulo_in_matrix_logistic,
       MATRIX_LOGISTIC_SIZE_I_IN => size_i_in_matrix_logistic,
       MATRIX_LOGISTIC_SIZE_J_IN => size_j_in_matrix_logistic,
       MATRIX_LOGISTIC_DATA_IN   => data_in_matrix_logistic,
@@ -1244,7 +1184,6 @@ begin
       MATRIX_SOFTMAX_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_softmax,
 
       -- DATA
-      MATRIX_SOFTMAX_MODULO_IN => modulo_in_matrix_softmax,
       MATRIX_SOFTMAX_SIZE_I_IN => size_i_in_matrix_softmax,
       MATRIX_SOFTMAX_SIZE_J_IN => size_j_in_matrix_softmax,
       MATRIX_SOFTMAX_LENGTH_IN => length_in_matrix_softmax,
@@ -1263,7 +1202,6 @@ begin
       MATRIX_ONEPLUS_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_oneplus,
 
       -- DATA
-      MATRIX_ONEPLUS_MODULO_IN => modulo_in_matrix_oneplus,
       MATRIX_ONEPLUS_SIZE_I_IN => size_i_in_matrix_oneplus,
       MATRIX_ONEPLUS_SIZE_J_IN => size_j_in_matrix_oneplus,
       MATRIX_ONEPLUS_DATA_IN   => data_in_matrix_oneplus,
@@ -1283,7 +1221,6 @@ begin
       MATRIX_SUMMATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_summation,
 
       -- DATA
-      MATRIX_SUMMATION_MODULO_IN => modulo_in_matrix_summation,
       MATRIX_SUMMATION_SIZE_I_IN => size_i_in_matrix_summation,
       MATRIX_SUMMATION_SIZE_J_IN => size_j_in_matrix_summation,
       MATRIX_SUMMATION_LENGTH_IN => length_in_matrix_summation,
@@ -1317,7 +1254,6 @@ begin
         DATA_OUT_ENABLE => data_out_enable_scalar_convolution,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_convolution,
         LENGTH_IN => length_in_scalar_convolution,
         DATA_A_IN => data_a_in_scalar_convolution,
         DATA_B_IN => data_b_in_scalar_convolution,
@@ -1347,7 +1283,6 @@ begin
         DATA_OUT_ENABLE => data_out_enable_scalar_cosine,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_cosine,
         LENGTH_IN => length_in_scalar_cosine,
         DATA_A_IN => data_a_in_scalar_cosine,
         DATA_B_IN => data_b_in_scalar_cosine,
@@ -1376,7 +1311,6 @@ begin
         DATA_OUT_ENABLE => data_out_enable_scalar_differentiation,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_differentiation,
         PERIOD_IN => period_in_scalar_differentiation,
         LENGTH_IN => length_in_scalar_differentiation,
         DATA_IN   => data_in_scalar_differentiation,
@@ -1405,7 +1339,6 @@ begin
         DATA_OUT_ENABLE => data_out_enable_scalar_multiplication,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_multiplication,
         LENGTH_IN => length_in_scalar_multiplication,
         DATA_IN   => data_in_scalar_multiplication,
         DATA_OUT  => data_out_scalar_multiplication
@@ -1429,7 +1362,6 @@ begin
         READY => ready_scalar_cosh,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_cosh,
         DATA_IN   => data_in_scalar_cosh,
         DATA_OUT  => data_out_scalar_cosh
         );
@@ -1452,7 +1384,6 @@ begin
         READY => ready_scalar_sinh,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_sinh,
         DATA_IN   => data_in_scalar_sinh,
         DATA_OUT  => data_out_scalar_sinh
         );
@@ -1475,7 +1406,6 @@ begin
         READY => ready_scalar_tanh,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_tanh,
         DATA_IN   => data_in_scalar_tanh,
         DATA_OUT  => data_out_scalar_tanh
         );
@@ -1498,7 +1428,6 @@ begin
         READY => ready_scalar_logistic,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_logistic,
         DATA_IN   => data_in_scalar_logistic,
         DATA_OUT  => data_out_scalar_logistic
         );
@@ -1525,7 +1454,6 @@ begin
         DATA_OUT_ENABLE => data_out_enable_scalar_softmax,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_softmax,
         LENGTH_IN => length_in_scalar_softmax,
         DATA_IN   => data_in_scalar_softmax,
         DATA_OUT  => data_out_scalar_softmax
@@ -1549,7 +1477,6 @@ begin
         READY => ready_scalar_oneplus,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_oneplus,
         DATA_IN   => data_in_scalar_oneplus,
         DATA_OUT  => data_out_scalar_oneplus
         );
@@ -1576,7 +1503,6 @@ begin
         DATA_OUT_ENABLE => data_out_enable_scalar_summation,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_summation,
         LENGTH_IN => length_in_scalar_summation,
         DATA_IN   => data_in_scalar_summation,
         DATA_OUT  => data_out_scalar_summation
@@ -1612,7 +1538,6 @@ begin
         DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_convolution,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_convolution,
         SIZE_IN   => size_in_vector_convolution,
         LENGTH_IN => length_in_vector_convolution,
         DATA_A_IN => data_a_in_vector_convolution,
@@ -1646,7 +1571,6 @@ begin
         DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_cosine,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_cosine,
         SIZE_IN   => size_in_vector_cosine,
         LENGTH_IN => length_in_vector_cosine,
         DATA_A_IN => data_a_in_vector_cosine,
@@ -1678,7 +1602,6 @@ begin
         DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_differentiation,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_differentiation,
         SIZE_IN   => size_in_vector_differentiation,
         PERIOD_IN => period_in_vector_differentiation,
         LENGTH_IN => length_in_vector_differentiation,
@@ -1710,7 +1633,6 @@ begin
         DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_multiplication,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_multiplication,
         SIZE_IN   => size_in_vector_multiplication,
         LENGTH_IN => length_in_vector_multiplication,
         DATA_IN   => data_in_vector_multiplication,
@@ -1739,7 +1661,6 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_cosh,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_cosh,
         SIZE_IN   => size_in_vector_cosh,
         DATA_IN   => data_in_vector_cosh,
         DATA_OUT  => data_out_vector_cosh
@@ -1767,7 +1688,6 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_sinh,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_sinh,
         SIZE_IN   => size_in_vector_sinh,
         DATA_IN   => data_in_vector_sinh,
         DATA_OUT  => data_out_vector_sinh
@@ -1795,7 +1715,6 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_tanh,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_tanh,
         SIZE_IN   => size_in_vector_tanh,
         DATA_IN   => data_in_vector_tanh,
         DATA_OUT  => data_out_vector_tanh
@@ -1823,7 +1742,6 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_logistic,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_logistic,
         SIZE_IN   => size_in_vector_logistic,
         DATA_IN   => data_in_vector_logistic,
         DATA_OUT  => data_out_vector_logistic
@@ -1853,7 +1771,6 @@ begin
         DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_softmax,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_softmax,
         SIZE_IN   => size_in_vector_softmax,
         LENGTH_IN => length_in_vector_softmax,
         DATA_IN   => data_in_vector_softmax,
@@ -1883,7 +1800,6 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_oneplus,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_oneplus,
         SIZE_IN   => size_in_vector_oneplus,
         DATA_IN   => data_in_vector_oneplus,
         DATA_OUT  => data_out_vector_oneplus
@@ -1913,7 +1829,6 @@ begin
         DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
 
         -- DATA
-        MODULO_IN => modulo_in_vector_summation,
         SIZE_IN   => size_in_vector_summation,
         LENGTH_IN => length_in_vector_summation,
         DATA_IN   => data_in_vector_summation,
@@ -1953,7 +1868,6 @@ begin
         DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_convolution,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_convolution,
         SIZE_I_IN => size_i_in_matrix_convolution,
         SIZE_J_IN => size_j_in_matrix_convolution,
         LENGTH_IN => length_in_matrix_convolution,
@@ -1991,7 +1905,6 @@ begin
         DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_cosine,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_cosine,
         SIZE_I_IN => size_i_in_matrix_cosine,
         SIZE_J_IN => size_j_in_matrix_cosine,
         LENGTH_IN => length_in_matrix_cosine,
@@ -2026,7 +1939,6 @@ begin
         DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_differentiation,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_differentiation,
         SIZE_I_IN => size_i_in_matrix_differentiation,
         SIZE_J_IN => size_j_in_matrix_differentiation,
         PERIOD_IN => period_in_matrix_differentiation,
@@ -2061,7 +1973,6 @@ begin
         DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_multiplication,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_multiplication,
         SIZE_I_IN => size_i_in_matrix_multiplication,
         SIZE_J_IN => size_j_in_matrix_multiplication,
         LENGTH_IN => length_in_matrix_multiplication,
@@ -2093,7 +2004,6 @@ begin
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_cosh,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_cosh,
         SIZE_I_IN => size_i_in_matrix_cosh,
         SIZE_J_IN => size_j_in_matrix_cosh,
         DATA_IN   => data_in_matrix_cosh,
@@ -2124,7 +2034,6 @@ begin
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_sinh,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_sinh,
         SIZE_I_IN => size_i_in_matrix_sinh,
         SIZE_J_IN => size_j_in_matrix_sinh,
         DATA_IN   => data_in_matrix_sinh,
@@ -2155,7 +2064,6 @@ begin
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_tanh,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_tanh,
         SIZE_I_IN => size_i_in_matrix_tanh,
         SIZE_J_IN => size_j_in_matrix_tanh,
         DATA_IN   => data_in_matrix_tanh,
@@ -2186,7 +2094,6 @@ begin
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_logistic,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_logistic,
         SIZE_I_IN => size_i_in_matrix_logistic,
         SIZE_J_IN => size_j_in_matrix_logistic,
         DATA_IN   => data_in_matrix_logistic,
@@ -2219,7 +2126,6 @@ begin
         DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_softmax,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_softmax,
         SIZE_I_IN => size_i_in_matrix_softmax,
         SIZE_J_IN => size_j_in_matrix_softmax,
         LENGTH_IN => length_in_matrix_softmax,
@@ -2251,7 +2157,6 @@ begin
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_oneplus,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_oneplus,
         SIZE_I_IN => size_i_in_matrix_oneplus,
         SIZE_J_IN => size_j_in_matrix_oneplus,
         DATA_IN   => data_in_matrix_oneplus,
@@ -2284,7 +2189,6 @@ begin
         DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_summation,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_summation,
         SIZE_I_IN => size_i_in_matrix_summation,
         SIZE_J_IN => size_j_in_matrix_summation,
         LENGTH_IN => length_in_matrix_summation,

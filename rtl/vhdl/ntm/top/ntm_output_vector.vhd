@@ -175,7 +175,6 @@ architecture ntm_output_vector_architecture of ntm_output_vector is
   signal data_out_j_enable_matrix_adder : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -196,7 +195,6 @@ architecture ntm_output_vector_architecture of ntm_output_vector is
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -217,7 +215,6 @@ architecture ntm_output_vector_architecture of ntm_output_vector is
   signal data_out_scalar_enable_vector_summation : std_logic;
 
   -- DATA
-  signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -299,7 +296,6 @@ begin
             data_b_int_i_product <= '0';
 
             -- Data Inputs
-            modulo_in_matrix_product   <= FULL;
             size_a_i_in_matrix_product <= SIZE_Y_IN;
             size_b_i_in_matrix_product <= SIZE_W_IN;
 
@@ -311,7 +307,6 @@ begin
 
           if (K_IN_K_ENABLE = '1') then
             -- Data Inputs
-            modulo_in_matrix_product   <= FULL;
             size_a_j_in_matrix_product <= SIZE_W_IN;
             size_b_j_in_matrix_product <= ONE_DATA;
 
@@ -424,7 +419,6 @@ begin
 
           if (U_IN_Y_ENABLE = '1') then
             -- Data Inputs
-            modulo_in_matrix_product   <= FULL;
             size_a_i_in_matrix_product <= SIZE_L_IN;
             size_b_i_in_matrix_product <= ONE_DATA;
 
@@ -469,7 +463,6 @@ begin
             data_b_int_j_product <= '0';
 
             -- Data Inputs
-            modulo_in_matrix_product   <= FULL;
             size_a_j_in_matrix_product <= SIZE_W_IN;
             size_b_j_in_matrix_product <= SIZE_W_IN;
 
@@ -590,7 +583,6 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_matrix_adder,
       SIZE_I_IN => size_i_in_matrix_adder,
       SIZE_J_IN => size_j_in_matrix_adder,
       DATA_A_IN => data_a_in_matrix_adder,
@@ -622,7 +614,6 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MODULO_IN   => modulo_in_matrix_product,
       SIZE_A_I_IN => size_a_i_in_matrix_product,
       SIZE_A_J_IN => size_a_j_in_matrix_product,
       SIZE_B_I_IN => size_b_i_in_matrix_product,
@@ -654,7 +645,6 @@ begin
       DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_summation,
       SIZE_IN   => size_in_vector_summation,
       LENGTH_IN => length_in_vector_summation,
       DATA_IN   => data_in_vector_summation,

@@ -152,7 +152,6 @@ module ntm_interface_vector #(
   wire data_out_enable_scalar_product;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_scalar_product;
   reg [DATA_SIZE-1:0] length_in_scalar_product;
   reg [DATA_SIZE-1:0] data_a_in_scalar_product;
   reg [DATA_SIZE-1:0] data_b_in_scalar_product;
@@ -170,7 +169,6 @@ module ntm_interface_vector #(
   wire data_out_j_enable_matrix_product;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_matrix_product;
   reg [DATA_SIZE-1:0] size_a_i_in_matrix_product;
   reg [DATA_SIZE-1:0] size_a_j_in_matrix_product;
   reg [DATA_SIZE-1:0] size_b_i_in_matrix_product;
@@ -213,7 +211,6 @@ module ntm_interface_vector #(
         MATRIX_FIRST_PRODUCT_STATE : begin  // STEP 1
 
           // Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_W_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
           size_b_i_in_matrix_product <= SIZE_L_IN;
@@ -228,7 +225,6 @@ module ntm_interface_vector #(
         MATRIX_SECOND_PRODUCT_STATE : begin  // STEP 2
 
           // Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_N_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
           size_b_i_in_matrix_product <= SIZE_L_IN;
@@ -243,7 +239,6 @@ module ntm_interface_vector #(
         SCALAR_FIRST_PRODUCT_STATE : begin  // STEP 3
 
           // Data Inputs
-          modulo_in_scalar_product <= FULL;
           length_in_scalar_product <= SIZE_L_IN;
           data_a_in_scalar_product <= WBETA_IN;
           data_b_in_scalar_product <= H_IN;
@@ -255,7 +250,6 @@ module ntm_interface_vector #(
         SCALAR_SECOND_PRODUCT_STATE : begin  // STEP 4
 
           // Data Inputs
-          modulo_in_scalar_product <= FULL;
           length_in_scalar_product <= SIZE_L_IN;
           data_a_in_scalar_product <= WG_IN;
           data_b_in_scalar_product <= H_IN;
@@ -267,7 +261,6 @@ module ntm_interface_vector #(
         SCALAR_THIRD_PRODUCT_STATE : begin  // STEP 5
 
           // Data Inputs
-          modulo_in_scalar_product <= FULL;
           length_in_scalar_product <= SIZE_L_IN;
           data_a_in_scalar_product <= WGAMMA_IN;
           data_b_in_scalar_product <= H_IN;
@@ -302,7 +295,6 @@ module ntm_interface_vector #(
     .DATA_OUT_ENABLE(data_out_enable_scalar_product),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_product),
     .LENGTH_IN(length_in_scalar_product),
     .DATA_A_IN(data_a_in_scalar_product),
     .DATA_B_IN(data_b_in_scalar_product),
@@ -330,7 +322,6 @@ module ntm_interface_vector #(
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_product),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_product),
     .SIZE_A_I_IN(size_a_i_in_matrix_product),
     .SIZE_A_J_IN(size_a_j_in_matrix_product),
     .SIZE_B_I_IN(size_b_i_in_matrix_product),

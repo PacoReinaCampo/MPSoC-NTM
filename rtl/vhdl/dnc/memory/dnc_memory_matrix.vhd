@@ -156,7 +156,6 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   signal data_out_j_enable_matrix_adder : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -177,7 +176,6 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   signal data_out_j_enable_matrix_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -196,7 +194,6 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   signal data_out_j_enable_matrix_transpose : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -216,7 +213,6 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -276,7 +272,6 @@ begin
           data_in_j_enable_matrix_transpose <= '0';
 
           -- Data Inputs
-          modulo_in_matrix_transpose <= FULL;
           size_i_in_matrix_transpose <= SIZE_W_IN;
           size_j_in_matrix_transpose <= ONE_DATA;
           data_in_matrix_transpose   <= E_IN;
@@ -308,7 +303,6 @@ begin
           data_in_j_enable_matrix_transpose <= '0';
 
           -- Data Inputs
-          modulo_in_matrix_transpose <= FULL;
           size_i_in_matrix_transpose <= SIZE_W_IN;
           size_j_in_matrix_transpose <= ONE_DATA;
           data_in_matrix_transpose   <= E_IN;
@@ -347,7 +341,6 @@ begin
           data_b_in_j_enable_matrix_product <= data_out_j_enable_matrix_transpose;
 
           -- Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_N_IN;
           size_a_j_in_matrix_product <= ONE_DATA;
           size_b_i_in_matrix_product <= ONE_DATA;
@@ -384,7 +377,6 @@ begin
           data_b_in_j_enable_matrix_product <= data_out_j_enable_matrix_transpose;
 
           -- Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_N_IN;
           size_a_j_in_matrix_product <= ONE_DATA;
           size_b_i_in_matrix_product <= ONE_DATA;
@@ -428,7 +420,6 @@ begin
           data_b_in_j_enable_matrix_adder <= data_b_in_j_enable_matrix_product;
 
           -- Data Inputs
-          modulo_in_matrix_adder <= FULL;
           size_i_in_matrix_adder <= SIZE_N_IN;
           size_j_in_matrix_adder <= SIZE_W_IN;
           data_a_in_matrix_adder <= ONE_DATA;
@@ -465,7 +456,6 @@ begin
           data_b_in_j_enable_matrix_adder <= data_b_in_j_enable_matrix_product;
 
           -- Data Inputs
-          modulo_in_matrix_adder <= FULL;
           size_i_in_matrix_adder <= SIZE_N_IN;
           size_j_in_matrix_adder <= SIZE_W_IN;
           data_a_in_matrix_adder <= ONE_DATA;
@@ -505,7 +495,6 @@ begin
           data_b_in_j_enable_matrix_multiplier <= data_out_j_enable_matrix_adder;
 
           -- Data Inputs
-          modulo_in_matrix_multiplier <= FULL;
           size_i_in_matrix_multiplier <= SIZE_N_IN;
           size_j_in_matrix_multiplier <= SIZE_W_IN;
           data_a_in_matrix_multiplier <= M_IN;
@@ -540,7 +529,6 @@ begin
           data_b_in_j_enable_matrix_multiplier <= data_out_j_enable_matrix_adder;
 
           -- Data Inputs
-          modulo_in_matrix_multiplier <= FULL;
           size_i_in_matrix_multiplier <= SIZE_N_IN;
           size_j_in_matrix_multiplier <= SIZE_W_IN;
           data_a_in_matrix_multiplier <= M_IN;
@@ -578,7 +566,6 @@ begin
           data_in_j_enable_matrix_transpose <= '0';
 
           -- Data Inputs
-          modulo_in_matrix_transpose <= FULL;
           size_i_in_matrix_transpose <= SIZE_W_IN;
           size_j_in_matrix_transpose <= ONE_DATA;
           data_in_matrix_transpose   <= V_IN;
@@ -610,7 +597,6 @@ begin
           data_in_j_enable_matrix_transpose <= '0';
 
           -- Data Inputs
-          modulo_in_matrix_transpose <= FULL;
           size_i_in_matrix_transpose <= SIZE_W_IN;
           size_j_in_matrix_transpose <= ONE_DATA;
           data_in_matrix_transpose   <= V_IN;
@@ -652,7 +638,6 @@ begin
           data_b_in_j_enable_matrix_product <= data_out_j_enable_matrix_transpose;
 
           -- Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_N_IN;
           size_a_j_in_matrix_product <= ONE_DATA;
           size_b_i_in_matrix_product <= ONE_DATA;
@@ -689,7 +674,6 @@ begin
           data_b_in_j_enable_matrix_product <= data_out_j_enable_matrix_transpose;
 
           -- Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_N_IN;
           size_a_j_in_matrix_product <= ONE_DATA;
           size_b_i_in_matrix_product <= ONE_DATA;
@@ -733,7 +717,6 @@ begin
           data_b_in_j_enable_matrix_adder <= data_b_in_j_enable_matrix_product;
 
           -- Data Inputs
-          modulo_in_matrix_adder <= FULL;
           size_i_in_matrix_adder <= SIZE_N_IN;
           size_j_in_matrix_adder <= SIZE_W_IN;
           data_a_in_matrix_adder <= data_out_matrix_multiplier;
@@ -770,7 +753,6 @@ begin
           data_b_in_j_enable_matrix_adder <= data_b_in_j_enable_matrix_product;
 
           -- Data Inputs
-          modulo_in_matrix_adder <= FULL;
           size_i_in_matrix_adder <= SIZE_N_IN;
           size_j_in_matrix_adder <= SIZE_W_IN;
           data_a_in_matrix_adder <= data_out_matrix_multiplier;
@@ -834,7 +816,6 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_matrix_adder,
       SIZE_I_IN => size_i_in_matrix_adder,
       SIZE_J_IN => size_j_in_matrix_adder,
       DATA_A_IN => data_a_in_matrix_adder,
@@ -866,7 +847,6 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_matrix_multiplier,
       SIZE_I_IN => size_i_in_matrix_multiplier,
       SIZE_J_IN => size_j_in_matrix_multiplier,
       DATA_A_IN => data_a_in_matrix_multiplier,
@@ -896,7 +876,6 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_transpose,
 
       -- DATA
-      MODULO_IN => modulo_in_matrix_transpose,
       SIZE_I_IN => size_i_in_matrix_transpose,
       SIZE_J_IN => size_j_in_matrix_transpose,
       DATA_IN   => data_in_matrix_transpose,
@@ -927,7 +906,6 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MODULO_IN   => modulo_in_matrix_product,
       SIZE_A_I_IN => size_a_i_in_matrix_product,
       SIZE_A_J_IN => size_a_j_in_matrix_product,
       SIZE_B_I_IN => size_b_i_in_matrix_product,

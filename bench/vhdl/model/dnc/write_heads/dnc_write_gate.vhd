@@ -100,7 +100,6 @@ architecture dnc_write_gate_architecture of dnc_write_gate is
   signal ready_scalar_logistic : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_scalar_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -139,7 +138,6 @@ begin
       READY => ready_scalar_logistic,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_logistic,
       DATA_IN   => data_in_scalar_logistic,
       DATA_OUT  => data_out_scalar_logistic
       );

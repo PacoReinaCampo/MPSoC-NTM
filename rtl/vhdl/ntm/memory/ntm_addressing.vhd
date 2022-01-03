@@ -190,7 +190,6 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -207,7 +206,6 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -224,7 +222,6 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal data_out_enable_vector_divider : std_logic;
 
   -- DATA
-  signal modulo_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_divider   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_divider : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -241,7 +238,6 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal data_out_enable_vector_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_exponentiator   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -259,7 +255,6 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal data_out_scalar_enable_vector_summation : std_logic;
 
   -- DATA
-  signal modulo_in_vector_summation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -279,7 +274,6 @@ architecture ntm_addressing_architecture of ntm_addressing is
   signal data_out_scalar_enable_vector_convolution : std_logic;
 
   -- DATA
-  signal modulo_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_convolution   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_vector_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -350,7 +344,6 @@ begin
               data_b_in_enable_vector_multiplier <= '0';
 
               -- Data Inputs
-              modulo_in_vector_multiplier <= FULL;
               size_in_vector_multiplier   <= FULL;
               data_a_in_vector_multiplier <= FULL;
               data_b_in_vector_multiplier <= FULL;
@@ -364,7 +357,6 @@ begin
               data_b_in_enable_vector_adder <= '0';
 
               -- Data Inputs
-              modulo_in_vector_adder <= FULL;
               size_in_vector_adder   <= FULL;
               data_a_in_vector_adder <= FULL;
               data_b_in_vector_adder <= FULL;
@@ -376,7 +368,6 @@ begin
               data_b_in_enable_vector_multiplier <= '0';
 
               -- Data Inputs
-              modulo_in_vector_multiplier <= FULL;
               size_in_vector_multiplier   <= FULL;
               data_a_in_vector_multiplier <= FULL;
               data_b_in_vector_multiplier <= FULL;
@@ -390,7 +381,6 @@ begin
               data_b_in_enable_vector_adder <= '0';
 
               -- Data Inputs
-              modulo_in_vector_adder <= FULL;
               size_in_vector_adder   <= FULL;
               data_a_in_vector_adder <= FULL;
               data_b_in_vector_adder <= FULL;
@@ -462,26 +452,22 @@ begin
   m_in_vector_content_based_addressing      <= M_IN;
 
   -- VECTOR CONVOLUTION
-  modulo_in_vector_convolution <= FULL;
   size_in_vector_convolution   <= FULL;
   length_in_vector_convolution <= FULL;
   data_a_in_vector_convolution <= FULL;
   data_b_in_vector_convolution <= FULL;
 
   -- VECTOR EXPONENTIATOR
-  modulo_in_vector_exponentiator <= FULL;
   size_in_vector_exponentiator   <= FULL;
   data_a_in_vector_exponentiator <= FULL;
   data_b_in_vector_exponentiator <= FULL;
 
   -- VECTOR SUMMATION
-  modulo_in_vector_summation <= FULL;
   size_in_vector_summation   <= FULL;
   length_in_vector_summation <= FULL;
   data_in_vector_summation   <= FULL;
 
   -- VECTOR DIVIDER
-  modulo_in_vector_divider <= FULL;
   size_in_vector_divider   <= FULL;
   data_a_in_vector_divider <= FULL;
   data_b_in_vector_divider <= FULL;
@@ -547,7 +533,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_adder,
       SIZE_IN   => size_in_vector_adder,
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
@@ -575,7 +560,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_multiplier,
       SIZE_IN   => size_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,
@@ -603,7 +587,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_divider,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_divider,
       SIZE_IN   => size_in_vector_divider,
       DATA_A_IN => data_a_in_vector_divider,
       DATA_B_IN => data_b_in_vector_divider,
@@ -631,7 +614,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_exponentiator,
       SIZE_IN   => size_in_vector_exponentiator,
       DATA_A_IN => data_a_in_vector_exponentiator,
       DATA_B_IN => data_b_in_vector_exponentiator,
@@ -660,7 +642,6 @@ begin
       DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_summation,
       SIZE_IN   => size_in_vector_summation,
       LENGTH_IN => length_in_vector_summation,
       DATA_IN   => data_in_vector_summation,
@@ -691,7 +672,6 @@ begin
       DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_convolution,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_convolution,
       SIZE_IN   => size_in_vector_convolution,
       LENGTH_IN => length_in_vector_convolution,
       DATA_A_IN => data_a_in_vector_convolution,

@@ -88,7 +88,6 @@ module dnc_allocation_gate #(
   wire ready_scalar_logistic;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_logistic;
   wire [DATA_SIZE-1:0] data_in_scalar_logistic;
   wire [DATA_SIZE-1:0] data_out_scalar_logistic;
 
@@ -104,7 +103,6 @@ module dnc_allocation_gate #(
   assign READY = ready_scalar_logistic;
 
   // DATA
-  assign modulo_in_scalar_logistic = FULL;
   assign data_in_scalar_logistic = GA_IN;
   assign GA_OUT = data_out_scalar_logistic;
 
@@ -123,7 +121,6 @@ module dnc_allocation_gate #(
     .READY(ready_scalar_logistic),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_logistic),
     .DATA_IN(data_in_scalar_logistic),
     .DATA_OUT(data_out_scalar_logistic)
   );

@@ -64,7 +64,6 @@ entity ntm_scalar_convolution_function is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -121,7 +120,6 @@ architecture ntm_scalar_convolution_function_architecture of ntm_scalar_convolut
   signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -137,7 +135,6 @@ architecture ntm_scalar_convolution_function_architecture of ntm_scalar_convolut
   signal data_out_enable_vector_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -235,12 +232,10 @@ begin
 
   -- DATA
   -- SCALAR ADDER
-  modulo_in_scalar_adder <= MODULO_IN;
   data_a_in_scalar_adder <= data_out_vector_multiplier;
   data_b_in_scalar_adder <= data_out_scalar_adder;
 
   -- VECTOR MULTIPLIER
-  modulo_in_vector_multiplier <= MODULO_IN;
   size_in_vector_multiplier   <= LENGTH_IN;
   data_a_in_vector_multiplier <= DATA_A_IN;
   data_b_in_vector_multiplier <= DATA_B_IN;
@@ -263,7 +258,6 @@ begin
       OPERATION => operation_scalar_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_adder,
       DATA_A_IN => data_a_in_scalar_adder,
       DATA_B_IN => data_b_in_scalar_adder,
       DATA_OUT  => data_out_scalar_adder
@@ -290,7 +284,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_multiplier,
       SIZE_IN   => size_in_vector_multiplier,
       DATA_A_IN => data_a_in_vector_multiplier,
       DATA_B_IN => data_b_in_vector_multiplier,

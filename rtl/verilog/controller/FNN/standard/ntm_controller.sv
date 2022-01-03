@@ -169,7 +169,6 @@ module ntm_controller #(
   wire data_out_enable_vector_adder;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_adder;
   reg [DATA_SIZE-1:0] size_in_vector_adder;
   reg [DATA_SIZE-1:0] data_a_in_vector_adder;
   reg [DATA_SIZE-1:0] data_b_in_vector_adder;
@@ -187,7 +186,6 @@ module ntm_controller #(
   wire data_out_j_enable_matrix_product;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_matrix_product;
   reg [DATA_SIZE-1:0] size_a_i_in_matrix_product;
   reg [DATA_SIZE-1:0] size_a_j_in_matrix_product;
   reg [DATA_SIZE-1:0] size_b_i_in_matrix_product;
@@ -204,7 +202,6 @@ module ntm_controller #(
   wire data_out_enable_vector_logistic;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_logistic;
   reg [DATA_SIZE-1:0] size_in_vector_logistic;
   reg [DATA_SIZE-1:0] data_in_vector_logistic;
   wire [DATA_SIZE-1:0] data_out_vector_logistic;
@@ -285,7 +282,6 @@ module ntm_controller #(
         MATRIX_FIRST_PRODUCT_STATE : begin  // STEP 1
 
           // Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= FULL;
           size_a_j_in_matrix_product <= FULL;
           size_b_i_in_matrix_product <= FULL;
@@ -297,7 +293,6 @@ module ntm_controller #(
         VECTOR_FIRST_ADDER_STATE : begin  // STEP 2
 
           // Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= FULL;
           data_a_in_vector_adder <= data_out_matrix_product;
           data_b_in_vector_adder <= B_IN;
@@ -306,7 +301,6 @@ module ntm_controller #(
         MATRIX_SECOND_PRODUCT_STATE : begin  // STEP 3
 
           // Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= FULL;
           size_a_j_in_matrix_product <= FULL;
           size_b_i_in_matrix_product <= FULL;
@@ -318,7 +312,6 @@ module ntm_controller #(
         VECTOR_SECOND_ADDER_STATE : begin  // STEP 4
 
           // Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= FULL;
           data_a_in_vector_adder <= data_out_matrix_product;
           data_b_in_vector_adder <= data_out_vector_adder;
@@ -327,7 +320,6 @@ module ntm_controller #(
         MATRIX_THIRD_PRODUCT_STATE : begin  // STEP 5
 
           // Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= FULL;
           size_a_j_in_matrix_product <= FULL;
           size_b_i_in_matrix_product <= FULL;
@@ -339,7 +331,6 @@ module ntm_controller #(
         VECTOR_THIRD_ADDER_STATE : begin  // STEP 6
 
           // Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= FULL;
           data_a_in_vector_adder <= data_out_matrix_product;
           data_b_in_vector_adder <= data_out_vector_adder;
@@ -348,7 +339,6 @@ module ntm_controller #(
         VECTOR_LOGISTIC_STATE : begin  // STEP 7
 
           // Data Inputs
-          modulo_in_vector_logistic <= FULL;
           size_in_vector_logistic   <= FULL;
           data_in_vector_logistic   <= FULL;
 
@@ -403,7 +393,6 @@ module ntm_controller #(
     .DATA_OUT_ENABLE(data_out_enable_vector_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_adder),
     .SIZE_IN(size_in_vector_adder),
     .DATA_A_IN(data_a_in_vector_adder),
     .DATA_B_IN(data_b_in_vector_adder),
@@ -431,7 +420,6 @@ module ntm_controller #(
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_product),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_product),
     .SIZE_A_I_IN(size_a_i_in_matrix_product),
     .SIZE_A_J_IN(size_a_j_in_matrix_product),
     .SIZE_B_I_IN(size_b_i_in_matrix_product),
@@ -458,7 +446,6 @@ module ntm_controller #(
     .DATA_OUT_ENABLE(data_out_enable_vector_logistic),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_logistic),
     .SIZE_IN(size_in_vector_logistic),
     .DATA_IN(data_in_vector_logistic),
     .DATA_OUT(data_out_vector_logistic)

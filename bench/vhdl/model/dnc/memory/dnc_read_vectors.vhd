@@ -141,7 +141,6 @@ architecture dnc_read_vectors_architecture of dnc_read_vectors is
   signal data_out_j_enable_matrix_transpose : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -161,7 +160,6 @@ architecture dnc_read_vectors_architecture of dnc_read_vectors is
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -280,13 +278,11 @@ begin
 
   -- DATA
   -- MATRIX TRANSPOSE
-  modulo_in_matrix_transpose <= FULL;
   size_i_in_matrix_transpose <= SIZE_N_IN;
   size_j_in_matrix_transpose <= SIZE_W_IN;
   data_in_matrix_transpose   <= M_IN;
 
   -- MATRIX PRODUCT
-  modulo_in_matrix_product   <= FULL;
   size_a_i_in_matrix_product <= SIZE_W_IN;
   size_a_j_in_matrix_product <= SIZE_N_IN;
   size_b_i_in_matrix_product <= SIZE_N_IN;
@@ -316,7 +312,6 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_transpose,
 
       -- DATA
-      MODULO_IN => modulo_in_matrix_transpose,
       SIZE_I_IN => size_i_in_matrix_transpose,
       SIZE_J_IN => size_j_in_matrix_transpose,
       DATA_IN   => data_in_matrix_transpose,
@@ -347,7 +342,6 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MODULO_IN   => modulo_in_matrix_product,
       SIZE_A_I_IN => size_a_i_in_matrix_product,
       SIZE_A_J_IN => size_a_j_in_matrix_product,
       SIZE_B_I_IN => size_b_i_in_matrix_product,

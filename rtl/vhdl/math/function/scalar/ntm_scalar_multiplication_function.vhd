@@ -63,7 +63,6 @@ entity ntm_scalar_multiplication_function is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -117,7 +116,6 @@ architecture ntm_scalar_multiplication_function_architecture of ntm_scalar_multi
   signal ready_scalar_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -160,7 +158,6 @@ begin
 
           if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
-            modulo_in_scalar_multiplier <= MODULO_IN;
 
             data_a_in_scalar_multiplier <= DATA_IN;
             data_b_in_scalar_multiplier <= data_out_scalar_multiplier;
@@ -225,7 +222,6 @@ begin
       READY => ready_scalar_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_multiplier,
       DATA_A_IN => data_a_in_scalar_multiplier,
       DATA_B_IN => data_b_in_scalar_multiplier,
       DATA_OUT  => data_out_scalar_multiplier

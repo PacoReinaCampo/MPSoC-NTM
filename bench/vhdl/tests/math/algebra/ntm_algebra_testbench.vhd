@@ -101,7 +101,6 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -124,7 +123,6 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_out_k_enable_tensor_transpose : std_logic;
 
   -- DATA
-  signal modulo_in_tensor_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_tensor_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_tensor_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_k_in_tensor_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -143,7 +141,6 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_out_j_enable_matrix_transpose : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_transpose : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_i_in_matrix_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -160,7 +157,6 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_out_enable_scalar_product : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_scalar_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -183,7 +179,6 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_out_k_enable_tensor_product : std_logic;
 
   -- DATA
-  signal modulo_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_a_i_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_a_j_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_a_k_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -232,7 +227,6 @@ begin
       MATRIX_PRODUCT_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MATRIX_PRODUCT_MODULO_IN   => modulo_in_matrix_product,
       MATRIX_PRODUCT_SIZE_A_I_IN => size_a_i_in_matrix_product,
       MATRIX_PRODUCT_SIZE_A_J_IN => size_a_j_in_matrix_product,
       MATRIX_PRODUCT_SIZE_B_I_IN => size_b_i_in_matrix_product,
@@ -255,7 +249,6 @@ begin
       TENSOR_TRANSPOSE_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_transpose,
 
       -- DATA
-      TENSOR_TRANSPOSE_MODULO_IN => modulo_in_tensor_transpose,
       TENSOR_TRANSPOSE_SIZE_I_IN => size_i_in_tensor_transpose,
       TENSOR_TRANSPOSE_SIZE_J_IN => size_j_in_tensor_transpose,
       TENSOR_TRANSPOSE_SIZE_K_IN => size_k_in_tensor_transpose,
@@ -274,7 +267,6 @@ begin
       MATRIX_TRANSPOSE_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_transpose,
 
       -- DATA
-      MATRIX_TRANSPOSE_MODULO_IN => modulo_in_matrix_transpose,
       MATRIX_TRANSPOSE_SIZE_I_IN => size_i_in_matrix_transpose,
       MATRIX_TRANSPOSE_SIZE_J_IN => size_j_in_matrix_transpose,
       MATRIX_TRANSPOSE_DATA_IN   => data_in_matrix_transpose,
@@ -291,7 +283,6 @@ begin
       SCALAR_PRODUCT_DATA_OUT_ENABLE => data_out_enable_scalar_product,
 
       -- DATA
-      SCALAR_PRODUCT_MODULO_IN => modulo_in_scalar_product,
       SCALAR_PRODUCT_LENGTH_IN => length_in_scalar_product,
       SCALAR_PRODUCT_DATA_A_IN => data_a_in_scalar_product,
       SCALAR_PRODUCT_DATA_B_IN => data_b_in_matrix_product,
@@ -314,7 +305,6 @@ begin
       TENSOR_PRODUCT_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_product,
 
       -- DATA
-      TENSOR_PRODUCT_MODULO_IN   => modulo_in_tensor_product,
       TENSOR_PRODUCT_SIZE_A_I_IN => size_a_i_in_tensor_product,
       TENSOR_PRODUCT_SIZE_A_J_IN => size_a_j_in_tensor_product,
       TENSOR_PRODUCT_SIZE_A_K_IN => size_a_k_in_tensor_product,
@@ -351,7 +341,6 @@ begin
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
         -- DATA
-        MODULO_IN   => modulo_in_matrix_product,
         SIZE_A_I_IN => size_a_i_in_matrix_product,
         SIZE_A_J_IN => size_a_j_in_matrix_product,
         SIZE_B_I_IN => size_b_i_in_matrix_product,
@@ -387,7 +376,6 @@ begin
         DATA_OUT_K_ENABLE => data_out_k_enable_tensor_transpose,
 
         -- DATA
-        MODULO_IN => modulo_in_tensor_transpose,
         SIZE_I_IN => size_i_in_tensor_transpose,
         SIZE_J_IN => size_j_in_tensor_transpose,
         SIZE_K_IN => size_k_in_tensor_transpose,
@@ -419,7 +407,6 @@ begin
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_transpose,
 
         -- DATA
-        MODULO_IN => modulo_in_matrix_transpose,
         SIZE_I_IN => size_i_in_matrix_transpose,
         SIZE_J_IN => size_j_in_matrix_transpose,
         DATA_IN   => data_in_matrix_transpose,
@@ -449,7 +436,6 @@ begin
         DATA_OUT_ENABLE => data_out_enable_scalar_product,
 
         -- DATA
-        MODULO_IN => modulo_in_scalar_product,
         LENGTH_IN => length_in_scalar_product,
         DATA_A_IN => data_a_in_scalar_product,
         DATA_B_IN => data_b_in_scalar_product,
@@ -485,7 +471,6 @@ begin
         DATA_OUT_K_ENABLE => data_out_k_enable_tensor_product,
 
         -- DATA
-        MODULO_IN   => modulo_in_tensor_product,
         SIZE_A_I_IN => size_a_i_in_tensor_product,
         SIZE_A_J_IN => size_a_j_in_tensor_product,
         SIZE_A_K_IN => size_a_k_in_tensor_product,

@@ -51,7 +51,6 @@ module ntm_scalar_cosh_function #(
     output reg READY,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] DATA_IN,
     output reg [DATA_SIZE-1:0] DATA_OUT
   );
@@ -76,7 +75,6 @@ module ntm_scalar_cosh_function #(
   wire operation_scalar_adder;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_adder;
   wire [DATA_SIZE-1:0] data_a_in_scalar_adder;
   wire [DATA_SIZE-1:0] data_b_in_scalar_adder;
   wire [DATA_SIZE-1:0] data_out_scalar_adder;
@@ -87,7 +85,6 @@ module ntm_scalar_cosh_function #(
   wire ready_scalar_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_multiplier;
   wire [DATA_SIZE-1:0] data_a_in_scalar_multiplier;
   wire [DATA_SIZE-1:0] data_b_in_scalar_multiplier;
   wire [DATA_SIZE-1:0] data_out_scalar_multiplier;
@@ -98,7 +95,6 @@ module ntm_scalar_cosh_function #(
   wire ready_scalar_divider;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_divider;
   wire [DATA_SIZE-1:0] data_a_in_scalar_divider;
   wire [DATA_SIZE-1:0] data_b_in_scalar_divider;
   wire [DATA_SIZE-1:0] data_out_scalar_divider;
@@ -109,7 +105,6 @@ module ntm_scalar_cosh_function #(
   wire ready_scalar_exponentiator;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_exponentiator;
   wire [DATA_SIZE-1:0] data_a_in_scalar_exponentiator;
   wire [DATA_SIZE-1:0] data_b_in_scalar_exponentiator;
   wire [DATA_SIZE-1:0] data_out_scalar_exponentiator;
@@ -135,7 +130,6 @@ module ntm_scalar_cosh_function #(
     .OPERATION(operation_scalar_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_adder),
     .DATA_A_IN(data_a_in_scalar_adder),
     .DATA_B_IN(data_b_in_scalar_adder),
     .DATA_OUT(data_out_scalar_adder)
@@ -156,7 +150,6 @@ module ntm_scalar_cosh_function #(
     .READY(ready_scalar_multiplier),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_multiplier),
     .DATA_A_IN(data_a_in_scalar_multiplier),
     .DATA_B_IN(data_b_in_scalar_multiplier),
     .DATA_OUT(data_out_scalar_multiplier)
@@ -177,7 +170,6 @@ module ntm_scalar_cosh_function #(
     .READY(ready_scalar_divider),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_divider),
     .DATA_A_IN(data_a_in_scalar_divider),
     .DATA_B_IN(data_b_in_scalar_divider),
     .DATA_OUT(data_out_scalar_divider)
@@ -198,7 +190,6 @@ module ntm_scalar_cosh_function #(
     .READY(ready_scalar_exponentiator),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_exponentiator),
     .DATA_A_IN(data_a_in_scalar_exponentiator),
     .DATA_B_IN(data_b_in_scalar_exponentiator),
     .DATA_OUT(data_out_scalar_exponentiator)

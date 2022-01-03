@@ -174,7 +174,6 @@ architecture ntm_interface_vector_architecture of ntm_interface_vector is
   signal data_out_enable_scalar_product : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_scalar_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -194,7 +193,6 @@ architecture ntm_interface_vector_architecture of ntm_interface_vector is
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -250,7 +248,6 @@ begin
           data_b_in_enable_scalar_product <= H_IN_ENABLE;
 
           -- Data Inputs
-          modulo_in_scalar_product <= FULL;
           length_in_scalar_product <= SIZE_L_IN;
           data_a_in_scalar_product <= WBETA_IN;
           data_b_in_scalar_product <= H_IN;
@@ -267,7 +264,6 @@ begin
           data_b_in_enable_scalar_product <= H_IN_ENABLE;
 
           -- Data Inputs
-          modulo_in_scalar_product <= FULL;
           length_in_scalar_product <= SIZE_L_IN;
           data_a_in_scalar_product <= WG_IN;
           data_b_in_scalar_product <= H_IN;
@@ -284,7 +280,6 @@ begin
           data_b_in_enable_scalar_product <= H_IN_ENABLE;
 
           -- Data Inputs
-          modulo_in_scalar_product <= FULL;
           length_in_scalar_product <= SIZE_L_IN;
           data_a_in_scalar_product <= WGAMMA_IN;
           data_b_in_scalar_product <= H_IN;
@@ -332,7 +327,6 @@ begin
           data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_W_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
           size_b_i_in_matrix_product <= SIZE_L_IN;
@@ -354,7 +348,6 @@ begin
           data_b_in_j_enable_matrix_product <= '0';
 
           -- Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_N_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
           size_b_i_in_matrix_product <= SIZE_L_IN;
@@ -393,7 +386,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_scalar_product,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_product,
       LENGTH_IN => length_in_scalar_product,
       DATA_A_IN => data_a_in_scalar_product,
       DATA_B_IN => data_b_in_scalar_product,
@@ -424,7 +416,6 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MODULO_IN   => modulo_in_matrix_product,
       SIZE_A_I_IN => size_a_i_in_matrix_product,
       SIZE_A_J_IN => size_a_j_in_matrix_product,
       SIZE_B_I_IN => size_b_i_in_matrix_product,

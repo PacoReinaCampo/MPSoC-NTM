@@ -184,7 +184,6 @@ architecture ntm_controller_architecture of ntm_controller is
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -204,7 +203,6 @@ architecture ntm_controller_architecture of ntm_controller is
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -223,7 +221,6 @@ architecture ntm_controller_architecture of ntm_controller is
   signal data_out_enable_vector_logistic : std_logic;
 
   -- DATA
-  signal modulo_in_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_logistic   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -325,7 +322,6 @@ begin
         when MATRIX_FIRST_PRODUCT_I_STATE =>  -- STEP 1
 
           -- Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_L_IN;
           size_a_j_in_matrix_product <= SIZE_X_IN;
           size_b_i_in_matrix_product <= SIZE_X_IN;
@@ -384,7 +380,6 @@ begin
         when VECTOR_FIRST_ADDER_STATE =>  -- STEP 3
 
           -- Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_matrix_product;
           data_b_in_vector_adder <= B_IN;
@@ -409,7 +404,6 @@ begin
         when MATRIX_SECOND_PRODUCT_I_STATE =>  -- STEP 4
 
           -- Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_L_IN;
           size_a_j_in_matrix_product <= SIZE_W_IN;
           size_b_i_in_matrix_product <= SIZE_W_IN;
@@ -468,7 +462,6 @@ begin
         when VECTOR_SECOND_ADDER_STATE =>  -- STEP 6
 
           -- Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_matrix_product;
           data_b_in_vector_adder <= data_out_vector_adder;
@@ -493,7 +486,6 @@ begin
         when MATRIX_THIRD_PRODUCT_I_STATE =>  -- STEP 7
 
           -- Data Inputs
-          modulo_in_matrix_product   <= FULL;
           size_a_i_in_matrix_product <= SIZE_L_IN;
           size_a_j_in_matrix_product <= SIZE_L_IN;
           size_b_i_in_matrix_product <= SIZE_L_IN;
@@ -552,7 +544,6 @@ begin
         when VECTOR_THIRD_ADDER_STATE =>  -- STEP 9
 
           -- Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_matrix_product;
           data_b_in_vector_adder <= data_out_vector_adder;
@@ -577,7 +568,6 @@ begin
         when VECTOR_LOGISTIC_STATE =>  -- STEP 10
 
           -- Data Inputs
-          modulo_in_vector_logistic <= FULL;
           size_in_vector_logistic   <= SIZE_L_IN;
           data_in_vector_logistic   <= data_out_vector_adder;
 
@@ -666,7 +656,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_adder,
       SIZE_IN   => size_in_vector_adder,
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
@@ -697,7 +686,6 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MODULO_IN   => modulo_in_matrix_product,
       SIZE_A_I_IN => size_a_i_in_matrix_product,
       SIZE_A_J_IN => size_a_j_in_matrix_product,
       SIZE_B_I_IN => size_b_i_in_matrix_product,
@@ -727,7 +715,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_logistic,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_logistic,
       SIZE_IN   => size_in_vector_logistic,
       DATA_IN   => data_in_vector_logistic,
       DATA_OUT  => data_out_vector_logistic

@@ -127,7 +127,6 @@ module ntm_state_gate_vector #(
   wire data_out_enable_vector_adder;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_adder;
   reg [DATA_SIZE-1:0] size_in_vector_adder;
   reg [DATA_SIZE-1:0] data_a_in_vector_adder;
   reg [DATA_SIZE-1:0] data_b_in_vector_adder;
@@ -143,7 +142,6 @@ module ntm_state_gate_vector #(
   wire data_out_enable_vector_multiplier;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_multiplier;
   reg [DATA_SIZE-1:0] size_in_vector_multiplier;
   reg [DATA_SIZE-1:0] data_a_in_vector_multiplier;
   reg [DATA_SIZE-1:0] data_b_in_vector_multiplier;
@@ -180,7 +178,6 @@ module ntm_state_gate_vector #(
         VECTOR_FIRST_MULTIPLIER_STATE : begin  // STEP 1
 
           // Data Outputs
-          modulo_in_vector_multiplier <= FULL;
           size_in_vector_multiplier   <= SIZE_L_IN;
           data_a_in_vector_multiplier <= F_IN;
           data_b_in_vector_multiplier <= S_IN;
@@ -189,7 +186,6 @@ module ntm_state_gate_vector #(
         VECTOR_FIRST_ADDER_STATE : begin  // STEP 2
 
           // Data Outputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= ZERO_DATA;
           data_b_in_vector_adder <= data_out_vector_multiplier;
@@ -198,7 +194,6 @@ module ntm_state_gate_vector #(
         VECTOR_SECOND_MULTIPLIER_STATE : begin  // STEP 3
 
           // Data Outputs
-          modulo_in_vector_multiplier <= FULL;
           size_in_vector_multiplier   <= SIZE_L_IN;
           data_a_in_vector_multiplier <= I_IN;
           data_b_in_vector_multiplier <= A_IN;
@@ -207,7 +202,6 @@ module ntm_state_gate_vector #(
         VECTOR_SECOND_ADDER_STATE : begin  // STEP 4
 
           // Data Outputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_vector_adder;
           data_b_in_vector_adder <= data_out_vector_multiplier;
@@ -245,7 +239,6 @@ module ntm_state_gate_vector #(
     .DATA_OUT_ENABLE(data_out_enable_vector_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_adder),
     .SIZE_IN(size_in_vector_adder),
     .DATA_A_IN(data_a_in_vector_adder),
     .DATA_B_IN(data_b_in_vector_adder),
@@ -271,7 +264,6 @@ module ntm_state_gate_vector #(
     .DATA_OUT_ENABLE(data_out_enable_vector_multiplier),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_multiplier),
     .SIZE_IN(size_in_vector_multiplier),
     .DATA_A_IN(data_a_in_vector_multiplier),
     .DATA_B_IN(data_b_in_vector_multiplier),

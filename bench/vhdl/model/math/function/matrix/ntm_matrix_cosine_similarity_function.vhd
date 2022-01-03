@@ -70,7 +70,6 @@ entity ntm_matrix_cosine_similarity_function is
     DATA_OUT_SCALAR_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -148,7 +147,6 @@ architecture ntm_matrix_cosine_similarity_function_architecture of ntm_matrix_co
   signal data_out_scalar_enable_vector_cosine_similarity : std_logic;
 
   -- DATA
-  signal modulo_in_vector_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_cosine_similarity   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_vector_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -243,7 +241,6 @@ begin
 
           if (data_a_in_matrix_cosine_similarity_int = '1' and data_a_in_vector_cosine_similarity_int = '1' and data_a_in_scalar_cosine_similarity_int = '1' and data_b_in_matrix_cosine_similarity_int = '1' and data_a_in_vector_cosine_similarity_int = '1' and data_a_in_scalar_cosine_similarity_int = '1') then
             -- Data Inputs
-            modulo_in_vector_cosine_similarity <= MODULO_IN;
             size_in_vector_cosine_similarity   <= SIZE_J_IN;
             length_in_vector_cosine_similarity <= LENGTH_IN;
 
@@ -484,7 +481,6 @@ begin
       DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_cosine_similarity,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_cosine_similarity,
       SIZE_IN   => size_in_vector_cosine_similarity,
       LENGTH_IN => length_in_vector_cosine_similarity,
       DATA_A_IN => data_a_in_vector_cosine_similarity,

@@ -184,7 +184,6 @@ architecture ntm_controller_architecture of ntm_controller is
   signal data_out_enable_vector_adder : std_logic;
 
   -- DATA
-  signal modulo_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -204,7 +203,6 @@ architecture ntm_controller_architecture of ntm_controller is
   signal data_out_scalar_enable_vector_convolution : std_logic;
 
   -- DATA
-  signal modulo_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_convolution   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_vector_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -221,7 +219,6 @@ architecture ntm_controller_architecture of ntm_controller is
   signal data_out_enable_vector_logistic : std_logic;
 
   -- DATA
-  signal modulo_in_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_logistic   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -329,7 +326,6 @@ begin
           data_b_in_scalar_enable_vector_convolution <= '0';
 
           -- Data Inputs
-          modulo_in_vector_convolution <= FULL;
           size_in_vector_convolution   <= ONE_CONTROL;
           length_in_vector_convolution <= ONE_CONTROL;
           data_a_in_vector_convolution <= W_IN;
@@ -391,7 +387,6 @@ begin
           data_b_in_enable_vector_adder <= '0';
 
           -- Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_vector_convolution;
           data_b_in_vector_adder <= B_IN;
@@ -405,7 +400,6 @@ begin
           data_b_in_scalar_enable_vector_convolution <= '0';
 
           -- Data Inputs
-          modulo_in_vector_convolution <= FULL;
           size_in_vector_convolution   <= ONE_CONTROL;
           length_in_vector_convolution <= ONE_CONTROL;
           data_a_in_vector_convolution <= K_IN;
@@ -467,7 +461,6 @@ begin
           data_b_in_enable_vector_adder <= '0';
 
           -- Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_vector_convolution;
           data_b_in_vector_adder <= data_out_vector_adder;
@@ -481,7 +474,6 @@ begin
           data_b_in_scalar_enable_vector_convolution <= '0';
 
           -- Data Inputs
-          modulo_in_vector_convolution <= FULL;
           size_in_vector_convolution   <= ONE_CONTROL;
           length_in_vector_convolution <= ONE_CONTROL;
           data_a_in_vector_convolution <= K_IN;
@@ -543,7 +535,6 @@ begin
           data_b_in_enable_vector_adder <= '0';
 
           -- Data Inputs
-          modulo_in_vector_adder <= FULL;
           size_in_vector_adder   <= SIZE_L_IN;
           data_a_in_vector_adder <= data_out_vector_convolution;
           data_b_in_vector_adder <= data_out_vector_adder;
@@ -554,7 +545,6 @@ begin
           data_in_enable_vector_logistic <= '0';
 
           -- Data Inputs
-          modulo_in_vector_logistic <= FULL;
           size_in_vector_logistic   <= SIZE_L_IN;
           data_in_vector_logistic   <= data_out_vector_adder;
 
@@ -640,7 +630,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_adder,
       SIZE_IN   => size_in_vector_adder,
       DATA_A_IN => data_a_in_vector_adder,
       DATA_B_IN => data_b_in_vector_adder,
@@ -671,7 +660,6 @@ begin
       DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_convolution,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_convolution,
       SIZE_IN   => size_in_vector_convolution,
       LENGTH_IN => length_in_vector_convolution,
       DATA_A_IN => data_a_in_vector_convolution,
@@ -699,7 +687,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_logistic,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_logistic,
       SIZE_IN   => size_in_vector_logistic,
       DATA_IN   => data_in_vector_logistic,
       DATA_OUT  => data_out_vector_logistic

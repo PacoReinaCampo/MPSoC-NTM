@@ -114,7 +114,6 @@ module dnc_temporal_link_matrix #(
   wire operation_scalar_adder;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_adder;
   wire [DATA_SIZE-1:0] data_a_in_scalar_adder;
   wire [DATA_SIZE-1:0] data_b_in_scalar_adder;
   wire [DATA_SIZE-1:0] data_out_scalar_adder;
@@ -124,7 +123,6 @@ module dnc_temporal_link_matrix #(
   wire start_scalar_multiplier;
   wire ready_scalar_multiplier;
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_multiplier;
   wire [DATA_SIZE-1:0] data_a_in_scalar_multiplier;
   wire [DATA_SIZE-1:0] data_b_in_scalar_multiplier;
   wire [DATA_SIZE-1:0] data_out_scalar_multiplier;
@@ -187,7 +185,6 @@ module dnc_temporal_link_matrix #(
     .OPERATION(operation_scalar_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_adder),
     .DATA_A_IN(data_a_in_scalar_adder),
     .DATA_B_IN(data_b_in_scalar_adder),
     .DATA_OUT(data_out_scalar_adder)
@@ -208,7 +205,6 @@ module dnc_temporal_link_matrix #(
     .READY(ready_scalar_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_multiplier),
     .DATA_A_IN(data_a_in_scalar_multiplier),
     .DATA_B_IN(data_b_in_scalar_multiplier),
     .DATA_OUT(data_out_scalar_multiplier)

@@ -99,7 +99,6 @@ module dnc_read_modes #(
   wire data_out_scalar_enable_vector_softmax;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_vector_softmax;
   wire [DATA_SIZE-1:0] length_in_vector_softmax;
   wire [DATA_SIZE-1:0] size_in_vector_softmax;
   wire [DATA_SIZE-1:0] data_in_vector_softmax;
@@ -121,7 +120,6 @@ module dnc_read_modes #(
   assign PI_OUT_P_ENABLE = data_out_scalar_enable_vector_softmax;
 
   // DATA
-  assign modulo_in_vector_softmax = FULL;
   assign length_in_vector_softmax = THREE_DATA;
   assign size_in_vector_softmax = SIZE_R_IN;
   assign data_in_vector_softmax = PI_IN;
@@ -147,7 +145,6 @@ module dnc_read_modes #(
     .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_softmax),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_softmax),
     .SIZE_IN(size_in_vector_softmax),
     .LENGTH_IN(length_in_vector_softmax),
     .DATA_IN(data_in_vector_softmax),

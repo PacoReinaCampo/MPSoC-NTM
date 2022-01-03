@@ -54,7 +54,6 @@ module ntm_vector_sinh_function #(
     output reg DATA_OUT_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] SIZE_IN,
     input [DATA_SIZE-1:0] DATA_IN,
     output reg [DATA_SIZE-1:0] DATA_OUT
@@ -103,7 +102,6 @@ module ntm_vector_sinh_function #(
   wire ready_scalar_sinh;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_scalar_sinh;
   reg [DATA_SIZE-1:0] data_in_scalar_sinh;
   wire [DATA_SIZE-1:0] data_out_scalar_sinh;
 
@@ -140,7 +138,6 @@ module ntm_vector_sinh_function #(
         INPUT_STATE : begin  // STEP 1
           if(DATA_IN_ENABLE == 1'b1) begin
             // Data Inputs
-            modulo_in_scalar_sinh <= MODULO_IN;
             data_in_scalar_sinh <= DATA_IN;
 
             if(index_loop == ZERO_DATA) begin
@@ -206,7 +203,6 @@ module ntm_vector_sinh_function #(
     .READY(ready_scalar_sinh),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_sinh),
     .DATA_IN(data_in_scalar_sinh),
     .DATA_OUT(data_out_scalar_sinh)
   );

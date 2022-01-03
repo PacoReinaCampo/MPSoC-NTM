@@ -67,7 +67,6 @@ entity ntm_matrix_exponentiator is
     DATA_OUT_J_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -136,7 +135,6 @@ architecture ntm_matrix_exponentiator_architecture of ntm_matrix_exponentiator i
   signal data_out_enable_vector_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_in_vector_exponentiator   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -178,7 +176,6 @@ begin
       data_b_in_j_exponentiator_int <= '0';
 
       -- Data Internal
-      modulo_in_vector_exponentiator <= ZERO_DATA;
       size_in_vector_exponentiator   <= ZERO_CONTROL;
       data_a_in_vector_exponentiator <= ZERO_DATA;
       data_b_in_vector_exponentiator <= ZERO_DATA;
@@ -238,7 +235,6 @@ begin
 
           if (data_a_in_i_exponentiator_int = '1' and data_a_in_j_exponentiator_int = '1' and data_b_in_i_exponentiator_int = '1' and data_b_in_j_exponentiator_int = '1') then
             -- Data Inputs
-            modulo_in_vector_exponentiator <= MODULO_IN;
             size_in_vector_exponentiator   <= SIZE_J_IN;
 
             -- Control Internal
@@ -391,7 +387,6 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_exponentiator,
       SIZE_IN   => size_in_vector_exponentiator,
       DATA_A_IN => data_a_in_vector_exponentiator,
       DATA_B_IN => data_b_in_vector_exponentiator,

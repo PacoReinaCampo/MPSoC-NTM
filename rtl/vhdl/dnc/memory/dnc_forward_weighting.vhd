@@ -128,7 +128,6 @@ architecture dnc_forward_weighting_architecture of dnc_forward_weighting is
   signal data_out_j_enable_matrix_product : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -160,7 +159,6 @@ begin
   F_OUT_J_ENABLE <= data_out_j_enable_matrix_product;
 
   -- DATA
-  modulo_in_matrix_product   <= FULL;
   size_a_i_in_matrix_product <= SIZE_N_IN;
   size_a_j_in_matrix_product <= SIZE_N_IN;
   size_b_i_in_matrix_product <= SIZE_R_IN;
@@ -194,7 +192,6 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
       -- DATA
-      MODULO_IN   => modulo_in_matrix_product,
       SIZE_A_I_IN => size_a_i_in_matrix_product,
       SIZE_A_J_IN => size_a_j_in_matrix_product,
       SIZE_B_I_IN => size_b_i_in_matrix_product,

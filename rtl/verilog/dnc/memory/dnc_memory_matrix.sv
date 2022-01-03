@@ -121,7 +121,6 @@ module dnc_memory_matrix #(
   wire data_out_j_enable_matrix_transpose;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_transpose;
   wire [DATA_SIZE-1:0] size_i_in_matrix_transpose;
   wire [DATA_SIZE-1:0] size_j_in_matrix_transpose;
   wire [DATA_SIZE-1:0] data_in_matrix_transpose;
@@ -140,7 +139,6 @@ module dnc_memory_matrix #(
   wire data_out_j_enable_matrix_product;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_matrix_product;
   wire [DATA_SIZE-1:0] size_a_i_in_matrix_product;
   wire [DATA_SIZE-1:0] size_a_j_in_matrix_product;
   wire [DATA_SIZE-1:0] size_b_i_in_matrix_product;
@@ -209,7 +207,6 @@ module dnc_memory_matrix #(
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_transpose),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_transpose),
     .SIZE_I_IN(size_i_in_matrix_transpose),
     .SIZE_J_IN(size_j_in_matrix_transpose),
     .DATA_IN(data_in_matrix_transpose),
@@ -238,7 +235,6 @@ module dnc_memory_matrix #(
     .DATA_OUT_J_ENABLE(data_out_j_enable_matrix_product),
 
     // DATA
-    .MODULO_IN(modulo_in_matrix_product),
     .SIZE_A_I_IN(size_a_i_in_matrix_product),
     .SIZE_A_J_IN(size_a_j_in_matrix_product),
     .SIZE_B_I_IN(size_b_i_in_matrix_product),

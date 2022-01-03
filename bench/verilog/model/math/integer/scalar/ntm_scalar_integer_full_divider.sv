@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_integer_divider #(
+module ntm_scalar_integer_full_divider #(
   parameter DATA_SIZE=128,
   parameter CONTROL_SIZE=64
 )
@@ -54,8 +54,8 @@ module ntm_scalar_integer_divider #(
     input [DATA_SIZE-1:0] DATA_A_IN,
     input [DATA_SIZE-1:0] DATA_B_IN,
 
-    output reg [DATA_SIZE-1:0] DATA_OUT,
-    output reg [DATA_SIZE-1:0] REST_OUT
+    output reg [DATA_SIZE-1:0] DATA_INTEGER_OUT,
+    output reg [DATA_SIZE-1:0] DATA_FRACTIONAL_OUT
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -104,13 +104,13 @@ module ntm_scalar_integer_divider #(
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = DATA_A_IN / DATA_B_IN
+  // DATA_INTEGER_OUT = DATA_A_IN / DATA_B_IN
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      DATA_OUT <= ZERO_DATA;
+      DATA_INTEGER_OUT <= ZERO_DATA;
 
       // Control Outputs
       READY <= 1'b0;
@@ -149,7 +149,7 @@ module ntm_scalar_integer_divider #(
           v_int <= v_int;
 
           // FSM Control
-          if(v_int < {1'b0,REST_OUT}) begin
+          if(v_int < {1'b0,DATA_FRACTIONAL_OUT}) begin
             divider_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
           end
           else begin
@@ -157,28 +157,28 @@ module ntm_scalar_integer_divider #(
           end
         end
         REDUCE_DATA_B_STATE : begin  // STEP 2
-          if(v_int < {1'b0,REST_OUT}) begin
+          if(v_int < {1'b0,DATA_FRACTIONAL_OUT}) begin
             // FSM Control
             divider_ctrl_fsm_int <= SET_PRODUCT_OUT_STATE;
           end
           else begin
             // Assignation
-            v_int <= (v_int - {1'b0,REST_OUT});
+            v_int <= (v_int - {1'b0,DATA_FRACTIONAL_OUT});
           end
         end
         SET_PRODUCT_OUT_STATE : begin  // STEP 3
           // Assignation
           if(u_int[0] == 1'b1) begin
-            if((divider_int + v_int) < {1'b0,REST_OUT}) begin
+            if((divider_int + v_int) < {1'b0,DATA_FRACTIONAL_OUT}) begin
               divider_int <= (divider_int + v_int);
             end
             else begin
-              divider_int <= (divider_int + v_int - {1'b0,REST_OUT});
+              divider_int <= (divider_int + v_int - {1'b0,DATA_FRACTIONAL_OUT});
             end
           end
           else begin
-            if(divider_int >= {1'b0,REST_OUT}) begin
-              divider_int <= (divider_int - REST_OUT);
+            if(divider_int >= {1'b0,DATA_FRACTIONAL_OUT}) begin
+              divider_int <= (divider_int - DATA_FRACTIONAL_OUT);
             end
           end
           // FSM Control
@@ -187,7 +187,7 @@ module ntm_scalar_integer_divider #(
         ENDER_STATE : begin  // STEP 4
           if(u_int == {1'b0,ONE_CONTROL}) begin
             // Data Outputs
-            DATA_OUT <= divider_int[DATA_SIZE-1:0];
+            DATA_INTEGER_OUT <= divider_int[DATA_SIZE-1:0];
 
             // Control Outputs
             READY <= 1'b1;

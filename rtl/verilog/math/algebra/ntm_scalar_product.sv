@@ -55,7 +55,6 @@ module ntm_scalar_product #(
     output reg DATA_OUT_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] LENGTH_IN,
     input [DATA_SIZE-1:0] DATA_A_IN,
     input [DATA_SIZE-1:0] DATA_B_IN,
@@ -107,7 +106,6 @@ module ntm_scalar_product #(
   wire operation_scalar_adder;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_adder;
   wire [DATA_SIZE-1:0] data_a_in_scalar_adder;
   wire [DATA_SIZE-1:0] data_b_in_scalar_adder;
   wire [DATA_SIZE-1:0] data_out_scalar_adder;
@@ -118,7 +116,6 @@ module ntm_scalar_product #(
   wire ready_scalar_multiplier;
 
   // DATA
-  wire [DATA_SIZE-1:0] modulo_in_scalar_multiplier;
   wire [DATA_SIZE-1:0] data_a_in_scalar_multiplier;
   wire [DATA_SIZE-1:0] data_b_in_scalar_multiplier;
   wire [DATA_SIZE-1:0] data_out_scalar_multiplier;
@@ -190,7 +187,6 @@ module ntm_scalar_product #(
     .OPERATION(operation_scalar_adder),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_adder),
     .DATA_A_IN(data_a_in_scalar_adder),
     .DATA_B_IN(data_b_in_scalar_adder),
     .DATA_OUT(data_out_scalar_adder)
@@ -210,7 +206,6 @@ module ntm_scalar_product #(
     .READY(ready_scalar_multiplier),
 
     // DATA
-    .MODULO_IN(modulo_in_scalar_multiplier),
     .DATA_A_IN(data_a_in_scalar_multiplier),
     .DATA_B_IN(data_b_in_scalar_multiplier),
     .DATA_OUT(data_out_scalar_multiplier)

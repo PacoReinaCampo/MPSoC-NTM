@@ -114,7 +114,6 @@ architecture dnc_read_modes_architecture of dnc_read_modes is
   signal data_out_scalar_enable_vector_softmax : std_logic;
 
   -- DATA
-  signal modulo_in_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_vector_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_in_vector_softmax   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -141,7 +140,6 @@ begin
   PI_OUT_P_ENABLE <= data_out_scalar_enable_vector_softmax;
 
   -- DATA
-  modulo_in_vector_softmax <= FULL;
   length_in_vector_softmax <= ONE_CONTROL;
   size_in_vector_softmax   <= SIZE_R_IN;
 
@@ -171,7 +169,6 @@ begin
       DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_softmax,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_softmax,
       SIZE_IN   => size_in_vector_softmax,
       LENGTH_IN => length_in_vector_softmax,
       DATA_IN   => data_in_vector_softmax,

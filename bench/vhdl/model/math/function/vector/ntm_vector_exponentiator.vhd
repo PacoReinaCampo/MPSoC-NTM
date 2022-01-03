@@ -64,7 +64,6 @@ entity ntm_vector_exponentiator is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -122,7 +121,6 @@ architecture ntm_vector_exponentiator_architecture of ntm_vector_exponentiator i
   signal ready_scalar_exponentiator : std_logic;
 
   -- DATA
-  signal modulo_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_a_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -155,7 +153,6 @@ begin
       data_b_in_exponentiator_int <= '0';
 
       -- Data Internal
-      modulo_in_scalar_exponentiator <= ZERO_DATA;
       data_a_in_scalar_exponentiator <= ZERO_DATA;
       data_b_in_scalar_exponentiator <= ZERO_DATA;
 
@@ -199,9 +196,6 @@ begin
 
             data_a_in_exponentiator_int <= '0';
             data_b_in_exponentiator_int <= '0';
-
-            -- Data Inputs
-            modulo_in_scalar_exponentiator <= MODULO_IN;
 
             -- FSM Control
             exponentiator_ctrl_fsm_int <= ENDER_STATE;
@@ -266,7 +260,6 @@ begin
       READY => ready_scalar_exponentiator,
 
       -- DATA
-      MODULO_IN => modulo_in_scalar_exponentiator,
       DATA_A_IN => data_a_in_scalar_exponentiator,
       DATA_B_IN => data_b_in_scalar_exponentiator,
       DATA_OUT  => data_out_scalar_exponentiator

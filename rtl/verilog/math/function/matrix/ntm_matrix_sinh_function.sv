@@ -56,7 +56,6 @@ module ntm_matrix_sinh_function #(
     output reg DATA_OUT_J_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] MODULO_IN,
     input [DATA_SIZE-1:0] SIZE_I_IN,
     input [DATA_SIZE-1:0] SIZE_J_IN,
     input [DATA_SIZE-1:0] DATA_IN,
@@ -110,7 +109,6 @@ module ntm_matrix_sinh_function #(
   wire data_out_enable_vector_sinh;
 
   // DATA
-  reg [DATA_SIZE-1:0] modulo_in_vector_sinh;
   reg [DATA_SIZE-1:0] size_in_vector_sinh;
   reg [DATA_SIZE-1:0] data_in_vector_sinh;
   wire [DATA_SIZE-1:0] data_out_vector_sinh;
@@ -150,7 +148,6 @@ module ntm_matrix_sinh_function #(
         INPUT_I_STATE : begin  // STEP 1
           if(DATA_IN_I_ENABLE == 1'b1) begin
             // Data Inputs
-            modulo_in_vector_sinh <= MODULO_IN;
             data_in_vector_sinh <= DATA_IN;
 
             if(index_i_loop == ZERO_DATA) begin
@@ -175,7 +172,6 @@ module ntm_matrix_sinh_function #(
         INPUT_J_STATE : begin  // STEP 2
           if(DATA_IN_J_ENABLE == 1'b1) begin
             // Data Inputs
-            modulo_in_vector_sinh <= MODULO_IN;
             size_in_vector_sinh <= SIZE_J_IN;
             data_in_vector_sinh <= DATA_IN;
 
@@ -263,7 +259,6 @@ module ntm_matrix_sinh_function #(
     .DATA_OUT_ENABLE(data_out_enable_vector_sinh),
 
     // DATA
-    .MODULO_IN(modulo_in_vector_sinh),
     .SIZE_IN(size_in_vector_sinh),
     .DATA_IN(data_in_vector_sinh),
     .DATA_OUT(data_out_vector_sinh)
