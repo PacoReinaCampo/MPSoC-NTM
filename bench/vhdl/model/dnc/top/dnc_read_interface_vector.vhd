@@ -131,12 +131,18 @@ architecture dnc_read_interface_vector_architecture of dnc_read_interface_vector
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    MATRIX_I_FIRST_PRODUCT_STATE,       -- STEP 1
-    MATRIX_J_FIRST_PRODUCT_STATE,       -- STEP 2
-    MATRIX_I_SECOND_PRODUCT_STATE,      -- STEP 3
-    MATRIX_J_SECOND_PRODUCT_STATE,      -- STEP 4
-    MATRIX_I_THIRD_PRODUCT_STATE,       -- STEP 5
-    MATRIX_J_THIRD_PRODUCT_STATE        -- STEP 6
+	INPUT_I_FIRST_STATE,                -- STEP 1
+	INPUT_J_FIRST_STATE,                -- STEP 2
+    MATRIX_I_FIRST_PRODUCT_STATE,       -- STEP 3
+    MATRIX_J_FIRST_PRODUCT_STATE,       -- STEP 4
+	INPUT_I_SECOND_STATE,               -- STEP 5
+	INPUT_J_SECOND_STATE,               -- STEP 6
+    MATRIX_I_SECOND_PRODUCT_STATE,      -- STEP 7
+    MATRIX_J_SECOND_PRODUCT_STATE,      -- STEP 8
+	INPUT_I_THIRD_STATE,                -- STEP 9
+	INPUT_J_THIRD_STATE,                -- STEP 10
+    MATRIX_I_THIRD_PRODUCT_STATE,       -- STEP 11
+    MATRIX_J_THIRD_PRODUCT_STATE        -- STEP 12
     );
 
   -----------------------------------------------------------------------
@@ -246,15 +252,19 @@ begin
             start_matrix_product <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_I_FIRST_PRODUCT_STATE;
+            controller_ctrl_fsm_int <= INPUT_I_FIRST_STATE;
           else
             -- Control Internal
             start_matrix_product <= '0';
           end if;
 
-        when MATRIX_I_FIRST_PRODUCT_STATE =>  -- STEP 1
+        when INPUT_I_FIRST_STATE =>  -- STEP 1
 
-        when MATRIX_J_FIRST_PRODUCT_STATE =>  -- STEP 2
+        when INPUT_J_FIRST_STATE =>  -- STEP 2
+
+        when MATRIX_I_FIRST_PRODUCT_STATE =>  -- STEP 3
+
+        when MATRIX_J_FIRST_PRODUCT_STATE =>  -- STEP 4
 
           -- beta(t;i) = Wbeta(t;i;l)·h(t;l)
 
@@ -275,9 +285,13 @@ begin
           -- Data Outputs
           BETA_OUT <= data_out_matrix_product;
 
-        when MATRIX_I_SECOND_PRODUCT_STATE =>  -- STEP 3
+        when INPUT_I_SECOND_STATE =>  -- STEP 5
 
-        when MATRIX_J_SECOND_PRODUCT_STATE =>  -- STEP 4
+        when INPUT_J_SECOND_STATE =>  -- STEP 6
+
+        when MATRIX_I_SECOND_PRODUCT_STATE =>  -- STEP 7
+
+        when MATRIX_J_SECOND_PRODUCT_STATE =>  -- STEP 8
 
           -- f(t;i) = Wf(t;i;l)·h(t;l)
 
@@ -298,9 +312,13 @@ begin
           -- Data Outputs
           F_OUT <= data_out_matrix_product;
 
-        when MATRIX_I_THIRD_PRODUCT_STATE =>  -- STEP 5
+        when INPUT_I_THIRD_STATE =>  -- STEP 9
 
-        when MATRIX_J_THIRD_PRODUCT_STATE =>  -- STEP 6
+        when INPUT_J_THIRD_STATE =>  -- STEP 10
+
+        when MATRIX_I_THIRD_PRODUCT_STATE =>  -- STEP 11
+
+        when MATRIX_J_THIRD_PRODUCT_STATE =>  -- STEP 12
 
           -- pi(t;i) = Wpi(t;i;l)·h(t;l)
 

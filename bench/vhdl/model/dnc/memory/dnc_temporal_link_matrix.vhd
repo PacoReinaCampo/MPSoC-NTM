@@ -89,10 +89,13 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    SCALAR_MULTIPLIER_ADDER_STATE,      -- STEP 1
-    SCALAR_FIRST_ADDER_STATE,           -- STEP 2
-    SCALAR_MULTIPLIER_STATE,            -- STEP 3
-    SCALAR_SECOND_ADDER_STATE           -- STEP 4
+	INPUT_FIRST_STATE,                  -- STEP 1
+    SCALAR_MULTIPLIER_ADDER_STATE,      -- STEP 2
+	INPUT_SECOND_STATE,                 -- STEP 3
+    SCALAR_FIRST_ADDER_STATE,           -- STEP 4
+	INPUT_THIRD_STATE,                  -- STEP 5
+    SCALAR_MULTIPLIER_STATE,            -- STEP 6
+    SCALAR_SECOND_ADDER_STATE           -- STEP 7
     );
 
   -----------------------------------------------------------------------
@@ -190,13 +193,15 @@ begin
             start_scalar_adder <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_MULTIPLIER_ADDER_STATE;
+            controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
           else
             -- Control Internal
             start_scalar_adder <= '0';
           end if;
 
-        when SCALAR_MULTIPLIER_ADDER_STATE =>  -- STEP 1
+        when INPUT_FIRST_STATE =>  -- STEP 1
+
+        when SCALAR_MULTIPLIER_ADDER_STATE =>  -- STEP 2
 
           -- Control Input
           operation_scalar_adder <= '1';
@@ -211,7 +216,9 @@ begin
           -- Data Internal
           data_int_scalar_multiplier <= data_out_scalar_multiplier;
 
-        when SCALAR_FIRST_ADDER_STATE =>  -- STEP 2
+        when INPUT_SECOND_STATE =>  -- STEP 3
+
+        when SCALAR_FIRST_ADDER_STATE =>  -- STEP 4
 
           -- Control Input
           operation_scalar_adder <= '1';
@@ -220,13 +227,15 @@ begin
           data_a_in_scalar_adder <= data_out_scalar_adder;
           data_b_in_scalar_adder <= W_IN;
 
-        when SCALAR_MULTIPLIER_STATE =>  -- STEP 3
+        when SCALAR_MULTIPLIER_STATE =>  -- STEP 5
 
           -- Data Input
           data_a_in_scalar_multiplier <= data_out_scalar_adder;
           data_b_in_scalar_multiplier <= L_OUT;
 
-        when SCALAR_SECOND_ADDER_STATE =>  -- STEP 4
+        when INPUT_THIRD_STATE =>  -- STEP 6
+
+        when SCALAR_SECOND_ADDER_STATE =>  -- STEP 7
 
           -- Control Input
           operation_scalar_adder <= '0';

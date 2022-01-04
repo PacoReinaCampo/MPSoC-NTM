@@ -94,20 +94,30 @@ architecture dnc_memory_matrix_architecture of dnc_memory_matrix is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    MATRIX_TRANSPOSE_I_STATE,           -- STEP 1
-    MATRIX_TRANSPOSE_J_STATE,           -- STEP 2
-    MATRIX_FIRST_PRODUCT_I_STATE,       -- STEP 3
-    MATRIX_FIRST_PRODUCT_J_STATE,       -- STEP 4
-    MATRIX_FIRST_ADDER_I_STATE,         -- STEP 5
-    MATRIX_FIRST_ADDER_J_STATE,         -- STEP 6
-    MATRIX_MULTIPLIER_I_STATE,          -- STEP 7
-    MATRIX_MULTIPLIER_J_STATE,          -- STEP 8
-    MATRIX_SECOND_TRANSPOSE_I_STATE,    -- STEP 9
-    MATRIX_SECOND_TRANSPOSE_J_STATE,    -- STEP 10
-    MATRIX_SECOND_PRODUCT_I_STATE,      -- STEP 11
-    MATRIX_SECOND_PRODUCT_J_STATE,      -- STEP 12
-    MATRIX_SECOND_ADDER_I_STATE,        -- STEP 13
-    MATRIX_SECOND_ADDER_J_STATE         -- STEP 14
+    INPUT_I_FIRST_STATE,                -- STEP 1
+    INPUT_J_FIRST_STATE,                -- STEP 2
+    MATRIX_FIRST_TRANSPOSE_I_STATE,     -- STEP 3
+    MATRIX_FIRST_TRANSPOSE_J_STATE,     -- STEP 4
+    INPUT_I_SECOND_STATE,               -- STEP 5
+    INPUT_J_SECOND_STATE,               -- STEP 6
+    MATRIX_FIRST_PRODUCT_I_STATE,       -- STEP 7
+    MATRIX_FIRST_PRODUCT_J_STATE,       -- STEP 8
+    MATRIX_FIRST_ADDER_I_STATE,         -- STEP 9
+    MATRIX_FIRST_ADDER_J_STATE,         -- STEP 10
+    INPUT_I_THIRD_STATE,                -- STEP 11
+    INPUT_J_THIRD_STATE,                -- STEP 12
+    MATRIX_MULTIPLIER_I_STATE,          -- STEP 13
+    MATRIX_MULTIPLIER_J_STATE,          -- STEP 14
+    INPUT_I_FOURTH_STATE,               -- STEP 15
+    INPUT_J_FOURTH_STATE,               -- STEP 16
+    MATRIX_SECOND_TRANSPOSE_I_STATE,    -- STEP 17
+    MATRIX_SECOND_TRANSPOSE_J_STATE,    -- STEP 18
+    INPUT_I_FIFTH_STATE,                -- STEP 19
+    INPUT_J_FIFTH_STATE,                -- STEP 20
+    MATRIX_SECOND_PRODUCT_I_STATE,      -- STEP 21
+    MATRIX_SECOND_PRODUCT_J_STATE,      -- STEP 22
+    MATRIX_SECOND_ADDER_I_STATE,        -- STEP 23
+    MATRIX_SECOND_ADDER_J_STATE         -- STEP 24
     );
 
   -----------------------------------------------------------------------
@@ -259,13 +269,17 @@ begin
             start_matrix_transpose <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_I_STATE;
+            controller_ctrl_fsm_int <= INPUT_I_FIRST_STATE;
           else
             -- Control Internal
             start_matrix_transpose <= '0';
           end if;
 
-        when MATRIX_TRANSPOSE_I_STATE =>  -- STEP 1
+        when INPUT_I_FIRST_STATE =>  -- STEP 1
+
+        when INPUT_J_FIRST_STATE =>  -- STEP 2
+
+        when MATRIX_FIRST_TRANSPOSE_I_STATE =>  -- STEP 3
 
           -- Control Inputs
           data_in_i_enable_matrix_transpose <= E_IN_K_ENABLE;
@@ -283,7 +297,7 @@ begin
               index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_J_STATE;
+              controller_ctrl_fsm_int <= MATRIX_FIRST_TRANSPOSE_J_STATE;
             end if;
 
             -- Data Outputs
@@ -296,7 +310,7 @@ begin
             M_OUT_J_ENABLE <= '0';
           end if;
 
-        when MATRIX_TRANSPOSE_J_STATE =>  -- STEP 2
+        when MATRIX_FIRST_TRANSPOSE_J_STATE =>  -- STEP 4
 
           -- Control Inputs
           data_in_i_enable_matrix_transpose <= E_IN_K_ENABLE;
@@ -319,7 +333,7 @@ begin
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_I_STATE;
+              controller_ctrl_fsm_int <= MATRIX_FIRST_TRANSPOSE_I_STATE;
             end if;
 
             -- Data Outputs
@@ -332,7 +346,11 @@ begin
             M_OUT_K_ENABLE <= '0';
           end if;
 
-        when MATRIX_FIRST_PRODUCT_I_STATE =>  -- STEP 3
+        when INPUT_I_SECOND_STATE =>  -- STEP 5
+
+        when INPUT_J_SECOND_STATE =>  -- STEP 6
+
+        when MATRIX_FIRST_PRODUCT_I_STATE =>  -- STEP 7
 
           -- Control Inputs
           data_a_in_i_enable_matrix_product <= W_IN_J_ENABLE;
@@ -355,7 +373,7 @@ begin
               index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_J_STATE;
+              controller_ctrl_fsm_int <= MATRIX_FIRST_TRANSPOSE_J_STATE;
             end if;
 
             -- Data Outputs
@@ -368,7 +386,7 @@ begin
             M_OUT_J_ENABLE <= '0';
           end if;
 
-        when MATRIX_FIRST_PRODUCT_J_STATE =>  -- STEP 4
+        when MATRIX_FIRST_PRODUCT_J_STATE =>  -- STEP 8
 
           -- Control Inputs
           data_a_in_i_enable_matrix_product <= W_IN_J_ENABLE;
@@ -396,7 +414,7 @@ begin
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_I_STATE;
+              controller_ctrl_fsm_int <= MATRIX_FIRST_TRANSPOSE_I_STATE;
             end if;
 
             -- Data Outputs
@@ -409,7 +427,7 @@ begin
             M_OUT_K_ENABLE <= '0';
           end if;
 
-        when MATRIX_FIRST_ADDER_I_STATE =>  -- STEP 5
+        when MATRIX_FIRST_ADDER_I_STATE =>  -- STEP 9
 
           -- Control Inputs
           operation_matrix_adder <= '0';
@@ -432,7 +450,7 @@ begin
               index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_J_STATE;
+              controller_ctrl_fsm_int <= MATRIX_FIRST_TRANSPOSE_J_STATE;
             end if;
 
             -- Data Outputs
@@ -445,7 +463,7 @@ begin
             M_OUT_J_ENABLE <= '0';
           end if;
 
-        when MATRIX_FIRST_ADDER_J_STATE =>  -- STEP 6
+        when MATRIX_FIRST_ADDER_J_STATE =>  -- STEP 10
 
           -- Control Inputs
           operation_matrix_adder <= '0';
@@ -473,7 +491,7 @@ begin
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_I_STATE;
+              controller_ctrl_fsm_int <= MATRIX_FIRST_TRANSPOSE_I_STATE;
             end if;
 
             -- Data Outputs
@@ -486,7 +504,11 @@ begin
             M_OUT_K_ENABLE <= '0';
           end if;
 
-        when MATRIX_MULTIPLIER_I_STATE =>  -- STEP 7
+        when INPUT_I_THIRD_STATE =>  -- STEP 11
+
+        when INPUT_J_THIRD_STATE =>  -- STEP 12
+
+        when MATRIX_MULTIPLIER_I_STATE =>  -- STEP 13
 
           -- Control Inputs
           data_a_in_i_enable_matrix_multiplier <= M_IN_J_ENABLE;
@@ -507,7 +529,7 @@ begin
               index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_J_STATE;
+              controller_ctrl_fsm_int <= MATRIX_FIRST_TRANSPOSE_J_STATE;
             end if;
 
             -- Data Outputs
@@ -520,7 +542,7 @@ begin
             M_OUT_J_ENABLE <= '0';
           end if;
 
-        when MATRIX_MULTIPLIER_J_STATE =>  -- STEP 8
+        when MATRIX_MULTIPLIER_J_STATE =>  -- STEP 14
 
           -- Control Inputs
           data_a_in_i_enable_matrix_multiplier <= M_IN_J_ENABLE;
@@ -546,7 +568,7 @@ begin
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_I_STATE;
+              controller_ctrl_fsm_int <= MATRIX_FIRST_TRANSPOSE_I_STATE;
             end if;
 
             -- Data Outputs
@@ -559,7 +581,11 @@ begin
             M_OUT_K_ENABLE <= '0';
           end if;
 
-        when MATRIX_SECOND_TRANSPOSE_I_STATE =>  -- STEP 9
+        when INPUT_I_FOURTH_STATE =>  -- STEP 15
+
+        when INPUT_J_FOURTH_STATE =>  -- STEP 16
+
+        when MATRIX_SECOND_TRANSPOSE_I_STATE =>  -- STEP 17
 
           -- Control Inputs
           data_in_i_enable_matrix_transpose <= V_IN_K_ENABLE;
@@ -577,7 +603,7 @@ begin
               index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_J_STATE;
+              controller_ctrl_fsm_int <= MATRIX_FIRST_TRANSPOSE_J_STATE;
             end if;
 
             -- Data Outputs
@@ -590,7 +616,7 @@ begin
             M_OUT_J_ENABLE <= '0';
           end if;
 
-        when MATRIX_SECOND_TRANSPOSE_J_STATE =>  -- STEP 10
+        when MATRIX_SECOND_TRANSPOSE_J_STATE =>  -- STEP 18
 
           -- Control Inputs
           data_in_i_enable_matrix_transpose <= V_IN_K_ENABLE;
@@ -613,7 +639,7 @@ begin
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_I_STATE;
+              controller_ctrl_fsm_int <= MATRIX_FIRST_TRANSPOSE_I_STATE;
             end if;
 
             -- Data Outputs
@@ -629,7 +655,11 @@ begin
             start_matrix_transpose <= '0';
           end if;
 
-        when MATRIX_SECOND_PRODUCT_I_STATE =>  -- STEP 11
+        when INPUT_I_FIFTH_STATE =>  -- STEP 19
+
+        when INPUT_J_FIFTH_STATE =>  -- STEP 20
+
+        when MATRIX_SECOND_PRODUCT_I_STATE =>  -- STEP 21
 
           -- Control Inputs
           data_a_in_i_enable_matrix_product <= W_IN_J_ENABLE;
@@ -652,7 +682,7 @@ begin
               index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_J_STATE;
+              controller_ctrl_fsm_int <= MATRIX_FIRST_TRANSPOSE_J_STATE;
             end if;
 
             -- Data Outputs
@@ -665,7 +695,7 @@ begin
             M_OUT_J_ENABLE <= '0';
           end if;
 
-        when MATRIX_SECOND_PRODUCT_J_STATE =>  -- STEP 12
+        when MATRIX_SECOND_PRODUCT_J_STATE =>  -- STEP 22
 
           -- Control Inputs
           data_a_in_i_enable_matrix_product <= W_IN_J_ENABLE;
@@ -693,7 +723,7 @@ begin
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_I_STATE;
+              controller_ctrl_fsm_int <= MATRIX_FIRST_TRANSPOSE_I_STATE;
             end if;
 
             -- Data Outputs
@@ -706,7 +736,7 @@ begin
             M_OUT_K_ENABLE <= '0';
           end if;
 
-        when MATRIX_SECOND_ADDER_I_STATE =>  -- STEP 13
+        when MATRIX_SECOND_ADDER_I_STATE =>  -- STEP 23
 
           -- Control Inputs
           operation_matrix_adder <= '1';
@@ -729,7 +759,7 @@ begin
               index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_J_STATE;
+              controller_ctrl_fsm_int <= MATRIX_FIRST_TRANSPOSE_J_STATE;
             end if;
 
             -- Data Outputs
@@ -742,7 +772,7 @@ begin
             M_OUT_J_ENABLE <= '0';
           end if;
 
-        when MATRIX_SECOND_ADDER_J_STATE =>  -- STEP 14
+        when MATRIX_SECOND_ADDER_J_STATE =>  -- STEP 24
 
           -- Control Inputs
           operation_matrix_adder <= '1';
@@ -770,7 +800,7 @@ begin
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_I_STATE;
+              controller_ctrl_fsm_int <= MATRIX_FIRST_TRANSPOSE_I_STATE;
             end if;
 
             -- Data Outputs

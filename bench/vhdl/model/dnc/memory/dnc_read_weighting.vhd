@@ -107,12 +107,15 @@ architecture dnc_read_weighting_architecture of dnc_read_weighting is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    VECTOR_FIRST_MULTIPLIER_STATE,      -- STEP 1
-    VECTOR_FIRST_ADDER_STATE,           -- STEP 2
-    VECTOR_SECOND_MULTIPLIER_STATE,     -- STEP 3
-    VECTOR_SECOND_ADDER_STATE,          -- STEP 4
-    VECTOR_THIRD_MULTIPLIER_STATE,      -- STEP 5
-    VECTOR_THIRD_ADDER_STATE            -- STEP 6
+	INPUT_FIRST_STATE,                  -- STEP 1
+    VECTOR_FIRST_MULTIPLIER_STATE,      -- STEP 2
+    VECTOR_FIRST_ADDER_STATE,           -- STEP 3
+	INPUT_SECOND_STATE,                 -- STEP 4
+    VECTOR_SECOND_MULTIPLIER_STATE,     -- STEP 5
+    VECTOR_SECOND_ADDER_STATE,          -- STEP 6
+	INPUT_THIRD_STATE,                  -- STEP 7
+    VECTOR_THIRD_MULTIPLIER_STATE,      -- STEP 8
+    VECTOR_THIRD_ADDER_STATE            -- STEP 9
     );
 
   -----------------------------------------------------------------------
@@ -216,10 +219,12 @@ begin
             end if;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_FIRST_MULTIPLIER_STATE;
+            controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
           end if;
 
-        when VECTOR_FIRST_MULTIPLIER_STATE =>  -- STEP 1
+        when INPUT_FIRST_STATE =>  -- STEP 1
+
+        when VECTOR_FIRST_MULTIPLIER_STATE =>  -- STEP 2
 
           -- Data Inputs
           size_in_vector_multiplier   <= SIZE_N_IN;
@@ -239,7 +244,7 @@ begin
             start_vector_multiplier <= '0';
           end if;
 
-        when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
+        when VECTOR_FIRST_ADDER_STATE =>  -- STEP 3
 
           -- Data Inputs
           size_in_vector_adder   <= SIZE_N_IN;
@@ -259,7 +264,9 @@ begin
             start_vector_adder <= '0';
           end if;
 
-        when VECTOR_SECOND_MULTIPLIER_STATE =>  -- STEP 3
+        when INPUT_SECOND_STATE =>  -- STEP 4
+
+        when VECTOR_SECOND_MULTIPLIER_STATE =>  -- STEP 5
 
           -- Data Inputs
           size_in_vector_multiplier   <= SIZE_N_IN;
@@ -279,7 +286,7 @@ begin
             start_vector_multiplier <= '0';
           end if;
 
-        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
+        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 6
 
           -- Data Inputs
           size_in_vector_adder   <= SIZE_N_IN;
@@ -299,7 +306,9 @@ begin
             start_vector_adder <= '0';
           end if;
 
-        when VECTOR_THIRD_MULTIPLIER_STATE =>  -- STEP 5
+        when INPUT_THIRD_STATE =>  -- STEP 7
+
+        when VECTOR_THIRD_MULTIPLIER_STATE =>  -- STEP 8
 
           -- Data Inputs
           size_in_vector_multiplier   <= SIZE_N_IN;
@@ -319,7 +328,7 @@ begin
             start_vector_multiplier <= '0';
           end if;
 
-        when VECTOR_THIRD_ADDER_STATE =>  -- STEP 6
+        when VECTOR_THIRD_ADDER_STATE =>  -- STEP 9
 
           -- Data Inputs
           size_in_vector_adder   <= SIZE_N_IN;

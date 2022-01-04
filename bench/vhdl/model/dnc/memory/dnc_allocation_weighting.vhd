@@ -82,11 +82,13 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    VECTOR_FIRST_SORT_STATE,            -- STEP 1
-    VECTOR_ADDER_STATE,                 -- STEP 2
-    VECTOR_SECOND_SORT_STATE,           -- STEP 3
-    VECTOR_MULTIPLICATION_STATE,        -- STEP 4
-    VECTOR_MULTIPLIER_STATE             -- STEP 5
+	INPUT_FIRST_STATE,                  -- STEP 1
+    VECTOR_FIRST_SORT_STATE,            -- STEP 2
+    VECTOR_ADDER_STATE,                 -- STEP 3
+	INPUT_SECOND_STATE,                 -- STEP 4
+    VECTOR_SECOND_SORT_STATE,           -- STEP 5
+    VECTOR_MULTIPLICATION_STATE,        -- STEP 6
+    VECTOR_MULTIPLIER_STATE             -- STEP 7
     );
 
   -----------------------------------------------------------------------
@@ -222,10 +224,12 @@ begin
             start_vector_sort <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_FIRST_SORT_STATE;
+            controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
           end if;
 
-        when VECTOR_FIRST_SORT_STATE =>  -- STEP 1
+        when INPUT_FIRST_STATE =>  -- STEP 1
+
+        when VECTOR_FIRST_SORT_STATE =>  -- STEP 2
 
           -- Data Inputs
           size_n_in_vector_sort <= SIZE_N_IN;
@@ -244,7 +248,7 @@ begin
             start_vector_sort <= '0';
           end if;
 
-        when VECTOR_ADDER_STATE =>  -- STEP 2
+        when VECTOR_ADDER_STATE =>  -- STEP 3
 
           if (data_out_enable_vector_adder = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
@@ -253,13 +257,15 @@ begin
             end if;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_SECOND_SORT_STATE;
+            controller_ctrl_fsm_int <= INPUT_SECOND_STATE;
           else
             -- Control Internal
             start_vector_adder <= '0';
           end if;
 
-        when VECTOR_SECOND_SORT_STATE =>  -- STEP 3
+        when INPUT_SECOND_STATE =>  -- STEP 4
+
+        when VECTOR_SECOND_SORT_STATE =>  -- STEP 5
 
           -- Data Inputs
           size_n_in_vector_sort <= SIZE_N_IN;
@@ -278,7 +284,7 @@ begin
             start_vector_sort <= '0';
           end if;
 
-        when VECTOR_MULTIPLICATION_STATE =>  -- STEP 4
+        when VECTOR_MULTIPLICATION_STATE =>  -- STEP 6
 
           if (data_out_vector_enable_vector_multiplication = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
@@ -293,7 +299,7 @@ begin
             start_vector_multiplication <= '0';
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 5
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 7
 
           if (data_out_enable_vector_multiplier = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) then

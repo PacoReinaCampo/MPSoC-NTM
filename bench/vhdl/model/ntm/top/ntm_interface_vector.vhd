@@ -132,8 +132,14 @@ architecture ntm_interface_vector_architecture of ntm_interface_vector is
 
   type controller_ctrl_matrix_fsm is (
     STARTER_STATE,                      -- STEP 0
-    MATRIX_FIRST_PRODUCT_STATE,         -- STEP 1
-    MATRIX_SECOND_PRODUCT_STATE         -- STEP 2
+	INPUT_I_FIRST_STATE,                -- STEP 1
+	INPUT_J_FIRST_STATE,                -- STEP 2
+    MATRIX_FIRST_PRODUCT_I_STATE,       -- STEP 3
+    MATRIX_FIRST_PRODUCT_j_STATE,       -- STEP 4
+	INPUT_I_SECOND_STATE,               -- STEP 5
+	INPUT_J_SECOND_STATE,               -- STEP 6
+    MATRIX_SECOND_PRODUCT_I_STATE,      -- STEP 7
+    MATRIX_SECOND_PRODUCT_J_STATE       -- STEP 8
     );
 
   -----------------------------------------------------------------------
@@ -313,10 +319,16 @@ begin
 
           if (START = '1') then
             -- FSM Control
-            controller_ctrl_matrix_fsm_int <= MATRIX_FIRST_PRODUCT_STATE;
+            controller_ctrl_matrix_fsm_int <= INPUT_I_FIRST_STATE;
           end if;
 
-        when MATRIX_FIRST_PRODUCT_STATE =>  -- STEP 1
+        when INPUT_I_FIRST_STATE =>  -- STEP 1
+
+        when INPUT_J_FIRST_STATE =>  -- STEP 2
+
+        when MATRIX_FIRST_PRODUCT_I_STATE =>  -- STEP 3
+
+        when MATRIX_FIRST_PRODUCT_J_STATE =>  -- STEP 4
 
           -- k(t;k) = Wk(t;l;k)·h(t;l)
 
@@ -337,7 +349,13 @@ begin
           -- Data Outputs
           K_OUT <= data_out_matrix_product;
 
-        when MATRIX_SECOND_PRODUCT_STATE =>  -- STEP 2
+        when INPUT_I_SECOND_STATE =>  -- STEP 5
+
+        when INPUT_J_SECOND_STATE =>  -- STEP 6
+
+        when MATRIX_SECOND_PRODUCT_I_STATE =>  -- STEP 7
+
+        when MATRIX_SECOND_PRODUCT_J_STATE =>  -- STEP 8
 
           -- s(t;j) = Wk(t;l;j)·h(t;l)
 

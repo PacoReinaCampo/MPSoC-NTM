@@ -88,10 +88,14 @@ architecture ntm_erasing_architecture of ntm_erasing is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    VECTOR_MULTIPLIER_STATE,            -- STEP 1
-    VECTOR_ADDER_STATE,                 -- STEP 2
-    MATRIX_PRODUCT_I_STATE,             -- STEP 3
-    MATRIX_PRODUCT_J_STATE              -- STEP 4
+	INPUT_FIRST_STATE,                  -- STEP 1
+    VECTOR_MULTIPLIER_STATE,            -- STEP 2
+	INPUT_SECOND_STATE,                 -- STEP 3
+    VECTOR_ADDER_STATE,                 -- STEP 4
+	INPUT_I_THIRD_STATE,                -- STEP 5
+	INPUT_J_THIRD_STATE,                -- STEP 6
+    MATRIX_PRODUCT_I_STATE,             -- STEP 7
+    MATRIX_PRODUCT_J_STATE              -- STEP 8
     );
 
   -----------------------------------------------------------------------
@@ -224,13 +228,15 @@ begin
             start_vector_multiplier <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
           else
             -- Control Internal
             start_vector_multiplier <= '0';
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
+        when INPUT_FIRST_STATE =>  -- STEP 1
+
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
 
           if (data_out_enable_vector_multiplier = '1') then
             -- Control Internal
@@ -243,7 +249,9 @@ begin
             start_vector_multiplier <= '0';
           end if;
 
-        when VECTOR_ADDER_STATE =>  -- STEP 2
+        when INPUT_SECOND_STATE =>  -- STEP 3
+
+        when VECTOR_ADDER_STATE =>  -- STEP 4
 
           if (data_out_enable_vector_adder = '1') then
             -- Control Internal
@@ -256,7 +264,11 @@ begin
             start_vector_adder <= '0';
           end if;
 
-        when MATRIX_PRODUCT_I_STATE =>  -- STEP 3
+        when INPUT_I_THIRD_STATE =>  -- STEP 5
+
+        when INPUT_J_THIRD_STATE =>  -- STEP 6
+
+        when MATRIX_PRODUCT_I_STATE =>  -- STEP 7
 
           if (data_out_i_enable_matrix_product = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
@@ -278,7 +290,7 @@ begin
             M_OUT_J_ENABLE <= '0';
           end if;
 
-        when MATRIX_PRODUCT_J_STATE =>  -- STEP 4
+        when MATRIX_PRODUCT_J_STATE =>  -- STEP 8
 
           if (data_out_j_enable_matrix_product = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then

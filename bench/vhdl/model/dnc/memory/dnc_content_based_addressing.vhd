@@ -90,10 +90,12 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    VECTOR_COSINE_SIMILARITY_STATE,     -- STEP 1
-    VECTOR_MULTIPLIER_STATE,            -- STEP 2
-    VECTOR_EXPONENTIATOR_STATE,         -- STEP 3
-    VECTOR_SOFTMAX_STATE                -- STEP 4
+	INPUT_FIRST_STATE,                  -- STEP 1
+    VECTOR_COSINE_SIMILARITY_STATE,     -- STEP 2
+	INPUT_SECOND_STATE,                 -- STEP 3
+    VECTOR_MULTIPLIER_STATE,            -- STEP 4
+    VECTOR_EXPONENTIATOR_STATE,         -- STEP 5
+    VECTOR_SOFTMAX_STATE                -- STEP 6
     );
 
   -----------------------------------------------------------------------
@@ -236,13 +238,15 @@ begin
             end if;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_COSINE_SIMILARITY_STATE;
+            controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
           else
             -- Control Internal
             start_vector_cosine <= '0';
           end if;
 
-        when VECTOR_COSINE_SIMILARITY_STATE =>  -- STEP 1
+        when INPUT_FIRST_STATE =>  -- STEP 1
+
+        when VECTOR_COSINE_SIMILARITY_STATE =>  -- STEP 2
 
           if (data_out_vector_enable_vector_cosine = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
@@ -257,7 +261,9 @@ begin
             start_vector_cosine <= '0';
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
+        when INPUT_SECOND_STATE =>  -- STEP 3
+
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 4
 
           if (data_out_enable_vector_multiplier = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
@@ -272,7 +278,7 @@ begin
             start_vector_multiplier <= '0';
           end if;
 
-        when VECTOR_EXPONENTIATOR_STATE =>  -- STEP 3
+        when VECTOR_EXPONENTIATOR_STATE =>  -- STEP 5
 
           if (data_out_enable_vector_exponentiator = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
@@ -287,7 +293,7 @@ begin
             start_vector_exponentiator <= '0';
           end if;
 
-        when VECTOR_SOFTMAX_STATE =>  -- STEP 4
+        when VECTOR_SOFTMAX_STATE =>  -- STEP 6
 
           if (data_out_vector_enable_vector_softmax = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_I_IN) - unsigned(ONE_CONTROL)) then

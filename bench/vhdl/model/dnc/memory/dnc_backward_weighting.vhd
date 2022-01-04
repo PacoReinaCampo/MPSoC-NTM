@@ -93,10 +93,14 @@ architecture dnc_backward_weighting_architecture of dnc_backward_weighting is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    MATRIX_TRANSPOSE_I_STATE,           -- STEP 1
-    MATRIX_TRANSPOSE_J_STATE,           -- STEP 2
-    MATRIX_PRODUCT_I_STATE,             -- STEP 3
-    MATRIX_PRODUCT_J_STATE              -- STEP 4
+	INPUT_I_FIRST_STATE,                -- STEP 1
+	INPUT_J_FIRST_STATE,                -- STEP 2
+    MATRIX_TRANSPOSE_I_STATE,           -- STEP 3
+    MATRIX_TRANSPOSE_J_STATE,           -- STEP 4
+    INPUT_I_SECOND_STATE,               -- STEP 5
+	INPUT_J_SECOND_STATE,               -- STEP 6
+    MATRIX_PRODUCT_I_STATE,             -- STEP 7
+    MATRIX_PRODUCT_J_STATE              -- STEP 8
     );
 
   -----------------------------------------------------------------------
@@ -212,17 +216,25 @@ begin
             start_matrix_product <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_TRANSPOSE_I_STATE;
+            controller_ctrl_fsm_int <= INPUT_I_FIRST_STATE;
           else
             -- Control Internal
             start_matrix_product <= '0';
           end if;
 
-        when MATRIX_TRANSPOSE_I_STATE =>  -- STEP 1
+        when INPUT_I_FIRST_STATE =>  -- STEP 1
 
-        when MATRIX_TRANSPOSE_J_STATE =>  -- STEP 2
+        when INPUT_J_FIRST_STATE =>  -- STEP 2
 
-        when MATRIX_PRODUCT_I_STATE =>  -- STEP 3
+        when MATRIX_TRANSPOSE_I_STATE =>  -- STEP 3
+
+        when MATRIX_TRANSPOSE_J_STATE =>  -- STEP 4
+
+        when INPUT_I_SECOND_STATE =>  -- STEP 5
+
+        when INPUT_J_SECOND_STATE =>  -- STEP 6
+
+        when MATRIX_PRODUCT_I_STATE =>  -- STEP 7
 
           if (data_out_i_enable_matrix_product = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_R_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL))) then
@@ -244,7 +256,7 @@ begin
             B_OUT_I_ENABLE <= '0';
           end if;
 
-        when MATRIX_PRODUCT_J_STATE =>  -- STEP 4
+        when MATRIX_PRODUCT_J_STATE =>  -- STEP 8
 
           if (data_out_j_enable_matrix_product = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_R_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL))) then
