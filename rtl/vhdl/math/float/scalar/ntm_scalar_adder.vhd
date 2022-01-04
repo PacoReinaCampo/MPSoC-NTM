@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_scalar_integer_adder is
+entity ntm_scalar_adder is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -69,7 +69,7 @@ entity ntm_scalar_integer_adder is
     );
 end entity;
 
-architecture ntm_scalar_integer_adder_architecture of ntm_scalar_integer_adder is
+architecture ntm_scalar_adder_architecture of ntm_scalar_adder is
 
   -----------------------------------------------------------------------
   -- Types
@@ -256,6 +256,9 @@ begin
         when ADAPTATION_STATE =>  -- STEP 2
 
           if (overflow_out_mantissa_scalar_integer_adder = '1') then
+            -- FSM Control
+            adder_ctrl_fsm_int <= NORMALIZATION_STATE;
+          else
             -- Data Outputs
             exponent_int_scalar_adder <= std_logic_vector(unsigned(exponent_int_scalar_adder) + unsigned(ONE_EXPONENT));
             mantissa_int_scalar_adder <= std_logic_vector(unsigned(mantissa_int_scalar_adder) srl 1);
@@ -264,6 +267,9 @@ begin
         when NORMALIZATION_STATE =>  -- STEP 3
 
           if (overflow_out_mantissa_scalar_integer_adder = '1') then
+            -- FSM Control
+            adder_ctrl_fsm_int <= ENDER_STATE;
+          else
             -- Data Outputs
             exponent_int_scalar_adder <= std_logic_vector(unsigned(exponent_int_scalar_adder) - unsigned(ONE_EXPONENT));
             mantissa_int_scalar_adder <= std_logic_vector(unsigned(mantissa_int_scalar_adder) sll 1);
@@ -276,6 +282,9 @@ begin
 
           -- Data Outputs
           DATA_OUT <= sign_int_scalar_adder & exponent_int_scalar_adder(EXPONENT_SIZE-1 downto 0) & mantissa_int_scalar_adder(MANTISSA_SIZE-1 downto 0);
+
+          -- FSM Control
+          adder_ctrl_fsm_int <= STARTER_STATE;
 
         when others =>
           -- FSM Control
