@@ -87,12 +87,15 @@ architecture dnc_write_weighting_architecture of dnc_write_weighting is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    VECTOR_FIRST_ADDER_STATE,           -- STEP 1
-    VECTOR_FIRST_MULTIPLIER_STATE,      -- STEP 2
-    VECTOR_SECOND_ADDER_STATE,          -- STEP 3
-    VECTOR_SECOND_MULTIPLIER_STATE,     -- STEP 4
-    VECTOR_THIRD_ADDER_STATE,           -- STEP 5
-    VECTOR_THIRD_MULTIPLIER_STATE       -- STEP 6
+	INPUT_FIRST_STATE,                  -- STEP 1
+    VECTOR_FIRST_ADDER_STATE,           -- STEP 2
+	INPUT_SECOND_STATE,                 -- STEP 3
+    VECTOR_FIRST_MULTIPLIER_STATE,      -- STEP 4
+    INPUT_THIRD_STATE,                  -- STEP 5
+    VECTOR_SECOND_MULTIPLIER_STATE,     -- STEP 6
+    VECTOR_SECOND_ADDER_STATE,          -- STEP 7
+	INPUT_FOURTH_STATE,                 -- STEP 8
+    VECTOR_THIRD_MULTIPLIER_STATE       -- STEP 9
     );
 
   -----------------------------------------------------------------------
@@ -198,10 +201,12 @@ begin
             start_vector_adder <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_FIRST_ADDER_STATE;
+            controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
           end if;
 
-        when VECTOR_FIRST_ADDER_STATE =>  -- STEP 1
+        when INPUT_FIRST_STATE =>  -- STEP 1
+
+        when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
 
           -- Control Inputs
           operation_vector_adder <= '1';
@@ -227,7 +232,9 @@ begin
             start_vector_adder <= '0';
           end if;
 
-        when VECTOR_FIRST_MULTIPLIER_STATE =>  -- STEP 2
+        when INPUT_SECOND_STATE =>  -- STEP 3
+
+        when VECTOR_FIRST_MULTIPLIER_STATE =>  -- STEP 4
 
           -- Control Inputs
           data_a_in_enable_vector_multiplier <= data_out_enable_vector_adder;
@@ -245,39 +252,15 @@ begin
             end if;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_SECOND_ADDER_STATE;
+            controller_ctrl_fsm_int <= INPUT_THIRD_STATE;
           else
             -- Control Internal
             start_vector_multiplier <= '0';
           end if;
 
-        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 3
+        when INPUT_THIRD_STATE =>  -- STEP 5
 
-          -- Control Inputs
-          operation_vector_adder <= '0';
-
-          data_a_in_enable_vector_adder <= data_out_enable_vector_multiplier;
-          data_b_in_enable_vector_adder <= data_out_enable_vector_multiplier;
-
-          -- Data Inputs
-          size_in_vector_adder   <= SIZE_N_IN;
-          data_a_in_vector_adder <= ZERO_DATA;
-          data_b_in_vector_adder <= data_out_vector_multiplier;
-
-          if (data_out_enable_vector_adder = '1') then
-            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
-              -- Control Internal
-              start_vector_multiplier <= '1';
-            end if;
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_SECOND_MULTIPLIER_STATE;
-          else
-            -- Control Internal
-            start_vector_adder <= '0';
-          end if;
-
-        when VECTOR_SECOND_MULTIPLIER_STATE =>  -- STEP 4
+        when VECTOR_SECOND_MULTIPLIER_STATE =>  -- STEP 6
 
           -- Control Inputs
           data_a_in_enable_vector_multiplier <= A_IN_ENABLE;
@@ -295,13 +278,13 @@ begin
             end if;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_THIRD_ADDER_STATE;
+            controller_ctrl_fsm_int <= VECTOR_SECOND_ADDER_STATE;
           else
             -- Control Internal
             start_vector_multiplier <= '0';
           end if;
 
-        when VECTOR_THIRD_ADDER_STATE =>  -- STEP 5
+        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 7
 
           -- Control Inputs
           operation_vector_adder <= '0';
@@ -326,6 +309,8 @@ begin
             -- Control Internal
             start_vector_adder <= '0';
           end if;
+
+        when INPUT_FOURTH_STATE =>  -- STEP 4
 
         when VECTOR_THIRD_MULTIPLIER_STATE =>  -- STEP 6
 

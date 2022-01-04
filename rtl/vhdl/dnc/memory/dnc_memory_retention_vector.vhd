@@ -89,9 +89,10 @@ architecture dnc_memory_retention_vector_architecture of dnc_memory_retention_ve
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    VECTOR_MULTIPLIER_STATE,            -- STEP 1
-    VECTOR_ADDER_STATE,                 -- STEP 2
-    VECTOR_MULTIPLICATION_STATE         -- STEP 3
+	INPUT_STATE,                        -- STEP 1
+    VECTOR_MULTIPLIER_STATE,            -- STEP 2
+    VECTOR_ADDER_STATE,                 -- STEP 3
+    VECTOR_MULTIPLICATION_STATE         -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -210,13 +211,15 @@ begin
             start_vector_multiplier <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            controller_ctrl_fsm_int <= INPUT_STATE;
           else
             -- Control Internal
             start_vector_multiplier <= '0';
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 1
+        when INPUT_STATE =>  -- STEP 1
+
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
 
           if (data_out_enable_vector_multiplier = '1') then
             -- Control Internal
@@ -229,7 +232,7 @@ begin
             start_vector_multiplier <= '0';
           end if;
 
-        when VECTOR_ADDER_STATE =>  -- STEP 2
+        when VECTOR_ADDER_STATE =>  -- STEP 3
 
           if (data_out_enable_vector_adder = '1') then
             -- Control Internal
@@ -242,7 +245,7 @@ begin
             start_vector_adder <= '0';
           end if;
 
-        when VECTOR_MULTIPLICATION_STATE =>  -- STEP 3
+        when VECTOR_MULTIPLICATION_STATE =>  -- STEP 4
 
           if (data_out_enable_vector_multiplier = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) then

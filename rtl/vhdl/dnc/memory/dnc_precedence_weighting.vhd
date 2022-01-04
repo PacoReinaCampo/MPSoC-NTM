@@ -83,10 +83,13 @@ architecture dnc_precedence_weighting_architecture of dnc_precedence_weighting i
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    VECTOR_SUMMATION_STATE,             -- STEP 1
-    VECTOR_FIRST_ADDER_STATE,           -- STEP 2
-    VECTOR_MULTIPLIER_STATE,            -- STEP 3
-    VECTOR_SECOND_ADDER_STATE           -- STEP 4
+	INPUT_FIRST_STATE,                  -- STEP 1
+    VECTOR_SUMMATION_STATE,             -- STEP 2
+    VECTOR_FIRST_ADDER_STATE,           -- STEP 3
+	INPUT_SECOND_STATE,                 -- STEP 4
+    VECTOR_MULTIPLIER_STATE,            -- STEP 5
+	INPUT_THIRD_STATE,                  -- STEP 6
+    VECTOR_SECOND_ADDER_STATE           -- STEP 7
     );
 
   -----------------------------------------------------------------------
@@ -212,10 +215,12 @@ begin
             end if;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_SUMMATION_STATE;
+            controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
           end if;
 
-        when VECTOR_SUMMATION_STATE =>  -- STEP 1
+        when INPUT_FIRST_STATE =>  -- STEP 1
+
+        when VECTOR_SUMMATION_STATE =>  -- STEP 2
 
           if (data_out_vector_enable_vector_summation = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
@@ -230,7 +235,7 @@ begin
             start_vector_summation <= '0';
           end if;
 
-        when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
+        when VECTOR_FIRST_ADDER_STATE =>  -- STEP 3
 
           -- Data Inputs
           size_in_vector_adder   <= SIZE_N_IN;
@@ -250,7 +255,9 @@ begin
             start_vector_adder <= '0';
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 3
+        when INPUT_SECOND_STATE =>  -- STEP 4
+
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 5
 
           if (data_out_enable_vector_multiplier = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
@@ -265,7 +272,9 @@ begin
             start_vector_multiplier <= '0';
           end if;
 
-        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 4
+        when INPUT_THIRD_STATE =>  -- STEP 6
+
+        when VECTOR_SECOND_ADDER_STATE =>  -- STEP 7
 
           -- Data Inputs
           size_in_vector_adder   <= SIZE_N_IN;
