@@ -285,7 +285,7 @@ begin
 
         when NORMALIZATION_STATE =>  -- STEP 3
 
-          if (overflow_out_scalar_integer_adder = '0') then
+          if (overflow_out_scalar_integer_multiplier(0) = '1') then
             -- FSM Control
             multiplier_ctrl_fsm_int <= ENDER_STATE;
           else
@@ -296,14 +296,17 @@ begin
 
         when ENDER_STATE =>  -- STEP 4
 
-          -- Control Outputs
-          READY <= '1';
+          if (overflow_out_scalar_integer_adder = '0') then
+            -- Data Outputs
+            DATA_OUT <= sign_int_scalar_multiplier & exponent_int_scalar_multiplier(EXPONENT_SIZE-1 downto 0) & mantissa_int_scalar_multiplier(MANTISSA_SIZE-1 downto 0);
 
-          -- Data Outputs
-          DATA_OUT <= sign_int_scalar_multiplier & exponent_int_scalar_multiplier(EXPONENT_SIZE-1 downto 0) & mantissa_int_scalar_multiplier(MANTISSA_SIZE-1 downto 0);
+            -- Control Outputs
+            READY <= '1';
 
-          -- FSM Control
-          multiplier_ctrl_fsm_int <= STARTER_STATE;
+            -- FSM Control
+            multiplier_ctrl_fsm_int <= STARTER_STATE;
+		  else
+		  end if;
 
         when others =>
           -- FSM Control

@@ -287,7 +287,7 @@ begin
 
         when NORMALIZATION_STATE =>  -- STEP 3
 
-          if (unsigned(rest_mantissa_int_scalar_divider) = unsigned(ZERO_MANTISSA)) then
+          if (rest_mantissa_int_scalar_divider(0) = '1') then
             -- FSM Control
             divider_ctrl_fsm_int <= ENDER_STATE;
           else
@@ -300,14 +300,17 @@ begin
 
         when ENDER_STATE =>  -- STEP 4
 
-          -- Control Outputs
-          READY <= '1';
+          if (overflow_out_scalar_integer_adder = '0') then
+            -- Data Outputs
+            DATA_OUT <= sign_int_scalar_divider & exponent_int_scalar_divider(EXPONENT_SIZE-1 downto 0) & data_mantissa_int_scalar_divider;
 
-          -- Data Outputs
-          DATA_OUT <= sign_int_scalar_divider & exponent_int_scalar_divider(EXPONENT_SIZE-1 downto 0) & data_mantissa_int_scalar_divider;
+            -- Control Outputs
+            READY <= '1';
 
-          -- FSM Control
-          divider_ctrl_fsm_int <= STARTER_STATE;
+            -- FSM Control
+            divider_ctrl_fsm_int <= STARTER_STATE;
+		  else
+		  end if;
 
         when others =>
           -- FSM Control
