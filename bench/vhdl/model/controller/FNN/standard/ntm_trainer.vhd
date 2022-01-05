@@ -110,29 +110,36 @@ architecture ntm_trainer_architecture of ntm_trainer is
 
   type differentiation_w_ctrl_fsm is (
     STARTER_DW_STATE,                   -- STEP 0
-    VECTOR_DIFFERENTIATION_DW_STATE,    -- STEP 1
-    MATRIX_PRODUCT_DW_STATE,            -- STEP 2
-    VECTOR_SUMMATION_DW_STATE           -- STEP 3
+    INPUT_FIRST_DW_STATE,               -- STEP 1
+    VECTOR_DIFFERENTIATION_DW_STATE,    -- STEP 2
+    INPUT_SECOND_DW_STATE,              -- STEP 3
+    MATRIX_PRODUCT_DW_STATE,            -- STEP 4
+    VECTOR_SUMMATION_DW_STATE           -- STEP 5
     );
 
   type differentiation_k_ctrl_fsm is (
     STARTER_DK_STATE,                   -- STEP 0
-    VECTOR_DIFFERENTIATION_DK_STATE,    -- STEP 1
-    MATRIX_PRODUCT_DK_STATE,            -- STEP 2
-    VECTOR_SUMMATION_DK_STATE           -- STEP 3
+    INPUT_FIRST_DK_STATE,               -- STEP 1
+    VECTOR_DIFFERENTIATION_DK_STATE,    -- STEP 2
+    INPUT_SECOND_DK_STATE,              -- STEP 3
+    MATRIX_PRODUCT_DK_STATE,            -- STEP 4
+    VECTOR_SUMMATION_DK_STATE           -- STEP 5
     );
 
   type differentiation_u_ctrl_fsm is (
     STARTER_DU_STATE,                   -- STEP 0
-    VECTOR_DIFFERENTIATION_DU_STATE,    -- STEP 1
-    MATRIX_PRODUCT_DU_STATE,            -- STEP 2
-    VECTOR_SUMMATION_DU_STATE           -- STEP 3
+    INPUT_FIRST_DU_STATE,               -- STEP 1
+    VECTOR_DIFFERENTIATION_DU_STATE,    -- STEP 2
+    INPUT_SECOND_DU_STATE,              -- STEP 3
+    MATRIX_PRODUCT_DU_STATE,            -- STEP 4
+    VECTOR_SUMMATION_DU_STATE           -- STEP 5
     );
 
   type differentiation_b_ctrl_fsm is (
     STARTER_DB_STATE,                   -- STEP 0
-    VECTOR_DIFFERENTIATION_DB_STATE,    -- STEP 1
-    VECTOR_SUMMATION_DB_STATE           -- STEP 2
+    INPUT_DB_STATE,                     -- STEP 1
+    VECTOR_DIFFERENTIATION_DB_STATE,    -- STEP 2
+    VECTOR_SUMMATION_DB_STATE           -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -262,17 +269,13 @@ begin
           pipeline_vector_summation       <= '0';
 
           if (START = '1') then
-            -- Control Internal
-            start_vector_differentiation <= '1';
-
             -- FSM Control
-            differentiation_w_ctrl_fsm_int <= VECTOR_DIFFERENTIATION_DW_STATE;
-          else
-            -- Control Internal
-            start_vector_differentiation <= '0';
+            differentiation_w_ctrl_fsm_int <= INPUT_FIRST_DW_STATE;
           end if;
 
-        when VECTOR_DIFFERENTIATION_DW_STATE =>  -- STEP 1
+        when INPUT_FIRST_DW_STATE =>  -- STEP 1
+
+        when VECTOR_DIFFERENTIATION_DW_STATE =>  -- STEP 2
 
           -- Control Inputs
           data_in_vector_enable_vector_differentiation <= '0';
@@ -282,7 +285,9 @@ begin
           size_in_vector_differentiation   <= SIZE_X_IN;
           data_in_vector_differentiation   <= X_IN;
 
-        when MATRIX_PRODUCT_DW_STATE =>  -- STEP 2
+        when INPUT_SECOND_DW_STATE =>  -- STEP 3
+
+        when MATRIX_PRODUCT_DW_STATE =>  -- STEP 4
 
           -- Control Inputs
           data_a_in_i_enable_matrix_product <= '0';
@@ -298,7 +303,7 @@ begin
           data_a_in_matrix_product   <= FULL;
           data_b_in_matrix_product   <= FULL;
 
-        when VECTOR_SUMMATION_DW_STATE =>  -- STEP 3
+        when VECTOR_SUMMATION_DW_STATE =>  -- STEP 5
 
           -- Control Inputs
           data_in_vector_enable_vector_summation <= '0';
@@ -343,17 +348,13 @@ begin
           pipeline_vector_summation       <= '0';
 
           if (START = '1') then
-            -- Control Internal
-            start_vector_differentiation <= '1';
-
             -- FSM Control
-            differentiation_k_ctrl_fsm_int <= VECTOR_DIFFERENTIATION_DK_STATE;
-          else
-            -- Control Internal
-            start_vector_differentiation <= '0';
+            differentiation_k_ctrl_fsm_int <= INPUT_FIRST_DK_STATE;
           end if;
 
-        when VECTOR_DIFFERENTIATION_DK_STATE =>  -- STEP 1
+        when INPUT_FIRST_DK_STATE =>  -- STEP 1
+
+        when VECTOR_DIFFERENTIATION_DK_STATE =>  -- STEP 2
 
           -- Control Inputs
           data_in_vector_enable_vector_differentiation <= '0';
@@ -363,7 +364,9 @@ begin
           size_in_vector_differentiation   <= SIZE_X_IN;
           data_in_vector_differentiation   <= X_IN;
 
-        when MATRIX_PRODUCT_DK_STATE =>  -- STEP 2
+        when INPUT_SECOND_DK_STATE =>  -- STEP 3
+
+        when MATRIX_PRODUCT_DK_STATE =>  -- STEP 4
 
           -- Control Inputs
           data_a_in_i_enable_matrix_product <= '0';
@@ -379,7 +382,7 @@ begin
           data_a_in_matrix_product   <= FULL;
           data_b_in_matrix_product   <= FULL;
 
-        when VECTOR_SUMMATION_DK_STATE =>  -- STEP 3
+        when VECTOR_SUMMATION_DK_STATE =>  -- STEP 5
 
           -- Control Inputs
           data_in_vector_enable_vector_summation <= '0';
@@ -424,17 +427,13 @@ begin
           pipeline_vector_summation       <= '0';
 
           if (START = '1') then
-            -- Control Internal
-            start_vector_differentiation <= '1';
-
             -- FSM Control
-            differentiation_u_ctrl_fsm_int <= VECTOR_DIFFERENTIATION_DU_STATE;
-          else
-            -- Control Internal
-            start_vector_differentiation <= '0';
+            differentiation_u_ctrl_fsm_int <= INPUT_FIRST_DU_STATE;
           end if;
 
-        when VECTOR_DIFFERENTIATION_DU_STATE =>  -- STEP 1
+        when INPUT_FIRST_DU_STATE =>  -- STEP 1
+
+        when VECTOR_DIFFERENTIATION_DU_STATE =>  -- STEP 2
 
           -- Control Inputs
           data_in_vector_enable_vector_differentiation <= '0';
@@ -444,7 +443,9 @@ begin
           size_in_vector_differentiation   <= SIZE_X_IN;
           data_in_vector_differentiation   <= X_IN;
 
-        when MATRIX_PRODUCT_DU_STATE =>  -- STEP 2
+        when INPUT_SECOND_DU_STATE =>  -- STEP 3
+
+        when MATRIX_PRODUCT_DU_STATE =>  -- STEP 4
 
           -- Control Inputs
           data_a_in_i_enable_matrix_product <= '0';
@@ -460,7 +461,7 @@ begin
           data_a_in_matrix_product   <= FULL;
           data_b_in_matrix_product   <= FULL;
 
-        when VECTOR_SUMMATION_DU_STATE =>  -- STEP 3
+        when VECTOR_SUMMATION_DU_STATE =>  -- STEP 5
 
           -- Control Inputs
           data_in_vector_enable_vector_summation <= '0';
@@ -505,17 +506,13 @@ begin
           pipeline_vector_summation       <= '0';
 
           if (START = '1') then
-            -- Control Internal
-            start_vector_differentiation <= '1';
-
             -- FSM Control
-            differentiation_b_ctrl_fsm_int <= VECTOR_DIFFERENTIATION_DB_STATE;
-          else
-            -- Control Internal
-            start_vector_differentiation <= '0';
+            differentiation_b_ctrl_fsm_int <= INPUT_DB_STATE;
           end if;
 
-        when VECTOR_DIFFERENTIATION_DB_STATE =>  -- STEP 1
+        when INPUT_DB_STATE =>  -- STEP 1
+
+        when VECTOR_DIFFERENTIATION_DB_STATE =>  -- STEP 2
 
           -- Control Inputs
           data_in_vector_enable_vector_differentiation <= '0';
@@ -525,7 +522,7 @@ begin
           size_in_vector_differentiation   <= SIZE_X_IN;
           data_in_vector_differentiation   <= X_IN;
 
-        when VECTOR_SUMMATION_DB_STATE =>  -- STEP 2
+        when VECTOR_SUMMATION_DB_STATE =>  -- STEP 3
 
           -- Control Inputs
           data_in_vector_enable_vector_summation <= '0';

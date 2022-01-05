@@ -378,7 +378,11 @@ architecture ntm_top_architecture of ntm_top is
   signal m_in_j_enable_writing : std_logic;
   signal m_in_k_enable_writing : std_logic;
 
+  signal w_in_enable_writing : std_logic;
+
   signal a_in_enable_writing : std_logic;
+
+  signal w_out_enable_writing : std_logic;
 
   signal a_out_enable_writing : std_logic;
 
@@ -657,6 +661,8 @@ begin
   -- WRITING
   m_in_j_enable_writing <= '0';
   m_in_k_enable_writing <= '0';
+
+  w_in_enable_writing <= '0';
 
   a_in_enable_writing <= '0';
 
@@ -1042,7 +1048,11 @@ begin
       M_IN_J_ENABLE => m_in_j_enable_writing,
       M_IN_K_ENABLE => m_in_k_enable_writing,
 
+      W_IN_ENABLE => w_in_enable_writing,
+
       A_IN_ENABLE => a_in_enable_writing,
+
+      W_OUT_ENABLE => w_out_enable_writing,
 
       A_OUT_ENABLE => a_out_enable_writing,
 

@@ -110,7 +110,11 @@ package ntm_core_pkg is
       M_IN_J_ENABLE : in std_logic;
       M_IN_K_ENABLE : in std_logic;
 
+      W_IN_ENABLE : in std_logic;
+
       A_IN_ENABLE : in std_logic;
+
+      W_OUT_ENABLE : out std_logic;
 
       A_OUT_ENABLE : out std_logic;
 

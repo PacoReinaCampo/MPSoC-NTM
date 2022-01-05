@@ -79,14 +79,15 @@ module ntm_scalar_logistic_function #(
   wire [DATA_SIZE-1:0] data_b_in_scalar_adder;
   wire [DATA_SIZE-1:0] data_out_scalar_adder;
 
-  // SCALAR INVERTER
+  // SCALAR DIVIDER
   // CONTROL
-  wire start_scalar_inverter;
-  wire ready_scalar_inverter;
+  wire start_scalar_divider;
+  wire ready_scalar_divider;
 
   // DATA
-  wire [DATA_SIZE-1:0] data_in_scalar_inverter;
-  wire [DATA_SIZE-1:0] data_out_scalar_inverter;
+  wire [DATA_SIZE-1:0] data_a_in_scalar_divider;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_divider;
+  wire [DATA_SIZE-1:0] data_out_scalar_divider;
 
   // SCALAR EXPONENTIATOR
   // CONTROL
@@ -123,23 +124,24 @@ module ntm_scalar_logistic_function #(
     .DATA_OUT(data_out_scalar_adder)
   );
 
-  // SCALAR INVERTER
-  ntm_scalar_inverter #(
+  // SCALAR DIVIDER
+  ntm_scalar_divider #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  scalar_inverter(
+  scalar_divider(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_inverter),
-    .READY(ready_scalar_inverter),
+    .START(start_scalar_divider),
+    .READY(ready_scalar_divider),
 
     // DATA
-    .DATA_IN(data_in_scalar_inverter),
-    .DATA_OUT(data_out_scalar_inverter)
+    .DATA_A_IN(data_a_in_scalar_divider),
+    .DATA_B_IN(data_b_in_scalar_divider),
+    .DATA_OUT(data_out_scalar_divider)
   );
 
   // SCALAR EXPONENTIATOR

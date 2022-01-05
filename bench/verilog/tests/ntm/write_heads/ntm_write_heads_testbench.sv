@@ -74,7 +74,11 @@ module ntm_write_heads_testbench;
   wire m_in_j_enable_writing;
   wire m_in_k_enable_writing;
 
+  wire w_in_enable_writing;
+
   wire a_in_enable_writing;
+
+  wire w_out_enable_writing;
 
   wire a_out_enable_writing;
 
@@ -145,7 +149,11 @@ module ntm_write_heads_testbench;
     .NTM_WRITE_HEADS_M_IN_J_ENABLE(m_in_j_enable_writing),
     .NTM_WRITE_HEADS_M_IN_K_ENABLE(m_in_k_enable_writing),
 
+    .NTM_WRITE_HEADS_W_IN_ENABLE(w_in_enable_writing),
+
     .NTM_WRITE_HEADS_A_IN_ENABLE(a_in_enable_writing),
+
+    .NTM_WRITE_HEADS_W_OUT_ENABLE(w_out_enable_writing),
 
     .NTM_WRITE_HEADS_A_OUT_ENABLE(a_out_enable_writing),
 
@@ -178,7 +186,11 @@ module ntm_write_heads_testbench;
     .M_IN_J_ENABLE(m_in_j_enable_writing),
     .M_IN_K_ENABLE(m_in_k_enable_writing),
 
+    .W_IN_ENABLE(w_in_enable_writing),
+
     .A_IN_ENABLE(a_in_enable_writing),
+
+    .W_OUT_ENABLE(w_out_enable_writing),
 
     .A_OUT_ENABLE(a_out_enable_writing),
 

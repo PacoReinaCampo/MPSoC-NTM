@@ -82,7 +82,11 @@ architecture ntm_write_heads_testbench_architecture of ntm_write_heads_testbench
   signal m_in_j_enable_writing : std_logic;
   signal m_in_k_enable_writing : std_logic;
 
+  signal w_in_enable_writing : std_logic;
+
   signal a_in_enable_writing : std_logic;
+
+  signal w_out_enable_writing : std_logic;
 
   signal a_out_enable_writing : std_logic;
 
@@ -154,7 +158,11 @@ begin
       NTM_WRITE_HEADS_M_IN_J_ENABLE => m_in_j_enable_writing,
       NTM_WRITE_HEADS_M_IN_K_ENABLE => m_in_k_enable_writing,
 
+      NTM_WRITE_HEADS_W_IN_ENABLE => w_in_enable_writing,
+
       NTM_WRITE_HEADS_A_IN_ENABLE => a_in_enable_writing,
+
+      NTM_WRITE_HEADS_W_OUT_ENABLE => w_out_enable_writing,
 
       NTM_WRITE_HEADS_A_OUT_ENABLE => a_out_enable_writing,
 
@@ -189,7 +197,11 @@ begin
       M_IN_J_ENABLE => m_in_j_enable_writing,
       M_IN_K_ENABLE => m_in_k_enable_writing,
 
+      W_IN_ENABLE => w_in_enable_writing,
+
       A_IN_ENABLE => a_in_enable_writing,
+
+      W_OUT_ENABLE => w_out_enable_writing,
 
       A_OUT_ENABLE => a_out_enable_writing,
 

@@ -62,7 +62,11 @@ module ntm_write_heads_stimulus #(
     output NTM_WRITE_HEADS_M_IN_J_ENABLE,
     output NTM_WRITE_HEADS_M_IN_K_ENABLE,
 
+    output NTM_WRITE_HEADS_W_IN_ENABLE,
+
     output NTM_WRITE_HEADS_A_IN_ENABLE,
+
+    input NTM_WRITE_HEADS_W_OUT_ENABLE,
 
     input NTM_WRITE_HEADS_A_OUT_ENABLE,
 

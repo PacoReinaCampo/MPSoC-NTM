@@ -88,12 +88,12 @@ architecture ntm_erasing_architecture of ntm_erasing is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-	INPUT_FIRST_STATE,                  -- STEP 1
+    INPUT_FIRST_STATE,                  -- STEP 1
     VECTOR_MULTIPLIER_STATE,            -- STEP 2
-	INPUT_SECOND_STATE,                 -- STEP 3
+    INPUT_SECOND_STATE,                 -- STEP 3
     VECTOR_ADDER_STATE,                 -- STEP 4
-	INPUT_I_THIRD_STATE,                -- STEP 5
-	INPUT_J_THIRD_STATE,                -- STEP 6
+    INPUT_I_THIRD_STATE,                -- STEP 5
+    INPUT_J_THIRD_STATE,                -- STEP 6
     MATRIX_PRODUCT_I_STATE,             -- STEP 7
     MATRIX_PRODUCT_J_STATE              -- STEP 8
     );

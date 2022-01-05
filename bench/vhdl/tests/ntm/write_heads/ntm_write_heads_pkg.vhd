@@ -101,7 +101,11 @@ package ntm_write_heads_pkg is
       NTM_WRITE_HEADS_M_IN_J_ENABLE : out std_logic;
       NTM_WRITE_HEADS_M_IN_K_ENABLE : out std_logic;
 
+      NTM_WRITE_HEADS_W_IN_ENABLE : out std_logic;
+
       NTM_WRITE_HEADS_A_IN_ENABLE : out std_logic;
+
+      NTM_WRITE_HEADS_W_OUT_ENABLE : in std_logic;
 
       NTM_WRITE_HEADS_A_OUT_ENABLE : in std_logic;
 
