@@ -96,7 +96,7 @@ module ntm_vector_oneplus_function #(
   // Internal Signals
   reg [CONTROL_SIZE-1:0] index_loop;
 
-  // ONE_CONTROLPLUS
+  // SCALAR ONEPLUS
   // CONTROL
   reg start_scalar_oneplus;
   wire ready_scalar_oneplus;
@@ -187,7 +187,7 @@ module ntm_vector_oneplus_function #(
     end
   end
 
-  // ONE_CONTROLPLUS
+  // SCALAR ONEPLUS
   ntm_scalar_oneplus_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)

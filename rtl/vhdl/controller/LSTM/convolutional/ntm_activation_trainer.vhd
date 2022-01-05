@@ -247,16 +247,14 @@ architecture ntm_activation_trainer_architecture of ntm_activation_trainer is
   signal start_vector_exponentiator : std_logic;
   signal ready_vector_exponentiator : std_logic;
 
-  signal data_a_in_enable_vector_exponentiator : std_logic;
-  signal data_b_in_enable_vector_exponentiator : std_logic;
+  signal data_in_enable_vector_exponentiator : std_logic;
 
   signal data_out_enable_vector_exponentiator : std_logic;
 
   -- DATA
-  signal size_in_vector_exponentiator   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_exponentiator  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR DIFFERENTIATION
   -- CONTROL
@@ -344,13 +342,11 @@ begin
         when VECTOR_EXPONENTIATOR_DA_STATE =>  -- STEP 2
 
           -- Control Inputs
-          data_a_in_enable_vector_exponentiator <= '0';
-          data_b_in_enable_vector_exponentiator <= '0';
+          data_in_enable_vector_exponentiator <= '0';
 
           -- Data Inputs
-          size_in_vector_exponentiator   <= ONE_CONTROL;
-          data_a_in_vector_exponentiator <= FULL;
-          data_b_in_vector_exponentiator <= FULL;
+          size_in_vector_exponentiator <= ONE_CONTROL;
+          data_in_vector_exponentiator <= FULL;
 
         when VECTOR_ADDER_DA_STATE =>  -- STEP 3
 
@@ -801,16 +797,14 @@ begin
       START => start_vector_exponentiator,
       READY => ready_vector_exponentiator,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_exponentiator,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_exponentiator,
+      DATA_IN_ENABLE => data_in_enable_vector_exponentiator,
 
       DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
 
       -- DATA
-      SIZE_IN   => size_in_vector_exponentiator,
-      DATA_A_IN => data_a_in_vector_exponentiator,
-      DATA_B_IN => data_b_in_vector_exponentiator,
-      DATA_OUT  => data_out_vector_exponentiator
+      SIZE_IN  => size_in_vector_exponentiator,
+      DATA_IN  => data_in_vector_exponentiator,
+      DATA_OUT => data_out_vector_exponentiator
       );
 
   -- VECTOR DIFFERENTIATION

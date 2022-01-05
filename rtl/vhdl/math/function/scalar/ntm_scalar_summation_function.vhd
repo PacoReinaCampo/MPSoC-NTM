@@ -162,7 +162,12 @@ begin
             -- Data Inputs
 
             data_a_in_scalar_adder <= DATA_IN;
-            data_b_in_scalar_adder <= data_out_scalar_adder;
+
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+              data_b_in_scalar_adder <= ZERO_DATA;
+            else
+              data_b_in_scalar_adder <= data_out_scalar_adder;
+            end if;
 
             -- Control Internal
             start_scalar_adder <= '1';

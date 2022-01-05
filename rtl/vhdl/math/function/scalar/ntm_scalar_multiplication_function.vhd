@@ -160,7 +160,12 @@ begin
             -- Data Inputs
 
             data_a_in_scalar_multiplier <= DATA_IN;
-            data_b_in_scalar_multiplier <= data_out_scalar_multiplier;
+
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+              data_b_in_scalar_multiplier <= ZERO_DATA;
+            else
+              data_b_in_scalar_multiplier <= data_out_scalar_multiplier;
+            end if;
 
             -- Control Internal
             start_scalar_multiplier <= '1';

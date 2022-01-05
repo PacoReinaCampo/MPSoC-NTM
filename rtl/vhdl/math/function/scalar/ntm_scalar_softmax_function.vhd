@@ -140,9 +140,8 @@ architecture ntm_scalar_softmax_function_architecture of ntm_scalar_softmax_func
   signal ready_scalar_exponentiator : std_logic;
 
   -- DATA
-  signal data_a_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -184,8 +183,7 @@ begin
 
           if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
-            data_a_in_scalar_exponentiator <= EULER;
-            data_b_in_scalar_exponentiator <= DATA_IN;
+            data_in_scalar_exponentiator <= DATA_IN;
 
             -- Control Internal
             start_scalar_exponentiator <= '1';
@@ -339,9 +337,8 @@ begin
       READY => ready_scalar_exponentiator,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_exponentiator,
-      DATA_B_IN => data_b_in_scalar_exponentiator,
-      DATA_OUT  => data_out_scalar_exponentiator
+      DATA_IN  => data_in_scalar_exponentiator,
+      DATA_OUT => data_out_scalar_exponentiator
       );
 
 end architecture;

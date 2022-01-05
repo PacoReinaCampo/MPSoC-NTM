@@ -101,7 +101,7 @@ module ntm_matrix_oneplus_function #(
   reg [CONTROL_SIZE-1:0] index_i_loop;
   reg [CONTROL_SIZE-1:0] index_j_loop;
 
-  // ONE_CONTROLPLUS
+  // SCALAR ONEPLUS
   // CONTROL
   reg start_vector_oneplus;
   wire ready_vector_oneplus;
@@ -241,7 +241,7 @@ module ntm_matrix_oneplus_function #(
     end
   end
 
-  // ONE_CONTROLPLUS
+  // SCALAR ONEPLUS
   ntm_vector_oneplus_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)

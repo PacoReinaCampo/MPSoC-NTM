@@ -116,7 +116,7 @@ module ntm_activation_trainer #(
   parameter [2:0] VECTOR_DIFFERENTIATION_B_STATE = 5;
 
   parameter [2:0] STARTER_DA_STATE = 0;
-  parameter [2:0] VECTOR_EXPONE_CONTROLNTIATOR_DA_STATE = 1;
+  parameter [2:0] VECTOR_EXPONENTIATOR_DA_STATE = 1;
   parameter [2:0] VECTOR_ADDER_DA_STATE = 2;
   parameter [2:0] VECTOR_FIRST_MULTIPLIER_DA_STATE = 3;
   parameter [2:0] VECTOR_SECOND_MULTIPLIER_DA_STATE = 4;
@@ -201,19 +201,17 @@ module ntm_activation_trainer #(
   wire [DATA_SIZE-1:0] data_b_in_vector_multiplier;
   wire [DATA_SIZE-1:0] data_out_vector_multiplier;
 
-  // VECTOR EXPONE_CONTROLNTIATOR
+  // VECTOR EXPONENTIATOR
   // CONTROL
   wire start_vector_exponentiator;
   wire ready_vector_exponentiator;
 
-  wire data_a_in_enable_vector_exponentiator;
-  wire data_b_in_enable_vector_exponentiator;
+  wire data_in_enable_vector_exponentiator;
   wire data_out_enable_vector_exponentiator;
 
   // DATA
   wire [DATA_SIZE-1:0] size_in_vector_exponentiator;
-  wire [DATA_SIZE-1:0] data_a_in_vector_exponentiator;
-  wire [DATA_SIZE-1:0] data_b_in_vector_exponentiator;
+  wire [DATA_SIZE-1:0] data_in_vector_exponentiator;
   wire [DATA_SIZE-1:0] data_out_vector_exponentiator;
 
   // VECTOR DIFFERENTIATION
@@ -295,7 +293,7 @@ module ntm_activation_trainer #(
             STARTER_DA_STATE : begin  // STEP 0
             end
 
-            VECTOR_EXPONE_CONTROLNTIATOR_DA_STATE : begin  // STEP 1
+            VECTOR_EXPONENTIATOR_DA_STATE : begin  // STEP 1
             end
 
             VECTOR_ADDER_DA_STATE : begin  // STEP 2
@@ -458,7 +456,7 @@ module ntm_activation_trainer #(
     .DATA_OUT(data_out_vector_multiplier)
   );
 
-  // VECTOR EXPONE_CONTROLNTIATOR
+  // VECTOR EXPONENTIATOR
   ntm_vector_exponentiator #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
@@ -472,14 +470,12 @@ module ntm_activation_trainer #(
     .START(start_vector_exponentiator),
     .READY(ready_vector_exponentiator),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_exponentiator),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_exponentiator),
+    .DATA_IN_ENABLE(data_in_enable_vector_exponentiator),
     .DATA_OUT_ENABLE(data_out_enable_vector_exponentiator),
 
     // DATA
     .SIZE_IN(size_in_vector_exponentiator),
-    .DATA_A_IN(data_a_in_vector_exponentiator),
-    .DATA_B_IN(data_b_in_vector_exponentiator),
+    .DATA_IN(data_in_vector_exponentiator),
     .DATA_OUT(data_out_vector_exponentiator)
   );
 

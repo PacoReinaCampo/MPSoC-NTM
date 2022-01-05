@@ -305,8 +305,11 @@ begin
 
             -- FSM Control
             multiplier_ctrl_fsm_int <= STARTER_STATE;
-		  else
-		  end if;
+          else
+            -- Data Outputs
+            exponent_int_scalar_multiplier <= std_logic_vector(unsigned(exponent_int_scalar_multiplier) - unsigned(ONE_EXPONENT));
+            mantissa_int_scalar_multiplier <= std_logic_vector(unsigned(mantissa_int_scalar_multiplier) sll 1);
+          end if;
 
         when others =>
           -- FSM Control

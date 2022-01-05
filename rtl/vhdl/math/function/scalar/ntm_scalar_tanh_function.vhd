@@ -146,9 +146,8 @@ architecture ntm_scalar_tanh_function_architecture of ntm_scalar_tanh_function i
   signal ready_scalar_exponentiator : std_logic;
 
   -- DATA
-  signal data_a_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -288,8 +287,7 @@ begin
   data_b_in_scalar_divider <= data_int_scalar_adder;
 
   -- SCALAR EXPONENTIATOR
-  data_a_in_scalar_exponentiator <= EULER;
-  data_b_in_scalar_exponentiator <= DATA_IN;
+  data_in_scalar_exponentiator <= DATA_IN;
 
   -- SCALAR ADDER
   scalar_adder : ntm_scalar_adder
@@ -372,9 +370,8 @@ begin
       READY => ready_scalar_exponentiator,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_exponentiator,
-      DATA_B_IN => data_b_in_scalar_exponentiator,
-      DATA_OUT  => data_out_scalar_exponentiator
+      DATA_IN  => data_in_scalar_exponentiator,
+      DATA_OUT => data_out_scalar_exponentiator
       );
 
 end architecture;

@@ -277,14 +277,20 @@ begin
 
         when ENDER_STATE =>  -- STEP 4
 
-          -- Control Outputs
-          READY <= '1';
+          if (overflow_out_mantissa_scalar_integer_adder = '1') then
+            -- Data Outputs
+            DATA_OUT <= sign_int_scalar_adder & exponent_int_scalar_adder(EXPONENT_SIZE-1 downto 0) & mantissa_int_scalar_adder(MANTISSA_SIZE-1 downto 0);
 
-          -- Data Outputs
-          DATA_OUT <= sign_int_scalar_adder & exponent_int_scalar_adder(EXPONENT_SIZE-1 downto 0) & mantissa_int_scalar_adder(MANTISSA_SIZE-1 downto 0);
+            -- Control Outputs
+            READY <= '1';
 
-          -- FSM Control
-          adder_ctrl_fsm_int <= STARTER_STATE;
+            -- FSM Control
+            adder_ctrl_fsm_int <= STARTER_STATE;
+          else
+            -- Data Outputs
+            exponent_int_scalar_adder <= std_logic_vector(unsigned(exponent_int_scalar_adder) - unsigned(ONE_EXPONENT));
+            mantissa_int_scalar_adder <= std_logic_vector(unsigned(mantissa_int_scalar_adder) sll 1);
+          end if;
 
         when others =>
           -- FSM Control

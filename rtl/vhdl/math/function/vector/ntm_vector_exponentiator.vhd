@@ -58,15 +58,13 @@ entity ntm_vector_exponentiator is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_A_IN_ENABLE : in std_logic;
-    DATA_B_IN_ENABLE : in std_logic;
+    DATA_IN_ENABLE : in std_logic;
 
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
     SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
@@ -112,17 +110,13 @@ architecture ntm_vector_exponentiator_architecture of ntm_vector_exponentiator i
   -- Internal Signals
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_a_in_exponentiator_int : std_logic;
-  signal data_b_in_exponentiator_int : std_logic;
-
-  -- EXPONENTIATOR
+  -- SCALAR EXPONENTIATOR
   -- CONTROL
   signal start_scalar_exponentiator : std_logic;
   signal ready_scalar_exponentiator : std_logic;
 
   -- DATA
-  signal data_a_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -141,7 +135,8 @@ begin
       DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
-      READY           <= '0';
+      READY <= '0';
+
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
@@ -149,12 +144,8 @@ begin
 
       index_loop <= ZERO_CONTROL;
 
-      data_a_in_exponentiator_int <= '0';
-      data_b_in_exponentiator_int <= '0';
-
       -- Data Internal
-      data_a_in_scalar_exponentiator <= ZERO_DATA;
-      data_b_in_scalar_exponentiator <= ZERO_DATA;
+      data_in_scalar_exponentiator   <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -174,28 +165,13 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          if ((DATA_A_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
+          if ((DATA_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
             -- Data Inputs
-            data_a_in_scalar_exponentiator <= DATA_A_IN;
 
-            -- Control Internal
-            data_a_in_exponentiator_int <= '1';
-          end if;
+            data_in_scalar_exponentiator <= DATA_IN;
 
-          if ((DATA_B_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
-            -- Data Inputs
-            data_b_in_scalar_exponentiator <= DATA_B_IN;
-
-            -- Control Internal
-            data_b_in_exponentiator_int <= '1';
-          end if;
-
-          if (data_a_in_exponentiator_int = '1' and data_b_in_exponentiator_int = '1') then
             -- Control Internal
             start_scalar_exponentiator <= '1';
-
-            data_a_in_exponentiator_int <= '0';
-            data_b_in_exponentiator_int <= '0';
 
             -- FSM Control
             exponentiator_ctrl_fsm_int <= ENDER_STATE;
@@ -232,9 +208,6 @@ begin
           else
             -- Control Internal
             start_scalar_exponentiator <= '0';
-
-            data_a_in_exponentiator_int <= '0';
-            data_b_in_exponentiator_int <= '0';
           end if;
 
         when others =>
@@ -244,7 +217,7 @@ begin
     end if;
   end process;
 
-  -- EXPONENTIATOR
+  -- SCALAR EXPONENTIATOR
   scalar_exponentiator : ntm_scalar_exponentiator
     generic map (
       DATA_SIZE    => DATA_SIZE,
@@ -260,8 +233,7 @@ begin
       READY => ready_scalar_exponentiator,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_exponentiator,
-      DATA_B_IN => data_b_in_scalar_exponentiator,
+      DATA_IN   => data_in_scalar_exponentiator,
       DATA_OUT  => data_out_scalar_exponentiator
       );
 
