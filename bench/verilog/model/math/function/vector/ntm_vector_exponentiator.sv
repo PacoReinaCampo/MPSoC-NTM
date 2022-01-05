@@ -50,14 +50,12 @@ module ntm_vector_exponentiator #(
     input START,
     output reg READY,
 
-    input DATA_A_IN_ENABLE,
-    input DATA_B_IN_ENABLE,
+    input DATA_IN_ENABLE,
     output reg DATA_OUT_ENABLE,
 
     // DATA
     input [DATA_SIZE-1:0] SIZE_IN,
-    input [DATA_SIZE-1:0] DATA_A_IN,
-    input [DATA_SIZE-1:0] DATA_B_IN,
+    input [DATA_SIZE-1:0] DATA_IN,
     output reg [DATA_SIZE-1:0] DATA_OUT
   );
 
@@ -98,44 +96,34 @@ module ntm_vector_exponentiator #(
   // Internal Signals
   reg [CONTROL_SIZE-1:0] index_loop;
 
-  reg data_a_in_exponentiator_int;
-  reg data_b_in_exponentiator_int;
-
-  // EXPONE_CONTROLNTIATOR
+  // SCALAR EXPONENTIATOR
   // CONTROL
   reg start_scalar_exponentiator;
   wire ready_scalar_exponentiator;
 
   // DATA
-  reg [DATA_SIZE-1:0] data_a_in_scalar_exponentiator;
-  reg [DATA_SIZE-1:0] data_b_in_scalar_exponentiator;
+  reg [DATA_SIZE-1:0] data_in_scalar_exponentiator;
   wire [DATA_SIZE-1:0] data_out_scalar_exponentiator;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = exponentiator(M_A_IN · 2^(E_A_IN), M_B_IN · 2^(E_B_IN))
-
   // CONTROL
   always @(posedge CLK or posedge RST) begin
     if(RST == 1'b0) begin
       // Data Outputs
-      DATA_OUT <= ZERO_DATA;
+      DATA_OUT <= 1'b0;
 
       // Control Outputs
       READY <= 1'b0;
 
       // Assignations
       index_loop <= ZERO_DATA;
-
-      data_a_in_exponentiator_int <= 1'b0;
-      data_b_in_exponentiator_int <= 1'b0;
     end
-	else begin
+    else begin
       case(exponentiator_ctrl_fsm_int)
-        STARTER_STATE : begin
-          // STEP 0
+        STARTER_STATE : begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
@@ -147,37 +135,24 @@ module ntm_vector_exponentiator #(
             exponentiator_ctrl_fsm_int <= INPUT_STATE;
           end
         end
-        INPUT_STATE : begin
-          // STEP 1
-          if(DATA_A_IN_ENABLE == 1'b1) begin
+        INPUT_STATE : begin  // STEP 1
+          if(DATA_IN_ENABLE == 1'b1) begin
             // Data Inputs
-            data_a_in_scalar_exponentiator <= DATA_A_IN;
+            data_in_scalar_exponentiator <= DATA_IN;
 
-            // Control Internal
-            data_a_in_exponentiator_int <= 1'b1;
-          end
-          if(DATA_B_IN_ENABLE == 1'b1) begin
-            // Data Inputs
-            data_b_in_scalar_exponentiator <= DATA_B_IN;
-
-            // Control Internal
-            data_b_in_exponentiator_int <= 1'b1;
-          end
-          if(data_a_in_exponentiator_int == 1'b1 && data_b_in_exponentiator_int == 1'b1) begin
             if(index_loop == ZERO_DATA) begin
               // Control Internal
               start_scalar_exponentiator <= 1'b1;
             end
-            // Data Inputs
 
             // FSM Control
             exponentiator_ctrl_fsm_int <= ENDER_STATE;
           end
+
           // Control Outputs
           DATA_OUT_ENABLE <= 1'b0;
         end
-        ENDER_STATE : begin
-          // STEP 2
+        ENDER_STATE : begin  // STEP 2
           if(ready_scalar_exponentiator == 1'b1) begin
             if(index_loop == (SIZE_IN - ONE_CONTROL)) begin
               // Control Outputs
@@ -202,8 +177,6 @@ module ntm_vector_exponentiator #(
           else begin
             // Control Internal
             start_scalar_exponentiator <= 1'b0;
-            data_a_in_exponentiator_int <= 1'b0;
-            data_b_in_exponentiator_int <= 1'b0;
           end
         end
         default : begin
@@ -214,7 +187,7 @@ module ntm_vector_exponentiator #(
     end
   end
 
-  // EXPONE_CONTROLNTIATOR
+  // SCALAR EXPONENTIATOR
   ntm_scalar_exponentiator #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
@@ -229,8 +202,7 @@ module ntm_vector_exponentiator #(
     .READY(ready_scalar_exponentiator),
 
     // DATA
-    .DATA_A_IN(data_a_in_scalar_exponentiator),
-    .DATA_B_IN(data_b_in_scalar_exponentiator),
+    .DATA_IN(data_in_scalar_exponentiator),
     .DATA_OUT(data_out_scalar_exponentiator)
   );
 

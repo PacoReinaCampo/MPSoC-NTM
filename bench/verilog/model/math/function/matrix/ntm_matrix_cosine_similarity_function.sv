@@ -117,7 +117,7 @@ module ntm_matrix_cosine_similarity_function #(
   reg data_b_in_vector_cosine_similarity_int;
   reg data_b_in_scalar_cosine_similarity_int;
 
-  // COSINE SIMILARITY
+  // VECTOR COSINE SIMILARITY
   // CONTROL
   reg start_vector_cosine_similarity;
 
@@ -379,7 +379,7 @@ module ntm_matrix_cosine_similarity_function #(
     end
   end
 
-  // COSINE SIMILARITY
+  // VECTOR COSINE SIMILARITY
   ntm_vector_cosine_similarity_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)

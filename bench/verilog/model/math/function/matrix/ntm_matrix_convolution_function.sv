@@ -117,7 +117,7 @@ module ntm_matrix_convolution_function #(
   reg data_b_in_vector_convolution_int;
   reg data_b_in_scalar_convolution_int;
 
-  // COSINE SIMILARITY
+  // VECTOR CONVOLUTION
   // CONTROL
   reg start_vector_convolution;
 
@@ -379,7 +379,7 @@ module ntm_matrix_convolution_function #(
     end
   end
 
-  // CONVOLUTION
+  // VECTOR CONVOLUTION
   ntm_vector_convolution_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)

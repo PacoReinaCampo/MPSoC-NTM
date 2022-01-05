@@ -101,7 +101,7 @@ module ntm_matrix_exponentiator #(
   reg [CONTROL_SIZE-1:0] index_i_loop;
   reg [CONTROL_SIZE-1:0] index_j_loop;
 
-  // SCALAR EXPONENTIATOR
+  // VECTOR EXPONENTIATOR
   // CONTROL
   reg start_vector_exponentiator;
   wire ready_vector_exponentiator;
@@ -241,7 +241,7 @@ module ntm_matrix_exponentiator #(
     end
   end
 
-  // SCALAR EXPONENTIATOR
+  // VECTOR EXPONENTIATOR
   ntm_vector_exponentiator #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)

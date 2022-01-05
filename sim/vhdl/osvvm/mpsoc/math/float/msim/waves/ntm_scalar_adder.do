@@ -21,6 +21,9 @@ add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/OVERF
 
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/adder_ctrl_fsm_int
 
+add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/data_out_ready_exponent_int
+add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/data_out_ready_mantissa_int
+
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/start_exponent_scalar_integer_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/operation_exponent_scalar_integer_adder
 add wave -noupdate /ntm_float_testbench/ntm_scalar_adder_test/scalar_adder/data_a_in_exponent_scalar_integer_adder

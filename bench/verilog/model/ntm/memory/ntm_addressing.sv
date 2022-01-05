@@ -98,7 +98,7 @@ module ntm_addressing #(
   parameter [2:0] VECTOR_SECOND_ADDER_INTERPOLATION_STATE = 4;
 
   parameter [2:0] STARTER_SHARPENING_STATE = 0;
-  parameter [2:0] VECTOR_EXPONE_CONTROLNTIATOR_SHARPENING_STATE = 1;
+  parameter [2:0] VECTOR_EXPONENTIATOR_SHARPENING_STATE = 1;
   parameter [2:0] VECTOR_SUMMATION_SHARPENING_STATE = 2;
   parameter [2:0] VECTOR_DIVIDER_SHARPENING_STATE = 3;
 
@@ -204,19 +204,17 @@ module ntm_addressing #(
   reg [DATA_SIZE-1:0] data_b_in_vector_divider;
   wire [DATA_SIZE-1:0] data_out_vector_divider;
 
-  // VECTOR EXPONE_CONTROLNTIATOR
+  // VECTOR EXPONENTIATOR
   // CONTROL
   wire start_vector_exponentiator;
   wire ready_vector_exponentiator;
 
-  wire data_a_in_enable_vector_exponentiator;
-  wire data_b_in_enable_vector_exponentiator;
+  wire data_in_enable_vector_exponentiator;
   wire data_out_enable_vector_exponentiator;
 
   // DATA
   reg [DATA_SIZE-1:0] size_in_vector_exponentiator;
-  reg [DATA_SIZE-1:0] data_a_in_vector_exponentiator;
-  reg [DATA_SIZE-1:0] data_b_in_vector_exponentiator;
+  reg [DATA_SIZE-1:0] data_in_vector_exponentiator;
   wire [DATA_SIZE-1:0] data_out_vector_exponentiator;
 
   // VECTOR SUMMATION
@@ -353,12 +351,11 @@ module ntm_addressing #(
             STARTER_SHARPENING_STATE : begin  // STEP 0
             end
 
-            VECTOR_EXPONE_CONTROLNTIATOR_SHARPENING_STATE : begin  // STEP 1
+            VECTOR_EXPONENTIATOR_SHARPENING_STATE : begin  // STEP 1
 
               // Data Inputs
-              size_in_vector_exponentiator   <= FULL;
-              data_a_in_vector_exponentiator <= FULL;
-              data_b_in_vector_exponentiator <= FULL;
+              size_in_vector_exponentiator <= FULL;
+              data_in_vector_exponentiator <= FULL;
             end
 
             VECTOR_SUMMATION_SHARPENING_STATE : begin  // STEP 2
@@ -504,7 +501,7 @@ module ntm_addressing #(
     .DATA_OUT(data_out_vector_divider)
   );
 
-  // VECTOR EXPONE_CONTROLNTIATOR
+  // VECTOR EXPONENTIATOR
   ntm_vector_exponentiator #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
@@ -518,14 +515,12 @@ module ntm_addressing #(
     .START(start_vector_exponentiator),
     .READY(ready_vector_exponentiator),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_vector_exponentiator),
-    .DATA_B_IN_ENABLE(data_b_in_enable_vector_exponentiator),
+    .DATA_IN_ENABLE(data_in_enable_vector_exponentiator),
     .DATA_OUT_ENABLE(data_out_enable_vector_exponentiator),
 
     // DATA
     .SIZE_IN(size_in_vector_exponentiator),
-    .DATA_A_IN(data_a_in_vector_exponentiator),
-    .DATA_B_IN(data_b_in_vector_exponentiator),
+    .DATA_IN(data_in_vector_exponentiator),
     .DATA_OUT(data_out_vector_exponentiator)
   );
 

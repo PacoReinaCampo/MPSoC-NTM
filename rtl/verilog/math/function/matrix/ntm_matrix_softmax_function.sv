@@ -106,7 +106,7 @@ module ntm_matrix_softmax_function #(
   reg [CONTROL_SIZE-1:0] index_vector_loop;
   reg [CONTROL_SIZE-1:0] index_scalar_loop;
 
-  // SOFTMAX
+  // VECTOR SOFTMAX
   // CONTROL
   reg start_vector_softmax;
   wire ready_vector_softmax;
@@ -295,7 +295,7 @@ module ntm_matrix_softmax_function #(
     end
   end
 
-  // SOFTMAX
+  // VECTOR SOFTMAX
   ntm_vector_softmax_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)

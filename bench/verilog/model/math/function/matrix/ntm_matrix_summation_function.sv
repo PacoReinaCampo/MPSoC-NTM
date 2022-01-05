@@ -106,7 +106,7 @@ module ntm_matrix_summation_function #(
   reg [CONTROL_SIZE-1:0] index_vector_loop;
   reg [CONTROL_SIZE-1:0] index_scalar_loop;
 
-  // SOFTMAX
+  // VECTOR SUMMATION
   // CONTROL
   reg start_vector_summation;
   wire ready_vector_summation;
@@ -295,7 +295,7 @@ module ntm_matrix_summation_function #(
     end
   end
 
-  // SUMMATION
+  // VECTOR SUMMATION
   ntm_vector_summation_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)

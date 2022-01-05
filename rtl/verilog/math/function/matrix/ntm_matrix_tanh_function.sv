@@ -101,7 +101,7 @@ module ntm_matrix_tanh_function #(
   reg [CONTROL_SIZE-1:0] index_i_loop;
   reg [CONTROL_SIZE-1:0] index_j_loop;
 
-  // TANH
+  // VECTOR TANH
   // CONTROL
   reg start_vector_tanh;
   wire ready_vector_tanh;
@@ -241,7 +241,7 @@ module ntm_matrix_tanh_function #(
     end
   end
 
-  // TANH
+  // VECTOR TANH
   ntm_vector_tanh_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)

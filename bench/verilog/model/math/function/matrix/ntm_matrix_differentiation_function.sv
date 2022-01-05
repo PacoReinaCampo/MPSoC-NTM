@@ -108,7 +108,7 @@ module ntm_matrix_differentiation_function #(
   reg [CONTROL_SIZE-1:0] index_vector_loop;
   reg [CONTROL_SIZE-1:0] index_scalar_loop;
 
-  // SOFTMAX
+  // VECTOR DIFFERENTIATION
   // CONTROL
   reg start_vector_differentiation;
   wire ready_vector_differentiation;

@@ -309,8 +309,13 @@ begin
 
             -- FSM Control
             divider_ctrl_fsm_int <= STARTER_STATE;
-		  else
-		  end if;
+          else
+            -- Data Outputs
+            exponent_int_scalar_divider <= std_logic_vector(unsigned(exponent_int_scalar_divider) - unsigned(ONE_EXPONENT));
+
+            data_mantissa_int_scalar_divider <= std_logic_vector(unsigned(data_mantissa_int_scalar_divider) sll 1);
+            rest_mantissa_int_scalar_divider <= std_logic_vector(unsigned(rest_mantissa_int_scalar_divider) sll 1);
+          end if;
 
         when others =>
           -- FSM Control

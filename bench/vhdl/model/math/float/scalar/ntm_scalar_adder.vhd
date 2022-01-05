@@ -135,6 +135,10 @@ architecture ntm_scalar_adder_architecture of ntm_scalar_adder is
   -- Finite State Machine
   signal adder_ctrl_fsm_int : adder_ctrl_fsm;
 
+  -- Control Internal
+  signal data_out_ready_exponent_int : std_logic;
+  signal data_out_ready_mantissa_int : std_logic;
+
   -- EXPONENT SCALAR ADDER
   -- CONTROL
   signal start_exponent_scalar_integer_adder : std_logic;
@@ -195,6 +199,9 @@ begin
       operation_exponent_scalar_integer_adder <= '0';
       operation_mantissa_scalar_integer_adder <= '0';
 
+      data_out_ready_exponent_int <= '0';
+      data_out_ready_mantissa_int <= '0';
+
       -- Data Internal
       data_a_in_exponent_scalar_integer_adder <= ZERO_EXPONENT;
       data_b_in_exponent_scalar_integer_adder <= ZERO_EXPONENT;
@@ -222,6 +229,9 @@ begin
             operation_exponent_scalar_integer_adder <= '0';
             operation_mantissa_scalar_integer_adder <= '0';
 
+            data_out_ready_exponent_int <= '0';
+            data_out_ready_mantissa_int <= '0';
+
             -- Data Internal
             sign_int_scalar_adder <= DATA_A_IN(DATA_SIZE-1) xor DATA_B_IN(DATA_SIZE-1);
 
@@ -240,6 +250,9 @@ begin
           if (ready_exponent_scalar_integer_adder = '1') then
             -- Data Outputs
             exponent_int_scalar_adder <= overflow_out_exponent_scalar_integer_adder & data_out_exponent_scalar_integer_adder;
+
+            -- Control Internal
+            data_out_ready_exponent_int <= '1';
           else
             -- Control Internal
             start_exponent_scalar_integer_adder <= '0';
@@ -248,14 +261,26 @@ begin
           if (ready_mantissa_scalar_integer_adder = '1') then
             -- Data Outputs
             mantissa_int_scalar_adder <= overflow_out_mantissa_scalar_integer_adder & data_out_mantissa_scalar_integer_adder;
+
+            -- Control Internal
+            data_out_ready_mantissa_int <= '1';
           else
             -- Control Internal
             start_mantissa_scalar_integer_adder <= '0';
           end if;
 
+          if (data_out_ready_exponent_int = '1' and data_out_ready_mantissa_int = '1') then
+            -- Control Internal
+            data_out_ready_exponent_int <= '0';
+            data_out_ready_mantissa_int <= '0';
+
+            -- FSM Control
+            adder_ctrl_fsm_int <= ADAPTATION_STATE;
+          end if;
+
         when ADAPTATION_STATE =>  -- STEP 2
 
-          if (overflow_out_mantissa_scalar_integer_adder = '1') then
+          if (overflow_out_mantissa_scalar_integer_adder = '0') then
             -- FSM Control
             adder_ctrl_fsm_int <= NORMALIZATION_STATE;
           else
@@ -266,7 +291,7 @@ begin
 
         when NORMALIZATION_STATE =>  -- STEP 3
 
-          if (overflow_out_mantissa_scalar_integer_adder = '1') then
+          if (overflow_out_mantissa_scalar_integer_adder = '0') then
             -- FSM Control
             adder_ctrl_fsm_int <= ENDER_STATE;
           else
@@ -277,14 +302,20 @@ begin
 
         when ENDER_STATE =>  -- STEP 4
 
-          -- Control Outputs
-          READY <= '1';
+          if (overflow_out_mantissa_scalar_integer_adder = '0') then
+            -- Data Outputs
+            DATA_OUT <= sign_int_scalar_adder & exponent_int_scalar_adder(EXPONENT_SIZE-1 downto 0) & mantissa_int_scalar_adder(MANTISSA_SIZE-1 downto 0);
 
-          -- Data Outputs
-          DATA_OUT <= sign_int_scalar_adder & exponent_int_scalar_adder(EXPONENT_SIZE-1 downto 0) & mantissa_int_scalar_adder(MANTISSA_SIZE-1 downto 0);
+            -- Control Outputs
+            READY <= '1';
 
-          -- FSM Control
-          adder_ctrl_fsm_int <= STARTER_STATE;
+            -- FSM Control
+            adder_ctrl_fsm_int <= STARTER_STATE;
+          else
+            -- Data Outputs
+            exponent_int_scalar_adder <= std_logic_vector(unsigned(exponent_int_scalar_adder) - unsigned(ONE_EXPONENT));
+            mantissa_int_scalar_adder <= std_logic_vector(unsigned(mantissa_int_scalar_adder) sll 1);
+          end if;
 
         when others =>
           -- FSM Control

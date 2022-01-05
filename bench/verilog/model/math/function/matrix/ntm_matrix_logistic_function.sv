@@ -101,7 +101,7 @@ module ntm_matrix_logistic_function #(
   reg [CONTROL_SIZE-1:0] index_i_loop;
   reg [CONTROL_SIZE-1:0] index_j_loop;
 
-  // LOGISTIC
+  // VECTOR LOGISTIC
   // CONTROL
   reg start_vector_logistic;
   wire ready_vector_logistic;
@@ -241,7 +241,7 @@ module ntm_matrix_logistic_function #(
     end
   end
 
-  // LOGISTIC
+  // VECTOR LOGISTIC
   ntm_vector_logistic_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)

@@ -101,7 +101,7 @@ module ntm_matrix_sinh_function #(
   reg [CONTROL_SIZE-1:0] index_i_loop;
   reg [CONTROL_SIZE-1:0] index_j_loop;
 
-  // SINH
+  // VECTOR SINH
   // CONTROL
   reg start_vector_sinh;
   wire ready_vector_sinh;
@@ -241,7 +241,7 @@ module ntm_matrix_sinh_function #(
     end
   end
 
-  // SINH
+  // VECTOR SINH
   ntm_vector_sinh_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)

@@ -106,7 +106,7 @@ module ntm_matrix_multiplication_function #(
   reg [CONTROL_SIZE-1:0] index_vector_loop;
   reg [CONTROL_SIZE-1:0] index_scalar_loop;
 
-  // SOFTMAX
+  // VECTOR MULTIPLICATION
   // CONTROL
   reg start_vector_multiplication;
   wire ready_vector_multiplication;
@@ -295,7 +295,7 @@ module ntm_matrix_multiplication_function #(
     end
   end
 
-  // MULTIPLICATION
+  // VECTOR MULTIPLICATION
   ntm_vector_multiplication_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)

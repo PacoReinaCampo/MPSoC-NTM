@@ -148,16 +148,14 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
   signal start_vector_exponentiator : std_logic;
   signal ready_vector_exponentiator : std_logic;
 
-  signal data_a_in_enable_vector_exponentiator : std_logic;
-  signal data_b_in_enable_vector_exponentiator : std_logic;
+  signal data_in_enable_vector_exponentiator : std_logic;
 
   signal data_out_enable_vector_exponentiator : std_logic;
 
   -- DATA
-  signal size_in_vector_exponentiator   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_exponentiator  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR COSINE SIMILARITY
   -- CONTROL
@@ -343,9 +341,8 @@ begin
   data_b_in_vector_multiplier <= BETA_IN;
 
   -- VECTOR EXPONENTIATOR
-  size_in_vector_exponentiator   <= SIZE_I_IN;
-  data_a_in_vector_exponentiator <= EULER;
-  data_b_in_vector_exponentiator <= data_out_vector_multiplier;
+  size_in_vector_exponentiator <= SIZE_I_IN;
+  data_in_vector_exponentiator <= data_out_vector_multiplier;
 
   -- VECTOR SOFTMAX
   size_in_vector_softmax   <= SIZE_I_IN;
@@ -394,16 +391,14 @@ begin
       START => start_vector_exponentiator,
       READY => ready_vector_exponentiator,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_exponentiator,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_exponentiator,
+      DATA_IN_ENABLE => data_in_enable_vector_exponentiator,
 
       DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
 
       -- DATA
-      SIZE_IN   => size_in_vector_exponentiator,
-      DATA_A_IN => data_a_in_vector_exponentiator,
-      DATA_B_IN => data_b_in_vector_exponentiator,
-      DATA_OUT  => data_out_vector_exponentiator
+      SIZE_IN  => size_in_vector_exponentiator,
+      DATA_IN  => data_in_vector_exponentiator,
+      DATA_OUT => data_out_vector_exponentiator
       );
 
   -- VECTOR COSINE SIMILARITY

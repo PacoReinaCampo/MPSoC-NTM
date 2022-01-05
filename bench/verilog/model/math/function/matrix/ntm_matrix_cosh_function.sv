@@ -101,7 +101,7 @@ module ntm_matrix_cosh_function #(
   reg [CONTROL_SIZE-1:0] index_i_loop;
   reg [CONTROL_SIZE-1:0] index_j_loop;
 
-  // COSH
+  // VECTOR COSH
   // CONTROL
   reg start_vector_cosh;
   wire ready_vector_cosh;
@@ -241,7 +241,7 @@ module ntm_matrix_cosh_function #(
     end
   end
 
-  // COSH
+  // VECTOR COSH
   ntm_vector_cosh_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
