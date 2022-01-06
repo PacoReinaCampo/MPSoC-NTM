@@ -67,7 +67,6 @@ entity ntm_tensor_transpose is
     DATA_OUT_K_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -203,7 +202,6 @@ begin
 
           if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1') and (DATA_IN_K_ENABLE = '1')) or ((index_i_loop = ZERO_CONTROL) and (index_j_loop = ZERO_CONTROL))) then
             -- Data Inputs
-            modulo_in_vector_transpose <= MODULO_IN;
             size_i_in_vector_transpose <= SIZE_J_IN;
             size_j_in_vector_transpose <= SIZE_K_IN;
 
