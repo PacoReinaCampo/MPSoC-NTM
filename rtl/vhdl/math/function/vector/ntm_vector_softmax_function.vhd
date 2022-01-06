@@ -136,7 +136,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = exponentiation(EULER,DATA_IN)/summation(exponentiation(EULER,DATA_IN) [i in 0 to LENGTH_IN-1])
+  -- DATA_OUT = exponentiation(DATA_IN)/summation(exponentiation(DATA_IN) [i in 0 to LENGTH_IN-1])
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)

@@ -136,6 +136,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- DATA_OUT = (exponentiation(2*DATA_IN) - 1)/(exponentiation(2*DATA_IN) + 1)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)

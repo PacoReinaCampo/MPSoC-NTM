@@ -147,6 +147,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- DATA_OUT(t) = (DATA_IN(t+1) - DATA_IN(t))/PERIOD_IN
+
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin

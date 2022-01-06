@@ -67,7 +67,6 @@ entity ntm_matrix_product is
     DATA_OUT_J_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     SIZE_A_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_A_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_B_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);

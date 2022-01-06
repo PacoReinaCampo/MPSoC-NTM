@@ -125,7 +125,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = 1/(1 + inverter(exponentiation(EULER,DATA_IN)))
+  -- DATA_OUT = 1/(1 + inverter(exponentiation(DATA_IN)))
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)

@@ -140,7 +140,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = 1 + logarithm(1 + (exponentiation(EULER,DATA_IN)))
+  -- DATA_OUT = 1 + logarithm(1 + (exponentiation(DATA_IN)))
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)

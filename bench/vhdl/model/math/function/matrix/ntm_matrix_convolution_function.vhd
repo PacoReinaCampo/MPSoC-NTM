@@ -159,6 +159,8 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
+  -- DATA_OUT = DATA_A_IN * DATA_B_IN = summation(DATA_A_IN[LENGTH_IN-i] · DATA_B_IN[i] [i in 0 to LENGTH_IN-1])
+
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
