@@ -89,7 +89,7 @@ architecture dnc_memory_retention_vector_architecture of dnc_memory_retention_ve
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-	INPUT_STATE,                        -- STEP 1
+    INPUT_STATE,                        -- STEP 1
     VECTOR_MULTIPLIER_STATE,            -- STEP 2
     VECTOR_ADDER_STATE,                 -- STEP 3
     VECTOR_MULTIPLICATION_STATE         -- STEP 4

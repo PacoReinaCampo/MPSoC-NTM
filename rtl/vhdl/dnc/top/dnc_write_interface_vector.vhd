@@ -145,16 +145,16 @@ architecture dnc_write_interface_vector_architecture of dnc_write_interface_vect
 
   type controller_ctrl_matrix_fsm is (
     STARTER_STATE,                      -- STEP 0
-	INPUT_I_FIRST_STATE,                -- STEP 1
-	INPUT_J_FIRST_STATE,                -- STEP 2
+    INPUT_I_FIRST_STATE,                -- STEP 1
+    INPUT_J_FIRST_STATE,                -- STEP 2
     MATRIX_I_FIRST_PRODUCT_STATE,       -- STEP 3
     MATRIX_J_FIRST_PRODUCT_STATE,       -- STEP 4
-	INPUT_I_SECOND_STATE,               -- STEP 5
-	INPUT_J_SECOND_STATE,               -- STEP 6
+    INPUT_I_SECOND_STATE,               -- STEP 5
+    INPUT_J_SECOND_STATE,               -- STEP 6
     MATRIX_I_SECOND_PRODUCT_STATE,      -- STEP 7
     MATRIX_J_SECOND_PRODUCT_STATE,      -- STEP 8
-	INPUT_I_THIRD_STATE,                -- STEP 9
-	INPUT_J_THIRD_STATE,                -- STEP 10
+    INPUT_I_THIRD_STATE,                -- STEP 9
+    INPUT_J_THIRD_STATE,                -- STEP 10
     MATRIX_I_THIRD_PRODUCT_STATE,       -- STEP 11
     MATRIX_J_THIRD_PRODUCT_STATE        -- STEP 12
     );

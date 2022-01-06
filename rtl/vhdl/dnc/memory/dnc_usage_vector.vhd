@@ -85,10 +85,10 @@ architecture dnc_usage_vector_architecture of dnc_usage_vector is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-	INPUT_FIRST_STATE,                  -- STEP 1
+    INPUT_FIRST_STATE,                  -- STEP 1
     VECTOR_ADDER_MULTIPLIER_STATE,      -- STEP 2
     VECTOR_ADDER_STATE,                 -- STEP 3
-	INPUT_SECOND_STATE,                 -- STEP 4
+    INPUT_SECOND_STATE,                 -- STEP 4
     VECTOR_MULTIPLIER_STATE             -- STEP 5
     );
 

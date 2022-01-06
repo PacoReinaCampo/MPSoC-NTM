@@ -176,6 +176,7 @@ begin
           DATA_OUT_J_ENABLE <= '0';
 
           if (START = '1') then
+            -- Control Internal
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
 

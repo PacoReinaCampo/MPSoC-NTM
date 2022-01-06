@@ -107,13 +107,13 @@ architecture dnc_read_weighting_architecture of dnc_read_weighting is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-	INPUT_FIRST_STATE,                  -- STEP 1
+    INPUT_FIRST_STATE,                  -- STEP 1
     VECTOR_FIRST_MULTIPLIER_STATE,      -- STEP 2
     VECTOR_FIRST_ADDER_STATE,           -- STEP 3
-	INPUT_SECOND_STATE,                 -- STEP 4
+    INPUT_SECOND_STATE,                 -- STEP 4
     VECTOR_SECOND_MULTIPLIER_STATE,     -- STEP 5
     VECTOR_SECOND_ADDER_STATE,          -- STEP 6
-	INPUT_THIRD_STATE,                  -- STEP 7
+    INPUT_THIRD_STATE,                  -- STEP 7
     VECTOR_THIRD_MULTIPLIER_STATE,      -- STEP 8
     VECTOR_THIRD_ADDER_STATE            -- STEP 9
     );

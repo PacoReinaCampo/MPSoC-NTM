@@ -89,11 +89,11 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-	INPUT_FIRST_STATE,                  -- STEP 1
+    INPUT_FIRST_STATE,                  -- STEP 1
     SCALAR_MULTIPLIER_ADDER_STATE,      -- STEP 2
-	INPUT_SECOND_STATE,                 -- STEP 3
+    INPUT_SECOND_STATE,                 -- STEP 3
     SCALAR_FIRST_ADDER_STATE,           -- STEP 4
-	INPUT_THIRD_STATE,                  -- STEP 5
+    INPUT_THIRD_STATE,                  -- STEP 5
     SCALAR_MULTIPLIER_STATE,            -- STEP 6
     SCALAR_SECOND_ADDER_STATE           -- STEP 7
     );

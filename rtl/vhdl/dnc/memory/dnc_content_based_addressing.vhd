@@ -90,9 +90,9 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-	INPUT_FIRST_STATE,                  -- STEP 1
+    INPUT_FIRST_STATE,                  -- STEP 1
     VECTOR_COSINE_SIMILARITY_STATE,     -- STEP 2
-	INPUT_SECOND_STATE,                 -- STEP 3
+    INPUT_SECOND_STATE,                 -- STEP 3
     VECTOR_MULTIPLIER_STATE,            -- STEP 4
     VECTOR_EXPONENTIATOR_STATE,         -- STEP 5
     VECTOR_SOFTMAX_STATE                -- STEP 6
