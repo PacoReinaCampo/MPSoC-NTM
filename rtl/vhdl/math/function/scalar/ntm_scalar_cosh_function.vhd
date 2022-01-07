@@ -164,6 +164,9 @@ begin
             -- Control Internal
             start_scalar_exponentiator <= '1';
 
+            -- Data Inputs
+            data_in_scalar_exponentiator <= DATA_IN;
+
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_EXPONENTIATOR_STATE;
           else
@@ -176,6 +179,10 @@ begin
           if (ready_scalar_exponentiator = '1') then
             -- Control Internal
             start_scalar_divider <= '1';
+
+            -- Data Internal
+            data_a_in_scalar_divider <= ONE_DATA;
+            data_b_in_scalar_divider <= data_out_scalar_exponentiator;
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_FIRST_DIVIDER_STATE;
@@ -190,6 +197,12 @@ begin
             -- Control Internal
             start_scalar_adder <= '1';
 
+            operation_scalar_adder <= '0';
+
+            -- Data Internal
+            data_a_in_scalar_adder <= data_out_scalar_exponentiator;
+            data_b_in_scalar_adder <= data_out_scalar_divider;
+
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
           else
@@ -202,6 +215,10 @@ begin
           if (ready_scalar_adder = '1') then
             -- Control Internal
             start_scalar_divider <= '1';
+
+            -- Data Internal
+            data_a_in_scalar_divider <= data_out_scalar_adder;
+            data_b_in_scalar_divider <= TWO_DATA;
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_SECOND_DIVIDER_STATE;
@@ -232,25 +249,6 @@ begin
       end case;
     end if;
   end process;
-
-  -- SCALAR ADDER
-  operation_scalar_adder <= '0';
-
-  -- DATA
-  -- SCALAR ADDER
-  data_a_in_scalar_adder <= data_out_scalar_exponentiator;
-  data_b_in_scalar_adder <= data_out_scalar_divider;
-
-  -- SCALAR FIRST DIVIDER
-  data_a_in_scalar_divider <= ONE_DATA;
-  data_b_in_scalar_divider <= data_out_scalar_exponentiator;
-
-  -- SCALAR SECOND DIVIDER
-  data_a_in_scalar_divider <= data_out_scalar_adder;
-  data_b_in_scalar_divider <= TWO_DATA;
-
-  -- SCALAR EXPONENTIATOR
-  data_in_scalar_exponentiator <= DATA_IN;
 
   -- SCALAR ADDER
   scalar_adder : ntm_scalar_adder

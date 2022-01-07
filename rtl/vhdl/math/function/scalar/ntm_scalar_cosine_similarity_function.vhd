@@ -111,8 +111,14 @@ architecture ntm_scalar_cosine_similarity_function_architecture of ntm_scalar_co
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- Internal Signals
+  -- Data Internal
   signal data_int_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- Control Internal
+  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal data_a_in_product_int : std_logic;
+  signal data_b_in_product_int : std_logic;
 
   -- SCALAR MULTIPLIER
   -- CONTROL
@@ -207,11 +213,18 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          DATA_OUT_ENABLE <= '0';
+
           if (START = '1') then
             -- Control Internal
             start_scalar_product_ab <= '1';
             start_scalar_product_aa <= '1';
             start_scalar_product_bb <= '1';
+
+            -- Data Inputs
+            length_in_scalar_product_ab <= LENGTH_IN;
+            length_in_scalar_product_aa <= LENGTH_IN;
+            length_in_scalar_product_ab <= LENGTH_IN;
 
             -- FSM Control
             controller_ctrl_fsm_int <= INPUT_STATE;
@@ -219,19 +232,95 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-        when SCALAR_PRODUCT_STATE =>  -- STEP 2
+          if ((DATA_A_IN_ENABLE = '1') or (unsigned(index_loop) = unsigned(ZERO_CONTROL))) then
+            -- Data Inputs
+            data_a_in_scalar_product_ab <= DATA_A_IN;
+            data_a_in_scalar_product_aa <= DATA_A_IN;
+            data_a_in_scalar_product_bb <= DATA_A_IN;
 
-          if (ready_scalar_product_ab = '1' and ready_scalar_product_aa = '1' and ready_scalar_product_bb = '1') then
             -- Control Internal
-            start_scalar_multiplier <= '1';
+            data_a_in_enable_scalar_product_ab <= '1';
+            data_a_in_enable_scalar_product_aa <= '1';
+            data_a_in_enable_scalar_product_bb <= '1';
+
+            data_a_in_product_int <= '1';
+          else
+            -- Control Inputs
+            data_a_in_enable_scalar_product_ab <= '0';
+            data_a_in_enable_scalar_product_aa <= '0';
+            data_a_in_enable_scalar_product_bb <= '0';
+          end if;
+
+          if ((DATA_B_IN_ENABLE = '1') or (unsigned(index_loop) = unsigned(ZERO_CONTROL))) then
+            -- Data Inputs
+            data_b_in_scalar_product_ab <= DATA_B_IN;
+            data_b_in_scalar_product_aa <= DATA_B_IN;
+            data_b_in_scalar_product_bb <= DATA_B_IN;
+
+            -- Control Internal
+            data_b_in_enable_scalar_product_ab <= '1';
+            data_b_in_enable_scalar_product_aa <= '1';
+            data_b_in_enable_scalar_product_bb <= '1';
+
+            data_b_in_product_int <= '1';
+          else
+            -- Control Inputs
+            data_b_in_enable_scalar_product_ab <= '0';
+            data_b_in_enable_scalar_product_aa <= '0';
+            data_b_in_enable_scalar_product_bb <= '0';
+          end if;
+
+          if (data_a_in_product_int = '1' and data_b_in_product_int = '1') then
+            -- Control Internal
+            data_a_in_enable_scalar_product_ab <= '0';
+            data_a_in_enable_scalar_product_aa <= '0';
+            data_a_in_enable_scalar_product_bb <= '0';
+
+            data_b_in_enable_scalar_product_ab <= '0';
+            data_b_in_enable_scalar_product_aa <= '0';
+            data_b_in_enable_scalar_product_bb <= '0';
+
+            data_a_in_product_int <= '0';
+            data_b_in_product_int <= '0';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
+            controller_ctrl_fsm_int <= SCALAR_PRODUCT_STATE;
           else
             -- Control Internal
             start_scalar_product_ab <= '0';
             start_scalar_product_aa <= '0';
             start_scalar_product_bb <= '0';
+          end if;
+
+        when SCALAR_PRODUCT_STATE =>  -- STEP 2
+
+          if (ready_scalar_product_ab = '1' and ready_scalar_product_aa = '1' and ready_scalar_product_bb = '1') then
+            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+              -- Control Outputs
+              DATA_OUT_ENABLE <= '1';
+
+              -- Data Internals
+              data_a_in_scalar_multiplier <= data_out_scalar_product_aa;
+              data_b_in_scalar_multiplier <= data_out_scalar_product_bb;
+
+              -- Control Internal
+              start_scalar_multiplier <= '1';
+
+              index_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
+            else
+              -- Control Internal
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              controller_ctrl_fsm_int <= INPUT_STATE;
+            end if;
+          else
+            -- Control Internal
+            data_a_in_product_int <= '0';
+            data_b_in_product_int <= '0';
           end if;
 
         when SCALAR_MULTIPLIER_STATE =>  -- STEP 3
@@ -240,9 +329,16 @@ begin
             -- Control Internal
             start_scalar_divider <= '1';
 
+            -- Data Internal
+            data_a_in_scalar_divider <= data_out_scalar_product_ab;
+            data_b_in_scalar_divider <= data_out_scalar_multiplier;
+
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;
           else
+             -- Control Outputs
+            DATA_OUT_ENABLE <= '0';
+
             -- Control Internal
             start_scalar_multiplier <= '0';
           end if;
@@ -269,42 +365,6 @@ begin
       end case;
     end if;
   end process;
-
-  -- SCALAR PRODUCT AB
-  data_a_in_enable_scalar_product_ab <= DATA_A_IN_ENABLE;
-  data_b_in_enable_scalar_product_ab <= DATA_B_IN_ENABLE;
-
-  -- SCALAR PRODUCT AA
-  data_a_in_enable_scalar_product_aa <= DATA_A_IN_ENABLE;
-  data_b_in_enable_scalar_product_aa <= DATA_B_IN_ENABLE;
-
-  -- SCALAR PRODUCT BB
-  data_a_in_enable_scalar_product_bb <= DATA_A_IN_ENABLE;
-  data_b_in_enable_scalar_product_bb <= DATA_B_IN_ENABLE;
-
-  -- DATA
-  -- SCALAR MULTIPLIER AB
-  length_in_scalar_product_ab <= LENGTH_IN;
-  data_a_in_scalar_product_ab <= DATA_A_IN;
-  data_b_in_scalar_product_ab <= DATA_B_IN;
-
-  -- SCALAR MULTIPLIER AA
-  length_in_scalar_product_ab <= LENGTH_IN;
-  data_a_in_scalar_product_ab <= DATA_A_IN;
-  data_b_in_scalar_product_ab <= DATA_A_IN;
-
-  -- SCALAR MULTIPLIER BB
-  length_in_scalar_product_ab <= LENGTH_IN;
-  data_a_in_scalar_product_ab <= DATA_B_IN;
-  data_b_in_scalar_product_ab <= DATA_B_IN;
-
-  -- SCALAR MULTIPLIER
-  data_a_in_scalar_multiplier <= data_out_scalar_product_aa;
-  data_b_in_scalar_multiplier <= data_out_scalar_product_bb;
-
-  -- SCALAR DIVIDER
-  data_a_in_scalar_divider <= data_out_scalar_product_ab;
-  data_b_in_scalar_divider <= data_out_scalar_multiplier;
 
   -- SCALAR MULTIPLIER
   scalar_multiplier : ntm_scalar_multiplier

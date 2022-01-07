@@ -160,7 +160,6 @@ begin
 
           if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
-
             data_a_in_scalar_adder <= DATA_IN;
 
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then

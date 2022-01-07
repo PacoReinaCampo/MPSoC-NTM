@@ -72,10 +72,9 @@ architecture ntm_scalar_oneplus_function_architecture of ntm_scalar_oneplus_func
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    SCALAR_FIRST_ADDER_STATE,           -- STEP 1
-    SCALAR_EXPONENTIATOR_STATE,         -- STEP 2
-    SCALAR_LOGARITHM_STATE,             -- STEP 3
-    SCALAR_SECOND_ADDER_STATE           -- STEP 1
+    SCALAR_EXPONENTIATOR_STATE,         -- STEP 1
+    SCALAR_LOGARITHM_STATE,             -- STEP 2
+    SCALAR_ADDER_STATE                  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -163,6 +162,9 @@ begin
             -- Control Internal
             start_scalar_exponentiator <= '1';
 
+            -- Data Input
+            data_in_scalar_exponentiator <= DATA_IN;
+
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_EXPONENTIATOR_STATE;
           else
@@ -174,33 +176,16 @@ begin
 
           if (ready_scalar_exponentiator = '1') then
             -- Control Internal
-            start_scalar_adder <= '1';
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_FIRST_ADDER_STATE;
-          else
-            -- Control Internal
-            start_scalar_exponentiator <= '0';
-          end if;
-
-        when SCALAR_FIRST_ADDER_STATE =>  -- STEP 2
-
-          -- Control Input
-          operation_scalar_adder <= '0';
-
-          -- Control Output
-          data_a_in_scalar_adder <= ONE_DATA;
-          data_b_in_scalar_adder <= data_out_scalar_exponentiator;
-
-          if (ready_scalar_adder = '1') then
-            -- Control Internal
             start_scalar_logarithm <= '1';
+
+            -- Data Internal
+            data_in_scalar_logarithm <= data_out_scalar_exponentiator;
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_LOGARITHM_STATE;
           else
             -- Control Internal
-            start_scalar_adder <= '0';
+            start_scalar_exponentiator <= '0';
           end if;
 
         when SCALAR_LOGARITHM_STATE =>  -- STEP 3
@@ -209,23 +194,28 @@ begin
             -- Control Internal
             start_scalar_adder <= '1';
 
+            operation_scalar_adder <= '0';
+
+            -- Data Internal
+            data_a_in_scalar_adder <= ONE_DATA;
+            data_b_in_scalar_adder <= data_out_scalar_logarithm;
+
             -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_SECOND_ADDER_STATE;
+            controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
           else
             -- Control Internal
             start_scalar_logarithm <= '0';
           end if;
 
-        when SCALAR_SECOND_ADDER_STATE =>  -- STEP 4
-
-          -- Control Input
-          operation_scalar_adder <= '0';
-
-          -- Control Output
-          data_a_in_scalar_adder <= ONE_DATA;
-          data_b_in_scalar_adder <= data_out_scalar_exponentiator;
+        when SCALAR_ADDER_STATE =>  -- STEP 4
 
           if (ready_scalar_adder = '1') then
+            -- Data Outputs
+            DATA_OUT <= data_out_scalar_adder;
+
+            -- Control Outputs
+            READY <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= STARTER_STATE;
           else
@@ -239,10 +229,6 @@ begin
       end case;
     end if;
   end process;
-
-  -- DATA
-  -- SCALAR EXPONENTIATOR
-  data_in_scalar_exponentiator <= DATA_IN;
 
   -- SCALAR ADDER
   scalar_adder : ntm_scalar_adder

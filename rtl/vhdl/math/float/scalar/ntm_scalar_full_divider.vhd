@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_scalar_sinh_function is
+entity ntm_scalar_full_divider is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -59,23 +59,25 @@ entity ntm_scalar_sinh_function is
     READY : out std_logic;
 
     -- DATA
-    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DATA_INTEGER_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_FRACTIONAL_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
-architecture ntm_scalar_sinh_function_architecture of ntm_scalar_sinh_function is
+architecture ntm_scalar_full_divider_architecture of ntm_scalar_full_divider is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type controller_ctrl_fsm is (
+  type divider_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    SCALAR_EXPONENTIATOR_STATE,         -- STEP 1
-    SCALAR_FIRST_DIVIDER_STATE,         -- STEP 2
-    SCALAR_ADDER_STATE,                 -- STEP 3
-    SCALAR_SECOND_DIVIDER_STATE         -- STEP 4
+    INTEGER_STATE,                      -- STEP 1
+    FRACTIONAL_STATE,                   -- STEP 2
+    ENDER_STATE                         -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -102,38 +104,15 @@ architecture ntm_scalar_sinh_function_architecture of ntm_scalar_sinh_function i
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+  signal divider_ctrl_fsm_int : divider_ctrl_fsm;
 
-  -- SCALAR ADDER
-  -- CONTROL
-  signal start_scalar_adder : std_logic;
-  signal ready_scalar_adder : std_logic;
+  -- Data Internal
+  signal divider_integer_int    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal divider_fractional_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal operation_scalar_adder : std_logic;
-
-  -- DATA
-  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR DIVIDER
-  -- CONTROL
-  signal start_scalar_divider : std_logic;
-  signal ready_scalar_divider : std_logic;
-
-  -- DATA
-  signal data_a_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR EXPONENTIATOR
-  -- CONTROL
-  signal start_scalar_exponentiator : std_logic;
-  signal ready_scalar_exponentiator : std_logic;
-
-  -- DATA
-  signal data_in_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  -- Control Internal
+  signal index_integer_loop    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_fractional_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -141,178 +120,110 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = (exponentiation(DATA_IN) - 1/exponentiation(DATA_IN))/2
+  -- DATA_INTEGER_OUT.DATA_FRACTIONAL_OUT = DATA_A_IN / DATA_B_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO_DATA;
+      DATA_INTEGER_OUT    <= ZERO_DATA;
+      DATA_FRACTIONAL_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
 
+      -- Data Internal
+      divider_integer_int    <= ZERO_DATA;
+      divider_fractional_int <= ZERO_DATA;
+
+      -- Control Internal
+      index_integer_loop    <= ZERO_DATA;
+      index_fractional_loop <= ZERO_DATA;
+
     elsif (rising_edge(CLK)) then
 
-      case controller_ctrl_fsm_int is
+      case divider_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
 
           if (START = '1') then
-            -- Control Internal
-            start_scalar_exponentiator <= '1';
-
-            -- Data Inputs
-            data_in_scalar_exponentiator <= DATA_IN;
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_EXPONENTIATOR_STATE;
-          else
-            -- Control Internal
-            start_scalar_exponentiator <= '0';
-          end if;
-
-        when SCALAR_EXPONENTIATOR_STATE =>  -- STEP 1
-
-          if (ready_scalar_exponentiator = '1') then
-            -- Control Internal
-            start_scalar_divider <= '1';
-
             -- Data Internal
-            data_a_in_scalar_divider <= ONE_DATA;
-            data_b_in_scalar_divider <= data_out_scalar_exponentiator;
+            divider_integer_int    <= ZERO_DATA;
+            divider_fractional_int <= ZERO_DATA;
+
+            -- Control Internal
+            index_integer_loop <= DATA_A_IN;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_FIRST_DIVIDER_STATE;
-          else
-            -- Control Internal
-            start_scalar_exponentiator <= '0';
+            divider_ctrl_fsm_int <= INTEGER_STATE;
           end if;
 
-        when SCALAR_FIRST_DIVIDER_STATE =>  -- STEP 2
+        when INTEGER_STATE =>  -- STEP 2
 
-          if (ready_scalar_divider = '1') then
-            -- Control Internal
-            start_scalar_adder <= '1';
-
-            -- Control Internal
-            operation_scalar_adder <= '1';
-
-            -- Data Internal
-            data_a_in_scalar_adder <= data_out_scalar_exponentiator;
-            data_b_in_scalar_adder <= data_out_scalar_divider;
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
-          else
-            -- Control Internal
-            start_scalar_divider <= '0';
-          end if;
-
-        when SCALAR_ADDER_STATE =>  -- STEP 3
-
-          if (ready_scalar_adder = '1') then
-            -- Control Internal
-            start_scalar_divider <= '1';
-
-            -- Data Internal
-            data_a_in_scalar_divider <= data_out_scalar_adder;
-            data_b_in_scalar_divider <= TWO_DATA;
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_SECOND_DIVIDER_STATE;
-          else
-            -- Control Internal
-            start_scalar_adder <= '0';
-          end if;
-
-        when SCALAR_SECOND_DIVIDER_STATE =>  -- STEP 4
-
-          if (ready_scalar_divider = '1') then
+          if (unsigned(DATA_B_IN) = unsigned(ZERO_DATA)) then
             -- Data Outputs
-            DATA_OUT <= data_out_scalar_divider;
+            DATA_INTEGER_OUT    <= FULL;
+            DATA_FRACTIONAL_OUT <= FULL;
 
             -- Control Outputs
             READY <= '1';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= STARTER_STATE;
+            divider_ctrl_fsm_int <= STARTER_STATE;
+          elsif (unsigned(DATA_B_IN) > unsigned(index_integer_loop)) then
+            -- Control Internal
+            index_fractional_loop <= index_integer_loop;
+
+            -- FSM Control
+            divider_ctrl_fsm_int <= FRACTIONAL_STATE;
+          else
+            -- Data Internal
+            divider_integer_int <= std_logic_vector(unsigned(divider_integer_int) + unsigned(ONE_DATA));
+
+            -- Control Internal
+            index_integer_loop <= std_logic_vector(unsigned(index_integer_loop) - unsigned(DATA_B_IN));
+          end if;
+
+        when FRACTIONAL_STATE =>  -- STEP 2
+
+          if (unsigned(DATA_B_IN) > unsigned(index_fractional_loop)) then
+            -- FSM Control
+            divider_ctrl_fsm_int <= ENDER_STATE;
           else
             -- Control Internal
-            start_scalar_divider <= '0';
+            index_fractional_loop <= std_logic_vector(unsigned(index_fractional_loop) - unsigned(DATA_B_IN));
+          end if;
+
+        when ENDER_STATE =>  -- STEP 3
+
+          if (unsigned(index_fractional_loop) = unsigned(ZERO_DATA)) then
+            -- Data Outputs
+            DATA_INTEGER_OUT    <= divider_integer_int;
+            DATA_FRACTIONAL_OUT <= divider_fractional_int;
+
+            -- Control Outputs
+            READY <= '1';
+
+            -- FSM Control
+            divider_ctrl_fsm_int <= STARTER_STATE;
+          else
+            -- Data Internal
+            divider_fractional_int <= std_logic_vector(unsigned(divider_fractional_int) + unsigned(ONE_DATA));
+
+            -- Control Internal
+            index_fractional_loop <= std_logic_vector(unsigned(index_fractional_loop) sll 1);
+
+            -- FSM Control
+            divider_ctrl_fsm_int <= FRACTIONAL_STATE;
           end if;
 
         when others =>
           -- FSM Control
-          controller_ctrl_fsm_int <= STARTER_STATE;
+          divider_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
-
-  -- SCALAR ADDER
-  scalar_adder : ntm_scalar_adder
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_adder,
-      READY => ready_scalar_adder,
-
-      OPERATION => operation_scalar_adder,
-
-      -- DATA
-      DATA_A_IN => data_a_in_scalar_adder,
-      DATA_B_IN => data_b_in_scalar_adder,
-      DATA_OUT  => data_out_scalar_adder
-      );
-
-  -- SCALAR DIVIDER
-  ntm_scalar_divider_i : ntm_scalar_divider
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_divider,
-      READY => ready_scalar_divider,
-
-      -- DATA
-      DATA_A_IN => data_a_in_scalar_divider,
-      DATA_B_IN => data_b_in_scalar_divider,
-      DATA_OUT  => data_out_scalar_divider
-      );
-
-  -- SCALAR EXPONENTIATOR
-  scalar_exponentiator : ntm_scalar_exponentiator
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_exponentiator,
-      READY => ready_scalar_exponentiator,
-
-      -- DATA
-      DATA_IN  => data_in_scalar_exponentiator,
-      DATA_OUT => data_out_scalar_exponentiator
-      );
 
 end architecture;

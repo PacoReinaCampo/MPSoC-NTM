@@ -178,6 +178,10 @@ begin
             -- Control Internal
             start_scalar_multiplier <= '1';
 
+            -- Data Inputs
+            data_a_in_scalar_multiplier <= TWO_DATA;
+            data_b_in_scalar_multiplier <= DATA_IN;
+
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
           else
@@ -190,6 +194,9 @@ begin
           if (ready_scalar_multiplier = '1') then
             -- Control Internal
             start_scalar_exponentiator <= '1';
+
+            -- Data Inputs
+            data_in_scalar_exponentiator <= data_out_scalar_multiplier;
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_EXPONENTIATOR_STATE;
@@ -204,6 +211,12 @@ begin
             -- Control Internal
             start_scalar_adder <= '1';
 
+            operation_scalar_adder <= '1';
+
+            -- Data Inputs
+            data_a_in_scalar_adder <= data_out_scalar_exponentiator;
+            data_b_in_scalar_adder <= ONE_DATA;
+
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_FIRST_ADDER_STATE;
           else
@@ -213,16 +226,19 @@ begin
 
         when SCALAR_FIRST_ADDER_STATE =>  -- STEP 3
 
-          -- Control Inputs
-          operation_scalar_adder <= '0';
-
-          -- Data Inputs
-          data_a_in_scalar_adder <= data_out_scalar_exponentiator;
-          data_b_in_scalar_adder <= ONE_DATA;
-
           if (ready_scalar_adder = '1') then
             -- Control Internal
             start_scalar_adder <= '1';
+
+            -- Data Internal
+            data_int_scalar_adder <= data_out_scalar_adder;
+
+            -- Control Inputs
+            operation_scalar_adder <= '0';
+
+            -- Data Inputs
+            data_a_in_scalar_adder <= data_out_scalar_exponentiator;
+            data_b_in_scalar_adder <= ONE_DATA;
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_SECOND_ADDER_STATE;
@@ -233,19 +249,13 @@ begin
 
         when SCALAR_SECOND_ADDER_STATE =>  -- STEP 4
 
-          -- Control Inputs
-          operation_scalar_adder <= '0';
-
-          -- Data Inputs
-          data_a_in_scalar_adder <= data_out_scalar_exponentiator;
-          data_b_in_scalar_adder <= ONE_DATA;
-
-          -- Data Internal
-          data_int_scalar_adder <= data_out_scalar_adder;
-
           if (ready_scalar_adder = '1') then
             -- Control Internal
             start_scalar_divider <= '1';
+
+            -- Data Internal
+            data_a_in_scalar_divider <= data_int_scalar_adder;
+            data_b_in_scalar_divider <= data_out_scalar_adder;
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;
@@ -276,18 +286,6 @@ begin
       end case;
     end if;
   end process;
-
-  -- DATA
-  -- SCALAR MULTIPLIER
-  data_a_in_scalar_multiplier <= TWO_DATA;
-  data_b_in_scalar_multiplier <= DATA_IN;
-
-  -- SCALAR DIVIDER
-  data_a_in_scalar_divider <= data_out_scalar_adder;
-  data_b_in_scalar_divider <= data_int_scalar_adder;
-
-  -- SCALAR EXPONENTIATOR
-  data_in_scalar_exponentiator <= DATA_IN;
 
   -- SCALAR ADDER
   scalar_adder : ntm_scalar_adder

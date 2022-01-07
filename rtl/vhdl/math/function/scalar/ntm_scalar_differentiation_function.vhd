@@ -158,6 +158,12 @@ begin
 
       DATA_OUT_ENABLE <= '0';
 
+      -- Control Internal
+      start_scalar_adder   <= '0';
+      start_scalar_divider <= '0';
+
+      index_loop <= ZERO_CONTROL;
+
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
@@ -205,11 +211,18 @@ begin
             controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
           end if;
 
+          -- Control Outputs
+          DATA_OUT_ENABLE <= '0';
+
         when SCALAR_ADDER_STATE =>  -- STEP 2
 
           if (ready_scalar_adder = '1') then
             -- Control Internal
             start_scalar_divider <= '1';
+
+            -- Data Internal
+            data_a_in_scalar_divider <= data_out_scalar_adder;
+            data_b_in_scalar_divider <= PERIOD_IN;
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;
@@ -251,11 +264,6 @@ begin
       end case;
     end if;
   end process;
-
-  -- SCALAR DIVIDER
-  data_a_in_scalar_divider <= data_out_scalar_adder;
-  data_b_in_scalar_divider <= PERIOD_IN;
-  data_out_scalar_divider  <= DATA_OUT;
 
   -- SCALAR ADDER
   scalar_adder : ntm_scalar_adder
