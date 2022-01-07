@@ -1678,6 +1678,26 @@ package ntm_math_pkg is
       );
   end component;
 
+  component ntm_scalar_logarithm_function is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
   component ntm_scalar_softmax_function is
     generic (
       DATA_SIZE    : integer := 128;
@@ -1969,6 +1989,31 @@ package ntm_math_pkg is
   end component;
 
   component ntm_vector_logistic_function is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_IN_ENABLE : in std_logic;
+
+      DATA_OUT_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_vector_logarithm_function is
     generic (
       DATA_SIZE    : integer := 128;
       CONTROL_SIZE : integer := 64
@@ -2321,6 +2366,34 @@ package ntm_math_pkg is
   end component;
 
   component ntm_matrix_logistic_function is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_IN_I_ENABLE : in std_logic;
+      DATA_IN_J_ENABLE : in std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_matrix_logarithm_function is
     generic (
       DATA_SIZE    : integer := 128;
       CONTROL_SIZE : integer := 64
