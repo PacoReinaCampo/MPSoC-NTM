@@ -154,10 +154,12 @@ begin
       DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
-      READY           <= '0';
+      READY <= '0';
+
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
+      start_scalar_adder      <= '0';
       start_scalar_multiplier <= '0';
 
       index_loop <= ZERO_CONTROL;
@@ -174,7 +176,8 @@ begin
       case multiplier_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
-          READY           <= '0';
+          READY <= '0';
+
           DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
@@ -223,6 +226,8 @@ begin
             -- Control Internal
             start_scalar_adder <= '1';
 
+            operation_scalar_adder <= '0';
+
             -- Data Internal
             data_a_in_scalar_adder <= data_out_scalar_multiplier;
 
@@ -258,15 +263,15 @@ begin
               -- FSM Control
               multiplier_ctrl_fsm_int <= STARTER_STATE;
             else
-              -- Control Outputs
-              DATA_OUT_ENABLE <= '1';
-
               -- Control Internal
               index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
               -- FSM Control
               multiplier_ctrl_fsm_int <= INPUT_STATE;
             end if;
+
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '1';
           else
             -- Control Internal
             start_scalar_adder <= '0';

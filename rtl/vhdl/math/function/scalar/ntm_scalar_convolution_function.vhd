@@ -80,8 +80,8 @@ architecture ntm_scalar_convolution_function_architecture of ntm_scalar_convolut
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
-    SCALAR_MULTIPLIER_STATE,            -- STEP 3
-    SCALAR_ADDER_STATE                  -- STEP 2
+    SCALAR_MULTIPLIER_STATE,            -- STEP 2
+    SCALAR_ADDER_STATE                  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -167,6 +167,10 @@ begin
       data_a_in_multiplier_int <= '0';
       data_b_in_multiplier_int <= '0';
 
+      -- Data Internal
+      data_a_in_scalar_multiplier <= ZERO_DATA;
+      data_b_in_scalar_multiplier <= ZERO_DATA;
+
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
@@ -228,6 +232,8 @@ begin
             data_a_in_scalar_adder <= data_out_scalar_multiplier;
             
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+              data_b_in_scalar_adder <= ZERO_DATA;
+            else
               data_b_in_scalar_adder <= data_out_scalar_adder;
             end if;
 
@@ -250,6 +256,9 @@ begin
 
               -- Control Outputs
               READY <= '1';
+
+              -- Control Internal
+              index_loop <= ZERO_CONTROL;
 
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
