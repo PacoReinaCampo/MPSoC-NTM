@@ -80,7 +80,8 @@ architecture ntm_scalar_product_architecture of ntm_scalar_product is
   type multiplier_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
-    ENDER_STATE                         -- STEP 2
+    SCALAR_MULTIPLIER_STATE,            -- STEP 2
+    SCALAR_ADDER_STATE                  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -186,7 +187,7 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          if ((DATA_A_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
+          if ((DATA_A_IN_ENABLE = '1') or (unsigned(index_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
             data_a_in_scalar_multiplier <= DATA_A_IN;
 
@@ -194,7 +195,7 @@ begin
             data_a_in_multiplier_int <= '1';
           end if;
 
-          if ((DATA_B_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
+          if ((DATA_B_IN_ENABLE = '1') or (unsigned(index_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
             data_b_in_scalar_multiplier <= DATA_B_IN;
 
@@ -210,23 +211,46 @@ begin
             data_b_in_multiplier_int <= '0';
 
             -- FSM Control
-            multiplier_ctrl_fsm_int <= ENDER_STATE;
+            multiplier_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
           end if;
 
           -- Control Outputs
           DATA_OUT_ENABLE <= '0';
 
-        when ENDER_STATE =>  -- STEP 2
+        when SCALAR_MULTIPLIER_STATE =>  -- STEP 3
 
           if (ready_scalar_multiplier = '1') then
+            -- Control Internal
+            start_scalar_adder <= '1';
+
+            -- Data Internal
+            data_a_in_scalar_adder <= data_out_scalar_multiplier;
+
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+              data_b_in_scalar_adder <= ZERO_DATA;
+            else
+              data_b_in_scalar_adder <= data_out_scalar_adder;
+            end if;
+
+            -- FSM Control
+            multiplier_ctrl_fsm_int <= SCALAR_ADDER_STATE;
+          else
+            -- Control Internal
+            start_scalar_multiplier <= '0';
+
+            data_a_in_multiplier_int <= '0';
+            data_b_in_multiplier_int <= '0';
+          end if;
+
+        when SCALAR_ADDER_STATE =>  -- STEP 2
+
+          if (ready_scalar_adder = '1') then
             if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
-              DATA_OUT <= data_out_scalar_multiplier;
+              DATA_OUT <= data_out_scalar_adder;
 
               -- Control Outputs
               READY <= '1';
-
-              DATA_OUT_ENABLE <= '1';
 
               -- Control Internal
               index_loop <= ZERO_CONTROL;
@@ -234,6 +258,9 @@ begin
               -- FSM Control
               multiplier_ctrl_fsm_int <= STARTER_STATE;
             else
+              -- Control Outputs
+              DATA_OUT_ENABLE <= '1';
+
               -- Control Internal
               index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
@@ -242,10 +269,7 @@ begin
             end if;
           else
             -- Control Internal
-            start_scalar_multiplier <= '0';
-
-            data_a_in_multiplier_int <= '0';
-            data_b_in_multiplier_int <= '0';
+            start_scalar_adder <= '0';
           end if;
 
         when others =>
