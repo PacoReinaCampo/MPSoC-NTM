@@ -357,7 +357,6 @@ begin
 
           if (data_out_product_ab_int = '1' and data_out_product_aa_int = '1' and data_out_product_bb_int = '1') then
             if ((unsigned(index_product_ab_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_product_aa_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_product_bb_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
-
               -- Data Internals
               data_a_in_scalar_multiplier <= data_out_scalar_product_aa;
               data_b_in_scalar_multiplier <= data_out_scalar_product_bb;

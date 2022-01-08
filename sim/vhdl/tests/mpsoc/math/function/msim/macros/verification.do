@@ -11,40 +11,40 @@ do ./variables.do
 ##################################################################################################
 
 ##################################################################################################
-# NTM_SCALAR_MOD_TEST 
+# NTM_SCALAR_SINH_FUNCTION_TEST 
 ##################################################################################################
 
-alias ntm_scalar_mod_verification_compilation {
-  echo "TEST: NTM_SCALAR_MOD_TEST"
+alias ntm_scalar_sinh_function_verification_compilation {
+  echo "TEST: NTM_SCALAR_SINH_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/arithmetic/ntm_arithmetic_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/arithmetic/ntm_arithmetic_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/arithmetic/ntm_arithmetic_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/math/function/ntm_function_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/math/function/ntm_function_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/math/function/ntm_function_testbench.vhd
 
-  vsim -g /ntm_arithmetic_testbench/ENABLE_NTM_SCALAR_MOD_TEST=true -t ps +notimingchecks -L unisim work.ntm_arithmetic_testbench
+  vsim -g /ntm_function_testbench/ENABLE_NTM_SCALAR_SINH_TEST=true -t ps +notimingchecks -L unisim work.ntm_function_testbench
 
   #MACROS
-  add log -r sim:/ntm_arithmetic_testbench/*
+  add log -r sim:/ntm_function_testbench/*
 
   #WAVES
-  view -title ntm_scalar_mod wave
-  do $simulation_path/mpsoc/math/arithmetic/msim/waves/ntm_scalar_mod.do
+  view -title ntm_scalar_sinh_function wave
+  do $simulation_path/mpsoc/math/function/msim/waves/ntm_scalar_sinh_function.do
 
-  force -freeze sim:/ntm_arithmetic_pkg/STIMULUS_NTM_SCALAR_MOD_TEST true 0
-  force -freeze sim:/ntm_arithmetic_pkg/STIMULUS_NTM_SCALAR_MOD_CASE_0 true 0
+  force -freeze sim:/ntm_function_pkg/STIMULUS_NTM_SCALAR_SINH_TEST true 0
+  force -freeze sim:/ntm_function_pkg/STIMULUS_NTM_SCALAR_SINH_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim ntm_scalar_mod_test.wlf
+  dataset save sim ntm_scalar_sinh_function_test.wlf
 }
 
 ##################################################################################################
 
-alias v1 {
-  ntm_scalar_mod_verification_compilation
+alias v01 {
+  ntm_scalar_sinh_function_verification_compilation
 }
 
 echo "************************************************************"
-echo "v01 . NTM-SCALAR-MOD-TEST"
+echo "v01 . NTM-SCALAR-SINH-FUNCTION-TEST"
 echo "************************************************************"
