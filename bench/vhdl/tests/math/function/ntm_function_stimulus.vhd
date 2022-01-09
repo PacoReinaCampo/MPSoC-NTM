@@ -913,6 +913,62 @@ begin
 
     end if;
 
+    if (STIMULUS_NTM_SCALAR_LOGISTIC_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_LOGISTIC_TEST       ";
+      -------------------------------------------------------------------
+
+      if (STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_LOGISTIC_CASE 0     ";
+        -------------------------------------------------------------------
+
+        SCALAR_LOGISTIC_DATA_IN <= ONE_DATA;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_LOGISTIC_CASE 1     ";
+        -------------------------------------------------------------------
+
+        SCALAR_LOGISTIC_DATA_IN <= TWO_DATA;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_SCALAR_ONEPLUS_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_ONEPLUS_TEST        ";
+      -------------------------------------------------------------------
+
+      if (STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ONEPLUS_CASE 0      ";
+        -------------------------------------------------------------------
+
+        SCALAR_ONEPLUS_DATA_IN <= ONE_DATA;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ONEPLUS_CASE 1      ";
+        -------------------------------------------------------------------
+
+        SCALAR_ONEPLUS_DATA_IN <= TWO_DATA;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
     if (STIMULUS_NTM_SCALAR_SINH_TEST) then
 
       -------------------------------------------------------------------
