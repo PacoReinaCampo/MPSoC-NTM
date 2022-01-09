@@ -1573,7 +1573,7 @@ package ntm_math_pkg is
       );
   end component;
 
-  component ntm_scalar_exponentiator is
+  component ntm_scalar_exponentiator_function is
     generic (
       DATA_SIZE    : integer := 128;
       CONTROL_SIZE : integer := 64
@@ -1885,7 +1885,7 @@ package ntm_math_pkg is
       );
   end component;
 
-  component ntm_vector_exponentiator is
+  component ntm_vector_exponentiator_function is
     generic (
       DATA_SIZE    : integer := 128;
       CONTROL_SIZE : integer := 64
@@ -2250,7 +2250,7 @@ package ntm_math_pkg is
       );
   end component;
 
-  component ntm_matrix_exponentiator is
+  component ntm_matrix_exponentiator_function is
     generic (
       DATA_SIZE    : integer := 128;
       CONTROL_SIZE : integer := 64

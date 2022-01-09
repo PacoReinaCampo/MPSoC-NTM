@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_scalar_exponentiator is
+entity ntm_scalar_exponentiator_function is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -64,7 +64,7 @@ entity ntm_scalar_exponentiator is
     );
 end entity;
 
-architecture ntm_scalar_exponentiator_architecture of ntm_scalar_exponentiator is
+architecture ntm_scalar_exponentiator_function_architecture of ntm_scalar_exponentiator_function is
 
   -----------------------------------------------------------------------
   -- Types
@@ -150,7 +150,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = exponentiator(DATA_IN)
+  -- DATA_OUT = exponentiator_function(DATA_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)

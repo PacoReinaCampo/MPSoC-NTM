@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_vector_exponentiator #(
+module ntm_vector_exponentiator_function #(
   parameter DATA_SIZE=128,
   parameter CONTROL_SIZE=64
 )
@@ -91,19 +91,19 @@ module ntm_vector_exponentiator #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] exponentiator_ctrl_fsm_int;
+  reg [1:0] exponentiator_function_ctrl_fsm_int;
 
   // Internal Signals
   reg [CONTROL_SIZE-1:0] index_loop;
 
   // SCALAR EXPONENTIATOR
   // CONTROL
-  reg start_scalar_exponentiator;
-  wire ready_scalar_exponentiator;
+  reg start_scalar_exponentiator_function;
+  wire ready_scalar_exponentiator_function;
 
   // DATA
-  reg [DATA_SIZE-1:0] data_in_scalar_exponentiator;
-  wire [DATA_SIZE-1:0] data_out_scalar_exponentiator;
+  reg [DATA_SIZE-1:0] data_in_scalar_exponentiator_function;
+  wire [DATA_SIZE-1:0] data_out_scalar_exponentiator_function;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -122,7 +122,7 @@ module ntm_vector_exponentiator #(
       index_loop <= ZERO_DATA;
     end
     else begin
-      case(exponentiator_ctrl_fsm_int)
+      case(exponentiator_function_ctrl_fsm_int)
         STARTER_STATE : begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
@@ -132,78 +132,78 @@ module ntm_vector_exponentiator #(
             index_loop <= ZERO_DATA;
 
             // FSM Control
-            exponentiator_ctrl_fsm_int <= INPUT_STATE;
+            exponentiator_function_ctrl_fsm_int <= INPUT_STATE;
           end
         end
         INPUT_STATE : begin  // STEP 1
           if(DATA_IN_ENABLE == 1'b1) begin
             // Data Inputs
-            data_in_scalar_exponentiator <= DATA_IN;
+            data_in_scalar_exponentiator_function <= DATA_IN;
 
             if(index_loop == ZERO_DATA) begin
               // Control Internal
-              start_scalar_exponentiator <= 1'b1;
+              start_scalar_exponentiator_function <= 1'b1;
             end
 
             // FSM Control
-            exponentiator_ctrl_fsm_int <= ENDER_STATE;
+            exponentiator_function_ctrl_fsm_int <= ENDER_STATE;
           end
 
           // Control Outputs
           DATA_OUT_ENABLE <= 1'b0;
         end
         ENDER_STATE : begin  // STEP 2
-          if(ready_scalar_exponentiator == 1'b1) begin
+          if(ready_scalar_exponentiator_function == 1'b1) begin
             if(index_loop == (SIZE_IN - ONE_CONTROL)) begin
               // Control Outputs
               READY <= 1'b1;
 
               // FSM Control
-              exponentiator_ctrl_fsm_int <= STARTER_STATE;
+              exponentiator_function_ctrl_fsm_int <= STARTER_STATE;
             end
             else begin
               // Control Internal
               index_loop <= (index_loop + ONE_CONTROL);
 
               // FSM Control
-              exponentiator_ctrl_fsm_int <= INPUT_STATE;
+              exponentiator_function_ctrl_fsm_int <= INPUT_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_scalar_exponentiator;
+            DATA_OUT <= data_out_scalar_exponentiator_function;
 
             // Control Outputs
             DATA_OUT_ENABLE <= 1'b1;
           end
           else begin
             // Control Internal
-            start_scalar_exponentiator <= 1'b0;
+            start_scalar_exponentiator_function <= 1'b0;
           end
         end
         default : begin
           // FSM Control
-          exponentiator_ctrl_fsm_int <= STARTER_STATE;
+          exponentiator_function_ctrl_fsm_int <= STARTER_STATE;
         end
       endcase
     end
   end
 
   // SCALAR EXPONENTIATOR
-  ntm_scalar_exponentiator #(
+  ntm_scalar_exponentiator_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  scalar_exponentiator(
+  scalar_exponentiator_function(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_exponentiator),
-    .READY(ready_scalar_exponentiator),
+    .START(start_scalar_exponentiator_function),
+    .READY(ready_scalar_exponentiator_function),
 
     // DATA
-    .DATA_IN(data_in_scalar_exponentiator),
-    .DATA_OUT(data_out_scalar_exponentiator)
+    .DATA_IN(data_in_scalar_exponentiator_function),
+    .DATA_OUT(data_out_scalar_exponentiator_function)
   );
 
 endmodule

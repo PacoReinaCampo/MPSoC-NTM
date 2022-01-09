@@ -175,19 +175,19 @@ module ntm_function_testbench;
 
   // SCALAR COSINE SIMILARITY
   // CONTROL
-  wire start_scalar_cosine;
-  wire ready_scalar_cosine;
+  wire start_scalar_cosine_similarity;
+  wire ready_scalar_cosine_similarity;
 
-  wire data_a_in_enable_scalar_cosine;
-  wire data_b_in_enable_scalar_cosine;
+  wire data_a_in_enable_scalar_cosine_similarity;
+  wire data_b_in_enable_scalar_cosine_similarity;
 
-  wire data_out_enable_scalar_cosine;
+  wire data_out_enable_scalar_cosine_similarity;
 
   // DATA
-  wire [DATA_SIZE-1:0] length_in_scalar_cosine;
-  wire [DATA_SIZE-1:0] data_a_in_scalar_cosine;
-  wire [DATA_SIZE-1:0] data_b_in_scalar_cosine;
-  wire [DATA_SIZE-1:0] data_out_scalar_cosine;
+  wire [DATA_SIZE-1:0] length_in_scalar_cosine_similarity;
+  wire [DATA_SIZE-1:0] data_a_in_scalar_cosine_similarity;
+  wire [DATA_SIZE-1:0] data_b_in_scalar_cosine_similarity;
+  wire [DATA_SIZE-1:0] data_out_scalar_cosine_similarity;
 
   // SCALAR DIFFERENTIATION
   // CONTROL
@@ -312,22 +312,22 @@ module ntm_function_testbench;
 
   // VECTOR COSINE SIMILARITY
   // CONTROL
-  wire start_vector_cosine;
-  wire ready_vector_cosine;
+  wire start_vector_cosine_similarity;
+  wire ready_vector_cosine_similarity;
 
-  wire data_a_in_vector_enable_vector_cosine;
-  wire data_a_in_scalar_enable_vector_cosine;
-  wire data_b_in_vector_enable_vector_cosine;
-  wire data_b_in_scalar_enable_vector_cosine;
-  wire data_out_vector_enable_vector_cosine;
-  wire data_out_scalar_enable_vector_cosine;
+  wire data_a_in_vector_enable_vector_cosine_similarity;
+  wire data_a_in_scalar_enable_vector_cosine_similarity;
+  wire data_b_in_vector_enable_vector_cosine_similarity;
+  wire data_b_in_scalar_enable_vector_cosine_similarity;
+  wire data_out_vector_enable_vector_cosine_similarity;
+  wire data_out_scalar_enable_vector_cosine_similarity;
 
   // DATA
-  wire [DATA_SIZE-1:0] size_in_vector_cosine;
-  wire [DATA_SIZE-1:0] length_in_vector_cosine;
-  wire [DATA_SIZE-1:0] data_a_in_vector_cosine;
-  wire [DATA_SIZE-1:0] data_b_in_vector_cosine;
-  wire [DATA_SIZE-1:0] data_out_vector_cosine;
+  wire [DATA_SIZE-1:0] size_in_vector_cosine_similarity;
+  wire [DATA_SIZE-1:0] length_in_vector_cosine_similarity;
+  wire [DATA_SIZE-1:0] data_a_in_vector_cosine_similarity;
+  wire [DATA_SIZE-1:0] data_b_in_vector_cosine_similarity;
+  wire [DATA_SIZE-1:0] data_out_vector_cosine_similarity;
 
   // VECTOR DIFFERENTIATION
   // CONTROL
@@ -489,26 +489,26 @@ module ntm_function_testbench;
 
   // MATRIX COSINE SIMILARITY
   // CONTROL
-  wire start_matrix_cosine;
-  wire ready_matrix_cosine;
+  wire start_matrix_cosine_similarity;
+  wire ready_matrix_cosine_similarity;
 
-  wire data_a_in_matrix_enable_matrix_cosine;
-  wire data_a_in_vector_enable_matrix_cosine;
-  wire data_a_in_scalar_enable_matrix_cosine;
-  wire data_b_in_matrix_enable_matrix_cosine;
-  wire data_b_in_vector_enable_matrix_cosine;
-  wire data_b_in_scalar_enable_matrix_cosine;
-  wire data_out_matrix_enable_matrix_cosine;
-  wire data_out_vector_enable_matrix_cosine;
-  wire data_out_scalar_enable_matrix_cosine;
+  wire data_a_in_matrix_enable_matrix_cosine_similarity;
+  wire data_a_in_vector_enable_matrix_cosine_similarity;
+  wire data_a_in_scalar_enable_matrix_cosine_similarity;
+  wire data_b_in_matrix_enable_matrix_cosine_similarity;
+  wire data_b_in_vector_enable_matrix_cosine_similarity;
+  wire data_b_in_scalar_enable_matrix_cosine_similarity;
+  wire data_out_matrix_enable_matrix_cosine_similarity;
+  wire data_out_vector_enable_matrix_cosine_similarity;
+  wire data_out_scalar_enable_matrix_cosine_similarity;
 
   // DATA
-  wire [DATA_SIZE-1:0] size_i_in_matrix_cosine;
-  wire [DATA_SIZE-1:0] size_j_in_matrix_cosine;
-  wire [DATA_SIZE-1:0] length_in_matrix_cosine;
-  wire [DATA_SIZE-1:0] data_a_in_matrix_cosine;
-  wire [DATA_SIZE-1:0] data_b_in_matrix_cosine;
-  wire [DATA_SIZE-1:0] data_out_matrix_cosine;
+  wire [DATA_SIZE-1:0] size_i_in_matrix_cosine_similarity;
+  wire [DATA_SIZE-1:0] size_j_in_matrix_cosine_similarity;
+  wire [DATA_SIZE-1:0] length_in_matrix_cosine_similarity;
+  wire [DATA_SIZE-1:0] data_a_in_matrix_cosine_similarity;
+  wire [DATA_SIZE-1:0] data_b_in_matrix_cosine_similarity;
+  wire [DATA_SIZE-1:0] data_out_matrix_cosine_similarity;
 
   // MATRIX DIFFERENTIATION
   // CONTROL
@@ -797,19 +797,19 @@ module ntm_function_testbench;
 
     // SCALAR COSINE SIMILARITY
     // CONTROL
-    .SCALAR_COSINE_SIMILARITY_START(start_scalar_cosine),
-    .SCALAR_COSINE_SIMILARITY_READY(ready_scalar_cosine),
+    .SCALAR_COSINE_SIMILARITY_START(start_scalar_cosine_similarity),
+    .SCALAR_COSINE_SIMILARITY_READY(ready_scalar_cosine_similarity),
 
-    .SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE(data_a_in_enable_scalar_cosine),
-    .SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE(data_b_in_enable_scalar_cosine),
+    .SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE(data_a_in_enable_scalar_cosine_similarity),
+    .SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE(data_b_in_enable_scalar_cosine_similarity),
 
-    .SCALAR_COSINE_SIMILARITY_DATA_OUT_ENABLE(data_out_enable_scalar_cosine),
+    .SCALAR_COSINE_SIMILARITY_DATA_OUT_ENABLE(data_out_enable_scalar_cosine_similarity),
 
     // DATA
-    .SCALAR_COSINE_SIMILARITY_LENGTH_IN(length_in_scalar_cosine),
-    .SCALAR_COSINE_SIMILARITY_DATA_A_IN(data_a_in_scalar_cosine),
-    .SCALAR_COSINE_SIMILARITY_DATA_B_IN(data_b_in_scalar_cosine),
-    .SCALAR_COSINE_SIMILARITY_DATA_OUT(data_out_scalar_cosine),
+    .SCALAR_COSINE_SIMILARITY_LENGTH_IN(length_in_scalar_cosine_similarity),
+    .SCALAR_COSINE_SIMILARITY_DATA_A_IN(data_a_in_scalar_cosine_similarity),
+    .SCALAR_COSINE_SIMILARITY_DATA_B_IN(data_b_in_scalar_cosine_similarity),
+    .SCALAR_COSINE_SIMILARITY_DATA_OUT(data_out_scalar_cosine_similarity),
 
     // SCALAR MULTIPLICATION
     // CONTROL
@@ -920,22 +920,22 @@ module ntm_function_testbench;
 
     // VECTOR COSINE SIMILARITY
     // CONTROL
-    .VECTOR_COSINE_SIMILARITY_START(start_vector_cosine),
-    .VECTOR_COSINE_SIMILARITY_READY(ready_vector_cosine),
+    .VECTOR_COSINE_SIMILARITY_START(start_vector_cosine_similarity),
+    .VECTOR_COSINE_SIMILARITY_READY(ready_vector_cosine_similarity),
 
-    .VECTOR_COSINE_SIMILARITY_DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_vector_cosine),
-    .VECTOR_COSINE_SIMILARITY_DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_vector_cosine),
-    .VECTOR_COSINE_SIMILARITY_DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_vector_cosine),
-    .VECTOR_COSINE_SIMILARITY_DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_vector_cosine),
-    .VECTOR_COSINE_SIMILARITY_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_cosine),
-    .VECTOR_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_cosine),
+    .VECTOR_COSINE_SIMILARITY_DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_vector_cosine_similarity),
+    .VECTOR_COSINE_SIMILARITY_DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_vector_cosine_similarity),
+    .VECTOR_COSINE_SIMILARITY_DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_vector_cosine_similarity),
+    .VECTOR_COSINE_SIMILARITY_DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_vector_cosine_similarity),
+    .VECTOR_COSINE_SIMILARITY_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_cosine_similarity),
+    .VECTOR_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_cosine_similarity),
 
     // DATA
-    .VECTOR_COSINE_SIMILARITY_SIZE_IN(size_in_vector_cosine),
-    .VECTOR_COSINE_SIMILARITY_LENGTH_IN(length_in_vector_cosine),
-    .VECTOR_COSINE_SIMILARITY_DATA_A_IN(data_a_in_vector_cosine),
-    .VECTOR_COSINE_SIMILARITY_DATA_B_IN(data_b_in_vector_cosine),
-    .VECTOR_COSINE_SIMILARITY_DATA_OUT(data_out_vector_cosine),
+    .VECTOR_COSINE_SIMILARITY_SIZE_IN(size_in_vector_cosine_similarity),
+    .VECTOR_COSINE_SIMILARITY_LENGTH_IN(length_in_vector_cosine_similarity),
+    .VECTOR_COSINE_SIMILARITY_DATA_A_IN(data_a_in_vector_cosine_similarity),
+    .VECTOR_COSINE_SIMILARITY_DATA_B_IN(data_b_in_vector_cosine_similarity),
+    .VECTOR_COSINE_SIMILARITY_DATA_OUT(data_out_vector_cosine_similarity),
 
     // VECTOR COSH
     // CONTROL
@@ -1077,26 +1077,26 @@ module ntm_function_testbench;
 
     // MATRIX COSINE SIMILARITY
     // CONTROL
-    .MATRIX_COSINE_SIMILARITY_START(start_matrix_cosine),
-    .MATRIX_COSINE_SIMILARITY_READY(ready_matrix_cosine),
+    .MATRIX_COSINE_SIMILARITY_START(start_matrix_cosine_similarity),
+    .MATRIX_COSINE_SIMILARITY_READY(ready_matrix_cosine_similarity),
 
-    .MATRIX_COSINE_SIMILARITY_DATA_A_IN_MATRIX_ENABLE(data_a_in_matrix_enable_matrix_cosine),
-    .MATRIX_COSINE_SIMILARITY_DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_matrix_cosine),
-    .MATRIX_COSINE_SIMILARITY_DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_matrix_cosine),
-    .MATRIX_COSINE_SIMILARITY_DATA_B_IN_MATRIX_ENABLE(data_b_in_matrix_enable_matrix_cosine),
-    .MATRIX_COSINE_SIMILARITY_DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_matrix_cosine),
-    .MATRIX_COSINE_SIMILARITY_DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_matrix_cosine),
-    .MATRIX_COSINE_SIMILARITY_DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_cosine),
-    .MATRIX_COSINE_SIMILARITY_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_cosine),
-    .MATRIX_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_cosine),
+    .MATRIX_COSINE_SIMILARITY_DATA_A_IN_MATRIX_ENABLE(data_a_in_matrix_enable_matrix_cosine_similarity),
+    .MATRIX_COSINE_SIMILARITY_DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_matrix_cosine_similarity),
+    .MATRIX_COSINE_SIMILARITY_DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_matrix_cosine_similarity),
+    .MATRIX_COSINE_SIMILARITY_DATA_B_IN_MATRIX_ENABLE(data_b_in_matrix_enable_matrix_cosine_similarity),
+    .MATRIX_COSINE_SIMILARITY_DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_matrix_cosine_similarity),
+    .MATRIX_COSINE_SIMILARITY_DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_matrix_cosine_similarity),
+    .MATRIX_COSINE_SIMILARITY_DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_cosine_similarity),
+    .MATRIX_COSINE_SIMILARITY_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_cosine_similarity),
+    .MATRIX_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_cosine_similarity),
 
     // DATA
-    .MATRIX_COSINE_SIMILARITY_SIZE_I_IN(size_i_in_matrix_cosine),
-    .MATRIX_COSINE_SIMILARITY_SIZE_J_IN(size_j_in_matrix_cosine),
-    .MATRIX_COSINE_SIMILARITY_LENGTH_IN(length_in_matrix_cosine),
-    .MATRIX_COSINE_SIMILARITY_DATA_A_IN(data_a_in_matrix_cosine),
-    .MATRIX_COSINE_SIMILARITY_DATA_B_IN(data_b_in_matrix_cosine),
-    .MATRIX_COSINE_SIMILARITY_DATA_OUT(data_out_matrix_cosine),
+    .MATRIX_COSINE_SIMILARITY_SIZE_I_IN(size_i_in_matrix_cosine_similarity),
+    .MATRIX_COSINE_SIMILARITY_SIZE_J_IN(size_j_in_matrix_cosine_similarity),
+    .MATRIX_COSINE_SIMILARITY_LENGTH_IN(length_in_matrix_cosine_similarity),
+    .MATRIX_COSINE_SIMILARITY_DATA_A_IN(data_a_in_matrix_cosine_similarity),
+    .MATRIX_COSINE_SIMILARITY_DATA_B_IN(data_b_in_matrix_cosine_similarity),
+    .MATRIX_COSINE_SIMILARITY_DATA_OUT(data_out_matrix_cosine_similarity),
 
     // MATRIX MULTIPLICATION
     // CONTROL
@@ -1277,19 +1277,19 @@ module ntm_function_testbench;
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_cosine),
-    .READY(ready_scalar_cosine),
+    .START(start_scalar_cosine_similarity),
+    .READY(ready_scalar_cosine_similarity),
 
-    .DATA_A_IN_ENABLE(data_a_in_enable_scalar_cosine),
-    .DATA_B_IN_ENABLE(data_b_in_enable_scalar_cosine),
+    .DATA_A_IN_ENABLE(data_a_in_enable_scalar_cosine_similarity),
+    .DATA_B_IN_ENABLE(data_b_in_enable_scalar_cosine_similarity),
 
-    .DATA_OUT_ENABLE(data_out_enable_scalar_cosine),
+    .DATA_OUT_ENABLE(data_out_enable_scalar_cosine_similarity),
 
     // DATA
-    .LENGTH_IN(length_in_scalar_cosine),
-    .DATA_A_IN(data_a_in_scalar_cosine),
-    .DATA_B_IN(data_b_in_scalar_cosine),
-    .DATA_OUT(data_out_scalar_cosine)
+    .LENGTH_IN(length_in_scalar_cosine_similarity),
+    .DATA_A_IN(data_a_in_scalar_cosine_similarity),
+    .DATA_B_IN(data_b_in_scalar_cosine_similarity),
+    .DATA_OUT(data_out_scalar_cosine_similarity)
   );
 
   // SCALAR DIFFERENTIATION
@@ -1524,22 +1524,22 @@ module ntm_function_testbench;
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_cosine),
-    .READY(ready_vector_cosine),
+    .START(start_vector_cosine_similarity),
+    .READY(ready_vector_cosine_similarity),
 
-    .DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_vector_cosine),
-    .DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_vector_cosine),
-    .DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_vector_cosine),
-    .DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_vector_cosine),
-    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_cosine),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_cosine),
+    .DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_vector_cosine_similarity),
+    .DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_vector_cosine_similarity),
+    .DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_vector_cosine_similarity),
+    .DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_vector_cosine_similarity),
+    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_cosine_similarity),
+    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_cosine_similarity),
 
     // DATA
-    .SIZE_IN(size_in_vector_cosine),
-    .LENGTH_IN(length_in_vector_cosine),
-    .DATA_A_IN(data_a_in_vector_cosine),
-    .DATA_B_IN(data_b_in_vector_cosine),
-    .DATA_OUT(data_out_vector_cosine)
+    .SIZE_IN(size_in_vector_cosine_similarity),
+    .LENGTH_IN(length_in_vector_cosine_similarity),
+    .DATA_A_IN(data_a_in_vector_cosine_similarity),
+    .DATA_B_IN(data_b_in_vector_cosine_similarity),
+    .DATA_OUT(data_out_vector_cosine_similarity)
   );
 
   // VECTOR DIFFERENTIATION
@@ -1810,26 +1810,26 @@ module ntm_function_testbench;
     .RST(RST),
 
     // CONTROL
-    .START(start_matrix_cosine),
-    .READY(ready_matrix_cosine),
+    .START(start_matrix_cosine_similarity),
+    .READY(ready_matrix_cosine_similarity),
 
-    .DATA_A_IN_MATRIX_ENABLE(data_a_in_matrix_enable_matrix_cosine),
-    .DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_matrix_cosine),
-    .DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_matrix_cosine),
-    .DATA_B_IN_MATRIX_ENABLE(data_b_in_matrix_enable_matrix_cosine),
-    .DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_matrix_cosine),
-    .DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_matrix_cosine),
-    .DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_cosine),
-    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_cosine),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_cosine),
+    .DATA_A_IN_MATRIX_ENABLE(data_a_in_matrix_enable_matrix_cosine_similarity),
+    .DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_matrix_cosine_similarity),
+    .DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_matrix_cosine_similarity),
+    .DATA_B_IN_MATRIX_ENABLE(data_b_in_matrix_enable_matrix_cosine_similarity),
+    .DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_matrix_cosine_similarity),
+    .DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_matrix_cosine_similarity),
+    .DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_cosine_similarity),
+    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_cosine_similarity),
+    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_cosine_similarity),
 
     // DATA
-    .SIZE_I_IN(size_i_in_matrix_cosine),
-    .SIZE_J_IN(size_j_in_matrix_cosine),
-    .LENGTH_IN(length_in_matrix_cosine),
-    .DATA_A_IN(data_a_in_matrix_cosine),
-    .DATA_B_IN(data_b_in_matrix_cosine),
-    .DATA_OUT(data_out_matrix_cosine)
+    .SIZE_I_IN(size_i_in_matrix_cosine_similarity),
+    .SIZE_J_IN(size_j_in_matrix_cosine_similarity),
+    .LENGTH_IN(length_in_matrix_cosine_similarity),
+    .DATA_A_IN(data_a_in_matrix_cosine_similarity),
+    .DATA_B_IN(data_b_in_matrix_cosine_similarity),
+    .DATA_OUT(data_out_matrix_cosine_similarity)
   );
 
   // MATRIX DIFFERENTIATION

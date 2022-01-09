@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_scalar_exponentiator #(
+module ntm_scalar_exponentiator_function #(
   parameter DATA_SIZE=128,
   parameter CONTROL_SIZE=64
 )
@@ -86,16 +86,16 @@ module ntm_scalar_exponentiator #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg exponentiator_ctrl_fsm_int;
+  reg exponentiator_function_ctrl_fsm_int;
 
   // Internal Signals
-  reg [DATA_SIZE-1:0] exponentiator_int;
+  reg [DATA_SIZE-1:0] exponentiator_function_int;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // DATA_OUT = exponentiator(M_A_IN · 2^(E_A_IN), M_B_IN · 2^(E_B_IN))
+  // DATA_OUT = exponentiator_function(M_A_IN · 2^(E_A_IN), M_B_IN · 2^(E_B_IN))
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
@@ -107,24 +107,24 @@ module ntm_scalar_exponentiator #(
       READY <= 1'b0;
 
       // Assignations
-      exponentiator_int <= ZERO_DATA;
+      exponentiator_function_int <= ZERO_DATA;
     end
     else begin
-      case(exponentiator_ctrl_fsm_int)
+      case(exponentiator_function_ctrl_fsm_int)
         STARTER_STATE : begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
 
           // FSM Control
-          exponentiator_ctrl_fsm_int <= ENDER_STATE;
+          exponentiator_function_ctrl_fsm_int <= ENDER_STATE;
         end
         ENDER_STATE : begin  // STEP 1
           // FSM Control
-          exponentiator_ctrl_fsm_int <= STARTER_STATE;
+          exponentiator_function_ctrl_fsm_int <= STARTER_STATE;
         end
         default : begin
           // FSM Control
-          exponentiator_ctrl_fsm_int <= STARTER_STATE;
+          exponentiator_function_ctrl_fsm_int <= STARTER_STATE;
         end
       endcase
     end

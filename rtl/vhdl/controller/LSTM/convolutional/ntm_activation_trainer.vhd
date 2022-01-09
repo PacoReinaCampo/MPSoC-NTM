@@ -244,17 +244,17 @@ architecture ntm_activation_trainer_architecture of ntm_activation_trainer is
 
   -- VECTOR EXPONENTIATOR
   -- CONTROL
-  signal start_vector_exponentiator : std_logic;
-  signal ready_vector_exponentiator : std_logic;
+  signal start_vector_exponentiator_function : std_logic;
+  signal ready_vector_exponentiator_function : std_logic;
 
-  signal data_in_enable_vector_exponentiator : std_logic;
+  signal data_in_enable_vector_exponentiator_function : std_logic;
 
-  signal data_out_enable_vector_exponentiator : std_logic;
+  signal data_out_enable_vector_exponentiator_function : std_logic;
 
   -- DATA
-  signal size_in_vector_exponentiator  : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_exponentiator_function  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_exponentiator_function  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_exponentiator_function : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR DIFFERENTIATION
   -- CONTROL
@@ -342,11 +342,11 @@ begin
         when VECTOR_EXPONENTIATOR_DA_STATE =>  -- STEP 2
 
           -- Control Inputs
-          data_in_enable_vector_exponentiator <= '0';
+          data_in_enable_vector_exponentiator_function <= '0';
 
           -- Data Inputs
-          size_in_vector_exponentiator <= ONE_CONTROL;
-          data_in_vector_exponentiator <= FULL;
+          size_in_vector_exponentiator_function <= ONE_CONTROL;
+          data_in_vector_exponentiator_function <= FULL;
 
         when VECTOR_ADDER_DA_STATE =>  -- STEP 3
 
@@ -783,7 +783,7 @@ begin
       );
 
   -- VECTOR EXPONENTIATOR
-  vector_exponentiator : ntm_vector_exponentiator
+  vector_exponentiator_function : ntm_vector_exponentiator_function
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -794,17 +794,17 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_exponentiator,
-      READY => ready_vector_exponentiator,
+      START => start_vector_exponentiator_function,
+      READY => ready_vector_exponentiator_function,
 
-      DATA_IN_ENABLE => data_in_enable_vector_exponentiator,
+      DATA_IN_ENABLE => data_in_enable_vector_exponentiator_function,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
+      DATA_OUT_ENABLE => data_out_enable_vector_exponentiator_function,
 
       -- DATA
-      SIZE_IN  => size_in_vector_exponentiator,
-      DATA_IN  => data_in_vector_exponentiator,
-      DATA_OUT => data_out_vector_exponentiator
+      SIZE_IN  => size_in_vector_exponentiator_function,
+      DATA_IN  => data_in_vector_exponentiator_function,
+      DATA_OUT => data_out_vector_exponentiator_function
       );
 
   -- VECTOR DIFFERENTIATION

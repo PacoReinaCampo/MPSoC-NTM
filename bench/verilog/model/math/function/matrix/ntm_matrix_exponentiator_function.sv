@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_matrix_exponentiator #(
+module ntm_matrix_exponentiator_function #(
   parameter DATA_SIZE=128,
   parameter CONTROL_SIZE=64
 )
@@ -95,7 +95,7 @@ module ntm_matrix_exponentiator #(
   ///////////////////////////////////////////////////////////////////////
 
   // Finite State Machine
-  reg [1:0] exponentiator_ctrl_fsm_int;
+  reg [1:0] exponentiator_function_ctrl_fsm_int;
 
   // Internal Signals
   reg [CONTROL_SIZE-1:0] index_i_loop;
@@ -103,15 +103,15 @@ module ntm_matrix_exponentiator #(
 
   // VECTOR EXPONENTIATOR
   // CONTROL
-  reg start_vector_exponentiator;
-  wire ready_vector_exponentiator;
-  reg data_in_enable_vector_exponentiator;
-  wire data_out_enable_vector_exponentiator;
+  reg start_vector_exponentiator_function;
+  wire ready_vector_exponentiator_function;
+  reg data_in_enable_vector_exponentiator_function;
+  wire data_out_enable_vector_exponentiator_function;
 
   // DATA
-  reg [DATA_SIZE-1:0] size_in_vector_exponentiator;
-  reg [DATA_SIZE-1:0] data_in_vector_exponentiator;
-  wire [DATA_SIZE-1:0] data_out_vector_exponentiator;
+  reg [DATA_SIZE-1:0] size_in_vector_exponentiator_function;
+  reg [DATA_SIZE-1:0] data_in_vector_exponentiator_function;
+  wire [DATA_SIZE-1:0] data_out_vector_exponentiator_function;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -131,7 +131,7 @@ module ntm_matrix_exponentiator #(
       index_j_loop <= ZERO_DATA;
     end
     else begin
-      case(exponentiator_ctrl_fsm_int)
+      case(exponentiator_function_ctrl_fsm_int)
         STARTER_STATE : begin  // STEP 0
           // Control Outputs
           READY <= 1'b0;
@@ -142,27 +142,27 @@ module ntm_matrix_exponentiator #(
             index_j_loop <= ZERO_DATA;
 
             // FSM Control
-            exponentiator_ctrl_fsm_int <= INPUT_I_STATE;
+            exponentiator_function_ctrl_fsm_int <= INPUT_I_STATE;
           end
         end
         INPUT_I_STATE : begin  // STEP 1
           if(DATA_IN_I_ENABLE == 1'b1) begin
             // Data Inputs
-            data_in_vector_exponentiator <= DATA_IN;
+            data_in_vector_exponentiator_function <= DATA_IN;
 
             if(index_i_loop == ZERO_DATA) begin
               // Control Internal
-              start_vector_exponentiator <= 1'b1;
+              start_vector_exponentiator_function <= 1'b1;
             end
 
-            data_in_enable_vector_exponentiator <= 1'b1;
+            data_in_enable_vector_exponentiator_function <= 1'b1;
 
             // FSM Control
-            exponentiator_ctrl_fsm_int <= ENDER_STATE;
+            exponentiator_function_ctrl_fsm_int <= ENDER_STATE;
           end
           else begin
             // Control Internal
-            data_in_enable_vector_exponentiator <= 1'b0;
+            data_in_enable_vector_exponentiator_function <= 1'b0;
           end
 
           // Control Outputs
@@ -172,36 +172,36 @@ module ntm_matrix_exponentiator #(
         INPUT_J_STATE : begin  // STEP 2
           if(DATA_IN_J_ENABLE == 1'b1) begin
             // Data Inputs
-            size_in_vector_exponentiator <= SIZE_J_IN;
-            data_in_vector_exponentiator <= DATA_IN;
+            size_in_vector_exponentiator_function <= SIZE_J_IN;
+            data_in_vector_exponentiator_function <= DATA_IN;
 
             if(index_j_loop == ZERO_DATA) begin
               // Control Internal
-              start_vector_exponentiator <= 1'b1;
+              start_vector_exponentiator_function <= 1'b1;
             end
 
-            data_in_enable_vector_exponentiator <= 1'b1;
+            data_in_enable_vector_exponentiator_function <= 1'b1;
 
             // FSM Control
-            exponentiator_ctrl_fsm_int <= ENDER_STATE;
+            exponentiator_function_ctrl_fsm_int <= ENDER_STATE;
           end
           else begin
             // Control Internal
-            data_in_enable_vector_exponentiator <= 1'b0;
+            data_in_enable_vector_exponentiator_function <= 1'b0;
           end
 
           // Control Outputs
           DATA_OUT_J_ENABLE <= 1'b0;
         end
         ENDER_STATE : begin  // STEP 3
-          if(ready_vector_exponentiator == 1'b1) begin
+          if(ready_vector_exponentiator_function == 1'b1) begin
             if((index_i_loop == (SIZE_I_IN - ONE_CONTROL)) && index_j_loop == (SIZE_J_IN - ONE_CONTROL)) begin
               // Control Outputs
               READY <= 1'b1;
               DATA_OUT_J_ENABLE <= 1'b1;
 
               // FSM Control
-              exponentiator_ctrl_fsm_int <= STARTER_STATE;
+              exponentiator_function_ctrl_fsm_int <= STARTER_STATE;
             end
             else if((index_i_loop < (SIZE_I_IN - ONE_CONTROL)) && index_j_loop == (SIZE_J_IN - ONE_CONTROL)) begin
               // Control Internal
@@ -213,7 +213,7 @@ module ntm_matrix_exponentiator #(
               DATA_OUT_J_ENABLE <= 1'b1;
 
               // FSM Control
-              exponentiator_ctrl_fsm_int <= INPUT_I_STATE;
+              exponentiator_function_ctrl_fsm_int <= INPUT_I_STATE;
             end
             else if((index_i_loop < (SIZE_I_IN - ONE_CONTROL)) && index_j_loop < (SIZE_J_IN - ONE_CONTROL)) begin
               // Control Internal
@@ -223,45 +223,45 @@ module ntm_matrix_exponentiator #(
               DATA_OUT_J_ENABLE <= 1'b1;
 
               // FSM Control
-              exponentiator_ctrl_fsm_int <= INPUT_J_STATE;
+              exponentiator_function_ctrl_fsm_int <= INPUT_J_STATE;
             end
             // Data Outputs
-            DATA_OUT <= data_out_vector_exponentiator;
+            DATA_OUT <= data_out_vector_exponentiator_function;
           end
           else begin
             // Control Internal
-            start_vector_exponentiator <= 1'b0;
+            start_vector_exponentiator_function <= 1'b0;
           end
         end
         default : begin
           // FSM Control
-          exponentiator_ctrl_fsm_int <= STARTER_STATE;
+          exponentiator_function_ctrl_fsm_int <= STARTER_STATE;
         end
       endcase
     end
   end
 
   // VECTOR EXPONENTIATOR
-  ntm_vector_exponentiator #(
+  ntm_vector_exponentiator_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_exponentiator(
+  vector_exponentiator_function(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_exponentiator),
-    .READY(ready_vector_exponentiator),
+    .START(start_vector_exponentiator_function),
+    .READY(ready_vector_exponentiator_function),
 
-    .DATA_IN_ENABLE(data_in_enable_vector_exponentiator),
-    .DATA_OUT_ENABLE(data_out_enable_vector_exponentiator),
+    .DATA_IN_ENABLE(data_in_enable_vector_exponentiator_function),
+    .DATA_OUT_ENABLE(data_out_enable_vector_exponentiator_function),
 
     // DATA
-    .SIZE_IN(size_in_vector_exponentiator),
-    .DATA_IN(data_in_vector_exponentiator),
-    .DATA_OUT(data_out_vector_exponentiator)
+    .SIZE_IN(size_in_vector_exponentiator_function),
+    .DATA_IN(data_in_vector_exponentiator_function),
+    .DATA_OUT(data_out_vector_exponentiator_function)
   );
 
 endmodule

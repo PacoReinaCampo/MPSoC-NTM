@@ -110,35 +110,35 @@ module dnc_content_based_addressing #(
 
   // VECTOR EXPONENTIATOR
   // CONTROL
-  wire start_vector_exponentiator;
-  wire ready_vector_exponentiator;
+  wire start_vector_exponentiator_function;
+  wire ready_vector_exponentiator_function;
 
-  wire data_in_enable_vector_exponentiator;
-  wire data_out_enable_vector_exponentiator;
+  wire data_in_enable_vector_exponentiator_function;
+  wire data_out_enable_vector_exponentiator_function;
 
   // DATA
-  wire [DATA_SIZE-1:0] size_in_vector_exponentiator;
-  wire [DATA_SIZE-1:0] data_in_vector_exponentiator;
-  wire [DATA_SIZE-1:0] data_out_vector_exponentiator;
+  wire [DATA_SIZE-1:0] size_in_vector_exponentiator_function;
+  wire [DATA_SIZE-1:0] data_in_vector_exponentiator_function;
+  wire [DATA_SIZE-1:0] data_out_vector_exponentiator_function;
 
   // VECTOR COSINE SIMILARITY
   // CONTROL
-  wire start_vector_cosine;
-  wire ready_vector_cosine;
+  wire start_vector_cosine_similarity;
+  wire ready_vector_cosine_similarity;
 
-  wire data_a_in_vector_enable_vector_cosine;
-  wire data_a_in_scalar_enable_vector_cosine;
-  wire data_b_in_vector_enable_vector_cosine;
-  wire data_b_in_scalar_enable_vector_cosine;
-  wire data_out_vector_enable_vector_cosine;
-  wire data_out_scalar_enable_vector_cosine;
+  wire data_a_in_vector_enable_vector_cosine_similarity;
+  wire data_a_in_scalar_enable_vector_cosine_similarity;
+  wire data_b_in_vector_enable_vector_cosine_similarity;
+  wire data_b_in_scalar_enable_vector_cosine_similarity;
+  wire data_out_vector_enable_vector_cosine_similarity;
+  wire data_out_scalar_enable_vector_cosine_similarity;
 
   // DATA
-  wire [DATA_SIZE-1:0] size_in_vector_cosine;
-  wire [DATA_SIZE-1:0] length_in_vector_cosine;
-  wire [DATA_SIZE-1:0] data_a_in_vector_cosine;
-  wire [DATA_SIZE-1:0] data_b_in_vector_cosine;
-  wire [DATA_SIZE-1:0] data_out_vector_cosine;
+  wire [DATA_SIZE-1:0] size_in_vector_cosine_similarity;
+  wire [DATA_SIZE-1:0] length_in_vector_cosine_similarity;
+  wire [DATA_SIZE-1:0] data_a_in_vector_cosine_similarity;
+  wire [DATA_SIZE-1:0] data_b_in_vector_cosine_similarity;
+  wire [DATA_SIZE-1:0] data_out_vector_cosine_similarity;
 
   // VECTOR SOFTMAX
   // CONTROL
@@ -160,7 +160,7 @@ module dnc_content_based_addressing #(
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  // C(M,k,beta)[i] = softmax(exponentiation(EULER,cosine(k,M)·beta))[i]
+  // C(M,k,beta)[i] = softmax(exponentiation(EULER,cosine_similarity(k,M)·beta))[i]
 
   // CONTROL
   always @(posedge CLK or posedge RST) begin
@@ -200,26 +200,26 @@ module dnc_content_based_addressing #(
   end
 
   // VECTOR EXPONENTIATOR
-  ntm_vector_exponentiator #(
+  ntm_vector_exponentiator_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_exponentiator(
+  vector_exponentiator_function(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_exponentiator),
-    .READY(ready_vector_exponentiator),
+    .START(start_vector_exponentiator_function),
+    .READY(ready_vector_exponentiator_function),
 
-    .DATA_IN_ENABLE(data_in_enable_vector_exponentiator),
-    .DATA_OUT_ENABLE(data_out_enable_vector_exponentiator),
+    .DATA_IN_ENABLE(data_in_enable_vector_exponentiator_function),
+    .DATA_OUT_ENABLE(data_out_enable_vector_exponentiator_function),
 
     // DATA
-    .SIZE_IN(size_in_vector_exponentiator),
-    .DATA_IN(data_in_vector_exponentiator),
-    .DATA_OUT(data_out_vector_exponentiator)
+    .SIZE_IN(size_in_vector_exponentiator_function),
+    .DATA_IN(data_in_vector_exponentiator_function),
+    .DATA_OUT(data_out_vector_exponentiator_function)
   );
 
   // VECTOR COSINE SIMILARITY
@@ -233,22 +233,22 @@ module dnc_content_based_addressing #(
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_cosine),
-    .READY(ready_vector_cosine),
+    .START(start_vector_cosine_similarity),
+    .READY(ready_vector_cosine_similarity),
 
-    .DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_vector_cosine),
-    .DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_vector_cosine),
-    .DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_vector_cosine),
-    .DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_vector_cosine),
-    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_cosine),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_cosine),
+    .DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_vector_cosine_similarity),
+    .DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_vector_cosine_similarity),
+    .DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_vector_cosine_similarity),
+    .DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_vector_cosine_similarity),
+    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_cosine_similarity),
+    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_cosine_similarity),
 
     // DATA
-    .SIZE_IN(size_in_vector_cosine),
-    .LENGTH_IN(length_in_vector_cosine),
-    .DATA_A_IN(data_a_in_vector_cosine),
-    .DATA_B_IN(data_b_in_vector_cosine),
-    .DATA_OUT(data_out_vector_cosine)
+    .SIZE_IN(size_in_vector_cosine_similarity),
+    .LENGTH_IN(length_in_vector_cosine_similarity),
+    .DATA_A_IN(data_a_in_vector_cosine_similarity),
+    .DATA_B_IN(data_b_in_vector_cosine_similarity),
+    .DATA_OUT(data_out_vector_cosine_similarity)
   );
 
   // VECTOR SOFTMAX

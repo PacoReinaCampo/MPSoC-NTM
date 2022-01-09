@@ -139,12 +139,12 @@ architecture ntm_scalar_softmax_function_architecture of ntm_scalar_softmax_func
 
   -- SCALAR EXPONENTIATOR
   -- CONTROL
-  signal start_scalar_exponentiator : std_logic;
-  signal ready_scalar_exponentiator : std_logic;
+  signal start_scalar_exponentiator_function : std_logic;
+  signal ready_scalar_exponentiator_function : std_logic;
 
   -- DATA
-  signal data_in_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_exponentiator_function  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_exponentiator_function : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -190,10 +190,10 @@ begin
 
           if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
-            data_in_scalar_exponentiator <= DATA_IN;
+            data_in_scalar_exponentiator_function <= DATA_IN;
 
             -- Control Internal
-            start_scalar_exponentiator <= '1';
+            start_scalar_exponentiator_function <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_FIRST_EXPONENTIATOR_STATE;
@@ -204,14 +204,14 @@ begin
 
         when SCALAR_FIRST_EXPONENTIATOR_STATE =>  -- STEP 2
 
-          if (ready_scalar_exponentiator = '1') then
+          if (ready_scalar_exponentiator_function = '1') then
             -- Control Internal
             start_scalar_adder <= '1';
 
             operation_scalar_adder <= '0';
 
             -- Data Inputs
-            data_a_in_scalar_adder <= data_out_scalar_exponentiator;
+            data_a_in_scalar_adder <= data_out_scalar_exponentiator_function;
             
             if (unsigned(index_adder_loop) = unsigned(ZERO_CONTROL)) then
               data_b_in_scalar_adder <= ZERO_DATA;
@@ -223,7 +223,7 @@ begin
             controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
           else
             -- Control Internal
-            start_scalar_exponentiator <= '0';
+            start_scalar_exponentiator_function <= '0';
           end if;
 
         when SCALAR_ADDER_STATE =>  -- STEP 3
@@ -254,10 +254,10 @@ begin
 
           if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
-            data_in_scalar_exponentiator <= DATA_IN;
+            data_in_scalar_exponentiator_function <= DATA_IN;
 
             -- Control Internal
-            start_scalar_exponentiator <= '1';
+            start_scalar_exponentiator_function <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_SECOND_EXPONENTIATOR_STATE;
@@ -268,19 +268,19 @@ begin
 
         when SCALAR_SECOND_EXPONENTIATOR_STATE =>  -- STEP 5
 
-          if (ready_scalar_exponentiator = '1') then
+          if (ready_scalar_exponentiator_function = '1') then
             -- Control Internal
             start_scalar_divider <= '1';
 
             -- Data Inputs
-            data_a_in_scalar_divider <= data_out_scalar_exponentiator;
+            data_a_in_scalar_divider <= data_out_scalar_exponentiator_function;
             data_b_in_scalar_divider <= data_out_scalar_adder;
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;
           else
             -- Control Internal
-            start_scalar_exponentiator <= '0';
+            start_scalar_exponentiator_function <= '0';
           end if;
 
         when SCALAR_DIVIDER_STATE =>  -- STEP 6
@@ -362,7 +362,7 @@ begin
       );
 
   -- SCALAR EXPONENTIATOR
-  scalar_exponentiator : ntm_scalar_exponentiator
+  scalar_exponentiator_function : ntm_scalar_exponentiator_function
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -373,12 +373,12 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_exponentiator,
-      READY => ready_scalar_exponentiator,
+      START => start_scalar_exponentiator_function,
+      READY => ready_scalar_exponentiator_function,
 
       -- DATA
-      DATA_IN  => data_in_scalar_exponentiator,
-      DATA_OUT => data_out_scalar_exponentiator
+      DATA_IN  => data_in_scalar_exponentiator_function,
+      DATA_OUT => data_out_scalar_exponentiator_function
       );
 
 end architecture;

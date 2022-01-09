@@ -203,16 +203,16 @@ module ntm_activation_trainer #(
 
   // VECTOR EXPONENTIATOR
   // CONTROL
-  wire start_vector_exponentiator;
-  wire ready_vector_exponentiator;
+  wire start_vector_exponentiator_function;
+  wire ready_vector_exponentiator_function;
 
-  wire data_in_enable_vector_exponentiator;
-  wire data_out_enable_vector_exponentiator;
+  wire data_in_enable_vector_exponentiator_function;
+  wire data_out_enable_vector_exponentiator_function;
 
   // DATA
-  wire [DATA_SIZE-1:0] size_in_vector_exponentiator;
-  wire [DATA_SIZE-1:0] data_in_vector_exponentiator;
-  wire [DATA_SIZE-1:0] data_out_vector_exponentiator;
+  wire [DATA_SIZE-1:0] size_in_vector_exponentiator_function;
+  wire [DATA_SIZE-1:0] data_in_vector_exponentiator_function;
+  wire [DATA_SIZE-1:0] data_out_vector_exponentiator_function;
 
   // VECTOR DIFFERENTIATION
   // CONTROL
@@ -457,26 +457,26 @@ module ntm_activation_trainer #(
   );
 
   // VECTOR EXPONENTIATOR
-  ntm_vector_exponentiator #(
+  ntm_vector_exponentiator_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_exponentiator(
+  vector_exponentiator_function(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_exponentiator),
-    .READY(ready_vector_exponentiator),
+    .START(start_vector_exponentiator_function),
+    .READY(ready_vector_exponentiator_function),
 
-    .DATA_IN_ENABLE(data_in_enable_vector_exponentiator),
-    .DATA_OUT_ENABLE(data_out_enable_vector_exponentiator),
+    .DATA_IN_ENABLE(data_in_enable_vector_exponentiator_function),
+    .DATA_OUT_ENABLE(data_out_enable_vector_exponentiator_function),
 
     // DATA
-    .SIZE_IN(size_in_vector_exponentiator),
-    .DATA_IN(data_in_vector_exponentiator),
-    .DATA_OUT(data_out_vector_exponentiator)
+    .SIZE_IN(size_in_vector_exponentiator_function),
+    .DATA_IN(data_in_vector_exponentiator_function),
+    .DATA_OUT(data_out_vector_exponentiator_function)
   );
 
   // VECTOR DIFFERENTIATION

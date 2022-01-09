@@ -31,7 +31,7 @@ sv work ../../../../../../../../rtl/verilog/math/algebra/ntm_matrix_transpose.sv
 sv work ../../../../../../../../rtl/verilog/math/algebra/ntm_scalar_product.sv
 sv work ../../../../../../../../rtl/verilog/math/algebra/ntm_tensor_product.sv
 
-sv work ../../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_exponentiator.sv
+sv work ../../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_exponentiator_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_convolution_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_cosh_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_cosine_similarity_function.sv
@@ -44,7 +44,7 @@ sv work ../../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_soft
 sv work ../../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_summation_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_tanh_function.sv
 
-sv work ../../../../../../../../rtl/verilog/math/function/vector/ntm_vector_exponentiator.sv
+sv work ../../../../../../../../rtl/verilog/math/function/vector/ntm_vector_exponentiator_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/vector/ntm_vector_convolution_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/vector/ntm_vector_cosh_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/vector/ntm_vector_cosine_similarity_function.sv
@@ -57,7 +57,7 @@ sv work ../../../../../../../../rtl/verilog/math/function/vector/ntm_vector_soft
 sv work ../../../../../../../../rtl/verilog/math/function/vector/ntm_vector_summation_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/vector/ntm_vector_tanh_function.sv
 
-sv work ../../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_exponentiator.sv
+sv work ../../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_exponentiator_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_convolution_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_cosh_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_cosine_similarity_function.sv

@@ -73,65 +73,53 @@ package ntm_integer_pkg is
   signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_TEST        : boolean := false;
   signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_TEST   : boolean := false;
   signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_FULL_DIVIDER_TEST : boolean := false;
 
   signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_0        : boolean := false;
   signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_0   : boolean := false;
   signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_FULL_DIVIDER_CASE_0 : boolean := false;
 
   signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_1        : boolean := false;
   signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_1   : boolean := false;
   signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_FULL_DIVIDER_CASE_1 : boolean := false;
 
   -- VECTOR-FUNCTIONALITY
   signal STIMULUS_NTM_VECTOR_INTEGER_ADDER_TEST        : boolean := false;
   signal STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_TEST   : boolean := false;
   signal STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INTEGER_FULL_DIVIDER_TEST : boolean := false;
 
   signal STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_0        : boolean := false;
   signal STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_0   : boolean := false;
   signal STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INTEGER_FULL_DIVIDER_CASE_0 : boolean := false;
 
   signal STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_1        : boolean := false;
   signal STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_1   : boolean := false;
   signal STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INTEGER_FULL_DIVIDER_CASE_1 : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
   signal STIMULUS_NTM_MATRIX_INTEGER_ADDER_TEST        : boolean := false;
   signal STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_TEST   : boolean := false;
   signal STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INTEGER_FULL_DIVIDER_TEST : boolean := false;
 
   signal STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_0        : boolean := false;
   signal STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_0   : boolean := false;
   signal STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INTEGER_FULL_DIVIDER_CASE_0 : boolean := false;
 
   signal STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_1        : boolean := false;
   signal STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_1   : boolean := false;
   signal STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INTEGER_FULL_DIVIDER_CASE_1 : boolean := false;
 
   -- TENSOR-FUNCTIONALITY
   signal STIMULUS_NTM_TENSOR_INTEGER_ADDER_TEST        : boolean := false;
   signal STIMULUS_NTM_TENSOR_INTEGER_MULTIPLIER_TEST   : boolean := false;
   signal STIMULUS_NTM_TENSOR_INTEGER_DIVIDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INTEGER_FULL_DIVIDER_TEST : boolean := false;
 
   signal STIMULUS_NTM_TENSOR_INTEGER_ADDER_CASE_0        : boolean := false;
   signal STIMULUS_NTM_TENSOR_INTEGER_MULTIPLIER_CASE_0   : boolean := false;
   signal STIMULUS_NTM_TENSOR_INTEGER_DIVIDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INTEGER_FULL_DIVIDER_CASE_0 : boolean := false;
 
   signal STIMULUS_NTM_TENSOR_INTEGER_ADDER_CASE_1        : boolean := false;
   signal STIMULUS_NTM_TENSOR_INTEGER_MULTIPLIER_CASE_1   : boolean := false;
   signal STIMULUS_NTM_TENSOR_INTEGER_DIVIDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INTEGER_FULL_DIVIDER_CASE_1 : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
@@ -197,18 +185,6 @@ package ntm_integer_pkg is
       SCALAR_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- SCALAR FULL DIVIDER
-      -- CONTROL
-      SCALAR_INTEGER_FULL_DIVIDER_START : out std_logic;
-      SCALAR_INTEGER_FULL_DIVIDER_READY : in  std_logic;
-
-      -- DATA
-      SCALAR_INTEGER_FULL_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_INTEGER_FULL_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-      SCALAR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_INTEGER_FULL_DIVIDER_DATA_FRACTIONAL_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
       -----------------------------------------------------------------------
       -- STIMULUS VECTOR
       -----------------------------------------------------------------------
@@ -268,24 +244,6 @@ package ntm_integer_pkg is
 
       VECTOR_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- VECTOR FULL DIVIDER
-      -- CONTROL
-      VECTOR_INTEGER_FULL_DIVIDER_START : out std_logic;
-      VECTOR_INTEGER_FULL_DIVIDER_READY : in  std_logic;
-
-      VECTOR_INTEGER_FULL_DIVIDER_DATA_A_IN_ENABLE : out std_logic;
-      VECTOR_INTEGER_FULL_DIVIDER_DATA_B_IN_ENABLE : out std_logic;
-
-      VECTOR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT_ENABLE : in std_logic;
-
-      -- DATA
-      VECTOR_INTEGER_FULL_DIVIDER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_INTEGER_FULL_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_INTEGER_FULL_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-      VECTOR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_INTEGER_FULL_DIVIDER_DATA_FRACTIONAL_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
       -- STIMULUS MATRIX
@@ -358,28 +316,6 @@ package ntm_integer_pkg is
 
       MATRIX_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- MATRIX FULL DIVIDER
-      -- CONTROL
-      MATRIX_INTEGER_FULL_DIVIDER_START : out std_logic;
-      MATRIX_INTEGER_FULL_DIVIDER_READY : in  std_logic;
-
-      MATRIX_INTEGER_FULL_DIVIDER_DATA_A_IN_I_ENABLE : out std_logic;
-      MATRIX_INTEGER_FULL_DIVIDER_DATA_A_IN_J_ENABLE : out std_logic;
-      MATRIX_INTEGER_FULL_DIVIDER_DATA_B_IN_I_ENABLE : out std_logic;
-      MATRIX_INTEGER_FULL_DIVIDER_DATA_B_IN_J_ENABLE : out std_logic;
-
-      MATRIX_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT_I_ENABLE : in std_logic;
-      MATRIX_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT_J_ENABLE : in std_logic;
-
-      -- DATA
-      MATRIX_INTEGER_FULL_DIVIDER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_INTEGER_FULL_DIVIDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_INTEGER_FULL_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INTEGER_FULL_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-      MATRIX_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INTEGER_FULL_DIVIDER_DATA_FRACTIONAL_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
       -- STIMULUS TENSOR
@@ -463,33 +399,7 @@ package ntm_integer_pkg is
       TENSOR_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
       TENSOR_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- TENSOR FULL DIVIDER
-      -- CONTROL
-      TENSOR_INTEGER_FULL_DIVIDER_START : out std_logic;
-      TENSOR_INTEGER_FULL_DIVIDER_READY : in  std_logic;
-
-      TENSOR_INTEGER_FULL_DIVIDER_DATA_A_IN_I_ENABLE : out std_logic;
-      TENSOR_INTEGER_FULL_DIVIDER_DATA_A_IN_J_ENABLE : out std_logic;
-      TENSOR_INTEGER_FULL_DIVIDER_DATA_A_IN_K_ENABLE : out std_logic;
-      TENSOR_INTEGER_FULL_DIVIDER_DATA_B_IN_I_ENABLE : out std_logic;
-      TENSOR_INTEGER_FULL_DIVIDER_DATA_B_IN_J_ENABLE : out std_logic;
-      TENSOR_INTEGER_FULL_DIVIDER_DATA_B_IN_K_ENABLE : out std_logic;
-
-      TENSOR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT_I_ENABLE : in std_logic;
-      TENSOR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT_J_ENABLE : in std_logic;
-      TENSOR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT_K_ENABLE : in std_logic;
-
-      -- DATA
-      TENSOR_INTEGER_FULL_DIVIDER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INTEGER_FULL_DIVIDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INTEGER_FULL_DIVIDER_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INTEGER_FULL_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_INTEGER_FULL_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-      TENSOR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT    : in std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_INTEGER_FULL_DIVIDER_DATA_FRACTIONAL_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+      TENSOR_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

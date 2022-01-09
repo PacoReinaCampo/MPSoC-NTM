@@ -229,17 +229,17 @@ architecture ntm_addressing_architecture of ntm_addressing is
 
   -- VECTOR EXPONENTIATOR
   -- CONTROL
-  signal start_vector_exponentiator : std_logic;
-  signal ready_vector_exponentiator : std_logic;
+  signal start_vector_exponentiator_function : std_logic;
+  signal ready_vector_exponentiator_function : std_logic;
 
-  signal data_in_enable_vector_exponentiator : std_logic;
+  signal data_in_enable_vector_exponentiator_function : std_logic;
 
-  signal data_out_enable_vector_exponentiator : std_logic;
+  signal data_out_enable_vector_exponentiator_function : std_logic;
 
   -- DATA
-  signal size_in_vector_exponentiator  : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_exponentiator_function  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_exponentiator_function  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_exponentiator_function : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR SUMMATION
   -- CONTROL
@@ -430,7 +430,7 @@ begin
   data_b_in_scalar_enable_vector_convolution <= '0';
 
   -- VECTOR EXPONENTIATOR
-  data_in_enable_vector_exponentiator <= '0';
+  data_in_enable_vector_exponentiator_function <= '0';
 
   -- VECTOR SUMMATION
   data_in_vector_enable_vector_summation <= '0';
@@ -455,8 +455,8 @@ begin
   data_b_in_vector_convolution <= FULL;
 
   -- VECTOR EXPONENTIATOR
-  size_in_vector_exponentiator <= FULL;
-  data_in_vector_exponentiator <= FULL;
+  size_in_vector_exponentiator_function <= FULL;
+  data_in_vector_exponentiator_function <= FULL;
 
   -- VECTOR SUMMATION
   size_in_vector_summation   <= FULL;
@@ -590,7 +590,7 @@ begin
       );
 
   -- VECTOR EXPONENTIATOR
-  vector_exponentiator : ntm_vector_exponentiator
+  vector_exponentiator_function : ntm_vector_exponentiator_function
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -601,17 +601,17 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_exponentiator,
-      READY => ready_vector_exponentiator,
+      START => start_vector_exponentiator_function,
+      READY => ready_vector_exponentiator_function,
 
-      DATA_IN_ENABLE => data_in_enable_vector_exponentiator,
+      DATA_IN_ENABLE => data_in_enable_vector_exponentiator_function,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
+      DATA_OUT_ENABLE => data_out_enable_vector_exponentiator_function,
 
       -- DATA
-      SIZE_IN  => size_in_vector_exponentiator,
-      DATA_IN  => data_in_vector_exponentiator,
-      DATA_OUT => data_out_vector_exponentiator
+      SIZE_IN  => size_in_vector_exponentiator_function,
+      DATA_IN  => data_in_vector_exponentiator_function,
+      DATA_OUT => data_out_vector_exponentiator_function
       );
 
   -- VECTOR SUMMATION

@@ -23,6 +23,7 @@ alias ntm_scalar_adder_design_compilation {
 
 alias ntm_scalar_multiplier_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_multiplier.vhd
 }
@@ -33,6 +34,7 @@ alias ntm_scalar_multiplier_design_compilation {
 
 alias ntm_scalar_divider_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_divider.vhd
 }
@@ -44,6 +46,7 @@ alias ntm_scalar_divider_design_compilation {
 alias ntm_vector_adder_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/vector/ntm_vector_integer_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/vector/ntm_vector_adder.vhd
 }
@@ -54,6 +57,7 @@ alias ntm_vector_adder_design_compilation {
 
 alias ntm_vector_multiplier_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/vector/ntm_vector_multiplier.vhd
@@ -65,6 +69,7 @@ alias ntm_vector_multiplier_design_compilation {
 
 alias ntm_vector_divider_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/vector/ntm_vector_divider.vhd
@@ -77,6 +82,8 @@ alias ntm_vector_divider_design_compilation {
 alias ntm_matrix_adder_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/vector/ntm_vector_integer_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/matrix/ntm_matrix_integer_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/vector/ntm_vector_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/matrix/ntm_matrix_adder.vhd
@@ -88,6 +95,7 @@ alias ntm_matrix_adder_design_compilation {
 
 alias ntm_matrix_multiplier_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/vector/ntm_vector_multiplier.vhd
@@ -100,6 +108,7 @@ alias ntm_matrix_multiplier_design_compilation {
 
 alias ntm_matrix_divider_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_addder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/vector/ntm_vector_divider.vhd

@@ -127,10 +127,10 @@ alias ntm_scalar_differentiation_function_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_SCALAR_EXPONENTIATOR_TEST 
+# NTM_SCALAR_EXPONENTIATOR_FUNCTION_TEST 
 ##################################################################################################
 
-alias ntm_scalar_exponentiator_verification_compilation {
+alias ntm_scalar_exponentiator_function_verification_compilation {
   echo "TEST: NTM_SCALAR_EXPONENTIATOR_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/ntm_function_pkg.vhd
@@ -143,8 +143,8 @@ alias ntm_scalar_exponentiator_verification_compilation {
   add log -r sim:/ntm_function_testbench/*
 
   #WAVES
-  view -title ntm_scalar_exponentiator wave
-  do $simulation_path/mpsoc/math/function/msim/waves/ntm_scalar_exponentiator.do
+  view -title ntm_scalar_exponentiator_function wave
+  do $simulation_path/mpsoc/math/function/msim/waves/ntm_scalar_exponentiator_function.do
 
   force -freeze sim:/ntm_function_pkg/STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST true 0
   force -freeze sim:/ntm_function_pkg/STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0 true 0
@@ -152,7 +152,7 @@ alias ntm_scalar_exponentiator_verification_compilation {
   onbreak {resume}
   run -all
 
-  dataset save sim ntm_scalar_exponentiator_test.wlf
+  dataset save sim ntm_scalar_exponentiator_function_test.wlf
 }
 
 ##################################################################################################
@@ -406,7 +406,7 @@ alias v04 {
 }
 
 alias v05 {
-  ntm_scalar_exponentiator_verification_compilation 
+  ntm_scalar_exponentiator_function_verification_compilation 
 }
 
 alias v06 {
@@ -446,7 +446,7 @@ echo "v01 . NTM-SCALAR-CONVOLUTION-FUNCTION-TEST"
 echo "v02 . NTM-SCALAR-COSH-FUNCTION-TEST"
 echo "v03 . NTM-SCALAR-COSINE_SIMILARITY-FUNCTION-TEST"
 echo "v04 . NTM-SCALAR-DIFFERENTIATION-FUNCTION-TEST"
-echo "v05 . NTM-SCALAR-EXPONENTIATOR-TEST"
+echo "v05 . NTM-SCALAR-EXPONENTIATOR-FUNCTION-TEST"
 echo "v06 . NTM-SCALAR-LOGARITHM-FUNCTION-TEST"
 echo "v07 . NTM-SCALAR-LOGISTIC-FUNCTION-TEST"
 echo "v08 . NTM-SCALAR-MULTIPLICATION-FUNCTION-TEST"

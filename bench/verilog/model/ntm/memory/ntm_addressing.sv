@@ -206,16 +206,16 @@ module ntm_addressing #(
 
   // VECTOR EXPONENTIATOR
   // CONTROL
-  wire start_vector_exponentiator;
-  wire ready_vector_exponentiator;
+  wire start_vector_exponentiator_function;
+  wire ready_vector_exponentiator_function;
 
-  wire data_in_enable_vector_exponentiator;
-  wire data_out_enable_vector_exponentiator;
+  wire data_in_enable_vector_exponentiator_function;
+  wire data_out_enable_vector_exponentiator_function;
 
   // DATA
-  reg [DATA_SIZE-1:0] size_in_vector_exponentiator;
-  reg [DATA_SIZE-1:0] data_in_vector_exponentiator;
-  wire [DATA_SIZE-1:0] data_out_vector_exponentiator;
+  reg [DATA_SIZE-1:0] size_in_vector_exponentiator_function;
+  reg [DATA_SIZE-1:0] data_in_vector_exponentiator_function;
+  wire [DATA_SIZE-1:0] data_out_vector_exponentiator_function;
 
   // VECTOR SUMMATION
   // CONTROL
@@ -354,8 +354,8 @@ module ntm_addressing #(
             VECTOR_EXPONENTIATOR_SHARPENING_STATE : begin  // STEP 1
 
               // Data Inputs
-              size_in_vector_exponentiator <= FULL;
-              data_in_vector_exponentiator <= FULL;
+              size_in_vector_exponentiator_function <= FULL;
+              data_in_vector_exponentiator_function <= FULL;
             end
 
             VECTOR_SUMMATION_SHARPENING_STATE : begin  // STEP 2
@@ -502,26 +502,26 @@ module ntm_addressing #(
   );
 
   // VECTOR EXPONENTIATOR
-  ntm_vector_exponentiator #(
+  ntm_vector_exponentiator_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  vector_exponentiator(
+  vector_exponentiator_function(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_vector_exponentiator),
-    .READY(ready_vector_exponentiator),
+    .START(start_vector_exponentiator_function),
+    .READY(ready_vector_exponentiator_function),
 
-    .DATA_IN_ENABLE(data_in_enable_vector_exponentiator),
-    .DATA_OUT_ENABLE(data_out_enable_vector_exponentiator),
+    .DATA_IN_ENABLE(data_in_enable_vector_exponentiator_function),
+    .DATA_OUT_ENABLE(data_out_enable_vector_exponentiator_function),
 
     // DATA
-    .SIZE_IN(size_in_vector_exponentiator),
-    .DATA_IN(data_in_vector_exponentiator),
-    .DATA_OUT(data_out_vector_exponentiator)
+    .SIZE_IN(size_in_vector_exponentiator_function),
+    .DATA_IN(data_in_vector_exponentiator_function),
+    .DATA_OUT(data_out_vector_exponentiator_function)
   );
 
   // VECTOR SUMMATION

@@ -91,12 +91,12 @@ module ntm_scalar_logistic_function #(
 
   // SCALAR EXPONENTIATOR
   // CONTROL
-  wire start_scalar_exponentiator;
-  wire ready_scalar_exponentiator;
+  wire start_scalar_exponentiator_function;
+  wire ready_scalar_exponentiator_function;
 
   // DATA
-  wire [DATA_SIZE-1:0] data_in_scalar_exponentiator;
-  wire [DATA_SIZE-1:0] data_out_scalar_exponentiator;
+  wire [DATA_SIZE-1:0] data_in_scalar_exponentiator_function;
+  wire [DATA_SIZE-1:0] data_out_scalar_exponentiator_function;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -145,22 +145,22 @@ module ntm_scalar_logistic_function #(
   );
 
   // SCALAR EXPONENTIATOR
-  ntm_scalar_exponentiator #(
+  ntm_scalar_exponentiator_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
   )
-  scalar_exponentiator(
+  scalar_exponentiator_function(
     // GLOBAL
     .CLK(CLK),
     .RST(RST),
 
     // CONTROL
-    .START(start_scalar_exponentiator),
-    .READY(ready_scalar_exponentiator),
+    .START(start_scalar_exponentiator_function),
+    .READY(ready_scalar_exponentiator_function),
 
     // DATA
-    .DATA_IN(data_in_scalar_exponentiator),
-    .DATA_OUT(data_out_scalar_exponentiator)
+    .DATA_IN(data_in_scalar_exponentiator_function),
+    .DATA_OUT(data_out_scalar_exponentiator_function)
   );
 
 endmodule

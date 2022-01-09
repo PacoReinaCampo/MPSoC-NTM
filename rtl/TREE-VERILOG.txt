@@ -96,7 +96,8 @@
 │   │   │   ├── ntm_matrix_cosh_function.sv
 │   │   │   ├── ntm_matrix_cosine_similarity_function.sv
 │   │   │   ├── ntm_matrix_differentiation_function.sv
-│   │   │   ├── ntm_matrix_exponentiator.sv
+│   │   │   ├── ntm_matrix_exponentiator_function.sv
+│   │   │   ├── ntm_matrix_logarithm_function.sv
 │   │   │   ├── ntm_matrix_logistic_function.sv
 │   │   │   ├── ntm_matrix_multiplication_function.sv
 │   │   │   ├── ntm_matrix_oneplus_function.sv
@@ -109,7 +110,8 @@
 │   │   │   ├── ntm_scalar_cosh_function.sv
 │   │   │   ├── ntm_scalar_cosine_similarity_function.sv
 │   │   │   ├── ntm_scalar_differentiation_function.sv
-│   │   │   ├── ntm_scalar_exponentiator.sv
+│   │   │   ├── ntm_scalar_exponentiator_function.sv
+│   │   │   ├── ntm_scalar_logarithm_function.sv
 │   │   │   ├── ntm_scalar_logistic_function.sv
 │   │   │   ├── ntm_scalar_multiplication_function.sv
 │   │   │   ├── ntm_scalar_oneplus_function.sv
@@ -122,7 +124,8 @@
 │   │       ├── ntm_vector_cosh_function.sv
 │   │       ├── ntm_vector_cosine_similarity_function.sv
 │   │       ├── ntm_vector_differentiation_function.sv
-│   │       ├── ntm_vector_exponentiator.sv
+│   │       ├── ntm_vector_exponentiator_function.sv
+│   │       ├── ntm_vector_logarithm_function.sv
 │   │       ├── ntm_vector_logistic_function.sv
 │   │       ├── ntm_vector_multiplication_function.sv
 │   │       ├── ntm_vector_oneplus_function.sv
@@ -134,22 +137,18 @@
 │   │   ├── matrix
 │   │   │   ├── ntm_matrix_integer_adder.sv
 │   │   │   ├── ntm_matrix_integer_divider.sv
-│   │   │   ├── ntm_matrix_integer_full_divider.sv
 │   │   │   └── ntm_matrix_integer_multiplier.sv
 │   │   ├── scalar
 │   │   │   ├── ntm_scalar_integer_adder.sv
 │   │   │   ├── ntm_scalar_integer_divider.sv
-│   │   │   ├── ntm_scalar_integer_full_divider.sv
 │   │   │   └── ntm_scalar_integer_multiplier.sv
 │   │   ├── tensor
 │   │   │   ├── ntm_tensor_integer_adder.sv
 │   │   │   ├── ntm_tensor_integer_divider.sv
-│   │   │   ├── ntm_tensor_integer_full_divider.sv
 │   │   │   └── ntm_tensor_integer_multiplier.sv
 │   │   └── vector
 │   │       ├── ntm_vector_integer_adder.sv
 │   │       ├── ntm_vector_integer_divider.sv
-│   │       ├── ntm_vector_integer_full_divider.sv
 │   │       └── ntm_vector_integer_multiplier.sv
 │   └── modular
 │       ├── matrix

@@ -145,37 +145,37 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
 
   -- VECTOR EXPONENTIATOR
   -- CONTROL
-  signal start_vector_exponentiator : std_logic;
-  signal ready_vector_exponentiator : std_logic;
+  signal start_vector_exponentiator_function : std_logic;
+  signal ready_vector_exponentiator_function : std_logic;
 
-  signal data_in_enable_vector_exponentiator : std_logic;
+  signal data_in_enable_vector_exponentiator_function : std_logic;
 
-  signal data_out_enable_vector_exponentiator : std_logic;
+  signal data_out_enable_vector_exponentiator_function : std_logic;
 
   -- DATA
-  signal size_in_vector_exponentiator  : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_exponentiator_function  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_exponentiator_function  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_exponentiator_function : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR COSINE SIMILARITY
   -- CONTROL
-  signal start_vector_cosine : std_logic;
-  signal ready_vector_cosine : std_logic;
+  signal start_vector_cosine_similarity : std_logic;
+  signal ready_vector_cosine_similarity : std_logic;
 
-  signal data_a_in_vector_enable_vector_cosine : std_logic;
-  signal data_a_in_scalar_enable_vector_cosine : std_logic;
-  signal data_b_in_vector_enable_vector_cosine : std_logic;
-  signal data_b_in_scalar_enable_vector_cosine : std_logic;
+  signal data_a_in_vector_enable_vector_cosine_similarity : std_logic;
+  signal data_a_in_scalar_enable_vector_cosine_similarity : std_logic;
+  signal data_b_in_vector_enable_vector_cosine_similarity : std_logic;
+  signal data_b_in_scalar_enable_vector_cosine_similarity : std_logic;
 
-  signal data_out_vector_enable_vector_cosine : std_logic;
-  signal data_out_scalar_enable_vector_cosine : std_logic;
+  signal data_out_vector_enable_vector_cosine_similarity : std_logic;
+  signal data_out_scalar_enable_vector_cosine_similarity : std_logic;
 
   -- DATA
-  signal size_in_vector_cosine   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_vector_cosine : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_cosine_similarity   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_cosine_similarity  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR SOFTMAX
   -- CONTROL
@@ -200,7 +200,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- C(M,k,beta)[i] = softmax(exponentiation(EULER,cosine(k,M)·beta))[i]
+  -- C(M,k,beta)[i] = softmax(exponentiation(EULER,cosine_similarity(k,M)·beta))[i]
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -232,21 +232,21 @@ begin
           if (START = '1') then
             if (index_loop = ZERO_CONTROL) then
               -- Control Internal
-              start_vector_cosine <= '1';
+              start_vector_cosine_similarity <= '1';
             end if;
 
             -- FSM Control
             controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
           else
             -- Control Internal
-            start_vector_cosine <= '0';
+            start_vector_cosine_similarity <= '0';
           end if;
 
         when INPUT_FIRST_STATE =>  -- STEP 1
 
         when VECTOR_COSINE_SIMILARITY_STATE =>  -- STEP 2
 
-          if (data_out_vector_enable_vector_cosine = '1') then
+          if (data_out_vector_enable_vector_cosine_similarity = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_multiplier <= '1';
@@ -256,7 +256,7 @@ begin
             controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
           else
             -- Control Internal
-            start_vector_cosine <= '0';
+            start_vector_cosine_similarity <= '0';
           end if;
 
         when INPUT_SECOND_STATE =>  -- STEP 3
@@ -266,7 +266,7 @@ begin
           if (data_out_enable_vector_multiplier = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
-              start_vector_exponentiator <= '1';
+              start_vector_exponentiator_function <= '1';
             end if;
 
             -- FSM Control
@@ -278,7 +278,7 @@ begin
 
         when VECTOR_EXPONENTIATOR_STATE =>  -- STEP 5
 
-          if (data_out_enable_vector_exponentiator = '1') then
+          if (data_out_enable_vector_exponentiator_function = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_softmax <= '1';
@@ -288,7 +288,7 @@ begin
             controller_ctrl_fsm_int <= VECTOR_SOFTMAX_STATE;
           else
             -- Control Internal
-            start_vector_exponentiator <= '0';
+            start_vector_exponentiator_function <= '0';
           end if;
 
         when VECTOR_SOFTMAX_STATE =>  -- STEP 6
@@ -330,24 +330,24 @@ begin
 
   -- DATA
   -- VECTOR COSINE SIMILARITY
-  size_in_vector_cosine   <= SIZE_I_IN;
-  length_in_vector_cosine <= SIZE_J_IN;
-  data_a_in_vector_cosine <= K_IN;
-  data_b_in_vector_cosine <= M_IN;
+  size_in_vector_cosine_similarity   <= SIZE_I_IN;
+  length_in_vector_cosine_similarity <= SIZE_J_IN;
+  data_a_in_vector_cosine_similarity <= K_IN;
+  data_b_in_vector_cosine_similarity <= M_IN;
 
   -- VECTOR MULTIPLIER
   size_in_vector_multiplier   <= SIZE_I_IN;
-  data_a_in_vector_multiplier <= data_out_vector_cosine;
+  data_a_in_vector_multiplier <= data_out_vector_cosine_similarity;
   data_b_in_vector_multiplier <= BETA_IN;
 
   -- VECTOR EXPONENTIATOR
-  size_in_vector_exponentiator <= SIZE_I_IN;
-  data_in_vector_exponentiator <= data_out_vector_multiplier;
+  size_in_vector_exponentiator_function <= SIZE_I_IN;
+  data_in_vector_exponentiator_function <= data_out_vector_multiplier;
 
   -- VECTOR SOFTMAX
   size_in_vector_softmax   <= SIZE_I_IN;
   length_in_vector_softmax <= SIZE_J_IN;
-  data_in_vector_softmax   <= data_out_vector_exponentiator;
+  data_in_vector_softmax   <= data_out_vector_exponentiator_function;
 
   -- VECTOR MULTIPLIER
   vector_multiplier : ntm_vector_multiplier
@@ -377,7 +377,7 @@ begin
       );
 
   -- VECTOR EXPONENTIATOR
-  vector_exponentiator : ntm_vector_exponentiator
+  vector_exponentiator_function : ntm_vector_exponentiator_function
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -388,17 +388,17 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_exponentiator,
-      READY => ready_vector_exponentiator,
+      START => start_vector_exponentiator_function,
+      READY => ready_vector_exponentiator_function,
 
-      DATA_IN_ENABLE => data_in_enable_vector_exponentiator,
+      DATA_IN_ENABLE => data_in_enable_vector_exponentiator_function,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
+      DATA_OUT_ENABLE => data_out_enable_vector_exponentiator_function,
 
       -- DATA
-      SIZE_IN  => size_in_vector_exponentiator,
-      DATA_IN  => data_in_vector_exponentiator,
-      DATA_OUT => data_out_vector_exponentiator
+      SIZE_IN  => size_in_vector_exponentiator_function,
+      DATA_IN  => data_in_vector_exponentiator_function,
+      DATA_OUT => data_out_vector_exponentiator_function
       );
 
   -- VECTOR COSINE SIMILARITY
@@ -413,23 +413,23 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_cosine,
-      READY => ready_vector_cosine,
+      START => start_vector_cosine_similarity,
+      READY => ready_vector_cosine_similarity,
 
-      DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_cosine,
-      DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_cosine,
-      DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_cosine,
-      DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_cosine,
+      DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_cosine_similarity,
+      DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_cosine_similarity,
+      DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_cosine_similarity,
+      DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_cosine_similarity,
 
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_cosine,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_cosine,
+      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_cosine_similarity,
+      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_cosine_similarity,
 
       -- DATA
-      SIZE_IN   => size_in_vector_cosine,
-      LENGTH_IN => length_in_vector_cosine,
-      DATA_A_IN => data_a_in_vector_cosine,
-      DATA_B_IN => data_b_in_vector_cosine,
-      DATA_OUT  => data_out_vector_cosine
+      SIZE_IN   => size_in_vector_cosine_similarity,
+      LENGTH_IN => length_in_vector_cosine_similarity,
+      DATA_A_IN => data_a_in_vector_cosine_similarity,
+      DATA_B_IN => data_b_in_vector_cosine_similarity,
+      DATA_OUT  => data_out_vector_cosine_similarity
       );
 
   -- VECTOR SOFTMAX

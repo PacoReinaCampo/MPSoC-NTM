@@ -62,65 +62,53 @@ entity ntm_integer_testbench is
     ENABLE_NTM_SCALAR_INTEGER_ADDER_TEST        : boolean := false;
     ENABLE_NTM_SCALAR_INTEGER_MULTIPLIER_TEST   : boolean := false;
     ENABLE_NTM_SCALAR_INTEGER_DIVIDER_TEST      : boolean := false;
-    ENABLE_NTM_SCALAR_INTEGER_FULL_DIVIDER_TEST : boolean := false;
 
     ENABLE_NTM_SCALAR_INTEGER_ADDER_CASE_0        : boolean := false;
     ENABLE_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_0   : boolean := false;
     ENABLE_NTM_SCALAR_INTEGER_DIVIDER_CASE_0      : boolean := false;
-    ENABLE_NTM_SCALAR_INTEGER_FULL_DIVIDER_CASE_0 : boolean := false;
 
     ENABLE_NTM_SCALAR_INTEGER_ADDER_CASE_1        : boolean := false;
     ENABLE_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_1   : boolean := false;
     ENABLE_NTM_SCALAR_INTEGER_DIVIDER_CASE_1      : boolean := false;
-    ENABLE_NTM_SCALAR_INTEGER_FULL_DIVIDER_CASE_1 : boolean := false;
 
     -- VECTOR-FUNCTIONALITY
     ENABLE_NTM_VECTOR_INTEGER_ADDER_TEST        : boolean := false;
     ENABLE_NTM_VECTOR_INTEGER_MULTIPLIER_TEST   : boolean := false;
     ENABLE_NTM_VECTOR_INTEGER_DIVIDER_TEST      : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGER_FULL_DIVIDER_TEST : boolean := false;
 
     ENABLE_NTM_VECTOR_INTEGER_ADDER_CASE_0        : boolean := false;
     ENABLE_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_0   : boolean := false;
     ENABLE_NTM_VECTOR_INTEGER_DIVIDER_CASE_0      : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGER_FULL_DIVIDER_CASE_0 : boolean := false;
 
     ENABLE_NTM_VECTOR_INTEGER_ADDER_CASE_1        : boolean := false;
     ENABLE_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_1   : boolean := false;
     ENABLE_NTM_VECTOR_INTEGER_DIVIDER_CASE_1      : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGER_FULL_DIVIDER_CASE_1 : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
     ENABLE_NTM_MATRIX_INTEGER_ADDER_TEST        : boolean := false;
     ENABLE_NTM_MATRIX_INTEGER_MULTIPLIER_TEST   : boolean := false;
     ENABLE_NTM_MATRIX_INTEGER_DIVIDER_TEST      : boolean := false;
-    ENABLE_NTM_MATRIX_INTEGER_FULL_DIVIDER_TEST : boolean := false;
 
     ENABLE_NTM_MATRIX_INTEGER_ADDER_CASE_0        : boolean := false;
     ENABLE_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_0   : boolean := false;
     ENABLE_NTM_MATRIX_INTEGER_DIVIDER_CASE_0      : boolean := false;
-    ENABLE_NTM_MATRIX_INTEGER_FULL_DIVIDER_CASE_0 : boolean := false;
 
     ENABLE_NTM_MATRIX_INTEGER_ADDER_CASE_1        : boolean := false;
     ENABLE_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_1   : boolean := false;
     ENABLE_NTM_MATRIX_INTEGER_DIVIDER_CASE_1      : boolean := false;
-    ENABLE_NTM_MATRIX_INTEGER_FULL_DIVIDER_CASE_1 : boolean := false;
 
     -- TENSOR-FUNCTIONALITY
     ENABLE_NTM_TENSOR_INTEGER_ADDER_TEST        : boolean := false;
     ENABLE_NTM_TENSOR_INTEGER_MULTIPLIER_TEST   : boolean := false;
     ENABLE_NTM_TENSOR_INTEGER_DIVIDER_TEST      : boolean := false;
-    ENABLE_NTM_TENSOR_INTEGER_FULL_DIVIDER_TEST : boolean := false;
 
     ENABLE_NTM_TENSOR_INTEGER_ADDER_CASE_0        : boolean := false;
     ENABLE_NTM_TENSOR_INTEGER_MULTIPLIER_CASE_0   : boolean := false;
     ENABLE_NTM_TENSOR_INTEGER_DIVIDER_CASE_0      : boolean := false;
-    ENABLE_NTM_TENSOR_INTEGER_FULL_DIVIDER_CASE_0 : boolean := false;
 
     ENABLE_NTM_TENSOR_INTEGER_ADDER_CASE_1        : boolean := false;
     ENABLE_NTM_TENSOR_INTEGER_MULTIPLIER_CASE_1   : boolean := false;
-    ENABLE_NTM_TENSOR_INTEGER_DIVIDER_CASE_1      : boolean := false;
-    ENABLE_NTM_TENSOR_INTEGER_FULL_DIVIDER_CASE_1 : boolean := false
+    ENABLE_NTM_TENSOR_INTEGER_DIVIDER_CASE_1      : boolean := false
     );
 end ntm_integer_testbench;
 
@@ -175,18 +163,6 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
 
   signal data_out_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal rest_out_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR FULL DIVIDER
-  -- CONTROL
-  signal start_scalar_integer_full_divider : std_logic;
-  signal ready_scalar_integer_full_divider : std_logic;
-
-  -- DATA
-  signal data_a_in_scalar_integer_full_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_integer_full_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal data_integer_out_scalar_integer_full_divider    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_fractional_out_scalar_integer_full_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- VECTOR
@@ -247,24 +223,6 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
 
   signal data_out_vector_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal rest_out_vector_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR FULL DIVIDER
-  -- CONTROL
-  signal start_vector_integer_full_divider : std_logic;
-  signal ready_vector_integer_full_divider : std_logic;
-
-  signal data_a_in_enable_vector_integer_full_divider : std_logic;
-  signal data_b_in_enable_vector_integer_full_divider : std_logic;
-
-  signal data_out_enable_vector_integer_full_divider : std_logic;
-
-  -- DATA
-  signal size_in_vector_integer_full_divider   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_integer_full_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_integer_full_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal data_integer_out_vector_integer_full_divider    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_fractional_out_vector_integer_full_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- MATRIX
@@ -337,28 +295,6 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
 
   signal data_out_matrix_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal rest_out_matrix_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- MATRIX FULL DIVIDER
-  -- CONTROL
-  signal start_matrix_integer_full_divider : std_logic;
-  signal ready_matrix_integer_full_divider : std_logic;
-
-  signal data_a_in_i_enable_matrix_integer_full_divider : std_logic;
-  signal data_a_in_j_enable_matrix_integer_full_divider : std_logic;
-  signal data_b_in_i_enable_matrix_integer_full_divider : std_logic;
-  signal data_b_in_j_enable_matrix_integer_full_divider : std_logic;
-
-  signal data_out_i_enable_matrix_integer_full_divider : std_logic;
-  signal data_out_j_enable_matrix_integer_full_divider : std_logic;
-
-  -- DATA
-  signal size_i_in_matrix_integer_full_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_integer_full_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_integer_full_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_integer_full_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal data_integer_out_matrix_integer_full_divider    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_fractional_out_matrix_integer_full_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- TENSOR
@@ -444,32 +380,6 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
   signal data_out_tensor_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal rest_out_tensor_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- TENSOR FULL DIVIDER
-  -- CONTROL
-  signal start_tensor_integer_full_divider : std_logic;
-  signal ready_tensor_integer_full_divider : std_logic;
-
-  signal data_a_in_i_enable_tensor_integer_full_divider : std_logic;
-  signal data_a_in_j_enable_tensor_integer_full_divider : std_logic;
-  signal data_a_in_k_enable_tensor_integer_full_divider : std_logic;
-  signal data_b_in_i_enable_tensor_integer_full_divider : std_logic;
-  signal data_b_in_j_enable_tensor_integer_full_divider : std_logic;
-  signal data_b_in_k_enable_tensor_integer_full_divider : std_logic;
-
-  signal data_out_i_enable_tensor_integer_full_divider : std_logic;
-  signal data_out_j_enable_tensor_integer_full_divider : std_logic;
-  signal data_out_k_enable_tensor_integer_full_divider : std_logic;
-
-  -- DATA
-  signal size_i_in_tensor_integer_full_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_tensor_integer_full_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_k_in_tensor_integer_full_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_tensor_integer_full_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_tensor_integer_full_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal data_integer_out_tensor_integer_full_divider    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_fractional_out_tensor_integer_full_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-
 begin
 
   -----------------------------------------------------------------------
@@ -536,18 +446,6 @@ begin
       SCALAR_INTEGER_DIVIDER_DATA_OUT => data_out_scalar_integer_divider,
       SCALAR_INTEGER_DIVIDER_REST_OUT => rest_out_scalar_integer_divider,
 
-      -- SCALAR FULL DIVIDER
-      -- CONTROL
-      SCALAR_INTEGER_full_divider_START => start_scalar_integer_full_divider,
-      SCALAR_INTEGER_full_divider_READY => ready_scalar_integer_full_divider,
-
-      -- DATA
-      SCALAR_INTEGER_full_divider_DATA_A_IN => data_a_in_scalar_integer_full_divider,
-      SCALAR_INTEGER_full_divider_DATA_B_IN => data_b_in_scalar_integer_full_divider,
-
-      SCALAR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT    => data_integer_out_scalar_integer_full_divider,
-      SCALAR_INTEGER_FULL_DIVIDER_DATA_FRACTIONAL_OUT => data_fractional_out_scalar_integer_full_divider,
-
       -----------------------------------------------------------------------
       -- STIMULUS VECTOR
       -----------------------------------------------------------------------
@@ -607,24 +505,6 @@ begin
 
       VECTOR_INTEGER_DIVIDER_DATA_OUT => data_out_vector_integer_divider,
       VECTOR_INTEGER_DIVIDER_REST_OUT => rest_out_vector_integer_divider,
-
-      -- VECTOR FULL DIVIDER
-      -- CONTROL
-      VECTOR_INTEGER_full_divider_START => start_vector_integer_full_divider,
-      VECTOR_INTEGER_full_divider_READY => ready_vector_integer_full_divider,
-
-      VECTOR_INTEGER_full_divider_DATA_A_IN_ENABLE => data_a_in_enable_vector_integer_full_divider,
-      VECTOR_INTEGER_full_divider_DATA_B_IN_ENABLE => data_b_in_enable_vector_integer_full_divider,
-
-      VECTOR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT_ENABLE => data_out_enable_vector_integer_full_divider,
-
-      -- DATA
-      VECTOR_INTEGER_full_divider_SIZE_IN   => size_in_vector_integer_full_divider,
-      VECTOR_INTEGER_full_divider_DATA_A_IN => data_a_in_vector_integer_full_divider,
-      VECTOR_INTEGER_full_divider_DATA_B_IN => data_b_in_vector_integer_full_divider,
-
-      VECTOR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT    => data_integer_out_vector_integer_full_divider,
-      VECTOR_INTEGER_FULL_DIVIDER_DATA_FRACTIONAL_OUT => data_fractional_out_vector_integer_full_divider,
 
       -----------------------------------------------------------------------
       -- STIMULUS MATRIX
@@ -697,28 +577,6 @@ begin
 
       MATRIX_INTEGER_DIVIDER_DATA_OUT => data_out_matrix_integer_divider,
       MATRIX_INTEGER_DIVIDER_REST_OUT => rest_out_matrix_integer_divider,
-
-      -- MATRIX FULL DIVIDER
-      -- CONTROL
-      MATRIX_INTEGER_full_divider_START => start_matrix_integer_full_divider,
-      MATRIX_INTEGER_full_divider_READY => ready_matrix_integer_full_divider,
-
-      MATRIX_INTEGER_full_divider_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_integer_full_divider,
-      MATRIX_INTEGER_full_divider_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_integer_full_divider,
-      MATRIX_INTEGER_full_divider_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_integer_full_divider,
-      MATRIX_INTEGER_full_divider_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_integer_full_divider,
-
-      MATRIX_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT_I_ENABLE => data_out_i_enable_matrix_integer_full_divider,
-      MATRIX_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT_J_ENABLE => data_out_j_enable_matrix_integer_full_divider,
-
-      -- DATA
-      MATRIX_INTEGER_full_divider_SIZE_I_IN => size_i_in_matrix_integer_full_divider,
-      MATRIX_INTEGER_full_divider_SIZE_J_IN => size_j_in_matrix_integer_full_divider,
-      MATRIX_INTEGER_full_divider_DATA_A_IN => data_a_in_matrix_integer_full_divider,
-      MATRIX_INTEGER_full_divider_DATA_B_IN => data_b_in_matrix_integer_full_divider,
-
-      MATRIX_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT    => data_integer_out_matrix_integer_full_divider,
-      MATRIX_INTEGER_FULL_DIVIDER_DATA_FRACTIONAL_OUT => data_fractional_out_matrix_integer_full_divider,
 
       -----------------------------------------------------------------------
       -- STIMULUS TENSOR
@@ -802,33 +660,7 @@ begin
       TENSOR_INTEGER_DIVIDER_DATA_B_IN => data_b_in_tensor_integer_divider,
 
       TENSOR_INTEGER_DIVIDER_DATA_OUT => data_out_tensor_integer_divider,
-      TENSOR_INTEGER_DIVIDER_REST_OUT => rest_out_tensor_integer_divider,
-
-      -- TENSOR FULL DIVIDER
-      -- CONTROL
-      TENSOR_INTEGER_full_divider_START => start_tensor_integer_full_divider,
-      TENSOR_INTEGER_full_divider_READY => ready_tensor_integer_full_divider,
-
-      TENSOR_INTEGER_full_divider_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_integer_full_divider,
-      TENSOR_INTEGER_full_divider_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_integer_full_divider,
-      TENSOR_INTEGER_full_divider_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_integer_full_divider,
-      TENSOR_INTEGER_full_divider_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_integer_full_divider,
-      TENSOR_INTEGER_full_divider_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_integer_full_divider,
-      TENSOR_INTEGER_full_divider_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_integer_full_divider,
-
-      TENSOR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT_I_ENABLE => data_out_i_enable_tensor_integer_full_divider,
-      TENSOR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT_J_ENABLE => data_out_j_enable_tensor_integer_full_divider,
-      TENSOR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT_K_ENABLE => data_out_k_enable_tensor_integer_full_divider,
-
-      -- DATA
-      TENSOR_INTEGER_full_divider_SIZE_I_IN => size_i_in_tensor_integer_full_divider,
-      TENSOR_INTEGER_full_divider_SIZE_J_IN => size_j_in_tensor_integer_full_divider,
-      TENSOR_INTEGER_full_divider_SIZE_K_IN => size_k_in_tensor_integer_full_divider,
-      TENSOR_INTEGER_full_divider_DATA_A_IN => data_a_in_tensor_integer_full_divider,
-      TENSOR_INTEGER_full_divider_DATA_B_IN => data_b_in_tensor_integer_full_divider,
-
-      TENSOR_INTEGER_FULL_DIVIDER_DATA_INTEGER_OUT    => data_integer_out_tensor_integer_full_divider,
-      TENSOR_INTEGER_FULL_DIVIDER_DATA_FRACTIONAL_OUT => data_fractional_out_tensor_integer_full_divider
+      TENSOR_INTEGER_DIVIDER_REST_OUT => rest_out_tensor_integer_divider
       );
 
   -----------------------------------------------------------------------
@@ -911,31 +743,6 @@ begin
         REST_OUT => rest_out_scalar_integer_divider
         );
   end generate ntm_scalar_integer_divider_test;
-
-  -- SCALAR FULL DIVIDER
-  ntm_scalar_integer_full_divider_test : if (ENABLE_NTM_SCALAR_INTEGER_full_divider_TEST) generate
-    scalar_integer_full_divider : ntm_scalar_integer_full_divider
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_scalar_integer_full_divider,
-        READY => ready_scalar_integer_full_divider,
-
-        -- DATA
-        DATA_A_IN => data_a_in_scalar_integer_full_divider,
-        DATA_B_IN => data_b_in_scalar_integer_full_divider,
-
-        DATA_INTEGER_OUT    => data_integer_out_scalar_integer_full_divider,
-        DATA_FRACTIONAL_OUT => data_fractional_out_scalar_integer_full_divider
-        );
-  end generate ntm_scalar_integer_full_divider_test;
 
   -----------------------------------------------------------------------
   -- VECTOR
@@ -1035,37 +842,6 @@ begin
         REST_OUT => rest_out_vector_integer_divider
         );
   end generate ntm_vector_integer_divider_test;
-
-  -- VECTOR FULL DIVIDER
-  ntm_vector_integer_full_divider_test : if (ENABLE_NTM_VECTOR_INTEGER_full_divider_TEST) generate
-    vector_integer_full_divider : ntm_vector_integer_full_divider
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_vector_integer_full_divider,
-        READY => ready_vector_integer_full_divider,
-
-        DATA_A_IN_ENABLE => data_a_in_enable_vector_integer_full_divider,
-        DATA_B_IN_ENABLE => data_b_in_enable_vector_integer_full_divider,
-
-        DATA_OUT_ENABLE => data_out_enable_vector_integer_full_divider,
-
-        -- DATA
-        SIZE_IN   => size_in_vector_integer_full_divider,
-        DATA_A_IN => data_a_in_vector_integer_full_divider,
-        DATA_B_IN => data_b_in_vector_integer_full_divider,
-
-        DATA_INTEGER_OUT    => data_integer_out_vector_integer_full_divider,
-        DATA_FRACTIONAL_OUT => data_fractional_out_vector_integer_full_divider
-        );
-  end generate ntm_vector_integer_full_divider_test;
 
   -----------------------------------------------------------------------
   -- MATRIX
@@ -1177,41 +953,6 @@ begin
         REST_OUT => rest_out_matrix_integer_divider
         );
   end generate ntm_matrix_integer_divider_test;
-
-  -- MATRIX FULL DIVIDER
-  ntm_matrix_integer_full_divider_test : if (ENABLE_NTM_MATRIX_INTEGER_full_divider_TEST) generate
-    matrix_integer_full_divider : ntm_matrix_integer_full_divider
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_matrix_integer_full_divider,
-        READY => ready_matrix_integer_full_divider,
-
-        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_integer_full_divider,
-        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_integer_full_divider,
-        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_integer_full_divider,
-        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_integer_full_divider,
-
-        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_integer_full_divider,
-        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_integer_full_divider,
-
-        -- DATA
-        SIZE_I_IN => size_i_in_matrix_integer_full_divider,
-        SIZE_J_IN => size_j_in_matrix_integer_full_divider,
-        DATA_A_IN => data_a_in_matrix_integer_full_divider,
-        DATA_B_IN => data_b_in_matrix_integer_full_divider,
-
-        DATA_INTEGER_OUT    => data_integer_out_matrix_integer_full_divider,
-        DATA_FRACTIONAL_OUT => data_fractional_out_matrix_integer_full_divider
-        );
-  end generate ntm_matrix_integer_full_divider_test;
 
   -----------------------------------------------------------------------
   -- TENSOR
@@ -1335,44 +1076,5 @@ begin
         REST_OUT => rest_out_tensor_integer_divider
         );
   end generate ntm_tensor_integer_divider_test;
-
-  -- TENSOR FULL DIVIDER
-  ntm_tensor_integer_full_divider_test : if (ENABLE_NTM_TENSOR_INTEGER_full_divider_TEST) generate
-    tensor_integer_full_divider : ntm_tensor_integer_full_divider
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_tensor_integer_full_divider,
-        READY => ready_tensor_integer_full_divider,
-
-        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_integer_full_divider,
-        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_integer_full_divider,
-        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_integer_full_divider,
-        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_integer_full_divider,
-        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_integer_full_divider,
-        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_integer_full_divider,
-
-        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_integer_full_divider,
-        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_integer_full_divider,
-        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_integer_full_divider,
-
-        -- DATA
-        SIZE_I_IN => size_i_in_tensor_integer_full_divider,
-        SIZE_J_IN => size_j_in_tensor_integer_full_divider,
-        SIZE_K_IN => size_k_in_tensor_integer_full_divider,
-        DATA_A_IN => data_a_in_tensor_integer_full_divider,
-        DATA_B_IN => data_b_in_tensor_integer_full_divider,
-
-        DATA_INTEGER_OUT    => data_integer_out_tensor_integer_full_divider,
-        DATA_FRACTIONAL_OUT => data_fractional_out_tensor_integer_full_divider
-        );
-  end generate ntm_tensor_integer_full_divider_test;
 
 end ntm_integer_testbench_architecture;

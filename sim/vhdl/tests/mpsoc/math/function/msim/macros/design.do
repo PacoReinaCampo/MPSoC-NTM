@@ -28,7 +28,7 @@ alias ntm_scalar_cosh_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_exponentiator.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_cosh_function.vhd
 }
 
@@ -57,15 +57,15 @@ alias ntm_scalar_differentiation_function_design_compilation {
 }
 
 ##################################################################################################
-# ntm_scalar_exponentiator_design_compilation ####################################################
+# ntm_scalar_exponentiator_function_design_compilation ###########################################
 ##################################################################################################
 
-alias ntm_scalar_exponentiator_design_compilation {
+alias ntm_scalar_exponentiator_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_exponentiator.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_exponentiator_function.vhd
 }
 
 ##################################################################################################
@@ -77,7 +77,7 @@ alias ntm_scalar_logarithm_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_exponentiator.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_logarithm_function.vhd
 }
 
@@ -89,7 +89,7 @@ alias ntm_scalar_logistic_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_exponentiator.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_logistic_function.vhd
 }
 
@@ -110,7 +110,7 @@ alias ntm_scalar_multiplication_function_design_compilation {
 alias ntm_scalar_oneplus_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_exponentiator.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_oneplus_function.vhd
 }
 
@@ -123,7 +123,7 @@ alias ntm_scalar_sinh_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_exponentiator.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_sinh_function.vhd
 }
 
@@ -135,7 +135,7 @@ alias ntm_scalar_softmax_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_exponentiator.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_softmax_function.vhd
 }
 
@@ -158,7 +158,7 @@ alias ntm_scalar_tanh_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_exponentiator.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_tanh_function.vhd
 }
 
@@ -181,7 +181,7 @@ alias d04 {
 }
 
 alias d05 {
-  ntm_scalar_exponentiator_design_compilation 
+  ntm_scalar_exponentiator_function_design_compilation 
 }
 
 alias d06 {
@@ -221,7 +221,7 @@ echo "d01 . NTM-SCALAR-CONVOLUTION-FUNCTION-TEST"
 echo "d02 . NTM-SCALAR-COSH-FUNCTION-TEST"
 echo "d03 . NTM-SCALAR-COSINE_SIMILARITY-FUNCTION-TEST"
 echo "d04 . NTM-SCALAR-DIFFERENTIATION-FUNCTION-TEST"
-echo "d05 . NTM-SCALAR-EXPONENTIATOR-TEST"
+echo "d05 . NTM-SCALAR-EXPONENTIATOR-FUNCTION-FUNCTION-TEST"
 echo "d06 . NTM-SCALAR-LOGARITHM-FUNCTION-TEST"
 echo "d07 . NTM-SCALAR-LOGISTIC-FUNCTION-TEST"
 echo "d08 . NTM-SCALAR-MULTIPLICATION-FUNCTION-TEST"

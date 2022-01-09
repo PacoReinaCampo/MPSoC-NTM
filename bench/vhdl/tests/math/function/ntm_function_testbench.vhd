@@ -228,19 +228,19 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- SCALAR COSINE SIMILARITY
   -- CONTROL
-  signal start_scalar_cosine : std_logic;
-  signal ready_scalar_cosine : std_logic;
+  signal start_scalar_cosine_similarity : std_logic;
+  signal ready_scalar_cosine_similarity : std_logic;
 
-  signal data_a_in_enable_scalar_cosine : std_logic;
-  signal data_b_in_enable_scalar_cosine : std_logic;
+  signal data_a_in_enable_scalar_cosine_similarity : std_logic;
+  signal data_b_in_enable_scalar_cosine_similarity : std_logic;
 
-  signal data_out_enable_scalar_cosine : std_logic;
+  signal data_out_enable_scalar_cosine_similarity : std_logic;
 
   -- DATA
-  signal length_in_scalar_cosine : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_scalar_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_scalar_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_cosine_similarity  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR DIFFERENTIATION
   -- CONTROL
@@ -393,23 +393,23 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- VECTOR COSINE SIMILARITY
   -- CONTROL
-  signal start_vector_cosine : std_logic;
-  signal ready_vector_cosine : std_logic;
+  signal start_vector_cosine_similarity : std_logic;
+  signal ready_vector_cosine_similarity : std_logic;
 
-  signal data_a_in_vector_enable_vector_cosine : std_logic;
-  signal data_a_in_scalar_enable_vector_cosine : std_logic;
-  signal data_b_in_vector_enable_vector_cosine : std_logic;
-  signal data_b_in_scalar_enable_vector_cosine : std_logic;
+  signal data_a_in_vector_enable_vector_cosine_similarity : std_logic;
+  signal data_a_in_scalar_enable_vector_cosine_similarity : std_logic;
+  signal data_b_in_vector_enable_vector_cosine_similarity : std_logic;
+  signal data_b_in_scalar_enable_vector_cosine_similarity : std_logic;
 
-  signal data_out_vector_enable_vector_cosine : std_logic;
-  signal data_out_scalar_enable_vector_cosine : std_logic;
+  signal data_out_vector_enable_vector_cosine_similarity : std_logic;
+  signal data_out_scalar_enable_vector_cosine_similarity : std_logic;
 
   -- DATA
-  signal size_in_vector_cosine   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_vector_cosine : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_cosine_similarity   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_cosine_similarity  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR DIFFERENTIATION
   -- CONTROL
@@ -611,27 +611,27 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
 
   -- MATRIX COSINE SIMILARITY
   -- CONTROL
-  signal start_matrix_cosine : std_logic;
-  signal ready_matrix_cosine : std_logic;
+  signal start_matrix_cosine_similarity : std_logic;
+  signal ready_matrix_cosine_similarity : std_logic;
 
-  signal data_a_in_matrix_enable_matrix_cosine : std_logic;
-  signal data_a_in_vector_enable_matrix_cosine : std_logic;
-  signal data_a_in_scalar_enable_matrix_cosine : std_logic;
-  signal data_b_in_matrix_enable_matrix_cosine : std_logic;
-  signal data_b_in_vector_enable_matrix_cosine : std_logic;
-  signal data_b_in_scalar_enable_matrix_cosine : std_logic;
+  signal data_a_in_matrix_enable_matrix_cosine_similarity : std_logic;
+  signal data_a_in_vector_enable_matrix_cosine_similarity : std_logic;
+  signal data_a_in_scalar_enable_matrix_cosine_similarity : std_logic;
+  signal data_b_in_matrix_enable_matrix_cosine_similarity : std_logic;
+  signal data_b_in_vector_enable_matrix_cosine_similarity : std_logic;
+  signal data_b_in_scalar_enable_matrix_cosine_similarity : std_logic;
 
-  signal data_out_matrix_enable_matrix_cosine : std_logic;
-  signal data_out_vector_enable_matrix_cosine : std_logic;
-  signal data_out_scalar_enable_matrix_cosine : std_logic;
+  signal data_out_matrix_enable_matrix_cosine_similarity : std_logic;
+  signal data_out_vector_enable_matrix_cosine_similarity : std_logic;
+  signal data_out_scalar_enable_matrix_cosine_similarity : std_logic;
 
   -- DATA
-  signal size_i_in_matrix_cosine : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_cosine : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_matrix_cosine : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_cosine : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_cosine  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_matrix_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_cosine_similarity  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX DIFFERENTIATION
   -- CONTROL
@@ -871,19 +871,19 @@ begin
 
       -- SCALAR COSINE SIMILARITY
       -- CONTROL
-      SCALAR_COSINE_SIMILARITY_START => start_scalar_cosine,
-      SCALAR_COSINE_SIMILARITY_READY => ready_scalar_cosine,
+      SCALAR_COSINE_SIMILARITY_START => start_scalar_cosine_similarity,
+      SCALAR_COSINE_SIMILARITY_READY => ready_scalar_cosine_similarity,
 
-      SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE => data_a_in_enable_scalar_cosine,
-      SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE => data_b_in_enable_scalar_cosine,
+      SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE => data_a_in_enable_scalar_cosine_similarity,
+      SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE => data_b_in_enable_scalar_cosine_similarity,
 
-      SCALAR_COSINE_SIMILARITY_DATA_OUT_ENABLE => data_out_enable_scalar_cosine,
+      SCALAR_COSINE_SIMILARITY_DATA_OUT_ENABLE => data_out_enable_scalar_cosine_similarity,
 
       -- DATA
-      SCALAR_COSINE_SIMILARITY_LENGTH_IN => length_in_scalar_cosine,
-      SCALAR_COSINE_SIMILARITY_DATA_A_IN => data_a_in_scalar_cosine,
-      SCALAR_COSINE_SIMILARITY_DATA_B_IN => data_b_in_scalar_cosine,
-      SCALAR_COSINE_SIMILARITY_DATA_OUT  => data_out_scalar_cosine,
+      SCALAR_COSINE_SIMILARITY_LENGTH_IN => length_in_scalar_cosine_similarity,
+      SCALAR_COSINE_SIMILARITY_DATA_A_IN => data_a_in_scalar_cosine_similarity,
+      SCALAR_COSINE_SIMILARITY_DATA_B_IN => data_b_in_scalar_cosine_similarity,
+      SCALAR_COSINE_SIMILARITY_DATA_OUT  => data_out_scalar_cosine_similarity,
 
       -- SCALAR DIFFERENTIATION
       -- CONTROL
@@ -1036,23 +1036,23 @@ begin
 
       -- VECTOR COSINE SIMILARITY
       -- CONTROL
-      VECTOR_COSINE_SIMILARITY_START => start_vector_cosine,
-      VECTOR_COSINE_SIMILARITY_READY => ready_vector_cosine,
+      VECTOR_COSINE_SIMILARITY_START => start_vector_cosine_similarity,
+      VECTOR_COSINE_SIMILARITY_READY => ready_vector_cosine_similarity,
 
-      VECTOR_COSINE_SIMILARITY_DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_cosine,
-      VECTOR_COSINE_SIMILARITY_DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_cosine,
-      VECTOR_COSINE_SIMILARITY_DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_cosine,
-      VECTOR_COSINE_SIMILARITY_DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_cosine,
+      VECTOR_COSINE_SIMILARITY_DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_cosine_similarity,
+      VECTOR_COSINE_SIMILARITY_DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_cosine_similarity,
+      VECTOR_COSINE_SIMILARITY_DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_cosine_similarity,
+      VECTOR_COSINE_SIMILARITY_DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_cosine_similarity,
 
-      VECTOR_COSINE_SIMILARITY_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_cosine,
-      VECTOR_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_cosine,
+      VECTOR_COSINE_SIMILARITY_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_cosine_similarity,
+      VECTOR_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_cosine_similarity,
 
       -- DATA
-      VECTOR_COSINE_SIMILARITY_SIZE_IN   => size_in_vector_cosine,
-      VECTOR_COSINE_SIMILARITY_LENGTH_IN => length_in_vector_cosine,
-      VECTOR_COSINE_SIMILARITY_DATA_A_IN => data_a_in_vector_cosine,
-      VECTOR_COSINE_SIMILARITY_DATA_B_IN => data_b_in_vector_cosine,
-      VECTOR_COSINE_SIMILARITY_DATA_OUT  => data_out_vector_cosine,
+      VECTOR_COSINE_SIMILARITY_SIZE_IN   => size_in_vector_cosine_similarity,
+      VECTOR_COSINE_SIMILARITY_LENGTH_IN => length_in_vector_cosine_similarity,
+      VECTOR_COSINE_SIMILARITY_DATA_A_IN => data_a_in_vector_cosine_similarity,
+      VECTOR_COSINE_SIMILARITY_DATA_B_IN => data_b_in_vector_cosine_similarity,
+      VECTOR_COSINE_SIMILARITY_DATA_OUT  => data_out_vector_cosine_similarity,
 
       -- VECTOR DIFFERENTIATION
       -- CONTROL
@@ -1253,27 +1253,27 @@ begin
 
       -- MATRIX COSINE SIMILARITY
       -- CONTROL
-      MATRIX_COSINE_SIMILARITY_START => start_matrix_cosine,
-      MATRIX_COSINE_SIMILARITY_READY => ready_matrix_cosine,
+      MATRIX_COSINE_SIMILARITY_START => start_matrix_cosine_similarity,
+      MATRIX_COSINE_SIMILARITY_READY => ready_matrix_cosine_similarity,
 
-      MATRIX_COSINE_SIMILARITY_DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_cosine,
-      MATRIX_COSINE_SIMILARITY_DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_cosine,
-      MATRIX_COSINE_SIMILARITY_DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_cosine,
-      MATRIX_COSINE_SIMILARITY_DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_cosine,
-      MATRIX_COSINE_SIMILARITY_DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_cosine,
-      MATRIX_COSINE_SIMILARITY_DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_cosine,
+      MATRIX_COSINE_SIMILARITY_DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_cosine_similarity,
+      MATRIX_COSINE_SIMILARITY_DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_cosine_similarity,
+      MATRIX_COSINE_SIMILARITY_DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_cosine_similarity,
+      MATRIX_COSINE_SIMILARITY_DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_cosine_similarity,
+      MATRIX_COSINE_SIMILARITY_DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_cosine_similarity,
+      MATRIX_COSINE_SIMILARITY_DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_cosine_similarity,
 
-      MATRIX_COSINE_SIMILARITY_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_cosine,
-      MATRIX_COSINE_SIMILARITY_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_cosine,
-      MATRIX_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_cosine,
+      MATRIX_COSINE_SIMILARITY_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_cosine_similarity,
+      MATRIX_COSINE_SIMILARITY_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_cosine_similarity,
+      MATRIX_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_cosine_similarity,
 
       -- DATA
-      MATRIX_COSINE_SIMILARITY_SIZE_I_IN => size_i_in_matrix_cosine,
-      MATRIX_COSINE_SIMILARITY_SIZE_J_IN => size_j_in_matrix_cosine,
-      MATRIX_COSINE_SIMILARITY_LENGTH_IN => length_in_matrix_cosine,
-      MATRIX_COSINE_SIMILARITY_DATA_A_IN => data_a_in_matrix_cosine,
-      MATRIX_COSINE_SIMILARITY_DATA_B_IN => data_b_in_matrix_cosine,
-      MATRIX_COSINE_SIMILARITY_DATA_OUT  => data_out_matrix_cosine,
+      MATRIX_COSINE_SIMILARITY_SIZE_I_IN => size_i_in_matrix_cosine_similarity,
+      MATRIX_COSINE_SIMILARITY_SIZE_J_IN => size_j_in_matrix_cosine_similarity,
+      MATRIX_COSINE_SIMILARITY_LENGTH_IN => length_in_matrix_cosine_similarity,
+      MATRIX_COSINE_SIMILARITY_DATA_A_IN => data_a_in_matrix_cosine_similarity,
+      MATRIX_COSINE_SIMILARITY_DATA_B_IN => data_b_in_matrix_cosine_similarity,
+      MATRIX_COSINE_SIMILARITY_DATA_OUT  => data_out_matrix_cosine_similarity,
 
       -- MATRIX DIFFERENTIATION
       -- CONTROL
@@ -1527,19 +1527,19 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_scalar_cosine,
-        READY => ready_scalar_cosine,
+        START => start_scalar_cosine_similarity,
+        READY => ready_scalar_cosine_similarity,
 
-        DATA_A_IN_ENABLE => data_a_in_enable_scalar_cosine,
-        DATA_B_IN_ENABLE => data_b_in_enable_scalar_cosine,
+        DATA_A_IN_ENABLE => data_a_in_enable_scalar_cosine_similarity,
+        DATA_B_IN_ENABLE => data_b_in_enable_scalar_cosine_similarity,
 
-        DATA_OUT_ENABLE => data_out_enable_scalar_cosine,
+        DATA_OUT_ENABLE => data_out_enable_scalar_cosine_similarity,
 
         -- DATA
-        LENGTH_IN => length_in_scalar_cosine,
-        DATA_A_IN => data_a_in_scalar_cosine,
-        DATA_B_IN => data_b_in_scalar_cosine,
-        DATA_OUT  => data_out_scalar_cosine
+        LENGTH_IN => length_in_scalar_cosine_similarity,
+        DATA_A_IN => data_a_in_scalar_cosine_similarity,
+        DATA_B_IN => data_b_in_scalar_cosine_similarity,
+        DATA_OUT  => data_out_scalar_cosine_similarity
         );
   end generate ntm_scalar_cosine_similarity_function_test;
 
@@ -1572,8 +1572,8 @@ begin
   end generate ntm_scalar_differentiation_function_test;
 
   -- SCALAR EXPONENTIATOR
-  ntm_scalar_exponentiator_test : if (ENABLE_NTM_SCALAR_EXPONENTIATOR_TEST) generate
-    scalar_exponentiator : ntm_scalar_exponentiator
+  ntm_scalar_exponentiator_function_test : if (ENABLE_NTM_SCALAR_EXPONENTIATOR_TEST) generate
+    scalar_exponentiator_function : ntm_scalar_exponentiator_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -1591,7 +1591,7 @@ begin
         DATA_IN   => data_in_scalar_exponentiator,
         DATA_OUT  => data_out_scalar_exponentiator
         );
-  end generate ntm_scalar_exponentiator_test;
+  end generate ntm_scalar_exponentiator_function_test;
 
   -- SCALAR LOGARITHM
   ntm_scalar_logarithm_function_test : if (ENABLE_NTM_SCALAR_LOGARITHM_TEST) generate
@@ -1861,23 +1861,23 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_vector_cosine,
-        READY => ready_vector_cosine,
+        START => start_vector_cosine_similarity,
+        READY => ready_vector_cosine_similarity,
 
-        DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_cosine,
-        DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_cosine,
-        DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_cosine,
-        DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_cosine,
+        DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_cosine_similarity,
+        DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_cosine_similarity,
+        DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_cosine_similarity,
+        DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_cosine_similarity,
 
-        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_cosine,
-        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_cosine,
+        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_cosine_similarity,
+        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_cosine_similarity,
 
         -- DATA
-        SIZE_IN   => size_in_vector_cosine,
-        LENGTH_IN => length_in_vector_cosine,
-        DATA_A_IN => data_a_in_vector_cosine,
-        DATA_B_IN => data_b_in_vector_cosine,
-        DATA_OUT  => data_out_vector_cosine
+        SIZE_IN   => size_in_vector_cosine_similarity,
+        LENGTH_IN => length_in_vector_cosine_similarity,
+        DATA_A_IN => data_a_in_vector_cosine_similarity,
+        DATA_B_IN => data_b_in_vector_cosine_similarity,
+        DATA_OUT  => data_out_vector_cosine_similarity
         );
   end generate ntm_vector_cosine_similarity_function_test;
 
@@ -1913,8 +1913,8 @@ begin
   end generate ntm_vector_differentiation_function_test;
 
   -- VECTOR EXPONENTIATOR
-  ntm_vector_exponentiator_test : if (ENABLE_NTM_VECTOR_EXPONENTIATOR_TEST) generate
-    vector_exponentiator : ntm_vector_exponentiator
+  ntm_vector_exponentiator_function_test : if (ENABLE_NTM_VECTOR_EXPONENTIATOR_TEST) generate
+    vector_exponentiator_function : ntm_vector_exponentiator_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -1937,7 +1937,7 @@ begin
         DATA_IN   => data_in_vector_exponentiator,
         DATA_OUT  => data_out_vector_exponentiator
         );
-  end generate ntm_vector_exponentiator_test;
+  end generate ntm_vector_exponentiator_function_test;
 
   -- VECTOR LOGARITHM
   ntm_vector_logarithm_function_test : if (ENABLE_NTM_VECTOR_LOGARITHM_TEST) generate
@@ -2249,27 +2249,27 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_matrix_cosine,
-        READY => ready_matrix_cosine,
+        START => start_matrix_cosine_similarity,
+        READY => ready_matrix_cosine_similarity,
 
-        DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_cosine,
-        DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_cosine,
-        DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_cosine,
-        DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_cosine,
-        DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_cosine,
-        DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_cosine,
+        DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_cosine_similarity,
+        DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_cosine_similarity,
+        DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_cosine_similarity,
+        DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_cosine_similarity,
+        DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_cosine_similarity,
+        DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_cosine_similarity,
 
-        DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_cosine,
-        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_cosine,
-        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_cosine,
+        DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_cosine_similarity,
+        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_cosine_similarity,
+        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_cosine_similarity,
 
         -- DATA
-        SIZE_I_IN => size_i_in_matrix_cosine,
-        SIZE_J_IN => size_j_in_matrix_cosine,
-        LENGTH_IN => length_in_matrix_cosine,
-        DATA_A_IN => data_a_in_matrix_cosine,
-        DATA_B_IN => data_b_in_matrix_cosine,
-        DATA_OUT  => data_out_matrix_cosine
+        SIZE_I_IN => size_i_in_matrix_cosine_similarity,
+        SIZE_J_IN => size_j_in_matrix_cosine_similarity,
+        LENGTH_IN => length_in_matrix_cosine_similarity,
+        DATA_A_IN => data_a_in_matrix_cosine_similarity,
+        DATA_B_IN => data_b_in_matrix_cosine_similarity,
+        DATA_OUT  => data_out_matrix_cosine_similarity
         );
   end generate ntm_matrix_cosine_similarity_function_test;
 
@@ -2308,8 +2308,8 @@ begin
   end generate ntm_matrix_differentiation_function_test;
 
   -- MATRIX EXPONENTIATOR
-  ntm_matrix_exponentiator_test : if (ENABLE_NTM_MATRIX_EXPONENTIATOR_TEST) generate
-    matrix_exponentiator : ntm_matrix_exponentiator
+  ntm_matrix_exponentiator_function_test : if (ENABLE_NTM_MATRIX_EXPONENTIATOR_TEST) generate
+    matrix_exponentiator_function : ntm_matrix_exponentiator_function
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -2335,7 +2335,7 @@ begin
         DATA_IN   => data_in_matrix_exponentiator,
         DATA_OUT  => data_out_matrix_exponentiator
         );
-  end generate ntm_matrix_exponentiator_test;
+  end generate ntm_matrix_exponentiator_function_test;
 
   -- MATRIX LOGARITHM
   ntm_matrix_logarithm_function_test : if (ENABLE_NTM_MATRIX_LOGARITHM_TEST) generate

@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_matrix_integer_full_divider is
+entity ntm_matrix_exponentiator_function is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -58,32 +58,27 @@ entity ntm_matrix_integer_full_divider is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_A_IN_I_ENABLE : in std_logic;
-    DATA_A_IN_J_ENABLE : in std_logic;
-    DATA_B_IN_I_ENABLE : in std_logic;
-    DATA_B_IN_J_ENABLE : in std_logic;
+    DATA_IN_I_ENABLE : in std_logic;
+    DATA_IN_J_ENABLE : in std_logic;
 
     DATA_OUT_I_ENABLE : out std_logic;
     DATA_OUT_J_ENABLE : out std_logic;
 
     -- DATA
-    SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-    DATA_INTEGER_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_FRACTIONAL_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
-architecture ntm_matrix_integer_full_divider_architecture of ntm_matrix_integer_full_divider is
+architecture ntm_matrix_exponentiator_function_architecture of ntm_matrix_exponentiator_function is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type divider_ctrl_fsm is (
+  type exponentiator_function_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
@@ -115,34 +110,25 @@ architecture ntm_matrix_integer_full_divider_architecture of ntm_matrix_integer_
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal divider_ctrl_fsm_int : divider_ctrl_fsm;
+  signal exponentiator_function_ctrl_fsm_int : exponentiator_function_ctrl_fsm;
 
   -- Internal Signals
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_a_in_i_divider_int : std_logic;
-  signal data_a_in_j_divider_int : std_logic;
-  signal data_b_in_i_divider_int : std_logic;
-  signal data_b_in_j_divider_int : std_logic;
-
-  -- VECTOR DIVIDER
+  -- VECTOR EXPONENTIATOR
   -- CONTROL
-  signal start_vector_integer_full_divider : std_logic;
-  signal ready_vector_integer_full_divider : std_logic;
+  signal start_vector_exponentiator_function : std_logic;
+  signal ready_vector_exponentiator_function : std_logic;
 
-  signal data_a_in_enable_vector_integer_full_divider : std_logic;
-  signal data_b_in_enable_vector_integer_full_divider : std_logic;
+  signal data_in_enable_vector_exponentiator_function : std_logic;
 
-  signal data_out_enable_vector_integer_full_divider : std_logic;
+  signal data_out_enable_vector_exponentiator_function : std_logic;
 
   -- DATA
-  signal size_in_vector_integer_full_divider   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_integer_full_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_integer_full_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  signal data_integer_out_vector_integer_full_divider    : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_fractional_out_vector_integer_full_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_exponentiator_function   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_exponentiator_function   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_exponentiator_function  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -150,15 +136,14 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_INTEGER_OUT.DATA_FRACTIONAL_OUT = DATA_A_IN / DATA_B_IN
+  -- DATA_OUT = exponentiator_function(DATA_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_INTEGER_OUT    <= ZERO_DATA;
-      DATA_FRACTIONAL_OUT <= ZERO_DATA;
+      DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -167,27 +152,20 @@ begin
       DATA_OUT_J_ENABLE <= '0';
 
       -- Control Internal
-      start_vector_integer_full_divider <= '0';
+      start_vector_exponentiator_function <= '0';
 
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
 
-      data_a_in_enable_vector_integer_full_divider <= '0';
-      data_b_in_enable_vector_integer_full_divider <= '0';
-
-      data_a_in_i_divider_int <= '0';
-      data_a_in_j_divider_int <= '0';
-      data_b_in_i_divider_int <= '0';
-      data_b_in_j_divider_int <= '0';
+      data_in_enable_vector_exponentiator_function <= '0';
 
       -- Data Internal
-      size_in_vector_integer_full_divider   <= ZERO_CONTROL;
-      data_a_in_vector_integer_full_divider <= ZERO_DATA;
-      data_b_in_vector_integer_full_divider <= ZERO_DATA;
+      size_in_vector_exponentiator_function   <= ZERO_CONTROL;
+      data_in_vector_exponentiator_function   <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
-      case divider_ctrl_fsm_int is
+      case exponentiator_function_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -196,121 +174,60 @@ begin
           DATA_OUT_J_ENABLE <= '0';
 
           if (START = '1') then
-            -- Assignations
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            divider_ctrl_fsm_int <= INPUT_I_STATE;
+            exponentiator_function_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
         when INPUT_I_STATE =>  -- STEP 1
 
-          if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
+          if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
             -- Data Inputs
-            data_a_in_vector_integer_full_divider <= DATA_A_IN;
+            size_in_vector_exponentiator_function   <= SIZE_J_IN;
+
+            data_in_vector_exponentiator_function <= DATA_IN;
 
             -- Control Internal
-            data_a_in_enable_vector_integer_full_divider <= '1';
+            start_vector_exponentiator_function <= '1';
 
-            data_a_in_i_divider_int <= '1';
-            data_a_in_j_divider_int <= '1';
-          else
-            -- Control Internal
-            data_a_in_enable_vector_integer_full_divider <= '0';
-          end if;
+            data_in_enable_vector_exponentiator_function <= '1';
 
-          if (((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
-            -- Data Inputs
-            data_b_in_vector_integer_full_divider <= DATA_B_IN;
-
-            -- Control Internal
-            data_b_in_enable_vector_integer_full_divider <= '1';
-
-            data_b_in_i_divider_int <= '1';
-            data_b_in_j_divider_int <= '1';
-          else
-            -- Control Internal
-            data_b_in_enable_vector_integer_full_divider <= '0';
+            -- FSM Control
+            exponentiator_function_ctrl_fsm_int <= ENDER_J_STATE;
           end if;
 
           -- Control Outputs
           DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
 
-          if (data_a_in_i_divider_int = '1' and data_a_in_j_divider_int = '1' and data_b_in_i_divider_int = '1' and data_b_in_j_divider_int = '1') then
-            -- Data Inputs
-            size_in_vector_integer_full_divider <= SIZE_J_IN;
-
-            -- Control Internal
-            start_vector_integer_full_divider <= '1';
-
-            data_a_in_enable_vector_integer_full_divider <= '0';
-            data_b_in_enable_vector_integer_full_divider <= '0';
-
-            data_a_in_i_divider_int <= '0';
-            data_a_in_j_divider_int <= '0';
-            data_b_in_i_divider_int <= '0';
-            data_b_in_j_divider_int <= '0';
-
-            -- FSM Control
-            divider_ctrl_fsm_int <= ENDER_J_STATE;
-          end if;
-
         when INPUT_J_STATE =>  -- STEP 2
 
-          if (DATA_A_IN_J_ENABLE = '1') then
+          if (DATA_IN_J_ENABLE = '1') then
             -- Data Inputs
-            data_a_in_vector_integer_full_divider <= DATA_A_IN;
+            data_in_vector_exponentiator_function <= DATA_IN;
 
             -- Control Internal
-            data_a_in_enable_vector_integer_full_divider <= '1';
+            data_in_enable_vector_exponentiator_function <= '1';
 
-            data_a_in_j_divider_int <= '1';
-          else
-            -- Control Internal
-            data_a_in_enable_vector_integer_full_divider <= '0';
-          end if;
-
-          if (DATA_B_IN_J_ENABLE = '1') then
-            -- Data Inputs
-            data_b_in_vector_integer_full_divider <= DATA_B_IN;
-
-            -- Control Internal
-            data_b_in_enable_vector_integer_full_divider <= '1';
-
-            data_b_in_j_divider_int <= '1';
-          else
-            -- Control Internal
-            data_b_in_enable_vector_integer_full_divider <= '0';
+            -- FSM Control
+            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              exponentiator_function_ctrl_fsm_int <= ENDER_I_STATE;
+            else
+              exponentiator_function_ctrl_fsm_int <= ENDER_J_STATE;
+            end if;
           end if;
 
           -- Control Outputs
           DATA_OUT_J_ENABLE <= '0';
 
-          if (data_a_in_j_divider_int = '1' and data_b_in_j_divider_int = '1') then
-            -- Control Internal
-            data_a_in_enable_vector_integer_full_divider <= '0';
-            data_b_in_enable_vector_integer_full_divider <= '0';
-
-            data_a_in_j_divider_int <= '0';
-            data_b_in_j_divider_int <= '0';
-
-            -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              divider_ctrl_fsm_int <= ENDER_I_STATE;
-            else
-              divider_ctrl_fsm_int <= ENDER_J_STATE;
-            end if;
-          end if;
-
         when ENDER_I_STATE =>  -- STEP 3
 
-          if (data_out_enable_vector_integer_full_divider = '1') then
+          if (data_out_enable_vector_exponentiator_function = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
-              DATA_INTEGER_OUT    <= data_integer_out_vector_integer_full_divider;
-              DATA_FRACTIONAL_OUT <= data_fractional_out_vector_integer_full_divider;
+              DATA_OUT <= data_out_vector_exponentiator_function;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -323,11 +240,10 @@ begin
               index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              divider_ctrl_fsm_int <= STARTER_STATE;
+              exponentiator_function_ctrl_fsm_int <= STARTER_STATE;
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
-              DATA_INTEGER_OUT    <= data_integer_out_vector_integer_full_divider;
-              DATA_FRACTIONAL_OUT <= data_fractional_out_vector_integer_full_divider;
+              DATA_OUT <= data_out_vector_exponentiator_function;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -338,20 +254,21 @@ begin
               index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              divider_ctrl_fsm_int <= INPUT_I_STATE;
+              exponentiator_function_ctrl_fsm_int <= INPUT_I_STATE;
             end if;
           else
             -- Control Internal
-            start_vector_integer_full_divider <= '0';
+            start_vector_exponentiator_function <= '0';
+
+            data_in_enable_vector_exponentiator_function <= '0';
           end if;
 
-        when ENDER_J_STATE =>  -- STEP 3
+        when ENDER_J_STATE =>  -- STEP 4
 
-          if (data_out_enable_vector_integer_full_divider = '1') then
+          if (data_out_enable_vector_exponentiator_function = '1') then
             if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
-              DATA_INTEGER_OUT    <= data_integer_out_vector_integer_full_divider;
-              DATA_FRACTIONAL_OUT <= data_fractional_out_vector_integer_full_divider;
+              DATA_OUT <= data_out_vector_exponentiator_function;
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';
@@ -360,22 +277,24 @@ begin
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
-              divider_ctrl_fsm_int <= INPUT_J_STATE;
+              exponentiator_function_ctrl_fsm_int <= INPUT_J_STATE;
             end if;
           else
             -- Control Internal
-            start_vector_integer_full_divider <= '0';
+            start_vector_exponentiator_function <= '0';
+
+            data_in_enable_vector_exponentiator_function <= '0';
           end if;
 
         when others =>
           -- FSM Control
-          divider_ctrl_fsm_int <= STARTER_STATE;
+          exponentiator_function_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
 
-  -- VECTOR DIVIDER
-  vector_integer_full_divider : ntm_vector_integer_full_divider
+  -- VECTOR EXPONENTIATOR
+  vector_exponentiator_function : ntm_vector_exponentiator_function
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -386,21 +305,17 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_integer_full_divider,
-      READY => ready_vector_integer_full_divider,
+      START => start_vector_exponentiator_function,
+      READY => ready_vector_exponentiator_function,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_integer_full_divider,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_integer_full_divider,
+      DATA_IN_ENABLE => data_in_enable_vector_exponentiator_function,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_integer_full_divider,
+      DATA_OUT_ENABLE => data_out_enable_vector_exponentiator_function,
 
       -- DATA
-      SIZE_IN   => size_in_vector_integer_full_divider,
-      DATA_A_IN => data_a_in_vector_integer_full_divider,
-      DATA_B_IN => data_b_in_vector_integer_full_divider,
-
-      DATA_INTEGER_OUT    => data_integer_out_vector_integer_full_divider,
-      DATA_FRACTIONAL_OUT => data_fractional_out_vector_integer_full_divider
+      SIZE_IN   => size_in_vector_exponentiator_function,
+      DATA_IN   => data_in_vector_exponentiator_function,
+      DATA_OUT  => data_out_vector_exponentiator_function
       );
 
 end architecture;

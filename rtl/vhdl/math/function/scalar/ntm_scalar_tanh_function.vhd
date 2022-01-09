@@ -142,12 +142,12 @@ architecture ntm_scalar_tanh_function_architecture of ntm_scalar_tanh_function i
 
   -- SCALAR EXPONENTIATOR
   -- CONTROL
-  signal start_scalar_exponentiator : std_logic;
-  signal ready_scalar_exponentiator : std_logic;
+  signal start_scalar_exponentiator_function : std_logic;
+  signal ready_scalar_exponentiator_function : std_logic;
 
   -- DATA
-  signal data_in_scalar_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_exponentiator_function  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_exponentiator_function : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -193,10 +193,10 @@ begin
 
           if (ready_scalar_multiplier = '1') then
             -- Control Internal
-            start_scalar_exponentiator <= '1';
+            start_scalar_exponentiator_function <= '1';
 
             -- Data Inputs
-            data_in_scalar_exponentiator <= data_out_scalar_multiplier;
+            data_in_scalar_exponentiator_function <= data_out_scalar_multiplier;
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_EXPONENTIATOR_STATE;
@@ -207,21 +207,21 @@ begin
 
         when SCALAR_EXPONENTIATOR_STATE =>  -- STEP 1
 
-          if (ready_scalar_exponentiator = '1') then
+          if (ready_scalar_exponentiator_function = '1') then
             -- Control Internal
             start_scalar_adder <= '1';
 
             operation_scalar_adder <= '1';
 
             -- Data Inputs
-            data_a_in_scalar_adder <= data_out_scalar_exponentiator;
+            data_a_in_scalar_adder <= data_out_scalar_exponentiator_function;
             data_b_in_scalar_adder <= ONE_DATA;
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_FIRST_ADDER_STATE;
           else
             -- Control Internal
-            start_scalar_exponentiator <= '0';
+            start_scalar_exponentiator_function <= '0';
           end if;
 
         when SCALAR_FIRST_ADDER_STATE =>  -- STEP 3
@@ -237,7 +237,7 @@ begin
             operation_scalar_adder <= '0';
 
             -- Data Inputs
-            data_a_in_scalar_adder <= data_out_scalar_exponentiator;
+            data_a_in_scalar_adder <= data_out_scalar_exponentiator_function;
             data_b_in_scalar_adder <= ONE_DATA;
 
             -- FSM Control
@@ -353,7 +353,7 @@ begin
       );
 
   -- SCALAR EXPONENTIATOR
-  scalar_exponentiator : ntm_scalar_exponentiator
+  scalar_exponentiator_function : ntm_scalar_exponentiator_function
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -364,12 +364,12 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_exponentiator,
-      READY => ready_scalar_exponentiator,
+      START => start_scalar_exponentiator_function,
+      READY => ready_scalar_exponentiator_function,
 
       -- DATA
-      DATA_IN  => data_in_scalar_exponentiator,
-      DATA_OUT => data_out_scalar_exponentiator
+      DATA_IN  => data_in_scalar_exponentiator_function,
+      DATA_OUT => data_out_scalar_exponentiator_function
       );
 
 end architecture;
