@@ -857,6 +857,62 @@ begin
 
     end if;
 
+    if (STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST  ";
+      -------------------------------------------------------------------
+
+      if (STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE 0";
+        -------------------------------------------------------------------
+
+        SCALAR_EXPONENTIATOR_DATA_IN <= ONE_DATA;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE 1";
+        -------------------------------------------------------------------
+
+        SCALAR_EXPONENTIATOR_DATA_IN <= TWO_DATA;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_SCALAR_LOGARITHM_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_LOGARITHM_TEST      ";
+      -------------------------------------------------------------------
+
+      if (STIMULUS_NTM_SCALAR_LOGARITHM_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_LOGARITHM_CASE 0    ";
+        -------------------------------------------------------------------
+
+        SCALAR_LOGARITHM_DATA_IN <= ONE_DATA;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_LOGARITHM_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_LOGARITHM_CASE 1    ";
+        -------------------------------------------------------------------
+
+        SCALAR_LOGARITHM_DATA_IN <= TWO_DATA;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
     if (STIMULUS_NTM_SCALAR_SINH_TEST) then
 
       -------------------------------------------------------------------
