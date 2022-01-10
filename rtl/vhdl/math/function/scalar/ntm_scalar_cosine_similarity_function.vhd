@@ -366,7 +366,7 @@ begin
         when SCALAR_PRODUCT_STATE =>  -- STEP 2
 
           if (data_out_enable_scalar_product_ab = '1') then
-            if (unsigned(index_product_ab_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+            if (unsigned(index_product_ab_loop) = unsigned(LENGTH_IN)) then
               -- Control Internal
               index_product_ab_loop <= ZERO_CONTROL;
             else
@@ -379,7 +379,7 @@ begin
           end if;
 
           if (data_out_enable_scalar_product_aa = '1') then
-            if (unsigned(index_product_aa_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+            if (unsigned(index_product_aa_loop) = unsigned(LENGTH_IN)) then
               -- Control Internal
               index_product_aa_loop <= ZERO_CONTROL;
             else
@@ -392,7 +392,7 @@ begin
           end if;
 
           if (data_out_enable_scalar_product_bb = '1') then
-            if (unsigned(index_product_bb_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+            if (unsigned(index_product_bb_loop) = unsigned(LENGTH_IN)) then
               -- Control Internal
               index_product_bb_loop <= ZERO_CONTROL;
             else
@@ -405,7 +405,7 @@ begin
           end if;
 
           if (data_out_product_ab_int = '1' and data_out_product_aa_int = '1' and data_out_product_bb_int = '1') then
-            if ((unsigned(index_product_ab_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_product_aa_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_product_bb_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            if ((unsigned(index_product_ab_loop) = unsigned(LENGTH_IN)) and (unsigned(index_product_aa_loop) = unsigned(LENGTH_IN)) and (unsigned(index_product_bb_loop) = unsigned(LENGTH_IN))) then
               -- Data Internals
               data_a_in_scalar_multiplier <= data_out_scalar_product_aa;
               data_b_in_scalar_multiplier <= data_out_scalar_product_bb;
