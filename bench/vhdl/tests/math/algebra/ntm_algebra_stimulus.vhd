@@ -299,7 +299,7 @@ begin
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_PRODUCT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
+          if ((MATRIX_PRODUCT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
@@ -311,7 +311,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
@@ -330,11 +330,11 @@ begin
             MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when MATRIX_PRODUCT_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when MATRIX_PRODUCT_READY = '1';
         end loop;
       end if;
 
@@ -359,7 +359,7 @@ begin
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_PRODUCT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
+          if ((MATRIX_PRODUCT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
@@ -371,7 +371,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
@@ -390,11 +390,11 @@ begin
             MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when MATRIX_PRODUCT_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when MATRIX_PRODUCT_READY = '1';
         end loop;
       end if;
 
@@ -430,7 +430,7 @@ begin
         index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((TENSOR_TRANSPOSE_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
+          if ((TENSOR_TRANSPOSE_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_TRANSPOSE_DATA_IN_I_ENABLE <= '1';
 
@@ -441,7 +441,7 @@ begin
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
             index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_TRANSPOSE_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
+          elsif ((TENSOR_TRANSPOSE_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_TRANSPOSE_DATA_IN_J_ENABLE <= '1';
 
@@ -451,7 +451,7 @@ begin
             -- LOOP
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
             index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_TRANSPOSE_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) < unsigned(SIZE_K)-unsigned(ONE_CONTROL))) then
+          elsif ((TENSOR_TRANSPOSE_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_k_loop) <= unsigned(SIZE_K)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_TRANSPOSE_DATA_IN_K_ENABLE <= '1';
 
@@ -467,11 +467,11 @@ begin
             TENSOR_TRANSPOSE_DATA_IN_K_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when TENSOR_TRANSPOSE_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when TENSOR_TRANSPOSE_READY = '1';
         end loop;
       end if;
 
@@ -495,7 +495,7 @@ begin
         index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((TENSOR_TRANSPOSE_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
+          if ((TENSOR_TRANSPOSE_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_TRANSPOSE_DATA_IN_I_ENABLE <= '1';
 
@@ -506,7 +506,7 @@ begin
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
             index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_TRANSPOSE_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
+          elsif ((TENSOR_TRANSPOSE_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_TRANSPOSE_DATA_IN_J_ENABLE <= '1';
 
@@ -516,7 +516,7 @@ begin
             -- LOOP
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
             index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_TRANSPOSE_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) < unsigned(SIZE_K)-unsigned(ONE_CONTROL))) then
+          elsif ((TENSOR_TRANSPOSE_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_k_loop) <= unsigned(SIZE_K)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_TRANSPOSE_DATA_IN_K_ENABLE <= '1';
 
@@ -532,11 +532,11 @@ begin
             TENSOR_TRANSPOSE_DATA_IN_K_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when TENSOR_TRANSPOSE_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when TENSOR_TRANSPOSE_READY = '1';
         end loop;
       end if;
 
@@ -570,7 +570,7 @@ begin
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_TRANSPOSE_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
+          if ((MATRIX_TRANSPOSE_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_TRANSPOSE_DATA_IN_I_ENABLE <= '1';
 
@@ -580,7 +580,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_TRANSPOSE_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_TRANSPOSE_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_TRANSPOSE_DATA_IN_J_ENABLE <= '1';
 
@@ -595,11 +595,11 @@ begin
             MATRIX_TRANSPOSE_DATA_IN_J_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when MATRIX_TRANSPOSE_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when MATRIX_TRANSPOSE_READY = '1';
         end loop;
       end if;
 
@@ -621,7 +621,7 @@ begin
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_TRANSPOSE_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
+          if ((MATRIX_TRANSPOSE_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_TRANSPOSE_DATA_IN_I_ENABLE <= '1';
 
@@ -631,7 +631,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_TRANSPOSE_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_TRANSPOSE_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_TRANSPOSE_DATA_IN_J_ENABLE <= '1';
 
@@ -646,11 +646,11 @@ begin
             MATRIX_TRANSPOSE_DATA_IN_J_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when MATRIX_TRANSPOSE_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when MATRIX_TRANSPOSE_READY = '1';
         end loop;
       end if;
 
@@ -685,7 +685,7 @@ begin
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((SCALAR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SCALAR_PRODUCT_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          if ((SCALAR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_PRODUCT_LENGTH_IN))) then
             -- CONTROL
             SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '1';
             SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
@@ -702,11 +702,11 @@ begin
             SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when SCALAR_PRODUCT_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when SCALAR_PRODUCT_READY = '1';
         end loop;
       end if;
 
@@ -728,7 +728,7 @@ begin
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((SCALAR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SCALAR_PRODUCT_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          if ((SCALAR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_PRODUCT_LENGTH_IN))) then
             -- CONTROL
             SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '1';
             SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
@@ -745,11 +745,11 @@ begin
             SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when SCALAR_PRODUCT_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when SCALAR_PRODUCT_READY = '1';
         end loop;
       end if;
 
@@ -789,7 +789,7 @@ begin
         index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((TENSOR_PRODUCT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
+          if ((TENSOR_PRODUCT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
             TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
@@ -802,7 +802,7 @@ begin
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
             index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
+          elsif ((TENSOR_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
             TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
@@ -814,7 +814,7 @@ begin
             -- LOOP
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
             index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_PRODUCT_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) < unsigned(SIZE_K)-unsigned(ONE_CONTROL))) then
+          elsif ((TENSOR_PRODUCT_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_k_loop) <= unsigned(SIZE_K)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
             TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
@@ -835,11 +835,11 @@ begin
             TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when TENSOR_PRODUCT_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when TENSOR_PRODUCT_READY = '1';
         end loop;
       end if;
 
@@ -867,7 +867,7 @@ begin
         index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((TENSOR_PRODUCT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) < unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
+          if ((TENSOR_PRODUCT_DATA_OUT_I_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
             TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
@@ -880,7 +880,7 @@ begin
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
             index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
+          elsif ((TENSOR_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
             TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
@@ -892,7 +892,7 @@ begin
             -- LOOP
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
             index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_PRODUCT_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) > unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) < unsigned(SIZE_K)-unsigned(ONE_CONTROL))) then
+          elsif ((TENSOR_PRODUCT_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_k_loop) <= unsigned(SIZE_K)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
             TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
@@ -913,11 +913,11 @@ begin
             TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when TENSOR_PRODUCT_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when TENSOR_PRODUCT_READY = '1';
         end loop;
       end if;
 

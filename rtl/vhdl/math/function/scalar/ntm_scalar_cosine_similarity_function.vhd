@@ -214,6 +214,55 @@ begin
 
       DATA_OUT_ENABLE <= '0';
 
+      -- Control Internal
+      start_scalar_multiplier <= '0';
+      start_scalar_divider    <= '0';
+
+      start_scalar_product_ab <= '0';
+      start_scalar_product_aa <= '0';
+      start_scalar_product_bb <= '0';
+
+      data_a_in_enable_scalar_product_ab <= '0';
+      data_b_in_enable_scalar_product_ab <= '0';
+
+      data_a_in_enable_scalar_product_aa <= '0';
+      data_b_in_enable_scalar_product_aa <= '0';
+
+      data_a_in_enable_scalar_product_bb <= '0';
+      data_b_in_enable_scalar_product_bb <= '0';
+
+      data_a_in_product_int <= '0';
+      data_b_in_product_int <= '0';
+  
+      data_out_product_ab_int <= '0';
+      data_out_product_aa_int <= '0';
+      data_out_product_bb_int <= '0';
+
+      index_product_ab_loop <= ZERO_CONTROL;
+      index_product_aa_loop <= ZERO_CONTROL;
+      index_product_bb_loop <= ZERO_CONTROL;
+
+      -- Data Internal
+      data_a_in_scalar_multiplier <= ZERO_DATA;
+      data_b_in_scalar_multiplier <= ZERO_DATA;
+
+      data_a_in_scalar_divider <= ZERO_DATA;
+      data_b_in_scalar_divider <= ZERO_DATA;
+
+      length_in_scalar_product_ab <= LENGTH_IN;
+      data_a_in_scalar_product_ab <= ZERO_DATA;
+      data_b_in_scalar_product_ab <= ZERO_DATA;
+
+      length_in_scalar_product_aa <= LENGTH_IN;
+      data_a_in_scalar_product_aa <= ZERO_DATA;
+      data_b_in_scalar_product_aa <= ZERO_DATA;
+
+      length_in_scalar_product_bb <= LENGTH_IN;
+      data_a_in_scalar_product_bb <= ZERO_DATA;
+      data_b_in_scalar_product_bb <= ZERO_DATA;
+
+      data_int_scalar_product <= ZERO_DATA;
+
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
@@ -243,7 +292,7 @@ begin
             -- Data Inputs
             length_in_scalar_product_ab <= LENGTH_IN;
             length_in_scalar_product_aa <= LENGTH_IN;
-            length_in_scalar_product_ab <= LENGTH_IN;
+            length_in_scalar_product_bb <= LENGTH_IN;
 
             -- FSM Control
             controller_ctrl_fsm_int <= INPUT_STATE;
@@ -316,7 +365,7 @@ begin
 
         when SCALAR_PRODUCT_STATE =>  -- STEP 2
 
-          if (ready_scalar_product_ab = '1') then
+          if (data_out_enable_scalar_product_ab = '1') then
             if (unsigned(index_product_ab_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
               -- Control Internal
               index_product_ab_loop <= ZERO_CONTROL;
@@ -329,7 +378,7 @@ begin
             data_out_product_ab_int <= '1';
           end if;
 
-          if (ready_scalar_product_aa = '1') then
+          if (data_out_enable_scalar_product_aa = '1') then
             if (unsigned(index_product_aa_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
               -- Control Internal
               index_product_aa_loop <= ZERO_CONTROL;
@@ -342,7 +391,7 @@ begin
             data_out_product_aa_int <= '1';
           end if;
 
-          if (ready_scalar_product_bb = '1') then
+          if (data_out_enable_scalar_product_bb = '1') then
             if (unsigned(index_product_bb_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
               -- Control Internal
               index_product_bb_loop <= ZERO_CONTROL;

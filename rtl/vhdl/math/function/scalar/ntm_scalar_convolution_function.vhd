@@ -158,18 +158,23 @@ begin
 
       DATA_OUT_ENABLE <= '0';
 
+      -- Data Internal
+      data_a_in_scalar_adder <= ZERO_DATA;
+      data_b_in_scalar_adder <= ZERO_DATA;
+
+      data_a_in_scalar_multiplier <= ZERO_DATA;
+      data_b_in_scalar_multiplier <= ZERO_DATA;
+
       -- Control Internal
       start_scalar_adder      <= '0';
       start_scalar_multiplier <= '0';
 
-      index_loop <= ZERO_CONTROL;
+      operation_scalar_adder <= '0';
 
       data_a_in_multiplier_int <= '0';
       data_b_in_multiplier_int <= '0';
 
-      -- Data Internal
-      data_a_in_scalar_multiplier <= ZERO_DATA;
-      data_b_in_scalar_multiplier <= ZERO_DATA;
+      index_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 

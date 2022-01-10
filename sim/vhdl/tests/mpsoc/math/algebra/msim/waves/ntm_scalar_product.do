@@ -25,9 +25,6 @@ add wave -noupdate /ntm_algebra_testbench/ntm_scalar_product_test/scalar_product
 
 add wave -noupdate /ntm_algebra_testbench/ntm_scalar_product_test/scalar_product/index_loop
 
-add wave -noupdate /ntm_algebra_testbench/ntm_scalar_product_test/scalar_product/data_a_in_multiplier_int
-add wave -noupdate /ntm_algebra_testbench/ntm_scalar_product_test/scalar_product/data_b_in_multiplier_int
-
 add wave -noupdate /ntm_algebra_testbench/ntm_scalar_product_test/scalar_product/start_scalar_adder
 add wave -noupdate /ntm_algebra_testbench/ntm_scalar_product_test/scalar_product/operation_scalar_adder
 add wave -noupdate /ntm_algebra_testbench/ntm_scalar_product_test/scalar_product/data_a_in_scalar_adder
@@ -36,7 +33,9 @@ add wave -noupdate /ntm_algebra_testbench/ntm_scalar_product_test/scalar_product
 add wave -noupdate /ntm_algebra_testbench/ntm_scalar_product_test/scalar_product/data_out_scalar_adder
 
 add wave -noupdate /ntm_algebra_testbench/ntm_scalar_product_test/scalar_product/start_scalar_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_scalar_product_test/scalar_product/data_a_in_multiplier_int
 add wave -noupdate /ntm_algebra_testbench/ntm_scalar_product_test/scalar_product/data_a_in_scalar_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_scalar_product_test/scalar_product/data_b_in_multiplier_int
 add wave -noupdate /ntm_algebra_testbench/ntm_scalar_product_test/scalar_product/data_b_in_scalar_multiplier
 add wave -noupdate /ntm_algebra_testbench/ntm_scalar_product_test/scalar_product/ready_scalar_multiplier
 add wave -noupdate /ntm_algebra_testbench/ntm_scalar_product_test/scalar_product/data_out_scalar_multiplier

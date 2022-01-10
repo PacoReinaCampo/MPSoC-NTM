@@ -285,8 +285,8 @@ begin
       -- DATA
       SCALAR_PRODUCT_LENGTH_IN => length_in_scalar_product,
       SCALAR_PRODUCT_DATA_A_IN => data_a_in_scalar_product,
-      SCALAR_PRODUCT_DATA_B_IN => data_b_in_matrix_product,
-      SCALAR_PRODUCT_DATA_OUT  => data_out_matrix_product,
+      SCALAR_PRODUCT_DATA_B_IN => data_b_in_scalar_product,
+      SCALAR_PRODUCT_DATA_OUT  => data_out_scalar_product,
 
       -- TENSOR PRODUCT
       -- CONTROL
