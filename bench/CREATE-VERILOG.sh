@@ -76,6 +76,7 @@ touch verilog/model/math/function/matrix/ntm_matrix_cosh_function.sv
 touch verilog/model/math/function/matrix/ntm_matrix_cosine_similarity_function.sv
 touch verilog/model/math/function/matrix/ntm_matrix_differentiation_function.sv
 touch verilog/model/math/function/matrix/ntm_matrix_exponentiator.sv
+touch verilog/model/math/function/matrix/ntm_matrix_logarithm_function.sv
 touch verilog/model/math/function/matrix/ntm_matrix_logistic_function.sv
 touch verilog/model/math/function/matrix/ntm_matrix_multiplication_function.sv
 touch verilog/model/math/function/matrix/ntm_matrix_oneplus_function.sv
@@ -88,6 +89,7 @@ touch verilog/model/math/function/scalar/ntm_scalar_cosh_function.sv
 touch verilog/model/math/function/scalar/ntm_scalar_cosine_similarity_function.sv
 touch verilog/model/math/function/scalar/ntm_scalar_differentiation_function.sv
 touch verilog/model/math/function/scalar/ntm_scalar_exponentiator.sv
+touch verilog/model/math/function/scalar/ntm_scalar_logarithm_function.sv
 touch verilog/model/math/function/scalar/ntm_scalar_logistic_function.sv
 touch verilog/model/math/function/scalar/ntm_scalar_multiplication_function.sv
 touch verilog/model/math/function/scalar/ntm_scalar_oneplus_function.sv
@@ -100,6 +102,7 @@ touch verilog/model/math/function/vector/ntm_vector_cosh_function.sv
 touch verilog/model/math/function/vector/ntm_vector_cosine_similarity_function.sv
 touch verilog/model/math/function/vector/ntm_vector_differentiation_function.sv
 touch verilog/model/math/function/vector/ntm_vector_exponentiator.sv
+touch verilog/model/math/function/vector/ntm_vector_logarithm_function.sv
 touch verilog/model/math/function/vector/ntm_vector_logistic_function.sv
 touch verilog/model/math/function/vector/ntm_vector_multiplication_function.sv
 touch verilog/model/math/function/vector/ntm_vector_oneplus_function.sv

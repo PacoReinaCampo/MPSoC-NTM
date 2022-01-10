@@ -76,6 +76,7 @@ emacs -batch vhdl/model/math/function/matrix/ntm_matrix_cosh_function.vhd -f vhd
 emacs -batch vhdl/model/math/function/matrix/ntm_matrix_cosine_similarity_function.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/function/matrix/ntm_matrix_differentiation_function.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/function/matrix/ntm_matrix_exponentiator.vhd -f vhdl-beautify-buffer -f save-buffer
+emacs -batch vhdl/model/math/function/matrix/ntm_matrix_logarithm_function.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/function/matrix/ntm_matrix_logistic_function.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/function/matrix/ntm_matrix_multiplication_function.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/function/matrix/ntm_matrix_oneplus_function.vhd -f vhdl-beautify-buffer -f save-buffer
@@ -88,6 +89,7 @@ emacs -batch vhdl/model/math/function/scalar/ntm_scalar_cosh_function.vhd -f vhd
 emacs -batch vhdl/model/math/function/scalar/ntm_scalar_cosine_similarity_function.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/function/scalar/ntm_scalar_differentiation_function.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/function/scalar/ntm_scalar_exponentiator.vhd -f vhdl-beautify-buffer -f save-buffer
+emacs -batch vhdl/model/math/function/scalar/ntm_scalar_logarithm_function.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/function/scalar/ntm_scalar_logistic_function.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/function/scalar/ntm_scalar_multiplication_function.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/function/scalar/ntm_scalar_oneplus_function.vhd -f vhdl-beautify-buffer -f save-buffer
@@ -100,6 +102,7 @@ emacs -batch vhdl/model/math/function/vector/ntm_vector_cosh_function.vhd -f vhd
 emacs -batch vhdl/model/math/function/vector/ntm_vector_cosine_similarity_function.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/function/vector/ntm_vector_differentiation_function.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/function/vector/ntm_vector_exponentiator.vhd -f vhdl-beautify-buffer -f save-buffer
+emacs -batch vhdl/model/math/function/vector/ntm_vector_logarithm_function.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/function/vector/ntm_vector_logistic_function.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/function/vector/ntm_vector_multiplication_function.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/function/vector/ntm_vector_oneplus_function.vhd -f vhdl-beautify-buffer -f save-buffer

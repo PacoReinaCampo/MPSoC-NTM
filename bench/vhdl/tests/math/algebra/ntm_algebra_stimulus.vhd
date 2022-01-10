@@ -665,7 +665,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      SCALAR_PRODUCT_LENGTH_IN <= THREE_DATA;
+      SCALAR_PRODUCT_LENGTH_IN <= THREE_CONTROL;
 
       -------------------------------------------------------------------
       MONITOR_CASE <= "STIMULUS_NTM_SCALAR_PRODUCT_CASE 0      ";
@@ -734,7 +734,7 @@ begin
             SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            SCALAR_PRODUCT_DATA_B_IN <= TWO_DATA;
+            SCALAR_PRODUCT_DATA_A_IN <= TWO_DATA;
             SCALAR_PRODUCT_DATA_B_IN <= ONE_DATA;
 
             -- LOOP

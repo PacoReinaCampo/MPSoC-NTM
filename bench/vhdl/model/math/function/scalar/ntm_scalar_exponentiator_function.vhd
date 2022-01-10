@@ -163,6 +163,15 @@ begin
       READY <= '0';
 
       -- Data Internal
+      data_a_in_scalar_adder <= ZERO_DATA;
+      data_b_in_scalar_adder <= ZERO_DATA;
+
+      data_a_in_scalar_multiplier <= ZERO_DATA;
+      data_b_in_scalar_multiplier <= ZERO_DATA;
+
+      data_a_in_scalar_divider <= ZERO_DATA;
+      data_b_in_scalar_divider <= ZERO_DATA;
+
       data_int_scalar_multiplier <= ZERO_DATA;
 
       -- Control Internal

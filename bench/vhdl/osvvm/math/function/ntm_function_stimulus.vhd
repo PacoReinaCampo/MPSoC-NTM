@@ -829,6 +829,107 @@ begin
     -- SCALAR-FUNCTION
     -------------------------------------------------------------------
 
+    if (STIMULUS_NTM_SCALAR_CONVOLUTION_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_CONVOLUTION_TEST    ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      SCALAR_CONVOLUTION_LENGTH_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_SCALAR_CONVOLUTION_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_CONVOLUTION_CASE 0  ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        SCALAR_CONVOLUTION_DATA_A_IN_ENABLE <= '1';
+        SCALAR_CONVOLUTION_DATA_B_IN_ENABLE <= '1';
+
+        -- DATA
+        SCALAR_CONVOLUTION_DATA_A_IN <= TWO_DATA;
+        SCALAR_CONVOLUTION_DATA_B_IN <= ONE_DATA;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+        loop
+          if ((SCALAR_CONVOLUTION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_CONVOLUTION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            SCALAR_CONVOLUTION_DATA_A_IN_ENABLE <= '1';
+            SCALAR_CONVOLUTION_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            SCALAR_CONVOLUTION_DATA_A_IN <= TWO_DATA;
+            SCALAR_CONVOLUTION_DATA_B_IN <= ONE_DATA;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            SCALAR_CONVOLUTION_DATA_A_IN_ENABLE <= '0';
+            SCALAR_CONVOLUTION_DATA_B_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when SCALAR_CONVOLUTION_READY = '1';
+        end loop;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_CONVOLUTION_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_CONVOLUTION_CASE 1  ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        SCALAR_CONVOLUTION_DATA_A_IN_ENABLE <= '1';
+        SCALAR_CONVOLUTION_DATA_B_IN_ENABLE <= '1';
+
+        -- DATA
+        SCALAR_CONVOLUTION_DATA_A_IN <= TWO_DATA;
+        SCALAR_CONVOLUTION_DATA_B_IN <= TWO_DATA;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+        loop
+          if ((SCALAR_CONVOLUTION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_CONVOLUTION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            SCALAR_CONVOLUTION_DATA_A_IN_ENABLE <= '1';
+            SCALAR_CONVOLUTION_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            SCALAR_CONVOLUTION_DATA_A_IN <= TWO_DATA;
+            SCALAR_CONVOLUTION_DATA_B_IN <= TWO_DATA;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            SCALAR_CONVOLUTION_DATA_A_IN_ENABLE <= '0';
+            SCALAR_CONVOLUTION_DATA_B_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when SCALAR_CONVOLUTION_READY = '1';
+        end loop;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
     if (STIMULUS_NTM_SCALAR_COSH_TEST) then
 
       -------------------------------------------------------------------
@@ -851,6 +952,199 @@ begin
         -------------------------------------------------------------------
 
         SCALAR_COSH_DATA_IN <= TWO_DATA;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_COSINE_TEST         ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      SCALAR_COSINE_SIMILARITY_LENGTH_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_COSINE_CASE 0       ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE <= '1';
+        SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE <= '1';
+
+        -- DATA
+        SCALAR_COSINE_SIMILARITY_DATA_A_IN <= TWO_DATA;
+        SCALAR_COSINE_SIMILARITY_DATA_B_IN <= ONE_DATA;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+        loop
+          if ((SCALAR_COSINE_SIMILARITY_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_COSINE_SIMILARITY_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE <= '1';
+            SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            SCALAR_COSINE_SIMILARITY_DATA_A_IN <= TWO_DATA;
+            SCALAR_COSINE_SIMILARITY_DATA_B_IN <= ONE_DATA;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE <= '0';
+            SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when SCALAR_COSINE_SIMILARITY_READY = '1';
+        end loop;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_COSINE_CASE 1       ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE <= '1';
+        SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE <= '1';
+
+        -- DATA
+        SCALAR_COSINE_SIMILARITY_DATA_A_IN <= TWO_DATA;
+        SCALAR_COSINE_SIMILARITY_DATA_B_IN <= TWO_DATA;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+        loop
+          if ((SCALAR_COSINE_SIMILARITY_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_COSINE_SIMILARITY_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE <= '1';
+            SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            SCALAR_COSINE_SIMILARITY_DATA_A_IN <= TWO_DATA;
+            SCALAR_COSINE_SIMILARITY_DATA_B_IN <= TWO_DATA;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE <= '0';
+            SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when SCALAR_COSINE_SIMILARITY_READY = '1';
+        end loop;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_SCALAR_DIFFERENTIATION_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_DIFFERENTIATION_TEST";
+      -------------------------------------------------------------------
+
+      -- DATA
+      SCALAR_DIFFERENTIATION_PERIOD_IN <= ONE_DATA;
+      SCALAR_DIFFERENTIATION_LENGTH_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIFFERENT_CASE 0    ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        SCALAR_DIFFERENTIATION_DATA_IN_ENABLE <= '1';
+
+        -- DATA
+        SCALAR_DIFFERENTIATION_DATA_IN <= ONE_DATA;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+        loop
+          if ((SCALAR_DIFFERENTIATION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_DIFFERENTIATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            SCALAR_DIFFERENTIATION_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            SCALAR_DIFFERENTIATION_DATA_IN <= ONE_DATA;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            SCALAR_DIFFERENTIATION_DATA_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when SCALAR_DIFFERENTIATION_READY = '1';
+        end loop;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIFFERENT_CASE 1    ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        SCALAR_DIFFERENTIATION_DATA_IN_ENABLE <= '1';
+
+        -- DATA
+        SCALAR_DIFFERENTIATION_DATA_IN <= TWO_DATA;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+        loop
+          if ((SCALAR_DIFFERENTIATION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_DIFFERENTIATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            SCALAR_DIFFERENTIATION_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            SCALAR_DIFFERENTIATION_DATA_IN <= TWO_DATA;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            SCALAR_DIFFERENTIATION_DATA_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when SCALAR_DIFFERENTIATION_READY = '1';
+        end loop;
       end if;
 
       wait for WORKING;
@@ -941,6 +1235,97 @@ begin
 
     end if;
 
+    if (STIMULUS_NTM_SCALAR_MULTIPLICATION_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_MULTIPLICATION_TEST ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      SCALAR_MULTIPLICATION_LENGTH_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_SCALAR_MULTIPLICATION_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULT_CASE 0         ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        SCALAR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
+
+        -- DATA
+        SCALAR_MULTIPLICATION_DATA_IN <= ONE_DATA;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+        loop
+          if ((SCALAR_MULTIPLICATION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            SCALAR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            SCALAR_MULTIPLICATION_DATA_IN <= ONE_DATA;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            SCALAR_MULTIPLICATION_DATA_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when SCALAR_MULTIPLICATION_READY = '1';
+        end loop;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_MULTIPLICATION_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULT_CASE 1         ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        SCALAR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
+
+        -- DATA
+        SCALAR_MULTIPLICATION_DATA_IN <= TWO_DATA;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+        loop
+          if ((SCALAR_MULTIPLICATION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            SCALAR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            SCALAR_MULTIPLICATION_DATA_IN <= TWO_DATA;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            SCALAR_MULTIPLICATION_DATA_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when SCALAR_MULTIPLICATION_READY = '1';
+        end loop;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
     if (STIMULUS_NTM_SCALAR_ONEPLUS_TEST) then
 
       -------------------------------------------------------------------
@@ -991,6 +1376,188 @@ begin
         -------------------------------------------------------------------
 
         SCALAR_SINH_DATA_IN <= TWO_DATA;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_SCALAR_SOFTMAX_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_SOFTMAX_TEST        ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      SCALAR_SOFTMAX_LENGTH_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_SCALAR_SOFTMAX_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_SOFTMAX_CASE 0      ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        SCALAR_SOFTMAX_DATA_IN_ENABLE <= '1';
+
+        -- DATA
+        SCALAR_SOFTMAX_DATA_IN <= ONE_DATA;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+        loop
+          if ((SCALAR_SOFTMAX_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_SOFTMAX_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            SCALAR_SOFTMAX_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            SCALAR_SOFTMAX_DATA_IN <= ONE_DATA;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            SCALAR_SOFTMAX_DATA_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when SCALAR_SOFTMAX_READY = '1';
+        end loop;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_SOFTMAX_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_SOFTMAX_CASE 1      ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        SCALAR_SOFTMAX_DATA_IN_ENABLE <= '1';
+
+        -- DATA
+        SCALAR_SOFTMAX_DATA_IN <= TWO_DATA;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+        loop
+          if ((SCALAR_SOFTMAX_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_SOFTMAX_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            SCALAR_SOFTMAX_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            SCALAR_SOFTMAX_DATA_IN <= TWO_DATA;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            SCALAR_SOFTMAX_DATA_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when SCALAR_SOFTMAX_READY = '1';
+        end loop;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_SCALAR_SUMMATION_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_SUMMATION_TEST      ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      SCALAR_SUMMATION_LENGTH_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_SCALAR_SUMMATION_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_SUMMATION_CASE 0    ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        SCALAR_SUMMATION_DATA_IN_ENABLE <= '1';
+
+        -- DATA
+        SCALAR_SUMMATION_DATA_IN <= ONE_DATA;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+        loop
+          if ((SCALAR_SUMMATION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            SCALAR_SUMMATION_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            SCALAR_SUMMATION_DATA_IN <= ONE_DATA;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            SCALAR_SUMMATION_DATA_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when SCALAR_SUMMATION_READY = '1';
+        end loop;
+      end if;
+
+      if (STIMULUS_NTM_SCALAR_SUMMATION_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_SUMMATION_CASE 1    ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- CONTROL
+        SCALAR_SUMMATION_DATA_IN_ENABLE <= '1';
+
+        -- DATA
+        SCALAR_SUMMATION_DATA_IN <= TWO_DATA;
+
+        -- LOOP
+        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+
+        loop
+          if ((SCALAR_SUMMATION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            SCALAR_SUMMATION_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            SCALAR_SUMMATION_DATA_IN <= TWO_DATA;
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            SCALAR_SUMMATION_DATA_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit when SCALAR_SUMMATION_READY = '1';
+        end loop;
       end if;
 
       wait for WORKING;
