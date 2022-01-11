@@ -137,7 +137,6 @@ architecture ntm_matrix_product_architecture of ntm_matrix_product is
   -- Internal Signals
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal data_a_in_i_multiplier_int : std_logic;
   signal data_a_in_j_multiplier_int : std_logic;
@@ -196,7 +195,6 @@ begin
 
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
-      index_k_loop <= ZERO_CONTROL;
 
       data_a_in_i_multiplier_int <= '0';
       data_a_in_j_multiplier_int <= '0';
@@ -221,7 +219,6 @@ begin
             -- Assignations
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
 
             -- FSM Control
             controller_ctrl_fsm_int <= INPUT_I_STATE;

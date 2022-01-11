@@ -198,6 +198,9 @@ begin
             -- Data Internal
             data_int_scalar_adder <= DATA_IN;
 
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '1';
+
             -- FSM Control
             controller_ctrl_fsm_int <= INPUT_STATE;
           end if;
@@ -245,7 +248,7 @@ begin
         when SCALAR_DIVIDER_STATE =>  -- STEP 3
 
           if (ready_scalar_divider = '1') then
-            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(TWO_CONTROL)) then
               -- Control Outputs
               READY <= '1';
 
