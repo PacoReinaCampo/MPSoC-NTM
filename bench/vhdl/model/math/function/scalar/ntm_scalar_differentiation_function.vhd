@@ -162,7 +162,18 @@ begin
       start_scalar_adder   <= '0';
       start_scalar_divider <= '0';
 
+      operation_scalar_adder <= '1';
+
       index_loop <= ZERO_CONTROL;
+
+      -- Data Internal
+     data_a_in_scalar_adder <= ZERO_DATA;
+     data_b_in_scalar_adder <= ZERO_DATA;
+
+     data_a_in_scalar_divider <= ZERO_DATA;
+     data_b_in_scalar_divider <= ZERO_DATA;
+
+     data_int_scalar_adder <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -183,9 +194,12 @@ begin
 
         when INPUT_INITIAL_STATE =>  -- STEP 1
 
-          if (DATA_IN_ENABLE = '1') then
+          if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
             -- Data Internal
             data_int_scalar_adder <= DATA_IN;
+
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= INPUT_STATE;
@@ -193,7 +207,7 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          if (DATA_IN_ENABLE = '1') then
+          if (DATA_IN_ENABLE = '1' or (unsigned(index_loop) = unsigned(ZERO_CONTROL))) then
             -- Control Inputs
             operation_scalar_adder <= '1';
 
@@ -234,7 +248,7 @@ begin
         when SCALAR_DIVIDER_STATE =>  -- STEP 3
 
           if (ready_scalar_divider = '1') then
-            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(TWO_CONTROL)) then
               -- Control Outputs
               READY <= '1';
 

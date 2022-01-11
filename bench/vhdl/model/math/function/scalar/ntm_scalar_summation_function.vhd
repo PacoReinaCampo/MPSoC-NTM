@@ -138,8 +138,18 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      DATA_OUT_ENABLE <= '0';
+
       -- Control Internal
+      start_scalar_adder <= '0';
+
+      operation_scalar_adder <= '0';
+
       index_loop <= ZERO_CONTROL;
+
+      -- Data Internal
+      data_a_in_scalar_adder <= ZERO_DATA;
+      data_b_in_scalar_adder <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -147,6 +157,8 @@ begin
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
+
+          DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
             -- Control Internal
@@ -158,7 +170,7 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          if (DATA_IN_ENABLE = '1') then
+          if (DATA_IN_ENABLE = '1' or (unsigned(index_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
             data_a_in_scalar_adder <= DATA_IN;
 
@@ -171,12 +183,14 @@ begin
             -- Control Internal
             start_scalar_adder <= '1';
 
+            operation_scalar_adder <= '0';
+
             -- FSM Control
             summation_ctrl_fsm_int <= SCALAR_ADDER_STATE;
-          else
-            -- Control Outputs
-            DATA_OUT_ENABLE <= '0';
           end if;
+
+          -- Control Outputs
+          DATA_OUT_ENABLE <= '0';
 
         when SCALAR_ADDER_STATE =>  -- STEP 2
 

@@ -1,9 +1,5 @@
 ../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
 
-../../../../../../../rtl/vhdl/buffer/ntm_vector_buffer.vhd
-../../../../../../../rtl/vhdl/buffer/ntm_matrix_buffer.vhd
-../../../../../../../rtl/vhdl/buffer/ntm_tensor_buffer.vhd
-
 ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_adder.vhd
 ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_multiplier.vhd
 ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_divider.vhd

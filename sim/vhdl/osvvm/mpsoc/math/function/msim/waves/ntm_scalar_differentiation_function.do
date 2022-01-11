@@ -5,9 +5,9 @@ quietly WaveActivateNextPane {} 0
 add wave -noupdate /ntm_function_pkg/MONITOR_TEST
 add wave -noupdate /ntm_function_pkg/MONITOR_CASE
 
-add wave -noupdate -logarithm {=========================================}
-add wave -noupdate -logarithm {NTM SCALAR DIFFERENTIATION TEST}
-add wave -noupdate -logarithm {=========================================}
+add wave -noupdate -divider {=========================================}
+add wave -noupdate -divider {NTM SCALAR DIFFERENTIATION TEST}
+add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /ntm_function_testbench/ntm_scalar_differentiation_function_test/scalar_differentiation_function/CLK
 add wave -noupdate /ntm_function_testbench/ntm_scalar_differentiation_function_test/scalar_differentiation_function/RST

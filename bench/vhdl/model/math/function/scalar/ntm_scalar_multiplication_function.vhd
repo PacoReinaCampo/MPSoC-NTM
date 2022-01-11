@@ -136,8 +136,16 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      DATA_OUT_ENABLE <= '0';
+
       -- Control Internal
+      start_scalar_multiplier <= '0';
+
       index_loop <= ZERO_CONTROL;
+
+      -- Data Internal
+      data_a_in_scalar_multiplier <= ZERO_DATA;
+      data_b_in_scalar_multiplier <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -145,6 +153,8 @@ begin
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
+
+          DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
             -- Control Internal
@@ -156,12 +166,12 @@ begin
 
         when INPUT_STATE =>  -- STEP 1
 
-          if (DATA_IN_ENABLE = '1') then
+          if (DATA_IN_ENABLE = '1' or (unsigned(index_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
             data_a_in_scalar_multiplier <= DATA_IN;
 
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
-              data_b_in_scalar_multiplier <= ZERO_DATA;
+              data_b_in_scalar_multiplier <= ONE_DATA;
             else
               data_b_in_scalar_multiplier <= data_out_scalar_multiplier;
             end if;
@@ -171,10 +181,10 @@ begin
 
             -- FSM Control
             multiplication_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
-          else
-            -- Control Outputs
-            DATA_OUT_ENABLE <= '0';
           end if;
+
+          -- Control Outputs
+          DATA_OUT_ENABLE <= '0';
 
         when SCALAR_MULTIPLIER_STATE =>  -- STEP 2
 

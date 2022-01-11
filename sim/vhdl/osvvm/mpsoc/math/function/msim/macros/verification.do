@@ -73,13 +73,13 @@ alias ntm_scalar_cosh_function_verification_compilation {
 ##################################################################################################
 
 alias ntm_scalar_cosine_similarity_function_verification_compilation {
-  echo "TEST: NTM_SCALAR_COSINE_SIMILARITY_FUNCTION_TEST"
+  echo "TEST: NTM_SCALAR_COSINE_SIMILARITY_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/ntm_function_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/ntm_function_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/ntm_function_testbench.vhd
 
-  vsim -g /ntm_function_testbench/ENABLE_NTM_SCALAR_COSINE_SIMILARITY_FUNCTION_TEST=true -t ps +notimingchecks -L unisim work.ntm_function_testbench
+  vsim -g /ntm_function_testbench/ENABLE_NTM_SCALAR_COSINE_SIMILARITY_TEST=true -t ps +notimingchecks -L unisim work.ntm_function_testbench
 
   #MACROS
   add log -r sim:/ntm_function_testbench/*
@@ -88,8 +88,8 @@ alias ntm_scalar_cosine_similarity_function_verification_compilation {
   view -title ntm_scalar_cosine_similarity_function wave
   do $simulation_path/mpsoc/math/function/msim/waves/ntm_scalar_cosine_similarity_function.do
 
-  force -freeze sim:/ntm_function_pkg/STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_FUNCTION_TEST true 0
-  force -freeze sim:/ntm_function_pkg/STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_FUNCTION_CASE_0 true 0
+  force -freeze sim:/ntm_function_pkg/STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_TEST true 0
+  force -freeze sim:/ntm_function_pkg/STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -450,13 +450,13 @@ alias ntm_vector_cosh_function_verification_compilation {
 ##################################################################################################
 
 alias ntm_vector_cosine_similarity_function_verification_compilation {
-  echo "TEST: NTM_VECTOR_COSINE_SIMILARITY_FUNCTION_TEST"
+  echo "TEST: NTM_VECTOR_COSINE_SIMILARITY_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/ntm_function_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/ntm_function_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/ntm_function_testbench.vhd
 
-  vsim -g /ntm_function_testbench/ENABLE_NTM_VECTOR_COSINE_SIMILARITY_FUNCTION_TEST=true -t ps +notimingchecks -L unisim work.ntm_function_testbench
+  vsim -g /ntm_function_testbench/ENABLE_NTM_VECTOR_COSINE_SIMILARITY_TEST=true -t ps +notimingchecks -L unisim work.ntm_function_testbench
 
   #MACROS
   add log -r sim:/ntm_function_testbench/*
@@ -465,8 +465,8 @@ alias ntm_vector_cosine_similarity_function_verification_compilation {
   view -title ntm_vector_cosine_similarity_function wave
   do $simulation_path/mpsoc/math/function/msim/waves/ntm_vector_cosine_similarity_function.do
 
-  force -freeze sim:/ntm_function_pkg/STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_FUNCTION_TEST true 0
-  force -freeze sim:/ntm_function_pkg/STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_FUNCTION_CASE_0 true 0
+  force -freeze sim:/ntm_function_pkg/STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_TEST true 0
+  force -freeze sim:/ntm_function_pkg/STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_0 true 0
 
   onbreak {resume}
   run -all
@@ -827,13 +827,13 @@ alias ntm_matrix_cosh_function_verification_compilation {
 ##################################################################################################
 
 alias ntm_matrix_cosine_similarity_function_verification_compilation {
-  echo "TEST: NTM_MATRIX_COSINE_SIMILARITY_FUNCTION_TEST"
+  echo "TEST: NTM_MATRIX_COSINE_SIMILARITY_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/ntm_function_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/ntm_function_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/function/ntm_function_testbench.vhd
 
-  vsim -g /ntm_function_testbench/ENABLE_NTM_MATRIX_COSINE_SIMILARITY_FUNCTION_TEST=true -t ps +notimingchecks -L unisim work.ntm_function_testbench
+  vsim -g /ntm_function_testbench/ENABLE_NTM_MATRIX_COSINE_SIMILARITY_TEST=true -t ps +notimingchecks -L unisim work.ntm_function_testbench
 
   #MACROS
   add log -r sim:/ntm_function_testbench/*
@@ -842,8 +842,8 @@ alias ntm_matrix_cosine_similarity_function_verification_compilation {
   view -title ntm_matrix_cosine_similarity_function wave
   do $simulation_path/mpsoc/math/function/msim/waves/ntm_matrix_cosine_similarity_function.do
 
-  force -freeze sim:/ntm_function_pkg/STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_FUNCTION_TEST true 0
-  force -freeze sim:/ntm_function_pkg/STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_FUNCTION_CASE_0 true 0
+  force -freeze sim:/ntm_function_pkg/STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_TEST true 0
+  force -freeze sim:/ntm_function_pkg/STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_0 true 0
 
   onbreak {resume}
   run -all

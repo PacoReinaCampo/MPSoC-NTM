@@ -25,7 +25,6 @@ alias ntm_matrix_product_design_compilation {
 
 alias ntm_matrix_transpose_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/buffer/ntm_matrix_buffer.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/ntm_matrix_transpose.vhd
 }
 

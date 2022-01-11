@@ -67,9 +67,11 @@ entity ntm_matrix_product is
     DATA_OUT_J_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -82,13 +84,17 @@ architecture ntm_matrix_product_architecture of ntm_matrix_product is
   -- Types
   -----------------------------------------------------------------------
 
-  type multiplier_ctrl_fsm is (
+  -- Finite State Machine
+  type product_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
     ENDER_I_STATE,                      -- STEP 3
     ENDER_J_STATE                       -- STEP 4
     );
+
+  -- Buffer
+  type matrix_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Constants
@@ -114,9 +120,13 @@ architecture ntm_matrix_product_architecture of ntm_matrix_product is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal multiplier_ctrl_fsm_int : multiplier_ctrl_fsm;
+  signal product_ctrl_fsm_int : product_ctrl_fsm;
 
-  -- Internal Signals
+  -- Buffer
+  signal matrix_a_int : matrix_buffer;
+  signal matrix_b_int : matrix_buffer;
+
+  -- Control Internal
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
@@ -151,28 +161,6 @@ architecture ntm_matrix_product_architecture of ntm_matrix_product is
   signal data_out_scalar_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal overflow_out_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MATRIX A BUFFER
-  -- CONTROL
-  signal operation_matrix_a_buffer : std_logic;
-
-  -- DATA
-  signal index_i_in_matrix_a_buffer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal index_j_in_matrix_a_buffer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  signal data_in_matrix_a_buffer  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_a_buffer : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- MATRIX B BUFFER
-  -- CONTROL
-  signal operation_matrix_b_buffer : std_logic;
-
-  -- DATA
-  signal index_i_in_matrix_b_buffer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal index_j_in_matrix_b_buffer : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  signal data_in_matrix_b_buffer  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_b_buffer : std_logic_vector(DATA_SIZE-1 downto 0);
-
 begin
 
   -----------------------------------------------------------------------
@@ -198,6 +186,8 @@ begin
       start_scalar_adder      <= '0';
       start_scalar_multiplier <= '0';
 
+	  operation_scalar_adder <= '0';
+
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
 
@@ -207,21 +197,15 @@ begin
       data_b_in_j_multiplier_int <= '0';
 
       -- Data Internal
-      index_i_in_matrix_a_buffer <= ZERO_CONTROL;
-      index_j_in_matrix_a_buffer <= ZERO_CONTROL;
+      data_a_in_scalar_adder <= ZERO_DATA;
+      data_b_in_scalar_adder <= ZERO_DATA;
 
-      data_in_matrix_a_buffer  <= ZERO_DATA;
-      data_out_matrix_a_buffer <= ZERO_DATA;
-
-      index_i_in_matrix_b_buffer <= ZERO_CONTROL;
-      index_j_in_matrix_b_buffer <= ZERO_CONTROL;
-
-      data_in_matrix_b_buffer  <= ZERO_DATA;
-      data_out_matrix_b_buffer <= ZERO_DATA;
-
+      data_a_in_scalar_multiplier <= ZERO_DATA;
+      data_b_in_scalar_multiplier <= ZERO_DATA;
+	  
     elsif (rising_edge(CLK)) then
 
-      case multiplier_ctrl_fsm_int is
+      case product_ctrl_fsm_int is
         when STARTER_STATE =>  -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -235,14 +219,14 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            multiplier_ctrl_fsm_int <= INPUT_I_STATE;
+            product_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
         when INPUT_I_STATE =>  -- STEP 1
 
           if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1')) or (unsigned(index_j_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
-            data_in_matrix_a_buffer <= DATA_A_IN;
+            matrix_a_int(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop))) <= DATA_A_IN;
 
             -- Control Internal
             data_a_in_i_multiplier_int <= '1';
@@ -251,7 +235,7 @@ begin
 
           if (((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) or (unsigned(index_j_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
-            data_in_matrix_b_buffer <= DATA_B_IN;
+            matrix_b_int(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop))) <= DATA_B_IN;
 
             -- Control Internal
             data_b_in_i_multiplier_int <= '1';
@@ -263,9 +247,6 @@ begin
           DATA_OUT_J_ENABLE <= '0';
 
           if (data_a_in_i_multiplier_int = '1' and data_a_in_j_multiplier_int = '1' and data_b_in_i_multiplier_int = '1' and data_b_in_j_multiplier_int = '1') then
-            -- Data Inputs
-            index_i_in_matrix_a_buffer <= index_i_loop;
-            index_j_in_matrix_a_buffer <= index_j_loop;
 
             -- Control Internal
             data_a_in_i_multiplier_int <= '0';
@@ -274,14 +255,14 @@ begin
             data_b_in_j_multiplier_int <= '0';
 
             -- FSM Control
-            multiplier_ctrl_fsm_int <= ENDER_J_STATE;
+            product_ctrl_fsm_int <= ENDER_J_STATE;
           end if;
 
         when INPUT_J_STATE =>  -- STEP 2
 
           if (DATA_A_IN_J_ENABLE = '1') then
             -- Data Inputs
-            data_in_matrix_a_buffer <= DATA_A_IN;
+            matrix_a_int(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop))) <= DATA_A_IN;
 
             -- Control Internal
             data_a_in_j_multiplier_int <= '1';
@@ -289,7 +270,7 @@ begin
 
           if (DATA_B_IN_J_ENABLE = '1') then
             -- Data Inputs
-            data_in_matrix_b_buffer <= DATA_B_IN;
+            matrix_b_int(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop))) <= DATA_B_IN;
 
             -- Control Internal
             data_b_in_j_multiplier_int <= '1';
@@ -304,18 +285,18 @@ begin
             data_b_in_j_multiplier_int <= '0';
 
             -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              multiplier_ctrl_fsm_int <= ENDER_I_STATE;
+            if (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
+              product_ctrl_fsm_int <= ENDER_I_STATE;
             else
-              multiplier_ctrl_fsm_int <= ENDER_J_STATE;
+              product_ctrl_fsm_int <= ENDER_J_STATE;
             end if;
           end if;
 
         when ENDER_I_STATE =>  -- STEP 3
 
-          if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            DATA_OUT <= data_out_matrix_b_buffer;
+            DATA_OUT <= matrix_a_int(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
             DATA_OUT_I_ENABLE <= '1';
@@ -328,10 +309,10 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            multiplier_ctrl_fsm_int <= STARTER_STATE;
-          elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            product_ctrl_fsm_int <= STARTER_STATE;
+          elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            DATA_OUT <= data_out_matrix_b_buffer;
+            DATA_OUT <= matrix_a_int(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
             DATA_OUT_I_ENABLE <= '1';
@@ -342,14 +323,14 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            multiplier_ctrl_fsm_int <= INPUT_I_STATE;
+            product_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
         when ENDER_J_STATE =>  -- STEP 3
 
-          if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+          if (unsigned(index_j_loop) < unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
-            DATA_OUT <= data_out_matrix_b_buffer;
+            DATA_OUT <= matrix_a_int(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
             DATA_OUT_J_ENABLE <= '1';
@@ -358,12 +339,12 @@ begin
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
             -- FSM Control
-            multiplier_ctrl_fsm_int <= INPUT_J_STATE;
+            product_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
         when others =>
           -- FSM Control
-          multiplier_ctrl_fsm_int <= STARTER_STATE;
+          product_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
@@ -414,54 +395,6 @@ begin
 
       DATA_OUT     => data_out_scalar_multiplier,
       OVERFLOW_OUT => overflow_out_scalar_multiplier
-      );
-
-  -- MATRIX A BUFFER
-  matrix_a_buffer : ntm_matrix_buffer
-    generic map (
-      BUFFER_I_SIZE => CONTROL_SIZE,
-      BUFFER_J_SIZE => CONTROL_SIZE,
-
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      OPERATION => operation_matrix_a_buffer,
-
-      -- DATA
-      INDEX_I_IN => index_i_in_matrix_a_buffer,
-      INDEX_J_IN => index_j_in_matrix_a_buffer,
-
-      DATA_IN  => data_in_matrix_a_buffer,
-      DATA_OUT => data_out_matrix_a_buffer
-      );
-
-  -- MATRIX B BUFFER
-  matrix_b_buffer : ntm_matrix_buffer
-    generic map (
-      BUFFER_I_SIZE => CONTROL_SIZE,
-      BUFFER_J_SIZE => CONTROL_SIZE,
-
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      OPERATION => operation_matrix_b_buffer,
-
-      -- DATA
-      INDEX_I_IN => index_i_in_matrix_b_buffer,
-      INDEX_J_IN => index_j_in_matrix_b_buffer,
-
-      DATA_IN  => data_in_matrix_b_buffer,
-      DATA_OUT => data_out_matrix_b_buffer
       );
 
 end architecture;

@@ -3,10 +3,6 @@ all: build simulate
 build:
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
 
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/buffer/ntm_vector_buffer.vhd
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/buffer/ntm_matrix_buffer.vhd
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/buffer/ntm_tensor_buffer.vhd
-
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_adder.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_multiplier.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_divider.vhd

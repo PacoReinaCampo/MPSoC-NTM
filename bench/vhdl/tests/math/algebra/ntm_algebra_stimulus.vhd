@@ -282,11 +282,12 @@ begin
       MATRIX_PRODUCT_SIZE_B_I_IN <= THREE_CONTROL;
       MATRIX_PRODUCT_SIZE_B_J_IN <= THREE_CONTROL;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_PRODUCT_CASE 0      ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_MATRIX_PRODUCT_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_PRODUCT_CASE 0      ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
@@ -344,11 +345,12 @@ begin
         end loop;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_PRODUCT_CASE 1      ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_MATRIX_PRODUCT_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_PRODUCT_CASE 1      ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
@@ -421,11 +423,12 @@ begin
       TENSOR_TRANSPOSE_SIZE_J_IN <= THREE_CONTROL;
       TENSOR_TRANSPOSE_SIZE_K_IN <= THREE_CONTROL;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_TENSOR_TRANSPOSE_CASE 0    ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_TRANSPOSE_CASE 0    ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         TENSOR_TRANSPOSE_DATA_IN_I_ENABLE <= '1';
@@ -489,11 +492,12 @@ begin
         end loop;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_TENSOR_TRANSPOSE_CASE 1    ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_TRANSPOSE_CASE 1    ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         TENSOR_TRANSPOSE_DATA_IN_I_ENABLE <= '1';
@@ -571,11 +575,12 @@ begin
       MATRIX_TRANSPOSE_SIZE_I_IN <= THREE_CONTROL;
       MATRIX_TRANSPOSE_SIZE_J_IN <= THREE_CONTROL;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_TRANSPOSE_CASE 0    ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_TRANSPOSE_CASE 0    ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         MATRIX_TRANSPOSE_DATA_IN_I_ENABLE <= '1';
@@ -622,11 +627,12 @@ begin
         end loop;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_TRANSPOSE_CASE 1    ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_TRANSPOSE_CASE 1    ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         MATRIX_TRANSPOSE_DATA_IN_I_ENABLE <= '1';
@@ -686,11 +692,12 @@ begin
       -- DATA
       SCALAR_PRODUCT_LENGTH_IN <= THREE_CONTROL;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_PRODUCT_CASE 0      ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_SCALAR_PRODUCT_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_PRODUCT_CASE 0      ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '1';
@@ -729,11 +736,12 @@ begin
         end loop;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_PRODUCT_CASE 1      ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_SCALAR_PRODUCT_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_PRODUCT_CASE 1      ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '1';
@@ -790,11 +798,12 @@ begin
       TENSOR_PRODUCT_SIZE_B_J_IN <= THREE_CONTROL;
       TENSOR_PRODUCT_SIZE_B_K_IN <= THREE_CONTROL;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_TENSOR_PRODUCT_CASE 0      ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_TENSOR_PRODUCT_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_PRODUCT_CASE 0      ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
@@ -874,11 +883,12 @@ begin
         end loop;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_TENSOR_PRODUCT_CASE 1      ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_TENSOR_PRODUCT_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_PRODUCT_CASE 1      ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
