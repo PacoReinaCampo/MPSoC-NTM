@@ -89,9 +89,6 @@ architecture ntm_matrix_transpose_architecture of ntm_matrix_transpose is
     ENDER_J_STATE                       -- STEP 4
     );
 
-  -- Buffer
-  type matrix is array (BUFFER_I_SIZE-1 downto 0, BUFFER_J_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
-
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
@@ -118,12 +115,20 @@ architecture ntm_matrix_transpose_architecture of ntm_matrix_transpose is
   -- Finite State Machine
   signal transpose_ctrl_fsm_int : transpose_ctrl_fsm;
 
-  -- Buffer
-  signal matrix_int : matrix;
-
-  -- Control Signals
+  -- Internal Signals
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  -- MATRIX BUFFER
+  -- CONTROL
+  signal operation_matrix_buffer : std_logic;
+
+  -- DATA
+  signal index_i_in_matrix_buffer : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_in_matrix_buffer : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal data_in_matrix_buffer  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_buffer : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -150,6 +155,14 @@ begin
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
 
+      -- Data Internal
+      operation_matrix_buffer <= '0';
+
+      index_i_in_matrix_buffer <= ZERO_CONTROL;
+      index_j_in_matrix_buffer <= ZERO_CONTROL;
+
+      data_in_matrix_buffer <= ZERO_DATA;
+
     elsif (rising_edge(CLK)) then
 
       case transpose_ctrl_fsm_int is
@@ -160,8 +173,10 @@ begin
           DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
 
+          -- Control Internal
+          operation_matrix_buffer <= '0';
+
           if (START = '1') then
-            -- Control Internal
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
 
@@ -172,68 +187,53 @@ begin
         when INPUT_I_STATE =>  -- STEP 1
 
           if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) or (unsigned(index_j_loop) = unsigned(ZERO_CONTROL))) then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-              -- Data Outputs
-              matrix_int(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop))) <= DATA_IN;
+            -- Data Inputs
+            data_in_matrix_buffer <= DATA_IN;
 
-              -- Control Outputs
-              DATA_OUT_I_ENABLE <= '1';
-              DATA_OUT_J_ENABLE <= '1';
+            -- Data Internal
+            index_i_in_matrix_buffer <= index_i_loop; 
+            index_j_in_matrix_buffer <= index_j_loop;
 
-              -- Control Internal
-              index_i_loop <= ZERO_CONTROL;
-              index_j_loop <= ZERO_CONTROL;
+            -- Control Internal
+            operation_matrix_buffer <= '1';
 
-              -- FSM Control
-              transpose_ctrl_fsm_int <= ENDER_I_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-              -- Data Outputs
-              matrix_int(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop))) <= DATA_IN;
-
-              -- Control Outputs
-              DATA_OUT_I_ENABLE <= '1';
-              DATA_OUT_J_ENABLE <= '1';
-
-              -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-              index_j_loop <= ZERO_CONTROL;
-
-              -- FSM Control
-              transpose_ctrl_fsm_int <= INPUT_J_STATE;
-            end if;
-          else
-            -- Control Output
-            DATA_OUT_I_ENABLE <= '0';
-            DATA_OUT_J_ENABLE <= '0';
+            -- FSM Control
+            transpose_ctrl_fsm_int <= ENDER_J_STATE;
           end if;
+
+          -- Control Outputs
+          DATA_OUT_I_ENABLE <= '0';
+          DATA_OUT_J_ENABLE <= '0';
 
         when INPUT_J_STATE =>  -- STEP 2
 
           if (DATA_IN_J_ENABLE = '1') then
-            if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              -- Data Outputs
-              matrix_int(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop))) <= DATA_IN;
+            -- Data Inputs
+            data_in_matrix_buffer <= DATA_IN;
 
-              -- Control Outputs
-              DATA_OUT_J_ENABLE <= '1';
+            -- Data Internal
+            index_i_in_matrix_buffer <= index_i_loop; 
+            index_j_in_matrix_buffer <= index_j_loop;
 
-              -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            -- Control Internal
+            operation_matrix_buffer <= '1';
 
-              -- FSM Control
-              transpose_ctrl_fsm_int <= INPUT_I_STATE;
+            -- FSM Control
+            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              transpose_ctrl_fsm_int <= ENDER_I_STATE;
+            else
+              transpose_ctrl_fsm_int <= ENDER_J_STATE;
             end if;
-          else
-            -- Control Output
-            DATA_OUT_I_ENABLE <= '0';
-            DATA_OUT_J_ENABLE <= '0';
           end if;
+
+          -- Control Outputs
+          DATA_OUT_J_ENABLE <= '0';
 
         when ENDER_I_STATE =>  -- STEP 3
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_i_loop)));
+            DATA_OUT <= data_out_matrix_buffer;
 
             -- Control Outputs
             DATA_OUT_I_ENABLE <= '1';
@@ -241,7 +241,13 @@ begin
 
             READY <= '1';
 
+            -- Data Internal
+            index_i_in_matrix_buffer <= index_i_loop; 
+            index_j_in_matrix_buffer <= index_j_loop;
+
             -- Control Internal
+            operation_matrix_buffer <= '0';
+
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
 
@@ -249,42 +255,46 @@ begin
             transpose_ctrl_fsm_int <= STARTER_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_i_loop)));
+            DATA_OUT <= data_out_matrix_buffer;
 
             -- Control Outputs
             DATA_OUT_I_ENABLE <= '1';
             DATA_OUT_J_ENABLE <= '1';
 
+            -- Data Internal
+            index_i_in_matrix_buffer <= index_i_loop; 
+            index_j_in_matrix_buffer <= index_j_loop;
+
             -- Control Internal
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            operation_matrix_buffer <= '0';
+
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
             transpose_ctrl_fsm_int <= INPUT_I_STATE;
-          else
-            -- Control Output
-            DATA_OUT_I_ENABLE <= '0';
-            DATA_OUT_J_ENABLE <= '0';
           end if;
 
         when ENDER_J_STATE =>  -- STEP 4
 
           if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_i_loop)));
+            DATA_OUT <= data_out_matrix_buffer;
 
             -- Control Outputs
             DATA_OUT_J_ENABLE <= '1';
 
+            -- Data Internal
+            index_i_in_matrix_buffer <= index_i_loop; 
+            index_j_in_matrix_buffer <= index_j_loop;
+
             -- Control Internal
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            operation_matrix_buffer <= '0';
+
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop)+unsigned(ONE_CONTROL));
 
             -- FSM Control
             transpose_ctrl_fsm_int <= INPUT_J_STATE;
-          else
-            -- Control Output
-            DATA_OUT_I_ENABLE <= '0';
-            DATA_OUT_J_ENABLE <= '0';
           end if;
 
         when others =>
@@ -293,5 +303,29 @@ begin
       end case;
     end if;
   end process;
+
+  -- MATRIX BUFFER
+  matrix_buffer : ntm_matrix_buffer
+    generic map (
+      BUFFER_I_SIZE => CONTROL_SIZE,
+      BUFFER_J_SIZE => CONTROL_SIZE,
+
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      OPERATION => operation_matrix_buffer,
+
+      -- DATA
+      INDEX_I_IN => index_i_in_matrix_buffer,
+      INDEX_J_IN => index_j_in_matrix_buffer,
+
+      DATA_IN  => data_in_matrix_buffer,
+      DATA_OUT => data_out_matrix_buffer
+      );
 
 end architecture;

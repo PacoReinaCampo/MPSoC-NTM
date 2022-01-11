@@ -27,6 +27,14 @@ add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_trans
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/index_i_loop
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/index_j_loop
 
+add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/operation_matrix_buffer
+
+add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/index_i_in_matrix_buffer
+add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/index_j_in_matrix_buffer
+
+add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/data_in_matrix_buffer
+add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/data_out_matrix_buffer
+
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}
 configure wave -namecolwidth 305

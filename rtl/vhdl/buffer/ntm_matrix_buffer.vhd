@@ -49,7 +49,7 @@ entity ntm_matrix_buffer is
     BUFFER_I_SIZE : integer := 10;
     BUFFER_J_SIZE : integer := 10;
 
-    DATA_SIZE : integer := 128;
+    DATA_SIZE : integer := 128
     );
   port (
     -- GLOBAL
@@ -57,9 +57,6 @@ entity ntm_matrix_buffer is
     RST : in std_logic;
 
     -- CONTROL
-    START : in  std_logic;
-    READY : out std_logic;
-
     OPERATION : in std_logic;
 
     -- DATA
@@ -75,11 +72,6 @@ architecture ntm_matrix_buffer_architecture of ntm_matrix_buffer is
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
-
-  type buffer_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    ENDER_STATE                         -- STEP 1
-    );
 
   -- Buffer
   type matrix_buffer is array (BUFFER_I_SIZE-1 downto 0, BUFFER_J_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
@@ -105,14 +97,8 @@ architecture ntm_matrix_buffer_architecture of ntm_matrix_buffer is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- Finite State Machine
-  signal buffer_ctrl_fsm_int : buffer_ctrl_fsm;
-
   -- Buffer
   signal matrix_int : matrix_buffer;
-
-  -- Data Internal
-  signal data_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -132,40 +118,14 @@ begin
       -- Data Outputs
       DATA_OUT <= ZERO_DATA;
 
-      -- Control Outputs
-      READY <= '0';
-
     elsif (rising_edge(CLK)) then
 
       if (OPERATION = '1') then
-        case buffer_ctrl_fsm_int is
-          when STARTER_STATE =>  -- STEP 0
-            -- Control Outputs
-            READY <= '0';
-
-            if (START = '1') then
-              -- Data Inputs
-              matrix_int(to_integer(unsigned(INDEX_I_IN)),to_integer(unsigned(INDEX_J_IN))) <= DATA_IN;
-
-              -- FSM Control
-              buffer_ctrl_fsm_int <= ENDER_STATE;
-            end if;
-
-          when ENDER_STATE =>  -- STEP 1
-
-            -- Data Outputs
-            DATA_OUT <= data_int;
-
-            -- Control Outputs
-            READY <= '1';
-
-          when others =>
-            -- FSM Control
-            buffer_ctrl_fsm_int <= STARTER_STATE;
-        end case;
+        -- Data Inputs
+        matrix_int(to_integer(unsigned(INDEX_I_IN)),to_integer(unsigned(INDEX_J_IN))) <= DATA_IN;
       else
-        -- Data Internal
-        data_int <= matrix_int(to_integer(unsigned(INDEX_I_IN)),to_integer(unsigned(INDEX_J_IN)));
+        -- Data Outputs
+        DATA_OUT <= matrix_int(to_integer(unsigned(INDEX_I_IN)),to_integer(unsigned(INDEX_J_IN)));
       end if;
 
     end if;

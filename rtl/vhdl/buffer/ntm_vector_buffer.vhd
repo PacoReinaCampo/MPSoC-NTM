@@ -48,7 +48,7 @@ entity ntm_vector_buffer is
   generic (
     BUFFER_SIZE : integer := 10;
 
-    DATA_SIZE : integer := 128;
+    DATA_SIZE : integer := 128
     );
   port (
     -- GLOBAL
@@ -56,13 +56,10 @@ entity ntm_vector_buffer is
     RST : in std_logic;
 
     -- CONTROL
-    START : in  std_logic;
-    READY : out std_logic;
-
     OPERATION : in std_logic;
 
     -- DATA
-    INDEX_IN : in  std_logic_vector(BUFFER_I_SIZE-1 downto 0);
+    INDEX_IN : in  std_logic_vector(BUFFER_SIZE-1 downto 0);
     DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -74,13 +71,8 @@ architecture ntm_vector_buffer_architecture of ntm_vector_buffer is
   -- Types
   -----------------------------------------------------------------------
 
-  type buffer_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    ENDER_STATE                         -- STEP 1
-    );
-
   -- Buffer
-  type vector_buffer is std_logic_vector(BUFFER_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
+  type vector_buffer is array (BUFFER_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Constants
@@ -103,14 +95,8 @@ architecture ntm_vector_buffer_architecture of ntm_vector_buffer is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- Finite State Machine
-  signal buffer_ctrl_fsm_int : buffer_ctrl_fsm;
-
   -- Buffer
   signal vector_int : vector_buffer;
-
-  -- Data Internal
-  signal data_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -130,40 +116,14 @@ begin
       -- Data Outputs
       DATA_OUT <= ZERO_DATA;
 
-      -- Control Outputs
-      READY <= '0';
-
     elsif (rising_edge(CLK)) then
 
       if (OPERATION = '1') then
-        case buffer_ctrl_fsm_int is
-          when STARTER_STATE =>  -- STEP 0
-            -- Control Outputs
-            READY <= '0';
-
-            if (START = '1') then
-              -- Data Inputs
-              vector_int(to_integer(unsigned(INDEX_IN))) <= DATA_IN;
-
-              -- FSM Control
-              buffer_ctrl_fsm_int <= ENDER_STATE;
-            end if;
-
-          when ENDER_STATE =>  -- STEP 1
-
-            -- Data Outputs
-            DATA_OUT <= data_int;
-
-            -- Control Outputs
-            READY <= '1';
-
-          when others =>
-            -- FSM Control
-            buffer_ctrl_fsm_int <= STARTER_STATE;
-        end case;
+        -- Data Inputs
+        vector_int(to_integer(unsigned(INDEX_IN))) <= DATA_IN;
       else
-        -- Data Internal
-        data_int <= vector_int(to_integer(unsigned(INDEX_IN)));
+        -- Data Outputs
+        DATA_OUT <= vector_int(to_integer(unsigned(INDEX_IN)));
       end if;
 
     end if;

@@ -1,5 +1,9 @@
 vhdl2008 work ../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
 
+vhdl2008 work ../../../../../../../rtl/vhdl/buffer/ntm_vector_buffer.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/buffer/ntm_matrix_buffer.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/buffer/ntm_tensor_buffer.vhd
+
 vhdl2008 work ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_adder.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_multiplier.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_divider.vhd
