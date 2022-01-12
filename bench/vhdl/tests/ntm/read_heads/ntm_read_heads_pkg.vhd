@@ -46,6 +46,17 @@ package ntm_read_heads_pkg is
   -- Types
   -----------------------------------------------------------------------
 
+  -- SYSTEM-SIZE
+  constant DATA_SIZE : integer := 512;
+
+  constant CONTROL_X_SIZE : integer := 3;
+  constant CONTROL_Y_SIZE : integer := 3;
+  constant CONTROL_Z_SIZE : integer := 3;
+
+  type tensor_buffer is array (1 to CONTROL_X_SIZE, 1 to CONTROL_Y_SIZE, 1 to CONTROL_Z_SIZE) of std_logic_vector(DATA_SIZE-1 downto 0);
+  type matrix_buffer is array (1 to CONTROL_X_SIZE, 1 to CONTROL_Y_SIZE) of std_logic_vector(DATA_SIZE-1 downto 0);
+  type vector_buffer is array (1 to CONTROL_X_SIZE) of std_logic_vector(DATA_SIZE-1 downto 0);
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
@@ -58,7 +69,11 @@ package ntm_read_heads_pkg is
   -----------------------------------------------------------------------
 
   -- SYSTEM-SIZE
-  constant DATA_SIZE : integer := 512;
+  constant SIZE_I : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
+  constant SIZE_J : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
+  constant SIZE_K : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
+
+  constant SIZE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));
 
   constant X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
   constant Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
@@ -66,6 +81,28 @@ package ntm_read_heads_pkg is
   constant W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
   constant L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
   constant R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
+
+  -- INTEGERS
+  constant ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant FOUR  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(4, DATA_SIZE));
+  constant FIVE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(5, DATA_SIZE));
+  constant SIX   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(6, DATA_SIZE));
+  constant SEVEN : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(7, DATA_SIZE));
+  constant EIGHT : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(8, DATA_SIZE));
+  constant NINE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(9, DATA_SIZE));
+
+  -- Buffer
+  constant TENSOR_SAMPLE_A : tensor_buffer := (((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO)), ((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO)), ((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO)));
+  constant TENSOR_SAMPLE_B : tensor_buffer := (((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO)), ((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO)), ((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO)));
+
+  constant MATRIX_SAMPLE_A : matrix_buffer := ((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO));
+  constant MATRIX_SAMPLE_B : matrix_buffer := ((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO));
+
+  constant VECTOR_SAMPLE_A : vector_buffer := (THREE, ONE, SIX);
+  constant VECTOR_SAMPLE_B : vector_buffer := (NINE, ZERO, FOUR);
 
   -- FUNCTIONALITY
   signal STIMULUS_NTM_READ_HEADS_TEST   : boolean := false;

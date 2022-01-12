@@ -107,10 +107,9 @@ architecture ntm_scalar_exponentiator_function_architecture of ntm_scalar_expone
   -- Data Internal
   signal data_int_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- Control Internal
-  signal index_adder_loop             : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal index_first_multiplier_loop  : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal index_second_multiplier_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_adder_loop             : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_first_multiplier_loop  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_second_multiplier_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR ADDER
   -- CONTROL
@@ -150,7 +149,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = exponentiator_function(DATA_IN)
+  -- DATA_OUT = exponentiator(DATA_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -181,9 +180,9 @@ begin
 
       operation_scalar_adder <= '0';
 
-      index_adder_loop             <= ZERO_CONTROL;
-      index_first_multiplier_loop  <= ZERO_CONTROL;
-      index_second_multiplier_loop <= ZERO_CONTROL;
+      index_adder_loop             <= ZERO_DATA;
+      index_first_multiplier_loop  <= ZERO_DATA;
+      index_second_multiplier_loop <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -196,9 +195,9 @@ begin
             -- Control Internal
             start_scalar_multiplier <= '1';
 
-            index_adder_loop             <= ZERO_CONTROL;
-            index_first_multiplier_loop  <= ZERO_CONTROL;
-            index_second_multiplier_loop <= ZERO_CONTROL;
+            index_adder_loop             <= ZERO_DATA;
+            index_first_multiplier_loop  <= ZERO_DATA;
+            index_second_multiplier_loop <= ZERO_DATA;
 
             -- Data Internal
             data_int_scalar_multiplier <= ZERO_DATA;
@@ -233,7 +232,7 @@ begin
               -- Control Internal
               start_scalar_multiplier <= '1';
 
-              index_first_multiplier_loop <= std_logic_vector(unsigned(index_first_multiplier_loop)+unsigned(ONE_CONTROL));
+              index_first_multiplier_loop <= std_logic_vector(unsigned(index_first_multiplier_loop)+unsigned(ONE_DATA));
             end if;
           else
             -- Control Internal
@@ -261,7 +260,7 @@ begin
               -- Control Internal
               start_scalar_multiplier <= '1';
 
-              index_second_multiplier_loop <= std_logic_vector(unsigned(index_second_multiplier_loop)+unsigned(ONE_CONTROL));
+              index_second_multiplier_loop <= std_logic_vector(unsigned(index_second_multiplier_loop)+unsigned(ONE_DATA));
             end if;
           else
             -- Control Internal
@@ -279,7 +278,7 @@ begin
             -- Data Internal
             data_a_in_scalar_adder <= data_out_scalar_divider;
 
-            if (unsigned(index_adder_loop) = unsigned(ONE_CONTROL)) then
+            if (unsigned(index_adder_loop) = unsigned(ONE_DATA)) then
               data_b_in_scalar_adder <= ZERO_DATA;
             else
               data_b_in_scalar_adder <= data_out_scalar_adder;
@@ -306,7 +305,7 @@ begin
               controller_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
-              index_adder_loop <= std_logic_vector(unsigned(index_adder_loop)+unsigned(ONE_CONTROL));
+              index_adder_loop <= std_logic_vector(unsigned(index_adder_loop)+unsigned(ONE_DATA));
 
               -- FSM Control
               controller_ctrl_fsm_int <= SCALAR_FIRST_MULTIPLIER_STATE;

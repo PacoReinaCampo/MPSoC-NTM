@@ -45,22 +45,17 @@ add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_b_in_k_multiplier_int
 
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/start_scalar_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/ready_scalar_adder
-
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/operation_scalar_adder
-
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_a_in_scalar_adder
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_b_in_scalar_adder
-
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/ready_scalar_adder
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_out_scalar_adder
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/overflow_out_scalar_adder
 
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/start_scalar_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/ready_scalar_multiplier
-
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_a_in_scalar_multiplier
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_b_in_scalar_multiplier
-
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/ready_scalar_multiplier
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_out_scalar_multiplier
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/overflow_out_scalar_multiplier
 

@@ -704,8 +704,8 @@ begin
         SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        SCALAR_PRODUCT_DATA_A_IN <= ONE_DATA;
-        SCALAR_PRODUCT_DATA_B_IN <= ONE_DATA;
+        SCALAR_PRODUCT_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+        SCALAR_PRODUCT_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -717,8 +717,8 @@ begin
             SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            SCALAR_PRODUCT_DATA_A_IN <= TWO_DATA;
-            SCALAR_PRODUCT_DATA_B_IN <= ONE_DATA;
+            SCALAR_PRODUCT_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            SCALAR_PRODUCT_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));

@@ -103,7 +103,7 @@ architecture ntm_scalar_logarithm_function_architecture of ntm_scalar_logarithm_
   -- Finite State Machine
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
-  -- Control Internal
+  -- Data Internal
   signal index_adder_loop      : std_logic_vector(DATA_SIZE-1 downto 0);
   signal index_multiplier_loop : std_logic_vector(DATA_SIZE-1 downto 0);
 
