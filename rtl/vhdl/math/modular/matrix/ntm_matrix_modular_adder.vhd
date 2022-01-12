@@ -210,7 +210,7 @@ begin
 
         when INPUT_I_STATE =>  -- STEP 1
 
-          if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
+          if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1')) or (unsigned(index_j_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
             data_a_in_vector_adder <= DATA_A_IN;
 
@@ -224,7 +224,7 @@ begin
             data_a_in_enable_vector_adder <= '0';
           end if;
 
-          if (((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
+          if (((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) or (unsigned(index_j_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
             data_b_in_vector_adder <= DATA_B_IN;
 
@@ -276,7 +276,11 @@ begin
             data_a_in_j_adder_int <= '1';
           else
             -- Control Internal
-            data_a_in_enable_vector_adder <= '0';
+            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              adder_ctrl_fsm_int <= ENDER_I_STATE;
+            else
+              adder_ctrl_fsm_int <= ENDER_J_STATE;
+            end if;
           end if;
 
           if (DATA_B_IN_J_ENABLE = '1') then

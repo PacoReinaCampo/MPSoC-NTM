@@ -186,7 +186,7 @@ begin
 
         when INPUT_I_STATE =>  -- STEP 1
 
-          if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
+          if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) or (unsigned(index_j_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
             modulo_in_vector_inverter <= MODULO_IN;
             size_in_vector_inverter   <= SIZE_J_IN;
@@ -199,7 +199,11 @@ begin
             data_in_enable_vector_inverter <= '1';
 
             -- FSM Control
-            inverter_ctrl_fsm_int <= ENDER_J_STATE;
+            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              inverter_ctrl_fsm_int <= ENDER_I_STATE;
+            else
+              inverter_ctrl_fsm_int <= ENDER_J_STATE;
+            end if;
           end if;
 
           -- Control Outputs

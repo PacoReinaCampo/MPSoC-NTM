@@ -204,7 +204,7 @@ begin
 
         when INPUT_I_STATE =>  -- STEP 1
 
-          if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
+          if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1')) or (unsigned(index_j_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
             data_a_in_vector_multiplier <= DATA_A_IN;
 
@@ -218,7 +218,7 @@ begin
             data_a_in_enable_vector_multiplier <= '0';
           end if;
 
-          if (((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
+          if (((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) or (unsigned(index_j_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
             data_b_in_vector_multiplier <= DATA_B_IN;
 
@@ -253,7 +253,11 @@ begin
             data_b_in_j_multiplier_int <= '0';
 
             -- FSM Control
-            multiplier_ctrl_fsm_int <= ENDER_J_STATE;
+            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              multiplier_ctrl_fsm_int <= ENDER_I_STATE;
+            else
+              multiplier_ctrl_fsm_int <= ENDER_J_STATE;
+            end if;
           end if;
 
         when INPUT_J_STATE =>  -- STEP 2

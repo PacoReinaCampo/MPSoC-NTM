@@ -370,7 +370,11 @@ begin
           start_scalar_multiplier <= '1';
 
           -- FSM Control
-          product_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
+          if (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
+            product_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
+          else
+            product_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
+          end if;
 
         when CLEAN_J_STATE =>           -- STEP 6
 
