@@ -90,7 +90,11 @@ architecture ntm_matrix_product_architecture of ntm_matrix_product is
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
     ENDER_I_STATE,                      -- STEP 3
-    ENDER_J_STATE                       -- STEP 4
+    ENDER_J_STATE,                      -- STEP 4
+    CLEAN_I_STATE,                      -- STEP 5
+    CLEAN_J_STATE,                      -- STEP 6
+    OPERATION_I_STATE,                  -- STEP 7
+    OPERATION_J_STATE                   -- STEP 8
     );
 
   -- Buffer
@@ -302,14 +306,12 @@ begin
             DATA_OUT_I_ENABLE <= '1';
             DATA_OUT_J_ENABLE <= '1';
 
-            READY <= '1';
-
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            product_ctrl_fsm_int <= STARTER_STATE;
+            product_ctrl_fsm_int <= CLEAN_I_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
             DATA_OUT <= matrix_a_int(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
@@ -326,7 +328,7 @@ begin
             product_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
-        when ENDER_J_STATE =>  -- STEP 3
+        when ENDER_J_STATE =>  -- STEP 4
 
           if (unsigned(index_j_loop) < unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
@@ -340,6 +342,77 @@ begin
 
             -- FSM Control
             product_ctrl_fsm_int <= INPUT_J_STATE;
+          end if;
+
+        when CLEAN_I_STATE =>  -- STEP 5
+
+          -- Control Outputs
+          DATA_OUT_I_ENABLE <= '0';
+          DATA_OUT_J_ENABLE <= '0';
+
+          -- FSM Control
+          product_ctrl_fsm_int <= OPERATION_J_STATE;
+
+        when CLEAN_J_STATE =>  -- STEP 6
+
+          -- Control Outputs
+          DATA_OUT_J_ENABLE <= '0';
+
+          -- FSM Control
+          if (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
+            product_ctrl_fsm_int <= OPERATION_I_STATE;
+          else
+            product_ctrl_fsm_int <= OPERATION_J_STATE;
+          end if;
+
+        when OPERATION_I_STATE =>  -- STEP 7
+
+          if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            DATA_OUT <= matrix_b_int(to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_i_loop)));
+
+            -- Control Outputs
+            DATA_OUT_I_ENABLE <= '1';
+            DATA_OUT_J_ENABLE <= '1';
+
+            READY <= '1';
+
+            -- Control Internal
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            product_ctrl_fsm_int <= STARTER_STATE;
+          elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            DATA_OUT <= matrix_b_int(to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_i_loop)));
+
+            -- Control Outputs
+            DATA_OUT_I_ENABLE <= '1';
+            DATA_OUT_J_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            product_ctrl_fsm_int <= CLEAN_I_STATE;
+          end if;
+
+        when OPERATION_J_STATE =>  -- STEP 8
+
+          if (unsigned(index_j_loop) < unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            DATA_OUT <= matrix_b_int(to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_i_loop)));
+
+            -- Control Outputs
+            DATA_OUT_J_ENABLE <= '1';
+
+            -- Control Internal
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop)+unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            product_ctrl_fsm_int <= CLEAN_J_STATE;
           end if;
 
         when others =>
