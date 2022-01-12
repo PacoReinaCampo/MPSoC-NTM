@@ -140,6 +140,9 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_in_i_enable_matrix_transpose : std_logic;
   signal data_in_j_enable_matrix_transpose : std_logic;
 
+  signal data_i_enable_matrix_transpose : std_logic;
+  signal data_j_enable_matrix_transpose : std_logic;
+
   signal data_out_i_enable_matrix_transpose : std_logic;
   signal data_out_j_enable_matrix_transpose : std_logic;
 
@@ -268,6 +271,9 @@ begin
 
       MATRIX_TRANSPOSE_DATA_IN_I_ENABLE => data_in_i_enable_matrix_transpose,
       MATRIX_TRANSPOSE_DATA_IN_J_ENABLE => data_in_j_enable_matrix_transpose,
+
+      MATRIX_TRANSPOSE_DATA_I_ENABLE => data_i_enable_matrix_transpose,
+      MATRIX_TRANSPOSE_DATA_J_ENABLE => data_j_enable_matrix_transpose,
 
       MATRIX_TRANSPOSE_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_transpose,
       MATRIX_TRANSPOSE_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_transpose,
@@ -411,6 +417,9 @@ begin
 
         DATA_IN_I_ENABLE => data_in_i_enable_matrix_transpose,
         DATA_IN_J_ENABLE => data_in_j_enable_matrix_transpose,
+
+        DATA_I_ENABLE => data_i_enable_matrix_transpose,
+        DATA_J_ENABLE => data_j_enable_matrix_transpose,
 
         DATA_OUT_I_ENABLE => data_out_i_enable_matrix_transpose,
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_transpose,
