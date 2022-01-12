@@ -247,7 +247,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_scalar_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -325,7 +325,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_matrix_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -340,9 +340,9 @@ begin
             start_matrix_product <= '0';
           end if;
 
-        when INPUT_I_FIRST_STATE =>  -- STEP 1
+        when INPUT_I_FIRST_STATE =>     -- STEP 1
 
-        when INPUT_J_FIRST_STATE =>  -- STEP 2
+        when INPUT_J_FIRST_STATE =>     -- STEP 2
 
         when MATRIX_I_FIRST_PRODUCT_STATE =>  -- STEP 3
 
@@ -367,9 +367,9 @@ begin
           -- Data Outputs
           K_OUT <= data_out_matrix_product;
 
-        when INPUT_I_SECOND_STATE =>  -- STEP 5
+        when INPUT_I_SECOND_STATE =>    -- STEP 5
 
-        when INPUT_J_SECOND_STATE =>  -- STEP 6
+        when INPUT_J_SECOND_STATE =>    -- STEP 6
 
         when MATRIX_I_SECOND_PRODUCT_STATE =>  -- STEP 7
 
@@ -394,9 +394,9 @@ begin
           -- Data Outputs
           E_OUT <= data_out_matrix_product;
 
-        when INPUT_I_THIRD_STATE =>  -- STEP 9
+        when INPUT_I_THIRD_STATE =>     -- STEP 9
 
-        when INPUT_J_THIRD_STATE =>  -- STEP 10
+        when INPUT_J_THIRD_STATE =>     -- STEP 10
 
         when MATRIX_I_THIRD_PRODUCT_STATE =>  -- STEP 11
 

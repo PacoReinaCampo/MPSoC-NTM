@@ -121,7 +121,7 @@ architecture ntm_scalar_cosine_similarity_function_architecture of ntm_scalar_co
 
   signal data_a_in_product_int : std_logic;
   signal data_b_in_product_int : std_logic;
-  
+
   signal data_out_product_ab_int : std_logic;
   signal data_out_product_aa_int : std_logic;
   signal data_out_product_bb_int : std_logic;
@@ -233,7 +233,7 @@ begin
 
       data_a_in_product_int <= '0';
       data_b_in_product_int <= '0';
-  
+
       data_out_product_ab_int <= '0';
       data_out_product_aa_int <= '0';
       data_out_product_bb_int <= '0';
@@ -266,7 +266,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -280,7 +280,7 @@ begin
 
             data_a_in_product_int <= '0';
             data_b_in_product_int <= '0';
-  
+
             data_out_product_ab_int <= '0';
             data_out_product_aa_int <= '0';
             data_out_product_bb_int <= '0';
@@ -298,7 +298,7 @@ begin
             controller_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_STATE =>  -- STEP 1
+        when INPUT_STATE =>             -- STEP 1
 
           if ((DATA_A_IN_ENABLE = '1') or (unsigned(index_product_aa_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
@@ -363,7 +363,7 @@ begin
           -- Control Outputs
           DATA_OUT_ENABLE <= '0';
 
-        when SCALAR_PRODUCT_STATE =>  -- STEP 2
+        when SCALAR_PRODUCT_STATE =>    -- STEP 2
 
           if (data_out_enable_scalar_product_ab = '1') then
             if (unsigned(index_product_ab_loop) = unsigned(LENGTH_IN)) then
@@ -446,14 +446,14 @@ begin
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;
           else
-             -- Control Outputs
+            -- Control Outputs
             DATA_OUT_ENABLE <= '0';
 
             -- Control Internal
             start_scalar_multiplier <= '0';
           end if;
 
-        when SCALAR_DIVIDER_STATE =>  -- STEP 4
+        when SCALAR_DIVIDER_STATE =>    -- STEP 4
 
           if (ready_scalar_divider = '1') then
             -- Data Outputs

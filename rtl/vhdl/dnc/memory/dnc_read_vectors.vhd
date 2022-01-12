@@ -209,7 +209,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -225,7 +225,7 @@ begin
             controller_ctrl_fsm_int <= INPUT_I_FIRST_STATE;
           end if;
 
-        when INPUT_I_FIRST_STATE =>  -- STEP 1
+        when INPUT_I_FIRST_STATE =>     -- STEP 1
 
           if (((M_IN_J_ENABLE = '1') and (M_IN_K_ENABLE = '1')) or (unsigned(index_j_transpose_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
@@ -250,7 +250,7 @@ begin
           M_OUT_J_ENABLE <= '0';
           M_OUT_K_ENABLE <= '0';
 
-        when INPUT_J_FIRST_STATE =>  -- STEP 2
+        when INPUT_J_FIRST_STATE =>     -- STEP 2
 
           if (M_IN_K_ENABLE = '1') then
             -- Data Inputs
@@ -336,7 +336,7 @@ begin
             data_in_j_enable_matrix_transpose <= '0';
           end if;
 
-        when INPUT_I_SECOND_STATE =>  -- STEP 5
+        when INPUT_I_SECOND_STATE =>    -- STEP 5
 
           if (((W_IN_I_ENABLE = '1') and (W_IN_J_ENABLE = '1')) or (unsigned(index_j_product_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
@@ -369,7 +369,7 @@ begin
           R_OUT_I_ENABLE <= '0';
           R_OUT_K_ENABLE <= '0';
 
-        when INPUT_J_SECOND_STATE =>  -- STEP 6
+        when INPUT_J_SECOND_STATE =>    -- STEP 6
 
           if (W_IN_J_ENABLE = '1') then
             -- Data Inputs

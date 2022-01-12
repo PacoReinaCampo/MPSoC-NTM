@@ -215,9 +215,9 @@ architecture ntm_activation_gate_vector_architecture of ntm_activation_gate_vect
   signal data_out_enable_vector_tanh : std_logic;
 
   -- DATA
-  signal size_in_vector_tanh   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_tanh  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -243,7 +243,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -422,11 +422,11 @@ begin
             start_vector_adder <= '0';
           end if;
 
-        when VECTOR_TANH_STATE =>  -- STEP 9
+        when VECTOR_TANH_STATE =>       -- STEP 9
 
           -- Data Inputs
-          size_in_vector_tanh   <= FULL;
-          data_in_vector_tanh   <= FULL;
+          size_in_vector_tanh <= FULL;
+          data_in_vector_tanh <= FULL;
 
           if (data_out_enable_vector_tanh = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_L_IN) - unsigned(ONE_CONTROL)) then
@@ -540,9 +540,9 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_tanh,
 
       -- DATA
-      SIZE_IN   => size_in_vector_tanh,
-      DATA_IN   => data_in_vector_tanh,
-      DATA_OUT  => data_out_vector_tanh
+      SIZE_IN  => size_in_vector_tanh,
+      DATA_IN  => data_in_vector_tanh,
+      DATA_OUT => data_out_vector_tanh
       );
 
 end architecture;

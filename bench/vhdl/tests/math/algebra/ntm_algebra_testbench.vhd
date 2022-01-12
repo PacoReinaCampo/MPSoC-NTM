@@ -97,6 +97,9 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_b_in_i_enable_matrix_product : std_logic;
   signal data_b_in_j_enable_matrix_product : std_logic;
 
+  signal data_i_enable_matrix_product : std_logic;
+  signal data_j_enable_matrix_product : std_logic;
+
   signal data_out_i_enable_matrix_product : std_logic;
   signal data_out_j_enable_matrix_product : std_logic;
 
@@ -223,6 +226,9 @@ begin
       MATRIX_PRODUCT_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
       MATRIX_PRODUCT_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
 
+      MATRIX_PRODUCT_DATA_I_ENABLE => data_i_enable_matrix_product,
+      MATRIX_PRODUCT_DATA_J_ENABLE => data_j_enable_matrix_product,
+
       MATRIX_PRODUCT_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
       MATRIX_PRODUCT_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
 
@@ -336,6 +342,9 @@ begin
         DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
         DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
         DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
+
+        DATA_I_ENABLE => data_i_enable_matrix_product,
+        DATA_J_ENABLE => data_j_enable_matrix_product,
 
         DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,

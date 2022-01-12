@@ -212,7 +212,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -227,7 +227,7 @@ begin
             controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
           end if;
 
-        when INPUT_FIRST_STATE =>  -- STEP 1
+        when INPUT_FIRST_STATE =>       -- STEP 1
 
         when VECTOR_FIRST_SORT_STATE =>  -- STEP 2
 
@@ -248,7 +248,7 @@ begin
             start_vector_sort <= '0';
           end if;
 
-        when VECTOR_ADDER_STATE =>  -- STEP 3
+        when VECTOR_ADDER_STATE =>      -- STEP 3
 
           if (data_out_enable_vector_adder = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
@@ -263,7 +263,7 @@ begin
             start_vector_adder <= '0';
           end if;
 
-        when INPUT_SECOND_STATE =>  -- STEP 4
+        when INPUT_SECOND_STATE =>      -- STEP 4
 
         when VECTOR_SECOND_SORT_STATE =>  -- STEP 5
 

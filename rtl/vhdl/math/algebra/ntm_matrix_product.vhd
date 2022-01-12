@@ -63,6 +63,9 @@ entity ntm_matrix_product is
     DATA_B_IN_I_ENABLE : in std_logic;
     DATA_B_IN_J_ENABLE : in std_logic;
 
+    DATA_I_ENABLE : out std_logic;
+    DATA_J_ENABLE : out std_logic;
+
     DATA_OUT_I_ENABLE : out std_logic;
     DATA_OUT_J_ENABLE : out std_logic;
 
@@ -186,6 +189,9 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      DATA_I_ENABLE <= '0';
+      DATA_J_ENABLE <= '0';
+
       DATA_OUT_I_ENABLE <= '0';
       DATA_OUT_J_ENABLE <= '0';
 
@@ -220,6 +226,9 @@ begin
 
           -- Control Outputs
           READY <= '0';
+
+          DATA_I_ENABLE <= '0';
+          DATA_J_ENABLE <= '0';
 
           DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
@@ -260,8 +269,8 @@ begin
           end if;
 
           -- Control Outputs
-          DATA_OUT_I_ENABLE <= '0';
-          DATA_OUT_J_ENABLE <= '0';
+          DATA_I_ENABLE <= '0';
+          DATA_J_ENABLE <= '0';
 
           if (data_a_in_i_multiplier_int = '1' and data_a_in_j_multiplier_int = '1' and data_b_in_i_multiplier_int = '1' and data_b_in_j_multiplier_int = '1') then
             -- Control Internal
@@ -293,7 +302,7 @@ begin
           end if;
 
           -- Control Outputs
-          DATA_OUT_J_ENABLE <= '0';
+          DATA_J_ENABLE <= '0';
 
           if (data_a_in_j_multiplier_int = '1' and data_b_in_j_multiplier_int = '1') then
             -- Control Internal
@@ -315,8 +324,8 @@ begin
             DATA_OUT <= matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
-            DATA_OUT_I_ENABLE <= '1';
-            DATA_OUT_J_ENABLE <= '1';
+            DATA_I_ENABLE <= '1';
+            DATA_J_ENABLE <= '1';
 
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
@@ -329,8 +338,8 @@ begin
             DATA_OUT <= matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
-            DATA_OUT_I_ENABLE <= '1';
-            DATA_OUT_J_ENABLE <= '1';
+            DATA_I_ENABLE <= '1';
+            DATA_J_ENABLE <= '1';
 
             -- Control Internal
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -347,7 +356,7 @@ begin
             DATA_OUT <= matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
-            DATA_OUT_J_ENABLE <= '1';
+            DATA_J_ENABLE <= '1';
 
             -- Control Internal
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
@@ -363,6 +372,9 @@ begin
           data_b_in_scalar_multiplier <= matrix_b_int(to_integer(unsigned(index_k_loop)), to_integer(unsigned(index_j_loop)));
 
           -- Control Outputs
+          DATA_I_ENABLE <= '0';
+          DATA_J_ENABLE <= '0';
+
           DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
 
@@ -383,6 +395,8 @@ begin
           data_b_in_scalar_multiplier <= matrix_b_int(to_integer(unsigned(index_k_loop)), to_integer(unsigned(index_j_loop)));
 
           -- Control Outputs
+          DATA_J_ENABLE <= '0';
+
           DATA_OUT_J_ENABLE <= '0';
 
           -- Control Internal

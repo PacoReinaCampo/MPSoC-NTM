@@ -223,8 +223,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_scalar_cosh : std_logic;
 
   -- DATA
-  signal data_in_scalar_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_cosh : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR COSINE SIMILARITY
   -- CONTROL
@@ -304,8 +304,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_scalar_oneplus : std_logic;
 
   -- DATA
-  signal data_in_scalar_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR SINH
   -- CONTROL
@@ -313,8 +313,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_scalar_sinh : std_logic;
 
   -- DATA
-  signal data_in_scalar_sinh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_sinh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_sinh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_sinh : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR SOFTMAX
   -- CONTROL
@@ -350,8 +350,8 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal ready_scalar_tanh : std_logic;
 
   -- DATA
-  signal data_in_scalar_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- VECTOR
@@ -387,9 +387,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_enable_vector_cosh : std_logic;
 
   -- DATA
-  signal size_in_vector_cosh   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_cosh  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_cosh : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR COSINE SIMILARITY
   -- CONTROL
@@ -439,9 +439,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_enable_vector_exponentiator : std_logic;
 
   -- DATA
-  signal size_in_vector_exponentiator   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_exponentiator  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_exponentiator : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR LOGARITHM
   -- CONTROL
@@ -453,9 +453,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_enable_vector_logarithm : std_logic;
 
   -- DATA
-  signal size_in_vector_logarithm   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_logarithm   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_logarithm  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR LOGISTIC
   -- CONTROL
@@ -467,9 +467,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_enable_vector_logistic : std_logic;
 
   -- DATA
-  signal size_in_vector_logistic   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_logistic  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR MULTIPLICATION
   -- CONTROL
@@ -498,9 +498,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_enable_vector_oneplus : std_logic;
 
   -- DATA
-  signal size_in_vector_oneplus   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_oneplus   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_oneplus  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_oneplus  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_oneplus : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR SINH
   -- CONTROL
@@ -512,9 +512,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_enable_vector_sinh : std_logic;
 
   -- DATA
-  signal size_in_vector_sinh   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_sinh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_sinh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_sinh  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_sinh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_sinh : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR SOFTMAX
   -- CONTROL
@@ -560,9 +560,9 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_out_enable_vector_tanh : std_logic;
 
   -- DATA
-  signal size_in_vector_tanh   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_tanh  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- MATRIX
@@ -866,8 +866,8 @@ begin
       SCALAR_COSH_READY => ready_scalar_cosh,
 
       -- DATA
-      SCALAR_COSH_DATA_IN   => data_in_scalar_cosh,
-      SCALAR_COSH_DATA_OUT  => data_out_scalar_cosh,
+      SCALAR_COSH_DATA_IN  => data_in_scalar_cosh,
+      SCALAR_COSH_DATA_OUT => data_out_scalar_cosh,
 
       -- SCALAR COSINE SIMILARITY
       -- CONTROL
@@ -906,8 +906,8 @@ begin
       SCALAR_EXPONENTIATOR_READY => ready_scalar_exponentiator,
 
       -- DATA
-      SCALAR_EXPONENTIATOR_DATA_IN   => data_in_scalar_exponentiator,
-      SCALAR_EXPONENTIATOR_DATA_OUT  => data_out_scalar_exponentiator,
+      SCALAR_EXPONENTIATOR_DATA_IN  => data_in_scalar_exponentiator,
+      SCALAR_EXPONENTIATOR_DATA_OUT => data_out_scalar_exponentiator,
 
       -- SCALAR LOGARITHM
       -- CONTROL
@@ -915,8 +915,8 @@ begin
       SCALAR_LOGARITHM_READY => ready_scalar_logarithm,
 
       -- DATA
-      SCALAR_LOGARITHM_DATA_IN   => data_in_scalar_logarithm,
-      SCALAR_LOGARITHM_DATA_OUT  => data_out_scalar_logarithm,
+      SCALAR_LOGARITHM_DATA_IN  => data_in_scalar_logarithm,
+      SCALAR_LOGARITHM_DATA_OUT => data_out_scalar_logarithm,
 
       -- SCALAR LOGISTIC
       -- CONTROL
@@ -924,8 +924,8 @@ begin
       SCALAR_LOGISTIC_READY => ready_scalar_logistic,
 
       -- DATA
-      SCALAR_LOGISTIC_DATA_IN   => data_in_scalar_logistic,
-      SCALAR_LOGISTIC_DATA_OUT  => data_out_scalar_logistic,
+      SCALAR_LOGISTIC_DATA_IN  => data_in_scalar_logistic,
+      SCALAR_LOGISTIC_DATA_OUT => data_out_scalar_logistic,
 
       -- SCALAR MULTIPLICATION
       -- CONTROL
@@ -947,8 +947,8 @@ begin
       SCALAR_ONEPLUS_READY => ready_scalar_oneplus,
 
       -- DATA
-      SCALAR_ONEPLUS_DATA_IN   => data_in_scalar_oneplus,
-      SCALAR_ONEPLUS_DATA_OUT  => data_out_scalar_oneplus,
+      SCALAR_ONEPLUS_DATA_IN  => data_in_scalar_oneplus,
+      SCALAR_ONEPLUS_DATA_OUT => data_out_scalar_oneplus,
 
       -- SCALAR SINH
       -- CONTROL
@@ -956,8 +956,8 @@ begin
       SCALAR_SINH_READY => ready_scalar_sinh,
 
       -- DATA
-      SCALAR_SINH_DATA_IN   => data_in_scalar_sinh,
-      SCALAR_SINH_DATA_OUT  => data_out_scalar_sinh,
+      SCALAR_SINH_DATA_IN  => data_in_scalar_sinh,
+      SCALAR_SINH_DATA_OUT => data_out_scalar_sinh,
 
       -- SCALAR SOFTMAX
       -- CONTROL
@@ -993,8 +993,8 @@ begin
       SCALAR_TANH_READY => ready_scalar_tanh,
 
       -- DATA
-      SCALAR_TANH_DATA_IN   => data_in_scalar_tanh,
-      SCALAR_TANH_DATA_OUT  => data_out_scalar_tanh,
+      SCALAR_TANH_DATA_IN  => data_in_scalar_tanh,
+      SCALAR_TANH_DATA_OUT => data_out_scalar_tanh,
 
       -----------------------------------------------------------------------
       -- STIMULUS VECTOR
@@ -1030,9 +1030,9 @@ begin
       VECTOR_COSH_DATA_OUT_ENABLE => data_out_enable_vector_cosh,
 
       -- DATA
-      VECTOR_COSH_SIZE_IN   => size_in_vector_cosh,
-      VECTOR_COSH_DATA_IN   => data_in_vector_cosh,
-      VECTOR_COSH_DATA_OUT  => data_out_vector_cosh,
+      VECTOR_COSH_SIZE_IN  => size_in_vector_cosh,
+      VECTOR_COSH_DATA_IN  => data_in_vector_cosh,
+      VECTOR_COSH_DATA_OUT => data_out_vector_cosh,
 
       -- VECTOR COSINE SIMILARITY
       -- CONTROL
@@ -1081,9 +1081,9 @@ begin
       VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
 
       -- DATA
-      VECTOR_EXPONENTIATOR_SIZE_IN   => size_in_vector_exponentiator,
-      VECTOR_EXPONENTIATOR_DATA_IN   => data_in_vector_exponentiator,
-      VECTOR_EXPONENTIATOR_DATA_OUT  => data_out_vector_exponentiator,
+      VECTOR_EXPONENTIATOR_SIZE_IN  => size_in_vector_exponentiator,
+      VECTOR_EXPONENTIATOR_DATA_IN  => data_in_vector_exponentiator,
+      VECTOR_EXPONENTIATOR_DATA_OUT => data_out_vector_exponentiator,
 
       -- VECTOR LOGARITHM
       -- CONTROL
@@ -1095,9 +1095,9 @@ begin
       VECTOR_LOGARITHM_DATA_OUT_ENABLE => data_out_enable_vector_logarithm,
 
       -- DATA
-      VECTOR_LOGARITHM_SIZE_IN   => size_in_vector_logarithm,
-      VECTOR_LOGARITHM_DATA_IN   => data_in_vector_logarithm,
-      VECTOR_LOGARITHM_DATA_OUT  => data_out_vector_logarithm,
+      VECTOR_LOGARITHM_SIZE_IN  => size_in_vector_logarithm,
+      VECTOR_LOGARITHM_DATA_IN  => data_in_vector_logarithm,
+      VECTOR_LOGARITHM_DATA_OUT => data_out_vector_logarithm,
 
       -- VECTOR LOGISTIC
       -- CONTROL
@@ -1109,9 +1109,9 @@ begin
       VECTOR_LOGISTIC_DATA_OUT_ENABLE => data_out_enable_vector_logistic,
 
       -- DATA
-      VECTOR_LOGISTIC_SIZE_IN   => size_in_vector_logistic,
-      VECTOR_LOGISTIC_DATA_IN   => data_in_vector_logistic,
-      VECTOR_LOGISTIC_DATA_OUT  => data_out_vector_logistic,
+      VECTOR_LOGISTIC_SIZE_IN  => size_in_vector_logistic,
+      VECTOR_LOGISTIC_DATA_IN  => data_in_vector_logistic,
+      VECTOR_LOGISTIC_DATA_OUT => data_out_vector_logistic,
 
       -- VECTOR ONEPLUS
       -- CONTROL
@@ -1123,9 +1123,9 @@ begin
       VECTOR_ONEPLUS_DATA_OUT_ENABLE => data_out_enable_vector_oneplus,
 
       -- DATA
-      VECTOR_ONEPLUS_SIZE_IN   => size_in_vector_oneplus,
-      VECTOR_ONEPLUS_DATA_IN   => data_in_vector_oneplus,
-      VECTOR_ONEPLUS_DATA_OUT  => data_out_vector_oneplus,
+      VECTOR_ONEPLUS_SIZE_IN  => size_in_vector_oneplus,
+      VECTOR_ONEPLUS_DATA_IN  => data_in_vector_oneplus,
+      VECTOR_ONEPLUS_DATA_OUT => data_out_vector_oneplus,
 
       -- VECTOR MULTIPLICATION
       -- CONTROL
@@ -1154,9 +1154,9 @@ begin
       VECTOR_SINH_DATA_OUT_ENABLE => data_out_enable_vector_sinh,
 
       -- DATA
-      VECTOR_SINH_SIZE_IN   => size_in_vector_sinh,
-      VECTOR_SINH_DATA_IN   => data_in_vector_sinh,
-      VECTOR_SINH_DATA_OUT  => data_out_vector_sinh,
+      VECTOR_SINH_SIZE_IN  => size_in_vector_sinh,
+      VECTOR_SINH_DATA_IN  => data_in_vector_sinh,
+      VECTOR_SINH_DATA_OUT => data_out_vector_sinh,
 
       -- VECTOR SOFTMAX
       -- CONTROL
@@ -1202,9 +1202,9 @@ begin
       VECTOR_TANH_DATA_OUT_ENABLE => data_out_enable_vector_tanh,
 
       -- DATA
-      VECTOR_TANH_SIZE_IN   => size_in_vector_tanh,
-      VECTOR_TANH_DATA_IN   => data_in_vector_tanh,
-      VECTOR_TANH_DATA_OUT  => data_out_vector_tanh,
+      VECTOR_TANH_SIZE_IN  => size_in_vector_tanh,
+      VECTOR_TANH_DATA_IN  => data_in_vector_tanh,
+      VECTOR_TANH_DATA_OUT => data_out_vector_tanh,
 
       -----------------------------------------------------------------------
       -- STIMULUS MATRIX
@@ -1509,8 +1509,8 @@ begin
         READY => ready_scalar_cosh,
 
         -- DATA
-        DATA_IN   => data_in_scalar_cosh,
-        DATA_OUT  => data_out_scalar_cosh
+        DATA_IN  => data_in_scalar_cosh,
+        DATA_OUT => data_out_scalar_cosh
         );
   end generate ntm_scalar_cosh_function_test;
 
@@ -1588,8 +1588,8 @@ begin
         READY => ready_scalar_exponentiator,
 
         -- DATA
-        DATA_IN   => data_in_scalar_exponentiator,
-        DATA_OUT  => data_out_scalar_exponentiator
+        DATA_IN  => data_in_scalar_exponentiator,
+        DATA_OUT => data_out_scalar_exponentiator
         );
   end generate ntm_scalar_exponentiator_function_test;
 
@@ -1610,8 +1610,8 @@ begin
         READY => ready_scalar_logarithm,
 
         -- DATA
-        DATA_IN   => data_in_scalar_logarithm,
-        DATA_OUT  => data_out_scalar_logarithm
+        DATA_IN  => data_in_scalar_logarithm,
+        DATA_OUT => data_out_scalar_logarithm
         );
   end generate ntm_scalar_logarithm_function_test;
 
@@ -1632,8 +1632,8 @@ begin
         READY => ready_scalar_logistic,
 
         -- DATA
-        DATA_IN   => data_in_scalar_logistic,
-        DATA_OUT  => data_out_scalar_logistic
+        DATA_IN  => data_in_scalar_logistic,
+        DATA_OUT => data_out_scalar_logistic
         );
   end generate ntm_scalar_logistic_function_test;
 
@@ -1681,8 +1681,8 @@ begin
         READY => ready_scalar_oneplus,
 
         -- DATA
-        DATA_IN   => data_in_scalar_oneplus,
-        DATA_OUT  => data_out_scalar_oneplus
+        DATA_IN  => data_in_scalar_oneplus,
+        DATA_OUT => data_out_scalar_oneplus
         );
   end generate ntm_scalar_oneplus_function_test;
 
@@ -1703,8 +1703,8 @@ begin
         READY => ready_scalar_sinh,
 
         -- DATA
-        DATA_IN   => data_in_scalar_sinh,
-        DATA_OUT  => data_out_scalar_sinh
+        DATA_IN  => data_in_scalar_sinh,
+        DATA_OUT => data_out_scalar_sinh
         );
   end generate ntm_scalar_sinh_function_test;
 
@@ -1779,8 +1779,8 @@ begin
         READY => ready_scalar_tanh,
 
         -- DATA
-        DATA_IN   => data_in_scalar_tanh,
-        DATA_OUT  => data_out_scalar_tanh
+        DATA_IN  => data_in_scalar_tanh,
+        DATA_OUT => data_out_scalar_tanh
         );
   end generate ntm_scalar_tanh_function_test;
 
@@ -1842,9 +1842,9 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_cosh,
 
         -- DATA
-        SIZE_IN   => size_in_vector_cosh,
-        DATA_IN   => data_in_vector_cosh,
-        DATA_OUT  => data_out_vector_cosh
+        SIZE_IN  => size_in_vector_cosh,
+        DATA_IN  => data_in_vector_cosh,
+        DATA_OUT => data_out_vector_cosh
         );
   end generate ntm_vector_cosh_function_test;
 
@@ -1933,9 +1933,9 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_exponentiator,
 
         -- DATA
-        SIZE_IN   => size_in_vector_exponentiator,
-        DATA_IN   => data_in_vector_exponentiator,
-        DATA_OUT  => data_out_vector_exponentiator
+        SIZE_IN  => size_in_vector_exponentiator,
+        DATA_IN  => data_in_vector_exponentiator,
+        DATA_OUT => data_out_vector_exponentiator
         );
   end generate ntm_vector_exponentiator_function_test;
 
@@ -1960,9 +1960,9 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_logarithm,
 
         -- DATA
-        SIZE_IN   => size_in_vector_logarithm,
-        DATA_IN   => data_in_vector_logarithm,
-        DATA_OUT  => data_out_vector_logarithm
+        SIZE_IN  => size_in_vector_logarithm,
+        DATA_IN  => data_in_vector_logarithm,
+        DATA_OUT => data_out_vector_logarithm
         );
   end generate ntm_vector_logarithm_function_test;
 
@@ -1987,9 +1987,9 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_logistic,
 
         -- DATA
-        SIZE_IN   => size_in_vector_logistic,
-        DATA_IN   => data_in_vector_logistic,
-        DATA_OUT  => data_out_vector_logistic
+        SIZE_IN  => size_in_vector_logistic,
+        DATA_IN  => data_in_vector_logistic,
+        DATA_OUT => data_out_vector_logistic
         );
   end generate ntm_vector_logistic_function_test;
 
@@ -2045,9 +2045,9 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_oneplus,
 
         -- DATA
-        SIZE_IN   => size_in_vector_oneplus,
-        DATA_IN   => data_in_vector_oneplus,
-        DATA_OUT  => data_out_vector_oneplus
+        SIZE_IN  => size_in_vector_oneplus,
+        DATA_IN  => data_in_vector_oneplus,
+        DATA_OUT => data_out_vector_oneplus
         );
   end generate ntm_vector_oneplus_function_test;
 
@@ -2072,9 +2072,9 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_sinh,
 
         -- DATA
-        SIZE_IN   => size_in_vector_sinh,
-        DATA_IN   => data_in_vector_sinh,
-        DATA_OUT  => data_out_vector_sinh
+        SIZE_IN  => size_in_vector_sinh,
+        DATA_IN  => data_in_vector_sinh,
+        DATA_OUT => data_out_vector_sinh
         );
   end generate ntm_vector_sinh_function_test;
 
@@ -2159,9 +2159,9 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_tanh,
 
         -- DATA
-        SIZE_IN   => size_in_vector_tanh,
-        DATA_IN   => data_in_vector_tanh,
-        DATA_OUT  => data_out_vector_tanh
+        SIZE_IN  => size_in_vector_tanh,
+        DATA_IN  => data_in_vector_tanh,
+        DATA_OUT => data_out_vector_tanh
         );
   end generate ntm_vector_tanh_function_test;
 

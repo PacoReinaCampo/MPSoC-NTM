@@ -155,6 +155,9 @@ package ntm_algebra_pkg is
       MATRIX_PRODUCT_DATA_B_IN_I_ENABLE : out std_logic;
       MATRIX_PRODUCT_DATA_B_IN_J_ENABLE : out std_logic;
 
+      MATRIX_PRODUCT_DATA_I_ENABLE : in std_logic;
+      MATRIX_PRODUCT_DATA_J_ENABLE : in std_logic;
+
       MATRIX_PRODUCT_DATA_OUT_I_ENABLE : in std_logic;
       MATRIX_PRODUCT_DATA_OUT_J_ENABLE : in std_logic;
 

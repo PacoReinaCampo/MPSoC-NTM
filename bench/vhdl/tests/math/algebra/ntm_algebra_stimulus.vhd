@@ -73,6 +73,9 @@ entity ntm_algebra_stimulus is
     MATRIX_PRODUCT_DATA_B_IN_I_ENABLE : out std_logic;
     MATRIX_PRODUCT_DATA_B_IN_J_ENABLE : out std_logic;
 
+    MATRIX_PRODUCT_DATA_I_ENABLE : in std_logic;
+    MATRIX_PRODUCT_DATA_J_ENABLE : in std_logic;
+
     MATRIX_PRODUCT_DATA_OUT_I_ENABLE : in std_logic;
     MATRIX_PRODUCT_DATA_OUT_J_ENABLE : in std_logic;
 
@@ -304,7 +307,7 @@ begin
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_PRODUCT_DATA_OUT_I_ENABLE = '1') and (MATRIX_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
+          if ((MATRIX_PRODUCT_DATA_I_ENABLE = '1') and (MATRIX_PRODUCT_DATA_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
@@ -318,7 +321,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_PRODUCT_DATA_OUT_I_ENABLE = '0') and (MATRIX_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_PRODUCT_DATA_I_ENABLE = '0') and (MATRIX_PRODUCT_DATA_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
@@ -367,7 +370,7 @@ begin
         index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
         loop
-          if ((MATRIX_PRODUCT_DATA_OUT_I_ENABLE = '1') and (MATRIX_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
+          if ((MATRIX_PRODUCT_DATA_I_ENABLE = '1') and (MATRIX_PRODUCT_DATA_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SIZE_I)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
@@ -381,7 +384,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_PRODUCT_DATA_OUT_I_ENABLE = '0') and (MATRIX_PRODUCT_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_PRODUCT_DATA_I_ENABLE = '0') and (MATRIX_PRODUCT_DATA_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(SIZE_J)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';

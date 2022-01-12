@@ -63,9 +63,9 @@ entity ntm_vector_logistic_function is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    SIZE_IN  : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -116,8 +116,8 @@ architecture ntm_vector_logistic_function_architecture of ntm_vector_logistic_fu
   signal ready_scalar_logistic_function : std_logic;
 
   -- DATA
-  signal data_in_scalar_logistic_function   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logistic_function  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_logistic_function  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_logistic_function : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -145,12 +145,12 @@ begin
       index_loop <= ZERO_CONTROL;
 
       -- Data Internal
-      data_in_scalar_logistic_function   <= ZERO_DATA;
+      data_in_scalar_logistic_function <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
       case logistic_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY           <= '0';
           DATA_OUT_ENABLE <= '0';
@@ -163,7 +163,7 @@ begin
             logistic_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_STATE =>  -- STEP 1
+        when INPUT_STATE =>             -- STEP 1
 
           if ((DATA_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
             -- Data Inputs
@@ -180,7 +180,7 @@ begin
           -- Control Outputs
           DATA_OUT_ENABLE <= '0';
 
-        when ENDER_STATE =>  -- STEP 2
+        when ENDER_STATE =>             -- STEP 2
 
           if (ready_scalar_logistic_function = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
@@ -233,8 +233,8 @@ begin
       READY => ready_scalar_logistic_function,
 
       -- DATA
-      DATA_IN   => data_in_scalar_logistic_function,
-      DATA_OUT  => data_out_scalar_logistic_function
+      DATA_IN  => data_in_scalar_logistic_function,
+      DATA_OUT => data_out_scalar_logistic_function
       );
 
 end architecture;

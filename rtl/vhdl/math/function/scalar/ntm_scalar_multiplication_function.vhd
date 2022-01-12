@@ -150,7 +150,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case multiplication_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -164,7 +164,7 @@ begin
             multiplication_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_STATE =>  -- STEP 1
+        when INPUT_STATE =>             -- STEP 1
 
           if (DATA_IN_ENABLE = '1' or (unsigned(index_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs

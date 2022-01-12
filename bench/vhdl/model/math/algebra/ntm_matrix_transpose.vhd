@@ -155,7 +155,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case transpose_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -171,11 +171,11 @@ begin
             transpose_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
-        when INPUT_I_STATE =>  -- STEP 1
+        when INPUT_I_STATE =>           -- STEP 1
 
           if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) or (unsigned(index_j_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
-            matrix_int(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop))) <= DATA_IN;
+            matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
 
             -- FSM Control
             transpose_ctrl_fsm_int <= ENDER_J_STATE;
@@ -185,11 +185,11 @@ begin
           DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
 
-        when INPUT_J_STATE =>  -- STEP 2
+        when INPUT_J_STATE =>           -- STEP 2
 
           if (DATA_IN_J_ENABLE = '1') then
             -- Data Inputs
-            matrix_int(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop))) <= DATA_IN;
+            matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
@@ -202,11 +202,11 @@ begin
           -- Control Outputs
           DATA_OUT_J_ENABLE <= '0';
 
-        when ENDER_I_STATE =>  -- STEP 3
+        when ENDER_I_STATE =>           -- STEP 3
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
             DATA_OUT_I_ENABLE <= '1';
@@ -220,7 +220,7 @@ begin
             transpose_ctrl_fsm_int <= CLEAN_I_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
             DATA_OUT_I_ENABLE <= '1';
@@ -234,11 +234,11 @@ begin
             transpose_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
-        when ENDER_J_STATE =>  -- STEP 4
+        when ENDER_J_STATE =>           -- STEP 4
 
           if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
             DATA_OUT_J_ENABLE <= '1';
@@ -250,7 +250,7 @@ begin
             transpose_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
-        when CLEAN_I_STATE =>  -- STEP 5
+        when CLEAN_I_STATE =>           -- STEP 5
 
           -- Control Outputs
           DATA_OUT_I_ENABLE <= '0';
@@ -259,7 +259,7 @@ begin
           -- FSM Control
           transpose_ctrl_fsm_int <= OPERATION_J_STATE;
 
-        when CLEAN_J_STATE =>  -- STEP 6
+        when CLEAN_J_STATE =>           -- STEP 6
 
           -- Control Outputs
           DATA_OUT_J_ENABLE <= '0';
@@ -271,11 +271,11 @@ begin
             transpose_ctrl_fsm_int <= OPERATION_J_STATE;
           end if;
 
-        when OPERATION_I_STATE =>  -- STEP 7
+        when OPERATION_I_STATE =>       -- STEP 7
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_i_loop)));
+            DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
 
             -- Control Outputs
             DATA_OUT_I_ENABLE <= '1';
@@ -291,7 +291,7 @@ begin
             transpose_ctrl_fsm_int <= STARTER_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_i_loop)));
+            DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
 
             -- Control Outputs
             DATA_OUT_I_ENABLE <= '1';
@@ -305,11 +305,11 @@ begin
             transpose_ctrl_fsm_int <= CLEAN_I_STATE;
           end if;
 
-        when OPERATION_J_STATE =>  -- STEP 8
+        when OPERATION_J_STATE =>       -- STEP 8
 
           if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_i_loop)));
+            DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
 
             -- Control Outputs
             DATA_OUT_J_ENABLE <= '1';

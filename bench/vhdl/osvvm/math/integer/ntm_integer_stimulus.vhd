@@ -413,24 +413,24 @@ begin
   end process;
 
   -- SCALAR-FUNCTIONALITY
-  SCALAR_INTEGER_ADDER_START        <= start_int;
-  SCALAR_INTEGER_MULTIPLIER_START   <= start_int;
-  SCALAR_INTEGER_DIVIDER_START      <= start_int;
+  SCALAR_INTEGER_ADDER_START      <= start_int;
+  SCALAR_INTEGER_MULTIPLIER_START <= start_int;
+  SCALAR_INTEGER_DIVIDER_START    <= start_int;
 
   -- VECTOR-FUNCTIONALITY
-  VECTOR_INTEGER_ADDER_START        <= start_int;
-  VECTOR_INTEGER_MULTIPLIER_START   <= start_int;
-  VECTOR_INTEGER_DIVIDER_START      <= start_int;
+  VECTOR_INTEGER_ADDER_START      <= start_int;
+  VECTOR_INTEGER_MULTIPLIER_START <= start_int;
+  VECTOR_INTEGER_DIVIDER_START    <= start_int;
 
   -- MATRIX-FUNCTIONALITY
-  MATRIX_INTEGER_ADDER_START        <= start_int;
-  MATRIX_INTEGER_MULTIPLIER_START   <= start_int;
-  MATRIX_INTEGER_DIVIDER_START      <= start_int;
+  MATRIX_INTEGER_ADDER_START      <= start_int;
+  MATRIX_INTEGER_MULTIPLIER_START <= start_int;
+  MATRIX_INTEGER_DIVIDER_START    <= start_int;
 
   -- TENSOR-FUNCTIONALITY
-  TENSOR_INTEGER_ADDER_START        <= start_int;
-  TENSOR_INTEGER_MULTIPLIER_START   <= start_int;
-  TENSOR_INTEGER_DIVIDER_START      <= start_int;
+  TENSOR_INTEGER_ADDER_START      <= start_int;
+  TENSOR_INTEGER_MULTIPLIER_START <= start_int;
+  TENSOR_INTEGER_DIVIDER_START    <= start_int;
 
   -----------------------------------------------------------------------
   -- STIMULUS

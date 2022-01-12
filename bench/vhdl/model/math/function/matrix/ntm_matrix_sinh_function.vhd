@@ -126,9 +126,9 @@ architecture ntm_matrix_sinh_function_architecture of ntm_matrix_sinh_function i
   signal data_out_enable_vector_sinh_function : std_logic;
 
   -- DATA
-  signal size_in_vector_sinh_function   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_sinh_function   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_sinh_function  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_sinh_function  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_sinh_function  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_sinh_function : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -160,13 +160,13 @@ begin
       data_in_enable_vector_sinh_function <= '0';
 
       -- Data Internal
-      size_in_vector_sinh_function   <= ZERO_CONTROL;
-      data_in_vector_sinh_function   <= ZERO_DATA;
+      size_in_vector_sinh_function <= ZERO_CONTROL;
+      data_in_vector_sinh_function <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
       case sinh_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -181,11 +181,11 @@ begin
             sinh_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
-        when INPUT_I_STATE =>  -- STEP 1
+        when INPUT_I_STATE =>           -- STEP 1
 
           if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) or (unsigned(index_j_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
-            size_in_vector_sinh_function   <= SIZE_J_IN;
+            size_in_vector_sinh_function <= SIZE_J_IN;
 
             data_in_vector_sinh_function <= DATA_IN;
 
@@ -202,7 +202,7 @@ begin
           DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
 
-        when INPUT_J_STATE =>  -- STEP 2
+        when INPUT_J_STATE =>           -- STEP 2
 
           if (DATA_IN_J_ENABLE = '1') then
             -- Data Inputs
@@ -222,7 +222,7 @@ begin
           -- Control Outputs
           DATA_OUT_J_ENABLE <= '0';
 
-        when ENDER_I_STATE =>  -- STEP 3
+        when ENDER_I_STATE =>           -- STEP 3
 
           if (data_out_enable_vector_sinh_function = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
@@ -263,7 +263,7 @@ begin
             data_in_enable_vector_sinh_function <= '0';
           end if;
 
-        when ENDER_J_STATE =>  -- STEP 4
+        when ENDER_J_STATE =>           -- STEP 4
 
           if (data_out_enable_vector_sinh_function = '1') then
             if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
@@ -313,9 +313,9 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_sinh_function,
 
       -- DATA
-      SIZE_IN   => size_in_vector_sinh_function,
-      DATA_IN   => data_in_vector_sinh_function,
-      DATA_OUT  => data_out_vector_sinh_function
+      SIZE_IN  => size_in_vector_sinh_function,
+      DATA_IN  => data_in_vector_sinh_function,
+      DATA_OUT => data_out_vector_sinh_function
       );
 
 end architecture;

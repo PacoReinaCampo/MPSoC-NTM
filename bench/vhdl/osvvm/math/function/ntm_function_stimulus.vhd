@@ -89,8 +89,8 @@ entity ntm_function_stimulus is
     SCALAR_COSH_READY : in  std_logic;
 
     -- DATA
-    SCALAR_COSH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_COSH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_COSH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_COSH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- SCALAR COSINE SIMILARITY
     -- CONTROL
@@ -129,8 +129,8 @@ entity ntm_function_stimulus is
     SCALAR_EXPONENTIATOR_READY : in  std_logic;
 
     -- DATA
-    SCALAR_EXPONENTIATOR_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_EXPONENTIATOR_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_EXPONENTIATOR_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- SCALAR LOGARITHM
     -- CONTROL
@@ -138,8 +138,8 @@ entity ntm_function_stimulus is
     SCALAR_LOGARITHM_READY : in  std_logic;
 
     -- DATA
-    SCALAR_LOGARITHM_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_LOGARITHM_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_LOGARITHM_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_LOGARITHM_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- SCALAR LOGISTIC
     -- CONTROL
@@ -147,8 +147,8 @@ entity ntm_function_stimulus is
     SCALAR_LOGISTIC_READY : in  std_logic;
 
     -- DATA
-    SCALAR_LOGISTIC_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_LOGISTIC_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_LOGISTIC_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_LOGISTIC_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- SCALAR MULTIPLICATION
     -- CONTROL
@@ -170,8 +170,8 @@ entity ntm_function_stimulus is
     SCALAR_ONEPLUS_READY : in  std_logic;
 
     -- DATA
-    SCALAR_ONEPLUS_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_ONEPLUS_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_ONEPLUS_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_ONEPLUS_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- SCALAR SINH
     -- CONTROL
@@ -179,8 +179,8 @@ entity ntm_function_stimulus is
     SCALAR_SINH_READY : in  std_logic;
 
     -- DATA
-    SCALAR_SINH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_SINH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_SINH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_SINH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- SCALAR SOFTMAX
     -- CONTROL
@@ -216,8 +216,8 @@ entity ntm_function_stimulus is
     SCALAR_TANH_READY : in  std_logic;
 
     -- DATA
-    SCALAR_TANH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_TANH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_TANH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_TANH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -----------------------------------------------------------------------
     -- STIMULUS VECTOR
@@ -253,9 +253,9 @@ entity ntm_function_stimulus is
     VECTOR_COSH_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_COSH_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_COSH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_COSH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_COSH_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_COSH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_COSH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- VECTOR COSINE SIMILARITY
     -- CONTROL
@@ -305,9 +305,9 @@ entity ntm_function_stimulus is
     VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_EXPONENTIATOR_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_EXPONENTIATOR_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_EXPONENTIATOR_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_EXPONENTIATOR_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_EXPONENTIATOR_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- VECTOR LOGARITHM
     -- CONTROL
@@ -319,9 +319,9 @@ entity ntm_function_stimulus is
     VECTOR_LOGARITHM_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_LOGARITHM_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_LOGARITHM_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_LOGARITHM_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_LOGARITHM_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_LOGARITHM_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_LOGARITHM_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- VECTOR LOGISTIC
     -- CONTROL
@@ -333,9 +333,9 @@ entity ntm_function_stimulus is
     VECTOR_LOGISTIC_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_LOGISTIC_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_LOGISTIC_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_LOGISTIC_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_LOGISTIC_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_LOGISTIC_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_LOGISTIC_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- VECTOR MULTIPLICATION
     -- CONTROL
@@ -364,9 +364,9 @@ entity ntm_function_stimulus is
     VECTOR_ONEPLUS_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_ONEPLUS_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_ONEPLUS_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_ONEPLUS_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_ONEPLUS_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_ONEPLUS_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_ONEPLUS_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- VECTOR SINH
     -- CONTROL
@@ -378,9 +378,9 @@ entity ntm_function_stimulus is
     VECTOR_SINH_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_SINH_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_SINH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_SINH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_SINH_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_SINH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_SINH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- VECTOR SOFTMAX
     -- CONTROL
@@ -426,9 +426,9 @@ entity ntm_function_stimulus is
     VECTOR_TANH_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_TANH_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_TANH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_TANH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_TANH_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_TANH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_TANH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -----------------------------------------------------------------------
     -- STIMULUS MATRIX
@@ -774,49 +774,49 @@ begin
   end process;
 
   -- SCALAR-FUNCTIONALITY
-   SCALAR_CONVOLUTION_START       <= start_int;
-   SCALAR_COSH_START              <= start_int;
-   SCALAR_COSINE_SIMILARITY_START <= start_int;
-   SCALAR_DIFFERENTIATION_START   <= start_int;
-   SCALAR_EXPONENTIATOR_START     <= start_int;
-   SCALAR_LOGARITHM_START         <= start_int;
-   SCALAR_LOGISTIC_START          <= start_int;
-   SCALAR_MULTIPLICATION_START    <= start_int;
-   SCALAR_ONEPLUS_START           <= start_int;
-   SCALAR_SINH_START              <= start_int;
-   SCALAR_SOFTMAX_START           <= start_int;
-   SCALAR_SUMMATION_START         <= start_int;
-   SCALAR_TANH_START              <= start_int;
+  SCALAR_CONVOLUTION_START       <= start_int;
+  SCALAR_COSH_START              <= start_int;
+  SCALAR_COSINE_SIMILARITY_START <= start_int;
+  SCALAR_DIFFERENTIATION_START   <= start_int;
+  SCALAR_EXPONENTIATOR_START     <= start_int;
+  SCALAR_LOGARITHM_START         <= start_int;
+  SCALAR_LOGISTIC_START          <= start_int;
+  SCALAR_MULTIPLICATION_START    <= start_int;
+  SCALAR_ONEPLUS_START           <= start_int;
+  SCALAR_SINH_START              <= start_int;
+  SCALAR_SOFTMAX_START           <= start_int;
+  SCALAR_SUMMATION_START         <= start_int;
+  SCALAR_TANH_START              <= start_int;
 
   -- VECTOR-FUNCTIONALITY
-   VECTOR_CONVOLUTION_START       <= start_int;
-   VECTOR_COSH_START              <= start_int;
-   VECTOR_COSINE_SIMILARITY_START <= start_int;
-   VECTOR_DIFFERENTIATION_START   <= start_int;
-   VECTOR_EXPONENTIATOR_START     <= start_int;
-   VECTOR_LOGARITHM_START         <= start_int;
-   VECTOR_LOGISTIC_START          <= start_int;
-   VECTOR_MULTIPLICATION_START    <= start_int;
-   VECTOR_ONEPLUS_START           <= start_int;
-   VECTOR_SINH_START              <= start_int;
-   VECTOR_SOFTMAX_START           <= start_int;
-   VECTOR_SUMMATION_START         <= start_int;
-   VECTOR_TANH_START              <= start_int;
+  VECTOR_CONVOLUTION_START       <= start_int;
+  VECTOR_COSH_START              <= start_int;
+  VECTOR_COSINE_SIMILARITY_START <= start_int;
+  VECTOR_DIFFERENTIATION_START   <= start_int;
+  VECTOR_EXPONENTIATOR_START     <= start_int;
+  VECTOR_LOGARITHM_START         <= start_int;
+  VECTOR_LOGISTIC_START          <= start_int;
+  VECTOR_MULTIPLICATION_START    <= start_int;
+  VECTOR_ONEPLUS_START           <= start_int;
+  VECTOR_SINH_START              <= start_int;
+  VECTOR_SOFTMAX_START           <= start_int;
+  VECTOR_SUMMATION_START         <= start_int;
+  VECTOR_TANH_START              <= start_int;
 
   -- MATRIX-FUNCTIONALITY
-   MATRIX_CONVOLUTION_START       <= start_int;
-   MATRIX_COSH_START              <= start_int;
-   MATRIX_COSINE_SIMILARITY_START <= start_int;
-   MATRIX_DIFFERENTIATION_START   <= start_int;
-   MATRIX_EXPONENTIATOR_START     <= start_int;
-   MATRIX_LOGARITHM_START         <= start_int;
-   MATRIX_LOGISTIC_START          <= start_int;
-   MATRIX_MULTIPLICATION_START    <= start_int;
-   MATRIX_ONEPLUS_START           <= start_int;
-   MATRIX_SINH_START              <= start_int;
-   MATRIX_SOFTMAX_START           <= start_int;
-   MATRIX_SUMMATION_START         <= start_int;
-   MATRIX_TANH_START              <= start_int;
+  MATRIX_CONVOLUTION_START       <= start_int;
+  MATRIX_COSH_START              <= start_int;
+  MATRIX_COSINE_SIMILARITY_START <= start_int;
+  MATRIX_DIFFERENTIATION_START   <= start_int;
+  MATRIX_EXPONENTIATOR_START     <= start_int;
+  MATRIX_LOGARITHM_START         <= start_int;
+  MATRIX_LOGISTIC_START          <= start_int;
+  MATRIX_MULTIPLICATION_START    <= start_int;
+  MATRIX_ONEPLUS_START           <= start_int;
+  MATRIX_SINH_START              <= start_int;
+  MATRIX_SOFTMAX_START           <= start_int;
+  MATRIX_SUMMATION_START         <= start_int;
+  MATRIX_TANH_START              <= start_int;
 
   -----------------------------------------------------------------------
   -- STIMULUS

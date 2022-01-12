@@ -171,7 +171,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -186,7 +186,7 @@ begin
             controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
           end if;
 
-        when INPUT_FIRST_STATE =>  -- STEP 1
+        when INPUT_FIRST_STATE =>       -- STEP 1
 
           if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
@@ -212,7 +212,7 @@ begin
 
             -- Data Inputs
             data_a_in_scalar_adder <= data_out_scalar_exponentiator_function;
-            
+
             if (unsigned(index_adder_loop) = unsigned(ZERO_CONTROL)) then
               data_b_in_scalar_adder <= ZERO_DATA;
             else
@@ -226,7 +226,7 @@ begin
             start_scalar_exponentiator_function <= '0';
           end if;
 
-        when SCALAR_ADDER_STATE =>  -- STEP 3
+        when SCALAR_ADDER_STATE =>      -- STEP 3
 
           if (ready_scalar_adder = '1') then
             if (unsigned(index_adder_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
@@ -250,7 +250,7 @@ begin
             start_scalar_adder <= '0';
           end if;
 
-        when INPUT_SECOND_STATE =>  -- STEP 4
+        when INPUT_SECOND_STATE =>      -- STEP 4
 
           if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
@@ -283,7 +283,7 @@ begin
             start_scalar_exponentiator_function <= '0';
           end if;
 
-        when SCALAR_DIVIDER_STATE =>  -- STEP 6
+        when SCALAR_DIVIDER_STATE =>    -- STEP 6
 
           if (ready_scalar_divider = '1') then
             if (unsigned(index_divider_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then

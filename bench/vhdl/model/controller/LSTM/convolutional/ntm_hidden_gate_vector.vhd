@@ -143,9 +143,9 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
   signal data_out_enable_vector_tanh : std_logic;
 
   -- DATA
-  signal size_in_vector_tanh   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_tanh   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_tanh  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_tanh  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_tanh : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -175,7 +175,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -200,7 +200,7 @@ begin
             start_vector_tanh <= '0';
           end if;
 
-        when VECTOR_TANH_STATE =>  -- STEP 1
+        when VECTOR_TANH_STATE =>       -- STEP 1
 
           if (data_out_enable_vector_tanh = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
@@ -261,8 +261,8 @@ begin
 
   -- DATA
   -- VECTOR TANH
-  size_in_vector_tanh   <= SIZE_L_IN;
-  data_in_vector_tanh   <= S_IN;
+  size_in_vector_tanh <= SIZE_L_IN;
+  data_in_vector_tanh <= S_IN;
 
   -- VECTOR MULTIPLIER
   size_in_vector_multiplier   <= SIZE_L_IN;
@@ -316,9 +316,9 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_tanh,
 
       -- DATA
-      SIZE_IN   => size_in_vector_tanh,
-      DATA_IN   => data_in_vector_tanh,
-      DATA_OUT  => data_out_vector_tanh
+      SIZE_IN  => size_in_vector_tanh,
+      DATA_IN  => data_in_vector_tanh,
+      DATA_OUT => data_out_vector_tanh
       );
 
 end architecture;

@@ -59,56 +59,56 @@ entity ntm_integer_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- SCALAR-FUNCTIONALITY
-    ENABLE_NTM_SCALAR_INTEGER_ADDER_TEST        : boolean := false;
-    ENABLE_NTM_SCALAR_INTEGER_MULTIPLIER_TEST   : boolean := false;
-    ENABLE_NTM_SCALAR_INTEGER_DIVIDER_TEST      : boolean := false;
+    ENABLE_NTM_SCALAR_INTEGER_ADDER_TEST      : boolean := false;
+    ENABLE_NTM_SCALAR_INTEGER_MULTIPLIER_TEST : boolean := false;
+    ENABLE_NTM_SCALAR_INTEGER_DIVIDER_TEST    : boolean := false;
 
-    ENABLE_NTM_SCALAR_INTEGER_ADDER_CASE_0        : boolean := false;
-    ENABLE_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_0   : boolean := false;
-    ENABLE_NTM_SCALAR_INTEGER_DIVIDER_CASE_0      : boolean := false;
+    ENABLE_NTM_SCALAR_INTEGER_ADDER_CASE_0      : boolean := false;
+    ENABLE_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_NTM_SCALAR_INTEGER_DIVIDER_CASE_0    : boolean := false;
 
-    ENABLE_NTM_SCALAR_INTEGER_ADDER_CASE_1        : boolean := false;
-    ENABLE_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_1   : boolean := false;
-    ENABLE_NTM_SCALAR_INTEGER_DIVIDER_CASE_1      : boolean := false;
+    ENABLE_NTM_SCALAR_INTEGER_ADDER_CASE_1      : boolean := false;
+    ENABLE_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_NTM_SCALAR_INTEGER_DIVIDER_CASE_1    : boolean := false;
 
     -- VECTOR-FUNCTIONALITY
-    ENABLE_NTM_VECTOR_INTEGER_ADDER_TEST        : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGER_MULTIPLIER_TEST   : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGER_DIVIDER_TEST      : boolean := false;
+    ENABLE_NTM_VECTOR_INTEGER_ADDER_TEST      : boolean := false;
+    ENABLE_NTM_VECTOR_INTEGER_MULTIPLIER_TEST : boolean := false;
+    ENABLE_NTM_VECTOR_INTEGER_DIVIDER_TEST    : boolean := false;
 
-    ENABLE_NTM_VECTOR_INTEGER_ADDER_CASE_0        : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_0   : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGER_DIVIDER_CASE_0      : boolean := false;
+    ENABLE_NTM_VECTOR_INTEGER_ADDER_CASE_0      : boolean := false;
+    ENABLE_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_NTM_VECTOR_INTEGER_DIVIDER_CASE_0    : boolean := false;
 
-    ENABLE_NTM_VECTOR_INTEGER_ADDER_CASE_1        : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_1   : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGER_DIVIDER_CASE_1      : boolean := false;
+    ENABLE_NTM_VECTOR_INTEGER_ADDER_CASE_1      : boolean := false;
+    ENABLE_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_NTM_VECTOR_INTEGER_DIVIDER_CASE_1    : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
-    ENABLE_NTM_MATRIX_INTEGER_ADDER_TEST        : boolean := false;
-    ENABLE_NTM_MATRIX_INTEGER_MULTIPLIER_TEST   : boolean := false;
-    ENABLE_NTM_MATRIX_INTEGER_DIVIDER_TEST      : boolean := false;
+    ENABLE_NTM_MATRIX_INTEGER_ADDER_TEST      : boolean := false;
+    ENABLE_NTM_MATRIX_INTEGER_MULTIPLIER_TEST : boolean := false;
+    ENABLE_NTM_MATRIX_INTEGER_DIVIDER_TEST    : boolean := false;
 
-    ENABLE_NTM_MATRIX_INTEGER_ADDER_CASE_0        : boolean := false;
-    ENABLE_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_0   : boolean := false;
-    ENABLE_NTM_MATRIX_INTEGER_DIVIDER_CASE_0      : boolean := false;
+    ENABLE_NTM_MATRIX_INTEGER_ADDER_CASE_0      : boolean := false;
+    ENABLE_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_NTM_MATRIX_INTEGER_DIVIDER_CASE_0    : boolean := false;
 
-    ENABLE_NTM_MATRIX_INTEGER_ADDER_CASE_1        : boolean := false;
-    ENABLE_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_1   : boolean := false;
-    ENABLE_NTM_MATRIX_INTEGER_DIVIDER_CASE_1      : boolean := false;
+    ENABLE_NTM_MATRIX_INTEGER_ADDER_CASE_1      : boolean := false;
+    ENABLE_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_NTM_MATRIX_INTEGER_DIVIDER_CASE_1    : boolean := false;
 
     -- TENSOR-FUNCTIONALITY
-    ENABLE_NTM_TENSOR_INTEGER_ADDER_TEST        : boolean := false;
-    ENABLE_NTM_TENSOR_INTEGER_MULTIPLIER_TEST   : boolean := false;
-    ENABLE_NTM_TENSOR_INTEGER_DIVIDER_TEST      : boolean := false;
+    ENABLE_NTM_TENSOR_INTEGER_ADDER_TEST      : boolean := false;
+    ENABLE_NTM_TENSOR_INTEGER_MULTIPLIER_TEST : boolean := false;
+    ENABLE_NTM_TENSOR_INTEGER_DIVIDER_TEST    : boolean := false;
 
-    ENABLE_NTM_TENSOR_INTEGER_ADDER_CASE_0        : boolean := false;
-    ENABLE_NTM_TENSOR_INTEGER_MULTIPLIER_CASE_0   : boolean := false;
-    ENABLE_NTM_TENSOR_INTEGER_DIVIDER_CASE_0      : boolean := false;
+    ENABLE_NTM_TENSOR_INTEGER_ADDER_CASE_0      : boolean := false;
+    ENABLE_NTM_TENSOR_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_NTM_TENSOR_INTEGER_DIVIDER_CASE_0    : boolean := false;
 
-    ENABLE_NTM_TENSOR_INTEGER_ADDER_CASE_1        : boolean := false;
-    ENABLE_NTM_TENSOR_INTEGER_MULTIPLIER_CASE_1   : boolean := false;
-    ENABLE_NTM_TENSOR_INTEGER_DIVIDER_CASE_1      : boolean := false
+    ENABLE_NTM_TENSOR_INTEGER_ADDER_CASE_1      : boolean := false;
+    ENABLE_NTM_TENSOR_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_NTM_TENSOR_INTEGER_DIVIDER_CASE_1    : boolean := false
     );
 end ntm_integer_testbench;
 

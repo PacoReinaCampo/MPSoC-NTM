@@ -256,7 +256,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -275,9 +275,9 @@ begin
             start_matrix_transpose <= '0';
           end if;
 
-        when INPUT_I_FIRST_STATE =>  -- STEP 1
+        when INPUT_I_FIRST_STATE =>     -- STEP 1
 
-        when INPUT_J_FIRST_STATE =>  -- STEP 2
+        when INPUT_J_FIRST_STATE =>     -- STEP 2
 
         when MATRIX_FIRST_TRANSPOSE_I_STATE =>  -- STEP 3
 
@@ -346,9 +346,9 @@ begin
             M_OUT_K_ENABLE <= '0';
           end if;
 
-        when INPUT_I_SECOND_STATE =>  -- STEP 5
+        when INPUT_I_SECOND_STATE =>    -- STEP 5
 
-        when INPUT_J_SECOND_STATE =>  -- STEP 6
+        when INPUT_J_SECOND_STATE =>    -- STEP 6
 
         when MATRIX_FIRST_PRODUCT_I_STATE =>  -- STEP 7
 
@@ -504,9 +504,9 @@ begin
             M_OUT_K_ENABLE <= '0';
           end if;
 
-        when INPUT_I_THIRD_STATE =>  -- STEP 11
+        when INPUT_I_THIRD_STATE =>     -- STEP 11
 
-        when INPUT_J_THIRD_STATE =>  -- STEP 12
+        when INPUT_J_THIRD_STATE =>     -- STEP 12
 
         when MATRIX_MULTIPLIER_I_STATE =>  -- STEP 13
 
@@ -581,9 +581,9 @@ begin
             M_OUT_K_ENABLE <= '0';
           end if;
 
-        when INPUT_I_FOURTH_STATE =>  -- STEP 15
+        when INPUT_I_FOURTH_STATE =>    -- STEP 15
 
-        when INPUT_J_FOURTH_STATE =>  -- STEP 16
+        when INPUT_J_FOURTH_STATE =>    -- STEP 16
 
         when MATRIX_SECOND_TRANSPOSE_I_STATE =>  -- STEP 17
 
@@ -655,9 +655,9 @@ begin
             start_matrix_transpose <= '0';
           end if;
 
-        when INPUT_I_FIFTH_STATE =>  -- STEP 19
+        when INPUT_I_FIFTH_STATE =>     -- STEP 19
 
-        when INPUT_J_FIFTH_STATE =>  -- STEP 20
+        when INPUT_J_FIFTH_STATE =>     -- STEP 20
 
         when MATRIX_SECOND_PRODUCT_I_STATE =>  -- STEP 21
 

@@ -206,7 +206,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -222,21 +222,21 @@ begin
             controller_ctrl_fsm_int <= INPUT_I_FIRST_STATE;
           end if;
 
-        when INPUT_I_FIRST_STATE =>  -- STEP 1
+        when INPUT_I_FIRST_STATE =>     -- STEP 1
 
-        when INPUT_J_FIRST_STATE =>  -- STEP 2
+        when INPUT_J_FIRST_STATE =>     -- STEP 2
 
         when MATRIX_MULTIPLIER_I_STATE =>  -- STEP 3
 
         when MATRIX_MULTIPLIER_J_STATE =>  -- STEP 4
 
-        when INPUT_SECOND_I_STATE =>  -- STEP 5
+        when INPUT_SECOND_I_STATE =>    -- STEP 5
 
-        when INPUT_SECOND_J_STATE =>  -- STEP 6
+        when INPUT_SECOND_J_STATE =>    -- STEP 6
 
-        when MATRIX_ADDER_I_STATE =>  -- STEP 7
+        when MATRIX_ADDER_I_STATE =>    -- STEP 7
 
-        when MATRIX_ADDER_J_STATE =>  -- STEP 8
+        when MATRIX_ADDER_J_STATE =>    -- STEP 8
 
         when others =>
           -- FSM Control

@@ -187,7 +187,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -204,7 +204,7 @@ begin
             controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
           end if;
 
-        when INPUT_FIRST_STATE =>  -- STEP 1
+        when INPUT_FIRST_STATE =>       -- STEP 1
 
         when VECTOR_FIRST_ADDER_STATE =>  -- STEP 2
 
@@ -232,7 +232,7 @@ begin
             start_vector_adder <= '0';
           end if;
 
-        when INPUT_SECOND_STATE =>  -- STEP 3
+        when INPUT_SECOND_STATE =>      -- STEP 3
 
         when VECTOR_FIRST_MULTIPLIER_STATE =>  -- STEP 4
 
@@ -258,7 +258,7 @@ begin
             start_vector_multiplier <= '0';
           end if;
 
-        when INPUT_THIRD_STATE =>  -- STEP 5
+        when INPUT_THIRD_STATE =>       -- STEP 5
 
         when VECTOR_SECOND_MULTIPLIER_STATE =>  -- STEP 6
 
@@ -310,7 +310,7 @@ begin
             start_vector_adder <= '0';
           end if;
 
-        when INPUT_FOURTH_STATE =>  -- STEP 4
+        when INPUT_FOURTH_STATE =>      -- STEP 4
 
         when VECTOR_THIRD_MULTIPLIER_STATE =>  -- STEP 6
 

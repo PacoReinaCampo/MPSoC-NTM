@@ -180,7 +180,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -190,7 +190,7 @@ begin
 
             index_adder_loop      <= ZERO_DATA;
             index_multiplier_loop <= ZERO_DATA;
-              
+
             -- Data Input
             data_a_in_scalar_multiplier <= DATA_IN;
             data_b_in_scalar_multiplier <= ONE_DATA;
@@ -226,7 +226,7 @@ begin
             start_scalar_multiplier <= '0';
           end if;
 
-        when SCALAR_DIVIDER_STATE =>  -- STEP 2
+        when SCALAR_DIVIDER_STATE =>    -- STEP 2
 
           if (ready_scalar_divider = '1') then
             -- Control Internal
@@ -254,7 +254,7 @@ begin
             start_scalar_divider <= '0';
           end if;
 
-        when SCALAR_ADDER_STATE =>  -- STEP 3
+        when SCALAR_ADDER_STATE =>      -- STEP 3
 
           if (ready_scalar_adder = '1') then
             if (unsigned(index_adder_loop) = unsigned(FULL)) then

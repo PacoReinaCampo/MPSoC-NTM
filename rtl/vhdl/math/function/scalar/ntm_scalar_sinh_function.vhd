@@ -59,8 +59,8 @@ entity ntm_scalar_sinh_function is
     READY : out std_logic;
 
     -- DATA
-    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -156,7 +156,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -211,7 +211,7 @@ begin
             start_scalar_divider <= '0';
           end if;
 
-        when SCALAR_ADDER_STATE =>  -- STEP 3
+        when SCALAR_ADDER_STATE =>      -- STEP 3
 
           if (ready_scalar_adder = '1') then
             -- Control Internal

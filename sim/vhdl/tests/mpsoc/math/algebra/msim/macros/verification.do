@@ -98,6 +98,35 @@ alias ntm_scalar_product_verification_compilation {
 }
 
 ##################################################################################################
+# NTM_SCALAR_TRANSPOSE_TEST 
+##################################################################################################
+
+alias ntm_scalar_transpose_verification_compilation {
+  echo "TEST: NTM_SCALAR_TRANSPOSE_TEST"
+
+  vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/ntm_algebra_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/ntm_algebra_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/ntm_algebra_testbench.vhd
+
+  vsim -g /ntm_algebra_testbench/ENABLE_NTM_SCALAR_TRANSPOSE_TEST=true -t ps +notimingchecks -L unisim work.ntm_algebra_testbench
+
+  #MACROS
+  add log -r sim:/ntm_algebra_testbench/*
+
+  #WAVES
+  view -title ntm_scalar_transpose wave
+  do $simulation_path/mpsoc/math/algebra/msim/waves/ntm_scalar_transpose.do
+
+  force -freeze sim:/ntm_algebra_pkg/STIMULUS_NTM_SCALAR_TRANSPOSE_TEST true 0
+  force -freeze sim:/ntm_algebra_pkg/STIMULUS_NTM_SCALAR_TRANSPOSE_CASE_0 true 0
+
+  onbreak {resume}
+  run -all
+
+  dataset save sim ntm_scalar_transpose_test.wlf
+}
+
+##################################################################################################
 # NTM_TENSOR_TRANSPOSE_TEST 
 ##################################################################################################
 
@@ -170,10 +199,14 @@ alias v03 {
 }
 
 alias v04 {
-  ntm_tensor_product_verification_compilation
+  ntm_scalar_transpose_verification_compilation
 }
 
 alias v05 {
+  ntm_tensor_product_verification_compilation
+}
+
+alias v06 {
   ntm_tensor_transpose_verification_compilation
 }
 
@@ -181,6 +214,7 @@ echo "****************************************"
 echo "v01 . NTM-MATRIX-PRODUCT-TEST"
 echo "v02 . NTM-MATRIX-TRANSPOSE-TEST"
 echo "v03 . NTM-SCALAR-PRODUCT-TEST"
-echo "v04 . NTM-TENSOR-PRODUCT-TEST"
-echo "v05 . NTM-TENSOR-TRANSPOSE-TEST"
+echo "v04 . NTM-SCALAR-TRANSPOSE-TEST"
+echo "v05 . NTM-TENSOR-PRODUCT-TEST"
+echo "v06 . NTM-TENSOR-TRANSPOSE-TEST"
 echo "****************************************"

@@ -100,8 +100,8 @@ architecture dnc_allocation_gate_architecture of dnc_allocation_gate is
   signal ready_scalar_logistic : std_logic;
 
   -- DATA
-  signal data_in_scalar_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -139,8 +139,8 @@ begin
       READY => ready_scalar_logistic,
 
       -- DATA
-      DATA_IN   => data_in_scalar_logistic,
-      DATA_OUT  => data_out_scalar_logistic
+      DATA_IN  => data_in_scalar_logistic,
+      DATA_OUT => data_out_scalar_logistic
       );
 
 end architecture;

@@ -281,8 +281,8 @@ package ntm_function_pkg is
       SCALAR_COSH_READY : in  std_logic;
 
       -- DATA
-      SCALAR_COSH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_COSH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_COSH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_COSH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- SCALAR COSINE SIMILARITY
       -- CONTROL
@@ -321,8 +321,8 @@ package ntm_function_pkg is
       SCALAR_EXPONENTIATOR_READY : in  std_logic;
 
       -- DATA
-      SCALAR_EXPONENTIATOR_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_EXPONENTIATOR_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_EXPONENTIATOR_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- SCALAR LOGISTIC
       -- CONTROL
@@ -330,8 +330,8 @@ package ntm_function_pkg is
       SCALAR_LOGISTIC_READY : in  std_logic;
 
       -- DATA
-      SCALAR_LOGISTIC_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_LOGISTIC_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_LOGISTIC_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_LOGISTIC_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- SCALAR LOGARITHM
       -- CONTROL
@@ -339,8 +339,8 @@ package ntm_function_pkg is
       SCALAR_LOGARITHM_READY : in  std_logic;
 
       -- DATA
-      SCALAR_LOGARITHM_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_LOGARITHM_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_LOGARITHM_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_LOGARITHM_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- SCALAR MULTIPLICATION
       -- CONTROL
@@ -362,8 +362,8 @@ package ntm_function_pkg is
       SCALAR_ONEPLUS_READY : in  std_logic;
 
       -- DATA
-      SCALAR_ONEPLUS_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_ONEPLUS_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_ONEPLUS_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_ONEPLUS_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- SCALAR SINH
       -- CONTROL
@@ -371,8 +371,8 @@ package ntm_function_pkg is
       SCALAR_SINH_READY : in  std_logic;
 
       -- DATA
-      SCALAR_SINH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_SINH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_SINH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_SINH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- SCALAR SOFTMAX
       -- CONTROL
@@ -408,8 +408,8 @@ package ntm_function_pkg is
       SCALAR_TANH_READY : in  std_logic;
 
       -- DATA
-      SCALAR_TANH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_TANH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_TANH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_TANH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
       -- STIMULUS VECTOR
@@ -445,9 +445,9 @@ package ntm_function_pkg is
       VECTOR_COSH_DATA_OUT_ENABLE : in std_logic;
 
       -- DATA
-      VECTOR_COSH_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_COSH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_COSH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_COSH_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_COSH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_COSH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- VECTOR COSINE SIMILARITY
       -- CONTROL
@@ -497,9 +497,9 @@ package ntm_function_pkg is
       VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE : in std_logic;
 
       -- DATA
-      VECTOR_EXPONENTIATOR_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_EXPONENTIATOR_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_EXPONENTIATOR_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_EXPONENTIATOR_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_EXPONENTIATOR_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- VECTOR LOGARITHM
       -- CONTROL
@@ -511,9 +511,9 @@ package ntm_function_pkg is
       VECTOR_LOGARITHM_DATA_OUT_ENABLE : in std_logic;
 
       -- DATA
-      VECTOR_LOGARITHM_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_LOGARITHM_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_LOGARITHM_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_LOGARITHM_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_LOGARITHM_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_LOGARITHM_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- VECTOR LOGISTIC
       -- CONTROL
@@ -525,9 +525,9 @@ package ntm_function_pkg is
       VECTOR_LOGISTIC_DATA_OUT_ENABLE : in std_logic;
 
       -- DATA
-      VECTOR_LOGISTIC_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_LOGISTIC_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_LOGISTIC_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_LOGISTIC_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_LOGISTIC_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_LOGISTIC_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- VECTOR MULTIPLICATION
       -- CONTROL
@@ -556,9 +556,9 @@ package ntm_function_pkg is
       VECTOR_ONEPLUS_DATA_OUT_ENABLE : in std_logic;
 
       -- DATA
-      VECTOR_ONEPLUS_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_ONEPLUS_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_ONEPLUS_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_ONEPLUS_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_ONEPLUS_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_ONEPLUS_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- VECTOR SINH
       -- CONTROL
@@ -570,9 +570,9 @@ package ntm_function_pkg is
       VECTOR_SINH_DATA_OUT_ENABLE : in std_logic;
 
       -- DATA
-      VECTOR_SINH_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_SINH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_SINH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_SINH_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_SINH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_SINH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- VECTOR SOFTMAX
       -- CONTROL
@@ -618,9 +618,9 @@ package ntm_function_pkg is
       VECTOR_TANH_DATA_OUT_ENABLE : in std_logic;
 
       -- DATA
-      VECTOR_TANH_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_TANH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_TANH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_TANH_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_TANH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_TANH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
       -- STIMULUS MATRIX

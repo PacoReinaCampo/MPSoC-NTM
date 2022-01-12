@@ -17,6 +17,8 @@ add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_trans
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/DATA_IN_I_ENABLE
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/DATA_IN_J_ENABLE
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/DATA_IN
+add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/DATA_I_ENABLE
+add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/DATA_J_ENABLE
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/READY
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/DATA_OUT_I_ENABLE
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/DATA_OUT_J_ENABLE

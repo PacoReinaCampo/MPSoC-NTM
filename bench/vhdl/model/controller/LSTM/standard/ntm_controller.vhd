@@ -721,7 +721,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Data Outputs
           H_OUT <= ZERO_DATA;
 
@@ -744,7 +744,7 @@ begin
             start_activation_gate_vector <= '0';
           end if;
 
-        when INPUT_STATE =>  -- STEP 1
+        when INPUT_STATE =>             -- STEP 1
 
         when VECTOR_ACTIVATION_STATE =>  -- STEP 2
 
@@ -761,7 +761,7 @@ begin
             start_activation_gate_vector <= '0';
           end if;
 
-        when VECTOR_FORGET_STATE =>  -- STEP 3
+        when VECTOR_FORGET_STATE =>     -- STEP 3
 
           -- f(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
 
@@ -776,7 +776,7 @@ begin
             start_forget_gate_vector <= '0';
           end if;
 
-        when VECTOR_INPUT_STATE =>  -- STEP 4
+        when VECTOR_INPUT_STATE =>      -- STEP 4
 
           -- i(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
 
@@ -791,7 +791,7 @@ begin
             start_input_gate_vector <= '0';
           end if;
 
-        when VECTOR_STATE_STATE =>  -- STEP 5
+        when VECTOR_STATE_STATE =>      -- STEP 5
 
           -- s(t;l) = f(t;l) o s(t-1;l) + i(t;l) o a(t;l)
           -- s(t=0;l) = 0
@@ -807,7 +807,7 @@ begin
             start_state_gate_vector <= '0';
           end if;
 
-        when VECTOR_OUTPUT_GATE =>  -- STEP 6
+        when VECTOR_OUTPUT_GATE =>      -- STEP 6
 
           -- o(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
 
@@ -822,7 +822,7 @@ begin
             start_output_gate_vector <= '0';
           end if;
 
-        when VECTOR_HIDDEN_GATE =>  -- STEP 7
+        when VECTOR_HIDDEN_GATE =>      -- STEP 7
 
           -- h(t;l) = o(t;l) o tanh(s(t;l))
           -- h(t=0;l) = 0; h(t;l=0) = 0

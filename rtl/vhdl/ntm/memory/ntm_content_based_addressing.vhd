@@ -220,7 +220,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -242,7 +242,7 @@ begin
             start_vector_cosine_similarity <= '0';
           end if;
 
-        when INPUT_FIRST_STATE =>  -- STEP 1
+        when INPUT_FIRST_STATE =>       -- STEP 1
 
         when VECTOR_COSINE_SIMILARITY_STATE =>  -- STEP 2
 
@@ -259,7 +259,7 @@ begin
             start_vector_cosine_similarity <= '0';
           end if;
 
-        when INPUT_SECOND_STATE =>  -- STEP 3
+        when INPUT_SECOND_STATE =>      -- STEP 3
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 4
 
@@ -291,7 +291,7 @@ begin
             start_vector_exponentiator_function <= '0';
           end if;
 
-        when VECTOR_SOFTMAX_STATE =>  -- STEP 6
+        when VECTOR_SOFTMAX_STATE =>    -- STEP 6
 
           if (data_out_vector_enable_vector_softmax = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_I_IN) - unsigned(ONE_CONTROL)) then

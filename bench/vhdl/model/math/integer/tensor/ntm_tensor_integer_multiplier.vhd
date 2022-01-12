@@ -208,7 +208,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case multiplier_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -226,7 +226,7 @@ begin
             multiplier_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
-        when INPUT_I_STATE =>  -- STEP 1
+        when INPUT_I_STATE =>           -- STEP 1
 
           if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) or ((index_j_loop = ZERO_CONTROL) and (index_k_loop = ZERO_CONTROL))) then
             -- Data Inputs
@@ -291,7 +291,7 @@ begin
             multiplier_ctrl_fsm_int <= ENDER_K_STATE;
           end if;
 
-        when INPUT_J_STATE =>  -- STEP 2
+        when INPUT_J_STATE =>           -- STEP 2
 
           if (((DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) or (index_k_loop = ZERO_CONTROL)) then
             -- Data Inputs
@@ -345,7 +345,7 @@ begin
             multiplier_ctrl_fsm_int <= ENDER_K_STATE;
           end if;
 
-        when INPUT_K_STATE =>  -- STEP 3
+        when INPUT_K_STATE =>           -- STEP 3
 
           if (DATA_A_IN_K_ENABLE = '1') then
             -- Data Inputs
@@ -396,7 +396,7 @@ begin
             end if;
           end if;
 
-        when ENDER_I_STATE =>  -- STEP 4
+        when ENDER_I_STATE =>           -- STEP 4
 
           if (data_out_i_enable_matrix_integer_multiplier = '1' and data_out_j_enable_matrix_integer_multiplier = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
@@ -441,7 +441,7 @@ begin
             start_matrix_integer_multiplier <= '0';
           end if;
 
-        when ENDER_J_STATE =>  -- STEP 5
+        when ENDER_J_STATE =>           -- STEP 5
 
           if (data_out_j_enable_matrix_integer_multiplier = '1') then
             if ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
@@ -465,7 +465,7 @@ begin
             start_matrix_integer_multiplier <= '0';
           end if;
 
-        when ENDER_K_STATE =>  -- STEP 6
+        when ENDER_K_STATE =>           -- STEP 6
 
           if (data_out_j_enable_matrix_integer_multiplier = '1') then
             if (unsigned(index_k_loop) < unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
