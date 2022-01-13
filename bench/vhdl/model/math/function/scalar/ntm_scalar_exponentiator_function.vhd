@@ -95,7 +95,7 @@ architecture ntm_scalar_exponentiator_function_architecture of ntm_scalar_expone
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
-  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   -----------------------------------------------------------------------
   -- Signals
@@ -187,7 +187,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -267,7 +267,7 @@ begin
             start_scalar_multiplier <= '0';
           end if;
 
-        when SCALAR_DIVIDER_STATE =>  -- STEP 3
+        when SCALAR_DIVIDER_STATE =>    -- STEP 3
 
           if (ready_scalar_divider = '1') then
             -- Control Internal
@@ -291,10 +291,10 @@ begin
             start_scalar_divider <= '0';
           end if;
 
-        when SCALAR_ADDER_STATE =>  -- STEP 4
+        when SCALAR_ADDER_STATE =>      -- STEP 4
 
           if (ready_scalar_adder = '1') then
-            if (unsigned(index_adder_loop) = unsigned(FULL)) then
+            if (unsigned(index_adder_loop) = unsigned(EULER)) then
               -- Data Outputs
               DATA_OUT <= data_out_scalar_adder;
 
@@ -305,7 +305,13 @@ begin
               controller_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
+              start_scalar_multiplier <= '1';
+
               index_adder_loop <= std_logic_vector(unsigned(index_adder_loop)+unsigned(ONE_DATA));
+
+              -- Data Input
+              data_a_in_scalar_multiplier <= DATA_IN;
+              data_b_in_scalar_multiplier <= ONE_DATA;
 
               -- FSM Control
               controller_ctrl_fsm_int <= SCALAR_FIRST_MULTIPLIER_STATE;

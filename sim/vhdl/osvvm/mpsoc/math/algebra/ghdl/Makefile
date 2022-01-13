@@ -28,10 +28,11 @@ build:
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_divider.vhd
 
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_product.vhd
-	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/algebra/ntm_tensor_transpose.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_transpose.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/algebra/ntm_scalar_product.vhd
+	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/algebra/ntm_scalar_transpose.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/algebra/ntm_tensor_product.vhd
+	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/algebra/ntm_tensor_transpose.vhd
 
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/math/algebra/ntm_algebra_pkg.vhd
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/math/algebra/ntm_algebra_stimulus.vhd

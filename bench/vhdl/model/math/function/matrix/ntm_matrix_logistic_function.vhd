@@ -195,7 +195,11 @@ begin
             data_in_enable_vector_logistic_function <= '1';
 
             -- FSM Control
-            logistic_ctrl_fsm_int <= ENDER_J_STATE;
+            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              logistic_ctrl_fsm_int <= ENDER_I_STATE;
+            else
+              logistic_ctrl_fsm_int <= ENDER_J_STATE;
+            end if;
           end if;
 
           -- Control Outputs

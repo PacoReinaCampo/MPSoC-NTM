@@ -53,9 +53,9 @@ package ntm_algebra_pkg is
   constant CONTROL_Y_SIZE : integer := 3;
   constant CONTROL_Z_SIZE : integer := 3;
 
-  type tensor_buffer is array (1 to CONTROL_X_SIZE, 1 to CONTROL_Y_SIZE, 1 to CONTROL_Z_SIZE) of std_logic_vector(DATA_SIZE-1 downto 0);
-  type matrix_buffer is array (1 to CONTROL_X_SIZE, 1 to CONTROL_Y_SIZE) of std_logic_vector(DATA_SIZE-1 downto 0);
-  type vector_buffer is array (1 to CONTROL_X_SIZE) of std_logic_vector(DATA_SIZE-1 downto 0);
+  type tensor_buffer is array (0 to CONTROL_X_SIZE-1, 0 to CONTROL_Y_SIZE-1, 0 to CONTROL_Z_SIZE-1) of std_logic_vector(DATA_SIZE-1 downto 0);
+  type matrix_buffer is array (0 to CONTROL_X_SIZE-1, 0 to CONTROL_Y_SIZE-1) of std_logic_vector(DATA_SIZE-1 downto 0);
+  type vector_buffer is array (0 to CONTROL_X_SIZE-1) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Signals
@@ -95,33 +95,36 @@ package ntm_algebra_pkg is
   constant NINE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(9, DATA_SIZE));
 
   -- Buffer
-  constant TENSOR_SAMPLE_A : tensor_buffer := (((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO)), ((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO)), ((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO)));
-  constant TENSOR_SAMPLE_B : tensor_buffer := (((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO)), ((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO)), ((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO)));
+  constant TENSOR_SAMPLE_A : tensor_buffer := (((TWO, ONE, FOUR), (NINE, FOUR, TWO), (ONE, ONE, TWO)), ((EIGHT, SIX, TWO), (EIGHT, FIVE, TWO), (ONE, FOUR, ONE)), ((THREE, ONE, SIX), (FIVE, ZERO, FOUR), (FIVE, EIGHT, FIVE)));
+  constant TENSOR_SAMPLE_B : tensor_buffer := (((ONE, THREE, ONE), (TWO, FOUR, EIGHT), (FOUR, ONE, TWO)), ((NINE, ONE, FIVE), (NINE, EIGHT, ONE), (FIVE, EIGHT, FOUR)), ((FIVE, FOUR, ONE), (THREE, FOUR, SIX), (ONE, EIGHT, EIGHT)));
 
-  constant MATRIX_SAMPLE_A : matrix_buffer := ((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO));
-  constant MATRIX_SAMPLE_B : matrix_buffer := ((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO));
+  constant MATRIX_SAMPLE_A : matrix_buffer := ((ONE, FOUR, ONE), (ZERO, EIGHT, FOUR), (FIVE, THREE, NINE));
+  constant MATRIX_SAMPLE_B : matrix_buffer := ((ONE, TWO, SIX), (ONE, THREE, SIX), (EIGHT, FOUR, FOUR));
 
-  constant VECTOR_SAMPLE_A : vector_buffer := (THREE, ONE, SIX);
-  constant VECTOR_SAMPLE_B : vector_buffer := (NINE, ZERO, FOUR);
+  constant VECTOR_SAMPLE_A : vector_buffer := (FOUR, NINE, THREE);
+  constant VECTOR_SAMPLE_B : vector_buffer := (THREE, NINE, ZERO);
 
   -- FUNCTIONALITY
   signal STIMULUS_NTM_MATRIX_PRODUCT_TEST   : boolean := false;
-  signal STIMULUS_NTM_TENSOR_TRANSPOSE_TEST : boolean := false;
   signal STIMULUS_NTM_MATRIX_TRANSPOSE_TEST : boolean := false;
   signal STIMULUS_NTM_SCALAR_PRODUCT_TEST   : boolean := false;
+  signal STIMULUS_NTM_SCALAR_TRANSPOSE_TEST : boolean := false;
   signal STIMULUS_NTM_TENSOR_PRODUCT_TEST   : boolean := false;
+  signal STIMULUS_NTM_TENSOR_TRANSPOSE_TEST : boolean := false;
 
   signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_0   : boolean := false;
-  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_0 : boolean := false;
   signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0 : boolean := false;
   signal STIMULUS_NTM_SCALAR_PRODUCT_CASE_0   : boolean := false;
+  signal STIMULUS_NTM_SCALAR_TRANSPOSE_CASE_0 : boolean := false;
   signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_0   : boolean := false;
+  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_0 : boolean := false;
 
   signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_1   : boolean := false;
-  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_1 : boolean := false;
   signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1 : boolean := false;
   signal STIMULUS_NTM_SCALAR_PRODUCT_CASE_1   : boolean := false;
+  signal STIMULUS_NTM_SCALAR_TRANSPOSE_CASE_1 : boolean := false;
   signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_1   : boolean := false;
+  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_1 : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
@@ -155,6 +158,9 @@ package ntm_algebra_pkg is
       MATRIX_PRODUCT_DATA_B_IN_I_ENABLE : out std_logic;
       MATRIX_PRODUCT_DATA_B_IN_J_ENABLE : out std_logic;
 
+      MATRIX_PRODUCT_DATA_I_ENABLE : in std_logic;
+      MATRIX_PRODUCT_DATA_J_ENABLE : in std_logic;
+
       MATRIX_PRODUCT_DATA_OUT_I_ENABLE : in std_logic;
       MATRIX_PRODUCT_DATA_OUT_J_ENABLE : in std_logic;
 
@@ -167,26 +173,6 @@ package ntm_algebra_pkg is
       MATRIX_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- TENSOR TRANSPOSE
-      -- CONTROL
-      TENSOR_TRANSPOSE_START : out std_logic;
-      TENSOR_TRANSPOSE_READY : in  std_logic;
-
-      TENSOR_TRANSPOSE_DATA_IN_I_ENABLE : out std_logic;
-      TENSOR_TRANSPOSE_DATA_IN_J_ENABLE : out std_logic;
-      TENSOR_TRANSPOSE_DATA_IN_K_ENABLE : out std_logic;
-
-      TENSOR_TRANSPOSE_DATA_OUT_I_ENABLE : in std_logic;
-      TENSOR_TRANSPOSE_DATA_OUT_J_ENABLE : in std_logic;
-      TENSOR_TRANSPOSE_DATA_OUT_K_ENABLE : in std_logic;
-
-      -- DATA
-      TENSOR_TRANSPOSE_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_TRANSPOSE_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_TRANSPOSE_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
       -- MATRIX TRANSPOSE
       -- CONTROL
       MATRIX_TRANSPOSE_START : out std_logic;
@@ -194,6 +180,9 @@ package ntm_algebra_pkg is
 
       MATRIX_TRANSPOSE_DATA_IN_I_ENABLE : out std_logic;
       MATRIX_TRANSPOSE_DATA_IN_J_ENABLE : out std_logic;
+
+      MATRIX_TRANSPOSE_DATA_I_ENABLE : in std_logic;
+      MATRIX_TRANSPOSE_DATA_J_ENABLE : in std_logic;
 
       MATRIX_TRANSPOSE_DATA_OUT_I_ENABLE : in std_logic;
       MATRIX_TRANSPOSE_DATA_OUT_J_ENABLE : in std_logic;
@@ -220,6 +209,22 @@ package ntm_algebra_pkg is
       SCALAR_PRODUCT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_PRODUCT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- SCALAR TRANSPOSE
+      -- CONTROL
+      SCALAR_TRANSPOSE_START : out std_logic;
+      SCALAR_TRANSPOSE_READY : in  std_logic;
+
+      SCALAR_TRANSPOSE_DATA_IN_ENABLE : out std_logic;
+
+      SCALAR_TRANSPOSE_DATA_ENABLE : in std_logic;
+
+      SCALAR_TRANSPOSE_DATA_OUT_ENABLE : in std_logic;
+
+      -- DATA
+      SCALAR_TRANSPOSE_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SCALAR_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
       -- TENSOR PRODUCT
       -- CONTROL
       TENSOR_PRODUCT_START : out std_logic;
@@ -245,7 +250,27 @@ package ntm_algebra_pkg is
       TENSOR_PRODUCT_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       TENSOR_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      TENSOR_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- TENSOR TRANSPOSE
+      -- CONTROL
+      TENSOR_TRANSPOSE_START : out std_logic;
+      TENSOR_TRANSPOSE_READY : in  std_logic;
+
+      TENSOR_TRANSPOSE_DATA_IN_I_ENABLE : out std_logic;
+      TENSOR_TRANSPOSE_DATA_IN_J_ENABLE : out std_logic;
+      TENSOR_TRANSPOSE_DATA_IN_K_ENABLE : out std_logic;
+
+      TENSOR_TRANSPOSE_DATA_OUT_I_ENABLE : in std_logic;
+      TENSOR_TRANSPOSE_DATA_OUT_J_ENABLE : in std_logic;
+      TENSOR_TRANSPOSE_DATA_OUT_K_ENABLE : in std_logic;
+
+      -- DATA
+      TENSOR_TRANSPOSE_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

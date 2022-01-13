@@ -187,7 +187,11 @@ begin
             matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
 
             -- FSM Control
-            transpose_ctrl_fsm_int <= ENDER_J_STATE;
+            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              transpose_ctrl_fsm_int <= ENDER_I_STATE;
+            else
+              transpose_ctrl_fsm_int <= ENDER_J_STATE;
+            end if;
           end if;
 
           -- Control Outputs

@@ -95,14 +95,14 @@ package ntm_algebra_pkg is
   constant NINE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(9, DATA_SIZE));
 
   -- Buffer
-  constant TENSOR_SAMPLE_A : tensor_buffer := (((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO)), ((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO)), ((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO)));
-  constant TENSOR_SAMPLE_B : tensor_buffer := (((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO)), ((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO)), ((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO)));
+  constant TENSOR_SAMPLE_A : tensor_buffer := (((TWO, ONE, FOUR), (NINE, FOUR, TWO), (ONE, ONE, TWO)), ((EIGHT, SIX, TWO), (EIGHT, FIVE, TWO), (ONE, FOUR, ONE)), ((THREE, ONE, SIX), (FIVE, ZERO, FOUR), (FIVE, EIGHT, FIVE)));
+  constant TENSOR_SAMPLE_B : tensor_buffer := (((ONE, THREE, ONE), (TWO, FOUR, EIGHT), (FOUR, ONE, TWO)), ((NINE, ONE, FIVE), (NINE, EIGHT, ONE), (FIVE, EIGHT, FOUR)), ((FIVE, FOUR, ONE), (THREE, FOUR, SIX), (ONE, EIGHT, EIGHT)));
 
-  constant MATRIX_SAMPLE_A : matrix_buffer := ((THREE, ONE, SIX), (NINE, ZERO, FOUR), (SEVEN, ZERO, FIVE));
-  constant MATRIX_SAMPLE_B : matrix_buffer := ((ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO), (ZERO, ZERO, ZERO));
+  constant MATRIX_SAMPLE_A : matrix_buffer := ((ONE, FOUR, ONE), (ZERO, EIGHT, FOUR), (FIVE, THREE, NINE));
+  constant MATRIX_SAMPLE_B : matrix_buffer := ((ONE, TWO, SIX), (ONE, THREE, SIX), (EIGHT, FOUR, FOUR));
 
-  constant VECTOR_SAMPLE_A : vector_buffer := (THREE, ONE, SIX);
-  constant VECTOR_SAMPLE_B : vector_buffer := (NINE, ZERO, FOUR);
+  constant VECTOR_SAMPLE_A : vector_buffer := (FOUR, NINE, THREE);
+  constant VECTOR_SAMPLE_B : vector_buffer := (THREE, NINE, ZERO);
 
   -- FUNCTIONALITY
   signal STIMULUS_NTM_MATRIX_PRODUCT_TEST   : boolean := false;

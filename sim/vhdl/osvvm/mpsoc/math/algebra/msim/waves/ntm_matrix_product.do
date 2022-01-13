@@ -22,6 +22,8 @@ add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/DATA_B_IN_I_ENABLE
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/DATA_B_IN_J_ENABLE
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/DATA_B_IN
+add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/DATA_I_ENABLE
+add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/DATA_J_ENABLE
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/READY
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/DATA_OUT_I_ENABLE
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/DATA_OUT_J_ENABLE

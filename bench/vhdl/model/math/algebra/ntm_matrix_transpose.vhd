@@ -61,6 +61,9 @@ entity ntm_matrix_transpose is
     DATA_IN_I_ENABLE : in std_logic;
     DATA_IN_J_ENABLE : in std_logic;
 
+    DATA_I_ENABLE : out std_logic;
+    DATA_J_ENABLE : out std_logic;
+
     DATA_OUT_I_ENABLE : out std_logic;
     DATA_OUT_J_ENABLE : out std_logic;
 
@@ -145,6 +148,9 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      DATA_I_ENABLE <= '0';
+      DATA_J_ENABLE <= '0';
+
       DATA_OUT_I_ENABLE <= '0';
       DATA_OUT_J_ENABLE <= '0';
 
@@ -158,6 +164,9 @@ begin
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
+
+          DATA_I_ENABLE <= '0';
+          DATA_J_ENABLE <= '0';
 
           DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
@@ -178,12 +187,16 @@ begin
             matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
 
             -- FSM Control
-            transpose_ctrl_fsm_int <= ENDER_J_STATE;
+            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              transpose_ctrl_fsm_int <= ENDER_I_STATE;
+            else
+              transpose_ctrl_fsm_int <= ENDER_J_STATE;
+            end if;
           end if;
 
           -- Control Outputs
-          DATA_OUT_I_ENABLE <= '0';
-          DATA_OUT_J_ENABLE <= '0';
+          DATA_I_ENABLE <= '0';
+          DATA_J_ENABLE <= '0';
 
         when INPUT_J_STATE =>           -- STEP 2
 
@@ -200,7 +213,7 @@ begin
           end if;
 
           -- Control Outputs
-          DATA_OUT_J_ENABLE <= '0';
+          DATA_J_ENABLE <= '0';
 
         when ENDER_I_STATE =>           -- STEP 3
 
@@ -209,8 +222,8 @@ begin
             DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
-            DATA_OUT_I_ENABLE <= '1';
-            DATA_OUT_J_ENABLE <= '1';
+            DATA_I_ENABLE <= '1';
+            DATA_J_ENABLE <= '1';
 
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
@@ -223,8 +236,8 @@ begin
             DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
-            DATA_OUT_I_ENABLE <= '1';
-            DATA_OUT_J_ENABLE <= '1';
+            DATA_I_ENABLE <= '1';
+            DATA_J_ENABLE <= '1';
 
             -- Control Internal
             index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
@@ -241,7 +254,7 @@ begin
             DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
-            DATA_OUT_J_ENABLE <= '1';
+            DATA_J_ENABLE <= '1';
 
             -- Control Internal
             index_j_loop <= std_logic_vector(unsigned(index_j_loop)+unsigned(ONE_CONTROL));
@@ -253,6 +266,9 @@ begin
         when CLEAN_I_STATE =>           -- STEP 5
 
           -- Control Outputs
+          DATA_I_ENABLE <= '0';
+          DATA_J_ENABLE <= '0';
+
           DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
 
@@ -262,6 +278,8 @@ begin
         when CLEAN_J_STATE =>           -- STEP 6
 
           -- Control Outputs
+          DATA_J_ENABLE <= '0';
+
           DATA_OUT_J_ENABLE <= '0';
 
           -- FSM Control
