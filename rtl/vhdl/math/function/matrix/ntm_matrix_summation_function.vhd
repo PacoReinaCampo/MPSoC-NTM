@@ -179,7 +179,7 @@ begin
 
         when INPUT_MATRIX_STATE =>      -- STEP 1
 
-          if (((DATA_IN_MATRIX_ENABLE = '1') and (DATA_IN_VECTOR_ENABLE = '1') and (DATA_IN_SCALAR_ENABLE = '1')) or ((index_matrix_loop = ZERO_CONTROL) and (index_vector_loop = ZERO_CONTROL))) then
+          if (((DATA_IN_MATRIX_ENABLE = '1') and (DATA_IN_VECTOR_ENABLE = '1') and (DATA_IN_SCALAR_ENABLE = '1')) or ((unsigned(index_matrix_loop) = unsigned(ZERO_CONTROL)) and (unsigned(index_vector_loop) = unsigned(ZERO_CONTROL)))) then
             -- Data Inputs
             size_in_vector_summation   <= SIZE_J_IN;
             length_in_vector_summation <= LENGTH_IN;
@@ -193,7 +193,15 @@ begin
             data_in_scalar_enable_vector_summation <= '1';
 
             -- FSM Control
-            summation_ctrl_fsm_int <= ENDER_SCALAR_STATE;
+            if (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+              if (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+                summation_ctrl_fsm_int <= ENDER_MATRIX_STATE;
+              else
+                summation_ctrl_fsm_int <= ENDER_VECTOR_STATE;
+              end if;
+            else
+              summation_ctrl_fsm_int <= ENDER_SCALAR_STATE;
+            end if;
           end if;
 
           -- Control Outputs
@@ -203,7 +211,7 @@ begin
 
         when INPUT_VECTOR_STATE =>      -- STEP 2
 
-          if (((DATA_IN_VECTOR_ENABLE = '1') and (DATA_IN_SCALAR_ENABLE = '1')) or (index_vector_loop = ZERO_CONTROL)) then
+          if (((DATA_IN_VECTOR_ENABLE = '1') and (DATA_IN_SCALAR_ENABLE = '1')) or (unsigned(index_vector_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
             data_in_vector_summation <= DATA_IN;
 
@@ -212,7 +220,15 @@ begin
             data_in_scalar_enable_vector_summation <= '1';
 
             -- FSM Control
-            summation_ctrl_fsm_int <= ENDER_SCALAR_STATE;
+            if (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+              if (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+                summation_ctrl_fsm_int <= ENDER_MATRIX_STATE;
+              else
+                summation_ctrl_fsm_int <= ENDER_VECTOR_STATE;
+              end if;
+            else
+              summation_ctrl_fsm_int <= ENDER_SCALAR_STATE;
+            end if;
           end if;
 
           -- Control Outputs

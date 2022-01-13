@@ -195,7 +195,11 @@ begin
             data_in_enable_vector_sinh_function <= '1';
 
             -- FSM Control
-            sinh_ctrl_fsm_int <= ENDER_J_STATE;
+            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              sinh_ctrl_fsm_int <= ENDER_I_STATE;
+            else
+              sinh_ctrl_fsm_int <= ENDER_J_STATE;
+            end if;
           end if;
 
           -- Control Outputs

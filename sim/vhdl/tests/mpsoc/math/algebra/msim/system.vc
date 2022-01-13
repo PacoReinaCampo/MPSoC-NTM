@@ -25,10 +25,11 @@
 ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_divider.vhd
 
 ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_product.vhd
-../../../../../../../rtl/vhdl/math/algebra/ntm_tensor_transpose.vhd
 ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_transpose.vhd
 ../../../../../../../rtl/vhdl/math/algebra/ntm_scalar_product.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_scalar_transpose.vhd
 ../../../../../../../rtl/vhdl/math/algebra/ntm_tensor_product.vhd
+../../../../../../../rtl/vhdl/math/algebra/ntm_tensor_transpose.vhd
 
 ../../../../../../../bench/vhdl/tests/math/algebra/ntm_algebra_pkg.vhd
 ../../../../../../../bench/vhdl/tests/math/algebra/ntm_algebra_stimulus.vhd

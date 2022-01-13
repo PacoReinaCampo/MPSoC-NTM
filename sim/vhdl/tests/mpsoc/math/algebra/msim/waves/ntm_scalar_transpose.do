@@ -6,22 +6,22 @@ add wave -noupdate /ntm_algebra_pkg/MONITOR_TEST
 add wave -noupdate /ntm_algebra_pkg/MONITOR_CASE
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM MATRIX TRANSPOSE TEST}
+add wave -noupdate -divider {NTM SCALAR TRANSPOSE TEST}
 add wave -noupdate -divider {=========================================}
 
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/CLK
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/RST
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/START
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/SIZE_IN
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/DATA_IN_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/DATA_IN
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/READY
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/DATA_OUT_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/DATA_OUT
+add wave -noupdate /ntm_algebra_testbench/ntm_scalar_transpose_test/scalar_transpose/CLK
+add wave -noupdate /ntm_algebra_testbench/ntm_scalar_transpose_test/scalar_transpose/RST
+add wave -noupdate /ntm_algebra_testbench/ntm_scalar_transpose_test/scalar_transpose/START
+add wave -noupdate /ntm_algebra_testbench/ntm_scalar_transpose_test/scalar_transpose/LENGTH_IN
+add wave -noupdate /ntm_algebra_testbench/ntm_scalar_transpose_test/scalar_transpose/DATA_IN_ENABLE
+add wave -noupdate /ntm_algebra_testbench/ntm_scalar_transpose_test/scalar_transpose/DATA_IN
+add wave -noupdate /ntm_algebra_testbench/ntm_scalar_transpose_test/scalar_transpose/READY
+add wave -noupdate /ntm_algebra_testbench/ntm_scalar_transpose_test/scalar_transpose/DATA_OUT_ENABLE
+add wave -noupdate /ntm_algebra_testbench/ntm_scalar_transpose_test/scalar_transpose/DATA_OUT
 
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/transpose_ctrl_fsm_int
+add wave -noupdate /ntm_algebra_testbench/ntm_scalar_transpose_test/scalar_transpose/transpose_ctrl_fsm_int
 
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_transpose_test/matrix_transpose/index_loop
+add wave -noupdate /ntm_algebra_testbench/ntm_scalar_transpose_test/scalar_transpose/index_loop
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

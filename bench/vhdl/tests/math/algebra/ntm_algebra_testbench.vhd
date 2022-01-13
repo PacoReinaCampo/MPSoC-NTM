@@ -58,22 +58,25 @@ entity ntm_algebra_testbench is
 
     -- FUNCTIONALITY
     ENABLE_NTM_MATRIX_PRODUCT_TEST   : boolean := false;
-    ENABLE_NTM_TENSOR_TRANSPOSE_TEST : boolean := false;
     ENABLE_NTM_MATRIX_TRANSPOSE_TEST : boolean := false;
     ENABLE_NTM_SCALAR_PRODUCT_TEST   : boolean := false;
+    ENABLE_NTM_SCALAR_TRANSPOSE_TEST : boolean := false;
     ENABLE_NTM_TENSOR_PRODUCT_TEST   : boolean := false;
+    ENABLE_NTM_TENSOR_TRANSPOSE_TEST : boolean := false;
 
     ENABLE_NTM_MATRIX_PRODUCT_CASE_0   : boolean := false;
-    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_0 : boolean := false;
     ENABLE_NTM_MATRIX_TRANSPOSE_CASE_0 : boolean := false;
     ENABLE_NTM_SCALAR_PRODUCT_CASE_0   : boolean := false;
+    ENABLE_NTM_SCALAR_TRANSPOSE_CASE_0 : boolean := false;
     ENABLE_NTM_TENSOR_PRODUCT_CASE_0   : boolean := false;
+    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_0 : boolean := false;
 
     ENABLE_NTM_MATRIX_PRODUCT_CASE_1   : boolean := false;
-    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_1 : boolean := false;
     ENABLE_NTM_MATRIX_TRANSPOSE_CASE_1 : boolean := false;
     ENABLE_NTM_SCALAR_PRODUCT_CASE_1   : boolean := false;
-    ENABLE_NTM_TENSOR_PRODUCT_CASE_1   : boolean := false
+    ENABLE_NTM_SCALAR_TRANSPOSE_CASE_1 : boolean := false;
+    ENABLE_NTM_TENSOR_PRODUCT_CASE_1   : boolean := false;
+    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_1 : boolean := false
     );
 end ntm_algebra_testbench;
 
@@ -112,26 +115,6 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- TENSOR TRANSPOSE
-  -- CONTROL
-  signal start_tensor_transpose : std_logic;
-  signal ready_tensor_transpose : std_logic;
-
-  signal data_in_i_enable_tensor_transpose : std_logic;
-  signal data_in_j_enable_tensor_transpose : std_logic;
-  signal data_in_k_enable_tensor_transpose : std_logic;
-
-  signal data_out_i_enable_tensor_transpose : std_logic;
-  signal data_out_j_enable_tensor_transpose : std_logic;
-  signal data_out_k_enable_tensor_transpose : std_logic;
-
-  -- DATA
-  signal size_i_in_tensor_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_tensor_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_k_in_tensor_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_tensor_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_tensor_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
-
   -- MATRIX TRANSPOSE
   -- CONTROL
   signal start_matrix_transpose : std_logic;
@@ -168,6 +151,22 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_b_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_product  : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- SCALAR TRANSPOSE
+  -- CONTROL
+  signal start_scalar_transpose : std_logic;
+  signal ready_scalar_transpose : std_logic;
+
+  signal data_in_enable_scalar_transpose : std_logic;
+
+  signal data_enable_scalar_transpose : std_logic;
+
+  signal data_out_enable_scalar_transpose : std_logic;
+
+  -- DATA
+  signal length_in_scalar_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_scalar_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- TENSOR PRODUCT
   -- CONTROL
   signal start_tensor_product : std_logic;
@@ -194,6 +193,26 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_a_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_tensor_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- TENSOR TRANSPOSE
+  -- CONTROL
+  signal start_tensor_transpose : std_logic;
+  signal ready_tensor_transpose : std_logic;
+
+  signal data_in_i_enable_tensor_transpose : std_logic;
+  signal data_in_j_enable_tensor_transpose : std_logic;
+  signal data_in_k_enable_tensor_transpose : std_logic;
+
+  signal data_out_i_enable_tensor_transpose : std_logic;
+  signal data_out_j_enable_tensor_transpose : std_logic;
+  signal data_out_k_enable_tensor_transpose : std_logic;
+
+  -- DATA
+  signal size_i_in_tensor_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_tensor_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_k_in_tensor_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_tensor_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -244,26 +263,6 @@ begin
       MATRIX_PRODUCT_DATA_B_IN   => data_b_in_matrix_product,
       MATRIX_PRODUCT_DATA_OUT    => data_out_matrix_product,
 
-      -- TENSOR TRANSPOSE
-      -- CONTROL
-      TENSOR_TRANSPOSE_START => start_tensor_transpose,
-      TENSOR_TRANSPOSE_READY => ready_tensor_transpose,
-
-      TENSOR_TRANSPOSE_DATA_IN_I_ENABLE => data_in_i_enable_tensor_transpose,
-      TENSOR_TRANSPOSE_DATA_IN_J_ENABLE => data_in_j_enable_tensor_transpose,
-      TENSOR_TRANSPOSE_DATA_IN_K_ENABLE => data_in_k_enable_tensor_transpose,
-
-      TENSOR_TRANSPOSE_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_transpose,
-      TENSOR_TRANSPOSE_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_transpose,
-      TENSOR_TRANSPOSE_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_transpose,
-
-      -- DATA
-      TENSOR_TRANSPOSE_SIZE_I_IN => size_i_in_tensor_transpose,
-      TENSOR_TRANSPOSE_SIZE_J_IN => size_j_in_tensor_transpose,
-      TENSOR_TRANSPOSE_SIZE_K_IN => size_k_in_tensor_transpose,
-      TENSOR_TRANSPOSE_DATA_IN   => data_in_tensor_transpose,
-      TENSOR_TRANSPOSE_DATA_OUT  => data_out_tensor_transpose,
-
       -- MATRIX TRANSPOSE
       -- CONTROL
       MATRIX_TRANSPOSE_START => start_matrix_transpose,
@@ -300,6 +299,22 @@ begin
       SCALAR_PRODUCT_DATA_B_IN => data_b_in_scalar_product,
       SCALAR_PRODUCT_DATA_OUT  => data_out_scalar_product,
 
+      -- SCALAR TRANSPOSE
+      -- CONTROL
+      SCALAR_TRANSPOSE_START => start_scalar_transpose,
+      SCALAR_TRANSPOSE_READY => ready_scalar_transpose,
+
+      SCALAR_TRANSPOSE_DATA_IN_ENABLE => data_in_enable_scalar_transpose,
+
+      SCALAR_TRANSPOSE_DATA_ENABLE => data_enable_scalar_transpose,
+
+      SCALAR_TRANSPOSE_DATA_OUT_ENABLE => data_out_enable_scalar_transpose,
+
+      -- DATA
+      SCALAR_TRANSPOSE_LENGTH_IN => length_in_scalar_transpose,
+      SCALAR_TRANSPOSE_DATA_IN   => data_in_scalar_transpose,
+      SCALAR_TRANSPOSE_DATA_OUT  => data_out_scalar_transpose,
+
       -- TENSOR PRODUCT
       -- CONTROL
       TENSOR_PRODUCT_START => start_tensor_product,
@@ -325,7 +340,27 @@ begin
       TENSOR_PRODUCT_SIZE_B_K_IN => size_b_k_in_tensor_product,
       TENSOR_PRODUCT_DATA_A_IN   => data_a_in_tensor_product,
       TENSOR_PRODUCT_DATA_B_IN   => data_b_in_tensor_product,
-      TENSOR_PRODUCT_DATA_OUT    => data_out_tensor_product
+      TENSOR_PRODUCT_DATA_OUT    => data_out_tensor_product,
+
+      -- TENSOR TRANSPOSE
+      -- CONTROL
+      TENSOR_TRANSPOSE_START => start_tensor_transpose,
+      TENSOR_TRANSPOSE_READY => ready_tensor_transpose,
+
+      TENSOR_TRANSPOSE_DATA_IN_I_ENABLE => data_in_i_enable_tensor_transpose,
+      TENSOR_TRANSPOSE_DATA_IN_J_ENABLE => data_in_j_enable_tensor_transpose,
+      TENSOR_TRANSPOSE_DATA_IN_K_ENABLE => data_in_k_enable_tensor_transpose,
+
+      TENSOR_TRANSPOSE_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_transpose,
+      TENSOR_TRANSPOSE_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_transpose,
+      TENSOR_TRANSPOSE_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_transpose,
+
+      -- DATA
+      TENSOR_TRANSPOSE_SIZE_I_IN => size_i_in_tensor_transpose,
+      TENSOR_TRANSPOSE_SIZE_J_IN => size_j_in_tensor_transpose,
+      TENSOR_TRANSPOSE_SIZE_K_IN => size_k_in_tensor_transpose,
+      TENSOR_TRANSPOSE_DATA_IN   => data_in_tensor_transpose,
+      TENSOR_TRANSPOSE_DATA_OUT  => data_out_tensor_transpose
       );
 
   -- MATRIX PRODUCT
@@ -365,39 +400,6 @@ begin
         DATA_OUT    => data_out_matrix_product
         );
   end generate ntm_matrix_product_test;
-
-  -- TENSOR TRANSPOSE
-  ntm_tensor_transpose_test : if (ENABLE_NTM_TENSOR_PRODUCT_TEST) generate
-    tensor_transpose : ntm_tensor_transpose
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_tensor_transpose,
-        READY => ready_tensor_transpose,
-
-        DATA_IN_I_ENABLE => data_in_i_enable_tensor_transpose,
-        DATA_IN_J_ENABLE => data_in_j_enable_tensor_transpose,
-        DATA_IN_K_ENABLE => data_in_k_enable_tensor_transpose,
-
-        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_transpose,
-        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_transpose,
-        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_transpose,
-
-        -- DATA
-        SIZE_I_IN => size_i_in_tensor_transpose,
-        SIZE_J_IN => size_j_in_tensor_transpose,
-        SIZE_K_IN => size_k_in_tensor_transpose,
-        DATA_IN   => data_in_tensor_transpose,
-        DATA_OUT  => data_out_tensor_transpose
-        );
-  end generate ntm_tensor_transpose_test;
 
   -- MATRIX TRANSPOSE
   ntm_matrix_transpose_test : if (ENABLE_NTM_MATRIX_TRANSPOSE_TEST) generate
@@ -461,6 +463,35 @@ begin
         );
   end generate ntm_scalar_product_test;
 
+  -- SCALAR TRANSPOSE
+  ntm_scalar_transpose_test : if (ENABLE_NTM_SCALAR_TRANSPOSE_TEST) generate
+    scalar_transpose : ntm_scalar_transpose
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_scalar_transpose,
+        READY => ready_scalar_transpose,
+
+        DATA_IN_ENABLE => data_in_enable_scalar_transpose,
+
+        DATA_ENABLE => data_enable_scalar_transpose,
+
+        DATA_OUT_ENABLE => data_out_enable_scalar_transpose,
+
+        -- DATA
+        LENGTH_IN => length_in_scalar_transpose,
+        DATA_IN   => data_in_scalar_transpose,
+        DATA_OUT  => data_out_scalar_transpose
+        );
+  end generate ntm_scalar_transpose_test;
+
   -- TENSOR PRODUCT
   ntm_tensor_product_test : if (ENABLE_NTM_TENSOR_PRODUCT_TEST) generate
     tensor_product : ntm_tensor_product
@@ -500,5 +531,38 @@ begin
         DATA_OUT    => data_out_tensor_product
         );
   end generate ntm_tensor_product_test;
+
+  -- TENSOR TRANSPOSE
+  ntm_tensor_transpose_test : if (ENABLE_NTM_TENSOR_PRODUCT_TEST) generate
+    tensor_transpose : ntm_tensor_transpose
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_tensor_transpose,
+        READY => ready_tensor_transpose,
+
+        DATA_IN_I_ENABLE => data_in_i_enable_tensor_transpose,
+        DATA_IN_J_ENABLE => data_in_j_enable_tensor_transpose,
+        DATA_IN_K_ENABLE => data_in_k_enable_tensor_transpose,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_transpose,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_transpose,
+        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_transpose,
+
+        -- DATA
+        SIZE_I_IN => size_i_in_tensor_transpose,
+        SIZE_J_IN => size_j_in_tensor_transpose,
+        SIZE_K_IN => size_k_in_tensor_transpose,
+        DATA_IN   => data_in_tensor_transpose,
+        DATA_OUT  => data_out_tensor_transpose
+        );
+  end generate ntm_tensor_transpose_test;
 
 end ntm_algebra_testbench_architecture;
