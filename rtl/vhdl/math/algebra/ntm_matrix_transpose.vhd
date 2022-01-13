@@ -182,7 +182,7 @@ begin
 
         when INPUT_I_STATE =>           -- STEP 1
 
-          if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) or (unsigned(index_j_loop) = unsigned(ZERO_CONTROL))) then
+          if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) or ((unsigned(index_i_loop) = unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) = unsigned(ZERO_CONTROL)))) then
             -- Data Inputs
             matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
 
@@ -273,7 +273,11 @@ begin
           DATA_OUT_J_ENABLE <= '0';
 
           -- FSM Control
-          transpose_ctrl_fsm_int <= OPERATION_J_STATE;
+          if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+            transpose_ctrl_fsm_int <= OPERATION_I_STATE;
+          else
+            transpose_ctrl_fsm_int <= OPERATION_J_STATE;
+          end if;
 
         when CLEAN_J_STATE =>           -- STEP 6
 

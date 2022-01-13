@@ -195,12 +195,18 @@ begin
             index_k_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            transpose_ctrl_fsm_int <= INPUT_I_STATE;
+            if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+              transpose_ctrl_fsm_int <= ENDER_I_STATE;
+            elsif (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              transpose_ctrl_fsm_int <= ENDER_J_STATE;
+            else
+              transpose_ctrl_fsm_int <= ENDER_K_STATE;
+            end if;
           end if;
 
         when INPUT_I_STATE =>           -- STEP 1
 
-          if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1') and (DATA_IN_K_ENABLE = '1')) or ((index_i_loop = ZERO_CONTROL) and (index_j_loop = ZERO_CONTROL))) then
+          if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1') and (DATA_IN_K_ENABLE = '1')) or ((unsigned(index_i_loop) = unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) and (unsigned(index_k_loop) = unsigned(ZERO_CONTROL)))) then
             -- Data Inputs
             size_i_in_vector_transpose <= SIZE_J_IN;
             size_j_in_vector_transpose <= SIZE_K_IN;
@@ -214,7 +220,13 @@ begin
             data_in_j_enable_vector_transpose <= '1';
 
             -- FSM Control
-            transpose_ctrl_fsm_int <= ENDER_J_STATE;
+            if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+              transpose_ctrl_fsm_int <= ENDER_I_STATE;
+            elsif (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              transpose_ctrl_fsm_int <= ENDER_J_STATE;
+            else
+              transpose_ctrl_fsm_int <= ENDER_K_STATE;
+            end if;
           end if;
 
           -- Control Outputs
@@ -224,7 +236,7 @@ begin
 
         when INPUT_J_STATE =>           -- STEP 2
 
-          if (((DATA_IN_J_ENABLE = '1') and (DATA_IN_K_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
+          if (((DATA_IN_J_ENABLE = '1') and (DATA_IN_K_ENABLE = '1')) or (unsigned(index_j_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
             data_in_vector_transpose <= DATA_IN;
 
@@ -233,10 +245,12 @@ begin
             data_in_j_enable_vector_transpose <= '1';
 
             -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+            if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
               transpose_ctrl_fsm_int <= ENDER_I_STATE;
-            else
+            elsif (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
               transpose_ctrl_fsm_int <= ENDER_J_STATE;
+            else
+              transpose_ctrl_fsm_int <= ENDER_K_STATE;
             end if;
           end if;
 
@@ -254,18 +268,14 @@ begin
             data_in_j_enable_vector_transpose <= '1';
 
             -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+            if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+              if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
                 transpose_ctrl_fsm_int <= ENDER_I_STATE;
               else
                 transpose_ctrl_fsm_int <= ENDER_J_STATE;
               end if;
             else
-              if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
-                transpose_ctrl_fsm_int <= ENDER_J_STATE;
-              else
-                transpose_ctrl_fsm_int <= ENDER_K_STATE;
-              end if;
+              transpose_ctrl_fsm_int <= ENDER_K_STATE;
             end if;
           end if;
 

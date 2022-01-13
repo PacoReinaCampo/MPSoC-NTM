@@ -250,7 +250,7 @@ begin
 
         when INPUT_I_STATE =>           -- STEP 1
 
-          if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1')) or (unsigned(index_j_loop) = unsigned(ZERO_CONTROL))) then
+          if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1')) or ((unsigned(index_i_loop) = unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) = unsigned(ZERO_CONTROL)))) then
             -- Data Inputs
             matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_A_IN;
 
@@ -259,7 +259,7 @@ begin
             data_a_in_j_multiplier_int <= '1';
           end if;
 
-          if (((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) or (unsigned(index_j_loop) = unsigned(ZERO_CONTROL))) then
+          if (((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) or ((unsigned(index_i_loop) = unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) = unsigned(ZERO_CONTROL)))) then
             -- Data Inputs
             matrix_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_B_IN;
 
@@ -280,7 +280,11 @@ begin
             data_b_in_j_multiplier_int <= '0';
 
             -- FSM Control
-            product_ctrl_fsm_int <= ENDER_J_STATE;
+            if (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
+              product_ctrl_fsm_int <= ENDER_I_STATE;
+            else
+              product_ctrl_fsm_int <= ENDER_J_STATE;
+            end if;
           end if;
 
         when INPUT_J_STATE =>           -- STEP 2

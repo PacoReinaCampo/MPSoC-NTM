@@ -244,7 +244,7 @@ begin
 
         when INPUT_I_STATE =>           -- STEP 1
 
-          if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) or ((index_j_loop = ZERO_CONTROL) and (index_k_loop = ZERO_CONTROL))) then
+          if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) or ((unsigned(index_i_loop) = unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) and (unsigned(index_k_loop) = unsigned(ZERO_CONTROL)))) then
             -- Data Inputs
             data_a_in_matrix_multiplier <= DATA_A_IN;
 
@@ -261,7 +261,7 @@ begin
             data_a_in_j_enable_matrix_multiplier <= '0';
           end if;
 
-          if (((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1') and (DATA_B_IN_K_ENABLE = '1')) or ((index_j_loop = ZERO_CONTROL) and (index_k_loop = ZERO_CONTROL))) then
+          if (((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1') and (DATA_B_IN_K_ENABLE = '1')) or ((unsigned(index_i_loop) = unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) and (unsigned(index_k_loop) = unsigned(ZERO_CONTROL)))) then
             -- Data Inputs
             data_b_in_matrix_multiplier <= DATA_B_IN;
 
@@ -304,12 +304,18 @@ begin
             data_b_in_k_multiplier_int <= '0';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= ENDER_J_STATE;
+            if ((unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then
+              controller_ctrl_fsm_int <= ENDER_I_STATE;
+            elsif (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then
+              controller_ctrl_fsm_int <= ENDER_J_STATE;
+            else
+              controller_ctrl_fsm_int <= ENDER_K_STATE;
+            end if;
           end if;
 
         when INPUT_J_STATE =>           -- STEP 2
 
-          if (((DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) or (index_k_loop = ZERO_CONTROL)) then
+          if (((DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) or ((unsigned(index_i_loop) = unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) and (unsigned(index_k_loop) = unsigned(ZERO_CONTROL)))) then
             -- Data Inputs
             data_a_in_matrix_multiplier <= DATA_A_IN;
 
@@ -356,10 +362,12 @@ begin
             data_b_in_k_multiplier_int <= '0';
 
             -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) then
+            if ((unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then
               controller_ctrl_fsm_int <= ENDER_I_STATE;
-            else
+            elsif (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then
               controller_ctrl_fsm_int <= ENDER_J_STATE;
+            else
+              controller_ctrl_fsm_int <= ENDER_K_STATE;
             end if;
           end if;
 
@@ -403,18 +411,12 @@ begin
             data_b_in_k_multiplier_int <= '0';
 
             -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) then
-              if (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
-                controller_ctrl_fsm_int <= ENDER_I_STATE;
-              else
-                controller_ctrl_fsm_int <= ENDER_J_STATE;
-              end if;
+            if ((unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL))) then
+              controller_ctrl_fsm_int <= ENDER_I_STATE;
+            elsif (unsigned(index_k_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then
+              controller_ctrl_fsm_int <= ENDER_J_STATE;
             else
-              if (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
-                controller_ctrl_fsm_int <= ENDER_J_STATE;
-              else
-                controller_ctrl_fsm_int <= ENDER_K_STATE;
-              end if;
+              controller_ctrl_fsm_int <= ENDER_K_STATE;
             end if;
           end if;
 
