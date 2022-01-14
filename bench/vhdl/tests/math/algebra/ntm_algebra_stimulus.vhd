@@ -312,15 +312,9 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
-        MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
-        MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-        MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+        MATRIX_PRODUCT_DATA_A_IN <= ZERO_DATA;
+        MATRIX_PRODUCT_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
@@ -389,15 +383,9 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
-        MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
-        MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-        MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+        MATRIX_PRODUCT_DATA_A_IN <= ZERO_DATA;
+        MATRIX_PRODUCT_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
@@ -480,12 +468,8 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_TRANSPOSE_DATA_IN_I_ENABLE <= '1';
-        MATRIX_TRANSPOSE_DATA_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_TRANSPOSE_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+        MATRIX_TRANSPOSE_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
@@ -544,12 +528,8 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_TRANSPOSE_DATA_IN_I_ENABLE <= '1';
-        MATRIX_TRANSPOSE_DATA_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_TRANSPOSE_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+        MATRIX_TRANSPOSE_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
@@ -621,13 +601,9 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '1';
-        SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
-
         -- DATA
-        SCALAR_PRODUCT_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-        SCALAR_PRODUCT_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+        SCALAR_PRODUCT_DATA_A_IN <= ZERO_DATA;
+        SCALAR_PRODUCT_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
@@ -676,13 +652,9 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '1';
-        SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
-
         -- DATA
-        SCALAR_PRODUCT_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-        SCALAR_PRODUCT_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+        SCALAR_PRODUCT_DATA_A_IN <= ZERO_DATA;
+        SCALAR_PRODUCT_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
@@ -744,11 +716,8 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        SCALAR_TRANSPOSE_DATA_IN_ENABLE <= '1';
-
         -- DATA
-        SCALAR_TRANSPOSE_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+        SCALAR_TRANSPOSE_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
@@ -792,11 +761,8 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        SCALAR_TRANSPOSE_DATA_IN_ENABLE <= '1';
-
         -- DATA
-        SCALAR_TRANSPOSE_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+        SCALAR_TRANSPOSE_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
@@ -858,17 +824,9 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
-        TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
-        TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
-        TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
-        TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-        TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
-
         -- DATA
-        TENSOR_PRODUCT_DATA_A_IN <= TWO_DATA;
-        TENSOR_PRODUCT_DATA_B_IN <= ONE_DATA;
+        TENSOR_PRODUCT_DATA_A_IN <= ZERO_DATA;
+        TENSOR_PRODUCT_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
@@ -960,17 +918,9 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
-        TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
-        TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
-        TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
-        TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-        TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
-
         -- DATA
-        TENSOR_PRODUCT_DATA_A_IN <= TWO_DATA;
-        TENSOR_PRODUCT_DATA_B_IN <= TWO_DATA;
+        TENSOR_PRODUCT_DATA_A_IN <= ZERO_DATA;
+        TENSOR_PRODUCT_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
@@ -1077,13 +1027,8 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        TENSOR_TRANSPOSE_DATA_IN_I_ENABLE <= '1';
-        TENSOR_TRANSPOSE_DATA_IN_J_ENABLE <= '1';
-        TENSOR_TRANSPOSE_DATA_IN_K_ENABLE <= '1';
-
         -- DATA
-        TENSOR_TRANSPOSE_DATA_IN <= TWO_DATA;
+        TENSOR_TRANSPOSE_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
@@ -1159,13 +1104,8 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        TENSOR_TRANSPOSE_DATA_IN_I_ENABLE <= '1';
-        TENSOR_TRANSPOSE_DATA_IN_J_ENABLE <= '1';
-        TENSOR_TRANSPOSE_DATA_IN_K_ENABLE <= '1';
-
         -- DATA
-        TENSOR_TRANSPOSE_DATA_IN <= TWO_DATA;
+        TENSOR_TRANSPOSE_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
