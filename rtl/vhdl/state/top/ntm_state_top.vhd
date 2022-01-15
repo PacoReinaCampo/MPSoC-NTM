@@ -197,7 +197,7 @@ begin
   -- y(k) = C·x(k) + D·u(k)
 
   -- x(k) = exp(A,k)·x(0) + summation(exp(A,k-j-1)·B·u(j))[j in 0 to k-1]
-  -- y(k) = summation(C·exp(A,k-j)·B·u(j)+D·u(k))[j in 0 to k-1]
+  -- y(k) = C·exp(A,k)·x(0) + summation(C·exp(A,k-j)·B·u(j))[j in 0 to k-1] + D·u(k)
 
   -- CONTROL
 

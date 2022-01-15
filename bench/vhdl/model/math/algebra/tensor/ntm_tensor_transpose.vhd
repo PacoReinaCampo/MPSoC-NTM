@@ -195,13 +195,7 @@ begin
             index_k_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
-              transpose_ctrl_fsm_int <= ENDER_I_STATE;
-            elsif (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              transpose_ctrl_fsm_int <= ENDER_J_STATE;
-            else
-              transpose_ctrl_fsm_int <= ENDER_K_STATE;
-            end if;
+            transpose_ctrl_fsm_int <= ENDER_I_STATE;
           end if;
 
         when INPUT_I_STATE =>           -- STEP 1

@@ -199,7 +199,7 @@ begin
 
         when INPUT_STATE =>             -- STEP 1
 
-          if ((DATA_A_IN_ENABLE = '1') or (unsigned(index_loop) = unsigned(ZERO_CONTROL))) then
+          if (DATA_A_IN_ENABLE = '1') then
             -- Data Inputs
             data_a_in_scalar_multiplier <= DATA_A_IN;
 
@@ -207,7 +207,7 @@ begin
             data_a_in_multiplier_int <= '1';
           end if;
 
-          if ((DATA_B_IN_ENABLE = '1') or (unsigned(index_loop) = unsigned(ZERO_CONTROL))) then
+          if (DATA_B_IN_ENABLE = '1') then
             -- Data Inputs
             data_b_in_scalar_multiplier <= DATA_B_IN;
 

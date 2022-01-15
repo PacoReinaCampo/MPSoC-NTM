@@ -262,12 +262,10 @@ begin
             data_a_in_scalar_convolution_int <= '0';
 
             -- FSM Control
-            if (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              if (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-                convolution_ctrl_fsm_int <= ENDER_MATRIX_STATE;
-              else
-                convolution_ctrl_fsm_int <= ENDER_VECTOR_STATE;
-              end if;
+            if ((unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+              convolution_ctrl_fsm_int <= ENDER_MATRIX_STATE;
+            if (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              convolution_ctrl_fsm_int <= ENDER_VECTOR_STATE;
             else
               convolution_ctrl_fsm_int <= ENDER_SCALAR_STATE;
             end if;
@@ -319,12 +317,10 @@ begin
             data_a_in_scalar_convolution_int <= '0';
 
             -- FSM Control
-            if (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              if (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-                convolution_ctrl_fsm_int <= ENDER_MATRIX_STATE;
-              else
-                convolution_ctrl_fsm_int <= ENDER_VECTOR_STATE;
-              end if;
+            if ((unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+              convolution_ctrl_fsm_int <= ENDER_MATRIX_STATE;
+            if (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              convolution_ctrl_fsm_int <= ENDER_VECTOR_STATE;
             else
               convolution_ctrl_fsm_int <= ENDER_SCALAR_STATE;
             end if;
@@ -370,12 +366,10 @@ begin
             data_a_in_scalar_convolution_int <= '0';
 
             -- FSM Control
-            if (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              if (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-                convolution_ctrl_fsm_int <= ENDER_MATRIX_STATE;
-              else
-                convolution_ctrl_fsm_int <= ENDER_VECTOR_STATE;
-              end if;
+            if ((unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+              convolution_ctrl_fsm_int <= ENDER_MATRIX_STATE;
+            if (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              convolution_ctrl_fsm_int <= ENDER_VECTOR_STATE;
             else
               convolution_ctrl_fsm_int <= ENDER_SCALAR_STATE;
             end if;

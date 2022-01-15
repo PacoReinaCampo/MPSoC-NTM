@@ -169,7 +169,7 @@ begin
 
         when INPUT_STATE =>           -- STEP 2
 
-          if (DATA_IN_ENABLE = '1' or (unsigned(index_loop) = unsigned(ZERO_CONTROL))) then
+          if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
             vector_int(to_integer(unsigned(index_loop))) <= DATA_IN;
 
@@ -192,15 +192,15 @@ begin
             -- Control Internal
             index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
+            -- Control Outputs
+            DATA_ENABLE <= '1';
+
             -- FSM Control
             transpose_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
           -- Data Outputs
           DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
-
-          -- Control Outputs
-          DATA_ENABLE <= '1';
 
         when CLEAN_STATE =>           -- STEP 5
 

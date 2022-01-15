@@ -198,12 +198,10 @@ begin
             data_in_scalar_enable_vector_differentiation <= '1';
 
             -- FSM Control
+            if ((unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
+              differentiation_ctrl_fsm_int <= ENDER_MATRIX_STATE;
             if (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              if (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-                differentiation_ctrl_fsm_int <= ENDER_MATRIX_STATE;
-              else
-                differentiation_ctrl_fsm_int <= ENDER_VECTOR_STATE;
-              end if;
+              differentiation_ctrl_fsm_int <= ENDER_VECTOR_STATE;
             else
               differentiation_ctrl_fsm_int <= ENDER_SCALAR_STATE;
             end if;
@@ -225,12 +223,10 @@ begin
             data_in_scalar_enable_vector_differentiation <= '1';
 
             -- FSM Control
+            if ((unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
+              differentiation_ctrl_fsm_int <= ENDER_MATRIX_STATE;
             if (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              if (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-                differentiation_ctrl_fsm_int <= ENDER_MATRIX_STATE;
-              else
-                differentiation_ctrl_fsm_int <= ENDER_VECTOR_STATE;
-              end if;
+              differentiation_ctrl_fsm_int <= ENDER_VECTOR_STATE;
             else
               differentiation_ctrl_fsm_int <= ENDER_SCALAR_STATE;
             end if;
@@ -250,12 +246,10 @@ begin
             data_in_scalar_enable_vector_differentiation <= '1';
 
             -- FSM Control
+            if ((unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
+              differentiation_ctrl_fsm_int <= ENDER_MATRIX_STATE;
             if (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              if (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-                differentiation_ctrl_fsm_int <= ENDER_MATRIX_STATE;
-              else
-                differentiation_ctrl_fsm_int <= ENDER_VECTOR_STATE;
-              end if;
+              differentiation_ctrl_fsm_int <= ENDER_VECTOR_STATE;
             else
               differentiation_ctrl_fsm_int <= ENDER_SCALAR_STATE;
             end if;
