@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_scalar_product is
+entity ntm_state_top is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -67,7 +67,6 @@ entity ntm_scalar_product is
     DATA_D_IN_I_ENABLE : in std_logic;
     DATA_D_IN_J_ENABLE : in std_logic;
 
-    DATA_X_IN_ENABLE : in std_logic;
     DATA_U_IN_ENABLE : in std_logic;
 
     DATA_X_OUT_ENABLE : out std_logic;
@@ -88,7 +87,6 @@ entity ntm_scalar_product is
     DATA_C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DATA_X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     DATA_X_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
@@ -96,7 +94,7 @@ entity ntm_scalar_product is
     );
 end entity;
 
-architecture ntm_scalar_product_architecture of ntm_scalar_product is
+architecture ntm_state_top_architecture of ntm_state_top is
 
   -----------------------------------------------------------------------
   -- Types
@@ -135,7 +133,6 @@ architecture ntm_scalar_product_architecture of ntm_scalar_product is
   signal data_b_in_i_state_internal : std_logic;
   signal data_b_in_j_state_internal : std_logic;
 
-  signal data_x_in_state_internal : std_logic;
   signal data_u_in_state_internal : std_logic;
 
   signal data_y_out_state_internal : std_logic;
@@ -149,7 +146,6 @@ architecture ntm_scalar_product_architecture of ntm_scalar_product is
   signal data_a_in_state_internal : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_state_internal : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_x_in_state_internal : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_u_in_state_internal : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal data_x_out_state_internal : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -168,7 +164,6 @@ architecture ntm_scalar_product_architecture of ntm_scalar_product is
   signal data_d_in_i_state_output : std_logic;
   signal data_d_in_j_state_output : std_logic;
 
-  signal data_x_in_state_output : std_logic;
   signal data_u_in_state_output : std_logic;
 
   signal data_y_out_state_output : std_logic;
@@ -188,7 +183,6 @@ architecture ntm_scalar_product_architecture of ntm_scalar_product is
   signal data_c_in_state_output : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_d_in_state_output : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_x_in_state_output : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_u_in_state_output : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal data_y_state_output : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -202,8 +196,8 @@ begin
   -- x(k+1) = A·x(k) + B·u(k)
   -- y(k) = C·x(k) + D·u(k)
 
-  -- x(k) = exp(A,k)·x(0) + summation(exp(A,k-j-1)·B·u(j))[j in 0 to K-1]
-  -- y(k) = summation(C·exp(A,k-j)·B·u(j)+D·u(k))[j in 0 to K-1]
+  -- x(k) = exp(A,k)·x(0) + summation(exp(A,k-j-1)·B·u(j))[j in 0 to k-1]
+  -- y(k) = summation(C·exp(A,k-j)·B·u(j)+D·u(k))[j in 0 to k-1]
 
   -- CONTROL
 
@@ -227,7 +221,6 @@ begin
       DATA_B_IN_I_ENABLE => data_b_in_i_state_internal,
       DATA_B_IN_J_ENABLE => data_b_in_j_state_internal,
 
-      DATA_X_IN_ENABLE => data_x_in_state_internal,
       DATA_U_IN_ENABLE => data_u_in_state_internal,
 
       DATA_X_OUT_ENABLE => data_y_out_state_internal,
@@ -241,7 +234,6 @@ begin
       DATA_A_IN => data_a_in_state_internal,
       DATA_B_IN => data_b_in_state_internal,
 
-      DATA_X_IN => data_x_state_internal,
       DATA_U_IN => data_u_state_internal,
 
       DATA_X_OUT => data_y_state_internal
@@ -271,7 +263,6 @@ begin
       DATA_D_IN_I_ENABLE => data_d_in_i_state_output,
       DATA_D_IN_J_ENABLE => data_d_in_j_state_output,
 
-      DATA_X_IN_ENABLE => data_x_in_state_output,
       DATA_U_IN_ENABLE => data_u_in_state_output,
 
       DATA_Y_OUT_ENABLE => data_y_out_state_output,
@@ -291,7 +282,6 @@ begin
       DATA_C_IN => data_c_in_state_output,
       DATA_D_IN => data_d_in_state_output,
 
-      DATA_X_IN => data_x_state_output,
       DATA_U_IN => data_u_state_output,
 
       DATA_Y_OUT => data_y_state_output
