@@ -24,12 +24,12 @@ vhdl2008 work ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_adder.v
 vhdl2008 work ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_multiplier.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_divider.vhd
 
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_product.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_transpose.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_scalar_product.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_scalar_transpose.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_tensor_product.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/ntm_tensor_transpose.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_product.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/scalar/ntm_scalar_product.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/scalar/ntm_scalar_transpose.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_product.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_transpose.vhd
 
 vhdl2008 work ../../../../../../../bench/vhdl/tests/math/algebra/ntm_algebra_pkg.vhd
 vhdl2008 work ../../../../../../../bench/vhdl/tests/math/algebra/ntm_algebra_stimulus.vhd

@@ -67,7 +67,6 @@ entity ntm_state_output is
     DATA_D_IN_I_ENABLE : in std_logic;
     DATA_D_IN_J_ENABLE : in std_logic;
 
-    DATA_X_IN_ENABLE : in std_logic;
     DATA_U_IN_ENABLE : in std_logic;
 
     DATA_Y_OUT_ENABLE : out std_logic;
@@ -87,7 +86,6 @@ entity ntm_state_output is
     DATA_C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DATA_X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     DATA_Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -132,8 +130,8 @@ begin
   -- x(k+1) = A·x(k) + B·u(k)
   -- y(k) = C·x(k) + D·u(k)
 
-  -- x(k) = exp(A,k)·x(0) + summation(exp(A,k-j-1)·B·u(j))[j in 0 to K-1]
-  -- y(k) = summation(C·exp(A,k-j)·B·u(j)+D·u(k))[j in 0 to K-1]
+  -- x(k) = exp(A,k)·x(0) + summation(exp(A,k-j-1)·B·u(j))[j in 0 to k-1]
+  -- y(k) = summation(C·exp(A,k-j)·B·u(j)+D·u(k))[j in 0 to k-1]
 
   -- CONTROL
 

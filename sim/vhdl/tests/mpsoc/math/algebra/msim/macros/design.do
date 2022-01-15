@@ -16,7 +16,7 @@ alias ntm_matrix_product_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/ntm_matrix_product.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/matrix/ntm_matrix_product.vhd
 }
 
 ##################################################################################################
@@ -25,7 +25,7 @@ alias ntm_matrix_product_design_compilation {
 
 alias ntm_matrix_transpose_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/ntm_matrix_transpose.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/matrix/ntm_matrix_transpose.vhd
 }
 
 ##################################################################################################
@@ -36,7 +36,7 @@ alias ntm_scalar_product_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/ntm_scalar_product.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/scalar/ntm_scalar_product.vhd
 }
 
 ##################################################################################################
@@ -45,7 +45,7 @@ alias ntm_scalar_product_design_compilation {
 
 alias ntm_scalar_transpose_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/ntm_scalar_transpose.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/scalar/ntm_scalar_transpose.vhd
 }
 
 ##################################################################################################
@@ -56,7 +56,7 @@ alias ntm_tensor_product_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/float/scalar/ntm_scalar_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/ntm_tensor_product.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/tensor/ntm_tensor_product.vhd
 }
 
 ##################################################################################################
@@ -65,7 +65,7 @@ alias ntm_tensor_product_design_compilation {
 
 alias ntm_tensor_transpose_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/ntm_tensor_transpose.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/tensor/ntm_tensor_transpose.vhd
 }
 
 ##################################################################################################
