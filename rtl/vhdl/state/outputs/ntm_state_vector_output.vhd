@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_state_output is
+entity ntm_state_vector_output is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -92,7 +92,7 @@ entity ntm_state_output is
     );
 end entity;
 
-architecture ntm_state_output_architecture of ntm_state_output is
+architecture ntm_state_vector_output_architecture of ntm_state_vector_output is
 
   -----------------------------------------------------------------------
   -- Types

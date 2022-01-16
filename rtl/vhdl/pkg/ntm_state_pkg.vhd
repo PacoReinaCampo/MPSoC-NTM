@@ -110,7 +110,7 @@ package ntm_lstm_controller_pkg is
   -- STATE - OUTPUTS
   -----------------------------------------------------------------------
 
-  component ntm_state_output is
+  component ntm_state_vector_output is
     generic (
       DATA_SIZE    : integer := 128;
       CONTROL_SIZE : integer := 64
@@ -158,7 +158,7 @@ package ntm_lstm_controller_pkg is
       );
   end component;
 
-  component ntm_state_internal is
+  component ntm_state_vector_state is
     generic (
       DATA_SIZE    : integer := 128;
       CONTROL_SIZE : integer := 64
