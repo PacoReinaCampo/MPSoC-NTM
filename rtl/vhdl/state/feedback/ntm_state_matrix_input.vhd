@@ -60,8 +60,6 @@ entity ntm_state_matrix_input is
 
     DATA_B_IN_I_ENABLE : in std_logic;
     DATA_B_IN_J_ENABLE : in std_logic;
-    DATA_C_IN_I_ENABLE : in std_logic;
-    DATA_C_IN_J_ENABLE : in std_logic;
     DATA_D_IN_I_ENABLE : in std_logic;
     DATA_D_IN_J_ENABLE : in std_logic;
 
@@ -74,13 +72,10 @@ entity ntm_state_matrix_input is
     -- DATA
     SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_B_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_C_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_C_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     DATA_K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -126,15 +121,15 @@ begin
 
   -- u(k) = -K·y(k) + r(k)
 
-  -- x(k+1) = Ȧ·x(k) + Ḃ·r(k)
-  -- y(k) = Ċ·x(k) + Ḋ·r(k)
+  -- x(k+1) = a·x(k) + b·r(k)
+  -- y(k) = c·x(k) + d·r(k)
 
-  -- x(k) = exp(Ȧ,k)·x(0) + summation(exp(Ȧ,k-j-1)·Ḃ·u(j))[j in 0 to k-1]
-  -- y(k) = Ċ·exp(Ȧ,k)·x(0) + summation(Ċ·exp(Ȧ,k-j)·Ḃ·u(j))[j in 0 to k-1] + Ḋ·u(k)
+  -- x(k) = exp(a,k)·x(0) + summation(exp(a,k-j-1)·b·u(j))[j in 0 to k-1]
+  -- y(k) = c·exp(a,k)·x(0) + summation(c·exp(a,k-j)·b·u(j))[j in 0 to k-1] + d·u(k)
 
-  -- Ȧ = A-B·K·inv(I+DK)·C
-  -- Ḃ = B·(I-K·inv(I+DK)·D)
-  -- Ċ = inv(I+DK)·C
-  -- Ḋ = inv(I+DK)
+  -- a = A-B·K·inv(I+DK)·C
+  -- b = B·(I-K·inv(I+DK)·D)
+  -- c = inv(I+DK)·C
+  -- d = inv(I+DK)·D
 
 end architecture;

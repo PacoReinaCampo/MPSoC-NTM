@@ -125,67 +125,67 @@ architecture ntm_state_top_architecture of ntm_state_top is
 
   -- STATE INTERNAL
   -- CONTROL
-  signal start_state_internal : std_logic;
-  signal ready_state_internal : std_logic;
+  signal start_state_vector_state : std_logic;
+  signal ready_state_vector_state : std_logic;
 
-  signal data_a_in_i_state_internal : std_logic;
-  signal data_a_in_j_state_internal : std_logic;
-  signal data_b_in_i_state_internal : std_logic;
-  signal data_b_in_j_state_internal : std_logic;
+  signal data_a_in_i_state_vector_state : std_logic;
+  signal data_a_in_j_state_vector_state : std_logic;
+  signal data_b_in_i_state_vector_state : std_logic;
+  signal data_b_in_j_state_vector_state : std_logic;
 
-  signal data_u_in_state_internal : std_logic;
+  signal data_u_in_state_vector_state : std_logic;
 
-  signal data_y_out_state_internal : std_logic;
+  signal data_y_out_state_vector_state : std_logic;
 
   -- DATA
-  signal size_a_i_in_state_internal : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_a_j_in_state_internal : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_i_in_state_internal : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_j_in_state_internal : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_i_in_state_vector_state : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_state_vector_state : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_state_vector_state : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_state_vector_state : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_a_in_state_internal : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_state_internal : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_state_vector_state : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_state_vector_state : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_u_in_state_internal : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_u_in_state_vector_state : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_x_out_state_internal : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_x_out_state_vector_state : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- STATE OUTPUT
   -- CONTROL
-  signal start_state_output : std_logic;
-  signal ready_state_output : std_logic;
+  signal start_state_vector_output : std_logic;
+  signal ready_state_vector_output : std_logic;
 
-  signal data_a_in_i_state_output : std_logic;
-  signal data_a_in_j_state_output : std_logic;
-  signal data_b_in_i_state_output : std_logic;
-  signal data_b_in_j_state_output : std_logic;
-  signal data_c_in_i_state_output : std_logic;
-  signal data_c_in_j_state_output : std_logic;
-  signal data_d_in_i_state_output : std_logic;
-  signal data_d_in_j_state_output : std_logic;
+  signal data_a_in_i_state_vector_output : std_logic;
+  signal data_a_in_j_state_vector_output : std_logic;
+  signal data_b_in_i_state_vector_output : std_logic;
+  signal data_b_in_j_state_vector_output : std_logic;
+  signal data_c_in_i_state_vector_output : std_logic;
+  signal data_c_in_j_state_vector_output : std_logic;
+  signal data_d_in_i_state_vector_output : std_logic;
+  signal data_d_in_j_state_vector_output : std_logic;
 
-  signal data_u_in_state_output : std_logic;
+  signal data_u_in_state_vector_output : std_logic;
 
-  signal data_y_out_state_output : std_logic;
+  signal data_y_out_state_vector_output : std_logic;
 
   -- DATA
-  signal size_a_in_i_state_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_a_in_j_state_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_in_i_state_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_in_j_state_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_c_in_i_state_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_c_in_j_state_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_d_in_i_state_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_d_in_j_state_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_in_i_state_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_in_j_state_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_in_i_state_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_in_j_state_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_c_in_i_state_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_c_in_j_state_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_d_in_i_state_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_d_in_j_state_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_a_in_state_output : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_state_output : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_c_in_state_output : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_d_in_state_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_state_vector_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_state_vector_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_c_in_state_vector_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_d_in_state_vector_output : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_u_in_state_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_u_in_state_vector_output : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_y_state_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_y_state_vector_output : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -201,8 +201,8 @@ begin
 
   -- CONTROL
 
-  -- STATE INTERNAL
-  state_internal : ntm_state_internal
+  -- VECTOR STATE
+  state_vector_state : ntm_state_vector_state
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -213,34 +213,34 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_state_internal,
-      READY => ready_state_internal,
+      START => start_state_vector_state,
+      READY => ready_state_vector_state,
 
-      DATA_A_IN_I_ENABLE => data_a_in_i_state_internal,
-      DATA_A_IN_J_ENABLE => data_a_in_j_state_internal,
-      DATA_B_IN_I_ENABLE => data_b_in_i_state_internal,
-      DATA_B_IN_J_ENABLE => data_b_in_j_state_internal,
+      DATA_A_IN_I_ENABLE => data_a_in_i_state_vector_state,
+      DATA_A_IN_J_ENABLE => data_a_in_j_state_vector_state,
+      DATA_B_IN_I_ENABLE => data_b_in_i_state_vector_state,
+      DATA_B_IN_J_ENABLE => data_b_in_j_state_vector_state,
 
-      DATA_U_IN_ENABLE => data_u_in_state_internal,
+      DATA_U_IN_ENABLE => data_u_in_state_vector_state,
 
-      DATA_X_OUT_ENABLE => data_y_out_state_internal,
+      DATA_X_OUT_ENABLE => data_y_out_state_vector_state,
 
       -- DATA
-      SIZE_A_I_IN => size_a_i_in_state_internal,
-      SIZE_A_J_IN => size_a_j_in_state_internal,
-      SIZE_B_I_IN => size_b_i_in_state_internal,
-      SIZE_B_J_IN => size_b_j_in_state_internal,
+      SIZE_A_I_IN => size_a_i_in_state_vector_state,
+      SIZE_A_J_IN => size_a_j_in_state_vector_state,
+      SIZE_B_I_IN => size_b_i_in_state_vector_state,
+      SIZE_B_J_IN => size_b_j_in_state_vector_state,
 
-      DATA_A_IN => data_a_in_state_internal,
-      DATA_B_IN => data_b_in_state_internal,
+      DATA_A_IN => data_a_in_state_vector_state,
+      DATA_B_IN => data_b_in_state_vector_state,
 
-      DATA_U_IN => data_u_state_internal,
+      DATA_U_IN => data_u_state_vector_state,
 
-      DATA_X_OUT => data_y_state_internal
+      DATA_X_OUT => data_y_state_vector_state
       );
 
-  -- STATE OUTPUT
-  state_output : ntm_state_output
+  -- VECTOR OUTPUT
+  state_vector_output : ntm_state_vector_output
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -251,40 +251,40 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_state_output,
-      READY => ready_state_output,
+      START => start_state_vector_output,
+      READY => ready_state_vector_output,
 
-      DATA_A_IN_I_ENABLE => data_a_in_i_state_output,
-      DATA_A_IN_J_ENABLE => data_a_in_j_state_output,
-      DATA_B_IN_I_ENABLE => data_b_in_i_state_output,
-      DATA_B_IN_J_ENABLE => data_b_in_j_state_output,
-      DATA_C_IN_I_ENABLE => data_c_in_i_state_output,
-      DATA_C_IN_J_ENABLE => data_c_in_j_state_output,
-      DATA_D_IN_I_ENABLE => data_d_in_i_state_output,
-      DATA_D_IN_J_ENABLE => data_d_in_j_state_output,
+      DATA_A_IN_I_ENABLE => data_a_in_i_state_vector_output,
+      DATA_A_IN_J_ENABLE => data_a_in_j_state_vector_output,
+      DATA_B_IN_I_ENABLE => data_b_in_i_state_vector_output,
+      DATA_B_IN_J_ENABLE => data_b_in_j_state_vector_output,
+      DATA_C_IN_I_ENABLE => data_c_in_i_state_vector_output,
+      DATA_C_IN_J_ENABLE => data_c_in_j_state_vector_output,
+      DATA_D_IN_I_ENABLE => data_d_in_i_state_vector_output,
+      DATA_D_IN_J_ENABLE => data_d_in_j_state_vector_output,
 
-      DATA_U_IN_ENABLE => data_u_in_state_output,
+      DATA_U_IN_ENABLE => data_u_in_state_vector_output,
 
-      DATA_Y_OUT_ENABLE => data_y_out_state_output,
+      DATA_Y_OUT_ENABLE => data_y_out_state_vector_output,
 
       -- DATA
-      SIZE_A_I_IN => size_a_in_i_state_output,
-      SIZE_A_J_IN => size_a_in_j_state_output,
-      SIZE_B_I_IN => size_b_in_i_state_output,
-      SIZE_B_J_IN => size_b_in_j_state_output,
-      SIZE_C_I_IN => size_c_in_i_state_output,
-      SIZE_C_J_IN => size_c_in_j_state_output,
-      SIZE_D_I_IN => size_d_in_i_state_output,
-      SIZE_D_J_IN => size_d_in_j_state_output,
+      SIZE_A_I_IN => size_a_in_i_state_vector_output,
+      SIZE_A_J_IN => size_a_in_j_state_vector_output,
+      SIZE_B_I_IN => size_b_in_i_state_vector_output,
+      SIZE_B_J_IN => size_b_in_j_state_vector_output,
+      SIZE_C_I_IN => size_c_in_i_state_vector_output,
+      SIZE_C_J_IN => size_c_in_j_state_vector_output,
+      SIZE_D_I_IN => size_d_in_i_state_vector_output,
+      SIZE_D_J_IN => size_d_in_j_state_vector_output,
 
-      DATA_A_IN => data_a_in_state_output,
-      DATA_B_IN => data_b_in_state_output,
-      DATA_C_IN => data_c_in_state_output,
-      DATA_D_IN => data_d_in_state_output,
+      DATA_A_IN => data_a_in_state_vector_output,
+      DATA_B_IN => data_b_in_state_vector_output,
+      DATA_C_IN => data_c_in_state_vector_output,
+      DATA_D_IN => data_d_in_state_vector_output,
 
-      DATA_U_IN => data_u_state_output,
+      DATA_U_IN => data_u_state_vector_output,
 
-      DATA_Y_OUT => data_y_state_output
+      DATA_Y_OUT => data_y_state_vector_output
       );
 
 end architecture;
