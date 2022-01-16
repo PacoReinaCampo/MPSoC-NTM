@@ -1,29 +1,29 @@
 sv work ../../../../../../../rtl/verilog/pkg/ntm_math_pkg.sv
 sv work ../../../../../../../rtl/verilog/pkg/dnc_core_pkg.sv
 
-sv work ../../../../../../../rtl/verilog/math/integer/scalar/ntm_scalar_integer_adder.sv
-sv work ../../../../../../../rtl/verilog/math/integer/scalar/ntm_scalar_integer_multiplier.sv
-sv work ../../../../../../../rtl/verilog/math/integer/scalar/ntm_scalar_integer_divider.sv
+sv work ../../../../../../../rtl/verilog/arithmetic/integer/scalar/ntm_scalar_integer_adder.sv
+sv work ../../../../../../../rtl/verilog/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.sv
+sv work ../../../../../../../rtl/verilog/arithmetic/integer/scalar/ntm_scalar_integer_divider.sv
 
-sv work ../../../../../../../rtl/verilog/math/integer/vector/ntm_vector_integer_adder.sv
-sv work ../../../../../../../rtl/verilog/math/integer/vector/ntm_vector_integer_multiplier.sv
-sv work ../../../../../../../rtl/verilog/math/integer/vector/ntm_vector_integer_divider.sv
+sv work ../../../../../../../rtl/verilog/arithmetic/integer/vector/ntm_vector_integer_adder.sv
+sv work ../../../../../../../rtl/verilog/arithmetic/integer/vector/ntm_vector_integer_multiplier.sv
+sv work ../../../../../../../rtl/verilog/arithmetic/integer/vector/ntm_vector_integer_divider.sv
 
-sv work ../../../../../../../rtl/verilog/math/integer/matrix/ntm_matrix_integer_adder.sv
-sv work ../../../../../../../rtl/verilog/math/integer/matrix/ntm_matrix_integer_multiplier.sv
-sv work ../../../../../../../rtl/verilog/math/integer/matrix/ntm_matrix_integer_divider.sv
+sv work ../../../../../../../rtl/verilog/arithmetic/integer/matrix/ntm_matrix_integer_adder.sv
+sv work ../../../../../../../rtl/verilog/arithmetic/integer/matrix/ntm_matrix_integer_multiplier.sv
+sv work ../../../../../../../rtl/verilog/arithmetic/integer/matrix/ntm_matrix_integer_divider.sv
 
-sv work ../../../../../../../rtl/verilog/math/float/scalar/ntm_scalar_adder.sv
-sv work ../../../../../../../rtl/verilog/math/float/scalar/ntm_scalar_multiplier.sv
-sv work ../../../../../../../rtl/verilog/math/float/scalar/ntm_scalar_divider.sv
+sv work ../../../../../../../rtl/verilog/arithmetic/float/scalar/ntm_scalar_adder.sv
+sv work ../../../../../../../rtl/verilog/arithmetic/float/scalar/ntm_scalar_multiplier.sv
+sv work ../../../../../../../rtl/verilog/arithmetic/float/scalar/ntm_scalar_divider.sv
 
-sv work ../../../../../../../rtl/verilog/math/float/vector/ntm_vector_adder.sv
-sv work ../../../../../../../rtl/verilog/math/float/vector/ntm_vector_multiplier.sv
-sv work ../../../../../../../rtl/verilog/math/float/vector/ntm_vector_divider.sv
+sv work ../../../../../../../rtl/verilog/arithmetic/float/vector/ntm_vector_adder.sv
+sv work ../../../../../../../rtl/verilog/arithmetic/float/vector/ntm_vector_multiplier.sv
+sv work ../../../../../../../rtl/verilog/arithmetic/float/vector/ntm_vector_divider.sv
 
-sv work ../../../../../../../rtl/verilog/math/float/matrix/ntm_matrix_adder.sv
-sv work ../../../../../../../rtl/verilog/math/float/matrix/ntm_matrix_multiplier.sv
-sv work ../../../../../../../rtl/verilog/math/float/matrix/ntm_matrix_divider.sv
+sv work ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_adder.sv
+sv work ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_multiplier.sv
+sv work ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_divider.sv
 
 sv work ../../../../../../../rtl/verilog/math/algebra/ntm_matrix_product.sv
 sv work ../../../../../../../rtl/verilog/math/algebra/ntm_tensor_transpose.sv

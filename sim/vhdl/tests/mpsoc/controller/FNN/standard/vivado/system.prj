@@ -1,29 +1,29 @@
 vhdl2008 work ../../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/pkg/ntm_fnn_controller_pkg.vhd
 
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_adder.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_multiplier.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/integer/scalar/ntm_scalar_integer_divider.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
 
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_adder.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_multiplier.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/integer/vector/ntm_vector_integer_divider.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/integer/vector/ntm_vector_integer_adder.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/integer/vector/ntm_vector_integer_multiplier.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/integer/vector/ntm_vector_integer_divider.vhd
 
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_adder.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_multiplier.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/integer/matrix/ntm_matrix_integer_divider.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/integer/matrix/ntm_matrix_integer_adder.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/integer/matrix/ntm_matrix_integer_multiplier.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/integer/matrix/ntm_matrix_integer_divider.vhd
 
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/float/scalar/ntm_scalar_adder.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/float/scalar/ntm_scalar_multiplier.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/float/scalar/ntm_scalar_divider.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_adder.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_multiplier.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_divider.vhd
 
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/float/vector/ntm_vector_adder.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/float/vector/ntm_vector_multiplier.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/float/vector/ntm_vector_divider.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/float/vector/ntm_vector_adder.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/float/vector/ntm_vector_multiplier.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/float/vector/ntm_vector_divider.vhd
 
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_adder.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_multiplier.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_divider.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_adder.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_multiplier.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_divider.vhd
 
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_product.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/ntm_tensor_transpose.vhd

@@ -620,7 +620,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif ((SCALAR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) < unsigned(SCALAR_PRODUCT_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif (((SCALAR_PRODUCT_DATA_OUT_ENABLE = '1') or (SCALAR_PRODUCT_START = '1')) and (unsigned(index_i_loop) < unsigned(SCALAR_PRODUCT_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '1';
             SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
@@ -671,7 +671,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif ((SCALAR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) < unsigned(SCALAR_PRODUCT_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif (((SCALAR_PRODUCT_DATA_OUT_ENABLE = '1') or (SCALAR_PRODUCT_START = '1')) and (unsigned(index_i_loop) < unsigned(SCALAR_PRODUCT_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '1';
             SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
@@ -732,7 +732,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif ((SCALAR_TRANSPOSE_DATA_ENABLE = '1') and (unsigned(index_i_loop) < unsigned(SCALAR_TRANSPOSE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif (((SCALAR_TRANSPOSE_DATA_ENABLE = '1') or (SCALAR_TRANSPOSE_START = '1')) and (unsigned(index_i_loop) < unsigned(SCALAR_TRANSPOSE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             SCALAR_TRANSPOSE_DATA_IN_ENABLE <= '1';
 
@@ -777,7 +777,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif ((SCALAR_TRANSPOSE_DATA_ENABLE = '1') and (unsigned(index_i_loop) < unsigned(SCALAR_TRANSPOSE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif (((SCALAR_TRANSPOSE_DATA_ENABLE = '1') or (SCALAR_TRANSPOSE_START = '1')) and (unsigned(index_i_loop) < unsigned(SCALAR_TRANSPOSE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             SCALAR_TRANSPOSE_DATA_IN_ENABLE <= '1';
 
