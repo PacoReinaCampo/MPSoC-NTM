@@ -65,6 +65,8 @@ entity ntm_state_internal is
 
     DATA_U_IN_ENABLE : in std_logic;
 
+    DATA_X_OUT_ENABLE : out std_logic;
+
     -- DATA
     SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
