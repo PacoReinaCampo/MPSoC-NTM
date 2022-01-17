@@ -25,10 +25,11 @@ sv work ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_mult
 sv work ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_divider.sv
 
 sv work ../../../../../../../rtl/verilog/math/algebra/ntm_matrix_product.sv
-sv work ../../../../../../../rtl/verilog/math/algebra/ntm_tensor_transpose.sv
 sv work ../../../../../../../rtl/verilog/math/algebra/ntm_matrix_transpose.sv
 sv work ../../../../../../../rtl/verilog/math/algebra/ntm_scalar_product.sv
+sv work ../../../../../../../rtl/verilog/math/algebra/ntm_scalar_transpose.sv
 sv work ../../../../../../../rtl/verilog/math/algebra/ntm_tensor_product.sv
+sv work ../../../../../../../rtl/verilog/math/algebra/ntm_tensor_transpose.sv
 
 sv work ../../../../../../../bench/verilog/tests/math/algebra/ntm_algebra_pkg.sv
 sv work ../../../../../../../bench/verilog/tests/math/algebra/ntm_algebra_stimulus.sv
