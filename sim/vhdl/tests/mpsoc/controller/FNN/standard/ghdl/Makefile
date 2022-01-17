@@ -1,6 +1,7 @@
 all: build simulate
 
 build:
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/pkg/ntm_arithmetic_pkg.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/pkg/ntm_fnn_controller_pkg.vhd
 
@@ -28,17 +29,15 @@ build:
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_multiplier.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_divider.vhd
 
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_product.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/algebra/ntm_tensor_transpose.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_transpose.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/algebra/ntm_scalar_product.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/algebra/ntm_tensor_product.vhd
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_product.vhd
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_transpose.vhd
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/algebra/scalar/ntm_scalar_product.vhd
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_product.vhd
 
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_exponentiator_function.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_convolution_function.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_cosh_function.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_cosine_similarity_function.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_differentiation_function.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_logistic_function.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_multiplication_function.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_oneplus_function.vhd
@@ -48,10 +47,8 @@ build:
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_tanh_function.vhd
 
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_exponentiator_function.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_convolution_function.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_cosh_function.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_cosine_similarity_function.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_differentiation_function.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_logistic_function.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_multiplication_function.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_oneplus_function.vhd
@@ -61,10 +58,8 @@ build:
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_tanh_function.vhd
 
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_exponentiator_function.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_convolution_function.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_cosh_function.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_cosine_similarity_function.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_differentiation_function.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_logistic_function.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_multiplication_function.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_oneplus_function.vhd
@@ -73,8 +68,9 @@ build:
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_summation_function.vhd
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_tanh_function.vhd
 
+	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/trainer/FNN/ntm_trainer.vhd
+
 	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/FNN/standard/ntm_controller.vhd
-	ghdl -a --std=08 ../../../../../../../../rtl/vhdl/controller/FNN/standard/ntm_trainer.vhd
 
 	ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/controller/FNN/standard/ntm_standard_fnn_pkg.vhd
 	ghdl -a --std=08 ../../../../../../../../bench/vhdl/tests/controller/FNN/standard/ntm_standard_fnn_stimulus.vhd

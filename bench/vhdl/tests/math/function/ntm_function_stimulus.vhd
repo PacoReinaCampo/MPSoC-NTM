@@ -67,22 +67,6 @@ entity ntm_function_stimulus is
     -- STIMULUS SCALAR
     -----------------------------------------------------------------------
 
-    -- SCALAR CONVOLUTION
-    -- CONTROL
-    SCALAR_CONVOLUTION_START : out std_logic;
-    SCALAR_CONVOLUTION_READY : in  std_logic;
-
-    SCALAR_CONVOLUTION_DATA_A_IN_ENABLE : out std_logic;
-    SCALAR_CONVOLUTION_DATA_B_IN_ENABLE : out std_logic;
-
-    SCALAR_CONVOLUTION_DATA_OUT_ENABLE : in std_logic;
-
-    -- DATA
-    SCALAR_CONVOLUTION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SCALAR_CONVOLUTION_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_CONVOLUTION_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_CONVOLUTION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
     -- SCALAR COSH
     -- CONTROL
     SCALAR_COSH_START : out std_logic;
@@ -107,21 +91,6 @@ entity ntm_function_stimulus is
     SCALAR_COSINE_SIMILARITY_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_COSINE_SIMILARITY_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_COSINE_SIMILARITY_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- SCALAR DIFFERENTIATION
-    -- CONTROL
-    SCALAR_DIFFERENTIATION_START : out std_logic;
-    SCALAR_DIFFERENTIATION_READY : in  std_logic;
-
-    SCALAR_DIFFERENTIATION_DATA_IN_ENABLE : out std_logic;
-
-    SCALAR_DIFFERENTIATION_DATA_OUT_ENABLE : in std_logic;
-
-    -- DATA
-    SCALAR_DIFFERENTIATION_PERIOD_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SCALAR_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- SCALAR EXPONENTIATOR
     -- CONTROL
@@ -223,26 +192,6 @@ entity ntm_function_stimulus is
     -- STIMULUS VECTOR
     -----------------------------------------------------------------------
 
-    -- VECTOR CONVOLUTION
-    -- CONTROL
-    VECTOR_CONVOLUTION_START : out std_logic;
-    VECTOR_CONVOLUTION_READY : in  std_logic;
-
-    VECTOR_CONVOLUTION_DATA_A_IN_VECTOR_ENABLE : out std_logic;
-    VECTOR_CONVOLUTION_DATA_A_IN_SCALAR_ENABLE : out std_logic;
-    VECTOR_CONVOLUTION_DATA_B_IN_VECTOR_ENABLE : out std_logic;
-    VECTOR_CONVOLUTION_DATA_B_IN_SCALAR_ENABLE : out std_logic;
-
-    VECTOR_CONVOLUTION_DATA_OUT_VECTOR_ENABLE : in std_logic;
-    VECTOR_CONVOLUTION_DATA_OUT_SCALAR_ENABLE : in std_logic;
-
-    -- DATA
-    VECTOR_CONVOLUTION_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_CONVOLUTION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_CONVOLUTION_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_CONVOLUTION_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_CONVOLUTION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
     -- VECTOR COSH
     -- CONTROL
     VECTOR_COSH_START : out std_logic;
@@ -276,24 +225,6 @@ entity ntm_function_stimulus is
     VECTOR_COSINE_SIMILARITY_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_COSINE_SIMILARITY_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_COSINE_SIMILARITY_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- VECTOR DIFFERENTIATION
-    -- CONTROL
-    VECTOR_DIFFERENTIATION_START : out std_logic;
-    VECTOR_DIFFERENTIATION_READY : in  std_logic;
-
-    VECTOR_DIFFERENTIATION_DATA_IN_VECTOR_ENABLE : out std_logic;
-    VECTOR_DIFFERENTIATION_DATA_IN_SCALAR_ENABLE : out std_logic;
-
-    VECTOR_DIFFERENTIATION_DATA_OUT_VECTOR_ENABLE : in std_logic;
-    VECTOR_DIFFERENTIATION_DATA_OUT_SCALAR_ENABLE : in std_logic;
-
-    -- DATA
-    VECTOR_DIFFERENTIATION_PERIOD_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_DIFFERENTIATION_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- VECTOR EXPONENTIATOR
     -- CONTROL
@@ -434,30 +365,6 @@ entity ntm_function_stimulus is
     -- STIMULUS MATRIX
     -----------------------------------------------------------------------
 
-    -- MATRIX CONVOLUTION
-    -- CONTROL
-    MATRIX_CONVOLUTION_START : out std_logic;
-    MATRIX_CONVOLUTION_READY : in  std_logic;
-
-    MATRIX_CONVOLUTION_DATA_A_IN_MATRIX_ENABLE : out std_logic;
-    MATRIX_CONVOLUTION_DATA_A_IN_VECTOR_ENABLE : out std_logic;
-    MATRIX_CONVOLUTION_DATA_A_IN_SCALAR_ENABLE : out std_logic;
-    MATRIX_CONVOLUTION_DATA_B_IN_MATRIX_ENABLE : out std_logic;
-    MATRIX_CONVOLUTION_DATA_B_IN_VECTOR_ENABLE : out std_logic;
-    MATRIX_CONVOLUTION_DATA_B_IN_SCALAR_ENABLE : out std_logic;
-
-    MATRIX_CONVOLUTION_DATA_OUT_MATRIX_ENABLE : in std_logic;
-    MATRIX_CONVOLUTION_DATA_OUT_VECTOR_ENABLE : in std_logic;
-    MATRIX_CONVOLUTION_DATA_OUT_SCALAR_ENABLE : in std_logic;
-
-    -- DATA
-    MATRIX_CONVOLUTION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_CONVOLUTION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_CONVOLUTION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_CONVOLUTION_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_CONVOLUTION_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_CONVOLUTION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
     -- MATRIX COSH
     -- CONTROL
     MATRIX_COSH_START : out std_logic;
@@ -498,27 +405,6 @@ entity ntm_function_stimulus is
     MATRIX_COSINE_SIMILARITY_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_COSINE_SIMILARITY_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_COSINE_SIMILARITY_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- MATRIX DIFFERENTIATION
-    -- CONTROL
-    MATRIX_DIFFERENTIATION_START : out std_logic;
-    MATRIX_DIFFERENTIATION_READY : in  std_logic;
-
-    MATRIX_DIFFERENTIATION_DATA_IN_MATRIX_ENABLE : out std_logic;
-    MATRIX_DIFFERENTIATION_DATA_IN_VECTOR_ENABLE : out std_logic;
-    MATRIX_DIFFERENTIATION_DATA_IN_SCALAR_ENABLE : out std_logic;
-
-    MATRIX_DIFFERENTIATION_DATA_OUT_MATRIX_ENABLE : in std_logic;
-    MATRIX_DIFFERENTIATION_DATA_OUT_VECTOR_ENABLE : in std_logic;
-    MATRIX_DIFFERENTIATION_DATA_OUT_SCALAR_ENABLE : in std_logic;
-
-    -- DATA
-    MATRIX_DIFFERENTIATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_DIFFERENTIATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_DIFFERENTIATION_PERIOD_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- MATRIX EXPONENTIATOR
     -- CONTROL
@@ -774,10 +660,8 @@ begin
   end process;
 
   -- SCALAR-FUNCTIONALITY
-  SCALAR_CONVOLUTION_START       <= start_int;
   SCALAR_COSH_START              <= start_int;
   SCALAR_COSINE_SIMILARITY_START <= start_int;
-  SCALAR_DIFFERENTIATION_START   <= start_int;
   SCALAR_EXPONENTIATOR_START     <= start_int;
   SCALAR_LOGARITHM_START         <= start_int;
   SCALAR_LOGISTIC_START          <= start_int;
@@ -789,10 +673,8 @@ begin
   SCALAR_TANH_START              <= start_int;
 
   -- VECTOR-FUNCTIONALITY
-  VECTOR_CONVOLUTION_START       <= start_int;
   VECTOR_COSH_START              <= start_int;
   VECTOR_COSINE_SIMILARITY_START <= start_int;
-  VECTOR_DIFFERENTIATION_START   <= start_int;
   VECTOR_EXPONENTIATOR_START     <= start_int;
   VECTOR_LOGARITHM_START         <= start_int;
   VECTOR_LOGISTIC_START          <= start_int;
@@ -804,10 +686,8 @@ begin
   VECTOR_TANH_START              <= start_int;
 
   -- MATRIX-FUNCTIONALITY
-  MATRIX_CONVOLUTION_START       <= start_int;
   MATRIX_COSH_START              <= start_int;
   MATRIX_COSINE_SIMILARITY_START <= start_int;
-  MATRIX_DIFFERENTIATION_START   <= start_int;
   MATRIX_EXPONENTIATOR_START     <= start_int;
   MATRIX_LOGARITHM_START         <= start_int;
   MATRIX_LOGISTIC_START          <= start_int;
@@ -828,107 +708,6 @@ begin
     -------------------------------------------------------------------
     -- SCALAR-FUNCTION
     -------------------------------------------------------------------
-
-    if (STIMULUS_NTM_SCALAR_CONVOLUTION_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_CONVOLUTION_TEST    ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      SCALAR_CONVOLUTION_LENGTH_IN <= THREE_CONTROL;
-
-      if (STIMULUS_NTM_SCALAR_CONVOLUTION_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_CONVOLUTION_CASE 0  ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        SCALAR_CONVOLUTION_DATA_A_IN_ENABLE <= '1';
-        SCALAR_CONVOLUTION_DATA_B_IN_ENABLE <= '1';
-
-        -- DATA
-        SCALAR_CONVOLUTION_DATA_A_IN <= TWO_DATA;
-        SCALAR_CONVOLUTION_DATA_B_IN <= ONE_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((SCALAR_CONVOLUTION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_CONVOLUTION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_CONVOLUTION_DATA_A_IN_ENABLE <= '1';
-            SCALAR_CONVOLUTION_DATA_B_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_CONVOLUTION_DATA_A_IN <= TWO_DATA;
-            SCALAR_CONVOLUTION_DATA_B_IN <= ONE_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            SCALAR_CONVOLUTION_DATA_A_IN_ENABLE <= '0';
-            SCALAR_CONVOLUTION_DATA_B_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit when SCALAR_CONVOLUTION_READY = '1';
-        end loop;
-      end if;
-
-      if (STIMULUS_NTM_SCALAR_CONVOLUTION_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_CONVOLUTION_CASE 1  ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        SCALAR_CONVOLUTION_DATA_A_IN_ENABLE <= '1';
-        SCALAR_CONVOLUTION_DATA_B_IN_ENABLE <= '1';
-
-        -- DATA
-        SCALAR_CONVOLUTION_DATA_A_IN <= TWO_DATA;
-        SCALAR_CONVOLUTION_DATA_B_IN <= TWO_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((SCALAR_CONVOLUTION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_CONVOLUTION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_CONVOLUTION_DATA_A_IN_ENABLE <= '1';
-            SCALAR_CONVOLUTION_DATA_B_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_CONVOLUTION_DATA_A_IN <= TWO_DATA;
-            SCALAR_CONVOLUTION_DATA_B_IN <= TWO_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            SCALAR_CONVOLUTION_DATA_A_IN_ENABLE <= '0';
-            SCALAR_CONVOLUTION_DATA_B_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit when SCALAR_CONVOLUTION_READY = '1';
-        end loop;
-      end if;
-
-      wait for WORKING;
-
-    end if;
 
     if (STIMULUS_NTM_SCALAR_COSH_TEST) then
 
@@ -1052,98 +831,6 @@ begin
 
           -- CONTROL
           exit when SCALAR_COSINE_SIMILARITY_READY = '1';
-        end loop;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_NTM_SCALAR_DIFFERENTIATION_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_DIFFERENTIATION_TEST";
-      -------------------------------------------------------------------
-
-      -- DATA
-      SCALAR_DIFFERENTIATION_PERIOD_IN <= ONE_DATA;
-      SCALAR_DIFFERENTIATION_LENGTH_IN <= THREE_CONTROL;
-
-      if (STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIFFERENT_CASE 0    ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        SCALAR_DIFFERENTIATION_DATA_IN_ENABLE <= '1';
-
-        -- DATA
-        SCALAR_DIFFERENTIATION_DATA_IN <= ONE_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((SCALAR_DIFFERENTIATION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_DIFFERENTIATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_DIFFERENTIATION_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_DIFFERENTIATION_DATA_IN <= ONE_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            SCALAR_DIFFERENTIATION_DATA_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit when SCALAR_DIFFERENTIATION_READY = '1';
-        end loop;
-      end if;
-
-      if (STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIFFERENT_CASE 1    ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        SCALAR_DIFFERENTIATION_DATA_IN_ENABLE <= '1';
-
-        -- DATA
-        SCALAR_DIFFERENTIATION_DATA_IN <= TWO_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((SCALAR_DIFFERENTIATION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_DIFFERENTIATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_DIFFERENTIATION_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_DIFFERENTIATION_DATA_IN <= TWO_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            SCALAR_DIFFERENTIATION_DATA_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit when SCALAR_DIFFERENTIATION_READY = '1';
         end loop;
       end if;
 

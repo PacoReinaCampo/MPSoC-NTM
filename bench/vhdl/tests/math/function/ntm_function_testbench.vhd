@@ -57,10 +57,8 @@ entity ntm_function_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- SCALAR-FUNCTIONALITY
-    ENABLE_NTM_SCALAR_CONVOLUTION_TEST       : boolean := false;
     ENABLE_NTM_SCALAR_COSH_TEST              : boolean := false;
     ENABLE_NTM_SCALAR_COSINE_SIMILARITY_TEST : boolean := false;
-    ENABLE_NTM_SCALAR_DIFFERENTIATION_TEST   : boolean := false;
     ENABLE_NTM_SCALAR_EXPONENTIATOR_TEST     : boolean := false;
     ENABLE_NTM_SCALAR_LOGARITHM_TEST         : boolean := false;
     ENABLE_NTM_SCALAR_LOGISTIC_TEST          : boolean := false;
@@ -71,10 +69,8 @@ entity ntm_function_testbench is
     ENABLE_NTM_SCALAR_SUMMATION_TEST         : boolean := false;
     ENABLE_NTM_SCALAR_TANH_TEST              : boolean := false;
 
-    ENABLE_NTM_SCALAR_CONVOLUTION_CASE_0       : boolean := false;
     ENABLE_NTM_SCALAR_COSH_CASE_0              : boolean := false;
     ENABLE_NTM_SCALAR_COSINE_SIMILARITY_CASE_0 : boolean := false;
-    ENABLE_NTM_SCALAR_DIFFERENTIATION_CASE_0   : boolean := false;
     ENABLE_NTM_SCALAR_EXPONENTIATOR_CASE_0     : boolean := false;
     ENABLE_NTM_SCALAR_LOGARITHM_CASE_0         : boolean := false;
     ENABLE_NTM_SCALAR_LOGISTIC_CASE_0          : boolean := false;
@@ -85,10 +81,8 @@ entity ntm_function_testbench is
     ENABLE_NTM_SCALAR_SUMMATION_CASE_0         : boolean := false;
     ENABLE_NTM_SCALAR_TANH_CASE_0              : boolean := false;
 
-    ENABLE_NTM_SCALAR_CONVOLUTION_CASE_1       : boolean := false;
     ENABLE_NTM_SCALAR_COSH_CASE_1              : boolean := false;
     ENABLE_NTM_SCALAR_COSINE_SIMILARITY_CASE_1 : boolean := false;
-    ENABLE_NTM_SCALAR_DIFFERENTIATION_CASE_1   : boolean := false;
     ENABLE_NTM_SCALAR_EXPONENTIATOR_CASE_1     : boolean := false;
     ENABLE_NTM_SCALAR_LOGARITHM_CASE_1         : boolean := false;
     ENABLE_NTM_SCALAR_LOGISTIC_CASE_1          : boolean := false;
@@ -100,10 +94,8 @@ entity ntm_function_testbench is
     ENABLE_NTM_SCALAR_TANH_CASE_1              : boolean := false;
 
     -- VECTOR-FUNCTIONALITY
-    ENABLE_NTM_VECTOR_CONVOLUTION_TEST       : boolean := false;
     ENABLE_NTM_VECTOR_COSH_TEST              : boolean := false;
     ENABLE_NTM_VECTOR_COSINE_SIMILARITY_TEST : boolean := false;
-    ENABLE_NTM_VECTOR_DIFFERENTIATION_TEST   : boolean := false;
     ENABLE_NTM_VECTOR_EXPONENTIATOR_TEST     : boolean := false;
     ENABLE_NTM_VECTOR_LOGARITHM_TEST         : boolean := false;
     ENABLE_NTM_VECTOR_LOGISTIC_TEST          : boolean := false;
@@ -114,10 +106,8 @@ entity ntm_function_testbench is
     ENABLE_NTM_VECTOR_SUMMATION_TEST         : boolean := false;
     ENABLE_NTM_VECTOR_TANH_TEST              : boolean := false;
 
-    ENABLE_NTM_VECTOR_CONVOLUTION_CASE_0       : boolean := false;
     ENABLE_NTM_VECTOR_COSH_CASE_0              : boolean := false;
     ENABLE_NTM_VECTOR_COSINE_SIMILARITY_CASE_0 : boolean := false;
-    ENABLE_NTM_VECTOR_DIFFERENTIATION_CASE_0   : boolean := false;
     ENABLE_NTM_VECTOR_EXPONENTIATOR_CASE_0     : boolean := false;
     ENABLE_NTM_VECTOR_LOGARITHM_CASE_0         : boolean := false;
     ENABLE_NTM_VECTOR_LOGISTIC_CASE_0          : boolean := false;
@@ -128,10 +118,8 @@ entity ntm_function_testbench is
     ENABLE_NTM_VECTOR_SUMMATION_CASE_0         : boolean := false;
     ENABLE_NTM_VECTOR_TANH_CASE_0              : boolean := false;
 
-    ENABLE_NTM_VECTOR_CONVOLUTION_CASE_1       : boolean := false;
     ENABLE_NTM_VECTOR_COSH_CASE_1              : boolean := false;
     ENABLE_NTM_VECTOR_COSINE_SIMILARITY_CASE_1 : boolean := false;
-    ENABLE_NTM_VECTOR_DIFFERENTIATION_CASE_1   : boolean := false;
     ENABLE_NTM_VECTOR_EXPONENTIATOR_CASE_1     : boolean := false;
     ENABLE_NTM_VECTOR_LOGARITHM_CASE_1         : boolean := false;
     ENABLE_NTM_VECTOR_LOGISTIC_CASE_1          : boolean := false;
@@ -143,10 +131,8 @@ entity ntm_function_testbench is
     ENABLE_NTM_VECTOR_TANH_CASE_1              : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
-    ENABLE_NTM_MATRIX_CONVOLUTION_TEST       : boolean := false;
     ENABLE_NTM_MATRIX_COSH_TEST              : boolean := false;
     ENABLE_NTM_MATRIX_COSINE_SIMILARITY_TEST : boolean := false;
-    ENABLE_NTM_MATRIX_DIFFERENTIATION_TEST   : boolean := false;
     ENABLE_NTM_MATRIX_EXPONENTIATOR_TEST     : boolean := false;
     ENABLE_NTM_MATRIX_LOGARITHM_TEST         : boolean := false;
     ENABLE_NTM_MATRIX_LOGISTIC_TEST          : boolean := false;
@@ -157,10 +143,8 @@ entity ntm_function_testbench is
     ENABLE_NTM_MATRIX_SUMMATION_TEST         : boolean := false;
     ENABLE_NTM_MATRIX_TANH_TEST              : boolean := false;
 
-    ENABLE_NTM_MATRIX_CONVOLUTION_CASE_0       : boolean := false;
     ENABLE_NTM_MATRIX_COSH_CASE_0              : boolean := false;
     ENABLE_NTM_MATRIX_COSINE_SIMILARITY_CASE_0 : boolean := false;
-    ENABLE_NTM_MATRIX_DIFFERENTIATION_CASE_0   : boolean := false;
     ENABLE_NTM_MATRIX_EXPONENTIATOR_CASE_0     : boolean := false;
     ENABLE_NTM_MATRIX_LOGARITHM_CASE_0         : boolean := false;
     ENABLE_NTM_MATRIX_LOGISTIC_CASE_0          : boolean := false;
@@ -171,10 +155,8 @@ entity ntm_function_testbench is
     ENABLE_NTM_MATRIX_SUMMATION_CASE_0         : boolean := false;
     ENABLE_NTM_MATRIX_TANH_CASE_0              : boolean := false;
 
-    ENABLE_NTM_MATRIX_CONVOLUTION_CASE_1       : boolean := false;
     ENABLE_NTM_MATRIX_COSH_CASE_1              : boolean := false;
     ENABLE_NTM_MATRIX_COSINE_SIMILARITY_CASE_1 : boolean := false;
-    ENABLE_NTM_MATRIX_DIFFERENTIATION_CASE_1   : boolean := false;
     ENABLE_NTM_MATRIX_EXPONENTIATOR_CASE_1     : boolean := false;
     ENABLE_NTM_MATRIX_LOGARITHM_CASE_1         : boolean := false;
     ENABLE_NTM_MATRIX_LOGISTIC_CASE_1          : boolean := false;
@@ -201,22 +183,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   -- SCALAR
   -----------------------------------------------------------------------
 
-  -- SCALAR CONVOLUTION
-  -- CONTROL
-  signal start_scalar_convolution : std_logic;
-  signal ready_scalar_convolution : std_logic;
-
-  signal data_a_in_enable_scalar_convolution : std_logic;
-  signal data_b_in_enable_scalar_convolution : std_logic;
-
-  signal data_out_enable_scalar_convolution : std_logic;
-
-  -- DATA
-  signal length_in_scalar_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
-
   -- SCALAR COSH
   -- CONTROL
   signal start_scalar_cosh : std_logic;
@@ -241,21 +207,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_a_in_scalar_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_cosine_similarity  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR DIFFERENTIATION
-  -- CONTROL
-  signal start_scalar_differentiation : std_logic;
-  signal ready_scalar_differentiation : std_logic;
-
-  signal data_in_enable_scalar_differentiation  : std_logic;
-  signal data_out_enable_scalar_differentiation : std_logic;
-
-  -- DATA
-  signal size_in_scalar_differentiation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal period_in_scalar_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_scalar_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_scalar_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR EXPONENTIATOR
   -- CONTROL
@@ -357,26 +308,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   -- VECTOR
   -----------------------------------------------------------------------
 
-  -- VECTOR CONVOLUTION
-  -- CONTROL
-  signal start_vector_convolution : std_logic;
-  signal ready_vector_convolution : std_logic;
-
-  signal data_a_in_vector_enable_vector_convolution : std_logic;
-  signal data_a_in_scalar_enable_vector_convolution : std_logic;
-  signal data_b_in_vector_enable_vector_convolution : std_logic;
-  signal data_b_in_scalar_enable_vector_convolution : std_logic;
-
-  signal data_out_vector_enable_vector_convolution : std_logic;
-  signal data_out_scalar_enable_vector_convolution : std_logic;
-
-  -- DATA
-  signal size_in_vector_convolution   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_vector_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
-
   -- VECTOR COSH
   -- CONTROL
   signal start_vector_cosh : std_logic;
@@ -410,24 +341,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_a_in_vector_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_cosine_similarity  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR DIFFERENTIATION
-  -- CONTROL
-  signal start_vector_differentiation : std_logic;
-  signal ready_vector_differentiation : std_logic;
-
-  signal data_in_vector_enable_vector_differentiation : std_logic;
-  signal data_in_scalar_enable_vector_differentiation : std_logic;
-
-  signal data_out_vector_enable_vector_differentiation : std_logic;
-  signal data_out_scalar_enable_vector_differentiation : std_logic;
-
-  -- DATA
-  signal size_in_vector_differentiation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal period_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_vector_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR EXPONENTIATOR
   -- CONTROL
@@ -568,30 +481,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   -- MATRIX
   -----------------------------------------------------------------------
 
-  -- MATRIX CONVOLUTION
-  -- CONTROL
-  signal start_matrix_convolution : std_logic;
-  signal ready_matrix_convolution : std_logic;
-
-  signal data_a_in_matrix_enable_matrix_convolution : std_logic;
-  signal data_a_in_vector_enable_matrix_convolution : std_logic;
-  signal data_a_in_scalar_enable_matrix_convolution : std_logic;
-  signal data_b_in_matrix_enable_matrix_convolution : std_logic;
-  signal data_b_in_vector_enable_matrix_convolution : std_logic;
-  signal data_b_in_scalar_enable_matrix_convolution : std_logic;
-
-  signal data_out_matrix_enable_matrix_convolution : std_logic;
-  signal data_out_vector_enable_matrix_convolution : std_logic;
-  signal data_out_scalar_enable_matrix_convolution : std_logic;
-
-  -- DATA
-  signal size_i_in_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
-
   -- MATRIX COSH
   -- CONTROL
   signal start_matrix_cosh : std_logic;
@@ -632,27 +521,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_a_in_matrix_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_cosine_similarity  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- MATRIX DIFFERENTIATION
-  -- CONTROL
-  signal start_matrix_differentiation : std_logic;
-  signal ready_matrix_differentiation : std_logic;
-
-  signal data_in_matrix_enable_matrix_differentiation : std_logic;
-  signal data_in_vector_enable_matrix_differentiation : std_logic;
-  signal data_in_scalar_enable_matrix_differentiation : std_logic;
-
-  signal data_out_matrix_enable_matrix_differentiation : std_logic;
-  signal data_out_vector_enable_matrix_differentiation : std_logic;
-  signal data_out_scalar_enable_matrix_differentiation : std_logic;
-
-  -- DATA
-  signal size_i_in_matrix_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal period_in_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_matrix_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_matrix_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX EXPONENTIATOR
   -- CONTROL
@@ -844,22 +712,6 @@ begin
       -- STIMULUS SCALAR
       -----------------------------------------------------------------------
 
-      -- SCALAR CONVOLUTION
-      -- CONTROL
-      SCALAR_CONVOLUTION_START => start_scalar_convolution,
-      SCALAR_CONVOLUTION_READY => ready_scalar_convolution,
-
-      SCALAR_CONVOLUTION_DATA_A_IN_ENABLE => data_a_in_enable_scalar_convolution,
-      SCALAR_CONVOLUTION_DATA_B_IN_ENABLE => data_b_in_enable_scalar_convolution,
-
-      SCALAR_CONVOLUTION_DATA_OUT_ENABLE => data_out_enable_scalar_convolution,
-
-      -- DATA
-      SCALAR_CONVOLUTION_LENGTH_IN => length_in_scalar_convolution,
-      SCALAR_CONVOLUTION_DATA_A_IN => data_a_in_scalar_convolution,
-      SCALAR_CONVOLUTION_DATA_B_IN => data_b_in_scalar_convolution,
-      SCALAR_CONVOLUTION_DATA_OUT  => data_out_scalar_convolution,
-
       -- SCALAR COSH
       -- CONTROL
       SCALAR_COSH_START => start_scalar_cosh,
@@ -884,21 +736,6 @@ begin
       SCALAR_COSINE_SIMILARITY_DATA_A_IN => data_a_in_scalar_cosine_similarity,
       SCALAR_COSINE_SIMILARITY_DATA_B_IN => data_b_in_scalar_cosine_similarity,
       SCALAR_COSINE_SIMILARITY_DATA_OUT  => data_out_scalar_cosine_similarity,
-
-      -- SCALAR DIFFERENTIATION
-      -- CONTROL
-      SCALAR_DIFFERENTIATION_START => start_scalar_differentiation,
-      SCALAR_DIFFERENTIATION_READY => ready_scalar_differentiation,
-
-      SCALAR_DIFFERENTIATION_DATA_IN_ENABLE => data_in_enable_scalar_differentiation,
-
-      SCALAR_DIFFERENTIATION_DATA_OUT_ENABLE => data_out_enable_scalar_differentiation,
-
-      -- DATA
-      SCALAR_DIFFERENTIATION_PERIOD_IN => period_in_scalar_differentiation,
-      SCALAR_DIFFERENTIATION_LENGTH_IN => length_in_scalar_differentiation,
-      SCALAR_DIFFERENTIATION_DATA_IN   => data_in_scalar_differentiation,
-      SCALAR_DIFFERENTIATION_DATA_OUT  => data_out_scalar_differentiation,
 
       -- SCALAR EXPONENTIATOR
       -- CONTROL
@@ -1000,26 +837,6 @@ begin
       -- STIMULUS VECTOR
       -----------------------------------------------------------------------
 
-      -- VECTOR CONVOLUTION
-      -- CONTROL
-      VECTOR_CONVOLUTION_START => start_vector_convolution,
-      VECTOR_CONVOLUTION_READY => ready_vector_convolution,
-
-      VECTOR_CONVOLUTION_DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_convolution,
-      VECTOR_CONVOLUTION_DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_convolution,
-      VECTOR_CONVOLUTION_DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_convolution,
-      VECTOR_CONVOLUTION_DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_convolution,
-
-      VECTOR_CONVOLUTION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_convolution,
-      VECTOR_CONVOLUTION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_convolution,
-
-      -- DATA
-      VECTOR_CONVOLUTION_SIZE_IN   => size_in_vector_convolution,
-      VECTOR_CONVOLUTION_LENGTH_IN => length_in_vector_convolution,
-      VECTOR_CONVOLUTION_DATA_A_IN => data_a_in_vector_convolution,
-      VECTOR_CONVOLUTION_DATA_B_IN => data_b_in_vector_convolution,
-      VECTOR_CONVOLUTION_DATA_OUT  => data_out_vector_convolution,
-
       -- VECTOR COSH
       -- CONTROL
       VECTOR_COSH_START => start_vector_cosh,
@@ -1053,23 +870,6 @@ begin
       VECTOR_COSINE_SIMILARITY_DATA_A_IN => data_a_in_vector_cosine_similarity,
       VECTOR_COSINE_SIMILARITY_DATA_B_IN => data_b_in_vector_cosine_similarity,
       VECTOR_COSINE_SIMILARITY_DATA_OUT  => data_out_vector_cosine_similarity,
-
-      -- VECTOR DIFFERENTIATION
-      -- CONTROL
-      VECTOR_DIFFERENTIATION_START => start_vector_differentiation,
-      VECTOR_DIFFERENTIATION_READY => ready_vector_differentiation,
-
-      VECTOR_DIFFERENTIATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_differentiation,
-      VECTOR_DIFFERENTIATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_differentiation,
-
-      VECTOR_DIFFERENTIATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_differentiation,
-      VECTOR_DIFFERENTIATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_differentiation,
-
-      -- DATA
-      VECTOR_DIFFERENTIATION_SIZE_IN   => size_in_vector_differentiation,
-      VECTOR_DIFFERENTIATION_LENGTH_IN => length_in_vector_differentiation,
-      VECTOR_DIFFERENTIATION_DATA_IN   => data_in_vector_differentiation,
-      VECTOR_DIFFERENTIATION_DATA_OUT  => data_out_vector_differentiation,
 
       -- VECTOR EXPONENTIATOR
       -- CONTROL
@@ -1210,30 +1010,6 @@ begin
       -- STIMULUS MATRIX
       -----------------------------------------------------------------------
 
-      -- MATRIX CONVOLUTION
-      -- CONTROL
-      MATRIX_CONVOLUTION_START => start_matrix_convolution,
-      MATRIX_CONVOLUTION_READY => ready_matrix_convolution,
-
-      MATRIX_CONVOLUTION_DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_convolution,
-      MATRIX_CONVOLUTION_DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_convolution,
-      MATRIX_CONVOLUTION_DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_convolution,
-      MATRIX_CONVOLUTION_DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_convolution,
-      MATRIX_CONVOLUTION_DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_convolution,
-      MATRIX_CONVOLUTION_DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_convolution,
-
-      MATRIX_CONVOLUTION_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_convolution,
-      MATRIX_CONVOLUTION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_convolution,
-      MATRIX_CONVOLUTION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_convolution,
-
-      -- DATA
-      MATRIX_CONVOLUTION_SIZE_I_IN => size_i_in_matrix_convolution,
-      MATRIX_CONVOLUTION_SIZE_J_IN => size_j_in_matrix_convolution,
-      MATRIX_CONVOLUTION_LENGTH_IN => length_in_matrix_convolution,
-      MATRIX_CONVOLUTION_DATA_A_IN => data_a_in_matrix_convolution,
-      MATRIX_CONVOLUTION_DATA_B_IN => data_b_in_matrix_convolution,
-      MATRIX_CONVOLUTION_DATA_OUT  => data_out_matrix_convolution,
-
       -- MATRIX COSH
       -- CONTROL
       MATRIX_COSH_START => start_matrix_cosh,
@@ -1274,27 +1050,6 @@ begin
       MATRIX_COSINE_SIMILARITY_DATA_A_IN => data_a_in_matrix_cosine_similarity,
       MATRIX_COSINE_SIMILARITY_DATA_B_IN => data_b_in_matrix_cosine_similarity,
       MATRIX_COSINE_SIMILARITY_DATA_OUT  => data_out_matrix_cosine_similarity,
-
-      -- MATRIX DIFFERENTIATION
-      -- CONTROL
-      MATRIX_DIFFERENTIATION_START => start_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_READY => ready_matrix_differentiation,
-
-      MATRIX_DIFFERENTIATION_DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_differentiation,
-
-      MATRIX_DIFFERENTIATION_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_differentiation,
-
-      -- DATA
-      MATRIX_DIFFERENTIATION_SIZE_I_IN => size_i_in_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_SIZE_J_IN => size_j_in_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_PERIOD_IN => period_in_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_LENGTH_IN => length_in_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_DATA_IN   => data_in_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_DATA_OUT  => data_out_matrix_differentiation,
 
       -- MATRIX EXPONENTIATOR
       -- CONTROL
@@ -1463,35 +1218,6 @@ begin
   -- SCALAR
   -----------------------------------------------------------------------
 
-  -- SCALAR CONVOLUTION
-  ntm_scalar_convolution_function_test : if (ENABLE_NTM_SCALAR_CONVOLUTION_TEST) generate
-    scalar_convolution_function : ntm_scalar_convolution_function
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_scalar_convolution,
-        READY => ready_scalar_convolution,
-
-        DATA_A_IN_ENABLE => data_a_in_enable_scalar_convolution,
-        DATA_B_IN_ENABLE => data_b_in_enable_scalar_convolution,
-
-        DATA_OUT_ENABLE => data_out_enable_scalar_convolution,
-
-        -- DATA
-        LENGTH_IN => length_in_scalar_convolution,
-        DATA_A_IN => data_a_in_scalar_convolution,
-        DATA_B_IN => data_b_in_scalar_convolution,
-        DATA_OUT  => data_out_scalar_convolution
-        );
-  end generate ntm_scalar_convolution_function_test;
-
   -- SCALAR COSH
   ntm_scalar_cosh_function_test : if (ENABLE_NTM_SCALAR_COSH_TEST) generate
     scalar_cosh_function : ntm_scalar_cosh_function
@@ -1542,34 +1268,6 @@ begin
         DATA_OUT  => data_out_scalar_cosine_similarity
         );
   end generate ntm_scalar_cosine_similarity_function_test;
-
-  -- SCALAR DIFFERENTIATION
-  ntm_scalar_differentiation_function_test : if (ENABLE_NTM_SCALAR_DIFFERENTIATION_TEST) generate
-    scalar_differentiation_function : ntm_scalar_differentiation_function
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_scalar_differentiation,
-        READY => ready_scalar_differentiation,
-
-        DATA_IN_ENABLE => data_in_enable_scalar_differentiation,
-
-        DATA_OUT_ENABLE => data_out_enable_scalar_differentiation,
-
-        -- DATA
-        PERIOD_IN => period_in_scalar_differentiation,
-        LENGTH_IN => length_in_scalar_differentiation,
-        DATA_IN   => data_in_scalar_differentiation,
-        DATA_OUT  => data_out_scalar_differentiation
-        );
-  end generate ntm_scalar_differentiation_function_test;
 
   -- SCALAR EXPONENTIATOR
   ntm_scalar_exponentiator_function_test : if (ENABLE_NTM_SCALAR_EXPONENTIATOR_TEST) generate
@@ -1788,39 +1486,6 @@ begin
   -- VECTOR
   -----------------------------------------------------------------------
 
-  -- VECTOR CONVOLUTION
-  ntm_vector_convolution_function_test : if (ENABLE_NTM_VECTOR_CONVOLUTION_TEST) generate
-    vector_convolution_function : ntm_vector_convolution_function
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_vector_convolution,
-        READY => ready_vector_convolution,
-
-        DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_convolution,
-        DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_convolution,
-        DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_convolution,
-        DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_convolution,
-
-        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_convolution,
-        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_convolution,
-
-        -- DATA
-        SIZE_IN   => size_in_vector_convolution,
-        LENGTH_IN => length_in_vector_convolution,
-        DATA_A_IN => data_a_in_vector_convolution,
-        DATA_B_IN => data_b_in_vector_convolution,
-        DATA_OUT  => data_out_vector_convolution
-        );
-  end generate ntm_vector_convolution_function_test;
-
   -- VECTOR COSH
   ntm_vector_cosh_function_test : if (ENABLE_NTM_VECTOR_COSH_TEST) generate
     vector_cosh_function : ntm_vector_cosh_function
@@ -1880,37 +1545,6 @@ begin
         DATA_OUT  => data_out_vector_cosine_similarity
         );
   end generate ntm_vector_cosine_similarity_function_test;
-
-  -- VECTOR DIFFERENTIATION
-  ntm_vector_differentiation_function_test : if (ENABLE_NTM_VECTOR_DIFFERENTIATION_TEST) generate
-    vector_differentiation_function : ntm_vector_differentiation_function
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_vector_differentiation,
-        READY => ready_vector_differentiation,
-
-        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_differentiation,
-        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_differentiation,
-
-        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_differentiation,
-        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_differentiation,
-
-        -- DATA
-        SIZE_IN   => size_in_vector_differentiation,
-        PERIOD_IN => period_in_vector_differentiation,
-        LENGTH_IN => length_in_vector_differentiation,
-        DATA_IN   => data_in_vector_differentiation,
-        DATA_OUT  => data_out_vector_differentiation
-        );
-  end generate ntm_vector_differentiation_function_test;
 
   -- VECTOR EXPONENTIATOR
   ntm_vector_exponentiator_function_test : if (ENABLE_NTM_VECTOR_EXPONENTIATOR_TEST) generate
@@ -2169,43 +1803,6 @@ begin
   -- MATRIX
   -----------------------------------------------------------------------
 
-  -- MATRIX CONVOLUTION
-  ntm_matrix_convolution_function_test : if (ENABLE_NTM_MATRIX_CONVOLUTION_TEST) generate
-    matrix_convolution_function : ntm_matrix_convolution_function
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_matrix_convolution,
-        READY => ready_matrix_convolution,
-
-        DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_convolution,
-        DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_convolution,
-        DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_convolution,
-        DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_convolution,
-        DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_convolution,
-        DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_convolution,
-
-        DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_convolution,
-        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_convolution,
-        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_convolution,
-
-        -- DATA
-        SIZE_I_IN => size_i_in_matrix_convolution,
-        SIZE_J_IN => size_j_in_matrix_convolution,
-        LENGTH_IN => length_in_matrix_convolution,
-        DATA_A_IN => data_a_in_matrix_convolution,
-        DATA_B_IN => data_b_in_matrix_convolution,
-        DATA_OUT  => data_out_matrix_convolution
-        );
-  end generate ntm_matrix_convolution_function_test;
-
   -- MATRIX COSH
   ntm_matrix_cosh_function_test : if (ENABLE_NTM_MATRIX_COSH_TEST) generate
     matrix_cosh_function : ntm_matrix_cosh_function
@@ -2272,40 +1869,6 @@ begin
         DATA_OUT  => data_out_matrix_cosine_similarity
         );
   end generate ntm_matrix_cosine_similarity_function_test;
-
-  -- MATRIX DIFFERENTIATION
-  ntm_matrix_differentiation_function_test : if (ENABLE_NTM_MATRIX_DIFFERENTIATION_TEST) generate
-    matrix_differentiation_function : ntm_matrix_differentiation_function
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_matrix_differentiation,
-        READY => ready_matrix_differentiation,
-
-        DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_differentiation,
-        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_differentiation,
-        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_differentiation,
-
-        DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_differentiation,
-        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_differentiation,
-        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_differentiation,
-
-        -- DATA
-        SIZE_I_IN => size_i_in_matrix_differentiation,
-        SIZE_J_IN => size_j_in_matrix_differentiation,
-        PERIOD_IN => period_in_matrix_differentiation,
-        LENGTH_IN => length_in_matrix_differentiation,
-        DATA_IN   => data_in_matrix_differentiation,
-        DATA_OUT  => data_out_matrix_differentiation
-        );
-  end generate ntm_matrix_differentiation_function_test;
 
   -- MATRIX EXPONENTIATOR
   ntm_matrix_exponentiator_function_test : if (ENABLE_NTM_MATRIX_EXPONENTIATOR_TEST) generate

@@ -1,3 +1,4 @@
+vhdl2008 work ../../../../../../../../rtl/vhdl/pkg/ntm_arithmetic_pkg.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/pkg/ntm_math_pkg.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/pkg/ntm_fnn_controller_pkg.vhd
 
@@ -25,17 +26,15 @@ vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matri
 vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_multiplier.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_divider.vhd
 
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_product.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/ntm_tensor_transpose.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/ntm_matrix_transpose.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/ntm_scalar_product.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/ntm_tensor_product.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_product.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_transpose.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/scalar/ntm_scalar_product.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_product.vhd
 
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_exponentiator_function.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_convolution_function.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_cosh_function.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_cosine_similarity_function.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_differentiation_function.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_logistic_function.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_multiplication_function.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_oneplus_function.vhd
@@ -45,10 +44,8 @@ vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_s
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_tanh_function.vhd
 
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_exponentiator_function.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_convolution_function.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_cosh_function.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_cosine_similarity_function.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_differentiation_function.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_logistic_function.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_multiplication_function.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_oneplus_function.vhd
@@ -58,10 +55,8 @@ vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_s
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/vector/ntm_vector_tanh_function.vhd
 
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_exponentiator_function.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_convolution_function.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_cosh_function.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_cosine_similarity_function.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_differentiation_function.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_logistic_function.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_multiplication_function.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_oneplus_function.vhd
@@ -70,8 +65,9 @@ vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_s
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_summation_function.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/matrix/ntm_matrix_tanh_function.vhd
 
+vhdl2008 work ../../../../../../../../rtl/vhdl/trainer/FNN/ntm_trainer.vhd
+
 vhdl2008 work ../../../../../../../../rtl/vhdl/controller/FNN/standard/ntm_controller.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/controller/FNN/standard/ntm_trainer.vhd
 
 vhdl2008 work ../../../../../../../../bench/vhdl/tests/controller/FNN/standard/ntm_standard_fnn_pkg.vhd
 vhdl2008 work ../../../../../../../../bench/vhdl/tests/controller/FNN/standard/ntm_standard_fnn_stimulus.vhd

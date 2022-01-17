@@ -1,4 +1,4 @@
-sv work ../../../../../../../rtl/verilog/pkg/ntm_math_pkg.sv
+sv work ../../../../../../../rtl/verilog/pkg/ntm_arithmetic_pkg.sv
 
 sv work ../../../../../../../rtl/verilog/arithmetic/modular/scalar/ntm_scalar_modular_mod.sv
 sv work ../../../../../../../rtl/verilog/arithmetic/modular/scalar/ntm_scalar_modular_adder.sv

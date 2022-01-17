@@ -50,14 +50,17 @@ module ntm_matrix_differentiation #(
     input START,
     output reg READY,
 
+    input DATA_IN_MATRIX_ENABLE,
     input DATA_IN_VECTOR_ENABLE,
     input DATA_IN_SCALAR_ENABLE,
 
+    output reg DATA_OUT_MATRIX_ENABLE,
     output reg DATA_OUT_VECTOR_ENABLE,
     output reg DATA_OUT_SCALAR_ENABLE,
 
     // DATA
-    input [DATA_SIZE-1:0] SIZE_IN,
+    input [DATA_SIZE-1:0] SIZE_I_IN,
+    input [DATA_SIZE-1:0] SIZE_J_IN,
     input [DATA_SIZE-1:0] PERIOD_IN,
     input [DATA_SIZE-1:0] LENGTH_IN,
     input [DATA_SIZE-1:0] DATA_IN,
