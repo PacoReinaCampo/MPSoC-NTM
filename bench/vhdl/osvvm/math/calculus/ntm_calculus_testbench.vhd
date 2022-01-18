@@ -41,9 +41,9 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
-use work.ntm_function_pkg.all;
+use work.ntm_calculus_pkg.all;
 
-entity ntm_function_testbench is
+entity ntm_calculus_testbench is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE    : integer := 128;
@@ -57,29 +57,38 @@ entity ntm_function_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- SCALAR-FUNCTIONALITY
-    ENABLE_NTM_SCALAR_DIFFERENTIATION_TEST   : boolean := false;
+    ENABLE_NTM_SCALAR_DIFFERENTIATION_TEST : boolean := false;
+    ENABLE_NTM_SCALAR_INTEGRATION_TEST     : boolean := false;
 
-    ENABLE_NTM_SCALAR_DIFFERENTIATION_CASE_0   : boolean := false;
+    ENABLE_NTM_SCALAR_DIFFERENTIATION_CASE_0 : boolean := false;
+    ENABLE_NTM_SCALAR_INTEGRATION_CASE_0     : boolean := false;
 
-    ENABLE_NTM_SCALAR_DIFFERENTIATION_CASE_1   : boolean := false;
+    ENABLE_NTM_SCALAR_DIFFERENTIATION_CASE_1 : boolean := false;
+    ENABLE_NTM_SCALAR_INTEGRATION_CASE_1     : boolean := false;
 
     -- VECTOR-FUNCTIONALITY
-    ENABLE_NTM_VECTOR_DIFFERENTIATION_TEST   : boolean := false;
+    ENABLE_NTM_VECTOR_DIFFERENTIATION_TEST : boolean := false;
+    ENABLE_NTM_VECTOR_INTEGRATION_TEST     : boolean := false;
 
-    ENABLE_NTM_VECTOR_DIFFERENTIATION_CASE_0   : boolean := false;
+    ENABLE_NTM_VECTOR_DIFFERENTIATION_CASE_0 : boolean := false;
+    ENABLE_NTM_VECTOR_INTEGRATION_CASE_0     : boolean := false;
 
-    ENABLE_NTM_VECTOR_DIFFERENTIATION_CASE_1   : boolean := false;
+    ENABLE_NTM_VECTOR_DIFFERENTIATION_CASE_1 : boolean := false;
+    ENABLE_NTM_VECTOR_INTEGRATION_CASE_1     : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
-    ENABLE_NTM_MATRIX_DIFFERENTIATION_TEST   : boolean := false;
+    ENABLE_NTM_MATRIX_DIFFERENTIATION_TEST : boolean := false;
+    ENABLE_NTM_MATRIX_INTEGRATION_TEST     : boolean := false;
 
-    ENABLE_NTM_MATRIX_DIFFERENTIATION_CASE_0   : boolean := false;
+    ENABLE_NTM_MATRIX_DIFFERENTIATION_CASE_0 : boolean := false;
+    ENABLE_NTM_MATRIX_INTEGRATION_CASE_0     : boolean := false;
 
-    ENABLE_NTM_MATRIX_DIFFERENTIATION_CASE_1   : boolean := false
+    ENABLE_NTM_MATRIX_DIFFERENTIATION_CASE_1 : boolean := false;
+    ENABLE_NTM_MATRIX_INTEGRATION_CASE_1     : boolean := false
     );
-end ntm_function_testbench;
+end ntm_calculus_testbench;
 
-architecture ntm_function_testbench_architecture of ntm_function_testbench is
+architecture ntm_calculus_testbench_architecture of ntm_calculus_testbench is
 
   -----------------------------------------------------------------------
   -- Signals
@@ -108,6 +117,21 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_scalar_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- SCALAR INTEGRATION
+  -- CONTROL
+  signal start_scalar_integration : std_logic;
+  signal ready_scalar_integration : std_logic;
+
+  signal data_in_enable_scalar_integration  : std_logic;
+  signal data_out_enable_scalar_integration : std_logic;
+
+  -- DATA
+  signal size_in_scalar_integration   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal period_in_scalar_integration : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_scalar_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_scalar_integration   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_integration  : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -----------------------------------------------------------------------
   -- VECTOR
   -----------------------------------------------------------------------
@@ -129,6 +153,24 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal length_in_vector_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- VECTOR INTEGRATION
+  -- CONTROL
+  signal start_vector_integration : std_logic;
+  signal ready_vector_integration : std_logic;
+
+  signal data_in_vector_enable_vector_integration : std_logic;
+  signal data_in_scalar_enable_vector_integration : std_logic;
+
+  signal data_out_vector_enable_vector_integration : std_logic;
+  signal data_out_scalar_enable_vector_integration : std_logic;
+
+  -- DATA
+  signal size_in_vector_integration   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal period_in_vector_integration : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_integration   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_integration  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- MATRIX
@@ -155,13 +197,34 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_matrix_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- MATRIX INTEGRATION
+  -- CONTROL
+  signal start_matrix_integration : std_logic;
+  signal ready_matrix_integration : std_logic;
+
+  signal data_in_matrix_enable_matrix_integration : std_logic;
+  signal data_in_vector_enable_matrix_integration : std_logic;
+  signal data_in_scalar_enable_matrix_integration : std_logic;
+
+  signal data_out_matrix_enable_matrix_integration : std_logic;
+  signal data_out_vector_enable_matrix_integration : std_logic;
+  signal data_out_scalar_enable_matrix_integration : std_logic;
+
+  -- DATA
+  signal size_i_in_matrix_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal period_in_matrix_integration : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_matrix_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_matrix_integration   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_integration  : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
 
-  function_stimulus : ntm_function_stimulus
+  calculus_stimulus : ntm_calculus_stimulus
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE    => DATA_SIZE,
@@ -198,6 +261,22 @@ begin
       SCALAR_DIFFERENTIATION_DATA_IN   => data_in_scalar_differentiation,
       SCALAR_DIFFERENTIATION_DATA_OUT  => data_out_scalar_differentiation,
 
+      -- SCALAR INTEGRATION
+      -- CONTROL
+      SCALAR_INTEGRATION_START => start_scalar_integration,
+      SCALAR_INTEGRATION_READY => ready_scalar_integration,
+
+      SCALAR_INTEGRATION_DATA_IN_ENABLE => data_in_enable_scalar_integration,
+
+      SCALAR_INTEGRATION_DATA_OUT_ENABLE => data_out_enable_scalar_integration,
+
+      -- DATA
+      SCALAR_INTEGRATION_PERIOD_IN => period_in_scalar_integration,
+      SCALAR_INTEGRATION_LENGTH_IN => length_in_scalar_integration,
+      SCALAR_INTEGRATION_DATA_IN   => data_in_scalar_integration,
+      SCALAR_INTEGRATION_DATA_OUT  => data_out_scalar_integration,
+
+
       -----------------------------------------------------------------------
       -- STIMULUS VECTOR
       -----------------------------------------------------------------------
@@ -218,6 +297,23 @@ begin
       VECTOR_DIFFERENTIATION_LENGTH_IN => length_in_vector_differentiation,
       VECTOR_DIFFERENTIATION_DATA_IN   => data_in_vector_differentiation,
       VECTOR_DIFFERENTIATION_DATA_OUT  => data_out_vector_differentiation,
+
+      -- VECTOR INTEGRATION
+      -- CONTROL
+      VECTOR_INTEGRATION_START => start_vector_integration,
+      VECTOR_INTEGRATION_READY => ready_vector_integration,
+
+      VECTOR_INTEGRATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_integration,
+      VECTOR_INTEGRATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_integration,
+
+      VECTOR_INTEGRATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_integration,
+      VECTOR_INTEGRATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_integration,
+
+      -- DATA
+      VECTOR_INTEGRATION_SIZE_IN   => size_in_vector_integration,
+      VECTOR_INTEGRATION_LENGTH_IN => length_in_vector_integration,
+      VECTOR_INTEGRATION_DATA_IN   => data_in_vector_integration,
+      VECTOR_INTEGRATION_DATA_OUT  => data_out_vector_integration,
 
       -----------------------------------------------------------------------
       -- STIMULUS MATRIX
@@ -242,7 +338,28 @@ begin
       MATRIX_DIFFERENTIATION_PERIOD_IN => period_in_matrix_differentiation,
       MATRIX_DIFFERENTIATION_LENGTH_IN => length_in_matrix_differentiation,
       MATRIX_DIFFERENTIATION_DATA_IN   => data_in_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_DATA_OUT  => data_out_matrix_differentiation
+      MATRIX_DIFFERENTIATION_DATA_OUT  => data_out_matrix_differentiation,
+
+      -- MATRIX INTEGRATION
+      -- CONTROL
+      MATRIX_INTEGRATION_START => start_matrix_integration,
+      MATRIX_INTEGRATION_READY => ready_matrix_integration,
+
+      MATRIX_INTEGRATION_DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_integration,
+      MATRIX_INTEGRATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_integration,
+      MATRIX_INTEGRATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_integration,
+
+      MATRIX_INTEGRATION_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_integration,
+      MATRIX_INTEGRATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_integration,
+      MATRIX_INTEGRATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_integration,
+
+      -- DATA
+      MATRIX_INTEGRATION_SIZE_I_IN => size_i_in_matrix_integration,
+      MATRIX_INTEGRATION_SIZE_J_IN => size_j_in_matrix_integration,
+      MATRIX_INTEGRATION_PERIOD_IN => period_in_matrix_integration,
+      MATRIX_INTEGRATION_LENGTH_IN => length_in_matrix_integration,
+      MATRIX_INTEGRATION_DATA_IN   => data_in_matrix_integration,
+      MATRIX_INTEGRATION_DATA_OUT  => data_out_matrix_integration
       );
 
   -----------------------------------------------------------------------
@@ -276,6 +393,34 @@ begin
         DATA_OUT  => data_out_scalar_differentiation
         );
   end generate ntm_scalar_differentiation_test;
+
+  -- SCALAR INTEGRATION
+  ntm_scalar_integration_test : if (ENABLE_NTM_SCALAR_INTEGRATION_TEST) generate
+    scalar_integration : ntm_scalar_integration
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_scalar_integration,
+        READY => ready_scalar_integration,
+
+        DATA_IN_ENABLE => data_in_enable_scalar_integration,
+
+        DATA_OUT_ENABLE => data_out_enable_scalar_integration,
+
+        -- DATA
+        PERIOD_IN => period_in_scalar_integration,
+        LENGTH_IN => length_in_scalar_integration,
+        DATA_IN   => data_in_scalar_integration,
+        DATA_OUT  => data_out_scalar_integration
+        );
+  end generate ntm_scalar_integration_test;
 
   -----------------------------------------------------------------------
   -- VECTOR
@@ -311,6 +456,37 @@ begin
         DATA_OUT  => data_out_vector_differentiation
         );
   end generate ntm_vector_differentiation_test;
+
+  -- VECTOR INTEGRATION
+  ntm_vector_integration_test : if (ENABLE_NTM_VECTOR_INTEGRATION_TEST) generate
+    vector_integration : ntm_vector_integration
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_vector_integration,
+        READY => ready_vector_integration,
+
+        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_integration,
+        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_integration,
+
+        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_integration,
+        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_integration,
+
+        -- DATA
+        SIZE_IN   => size_in_vector_integration,
+        PERIOD_IN => period_in_vector_integration,
+        LENGTH_IN => length_in_vector_integration,
+        DATA_IN   => data_in_vector_integration,
+        DATA_OUT  => data_out_vector_integration
+        );
+  end generate ntm_vector_integration_test;
 
   -----------------------------------------------------------------------
   -- MATRIX
@@ -350,4 +526,38 @@ begin
         );
   end generate ntm_matrix_differentiation_test;
 
-end ntm_function_testbench_architecture;
+  -- MATRIX INTEGRATION
+  ntm_matrix_integration_test : if (ENABLE_NTM_MATRIX_INTEGRATION_TEST) generate
+    matrix_integration : ntm_matrix_integration
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_matrix_integration,
+        READY => ready_matrix_integration,
+
+        DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_integration,
+        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_integration,
+        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_integration,
+
+        DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_integration,
+        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_integration,
+        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_integration,
+
+        -- DATA
+        SIZE_I_IN => size_i_in_matrix_integration,
+        SIZE_J_IN => size_j_in_matrix_integration,
+        PERIOD_IN => period_in_matrix_integration,
+        LENGTH_IN => length_in_matrix_integration,
+        DATA_IN   => data_in_matrix_integration,
+        DATA_OUT  => data_out_matrix_integration
+        );
+  end generate ntm_matrix_integration_test;
+
+end ntm_calculus_testbench_architecture;

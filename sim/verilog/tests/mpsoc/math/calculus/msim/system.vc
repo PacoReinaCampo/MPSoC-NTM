@@ -25,8 +25,11 @@
 ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_divider.sv
 
 ../../../../../../../rtl/verilog/math/calculus/scalar/ntm_scalar_differentiation.sv
+../../../../../../../rtl/verilog/math/calculus/scalar/ntm_scalar_integration.sv
 ../../../../../../../rtl/verilog/math/calculus/vector/ntm_vector_differentiation.sv
+../../../../../../../rtl/verilog/math/calculus/vector/ntm_vector_integration.sv
 ../../../../../../../rtl/verilog/math/calculus/matrix/ntm_matrix_differentiation.sv
+../../../../../../../rtl/verilog/math/calculus/matrix/ntm_matrix_integration.sv
 
 ../../../../../../../bench/verilog/tests/math/calculus/ntm_calculus_pkg.sv
 ../../../../../../../bench/verilog/tests/math/calculus/ntm_calculus_stimulus.sv

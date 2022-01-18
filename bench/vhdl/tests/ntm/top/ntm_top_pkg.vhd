@@ -47,7 +47,7 @@ package ntm_top_pkg is
   -----------------------------------------------------------------------
 
   -- SYSTEM-SIZE
-  constant DATA_SIZE : integer := 512;
+  constant DATA_SIZE : integer := 128;
 
   constant CONTROL_X_SIZE : integer := 3;
   constant CONTROL_Y_SIZE : integer := 3;
@@ -103,20 +103,6 @@ package ntm_top_pkg is
 
   constant VECTOR_SAMPLE_A : vector_buffer := (FOUR, NINE, THREE);
   constant VECTOR_SAMPLE_B : vector_buffer := (THREE, NINE, ZERO);
-
-  -----------------------------------------------------------------------
-  -- Constants
-  -----------------------------------------------------------------------
-
-  -- SYSTEM-SIZE
-  constant DATA_SIZE : integer := 512;
-
-  constant X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
-  constant Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
-  constant N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
-  constant W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
-  constant L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
-  constant R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
   -- FUNCTIONALITY
   signal STIMULUS_NTM_TOP_TEST   : boolean := false;

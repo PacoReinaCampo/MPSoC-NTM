@@ -26,8 +26,11 @@
 ../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_divider.vhd
 
 ../../../../../../../rtl/vhdl/math/calculus/scalar/ntm_scalar_differentiation.vhd
+../../../../../../../rtl/vhdl/math/calculus/scalar/ntm_scalar_integration.vhd
 ../../../../../../../rtl/vhdl/math/calculus/vector/ntm_vector_differentiation.vhd
+../../../../../../../rtl/vhdl/math/calculus/vector/ntm_vector_integration.vhd
 ../../../../../../../rtl/vhdl/math/calculus/matrix/ntm_matrix_differentiation.vhd
+../../../../../../../rtl/vhdl/math/calculus/matrix/ntm_matrix_integration.vhd
 
 ../../../../../../../bench/vhdl/tests/math/calculus/ntm_calculus_pkg.vhd
 ../../../../../../../bench/vhdl/tests/math/calculus/ntm_calculus_stimulus.vhd

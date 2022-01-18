@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-package ntm_function_pkg;
+package ntm_calculus_pkg;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -60,18 +60,27 @@ package ntm_function_pkg;
 
   // SCALAR-FUNCTIONALITY
   parameter STIMULUS_NTM_SCALAR_DIFFERENTIATION_TEST=0;
+  parameter STIMULUS_NTM_SCALAR_INTEGRATION_TEST=0;
   parameter STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_0=0;
+  parameter STIMULUS_NTM_SCALAR_INTEGRATION_CASE_0=0;
   parameter STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_1=0;
+  parameter STIMULUS_NTM_SCALAR_INTEGRATION_CASE_1=0;
 
   // VECTOR-FUNCTIONALITY
   parameter STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST=0;
+  parameter STIMULUS_NTM_VECTOR_INTEGRATION_TEST=0;
   parameter STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_0=0;
+  parameter STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0=0;
   parameter STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_1=0;
+  parameter STIMULUS_NTM_VECTOR_INTEGRATION_CASE_1=0;
 
   // MATRIX-FUNCTIONALITY
   parameter STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST=0;
+  parameter STIMULUS_NTM_MATRIX_INTEGRATION_TEST=0;
   parameter STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0=0;
+  parameter STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0=0;
   parameter STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1=0;
+  parameter STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1=0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals

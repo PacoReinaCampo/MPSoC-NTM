@@ -1234,6 +1234,32 @@ package ntm_math_pkg is
       );
   end component;
 
+  component ntm_scalar_integration is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_IN_ENABLE : in std_logic;
+
+      DATA_OUT_ENABLE : out std_logic;
+
+      -- DATA
+      PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
   component ntm_vector_differentiation is
     generic (
       DATA_SIZE    : integer := 128;
@@ -1263,7 +1289,68 @@ package ntm_math_pkg is
       );
   end component;
 
+  component ntm_vector_integration is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_IN_VECTOR_ENABLE : in std_logic;
+      DATA_IN_SCALAR_ENABLE : in std_logic;
+
+      DATA_OUT_VECTOR_ENABLE : out std_logic;
+      DATA_OUT_SCALAR_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
   component ntm_matrix_differentiation is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_IN_MATRIX_ENABLE : in std_logic;
+      DATA_IN_VECTOR_ENABLE : in std_logic;
+      DATA_IN_SCALAR_ENABLE : in std_logic;
+
+      DATA_OUT_MATRIX_ENABLE : out std_logic;
+      DATA_OUT_VECTOR_ENABLE : out std_logic;
+      DATA_OUT_SCALAR_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_matrix_integration is
     generic (
       DATA_SIZE    : integer := 128;
       CONTROL_SIZE : integer := 64

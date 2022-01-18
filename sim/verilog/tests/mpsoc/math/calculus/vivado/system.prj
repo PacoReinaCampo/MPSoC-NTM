@@ -25,8 +25,11 @@ sv work ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_mult
 sv work ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_divider.sv
 
 sv work ../../../../../../../rtl/verilog/math/calculus/scalar/ntm_scalar_differentiation.sv
+sv work ../../../../../../../rtl/verilog/math/calculus/scalar/ntm_scalar_integration.sv
 sv work ../../../../../../../rtl/verilog/math/calculus/vector/ntm_vector_differentiation.sv
+sv work ../../../../../../../rtl/verilog/math/calculus/vector/ntm_vector_integration.sv
 sv work ../../../../../../../rtl/verilog/math/calculus/matrix/ntm_matrix_differentiation.sv
+sv work ../../../../../../../rtl/verilog/math/calculus/matrix/ntm_matrix_integration.sv
 
 sv work ../../../../../../../bench/verilog/tests/math/calculus/ntm_calculus_pkg.sv
 sv work ../../../../../../../bench/verilog/tests/math/calculus/ntm_calculus_stimulus.sv

@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_function_testbench;
+module ntm_calculus_testbench;
 
   ///////////////////////////////////////////////////////////////////////
   // Types
@@ -60,18 +60,27 @@ module ntm_function_testbench;
 
   // SCALAR-FUNCTIONALITY
   parameter STIMULUS_NTM_SCALAR_DIFFERENTIATION_TEST=0;
+  parameter STIMULUS_NTM_SCALAR_INTEGRATION_TEST=0;
   parameter STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_0=0;
+  parameter STIMULUS_NTM_SCALAR_INTEGRATION_CASE_0=0;
   parameter STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_1=0;
+  parameter STIMULUS_NTM_SCALAR_INTEGRATION_CASE_1=0;
 
   // VECTOR-FUNCTIONALITY
   parameter STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST=0;
+  parameter STIMULUS_NTM_VECTOR_INTEGRATION_TEST=0;
   parameter STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_0=0;
+  parameter STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0=0;
   parameter STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_1=0;
+  parameter STIMULUS_NTM_VECTOR_INTEGRATION_CASE_1=0;
 
   // MATRIX-FUNCTIONALITY
   parameter STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST=0;
+  parameter STIMULUS_NTM_MATRIX_INTEGRATION_TEST=0;
   parameter STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0=0;
+  parameter STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0=0;
   parameter STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1=0;
+  parameter STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1=0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -148,7 +157,7 @@ module ntm_function_testbench;
   // Body
   ///////////////////////////////////////////////////////////////////////
 
-  ntm_function_stimulus #(
+  ntm_calculus_stimulus #(
     // SYSTEM-SIZE
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE),
@@ -162,18 +171,27 @@ module ntm_function_testbench;
 
     // SCALAR-FUNCTIONALITY
     .STIMULUS_NTM_SCALAR_DIFFERENTIATION_TEST(STIMULUS_NTM_SCALAR_DIFFERENTIATION_TEST),
+    .STIMULUS_NTM_SCALAR_INTEGRATION_TEST(STIMULUS_NTM_SCALAR_INTEGRATION_TEST),
     .STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_0(STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_0),
+    .STIMULUS_NTM_SCALAR_INTEGRATION_CASE_0(STIMULUS_NTM_SCALAR_INTEGRATION_CASE_0),
     .STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_1(STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_1),
+    .STIMULUS_NTM_SCALAR_INTEGRATION_CASE_1(STIMULUS_NTM_SCALAR_INTEGRATION_CASE_1),
 
     // VECTOR-FUNCTIONALITY
     .STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST(STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST),
+    .STIMULUS_NTM_VECTOR_INTEGRATION_TEST(STIMULUS_NTM_VECTOR_INTEGRATION_TEST),
     .STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_0(STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_0),
+    .STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0(STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0),
     .STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_1(STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_1),
+    .STIMULUS_NTM_VECTOR_INTEGRATION_CASE_1(STIMULUS_NTM_VECTOR_INTEGRATION_CASE_1),
 
     // MATRIX-FUNCTIONALITY
     .STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST(STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST),
+    .STIMULUS_NTM_MATRIX_INTEGRATION_TEST(STIMULUS_NTM_MATRIX_INTEGRATION_TEST),
     .STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0(STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0),
-    .STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1(STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1)
+    .STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0(STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0),
+    .STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1(STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1),
+    .STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1(STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1)
   )
   function_stimulus(
     // GLOBAL
@@ -186,16 +204,33 @@ module ntm_function_testbench;
 
     // SCALAR DIFFERENTIATION
     // CONTROL
-    .SCALAR_DIFFERENTIATION_START(),
-    .SCALAR_DIFFERENTIATION_READY(),
+    .SCALAR_DIFFERENTIATION_START(start_scalar_differentiation),
+    .SCALAR_DIFFERENTIATION_READY(ready_scalar_differentiation),
 
-    .SCALAR_DIFFERENTIATION_DATA_IN_ENABLE(),
+    .SCALAR_DIFFERENTIATION_DATA_IN_ENABLE(data_in_enable_scalar_differentiation),
 
-    .SCALAR_DIFFERENTIATION_DATA_OUT_ENABLE(),
+    .SCALAR_DIFFERENTIATION_DATA_OUT_ENABLE(data_out_enable_scalar_differentiation),
 
     // DATA
-    .SCALAR_DIFFERENTIATION_DATA_IN(),
-    .SCALAR_DIFFERENTIATION_DATA_OUT(),
+    .SCALAR_DIFFERENTIATION_PERIOD_IN(period_in_scalar_differentiation),
+    .SCALAR_DIFFERENTIATION_LENGTH_IN(length_in_scalar_differentiation),
+    .SCALAR_DIFFERENTIATION_DATA_IN(data_in_scalar_differentiation),
+    .SCALAR_DIFFERENTIATION_DATA_OUT(data_out_scalar_differentiation),
+
+    // SCALAR INTEGRATION
+    // CONTROL
+    .SCALAR_INTEGRATION_START(start_scalar_integration),
+    .SCALAR_INTEGRATION_READY(ready_scalar_integration),
+
+    .SCALAR_INTEGRATION_DATA_IN_ENABLE(data_in_enable_scalar_integration),
+
+    .SCALAR_INTEGRATION_DATA_OUT_ENABLE(data_out_enable_scalar_integration),
+
+    // DATA
+    .SCALAR_INTEGRATION_PERIOD_IN(period_in_scalar_integration),
+    .SCALAR_INTEGRATION_LENGTH_IN(length_in_scalar_integration),
+    .SCALAR_INTEGRATION_DATA_IN(data_in_scalar_integration),
+    .SCALAR_INTEGRATION_DATA_OUT(data_out_scalar_integration),
 
     ///////////////////////////////////////////////////////////////////////
     // STIMULUS VECTOR
@@ -203,19 +238,39 @@ module ntm_function_testbench;
 
     // VECTOR DIFFERENTIATION
     // CONTROL
-    .VECTOR_DIFFERENTIATION_START(),
-    .VECTOR_DIFFERENTIATION_READY(),
+    .VECTOR_DIFFERENTIATION_START(start_vector_differentiation),
+    .VECTOR_DIFFERENTIATION_READY(ready_vector_differentiation),
 
-    .VECTOR_DIFFERENTIATION_DATA_IN_VECTOR_ENABLE(),
-    .VECTOR_DIFFERENTIATION_DATA_IN_SCALAR_ENABLE(),
+    .VECTOR_DIFFERENTIATION_DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_differentiation),
+    .VECTOR_DIFFERENTIATION_DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_differentiation),
 
-    .VECTOR_DIFFERENTIATION_DATA_OUT_VECTOR_ENABLE(),
-    .VECTOR_DIFFERENTIATION_DATA_OUT_SCALAR_ENABLE(),
+    .VECTOR_DIFFERENTIATION_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_differentiation),
+    .VECTOR_DIFFERENTIATION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_differentiation),
 
     // DATA
-    .VECTOR_DIFFERENTIATION_SIZE_IN(),
-    .VECTOR_DIFFERENTIATION_DATA_IN(),
-    .VECTOR_DIFFERENTIATION_DATA_OUT(),
+    .VECTOR_DIFFERENTIATION_SIZE_IN(size_in_vector_differentiation),
+    .VECTOR_DIFFERENTIATION_PERIOD_IN(period_in_vector_differentiation),
+    .VECTOR_DIFFERENTIATION_LENGTH_IN(length_in_vector_differentiation),
+    .VECTOR_DIFFERENTIATION_DATA_IN(data_in_vector_differentiation),
+    .VECTOR_DIFFERENTIATION_DATA_OUT(data_out_vector_differentiation),
+
+    // VECTOR INTEGRATION
+    // CONTROL
+    .VECTOR_INTEGRATION_START(start_vector_integration),
+    .VECTOR_INTEGRATION_READY(ready_vector_integration),
+
+    .VECTOR_INTEGRATION_DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_integration),
+    .VECTOR_INTEGRATION_DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_integration),
+
+    .VECTOR_INTEGRATION_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_integration),
+    .VECTOR_INTEGRATION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_integration),
+
+    // DATA
+    .VECTOR_INTEGRATION_SIZE_IN(size_in_vector_integration),
+    .VECTOR_INTEGRATION_PERIOD_IN(period_in_vector_integration),
+    .VECTOR_INTEGRATION_LENGTH_IN(length_in_vector_integration),
+    .VECTOR_INTEGRATION_DATA_IN(data_in_vector_integration),
+    .VECTOR_INTEGRATION_DATA_OUT(data_out_vector_integration),
 
     ///////////////////////////////////////////////////////////////////////
     // STIMULUS MATRIX
@@ -224,26 +279,44 @@ module ntm_function_testbench;
     // MATRIX DIFFERENTIATION
     // CONTROL
     .MATRIX_DIFFERENTIATION_START(start_matrix_differentiation),
-    .MATRIX_DIFFERENTIATION_READY(),
+    .MATRIX_DIFFERENTIATION_READY(ready_matrix_differentiation),
 
-    .MATRIX_DIFFERENTIATION_DATA_IN_I_ENABLE(),
-    .MATRIX_DIFFERENTIATION_DATA_IN_J_ENABLE(),
-    .MATRIX_DIFFERENTIATION_DATA_OUT_I_ENABLE(),
-    .MATRIX_DIFFERENTIATION_DATA_OUT_J_ENABLE(),
+    .MATRIX_DIFFERENTIATION_DATA_IN_MATRIX_ENABLE(data_in_matrix_enable_matrix_differentiation),
+    .MATRIX_DIFFERENTIATION_DATA_IN_VECTOR_ENABLE(data_in_vector_enable_matrix_differentiation),
+    .MATRIX_DIFFERENTIATION_DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_matrix_differentiation),
 
-    .MATRIX_DIFFERENTIATION_DATA_IN_MATRIX_ENABLE(),
-    .MATRIX_DIFFERENTIATION_DATA_IN_VECTOR_ENABLE(),
-    .MATRIX_DIFFERENTIATION_DATA_IN_SCALAR_ENABLE(),
-
-    .MATRIX_DIFFERENTIATION_DATA_OUT_MATRIX_ENABLE(),
-    .MATRIX_DIFFERENTIATION_DATA_OUT_VECTOR_ENABLE(),
-    .MATRIX_DIFFERENTIATION_DATA_OUT_SCALAR_ENABLE(),
+    .MATRIX_DIFFERENTIATION_DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_differentiation),
+    .MATRIX_DIFFERENTIATION_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_differentiation),
+    .MATRIX_DIFFERENTIATION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_differentiation),
 
     // DATA
-    .MATRIX_DIFFERENTIATION_SIZE_I_IN(),
-    .MATRIX_DIFFERENTIATION_SIZE_J_IN(),
-    .MATRIX_DIFFERENTIATION_DATA_IN(),
-    .MATRIX_DIFFERENTIATION_DATA_OUT()
+    .MATRIX_DIFFERENTIATION_SIZE_I_IN(size_i_in_matrix_differentiation),
+    .MATRIX_DIFFERENTIATION_SIZE_J_IN(size_j_in_matrix_differentiation),
+    .MATRIX_DIFFERENTIATION_PERIOD_IN(period_in_matrix_differentiation),
+    .MATRIX_DIFFERENTIATION_LENGTH_IN(length_in_matrix_differentiation),
+    .MATRIX_DIFFERENTIATION_DATA_IN(data_in_matrix_differentiation),
+    .MATRIX_DIFFERENTIATION_DATA_OUT(data_out_matrix_differentiation),
+
+    // MATRIX INTEGRATION
+    // CONTROL
+    .MATRIX_INTEGRATION_START(start_matrix_integration),
+    .MATRIX_INTEGRATION_READY(ready_matrix_integration),
+
+    .MATRIX_INTEGRATION_DATA_IN_MATRIX_ENABLE(data_in_matrix_enable_matrix_integration),
+    .MATRIX_INTEGRATION_DATA_IN_VECTOR_ENABLE(data_in_vector_enable_matrix_integration),
+    .MATRIX_INTEGRATION_DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_matrix_integration),
+
+    .MATRIX_INTEGRATION_DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_integration),
+    .MATRIX_INTEGRATION_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_integration),
+    .MATRIX_INTEGRATION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_integration),
+
+    // DATA
+    .MATRIX_INTEGRATION_SIZE_I_IN(size_i_in_matrix_integration),
+    .MATRIX_INTEGRATION_SIZE_J_IN(size_j_in_matrix_integration),
+    .MATRIX_INTEGRATION_PERIOD_IN(period_in_matrix_integration),
+    .MATRIX_INTEGRATION_LENGTH_IN(length_in_matrix_integration),
+    .MATRIX_INTEGRATION_DATA_IN(data_in_matrix_integration),
+    .MATRIX_INTEGRATION_DATA_OUT(data_out_matrix_integration)
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -272,6 +345,30 @@ module ntm_function_testbench;
     .LENGTH_IN(length_in_scalar_differentiation),
     .DATA_IN(data_in_scalar_differentiation),
     .DATA_OUT(data_out_scalar_differentiation)
+  );
+
+  // SCALAR INTEGRATION
+  ntm_scalar_integration_function #(
+    .DATA_SIZE(DATA_SIZE),
+    .CONTROL_SIZE(CONTROL_SIZE)
+  )
+  scalar_integration_function(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_scalar_integration),
+    .READY(ready_scalar_integration),
+
+    .DATA_IN_ENABLE(data_in_enable_scalar_integration),
+    .DATA_OUT_ENABLE(data_out_enable_scalar_integration),
+
+    // DATA
+    .PERIOD_IN(period_in_scalar_integration),
+    .LENGTH_IN(length_in_scalar_integration),
+    .DATA_IN(data_in_scalar_integration),
+    .DATA_OUT(data_out_scalar_integration)
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -303,6 +400,33 @@ module ntm_function_testbench;
     .LENGTH_IN(length_in_vector_differentiation),
     .DATA_IN(data_in_vector_differentiation),
     .DATA_OUT(data_out_vector_differentiation)
+  );
+
+  // VECTOR INTEGRATION
+  ntm_vector_integration_function #(
+    .DATA_SIZE(DATA_SIZE),
+    .CONTROL_SIZE(CONTROL_SIZE)
+  )
+  vector_integration_function(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_vector_integration),
+    .READY(ready_vector_integration),
+
+    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_integration),
+    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_integration),
+    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_integration),
+    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_integration),
+
+    // DATA
+    .SIZE_IN(size_in_vector_integration),
+    .PERIOD_IN(period_in_vector_integration),
+    .LENGTH_IN(length_in_vector_integration),
+    .DATA_IN(data_in_vector_integration),
+    .DATA_OUT(data_out_vector_integration)
   );
 
   ///////////////////////////////////////////////////////////////////////
@@ -337,6 +461,36 @@ module ntm_function_testbench;
     .LENGTH_IN(length_in_matrix_differentiation),
     .DATA_IN(data_in_matrix_differentiation),
     .DATA_OUT(data_out_matrix_differentiation)
+  );
+
+  // MATRIX INTEGRATION
+  ntm_matrix_integration_function #(
+    .DATA_SIZE(DATA_SIZE),
+    .CONTROL_SIZE(CONTROL_SIZE)
+  )
+  matrix_integration_function(
+    // GLOBAL
+    .CLK(CLK),
+    .RST(RST),
+
+    // CONTROL
+    .START(start_matrix_integration),
+    .READY(ready_matrix_integration),
+
+    .DATA_IN_MATRIX_ENABLE(data_in_matrix_enable_matrix_integration),
+    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_matrix_integration),
+    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_matrix_integration),
+    .DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_integration),
+    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_integration),
+    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_integration),
+
+    // DATA
+    .SIZE_I_IN(size_i_in_matrix_integration),
+    .SIZE_J_IN(size_j_in_matrix_integration),
+    .PERIOD_IN(period_in_matrix_integration),
+    .LENGTH_IN(length_in_matrix_integration),
+    .DATA_IN(data_in_matrix_integration),
+    .DATA_OUT(data_out_matrix_integration)
   );
 
 endmodule

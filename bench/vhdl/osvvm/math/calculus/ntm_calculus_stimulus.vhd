@@ -43,9 +43,9 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
-use work.ntm_function_pkg.all;
+use work.ntm_calculus_pkg.all;
 
-entity ntm_function_stimulus is
+entity ntm_calculus_stimulus is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE    : integer := 128;
@@ -82,6 +82,21 @@ entity ntm_function_stimulus is
     SCALAR_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
+    -- SCALAR INTEGRATION
+    -- CONTROL
+    SCALAR_INTEGRATION_START : out std_logic;
+    SCALAR_INTEGRATION_READY : in  std_logic;
+
+    SCALAR_INTEGRATION_DATA_IN_ENABLE : out std_logic;
+
+    SCALAR_INTEGRATION_DATA_OUT_ENABLE : in std_logic;
+
+    -- DATA
+    SCALAR_INTEGRATION_PERIOD_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_INTEGRATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SCALAR_INTEGRATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
     -----------------------------------------------------------------------
     -- STIMULUS VECTOR
     -----------------------------------------------------------------------
@@ -103,6 +118,24 @@ entity ntm_function_stimulus is
     VECTOR_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- VECTOR INTEGRATION
+    -- CONTROL
+    VECTOR_INTEGRATION_START : out std_logic;
+    VECTOR_INTEGRATION_READY : in  std_logic;
+
+    VECTOR_INTEGRATION_DATA_IN_VECTOR_ENABLE : out std_logic;
+    VECTOR_INTEGRATION_DATA_IN_SCALAR_ENABLE : out std_logic;
+
+    VECTOR_INTEGRATION_DATA_OUT_VECTOR_ENABLE : in std_logic;
+    VECTOR_INTEGRATION_DATA_OUT_SCALAR_ENABLE : in std_logic;
+
+    -- DATA
+    VECTOR_INTEGRATION_PERIOD_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_INTEGRATION_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_INTEGRATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_INTEGRATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -----------------------------------------------------------------------
     -- STIMULUS MATRIX
@@ -127,11 +160,32 @@ entity ntm_function_stimulus is
     MATRIX_DIFFERENTIATION_PERIOD_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
+    MATRIX_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- MATRIX INTEGRATION
+    -- CONTROL
+    MATRIX_INTEGRATION_START : out std_logic;
+    MATRIX_INTEGRATION_READY : in  std_logic;
+
+    MATRIX_INTEGRATION_DATA_IN_MATRIX_ENABLE : out std_logic;
+    MATRIX_INTEGRATION_DATA_IN_VECTOR_ENABLE : out std_logic;
+    MATRIX_INTEGRATION_DATA_IN_SCALAR_ENABLE : out std_logic;
+
+    MATRIX_INTEGRATION_DATA_OUT_MATRIX_ENABLE : in std_logic;
+    MATRIX_INTEGRATION_DATA_OUT_VECTOR_ENABLE : in std_logic;
+    MATRIX_INTEGRATION_DATA_OUT_SCALAR_ENABLE : in std_logic;
+
+    -- DATA
+    MATRIX_INTEGRATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_INTEGRATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_INTEGRATION_PERIOD_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_INTEGRATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_INTEGRATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
-architecture ntm_function_stimulus_architecture of ntm_function_stimulus is
+architecture ntm_calculus_stimulus_architecture of ntm_calculus_stimulus is
 
   -----------------------------------------------------------------------
   -- Types

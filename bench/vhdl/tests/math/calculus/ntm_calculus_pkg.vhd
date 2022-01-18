@@ -40,7 +40,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-package ntm_function_pkg is
+package ntm_calculus_pkg is
 
   -----------------------------------------------------------------------
   -- Types
@@ -105,31 +105,40 @@ package ntm_function_pkg is
   constant VECTOR_SAMPLE_B : vector_buffer := (THREE, NINE, ZERO);
 
   -- SCALAR-FUNCTIONALITY
-  signal STIMULUS_NTM_SCALAR_DIFFERENTIATION_TEST   : boolean := false;
+  signal STIMULUS_NTM_SCALAR_DIFFERENTIATION_TEST : boolean := false;
+  signal STIMULUS_NTM_SCALAR_INTEGRATION_TEST     : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_0   : boolean := false;
+  signal STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_SCALAR_INTEGRATION_CASE_0     : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_1   : boolean := false;
+  signal STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_SCALAR_INTEGRATION_CASE_1     : boolean := false;
 
   -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST   : boolean := false;
+  signal STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST : boolean := false;
+  signal STIMULUS_NTM_VECTOR_INTEGRATION_TEST     : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_0   : boolean := false;
+  signal STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0     : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_1   : boolean := false;
+  signal STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_VECTOR_INTEGRATION_CASE_1     : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
-  signal STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST   : boolean := false;
+  signal STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST : boolean := false;
+  signal STIMULUS_NTM_MATRIX_INTEGRATION_TEST     : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0   : boolean := false;
+  signal STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0     : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1   : boolean := false;
+  signal STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1     : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
 
-  component ntm_function_stimulus is
+  component ntm_calculus_stimulus is
     generic (
       -- SYSTEM-SIZE
       DATA_SIZE    : integer := 128;
@@ -166,6 +175,21 @@ package ntm_function_pkg is
       SCALAR_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- SCALAR INTEGRATION
+      -- CONTROL
+      SCALAR_INTEGRATION_START : out std_logic;
+      SCALAR_INTEGRATION_READY : in  std_logic;
+
+      SCALAR_INTEGRATION_DATA_IN_ENABLE : out std_logic;
+
+      SCALAR_INTEGRATION_DATA_OUT_ENABLE : in std_logic;
+
+      -- DATA
+      SCALAR_INTEGRATION_PERIOD_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_INTEGRATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SCALAR_INTEGRATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
       -----------------------------------------------------------------------
       -- STIMULUS VECTOR
       -----------------------------------------------------------------------
@@ -187,6 +211,24 @@ package ntm_function_pkg is
       VECTOR_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       VECTOR_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- VECTOR INTEGRATION
+      -- CONTROL
+      VECTOR_INTEGRATION_START : out std_logic;
+      VECTOR_INTEGRATION_READY : in  std_logic;
+
+      VECTOR_INTEGRATION_DATA_IN_VECTOR_ENABLE : out std_logic;
+      VECTOR_INTEGRATION_DATA_IN_SCALAR_ENABLE : out std_logic;
+
+      VECTOR_INTEGRATION_DATA_OUT_VECTOR_ENABLE : in std_logic;
+      VECTOR_INTEGRATION_DATA_OUT_SCALAR_ENABLE : in std_logic;
+
+      -- DATA
+      VECTOR_INTEGRATION_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_INTEGRATION_PERIOD_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_INTEGRATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_INTEGRATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
       -- STIMULUS MATRIX
@@ -211,7 +253,28 @@ package ntm_function_pkg is
       MATRIX_DIFFERENTIATION_PERIOD_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      MATRIX_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- MATRIX INTEGRATION
+      -- CONTROL
+      MATRIX_INTEGRATION_START : out std_logic;
+      MATRIX_INTEGRATION_READY : in  std_logic;
+
+      MATRIX_INTEGRATION_DATA_IN_MATRIX_ENABLE : out std_logic;
+      MATRIX_INTEGRATION_DATA_IN_VECTOR_ENABLE : out std_logic;
+      MATRIX_INTEGRATION_DATA_IN_SCALAR_ENABLE : out std_logic;
+
+      MATRIX_INTEGRATION_DATA_OUT_MATRIX_ENABLE : in std_logic;
+      MATRIX_INTEGRATION_DATA_OUT_VECTOR_ENABLE : in std_logic;
+      MATRIX_INTEGRATION_DATA_OUT_SCALAR_ENABLE : in std_logic;
+
+      -- DATA
+      MATRIX_INTEGRATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_INTEGRATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_INTEGRATION_PERIOD_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_INTEGRATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_INTEGRATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -219,4 +282,4 @@ package ntm_function_pkg is
   -- Functions
   -----------------------------------------------------------------------
 
-end ntm_function_pkg;
+end ntm_calculus_pkg;

@@ -42,6 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 use work.dnc_core_pkg.all;
 use work.ntm_lstm_controller_pkg.all;
@@ -188,19 +189,19 @@ architecture dnc_write_interface_vector_architecture of dnc_write_interface_vect
 
   -- SCALAR PRODUCT
   -- CONTROL
-  signal start_scalar_product : std_logic;
-  signal ready_scalar_product : std_logic;
+  signal start_dot_product : std_logic;
+  signal ready_dot_product : std_logic;
 
-  signal data_a_in_enable_scalar_product : std_logic;
-  signal data_b_in_enable_scalar_product : std_logic;
+  signal data_a_in_enable_dot_product : std_logic;
+  signal data_b_in_enable_dot_product : std_logic;
 
-  signal data_out_enable_scalar_product : std_logic;
+  signal data_out_enable_dot_product : std_logic;
 
   -- DATA
-  signal length_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_product  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_dot_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_dot_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_dot_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_dot_product  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX PRODUCT
   -- CONTROL
@@ -261,48 +262,48 @@ begin
           -- beta(t) = Wbeta(t;l)·h(t;l)
 
           -- Control Inputs
-          data_a_in_enable_scalar_product <= WBETA_IN_ENABLE;
-          data_b_in_enable_scalar_product <= H_IN_ENABLE;
+          data_a_in_enable_dot_product <= WBETA_IN_ENABLE;
+          data_b_in_enable_dot_product <= H_IN_ENABLE;
 
           -- Data Inputs
-          length_in_scalar_product <= SIZE_L_IN;
-          data_a_in_scalar_product <= WBETA_IN;
-          data_b_in_scalar_product <= H_IN;
+          length_in_dot_product <= SIZE_L_IN;
+          data_a_in_dot_product <= WBETA_IN;
+          data_b_in_dot_product <= H_IN;
 
           -- Data Outputs
-          BETA_OUT <= data_out_scalar_product;
+          BETA_OUT <= data_out_dot_product;
 
         when SCALAR_SECOND_PRODUCT_STATE =>  -- STEP 2
 
           -- ga(t) = Wga(t;l)·h(t;l)
 
           -- Control Inputs
-          data_a_in_enable_scalar_product <= WGA_IN_ENABLE;
-          data_b_in_enable_scalar_product <= H_IN_ENABLE;
+          data_a_in_enable_dot_product <= WGA_IN_ENABLE;
+          data_b_in_enable_dot_product <= H_IN_ENABLE;
 
           -- Data Inputs
-          length_in_scalar_product <= SIZE_L_IN;
-          data_a_in_scalar_product <= WGA_IN;
-          data_b_in_scalar_product <= H_IN;
+          length_in_dot_product <= SIZE_L_IN;
+          data_a_in_dot_product <= WGA_IN;
+          data_b_in_dot_product <= H_IN;
 
           -- Data Outputs
-          GA_OUT <= data_out_scalar_product;
+          GA_OUT <= data_out_dot_product;
 
         when SCALAR_THIRD_PRODUCT_STATE =>  -- STEP 3
 
           -- gw(t) = Wgw(t;l)·h(t;l)
 
           -- Control Inputs
-          data_a_in_enable_scalar_product <= WGW_IN_ENABLE;
-          data_b_in_enable_scalar_product <= H_IN_ENABLE;
+          data_a_in_enable_dot_product <= WGW_IN_ENABLE;
+          data_b_in_enable_dot_product <= H_IN_ENABLE;
 
           -- Data Inputs
-          length_in_scalar_product <= SIZE_L_IN;
-          data_a_in_scalar_product <= WGW_IN;
-          data_b_in_scalar_product <= H_IN;
+          length_in_dot_product <= SIZE_L_IN;
+          data_a_in_dot_product <= WGW_IN;
+          data_b_in_dot_product <= H_IN;
 
           -- Data Outputs
-          GW_OUT <= data_out_scalar_product;
+          GW_OUT <= data_out_dot_product;
 
         when others =>
           -- FSM Control
@@ -429,7 +430,7 @@ begin
   end process;
 
   -- SCALAR PRODUCT
-  scalar_product : ntm_scalar_product
+  dot_product : ntm_dot_product
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -440,19 +441,19 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_product,
-      READY => ready_scalar_product,
+      START => start_dot_product,
+      READY => ready_dot_product,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_scalar_product,
-      DATA_B_IN_ENABLE => data_b_in_enable_scalar_product,
+      DATA_A_IN_ENABLE => data_a_in_enable_dot_product,
+      DATA_B_IN_ENABLE => data_b_in_enable_dot_product,
 
-      DATA_OUT_ENABLE => data_out_enable_scalar_product,
+      DATA_OUT_ENABLE => data_out_enable_dot_product,
 
       -- DATA
-      LENGTH_IN => length_in_scalar_product,
-      DATA_A_IN => data_a_in_scalar_product,
-      DATA_B_IN => data_b_in_scalar_product,
-      DATA_OUT  => data_out_scalar_product
+      LENGTH_IN => length_in_dot_product,
+      DATA_A_IN => data_a_in_dot_product,
+      DATA_B_IN => data_b_in_dot_product,
+      DATA_OUT  => data_out_dot_product
       );
 
   -- MATRIX PRODUCT
