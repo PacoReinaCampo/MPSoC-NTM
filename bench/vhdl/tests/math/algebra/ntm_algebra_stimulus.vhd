@@ -699,7 +699,7 @@ begin
         index_j_loop <= ZERO_CONTROL;
 
         MATRIX_TRANSPOSE_FIRST_RUN : loop
-          if ((MATRIX_TRANSPOSE_DATA_I_ENABLE = '1') and (MATRIX_TRANSPOSE_DATA_J_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(MATRIX_TRANSPOSE_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_TRANSPOSE_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          if ((MATRIX_TRANSPOSE_DATA_J_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(MATRIX_TRANSPOSE_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_TRANSPOSE_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_TRANSPOSE_DATA_IN_I_ENABLE <= '1';
             MATRIX_TRANSPOSE_DATA_IN_J_ENABLE <= '1';
@@ -710,7 +710,7 @@ begin
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_TRANSPOSE_DATA_I_ENABLE = '1') and (MATRIX_TRANSPOSE_DATA_J_ENABLE = '1') and (unsigned(index_i_loop) < unsigned(MATRIX_TRANSPOSE_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_TRANSPOSE_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_TRANSPOSE_DATA_J_ENABLE = '1') and (unsigned(index_i_loop) < unsigned(MATRIX_TRANSPOSE_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_TRANSPOSE_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_TRANSPOSE_DATA_IN_I_ENABLE <= '1';
             MATRIX_TRANSPOSE_DATA_IN_J_ENABLE <= '1';
@@ -721,7 +721,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_TRANSPOSE_DATA_J_ENABLE = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_TRANSPOSE_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif (((MATRIX_TRANSPOSE_DATA_J_ENABLE = '1') or (MATRIX_TRANSPOSE_START = '1')) and (unsigned(index_j_loop) < unsigned(MATRIX_TRANSPOSE_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_TRANSPOSE_DATA_IN_J_ENABLE <= '1';
 
@@ -759,7 +759,7 @@ begin
         index_j_loop <= ZERO_CONTROL;
 
         MATRIX_TRANSPOSE_SECOND_RUN : loop
-          if ((MATRIX_TRANSPOSE_DATA_I_ENABLE = '1') and (MATRIX_TRANSPOSE_DATA_J_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(MATRIX_TRANSPOSE_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_TRANSPOSE_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          if ((MATRIX_TRANSPOSE_DATA_J_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(MATRIX_TRANSPOSE_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_TRANSPOSE_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_TRANSPOSE_DATA_IN_I_ENABLE <= '1';
             MATRIX_TRANSPOSE_DATA_IN_J_ENABLE <= '1';
@@ -770,7 +770,7 @@ begin
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_TRANSPOSE_DATA_I_ENABLE = '1') and (MATRIX_TRANSPOSE_DATA_J_ENABLE = '1') and (unsigned(index_i_loop) < unsigned(MATRIX_TRANSPOSE_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_TRANSPOSE_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_TRANSPOSE_DATA_J_ENABLE = '1') and (unsigned(index_i_loop) < unsigned(MATRIX_TRANSPOSE_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_TRANSPOSE_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_TRANSPOSE_DATA_IN_I_ENABLE <= '1';
             MATRIX_TRANSPOSE_DATA_IN_J_ENABLE <= '1';
@@ -781,7 +781,7 @@ begin
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_TRANSPOSE_DATA_J_ENABLE = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_TRANSPOSE_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif (((MATRIX_TRANSPOSE_DATA_J_ENABLE = '1') or (MATRIX_TRANSPOSE_START = '1')) and (unsigned(index_j_loop) < unsigned(MATRIX_TRANSPOSE_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_TRANSPOSE_DATA_IN_J_ENABLE <= '1';
 

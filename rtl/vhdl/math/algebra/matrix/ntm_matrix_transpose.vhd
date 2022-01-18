@@ -177,21 +177,17 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            transpose_ctrl_fsm_int <= INPUT_I_STATE;
+            transpose_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
         when INPUT_I_STATE =>           -- STEP 1
 
-          if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) or ((unsigned(index_i_loop) = unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) = unsigned(ZERO_CONTROL)))) then
+          if ((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) then
             -- Data Inputs
             matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
 
             -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              transpose_ctrl_fsm_int <= ENDER_I_STATE;
-            else
-              transpose_ctrl_fsm_int <= ENDER_J_STATE;
-            end if;
+            transpose_ctrl_fsm_int <= ENDER_J_STATE;
           end if;
 
           -- Control Outputs
@@ -213,6 +209,7 @@ begin
           end if;
 
           -- Control Outputs
+          DATA_I_ENABLE <= '0';
           DATA_J_ENABLE <= '0';
 
         when ENDER_I_STATE =>           -- STEP 3
@@ -220,10 +217,6 @@ begin
           if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
             DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- Control Outputs
-            DATA_I_ENABLE <= '1';
-            DATA_J_ENABLE <= '1';
 
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
@@ -244,7 +237,7 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            transpose_ctrl_fsm_int <= INPUT_I_STATE;
+            transpose_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
         when ENDER_J_STATE =>           -- STEP 4
@@ -282,8 +275,10 @@ begin
         when CLEAN_J_STATE =>           -- STEP 6
 
           -- Control Outputs
+          DATA_I_ENABLE <= '0';
           DATA_J_ENABLE <= '0';
 
+          DATA_OUT_J_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
 
           -- FSM Control
