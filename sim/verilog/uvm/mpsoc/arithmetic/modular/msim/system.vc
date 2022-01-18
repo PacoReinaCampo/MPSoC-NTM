@@ -1,4 +1,4 @@
-../../../../../../../rtl/verilog/pkg/ntm_math_pkg.sv
+../../../../../../../rtl/verilog/pkg/ntm_arithmetic_pkg.sv
 
 ../../../../../../../rtl/verilog/arithmetic/modular/scalar/ntm_scalar_modular_mod.sv
 ../../../../../../../rtl/verilog/arithmetic/modular/scalar/ntm_scalar_modular_adder.sv

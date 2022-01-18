@@ -105,10 +105,8 @@ package ntm_function_pkg is
   constant VECTOR_SAMPLE_B : vector_buffer := (THREE, NINE, ZERO);
 
   -- SCALAR-FUNCTIONALITY
-  signal STIMULUS_NTM_SCALAR_CONVOLUTION_TEST       : boolean := false;
   signal STIMULUS_NTM_SCALAR_COSH_TEST              : boolean := false;
   signal STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_TEST : boolean := false;
-  signal STIMULUS_NTM_SCALAR_DIFFERENTIATION_TEST   : boolean := false;
   signal STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST     : boolean := false;
   signal STIMULUS_NTM_SCALAR_LOGARITHM_TEST         : boolean := false;
   signal STIMULUS_NTM_SCALAR_LOGISTIC_TEST          : boolean := false;
@@ -119,10 +117,8 @@ package ntm_function_pkg is
   signal STIMULUS_NTM_SCALAR_SUMMATION_TEST         : boolean := false;
   signal STIMULUS_NTM_SCALAR_TANH_TEST              : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_CONVOLUTION_CASE_0       : boolean := false;
   signal STIMULUS_NTM_SCALAR_COSH_CASE_0              : boolean := false;
   signal STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_0   : boolean := false;
   signal STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0     : boolean := false;
   signal STIMULUS_NTM_SCALAR_LOGARITHM_CASE_0         : boolean := false;
   signal STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0          : boolean := false;
@@ -133,10 +129,8 @@ package ntm_function_pkg is
   signal STIMULUS_NTM_SCALAR_SUMMATION_CASE_0         : boolean := false;
   signal STIMULUS_NTM_SCALAR_TANH_CASE_0              : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_CONVOLUTION_CASE_1       : boolean := false;
   signal STIMULUS_NTM_SCALAR_COSH_CASE_1              : boolean := false;
   signal STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_DIFFERENTIATION_CASE_1   : boolean := false;
   signal STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1     : boolean := false;
   signal STIMULUS_NTM_SCALAR_LOGARITHM_CASE_1         : boolean := false;
   signal STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1          : boolean := false;
@@ -148,10 +142,8 @@ package ntm_function_pkg is
   signal STIMULUS_NTM_SCALAR_TANH_CASE_1              : boolean := false;
 
   -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_NTM_VECTOR_CONVOLUTION_TEST       : boolean := false;
   signal STIMULUS_NTM_VECTOR_COSH_TEST              : boolean := false;
   signal STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_TEST : boolean := false;
-  signal STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST   : boolean := false;
   signal STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST     : boolean := false;
   signal STIMULUS_NTM_VECTOR_LOGARITHM_TEST         : boolean := false;
   signal STIMULUS_NTM_VECTOR_LOGISTIC_TEST          : boolean := false;
@@ -162,10 +154,8 @@ package ntm_function_pkg is
   signal STIMULUS_NTM_VECTOR_SUMMATION_TEST         : boolean := false;
   signal STIMULUS_NTM_VECTOR_TANH_TEST              : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_0       : boolean := false;
   signal STIMULUS_NTM_VECTOR_COSH_CASE_0              : boolean := false;
   signal STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_0   : boolean := false;
   signal STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0     : boolean := false;
   signal STIMULUS_NTM_VECTOR_LOGARITHM_CASE_0         : boolean := false;
   signal STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0          : boolean := false;
@@ -176,10 +166,8 @@ package ntm_function_pkg is
   signal STIMULUS_NTM_VECTOR_SUMMATION_CASE_0         : boolean := false;
   signal STIMULUS_NTM_VECTOR_TANH_CASE_0              : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_1       : boolean := false;
   signal STIMULUS_NTM_VECTOR_COSH_CASE_1              : boolean := false;
   signal STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_1   : boolean := false;
   signal STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_1     : boolean := false;
   signal STIMULUS_NTM_VECTOR_LOGARITHM_CASE_1         : boolean := false;
   signal STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1          : boolean := false;
@@ -191,10 +179,8 @@ package ntm_function_pkg is
   signal STIMULUS_NTM_VECTOR_TANH_CASE_1              : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
-  signal STIMULUS_NTM_MATRIX_CONVOLUTION_TEST       : boolean := false;
   signal STIMULUS_NTM_MATRIX_COSH_TEST              : boolean := false;
   signal STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_TEST : boolean := false;
-  signal STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST   : boolean := false;
   signal STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST     : boolean := false;
   signal STIMULUS_NTM_MATRIX_LOGARITHM_TEST         : boolean := false;
   signal STIMULUS_NTM_MATRIX_LOGISTIC_TEST          : boolean := false;
@@ -205,10 +191,8 @@ package ntm_function_pkg is
   signal STIMULUS_NTM_MATRIX_SUMMATION_TEST         : boolean := false;
   signal STIMULUS_NTM_MATRIX_TANH_TEST              : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_0       : boolean := false;
   signal STIMULUS_NTM_MATRIX_COSH_CASE_0              : boolean := false;
   signal STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0   : boolean := false;
   signal STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0     : boolean := false;
   signal STIMULUS_NTM_MATRIX_LOGARITHM_CASE_0         : boolean := false;
   signal STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0          : boolean := false;
@@ -219,10 +203,8 @@ package ntm_function_pkg is
   signal STIMULUS_NTM_MATRIX_SUMMATION_CASE_0         : boolean := false;
   signal STIMULUS_NTM_MATRIX_TANH_CASE_0              : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_1       : boolean := false;
   signal STIMULUS_NTM_MATRIX_COSH_CASE_1              : boolean := false;
   signal STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1   : boolean := false;
   signal STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1     : boolean := false;
   signal STIMULUS_NTM_MATRIX_LOGARITHM_CASE_1         : boolean := false;
   signal STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1          : boolean := false;
@@ -259,22 +241,6 @@ package ntm_function_pkg is
       -- STIMULUS SCALAR
       -----------------------------------------------------------------------
 
-      -- SCALAR CONVOLUTION
-      -- CONTROL
-      SCALAR_CONVOLUTION_START : out std_logic;
-      SCALAR_CONVOLUTION_READY : in  std_logic;
-
-      SCALAR_CONVOLUTION_DATA_A_IN_ENABLE : out std_logic;
-      SCALAR_CONVOLUTION_DATA_B_IN_ENABLE : out std_logic;
-
-      SCALAR_CONVOLUTION_DATA_OUT_ENABLE : in std_logic;
-
-      -- DATA
-      SCALAR_CONVOLUTION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SCALAR_CONVOLUTION_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_CONVOLUTION_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_CONVOLUTION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
       -- SCALAR COSH
       -- CONTROL
       SCALAR_COSH_START : out std_logic;
@@ -299,21 +265,6 @@ package ntm_function_pkg is
       SCALAR_COSINE_SIMILARITY_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_COSINE_SIMILARITY_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_COSINE_SIMILARITY_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- SCALAR DIFFERENTIATION
-      -- CONTROL
-      SCALAR_DIFFERENTIATION_START : out std_logic;
-      SCALAR_DIFFERENTIATION_READY : in  std_logic;
-
-      SCALAR_DIFFERENTIATION_DATA_IN_ENABLE : out std_logic;
-
-      SCALAR_DIFFERENTIATION_DATA_OUT_ENABLE : in std_logic;
-
-      -- DATA
-      SCALAR_DIFFERENTIATION_PERIOD_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SCALAR_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- SCALAR EXPONENTIATOR
       -- CONTROL
@@ -415,26 +366,6 @@ package ntm_function_pkg is
       -- STIMULUS VECTOR
       -----------------------------------------------------------------------
 
-      -- VECTOR CONVOLUTION
-      -- CONTROL
-      VECTOR_CONVOLUTION_START : out std_logic;
-      VECTOR_CONVOLUTION_READY : in  std_logic;
-
-      VECTOR_CONVOLUTION_DATA_A_IN_VECTOR_ENABLE : out std_logic;
-      VECTOR_CONVOLUTION_DATA_A_IN_SCALAR_ENABLE : out std_logic;
-      VECTOR_CONVOLUTION_DATA_B_IN_VECTOR_ENABLE : out std_logic;
-      VECTOR_CONVOLUTION_DATA_B_IN_SCALAR_ENABLE : out std_logic;
-
-      VECTOR_CONVOLUTION_DATA_OUT_VECTOR_ENABLE : in std_logic;
-      VECTOR_CONVOLUTION_DATA_OUT_SCALAR_ENABLE : in std_logic;
-
-      -- DATA
-      VECTOR_CONVOLUTION_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_CONVOLUTION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_CONVOLUTION_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_CONVOLUTION_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_CONVOLUTION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
       -- VECTOR COSH
       -- CONTROL
       VECTOR_COSH_START : out std_logic;
@@ -468,24 +399,6 @@ package ntm_function_pkg is
       VECTOR_COSINE_SIMILARITY_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_COSINE_SIMILARITY_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_COSINE_SIMILARITY_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- VECTOR DIFFERENTIATION
-      -- CONTROL
-      VECTOR_DIFFERENTIATION_START : out std_logic;
-      VECTOR_DIFFERENTIATION_READY : in  std_logic;
-
-      VECTOR_DIFFERENTIATION_DATA_IN_VECTOR_ENABLE : out std_logic;
-      VECTOR_DIFFERENTIATION_DATA_IN_SCALAR_ENABLE : out std_logic;
-
-      VECTOR_DIFFERENTIATION_DATA_OUT_VECTOR_ENABLE : in std_logic;
-      VECTOR_DIFFERENTIATION_DATA_OUT_SCALAR_ENABLE : in std_logic;
-
-      -- DATA
-      VECTOR_DIFFERENTIATION_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_DIFFERENTIATION_PERIOD_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- VECTOR EXPONENTIATOR
       -- CONTROL
@@ -626,30 +539,6 @@ package ntm_function_pkg is
       -- STIMULUS MATRIX
       -----------------------------------------------------------------------
 
-      -- MATRIX CONVOLUTION
-      -- CONTROL
-      MATRIX_CONVOLUTION_START : out std_logic;
-      MATRIX_CONVOLUTION_READY : in  std_logic;
-
-      MATRIX_CONVOLUTION_DATA_A_IN_MATRIX_ENABLE : out std_logic;
-      MATRIX_CONVOLUTION_DATA_A_IN_VECTOR_ENABLE : out std_logic;
-      MATRIX_CONVOLUTION_DATA_A_IN_SCALAR_ENABLE : out std_logic;
-      MATRIX_CONVOLUTION_DATA_B_IN_MATRIX_ENABLE : out std_logic;
-      MATRIX_CONVOLUTION_DATA_B_IN_VECTOR_ENABLE : out std_logic;
-      MATRIX_CONVOLUTION_DATA_B_IN_SCALAR_ENABLE : out std_logic;
-
-      MATRIX_CONVOLUTION_DATA_OUT_MATRIX_ENABLE : in std_logic;
-      MATRIX_CONVOLUTION_DATA_OUT_VECTOR_ENABLE : in std_logic;
-      MATRIX_CONVOLUTION_DATA_OUT_SCALAR_ENABLE : in std_logic;
-
-      -- DATA
-      MATRIX_CONVOLUTION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_CONVOLUTION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_CONVOLUTION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_CONVOLUTION_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_CONVOLUTION_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_CONVOLUTION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
       -- MATRIX COSH
       -- CONTROL
       MATRIX_COSH_START : out std_logic;
@@ -690,27 +579,6 @@ package ntm_function_pkg is
       MATRIX_COSINE_SIMILARITY_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_COSINE_SIMILARITY_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_COSINE_SIMILARITY_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- MATRIX DIFFERENTIATION
-      -- CONTROL
-      MATRIX_DIFFERENTIATION_START : out std_logic;
-      MATRIX_DIFFERENTIATION_READY : in  std_logic;
-
-      MATRIX_DIFFERENTIATION_DATA_IN_MATRIX_ENABLE : out std_logic;
-      MATRIX_DIFFERENTIATION_DATA_IN_VECTOR_ENABLE : out std_logic;
-      MATRIX_DIFFERENTIATION_DATA_IN_SCALAR_ENABLE : out std_logic;
-
-      MATRIX_DIFFERENTIATION_DATA_OUT_MATRIX_ENABLE : in std_logic;
-      MATRIX_DIFFERENTIATION_DATA_OUT_VECTOR_ENABLE : in std_logic;
-      MATRIX_DIFFERENTIATION_DATA_OUT_SCALAR_ENABLE : in std_logic;
-
-      -- DATA
-      MATRIX_DIFFERENTIATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_DIFFERENTIATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_DIFFERENTIATION_PERIOD_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- MATRIX EXPONENTIATOR
       -- CONTROL

@@ -42,6 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 use work.ntm_algebra_pkg.all;
 
@@ -62,6 +63,38 @@ entity ntm_algebra_stimulus is
     -- GLOBAL
     CLK : out std_logic;
     RST : out std_logic;
+
+    -- DOT PRODUCT
+    -- CONTROL
+    DOT_PRODUCT_START : out std_logic;
+    DOT_PRODUCT_READY : in  std_logic;
+
+    DOT_PRODUCT_DATA_A_IN_ENABLE : out std_logic;
+    DOT_PRODUCT_DATA_B_IN_ENABLE : out std_logic;
+
+    DOT_PRODUCT_DATA_OUT_ENABLE : in std_logic;
+
+    -- DATA
+    DOT_PRODUCT_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DOT_PRODUCT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DOT_PRODUCT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DOT_PRODUCT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- VECTOR TRANSPOSE
+    -- CONTROL
+    VECTOR_TRANSPOSE_START : out std_logic;
+    VECTOR_TRANSPOSE_READY : in  std_logic;
+
+    VECTOR_TRANSPOSE_DATA_IN_ENABLE : out std_logic;
+
+    VECTOR_TRANSPOSE_DATA_ENABLE : in std_logic;
+
+    VECTOR_TRANSPOSE_DATA_OUT_ENABLE : in std_logic;
+
+    -- DATA
+    VECTOR_TRANSPOSE_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- MATRIX PRODUCT
     -- CONTROL
@@ -107,38 +140,6 @@ entity ntm_algebra_stimulus is
     MATRIX_TRANSPOSE_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- SCALAR PRODUCT
-    -- CONTROL
-    SCALAR_PRODUCT_START : out std_logic;
-    SCALAR_PRODUCT_READY : in  std_logic;
-
-    SCALAR_PRODUCT_DATA_A_IN_ENABLE : out std_logic;
-    SCALAR_PRODUCT_DATA_B_IN_ENABLE : out std_logic;
-
-    SCALAR_PRODUCT_DATA_OUT_ENABLE : in std_logic;
-
-    -- DATA
-    SCALAR_PRODUCT_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SCALAR_PRODUCT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_PRODUCT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_PRODUCT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- SCALAR TRANSPOSE
-    -- CONTROL
-    SCALAR_TRANSPOSE_START : out std_logic;
-    SCALAR_TRANSPOSE_READY : in  std_logic;
-
-    SCALAR_TRANSPOSE_DATA_IN_ENABLE : out std_logic;
-
-    SCALAR_TRANSPOSE_DATA_ENABLE : in std_logic;
-
-    SCALAR_TRANSPOSE_DATA_OUT_ENABLE : in std_logic;
-
-    -- DATA
-    SCALAR_TRANSPOSE_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SCALAR_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- TENSOR PRODUCT
     -- CONTROL
@@ -278,11 +279,15 @@ begin
     wait for WORKING;
   end process;
 
-  -- FUNCTIONALITY
+  -- VECTOR-FUNCTIONALITY
+  DOT_PRODUCT_START      <= start_int;
+  VECTOR_TRANSPOSE_START <= start_int;
+
+  -- MATRIX-FUNCTIONALITY
   MATRIX_PRODUCT_START   <= start_int;
   MATRIX_TRANSPOSE_START <= start_int;
-  SCALAR_PRODUCT_START   <= start_int;
-  SCALAR_TRANSPOSE_START <= start_int;
+
+  -- TENSOR-FUNCTIONALITY
   TENSOR_PRODUCT_START   <= start_int;
   TENSOR_TRANSPOSE_START <= start_int;
 
@@ -292,6 +297,224 @@ begin
 
   main_test : process
   begin
+
+    if (STIMULUS_NTM_DOT_PRODUCT_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_DOT_PRODUCT_TEST           ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      DOT_PRODUCT_LENGTH_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_DOT_PRODUCT_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_DOT_PRODUCT_CASE 0         ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        DOT_PRODUCT_DATA_A_IN <= ZERO_DATA;
+        DOT_PRODUCT_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+
+        DOT_PRODUCT_FIRST_RUN : loop
+          if ((DOT_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(DOT_PRODUCT_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            DOT_PRODUCT_DATA_A_IN_ENABLE <= '1';
+            DOT_PRODUCT_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            DOT_PRODUCT_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            DOT_PRODUCT_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif (((DOT_PRODUCT_DATA_OUT_ENABLE = '1') or (DOT_PRODUCT_START = '1')) and (unsigned(index_i_loop) < unsigned(DOT_PRODUCT_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            DOT_PRODUCT_DATA_A_IN_ENABLE <= '1';
+            DOT_PRODUCT_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            DOT_PRODUCT_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            DOT_PRODUCT_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            DOT_PRODUCT_DATA_A_IN_ENABLE <= '0';
+            DOT_PRODUCT_DATA_B_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit DOT_PRODUCT_FIRST_RUN when DOT_PRODUCT_READY = '1';
+        end loop DOT_PRODUCT_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_NTM_DOT_PRODUCT_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_DOT_PRODUCT_CASE 1         ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        DOT_PRODUCT_DATA_A_IN <= ZERO_DATA;
+        DOT_PRODUCT_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+
+        DOT_PRODUCT_SECOND_RUN : loop
+          if ((DOT_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(DOT_PRODUCT_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            DOT_PRODUCT_DATA_A_IN_ENABLE <= '1';
+            DOT_PRODUCT_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            DOT_PRODUCT_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            DOT_PRODUCT_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif (((DOT_PRODUCT_DATA_OUT_ENABLE = '1') or (DOT_PRODUCT_START = '1')) and (unsigned(index_i_loop) < unsigned(DOT_PRODUCT_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            DOT_PRODUCT_DATA_A_IN_ENABLE <= '1';
+            DOT_PRODUCT_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            DOT_PRODUCT_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            DOT_PRODUCT_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            DOT_PRODUCT_DATA_A_IN_ENABLE <= '0';
+            DOT_PRODUCT_DATA_B_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit DOT_PRODUCT_SECOND_RUN when DOT_PRODUCT_READY = '1';
+        end loop DOT_PRODUCT_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_VECTOR_TRANSPOSE_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_TRANSPOSE_TEST      ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      VECTOR_TRANSPOSE_LENGTH_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_TRANSPOSE_CASE 0    ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        VECTOR_TRANSPOSE_DATA_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+
+        VECTOR_TRANSPOSE_FIRST_RUN : loop
+          if ((VECTOR_TRANSPOSE_DATA_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_TRANSPOSE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_TRANSPOSE_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_TRANSPOSE_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif (((VECTOR_TRANSPOSE_DATA_ENABLE = '1') or (VECTOR_TRANSPOSE_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_TRANSPOSE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_TRANSPOSE_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_TRANSPOSE_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            VECTOR_TRANSPOSE_DATA_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit VECTOR_TRANSPOSE_FIRST_RUN when VECTOR_TRANSPOSE_READY = '1';
+        end loop VECTOR_TRANSPOSE_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_TRANSPOSE_CASE 1    ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        VECTOR_TRANSPOSE_DATA_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+
+        VECTOR_TRANSPOSE_SECOND_RUN : loop
+          if ((VECTOR_TRANSPOSE_DATA_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_TRANSPOSE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_TRANSPOSE_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_TRANSPOSE_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif (((VECTOR_TRANSPOSE_DATA_ENABLE = '1') or (VECTOR_TRANSPOSE_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_TRANSPOSE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_TRANSPOSE_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_TRANSPOSE_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            VECTOR_TRANSPOSE_DATA_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit VECTOR_TRANSPOSE_SECOND_RUN when VECTOR_TRANSPOSE_READY = '1';
+        end loop VECTOR_TRANSPOSE_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
 
     if (STIMULUS_NTM_MATRIX_PRODUCT_TEST) then
 
@@ -579,224 +802,6 @@ begin
           -- CONTROL
           exit MATRIX_TRANSPOSE_SECOND_RUN when MATRIX_TRANSPOSE_READY = '1';
         end loop MATRIX_TRANSPOSE_SECOND_RUN;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_NTM_SCALAR_PRODUCT_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_PRODUCT_TEST        ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      SCALAR_PRODUCT_LENGTH_IN <= THREE_CONTROL;
-
-      if (STIMULUS_NTM_SCALAR_PRODUCT_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_PRODUCT_CASE 0      ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        SCALAR_PRODUCT_DATA_A_IN <= ZERO_DATA;
-        SCALAR_PRODUCT_DATA_B_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-
-        SCALAR_PRODUCT_FIRST_RUN : loop
-          if ((SCALAR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(SCALAR_PRODUCT_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '1';
-            SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_PRODUCT_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-            SCALAR_PRODUCT_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= ZERO_CONTROL;
-          elsif (((SCALAR_PRODUCT_DATA_OUT_ENABLE = '1') or (SCALAR_PRODUCT_START = '1')) and (unsigned(index_i_loop) < unsigned(SCALAR_PRODUCT_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '1';
-            SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_PRODUCT_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-            SCALAR_PRODUCT_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '0';
-            SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit SCALAR_PRODUCT_FIRST_RUN when SCALAR_PRODUCT_READY = '1';
-        end loop SCALAR_PRODUCT_FIRST_RUN;
-      end if;
-
-      if (STIMULUS_NTM_SCALAR_PRODUCT_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_PRODUCT_CASE 1      ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        SCALAR_PRODUCT_DATA_A_IN <= ZERO_DATA;
-        SCALAR_PRODUCT_DATA_B_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-
-        SCALAR_PRODUCT_SECOND_RUN : loop
-          if ((SCALAR_PRODUCT_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(SCALAR_PRODUCT_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '1';
-            SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_PRODUCT_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-            SCALAR_PRODUCT_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= ZERO_CONTROL;
-          elsif (((SCALAR_PRODUCT_DATA_OUT_ENABLE = '1') or (SCALAR_PRODUCT_START = '1')) and (unsigned(index_i_loop) < unsigned(SCALAR_PRODUCT_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '1';
-            SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_PRODUCT_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-            SCALAR_PRODUCT_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            SCALAR_PRODUCT_DATA_A_IN_ENABLE <= '0';
-            SCALAR_PRODUCT_DATA_B_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit SCALAR_PRODUCT_SECOND_RUN when SCALAR_PRODUCT_READY = '1';
-        end loop SCALAR_PRODUCT_SECOND_RUN;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_NTM_SCALAR_TRANSPOSE_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_TRANSPOSE_TEST      ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      SCALAR_TRANSPOSE_LENGTH_IN <= THREE_CONTROL;
-
-      if (STIMULUS_NTM_SCALAR_TRANSPOSE_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_TRANSPOSE_CASE 0    ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        SCALAR_TRANSPOSE_DATA_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-
-        SCALAR_TRANSPOSE_FIRST_RUN : loop
-          if ((SCALAR_TRANSPOSE_DATA_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(SCALAR_TRANSPOSE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_TRANSPOSE_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_TRANSPOSE_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= ZERO_CONTROL;
-          elsif (((SCALAR_TRANSPOSE_DATA_ENABLE = '1') or (SCALAR_TRANSPOSE_START = '1')) and (unsigned(index_i_loop) < unsigned(SCALAR_TRANSPOSE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_TRANSPOSE_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_TRANSPOSE_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            SCALAR_TRANSPOSE_DATA_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit SCALAR_TRANSPOSE_FIRST_RUN when SCALAR_TRANSPOSE_READY = '1';
-        end loop SCALAR_TRANSPOSE_FIRST_RUN;
-      end if;
-
-      if (STIMULUS_NTM_SCALAR_TRANSPOSE_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_TRANSPOSE_CASE 1    ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        SCALAR_TRANSPOSE_DATA_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-
-        SCALAR_TRANSPOSE_SECOND_RUN : loop
-          if ((SCALAR_TRANSPOSE_DATA_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(SCALAR_TRANSPOSE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_TRANSPOSE_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_TRANSPOSE_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= ZERO_CONTROL;
-          elsif (((SCALAR_TRANSPOSE_DATA_ENABLE = '1') or (SCALAR_TRANSPOSE_START = '1')) and (unsigned(index_i_loop) < unsigned(SCALAR_TRANSPOSE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_TRANSPOSE_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_TRANSPOSE_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            SCALAR_TRANSPOSE_DATA_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit SCALAR_TRANSPOSE_SECOND_RUN when SCALAR_TRANSPOSE_READY = '1';
-        end loop SCALAR_TRANSPOSE_SECOND_RUN;
       end if;
 
       wait for WORKING;

@@ -24,10 +24,10 @@
 ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_multiplier.sv
 ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_divider.sv
 
+../../../../../../../rtl/verilog/math/algebra/vector/ntm_dot_product.sv
+../../../../../../../rtl/verilog/math/algebra/vector/ntm_vector_transpose.sv
 ../../../../../../../rtl/verilog/math/algebra/matrix/ntm_matrix_product.sv
 ../../../../../../../rtl/verilog/math/algebra/matrix/ntm_matrix_transpose.sv
-../../../../../../../rtl/verilog/math/algebra/scalar/ntm_scalar_product.sv
-../../../../../../../rtl/verilog/math/algebra/scalar/ntm_scalar_transpose.sv
 ../../../../../../../rtl/verilog/math/algebra/tensor/ntm_tensor_product.sv
 ../../../../../../../rtl/verilog/math/algebra/tensor/ntm_tensor_transpose.sv
 

@@ -24,12 +24,12 @@ sv work ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_adde
 sv work ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_multiplier.sv
 sv work ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_divider.sv
 
-sv work ../../../../../../../rtl/verilog/math/algebra/ntm_matrix_product.sv
-sv work ../../../../../../../rtl/verilog/math/algebra/ntm_matrix_transpose.sv
-sv work ../../../../../../../rtl/verilog/math/algebra/ntm_scalar_product.sv
-sv work ../../../../../../../rtl/verilog/math/algebra/ntm_scalar_transpose.sv
-sv work ../../../../../../../rtl/verilog/math/algebra/ntm_tensor_product.sv
-sv work ../../../../../../../rtl/verilog/math/algebra/ntm_tensor_transpose.sv
+sv work ../../../../../../../rtl/verilog/math/algebra/vector/ntm_dot_product.sv
+sv work ../../../../../../../rtl/verilog/math/algebra/vector/ntm_vector_transpose.sv
+sv work ../../../../../../../rtl/verilog/math/algebra/matrix/ntm_matrix_product.sv
+sv work ../../../../../../../rtl/verilog/math/algebra/matrix/ntm_matrix_transpose.sv
+sv work ../../../../../../../rtl/verilog/math/algebra/tensor/ntm_tensor_product.sv
+sv work ../../../../../../../rtl/verilog/math/algebra/tensor/ntm_tensor_transpose.sv
 
 sv work ../../../../../../../bench/verilog/tests/math/algebra/ntm_algebra_pkg.sv
 sv work ../../../../../../../bench/verilog/tests/math/algebra/ntm_algebra_stimulus.sv

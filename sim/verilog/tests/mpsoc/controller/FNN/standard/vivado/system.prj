@@ -25,17 +25,15 @@ sv work ../../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_a
 sv work ../../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_multiplier.sv
 sv work ../../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_divider.sv
 
-sv work ../../../../../../../../rtl/verilog/math/algebra/ntm_matrix_product.sv
-sv work ../../../../../../../../rtl/verilog/math/algebra/ntm_tensor_transpose.sv
-sv work ../../../../../../../../rtl/verilog/math/algebra/ntm_matrix_transpose.sv
-sv work ../../../../../../../../rtl/verilog/math/algebra/ntm_scalar_product.sv
-sv work ../../../../../../../../rtl/verilog/math/algebra/ntm_tensor_product.sv
+sv work ../../../../../../../../rtl/verilog/math/algebra/matrix/ntm_matrix_product.sv
+sv work ../../../../../../../../rtl/verilog/math/algebra/tensor/ntm_tensor_transpose.sv
+sv work ../../../../../../../../rtl/verilog/math/algebra/matrix/ntm_matrix_transpose.sv
+sv work ../../../../../../../../rtl/verilog/math/algebra/vector/ntm_dot_product.sv
+sv work ../../../../../../../../rtl/verilog/math/algebra/tensor/ntm_tensor_product.sv
 
 sv work ../../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_exponentiator_function.sv
-sv work ../../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_convolution_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_cosh_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_cosine_similarity_function.sv
-sv work ../../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_differentiation_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_logistic_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_multiplication_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_oneplus_function.sv
@@ -45,10 +43,8 @@ sv work ../../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_summ
 sv work ../../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_tanh_function.sv
 
 sv work ../../../../../../../../rtl/verilog/math/function/vector/ntm_vector_exponentiator_function.sv
-sv work ../../../../../../../../rtl/verilog/math/function/vector/ntm_vector_convolution_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/vector/ntm_vector_cosh_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/vector/ntm_vector_cosine_similarity_function.sv
-sv work ../../../../../../../../rtl/verilog/math/function/vector/ntm_vector_differentiation_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/vector/ntm_vector_logistic_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/vector/ntm_vector_multiplication_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/vector/ntm_vector_oneplus_function.sv
@@ -58,10 +54,8 @@ sv work ../../../../../../../../rtl/verilog/math/function/vector/ntm_vector_summ
 sv work ../../../../../../../../rtl/verilog/math/function/vector/ntm_vector_tanh_function.sv
 
 sv work ../../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_exponentiator_function.sv
-sv work ../../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_convolution_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_cosh_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_cosine_similarity_function.sv
-sv work ../../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_differentiation_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_logistic_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_multiplication_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_oneplus_function.sv
@@ -70,8 +64,9 @@ sv work ../../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_soft
 sv work ../../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_summation_function.sv
 sv work ../../../../../../../../rtl/verilog/math/function/matrix/ntm_matrix_tanh_function.sv
 
+sv work ../../../../../../../../rtl/verilog/trainer/FNN/ntm_trainer.sv
+
 sv work ../../../../../../../../rtl/verilog/controller/FNN/standard/ntm_controller.sv
-sv work ../../../../../../../../rtl/verilog/controller/FNN/standard/ntm_trainer.sv
 
 sv work ../../../../../../../../bench/verilog/tests/controller/FNN/standard/ntm_standard_fnn_pkg.sv
 sv work ../../../../../../../../bench/verilog/tests/controller/FNN/standard/ntm_standard_fnn_stimulus.sv

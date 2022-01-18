@@ -29,7 +29,7 @@ vhdl2008 work ../../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matri
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_product.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_transpose.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
-vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/scalar/ntm_scalar_product.vhd
+vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/scalar/ntm_dot_product.vhd
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_product.vhd
 
 vhdl2008 work ../../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_exponentiator_function.vhd

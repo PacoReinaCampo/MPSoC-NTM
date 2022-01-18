@@ -42,6 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 use work.ntm_lstm_controller_pkg.all;
 
@@ -768,7 +769,7 @@ begin
       );
 
   -- VECTOR DIFFERENTIATION
-  vector_differentiation_function : ntm_vector_differentiation_function
+  vector_differentiation : ntm_vector_differentiation
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE

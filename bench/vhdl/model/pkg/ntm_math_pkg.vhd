@@ -50,1144 +50,67 @@ package ntm_math_pkg is
   -- Constants
   -----------------------------------------------------------------------
 
-  constant I : integer := 64;
-  constant J : integer := 64;
-
-  constant X : integer := 64;           -- x in 0 to X-1
-  constant Y : integer := 64;           -- y in 0 to Y-1
-  constant N : integer := 64;           -- j in 0 to N-1
-  constant W : integer := 64;           -- k in 0 to W-1
-  constant L : integer := 64;           -- l in 0 to L-1
-  constant R : integer := 64;           -- i in 0 to R-1
-
-  constant DATA_SIZE    : integer := 128;
-  constant CONTROL_SIZE : integer := 64;
-
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
-  -- MATH - MODULAR
-  -----------------------------------------------------------------------
-
-  -- SCALAR
-  component ntm_scalar_modular_mod is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_scalar_modular_adder is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      OPERATION : in std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_scalar_modular_multiplier is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_scalar_modular_inverter is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  -- VECTOR
-  component ntm_vector_modular_mod is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_vector_modular_adder is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      OPERATION : in std_logic;
-
-      DATA_A_IN_ENABLE : in std_logic;
-      DATA_B_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_vector_modular_multiplier is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_ENABLE : in std_logic;
-      DATA_B_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_vector_modular_inverter is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  -- MATRIX
-  component ntm_matrix_modular_mod is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_I_ENABLE : in std_logic;
-      DATA_IN_J_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_matrix_modular_adder is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      OPERATION : in std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_matrix_modular_multiplier is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_matrix_modular_inverter is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_I_ENABLE : in std_logic;
-      DATA_IN_J_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  -- TENSOR
-  component ntm_tensor_modular_mod is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_I_ENABLE : in std_logic;
-      DATA_IN_J_ENABLE : in std_logic;
-      DATA_IN_K_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-      DATA_OUT_K_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_tensor_modular_adder is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      OPERATION : in std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_A_IN_K_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_K_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-      DATA_OUT_K_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_tensor_modular_multiplier is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_A_IN_K_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_K_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-      DATA_OUT_K_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_tensor_modular_inverter is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_I_ENABLE : in std_logic;
-      DATA_IN_J_ENABLE : in std_logic;
-      DATA_IN_K_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-      DATA_OUT_K_ENABLE : out std_logic;
-
-      -- DATA
-      MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  -----------------------------------------------------------------------
-  -- MATH - INTEGER
-  -----------------------------------------------------------------------
-
-  -- SCALAR
-  component ntm_scalar_integer_adder is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      OPERATION : in std_logic;
-
-      -- DATA
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic
-      );
-  end component;
-
-  component ntm_scalar_integer_multiplier is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      -- DATA
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_scalar_integer_divider is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      -- DATA
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      REST_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  -- VECTOR
-  component ntm_vector_integer_adder is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      OPERATION : in std_logic;
-
-      DATA_A_IN_ENABLE : in std_logic;
-      DATA_B_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic
-      );
-  end component;
-
-  component ntm_vector_integer_multiplier is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_ENABLE : in std_logic;
-      DATA_B_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_vector_integer_divider is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_ENABLE : in std_logic;
-      DATA_B_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      REST_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  -- MATRIX
-  component ntm_matrix_integer_adder is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      OPERATION : in std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic
-      );
-  end component;
-
-  component ntm_matrix_integer_multiplier is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_matrix_integer_divider is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      REST_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  -- TENSOR
-  component ntm_tensor_integer_adder is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      OPERATION : in std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_A_IN_K_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_K_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-      DATA_OUT_K_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic
-      );
-  end component;
-
-  component ntm_tensor_integer_multiplier is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_A_IN_K_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_K_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-      DATA_OUT_K_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_tensor_integer_divider is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_A_IN_K_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_K_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-      DATA_OUT_K_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      REST_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  -----------------------------------------------------------------------
-  -- MATH - FLOAT
-  -----------------------------------------------------------------------
-
-  -- SCALAR
-  component ntm_scalar_adder is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      OPERATION : in std_logic;
-
-      -- DATA
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic
-      );
-  end component;
-
-  component ntm_scalar_multiplier is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      -- DATA
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_scalar_divider is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      -- DATA
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      REST_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  -- VECTOR
-  component ntm_vector_adder is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      OPERATION : in std_logic;
-
-      DATA_A_IN_ENABLE : in std_logic;
-      DATA_B_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic
-      );
-  end component;
-
-  component ntm_vector_multiplier is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_ENABLE : in std_logic;
-      DATA_B_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_vector_divider is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_ENABLE : in std_logic;
-      DATA_B_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      REST_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  -- MATRIX
-  component ntm_matrix_adder is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      OPERATION : in std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic
-      );
-  end component;
-
-  component ntm_matrix_multiplier is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-      OVERFLOW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_matrix_divider is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_I_ENABLE : in std_logic;
-      DATA_A_IN_J_ENABLE : in std_logic;
-      DATA_B_IN_I_ENABLE : in std_logic;
-      DATA_B_IN_J_ENABLE : in std_logic;
-
-      DATA_OUT_I_ENABLE : out std_logic;
-      DATA_OUT_J_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      REST_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  -----------------------------------------------------------------------
   -- MATH - ALGEBRA
   -----------------------------------------------------------------------
+
+  component ntm_dot_product is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
+
+      DATA_OUT_ENABLE : out std_logic;
+
+      -- DATA
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_vector_transpose is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_IN_ENABLE : in std_logic;
+
+      DATA_ENABLE : out std_logic;
+
+      DATA_OUT_ENABLE : out std_logic;
+
+      -- DATA
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
   component ntm_matrix_product is
     generic (
@@ -1251,60 +174,6 @@ package ntm_math_pkg is
       -- DATA
       SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_scalar_product is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_ENABLE : in std_logic;
-      DATA_B_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_scalar_transpose is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_ENABLE : in std_logic;
-
-      DATA_ENABLE : out std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1454,32 +323,6 @@ package ntm_math_pkg is
       LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_scalar_differentiation_function is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
@@ -1763,35 +606,6 @@ package ntm_math_pkg is
       LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_vector_differentiation_function is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_VECTOR_ENABLE : in std_logic;
-      DATA_IN_SCALAR_ENABLE : in std_logic;
-
-      DATA_OUT_VECTOR_ENABLE : out std_logic;
-      DATA_OUT_SCALAR_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
@@ -2129,38 +943,6 @@ package ntm_math_pkg is
       );
   end component;
 
-  component ntm_matrix_differentiation_function is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_MATRIX_ENABLE : in std_logic;
-      DATA_IN_VECTOR_ENABLE : in std_logic;
-      DATA_IN_SCALAR_ENABLE : in std_logic;
-
-      DATA_OUT_MATRIX_ENABLE : out std_logic;
-      DATA_OUT_VECTOR_ENABLE : out std_logic;
-      DATA_OUT_SCALAR_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
   component ntm_matrix_exponentiator_function is
     generic (
       DATA_SIZE    : integer := 128;
@@ -2417,6 +1199,97 @@ package ntm_math_pkg is
       -- DATA
       SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  -----------------------------------------------------------------------
+  -- MATH - CALCULUS
+  -----------------------------------------------------------------------
+
+  component ntm_scalar_differentiation is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_IN_ENABLE : in std_logic;
+
+      DATA_OUT_ENABLE : out std_logic;
+
+      -- DATA
+      PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_vector_differentiation is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_IN_VECTOR_ENABLE : in std_logic;
+      DATA_IN_SCALAR_ENABLE : in std_logic;
+
+      DATA_OUT_VECTOR_ENABLE : out std_logic;
+      DATA_OUT_SCALAR_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_matrix_differentiation is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_IN_MATRIX_ENABLE : in std_logic;
+      DATA_IN_VECTOR_ENABLE : in std_logic;
+      DATA_IN_SCALAR_ENABLE : in std_logic;
+
+      DATA_OUT_MATRIX_ENABLE : out std_logic;
+      DATA_OUT_VECTOR_ENABLE : out std_logic;
+      DATA_OUT_SCALAR_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );

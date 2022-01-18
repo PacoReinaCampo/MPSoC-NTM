@@ -56,25 +56,33 @@ entity ntm_algebra_testbench is
     L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
-    -- FUNCTIONALITY
+    -- VECTOR-FUNCTIONALITY
+    ENABLE_NTM_DOT_PRODUCT_TEST      : boolean := false;
+    ENABLE_NTM_VECTOR_TRANSPOSE_TEST : boolean := false;
+
+    ENABLE_NTM_DOT_PRODUCT_CASE_0      : boolean := false;
+    ENABLE_NTM_VECTOR_TRANSPOSE_CASE_0 : boolean := false;
+
+    ENABLE_NTM_DOT_PRODUCT_CASE_1      : boolean := false;
+    ENABLE_NTM_VECTOR_TRANSPOSE_CASE_1 : boolean := false;
+
+    -- MATRIX-FUNCTIONALITY
     ENABLE_NTM_MATRIX_PRODUCT_TEST   : boolean := false;
     ENABLE_NTM_MATRIX_TRANSPOSE_TEST : boolean := false;
-    ENABLE_NTM_SCALAR_PRODUCT_TEST   : boolean := false;
-    ENABLE_NTM_SCALAR_TRANSPOSE_TEST : boolean := false;
-    ENABLE_NTM_TENSOR_PRODUCT_TEST   : boolean := false;
-    ENABLE_NTM_TENSOR_TRANSPOSE_TEST : boolean := false;
 
     ENABLE_NTM_MATRIX_PRODUCT_CASE_0   : boolean := false;
     ENABLE_NTM_MATRIX_TRANSPOSE_CASE_0 : boolean := false;
-    ENABLE_NTM_SCALAR_PRODUCT_CASE_0   : boolean := false;
-    ENABLE_NTM_SCALAR_TRANSPOSE_CASE_0 : boolean := false;
-    ENABLE_NTM_TENSOR_PRODUCT_CASE_0   : boolean := false;
-    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_0 : boolean := false;
 
     ENABLE_NTM_MATRIX_PRODUCT_CASE_1   : boolean := false;
     ENABLE_NTM_MATRIX_TRANSPOSE_CASE_1 : boolean := false;
-    ENABLE_NTM_SCALAR_PRODUCT_CASE_1   : boolean := false;
-    ENABLE_NTM_SCALAR_TRANSPOSE_CASE_1 : boolean := false;
+
+    -- TENSOR-FUNCTIONALITY
+    ENABLE_NTM_TENSOR_PRODUCT_TEST   : boolean := false;
+    ENABLE_NTM_TENSOR_TRANSPOSE_TEST : boolean := false;
+
+    ENABLE_NTM_TENSOR_PRODUCT_CASE_0   : boolean := false;
+    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_0 : boolean := false;
+
     ENABLE_NTM_TENSOR_PRODUCT_CASE_1   : boolean := false;
     ENABLE_NTM_TENSOR_TRANSPOSE_CASE_1 : boolean := false
     );
@@ -89,6 +97,38 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   -- GLOBAL
   signal CLK : std_logic;
   signal RST : std_logic;
+
+  -- DOT PRODUCT
+  -- CONTROL
+  signal start_dot_product : std_logic;
+  signal ready_dot_product : std_logic;
+
+  signal data_a_in_enable_dot_product : std_logic;
+  signal data_b_in_enable_dot_product : std_logic;
+
+  signal data_out_enable_dot_product : std_logic;
+
+  -- DATA
+  signal length_in_dot_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_dot_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_dot_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_dot_product  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- VECTOR TRANSPOSE
+  -- CONTROL
+  signal start_vector_transpose : std_logic;
+  signal ready_vector_transpose : std_logic;
+
+  signal data_in_enable_vector_transpose : std_logic;
+
+  signal data_enable_vector_transpose : std_logic;
+
+  signal data_out_enable_vector_transpose : std_logic;
+
+  -- DATA
+  signal length_in_vector_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX PRODUCT
   -- CONTROL
@@ -134,38 +174,6 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal size_j_in_matrix_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR PRODUCT
-  -- CONTROL
-  signal start_scalar_product : std_logic;
-  signal ready_scalar_product : std_logic;
-
-  signal data_a_in_enable_scalar_product : std_logic;
-  signal data_b_in_enable_scalar_product : std_logic;
-
-  signal data_out_enable_scalar_product : std_logic;
-
-  -- DATA
-  signal length_in_scalar_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_product  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR TRANSPOSE
-  -- CONTROL
-  signal start_scalar_transpose : std_logic;
-  signal ready_scalar_transpose : std_logic;
-
-  signal data_in_enable_scalar_transpose : std_logic;
-
-  signal data_enable_scalar_transpose : std_logic;
-
-  signal data_out_enable_scalar_transpose : std_logic;
-
-  -- DATA
-  signal length_in_scalar_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_scalar_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- TENSOR PRODUCT
   -- CONTROL
@@ -238,6 +246,38 @@ begin
       CLK => CLK,
       RST => RST,
 
+      -- DOT PRODUCT
+      -- CONTROL
+      DOT_PRODUCT_START => start_dot_product,
+      DOT_PRODUCT_READY => ready_dot_product,
+
+      DOT_PRODUCT_DATA_A_IN_ENABLE => data_a_in_enable_dot_product,
+      DOT_PRODUCT_DATA_B_IN_ENABLE => data_b_in_enable_dot_product,
+
+      DOT_PRODUCT_DATA_OUT_ENABLE => data_out_enable_dot_product,
+
+      -- DATA
+      DOT_PRODUCT_LENGTH_IN => length_in_dot_product,
+      DOT_PRODUCT_DATA_A_IN => data_a_in_dot_product,
+      DOT_PRODUCT_DATA_B_IN => data_b_in_dot_product,
+      DOT_PRODUCT_DATA_OUT  => data_out_dot_product,
+
+      -- VECTOR TRANSPOSE
+      -- CONTROL
+      VECTOR_TRANSPOSE_START => start_vector_transpose,
+      VECTOR_TRANSPOSE_READY => ready_vector_transpose,
+
+      VECTOR_TRANSPOSE_DATA_IN_ENABLE => data_in_enable_vector_transpose,
+
+      VECTOR_TRANSPOSE_DATA_ENABLE => data_enable_vector_transpose,
+
+      VECTOR_TRANSPOSE_DATA_OUT_ENABLE => data_out_enable_vector_transpose,
+
+      -- DATA
+      VECTOR_TRANSPOSE_LENGTH_IN => length_in_vector_transpose,
+      VECTOR_TRANSPOSE_DATA_IN   => data_in_vector_transpose,
+      VECTOR_TRANSPOSE_DATA_OUT  => data_out_vector_transpose,
+
       -- MATRIX PRODUCT
       -- CONTROL
       MATRIX_PRODUCT_START => start_matrix_product,
@@ -282,38 +322,6 @@ begin
       MATRIX_TRANSPOSE_SIZE_J_IN => size_j_in_matrix_transpose,
       MATRIX_TRANSPOSE_DATA_IN   => data_in_matrix_transpose,
       MATRIX_TRANSPOSE_DATA_OUT  => data_out_matrix_transpose,
-
-      -- SCALAR PRODUCT
-      -- CONTROL
-      SCALAR_PRODUCT_START => start_scalar_product,
-      SCALAR_PRODUCT_READY => ready_scalar_product,
-
-      SCALAR_PRODUCT_DATA_A_IN_ENABLE => data_a_in_enable_scalar_product,
-      SCALAR_PRODUCT_DATA_B_IN_ENABLE => data_b_in_enable_scalar_product,
-
-      SCALAR_PRODUCT_DATA_OUT_ENABLE => data_out_enable_scalar_product,
-
-      -- DATA
-      SCALAR_PRODUCT_LENGTH_IN => length_in_scalar_product,
-      SCALAR_PRODUCT_DATA_A_IN => data_a_in_scalar_product,
-      SCALAR_PRODUCT_DATA_B_IN => data_b_in_scalar_product,
-      SCALAR_PRODUCT_DATA_OUT  => data_out_scalar_product,
-
-      -- SCALAR TRANSPOSE
-      -- CONTROL
-      SCALAR_TRANSPOSE_START => start_scalar_transpose,
-      SCALAR_TRANSPOSE_READY => ready_scalar_transpose,
-
-      SCALAR_TRANSPOSE_DATA_IN_ENABLE => data_in_enable_scalar_transpose,
-
-      SCALAR_TRANSPOSE_DATA_ENABLE => data_enable_scalar_transpose,
-
-      SCALAR_TRANSPOSE_DATA_OUT_ENABLE => data_out_enable_scalar_transpose,
-
-      -- DATA
-      SCALAR_TRANSPOSE_LENGTH_IN => length_in_scalar_transpose,
-      SCALAR_TRANSPOSE_DATA_IN   => data_in_scalar_transpose,
-      SCALAR_TRANSPOSE_DATA_OUT  => data_out_scalar_transpose,
 
       -- TENSOR PRODUCT
       -- CONTROL
@@ -362,6 +370,64 @@ begin
       TENSOR_TRANSPOSE_DATA_IN   => data_in_tensor_transpose,
       TENSOR_TRANSPOSE_DATA_OUT  => data_out_tensor_transpose
       );
+
+  -- DOT PRODUCT
+  ntm_dot_product_test : if (ENABLE_NTM_DOT_PRODUCT_TEST) generate
+    DOT_PRODUCT : ntm_DOT_PRODUCT
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_dot_product,
+        READY => ready_dot_product,
+
+        DATA_A_IN_ENABLE => data_a_in_enable_dot_product,
+        DATA_B_IN_ENABLE => data_b_in_enable_dot_product,
+
+        DATA_OUT_ENABLE => data_out_enable_dot_product,
+
+        -- DATA
+        LENGTH_IN => length_in_dot_product,
+        DATA_A_IN => data_a_in_dot_product,
+        DATA_B_IN => data_b_in_dot_product,
+        DATA_OUT  => data_out_dot_product
+        );
+  end generate ntm_dot_product_test;
+
+  -- VECTOR TRANSPOSE
+  ntm_vector_transpose_test : if (ENABLE_ntm_vector_transpose_TEST) generate
+    VECTOR_TRANSPOSE : ntm_vector_transpose
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_vector_transpose,
+        READY => ready_vector_transpose,
+
+        DATA_IN_ENABLE => data_in_enable_vector_transpose,
+
+        DATA_ENABLE => data_enable_vector_transpose,
+
+        DATA_OUT_ENABLE => data_out_enable_vector_transpose,
+
+        -- DATA
+        LENGTH_IN => length_in_vector_transpose,
+        DATA_IN   => data_in_vector_transpose,
+        DATA_OUT  => data_out_vector_transpose
+        );
+  end generate ntm_vector_transpose_test;
 
   -- MATRIX PRODUCT
   ntm_matrix_product_test : if (ENABLE_NTM_MATRIX_PRODUCT_TEST) generate
@@ -433,64 +499,6 @@ begin
         DATA_OUT  => data_out_matrix_transpose
         );
   end generate ntm_matrix_transpose_test;
-
-  -- SCALAR PRODUCT
-  ntm_scalar_product_test : if (ENABLE_NTM_SCALAR_PRODUCT_TEST) generate
-    scalar_product : ntm_scalar_product
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_scalar_product,
-        READY => ready_scalar_product,
-
-        DATA_A_IN_ENABLE => data_a_in_enable_scalar_product,
-        DATA_B_IN_ENABLE => data_b_in_enable_scalar_product,
-
-        DATA_OUT_ENABLE => data_out_enable_scalar_product,
-
-        -- DATA
-        LENGTH_IN => length_in_scalar_product,
-        DATA_A_IN => data_a_in_scalar_product,
-        DATA_B_IN => data_b_in_scalar_product,
-        DATA_OUT  => data_out_scalar_product
-        );
-  end generate ntm_scalar_product_test;
-
-  -- SCALAR TRANSPOSE
-  ntm_scalar_transpose_test : if (ENABLE_NTM_SCALAR_TRANSPOSE_TEST) generate
-    scalar_transpose : ntm_scalar_transpose
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_scalar_transpose,
-        READY => ready_scalar_transpose,
-
-        DATA_IN_ENABLE => data_in_enable_scalar_transpose,
-
-        DATA_ENABLE => data_enable_scalar_transpose,
-
-        DATA_OUT_ENABLE => data_out_enable_scalar_transpose,
-
-        -- DATA
-        LENGTH_IN => length_in_scalar_transpose,
-        DATA_IN   => data_in_scalar_transpose,
-        DATA_OUT  => data_out_scalar_transpose
-        );
-  end generate ntm_scalar_transpose_test;
 
   -- TENSOR PRODUCT
   ntm_tensor_product_test : if (ENABLE_NTM_TENSOR_PRODUCT_TEST) generate

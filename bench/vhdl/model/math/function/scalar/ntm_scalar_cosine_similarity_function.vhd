@@ -42,6 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 
 entity ntm_scalar_cosine_similarity_function is
@@ -112,7 +113,7 @@ architecture ntm_scalar_cosine_similarity_function_architecture of ntm_scalar_co
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Data Internal
-  signal data_int_scalar_product : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_int_dot_product : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- Control Internal
   signal index_product_ab_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -146,53 +147,53 @@ architecture ntm_scalar_cosine_similarity_function_architecture of ntm_scalar_co
   signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR PRODUCT AB
+  -- DOT PRODUCT AB
   -- CONTROL
-  signal start_scalar_product_ab : std_logic;
-  signal ready_scalar_product_ab : std_logic;
+  signal start_dot_product_ab : std_logic;
+  signal ready_dot_product_ab : std_logic;
 
-  signal data_a_in_enable_scalar_product_ab : std_logic;
-  signal data_b_in_enable_scalar_product_ab : std_logic;
+  signal data_a_in_enable_dot_product_ab : std_logic;
+  signal data_b_in_enable_dot_product_ab : std_logic;
 
-  signal data_out_enable_scalar_product_ab : std_logic;
+  signal data_out_enable_dot_product_ab : std_logic;
 
   -- DATA
-  signal length_in_scalar_product_ab : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_scalar_product_ab : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_product_ab : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_product_ab  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_dot_product_ab : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_dot_product_ab : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_dot_product_ab : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_dot_product_ab  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR PRODUCT AA
+  -- DOT PRODUCT AA
   -- CONTROL
-  signal start_scalar_product_aa : std_logic;
-  signal ready_scalar_product_aa : std_logic;
+  signal start_dot_product_aa : std_logic;
+  signal ready_dot_product_aa : std_logic;
 
-  signal data_a_in_enable_scalar_product_aa : std_logic;
-  signal data_b_in_enable_scalar_product_aa : std_logic;
+  signal data_a_in_enable_dot_product_aa : std_logic;
+  signal data_b_in_enable_dot_product_aa : std_logic;
 
-  signal data_out_enable_scalar_product_aa : std_logic;
+  signal data_out_enable_dot_product_aa : std_logic;
 
   -- DATA
-  signal length_in_scalar_product_aa : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_scalar_product_aa : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_product_aa : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_product_aa  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_dot_product_aa : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_dot_product_aa : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_dot_product_aa : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_dot_product_aa  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR PRODUCT BB
+  -- DOT PRODUCT BB
   -- CONTROL
-  signal start_scalar_product_bb : std_logic;
-  signal ready_scalar_product_bb : std_logic;
+  signal start_dot_product_bb : std_logic;
+  signal ready_dot_product_bb : std_logic;
 
-  signal data_a_in_enable_scalar_product_bb : std_logic;
-  signal data_b_in_enable_scalar_product_bb : std_logic;
+  signal data_a_in_enable_dot_product_bb : std_logic;
+  signal data_b_in_enable_dot_product_bb : std_logic;
 
-  signal data_out_enable_scalar_product_bb : std_logic;
+  signal data_out_enable_dot_product_bb : std_logic;
 
   -- DATA
-  signal length_in_scalar_product_bb : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_scalar_product_bb : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_product_bb : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_product_bb  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_dot_product_bb : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_dot_product_bb : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_dot_product_bb : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_dot_product_bb  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -218,18 +219,18 @@ begin
       start_scalar_multiplier <= '0';
       start_scalar_divider    <= '0';
 
-      start_scalar_product_ab <= '0';
-      start_scalar_product_aa <= '0';
-      start_scalar_product_bb <= '0';
+      start_dot_product_ab <= '0';
+      start_dot_product_aa <= '0';
+      start_dot_product_bb <= '0';
 
-      data_a_in_enable_scalar_product_ab <= '0';
-      data_b_in_enable_scalar_product_ab <= '0';
+      data_a_in_enable_dot_product_ab <= '0';
+      data_b_in_enable_dot_product_ab <= '0';
 
-      data_a_in_enable_scalar_product_aa <= '0';
-      data_b_in_enable_scalar_product_aa <= '0';
+      data_a_in_enable_dot_product_aa <= '0';
+      data_b_in_enable_dot_product_aa <= '0';
 
-      data_a_in_enable_scalar_product_bb <= '0';
-      data_b_in_enable_scalar_product_bb <= '0';
+      data_a_in_enable_dot_product_bb <= '0';
+      data_b_in_enable_dot_product_bb <= '0';
 
       data_a_in_product_int <= '0';
       data_b_in_product_int <= '0';
@@ -249,19 +250,19 @@ begin
       data_a_in_scalar_divider <= ZERO_DATA;
       data_b_in_scalar_divider <= ZERO_DATA;
 
-      length_in_scalar_product_ab <= LENGTH_IN;
-      data_a_in_scalar_product_ab <= ZERO_DATA;
-      data_b_in_scalar_product_ab <= ZERO_DATA;
+      length_in_dot_product_ab <= LENGTH_IN;
+      data_a_in_dot_product_ab <= ZERO_DATA;
+      data_b_in_dot_product_ab <= ZERO_DATA;
 
-      length_in_scalar_product_aa <= LENGTH_IN;
-      data_a_in_scalar_product_aa <= ZERO_DATA;
-      data_b_in_scalar_product_aa <= ZERO_DATA;
+      length_in_dot_product_aa <= LENGTH_IN;
+      data_a_in_dot_product_aa <= ZERO_DATA;
+      data_b_in_dot_product_aa <= ZERO_DATA;
 
-      length_in_scalar_product_bb <= LENGTH_IN;
-      data_a_in_scalar_product_bb <= ZERO_DATA;
-      data_b_in_scalar_product_bb <= ZERO_DATA;
+      length_in_dot_product_bb <= LENGTH_IN;
+      data_a_in_dot_product_bb <= ZERO_DATA;
+      data_b_in_dot_product_bb <= ZERO_DATA;
 
-      data_int_scalar_product <= ZERO_DATA;
+      data_int_dot_product <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -274,9 +275,9 @@ begin
 
           if (START = '1') then
             -- Control Internal
-            start_scalar_product_ab <= '1';
-            start_scalar_product_aa <= '1';
-            start_scalar_product_bb <= '1';
+            start_dot_product_ab <= '1';
+            start_dot_product_aa <= '1';
+            start_dot_product_bb <= '1';
 
             data_a_in_product_int <= '0';
             data_b_in_product_int <= '0';
@@ -290,9 +291,9 @@ begin
             index_product_bb_loop <= ZERO_CONTROL;
 
             -- Data Inputs
-            length_in_scalar_product_ab <= LENGTH_IN;
-            length_in_scalar_product_aa <= LENGTH_IN;
-            length_in_scalar_product_bb <= LENGTH_IN;
+            length_in_dot_product_ab <= LENGTH_IN;
+            length_in_dot_product_aa <= LENGTH_IN;
+            length_in_dot_product_bb <= LENGTH_IN;
 
             -- FSM Control
             controller_ctrl_fsm_int <= INPUT_STATE;
@@ -302,51 +303,51 @@ begin
 
           if ((DATA_A_IN_ENABLE = '1') or (unsigned(index_product_aa_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
-            data_a_in_scalar_product_ab <= DATA_A_IN;
-            data_a_in_scalar_product_aa <= DATA_A_IN;
-            data_a_in_scalar_product_bb <= DATA_A_IN;
+            data_a_in_dot_product_ab <= DATA_A_IN;
+            data_a_in_dot_product_aa <= DATA_A_IN;
+            data_a_in_dot_product_bb <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_enable_scalar_product_ab <= '1';
-            data_a_in_enable_scalar_product_aa <= '1';
-            data_a_in_enable_scalar_product_bb <= '1';
+            data_a_in_enable_dot_product_ab <= '1';
+            data_a_in_enable_dot_product_aa <= '1';
+            data_a_in_enable_dot_product_bb <= '1';
 
             data_a_in_product_int <= '1';
           else
             -- Control Inputs
-            data_a_in_enable_scalar_product_ab <= '0';
-            data_a_in_enable_scalar_product_aa <= '0';
-            data_a_in_enable_scalar_product_bb <= '0';
+            data_a_in_enable_dot_product_ab <= '0';
+            data_a_in_enable_dot_product_aa <= '0';
+            data_a_in_enable_dot_product_bb <= '0';
           end if;
 
           if ((DATA_B_IN_ENABLE = '1') or (unsigned(index_product_aa_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
-            data_b_in_scalar_product_ab <= DATA_B_IN;
-            data_b_in_scalar_product_aa <= DATA_B_IN;
-            data_b_in_scalar_product_bb <= DATA_B_IN;
+            data_b_in_dot_product_ab <= DATA_B_IN;
+            data_b_in_dot_product_aa <= DATA_B_IN;
+            data_b_in_dot_product_bb <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_enable_scalar_product_ab <= '1';
-            data_b_in_enable_scalar_product_aa <= '1';
-            data_b_in_enable_scalar_product_bb <= '1';
+            data_b_in_enable_dot_product_ab <= '1';
+            data_b_in_enable_dot_product_aa <= '1';
+            data_b_in_enable_dot_product_bb <= '1';
 
             data_b_in_product_int <= '1';
           else
             -- Control Inputs
-            data_b_in_enable_scalar_product_ab <= '0';
-            data_b_in_enable_scalar_product_aa <= '0';
-            data_b_in_enable_scalar_product_bb <= '0';
+            data_b_in_enable_dot_product_ab <= '0';
+            data_b_in_enable_dot_product_aa <= '0';
+            data_b_in_enable_dot_product_bb <= '0';
           end if;
 
           if (data_a_in_product_int = '1' and data_b_in_product_int = '1') then
             -- Control Internal
-            data_a_in_enable_scalar_product_ab <= '0';
-            data_a_in_enable_scalar_product_aa <= '0';
-            data_a_in_enable_scalar_product_bb <= '0';
+            data_a_in_enable_dot_product_ab <= '0';
+            data_a_in_enable_dot_product_aa <= '0';
+            data_a_in_enable_dot_product_bb <= '0';
 
-            data_b_in_enable_scalar_product_ab <= '0';
-            data_b_in_enable_scalar_product_aa <= '0';
-            data_b_in_enable_scalar_product_bb <= '0';
+            data_b_in_enable_dot_product_ab <= '0';
+            data_b_in_enable_dot_product_aa <= '0';
+            data_b_in_enable_dot_product_bb <= '0';
 
             data_a_in_product_int <= '0';
             data_b_in_product_int <= '0';
@@ -355,9 +356,9 @@ begin
             controller_ctrl_fsm_int <= SCALAR_PRODUCT_STATE;
           else
             -- Control Internal
-            start_scalar_product_ab <= '0';
-            start_scalar_product_aa <= '0';
-            start_scalar_product_bb <= '0';
+            start_dot_product_ab <= '0';
+            start_dot_product_aa <= '0';
+            start_dot_product_bb <= '0';
           end if;
 
           -- Control Outputs
@@ -365,7 +366,7 @@ begin
 
         when SCALAR_PRODUCT_STATE =>    -- STEP 2
 
-          if (data_out_enable_scalar_product_ab = '1') then
+          if (data_out_enable_dot_product_ab = '1') then
             if (unsigned(index_product_ab_loop) = unsigned(LENGTH_IN)) then
               -- Control Internal
               index_product_ab_loop <= ZERO_CONTROL;
@@ -378,7 +379,7 @@ begin
             data_out_product_ab_int <= '1';
           end if;
 
-          if (data_out_enable_scalar_product_aa = '1') then
+          if (data_out_enable_dot_product_aa = '1') then
             if (unsigned(index_product_aa_loop) = unsigned(LENGTH_IN)) then
               -- Control Internal
               index_product_aa_loop <= ZERO_CONTROL;
@@ -391,7 +392,7 @@ begin
             data_out_product_aa_int <= '1';
           end if;
 
-          if (data_out_enable_scalar_product_bb = '1') then
+          if (data_out_enable_dot_product_bb = '1') then
             if (unsigned(index_product_bb_loop) = unsigned(LENGTH_IN)) then
               -- Control Internal
               index_product_bb_loop <= ZERO_CONTROL;
@@ -407,8 +408,8 @@ begin
           if (data_out_product_ab_int = '1' and data_out_product_aa_int = '1' and data_out_product_bb_int = '1') then
             if ((unsigned(index_product_ab_loop) = unsigned(LENGTH_IN)) and (unsigned(index_product_aa_loop) = unsigned(LENGTH_IN)) and (unsigned(index_product_bb_loop) = unsigned(LENGTH_IN))) then
               -- Data Internals
-              data_a_in_scalar_multiplier <= data_out_scalar_product_aa;
-              data_b_in_scalar_multiplier <= data_out_scalar_product_bb;
+              data_a_in_scalar_multiplier <= data_out_dot_product_aa;
+              data_b_in_scalar_multiplier <= data_out_dot_product_bb;
 
               -- Control Internal
               start_scalar_multiplier <= '1';
@@ -440,7 +441,7 @@ begin
             start_scalar_divider <= '1';
 
             -- Data Internal
-            data_a_in_scalar_divider <= data_out_scalar_product_ab;
+            data_a_in_scalar_divider <= data_out_dot_product_ab;
             data_b_in_scalar_divider <= data_out_scalar_multiplier;
 
             -- FSM Control
@@ -518,8 +519,8 @@ begin
       DATA_OUT  => data_out_scalar_divider
       );
 
-  -- SCALAR PRODUCT AB
-  scalar_product_ab : ntm_scalar_product
+  -- DOT PRODUCT AB
+  dot_product_ab : ntm_dot_product
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -530,23 +531,23 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_product_ab,
-      READY => ready_scalar_product_ab,
+      START => start_dot_product_ab,
+      READY => ready_dot_product_ab,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_scalar_product_ab,
-      DATA_B_IN_ENABLE => data_b_in_enable_scalar_product_ab,
+      DATA_A_IN_ENABLE => data_a_in_enable_dot_product_ab,
+      DATA_B_IN_ENABLE => data_b_in_enable_dot_product_ab,
 
-      DATA_OUT_ENABLE => data_out_enable_scalar_product_ab,
+      DATA_OUT_ENABLE => data_out_enable_dot_product_ab,
 
       -- DATA
-      LENGTH_IN => length_in_scalar_product_ab,
-      DATA_A_IN => data_a_in_scalar_product_ab,
-      DATA_B_IN => data_b_in_scalar_product_ab,
-      DATA_OUT  => data_out_scalar_product_ab
+      LENGTH_IN => length_in_dot_product_ab,
+      DATA_A_IN => data_a_in_dot_product_ab,
+      DATA_B_IN => data_b_in_dot_product_ab,
+      DATA_OUT  => data_out_dot_product_ab
       );
 
-  -- SCALAR PRODUCT AA
-  scalar_product_aa : ntm_scalar_product
+  -- DOT PRODUCT AA
+  dot_product_aa : ntm_dot_product
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -557,23 +558,23 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_product_aa,
-      READY => ready_scalar_product_aa,
+      START => start_dot_product_aa,
+      READY => ready_dot_product_aa,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_scalar_product_aa,
-      DATA_B_IN_ENABLE => data_b_in_enable_scalar_product_aa,
+      DATA_A_IN_ENABLE => data_a_in_enable_dot_product_aa,
+      DATA_B_IN_ENABLE => data_b_in_enable_dot_product_aa,
 
-      DATA_OUT_ENABLE => data_out_enable_scalar_product_aa,
+      DATA_OUT_ENABLE => data_out_enable_dot_product_aa,
 
       -- DATA
-      LENGTH_IN => length_in_scalar_product_aa,
-      DATA_A_IN => data_a_in_scalar_product_aa,
-      DATA_B_IN => data_b_in_scalar_product_aa,
-      DATA_OUT  => data_out_scalar_product_aa
+      LENGTH_IN => length_in_dot_product_aa,
+      DATA_A_IN => data_a_in_dot_product_aa,
+      DATA_B_IN => data_b_in_dot_product_aa,
+      DATA_OUT  => data_out_dot_product_aa
       );
 
-  -- SCALAR PRODUCT BB
-  scalar_product_bb : ntm_scalar_product
+  -- DOT PRODUCT BB
+  dot_product_bb : ntm_dot_product
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -584,19 +585,19 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_product_bb,
-      READY => ready_scalar_product_bb,
+      START => start_dot_product_bb,
+      READY => ready_dot_product_bb,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_scalar_product_bb,
-      DATA_B_IN_ENABLE => data_b_in_enable_scalar_product_bb,
+      DATA_A_IN_ENABLE => data_a_in_enable_dot_product_bb,
+      DATA_B_IN_ENABLE => data_b_in_enable_dot_product_bb,
 
-      DATA_OUT_ENABLE => data_out_enable_scalar_product_bb,
+      DATA_OUT_ENABLE => data_out_enable_dot_product_bb,
 
       -- DATA
-      LENGTH_IN => length_in_scalar_product_bb,
-      DATA_A_IN => data_a_in_scalar_product_bb,
-      DATA_B_IN => data_b_in_scalar_product_bb,
-      DATA_OUT  => data_out_scalar_product_bb
+      LENGTH_IN => length_in_dot_product_bb,
+      DATA_A_IN => data_a_in_dot_product_bb,
+      DATA_B_IN => data_b_in_dot_product_bb,
+      DATA_OUT  => data_out_dot_product_bb
       );
 
 end architecture;

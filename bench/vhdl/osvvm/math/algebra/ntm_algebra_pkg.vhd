@@ -104,25 +104,34 @@ package ntm_algebra_pkg is
   constant VECTOR_SAMPLE_A : vector_buffer := (FOUR, NINE, THREE);
   constant VECTOR_SAMPLE_B : vector_buffer := (THREE, NINE, ZERO);
 
-  -- FUNCTIONALITY
+  -- VECTOR-FUNCTIONALITY
+  signal STIMULUS_NTM_DOT_PRODUCT_TEST      : boolean := false;
+  signal STIMULUS_NTM_VECTOR_TRANSPOSE_TEST : boolean := false;
+
+  signal STIMULUS_NTM_DOT_PRODUCT_CASE_1      : boolean := false;
+  signal STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_1 : boolean := false;
+
+  signal STIMULUS_NTM_DOT_PRODUCT_CASE_0      : boolean := false;
+  signal STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_0 : boolean := false;
+
+  -- MATRIX-FUNCTIONALITY
   signal STIMULUS_NTM_MATRIX_PRODUCT_TEST   : boolean := false;
   signal STIMULUS_NTM_MATRIX_TRANSPOSE_TEST : boolean := false;
-  signal STIMULUS_NTM_SCALAR_PRODUCT_TEST   : boolean := false;
-  signal STIMULUS_NTM_SCALAR_TRANSPOSE_TEST : boolean := false;
-  signal STIMULUS_NTM_TENSOR_PRODUCT_TEST   : boolean := false;
-  signal STIMULUS_NTM_TENSOR_TRANSPOSE_TEST : boolean := false;
 
   signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_0   : boolean := false;
   signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_PRODUCT_CASE_0   : boolean := false;
-  signal STIMULUS_NTM_SCALAR_TRANSPOSE_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_0   : boolean := false;
-  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_0 : boolean := false;
 
   signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_1   : boolean := false;
   signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_PRODUCT_CASE_1   : boolean := false;
-  signal STIMULUS_NTM_SCALAR_TRANSPOSE_CASE_1 : boolean := false;
+
+
+  -- TENSOR-FUNCTIONALITY
+  signal STIMULUS_NTM_TENSOR_PRODUCT_TEST   : boolean := false;
+  signal STIMULUS_NTM_TENSOR_TRANSPOSE_TEST : boolean := false;
+
+  signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_0   : boolean := false;
+  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_0 : boolean := false;
+
   signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_1   : boolean := false;
   signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_1 : boolean := false;
 
@@ -147,6 +156,38 @@ package ntm_algebra_pkg is
       -- GLOBAL
       CLK : out std_logic;
       RST : out std_logic;
+
+      -- DOT PRODUCT
+      -- CONTROL
+      DOT_PRODUCT_START : out std_logic;
+      DOT_PRODUCT_READY : in  std_logic;
+
+      DOT_PRODUCT_DATA_A_IN_ENABLE : out std_logic;
+      DOT_PRODUCT_DATA_B_IN_ENABLE : out std_logic;
+
+      DOT_PRODUCT_DATA_OUT_ENABLE : in std_logic;
+
+      -- DATA
+      DOT_PRODUCT_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DOT_PRODUCT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DOT_PRODUCT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DOT_PRODUCT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- VECTOR TRANSPOSE
+      -- CONTROL
+      VECTOR_TRANSPOSE_START : out std_logic;
+      VECTOR_TRANSPOSE_READY : in  std_logic;
+
+      VECTOR_TRANSPOSE_DATA_IN_ENABLE : out std_logic;
+
+      VECTOR_TRANSPOSE_DATA_ENABLE : in std_logic;
+
+      VECTOR_TRANSPOSE_DATA_OUT_ENABLE : in std_logic;
+
+      -- DATA
+      VECTOR_TRANSPOSE_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- MATRIX PRODUCT
       -- CONTROL
@@ -192,38 +233,6 @@ package ntm_algebra_pkg is
       MATRIX_TRANSPOSE_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- SCALAR PRODUCT
-      -- CONTROL
-      SCALAR_PRODUCT_START : out std_logic;
-      SCALAR_PRODUCT_READY : in  std_logic;
-
-      SCALAR_PRODUCT_DATA_A_IN_ENABLE : out std_logic;
-      SCALAR_PRODUCT_DATA_B_IN_ENABLE : out std_logic;
-
-      SCALAR_PRODUCT_DATA_OUT_ENABLE : in std_logic;
-
-      -- DATA
-      SCALAR_PRODUCT_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SCALAR_PRODUCT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_PRODUCT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_PRODUCT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- SCALAR TRANSPOSE
-      -- CONTROL
-      SCALAR_TRANSPOSE_START : out std_logic;
-      SCALAR_TRANSPOSE_READY : in  std_logic;
-
-      SCALAR_TRANSPOSE_DATA_IN_ENABLE : out std_logic;
-
-      SCALAR_TRANSPOSE_DATA_ENABLE : in std_logic;
-
-      SCALAR_TRANSPOSE_DATA_OUT_ENABLE : in std_logic;
-
-      -- DATA
-      SCALAR_TRANSPOSE_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SCALAR_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- TENSOR PRODUCT
       -- CONTROL
