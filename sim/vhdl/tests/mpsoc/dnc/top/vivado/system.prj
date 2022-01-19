@@ -27,11 +27,11 @@ vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_a
 vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_multiplier.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_divider.vhd
 
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_product.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_transpose.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/vector/ntm_dot_product.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_product.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_product.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_transpose.vhd
 
 vhdl2008 work ../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_cosh_function.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_cosine_similarity_function.vhd
