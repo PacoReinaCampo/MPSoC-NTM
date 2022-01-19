@@ -27,10 +27,13 @@
 
 ../../../../../../../rtl/vhdl/math/algebra/vector/ntm_dot_product.vhd
 ../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_transpose.vhd
+../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_vector_convolution.vhd
 ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_product.vhd
 ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
+../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_matrix_convolution.vhd
 ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_product.vhd
 ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_transpose.vhd
+../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_convolution.vhd
 
 ../../../../../../../bench/vhdl/tests/math/algebra/ntm_algebra_pkg.vhd
 ../../../../../../../bench/vhdl/tests/math/algebra/ntm_algebra_stimulus.vhd

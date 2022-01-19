@@ -105,35 +105,44 @@ package ntm_algebra_pkg is
   constant VECTOR_SAMPLE_B : vector_buffer := (THREE, NINE, ZERO);
 
   -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_NTM_DOT_PRODUCT_TEST      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_TRANSPOSE_TEST : boolean := false;
+  signal STIMULUS_NTM_DOT_PRODUCT_TEST        : boolean := false;
+  signal STIMULUS_NTM_VECTOR_CONVOLUTION_TEST : boolean := false;
+  signal STIMULUS_NTM_VECTOR_TRANSPOSE_TEST   : boolean := false;
 
-  signal STIMULUS_NTM_DOT_PRODUCT_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_DOT_PRODUCT_CASE_1        : boolean := false;
+  signal STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_1   : boolean := false;
 
-  signal STIMULUS_NTM_DOT_PRODUCT_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_DOT_PRODUCT_CASE_0        : boolean := false;
+  signal STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_0   : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
-  signal STIMULUS_NTM_MATRIX_PRODUCT_TEST   : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TRANSPOSE_TEST : boolean := false;
+  signal STIMULUS_NTM_MATRIX_PRODUCT_TEST     : boolean := false;
+  signal STIMULUS_NTM_MATRIX_CONVOLUTION_TEST : boolean := false;
+  signal STIMULUS_NTM_MATRIX_TRANSPOSE_TEST   : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_0   : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_0     : boolean := false;
+  signal STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0   : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_1   : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_1     : boolean := false;
+  signal STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1   : boolean := false;
 
 
   -- TENSOR-FUNCTIONALITY
-  signal STIMULUS_NTM_TENSOR_PRODUCT_TEST   : boolean := false;
-  signal STIMULUS_NTM_TENSOR_TRANSPOSE_TEST : boolean := false;
+  signal STIMULUS_NTM_TENSOR_PRODUCT_TEST     : boolean := false;
+  signal STIMULUS_NTM_TENSOR_CONVOLUTION_TEST : boolean := false;
+  signal STIMULUS_NTM_TENSOR_TRANSPOSE_TEST   : boolean := false;
 
-  signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_0   : boolean := false;
-  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_0     : boolean := false;
+  signal STIMULUS_NTM_TENSOR_CONVOLUTION_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_0   : boolean := false;
 
-  signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_1   : boolean := false;
-  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_1     : boolean := false;
+  signal STIMULUS_NTM_TENSOR_CONVOLUTION_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_1   : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
@@ -172,6 +181,22 @@ package ntm_algebra_pkg is
       DOT_PRODUCT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       DOT_PRODUCT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       DOT_PRODUCT_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- VECTOR CONVOLUTION
+      -- CONTROL
+      VECTOR_CONVOLUTION_START : out std_logic;
+      VECTOR_CONVOLUTION_READY : in  std_logic;
+
+      VECTOR_CONVOLUTION_DATA_A_IN_ENABLE : out std_logic;
+      VECTOR_CONVOLUTION_DATA_B_IN_ENABLE : out std_logic;
+
+      VECTOR_CONVOLUTION_DATA_OUT_ENABLE : in std_logic;
+
+      -- DATA
+      VECTOR_CONVOLUTION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_CONVOLUTION_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_CONVOLUTION_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_CONVOLUTION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- VECTOR TRANSPOSE
       -- CONTROL
@@ -213,6 +238,33 @@ package ntm_algebra_pkg is
       MATRIX_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- TENSOR CONVOLUTION
+      -- CONTROL
+      TENSOR_CONVOLUTION_START : out std_logic;
+      TENSOR_CONVOLUTION_READY : in  std_logic;
+
+      TENSOR_CONVOLUTION_DATA_A_IN_I_ENABLE : out std_logic;
+      TENSOR_CONVOLUTION_DATA_A_IN_J_ENABLE : out std_logic;
+      TENSOR_CONVOLUTION_DATA_A_IN_K_ENABLE : out std_logic;
+      TENSOR_CONVOLUTION_DATA_B_IN_I_ENABLE : out std_logic;
+      TENSOR_CONVOLUTION_DATA_B_IN_J_ENABLE : out std_logic;
+      TENSOR_CONVOLUTION_DATA_B_IN_K_ENABLE : out std_logic;
+
+      TENSOR_CONVOLUTION_DATA_OUT_I_ENABLE : in std_logic;
+      TENSOR_CONVOLUTION_DATA_OUT_J_ENABLE : in std_logic;
+      TENSOR_CONVOLUTION_DATA_OUT_K_ENABLE : in std_logic;
+
+      -- DATA
+      TENSOR_CONVOLUTION_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- MATRIX TRANSPOSE
       -- CONTROL
@@ -260,6 +312,31 @@ package ntm_algebra_pkg is
       TENSOR_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- MATRIX CONVOLUTION
+      -- CONTROL
+      MATRIX_CONVOLUTION_START : out std_logic;
+      MATRIX_CONVOLUTION_READY : in  std_logic;
+
+      MATRIX_CONVOLUTION_DATA_A_IN_I_ENABLE : out std_logic;
+      MATRIX_CONVOLUTION_DATA_A_IN_J_ENABLE : out std_logic;
+      MATRIX_CONVOLUTION_DATA_B_IN_I_ENABLE : out std_logic;
+      MATRIX_CONVOLUTION_DATA_B_IN_J_ENABLE : out std_logic;
+
+      MATRIX_CONVOLUTION_DATA_I_ENABLE : in std_logic;
+      MATRIX_CONVOLUTION_DATA_J_ENABLE : in std_logic;
+
+      MATRIX_CONVOLUTION_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_CONVOLUTION_DATA_OUT_J_ENABLE : in std_logic;
+
+      -- DATA
+      MATRIX_CONVOLUTION_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_CONVOLUTION_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_CONVOLUTION_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_CONVOLUTION_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_CONVOLUTION_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_CONVOLUTION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_CONVOLUTION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- TENSOR TRANSPOSE
       -- CONTROL
