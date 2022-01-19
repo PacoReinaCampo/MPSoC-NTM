@@ -27,11 +27,11 @@
 ../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_multiplier.vhd
 ../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_divider.vhd
 
-../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_product.vhd
-../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_transpose.vhd
-../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
 ../../../../../../../rtl/vhdl/math/algebra/vector/ntm_dot_product.vhd
+../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_product.vhd
+../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
 ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_product.vhd
+../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_transpose.vhd
 
 ../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_cosh_function.vhd
 ../../../../../../../rtl/vhdl/math/function/scalar/ntm_scalar_cosine_similarity_function.vhd

@@ -544,51 +544,51 @@ begin
         index_j_loop <= ZERO_CONTROL;
 
         MATRIX_PRODUCT_FIRST_RUN : loop
-          if ((MATRIX_PRODUCT_DATA_I_ENABLE = '1') and (MATRIX_PRODUCT_DATA_J_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(MATRIX_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+          if (MATRIX_PRODUCT_DATA_I_ENABLE = '1' and MATRIX_PRODUCT_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_PRODUCT_DATA_I_ENABLE = '1' and MATRIX_PRODUCT_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
             MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= ZERO_CONTROL;
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_PRODUCT_DATA_I_ENABLE = '1') and (MATRIX_PRODUCT_DATA_J_ENABLE = '1') and (unsigned(index_i_loop) < unsigned(MATRIX_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_PRODUCT_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
             MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
             MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_PRODUCT_DATA_J_ENABLE = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '0';
             MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '0';
             MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '0';
             MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (MATRIX_PRODUCT_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_PRODUCT_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_PRODUCT_DATA_J_ENABLE = '1' or MATRIX_PRODUCT_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           end if;
 
           -- GLOBAL
@@ -615,51 +615,51 @@ begin
         index_j_loop <= ZERO_CONTROL;
 
         MATRIX_PRODUCT_SECOND_RUN : loop
-          if ((MATRIX_PRODUCT_DATA_I_ENABLE = '1') and (MATRIX_PRODUCT_DATA_J_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(MATRIX_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+          if (MATRIX_PRODUCT_DATA_I_ENABLE = '1' and MATRIX_PRODUCT_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_PRODUCT_DATA_I_ENABLE = '1' and MATRIX_PRODUCT_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
             MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= ZERO_CONTROL;
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_PRODUCT_DATA_I_ENABLE = '1') and (MATRIX_PRODUCT_DATA_J_ENABLE = '1') and (unsigned(index_i_loop) < unsigned(MATRIX_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_PRODUCT_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
             MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
             MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_PRODUCT_DATA_J_ENABLE = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '0';
             MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '0';
             MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '0';
             MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (MATRIX_PRODUCT_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_PRODUCT_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_PRODUCT_DATA_J_ENABLE = '1' or MATRIX_PRODUCT_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           end if;
 
           -- GLOBAL
@@ -699,7 +699,6 @@ begin
         index_j_loop <= ZERO_CONTROL;
 
         MATRIX_TRANSPOSE_FIRST_RUN : loop
-
           if (MATRIX_TRANSPOSE_DATA_I_ENABLE = '1' and MATRIX_TRANSPOSE_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             MATRIX_TRANSPOSE_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));

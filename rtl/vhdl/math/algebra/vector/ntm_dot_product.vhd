@@ -78,7 +78,7 @@ architecture ntm_dot_product_architecture of ntm_dot_product is
   -- Types
   -----------------------------------------------------------------------
 
-  type multiplier_ctrl_fsm is (
+  type product_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
     SCALAR_MULTIPLIER_STATE,            -- STEP 2
@@ -109,13 +109,13 @@ architecture ntm_dot_product_architecture of ntm_dot_product is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal multiplier_ctrl_fsm_int : multiplier_ctrl_fsm;
+  signal product_ctrl_fsm_int : product_ctrl_fsm;
 
   -- Internal Signals
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_a_in_multiplier_int : std_logic;
-  signal data_b_in_multiplier_int : std_logic;
+  signal data_a_in_product_int : std_logic;
+  signal data_b_in_product_int : std_logic;
 
   -- SCALAR ADDER
   -- CONTROL
@@ -172,8 +172,8 @@ begin
 
       operation_scalar_adder <= '0';
 
-      data_a_in_multiplier_int <= '0';
-      data_b_in_multiplier_int <= '0';
+      data_a_in_product_int <= '0';
+      data_b_in_product_int <= '0';
 
       index_loop <= ZERO_CONTROL;
 
@@ -183,7 +183,7 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      case multiplier_ctrl_fsm_int is
+      case product_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -195,7 +195,7 @@ begin
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            multiplier_ctrl_fsm_int <= INPUT_STATE;
+            product_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
         when INPUT_STATE =>             -- STEP 1
@@ -205,7 +205,7 @@ begin
             data_a_in_scalar_multiplier <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_multiplier_int <= '1';
+            data_a_in_product_int <= '1';
           end if;
 
           if (DATA_B_IN_ENABLE = '1') then
@@ -213,18 +213,18 @@ begin
             data_b_in_scalar_multiplier <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_multiplier_int <= '1';
+            data_b_in_product_int <= '1';
           end if;
 
-          if (data_a_in_multiplier_int = '1' and data_b_in_multiplier_int = '1') then
+          if (data_a_in_product_int = '1' and data_b_in_product_int = '1') then
             -- Control Internal
             start_scalar_multiplier <= '1';
 
-            data_a_in_multiplier_int <= '0';
-            data_b_in_multiplier_int <= '0';
+            data_a_in_product_int <= '0';
+            data_b_in_product_int <= '0';
 
             -- FSM Control
-            multiplier_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
+            product_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
           end if;
 
           -- Control Outputs
@@ -248,13 +248,13 @@ begin
             end if;
 
             -- FSM Control
-            multiplier_ctrl_fsm_int <= SCALAR_ADDER_STATE;
+            product_ctrl_fsm_int <= SCALAR_ADDER_STATE;
           else
             -- Control Internal
             start_scalar_multiplier <= '0';
 
-            data_a_in_multiplier_int <= '0';
-            data_b_in_multiplier_int <= '0';
+            data_a_in_product_int <= '0';
+            data_b_in_product_int <= '0';
           end if;
 
         when SCALAR_ADDER_STATE =>      -- STEP 2
@@ -271,13 +271,13 @@ begin
               index_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              multiplier_ctrl_fsm_int <= STARTER_STATE;
+              product_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
               index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
               -- FSM Control
-              multiplier_ctrl_fsm_int <= INPUT_STATE;
+              product_ctrl_fsm_int <= INPUT_STATE;
             end if;
 
             -- Control Outputs
@@ -289,7 +289,7 @@ begin
 
         when others =>
           -- FSM Control
-          multiplier_ctrl_fsm_int <= STARTER_STATE;
+          product_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

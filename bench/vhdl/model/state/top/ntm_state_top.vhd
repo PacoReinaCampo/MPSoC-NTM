@@ -43,6 +43,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
+use work.ntm_state_pkg.all;
 
 entity ntm_state_top is
   generic (
@@ -133,9 +134,9 @@ architecture ntm_state_top_architecture of ntm_state_top is
   signal data_b_in_i_state_vector_state : std_logic;
   signal data_b_in_j_state_vector_state : std_logic;
 
-  signal data_u_in_state_vector_state : std_logic;
+  signal data_u_in_enable_state_vector_state : std_logic;
 
-  signal data_y_out_state_vector_state : std_logic;
+  signal data_x_out_enable_state_vector_state : std_logic;
 
   -- DATA
   signal size_a_i_in_state_vector_state : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -164,9 +165,9 @@ architecture ntm_state_top_architecture of ntm_state_top is
   signal data_d_in_i_state_vector_output : std_logic;
   signal data_d_in_j_state_vector_output : std_logic;
 
-  signal data_u_in_state_vector_output : std_logic;
+  signal data_u_in_enable_state_vector_output : std_logic;
 
-  signal data_y_out_state_vector_output : std_logic;
+  signal data_y_out_enable_state_vector_output : std_logic;
 
   -- DATA
   signal size_a_in_i_state_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -185,7 +186,7 @@ architecture ntm_state_top_architecture of ntm_state_top is
 
   signal data_u_in_state_vector_output : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_y_state_vector_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_y_out_state_vector_output : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -221,9 +222,9 @@ begin
       DATA_B_IN_I_ENABLE => data_b_in_i_state_vector_state,
       DATA_B_IN_J_ENABLE => data_b_in_j_state_vector_state,
 
-      DATA_U_IN_ENABLE => data_u_in_state_vector_state,
+      DATA_U_IN_ENABLE => data_u_in_enable_state_vector_state,
 
-      DATA_X_OUT_ENABLE => data_y_out_state_vector_state,
+      DATA_X_OUT_ENABLE => data_x_out_enable_state_vector_state,
 
       -- DATA
       SIZE_A_I_IN => size_a_i_in_state_vector_state,
@@ -234,9 +235,9 @@ begin
       DATA_A_IN => data_a_in_state_vector_state,
       DATA_B_IN => data_b_in_state_vector_state,
 
-      DATA_U_IN => data_u_state_vector_state,
+      DATA_U_IN => data_u_in_state_vector_state,
 
-      DATA_X_OUT => data_y_state_vector_state
+      DATA_X_OUT => data_x_out_state_vector_state
       );
 
   -- VECTOR OUTPUT
@@ -263,9 +264,9 @@ begin
       DATA_D_IN_I_ENABLE => data_d_in_i_state_vector_output,
       DATA_D_IN_J_ENABLE => data_d_in_j_state_vector_output,
 
-      DATA_U_IN_ENABLE => data_u_in_state_vector_output,
+      DATA_U_IN_ENABLE => data_u_in_enable_state_vector_output,
 
-      DATA_Y_OUT_ENABLE => data_y_out_state_vector_output,
+      DATA_Y_OUT_ENABLE => data_y_out_enable_state_vector_output,
 
       -- DATA
       SIZE_A_I_IN => size_a_in_i_state_vector_output,
@@ -282,9 +283,9 @@ begin
       DATA_C_IN => data_c_in_state_vector_output,
       DATA_D_IN => data_d_in_state_vector_output,
 
-      DATA_U_IN => data_u_state_vector_output,
+      DATA_U_IN => data_u_in_state_vector_output,
 
-      DATA_Y_OUT => data_y_state_vector_output
+      DATA_Y_OUT => data_y_out_state_vector_output
       );
 
 end architecture;

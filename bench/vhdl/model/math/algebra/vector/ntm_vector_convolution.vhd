@@ -42,6 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 
 entity ntm_vector_convolution is
@@ -77,7 +78,7 @@ architecture ntm_vector_convolution_architecture of ntm_vector_convolution is
   -- Types
   -----------------------------------------------------------------------
 
-  type controller_ctrl_fsm is (
+  type convolution_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
     SCALAR_MULTIPLIER_STATE,            -- STEP 2
@@ -108,13 +109,13 @@ architecture ntm_vector_convolution_architecture of ntm_vector_convolution is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+  signal convolution_ctrl_fsm_int : convolution_ctrl_fsm;
 
   -- Internal Signals
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_a_in_multiplier_int : std_logic;
-  signal data_b_in_multiplier_int : std_logic;
+  signal data_a_in_convolution_int : std_logic;
+  signal data_b_in_convolution_int : std_logic;
 
   -- SCALAR ADDER
   -- CONTROL
@@ -144,7 +145,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN * DATA_B_IN = summation(DATA_A_IN[LENGTH_IN-i] · DATA_B_IN[i] [i in 0 to LENGTH_IN-1])
+  -- DATA_OUT = DATA_A_IN · DATA_B_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -171,14 +172,18 @@ begin
 
       operation_scalar_adder <= '0';
 
-      data_a_in_multiplier_int <= '0';
-      data_b_in_multiplier_int <= '0';
+      data_a_in_convolution_int <= '0';
+      data_b_in_convolution_int <= '0';
 
       index_loop <= ZERO_CONTROL;
 
+      -- Data Internal
+      data_a_in_scalar_multiplier <= ZERO_DATA;
+      data_b_in_scalar_multiplier <= ZERO_DATA;
+
     elsif (rising_edge(CLK)) then
 
-      case controller_ctrl_fsm_int is
+      case convolution_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -190,42 +195,42 @@ begin
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= INPUT_STATE;
+            convolution_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
         when INPUT_STATE =>             -- STEP 1
 
-          if ((DATA_A_IN_ENABLE = '1') or (unsigned(index_loop) = unsigned(ZERO_CONTROL))) then
+          if (DATA_A_IN_ENABLE = '1') then
             -- Data Inputs
             data_a_in_scalar_multiplier <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_multiplier_int <= '1';
+            data_a_in_convolution_int <= '1';
           end if;
 
-          if ((DATA_B_IN_ENABLE = '1') or (unsigned(index_loop) = unsigned(ZERO_CONTROL))) then
+          if (DATA_B_IN_ENABLE = '1') then
             -- Data Inputs
             data_b_in_scalar_multiplier <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_multiplier_int <= '1';
+            data_b_in_convolution_int <= '1';
           end if;
 
-          if (data_a_in_multiplier_int = '1' and data_b_in_multiplier_int = '1') then
+          if (data_a_in_convolution_int = '1' and data_b_in_convolution_int = '1') then
             -- Control Internal
             start_scalar_multiplier <= '1';
 
-            data_a_in_multiplier_int <= '0';
-            data_b_in_multiplier_int <= '0';
+            data_a_in_convolution_int <= '0';
+            data_b_in_convolution_int <= '0';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
+            convolution_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
           end if;
 
           -- Control Outputs
           DATA_OUT_ENABLE <= '0';
 
-        when SCALAR_MULTIPLIER_STATE =>  -- STEP 2
+        when SCALAR_MULTIPLIER_STATE =>  -- STEP 3
 
           if (ready_scalar_multiplier = '1') then
             -- Control Internal
@@ -243,16 +248,16 @@ begin
             end if;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
+            convolution_ctrl_fsm_int <= SCALAR_ADDER_STATE;
           else
             -- Control Internal
             start_scalar_multiplier <= '0';
 
-            data_a_in_multiplier_int <= '0';
-            data_b_in_multiplier_int <= '0';
+            data_a_in_convolution_int <= '0';
+            data_b_in_convolution_int <= '0';
           end if;
 
-        when SCALAR_ADDER_STATE =>      -- STEP 3
+        when SCALAR_ADDER_STATE =>      -- STEP 2
 
           if (ready_scalar_adder = '1') then
             if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
@@ -266,13 +271,13 @@ begin
               index_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              controller_ctrl_fsm_int <= STARTER_STATE;
+              convolution_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
               index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= INPUT_STATE;
+              convolution_ctrl_fsm_int <= INPUT_STATE;
             end if;
 
             -- Control Outputs
@@ -284,7 +289,7 @@ begin
 
         when others =>
           -- FSM Control
-          controller_ctrl_fsm_int <= STARTER_STATE;
+          convolution_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

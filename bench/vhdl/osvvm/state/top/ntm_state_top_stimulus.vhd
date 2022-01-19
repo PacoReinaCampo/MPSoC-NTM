@@ -43,9 +43,9 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
-use work.dnc_top_pkg.all;
+use work.ntm_state_top_pkg.all;
 
-entity dnc_top_stimulus is
+entity ntm_state_top_stimulus is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE    : integer := 128;
@@ -64,55 +64,46 @@ entity dnc_top_stimulus is
     RST : out std_logic;
 
     -- CONTROL
-    DNC_TOP_START : out std_logic;
-    DNC_TOP_READY : in  std_logic;
+    NTM_STATE_TOP_START : out std_logic;
+    NTM_STATE_TOP_READY : in  std_logic;
 
-    DNC_TOP_W_IN_L_ENABLE : out std_logic;
-    DNC_TOP_W_IN_X_ENABLE : out std_logic;
+    NTM_STATE_TOP_DATA_A_IN_I_ENABLE : out std_logic;
+    NTM_STATE_TOP_DATA_A_IN_J_ENABLE : out std_logic;
+    NTM_STATE_TOP_DATA_B_IN_I_ENABLE : out std_logic;
+    NTM_STATE_TOP_DATA_B_IN_J_ENABLE : out std_logic;
+    NTM_STATE_TOP_DATA_C_IN_I_ENABLE : out std_logic;
+    NTM_STATE_TOP_DATA_C_IN_J_ENABLE : out std_logic;
+    NTM_STATE_TOP_DATA_D_IN_I_ENABLE : out std_logic;
+    NTM_STATE_TOP_DATA_D_IN_J_ENABLE : out std_logic;
 
-    DNC_TOP_W_OUT_L_ENABLE : in std_logic;
-    DNC_TOP_W_OUT_X_ENABLE : in std_logic;
+    NTM_STATE_TOP_DATA_U_IN_ENABLE : out std_logic;
 
-    DNC_TOP_K_IN_I_ENABLE : out std_logic;
-    DNC_TOP_K_IN_L_ENABLE : out std_logic;
-    DNC_TOP_K_IN_K_ENABLE : out std_logic;
-
-    DNC_TOP_K_OUT_I_ENABLE : in std_logic;
-    DNC_TOP_K_OUT_L_ENABLE : in std_logic;
-    DNC_TOP_K_OUT_K_ENABLE : in std_logic;
-
-    DNC_TOP_U_IN_L_ENABLE : out std_logic;
-    DNC_TOP_U_IN_P_ENABLE : out std_logic;
-
-    DNC_TOP_U_OUT_L_ENABLE : in std_logic;
-    DNC_TOP_U_OUT_P_ENABLE : in std_logic;
-
-    DNC_TOP_B_IN_ENABLE : out std_logic;
-
-    DNC_TOP_B_OUT_ENABLE : in std_logic;
-
-    DNC_TOP_X_IN_ENABLE  : out std_logic;
-    DNC_TOP_Y_OUT_ENABLE : in  std_logic;
+    NTM_STATE_TOP_DATA_X_OUT_ENABLE : in std_logic;
+    NTM_STATE_TOP_DATA_Y_OUT_ENABLE : in std_logic;
 
     -- DATA
-    DNC_TOP_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DNC_TOP_SIZE_Y_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DNC_TOP_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DNC_TOP_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DNC_TOP_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DNC_TOP_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_STATE_TOP_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_STATE_TOP_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_STATE_TOP_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_STATE_TOP_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_STATE_TOP_SIZE_C_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_STATE_TOP_SIZE_C_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_STATE_TOP_SIZE_D_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_STATE_TOP_SIZE_D_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    DNC_TOP_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    DNC_TOP_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    DNC_TOP_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    DNC_TOP_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STATE_TOP_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STATE_TOP_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STATE_TOP_DATA_C_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STATE_TOP_DATA_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DNC_TOP_X_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-    DNC_TOP_Y_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
+    NTM_STATE_TOP_DATA_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    NTM_STATE_TOP_DATA_X_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STATE_TOP_DATA_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
-architecture dnc_top_stimulus_architecture of dnc_top_stimulus is
+architecture ntm_state_top_stimulus_architecture of ntm_state_top_stimulus is
 
   -----------------------------------------------------------------------
   -- Types
@@ -193,7 +184,7 @@ begin
   end process;
 
   -- FUNCTIONALITY
-  DNC_TOP_START <= start_int;
+  NTM_STATE_TOP_START <= start_int;
 
   -----------------------------------------------------------------------
   -- STIMULUS
@@ -202,50 +193,44 @@ begin
   main_test : process
   begin
 
-    if (STIMULUS_DNC_TOP_TEST) then
+    if (STIMULUS_NTM_STATE_TOP_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_DNC_TOP_TEST                   ";
+      MONITOR_TEST <= "STIMULUS_NTM_STATE_TOP_TEST             ";
       -------------------------------------------------------------------
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_DNC_TOP_CASE_0                 ";
+      MONITOR_CASE <= "STIMULUS_NTM_STATE_TOP_CASE_0           ";
       -------------------------------------------------------------------
 
-      if (STIMULUS_DNC_TOP_CASE_0) then
-        DNC_TOP_SIZE_X_IN <= EMPTY;
-        DNC_TOP_SIZE_Y_IN <= EMPTY;
-        DNC_TOP_SIZE_N_IN <= EMPTY;
-        DNC_TOP_SIZE_W_IN <= EMPTY;
-        DNC_TOP_SIZE_L_IN <= EMPTY;
-        DNC_TOP_SIZE_R_IN <= EMPTY;
+      if (STIMULUS_NTM_STATE_TOP_CASE_0) then
+        NTM_STATE_TOP_SIZE_A_I_IN <= THREE_CONTROL;
+        NTM_STATE_TOP_SIZE_A_J_IN <= THREE_CONTROL;
+        NTM_STATE_TOP_SIZE_B_I_IN <= THREE_CONTROL;
+        NTM_STATE_TOP_SIZE_B_J_IN <= THREE_CONTROL;
+        NTM_STATE_TOP_SIZE_C_I_IN <= THREE_CONTROL;
+        NTM_STATE_TOP_SIZE_C_J_IN <= THREE_CONTROL;
+        NTM_STATE_TOP_SIZE_D_I_IN <= THREE_CONTROL;
+        NTM_STATE_TOP_SIZE_D_J_IN <= THREE_CONTROL;
 
-        DNC_TOP_W_IN <= EMPTY;
-        DNC_TOP_K_IN <= EMPTY;
-        DNC_TOP_U_IN <= EMPTY;
-        DNC_TOP_B_IN <= EMPTY;
-
-        DNC_TOP_X_IN <= EMPTY;
+        NTM_STATE_TOP_DATA_U_IN <= EMPTY;
       end if;
 
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_DNC_TOP_CASE_1                 ";
+      MONITOR_CASE <= "STIMULUS_NTM_STATE_TOP_CASE_1           ";
       -------------------------------------------------------------------
 
-      if (STIMULUS_DNC_TOP_CASE_1) then
-        DNC_TOP_SIZE_X_IN <= FULL;
-        DNC_TOP_SIZE_Y_IN <= FULL;
-        DNC_TOP_SIZE_N_IN <= FULL;
-        DNC_TOP_SIZE_W_IN <= FULL;
-        DNC_TOP_SIZE_L_IN <= FULL;
-        DNC_TOP_SIZE_R_IN <= FULL;
+      if (STIMULUS_NTM_STATE_TOP_CASE_1) then
+        NTM_STATE_TOP_SIZE_A_I_IN <= THREE_CONTROL;
+        NTM_STATE_TOP_SIZE_A_J_IN <= THREE_CONTROL;
+        NTM_STATE_TOP_SIZE_B_I_IN <= THREE_CONTROL;
+        NTM_STATE_TOP_SIZE_B_J_IN <= THREE_CONTROL;
+        NTM_STATE_TOP_SIZE_C_I_IN <= THREE_CONTROL;
+        NTM_STATE_TOP_SIZE_C_J_IN <= THREE_CONTROL;
+        NTM_STATE_TOP_SIZE_D_I_IN <= THREE_CONTROL;
+        NTM_STATE_TOP_SIZE_D_J_IN <= THREE_CONTROL;
 
-        DNC_TOP_W_IN <= FULL;
-        DNC_TOP_K_IN <= FULL;
-        DNC_TOP_U_IN <= FULL;
-        DNC_TOP_B_IN <= FULL;
-
-        DNC_TOP_X_IN <= FULL;
+        NTM_STATE_TOP_DATA_U_IN <= FULL;
       end if;
 
       wait for WORKING;

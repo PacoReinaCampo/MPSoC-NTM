@@ -27,11 +27,11 @@ sv work ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_adde
 sv work ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_multiplier.sv
 sv work ../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_divider.sv
 
-sv work ../../../../../../../rtl/verilog/math/algebra/matrix/ntm_matrix_product.sv
-sv work ../../../../../../../rtl/verilog/math/algebra/tensor/ntm_tensor_transpose.sv
-sv work ../../../../../../../rtl/verilog/math/algebra/matrix/ntm_matrix_transpose.sv
 sv work ../../../../../../../rtl/verilog/math/algebra/vector/ntm_dot_product.sv
+sv work ../../../../../../../rtl/verilog/math/algebra/matrix/ntm_matrix_product.sv
+sv work ../../../../../../../rtl/verilog/math/algebra/matrix/ntm_matrix_transpose.sv
 sv work ../../../../../../../rtl/verilog/math/algebra/tensor/ntm_tensor_product.sv
+sv work ../../../../../../../rtl/verilog/math/algebra/tensor/ntm_tensor_transpose.sv
 
 sv work ../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_cosh_function.sv
 sv work ../../../../../../../rtl/verilog/math/function/scalar/ntm_scalar_cosine_similarity_function.sv

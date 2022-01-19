@@ -141,10 +141,10 @@ architecture ntm_matrix_product_architecture of ntm_matrix_product is
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_a_in_i_multiplier_int : std_logic;
-  signal data_a_in_j_multiplier_int : std_logic;
-  signal data_b_in_i_multiplier_int : std_logic;
-  signal data_b_in_j_multiplier_int : std_logic;
+  signal data_a_in_i_product_int : std_logic;
+  signal data_a_in_j_product_int : std_logic;
+  signal data_b_in_i_product_int : std_logic;
+  signal data_b_in_j_product_int : std_logic;
 
   -- SCALAR ADDER
   -- CONTROL
@@ -206,10 +206,10 @@ begin
       index_j_loop <= ZERO_CONTROL;
       index_k_loop <= ZERO_CONTROL;
 
-      data_a_in_i_multiplier_int <= '0';
-      data_a_in_j_multiplier_int <= '0';
-      data_b_in_i_multiplier_int <= '0';
-      data_b_in_j_multiplier_int <= '0';
+      data_a_in_i_product_int <= '0';
+      data_a_in_j_product_int <= '0';
+      data_b_in_i_product_int <= '0';
+      data_b_in_j_product_int <= '0';
 
       -- Data Internal
       data_a_in_scalar_adder <= ZERO_DATA;
@@ -222,20 +222,16 @@ begin
 
       case product_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
-          -- Data Outputs
-          DATA_OUT <= ZERO_DATA;
-
           -- Control Outputs
-          READY <= '0';
-
-          DATA_I_ENABLE <= '0';
-          DATA_J_ENABLE <= '0';
-
           DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
 
           if (START = '1') then
             if (unsigned(SIZE_A_J_IN) = unsigned(SIZE_B_I_IN)) then
+              -- Control Outputs
+              DATA_I_ENABLE <= '1';
+              DATA_J_ENABLE <= '1';
+
               -- Control Internal
               index_i_loop <= ZERO_CONTROL;
               index_j_loop <= ZERO_CONTROL;
@@ -247,45 +243,47 @@ begin
               -- Control Outputs
               READY <= '1';
             end if;
+          else
+            -- Control Outputs
+             READY <= '0';
+
+            DATA_I_ENABLE <= '0';
+            DATA_J_ENABLE <= '0';
           end if;
 
         when INPUT_I_STATE =>           -- STEP 1
 
-          if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1')) or ((unsigned(index_i_loop) = unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) = unsigned(ZERO_CONTROL)))) then
+          if ((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1')) then
             -- Data Inputs
             matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_i_multiplier_int <= '1';
-            data_a_in_j_multiplier_int <= '1';
+            data_a_in_i_product_int <= '1';
+            data_a_in_j_product_int <= '1';
           end if;
 
-          if (((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) or ((unsigned(index_i_loop) = unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) = unsigned(ZERO_CONTROL)))) then
+          if ((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) then
             -- Data Inputs
             matrix_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_i_multiplier_int <= '1';
-            data_b_in_j_multiplier_int <= '1';
+            data_b_in_i_product_int <= '1';
+            data_b_in_j_product_int <= '1';
           end if;
 
           -- Control Outputs
           DATA_I_ENABLE <= '0';
           DATA_J_ENABLE <= '0';
 
-          if (data_a_in_i_multiplier_int = '1' and data_a_in_j_multiplier_int = '1' and data_b_in_i_multiplier_int = '1' and data_b_in_j_multiplier_int = '1') then
+          if (data_a_in_i_product_int = '1' and data_a_in_j_product_int = '1' and data_b_in_i_product_int = '1' and data_b_in_j_product_int = '1') then
             -- Control Internal
-            data_a_in_i_multiplier_int <= '0';
-            data_a_in_j_multiplier_int <= '0';
-            data_b_in_i_multiplier_int <= '0';
-            data_b_in_j_multiplier_int <= '0';
+            data_a_in_i_product_int <= '0';
+            data_a_in_j_product_int <= '0';
+            data_b_in_i_product_int <= '0';
+            data_b_in_j_product_int <= '0';
 
             -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
-              product_ctrl_fsm_int <= ENDER_I_STATE;
-            else
-              product_ctrl_fsm_int <= ENDER_J_STATE;
-            end if;
+            product_ctrl_fsm_int <= ENDER_J_STATE;
           end if;
 
         when INPUT_J_STATE =>           -- STEP 2
@@ -295,7 +293,7 @@ begin
             matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_j_multiplier_int <= '1';
+            data_a_in_j_product_int <= '1';
           end if;
 
           if (DATA_B_IN_J_ENABLE = '1') then
@@ -303,16 +301,16 @@ begin
             matrix_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_j_multiplier_int <= '1';
+            data_b_in_j_product_int <= '1';
           end if;
 
           -- Control Outputs
           DATA_J_ENABLE <= '0';
 
-          if (data_a_in_j_multiplier_int = '1' and data_b_in_j_multiplier_int = '1') then
+          if (data_a_in_j_product_int = '1' and data_b_in_j_product_int = '1') then
             -- Control Internal
-            data_a_in_j_multiplier_int <= '0';
-            data_b_in_j_multiplier_int <= '0';
+            data_a_in_j_product_int <= '0';
+            data_b_in_j_product_int <= '0';
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
@@ -327,10 +325,6 @@ begin
           if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
             DATA_OUT <= matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- Control Outputs
-            DATA_I_ENABLE <= '1';
-            DATA_J_ENABLE <= '1';
 
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;

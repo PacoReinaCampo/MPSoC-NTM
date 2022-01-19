@@ -42,7 +42,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-package ntm_lstm_controller_pkg is
+package ntm_state_pkg is
 
   -----------------------------------------------------------------------
   -- Constants
@@ -178,6 +178,8 @@ package ntm_lstm_controller_pkg is
       DATA_B_IN_J_ENABLE : in std_logic;
 
       DATA_U_IN_ENABLE : in std_logic;
+
+      DATA_X_OUT_ENABLE : out std_logic;
 
       -- DATA
       SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -368,4 +370,4 @@ package ntm_lstm_controller_pkg is
       );
   end component;
 
-end ntm_lstm_controller_pkg;
+end ntm_state_pkg;

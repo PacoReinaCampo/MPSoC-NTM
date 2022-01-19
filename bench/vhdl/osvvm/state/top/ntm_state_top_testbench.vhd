@@ -40,12 +40,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.ntm_math_pkg.all;
-use work.ntm_lstm_controller_pkg.all;
-use work.dnc_core_pkg.all;
-use work.dnc_top_pkg.all;
+use work.ntm_state_pkg.all;
+use work.ntm_state_top_pkg.all;
 
-entity dnc_top_testbench is
+entity ntm_state_top_testbench is
   generic (
     -- SYSTEM-SIZE
     DATA_SIZE    : integer := 128;
@@ -59,13 +57,13 @@ entity dnc_top_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- FUNCTIONALITY
-    ENABLE_DNC_TOP_TEST   : boolean := false;
-    ENABLE_DNC_TOP_CASE_0 : boolean := false;
-    ENABLE_DNC_TOP_CASE_1 : boolean := false
+    ENABLE_NTM_STATE_TOP_TEST   : boolean := false;
+    ENABLE_NTM_STATE_TOP_CASE_0 : boolean := false;
+    ENABLE_NTM_STATE_TOP_CASE_1 : boolean := false
     );
-end dnc_top_testbench;
+end ntm_state_top_testbench;
 
-architecture dnc_top_testbench_architecture of dnc_top_testbench is
+architecture ntm_state_top_testbench_architecture of ntm_state_top_testbench is
 
   -----------------------------------------------------------------------
   -- Signals
@@ -77,51 +75,42 @@ architecture dnc_top_testbench_architecture of dnc_top_testbench is
 
   -- TOP
   -- CONTROL
-  signal start_top : std_logic;
-  signal ready_top : std_logic;
+  signal start_state_top : std_logic;
+  signal ready_state_top : std_logic;
 
-  signal w_in_l_enable_top : std_logic;
-  signal w_in_x_enable_top : std_logic;
+  signal data_a_i_in_enable_state_top : std_logic;
+  signal data_a_j_in_enable_state_top : std_logic;
+  signal data_b_i_in_enable_state_top : std_logic;
+  signal data_b_j_in_enable_state_top : std_logic;
+  signal data_c_i_in_enable_state_top : std_logic;
+  signal data_c_j_in_enable_state_top : std_logic;
+  signal data_d_i_in_enable_state_top : std_logic;
+  signal data_d_j_in_enable_state_top : std_logic;
 
-  signal w_out_l_enable_top : std_logic;
-  signal w_out_x_enable_top : std_logic;
+  signal data_u_in_enable_state_top : std_logic;
 
-  signal k_in_i_enable_top : std_logic;
-  signal k_in_l_enable_top : std_logic;
-  signal k_in_k_enable_top : std_logic;
-
-  signal k_out_i_enable_top : std_logic;
-  signal k_out_l_enable_top : std_logic;
-  signal k_out_k_enable_top : std_logic;
-
-  signal u_in_l_enable_top : std_logic;
-  signal u_in_p_enable_top : std_logic;
-
-  signal u_out_l_enable_top : std_logic;
-  signal u_out_p_enable_top : std_logic;
-
-  signal b_in_enable_top : std_logic;
-
-  signal b_out_enable_top : std_logic;
-
-  signal x_in_enable_top  : std_logic;
-  signal y_out_enable_top : std_logic;
+  signal data_x_out_enable_state_top : std_logic;
+  signal data_y_out_enable_state_top : std_logic;
 
   -- DATA
-  signal size_x_in_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_y_in_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_n_in_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_w_in_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_l_in_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_r_in_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_i_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_c_i_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_c_j_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_d_i_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_d_j_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal w_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal k_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal u_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal b_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_c_in_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_d_in_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal x_in_top  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal y_out_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_u_in_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_x_out_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_y_out_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -130,7 +119,7 @@ begin
   -----------------------------------------------------------------------
 
   -- STIMULUS
-  top_stimulus : dnc_top_stimulus
+  top_stimulus : ntm_state_top_stimulus
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE    => DATA_SIZE,
@@ -149,56 +138,47 @@ begin
       RST => RST,
 
       -- CONTROL
-      DNC_TOP_START => start_top,
-      DNC_TOP_READY => ready_top,
+      NTM_STATE_TOP_START => start_state_top,
+      NTM_STATE_TOP_READY => ready_state_top,
 
-      DNC_TOP_W_IN_L_ENABLE => w_in_l_enable_top,
-      DNC_TOP_W_IN_X_ENABLE => w_in_x_enable_top,
+      NTM_STATE_TOP_DATA_A_IN_I_ENABLE => data_a_i_in_enable_state_top,
+      NTM_STATE_TOP_DATA_A_IN_J_ENABLE => data_a_j_in_enable_state_top,
+      NTM_STATE_TOP_DATA_B_IN_I_ENABLE => data_b_i_in_enable_state_top,
+      NTM_STATE_TOP_DATA_B_IN_J_ENABLE => data_b_j_in_enable_state_top,
+      NTM_STATE_TOP_DATA_C_IN_I_ENABLE => data_c_i_in_enable_state_top,
+      NTM_STATE_TOP_DATA_C_IN_J_ENABLE => data_c_j_in_enable_state_top,
+      NTM_STATE_TOP_DATA_D_IN_I_ENABLE => data_d_i_in_enable_state_top,
+      NTM_STATE_TOP_DATA_D_IN_J_ENABLE => data_d_j_in_enable_state_top,
 
-      DNC_TOP_W_OUT_L_ENABLE => w_out_l_enable_top,
-      DNC_TOP_W_OUT_X_ENABLE => w_out_x_enable_top,
+      NTM_STATE_TOP_DATA_U_IN_ENABLE => data_u_in_enable_state_top,
 
-      DNC_TOP_K_IN_I_ENABLE => k_in_i_enable_top,
-      DNC_TOP_K_IN_L_ENABLE => k_in_l_enable_top,
-      DNC_TOP_K_IN_K_ENABLE => k_in_k_enable_top,
-
-      DNC_TOP_K_OUT_I_ENABLE => k_out_i_enable_top,
-      DNC_TOP_K_OUT_L_ENABLE => k_out_l_enable_top,
-      DNC_TOP_K_OUT_K_ENABLE => k_out_k_enable_top,
-
-      DNC_TOP_U_IN_L_ENABLE => u_in_l_enable_top,
-      DNC_TOP_U_IN_P_ENABLE => u_in_p_enable_top,
-
-      DNC_TOP_U_OUT_L_ENABLE => u_out_l_enable_top,
-      DNC_TOP_U_OUT_P_ENABLE => u_out_p_enable_top,
-
-      DNC_TOP_B_IN_ENABLE => b_in_enable_top,
-
-      DNC_TOP_B_OUT_ENABLE => b_out_enable_top,
-
-      DNC_TOP_X_IN_ENABLE  => x_in_enable_top,
-      DNC_TOP_Y_OUT_ENABLE => y_out_enable_top,
+      NTM_STATE_TOP_DATA_X_OUT_ENABLE => data_x_out_enable_state_top,
+      NTM_STATE_TOP_DATA_Y_OUT_ENABLE => data_y_out_enable_state_top,
 
       -- DATA
-      DNC_TOP_SIZE_X_IN => size_x_in_top,
-      DNC_TOP_SIZE_Y_IN => size_y_in_top,
-      DNC_TOP_SIZE_N_IN => size_n_in_top,
-      DNC_TOP_SIZE_W_IN => size_w_in_top,
-      DNC_TOP_SIZE_L_IN => size_l_in_top,
-      DNC_TOP_SIZE_R_IN => size_r_in_top,
+      NTM_STATE_TOP_SIZE_A_I_IN => size_a_i_in_state_top,
+      NTM_STATE_TOP_SIZE_A_J_IN => size_a_j_in_state_top,
+      NTM_STATE_TOP_SIZE_B_I_IN => size_b_i_in_state_top,
+      NTM_STATE_TOP_SIZE_B_J_IN => size_b_j_in_state_top,
+      NTM_STATE_TOP_SIZE_C_I_IN => size_c_i_in_state_top,
+      NTM_STATE_TOP_SIZE_C_J_IN => size_c_j_in_state_top,
+      NTM_STATE_TOP_SIZE_D_I_IN => size_d_i_in_state_top,
+      NTM_STATE_TOP_SIZE_D_J_IN => size_d_j_in_state_top,
 
-      DNC_TOP_W_IN => w_in_top,
-      DNC_TOP_K_IN => k_in_top,
-      DNC_TOP_U_IN => u_in_top,
-      DNC_TOP_B_IN => b_in_top,
+      NTM_STATE_TOP_DATA_A_IN => data_a_in_state_top,
+      NTM_STATE_TOP_DATA_B_IN => data_b_in_state_top,
+      NTM_STATE_TOP_DATA_C_IN => data_c_in_state_top,
+      NTM_STATE_TOP_DATA_D_IN => data_d_in_state_top,
 
-      DNC_TOP_X_IN  => x_in_top,
-      DNC_TOP_Y_OUT => y_out_top
+      NTM_STATE_TOP_DATA_U_IN => data_u_in_state_top,
+
+      NTM_STATE_TOP_DATA_X_OUT => data_x_out_state_top,
+      NTM_STATE_TOP_DATA_Y_OUT => data_y_out_state_top
       );
 
   -- TOP
-  dnc_top_test : if (ENABLE_DNC_TOP_TEST) generate
-    top : dnc_top
+  ntm_state_top_test : if (ENABLE_NTM_STATE_TOP_TEST) generate
+    top : ntm_state_top
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -209,52 +189,43 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_top,
-        READY => ready_top,
+        START => start_state_top,
+        READY => ready_state_top,
 
-        W_IN_L_ENABLE => w_in_l_enable_top,
-        W_IN_X_ENABLE => w_in_x_enable_top,
+        DATA_A_IN_I_ENABLE => data_a_i_in_enable_state_top,
+        DATA_A_IN_J_ENABLE => data_a_j_in_enable_state_top,
+        DATA_B_IN_I_ENABLE => data_b_i_in_enable_state_top,
+        DATA_B_IN_J_ENABLE => data_b_j_in_enable_state_top,
+        DATA_C_IN_I_ENABLE => data_c_i_in_enable_state_top,
+        DATA_C_IN_J_ENABLE => data_c_j_in_enable_state_top,
+        DATA_D_IN_I_ENABLE => data_d_i_in_enable_state_top,
+        DATA_D_IN_J_ENABLE => data_d_j_in_enable_state_top,
 
-        W_OUT_L_ENABLE => w_out_l_enable_top,
-        W_OUT_X_ENABLE => w_out_x_enable_top,
+        DATA_U_IN_ENABLE => data_u_in_enable_state_top,
 
-        K_IN_I_ENABLE => k_in_i_enable_top,
-        K_IN_L_ENABLE => k_in_l_enable_top,
-        K_IN_K_ENABLE => k_in_k_enable_top,
-
-        K_OUT_I_ENABLE => k_out_i_enable_top,
-        K_OUT_L_ENABLE => k_out_l_enable_top,
-        K_OUT_K_ENABLE => k_out_k_enable_top,
-
-        U_IN_L_ENABLE => u_in_l_enable_top,
-        U_IN_P_ENABLE => u_in_p_enable_top,
-
-        U_OUT_L_ENABLE => u_out_l_enable_top,
-        U_OUT_P_ENABLE => u_out_p_enable_top,
-
-        B_IN_ENABLE => b_in_enable_top,
-
-        B_OUT_ENABLE => b_in_enable_top,
-
-        X_IN_ENABLE  => x_in_enable_top,
-        Y_OUT_ENABLE => y_out_enable_top,
+        DATA_X_OUT_ENABLE => data_x_out_enable_state_top,
+        DATA_Y_OUT_ENABLE => data_y_out_enable_state_top,
 
         -- DATA
-        SIZE_X_IN => size_x_in_top,
-        SIZE_Y_IN => size_y_in_top,
-        SIZE_N_IN => size_n_in_top,
-        SIZE_W_IN => size_w_in_top,
-        SIZE_L_IN => size_l_in_top,
-        SIZE_R_IN => size_r_in_top,
+        SIZE_A_I_IN => size_a_i_in_state_top,
+        SIZE_A_J_IN => size_a_j_in_state_top,
+        SIZE_B_I_IN => size_b_i_in_state_top,
+        SIZE_B_J_IN => size_b_j_in_state_top,
+        SIZE_C_I_IN => size_c_i_in_state_top,
+        SIZE_C_J_IN => size_c_j_in_state_top,
+        SIZE_D_I_IN => size_d_i_in_state_top,
+        SIZE_D_J_IN => size_d_j_in_state_top,
 
-        W_IN => w_in_top,
-        K_IN => k_in_top,
-        U_IN => u_in_top,
-        B_IN => b_in_top,
+        DATA_A_IN => data_a_in_state_top,
+        DATA_B_IN => data_b_in_state_top,
+        DATA_C_IN => data_c_in_state_top,
+        DATA_D_IN => data_d_in_state_top,
 
-        X_IN  => x_in_top,
-        Y_OUT => y_out_top
+        DATA_U_IN => data_u_in_state_top,
+
+        DATA_X_OUT => data_x_out_state_top,
+        DATA_Y_OUT => data_y_out_state_top
         );
-  end generate dnc_top_test;
+  end generate ntm_state_top_test;
 
-end dnc_top_testbench_architecture;
+end ntm_state_top_testbench_architecture;

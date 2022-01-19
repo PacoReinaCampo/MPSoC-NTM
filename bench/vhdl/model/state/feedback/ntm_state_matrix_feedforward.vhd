@@ -43,6 +43,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
+use work.ntm_state_pkg.all;
 
 entity ntm_state_matrix_feedforward is
   generic (
@@ -108,6 +109,31 @@ architecture ntm_state_matrix_feedforward_architecture of ntm_state_matrix_feedf
   -- Signals
   -----------------------------------------------------------------------
 
+  -- MATRIX PRODUCT
+  -- CONTROL
+  signal start_matrix_product : std_logic;
+  signal ready_matrix_product : std_logic;
+
+  signal data_a_in_i_enable_matrix_product : std_logic;
+  signal data_a_in_j_enable_matrix_product : std_logic;
+  signal data_b_in_i_enable_matrix_product : std_logic;
+  signal data_b_in_j_enable_matrix_product : std_logic;
+
+  signal data_i_enable_matrix_product : std_logic;
+  signal data_j_enable_matrix_product : std_logic;
+
+  signal data_out_i_enable_matrix_product : std_logic;
+  signal data_out_j_enable_matrix_product : std_logic;
+
+  -- DATA
+  signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
@@ -128,5 +154,41 @@ begin
   -- d = inv(I+DK)·D
 
   -- CONTROL
+
+  -- MATRIX PRODUCT
+  matrix_product : ntm_matrix_product
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_matrix_product,
+      READY => ready_matrix_product,
+
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_product,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
+
+      DATA_I_ENABLE => data_i_enable_matrix_product,
+      DATA_J_ENABLE => data_j_enable_matrix_product,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
+
+      -- DATA
+      SIZE_A_I_IN => size_a_i_in_matrix_product,
+      SIZE_A_J_IN => size_a_j_in_matrix_product,
+      SIZE_B_I_IN => size_b_i_in_matrix_product,
+      SIZE_B_J_IN => size_b_j_in_matrix_product,
+      DATA_A_IN   => data_a_in_matrix_product,
+      DATA_B_IN   => data_b_in_matrix_product,
+      DATA_OUT    => data_out_matrix_product
+      );
 
 end architecture;
