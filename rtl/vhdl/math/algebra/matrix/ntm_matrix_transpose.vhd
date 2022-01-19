@@ -165,19 +165,24 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          DATA_I_ENABLE <= '0';
-          DATA_J_ENABLE <= '0';
-
           DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
 
           if (START = '1') then
+            -- Control Outputs
+            DATA_I_ENABLE <= '1';
+            DATA_J_ENABLE <= '1';
+
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            transpose_ctrl_fsm_int <= INPUT_J_STATE;
+            transpose_ctrl_fsm_int <= INPUT_I_STATE;
+          else
+            -- Control Outputs
+            DATA_I_ENABLE <= '0';
+            DATA_J_ENABLE <= '0';
           end if;
 
         when INPUT_I_STATE =>           -- STEP 1
@@ -237,7 +242,7 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            transpose_ctrl_fsm_int <= INPUT_J_STATE;
+            transpose_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
         when ENDER_J_STATE =>           -- STEP 4
@@ -295,10 +300,10 @@ begin
             DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
 
             -- Control Outputs
+            READY <= '1';
+
             DATA_OUT_I_ENABLE <= '1';
             DATA_OUT_J_ENABLE <= '1';
-
-            READY <= '1';
 
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
