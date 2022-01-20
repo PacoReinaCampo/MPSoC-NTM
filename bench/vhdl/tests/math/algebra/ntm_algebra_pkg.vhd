@@ -239,32 +239,30 @@ package ntm_algebra_pkg is
       MATRIX_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- TENSOR CONVOLUTION
+      -- MATRIX CONVOLUTION
       -- CONTROL
-      TENSOR_CONVOLUTION_START : out std_logic;
-      TENSOR_CONVOLUTION_READY : in  std_logic;
+      MATRIX_CONVOLUTION_START : out std_logic;
+      MATRIX_CONVOLUTION_READY : in  std_logic;
 
-      TENSOR_CONVOLUTION_DATA_A_IN_I_ENABLE : out std_logic;
-      TENSOR_CONVOLUTION_DATA_A_IN_J_ENABLE : out std_logic;
-      TENSOR_CONVOLUTION_DATA_A_IN_K_ENABLE : out std_logic;
-      TENSOR_CONVOLUTION_DATA_B_IN_I_ENABLE : out std_logic;
-      TENSOR_CONVOLUTION_DATA_B_IN_J_ENABLE : out std_logic;
-      TENSOR_CONVOLUTION_DATA_B_IN_K_ENABLE : out std_logic;
+      MATRIX_CONVOLUTION_DATA_A_IN_I_ENABLE : out std_logic;
+      MATRIX_CONVOLUTION_DATA_A_IN_J_ENABLE : out std_logic;
+      MATRIX_CONVOLUTION_DATA_B_IN_I_ENABLE : out std_logic;
+      MATRIX_CONVOLUTION_DATA_B_IN_J_ENABLE : out std_logic;
 
-      TENSOR_CONVOLUTION_DATA_OUT_I_ENABLE : in std_logic;
-      TENSOR_CONVOLUTION_DATA_OUT_J_ENABLE : in std_logic;
-      TENSOR_CONVOLUTION_DATA_OUT_K_ENABLE : in std_logic;
+      MATRIX_CONVOLUTION_DATA_I_ENABLE : in std_logic;
+      MATRIX_CONVOLUTION_DATA_J_ENABLE : in std_logic;
+
+      MATRIX_CONVOLUTION_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_CONVOLUTION_DATA_OUT_J_ENABLE : in std_logic;
 
       -- DATA
-      TENSOR_CONVOLUTION_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_CONVOLUTION_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_CONVOLUTION_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_CONVOLUTION_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_CONVOLUTION_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_CONVOLUTION_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_CONVOLUTION_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_CONVOLUTION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_CONVOLUTION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_CONVOLUTION_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_CONVOLUTION_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_CONVOLUTION_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_CONVOLUTION_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_CONVOLUTION_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_CONVOLUTION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_CONVOLUTION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- MATRIX TRANSPOSE
       -- CONTROL
@@ -298,6 +296,10 @@ package ntm_algebra_pkg is
       TENSOR_PRODUCT_DATA_B_IN_J_ENABLE : out std_logic;
       TENSOR_PRODUCT_DATA_B_IN_K_ENABLE : out std_logic;
 
+      TENSOR_PRODUCT_DATA_I_ENABLE : in std_logic;
+      TENSOR_PRODUCT_DATA_J_ENABLE : in std_logic;
+      TENSOR_PRODUCT_DATA_K_ENABLE : in std_logic;
+
       TENSOR_PRODUCT_DATA_OUT_I_ENABLE : in std_logic;
       TENSOR_PRODUCT_DATA_OUT_J_ENABLE : in std_logic;
       TENSOR_PRODUCT_DATA_OUT_K_ENABLE : in std_logic;
@@ -313,30 +315,36 @@ package ntm_algebra_pkg is
       TENSOR_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- MATRIX CONVOLUTION
+      -- TENSOR CONVOLUTION
       -- CONTROL
-      MATRIX_CONVOLUTION_START : out std_logic;
-      MATRIX_CONVOLUTION_READY : in  std_logic;
+      TENSOR_CONVOLUTION_START : out std_logic;
+      TENSOR_CONVOLUTION_READY : in  std_logic;
 
-      MATRIX_CONVOLUTION_DATA_A_IN_I_ENABLE : out std_logic;
-      MATRIX_CONVOLUTION_DATA_A_IN_J_ENABLE : out std_logic;
-      MATRIX_CONVOLUTION_DATA_B_IN_I_ENABLE : out std_logic;
-      MATRIX_CONVOLUTION_DATA_B_IN_J_ENABLE : out std_logic;
+      TENSOR_CONVOLUTION_DATA_A_IN_I_ENABLE : out std_logic;
+      TENSOR_CONVOLUTION_DATA_A_IN_J_ENABLE : out std_logic;
+      TENSOR_CONVOLUTION_DATA_A_IN_K_ENABLE : out std_logic;
+      TENSOR_CONVOLUTION_DATA_B_IN_I_ENABLE : out std_logic;
+      TENSOR_CONVOLUTION_DATA_B_IN_J_ENABLE : out std_logic;
+      TENSOR_CONVOLUTION_DATA_B_IN_K_ENABLE : out std_logic;
 
-      MATRIX_CONVOLUTION_DATA_I_ENABLE : in std_logic;
-      MATRIX_CONVOLUTION_DATA_J_ENABLE : in std_logic;
+      TENSOR_CONVOLUTION_DATA_I_ENABLE : in std_logic;
+      TENSOR_CONVOLUTION_DATA_J_ENABLE : in std_logic;
+      TENSOR_CONVOLUTION_DATA_K_ENABLE : in std_logic;
 
-      MATRIX_CONVOLUTION_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_CONVOLUTION_DATA_OUT_J_ENABLE : in std_logic;
+      TENSOR_CONVOLUTION_DATA_OUT_I_ENABLE : in std_logic;
+      TENSOR_CONVOLUTION_DATA_OUT_J_ENABLE : in std_logic;
+      TENSOR_CONVOLUTION_DATA_OUT_K_ENABLE : in std_logic;
 
       -- DATA
-      MATRIX_CONVOLUTION_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_CONVOLUTION_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_CONVOLUTION_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_CONVOLUTION_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_CONVOLUTION_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_CONVOLUTION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_CONVOLUTION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- TENSOR TRANSPOSE
       -- CONTROL
@@ -346,6 +354,10 @@ package ntm_algebra_pkg is
       TENSOR_TRANSPOSE_DATA_IN_I_ENABLE : out std_logic;
       TENSOR_TRANSPOSE_DATA_IN_J_ENABLE : out std_logic;
       TENSOR_TRANSPOSE_DATA_IN_K_ENABLE : out std_logic;
+
+      TENSOR_TRANSPOSE_DATA_I_ENABLE : in std_logic;
+      TENSOR_TRANSPOSE_DATA_J_ENABLE : in std_logic;
+      TENSOR_TRANSPOSE_DATA_K_ENABLE : in std_logic;
 
       TENSOR_TRANSPOSE_DATA_OUT_I_ENABLE : in std_logic;
       TENSOR_TRANSPOSE_DATA_OUT_J_ENABLE : in std_logic;

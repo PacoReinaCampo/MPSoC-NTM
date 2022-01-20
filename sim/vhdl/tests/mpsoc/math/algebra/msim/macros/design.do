@@ -37,6 +37,7 @@ alias ntm_vector_convolution_design_compilation {
 ##################################################################################################
 
 alias ntm_vector_transpose_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/vector/ntm_vector_transpose.vhd
 }
@@ -104,6 +105,7 @@ alias ntm_tensor_product_design_compilation {
 ##################################################################################################
 
 alias ntm_tensor_transpose_design_compilation {
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/tensor/ntm_tensor_transpose.vhd
 }

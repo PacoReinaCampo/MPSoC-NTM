@@ -239,6 +239,10 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_b_in_j_enable_tensor_product : std_logic;
   signal data_b_in_k_enable_tensor_product : std_logic;
 
+  signal data_i_enable_tensor_product : std_logic;
+  signal data_j_enable_tensor_product : std_logic;
+  signal data_k_enable_tensor_product : std_logic;
+
   signal data_out_i_enable_tensor_product : std_logic;
   signal data_out_j_enable_tensor_product : std_logic;
   signal data_out_k_enable_tensor_product : std_logic;
@@ -266,6 +270,10 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_b_in_j_enable_tensor_convolution : std_logic;
   signal data_b_in_k_enable_tensor_convolution : std_logic;
 
+  signal data_i_enable_tensor_convolution : std_logic;
+  signal data_j_enable_tensor_convolution : std_logic;
+  signal data_k_enable_tensor_convolution : std_logic;
+
   signal data_out_i_enable_tensor_convolution : std_logic;
   signal data_out_j_enable_tensor_convolution : std_logic;
   signal data_out_k_enable_tensor_convolution : std_logic;
@@ -289,6 +297,10 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_in_i_enable_tensor_transpose : std_logic;
   signal data_in_j_enable_tensor_transpose : std_logic;
   signal data_in_k_enable_tensor_transpose : std_logic;
+
+  signal data_i_enable_tensor_transpose : std_logic;
+  signal data_j_enable_tensor_transpose : std_logic;
+  signal data_k_enable_tensor_transpose : std_logic;
 
   signal data_out_i_enable_tensor_transpose : std_logic;
   signal data_out_j_enable_tensor_transpose : std_logic;
@@ -373,31 +385,6 @@ begin
       VECTOR_TRANSPOSE_DATA_IN   => data_in_vector_transpose,
       VECTOR_TRANSPOSE_DATA_OUT  => data_out_vector_transpose,
 
-      -- MATRIX CONVOLUTION
-      -- CONTROL
-      MATRIX_CONVOLUTION_START => start_matrix_convolution,
-      MATRIX_CONVOLUTION_READY => ready_matrix_convolution,
-
-      MATRIX_CONVOLUTION_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_convolution,
-      MATRIX_CONVOLUTION_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_convolution,
-      MATRIX_CONVOLUTION_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_convolution,
-      MATRIX_CONVOLUTION_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_convolution,
-
-      MATRIX_CONVOLUTION_DATA_I_ENABLE => data_i_enable_matrix_convolution,
-      MATRIX_CONVOLUTION_DATA_J_ENABLE => data_j_enable_matrix_convolution,
-
-      MATRIX_CONVOLUTION_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_convolution,
-      MATRIX_CONVOLUTION_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_convolution,
-
-      -- DATA
-      MATRIX_CONVOLUTION_SIZE_A_I_IN => size_a_i_in_matrix_convolution,
-      MATRIX_CONVOLUTION_SIZE_A_J_IN => size_a_j_in_matrix_convolution,
-      MATRIX_CONVOLUTION_SIZE_B_I_IN => size_b_i_in_matrix_convolution,
-      MATRIX_CONVOLUTION_SIZE_B_J_IN => size_b_j_in_matrix_convolution,
-      MATRIX_CONVOLUTION_DATA_A_IN   => data_a_in_matrix_convolution,
-      MATRIX_CONVOLUTION_DATA_B_IN   => data_b_in_matrix_convolution,
-      MATRIX_CONVOLUTION_DATA_OUT    => data_out_matrix_convolution,
-
       -- MATRIX PRODUCT
       -- CONTROL
       MATRIX_PRODUCT_START => start_matrix_product,
@@ -423,6 +410,31 @@ begin
       MATRIX_PRODUCT_DATA_B_IN   => data_b_in_matrix_product,
       MATRIX_PRODUCT_DATA_OUT    => data_out_matrix_product,
 
+      -- MATRIX CONVOLUTION
+      -- CONTROL
+      MATRIX_CONVOLUTION_START => start_matrix_convolution,
+      MATRIX_CONVOLUTION_READY => ready_matrix_convolution,
+
+      MATRIX_CONVOLUTION_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_convolution,
+      MATRIX_CONVOLUTION_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_convolution,
+      MATRIX_CONVOLUTION_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_convolution,
+      MATRIX_CONVOLUTION_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_convolution,
+
+      MATRIX_CONVOLUTION_DATA_I_ENABLE => data_i_enable_matrix_convolution,
+      MATRIX_CONVOLUTION_DATA_J_ENABLE => data_j_enable_matrix_convolution,
+
+      MATRIX_CONVOLUTION_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_convolution,
+      MATRIX_CONVOLUTION_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_convolution,
+
+      -- DATA
+      MATRIX_CONVOLUTION_SIZE_A_I_IN => size_a_i_in_matrix_convolution,
+      MATRIX_CONVOLUTION_SIZE_A_J_IN => size_a_j_in_matrix_convolution,
+      MATRIX_CONVOLUTION_SIZE_B_I_IN => size_b_i_in_matrix_convolution,
+      MATRIX_CONVOLUTION_SIZE_B_J_IN => size_b_j_in_matrix_convolution,
+      MATRIX_CONVOLUTION_DATA_A_IN   => data_a_in_matrix_convolution,
+      MATRIX_CONVOLUTION_DATA_B_IN   => data_b_in_matrix_convolution,
+      MATRIX_CONVOLUTION_DATA_OUT    => data_out_matrix_convolution,
+
       -- MATRIX TRANSPOSE
       -- CONTROL
       MATRIX_TRANSPOSE_START => start_matrix_transpose,
@@ -443,33 +455,6 @@ begin
       MATRIX_TRANSPOSE_DATA_IN   => data_in_matrix_transpose,
       MATRIX_TRANSPOSE_DATA_OUT  => data_out_matrix_transpose,
 
-      -- TENSOR CONVOLUTION
-      -- CONTROL
-      TENSOR_CONVOLUTION_START => start_tensor_convolution,
-      TENSOR_CONVOLUTION_READY => ready_tensor_convolution,
-
-      TENSOR_CONVOLUTION_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_convolution,
-      TENSOR_CONVOLUTION_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_convolution,
-      TENSOR_CONVOLUTION_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_convolution,
-      TENSOR_CONVOLUTION_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_convolution,
-      TENSOR_CONVOLUTION_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_convolution,
-      TENSOR_CONVOLUTION_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_convolution,
-
-      TENSOR_CONVOLUTION_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_convolution,
-      TENSOR_CONVOLUTION_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_convolution,
-      TENSOR_CONVOLUTION_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_convolution,
-
-      -- DATA
-      TENSOR_CONVOLUTION_SIZE_A_I_IN => size_a_i_in_tensor_convolution,
-      TENSOR_CONVOLUTION_SIZE_A_J_IN => size_a_j_in_tensor_convolution,
-      TENSOR_CONVOLUTION_SIZE_A_K_IN => size_a_k_in_tensor_convolution,
-      TENSOR_CONVOLUTION_SIZE_B_I_IN => size_b_i_in_tensor_convolution,
-      TENSOR_CONVOLUTION_SIZE_B_J_IN => size_b_j_in_tensor_convolution,
-      TENSOR_CONVOLUTION_SIZE_B_K_IN => size_b_k_in_tensor_convolution,
-      TENSOR_CONVOLUTION_DATA_A_IN   => data_a_in_tensor_convolution,
-      TENSOR_CONVOLUTION_DATA_B_IN   => data_b_in_tensor_convolution,
-      TENSOR_CONVOLUTION_DATA_OUT    => data_out_tensor_convolution,
-
       -- TENSOR PRODUCT
       -- CONTROL
       TENSOR_PRODUCT_START => start_tensor_product,
@@ -481,6 +466,10 @@ begin
       TENSOR_PRODUCT_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_product,
       TENSOR_PRODUCT_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_product,
       TENSOR_PRODUCT_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_product,
+
+      TENSOR_PRODUCT_DATA_I_ENABLE => data_i_enable_tensor_product,
+      TENSOR_PRODUCT_DATA_J_ENABLE => data_j_enable_tensor_product,
+      TENSOR_PRODUCT_DATA_K_ENABLE => data_k_enable_tensor_product,
 
       TENSOR_PRODUCT_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_product,
       TENSOR_PRODUCT_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_product,
@@ -497,6 +486,37 @@ begin
       TENSOR_PRODUCT_DATA_B_IN   => data_b_in_tensor_product,
       TENSOR_PRODUCT_DATA_OUT    => data_out_tensor_product,
 
+      -- TENSOR CONVOLUTION
+      -- CONTROL
+      TENSOR_CONVOLUTION_START => start_tensor_convolution,
+      TENSOR_CONVOLUTION_READY => ready_tensor_convolution,
+
+      TENSOR_CONVOLUTION_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_convolution,
+      TENSOR_CONVOLUTION_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_convolution,
+      TENSOR_CONVOLUTION_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_convolution,
+      TENSOR_CONVOLUTION_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_convolution,
+      TENSOR_CONVOLUTION_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_convolution,
+      TENSOR_CONVOLUTION_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_convolution,
+
+      TENSOR_CONVOLUTION_DATA_I_ENABLE => data_i_enable_tensor_convolution,
+      TENSOR_CONVOLUTION_DATA_J_ENABLE => data_j_enable_tensor_convolution,
+      TENSOR_CONVOLUTION_DATA_K_ENABLE => data_k_enable_tensor_convolution,
+
+      TENSOR_CONVOLUTION_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_convolution,
+      TENSOR_CONVOLUTION_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_convolution,
+      TENSOR_CONVOLUTION_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_convolution,
+
+      -- DATA
+      TENSOR_CONVOLUTION_SIZE_A_I_IN => size_a_i_in_tensor_convolution,
+      TENSOR_CONVOLUTION_SIZE_A_J_IN => size_a_j_in_tensor_convolution,
+      TENSOR_CONVOLUTION_SIZE_A_K_IN => size_a_k_in_tensor_convolution,
+      TENSOR_CONVOLUTION_SIZE_B_I_IN => size_b_i_in_tensor_convolution,
+      TENSOR_CONVOLUTION_SIZE_B_J_IN => size_b_j_in_tensor_convolution,
+      TENSOR_CONVOLUTION_SIZE_B_K_IN => size_b_k_in_tensor_convolution,
+      TENSOR_CONVOLUTION_DATA_A_IN   => data_a_in_tensor_convolution,
+      TENSOR_CONVOLUTION_DATA_B_IN   => data_b_in_tensor_convolution,
+      TENSOR_CONVOLUTION_DATA_OUT    => data_out_tensor_convolution,
+
       -- TENSOR TRANSPOSE
       -- CONTROL
       TENSOR_TRANSPOSE_START => start_tensor_transpose,
@@ -505,6 +525,10 @@ begin
       TENSOR_TRANSPOSE_DATA_IN_I_ENABLE => data_in_i_enable_tensor_transpose,
       TENSOR_TRANSPOSE_DATA_IN_J_ENABLE => data_in_j_enable_tensor_transpose,
       TENSOR_TRANSPOSE_DATA_IN_K_ENABLE => data_in_k_enable_tensor_transpose,
+
+      TENSOR_TRANSPOSE_DATA_I_ENABLE => data_i_enable_tensor_transpose,
+      TENSOR_TRANSPOSE_DATA_J_ENABLE => data_j_enable_tensor_transpose,
+      TENSOR_TRANSPOSE_DATA_K_ENABLE => data_k_enable_tensor_transpose,
 
       TENSOR_TRANSPOSE_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_transpose,
       TENSOR_TRANSPOSE_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_transpose,
@@ -737,6 +761,10 @@ begin
         DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_product,
         DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_product,
 
+        DATA_I_ENABLE => data_i_enable_tensor_product,
+        DATA_J_ENABLE => data_j_enable_tensor_product,
+        DATA_K_ENABLE => data_k_enable_tensor_product,
+
         DATA_OUT_I_ENABLE => data_out_i_enable_tensor_product,
         DATA_OUT_J_ENABLE => data_out_j_enable_tensor_product,
         DATA_OUT_K_ENABLE => data_out_k_enable_tensor_product,
@@ -777,6 +805,10 @@ begin
         DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_convolution,
         DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_convolution,
 
+        DATA_I_ENABLE => data_i_enable_tensor_convolution,
+        DATA_J_ENABLE => data_j_enable_tensor_convolution,
+        DATA_K_ENABLE => data_k_enable_tensor_convolution,
+
         DATA_OUT_I_ENABLE => data_out_i_enable_tensor_convolution,
         DATA_OUT_J_ENABLE => data_out_j_enable_tensor_convolution,
         DATA_OUT_K_ENABLE => data_out_k_enable_tensor_convolution,
@@ -795,7 +827,7 @@ begin
   end generate ntm_tensor_convolution_test;
 
   -- TENSOR TRANSPOSE
-  ntm_tensor_transpose_test : if (ENABLE_NTM_TENSOR_PRODUCT_TEST) generate
+  ntm_tensor_transpose_test : if (ENABLE_NTM_TENSOR_TRANSPOSE_TEST) generate
     tensor_transpose : ntm_tensor_transpose
       generic map (
         DATA_SIZE    => DATA_SIZE,
@@ -813,6 +845,10 @@ begin
         DATA_IN_I_ENABLE => data_in_i_enable_tensor_transpose,
         DATA_IN_J_ENABLE => data_in_j_enable_tensor_transpose,
         DATA_IN_K_ENABLE => data_in_k_enable_tensor_transpose,
+
+        DATA_I_ENABLE => data_i_enable_tensor_transpose,
+        DATA_J_ENABLE => data_j_enable_tensor_transpose,
+        DATA_K_ENABLE => data_k_enable_tensor_transpose,
 
         DATA_OUT_I_ENABLE => data_out_i_enable_tensor_transpose,
         DATA_OUT_J_ENABLE => data_out_j_enable_tensor_transpose,

@@ -65,6 +65,10 @@ entity ntm_tensor_convolution is
     DATA_B_IN_VECTOR_ENABLE : in std_logic;
     DATA_B_IN_SCALAR_ENABLE : in std_logic;
 
+    DATA_I_ENABLE : out std_logic;
+    DATA_J_ENABLE : out std_logic;
+    DATA_K_ENABLE : out std_logic;
+
     DATA_OUT_MATRIX_ENABLE : out std_logic;
     DATA_OUT_VECTOR_ENABLE : out std_logic;
     DATA_OUT_SCALAR_ENABLE : out std_logic;
@@ -264,7 +268,7 @@ begin
             -- FSM Control
             if ((unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               convolution_ctrl_fsm_int <= ENDER_MATRIX_STATE;
-            if (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+            elsif (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
               convolution_ctrl_fsm_int <= ENDER_VECTOR_STATE;
             else
               convolution_ctrl_fsm_int <= ENDER_SCALAR_STATE;
@@ -319,7 +323,7 @@ begin
             -- FSM Control
             if ((unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               convolution_ctrl_fsm_int <= ENDER_MATRIX_STATE;
-            if (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+            elsif (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
               convolution_ctrl_fsm_int <= ENDER_VECTOR_STATE;
             else
               convolution_ctrl_fsm_int <= ENDER_SCALAR_STATE;
@@ -368,7 +372,7 @@ begin
             -- FSM Control
             if ((unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               convolution_ctrl_fsm_int <= ENDER_MATRIX_STATE;
-            if (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+            elsif (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
               convolution_ctrl_fsm_int <= ENDER_VECTOR_STATE;
             else
               convolution_ctrl_fsm_int <= ENDER_SCALAR_STATE;
