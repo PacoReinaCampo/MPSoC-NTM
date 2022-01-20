@@ -21,7 +21,7 @@ add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/READY
 add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/DATA_OUT_ENABLE
 add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/DATA_OUT
 
-add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/multiplier_ctrl_fsm_int
+add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/product_ctrl_fsm_int
 
 add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/index_loop
 
@@ -33,9 +33,9 @@ add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/ready
 add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_out_scalar_adder
 
 add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/start_scalar_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_a_in_multiplier_int
+add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_a_in_product_int
 add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_a_in_scalar_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_b_in_multiplier_int
+add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_b_in_product_int
 add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_b_in_scalar_multiplier
 add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/ready_scalar_multiplier
 add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_out_scalar_multiplier

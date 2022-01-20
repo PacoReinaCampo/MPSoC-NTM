@@ -333,13 +333,7 @@ begin
           DATA_OUT_K_ENABLE <= '0';
 
           -- FSM Control
-          if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
-            transpose_ctrl_fsm_int <= OPERATION_I_STATE;
-          elsif (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
-            transpose_ctrl_fsm_int <= OPERATION_J_STATE;
-          else
-            transpose_ctrl_fsm_int <= OPERATION_K_STATE;
-          end if;
+          transpose_ctrl_fsm_int <= OPERATION_K_STATE;
 
         when CLEAN_J_STATE =>           -- STEP 8
 
@@ -353,9 +347,7 @@ begin
           DATA_OUT_K_ENABLE <= '0';
 
           -- FSM Control
-          if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
-            transpose_ctrl_fsm_int <= OPERATION_I_STATE;
-          elsif (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+          if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
             transpose_ctrl_fsm_int <= OPERATION_J_STATE;
           else
             transpose_ctrl_fsm_int <= OPERATION_K_STATE;

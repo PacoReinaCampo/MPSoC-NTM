@@ -1368,6 +1368,210 @@ begin
 
     end if;
 
+    if (STIMULUS_NTM_TENSOR_CONVOLUTION_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_TENSOR_CONVOLUTION_TEST    ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      TENSOR_CONVOLUTION_SIZE_A_I_IN <= THREE_CONTROL;
+      TENSOR_CONVOLUTION_SIZE_A_J_IN <= THREE_CONTROL;
+      TENSOR_CONVOLUTION_SIZE_A_K_IN <= THREE_CONTROL;
+      TENSOR_CONVOLUTION_SIZE_B_I_IN <= THREE_CONTROL;
+      TENSOR_CONVOLUTION_SIZE_B_J_IN <= THREE_CONTROL;
+      TENSOR_CONVOLUTION_SIZE_B_K_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_TENSOR_CONVOLUTION_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_CONVOLUTION_CASE 0  ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_CONVOLUTION_DATA_A_IN <= ZERO_DATA;
+        TENSOR_CONVOLUTION_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_CONVOLUTION_FIRST_RUN : loop
+          if (TENSOR_CONVOLUTION_DATA_I_ENABLE = '1' and TENSOR_CONVOLUTION_DATA_J_ENABLE = '1' and TENSOR_CONVOLUTION_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_CONVOLUTION_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_CONVOLUTION_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_CONVOLUTION_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_CONVOLUTION_DATA_I_ENABLE = '1' and TENSOR_CONVOLUTION_DATA_J_ENABLE = '1' and TENSOR_CONVOLUTION_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_CONVOLUTION_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_CONVOLUTION_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_CONVOLUTION_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_CONVOLUTION_DATA_J_ENABLE = '1' and TENSOR_CONVOLUTION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_CONVOLUTION_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_CONVOLUTION_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_CONVOLUTION_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_CONVOLUTION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_CONVOLUTION_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_CONVOLUTION_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_CONVOLUTION_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_B_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_CONVOLUTION_DATA_A_IN_I_ENABLE <= '0';
+            TENSOR_CONVOLUTION_DATA_A_IN_J_ENABLE <= '0';
+            TENSOR_CONVOLUTION_DATA_A_IN_K_ENABLE <= '0';
+            TENSOR_CONVOLUTION_DATA_B_IN_I_ENABLE <= '0';
+            TENSOR_CONVOLUTION_DATA_B_IN_J_ENABLE <= '0';
+            TENSOR_CONVOLUTION_DATA_B_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_CONVOLUTION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_CONVOLUTION_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_CONVOLUTION_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_CONVOLUTION_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_CONVOLUTION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_CONVOLUTION_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_CONVOLUTION_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_CONVOLUTION_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_CONVOLUTION_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_CONVOLUTION_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_CONVOLUTION_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_CONVOLUTION_DATA_K_ENABLE = '1' or TENSOR_CONVOLUTION_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_CONVOLUTION_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_CONVOLUTION_FIRST_RUN when TENSOR_CONVOLUTION_READY = '1';
+        end loop TENSOR_CONVOLUTION_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_NTM_TENSOR_CONVOLUTION_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_CONVOLUTION_CASE 1  ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_CONVOLUTION_DATA_A_IN <= ZERO_DATA;
+        TENSOR_CONVOLUTION_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_CONVOLUTION_SECOND_RUN : loop
+          if (TENSOR_CONVOLUTION_DATA_I_ENABLE = '1' and TENSOR_CONVOLUTION_DATA_J_ENABLE = '1' and TENSOR_CONVOLUTION_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_CONVOLUTION_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_CONVOLUTION_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_CONVOLUTION_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_CONVOLUTION_DATA_I_ENABLE = '1' and TENSOR_CONVOLUTION_DATA_J_ENABLE = '1' and TENSOR_CONVOLUTION_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_CONVOLUTION_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_CONVOLUTION_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_CONVOLUTION_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_CONVOLUTION_DATA_J_ENABLE = '1' and TENSOR_CONVOLUTION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_CONVOLUTION_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_CONVOLUTION_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_CONVOLUTION_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_CONVOLUTION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_CONVOLUTION_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_CONVOLUTION_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_CONVOLUTION_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_CONVOLUTION_DATA_B_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_CONVOLUTION_DATA_A_IN_I_ENABLE <= '0';
+            TENSOR_CONVOLUTION_DATA_A_IN_J_ENABLE <= '0';
+            TENSOR_CONVOLUTION_DATA_A_IN_K_ENABLE <= '0';
+            TENSOR_CONVOLUTION_DATA_B_IN_I_ENABLE <= '0';
+            TENSOR_CONVOLUTION_DATA_B_IN_J_ENABLE <= '0';
+            TENSOR_CONVOLUTION_DATA_B_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_CONVOLUTION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_CONVOLUTION_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_CONVOLUTION_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_CONVOLUTION_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_CONVOLUTION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_CONVOLUTION_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_CONVOLUTION_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_CONVOLUTION_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_CONVOLUTION_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_CONVOLUTION_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_CONVOLUTION_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_CONVOLUTION_DATA_K_ENABLE = '1' or TENSOR_CONVOLUTION_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_CONVOLUTION_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_CONVOLUTION_SECOND_RUN when TENSOR_CONVOLUTION_READY = '1';
+        end loop TENSOR_CONVOLUTION_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
     if (STIMULUS_NTM_TENSOR_TRANSPOSE_TEST) then
 
       -------------------------------------------------------------------

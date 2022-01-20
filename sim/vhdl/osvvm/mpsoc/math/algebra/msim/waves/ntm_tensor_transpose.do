@@ -19,6 +19,9 @@ add wave -noupdate /ntm_algebra_testbench/ntm_tensor_transpose_test/tensor_trans
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_transpose_test/tensor_transpose/DATA_IN_J_ENABLE
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_transpose_test/tensor_transpose/DATA_IN_K_ENABLE
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_transpose_test/tensor_transpose/DATA_IN
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_transpose_test/tensor_transpose/DATA_I_ENABLE
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_transpose_test/tensor_transpose/DATA_J_ENABLE
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_transpose_test/tensor_transpose/DATA_K_ENABLE
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_transpose_test/tensor_transpose/READY
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_transpose_test/tensor_transpose/DATA_OUT_I_ENABLE
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_transpose_test/tensor_transpose/DATA_OUT_J_ENABLE
