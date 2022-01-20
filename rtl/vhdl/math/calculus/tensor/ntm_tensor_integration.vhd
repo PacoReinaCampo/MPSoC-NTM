@@ -45,7 +45,7 @@ use ieee.numeric_std.all;
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 
-entity ntm_matrix_integration is
+entity ntm_tensor_integration is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -61,20 +61,26 @@ entity ntm_matrix_integration is
 
     DATA_A_IN_I_ENABLE : in std_logic;
     DATA_A_IN_J_ENABLE : in std_logic;
+    DATA_A_IN_K_ENABLE : in std_logic;
     DATA_B_IN_I_ENABLE : in std_logic;
     DATA_B_IN_J_ENABLE : in std_logic;
+    DATA_B_IN_K_ENABLE : in std_logic;
 
     DATA_I_ENABLE : out std_logic;
     DATA_J_ENABLE : out std_logic;
+    DATA_K_ENABLE : out std_logic;
 
     DATA_OUT_I_ENABLE : out std_logic;
     DATA_OUT_J_ENABLE : out std_logic;
+    DATA_OUT_K_ENABLE : out std_logic;
 
     -- DATA
     SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_B_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
@@ -82,7 +88,7 @@ entity ntm_matrix_integration is
     );
 end entity;
 
-architecture ntm_matrix_integration_architecture of ntm_matrix_integration is
+architecture ntm_tensor_integration_architecture of ntm_tensor_integration is
 
   -----------------------------------------------------------------------
   -- Types
@@ -93,18 +99,23 @@ architecture ntm_matrix_integration_architecture of ntm_matrix_integration is
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
-    ENDER_I_STATE,                      -- STEP 3
-    ENDER_J_STATE,                      -- STEP 4
-    CLEAN_I_STATE,                      -- STEP 5
-    CLEAN_J_STATE,                      -- STEP 6
-    SCALAR_MULTIPLIER_I_STATE,          -- STEP 7
-    SCALAR_MULTIPLIER_J_STATE,          -- STEP 8
-    SCALAR_ADDER_I_STATE,               -- STEP 9
-    SCALAR_ADDER_J_STATE                -- STEP 10
+    INPUT_K_STATE,                      -- STEP 3
+    ENDER_I_STATE,                      -- STEP 4
+    ENDER_J_STATE,                      -- STEP 5
+    ENDER_K_STATE,                      -- STEP 6
+    CLEAN_I_STATE,                      -- STEP 7
+    CLEAN_J_STATE,                      -- STEP 8
+    CLEAN_K_STATE,                      -- STEP 9
+    SCALAR_MULTIPLIER_I_STATE,          -- STEP 10
+    SCALAR_MULTIPLIER_J_STATE,          -- STEP 11
+    SCALAR_MULTIPLIER_K_STATE,          -- STEP 12
+    SCALAR_ADDER_I_STATE,               -- STEP 13
+    SCALAR_ADDER_J_STATE,               -- STEP 14
+    SCALAR_ADDER_K_STATE                -- STEP 15
     );
 
   -- Buffer
-  type matrix_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
+  type tensor_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Constants
@@ -133,18 +144,21 @@ architecture ntm_matrix_integration_architecture of ntm_matrix_integration is
   signal integration_ctrl_fsm_int : integration_ctrl_fsm;
 
   -- Buffer
-  signal matrix_a_int : matrix_buffer;
-  signal matrix_b_int : matrix_buffer;
+  signal tensor_a_int : tensor_buffer;
+  signal tensor_b_int : tensor_buffer;
 
   -- Control Internal
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_m_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal data_a_in_i_integration_int : std_logic;
   signal data_a_in_j_integration_int : std_logic;
+  signal data_a_in_k_integration_int : std_logic;
   signal data_b_in_i_integration_int : std_logic;
   signal data_b_in_j_integration_int : std_logic;
+  signal data_b_in_k_integration_int : std_logic;
 
   -- SCALAR ADDER
   -- CONTROL
@@ -192,9 +206,11 @@ begin
 
       DATA_I_ENABLE <= '0';
       DATA_J_ENABLE <= '0';
+      DATA_K_ENABLE <= '0';
 
       DATA_OUT_I_ENABLE <= '0';
       DATA_OUT_J_ENABLE <= '0';
+      DATA_OUT_K_ENABLE <= '0';
 
       -- Control Internal
       start_scalar_adder      <= '0';
@@ -205,11 +221,14 @@ begin
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
       index_k_loop <= ZERO_CONTROL;
+      index_m_loop <= ZERO_CONTROL;
 
       data_a_in_i_integration_int <= '0';
       data_a_in_j_integration_int <= '0';
+      data_a_in_k_integration_int <= '0';
       data_b_in_i_integration_int <= '0';
       data_b_in_j_integration_int <= '0';
+      data_b_in_k_integration_int <= '0';
 
       -- Data Internal
       data_a_in_scalar_adder <= ZERO_DATA;
@@ -225,17 +244,20 @@ begin
           -- Control Outputs
           DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
+          DATA_OUT_K_ENABLE <= '0';
 
           if (START = '1') then
-            if (unsigned(SIZE_A_J_IN) = unsigned(SIZE_B_I_IN)) then
+            if (unsigned(SIZE_A_K_IN) = unsigned(SIZE_B_J_IN)) then
               -- Control Outputs
               DATA_I_ENABLE <= '1';
               DATA_J_ENABLE <= '1';
+              DATA_K_ENABLE <= '1';
 
               -- Control Internal
               index_i_loop <= ZERO_CONTROL;
               index_j_loop <= ZERO_CONTROL;
               index_k_loop <= ZERO_CONTROL;
+              index_m_loop <= ZERO_CONTROL;
 
               -- FSM Control
               integration_ctrl_fsm_int <= INPUT_I_STATE;
@@ -249,166 +271,265 @@ begin
 
             DATA_I_ENABLE <= '0';
             DATA_J_ENABLE <= '0';
+            DATA_K_ENABLE <= '0';
           end if;
 
         when INPUT_I_STATE =>           -- STEP 1
 
-          if ((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1')) then
+          if ((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_A_IN;
+            tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_A_IN;
 
             -- Control Internal
             data_a_in_i_integration_int <= '1';
             data_a_in_j_integration_int <= '1';
+            data_a_in_k_integration_int <= '1';
           end if;
 
-          if ((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) then
+          if ((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1') and (DATA_B_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            matrix_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_B_IN;
+            tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_B_IN;
 
             -- Control Internal
             data_b_in_i_integration_int <= '1';
             data_b_in_j_integration_int <= '1';
+            data_b_in_k_integration_int <= '1';
           end if;
 
           -- Control Outputs
           DATA_I_ENABLE <= '0';
           DATA_J_ENABLE <= '0';
+          DATA_K_ENABLE <= '0';
 
-          if (data_a_in_i_integration_int = '1' and data_a_in_j_integration_int = '1' and data_b_in_i_integration_int = '1' and data_b_in_j_integration_int = '1') then
+          if (data_a_in_i_integration_int = '1' and data_a_in_j_integration_int = '1' and data_a_in_k_integration_int = '1' and data_b_in_i_integration_int = '1' and data_b_in_j_integration_int = '1' and data_b_in_k_integration_int = '1') then
             -- Control Internal
             data_a_in_i_integration_int <= '0';
             data_a_in_j_integration_int <= '0';
+            data_a_in_k_integration_int <= '0';
             data_b_in_i_integration_int <= '0';
             data_b_in_j_integration_int <= '0';
+            data_b_in_k_integration_int <= '0';
 
             -- FSM Control
-            integration_ctrl_fsm_int <= ENDER_J_STATE;
+            integration_ctrl_fsm_int <= ENDER_K_STATE;
           end if;
 
         when INPUT_J_STATE =>           -- STEP 2
 
-          if (DATA_A_IN_J_ENABLE = '1') then
+          if ((DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_A_IN;
+            tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_A_IN;
 
             -- Control Internal
             data_a_in_j_integration_int <= '1';
+            data_a_in_k_integration_int <= '1';
           end if;
 
-          if (DATA_B_IN_J_ENABLE = '1') then
+          if ((DATA_B_IN_J_ENABLE = '1') and (DATA_B_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            matrix_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_B_IN;
+            tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_B_IN;
 
             -- Control Internal
             data_b_in_j_integration_int <= '1';
+            data_b_in_k_integration_int <= '1';
           end if;
 
           -- Control Outputs
           DATA_J_ENABLE <= '0';
+          DATA_K_ENABLE <= '0';
 
-          if (data_a_in_j_integration_int = '1' and data_b_in_j_integration_int = '1') then
+          if (data_a_in_j_integration_int = '1' and data_a_in_k_integration_int = '1' and data_b_in_j_integration_int = '1' and data_b_in_k_integration_int = '1') then
             -- Control Internal
             data_a_in_j_integration_int <= '0';
+            data_a_in_k_integration_int <= '0';
             data_b_in_j_integration_int <= '0';
+            data_b_in_k_integration_int <= '0';
 
             -- FSM Control
-            if (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
-              integration_ctrl_fsm_int <= ENDER_I_STATE;
-            else
+            if (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
               integration_ctrl_fsm_int <= ENDER_J_STATE;
+            else
+              integration_ctrl_fsm_int <= ENDER_K_STATE;
             end if;
           end if;
 
-        when ENDER_I_STATE =>           -- STEP 3
+        when INPUT_K_STATE =>           -- STEP 3
 
-          if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+          if (DATA_A_IN_K_ENABLE = '1') then
+            -- Data Inputs
+            tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_A_IN;
+
+            -- Control Internal
+            data_a_in_k_integration_int <= '1';
+          end if;
+
+          if (DATA_B_IN_K_ENABLE = '1') then
+            -- Data Inputs
+            tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_B_IN;
+
+            -- Control Internal
+            data_b_in_k_integration_int <= '1';
+          end if;
+
+          -- Control Outputs
+          DATA_K_ENABLE <= '0';
+
+          if (data_a_in_k_integration_int = '1' and data_b_in_k_integration_int = '1') then
+            -- Control Internal
+            data_a_in_k_integration_int <= '0';
+            data_b_in_k_integration_int <= '0';
+
+            -- FSM Control
+            if (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL) and unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
+              integration_ctrl_fsm_int <= ENDER_I_STATE;
+            elsif (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
+              integration_ctrl_fsm_int <= ENDER_J_STATE;
+            else
+              integration_ctrl_fsm_int <= ENDER_K_STATE;
+            end if;
+          end if;
+
+        when ENDER_I_STATE =>           -- STEP 4
+
+          if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            DATA_OUT <= matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            DATA_OUT <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
 
             -- FSM Control
             integration_ctrl_fsm_int <= CLEAN_I_STATE;
-          elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            DATA_OUT <= matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            DATA_OUT <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
             -- Control Outputs
             DATA_I_ENABLE <= '1';
             DATA_J_ENABLE <= '1';
+            DATA_K_ENABLE <= '1';
 
             -- Control Internal
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
 
             -- FSM Control
             integration_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
-        when ENDER_J_STATE =>           -- STEP 4
+        when ENDER_J_STATE =>           -- STEP 5
 
-          if (unsigned(index_j_loop) < unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
+          if ((unsigned(index_j_loop) < unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            DATA_OUT <= matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            DATA_OUT <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
             -- Control Outputs
             DATA_J_ENABLE <= '1';
+            DATA_K_ENABLE <= '1';
 
             -- Control Internal
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
 
             -- FSM Control
             integration_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
-        when CLEAN_I_STATE =>           -- STEP 5
+        when ENDER_K_STATE =>           -- STEP 6
+
+          if (unsigned(index_k_loop) < unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            DATA_OUT <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- Control Outputs
+            DATA_K_ENABLE <= '1';
+
+            -- Control Internal
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            integration_ctrl_fsm_int <= INPUT_K_STATE;
+          end if;
+
+        when CLEAN_I_STATE =>           -- STEP 7
 
           -- Data Inputs
-          data_a_in_scalar_multiplier <= matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_k_loop)));
-          data_b_in_scalar_multiplier <= matrix_b_int(to_integer(unsigned(index_k_loop)), to_integer(unsigned(index_j_loop)));
+          data_a_in_scalar_multiplier <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+          data_b_in_scalar_multiplier <= tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
           -- Control Outputs
           DATA_I_ENABLE <= '0';
           DATA_J_ENABLE <= '0';
+          DATA_K_ENABLE <= '0';
 
           DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
+          DATA_OUT_K_ENABLE <= '0';
 
           -- Control Internal
           start_scalar_multiplier <= '1';
 
           -- FSM Control
-          if (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
+          if ((unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
             integration_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
-          else
+          elsif (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
             integration_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
+          else
+            integration_ctrl_fsm_int <= SCALAR_MULTIPLIER_K_STATE;
           end if;
 
-        when CLEAN_J_STATE =>           -- STEP 6
+        when CLEAN_J_STATE =>           -- STEP 8
 
           -- Data Inputs
-          data_a_in_scalar_multiplier <= matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_k_loop)));
-          data_b_in_scalar_multiplier <= matrix_b_int(to_integer(unsigned(index_k_loop)), to_integer(unsigned(index_j_loop)));
+          data_a_in_scalar_multiplier <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+          data_b_in_scalar_multiplier <= tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
           -- Control Outputs
           DATA_J_ENABLE <= '0';
+          DATA_K_ENABLE <= '0';
 
           DATA_OUT_J_ENABLE <= '0';
+          DATA_OUT_K_ENABLE <= '0';
 
           -- Control Internal
           start_scalar_multiplier <= '1';
 
           -- FSM Control
-          if (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
+          if ((unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
             integration_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
-          else
+          elsif (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
             integration_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
+          else
+            integration_ctrl_fsm_int <= SCALAR_MULTIPLIER_K_STATE;
           end if;
 
-        when SCALAR_MULTIPLIER_I_STATE =>  -- STEP 7
+        when CLEAN_K_STATE =>           -- STEP 9
+
+          -- Data Inputs
+          data_a_in_scalar_multiplier <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+          data_b_in_scalar_multiplier <= tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+          -- Control Outputs
+          DATA_K_ENABLE <= '0';
+
+          DATA_OUT_K_ENABLE <= '0';
+
+          -- Control Internal
+          start_scalar_multiplier <= '1';
+
+          -- FSM Control
+          if ((unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            integration_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
+          elsif (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
+            integration_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
+          else
+            integration_ctrl_fsm_int <= SCALAR_MULTIPLIER_K_STATE;
+          end if;
+
+        when SCALAR_MULTIPLIER_I_STATE =>  -- STEP 10
 
           if (ready_scalar_multiplier = '1') then
             -- Control Internal
@@ -419,7 +540,7 @@ begin
             -- Data Internal
             data_a_in_scalar_adder <= data_out_scalar_multiplier;
 
-            if (unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            if (unsigned(index_m_loop) = unsigned(ZERO_CONTROL)) then
               data_b_in_scalar_adder <= ZERO_DATA;
             else
               data_b_in_scalar_adder <= data_out_scalar_adder;
@@ -432,7 +553,7 @@ begin
             start_scalar_multiplier <= '0';
           end if;
 
-        when SCALAR_MULTIPLIER_J_STATE =>  -- STEP 8
+        when SCALAR_MULTIPLIER_J_STATE =>  -- STEP 11
 
           if (ready_scalar_multiplier = '1') then
             -- Control Internal
@@ -443,7 +564,7 @@ begin
             -- Data Internal
             data_a_in_scalar_adder <= data_out_scalar_multiplier;
 
-            if (unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            if (unsigned(index_m_loop) = unsigned(ZERO_CONTROL)) then
               data_b_in_scalar_adder <= ZERO_DATA;
             else
               data_b_in_scalar_adder <= data_out_scalar_adder;
@@ -456,17 +577,42 @@ begin
             start_scalar_multiplier <= '0';
           end if;
 
-        when SCALAR_ADDER_I_STATE =>    -- STEP 9
+        when SCALAR_MULTIPLIER_K_STATE =>  -- STEP 12
+
+          if (ready_scalar_multiplier = '1') then
+            -- Control Internal
+            start_scalar_adder <= '1';
+
+            operation_scalar_adder <= '0';
+
+            -- Data Internal
+            data_a_in_scalar_adder <= data_out_scalar_multiplier;
+
+            if (unsigned(index_m_loop) = unsigned(ZERO_CONTROL)) then
+              data_b_in_scalar_adder <= ZERO_DATA;
+            else
+              data_b_in_scalar_adder <= data_out_scalar_adder;
+            end if;
+
+            -- FSM Control
+            integration_ctrl_fsm_int <= SCALAR_ADDER_K_STATE;
+          else
+            -- Control Internal
+            start_scalar_multiplier <= '0';
+          end if;
+
+        when SCALAR_ADDER_I_STATE =>    -- STEP 13
 
           if (ready_scalar_adder = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-              if (unsigned(index_k_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+              if (unsigned(index_m_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then
                 -- Data Outputs
                 DATA_OUT <= data_out_scalar_adder;
 
                 -- Control Outputs
                 DATA_OUT_I_ENABLE <= '1';
                 DATA_OUT_J_ENABLE <= '1';
+                DATA_OUT_K_ENABLE <= '1';
 
                 READY <= '1';
 
@@ -474,32 +620,35 @@ begin
                 index_i_loop <= ZERO_CONTROL;
                 index_j_loop <= ZERO_CONTROL;
                 index_k_loop <= ZERO_CONTROL;
+                index_m_loop <= ZERO_CONTROL;
 
                 -- FSM Control
                 integration_ctrl_fsm_int <= STARTER_STATE;
               else
                 -- Control Internal
-                index_k_loop <= std_logic_vector(unsigned(index_k_loop)+unsigned(ONE_CONTROL));
+                index_m_loop <= std_logic_vector(unsigned(index_m_loop)+unsigned(ONE_CONTROL));
 
                 -- FSM Control
                 integration_ctrl_fsm_int <= CLEAN_I_STATE;
               end if;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-              if (unsigned(index_k_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+              if (unsigned(index_m_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then
                 -- Data Outputs
                 DATA_OUT <= data_out_scalar_adder;
 
                 -- Control Outputs
                 DATA_OUT_I_ENABLE <= '1';
                 DATA_OUT_J_ENABLE <= '1';
+                DATA_OUT_K_ENABLE <= '1';
 
                 -- Control Internal
                 index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
                 index_j_loop <= ZERO_CONTROL;
                 index_k_loop <= ZERO_CONTROL;
+                index_m_loop <= ZERO_CONTROL;
               else
                 -- Control Internal
-                index_k_loop <= std_logic_vector(unsigned(index_k_loop)+unsigned(ONE_CONTROL));
+                index_m_loop <= std_logic_vector(unsigned(index_m_loop)+unsigned(ONE_CONTROL));
               end if;
 
               -- FSM Control
@@ -510,27 +659,56 @@ begin
             start_scalar_adder <= '0';
           end if;
 
-        when SCALAR_ADDER_J_STATE =>    -- STEP 10
+        when SCALAR_ADDER_J_STATE =>    -- STEP 14
 
           if (ready_scalar_adder = '1') then
-            if (unsigned(index_j_loop) < unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
-              if (unsigned(index_k_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) then
+            if ((unsigned(index_j_loop) < unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+              if (unsigned(index_m_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then
                 -- Data Outputs
                 DATA_OUT <= data_out_scalar_adder;
 
                 -- Control Outputs
                 DATA_OUT_J_ENABLE <= '1';
+                DATA_OUT_K_ENABLE <= '1';
 
                 -- Control Internal
                 index_j_loop <= std_logic_vector(unsigned(index_j_loop)+unsigned(ONE_CONTROL));
                 index_k_loop <= ZERO_CONTROL;
+                index_m_loop <= ZERO_CONTROL;
               else
                 -- Control Internal
-                index_k_loop <= std_logic_vector(unsigned(index_k_loop)+unsigned(ONE_CONTROL));
+                index_m_loop <= std_logic_vector(unsigned(index_m_loop)+unsigned(ONE_CONTROL));
               end if;
 
               -- FSM Control
               integration_ctrl_fsm_int <= CLEAN_J_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_scalar_adder <= '0';
+          end if;
+
+        when SCALAR_ADDER_K_STATE =>    -- STEP 15
+
+          if (ready_scalar_adder = '1') then
+            if (unsigned(index_k_loop) < unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
+              if (unsigned(index_m_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then
+                -- Data Outputs
+                DATA_OUT <= data_out_scalar_adder;
+
+                -- Control Outputs
+                DATA_OUT_K_ENABLE <= '1';
+
+                -- Control Internal
+                index_k_loop <= std_logic_vector(unsigned(index_k_loop)+unsigned(ONE_CONTROL));
+                index_m_loop <= ZERO_CONTROL;
+              else
+                -- Control Internal
+                index_m_loop <= std_logic_vector(unsigned(index_m_loop)+unsigned(ONE_CONTROL));
+              end if;
+
+              -- FSM Control
+              integration_ctrl_fsm_int <= CLEAN_K_STATE;
             end if;
           else
             -- Control Internal

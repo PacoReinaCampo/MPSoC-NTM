@@ -1,5 +1,5 @@
 #*************************
-# VERIFICATION COMPILATION
+# VERIFICATION
 #*************************
 
 
@@ -16,9 +16,9 @@ do ./variables.do
 alias ntm_scalar_integer_adder_verification_compilation {
   echo "TEST: NTM_SCALAR_INTEGER_ADDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
 
   vsim -g /ntm_integer_testbench/ENABLE_NTM_SCALAR_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
 
@@ -27,7 +27,7 @@ alias ntm_scalar_integer_adder_verification_compilation {
 
   #WAVES
   view -title ntm_scalar_integer_adder wave
-  do $simulation_path/mpsoc/math/integer/msim/waves/ntm_scalar_integer_adder.do
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_scalar_integer_adder.do
 
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_ADDER_TEST true 0
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_0 true 0
@@ -45,9 +45,9 @@ alias ntm_scalar_integer_adder_verification_compilation {
 alias ntm_scalar_integer_multiplier_verification_compilation {
   echo "TEST: NTM_SCALAR_INTEGER_MULTIPLIER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
 
   vsim -g /ntm_integer_testbench/ENABLE_NTM_SCALAR_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
 
@@ -56,7 +56,7 @@ alias ntm_scalar_integer_multiplier_verification_compilation {
 
   #WAVES
   view -title ntm_scalar_integer_multiplier wave
-  do $simulation_path/mpsoc/math/integer/msim/waves/ntm_scalar_integer_multiplier.do
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_scalar_integer_multiplier.do
 
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_TEST true 0
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_0 true 0
@@ -74,9 +74,9 @@ alias ntm_scalar_integer_multiplier_verification_compilation {
 alias ntm_scalar_integer_divider_verification_compilation {
   echo "TEST: NTM_SCALAR_INTEGER_DIVIDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
 
   vsim -g /ntm_integer_testbench/ENABLE_NTM_SCALAR_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
 
@@ -85,7 +85,7 @@ alias ntm_scalar_integer_divider_verification_compilation {
 
   #WAVES
   view -title ntm_scalar_integer_divider wave
-  do $simulation_path/mpsoc/math/integer/msim/waves/ntm_scalar_integer_divider.do
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_scalar_integer_divider.do
 
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_TEST true 0
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_0 true 0
@@ -103,9 +103,9 @@ alias ntm_scalar_integer_divider_verification_compilation {
 alias ntm_vector_integer_adder_verification_compilation {
   echo "TEST: NTM_VECTOR_INTEGER_ADDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
 
   vsim -g /ntm_integer_testbench/ENABLE_NTM_VECTOR_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
 
@@ -114,7 +114,7 @@ alias ntm_vector_integer_adder_verification_compilation {
 
   #WAVES
   view -title ntm_vector_integer_adder wave
-  do $simulation_path/mpsoc/math/integer/msim/waves/ntm_vector_integer_adder.do
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_vector_integer_adder.do
 
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_ADDER_TEST true 0
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_0 true 0
@@ -132,9 +132,9 @@ alias ntm_vector_integer_adder_verification_compilation {
 alias ntm_vector_integer_multiplier_verification_compilation {
   echo "TEST: NTM_VECTOR_INTEGER_MULTIPLIER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
 
   vsim -g /ntm_integer_testbench/ENABLE_NTM_VECTOR_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
 
@@ -143,7 +143,7 @@ alias ntm_vector_integer_multiplier_verification_compilation {
 
   #WAVES
   view -title ntm_vector_integer_multiplier wave
-  do $simulation_path/mpsoc/math/integer/msim/waves/ntm_vector_integer_multiplier.do
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_vector_integer_multiplier.do
 
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_TEST true 0
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_0 true 0
@@ -161,9 +161,9 @@ alias ntm_vector_integer_multiplier_verification_compilation {
 alias ntm_vector_integer_divider_verification_compilation {
   echo "TEST: NTM_VECTOR_INTEGER_DIVIDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
 
   vsim -g /ntm_integer_testbench/ENABLE_NTM_VECTOR_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
 
@@ -172,7 +172,7 @@ alias ntm_vector_integer_divider_verification_compilation {
 
   #WAVES
   view -title ntm_vector_integer_divider wave
-  do $simulation_path/mpsoc/math/integer/msim/waves/ntm_vector_integer_divider.do
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_vector_integer_divider.do
 
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_TEST true 0
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_0 true 0
@@ -190,9 +190,9 @@ alias ntm_vector_integer_divider_verification_compilation {
 alias ntm_matrix_integer_adder_verification_compilation {
   echo "TEST: NTM_MATRIX_INTEGER_ADDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
 
   vsim -g /ntm_integer_testbench/ENABLE_NTM_MATRIX_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
 
@@ -201,7 +201,7 @@ alias ntm_matrix_integer_adder_verification_compilation {
 
   #WAVES
   view -title ntm_matrix_integer_adder wave
-  do $simulation_path/mpsoc/math/integer/msim/waves/ntm_matrix_integer_adder.do
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_matrix_integer_adder.do
 
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_ADDER_TEST true 0
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_0 true 0
@@ -219,9 +219,9 @@ alias ntm_matrix_integer_adder_verification_compilation {
 alias ntm_matrix_integer_multiplier_verification_compilation {
   echo "TEST: NTM_MATRIX_INTEGER_MULTIPLIER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
 
   vsim -g /ntm_integer_testbench/ENABLE_NTM_MATRIX_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
 
@@ -230,7 +230,7 @@ alias ntm_matrix_integer_multiplier_verification_compilation {
 
   #WAVES
   view -title ntm_matrix_integer_multiplier wave
-  do $simulation_path/mpsoc/math/integer/msim/waves/ntm_matrix_integer_multiplier.do
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_matrix_integer_multiplier.do
 
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_TEST true 0
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_0 true 0
@@ -248,9 +248,9 @@ alias ntm_matrix_integer_multiplier_verification_compilation {
 alias ntm_matrix_integer_divider_verification_compilation {
   echo "TEST: NTM_MATRIX_INTEGER_DIVIDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
 
   vsim -g /ntm_integer_testbench/ENABLE_NTM_MATRIX_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
 
@@ -259,7 +259,7 @@ alias ntm_matrix_integer_divider_verification_compilation {
 
   #WAVES
   view -title ntm_matrix_integer_divider wave
-  do $simulation_path/mpsoc/math/integer/msim/waves/ntm_matrix_integer_divider.do
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_matrix_integer_divider.do
 
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_TEST true 0
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_0 true 0
@@ -277,9 +277,9 @@ alias ntm_matrix_integer_divider_verification_compilation {
 alias ntm_tensor_integer_adder_verification_compilation {
   echo "TEST: NTM_TENSOR_INTEGER_ADDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
 
   vsim -g /ntm_integer_testbench/ENABLE_NTM_TENSOR_INTEGER_ADDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
 
@@ -288,7 +288,7 @@ alias ntm_tensor_integer_adder_verification_compilation {
 
   #WAVES
   view -title ntm_tensor_integer_adder wave
-  do $simulation_path/mpsoc/math/integer/msim/waves/ntm_tensor_integer_adder.do
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_tensor_integer_adder.do
 
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_ADDER_TEST true 0
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_ADDER_CASE_0 true 0
@@ -306,9 +306,9 @@ alias ntm_tensor_integer_adder_verification_compilation {
 alias ntm_tensor_integer_multiplier_verification_compilation {
   echo "TEST: NTM_TENSOR_INTEGER_MULTIPLIER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
 
   vsim -g /ntm_integer_testbench/ENABLE_NTM_TENSOR_INTEGER_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
 
@@ -317,7 +317,7 @@ alias ntm_tensor_integer_multiplier_verification_compilation {
 
   #WAVES
   view -title ntm_tensor_integer_multiplier wave
-  do $simulation_path/mpsoc/math/integer/msim/waves/ntm_tensor_integer_multiplier.do
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_tensor_integer_multiplier.do
 
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_MULTIPLIER_TEST true 0
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_MULTIPLIER_CASE_0 true 0
@@ -335,9 +335,9 @@ alias ntm_tensor_integer_multiplier_verification_compilation {
 alias ntm_tensor_integer_divider_verification_compilation {
   echo "TEST: NTM_TENSOR_INTEGER_DIVIDER_TEST"
 
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_stimulus.vhd
-  vcom -2008 -reportprogress 300 -work work $verification_path/math/integer/ntm_integer_testbench.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/integer/ntm_integer_testbench.vhd
 
   vsim -g /ntm_integer_testbench/ENABLE_NTM_TENSOR_INTEGER_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_integer_testbench
 
@@ -346,7 +346,7 @@ alias ntm_tensor_integer_divider_verification_compilation {
 
   #WAVES
   view -title ntm_tensor_integer_divider wave
-  do $simulation_path/mpsoc/math/integer/msim/waves/ntm_tensor_integer_divider.do
+  do $simulation_path/mpsoc/arithmetic/integer/msim/waves/ntm_tensor_integer_divider.do
 
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_DIVIDER_TEST true 0
   force -freeze sim:/ntm_integer_pkg/STIMULUS_NTM_TENSOR_INTEGER_DIVIDER_CASE_0 true 0

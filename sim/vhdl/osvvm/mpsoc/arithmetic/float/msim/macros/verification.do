@@ -1,5 +1,5 @@
 #*************************
-# VERIFICATION COMPILATION
+# VERIFICATION
 #*************************
 
 

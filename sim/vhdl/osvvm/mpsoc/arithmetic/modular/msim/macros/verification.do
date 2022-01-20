@@ -1,5 +1,5 @@
 #*************************
-# VERIFICATION COMPILATION
+# VERIFICATION
 #*************************
 
 # MODELSIM 10.4d

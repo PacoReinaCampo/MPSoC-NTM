@@ -1,4 +1,4 @@
-cd D:/QueenField/GitHub/MPSoC-NTM/sim/vhdl/tests/mpsoc/math/integer/msim
+cd D:/QueenField/GitHub/MPSoC-NTM/sim/vhdl/tests/mpsoc/arithmetic/integer/msim
 
-do D:/QueenField/GitHub/MPSoC-NTM/sim/vhdl/tests/mpsoc/math/integer/msim/macros/design.do
-do D:/QueenField/GitHub/MPSoC-NTM/sim/vhdl/tests/mpsoc/math/integer/msim/macros/verification.do
+do D:/QueenField/GitHub/MPSoC-NTM/sim/vhdl/tests/mpsoc/arithmetic/integer/msim/macros/design.do
+do D:/QueenField/GitHub/MPSoC-NTM/sim/vhdl/tests/mpsoc/arithmetic/integer/msim/macros/verification.do

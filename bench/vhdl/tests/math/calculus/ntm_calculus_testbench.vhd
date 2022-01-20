@@ -56,35 +56,44 @@ entity ntm_calculus_testbench is
     L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
-    -- SCALAR-FUNCTIONALITY
-    ENABLE_NTM_SCALAR_DIFFERENTIATION_TEST : boolean := false;
-    ENABLE_NTM_SCALAR_INTEGRATION_TEST     : boolean := false;
-
-    ENABLE_NTM_SCALAR_DIFFERENTIATION_CASE_0 : boolean := false;
-    ENABLE_NTM_SCALAR_INTEGRATION_CASE_0     : boolean := false;
-
-    ENABLE_NTM_SCALAR_DIFFERENTIATION_CASE_1 : boolean := false;
-    ENABLE_NTM_SCALAR_INTEGRATION_CASE_1     : boolean := false;
-
     -- VECTOR-FUNCTIONALITY
-    ENABLE_NTM_VECTOR_DIFFERENTIATION_TEST : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGRATION_TEST     : boolean := false;
+    ENABLE_NTM_VECTOR_INTEGRATION_TEST        : boolean := false;
+    ENABLE_NTM_VECTOR_AVERAGE_TEST : boolean := false;
+    ENABLE_NTM_VECTOR_DIFFERENTIATION_TEST   : boolean := false;
 
-    ENABLE_NTM_VECTOR_DIFFERENTIATION_CASE_0 : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGRATION_CASE_0     : boolean := false;
+    ENABLE_NTM_VECTOR_INTEGRATION_CASE_0        : boolean := false;
+    ENABLE_NTM_VECTOR_AVERAGE_CASE_0 : boolean := false;
+    ENABLE_NTM_VECTOR_DIFFERENTIATION_CASE_0   : boolean := false;
 
-    ENABLE_NTM_VECTOR_DIFFERENTIATION_CASE_1 : boolean := false;
-    ENABLE_NTM_VECTOR_INTEGRATION_CASE_1     : boolean := false;
+    ENABLE_NTM_VECTOR_INTEGRATION_CASE_1        : boolean := false;
+    ENABLE_NTM_VECTOR_AVERAGE_CASE_1 : boolean := false;
+    ENABLE_NTM_VECTOR_DIFFERENTIATION_CASE_1   : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
-    ENABLE_NTM_MATRIX_DIFFERENTIATION_TEST : boolean := false;
     ENABLE_NTM_MATRIX_INTEGRATION_TEST     : boolean := false;
+    ENABLE_NTM_MATRIX_AVERAGE_TEST : boolean := false;
+    ENABLE_NTM_MATRIX_DIFFERENTIATION_TEST   : boolean := false;
 
-    ENABLE_NTM_MATRIX_DIFFERENTIATION_CASE_0 : boolean := false;
     ENABLE_NTM_MATRIX_INTEGRATION_CASE_0     : boolean := false;
+    ENABLE_NTM_MATRIX_AVERAGE_CASE_0 : boolean := false;
+    ENABLE_NTM_MATRIX_DIFFERENTIATION_CASE_0   : boolean := false;
 
-    ENABLE_NTM_MATRIX_DIFFERENTIATION_CASE_1 : boolean := false;
-    ENABLE_NTM_MATRIX_INTEGRATION_CASE_1     : boolean := false
+    ENABLE_NTM_MATRIX_INTEGRATION_CASE_1     : boolean := false;
+    ENABLE_NTM_MATRIX_AVERAGE_CASE_1 : boolean := false;
+    ENABLE_NTM_MATRIX_DIFFERENTIATION_CASE_1   : boolean := false;
+
+    -- TENSOR-FUNCTIONALITY
+    ENABLE_NTM_TENSOR_INTEGRATION_TEST     : boolean := false;
+    ENABLE_NTM_TENSOR_AVERAGE_TEST : boolean := false;
+    ENABLE_NTM_TENSOR_DIFFERENTIATION_TEST   : boolean := false;
+
+    ENABLE_NTM_TENSOR_INTEGRATION_CASE_0     : boolean := false;
+    ENABLE_NTM_TENSOR_AVERAGE_CASE_0 : boolean := false;
+    ENABLE_NTM_TENSOR_DIFFERENTIATION_CASE_0   : boolean := false;
+
+    ENABLE_NTM_TENSOR_INTEGRATION_CASE_1     : boolean := false;
+    ENABLE_NTM_TENSOR_AVERAGE_CASE_1 : boolean := false;
+    ENABLE_NTM_TENSOR_DIFFERENTIATION_CASE_1   : boolean := false
     );
 end ntm_calculus_testbench;
 
@@ -98,125 +107,211 @@ architecture ntm_calculus_testbench_architecture of ntm_calculus_testbench is
   signal CLK : std_logic;
   signal RST : std_logic;
 
-  -----------------------------------------------------------------------
-  -- SCALAR
-  -----------------------------------------------------------------------
-
-  -- SCALAR DIFFERENTIATION
+  -- DOT INTEGRATION
   -- CONTROL
-  signal start_scalar_differentiation : std_logic;
-  signal ready_scalar_differentiation : std_logic;
+  signal start_vector_integration : std_logic;
+  signal ready_vector_integration : std_logic;
 
-  signal data_in_enable_scalar_differentiation  : std_logic;
-  signal data_out_enable_scalar_differentiation : std_logic;
+  signal data_a_in_enable_vector_integration : std_logic;
+  signal data_b_in_enable_vector_integration : std_logic;
+
+  signal data_out_enable_vector_integration : std_logic;
 
   -- DATA
-  signal size_in_scalar_differentiation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal period_in_scalar_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_scalar_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_scalar_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_integration : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_integration : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_integration  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR INTEGRATION
+  -- VECTOR AVERAGE
   -- CONTROL
-  signal start_scalar_integration : std_logic;
-  signal ready_scalar_integration : std_logic;
+  signal start_vector_average : std_logic;
+  signal ready_vector_average : std_logic;
 
-  signal data_in_enable_scalar_integration  : std_logic;
-  signal data_out_enable_scalar_integration : std_logic;
+  signal data_a_in_enable_vector_average : std_logic;
+  signal data_b_in_enable_vector_average : std_logic;
+
+  signal data_enable_vector_average : std_logic;
+
+  signal data_out_enable_vector_average : std_logic;
 
   -- DATA
-  signal size_in_scalar_integration   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal period_in_scalar_integration : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_scalar_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_scalar_integration   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_integration  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -----------------------------------------------------------------------
-  -- VECTOR
-  -----------------------------------------------------------------------
+  signal length_in_vector_average : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_average : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_average : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_average  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR DIFFERENTIATION
   -- CONTROL
   signal start_vector_differentiation : std_logic;
   signal ready_vector_differentiation : std_logic;
 
-  signal data_in_vector_enable_vector_differentiation : std_logic;
-  signal data_in_scalar_enable_vector_differentiation : std_logic;
+  signal data_in_enable_vector_differentiation : std_logic;
 
-  signal data_out_vector_enable_vector_differentiation : std_logic;
-  signal data_out_scalar_enable_vector_differentiation : std_logic;
+  signal data_enable_vector_differentiation : std_logic;
+
+  signal data_out_enable_vector_differentiation : std_logic;
 
   -- DATA
-  signal size_in_vector_differentiation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal period_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_vector_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR INTEGRATION
-  -- CONTROL
-  signal start_vector_integration : std_logic;
-  signal ready_vector_integration : std_logic;
-
-  signal data_in_vector_enable_vector_integration : std_logic;
-  signal data_in_scalar_enable_vector_integration : std_logic;
-
-  signal data_out_vector_enable_vector_integration : std_logic;
-  signal data_out_scalar_enable_vector_integration : std_logic;
-
-  -- DATA
-  signal size_in_vector_integration   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal period_in_vector_integration : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_vector_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_integration   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_integration  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -----------------------------------------------------------------------
-  -- MATRIX
-  -----------------------------------------------------------------------
-
-  -- MATRIX DIFFERENTIATION
-  -- CONTROL
-  signal start_matrix_differentiation : std_logic;
-  signal ready_matrix_differentiation : std_logic;
-
-  signal data_in_matrix_enable_matrix_differentiation : std_logic;
-  signal data_in_vector_enable_matrix_differentiation : std_logic;
-  signal data_in_scalar_enable_matrix_differentiation : std_logic;
-
-  signal data_out_matrix_enable_matrix_differentiation : std_logic;
-  signal data_out_vector_enable_matrix_differentiation : std_logic;
-  signal data_out_scalar_enable_matrix_differentiation : std_logic;
-
-  -- DATA
-  signal size_i_in_matrix_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal period_in_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_matrix_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_matrix_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX INTEGRATION
   -- CONTROL
   signal start_matrix_integration : std_logic;
   signal ready_matrix_integration : std_logic;
 
-  signal data_in_matrix_enable_matrix_integration : std_logic;
-  signal data_in_vector_enable_matrix_integration : std_logic;
-  signal data_in_scalar_enable_matrix_integration : std_logic;
+  signal data_a_in_i_enable_matrix_integration : std_logic;
+  signal data_a_in_j_enable_matrix_integration : std_logic;
+  signal data_b_in_i_enable_matrix_integration : std_logic;
+  signal data_b_in_j_enable_matrix_integration : std_logic;
 
-  signal data_out_matrix_enable_matrix_integration : std_logic;
-  signal data_out_vector_enable_matrix_integration : std_logic;
-  signal data_out_scalar_enable_matrix_integration : std_logic;
+  signal data_i_enable_matrix_integration : std_logic;
+  signal data_j_enable_matrix_integration : std_logic;
+
+  signal data_out_i_enable_matrix_integration : std_logic;
+  signal data_out_j_enable_matrix_integration : std_logic;
 
   -- DATA
-  signal size_i_in_matrix_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal period_in_matrix_integration : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_matrix_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_matrix_integration   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_integration  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_i_in_matrix_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_matrix_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_matrix_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_integration   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_integration   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_integration    : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- MATRIX AVERAGE
+  -- CONTROL
+  signal start_matrix_average : std_logic;
+  signal ready_matrix_average : std_logic;
+
+  signal data_a_in_i_enable_matrix_average : std_logic;
+  signal data_a_in_j_enable_matrix_average : std_logic;
+  signal data_b_in_i_enable_matrix_average : std_logic;
+  signal data_b_in_j_enable_matrix_average : std_logic;
+
+  signal data_i_enable_matrix_average : std_logic;
+  signal data_j_enable_matrix_average : std_logic;
+
+  signal data_out_i_enable_matrix_average : std_logic;
+  signal data_out_j_enable_matrix_average : std_logic;
+
+  -- DATA
+  signal size_a_i_in_matrix_average : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_average : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_matrix_average : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_matrix_average : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_average   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_average   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_average    : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- MATRIX DIFFERENTIATION
+  -- CONTROL
+  signal start_matrix_differentiation : std_logic;
+  signal ready_matrix_differentiation : std_logic;
+
+  signal data_in_i_enable_matrix_differentiation : std_logic;
+  signal data_in_j_enable_matrix_differentiation : std_logic;
+
+  signal data_i_enable_matrix_differentiation : std_logic;
+  signal data_j_enable_matrix_differentiation : std_logic;
+
+  signal data_out_i_enable_matrix_differentiation : std_logic;
+  signal data_out_j_enable_matrix_differentiation : std_logic;
+
+  -- DATA
+  signal size_i_in_matrix_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_matrix_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- TENSOR INTEGRATION
+  -- CONTROL
+  signal start_tensor_integration : std_logic;
+  signal ready_tensor_integration : std_logic;
+
+  signal data_a_in_i_enable_tensor_integration : std_logic;
+  signal data_a_in_j_enable_tensor_integration : std_logic;
+  signal data_a_in_k_enable_tensor_integration : std_logic;
+  signal data_b_in_i_enable_tensor_integration : std_logic;
+  signal data_b_in_j_enable_tensor_integration : std_logic;
+  signal data_b_in_k_enable_tensor_integration : std_logic;
+
+  signal data_i_enable_tensor_integration : std_logic;
+  signal data_j_enable_tensor_integration : std_logic;
+  signal data_k_enable_tensor_integration : std_logic;
+
+  signal data_out_i_enable_tensor_integration : std_logic;
+  signal data_out_j_enable_tensor_integration : std_logic;
+  signal data_out_k_enable_tensor_integration : std_logic;
+
+  -- DATA
+  signal size_a_i_in_tensor_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_tensor_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_k_in_tensor_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_tensor_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_tensor_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_k_in_tensor_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_tensor_integration   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_integration   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_integration    : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- TENSOR AVERAGE
+  -- CONTROL
+  signal start_tensor_average : std_logic;
+  signal ready_tensor_average : std_logic;
+
+  signal data_a_in_i_enable_tensor_average : std_logic;
+  signal data_a_in_j_enable_tensor_average : std_logic;
+  signal data_a_in_k_enable_tensor_average : std_logic;
+  signal data_b_in_i_enable_tensor_average : std_logic;
+  signal data_b_in_j_enable_tensor_average : std_logic;
+  signal data_b_in_k_enable_tensor_average : std_logic;
+
+  signal data_i_enable_tensor_average : std_logic;
+  signal data_j_enable_tensor_average : std_logic;
+  signal data_k_enable_tensor_average : std_logic;
+
+  signal data_out_i_enable_tensor_average : std_logic;
+  signal data_out_j_enable_tensor_average : std_logic;
+  signal data_out_k_enable_tensor_average : std_logic;
+
+  -- DATA
+  signal size_a_i_in_tensor_average : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_tensor_average : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_k_in_tensor_average : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_tensor_average : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_tensor_average : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_k_in_tensor_average : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_tensor_average   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_average   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_average    : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- TENSOR DIFFERENTIATION
+  -- CONTROL
+  signal start_tensor_differentiation : std_logic;
+  signal ready_tensor_differentiation : std_logic;
+
+  signal data_in_i_enable_tensor_differentiation : std_logic;
+  signal data_in_j_enable_tensor_differentiation : std_logic;
+  signal data_in_k_enable_tensor_differentiation : std_logic;
+
+  signal data_i_enable_tensor_differentiation : std_logic;
+  signal data_j_enable_tensor_differentiation : std_logic;
+  signal data_k_enable_tensor_differentiation : std_logic;
+
+  signal data_out_i_enable_tensor_differentiation : std_logic;
+  signal data_out_j_enable_tensor_differentiation : std_logic;
+  signal data_out_k_enable_tensor_differentiation : std_logic;
+
+  -- DATA
+  signal size_i_in_tensor_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_tensor_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_k_in_tensor_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_tensor_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -242,224 +337,214 @@ begin
       CLK => CLK,
       RST => RST,
 
-      -----------------------------------------------------------------------
-      -- STIMULUS SCALAR
-      -----------------------------------------------------------------------
-
-      -- SCALAR DIFFERENTIATION
+      -- DOT INTEGRATION
       -- CONTROL
-      SCALAR_DIFFERENTIATION_START => start_scalar_differentiation,
-      SCALAR_DIFFERENTIATION_READY => ready_scalar_differentiation,
+      DOT_INTEGRATION_START => start_vector_integration,
+      DOT_INTEGRATION_READY => ready_vector_integration,
 
-      SCALAR_DIFFERENTIATION_DATA_IN_ENABLE => data_in_enable_scalar_differentiation,
+      DOT_INTEGRATION_DATA_A_IN_ENABLE => data_a_in_enable_vector_integration,
+      DOT_INTEGRATION_DATA_B_IN_ENABLE => data_b_in_enable_vector_integration,
 
-      SCALAR_DIFFERENTIATION_DATA_OUT_ENABLE => data_out_enable_scalar_differentiation,
+      DOT_INTEGRATION_DATA_OUT_ENABLE => data_out_enable_vector_integration,
 
       -- DATA
-      SCALAR_DIFFERENTIATION_PERIOD_IN => period_in_scalar_differentiation,
-      SCALAR_DIFFERENTIATION_LENGTH_IN => length_in_scalar_differentiation,
-      SCALAR_DIFFERENTIATION_DATA_IN   => data_in_scalar_differentiation,
-      SCALAR_DIFFERENTIATION_DATA_OUT  => data_out_scalar_differentiation,
+      DOT_INTEGRATION_LENGTH_IN => length_in_vector_integration,
+      DOT_INTEGRATION_DATA_A_IN => data_a_in_vector_integration,
+      DOT_INTEGRATION_DATA_B_IN => data_b_in_vector_integration,
+      DOT_INTEGRATION_DATA_OUT  => data_out_vector_integration,
 
-      -- SCALAR INTEGRATION
+      -- VECTOR AVERAGE
       -- CONTROL
-      SCALAR_INTEGRATION_START => start_scalar_integration,
-      SCALAR_INTEGRATION_READY => ready_scalar_integration,
+      VECTOR_AVERAGE_START => start_vector_average,
+      VECTOR_AVERAGE_READY => ready_vector_average,
 
-      SCALAR_INTEGRATION_DATA_IN_ENABLE => data_in_enable_scalar_integration,
+      VECTOR_AVERAGE_DATA_A_IN_ENABLE => data_a_in_enable_vector_average,
+      VECTOR_AVERAGE_DATA_B_IN_ENABLE => data_b_in_enable_vector_average,
 
-      SCALAR_INTEGRATION_DATA_OUT_ENABLE => data_out_enable_scalar_integration,
+      VECTOR_AVERAGE_DATA_OUT_ENABLE => data_out_enable_vector_average,
 
       -- DATA
-      SCALAR_INTEGRATION_PERIOD_IN => period_in_scalar_integration,
-      SCALAR_INTEGRATION_LENGTH_IN => length_in_scalar_integration,
-      SCALAR_INTEGRATION_DATA_IN   => data_in_scalar_integration,
-      SCALAR_INTEGRATION_DATA_OUT  => data_out_scalar_integration,
-
-
-      -----------------------------------------------------------------------
-      -- STIMULUS VECTOR
-      -----------------------------------------------------------------------
+      VECTOR_AVERAGE_LENGTH_IN => length_in_vector_average,
+      VECTOR_AVERAGE_DATA_A_IN => data_a_in_vector_average,
+      VECTOR_AVERAGE_DATA_B_IN => data_b_in_vector_average,
+      VECTOR_AVERAGE_DATA_OUT  => data_out_vector_average,
 
       -- VECTOR DIFFERENTIATION
       -- CONTROL
       VECTOR_DIFFERENTIATION_START => start_vector_differentiation,
       VECTOR_DIFFERENTIATION_READY => ready_vector_differentiation,
 
-      VECTOR_DIFFERENTIATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_differentiation,
-      VECTOR_DIFFERENTIATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_differentiation,
+      VECTOR_DIFFERENTIATION_DATA_IN_ENABLE => data_in_enable_vector_differentiation,
 
-      VECTOR_DIFFERENTIATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_differentiation,
-      VECTOR_DIFFERENTIATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_differentiation,
+      VECTOR_DIFFERENTIATION_DATA_ENABLE => data_enable_vector_differentiation,
+
+      VECTOR_DIFFERENTIATION_DATA_OUT_ENABLE => data_out_enable_vector_differentiation,
 
       -- DATA
-      VECTOR_DIFFERENTIATION_SIZE_IN   => size_in_vector_differentiation,
       VECTOR_DIFFERENTIATION_LENGTH_IN => length_in_vector_differentiation,
       VECTOR_DIFFERENTIATION_DATA_IN   => data_in_vector_differentiation,
       VECTOR_DIFFERENTIATION_DATA_OUT  => data_out_vector_differentiation,
-
-      -- VECTOR INTEGRATION
-      -- CONTROL
-      VECTOR_INTEGRATION_START => start_vector_integration,
-      VECTOR_INTEGRATION_READY => ready_vector_integration,
-
-      VECTOR_INTEGRATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_integration,
-      VECTOR_INTEGRATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_integration,
-
-      VECTOR_INTEGRATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_integration,
-      VECTOR_INTEGRATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_integration,
-
-      -- DATA
-      VECTOR_INTEGRATION_SIZE_IN   => size_in_vector_integration,
-      VECTOR_INTEGRATION_LENGTH_IN => length_in_vector_integration,
-      VECTOR_INTEGRATION_DATA_IN   => data_in_vector_integration,
-      VECTOR_INTEGRATION_DATA_OUT  => data_out_vector_integration,
-
-      -----------------------------------------------------------------------
-      -- STIMULUS MATRIX
-      -----------------------------------------------------------------------
-
-      -- MATRIX DIFFERENTIATION
-      -- CONTROL
-      MATRIX_DIFFERENTIATION_START => start_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_READY => ready_matrix_differentiation,
-
-      MATRIX_DIFFERENTIATION_DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_differentiation,
-
-      MATRIX_DIFFERENTIATION_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_differentiation,
-
-      -- DATA
-      MATRIX_DIFFERENTIATION_SIZE_I_IN => size_i_in_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_SIZE_J_IN => size_j_in_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_PERIOD_IN => period_in_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_LENGTH_IN => length_in_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_DATA_IN   => data_in_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_DATA_OUT  => data_out_matrix_differentiation,
 
       -- MATRIX INTEGRATION
       -- CONTROL
       MATRIX_INTEGRATION_START => start_matrix_integration,
       MATRIX_INTEGRATION_READY => ready_matrix_integration,
 
-      MATRIX_INTEGRATION_DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_integration,
-      MATRIX_INTEGRATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_integration,
-      MATRIX_INTEGRATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_integration,
+      MATRIX_INTEGRATION_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_integration,
+      MATRIX_INTEGRATION_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_integration,
+      MATRIX_INTEGRATION_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_integration,
+      MATRIX_INTEGRATION_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_integration,
 
-      MATRIX_INTEGRATION_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_integration,
-      MATRIX_INTEGRATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_integration,
-      MATRIX_INTEGRATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_integration,
+      MATRIX_INTEGRATION_DATA_I_ENABLE => data_i_enable_matrix_integration,
+      MATRIX_INTEGRATION_DATA_J_ENABLE => data_j_enable_matrix_integration,
+
+      MATRIX_INTEGRATION_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_integration,
+      MATRIX_INTEGRATION_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_integration,
 
       -- DATA
-      MATRIX_INTEGRATION_SIZE_I_IN => size_i_in_matrix_integration,
-      MATRIX_INTEGRATION_SIZE_J_IN => size_j_in_matrix_integration,
-      MATRIX_INTEGRATION_PERIOD_IN => period_in_matrix_integration,
-      MATRIX_INTEGRATION_LENGTH_IN => length_in_matrix_integration,
-      MATRIX_INTEGRATION_DATA_IN   => data_in_matrix_integration,
-      MATRIX_INTEGRATION_DATA_OUT  => data_out_matrix_integration
+      MATRIX_INTEGRATION_SIZE_A_I_IN => size_a_i_in_matrix_integration,
+      MATRIX_INTEGRATION_SIZE_A_J_IN => size_a_j_in_matrix_integration,
+      MATRIX_INTEGRATION_SIZE_B_I_IN => size_b_i_in_matrix_integration,
+      MATRIX_INTEGRATION_SIZE_B_J_IN => size_b_j_in_matrix_integration,
+      MATRIX_INTEGRATION_DATA_A_IN   => data_a_in_matrix_integration,
+      MATRIX_INTEGRATION_DATA_B_IN   => data_b_in_matrix_integration,
+      MATRIX_INTEGRATION_DATA_OUT    => data_out_matrix_integration,
+
+      -- MATRIX AVERAGE
+      -- CONTROL
+      MATRIX_AVERAGE_START => start_matrix_average,
+      MATRIX_AVERAGE_READY => ready_matrix_average,
+
+      MATRIX_AVERAGE_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_average,
+      MATRIX_AVERAGE_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_average,
+      MATRIX_AVERAGE_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_average,
+      MATRIX_AVERAGE_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_average,
+
+      MATRIX_AVERAGE_DATA_I_ENABLE => data_i_enable_matrix_average,
+      MATRIX_AVERAGE_DATA_J_ENABLE => data_j_enable_matrix_average,
+
+      MATRIX_AVERAGE_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_average,
+      MATRIX_AVERAGE_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_average,
+
+      -- DATA
+      MATRIX_AVERAGE_SIZE_A_I_IN => size_a_i_in_matrix_average,
+      MATRIX_AVERAGE_SIZE_A_J_IN => size_a_j_in_matrix_average,
+      MATRIX_AVERAGE_SIZE_B_I_IN => size_b_i_in_matrix_average,
+      MATRIX_AVERAGE_SIZE_B_J_IN => size_b_j_in_matrix_average,
+      MATRIX_AVERAGE_DATA_A_IN   => data_a_in_matrix_average,
+      MATRIX_AVERAGE_DATA_B_IN   => data_b_in_matrix_average,
+      MATRIX_AVERAGE_DATA_OUT    => data_out_matrix_average,
+
+      -- MATRIX DIFFERENTIATION
+      -- CONTROL
+      MATRIX_DIFFERENTIATION_START => start_matrix_differentiation,
+      MATRIX_DIFFERENTIATION_READY => ready_matrix_differentiation,
+
+      MATRIX_DIFFERENTIATION_DATA_IN_I_ENABLE => data_in_i_enable_matrix_differentiation,
+      MATRIX_DIFFERENTIATION_DATA_IN_J_ENABLE => data_in_j_enable_matrix_differentiation,
+
+      MATRIX_DIFFERENTIATION_DATA_I_ENABLE => data_i_enable_matrix_differentiation,
+      MATRIX_DIFFERENTIATION_DATA_J_ENABLE => data_j_enable_matrix_differentiation,
+
+      MATRIX_DIFFERENTIATION_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_differentiation,
+      MATRIX_DIFFERENTIATION_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_differentiation,
+
+      -- DATA
+      MATRIX_DIFFERENTIATION_SIZE_I_IN => size_i_in_matrix_differentiation,
+      MATRIX_DIFFERENTIATION_SIZE_J_IN => size_j_in_matrix_differentiation,
+      MATRIX_DIFFERENTIATION_DATA_IN   => data_in_matrix_differentiation,
+      MATRIX_DIFFERENTIATION_DATA_OUT  => data_out_matrix_differentiation,
+
+      -- TENSOR INTEGRATION
+      -- CONTROL
+      TENSOR_INTEGRATION_START => start_tensor_integration,
+      TENSOR_INTEGRATION_READY => ready_tensor_integration,
+
+      TENSOR_INTEGRATION_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_integration,
+      TENSOR_INTEGRATION_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_integration,
+      TENSOR_INTEGRATION_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_integration,
+      TENSOR_INTEGRATION_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_integration,
+      TENSOR_INTEGRATION_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_integration,
+      TENSOR_INTEGRATION_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_integration,
+
+      TENSOR_INTEGRATION_DATA_I_ENABLE => data_i_enable_tensor_integration,
+      TENSOR_INTEGRATION_DATA_J_ENABLE => data_j_enable_tensor_integration,
+      TENSOR_INTEGRATION_DATA_K_ENABLE => data_k_enable_tensor_integration,
+
+      TENSOR_INTEGRATION_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_integration,
+      TENSOR_INTEGRATION_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_integration,
+      TENSOR_INTEGRATION_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_integration,
+
+      -- DATA
+      TENSOR_INTEGRATION_SIZE_A_I_IN => size_a_i_in_tensor_integration,
+      TENSOR_INTEGRATION_SIZE_A_J_IN => size_a_j_in_tensor_integration,
+      TENSOR_INTEGRATION_SIZE_A_K_IN => size_a_k_in_tensor_integration,
+      TENSOR_INTEGRATION_SIZE_B_I_IN => size_b_i_in_tensor_integration,
+      TENSOR_INTEGRATION_SIZE_B_J_IN => size_b_j_in_tensor_integration,
+      TENSOR_INTEGRATION_SIZE_B_K_IN => size_b_k_in_tensor_integration,
+      TENSOR_INTEGRATION_DATA_A_IN   => data_a_in_tensor_integration,
+      TENSOR_INTEGRATION_DATA_B_IN   => data_b_in_tensor_integration,
+      TENSOR_INTEGRATION_DATA_OUT    => data_out_tensor_integration,
+
+      -- TENSOR AVERAGE
+      -- CONTROL
+      TENSOR_AVERAGE_START => start_tensor_average,
+      TENSOR_AVERAGE_READY => ready_tensor_average,
+
+      TENSOR_AVERAGE_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_average,
+      TENSOR_AVERAGE_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_average,
+      TENSOR_AVERAGE_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_average,
+      TENSOR_AVERAGE_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_average,
+      TENSOR_AVERAGE_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_average,
+      TENSOR_AVERAGE_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_average,
+
+      TENSOR_AVERAGE_DATA_I_ENABLE => data_i_enable_tensor_average,
+      TENSOR_AVERAGE_DATA_J_ENABLE => data_j_enable_tensor_average,
+      TENSOR_AVERAGE_DATA_K_ENABLE => data_k_enable_tensor_average,
+
+      TENSOR_AVERAGE_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_average,
+      TENSOR_AVERAGE_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_average,
+      TENSOR_AVERAGE_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_average,
+
+      -- DATA
+      TENSOR_AVERAGE_SIZE_A_I_IN => size_a_i_in_tensor_average,
+      TENSOR_AVERAGE_SIZE_A_J_IN => size_a_j_in_tensor_average,
+      TENSOR_AVERAGE_SIZE_A_K_IN => size_a_k_in_tensor_average,
+      TENSOR_AVERAGE_SIZE_B_I_IN => size_b_i_in_tensor_average,
+      TENSOR_AVERAGE_SIZE_B_J_IN => size_b_j_in_tensor_average,
+      TENSOR_AVERAGE_SIZE_B_K_IN => size_b_k_in_tensor_average,
+      TENSOR_AVERAGE_DATA_A_IN   => data_a_in_tensor_average,
+      TENSOR_AVERAGE_DATA_B_IN   => data_b_in_tensor_average,
+      TENSOR_AVERAGE_DATA_OUT    => data_out_tensor_average,
+
+      -- TENSOR DIFFERENTIATION
+      -- CONTROL
+      TENSOR_DIFFERENTIATION_START => start_tensor_differentiation,
+      TENSOR_DIFFERENTIATION_READY => ready_tensor_differentiation,
+
+      TENSOR_DIFFERENTIATION_DATA_IN_I_ENABLE => data_in_i_enable_tensor_differentiation,
+      TENSOR_DIFFERENTIATION_DATA_IN_J_ENABLE => data_in_j_enable_tensor_differentiation,
+      TENSOR_DIFFERENTIATION_DATA_IN_K_ENABLE => data_in_k_enable_tensor_differentiation,
+
+      TENSOR_DIFFERENTIATION_DATA_I_ENABLE => data_i_enable_tensor_differentiation,
+      TENSOR_DIFFERENTIATION_DATA_J_ENABLE => data_j_enable_tensor_differentiation,
+      TENSOR_DIFFERENTIATION_DATA_K_ENABLE => data_k_enable_tensor_differentiation,
+
+      TENSOR_DIFFERENTIATION_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_differentiation,
+      TENSOR_DIFFERENTIATION_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_differentiation,
+      TENSOR_DIFFERENTIATION_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_differentiation,
+
+      -- DATA
+      TENSOR_DIFFERENTIATION_SIZE_I_IN => size_i_in_tensor_differentiation,
+      TENSOR_DIFFERENTIATION_SIZE_J_IN => size_j_in_tensor_differentiation,
+      TENSOR_DIFFERENTIATION_SIZE_K_IN => size_k_in_tensor_differentiation,
+      TENSOR_DIFFERENTIATION_DATA_IN   => data_in_tensor_differentiation,
+      TENSOR_DIFFERENTIATION_DATA_OUT  => data_out_tensor_differentiation
       );
 
-  -----------------------------------------------------------------------
-  -- SCALAR
-  -----------------------------------------------------------------------
-
-  -- SCALAR DIFFERENTIATION
-  ntm_scalar_differentiation_test : if (ENABLE_NTM_SCALAR_DIFFERENTIATION_TEST) generate
-    scalar_differentiation : ntm_scalar_differentiation
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_scalar_differentiation,
-        READY => ready_scalar_differentiation,
-
-        DATA_IN_ENABLE => data_in_enable_scalar_differentiation,
-
-        DATA_OUT_ENABLE => data_out_enable_scalar_differentiation,
-
-        -- DATA
-        PERIOD_IN => period_in_scalar_differentiation,
-        LENGTH_IN => length_in_scalar_differentiation,
-        DATA_IN   => data_in_scalar_differentiation,
-        DATA_OUT  => data_out_scalar_differentiation
-        );
-  end generate ntm_scalar_differentiation_test;
-
-  -- SCALAR INTEGRATION
-  ntm_scalar_integration_test : if (ENABLE_NTM_SCALAR_INTEGRATION_TEST) generate
-    scalar_integration : ntm_scalar_integration
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_scalar_integration,
-        READY => ready_scalar_integration,
-
-        DATA_IN_ENABLE => data_in_enable_scalar_integration,
-
-        DATA_OUT_ENABLE => data_out_enable_scalar_integration,
-
-        -- DATA
-        PERIOD_IN => period_in_scalar_integration,
-        LENGTH_IN => length_in_scalar_integration,
-        DATA_IN   => data_in_scalar_integration,
-        DATA_OUT  => data_out_scalar_integration
-        );
-  end generate ntm_scalar_integration_test;
-
-  -----------------------------------------------------------------------
-  -- VECTOR
-  -----------------------------------------------------------------------
-
-  -- VECTOR DIFFERENTIATION
-  ntm_vector_differentiation_test : if (ENABLE_NTM_VECTOR_DIFFERENTIATION_TEST) generate
-    vector_differentiation : ntm_vector_differentiation
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_vector_differentiation,
-        READY => ready_vector_differentiation,
-
-        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_differentiation,
-        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_differentiation,
-
-        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_differentiation,
-        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_differentiation,
-
-        -- DATA
-        SIZE_IN   => size_in_vector_differentiation,
-        PERIOD_IN => period_in_vector_differentiation,
-        LENGTH_IN => length_in_vector_differentiation,
-        DATA_IN   => data_in_vector_differentiation,
-        DATA_OUT  => data_out_vector_differentiation
-        );
-  end generate ntm_vector_differentiation_test;
-
-  -- VECTOR INTEGRATION
+  -- DOT INTEGRATION
   ntm_vector_integration_test : if (ENABLE_NTM_VECTOR_INTEGRATION_TEST) generate
-    vector_integration : ntm_vector_integration
+    dot_integration : ntm_vector_integration
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -473,28 +558,22 @@ begin
         START => start_vector_integration,
         READY => ready_vector_integration,
 
-        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_integration,
-        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_integration,
+        DATA_A_IN_ENABLE => data_a_in_enable_vector_integration,
+        DATA_B_IN_ENABLE => data_b_in_enable_vector_integration,
 
-        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_integration,
-        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_integration,
+        DATA_OUT_ENABLE => data_out_enable_vector_integration,
 
         -- DATA
-        SIZE_IN   => size_in_vector_integration,
-        PERIOD_IN => period_in_vector_integration,
         LENGTH_IN => length_in_vector_integration,
-        DATA_IN   => data_in_vector_integration,
+        DATA_A_IN => data_a_in_vector_integration,
+        DATA_B_IN => data_b_in_vector_integration,
         DATA_OUT  => data_out_vector_integration
         );
   end generate ntm_vector_integration_test;
 
-  -----------------------------------------------------------------------
-  -- MATRIX
-  -----------------------------------------------------------------------
-
-  -- MATRIX DIFFERENTIATION
-  ntm_matrix_differentiation_test : if (ENABLE_NTM_MATRIX_DIFFERENTIATION_TEST) generate
-    matrix_differentiation : ntm_matrix_differentiation
+  -- VECTOR AVERAGE
+  ntm_vector_average_test : if (ENABLE_NTM_VECTOR_AVERAGE_TEST) generate
+    vector_average : ntm_vector_average
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -505,26 +584,50 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_matrix_differentiation,
-        READY => ready_matrix_differentiation,
+        START => start_vector_average,
+        READY => ready_vector_average,
 
-        DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_differentiation,
-        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_differentiation,
-        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_differentiation,
+        DATA_A_IN_ENABLE => data_a_in_enable_vector_average,
+        DATA_B_IN_ENABLE => data_b_in_enable_vector_average,
 
-        DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_differentiation,
-        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_differentiation,
-        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_differentiation,
+        DATA_OUT_ENABLE => data_out_enable_vector_average,
 
         -- DATA
-        SIZE_I_IN => size_i_in_matrix_differentiation,
-        SIZE_J_IN => size_j_in_matrix_differentiation,
-        PERIOD_IN => period_in_matrix_differentiation,
-        LENGTH_IN => length_in_matrix_differentiation,
-        DATA_IN   => data_in_matrix_differentiation,
-        DATA_OUT  => data_out_matrix_differentiation
+        LENGTH_IN => length_in_vector_average,
+        DATA_A_IN => data_a_in_vector_average,
+        DATA_B_IN => data_b_in_vector_average,
+        DATA_OUT  => data_out_vector_average
         );
-  end generate ntm_matrix_differentiation_test;
+  end generate ntm_vector_average_test;
+
+  -- VECTOR DIFFERENTIATION
+  ntm_vector_differentiation_test : if (ENABLE_ntm_vector_differentiation_TEST) generate
+    VECTOR_DIFFERENTIATION : ntm_vector_differentiation
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_vector_differentiation,
+        READY => ready_vector_differentiation,
+
+        DATA_IN_ENABLE => data_in_enable_vector_differentiation,
+
+        DATA_ENABLE => data_enable_vector_differentiation,
+
+        DATA_OUT_ENABLE => data_out_enable_vector_differentiation,
+
+        -- DATA
+        LENGTH_IN => length_in_vector_differentiation,
+        DATA_IN   => data_in_vector_differentiation,
+        DATA_OUT  => data_out_vector_differentiation
+        );
+  end generate ntm_vector_differentiation_test;
 
   -- MATRIX INTEGRATION
   ntm_matrix_integration_test : if (ENABLE_NTM_MATRIX_INTEGRATION_TEST) generate
@@ -542,22 +645,222 @@ begin
         START => start_matrix_integration,
         READY => ready_matrix_integration,
 
-        DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_integration,
-        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_integration,
-        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_integration,
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_integration,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_integration,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_integration,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_integration,
 
-        DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_integration,
-        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_integration,
-        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_integration,
+        DATA_I_ENABLE => data_i_enable_matrix_integration,
+        DATA_J_ENABLE => data_j_enable_matrix_integration,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_integration,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_integration,
 
         -- DATA
-        SIZE_I_IN => size_i_in_matrix_integration,
-        SIZE_J_IN => size_j_in_matrix_integration,
-        PERIOD_IN => period_in_matrix_integration,
-        LENGTH_IN => length_in_matrix_integration,
-        DATA_IN   => data_in_matrix_integration,
-        DATA_OUT  => data_out_matrix_integration
+        SIZE_A_I_IN => size_a_i_in_matrix_integration,
+        SIZE_A_J_IN => size_a_j_in_matrix_integration,
+        SIZE_B_I_IN => size_b_i_in_matrix_integration,
+        SIZE_B_J_IN => size_b_j_in_matrix_integration,
+        DATA_A_IN   => data_a_in_matrix_integration,
+        DATA_B_IN   => data_b_in_matrix_integration,
+        DATA_OUT    => data_out_matrix_integration
         );
   end generate ntm_matrix_integration_test;
+
+  -- MATRIX AVERAGE
+  ntm_matrix_average_test : if (ENABLE_NTM_MATRIX_AVERAGE_TEST) generate
+    matrix_average : ntm_matrix_average
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_matrix_average,
+        READY => ready_matrix_average,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_average,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_average,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_average,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_average,
+
+        DATA_I_ENABLE => data_i_enable_matrix_average,
+        DATA_J_ENABLE => data_j_enable_matrix_average,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_average,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_average,
+
+        -- DATA
+        SIZE_A_I_IN => size_a_i_in_matrix_average,
+        SIZE_A_J_IN => size_a_j_in_matrix_average,
+        SIZE_B_I_IN => size_b_i_in_matrix_average,
+        SIZE_B_J_IN => size_b_j_in_matrix_average,
+        DATA_A_IN   => data_a_in_matrix_average,
+        DATA_B_IN   => data_b_in_matrix_average,
+        DATA_OUT    => data_out_matrix_average
+        );
+  end generate ntm_matrix_average_test;
+
+  -- MATRIX DIFFERENTIATION
+  ntm_matrix_differentiation_test : if (ENABLE_NTM_MATRIX_DIFFERENTIATION_TEST) generate
+    matrix_differentiation : ntm_matrix_differentiation
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_matrix_differentiation,
+        READY => ready_matrix_differentiation,
+
+        DATA_IN_I_ENABLE => data_in_i_enable_matrix_differentiation,
+        DATA_IN_J_ENABLE => data_in_j_enable_matrix_differentiation,
+
+        DATA_I_ENABLE => data_i_enable_matrix_differentiation,
+        DATA_J_ENABLE => data_j_enable_matrix_differentiation,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_differentiation,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_differentiation,
+
+        -- DATA
+        SIZE_I_IN => size_i_in_matrix_differentiation,
+        SIZE_J_IN => size_j_in_matrix_differentiation,
+        DATA_IN   => data_in_matrix_differentiation,
+        DATA_OUT  => data_out_matrix_differentiation
+        );
+  end generate ntm_matrix_differentiation_test;
+
+  -- TENSOR INTEGRATION
+  ntm_tensor_integration_test : if (ENABLE_NTM_TENSOR_INTEGRATION_TEST) generate
+    tensor_integration : ntm_tensor_integration
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_tensor_integration,
+        READY => ready_tensor_integration,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_integration,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_integration,
+        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_integration,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_integration,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_integration,
+        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_integration,
+
+        DATA_I_ENABLE => data_i_enable_tensor_integration,
+        DATA_J_ENABLE => data_j_enable_tensor_integration,
+        DATA_K_ENABLE => data_k_enable_tensor_integration,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_integration,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_integration,
+        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_integration,
+
+        -- DATA
+        SIZE_A_I_IN => size_a_i_in_tensor_integration,
+        SIZE_A_J_IN => size_a_j_in_tensor_integration,
+        SIZE_A_K_IN => size_a_k_in_tensor_integration,
+        SIZE_B_I_IN => size_b_i_in_tensor_integration,
+        SIZE_B_J_IN => size_b_j_in_tensor_integration,
+        SIZE_B_K_IN => size_b_k_in_tensor_integration,
+        DATA_A_IN   => data_a_in_tensor_integration,
+        DATA_B_IN   => data_b_in_tensor_integration,
+        DATA_OUT    => data_out_tensor_integration
+        );
+  end generate ntm_tensor_integration_test;
+
+  -- TENSOR AVERAGE
+  ntm_tensor_average_test : if (ENABLE_NTM_TENSOR_AVERAGE_TEST) generate
+    tensor_average : ntm_tensor_average
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_tensor_average,
+        READY => ready_tensor_average,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_average,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_average,
+        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_average,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_average,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_average,
+        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_average,
+
+        DATA_I_ENABLE => data_i_enable_tensor_average,
+        DATA_J_ENABLE => data_j_enable_tensor_average,
+        DATA_K_ENABLE => data_k_enable_tensor_average,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_average,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_average,
+        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_average,
+
+        -- DATA
+        SIZE_A_I_IN => size_a_i_in_tensor_average,
+        SIZE_A_J_IN => size_a_j_in_tensor_average,
+        SIZE_A_K_IN => size_a_k_in_tensor_average,
+        SIZE_B_I_IN => size_b_i_in_tensor_average,
+        SIZE_B_J_IN => size_b_j_in_tensor_average,
+        SIZE_B_K_IN => size_b_k_in_tensor_average,
+        DATA_A_IN   => data_a_in_tensor_average,
+        DATA_B_IN   => data_b_in_tensor_average,
+        DATA_OUT    => data_out_tensor_average
+        );
+  end generate ntm_tensor_average_test;
+
+  -- TENSOR DIFFERENTIATION
+  ntm_tensor_differentiation_test : if (ENABLE_NTM_TENSOR_DIFFERENTIATION_TEST) generate
+    tensor_differentiation : ntm_tensor_differentiation
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_tensor_differentiation,
+        READY => ready_tensor_differentiation,
+
+        DATA_IN_I_ENABLE => data_in_i_enable_tensor_differentiation,
+        DATA_IN_J_ENABLE => data_in_j_enable_tensor_differentiation,
+        DATA_IN_K_ENABLE => data_in_k_enable_tensor_differentiation,
+
+        DATA_I_ENABLE => data_i_enable_tensor_differentiation,
+        DATA_J_ENABLE => data_j_enable_tensor_differentiation,
+        DATA_K_ENABLE => data_k_enable_tensor_differentiation,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_differentiation,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_differentiation,
+        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_differentiation,
+
+        -- DATA
+        SIZE_I_IN => size_i_in_tensor_differentiation,
+        SIZE_J_IN => size_j_in_tensor_differentiation,
+        SIZE_K_IN => size_k_in_tensor_differentiation,
+        DATA_IN   => data_in_tensor_differentiation,
+        DATA_OUT  => data_out_tensor_differentiation
+        );
+  end generate ntm_tensor_differentiation_test;
 
 end ntm_calculus_testbench_architecture;

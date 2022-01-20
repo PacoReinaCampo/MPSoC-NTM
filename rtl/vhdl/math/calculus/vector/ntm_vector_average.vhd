@@ -43,8 +43,9 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
+use work.ntm_math_pkg.all;
 
-entity ntm_scalar_integration is
+entity ntm_vector_average is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -58,30 +59,30 @@ entity ntm_scalar_integration is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_IN_ENABLE : in std_logic;
+    DATA_A_IN_ENABLE : in std_logic;
+    DATA_B_IN_ENABLE : in std_logic;
 
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
-architecture ntm_scalar_integration_architecture of ntm_scalar_integration is
+architecture ntm_vector_average_architecture of ntm_vector_average is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type controller_ctrl_fsm is (
+  type average_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    INPUT_INITIAL_STATE,                -- STEP 1
-    INPUT_STATE,                        -- STEP 2
-    SCALAR_ADDER_STATE,                 -- STEP 3
-    SCALAR_DIVIDER_STATE                -- STEP 4
+    INPUT_STATE,                        -- STEP 1
+    SCALAR_MULTIPLIER_STATE,            -- STEP 2
+    SCALAR_ADDER_STATE                  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -108,13 +109,13 @@ architecture ntm_scalar_integration_architecture of ntm_scalar_integration is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+  signal average_ctrl_fsm_int : average_ctrl_fsm;
 
-  -- Control Internal
+  -- Internal Signals
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- Data Internal
-  signal data_int_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_average_int : std_logic;
+  signal data_b_in_average_int : std_logic;
 
   -- SCALAR ADDER
   -- CONTROL
@@ -128,15 +129,15 @@ architecture ntm_scalar_integration_architecture of ntm_scalar_integration is
   signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR DIVIDER
+  -- SCALAR MULTIPLIER
   -- CONTROL
-  signal start_scalar_divider : std_logic;
-  signal ready_scalar_divider : std_logic;
+  signal start_scalar_multiplier : std_logic;
+  signal ready_scalar_multiplier : std_logic;
 
   -- DATA
-  signal data_a_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -144,7 +145,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT(t) = (DATA_IN(t+1) - DATA_IN(t))/PERIOD_IN
+  -- DATA_OUT = DATA_A_IN · DATA_B_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -158,26 +159,31 @@ begin
 
       DATA_OUT_ENABLE <= '0';
 
-      -- Control Internal
-      start_scalar_adder   <= '0';
-      start_scalar_divider <= '0';
-
-      operation_scalar_adder <= '1';
-
-      index_loop <= ZERO_CONTROL;
-
       -- Data Internal
       data_a_in_scalar_adder <= ZERO_DATA;
       data_b_in_scalar_adder <= ZERO_DATA;
 
-      data_a_in_scalar_divider <= ZERO_DATA;
-      data_b_in_scalar_divider <= ZERO_DATA;
+      data_a_in_scalar_multiplier <= ZERO_DATA;
+      data_b_in_scalar_multiplier <= ZERO_DATA;
 
-      data_int_scalar_adder <= ZERO_DATA;
+      -- Control Internal
+      start_scalar_adder      <= '0';
+      start_scalar_multiplier <= '0';
+
+      operation_scalar_adder <= '0';
+
+      data_a_in_average_int <= '0';
+      data_b_in_average_int <= '0';
+
+      index_loop <= ZERO_CONTROL;
+
+      -- Data Internal
+      data_a_in_scalar_multiplier <= ZERO_DATA;
+      data_b_in_scalar_multiplier <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
-      case controller_ctrl_fsm_int is
+      case average_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -189,92 +195,101 @@ begin
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= INPUT_INITIAL_STATE;
-          end if;
-
-        when INPUT_INITIAL_STATE =>     -- STEP 1
-
-          if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
-            -- Data Internal
-            data_int_scalar_adder <= DATA_IN;
-
-            -- Control Outputs
-            DATA_OUT_ENABLE <= '1';
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= INPUT_STATE;
+            average_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
         when INPUT_STATE =>             -- STEP 1
 
-          if (DATA_IN_ENABLE = '1' or (unsigned(index_loop) = unsigned(ZERO_CONTROL))) then
-            -- Control Inputs
-            operation_scalar_adder <= '1';
-
+          if (DATA_A_IN_ENABLE = '1') then
             -- Data Inputs
-            data_a_in_scalar_adder <= DATA_IN;
-            data_b_in_scalar_adder <= data_int_scalar_adder;
-
-            -- Data Internal
-            data_int_scalar_adder <= DATA_IN;
+            data_a_in_scalar_multiplier <= DATA_A_IN;
 
             -- Control Internal
-            start_scalar_adder <= '1';
+            data_a_in_average_int <= '1';
+          end if;
+
+          if (DATA_B_IN_ENABLE = '1') then
+            -- Data Inputs
+            data_b_in_scalar_multiplier <= DATA_B_IN;
+
+            -- Control Internal
+            data_b_in_average_int <= '1';
+          end if;
+
+          if (data_a_in_average_int = '1' and data_b_in_average_int = '1') then
+            -- Control Internal
+            start_scalar_multiplier <= '1';
+
+            data_a_in_average_int <= '0';
+            data_b_in_average_int <= '0';
 
             -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
+            average_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
           end if;
 
           -- Control Outputs
           DATA_OUT_ENABLE <= '0';
 
+        when SCALAR_MULTIPLIER_STATE =>  -- STEP 3
+
+          if (ready_scalar_multiplier = '1') then
+            -- Control Internal
+            start_scalar_adder <= '1';
+
+            operation_scalar_adder <= '0';
+
+            -- Data Internal
+            data_a_in_scalar_adder <= data_out_scalar_multiplier;
+
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+              data_b_in_scalar_adder <= ZERO_DATA;
+            else
+              data_b_in_scalar_adder <= data_out_scalar_adder;
+            end if;
+
+            -- FSM Control
+            average_ctrl_fsm_int <= SCALAR_ADDER_STATE;
+          else
+            -- Control Internal
+            start_scalar_multiplier <= '0';
+
+            data_a_in_average_int <= '0';
+            data_b_in_average_int <= '0';
+          end if;
+
         when SCALAR_ADDER_STATE =>      -- STEP 2
 
           if (ready_scalar_adder = '1') then
-            -- Control Internal
-            start_scalar_divider <= '1';
+            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Outputs
+              DATA_OUT <= data_out_scalar_adder;
 
-            -- Data Internal
-            data_a_in_scalar_divider <= data_out_scalar_adder;
-            data_b_in_scalar_divider <= PERIOD_IN;
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;
-          else
-            -- Control Internal
-            start_scalar_adder <= '0';
-          end if;
-
-        when SCALAR_DIVIDER_STATE =>    -- STEP 3
-
-          if (ready_scalar_divider = '1') then
-            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(TWO_CONTROL)) then
               -- Control Outputs
               READY <= '1';
 
+              -- Control Internal
+              index_loop <= ZERO_CONTROL;
+
               -- FSM Control
-              controller_ctrl_fsm_int <= STARTER_STATE;
+              average_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
               index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
               -- FSM Control
-              controller_ctrl_fsm_int <= INPUT_STATE;
+              average_ctrl_fsm_int <= INPUT_STATE;
             end if;
-
-            -- Data Outputs
-            DATA_OUT <= data_out_scalar_divider;
 
             -- Control Outputs
             DATA_OUT_ENABLE <= '1';
           else
             -- Control Internal
-            start_scalar_divider <= '0';
+            start_scalar_adder <= '0';
           end if;
 
         when others =>
           -- FSM Control
-          controller_ctrl_fsm_int <= STARTER_STATE;
+          average_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
@@ -302,8 +317,8 @@ begin
       DATA_OUT  => data_out_scalar_adder
       );
 
-  -- SCALAR DIVIDER
-  scalar_divider : ntm_scalar_divider
+  -- SCALAR MULTIPLIER
+  scalar_multiplier : ntm_scalar_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -314,13 +329,13 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_divider,
-      READY => ready_scalar_divider,
+      START => start_scalar_multiplier,
+      READY => ready_scalar_multiplier,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_divider,
-      DATA_B_IN => data_b_in_scalar_divider,
-      DATA_OUT  => data_out_scalar_divider
+      DATA_A_IN => data_a_in_scalar_multiplier,
+      DATA_B_IN => data_b_in_scalar_multiplier,
+      DATA_OUT  => data_out_scalar_multiplier
       );
 
 end architecture;
