@@ -105,44 +105,44 @@ package ntm_calculus_pkg is
   constant VECTOR_SAMPLE_B : vector_buffer := (THREE, NINE, ZERO);
 
   -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_NTM_VECTOR_INTEGRATION_TEST        : boolean := false;
-  signal STIMULUS_NTM_VECTOR_AVERAGE_TEST : boolean := false;
-  signal STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST   : boolean := false;
+  signal STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST : boolean := false;
+  signal STIMULUS_NTM_VECTOR_INTEGRATION_TEST     : boolean := false;
+  signal STIMULUS_NTM_VECTOR_SOFTMAX_TEST         : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_INTEGRATION_CASE_1        : boolean := false;
-  signal STIMULUS_NTM_VECTOR_AVERAGE_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_1   : boolean := false;
+  signal STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0     : boolean := false;
+  signal STIMULUS_NTM_VECTOR_SOFTMAX_CASE_0         : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0        : boolean := false;
-  signal STIMULUS_NTM_VECTOR_AVERAGE_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_0   : boolean := false;
+  signal STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_VECTOR_INTEGRATION_CASE_1     : boolean := false;
+  signal STIMULUS_NTM_VECTOR_SOFTMAX_CASE_1         : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
+  signal STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST : boolean := false;
   signal STIMULUS_NTM_MATRIX_INTEGRATION_TEST     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_AVERAGE_TEST : boolean := false;
-  signal STIMULUS_NTM_MATRIX_DIFFERENTIATION_TEST   : boolean := false;
+  signal STIMULUS_NTM_MATRIX_SOFTMAX_TEST         : boolean := false;
 
+  signal STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0 : boolean := false;
   signal STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_AVERAGE_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0   : boolean := false;
+  signal STIMULUS_NTM_MATRIX_SOFTMAX_CASE_0         : boolean := false;
 
+  signal STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1 : boolean := false;
   signal STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_AVERAGE_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_1   : boolean := false;
+  signal STIMULUS_NTM_MATRIX_SOFTMAX_CASE_1         : boolean := false;
 
 
   -- TENSOR-FUNCTIONALITY
+  signal STIMULUS_NTM_TENSOR_DIFFERENTIATION_TEST : boolean := false;
   signal STIMULUS_NTM_TENSOR_INTEGRATION_TEST     : boolean := false;
-  signal STIMULUS_NTM_TENSOR_AVERAGE_TEST : boolean := false;
-  signal STIMULUS_NTM_TENSOR_DIFFERENTIATION_TEST   : boolean := false;
+  signal STIMULUS_NTM_TENSOR_SOFTMAX_TEST         : boolean := false;
 
+  signal STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_0 : boolean := false;
   signal STIMULUS_NTM_TENSOR_INTEGRATION_CASE_0     : boolean := false;
-  signal STIMULUS_NTM_TENSOR_AVERAGE_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_0   : boolean := false;
+  signal STIMULUS_NTM_TENSOR_SOFTMAX_CASE_0         : boolean := false;
 
+  signal STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_1 : boolean := false;
   signal STIMULUS_NTM_TENSOR_INTEGRATION_CASE_1     : boolean := false;
-  signal STIMULUS_NTM_TENSOR_AVERAGE_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_1   : boolean := false;
+  signal STIMULUS_NTM_TENSOR_SOFTMAX_CASE_1         : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
@@ -166,38 +166,6 @@ package ntm_calculus_pkg is
       CLK : out std_logic;
       RST : out std_logic;
 
-      -- DOT INTEGRATION
-      -- CONTROL
-      DOT_INTEGRATION_START : out std_logic;
-      DOT_INTEGRATION_READY : in  std_logic;
-
-      DOT_INTEGRATION_DATA_A_IN_ENABLE : out std_logic;
-      DOT_INTEGRATION_DATA_B_IN_ENABLE : out std_logic;
-
-      DOT_INTEGRATION_DATA_OUT_ENABLE : in std_logic;
-
-      -- DATA
-      DOT_INTEGRATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DOT_INTEGRATION_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      DOT_INTEGRATION_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      DOT_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- VECTOR AVERAGE
-      -- CONTROL
-      VECTOR_AVERAGE_START : out std_logic;
-      VECTOR_AVERAGE_READY : in  std_logic;
-
-      VECTOR_AVERAGE_DATA_A_IN_ENABLE : out std_logic;
-      VECTOR_AVERAGE_DATA_B_IN_ENABLE : out std_logic;
-
-      VECTOR_AVERAGE_DATA_OUT_ENABLE : in std_logic;
-
-      -- DATA
-      VECTOR_AVERAGE_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_AVERAGE_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_AVERAGE_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_AVERAGE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
       -- VECTOR DIFFERENTIATION
       -- CONTROL
       VECTOR_DIFFERENTIATION_START : out std_logic;
@@ -214,55 +182,37 @@ package ntm_calculus_pkg is
       VECTOR_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- MATRIX INTEGRATION
+      -- VECTOR INTEGRATION
       -- CONTROL
-      MATRIX_INTEGRATION_START : out std_logic;
-      MATRIX_INTEGRATION_READY : in  std_logic;
+      VECTOR_INTEGRATION_START : out std_logic;
+      VECTOR_INTEGRATION_READY : in  std_logic;
 
-      MATRIX_INTEGRATION_DATA_A_IN_I_ENABLE : out std_logic;
-      MATRIX_INTEGRATION_DATA_A_IN_J_ENABLE : out std_logic;
-      MATRIX_INTEGRATION_DATA_B_IN_I_ENABLE : out std_logic;
-      MATRIX_INTEGRATION_DATA_B_IN_J_ENABLE : out std_logic;
+      VECTOR_INTEGRATION_DATA_IN_ENABLE : out std_logic;
 
-      MATRIX_INTEGRATION_DATA_I_ENABLE : in std_logic;
-      MATRIX_INTEGRATION_DATA_J_ENABLE : in std_logic;
+      VECTOR_INTEGRATION_DATA_ENABLE : in std_logic;
 
-      MATRIX_INTEGRATION_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_INTEGRATION_DATA_OUT_J_ENABLE : in std_logic;
+      VECTOR_INTEGRATION_DATA_OUT_ENABLE : in std_logic;
 
       -- DATA
-      MATRIX_INTEGRATION_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_INTEGRATION_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_INTEGRATION_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_INTEGRATION_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_INTEGRATION_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INTEGRATION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INTEGRATION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_INTEGRATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_INTEGRATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- MATRIX AVERAGE
+      -- VECTOR SOFTMAX
       -- CONTROL
-      MATRIX_AVERAGE_START : out std_logic;
-      MATRIX_AVERAGE_READY : in  std_logic;
+      VECTOR_SOFTMAX_START : out std_logic;
+      VECTOR_SOFTMAX_READY : in  std_logic;
 
-      MATRIX_AVERAGE_DATA_A_IN_I_ENABLE : out std_logic;
-      MATRIX_AVERAGE_DATA_A_IN_J_ENABLE : out std_logic;
-      MATRIX_AVERAGE_DATA_B_IN_I_ENABLE : out std_logic;
-      MATRIX_AVERAGE_DATA_B_IN_J_ENABLE : out std_logic;
+      VECTOR_SOFTMAX_DATA_IN_ENABLE : out std_logic;
 
-      MATRIX_AVERAGE_DATA_I_ENABLE : in std_logic;
-      MATRIX_AVERAGE_DATA_J_ENABLE : in std_logic;
+      VECTOR_SOFTMAX_DATA_ENABLE : in std_logic;
 
-      MATRIX_AVERAGE_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_AVERAGE_DATA_OUT_J_ENABLE : in std_logic;
+      VECTOR_SOFTMAX_DATA_OUT_ENABLE : in std_logic;
 
       -- DATA
-      MATRIX_AVERAGE_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_AVERAGE_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_AVERAGE_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_AVERAGE_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_AVERAGE_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_AVERAGE_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_AVERAGE_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_SOFTMAX_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_SOFTMAX_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_SOFTMAX_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- MATRIX DIFFERENTIATION
       -- CONTROL
@@ -284,67 +234,45 @@ package ntm_calculus_pkg is
       MATRIX_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- TENSOR INTEGRATION
+      -- MATRIX INTEGRATION
       -- CONTROL
-      TENSOR_INTEGRATION_START : out std_logic;
-      TENSOR_INTEGRATION_READY : in  std_logic;
+      MATRIX_INTEGRATION_START : out std_logic;
+      MATRIX_INTEGRATION_READY : in  std_logic;
 
-      TENSOR_INTEGRATION_DATA_A_IN_I_ENABLE : out std_logic;
-      TENSOR_INTEGRATION_DATA_A_IN_J_ENABLE : out std_logic;
-      TENSOR_INTEGRATION_DATA_A_IN_K_ENABLE : out std_logic;
-      TENSOR_INTEGRATION_DATA_B_IN_I_ENABLE : out std_logic;
-      TENSOR_INTEGRATION_DATA_B_IN_J_ENABLE : out std_logic;
-      TENSOR_INTEGRATION_DATA_B_IN_K_ENABLE : out std_logic;
+      MATRIX_INTEGRATION_DATA_IN_I_ENABLE : out std_logic;
+      MATRIX_INTEGRATION_DATA_IN_J_ENABLE : out std_logic;
 
-      TENSOR_INTEGRATION_DATA_I_ENABLE : in std_logic;
-      TENSOR_INTEGRATION_DATA_J_ENABLE : in std_logic;
-      TENSOR_INTEGRATION_DATA_K_ENABLE : in std_logic;
+      MATRIX_INTEGRATION_DATA_I_ENABLE : in std_logic;
+      MATRIX_INTEGRATION_DATA_J_ENABLE : in std_logic;
 
-      TENSOR_INTEGRATION_DATA_OUT_I_ENABLE : in std_logic;
-      TENSOR_INTEGRATION_DATA_OUT_J_ENABLE : in std_logic;
-      TENSOR_INTEGRATION_DATA_OUT_K_ENABLE : in std_logic;
+      MATRIX_INTEGRATION_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_INTEGRATION_DATA_OUT_J_ENABLE : in std_logic;
 
       -- DATA
-      TENSOR_INTEGRATION_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INTEGRATION_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INTEGRATION_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INTEGRATION_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INTEGRATION_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INTEGRATION_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INTEGRATION_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_INTEGRATION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_INTEGRATION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_INTEGRATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_INTEGRATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_INTEGRATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- TENSOR AVERAGE
+      -- MATRIX SOFTMAX
       -- CONTROL
-      TENSOR_AVERAGE_START : out std_logic;
-      TENSOR_AVERAGE_READY : in  std_logic;
+      MATRIX_SOFTMAX_START : out std_logic;
+      MATRIX_SOFTMAX_READY : in  std_logic;
 
-      TENSOR_AVERAGE_DATA_A_IN_I_ENABLE : out std_logic;
-      TENSOR_AVERAGE_DATA_A_IN_J_ENABLE : out std_logic;
-      TENSOR_AVERAGE_DATA_A_IN_K_ENABLE : out std_logic;
-      TENSOR_AVERAGE_DATA_B_IN_I_ENABLE : out std_logic;
-      TENSOR_AVERAGE_DATA_B_IN_J_ENABLE : out std_logic;
-      TENSOR_AVERAGE_DATA_B_IN_K_ENABLE : out std_logic;
+      MATRIX_SOFTMAX_DATA_IN_I_ENABLE : out std_logic;
+      MATRIX_SOFTMAX_DATA_IN_J_ENABLE : out std_logic;
 
-      TENSOR_AVERAGE_DATA_I_ENABLE : in std_logic;
-      TENSOR_AVERAGE_DATA_J_ENABLE : in std_logic;
-      TENSOR_AVERAGE_DATA_K_ENABLE : in std_logic;
+      MATRIX_SOFTMAX_DATA_I_ENABLE : in std_logic;
+      MATRIX_SOFTMAX_DATA_J_ENABLE : in std_logic;
 
-      TENSOR_AVERAGE_DATA_OUT_I_ENABLE : in std_logic;
-      TENSOR_AVERAGE_DATA_OUT_J_ENABLE : in std_logic;
-      TENSOR_AVERAGE_DATA_OUT_K_ENABLE : in std_logic;
+      MATRIX_SOFTMAX_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_SOFTMAX_DATA_OUT_J_ENABLE : in std_logic;
 
       -- DATA
-      TENSOR_AVERAGE_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_AVERAGE_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_AVERAGE_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_AVERAGE_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_AVERAGE_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_AVERAGE_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_AVERAGE_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_AVERAGE_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_AVERAGE_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_SOFTMAX_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_SOFTMAX_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_SOFTMAX_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_SOFTMAX_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- TENSOR DIFFERENTIATION
       -- CONTROL
@@ -368,7 +296,55 @@ package ntm_calculus_pkg is
       TENSOR_DIFFERENTIATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       TENSOR_DIFFERENTIATION_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       TENSOR_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      TENSOR_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- TENSOR INTEGRATION
+      -- CONTROL
+      TENSOR_INTEGRATION_START : out std_logic;
+      TENSOR_INTEGRATION_READY : in  std_logic;
+
+      TENSOR_INTEGRATION_DATA_IN_I_ENABLE : out std_logic;
+      TENSOR_INTEGRATION_DATA_IN_J_ENABLE : out std_logic;
+      TENSOR_INTEGRATION_DATA_IN_K_ENABLE : out std_logic;
+
+      TENSOR_INTEGRATION_DATA_I_ENABLE : in std_logic;
+      TENSOR_INTEGRATION_DATA_J_ENABLE : in std_logic;
+      TENSOR_INTEGRATION_DATA_K_ENABLE : in std_logic;
+
+      TENSOR_INTEGRATION_DATA_OUT_I_ENABLE : in std_logic;
+      TENSOR_INTEGRATION_DATA_OUT_J_ENABLE : in std_logic;
+      TENSOR_INTEGRATION_DATA_OUT_K_ENABLE : in std_logic;
+
+      -- DATA
+      TENSOR_INTEGRATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_INTEGRATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_INTEGRATION_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_INTEGRATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- TENSOR SOFTMAX
+      -- CONTROL
+      TENSOR_SOFTMAX_START : out std_logic;
+      TENSOR_SOFTMAX_READY : in  std_logic;
+
+      TENSOR_SOFTMAX_DATA_IN_I_ENABLE : out std_logic;
+      TENSOR_SOFTMAX_DATA_IN_J_ENABLE : out std_logic;
+      TENSOR_SOFTMAX_DATA_IN_K_ENABLE : out std_logic;
+
+      TENSOR_SOFTMAX_DATA_I_ENABLE : in std_logic;
+      TENSOR_SOFTMAX_DATA_J_ENABLE : in std_logic;
+      TENSOR_SOFTMAX_DATA_K_ENABLE : in std_logic;
+
+      TENSOR_SOFTMAX_DATA_OUT_I_ENABLE : in std_logic;
+      TENSOR_SOFTMAX_DATA_OUT_J_ENABLE : in std_logic;
+      TENSOR_SOFTMAX_DATA_OUT_K_ENABLE : in std_logic;
+
+      -- DATA
+      TENSOR_SOFTMAX_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_SOFTMAX_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_SOFTMAX_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_SOFTMAX_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_SOFTMAX_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

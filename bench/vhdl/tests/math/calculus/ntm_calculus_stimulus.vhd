@@ -64,38 +64,6 @@ entity ntm_calculus_stimulus is
     CLK : out std_logic;
     RST : out std_logic;
 
-    -- DOT INTEGRATION
-    -- CONTROL
-    DOT_INTEGRATION_START : out std_logic;
-    DOT_INTEGRATION_READY : in  std_logic;
-
-    DOT_INTEGRATION_DATA_A_IN_ENABLE : out std_logic;
-    DOT_INTEGRATION_DATA_B_IN_ENABLE : out std_logic;
-
-    DOT_INTEGRATION_DATA_OUT_ENABLE : in std_logic;
-
-    -- DATA
-    DOT_INTEGRATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DOT_INTEGRATION_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    DOT_INTEGRATION_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    DOT_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- VECTOR AVERAGE
-    -- CONTROL
-    VECTOR_AVERAGE_START : out std_logic;
-    VECTOR_AVERAGE_READY : in  std_logic;
-
-    VECTOR_AVERAGE_DATA_A_IN_ENABLE : out std_logic;
-    VECTOR_AVERAGE_DATA_B_IN_ENABLE : out std_logic;
-
-    VECTOR_AVERAGE_DATA_OUT_ENABLE : in std_logic;
-
-    -- DATA
-    VECTOR_AVERAGE_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_AVERAGE_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_AVERAGE_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_AVERAGE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
     -- VECTOR DIFFERENTIATION
     -- CONTROL
     VECTOR_DIFFERENTIATION_START : out std_logic;
@@ -112,55 +80,38 @@ entity ntm_calculus_stimulus is
     VECTOR_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-    -- MATRIX INTEGRATION
+
+    -- VECTOR INTEGRATION
     -- CONTROL
-    MATRIX_INTEGRATION_START : out std_logic;
-    MATRIX_INTEGRATION_READY : in  std_logic;
+    VECTOR_INTEGRATION_START : out std_logic;
+    VECTOR_INTEGRATION_READY : in  std_logic;
 
-    MATRIX_INTEGRATION_DATA_A_IN_I_ENABLE : out std_logic;
-    MATRIX_INTEGRATION_DATA_A_IN_J_ENABLE : out std_logic;
-    MATRIX_INTEGRATION_DATA_B_IN_I_ENABLE : out std_logic;
-    MATRIX_INTEGRATION_DATA_B_IN_J_ENABLE : out std_logic;
+    VECTOR_INTEGRATION_DATA_IN_ENABLE : out std_logic;
 
-    MATRIX_INTEGRATION_DATA_I_ENABLE : in std_logic;
-    MATRIX_INTEGRATION_DATA_J_ENABLE : in std_logic;
+    VECTOR_INTEGRATION_DATA_ENABLE : in std_logic;
 
-    MATRIX_INTEGRATION_DATA_OUT_I_ENABLE : in std_logic;
-    MATRIX_INTEGRATION_DATA_OUT_J_ENABLE : in std_logic;
+    VECTOR_INTEGRATION_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_INTEGRATION_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_INTEGRATION_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_INTEGRATION_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_INTEGRATION_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_INTEGRATION_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_INTEGRATION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_INTEGRATION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_INTEGRATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_INTEGRATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-    -- MATRIX AVERAGE
+    -- VECTOR SOFTMAX
     -- CONTROL
-    MATRIX_AVERAGE_START : out std_logic;
-    MATRIX_AVERAGE_READY : in  std_logic;
+    VECTOR_SOFTMAX_START : out std_logic;
+    VECTOR_SOFTMAX_READY : in  std_logic;
 
-    MATRIX_AVERAGE_DATA_A_IN_I_ENABLE : out std_logic;
-    MATRIX_AVERAGE_DATA_A_IN_J_ENABLE : out std_logic;
-    MATRIX_AVERAGE_DATA_B_IN_I_ENABLE : out std_logic;
-    MATRIX_AVERAGE_DATA_B_IN_J_ENABLE : out std_logic;
+    VECTOR_SOFTMAX_DATA_IN_ENABLE : out std_logic;
 
-    MATRIX_AVERAGE_DATA_I_ENABLE : in std_logic;
-    MATRIX_AVERAGE_DATA_J_ENABLE : in std_logic;
+    VECTOR_SOFTMAX_DATA_ENABLE : in std_logic;
 
-    MATRIX_AVERAGE_DATA_OUT_I_ENABLE : in std_logic;
-    MATRIX_AVERAGE_DATA_OUT_J_ENABLE : in std_logic;
+    VECTOR_SOFTMAX_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_AVERAGE_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_AVERAGE_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_AVERAGE_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_AVERAGE_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_AVERAGE_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_AVERAGE_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_AVERAGE_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_SOFTMAX_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_SOFTMAX_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_SOFTMAX_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- MATRIX DIFFERENTIATION
     -- CONTROL
@@ -182,67 +133,45 @@ entity ntm_calculus_stimulus is
     MATRIX_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-    -- TENSOR INTEGRATION
+    -- MATRIX INTEGRATION
     -- CONTROL
-    TENSOR_INTEGRATION_START : out std_logic;
-    TENSOR_INTEGRATION_READY : in  std_logic;
+    MATRIX_INTEGRATION_START : out std_logic;
+    MATRIX_INTEGRATION_READY : in  std_logic;
 
-    TENSOR_INTEGRATION_DATA_A_IN_I_ENABLE : out std_logic;
-    TENSOR_INTEGRATION_DATA_A_IN_J_ENABLE : out std_logic;
-    TENSOR_INTEGRATION_DATA_A_IN_K_ENABLE : out std_logic;
-    TENSOR_INTEGRATION_DATA_B_IN_I_ENABLE : out std_logic;
-    TENSOR_INTEGRATION_DATA_B_IN_J_ENABLE : out std_logic;
-    TENSOR_INTEGRATION_DATA_B_IN_K_ENABLE : out std_logic;
+    MATRIX_INTEGRATION_DATA_IN_I_ENABLE : out std_logic;
+    MATRIX_INTEGRATION_DATA_IN_J_ENABLE : out std_logic;
 
-    TENSOR_INTEGRATION_DATA_I_ENABLE : in std_logic;
-    TENSOR_INTEGRATION_DATA_J_ENABLE : in std_logic;
-    TENSOR_INTEGRATION_DATA_K_ENABLE : in std_logic;
+    MATRIX_INTEGRATION_DATA_I_ENABLE : in std_logic;
+    MATRIX_INTEGRATION_DATA_J_ENABLE : in std_logic;
 
-    TENSOR_INTEGRATION_DATA_OUT_I_ENABLE : in std_logic;
-    TENSOR_INTEGRATION_DATA_OUT_J_ENABLE : in std_logic;
-    TENSOR_INTEGRATION_DATA_OUT_K_ENABLE : in std_logic;
+    MATRIX_INTEGRATION_DATA_OUT_I_ENABLE : in std_logic;
+    MATRIX_INTEGRATION_DATA_OUT_J_ENABLE : in std_logic;
 
     -- DATA
-    TENSOR_INTEGRATION_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_INTEGRATION_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_INTEGRATION_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_INTEGRATION_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_INTEGRATION_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_INTEGRATION_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_INTEGRATION_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_INTEGRATION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_INTEGRATION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_INTEGRATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_INTEGRATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_INTEGRATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-    -- TENSOR AVERAGE
+    -- MATRIX SOFTMAX
     -- CONTROL
-    TENSOR_AVERAGE_START : out std_logic;
-    TENSOR_AVERAGE_READY : in  std_logic;
+    MATRIX_SOFTMAX_START : out std_logic;
+    MATRIX_SOFTMAX_READY : in  std_logic;
 
-    TENSOR_AVERAGE_DATA_A_IN_I_ENABLE : out std_logic;
-    TENSOR_AVERAGE_DATA_A_IN_J_ENABLE : out std_logic;
-    TENSOR_AVERAGE_DATA_A_IN_K_ENABLE : out std_logic;
-    TENSOR_AVERAGE_DATA_B_IN_I_ENABLE : out std_logic;
-    TENSOR_AVERAGE_DATA_B_IN_J_ENABLE : out std_logic;
-    TENSOR_AVERAGE_DATA_B_IN_K_ENABLE : out std_logic;
+    MATRIX_SOFTMAX_DATA_IN_I_ENABLE : out std_logic;
+    MATRIX_SOFTMAX_DATA_IN_J_ENABLE : out std_logic;
 
-    TENSOR_AVERAGE_DATA_I_ENABLE : in std_logic;
-    TENSOR_AVERAGE_DATA_J_ENABLE : in std_logic;
-    TENSOR_AVERAGE_DATA_K_ENABLE : in std_logic;
+    MATRIX_SOFTMAX_DATA_I_ENABLE : in std_logic;
+    MATRIX_SOFTMAX_DATA_J_ENABLE : in std_logic;
 
-    TENSOR_AVERAGE_DATA_OUT_I_ENABLE : in std_logic;
-    TENSOR_AVERAGE_DATA_OUT_J_ENABLE : in std_logic;
-    TENSOR_AVERAGE_DATA_OUT_K_ENABLE : in std_logic;
+    MATRIX_SOFTMAX_DATA_OUT_I_ENABLE : in std_logic;
+    MATRIX_SOFTMAX_DATA_OUT_J_ENABLE : in std_logic;
 
     -- DATA
-    TENSOR_AVERAGE_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_AVERAGE_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_AVERAGE_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_AVERAGE_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_AVERAGE_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_AVERAGE_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_AVERAGE_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_AVERAGE_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_AVERAGE_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_SOFTMAX_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_SOFTMAX_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_SOFTMAX_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_SOFTMAX_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- TENSOR DIFFERENTIATION
     -- CONTROL
@@ -266,7 +195,55 @@ entity ntm_calculus_stimulus is
     TENSOR_DIFFERENTIATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     TENSOR_DIFFERENTIATION_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     TENSOR_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
+    TENSOR_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- TENSOR INTEGRATION
+    -- CONTROL
+    TENSOR_INTEGRATION_START : out std_logic;
+    TENSOR_INTEGRATION_READY : in  std_logic;
+
+    TENSOR_INTEGRATION_DATA_IN_I_ENABLE : out std_logic;
+    TENSOR_INTEGRATION_DATA_IN_J_ENABLE : out std_logic;
+    TENSOR_INTEGRATION_DATA_IN_K_ENABLE : out std_logic;
+
+    TENSOR_INTEGRATION_DATA_I_ENABLE : in std_logic;
+    TENSOR_INTEGRATION_DATA_J_ENABLE : in std_logic;
+    TENSOR_INTEGRATION_DATA_K_ENABLE : in std_logic;
+
+    TENSOR_INTEGRATION_DATA_OUT_I_ENABLE : in std_logic;
+    TENSOR_INTEGRATION_DATA_OUT_J_ENABLE : in std_logic;
+    TENSOR_INTEGRATION_DATA_OUT_K_ENABLE : in std_logic;
+
+    -- DATA
+    TENSOR_INTEGRATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_INTEGRATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_INTEGRATION_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_INTEGRATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- TENSOR SOFTMAX
+    -- CONTROL
+    TENSOR_SOFTMAX_START : out std_logic;
+    TENSOR_SOFTMAX_READY : in  std_logic;
+
+    TENSOR_SOFTMAX_DATA_IN_I_ENABLE : out std_logic;
+    TENSOR_SOFTMAX_DATA_IN_J_ENABLE : out std_logic;
+    TENSOR_SOFTMAX_DATA_IN_K_ENABLE : out std_logic;
+
+    TENSOR_SOFTMAX_DATA_I_ENABLE : in std_logic;
+    TENSOR_SOFTMAX_DATA_J_ENABLE : in std_logic;
+    TENSOR_SOFTMAX_DATA_K_ENABLE : in std_logic;
+
+    TENSOR_SOFTMAX_DATA_OUT_I_ENABLE : in std_logic;
+    TENSOR_SOFTMAX_DATA_OUT_J_ENABLE : in std_logic;
+    TENSOR_SOFTMAX_DATA_OUT_K_ENABLE : in std_logic;
+
+    -- DATA
+    TENSOR_SOFTMAX_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_SOFTMAX_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_SOFTMAX_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_SOFTMAX_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_SOFTMAX_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -360,19 +337,19 @@ begin
   end process;
 
   -- VECTOR-FUNCTIONALITY
-  DOT_INTEGRATION_START        <= start_int;
-  VECTOR_AVERAGE_START <= start_int;
-  VECTOR_DIFFERENTIATION_START   <= start_int;
+  VECTOR_DIFFERENTIATION_START <= start_int;
+  VECTOR_INTEGRATION_START     <= start_int;
+  VECTOR_SOFTMAX_START         <= start_int;
 
   -- MATRIX-FUNCTIONALITY
+  MATRIX_DIFFERENTIATION_START <= start_int;
   MATRIX_INTEGRATION_START     <= start_int;
-  MATRIX_AVERAGE_START <= start_int;
-  MATRIX_DIFFERENTIATION_START   <= start_int;
+  MATRIX_SOFTMAX_START         <= start_int;
 
   -- TENSOR-FUNCTIONALITY
+  TENSOR_DIFFERENTIATION_START <= start_int;
   TENSOR_INTEGRATION_START     <= start_int;
-  TENSOR_AVERAGE_START <= start_int;
-  TENSOR_DIFFERENTIATION_START   <= start_int;
+  TENSOR_SOFTMAX_START         <= start_int;
 
   -----------------------------------------------------------------------
   -- STIMULUS
@@ -380,236 +357,6 @@ begin
 
   main_test : process
   begin
-
-    if (STIMULUS_NTM_VECTOR_INTEGRATION_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_INTEGRATION_TEST    ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      DOT_INTEGRATION_LENGTH_IN <= THREE_CONTROL;
-
-      if (STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_INTEGRATION_CASE 0  ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        DOT_INTEGRATION_DATA_A_IN <= ZERO_DATA;
-        DOT_INTEGRATION_DATA_B_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-
-        DOT_INTEGRATION_FIRST_RUN : loop
-          if (DOT_INTEGRATION_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(DOT_INTEGRATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            DOT_INTEGRATION_DATA_A_IN_ENABLE <= '1';
-            DOT_INTEGRATION_DATA_B_IN_ENABLE <= '1';
-
-            -- DATA
-            DOT_INTEGRATION_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-            DOT_INTEGRATION_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= ZERO_CONTROL;
-          elsif ((DOT_INTEGRATION_DATA_OUT_ENABLE = '1' or DOT_INTEGRATION_START = '1') and (unsigned(index_i_loop) < unsigned(DOT_INTEGRATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            DOT_INTEGRATION_DATA_A_IN_ENABLE <= '1';
-            DOT_INTEGRATION_DATA_B_IN_ENABLE <= '1';
-
-            -- DATA
-            DOT_INTEGRATION_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-            DOT_INTEGRATION_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            DOT_INTEGRATION_DATA_A_IN_ENABLE <= '0';
-            DOT_INTEGRATION_DATA_B_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit DOT_INTEGRATION_FIRST_RUN when DOT_INTEGRATION_READY = '1';
-        end loop DOT_INTEGRATION_FIRST_RUN;
-      end if;
-
-      if (STIMULUS_NTM_VECTOR_INTEGRATION_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_INTEGRATION_CASE 1  ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        DOT_INTEGRATION_DATA_A_IN <= ZERO_DATA;
-        DOT_INTEGRATION_DATA_B_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-
-        DOT_INTEGRATION_SECOND_RUN : loop
-          if (DOT_INTEGRATION_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(DOT_INTEGRATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            DOT_INTEGRATION_DATA_A_IN_ENABLE <= '1';
-            DOT_INTEGRATION_DATA_B_IN_ENABLE <= '1';
-
-            -- DATA
-            DOT_INTEGRATION_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-            DOT_INTEGRATION_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= ZERO_CONTROL;
-          elsif ((DOT_INTEGRATION_DATA_OUT_ENABLE = '1' or DOT_INTEGRATION_START = '1') and (unsigned(index_i_loop) < unsigned(DOT_INTEGRATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            DOT_INTEGRATION_DATA_A_IN_ENABLE <= '1';
-            DOT_INTEGRATION_DATA_B_IN_ENABLE <= '1';
-
-            -- DATA
-            DOT_INTEGRATION_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-            DOT_INTEGRATION_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            DOT_INTEGRATION_DATA_A_IN_ENABLE <= '0';
-            DOT_INTEGRATION_DATA_B_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit DOT_INTEGRATION_SECOND_RUN when DOT_INTEGRATION_READY = '1';
-        end loop DOT_INTEGRATION_SECOND_RUN;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_NTM_VECTOR_AVERAGE_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_AVERAGE_TEST        ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      VECTOR_AVERAGE_LENGTH_IN <= THREE_CONTROL;
-
-      if (STIMULUS_NTM_VECTOR_AVERAGE_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_AVERAGE_CASE 0      ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        VECTOR_AVERAGE_DATA_A_IN <= ZERO_DATA;
-        VECTOR_AVERAGE_DATA_B_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-
-        VECTOR_AVERAGE_FIRST_RUN : loop
-          if (VECTOR_AVERAGE_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_AVERAGE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            VECTOR_AVERAGE_DATA_A_IN_ENABLE <= '1';
-            VECTOR_AVERAGE_DATA_B_IN_ENABLE <= '1';
-
-            -- DATA
-            VECTOR_AVERAGE_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-            VECTOR_AVERAGE_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= ZERO_CONTROL;
-          elsif ((VECTOR_AVERAGE_DATA_OUT_ENABLE = '1' or VECTOR_AVERAGE_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_AVERAGE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            VECTOR_AVERAGE_DATA_A_IN_ENABLE <= '1';
-            VECTOR_AVERAGE_DATA_B_IN_ENABLE <= '1';
-
-            -- DATA
-            VECTOR_AVERAGE_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-            VECTOR_AVERAGE_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            VECTOR_AVERAGE_DATA_A_IN_ENABLE <= '0';
-            VECTOR_AVERAGE_DATA_B_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit VECTOR_AVERAGE_FIRST_RUN when VECTOR_AVERAGE_READY = '1';
-        end loop VECTOR_AVERAGE_FIRST_RUN;
-      end if;
-
-      if (STIMULUS_NTM_VECTOR_AVERAGE_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_AVERAGE_CASE 1      ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        VECTOR_AVERAGE_DATA_A_IN <= ZERO_DATA;
-        VECTOR_AVERAGE_DATA_B_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-
-        VECTOR_AVERAGE_SECOND_RUN : loop
-          if (VECTOR_AVERAGE_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_AVERAGE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            VECTOR_AVERAGE_DATA_A_IN_ENABLE <= '1';
-            VECTOR_AVERAGE_DATA_B_IN_ENABLE <= '1';
-
-            -- DATA
-            VECTOR_AVERAGE_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-            VECTOR_AVERAGE_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= ZERO_CONTROL;
-          elsif ((VECTOR_AVERAGE_DATA_OUT_ENABLE = '1' or VECTOR_AVERAGE_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_AVERAGE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            VECTOR_AVERAGE_DATA_A_IN_ENABLE <= '1';
-            VECTOR_AVERAGE_DATA_B_IN_ENABLE <= '1';
-
-            -- DATA
-            VECTOR_AVERAGE_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-            VECTOR_AVERAGE_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            VECTOR_AVERAGE_DATA_A_IN_ENABLE <= '0';
-            VECTOR_AVERAGE_DATA_B_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit VECTOR_AVERAGE_SECOND_RUN when VECTOR_AVERAGE_READY = '1';
-        end loop VECTOR_AVERAGE_SECOND_RUN;
-      end if;
-
-      wait for WORKING;
-
-    end if;
 
     if (STIMULUS_NTM_VECTOR_DIFFERENTIATION_TEST) then
 
@@ -714,316 +461,206 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_MATRIX_INTEGRATION_TEST) then
+    if (STIMULUS_NTM_VECTOR_INTEGRATION_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_INTEGRATION_TEST    ";
+      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_INTEGRATION_TEST    ";
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_INTEGRATION_SIZE_A_I_IN <= THREE_CONTROL;
-      MATRIX_INTEGRATION_SIZE_A_J_IN <= THREE_CONTROL;
-      MATRIX_INTEGRATION_SIZE_B_I_IN <= THREE_CONTROL;
-      MATRIX_INTEGRATION_SIZE_B_J_IN <= THREE_CONTROL;
+      VECTOR_INTEGRATION_LENGTH_IN <= THREE_CONTROL;
 
-      if (STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0) then
+      if (STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_INTEGRATION_CASE 0  ";
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_INTEGRATION_CASE 0  ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
         -- DATA
-        MATRIX_INTEGRATION_DATA_A_IN <= ZERO_DATA;
-        MATRIX_INTEGRATION_DATA_B_IN <= ZERO_DATA;
+        VECTOR_INTEGRATION_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
-        index_j_loop <= ZERO_CONTROL;
 
-        MATRIX_INTEGRATION_FIRST_RUN : loop
-          if (MATRIX_INTEGRATION_DATA_I_ENABLE = '1' and MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_INTEGRATION_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_INTEGRATION_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-
+        VECTOR_INTEGRATION_FIRST_RUN : loop
+          if (VECTOR_INTEGRATION_DATA_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_INTEGRATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
-            MATRIX_INTEGRATION_DATA_A_IN_I_ENABLE <= '1';
-            MATRIX_INTEGRATION_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_INTEGRATION_DATA_B_IN_I_ENABLE <= '1';
-            MATRIX_INTEGRATION_DATA_B_IN_J_ENABLE <= '1';
-          elsif (MATRIX_INTEGRATION_DATA_I_ENABLE = '1' and MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_INTEGRATION_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_INTEGRATION_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            VECTOR_INTEGRATION_DATA_IN_ENABLE <= '1';
 
-            -- CONTROL
-            MATRIX_INTEGRATION_DATA_A_IN_I_ENABLE <= '1';
-            MATRIX_INTEGRATION_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_INTEGRATION_DATA_B_IN_I_ENABLE <= '1';
-            MATRIX_INTEGRATION_DATA_B_IN_J_ENABLE <= '1';
-          elsif (MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_INTEGRATION_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_INTEGRATION_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            VECTOR_INTEGRATION_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
 
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_INTEGRATION_DATA_ENABLE = '1' or VECTOR_INTEGRATION_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_INTEGRATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
-            MATRIX_INTEGRATION_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_INTEGRATION_DATA_B_IN_J_ENABLE <= '1';
+            VECTOR_INTEGRATION_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_INTEGRATION_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
-            MATRIX_INTEGRATION_DATA_A_IN_I_ENABLE <= '0';
-            MATRIX_INTEGRATION_DATA_A_IN_J_ENABLE <= '0';
-            MATRIX_INTEGRATION_DATA_B_IN_I_ENABLE <= '0';
-            MATRIX_INTEGRATION_DATA_B_IN_J_ENABLE <= '0';
-          end if;
-
-          -- LOOP
-          if (MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_INTEGRATION_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INTEGRATION_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= ZERO_CONTROL;
-            index_j_loop <= ZERO_CONTROL;
-          elsif (MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_INTEGRATION_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INTEGRATION_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_INTEGRATION_DATA_J_ENABLE = '1' or MATRIX_INTEGRATION_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_INTEGRATION_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            VECTOR_INTEGRATION_DATA_IN_ENABLE <= '0';
           end if;
 
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit MATRIX_INTEGRATION_FIRST_RUN when MATRIX_INTEGRATION_READY = '1';
-        end loop MATRIX_INTEGRATION_FIRST_RUN;
+          exit VECTOR_INTEGRATION_FIRST_RUN when VECTOR_INTEGRATION_READY = '1';
+        end loop VECTOR_INTEGRATION_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1) then
+      if (STIMULUS_NTM_VECTOR_INTEGRATION_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_INTEGRATION_CASE 1  ";
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_INTEGRATION_CASE 1  ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
         -- DATA
-        MATRIX_INTEGRATION_DATA_A_IN <= ZERO_DATA;
-        MATRIX_INTEGRATION_DATA_B_IN <= ZERO_DATA;
+        VECTOR_INTEGRATION_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
-        index_j_loop <= ZERO_CONTROL;
 
-        MATRIX_INTEGRATION_SECOND_RUN : loop
-          if (MATRIX_INTEGRATION_DATA_I_ENABLE = '1' and MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_INTEGRATION_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_INTEGRATION_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-
+        VECTOR_INTEGRATION_SECOND_RUN : loop
+          if ((VECTOR_INTEGRATION_DATA_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_INTEGRATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
-            MATRIX_INTEGRATION_DATA_A_IN_I_ENABLE <= '1';
-            MATRIX_INTEGRATION_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_INTEGRATION_DATA_B_IN_I_ENABLE <= '1';
-            MATRIX_INTEGRATION_DATA_B_IN_J_ENABLE <= '1';
-          elsif (MATRIX_INTEGRATION_DATA_I_ENABLE = '1' and MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_INTEGRATION_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_INTEGRATION_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            VECTOR_INTEGRATION_DATA_IN_ENABLE <= '1';
 
-            -- CONTROL
-            MATRIX_INTEGRATION_DATA_A_IN_I_ENABLE <= '1';
-            MATRIX_INTEGRATION_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_INTEGRATION_DATA_B_IN_I_ENABLE <= '1';
-            MATRIX_INTEGRATION_DATA_B_IN_J_ENABLE <= '1';
-          elsif (MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_INTEGRATION_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_INTEGRATION_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            VECTOR_INTEGRATION_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
 
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif (((VECTOR_INTEGRATION_DATA_ENABLE = '1') or (VECTOR_INTEGRATION_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_INTEGRATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
-            MATRIX_INTEGRATION_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_INTEGRATION_DATA_B_IN_J_ENABLE <= '1';
+            VECTOR_INTEGRATION_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_INTEGRATION_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
-            MATRIX_INTEGRATION_DATA_A_IN_I_ENABLE <= '0';
-            MATRIX_INTEGRATION_DATA_A_IN_J_ENABLE <= '0';
-            MATRIX_INTEGRATION_DATA_B_IN_I_ENABLE <= '0';
-            MATRIX_INTEGRATION_DATA_B_IN_J_ENABLE <= '0';
-          end if;
-
-          -- LOOP
-          if (MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_INTEGRATION_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INTEGRATION_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= ZERO_CONTROL;
-            index_j_loop <= ZERO_CONTROL;
-          elsif (MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_INTEGRATION_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INTEGRATION_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_INTEGRATION_DATA_J_ENABLE = '1' or MATRIX_INTEGRATION_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_INTEGRATION_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            VECTOR_INTEGRATION_DATA_IN_ENABLE <= '0';
           end if;
 
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit MATRIX_INTEGRATION_SECOND_RUN when MATRIX_INTEGRATION_READY = '1';
-        end loop MATRIX_INTEGRATION_SECOND_RUN;
+          exit VECTOR_INTEGRATION_SECOND_RUN when VECTOR_INTEGRATION_READY = '1';
+        end loop VECTOR_INTEGRATION_SECOND_RUN;
       end if;
 
       wait for WORKING;
 
     end if;
 
-    if (STIMULUS_NTM_MATRIX_AVERAGE_TEST) then
+    if (STIMULUS_NTM_VECTOR_SOFTMAX_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_AVERAGE_TEST        ";
+      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_SOFTMAX_TEST        ";
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_AVERAGE_SIZE_A_I_IN <= THREE_CONTROL;
-      MATRIX_AVERAGE_SIZE_A_J_IN <= THREE_CONTROL;
-      MATRIX_AVERAGE_SIZE_B_I_IN <= THREE_CONTROL;
-      MATRIX_AVERAGE_SIZE_B_J_IN <= THREE_CONTROL;
+      VECTOR_SOFTMAX_LENGTH_IN <= THREE_CONTROL;
 
-      if (STIMULUS_NTM_MATRIX_AVERAGE_CASE_0) then
+      if (STIMULUS_NTM_VECTOR_SOFTMAX_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_AVERAGE_CASE 0      ";
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_SOFTMAX_CASE 0      ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
         -- DATA
-        MATRIX_AVERAGE_DATA_A_IN <= ZERO_DATA;
-        MATRIX_AVERAGE_DATA_B_IN <= ZERO_DATA;
+        VECTOR_SOFTMAX_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
-        index_j_loop <= ZERO_CONTROL;
 
-        MATRIX_AVERAGE_FIRST_RUN : loop
-          if (MATRIX_AVERAGE_DATA_I_ENABLE = '1' and MATRIX_AVERAGE_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_AVERAGE_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_AVERAGE_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-
+        VECTOR_SOFTMAX_FIRST_RUN : loop
+          if (VECTOR_SOFTMAX_DATA_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_SOFTMAX_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
-            MATRIX_AVERAGE_DATA_A_IN_I_ENABLE <= '1';
-            MATRIX_AVERAGE_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_AVERAGE_DATA_B_IN_I_ENABLE <= '1';
-            MATRIX_AVERAGE_DATA_B_IN_J_ENABLE <= '1';
-          elsif (MATRIX_AVERAGE_DATA_I_ENABLE = '1' and MATRIX_AVERAGE_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_AVERAGE_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_AVERAGE_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            VECTOR_SOFTMAX_DATA_IN_ENABLE <= '1';
 
-            -- CONTROL
-            MATRIX_AVERAGE_DATA_A_IN_I_ENABLE <= '1';
-            MATRIX_AVERAGE_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_AVERAGE_DATA_B_IN_I_ENABLE <= '1';
-            MATRIX_AVERAGE_DATA_B_IN_J_ENABLE <= '1';
-          elsif (MATRIX_AVERAGE_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_AVERAGE_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_AVERAGE_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            VECTOR_SOFTMAX_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
 
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_SOFTMAX_DATA_ENABLE = '1' or VECTOR_SOFTMAX_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_SOFTMAX_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
-            MATRIX_AVERAGE_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_AVERAGE_DATA_B_IN_J_ENABLE <= '1';
+            VECTOR_SOFTMAX_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_SOFTMAX_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
-            MATRIX_AVERAGE_DATA_A_IN_I_ENABLE <= '0';
-            MATRIX_AVERAGE_DATA_A_IN_J_ENABLE <= '0';
-            MATRIX_AVERAGE_DATA_B_IN_I_ENABLE <= '0';
-            MATRIX_AVERAGE_DATA_B_IN_J_ENABLE <= '0';
-          end if;
-
-          -- LOOP
-          if (MATRIX_AVERAGE_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_AVERAGE_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_AVERAGE_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= ZERO_CONTROL;
-            index_j_loop <= ZERO_CONTROL;
-          elsif (MATRIX_AVERAGE_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_AVERAGE_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_AVERAGE_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_AVERAGE_DATA_J_ENABLE = '1' or MATRIX_AVERAGE_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_AVERAGE_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            VECTOR_SOFTMAX_DATA_IN_ENABLE <= '0';
           end if;
 
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit MATRIX_AVERAGE_FIRST_RUN when MATRIX_AVERAGE_READY = '1';
-        end loop MATRIX_AVERAGE_FIRST_RUN;
+          exit VECTOR_SOFTMAX_FIRST_RUN when VECTOR_SOFTMAX_READY = '1';
+        end loop VECTOR_SOFTMAX_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_MATRIX_AVERAGE_CASE_1) then
+      if (STIMULUS_NTM_VECTOR_SOFTMAX_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_AVERAGE_CASE 1      ";
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_SOFTMAX_CASE 1      ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
         -- DATA
-        MATRIX_AVERAGE_DATA_A_IN <= ZERO_DATA;
-        MATRIX_AVERAGE_DATA_B_IN <= ZERO_DATA;
+        VECTOR_SOFTMAX_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
-        index_j_loop <= ZERO_CONTROL;
 
-        MATRIX_AVERAGE_SECOND_RUN : loop
-          if (MATRIX_AVERAGE_DATA_I_ENABLE = '1' and MATRIX_AVERAGE_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_AVERAGE_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_AVERAGE_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-
+        VECTOR_SOFTMAX_SECOND_RUN : loop
+          if ((VECTOR_SOFTMAX_DATA_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_SOFTMAX_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
-            MATRIX_AVERAGE_DATA_A_IN_I_ENABLE <= '1';
-            MATRIX_AVERAGE_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_AVERAGE_DATA_B_IN_I_ENABLE <= '1';
-            MATRIX_AVERAGE_DATA_B_IN_J_ENABLE <= '1';
-          elsif (MATRIX_AVERAGE_DATA_I_ENABLE = '1' and MATRIX_AVERAGE_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_AVERAGE_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_AVERAGE_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            VECTOR_SOFTMAX_DATA_IN_ENABLE <= '1';
 
-            -- CONTROL
-            MATRIX_AVERAGE_DATA_A_IN_I_ENABLE <= '1';
-            MATRIX_AVERAGE_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_AVERAGE_DATA_B_IN_I_ENABLE <= '1';
-            MATRIX_AVERAGE_DATA_B_IN_J_ENABLE <= '1';
-          elsif (MATRIX_AVERAGE_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_AVERAGE_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_AVERAGE_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            VECTOR_SOFTMAX_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
 
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif (((VECTOR_SOFTMAX_DATA_ENABLE = '1') or (VECTOR_SOFTMAX_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_SOFTMAX_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
-            MATRIX_AVERAGE_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_AVERAGE_DATA_B_IN_J_ENABLE <= '1';
+            VECTOR_SOFTMAX_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_SOFTMAX_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
-            MATRIX_AVERAGE_DATA_A_IN_I_ENABLE <= '0';
-            MATRIX_AVERAGE_DATA_A_IN_J_ENABLE <= '0';
-            MATRIX_AVERAGE_DATA_B_IN_I_ENABLE <= '0';
-            MATRIX_AVERAGE_DATA_B_IN_J_ENABLE <= '0';
-          end if;
-
-          -- LOOP
-          if (MATRIX_AVERAGE_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_AVERAGE_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_AVERAGE_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= ZERO_CONTROL;
-            index_j_loop <= ZERO_CONTROL;
-          elsif (MATRIX_AVERAGE_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_AVERAGE_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_AVERAGE_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_AVERAGE_DATA_J_ENABLE = '1' or MATRIX_AVERAGE_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_AVERAGE_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            VECTOR_SOFTMAX_DATA_IN_ENABLE <= '0';
           end if;
 
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit MATRIX_AVERAGE_SECOND_RUN when MATRIX_AVERAGE_READY = '1';
-        end loop MATRIX_AVERAGE_SECOND_RUN;
+          exit VECTOR_SOFTMAX_SECOND_RUN when VECTOR_SOFTMAX_READY = '1';
+        end loop VECTOR_SOFTMAX_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -1057,21 +694,21 @@ begin
         MATRIX_DIFFERENTIATION_FIRST_RUN : loop
           if (MATRIX_DIFFERENTIATION_DATA_I_ENABLE = '1' and MATRIX_DIFFERENTIATION_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_DIFFERENTIATION_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_DIFFERENTIATION_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
             MATRIX_DIFFERENTIATION_DATA_IN_I_ENABLE <= '1';
             MATRIX_DIFFERENTIATION_DATA_IN_J_ENABLE <= '1';
           elsif (MATRIX_DIFFERENTIATION_DATA_I_ENABLE = '1' and MATRIX_DIFFERENTIATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_DIFFERENTIATION_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_DIFFERENTIATION_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
             MATRIX_DIFFERENTIATION_DATA_IN_I_ENABLE <= '1';
             MATRIX_DIFFERENTIATION_DATA_IN_J_ENABLE <= '1';
           elsif (MATRIX_DIFFERENTIATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_DIFFERENTIATION_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_DIFFERENTIATION_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
             MATRIX_DIFFERENTIATION_DATA_IN_J_ENABLE <= '1';
@@ -1117,21 +754,21 @@ begin
         MATRIX_DIFFERENTIATION_SECOND_RUN : loop
           if (MATRIX_DIFFERENTIATION_DATA_I_ENABLE = '1' and MATRIX_DIFFERENTIATION_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_DIFFERENTIATION_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_DIFFERENTIATION_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
             MATRIX_DIFFERENTIATION_DATA_IN_I_ENABLE <= '1';
             MATRIX_DIFFERENTIATION_DATA_IN_J_ENABLE <= '1';
           elsif (MATRIX_DIFFERENTIATION_DATA_I_ENABLE = '1' and MATRIX_DIFFERENTIATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_DIFFERENTIATION_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_DIFFERENTIATION_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
             MATRIX_DIFFERENTIATION_DATA_IN_I_ENABLE <= '1';
             MATRIX_DIFFERENTIATION_DATA_IN_J_ENABLE <= '1';
           elsif (MATRIX_DIFFERENTIATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_DIFFERENTIATION_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_DIFFERENTIATION_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
             MATRIX_DIFFERENTIATION_DATA_IN_J_ENABLE <= '1';
@@ -1164,408 +801,268 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_TENSOR_INTEGRATION_TEST) then
+    if (STIMULUS_NTM_MATRIX_INTEGRATION_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_TENSOR_INTEGRATION_TEST    ";
+      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_INTEGRATION_TEST    ";
       -------------------------------------------------------------------
 
       -- DATA
-      TENSOR_INTEGRATION_SIZE_A_I_IN <= THREE_CONTROL;
-      TENSOR_INTEGRATION_SIZE_A_J_IN <= THREE_CONTROL;
-      TENSOR_INTEGRATION_SIZE_A_K_IN <= THREE_CONTROL;
-      TENSOR_INTEGRATION_SIZE_B_I_IN <= THREE_CONTROL;
-      TENSOR_INTEGRATION_SIZE_B_J_IN <= THREE_CONTROL;
-      TENSOR_INTEGRATION_SIZE_B_K_IN <= THREE_CONTROL;
+      MATRIX_INTEGRATION_SIZE_I_IN <= THREE_CONTROL;
+      MATRIX_INTEGRATION_SIZE_J_IN <= THREE_CONTROL;
 
-      if (STIMULUS_NTM_TENSOR_INTEGRATION_CASE_0) then
+      if (STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_INTEGRATION_CASE 0  ";
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_INTEGRATION_CASE 0  ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
         -- DATA
-        TENSOR_INTEGRATION_DATA_A_IN <= ZERO_DATA;
-        TENSOR_INTEGRATION_DATA_B_IN <= ZERO_DATA;
+        MATRIX_INTEGRATION_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
         index_j_loop <= ZERO_CONTROL;
-        index_k_loop <= ZERO_CONTROL;
 
-        TENSOR_INTEGRATION_FIRST_RUN : loop
-          if (TENSOR_INTEGRATION_DATA_I_ENABLE = '1' and TENSOR_INTEGRATION_DATA_J_ENABLE = '1' and TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+        MATRIX_INTEGRATION_FIRST_RUN : loop
+          if (MATRIX_INTEGRATION_DATA_I_ENABLE = '1' and MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_INTEGRATION_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_INTEGRATION_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            MATRIX_INTEGRATION_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
-            TENSOR_INTEGRATION_DATA_A_IN_I_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_B_IN_I_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_B_IN_K_ENABLE <= '1';
-          elsif (TENSOR_INTEGRATION_DATA_I_ENABLE = '1' and TENSOR_INTEGRATION_DATA_J_ENABLE = '1' and TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            MATRIX_INTEGRATION_DATA_IN_I_ENABLE <= '1';
+            MATRIX_INTEGRATION_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_INTEGRATION_DATA_I_ENABLE = '1' and MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_INTEGRATION_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_INTEGRATION_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            MATRIX_INTEGRATION_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
-            TENSOR_INTEGRATION_DATA_A_IN_I_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_B_IN_I_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_B_IN_K_ENABLE <= '1';
-          elsif (TENSOR_INTEGRATION_DATA_J_ENABLE = '1' and TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            MATRIX_INTEGRATION_DATA_IN_I_ENABLE <= '1';
+            MATRIX_INTEGRATION_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_INTEGRATION_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_INTEGRATION_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            MATRIX_INTEGRATION_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
-            TENSOR_INTEGRATION_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_B_IN_K_ENABLE <= '1';
-          elsif (TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
-            -- DATA
-            TENSOR_INTEGRATION_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_INTEGRATION_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-
-            -- CONTROL
-            TENSOR_INTEGRATION_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_B_IN_K_ENABLE <= '1';
+            MATRIX_INTEGRATION_DATA_IN_J_ENABLE <= '1';
           else
             -- CONTROL
-            TENSOR_INTEGRATION_DATA_A_IN_I_ENABLE <= '0';
-            TENSOR_INTEGRATION_DATA_A_IN_J_ENABLE <= '0';
-            TENSOR_INTEGRATION_DATA_A_IN_K_ENABLE <= '0';
-            TENSOR_INTEGRATION_DATA_B_IN_I_ENABLE <= '0';
-            TENSOR_INTEGRATION_DATA_B_IN_J_ENABLE <= '0';
-            TENSOR_INTEGRATION_DATA_B_IN_K_ENABLE <= '0';
+            MATRIX_INTEGRATION_DATA_IN_I_ENABLE <= '0';
+            MATRIX_INTEGRATION_DATA_IN_J_ENABLE <= '0';
           end if;
 
           -- LOOP
-          if (TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_INTEGRATION_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_INTEGRATION_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INTEGRATION_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          if (MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_INTEGRATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INTEGRATION_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif (TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_INTEGRATION_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_INTEGRATION_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INTEGRATION_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          elsif (MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_INTEGRATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INTEGRATION_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif (TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_INTEGRATION_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INTEGRATION_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_INTEGRATION_DATA_J_ENABLE = '1' or MATRIX_INTEGRATION_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_INTEGRATION_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_INTEGRATION_DATA_K_ENABLE = '1' or TENSOR_INTEGRATION_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_INTEGRATION_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
-            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
           end if;
 
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit TENSOR_INTEGRATION_FIRST_RUN when TENSOR_INTEGRATION_READY = '1';
-        end loop TENSOR_INTEGRATION_FIRST_RUN;
+          exit MATRIX_INTEGRATION_FIRST_RUN when MATRIX_INTEGRATION_READY = '1';
+        end loop MATRIX_INTEGRATION_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_TENSOR_INTEGRATION_CASE_1) then
+      if (STIMULUS_NTM_MATRIX_INTEGRATION_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_INTEGRATION_CASE 1  ";
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_INTEGRATION_CASE 1  ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
         -- DATA
-        TENSOR_INTEGRATION_DATA_A_IN <= ZERO_DATA;
-        TENSOR_INTEGRATION_DATA_B_IN <= ZERO_DATA;
+        MATRIX_INTEGRATION_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
         index_j_loop <= ZERO_CONTROL;
-        index_k_loop <= ZERO_CONTROL;
 
-        TENSOR_INTEGRATION_SECOND_RUN : loop
-          if (TENSOR_INTEGRATION_DATA_I_ENABLE = '1' and TENSOR_INTEGRATION_DATA_J_ENABLE = '1' and TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+        MATRIX_INTEGRATION_SECOND_RUN : loop
+          if (MATRIX_INTEGRATION_DATA_I_ENABLE = '1' and MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_INTEGRATION_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_INTEGRATION_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            MATRIX_INTEGRATION_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
-            TENSOR_INTEGRATION_DATA_A_IN_I_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_B_IN_I_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_B_IN_K_ENABLE <= '1';
-          elsif (TENSOR_INTEGRATION_DATA_I_ENABLE = '1' and TENSOR_INTEGRATION_DATA_J_ENABLE = '1' and TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            MATRIX_INTEGRATION_DATA_IN_I_ENABLE <= '1';
+            MATRIX_INTEGRATION_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_INTEGRATION_DATA_I_ENABLE = '1' and MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_INTEGRATION_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_INTEGRATION_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            MATRIX_INTEGRATION_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
-            TENSOR_INTEGRATION_DATA_A_IN_I_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_B_IN_I_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_B_IN_K_ENABLE <= '1';
-          elsif (TENSOR_INTEGRATION_DATA_J_ENABLE = '1' and TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            MATRIX_INTEGRATION_DATA_IN_I_ENABLE <= '1';
+            MATRIX_INTEGRATION_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_INTEGRATION_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_INTEGRATION_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            MATRIX_INTEGRATION_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
-            TENSOR_INTEGRATION_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_B_IN_K_ENABLE <= '1';
-          elsif (TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
-            -- DATA
-            TENSOR_INTEGRATION_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_INTEGRATION_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-
-            -- CONTROL
-            TENSOR_INTEGRATION_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_INTEGRATION_DATA_B_IN_K_ENABLE <= '1';
+            MATRIX_INTEGRATION_DATA_IN_J_ENABLE <= '1';
           else
             -- CONTROL
-            TENSOR_INTEGRATION_DATA_A_IN_I_ENABLE <= '0';
-            TENSOR_INTEGRATION_DATA_A_IN_J_ENABLE <= '0';
-            TENSOR_INTEGRATION_DATA_A_IN_K_ENABLE <= '0';
-            TENSOR_INTEGRATION_DATA_B_IN_I_ENABLE <= '0';
-            TENSOR_INTEGRATION_DATA_B_IN_J_ENABLE <= '0';
-            TENSOR_INTEGRATION_DATA_B_IN_K_ENABLE <= '0';
+            MATRIX_INTEGRATION_DATA_IN_I_ENABLE <= '0';
+            MATRIX_INTEGRATION_DATA_IN_J_ENABLE <= '0';
           end if;
 
           -- LOOP
-          if (TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_INTEGRATION_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_INTEGRATION_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INTEGRATION_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          if (MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_INTEGRATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INTEGRATION_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif (TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_INTEGRATION_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_INTEGRATION_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INTEGRATION_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          elsif (MATRIX_INTEGRATION_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_INTEGRATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INTEGRATION_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif (TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_INTEGRATION_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INTEGRATION_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_INTEGRATION_DATA_J_ENABLE = '1' or MATRIX_INTEGRATION_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_INTEGRATION_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_INTEGRATION_DATA_K_ENABLE = '1' or TENSOR_INTEGRATION_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_INTEGRATION_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
-            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
           end if;
 
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit TENSOR_INTEGRATION_SECOND_RUN when TENSOR_INTEGRATION_READY = '1';
-        end loop TENSOR_INTEGRATION_SECOND_RUN;
+          exit MATRIX_INTEGRATION_SECOND_RUN when MATRIX_INTEGRATION_READY = '1';
+        end loop MATRIX_INTEGRATION_SECOND_RUN;
       end if;
 
       wait for WORKING;
 
     end if;
 
-    if (STIMULUS_NTM_TENSOR_AVERAGE_TEST) then
+    if (STIMULUS_NTM_MATRIX_SOFTMAX_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_TENSOR_AVERAGE_TEST        ";
+      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_SOFTMAX_TEST        ";
       -------------------------------------------------------------------
 
       -- DATA
-      TENSOR_AVERAGE_SIZE_A_I_IN <= THREE_CONTROL;
-      TENSOR_AVERAGE_SIZE_A_J_IN <= THREE_CONTROL;
-      TENSOR_AVERAGE_SIZE_A_K_IN <= THREE_CONTROL;
-      TENSOR_AVERAGE_SIZE_B_I_IN <= THREE_CONTROL;
-      TENSOR_AVERAGE_SIZE_B_J_IN <= THREE_CONTROL;
-      TENSOR_AVERAGE_SIZE_B_K_IN <= THREE_CONTROL;
+      MATRIX_SOFTMAX_SIZE_I_IN <= THREE_CONTROL;
+      MATRIX_SOFTMAX_SIZE_J_IN <= THREE_CONTROL;
 
-      if (STIMULUS_NTM_TENSOR_AVERAGE_CASE_0) then
+      if (STIMULUS_NTM_MATRIX_SOFTMAX_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_AVERAGE_CASE 0      ";
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_SOFTMAX_CASE 0      ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
         -- DATA
-        TENSOR_AVERAGE_DATA_A_IN <= ZERO_DATA;
-        TENSOR_AVERAGE_DATA_B_IN <= ZERO_DATA;
+        MATRIX_SOFTMAX_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
         index_j_loop <= ZERO_CONTROL;
-        index_k_loop <= ZERO_CONTROL;
 
-        TENSOR_AVERAGE_FIRST_RUN : loop
-          if (TENSOR_AVERAGE_DATA_I_ENABLE = '1' and TENSOR_AVERAGE_DATA_J_ENABLE = '1' and TENSOR_AVERAGE_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+        MATRIX_SOFTMAX_FIRST_RUN : loop
+          if (MATRIX_SOFTMAX_DATA_I_ENABLE = '1' and MATRIX_SOFTMAX_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_AVERAGE_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_AVERAGE_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            MATRIX_SOFTMAX_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
-            TENSOR_AVERAGE_DATA_A_IN_I_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_B_IN_I_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_B_IN_K_ENABLE <= '1';
-          elsif (TENSOR_AVERAGE_DATA_I_ENABLE = '1' and TENSOR_AVERAGE_DATA_J_ENABLE = '1' and TENSOR_AVERAGE_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            MATRIX_SOFTMAX_DATA_IN_I_ENABLE <= '1';
+            MATRIX_SOFTMAX_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_SOFTMAX_DATA_I_ENABLE = '1' and MATRIX_SOFTMAX_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_AVERAGE_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_AVERAGE_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            MATRIX_SOFTMAX_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
-            TENSOR_AVERAGE_DATA_A_IN_I_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_B_IN_I_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_B_IN_K_ENABLE <= '1';
-          elsif (TENSOR_AVERAGE_DATA_J_ENABLE = '1' and TENSOR_AVERAGE_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            MATRIX_SOFTMAX_DATA_IN_I_ENABLE <= '1';
+            MATRIX_SOFTMAX_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_SOFTMAX_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_AVERAGE_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_AVERAGE_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            MATRIX_SOFTMAX_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
-            TENSOR_AVERAGE_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_B_IN_K_ENABLE <= '1';
-          elsif (TENSOR_AVERAGE_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
-            -- DATA
-            TENSOR_AVERAGE_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_AVERAGE_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-
-            -- CONTROL
-            TENSOR_AVERAGE_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_B_IN_K_ENABLE <= '1';
+            MATRIX_SOFTMAX_DATA_IN_J_ENABLE <= '1';
           else
             -- CONTROL
-            TENSOR_AVERAGE_DATA_A_IN_I_ENABLE <= '0';
-            TENSOR_AVERAGE_DATA_A_IN_J_ENABLE <= '0';
-            TENSOR_AVERAGE_DATA_A_IN_K_ENABLE <= '0';
-            TENSOR_AVERAGE_DATA_B_IN_I_ENABLE <= '0';
-            TENSOR_AVERAGE_DATA_B_IN_J_ENABLE <= '0';
-            TENSOR_AVERAGE_DATA_B_IN_K_ENABLE <= '0';
+            MATRIX_SOFTMAX_DATA_IN_I_ENABLE <= '0';
+            MATRIX_SOFTMAX_DATA_IN_J_ENABLE <= '0';
           end if;
 
           -- LOOP
-          if (TENSOR_AVERAGE_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_AVERAGE_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_AVERAGE_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_AVERAGE_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          if (MATRIX_SOFTMAX_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_SOFTMAX_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_SOFTMAX_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif (TENSOR_AVERAGE_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_AVERAGE_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_AVERAGE_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_AVERAGE_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          elsif (MATRIX_SOFTMAX_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_SOFTMAX_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_SOFTMAX_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif (TENSOR_AVERAGE_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_AVERAGE_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_AVERAGE_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_SOFTMAX_DATA_J_ENABLE = '1' or MATRIX_SOFTMAX_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_SOFTMAX_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_AVERAGE_DATA_K_ENABLE = '1' or TENSOR_AVERAGE_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_AVERAGE_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
-            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
           end if;
 
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit TENSOR_AVERAGE_FIRST_RUN when TENSOR_AVERAGE_READY = '1';
-        end loop TENSOR_AVERAGE_FIRST_RUN;
+          exit MATRIX_SOFTMAX_FIRST_RUN when MATRIX_SOFTMAX_READY = '1';
+        end loop MATRIX_SOFTMAX_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_TENSOR_AVERAGE_CASE_1) then
+      if (STIMULUS_NTM_MATRIX_SOFTMAX_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_AVERAGE_CASE 1      ";
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_SOFTMAX_CASE 1      ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
         -- DATA
-        TENSOR_AVERAGE_DATA_A_IN <= ZERO_DATA;
-        TENSOR_AVERAGE_DATA_B_IN <= ZERO_DATA;
+        MATRIX_SOFTMAX_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
         index_j_loop <= ZERO_CONTROL;
-        index_k_loop <= ZERO_CONTROL;
 
-        TENSOR_AVERAGE_SECOND_RUN : loop
-          if (TENSOR_AVERAGE_DATA_I_ENABLE = '1' and TENSOR_AVERAGE_DATA_J_ENABLE = '1' and TENSOR_AVERAGE_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+        MATRIX_SOFTMAX_SECOND_RUN : loop
+          if (MATRIX_SOFTMAX_DATA_I_ENABLE = '1' and MATRIX_SOFTMAX_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_AVERAGE_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_AVERAGE_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            MATRIX_SOFTMAX_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
-            TENSOR_AVERAGE_DATA_A_IN_I_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_B_IN_I_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_B_IN_K_ENABLE <= '1';
-          elsif (TENSOR_AVERAGE_DATA_I_ENABLE = '1' and TENSOR_AVERAGE_DATA_J_ENABLE = '1' and TENSOR_AVERAGE_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            MATRIX_SOFTMAX_DATA_IN_I_ENABLE <= '1';
+            MATRIX_SOFTMAX_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_SOFTMAX_DATA_I_ENABLE = '1' and MATRIX_SOFTMAX_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_AVERAGE_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_AVERAGE_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            MATRIX_SOFTMAX_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
-            TENSOR_AVERAGE_DATA_A_IN_I_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_B_IN_I_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_B_IN_K_ENABLE <= '1';
-          elsif (TENSOR_AVERAGE_DATA_J_ENABLE = '1' and TENSOR_AVERAGE_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            MATRIX_SOFTMAX_DATA_IN_I_ENABLE <= '1';
+            MATRIX_SOFTMAX_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_SOFTMAX_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_AVERAGE_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_AVERAGE_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            MATRIX_SOFTMAX_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
-            TENSOR_AVERAGE_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_B_IN_K_ENABLE <= '1';
-          elsif (TENSOR_AVERAGE_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
-            -- DATA
-            TENSOR_AVERAGE_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_AVERAGE_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-
-            -- CONTROL
-            TENSOR_AVERAGE_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_AVERAGE_DATA_B_IN_K_ENABLE <= '1';
+            MATRIX_SOFTMAX_DATA_IN_J_ENABLE <= '1';
           else
             -- CONTROL
-            TENSOR_AVERAGE_DATA_A_IN_I_ENABLE <= '0';
-            TENSOR_AVERAGE_DATA_A_IN_J_ENABLE <= '0';
-            TENSOR_AVERAGE_DATA_A_IN_K_ENABLE <= '0';
-            TENSOR_AVERAGE_DATA_B_IN_I_ENABLE <= '0';
-            TENSOR_AVERAGE_DATA_B_IN_J_ENABLE <= '0';
-            TENSOR_AVERAGE_DATA_B_IN_K_ENABLE <= '0';
+            MATRIX_SOFTMAX_DATA_IN_I_ENABLE <= '0';
+            MATRIX_SOFTMAX_DATA_IN_J_ENABLE <= '0';
           end if;
 
           -- LOOP
-          if (TENSOR_AVERAGE_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_AVERAGE_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_AVERAGE_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_AVERAGE_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          if (MATRIX_SOFTMAX_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_SOFTMAX_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_SOFTMAX_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif (TENSOR_AVERAGE_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_AVERAGE_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_AVERAGE_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_AVERAGE_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          elsif (MATRIX_SOFTMAX_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_SOFTMAX_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_SOFTMAX_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif (TENSOR_AVERAGE_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_AVERAGE_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_AVERAGE_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_SOFTMAX_DATA_J_ENABLE = '1' or MATRIX_SOFTMAX_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_SOFTMAX_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_AVERAGE_DATA_K_ENABLE = '1' or TENSOR_AVERAGE_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_AVERAGE_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
-            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
           end if;
 
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit TENSOR_AVERAGE_SECOND_RUN when TENSOR_AVERAGE_READY = '1';
-        end loop TENSOR_AVERAGE_SECOND_RUN;
+          exit MATRIX_SOFTMAX_SECOND_RUN when MATRIX_SOFTMAX_READY = '1';
+        end loop MATRIX_SOFTMAX_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -1601,7 +1098,7 @@ begin
         TENSOR_DIFFERENTIATION_FIRST_RUN : loop
           if (TENSOR_DIFFERENTIATION_DATA_I_ENABLE = '1' and TENSOR_DIFFERENTIATION_DATA_J_ENABLE = '1' and TENSOR_DIFFERENTIATION_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_DIFFERENTIATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_DIFFERENTIATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
             -- CONTROL
             TENSOR_DIFFERENTIATION_DATA_IN_I_ENABLE <= '1';
@@ -1609,7 +1106,7 @@ begin
             TENSOR_DIFFERENTIATION_DATA_IN_K_ENABLE <= '1';
           elsif (TENSOR_DIFFERENTIATION_DATA_I_ENABLE = '1' and TENSOR_DIFFERENTIATION_DATA_J_ENABLE = '1' and TENSOR_DIFFERENTIATION_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_DIFFERENTIATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_DIFFERENTIATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
             -- CONTROL
             TENSOR_DIFFERENTIATION_DATA_IN_I_ENABLE <= '1';
@@ -1617,14 +1114,14 @@ begin
             TENSOR_DIFFERENTIATION_DATA_IN_K_ENABLE <= '1';
           elsif (TENSOR_DIFFERENTIATION_DATA_J_ENABLE = '1' and TENSOR_DIFFERENTIATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_DIFFERENTIATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_DIFFERENTIATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
             -- CONTROL
             TENSOR_DIFFERENTIATION_DATA_IN_J_ENABLE <= '1';
             TENSOR_DIFFERENTIATION_DATA_IN_K_ENABLE <= '1';
           elsif (TENSOR_DIFFERENTIATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_DIFFERENTIATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_DIFFERENTIATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
             -- CONTROL
             TENSOR_DIFFERENTIATION_DATA_IN_K_ENABLE <= '1';
@@ -1677,7 +1174,7 @@ begin
         TENSOR_DIFFERENTIATION_SECOND_RUN : loop
           if (TENSOR_DIFFERENTIATION_DATA_I_ENABLE = '1' and TENSOR_DIFFERENTIATION_DATA_J_ENABLE = '1' and TENSOR_DIFFERENTIATION_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_DIFFERENTIATION_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_DIFFERENTIATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
             -- CONTROL
             TENSOR_DIFFERENTIATION_DATA_IN_I_ENABLE <= '1';
@@ -1685,7 +1182,7 @@ begin
             TENSOR_DIFFERENTIATION_DATA_IN_K_ENABLE <= '1';
           elsif (TENSOR_DIFFERENTIATION_DATA_I_ENABLE = '1' and TENSOR_DIFFERENTIATION_DATA_J_ENABLE = '1' and TENSOR_DIFFERENTIATION_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_DIFFERENTIATION_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_DIFFERENTIATION_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
             -- CONTROL
             TENSOR_DIFFERENTIATION_DATA_IN_I_ENABLE <= '1';
@@ -1693,14 +1190,14 @@ begin
             TENSOR_DIFFERENTIATION_DATA_IN_K_ENABLE <= '1';
           elsif (TENSOR_DIFFERENTIATION_DATA_J_ENABLE = '1' and TENSOR_DIFFERENTIATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_DIFFERENTIATION_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_DIFFERENTIATION_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
             -- CONTROL
             TENSOR_DIFFERENTIATION_DATA_IN_J_ENABLE <= '1';
             TENSOR_DIFFERENTIATION_DATA_IN_K_ENABLE <= '1';
           elsif (TENSOR_DIFFERENTIATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_DIFFERENTIATION_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_DIFFERENTIATION_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
             -- CONTROL
             TENSOR_DIFFERENTIATION_DATA_IN_K_ENABLE <= '1';
@@ -1733,6 +1230,340 @@ begin
           -- CONTROL
           exit TENSOR_DIFFERENTIATION_SECOND_RUN when TENSOR_DIFFERENTIATION_READY = '1';
         end loop TENSOR_DIFFERENTIATION_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_TENSOR_INTEGRATION_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_TENSOR_INTEGRATION_TEST    ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      TENSOR_INTEGRATION_SIZE_I_IN <= THREE_CONTROL;
+      TENSOR_INTEGRATION_SIZE_J_IN <= THREE_CONTROL;
+      TENSOR_INTEGRATION_SIZE_K_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_TENSOR_INTEGRATION_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_INTEGRATION_CASE 0  ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_INTEGRATION_DATA_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_INTEGRATION_FIRST_RUN : loop
+          if (TENSOR_INTEGRATION_DATA_I_ENABLE = '1' and TENSOR_INTEGRATION_DATA_J_ENABLE = '1' and TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_INTEGRATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_INTEGRATION_DATA_IN_I_ENABLE <= '1';
+            TENSOR_INTEGRATION_DATA_IN_J_ENABLE <= '1';
+            TENSOR_INTEGRATION_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_INTEGRATION_DATA_I_ENABLE = '1' and TENSOR_INTEGRATION_DATA_J_ENABLE = '1' and TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_INTEGRATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_INTEGRATION_DATA_IN_I_ENABLE <= '1';
+            TENSOR_INTEGRATION_DATA_IN_J_ENABLE <= '1';
+            TENSOR_INTEGRATION_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_INTEGRATION_DATA_J_ENABLE = '1' and TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_INTEGRATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_INTEGRATION_DATA_IN_J_ENABLE <= '1';
+            TENSOR_INTEGRATION_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_INTEGRATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_INTEGRATION_DATA_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_INTEGRATION_DATA_IN_I_ENABLE <= '0';
+            TENSOR_INTEGRATION_DATA_IN_J_ENABLE <= '0';
+            TENSOR_INTEGRATION_DATA_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_INTEGRATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_INTEGRATION_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INTEGRATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_INTEGRATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_INTEGRATION_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INTEGRATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_INTEGRATION_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INTEGRATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_INTEGRATION_DATA_K_ENABLE = '1' or TENSOR_INTEGRATION_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_INTEGRATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_INTEGRATION_FIRST_RUN when TENSOR_INTEGRATION_READY = '1';
+        end loop TENSOR_INTEGRATION_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_NTM_TENSOR_INTEGRATION_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_INTEGRATION_CASE 1  ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_INTEGRATION_DATA_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_INTEGRATION_SECOND_RUN : loop
+          if (TENSOR_INTEGRATION_DATA_I_ENABLE = '1' and TENSOR_INTEGRATION_DATA_J_ENABLE = '1' and TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_INTEGRATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_INTEGRATION_DATA_IN_I_ENABLE <= '1';
+            TENSOR_INTEGRATION_DATA_IN_J_ENABLE <= '1';
+            TENSOR_INTEGRATION_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_INTEGRATION_DATA_I_ENABLE = '1' and TENSOR_INTEGRATION_DATA_J_ENABLE = '1' and TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_INTEGRATION_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_INTEGRATION_DATA_IN_I_ENABLE <= '1';
+            TENSOR_INTEGRATION_DATA_IN_J_ENABLE <= '1';
+            TENSOR_INTEGRATION_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_INTEGRATION_DATA_J_ENABLE = '1' and TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_INTEGRATION_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_INTEGRATION_DATA_IN_J_ENABLE <= '1';
+            TENSOR_INTEGRATION_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_INTEGRATION_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_INTEGRATION_DATA_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_INTEGRATION_DATA_IN_I_ENABLE <= '0';
+            TENSOR_INTEGRATION_DATA_IN_J_ENABLE <= '0';
+            TENSOR_INTEGRATION_DATA_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_INTEGRATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_INTEGRATION_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INTEGRATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_INTEGRATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_INTEGRATION_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INTEGRATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_INTEGRATION_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_INTEGRATION_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INTEGRATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_INTEGRATION_DATA_K_ENABLE = '1' or TENSOR_INTEGRATION_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_INTEGRATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_INTEGRATION_SECOND_RUN when TENSOR_INTEGRATION_READY = '1';
+        end loop TENSOR_INTEGRATION_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_TENSOR_SOFTMAX_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_TENSOR_SOFTMAX_TEST        ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      TENSOR_SOFTMAX_SIZE_I_IN <= THREE_CONTROL;
+      TENSOR_SOFTMAX_SIZE_J_IN <= THREE_CONTROL;
+      TENSOR_SOFTMAX_SIZE_K_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_TENSOR_SOFTMAX_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_SOFTMAX_CASE 0      ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_SOFTMAX_DATA_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_SOFTMAX_FIRST_RUN : loop
+          if (TENSOR_SOFTMAX_DATA_I_ENABLE = '1' and TENSOR_SOFTMAX_DATA_J_ENABLE = '1' and TENSOR_SOFTMAX_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_SOFTMAX_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_SOFTMAX_DATA_IN_I_ENABLE <= '1';
+            TENSOR_SOFTMAX_DATA_IN_J_ENABLE <= '1';
+            TENSOR_SOFTMAX_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_SOFTMAX_DATA_I_ENABLE = '1' and TENSOR_SOFTMAX_DATA_J_ENABLE = '1' and TENSOR_SOFTMAX_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_SOFTMAX_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_SOFTMAX_DATA_IN_I_ENABLE <= '1';
+            TENSOR_SOFTMAX_DATA_IN_J_ENABLE <= '1';
+            TENSOR_SOFTMAX_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_SOFTMAX_DATA_J_ENABLE = '1' and TENSOR_SOFTMAX_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_SOFTMAX_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_SOFTMAX_DATA_IN_J_ENABLE <= '1';
+            TENSOR_SOFTMAX_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_SOFTMAX_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_SOFTMAX_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_SOFTMAX_DATA_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_SOFTMAX_DATA_IN_I_ENABLE <= '0';
+            TENSOR_SOFTMAX_DATA_IN_J_ENABLE <= '0';
+            TENSOR_SOFTMAX_DATA_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_SOFTMAX_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_SOFTMAX_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_SOFTMAX_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_SOFTMAX_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_SOFTMAX_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_SOFTMAX_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_SOFTMAX_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_SOFTMAX_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_SOFTMAX_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_SOFTMAX_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_SOFTMAX_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_SOFTMAX_DATA_K_ENABLE = '1' or TENSOR_SOFTMAX_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_SOFTMAX_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_SOFTMAX_FIRST_RUN when TENSOR_SOFTMAX_READY = '1';
+        end loop TENSOR_SOFTMAX_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_NTM_TENSOR_SOFTMAX_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_SOFTMAX_CASE 1      ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_SOFTMAX_DATA_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_SOFTMAX_SECOND_RUN : loop
+          if (TENSOR_SOFTMAX_DATA_I_ENABLE = '1' and TENSOR_SOFTMAX_DATA_J_ENABLE = '1' and TENSOR_SOFTMAX_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_SOFTMAX_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_SOFTMAX_DATA_IN_I_ENABLE <= '1';
+            TENSOR_SOFTMAX_DATA_IN_J_ENABLE <= '1';
+            TENSOR_SOFTMAX_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_SOFTMAX_DATA_I_ENABLE = '1' and TENSOR_SOFTMAX_DATA_J_ENABLE = '1' and TENSOR_SOFTMAX_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_SOFTMAX_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_SOFTMAX_DATA_IN_I_ENABLE <= '1';
+            TENSOR_SOFTMAX_DATA_IN_J_ENABLE <= '1';
+            TENSOR_SOFTMAX_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_SOFTMAX_DATA_J_ENABLE = '1' and TENSOR_SOFTMAX_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_SOFTMAX_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_SOFTMAX_DATA_IN_J_ENABLE <= '1';
+            TENSOR_SOFTMAX_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_SOFTMAX_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_SOFTMAX_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_SOFTMAX_DATA_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_SOFTMAX_DATA_IN_I_ENABLE <= '0';
+            TENSOR_SOFTMAX_DATA_IN_J_ENABLE <= '0';
+            TENSOR_SOFTMAX_DATA_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_SOFTMAX_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_SOFTMAX_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_SOFTMAX_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_SOFTMAX_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_SOFTMAX_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_SOFTMAX_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_SOFTMAX_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_SOFTMAX_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_SOFTMAX_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_SOFTMAX_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_SOFTMAX_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_SOFTMAX_DATA_K_ENABLE = '1' or TENSOR_SOFTMAX_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_SOFTMAX_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_SOFTMAX_SECOND_RUN when TENSOR_SOFTMAX_READY = '1';
+        end loop TENSOR_SOFTMAX_SECOND_RUN;
       end if;
 
       wait for WORKING;

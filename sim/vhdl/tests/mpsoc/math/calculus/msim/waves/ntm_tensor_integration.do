@@ -12,20 +12,13 @@ add wave -noupdate -divider {=========================================}
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/CLK
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/RST
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/START
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/SIZE_A_I_IN
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/SIZE_A_J_IN
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/SIZE_A_K_IN
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/SIZE_B_I_IN
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/SIZE_B_J_IN
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/SIZE_B_K_IN
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/DATA_A_IN_I_ENABLE
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/DATA_A_IN_J_ENABLE
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/DATA_A_IN_K_ENABLE
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/DATA_A_IN
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/DATA_B_IN_I_ENABLE
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/DATA_B_IN_J_ENABLE
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/DATA_B_IN_K_ENABLE
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/DATA_B_IN
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/SIZE_I_IN
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/SIZE_J_IN
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/SIZE_K_IN
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/DATA_IN_I_ENABLE
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/DATA_IN_J_ENABLE
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/DATA_IN_K_ENABLE
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/DATA_IN
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/DATA_I_ENABLE
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/DATA_J_ENABLE
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/DATA_K_ENABLE
@@ -40,29 +33,6 @@ add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_in
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/index_i_loop
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/index_j_loop
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/index_k_loop
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/index_m_loop
-
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/data_a_in_i_integration_int
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/data_a_in_j_integration_int
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/data_a_in_k_integration_int
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/data_b_in_i_integration_int
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/data_b_in_j_integration_int
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/data_b_in_k_integration_int
-
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/start_scalar_adder
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/operation_scalar_adder
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/data_a_in_scalar_adder
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/data_b_in_scalar_adder
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/ready_scalar_adder
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/data_out_scalar_adder
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/overflow_out_scalar_adder
-
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/start_scalar_multiplier
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/data_a_in_scalar_multiplier
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/data_b_in_scalar_multiplier
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/ready_scalar_multiplier
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/data_out_scalar_multiplier
-add wave -noupdate /ntm_calculus_testbench/ntm_tensor_integration_test/tensor_integration/overflow_out_scalar_multiplier
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

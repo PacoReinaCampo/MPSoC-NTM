@@ -25,15 +25,15 @@
 ../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_multiplier.vhd
 ../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_divider.vhd
 
-../../../../../../../rtl/vhdl/math/calculus/vector/ntm_vector_integration.vhd
 ../../../../../../../rtl/vhdl/math/calculus/vector/ntm_vector_differentiation.vhd
-../../../../../../../rtl/vhdl/math/calculus/vector/ntm_vector_average.vhd
-../../../../../../../rtl/vhdl/math/calculus/matrix/ntm_matrix_integration.vhd
+../../../../../../../rtl/vhdl/math/calculus/vector/ntm_vector_integration.vhd
+../../../../../../../rtl/vhdl/math/calculus/vector/ntm_vector_softmax.vhd
 ../../../../../../../rtl/vhdl/math/calculus/matrix/ntm_matrix_differentiation.vhd
-../../../../../../../rtl/vhdl/math/calculus/matrix/ntm_matrix_average.vhd
-../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_integration.vhd
+../../../../../../../rtl/vhdl/math/calculus/matrix/ntm_matrix_integration.vhd
+../../../../../../../rtl/vhdl/math/calculus/matrix/ntm_matrix_softmax.vhd
 ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_differentiation.vhd
-../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_average.vhd
+../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_integration.vhd
+../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_softmax.vhd
 
 ../../../../../../../bench/vhdl/tests/math/calculus/ntm_calculus_pkg.vhd
 ../../../../../../../bench/vhdl/tests/math/calculus/ntm_calculus_stimulus.vhd

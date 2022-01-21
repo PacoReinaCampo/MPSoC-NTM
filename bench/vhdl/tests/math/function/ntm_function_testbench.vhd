@@ -58,113 +58,77 @@ entity ntm_function_testbench is
 
     -- SCALAR-FUNCTIONALITY
     ENABLE_NTM_SCALAR_COSH_TEST              : boolean := false;
-    ENABLE_NTM_SCALAR_COSINE_SIMILARITY_TEST : boolean := false;
     ENABLE_NTM_SCALAR_EXPONENTIATOR_TEST     : boolean := false;
     ENABLE_NTM_SCALAR_LOGARITHM_TEST         : boolean := false;
     ENABLE_NTM_SCALAR_LOGISTIC_TEST          : boolean := false;
-    ENABLE_NTM_SCALAR_MULTIPLICATION_TEST    : boolean := false;
     ENABLE_NTM_SCALAR_ONEPLUS_TEST           : boolean := false;
     ENABLE_NTM_SCALAR_SINH_TEST              : boolean := false;
-    ENABLE_NTM_SCALAR_SOFTMAX_TEST           : boolean := false;
-    ENABLE_NTM_SCALAR_SUMMATION_TEST         : boolean := false;
     ENABLE_NTM_SCALAR_TANH_TEST              : boolean := false;
 
     ENABLE_NTM_SCALAR_COSH_CASE_0              : boolean := false;
-    ENABLE_NTM_SCALAR_COSINE_SIMILARITY_CASE_0 : boolean := false;
     ENABLE_NTM_SCALAR_EXPONENTIATOR_CASE_0     : boolean := false;
     ENABLE_NTM_SCALAR_LOGARITHM_CASE_0         : boolean := false;
     ENABLE_NTM_SCALAR_LOGISTIC_CASE_0          : boolean := false;
-    ENABLE_NTM_SCALAR_MULTIPLICATION_CASE_0    : boolean := false;
     ENABLE_NTM_SCALAR_ONEPLUS_CASE_0           : boolean := false;
     ENABLE_NTM_SCALAR_SINH_CASE_0              : boolean := false;
-    ENABLE_NTM_SCALAR_SOFTMAX_CASE_0           : boolean := false;
-    ENABLE_NTM_SCALAR_SUMMATION_CASE_0         : boolean := false;
     ENABLE_NTM_SCALAR_TANH_CASE_0              : boolean := false;
 
     ENABLE_NTM_SCALAR_COSH_CASE_1              : boolean := false;
-    ENABLE_NTM_SCALAR_COSINE_SIMILARITY_CASE_1 : boolean := false;
     ENABLE_NTM_SCALAR_EXPONENTIATOR_CASE_1     : boolean := false;
     ENABLE_NTM_SCALAR_LOGARITHM_CASE_1         : boolean := false;
     ENABLE_NTM_SCALAR_LOGISTIC_CASE_1          : boolean := false;
-    ENABLE_NTM_SCALAR_MULTIPLICATION_CASE_1    : boolean := false;
     ENABLE_NTM_SCALAR_ONEPLUS_CASE_1           : boolean := false;
     ENABLE_NTM_SCALAR_SINH_CASE_1              : boolean := false;
-    ENABLE_NTM_SCALAR_SOFTMAX_CASE_1           : boolean := false;
-    ENABLE_NTM_SCALAR_SUMMATION_CASE_1         : boolean := false;
     ENABLE_NTM_SCALAR_TANH_CASE_1              : boolean := false;
 
     -- VECTOR-FUNCTIONALITY
     ENABLE_NTM_VECTOR_COSH_TEST              : boolean := false;
-    ENABLE_NTM_VECTOR_COSINE_SIMILARITY_TEST : boolean := false;
     ENABLE_NTM_VECTOR_EXPONENTIATOR_TEST     : boolean := false;
     ENABLE_NTM_VECTOR_LOGARITHM_TEST         : boolean := false;
     ENABLE_NTM_VECTOR_LOGISTIC_TEST          : boolean := false;
-    ENABLE_NTM_VECTOR_MULTIPLICATION_TEST    : boolean := false;
     ENABLE_NTM_VECTOR_ONEPLUS_TEST           : boolean := false;
     ENABLE_NTM_VECTOR_SINH_TEST              : boolean := false;
-    ENABLE_NTM_VECTOR_SOFTMAX_TEST           : boolean := false;
-    ENABLE_NTM_VECTOR_SUMMATION_TEST         : boolean := false;
     ENABLE_NTM_VECTOR_TANH_TEST              : boolean := false;
 
     ENABLE_NTM_VECTOR_COSH_CASE_0              : boolean := false;
-    ENABLE_NTM_VECTOR_COSINE_SIMILARITY_CASE_0 : boolean := false;
     ENABLE_NTM_VECTOR_EXPONENTIATOR_CASE_0     : boolean := false;
     ENABLE_NTM_VECTOR_LOGARITHM_CASE_0         : boolean := false;
     ENABLE_NTM_VECTOR_LOGISTIC_CASE_0          : boolean := false;
-    ENABLE_NTM_VECTOR_MULTIPLICATION_CASE_0    : boolean := false;
     ENABLE_NTM_VECTOR_ONEPLUS_CASE_0           : boolean := false;
     ENABLE_NTM_VECTOR_SINH_CASE_0              : boolean := false;
-    ENABLE_NTM_VECTOR_SOFTMAX_CASE_0           : boolean := false;
-    ENABLE_NTM_VECTOR_SUMMATION_CASE_0         : boolean := false;
     ENABLE_NTM_VECTOR_TANH_CASE_0              : boolean := false;
 
     ENABLE_NTM_VECTOR_COSH_CASE_1              : boolean := false;
-    ENABLE_NTM_VECTOR_COSINE_SIMILARITY_CASE_1 : boolean := false;
     ENABLE_NTM_VECTOR_EXPONENTIATOR_CASE_1     : boolean := false;
     ENABLE_NTM_VECTOR_LOGARITHM_CASE_1         : boolean := false;
     ENABLE_NTM_VECTOR_LOGISTIC_CASE_1          : boolean := false;
-    ENABLE_NTM_VECTOR_MULTIPLICATION_CASE_1    : boolean := false;
     ENABLE_NTM_VECTOR_ONEPLUS_CASE_1           : boolean := false;
     ENABLE_NTM_VECTOR_SINH_CASE_1              : boolean := false;
-    ENABLE_NTM_VECTOR_SOFTMAX_CASE_1           : boolean := false;
-    ENABLE_NTM_VECTOR_SUMMATION_CASE_1         : boolean := false;
     ENABLE_NTM_VECTOR_TANH_CASE_1              : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
     ENABLE_NTM_MATRIX_COSH_TEST              : boolean := false;
-    ENABLE_NTM_MATRIX_COSINE_SIMILARITY_TEST : boolean := false;
     ENABLE_NTM_MATRIX_EXPONENTIATOR_TEST     : boolean := false;
     ENABLE_NTM_MATRIX_LOGARITHM_TEST         : boolean := false;
     ENABLE_NTM_MATRIX_LOGISTIC_TEST          : boolean := false;
-    ENABLE_NTM_MATRIX_MULTIPLICATION_TEST    : boolean := false;
     ENABLE_NTM_MATRIX_ONEPLUS_TEST           : boolean := false;
     ENABLE_NTM_MATRIX_SINH_TEST              : boolean := false;
-    ENABLE_NTM_MATRIX_SOFTMAX_TEST           : boolean := false;
-    ENABLE_NTM_MATRIX_SUMMATION_TEST         : boolean := false;
     ENABLE_NTM_MATRIX_TANH_TEST              : boolean := false;
 
     ENABLE_NTM_MATRIX_COSH_CASE_0              : boolean := false;
-    ENABLE_NTM_MATRIX_COSINE_SIMILARITY_CASE_0 : boolean := false;
     ENABLE_NTM_MATRIX_EXPONENTIATOR_CASE_0     : boolean := false;
     ENABLE_NTM_MATRIX_LOGARITHM_CASE_0         : boolean := false;
     ENABLE_NTM_MATRIX_LOGISTIC_CASE_0          : boolean := false;
-    ENABLE_NTM_MATRIX_MULTIPLICATION_CASE_0    : boolean := false;
     ENABLE_NTM_MATRIX_ONEPLUS_CASE_0           : boolean := false;
     ENABLE_NTM_MATRIX_SINH_CASE_0              : boolean := false;
-    ENABLE_NTM_MATRIX_SOFTMAX_CASE_0           : boolean := false;
-    ENABLE_NTM_MATRIX_SUMMATION_CASE_0         : boolean := false;
     ENABLE_NTM_MATRIX_TANH_CASE_0              : boolean := false;
 
     ENABLE_NTM_MATRIX_COSH_CASE_1              : boolean := false;
-    ENABLE_NTM_MATRIX_COSINE_SIMILARITY_CASE_1 : boolean := false;
     ENABLE_NTM_MATRIX_EXPONENTIATOR_CASE_1     : boolean := false;
     ENABLE_NTM_MATRIX_LOGARITHM_CASE_1         : boolean := false;
     ENABLE_NTM_MATRIX_LOGISTIC_CASE_1          : boolean := false;
-    ENABLE_NTM_MATRIX_MULTIPLICATION_CASE_1    : boolean := false;
     ENABLE_NTM_MATRIX_ONEPLUS_CASE_1           : boolean := false;
     ENABLE_NTM_MATRIX_SINH_CASE_1              : boolean := false;
-    ENABLE_NTM_MATRIX_SOFTMAX_CASE_1           : boolean := false;
-    ENABLE_NTM_MATRIX_SUMMATION_CASE_1         : boolean := false;
     ENABLE_NTM_MATRIX_TANH_CASE_1              : boolean := false
     );
 end ntm_function_testbench;
@@ -192,7 +156,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_scalar_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_cosh : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR COSINE SIMILARITY
   -- CONTROL
   signal start_scalar_cosine_similarity : std_logic;
   signal ready_scalar_cosine_similarity : std_logic;
@@ -235,7 +198,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_scalar_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR MULTIPLICATION
   -- CONTROL
   signal start_scalar_multiplication : std_logic;
   signal ready_scalar_multiplication : std_logic;
@@ -267,7 +229,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_scalar_sinh  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_sinh : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR SOFTMAX
   -- CONTROL
   signal start_scalar_softmax : std_logic;
   signal ready_scalar_softmax : std_logic;
@@ -281,7 +242,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_scalar_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_scalar_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- SCALAR SUMMATION
   -- CONTROL
   signal start_scalar_summation : std_logic;
   signal ready_scalar_summation : std_logic;
@@ -321,26 +281,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal size_in_vector_cosh  : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_cosh : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR COSINE SIMILARITY
-  -- CONTROL
-  signal start_vector_cosine_similarity : std_logic;
-  signal ready_vector_cosine_similarity : std_logic;
-
-  signal data_a_in_vector_enable_vector_cosine_similarity : std_logic;
-  signal data_a_in_scalar_enable_vector_cosine_similarity : std_logic;
-  signal data_b_in_vector_enable_vector_cosine_similarity : std_logic;
-  signal data_b_in_scalar_enable_vector_cosine_similarity : std_logic;
-
-  signal data_out_vector_enable_vector_cosine_similarity : std_logic;
-  signal data_out_scalar_enable_vector_cosine_similarity : std_logic;
-
-  -- DATA
-  signal size_in_vector_cosine_similarity   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_vector_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_cosine_similarity  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR EXPONENTIATOR
   -- CONTROL
@@ -384,23 +324,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_vector_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_logistic : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR MULTIPLICATION
-  -- CONTROL
-  signal start_vector_multiplication : std_logic;
-  signal ready_vector_multiplication : std_logic;
-
-  signal data_in_vector_enable_vector_multiplication : std_logic;
-  signal data_in_scalar_enable_vector_multiplication : std_logic;
-
-  signal data_out_vector_enable_vector_multiplication : std_logic;
-  signal data_out_scalar_enable_vector_multiplication : std_logic;
-
-  -- DATA
-  signal length_in_vector_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_in_vector_multiplication   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
-
   -- VECTOR ONEPLUS
   -- CONTROL
   signal start_vector_oneplus : std_logic;
@@ -428,40 +351,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal size_in_vector_sinh  : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_sinh  : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_sinh : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR SOFTMAX
-  -- CONTROL
-  signal start_vector_softmax : std_logic;
-  signal ready_vector_softmax : std_logic;
-
-  signal data_in_vector_enable_vector_softmax : std_logic;
-  signal data_in_scalar_enable_vector_softmax : std_logic;
-
-  signal data_out_vector_enable_vector_softmax : std_logic;
-  signal data_out_scalar_enable_vector_softmax : std_logic;
-
-  -- DATA
-  signal length_in_vector_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_in_vector_softmax   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- VECTOR SUMMATION
-  -- CONTROL
-  signal start_vector_summation : std_logic;
-  signal ready_vector_summation : std_logic;
-
-  signal data_in_vector_enable_vector_summation : std_logic;
-  signal data_in_scalar_enable_vector_summation : std_logic;
-
-  signal data_out_vector_enable_vector_summation : std_logic;
-  signal data_out_scalar_enable_vector_summation : std_logic;
-
-  -- DATA
-  signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR TANH
   -- CONTROL
@@ -497,30 +386,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal size_j_in_matrix_cosh : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_cosh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_cosh  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- MATRIX COSINE SIMILARITY
-  -- CONTROL
-  signal start_matrix_cosine_similarity : std_logic;
-  signal ready_matrix_cosine_similarity : std_logic;
-
-  signal data_a_in_matrix_enable_matrix_cosine_similarity : std_logic;
-  signal data_a_in_vector_enable_matrix_cosine_similarity : std_logic;
-  signal data_a_in_scalar_enable_matrix_cosine_similarity : std_logic;
-  signal data_b_in_matrix_enable_matrix_cosine_similarity : std_logic;
-  signal data_b_in_vector_enable_matrix_cosine_similarity : std_logic;
-  signal data_b_in_scalar_enable_matrix_cosine_similarity : std_logic;
-
-  signal data_out_matrix_enable_matrix_cosine_similarity : std_logic;
-  signal data_out_vector_enable_matrix_cosine_similarity : std_logic;
-  signal data_out_scalar_enable_matrix_cosine_similarity : std_logic;
-
-  -- DATA
-  signal size_i_in_matrix_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_matrix_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_cosine_similarity  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX EXPONENTIATOR
   -- CONTROL
@@ -573,26 +438,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal data_in_matrix_logistic   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_logistic  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MATRIX MULTIPLICATION
-  -- CONTROL
-  signal start_matrix_multiplication : std_logic;
-  signal ready_matrix_multiplication : std_logic;
-
-  signal data_in_matrix_enable_matrix_multiplication : std_logic;
-  signal data_in_vector_enable_matrix_multiplication : std_logic;
-  signal data_in_scalar_enable_matrix_multiplication : std_logic;
-
-  signal data_out_matrix_enable_matrix_multiplication : std_logic;
-  signal data_out_vector_enable_matrix_multiplication : std_logic;
-  signal data_out_scalar_enable_matrix_multiplication : std_logic;
-
-  -- DATA
-  signal size_i_in_matrix_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_matrix_multiplication : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_matrix_multiplication   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_multiplication  : std_logic_vector(DATA_SIZE-1 downto 0);
-
   -- MATRIX ONEPLUS
   -- CONTROL
   signal start_matrix_oneplus : std_logic;
@@ -626,46 +471,6 @@ architecture ntm_function_testbench_architecture of ntm_function_testbench is
   signal size_j_in_matrix_sinh : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_matrix_sinh   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_sinh  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- MATRIX SOFTMAX
-  -- CONTROL
-  signal start_matrix_softmax : std_logic;
-  signal ready_matrix_softmax : std_logic;
-
-  signal data_in_matrix_enable_matrix_softmax : std_logic;
-  signal data_in_vector_enable_matrix_softmax : std_logic;
-  signal data_in_scalar_enable_matrix_softmax : std_logic;
-
-  signal data_out_matrix_enable_matrix_softmax : std_logic;
-  signal data_out_vector_enable_matrix_softmax : std_logic;
-  signal data_out_scalar_enable_matrix_softmax : std_logic;
-
-  -- DATA
-  signal size_i_in_matrix_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_matrix_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_matrix_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- MATRIX SUMMATION
-  -- CONTROL
-  signal start_matrix_summation : std_logic;
-  signal ready_matrix_summation : std_logic;
-
-  signal data_in_matrix_enable_matrix_summation : std_logic;
-  signal data_in_vector_enable_matrix_summation : std_logic;
-  signal data_in_scalar_enable_matrix_summation : std_logic;
-
-  signal data_out_matrix_enable_matrix_summation : std_logic;
-  signal data_out_vector_enable_matrix_summation : std_logic;
-  signal data_out_scalar_enable_matrix_summation : std_logic;
-
-  -- DATA
-  signal size_i_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_matrix_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_matrix_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX TANH
   -- CONTROL
@@ -721,22 +526,6 @@ begin
       SCALAR_COSH_DATA_IN  => data_in_scalar_cosh,
       SCALAR_COSH_DATA_OUT => data_out_scalar_cosh,
 
-      -- SCALAR COSINE SIMILARITY
-      -- CONTROL
-      SCALAR_COSINE_SIMILARITY_START => start_scalar_cosine_similarity,
-      SCALAR_COSINE_SIMILARITY_READY => ready_scalar_cosine_similarity,
-
-      SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE => data_a_in_enable_scalar_cosine_similarity,
-      SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE => data_b_in_enable_scalar_cosine_similarity,
-
-      SCALAR_COSINE_SIMILARITY_DATA_OUT_ENABLE => data_out_enable_scalar_cosine_similarity,
-
-      -- DATA
-      SCALAR_COSINE_SIMILARITY_LENGTH_IN => length_in_scalar_cosine_similarity,
-      SCALAR_COSINE_SIMILARITY_DATA_A_IN => data_a_in_scalar_cosine_similarity,
-      SCALAR_COSINE_SIMILARITY_DATA_B_IN => data_b_in_scalar_cosine_similarity,
-      SCALAR_COSINE_SIMILARITY_DATA_OUT  => data_out_scalar_cosine_similarity,
-
       -- SCALAR EXPONENTIATOR
       -- CONTROL
       SCALAR_EXPONENTIATOR_START => start_scalar_exponentiator,
@@ -764,20 +553,6 @@ begin
       SCALAR_LOGISTIC_DATA_IN  => data_in_scalar_logistic,
       SCALAR_LOGISTIC_DATA_OUT => data_out_scalar_logistic,
 
-      -- SCALAR MULTIPLICATION
-      -- CONTROL
-      SCALAR_MULTIPLICATION_START => start_scalar_multiplication,
-      SCALAR_MULTIPLICATION_READY => ready_scalar_multiplication,
-
-      SCALAR_MULTIPLICATION_DATA_IN_ENABLE => data_in_enable_scalar_multiplication,
-
-      SCALAR_MULTIPLICATION_DATA_OUT_ENABLE => data_out_enable_scalar_multiplication,
-
-      -- DATA
-      SCALAR_MULTIPLICATION_LENGTH_IN => length_in_scalar_multiplication,
-      SCALAR_MULTIPLICATION_DATA_IN   => data_in_scalar_multiplication,
-      SCALAR_MULTIPLICATION_DATA_OUT  => data_out_scalar_multiplication,
-
       -- SCALAR ONEPLUS
       -- CONTROL
       SCALAR_ONEPLUS_START => start_scalar_oneplus,
@@ -795,34 +570,6 @@ begin
       -- DATA
       SCALAR_SINH_DATA_IN  => data_in_scalar_sinh,
       SCALAR_SINH_DATA_OUT => data_out_scalar_sinh,
-
-      -- SCALAR SOFTMAX
-      -- CONTROL
-      SCALAR_SOFTMAX_START => start_scalar_softmax,
-      SCALAR_SOFTMAX_READY => ready_scalar_softmax,
-
-      SCALAR_SOFTMAX_DATA_IN_ENABLE => data_in_enable_scalar_softmax,
-
-      SCALAR_SOFTMAX_DATA_OUT_ENABLE => data_out_enable_scalar_softmax,
-
-      -- DATA
-      SCALAR_SOFTMAX_LENGTH_IN => length_in_scalar_softmax,
-      SCALAR_SOFTMAX_DATA_IN   => data_in_scalar_softmax,
-      SCALAR_SOFTMAX_DATA_OUT  => data_out_scalar_softmax,
-
-      -- SCALAR SUMMATION
-      -- CONTROL
-      SCALAR_SUMMATION_START => start_scalar_summation,
-      SCALAR_SUMMATION_READY => ready_scalar_summation,
-
-      SCALAR_SUMMATION_DATA_IN_ENABLE => data_in_enable_scalar_summation,
-
-      SCALAR_SUMMATION_DATA_OUT_ENABLE => data_out_enable_scalar_summation,
-
-      -- DATA
-      SCALAR_SUMMATION_LENGTH_IN => length_in_scalar_summation,
-      SCALAR_SUMMATION_DATA_IN   => data_in_scalar_summation,
-      SCALAR_SUMMATION_DATA_OUT  => data_out_scalar_summation,
 
       -- SCALAR TANH
       -- CONTROL
@@ -850,26 +597,6 @@ begin
       VECTOR_COSH_SIZE_IN  => size_in_vector_cosh,
       VECTOR_COSH_DATA_IN  => data_in_vector_cosh,
       VECTOR_COSH_DATA_OUT => data_out_vector_cosh,
-
-      -- VECTOR COSINE SIMILARITY
-      -- CONTROL
-      VECTOR_COSINE_SIMILARITY_START => start_vector_cosine_similarity,
-      VECTOR_COSINE_SIMILARITY_READY => ready_vector_cosine_similarity,
-
-      VECTOR_COSINE_SIMILARITY_DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_cosine_similarity,
-      VECTOR_COSINE_SIMILARITY_DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_cosine_similarity,
-      VECTOR_COSINE_SIMILARITY_DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_cosine_similarity,
-      VECTOR_COSINE_SIMILARITY_DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_cosine_similarity,
-
-      VECTOR_COSINE_SIMILARITY_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_cosine_similarity,
-      VECTOR_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_cosine_similarity,
-
-      -- DATA
-      VECTOR_COSINE_SIMILARITY_SIZE_IN   => size_in_vector_cosine_similarity,
-      VECTOR_COSINE_SIMILARITY_LENGTH_IN => length_in_vector_cosine_similarity,
-      VECTOR_COSINE_SIMILARITY_DATA_A_IN => data_a_in_vector_cosine_similarity,
-      VECTOR_COSINE_SIMILARITY_DATA_B_IN => data_b_in_vector_cosine_similarity,
-      VECTOR_COSINE_SIMILARITY_DATA_OUT  => data_out_vector_cosine_similarity,
 
       -- VECTOR EXPONENTIATOR
       -- CONTROL
@@ -927,23 +654,6 @@ begin
       VECTOR_ONEPLUS_DATA_IN  => data_in_vector_oneplus,
       VECTOR_ONEPLUS_DATA_OUT => data_out_vector_oneplus,
 
-      -- VECTOR MULTIPLICATION
-      -- CONTROL
-      VECTOR_MULTIPLICATION_START => start_vector_multiplication,
-      VECTOR_MULTIPLICATION_READY => ready_vector_multiplication,
-
-      VECTOR_MULTIPLICATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_multiplication,
-      VECTOR_MULTIPLICATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_multiplication,
-
-      VECTOR_MULTIPLICATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_multiplication,
-      VECTOR_MULTIPLICATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_multiplication,
-
-      -- DATA
-      VECTOR_MULTIPLICATION_SIZE_IN   => size_in_vector_multiplication,
-      VECTOR_MULTIPLICATION_LENGTH_IN => length_in_vector_multiplication,
-      VECTOR_MULTIPLICATION_DATA_IN   => data_in_vector_multiplication,
-      VECTOR_MULTIPLICATION_DATA_OUT  => data_out_vector_multiplication,
-
       -- VECTOR SINH
       -- CONTROL
       VECTOR_SINH_START => start_vector_sinh,
@@ -957,40 +667,6 @@ begin
       VECTOR_SINH_SIZE_IN  => size_in_vector_sinh,
       VECTOR_SINH_DATA_IN  => data_in_vector_sinh,
       VECTOR_SINH_DATA_OUT => data_out_vector_sinh,
-
-      -- VECTOR SOFTMAX
-      -- CONTROL
-      VECTOR_SOFTMAX_START => start_vector_softmax,
-      VECTOR_SOFTMAX_READY => ready_vector_softmax,
-
-      VECTOR_SOFTMAX_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_softmax,
-      VECTOR_SOFTMAX_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_softmax,
-
-      VECTOR_SOFTMAX_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_softmax,
-      VECTOR_SOFTMAX_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_softmax,
-
-      -- DATA
-      VECTOR_SOFTMAX_SIZE_IN   => size_in_vector_softmax,
-      VECTOR_SOFTMAX_LENGTH_IN => length_in_vector_softmax,
-      VECTOR_SOFTMAX_DATA_IN   => data_in_vector_softmax,
-      VECTOR_SOFTMAX_DATA_OUT  => data_out_vector_softmax,
-
-      -- VECTOR SUMMATION
-      -- CONTROL
-      VECTOR_SUMMATION_START => start_vector_summation,
-      VECTOR_SUMMATION_READY => ready_vector_summation,
-
-      VECTOR_SUMMATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_summation,
-      VECTOR_SUMMATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_summation,
-
-      VECTOR_SUMMATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_summation,
-      VECTOR_SUMMATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
-
-      -- DATA
-      VECTOR_SUMMATION_SIZE_IN   => size_in_vector_summation,
-      VECTOR_SUMMATION_LENGTH_IN => length_in_vector_summation,
-      VECTOR_SUMMATION_DATA_IN   => data_in_vector_summation,
-      VECTOR_SUMMATION_DATA_OUT  => data_out_vector_summation,
 
       -- VECTOR TANH
       -- CONTROL
@@ -1026,30 +702,6 @@ begin
       MATRIX_COSH_SIZE_J_IN => size_j_in_matrix_cosh,
       MATRIX_COSH_DATA_IN   => data_in_matrix_cosh,
       MATRIX_COSH_DATA_OUT  => data_out_matrix_cosh,
-
-      -- MATRIX COSINE SIMILARITY
-      -- CONTROL
-      MATRIX_COSINE_SIMILARITY_START => start_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_READY => ready_matrix_cosine_similarity,
-
-      MATRIX_COSINE_SIMILARITY_DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_cosine_similarity,
-
-      MATRIX_COSINE_SIMILARITY_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_cosine_similarity,
-
-      -- DATA
-      MATRIX_COSINE_SIMILARITY_SIZE_I_IN => size_i_in_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_SIZE_J_IN => size_j_in_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_LENGTH_IN => length_in_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_DATA_A_IN => data_a_in_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_DATA_B_IN => data_b_in_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_DATA_OUT  => data_out_matrix_cosine_similarity,
 
       -- MATRIX EXPONENTIATOR
       -- CONTROL
@@ -1102,26 +754,6 @@ begin
       MATRIX_LOGISTIC_DATA_IN   => data_in_matrix_logistic,
       MATRIX_LOGISTIC_DATA_OUT  => data_out_matrix_logistic,
 
-      -- MATRIX MULTIPLICATION
-      -- CONTROL
-      MATRIX_MULTIPLICATION_START => start_matrix_multiplication,
-      MATRIX_MULTIPLICATION_READY => ready_matrix_multiplication,
-
-      MATRIX_MULTIPLICATION_DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_multiplication,
-      MATRIX_MULTIPLICATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_multiplication,
-      MATRIX_MULTIPLICATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_multiplication,
-
-      MATRIX_MULTIPLICATION_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_multiplication,
-      MATRIX_MULTIPLICATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_multiplication,
-      MATRIX_MULTIPLICATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_multiplication,
-
-      -- DATA
-      MATRIX_MULTIPLICATION_SIZE_I_IN => size_i_in_matrix_multiplication,
-      MATRIX_MULTIPLICATION_SIZE_J_IN => size_j_in_matrix_multiplication,
-      MATRIX_MULTIPLICATION_LENGTH_IN => length_in_matrix_multiplication,
-      MATRIX_MULTIPLICATION_DATA_IN   => data_in_matrix_multiplication,
-      MATRIX_MULTIPLICATION_DATA_OUT  => data_out_matrix_multiplication,
-
       -- MATRIX ONEPLUS
       -- CONTROL
       MATRIX_ONEPLUS_START => start_matrix_oneplus,
@@ -1155,46 +787,6 @@ begin
       MATRIX_SINH_SIZE_J_IN => size_j_in_matrix_sinh,
       MATRIX_SINH_DATA_IN   => data_in_matrix_sinh,
       MATRIX_SINH_DATA_OUT  => data_out_matrix_sinh,
-
-      -- MATRIX SOFTMAX
-      -- CONTROL
-      MATRIX_SOFTMAX_START => start_matrix_softmax,
-      MATRIX_SOFTMAX_READY => ready_matrix_softmax,
-
-      MATRIX_SOFTMAX_DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_softmax,
-      MATRIX_SOFTMAX_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_softmax,
-      MATRIX_SOFTMAX_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_softmax,
-
-      MATRIX_SOFTMAX_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_softmax,
-      MATRIX_SOFTMAX_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_softmax,
-      MATRIX_SOFTMAX_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_softmax,
-
-      -- DATA
-      MATRIX_SOFTMAX_SIZE_I_IN => size_i_in_matrix_softmax,
-      MATRIX_SOFTMAX_SIZE_J_IN => size_j_in_matrix_softmax,
-      MATRIX_SOFTMAX_LENGTH_IN => length_in_matrix_softmax,
-      MATRIX_SOFTMAX_DATA_IN   => data_in_matrix_softmax,
-      MATRIX_SOFTMAX_DATA_OUT  => data_out_matrix_softmax,
-
-      -- MATRIX SUMMATION
-      -- CONTROL
-      MATRIX_SUMMATION_START => start_matrix_summation,
-      MATRIX_SUMMATION_READY => ready_matrix_summation,
-
-      MATRIX_SUMMATION_DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_summation,
-      MATRIX_SUMMATION_DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_summation,
-      MATRIX_SUMMATION_DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_summation,
-
-      MATRIX_SUMMATION_DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_summation,
-      MATRIX_SUMMATION_DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_summation,
-      MATRIX_SUMMATION_DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_summation,
-
-      -- DATA
-      MATRIX_SUMMATION_SIZE_I_IN => size_i_in_matrix_summation,
-      MATRIX_SUMMATION_SIZE_J_IN => size_j_in_matrix_summation,
-      MATRIX_SUMMATION_LENGTH_IN => length_in_matrix_summation,
-      MATRIX_SUMMATION_DATA_IN   => data_in_matrix_summation,
-      MATRIX_SUMMATION_DATA_OUT  => data_out_matrix_summation,
 
       -- MATRIX TANH
       -- CONTROL
@@ -1239,35 +831,6 @@ begin
         DATA_OUT => data_out_scalar_cosh
         );
   end generate ntm_scalar_cosh_function_test;
-
-  -- SCALAR COSINE SIMILARITY
-  ntm_scalar_cosine_similarity_function_test : if (ENABLE_NTM_SCALAR_COSINE_SIMILARITY_TEST) generate
-    scalar_cosine_similarity_function : ntm_scalar_cosine_similarity_function
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_scalar_cosine_similarity,
-        READY => ready_scalar_cosine_similarity,
-
-        DATA_A_IN_ENABLE => data_a_in_enable_scalar_cosine_similarity,
-        DATA_B_IN_ENABLE => data_b_in_enable_scalar_cosine_similarity,
-
-        DATA_OUT_ENABLE => data_out_enable_scalar_cosine_similarity,
-
-        -- DATA
-        LENGTH_IN => length_in_scalar_cosine_similarity,
-        DATA_A_IN => data_a_in_scalar_cosine_similarity,
-        DATA_B_IN => data_b_in_scalar_cosine_similarity,
-        DATA_OUT  => data_out_scalar_cosine_similarity
-        );
-  end generate ntm_scalar_cosine_similarity_function_test;
 
   -- SCALAR EXPONENTIATOR
   ntm_scalar_exponentiator_function_test : if (ENABLE_NTM_SCALAR_EXPONENTIATOR_TEST) generate
@@ -1335,33 +898,6 @@ begin
         );
   end generate ntm_scalar_logistic_function_test;
 
-  -- SCALAR MULTIPLICATION
-  ntm_scalar_multiplication_function_test : if (ENABLE_NTM_SCALAR_MULTIPLICATION_TEST) generate
-    scalar_multiplication_function : ntm_scalar_multiplication_function
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_scalar_multiplication,
-        READY => ready_scalar_multiplication,
-
-        DATA_IN_ENABLE => data_in_enable_scalar_multiplication,
-
-        DATA_OUT_ENABLE => data_out_enable_scalar_multiplication,
-
-        -- DATA
-        LENGTH_IN => length_in_scalar_multiplication,
-        DATA_IN   => data_in_scalar_multiplication,
-        DATA_OUT  => data_out_scalar_multiplication
-        );
-  end generate ntm_scalar_multiplication_function_test;
-
   -- SCALAR ONEPLUS
   ntm_scalar_oneplus_function_test : if (ENABLE_NTM_SCALAR_ONEPLUS_TEST) generate
     scalar_oneplus_function : ntm_scalar_oneplus_function
@@ -1405,60 +941,6 @@ begin
         DATA_OUT => data_out_scalar_sinh
         );
   end generate ntm_scalar_sinh_function_test;
-
-  -- SCALAR SOFTMAX
-  ntm_scalar_softmax_function_test : if (ENABLE_NTM_SCALAR_SOFTMAX_TEST) generate
-    scalar_softmax_function : ntm_scalar_softmax_function
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_scalar_softmax,
-        READY => ready_scalar_softmax,
-
-        DATA_IN_ENABLE => data_in_enable_scalar_softmax,
-
-        DATA_OUT_ENABLE => data_out_enable_scalar_softmax,
-
-        -- DATA
-        LENGTH_IN => length_in_scalar_softmax,
-        DATA_IN   => data_in_scalar_softmax,
-        DATA_OUT  => data_out_scalar_softmax
-        );
-  end generate ntm_scalar_softmax_function_test;
-
-  -- SCALAR SUMMATION
-  ntm_scalar_summation_function_test : if (ENABLE_NTM_SCALAR_SUMMATION_TEST) generate
-    scalar_summation_function : ntm_scalar_summation_function
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_scalar_summation,
-        READY => ready_scalar_summation,
-
-        DATA_IN_ENABLE => data_in_enable_scalar_summation,
-
-        DATA_OUT_ENABLE => data_out_enable_scalar_summation,
-
-        -- DATA
-        LENGTH_IN => length_in_scalar_summation,
-        DATA_IN   => data_in_scalar_summation,
-        DATA_OUT  => data_out_scalar_summation
-        );
-  end generate ntm_scalar_summation_function_test;
 
   -- SCALAR TANH
   ntm_scalar_tanh_function_test : if (ENABLE_NTM_SCALAR_TANH_TEST) generate
@@ -1512,39 +994,6 @@ begin
         DATA_OUT => data_out_vector_cosh
         );
   end generate ntm_vector_cosh_function_test;
-
-  -- VECTOR COSINE SIMILARITY
-  ntm_vector_cosine_similarity_function_test : if (ENABLE_NTM_VECTOR_COSINE_SIMILARITY_TEST) generate
-    vector_cosine_similarity_function : ntm_vector_cosine_similarity_function
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_vector_cosine_similarity,
-        READY => ready_vector_cosine_similarity,
-
-        DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_vector_cosine_similarity,
-        DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_vector_cosine_similarity,
-        DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_vector_cosine_similarity,
-        DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_vector_cosine_similarity,
-
-        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_cosine_similarity,
-        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_cosine_similarity,
-
-        -- DATA
-        SIZE_IN   => size_in_vector_cosine_similarity,
-        LENGTH_IN => length_in_vector_cosine_similarity,
-        DATA_A_IN => data_a_in_vector_cosine_similarity,
-        DATA_B_IN => data_b_in_vector_cosine_similarity,
-        DATA_OUT  => data_out_vector_cosine_similarity
-        );
-  end generate ntm_vector_cosine_similarity_function_test;
 
   -- VECTOR EXPONENTIATOR
   ntm_vector_exponentiator_function_test : if (ENABLE_NTM_VECTOR_EXPONENTIATOR_TEST) generate
@@ -1627,36 +1076,6 @@ begin
         );
   end generate ntm_vector_logistic_function_test;
 
-  -- VECTOR MULTIPLICATION
-  ntm_vector_multiplication_function_test : if (ENABLE_NTM_VECTOR_MULTIPLICATION_TEST) generate
-    vector_multiplication_function : ntm_vector_multiplication_function
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_vector_multiplication,
-        READY => ready_vector_multiplication,
-
-        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_multiplication,
-        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_multiplication,
-
-        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_multiplication,
-        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_multiplication,
-
-        -- DATA
-        SIZE_IN   => size_in_vector_multiplication,
-        LENGTH_IN => length_in_vector_multiplication,
-        DATA_IN   => data_in_vector_multiplication,
-        DATA_OUT  => data_out_vector_multiplication
-        );
-  end generate ntm_vector_multiplication_function_test;
-
   -- VECTOR ONEPLUS
   ntm_vector_oneplus_function_test : if (ENABLE_NTM_VECTOR_ONEPLUS_TEST) generate
     vector_oneplus_function : ntm_vector_oneplus_function
@@ -1711,66 +1130,6 @@ begin
         DATA_OUT => data_out_vector_sinh
         );
   end generate ntm_vector_sinh_function_test;
-
-  -- VECTOR SOFTMAX
-  ntm_vector_softmax_function_test : if (ENABLE_NTM_VECTOR_SOFTMAX_TEST) generate
-    vector_softmax_function : ntm_vector_softmax_function
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_vector_softmax,
-        READY => ready_vector_softmax,
-
-        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_softmax,
-        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_softmax,
-
-        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_softmax,
-        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_softmax,
-
-        -- DATA
-        SIZE_IN   => size_in_vector_softmax,
-        LENGTH_IN => length_in_vector_softmax,
-        DATA_IN   => data_in_vector_softmax,
-        DATA_OUT  => data_out_vector_softmax
-        );
-  end generate ntm_vector_softmax_function_test;
-
-  -- VECTOR SUMMATION
-  ntm_vector_summation_function_test : if (ENABLE_NTM_VECTOR_SUMMATION_TEST) generate
-    vector_summation_function : ntm_vector_summation_function
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_vector_summation,
-        READY => ready_vector_summation,
-
-        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_summation,
-        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_summation,
-
-        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_summation,
-        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
-
-        -- DATA
-        SIZE_IN   => size_in_vector_summation,
-        LENGTH_IN => length_in_vector_summation,
-        DATA_IN   => data_in_vector_summation,
-        DATA_OUT  => data_out_vector_summation
-        );
-  end generate ntm_vector_summation_function_test;
 
   -- VECTOR TANH
   ntm_vector_tanh_function_test : if (ENABLE_NTM_VECTOR_TANH_TEST) generate
@@ -1832,43 +1191,6 @@ begin
         DATA_OUT  => data_out_matrix_cosh
         );
   end generate ntm_matrix_cosh_function_test;
-
-  -- MATRIX COSINE SIMILARITY
-  ntm_matrix_cosine_similarity_function_test : if (ENABLE_NTM_MATRIX_COSINE_SIMILARITY_TEST) generate
-    matrix_cosine_similarity_function : ntm_matrix_cosine_similarity_function
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_matrix_cosine_similarity,
-        READY => ready_matrix_cosine_similarity,
-
-        DATA_A_IN_MATRIX_ENABLE => data_a_in_matrix_enable_matrix_cosine_similarity,
-        DATA_A_IN_VECTOR_ENABLE => data_a_in_vector_enable_matrix_cosine_similarity,
-        DATA_A_IN_SCALAR_ENABLE => data_a_in_scalar_enable_matrix_cosine_similarity,
-        DATA_B_IN_MATRIX_ENABLE => data_b_in_matrix_enable_matrix_cosine_similarity,
-        DATA_B_IN_VECTOR_ENABLE => data_b_in_vector_enable_matrix_cosine_similarity,
-        DATA_B_IN_SCALAR_ENABLE => data_b_in_scalar_enable_matrix_cosine_similarity,
-
-        DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_cosine_similarity,
-        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_cosine_similarity,
-        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_cosine_similarity,
-
-        -- DATA
-        SIZE_I_IN => size_i_in_matrix_cosine_similarity,
-        SIZE_J_IN => size_j_in_matrix_cosine_similarity,
-        LENGTH_IN => length_in_matrix_cosine_similarity,
-        DATA_A_IN => data_a_in_matrix_cosine_similarity,
-        DATA_B_IN => data_b_in_matrix_cosine_similarity,
-        DATA_OUT  => data_out_matrix_cosine_similarity
-        );
-  end generate ntm_matrix_cosine_similarity_function_test;
 
   -- MATRIX EXPONENTIATOR
   ntm_matrix_exponentiator_function_test : if (ENABLE_NTM_MATRIX_EXPONENTIATOR_TEST) generate
@@ -1960,39 +1282,6 @@ begin
         );
   end generate ntm_matrix_logistic_function_test;
 
-  -- MATRIX MULTIPLICATION
-  ntm_matrix_multiplication_function_test : if (ENABLE_NTM_MATRIX_MULTIPLICATION_TEST) generate
-    matrix_multiplication_function : ntm_matrix_multiplication_function
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_matrix_multiplication,
-        READY => ready_matrix_multiplication,
-
-        DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_multiplication,
-        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_multiplication,
-        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_multiplication,
-
-        DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_multiplication,
-        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_multiplication,
-        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_multiplication,
-
-        -- DATA
-        SIZE_I_IN => size_i_in_matrix_multiplication,
-        SIZE_J_IN => size_j_in_matrix_multiplication,
-        LENGTH_IN => length_in_matrix_multiplication,
-        DATA_IN   => data_in_matrix_multiplication,
-        DATA_OUT  => data_out_matrix_multiplication
-        );
-  end generate ntm_matrix_multiplication_function_test;
-
   -- MATRIX ONEPLUS
   ntm_matrix_oneplus_function_test : if (ENABLE_NTM_MATRIX_ONEPLUS_TEST) generate
     matrix_oneplus_function : ntm_matrix_oneplus_function
@@ -2052,72 +1341,6 @@ begin
         DATA_OUT  => data_out_matrix_sinh
         );
   end generate ntm_matrix_sinh_function_test;
-
-  -- MATRIX SOFTMAX
-  ntm_matrix_softmax_function_test : if (ENABLE_NTM_MATRIX_SOFTMAX_TEST) generate
-    matrix_softmax_function : ntm_matrix_softmax_function
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_matrix_softmax,
-        READY => ready_matrix_softmax,
-
-        DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_softmax,
-        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_softmax,
-        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_softmax,
-
-        DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_softmax,
-        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_softmax,
-        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_softmax,
-
-        -- DATA
-        SIZE_I_IN => size_i_in_matrix_softmax,
-        SIZE_J_IN => size_j_in_matrix_softmax,
-        LENGTH_IN => length_in_matrix_softmax,
-        DATA_IN   => data_in_matrix_softmax,
-        DATA_OUT  => data_out_matrix_softmax
-        );
-  end generate ntm_matrix_softmax_function_test;
-
-  -- MATRIX SUMMATION
-  ntm_matrix_summation_function_test : if (ENABLE_NTM_MATRIX_SUMMATION_TEST) generate
-    matrix_summation_function : ntm_matrix_summation_function
-      generic map (
-        DATA_SIZE    => DATA_SIZE,
-        CONTROL_SIZE => CONTROL_SIZE
-        )
-      port map (
-        -- GLOBAL
-        CLK => CLK,
-        RST => RST,
-
-        -- CONTROL
-        START => start_matrix_summation,
-        READY => ready_matrix_summation,
-
-        DATA_IN_MATRIX_ENABLE => data_in_matrix_enable_matrix_summation,
-        DATA_IN_VECTOR_ENABLE => data_in_vector_enable_matrix_summation,
-        DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_matrix_summation,
-
-        DATA_OUT_MATRIX_ENABLE => data_out_matrix_enable_matrix_summation,
-        DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_matrix_summation,
-        DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_matrix_summation,
-
-        -- DATA
-        SIZE_I_IN => size_i_in_matrix_summation,
-        SIZE_J_IN => size_j_in_matrix_summation,
-        LENGTH_IN => length_in_matrix_summation,
-        DATA_IN   => data_in_matrix_summation,
-        DATA_OUT  => data_out_matrix_summation
-        );
-  end generate ntm_matrix_summation_function_test;
 
   -- MATRIX TANH
   ntm_matrix_tanh_function_test : if (ENABLE_NTM_MATRIX_TANH_TEST) generate

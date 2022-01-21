@@ -25,15 +25,15 @@ vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_a
 vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_multiplier.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_divider.vhd
 
-vhdl2008 work ../../../../../../../rtl/vhdl/math/calculus/vector/ntm_vector_integration.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/calculus/vector/ntm_vector_differentiation.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/calculus/vector/ntm_vector_average.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/calculus/matrix/ntm_matrix_integration.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/calculus/vector/ntm_vector_integration.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/calculus/vector/ntm_vector_softmax.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/calculus/matrix/ntm_matrix_differentiation.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/calculus/matrix/ntm_matrix_average.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_integration.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/calculus/matrix/ntm_matrix_integration.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/calculus/matrix/ntm_matrix_softmax.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_differentiation.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_average.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_integration.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/calculus/tensor/ntm_tensor_softmax.vhd
 
 vhdl2008 work ../../../../../../../bench/vhdl/tests/math/calculus/ntm_calculus_pkg.vhd
 vhdl2008 work ../../../../../../../bench/vhdl/tests/math/calculus/ntm_calculus_stimulus.vhd

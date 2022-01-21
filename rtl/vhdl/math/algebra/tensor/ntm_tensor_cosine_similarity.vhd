@@ -45,7 +45,7 @@ use ieee.numeric_std.all;
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 
-entity ntm_tensor_average is
+entity ntm_tensor_cosine_similarity is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -88,14 +88,14 @@ entity ntm_tensor_average is
     );
 end entity;
 
-architecture ntm_tensor_average_architecture of ntm_tensor_average is
+architecture ntm_tensor_cosine_similarity_architecture of ntm_tensor_cosine_similarity is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  type average_ctrl_fsm is (
+  type cosine_similarity_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
@@ -141,7 +141,7 @@ architecture ntm_tensor_average_architecture of ntm_tensor_average is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal average_ctrl_fsm_int : average_ctrl_fsm;
+  signal cosine_similarity_ctrl_fsm_int : cosine_similarity_ctrl_fsm;
 
   -- Buffer
   signal tensor_a_int : tensor_buffer;
@@ -153,12 +153,12 @@ architecture ntm_tensor_average_architecture of ntm_tensor_average is
   signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_m_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_a_in_i_average_int : std_logic;
-  signal data_a_in_j_average_int : std_logic;
-  signal data_a_in_k_average_int : std_logic;
-  signal data_b_in_i_average_int : std_logic;
-  signal data_b_in_j_average_int : std_logic;
-  signal data_b_in_k_average_int : std_logic;
+  signal data_a_in_i_cosine_similarity_int : std_logic;
+  signal data_a_in_j_cosine_similarity_int : std_logic;
+  signal data_a_in_k_cosine_similarity_int : std_logic;
+  signal data_b_in_i_cosine_similarity_int : std_logic;
+  signal data_b_in_j_cosine_similarity_int : std_logic;
+  signal data_b_in_k_cosine_similarity_int : std_logic;
 
   -- SCALAR ADDER
   -- CONTROL
@@ -223,12 +223,12 @@ begin
       index_k_loop <= ZERO_CONTROL;
       index_m_loop <= ZERO_CONTROL;
 
-      data_a_in_i_average_int <= '0';
-      data_a_in_j_average_int <= '0';
-      data_a_in_k_average_int <= '0';
-      data_b_in_i_average_int <= '0';
-      data_b_in_j_average_int <= '0';
-      data_b_in_k_average_int <= '0';
+      data_a_in_i_cosine_similarity_int <= '0';
+      data_a_in_j_cosine_similarity_int <= '0';
+      data_a_in_k_cosine_similarity_int <= '0';
+      data_b_in_i_cosine_similarity_int <= '0';
+      data_b_in_j_cosine_similarity_int <= '0';
+      data_b_in_k_cosine_similarity_int <= '0';
 
       -- Data Internal
       data_a_in_scalar_adder <= ZERO_DATA;
@@ -239,7 +239,7 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      case average_ctrl_fsm_int is
+      case cosine_similarity_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           DATA_OUT_I_ENABLE <= '0';
@@ -260,7 +260,7 @@ begin
               index_m_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              average_ctrl_fsm_int <= INPUT_I_STATE;
+              cosine_similarity_ctrl_fsm_int <= INPUT_I_STATE;
             else
               -- Control Outputs
               READY <= '1';
@@ -281,9 +281,9 @@ begin
             tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_i_average_int <= '1';
-            data_a_in_j_average_int <= '1';
-            data_a_in_k_average_int <= '1';
+            data_a_in_i_cosine_similarity_int <= '1';
+            data_a_in_j_cosine_similarity_int <= '1';
+            data_a_in_k_cosine_similarity_int <= '1';
           end if;
 
           if ((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1') and (DATA_B_IN_K_ENABLE = '1')) then
@@ -291,9 +291,9 @@ begin
             tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_i_average_int <= '1';
-            data_b_in_j_average_int <= '1';
-            data_b_in_k_average_int <= '1';
+            data_b_in_i_cosine_similarity_int <= '1';
+            data_b_in_j_cosine_similarity_int <= '1';
+            data_b_in_k_cosine_similarity_int <= '1';
           end if;
 
           -- Control Outputs
@@ -301,17 +301,17 @@ begin
           DATA_J_ENABLE <= '0';
           DATA_K_ENABLE <= '0';
 
-          if (data_a_in_i_average_int = '1' and data_a_in_j_average_int = '1' and data_a_in_k_average_int = '1' and data_b_in_i_average_int = '1' and data_b_in_j_average_int = '1' and data_b_in_k_average_int = '1') then
+          if (data_a_in_i_cosine_similarity_int = '1' and data_a_in_j_cosine_similarity_int = '1' and data_a_in_k_cosine_similarity_int = '1' and data_b_in_i_cosine_similarity_int = '1' and data_b_in_j_cosine_similarity_int = '1' and data_b_in_k_cosine_similarity_int = '1') then
             -- Control Internal
-            data_a_in_i_average_int <= '0';
-            data_a_in_j_average_int <= '0';
-            data_a_in_k_average_int <= '0';
-            data_b_in_i_average_int <= '0';
-            data_b_in_j_average_int <= '0';
-            data_b_in_k_average_int <= '0';
+            data_a_in_i_cosine_similarity_int <= '0';
+            data_a_in_j_cosine_similarity_int <= '0';
+            data_a_in_k_cosine_similarity_int <= '0';
+            data_b_in_i_cosine_similarity_int <= '0';
+            data_b_in_j_cosine_similarity_int <= '0';
+            data_b_in_k_cosine_similarity_int <= '0';
 
             -- FSM Control
-            average_ctrl_fsm_int <= ENDER_K_STATE;
+            cosine_similarity_ctrl_fsm_int <= ENDER_K_STATE;
           end if;
 
         when INPUT_J_STATE =>           -- STEP 2
@@ -321,8 +321,8 @@ begin
             tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_j_average_int <= '1';
-            data_a_in_k_average_int <= '1';
+            data_a_in_j_cosine_similarity_int <= '1';
+            data_a_in_k_cosine_similarity_int <= '1';
           end if;
 
           if ((DATA_B_IN_J_ENABLE = '1') and (DATA_B_IN_K_ENABLE = '1')) then
@@ -330,26 +330,26 @@ begin
             tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_j_average_int <= '1';
-            data_b_in_k_average_int <= '1';
+            data_b_in_j_cosine_similarity_int <= '1';
+            data_b_in_k_cosine_similarity_int <= '1';
           end if;
 
           -- Control Outputs
           DATA_J_ENABLE <= '0';
           DATA_K_ENABLE <= '0';
 
-          if (data_a_in_j_average_int = '1' and data_a_in_k_average_int = '1' and data_b_in_j_average_int = '1' and data_b_in_k_average_int = '1') then
+          if (data_a_in_j_cosine_similarity_int = '1' and data_a_in_k_cosine_similarity_int = '1' and data_b_in_j_cosine_similarity_int = '1' and data_b_in_k_cosine_similarity_int = '1') then
             -- Control Internal
-            data_a_in_j_average_int <= '0';
-            data_a_in_k_average_int <= '0';
-            data_b_in_j_average_int <= '0';
-            data_b_in_k_average_int <= '0';
+            data_a_in_j_cosine_similarity_int <= '0';
+            data_a_in_k_cosine_similarity_int <= '0';
+            data_b_in_j_cosine_similarity_int <= '0';
+            data_b_in_k_cosine_similarity_int <= '0';
 
             -- FSM Control
             if (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
-              average_ctrl_fsm_int <= ENDER_J_STATE;
+              cosine_similarity_ctrl_fsm_int <= ENDER_J_STATE;
             else
-              average_ctrl_fsm_int <= ENDER_K_STATE;
+              cosine_similarity_ctrl_fsm_int <= ENDER_K_STATE;
             end if;
           end if;
 
@@ -360,7 +360,7 @@ begin
             tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_k_average_int <= '1';
+            data_a_in_k_cosine_similarity_int <= '1';
           end if;
 
           if (DATA_B_IN_K_ENABLE = '1') then
@@ -368,24 +368,24 @@ begin
             tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop))) <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_k_average_int <= '1';
+            data_b_in_k_cosine_similarity_int <= '1';
           end if;
 
           -- Control Outputs
           DATA_K_ENABLE <= '0';
 
-          if (data_a_in_k_average_int = '1' and data_b_in_k_average_int = '1') then
+          if (data_a_in_k_cosine_similarity_int = '1' and data_b_in_k_cosine_similarity_int = '1') then
             -- Control Internal
-            data_a_in_k_average_int <= '0';
-            data_b_in_k_average_int <= '0';
+            data_a_in_k_cosine_similarity_int <= '0';
+            data_b_in_k_cosine_similarity_int <= '0';
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL) and unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
-              average_ctrl_fsm_int <= ENDER_I_STATE;
+              cosine_similarity_ctrl_fsm_int <= ENDER_I_STATE;
             elsif (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
-              average_ctrl_fsm_int <= ENDER_J_STATE;
+              cosine_similarity_ctrl_fsm_int <= ENDER_J_STATE;
             else
-              average_ctrl_fsm_int <= ENDER_K_STATE;
+              cosine_similarity_ctrl_fsm_int <= ENDER_K_STATE;
             end if;
           end if;
 
@@ -401,7 +401,7 @@ begin
             index_k_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            average_ctrl_fsm_int <= CLEAN_I_STATE;
+            cosine_similarity_ctrl_fsm_int <= CLEAN_I_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
             DATA_OUT <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
@@ -417,7 +417,7 @@ begin
             index_k_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            average_ctrl_fsm_int <= INPUT_I_STATE;
+            cosine_similarity_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
         when ENDER_J_STATE =>           -- STEP 5
@@ -435,7 +435,7 @@ begin
             index_k_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            average_ctrl_fsm_int <= INPUT_J_STATE;
+            cosine_similarity_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
         when ENDER_K_STATE =>           -- STEP 6
@@ -451,7 +451,7 @@ begin
             index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
 
             -- FSM Control
-            average_ctrl_fsm_int <= INPUT_K_STATE;
+            cosine_similarity_ctrl_fsm_int <= INPUT_K_STATE;
           end if;
 
         when CLEAN_I_STATE =>           -- STEP 7
@@ -474,11 +474,11 @@ begin
 
           -- FSM Control
           if ((unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
-            average_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
+            cosine_similarity_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
           elsif (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
-            average_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
+            cosine_similarity_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
           else
-            average_ctrl_fsm_int <= SCALAR_MULTIPLIER_K_STATE;
+            cosine_similarity_ctrl_fsm_int <= SCALAR_MULTIPLIER_K_STATE;
           end if;
 
         when CLEAN_J_STATE =>           -- STEP 8
@@ -499,11 +499,11 @@ begin
 
           -- FSM Control
           if ((unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
-            average_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
+            cosine_similarity_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
           elsif (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
-            average_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
+            cosine_similarity_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
           else
-            average_ctrl_fsm_int <= SCALAR_MULTIPLIER_K_STATE;
+            cosine_similarity_ctrl_fsm_int <= SCALAR_MULTIPLIER_K_STATE;
           end if;
 
         when CLEAN_K_STATE =>           -- STEP 9
@@ -522,11 +522,11 @@ begin
 
           -- FSM Control
           if ((unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
-            average_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
+            cosine_similarity_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
           elsif (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
-            average_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
+            cosine_similarity_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
           else
-            average_ctrl_fsm_int <= SCALAR_MULTIPLIER_K_STATE;
+            cosine_similarity_ctrl_fsm_int <= SCALAR_MULTIPLIER_K_STATE;
           end if;
 
         when SCALAR_MULTIPLIER_I_STATE =>  -- STEP 10
@@ -547,7 +547,7 @@ begin
             end if;
 
             -- FSM Control
-            average_ctrl_fsm_int <= SCALAR_ADDER_I_STATE;
+            cosine_similarity_ctrl_fsm_int <= SCALAR_ADDER_I_STATE;
           else
             -- Control Internal
             start_scalar_multiplier <= '0';
@@ -571,7 +571,7 @@ begin
             end if;
 
             -- FSM Control
-            average_ctrl_fsm_int <= SCALAR_ADDER_J_STATE;
+            cosine_similarity_ctrl_fsm_int <= SCALAR_ADDER_J_STATE;
           else
             -- Control Internal
             start_scalar_multiplier <= '0';
@@ -595,7 +595,7 @@ begin
             end if;
 
             -- FSM Control
-            average_ctrl_fsm_int <= SCALAR_ADDER_K_STATE;
+            cosine_similarity_ctrl_fsm_int <= SCALAR_ADDER_K_STATE;
           else
             -- Control Internal
             start_scalar_multiplier <= '0';
@@ -623,13 +623,13 @@ begin
                 index_m_loop <= ZERO_CONTROL;
 
                 -- FSM Control
-                average_ctrl_fsm_int <= STARTER_STATE;
+                cosine_similarity_ctrl_fsm_int <= STARTER_STATE;
               else
                 -- Control Internal
                 index_m_loop <= std_logic_vector(unsigned(index_m_loop)+unsigned(ONE_CONTROL));
 
                 -- FSM Control
-                average_ctrl_fsm_int <= CLEAN_I_STATE;
+                cosine_similarity_ctrl_fsm_int <= CLEAN_I_STATE;
               end if;
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
               if (unsigned(index_m_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then
@@ -652,7 +652,7 @@ begin
               end if;
 
               -- FSM Control
-              average_ctrl_fsm_int <= CLEAN_I_STATE;
+              cosine_similarity_ctrl_fsm_int <= CLEAN_I_STATE;
             end if;
           else
             -- Control Internal
@@ -681,7 +681,7 @@ begin
               end if;
 
               -- FSM Control
-              average_ctrl_fsm_int <= CLEAN_J_STATE;
+              cosine_similarity_ctrl_fsm_int <= CLEAN_J_STATE;
             end if;
           else
             -- Control Internal
@@ -708,7 +708,7 @@ begin
               end if;
 
               -- FSM Control
-              average_ctrl_fsm_int <= CLEAN_K_STATE;
+              cosine_similarity_ctrl_fsm_int <= CLEAN_K_STATE;
             end if;
           else
             -- Control Internal
@@ -717,7 +717,7 @@ begin
 
         when others =>
           -- FSM Control
-          average_ctrl_fsm_int <= STARTER_STATE;
+          cosine_similarity_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

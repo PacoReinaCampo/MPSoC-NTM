@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_matrix_integration is
+entity ntm_matrix_summation is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -75,14 +75,14 @@ entity ntm_matrix_integration is
     );
 end entity;
 
-architecture ntm_matrix_integration_architecture of ntm_matrix_integration is
+architecture ntm_matrix_summation_architecture of ntm_matrix_summation is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  type integration_ctrl_fsm is (
+  type summation_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
@@ -121,7 +121,7 @@ architecture ntm_matrix_integration_architecture of ntm_matrix_integration is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal integration_ctrl_fsm_int : integration_ctrl_fsm;
+  signal summation_ctrl_fsm_int : summation_ctrl_fsm;
 
   -- Buffer
   signal matrix_int : matrix_buffer;
@@ -136,7 +136,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = integration(DATA_IN)
+  -- DATA_OUT = summation(DATA_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -160,7 +160,7 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      case integration_ctrl_fsm_int is
+      case summation_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -178,7 +178,7 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            integration_ctrl_fsm_int <= INPUT_I_STATE;
+            summation_ctrl_fsm_int <= INPUT_I_STATE;
           else
             -- Control Outputs
             DATA_I_ENABLE <= '0';
@@ -192,7 +192,7 @@ begin
             matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
 
             -- FSM Control
-            integration_ctrl_fsm_int <= ENDER_J_STATE;
+            summation_ctrl_fsm_int <= ENDER_J_STATE;
           end if;
 
           -- Control Outputs
@@ -207,9 +207,9 @@ begin
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              integration_ctrl_fsm_int <= ENDER_I_STATE;
+              summation_ctrl_fsm_int <= ENDER_I_STATE;
             else
-              integration_ctrl_fsm_int <= ENDER_J_STATE;
+              summation_ctrl_fsm_int <= ENDER_J_STATE;
             end if;
           end if;
 
@@ -228,7 +228,7 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            integration_ctrl_fsm_int <= CLEAN_I_STATE;
+            summation_ctrl_fsm_int <= CLEAN_I_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
             DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
@@ -242,7 +242,7 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            integration_ctrl_fsm_int <= INPUT_I_STATE;
+            summation_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
         when ENDER_J_STATE =>           -- STEP 4
@@ -258,7 +258,7 @@ begin
             index_j_loop <= std_logic_vector(unsigned(index_j_loop)+unsigned(ONE_CONTROL));
 
             -- FSM Control
-            integration_ctrl_fsm_int <= INPUT_J_STATE;
+            summation_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
         when CLEAN_I_STATE =>           -- STEP 5
@@ -271,7 +271,7 @@ begin
           DATA_OUT_J_ENABLE <= '0';
 
           -- FSM Control
-          integration_ctrl_fsm_int <= OPERATION_J_STATE;
+          summation_ctrl_fsm_int <= OPERATION_J_STATE;
 
         when CLEAN_J_STATE =>           -- STEP 6
 
@@ -284,9 +284,9 @@ begin
 
           -- FSM Control
           if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-            integration_ctrl_fsm_int <= OPERATION_I_STATE;
+            summation_ctrl_fsm_int <= OPERATION_I_STATE;
           else
-            integration_ctrl_fsm_int <= OPERATION_J_STATE;
+            summation_ctrl_fsm_int <= OPERATION_J_STATE;
           end if;
 
         when OPERATION_I_STATE =>       -- STEP 7
@@ -306,7 +306,7 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            integration_ctrl_fsm_int <= STARTER_STATE;
+            summation_ctrl_fsm_int <= STARTER_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
             DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
@@ -320,7 +320,7 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            integration_ctrl_fsm_int <= CLEAN_I_STATE;
+            summation_ctrl_fsm_int <= CLEAN_I_STATE;
           end if;
 
         when OPERATION_J_STATE =>       -- STEP 8
@@ -336,12 +336,12 @@ begin
             index_j_loop <= std_logic_vector(unsigned(index_j_loop)+unsigned(ONE_CONTROL));
 
             -- FSM Control
-            integration_ctrl_fsm_int <= CLEAN_J_STATE;
+            summation_ctrl_fsm_int <= CLEAN_J_STATE;
           end if;
 
         when others =>
           -- FSM Control
-          integration_ctrl_fsm_int <= STARTER_STATE;
+          summation_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

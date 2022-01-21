@@ -6,39 +6,23 @@ add wave -noupdate /ntm_calculus_pkg/MONITOR_TEST
 add wave -noupdate /ntm_calculus_pkg/MONITOR_CASE
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM DOT INTEGRATION TEST}
+add wave -noupdate -divider {NTM VECTOR INTEGRATION TEST}
 add wave -noupdate -divider {=========================================}
 
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/CLK
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/RST
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/START
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/LENGTH_IN
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/DATA_A_IN_ENABLE
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/DATA_A_IN
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/DATA_B_IN_ENABLE
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/DATA_B_IN
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/READY
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/DATA_OUT_ENABLE
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/DATA_OUT
+add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/vector_integration/CLK
+add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/vector_integration/RST
+add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/vector_integration/START
+add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/vector_integration/LENGTH_IN
+add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/vector_integration/DATA_IN_ENABLE
+add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/vector_integration/DATA_IN
+add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/vector_integration/DATA_ENABLE
+add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/vector_integration/READY
+add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/vector_integration/DATA_OUT_ENABLE
+add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/vector_integration/DATA_OUT
 
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/integration_ctrl_fsm_int
+add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/vector_integration/integration_ctrl_fsm_int
 
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/index_loop
-
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/start_scalar_adder
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/operation_scalar_adder
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/data_a_in_scalar_adder
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/data_b_in_scalar_adder
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/ready_scalar_adder
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/data_out_scalar_adder
-
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/start_scalar_multiplier
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/data_a_in_integration_int
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/data_a_in_scalar_multiplier
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/data_b_in_integration_int
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/data_b_in_scalar_multiplier
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/ready_scalar_multiplier
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/dot_integration/data_out_scalar_multiplier
+add wave -noupdate /ntm_calculus_testbench/ntm_vector_integration_test/vector_integration/index_loop
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

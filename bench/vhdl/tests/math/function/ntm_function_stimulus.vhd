@@ -76,22 +76,6 @@ entity ntm_function_stimulus is
     SCALAR_COSH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_COSH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-    -- SCALAR COSINE SIMILARITY
-    -- CONTROL
-    SCALAR_COSINE_SIMILARITY_START : out std_logic;
-    SCALAR_COSINE_SIMILARITY_READY : in  std_logic;
-
-    SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE : out std_logic;
-    SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE : out std_logic;
-
-    SCALAR_COSINE_SIMILARITY_DATA_OUT_ENABLE : in std_logic;
-
-    -- DATA
-    SCALAR_COSINE_SIMILARITY_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SCALAR_COSINE_SIMILARITY_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_COSINE_SIMILARITY_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_COSINE_SIMILARITY_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
     -- SCALAR EXPONENTIATOR
     -- CONTROL
     SCALAR_EXPONENTIATOR_START : out std_logic;
@@ -119,20 +103,6 @@ entity ntm_function_stimulus is
     SCALAR_LOGISTIC_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_LOGISTIC_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-    -- SCALAR MULTIPLICATION
-    -- CONTROL
-    SCALAR_MULTIPLICATION_START : out std_logic;
-    SCALAR_MULTIPLICATION_READY : in  std_logic;
-
-    SCALAR_MULTIPLICATION_DATA_IN_ENABLE : out std_logic;
-
-    SCALAR_MULTIPLICATION_DATA_OUT_ENABLE : in std_logic;
-
-    -- DATA
-    SCALAR_MULTIPLICATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SCALAR_MULTIPLICATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_MULTIPLICATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
     -- SCALAR ONEPLUS
     -- CONTROL
     SCALAR_ONEPLUS_START : out std_logic;
@@ -150,34 +120,6 @@ entity ntm_function_stimulus is
     -- DATA
     SCALAR_SINH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_SINH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- SCALAR SOFTMAX
-    -- CONTROL
-    SCALAR_SOFTMAX_START : out std_logic;
-    SCALAR_SOFTMAX_READY : in  std_logic;
-
-    SCALAR_SOFTMAX_DATA_IN_ENABLE : out std_logic;
-
-    SCALAR_SOFTMAX_DATA_OUT_ENABLE : in std_logic;
-
-    -- DATA
-    SCALAR_SOFTMAX_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SCALAR_SOFTMAX_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_SOFTMAX_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- SCALAR SUMMATION
-    -- CONTROL
-    SCALAR_SUMMATION_START : out std_logic;
-    SCALAR_SUMMATION_READY : in  std_logic;
-
-    SCALAR_SUMMATION_DATA_IN_ENABLE : out std_logic;
-
-    SCALAR_SUMMATION_DATA_OUT_ENABLE : in std_logic;
-
-    -- DATA
-    SCALAR_SUMMATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SCALAR_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- SCALAR TANH
     -- CONTROL
@@ -205,26 +147,6 @@ entity ntm_function_stimulus is
     VECTOR_COSH_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_COSH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_COSH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- VECTOR COSINE SIMILARITY
-    -- CONTROL
-    VECTOR_COSINE_SIMILARITY_START : out std_logic;
-    VECTOR_COSINE_SIMILARITY_READY : in  std_logic;
-
-    VECTOR_COSINE_SIMILARITY_DATA_A_IN_VECTOR_ENABLE : out std_logic;
-    VECTOR_COSINE_SIMILARITY_DATA_A_IN_SCALAR_ENABLE : out std_logic;
-    VECTOR_COSINE_SIMILARITY_DATA_B_IN_VECTOR_ENABLE : out std_logic;
-    VECTOR_COSINE_SIMILARITY_DATA_B_IN_SCALAR_ENABLE : out std_logic;
-
-    VECTOR_COSINE_SIMILARITY_DATA_OUT_VECTOR_ENABLE : in std_logic;
-    VECTOR_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE : in std_logic;
-
-    -- DATA
-    VECTOR_COSINE_SIMILARITY_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_COSINE_SIMILARITY_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_COSINE_SIMILARITY_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_COSINE_SIMILARITY_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_COSINE_SIMILARITY_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- VECTOR EXPONENTIATOR
     -- CONTROL
@@ -268,23 +190,6 @@ entity ntm_function_stimulus is
     VECTOR_LOGISTIC_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_LOGISTIC_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-    -- VECTOR MULTIPLICATION
-    -- CONTROL
-    VECTOR_MULTIPLICATION_START : out std_logic;
-    VECTOR_MULTIPLICATION_READY : in  std_logic;
-
-    VECTOR_MULTIPLICATION_DATA_IN_VECTOR_ENABLE : out std_logic;
-    VECTOR_MULTIPLICATION_DATA_IN_SCALAR_ENABLE : out std_logic;
-
-    VECTOR_MULTIPLICATION_DATA_OUT_VECTOR_ENABLE : in std_logic;
-    VECTOR_MULTIPLICATION_DATA_OUT_SCALAR_ENABLE : in std_logic;
-
-    -- DATA
-    VECTOR_MULTIPLICATION_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_MULTIPLICATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_MULTIPLICATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_MULTIPLICATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
     -- VECTOR ONEPLUS
     -- CONTROL
     VECTOR_ONEPLUS_START : out std_logic;
@@ -312,40 +217,6 @@ entity ntm_function_stimulus is
     VECTOR_SINH_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_SINH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_SINH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- VECTOR SOFTMAX
-    -- CONTROL
-    VECTOR_SOFTMAX_START : out std_logic;
-    VECTOR_SOFTMAX_READY : in  std_logic;
-
-    VECTOR_SOFTMAX_DATA_IN_VECTOR_ENABLE : out std_logic;
-    VECTOR_SOFTMAX_DATA_IN_SCALAR_ENABLE : out std_logic;
-
-    VECTOR_SOFTMAX_DATA_OUT_VECTOR_ENABLE : in std_logic;
-    VECTOR_SOFTMAX_DATA_OUT_SCALAR_ENABLE : in std_logic;
-
-    -- DATA
-    VECTOR_SOFTMAX_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_SOFTMAX_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_SOFTMAX_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_SOFTMAX_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- VECTOR SUMMATION
-    -- CONTROL
-    VECTOR_SUMMATION_START : out std_logic;
-    VECTOR_SUMMATION_READY : in  std_logic;
-
-    VECTOR_SUMMATION_DATA_IN_VECTOR_ENABLE : out std_logic;
-    VECTOR_SUMMATION_DATA_IN_SCALAR_ENABLE : out std_logic;
-
-    VECTOR_SUMMATION_DATA_OUT_VECTOR_ENABLE : in std_logic;
-    VECTOR_SUMMATION_DATA_OUT_SCALAR_ENABLE : in std_logic;
-
-    -- DATA
-    VECTOR_SUMMATION_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_SUMMATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- VECTOR TANH
     -- CONTROL
@@ -381,30 +252,6 @@ entity ntm_function_stimulus is
     MATRIX_COSH_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_COSH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_COSH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- MATRIX COSINE SIMILARITY
-    -- CONTROL
-    MATRIX_COSINE_SIMILARITY_START : out std_logic;
-    MATRIX_COSINE_SIMILARITY_READY : in  std_logic;
-
-    MATRIX_COSINE_SIMILARITY_DATA_A_IN_MATRIX_ENABLE : out std_logic;
-    MATRIX_COSINE_SIMILARITY_DATA_A_IN_VECTOR_ENABLE : out std_logic;
-    MATRIX_COSINE_SIMILARITY_DATA_A_IN_SCALAR_ENABLE : out std_logic;
-    MATRIX_COSINE_SIMILARITY_DATA_B_IN_MATRIX_ENABLE : out std_logic;
-    MATRIX_COSINE_SIMILARITY_DATA_B_IN_VECTOR_ENABLE : out std_logic;
-    MATRIX_COSINE_SIMILARITY_DATA_B_IN_SCALAR_ENABLE : out std_logic;
-
-    MATRIX_COSINE_SIMILARITY_DATA_OUT_MATRIX_ENABLE : in std_logic;
-    MATRIX_COSINE_SIMILARITY_DATA_OUT_VECTOR_ENABLE : in std_logic;
-    MATRIX_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE : in std_logic;
-
-    -- DATA
-    MATRIX_COSINE_SIMILARITY_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_COSINE_SIMILARITY_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_COSINE_SIMILARITY_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_COSINE_SIMILARITY_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_COSINE_SIMILARITY_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_COSINE_SIMILARITY_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- MATRIX EXPONENTIATOR
     -- CONTROL
@@ -457,26 +304,6 @@ entity ntm_function_stimulus is
     MATRIX_LOGARITHM_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_LOGARITHM_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-    -- MATRIX MULTIPLICATION
-    -- CONTROL
-    MATRIX_MULTIPLICATION_START : out std_logic;
-    MATRIX_MULTIPLICATION_READY : in  std_logic;
-
-    MATRIX_MULTIPLICATION_DATA_IN_MATRIX_ENABLE : out std_logic;
-    MATRIX_MULTIPLICATION_DATA_IN_VECTOR_ENABLE : out std_logic;
-    MATRIX_MULTIPLICATION_DATA_IN_SCALAR_ENABLE : out std_logic;
-
-    MATRIX_MULTIPLICATION_DATA_OUT_MATRIX_ENABLE : in std_logic;
-    MATRIX_MULTIPLICATION_DATA_OUT_VECTOR_ENABLE : in std_logic;
-    MATRIX_MULTIPLICATION_DATA_OUT_SCALAR_ENABLE : in std_logic;
-
-    -- DATA
-    MATRIX_MULTIPLICATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_MULTIPLICATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_MULTIPLICATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_MULTIPLICATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_MULTIPLICATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
     -- MATRIX ONEPLUS
     -- CONTROL
     MATRIX_ONEPLUS_START : out std_logic;
@@ -510,46 +337,6 @@ entity ntm_function_stimulus is
     MATRIX_SINH_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_SINH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_SINH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- MATRIX SOFTMAX
-    -- CONTROL
-    MATRIX_SOFTMAX_START : out std_logic;
-    MATRIX_SOFTMAX_READY : in  std_logic;
-
-    MATRIX_SOFTMAX_DATA_IN_MATRIX_ENABLE : out std_logic;
-    MATRIX_SOFTMAX_DATA_IN_VECTOR_ENABLE : out std_logic;
-    MATRIX_SOFTMAX_DATA_IN_SCALAR_ENABLE : out std_logic;
-
-    MATRIX_SOFTMAX_DATA_OUT_MATRIX_ENABLE : in std_logic;
-    MATRIX_SOFTMAX_DATA_OUT_VECTOR_ENABLE : in std_logic;
-    MATRIX_SOFTMAX_DATA_OUT_SCALAR_ENABLE : in std_logic;
-
-    -- DATA
-    MATRIX_SOFTMAX_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_SOFTMAX_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_SOFTMAX_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_SOFTMAX_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_SOFTMAX_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- MATRIX SUMMATION
-    -- CONTROL
-    MATRIX_SUMMATION_START : out std_logic;
-    MATRIX_SUMMATION_READY : in  std_logic;
-
-    MATRIX_SUMMATION_DATA_IN_MATRIX_ENABLE : out std_logic;
-    MATRIX_SUMMATION_DATA_IN_VECTOR_ENABLE : out std_logic;
-    MATRIX_SUMMATION_DATA_IN_SCALAR_ENABLE : out std_logic;
-
-    MATRIX_SUMMATION_DATA_OUT_MATRIX_ENABLE : in std_logic;
-    MATRIX_SUMMATION_DATA_OUT_VECTOR_ENABLE : in std_logic;
-    MATRIX_SUMMATION_DATA_OUT_SCALAR_ENABLE : in std_logic;
-
-    -- DATA
-    MATRIX_SUMMATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_SUMMATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_SUMMATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- MATRIX TANH
     -- CONTROL
@@ -661,41 +448,29 @@ begin
 
   -- SCALAR-FUNCTIONALITY
   SCALAR_COSH_START              <= start_int;
-  SCALAR_COSINE_SIMILARITY_START <= start_int;
   SCALAR_EXPONENTIATOR_START     <= start_int;
   SCALAR_LOGARITHM_START         <= start_int;
   SCALAR_LOGISTIC_START          <= start_int;
-  SCALAR_MULTIPLICATION_START    <= start_int;
   SCALAR_ONEPLUS_START           <= start_int;
   SCALAR_SINH_START              <= start_int;
-  SCALAR_SOFTMAX_START           <= start_int;
-  SCALAR_SUMMATION_START         <= start_int;
   SCALAR_TANH_START              <= start_int;
 
   -- VECTOR-FUNCTIONALITY
   VECTOR_COSH_START              <= start_int;
-  VECTOR_COSINE_SIMILARITY_START <= start_int;
   VECTOR_EXPONENTIATOR_START     <= start_int;
   VECTOR_LOGARITHM_START         <= start_int;
   VECTOR_LOGISTIC_START          <= start_int;
-  VECTOR_MULTIPLICATION_START    <= start_int;
   VECTOR_ONEPLUS_START           <= start_int;
   VECTOR_SINH_START              <= start_int;
-  VECTOR_SOFTMAX_START           <= start_int;
-  VECTOR_SUMMATION_START         <= start_int;
   VECTOR_TANH_START              <= start_int;
 
   -- MATRIX-FUNCTIONALITY
   MATRIX_COSH_START              <= start_int;
-  MATRIX_COSINE_SIMILARITY_START <= start_int;
   MATRIX_EXPONENTIATOR_START     <= start_int;
   MATRIX_LOGARITHM_START         <= start_int;
   MATRIX_LOGISTIC_START          <= start_int;
-  MATRIX_MULTIPLICATION_START    <= start_int;
   MATRIX_ONEPLUS_START           <= start_int;
   MATRIX_SINH_START              <= start_int;
-  MATRIX_SOFTMAX_START           <= start_int;
-  MATRIX_SUMMATION_START         <= start_int;
   MATRIX_TANH_START              <= start_int;
 
   -----------------------------------------------------------------------
@@ -731,107 +506,6 @@ begin
         -------------------------------------------------------------------
 
         SCALAR_COSH_DATA_IN <= TWO_DATA;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_COSINE_TEST         ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      SCALAR_COSINE_SIMILARITY_LENGTH_IN <= THREE_CONTROL;
-
-      if (STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_COSINE_CASE 0       ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE <= '1';
-        SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE <= '1';
-
-        -- DATA
-        SCALAR_COSINE_SIMILARITY_DATA_A_IN <= TWO_DATA;
-        SCALAR_COSINE_SIMILARITY_DATA_B_IN <= ONE_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((SCALAR_COSINE_SIMILARITY_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_COSINE_SIMILARITY_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE <= '1';
-            SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_COSINE_SIMILARITY_DATA_A_IN <= TWO_DATA;
-            SCALAR_COSINE_SIMILARITY_DATA_B_IN <= ONE_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE <= '0';
-            SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit when SCALAR_COSINE_SIMILARITY_READY = '1';
-        end loop;
-      end if;
-
-      if (STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_COSINE_CASE 1       ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE <= '1';
-        SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE <= '1';
-
-        -- DATA
-        SCALAR_COSINE_SIMILARITY_DATA_A_IN <= TWO_DATA;
-        SCALAR_COSINE_SIMILARITY_DATA_B_IN <= TWO_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((SCALAR_COSINE_SIMILARITY_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_COSINE_SIMILARITY_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE <= '1';
-            SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_COSINE_SIMILARITY_DATA_A_IN <= TWO_DATA;
-            SCALAR_COSINE_SIMILARITY_DATA_B_IN <= TWO_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE <= '0';
-            SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit when SCALAR_COSINE_SIMILARITY_READY = '1';
-        end loop;
       end if;
 
       wait for WORKING;
@@ -922,97 +596,6 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_SCALAR_MULTIPLICATION_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_MULTIPLICATION_TEST ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      SCALAR_MULTIPLICATION_LENGTH_IN <= THREE_CONTROL;
-
-      if (STIMULUS_NTM_SCALAR_MULTIPLICATION_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULT_CASE 0         ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        SCALAR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
-
-        -- DATA
-        SCALAR_MULTIPLICATION_DATA_IN <= ONE_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((SCALAR_MULTIPLICATION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_MULTIPLICATION_DATA_IN <= ONE_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            SCALAR_MULTIPLICATION_DATA_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit when SCALAR_MULTIPLICATION_READY = '1';
-        end loop;
-      end if;
-
-      if (STIMULUS_NTM_SCALAR_MULTIPLICATION_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULT_CASE 1         ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        SCALAR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
-
-        -- DATA
-        SCALAR_MULTIPLICATION_DATA_IN <= TWO_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((SCALAR_MULTIPLICATION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_MULTIPLICATION_DATA_IN <= TWO_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            SCALAR_MULTIPLICATION_DATA_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit when SCALAR_MULTIPLICATION_READY = '1';
-        end loop;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
     if (STIMULUS_NTM_SCALAR_ONEPLUS_TEST) then
 
       -------------------------------------------------------------------
@@ -1063,188 +646,6 @@ begin
         -------------------------------------------------------------------
 
         SCALAR_SINH_DATA_IN <= TWO_DATA;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_NTM_SCALAR_SOFTMAX_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_SOFTMAX_TEST        ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      SCALAR_SOFTMAX_LENGTH_IN <= THREE_CONTROL;
-
-      if (STIMULUS_NTM_SCALAR_SOFTMAX_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_SOFTMAX_CASE 0      ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        SCALAR_SOFTMAX_DATA_IN_ENABLE <= '1';
-
-        -- DATA
-        SCALAR_SOFTMAX_DATA_IN <= ONE_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((SCALAR_SOFTMAX_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_SOFTMAX_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_SOFTMAX_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_SOFTMAX_DATA_IN <= ONE_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            SCALAR_SOFTMAX_DATA_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit when SCALAR_SOFTMAX_READY = '1';
-        end loop;
-      end if;
-
-      if (STIMULUS_NTM_SCALAR_SOFTMAX_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_SOFTMAX_CASE 1      ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        SCALAR_SOFTMAX_DATA_IN_ENABLE <= '1';
-
-        -- DATA
-        SCALAR_SOFTMAX_DATA_IN <= TWO_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((SCALAR_SOFTMAX_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_SOFTMAX_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_SOFTMAX_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_SOFTMAX_DATA_IN <= TWO_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            SCALAR_SOFTMAX_DATA_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit when SCALAR_SOFTMAX_READY = '1';
-        end loop;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_NTM_SCALAR_SUMMATION_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_SUMMATION_TEST      ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      SCALAR_SUMMATION_LENGTH_IN <= THREE_CONTROL;
-
-      if (STIMULUS_NTM_SCALAR_SUMMATION_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_SUMMATION_CASE 0    ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        SCALAR_SUMMATION_DATA_IN_ENABLE <= '1';
-
-        -- DATA
-        SCALAR_SUMMATION_DATA_IN <= ONE_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((SCALAR_SUMMATION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_SUMMATION_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_SUMMATION_DATA_IN <= ONE_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            SCALAR_SUMMATION_DATA_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit when SCALAR_SUMMATION_READY = '1';
-        end loop;
-      end if;
-
-      if (STIMULUS_NTM_SCALAR_SUMMATION_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_SUMMATION_CASE 1    ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- CONTROL
-        SCALAR_SUMMATION_DATA_IN_ENABLE <= '1';
-
-        -- DATA
-        SCALAR_SUMMATION_DATA_IN <= TWO_DATA;
-
-        -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-
-        loop
-          if ((SCALAR_SUMMATION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(SCALAR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            SCALAR_SUMMATION_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            SCALAR_SUMMATION_DATA_IN <= TWO_DATA;
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            SCALAR_SUMMATION_DATA_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit when SCALAR_SUMMATION_READY = '1';
-        end loop;
       end if;
 
       wait for WORKING;

@@ -15,6 +15,7 @@ add wave -noupdate /ntm_calculus_testbench/ntm_vector_differentiation_test/vecto
 add wave -noupdate /ntm_calculus_testbench/ntm_vector_differentiation_test/vector_differentiation/LENGTH_IN
 add wave -noupdate /ntm_calculus_testbench/ntm_vector_differentiation_test/vector_differentiation/DATA_IN_ENABLE
 add wave -noupdate /ntm_calculus_testbench/ntm_vector_differentiation_test/vector_differentiation/DATA_IN
+add wave -noupdate /ntm_calculus_testbench/ntm_vector_differentiation_test/vector_differentiation/DATA_ENABLE
 add wave -noupdate /ntm_calculus_testbench/ntm_vector_differentiation_test/vector_differentiation/READY
 add wave -noupdate /ntm_calculus_testbench/ntm_vector_differentiation_test/vector_differentiation/DATA_OUT_ENABLE
 add wave -noupdate /ntm_calculus_testbench/ntm_vector_differentiation_test/vector_differentiation/DATA_OUT
