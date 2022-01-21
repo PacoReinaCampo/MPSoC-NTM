@@ -59,6 +59,33 @@ package ntm_math_pkg is
   -----------------------------------------------------------------------
 
   -- VECTOR
+  component ntm_dot_product is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
+
+      DATA_OUT_ENABLE : out std_logic;
+
+      -- DATA
+      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
   component ntm_vector_convolution is
     generic (
       DATA_SIZE    : integer := 128;
@@ -136,33 +163,6 @@ package ntm_math_pkg is
       -- DATA
       LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
-  component ntm_dot_product is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_A_IN_ENABLE : in std_logic;
-      DATA_B_IN_ENABLE : in std_logic;
-
-      DATA_OUT_ENABLE : out std_logic;
-
-      -- DATA
-      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;

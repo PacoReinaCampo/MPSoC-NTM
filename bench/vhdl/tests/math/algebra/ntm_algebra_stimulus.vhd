@@ -96,6 +96,54 @@ entity ntm_algebra_stimulus is
     VECTOR_CONVOLUTION_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_CONVOLUTION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
+    -- VECTOR COSINE_SIMILARITY
+    -- CONTROL
+    VECTOR_COSINE_SIMILARITY_START : out std_logic;
+    VECTOR_COSINE_SIMILARITY_READY : in  std_logic;
+
+    VECTOR_COSINE_SIMILARITY_DATA_A_IN_ENABLE : out std_logic;
+    VECTOR_COSINE_SIMILARITY_DATA_B_IN_ENABLE : out std_logic;
+
+    VECTOR_COSINE_SIMILARITY_DATA_OUT_ENABLE : in std_logic;
+
+    -- DATA
+    VECTOR_COSINE_SIMILARITY_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_COSINE_SIMILARITY_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_COSINE_SIMILARITY_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_COSINE_SIMILARITY_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- VECTOR MULTIPLICATION
+    -- CONTROL
+    VECTOR_MULTIPLICATION_START : out std_logic;
+    VECTOR_MULTIPLICATION_READY : in  std_logic;
+
+    VECTOR_MULTIPLICATION_DATA_IN_ENABLE : out std_logic;
+
+    VECTOR_MULTIPLICATION_DATA_ENABLE : in std_logic;
+
+    VECTOR_MULTIPLICATION_DATA_OUT_ENABLE : in std_logic;
+
+    -- DATA
+    VECTOR_MULTIPLICATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_MULTIPLICATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_MULTIPLICATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- VECTOR SUMMATION
+    -- CONTROL
+    VECTOR_SUMMATION_START : out std_logic;
+    VECTOR_SUMMATION_READY : in  std_logic;
+
+    VECTOR_SUMMATION_DATA_IN_ENABLE : out std_logic;
+
+    VECTOR_SUMMATION_DATA_ENABLE : in std_logic;
+
+    VECTOR_SUMMATION_DATA_OUT_ENABLE : in std_logic;
+
+    -- DATA
+    VECTOR_SUMMATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
     -- VECTOR TRANSPOSE
     -- CONTROL
     VECTOR_TRANSPOSE_START : out std_logic;
@@ -111,31 +159,6 @@ entity ntm_algebra_stimulus is
     VECTOR_TRANSPOSE_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     VECTOR_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- MATRIX PRODUCT
-    -- CONTROL
-    MATRIX_PRODUCT_START : out std_logic;
-    MATRIX_PRODUCT_READY : in  std_logic;
-
-    MATRIX_PRODUCT_DATA_A_IN_I_ENABLE : out std_logic;
-    MATRIX_PRODUCT_DATA_A_IN_J_ENABLE : out std_logic;
-    MATRIX_PRODUCT_DATA_B_IN_I_ENABLE : out std_logic;
-    MATRIX_PRODUCT_DATA_B_IN_J_ENABLE : out std_logic;
-
-    MATRIX_PRODUCT_DATA_I_ENABLE : in std_logic;
-    MATRIX_PRODUCT_DATA_J_ENABLE : in std_logic;
-
-    MATRIX_PRODUCT_DATA_OUT_I_ENABLE : in std_logic;
-    MATRIX_PRODUCT_DATA_OUT_J_ENABLE : in std_logic;
-
-    -- DATA
-    MATRIX_PRODUCT_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_PRODUCT_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_PRODUCT_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_PRODUCT_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- MATRIX CONVOLUTION
     -- CONTROL
@@ -162,6 +185,96 @@ entity ntm_algebra_stimulus is
     MATRIX_CONVOLUTION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_CONVOLUTION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
+    -- MATRIX COSINE_SIMILARITY
+    -- CONTROL
+    MATRIX_COSINE_SIMILARITY_START : out std_logic;
+    MATRIX_COSINE_SIMILARITY_READY : in  std_logic;
+
+    MATRIX_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE : out std_logic;
+    MATRIX_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE : out std_logic;
+    MATRIX_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE : out std_logic;
+    MATRIX_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE : out std_logic;
+
+    MATRIX_COSINE_SIMILARITY_DATA_I_ENABLE : in std_logic;
+    MATRIX_COSINE_SIMILARITY_DATA_J_ENABLE : in std_logic;
+
+    MATRIX_COSINE_SIMILARITY_DATA_OUT_I_ENABLE : in std_logic;
+    MATRIX_COSINE_SIMILARITY_DATA_OUT_J_ENABLE : in std_logic;
+
+    -- DATA
+    MATRIX_COSINE_SIMILARITY_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_COSINE_SIMILARITY_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_COSINE_SIMILARITY_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_COSINE_SIMILARITY_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_COSINE_SIMILARITY_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_COSINE_SIMILARITY_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_COSINE_SIMILARITY_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- MATRIX MULTIPLICATION
+    -- CONTROL
+    MATRIX_MULTIPLICATION_START : out std_logic;
+    MATRIX_MULTIPLICATION_READY : in  std_logic;
+
+    MATRIX_MULTIPLICATION_DATA_IN_I_ENABLE : out std_logic;
+    MATRIX_MULTIPLICATION_DATA_IN_J_ENABLE : out std_logic;
+
+    MATRIX_MULTIPLICATION_DATA_I_ENABLE : in std_logic;
+    MATRIX_MULTIPLICATION_DATA_J_ENABLE : in std_logic;
+
+    MATRIX_MULTIPLICATION_DATA_OUT_I_ENABLE : in std_logic;
+    MATRIX_MULTIPLICATION_DATA_OUT_J_ENABLE : in std_logic;
+
+    -- DATA
+    MATRIX_MULTIPLICATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_MULTIPLICATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_MULTIPLICATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_MULTIPLICATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- MATRIX PRODUCT
+    -- CONTROL
+    MATRIX_PRODUCT_START : out std_logic;
+    MATRIX_PRODUCT_READY : in  std_logic;
+
+    MATRIX_PRODUCT_DATA_A_IN_I_ENABLE : out std_logic;
+    MATRIX_PRODUCT_DATA_A_IN_J_ENABLE : out std_logic;
+    MATRIX_PRODUCT_DATA_B_IN_I_ENABLE : out std_logic;
+    MATRIX_PRODUCT_DATA_B_IN_J_ENABLE : out std_logic;
+
+    MATRIX_PRODUCT_DATA_I_ENABLE : in std_logic;
+    MATRIX_PRODUCT_DATA_J_ENABLE : in std_logic;
+
+    MATRIX_PRODUCT_DATA_OUT_I_ENABLE : in std_logic;
+    MATRIX_PRODUCT_DATA_OUT_J_ENABLE : in std_logic;
+
+    -- DATA
+    MATRIX_PRODUCT_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_PRODUCT_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_PRODUCT_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_PRODUCT_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- MATRIX SUMMATION
+    -- CONTROL
+    MATRIX_SUMMATION_START : out std_logic;
+    MATRIX_SUMMATION_READY : in  std_logic;
+
+    MATRIX_SUMMATION_DATA_IN_I_ENABLE : out std_logic;
+    MATRIX_SUMMATION_DATA_IN_J_ENABLE : out std_logic;
+
+    MATRIX_SUMMATION_DATA_I_ENABLE : in std_logic;
+    MATRIX_SUMMATION_DATA_J_ENABLE : in std_logic;
+
+    MATRIX_SUMMATION_DATA_OUT_I_ENABLE : in std_logic;
+    MATRIX_SUMMATION_DATA_OUT_J_ENABLE : in std_logic;
+
+    -- DATA
+    MATRIX_SUMMATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_SUMMATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
     -- MATRIX TRANSPOSE
     -- CONTROL
     MATRIX_TRANSPOSE_START : out std_logic;
@@ -181,6 +294,92 @@ entity ntm_algebra_stimulus is
     MATRIX_TRANSPOSE_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- TENSOR CONVOLUTION
+    -- CONTROL
+    TENSOR_CONVOLUTION_START : out std_logic;
+    TENSOR_CONVOLUTION_READY : in  std_logic;
+
+    TENSOR_CONVOLUTION_DATA_A_IN_I_ENABLE : out std_logic;
+    TENSOR_CONVOLUTION_DATA_A_IN_J_ENABLE : out std_logic;
+    TENSOR_CONVOLUTION_DATA_A_IN_K_ENABLE : out std_logic;
+    TENSOR_CONVOLUTION_DATA_B_IN_I_ENABLE : out std_logic;
+    TENSOR_CONVOLUTION_DATA_B_IN_J_ENABLE : out std_logic;
+    TENSOR_CONVOLUTION_DATA_B_IN_K_ENABLE : out std_logic;
+
+    TENSOR_CONVOLUTION_DATA_I_ENABLE : in std_logic;
+    TENSOR_CONVOLUTION_DATA_J_ENABLE : in std_logic;
+    TENSOR_CONVOLUTION_DATA_K_ENABLE : in std_logic;
+
+    TENSOR_CONVOLUTION_DATA_OUT_I_ENABLE : in std_logic;
+    TENSOR_CONVOLUTION_DATA_OUT_J_ENABLE : in std_logic;
+    TENSOR_CONVOLUTION_DATA_OUT_K_ENABLE : in std_logic;
+
+    -- DATA
+    TENSOR_CONVOLUTION_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_CONVOLUTION_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_CONVOLUTION_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_CONVOLUTION_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_CONVOLUTION_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_CONVOLUTION_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_CONVOLUTION_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_CONVOLUTION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_CONVOLUTION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- TENSOR COSINE_SIMILARITY
+    -- CONTROL
+    TENSOR_COSINE_SIMILARITY_START : out std_logic;
+    TENSOR_COSINE_SIMILARITY_READY : in  std_logic;
+
+    TENSOR_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE : out std_logic;
+    TENSOR_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE : out std_logic;
+    TENSOR_COSINE_SIMILARITY_DATA_A_IN_K_ENABLE : out std_logic;
+    TENSOR_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE : out std_logic;
+    TENSOR_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE : out std_logic;
+    TENSOR_COSINE_SIMILARITY_DATA_B_IN_K_ENABLE : out std_logic;
+
+    TENSOR_COSINE_SIMILARITY_DATA_I_ENABLE : in std_logic;
+    TENSOR_COSINE_SIMILARITY_DATA_J_ENABLE : in std_logic;
+    TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE : in std_logic;
+
+    TENSOR_COSINE_SIMILARITY_DATA_OUT_I_ENABLE : in std_logic;
+    TENSOR_COSINE_SIMILARITY_DATA_OUT_J_ENABLE : in std_logic;
+    TENSOR_COSINE_SIMILARITY_DATA_OUT_K_ENABLE : in std_logic;
+
+    -- DATA
+    TENSOR_COSINE_SIMILARITY_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_COSINE_SIMILARITY_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_COSINE_SIMILARITY_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_COSINE_SIMILARITY_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_COSINE_SIMILARITY_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_COSINE_SIMILARITY_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_COSINE_SIMILARITY_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_COSINE_SIMILARITY_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_COSINE_SIMILARITY_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- TENSOR MULTIPLICATION
+    -- CONTROL
+    TENSOR_MULTIPLICATION_START : out std_logic;
+    TENSOR_MULTIPLICATION_READY : in  std_logic;
+
+    TENSOR_MULTIPLICATION_DATA_IN_I_ENABLE : out std_logic;
+    TENSOR_MULTIPLICATION_DATA_IN_J_ENABLE : out std_logic;
+    TENSOR_MULTIPLICATION_DATA_IN_K_ENABLE : out std_logic;
+
+    TENSOR_MULTIPLICATION_DATA_I_ENABLE : in std_logic;
+    TENSOR_MULTIPLICATION_DATA_J_ENABLE : in std_logic;
+    TENSOR_MULTIPLICATION_DATA_K_ENABLE : in std_logic;
+
+    TENSOR_MULTIPLICATION_DATA_OUT_I_ENABLE : in std_logic;
+    TENSOR_MULTIPLICATION_DATA_OUT_J_ENABLE : in std_logic;
+    TENSOR_MULTIPLICATION_DATA_OUT_K_ENABLE : in std_logic;
+
+    -- DATA
+    TENSOR_MULTIPLICATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_MULTIPLICATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_MULTIPLICATION_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_MULTIPLICATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_MULTIPLICATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- TENSOR PRODUCT
     -- CONTROL
@@ -213,36 +412,29 @@ entity ntm_algebra_stimulus is
     TENSOR_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-    -- TENSOR CONVOLUTION
+    -- TENSOR SUMMATION
     -- CONTROL
-    TENSOR_CONVOLUTION_START : out std_logic;
-    TENSOR_CONVOLUTION_READY : in  std_logic;
+    TENSOR_SUMMATION_START : out std_logic;
+    TENSOR_SUMMATION_READY : in  std_logic;
 
-    TENSOR_CONVOLUTION_DATA_A_IN_I_ENABLE : out std_logic;
-    TENSOR_CONVOLUTION_DATA_A_IN_J_ENABLE : out std_logic;
-    TENSOR_CONVOLUTION_DATA_A_IN_K_ENABLE : out std_logic;
-    TENSOR_CONVOLUTION_DATA_B_IN_I_ENABLE : out std_logic;
-    TENSOR_CONVOLUTION_DATA_B_IN_J_ENABLE : out std_logic;
-    TENSOR_CONVOLUTION_DATA_B_IN_K_ENABLE : out std_logic;
+    TENSOR_SUMMATION_DATA_IN_I_ENABLE : out std_logic;
+    TENSOR_SUMMATION_DATA_IN_J_ENABLE : out std_logic;
+    TENSOR_SUMMATION_DATA_IN_K_ENABLE : out std_logic;
 
-    TENSOR_CONVOLUTION_DATA_I_ENABLE : in std_logic;
-    TENSOR_CONVOLUTION_DATA_J_ENABLE : in std_logic;
-    TENSOR_CONVOLUTION_DATA_K_ENABLE : in std_logic;
+    TENSOR_SUMMATION_DATA_I_ENABLE : in std_logic;
+    TENSOR_SUMMATION_DATA_J_ENABLE : in std_logic;
+    TENSOR_SUMMATION_DATA_K_ENABLE : in std_logic;
 
-    TENSOR_CONVOLUTION_DATA_OUT_I_ENABLE : in std_logic;
-    TENSOR_CONVOLUTION_DATA_OUT_J_ENABLE : in std_logic;
-    TENSOR_CONVOLUTION_DATA_OUT_K_ENABLE : in std_logic;
+    TENSOR_SUMMATION_DATA_OUT_I_ENABLE : in std_logic;
+    TENSOR_SUMMATION_DATA_OUT_J_ENABLE : in std_logic;
+    TENSOR_SUMMATION_DATA_OUT_K_ENABLE : in std_logic;
 
     -- DATA
-    TENSOR_CONVOLUTION_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_CONVOLUTION_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_CONVOLUTION_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_CONVOLUTION_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_CONVOLUTION_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_CONVOLUTION_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_CONVOLUTION_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_CONVOLUTION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_CONVOLUTION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_SUMMATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_SUMMATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_SUMMATION_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- TENSOR TRANSPOSE
     -- CONTROL
@@ -360,19 +552,28 @@ begin
   end process;
 
   -- VECTOR-FUNCTIONALITY
-  DOT_PRODUCT_START        <= start_int;
-  VECTOR_CONVOLUTION_START <= start_int;
-  VECTOR_TRANSPOSE_START   <= start_int;
+  DOT_PRODUCT_START              <= start_int;
+  VECTOR_CONVOLUTION_START       <= start_int;
+  VECTOR_COSINE_SIMILARITY_START <= start_int;
+  VECTOR_MULTIPLICATION_START    <= start_int;
+  VECTOR_SUMMATION_START         <= start_int;
+  VECTOR_TRANSPOSE_START         <= start_int;
 
   -- MATRIX-FUNCTIONALITY
-  MATRIX_PRODUCT_START     <= start_int;
-  MATRIX_CONVOLUTION_START <= start_int;
-  MATRIX_TRANSPOSE_START   <= start_int;
+  MATRIX_CONVOLUTION_START       <= start_int;
+  MATRIX_COSINE_SIMILARITY_START <= start_int;
+  MATRIX_MULTIPLICATION_START    <= start_int;
+  MATRIX_PRODUCT_START           <= start_int;
+  MATRIX_SUMMATION_START         <= start_int;
+  MATRIX_TRANSPOSE_START         <= start_int;
 
   -- TENSOR-FUNCTIONALITY
-  TENSOR_PRODUCT_START     <= start_int;
-  TENSOR_CONVOLUTION_START <= start_int;
-  TENSOR_TRANSPOSE_START   <= start_int;
+  TENSOR_CONVOLUTION_START       <= start_int;
+  TENSOR_COSINE_SIMILARITY_START <= start_int;
+  TENSOR_MULTIPLICATION_START    <= start_int;
+  TENSOR_PRODUCT_START           <= start_int;
+  TENSOR_SUMMATION_START         <= start_int;
+  TENSOR_TRANSPOSE_START         <= start_int;
 
   -----------------------------------------------------------------------
   -- STIMULUS
@@ -611,6 +812,327 @@ begin
 
     end if;
 
+    if (STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_COSINE_TEST         ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      VECTOR_COSINE_SIMILARITY_LENGTH_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_COSINE_CASE 0       ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        VECTOR_COSINE_SIMILARITY_DATA_A_IN <= ZERO_DATA;
+        VECTOR_COSINE_SIMILARITY_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+
+        VECTOR_COSINE_SIMILARITY_FIRST_RUN : loop
+          if (VECTOR_COSINE_SIMILARITY_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_COSINE_SIMILARITY_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_COSINE_SIMILARITY_DATA_A_IN_ENABLE <= '1';
+            VECTOR_COSINE_SIMILARITY_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_COSINE_SIMILARITY_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            VECTOR_COSINE_SIMILARITY_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_COSINE_SIMILARITY_DATA_OUT_ENABLE = '1' or VECTOR_COSINE_SIMILARITY_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_COSINE_SIMILARITY_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_COSINE_SIMILARITY_DATA_A_IN_ENABLE <= '1';
+            VECTOR_COSINE_SIMILARITY_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_COSINE_SIMILARITY_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            VECTOR_COSINE_SIMILARITY_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            VECTOR_COSINE_SIMILARITY_DATA_A_IN_ENABLE <= '0';
+            VECTOR_COSINE_SIMILARITY_DATA_B_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit VECTOR_COSINE_SIMILARITY_FIRST_RUN when VECTOR_COSINE_SIMILARITY_READY = '1';
+        end loop VECTOR_COSINE_SIMILARITY_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_COSINE_CASE 1       ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        VECTOR_COSINE_SIMILARITY_DATA_A_IN <= ZERO_DATA;
+        VECTOR_COSINE_SIMILARITY_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+
+        VECTOR_COSINE_SIMILARITY_SECOND_RUN : loop
+          if (VECTOR_COSINE_SIMILARITY_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_COSINE_SIMILARITY_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_COSINE_SIMILARITY_DATA_A_IN_ENABLE <= '1';
+            VECTOR_COSINE_SIMILARITY_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_COSINE_SIMILARITY_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            VECTOR_COSINE_SIMILARITY_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_COSINE_SIMILARITY_DATA_OUT_ENABLE = '1' or VECTOR_COSINE_SIMILARITY_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_COSINE_SIMILARITY_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_COSINE_SIMILARITY_DATA_A_IN_ENABLE <= '1';
+            VECTOR_COSINE_SIMILARITY_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_COSINE_SIMILARITY_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            VECTOR_COSINE_SIMILARITY_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            VECTOR_COSINE_SIMILARITY_DATA_A_IN_ENABLE <= '0';
+            VECTOR_COSINE_SIMILARITY_DATA_B_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit VECTOR_COSINE_SIMILARITY_SECOND_RUN when VECTOR_COSINE_SIMILARITY_READY = '1';
+        end loop VECTOR_COSINE_SIMILARITY_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_VECTOR_MULTIPLICATION_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_MULTIPLICATION_TEST ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      VECTOR_MULTIPLICATION_LENGTH_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_VECTOR_MULTIPLICATION_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_MULTIPLICATIO_CASE 0";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        VECTOR_MULTIPLICATION_DATA_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+
+        VECTOR_MULTIPLICATION_FIRST_RUN : loop
+          if (VECTOR_MULTIPLICATION_DATA_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_MULTIPLICATION_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_MULTIPLICATION_DATA_ENABLE = '1' or VECTOR_MULTIPLICATION_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_MULTIPLICATION_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            VECTOR_MULTIPLICATION_DATA_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit VECTOR_MULTIPLICATION_FIRST_RUN when VECTOR_MULTIPLICATION_READY = '1';
+        end loop VECTOR_MULTIPLICATION_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_NTM_VECTOR_MULTIPLICATION_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_MULTIPLICATIO_CASE 1";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        VECTOR_MULTIPLICATION_DATA_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+
+        VECTOR_MULTIPLICATION_SECOND_RUN : loop
+          if ((VECTOR_MULTIPLICATION_DATA_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_MULTIPLICATION_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif (((VECTOR_MULTIPLICATION_DATA_ENABLE = '1') or (VECTOR_MULTIPLICATION_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_MULTIPLICATION_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            VECTOR_MULTIPLICATION_DATA_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit VECTOR_MULTIPLICATION_SECOND_RUN when VECTOR_MULTIPLICATION_READY = '1';
+        end loop VECTOR_MULTIPLICATION_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_VECTOR_SUMMATION_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_SUMMATION_TEST      ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      VECTOR_SUMMATION_LENGTH_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_VECTOR_SUMMATION_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_SUMMATION_CASE 0    ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        VECTOR_SUMMATION_DATA_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+
+        VECTOR_SUMMATION_FIRST_RUN : loop
+          if (VECTOR_SUMMATION_DATA_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_SUMMATION_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_SUMMATION_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_SUMMATION_DATA_ENABLE = '1' or VECTOR_SUMMATION_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_SUMMATION_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_SUMMATION_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            VECTOR_SUMMATION_DATA_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit VECTOR_SUMMATION_FIRST_RUN when VECTOR_SUMMATION_READY = '1';
+        end loop VECTOR_SUMMATION_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_NTM_VECTOR_SUMMATION_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_SUMMATION_CASE 1    ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        VECTOR_SUMMATION_DATA_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+
+        VECTOR_SUMMATION_SECOND_RUN : loop
+          if ((VECTOR_SUMMATION_DATA_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_SUMMATION_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_SUMMATION_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif (((VECTOR_SUMMATION_DATA_ENABLE = '1') or (VECTOR_SUMMATION_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_SUMMATION_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_SUMMATION_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            VECTOR_SUMMATION_DATA_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit VECTOR_SUMMATION_SECOND_RUN when VECTOR_SUMMATION_READY = '1';
+        end loop VECTOR_SUMMATION_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
     if (STIMULUS_NTM_VECTOR_TRANSPOSE_TEST) then
 
       -------------------------------------------------------------------
@@ -708,164 +1230,6 @@ begin
           -- CONTROL
           exit VECTOR_TRANSPOSE_SECOND_RUN when VECTOR_TRANSPOSE_READY = '1';
         end loop VECTOR_TRANSPOSE_SECOND_RUN;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_NTM_MATRIX_PRODUCT_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_PRODUCT_TEST        ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      MATRIX_PRODUCT_SIZE_A_I_IN <= THREE_CONTROL;
-      MATRIX_PRODUCT_SIZE_A_J_IN <= THREE_CONTROL;
-      MATRIX_PRODUCT_SIZE_B_I_IN <= THREE_CONTROL;
-      MATRIX_PRODUCT_SIZE_B_J_IN <= THREE_CONTROL;
-
-      if (STIMULUS_NTM_MATRIX_PRODUCT_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_PRODUCT_CASE 0      ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        MATRIX_PRODUCT_DATA_A_IN <= ZERO_DATA;
-        MATRIX_PRODUCT_DATA_B_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-        index_j_loop <= ZERO_CONTROL;
-
-        MATRIX_PRODUCT_FIRST_RUN : loop
-          if (MATRIX_PRODUCT_DATA_I_ENABLE = '1' and MATRIX_PRODUCT_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-
-            -- CONTROL
-            MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
-            MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
-            MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-          elsif (MATRIX_PRODUCT_DATA_I_ENABLE = '1' and MATRIX_PRODUCT_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-
-            -- CONTROL
-            MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
-            MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
-            MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-          elsif (MATRIX_PRODUCT_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-
-            -- CONTROL
-            MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-          else
-            -- CONTROL
-            MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '0';
-            MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '0';
-            MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '0';
-            MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '0';
-          end if;
-
-          -- LOOP
-          if (MATRIX_PRODUCT_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= ZERO_CONTROL;
-            index_j_loop <= ZERO_CONTROL;
-          elsif (MATRIX_PRODUCT_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_PRODUCT_DATA_J_ENABLE = '1' or MATRIX_PRODUCT_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit MATRIX_PRODUCT_FIRST_RUN when MATRIX_PRODUCT_READY = '1';
-        end loop MATRIX_PRODUCT_FIRST_RUN;
-      end if;
-
-      if (STIMULUS_NTM_MATRIX_PRODUCT_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_PRODUCT_CASE 1      ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        MATRIX_PRODUCT_DATA_A_IN <= ZERO_DATA;
-        MATRIX_PRODUCT_DATA_B_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-        index_j_loop <= ZERO_CONTROL;
-
-        MATRIX_PRODUCT_SECOND_RUN : loop
-          if (MATRIX_PRODUCT_DATA_I_ENABLE = '1' and MATRIX_PRODUCT_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-
-            -- CONTROL
-            MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
-            MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
-            MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-          elsif (MATRIX_PRODUCT_DATA_I_ENABLE = '1' and MATRIX_PRODUCT_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-
-            -- CONTROL
-            MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
-            MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
-            MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-          elsif (MATRIX_PRODUCT_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-            MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
-
-            -- CONTROL
-            MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-          else
-            -- CONTROL
-            MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '0';
-            MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '0';
-            MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '0';
-            MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '0';
-          end if;
-
-          -- LOOP
-          if (MATRIX_PRODUCT_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= ZERO_CONTROL;
-            index_j_loop <= ZERO_CONTROL;
-          elsif (MATRIX_PRODUCT_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_PRODUCT_DATA_J_ENABLE = '1' or MATRIX_PRODUCT_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit MATRIX_PRODUCT_SECOND_RUN when MATRIX_PRODUCT_READY = '1';
-        end loop MATRIX_PRODUCT_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -1030,6 +1394,590 @@ begin
 
     end if;
 
+    if (STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_COSINE_TEST         ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      MATRIX_COSINE_SIMILARITY_SIZE_A_I_IN <= THREE_CONTROL;
+      MATRIX_COSINE_SIMILARITY_SIZE_A_J_IN <= THREE_CONTROL;
+      MATRIX_COSINE_SIMILARITY_SIZE_B_I_IN <= THREE_CONTROL;
+      MATRIX_COSINE_SIMILARITY_SIZE_B_J_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_COSINE_CASE 0       ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        MATRIX_COSINE_SIMILARITY_DATA_A_IN <= ZERO_DATA;
+        MATRIX_COSINE_SIMILARITY_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+
+        MATRIX_COSINE_SIMILARITY_FIRST_RUN : loop
+          if (MATRIX_COSINE_SIMILARITY_DATA_I_ENABLE = '1' and MATRIX_COSINE_SIMILARITY_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_COSINE_SIMILARITY_DATA_I_ENABLE = '1' and MATRIX_COSINE_SIMILARITY_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_COSINE_SIMILARITY_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE <= '1';
+          else
+            -- CONTROL
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE <= '0';
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE <= '0';
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE <= '0';
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (MATRIX_COSINE_SIMILARITY_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_COSINE_SIMILARITY_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_COSINE_SIMILARITY_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_COSINE_SIMILARITY_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_COSINE_SIMILARITY_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_COSINE_SIMILARITY_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_COSINE_SIMILARITY_DATA_J_ENABLE = '1' or MATRIX_COSINE_SIMILARITY_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_COSINE_SIMILARITY_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit MATRIX_COSINE_SIMILARITY_FIRST_RUN when MATRIX_COSINE_SIMILARITY_READY = '1';
+        end loop MATRIX_COSINE_SIMILARITY_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_COSINE_CASE 1       ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        MATRIX_COSINE_SIMILARITY_DATA_A_IN <= ZERO_DATA;
+        MATRIX_COSINE_SIMILARITY_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+
+        MATRIX_COSINE_SIMILARITY_SECOND_RUN : loop
+          if (MATRIX_COSINE_SIMILARITY_DATA_I_ENABLE = '1' and MATRIX_COSINE_SIMILARITY_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_COSINE_SIMILARITY_DATA_I_ENABLE = '1' and MATRIX_COSINE_SIMILARITY_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_COSINE_SIMILARITY_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE <= '1';
+          else
+            -- CONTROL
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE <= '0';
+            MATRIX_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE <= '0';
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE <= '0';
+            MATRIX_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (MATRIX_COSINE_SIMILARITY_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_COSINE_SIMILARITY_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_COSINE_SIMILARITY_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_COSINE_SIMILARITY_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_COSINE_SIMILARITY_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_COSINE_SIMILARITY_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_COSINE_SIMILARITY_DATA_J_ENABLE = '1' or MATRIX_COSINE_SIMILARITY_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_COSINE_SIMILARITY_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit MATRIX_COSINE_SIMILARITY_SECOND_RUN when MATRIX_COSINE_SIMILARITY_READY = '1';
+        end loop MATRIX_COSINE_SIMILARITY_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_MATRIX_MULTIPLICATION_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_MULTIPLICATION_TEST ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      MATRIX_MULTIPLICATION_SIZE_I_IN <= THREE_CONTROL;
+      MATRIX_MULTIPLICATION_SIZE_J_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_MATRIX_MULTIPLICATION_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_MULTIPLICATIO_CASE 0";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        MATRIX_MULTIPLICATION_DATA_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+
+        MATRIX_MULTIPLICATION_FIRST_RUN : loop
+          if (MATRIX_MULTIPLICATION_DATA_I_ENABLE = '1' and MATRIX_MULTIPLICATION_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MULTIPLICATION_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_MULTIPLICATION_DATA_IN_I_ENABLE <= '1';
+            MATRIX_MULTIPLICATION_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_MULTIPLICATION_DATA_I_ENABLE = '1' and MATRIX_MULTIPLICATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MULTIPLICATION_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_MULTIPLICATION_DATA_IN_I_ENABLE <= '1';
+            MATRIX_MULTIPLICATION_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_MULTIPLICATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MULTIPLICATION_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_MULTIPLICATION_DATA_IN_J_ENABLE <= '1';
+          else
+            -- CONTROL
+            MATRIX_MULTIPLICATION_DATA_IN_I_ENABLE <= '0';
+            MATRIX_MULTIPLICATION_DATA_IN_J_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (MATRIX_MULTIPLICATION_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_MULTIPLICATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MULTIPLICATION_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_MULTIPLICATION_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_MULTIPLICATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MULTIPLICATION_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_MULTIPLICATION_DATA_J_ENABLE = '1' or MATRIX_MULTIPLICATION_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_MULTIPLICATION_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit MATRIX_MULTIPLICATION_FIRST_RUN when MATRIX_MULTIPLICATION_READY = '1';
+        end loop MATRIX_MULTIPLICATION_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_NTM_MATRIX_MULTIPLICATION_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_MULTIPLICATIO_CASE 1";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        MATRIX_MULTIPLICATION_DATA_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+
+        MATRIX_MULTIPLICATION_SECOND_RUN : loop
+          if (MATRIX_MULTIPLICATION_DATA_I_ENABLE = '1' and MATRIX_MULTIPLICATION_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MULTIPLICATION_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_MULTIPLICATION_DATA_IN_I_ENABLE <= '1';
+            MATRIX_MULTIPLICATION_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_MULTIPLICATION_DATA_I_ENABLE = '1' and MATRIX_MULTIPLICATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MULTIPLICATION_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_MULTIPLICATION_DATA_IN_I_ENABLE <= '1';
+            MATRIX_MULTIPLICATION_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_MULTIPLICATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MULTIPLICATION_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_MULTIPLICATION_DATA_IN_J_ENABLE <= '1';
+          else
+            -- CONTROL
+            MATRIX_MULTIPLICATION_DATA_IN_I_ENABLE <= '0';
+            MATRIX_MULTIPLICATION_DATA_IN_J_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (MATRIX_MULTIPLICATION_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_MULTIPLICATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MULTIPLICATION_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_MULTIPLICATION_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_MULTIPLICATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MULTIPLICATION_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_MULTIPLICATION_DATA_J_ENABLE = '1' or MATRIX_MULTIPLICATION_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_MULTIPLICATION_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit MATRIX_MULTIPLICATION_SECOND_RUN when MATRIX_MULTIPLICATION_READY = '1';
+        end loop MATRIX_MULTIPLICATION_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_MATRIX_PRODUCT_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_PRODUCT_TEST        ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      MATRIX_PRODUCT_SIZE_A_I_IN <= THREE_CONTROL;
+      MATRIX_PRODUCT_SIZE_A_J_IN <= THREE_CONTROL;
+      MATRIX_PRODUCT_SIZE_B_I_IN <= THREE_CONTROL;
+      MATRIX_PRODUCT_SIZE_B_J_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_MATRIX_PRODUCT_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_PRODUCT_CASE 0      ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        MATRIX_PRODUCT_DATA_A_IN <= ZERO_DATA;
+        MATRIX_PRODUCT_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+
+        MATRIX_PRODUCT_FIRST_RUN : loop
+          if (MATRIX_PRODUCT_DATA_I_ENABLE = '1' and MATRIX_PRODUCT_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_PRODUCT_DATA_I_ENABLE = '1' and MATRIX_PRODUCT_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_PRODUCT_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
+          else
+            -- CONTROL
+            MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '0';
+            MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '0';
+            MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '0';
+            MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (MATRIX_PRODUCT_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_PRODUCT_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_PRODUCT_DATA_J_ENABLE = '1' or MATRIX_PRODUCT_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit MATRIX_PRODUCT_FIRST_RUN when MATRIX_PRODUCT_READY = '1';
+        end loop MATRIX_PRODUCT_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_NTM_MATRIX_PRODUCT_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_PRODUCT_CASE 1      ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        MATRIX_PRODUCT_DATA_A_IN <= ZERO_DATA;
+        MATRIX_PRODUCT_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+
+        MATRIX_PRODUCT_SECOND_RUN : loop
+          if (MATRIX_PRODUCT_DATA_I_ENABLE = '1' and MATRIX_PRODUCT_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_PRODUCT_DATA_I_ENABLE = '1' and MATRIX_PRODUCT_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_PRODUCT_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_PRODUCT_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+            MATRIX_PRODUCT_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
+          else
+            -- CONTROL
+            MATRIX_PRODUCT_DATA_A_IN_I_ENABLE <= '0';
+            MATRIX_PRODUCT_DATA_A_IN_J_ENABLE <= '0';
+            MATRIX_PRODUCT_DATA_B_IN_I_ENABLE <= '0';
+            MATRIX_PRODUCT_DATA_B_IN_J_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (MATRIX_PRODUCT_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_PRODUCT_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_PRODUCT_DATA_J_ENABLE = '1' or MATRIX_PRODUCT_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_PRODUCT_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit MATRIX_PRODUCT_SECOND_RUN when MATRIX_PRODUCT_READY = '1';
+        end loop MATRIX_PRODUCT_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_MATRIX_SUMMATION_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_SUMMATION_TEST      ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      MATRIX_SUMMATION_SIZE_I_IN <= THREE_CONTROL;
+      MATRIX_SUMMATION_SIZE_J_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_MATRIX_SUMMATION_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_SUMMATION_CASE 0    ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        MATRIX_SUMMATION_DATA_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+
+        MATRIX_SUMMATION_FIRST_RUN : loop
+          if (MATRIX_SUMMATION_DATA_I_ENABLE = '1' and MATRIX_SUMMATION_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_SUMMATION_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_SUMMATION_DATA_IN_I_ENABLE <= '1';
+            MATRIX_SUMMATION_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_SUMMATION_DATA_I_ENABLE = '1' and MATRIX_SUMMATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_SUMMATION_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_SUMMATION_DATA_IN_I_ENABLE <= '1';
+            MATRIX_SUMMATION_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_SUMMATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_SUMMATION_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_SUMMATION_DATA_IN_J_ENABLE <= '1';
+          else
+            -- CONTROL
+            MATRIX_SUMMATION_DATA_IN_I_ENABLE <= '0';
+            MATRIX_SUMMATION_DATA_IN_J_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (MATRIX_SUMMATION_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_SUMMATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_SUMMATION_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_SUMMATION_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_SUMMATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_SUMMATION_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_SUMMATION_DATA_J_ENABLE = '1' or MATRIX_SUMMATION_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_SUMMATION_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit MATRIX_SUMMATION_FIRST_RUN when MATRIX_SUMMATION_READY = '1';
+        end loop MATRIX_SUMMATION_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_NTM_MATRIX_SUMMATION_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_SUMMATION_CASE 1    ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        MATRIX_SUMMATION_DATA_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+
+        MATRIX_SUMMATION_SECOND_RUN : loop
+          if (MATRIX_SUMMATION_DATA_I_ENABLE = '1' and MATRIX_SUMMATION_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_SUMMATION_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_SUMMATION_DATA_IN_I_ENABLE <= '1';
+            MATRIX_SUMMATION_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_SUMMATION_DATA_I_ENABLE = '1' and MATRIX_SUMMATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_SUMMATION_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_SUMMATION_DATA_IN_I_ENABLE <= '1';
+            MATRIX_SUMMATION_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_SUMMATION_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_SUMMATION_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)));
+
+            -- CONTROL
+            MATRIX_SUMMATION_DATA_IN_J_ENABLE <= '1';
+          else
+            -- CONTROL
+            MATRIX_SUMMATION_DATA_IN_I_ENABLE <= '0';
+            MATRIX_SUMMATION_DATA_IN_J_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (MATRIX_SUMMATION_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_SUMMATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_SUMMATION_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_SUMMATION_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_SUMMATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_SUMMATION_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_SUMMATION_DATA_J_ENABLE = '1' or MATRIX_SUMMATION_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_SUMMATION_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit MATRIX_SUMMATION_SECOND_RUN when MATRIX_SUMMATION_READY = '1';
+        end loop MATRIX_SUMMATION_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
     if (STIMULUS_NTM_MATRIX_TRANSPOSE_TEST) then
 
       -------------------------------------------------------------------
@@ -1158,210 +2106,6 @@ begin
           -- CONTROL
           exit MATRIX_TRANSPOSE_SECOND_RUN when MATRIX_TRANSPOSE_READY = '1';
         end loop MATRIX_TRANSPOSE_SECOND_RUN;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_NTM_TENSOR_PRODUCT_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_TENSOR_PRODUCT_TEST        ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      TENSOR_PRODUCT_SIZE_A_I_IN <= THREE_CONTROL;
-      TENSOR_PRODUCT_SIZE_A_J_IN <= THREE_CONTROL;
-      TENSOR_PRODUCT_SIZE_A_K_IN <= THREE_CONTROL;
-      TENSOR_PRODUCT_SIZE_B_I_IN <= THREE_CONTROL;
-      TENSOR_PRODUCT_SIZE_B_J_IN <= THREE_CONTROL;
-      TENSOR_PRODUCT_SIZE_B_K_IN <= THREE_CONTROL;
-
-      if (STIMULUS_NTM_TENSOR_PRODUCT_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_PRODUCT_CASE 0      ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        TENSOR_PRODUCT_DATA_A_IN <= ZERO_DATA;
-        TENSOR_PRODUCT_DATA_B_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-        index_j_loop <= ZERO_CONTROL;
-        index_k_loop <= ZERO_CONTROL;
-
-        TENSOR_PRODUCT_FIRST_RUN : loop
-          if (TENSOR_PRODUCT_DATA_I_ENABLE = '1' and TENSOR_PRODUCT_DATA_J_ENABLE = '1' and TENSOR_PRODUCT_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            TENSOR_PRODUCT_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_PRODUCT_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-
-            -- CONTROL
-            TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
-          elsif (TENSOR_PRODUCT_DATA_I_ENABLE = '1' and TENSOR_PRODUCT_DATA_J_ENABLE = '1' and TENSOR_PRODUCT_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            TENSOR_PRODUCT_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_PRODUCT_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-
-            -- CONTROL
-            TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
-          elsif (TENSOR_PRODUCT_DATA_J_ENABLE = '1' and TENSOR_PRODUCT_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            TENSOR_PRODUCT_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_PRODUCT_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-
-            -- CONTROL
-            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
-          elsif (TENSOR_PRODUCT_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
-            -- DATA
-            TENSOR_PRODUCT_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_PRODUCT_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-
-            -- CONTROL
-            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
-          else
-            -- CONTROL
-            TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '0';
-            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '0';
-            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '0';
-            TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '0';
-            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '0';
-            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '0';
-          end if;
-
-          -- LOOP
-          if (TENSOR_PRODUCT_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_PRODUCT_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_PRODUCT_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= ZERO_CONTROL;
-            index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif (TENSOR_PRODUCT_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_PRODUCT_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_PRODUCT_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif (TENSOR_PRODUCT_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_PRODUCT_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_PRODUCT_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_PRODUCT_DATA_K_ENABLE = '1' or TENSOR_PRODUCT_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_PRODUCT_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
-            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit TENSOR_PRODUCT_FIRST_RUN when TENSOR_PRODUCT_READY = '1';
-        end loop TENSOR_PRODUCT_FIRST_RUN;
-      end if;
-
-      if (STIMULUS_NTM_TENSOR_PRODUCT_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_PRODUCT_CASE 1      ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        TENSOR_PRODUCT_DATA_A_IN <= ZERO_DATA;
-        TENSOR_PRODUCT_DATA_B_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-        index_j_loop <= ZERO_CONTROL;
-        index_k_loop <= ZERO_CONTROL;
-
-        TENSOR_PRODUCT_SECOND_RUN : loop
-          if (TENSOR_PRODUCT_DATA_I_ENABLE = '1' and TENSOR_PRODUCT_DATA_J_ENABLE = '1' and TENSOR_PRODUCT_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            TENSOR_PRODUCT_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_PRODUCT_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-
-            -- CONTROL
-            TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
-          elsif (TENSOR_PRODUCT_DATA_I_ENABLE = '1' and TENSOR_PRODUCT_DATA_J_ENABLE = '1' and TENSOR_PRODUCT_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            TENSOR_PRODUCT_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_PRODUCT_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-
-            -- CONTROL
-            TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
-          elsif (TENSOR_PRODUCT_DATA_J_ENABLE = '1' and TENSOR_PRODUCT_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            TENSOR_PRODUCT_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_PRODUCT_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-
-            -- CONTROL
-            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
-          elsif (TENSOR_PRODUCT_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
-            -- DATA
-            TENSOR_PRODUCT_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-            TENSOR_PRODUCT_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
-
-            -- CONTROL
-            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
-          else
-            -- CONTROL
-            TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '0';
-            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '0';
-            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '0';
-            TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '0';
-            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '0';
-            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '0';
-          end if;
-
-          -- LOOP
-          if (TENSOR_PRODUCT_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_PRODUCT_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_PRODUCT_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= ZERO_CONTROL;
-            index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif (TENSOR_PRODUCT_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_PRODUCT_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_PRODUCT_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif (TENSOR_PRODUCT_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_PRODUCT_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_PRODUCT_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_PRODUCT_DATA_K_ENABLE = '1' or TENSOR_PRODUCT_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_PRODUCT_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
-            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit TENSOR_PRODUCT_SECOND_RUN when TENSOR_PRODUCT_READY = '1';
-        end loop TENSOR_PRODUCT_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -1572,6 +2316,748 @@ begin
 
     end if;
 
+    if (STIMULUS_NTM_TENSOR_COSINE_SIMILARITY_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_TENSOR_COSINE_TEST         ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      TENSOR_COSINE_SIMILARITY_SIZE_A_I_IN <= THREE_CONTROL;
+      TENSOR_COSINE_SIMILARITY_SIZE_A_J_IN <= THREE_CONTROL;
+      TENSOR_COSINE_SIMILARITY_SIZE_A_K_IN <= THREE_CONTROL;
+      TENSOR_COSINE_SIMILARITY_SIZE_B_I_IN <= THREE_CONTROL;
+      TENSOR_COSINE_SIMILARITY_SIZE_B_J_IN <= THREE_CONTROL;
+      TENSOR_COSINE_SIMILARITY_SIZE_B_K_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_TENSOR_COSINE_SIMILARITY_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_COSINE_CASE 0       ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_COSINE_SIMILARITY_DATA_A_IN <= ZERO_DATA;
+        TENSOR_COSINE_SIMILARITY_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_COSINE_SIMILARITY_FIRST_RUN : loop
+          if (TENSOR_COSINE_SIMILARITY_DATA_I_ENABLE = '1' and TENSOR_COSINE_SIMILARITY_DATA_J_ENABLE = '1' and TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_COSINE_SIMILARITY_DATA_I_ENABLE = '1' and TENSOR_COSINE_SIMILARITY_DATA_J_ENABLE = '1' and TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_COSINE_SIMILARITY_DATA_J_ENABLE = '1' and TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE <= '0';
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE <= '0';
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_K_ENABLE <= '0';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE <= '0';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE <= '0';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_COSINE_SIMILARITY_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_COSINE_SIMILARITY_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_COSINE_SIMILARITY_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_COSINE_SIMILARITY_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_COSINE_SIMILARITY_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_COSINE_SIMILARITY_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_COSINE_SIMILARITY_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_COSINE_SIMILARITY_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE = '1' or TENSOR_COSINE_SIMILARITY_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_COSINE_SIMILARITY_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_COSINE_SIMILARITY_FIRST_RUN when TENSOR_COSINE_SIMILARITY_READY = '1';
+        end loop TENSOR_COSINE_SIMILARITY_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_NTM_TENSOR_COSINE_SIMILARITY_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_COSINE_CASE 1       ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_COSINE_SIMILARITY_DATA_A_IN <= ZERO_DATA;
+        TENSOR_COSINE_SIMILARITY_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_COSINE_SIMILARITY_SECOND_RUN : loop
+          if (TENSOR_COSINE_SIMILARITY_DATA_I_ENABLE = '1' and TENSOR_COSINE_SIMILARITY_DATA_J_ENABLE = '1' and TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_COSINE_SIMILARITY_DATA_I_ENABLE = '1' and TENSOR_COSINE_SIMILARITY_DATA_J_ENABLE = '1' and TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_COSINE_SIMILARITY_DATA_J_ENABLE = '1' and TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE <= '0';
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE <= '0';
+            TENSOR_COSINE_SIMILARITY_DATA_A_IN_K_ENABLE <= '0';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE <= '0';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE <= '0';
+            TENSOR_COSINE_SIMILARITY_DATA_B_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_COSINE_SIMILARITY_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_COSINE_SIMILARITY_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_COSINE_SIMILARITY_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_COSINE_SIMILARITY_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_COSINE_SIMILARITY_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_COSINE_SIMILARITY_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_COSINE_SIMILARITY_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_COSINE_SIMILARITY_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE = '1' or TENSOR_COSINE_SIMILARITY_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_COSINE_SIMILARITY_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_COSINE_SIMILARITY_SECOND_RUN when TENSOR_COSINE_SIMILARITY_READY = '1';
+        end loop TENSOR_COSINE_SIMILARITY_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_TENSOR_MULTIPLICATION_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_TENSOR_MULTIPLICATION_TEST ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      TENSOR_MULTIPLICATION_SIZE_I_IN <= THREE_CONTROL;
+      TENSOR_MULTIPLICATION_SIZE_J_IN <= THREE_CONTROL;
+      TENSOR_MULTIPLICATION_SIZE_K_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_TENSOR_MULTIPLICATION_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_MULTIPLICATIO_CASE 0";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_MULTIPLICATION_DATA_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_MULTIPLICATION_FIRST_RUN : loop
+          if (TENSOR_MULTIPLICATION_DATA_I_ENABLE = '1' and TENSOR_MULTIPLICATION_DATA_J_ENABLE = '1' and TENSOR_MULTIPLICATION_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MULTIPLICATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_MULTIPLICATION_DATA_IN_I_ENABLE <= '1';
+            TENSOR_MULTIPLICATION_DATA_IN_J_ENABLE <= '1';
+            TENSOR_MULTIPLICATION_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_MULTIPLICATION_DATA_I_ENABLE = '1' and TENSOR_MULTIPLICATION_DATA_J_ENABLE = '1' and TENSOR_MULTIPLICATION_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MULTIPLICATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_MULTIPLICATION_DATA_IN_I_ENABLE <= '1';
+            TENSOR_MULTIPLICATION_DATA_IN_J_ENABLE <= '1';
+            TENSOR_MULTIPLICATION_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_MULTIPLICATION_DATA_J_ENABLE = '1' and TENSOR_MULTIPLICATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MULTIPLICATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_MULTIPLICATION_DATA_IN_J_ENABLE <= '1';
+            TENSOR_MULTIPLICATION_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_MULTIPLICATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MULTIPLICATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_MULTIPLICATION_DATA_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_MULTIPLICATION_DATA_IN_I_ENABLE <= '0';
+            TENSOR_MULTIPLICATION_DATA_IN_J_ENABLE <= '0';
+            TENSOR_MULTIPLICATION_DATA_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_MULTIPLICATION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_MULTIPLICATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MULTIPLICATION_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MULTIPLICATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MULTIPLICATION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_MULTIPLICATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MULTIPLICATION_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MULTIPLICATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MULTIPLICATION_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_MULTIPLICATION_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MULTIPLICATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_MULTIPLICATION_DATA_K_ENABLE = '1' or TENSOR_MULTIPLICATION_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_MULTIPLICATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_MULTIPLICATION_FIRST_RUN when TENSOR_MULTIPLICATION_READY = '1';
+        end loop TENSOR_MULTIPLICATION_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_NTM_TENSOR_MULTIPLICATION_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_MULTIPLICATIO_CASE 1";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_MULTIPLICATION_DATA_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_MULTIPLICATION_SECOND_RUN : loop
+          if (TENSOR_MULTIPLICATION_DATA_I_ENABLE = '1' and TENSOR_MULTIPLICATION_DATA_J_ENABLE = '1' and TENSOR_MULTIPLICATION_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MULTIPLICATION_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_MULTIPLICATION_DATA_IN_I_ENABLE <= '1';
+            TENSOR_MULTIPLICATION_DATA_IN_J_ENABLE <= '1';
+            TENSOR_MULTIPLICATION_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_MULTIPLICATION_DATA_I_ENABLE = '1' and TENSOR_MULTIPLICATION_DATA_J_ENABLE = '1' and TENSOR_MULTIPLICATION_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MULTIPLICATION_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_MULTIPLICATION_DATA_IN_I_ENABLE <= '1';
+            TENSOR_MULTIPLICATION_DATA_IN_J_ENABLE <= '1';
+            TENSOR_MULTIPLICATION_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_MULTIPLICATION_DATA_J_ENABLE = '1' and TENSOR_MULTIPLICATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MULTIPLICATION_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_MULTIPLICATION_DATA_IN_J_ENABLE <= '1';
+            TENSOR_MULTIPLICATION_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_MULTIPLICATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MULTIPLICATION_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_MULTIPLICATION_DATA_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_MULTIPLICATION_DATA_IN_I_ENABLE <= '0';
+            TENSOR_MULTIPLICATION_DATA_IN_J_ENABLE <= '0';
+            TENSOR_MULTIPLICATION_DATA_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_MULTIPLICATION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_MULTIPLICATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MULTIPLICATION_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MULTIPLICATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MULTIPLICATION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_MULTIPLICATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MULTIPLICATION_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MULTIPLICATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MULTIPLICATION_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_MULTIPLICATION_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MULTIPLICATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_MULTIPLICATION_DATA_K_ENABLE = '1' or TENSOR_MULTIPLICATION_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_MULTIPLICATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_MULTIPLICATION_SECOND_RUN when TENSOR_MULTIPLICATION_READY = '1';
+        end loop TENSOR_MULTIPLICATION_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_TENSOR_PRODUCT_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_TENSOR_PRODUCT_TEST        ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      TENSOR_PRODUCT_SIZE_A_I_IN <= THREE_CONTROL;
+      TENSOR_PRODUCT_SIZE_A_J_IN <= THREE_CONTROL;
+      TENSOR_PRODUCT_SIZE_A_K_IN <= THREE_CONTROL;
+      TENSOR_PRODUCT_SIZE_B_I_IN <= THREE_CONTROL;
+      TENSOR_PRODUCT_SIZE_B_J_IN <= THREE_CONTROL;
+      TENSOR_PRODUCT_SIZE_B_K_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_TENSOR_PRODUCT_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_PRODUCT_CASE 0      ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_PRODUCT_DATA_A_IN <= ZERO_DATA;
+        TENSOR_PRODUCT_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_PRODUCT_FIRST_RUN : loop
+          if (TENSOR_PRODUCT_DATA_I_ENABLE = '1' and TENSOR_PRODUCT_DATA_J_ENABLE = '1' and TENSOR_PRODUCT_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_PRODUCT_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_PRODUCT_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_PRODUCT_DATA_I_ENABLE = '1' and TENSOR_PRODUCT_DATA_J_ENABLE = '1' and TENSOR_PRODUCT_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_PRODUCT_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_PRODUCT_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_PRODUCT_DATA_J_ENABLE = '1' and TENSOR_PRODUCT_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_PRODUCT_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_PRODUCT_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_PRODUCT_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_PRODUCT_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_PRODUCT_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_PRODUCT_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_PRODUCT_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_PRODUCT_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_PRODUCT_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_PRODUCT_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_PRODUCT_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_PRODUCT_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_PRODUCT_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_PRODUCT_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_PRODUCT_DATA_K_ENABLE = '1' or TENSOR_PRODUCT_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_PRODUCT_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_PRODUCT_FIRST_RUN when TENSOR_PRODUCT_READY = '1';
+        end loop TENSOR_PRODUCT_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_NTM_TENSOR_PRODUCT_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_PRODUCT_CASE 1      ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_PRODUCT_DATA_A_IN <= ZERO_DATA;
+        TENSOR_PRODUCT_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_PRODUCT_SECOND_RUN : loop
+          if (TENSOR_PRODUCT_DATA_I_ENABLE = '1' and TENSOR_PRODUCT_DATA_J_ENABLE = '1' and TENSOR_PRODUCT_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_PRODUCT_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_PRODUCT_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_PRODUCT_DATA_I_ENABLE = '1' and TENSOR_PRODUCT_DATA_J_ENABLE = '1' and TENSOR_PRODUCT_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_PRODUCT_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_PRODUCT_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_PRODUCT_DATA_J_ENABLE = '1' and TENSOR_PRODUCT_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_PRODUCT_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_PRODUCT_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_PRODUCT_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_PRODUCT_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+            TENSOR_PRODUCT_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_PRODUCT_DATA_A_IN_I_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_A_IN_J_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_A_IN_K_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_B_IN_I_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_B_IN_J_ENABLE <= '0';
+            TENSOR_PRODUCT_DATA_B_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_PRODUCT_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_PRODUCT_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_PRODUCT_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_PRODUCT_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_PRODUCT_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_PRODUCT_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_PRODUCT_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_PRODUCT_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_PRODUCT_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_PRODUCT_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_PRODUCT_DATA_K_ENABLE = '1' or TENSOR_PRODUCT_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_PRODUCT_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_PRODUCT_SECOND_RUN when TENSOR_PRODUCT_READY = '1';
+        end loop TENSOR_PRODUCT_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_TENSOR_SUMMATION_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_TENSOR_SUMMATION_TEST      ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      TENSOR_SUMMATION_SIZE_I_IN <= THREE_CONTROL;
+      TENSOR_SUMMATION_SIZE_J_IN <= THREE_CONTROL;
+      TENSOR_SUMMATION_SIZE_K_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_TENSOR_SUMMATION_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_SUMMATION_CASE 0    ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_SUMMATION_DATA_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_SUMMATION_FIRST_RUN : loop
+          if (TENSOR_SUMMATION_DATA_I_ENABLE = '1' and TENSOR_SUMMATION_DATA_J_ENABLE = '1' and TENSOR_SUMMATION_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_SUMMATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_SUMMATION_DATA_IN_I_ENABLE <= '1';
+            TENSOR_SUMMATION_DATA_IN_J_ENABLE <= '1';
+            TENSOR_SUMMATION_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_SUMMATION_DATA_I_ENABLE = '1' and TENSOR_SUMMATION_DATA_J_ENABLE = '1' and TENSOR_SUMMATION_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_SUMMATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_SUMMATION_DATA_IN_I_ENABLE <= '1';
+            TENSOR_SUMMATION_DATA_IN_J_ENABLE <= '1';
+            TENSOR_SUMMATION_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_SUMMATION_DATA_J_ENABLE = '1' and TENSOR_SUMMATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_SUMMATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_SUMMATION_DATA_IN_J_ENABLE <= '1';
+            TENSOR_SUMMATION_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_SUMMATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_SUMMATION_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_SUMMATION_DATA_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_SUMMATION_DATA_IN_I_ENABLE <= '0';
+            TENSOR_SUMMATION_DATA_IN_J_ENABLE <= '0';
+            TENSOR_SUMMATION_DATA_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_SUMMATION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_SUMMATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_SUMMATION_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_SUMMATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_SUMMATION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_SUMMATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_SUMMATION_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_SUMMATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_SUMMATION_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_SUMMATION_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_SUMMATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_SUMMATION_DATA_K_ENABLE = '1' or TENSOR_SUMMATION_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_SUMMATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_SUMMATION_FIRST_RUN when TENSOR_SUMMATION_READY = '1';
+        end loop TENSOR_SUMMATION_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_NTM_TENSOR_SUMMATION_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_SUMMATION_CASE 1    ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_SUMMATION_DATA_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_SUMMATION_SECOND_RUN : loop
+          if (TENSOR_SUMMATION_DATA_I_ENABLE = '1' and TENSOR_SUMMATION_DATA_J_ENABLE = '1' and TENSOR_SUMMATION_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_SUMMATION_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_SUMMATION_DATA_IN_I_ENABLE <= '1';
+            TENSOR_SUMMATION_DATA_IN_J_ENABLE <= '1';
+            TENSOR_SUMMATION_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_SUMMATION_DATA_I_ENABLE = '1' and TENSOR_SUMMATION_DATA_J_ENABLE = '1' and TENSOR_SUMMATION_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_SUMMATION_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_SUMMATION_DATA_IN_I_ENABLE <= '1';
+            TENSOR_SUMMATION_DATA_IN_J_ENABLE <= '1';
+            TENSOR_SUMMATION_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_SUMMATION_DATA_J_ENABLE = '1' and TENSOR_SUMMATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_SUMMATION_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_SUMMATION_DATA_IN_J_ENABLE <= '1';
+            TENSOR_SUMMATION_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_SUMMATION_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_SUMMATION_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)),to_integer(unsigned(index_j_loop)),to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_SUMMATION_DATA_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_SUMMATION_DATA_IN_I_ENABLE <= '0';
+            TENSOR_SUMMATION_DATA_IN_J_ENABLE <= '0';
+            TENSOR_SUMMATION_DATA_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_SUMMATION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_SUMMATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_SUMMATION_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_SUMMATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_SUMMATION_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_SUMMATION_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_SUMMATION_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_SUMMATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_SUMMATION_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_SUMMATION_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_SUMMATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_SUMMATION_DATA_K_ENABLE = '1' or TENSOR_SUMMATION_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_SUMMATION_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_SUMMATION_SECOND_RUN when TENSOR_SUMMATION_READY = '1';
+        end loop TENSOR_SUMMATION_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
     if (STIMULUS_NTM_TENSOR_TRANSPOSE_TEST) then
 
       -------------------------------------------------------------------
@@ -1738,7 +3224,6 @@ begin
       wait for WORKING;
 
     end if;
-
 
     assert false
       report "END OF TEST"
