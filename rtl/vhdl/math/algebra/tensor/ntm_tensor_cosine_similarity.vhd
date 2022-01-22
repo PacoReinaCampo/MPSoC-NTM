@@ -247,7 +247,7 @@ begin
           DATA_OUT_K_ENABLE <= '0';
 
           if (START = '1') then
-            if (unsigned(SIZE_A_K_IN) = unsigned(SIZE_B_J_IN)) then
+            if ((unsigned(SIZE_A_I_IN) = unsigned(SIZE_B_I_IN)) and (unsigned(SIZE_A_K_IN) = unsigned(SIZE_B_J_IN))) then
               -- Control Outputs
               DATA_I_ENABLE <= '1';
               DATA_J_ENABLE <= '1';

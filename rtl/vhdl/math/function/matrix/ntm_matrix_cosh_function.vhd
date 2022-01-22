@@ -183,7 +183,7 @@ begin
 
         when INPUT_I_STATE =>           -- STEP 1
 
-          if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) or (unsigned(index_j_loop) = unsigned(ZERO_CONTROL))) then
+          if ((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) then
             -- Data Inputs
             size_in_vector_cosh_function <= SIZE_J_IN;
 

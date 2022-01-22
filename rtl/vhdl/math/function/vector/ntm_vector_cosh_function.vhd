@@ -152,7 +152,8 @@ begin
       case cosh_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
-          READY           <= '0';
+          READY <= '0';
+
           DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
@@ -165,9 +166,8 @@ begin
 
         when INPUT_STATE =>             -- STEP 1
 
-          if ((DATA_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
+          if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
-
             data_in_scalar_cosh_function <= DATA_IN;
 
             -- Control Internal
