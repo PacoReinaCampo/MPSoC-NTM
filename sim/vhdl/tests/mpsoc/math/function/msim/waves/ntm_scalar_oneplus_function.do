@@ -5,9 +5,9 @@ quietly WaveActivateNextPane {} 0
 add wave -noupdate /ntm_function_pkg/MONITOR_TEST
 add wave -noupdate /ntm_function_pkg/MONITOR_CASE
 
-add wave -noupdate -logarithm {=========================================}
-add wave -noupdate -logarithm {NTM SCALAR ONEPLUS TEST}
-add wave -noupdate -logarithm {=========================================}
+add wave -noupdate -divider {=========================================}
+add wave -noupdate -divider {NTM SCALAR ONEPLUS TEST}
+add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /ntm_function_testbench/ntm_scalar_oneplus_function_test/scalar_oneplus_function/CLK
 add wave -noupdate /ntm_function_testbench/ntm_scalar_oneplus_function_test/scalar_oneplus_function/RST
@@ -25,15 +25,10 @@ add wave -noupdate /ntm_function_testbench/ntm_scalar_oneplus_function_test/scal
 add wave -noupdate /ntm_function_testbench/ntm_scalar_oneplus_function_test/scalar_oneplus_function/ready_scalar_adder
 add wave -noupdate /ntm_function_testbench/ntm_scalar_oneplus_function_test/scalar_oneplus_function/data_out_scalar_adder
 
-add wave -noupdate /ntm_function_testbench/ntm_scalar_oneplus_function_test/scalar_oneplus_function/start_scalar_exponentiator
-add wave -noupdate /ntm_function_testbench/ntm_scalar_oneplus_function_test/scalar_oneplus_function/data_in_scalar_exponentiator
-add wave -noupdate /ntm_function_testbench/ntm_scalar_oneplus_function_test/scalar_oneplus_function/ready_scalar_exponentiator
-add wave -noupdate /ntm_function_testbench/ntm_scalar_oneplus_function_test/scalar_oneplus_function/data_out_scalar_exponentiator
-
-add wave -noupdate /ntm_function_testbench/ntm_scalar_oneplus_function_test/scalar_oneplus_function/start_scalar_logarithm
-add wave -noupdate /ntm_function_testbench/ntm_scalar_oneplus_function_test/scalar_oneplus_function/data_in_scalar_logarithm
-add wave -noupdate /ntm_function_testbench/ntm_scalar_oneplus_function_test/scalar_oneplus_function/ready_scalar_logarithm
-add wave -noupdate /ntm_function_testbench/ntm_scalar_oneplus_function_test/scalar_oneplus_function/data_out_scalar_logarithm
+add wave -noupdate /ntm_function_testbench/ntm_scalar_oneplus_function_test/scalar_oneplus_function/start_scalar_exponentiator_function
+add wave -noupdate /ntm_function_testbench/ntm_scalar_oneplus_function_test/scalar_oneplus_function/data_in_scalar_exponentiator_function
+add wave -noupdate /ntm_function_testbench/ntm_scalar_oneplus_function_test/scalar_oneplus_function/ready_scalar_exponentiator_function
+add wave -noupdate /ntm_function_testbench/ntm_scalar_oneplus_function_test/scalar_oneplus_function/data_out_scalar_exponentiator_function
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

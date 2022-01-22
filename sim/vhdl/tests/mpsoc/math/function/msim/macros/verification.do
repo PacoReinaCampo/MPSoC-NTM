@@ -638,7 +638,7 @@ alias v04 {
 }
 
 alias v05 {
-  ntm_vector_oneplus_function_verification_compilation 
+  ntm_scalar_oneplus_function_verification_compilation 
 }
 
 alias v06 {

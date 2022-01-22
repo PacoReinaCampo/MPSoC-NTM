@@ -152,6 +152,19 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      -- Control Internal
+      start_scalar_adder <= '0';
+
+      operation_scalar_adder <= '0';
+  
+      start_scalar_exponentiator_function <= '0';
+
+      -- Data Internal
+      data_a_in_scalar_adder <= ZERO_DATA;
+      data_b_in_scalar_adder <= ZERO_DATA;
+
+      data_in_scalar_exponentiator_function <= ZERO_DATA;
+
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
