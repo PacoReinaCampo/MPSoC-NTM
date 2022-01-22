@@ -103,19 +103,34 @@ package ntm_float_pkg is
 
   constant VECTOR_SAMPLE_A : vector_buffer := (FOUR, NINE, THREE);
   constant VECTOR_SAMPLE_B : vector_buffer := (THREE, NINE, ZERO);
+  
+  constant FLOAT_SAMPLE_A : std_logic_vector(31 downto 0) := X"40166de4";
+  constant FLOAT_SAMPLE_B : std_logic_vector(31 downto 0) := X"be48c23f";
 
   -- SCALAR-FUNCTIONALITY
   signal STIMULUS_NTM_SCALAR_ADDER_TEST      : boolean := false;
   signal STIMULUS_NTM_SCALAR_MULTIPLIER_TEST : boolean := false;
   signal STIMULUS_NTM_SCALAR_DIVIDER_TEST    : boolean := false;
 
+  signal STIMULUS_NTM_SCALAR_FLOAT_ADDER_TEST      : boolean := false;
+  signal STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_TEST    : boolean := false;
+
   signal STIMULUS_NTM_SCALAR_ADDER_CASE_0      : boolean := false;
   signal STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0 : boolean := false;
   signal STIMULUS_NTM_SCALAR_DIVIDER_CASE_0    : boolean := false;
 
+  signal STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE_0      : boolean := false;
+  signal STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE_0    : boolean := false;
+
   signal STIMULUS_NTM_SCALAR_ADDER_CASE_1      : boolean := false;
   signal STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1 : boolean := false;
   signal STIMULUS_NTM_SCALAR_DIVIDER_CASE_1    : boolean := false;
+
+  signal STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE_1      : boolean := false;
+  signal STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE_1    : boolean := false;
 
   -- VECTOR-FUNCTIONALITY
   signal STIMULUS_NTM_VECTOR_ADDER_TEST      : boolean := false;
@@ -181,6 +196,18 @@ package ntm_float_pkg is
       SCALAR_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_ADDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- SCALAR FLOAT ADDER
+      -- CONTROL
+      SCALAR_FLOAT_ADDER_START : out std_logic;
+      SCALAR_FLOAT_ADDER_READY : in  std_logic;
+
+      SCALAR_FLOAT_ADDER_OPERATION : out std_logic;
+
+      -- DATA
+      SCALAR_FLOAT_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_FLOAT_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_FLOAT_ADDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
       -- SCALAR MULTIPLIER
       -- CONTROL
       SCALAR_MULTIPLIER_START : out std_logic;
@@ -191,6 +218,16 @@ package ntm_float_pkg is
       SCALAR_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- SCALAR FLOAT MULTIPLIER
+      -- CONTROL
+      SCALAR_FLOAT_MULTIPLIER_START : out std_logic;
+      SCALAR_FLOAT_MULTIPLIER_READY : in  std_logic;
+
+      -- DATA
+      SCALAR_FLOAT_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_FLOAT_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_FLOAT_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
       -- SCALAR DIVIDER
       -- CONTROL
       SCALAR_DIVIDER_START : out std_logic;
@@ -200,6 +237,16 @@ package ntm_float_pkg is
       SCALAR_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- SCALAR FLOAT DIVIDER
+      -- CONTROL
+      SCALAR_FLOAT_DIVIDER_START : out std_logic;
+      SCALAR_FLOAT_DIVIDER_READY : in  std_logic;
+
+      -- DATA
+      SCALAR_FLOAT_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_FLOAT_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_FLOAT_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
       -- STIMULUS VECTOR
