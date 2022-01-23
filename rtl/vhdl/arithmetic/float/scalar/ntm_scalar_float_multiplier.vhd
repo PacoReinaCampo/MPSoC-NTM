@@ -104,6 +104,9 @@ architecture ntm_scalar_float_multiplier_architecture of ntm_scalar_float_multip
   constant ZERO_EXPONENT_REGISTER : std_logic_vector(EXPONENT_SIZE+1 downto 0) := std_logic_vector(to_unsigned(0, EXPONENT_SIZE+2));
   constant ONE_EXPONENT_REGISTER  : std_logic_vector(EXPONENT_SIZE+1 downto 0) := std_logic_vector(to_unsigned(1, EXPONENT_SIZE+2));
 
+  constant EXPONENT_FULL  : std_logic_vector(EXPONENT_SIZE-1 downto 0) := (others => '1');
+  constant EXPONENT_EMPTY : std_logic_vector(EXPONENT_SIZE-1 downto 0) := (others => '0');
+
   constant BIAS_EXPONENT : std_logic_vector(EXPONENT_SIZE+1 downto 0) := "0001111111";
 
   -----------------------------------------------------------------------
@@ -218,7 +221,7 @@ begin
 
         when OPERATION_STATE =>
 
-          if (data_b_in_mantissa_int = X"800000" and data_b_in_exponent_int = X"00") then
+          if (data_b_in_mantissa_int = X"800000" and data_b_in_exponent_int = EXPONENT_EMPTY) then
             -- Data Outputs
             OVERFLOW_OUT <= '1';
 
@@ -232,7 +235,7 @@ begin
 
             -- FSM Control
             multiplier_ctrl_fsm_int <= STARTER_STATE;
-          elsif (data_exponent_int(EXPONENT_SIZE+1) = '1' or data_exponent_int(EXPONENT_SIZE-1 downto 0) = X"00" or (data_a_in_exponent_int = X"00" and data_a_in_mantissa_int = ZERO_MANTISSA_REGISTER) or (data_b_in_exponent_int = X"FF" and data_b_in_mantissa_int = ZERO_MANTISSA_REGISTER)) then
+          elsif (data_exponent_int(EXPONENT_SIZE+1) = '1' or data_exponent_int(EXPONENT_SIZE-1 downto 0) = EXPONENT_EMPTY or (data_a_in_exponent_int = EXPONENT_EMPTY and data_a_in_mantissa_int = ZERO_MANTISSA_REGISTER) or (data_b_in_exponent_int = EXPONENT_FULL and data_b_in_mantissa_int = ZERO_MANTISSA_REGISTER)) then
             -- Control Outputs
             READY <= '1';
 
@@ -245,7 +248,7 @@ begin
             multiplier_ctrl_fsm_int <= STARTER_STATE;
           else
             -- Data Internal
-            data_mantissa_int <= std_logic_vector(unsigned(data_mantissa_int) + ('0' & unsigned(not data_b_mantissa_int)) + unsigned(ONE_MANTISSA_REGISTER));
+            data_mantissa_int <= std_logic_vector(unsigned(data_mantissa_int) - ('1' & unsigned(data_b_mantissa_int)));
 
             -- FSM Control
             multiplier_ctrl_fsm_int <= NORMALIZATION_STATE;
