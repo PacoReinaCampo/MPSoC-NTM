@@ -104,8 +104,13 @@ package ntm_float_pkg is
   constant VECTOR_SAMPLE_A : vector_buffer := (FOUR, NINE, THREE);
   constant VECTOR_SAMPLE_B : vector_buffer := (THREE, NINE, ZERO);
   
-  constant FLOAT_SAMPLE_A : std_logic_vector(31 downto 0) := X"40166de4";
-  constant FLOAT_SAMPLE_B : std_logic_vector(31 downto 0) := X"be48c23f";
+  constant FLOAT_SAMPLE_A : std_logic_vector(31 downto 0) := X"480C8021";
+  constant FLOAT_SAMPLE_B : std_logic_vector(31 downto 0) := X"C3302020";
+
+  -- ADDITION       = X"480C5419"
+  -- SUSTRACTION    = X"480CAC29"
+  -- MULTIPLICATION = X"CBC15371"
+  -- DIVISION       = X"C44C3801"
 
   -- SCALAR-FUNCTIONALITY
   signal STIMULUS_NTM_SCALAR_ADDER_TEST      : boolean := false;

@@ -186,6 +186,9 @@ begin
     elsif rising_edge(CLK) then
       case divider_ctrl_fsm_int is
         when STARTER_STATE =>
+          -- Control Outputs
+          READY <= '0';
+
           if (START = '1') then
             -- Data Inputs
             data_a_in_int <= DATA_A_IN;
@@ -196,12 +199,6 @@ begin
           end if;
 
         when ASIGNATION_STATE =>
-
-          -- Data Outputs
-          OVERFLOW_OUT <= '0';
-
-          -- Control Outputs
-          READY <= '0';
 
           -- Data Internal
           data_mantissa_int   <= '0' & data_a_in_mantissa_int;

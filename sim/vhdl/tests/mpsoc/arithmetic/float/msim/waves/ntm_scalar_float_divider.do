@@ -16,6 +16,7 @@ add wave -noupdate /ntm_float_testbench/ntm_scalar_float_divider_test/scalar_flo
 add wave -noupdate /ntm_float_testbench/ntm_scalar_float_divider_test/scalar_float_divider/DATA_B_IN
 add wave -noupdate /ntm_float_testbench/ntm_scalar_float_divider_test/scalar_float_divider/READY
 add wave -noupdate /ntm_float_testbench/ntm_scalar_float_divider_test/scalar_float_divider/DATA_OUT
+add wave -noupdate /ntm_float_testbench/ntm_scalar_float_divider_test/scalar_float_divider/OVERFLOW_OUT
 
 add wave -noupdate /ntm_float_testbench/ntm_scalar_float_divider_test/scalar_float_divider/divider_ctrl_fsm_int
 
