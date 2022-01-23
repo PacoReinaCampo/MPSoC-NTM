@@ -17,18 +17,18 @@ add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_
 add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/READY
 add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/DATA_OUT
 
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/state
+add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/multiplier_ctrl_fsm_int
 
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/A_mantissa
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/B_mantissa
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/A_exp
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/B_exp
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/A_sgn
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/B_sgn
+add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_a_in_mantissa_int
+add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_b_in_mantissa_int
+add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_a_in_exponent_int
+add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_b_in_exponent_int
+add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_a_in_sign_int
+add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_b_in_sign_int
 
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/sum_exp
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/sum_mantissa
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/sum_sgn
+add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_out_exponent_int
+add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_out_mantissa_int
+add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_out_sign_int
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

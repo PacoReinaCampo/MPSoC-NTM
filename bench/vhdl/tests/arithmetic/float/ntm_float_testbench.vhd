@@ -192,7 +192,8 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal data_a_in_scalar_float_divider : std_logic_vector(31 downto 0);
   signal data_b_in_scalar_float_divider : std_logic_vector(31 downto 0);
 
-  signal data_out_scalar_float_divider : std_logic_vector(31 downto 0);
+  signal data_out_scalar_float_divider     : std_logic_vector(31 downto 0);
+  signal overflow_out_scalar_float_divider : std_logic;
 
   -----------------------------------------------------------------------
   -- VECTOR
@@ -412,9 +413,10 @@ begin
       SCALAR_FLOAT_DIVIDER_READY => ready_scalar_float_divider,
 
       -- DATA
-      SCALAR_FLOAT_DIVIDER_DATA_A_IN => data_a_in_scalar_float_divider,
-      SCALAR_FLOAT_DIVIDER_DATA_B_IN => data_b_in_scalar_float_divider,
-      SCALAR_FLOAT_DIVIDER_DATA_OUT  => data_out_scalar_float_divider,
+      SCALAR_FLOAT_DIVIDER_DATA_A_IN    => data_a_in_scalar_float_divider,
+      SCALAR_FLOAT_DIVIDER_DATA_B_IN    => data_b_in_scalar_float_divider,
+      SCALAR_FLOAT_DIVIDER_DATA_OUT     => data_out_scalar_float_divider,
+      SCALAR_FLOAT_DIVIDER_OVERFLOW_OUT => overflow_out_scalar_float_divider,
 
       -----------------------------------------------------------------------
       -- STIMULUS VECTOR
@@ -686,7 +688,8 @@ begin
         DATA_A_IN => data_a_in_scalar_float_divider,
         DATA_B_IN => data_b_in_scalar_float_divider,
 
-        DATA_OUT => data_out_scalar_float_divider
+        DATA_OUT     => data_out_scalar_float_divider,
+        OVERFLOW_OUT => overflow_out_scalar_float_divider
         );
   end generate ntm_scalar_float_divider_test;
 

@@ -113,9 +113,9 @@ architecture ntm_scalar_float_multiplier_architecture of ntm_scalar_float_multip
   signal data_a_in_sign_int : std_logic;
   signal data_b_in_sign_int : std_logic;
 
-  signal data_out_exponent_int : std_logic_vector(EXPONENT_SIZE downto 0);
-
   signal data_out_mantissa_int : std_logic_vector(MANTISSA_SIZE+1 downto 0);
+
+  signal data_out_exponent_int : std_logic_vector(EXPONENT_SIZE downto 0);
 
   signal data_out_sign_int : std_logic;
 
@@ -276,11 +276,7 @@ begin
 
         when ENDER_STATE =>
           -- Data Outputs
-          DATA_OUT(MANTISSA_SIZE-1 downto 0) <= data_out_mantissa_int(MANTISSA_SIZE-1 downto 0);
-
-          DATA_OUT(DATA_SIZE-2 downto MANTISSA_SIZE) <= data_out_exponent_int(EXPONENT_SIZE-1 downto 0);
-
-          DATA_OUT(DATA_SIZE-1) <= data_out_sign_int;
+          DATA_OUT <= data_out_sign_int & data_out_exponent_int(EXPONENT_SIZE-1 downto 0) & data_out_mantissa_int(MANTISSA_SIZE-1 downto 0);
 
           -- Control Outputs
           READY <= '1';
