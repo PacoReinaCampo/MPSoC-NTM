@@ -229,9 +229,10 @@ package ntm_float_pkg is
       SCALAR_FLOAT_MULTIPLIER_READY : in  std_logic;
 
       -- DATA
-      SCALAR_FLOAT_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_FLOAT_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_FLOAT_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_FLOAT_MULTIPLIER_DATA_A_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_FLOAT_MULTIPLIER_DATA_B_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_FLOAT_MULTIPLIER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_FLOAT_MULTIPLIER_OVERFLOW_OUT : in  std_logic;
 
       -- SCALAR DIVIDER
       -- CONTROL

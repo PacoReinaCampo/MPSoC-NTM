@@ -949,10 +949,10 @@ package ntm_arithmetic_pkg is
       READY : out std_logic;
 
       -- DATA
-      DATA_A_IN : in std_logic_vector(31 downto 0);
-      DATA_B_IN : in std_logic_vector(31 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DATA_OUT : out std_logic_vector(31 downto 0)
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -994,10 +994,11 @@ package ntm_arithmetic_pkg is
       READY : out std_logic;
 
       -- DATA
-      DATA_A_IN : in std_logic_vector(31 downto 0);
-      DATA_B_IN : in std_logic_vector(31 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DATA_OUT : out std_logic_vector(31 downto 0)
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
       );
   end component;
 
@@ -1039,10 +1040,10 @@ package ntm_arithmetic_pkg is
       READY : out std_logic;
 
       -- DATA
-      DATA_A_IN : in std_logic_vector(31 downto 0);
-      DATA_B_IN : in std_logic_vector(31 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DATA_OUT     : out std_logic_vector(31 downto 0);
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
       OVERFLOW_OUT : out std_logic
       );
   end component;

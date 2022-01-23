@@ -204,7 +204,7 @@ begin
           data_mantissa_int   <= '0' & data_a_in_mantissa_int;
           data_b_mantissa_int <= data_b_in_mantissa_int;
 
-          data_exponent_int <= std_logic_vector(("00" & unsigned(data_a_in_exponent_int)) + not ("00" & unsigned(data_b_in_exponent_int)) + unsigned(ONE_EXPONENT_REGISTER) + unsigned(BIAS_EXPONENT));
+          data_exponent_int <= std_logic_vector(("00" & unsigned(data_a_in_exponent_int)) - ("00" & unsigned(data_b_in_exponent_int)) + unsigned(BIAS_EXPONENT));
 
           data_sign_int <= data_a_in_sign_int xor data_b_in_sign_int;
 
@@ -245,7 +245,7 @@ begin
             divider_ctrl_fsm_int <= STARTER_STATE;
           else
             -- Data Internal
-            data_mantissa_int <= std_logic_vector(unsigned(data_mantissa_int) + ('0' & unsigned(not data_b_mantissa_int)) + unsigned(ONE_EXPONENT_REGISTER));
+            data_mantissa_int <= std_logic_vector(unsigned(data_mantissa_int) + ('0' & unsigned(not data_b_mantissa_int)) + unsigned(ONE_MANTISSA_REGISTER));
 
             -- FSM Control
             divider_ctrl_fsm_int <= NORMALIZATION_STATE;

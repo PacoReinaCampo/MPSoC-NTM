@@ -146,7 +146,8 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal data_a_in_scalar_float_adder : std_logic_vector(31 downto 0);
   signal data_b_in_scalar_float_adder : std_logic_vector(31 downto 0);
 
-  signal data_out_scalar_float_adder : std_logic_vector(31 downto 0);
+  signal data_out_scalar_float_adder     : std_logic_vector(31 downto 0);
+  signal overflow_out_scalar_float_adder : std_logic;
 
   -- SCALAR MULTIPLIER
   -- CONTROL
@@ -169,7 +170,8 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal data_a_in_scalar_float_multiplier : std_logic_vector(31 downto 0);
   signal data_b_in_scalar_float_multiplier : std_logic_vector(31 downto 0);
 
-  signal data_out_scalar_float_multiplier : std_logic_vector(31 downto 0);
+  signal data_out_scalar_float_multiplier     : std_logic_vector(31 downto 0);
+  signal overflow_out_scalar_float_multiplier : std_logic;
 
   -- SCALAR DIVIDER
   -- CONTROL
@@ -393,9 +395,10 @@ begin
       SCALAR_FLOAT_MULTIPLIER_READY => ready_scalar_float_multiplier,
 
       -- DATA
-      SCALAR_FLOAT_MULTIPLIER_DATA_A_IN => data_a_in_scalar_float_multiplier,
-      SCALAR_FLOAT_MULTIPLIER_DATA_B_IN => data_b_in_scalar_float_multiplier,
-      SCALAR_FLOAT_MULTIPLIER_DATA_OUT  => data_out_scalar_float_multiplier,
+      SCALAR_FLOAT_MULTIPLIER_DATA_A_IN    => data_a_in_scalar_float_multiplier,
+      SCALAR_FLOAT_MULTIPLIER_DATA_B_IN    => data_b_in_scalar_float_multiplier,
+      SCALAR_FLOAT_MULTIPLIER_DATA_OUT     => data_out_scalar_float_multiplier,
+      SCALAR_FLOAT_MULTIPLIER_OVERFLOW_OUT => overflow_out_scalar_float_multiplier,
 
       -- SCALAR DIVIDER
       -- CONTROL
@@ -639,7 +642,8 @@ begin
         DATA_A_IN => data_a_in_scalar_float_multiplier,
         DATA_B_IN => data_b_in_scalar_float_multiplier,
 
-        DATA_OUT => data_out_scalar_float_multiplier
+        DATA_OUT     => data_out_scalar_float_multiplier,
+        OVERFLOW_OUT => overflow_out_scalar_float_multiplier
         );
   end generate ntm_scalar_float_multiplier_test;
 
