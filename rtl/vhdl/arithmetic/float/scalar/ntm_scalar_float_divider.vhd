@@ -104,6 +104,8 @@ architecture ntm_scalar_float_divider_architecture of ntm_scalar_float_divider i
   constant ZERO_EXPONENT_REGISTER : std_logic_vector(EXPONENT_SIZE+1 downto 0) := std_logic_vector(to_unsigned(0, EXPONENT_SIZE+2));
   constant ONE_EXPONENT_REGISTER  : std_logic_vector(EXPONENT_SIZE+1 downto 0) := std_logic_vector(to_unsigned(1, EXPONENT_SIZE+2));
 
+  constant BIAS_EXPONENT : std_logic_vector(EXPONENT_SIZE+1 downto 0) := "0001111111";
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
@@ -153,7 +155,7 @@ begin
   data_a_in_sign_int <= data_a_in_int(DATA_SIZE-1);
   data_b_in_sign_int <= data_b_in_int(DATA_SIZE-1);
 
-  process(CLK)
+  ctrl_fsm : process (CLK, RST)
   begin
     if (RST = '0') then
       -- Data Outputs
@@ -205,7 +207,7 @@ begin
           data_mantissa_int   <= '0' & data_a_in_mantissa_int;
           data_b_mantissa_int <= data_b_in_mantissa_int;
 
-          data_exponent_int <= std_logic_vector(("00" & unsigned(data_a_in_exponent_int)) + not ("00" & unsigned(data_b_in_exponent_int)) + unsigned(ONE_EXPONENT_REGISTER) + "0001111111");
+          data_exponent_int <= std_logic_vector(("00" & unsigned(data_a_in_exponent_int)) + not ("00" & unsigned(data_b_in_exponent_int)) + unsigned(ONE_EXPONENT_REGISTER) + unsigned(BIAS_EXPONENT));
 
           data_sign_int <= data_a_in_sign_int xor data_b_in_sign_int;
 
