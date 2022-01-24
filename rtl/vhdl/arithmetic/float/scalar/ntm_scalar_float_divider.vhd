@@ -238,10 +238,10 @@ begin
             -- FSM Control
             divider_ctrl_fsm_int <= STARTER_STATE;
           elsif (
-		    data_exponent_int(EXPONENT_SIZE+1) = '1' or
-			data_exponent_int(EXPONENT_SIZE-1 downto 0) = EXPONENT_EMPTY or
-			(data_a_in_exponent_int = EXPONENT_EMPTY and data_a_in_mantissa_int = ZERO_MANTISSA_REGISTER) or
-			(data_b_in_exponent_int = EXPONENT_FULL and data_b_in_mantissa_int = ZERO_MANTISSA_REGISTER)) then
+            data_exponent_int(EXPONENT_SIZE+1) = '1' or
+            data_exponent_int(EXPONENT_SIZE-1 downto 0) = EXPONENT_EMPTY or
+            (data_a_in_exponent_int = EXPONENT_EMPTY and data_a_in_mantissa_int = ZERO_MANTISSA_REGISTER) or
+            (data_b_in_exponent_int = EXPONENT_FULL and data_b_in_mantissa_int = ZERO_MANTISSA_REGISTER)) then
 
             -- Control Outputs
             READY <= '1';
