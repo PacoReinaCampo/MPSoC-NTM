@@ -278,7 +278,7 @@ begin
           DATA_OUT_ENABLE <= '0';
 
           -- Data Internal
-          data_a_in_scalar_multiplier <= vector_a_int(to_integer(unsigned(index_i_loop)));
+          data_a_in_scalar_multiplier <= vector_a_int(to_integer(unsigned(index_m_loop)));
           data_b_in_scalar_multiplier <= vector_b_int(to_integer(unsigned(index_i_loop)-unsigned(index_m_loop)));
 
           -- Control Internal
@@ -298,7 +298,7 @@ begin
             -- Data Internal
             data_a_in_scalar_adder <= data_out_scalar_multiplier;
 
-            if (unsigned(index_i_loop) = unsigned(ZERO_CONTROL)) then
+            if (unsigned(index_m_loop) = unsigned(ZERO_CONTROL)) then
               data_b_in_scalar_adder <= ZERO_DATA;
             else
               data_b_in_scalar_adder <= data_out_scalar_adder;
@@ -315,28 +315,47 @@ begin
 
           if (ready_scalar_adder = '1') then
             if (unsigned(index_i_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+              if (unsigned(index_m_loop) = unsigned(index_i_loop)) then
+                -- Data Outputs
+                DATA_OUT <= data_out_scalar_adder;
 
-              -- Control Outputs
-              READY <= '1';
+                -- Control Outputs
+                DATA_OUT_ENABLE <= '1';
 
-              -- Control Internal
-              index_i_loop <= ZERO_CONTROL;
+                READY <= '1';
 
-              -- FSM Control
-              convolution_ctrl_fsm_int <= STARTER_STATE;
+                -- Control Internal
+                index_i_loop <= ZERO_CONTROL;
+                index_m_loop <= ZERO_CONTROL;
+
+                -- FSM Control
+                convolution_ctrl_fsm_int <= STARTER_STATE;
+              else
+                -- Control Internal
+                index_m_loop <= std_logic_vector(unsigned(index_m_loop)+unsigned(ONE_CONTROL));
+
+                -- FSM Control
+                convolution_ctrl_fsm_int <= CLEAN_STATE;
+              end if;
             else
-              -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
+              if (unsigned(index_m_loop) = unsigned(index_i_loop)) then
+                -- Data Outputs
+                DATA_OUT <= data_out_scalar_adder;
+
+                -- Control Outputs
+                DATA_OUT_ENABLE <= '1';
+
+                -- Control Internal
+                index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
+                index_m_loop <= ZERO_CONTROL;
+              else
+                -- Control Internal
+                index_m_loop <= std_logic_vector(unsigned(index_m_loop)+unsigned(ONE_CONTROL));
+              end if;
 
               -- FSM Control
               convolution_ctrl_fsm_int <= CLEAN_STATE;
             end if;
-
-            -- Data Outputs
-            DATA_OUT <= data_out_scalar_adder;
-
-            -- Control Outputs
-            DATA_OUT_ENABLE <= '1';
           else
             -- Control Internal
             start_scalar_adder <= '0';

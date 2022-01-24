@@ -33,7 +33,7 @@ add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product
 
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/index_i_loop
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/index_j_loop
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/index_k_loop
+add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/index_m_loop
 
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/data_a_in_i_product_int
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/data_a_in_j_product_int

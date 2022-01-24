@@ -42,6 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 
 entity ntm_matrix_summation is
@@ -90,8 +91,8 @@ architecture ntm_matrix_summation_architecture of ntm_matrix_summation is
     ENDER_J_STATE,                      -- STEP 4
     CLEAN_I_STATE,                      -- STEP 5
     CLEAN_J_STATE,                      -- STEP 6
-    OPERATION_I_STATE,                  -- STEP 7
-    OPERATION_J_STATE                   -- STEP 8
+    SCALAR_ADDER_I_STATE,               -- STEP 7
+    SCALAR_ADDER_J_STATE                -- STEP 8
     );
 
   -- Buffer
@@ -130,6 +131,20 @@ architecture ntm_matrix_summation_architecture of ntm_matrix_summation is
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
+  -- SCALAR ADDER
+  -- CONTROL
+  signal start_scalar_adder : std_logic;
+  signal ready_scalar_adder : std_logic;
+
+  signal operation_scalar_adder : std_logic;
+
+  -- DATA
+  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_scalar_adder : std_logic;
+
 begin
 
   -----------------------------------------------------------------------
@@ -155,8 +170,16 @@ begin
       DATA_OUT_J_ENABLE <= '0';
 
       -- Control Internal
+      start_scalar_adder <= '0';
+
+      operation_scalar_adder <= '0';
+
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
+
+      -- Data Internal
+      data_a_in_scalar_adder <= ZERO_DATA;
+      data_b_in_scalar_adder <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -263,6 +286,15 @@ begin
 
         when CLEAN_I_STATE =>           -- STEP 5
 
+          -- Data Inputs
+          data_a_in_scalar_adder <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+          if (unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            data_b_in_scalar_adder <= ZERO_DATA;
+          else
+            data_b_in_scalar_adder <= data_out_scalar_adder;
+          end if;
+
           -- Control Outputs
           DATA_I_ENABLE <= '0';
           DATA_J_ENABLE <= '0';
@@ -270,73 +302,99 @@ begin
           DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
 
-          -- FSM Control
-          summation_ctrl_fsm_int <= OPERATION_J_STATE;
+          -- Control Internal
+          start_scalar_adder <= '1';
 
-        when CLEAN_J_STATE =>           -- STEP 6
-
-          -- Control Outputs
-          DATA_I_ENABLE <= '0';
-          DATA_J_ENABLE <= '0';
-
-          DATA_OUT_J_ENABLE <= '0';
-          DATA_OUT_J_ENABLE <= '0';
+          operation_scalar_adder <= '0';
 
           -- FSM Control
           if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-            summation_ctrl_fsm_int <= OPERATION_I_STATE;
+            summation_ctrl_fsm_int <= SCALAR_ADDER_I_STATE;
           else
-            summation_ctrl_fsm_int <= OPERATION_J_STATE;
+            summation_ctrl_fsm_int <= SCALAR_ADDER_J_STATE;
           end if;
 
-        when OPERATION_I_STATE =>       -- STEP 7
+        when CLEAN_J_STATE =>           -- STEP 6
 
-          if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
+          -- Data Inputs
+          data_a_in_scalar_adder <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+          data_b_in_scalar_adder <= data_out_scalar_adder;
 
-            -- Control Outputs
-            READY <= '1';
+          -- Control Outputs
+          DATA_J_ENABLE <= '0';
 
-            DATA_OUT_I_ENABLE <= '1';
-            DATA_OUT_J_ENABLE <= '1';
+          DATA_OUT_J_ENABLE <= '0';
 
-            -- Control Internal
-            index_i_loop <= ZERO_CONTROL;
-            index_j_loop <= ZERO_CONTROL;
+          -- Control Internal
+          start_scalar_adder <= '1';
 
-            -- FSM Control
-            summation_ctrl_fsm_int <= STARTER_STATE;
-          elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
+          operation_scalar_adder <= '0';
 
-            -- Control Outputs
-            DATA_OUT_I_ENABLE <= '1';
-            DATA_OUT_J_ENABLE <= '1';
-
-            -- Control Internal
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-
-            -- FSM Control
-            summation_ctrl_fsm_int <= CLEAN_I_STATE;
+          -- FSM Control
+          if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+            summation_ctrl_fsm_int <= SCALAR_ADDER_I_STATE;
+          else
+            summation_ctrl_fsm_int <= SCALAR_ADDER_J_STATE;
           end if;
 
-        when OPERATION_J_STATE =>       -- STEP 8
+        when SCALAR_ADDER_I_STATE =>    -- STEP 7
 
-          if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-            -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
+          if (ready_scalar_adder = '1') then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_scalar_adder;
 
-            -- Control Outputs
-            DATA_OUT_J_ENABLE <= '1';
+              -- Control Outputs
+              READY <= '1';
 
+              DATA_OUT_I_ENABLE <= '1';              
+              DATA_OUT_J_ENABLE <= '1';
+
+              -- Control Internal
+              index_i_loop <= ZERO_CONTROL;
+              index_j_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              summation_ctrl_fsm_int <= STARTER_STATE;
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+              -- Data Outputs
+              DATA_OUT <= data_out_scalar_adder;
+
+              -- Control Outputs
+              DATA_OUT_I_ENABLE <= '1';
+              DATA_OUT_J_ENABLE <= '1';
+
+              -- Control Internal
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
+              index_j_loop <= ZERO_CONTROL;
+
+              -- FSM Control
+              summation_ctrl_fsm_int <= CLEAN_I_STATE;
+            end if;
+          else
             -- Control Internal
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop)+unsigned(ONE_CONTROL));
+            start_scalar_adder <= '0';
+          end if;
 
-            -- FSM Control
-            summation_ctrl_fsm_int <= CLEAN_J_STATE;
+        when SCALAR_ADDER_J_STATE =>    -- STEP 8
+
+          if (ready_scalar_adder = '1') then
+            if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              -- Data Outputs
+              DATA_OUT <= data_out_scalar_adder;
+
+              -- Control Outputs
+              DATA_OUT_J_ENABLE <= '1';
+
+              -- Control Internal
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop)+unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              summation_ctrl_fsm_int <= CLEAN_J_STATE;
+            end if;
+          else
+            -- Control Internal
+            start_scalar_adder <= '0';
           end if;
 
         when others =>
@@ -345,5 +403,30 @@ begin
       end case;
     end if;
   end process;
+
+  -- SCALAR ADDER
+  scalar_adder : ntm_scalar_adder
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_adder,
+      READY => ready_scalar_adder,
+
+      OPERATION => operation_scalar_adder,
+
+      -- DATA
+      DATA_A_IN => data_a_in_scalar_adder,
+      DATA_B_IN => data_b_in_scalar_adder,
+
+      DATA_OUT     => data_out_scalar_adder,
+      OVERFLOW_OUT => overflow_out_scalar_adder
+      );
 
 end architecture;

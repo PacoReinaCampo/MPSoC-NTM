@@ -29,6 +29,14 @@ add wave -noupdate /ntm_algebra_testbench/ntm_matrix_summation_test/matrix_summa
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_summation_test/matrix_summation/index_i_loop
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_summation_test/matrix_summation/index_j_loop
 
+add wave -noupdate /ntm_algebra_testbench/ntm_matrix_summation_test/matrix_summation/start_scalar_adder
+add wave -noupdate /ntm_algebra_testbench/ntm_matrix_summation_test/matrix_summation/operation_scalar_adder
+add wave -noupdate /ntm_algebra_testbench/ntm_matrix_summation_test/matrix_summation/data_a_in_scalar_adder
+add wave -noupdate /ntm_algebra_testbench/ntm_matrix_summation_test/matrix_summation/data_b_in_scalar_adder
+add wave -noupdate /ntm_algebra_testbench/ntm_matrix_summation_test/matrix_summation/ready_scalar_adder
+add wave -noupdate /ntm_algebra_testbench/ntm_matrix_summation_test/matrix_summation/data_out_scalar_adder
+add wave -noupdate /ntm_algebra_testbench/ntm_matrix_summation_test/matrix_summation/overflow_out_scalar_adder
+
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}
 configure wave -namecolwidth 305
