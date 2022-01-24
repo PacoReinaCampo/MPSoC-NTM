@@ -154,9 +154,7 @@ begin
           READY <= '0';
 
           DATA_ENABLE <= '0';
-          DATA_ENABLE <= '0';
 
-          DATA_OUT_ENABLE <= '0';
           DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then

@@ -216,6 +216,8 @@ package ntm_algebra_pkg is
       VECTOR_CONVOLUTION_DATA_A_IN_ENABLE : out std_logic;
       VECTOR_CONVOLUTION_DATA_B_IN_ENABLE : out std_logic;
 
+      VECTOR_CONVOLUTION_DATA_ENABLE : in std_logic;
+
       VECTOR_CONVOLUTION_DATA_OUT_ENABLE : in std_logic;
 
       -- DATA
@@ -247,8 +249,6 @@ package ntm_algebra_pkg is
 
       VECTOR_MULTIPLICATION_DATA_IN_ENABLE : out std_logic;
 
-      VECTOR_MULTIPLICATION_DATA_ENABLE : in std_logic;
-
       VECTOR_MULTIPLICATION_DATA_OUT_ENABLE : in std_logic;
 
       -- DATA
@@ -262,8 +262,6 @@ package ntm_algebra_pkg is
       VECTOR_SUMMATION_READY : in  std_logic;
 
       VECTOR_SUMMATION_DATA_IN_ENABLE : out std_logic;
-
-      VECTOR_SUMMATION_DATA_ENABLE : in std_logic;
 
       VECTOR_SUMMATION_DATA_OUT_ENABLE : in std_logic;
 

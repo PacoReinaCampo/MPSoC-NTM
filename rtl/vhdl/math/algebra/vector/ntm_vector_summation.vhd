@@ -42,7 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.ntm_math_pkg.all;
+use work.ntm_arithmetic_pkg.all;
 
 entity ntm_vector_summation is
   generic (
@@ -60,8 +60,6 @@ entity ntm_vector_summation is
 
     DATA_IN_ENABLE : in std_logic;
 
-    DATA_ENABLE : out std_logic;
-
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
@@ -77,17 +75,11 @@ architecture ntm_vector_summation_architecture of ntm_vector_summation is
   -- Types
   -----------------------------------------------------------------------
 
-  -- Finite State Machine
   type summation_ctrl_fsm is (
-    STARTER_STATE,                    -- STEP 0
-    INPUT_STATE,                      -- STEP 1
-    ENDER_STATE,                      -- STEP 3
-    CLEAN_STATE,                      -- STEP 5
-    OPERATION_STATE                   -- STEP 8
+    STARTER_STATE,                      -- STEP 0
+    INPUT_STATE,                        -- STEP 1
+    SCALAR_ADDER_STATE                  -- STEP 2
     );
-
-  -- Buffer
-  type vector_buffer is array (CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Constants
@@ -115,19 +107,26 @@ architecture ntm_vector_summation_architecture of ntm_vector_summation is
   -- Finite State Machine
   signal summation_ctrl_fsm_int : summation_ctrl_fsm;
 
-  -- Buffer
-  signal vector_int : vector_buffer;
-
   -- Control Internal
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  -- SCALAR ADDER
+  -- CONTROL
+  signal start_scalar_adder : std_logic;
+  signal ready_scalar_adder : std_logic;
+
+  signal operation_scalar_adder : std_logic;
+
+  -- DATA
+  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
-
-  -- DATA_OUT = summation(DATA_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -139,12 +138,18 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      DATA_ENABLE <= '0';
-
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
+      start_scalar_adder <= '0';
+
+      operation_scalar_adder <= '0';
+
       index_loop <= ZERO_CONTROL;
+
+      -- Data Internal
+      data_a_in_scalar_adder <= ZERO_DATA;
+      data_b_in_scalar_adder <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -153,10 +158,6 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          DATA_ENABLE <= '0';
-          DATA_ENABLE <= '0';
-
-          DATA_OUT_ENABLE <= '0';
           DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
@@ -167,75 +168,56 @@ begin
             summation_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_STATE =>           -- STEP 2
+        when INPUT_STATE =>             -- STEP 1
 
           if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
-            vector_int(to_integer(unsigned(index_loop))) <= DATA_IN;
+            data_a_in_scalar_adder <= DATA_IN;
+
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+              data_b_in_scalar_adder <= ZERO_DATA;
+            else
+              data_b_in_scalar_adder <= data_out_scalar_adder;
+            end if;
+
+            -- Control Internal
+            start_scalar_adder <= '1';
+
+            operation_scalar_adder <= '0';
 
             -- FSM Control
-            summation_ctrl_fsm_int <= ENDER_STATE;
+            summation_ctrl_fsm_int <= SCALAR_ADDER_STATE;
           end if;
 
           -- Control Outputs
-          DATA_ENABLE <= '0';
-
-        when ENDER_STATE =>           -- STEP 4
-
-          if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-            -- Control Internal
-            index_loop <= ZERO_CONTROL;
-
-            -- FSM Control
-            summation_ctrl_fsm_int <= CLEAN_STATE;
-          else
-            -- Control Internal
-            index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
-
-            -- Control Outputs
-            DATA_ENABLE <= '1';
-
-            -- FSM Control
-            summation_ctrl_fsm_int <= INPUT_STATE;
-          end if;
-
-          -- Data Outputs
-          DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
-
-        when CLEAN_STATE =>           -- STEP 5
-
-          -- Control Outputs
-          DATA_ENABLE <= '0';
-
           DATA_OUT_ENABLE <= '0';
 
-          -- FSM Control
-          summation_ctrl_fsm_int <= OPERATION_STATE;
+        when SCALAR_ADDER_STATE =>      -- STEP 2
 
-        when OPERATION_STATE =>       -- STEP 8
+          if (ready_scalar_adder = '1') then
+            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+              -- Control Outputs
+              READY <= '1';
 
-          if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+              -- FSM Control
+              summation_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Control Internal
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
+
+              -- FSM Control
+              summation_ctrl_fsm_int <= INPUT_STATE;
+            end if;
+
+            -- Data Outputs
+            DATA_OUT <= data_out_scalar_adder;
+
             -- Control Outputs
-            READY <= '1';
-
-            -- Control Internal
-            index_loop <= ZERO_CONTROL;
-
-            -- FSM Control
-            summation_ctrl_fsm_int <= STARTER_STATE;
+            DATA_OUT_ENABLE <= '1';
           else
             -- Control Internal
-            index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
-
-            -- FSM Control
-            summation_ctrl_fsm_int <= CLEAN_STATE;
+            start_scalar_adder <= '0';
           end if;
-
-          -- Data Outputs
-          DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
-
-          -- Control Outputs
-          DATA_OUT_ENABLE <= '1';
 
         when others =>
           -- FSM Control
@@ -243,5 +225,28 @@ begin
       end case;
     end if;
   end process;
+
+  -- SCALAR ADDER
+  scalar_adder : ntm_scalar_adder
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_adder,
+      READY => ready_scalar_adder,
+
+      OPERATION => operation_scalar_adder,
+
+      -- DATA
+      DATA_A_IN => data_a_in_scalar_adder,
+      DATA_B_IN => data_b_in_scalar_adder,
+      DATA_OUT  => data_out_scalar_adder
+      );
 
 end architecture;

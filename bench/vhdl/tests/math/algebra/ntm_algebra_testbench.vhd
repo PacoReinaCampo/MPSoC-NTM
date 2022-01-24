@@ -193,8 +193,6 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
 
   signal data_in_enable_vector_multiplication : std_logic;
 
-  signal data_enable_vector_multiplication : std_logic;
-
   signal data_out_enable_vector_multiplication : std_logic;
 
   -- DATA
@@ -208,8 +206,6 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal ready_vector_summation : std_logic;
 
   signal data_in_enable_vector_summation : std_logic;
-
-  signal data_enable_vector_summation : std_logic;
 
   signal data_out_enable_vector_summation : std_logic;
 
@@ -582,6 +578,8 @@ begin
       VECTOR_CONVOLUTION_DATA_A_IN_ENABLE => data_a_in_enable_vector_convolution,
       VECTOR_CONVOLUTION_DATA_B_IN_ENABLE => data_b_in_enable_vector_convolution,
 
+      VECTOR_CONVOLUTION_DATA_ENABLE => data_enable_vector_convolution,
+
       VECTOR_CONVOLUTION_DATA_OUT_ENABLE => data_out_enable_vector_convolution,
 
       -- DATA
@@ -613,8 +611,6 @@ begin
 
       VECTOR_MULTIPLICATION_DATA_IN_ENABLE => data_in_enable_vector_multiplication,
 
-      VECTOR_MULTIPLICATION_DATA_ENABLE => data_enable_vector_multiplication,
-
       VECTOR_MULTIPLICATION_DATA_OUT_ENABLE => data_out_enable_vector_multiplication,
 
       -- DATA
@@ -628,8 +624,6 @@ begin
       VECTOR_SUMMATION_READY => ready_vector_summation,
 
       VECTOR_SUMMATION_DATA_IN_ENABLE => data_in_enable_vector_summation,
-
-      VECTOR_SUMMATION_DATA_ENABLE => data_enable_vector_summation,
 
       VECTOR_SUMMATION_DATA_OUT_ENABLE => data_out_enable_vector_summation,
 
@@ -1003,6 +997,8 @@ begin
         DATA_A_IN_ENABLE => data_a_in_enable_vector_convolution,
         DATA_B_IN_ENABLE => data_b_in_enable_vector_convolution,
 
+        DATA_ENABLE => data_enable_vector_convolution,
+
         DATA_OUT_ENABLE => data_out_enable_vector_convolution,
 
         -- DATA
@@ -1060,8 +1056,6 @@ begin
 
         DATA_IN_ENABLE => data_in_enable_vector_multiplication,
 
-        DATA_ENABLE => data_enable_vector_multiplication,
-
         DATA_OUT_ENABLE => data_out_enable_vector_multiplication,
 
         -- DATA
@@ -1088,8 +1082,6 @@ begin
         READY => ready_vector_summation,
 
         DATA_IN_ENABLE => data_in_enable_vector_summation,
-
-        DATA_ENABLE => data_enable_vector_summation,
 
         DATA_OUT_ENABLE => data_out_enable_vector_summation,
 

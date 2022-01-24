@@ -51,7 +51,6 @@ alias ntm_vector_cosine_similarity_design_compilation {
 alias ntm_vector_multiplication_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/ntm_scalar_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/ntm_scalar_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/vector/ntm_vector_multiplication.vhd
 }
@@ -64,7 +63,6 @@ alias ntm_vector_summation_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/ntm_scalar_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/ntm_scalar_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/vector/ntm_vector_summation.vhd
 }
 

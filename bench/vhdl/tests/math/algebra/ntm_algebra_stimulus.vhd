@@ -88,6 +88,8 @@ entity ntm_algebra_stimulus is
     VECTOR_CONVOLUTION_DATA_A_IN_ENABLE : out std_logic;
     VECTOR_CONVOLUTION_DATA_B_IN_ENABLE : out std_logic;
 
+    VECTOR_CONVOLUTION_DATA_ENABLE : in std_logic;
+
     VECTOR_CONVOLUTION_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
@@ -119,8 +121,6 @@ entity ntm_algebra_stimulus is
 
     VECTOR_MULTIPLICATION_DATA_IN_ENABLE : out std_logic;
 
-    VECTOR_MULTIPLICATION_DATA_ENABLE : in std_logic;
-
     VECTOR_MULTIPLICATION_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
@@ -134,8 +134,6 @@ entity ntm_algebra_stimulus is
     VECTOR_SUMMATION_READY : in  std_logic;
 
     VECTOR_SUMMATION_DATA_IN_ENABLE : out std_logic;
-
-    VECTOR_SUMMATION_DATA_ENABLE : in std_logic;
 
     VECTOR_SUMMATION_DATA_OUT_ENABLE : in std_logic;
 
@@ -721,7 +719,7 @@ begin
         index_i_loop <= ZERO_CONTROL;
 
         VECTOR_CONVOLUTION_FIRST_RUN : loop
-          if (VECTOR_CONVOLUTION_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_CONVOLUTION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          if (VECTOR_CONVOLUTION_DATA_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_CONVOLUTION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_CONVOLUTION_DATA_A_IN_ENABLE <= '1';
             VECTOR_CONVOLUTION_DATA_B_IN_ENABLE <= '1';
@@ -732,7 +730,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif ((VECTOR_CONVOLUTION_DATA_OUT_ENABLE = '1' or VECTOR_CONVOLUTION_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_CONVOLUTION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((VECTOR_CONVOLUTION_DATA_ENABLE = '1' or VECTOR_CONVOLUTION_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_CONVOLUTION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_CONVOLUTION_DATA_A_IN_ENABLE <= '1';
             VECTOR_CONVOLUTION_DATA_B_IN_ENABLE <= '1';
@@ -772,7 +770,7 @@ begin
         index_i_loop <= ZERO_CONTROL;
 
         VECTOR_CONVOLUTION_SECOND_RUN : loop
-          if (VECTOR_CONVOLUTION_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_CONVOLUTION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          if (VECTOR_CONVOLUTION_DATA_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_CONVOLUTION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_CONVOLUTION_DATA_A_IN_ENABLE <= '1';
             VECTOR_CONVOLUTION_DATA_B_IN_ENABLE <= '1';
@@ -783,7 +781,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif ((VECTOR_CONVOLUTION_DATA_OUT_ENABLE = '1' or VECTOR_CONVOLUTION_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_CONVOLUTION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((VECTOR_CONVOLUTION_DATA_ENABLE = '1' or VECTOR_CONVOLUTION_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_CONVOLUTION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_CONVOLUTION_DATA_A_IN_ENABLE <= '1';
             VECTOR_CONVOLUTION_DATA_B_IN_ENABLE <= '1';
@@ -950,7 +948,7 @@ begin
         index_i_loop <= ZERO_CONTROL;
 
         VECTOR_MULTIPLICATION_FIRST_RUN : loop
-          if (VECTOR_MULTIPLICATION_DATA_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          if (VECTOR_MULTIPLICATION_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
 
@@ -959,7 +957,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif ((VECTOR_MULTIPLICATION_DATA_ENABLE = '1' or VECTOR_MULTIPLICATION_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((VECTOR_MULTIPLICATION_DATA_OUT_ENABLE = '1' or VECTOR_MULTIPLICATION_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
 
@@ -995,7 +993,7 @@ begin
         index_i_loop <= ZERO_CONTROL;
 
         VECTOR_MULTIPLICATION_SECOND_RUN : loop
-          if ((VECTOR_MULTIPLICATION_DATA_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          if ((VECTOR_MULTIPLICATION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
 
@@ -1004,7 +1002,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif (((VECTOR_MULTIPLICATION_DATA_ENABLE = '1') or (VECTOR_MULTIPLICATION_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif (((VECTOR_MULTIPLICATION_DATA_OUT_ENABLE = '1') or (VECTOR_MULTIPLICATION_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_MULTIPLICATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MULTIPLICATION_DATA_IN_ENABLE <= '1';
 
@@ -1053,7 +1051,7 @@ begin
         index_i_loop <= ZERO_CONTROL;
 
         VECTOR_SUMMATION_FIRST_RUN : loop
-          if (VECTOR_SUMMATION_DATA_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          if (VECTOR_SUMMATION_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_SUMMATION_DATA_IN_ENABLE <= '1';
 
@@ -1062,7 +1060,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif ((VECTOR_SUMMATION_DATA_ENABLE = '1' or VECTOR_SUMMATION_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((VECTOR_SUMMATION_DATA_OUT_ENABLE = '1' or VECTOR_SUMMATION_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_SUMMATION_DATA_IN_ENABLE <= '1';
 
@@ -1098,7 +1096,7 @@ begin
         index_i_loop <= ZERO_CONTROL;
 
         VECTOR_SUMMATION_SECOND_RUN : loop
-          if ((VECTOR_SUMMATION_DATA_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          if ((VECTOR_SUMMATION_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_SUMMATION_DATA_IN_ENABLE <= '1';
 
@@ -1107,7 +1105,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif (((VECTOR_SUMMATION_DATA_ENABLE = '1') or (VECTOR_SUMMATION_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif (((VECTOR_SUMMATION_DATA_OUT_ENABLE = '1') or (VECTOR_SUMMATION_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_SUMMATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_SUMMATION_DATA_IN_ENABLE <= '1';
 
