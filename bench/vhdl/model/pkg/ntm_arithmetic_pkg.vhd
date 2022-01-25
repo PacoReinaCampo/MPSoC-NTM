@@ -934,6 +934,28 @@ package ntm_arithmetic_pkg is
       );
   end component;
 
+  component ntm_scalar_float_adder is
+    generic (
+      DATA_SIZE    : integer := 32;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
   component ntm_scalar_multiplier is
     generic (
       DATA_SIZE    : integer := 128;
@@ -957,6 +979,29 @@ package ntm_arithmetic_pkg is
       );
   end component;
 
+  component ntm_scalar_float_multiplier is
+    generic (
+      DATA_SIZE    : integer := 32;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
   component ntm_scalar_divider is
     generic (
       DATA_SIZE    : integer := 128;
@@ -977,6 +1022,29 @@ package ntm_arithmetic_pkg is
 
       DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
       REST_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_scalar_float_divider is
+    generic (
+      DATA_SIZE    : integer := 32;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- DATA
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
       );
   end component;
 

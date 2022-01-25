@@ -267,7 +267,7 @@ begin
             end if;
           else
             -- Control Outputs
-             READY <= '0';
+            READY <= '0';
 
             DATA_I_ENABLE <= '0';
             DATA_J_ENABLE <= '0';

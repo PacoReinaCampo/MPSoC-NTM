@@ -248,14 +248,14 @@ begin
           -- Control Outputs
           DATA_ENABLE <= '0';
 
-        when ENDER_STATE =>           -- STEP 2
+        when ENDER_STATE =>             -- STEP 2
 
           if (unsigned(index_i_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
 
             -- FSM Control
-           convolution_ctrl_fsm_int <= CLEAN_STATE;
+            convolution_ctrl_fsm_int <= CLEAN_STATE;
           else
             -- Control Internal
             index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
@@ -264,13 +264,13 @@ begin
             DATA_ENABLE <= '1';
 
             -- FSM Control
-           convolution_ctrl_fsm_int <= INPUT_STATE;
+            convolution_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
           -- Data Outputs
           DATA_OUT <= ZERO_DATA;
 
-        when CLEAN_STATE =>           -- STEP 3
+        when CLEAN_STATE =>             -- STEP 3
 
           -- Control Outputs
           DATA_ENABLE <= '0';
@@ -285,7 +285,7 @@ begin
           start_scalar_multiplier <= '1';
 
           -- FSM Control
-         convolution_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
+          convolution_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
 
         when SCALAR_MULTIPLIER_STATE =>  -- STEP 4
 

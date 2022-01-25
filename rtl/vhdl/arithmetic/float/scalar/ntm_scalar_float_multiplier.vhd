@@ -103,7 +103,7 @@ architecture ntm_scalar_float_multiplier_architecture of ntm_scalar_float_multip
 
   constant ZERO_EXPONENT_REGISTER : std_logic_vector(EXPONENT_SIZE+1 downto 0) := std_logic_vector(to_unsigned(0, EXPONENT_SIZE+2));
   constant ONE_EXPONENT_REGISTER  : std_logic_vector(EXPONENT_SIZE+1 downto 0) := std_logic_vector(to_unsigned(1, EXPONENT_SIZE+2));
-  
+
   constant LIMIT_MANTISSA : std_logic_vector(MANTISSA_SIZE downto 0) := X"800000";
 
   constant EXPONENT_FULL  : std_logic_vector(EXPONENT_SIZE-1 downto 0) := (others => '1');
@@ -283,7 +283,7 @@ begin
             -- Data Internal
             if (data_product_int(MANTISSA_SIZE+1) = '0') then
               data_exponent_int <= std_logic_vector(unsigned(data_exponent_int) - unsigned(ONE_EXPONENT_REGISTER));
-              data_product_int <= data_product_int(MANTISSA_SIZE downto 0) & '0';
+              data_product_int  <= data_product_int(MANTISSA_SIZE downto 0) & '0';
             end if;
 
             -- FSM Control

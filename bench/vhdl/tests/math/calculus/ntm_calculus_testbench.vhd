@@ -179,7 +179,7 @@ architecture ntm_calculus_testbench_architecture of ntm_calculus_testbench is
   signal length_i_in_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_j_in_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_differentiation     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_differentiation    : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX INTEGRATION
   -- CONTROL
@@ -228,7 +228,7 @@ architecture ntm_calculus_testbench_architecture of ntm_calculus_testbench is
   signal ready_tensor_differentiation : std_logic;
 
   signal control_tensor_differentiation : std_logic_vector(1 downto 0)
-  ;
+;
 
   signal data_in_i_enable_tensor_differentiation : std_logic;
   signal data_in_j_enable_tensor_differentiation : std_logic;

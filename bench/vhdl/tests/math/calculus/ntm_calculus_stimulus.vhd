@@ -137,7 +137,7 @@ entity ntm_calculus_stimulus is
     MATRIX_DIFFERENTIATION_LENGTH_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_DIFFERENTIATION_LENGTH_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_DIFFERENTIATION_DATA_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_DIFFERENTIATION_DATA_OUT   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_DIFFERENTIATION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- MATRIX INTEGRATION
     -- CONTROL

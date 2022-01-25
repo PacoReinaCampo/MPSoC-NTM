@@ -42,9 +42,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.ntm_math_pkg.all;
+use work.ntm_arithmetic_pkg.all;
 
-entity ntm_vector_summation_function is
+entity ntm_vector_multiplication is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -58,32 +58,27 @@ entity ntm_vector_summation_function is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_IN_VECTOR_ENABLE : in std_logic;
-    DATA_IN_SCALAR_ENABLE : in std_logic;
+    DATA_IN_ENABLE : in std_logic;
 
-    DATA_OUT_VECTOR_ENABLE : out std_logic;
-    DATA_OUT_SCALAR_ENABLE : out std_logic;
+    DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
-architecture ntm_vector_summation_function_architecture of ntm_vector_summation_function is
+architecture ntm_vector_multiplication_architecture of ntm_vector_multiplication is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type summation_ctrl_fsm is (
+  type multiplication_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    INPUT_VECTOR_STATE,                 -- STEP 1
-    INPUT_SCALAR_STATE,                 -- STEP 2
-    ENDER_VECTOR_STATE,                 -- STEP 3
-    ENDER_SCALAR_STATE                  -- STEP 4
+    INPUT_STATE,                        -- STEP 1
+    SCALAR_MULTIPLIER_STATE             -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -110,25 +105,20 @@ architecture ntm_vector_summation_function_architecture of ntm_vector_summation_
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal summation_ctrl_fsm_int : summation_ctrl_fsm;
+  signal multiplication_ctrl_fsm_int : multiplication_ctrl_fsm;
 
-  -- Internal Signals
-  signal index_vector_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal index_scalar_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  -- Control Internal
+  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- SCALAR SUMMATION
+  -- SCALAR MULTIPLIER
   -- CONTROL
-  signal start_scalar_summation_function : std_logic;
-  signal ready_scalar_summation_function : std_logic;
-
-  signal data_in_enable_scalar_summation_function : std_logic;
-
-  signal data_out_enable_scalar_summation_function : std_logic;
+  signal start_scalar_multiplier : std_logic;
+  signal ready_scalar_multiplier : std_logic;
 
   -- DATA
-  signal length_in_scalar_summation_function : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_scalar_summation_function   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_summation_function  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -146,153 +136,92 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      DATA_OUT_VECTOR_ENABLE <= '0';
-      DATA_OUT_SCALAR_ENABLE <= '0';
+      DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
-      start_scalar_summation_function <= '0';
+      start_scalar_multiplier <= '0';
 
-      index_vector_loop <= ZERO_CONTROL;
-      index_scalar_loop <= ZERO_CONTROL;
-
-      data_in_enable_scalar_summation_function <= '0';
+      index_loop <= ZERO_CONTROL;
 
       -- Data Internal
-      length_in_scalar_summation_function <= ZERO_CONTROL;
-      data_in_scalar_summation_function   <= ZERO_DATA;
+      data_a_in_scalar_multiplier <= ZERO_DATA;
+      data_b_in_scalar_multiplier <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
-      case summation_ctrl_fsm_int is
+      case multiplication_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
-          DATA_OUT_VECTOR_ENABLE <= '0';
-          DATA_OUT_SCALAR_ENABLE <= '0';
+          DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
-            index_vector_loop <= ZERO_CONTROL;
-            index_scalar_loop <= ZERO_CONTROL;
+            -- Control Internal
+            index_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            summation_ctrl_fsm_int <= INPUT_VECTOR_STATE;
+            multiplication_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_VECTOR_STATE =>      -- STEP 1
+        when INPUT_STATE =>             -- STEP 1
 
-          if (((DATA_IN_VECTOR_ENABLE = '1') and (DATA_IN_SCALAR_ENABLE = '1')) or (index_scalar_loop = ZERO_CONTROL)) then
+          if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
-            length_in_scalar_summation_function <= LENGTH_IN;
+            data_a_in_scalar_multiplier <= DATA_IN;
 
-            data_in_scalar_summation_function <= DATA_IN;
-
-            -- Control Internal
-            start_scalar_summation_function <= '1';
-
-            data_in_enable_scalar_summation_function <= '1';
-
-            -- FSM Control
-            summation_ctrl_fsm_int <= ENDER_SCALAR_STATE;
-          end if;
-
-          -- Control Outputs
-          DATA_OUT_VECTOR_ENABLE <= '0';
-          DATA_OUT_SCALAR_ENABLE <= '0';
-
-        when INPUT_SCALAR_STATE =>      -- STEP 2
-
-          if (DATA_IN_SCALAR_ENABLE = '1') then
-            -- Data Inputs
-            data_in_scalar_summation_function <= DATA_IN;
-
-            -- Control Internal
-            data_in_enable_scalar_summation_function <= '1';
-
-            -- FSM Control
-            if (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              summation_ctrl_fsm_int <= ENDER_VECTOR_STATE;
+            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+              data_b_in_scalar_multiplier <= ONE_DATA;
             else
-              summation_ctrl_fsm_int <= ENDER_SCALAR_STATE;
+              data_b_in_scalar_multiplier <= data_out_scalar_multiplier;
             end if;
+
+            -- Control Internal
+            start_scalar_multiplier <= '1';
+
+            -- FSM Control
+            multiplication_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
           end if;
 
           -- Control Outputs
-          DATA_OUT_SCALAR_ENABLE <= '0';
+          DATA_OUT_ENABLE <= '0';
 
-        when ENDER_VECTOR_STATE =>      -- STEP 3
+        when SCALAR_MULTIPLIER_STATE =>  -- STEP 2
 
-          if (data_out_enable_scalar_summation_function = '1') then
-            if ((unsigned(index_vector_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
-              -- Data Outputs
-              DATA_OUT <= data_out_scalar_summation_function;
-
+          if (ready_scalar_multiplier = '1') then
+            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
               -- Control Outputs
-              DATA_OUT_VECTOR_ENABLE <= '1';
-              DATA_OUT_SCALAR_ENABLE <= '1';
-
               READY <= '1';
 
+              -- FSM Control
+              multiplication_ctrl_fsm_int <= STARTER_STATE;
+            else
               -- Control Internal
-              index_vector_loop <= ZERO_CONTROL;
-              index_scalar_loop <= ZERO_CONTROL;
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
               -- FSM Control
-              summation_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_vector_loop) < unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
-              -- Data Outputs
-              DATA_OUT <= data_out_scalar_summation_function;
-
-              -- Control Outputs
-              DATA_OUT_VECTOR_ENABLE <= '1';
-              DATA_OUT_SCALAR_ENABLE <= '1';
-
-              -- Control Internal
-              index_vector_loop <= std_logic_vector(unsigned(index_vector_loop) + unsigned(ONE_CONTROL));
-              index_scalar_loop <= ZERO_CONTROL;
-
-              -- FSM Control
-              summation_ctrl_fsm_int <= INPUT_VECTOR_STATE;
+              multiplication_ctrl_fsm_int <= INPUT_STATE;
             end if;
+
+            -- Data Outputs
+            DATA_OUT <= data_out_scalar_multiplier;
+
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '1';
           else
             -- Control Internal
-            start_scalar_summation_function <= '0';
-
-            data_in_enable_scalar_summation_function <= '0';
-          end if;
-
-        when ENDER_SCALAR_STATE =>      -- STEP 4
-
-          if (data_out_enable_scalar_summation_function = '1') then
-            if (unsigned(index_scalar_loop) < unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              -- Data Outputs
-              DATA_OUT <= data_out_scalar_summation_function;
-
-              -- Control Outputs
-              DATA_OUT_SCALAR_ENABLE <= '1';
-
-              -- Control Internal
-              index_scalar_loop <= std_logic_vector(unsigned(index_scalar_loop) + unsigned(ONE_CONTROL));
-
-              -- FSM Control
-              summation_ctrl_fsm_int <= INPUT_SCALAR_STATE;
-            end if;
-          else
-            -- Control Internal
-            start_scalar_summation_function <= '0';
-
-            data_in_enable_scalar_summation_function <= '0';
+            start_scalar_multiplier <= '0';
           end if;
 
         when others =>
           -- FSM Control
-          summation_ctrl_fsm_int <= STARTER_STATE;
+          multiplication_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
 
-  -- SCALAR SUMMATION
-  scalar_summation_function : ntm_scalar_summation_function
+  -- SCALAR MULTIPLIER
+  scalar_multiplier : ntm_scalar_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -303,17 +232,13 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_summation_function,
-      READY => ready_scalar_summation_function,
-
-      DATA_IN_ENABLE => data_in_enable_scalar_summation_function,
-
-      DATA_OUT_ENABLE => data_out_enable_scalar_summation_function,
+      START => start_scalar_multiplier,
+      READY => ready_scalar_multiplier,
 
       -- DATA
-      LENGTH_IN => length_in_scalar_summation_function,
-      DATA_IN   => data_in_scalar_summation_function,
-      DATA_OUT  => data_out_scalar_summation_function
+      DATA_A_IN => data_a_in_scalar_multiplier,
+      DATA_B_IN => data_b_in_scalar_multiplier,
+      DATA_OUT  => data_out_scalar_multiplier
       );
 
 end architecture;

@@ -103,7 +103,7 @@ package ntm_float_pkg is
 
   constant VECTOR_SAMPLE_A : vector_buffer := (FOUR, NINE, THREE);
   constant VECTOR_SAMPLE_B : vector_buffer := (THREE, NINE, ZERO);
-  
+
   constant FLOAT_SAMPLE_A : std_logic_vector(31 downto 0) := X"480C8021";
   constant FLOAT_SAMPLE_B : std_logic_vector(31 downto 0) := X"C3302020";
 

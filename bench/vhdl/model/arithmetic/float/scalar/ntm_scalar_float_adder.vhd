@@ -44,12 +44,12 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 
-entity ntm_scalar_adder is
+entity ntm_scalar_float_adder is
   generic (
-    DATA_SIZE    : integer := 128;
+    DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64
     );
-  port (
+  port(
     -- GLOBAL
     CLK : in std_logic;
     RST : in std_logic;
@@ -58,75 +58,43 @@ entity ntm_scalar_adder is
     START : in  std_logic;
     READY : out std_logic;
 
-    OPERATION : in std_logic;
-
     -- DATA
     DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-    OVERFLOW_OUT : out std_logic
+    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
-end entity;
+end ntm_scalar_float_adder;
 
-architecture ntm_scalar_adder_architecture of ntm_scalar_adder is
+architecture ntm_scalar_float_adder_architecture of ntm_scalar_float_adder is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
   type adder_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    ARITHMETIC_STATE,                   -- STEP 1
-    ADAPTATION_STATE,                   -- STEP 2
-    NORMALIZATION_STATE,                -- STEP 3
-    ENDER_STATE                         -- STEP 4
+    STARTER_STATE,
+    ALIGNMENT_STATE,
+    ADDITION_STATE,
+    NORMALIZATION_STATE,
+    ENDER_STATE
     );
 
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
-  constant EXPONENT_SIZE : integer := 15;
-  constant MANTISSA_SIZE : integer := 112;
+  constant MANTISSA_SIZE : integer := 23;
+  constant EXPONENT_SIZE : integer := 8;
 
-  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
 
-  constant ZERO_EXPONENT  : std_logic_vector(EXPONENT_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, EXPONENT_SIZE));
-  constant ONE_EXPONENT   : std_logic_vector(EXPONENT_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, EXPONENT_SIZE));
-  constant TWO_EXPONENT   : std_logic_vector(EXPONENT_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, EXPONENT_SIZE));
-  constant THREE_EXPONENT : std_logic_vector(EXPONENT_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, EXPONENT_SIZE));
+  constant ZERO_MANTISSA : std_logic_vector(MANTISSA_SIZE+1 downto 0) := std_logic_vector(to_unsigned(0, MANTISSA_SIZE+2));
+  constant ONE_MANTISSA  : std_logic_vector(MANTISSA_SIZE+1 downto 0) := std_logic_vector(to_unsigned(1, MANTISSA_SIZE+2));
 
-  constant ZERO_MANTISSA  : std_logic_vector(MANTISSA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, MANTISSA_SIZE));
-  constant ONE_MANTISSA   : std_logic_vector(MANTISSA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, MANTISSA_SIZE));
-  constant TWO_MANTISSA   : std_logic_vector(MANTISSA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, MANTISSA_SIZE));
-  constant THREE_MANTISSA : std_logic_vector(MANTISSA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, MANTISSA_SIZE));
-
-  constant ZERO_EXPONENT_OUTPUT  : std_logic_vector(EXPONENT_SIZE downto 0) := std_logic_vector(to_unsigned(0, EXPONENT_SIZE+1));
-  constant ONE_EXPONENT_OUTPUT   : std_logic_vector(EXPONENT_SIZE downto 0) := std_logic_vector(to_unsigned(1, EXPONENT_SIZE+1));
-  constant TWO_EXPONENT_OUTPUT   : std_logic_vector(EXPONENT_SIZE downto 0) := std_logic_vector(to_unsigned(2, EXPONENT_SIZE+1));
-  constant THREE_EXPONENT_OUTPUT : std_logic_vector(EXPONENT_SIZE downto 0) := std_logic_vector(to_unsigned(3, EXPONENT_SIZE+1));
-
-  constant ZERO_MANTISSA_OUTPUT  : std_logic_vector(MANTISSA_SIZE downto 0) := std_logic_vector(to_unsigned(0, MANTISSA_SIZE+1));
-  constant ONE_MANTISSA_OUTPUT   : std_logic_vector(MANTISSA_SIZE downto 0) := std_logic_vector(to_unsigned(1, MANTISSA_SIZE+1));
-  constant TWO_MANTISSA_OUTPUT   : std_logic_vector(MANTISSA_SIZE downto 0) := std_logic_vector(to_unsigned(2, MANTISSA_SIZE+1));
-  constant THREE_MANTISSA_OUTPUT : std_logic_vector(MANTISSA_SIZE downto 0) := std_logic_vector(to_unsigned(3, MANTISSA_SIZE+1));
-
-  constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
-  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
-
-  constant FULL_EXPONENT  : std_logic_vector(EXPONENT_SIZE-1 downto 0) := (others => '1');
-  constant EMPTY_EXPONENT : std_logic_vector(EXPONENT_SIZE-1 downto 0) := (others => '0');
-
-  constant FULL_MANTISSA  : std_logic_vector(MANTISSA_SIZE-1 downto 0) := (others => '1');
-  constant EMPTY_MANTISSA : std_logic_vector(MANTISSA_SIZE-1 downto 0) := (others => '0');
-
-  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
-
-  constant BIAS : std_logic_vector(EXPONENT_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2**(EXPONENT_SIZE-1)-1, EXPONENT_SIZE));
+  constant ZERO_EXPONENT : std_logic_vector(EXPONENT_SIZE downto 0) := std_logic_vector(to_unsigned(0, EXPONENT_SIZE+1));
+  constant ONE_EXPONENT  : std_logic_vector(EXPONENT_SIZE downto 0) := std_logic_vector(to_unsigned(1, EXPONENT_SIZE+1));
 
   -----------------------------------------------------------------------
   -- Signals
@@ -135,187 +103,181 @@ architecture ntm_scalar_adder_architecture of ntm_scalar_adder is
   -- Finite State Machine
   signal adder_ctrl_fsm_int : adder_ctrl_fsm;
 
-  -- Control Internal
-  signal data_out_ready_exponent_int : std_logic;
-  signal data_out_ready_mantissa_int : std_logic;
+  -- Data Internal
+  signal data_a_in_mantissa_int : std_logic_vector(MANTISSA_SIZE+1 downto 0);
+  signal data_b_in_mantissa_int : std_logic_vector(MANTISSA_SIZE+1 downto 0);
 
-  -- EXPONENT SCALAR ADDER
-  -- CONTROL
-  signal start_exponent_scalar_integer_adder : std_logic;
-  signal ready_exponent_scalar_integer_adder : std_logic;
+  signal data_a_in_exponent_int : std_logic_vector(EXPONENT_SIZE downto 0);
+  signal data_b_in_exponent_int : std_logic_vector(EXPONENT_SIZE downto 0);
 
-  signal operation_exponent_scalar_integer_adder : std_logic;
+  signal data_a_in_sign_int : std_logic;
+  signal data_b_in_sign_int : std_logic;
 
-  -- DATA
-  signal data_a_in_exponent_scalar_integer_adder : std_logic_vector(EXPONENT_SIZE-1 downto 0);
-  signal data_b_in_exponent_scalar_integer_adder : std_logic_vector(EXPONENT_SIZE-1 downto 0);
+  signal data_out_mantissa_int : std_logic_vector(MANTISSA_SIZE+1 downto 0);
 
-  signal data_out_exponent_scalar_integer_adder     : std_logic_vector(EXPONENT_SIZE-1 downto 0);
-  signal overflow_out_exponent_scalar_integer_adder : std_logic;
+  signal data_out_exponent_int : std_logic_vector(EXPONENT_SIZE downto 0);
 
-  -- MANTISSA SCALAR ADDER
-  -- CONTROL
-  signal start_mantissa_scalar_integer_adder : std_logic;
-  signal ready_mantissa_scalar_integer_adder : std_logic;
-
-  signal operation_mantissa_scalar_integer_adder : std_logic;
-
-  -- DATA
-  signal data_a_in_mantissa_scalar_integer_adder : std_logic_vector(MANTISSA_SIZE-1 downto 0);
-  signal data_b_in_mantissa_scalar_integer_adder : std_logic_vector(MANTISSA_SIZE-1 downto 0);
-
-  signal data_out_mantissa_scalar_integer_adder     : std_logic_vector(MANTISSA_SIZE-1 downto 0);
-  signal overflow_out_mantissa_scalar_integer_adder : std_logic;
-
-  -- OUTPUT
-  signal sign_int_scalar_adder : std_logic;
-
-  signal exponent_int_scalar_adder : std_logic_vector(EXPONENT_SIZE downto 0);
-  signal mantissa_int_scalar_adder : std_logic_vector(MANTISSA_SIZE downto 0);
+  signal data_out_sign_int : std_logic;
 
 begin
 
-  -----------------------------------------------------------------------
-  -- Body
-  -----------------------------------------------------------------------
-
-  -- DATA_OUT = DATA_A_IN ± DATA_B_IN = M_A_IN · 2^(E_A_IN) ± M_B_IN · 2^(E_B_IN)
-
-  -- CONTROL
-  ctrl_fsm : process(CLK, RST)
+  ctrl_fsm : process (CLK, RST)
   begin
-    if (RST = '0') then
+    if(RST = '0') then
       -- Data Outputs
-      DATA_OUT     <= ZERO_DATA;
-      OVERFLOW_OUT <= '0';
+      DATA_OUT <= (others => '0');
 
       -- Control Outputs
       READY <= '0';
 
-      -- Control Internal
-      start_exponent_scalar_integer_adder <= '0';
-      start_mantissa_scalar_integer_adder <= '0';
-
-      operation_exponent_scalar_integer_adder <= '0';
-      operation_mantissa_scalar_integer_adder <= '0';
-
-      data_out_ready_exponent_int <= '0';
-      data_out_ready_mantissa_int <= '0';
-
       -- Data Internal
-      data_a_in_exponent_scalar_integer_adder <= ZERO_EXPONENT;
-      data_b_in_exponent_scalar_integer_adder <= ZERO_EXPONENT;
+      data_a_in_mantissa_int <= ZERO_MANTISSA;
+      data_b_in_mantissa_int <= ZERO_MANTISSA;
 
-      data_a_in_mantissa_scalar_integer_adder <= ZERO_MANTISSA;
-      data_b_in_mantissa_scalar_integer_adder <= ZERO_MANTISSA;
+      data_a_in_exponent_int <= ZERO_EXPONENT;
+      data_b_in_exponent_int <= ZERO_EXPONENT;
 
-      sign_int_scalar_adder <= '0';
+      data_a_in_sign_int <= '0';
+      data_b_in_sign_int <= '0';
 
-      exponent_int_scalar_adder <= ZERO_EXPONENT_OUTPUT;
-      mantissa_int_scalar_adder <= ZERO_MANTISSA_OUTPUT;
+      data_out_mantissa_int <= ZERO_MANTISSA;
 
-    elsif (rising_edge(CLK)) then
+      data_out_exponent_int <= ZERO_EXPONENT;
+
+      data_out_sign_int <= '0';
+
+    elsif rising_edge(CLK) then
 
       case adder_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>
           -- Control Outputs
           READY <= '0';
 
           if (START = '1') then
-            -- Control Internal
-            start_exponent_scalar_integer_adder <= '1';
-            start_mantissa_scalar_integer_adder <= '1';
-
-            operation_exponent_scalar_integer_adder <= '0';
-            operation_mantissa_scalar_integer_adder <= '0';
-
-            data_out_ready_exponent_int <= '0';
-            data_out_ready_mantissa_int <= '0';
-
             -- Data Internal
-            sign_int_scalar_adder <= DATA_A_IN(DATA_SIZE-1) xor DATA_B_IN(DATA_SIZE-1);
+            data_a_in_mantissa_int <= "01" & DATA_A_IN(MANTISSA_SIZE-1 downto 0);
+            data_b_in_mantissa_int <= "01" & DATA_B_IN(MANTISSA_SIZE-1 downto 0);
 
-            data_a_in_exponent_scalar_integer_adder <= DATA_A_IN(DATA_SIZE-2 downto MANTISSA_SIZE);
-            data_b_in_exponent_scalar_integer_adder <= DATA_B_IN(DATA_SIZE-2 downto MANTISSA_SIZE);
+            data_a_in_exponent_int <= '0' & DATA_A_IN(DATA_SIZE-2 downto MANTISSA_SIZE);
+            data_b_in_exponent_int <= '0' & DATA_B_IN(DATA_SIZE-2 downto MANTISSA_SIZE);
 
-            data_a_in_mantissa_scalar_integer_adder <= DATA_A_IN(MANTISSA_SIZE-1 downto 0);
-            data_b_in_mantissa_scalar_integer_adder <= DATA_B_IN(MANTISSA_SIZE-1 downto 0);
-
-            -- FSM Control
-            adder_ctrl_fsm_int <= ARITHMETIC_STATE;
-          end if;
-
-        when ARITHMETIC_STATE =>  -- STEP 1
-
-          if (ready_exponent_scalar_integer_adder = '1') then
-            -- Data Outputs
-            exponent_int_scalar_adder <= overflow_out_exponent_scalar_integer_adder & data_out_exponent_scalar_integer_adder;
-
-            -- Control Internal
-            data_out_ready_exponent_int <= '1';
-          else
-            -- Control Internal
-            start_exponent_scalar_integer_adder <= '0';
-          end if;
-
-          if (ready_mantissa_scalar_integer_adder = '1') then
-            -- Data Outputs
-            mantissa_int_scalar_adder <= overflow_out_mantissa_scalar_integer_adder & data_out_mantissa_scalar_integer_adder;
-
-            -- Control Internal
-            data_out_ready_mantissa_int <= '1';
-          else
-            -- Control Internal
-            start_mantissa_scalar_integer_adder <= '0';
-          end if;
-
-          if (data_out_ready_exponent_int = '1' and data_out_ready_mantissa_int = '1') then
-            -- Control Internal
-            data_out_ready_exponent_int <= '0';
-            data_out_ready_mantissa_int <= '0';
+            data_b_in_sign_int <= DATA_B_IN(DATA_SIZE-1);
+            data_a_in_sign_int <= DATA_A_IN(DATA_SIZE-1);
 
             -- FSM Control
-            adder_ctrl_fsm_int <= ADAPTATION_STATE;
+            adder_ctrl_fsm_int <= ALIGNMENT_STATE;
           end if;
 
-        when ADAPTATION_STATE =>  -- STEP 2
+        when ALIGNMENT_STATE =>
 
-          if (overflow_out_mantissa_scalar_integer_adder = '0') then
-            -- FSM Control
-            adder_ctrl_fsm_int <= NORMALIZATION_STATE;
+          if (unsigned(data_a_in_exponent_int) > unsigned(data_b_in_exponent_int)) then
+            if (signed(data_a_in_exponent_int)-signed(data_b_in_exponent_int) > to_signed(MANTISSA_SIZE, EXPONENT_SIZE+1)) then
+              -- Data Internal
+              data_out_mantissa_int <= data_a_in_mantissa_int;
+
+              data_out_exponent_int <= data_a_in_exponent_int;
+
+              data_out_sign_int <= data_a_in_sign_int;
+
+              -- FSM Control
+              adder_ctrl_fsm_int <= ENDER_STATE;
+            else
+              -- Data Internal
+              data_b_in_mantissa_int(MANTISSA_SIZE+1-to_integer(signed(data_a_in_exponent_int)-signed(data_b_in_exponent_int)) downto 0) <= data_b_in_mantissa_int(MANTISSA_SIZE+1 downto to_integer(signed(data_a_in_exponent_int)-signed(data_b_in_exponent_int)));
+
+              data_b_in_mantissa_int(MANTISSA_SIZE+1 downto MANTISSA_SIZE+2-to_integer(signed(data_a_in_exponent_int)-signed(data_b_in_exponent_int))) <= (others => '0');
+
+              data_out_exponent_int <= data_a_in_exponent_int;
+
+              -- FSM Control
+              adder_ctrl_fsm_int <= ADDITION_STATE;
+            end if;
+          elsif (unsigned(data_a_in_exponent_int) < unsigned(data_b_in_exponent_int)) then
+            if (signed(data_b_in_exponent_int)-signed(data_a_in_exponent_int) > to_signed(MANTISSA_SIZE, EXPONENT_SIZE+1)) then
+              -- Data Internal
+              data_out_mantissa_int <= data_b_in_mantissa_int;
+
+              data_out_exponent_int <= data_b_in_exponent_int;
+
+              data_out_sign_int <= data_b_in_sign_int;
+
+              -- FSM Control
+              adder_ctrl_fsm_int <= ENDER_STATE;
+            else
+              -- Data Internal
+              data_a_in_mantissa_int(MANTISSA_SIZE+1-to_integer(signed(data_b_in_exponent_int)-signed(data_a_in_exponent_int)) downto 0) <= data_a_in_mantissa_int(MANTISSA_SIZE+1 downto to_integer(signed(data_b_in_exponent_int)-signed(data_a_in_exponent_int)));
+
+              data_a_in_mantissa_int(MANTISSA_SIZE+1 downto MANTISSA_SIZE+2-to_integer(signed(data_b_in_exponent_int)-signed(data_a_in_exponent_int))) <= (others => '0');
+
+              data_out_exponent_int <= data_b_in_exponent_int;
+
+              -- FSM Control
+              adder_ctrl_fsm_int <= ADDITION_STATE;
+            end if;
           else
-            -- Data Outputs
-            exponent_int_scalar_adder <= std_logic_vector(unsigned(exponent_int_scalar_adder) + unsigned(ONE_EXPONENT));
-            mantissa_int_scalar_adder <= std_logic_vector(unsigned(mantissa_int_scalar_adder) srl 1);
+            -- Data Internal
+            data_out_exponent_int <= data_a_in_exponent_int;
+
+            -- FSM Control
+            adder_ctrl_fsm_int <= ADDITION_STATE;
           end if;
 
-        when NORMALIZATION_STATE =>  -- STEP 3
+        when ADDITION_STATE =>
 
-          if (overflow_out_mantissa_scalar_integer_adder = '0') then
+          if ((data_a_in_sign_int xor data_b_in_sign_int) = '0') then
+            -- Data Internal
+            data_out_mantissa_int <= std_logic_vector((unsigned(data_a_in_mantissa_int)+unsigned(data_b_in_mantissa_int)));
+
+            data_out_sign_int <= data_a_in_sign_int;
+          elsif (unsigned(data_a_in_mantissa_int) < unsigned(data_b_in_mantissa_int)) then
+            -- Data Internal
+            data_out_mantissa_int <= std_logic_vector((unsigned(data_b_in_mantissa_int)-unsigned(data_a_in_mantissa_int)));
+
+            data_out_sign_int <= data_b_in_sign_int;
+          else
+            -- Data Internal
+            data_out_mantissa_int <= std_logic_vector((unsigned(data_a_in_mantissa_int)-unsigned(data_b_in_mantissa_int)));
+
+            data_out_sign_int <= data_a_in_sign_int;
+          end if;
+
+          -- FSM Control
+          adder_ctrl_fsm_int <= NORMALIZATION_STATE;
+
+        when NORMALIZATION_STATE =>
+
+          if unsigned(data_out_mantissa_int) = to_unsigned(0, MANTISSA_SIZE+2) then
+            -- Data Internal
+            data_out_mantissa_int <= ZERO_MANTISSA;
+            data_out_exponent_int <= ZERO_EXPONENT;
+
             -- FSM Control
             adder_ctrl_fsm_int <= ENDER_STATE;
-          else
-            -- Data Outputs
-            exponent_int_scalar_adder <= std_logic_vector(unsigned(exponent_int_scalar_adder) - unsigned(ONE_EXPONENT));
-            mantissa_int_scalar_adder <= std_logic_vector(unsigned(mantissa_int_scalar_adder) sll 1);
-          end if;
-
-        when ENDER_STATE =>  -- STEP 4
-
-          if (overflow_out_mantissa_scalar_integer_adder = '0') then
-            -- Data Outputs
-            DATA_OUT <= sign_int_scalar_adder & exponent_int_scalar_adder(EXPONENT_SIZE-1 downto 0) & mantissa_int_scalar_adder(MANTISSA_SIZE-1 downto 0);
-
-            -- Control Outputs
-            READY <= '1';
+          elsif(data_out_mantissa_int(MANTISSA_SIZE+1) = '1') then
+            -- Data Internal
+            data_out_mantissa_int <= '0' & data_out_mantissa_int(MANTISSA_SIZE+1 downto 1);
+            data_out_exponent_int <= std_logic_vector(unsigned(data_out_exponent_int)+unsigned(ONE_EXPONENT));
 
             -- FSM Control
-            adder_ctrl_fsm_int <= STARTER_STATE;
+            adder_ctrl_fsm_int <= ENDER_STATE;
+          elsif(data_out_mantissa_int(MANTISSA_SIZE) = '0') then
+            -- Data Internal
+            data_out_mantissa_int <= data_out_mantissa_int(MANTISSA_SIZE downto 0) & '0';
+            data_out_exponent_int <= std_logic_vector(unsigned(data_out_exponent_int)-unsigned(ONE_EXPONENT));
           else
-            -- Data Outputs
-            exponent_int_scalar_adder <= std_logic_vector(unsigned(exponent_int_scalar_adder) - unsigned(ONE_EXPONENT));
-            mantissa_int_scalar_adder <= std_logic_vector(unsigned(mantissa_int_scalar_adder) sll 1);
+            -- FSM Control
+            adder_ctrl_fsm_int <= ENDER_STATE;
           end if;
+
+        when ENDER_STATE =>
+          -- Data Outputs
+          DATA_OUT <= data_out_sign_int & data_out_exponent_int(EXPONENT_SIZE-1 downto 0) & data_out_mantissa_int(MANTISSA_SIZE-1 downto 0);
+
+          -- Control Outputs
+          READY <= '1';
+
+          -- FSM Control
+          adder_ctrl_fsm_int <= STARTER_STATE;
 
         when others =>
           -- FSM Control
@@ -324,54 +286,4 @@ begin
     end if;
   end process;
 
-  -- EXPONENT SCALAR ADDER
-  exponent_scalar_integer_adder : ntm_scalar_integer_adder
-    generic map (
-      DATA_SIZE    => EXPONENT_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_exponent_scalar_integer_adder,
-      READY => ready_exponent_scalar_integer_adder,
-
-      OPERATION => operation_exponent_scalar_integer_adder,
-
-      -- DATA
-      DATA_A_IN => data_a_in_exponent_scalar_integer_adder,
-      DATA_B_IN => data_b_in_exponent_scalar_integer_adder,
-
-      DATA_OUT     => data_out_exponent_scalar_integer_adder,
-      OVERFLOW_OUT => overflow_out_exponent_scalar_integer_adder
-      );
-
-  -- MANTISSA SCALAR ADDER
-  mantissa_scalar_integer_adder : ntm_scalar_integer_adder
-    generic map (
-      DATA_SIZE    => MANTISSA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_mantissa_scalar_integer_adder,
-      READY => ready_mantissa_scalar_integer_adder,
-
-      OPERATION => operation_mantissa_scalar_integer_adder,
-
-      -- DATA
-      DATA_A_IN => data_a_in_mantissa_scalar_integer_adder,
-      DATA_B_IN => data_b_in_mantissa_scalar_integer_adder,
-
-      DATA_OUT     => data_out_mantissa_scalar_integer_adder,
-      OVERFLOW_OUT => overflow_out_mantissa_scalar_integer_adder
-      );
-
-end architecture;
+end ntm_scalar_float_adder_architecture;

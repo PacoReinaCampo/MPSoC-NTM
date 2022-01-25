@@ -103,7 +103,7 @@ architecture ntm_scalar_float_divider_architecture of ntm_scalar_float_divider i
 
   constant ZERO_EXPONENT_REGISTER : std_logic_vector(EXPONENT_SIZE+1 downto 0) := std_logic_vector(to_unsigned(0, EXPONENT_SIZE+2));
   constant ONE_EXPONENT_REGISTER  : std_logic_vector(EXPONENT_SIZE+1 downto 0) := std_logic_vector(to_unsigned(1, EXPONENT_SIZE+2));
-  
+
   constant LIMIT_MANTISSA : std_logic_vector(MANTISSA_SIZE downto 0) := X"800000";
 
   constant EXPONENT_FULL  : std_logic_vector(EXPONENT_SIZE-1 downto 0) := (others => '1');

@@ -42,9 +42,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.ntm_arithmetic_pkg.all;
+use work.ntm_math_pkg.all;
 
-entity ntm_scalar_multiplication_function is
+entity ntm_vector_softmax is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -60,26 +60,34 @@ entity ntm_scalar_multiplication_function is
 
     DATA_IN_ENABLE : in std_logic;
 
+    DATA_ENABLE : out std_logic;
+
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    SIZE_IN  : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
-architecture ntm_scalar_multiplication_function_architecture of ntm_scalar_multiplication_function is
+architecture ntm_vector_softmax_architecture of ntm_vector_softmax is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type multiplication_ctrl_fsm is (
+  -- Finite State Machine
+  type softmax_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
-    SCALAR_MULTIPLIER_STATE             -- STEP 2
+    ENDER_STATE,                        -- STEP 3
+    CLEAN_STATE,                        -- STEP 5
+    OPERATION_STATE                     -- STEP 8
     );
+
+  -- Buffer
+  type vector_buffer is array (CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Constants
@@ -105,26 +113,21 @@ architecture ntm_scalar_multiplication_function_architecture of ntm_scalar_multi
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal multiplication_ctrl_fsm_int : multiplication_ctrl_fsm;
+  signal softmax_ctrl_fsm_int : softmax_ctrl_fsm;
+
+  -- Buffer
+  signal vector_int : vector_buffer;
 
   -- Control Internal
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-  -- SCALAR MULTIPLIER
-  -- CONTROL
-  signal start_scalar_multiplier : std_logic;
-  signal ready_scalar_multiplier : std_logic;
-
-  -- DATA
-  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
+
+  -- DATA_OUT = softmax(DATA_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -136,109 +139,113 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      DATA_ENABLE <= '0';
+
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
-      start_scalar_multiplier <= '0';
-
       index_loop <= ZERO_CONTROL;
-
-      -- Data Internal
-      data_a_in_scalar_multiplier <= ZERO_DATA;
-      data_b_in_scalar_multiplier <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
-      case multiplication_ctrl_fsm_int is
+      case softmax_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
+          DATA_ENABLE <= '0';
+
           DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
+            -- Control Outputs
+            DATA_ENABLE <= '1';
+
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            multiplication_ctrl_fsm_int <= INPUT_STATE;
+            softmax_ctrl_fsm_int <= INPUT_STATE;
+          else
+            -- Control Outputs
+            DATA_ENABLE <= '0';
           end if;
 
-        when INPUT_STATE =>             -- STEP 1
+        when INPUT_STATE =>             -- STEP 2
 
-          if (DATA_IN_ENABLE = '1' or (unsigned(index_loop) = unsigned(ZERO_CONTROL))) then
+          if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
-            data_a_in_scalar_multiplier <= DATA_IN;
-
-            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
-              data_b_in_scalar_multiplier <= ONE_DATA;
-            else
-              data_b_in_scalar_multiplier <= data_out_scalar_multiplier;
-            end if;
-
-            -- Control Internal
-            start_scalar_multiplier <= '1';
+            vector_int(to_integer(unsigned(index_loop))) <= DATA_IN;
 
             -- FSM Control
-            multiplication_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
+            softmax_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
           -- Control Outputs
-          DATA_OUT_ENABLE <= '0';
+          DATA_ENABLE <= '0';
 
-        when SCALAR_MULTIPLIER_STATE =>  -- STEP 2
+        when ENDER_STATE =>             -- STEP 4
 
-          if (ready_scalar_multiplier = '1') then
-            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              -- Control Outputs
-              READY <= '1';
+          if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Internal
+            index_loop <= ZERO_CONTROL;
 
-              -- FSM Control
-              multiplication_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
-
-              -- FSM Control
-              multiplication_ctrl_fsm_int <= INPUT_STATE;
-            end if;
-
-            -- Data Outputs
-            DATA_OUT <= data_out_scalar_multiplier;
-
-            -- Control Outputs
-            DATA_OUT_ENABLE <= '1';
+            -- FSM Control
+            softmax_ctrl_fsm_int <= CLEAN_STATE;
           else
             -- Control Internal
-            start_scalar_multiplier <= '0';
+            index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
+
+            -- Control Outputs
+            DATA_ENABLE <= '1';
+
+            -- FSM Control
+            softmax_ctrl_fsm_int <= INPUT_STATE;
           end if;
+
+          -- Data Outputs
+          DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
+
+        when CLEAN_STATE =>             -- STEP 5
+
+          -- Control Outputs
+          DATA_ENABLE <= '0';
+
+          DATA_OUT_ENABLE <= '0';
+
+          -- FSM Control
+          softmax_ctrl_fsm_int <= OPERATION_STATE;
+
+        when OPERATION_STATE =>         -- STEP 8
+
+          if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            READY <= '1';
+
+            -- Control Internal
+            index_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            softmax_ctrl_fsm_int <= STARTER_STATE;
+          else
+            -- Control Internal
+            index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            softmax_ctrl_fsm_int <= CLEAN_STATE;
+          end if;
+
+          -- Data Outputs
+          DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
+
+          -- Control Outputs
+          DATA_OUT_ENABLE <= '1';
 
         when others =>
           -- FSM Control
-          multiplication_ctrl_fsm_int <= STARTER_STATE;
+          softmax_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
-
-  -- SCALAR MULTIPLIER
-  scalar_multiplier : ntm_scalar_multiplier
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_multiplier,
-      READY => ready_scalar_multiplier,
-
-      -- DATA
-      DATA_A_IN => data_a_in_scalar_multiplier,
-      DATA_B_IN => data_b_in_scalar_multiplier,
-      DATA_OUT  => data_out_scalar_multiplier
-      );
 
 end architecture;

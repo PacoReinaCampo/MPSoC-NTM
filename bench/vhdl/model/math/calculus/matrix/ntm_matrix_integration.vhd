@@ -42,7 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.ntm_math_pkg.all;
+use work.ntm_arithmetic_pkg.all;
 
 entity ntm_matrix_integration is
   generic (
@@ -58,19 +58,19 @@ entity ntm_matrix_integration is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_IN_MATRIX_ENABLE : in std_logic;
-    DATA_IN_VECTOR_ENABLE : in std_logic;
-    DATA_IN_SCALAR_ENABLE : in std_logic;
+    DATA_IN_I_ENABLE : in std_logic;
+    DATA_IN_J_ENABLE : in std_logic;
 
-    DATA_OUT_MATRIX_ENABLE : out std_logic;
-    DATA_OUT_VECTOR_ENABLE : out std_logic;
-    DATA_OUT_SCALAR_ENABLE : out std_logic;
+    DATA_I_ENABLE : out std_logic;
+    DATA_J_ENABLE : out std_logic;
+
+    DATA_OUT_I_ENABLE : out std_logic;
+    DATA_OUT_J_ENABLE : out std_logic;
 
     -- DATA
     SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -82,15 +82,23 @@ architecture ntm_matrix_integration_architecture of ntm_matrix_integration is
   -- Types
   -----------------------------------------------------------------------
 
+  -- Finite State Machine
   type integration_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    INPUT_MATRIX_STATE,                 -- STEP 1
-    INPUT_VECTOR_STATE,                 -- STEP 2
-    INPUT_SCALAR_STATE,                 -- STEP 3
-    ENDER_MATRIX_STATE,                 -- STEP 4
-    ENDER_VECTOR_STATE,                 -- STEP 5
-    ENDER_SCALAR_STATE                  -- STEP 6
+    INPUT_I_STATE,                      -- STEP 1
+    INPUT_J_STATE,                      -- STEP 2
+    ENDER_I_STATE,                      -- STEP 3
+    ENDER_J_STATE,                      -- STEP 4
+    CLEAN_I_STATE,                      -- STEP 5
+    CLEAN_J_STATE,                      -- STEP 6
+    SCALAR_MULTIPLIER_I_STATE,          -- STEP 7
+    SCALAR_MULTIPLIER_J_STATE,          -- STEP 8
+    SCALAR_ADDER_I_STATE,               -- STEP 9
+    SCALAR_ADDER_J_STATE                -- STEP 10
     );
+
+  -- Buffer
+  type matrix_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Constants
@@ -118,28 +126,38 @@ architecture ntm_matrix_integration_architecture of ntm_matrix_integration is
   -- Finite State Machine
   signal integration_ctrl_fsm_int : integration_ctrl_fsm;
 
-  -- Internal Signals
-  signal index_matrix_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal index_vector_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal index_scalar_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  -- Buffer
+  signal matrix_int : matrix_buffer;
 
-  -- VECTOR integration
+  -- Control Internal
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  -- SCALAR ADDER
   -- CONTROL
-  signal start_vector_integration : std_logic;
-  signal ready_vector_integration : std_logic;
+  signal start_scalar_adder : std_logic;
+  signal ready_scalar_adder : std_logic;
 
-  signal data_in_vector_enable_vector_integration : std_logic;
-  signal data_in_scalar_enable_vector_integration : std_logic;
-
-  signal data_out_vector_enable_vector_integration : std_logic;
-  signal data_out_scalar_enable_vector_integration : std_logic;
+  signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal size_in_vector_integration   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal period_in_vector_integration : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_vector_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_integration   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_integration  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_scalar_adder : std_logic;
+
+  -- SCALAR MULTIPLIER
+  -- CONTROL
+  signal start_scalar_multiplier : std_logic;
+  signal ready_scalar_multiplier : std_logic;
+
+  -- DATA
+  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -147,7 +165,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT(t) = (DATA_IN(t+1) - DATA_IN(t))/PERIOD_IN
+  -- DATA_OUT = integration(DATA_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -159,10 +177,27 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      -- Assignations
-      index_matrix_loop <= ZERO_CONTROL;
-      index_vector_loop <= ZERO_CONTROL;
-      index_scalar_loop <= ZERO_CONTROL;
+      DATA_I_ENABLE <= '0';
+      DATA_J_ENABLE <= '0';
+
+      DATA_OUT_I_ENABLE <= '0';
+      DATA_OUT_J_ENABLE <= '0';
+
+      -- Control Internal
+      start_scalar_adder      <= '0';
+      start_scalar_multiplier <= '0';
+
+      operation_scalar_adder <= '0';
+
+      index_i_loop <= ZERO_CONTROL;
+      index_j_loop <= ZERO_CONTROL;
+
+      -- Data Internal
+      data_a_in_scalar_adder <= ZERO_DATA;
+      data_b_in_scalar_adder <= ZERO_DATA;
+
+      data_a_in_scalar_multiplier <= ZERO_DATA;
+      data_b_in_scalar_multiplier <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -171,187 +206,247 @@ begin
           -- Control Outputs
           READY <= '0';
 
+          DATA_OUT_I_ENABLE <= '0';
+          DATA_OUT_J_ENABLE <= '0';
+
           if (START = '1') then
-            -- Assignations
-            index_matrix_loop <= ZERO_CONTROL;
-            index_vector_loop <= ZERO_CONTROL;
-            index_scalar_loop <= ZERO_CONTROL;
-
-            -- FSM Control
-            integration_ctrl_fsm_int <= INPUT_MATRIX_STATE;
-          end if;
-
-        when INPUT_MATRIX_STATE =>      -- STEP 1
-
-          if (((DATA_IN_MATRIX_ENABLE = '1') and (DATA_IN_VECTOR_ENABLE = '1') and (DATA_IN_SCALAR_ENABLE = '1')) or ((unsigned(index_matrix_loop) = unsigned(ZERO_CONTROL)) and (unsigned(index_vector_loop) = unsigned(ZERO_CONTROL)))) then
-            -- Data Inputs
-            period_in_vector_integration <= PERIOD_IN;
-            size_in_vector_integration   <= SIZE_J_IN;
-            length_in_vector_integration <= LENGTH_IN;
-
-            data_in_vector_integration <= DATA_IN;
+            -- Control Outputs
+            DATA_I_ENABLE <= '1';
+            DATA_J_ENABLE <= '1';
 
             -- Control Internal
-            start_vector_integration <= '1';
-
-            data_in_vector_enable_vector_integration <= '1';
-            data_in_scalar_enable_vector_integration <= '1';
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            if ((unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
-              integration_ctrl_fsm_int <= ENDER_MATRIX_STATE;
-            elsif (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              integration_ctrl_fsm_int <= ENDER_VECTOR_STATE;
+            integration_ctrl_fsm_int <= INPUT_I_STATE;
+          else
+            -- Control Outputs
+            DATA_I_ENABLE <= '0';
+            DATA_J_ENABLE <= '0';
+          end if;
+
+        when INPUT_I_STATE =>           -- STEP 1
+
+          if ((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) then
+            -- Data Inputs
+            matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
+
+            -- FSM Control
+            integration_ctrl_fsm_int <= ENDER_J_STATE;
+          end if;
+
+          -- Control Outputs
+          DATA_I_ENABLE <= '0';
+          DATA_J_ENABLE <= '0';
+
+        when INPUT_J_STATE =>           -- STEP 2
+
+          if (DATA_IN_J_ENABLE = '1') then
+            -- Data Inputs
+            matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
+
+            -- FSM Control
+            if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+              integration_ctrl_fsm_int <= ENDER_I_STATE;
             else
-              integration_ctrl_fsm_int <= ENDER_SCALAR_STATE;
+              integration_ctrl_fsm_int <= ENDER_J_STATE;
             end if;
           end if;
 
           -- Control Outputs
-          DATA_OUT_MATRIX_ENABLE <= '0';
-          DATA_OUT_VECTOR_ENABLE <= '0';
-          DATA_OUT_SCALAR_ENABLE <= '0';
+          DATA_I_ENABLE <= '0';
+          DATA_J_ENABLE <= '0';
 
-        when INPUT_VECTOR_STATE =>      -- STEP 2
+        when ENDER_I_STATE =>           -- STEP 3
 
-          if (((DATA_IN_VECTOR_ENABLE = '1') and (DATA_IN_SCALAR_ENABLE = '1')) or (unsigned(index_vector_loop) = unsigned(ZERO_CONTROL))) then
-            -- Data Inputs
-            data_in_vector_integration <= DATA_IN;
-
-            -- Control Internal
-            data_in_vector_enable_vector_integration <= '1';
-            data_in_scalar_enable_vector_integration <= '1';
-
-            -- FSM Control
-            if ((unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
-              integration_ctrl_fsm_int <= ENDER_MATRIX_STATE;
-            elsif (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              integration_ctrl_fsm_int <= ENDER_VECTOR_STATE;
-            else
-              integration_ctrl_fsm_int <= ENDER_SCALAR_STATE;
-            end if;
-          end if;
-
-          -- Control Outputs
-          DATA_OUT_VECTOR_ENABLE <= '0';
-          DATA_OUT_SCALAR_ENABLE <= '0';
-
-        when INPUT_SCALAR_STATE =>      -- STEP 3
-
-          if (DATA_IN_SCALAR_ENABLE = '1') then
-            -- Data Inputs
-            data_in_vector_integration <= DATA_IN;
+          if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Internal
-            data_in_scalar_enable_vector_integration <= '1';
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            if ((unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
-              integration_ctrl_fsm_int <= ENDER_MATRIX_STATE;
-            elsif (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              integration_ctrl_fsm_int <= ENDER_VECTOR_STATE;
-            else
-              integration_ctrl_fsm_int <= ENDER_SCALAR_STATE;
-            end if;
+            integration_ctrl_fsm_int <= CLEAN_I_STATE;
+          elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- Data Outputs
+            DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- Control Outputs
+            DATA_I_ENABLE <= '1';
+            DATA_J_ENABLE <= '1';
+
+            -- Control Internal
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            integration_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
+        when ENDER_J_STATE =>           -- STEP 4
+
+          if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+            -- Data Outputs
+            DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
+            -- Control Outputs
+            DATA_J_ENABLE <= '1';
+
+            -- Control Internal
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop)+unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            integration_ctrl_fsm_int <= INPUT_J_STATE;
+          end if;
+
+        when CLEAN_I_STATE =>           -- STEP 5
+
+          -- Data Inputs
+          data_a_in_scalar_multiplier <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+          data_b_in_scalar_multiplier <= LENGTH_IN;
+
           -- Control Outputs
-          DATA_OUT_SCALAR_ENABLE <= '0';
+          DATA_I_ENABLE <= '0';
+          DATA_J_ENABLE <= '0';
 
-        when ENDER_MATRIX_STATE =>      -- STEP 4
+          DATA_OUT_I_ENABLE <= '0';
+          DATA_OUT_J_ENABLE <= '0';
 
-          if (data_out_vector_enable_vector_integration = '1' and data_out_scalar_enable_vector_integration = '1') then
-            if ((unsigned(index_matrix_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          -- Control Internal
+          start_scalar_multiplier <= '1';
+
+          -- FSM Control
+          if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+            integration_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
+          else
+            integration_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
+          end if;
+
+        when CLEAN_J_STATE =>           -- STEP 6
+
+          -- Data Inputs
+          data_a_in_scalar_multiplier <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+          data_b_in_scalar_multiplier <= LENGTH_IN;
+
+          -- Control Outputs
+          DATA_J_ENABLE <= '0';
+
+          DATA_OUT_J_ENABLE <= '0';
+
+          -- Control Internal
+          start_scalar_multiplier <= '1';
+
+          -- FSM Control
+          if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
+            integration_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
+          else
+            integration_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
+          end if;
+
+        when SCALAR_MULTIPLIER_I_STATE =>  -- STEP 7
+
+          if (ready_scalar_multiplier = '1') then
+            -- Data Inputs
+            data_a_in_scalar_adder <= data_out_scalar_multiplier;
+
+            if ((unsigned(index_i_loop) = unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) = unsigned(ZERO_CONTROL))) then
+              data_b_in_scalar_adder <= ZERO_DATA;
+            else
+              data_b_in_scalar_adder <= data_out_scalar_adder;
+            end if;
+
+            -- Control Internal
+            start_scalar_adder <= '1';
+
+            operation_scalar_adder <= '0';
+
+            -- FSM Control
+            integration_ctrl_fsm_int <= SCALAR_ADDER_I_STATE;
+          else
+            -- Control Internal
+            start_scalar_multiplier <= '0';
+          end if;
+
+        when SCALAR_MULTIPLIER_J_STATE =>  -- STEP 8
+
+          if (ready_scalar_multiplier = '1') then
+            -- Data Inputs
+            data_a_in_scalar_adder <= data_out_scalar_multiplier;
+            data_b_in_scalar_adder <= data_out_scalar_adder;
+
+            -- Control Internal
+            start_scalar_adder <= '1';
+
+            operation_scalar_adder <= '0';
+
+            -- FSM Control
+            integration_ctrl_fsm_int <= SCALAR_ADDER_J_STATE;
+          else
+            -- Control Internal
+            start_scalar_multiplier <= '0';
+          end if;
+
+        when SCALAR_ADDER_I_STATE =>    -- STEP 9
+
+          if (ready_scalar_adder = '1') then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_integration;
+              DATA_OUT <= data_out_scalar_adder;
 
               -- Control Outputs
-              DATA_OUT_MATRIX_ENABLE <= '1';
-              DATA_OUT_VECTOR_ENABLE <= '1';
-              DATA_OUT_SCALAR_ENABLE <= '1';
-
               READY <= '1';
 
+              DATA_OUT_I_ENABLE <= '1';
+              DATA_OUT_J_ENABLE <= '1';
+
               -- Control Internal
-              index_matrix_loop <= ZERO_CONTROL;
-              index_vector_loop <= ZERO_CONTROL;
-              index_scalar_loop <= ZERO_CONTROL;
+              index_i_loop <= ZERO_CONTROL;
+              index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
               integration_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_matrix_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_vector_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_integration;
+              DATA_OUT <= data_out_scalar_adder;
 
               -- Control Outputs
-              DATA_OUT_MATRIX_ENABLE <= '1';
-              DATA_OUT_VECTOR_ENABLE <= '1';
-              DATA_OUT_SCALAR_ENABLE <= '1';
+              DATA_OUT_I_ENABLE <= '1';
+              DATA_OUT_J_ENABLE <= '1';
 
               -- Control Internal
-              index_matrix_loop <= std_logic_vector(unsigned(index_matrix_loop) + unsigned(ONE_CONTROL));
-              index_vector_loop <= ZERO_CONTROL;
-              index_scalar_loop <= ZERO_CONTROL;
+              index_i_loop <= std_logic_vector(unsigned(index_i_loop)+unsigned(ONE_CONTROL));
+              index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              integration_ctrl_fsm_int <= INPUT_MATRIX_STATE;
+              integration_ctrl_fsm_int <= CLEAN_I_STATE;
             end if;
           else
             -- Control Internal
-            start_vector_integration <= '0';
-
-            data_in_vector_enable_vector_integration <= '0';
-            data_in_scalar_enable_vector_integration <= '0';
+            start_scalar_adder <= '0';
           end if;
 
-        when ENDER_VECTOR_STATE =>      -- STEP 5
+        when SCALAR_ADDER_J_STATE =>    -- STEP 10
 
-          if (data_out_scalar_enable_vector_integration = '1') then
-            if ((unsigned(index_vector_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          if (ready_scalar_adder = '1') then
+            if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_integration;
+              DATA_OUT <= data_out_scalar_adder;
 
               -- Control Outputs
-              DATA_OUT_VECTOR_ENABLE <= '1';
-              DATA_OUT_SCALAR_ENABLE <= '1';
+              DATA_OUT_J_ENABLE <= '1';
 
               -- Control Internal
-              index_vector_loop <= std_logic_vector(unsigned(index_vector_loop) + unsigned(ONE_CONTROL));
-              index_scalar_loop <= ZERO_CONTROL;
+              index_j_loop <= std_logic_vector(unsigned(index_j_loop)+unsigned(ONE_CONTROL));
 
               -- FSM Control
-              integration_ctrl_fsm_int <= INPUT_VECTOR_STATE;
+              integration_ctrl_fsm_int <= CLEAN_J_STATE;
             end if;
           else
             -- Control Internal
-            start_vector_integration <= '0';
-
-            data_in_vector_enable_vector_integration <= '0';
-            data_in_scalar_enable_vector_integration <= '0';
-          end if;
-
-        when ENDER_SCALAR_STATE =>      -- STEP 6
-
-          if (data_out_scalar_enable_vector_integration = '1') then
-            if (unsigned(index_scalar_loop) < unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              -- Data Outputs
-              DATA_OUT <= data_out_vector_integration;
-
-              -- Control Outputs
-              DATA_OUT_SCALAR_ENABLE <= '1';
-
-              -- Control Internal
-              index_scalar_loop <= std_logic_vector(unsigned(index_scalar_loop) + unsigned(ONE_CONTROL));
-
-              -- FSM Control
-              integration_ctrl_fsm_int <= INPUT_SCALAR_STATE;
-            end if;
-          else
-            -- Control Internal
-            start_vector_integration <= '0';
-
-            data_in_vector_enable_vector_integration <= '0';
-            data_in_scalar_enable_vector_integration <= '0';
+            start_scalar_adder <= '0';
           end if;
 
         when others =>
@@ -361,8 +456,8 @@ begin
     end if;
   end process;
 
-  -- VECTOR integration
-  vector_integration : ntm_vector_integration
+  -- SCALAR ADDER
+  scalar_adder : ntm_scalar_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -373,21 +468,40 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_integration,
-      READY => ready_vector_integration,
+      START => start_scalar_adder,
+      READY => ready_scalar_adder,
 
-      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_integration,
-      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_integration,
-
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_integration,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_integration,
+      OPERATION => operation_scalar_adder,
 
       -- DATA
-      SIZE_IN   => size_in_vector_integration,
-      PERIOD_IN => period_in_vector_integration,
-      LENGTH_IN => length_in_vector_integration,
-      DATA_IN   => data_in_vector_integration,
-      DATA_OUT  => data_out_vector_integration
+      DATA_A_IN => data_a_in_scalar_adder,
+      DATA_B_IN => data_b_in_scalar_adder,
+
+      DATA_OUT     => data_out_scalar_adder,
+      OVERFLOW_OUT => overflow_out_scalar_adder
+      );
+
+  -- SCALAR MULTIPLIER
+  scalar_multiplier : ntm_scalar_multiplier
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_multiplier,
+      READY => ready_scalar_multiplier,
+
+      -- DATA
+      DATA_A_IN => data_a_in_scalar_multiplier,
+      DATA_B_IN => data_b_in_scalar_multiplier,
+
+      DATA_OUT     => data_out_scalar_multiplier,
+      OVERFLOW_OUT => overflow_out_scalar_multiplier
       );
 
 end architecture;

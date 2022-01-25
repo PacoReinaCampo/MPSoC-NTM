@@ -122,7 +122,6 @@ architecture ntm_scalar_float_adder_architecture of ntm_scalar_float_adder is
 begin
 
   ctrl_fsm : process (CLK, RST)
-    variable data_difference_exponent_int : signed(EXPONENT_SIZE downto 0);
   begin
     if(RST = '0') then
       -- Data Outputs
@@ -171,11 +170,8 @@ begin
 
         when ALIGNMENT_STATE =>
 
-          if unsigned(data_a_in_exponent_int) > unsigned(data_b_in_exponent_int) then
-            -- Data Internal
-            data_difference_exponent_int := signed(data_a_in_exponent_int)-signed(data_b_in_exponent_int);
-
-            if (data_difference_exponent_int > MANTISSA_SIZE) then
+          if (unsigned(data_a_in_exponent_int) > unsigned(data_b_in_exponent_int)) then
+            if (signed(data_a_in_exponent_int)-signed(data_b_in_exponent_int) > to_signed(MANTISSA_SIZE,EXPONENT_SIZE+1)) then
               -- Data Internal
               data_out_mantissa_int <= data_a_in_mantissa_int;
 
@@ -187,19 +183,17 @@ begin
               adder_ctrl_fsm_int <= ENDER_STATE;
             else
               -- Data Internal
-              data_b_in_mantissa_int(MANTISSA_SIZE+1-to_integer(data_difference_exponent_int) downto 0)               <= data_b_in_mantissa_int(MANTISSA_SIZE+1 downto to_integer(data_difference_exponent_int));
-              data_b_in_mantissa_int(MANTISSA_SIZE+1 downto MANTISSA_SIZE+2-to_integer(data_difference_exponent_int)) <= (others => '0');
+              data_b_in_mantissa_int(MANTISSA_SIZE+1-to_integer(signed(data_a_in_exponent_int)-signed(data_b_in_exponent_int)) downto 0) <= data_b_in_mantissa_int(MANTISSA_SIZE+1 downto to_integer(signed(data_a_in_exponent_int)-signed(data_b_in_exponent_int)));
+
+              data_b_in_mantissa_int(MANTISSA_SIZE+1 downto MANTISSA_SIZE+2-to_integer(signed(data_a_in_exponent_int)-signed(data_b_in_exponent_int))) <= (others => '0');
 
               data_out_exponent_int <= data_a_in_exponent_int;
 
               -- FSM Control
               adder_ctrl_fsm_int <= ADDITION_STATE;
             end if;
-          elsif unsigned(data_a_in_exponent_int) < unsigned(data_b_in_exponent_int) then
-            -- Data Internal
-            data_difference_exponent_int := signed(data_b_in_exponent_int)-signed(data_a_in_exponent_int);
-
-            if (data_difference_exponent_int > MANTISSA_SIZE) then
+          elsif (unsigned(data_a_in_exponent_int) < unsigned(data_b_in_exponent_int)) then
+            if (signed(data_b_in_exponent_int)-signed(data_a_in_exponent_int) > to_signed(MANTISSA_SIZE,EXPONENT_SIZE+1)) then
               -- Data Internal
               data_out_mantissa_int <= data_b_in_mantissa_int;
 
@@ -211,8 +205,9 @@ begin
               adder_ctrl_fsm_int <= ENDER_STATE;
             else
               -- Data Internal
-              data_a_in_mantissa_int(MANTISSA_SIZE+1-to_integer(data_difference_exponent_int) downto 0)               <= data_a_in_mantissa_int(MANTISSA_SIZE+1 downto to_integer(data_difference_exponent_int));
-              data_a_in_mantissa_int(MANTISSA_SIZE+1 downto MANTISSA_SIZE+2-to_integer(data_difference_exponent_int)) <= (others => '0');
+              data_a_in_mantissa_int(MANTISSA_SIZE+1-to_integer(signed(data_b_in_exponent_int)-signed(data_a_in_exponent_int)) downto 0) <= data_a_in_mantissa_int(MANTISSA_SIZE+1 downto to_integer(signed(data_b_in_exponent_int)-signed(data_a_in_exponent_int)));
+
+              data_a_in_mantissa_int(MANTISSA_SIZE+1 downto MANTISSA_SIZE+2-to_integer(signed(data_b_in_exponent_int)-signed(data_a_in_exponent_int))) <= (others => '0');
 
               data_out_exponent_int <= data_b_in_exponent_int;
 
@@ -229,21 +224,21 @@ begin
 
         when ADDITION_STATE =>
 
-          if (data_a_in_sign_int xor data_b_in_sign_int) = '0' then
+          if ((data_a_in_sign_int xor data_b_in_sign_int) = '0') then
             -- Data Internal
             data_out_mantissa_int <= std_logic_vector((unsigned(data_a_in_mantissa_int)+unsigned(data_b_in_mantissa_int)));
 
             data_out_sign_int <= data_a_in_sign_int;
-          elsif unsigned(data_a_in_mantissa_int) >= unsigned(data_b_in_mantissa_int) then
-            -- Data Internal
-            data_out_mantissa_int <= std_logic_vector((unsigned(data_a_in_mantissa_int)-unsigned(data_b_in_mantissa_int)));
-
-            data_out_sign_int <= data_a_in_sign_int;
-          else
+          elsif (unsigned(data_a_in_mantissa_int) < unsigned(data_b_in_mantissa_int)) then
             -- Data Internal
             data_out_mantissa_int <= std_logic_vector((unsigned(data_b_in_mantissa_int)-unsigned(data_a_in_mantissa_int)));
 
             data_out_sign_int <= data_b_in_sign_int;
+          else
+            -- Data Internal
+            data_out_mantissa_int <= std_logic_vector((unsigned(data_a_in_mantissa_int)-unsigned(data_b_in_mantissa_int)));
+
+            data_out_sign_int <= data_a_in_sign_int;
           end if;
 
           -- FSM Control

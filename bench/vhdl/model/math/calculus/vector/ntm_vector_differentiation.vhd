@@ -42,7 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.ntm_math_pkg.all;
+use work.ntm_arithmetic_pkg.all;
 
 entity ntm_vector_differentiation is
   generic (
@@ -58,16 +58,15 @@ entity ntm_vector_differentiation is
     START : in  std_logic;
     READY : out std_logic;
 
-    DATA_IN_VECTOR_ENABLE : in std_logic;
-    DATA_IN_SCALAR_ENABLE : in std_logic;
+    DATA_IN_ENABLE : in std_logic;
 
-    DATA_OUT_VECTOR_ENABLE : out std_logic;
-    DATA_OUT_SCALAR_ENABLE : out std_logic;
+    DATA_ENABLE : out std_logic;
+
+    DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
     SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    PERIOD_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
@@ -79,13 +78,18 @@ architecture ntm_vector_differentiation_architecture of ntm_vector_differentiati
   -- Types
   -----------------------------------------------------------------------
 
+  -- Finite State Machine
   type differentiation_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    INPUT_VECTOR_STATE,                 -- STEP 1
-    INPUT_SCALAR_STATE,                 -- STEP 2
-    ENDER_VECTOR_STATE,                 -- STEP 3
-    ENDER_SCALAR_STATE                  -- STEP 4
+    INPUT_STATE,                        -- STEP 1
+    ENDER_STATE,                        -- STEP 2
+    CLEAN_STATE,                        -- STEP 3
+    SCALAR_ADDER_STATE,                 -- STEP 4
+    SCALAR_DIVIDER_STATE                -- STEP 5
     );
+
+  -- Buffer
+  type vector_buffer is array (CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Constants
@@ -113,24 +117,37 @@ architecture ntm_vector_differentiation_architecture of ntm_vector_differentiati
   -- Finite State Machine
   signal differentiation_ctrl_fsm_int : differentiation_ctrl_fsm;
 
-  -- Internal Signals
-  signal index_vector_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal index_scalar_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  -- Buffer
+  signal vector_int : vector_buffer;
 
-  -- SCALAR DIFFERENTIATION
+  -- Control Internal
+  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  -- SCALAR ADDER
   -- CONTROL
-  signal start_scalar_differentiation : std_logic;
-  signal ready_scalar_differentiation : std_logic;
+  signal start_scalar_adder : std_logic;
+  signal ready_scalar_adder : std_logic;
 
-  signal data_in_enable_scalar_differentiation : std_logic;
-
-  signal data_out_enable_scalar_differentiation : std_logic;
+  signal operation_scalar_adder : std_logic;
 
   -- DATA
-  signal period_in_scalar_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal length_in_scalar_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_scalar_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_scalar_adder : std_logic;
+
+  -- SCALAR DIVIDER
+  -- CONTROL
+  signal start_scalar_divider : std_logic;
+  signal ready_scalar_divider : std_logic;
+
+  -- DATA
+  signal data_a_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal rest_out_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -138,7 +155,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT(t) = (DATA_IN(t+1) - DATA_IN(t))/PERIOD_IN
+  -- DATA_OUT = differentiation(DATA_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -150,21 +167,24 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      DATA_OUT_VECTOR_ENABLE <= '0';
-      DATA_OUT_SCALAR_ENABLE <= '0';
+      DATA_ENABLE <= '0';
+
+      DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
-      start_scalar_differentiation <= '0';
+      start_scalar_adder   <= '0';
+      start_scalar_divider <= '0';
 
-      index_vector_loop <= ZERO_CONTROL;
-      index_scalar_loop <= ZERO_CONTROL;
+      operation_scalar_adder <= '0';
 
-      data_in_enable_scalar_differentiation <= '0';
+      index_loop <= ZERO_CONTROL;
 
       -- Data Internal
-      period_in_scalar_differentiation <= ZERO_DATA;
-      length_in_scalar_differentiation <= ZERO_CONTROL;
-      data_in_scalar_differentiation   <= ZERO_DATA;
+      data_a_in_scalar_adder <= ZERO_DATA;
+      data_b_in_scalar_adder <= ZERO_DATA;
+
+      data_a_in_scalar_divider <= ZERO_DATA;
+      data_b_in_scalar_divider <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -173,121 +193,128 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          DATA_OUT_VECTOR_ENABLE <= '0';
-          DATA_OUT_SCALAR_ENABLE <= '0';
+          DATA_ENABLE <= '0';
+
+          DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
-            index_vector_loop <= ZERO_CONTROL;
-            index_scalar_loop <= ZERO_CONTROL;
-
-            -- FSM Control
-            differentiation_ctrl_fsm_int <= INPUT_VECTOR_STATE;
-          end if;
-
-        when INPUT_VECTOR_STATE =>      -- STEP 1
-
-          if (((DATA_IN_VECTOR_ENABLE = '1') and (DATA_IN_SCALAR_ENABLE = '1')) or (index_scalar_loop = ZERO_CONTROL)) then
-            -- Data Inputs
-            period_in_scalar_differentiation <= PERIOD_IN;
-            length_in_scalar_differentiation <= LENGTH_IN;
-
-            data_in_scalar_differentiation <= DATA_IN;
+            -- Control Outputs
+            DATA_ENABLE <= '1';
 
             -- Control Internal
-            start_scalar_differentiation <= '1';
-
-            data_in_enable_scalar_differentiation <= '1';
+            index_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            differentiation_ctrl_fsm_int <= ENDER_SCALAR_STATE;
+            differentiation_ctrl_fsm_int <= INPUT_STATE;
+          else
+            -- Control Outputs
+            DATA_ENABLE <= '0';
+          end if;
+
+        when INPUT_STATE =>             -- STEP 1
+
+          if (DATA_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_int(to_integer(unsigned(index_loop))) <= DATA_IN;
+
+            -- FSM Control
+            differentiation_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
           -- Control Outputs
-          DATA_OUT_VECTOR_ENABLE <= '0';
-          DATA_OUT_SCALAR_ENABLE <= '0';
+          DATA_ENABLE <= '0';
 
-        when INPUT_SCALAR_STATE =>      -- STEP 2
+        when ENDER_STATE =>             -- STEP 2
 
-          if (DATA_IN_SCALAR_ENABLE = '1') then
-            -- Data Inputs
-            data_in_scalar_differentiation <= DATA_IN;
-
+          if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
             -- Control Internal
-            data_in_enable_scalar_differentiation <= '1';
+            index_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            if (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              differentiation_ctrl_fsm_int <= ENDER_VECTOR_STATE;
-            else
-              differentiation_ctrl_fsm_int <= ENDER_SCALAR_STATE;
-            end if;
+            differentiation_ctrl_fsm_int <= CLEAN_STATE;
+          else
+            -- Control Internal
+            index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
+
+            -- Control Outputs
+            DATA_ENABLE <= '1';
+
+            -- FSM Control
+            differentiation_ctrl_fsm_int <= INPUT_STATE;
+          end if;
+
+          -- Data Outputs
+          DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
+
+        when CLEAN_STATE =>             -- STEP 3
+
+          -- Data Inputs
+          data_a_in_scalar_adder <= vector_int(to_integer(unsigned(index_loop)));
+
+          if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
+            data_b_in_scalar_adder <= vector_int(to_integer(unsigned(index_loop)));
+          else
+            data_b_in_scalar_adder <= vector_int(to_integer(unsigned(index_loop)-unsigned(ONE_CONTROL)));
           end if;
 
           -- Control Outputs
-          DATA_OUT_SCALAR_ENABLE <= '0';
+          DATA_ENABLE <= '0';
 
-        when ENDER_VECTOR_STATE =>      -- STEP 3
+          DATA_OUT_ENABLE <= '0';
 
-          if (data_out_enable_scalar_differentiation = '1') then
-            if ((unsigned(index_vector_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
-              -- Data Outputs
-              DATA_OUT <= data_out_scalar_differentiation;
+          -- Control Internal
+          start_scalar_adder <= '1';
 
+          operation_scalar_adder <= '0';
+
+          -- FSM Control
+          differentiation_ctrl_fsm_int <= SCALAR_ADDER_STATE;
+
+        when SCALAR_ADDER_STATE =>      -- STEP 4
+
+          if (ready_scalar_adder = '1') then
+            -- Data Inputs
+            data_a_in_scalar_divider <= data_out_scalar_adder;
+            data_b_in_scalar_divider <= LENGTH_IN;
+
+            -- Control Internal
+            start_scalar_divider <= '1';
+
+            -- FSM Control
+            differentiation_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;
+          else
+            -- Control Internal
+            start_scalar_adder <= '0';
+          end if;
+
+        when SCALAR_DIVIDER_STATE =>    -- STEP 5
+
+          if (ready_scalar_divider = '1') then
+            if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
               -- Control Outputs
-              DATA_OUT_VECTOR_ENABLE <= '1';
-              DATA_OUT_SCALAR_ENABLE <= '1';
-
               READY <= '1';
 
               -- Control Internal
-              index_vector_loop <= ZERO_CONTROL;
-              index_scalar_loop <= ZERO_CONTROL;
+              index_loop <= ZERO_CONTROL;
 
               -- FSM Control
               differentiation_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_vector_loop) < unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_scalar_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL))) then
-              -- Data Outputs
-              DATA_OUT <= data_out_scalar_differentiation;
-
-              -- Control Outputs
-              DATA_OUT_VECTOR_ENABLE <= '1';
-              DATA_OUT_SCALAR_ENABLE <= '1';
-
+            else
               -- Control Internal
-              index_vector_loop <= std_logic_vector(unsigned(index_vector_loop) + unsigned(ONE_CONTROL));
-              index_scalar_loop <= ZERO_CONTROL;
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
               -- FSM Control
-              differentiation_ctrl_fsm_int <= INPUT_VECTOR_STATE;
+              differentiation_ctrl_fsm_int <= CLEAN_STATE;
             end if;
+
+            -- Data Outputs
+            DATA_OUT <= data_out_scalar_divider;
+
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '1';
           else
             -- Control Internal
-            start_scalar_differentiation <= '0';
-
-            data_in_enable_scalar_differentiation <= '0';
-          end if;
-
-        when ENDER_SCALAR_STATE =>      -- STEP 4
-
-          if (data_out_enable_scalar_differentiation = '1') then
-            if (unsigned(index_scalar_loop) < unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              -- Data Outputs
-              DATA_OUT <= data_out_scalar_differentiation;
-
-              -- Control Outputs
-              DATA_OUT_SCALAR_ENABLE <= '1';
-
-              -- Control Internal
-              index_scalar_loop <= std_logic_vector(unsigned(index_scalar_loop) + unsigned(ONE_CONTROL));
-
-              -- FSM Control
-              differentiation_ctrl_fsm_int <= INPUT_SCALAR_STATE;
-            end if;
-          else
-            -- Control Internal
-            start_scalar_differentiation <= '0';
-
-            data_in_enable_scalar_differentiation <= '0';
+            start_scalar_divider <= '0';
           end if;
 
         when others =>
@@ -297,8 +324,8 @@ begin
     end if;
   end process;
 
-  -- SCALAR DIFFERENTIATION
-  scalar_differentiation : ntm_scalar_differentiation
+  -- SCALAR ADDER
+  scalar_adder : ntm_scalar_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -309,18 +336,40 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_differentiation,
-      READY => ready_scalar_differentiation,
+      START => start_scalar_adder,
+      READY => ready_scalar_adder,
 
-      DATA_IN_ENABLE => data_in_enable_scalar_differentiation,
-
-      DATA_OUT_ENABLE => data_out_enable_scalar_differentiation,
+      OPERATION => operation_scalar_adder,
 
       -- DATA
-      PERIOD_IN => period_in_scalar_differentiation,
-      LENGTH_IN => length_in_scalar_differentiation,
-      DATA_IN   => data_in_scalar_differentiation,
-      DATA_OUT  => data_out_scalar_differentiation
+      DATA_A_IN => data_a_in_scalar_adder,
+      DATA_B_IN => data_b_in_scalar_adder,
+
+      DATA_OUT     => data_out_scalar_adder,
+      OVERFLOW_OUT => overflow_out_scalar_adder
+      );
+
+  -- SCALAR DIVIDER
+  scalar_divider : ntm_scalar_divider
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_divider,
+      READY => ready_scalar_divider,
+
+      -- DATA
+      DATA_A_IN => data_a_in_scalar_divider,
+      DATA_B_IN => data_b_in_scalar_divider,
+
+      DATA_OUT => data_out_scalar_divider,
+      REST_OUT => rest_out_scalar_divider
       );
 
 end architecture;

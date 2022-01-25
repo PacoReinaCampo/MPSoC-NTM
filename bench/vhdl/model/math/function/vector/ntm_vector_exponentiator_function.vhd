@@ -75,7 +75,7 @@ architecture ntm_vector_exponentiator_function_architecture of ntm_vector_expone
   -- Types
   -----------------------------------------------------------------------
 
-  type exponentiator_function_ctrl_fsm is (
+  type exponentiator_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
     ENDER_STATE                         -- STEP 2
@@ -105,7 +105,7 @@ architecture ntm_vector_exponentiator_function_architecture of ntm_vector_expone
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal exponentiator_function_ctrl_fsm_int : exponentiator_function_ctrl_fsm;
+  signal exponentiator_ctrl_fsm_int : exponentiator_ctrl_fsm;
 
   -- Internal Signals
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -149,10 +149,11 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      case exponentiator_function_ctrl_fsm_int is
+      case exponentiator_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
-          READY           <= '0';
+          READY <= '0';
+
           DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
@@ -160,21 +161,20 @@ begin
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            exponentiator_function_ctrl_fsm_int <= INPUT_STATE;
+            exponentiator_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
         when INPUT_STATE =>             -- STEP 1
 
-          if ((DATA_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
+          if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
-
             data_in_scalar_exponentiator_function <= DATA_IN;
 
             -- Control Internal
             start_scalar_exponentiator_function <= '1';
 
             -- FSM Control
-            exponentiator_function_ctrl_fsm_int <= ENDER_STATE;
+            exponentiator_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
           -- Control Outputs
@@ -191,13 +191,13 @@ begin
               index_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              exponentiator_function_ctrl_fsm_int <= STARTER_STATE;
+              exponentiator_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Control Internal
               index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
               -- FSM Control
-              exponentiator_function_ctrl_fsm_int <= INPUT_STATE;
+              exponentiator_ctrl_fsm_int <= INPUT_STATE;
             end if;
 
             -- Data Outputs
@@ -212,7 +212,7 @@ begin
 
         when others =>
           -- FSM Control
-          exponentiator_function_ctrl_fsm_int <= STARTER_STATE;
+          exponentiator_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 
-entity ntm_scalar_summation_function is
+entity ntm_vector_summation is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -69,7 +69,7 @@ entity ntm_scalar_summation_function is
     );
 end entity;
 
-architecture ntm_scalar_summation_function_architecture of ntm_scalar_summation_function is
+architecture ntm_vector_summation_architecture of ntm_vector_summation is
 
   -----------------------------------------------------------------------
   -- Types
@@ -170,7 +170,7 @@ begin
 
         when INPUT_STATE =>             -- STEP 1
 
-          if (DATA_IN_ENABLE = '1' or (unsigned(index_loop) = unsigned(ZERO_CONTROL))) then
+          if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
             data_a_in_scalar_adder <= DATA_IN;
 

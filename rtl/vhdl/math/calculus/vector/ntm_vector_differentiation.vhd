@@ -80,12 +80,12 @@ architecture ntm_vector_differentiation_architecture of ntm_vector_differentiati
 
   -- Finite State Machine
   type differentiation_ctrl_fsm is (
-    STARTER_STATE,                    -- STEP 0
-    INPUT_STATE,                      -- STEP 1
-    ENDER_STATE,                      -- STEP 2
-    CLEAN_STATE,                      -- STEP 3
-    SCALAR_ADDER_STATE,               -- STEP 4
-    SCALAR_DIVIDER_STATE              -- STEP 5
+    STARTER_STATE,                      -- STEP 0
+    INPUT_STATE,                        -- STEP 1
+    ENDER_STATE,                        -- STEP 2
+    CLEAN_STATE,                        -- STEP 3
+    SCALAR_ADDER_STATE,                 -- STEP 4
+    SCALAR_DIVIDER_STATE                -- STEP 5
     );
 
   -- Buffer
@@ -211,7 +211,7 @@ begin
             DATA_ENABLE <= '0';
           end if;
 
-        when INPUT_STATE =>           -- STEP 1
+        when INPUT_STATE =>             -- STEP 1
 
           if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
@@ -224,7 +224,7 @@ begin
           -- Control Outputs
           DATA_ENABLE <= '0';
 
-        when ENDER_STATE =>           -- STEP 2
+        when ENDER_STATE =>             -- STEP 2
 
           if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
             -- Control Internal
@@ -246,7 +246,7 @@ begin
           -- Data Outputs
           DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
 
-        when CLEAN_STATE =>           -- STEP 3
+        when CLEAN_STATE =>             -- STEP 3
 
           -- Data Inputs
           data_a_in_scalar_adder <= vector_int(to_integer(unsigned(index_loop)));
@@ -270,7 +270,7 @@ begin
           -- FSM Control
           differentiation_ctrl_fsm_int <= SCALAR_ADDER_STATE;
 
-        when SCALAR_ADDER_STATE =>    -- STEP 4
+        when SCALAR_ADDER_STATE =>      -- STEP 4
 
           if (ready_scalar_adder = '1') then
             -- Data Inputs
@@ -287,7 +287,7 @@ begin
             start_scalar_adder <= '0';
           end if;
 
-        when SCALAR_DIVIDER_STATE =>  -- STEP 5
+        when SCALAR_DIVIDER_STATE =>    -- STEP 5
 
           if (ready_scalar_divider = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then

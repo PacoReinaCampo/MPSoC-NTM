@@ -315,7 +315,7 @@ begin
           else
             if (CONTROL = '0') then
               data_b_in_scalar_adder <= matrix_int(to_integer(unsigned(index_i_loop)-unsigned(ONE_CONTROL)), to_integer(unsigned(index_j_loop)));
-            else 
+            else
               data_b_in_scalar_adder <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)-unsigned(ONE_CONTROL)));
             end if;
           end if;
@@ -345,7 +345,7 @@ begin
           else
             if (CONTROL = '0') then
               data_b_in_scalar_adder <= matrix_int(to_integer(unsigned(index_i_loop)-unsigned(ONE_CONTROL)), to_integer(unsigned(index_j_loop)));
-            else 
+            else
               data_b_in_scalar_adder <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)-unsigned(ONE_CONTROL)));
             end if;
           end if;
@@ -413,7 +413,7 @@ begin
             start_scalar_adder <= '0';
           end if;
 
-        when SCALAR_DIVIDER_I_STATE =>       -- STEP 7
+        when SCALAR_DIVIDER_I_STATE =>  -- STEP 7
 
           if (ready_scalar_divider = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
@@ -452,7 +452,7 @@ begin
             start_scalar_divider <= '0';
           end if;
 
-        when SCALAR_DIVIDER_J_STATE =>       -- STEP 8
+        when SCALAR_DIVIDER_J_STATE =>  -- STEP 8
 
           if (ready_scalar_divider = '1') then
             if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then

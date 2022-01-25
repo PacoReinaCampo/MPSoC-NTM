@@ -156,7 +156,7 @@ begin
       start_scalar_adder <= '0';
 
       operation_scalar_adder <= '0';
-  
+
       start_scalar_exponentiator_function <= '0';
 
       -- Data Internal

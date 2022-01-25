@@ -57,79 +57,79 @@ entity ntm_function_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- SCALAR-FUNCTIONALITY
-    ENABLE_NTM_SCALAR_COSH_TEST              : boolean := false;
-    ENABLE_NTM_SCALAR_EXPONENTIATOR_TEST     : boolean := false;
-    ENABLE_NTM_SCALAR_LOGARITHM_TEST         : boolean := false;
-    ENABLE_NTM_SCALAR_LOGISTIC_TEST          : boolean := false;
-    ENABLE_NTM_SCALAR_ONEPLUS_TEST           : boolean := false;
-    ENABLE_NTM_SCALAR_SINH_TEST              : boolean := false;
-    ENABLE_NTM_SCALAR_TANH_TEST              : boolean := false;
+    ENABLE_NTM_SCALAR_COSH_TEST          : boolean := false;
+    ENABLE_NTM_SCALAR_EXPONENTIATOR_TEST : boolean := false;
+    ENABLE_NTM_SCALAR_LOGARITHM_TEST     : boolean := false;
+    ENABLE_NTM_SCALAR_LOGISTIC_TEST      : boolean := false;
+    ENABLE_NTM_SCALAR_ONEPLUS_TEST       : boolean := false;
+    ENABLE_NTM_SCALAR_SINH_TEST          : boolean := false;
+    ENABLE_NTM_SCALAR_TANH_TEST          : boolean := false;
 
-    ENABLE_NTM_SCALAR_COSH_CASE_0              : boolean := false;
-    ENABLE_NTM_SCALAR_EXPONENTIATOR_CASE_0     : boolean := false;
-    ENABLE_NTM_SCALAR_LOGARITHM_CASE_0         : boolean := false;
-    ENABLE_NTM_SCALAR_LOGISTIC_CASE_0          : boolean := false;
-    ENABLE_NTM_SCALAR_ONEPLUS_CASE_0           : boolean := false;
-    ENABLE_NTM_SCALAR_SINH_CASE_0              : boolean := false;
-    ENABLE_NTM_SCALAR_TANH_CASE_0              : boolean := false;
+    ENABLE_NTM_SCALAR_COSH_CASE_0          : boolean := false;
+    ENABLE_NTM_SCALAR_EXPONENTIATOR_CASE_0 : boolean := false;
+    ENABLE_NTM_SCALAR_LOGARITHM_CASE_0     : boolean := false;
+    ENABLE_NTM_SCALAR_LOGISTIC_CASE_0      : boolean := false;
+    ENABLE_NTM_SCALAR_ONEPLUS_CASE_0       : boolean := false;
+    ENABLE_NTM_SCALAR_SINH_CASE_0          : boolean := false;
+    ENABLE_NTM_SCALAR_TANH_CASE_0          : boolean := false;
 
-    ENABLE_NTM_SCALAR_COSH_CASE_1              : boolean := false;
-    ENABLE_NTM_SCALAR_EXPONENTIATOR_CASE_1     : boolean := false;
-    ENABLE_NTM_SCALAR_LOGARITHM_CASE_1         : boolean := false;
-    ENABLE_NTM_SCALAR_LOGISTIC_CASE_1          : boolean := false;
-    ENABLE_NTM_SCALAR_ONEPLUS_CASE_1           : boolean := false;
-    ENABLE_NTM_SCALAR_SINH_CASE_1              : boolean := false;
-    ENABLE_NTM_SCALAR_TANH_CASE_1              : boolean := false;
+    ENABLE_NTM_SCALAR_COSH_CASE_1          : boolean := false;
+    ENABLE_NTM_SCALAR_EXPONENTIATOR_CASE_1 : boolean := false;
+    ENABLE_NTM_SCALAR_LOGARITHM_CASE_1     : boolean := false;
+    ENABLE_NTM_SCALAR_LOGISTIC_CASE_1      : boolean := false;
+    ENABLE_NTM_SCALAR_ONEPLUS_CASE_1       : boolean := false;
+    ENABLE_NTM_SCALAR_SINH_CASE_1          : boolean := false;
+    ENABLE_NTM_SCALAR_TANH_CASE_1          : boolean := false;
 
     -- VECTOR-FUNCTIONALITY
-    ENABLE_NTM_VECTOR_COSH_TEST              : boolean := false;
-    ENABLE_NTM_VECTOR_EXPONENTIATOR_TEST     : boolean := false;
-    ENABLE_NTM_VECTOR_LOGARITHM_TEST         : boolean := false;
-    ENABLE_NTM_VECTOR_LOGISTIC_TEST          : boolean := false;
-    ENABLE_NTM_VECTOR_ONEPLUS_TEST           : boolean := false;
-    ENABLE_NTM_VECTOR_SINH_TEST              : boolean := false;
-    ENABLE_NTM_VECTOR_TANH_TEST              : boolean := false;
+    ENABLE_NTM_VECTOR_COSH_TEST          : boolean := false;
+    ENABLE_NTM_VECTOR_EXPONENTIATOR_TEST : boolean := false;
+    ENABLE_NTM_VECTOR_LOGARITHM_TEST     : boolean := false;
+    ENABLE_NTM_VECTOR_LOGISTIC_TEST      : boolean := false;
+    ENABLE_NTM_VECTOR_ONEPLUS_TEST       : boolean := false;
+    ENABLE_NTM_VECTOR_SINH_TEST          : boolean := false;
+    ENABLE_NTM_VECTOR_TANH_TEST          : boolean := false;
 
-    ENABLE_NTM_VECTOR_COSH_CASE_0              : boolean := false;
-    ENABLE_NTM_VECTOR_EXPONENTIATOR_CASE_0     : boolean := false;
-    ENABLE_NTM_VECTOR_LOGARITHM_CASE_0         : boolean := false;
-    ENABLE_NTM_VECTOR_LOGISTIC_CASE_0          : boolean := false;
-    ENABLE_NTM_VECTOR_ONEPLUS_CASE_0           : boolean := false;
-    ENABLE_NTM_VECTOR_SINH_CASE_0              : boolean := false;
-    ENABLE_NTM_VECTOR_TANH_CASE_0              : boolean := false;
+    ENABLE_NTM_VECTOR_COSH_CASE_0          : boolean := false;
+    ENABLE_NTM_VECTOR_EXPONENTIATOR_CASE_0 : boolean := false;
+    ENABLE_NTM_VECTOR_LOGARITHM_CASE_0     : boolean := false;
+    ENABLE_NTM_VECTOR_LOGISTIC_CASE_0      : boolean := false;
+    ENABLE_NTM_VECTOR_ONEPLUS_CASE_0       : boolean := false;
+    ENABLE_NTM_VECTOR_SINH_CASE_0          : boolean := false;
+    ENABLE_NTM_VECTOR_TANH_CASE_0          : boolean := false;
 
-    ENABLE_NTM_VECTOR_COSH_CASE_1              : boolean := false;
-    ENABLE_NTM_VECTOR_EXPONENTIATOR_CASE_1     : boolean := false;
-    ENABLE_NTM_VECTOR_LOGARITHM_CASE_1         : boolean := false;
-    ENABLE_NTM_VECTOR_LOGISTIC_CASE_1          : boolean := false;
-    ENABLE_NTM_VECTOR_ONEPLUS_CASE_1           : boolean := false;
-    ENABLE_NTM_VECTOR_SINH_CASE_1              : boolean := false;
-    ENABLE_NTM_VECTOR_TANH_CASE_1              : boolean := false;
+    ENABLE_NTM_VECTOR_COSH_CASE_1          : boolean := false;
+    ENABLE_NTM_VECTOR_EXPONENTIATOR_CASE_1 : boolean := false;
+    ENABLE_NTM_VECTOR_LOGARITHM_CASE_1     : boolean := false;
+    ENABLE_NTM_VECTOR_LOGISTIC_CASE_1      : boolean := false;
+    ENABLE_NTM_VECTOR_ONEPLUS_CASE_1       : boolean := false;
+    ENABLE_NTM_VECTOR_SINH_CASE_1          : boolean := false;
+    ENABLE_NTM_VECTOR_TANH_CASE_1          : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
-    ENABLE_NTM_MATRIX_COSH_TEST              : boolean := false;
-    ENABLE_NTM_MATRIX_EXPONENTIATOR_TEST     : boolean := false;
-    ENABLE_NTM_MATRIX_LOGARITHM_TEST         : boolean := false;
-    ENABLE_NTM_MATRIX_LOGISTIC_TEST          : boolean := false;
-    ENABLE_NTM_MATRIX_ONEPLUS_TEST           : boolean := false;
-    ENABLE_NTM_MATRIX_SINH_TEST              : boolean := false;
-    ENABLE_NTM_MATRIX_TANH_TEST              : boolean := false;
+    ENABLE_NTM_MATRIX_COSH_TEST          : boolean := false;
+    ENABLE_NTM_MATRIX_EXPONENTIATOR_TEST : boolean := false;
+    ENABLE_NTM_MATRIX_LOGARITHM_TEST     : boolean := false;
+    ENABLE_NTM_MATRIX_LOGISTIC_TEST      : boolean := false;
+    ENABLE_NTM_MATRIX_ONEPLUS_TEST       : boolean := false;
+    ENABLE_NTM_MATRIX_SINH_TEST          : boolean := false;
+    ENABLE_NTM_MATRIX_TANH_TEST          : boolean := false;
 
-    ENABLE_NTM_MATRIX_COSH_CASE_0              : boolean := false;
-    ENABLE_NTM_MATRIX_EXPONENTIATOR_CASE_0     : boolean := false;
-    ENABLE_NTM_MATRIX_LOGARITHM_CASE_0         : boolean := false;
-    ENABLE_NTM_MATRIX_LOGISTIC_CASE_0          : boolean := false;
-    ENABLE_NTM_MATRIX_ONEPLUS_CASE_0           : boolean := false;
-    ENABLE_NTM_MATRIX_SINH_CASE_0              : boolean := false;
-    ENABLE_NTM_MATRIX_TANH_CASE_0              : boolean := false;
+    ENABLE_NTM_MATRIX_COSH_CASE_0          : boolean := false;
+    ENABLE_NTM_MATRIX_EXPONENTIATOR_CASE_0 : boolean := false;
+    ENABLE_NTM_MATRIX_LOGARITHM_CASE_0     : boolean := false;
+    ENABLE_NTM_MATRIX_LOGISTIC_CASE_0      : boolean := false;
+    ENABLE_NTM_MATRIX_ONEPLUS_CASE_0       : boolean := false;
+    ENABLE_NTM_MATRIX_SINH_CASE_0          : boolean := false;
+    ENABLE_NTM_MATRIX_TANH_CASE_0          : boolean := false;
 
-    ENABLE_NTM_MATRIX_COSH_CASE_1              : boolean := false;
-    ENABLE_NTM_MATRIX_EXPONENTIATOR_CASE_1     : boolean := false;
-    ENABLE_NTM_MATRIX_LOGARITHM_CASE_1         : boolean := false;
-    ENABLE_NTM_MATRIX_LOGISTIC_CASE_1          : boolean := false;
-    ENABLE_NTM_MATRIX_ONEPLUS_CASE_1           : boolean := false;
-    ENABLE_NTM_MATRIX_SINH_CASE_1              : boolean := false;
-    ENABLE_NTM_MATRIX_TANH_CASE_1              : boolean := false
+    ENABLE_NTM_MATRIX_COSH_CASE_1          : boolean := false;
+    ENABLE_NTM_MATRIX_EXPONENTIATOR_CASE_1 : boolean := false;
+    ENABLE_NTM_MATRIX_LOGARITHM_CASE_1     : boolean := false;
+    ENABLE_NTM_MATRIX_LOGISTIC_CASE_1      : boolean := false;
+    ENABLE_NTM_MATRIX_ONEPLUS_CASE_1       : boolean := false;
+    ENABLE_NTM_MATRIX_SINH_CASE_1          : boolean := false;
+    ENABLE_NTM_MATRIX_TANH_CASE_1          : boolean := false
     );
 end ntm_function_testbench;
 

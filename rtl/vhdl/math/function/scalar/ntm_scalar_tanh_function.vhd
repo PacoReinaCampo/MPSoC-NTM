@@ -176,7 +176,7 @@ begin
       start_scalar_multiplier <= '0';
 
       start_scalar_divider <= '0';
-  
+
       start_scalar_exponentiator_function <= '0';
 
       -- Data Internal
@@ -188,7 +188,7 @@ begin
 
       data_a_in_scalar_divider <= ZERO_DATA;
       data_b_in_scalar_divider <= ZERO_DATA;
-  
+
       data_int_scalar_adder <= ZERO_DATA;
 
       data_in_scalar_exponentiator_function <= ZERO_DATA;

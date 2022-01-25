@@ -447,31 +447,31 @@ begin
   end process;
 
   -- SCALAR-FUNCTIONALITY
-  SCALAR_COSH_START              <= start_int;
-  SCALAR_EXPONENTIATOR_START     <= start_int;
-  SCALAR_LOGARITHM_START         <= start_int;
-  SCALAR_LOGISTIC_START          <= start_int;
-  SCALAR_ONEPLUS_START           <= start_int;
-  SCALAR_SINH_START              <= start_int;
-  SCALAR_TANH_START              <= start_int;
+  SCALAR_COSH_START          <= start_int;
+  SCALAR_EXPONENTIATOR_START <= start_int;
+  SCALAR_LOGARITHM_START     <= start_int;
+  SCALAR_LOGISTIC_START      <= start_int;
+  SCALAR_ONEPLUS_START       <= start_int;
+  SCALAR_SINH_START          <= start_int;
+  SCALAR_TANH_START          <= start_int;
 
   -- VECTOR-FUNCTIONALITY
-  VECTOR_COSH_START              <= start_int;
-  VECTOR_EXPONENTIATOR_START     <= start_int;
-  VECTOR_LOGARITHM_START         <= start_int;
-  VECTOR_LOGISTIC_START          <= start_int;
-  VECTOR_ONEPLUS_START           <= start_int;
-  VECTOR_SINH_START              <= start_int;
-  VECTOR_TANH_START              <= start_int;
+  VECTOR_COSH_START          <= start_int;
+  VECTOR_EXPONENTIATOR_START <= start_int;
+  VECTOR_LOGARITHM_START     <= start_int;
+  VECTOR_LOGISTIC_START      <= start_int;
+  VECTOR_ONEPLUS_START       <= start_int;
+  VECTOR_SINH_START          <= start_int;
+  VECTOR_TANH_START          <= start_int;
 
   -- MATRIX-FUNCTIONALITY
-  MATRIX_COSH_START              <= start_int;
-  MATRIX_EXPONENTIATOR_START     <= start_int;
-  MATRIX_LOGARITHM_START         <= start_int;
-  MATRIX_LOGISTIC_START          <= start_int;
-  MATRIX_ONEPLUS_START           <= start_int;
-  MATRIX_SINH_START              <= start_int;
-  MATRIX_TANH_START              <= start_int;
+  MATRIX_COSH_START          <= start_int;
+  MATRIX_EXPONENTIATOR_START <= start_int;
+  MATRIX_LOGARITHM_START     <= start_int;
+  MATRIX_LOGISTIC_START      <= start_int;
+  MATRIX_ONEPLUS_START       <= start_int;
+  MATRIX_SINH_START          <= start_int;
+  MATRIX_TANH_START          <= start_int;
 
   -----------------------------------------------------------------------
   -- STIMULUS

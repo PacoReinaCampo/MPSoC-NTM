@@ -79,11 +79,11 @@ architecture ntm_vector_softmax_architecture of ntm_vector_softmax is
 
   -- Finite State Machine
   type softmax_ctrl_fsm is (
-    STARTER_STATE,                    -- STEP 0
-    INPUT_STATE,                      -- STEP 1
-    ENDER_STATE,                      -- STEP 3
-    CLEAN_STATE,                      -- STEP 5
-    OPERATION_STATE                   -- STEP 8
+    STARTER_STATE,                      -- STEP 0
+    INPUT_STATE,                        -- STEP 1
+    ENDER_STATE,                        -- STEP 3
+    CLEAN_STATE,                        -- STEP 5
+    OPERATION_STATE                     -- STEP 8
     );
 
   -- Buffer
@@ -171,7 +171,7 @@ begin
             DATA_ENABLE <= '0';
           end if;
 
-        when INPUT_STATE =>           -- STEP 2
+        when INPUT_STATE =>             -- STEP 2
 
           if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
@@ -184,7 +184,7 @@ begin
           -- Control Outputs
           DATA_ENABLE <= '0';
 
-        when ENDER_STATE =>           -- STEP 4
+        when ENDER_STATE =>             -- STEP 4
 
           if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
             -- Control Internal
@@ -206,7 +206,7 @@ begin
           -- Data Outputs
           DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
 
-        when CLEAN_STATE =>           -- STEP 5
+        when CLEAN_STATE =>             -- STEP 5
 
           -- Control Outputs
           DATA_ENABLE <= '0';
@@ -216,7 +216,7 @@ begin
           -- FSM Control
           softmax_ctrl_fsm_int <= OPERATION_STATE;
 
-        when OPERATION_STATE =>       -- STEP 8
+        when OPERATION_STATE =>         -- STEP 8
 
           if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs

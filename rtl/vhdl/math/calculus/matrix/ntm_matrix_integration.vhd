@@ -346,7 +346,7 @@ begin
             integration_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
           end if;
 
-        when SCALAR_MULTIPLIER_I_STATE =>    -- STEP 7
+        when SCALAR_MULTIPLIER_I_STATE =>  -- STEP 7
 
           if (ready_scalar_multiplier = '1') then
             -- Data Inputs
@@ -370,7 +370,7 @@ begin
             start_scalar_multiplier <= '0';
           end if;
 
-        when SCALAR_MULTIPLIER_J_STATE =>    -- STEP 8
+        when SCALAR_MULTIPLIER_J_STATE =>  -- STEP 8
 
           if (ready_scalar_multiplier = '1') then
             -- Data Inputs
@@ -399,7 +399,7 @@ begin
               -- Control Outputs
               READY <= '1';
 
-              DATA_OUT_I_ENABLE <= '1';              
+              DATA_OUT_I_ENABLE <= '1';
               DATA_OUT_J_ENABLE <= '1';
 
               -- Control Internal
