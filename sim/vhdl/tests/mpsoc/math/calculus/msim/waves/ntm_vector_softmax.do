@@ -12,7 +12,7 @@ add wave -noupdate -divider {=========================================}
 add wave -noupdate /ntm_calculus_testbench/ntm_vector_softmax_test/vector_softmax/CLK
 add wave -noupdate /ntm_calculus_testbench/ntm_vector_softmax_test/vector_softmax/RST
 add wave -noupdate /ntm_calculus_testbench/ntm_vector_softmax_test/vector_softmax/START
-add wave -noupdate /ntm_calculus_testbench/ntm_vector_softmax_test/vector_softmax/LENGTH_IN
+add wave -noupdate /ntm_calculus_testbench/ntm_vector_softmax_test/vector_softmax/SIZE_IN
 add wave -noupdate /ntm_calculus_testbench/ntm_vector_softmax_test/vector_softmax/DATA_IN_ENABLE
 add wave -noupdate /ntm_calculus_testbench/ntm_vector_softmax_test/vector_softmax/DATA_IN
 add wave -noupdate /ntm_calculus_testbench/ntm_vector_softmax_test/vector_softmax/DATA_ENABLE

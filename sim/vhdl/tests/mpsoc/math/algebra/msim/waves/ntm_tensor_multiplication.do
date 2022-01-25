@@ -34,6 +34,13 @@ add wave -noupdate /ntm_algebra_testbench/ntm_tensor_multiplication_test/tensor_
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_multiplication_test/tensor_multiplication/index_j_loop
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_multiplication_test/tensor_multiplication/index_k_loop
 
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_multiplication_test/tensor_multiplication/start_scalar_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_multiplication_test/tensor_multiplication/data_a_in_scalar_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_multiplication_test/tensor_multiplication/data_b_in_scalar_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_multiplication_test/tensor_multiplication/ready_scalar_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_multiplication_test/tensor_multiplication/data_out_scalar_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_multiplication_test/tensor_multiplication/overflow_out_scalar_multiplier
+
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}
 configure wave -namecolwidth 305

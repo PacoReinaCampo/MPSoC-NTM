@@ -79,7 +79,7 @@ package ntm_math_pkg is
       DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -108,7 +108,7 @@ package ntm_math_pkg is
       DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -135,7 +135,7 @@ package ntm_math_pkg is
       DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -161,7 +161,7 @@ package ntm_math_pkg is
       DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -186,7 +186,7 @@ package ntm_math_pkg is
       DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -213,7 +213,7 @@ package ntm_math_pkg is
       DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -949,34 +949,6 @@ package ntm_math_pkg is
       );
   end component;
 
-  component ntm_vector_softmax_function is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_VECTOR_ENABLE : in std_logic;
-      DATA_IN_SCALAR_ENABLE : in std_logic;
-
-      DATA_OUT_VECTOR_ENABLE : out std_logic;
-      DATA_OUT_SCALAR_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
   component ntm_vector_tanh_function is
     generic (
       DATA_SIZE    : integer := 128;
@@ -1171,37 +1143,6 @@ package ntm_math_pkg is
       );
   end component;
 
-  component ntm_matrix_softmax_function is
-    generic (
-      DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64
-      );
-    port (
-      -- GLOBAL
-      CLK : in std_logic;
-      RST : in std_logic;
-
-      -- CONTROL
-      START : in  std_logic;
-      READY : out std_logic;
-
-      DATA_IN_MATRIX_ENABLE : in std_logic;
-      DATA_IN_VECTOR_ENABLE : in std_logic;
-      DATA_IN_SCALAR_ENABLE : in std_logic;
-
-      DATA_OUT_MATRIX_ENABLE : out std_logic;
-      DATA_OUT_VECTOR_ENABLE : out std_logic;
-      DATA_OUT_SCALAR_ENABLE : out std_logic;
-
-      -- DATA
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-      );
-  end component;
-
   component ntm_matrix_tanh_function is
     generic (
       DATA_SIZE    : integer := 128;
@@ -1255,7 +1196,8 @@ package ntm_math_pkg is
       DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1282,7 +1224,8 @@ package ntm_math_pkg is
       DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1309,9 +1252,9 @@ package ntm_math_pkg is
       DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      SIZE_IN  : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -1329,6 +1272,8 @@ package ntm_math_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
+      CONTROL : in std_logic;
+
       DATA_IN_I_ENABLE : in std_logic;
       DATA_IN_J_ENABLE : in std_logic;
 
@@ -1339,10 +1284,12 @@ package ntm_math_pkg is
       DATA_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      SIZE_I_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_I_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      LENGTH_J_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN     : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -1372,6 +1319,7 @@ package ntm_math_pkg is
       -- DATA
       SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
@@ -1418,6 +1366,8 @@ package ntm_math_pkg is
       CLK : in std_logic;
       RST : in std_logic;
 
+      CONTROL : in std_logic_vector(1 downto 0);
+
       -- CONTROL
       START : in  std_logic;
       READY : out std_logic;
@@ -1435,11 +1385,14 @@ package ntm_math_pkg is
       DATA_OUT_K_ENABLE : out std_logic;
 
       -- DATA
-      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      SIZE_I_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_I_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      LENGTH_J_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      LENGTH_K_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN     : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -1473,6 +1426,7 @@ package ntm_math_pkg is
       SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );

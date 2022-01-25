@@ -76,7 +76,8 @@ entity ntm_calculus_stimulus is
     VECTOR_DIFFERENTIATION_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_DIFFERENTIATION_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -93,7 +94,8 @@ entity ntm_calculus_stimulus is
     VECTOR_INTEGRATION_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_INTEGRATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_INTEGRATION_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_INTEGRATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_INTEGRATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -109,14 +111,16 @@ entity ntm_calculus_stimulus is
     VECTOR_SOFTMAX_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_SOFTMAX_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_SOFTMAX_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_SOFTMAX_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_SOFTMAX_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_SOFTMAX_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_SOFTMAX_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- MATRIX DIFFERENTIATION
     -- CONTROL
     MATRIX_DIFFERENTIATION_START : out std_logic;
     MATRIX_DIFFERENTIATION_READY : in  std_logic;
+
+    MATRIX_DIFFERENTIATION_CONTROL : out std_logic;
 
     MATRIX_DIFFERENTIATION_DATA_IN_I_ENABLE : out std_logic;
     MATRIX_DIFFERENTIATION_DATA_IN_J_ENABLE : out std_logic;
@@ -128,10 +132,12 @@ entity ntm_calculus_stimulus is
     MATRIX_DIFFERENTIATION_DATA_OUT_J_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_DIFFERENTIATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_DIFFERENTIATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_DIFFERENTIATION_SIZE_I_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_DIFFERENTIATION_SIZE_J_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_DIFFERENTIATION_LENGTH_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_DIFFERENTIATION_LENGTH_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_DIFFERENTIATION_DATA_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_DIFFERENTIATION_DATA_OUT   : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- MATRIX INTEGRATION
     -- CONTROL
@@ -150,6 +156,7 @@ entity ntm_calculus_stimulus is
     -- DATA
     MATRIX_INTEGRATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_INTEGRATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_INTEGRATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_INTEGRATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -178,6 +185,8 @@ entity ntm_calculus_stimulus is
     TENSOR_DIFFERENTIATION_START : out std_logic;
     TENSOR_DIFFERENTIATION_READY : in  std_logic;
 
+    TENSOR_DIFFERENTIATION_CONTROL : out std_logic_vector(1 downto 0);
+
     TENSOR_DIFFERENTIATION_DATA_IN_I_ENABLE : out std_logic;
     TENSOR_DIFFERENTIATION_DATA_IN_J_ENABLE : out std_logic;
     TENSOR_DIFFERENTIATION_DATA_IN_K_ENABLE : out std_logic;
@@ -191,11 +200,14 @@ entity ntm_calculus_stimulus is
     TENSOR_DIFFERENTIATION_DATA_OUT_K_ENABLE : in std_logic;
 
     -- DATA
-    TENSOR_DIFFERENTIATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_DIFFERENTIATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_DIFFERENTIATION_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_DIFFERENTIATION_SIZE_I_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_DIFFERENTIATION_SIZE_J_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_DIFFERENTIATION_SIZE_K_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_DIFFERENTIATION_LENGTH_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_DIFFERENTIATION_LENGTH_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_DIFFERENTIATION_LENGTH_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_DIFFERENTIATION_DATA_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_DIFFERENTIATION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- TENSOR INTEGRATION
     -- CONTROL
@@ -218,6 +230,7 @@ entity ntm_calculus_stimulus is
     TENSOR_INTEGRATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     TENSOR_INTEGRATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     TENSOR_INTEGRATION_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_INTEGRATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_INTEGRATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     TENSOR_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -365,7 +378,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_DIFFERENTIATION_LENGTH_IN <= THREE_CONTROL;
+      VECTOR_DIFFERENTIATION_SIZE_IN   <= THREE_CONTROL;
+      VECTOR_DIFFERENTIATION_LENGTH_IN <= TWO_DATA;
 
       if (STIMULUS_NTM_VECTOR_DIFFERENTIATION_CASE_0) then
 
@@ -381,7 +395,7 @@ begin
         index_i_loop <= ZERO_CONTROL;
 
         VECTOR_DIFFERENTIATION_FIRST_RUN : loop
-          if (VECTOR_DIFFERENTIATION_DATA_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_DIFFERENTIATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          if (VECTOR_DIFFERENTIATION_DATA_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_DIFFERENTIATION_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_DIFFERENTIATION_DATA_IN_ENABLE <= '1';
 
@@ -390,7 +404,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif ((VECTOR_DIFFERENTIATION_DATA_ENABLE = '1' or VECTOR_DIFFERENTIATION_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_DIFFERENTIATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((VECTOR_DIFFERENTIATION_DATA_ENABLE = '1' or VECTOR_DIFFERENTIATION_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_DIFFERENTIATION_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_DIFFERENTIATION_DATA_IN_ENABLE <= '1';
 
@@ -426,7 +440,7 @@ begin
         index_i_loop <= ZERO_CONTROL;
 
         VECTOR_DIFFERENTIATION_SECOND_RUN : loop
-          if ((VECTOR_DIFFERENTIATION_DATA_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_DIFFERENTIATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          if ((VECTOR_DIFFERENTIATION_DATA_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_DIFFERENTIATION_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_DIFFERENTIATION_DATA_IN_ENABLE <= '1';
 
@@ -435,7 +449,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif (((VECTOR_DIFFERENTIATION_DATA_ENABLE = '1') or (VECTOR_DIFFERENTIATION_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_DIFFERENTIATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif (((VECTOR_DIFFERENTIATION_DATA_ENABLE = '1') or (VECTOR_DIFFERENTIATION_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_DIFFERENTIATION_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_DIFFERENTIATION_DATA_IN_ENABLE <= '1';
 
@@ -468,7 +482,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_INTEGRATION_LENGTH_IN <= THREE_CONTROL;
+      VECTOR_INTEGRATION_SIZE_IN   <= THREE_CONTROL;
+      VECTOR_INTEGRATION_LENGTH_IN <= TWO_DATA;
 
       if (STIMULUS_NTM_VECTOR_INTEGRATION_CASE_0) then
 
@@ -484,7 +499,7 @@ begin
         index_i_loop <= ZERO_CONTROL;
 
         VECTOR_INTEGRATION_FIRST_RUN : loop
-          if (VECTOR_INTEGRATION_DATA_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_INTEGRATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          if (VECTOR_INTEGRATION_DATA_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_INTEGRATION_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_INTEGRATION_DATA_IN_ENABLE <= '1';
 
@@ -493,7 +508,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif ((VECTOR_INTEGRATION_DATA_ENABLE = '1' or VECTOR_INTEGRATION_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_INTEGRATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((VECTOR_INTEGRATION_DATA_ENABLE = '1' or VECTOR_INTEGRATION_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_INTEGRATION_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_INTEGRATION_DATA_IN_ENABLE <= '1';
 
@@ -529,7 +544,7 @@ begin
         index_i_loop <= ZERO_CONTROL;
 
         VECTOR_INTEGRATION_SECOND_RUN : loop
-          if ((VECTOR_INTEGRATION_DATA_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_INTEGRATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          if ((VECTOR_INTEGRATION_DATA_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_INTEGRATION_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_INTEGRATION_DATA_IN_ENABLE <= '1';
 
@@ -538,7 +553,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif (((VECTOR_INTEGRATION_DATA_ENABLE = '1') or (VECTOR_INTEGRATION_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_INTEGRATION_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif (((VECTOR_INTEGRATION_DATA_ENABLE = '1') or (VECTOR_INTEGRATION_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_INTEGRATION_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_INTEGRATION_DATA_IN_ENABLE <= '1';
 
@@ -571,7 +586,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_SOFTMAX_LENGTH_IN <= THREE_CONTROL;
+      VECTOR_SOFTMAX_SIZE_IN <= THREE_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_SOFTMAX_CASE_0) then
 
@@ -587,7 +602,7 @@ begin
         index_i_loop <= ZERO_CONTROL;
 
         VECTOR_SOFTMAX_FIRST_RUN : loop
-          if (VECTOR_SOFTMAX_DATA_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_SOFTMAX_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          if (VECTOR_SOFTMAX_DATA_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_SOFTMAX_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_SOFTMAX_DATA_IN_ENABLE <= '1';
 
@@ -596,7 +611,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif ((VECTOR_SOFTMAX_DATA_ENABLE = '1' or VECTOR_SOFTMAX_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_SOFTMAX_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((VECTOR_SOFTMAX_DATA_ENABLE = '1' or VECTOR_SOFTMAX_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_SOFTMAX_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_SOFTMAX_DATA_IN_ENABLE <= '1';
 
@@ -632,7 +647,7 @@ begin
         index_i_loop <= ZERO_CONTROL;
 
         VECTOR_SOFTMAX_SECOND_RUN : loop
-          if ((VECTOR_SOFTMAX_DATA_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_SOFTMAX_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          if ((VECTOR_SOFTMAX_DATA_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_SOFTMAX_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_SOFTMAX_DATA_IN_ENABLE <= '1';
 
@@ -641,7 +656,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif (((VECTOR_SOFTMAX_DATA_ENABLE = '1') or (VECTOR_SOFTMAX_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_SOFTMAX_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif (((VECTOR_SOFTMAX_DATA_ENABLE = '1') or (VECTOR_SOFTMAX_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_SOFTMAX_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_SOFTMAX_DATA_IN_ENABLE <= '1';
 
@@ -677,6 +692,9 @@ begin
       MATRIX_DIFFERENTIATION_SIZE_I_IN <= THREE_CONTROL;
       MATRIX_DIFFERENTIATION_SIZE_J_IN <= THREE_CONTROL;
 
+      MATRIX_DIFFERENTIATION_LENGTH_I_IN <= TWO_DATA;
+      MATRIX_DIFFERENTIATION_LENGTH_J_IN <= TWO_DATA;
+
       if (STIMULUS_NTM_MATRIX_DIFFERENTIATION_CASE_0) then
 
         -------------------------------------------------------------------
@@ -684,6 +702,9 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
+        -- CONTROL
+        MATRIX_DIFFERENTIATION_CONTROL <= '0';
+
         -- DATA
         MATRIX_DIFFERENTIATION_DATA_IN <= ZERO_DATA;
 
@@ -810,6 +831,8 @@ begin
       -- DATA
       MATRIX_INTEGRATION_SIZE_I_IN <= THREE_CONTROL;
       MATRIX_INTEGRATION_SIZE_J_IN <= THREE_CONTROL;
+
+      MATRIX_INTEGRATION_LENGTH_IN <= TWO_DATA;
 
       if (STIMULUS_NTM_MATRIX_INTEGRATION_CASE_0) then
 
@@ -1080,6 +1103,10 @@ begin
       TENSOR_DIFFERENTIATION_SIZE_J_IN <= THREE_CONTROL;
       TENSOR_DIFFERENTIATION_SIZE_K_IN <= THREE_CONTROL;
 
+      TENSOR_DIFFERENTIATION_LENGTH_I_IN <= TWO_DATA;
+      TENSOR_DIFFERENTIATION_LENGTH_J_IN <= TWO_DATA;
+      TENSOR_DIFFERENTIATION_LENGTH_K_IN <= TWO_DATA;
+
       if (STIMULUS_NTM_TENSOR_DIFFERENTIATION_CASE_0) then
 
         -------------------------------------------------------------------
@@ -1087,6 +1114,9 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
+        -- CONTROL
+        TENSOR_DIFFERENTIATION_CONTROL <= "01";
+
         -- DATA
         TENSOR_DIFFERENTIATION_DATA_IN <= ZERO_DATA;
 
@@ -1246,6 +1276,8 @@ begin
       TENSOR_INTEGRATION_SIZE_I_IN <= THREE_CONTROL;
       TENSOR_INTEGRATION_SIZE_J_IN <= THREE_CONTROL;
       TENSOR_INTEGRATION_SIZE_K_IN <= THREE_CONTROL;
+
+      TENSOR_INTEGRATION_LENGTH_IN <= TWO_DATA;
 
       if (STIMULUS_NTM_TENSOR_INTEGRATION_CASE_0) then
 

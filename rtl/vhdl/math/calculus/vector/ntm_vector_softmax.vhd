@@ -65,9 +65,9 @@ entity ntm_vector_softmax is
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
-    LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    SIZE_IN  : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -154,17 +154,21 @@ begin
           READY <= '0';
 
           DATA_ENABLE <= '0';
-          DATA_ENABLE <= '0';
 
-          DATA_OUT_ENABLE <= '0';
           DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
+            -- Control Outputs
+            DATA_ENABLE <= '1';
+
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
             softmax_ctrl_fsm_int <= INPUT_STATE;
+          else
+            -- Control Outputs
+            DATA_ENABLE <= '0';
           end if;
 
         when INPUT_STATE =>           -- STEP 2
@@ -182,7 +186,7 @@ begin
 
         when ENDER_STATE =>           -- STEP 4
 
-          if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+          if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
@@ -214,7 +218,7 @@ begin
 
         when OPERATION_STATE =>       -- STEP 8
 
-          if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+          if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
             -- Control Outputs
             READY <= '1';
 

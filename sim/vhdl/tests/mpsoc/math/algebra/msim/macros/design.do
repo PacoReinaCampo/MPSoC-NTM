@@ -200,7 +200,6 @@ alias ntm_tensor_summation_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/ntm_scalar_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/ntm_scalar_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/tensor/ntm_tensor_summation.vhd
 }
 

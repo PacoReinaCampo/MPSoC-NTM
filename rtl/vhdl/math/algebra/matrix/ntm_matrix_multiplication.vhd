@@ -91,8 +91,8 @@ architecture ntm_matrix_multiplication_architecture of ntm_matrix_multiplication
     ENDER_J_STATE,                      -- STEP 4
     CLEAN_I_STATE,                      -- STEP 5
     CLEAN_J_STATE,                      -- STEP 6
-    SCALAR_MULTIPLIER_I_STATE,               -- STEP 7
-    SCALAR_MULTIPLIER_J_STATE                -- STEP 8
+    SCALAR_MULTIPLIER_I_STATE,          -- STEP 7
+    SCALAR_MULTIPLIER_J_STATE           -- STEP 8
     );
 
   -- Buffer

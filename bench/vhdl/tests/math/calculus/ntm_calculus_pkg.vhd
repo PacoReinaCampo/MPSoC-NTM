@@ -178,7 +178,8 @@ package ntm_calculus_pkg is
       VECTOR_DIFFERENTIATION_DATA_OUT_ENABLE : in std_logic;
 
       -- DATA
-      VECTOR_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_DIFFERENTIATION_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_DIFFERENTIATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -194,7 +195,8 @@ package ntm_calculus_pkg is
       VECTOR_INTEGRATION_DATA_OUT_ENABLE : in std_logic;
 
       -- DATA
-      VECTOR_INTEGRATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_INTEGRATION_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_INTEGRATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_INTEGRATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -210,14 +212,16 @@ package ntm_calculus_pkg is
       VECTOR_SOFTMAX_DATA_OUT_ENABLE : in std_logic;
 
       -- DATA
-      VECTOR_SOFTMAX_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_SOFTMAX_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_SOFTMAX_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_SOFTMAX_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_SOFTMAX_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_SOFTMAX_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- MATRIX DIFFERENTIATION
       -- CONTROL
       MATRIX_DIFFERENTIATION_START : out std_logic;
       MATRIX_DIFFERENTIATION_READY : in  std_logic;
+
+      MATRIX_DIFFERENTIATION_CONTROL : out std_logic;
 
       MATRIX_DIFFERENTIATION_DATA_IN_I_ENABLE : out std_logic;
       MATRIX_DIFFERENTIATION_DATA_IN_J_ENABLE : out std_logic;
@@ -229,10 +233,12 @@ package ntm_calculus_pkg is
       MATRIX_DIFFERENTIATION_DATA_OUT_J_ENABLE : in std_logic;
 
       -- DATA
-      MATRIX_DIFFERENTIATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_DIFFERENTIATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_DIFFERENTIATION_SIZE_I_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_DIFFERENTIATION_SIZE_J_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_DIFFERENTIATION_LENGTH_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_DIFFERENTIATION_LENGTH_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_DIFFERENTIATION_DATA_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_DIFFERENTIATION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- MATRIX INTEGRATION
       -- CONTROL
@@ -251,6 +257,7 @@ package ntm_calculus_pkg is
       -- DATA
       MATRIX_INTEGRATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_INTEGRATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_INTEGRATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_INTEGRATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -279,6 +286,8 @@ package ntm_calculus_pkg is
       TENSOR_DIFFERENTIATION_START : out std_logic;
       TENSOR_DIFFERENTIATION_READY : in  std_logic;
 
+      TENSOR_DIFFERENTIATION_CONTROL : out std_logic_vector(1 downto 0);
+
       TENSOR_DIFFERENTIATION_DATA_IN_I_ENABLE : out std_logic;
       TENSOR_DIFFERENTIATION_DATA_IN_J_ENABLE : out std_logic;
       TENSOR_DIFFERENTIATION_DATA_IN_K_ENABLE : out std_logic;
@@ -292,11 +301,14 @@ package ntm_calculus_pkg is
       TENSOR_DIFFERENTIATION_DATA_OUT_K_ENABLE : in std_logic;
 
       -- DATA
-      TENSOR_DIFFERENTIATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_DIFFERENTIATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_DIFFERENTIATION_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_DIFFERENTIATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_DIFFERENTIATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_DIFFERENTIATION_SIZE_I_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_DIFFERENTIATION_SIZE_J_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_DIFFERENTIATION_SIZE_K_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_DIFFERENTIATION_LENGTH_I_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_DIFFERENTIATION_LENGTH_J_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_DIFFERENTIATION_LENGTH_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_DIFFERENTIATION_DATA_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_DIFFERENTIATION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- TENSOR INTEGRATION
       -- CONTROL
@@ -319,6 +331,7 @@ package ntm_calculus_pkg is
       TENSOR_INTEGRATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       TENSOR_INTEGRATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       TENSOR_INTEGRATION_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_INTEGRATION_LENGTH_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_INTEGRATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_INTEGRATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 

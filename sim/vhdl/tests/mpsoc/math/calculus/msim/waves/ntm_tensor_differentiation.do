@@ -12,9 +12,13 @@ add wave -noupdate -divider {=========================================}
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/CLK
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/RST
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/START
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/CONTROL
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/SIZE_I_IN
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/SIZE_J_IN
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/SIZE_K_IN
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/LENGTH_I_IN
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/LENGTH_J_IN
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/LENGTH_K_IN
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/DATA_IN_I_ENABLE
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/DATA_IN_J_ENABLE
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/DATA_IN_K_ENABLE
@@ -33,6 +37,21 @@ add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tenso
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/index_i_loop
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/index_j_loop
 add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/index_k_loop
+
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/start_scalar_adder
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/operation_scalar_adder
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/data_a_in_scalar_adder
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/data_b_in_scalar_adder
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/ready_scalar_adder
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/data_out_scalar_adder
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/overflow_out_scalar_adder
+
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/start_scalar_divider
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/data_a_in_scalar_divider
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/data_b_in_scalar_divider
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/ready_scalar_divider
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/data_out_scalar_divider
+add wave -noupdate /ntm_calculus_testbench/ntm_tensor_differentiation_test/tensor_differentiation/rest_out_scalar_divider
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

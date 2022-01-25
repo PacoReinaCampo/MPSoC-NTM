@@ -119,7 +119,8 @@ architecture ntm_calculus_testbench_architecture of ntm_calculus_testbench is
   signal data_out_enable_vector_differentiation : std_logic;
 
   -- DATA
-  signal length_in_vector_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_in_vector_differentiation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -135,7 +136,8 @@ architecture ntm_calculus_testbench_architecture of ntm_calculus_testbench is
   signal data_out_enable_vector_integration : std_logic;
 
   -- DATA
-  signal length_in_vector_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_in_vector_integration   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_integration : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_integration   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_integration  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -151,14 +153,16 @@ architecture ntm_calculus_testbench_architecture of ntm_calculus_testbench is
   signal data_out_enable_vector_softmax : std_logic;
 
   -- DATA
-  signal length_in_vector_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_softmax  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX DIFFERENTIATION
   -- CONTROL
   signal start_matrix_differentiation : std_logic;
   signal ready_matrix_differentiation : std_logic;
+
+  signal control_matrix_differentiation : std_logic;
 
   signal data_in_i_enable_matrix_differentiation : std_logic;
   signal data_in_j_enable_matrix_differentiation : std_logic;
@@ -170,9 +174,11 @@ architecture ntm_calculus_testbench_architecture of ntm_calculus_testbench is
   signal data_out_j_enable_matrix_differentiation : std_logic;
 
   -- DATA
-  signal size_i_in_matrix_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_matrix_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_differentiation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_differentiation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_i_in_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_j_in_matrix_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_matrix_differentiation     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX INTEGRATION
@@ -192,6 +198,7 @@ architecture ntm_calculus_testbench_architecture of ntm_calculus_testbench is
   -- DATA
   signal size_i_in_matrix_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_matrix_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_matrix_integration : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_matrix_integration   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_integration  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -220,6 +227,9 @@ architecture ntm_calculus_testbench_architecture of ntm_calculus_testbench is
   signal start_tensor_differentiation : std_logic;
   signal ready_tensor_differentiation : std_logic;
 
+  signal control_tensor_differentiation : std_logic_vector(1 downto 0)
+  ;
+
   signal data_in_i_enable_tensor_differentiation : std_logic;
   signal data_in_j_enable_tensor_differentiation : std_logic;
   signal data_in_k_enable_tensor_differentiation : std_logic;
@@ -233,11 +243,14 @@ architecture ntm_calculus_testbench_architecture of ntm_calculus_testbench is
   signal data_out_k_enable_tensor_differentiation : std_logic;
 
   -- DATA
-  signal size_i_in_tensor_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_tensor_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_k_in_tensor_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_tensor_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_tensor_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_tensor_differentiation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_tensor_differentiation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_k_in_tensor_differentiation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_i_in_tensor_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_j_in_tensor_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_k_in_tensor_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_tensor_differentiation     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_differentiation    : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- TENSOR INTEGRATION
   -- CONTROL
@@ -260,6 +273,7 @@ architecture ntm_calculus_testbench_architecture of ntm_calculus_testbench is
   signal size_i_in_tensor_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_j_in_tensor_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_k_in_tensor_integration : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_tensor_integration : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_tensor_integration   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_tensor_integration  : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -323,6 +337,7 @@ begin
       VECTOR_DIFFERENTIATION_DATA_OUT_ENABLE => data_out_enable_vector_differentiation,
 
       -- DATA
+      VECTOR_DIFFERENTIATION_SIZE_IN   => size_in_vector_differentiation,
       VECTOR_DIFFERENTIATION_LENGTH_IN => length_in_vector_differentiation,
       VECTOR_DIFFERENTIATION_DATA_IN   => data_in_vector_differentiation,
       VECTOR_DIFFERENTIATION_DATA_OUT  => data_out_vector_differentiation,
@@ -339,6 +354,7 @@ begin
       VECTOR_INTEGRATION_DATA_OUT_ENABLE => data_out_enable_vector_integration,
 
       -- DATA
+      VECTOR_INTEGRATION_SIZE_IN   => size_in_vector_integration,
       VECTOR_INTEGRATION_LENGTH_IN => length_in_vector_integration,
       VECTOR_INTEGRATION_DATA_IN   => data_in_vector_integration,
       VECTOR_INTEGRATION_DATA_OUT  => data_out_vector_integration,
@@ -355,14 +371,16 @@ begin
       VECTOR_SOFTMAX_DATA_OUT_ENABLE => data_out_enable_vector_softmax,
 
       -- DATA
-      VECTOR_SOFTMAX_LENGTH_IN => length_in_vector_softmax,
-      VECTOR_SOFTMAX_DATA_IN   => data_in_vector_softmax,
-      VECTOR_SOFTMAX_DATA_OUT  => data_out_vector_softmax,
+      VECTOR_SOFTMAX_SIZE_IN  => size_in_vector_softmax,
+      VECTOR_SOFTMAX_DATA_IN  => data_in_vector_softmax,
+      VECTOR_SOFTMAX_DATA_OUT => data_out_vector_softmax,
 
       -- MATRIX DIFFERENTIATION
       -- CONTROL
       MATRIX_DIFFERENTIATION_START => start_matrix_differentiation,
       MATRIX_DIFFERENTIATION_READY => ready_matrix_differentiation,
+
+      MATRIX_DIFFERENTIATION_CONTROL => control_matrix_differentiation,
 
       MATRIX_DIFFERENTIATION_DATA_IN_I_ENABLE => data_in_i_enable_matrix_differentiation,
       MATRIX_DIFFERENTIATION_DATA_IN_J_ENABLE => data_in_j_enable_matrix_differentiation,
@@ -374,10 +392,12 @@ begin
       MATRIX_DIFFERENTIATION_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_differentiation,
 
       -- DATA
-      MATRIX_DIFFERENTIATION_SIZE_I_IN => size_i_in_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_SIZE_J_IN => size_j_in_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_DATA_IN   => data_in_matrix_differentiation,
-      MATRIX_DIFFERENTIATION_DATA_OUT  => data_out_matrix_differentiation,
+      MATRIX_DIFFERENTIATION_SIZE_I_IN   => size_i_in_matrix_differentiation,
+      MATRIX_DIFFERENTIATION_SIZE_J_IN   => size_j_in_matrix_differentiation,
+      MATRIX_DIFFERENTIATION_LENGTH_I_IN => length_i_in_matrix_differentiation,
+      MATRIX_DIFFERENTIATION_LENGTH_J_IN => length_j_in_matrix_differentiation,
+      MATRIX_DIFFERENTIATION_DATA_IN     => data_in_matrix_differentiation,
+      MATRIX_DIFFERENTIATION_DATA_OUT    => data_out_matrix_differentiation,
 
       -- MATRIX INTEGRATION
       -- CONTROL
@@ -396,6 +416,7 @@ begin
       -- DATA
       MATRIX_INTEGRATION_SIZE_I_IN => size_i_in_matrix_integration,
       MATRIX_INTEGRATION_SIZE_J_IN => size_j_in_matrix_integration,
+      MATRIX_INTEGRATION_LENGTH_IN => length_in_matrix_integration,
       MATRIX_INTEGRATION_DATA_IN   => data_in_matrix_integration,
       MATRIX_INTEGRATION_DATA_OUT  => data_out_matrix_integration,
 
@@ -424,6 +445,8 @@ begin
       TENSOR_DIFFERENTIATION_START => start_tensor_differentiation,
       TENSOR_DIFFERENTIATION_READY => ready_tensor_differentiation,
 
+      TENSOR_DIFFERENTIATION_CONTROL => control_tensor_differentiation,
+
       TENSOR_DIFFERENTIATION_DATA_IN_I_ENABLE => data_in_i_enable_tensor_differentiation,
       TENSOR_DIFFERENTIATION_DATA_IN_J_ENABLE => data_in_j_enable_tensor_differentiation,
       TENSOR_DIFFERENTIATION_DATA_IN_K_ENABLE => data_in_k_enable_tensor_differentiation,
@@ -437,11 +460,14 @@ begin
       TENSOR_DIFFERENTIATION_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_differentiation,
 
       -- DATA
-      TENSOR_DIFFERENTIATION_SIZE_I_IN => size_i_in_tensor_differentiation,
-      TENSOR_DIFFERENTIATION_SIZE_J_IN => size_j_in_tensor_differentiation,
-      TENSOR_DIFFERENTIATION_SIZE_K_IN => size_k_in_tensor_differentiation,
-      TENSOR_DIFFERENTIATION_DATA_IN   => data_in_tensor_differentiation,
-      TENSOR_DIFFERENTIATION_DATA_OUT  => data_out_tensor_differentiation,
+      TENSOR_DIFFERENTIATION_SIZE_I_IN   => size_i_in_tensor_differentiation,
+      TENSOR_DIFFERENTIATION_SIZE_J_IN   => size_j_in_tensor_differentiation,
+      TENSOR_DIFFERENTIATION_SIZE_K_IN   => size_k_in_tensor_differentiation,
+      TENSOR_DIFFERENTIATION_LENGTH_I_IN => length_i_in_tensor_differentiation,
+      TENSOR_DIFFERENTIATION_LENGTH_J_IN => length_j_in_tensor_differentiation,
+      TENSOR_DIFFERENTIATION_LENGTH_K_IN => length_k_in_tensor_differentiation,
+      TENSOR_DIFFERENTIATION_DATA_IN     => data_in_tensor_differentiation,
+      TENSOR_DIFFERENTIATION_DATA_OUT    => data_out_tensor_differentiation,
 
       -- TENSOR INTEGRATION
       -- CONTROL
@@ -464,6 +490,7 @@ begin
       TENSOR_INTEGRATION_SIZE_I_IN => size_i_in_tensor_integration,
       TENSOR_INTEGRATION_SIZE_J_IN => size_j_in_tensor_integration,
       TENSOR_INTEGRATION_SIZE_K_IN => size_k_in_tensor_integration,
+      TENSOR_INTEGRATION_LENGTH_IN => length_in_tensor_integration,
       TENSOR_INTEGRATION_DATA_IN   => data_in_tensor_integration,
       TENSOR_INTEGRATION_DATA_OUT  => data_out_tensor_integration,
 
@@ -515,6 +542,7 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_differentiation,
 
         -- DATA
+        SIZE_IN   => size_in_vector_differentiation,
         LENGTH_IN => length_in_vector_differentiation,
         DATA_IN   => data_in_vector_differentiation,
         DATA_OUT  => data_out_vector_differentiation
@@ -544,6 +572,7 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_integration,
 
         -- DATA
+        SIZE_IN   => size_in_vector_integration,
         LENGTH_IN => length_in_vector_integration,
         DATA_IN   => data_in_vector_integration,
         DATA_OUT  => data_out_vector_integration
@@ -573,9 +602,9 @@ begin
         DATA_OUT_ENABLE => data_out_enable_vector_softmax,
 
         -- DATA
-        LENGTH_IN => length_in_vector_softmax,
-        DATA_IN   => data_in_vector_softmax,
-        DATA_OUT  => data_out_vector_softmax
+        SIZE_IN  => size_in_vector_softmax,
+        DATA_IN  => data_in_vector_softmax,
+        DATA_OUT => data_out_vector_softmax
         );
   end generate ntm_vector_softmax_test;
 
@@ -595,6 +624,8 @@ begin
         START => start_matrix_differentiation,
         READY => ready_matrix_differentiation,
 
+        CONTROL => control_matrix_differentiation,
+
         DATA_IN_I_ENABLE => data_in_i_enable_matrix_differentiation,
         DATA_IN_J_ENABLE => data_in_j_enable_matrix_differentiation,
 
@@ -605,10 +636,12 @@ begin
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_differentiation,
 
         -- DATA
-        SIZE_I_IN => size_i_in_matrix_differentiation,
-        SIZE_J_IN => size_j_in_matrix_differentiation,
-        DATA_IN   => data_in_matrix_differentiation,
-        DATA_OUT  => data_out_matrix_differentiation
+        SIZE_I_IN   => size_i_in_matrix_differentiation,
+        SIZE_J_IN   => size_j_in_matrix_differentiation,
+        LENGTH_I_IN => length_i_in_matrix_differentiation,
+        LENGTH_J_IN => length_j_in_matrix_differentiation,
+        DATA_IN     => data_in_matrix_differentiation,
+        DATA_OUT    => data_out_matrix_differentiation
         );
   end generate ntm_matrix_differentiation_test;
 
@@ -640,6 +673,7 @@ begin
         -- DATA
         SIZE_I_IN => size_i_in_matrix_integration,
         SIZE_J_IN => size_j_in_matrix_integration,
+        LENGTH_IN => length_in_matrix_integration,
         DATA_IN   => data_in_matrix_integration,
         DATA_OUT  => data_out_matrix_integration
         );
@@ -694,6 +728,8 @@ begin
         START => start_tensor_differentiation,
         READY => ready_tensor_differentiation,
 
+        CONTROL => control_tensor_differentiation,
+
         DATA_IN_I_ENABLE => data_in_i_enable_tensor_differentiation,
         DATA_IN_J_ENABLE => data_in_j_enable_tensor_differentiation,
         DATA_IN_K_ENABLE => data_in_k_enable_tensor_differentiation,
@@ -707,11 +743,14 @@ begin
         DATA_OUT_K_ENABLE => data_out_k_enable_tensor_differentiation,
 
         -- DATA
-        SIZE_I_IN => size_i_in_tensor_differentiation,
-        SIZE_J_IN => size_j_in_tensor_differentiation,
-        SIZE_K_IN => size_k_in_tensor_differentiation,
-        DATA_IN   => data_in_tensor_differentiation,
-        DATA_OUT  => data_out_tensor_differentiation
+        SIZE_I_IN   => size_i_in_tensor_differentiation,
+        SIZE_J_IN   => size_j_in_tensor_differentiation,
+        SIZE_K_IN   => size_k_in_tensor_differentiation,
+        LENGTH_I_IN => length_i_in_tensor_differentiation,
+        LENGTH_J_IN => length_j_in_tensor_differentiation,
+        LENGTH_K_IN => length_k_in_tensor_differentiation,
+        DATA_IN     => data_in_tensor_differentiation,
+        DATA_OUT    => data_out_tensor_differentiation
         );
   end generate ntm_tensor_differentiation_test;
 
@@ -747,6 +786,7 @@ begin
         SIZE_I_IN => size_i_in_tensor_integration,
         SIZE_J_IN => size_j_in_tensor_integration,
         SIZE_K_IN => size_k_in_tensor_integration,
+        LENGTH_IN => length_in_tensor_integration,
         DATA_IN   => data_in_tensor_integration,
         DATA_OUT  => data_out_tensor_integration
         );
