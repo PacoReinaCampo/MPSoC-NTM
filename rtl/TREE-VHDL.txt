@@ -144,7 +144,6 @@
 │   │   │   ├── ntm_matrix_integration.vhd
 │   │   │   └── ntm_matrix_softmax.vhd
 │   │   ├── tensor
-│   │   │   ├── ntm_tensor_differentiation.vhd
 │   │   │   ├── ntm_tensor_differentiation.vhd~
 │   │   │   ├── ntm_tensor_integration.vhd
 │   │   │   └── ntm_tensor_softmax.vhd

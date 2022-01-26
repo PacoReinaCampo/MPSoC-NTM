@@ -61,13 +61,25 @@ entity ntm_float_testbench is
     ENABLE_NTM_SCALAR_MULTIPLIER_TEST : boolean := false;
     ENABLE_NTM_SCALAR_DIVIDER_TEST    : boolean := false;
 
+    ENABLE_NTM_SCALAR_FLOAT_ADDER_TEST      : boolean := false;
+    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_TEST : boolean := false;
+    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_TEST    : boolean := false;
+
     ENABLE_NTM_SCALAR_ADDER_CASE_0      : boolean := false;
     ENABLE_NTM_SCALAR_MULTIPLIER_CASE_0 : boolean := false;
     ENABLE_NTM_SCALAR_DIVIDER_CASE_0    : boolean := false;
 
+    ENABLE_NTM_SCALAR_FLOAT_ADDER_CASE_0      : boolean := false;
+    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_CASE_0    : boolean := false;
+
     ENABLE_NTM_SCALAR_ADDER_CASE_1      : boolean := false;
     ENABLE_NTM_SCALAR_MULTIPLIER_CASE_1 : boolean := false;
     ENABLE_NTM_SCALAR_DIVIDER_CASE_1    : boolean := false;
+
+    ENABLE_NTM_SCALAR_FLOAT_ADDER_CASE_1      : boolean := false;
+    ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_NTM_SCALAR_FLOAT_DIVIDER_CASE_1    : boolean := false;
 
     -- VECTOR-FUNCTIONALITY
     ENABLE_NTM_VECTOR_ADDER_TEST      : boolean := false;
@@ -125,6 +137,18 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal data_out_scalar_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal overflow_out_scalar_adder : std_logic;
 
+  -- SCALAR FLOAT ADDER
+  -- CONTROL
+  signal start_scalar_float_adder : std_logic;
+  signal ready_scalar_float_adder : std_logic;
+
+  -- DATA
+  signal data_a_in_scalar_float_adder : std_logic_vector(31 downto 0);
+  signal data_b_in_scalar_float_adder : std_logic_vector(31 downto 0);
+
+  signal data_out_scalar_float_adder     : std_logic_vector(31 downto 0);
+  signal overflow_out_scalar_float_adder : std_logic;
+
   -- SCALAR MULTIPLIER
   -- CONTROL
   signal start_scalar_multiplier : std_logic;
@@ -137,6 +161,18 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal data_out_scalar_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal overflow_out_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- SCALAR FLOAT MULTIPLIER
+  -- CONTROL
+  signal start_scalar_float_multiplier : std_logic;
+  signal ready_scalar_float_multiplier : std_logic;
+
+  -- DATA
+  signal data_a_in_scalar_float_multiplier : std_logic_vector(31 downto 0);
+  signal data_b_in_scalar_float_multiplier : std_logic_vector(31 downto 0);
+
+  signal data_out_scalar_float_multiplier     : std_logic_vector(31 downto 0);
+  signal overflow_out_scalar_float_multiplier : std_logic;
+
   -- SCALAR DIVIDER
   -- CONTROL
   signal start_scalar_divider : std_logic;
@@ -148,6 +184,18 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
 
   signal data_out_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal rest_out_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- SCALAR FLOAT DIVIDER
+  -- CONTROL
+  signal start_scalar_float_divider : std_logic;
+  signal ready_scalar_float_divider : std_logic;
+
+  -- DATA
+  signal data_a_in_scalar_float_divider : std_logic_vector(31 downto 0);
+  signal data_b_in_scalar_float_divider : std_logic_vector(31 downto 0);
+
+  signal data_out_scalar_float_divider     : std_logic_vector(31 downto 0);
+  signal overflow_out_scalar_float_divider : std_logic;
 
   -----------------------------------------------------------------------
   -- VECTOR
@@ -321,6 +369,16 @@ begin
       SCALAR_ADDER_DATA_B_IN => data_b_in_scalar_adder,
       SCALAR_ADDER_DATA_OUT  => data_out_scalar_adder,
 
+      -- SCALAR FLOAT ADDER
+      -- CONTROL
+      SCALAR_FLOAT_ADDER_START => start_scalar_float_adder,
+      SCALAR_FLOAT_ADDER_READY => ready_scalar_float_adder,
+
+      -- DATA
+      SCALAR_FLOAT_ADDER_DATA_A_IN => data_a_in_scalar_float_adder,
+      SCALAR_FLOAT_ADDER_DATA_B_IN => data_b_in_scalar_float_adder,
+      SCALAR_FLOAT_ADDER_DATA_OUT  => data_out_scalar_float_adder,
+
       -- SCALAR MULTIPLIER
       -- CONTROL
       SCALAR_MULTIPLIER_START => start_scalar_multiplier,
@@ -331,6 +389,17 @@ begin
       SCALAR_MULTIPLIER_DATA_B_IN => data_b_in_scalar_multiplier,
       SCALAR_MULTIPLIER_DATA_OUT  => data_out_scalar_multiplier,
 
+      -- SCALAR FLOAT MULTIPLIER
+      -- CONTROL
+      SCALAR_FLOAT_MULTIPLIER_START => start_scalar_float_multiplier,
+      SCALAR_FLOAT_MULTIPLIER_READY => ready_scalar_float_multiplier,
+
+      -- DATA
+      SCALAR_FLOAT_MULTIPLIER_DATA_A_IN    => data_a_in_scalar_float_multiplier,
+      SCALAR_FLOAT_MULTIPLIER_DATA_B_IN    => data_b_in_scalar_float_multiplier,
+      SCALAR_FLOAT_MULTIPLIER_DATA_OUT     => data_out_scalar_float_multiplier,
+      SCALAR_FLOAT_MULTIPLIER_OVERFLOW_OUT => overflow_out_scalar_float_multiplier,
+
       -- SCALAR DIVIDER
       -- CONTROL
       SCALAR_DIVIDER_START => start_scalar_divider,
@@ -340,6 +409,17 @@ begin
       SCALAR_DIVIDER_DATA_A_IN => data_a_in_scalar_divider,
       SCALAR_DIVIDER_DATA_B_IN => data_b_in_scalar_divider,
       SCALAR_DIVIDER_DATA_OUT  => data_out_scalar_divider,
+
+      -- SCALAR FLOAT DIVIDER
+      -- CONTROL
+      SCALAR_FLOAT_DIVIDER_START => start_scalar_float_divider,
+      SCALAR_FLOAT_DIVIDER_READY => ready_scalar_float_divider,
+
+      -- DATA
+      SCALAR_FLOAT_DIVIDER_DATA_A_IN    => data_a_in_scalar_float_divider,
+      SCALAR_FLOAT_DIVIDER_DATA_B_IN    => data_b_in_scalar_float_divider,
+      SCALAR_FLOAT_DIVIDER_DATA_OUT     => data_out_scalar_float_divider,
+      SCALAR_FLOAT_DIVIDER_OVERFLOW_OUT => overflow_out_scalar_float_divider,
 
       -----------------------------------------------------------------------
       -- STIMULUS VECTOR
@@ -493,6 +573,30 @@ begin
         );
   end generate ntm_scalar_adder_test;
 
+  -- SCALAR FLOAT ADDER
+  ntm_scalar_float_adder_test : if (ENABLE_NTM_SCALAR_FLOAT_ADDER_TEST) generate
+    scalar_float_adder : ntm_scalar_float_adder
+      generic map (
+        DATA_SIZE    => 32,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_scalar_float_adder,
+        READY => ready_scalar_float_adder,
+
+        -- DATA
+        DATA_A_IN => data_a_in_scalar_float_adder,
+        DATA_B_IN => data_b_in_scalar_float_adder,
+
+        DATA_OUT => data_out_scalar_float_adder
+        );
+  end generate ntm_scalar_float_adder_test;
+
   -- SCALAR MULTIPLIER
   ntm_scalar_multiplier_test : if (ENABLE_NTM_SCALAR_MULTIPLIER_TEST) generate
     scalar_multiplier : ntm_scalar_multiplier
@@ -518,6 +622,31 @@ begin
         );
   end generate ntm_scalar_multiplier_test;
 
+  -- SCALAR FLOAT MULTIPLIER
+  ntm_scalar_float_multiplier_test : if (ENABLE_NTM_SCALAR_FLOAT_MULTIPLIER_TEST) generate
+    scalar_float_multiplier : ntm_scalar_float_multiplier
+      generic map (
+        DATA_SIZE    => 32,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_scalar_float_multiplier,
+        READY => ready_scalar_float_adder,
+
+        -- DATA
+        DATA_A_IN => data_a_in_scalar_float_multiplier,
+        DATA_B_IN => data_b_in_scalar_float_multiplier,
+
+        DATA_OUT     => data_out_scalar_float_multiplier,
+        OVERFLOW_OUT => overflow_out_scalar_float_multiplier
+        );
+  end generate ntm_scalar_float_multiplier_test;
+
   -- SCALAR DIVIDER
   ntm_scalar_divider_test : if (ENABLE_NTM_SCALAR_DIVIDER_TEST) generate
     scalar_divider : ntm_scalar_divider
@@ -542,6 +671,31 @@ begin
         REST_OUT => rest_out_scalar_divider
         );
   end generate ntm_scalar_divider_test;
+
+  -- SCALAR FLOAT DIVIDER
+  ntm_scalar_float_divider_test : if (ENABLE_NTM_SCALAR_FLOAT_DIVIDER_TEST) generate
+    scalar_float_divider : ntm_scalar_float_divider
+      generic map (
+        DATA_SIZE    => 32,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_scalar_float_divider,
+        READY => ready_scalar_float_divider,
+
+        -- DATA
+        DATA_A_IN => data_a_in_scalar_float_divider,
+        DATA_B_IN => data_b_in_scalar_float_divider,
+
+        DATA_OUT     => data_out_scalar_float_divider,
+        OVERFLOW_OUT => overflow_out_scalar_float_divider
+        );
+  end generate ntm_scalar_float_divider_test;
 
   -----------------------------------------------------------------------
   -- VECTOR

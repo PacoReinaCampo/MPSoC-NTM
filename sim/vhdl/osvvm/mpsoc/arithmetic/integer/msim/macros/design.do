@@ -12,8 +12,8 @@ vlib work
 ##################################################################################################
 
 alias ntm_scalar_integer_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
 }
 
 ##################################################################################################
@@ -21,8 +21,8 @@ alias ntm_scalar_integer_adder_design_compilation {
 ##################################################################################################
 
 alias ntm_scalar_integer_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
 }
 
 ##################################################################################################
@@ -30,8 +30,8 @@ alias ntm_scalar_integer_multiplier_design_compilation {
 ##################################################################################################
 
 alias ntm_scalar_integer_divider_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
 }
 
 ##################################################################################################
@@ -39,9 +39,9 @@ alias ntm_scalar_integer_divider_design_compilation {
 ##################################################################################################
 
 alias ntm_vector_integer_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/vector/ntm_vector_integer_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/vector/ntm_vector_integer_adder.vhd
 }
 
 ##################################################################################################
@@ -49,9 +49,9 @@ alias ntm_vector_integer_adder_design_compilation {
 ##################################################################################################
 
 alias ntm_vector_integer_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/vector/ntm_vector_integer_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/vector/ntm_vector_integer_multiplier.vhd
 }
 
 ##################################################################################################
@@ -59,9 +59,9 @@ alias ntm_vector_integer_multiplier_design_compilation {
 ##################################################################################################
 
 alias ntm_vector_integer_divider_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/vector/ntm_vector_integer_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/vector/ntm_vector_integer_divider.vhd
 }
 
 ##################################################################################################
@@ -69,10 +69,10 @@ alias ntm_vector_integer_divider_design_compilation {
 ##################################################################################################
 
 alias ntm_matrix_integer_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/vector/ntm_vector_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/matrix/ntm_matrix_integer_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/vector/ntm_vector_integer_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/matrix/ntm_matrix_integer_adder.vhd
 }
 
 ##################################################################################################
@@ -80,10 +80,10 @@ alias ntm_matrix_integer_adder_design_compilation {
 ##################################################################################################
 
 alias ntm_matrix_integer_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/vector/ntm_vector_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/matrix/ntm_matrix_integer_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/vector/ntm_vector_integer_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/matrix/ntm_matrix_integer_multiplier.vhd
 }
 
 ##################################################################################################
@@ -91,10 +91,10 @@ alias ntm_matrix_integer_multiplier_design_compilation {
 ##################################################################################################
 
 alias ntm_matrix_integer_divider_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/vector/ntm_vector_integer_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/matrix/ntm_matrix_integer_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/vector/ntm_vector_integer_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/matrix/ntm_matrix_integer_divider.vhd
 }
 
 ##################################################################################################
@@ -102,11 +102,11 @@ alias ntm_matrix_integer_divider_design_compilation {
 ##################################################################################################
 
 alias ntm_tensor_integer_adder_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/vector/ntm_vector_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/matrix/ntm_matrix_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/tensor/ntm_tensor_integer_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/vector/ntm_vector_integer_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/matrix/ntm_matrix_integer_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/tensor/ntm_tensor_integer_adder.vhd
 }
 
 ##################################################################################################
@@ -114,11 +114,11 @@ alias ntm_tensor_integer_adder_design_compilation {
 ##################################################################################################
 
 alias ntm_tensor_integer_multiplier_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/vector/ntm_vector_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/matrix/ntm_matrix_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/tensor/ntm_tensor_integer_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/vector/ntm_vector_integer_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/matrix/ntm_matrix_integer_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/tensor/ntm_tensor_integer_multiplier.vhd
 }
 
 ##################################################################################################
@@ -126,11 +126,11 @@ alias ntm_tensor_integer_multiplier_design_compilation {
 ##################################################################################################
 
 alias ntm_tensor_integer_divider_design_compilation {
-  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/scalar/ntm_scalar_integer_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/vector/ntm_vector_integer_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/matrix/ntm_matrix_integer_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/integer/tensor/ntm_tensor_integer_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/vector/ntm_vector_integer_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/matrix/ntm_matrix_integer_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/tensor/ntm_tensor_integer_divider.vhd
 }
 
 ##################################################################################################

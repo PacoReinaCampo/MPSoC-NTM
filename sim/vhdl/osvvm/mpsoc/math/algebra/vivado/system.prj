@@ -26,14 +26,25 @@ vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_m
 vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_divider.vhd
 
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/vector/ntm_dot_product.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_transpose.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_convolution.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_product.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_cosine_similarity.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_multiplication.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_summation.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_transpose.vhd
+
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_convolution.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_product.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_transpose.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_cosine_similarity.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_multiplication.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_product.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_summation.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
+
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_convolution.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_cosine_similarity.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_multiplication.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_product.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_summation.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_transpose.vhd
 
 vhdl2008 work ../../../../../../../bench/vhdl/tests/math/algebra/ntm_algebra_pkg.vhd
 vhdl2008 work ../../../../../../../bench/vhdl/tests/math/algebra/ntm_algebra_stimulus.vhd

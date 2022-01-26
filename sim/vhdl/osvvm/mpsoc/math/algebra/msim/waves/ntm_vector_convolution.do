@@ -23,7 +23,8 @@ add wave -noupdate /ntm_algebra_testbench/ntm_vector_convolution_test/vector_con
 
 add wave -noupdate /ntm_algebra_testbench/ntm_vector_convolution_test/vector_convolution/convolution_ctrl_fsm_int
 
-add wave -noupdate /ntm_algebra_testbench/ntm_vector_convolution_test/vector_convolution/index_loop
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_convolution_test/vector_convolution/index_i_loop
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_convolution_test/vector_convolution/index_m_loop
 
 add wave -noupdate /ntm_algebra_testbench/ntm_vector_convolution_test/vector_convolution/start_scalar_adder
 add wave -noupdate /ntm_algebra_testbench/ntm_vector_convolution_test/vector_convolution/operation_scalar_adder

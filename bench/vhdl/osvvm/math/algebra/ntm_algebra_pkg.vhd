@@ -105,44 +105,70 @@ package ntm_algebra_pkg is
   constant VECTOR_SAMPLE_B : vector_buffer := (THREE, NINE, ZERO);
 
   -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_NTM_DOT_PRODUCT_TEST        : boolean := false;
-  signal STIMULUS_NTM_VECTOR_CONVOLUTION_TEST : boolean := false;
-  signal STIMULUS_NTM_VECTOR_TRANSPOSE_TEST   : boolean := false;
+  signal STIMULUS_NTM_DOT_PRODUCT_TEST              : boolean := false;
+  signal STIMULUS_NTM_VECTOR_CONVOLUTION_TEST       : boolean := false;
+  signal STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_TEST : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MULTIPLICATION_TEST    : boolean := false;
+  signal STIMULUS_NTM_VECTOR_SUMMATION_TEST         : boolean := false;
+  signal STIMULUS_NTM_VECTOR_TRANSPOSE_TEST         : boolean := false;
 
-  signal STIMULUS_NTM_DOT_PRODUCT_CASE_1        : boolean := false;
-  signal STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_1   : boolean := false;
+  signal STIMULUS_NTM_DOT_PRODUCT_CASE_0              : boolean := false;
+  signal STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_0       : boolean := false;
+  signal STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MULTIPLICATION_CASE_0    : boolean := false;
+  signal STIMULUS_NTM_VECTOR_SUMMATION_CASE_0         : boolean := false;
+  signal STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_0         : boolean := false;
 
-  signal STIMULUS_NTM_DOT_PRODUCT_CASE_0        : boolean := false;
-  signal STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_0   : boolean := false;
+  signal STIMULUS_NTM_DOT_PRODUCT_CASE_1              : boolean := false;
+  signal STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_1       : boolean := false;
+  signal STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MULTIPLICATION_CASE_1    : boolean := false;
+  signal STIMULUS_NTM_VECTOR_SUMMATION_CASE_1         : boolean := false;
+  signal STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_1         : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
-  signal STIMULUS_NTM_MATRIX_PRODUCT_TEST     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_CONVOLUTION_TEST : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TRANSPOSE_TEST   : boolean := false;
+  signal STIMULUS_NTM_MATRIX_CONVOLUTION_TEST       : boolean := false;
+  signal STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_TEST : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MULTIPLICATION_TEST    : boolean := false;
+  signal STIMULUS_NTM_MATRIX_PRODUCT_TEST           : boolean := false;
+  signal STIMULUS_NTM_MATRIX_SUMMATION_TEST         : boolean := false;
+  signal STIMULUS_NTM_MATRIX_TRANSPOSE_TEST         : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_0     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0   : boolean := false;
+  signal STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_0       : boolean := false;
+  signal STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MULTIPLICATION_CASE_0    : boolean := false;
+  signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_0           : boolean := false;
+  signal STIMULUS_NTM_MATRIX_SUMMATION_CASE_0         : boolean := false;
+  signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0         : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_1     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1   : boolean := false;
-
+  signal STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_1       : boolean := false;
+  signal STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MULTIPLICATION_CASE_1    : boolean := false;
+  signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_1           : boolean := false;
+  signal STIMULUS_NTM_MATRIX_SUMMATION_CASE_1         : boolean := false;
+  signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1         : boolean := false;
 
   -- TENSOR-FUNCTIONALITY
-  signal STIMULUS_NTM_TENSOR_PRODUCT_TEST     : boolean := false;
-  signal STIMULUS_NTM_TENSOR_CONVOLUTION_TEST : boolean := false;
-  signal STIMULUS_NTM_TENSOR_TRANSPOSE_TEST   : boolean := false;
+  signal STIMULUS_NTM_TENSOR_CONVOLUTION_TEST       : boolean := false;
+  signal STIMULUS_NTM_TENSOR_COSINE_SIMILARITY_TEST : boolean := false;
+  signal STIMULUS_NTM_TENSOR_MULTIPLICATION_TEST    : boolean := false;
+  signal STIMULUS_NTM_TENSOR_PRODUCT_TEST           : boolean := false;
+  signal STIMULUS_NTM_TENSOR_SUMMATION_TEST         : boolean := false;
+  signal STIMULUS_NTM_TENSOR_TRANSPOSE_TEST         : boolean := false;
 
-  signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_0     : boolean := false;
-  signal STIMULUS_NTM_TENSOR_CONVOLUTION_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_0   : boolean := false;
+  signal STIMULUS_NTM_TENSOR_CONVOLUTION_CASE_0       : boolean := false;
+  signal STIMULUS_NTM_TENSOR_COSINE_SIMILARITY_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_TENSOR_MULTIPLICATION_CASE_0    : boolean := false;
+  signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_0           : boolean := false;
+  signal STIMULUS_NTM_TENSOR_SUMMATION_CASE_0         : boolean := false;
+  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_0         : boolean := false;
 
-  signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_1     : boolean := false;
-  signal STIMULUS_NTM_TENSOR_CONVOLUTION_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_1   : boolean := false;
+  signal STIMULUS_NTM_TENSOR_CONVOLUTION_CASE_1       : boolean := false;
+  signal STIMULUS_NTM_TENSOR_COSINE_SIMILARITY_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_TENSOR_MULTIPLICATION_CASE_1    : boolean := false;
+  signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_1           : boolean := false;
+  signal STIMULUS_NTM_TENSOR_SUMMATION_CASE_1         : boolean := false;
+  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_1         : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
@@ -190,6 +216,8 @@ package ntm_algebra_pkg is
       VECTOR_CONVOLUTION_DATA_A_IN_ENABLE : out std_logic;
       VECTOR_CONVOLUTION_DATA_B_IN_ENABLE : out std_logic;
 
+      VECTOR_CONVOLUTION_DATA_ENABLE : in std_logic;
+
       VECTOR_CONVOLUTION_DATA_OUT_ENABLE : in std_logic;
 
       -- DATA
@@ -197,6 +225,50 @@ package ntm_algebra_pkg is
       VECTOR_CONVOLUTION_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_CONVOLUTION_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_CONVOLUTION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- VECTOR COSINE_SIMILARITY
+      -- CONTROL
+      VECTOR_COSINE_SIMILARITY_START : out std_logic;
+      VECTOR_COSINE_SIMILARITY_READY : in  std_logic;
+
+      VECTOR_COSINE_SIMILARITY_DATA_A_IN_ENABLE : out std_logic;
+      VECTOR_COSINE_SIMILARITY_DATA_B_IN_ENABLE : out std_logic;
+
+      VECTOR_COSINE_SIMILARITY_DATA_OUT_ENABLE : in std_logic;
+
+      -- DATA
+      VECTOR_COSINE_SIMILARITY_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_COSINE_SIMILARITY_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_COSINE_SIMILARITY_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_COSINE_SIMILARITY_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- VECTOR MULTIPLICATION
+      -- CONTROL
+      VECTOR_MULTIPLICATION_START : out std_logic;
+      VECTOR_MULTIPLICATION_READY : in  std_logic;
+
+      VECTOR_MULTIPLICATION_DATA_IN_ENABLE : out std_logic;
+
+      VECTOR_MULTIPLICATION_DATA_OUT_ENABLE : in std_logic;
+
+      -- DATA
+      VECTOR_MULTIPLICATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_MULTIPLICATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_MULTIPLICATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- VECTOR SUMMATION
+      -- CONTROL
+      VECTOR_SUMMATION_START : out std_logic;
+      VECTOR_SUMMATION_READY : in  std_logic;
+
+      VECTOR_SUMMATION_DATA_IN_ENABLE : out std_logic;
+
+      VECTOR_SUMMATION_DATA_OUT_ENABLE : in std_logic;
+
+      -- DATA
+      VECTOR_SUMMATION_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- VECTOR TRANSPOSE
       -- CONTROL
@@ -213,31 +285,6 @@ package ntm_algebra_pkg is
       VECTOR_TRANSPOSE_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       VECTOR_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- MATRIX PRODUCT
-      -- CONTROL
-      MATRIX_PRODUCT_START : out std_logic;
-      MATRIX_PRODUCT_READY : in  std_logic;
-
-      MATRIX_PRODUCT_DATA_A_IN_I_ENABLE : out std_logic;
-      MATRIX_PRODUCT_DATA_A_IN_J_ENABLE : out std_logic;
-      MATRIX_PRODUCT_DATA_B_IN_I_ENABLE : out std_logic;
-      MATRIX_PRODUCT_DATA_B_IN_J_ENABLE : out std_logic;
-
-      MATRIX_PRODUCT_DATA_I_ENABLE : in std_logic;
-      MATRIX_PRODUCT_DATA_J_ENABLE : in std_logic;
-
-      MATRIX_PRODUCT_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_PRODUCT_DATA_OUT_J_ENABLE : in std_logic;
-
-      -- DATA
-      MATRIX_PRODUCT_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_PRODUCT_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_PRODUCT_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_PRODUCT_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- MATRIX CONVOLUTION
       -- CONTROL
@@ -264,6 +311,96 @@ package ntm_algebra_pkg is
       MATRIX_CONVOLUTION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_CONVOLUTION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
+      -- MATRIX COSINE_SIMILARITY
+      -- CONTROL
+      MATRIX_COSINE_SIMILARITY_START : out std_logic;
+      MATRIX_COSINE_SIMILARITY_READY : in  std_logic;
+
+      MATRIX_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE : out std_logic;
+      MATRIX_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE : out std_logic;
+      MATRIX_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE : out std_logic;
+      MATRIX_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE : out std_logic;
+
+      MATRIX_COSINE_SIMILARITY_DATA_I_ENABLE : in std_logic;
+      MATRIX_COSINE_SIMILARITY_DATA_J_ENABLE : in std_logic;
+
+      MATRIX_COSINE_SIMILARITY_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_COSINE_SIMILARITY_DATA_OUT_J_ENABLE : in std_logic;
+
+      -- DATA
+      MATRIX_COSINE_SIMILARITY_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_COSINE_SIMILARITY_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_COSINE_SIMILARITY_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_COSINE_SIMILARITY_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_COSINE_SIMILARITY_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_COSINE_SIMILARITY_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_COSINE_SIMILARITY_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- MATRIX MULTIPLICATION
+      -- CONTROL
+      MATRIX_MULTIPLICATION_START : out std_logic;
+      MATRIX_MULTIPLICATION_READY : in  std_logic;
+
+      MATRIX_MULTIPLICATION_DATA_IN_I_ENABLE : out std_logic;
+      MATRIX_MULTIPLICATION_DATA_IN_J_ENABLE : out std_logic;
+
+      MATRIX_MULTIPLICATION_DATA_I_ENABLE : in std_logic;
+      MATRIX_MULTIPLICATION_DATA_J_ENABLE : in std_logic;
+
+      MATRIX_MULTIPLICATION_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_MULTIPLICATION_DATA_OUT_J_ENABLE : in std_logic;
+
+      -- DATA
+      MATRIX_MULTIPLICATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_MULTIPLICATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_MULTIPLICATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_MULTIPLICATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- MATRIX PRODUCT
+      -- CONTROL
+      MATRIX_PRODUCT_START : out std_logic;
+      MATRIX_PRODUCT_READY : in  std_logic;
+
+      MATRIX_PRODUCT_DATA_A_IN_I_ENABLE : out std_logic;
+      MATRIX_PRODUCT_DATA_A_IN_J_ENABLE : out std_logic;
+      MATRIX_PRODUCT_DATA_B_IN_I_ENABLE : out std_logic;
+      MATRIX_PRODUCT_DATA_B_IN_J_ENABLE : out std_logic;
+
+      MATRIX_PRODUCT_DATA_I_ENABLE : in std_logic;
+      MATRIX_PRODUCT_DATA_J_ENABLE : in std_logic;
+
+      MATRIX_PRODUCT_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_PRODUCT_DATA_OUT_J_ENABLE : in std_logic;
+
+      -- DATA
+      MATRIX_PRODUCT_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_PRODUCT_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_PRODUCT_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_PRODUCT_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_PRODUCT_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- MATRIX SUMMATION
+      -- CONTROL
+      MATRIX_SUMMATION_START : out std_logic;
+      MATRIX_SUMMATION_READY : in  std_logic;
+
+      MATRIX_SUMMATION_DATA_IN_I_ENABLE : out std_logic;
+      MATRIX_SUMMATION_DATA_IN_J_ENABLE : out std_logic;
+
+      MATRIX_SUMMATION_DATA_I_ENABLE : in std_logic;
+      MATRIX_SUMMATION_DATA_J_ENABLE : in std_logic;
+
+      MATRIX_SUMMATION_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_SUMMATION_DATA_OUT_J_ENABLE : in std_logic;
+
+      -- DATA
+      MATRIX_SUMMATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_SUMMATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
       -- MATRIX TRANSPOSE
       -- CONTROL
       MATRIX_TRANSPOSE_START : out std_logic;
@@ -283,6 +420,92 @@ package ntm_algebra_pkg is
       MATRIX_TRANSPOSE_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- TENSOR CONVOLUTION
+      -- CONTROL
+      TENSOR_CONVOLUTION_START : out std_logic;
+      TENSOR_CONVOLUTION_READY : in  std_logic;
+
+      TENSOR_CONVOLUTION_DATA_A_IN_I_ENABLE : out std_logic;
+      TENSOR_CONVOLUTION_DATA_A_IN_J_ENABLE : out std_logic;
+      TENSOR_CONVOLUTION_DATA_A_IN_K_ENABLE : out std_logic;
+      TENSOR_CONVOLUTION_DATA_B_IN_I_ENABLE : out std_logic;
+      TENSOR_CONVOLUTION_DATA_B_IN_J_ENABLE : out std_logic;
+      TENSOR_CONVOLUTION_DATA_B_IN_K_ENABLE : out std_logic;
+
+      TENSOR_CONVOLUTION_DATA_I_ENABLE : in std_logic;
+      TENSOR_CONVOLUTION_DATA_J_ENABLE : in std_logic;
+      TENSOR_CONVOLUTION_DATA_K_ENABLE : in std_logic;
+
+      TENSOR_CONVOLUTION_DATA_OUT_I_ENABLE : in std_logic;
+      TENSOR_CONVOLUTION_DATA_OUT_J_ENABLE : in std_logic;
+      TENSOR_CONVOLUTION_DATA_OUT_K_ENABLE : in std_logic;
+
+      -- DATA
+      TENSOR_CONVOLUTION_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_CONVOLUTION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- TENSOR COSINE_SIMILARITY
+      -- CONTROL
+      TENSOR_COSINE_SIMILARITY_START : out std_logic;
+      TENSOR_COSINE_SIMILARITY_READY : in  std_logic;
+
+      TENSOR_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE : out std_logic;
+      TENSOR_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE : out std_logic;
+      TENSOR_COSINE_SIMILARITY_DATA_A_IN_K_ENABLE : out std_logic;
+      TENSOR_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE : out std_logic;
+      TENSOR_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE : out std_logic;
+      TENSOR_COSINE_SIMILARITY_DATA_B_IN_K_ENABLE : out std_logic;
+
+      TENSOR_COSINE_SIMILARITY_DATA_I_ENABLE : in std_logic;
+      TENSOR_COSINE_SIMILARITY_DATA_J_ENABLE : in std_logic;
+      TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE : in std_logic;
+
+      TENSOR_COSINE_SIMILARITY_DATA_OUT_I_ENABLE : in std_logic;
+      TENSOR_COSINE_SIMILARITY_DATA_OUT_J_ENABLE : in std_logic;
+      TENSOR_COSINE_SIMILARITY_DATA_OUT_K_ENABLE : in std_logic;
+
+      -- DATA
+      TENSOR_COSINE_SIMILARITY_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_COSINE_SIMILARITY_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_COSINE_SIMILARITY_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_COSINE_SIMILARITY_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_COSINE_SIMILARITY_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_COSINE_SIMILARITY_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_COSINE_SIMILARITY_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_COSINE_SIMILARITY_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_COSINE_SIMILARITY_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- TENSOR MULTIPLICATION
+      -- CONTROL
+      TENSOR_MULTIPLICATION_START : out std_logic;
+      TENSOR_MULTIPLICATION_READY : in  std_logic;
+
+      TENSOR_MULTIPLICATION_DATA_IN_I_ENABLE : out std_logic;
+      TENSOR_MULTIPLICATION_DATA_IN_J_ENABLE : out std_logic;
+      TENSOR_MULTIPLICATION_DATA_IN_K_ENABLE : out std_logic;
+
+      TENSOR_MULTIPLICATION_DATA_I_ENABLE : in std_logic;
+      TENSOR_MULTIPLICATION_DATA_J_ENABLE : in std_logic;
+      TENSOR_MULTIPLICATION_DATA_K_ENABLE : in std_logic;
+
+      TENSOR_MULTIPLICATION_DATA_OUT_I_ENABLE : in std_logic;
+      TENSOR_MULTIPLICATION_DATA_OUT_J_ENABLE : in std_logic;
+      TENSOR_MULTIPLICATION_DATA_OUT_K_ENABLE : in std_logic;
+
+      -- DATA
+      TENSOR_MULTIPLICATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_MULTIPLICATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_MULTIPLICATION_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_MULTIPLICATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_MULTIPLICATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- TENSOR PRODUCT
       -- CONTROL
@@ -315,36 +538,29 @@ package ntm_algebra_pkg is
       TENSOR_PRODUCT_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_PRODUCT_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- TENSOR CONVOLUTION
+      -- TENSOR SUMMATION
       -- CONTROL
-      TENSOR_CONVOLUTION_START : out std_logic;
-      TENSOR_CONVOLUTION_READY : in  std_logic;
+      TENSOR_SUMMATION_START : out std_logic;
+      TENSOR_SUMMATION_READY : in  std_logic;
 
-      TENSOR_CONVOLUTION_DATA_A_IN_I_ENABLE : out std_logic;
-      TENSOR_CONVOLUTION_DATA_A_IN_J_ENABLE : out std_logic;
-      TENSOR_CONVOLUTION_DATA_A_IN_K_ENABLE : out std_logic;
-      TENSOR_CONVOLUTION_DATA_B_IN_I_ENABLE : out std_logic;
-      TENSOR_CONVOLUTION_DATA_B_IN_J_ENABLE : out std_logic;
-      TENSOR_CONVOLUTION_DATA_B_IN_K_ENABLE : out std_logic;
+      TENSOR_SUMMATION_DATA_IN_I_ENABLE : out std_logic;
+      TENSOR_SUMMATION_DATA_IN_J_ENABLE : out std_logic;
+      TENSOR_SUMMATION_DATA_IN_K_ENABLE : out std_logic;
 
-      TENSOR_CONVOLUTION_DATA_I_ENABLE : in std_logic;
-      TENSOR_CONVOLUTION_DATA_J_ENABLE : in std_logic;
-      TENSOR_CONVOLUTION_DATA_K_ENABLE : in std_logic;
+      TENSOR_SUMMATION_DATA_I_ENABLE : in std_logic;
+      TENSOR_SUMMATION_DATA_J_ENABLE : in std_logic;
+      TENSOR_SUMMATION_DATA_K_ENABLE : in std_logic;
 
-      TENSOR_CONVOLUTION_DATA_OUT_I_ENABLE : in std_logic;
-      TENSOR_CONVOLUTION_DATA_OUT_J_ENABLE : in std_logic;
-      TENSOR_CONVOLUTION_DATA_OUT_K_ENABLE : in std_logic;
+      TENSOR_SUMMATION_DATA_OUT_I_ENABLE : in std_logic;
+      TENSOR_SUMMATION_DATA_OUT_J_ENABLE : in std_logic;
+      TENSOR_SUMMATION_DATA_OUT_K_ENABLE : in std_logic;
 
       -- DATA
-      TENSOR_CONVOLUTION_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_CONVOLUTION_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_CONVOLUTION_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_CONVOLUTION_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_CONVOLUTION_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_CONVOLUTION_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_CONVOLUTION_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_CONVOLUTION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_CONVOLUTION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_SUMMATION_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_SUMMATION_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_SUMMATION_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- TENSOR TRANSPOSE
       -- CONTROL

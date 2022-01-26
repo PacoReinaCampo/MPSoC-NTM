@@ -79,6 +79,18 @@ entity ntm_float_stimulus is
     SCALAR_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_ADDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
+    -- SCALAR FLOAT ADDER
+    -- CONTROL
+    SCALAR_FLOAT_ADDER_START : out std_logic;
+    SCALAR_FLOAT_ADDER_READY : in  std_logic;
+
+    SCALAR_FLOAT_ADDER_OPERATION : out std_logic;
+
+    -- DATA
+    SCALAR_FLOAT_ADDER_DATA_A_IN : out std_logic_vector(31 downto 0);
+    SCALAR_FLOAT_ADDER_DATA_B_IN : out std_logic_vector(31 downto 0);
+    SCALAR_FLOAT_ADDER_DATA_OUT  : in  std_logic_vector(31 downto 0);
+
     -- SCALAR MULTIPLIER
     -- CONTROL
     SCALAR_MULTIPLIER_START : out std_logic;
@@ -89,6 +101,17 @@ entity ntm_float_stimulus is
     SCALAR_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
+    -- SCALAR FLOAT MULTIPLIER
+    -- CONTROL
+    SCALAR_FLOAT_MULTIPLIER_START : out std_logic;
+    SCALAR_FLOAT_MULTIPLIER_READY : in  std_logic;
+
+    -- DATA
+    SCALAR_FLOAT_MULTIPLIER_DATA_A_IN    : out std_logic_vector(31 downto 0);
+    SCALAR_FLOAT_MULTIPLIER_DATA_B_IN    : out std_logic_vector(31 downto 0);
+    SCALAR_FLOAT_MULTIPLIER_DATA_OUT     : in  std_logic_vector(31 downto 0);
+    SCALAR_FLOAT_MULTIPLIER_OVERFLOW_OUT : in  std_logic;
+
     -- SCALAR DIVIDER
     -- CONTROL
     SCALAR_DIVIDER_START : out std_logic;
@@ -98,6 +121,17 @@ entity ntm_float_stimulus is
     SCALAR_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     SCALAR_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- SCALAR FLOAT DIVIDER
+    -- CONTROL
+    SCALAR_FLOAT_DIVIDER_START : out std_logic;
+    SCALAR_FLOAT_DIVIDER_READY : in  std_logic;
+
+    -- DATA
+    SCALAR_FLOAT_DIVIDER_DATA_A_IN    : out std_logic_vector(31 downto 0);
+    SCALAR_FLOAT_DIVIDER_DATA_B_IN    : out std_logic_vector(31 downto 0);
+    SCALAR_FLOAT_DIVIDER_DATA_OUT     : in  std_logic_vector(31 downto 0);
+    SCALAR_FLOAT_DIVIDER_OVERFLOW_OUT : in  std_logic;
 
     -----------------------------------------------------------------------
     -- STIMULUS VECTOR
@@ -327,6 +361,10 @@ begin
   SCALAR_MULTIPLIER_START <= start_int;
   SCALAR_DIVIDER_START    <= start_int;
 
+  SCALAR_FLOAT_ADDER_START      <= start_int;
+  SCALAR_FLOAT_MULTIPLIER_START <= start_int;
+  SCALAR_FLOAT_DIVIDER_START    <= start_int;
+
   -- VECTOR-FUNCTIONALITY
   VECTOR_ADDER_START      <= start_int;
   VECTOR_MULTIPLIER_START <= start_int;
@@ -379,6 +417,34 @@ begin
 
     end if;
 
+    if (STIMULUS_NTM_SCALAR_FLOAT_ADDER_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_FLOAT_ADDER_TEST    ";
+      -------------------------------------------------------------------
+
+      -------------------------------------------------------------------
+      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE 0  ";
+      -------------------------------------------------------------------
+
+      if (STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE_0) then
+        SCALAR_FLOAT_ADDER_DATA_A_IN <= FLOAT_SAMPLE_A;
+        SCALAR_FLOAT_ADDER_DATA_B_IN <= FLOAT_SAMPLE_B;
+      end if;
+
+      -------------------------------------------------------------------
+      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE 1  ";
+      -------------------------------------------------------------------
+
+      if (STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE_1) then
+        SCALAR_FLOAT_ADDER_DATA_A_IN <= FLOAT_SAMPLE_B;
+        SCALAR_FLOAT_ADDER_DATA_B_IN <= FLOAT_SAMPLE_A;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
     if (STIMULUS_NTM_SCALAR_MULTIPLIER_TEST) then
 
       -------------------------------------------------------------------
@@ -407,6 +473,34 @@ begin
 
     end if;
 
+    if (STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIE_TEST";
+      -------------------------------------------------------------------
+
+      -------------------------------------------------------------------
+      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FLOAT_MULTIPL_CASE 0";
+      -------------------------------------------------------------------
+
+      if (STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_0) then
+        SCALAR_FLOAT_MULTIPLIER_DATA_A_IN <= FLOAT_SAMPLE_A;
+        SCALAR_FLOAT_MULTIPLIER_DATA_B_IN <= FLOAT_SAMPLE_B;
+      end if;
+
+      -------------------------------------------------------------------
+      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FLOAT_MULTIPL_CASE 1";
+      -------------------------------------------------------------------
+
+      if (STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_1) then
+        SCALAR_FLOAT_MULTIPLIER_DATA_A_IN <= FLOAT_SAMPLE_B;
+        SCALAR_FLOAT_MULTIPLIER_DATA_B_IN <= FLOAT_SAMPLE_A;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
     if (STIMULUS_NTM_SCALAR_DIVIDER_TEST) then
 
       -------------------------------------------------------------------
@@ -429,6 +523,34 @@ begin
       if (STIMULUS_NTM_SCALAR_DIVIDER_CASE_1) then
         SCALAR_DIVIDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
         SCALAR_DIVIDER_DATA_B_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_TEST  ";
+      -------------------------------------------------------------------
+
+      -------------------------------------------------------------------
+      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE 0";
+      -------------------------------------------------------------------
+
+      if (STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE_0) then
+        SCALAR_FLOAT_DIVIDER_DATA_A_IN <= FLOAT_SAMPLE_A;
+        SCALAR_FLOAT_DIVIDER_DATA_B_IN <= FLOAT_SAMPLE_B;
+      end if;
+
+      -------------------------------------------------------------------
+      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE 1";
+      -------------------------------------------------------------------
+
+      if (STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE_1) then
+        SCALAR_FLOAT_DIVIDER_DATA_A_IN <= FLOAT_SAMPLE_B;
+        SCALAR_FLOAT_DIVIDER_DATA_B_IN <= FLOAT_SAMPLE_A;
       end if;
 
       wait for WORKING;

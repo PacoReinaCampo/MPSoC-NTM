@@ -41,6 +41,8 @@ add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_con
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/index_j_loop
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/index_k_loop
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/index_m_loop
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/index_n_loop
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/index_p_loop
 
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/data_a_in_i_convolution_int
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/data_a_in_j_convolution_int

@@ -59,91 +59,55 @@ module ntm_function_testbench;
   parameter R=64;
 
   // SCALAR-FUNCTIONALITY
-  parameter STIMULUS_NTM_SCALAR_CONVOLUTION_TEST=0;
-  parameter STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_TEST=0;
   parameter STIMULUS_NTM_SCALAR_COSH_TEST=0;
   parameter STIMULUS_NTM_SCALAR_SINH_TEST=0;
   parameter STIMULUS_NTM_SCALAR_TANH_TEST=0;
   parameter STIMULUS_NTM_SCALAR_LOGISTIC_TEST=0;
-  parameter STIMULUS_NTM_SCALAR_SOFTMAX_TEST=0;
-  parameter STIMULUS_NTM_SCALAR_ONE_CONTROLPLUS_TEST=0;
-  parameter STIMULUS_NTM_SCALAR_SUMMATION_TEST=0;
-  parameter STIMULUS_NTM_SCALAR_CONVOLUTION_CASE_0=0;
-  parameter STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_CASE_0=0;
+  parameter STIMULUS_NTM_SCALAR_ONEPLUS_TEST=0;
   parameter STIMULUS_NTM_SCALAR_COSH_CASE_0=0;
   parameter STIMULUS_NTM_SCALAR_SINH_CASE_0=0;
   parameter STIMULUS_NTM_SCALAR_TANH_CASE_0=0;
   parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0=0;
-  parameter STIMULUS_NTM_SCALAR_SOFTMAX_CASE_0=0;
-  parameter STIMULUS_NTM_SCALAR_ONE_CONTROLPLUS_CASE_0=0;
-  parameter STIMULUS_NTM_SCALAR_SUMMATION_CASE_0=0;
-  parameter STIMULUS_NTM_SCALAR_CONVOLUTION_CASE_1=0;
-  parameter STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_CASE_1=0;
+  parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0=0;
   parameter STIMULUS_NTM_SCALAR_COSH_CASE_1=0;
   parameter STIMULUS_NTM_SCALAR_SINH_CASE_1=0;
   parameter STIMULUS_NTM_SCALAR_TANH_CASE_1=0;
   parameter STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1=0;
-  parameter STIMULUS_NTM_SCALAR_SOFTMAX_CASE_1=0;
-  parameter STIMULUS_NTM_SCALAR_ONE_CONTROLPLUS_CASE_1=0;
-  parameter STIMULUS_NTM_SCALAR_SUMMATION_CASE_1=0;
+  parameter STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1=0;
 
   // VECTOR-FUNCTIONALITY
-  parameter STIMULUS_NTM_VECTOR_CONVOLUTION_TEST=0;
-  parameter STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_TEST=0;
   parameter STIMULUS_NTM_VECTOR_COSH_TEST=0;
   parameter STIMULUS_NTM_VECTOR_SINH_TEST=0;
   parameter STIMULUS_NTM_VECTOR_TANH_TEST=0;
   parameter STIMULUS_NTM_VECTOR_LOGISTIC_TEST=0;
-  parameter STIMULUS_NTM_VECTOR_SOFTMAX_TEST=0;
-  parameter STIMULUS_NTM_VECTOR_ONE_CONTROLPLUS_TEST=0;
-  parameter STIMULUS_NTM_VECTOR_SUMMATION_TEST=0;
-  parameter STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_0=0;
-  parameter STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_0=0;
+  parameter STIMULUS_NTM_VECTOR_ONEPLUS_TEST=0;
   parameter STIMULUS_NTM_VECTOR_COSH_CASE_0=0;
   parameter STIMULUS_NTM_VECTOR_SINH_CASE_0=0;
   parameter STIMULUS_NTM_VECTOR_TANH_CASE_0=0;
   parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0=0;
-  parameter STIMULUS_NTM_VECTOR_SOFTMAX_CASE_0=0;
-  parameter STIMULUS_NTM_VECTOR_ONE_CONTROLPLUS_CASE_0=0;
-  parameter STIMULUS_NTM_VECTOR_SUMMATION_CASE_0=0;
-  parameter STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_1=0;
-  parameter STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_1=0;
+  parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0=0;
   parameter STIMULUS_NTM_VECTOR_COSH_CASE_1=0;
   parameter STIMULUS_NTM_VECTOR_SINH_CASE_1=0;
   parameter STIMULUS_NTM_VECTOR_TANH_CASE_1=0;
   parameter STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1=0;
-  parameter STIMULUS_NTM_VECTOR_SOFTMAX_CASE_1=0;
-  parameter STIMULUS_NTM_VECTOR_ONE_CONTROLPLUS_CASE_1=0;
-  parameter STIMULUS_NTM_VECTOR_SUMMATION_CASE_1=0;
+  parameter STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1=0;
 
   // MATRIX-FUNCTIONALITY
-  parameter STIMULUS_NTM_MATRIX_CONVOLUTION_TEST=0;
-  parameter STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_TEST=0;
   parameter STIMULUS_NTM_MATRIX_COSH_TEST=0;
   parameter STIMULUS_NTM_MATRIX_SINH_TEST=0;
   parameter STIMULUS_NTM_MATRIX_TANH_TEST=0;
   parameter STIMULUS_NTM_MATRIX_LOGISTIC_TEST=0;
-  parameter STIMULUS_NTM_MATRIX_SOFTMAX_TEST=0;
-  parameter STIMULUS_NTM_MATRIX_ONE_CONTROLPLUS_TEST=0;
-  parameter STIMULUS_NTM_MATRIX_SUMMATION_TEST=0;
-  parameter STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_0=0;
-  parameter STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_0=0;
+  parameter STIMULUS_NTM_MATRIX_ONEPLUS_TEST=0;
   parameter STIMULUS_NTM_MATRIX_COSH_CASE_0=0;
   parameter STIMULUS_NTM_MATRIX_SINH_CASE_0=0;
   parameter STIMULUS_NTM_MATRIX_TANH_CASE_0=0;
   parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0=0;
-  parameter STIMULUS_NTM_MATRIX_SOFTMAX_CASE_0=0;
-  parameter STIMULUS_NTM_MATRIX_ONE_CONTROLPLUS_CASE_0=0;
-  parameter STIMULUS_NTM_MATRIX_SUMMATION_CASE_0=0;
-  parameter STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_1=0;
-  parameter STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_1=0;
+  parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0=0;
   parameter STIMULUS_NTM_MATRIX_COSH_CASE_1=0;
   parameter STIMULUS_NTM_MATRIX_SINH_CASE_1=0;
   parameter STIMULUS_NTM_MATRIX_TANH_CASE_1=0;
   parameter STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1=0;
-  parameter STIMULUS_NTM_MATRIX_SOFTMAX_CASE_1=0;
-  parameter STIMULUS_NTM_MATRIX_ONE_CONTROLPLUS_CASE_1=0;
-  parameter STIMULUS_NTM_MATRIX_SUMMATION_CASE_1=0;
+  parameter STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1=0;
 
   ///////////////////////////////////////////////////////////////////////
   // Signals
@@ -157,64 +121,27 @@ module ntm_function_testbench;
   // SCALAR
   ///////////////////////////////////////////////////////////////////////
 
-  // SCALAR CONVOLUTION
   // CONTROL
-  wire start_scalar_convolution;
-  wire ready_scalar_convolution;
 
-  wire data_a_in_enable_scalar_convolution;
-  wire data_b_in_enable_scalar_convolution;
 
-  wire data_out_enable_scalar_convolution;
 
   // DATA
-  wire [DATA_SIZE-1:0] length_in_scalar_convolution;
-  wire [DATA_SIZE-1:0] data_a_in_scalar_convolution;
-  wire [DATA_SIZE-1:0] data_b_in_scalar_convolution;
-  wire [DATA_SIZE-1:0] data_out_scalar_convolution;
 
-  // SCALAR COSINE SIMILARITY
   // CONTROL
-  wire start_scalar_cosine_similarity;
-  wire ready_scalar_cosine_similarity;
 
-  wire data_a_in_enable_scalar_cosine_similarity;
-  wire data_b_in_enable_scalar_cosine_similarity;
 
-  wire data_out_enable_scalar_cosine_similarity;
 
   // DATA
-  wire [DATA_SIZE-1:0] length_in_scalar_cosine_similarity;
-  wire [DATA_SIZE-1:0] data_a_in_scalar_cosine_similarity;
-  wire [DATA_SIZE-1:0] data_b_in_scalar_cosine_similarity;
-  wire [DATA_SIZE-1:0] data_out_scalar_cosine_similarity;
 
-  // SCALAR DIFFERENTIATION
   // CONTROL
-  wire start_scalar_differentiation;
-  wire ready_scalar_differentiation;
 
-  wire data_in_enable_scalar_differentiation;
-  wire data_out_enable_scalar_differentiation;
 
   // DATA
-  wire [DATA_SIZE-1:0] period_in_scalar_differentiation;
-  wire [DATA_SIZE-1:0] length_in_scalar_differentiation;
-  wire [DATA_SIZE-1:0] data_in_scalar_differentiation;
-  wire [DATA_SIZE-1:0] data_out_scalar_differentiation;
 
-  // SCALAR MULTIPLICATION
   // CONTROL
-  wire start_scalar_multiplication;
-  wire ready_scalar_multiplication;
 
-  wire data_in_enable_scalar_multiplication;
-  wire data_out_enable_scalar_multiplication;
 
   // DATA
-  wire [DATA_SIZE-1:0] length_in_scalar_multiplication;
-  wire [DATA_SIZE-1:0] data_in_scalar_multiplication;
-  wire [DATA_SIZE-1:0] data_out_scalar_multiplication;
 
   // SCALAR COSH
   // CONTROL
@@ -252,20 +179,12 @@ module ntm_function_testbench;
   wire [DATA_SIZE-1:0] data_in_scalar_logistic;
   wire [DATA_SIZE-1:0] data_out_scalar_logistic;
 
-  // SCALAR SOFTMAX
   // CONTROL
-  wire start_scalar_softmax;
-  wire ready_scalar_softmax;
 
-  wire data_in_enable_scalar_softmax;
-  wire data_out_enable_scalar_softmax;
 
   // DATA
-  wire [DATA_SIZE-1:0] length_in_scalar_softmax;
-  wire [DATA_SIZE-1:0] data_in_scalar_softmax;
-  wire [DATA_SIZE-1:0] data_out_scalar_softmax;
 
-  // SCALAR ONE_CONTROLPLUS
+  // SCALAR ONEPLUS
   // CONTROL
   wire start_scalar_oneplus;
   wire ready_scalar_oneplus;
@@ -274,93 +193,34 @@ module ntm_function_testbench;
   wire [DATA_SIZE-1:0] data_in_scalar_oneplus;
   wire [DATA_SIZE-1:0] data_out_scalar_oneplus;
 
-  // SCALAR SUMMATION
   // CONTROL
-  wire start_scalar_summation;
-  wire ready_scalar_summation;
 
-  wire data_in_enable_scalar_summation;
-  wire data_out_enable_scalar_summation;
 
   // DATA
-  wire [DATA_SIZE-1:0] length_in_scalar_summation;
-  wire [DATA_SIZE-1:0] data_in_scalar_summation;
-  wire [DATA_SIZE-1:0] data_out_scalar_summation;
 
   ///////////////////////////////////////////////////////////////////////
   // VECTOR
   ///////////////////////////////////////////////////////////////////////
 
-  // VECTOR CONVOLUTION
   // CONTROL
-  wire start_vector_convolution;
-  wire ready_vector_convolution;
 
-  wire data_a_in_vector_enable_vector_convolution;
-  wire data_a_in_scalar_enable_vector_convolution;
-  wire data_b_in_vector_enable_vector_convolution;
-  wire data_b_in_scalar_enable_vector_convolution;
-  wire data_out_vector_enable_vector_convolution;
-  wire data_out_scalar_enable_vector_convolution;
 
   // DATA
-  wire [DATA_SIZE-1:0] size_in_vector_convolution;
-  wire [DATA_SIZE-1:0] length_in_vector_convolution;
-  wire [DATA_SIZE-1:0] data_a_in_vector_convolution;
-  wire [DATA_SIZE-1:0] data_b_in_vector_convolution;
-  wire [DATA_SIZE-1:0] data_out_vector_convolution;
 
-  // VECTOR COSINE SIMILARITY
   // CONTROL
-  wire start_vector_cosine_similarity;
-  wire ready_vector_cosine_similarity;
 
-  wire data_a_in_vector_enable_vector_cosine_similarity;
-  wire data_a_in_scalar_enable_vector_cosine_similarity;
-  wire data_b_in_vector_enable_vector_cosine_similarity;
-  wire data_b_in_scalar_enable_vector_cosine_similarity;
-  wire data_out_vector_enable_vector_cosine_similarity;
-  wire data_out_scalar_enable_vector_cosine_similarity;
 
   // DATA
-  wire [DATA_SIZE-1:0] size_in_vector_cosine_similarity;
-  wire [DATA_SIZE-1:0] length_in_vector_cosine_similarity;
-  wire [DATA_SIZE-1:0] data_a_in_vector_cosine_similarity;
-  wire [DATA_SIZE-1:0] data_b_in_vector_cosine_similarity;
-  wire [DATA_SIZE-1:0] data_out_vector_cosine_similarity;
 
-  // VECTOR DIFFERENTIATION
   // CONTROL
-  wire start_vector_differentiation;
-  wire ready_vector_differentiation;
 
-  wire data_in_vector_enable_vector_differentiation;
-  wire data_in_scalar_enable_vector_differentiation;
-  wire data_out_vector_enable_vector_differentiation;
-  wire data_out_scalar_enable_vector_differentiation;
 
   // DATA
-  wire [DATA_SIZE-1:0] period_in_vector_differentiation;
-  wire [DATA_SIZE-1:0] length_in_vector_differentiation;
-  wire [DATA_SIZE-1:0] size_in_vector_differentiation;
-  wire [DATA_SIZE-1:0] data_in_vector_differentiation;
-  wire [DATA_SIZE-1:0] data_out_vector_differentiation;
 
-  // VECTOR MULTIPLICATION
   // CONTROL
-  wire start_vector_multiplication;
-  wire ready_vector_multiplication;
 
-  wire data_in_vector_enable_vector_multiplication;
-  wire data_in_scalar_enable_vector_multiplication;
-  wire data_out_vector_enable_vector_multiplication;
-  wire data_out_scalar_enable_vector_multiplication;
 
   // DATA
-  wire [DATA_SIZE-1:0] length_in_vector_multiplication;
-  wire [DATA_SIZE-1:0] size_in_vector_multiplication;
-  wire [DATA_SIZE-1:0] data_in_vector_multiplication;
-  wire [DATA_SIZE-1:0] data_out_vector_multiplication;
 
   // VECTOR COSH
   // CONTROL
@@ -414,24 +274,13 @@ module ntm_function_testbench;
   wire [DATA_SIZE-1:0] data_in_vector_logistic;
   wire [DATA_SIZE-1:0] data_out_vector_logistic;
 
-  // VECTOR SOFTMAX
   // CONTROL
-  wire start_vector_softmax;
-  wire ready_vector_softmax;
 
-  wire data_in_vector_enable_vector_softmax;
-  wire data_in_scalar_enable_vector_softmax;
 
-  wire data_out_vector_enable_vector_softmax;
-  wire data_out_scalar_enable_vector_softmax;
 
   // DATA
-  wire [DATA_SIZE-1:0] length_in_vector_softmax;
-  wire [DATA_SIZE-1:0] size_in_vector_softmax;
-  wire [DATA_SIZE-1:0] data_in_vector_softmax;
-  wire [DATA_SIZE-1:0] data_out_vector_softmax;
 
-  // VECTOR ONE_CONTROLPLUS
+  // VECTOR ONEPLUS
   // CONTROL
   wire start_vector_oneplus;
   wire ready_vector_oneplus;
@@ -444,110 +293,14 @@ module ntm_function_testbench;
   wire [DATA_SIZE-1:0] data_in_vector_oneplus;
   wire [DATA_SIZE-1:0] data_out_vector_oneplus;
 
-  // VECTOR SUMMATION
   // CONTROL
-  wire start_vector_summation;
-  wire ready_vector_summation;
 
-  wire data_in_vector_enable_vector_summation;
-  wire data_in_scalar_enable_vector_summation;
-  wire data_out_vector_enable_vector_summation;
-  wire data_out_scalar_enable_vector_summation;
 
   // DATA
-  wire [DATA_SIZE-1:0] size_in_vector_summation;
-  wire [DATA_SIZE-1:0] length_in_vector_summation;
-  wire [DATA_SIZE-1:0] data_in_vector_summation;
-  wire [DATA_SIZE-1:0] data_out_vector_summation;
 
   ///////////////////////////////////////////////////////////////////////
   // MATRIX
   ///////////////////////////////////////////////////////////////////////
-
-  // MATRIX CONVOLUTION
-  // CONTROL
-  wire start_matrix_convolution;
-  wire ready_matrix_convolution;
-
-  wire data_a_in_matrix_enable_matrix_convolution;
-  wire data_a_in_vector_enable_matrix_convolution;
-  wire data_a_in_scalar_enable_matrix_convolution;
-  wire data_b_in_matrix_enable_matrix_convolution;
-  wire data_b_in_vector_enable_matrix_convolution;
-  wire data_b_in_scalar_enable_matrix_convolution;
-  wire data_out_matrix_enable_matrix_convolution;
-  wire data_out_vector_enable_matrix_convolution;
-  wire data_out_scalar_enable_matrix_convolution;
-
-  // DATA
-  wire [DATA_SIZE-1:0] size_i_in_matrix_convolution;
-  wire [DATA_SIZE-1:0] size_j_in_matrix_convolution;
-  wire [DATA_SIZE-1:0] length_in_matrix_convolution;
-  wire [DATA_SIZE-1:0] data_a_in_matrix_convolution;
-  wire [DATA_SIZE-1:0] data_b_in_matrix_convolution;
-  wire [DATA_SIZE-1:0] data_out_matrix_convolution;
-
-  // MATRIX COSINE SIMILARITY
-  // CONTROL
-  wire start_matrix_cosine_similarity;
-  wire ready_matrix_cosine_similarity;
-
-  wire data_a_in_matrix_enable_matrix_cosine_similarity;
-  wire data_a_in_vector_enable_matrix_cosine_similarity;
-  wire data_a_in_scalar_enable_matrix_cosine_similarity;
-  wire data_b_in_matrix_enable_matrix_cosine_similarity;
-  wire data_b_in_vector_enable_matrix_cosine_similarity;
-  wire data_b_in_scalar_enable_matrix_cosine_similarity;
-  wire data_out_matrix_enable_matrix_cosine_similarity;
-  wire data_out_vector_enable_matrix_cosine_similarity;
-  wire data_out_scalar_enable_matrix_cosine_similarity;
-
-  // DATA
-  wire [DATA_SIZE-1:0] size_i_in_matrix_cosine_similarity;
-  wire [DATA_SIZE-1:0] size_j_in_matrix_cosine_similarity;
-  wire [DATA_SIZE-1:0] length_in_matrix_cosine_similarity;
-  wire [DATA_SIZE-1:0] data_a_in_matrix_cosine_similarity;
-  wire [DATA_SIZE-1:0] data_b_in_matrix_cosine_similarity;
-  wire [DATA_SIZE-1:0] data_out_matrix_cosine_similarity;
-
-  // MATRIX DIFFERENTIATION
-  // CONTROL
-  wire start_matrix_differentiation;
-  wire ready_matrix_differentiation;
-
-  wire data_in_matrix_enable_matrix_differentiation;
-  wire data_in_vector_enable_matrix_differentiation;
-  wire data_in_scalar_enable_matrix_differentiation;
-  wire data_out_matrix_enable_matrix_differentiation;
-  wire data_out_vector_enable_matrix_differentiation;
-  wire data_out_scalar_enable_matrix_differentiation;
-
-  // DATA
-  wire [DATA_SIZE-1:0] size_i_in_matrix_differentiation;
-  wire [DATA_SIZE-1:0] size_j_in_matrix_differentiation;
-  wire [DATA_SIZE-1:0] period_in_matrix_differentiation;
-  wire [DATA_SIZE-1:0] length_in_matrix_differentiation;
-  wire [DATA_SIZE-1:0] data_in_matrix_differentiation;
-  wire [DATA_SIZE-1:0] data_out_matrix_differentiation;
-
-  // MATRIX MULTIPLICATION
-  // CONTROL
-  wire start_matrix_multiplication;
-  wire ready_matrix_multiplication;
-
-  wire data_in_matrix_enable_matrix_multiplication;
-  wire data_in_vector_enable_matrix_multiplication;
-  wire data_in_scalar_enable_matrix_multiplication;
-  wire data_out_matrix_enable_matrix_multiplication;
-  wire data_out_vector_enable_matrix_multiplication;
-  wire data_out_scalar_enable_matrix_multiplication;
-
-  // DATA
-  wire [DATA_SIZE-1:0] size_i_in_matrix_multiplication;
-  wire [DATA_SIZE-1:0] size_j_in_matrix_multiplication;
-  wire [DATA_SIZE-1:0] length_in_matrix_multiplication;
-  wire [DATA_SIZE-1:0] data_in_matrix_multiplication;
-  wire [DATA_SIZE-1:0] data_out_matrix_multiplication;
 
   // MATRIX COSH
   // CONTROL
@@ -613,27 +366,13 @@ module ntm_function_testbench;
   wire [DATA_SIZE-1:0] data_in_matrix_logistic;
   wire [DATA_SIZE-1:0] data_out_matrix_logistic;
 
-  // MATRIX SOFTMAX
   // CONTROL
-  wire start_matrix_softmax;
-  wire ready_matrix_softmax;
 
-  wire data_in_matrix_enable_matrix_softmax;
-  wire data_in_vector_enable_matrix_softmax;
-  wire data_in_scalar_enable_matrix_softmax;
 
-  wire data_out_matrix_enable_matrix_softmax;
-  wire data_out_vector_enable_matrix_softmax;
-  wire data_out_scalar_enable_matrix_softmax;
 
   // DATA
-  wire [DATA_SIZE-1:0] size_i_in_matrix_softmax;
-  wire [DATA_SIZE-1:0] size_j_in_matrix_softmax;
-  wire [DATA_SIZE-1:0] length_in_matrix_softmax;
-  wire [DATA_SIZE-1:0] data_in_matrix_softmax;
-  wire [DATA_SIZE-1:0] data_out_matrix_softmax;
 
-  // MATRIX ONE_CONTROLPLUS
+  // MATRIX ONEPLUS
   // CONTROL
   wire start_matrix_oneplus;
   wire ready_matrix_oneplus;
@@ -649,24 +388,10 @@ module ntm_function_testbench;
   wire [DATA_SIZE-1:0] data_in_matrix_oneplus;
   wire [DATA_SIZE-1:0] data_out_matrix_oneplus;
 
-  // MATRIX SUMMATION
   // CONTROL
-  wire start_matrix_summation;
-  wire ready_matrix_summation;
 
-  wire data_in_matrix_enable_matrix_summation;
-  wire data_in_vector_enable_matrix_summation;
-  wire data_in_scalar_enable_matrix_summation;
-  wire data_out_matrix_enable_matrix_summation;
-  wire data_out_vector_enable_matrix_summation;
-  wire data_out_scalar_enable_matrix_summation;
 
   // DATA
-  wire [DATA_SIZE-1:0] size_i_in_matrix_summation;
-  wire [DATA_SIZE-1:0] size_j_in_matrix_summation;
-  wire [DATA_SIZE-1:0] length_in_matrix_summation;
-  wire [DATA_SIZE-1:0] data_in_matrix_summation;
-  wire [DATA_SIZE-1:0] data_out_matrix_summation;
 
   ///////////////////////////////////////////////////////////////////////
   // Body
@@ -684,91 +409,55 @@ module ntm_function_testbench;
     .R(R),
 
     // SCALAR-FUNCTIONALITY
-    .STIMULUS_NTM_SCALAR_CONVOLUTION_TEST(STIMULUS_NTM_SCALAR_CONVOLUTION_TEST),
-    .STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_TEST(STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_TEST),
     .STIMULUS_NTM_SCALAR_COSH_TEST(STIMULUS_NTM_SCALAR_COSH_TEST),
     .STIMULUS_NTM_SCALAR_SINH_TEST(STIMULUS_NTM_SCALAR_SINH_TEST),
     .STIMULUS_NTM_SCALAR_TANH_TEST(STIMULUS_NTM_SCALAR_TANH_TEST),
     .STIMULUS_NTM_SCALAR_LOGISTIC_TEST(STIMULUS_NTM_SCALAR_LOGISTIC_TEST),
-    .STIMULUS_NTM_SCALAR_SOFTMAX_TEST(STIMULUS_NTM_SCALAR_SOFTMAX_TEST),
-    .STIMULUS_NTM_SCALAR_ONE_CONTROLPLUS_TEST(STIMULUS_NTM_SCALAR_ONE_CONTROLPLUS_TEST),
-    .STIMULUS_NTM_SCALAR_SUMMATION_TEST(STIMULUS_NTM_SCALAR_SUMMATION_TEST),
-    .STIMULUS_NTM_SCALAR_CONVOLUTION_CASE_0(STIMULUS_NTM_SCALAR_CONVOLUTION_CASE_0),
-    .STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_CASE_0(STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_CASE_0),
+    .STIMULUS_NTM_SCALAR_ONEPLUS_TEST(STIMULUS_NTM_SCALAR_ONEPLUS_TEST),
     .STIMULUS_NTM_SCALAR_COSH_CASE_0(STIMULUS_NTM_SCALAR_COSH_CASE_0),
     .STIMULUS_NTM_SCALAR_SINH_CASE_0(STIMULUS_NTM_SCALAR_SINH_CASE_0),
     .STIMULUS_NTM_SCALAR_TANH_CASE_0(STIMULUS_NTM_SCALAR_TANH_CASE_0),
     .STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0(STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0),
-    .STIMULUS_NTM_SCALAR_SOFTMAX_CASE_0(STIMULUS_NTM_SCALAR_SOFTMAX_CASE_0),
-    .STIMULUS_NTM_SCALAR_ONE_CONTROLPLUS_CASE_0(STIMULUS_NTM_SCALAR_ONE_CONTROLPLUS_CASE_0),
-    .STIMULUS_NTM_SCALAR_SUMMATION_CASE_0(STIMULUS_NTM_SCALAR_SUMMATION_CASE_0),
-    .STIMULUS_NTM_SCALAR_CONVOLUTION_CASE_1(STIMULUS_NTM_SCALAR_CONVOLUTION_CASE_1),
-    .STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_CASE_1(STIMULUS_NTM_SCALAR_COSINE_SIMILARITY_CASE_1),
+    .STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0(STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0),
     .STIMULUS_NTM_SCALAR_COSH_CASE_1(STIMULUS_NTM_SCALAR_COSH_CASE_1),
     .STIMULUS_NTM_SCALAR_SINH_CASE_1(STIMULUS_NTM_SCALAR_SINH_CASE_1),
     .STIMULUS_NTM_SCALAR_TANH_CASE_1(STIMULUS_NTM_SCALAR_TANH_CASE_1),
     .STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1(STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1),
-    .STIMULUS_NTM_SCALAR_SOFTMAX_CASE_1(STIMULUS_NTM_SCALAR_SOFTMAX_CASE_1),
-    .STIMULUS_NTM_SCALAR_ONE_CONTROLPLUS_CASE_1(STIMULUS_NTM_SCALAR_ONE_CONTROLPLUS_CASE_1),
-    .STIMULUS_NTM_SCALAR_SUMMATION_CASE_1(STIMULUS_NTM_SCALAR_SUMMATION_CASE_1),
+    .STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1(STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1),
 
     // VECTOR-FUNCTIONALITY
-    .STIMULUS_NTM_VECTOR_CONVOLUTION_TEST(STIMULUS_NTM_VECTOR_CONVOLUTION_TEST),
-    .STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_TEST(STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_TEST),
     .STIMULUS_NTM_VECTOR_COSH_TEST(STIMULUS_NTM_VECTOR_COSH_TEST),
     .STIMULUS_NTM_VECTOR_SINH_TEST(STIMULUS_NTM_VECTOR_SINH_TEST),
     .STIMULUS_NTM_VECTOR_TANH_TEST(STIMULUS_NTM_VECTOR_TANH_TEST),
     .STIMULUS_NTM_VECTOR_LOGISTIC_TEST(STIMULUS_NTM_VECTOR_LOGISTIC_TEST),
-    .STIMULUS_NTM_VECTOR_SOFTMAX_TEST(STIMULUS_NTM_VECTOR_SOFTMAX_TEST),
-    .STIMULUS_NTM_VECTOR_ONE_CONTROLPLUS_TEST(STIMULUS_NTM_VECTOR_ONE_CONTROLPLUS_TEST),
-    .STIMULUS_NTM_VECTOR_SUMMATION_TEST(STIMULUS_NTM_VECTOR_SUMMATION_TEST),
-    .STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_0(STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_0),
-    .STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_0(STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_0),
+    .STIMULUS_NTM_VECTOR_ONEPLUS_TEST(STIMULUS_NTM_VECTOR_ONEPLUS_TEST),
     .STIMULUS_NTM_VECTOR_COSH_CASE_0(STIMULUS_NTM_VECTOR_COSH_CASE_0),
     .STIMULUS_NTM_VECTOR_SINH_CASE_0(STIMULUS_NTM_VECTOR_SINH_CASE_0),
     .STIMULUS_NTM_VECTOR_TANH_CASE_0(STIMULUS_NTM_VECTOR_TANH_CASE_0),
     .STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0(STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0),
-    .STIMULUS_NTM_VECTOR_SOFTMAX_CASE_0(STIMULUS_NTM_VECTOR_SOFTMAX_CASE_0),
-    .STIMULUS_NTM_VECTOR_ONE_CONTROLPLUS_CASE_0(STIMULUS_NTM_VECTOR_ONE_CONTROLPLUS_CASE_0),
-    .STIMULUS_NTM_VECTOR_SUMMATION_CASE_0(STIMULUS_NTM_VECTOR_SUMMATION_CASE_0),
-    .STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_1(STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_1),
-    .STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_1(STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_1),
+    .STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0(STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0),
     .STIMULUS_NTM_VECTOR_COSH_CASE_1(STIMULUS_NTM_VECTOR_COSH_CASE_1),
     .STIMULUS_NTM_VECTOR_SINH_CASE_1(STIMULUS_NTM_VECTOR_SINH_CASE_1),
     .STIMULUS_NTM_VECTOR_TANH_CASE_1(STIMULUS_NTM_VECTOR_TANH_CASE_1),
     .STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1(STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1),
-    .STIMULUS_NTM_VECTOR_SOFTMAX_CASE_1(STIMULUS_NTM_VECTOR_SOFTMAX_CASE_1),
-    .STIMULUS_NTM_VECTOR_ONE_CONTROLPLUS_CASE_1(STIMULUS_NTM_VECTOR_ONE_CONTROLPLUS_CASE_1),
-    .STIMULUS_NTM_VECTOR_SUMMATION_CASE_1(STIMULUS_NTM_VECTOR_SUMMATION_CASE_1),
+    .STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1(STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1),
 
     // MATRIX-FUNCTIONALITY
-    .STIMULUS_NTM_MATRIX_CONVOLUTION_TEST(STIMULUS_NTM_MATRIX_CONVOLUTION_TEST),
-    .STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_TEST(STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_TEST),
     .STIMULUS_NTM_MATRIX_COSH_TEST(STIMULUS_NTM_MATRIX_COSH_TEST),
     .STIMULUS_NTM_MATRIX_SINH_TEST(STIMULUS_NTM_MATRIX_SINH_TEST),
     .STIMULUS_NTM_MATRIX_TANH_TEST(STIMULUS_NTM_MATRIX_TANH_TEST),
     .STIMULUS_NTM_MATRIX_LOGISTIC_TEST(STIMULUS_NTM_MATRIX_LOGISTIC_TEST),
-    .STIMULUS_NTM_MATRIX_SOFTMAX_TEST(STIMULUS_NTM_MATRIX_SOFTMAX_TEST),
-    .STIMULUS_NTM_MATRIX_ONE_CONTROLPLUS_TEST(STIMULUS_NTM_MATRIX_ONE_CONTROLPLUS_TEST),
-    .STIMULUS_NTM_MATRIX_SUMMATION_TEST(STIMULUS_NTM_MATRIX_SUMMATION_TEST),
-    .STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_0(STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_0),
-    .STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_0(STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_0),
+    .STIMULUS_NTM_MATRIX_ONEPLUS_TEST(STIMULUS_NTM_MATRIX_ONEPLUS_TEST),
     .STIMULUS_NTM_MATRIX_COSH_CASE_0(STIMULUS_NTM_MATRIX_COSH_CASE_0),
     .STIMULUS_NTM_MATRIX_SINH_CASE_0(STIMULUS_NTM_MATRIX_SINH_CASE_0),
     .STIMULUS_NTM_MATRIX_TANH_CASE_0(STIMULUS_NTM_MATRIX_TANH_CASE_0),
     .STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0(STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0),
-    .STIMULUS_NTM_MATRIX_SOFTMAX_CASE_0(STIMULUS_NTM_MATRIX_SOFTMAX_CASE_0),
-    .STIMULUS_NTM_MATRIX_ONE_CONTROLPLUS_CASE_0(STIMULUS_NTM_MATRIX_ONE_CONTROLPLUS_CASE_0),
-    .STIMULUS_NTM_MATRIX_SUMMATION_CASE_0(STIMULUS_NTM_MATRIX_SUMMATION_CASE_0),
-    .STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_1(STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_1),
-    .STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_1(STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_1),
+    .STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0(STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0),
     .STIMULUS_NTM_MATRIX_COSH_CASE_1(STIMULUS_NTM_MATRIX_COSH_CASE_1),
     .STIMULUS_NTM_MATRIX_SINH_CASE_1(STIMULUS_NTM_MATRIX_SINH_CASE_1),
     .STIMULUS_NTM_MATRIX_TANH_CASE_1(STIMULUS_NTM_MATRIX_TANH_CASE_1),
     .STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1(STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1),
-    .STIMULUS_NTM_MATRIX_SOFTMAX_CASE_1(STIMULUS_NTM_MATRIX_SOFTMAX_CASE_1),
-    .STIMULUS_NTM_MATRIX_ONE_CONTROLPLUS_CASE_1(STIMULUS_NTM_MATRIX_ONE_CONTROLPLUS_CASE_1),
-    .STIMULUS_NTM_MATRIX_SUMMATION_CASE_1(STIMULUS_NTM_MATRIX_SUMMATION_CASE_1)
+    .STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1(STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1)
   )
   function_stimulus(
     // GLOBAL
@@ -778,51 +467,6 @@ module ntm_function_testbench;
     ///////////////////////////////////////////////////////////////////////
     // STIMULUS SCALAR
     ///////////////////////////////////////////////////////////////////////
-
-    // SCALAR CONVOLUTION
-    // CONTROL
-    .SCALAR_CONVOLUTION_START(start_scalar_convolution),
-    .SCALAR_CONVOLUTION_READY(ready_scalar_convolution),
-
-    .SCALAR_CONVOLUTION_DATA_A_IN_ENABLE(data_a_in_enable_scalar_convolution),
-    .SCALAR_CONVOLUTION_DATA_B_IN_ENABLE(data_b_in_enable_scalar_convolution),
-
-    .SCALAR_CONVOLUTION_DATA_OUT_ENABLE(data_out_enable_scalar_convolution),
-
-    // DATA
-    .SCALAR_CONVOLUTION_LENGTH_IN(length_in_scalar_convolution),
-    .SCALAR_CONVOLUTION_DATA_A_IN(data_a_in_scalar_convolution),
-    .SCALAR_CONVOLUTION_DATA_B_IN(data_b_in_scalar_convolution),
-    .SCALAR_CONVOLUTION_DATA_OUT(data_out_scalar_convolution),
-
-    // SCALAR COSINE SIMILARITY
-    // CONTROL
-    .SCALAR_COSINE_SIMILARITY_START(start_scalar_cosine_similarity),
-    .SCALAR_COSINE_SIMILARITY_READY(ready_scalar_cosine_similarity),
-
-    .SCALAR_COSINE_SIMILARITY_DATA_A_IN_ENABLE(data_a_in_enable_scalar_cosine_similarity),
-    .SCALAR_COSINE_SIMILARITY_DATA_B_IN_ENABLE(data_b_in_enable_scalar_cosine_similarity),
-
-    .SCALAR_COSINE_SIMILARITY_DATA_OUT_ENABLE(data_out_enable_scalar_cosine_similarity),
-
-    // DATA
-    .SCALAR_COSINE_SIMILARITY_LENGTH_IN(length_in_scalar_cosine_similarity),
-    .SCALAR_COSINE_SIMILARITY_DATA_A_IN(data_a_in_scalar_cosine_similarity),
-    .SCALAR_COSINE_SIMILARITY_DATA_B_IN(data_b_in_scalar_cosine_similarity),
-    .SCALAR_COSINE_SIMILARITY_DATA_OUT(data_out_scalar_cosine_similarity),
-
-    // SCALAR MULTIPLICATION
-    // CONTROL
-    .SCALAR_MULTIPLICATION_START(start_scalar_multiplication),
-    .SCALAR_MULTIPLICATION_READY(ready_scalar_multiplication),
-
-    .SCALAR_MULTIPLICATION_DATA_IN_ENABLE(data_in_enable_scalar_multiplication),
-    .SCALAR_MULTIPLICATION_DATA_OUT_ENABLE(data_out_enable_scalar_multiplication),
-
-    // DATA
-    .SCALAR_MULTIPLICATION_LENGTH_IN(length_in_scalar_multiplication),
-    .SCALAR_MULTIPLICATION_DATA_IN(data_in_scalar_multiplication),
-    .SCALAR_MULTIPLICATION_DATA_OUT(data_out_scalar_multiplication),
 
     // SCALAR COSH
     // CONTROL
@@ -860,82 +504,18 @@ module ntm_function_testbench;
     .SCALAR_LOGISTIC_DATA_IN(data_in_scalar_logistic),
     .SCALAR_LOGISTIC_DATA_OUT(data_out_scalar_logistic),
 
-    // SCALAR SOFTMAX
+    // SCALAR ONEPLUS
     // CONTROL
-    .SCALAR_SOFTMAX_START(start_scalar_softmax),
-    .SCALAR_SOFTMAX_READY(ready_scalar_softmax),
-
-    .SCALAR_SOFTMAX_DATA_IN_ENABLE(data_in_enable_scalar_softmax),
-    .SCALAR_SOFTMAX_DATA_OUT_ENABLE(data_out_enable_scalar_softmax),
+    .SCALAR_ONEPLUS_START(start_scalar_oneplus),
+    .SCALAR_ONEPLUS_READY(ready_scalar_oneplus),
 
     // DATA
-    .SCALAR_SOFTMAX_LENGTH_IN(length_in_scalar_softmax),
-    .SCALAR_SOFTMAX_DATA_IN(data_in_scalar_softmax),
-    .SCALAR_SOFTMAX_DATA_OUT(data_out_scalar_softmax),
-
-    // SCALAR ONE_CONTROLPLUS
-    // CONTROL
-    .SCALAR_ONE_CONTROLPLUS_START(start_scalar_oneplus),
-    .SCALAR_ONE_CONTROLPLUS_READY(ready_scalar_oneplus),
-
-    // DATA
-    .SCALAR_ONE_CONTROLPLUS_DATA_IN(data_in_scalar_oneplus),
-    .SCALAR_ONE_CONTROLPLUS_DATA_OUT(data_out_scalar_oneplus),
-
-    // SCALAR SUMMATION
-    // CONTROL
-    .SCALAR_SUMMATION_START(start_scalar_summation),
-    .SCALAR_SUMMATION_READY(ready_scalar_summation),
-
-    .SCALAR_SUMMATION_DATA_IN_ENABLE(data_in_enable_scalar_summation),
-    .SCALAR_SUMMATION_DATA_OUT_ENABLE(data_out_enable_scalar_summation),
-
-    // DATA
-    .SCALAR_SUMMATION_LENGTH_IN(length_in_scalar_summation),
-    .SCALAR_SUMMATION_DATA_IN(data_in_scalar_summation),
-    .SCALAR_SUMMATION_DATA_OUT(data_out_scalar_summation),
+    .SCALAR_ONEPLUS_DATA_IN(data_in_scalar_oneplus),
+    .SCALAR_ONEPLUS_DATA_OUT(data_out_scalar_oneplus),
 
     ///////////////////////////////////////////////////////////////////////
     // STIMULUS VECTOR
     ///////////////////////////////////////////////////////////////////////
-
-    // VECTOR CONVOLUTION
-    // CONTROL
-    .VECTOR_CONVOLUTION_START(start_vector_convolution),
-    .VECTOR_CONVOLUTION_READY(ready_vector_convolution),
-
-    .VECTOR_CONVOLUTION_DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_vector_convolution),
-    .VECTOR_CONVOLUTION_DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_vector_convolution),
-    .VECTOR_CONVOLUTION_DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_vector_convolution),
-    .VECTOR_CONVOLUTION_DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_vector_convolution),
-    .VECTOR_CONVOLUTION_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_convolution),
-    .VECTOR_CONVOLUTION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_convolution),
-
-    // DATA
-    .VECTOR_CONVOLUTION_SIZE_IN(size_in_vector_convolution),
-    .VECTOR_CONVOLUTION_LENGTH_IN(length_in_vector_convolution),
-    .VECTOR_CONVOLUTION_DATA_A_IN(data_a_in_vector_convolution),
-    .VECTOR_CONVOLUTION_DATA_B_IN(data_b_in_vector_convolution),
-    .VECTOR_CONVOLUTION_DATA_OUT(data_out_vector_convolution),
-
-    // VECTOR COSINE SIMILARITY
-    // CONTROL
-    .VECTOR_COSINE_SIMILARITY_START(start_vector_cosine_similarity),
-    .VECTOR_COSINE_SIMILARITY_READY(ready_vector_cosine_similarity),
-
-    .VECTOR_COSINE_SIMILARITY_DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_vector_cosine_similarity),
-    .VECTOR_COSINE_SIMILARITY_DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_vector_cosine_similarity),
-    .VECTOR_COSINE_SIMILARITY_DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_vector_cosine_similarity),
-    .VECTOR_COSINE_SIMILARITY_DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_vector_cosine_similarity),
-    .VECTOR_COSINE_SIMILARITY_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_cosine_similarity),
-    .VECTOR_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_cosine_similarity),
-
-    // DATA
-    .VECTOR_COSINE_SIMILARITY_SIZE_IN(size_in_vector_cosine_similarity),
-    .VECTOR_COSINE_SIMILARITY_LENGTH_IN(length_in_vector_cosine_similarity),
-    .VECTOR_COSINE_SIMILARITY_DATA_A_IN(data_a_in_vector_cosine_similarity),
-    .VECTOR_COSINE_SIMILARITY_DATA_B_IN(data_b_in_vector_cosine_similarity),
-    .VECTOR_COSINE_SIMILARITY_DATA_OUT(data_out_vector_cosine_similarity),
 
     // VECTOR COSH
     // CONTROL
@@ -975,21 +555,6 @@ module ntm_function_testbench;
     .VECTOR_TANH_DATA_IN(data_in_vector_tanh),
     .VECTOR_TANH_DATA_OUT(data_out_vector_tanh),
 
-    // VECTOR MULTIPLICATION
-    // CONTROL
-    .VECTOR_MULTIPLICATION_START(start_vector_multiplication),
-    .VECTOR_MULTIPLICATION_READY(ready_vector_multiplication),
-    .VECTOR_MULTIPLICATION_DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_multiplication),
-    .VECTOR_MULTIPLICATION_DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_multiplication),
-    .VECTOR_MULTIPLICATION_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_multiplication),
-    .VECTOR_MULTIPLICATION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_multiplication),
-
-    // DATA
-    .VECTOR_MULTIPLICATION_SIZE_IN(size_in_vector_multiplication),
-    .VECTOR_MULTIPLICATION_LENGTH_IN(length_in_vector_multiplication),
-    .VECTOR_MULTIPLICATION_DATA_IN(data_in_vector_multiplication),
-    .VECTOR_MULTIPLICATION_DATA_OUT(data_out_vector_multiplication),
-
     // VECTOR LOGISTIC
     // CONTROL
     .VECTOR_LOGISTIC_START(start_vector_logistic),
@@ -1003,119 +568,22 @@ module ntm_function_testbench;
     .VECTOR_LOGISTIC_DATA_IN(data_in_vector_logistic),
     .VECTOR_LOGISTIC_DATA_OUT(data_out_vector_logistic),
 
-    // VECTOR SOFTMAX
+    // VECTOR ONEPLUS
     // CONTROL
-    .VECTOR_SOFTMAX_START(start_vector_softmax),
-    .VECTOR_SOFTMAX_READY(ready_vector_softmax),
+    .VECTOR_ONEPLUS_START(start_vector_oneplus),
+    .VECTOR_ONEPLUS_READY(ready_vector_oneplus),
 
-    .VECTOR_SOFTMAX_DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_softmax),
-    .VECTOR_SOFTMAX_DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_softmax),
-    .VECTOR_SOFTMAX_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_softmax),
-    .VECTOR_SOFTMAX_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_softmax),
+    .VECTOR_ONEPLUS_DATA_IN_ENABLE(data_in_enable_vector_oneplus),
+    .VECTOR_ONEPLUS_DATA_OUT_ENABLE(data_out_enable_vector_oneplus),
 
     // DATA
-    .VECTOR_SOFTMAX_SIZE_IN(size_in_vector_softmax),
-    .VECTOR_SOFTMAX_LENGTH_IN(length_in_vector_softmax),
-    .VECTOR_SOFTMAX_DATA_IN(data_in_vector_softmax),
-    .VECTOR_SOFTMAX_DATA_OUT(data_out_vector_softmax),
-
-    // VECTOR ONE_CONTROLPLUS
-    // CONTROL
-    .VECTOR_ONE_CONTROLPLUS_START(start_vector_oneplus),
-    .VECTOR_ONE_CONTROLPLUS_READY(ready_vector_oneplus),
-
-    .VECTOR_ONE_CONTROLPLUS_DATA_IN_ENABLE(data_in_enable_vector_oneplus),
-    .VECTOR_ONE_CONTROLPLUS_DATA_OUT_ENABLE(data_out_enable_vector_oneplus),
-
-    // DATA
-    .VECTOR_ONE_CONTROLPLUS_SIZE_IN(size_in_vector_oneplus),
-    .VECTOR_ONE_CONTROLPLUS_DATA_IN(data_in_vector_oneplus),
-    .VECTOR_ONE_CONTROLPLUS_DATA_OUT(data_out_vector_oneplus),
-
-    // VECTOR SUMMATION
-    // CONTROL
-    .VECTOR_SUMMATION_START(start_vector_summation),
-    .VECTOR_SUMMATION_READY(ready_vector_summation),
-
-    .VECTOR_SUMMATION_DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_summation),
-    .VECTOR_SUMMATION_DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_summation),
-    .VECTOR_SUMMATION_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_summation),
-    .VECTOR_SUMMATION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_summation),
-
-    // DATA
-    .VECTOR_SUMMATION_SIZE_IN(size_in_vector_summation),
-    .VECTOR_SUMMATION_LENGTH_IN(length_in_vector_summation),
-    .VECTOR_SUMMATION_DATA_IN(data_in_vector_summation),
-    .VECTOR_SUMMATION_DATA_OUT(data_out_vector_summation),
+    .VECTOR_ONEPLUS_SIZE_IN(size_in_vector_oneplus),
+    .VECTOR_ONEPLUS_DATA_IN(data_in_vector_oneplus),
+    .VECTOR_ONEPLUS_DATA_OUT(data_out_vector_oneplus),
 
     ///////////////////////////////////////////////////////////////////////
     // STIMULUS MATRIX
     ///////////////////////////////////////////////////////////////////////
-
-    // MATRIX CONVOLUTION
-    // CONTROL
-    .MATRIX_CONVOLUTION_START(start_matrix_convolution),
-    .MATRIX_CONVOLUTION_READY(ready_matrix_convolution),
-
-    .MATRIX_CONVOLUTION_DATA_A_IN_MATRIX_ENABLE(data_a_in_matrix_enable_matrix_convolution),
-    .MATRIX_CONVOLUTION_DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_matrix_convolution),
-    .MATRIX_CONVOLUTION_DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_matrix_convolution),
-    .MATRIX_CONVOLUTION_DATA_B_IN_MATRIX_ENABLE(data_b_in_matrix_enable_matrix_convolution),
-    .MATRIX_CONVOLUTION_DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_matrix_convolution),
-    .MATRIX_CONVOLUTION_DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_matrix_convolution),
-    .MATRIX_CONVOLUTION_DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_convolution),
-    .MATRIX_CONVOLUTION_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_convolution),
-    .MATRIX_CONVOLUTION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_convolution),
-
-    // DATA
-    .MATRIX_CONVOLUTION_SIZE_I_IN(size_i_in_matrix_convolution),
-    .MATRIX_CONVOLUTION_SIZE_J_IN(size_j_in_matrix_convolution),
-    .MATRIX_CONVOLUTION_LENGTH_IN(length_in_matrix_convolution),
-    .MATRIX_CONVOLUTION_DATA_A_IN(data_a_in_matrix_convolution),
-    .MATRIX_CONVOLUTION_DATA_B_IN(data_b_in_matrix_convolution),
-    .MATRIX_CONVOLUTION_DATA_OUT(data_out_matrix_convolution),
-
-    // MATRIX COSINE SIMILARITY
-    // CONTROL
-    .MATRIX_COSINE_SIMILARITY_START(start_matrix_cosine_similarity),
-    .MATRIX_COSINE_SIMILARITY_READY(ready_matrix_cosine_similarity),
-
-    .MATRIX_COSINE_SIMILARITY_DATA_A_IN_MATRIX_ENABLE(data_a_in_matrix_enable_matrix_cosine_similarity),
-    .MATRIX_COSINE_SIMILARITY_DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_matrix_cosine_similarity),
-    .MATRIX_COSINE_SIMILARITY_DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_matrix_cosine_similarity),
-    .MATRIX_COSINE_SIMILARITY_DATA_B_IN_MATRIX_ENABLE(data_b_in_matrix_enable_matrix_cosine_similarity),
-    .MATRIX_COSINE_SIMILARITY_DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_matrix_cosine_similarity),
-    .MATRIX_COSINE_SIMILARITY_DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_matrix_cosine_similarity),
-    .MATRIX_COSINE_SIMILARITY_DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_cosine_similarity),
-    .MATRIX_COSINE_SIMILARITY_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_cosine_similarity),
-    .MATRIX_COSINE_SIMILARITY_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_cosine_similarity),
-
-    // DATA
-    .MATRIX_COSINE_SIMILARITY_SIZE_I_IN(size_i_in_matrix_cosine_similarity),
-    .MATRIX_COSINE_SIMILARITY_SIZE_J_IN(size_j_in_matrix_cosine_similarity),
-    .MATRIX_COSINE_SIMILARITY_LENGTH_IN(length_in_matrix_cosine_similarity),
-    .MATRIX_COSINE_SIMILARITY_DATA_A_IN(data_a_in_matrix_cosine_similarity),
-    .MATRIX_COSINE_SIMILARITY_DATA_B_IN(data_b_in_matrix_cosine_similarity),
-    .MATRIX_COSINE_SIMILARITY_DATA_OUT(data_out_matrix_cosine_similarity),
-
-    // MATRIX MULTIPLICATION
-    // CONTROL
-    .MATRIX_MULTIPLICATION_START(start_matrix_multiplication),
-    .MATRIX_MULTIPLICATION_READY(ready_matrix_multiplication),
-
-    .MATRIX_MULTIPLICATION_DATA_IN_MATRIX_ENABLE(data_in_matrix_enable_matrix_multiplication),
-    .MATRIX_MULTIPLICATION_DATA_IN_VECTOR_ENABLE(data_in_vector_enable_matrix_multiplication),
-    .MATRIX_MULTIPLICATION_DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_matrix_multiplication),
-    .MATRIX_MULTIPLICATION_DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_multiplication),
-    .MATRIX_MULTIPLICATION_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_multiplication),
-    .MATRIX_MULTIPLICATION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_multiplication),
-
-    // DATA
-    .MATRIX_MULTIPLICATION_SIZE_I_IN(size_i_in_matrix_multiplication),
-    .MATRIX_MULTIPLICATION_SIZE_J_IN(size_j_in_matrix_multiplication),
-    .MATRIX_MULTIPLICATION_LENGTH_IN(length_in_matrix_multiplication),
-    .MATRIX_MULTIPLICATION_DATA_IN(data_in_matrix_multiplication),
-    .MATRIX_MULTIPLICATION_DATA_OUT(data_out_matrix_multiplication),
 
     // MATRIX COSH
     // CONTROL
@@ -1181,163 +649,26 @@ module ntm_function_testbench;
     .MATRIX_LOGISTIC_DATA_IN(data_in_matrix_logistic),
     .MATRIX_LOGISTIC_DATA_OUT(data_out_matrix_logistic),
 
-    // MATRIX SOFTMAX
+    // MATRIX ONEPLUS
     // CONTROL
-    .MATRIX_SOFTMAX_START(start_matrix_softmax),
-    .MATRIX_SOFTMAX_READY(ready_matrix_softmax),
+    .MATRIX_ONEPLUS_START(start_matrix_oneplus),
+    .MATRIX_ONEPLUS_READY(ready_matrix_oneplus),
 
-    .MATRIX_SOFTMAX_DATA_IN_MATRIX_ENABLE(data_in_matrix_enable_matrix_softmax),
-    .MATRIX_SOFTMAX_DATA_IN_VECTOR_ENABLE(data_in_vector_enable_matrix_softmax),
-    .MATRIX_SOFTMAX_DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_matrix_softmax),
-    .MATRIX_SOFTMAX_DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_softmax),
-    .MATRIX_SOFTMAX_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_softmax),
-    .MATRIX_SOFTMAX_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_softmax),
+    .MATRIX_ONEPLUS_DATA_IN_I_ENABLE(data_in_i_enable_matrix_oneplus),
+    .MATRIX_ONEPLUS_DATA_IN_J_ENABLE(data_in_j_enable_matrix_oneplus),
+    .MATRIX_ONEPLUS_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_oneplus),
+    .MATRIX_ONEPLUS_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_oneplus),
 
     // DATA
-    .MATRIX_SOFTMAX_SIZE_I_IN(size_i_in_matrix_softmax),
-    .MATRIX_SOFTMAX_SIZE_J_IN(size_j_in_matrix_softmax),
-    .MATRIX_SOFTMAX_LENGTH_IN(length_in_matrix_softmax),
-    .MATRIX_SOFTMAX_DATA_IN(data_in_matrix_softmax),
-    .MATRIX_SOFTMAX_DATA_OUT(data_out_matrix_softmax),
-
-    // MATRIX ONE_CONTROLPLUS
-    // CONTROL
-    .MATRIX_ONE_CONTROLPLUS_START(start_matrix_oneplus),
-    .MATRIX_ONE_CONTROLPLUS_READY(ready_matrix_oneplus),
-
-    .MATRIX_ONE_CONTROLPLUS_DATA_IN_I_ENABLE(data_in_i_enable_matrix_oneplus),
-    .MATRIX_ONE_CONTROLPLUS_DATA_IN_J_ENABLE(data_in_j_enable_matrix_oneplus),
-    .MATRIX_ONE_CONTROLPLUS_DATA_OUT_I_ENABLE(data_out_i_enable_matrix_oneplus),
-    .MATRIX_ONE_CONTROLPLUS_DATA_OUT_J_ENABLE(data_out_j_enable_matrix_oneplus),
-
-    // DATA
-    .MATRIX_ONE_CONTROLPLUS_SIZE_I_IN(size_i_in_matrix_oneplus),
-    .MATRIX_ONE_CONTROLPLUS_SIZE_J_IN(size_j_in_matrix_oneplus),
-    .MATRIX_ONE_CONTROLPLUS_DATA_IN(data_in_matrix_oneplus),
-    .MATRIX_ONE_CONTROLPLUS_DATA_OUT(data_out_matrix_oneplus),
-
-    // MATRIX SUMMATION
-    // CONTROL
-    .MATRIX_SUMMATION_START(start_matrix_summation),
-    .MATRIX_SUMMATION_READY(ready_matrix_summation),
-
-    .MATRIX_SUMMATION_DATA_IN_MATRIX_ENABLE(data_in_matrix_enable_matrix_summation),
-    .MATRIX_SUMMATION_DATA_IN_VECTOR_ENABLE(data_in_vector_enable_matrix_summation),
-    .MATRIX_SUMMATION_DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_matrix_summation),
-    .MATRIX_SUMMATION_DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_summation),
-    .MATRIX_SUMMATION_DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_summation),
-    .MATRIX_SUMMATION_DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_summation),
-
-    // DATA
-    .MATRIX_SUMMATION_SIZE_I_IN(size_i_in_matrix_summation),
-    .MATRIX_SUMMATION_SIZE_J_IN(size_j_in_matrix_summation),
-    .MATRIX_SUMMATION_LENGTH_IN(length_in_matrix_summation),
-    .MATRIX_SUMMATION_DATA_IN(data_in_matrix_summation),
-    .MATRIX_SUMMATION_DATA_OUT(data_out_matrix_summation)
+    .MATRIX_ONEPLUS_SIZE_I_IN(size_i_in_matrix_oneplus),
+    .MATRIX_ONEPLUS_SIZE_J_IN(size_j_in_matrix_oneplus),
+    .MATRIX_ONEPLUS_DATA_IN(data_in_matrix_oneplus),
+    .MATRIX_ONEPLUS_DATA_OUT(data_out_matrix_oneplus)
   );
 
   ///////////////////////////////////////////////////////////////////////
   // SCALAR
   ///////////////////////////////////////////////////////////////////////
-
-  // SCALAR CONVOLUTION
-  ntm_scalar_convolution_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_convolution_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_scalar_convolution),
-    .READY(ready_scalar_convolution),
-
-    .DATA_A_IN_ENABLE(data_a_in_enable_scalar_convolution),
-    .DATA_B_IN_ENABLE(data_b_in_enable_scalar_convolution),
-
-    .DATA_OUT_ENABLE(data_out_enable_scalar_convolution),
-
-    // DATA
-    .LENGTH_IN(length_in_scalar_convolution),
-    .DATA_A_IN(data_a_in_scalar_convolution),
-    .DATA_B_IN(data_b_in_scalar_convolution),
-    .DATA_OUT(data_out_scalar_convolution)
-  );
-
-  // SCALAR COSINE SIMILARITY
-  ntm_scalar_cosine_similarity_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_cosine_similarity_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_scalar_cosine_similarity),
-    .READY(ready_scalar_cosine_similarity),
-
-    .DATA_A_IN_ENABLE(data_a_in_enable_scalar_cosine_similarity),
-    .DATA_B_IN_ENABLE(data_b_in_enable_scalar_cosine_similarity),
-
-    .DATA_OUT_ENABLE(data_out_enable_scalar_cosine_similarity),
-
-    // DATA
-    .LENGTH_IN(length_in_scalar_cosine_similarity),
-    .DATA_A_IN(data_a_in_scalar_cosine_similarity),
-    .DATA_B_IN(data_b_in_scalar_cosine_similarity),
-    .DATA_OUT(data_out_scalar_cosine_similarity)
-  );
-
-  // SCALAR DIFFERENTIATION
-  ntm_scalar_differentiation_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_differentiation_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_scalar_differentiation),
-    .READY(ready_scalar_differentiation),
-
-    .DATA_IN_ENABLE(data_in_enable_scalar_differentiation),
-    .DATA_OUT_ENABLE(data_out_enable_scalar_differentiation),
-
-    // DATA
-    .PERIOD_IN(period_in_scalar_differentiation),
-    .LENGTH_IN(length_in_scalar_differentiation),
-    .DATA_IN(data_in_scalar_differentiation),
-    .DATA_OUT(data_out_scalar_differentiation)
-  );
-
-  // SCALAR MULTIPLICATION
-  ntm_scalar_multiplication_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_multiplication_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_scalar_multiplication),
-    .READY(ready_scalar_multiplication),
-
-    .DATA_IN_ENABLE(data_in_enable_scalar_multiplication),
-    .DATA_OUT_ENABLE(data_out_enable_scalar_multiplication),
-
-    // DATA
-    .LENGTH_IN(length_in_scalar_multiplication),
-    .DATA_IN(data_in_scalar_multiplication),
-    .DATA_OUT(data_out_scalar_multiplication)
-  );
 
   // SCALAR COSH
   ntm_scalar_cosh_function #(
@@ -1415,30 +746,7 @@ module ntm_function_testbench;
     .DATA_OUT(data_out_scalar_logistic)
   );
 
-  // SCALAR SOFTMAX
-  ntm_scalar_softmax_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_softmax_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_scalar_softmax),
-    .READY(ready_scalar_softmax),
-
-    .DATA_IN_ENABLE(data_in_enable_scalar_softmax),
-    .DATA_OUT_ENABLE(data_out_enable_scalar_softmax),
-
-    // DATA
-    .LENGTH_IN(length_in_scalar_softmax),
-    .DATA_IN(data_in_scalar_softmax),
-    .DATA_OUT(data_out_scalar_softmax)
-  );
-
-  // SCALAR ONE_CONTROLPLUS
+  // SCALAR ONEPLUS
   ntm_scalar_oneplus_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
@@ -1457,143 +765,9 @@ module ntm_function_testbench;
     .DATA_OUT(data_out_scalar_oneplus)
   );
 
-  // SCALAR SUMMATION
-  ntm_scalar_summation_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  scalar_summation_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_scalar_summation),
-    .READY(ready_scalar_summation),
-
-    .DATA_IN_ENABLE(data_in_enable_scalar_summation),
-    .DATA_OUT_ENABLE(data_out_enable_scalar_summation),
-
-    // DATA
-    .LENGTH_IN(length_in_scalar_summation),
-    .DATA_IN(data_in_scalar_summation),
-    .DATA_OUT(data_out_scalar_summation)
-  );
-
   ///////////////////////////////////////////////////////////////////////
   // VECTOR
   ///////////////////////////////////////////////////////////////////////
-
-  // VECTOR CONVOLUTION
-  ntm_vector_convolution_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_convolution_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_vector_convolution),
-    .READY(ready_vector_convolution),
-
-    .DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_vector_convolution),
-    .DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_vector_convolution),
-    .DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_vector_convolution),
-    .DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_vector_convolution),
-    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_convolution),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_convolution),
-
-    // DATA
-    .SIZE_IN(size_in_vector_convolution),
-    .LENGTH_IN(length_in_vector_convolution),
-    .DATA_A_IN(data_a_in_vector_convolution),
-    .DATA_B_IN(data_b_in_vector_convolution),
-    .DATA_OUT(data_out_vector_convolution)
-  );
-
-  // VECTOR COSINE SIMILARITY
-  ntm_vector_cosine_similarity_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_cosine_similarity_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_vector_cosine_similarity),
-    .READY(ready_vector_cosine_similarity),
-
-    .DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_vector_cosine_similarity),
-    .DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_vector_cosine_similarity),
-    .DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_vector_cosine_similarity),
-    .DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_vector_cosine_similarity),
-    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_cosine_similarity),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_cosine_similarity),
-
-    // DATA
-    .SIZE_IN(size_in_vector_cosine_similarity),
-    .LENGTH_IN(length_in_vector_cosine_similarity),
-    .DATA_A_IN(data_a_in_vector_cosine_similarity),
-    .DATA_B_IN(data_b_in_vector_cosine_similarity),
-    .DATA_OUT(data_out_vector_cosine_similarity)
-  );
-
-  // VECTOR DIFFERENTIATION
-  ntm_vector_differentiation_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_differentiation_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_vector_differentiation),
-    .READY(ready_vector_differentiation),
-
-    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_differentiation),
-    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_differentiation),
-    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_differentiation),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_differentiation),
-
-    // DATA
-    .SIZE_IN(size_in_vector_differentiation),
-    .PERIOD_IN(period_in_vector_differentiation),
-    .LENGTH_IN(length_in_vector_differentiation),
-    .DATA_IN(data_in_vector_differentiation),
-    .DATA_OUT(data_out_vector_differentiation)
-  );
-
-  // VECTOR MULTIPLICATION
-  ntm_vector_multiplication_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_multiplication_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_vector_multiplication),
-    .READY(ready_vector_multiplication),
-
-    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_multiplication),
-    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_multiplication),
-    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_multiplication),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_multiplication),
-
-    // DATA
-    .SIZE_IN(size_in_vector_multiplication),
-    .LENGTH_IN(length_in_vector_multiplication),
-    .DATA_IN(data_in_vector_multiplication),
-    .DATA_OUT(data_out_vector_multiplication)
-  );
 
   // VECTOR COSH
   ntm_vector_cosh_function #(
@@ -1687,33 +861,7 @@ module ntm_function_testbench;
     .DATA_OUT(data_out_vector_logistic)
   );
 
-  // VECTOR SOFTMAX
-  ntm_vector_softmax_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_softmax_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_vector_softmax),
-    .READY(ready_vector_softmax),
-
-    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_softmax),
-    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_softmax),
-    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_softmax),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_softmax),
-
-    // DATA
-    .SIZE_IN(size_in_vector_softmax),
-    .LENGTH_IN(length_in_vector_softmax),
-    .DATA_IN(data_in_vector_softmax),
-    .DATA_OUT(data_out_vector_softmax)
-  );
-
-  // VECTOR ONE_CONTROLPLUS
+  // VECTOR ONEPLUS
   ntm_vector_oneplus_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
@@ -1736,160 +884,9 @@ module ntm_function_testbench;
     .DATA_OUT(data_out_vector_oneplus)
   );
 
-  // VECTOR SUMMATION
-  ntm_vector_summation_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  vector_summation_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_vector_summation),
-    .READY(ready_vector_summation),
-
-    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_vector_summation),
-    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_vector_summation),
-    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_vector_summation),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_vector_summation),
-
-    // DATA
-    .SIZE_IN(size_in_vector_summation),
-    .LENGTH_IN(length_in_vector_summation),
-    .DATA_IN(data_in_vector_summation),
-    .DATA_OUT(data_out_vector_summation)
-  );
-
   ///////////////////////////////////////////////////////////////////////
   // MATRIX
   ///////////////////////////////////////////////////////////////////////
-
-  // MATRIX CONVOLUTION
-  ntm_matrix_convolution_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_convolution_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_matrix_convolution),
-    .READY(ready_matrix_convolution),
-
-    .DATA_A_IN_MATRIX_ENABLE(data_a_in_matrix_enable_matrix_convolution),
-    .DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_matrix_convolution),
-    .DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_matrix_convolution),
-    .DATA_B_IN_MATRIX_ENABLE(data_b_in_matrix_enable_matrix_convolution),
-    .DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_matrix_convolution),
-    .DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_matrix_convolution),
-    .DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_convolution),
-    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_convolution),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_convolution),
-
-    // DATA
-    .SIZE_I_IN(size_i_in_matrix_convolution),
-    .SIZE_J_IN(size_j_in_matrix_convolution),
-    .LENGTH_IN(length_in_matrix_convolution),
-    .DATA_A_IN(data_a_in_matrix_convolution),
-    .DATA_B_IN(data_b_in_matrix_convolution),
-    .DATA_OUT(data_out_matrix_convolution)
-  );
-
-  // MATRIX COSINE SIMILARITY
-  ntm_matrix_cosine_similarity_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_cosine_similarity_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_matrix_cosine_similarity),
-    .READY(ready_matrix_cosine_similarity),
-
-    .DATA_A_IN_MATRIX_ENABLE(data_a_in_matrix_enable_matrix_cosine_similarity),
-    .DATA_A_IN_VECTOR_ENABLE(data_a_in_vector_enable_matrix_cosine_similarity),
-    .DATA_A_IN_SCALAR_ENABLE(data_a_in_scalar_enable_matrix_cosine_similarity),
-    .DATA_B_IN_MATRIX_ENABLE(data_b_in_matrix_enable_matrix_cosine_similarity),
-    .DATA_B_IN_VECTOR_ENABLE(data_b_in_vector_enable_matrix_cosine_similarity),
-    .DATA_B_IN_SCALAR_ENABLE(data_b_in_scalar_enable_matrix_cosine_similarity),
-    .DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_cosine_similarity),
-    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_cosine_similarity),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_cosine_similarity),
-
-    // DATA
-    .SIZE_I_IN(size_i_in_matrix_cosine_similarity),
-    .SIZE_J_IN(size_j_in_matrix_cosine_similarity),
-    .LENGTH_IN(length_in_matrix_cosine_similarity),
-    .DATA_A_IN(data_a_in_matrix_cosine_similarity),
-    .DATA_B_IN(data_b_in_matrix_cosine_similarity),
-    .DATA_OUT(data_out_matrix_cosine_similarity)
-  );
-
-  // MATRIX DIFFERENTIATION
-  ntm_matrix_differentiation_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_differentiation_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_matrix_differentiation),
-    .READY(ready_matrix_differentiation),
-
-    .DATA_IN_MATRIX_ENABLE(data_in_matrix_enable_matrix_differentiation),
-    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_matrix_differentiation),
-    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_matrix_differentiation),
-    .DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_differentiation),
-    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_differentiation),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_differentiation),
-
-    // DATA
-    .SIZE_I_IN(size_i_in_matrix_differentiation),
-    .SIZE_J_IN(size_j_in_matrix_differentiation),
-    .PERIOD_IN(period_in_matrix_differentiation),
-    .LENGTH_IN(length_in_matrix_differentiation),
-    .DATA_IN(data_in_matrix_differentiation),
-    .DATA_OUT(data_out_matrix_differentiation)
-  );
-
-  // MATRIX MULTIPLICATION
-  ntm_matrix_multiplication_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_multiplication_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_matrix_multiplication),
-    .READY(ready_matrix_multiplication),
-
-    .DATA_IN_MATRIX_ENABLE(data_in_matrix_enable_matrix_multiplication),
-    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_matrix_multiplication),
-    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_matrix_multiplication),
-    .DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_multiplication),
-    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_multiplication),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_multiplication),
-
-    // DATA
-    .SIZE_I_IN(size_i_in_matrix_multiplication),
-    .SIZE_J_IN(size_j_in_matrix_multiplication),
-    .LENGTH_IN(length_in_matrix_multiplication),
-    .DATA_IN(data_in_matrix_multiplication),
-    .DATA_OUT(data_out_matrix_multiplication)
-  );
 
   // MATRIX COSH
   ntm_matrix_cosh_function #(
@@ -1995,36 +992,7 @@ module ntm_function_testbench;
     .DATA_OUT(data_out_matrix_logistic)
   );
 
-  // MATRIX SOFTMAX
-  ntm_matrix_softmax_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_softmax_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_matrix_softmax),
-    .READY(ready_matrix_softmax),
-
-    .DATA_IN_MATRIX_ENABLE(data_in_matrix_enable_matrix_softmax),
-    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_matrix_softmax),
-    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_matrix_softmax),
-    .DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_softmax),
-    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_softmax),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_softmax),
-
-    // DATA
-    .SIZE_I_IN(size_i_in_matrix_softmax),
-    .SIZE_J_IN(size_j_in_matrix_softmax),
-    .LENGTH_IN(length_in_matrix_softmax),
-    .DATA_IN(data_in_matrix_softmax),
-    .DATA_OUT(data_out_matrix_softmax)
-  );
-
-  // MATRIX ONE_CONTROLPLUS
+  // MATRIX ONEPLUS
   ntm_matrix_oneplus_function #(
     .DATA_SIZE(DATA_SIZE),
     .CONTROL_SIZE(CONTROL_SIZE)
@@ -2048,35 +1016,6 @@ module ntm_function_testbench;
     .SIZE_J_IN(size_j_in_matrix_oneplus),
     .DATA_IN(data_in_matrix_oneplus),
     .DATA_OUT(data_out_matrix_oneplus)
-  );
-
-  // MATRIX SUMMATION
-  ntm_matrix_summation_function #(
-    .DATA_SIZE(DATA_SIZE),
-    .CONTROL_SIZE(CONTROL_SIZE)
-  )
-  matrix_summation_function(
-    // GLOBAL
-    .CLK(CLK),
-    .RST(RST),
-
-    // CONTROL
-    .START(start_matrix_summation),
-    .READY(ready_matrix_summation),
-
-    .DATA_IN_MATRIX_ENABLE(data_in_matrix_enable_matrix_summation),
-    .DATA_IN_VECTOR_ENABLE(data_in_vector_enable_matrix_summation),
-    .DATA_IN_SCALAR_ENABLE(data_in_scalar_enable_matrix_summation),
-    .DATA_OUT_MATRIX_ENABLE(data_out_matrix_enable_matrix_summation),
-    .DATA_OUT_VECTOR_ENABLE(data_out_vector_enable_matrix_summation),
-    .DATA_OUT_SCALAR_ENABLE(data_out_scalar_enable_matrix_summation),
-
-    // DATA
-    .SIZE_I_IN(size_i_in_matrix_summation),
-    .SIZE_J_IN(size_j_in_matrix_summation),
-    .LENGTH_IN(length_in_matrix_summation),
-    .DATA_IN(data_in_matrix_summation),
-    .DATA_OUT(data_out_matrix_summation)
   );
 
 endmodule

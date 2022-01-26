@@ -15,6 +15,7 @@ add wave -noupdate /ntm_algebra_testbench/ntm_vector_transpose_test/vector_trans
 add wave -noupdate /ntm_algebra_testbench/ntm_vector_transpose_test/vector_transpose/LENGTH_IN
 add wave -noupdate /ntm_algebra_testbench/ntm_vector_transpose_test/vector_transpose/DATA_IN_ENABLE
 add wave -noupdate /ntm_algebra_testbench/ntm_vector_transpose_test/vector_transpose/DATA_IN
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_transpose_test/vector_transpose/DATA_ENABLE
 add wave -noupdate /ntm_algebra_testbench/ntm_vector_transpose_test/vector_transpose/READY
 add wave -noupdate /ntm_algebra_testbench/ntm_vector_transpose_test/vector_transpose/DATA_OUT_ENABLE
 add wave -noupdate /ntm_algebra_testbench/ntm_vector_transpose_test/vector_transpose/DATA_OUT

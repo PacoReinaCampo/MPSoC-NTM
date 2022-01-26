@@ -16,6 +16,10 @@ vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_a
 vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_multiplier.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_divider.vhd
 
+vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_float_adder.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_float_multiplier.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_float_divider.vhd
+
 vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/vector/ntm_vector_adder.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/vector/ntm_vector_multiplier.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/vector/ntm_vector_divider.vhd

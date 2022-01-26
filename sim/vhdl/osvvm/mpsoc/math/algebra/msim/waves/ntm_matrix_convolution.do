@@ -33,7 +33,8 @@ add wave -noupdate /ntm_algebra_testbench/ntm_matrix_convolution_test/matrix_con
 
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_convolution_test/matrix_convolution/index_i_loop
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_convolution_test/matrix_convolution/index_j_loop
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_convolution_test/matrix_convolution/index_k_loop
+add wave -noupdate /ntm_algebra_testbench/ntm_matrix_convolution_test/matrix_convolution/index_m_loop
+add wave -noupdate /ntm_algebra_testbench/ntm_matrix_convolution_test/matrix_convolution/index_n_loop
 
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_convolution_test/matrix_convolution/data_a_in_i_convolution_int
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_convolution_test/matrix_convolution/data_a_in_j_convolution_int
