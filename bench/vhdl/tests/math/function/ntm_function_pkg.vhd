@@ -114,8 +114,8 @@ package ntm_function_pkg is
   constant VECTOR_SAMPLE_A : vector_buffer := (P_FOUR, P_SEVEN, N_THREE);
   constant VECTOR_SAMPLE_B : vector_buffer := (P_THREE, N_NINE, N_ONE);
 
-  constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := P_NINE;
-  constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := N_FOUR;
+  constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := P_TWO;
+  constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := N_NINE;
 
   -- SCALAR-FUNCTIONALITY
   signal STIMULUS_NTM_SCALAR_COSH_TEST          : boolean := false;

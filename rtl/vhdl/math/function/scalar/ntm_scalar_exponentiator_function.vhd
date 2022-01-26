@@ -223,6 +223,8 @@ begin
 
               data_int_scalar_multiplier <= data_out_scalar_multiplier;
 
+              index_first_multiplier_loop <= ZERO_DATA;
+
               -- FSM Control
               controller_ctrl_fsm_int <= SCALAR_SECOND_MULTIPLIER_STATE;
             else
@@ -249,6 +251,8 @@ begin
               -- Data Internal
               data_a_in_scalar_divider <= data_int_scalar_multiplier;
               data_b_in_scalar_divider <= data_out_scalar_multiplier;
+
+              index_second_multiplier_loop <= ZERO_DATA;
 
               -- FSM Control
               controller_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;

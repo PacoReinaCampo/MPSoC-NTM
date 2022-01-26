@@ -8,4 +8,4 @@ simulate:
 	vsim -c -do run.do work.dnc_memory_testbench
 
 clean:
-	rm -rf work transcript
+	rm -rf work transcript *.vstf *.wlf

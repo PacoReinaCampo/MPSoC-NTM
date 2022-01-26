@@ -8,4 +8,4 @@ simulate:
 	vsim -c -do run.do work.ntm_float_testbench
 
 clean:
-	rm -rf work transcript
+	rm -rf work transcript *.vstf *.wlf
