@@ -89,10 +89,10 @@ architecture ntm_scalar_integer_adder_architecture of ntm_scalar_integer_adder i
   constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
   constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -107,7 +107,7 @@ architecture ntm_scalar_integer_adder_architecture of ntm_scalar_integer_adder i
   signal adder_ctrl_fsm_int : adder_ctrl_fsm;
 
   -- Internal Signals
-  signal adder_int : std_logic_vector(DATA_SIZE downto 0);
+  signal adder_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -129,7 +129,7 @@ begin
       READY <= '0';
 
       -- Assignations
-      adder_int <= (others => '0');
+      adder_int <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -141,9 +141,9 @@ begin
           if (START = '1') then
             -- Assignations
             if (OPERATION = '1') then
-              adder_int <= std_logic_vector(('0' & signed(DATA_A_IN)) - ('0' & signed(DATA_B_IN)));
+              adder_int <= std_logic_vector(signed(DATA_A_IN) - signed(DATA_B_IN));
             else
-              adder_int <= std_logic_vector(('0' & signed(DATA_A_IN)) + ('0' & signed(DATA_B_IN)));
+              adder_int <= std_logic_vector(signed(DATA_A_IN) + signed(DATA_B_IN));
             end if;
 
             -- FSM Control
@@ -153,8 +153,8 @@ begin
         when ENDER_STATE =>             -- STEP 1
 
           -- Data Outputs
-          DATA_OUT     <= adder_int(DATA_SIZE-1 downto 0);
-          OVERFLOW_OUT <= adder_int(DATA_SIZE);
+          DATA_OUT     <= adder_int;
+          OVERFLOW_OUT <= '0';
 
           -- Control Outputs
           READY <= '1';

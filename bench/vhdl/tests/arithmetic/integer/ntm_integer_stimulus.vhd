@@ -458,8 +458,8 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ADDER_CASE 0        ";
         -------------------------------------------------------------------
 
-        SCALAR_INTEGER_ADDER_DATA_A_IN <= TWO_DATA;
-        SCALAR_INTEGER_ADDER_DATA_B_IN <= ONE_DATA;
+        SCALAR_INTEGER_ADDER_DATA_A_IN <= SCALAR_SAMPLE_A;
+        SCALAR_INTEGER_ADDER_DATA_B_IN <= SCALAR_SAMPLE_B;
       end if;
 
       if (STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_1) then
@@ -468,8 +468,8 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ADDER_CASE 1        ";
         -------------------------------------------------------------------
 
-        SCALAR_INTEGER_ADDER_DATA_A_IN <= TWO_DATA;
-        SCALAR_INTEGER_ADDER_DATA_B_IN <= TWO_DATA;
+        SCALAR_INTEGER_ADDER_DATA_A_IN <= SCALAR_SAMPLE_B;
+        SCALAR_INTEGER_ADDER_DATA_B_IN <= SCALAR_SAMPLE_A;
       end if;
 
       wait for WORKING;
@@ -488,8 +488,8 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULTIPLIER_CASE 0   ";
         -------------------------------------------------------------------
 
-        SCALAR_INTEGER_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-        SCALAR_INTEGER_MULTIPLIER_DATA_B_IN <= ONE_DATA;
+        SCALAR_INTEGER_MULTIPLIER_DATA_A_IN <= SCALAR_SAMPLE_A;
+        SCALAR_INTEGER_MULTIPLIER_DATA_B_IN <= SCALAR_SAMPLE_B;
       end if;
 
       if (STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_1) then
@@ -498,8 +498,8 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULTIPLIER_CASE 1   ";
         -------------------------------------------------------------------
 
-        SCALAR_INTEGER_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-        SCALAR_INTEGER_MULTIPLIER_DATA_B_IN <= TWO_DATA;
+        SCALAR_INTEGER_MULTIPLIER_DATA_A_IN <= SCALAR_SAMPLE_B;
+        SCALAR_INTEGER_MULTIPLIER_DATA_B_IN <= SCALAR_SAMPLE_A;
       end if;
 
       wait for WORKING;
@@ -518,8 +518,8 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIVIDER_CASE 0      ";
         -------------------------------------------------------------------
 
-        SCALAR_INTEGER_DIVIDER_DATA_A_IN <= TWO_DATA;
-        SCALAR_INTEGER_DIVIDER_DATA_B_IN <= ONE_DATA;
+        SCALAR_INTEGER_DIVIDER_DATA_A_IN <= SCALAR_SAMPLE_A;
+        SCALAR_INTEGER_DIVIDER_DATA_B_IN <= SCALAR_SAMPLE_B;
       end if;
 
       if (STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_1) then
@@ -528,8 +528,8 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIVIDER_CASE 1      ";
         -------------------------------------------------------------------
 
-        SCALAR_INTEGER_DIVIDER_DATA_A_IN <= TWO_DATA;
-        SCALAR_INTEGER_DIVIDER_DATA_B_IN <= TWO_DATA;
+        SCALAR_INTEGER_DIVIDER_DATA_A_IN <= SCALAR_SAMPLE_B;
+        SCALAR_INTEGER_DIVIDER_DATA_B_IN <= SCALAR_SAMPLE_A;
       end if;
 
       wait for WORKING;

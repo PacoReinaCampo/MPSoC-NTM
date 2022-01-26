@@ -261,9 +261,6 @@ begin
 
           if (ready_scalar_adder = '1') then
             if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              -- Data Outputs
-              DATA_OUT <= data_out_scalar_adder;
-
               -- Control Outputs
               READY <= '1';
 
@@ -279,6 +276,9 @@ begin
               -- FSM Control
               product_ctrl_fsm_int <= INPUT_STATE;
             end if;
+
+            -- Data Outputs
+            DATA_OUT <= data_out_scalar_adder;
 
             -- Control Outputs
             DATA_OUT_ENABLE <= '1';
