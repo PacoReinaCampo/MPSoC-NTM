@@ -184,7 +184,7 @@ begin
               index_loop <= std_logic_vector(signed(index_loop) - signed(DATA_B_IN));
             end if;
           elsif (DATA_A_IN(DATA_SIZE-1) = '1' and DATA_B_IN(DATA_SIZE-1) = '0') then
-            if (signed(divider_int) < signed(index_loop)) then
+            if (signed(index_loop)+signed(DATA_B_IN) > signed(ZERO_DATA)) then
               -- Data Outputs
               DATA_OUT <= divider_int;
               REST_OUT <= index_loop;
@@ -220,7 +220,7 @@ begin
               index_loop <= std_logic_vector(signed(index_loop) + signed(DATA_B_IN));
             end if;
           elsif (DATA_A_IN(DATA_SIZE-1) = '1' and DATA_B_IN(DATA_SIZE-1) = '1') then
-            if (signed(divider_int) < signed(index_loop)) then
+            if (signed(DATA_B_IN) < signed(index_loop)) then
               -- Data Outputs
               DATA_OUT <= divider_int;
               REST_OUT <= index_loop;
