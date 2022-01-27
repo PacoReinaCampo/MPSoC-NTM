@@ -395,20 +395,22 @@ begin
       -- CONTROL
       SCALAR_ADDER_OPERATION <= '0';
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ADDER_CASE 0        ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_SCALAR_ADDER_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ADDER_CASE 0        ";
+        -------------------------------------------------------------------
+
         SCALAR_ADDER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
         SCALAR_ADDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ADDER_CASE 1        ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_SCALAR_ADDER_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ADDER_CASE 1        ";
+        -------------------------------------------------------------------
+
         SCALAR_ADDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
         SCALAR_ADDER_DATA_B_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
       end if;
@@ -423,20 +425,22 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_SCALAR_FLOAT_ADDER_TEST    ";
       -------------------------------------------------------------------
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE 0  ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE 0  ";
+        -------------------------------------------------------------------
+
         SCALAR_FLOAT_ADDER_DATA_A_IN <= FLOAT_SAMPLE_A;
         SCALAR_FLOAT_ADDER_DATA_B_IN <= FLOAT_SAMPLE_B;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE 1  ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE 1  ";
+        -------------------------------------------------------------------
+
         SCALAR_FLOAT_ADDER_DATA_A_IN <= FLOAT_SAMPLE_B;
         SCALAR_FLOAT_ADDER_DATA_B_IN <= FLOAT_SAMPLE_A;
       end if;
@@ -451,20 +455,22 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_SCALAR_MULTIPLIER_TEST     ";
       -------------------------------------------------------------------
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULTIPLIER_CASE 0   ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULTIPLIER_CASE 0   ";
+        -------------------------------------------------------------------
+
         SCALAR_MULTIPLIER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
         SCALAR_MULTIPLIER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULTIPLIER_CASE 1   ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULTIPLIER_CASE 1   ";
+        -------------------------------------------------------------------
+
         SCALAR_MULTIPLIER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
         SCALAR_MULTIPLIER_DATA_B_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
       end if;
@@ -479,20 +485,22 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIE_TEST";
       -------------------------------------------------------------------
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FLOAT_MULTIPL_CASE 0";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FLOAT_MULTIPL_CASE 0";
+        -------------------------------------------------------------------
+
         SCALAR_FLOAT_MULTIPLIER_DATA_A_IN <= FLOAT_SAMPLE_A;
         SCALAR_FLOAT_MULTIPLIER_DATA_B_IN <= FLOAT_SAMPLE_B;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FLOAT_MULTIPL_CASE 1";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FLOAT_MULTIPL_CASE 1";
+        -------------------------------------------------------------------
+
         SCALAR_FLOAT_MULTIPLIER_DATA_A_IN <= FLOAT_SAMPLE_B;
         SCALAR_FLOAT_MULTIPLIER_DATA_B_IN <= FLOAT_SAMPLE_A;
       end if;
@@ -507,20 +515,22 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_SCALAR_DIVIDER_TEST        ";
       -------------------------------------------------------------------
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIVIDER_CASE 0      ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_SCALAR_DIVIDER_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIVIDER_CASE 0      ";
+        -------------------------------------------------------------------
+
         SCALAR_DIVIDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
         SCALAR_DIVIDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIVIDER_CASE 1      ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_SCALAR_DIVIDER_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_DIVIDER_CASE 1      ";
+        -------------------------------------------------------------------
+
         SCALAR_DIVIDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
         SCALAR_DIVIDER_DATA_B_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
       end if;
@@ -535,20 +545,22 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_TEST  ";
       -------------------------------------------------------------------
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE 0";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE 0";
+        -------------------------------------------------------------------
+
         SCALAR_FLOAT_DIVIDER_DATA_A_IN <= FLOAT_SAMPLE_A;
         SCALAR_FLOAT_DIVIDER_DATA_B_IN <= FLOAT_SAMPLE_B;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE 1";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE 1";
+        -------------------------------------------------------------------
+
         SCALAR_FLOAT_DIVIDER_DATA_A_IN <= FLOAT_SAMPLE_B;
         SCALAR_FLOAT_DIVIDER_DATA_B_IN <= FLOAT_SAMPLE_A;
       end if;
@@ -573,11 +585,12 @@ begin
       -- DATA
       VECTOR_ADDER_SIZE_IN <= THREE_CONTROL;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_VECTOR_ADDER_CASE 0        ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_VECTOR_ADDER_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_ADDER_CASE 0        ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         VECTOR_ADDER_DATA_A_IN_ENABLE <= '1';
@@ -616,11 +629,12 @@ begin
         end loop;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_VECTOR_ADDER_CASE 1        ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_VECTOR_ADDER_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_ADDER_CASE 1        ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         VECTOR_ADDER_DATA_A_IN_ENABLE <= '1';
@@ -672,11 +686,12 @@ begin
       -- DATA
       VECTOR_MULTIPLIER_SIZE_IN <= THREE_CONTROL;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_VECTOR_MULTIPLIER_CASE 0   ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_MULTIPLIER_CASE 0   ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         VECTOR_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
@@ -715,11 +730,12 @@ begin
         end loop;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_VECTOR_MULTIPLIER_CASE 1   ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_VECTOR_MULTIPLIER_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_MULTIPLIER_CASE 1   ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         VECTOR_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
@@ -771,11 +787,12 @@ begin
       -- DATA
       VECTOR_DIVIDER_SIZE_IN <= THREE_CONTROL;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_VECTOR_DIVIDER_CASE 0      ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_VECTOR_DIVIDER_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_DIVIDER_CASE 0      ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         VECTOR_DIVIDER_DATA_A_IN_ENABLE <= '1';
@@ -814,11 +831,12 @@ begin
         end loop;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_VECTOR_DIVIDER_CASE 1      ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_VECTOR_DIVIDER_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_DIVIDER_CASE 1      ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         VECTOR_DIVIDER_DATA_A_IN_ENABLE <= '1';
@@ -878,11 +896,12 @@ begin
       MATRIX_ADDER_SIZE_I_IN <= THREE_CONTROL;
       MATRIX_ADDER_SIZE_J_IN <= THREE_CONTROL;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_ADDER_CASE 0        ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_MATRIX_ADDER_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_ADDER_CASE 0        ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         MATRIX_ADDER_DATA_A_IN_I_ENABLE <= '0';
@@ -938,11 +957,12 @@ begin
         end loop;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_ADDER_CASE 1        ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_MATRIX_ADDER_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_ADDER_CASE 1        ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         MATRIX_ADDER_DATA_A_IN_I_ENABLE <= '0';
@@ -1012,11 +1032,12 @@ begin
       MATRIX_MULTIPLIER_SIZE_I_IN <= THREE_CONTROL;
       MATRIX_MULTIPLIER_SIZE_J_IN <= THREE_CONTROL;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_MULTIPLIER_CASE 0   ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_MULTIPLIER_CASE 0   ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         MATRIX_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
@@ -1072,11 +1093,12 @@ begin
         end loop;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_MULTIPLIER_CASE 1   ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_MATRIX_MULTIPLIER_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_MULTIPLIER_CASE 1   ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         MATRIX_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
@@ -1146,11 +1168,12 @@ begin
       MATRIX_DIVIDER_SIZE_I_IN <= THREE_CONTROL;
       MATRIX_DIVIDER_SIZE_J_IN <= THREE_CONTROL;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_DIVIDER_CASE 0      ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_MATRIX_DIVIDER_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_DIVIDER_CASE 0      ";
+        -------------------------------------------------------------------
+
         -- INITIAL CONDITIONS
         -- CONTROL
         MATRIX_DIVIDER_DATA_A_IN_I_ENABLE <= '0';
@@ -1206,11 +1229,13 @@ begin
         end loop;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MATRIX_DIVIDER_CASE 1      ";
-      -------------------------------------------------------------------
-
       if (STIMULUS_NTM_MATRIX_DIVIDER_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_DIVIDER_CASE 1      ";
+        -------------------------------------------------------------------
+
+
         -- INITIAL CONDITIONS
         -- CONTROL
         MATRIX_DIVIDER_DATA_A_IN_I_ENABLE <= '0';

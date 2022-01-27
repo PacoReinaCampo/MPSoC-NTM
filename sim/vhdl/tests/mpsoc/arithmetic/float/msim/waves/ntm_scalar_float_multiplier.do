@@ -37,7 +37,7 @@ add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_
 add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_b_in_int
 
 add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_mantissa_int
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_a_mantissa_int
+add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_b_mantissa_int
 
 add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_exponent_int
 
