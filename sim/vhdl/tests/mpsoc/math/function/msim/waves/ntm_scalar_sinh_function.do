@@ -18,6 +18,9 @@ add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_
 
 add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/controller_ctrl_fsm_int
 
+add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/index_adder_loop
+add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/index_multiplier_loop
+
 add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/start_scalar_adder
 add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/operation_scalar_adder
 add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/data_a_in_scalar_adder
@@ -25,16 +28,17 @@ add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_
 add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/ready_scalar_adder
 add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/data_out_scalar_adder
 
+add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/start_scalar_multiplier
+add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/data_a_in_scalar_multiplier
+add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/data_b_in_scalar_multiplier
+add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/ready_scalar_multiplier
+add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/data_out_scalar_multiplier
+
 add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/start_scalar_divider
 add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/data_a_in_scalar_divider
 add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/data_b_in_scalar_divider
 add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/ready_scalar_divider
 add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/data_out_scalar_divider
-
-add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/start_scalar_exponentiator_function
-add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/data_in_scalar_exponentiator_function
-add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/ready_scalar_exponentiator_function
-add wave -noupdate /ntm_function_testbench/ntm_scalar_sinh_function_test/scalar_sinh_function/data_out_scalar_exponentiator_function
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}
