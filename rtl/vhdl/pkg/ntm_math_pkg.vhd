@@ -256,7 +256,7 @@ package ntm_math_pkg is
       );
   end component;
 
-  component ntm_matrix_cosine_similarity is
+  component ntm_matrix_inverse is
     generic (
       DATA_SIZE    : integer := 128;
       CONTROL_SIZE : integer := 64
@@ -464,7 +464,7 @@ package ntm_math_pkg is
       );
   end component;
 
-  component ntm_tensor_cosine_similarity is
+  component ntm_tensor_inverse is
     generic (
       DATA_SIZE    : integer := 128;
       CONTROL_SIZE : integer := 64

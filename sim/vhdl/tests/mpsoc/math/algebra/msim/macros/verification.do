@@ -214,32 +214,32 @@ alias ntm_matrix_convolution_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_MATRIX_COSINE_SIMILARITY_TEST 
+# NTM_MATRIX_INVERSE_TEST 
 ##################################################################################################
 
-alias ntm_matrix_cosine_similarity_verification_compilation {
-  echo "TEST: NTM_MATRIX_COSINE_SIMILARITY_TEST"
+alias ntm_matrix_inverse_verification_compilation {
+  echo "TEST: NTM_MATRIX_INVERSE_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/ntm_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/ntm_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/ntm_algebra_testbench.vhd
 
-  vsim -g /ntm_algebra_testbench/ENABLE_NTM_MATRIX_COSINE_SIMILARITY_TEST=true -t ps +notimingchecks -L unisim work.ntm_algebra_testbench
+  vsim -g /ntm_algebra_testbench/ENABLE_NTM_MATRIX_INVERSE_TEST=true -t ps +notimingchecks -L unisim work.ntm_algebra_testbench
 
   #MACROS
   add log -r sim:/ntm_algebra_testbench/*
 
   #WAVES
-  view -title ntm_matrix_cosine_similarity wave
-  do $simulation_path/mpsoc/math/algebra/msim/waves/ntm_matrix_cosine_similarity.do
+  view -title ntm_matrix_inverse wave
+  do $simulation_path/mpsoc/math/algebra/msim/waves/ntm_matrix_inverse.do
 
-  force -freeze sim:/ntm_algebra_pkg/STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_TEST true 0
-  force -freeze sim:/ntm_algebra_pkg/STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_0 true 0
+  force -freeze sim:/ntm_algebra_pkg/STIMULUS_NTM_MATRIX_INVERSE_TEST true 0
+  force -freeze sim:/ntm_algebra_pkg/STIMULUS_NTM_MATRIX_INVERSE_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim ntm_matrix_cosine_similarity_test.wlf
+  dataset save sim ntm_matrix_inverse_test.wlf
 }
 
 ##################################################################################################
@@ -388,32 +388,32 @@ alias ntm_tensor_convolution_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_TENSOR_COSINE_SIMILARITY_TEST 
+# NTM_TENSOR_INVERSE_TEST 
 ##################################################################################################
 
-alias ntm_tensor_cosine_similarity_verification_compilation {
-  echo "TEST: NTM_TENSOR_COSINE_SIMILARITY_TEST"
+alias ntm_tensor_inverse_verification_compilation {
+  echo "TEST: NTM_TENSOR_INVERSE_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/ntm_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/ntm_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/ntm_algebra_testbench.vhd
 
-  vsim -g /ntm_algebra_testbench/ENABLE_NTM_TENSOR_COSINE_SIMILARITY_TEST=true -t ps +notimingchecks -L unisim work.ntm_algebra_testbench
+  vsim -g /ntm_algebra_testbench/ENABLE_NTM_TENSOR_INVERSE_TEST=true -t ps +notimingchecks -L unisim work.ntm_algebra_testbench
 
   #MACROS
   add log -r sim:/ntm_algebra_testbench/*
 
   #WAVES
-  view -title ntm_tensor_cosine_similarity wave
-  do $simulation_path/mpsoc/math/algebra/msim/waves/ntm_tensor_cosine_similarity.do
+  view -title ntm_tensor_inverse wave
+  do $simulation_path/mpsoc/math/algebra/msim/waves/ntm_tensor_inverse.do
 
-  force -freeze sim:/ntm_algebra_pkg/STIMULUS_NTM_TENSOR_COSINE_SIMILARITY_TEST true 0
-  force -freeze sim:/ntm_algebra_pkg/STIMULUS_NTM_TENSOR_COSINE_SIMILARITY_CASE_0 true 0
+  force -freeze sim:/ntm_algebra_pkg/STIMULUS_NTM_TENSOR_INVERSE_TEST true 0
+  force -freeze sim:/ntm_algebra_pkg/STIMULUS_NTM_TENSOR_INVERSE_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim ntm_tensor_cosine_similarity_test.wlf
+  dataset save sim ntm_tensor_inverse_test.wlf
 }
 
 ##################################################################################################
@@ -563,7 +563,7 @@ alias v07 {
 }
 
 alias v08 {
-  ntm_matrix_cosine_similarity_verification_compilation
+  ntm_matrix_inverse_verification_compilation
 }
 
 alias v09 {
@@ -587,7 +587,7 @@ alias v13 {
 }
 
 alias v14 {
-  ntm_tensor_cosine_similarity_verification_compilation
+  ntm_tensor_inverse_verification_compilation
 }
 
 alias v15 {
@@ -614,13 +614,13 @@ echo "v04 . NTM-VECTOR-MULTIPLICATION-TEST"
 echo "v05 . NTM-VECTOR-SUMMATION-TEST"
 echo "v06 . NTM-VECTOR-TRANSPOSE-TEST"
 echo "v07 . NTM-MATRIX-CONVOLUTION-TEST"
-echo "v08 . NTM-MATRIX-COSINE-SIMILARITY-TEST"
+echo "v08 . NTM-MATRIX-INVERSE-TEST"
 echo "v09 . NTM-MATRIX-MULTIPLICATION-TEST"
 echo "v10 . NTM-MATRIX-PRODUCT-TEST"
 echo "v11 . NTM-MATRIX-SUMMATION-TEST"
 echo "v12 . NTM-MATRIX-TRANSPOSE-TEST"
 echo "v13 . NTM-TENSOR-CONVOLUTION-TEST"
-echo "v14 . NTM-TENSOR-COSINE-SIMILARITY-TEST"
+echo "v14 . NTM-TENSOR-INVERSE-TEST"
 echo "v15 . NTM-TENSOR-MULTIPLICATION-TEST"
 echo "v16 . NTM-TENSOR-PRODUCT-TEST"
 echo "v17 . NTM-TENSOR-SUMMATION-TEST"

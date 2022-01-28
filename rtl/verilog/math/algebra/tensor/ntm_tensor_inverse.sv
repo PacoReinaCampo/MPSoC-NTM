@@ -37,7 +37,7 @@
 // Author(s):
 //   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
-module ntm_tensor_cosine_similarity #(
+module ntm_tensor_inverse #(
   parameter DATA_SIZE=128,
   parameter CONTROL_SIZE=64
 )

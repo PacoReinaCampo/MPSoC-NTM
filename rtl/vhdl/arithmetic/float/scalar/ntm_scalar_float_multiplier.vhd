@@ -264,7 +264,7 @@ begin
         when NORMALIZATION_STATE =>
 
           -- Data Internal
-          if (data_mantissa_int(MANTISSA_SIZE+1) = '1') then
+          if (data_mantissa_int(2*MANTISSA_SIZE+1) = '1') then
             data_product_int(0) <= '1';
           else
             data_mantissa_int   <= std_logic_vector(unsigned(data_mantissa_int) + (unsigned(ZERO_MANTISSA_REGISTER) & unsigned(data_b_mantissa_int)));

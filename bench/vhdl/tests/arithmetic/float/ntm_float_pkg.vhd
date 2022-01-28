@@ -104,7 +104,7 @@ package ntm_float_pkg is
   constant N_EIGHT : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-8, DATA_SIZE));
   constant N_NINE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-9, DATA_SIZE));
 
-  -- Buffer
+  -- Integer Buffer
   constant TENSOR_SAMPLE_A : tensor_buffer := (((P_TWO, P_ONE, P_FOUR), (P_NINE, P_FOUR, P_TWO), (P_ONE, P_ONE, P_TWO)), ((P_EIGHT, P_SIX, P_TWO), (P_EIGHT, P_FIVE, P_TWO), (P_ONE, P_FOUR, P_ONE)), ((P_THREE, P_ONE, P_SIX), (P_FIVE, P_ZERO, P_FOUR), (P_FIVE, P_EIGHT, P_FIVE)));
   constant TENSOR_SAMPLE_B : tensor_buffer := (((P_ONE, P_THREE, P_ONE), (P_TWO, P_FOUR, P_EIGHT), (P_FOUR, P_ONE, P_TWO)), ((P_NINE, P_ONE, P_FIVE), (P_NINE, P_EIGHT, P_ONE), (P_FIVE, P_EIGHT, P_FOUR)), ((P_FIVE, P_FOUR, P_ONE), (P_THREE, P_FOUR, P_SIX), (P_ONE, P_EIGHT, P_EIGHT)));
 
@@ -114,16 +114,22 @@ package ntm_float_pkg is
   constant VECTOR_SAMPLE_A : vector_buffer := (P_FOUR, P_SEVEN, N_THREE);
   constant VECTOR_SAMPLE_B : vector_buffer := (P_THREE, N_NINE, N_ONE);
 
-  constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := P_NINE;
-  constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := N_FOUR;
-
-  constant FLOAT_SAMPLE_A : std_logic_vector(31 downto 0) := X"480C8021";
-  constant FLOAT_SAMPLE_B : std_logic_vector(31 downto 0) := X"C3302020";
+  -- constant FLOAT_SAMPLE_A : std_logic_vector(31 downto 0) := X"480C8021";
+  -- constant FLOAT_SAMPLE_B : std_logic_vector(31 downto 0) := X"C3302020";
 
   -- ADDITION       = X"480C5419"
   -- SUSTRACTION    = X"480CAC29"
   -- MULTIPLICATION = X"CBC15371"
   -- DIVISION       = X"C44C3801"
+
+  -- Float Buffer
+  constant FLOAT_SAMPLE_A : std_logic_vector(31 downto 0) := X"40400000";
+  constant FLOAT_SAMPLE_B : std_logic_vector(31 downto 0) := X"40000000";
+
+  -- ADDITION       = X"40A00000"
+  -- SUSTRACTION    = X"3F800000"
+  -- MULTIPLICATION = X"40C00000"
+  -- DIVISION       = X"3FC00000"
 
   -- SCALAR-FUNCTIONALITY
   signal STIMULUS_NTM_SCALAR_ADDER_TEST      : boolean := false;

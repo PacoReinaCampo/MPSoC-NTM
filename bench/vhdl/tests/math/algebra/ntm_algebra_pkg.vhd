@@ -141,21 +141,21 @@ package ntm_algebra_pkg is
 
   -- MATRIX-FUNCTIONALITY
   signal STIMULUS_NTM_MATRIX_CONVOLUTION_TEST       : boolean := false;
-  signal STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_TEST : boolean := false;
+  signal STIMULUS_NTM_MATRIX_INVERSE_TEST : boolean := false;
   signal STIMULUS_NTM_MATRIX_MULTIPLICATION_TEST    : boolean := false;
   signal STIMULUS_NTM_MATRIX_PRODUCT_TEST           : boolean := false;
   signal STIMULUS_NTM_MATRIX_SUMMATION_TEST         : boolean := false;
   signal STIMULUS_NTM_MATRIX_TRANSPOSE_TEST         : boolean := false;
 
   signal STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_0       : boolean := false;
-  signal STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_MATRIX_INVERSE_CASE_0 : boolean := false;
   signal STIMULUS_NTM_MATRIX_MULTIPLICATION_CASE_0    : boolean := false;
   signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_0           : boolean := false;
   signal STIMULUS_NTM_MATRIX_SUMMATION_CASE_0         : boolean := false;
   signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0         : boolean := false;
 
   signal STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_1       : boolean := false;
-  signal STIMULUS_NTM_MATRIX_COSINE_SIMILARITY_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_MATRIX_INVERSE_CASE_1 : boolean := false;
   signal STIMULUS_NTM_MATRIX_MULTIPLICATION_CASE_1    : boolean := false;
   signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_1           : boolean := false;
   signal STIMULUS_NTM_MATRIX_SUMMATION_CASE_1         : boolean := false;
@@ -163,21 +163,21 @@ package ntm_algebra_pkg is
 
   -- TENSOR-FUNCTIONALITY
   signal STIMULUS_NTM_TENSOR_CONVOLUTION_TEST       : boolean := false;
-  signal STIMULUS_NTM_TENSOR_COSINE_SIMILARITY_TEST : boolean := false;
+  signal STIMULUS_NTM_TENSOR_INVERSE_TEST : boolean := false;
   signal STIMULUS_NTM_TENSOR_MULTIPLICATION_TEST    : boolean := false;
   signal STIMULUS_NTM_TENSOR_PRODUCT_TEST           : boolean := false;
   signal STIMULUS_NTM_TENSOR_SUMMATION_TEST         : boolean := false;
   signal STIMULUS_NTM_TENSOR_TRANSPOSE_TEST         : boolean := false;
 
   signal STIMULUS_NTM_TENSOR_CONVOLUTION_CASE_0       : boolean := false;
-  signal STIMULUS_NTM_TENSOR_COSINE_SIMILARITY_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_TENSOR_INVERSE_CASE_0 : boolean := false;
   signal STIMULUS_NTM_TENSOR_MULTIPLICATION_CASE_0    : boolean := false;
   signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_0           : boolean := false;
   signal STIMULUS_NTM_TENSOR_SUMMATION_CASE_0         : boolean := false;
   signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_0         : boolean := false;
 
   signal STIMULUS_NTM_TENSOR_CONVOLUTION_CASE_1       : boolean := false;
-  signal STIMULUS_NTM_TENSOR_COSINE_SIMILARITY_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_TENSOR_INVERSE_CASE_1 : boolean := false;
   signal STIMULUS_NTM_TENSOR_MULTIPLICATION_CASE_1    : boolean := false;
   signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_1           : boolean := false;
   signal STIMULUS_NTM_TENSOR_SUMMATION_CASE_1         : boolean := false;
@@ -324,30 +324,30 @@ package ntm_algebra_pkg is
       MATRIX_CONVOLUTION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_CONVOLUTION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- MATRIX COSINE_SIMILARITY
+      -- MATRIX INVERSE
       -- CONTROL
-      MATRIX_COSINE_SIMILARITY_START : out std_logic;
-      MATRIX_COSINE_SIMILARITY_READY : in  std_logic;
+      MATRIX_INVERSE_START : out std_logic;
+      MATRIX_INVERSE_READY : in  std_logic;
 
-      MATRIX_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE : out std_logic;
-      MATRIX_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE : out std_logic;
-      MATRIX_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE : out std_logic;
-      MATRIX_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE : out std_logic;
+      MATRIX_INVERSE_DATA_A_IN_I_ENABLE : out std_logic;
+      MATRIX_INVERSE_DATA_A_IN_J_ENABLE : out std_logic;
+      MATRIX_INVERSE_DATA_B_IN_I_ENABLE : out std_logic;
+      MATRIX_INVERSE_DATA_B_IN_J_ENABLE : out std_logic;
 
-      MATRIX_COSINE_SIMILARITY_DATA_I_ENABLE : in std_logic;
-      MATRIX_COSINE_SIMILARITY_DATA_J_ENABLE : in std_logic;
+      MATRIX_INVERSE_DATA_I_ENABLE : in std_logic;
+      MATRIX_INVERSE_DATA_J_ENABLE : in std_logic;
 
-      MATRIX_COSINE_SIMILARITY_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_COSINE_SIMILARITY_DATA_OUT_J_ENABLE : in std_logic;
+      MATRIX_INVERSE_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_INVERSE_DATA_OUT_J_ENABLE : in std_logic;
 
       -- DATA
-      MATRIX_COSINE_SIMILARITY_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_COSINE_SIMILARITY_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_COSINE_SIMILARITY_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_COSINE_SIMILARITY_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_COSINE_SIMILARITY_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_COSINE_SIMILARITY_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_COSINE_SIMILARITY_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_INVERSE_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_INVERSE_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_INVERSE_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_INVERSE_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_INVERSE_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_INVERSE_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_INVERSE_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- MATRIX MULTIPLICATION
       -- CONTROL
@@ -465,36 +465,36 @@ package ntm_algebra_pkg is
       TENSOR_CONVOLUTION_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_CONVOLUTION_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- TENSOR COSINE_SIMILARITY
+      -- TENSOR INVERSE
       -- CONTROL
-      TENSOR_COSINE_SIMILARITY_START : out std_logic;
-      TENSOR_COSINE_SIMILARITY_READY : in  std_logic;
+      TENSOR_INVERSE_START : out std_logic;
+      TENSOR_INVERSE_READY : in  std_logic;
 
-      TENSOR_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE : out std_logic;
-      TENSOR_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE : out std_logic;
-      TENSOR_COSINE_SIMILARITY_DATA_A_IN_K_ENABLE : out std_logic;
-      TENSOR_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE : out std_logic;
-      TENSOR_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE : out std_logic;
-      TENSOR_COSINE_SIMILARITY_DATA_B_IN_K_ENABLE : out std_logic;
+      TENSOR_INVERSE_DATA_A_IN_I_ENABLE : out std_logic;
+      TENSOR_INVERSE_DATA_A_IN_J_ENABLE : out std_logic;
+      TENSOR_INVERSE_DATA_A_IN_K_ENABLE : out std_logic;
+      TENSOR_INVERSE_DATA_B_IN_I_ENABLE : out std_logic;
+      TENSOR_INVERSE_DATA_B_IN_J_ENABLE : out std_logic;
+      TENSOR_INVERSE_DATA_B_IN_K_ENABLE : out std_logic;
 
-      TENSOR_COSINE_SIMILARITY_DATA_I_ENABLE : in std_logic;
-      TENSOR_COSINE_SIMILARITY_DATA_J_ENABLE : in std_logic;
-      TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE : in std_logic;
+      TENSOR_INVERSE_DATA_I_ENABLE : in std_logic;
+      TENSOR_INVERSE_DATA_J_ENABLE : in std_logic;
+      TENSOR_INVERSE_DATA_K_ENABLE : in std_logic;
 
-      TENSOR_COSINE_SIMILARITY_DATA_OUT_I_ENABLE : in std_logic;
-      TENSOR_COSINE_SIMILARITY_DATA_OUT_J_ENABLE : in std_logic;
-      TENSOR_COSINE_SIMILARITY_DATA_OUT_K_ENABLE : in std_logic;
+      TENSOR_INVERSE_DATA_OUT_I_ENABLE : in std_logic;
+      TENSOR_INVERSE_DATA_OUT_J_ENABLE : in std_logic;
+      TENSOR_INVERSE_DATA_OUT_K_ENABLE : in std_logic;
 
       -- DATA
-      TENSOR_COSINE_SIMILARITY_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_COSINE_SIMILARITY_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_COSINE_SIMILARITY_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_COSINE_SIMILARITY_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_COSINE_SIMILARITY_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_COSINE_SIMILARITY_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_COSINE_SIMILARITY_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_COSINE_SIMILARITY_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_COSINE_SIMILARITY_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_INVERSE_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_INVERSE_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_INVERSE_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_INVERSE_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_INVERSE_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_INVERSE_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_INVERSE_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_INVERSE_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_INVERSE_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- TENSOR MULTIPLICATION
       -- CONTROL

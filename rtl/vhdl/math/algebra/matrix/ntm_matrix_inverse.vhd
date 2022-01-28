@@ -45,7 +45,7 @@ use ieee.numeric_std.all;
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 
-entity ntm_matrix_cosine_similarity is
+entity ntm_matrix_inverse is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -82,14 +82,14 @@ entity ntm_matrix_cosine_similarity is
     );
 end entity;
 
-architecture ntm_matrix_cosine_similarity_architecture of ntm_matrix_cosine_similarity is
+architecture ntm_matrix_inverse_architecture of ntm_matrix_inverse is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  type cosine_similarity_ctrl_fsm is (
+  type inverse_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
@@ -130,7 +130,7 @@ architecture ntm_matrix_cosine_similarity_architecture of ntm_matrix_cosine_simi
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal cosine_similarity_ctrl_fsm_int : cosine_similarity_ctrl_fsm;
+  signal inverse_ctrl_fsm_int : inverse_ctrl_fsm;
 
   -- Buffer
   signal matrix_a_int : matrix_buffer;
@@ -141,10 +141,10 @@ architecture ntm_matrix_cosine_similarity_architecture of ntm_matrix_cosine_simi
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_a_in_i_cosine_similarity_int : std_logic;
-  signal data_a_in_j_cosine_similarity_int : std_logic;
-  signal data_b_in_i_cosine_similarity_int : std_logic;
-  signal data_b_in_j_cosine_similarity_int : std_logic;
+  signal data_a_in_i_inverse_int : std_logic;
+  signal data_a_in_j_inverse_int : std_logic;
+  signal data_b_in_i_inverse_int : std_logic;
+  signal data_b_in_j_inverse_int : std_logic;
 
   -- SCALAR ADDER
   -- CONTROL
@@ -206,10 +206,10 @@ begin
       index_j_loop <= ZERO_CONTROL;
       index_k_loop <= ZERO_CONTROL;
 
-      data_a_in_i_cosine_similarity_int <= '0';
-      data_a_in_j_cosine_similarity_int <= '0';
-      data_b_in_i_cosine_similarity_int <= '0';
-      data_b_in_j_cosine_similarity_int <= '0';
+      data_a_in_i_inverse_int <= '0';
+      data_a_in_j_inverse_int <= '0';
+      data_b_in_i_inverse_int <= '0';
+      data_b_in_j_inverse_int <= '0';
 
       -- Data Internal
       data_a_in_scalar_adder <= ZERO_DATA;
@@ -220,7 +220,7 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      case cosine_similarity_ctrl_fsm_int is
+      case inverse_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           DATA_OUT_I_ENABLE <= '0';
@@ -238,7 +238,7 @@ begin
               index_k_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              cosine_similarity_ctrl_fsm_int <= INPUT_I_STATE;
+              inverse_ctrl_fsm_int <= INPUT_I_STATE;
             else
               -- Control Outputs
               READY <= '1';
@@ -258,8 +258,8 @@ begin
             matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_i_cosine_similarity_int <= '1';
-            data_a_in_j_cosine_similarity_int <= '1';
+            data_a_in_i_inverse_int <= '1';
+            data_a_in_j_inverse_int <= '1';
           end if;
 
           if ((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) then
@@ -267,23 +267,23 @@ begin
             matrix_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_i_cosine_similarity_int <= '1';
-            data_b_in_j_cosine_similarity_int <= '1';
+            data_b_in_i_inverse_int <= '1';
+            data_b_in_j_inverse_int <= '1';
           end if;
 
           -- Control Outputs
           DATA_I_ENABLE <= '0';
           DATA_J_ENABLE <= '0';
 
-          if (data_a_in_i_cosine_similarity_int = '1' and data_a_in_j_cosine_similarity_int = '1' and data_b_in_i_cosine_similarity_int = '1' and data_b_in_j_cosine_similarity_int = '1') then
+          if (data_a_in_i_inverse_int = '1' and data_a_in_j_inverse_int = '1' and data_b_in_i_inverse_int = '1' and data_b_in_j_inverse_int = '1') then
             -- Control Internal
-            data_a_in_i_cosine_similarity_int <= '0';
-            data_a_in_j_cosine_similarity_int <= '0';
-            data_b_in_i_cosine_similarity_int <= '0';
-            data_b_in_j_cosine_similarity_int <= '0';
+            data_a_in_i_inverse_int <= '0';
+            data_a_in_j_inverse_int <= '0';
+            data_b_in_i_inverse_int <= '0';
+            data_b_in_j_inverse_int <= '0';
 
             -- FSM Control
-            cosine_similarity_ctrl_fsm_int <= ENDER_J_STATE;
+            inverse_ctrl_fsm_int <= ENDER_J_STATE;
           end if;
 
         when INPUT_J_STATE =>           -- STEP 2
@@ -293,7 +293,7 @@ begin
             matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_j_cosine_similarity_int <= '1';
+            data_a_in_j_inverse_int <= '1';
           end if;
 
           if (DATA_B_IN_J_ENABLE = '1') then
@@ -301,22 +301,22 @@ begin
             matrix_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_j_cosine_similarity_int <= '1';
+            data_b_in_j_inverse_int <= '1';
           end if;
 
           -- Control Outputs
           DATA_J_ENABLE <= '0';
 
-          if (data_a_in_j_cosine_similarity_int = '1' and data_b_in_j_cosine_similarity_int = '1') then
+          if (data_a_in_j_inverse_int = '1' and data_b_in_j_inverse_int = '1') then
             -- Control Internal
-            data_a_in_j_cosine_similarity_int <= '0';
-            data_b_in_j_cosine_similarity_int <= '0';
+            data_a_in_j_inverse_int <= '0';
+            data_b_in_j_inverse_int <= '0';
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
-              cosine_similarity_ctrl_fsm_int <= ENDER_I_STATE;
+              inverse_ctrl_fsm_int <= ENDER_I_STATE;
             else
-              cosine_similarity_ctrl_fsm_int <= ENDER_J_STATE;
+              inverse_ctrl_fsm_int <= ENDER_J_STATE;
             end if;
           end if;
 
@@ -331,7 +331,7 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            cosine_similarity_ctrl_fsm_int <= CLEAN_I_STATE;
+            inverse_ctrl_fsm_int <= CLEAN_I_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
             DATA_OUT <= matrix_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
@@ -345,7 +345,7 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            cosine_similarity_ctrl_fsm_int <= INPUT_I_STATE;
+            inverse_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
         when ENDER_J_STATE =>           -- STEP 4
@@ -361,7 +361,7 @@ begin
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
             -- FSM Control
-            cosine_similarity_ctrl_fsm_int <= INPUT_J_STATE;
+            inverse_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
         when CLEAN_I_STATE =>           -- STEP 5
@@ -382,9 +382,9 @@ begin
 
           -- FSM Control
           if (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
-            cosine_similarity_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
+            inverse_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
           else
-            cosine_similarity_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
+            inverse_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
           end if;
 
         when CLEAN_J_STATE =>           -- STEP 6
@@ -403,9 +403,9 @@ begin
 
           -- FSM Control
           if (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL)) then
-            cosine_similarity_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
+            inverse_ctrl_fsm_int <= SCALAR_MULTIPLIER_I_STATE;
           else
-            cosine_similarity_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
+            inverse_ctrl_fsm_int <= SCALAR_MULTIPLIER_J_STATE;
           end if;
 
         when SCALAR_MULTIPLIER_I_STATE =>  -- STEP 7
@@ -426,7 +426,7 @@ begin
             end if;
 
             -- FSM Control
-            cosine_similarity_ctrl_fsm_int <= SCALAR_ADDER_I_STATE;
+            inverse_ctrl_fsm_int <= SCALAR_ADDER_I_STATE;
           else
             -- Control Internal
             start_scalar_multiplier <= '0';
@@ -450,7 +450,7 @@ begin
             end if;
 
             -- FSM Control
-            cosine_similarity_ctrl_fsm_int <= SCALAR_ADDER_J_STATE;
+            inverse_ctrl_fsm_int <= SCALAR_ADDER_J_STATE;
           else
             -- Control Internal
             start_scalar_multiplier <= '0';
@@ -476,13 +476,13 @@ begin
                 index_k_loop <= ZERO_CONTROL;
 
                 -- FSM Control
-                cosine_similarity_ctrl_fsm_int <= STARTER_STATE;
+                inverse_ctrl_fsm_int <= STARTER_STATE;
               else
                 -- Control Internal
                 index_k_loop <= std_logic_vector(unsigned(index_k_loop)+unsigned(ONE_CONTROL));
 
                 -- FSM Control
-                cosine_similarity_ctrl_fsm_int <= CLEAN_I_STATE;
+                inverse_ctrl_fsm_int <= CLEAN_I_STATE;
               end if;
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
               if (unsigned(index_k_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) then
@@ -503,7 +503,7 @@ begin
               end if;
 
               -- FSM Control
-              cosine_similarity_ctrl_fsm_int <= CLEAN_I_STATE;
+              inverse_ctrl_fsm_int <= CLEAN_I_STATE;
             end if;
           else
             -- Control Internal
@@ -530,7 +530,7 @@ begin
               end if;
 
               -- FSM Control
-              cosine_similarity_ctrl_fsm_int <= CLEAN_J_STATE;
+              inverse_ctrl_fsm_int <= CLEAN_J_STATE;
             end if;
           else
             -- Control Internal
@@ -539,7 +539,7 @@ begin
 
         when others =>
           -- FSM Control
-          cosine_similarity_ctrl_fsm_int <= STARTER_STATE;
+          inverse_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
