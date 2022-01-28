@@ -425,6 +425,9 @@ begin
       MONITOR_TEST <= "STIMULUS_NTM_SCALAR_FLOAT_ADDER_TEST    ";
       -------------------------------------------------------------------
 
+      -- CONTROL
+      SCALAR_FLOAT_ADDER_OPERATION <= '0';
+
       if (STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE_0) then
 
         -------------------------------------------------------------------

@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_vector_transpose is
+entity ntm_vector_module is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -71,7 +71,7 @@ entity ntm_vector_transpose is
     );
 end entity;
 
-architecture ntm_vector_transpose_architecture of ntm_vector_transpose is
+architecture ntm_vector_module_architecture of ntm_vector_module is
 
   -----------------------------------------------------------------------
   -- Types
@@ -158,6 +158,9 @@ begin
           DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
+            -- Control Outputs
+            DATA_ENABLE <= '1';
+
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 

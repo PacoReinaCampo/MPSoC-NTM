@@ -192,7 +192,7 @@ package ntm_math_pkg is
       );
   end component;
 
-  component ntm_vector_transpose is
+  component ntm_vector_module is
     generic (
       DATA_SIZE    : integer := 128;
       CONTROL_SIZE : integer := 64

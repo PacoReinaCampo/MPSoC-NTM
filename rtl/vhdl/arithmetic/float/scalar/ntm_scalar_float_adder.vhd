@@ -58,6 +58,8 @@ entity ntm_scalar_float_adder is
     START : in  std_logic;
     READY : out std_logic;
 
+    OPERATION : in std_logic;
+
     -- DATA
     DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
@@ -157,8 +159,13 @@ begin
             data_a_in_exponent_int <= '0' & DATA_A_IN(DATA_SIZE-2 downto MANTISSA_SIZE);
             data_b_in_exponent_int <= '0' & DATA_B_IN(DATA_SIZE-2 downto MANTISSA_SIZE);
 
-            data_b_in_sign_int <= DATA_B_IN(DATA_SIZE-1);
             data_a_in_sign_int <= DATA_A_IN(DATA_SIZE-1);
+
+			if (OPERATION = '1') then
+              data_b_in_sign_int <= not DATA_B_IN(DATA_SIZE-1);
+			else
+              data_b_in_sign_int <= DATA_B_IN(DATA_SIZE-1);
+			end if;
 
             -- FSM Control
             adder_ctrl_fsm_int <= ALIGNMENT_STATE;

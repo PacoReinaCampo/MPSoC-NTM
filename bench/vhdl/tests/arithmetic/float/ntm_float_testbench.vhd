@@ -142,6 +142,8 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
   signal start_scalar_float_adder : std_logic;
   signal ready_scalar_float_adder : std_logic;
 
+  signal operation_scalar_float_adder : std_logic;
+
   -- DATA
   signal data_a_in_scalar_float_adder : std_logic_vector(31 downto 0);
   signal data_b_in_scalar_float_adder : std_logic_vector(31 downto 0);
@@ -374,6 +376,8 @@ begin
       SCALAR_FLOAT_ADDER_START => start_scalar_float_adder,
       SCALAR_FLOAT_ADDER_READY => ready_scalar_float_adder,
 
+      SCALAR_FLOAT_ADDER_OPERATION => operation_scalar_float_adder,
+
       -- DATA
       SCALAR_FLOAT_ADDER_DATA_A_IN => data_a_in_scalar_float_adder,
       SCALAR_FLOAT_ADDER_DATA_B_IN => data_b_in_scalar_float_adder,
@@ -589,6 +593,8 @@ begin
         START => start_scalar_float_adder,
         READY => ready_scalar_float_adder,
 
+        OPERATION => operation_scalar_float_adder,
+
         -- DATA
         DATA_A_IN => data_a_in_scalar_float_adder,
         DATA_B_IN => data_b_in_scalar_float_adder,
@@ -636,7 +642,7 @@ begin
 
         -- CONTROL
         START => start_scalar_float_multiplier,
-        READY => ready_scalar_float_adder,
+        READY => ready_scalar_float_multiplier,
 
         -- DATA
         DATA_A_IN => data_a_in_scalar_float_multiplier,

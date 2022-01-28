@@ -156,32 +156,32 @@ alias ntm_vector_summation_verification_compilation {
 }
 
 ##################################################################################################
-# NTM_VECTOR_TRANSPOSE_TEST 
+# NTM_VECTOR_MODULE_TEST 
 ##################################################################################################
 
-alias ntm_vector_transpose_verification_compilation {
-  echo "TEST: NTM_VECTOR_TRANSPOSE_TEST"
+alias ntm_vector_module_verification_compilation {
+  echo "TEST: NTM_VECTOR_MODULE_TEST"
 
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/ntm_algebra_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/ntm_algebra_stimulus.vhd
   vcom -2008 -reportprogress 300 -work work $verification_path/math/algebra/ntm_algebra_testbench.vhd
 
-  vsim -g /ntm_algebra_testbench/ENABLE_NTM_VECTOR_TRANSPOSE_TEST=true -t ps +notimingchecks -L unisim work.ntm_algebra_testbench
+  vsim -g /ntm_algebra_testbench/ENABLE_NTM_VECTOR_MODULE_TEST=true -t ps +notimingchecks -L unisim work.ntm_algebra_testbench
 
   #MACROS
   add log -r sim:/ntm_algebra_testbench/*
 
   #WAVES
-  view -title ntm_vector_transpose wave
-  do $simulation_path/mpsoc/math/algebra/msim/waves/ntm_vector_transpose.do
+  view -title ntm_vector_module wave
+  do $simulation_path/mpsoc/math/algebra/msim/waves/ntm_vector_module.do
 
-  force -freeze sim:/ntm_algebra_pkg/STIMULUS_NTM_VECTOR_TRANSPOSE_TEST true 0
-  force -freeze sim:/ntm_algebra_pkg/STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_0 true 0
+  force -freeze sim:/ntm_algebra_pkg/STIMULUS_NTM_VECTOR_MODULE_TEST true 0
+  force -freeze sim:/ntm_algebra_pkg/STIMULUS_NTM_VECTOR_MODULE_CASE_0 true 0
 
   onbreak {resume}
   run -all
 
-  dataset save sim ntm_vector_transpose_test.wlf
+  dataset save sim ntm_vector_module_test.wlf
 }
 
 ##################################################################################################
@@ -555,7 +555,7 @@ alias v05 {
 }
 
 alias v06 {
-  ntm_vector_transpose_verification_compilation
+  ntm_vector_module_verification_compilation
 }
 
 alias v07 {
@@ -612,7 +612,7 @@ echo "v02 . NTM-VECTOR-CONVOLUTION-TEST"
 echo "v03 . NTM-VECTOR-COSINE-SIMILARITY-TEST"
 echo "v04 . NTM-VECTOR-MULTIPLICATION-TEST"
 echo "v05 . NTM-VECTOR-SUMMATION-TEST"
-echo "v06 . NTM-VECTOR-TRANSPOSE-TEST"
+echo "v06 . NTM-VECTOR-MODULE-TEST"
 echo "v07 . NTM-MATRIX-CONVOLUTION-TEST"
 echo "v08 . NTM-MATRIX-INVERSE-TEST"
 echo "v09 . NTM-MATRIX-MULTIPLICATION-TEST"

@@ -948,6 +948,8 @@ package ntm_arithmetic_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
+      OPERATION : in std_logic;
+
       -- DATA
       DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);

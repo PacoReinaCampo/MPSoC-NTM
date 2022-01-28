@@ -67,13 +67,13 @@ alias ntm_vector_summation_design_compilation {
 }
 
 ##################################################################################################
-# ntm_vector_transpose_design_compilation ########################################################
+# ntm_vector_module_design_compilation ########################################################
 ##################################################################################################
 
-alias ntm_vector_transpose_design_compilation {
+alias ntm_vector_module_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/vector/ntm_vector_transpose.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/vector/ntm_vector_module.vhd
 }
 
 ##################################################################################################
@@ -236,7 +236,7 @@ alias d05 {
 }
 
 alias d06 {
-  ntm_vector_transpose_design_compilation
+  ntm_vector_module_design_compilation
 }
 
 alias d07 {
@@ -293,7 +293,7 @@ echo "d02 . NTM-VECTOR-CONVOLUTION-TEST"
 echo "d03 . NTM-VECTOR-COSINE-SIMILARITY-TEST"
 echo "d04 . NTM-VECTOR-MULTIPLICATION-TEST"
 echo "d05 . NTM-VECTOR-SUMMATION-TEST"
-echo "d06 . NTM-VECTOR-TRANSPOSE-TEST"
+echo "d06 . NTM-VECTOR-MODULE-TEST"
 echo "d07 . NTM-MATRIX-CONVOLUTION-TEST"
 echo "d08 . NTM-MATRIX-INVERSE-TEST"
 echo "d09 . NTM-MATRIX-MULTIPLICATION-TEST"

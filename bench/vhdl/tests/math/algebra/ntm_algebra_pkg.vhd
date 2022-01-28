@@ -123,21 +123,21 @@ package ntm_algebra_pkg is
   signal STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_TEST : boolean := false;
   signal STIMULUS_NTM_VECTOR_MULTIPLICATION_TEST    : boolean := false;
   signal STIMULUS_NTM_VECTOR_SUMMATION_TEST         : boolean := false;
-  signal STIMULUS_NTM_VECTOR_TRANSPOSE_TEST         : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MODULE_TEST         : boolean := false;
 
   signal STIMULUS_NTM_DOT_PRODUCT_CASE_0              : boolean := false;
   signal STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_0       : boolean := false;
   signal STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_0 : boolean := false;
   signal STIMULUS_NTM_VECTOR_MULTIPLICATION_CASE_0    : boolean := false;
   signal STIMULUS_NTM_VECTOR_SUMMATION_CASE_0         : boolean := false;
-  signal STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_0         : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MODULE_CASE_0         : boolean := false;
 
   signal STIMULUS_NTM_DOT_PRODUCT_CASE_1              : boolean := false;
   signal STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_1       : boolean := false;
   signal STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_1 : boolean := false;
   signal STIMULUS_NTM_VECTOR_MULTIPLICATION_CASE_1    : boolean := false;
   signal STIMULUS_NTM_VECTOR_SUMMATION_CASE_1         : boolean := false;
-  signal STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_1         : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MODULE_CASE_1         : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
   signal STIMULUS_NTM_MATRIX_CONVOLUTION_TEST    : boolean := false;
@@ -283,21 +283,21 @@ package ntm_algebra_pkg is
       VECTOR_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- VECTOR TRANSPOSE
+      -- VECTOR MODULE
       -- CONTROL
-      VECTOR_TRANSPOSE_START : out std_logic;
-      VECTOR_TRANSPOSE_READY : in  std_logic;
+      VECTOR_MODULE_START : out std_logic;
+      VECTOR_MODULE_READY : in  std_logic;
 
-      VECTOR_TRANSPOSE_DATA_IN_ENABLE : out std_logic;
+      VECTOR_MODULE_DATA_IN_ENABLE : out std_logic;
 
-      VECTOR_TRANSPOSE_DATA_ENABLE : in std_logic;
+      VECTOR_MODULE_DATA_ENABLE : in std_logic;
 
-      VECTOR_TRANSPOSE_DATA_OUT_ENABLE : in std_logic;
+      VECTOR_MODULE_DATA_OUT_ENABLE : in std_logic;
 
       -- DATA
-      VECTOR_TRANSPOSE_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_MODULE_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_MODULE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_MODULE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- MATRIX CONVOLUTION
       -- CONTROL
