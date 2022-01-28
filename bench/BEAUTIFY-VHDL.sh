@@ -88,13 +88,13 @@ emacs -batch vhdl/model/dnc/write_heads/dnc_write_key.vhd -f vhdl-beautify-buffe
 emacs -batch vhdl/model/dnc/write_heads/dnc_write_strength.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/dnc/write_heads/dnc_write_vector.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/algebra/matrix/ntm_matrix_convolution.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/model/math/algebra/matrix/ntm_matrix_cosine_similarity.vhd -f vhdl-beautify-buffer -f save-buffer
+emacs -batch vhdl/model/math/algebra/matrix/ntm_matrix_inverse.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/algebra/matrix/ntm_matrix_multiplication.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/algebra/matrix/ntm_matrix_product.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/algebra/matrix/ntm_matrix_summation.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/algebra/matrix/ntm_matrix_transpose.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/algebra/tensor/ntm_tensor_convolution.vhd -f vhdl-beautify-buffer -f save-buffer
-emacs -batch vhdl/model/math/algebra/tensor/ntm_tensor_cosine_similarity.vhd -f vhdl-beautify-buffer -f save-buffer
+emacs -batch vhdl/model/math/algebra/tensor/ntm_tensor_inverse.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/algebra/tensor/ntm_tensor_multiplication.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/algebra/tensor/ntm_tensor_product.vhd -f vhdl-beautify-buffer -f save-buffer
 emacs -batch vhdl/model/math/algebra/tensor/ntm_tensor_summation.vhd -f vhdl-beautify-buffer -f save-buffer

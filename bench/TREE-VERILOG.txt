@@ -120,14 +120,14 @@
 │   │   ├── algebra
 │   │   │   ├── matrix
 │   │   │   │   ├── ntm_matrix_convolution.sv
-│   │   │   │   ├── ntm_matrix_cosine_similarity.sv
+│   │   │   │   ├── ntm_matrix_inverse.sv
 │   │   │   │   ├── ntm_matrix_multiplication.sv
 │   │   │   │   ├── ntm_matrix_product.sv
 │   │   │   │   ├── ntm_matrix_summation.sv
 │   │   │   │   └── ntm_matrix_transpose.sv
 │   │   │   ├── tensor
 │   │   │   │   ├── ntm_tensor_convolution.sv
-│   │   │   │   ├── ntm_tensor_cosine_similarity.sv
+│   │   │   │   ├── ntm_tensor_inverse.sv
 │   │   │   │   ├── ntm_tensor_multiplication.sv
 │   │   │   │   ├── ntm_tensor_product.sv
 │   │   │   │   ├── ntm_tensor_summation.sv

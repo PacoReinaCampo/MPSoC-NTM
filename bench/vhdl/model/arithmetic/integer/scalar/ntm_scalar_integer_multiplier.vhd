@@ -87,10 +87,10 @@ architecture ntm_scalar_integer_multiplier_architecture of ntm_scalar_integer_mu
   constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
   constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -105,7 +105,7 @@ architecture ntm_scalar_integer_multiplier_architecture of ntm_scalar_integer_mu
   signal multiplier_ctrl_fsm_int : multiplier_ctrl_fsm;
 
   -- Data Internal
-  signal multiplier_int : std_logic_vector(2*DATA_SIZE-1 downto 0);
+  signal multiplier_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- Control Internal
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -130,7 +130,7 @@ begin
       READY <= '0';
 
       -- Data Internal
-      multiplier_int <= (others => '0');
+      multiplier_int <= ZERO_DATA;
 
       -- Control Internal
       index_loop <= ZERO_DATA;
@@ -144,7 +144,7 @@ begin
 
           if (START = '1') then
             -- Data Internal
-            multiplier_int <= (others => '0');
+            multiplier_int <= ZERO_DATA;
 
             -- Control Internal
             index_loop <= ZERO_DATA;
@@ -155,22 +155,42 @@ begin
 
         when ENDER_STATE =>             -- STEP 1
 
-          if (unsigned(index_loop) = unsigned(DATA_B_IN)) then
-            -- Data Outputs
-            DATA_OUT     <= multiplier_int(DATA_SIZE-1 downto 0);
-            OVERFLOW_OUT <= multiplier_int(2*DATA_SIZE-1 downto DATA_SIZE);
+          if (DATA_B_IN(DATA_SIZE-1) = '1') then
+            if (signed(index_loop) = signed(DATA_B_IN)) then
+              -- Data Outputs
+              DATA_OUT     <= multiplier_int;
+              OVERFLOW_OUT <= ZERO_DATA;
 
-            -- Control Outputs
-            READY <= '1';
+              -- Control Outputs
+              READY <= '1';
 
-            -- FSM Control
-            multiplier_ctrl_fsm_int <= STARTER_STATE;
-          else
-            -- Data Internal
-            multiplier_int <= std_logic_vector(unsigned(multiplier_int) + (unsigned(ZERO_DATA) & unsigned(DATA_A_IN)));
+              -- FSM Control
+              multiplier_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Data Internal
+              multiplier_int <= std_logic_vector(signed(multiplier_int) - signed(DATA_A_IN));
 
-            -- Control Internal
-            index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE_DATA));
+              -- Control Internal
+              index_loop <= std_logic_vector(signed(index_loop) - signed(ONE_DATA));
+            end if;
+          elsif (DATA_B_IN(DATA_SIZE-1) = '0') then
+            if (signed(index_loop) = signed(DATA_B_IN)) then
+              -- Data Outputs
+              DATA_OUT     <= multiplier_int;
+              OVERFLOW_OUT <= ZERO_DATA;
+
+              -- Control Outputs
+              READY <= '1';
+
+              -- FSM Control
+              multiplier_ctrl_fsm_int <= STARTER_STATE;
+            else
+              -- Data Internal
+              multiplier_int <= std_logic_vector(signed(multiplier_int) + signed(DATA_A_IN));
+
+              -- Control Internal
+              index_loop <= std_logic_vector(signed(index_loop) + signed(ONE_DATA));
+            end if;
           end if;
 
         when others =>

@@ -171,7 +171,7 @@ begin
         when ALIGNMENT_STATE =>
 
           if (unsigned(data_a_in_exponent_int) > unsigned(data_b_in_exponent_int)) then
-            if (signed(data_a_in_exponent_int)-signed(data_b_in_exponent_int) > to_signed(MANTISSA_SIZE,EXPONENT_SIZE+1)) then
+            if (signed(data_a_in_exponent_int)-signed(data_b_in_exponent_int) > to_signed(MANTISSA_SIZE, EXPONENT_SIZE+1)) then
               -- Data Internal
               data_out_mantissa_int <= data_a_in_mantissa_int;
 
@@ -193,7 +193,7 @@ begin
               adder_ctrl_fsm_int <= ADDITION_STATE;
             end if;
           elsif (unsigned(data_a_in_exponent_int) < unsigned(data_b_in_exponent_int)) then
-            if (signed(data_b_in_exponent_int)-signed(data_a_in_exponent_int) > to_signed(MANTISSA_SIZE,EXPONENT_SIZE+1)) then
+            if (signed(data_b_in_exponent_int)-signed(data_a_in_exponent_int) > to_signed(MANTISSA_SIZE, EXPONENT_SIZE+1)) then
               -- Data Internal
               data_out_mantissa_int <= data_b_in_mantissa_int;
 

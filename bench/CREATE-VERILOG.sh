@@ -88,13 +88,13 @@ touch verilog/model/dnc/write_heads/dnc_write_key.sv
 touch verilog/model/dnc/write_heads/dnc_write_strength.sv
 touch verilog/model/dnc/write_heads/dnc_write_vector.sv
 touch verilog/model/math/algebra/matrix/ntm_matrix_convolution.sv
-touch verilog/model/math/algebra/matrix/ntm_matrix_cosine_similarity.sv
+touch verilog/model/math/algebra/matrix/ntm_matrix_inverse.sv
 touch verilog/model/math/algebra/matrix/ntm_matrix_multiplication.sv
 touch verilog/model/math/algebra/matrix/ntm_matrix_product.sv
 touch verilog/model/math/algebra/matrix/ntm_matrix_summation.sv
 touch verilog/model/math/algebra/matrix/ntm_matrix_transpose.sv
 touch verilog/model/math/algebra/tensor/ntm_tensor_convolution.sv
-touch verilog/model/math/algebra/tensor/ntm_tensor_cosine_similarity.sv
+touch verilog/model/math/algebra/tensor/ntm_tensor_inverse.sv
 touch verilog/model/math/algebra/tensor/ntm_tensor_multiplication.sv
 touch verilog/model/math/algebra/tensor/ntm_tensor_product.sv
 touch verilog/model/math/algebra/tensor/ntm_tensor_summation.sv

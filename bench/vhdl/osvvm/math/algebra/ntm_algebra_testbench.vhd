@@ -79,48 +79,48 @@ entity ntm_algebra_testbench is
     ENABLE_NTM_VECTOR_TRANSPOSE_CASE_1         : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
-    ENABLE_NTM_MATRIX_CONVOLUTION_TEST       : boolean := false;
-    ENABLE_NTM_MATRIX_COSINE_SIMILARITY_TEST : boolean := false;
-    ENABLE_NTM_MATRIX_MULTIPLICATION_TEST    : boolean := false;
-    ENABLE_NTM_MATRIX_PRODUCT_TEST           : boolean := false;
-    ENABLE_NTM_MATRIX_SUMMATION_TEST         : boolean := false;
-    ENABLE_NTM_MATRIX_TRANSPOSE_TEST         : boolean := false;
+    ENABLE_NTM_MATRIX_CONVOLUTION_TEST    : boolean := false;
+    ENABLE_NTM_MATRIX_INVERSE_TEST        : boolean := false;
+    ENABLE_NTM_MATRIX_MULTIPLICATION_TEST : boolean := false;
+    ENABLE_NTM_MATRIX_PRODUCT_TEST        : boolean := false;
+    ENABLE_NTM_MATRIX_SUMMATION_TEST      : boolean := false;
+    ENABLE_NTM_MATRIX_TRANSPOSE_TEST      : boolean := false;
 
-    ENABLE_NTM_MATRIX_CONVOLUTION_CASE_0       : boolean := false;
-    ENABLE_NTM_MATRIX_COSINE_SIMILARITY_CASE_0 : boolean := false;
-    ENABLE_NTM_MATRIX_MULTIPLICATION_CASE_0    : boolean := false;
-    ENABLE_NTM_MATRIX_PRODUCT_CASE_0           : boolean := false;
-    ENABLE_NTM_MATRIX_SUMMATION_CASE_0         : boolean := false;
-    ENABLE_NTM_MATRIX_TRANSPOSE_CASE_0         : boolean := false;
+    ENABLE_NTM_MATRIX_CONVOLUTION_CASE_0    : boolean := false;
+    ENABLE_NTM_MATRIX_INVERSE_CASE_0        : boolean := false;
+    ENABLE_NTM_MATRIX_MULTIPLICATION_CASE_0 : boolean := false;
+    ENABLE_NTM_MATRIX_PRODUCT_CASE_0        : boolean := false;
+    ENABLE_NTM_MATRIX_SUMMATION_CASE_0      : boolean := false;
+    ENABLE_NTM_MATRIX_TRANSPOSE_CASE_0      : boolean := false;
 
-    ENABLE_NTM_MATRIX_CONVOLUTION_CASE_1       : boolean := false;
-    ENABLE_NTM_MATRIX_COSINE_SIMILARITY_CASE_1 : boolean := false;
-    ENABLE_NTM_MATRIX_MULTIPLICATION_CASE_1    : boolean := false;
-    ENABLE_NTM_MATRIX_PRODUCT_CASE_1           : boolean := false;
-    ENABLE_NTM_MATRIX_SUMMATION_CASE_1         : boolean := false;
-    ENABLE_NTM_MATRIX_TRANSPOSE_CASE_1         : boolean := false;
+    ENABLE_NTM_MATRIX_CONVOLUTION_CASE_1    : boolean := false;
+    ENABLE_NTM_MATRIX_INVERSE_CASE_1        : boolean := false;
+    ENABLE_NTM_MATRIX_MULTIPLICATION_CASE_1 : boolean := false;
+    ENABLE_NTM_MATRIX_PRODUCT_CASE_1        : boolean := false;
+    ENABLE_NTM_MATRIX_SUMMATION_CASE_1      : boolean := false;
+    ENABLE_NTM_MATRIX_TRANSPOSE_CASE_1      : boolean := false;
 
     -- TENSOR-FUNCTIONALITY
-    ENABLE_NTM_TENSOR_CONVOLUTION_TEST       : boolean := false;
-    ENABLE_NTM_TENSOR_COSINE_SIMILARITY_TEST : boolean := false;
-    ENABLE_NTM_TENSOR_MULTIPLICATION_TEST    : boolean := false;
-    ENABLE_NTM_TENSOR_PRODUCT_TEST           : boolean := false;
-    ENABLE_NTM_TENSOR_SUMMATION_TEST         : boolean := false;
-    ENABLE_NTM_TENSOR_TRANSPOSE_TEST         : boolean := false;
+    ENABLE_NTM_TENSOR_CONVOLUTION_TEST    : boolean := false;
+    ENABLE_NTM_TENSOR_INVERSE_TEST        : boolean := false;
+    ENABLE_NTM_TENSOR_MULTIPLICATION_TEST : boolean := false;
+    ENABLE_NTM_TENSOR_PRODUCT_TEST        : boolean := false;
+    ENABLE_NTM_TENSOR_SUMMATION_TEST      : boolean := false;
+    ENABLE_NTM_TENSOR_TRANSPOSE_TEST      : boolean := false;
 
-    ENABLE_NTM_TENSOR_CONVOLUTION_CASE_0       : boolean := false;
-    ENABLE_NTM_TENSOR_COSINE_SIMILARITY_CASE_0 : boolean := false;
-    ENABLE_NTM_TENSOR_MULTIPLICATION_CASE_0    : boolean := false;
-    ENABLE_NTM_TENSOR_PRODUCT_CASE_0           : boolean := false;
-    ENABLE_NTM_TENSOR_SUMMATION_CASE_0         : boolean := false;
-    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_0         : boolean := false;
+    ENABLE_NTM_TENSOR_CONVOLUTION_CASE_0    : boolean := false;
+    ENABLE_NTM_TENSOR_INVERSE_CASE_0        : boolean := false;
+    ENABLE_NTM_TENSOR_MULTIPLICATION_CASE_0 : boolean := false;
+    ENABLE_NTM_TENSOR_PRODUCT_CASE_0        : boolean := false;
+    ENABLE_NTM_TENSOR_SUMMATION_CASE_0      : boolean := false;
+    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_0      : boolean := false;
 
-    ENABLE_NTM_TENSOR_CONVOLUTION_CASE_1       : boolean := false;
-    ENABLE_NTM_TENSOR_COSINE_SIMILARITY_CASE_1 : boolean := false;
-    ENABLE_NTM_TENSOR_MULTIPLICATION_CASE_1    : boolean := false;
-    ENABLE_NTM_TENSOR_PRODUCT_CASE_1           : boolean := false;
-    ENABLE_NTM_TENSOR_SUMMATION_CASE_1         : boolean := false;
-    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_1         : boolean := false
+    ENABLE_NTM_TENSOR_CONVOLUTION_CASE_1    : boolean := false;
+    ENABLE_NTM_TENSOR_INVERSE_CASE_1        : boolean := false;
+    ENABLE_NTM_TENSOR_MULTIPLICATION_CASE_1 : boolean := false;
+    ENABLE_NTM_TENSOR_PRODUCT_CASE_1        : boolean := false;
+    ENABLE_NTM_TENSOR_SUMMATION_CASE_1      : boolean := false;
+    ENABLE_NTM_TENSOR_TRANSPOSE_CASE_1      : boolean := false
     );
 end ntm_algebra_testbench;
 
@@ -255,30 +255,30 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_b_in_matrix_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MATRIX COSINE_SIMILARITY
+  -- MATRIX INVERSE
   -- CONTROL
-  signal start_matrix_cosine_similarity : std_logic;
-  signal ready_matrix_cosine_similarity : std_logic;
+  signal start_matrix_inverse : std_logic;
+  signal ready_matrix_inverse : std_logic;
 
-  signal data_a_in_i_enable_matrix_cosine_similarity : std_logic;
-  signal data_a_in_j_enable_matrix_cosine_similarity : std_logic;
-  signal data_b_in_i_enable_matrix_cosine_similarity : std_logic;
-  signal data_b_in_j_enable_matrix_cosine_similarity : std_logic;
+  signal data_a_in_i_enable_matrix_inverse : std_logic;
+  signal data_a_in_j_enable_matrix_inverse : std_logic;
+  signal data_b_in_i_enable_matrix_inverse : std_logic;
+  signal data_b_in_j_enable_matrix_inverse : std_logic;
 
-  signal data_i_enable_matrix_cosine_similarity : std_logic;
-  signal data_j_enable_matrix_cosine_similarity : std_logic;
+  signal data_i_enable_matrix_inverse : std_logic;
+  signal data_j_enable_matrix_inverse : std_logic;
 
-  signal data_out_i_enable_matrix_cosine_similarity : std_logic;
-  signal data_out_j_enable_matrix_cosine_similarity : std_logic;
+  signal data_out_i_enable_matrix_inverse : std_logic;
+  signal data_out_j_enable_matrix_inverse : std_logic;
 
   -- DATA
-  signal size_a_i_in_matrix_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_a_j_in_matrix_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_i_in_matrix_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_j_in_matrix_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_cosine_similarity   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_cosine_similarity   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_cosine_similarity    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_i_in_matrix_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_matrix_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_matrix_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_inverse   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_inverse   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_inverse    : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX MULTIPLICATION
   -- CONTROL
@@ -396,36 +396,36 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_b_in_tensor_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_tensor_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- TENSOR COSINE_SIMILARITY
+  -- TENSOR INVERSE
   -- CONTROL
-  signal start_tensor_cosine_similarity : std_logic;
-  signal ready_tensor_cosine_similarity : std_logic;
+  signal start_tensor_inverse : std_logic;
+  signal ready_tensor_inverse : std_logic;
 
-  signal data_a_in_i_enable_tensor_cosine_similarity : std_logic;
-  signal data_a_in_j_enable_tensor_cosine_similarity : std_logic;
-  signal data_a_in_k_enable_tensor_cosine_similarity : std_logic;
-  signal data_b_in_i_enable_tensor_cosine_similarity : std_logic;
-  signal data_b_in_j_enable_tensor_cosine_similarity : std_logic;
-  signal data_b_in_k_enable_tensor_cosine_similarity : std_logic;
+  signal data_a_in_i_enable_tensor_inverse : std_logic;
+  signal data_a_in_j_enable_tensor_inverse : std_logic;
+  signal data_a_in_k_enable_tensor_inverse : std_logic;
+  signal data_b_in_i_enable_tensor_inverse : std_logic;
+  signal data_b_in_j_enable_tensor_inverse : std_logic;
+  signal data_b_in_k_enable_tensor_inverse : std_logic;
 
-  signal data_i_enable_tensor_cosine_similarity : std_logic;
-  signal data_j_enable_tensor_cosine_similarity : std_logic;
-  signal data_k_enable_tensor_cosine_similarity : std_logic;
+  signal data_i_enable_tensor_inverse : std_logic;
+  signal data_j_enable_tensor_inverse : std_logic;
+  signal data_k_enable_tensor_inverse : std_logic;
 
-  signal data_out_i_enable_tensor_cosine_similarity : std_logic;
-  signal data_out_j_enable_tensor_cosine_similarity : std_logic;
-  signal data_out_k_enable_tensor_cosine_similarity : std_logic;
+  signal data_out_i_enable_tensor_inverse : std_logic;
+  signal data_out_j_enable_tensor_inverse : std_logic;
+  signal data_out_k_enable_tensor_inverse : std_logic;
 
   -- DATA
-  signal size_a_i_in_tensor_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_a_j_in_tensor_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_a_k_in_tensor_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_i_in_tensor_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_j_in_tensor_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_k_in_tensor_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_tensor_cosine_similarity   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_tensor_cosine_similarity   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_tensor_cosine_similarity    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_i_in_tensor_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_tensor_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_k_in_tensor_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_tensor_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_tensor_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_k_in_tensor_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_tensor_inverse   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_inverse   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_inverse    : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- TENSOR MULTIPLICATION
   -- CONTROL
@@ -673,30 +673,30 @@ begin
       MATRIX_CONVOLUTION_DATA_B_IN   => data_b_in_matrix_convolution,
       MATRIX_CONVOLUTION_DATA_OUT    => data_out_matrix_convolution,
 
-      -- MATRIX COSINE_SIMILARITY
+      -- MATRIX INVERSE
       -- CONTROL
-      MATRIX_COSINE_SIMILARITY_START => start_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_READY => ready_matrix_cosine_similarity,
+      MATRIX_INVERSE_START => start_matrix_inverse,
+      MATRIX_INVERSE_READY => ready_matrix_inverse,
 
-      MATRIX_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_cosine_similarity,
+      MATRIX_INVERSE_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_inverse,
+      MATRIX_INVERSE_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_inverse,
+      MATRIX_INVERSE_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_inverse,
+      MATRIX_INVERSE_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_inverse,
 
-      MATRIX_COSINE_SIMILARITY_DATA_I_ENABLE => data_i_enable_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_DATA_J_ENABLE => data_j_enable_matrix_cosine_similarity,
+      MATRIX_INVERSE_DATA_I_ENABLE => data_i_enable_matrix_inverse,
+      MATRIX_INVERSE_DATA_J_ENABLE => data_j_enable_matrix_inverse,
 
-      MATRIX_COSINE_SIMILARITY_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_cosine_similarity,
+      MATRIX_INVERSE_DATA_OUT_I_ENABLE => data_out_i_enable_matrix_inverse,
+      MATRIX_INVERSE_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_inverse,
 
       -- DATA
-      MATRIX_COSINE_SIMILARITY_SIZE_A_I_IN => size_a_i_in_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_SIZE_A_J_IN => size_a_j_in_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_SIZE_B_I_IN => size_b_i_in_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_SIZE_B_J_IN => size_b_j_in_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_DATA_A_IN   => data_a_in_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_DATA_B_IN   => data_b_in_matrix_cosine_similarity,
-      MATRIX_COSINE_SIMILARITY_DATA_OUT    => data_out_matrix_cosine_similarity,
+      MATRIX_INVERSE_SIZE_A_I_IN => size_a_i_in_matrix_inverse,
+      MATRIX_INVERSE_SIZE_A_J_IN => size_a_j_in_matrix_inverse,
+      MATRIX_INVERSE_SIZE_B_I_IN => size_b_i_in_matrix_inverse,
+      MATRIX_INVERSE_SIZE_B_J_IN => size_b_j_in_matrix_inverse,
+      MATRIX_INVERSE_DATA_A_IN   => data_a_in_matrix_inverse,
+      MATRIX_INVERSE_DATA_B_IN   => data_b_in_matrix_inverse,
+      MATRIX_INVERSE_DATA_OUT    => data_out_matrix_inverse,
 
       -- MATRIX MULTIPLICATION
       -- CONTROL
@@ -814,36 +814,36 @@ begin
       TENSOR_CONVOLUTION_DATA_B_IN   => data_b_in_tensor_convolution,
       TENSOR_CONVOLUTION_DATA_OUT    => data_out_tensor_convolution,
 
-      -- TENSOR COSINE_SIMILARITY
+      -- TENSOR INVERSE
       -- CONTROL
-      TENSOR_COSINE_SIMILARITY_START => start_tensor_cosine_similarity,
-      TENSOR_COSINE_SIMILARITY_READY => ready_tensor_cosine_similarity,
+      TENSOR_INVERSE_START => start_tensor_inverse,
+      TENSOR_INVERSE_READY => ready_tensor_inverse,
 
-      TENSOR_COSINE_SIMILARITY_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_cosine_similarity,
-      TENSOR_COSINE_SIMILARITY_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_cosine_similarity,
-      TENSOR_COSINE_SIMILARITY_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_cosine_similarity,
-      TENSOR_COSINE_SIMILARITY_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_cosine_similarity,
-      TENSOR_COSINE_SIMILARITY_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_cosine_similarity,
-      TENSOR_COSINE_SIMILARITY_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_cosine_similarity,
+      TENSOR_INVERSE_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_inverse,
+      TENSOR_INVERSE_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_inverse,
+      TENSOR_INVERSE_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_inverse,
+      TENSOR_INVERSE_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_inverse,
+      TENSOR_INVERSE_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_inverse,
+      TENSOR_INVERSE_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_inverse,
 
-      TENSOR_COSINE_SIMILARITY_DATA_I_ENABLE => data_i_enable_tensor_cosine_similarity,
-      TENSOR_COSINE_SIMILARITY_DATA_J_ENABLE => data_j_enable_tensor_cosine_similarity,
-      TENSOR_COSINE_SIMILARITY_DATA_K_ENABLE => data_k_enable_tensor_cosine_similarity,
+      TENSOR_INVERSE_DATA_I_ENABLE => data_i_enable_tensor_inverse,
+      TENSOR_INVERSE_DATA_J_ENABLE => data_j_enable_tensor_inverse,
+      TENSOR_INVERSE_DATA_K_ENABLE => data_k_enable_tensor_inverse,
 
-      TENSOR_COSINE_SIMILARITY_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_cosine_similarity,
-      TENSOR_COSINE_SIMILARITY_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_cosine_similarity,
-      TENSOR_COSINE_SIMILARITY_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_cosine_similarity,
+      TENSOR_INVERSE_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_inverse,
+      TENSOR_INVERSE_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_inverse,
+      TENSOR_INVERSE_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_inverse,
 
       -- DATA
-      TENSOR_COSINE_SIMILARITY_SIZE_A_I_IN => size_a_i_in_tensor_cosine_similarity,
-      TENSOR_COSINE_SIMILARITY_SIZE_A_J_IN => size_a_j_in_tensor_cosine_similarity,
-      TENSOR_COSINE_SIMILARITY_SIZE_A_K_IN => size_a_k_in_tensor_cosine_similarity,
-      TENSOR_COSINE_SIMILARITY_SIZE_B_I_IN => size_b_i_in_tensor_cosine_similarity,
-      TENSOR_COSINE_SIMILARITY_SIZE_B_J_IN => size_b_j_in_tensor_cosine_similarity,
-      TENSOR_COSINE_SIMILARITY_SIZE_B_K_IN => size_b_k_in_tensor_cosine_similarity,
-      TENSOR_COSINE_SIMILARITY_DATA_A_IN   => data_a_in_tensor_cosine_similarity,
-      TENSOR_COSINE_SIMILARITY_DATA_B_IN   => data_b_in_tensor_cosine_similarity,
-      TENSOR_COSINE_SIMILARITY_DATA_OUT    => data_out_tensor_cosine_similarity,
+      TENSOR_INVERSE_SIZE_A_I_IN => size_a_i_in_tensor_inverse,
+      TENSOR_INVERSE_SIZE_A_J_IN => size_a_j_in_tensor_inverse,
+      TENSOR_INVERSE_SIZE_A_K_IN => size_a_k_in_tensor_inverse,
+      TENSOR_INVERSE_SIZE_B_I_IN => size_b_i_in_tensor_inverse,
+      TENSOR_INVERSE_SIZE_B_J_IN => size_b_j_in_tensor_inverse,
+      TENSOR_INVERSE_SIZE_B_K_IN => size_b_k_in_tensor_inverse,
+      TENSOR_INVERSE_DATA_A_IN   => data_a_in_tensor_inverse,
+      TENSOR_INVERSE_DATA_B_IN   => data_b_in_tensor_inverse,
+      TENSOR_INVERSE_DATA_OUT    => data_out_tensor_inverse,
 
       -- TENSOR MULTIPLICATION
       -- CONTROL
@@ -1159,9 +1159,9 @@ begin
         );
   end generate ntm_matrix_convolution_test;
 
-  -- MATRIX COSINE_SIMILARITY
-  ntm_matrix_cosine_similarity_test : if (ENABLE_NTM_MATRIX_COSINE_SIMILARITY_TEST) generate
-    matrix_cosine_similarity : ntm_matrix_cosine_similarity
+  -- MATRIX INVERSE
+  ntm_matrix_inverse_test : if (ENABLE_NTM_MATRIX_INVERSE_TEST) generate
+    matrix_inverse : ntm_matrix_inverse
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -1172,30 +1172,30 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_matrix_cosine_similarity,
-        READY => ready_matrix_cosine_similarity,
+        START => start_matrix_inverse,
+        READY => ready_matrix_inverse,
 
-        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_cosine_similarity,
-        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_cosine_similarity,
-        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_cosine_similarity,
-        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_cosine_similarity,
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_inverse,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_inverse,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_inverse,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_inverse,
 
-        DATA_I_ENABLE => data_i_enable_matrix_cosine_similarity,
-        DATA_J_ENABLE => data_j_enable_matrix_cosine_similarity,
+        DATA_I_ENABLE => data_i_enable_matrix_inverse,
+        DATA_J_ENABLE => data_j_enable_matrix_inverse,
 
-        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_cosine_similarity,
-        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_cosine_similarity,
+        DATA_OUT_I_ENABLE => data_out_i_enable_matrix_inverse,
+        DATA_OUT_J_ENABLE => data_out_j_enable_matrix_inverse,
 
         -- DATA
-        SIZE_A_I_IN => size_a_i_in_matrix_cosine_similarity,
-        SIZE_A_J_IN => size_a_j_in_matrix_cosine_similarity,
-        SIZE_B_I_IN => size_b_i_in_matrix_cosine_similarity,
-        SIZE_B_J_IN => size_b_j_in_matrix_cosine_similarity,
-        DATA_A_IN   => data_a_in_matrix_cosine_similarity,
-        DATA_B_IN   => data_b_in_matrix_cosine_similarity,
-        DATA_OUT    => data_out_matrix_cosine_similarity
+        SIZE_A_I_IN => size_a_i_in_matrix_inverse,
+        SIZE_A_J_IN => size_a_j_in_matrix_inverse,
+        SIZE_B_I_IN => size_b_i_in_matrix_inverse,
+        SIZE_B_J_IN => size_b_j_in_matrix_inverse,
+        DATA_A_IN   => data_a_in_matrix_inverse,
+        DATA_B_IN   => data_b_in_matrix_inverse,
+        DATA_OUT    => data_out_matrix_inverse
         );
-  end generate ntm_matrix_cosine_similarity_test;
+  end generate ntm_matrix_inverse_test;
 
   -- MATRIX MULTIPLICATION
   ntm_matrix_multiplication_test : if (ENABLE_NTM_MATRIX_MULTIPLICATION_TEST) generate
@@ -1378,9 +1378,9 @@ begin
         );
   end generate ntm_tensor_convolution_test;
 
-  -- TENSOR COSINE_SIMILARITY
-  ntm_tensor_cosine_similarity_test : if (ENABLE_NTM_TENSOR_COSINE_SIMILARITY_TEST) generate
-    tensor_cosine_similarity : ntm_tensor_cosine_similarity
+  -- TENSOR INVERSE
+  ntm_tensor_inverse_test : if (ENABLE_NTM_TENSOR_INVERSE_TEST) generate
+    tensor_inverse : ntm_tensor_inverse
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -1391,36 +1391,36 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_tensor_cosine_similarity,
-        READY => ready_tensor_cosine_similarity,
+        START => start_tensor_inverse,
+        READY => ready_tensor_inverse,
 
-        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_cosine_similarity,
-        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_cosine_similarity,
-        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_cosine_similarity,
-        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_cosine_similarity,
-        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_cosine_similarity,
-        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_cosine_similarity,
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_inverse,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_inverse,
+        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_inverse,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_inverse,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_inverse,
+        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_inverse,
 
-        DATA_I_ENABLE => data_i_enable_tensor_cosine_similarity,
-        DATA_J_ENABLE => data_j_enable_tensor_cosine_similarity,
-        DATA_K_ENABLE => data_k_enable_tensor_cosine_similarity,
+        DATA_I_ENABLE => data_i_enable_tensor_inverse,
+        DATA_J_ENABLE => data_j_enable_tensor_inverse,
+        DATA_K_ENABLE => data_k_enable_tensor_inverse,
 
-        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_cosine_similarity,
-        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_cosine_similarity,
-        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_cosine_similarity,
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_inverse,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_inverse,
+        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_inverse,
 
         -- DATA
-        SIZE_A_I_IN => size_a_i_in_tensor_cosine_similarity,
-        SIZE_A_J_IN => size_a_j_in_tensor_cosine_similarity,
-        SIZE_A_K_IN => size_a_k_in_tensor_cosine_similarity,
-        SIZE_B_I_IN => size_b_i_in_tensor_cosine_similarity,
-        SIZE_B_J_IN => size_b_j_in_tensor_cosine_similarity,
-        SIZE_B_K_IN => size_b_k_in_tensor_cosine_similarity,
-        DATA_A_IN   => data_a_in_tensor_cosine_similarity,
-        DATA_B_IN   => data_b_in_tensor_cosine_similarity,
-        DATA_OUT    => data_out_tensor_cosine_similarity
+        SIZE_A_I_IN => size_a_i_in_tensor_inverse,
+        SIZE_A_J_IN => size_a_j_in_tensor_inverse,
+        SIZE_A_K_IN => size_a_k_in_tensor_inverse,
+        SIZE_B_I_IN => size_b_i_in_tensor_inverse,
+        SIZE_B_J_IN => size_b_j_in_tensor_inverse,
+        SIZE_B_K_IN => size_b_k_in_tensor_inverse,
+        DATA_A_IN   => data_a_in_tensor_inverse,
+        DATA_B_IN   => data_b_in_tensor_inverse,
+        DATA_OUT    => data_out_tensor_inverse
         );
-  end generate ntm_tensor_cosine_similarity_test;
+  end generate ntm_tensor_inverse_test;
 
   -- TENSOR MULTIPLICATION
   ntm_tensor_multiplication_test : if (ENABLE_NTM_TENSOR_MULTIPLICATION_TEST) generate

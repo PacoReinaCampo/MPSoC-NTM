@@ -92,8 +92,8 @@ architecture ntm_scalar_float_multiplier_architecture of ntm_scalar_float_multip
   constant ZERO_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
   constant ONE_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
 
-  constant ZERO_MANTISSA : std_logic_vector(MANTISSA_SIZE+1 downto 0) := std_logic_vector(to_unsigned(0, MANTISSA_SIZE+2));
-  constant ONE_MANTISSA  : std_logic_vector(MANTISSA_SIZE+1 downto 0) := std_logic_vector(to_unsigned(1, MANTISSA_SIZE+2));
+  constant ZERO_MANTISSA : std_logic_vector(2*MANTISSA_SIZE+1 downto 0) := std_logic_vector(to_unsigned(0, 2*MANTISSA_SIZE+2));
+  constant ONE_MANTISSA  : std_logic_vector(2*MANTISSA_SIZE+1 downto 0) := std_logic_vector(to_unsigned(1, 2*MANTISSA_SIZE+2));
 
   constant ZERO_EXPONENT : std_logic_vector(EXPONENT_SIZE downto 0) := std_logic_vector(to_unsigned(0, EXPONENT_SIZE+1));
   constant ONE_EXPONENT  : std_logic_vector(EXPONENT_SIZE downto 0) := std_logic_vector(to_unsigned(1, EXPONENT_SIZE+1));
@@ -137,14 +137,14 @@ architecture ntm_scalar_float_multiplier_architecture of ntm_scalar_float_multip
   signal data_a_in_int : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_mantissa_int   : std_logic_vector(MANTISSA_SIZE+1 downto 0);
-  signal data_a_mantissa_int : std_logic_vector(MANTISSA_SIZE downto 0);
+  signal data_mantissa_int   : std_logic_vector(2*MANTISSA_SIZE+1 downto 0);
+  signal data_b_mantissa_int : std_logic_vector(MANTISSA_SIZE downto 0);
 
   signal data_exponent_int : std_logic_vector(EXPONENT_SIZE+1 downto 0);
 
   signal data_sign_int : std_logic;
 
-  signal data_product_int : std_logic_vector(MANTISSA_SIZE+1 downto 0);
+  signal data_product_int : std_logic_vector(2*MANTISSA_SIZE+1 downto 0);
 
   signal index_loop : integer;
 
@@ -180,7 +180,7 @@ begin
       data_b_in_int <= ZERO_DATA;
 
       data_mantissa_int   <= ZERO_MANTISSA;
-      data_a_mantissa_int <= ZERO_MANTISSA_REGISTER;
+      data_b_mantissa_int <= ZERO_MANTISSA_REGISTER;
 
       data_exponent_int <= ZERO_EXPONENT_REGISTER;
 
@@ -206,8 +206,8 @@ begin
         when ASIGNATION_STATE =>
 
           -- Data Internal
-          data_mantissa_int   <= ZERO_MANTISSA;
-          data_a_mantissa_int <= data_a_in_mantissa_int;
+          data_mantissa_int   <= ZERO_MANTISSA_REGISTER & data_a_in_mantissa_int;
+          data_b_mantissa_int <= data_b_in_mantissa_int;
 
           data_exponent_int <= std_logic_vector(("00" & unsigned(data_a_in_exponent_int)) + ("00" & unsigned(data_b_in_exponent_int)) - unsigned(BIAS_EXPONENT));
 
@@ -216,14 +216,14 @@ begin
           data_product_int <= ZERO_MANTISSA;
 
           -- Control Internal
-          index_loop <= MANTISSA_SIZE+2;
+          index_loop <= 2*MANTISSA_SIZE+2;
 
           -- FSM Control
           multiplier_ctrl_fsm_int <= OPERATION_STATE;
 
         when OPERATION_STATE =>
 
-          if (data_a_in_mantissa_int = LIMIT_MANTISSA and data_a_in_exponent_int = EXPONENT_EMPTY) then
+          if (data_b_in_mantissa_int = LIMIT_MANTISSA and data_b_in_exponent_int = EXPONENT_EMPTY) then
             -- Data Outputs
             OVERFLOW_OUT <= '1';
 
@@ -255,7 +255,7 @@ begin
             multiplier_ctrl_fsm_int <= STARTER_STATE;
           else
             -- Data Internal
-            data_mantissa_int <= std_logic_vector(unsigned(data_mantissa_int) + ('1' & unsigned(data_a_mantissa_int)));
+            data_mantissa_int <= std_logic_vector(unsigned(data_mantissa_int) + (unsigned(LIMIT_MANTISSA) & unsigned(data_b_mantissa_int)));
 
             -- FSM Control
             multiplier_ctrl_fsm_int <= NORMALIZATION_STATE;
@@ -264,10 +264,10 @@ begin
         when NORMALIZATION_STATE =>
 
           -- Data Internal
-          if (data_mantissa_int(MANTISSA_SIZE+1) = '1') then
+          if (data_mantissa_int(2*MANTISSA_SIZE+1) = '1') then
             data_product_int(0) <= '1';
           else
-            data_mantissa_int   <= std_logic_vector(unsigned(data_mantissa_int) + ('0' & unsigned(data_a_mantissa_int)));
+            data_mantissa_int   <= std_logic_vector(unsigned(data_mantissa_int) + (unsigned(ZERO_MANTISSA_REGISTER) & unsigned(data_b_mantissa_int)));
             data_product_int(0) <= '0';
           end if;
 
@@ -281,17 +281,17 @@ begin
 
           if (index_loop = 0) then
             -- Data Internal
-            if (data_product_int(MANTISSA_SIZE+1) = '0') then
+            if (data_product_int(2*MANTISSA_SIZE+1) = '0') then
               data_exponent_int <= std_logic_vector(unsigned(data_exponent_int) - unsigned(ONE_EXPONENT_REGISTER));
-              data_product_int  <= data_product_int(MANTISSA_SIZE downto 0) & '0';
+              data_product_int  <= data_product_int(2*MANTISSA_SIZE downto 0) & '0';
             end if;
 
             -- FSM Control
             multiplier_ctrl_fsm_int <= ENDER_STATE;
           else
             -- Data Internal
-            data_mantissa_int <= data_mantissa_int(MANTISSA_SIZE downto 0) & data_product_int(MANTISSA_SIZE+1);
-            data_product_int  <= data_product_int(MANTISSA_SIZE downto 0) & '0';
+            data_mantissa_int <= data_mantissa_int(2*MANTISSA_SIZE downto 0) & data_product_int(2*MANTISSA_SIZE+1);
+            data_product_int  <= data_product_int(2*MANTISSA_SIZE downto 0) & '0';
 
             -- FSM Control
             multiplier_ctrl_fsm_int <= OPERATION_STATE;
@@ -309,7 +309,7 @@ begin
             data_out_exponent_int <= (others => '1');
             data_out_sign_int     <= data_sign_int;
           else
-            data_out_mantissa_int <= data_mantissa_int(MANTISSA_SIZE+1 downto 1);
+            data_out_mantissa_int <= data_mantissa_int(2*MANTISSA_SIZE+1 downto MANTISSA_SIZE+1);
             data_out_exponent_int <= data_exponent_int(EXPONENT_SIZE-1 downto 0);
             data_out_sign_int     <= data_sign_int;
           end if;

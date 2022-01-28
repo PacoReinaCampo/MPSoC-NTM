@@ -265,7 +265,7 @@ begin
           -- Control Internal
           start_scalar_adder <= '1';
 
-          operation_scalar_adder <= '0';
+          operation_scalar_adder <= '1';
 
           -- FSM Control
           differentiation_ctrl_fsm_int <= SCALAR_ADDER_STATE;

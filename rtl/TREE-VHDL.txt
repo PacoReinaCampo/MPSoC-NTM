@@ -119,14 +119,14 @@
 │   ├── algebra
 │   │   ├── matrix
 │   │   │   ├── ntm_matrix_convolution.vhd
-│   │   │   ├── ntm_matrix_cosine_similarity.vhd
+│   │   │   ├── ntm_matrix_inverse.vhd
 │   │   │   ├── ntm_matrix_multiplication.vhd
 │   │   │   ├── ntm_matrix_product.vhd
 │   │   │   ├── ntm_matrix_summation.vhd
 │   │   │   └── ntm_matrix_transpose.vhd
 │   │   ├── tensor
 │   │   │   ├── ntm_tensor_convolution.vhd
-│   │   │   ├── ntm_tensor_cosine_similarity.vhd
+│   │   │   ├── ntm_tensor_inverse.vhd
 │   │   │   ├── ntm_tensor_multiplication.vhd
 │   │   │   ├── ntm_tensor_product.vhd
 │   │   │   ├── ntm_tensor_summation.vhd
@@ -144,7 +144,7 @@
 │   │   │   ├── ntm_matrix_integration.vhd
 │   │   │   └── ntm_matrix_softmax.vhd
 │   │   ├── tensor
-│   │   │   ├── ntm_tensor_differentiation.vhd~
+│   │   │   ├── ntm_tensor_differentiation.vhd
 │   │   │   ├── ntm_tensor_integration.vhd
 │   │   │   └── ntm_tensor_softmax.vhd
 │   │   └── vector

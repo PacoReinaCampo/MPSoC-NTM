@@ -496,7 +496,7 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_COSH_CASE 0         ";
         -------------------------------------------------------------------
 
-        SCALAR_COSH_DATA_IN <= ONE_DATA;
+        SCALAR_COSH_DATA_IN <= SCALAR_SAMPLE_A;
       end if;
 
       if (STIMULUS_NTM_SCALAR_COSH_CASE_1) then
@@ -505,7 +505,7 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_COSH_CASE 1         ";
         -------------------------------------------------------------------
 
-        SCALAR_COSH_DATA_IN <= TWO_DATA;
+        SCALAR_COSH_DATA_IN <= SCALAR_SAMPLE_B;
       end if;
 
       wait for WORKING;
@@ -524,7 +524,7 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE 0";
         -------------------------------------------------------------------
 
-        SCALAR_EXPONENTIATOR_DATA_IN <= ONE_DATA;
+        SCALAR_EXPONENTIATOR_DATA_IN <= SCALAR_SAMPLE_A;
       end if;
 
       if (STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1) then
@@ -533,7 +533,7 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE 1";
         -------------------------------------------------------------------
 
-        SCALAR_EXPONENTIATOR_DATA_IN <= TWO_DATA;
+        SCALAR_EXPONENTIATOR_DATA_IN <= SCALAR_SAMPLE_B;
       end if;
 
       wait for WORKING;
@@ -552,7 +552,7 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_LOGARITHM_CASE 0    ";
         -------------------------------------------------------------------
 
-        SCALAR_LOGARITHM_DATA_IN <= ONE_DATA;
+        SCALAR_LOGARITHM_DATA_IN <= SCALAR_SAMPLE_A;
       end if;
 
       if (STIMULUS_NTM_SCALAR_LOGARITHM_CASE_1) then
@@ -561,7 +561,7 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_LOGARITHM_CASE 1    ";
         -------------------------------------------------------------------
 
-        SCALAR_LOGARITHM_DATA_IN <= TWO_DATA;
+        SCALAR_LOGARITHM_DATA_IN <= SCALAR_SAMPLE_B;
       end if;
 
       wait for WORKING;
@@ -580,7 +580,7 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_LOGISTIC_CASE 0     ";
         -------------------------------------------------------------------
 
-        SCALAR_LOGISTIC_DATA_IN <= ONE_DATA;
+        SCALAR_LOGISTIC_DATA_IN <= SCALAR_SAMPLE_A;
       end if;
 
       if (STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1) then
@@ -589,7 +589,7 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_LOGISTIC_CASE 1     ";
         -------------------------------------------------------------------
 
-        SCALAR_LOGISTIC_DATA_IN <= TWO_DATA;
+        SCALAR_LOGISTIC_DATA_IN <= SCALAR_SAMPLE_B;
       end if;
 
       wait for WORKING;
@@ -608,7 +608,7 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ONEPLUS_CASE 0      ";
         -------------------------------------------------------------------
 
-        SCALAR_ONEPLUS_DATA_IN <= ONE_DATA;
+        SCALAR_ONEPLUS_DATA_IN <= SCALAR_SAMPLE_A;
       end if;
 
       if (STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1) then
@@ -617,7 +617,7 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ONEPLUS_CASE 1      ";
         -------------------------------------------------------------------
 
-        SCALAR_ONEPLUS_DATA_IN <= TWO_DATA;
+        SCALAR_ONEPLUS_DATA_IN <= SCALAR_SAMPLE_B;
       end if;
 
       wait for WORKING;
@@ -636,7 +636,7 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_SINH_CASE 0         ";
         -------------------------------------------------------------------
 
-        SCALAR_SINH_DATA_IN <= ONE_DATA;
+        SCALAR_SINH_DATA_IN <= SCALAR_SAMPLE_A;
       end if;
 
       if (STIMULUS_NTM_SCALAR_SINH_CASE_1) then
@@ -645,7 +645,7 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_SINH_CASE 1         ";
         -------------------------------------------------------------------
 
-        SCALAR_SINH_DATA_IN <= TWO_DATA;
+        SCALAR_SINH_DATA_IN <= SCALAR_SAMPLE_B;
       end if;
 
       wait for WORKING;
@@ -664,7 +664,7 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_TANH_CASE 0         ";
         -------------------------------------------------------------------
 
-        SCALAR_TANH_DATA_IN <= ONE_DATA;
+        SCALAR_TANH_DATA_IN <= SCALAR_SAMPLE_A;
       end if;
 
       if (STIMULUS_NTM_SCALAR_TANH_CASE_1) then
@@ -673,7 +673,7 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_TANH_CASE 1         ";
         -------------------------------------------------------------------
 
-        SCALAR_TANH_DATA_IN <= TWO_DATA;
+        SCALAR_TANH_DATA_IN <= SCALAR_SAMPLE_B;
       end if;
 
       wait for WORKING;

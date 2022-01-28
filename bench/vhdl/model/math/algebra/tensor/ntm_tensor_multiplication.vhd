@@ -149,7 +149,7 @@ architecture ntm_tensor_multiplication_architecture of ntm_tensor_multiplication
   signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal data_out_scalar_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal overflow_out_scalar_multiplier : std_logic;
+  signal overflow_out_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 

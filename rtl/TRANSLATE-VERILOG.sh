@@ -88,13 +88,13 @@ vhdl2verilog vhdl/dnc/write_heads/dnc_write_key.vhd
 vhdl2verilog vhdl/dnc/write_heads/dnc_write_strength.vhd
 vhdl2verilog vhdl/dnc/write_heads/dnc_write_vector.vhd
 vhdl2verilog vhdl/math/algebra/matrix/ntm_matrix_convolution.vhd
-vhdl2verilog vhdl/math/algebra/matrix/ntm_matrix_cosine_similarity.vhd
+vhdl2verilog vhdl/math/algebra/matrix/ntm_matrix_inverse.vhd
 vhdl2verilog vhdl/math/algebra/matrix/ntm_matrix_multiplication.vhd
 vhdl2verilog vhdl/math/algebra/matrix/ntm_matrix_product.vhd
 vhdl2verilog vhdl/math/algebra/matrix/ntm_matrix_summation.vhd
 vhdl2verilog vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
 vhdl2verilog vhdl/math/algebra/tensor/ntm_tensor_convolution.vhd
-vhdl2verilog vhdl/math/algebra/tensor/ntm_tensor_cosine_similarity.vhd
+vhdl2verilog vhdl/math/algebra/tensor/ntm_tensor_inverse.vhd
 vhdl2verilog vhdl/math/algebra/tensor/ntm_tensor_multiplication.vhd
 vhdl2verilog vhdl/math/algebra/tensor/ntm_tensor_product.vhd
 vhdl2verilog vhdl/math/algebra/tensor/ntm_tensor_summation.vhd

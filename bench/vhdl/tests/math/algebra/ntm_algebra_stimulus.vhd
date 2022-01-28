@@ -558,20 +558,20 @@ begin
   VECTOR_TRANSPOSE_START         <= start_int;
 
   -- MATRIX-FUNCTIONALITY
-  MATRIX_CONVOLUTION_START       <= start_int;
-  MATRIX_INVERSE_START <= start_int;
-  MATRIX_MULTIPLICATION_START    <= start_int;
-  MATRIX_PRODUCT_START           <= start_int;
-  MATRIX_SUMMATION_START         <= start_int;
-  MATRIX_TRANSPOSE_START         <= start_int;
+  MATRIX_CONVOLUTION_START    <= start_int;
+  MATRIX_INVERSE_START        <= start_int;
+  MATRIX_MULTIPLICATION_START <= start_int;
+  MATRIX_PRODUCT_START        <= start_int;
+  MATRIX_SUMMATION_START      <= start_int;
+  MATRIX_TRANSPOSE_START      <= start_int;
 
   -- TENSOR-FUNCTIONALITY
-  TENSOR_CONVOLUTION_START       <= start_int;
-  TENSOR_INVERSE_START <= start_int;
-  TENSOR_MULTIPLICATION_START    <= start_int;
-  TENSOR_PRODUCT_START           <= start_int;
-  TENSOR_SUMMATION_START         <= start_int;
-  TENSOR_TRANSPOSE_START         <= start_int;
+  TENSOR_CONVOLUTION_START    <= start_int;
+  TENSOR_INVERSE_START        <= start_int;
+  TENSOR_MULTIPLICATION_START <= start_int;
+  TENSOR_PRODUCT_START        <= start_int;
+  TENSOR_SUMMATION_START      <= start_int;
+  TENSOR_TRANSPOSE_START      <= start_int;
 
   -----------------------------------------------------------------------
   -- STIMULUS

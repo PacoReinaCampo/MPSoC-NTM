@@ -140,48 +140,48 @@ package ntm_algebra_pkg is
   signal STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_1         : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
-  signal STIMULUS_NTM_MATRIX_CONVOLUTION_TEST       : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INVERSE_TEST : boolean := false;
-  signal STIMULUS_NTM_MATRIX_MULTIPLICATION_TEST    : boolean := false;
-  signal STIMULUS_NTM_MATRIX_PRODUCT_TEST           : boolean := false;
-  signal STIMULUS_NTM_MATRIX_SUMMATION_TEST         : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TRANSPOSE_TEST         : boolean := false;
+  signal STIMULUS_NTM_MATRIX_CONVOLUTION_TEST    : boolean := false;
+  signal STIMULUS_NTM_MATRIX_INVERSE_TEST        : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MULTIPLICATION_TEST : boolean := false;
+  signal STIMULUS_NTM_MATRIX_PRODUCT_TEST        : boolean := false;
+  signal STIMULUS_NTM_MATRIX_SUMMATION_TEST      : boolean := false;
+  signal STIMULUS_NTM_MATRIX_TRANSPOSE_TEST      : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_0       : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INVERSE_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_MULTIPLICATION_CASE_0    : boolean := false;
-  signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_0           : boolean := false;
-  signal STIMULUS_NTM_MATRIX_SUMMATION_CASE_0         : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0         : boolean := false;
+  signal STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_0    : boolean := false;
+  signal STIMULUS_NTM_MATRIX_INVERSE_CASE_0        : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MULTIPLICATION_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_0        : boolean := false;
+  signal STIMULUS_NTM_MATRIX_SUMMATION_CASE_0      : boolean := false;
+  signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_0      : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_1       : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INVERSE_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_MULTIPLICATION_CASE_1    : boolean := false;
-  signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_1           : boolean := false;
-  signal STIMULUS_NTM_MATRIX_SUMMATION_CASE_1         : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1         : boolean := false;
+  signal STIMULUS_NTM_MATRIX_CONVOLUTION_CASE_1    : boolean := false;
+  signal STIMULUS_NTM_MATRIX_INVERSE_CASE_1        : boolean := false;
+  signal STIMULUS_NTM_MATRIX_MULTIPLICATION_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_MATRIX_PRODUCT_CASE_1        : boolean := false;
+  signal STIMULUS_NTM_MATRIX_SUMMATION_CASE_1      : boolean := false;
+  signal STIMULUS_NTM_MATRIX_TRANSPOSE_CASE_1      : boolean := false;
 
   -- TENSOR-FUNCTIONALITY
-  signal STIMULUS_NTM_TENSOR_CONVOLUTION_TEST       : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INVERSE_TEST : boolean := false;
-  signal STIMULUS_NTM_TENSOR_MULTIPLICATION_TEST    : boolean := false;
-  signal STIMULUS_NTM_TENSOR_PRODUCT_TEST           : boolean := false;
-  signal STIMULUS_NTM_TENSOR_SUMMATION_TEST         : boolean := false;
-  signal STIMULUS_NTM_TENSOR_TRANSPOSE_TEST         : boolean := false;
+  signal STIMULUS_NTM_TENSOR_CONVOLUTION_TEST    : boolean := false;
+  signal STIMULUS_NTM_TENSOR_INVERSE_TEST        : boolean := false;
+  signal STIMULUS_NTM_TENSOR_MULTIPLICATION_TEST : boolean := false;
+  signal STIMULUS_NTM_TENSOR_PRODUCT_TEST        : boolean := false;
+  signal STIMULUS_NTM_TENSOR_SUMMATION_TEST      : boolean := false;
+  signal STIMULUS_NTM_TENSOR_TRANSPOSE_TEST      : boolean := false;
 
-  signal STIMULUS_NTM_TENSOR_CONVOLUTION_CASE_0       : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INVERSE_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_MULTIPLICATION_CASE_0    : boolean := false;
-  signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_0           : boolean := false;
-  signal STIMULUS_NTM_TENSOR_SUMMATION_CASE_0         : boolean := false;
-  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_0         : boolean := false;
+  signal STIMULUS_NTM_TENSOR_CONVOLUTION_CASE_0    : boolean := false;
+  signal STIMULUS_NTM_TENSOR_INVERSE_CASE_0        : boolean := false;
+  signal STIMULUS_NTM_TENSOR_MULTIPLICATION_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_0        : boolean := false;
+  signal STIMULUS_NTM_TENSOR_SUMMATION_CASE_0      : boolean := false;
+  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_0      : boolean := false;
 
-  signal STIMULUS_NTM_TENSOR_CONVOLUTION_CASE_1       : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INVERSE_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_MULTIPLICATION_CASE_1    : boolean := false;
-  signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_1           : boolean := false;
-  signal STIMULUS_NTM_TENSOR_SUMMATION_CASE_1         : boolean := false;
-  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_1         : boolean := false;
+  signal STIMULUS_NTM_TENSOR_CONVOLUTION_CASE_1    : boolean := false;
+  signal STIMULUS_NTM_TENSOR_INVERSE_CASE_1        : boolean := false;
+  signal STIMULUS_NTM_TENSOR_MULTIPLICATION_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_TENSOR_PRODUCT_CASE_1        : boolean := false;
+  signal STIMULUS_NTM_TENSOR_SUMMATION_CASE_1      : boolean := false;
+  signal STIMULUS_NTM_TENSOR_TRANSPOSE_CASE_1      : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components

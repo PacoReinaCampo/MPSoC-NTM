@@ -330,7 +330,7 @@ begin
           -- Control Internal
           start_scalar_adder <= '1';
 
-          operation_scalar_adder <= '0';
+          operation_scalar_adder <= '1';
 
           -- FSM Control
           differentiation_ctrl_fsm_int <= SCALAR_ADDER_J_STATE;
@@ -360,7 +360,7 @@ begin
           -- Control Internal
           start_scalar_adder <= '1';
 
-          operation_scalar_adder <= '0';
+          operation_scalar_adder <= '1';
 
           -- FSM Control
           if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then

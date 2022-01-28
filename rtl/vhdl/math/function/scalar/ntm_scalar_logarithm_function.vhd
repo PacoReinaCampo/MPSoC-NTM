@@ -253,7 +253,7 @@ begin
               data_b_in_scalar_adder <= data_out_scalar_adder;
             end if;
 
-             -- FSM Control
+            -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
           else
             -- Control Internal
