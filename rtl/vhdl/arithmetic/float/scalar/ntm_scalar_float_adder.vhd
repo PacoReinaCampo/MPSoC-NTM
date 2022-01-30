@@ -88,9 +88,6 @@ architecture ntm_scalar_float_adder_architecture of ntm_scalar_float_adder is
   constant MANTISSA_SIZE : integer := 23;
   constant EXPONENT_SIZE : integer := 8;
 
-  constant ZERO_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-
   constant ZERO_MANTISSA : std_logic_vector(MANTISSA_SIZE+1 downto 0) := std_logic_vector(to_unsigned(0, MANTISSA_SIZE+2));
   constant ONE_MANTISSA  : std_logic_vector(MANTISSA_SIZE+1 downto 0) := std_logic_vector(to_unsigned(1, MANTISSA_SIZE+2));
 
