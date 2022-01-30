@@ -33,11 +33,7 @@ add wave -noupdate /ntm_float_testbench/ntm_scalar_float_divider_test/scalar_flo
 add wave -noupdate /ntm_float_testbench/ntm_scalar_float_divider_test/scalar_float_divider/data_out_mantissa_int
 add wave -noupdate /ntm_float_testbench/ntm_scalar_float_divider_test/scalar_float_divider/data_out_sign_int
 
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_divider_test/scalar_float_divider/data_a_in_int
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_divider_test/scalar_float_divider/data_b_in_int
-
 add wave -noupdate /ntm_float_testbench/ntm_scalar_float_divider_test/scalar_float_divider/data_mantissa_int
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_divider_test/scalar_float_divider/data_b_mantissa_int
 
 add wave -noupdate /ntm_float_testbench/ntm_scalar_float_divider_test/scalar_float_divider/data_exponent_int
 
