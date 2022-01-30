@@ -209,14 +209,14 @@ begin
           data_mantissa_int   <= '0' & data_a_in_mantissa_int;
           data_b_mantissa_int <= data_b_in_mantissa_int;
 
-          data_exponent_int <= std_logic_vector(("00" & unsigned(data_a_in_exponent_int)) - ("00" & unsigned(data_b_in_exponent_int)) + unsigned(BIAS_EXPONENT));
+          data_exponent_int <= std_logic_vector(("00" & unsigned(data_a_in_exponent_int))-("00" & unsigned(data_b_in_exponent_int))+unsigned(BIAS_EXPONENT));
 
           data_sign_int <= data_a_in_sign_int xor data_b_in_sign_int;
 
           data_quotient_int <= ZERO_MANTISSA;
 
           -- Control Internal
-          index_loop <= MANTISSA_SIZE+2;
+          index_loop <= MANTISSA_SIZE+1;
 
           -- FSM Control
           divider_ctrl_fsm_int <= OPERATION_STATE;
@@ -255,7 +255,7 @@ begin
             divider_ctrl_fsm_int <= STARTER_STATE;
           else
             -- Data Internal
-            data_mantissa_int <= std_logic_vector(unsigned(data_mantissa_int) - ('1' & unsigned(data_b_mantissa_int)));
+            data_mantissa_int <= std_logic_vector(unsigned(data_mantissa_int)-('1' & unsigned(data_b_mantissa_int)));
 
             -- FSM Control
             divider_ctrl_fsm_int <= NORMALIZATION_STATE;
@@ -267,12 +267,9 @@ begin
           if (data_mantissa_int(MANTISSA_SIZE+1) = '1') then
             data_quotient_int(0) <= '1';
           else
-            data_mantissa_int    <= std_logic_vector(unsigned(data_mantissa_int) + ('0' & unsigned(data_b_mantissa_int)));
+            data_mantissa_int    <= std_logic_vector(unsigned(data_mantissa_int)+('0' & unsigned(data_b_mantissa_int)));
             data_quotient_int(0) <= '0';
           end if;
-
-          -- Control Internal
-          index_loop <= index_loop - 1;
 
           -- FSM Control
           divider_ctrl_fsm_int <= ROUND_STATE;
@@ -282,7 +279,7 @@ begin
           if (index_loop = 0) then
             -- Data Internal
             if (data_quotient_int(MANTISSA_SIZE+1) = '0') then
-              data_exponent_int <= std_logic_vector(unsigned(data_exponent_int) - unsigned(ONE_EXPONENT_REGISTER));
+              data_exponent_int <= std_logic_vector(unsigned(data_exponent_int)-unsigned(ONE_EXPONENT_REGISTER));
               data_quotient_int <= data_quotient_int(MANTISSA_SIZE downto 0) & '0';
             end if;
 
@@ -292,6 +289,9 @@ begin
             -- Data Internal
             data_mantissa_int <= data_mantissa_int(MANTISSA_SIZE downto 0) & data_quotient_int(MANTISSA_SIZE+1);
             data_quotient_int <= data_quotient_int(MANTISSA_SIZE downto 0) & '0';
+
+            -- Control Internal
+            index_loop <= index_loop-1;
 
             -- FSM Control
             divider_ctrl_fsm_int <= OPERATION_STATE;

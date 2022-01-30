@@ -161,11 +161,11 @@ begin
 
             data_a_in_sign_int <= DATA_A_IN(DATA_SIZE-1);
 
-			if (OPERATION = '1') then
+            if (OPERATION = '1') then
               data_b_in_sign_int <= not DATA_B_IN(DATA_SIZE-1);
-			else
+            else
               data_b_in_sign_int <= DATA_B_IN(DATA_SIZE-1);
-			end if;
+            end if;
 
             -- FSM Control
             adder_ctrl_fsm_int <= ALIGNMENT_STATE;
