@@ -29,19 +29,6 @@ add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_
 add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_a_in_sign_int
 add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_b_in_sign_int
 
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_out_exponent_int
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_out_mantissa_int
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_out_sign_int
-
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_mantissa_int
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_product_int
-
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_exponent_int
-
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/data_sign_int
-
-add wave -noupdate /ntm_float_testbench/ntm_scalar_float_multiplier_test/scalar_float_multiplier/index_loop
-
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}
 configure wave -namecolwidth 305

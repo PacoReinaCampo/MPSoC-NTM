@@ -115,16 +115,16 @@ package ntm_float_pkg is
   constant VECTOR_SAMPLE_B : vector_buffer := (P_THREE, N_NINE, N_ONE);
 
   -- Float Buffer
-  -- constant FLOAT_SAMPLE_A : std_logic_vector(31 downto 0) := X"480C8021";
-  -- constant FLOAT_SAMPLE_B : std_logic_vector(31 downto 0) := X"C3302020";
+  constant FLOAT_SAMPLE_A : std_logic_vector(31 downto 0) := X"480C8021";
+  constant FLOAT_SAMPLE_B : std_logic_vector(31 downto 0) := X"C3302020";
 
   -- ADDITION       = X"480C5419"
   -- SUSTRACTION    = X"480CAC29"
   -- MULTIPLICATION = X"CBC15371"
   -- DIVISION       = X"C44C3801"
 
-  constant FLOAT_SAMPLE_A : std_logic_vector(31 downto 0) := X"40400000";
-  constant FLOAT_SAMPLE_B : std_logic_vector(31 downto 0) := X"40000000";
+  -- constant FLOAT_SAMPLE_A : std_logic_vector(31 downto 0) := X"40400000";
+  -- constant FLOAT_SAMPLE_B : std_logic_vector(31 downto 0) := X"40000000";
 
   -- ADDITION       = X"40A00000"
   -- SUSTRACTION    = X"3F800000"

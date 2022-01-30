@@ -97,10 +97,10 @@ architecture ntm_scalar_float_divider_architecture of ntm_scalar_float_divider i
   constant MANTISSA_FULL  : std_logic_vector(MANTISSA_SIZE downto 0) := (others => '1');
   constant MANTISSA_EMPTY : std_logic_vector(MANTISSA_SIZE downto 0) := (others => '0');
 
-  constant LIMIT_MANTISSA : std_logic_vector(MANTISSA_SIZE downto 0) := X"800000";
-
   constant EXPONENT_FULL  : std_logic_vector(EXPONENT_SIZE-1 downto 0) := (others => '1');
   constant EXPONENT_EMPTY : std_logic_vector(EXPONENT_SIZE-1 downto 0) := (others => '0');
+
+  constant LIMIT_MANTISSA : std_logic_vector(MANTISSA_SIZE downto 0) := X"800000";
 
   constant BIAS_EXPONENT : std_logic_vector(EXPONENT_SIZE+1 downto 0) := "0001111111";
 
@@ -134,6 +134,7 @@ architecture ntm_scalar_float_divider_architecture of ntm_scalar_float_divider i
 
   signal data_sign_int : std_logic;
 
+  -- Control Internal
   signal index_loop : integer;
 
 begin
