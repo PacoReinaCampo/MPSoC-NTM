@@ -274,14 +274,17 @@ begin
 
           -- Data Internal
           if (data_exponent_int = ZERO_EXPONENT) then
+            -- Underflow
             data_out_mantissa_int <= MANTISSA_EMPTY;
             data_out_exponent_int <= EXPONENT_EMPTY;
             data_out_sign_int     <= data_sign_int;
           elsif (data_exponent_int(EXPONENT_SIZE+1 downto EXPONENT_SIZE) = "01") then
+            -- Overflow
             data_out_mantissa_int <= MANTISSA_EMPTY;
             data_out_exponent_int <= EXPONENT_FULL;
             data_out_sign_int     <= data_sign_int;
           else
+            -- Normal
             data_out_mantissa_int <= data_quotient_int(MANTISSA_SIZE+1 downto 1);
             data_out_exponent_int <= data_exponent_int(EXPONENT_SIZE-1 downto 0);
             data_out_sign_int     <= data_sign_int;
