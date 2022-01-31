@@ -64,7 +64,8 @@ entity ntm_scalar_float_adder is
     DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    OVERFLOW_OUT : out std_logic
     );
 end ntm_scalar_float_adder;
 
@@ -122,6 +123,9 @@ begin
   ctrl_fsm : process (CLK, RST)
   begin
     if(RST = '0') then
+      -- Data Outputs
+      OVERFLOW_OUT <= '0';
+
       -- Control Outputs
       READY <= '0';
 
