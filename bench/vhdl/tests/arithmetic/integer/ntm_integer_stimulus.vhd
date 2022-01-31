@@ -870,46 +870,43 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_INTEGER_ADDER_DATA_A_IN_I_ENABLE <= '1';
-        MATRIX_INTEGER_ADDER_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_INTEGER_ADDER_DATA_B_IN_I_ENABLE <= '1';
-        MATRIX_INTEGER_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_INTEGER_ADDER_DATA_A_IN <= ONE_DATA;
-        MATRIX_INTEGER_ADDER_DATA_B_IN <= ONE_DATA;
+        MATRIX_INTEGER_ADDER_DATA_A_IN <= ZERO_DATA;
+        MATRIX_INTEGER_ADDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_INTEGER_ADDER_DATA_OUT_I_ENABLE = '1') and (MATRIX_INTEGER_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_INTEGER_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_INTEGER_ADDER_FIRST_RUN : loop
+          if (MATRIX_INTEGER_ADDER_DATA_OUT_I_ENABLE = '1' and MATRIX_INTEGER_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_INTEGER_ADDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_INTEGER_ADDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_INTEGER_ADDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_INTEGER_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_INTEGER_ADDER_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_INTEGER_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_INTEGER_ADDER_DATA_OUT_I_ENABLE = '1' and MATRIX_INTEGER_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_INTEGER_ADDER_DATA_A_IN <= ONE_DATA;
-            MATRIX_INTEGER_ADDER_DATA_B_IN <= ONE_DATA;
+            MATRIX_INTEGER_ADDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_INTEGER_ADDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_INTEGER_ADDER_DATA_OUT_I_ENABLE = '0') and (MATRIX_INTEGER_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_INTEGER_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_INTEGER_ADDER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_INTEGER_ADDER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_INTEGER_ADDER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_INTEGER_ADDER_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_INTEGER_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_INTEGER_ADDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_INTEGER_ADDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_INTEGER_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_INTEGER_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_INTEGER_ADDER_DATA_A_IN <= ONE_DATA;
-            MATRIX_INTEGER_ADDER_DATA_B_IN <= ONE_DATA;
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_INTEGER_ADDER_DATA_A_IN_I_ENABLE <= '0';
@@ -918,12 +915,23 @@ begin
             MATRIX_INTEGER_ADDER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_INTEGER_ADDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_INTEGER_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INTEGER_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_INTEGER_ADDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_INTEGER_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INTEGER_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_INTEGER_ADDER_DATA_OUT_J_ENABLE = '1' or MATRIX_INTEGER_ADDER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_INTEGER_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_INTEGER_ADDER_READY = '1';
-        end loop;
+          exit MATRIX_INTEGER_ADDER_FIRST_RUN when MATRIX_INTEGER_ADDER_READY = '1';
+        end loop MATRIX_INTEGER_ADDER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_1) then
@@ -933,47 +941,43 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_INTEGER_ADDER_DATA_A_IN_I_ENABLE <= '1';
-        MATRIX_INTEGER_ADDER_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_INTEGER_ADDER_DATA_B_IN_I_ENABLE <= '1';
-        MATRIX_INTEGER_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_INTEGER_ADDER_DATA_A_IN <= TWO_DATA;
-        MATRIX_INTEGER_ADDER_DATA_B_IN <= ONE_DATA;
+        MATRIX_INTEGER_ADDER_DATA_A_IN <= ZERO_DATA;
+        MATRIX_INTEGER_ADDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
+        MATRIX_INTEGER_ADDER_SECOND_RUN : loop
+          if (MATRIX_INTEGER_ADDER_DATA_OUT_I_ENABLE = '1' and MATRIX_INTEGER_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_INTEGER_ADDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_INTEGER_ADDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-        loop
-          if ((MATRIX_INTEGER_ADDER_DATA_OUT_I_ENABLE = '1') and (MATRIX_INTEGER_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_INTEGER_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_INTEGER_ADDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_INTEGER_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_INTEGER_ADDER_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_INTEGER_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_INTEGER_ADDER_DATA_OUT_I_ENABLE = '1' and MATRIX_INTEGER_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_INTEGER_ADDER_DATA_A_IN <= TWO_DATA;
-            MATRIX_INTEGER_ADDER_DATA_B_IN <= ONE_DATA;
+            MATRIX_INTEGER_ADDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_INTEGER_ADDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_INTEGER_ADDER_DATA_OUT_I_ENABLE = '0') and (MATRIX_INTEGER_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_INTEGER_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_INTEGER_ADDER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_INTEGER_ADDER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_INTEGER_ADDER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_INTEGER_ADDER_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_INTEGER_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_INTEGER_ADDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_INTEGER_ADDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_INTEGER_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_INTEGER_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_INTEGER_ADDER_DATA_A_IN <= TWO_DATA;
-            MATRIX_INTEGER_ADDER_DATA_B_IN <= ONE_DATA;
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_INTEGER_ADDER_DATA_A_IN_I_ENABLE <= '0';
@@ -982,12 +986,23 @@ begin
             MATRIX_INTEGER_ADDER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_INTEGER_ADDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_INTEGER_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INTEGER_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_INTEGER_ADDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_INTEGER_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INTEGER_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_INTEGER_ADDER_DATA_OUT_J_ENABLE = '1' or MATRIX_INTEGER_ADDER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_INTEGER_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_INTEGER_ADDER_READY = '1';
-        end loop;
+          exit MATRIX_INTEGER_ADDER_SECOND_RUN when MATRIX_INTEGER_ADDER_READY = '1';
+        end loop MATRIX_INTEGER_ADDER_SECOND_RUN;
       end if;
 
       wait for WORKING;
