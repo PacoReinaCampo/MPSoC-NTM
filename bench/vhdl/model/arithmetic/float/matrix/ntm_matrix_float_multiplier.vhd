@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 
-entity ntm_matrix_adder is
+entity ntm_matrix_float_multiplier is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -57,8 +57,6 @@ entity ntm_matrix_adder is
     -- CONTROL
     START : in  std_logic;
     READY : out std_logic;
-
-    OPERATION : in std_logic;
 
     DATA_A_IN_I_ENABLE : in std_logic;
     DATA_A_IN_J_ENABLE : in std_logic;
@@ -79,13 +77,13 @@ entity ntm_matrix_adder is
     );
 end entity;
 
-architecture ntm_matrix_adder_architecture of ntm_matrix_adder is
+architecture ntm_matrix_float_multiplier_architecture of ntm_matrix_float_multiplier is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type adder_ctrl_fsm is (
+  type multiplier_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
@@ -117,36 +115,34 @@ architecture ntm_matrix_adder_architecture of ntm_matrix_adder is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal adder_ctrl_fsm_int : adder_ctrl_fsm;
+  signal multiplier_ctrl_fsm_int : multiplier_ctrl_fsm;
 
   -- Internal Signals
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_a_in_i_adder_int : std_logic;
-  signal data_a_in_j_adder_int : std_logic;
-  signal data_b_in_i_adder_int : std_logic;
-  signal data_b_in_j_adder_int : std_logic;
+  signal data_a_in_i_multiplier_int : std_logic;
+  signal data_a_in_j_multiplier_int : std_logic;
+  signal data_b_in_i_multiplier_int : std_logic;
+  signal data_b_in_j_multiplier_int : std_logic;
 
-  -- VECTOR ADDER
+  -- VECTOR FLOAT MULTIPLIER
   -- CONTROL
-  signal start_vector_adder : std_logic;
-  signal ready_vector_adder : std_logic;
+  signal start_vector_float_multiplier : std_logic;
+  signal ready_vector_float_multiplier : std_logic;
 
-  signal operation_vector_adder : std_logic;
+  signal data_a_in_enable_vector_float_multiplier : std_logic;
+  signal data_b_in_enable_vector_float_multiplier : std_logic;
 
-  signal data_a_in_enable_vector_adder : std_logic;
-  signal data_b_in_enable_vector_adder : std_logic;
-
-  signal data_out_enable_vector_adder : std_logic;
+  signal data_out_enable_vector_float_multiplier : std_logic;
 
   -- DATA
-  signal size_in_vector_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_float_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_vector_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal overflow_out_vector_adder : std_logic;
+  signal data_out_vector_float_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_vector_float_multiplier : std_logic;
 
 begin
 
@@ -154,7 +150,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN ± DATA_B_IN = M_A_IN · 2^(E_A_IN) ± M_B_IN · 2^(E_B_IN)
+  -- DATA_OUT = DATA_A_IN · DATA_B_IN = M_A_IN · M_B_IN · 2^(E_A_IN + E_B_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -171,29 +167,27 @@ begin
       DATA_OUT_J_ENABLE <= '0';
 
       -- Control Internal
-      start_vector_adder <= '0';
-
-      operation_vector_adder <= '0';
+      start_vector_float_multiplier <= '0';
 
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
 
-      data_a_in_enable_vector_adder <= '0';
-      data_b_in_enable_vector_adder <= '0';
+      data_a_in_enable_vector_float_multiplier <= '0';
+      data_b_in_enable_vector_float_multiplier <= '0';
 
-      data_a_in_i_adder_int <= '0';
-      data_a_in_j_adder_int <= '0';
-      data_b_in_i_adder_int <= '0';
-      data_b_in_j_adder_int <= '0';
+      data_a_in_i_multiplier_int <= '0';
+      data_a_in_j_multiplier_int <= '0';
+      data_b_in_i_multiplier_int <= '0';
+      data_b_in_j_multiplier_int <= '0';
 
       -- Data Internal
-      size_in_vector_adder   <= ZERO_CONTROL;
-      data_a_in_vector_adder <= ZERO_DATA;
-      data_b_in_vector_adder <= ZERO_DATA;
+      size_in_vector_float_multiplier   <= ZERO_CONTROL;
+      data_a_in_vector_float_multiplier <= ZERO_DATA;
+      data_b_in_vector_float_multiplier <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
-      case adder_ctrl_fsm_int is
+      case multiplier_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -207,65 +201,63 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            adder_ctrl_fsm_int <= INPUT_I_STATE;
+            multiplier_ctrl_fsm_int <= INPUT_I_STATE;
           end if;
 
         when INPUT_I_STATE =>           -- STEP 1
 
           if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1')) or (unsigned(index_j_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
-            data_a_in_vector_adder <= DATA_A_IN;
+            data_a_in_vector_float_multiplier <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_enable_vector_adder <= '1';
+            data_a_in_enable_vector_float_multiplier <= '1';
 
-            data_a_in_i_adder_int <= '1';
-            data_a_in_j_adder_int <= '1';
+            data_a_in_i_multiplier_int <= '1';
+            data_a_in_j_multiplier_int <= '1';
           else
             -- Control Internal
-            data_a_in_enable_vector_adder <= '0';
+            data_a_in_enable_vector_float_multiplier <= '0';
           end if;
 
           if (((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) or (unsigned(index_j_loop) = unsigned(ZERO_CONTROL))) then
             -- Data Inputs
-            data_b_in_vector_adder <= DATA_B_IN;
+            data_b_in_vector_float_multiplier <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_enable_vector_adder <= '1';
+            data_b_in_enable_vector_float_multiplier <= '1';
 
-            data_b_in_i_adder_int <= '1';
-            data_b_in_j_adder_int <= '1';
+            data_b_in_i_multiplier_int <= '1';
+            data_b_in_j_multiplier_int <= '1';
           else
             -- Control Internal
-            data_b_in_enable_vector_adder <= '0';
+            data_b_in_enable_vector_float_multiplier <= '0';
           end if;
 
           -- Control Outputs
           DATA_OUT_I_ENABLE <= '0';
           DATA_OUT_J_ENABLE <= '0';
 
-          if (data_a_in_i_adder_int = '1' and data_a_in_j_adder_int = '1' and data_b_in_i_adder_int = '1' and data_b_in_j_adder_int = '1') then
+          if (data_a_in_i_multiplier_int = '1' and data_a_in_j_multiplier_int = '1' and data_b_in_i_multiplier_int = '1' and data_b_in_j_multiplier_int = '1') then
             -- Data Inputs
-            size_in_vector_adder <= SIZE_J_IN;
+            size_in_vector_float_multiplier <= SIZE_J_IN;
 
             -- Control Internal
-            start_vector_adder <= '1';
+            start_vector_float_multiplier <= '1';
 
-            operation_vector_adder <= OPERATION;
+            data_a_in_enable_vector_float_multiplier <= '0';
+            data_b_in_enable_vector_float_multiplier <= '0';
 
-            data_a_in_enable_vector_adder <= '0';
-            data_b_in_enable_vector_adder <= '0';
-
-            data_a_in_i_adder_int <= '0';
-            data_a_in_j_adder_int <= '0';
-            data_b_in_i_adder_int <= '0';
-            data_b_in_j_adder_int <= '0';
+            data_a_in_i_multiplier_int <= '0';
+            data_a_in_j_multiplier_int <= '0';
+            data_b_in_i_multiplier_int <= '0';
+            data_b_in_j_multiplier_int <= '0';
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              adder_ctrl_fsm_int <= ENDER_I_STATE;
+              multiplier_ctrl_fsm_int <= ENDER_I_STATE;
             else
-              adder_ctrl_fsm_int <= ENDER_J_STATE;
+              multiplier_ctrl_fsm_int <= ENDER_J_STATE;
             end if;
           end if;
 
@@ -273,55 +265,55 @@ begin
 
           if (DATA_A_IN_J_ENABLE = '1') then
             -- Data Inputs
-            data_a_in_vector_adder <= DATA_A_IN;
+            data_a_in_vector_float_multiplier <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_enable_vector_adder <= '1';
+            data_a_in_enable_vector_float_multiplier <= '1';
 
-            data_a_in_j_adder_int <= '1';
+            data_a_in_j_multiplier_int <= '1';
           else
             -- Control Internal
-            data_a_in_enable_vector_adder <= '0';
+            data_a_in_enable_vector_float_multiplier <= '0';
           end if;
 
           if (DATA_B_IN_J_ENABLE = '1') then
             -- Data Inputs
-            data_b_in_vector_adder <= DATA_B_IN;
+            data_b_in_vector_float_multiplier <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_enable_vector_adder <= '1';
+            data_b_in_enable_vector_float_multiplier <= '1';
 
-            data_b_in_j_adder_int <= '1';
+            data_b_in_j_multiplier_int <= '1';
           else
             -- Control Internal
-            data_b_in_enable_vector_adder <= '0';
+            data_b_in_enable_vector_float_multiplier <= '0';
           end if;
 
           -- Control Outputs
           DATA_OUT_J_ENABLE <= '0';
 
-          if (data_a_in_j_adder_int = '1' and data_b_in_j_adder_int = '1') then
+          if (data_a_in_j_multiplier_int = '1' and data_b_in_j_multiplier_int = '1') then
             -- Control Internal
-            data_a_in_enable_vector_adder <= '0';
-            data_b_in_enable_vector_adder <= '0';
+            data_a_in_enable_vector_float_multiplier <= '0';
+            data_b_in_enable_vector_float_multiplier <= '0';
 
-            data_a_in_j_adder_int <= '0';
-            data_b_in_j_adder_int <= '0';
+            data_a_in_j_multiplier_int <= '0';
+            data_b_in_j_multiplier_int <= '0';
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              adder_ctrl_fsm_int <= ENDER_I_STATE;
+              multiplier_ctrl_fsm_int <= ENDER_I_STATE;
             else
-              adder_ctrl_fsm_int <= ENDER_J_STATE;
+              multiplier_ctrl_fsm_int <= ENDER_J_STATE;
             end if;
           end if;
 
         when ENDER_I_STATE =>           -- STEP 3
 
-          if (data_out_enable_vector_adder = '1') then
+          if (data_out_enable_vector_float_multiplier = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_adder;
+              DATA_OUT <= data_out_vector_float_multiplier;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -334,10 +326,10 @@ begin
               index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              adder_ctrl_fsm_int <= STARTER_STATE;
+              multiplier_ctrl_fsm_int <= STARTER_STATE;
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_adder;
+              DATA_OUT <= data_out_vector_float_multiplier;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -348,19 +340,19 @@ begin
               index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              adder_ctrl_fsm_int <= INPUT_I_STATE;
+              multiplier_ctrl_fsm_int <= INPUT_I_STATE;
             end if;
           else
             -- Control Internal
-            start_vector_adder <= '0';
+            start_vector_float_multiplier <= '0';
           end if;
 
         when ENDER_J_STATE =>           -- STEP 3
 
-          if (data_out_enable_vector_adder = '1') then
+          if (data_out_enable_vector_float_multiplier = '1') then
             if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_adder;
+              DATA_OUT <= data_out_vector_float_multiplier;
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';
@@ -369,22 +361,22 @@ begin
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
-              adder_ctrl_fsm_int <= INPUT_J_STATE;
+              multiplier_ctrl_fsm_int <= INPUT_J_STATE;
             end if;
           else
             -- Control Internal
-            start_vector_adder <= '0';
+            start_vector_float_multiplier <= '0';
           end if;
 
         when others =>
           -- FSM Control
-          adder_ctrl_fsm_int <= STARTER_STATE;
+          multiplier_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
 
-  -- VECTOR ADDER
-  vector_adder : ntm_vector_adder
+  -- VECTOR FLOAT MULTIPLIER
+  vector_float_multiplier : ntm_vector_float_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -395,23 +387,21 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_adder,
-      READY => ready_vector_adder,
+      START => start_vector_float_multiplier,
+      READY => ready_vector_float_multiplier,
 
-      OPERATION => operation_vector_adder,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_multiplier,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_multiplier,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_adder,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_adder,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_adder,
+      DATA_OUT_ENABLE => data_out_enable_vector_float_multiplier,
 
       -- DATA
-      SIZE_IN   => size_in_vector_adder,
-      DATA_A_IN => data_a_in_vector_adder,
-      DATA_B_IN => data_b_in_vector_adder,
+      SIZE_IN   => size_in_vector_float_multiplier,
+      DATA_A_IN => data_a_in_vector_float_multiplier,
+      DATA_B_IN => data_b_in_vector_float_multiplier,
 
-      DATA_OUT     => data_out_vector_adder,
-      OVERFLOW_OUT => overflow_out_vector_adder
+      DATA_OUT     => data_out_vector_float_multiplier,
+      OVERFLOW_OUT => overflow_out_vector_float_multiplier
       );
 
 end architecture;

@@ -248,16 +248,6 @@ architecture ntm_float_stimulus_architecture of ntm_float_stimulus is
   constant EXPONENT_SIZE : integer := 8;
   constant MANTISSA_SIZE : integer := 23;
 
-  constant ZERO_EXPONENT  : std_logic_vector(EXPONENT_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, EXPONENT_SIZE));
-  constant ONE_EXPONENT   : std_logic_vector(EXPONENT_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, EXPONENT_SIZE));
-  constant TWO_EXPONENT   : std_logic_vector(EXPONENT_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, EXPONENT_SIZE));
-  constant THREE_EXPONENT : std_logic_vector(EXPONENT_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, EXPONENT_SIZE));
-
-  constant ZERO_MANTISSA  : std_logic_vector(MANTISSA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, MANTISSA_SIZE));
-  constant ONE_MANTISSA   : std_logic_vector(MANTISSA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, MANTISSA_SIZE));
-  constant TWO_MANTISSA   : std_logic_vector(MANTISSA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, MANTISSA_SIZE));
-  constant THREE_MANTISSA : std_logic_vector(MANTISSA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, MANTISSA_SIZE));
-
   constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
   constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
   constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
@@ -478,8 +468,8 @@ begin
         VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_FLOAT_ADDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-        VECTOR_FLOAT_ADDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+        VECTOR_FLOAT_ADDER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+        VECTOR_FLOAT_ADDER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -491,8 +481,8 @@ begin
             VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_FLOAT_ADDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-            VECTOR_FLOAT_ADDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            VECTOR_FLOAT_ADDER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            VECTOR_FLOAT_ADDER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -522,8 +512,8 @@ begin
         VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_FLOAT_ADDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-        VECTOR_FLOAT_ADDER_DATA_B_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+        VECTOR_FLOAT_ADDER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+        VECTOR_FLOAT_ADDER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -535,8 +525,8 @@ begin
             VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_FLOAT_ADDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-            VECTOR_FLOAT_ADDER_DATA_B_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+            VECTOR_FLOAT_ADDER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            VECTOR_FLOAT_ADDER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -579,8 +569,8 @@ begin
         VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-        VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+        VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+        VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -592,8 +582,8 @@ begin
             VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-            VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -623,8 +613,8 @@ begin
         VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-        VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+        VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+        VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -636,8 +626,8 @@ begin
             VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-            VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+            VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -680,8 +670,8 @@ begin
         VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_FLOAT_DIVIDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-        VECTOR_FLOAT_DIVIDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+        VECTOR_FLOAT_DIVIDER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+        VECTOR_FLOAT_DIVIDER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -693,8 +683,8 @@ begin
             VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_FLOAT_DIVIDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-            VECTOR_FLOAT_DIVIDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            VECTOR_FLOAT_DIVIDER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            VECTOR_FLOAT_DIVIDER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -724,8 +714,8 @@ begin
         VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '1';
 
         -- DATA
-        VECTOR_FLOAT_DIVIDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-        VECTOR_FLOAT_DIVIDER_DATA_B_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+        VECTOR_FLOAT_DIVIDER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+        VECTOR_FLOAT_DIVIDER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -737,8 +727,8 @@ begin
             VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_FLOAT_DIVIDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-            VECTOR_FLOAT_DIVIDER_DATA_B_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
+            VECTOR_FLOAT_DIVIDER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            VECTOR_FLOAT_DIVIDER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -791,8 +781,8 @@ begin
         MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_FLOAT_ADDER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
-        MATRIX_FLOAT_ADDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+        MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+        MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -807,8 +797,8 @@ begin
             MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_FLOAT_ADDER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
-            MATRIX_FLOAT_ADDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -819,8 +809,8 @@ begin
             MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_FLOAT_ADDER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
-            MATRIX_FLOAT_ADDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- LOOP
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
@@ -854,8 +844,8 @@ begin
         MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_FLOAT_ADDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-        MATRIX_FLOAT_ADDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+        MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+        MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -870,8 +860,8 @@ begin
             MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_FLOAT_ADDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-            MATRIX_FLOAT_ADDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -882,8 +872,8 @@ begin
             MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_FLOAT_ADDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-            MATRIX_FLOAT_ADDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- LOOP
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
@@ -931,8 +921,8 @@ begin
         MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
-        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -947,8 +937,8 @@ begin
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
-            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -959,8 +949,8 @@ begin
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
-            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- LOOP
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
@@ -994,8 +984,8 @@ begin
         MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -1010,8 +1000,8 @@ begin
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -1022,8 +1012,8 @@ begin
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- LOOP
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
@@ -1071,8 +1061,8 @@ begin
         MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_FLOAT_DIVIDER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
-        MATRIX_FLOAT_DIVIDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+        MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+        MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -1087,8 +1077,8 @@ begin
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
-            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -1099,8 +1089,8 @@ begin
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
-            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- LOOP
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
@@ -1135,8 +1125,8 @@ begin
         MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
 
         -- DATA
-        MATRIX_FLOAT_DIVIDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-        MATRIX_FLOAT_DIVIDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+        MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+        MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
         -- LOOP
         index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -1151,8 +1141,8 @@ begin
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -1163,8 +1153,8 @@ begin
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
 
             -- DATA
-            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= '0' & TWO_EXPONENT & TWO_MANTISSA;
-            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= '0' & ONE_EXPONENT & ONE_MANTISSA;
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- LOOP
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));

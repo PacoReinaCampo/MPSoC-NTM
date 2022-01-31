@@ -67,13 +67,13 @@ alias ntm_vector_summation_design_compilation {
 }
 
 ##################################################################################################
-# ntm_vector_transpose_design_compilation ########################################################
+# ntm_vector_module_design_compilation ########################################################
 ##################################################################################################
 
-alias ntm_vector_transpose_design_compilation {
+alias ntm_vector_module_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/vector/ntm_vector_transpose.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/vector/ntm_vector_module.vhd
 }
 
 ##################################################################################################
@@ -89,15 +89,15 @@ alias ntm_matrix_convolution_design_compilation {
 }
 
 ##################################################################################################
-# ntm_matrix_cosine_similarity_design_compilation ################################################
+# ntm_matrix_inverse_design_compilation ##########################################################
 ##################################################################################################
 
-alias ntm_matrix_cosine_similarity_design_compilation {
+alias ntm_matrix_inverse_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/ntm_scalar_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/ntm_scalar_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/matrix/ntm_matrix_cosine_similarity.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/matrix/ntm_matrix_inverse.vhd
 }
 
 ##################################################################################################
@@ -158,15 +158,15 @@ alias ntm_tensor_convolution_design_compilation {
 }
 
 ##################################################################################################
-# ntm_tensor_cosine_similarity_design_compilation ################################################
+# ntm_tensor_inverse_design_compilation ##########################################################
 ##################################################################################################
 
-alias ntm_tensor_cosine_similarity_design_compilation {
+alias ntm_tensor_inverse_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/ntm_scalar_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/float/scalar/ntm_scalar_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/tensor/ntm_tensor_cosine_similarity.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/algebra/tensor/ntm_tensor_inverse.vhd
 }
 
 ##################################################################################################
@@ -236,7 +236,7 @@ alias d05 {
 }
 
 alias d06 {
-  ntm_vector_transpose_design_compilation
+  ntm_vector_module_design_compilation
 }
 
 alias d07 {
@@ -244,7 +244,7 @@ alias d07 {
 }
 
 alias d08 {
-  ntm_matrix_cosine_similarity_design_compilation
+  ntm_matrix_inverse_design_compilation
 }
 
 alias d09 {
@@ -268,7 +268,7 @@ alias d13 {
 }
 
 alias d14 {
-  ntm_tensor_cosine_similarity_design_compilation
+  ntm_tensor_inverse_design_compilation
 }
 
 alias d15 {
@@ -293,15 +293,15 @@ echo "d02 . NTM-VECTOR-CONVOLUTION-TEST"
 echo "d03 . NTM-VECTOR-COSINE-SIMILARITY-TEST"
 echo "d04 . NTM-VECTOR-MULTIPLICATION-TEST"
 echo "d05 . NTM-VECTOR-SUMMATION-TEST"
-echo "d06 . NTM-VECTOR-TRANSPOSE-TEST"
+echo "d06 . NTM-VECTOR-MODULE-TEST"
 echo "d07 . NTM-MATRIX-CONVOLUTION-TEST"
-echo "d08 . NTM-MATRIX-COSINE-SIMILARITY-TEST"
+echo "d08 . NTM-MATRIX-INVERSE-TEST"
 echo "d09 . NTM-MATRIX-MULTIPLICATION-TEST"
 echo "d10 . NTM-MATRIX-PRODUCT-TEST"
 echo "d11 . NTM-MATRIX-SUMMATION-TEST"
 echo "d12 . NTM-MATRIX-TRANSPOSE-TEST"
 echo "d13 . NTM-TENSOR-CONVOLUTION-TEST"
-echo "d14 . NTM-TENSOR-COSINE-SIMILARITY-TEST"
+echo "d14 . NTM-TENSOR-INVERSE-TEST"
 echo "d15 . NTM-TENSOR-MULTIPLICATION-TEST"
 echo "d16 . NTM-TENSOR-PRODUCT-TEST"
 echo "d17 . NTM-TENSOR-SUMMATION-TEST"

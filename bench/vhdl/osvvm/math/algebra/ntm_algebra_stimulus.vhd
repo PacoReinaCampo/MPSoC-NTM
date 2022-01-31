@@ -142,21 +142,21 @@ entity ntm_algebra_stimulus is
     VECTOR_SUMMATION_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
     VECTOR_SUMMATION_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-    -- VECTOR TRANSPOSE
+    -- VECTOR MODULE
     -- CONTROL
-    VECTOR_TRANSPOSE_START : out std_logic;
-    VECTOR_TRANSPOSE_READY : in  std_logic;
+    VECTOR_MODULE_START : out std_logic;
+    VECTOR_MODULE_READY : in  std_logic;
 
-    VECTOR_TRANSPOSE_DATA_IN_ENABLE : out std_logic;
+    VECTOR_MODULE_DATA_IN_ENABLE : out std_logic;
 
-    VECTOR_TRANSPOSE_DATA_ENABLE : in std_logic;
+    VECTOR_MODULE_DATA_ENABLE : in std_logic;
 
-    VECTOR_TRANSPOSE_DATA_OUT_ENABLE : in std_logic;
+    VECTOR_MODULE_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_TRANSPOSE_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_TRANSPOSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_TRANSPOSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_MODULE_LENGTH_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_MODULE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_MODULE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- MATRIX CONVOLUTION
     -- CONTROL
@@ -555,7 +555,7 @@ begin
   VECTOR_COSINE_SIMILARITY_START <= start_int;
   VECTOR_MULTIPLICATION_START    <= start_int;
   VECTOR_SUMMATION_START         <= start_int;
-  VECTOR_TRANSPOSE_START         <= start_int;
+  VECTOR_MODULE_START            <= start_int;
 
   -- MATRIX-FUNCTIONALITY
   MATRIX_CONVOLUTION_START    <= start_int;
@@ -1131,103 +1131,103 @@ begin
 
     end if;
 
-    if (STIMULUS_NTM_VECTOR_TRANSPOSE_TEST) then
+    if (STIMULUS_NTM_VECTOR_MODULE_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_TRANSPOSE_TEST      ";
+      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_MODULE_TEST         ";
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_TRANSPOSE_LENGTH_IN <= THREE_CONTROL;
+      VECTOR_MODULE_LENGTH_IN <= THREE_CONTROL;
 
-      if (STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_0) then
+      if (STIMULUS_NTM_VECTOR_MODULE_CASE_0) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_TRANSPOSE_CASE 0    ";
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_MODULE_CASE 0       ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
         -- DATA
-        VECTOR_TRANSPOSE_DATA_IN <= ZERO_DATA;
+        VECTOR_MODULE_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
 
-        VECTOR_TRANSPOSE_FIRST_RUN : loop
-          if (VECTOR_TRANSPOSE_DATA_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_TRANSPOSE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_MODULE_FIRST_RUN : loop
+          if (VECTOR_MODULE_DATA_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_MODULE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
-            VECTOR_TRANSPOSE_DATA_IN_ENABLE <= '1';
+            VECTOR_MODULE_DATA_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_TRANSPOSE_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            VECTOR_MODULE_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif ((VECTOR_TRANSPOSE_DATA_ENABLE = '1' or VECTOR_TRANSPOSE_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_TRANSPOSE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((VECTOR_MODULE_DATA_ENABLE = '1' or VECTOR_MODULE_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_MODULE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
-            VECTOR_TRANSPOSE_DATA_IN_ENABLE <= '1';
+            VECTOR_MODULE_DATA_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_TRANSPOSE_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            VECTOR_MODULE_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
-            VECTOR_TRANSPOSE_DATA_IN_ENABLE <= '0';
+            VECTOR_MODULE_DATA_IN_ENABLE <= '0';
           end if;
 
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit VECTOR_TRANSPOSE_FIRST_RUN when VECTOR_TRANSPOSE_READY = '1';
-        end loop VECTOR_TRANSPOSE_FIRST_RUN;
+          exit VECTOR_MODULE_FIRST_RUN when VECTOR_MODULE_READY = '1';
+        end loop VECTOR_MODULE_FIRST_RUN;
       end if;
 
-      if (STIMULUS_NTM_VECTOR_TRANSPOSE_CASE_1) then
+      if (STIMULUS_NTM_VECTOR_MODULE_CASE_1) then
 
         -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_TRANSPOSE_CASE 1    ";
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_MODULE_CASE 1       ";
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
         -- DATA
-        VECTOR_TRANSPOSE_DATA_IN <= ZERO_DATA;
+        VECTOR_MODULE_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
 
-        VECTOR_TRANSPOSE_SECOND_RUN : loop
-          if ((VECTOR_TRANSPOSE_DATA_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_TRANSPOSE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_MODULE_SECOND_RUN : loop
+          if ((VECTOR_MODULE_DATA_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_MODULE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
-            VECTOR_TRANSPOSE_DATA_IN_ENABLE <= '1';
+            VECTOR_MODULE_DATA_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_TRANSPOSE_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            VECTOR_MODULE_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif (((VECTOR_TRANSPOSE_DATA_ENABLE = '1') or (VECTOR_TRANSPOSE_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_TRANSPOSE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
+          elsif (((VECTOR_MODULE_DATA_ENABLE = '1') or (VECTOR_MODULE_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_MODULE_LENGTH_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
-            VECTOR_TRANSPOSE_DATA_IN_ENABLE <= '1';
+            VECTOR_MODULE_DATA_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_TRANSPOSE_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            VECTOR_MODULE_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
-            VECTOR_TRANSPOSE_DATA_IN_ENABLE <= '0';
+            VECTOR_MODULE_DATA_IN_ENABLE <= '0';
           end if;
 
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit VECTOR_TRANSPOSE_SECOND_RUN when VECTOR_TRANSPOSE_READY = '1';
-        end loop VECTOR_TRANSPOSE_SECOND_RUN;
+          exit VECTOR_MODULE_SECOND_RUN when VECTOR_MODULE_READY = '1';
+        end loop VECTOR_MODULE_SECOND_RUN;
       end if;
 
       wait for WORKING;

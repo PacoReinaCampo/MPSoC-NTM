@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_arithmetic_pkg.all;
 
-entity ntm_scalar_divider is
+entity ntm_vector_float_multiplier is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -58,24 +58,31 @@ entity ntm_scalar_divider is
     START : in  std_logic;
     READY : out std_logic;
 
+    DATA_A_IN_ENABLE : in std_logic;
+    DATA_B_IN_ENABLE : in std_logic;
+
+    DATA_OUT_ENABLE : out std_logic;
+
     -- DATA
+    SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-    REST_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    OVERFLOW_OUT : out std_logic
     );
 end entity;
 
-architecture ntm_scalar_divider_architecture of ntm_scalar_divider is
+architecture ntm_vector_float_multiplier_architecture of ntm_vector_float_multiplier is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type divider_ctrl_fsm is (
+  type multiplier_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    ENDER_STATE                         -- STEP 1
+    INPUT_STATE,                        -- STEP 1
+    ENDER_STATE                         -- STEP 2
     );
 
   -----------------------------------------------------------------------
@@ -87,10 +94,10 @@ architecture ntm_scalar_divider_architecture of ntm_scalar_divider is
   constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
   constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(0, DATA_SIZE));
-  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(1, DATA_SIZE));
-  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(2, DATA_SIZE));
-  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -102,13 +109,25 @@ architecture ntm_scalar_divider_architecture of ntm_scalar_divider is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal divider_ctrl_fsm_int : divider_ctrl_fsm;
+  signal multiplier_ctrl_fsm_int : multiplier_ctrl_fsm;
 
-  -- Data Internal
-  signal divider_int : std_logic_vector(DATA_SIZE-1 downto 0);
+  -- Internal Signals
+  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- Control Internal
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_multiplier_int : std_logic;
+  signal data_b_in_multiplier_int : std_logic;
+
+  -- MULTIPLIER
+  -- CONTROL
+  signal start_scalar_float_multiplier : std_logic;
+  signal ready_scalar_float_multiplier : std_logic;
+
+  -- DATA
+  signal data_a_in_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_float_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_scalar_float_multiplier : std_logic;
 
 begin
 
@@ -116,134 +135,141 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN / DATA_B_IN
+  -- DATA_OUT = DATA_A_IN · DATA_B_IN = M_A_IN · M_B_IN · 2^(E_A_IN + E_B_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO_DATA;
-      REST_OUT <= ZERO_DATA;
+      DATA_OUT     <= ZERO_DATA;
+      OVERFLOW_OUT <= '0';
 
       -- Control Outputs
-      READY <= '0';
-
-      -- Data Internal
-      divider_int <= ZERO_DATA;
+      READY           <= '0';
+      DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
-      index_loop <= ZERO_DATA;
+      start_scalar_float_multiplier <= '0';
+
+      index_loop <= ZERO_CONTROL;
+
+      data_a_in_multiplier_int <= '0';
+      data_b_in_multiplier_int <= '0';
+
+      -- Data Internal
+      data_a_in_scalar_float_multiplier <= ZERO_DATA;
+      data_b_in_scalar_float_multiplier <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
-      case divider_ctrl_fsm_int is
+      case multiplier_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
-          READY <= '0';
+          READY           <= '0';
+          DATA_OUT_ENABLE <= '0';
 
           if (START = '1') then
-            -- Data Internal
-            divider_int <= ZERO_DATA;
-
             -- Control Internal
-            index_loop <= DATA_A_IN;
+            index_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            divider_ctrl_fsm_int <= ENDER_STATE;
+            multiplier_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when ENDER_STATE =>             -- STEP 1
+        when INPUT_STATE =>             -- STEP 1
 
-          if (signed(DATA_B_IN) = signed(ZERO_DATA)) then
-            -- Data Outputs
-            DATA_OUT <= ONE_DATA;
-            REST_OUT <= ZERO_DATA;
+          if ((DATA_A_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
+            -- Data Inputs
+            data_a_in_scalar_float_multiplier <= DATA_A_IN;
 
-            -- Control Outputs
-            READY <= '1';
+            -- Control Internal
+            data_a_in_multiplier_int <= '1';
+          end if;
+
+          if ((DATA_B_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
+            -- Data Inputs
+            data_b_in_scalar_float_multiplier <= DATA_B_IN;
+
+            -- Control Internal
+            data_b_in_multiplier_int <= '1';
+          end if;
+
+          if (data_a_in_multiplier_int = '1' and data_b_in_multiplier_int = '1') then
+            -- Control Internal
+            start_scalar_float_multiplier <= '1';
+
+            data_a_in_multiplier_int <= '0';
+            data_b_in_multiplier_int <= '0';
 
             -- FSM Control
-            divider_ctrl_fsm_int <= STARTER_STATE;
-          elsif (DATA_A_IN(DATA_SIZE-1) = '0' and DATA_B_IN(DATA_SIZE-1) = '0') then
-            if (signed(DATA_B_IN) > signed(index_loop)) then
-              -- Data Outputs
-              DATA_OUT <= divider_int;
-              REST_OUT <= index_loop;
+            multiplier_ctrl_fsm_int <= ENDER_STATE;
+          end if;
 
+          -- Control Outputs
+          DATA_OUT_ENABLE <= '0';
+
+        when ENDER_STATE =>             -- STEP 2
+
+          if (ready_scalar_float_multiplier = '1') then
+            if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
               -- Control Outputs
               READY <= '1';
 
-              -- FSM Control
-              divider_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Data Internal
-              divider_int <= std_logic_vector(signed(divider_int) + signed(ONE_DATA));
-
               -- Control Internal
-              index_loop <= std_logic_vector(signed(index_loop) - signed(DATA_B_IN));
-            end if;
-          elsif (DATA_A_IN(DATA_SIZE-1) = '1' and DATA_B_IN(DATA_SIZE-1) = '0') then
-            if (signed(index_loop)+signed(DATA_B_IN) > signed(ZERO_DATA)) then
-              -- Data Outputs
-              DATA_OUT <= divider_int;
-              REST_OUT <= index_loop;
-
-              -- Control Outputs
-              READY <= '1';
+              index_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              divider_ctrl_fsm_int <= STARTER_STATE;
+              multiplier_ctrl_fsm_int <= STARTER_STATE;
             else
-              -- Data Internal
-              divider_int <= std_logic_vector(signed(divider_int) - signed(ONE_DATA));
-
               -- Control Internal
-              index_loop <= std_logic_vector(signed(index_loop) + signed(DATA_B_IN));
-            end if;
-          elsif (DATA_A_IN(DATA_SIZE-1) = '0' and DATA_B_IN(DATA_SIZE-1) = '1') then
-            if (signed(index_loop)+signed(DATA_B_IN) < signed(ZERO_DATA)) then
-              -- Data Outputs
-              DATA_OUT <= divider_int;
-              REST_OUT <= index_loop;
-
-              -- Control Outputs
-              READY <= '1';
+              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
               -- FSM Control
-              divider_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Data Internal
-              divider_int <= std_logic_vector(signed(divider_int) - signed(ONE_DATA));
-
-              -- Control Internal
-              index_loop <= std_logic_vector(signed(index_loop) + signed(DATA_B_IN));
+              multiplier_ctrl_fsm_int <= INPUT_STATE;
             end if;
-          elsif (DATA_A_IN(DATA_SIZE-1) = '1' and DATA_B_IN(DATA_SIZE-1) = '1') then
-            if (signed(DATA_B_IN) < signed(index_loop)) then
-              -- Data Outputs
-              DATA_OUT <= divider_int;
-              REST_OUT <= index_loop;
 
-              -- Control Outputs
-              READY <= '1';
+            -- Data Outputs
+            DATA_OUT <= data_out_scalar_float_multiplier;
 
-              -- FSM Control
-              divider_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Data Internal
-              divider_int <= std_logic_vector(signed(divider_int) - signed(ONE_DATA));
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '1';
+          else
+            -- Control Internal
+            start_scalar_float_multiplier <= '0';
 
-              -- Control Internal
-              index_loop <= std_logic_vector(signed(index_loop) - signed(DATA_B_IN));
-            end if;
+            data_a_in_multiplier_int <= '0';
+            data_b_in_multiplier_int <= '0';
           end if;
 
         when others =>
           -- FSM Control
-          divider_ctrl_fsm_int <= STARTER_STATE;
+          multiplier_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
+
+  -- SCALAR FLOAT MULTIPLIER
+  scalar_float_multiplier : ntm_scalar_float_multiplier
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_float_multiplier,
+      READY => ready_scalar_float_multiplier,
+
+      -- DATA
+      DATA_A_IN => data_a_in_scalar_float_multiplier,
+      DATA_B_IN => data_b_in_scalar_float_multiplier,
+
+      DATA_OUT     => data_out_scalar_float_multiplier,
+      OVERFLOW_OUT => overflow_out_scalar_float_multiplier
+      );
 
 end architecture;

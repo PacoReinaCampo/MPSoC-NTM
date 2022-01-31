@@ -42,9 +42,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.ntm_arithmetic_pkg.all;
+use work.ntm_math_pkg.all;
 
-entity ntm_scalar_multiplier is
+entity ntm_vector_module is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -58,25 +58,36 @@ entity ntm_scalar_multiplier is
     START : in  std_logic;
     READY : out std_logic;
 
-    -- DATA
-    DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_IN_ENABLE : in std_logic;
 
-    DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
-    OVERFLOW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    DATA_ENABLE : out std_logic;
+
+    DATA_OUT_ENABLE : out std_logic;
+
+    -- DATA
+    LENGTH_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
-architecture ntm_scalar_multiplier_architecture of ntm_scalar_multiplier is
+architecture ntm_vector_module_architecture of ntm_vector_module is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type multiplier_ctrl_fsm is (
+  -- Finite State Machine
+  type transpose_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    ENDER_STATE                         -- STEP 1
+    INPUT_STATE,                        -- STEP 1
+    ENDER_STATE,                        -- STEP 3
+    CLEAN_STATE,                        -- STEP 5
+    OPERATION_STATE                     -- STEP 8
     );
+
+  -- Buffer
+  type vector_buffer is array (CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Constants
@@ -87,10 +98,10 @@ architecture ntm_scalar_multiplier_architecture of ntm_scalar_multiplier is
   constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
   constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(0, DATA_SIZE));
-  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(1, DATA_SIZE));
-  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(2, DATA_SIZE));
-  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -102,13 +113,13 @@ architecture ntm_scalar_multiplier_architecture of ntm_scalar_multiplier is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal multiplier_ctrl_fsm_int : multiplier_ctrl_fsm;
+  signal transpose_ctrl_fsm_int : transpose_ctrl_fsm;
 
-  -- Data Internal
-  signal multiplier_int : std_logic_vector(DATA_SIZE-1 downto 0);
+  -- Buffer
+  signal vector_int : vector_buffer;
 
   -- Control Internal
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
 begin
 
@@ -116,86 +127,120 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN · DATA_B_IN
+  -- DATA_OUT = transpose(DATA_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT     <= ZERO_DATA;
-      OVERFLOW_OUT <= ZERO_DATA;
+      DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
 
-      -- Data Internal
-      multiplier_int <= ZERO_DATA;
+      DATA_ENABLE <= '0';
+
+      DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
-      index_loop <= ZERO_DATA;
+      index_loop <= ZERO_CONTROL;
 
     elsif (rising_edge(CLK)) then
 
-      case multiplier_ctrl_fsm_int is
+      case transpose_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
+          DATA_ENABLE <= '0';
+
+          DATA_OUT_ENABLE <= '0';
+
           if (START = '1') then
-            -- Data Internal
-            multiplier_int <= ZERO_DATA;
+            -- Control Outputs
+            DATA_ENABLE <= '1';
 
             -- Control Internal
-            index_loop <= ZERO_DATA;
+            index_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            multiplier_ctrl_fsm_int <= ENDER_STATE;
+            transpose_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when ENDER_STATE =>             -- STEP 1
+        when INPUT_STATE =>             -- STEP 2
 
-          if (DATA_B_IN(DATA_SIZE-1) = '1') then
-            if (signed(index_loop) = signed(DATA_B_IN)) then
-              -- Data Outputs
-              DATA_OUT     <= multiplier_int;
-              OVERFLOW_OUT <= ZERO_DATA;
+          if (DATA_IN_ENABLE = '1') then
+            -- Data Inputs
+            vector_int(to_integer(unsigned(index_loop))) <= DATA_IN;
 
-              -- Control Outputs
-              READY <= '1';
-
-              -- FSM Control
-              multiplier_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Data Internal
-              multiplier_int <= std_logic_vector(signed(multiplier_int) - signed(DATA_A_IN));
-
-              -- Control Internal
-              index_loop <= std_logic_vector(signed(index_loop) - signed(ONE_DATA));
-            end if;
-          elsif (DATA_B_IN(DATA_SIZE-1) = '0') then
-            if (signed(index_loop) = signed(DATA_B_IN)) then
-              -- Data Outputs
-              DATA_OUT     <= multiplier_int;
-              OVERFLOW_OUT <= ZERO_DATA;
-
-              -- Control Outputs
-              READY <= '1';
-
-              -- FSM Control
-              multiplier_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Data Internal
-              multiplier_int <= std_logic_vector(signed(multiplier_int) + signed(DATA_A_IN));
-
-              -- Control Internal
-              index_loop <= std_logic_vector(signed(index_loop) + signed(ONE_DATA));
-            end if;
+            -- FSM Control
+            transpose_ctrl_fsm_int <= ENDER_STATE;
           end if;
+
+          -- Control Outputs
+          DATA_ENABLE <= '0';
+
+        when ENDER_STATE =>             -- STEP 4
+
+          if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Internal
+            index_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            transpose_ctrl_fsm_int <= CLEAN_STATE;
+          else
+            -- Control Internal
+            index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
+
+            -- Control Outputs
+            DATA_ENABLE <= '1';
+
+            -- FSM Control
+            transpose_ctrl_fsm_int <= INPUT_STATE;
+          end if;
+
+          -- Data Outputs
+          DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
+
+        when CLEAN_STATE =>             -- STEP 5
+
+          -- Control Outputs
+          DATA_ENABLE <= '0';
+
+          DATA_OUT_ENABLE <= '0';
+
+          -- FSM Control
+          transpose_ctrl_fsm_int <= OPERATION_STATE;
+
+        when OPERATION_STATE =>         -- STEP 8
+
+          if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            READY <= '1';
+
+            -- Control Internal
+            index_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            transpose_ctrl_fsm_int <= STARTER_STATE;
+          else
+            -- Control Internal
+            index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            transpose_ctrl_fsm_int <= CLEAN_STATE;
+          end if;
+
+          -- Data Outputs
+          DATA_OUT <= vector_int(to_integer(unsigned(index_loop)));
+
+          -- Control Outputs
+          DATA_OUT_ENABLE <= '1';
 
         when others =>
           -- FSM Control
-          multiplier_ctrl_fsm_int <= STARTER_STATE;
+          transpose_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

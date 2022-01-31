@@ -58,11 +58,14 @@ entity ntm_scalar_float_adder is
     START : in  std_logic;
     READY : out std_logic;
 
+    OPERATION : in std_logic;
+
     -- DATA
     DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    OVERFLOW_OUT : out std_logic
     );
 end ntm_scalar_float_adder;
 
@@ -76,8 +79,7 @@ architecture ntm_scalar_float_adder_architecture of ntm_scalar_float_adder is
     STARTER_STATE,
     ALIGNMENT_STATE,
     ADDITION_STATE,
-    NORMALIZATION_STATE,
-    ENDER_STATE
+    NORMALIZATION_STATE
     );
 
   -----------------------------------------------------------------------
@@ -86,9 +88,6 @@ architecture ntm_scalar_float_adder_architecture of ntm_scalar_float_adder is
 
   constant MANTISSA_SIZE : integer := 23;
   constant EXPONENT_SIZE : integer := 8;
-
-  constant ZERO_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
 
   constant ZERO_MANTISSA : std_logic_vector(MANTISSA_SIZE+1 downto 0) := std_logic_vector(to_unsigned(0, MANTISSA_SIZE+2));
   constant ONE_MANTISSA  : std_logic_vector(MANTISSA_SIZE+1 downto 0) := std_logic_vector(to_unsigned(1, MANTISSA_SIZE+2));
@@ -125,7 +124,7 @@ begin
   begin
     if(RST = '0') then
       -- Data Outputs
-      DATA_OUT <= (others => '0');
+      OVERFLOW_OUT <= '0';
 
       -- Control Outputs
       READY <= '0';
@@ -161,8 +160,13 @@ begin
             data_a_in_exponent_int <= '0' & DATA_A_IN(DATA_SIZE-2 downto MANTISSA_SIZE);
             data_b_in_exponent_int <= '0' & DATA_B_IN(DATA_SIZE-2 downto MANTISSA_SIZE);
 
-            data_b_in_sign_int <= DATA_B_IN(DATA_SIZE-1);
             data_a_in_sign_int <= DATA_A_IN(DATA_SIZE-1);
+
+            if (OPERATION = '1') then
+              data_b_in_sign_int <= not DATA_B_IN(DATA_SIZE-1);
+            else
+              data_b_in_sign_int <= DATA_B_IN(DATA_SIZE-1);
+            end if;
 
             -- FSM Control
             adder_ctrl_fsm_int <= ALIGNMENT_STATE;
@@ -179,8 +183,11 @@ begin
 
               data_out_sign_int <= data_a_in_sign_int;
 
+              -- Control Outputs
+              READY <= '1';
+
               -- FSM Control
-              adder_ctrl_fsm_int <= ENDER_STATE;
+              adder_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Data Internal
               data_b_in_mantissa_int(MANTISSA_SIZE+1-to_integer(signed(data_a_in_exponent_int)-signed(data_b_in_exponent_int)) downto 0) <= data_b_in_mantissa_int(MANTISSA_SIZE+1 downto to_integer(signed(data_a_in_exponent_int)-signed(data_b_in_exponent_int)));
@@ -201,8 +208,11 @@ begin
 
               data_out_sign_int <= data_b_in_sign_int;
 
+              -- Control Outputs
+              READY <= '1';
+
               -- FSM Control
-              adder_ctrl_fsm_int <= ENDER_STATE;
+              adder_ctrl_fsm_int <= STARTER_STATE;
             else
               -- Data Internal
               data_a_in_mantissa_int(MANTISSA_SIZE+1-to_integer(signed(data_b_in_exponent_int)-signed(data_a_in_exponent_int)) downto 0) <= data_a_in_mantissa_int(MANTISSA_SIZE+1 downto to_integer(signed(data_b_in_exponent_int)-signed(data_a_in_exponent_int)));
@@ -251,33 +261,32 @@ begin
             data_out_mantissa_int <= ZERO_MANTISSA;
             data_out_exponent_int <= ZERO_EXPONENT;
 
+            -- Control Outputs
+            READY <= '1';
+
             -- FSM Control
-            adder_ctrl_fsm_int <= ENDER_STATE;
+            adder_ctrl_fsm_int <= STARTER_STATE;
           elsif(data_out_mantissa_int(MANTISSA_SIZE+1) = '1') then
             -- Data Internal
             data_out_mantissa_int <= '0' & data_out_mantissa_int(MANTISSA_SIZE+1 downto 1);
             data_out_exponent_int <= std_logic_vector(unsigned(data_out_exponent_int)+unsigned(ONE_EXPONENT));
 
+            -- Control Outputs
+            READY <= '1';
+
             -- FSM Control
-            adder_ctrl_fsm_int <= ENDER_STATE;
+            adder_ctrl_fsm_int <= STARTER_STATE;
           elsif(data_out_mantissa_int(MANTISSA_SIZE) = '0') then
             -- Data Internal
             data_out_mantissa_int <= data_out_mantissa_int(MANTISSA_SIZE downto 0) & '0';
             data_out_exponent_int <= std_logic_vector(unsigned(data_out_exponent_int)-unsigned(ONE_EXPONENT));
           else
+            -- Control Outputs
+            READY <= '1';
+
             -- FSM Control
-            adder_ctrl_fsm_int <= ENDER_STATE;
+            adder_ctrl_fsm_int <= STARTER_STATE;
           end if;
-
-        when ENDER_STATE =>
-          -- Data Outputs
-          DATA_OUT <= data_out_sign_int & data_out_exponent_int(EXPONENT_SIZE-1 downto 0) & data_out_mantissa_int(MANTISSA_SIZE-1 downto 0);
-
-          -- Control Outputs
-          READY <= '1';
-
-          -- FSM Control
-          adder_ctrl_fsm_int <= STARTER_STATE;
 
         when others =>
           -- FSM Control
@@ -285,5 +294,8 @@ begin
       end case;
     end if;
   end process;
+  
+  -- Data Outputs
+  DATA_OUT <= data_out_sign_int & data_out_exponent_int(EXPONENT_SIZE-1 downto 0) & data_out_mantissa_int(MANTISSA_SIZE-1 downto 0);
 
 end ntm_scalar_float_adder_architecture;

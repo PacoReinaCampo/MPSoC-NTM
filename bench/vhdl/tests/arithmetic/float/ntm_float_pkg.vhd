@@ -82,37 +82,40 @@ package ntm_float_pkg is
   constant L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(32, DATA_SIZE));  -- l in 0 to L-1
   constant R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(32, DATA_SIZE));  -- i in 0 to R-1
 
-  -- INTEGERS
-  constant P_ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(0, DATA_SIZE));
-  constant P_ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(1, DATA_SIZE));
-  constant P_TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(2, DATA_SIZE));
-  constant P_THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(3, DATA_SIZE));
-  constant P_FOUR  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(4, DATA_SIZE));
-  constant P_FIVE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(5, DATA_SIZE));
-  constant P_SIX   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(6, DATA_SIZE));
-  constant P_SEVEN : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(7, DATA_SIZE));
-  constant P_EIGHT : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(8, DATA_SIZE));
-  constant P_NINE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(9, DATA_SIZE));
+  -- FLOATS
+  constant P_ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := X"00000000";
+  constant P_ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := X"3f8ccccd";
+  constant P_TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := X"400ccccd";
+  constant P_THREE : std_logic_vector(DATA_SIZE-1 downto 0) := X"40533333";
+  constant P_FOUR  : std_logic_vector(DATA_SIZE-1 downto 0) := X"408ccccd";
+  constant P_FIVE  : std_logic_vector(DATA_SIZE-1 downto 0) := X"40b00000";
+  constant P_SIX   : std_logic_vector(DATA_SIZE-1 downto 0) := X"40d33333";
+  constant P_SEVEN : std_logic_vector(DATA_SIZE-1 downto 0) := X"40f66666";
+  constant P_EIGHT : std_logic_vector(DATA_SIZE-1 downto 0) := X"410ccccd";
+  constant P_NINE  : std_logic_vector(DATA_SIZE-1 downto 0) := X"411e6666";
+  constant P_INF   : std_logic_vector(DATA_SIZE-1 downto 0) := X"7f800000";
 
-  constant N_ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-1, DATA_SIZE));
-  constant N_TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-2, DATA_SIZE));
-  constant N_THREE : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-3, DATA_SIZE));
-  constant N_FOUR  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-4, DATA_SIZE));
-  constant N_FIVE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-5, DATA_SIZE));
-  constant N_SIX   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-6, DATA_SIZE));
-  constant N_SEVEN : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-7, DATA_SIZE));
-  constant N_EIGHT : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-8, DATA_SIZE));
-  constant N_NINE  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(-9, DATA_SIZE));
+  constant N_ZERO  : std_logic_vector(DATA_SIZE-1 downto 0) := X"80000000";
+  constant N_ONE   : std_logic_vector(DATA_SIZE-1 downto 0) := X"bf8ccccd";
+  constant N_TWO   : std_logic_vector(DATA_SIZE-1 downto 0) := X"c00ccccd";
+  constant N_THREE : std_logic_vector(DATA_SIZE-1 downto 0) := X"c0533333";
+  constant N_FOUR  : std_logic_vector(DATA_SIZE-1 downto 0) := X"c08ccccd";
+  constant N_FIVE  : std_logic_vector(DATA_SIZE-1 downto 0) := X"c0b00000";
+  constant N_SIX   : std_logic_vector(DATA_SIZE-1 downto 0) := X"c0d33333";
+  constant N_SEVEN : std_logic_vector(DATA_SIZE-1 downto 0) := X"c0f66666";
+  constant N_EIGHT : std_logic_vector(DATA_SIZE-1 downto 0) := X"c10ccccd";
+  constant N_NINE  : std_logic_vector(DATA_SIZE-1 downto 0) := X"c11e6666";
+  constant N_INF   : std_logic_vector(DATA_SIZE-1 downto 0) := X"ff800000";
 
   -- Integer Buffer
   constant TENSOR_SAMPLE_A : tensor_buffer := (((P_TWO, P_ONE, P_FOUR), (P_NINE, P_FOUR, P_TWO), (P_ONE, P_ONE, P_TWO)), ((P_EIGHT, P_SIX, P_TWO), (P_EIGHT, P_FIVE, P_TWO), (P_ONE, P_FOUR, P_ONE)), ((P_THREE, P_ONE, P_SIX), (P_FIVE, P_ZERO, P_FOUR), (P_FIVE, P_EIGHT, P_FIVE)));
   constant TENSOR_SAMPLE_B : tensor_buffer := (((P_ONE, P_THREE, P_ONE), (P_TWO, P_FOUR, P_EIGHT), (P_FOUR, P_ONE, P_TWO)), ((P_NINE, P_ONE, P_FIVE), (P_NINE, P_EIGHT, P_ONE), (P_FIVE, P_EIGHT, P_FOUR)), ((P_FIVE, P_FOUR, P_ONE), (P_THREE, P_FOUR, P_SIX), (P_ONE, P_EIGHT, P_EIGHT)));
 
-  constant MATRIX_FLOAT_SAMPLE_A : matrix_buffer := ((P_ONE, P_FOUR, P_ONE), (P_ZERO, P_EIGHT, P_FOUR), (P_FIVE, P_THREE, P_NINE));
-  constant MATRIX_FLOAT_SAMPLE_B : matrix_buffer := ((P_ONE, P_TWO, P_SIX), (P_ONE, P_THREE, P_SIX), (P_EIGHT, P_FOUR, P_FOUR));
+  constant MATRIX_SAMPLE_A : matrix_buffer := ((P_ONE, P_FOUR, P_ONE), (P_ZERO, P_EIGHT, P_FOUR), (P_FIVE, P_THREE, P_NINE));
+  constant MATRIX_SAMPLE_B : matrix_buffer := ((P_ONE, P_TWO, P_SIX), (P_ONE, P_THREE, P_SIX), (P_EIGHT, P_FOUR, P_FOUR));
 
-  constant VECTOR_FLOAT_SAMPLE_A : vector_buffer := (P_FOUR, P_SEVEN, N_THREE);
-  constant VECTOR_FLOAT_SAMPLE_B : vector_buffer := (P_THREE, N_NINE, N_ONE);
+  constant VECTOR_SAMPLE_A : vector_buffer := (P_FOUR, P_SEVEN, N_THREE);
+  constant VECTOR_SAMPLE_B : vector_buffer := (P_THREE, N_NINE, N_ONE);
 
   -- constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := P_NINE;
   -- constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := N_FOUR;

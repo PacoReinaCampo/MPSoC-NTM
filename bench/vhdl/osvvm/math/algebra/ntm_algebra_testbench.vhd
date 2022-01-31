@@ -62,21 +62,21 @@ entity ntm_algebra_testbench is
     ENABLE_NTM_VECTOR_COSINE_SIMILARITY_TEST : boolean := false;
     ENABLE_NTM_VECTOR_MULTIPLICATION_TEST    : boolean := false;
     ENABLE_NTM_VECTOR_SUMMATION_TEST         : boolean := false;
-    ENABLE_NTM_VECTOR_TRANSPOSE_TEST         : boolean := false;
+    ENABLE_NTM_VECTOR_MODULE_TEST            : boolean := false;
 
     ENABLE_NTM_DOT_PRODUCT_CASE_0              : boolean := false;
     ENABLE_NTM_VECTOR_CONVOLUTION_CASE_0       : boolean := false;
     ENABLE_NTM_VECTOR_COSINE_SIMILARITY_CASE_0 : boolean := false;
     ENABLE_NTM_VECTOR_MULTIPLICATION_CASE_0    : boolean := false;
     ENABLE_NTM_VECTOR_SUMMATION_CASE_0         : boolean := false;
-    ENABLE_NTM_VECTOR_TRANSPOSE_CASE_0         : boolean := false;
+    ENABLE_NTM_VECTOR_MODULE_CASE_0            : boolean := false;
 
     ENABLE_NTM_DOT_PRODUCT_CASE_1              : boolean := false;
     ENABLE_NTM_VECTOR_CONVOLUTION_CASE_1       : boolean := false;
     ENABLE_NTM_VECTOR_COSINE_SIMILARITY_CASE_1 : boolean := false;
     ENABLE_NTM_VECTOR_MULTIPLICATION_CASE_1    : boolean := false;
     ENABLE_NTM_VECTOR_SUMMATION_CASE_1         : boolean := false;
-    ENABLE_NTM_VECTOR_TRANSPOSE_CASE_1         : boolean := false;
+    ENABLE_NTM_VECTOR_MODULE_CASE_1            : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
     ENABLE_NTM_MATRIX_CONVOLUTION_TEST    : boolean := false;
@@ -214,21 +214,21 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- VECTOR TRANSPOSE
+  -- VECTOR MODULE
   -- CONTROL
-  signal start_vector_transpose : std_logic;
-  signal ready_vector_transpose : std_logic;
+  signal start_vector_module : std_logic;
+  signal ready_vector_module : std_logic;
 
-  signal data_in_enable_vector_transpose : std_logic;
+  signal data_in_enable_vector_module : std_logic;
 
-  signal data_enable_vector_transpose : std_logic;
+  signal data_enable_vector_module : std_logic;
 
-  signal data_out_enable_vector_transpose : std_logic;
+  signal data_out_enable_vector_module : std_logic;
 
   -- DATA
-  signal length_in_vector_transpose : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_transpose   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_transpose  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal length_in_vector_module : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_module   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_module  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX CONVOLUTION
   -- CONTROL
@@ -632,21 +632,21 @@ begin
       VECTOR_SUMMATION_DATA_IN   => data_in_vector_summation,
       VECTOR_SUMMATION_DATA_OUT  => data_out_vector_summation,
 
-      -- VECTOR TRANSPOSE
+      -- VECTOR MODULE
       -- CONTROL
-      VECTOR_TRANSPOSE_START => start_vector_transpose,
-      VECTOR_TRANSPOSE_READY => ready_vector_transpose,
+      VECTOR_MODULE_START => start_vector_module,
+      VECTOR_MODULE_READY => ready_vector_module,
 
-      VECTOR_TRANSPOSE_DATA_IN_ENABLE => data_in_enable_vector_transpose,
+      VECTOR_MODULE_DATA_IN_ENABLE => data_in_enable_vector_module,
 
-      VECTOR_TRANSPOSE_DATA_ENABLE => data_enable_vector_transpose,
+      VECTOR_MODULE_DATA_ENABLE => data_enable_vector_module,
 
-      VECTOR_TRANSPOSE_DATA_OUT_ENABLE => data_out_enable_vector_transpose,
+      VECTOR_MODULE_DATA_OUT_ENABLE => data_out_enable_vector_module,
 
       -- DATA
-      VECTOR_TRANSPOSE_LENGTH_IN => length_in_vector_transpose,
-      VECTOR_TRANSPOSE_DATA_IN   => data_in_vector_transpose,
-      VECTOR_TRANSPOSE_DATA_OUT  => data_out_vector_transpose,
+      VECTOR_MODULE_LENGTH_IN => length_in_vector_module,
+      VECTOR_MODULE_DATA_IN   => data_in_vector_module,
+      VECTOR_MODULE_DATA_OUT  => data_out_vector_module,
 
       -- MATRIX CONVOLUTION
       -- CONTROL
@@ -1092,9 +1092,9 @@ begin
         );
   end generate ntm_vector_summation_test;
 
-  -- VECTOR TRANSPOSE
-  ntm_vector_transpose_test : if (ENABLE_NTM_VECTOR_TRANSPOSE_TEST) generate
-    vector_transpose : ntm_vector_transpose
+  -- VECTOR MODULE
+  ntm_vector_module_test : if (ENABLE_NTM_VECTOR_MODULE_TEST) generate
+    vector_module : ntm_vector_module
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -1105,21 +1105,21 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_vector_transpose,
-        READY => ready_vector_transpose,
+        START => start_vector_module,
+        READY => ready_vector_module,
 
-        DATA_IN_ENABLE => data_in_enable_vector_transpose,
+        DATA_IN_ENABLE => data_in_enable_vector_module,
 
-        DATA_ENABLE => data_enable_vector_transpose,
+        DATA_ENABLE => data_enable_vector_module,
 
-        DATA_OUT_ENABLE => data_out_enable_vector_transpose,
+        DATA_OUT_ENABLE => data_out_enable_vector_module,
 
         -- DATA
-        LENGTH_IN => length_in_vector_transpose,
-        DATA_IN   => data_in_vector_transpose,
-        DATA_OUT  => data_out_vector_transpose
+        LENGTH_IN => length_in_vector_module,
+        DATA_IN   => data_in_vector_module,
+        DATA_OUT  => data_out_vector_module
         );
-  end generate ntm_vector_transpose_test;
+  end generate ntm_vector_module_test;
 
   -- MATRIX CONVOLUTION
   ntm_matrix_convolution_test : if (ENABLE_NTM_MATRIX_CONVOLUTION_TEST) generate
