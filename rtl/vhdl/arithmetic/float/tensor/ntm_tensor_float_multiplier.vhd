@@ -128,34 +128,24 @@ architecture ntm_tensor_float_multiplier_architecture of ntm_tensor_float_multip
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_a_in_i_multiplier_int : std_logic;
-  signal data_a_in_j_multiplier_int : std_logic;
-  signal data_a_in_k_multiplier_int : std_logic;
-  signal data_b_in_i_multiplier_int : std_logic;
-  signal data_b_in_j_multiplier_int : std_logic;
-  signal data_b_in_k_multiplier_int : std_logic;
+  signal data_a_in_i_float_multiplier_int : std_logic;
+  signal data_a_in_j_float_multiplier_int : std_logic;
+  signal data_a_in_k_float_multiplier_int : std_logic;
+  signal data_b_in_i_float_multiplier_int : std_logic;
+  signal data_b_in_j_float_multiplier_int : std_logic;
+  signal data_b_in_k_float_multiplier_int : std_logic;
 
-  -- MATRIX FLOAT MULTIPLIER
+  -- SCALAR MULTIPLIER
   -- CONTROL
-  signal start_matrix_float_multiplier : std_logic;
-  signal ready_matrix_float_multiplier : std_logic;
-
-  signal data_a_in_i_enable_matrix_float_multiplier : std_logic;
-  signal data_a_in_j_enable_matrix_float_multiplier : std_logic;
-  signal data_b_in_i_enable_matrix_float_multiplier : std_logic;
-  signal data_b_in_j_enable_matrix_float_multiplier : std_logic;
-
-  signal data_out_i_enable_matrix_float_multiplier : std_logic;
-  signal data_out_j_enable_matrix_float_multiplier : std_logic;
+  signal start_scalar_float_multiplier : std_logic;
+  signal ready_scalar_float_multiplier : std_logic;
 
   -- DATA
-  signal size_i_in_matrix_float_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_float_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_matrix_float_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal overflow_out_matrix_float_multiplier : std_logic;
+  signal data_out_scalar_float_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_scalar_float_multiplier : std_logic;
 
 begin
 
@@ -181,29 +171,22 @@ begin
       DATA_OUT_K_ENABLE <= '0';
 
       -- Control Internal
-      start_matrix_float_multiplier <= '0';
+      start_scalar_float_multiplier <= '0';
 
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
       index_k_loop <= ZERO_CONTROL;
 
-      data_a_in_i_enable_matrix_float_multiplier <= '0';
-      data_a_in_j_enable_matrix_float_multiplier <= '0';
-      data_b_in_i_enable_matrix_float_multiplier <= '0';
-      data_b_in_j_enable_matrix_float_multiplier <= '0';
-
-      data_a_in_i_multiplier_int <= '0';
-      data_a_in_j_multiplier_int <= '0';
-      data_a_in_k_multiplier_int <= '0';
-      data_b_in_i_multiplier_int <= '0';
-      data_b_in_j_multiplier_int <= '0';
-      data_b_in_k_multiplier_int <= '0';
+      data_a_in_i_float_multiplier_int <= '0';
+      data_a_in_j_float_multiplier_int <= '0';
+      data_a_in_k_float_multiplier_int <= '0';
+      data_b_in_i_float_multiplier_int <= '0';
+      data_b_in_j_float_multiplier_int <= '0';
+      data_b_in_k_float_multiplier_int <= '0';
 
       -- Data Internal
-      size_i_in_matrix_float_multiplier <= ZERO_CONTROL;
-      size_j_in_matrix_float_multiplier <= ZERO_CONTROL;
-      data_a_in_matrix_float_multiplier <= ZERO_DATA;
-      data_b_in_matrix_float_multiplier <= ZERO_DATA;
+      data_a_in_scalar_float_multiplier <= ZERO_DATA;
+      data_b_in_scalar_float_multiplier <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -212,11 +195,12 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          DATA_OUT_I_ENABLE <= '0';
-          DATA_OUT_J_ENABLE <= '0';
-          DATA_OUT_K_ENABLE <= '0';
-
           if (START = '1') then
+            -- Control Outputs
+            DATA_OUT_I_ENABLE <= '1';
+            DATA_OUT_J_ENABLE <= '1';
+            DATA_OUT_K_ENABLE <= '1';
+
             -- Assignations
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
@@ -224,42 +208,33 @@ begin
 
             -- FSM Control
             multiplier_ctrl_fsm_int <= INPUT_I_STATE;
+          else
+            -- Control Outputs
+            DATA_OUT_I_ENABLE <= '0';
+            DATA_OUT_J_ENABLE <= '0';
+            DATA_OUT_K_ENABLE <= '0';
           end if;
 
         when INPUT_I_STATE =>           -- STEP 1
 
-          if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) or ((index_j_loop = ZERO_CONTROL) and (index_k_loop = ZERO_CONTROL))) then
+          if ((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            data_a_in_matrix_float_multiplier <= DATA_A_IN;
+            data_a_in_scalar_float_multiplier <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_i_enable_matrix_float_multiplier <= '1';
-            data_a_in_j_enable_matrix_float_multiplier <= '1';
-
-            data_a_in_i_multiplier_int <= '1';
-            data_a_in_j_multiplier_int <= '1';
-            data_a_in_k_multiplier_int <= '1';
-          else
-            -- Control Internal
-            data_a_in_i_enable_matrix_float_multiplier <= '0';
-            data_a_in_j_enable_matrix_float_multiplier <= '0';
+            data_a_in_i_float_multiplier_int <= '1';
+            data_a_in_j_float_multiplier_int <= '1';
+            data_a_in_k_float_multiplier_int <= '1';
           end if;
 
-          if (((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1') and (DATA_B_IN_K_ENABLE = '1')) or ((index_j_loop = ZERO_CONTROL) and (index_k_loop = ZERO_CONTROL))) then
+          if ((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1') and (DATA_B_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            data_b_in_matrix_float_multiplier <= DATA_B_IN;
+            data_b_in_scalar_float_multiplier <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_i_enable_matrix_float_multiplier <= '1';
-            data_b_in_j_enable_matrix_float_multiplier <= '1';
-
-            data_b_in_i_multiplier_int <= '1';
-            data_b_in_j_multiplier_int <= '1';
-            data_b_in_k_multiplier_int <= '1';
-          else
-            -- Control Internal
-            data_b_in_i_enable_matrix_float_multiplier <= '0';
-            data_b_in_j_enable_matrix_float_multiplier <= '0';
+            data_b_in_i_float_multiplier_int <= '1';
+            data_b_in_j_float_multiplier_int <= '1';
+            data_b_in_k_float_multiplier_int <= '1';
           end if;
 
           -- Control Outputs
@@ -267,130 +242,103 @@ begin
           DATA_OUT_J_ENABLE <= '0';
           DATA_OUT_K_ENABLE <= '0';
 
-          if (data_a_in_i_multiplier_int = '1' and data_a_in_j_multiplier_int = '1' and data_a_in_k_multiplier_int = '1' and data_b_in_i_multiplier_int = '1' and data_b_in_j_multiplier_int = '1' and data_b_in_k_multiplier_int = '1') then
-            -- Data Inputs
-            size_i_in_matrix_float_multiplier <= SIZE_J_IN;
-            size_j_in_matrix_float_multiplier <= SIZE_K_IN;
-
+          if (data_a_in_i_float_multiplier_int = '1' and data_a_in_j_float_multiplier_int = '1' and data_a_in_k_float_multiplier_int = '1' and data_b_in_i_float_multiplier_int = '1' and data_b_in_j_float_multiplier_int = '1' and data_b_in_k_float_multiplier_int = '1') then
             -- Control Internal
-            start_matrix_float_multiplier <= '1';
+            start_scalar_float_multiplier <= '1';
 
-            data_a_in_i_enable_matrix_float_multiplier <= '0';
-            data_a_in_j_enable_matrix_float_multiplier <= '0';
-            data_b_in_i_enable_matrix_float_multiplier <= '0';
-            data_b_in_j_enable_matrix_float_multiplier <= '0';
-
-            data_a_in_i_multiplier_int <= '0';
-            data_a_in_j_multiplier_int <= '0';
-            data_a_in_k_multiplier_int <= '0';
-            data_b_in_i_multiplier_int <= '0';
-            data_b_in_j_multiplier_int <= '0';
-            data_b_in_k_multiplier_int <= '0';
+            data_a_in_i_float_multiplier_int <= '0';
+            data_a_in_j_float_multiplier_int <= '0';
+            data_a_in_k_float_multiplier_int <= '0';
+            data_b_in_i_float_multiplier_int <= '0';
+            data_b_in_j_float_multiplier_int <= '0';
+            data_b_in_k_float_multiplier_int <= '0';
 
             -- FSM Control
-            multiplier_ctrl_fsm_int <= ENDER_K_STATE;
+            if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+              multiplier_ctrl_fsm_int <= ENDER_I_STATE;
+            elsif (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+              multiplier_ctrl_fsm_int <= ENDER_J_STATE;
+            else
+              multiplier_ctrl_fsm_int <= ENDER_K_STATE;
+            end if;
           end if;
 
         when INPUT_J_STATE =>           -- STEP 2
 
-          if (((DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) or (index_k_loop = ZERO_CONTROL)) then
+          if ((DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            data_a_in_matrix_float_multiplier <= DATA_A_IN;
+            data_a_in_scalar_float_multiplier <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_i_enable_matrix_float_multiplier <= '1';
-            data_a_in_j_enable_matrix_float_multiplier <= '1';
-
-            data_a_in_j_multiplier_int <= '1';
-            data_a_in_k_multiplier_int <= '1';
-          else
-            -- Control Internal
-            data_a_in_i_enable_matrix_float_multiplier <= '0';
-            data_a_in_j_enable_matrix_float_multiplier <= '0';
+            data_a_in_j_float_multiplier_int <= '1';
+            data_a_in_k_float_multiplier_int <= '1';
           end if;
 
-          if (((DATA_B_IN_J_ENABLE = '1') and (DATA_B_IN_K_ENABLE = '1')) or (index_k_loop = ZERO_CONTROL)) then
+          if ((DATA_B_IN_J_ENABLE = '1') and (DATA_B_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            data_b_in_matrix_float_multiplier <= DATA_B_IN;
+            data_b_in_scalar_float_multiplier <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_i_enable_matrix_float_multiplier <= '1';
-            data_b_in_j_enable_matrix_float_multiplier <= '1';
-
-            data_b_in_j_multiplier_int <= '1';
-            data_b_in_k_multiplier_int <= '1';
-          else
-            -- Control Internal
-            data_b_in_i_enable_matrix_float_multiplier <= '0';
-            data_b_in_j_enable_matrix_float_multiplier <= '0';
+            data_b_in_j_float_multiplier_int <= '1';
+            data_b_in_k_float_multiplier_int <= '1';
           end if;
 
           -- Control Outputs
           DATA_OUT_J_ENABLE <= '0';
           DATA_OUT_K_ENABLE <= '0';
 
-          if (data_a_in_j_multiplier_int = '1' and data_a_in_k_multiplier_int = '1' and data_b_in_j_multiplier_int = '1' and data_b_in_k_multiplier_int = '1') then
-            -- Data Inputs
-            data_a_in_i_enable_matrix_float_multiplier <= '0';
-            data_a_in_j_enable_matrix_float_multiplier <= '0';
-            data_b_in_i_enable_matrix_float_multiplier <= '0';
-            data_b_in_j_enable_matrix_float_multiplier <= '0';
+          if (data_a_in_j_float_multiplier_int = '1' and data_a_in_k_float_multiplier_int = '1' and data_b_in_j_float_multiplier_int = '1' and data_b_in_k_float_multiplier_int = '1') then
+            -- Control Internal
+            start_scalar_float_multiplier <= '1';
 
-            data_a_in_j_multiplier_int <= '0';
-            data_a_in_k_multiplier_int <= '0';
-            data_b_in_j_multiplier_int <= '0';
-            data_b_in_k_multiplier_int <= '0';
+            data_a_in_j_float_multiplier_int <= '0';
+            data_a_in_k_float_multiplier_int <= '0';
+            data_b_in_j_float_multiplier_int <= '0';
+            data_b_in_k_float_multiplier_int <= '0';
 
             -- FSM Control
-            multiplier_ctrl_fsm_int <= ENDER_K_STATE;
+            if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+              multiplier_ctrl_fsm_int <= ENDER_I_STATE;
+            elsif (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+              multiplier_ctrl_fsm_int <= ENDER_J_STATE;
+            else
+              multiplier_ctrl_fsm_int <= ENDER_K_STATE;
+            end if;
           end if;
 
         when INPUT_K_STATE =>           -- STEP 3
 
           if (DATA_A_IN_K_ENABLE = '1') then
             -- Data Inputs
-            data_a_in_matrix_float_multiplier <= DATA_A_IN;
+            data_a_in_scalar_float_multiplier <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_j_enable_matrix_float_multiplier <= '1';
-
-            data_a_in_k_multiplier_int <= '1';
-          else
-            -- Control Internal
-            data_a_in_j_enable_matrix_float_multiplier <= '0';
+            data_a_in_k_float_multiplier_int <= '1';
           end if;
 
           if (DATA_B_IN_K_ENABLE = '1') then
             -- Data Inputs
-            data_b_in_matrix_float_multiplier <= DATA_B_IN;
+            data_b_in_scalar_float_multiplier <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_j_enable_matrix_float_multiplier <= '1';
-
-            data_b_in_k_multiplier_int <= '1';
-          else
-            -- Control Internal
-            data_b_in_j_enable_matrix_float_multiplier <= '0';
+            data_b_in_k_float_multiplier_int <= '1';
           end if;
 
           -- Control Outputs
           DATA_OUT_K_ENABLE <= '0';
 
-          if (data_a_in_k_multiplier_int = '1' and data_b_in_k_multiplier_int = '1') then
+          if (data_a_in_k_float_multiplier_int = '1' and data_b_in_k_float_multiplier_int = '1') then
             -- Control Internal
-            data_a_in_j_enable_matrix_float_multiplier <= '0';
-            data_b_in_j_enable_matrix_float_multiplier <= '0';
+            start_scalar_float_multiplier <= '1';
 
-            data_a_in_k_multiplier_int <= '0';
-            data_b_in_k_multiplier_int <= '0';
+            data_a_in_k_float_multiplier_int <= '0';
+            data_b_in_k_float_multiplier_int <= '0';
 
             -- FSM Control
-            if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
-              if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-                multiplier_ctrl_fsm_int <= ENDER_I_STATE;
-              else
-                multiplier_ctrl_fsm_int <= ENDER_J_STATE;
-              end if;
+            if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+              multiplier_ctrl_fsm_int <= ENDER_I_STATE;
+            elsif (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+              multiplier_ctrl_fsm_int <= ENDER_J_STATE;
             else
               multiplier_ctrl_fsm_int <= ENDER_K_STATE;
             end if;
@@ -398,10 +346,11 @@ begin
 
         when ENDER_I_STATE =>           -- STEP 4
 
-          if (data_out_i_enable_matrix_float_multiplier = '1' and data_out_j_enable_matrix_float_multiplier = '1') then
+          if (ready_scalar_float_multiplier = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_float_multiplier;
+              DATA_OUT     <= data_out_scalar_float_multiplier;
+              OVERFLOW_OUT <= overflow_out_scalar_float_multiplier;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -419,7 +368,8 @@ begin
               multiplier_ctrl_fsm_int <= STARTER_STATE;
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_float_multiplier;
+              DATA_OUT     <= data_out_scalar_float_multiplier;
+              OVERFLOW_OUT <= overflow_out_scalar_float_multiplier;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -436,15 +386,16 @@ begin
             end if;
           else
             -- Control Internal
-            start_matrix_float_multiplier <= '0';
+            start_scalar_float_multiplier <= '0';
           end if;
 
         when ENDER_J_STATE =>           -- STEP 5
 
-          if (data_out_j_enable_matrix_float_multiplier = '1') then
+          if (ready_scalar_float_multiplier = '1') then
             if ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_float_multiplier;
+              DATA_OUT     <= data_out_scalar_float_multiplier;
+              OVERFLOW_OUT <= overflow_out_scalar_float_multiplier;
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';
@@ -459,15 +410,16 @@ begin
             end if;
           else
             -- Control Internal
-            start_matrix_float_multiplier <= '0';
+            start_scalar_float_multiplier <= '0';
           end if;
 
         when ENDER_K_STATE =>           -- STEP 6
 
-          if (data_out_j_enable_matrix_float_multiplier = '1') then
+          if (ready_scalar_float_multiplier = '1') then
             if (unsigned(index_k_loop) < unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_float_multiplier;
+              DATA_OUT     <= data_out_scalar_float_multiplier;
+              OVERFLOW_OUT <= overflow_out_scalar_float_multiplier;
 
               -- Control Outputs
               DATA_OUT_K_ENABLE <= '1';
@@ -480,7 +432,7 @@ begin
             end if;
           else
             -- Control Internal
-            start_matrix_float_multiplier <= '0';
+            start_scalar_float_multiplier <= '0';
           end if;
 
         when others =>
@@ -490,8 +442,8 @@ begin
     end if;
   end process;
 
-  -- MATRIX FLOAT MULTIPLIER
-  matrix_float_multiplier : ntm_matrix_float_multiplier
+  -- SCALAR MULTIPLIER
+  scalar_float_multiplier : ntm_scalar_float_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -502,25 +454,15 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_float_multiplier,
-      READY => ready_matrix_float_multiplier,
-
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_float_multiplier,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_float_multiplier,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_float_multiplier,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_float_multiplier,
-
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_float_multiplier,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_float_multiplier,
+      START => start_scalar_float_multiplier,
+      READY => ready_scalar_float_multiplier,
 
       -- DATA
-      SIZE_I_IN => size_i_in_matrix_float_multiplier,
-      SIZE_J_IN => size_j_in_matrix_float_multiplier,
-      DATA_A_IN => data_a_in_matrix_float_multiplier,
-      DATA_B_IN => data_b_in_matrix_float_multiplier,
+      DATA_A_IN => data_a_in_scalar_float_multiplier,
+      DATA_B_IN => data_b_in_scalar_float_multiplier,
 
-      DATA_OUT     => data_out_matrix_float_multiplier,
-      OVERFLOW_OUT => overflow_out_matrix_float_multiplier
+      DATA_OUT     => data_out_scalar_float_multiplier,
+      OVERFLOW_OUT => overflow_out_scalar_float_multiplier
       );
 
 end architecture;

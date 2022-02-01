@@ -216,11 +216,12 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          DATA_OUT_I_ENABLE <= '0';
-          DATA_OUT_J_ENABLE <= '0';
-          DATA_OUT_K_ENABLE <= '0';
-
           if (START = '1') then
+            -- Control Outputs
+            DATA_OUT_I_ENABLE <= '1';
+            DATA_OUT_J_ENABLE <= '1';
+            DATA_OUT_K_ENABLE <= '1';
+
             -- Assignations
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
@@ -228,11 +229,16 @@ begin
 
             -- FSM Control
             adder_ctrl_fsm_int <= INPUT_I_STATE;
+          else
+            -- Control Outputs
+            DATA_OUT_I_ENABLE <= '0';
+            DATA_OUT_J_ENABLE <= '0';
+            DATA_OUT_K_ENABLE <= '0';
           end if;
 
         when INPUT_I_STATE =>           -- STEP 1
 
-          if (((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) or ((index_j_loop = ZERO_CONTROL) and (index_k_loop = ZERO_CONTROL))) then
+          if ((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) then
             -- Data Inputs
             data_a_in_matrix_modular_adder <= DATA_A_IN;
 
@@ -249,7 +255,7 @@ begin
             data_a_in_j_enable_matrix_modular_adder <= '0';
           end if;
 
-          if (((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1') and (DATA_B_IN_K_ENABLE = '1')) or ((index_j_loop = ZERO_CONTROL) and (index_k_loop = ZERO_CONTROL))) then
+          if ((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1') and (DATA_B_IN_K_ENABLE = '1')) then
             -- Data Inputs
             data_b_in_matrix_modular_adder <= DATA_B_IN;
 
@@ -300,7 +306,7 @@ begin
 
         when INPUT_J_STATE =>           -- STEP 2
 
-          if (((DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) or (index_k_loop = ZERO_CONTROL)) then
+          if ((DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) then
             -- Data Inputs
             data_a_in_matrix_modular_adder <= DATA_A_IN;
 
@@ -316,7 +322,7 @@ begin
             data_a_in_j_enable_matrix_modular_adder <= '0';
           end if;
 
-          if (((DATA_B_IN_J_ENABLE = '1') and (DATA_B_IN_K_ENABLE = '1')) or (index_k_loop = ZERO_CONTROL)) then
+          if ((DATA_B_IN_J_ENABLE = '1') and (DATA_B_IN_K_ENABLE = '1')) then
             -- Data Inputs
             data_b_in_matrix_modular_adder <= DATA_B_IN;
 

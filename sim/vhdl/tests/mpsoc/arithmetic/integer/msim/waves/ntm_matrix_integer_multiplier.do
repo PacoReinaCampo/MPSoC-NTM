@@ -6,7 +6,7 @@ add wave -noupdate /ntm_integer_pkg/MONITOR_TEST
 add wave -noupdate /ntm_integer_pkg/MONITOR_CASE
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM MATRIX MULTIPLIER TEST}
+add wave -noupdate -divider {NTM MATRIX INTEGER MULTIPLIER TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/CLK
@@ -30,20 +30,16 @@ add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/mat
 
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/multiplier_ctrl_fsm_int
 
-add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/start_vector_integer_multiplier
-add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/size_in_vector_integer_multiplier
+add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/start_scalar_integer_multiplier
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/data_a_in_i_multiplier_int
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/data_a_in_j_multiplier_int
-add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/data_a_in_enable_vector_integer_multiplier
-add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/data_a_in_vector_integer_multiplier
+add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/data_a_in_scalar_integer_multiplier
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/data_b_in_i_multiplier_int
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/data_b_in_j_multiplier_int
-add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/data_b_in_enable_vector_integer_multiplier
-add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/data_b_in_vector_integer_multiplier
-add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/ready_vector_integer_multiplier
-add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/data_out_enable_vector_integer_multiplier
-add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/data_out_vector_integer_multiplier
-add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/overflow_out_vector_integer_multiplier
+add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/data_b_in_scalar_integer_multiplier
+add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/ready_scalar_integer_multiplier
+add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/data_out_scalar_integer_multiplier
+add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_multiplier_test/matrix_integer_multiplier/overflow_out_scalar_integer_multiplier
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

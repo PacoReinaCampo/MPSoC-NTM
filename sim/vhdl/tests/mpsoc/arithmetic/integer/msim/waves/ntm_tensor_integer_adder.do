@@ -6,7 +6,7 @@ add wave -noupdate /ntm_integer_pkg/MONITOR_TEST
 add wave -noupdate /ntm_integer_pkg/MONITOR_CASE
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM TENSOR ADDER TEST}
+add wave -noupdate -divider {NTM TENSOR INTEGER ADDER TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/CLK
@@ -36,27 +36,19 @@ add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_i
 
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/adder_ctrl_fsm_int
 
-add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/start_matrix_integer_adder
-add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/operation_matrix_integer_adder
-add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/size_i_in_matrix_integer_adder
-add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/size_j_in_matrix_integer_adder
+add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/start_scalar_integer_adder
+add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/operation_scalar_integer_adder
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_a_in_i_integer_adder_int
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_a_in_j_integer_adder_int
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_a_in_k_integer_adder_int
-add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_a_in_i_enable_matrix_integer_adder
-add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_a_in_j_enable_matrix_integer_adder
-add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_a_in_matrix_integer_adder
+add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_a_in_scalar_integer_adder
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_b_in_i_integer_adder_int
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_b_in_j_integer_adder_int
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_b_in_k_integer_adder_int
-add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_b_in_i_enable_matrix_integer_adder
-add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_b_in_j_enable_matrix_integer_adder
-add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_b_in_matrix_integer_adder
-add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/ready_matrix_integer_adder
-add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_out_i_enable_matrix_integer_adder
-add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_out_j_enable_matrix_integer_adder
-add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_out_matrix_integer_adder
-add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/overflow_out_matrix_integer_adder
+add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_b_in_scalar_integer_adder
+add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/ready_scalar_integer_adder
+add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/data_out_scalar_integer_adder
+add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_adder_test/tensor_integer_adder/overflow_out_scalar_integer_adder
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

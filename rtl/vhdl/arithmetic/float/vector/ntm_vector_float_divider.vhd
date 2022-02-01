@@ -146,7 +146,8 @@ begin
       OVERFLOW_OUT <= '0';
 
       -- Control Outputs
-      READY           <= '0';
+      READY <= '0';
+
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
@@ -166,20 +167,25 @@ begin
       case divider_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
-          READY           <= '0';
-          DATA_OUT_ENABLE <= '0';
+          READY <= '0';
 
           if (START = '1') then
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '1';
+
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
             divider_ctrl_fsm_int <= INPUT_STATE;
+          else
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '0';
           end if;
 
         when INPUT_STATE =>             -- STEP 1
 
-          if ((DATA_A_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
+          if (DATA_A_IN_ENABLE = '1') then
             -- Data Inputs
             data_a_in_scalar_float_divider <= DATA_A_IN;
 
@@ -187,7 +193,7 @@ begin
             data_a_in_divider_int <= '1';
           end if;
 
-          if ((DATA_B_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
+          if (DATA_B_IN_ENABLE = '1') then
             -- Data Inputs
             data_b_in_scalar_float_divider <= DATA_B_IN;
 

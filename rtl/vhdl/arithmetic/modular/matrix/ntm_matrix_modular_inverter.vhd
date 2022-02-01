@@ -173,20 +173,26 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          DATA_OUT_I_ENABLE <= '0';
-          DATA_OUT_J_ENABLE <= '0';
-
           if (START = '1') then
+            -- Control Outputs
+            DATA_OUT_I_ENABLE <= '1';
+            DATA_OUT_J_ENABLE <= '1';
+
+            -- Assignations
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
             inverter_ctrl_fsm_int <= INPUT_I_STATE;
+          else
+            -- Control Outputs
+            DATA_OUT_I_ENABLE <= '0';
+            DATA_OUT_J_ENABLE <= '0';
           end if;
 
         when INPUT_I_STATE =>           -- STEP 1
 
-          if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) or (unsigned(index_j_loop) = unsigned(ZERO_CONTROL))) then
+          if ((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) then
             -- Data Inputs
             modulo_in_vector_inverter <= MODULO_IN;
             size_in_vector_inverter   <= SIZE_J_IN;

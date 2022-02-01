@@ -6,7 +6,7 @@ add wave -noupdate /ntm_integer_pkg/MONITOR_TEST
 add wave -noupdate /ntm_integer_pkg/MONITOR_CASE
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM SCALAR ADDER TEST}
+add wave -noupdate -divider {NTM SCALAR INTEGER ADDER TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_adder_test/scalar_integer_adder/CLK

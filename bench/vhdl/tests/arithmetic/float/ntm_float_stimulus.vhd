@@ -463,19 +463,26 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_FLOAT_ADDER_DATA_A_IN_ENABLE <= '1';
-        VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_FLOAT_ADDER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-        VECTOR_FLOAT_ADDER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+        VECTOR_FLOAT_ADDER_DATA_A_IN <= ZERO_DATA;
+        VECTOR_FLOAT_ADDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_FLOAT_ADDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_FLOAT_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_FLOAT_ADDER_FIRST_RUN : loop
+          if (VECTOR_FLOAT_ADDER_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_FLOAT_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_FLOAT_ADDER_DATA_A_IN_ENABLE <= '1';
+            VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_FLOAT_ADDER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            VECTOR_FLOAT_ADDER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_FLOAT_ADDER_DATA_OUT_ENABLE = '1' or VECTOR_FLOAT_ADDER_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_FLOAT_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_FLOAT_ADDER_DATA_A_IN_ENABLE <= '1';
             VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '1';
@@ -492,12 +499,12 @@ begin
             VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_FLOAT_ADDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
-        end loop;
+
+          -- CONTROL
+          exit VECTOR_FLOAT_ADDER_FIRST_RUN when VECTOR_FLOAT_ADDER_READY = '1';
+        end loop VECTOR_FLOAT_ADDER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_VECTOR_FLOAT_ADDER_CASE_1) then
@@ -507,19 +514,26 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_FLOAT_ADDER_DATA_A_IN_ENABLE <= '1';
-        VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_FLOAT_ADDER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-        VECTOR_FLOAT_ADDER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+        VECTOR_FLOAT_ADDER_DATA_A_IN <= ZERO_DATA;
+        VECTOR_FLOAT_ADDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_FLOAT_ADDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_FLOAT_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_FLOAT_ADDER_SECOND_RUN : loop
+          if (VECTOR_FLOAT_ADDER_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_FLOAT_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_FLOAT_ADDER_DATA_A_IN_ENABLE <= '1';
+            VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_FLOAT_ADDER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            VECTOR_FLOAT_ADDER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_FLOAT_ADDER_DATA_OUT_ENABLE = '1' or VECTOR_FLOAT_ADDER_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_FLOAT_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_FLOAT_ADDER_DATA_A_IN_ENABLE <= '1';
             VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '1';
@@ -536,12 +550,12 @@ begin
             VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_FLOAT_ADDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
-        end loop;
+
+          -- CONTROL
+          exit VECTOR_FLOAT_ADDER_SECOND_RUN when VECTOR_FLOAT_ADDER_READY = '1';
+        end loop VECTOR_FLOAT_ADDER_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -564,19 +578,26 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_FLOAT_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
-        VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-        VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+        VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= ZERO_DATA;
+        VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_FLOAT_MULTIPLIER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_FLOAT_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_FLOAT_MULTIPLIER_FIRST_RUN : loop
+          if (VECTOR_FLOAT_MULTIPLIER_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_FLOAT_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_FLOAT_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
+            VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_FLOAT_MULTIPLIER_DATA_OUT_ENABLE = '1' or VECTOR_FLOAT_MULTIPLIER_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_FLOAT_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_FLOAT_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
             VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
@@ -593,12 +614,12 @@ begin
             VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_FLOAT_MULTIPLIER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
-        end loop;
+
+          -- CONTROL
+          exit VECTOR_FLOAT_MULTIPLIER_FIRST_RUN when VECTOR_FLOAT_MULTIPLIER_READY = '1';
+        end loop VECTOR_FLOAT_MULTIPLIER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_VECTOR_FLOAT_MULTIPLIER_CASE_1) then
@@ -608,19 +629,26 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_FLOAT_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
-        VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-        VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+        VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= ZERO_DATA;
+        VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_FLOAT_MULTIPLIER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_FLOAT_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_FLOAT_MULTIPLIER_SECOND_RUN : loop
+          if (VECTOR_FLOAT_MULTIPLIER_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_FLOAT_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_FLOAT_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
+            VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_FLOAT_MULTIPLIER_DATA_OUT_ENABLE = '1' or VECTOR_FLOAT_MULTIPLIER_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_FLOAT_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_FLOAT_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
             VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
@@ -637,12 +665,12 @@ begin
             VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_FLOAT_MULTIPLIER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
-        end loop;
+
+          -- CONTROL
+          exit VECTOR_FLOAT_MULTIPLIER_SECOND_RUN when VECTOR_FLOAT_MULTIPLIER_READY = '1';
+        end loop VECTOR_FLOAT_MULTIPLIER_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -665,19 +693,26 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_FLOAT_DIVIDER_DATA_A_IN_ENABLE <= '1';
-        VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_FLOAT_DIVIDER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-        VECTOR_FLOAT_DIVIDER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+        VECTOR_FLOAT_DIVIDER_DATA_A_IN <= ZERO_DATA;
+        VECTOR_FLOAT_DIVIDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_FLOAT_DIVIDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_FLOAT_DIVIDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_FLOAT_DIVIDER_FIRST_RUN : loop
+          if (VECTOR_FLOAT_DIVIDER_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_FLOAT_DIVIDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_FLOAT_DIVIDER_DATA_A_IN_ENABLE <= '1';
+            VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_FLOAT_DIVIDER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            VECTOR_FLOAT_DIVIDER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_FLOAT_DIVIDER_DATA_OUT_ENABLE = '1' or VECTOR_FLOAT_DIVIDER_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_FLOAT_DIVIDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_FLOAT_DIVIDER_DATA_A_IN_ENABLE <= '1';
             VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '1';
@@ -694,12 +729,12 @@ begin
             VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_FLOAT_DIVIDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
-        end loop;
+
+          -- CONTROL
+          exit VECTOR_FLOAT_DIVIDER_FIRST_RUN when VECTOR_FLOAT_DIVIDER_READY = '1';
+        end loop VECTOR_FLOAT_DIVIDER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_VECTOR_FLOAT_DIVIDER_CASE_1) then
@@ -709,19 +744,26 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_FLOAT_DIVIDER_DATA_A_IN_ENABLE <= '1';
-        VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_FLOAT_DIVIDER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-        VECTOR_FLOAT_DIVIDER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+        VECTOR_FLOAT_DIVIDER_DATA_A_IN <= ZERO_DATA;
+        VECTOR_FLOAT_DIVIDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_FLOAT_DIVIDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_FLOAT_DIVIDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_FLOAT_DIVIDER_SECOND_RUN : loop
+          if (VECTOR_FLOAT_DIVIDER_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_FLOAT_DIVIDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_FLOAT_DIVIDER_DATA_A_IN_ENABLE <= '1';
+            VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_FLOAT_DIVIDER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            VECTOR_FLOAT_DIVIDER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_FLOAT_DIVIDER_DATA_OUT_ENABLE = '1' or VECTOR_FLOAT_DIVIDER_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_FLOAT_DIVIDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_FLOAT_DIVIDER_DATA_A_IN_ENABLE <= '1';
             VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '1';
@@ -738,12 +780,12 @@ begin
             VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_FLOAT_DIVIDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
-        end loop;
+
+          -- CONTROL
+          exit VECTOR_FLOAT_DIVIDER_SECOND_RUN when VECTOR_FLOAT_DIVIDER_READY = '1';
+        end loop VECTOR_FLOAT_DIVIDER_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -774,46 +816,43 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_FLOAT_ADDER_DATA_B_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-        MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+        MATRIX_FLOAT_ADDER_DATA_A_IN <= ZERO_DATA;
+        MATRIX_FLOAT_ADDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_FLOAT_ADDER_DATA_OUT_I_ENABLE = '1') and (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_FLOAT_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_FLOAT_ADDER_FIRST_RUN : loop
+          if (MATRIX_FLOAT_ADDER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_ADDER_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_FLOAT_ADDER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
             MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_FLOAT_ADDER_DATA_OUT_I_ENABLE = '0') and (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_FLOAT_ADDER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-            MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '0';
@@ -822,12 +861,23 @@ begin
             MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_FLOAT_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_FLOAT_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' or MATRIX_FLOAT_ADDER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_FLOAT_ADDER_READY = '1';
-        end loop;
+          exit MATRIX_FLOAT_ADDER_FIRST_RUN when MATRIX_FLOAT_ADDER_READY = '1';
+        end loop MATRIX_FLOAT_ADDER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_MATRIX_FLOAT_ADDER_CASE_1) then
@@ -837,46 +887,43 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_FLOAT_ADDER_DATA_B_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-        MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+        MATRIX_FLOAT_ADDER_DATA_A_IN <= ZERO_DATA;
+        MATRIX_FLOAT_ADDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_FLOAT_ADDER_DATA_OUT_I_ENABLE = '1') and (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_FLOAT_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_FLOAT_ADDER_SECOND_RUN : loop
+          if (MATRIX_FLOAT_ADDER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_ADDER_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_FLOAT_ADDER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
             MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_FLOAT_ADDER_DATA_OUT_I_ENABLE = '0') and (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_FLOAT_ADDER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-            MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '0';
@@ -885,12 +932,23 @@ begin
             MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_FLOAT_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_FLOAT_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' or MATRIX_FLOAT_ADDER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_FLOAT_ADDER_READY = '1';
-        end loop;
+          exit MATRIX_FLOAT_ADDER_SECOND_RUN when MATRIX_FLOAT_ADDER_READY = '1';
+        end loop MATRIX_FLOAT_ADDER_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -914,46 +972,43 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= ZERO_DATA;
+        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '1') and (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_FLOAT_MULTIPLIER_FIRST_RUN : loop
+          if (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '0') and (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
@@ -962,12 +1017,23 @@ begin
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' or MATRIX_FLOAT_MULTIPLIER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_FLOAT_MULTIPLIER_READY = '1';
-        end loop;
+          exit MATRIX_FLOAT_MULTIPLIER_FIRST_RUN when MATRIX_FLOAT_MULTIPLIER_READY = '1';
+        end loop MATRIX_FLOAT_MULTIPLIER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_CASE_1) then
@@ -977,46 +1043,43 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= ZERO_DATA;
+        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '1') and (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_FLOAT_MULTIPLIER_SECOND_RUN : loop
+          if (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '0') and (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
@@ -1025,12 +1088,23 @@ begin
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' or MATRIX_FLOAT_MULTIPLIER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_FLOAT_MULTIPLIER_READY = '1';
-        end loop;
+          exit MATRIX_FLOAT_MULTIPLIER_SECOND_RUN when MATRIX_FLOAT_MULTIPLIER_READY = '1';
+        end loop MATRIX_FLOAT_MULTIPLIER_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -1054,46 +1128,43 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-        MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+        MATRIX_FLOAT_DIVIDER_DATA_A_IN <= ZERO_DATA;
+        MATRIX_FLOAT_DIVIDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '1') and (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_FLOAT_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_FLOAT_DIVIDER_FIRST_RUN : loop
+          if (MATRIX_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
             MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '0') and (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '0';
@@ -1102,12 +1173,23 @@ begin
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_FLOAT_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_FLOAT_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' or MATRIX_FLOAT_DIVIDER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_FLOAT_DIVIDER_READY = '1';
-        end loop;
+          exit MATRIX_FLOAT_DIVIDER_FIRST_RUN when MATRIX_FLOAT_DIVIDER_READY = '1';
+        end loop MATRIX_FLOAT_DIVIDER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_CASE_1) then
@@ -1116,48 +1198,44 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_MATRIX_DIVIDER_CASE 1      ";
         -------------------------------------------------------------------
 
-
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-        MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+        MATRIX_FLOAT_DIVIDER_DATA_A_IN <= ZERO_DATA;
+        MATRIX_FLOAT_DIVIDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '1') and (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_FLOAT_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_FLOAT_DIVIDER_SECOND_RUN : loop
+          if (MATRIX_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
             MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '0') and (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '0';
@@ -1166,12 +1244,23 @@ begin
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_FLOAT_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_FLOAT_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' or MATRIX_FLOAT_DIVIDER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_FLOAT_DIVIDER_READY = '1';
-        end loop;
+          exit MATRIX_FLOAT_DIVIDER_SECOND_RUN when MATRIX_FLOAT_DIVIDER_READY = '1';
+        end loop MATRIX_FLOAT_DIVIDER_SECOND_RUN;
       end if;
 
       wait for WORKING;

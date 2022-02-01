@@ -627,8 +627,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_MODULAR_MOD_MODULO_IN <= FULL;
-      VECTOR_MODULAR_MOD_SIZE_IN   <= THREE_CONTROL;
+      VECTOR_MODULAR_MOD_SIZE_IN <= THREE_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_MODULAR_MOD_CASE_0) then
 
@@ -637,22 +636,28 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_MODULAR_MOD_DATA_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_MODULAR_MOD_DATA_IN <= ONE_DATA;
+        VECTOR_MODULAR_MOD_DATA_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_MODULAR_MOD_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_MODULAR_MOD_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_MODULAR_MOD_FIRST_RUN : loop
+          if (VECTOR_MODULAR_MOD_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_MODULAR_MOD_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MODULAR_MOD_DATA_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_MODULAR_MOD_DATA_IN <= ONE_DATA;
+            VECTOR_MODULAR_MOD_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_MODULAR_MOD_DATA_OUT_ENABLE = '1' or VECTOR_MODULAR_MOD_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_MODULAR_MOD_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_MODULAR_MOD_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_MODULAR_MOD_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -665,8 +670,8 @@ begin
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when VECTOR_MODULAR_MOD_READY = '1';
-        end loop;
+          exit VECTOR_MODULAR_MOD_FIRST_RUN when VECTOR_MODULAR_MOD_READY = '1';
+        end loop VECTOR_MODULAR_MOD_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_VECTOR_MODULAR_MOD_CASE_1) then
@@ -676,22 +681,28 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_MODULAR_MOD_DATA_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_MODULAR_MOD_DATA_IN <= TWO_DATA;
+        VECTOR_MODULAR_MOD_DATA_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_MODULAR_MOD_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_MODULAR_MOD_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_MODULAR_MOD_SECOND_RUN : loop
+          if ((VECTOR_MODULAR_MOD_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_MODULAR_MOD_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MODULAR_MOD_DATA_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_MODULAR_MOD_DATA_IN <= TWO_DATA;
+            VECTOR_MODULAR_MOD_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif (((VECTOR_MODULAR_MOD_DATA_OUT_ENABLE = '1') or (VECTOR_MODULAR_MOD_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_MODULAR_MOD_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_MODULAR_MOD_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_MODULAR_MOD_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -704,8 +715,8 @@ begin
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when VECTOR_MODULAR_MOD_READY = '1';
-        end loop;
+          exit VECTOR_MODULAR_MOD_SECOND_RUN when VECTOR_MODULAR_MOD_READY = '1';
+        end loop VECTOR_MODULAR_MOD_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -732,26 +743,33 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_MODULAR_ADDER_DATA_A_IN_ENABLE <= '1';
-        VECTOR_MODULAR_ADDER_DATA_B_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_MODULAR_ADDER_DATA_A_IN <= TWO_DATA;
-        VECTOR_MODULAR_ADDER_DATA_B_IN <= ONE_DATA;
+        VECTOR_MODULAR_ADDER_DATA_A_IN <= ZERO_DATA;
+        VECTOR_MODULAR_ADDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_MODULAR_ADDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_MODULAR_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_MODULAR_ADDER_FIRST_RUN : loop
+          if (VECTOR_MODULAR_ADDER_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_MODULAR_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MODULAR_ADDER_DATA_A_IN_ENABLE <= '1';
             VECTOR_MODULAR_ADDER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_MODULAR_ADDER_DATA_A_IN <= TWO_DATA;
-            VECTOR_MODULAR_ADDER_DATA_B_IN <= ONE_DATA;
+            VECTOR_MODULAR_ADDER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            VECTOR_MODULAR_ADDER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_MODULAR_ADDER_DATA_OUT_ENABLE = '1' or VECTOR_MODULAR_ADDER_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_MODULAR_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_MODULAR_ADDER_DATA_A_IN_ENABLE <= '1';
+            VECTOR_MODULAR_ADDER_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_MODULAR_ADDER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            VECTOR_MODULAR_ADDER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -765,8 +783,8 @@ begin
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when VECTOR_MODULAR_ADDER_READY = '1';
-        end loop;
+          exit VECTOR_MODULAR_ADDER_FIRST_RUN when VECTOR_MODULAR_ADDER_READY = '1';
+        end loop VECTOR_MODULAR_ADDER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_VECTOR_MODULAR_ADDER_CASE_1) then
@@ -776,26 +794,33 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_MODULAR_ADDER_DATA_A_IN_ENABLE <= '1';
-        VECTOR_MODULAR_ADDER_DATA_B_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_MODULAR_ADDER_DATA_A_IN <= TWO_DATA;
-        VECTOR_MODULAR_ADDER_DATA_B_IN <= TWO_DATA;
+        VECTOR_MODULAR_ADDER_DATA_A_IN <= ZERO_DATA;
+        VECTOR_MODULAR_ADDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_MODULAR_ADDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_MODULAR_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_MODULAR_ADDER_SECOND_RUN : loop
+          if (VECTOR_MODULAR_ADDER_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_MODULAR_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MODULAR_ADDER_DATA_A_IN_ENABLE <= '1';
             VECTOR_MODULAR_ADDER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_MODULAR_ADDER_DATA_A_IN <= TWO_DATA;
-            VECTOR_MODULAR_ADDER_DATA_B_IN <= TWO_DATA;
+            VECTOR_MODULAR_ADDER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            VECTOR_MODULAR_ADDER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_MODULAR_ADDER_DATA_OUT_ENABLE = '1' or VECTOR_MODULAR_ADDER_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_MODULAR_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_MODULAR_ADDER_DATA_A_IN_ENABLE <= '1';
+            VECTOR_MODULAR_ADDER_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_MODULAR_ADDER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            VECTOR_MODULAR_ADDER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -809,8 +834,8 @@ begin
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when VECTOR_MODULAR_ADDER_READY = '1';
-        end loop;
+          exit VECTOR_MODULAR_ADDER_SECOND_RUN when VECTOR_MODULAR_ADDER_READY = '1';
+        end loop VECTOR_MODULAR_ADDER_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -834,26 +859,33 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_MODULAR_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
-        VECTOR_MODULAR_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_MODULAR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-        VECTOR_MODULAR_MULTIPLIER_DATA_B_IN <= ONE_DATA;
+        VECTOR_MODULAR_MULTIPLIER_DATA_A_IN <= ZERO_DATA;
+        VECTOR_MODULAR_MULTIPLIER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_MODULAR_MULTIPLIER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_MODULAR_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_MODULAR_MULTIPLIER_FIRST_RUN : loop
+          if (VECTOR_MODULAR_MULTIPLIER_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_MODULAR_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MODULAR_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
             VECTOR_MODULAR_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_MODULAR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-            VECTOR_MODULAR_MULTIPLIER_DATA_B_IN <= ONE_DATA;
+            VECTOR_MODULAR_MULTIPLIER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            VECTOR_MODULAR_MULTIPLIER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_MODULAR_MULTIPLIER_DATA_OUT_ENABLE = '1' or VECTOR_MODULAR_MULTIPLIER_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_MODULAR_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_MODULAR_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
+            VECTOR_MODULAR_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_MODULAR_MULTIPLIER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            VECTOR_MODULAR_MULTIPLIER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -867,8 +899,8 @@ begin
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when VECTOR_MODULAR_MULTIPLIER_READY = '1';
-        end loop;
+          exit VECTOR_MODULAR_MULTIPLIER_FIRST_RUN when VECTOR_MODULAR_MULTIPLIER_READY = '1';
+        end loop VECTOR_MODULAR_MULTIPLIER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_1) then
@@ -878,26 +910,33 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_MODULAR_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
-        VECTOR_MODULAR_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_MODULAR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-        VECTOR_MODULAR_MULTIPLIER_DATA_B_IN <= TWO_DATA;
+        VECTOR_MODULAR_MULTIPLIER_DATA_A_IN <= ZERO_DATA;
+        VECTOR_MODULAR_MULTIPLIER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_MODULAR_MULTIPLIER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_MODULAR_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_MODULAR_MULTIPLIER_SECOND_RUN : loop
+          if (VECTOR_MODULAR_MULTIPLIER_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_MODULAR_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MODULAR_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
             VECTOR_MODULAR_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_MODULAR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-            VECTOR_MODULAR_MULTIPLIER_DATA_B_IN <= TWO_DATA;
+            VECTOR_MODULAR_MULTIPLIER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            VECTOR_MODULAR_MULTIPLIER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_MODULAR_MULTIPLIER_DATA_OUT_ENABLE = '1' or VECTOR_MODULAR_MULTIPLIER_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_MODULAR_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_MODULAR_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
+            VECTOR_MODULAR_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_MODULAR_MULTIPLIER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            VECTOR_MODULAR_MULTIPLIER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -911,8 +950,8 @@ begin
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when VECTOR_MODULAR_MULTIPLIER_READY = '1';
-        end loop;
+          exit VECTOR_MODULAR_MULTIPLIER_SECOND_RUN when VECTOR_MODULAR_MULTIPLIER_READY = '1';
+        end loop VECTOR_MODULAR_MULTIPLIER_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -926,8 +965,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_MODULAR_INVERTER_MODULO_IN <= FULL;
-      VECTOR_MODULAR_INVERTER_SIZE_IN   <= THREE_CONTROL;
+      VECTOR_MODULAR_INVERTER_SIZE_IN <= THREE_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_MODULAR_INVERTER_CASE_0) then
 
@@ -936,22 +974,28 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_MODULAR_INVERTER_DATA_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_MODULAR_INVERTER_DATA_IN <= ONE_DATA;
+        VECTOR_MODULAR_INVERTER_DATA_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_MODULAR_INVERTER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_MODULAR_INVERTER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_MODULAR_INVERTER_FIRST_RUN : loop
+          if (VECTOR_MODULAR_INVERTER_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_MODULAR_INVERTER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MODULAR_INVERTER_DATA_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_MODULAR_INVERTER_DATA_IN <= ONE_DATA;
+            VECTOR_MODULAR_INVERTER_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_MODULAR_INVERTER_DATA_OUT_ENABLE = '1' or VECTOR_MODULAR_INVERTER_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_MODULAR_INVERTER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_MODULAR_INVERTER_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_MODULAR_INVERTER_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -964,8 +1008,8 @@ begin
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when VECTOR_MODULAR_INVERTER_READY = '1';
-        end loop;
+          exit VECTOR_MODULAR_INVERTER_FIRST_RUN when VECTOR_MODULAR_INVERTER_READY = '1';
+        end loop VECTOR_MODULAR_INVERTER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_VECTOR_MODULAR_INVERTER_CASE_1) then
@@ -975,22 +1019,28 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_MODULAR_INVERTER_DATA_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_MODULAR_INVERTER_DATA_IN <= TWO_DATA;
+        VECTOR_MODULAR_INVERTER_DATA_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_MODULAR_INVERTER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_MODULAR_INVERTER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_MODULAR_INVERTER_SECOND_RUN : loop
+          if ((VECTOR_MODULAR_INVERTER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_MODULAR_INVERTER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_MODULAR_INVERTER_DATA_IN_ENABLE <= '1';
 
             -- DATA
-            VECTOR_MODULAR_INVERTER_DATA_IN <= TWO_DATA;
+            VECTOR_MODULAR_INVERTER_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif (((VECTOR_MODULAR_INVERTER_DATA_OUT_ENABLE = '1') or (VECTOR_MODULAR_INVERTER_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_MODULAR_INVERTER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_MODULAR_INVERTER_DATA_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_MODULAR_INVERTER_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
 
             -- LOOP
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -1003,8 +1053,8 @@ begin
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when VECTOR_MODULAR_INVERTER_READY = '1';
-        end loop;
+          exit VECTOR_MODULAR_INVERTER_SECOND_RUN when VECTOR_MODULAR_INVERTER_READY = '1';
+        end loop VECTOR_MODULAR_INVERTER_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -1033,50 +1083,57 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_MODULAR_MOD_DATA_IN_I_ENABLE <= '1';
-        MATRIX_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_MODULAR_MOD_DATA_IN <= ONE_DATA;
-
+        MATRIX_MODULAR_MOD_DATA_IN <= ZERO_DATA;
+        
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_MODULAR_MOD_DATA_OUT_I_ENABLE = '1') and (MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_MODULAR_MOD_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_MODULAR_MOD_FIRST_RUN : loop
+          if (MATRIX_MODULAR_MOD_DATA_OUT_I_ENABLE = '1' and MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MODULAR_MOD_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_MODULAR_MOD_DATA_IN_I_ENABLE <= '1';
             MATRIX_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_MODULAR_MOD_DATA_OUT_I_ENABLE = '1' and MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_MODULAR_MOD_DATA_IN <= ONE_DATA;
+            MATRIX_MODULAR_MOD_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_MOD_DATA_OUT_I_ENABLE = '0') and (MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_MODULAR_MOD_DATA_IN_I_ENABLE <= '1';
+            MATRIX_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MODULAR_MOD_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_MODULAR_MOD_DATA_IN <= ONE_DATA;
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_MODULAR_MOD_DATA_IN_I_ENABLE <= '0';
             MATRIX_MODULAR_MOD_DATA_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_MODULAR_MOD_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_MODULAR_MOD_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1' or MATRIX_MODULAR_MOD_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_MODULAR_MOD_READY = '1';
-        end loop;
+          exit MATRIX_MODULAR_MOD_FIRST_RUN when MATRIX_MODULAR_MOD_READY = '1';
+        end loop MATRIX_MODULAR_MOD_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_MATRIX_MODULAR_MOD_CASE_1) then
@@ -1086,49 +1143,57 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_MODULAR_MOD_DATA_IN_I_ENABLE <= '1';
-        MATRIX_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_MODULAR_MOD_DATA_IN <= ONE_DATA;
-
+        MATRIX_MODULAR_MOD_DATA_IN <= ZERO_DATA;
+        
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_MODULAR_MOD_DATA_OUT_I_ENABLE = '1') and (MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_MODULAR_MOD_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_MODULAR_MOD_SECOND_RUN : loop
+          if (MATRIX_MODULAR_MOD_DATA_OUT_I_ENABLE = '1' and MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MODULAR_MOD_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_MODULAR_MOD_DATA_IN_I_ENABLE <= '1';
-
+            MATRIX_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_MODULAR_MOD_DATA_OUT_I_ENABLE = '1' and MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_MODULAR_MOD_DATA_IN <= TWO_DATA;
+            MATRIX_MODULAR_MOD_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_MOD_DATA_OUT_I_ENABLE = '0') and (MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_MODULAR_MOD_DATA_IN_I_ENABLE <= '1';
+            MATRIX_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MODULAR_MOD_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_MODULAR_MOD_DATA_IN <= TWO_DATA;
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_MODULAR_MOD_DATA_IN_I_ENABLE <= '0';
             MATRIX_MODULAR_MOD_DATA_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_MODULAR_MOD_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_MODULAR_MOD_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_MODULAR_MOD_DATA_OUT_J_ENABLE = '1' or MATRIX_MODULAR_MOD_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_MODULAR_MOD_READY = '1';
-        end loop;
+          exit MATRIX_MODULAR_MOD_SECOND_RUN when MATRIX_MODULAR_MOD_READY = '1';
+        end loop MATRIX_MODULAR_MOD_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -1156,46 +1221,43 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_MODULAR_ADDER_DATA_A_IN_I_ENABLE <= '1';
-        MATRIX_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_MODULAR_ADDER_DATA_B_IN_I_ENABLE <= '1';
-        MATRIX_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_MODULAR_ADDER_DATA_A_IN <= ONE_DATA;
-        MATRIX_MODULAR_ADDER_DATA_B_IN <= ONE_DATA;
+        MATRIX_MODULAR_ADDER_DATA_A_IN <= ZERO_DATA;
+        MATRIX_MODULAR_ADDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_MODULAR_ADDER_DATA_OUT_I_ENABLE = '1') and (MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_MODULAR_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_MODULAR_ADDER_FIRST_RUN : loop
+          if (MATRIX_MODULAR_ADDER_DATA_OUT_I_ENABLE = '1' and MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MODULAR_ADDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_MODULAR_ADDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_MODULAR_ADDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MODULAR_ADDER_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_MODULAR_ADDER_DATA_OUT_I_ENABLE = '1' and MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_MODULAR_ADDER_DATA_A_IN <= ONE_DATA;
-            MATRIX_MODULAR_ADDER_DATA_B_IN <= ONE_DATA;
+            MATRIX_MODULAR_ADDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_MODULAR_ADDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_ADDER_DATA_OUT_I_ENABLE = '0') and (MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_MODULAR_ADDER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_MODULAR_ADDER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MODULAR_ADDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_MODULAR_ADDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_MODULAR_ADDER_DATA_A_IN <= ONE_DATA;
-            MATRIX_MODULAR_ADDER_DATA_B_IN <= ONE_DATA;
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_MODULAR_ADDER_DATA_A_IN_I_ENABLE <= '0';
@@ -1204,12 +1266,23 @@ begin
             MATRIX_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_MODULAR_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_MODULAR_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1' or MATRIX_MODULAR_ADDER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_MODULAR_ADDER_READY = '1';
-        end loop;
+          exit MATRIX_MODULAR_ADDER_FIRST_RUN when MATRIX_MODULAR_ADDER_READY = '1';
+        end loop MATRIX_MODULAR_ADDER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_MATRIX_MODULAR_ADDER_CASE_1) then
@@ -1219,47 +1292,43 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_MODULAR_ADDER_DATA_A_IN_I_ENABLE <= '1';
-        MATRIX_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_MODULAR_ADDER_DATA_B_IN_I_ENABLE <= '1';
-        MATRIX_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_MODULAR_ADDER_DATA_A_IN <= TWO_DATA;
-        MATRIX_MODULAR_ADDER_DATA_B_IN <= ONE_DATA;
+        MATRIX_MODULAR_ADDER_DATA_A_IN <= ZERO_DATA;
+        MATRIX_MODULAR_ADDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
+        MATRIX_MODULAR_ADDER_SECOND_RUN : loop
+          if (MATRIX_MODULAR_ADDER_DATA_OUT_I_ENABLE = '1' and MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MODULAR_ADDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_MODULAR_ADDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-        loop
-          if ((MATRIX_MODULAR_ADDER_DATA_OUT_I_ENABLE = '1') and (MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_MODULAR_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             MATRIX_MODULAR_ADDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MODULAR_ADDER_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_MODULAR_ADDER_DATA_OUT_I_ENABLE = '1' and MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_MODULAR_ADDER_DATA_A_IN <= TWO_DATA;
-            MATRIX_MODULAR_ADDER_DATA_B_IN <= ONE_DATA;
+            MATRIX_MODULAR_ADDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_MODULAR_ADDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_ADDER_DATA_OUT_I_ENABLE = '0') and (MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_MODULAR_ADDER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_MODULAR_ADDER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MODULAR_ADDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_MODULAR_ADDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_MODULAR_ADDER_DATA_A_IN <= TWO_DATA;
-            MATRIX_MODULAR_ADDER_DATA_B_IN <= ONE_DATA;
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_MODULAR_ADDER_DATA_A_IN_I_ENABLE <= '0';
@@ -1268,12 +1337,23 @@ begin
             MATRIX_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_MODULAR_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_MODULAR_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1' or MATRIX_MODULAR_ADDER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_MODULAR_ADDER_READY = '1';
-        end loop;
+          exit MATRIX_MODULAR_ADDER_SECOND_RUN when MATRIX_MODULAR_ADDER_READY = '1';
+        end loop MATRIX_MODULAR_ADDER_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -1298,46 +1378,43 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_MODULAR_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
-        MATRIX_MODULAR_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
-        MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_MODULAR_MULTIPLIER_DATA_A_IN <= ONE_DATA;
-        MATRIX_MODULAR_MULTIPLIER_DATA_B_IN <= ONE_DATA;
+        MATRIX_MODULAR_MULTIPLIER_DATA_A_IN <= ZERO_DATA;
+        MATRIX_MODULAR_MULTIPLIER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_MODULAR_MULTIPLIER_DATA_OUT_I_ENABLE = '1') and (MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_MODULAR_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_MODULAR_MULTIPLIER_FIRST_RUN : loop
+          if (MATRIX_MODULAR_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MODULAR_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_MODULAR_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_MODULAR_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_MODULAR_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_MODULAR_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_MODULAR_MULTIPLIER_DATA_A_IN <= ONE_DATA;
-            MATRIX_MODULAR_MULTIPLIER_DATA_B_IN <= ONE_DATA;
+            MATRIX_MODULAR_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_MODULAR_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_MULTIPLIER_DATA_OUT_I_ENABLE = '0') and (MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_MODULAR_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_MODULAR_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MODULAR_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_MODULAR_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_MODULAR_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_MODULAR_MULTIPLIER_DATA_A_IN <= ONE_DATA;
-            MATRIX_MODULAR_MULTIPLIER_DATA_B_IN <= ONE_DATA;
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_MODULAR_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
@@ -1346,12 +1423,23 @@ begin
             MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_MODULAR_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_MODULAR_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1' or MATRIX_MODULAR_MULTIPLIER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_MODULAR_MULTIPLIER_READY = '1';
-        end loop;
+          exit MATRIX_MODULAR_MULTIPLIER_FIRST_RUN when MATRIX_MODULAR_MULTIPLIER_READY = '1';
+        end loop MATRIX_MODULAR_MULTIPLIER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_MATRIX_MODULAR_MULTIPLIER_CASE_1) then
@@ -1361,45 +1449,43 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_MODULAR_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
-        MATRIX_MODULAR_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
-        MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_MODULAR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-        MATRIX_MODULAR_MULTIPLIER_DATA_B_IN <= ONE_DATA;
+        MATRIX_MODULAR_MULTIPLIER_DATA_A_IN <= ZERO_DATA;
+        MATRIX_MODULAR_MULTIPLIER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_MODULAR_MULTIPLIER_DATA_OUT_I_ENABLE = '1') and (MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_MODULAR_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_MODULAR_MULTIPLIER_SECOND_RUN : loop
+          if (MATRIX_MODULAR_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MODULAR_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_MODULAR_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_MODULAR_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_MODULAR_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_MODULAR_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_MODULAR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-            MATRIX_MODULAR_MULTIPLIER_DATA_B_IN <= ONE_DATA;
+            MATRIX_MODULAR_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_MODULAR_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_MULTIPLIER_DATA_OUT_I_ENABLE = '0') and (MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_MODULAR_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_MODULAR_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MODULAR_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_MODULAR_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_MODULAR_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_MODULAR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-            MATRIX_MODULAR_MULTIPLIER_DATA_B_IN <= ONE_DATA;
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_MODULAR_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
@@ -1408,12 +1494,23 @@ begin
             MATRIX_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_MODULAR_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_MODULAR_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1' or MATRIX_MODULAR_MULTIPLIER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_MODULAR_MULTIPLIER_READY = '1';
-        end loop;
+          exit MATRIX_MODULAR_MULTIPLIER_SECOND_RUN when MATRIX_MODULAR_MULTIPLIER_READY = '1';
+        end loop MATRIX_MODULAR_MULTIPLIER_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -1438,50 +1535,57 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_MODULAR_INVERTER_DATA_IN_I_ENABLE <= '1';
-        MATRIX_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_MODULAR_INVERTER_DATA_IN <= ONE_DATA;
+        MATRIX_MODULAR_INVERTER_DATA_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_MODULAR_INVERTER_DATA_OUT_I_ENABLE = '1') and (MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_MODULAR_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_MODULAR_INVERTER_FIRST_RUN : loop
+          if (MATRIX_MODULAR_INVERTER_DATA_OUT_I_ENABLE = '1' and MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MODULAR_INVERTER_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            
             -- CONTROL
             MATRIX_MODULAR_INVERTER_DATA_IN_I_ENABLE <= '1';
             MATRIX_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_MODULAR_INVERTER_DATA_OUT_I_ENABLE = '1' and MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_MODULAR_INVERTER_DATA_IN <= ONE_DATA;
+            MATRIX_MODULAR_INVERTER_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_INVERTER_DATA_OUT_I_ENABLE = '0') and (MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_MODULAR_INVERTER_DATA_IN_I_ENABLE <= '1';
+            MATRIX_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MODULAR_INVERTER_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_MODULAR_INVERTER_DATA_IN <= ONE_DATA;
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_MODULAR_INVERTER_DATA_IN_I_ENABLE <= '0';
             MATRIX_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_MODULAR_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_MODULAR_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1' or MATRIX_MODULAR_INVERTER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_MODULAR_INVERTER_READY = '1';
-        end loop;
+          exit MATRIX_MODULAR_INVERTER_FIRST_RUN when MATRIX_MODULAR_INVERTER_READY = '1';
+        end loop MATRIX_MODULAR_INVERTER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_MATRIX_MODULAR_INVERTER_CASE_1) then
@@ -1491,50 +1595,57 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_MODULAR_INVERTER_DATA_IN_I_ENABLE <= '1';
-        MATRIX_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_MODULAR_INVERTER_DATA_IN <= ONE_DATA;
+        MATRIX_MODULAR_INVERTER_DATA_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_MODULAR_INVERTER_DATA_OUT_I_ENABLE = '1') and (MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_MODULAR_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_MODULAR_INVERTER_SECOND_RUN : loop
+          if (MATRIX_MODULAR_INVERTER_DATA_OUT_I_ENABLE = '1' and MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MODULAR_INVERTER_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_MODULAR_INVERTER_DATA_IN_I_ENABLE <= '1';
             MATRIX_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_MODULAR_INVERTER_DATA_OUT_I_ENABLE = '1' and MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_MODULAR_INVERTER_DATA_IN <= TWO_DATA;
+            MATRIX_MODULAR_INVERTER_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_MODULAR_INVERTER_DATA_OUT_I_ENABLE = '0') and (MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_MODULAR_INVERTER_DATA_IN_I_ENABLE <= '1';
+            MATRIX_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';
+          elsif (MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_MODULAR_INVERTER_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_MODULAR_INVERTER_DATA_IN <= TWO_DATA;
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_MODULAR_INVERTER_DATA_IN_I_ENABLE <= '0';
             MATRIX_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_MODULAR_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_MODULAR_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1' or MATRIX_MODULAR_INVERTER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_MODULAR_INVERTER_READY = '1';
-        end loop;
+          exit MATRIX_MODULAR_INVERTER_SECOND_RUN when MATRIX_MODULAR_INVERTER_READY = '1';
+        end loop MATRIX_MODULAR_INVERTER_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -1564,53 +1675,44 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        TENSOR_MODULAR_MOD_DATA_IN_I_ENABLE <= '1';
-        TENSOR_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
-        TENSOR_MODULAR_MOD_DATA_IN_K_ENABLE <= '1';
-
         -- DATA
-        TENSOR_MODULAR_MOD_DATA_IN <= ONE_DATA;
+        TENSOR_MODULAR_MOD_DATA_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-        index_k_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
 
-        loop
-          if ((TENSOR_MODULAR_MOD_DATA_OUT_I_ENABLE = '1') and (TENSOR_MODULAR_MOD_DATA_OUT_J_ENABLE = '1') and (TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(TENSOR_MODULAR_MOD_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        TENSOR_MODULAR_MOD_FIRST_RUN : loop
+          if (TENSOR_MODULAR_MOD_DATA_OUT_I_ENABLE = '1' and TENSOR_MODULAR_MOD_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MODULAR_MOD_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
             -- CONTROL
             TENSOR_MODULAR_MOD_DATA_IN_I_ENABLE <= '1';
             TENSOR_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_MOD_DATA_IN_K_ENABLE <= '1';
-
+          elsif (TENSOR_MODULAR_MOD_DATA_OUT_I_ENABLE = '1' and TENSOR_MODULAR_MOD_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_MODULAR_MOD_DATA_IN <= ONE_DATA;
+            TENSOR_MODULAR_MOD_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_MODULAR_MOD_DATA_OUT_J_ENABLE = '1') and (TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(TENSOR_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            TENSOR_MODULAR_MOD_DATA_IN_I_ENABLE <= '1';
+            TENSOR_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
+            TENSOR_MODULAR_MOD_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_MODULAR_MOD_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MODULAR_MOD_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
             -- CONTROL
             TENSOR_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_MOD_DATA_IN_K_ENABLE <= '1';
-
+          elsif (TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_MODULAR_MOD_DATA_IN <= ONE_DATA;
+            TENSOR_MODULAR_MOD_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_k_loop) <= unsigned(TENSOR_MODULAR_MOD_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_MODULAR_MOD_DATA_IN_K_ENABLE <= '1';
-
-            -- DATA
-            TENSOR_MODULAR_MOD_DATA_IN <= ONE_DATA;
-
-            -- LOOP
-            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             TENSOR_MODULAR_MOD_DATA_IN_I_ENABLE <= '0';
@@ -1618,12 +1720,28 @@ begin
             TENSOR_MODULAR_MOD_DATA_IN_K_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_MODULAR_MOD_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_MOD_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_MODULAR_MOD_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_MOD_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_MOD_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1' or TENSOR_MODULAR_MOD_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_MODULAR_MOD_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when TENSOR_MODULAR_MOD_READY = '1';
-        end loop;
+          exit TENSOR_MODULAR_MOD_FIRST_RUN when TENSOR_MODULAR_MOD_READY = '1';
+        end loop TENSOR_MODULAR_MOD_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_TENSOR_MODULAR_MOD_CASE_1) then
@@ -1633,53 +1751,44 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        TENSOR_MODULAR_MOD_DATA_IN_I_ENABLE <= '1';
-        TENSOR_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
-        TENSOR_MODULAR_MOD_DATA_IN_K_ENABLE <= '1';
-
         -- DATA
-        TENSOR_MODULAR_MOD_DATA_IN <= ONE_DATA;
+        TENSOR_MODULAR_MOD_DATA_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-        index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
 
-        loop
-          if ((TENSOR_MODULAR_MOD_DATA_OUT_I_ENABLE = '1') and (TENSOR_MODULAR_MOD_DATA_OUT_J_ENABLE = '1') and (TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(TENSOR_MODULAR_MOD_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        TENSOR_MODULAR_MOD_SECOND_RUN : loop
+          if (TENSOR_MODULAR_MOD_DATA_OUT_I_ENABLE = '1' and TENSOR_MODULAR_MOD_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MODULAR_MOD_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
             -- CONTROL
             TENSOR_MODULAR_MOD_DATA_IN_I_ENABLE <= '1';
             TENSOR_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_MOD_DATA_IN_K_ENABLE <= '1';
-
+          elsif (TENSOR_MODULAR_MOD_DATA_OUT_I_ENABLE = '1' and TENSOR_MODULAR_MOD_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_MODULAR_MOD_DATA_IN <= TWO_DATA;
+            TENSOR_MODULAR_MOD_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_MODULAR_MOD_DATA_OUT_J_ENABLE = '1') and (TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(TENSOR_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            TENSOR_MODULAR_MOD_DATA_IN_I_ENABLE <= '1';
+            TENSOR_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
+            TENSOR_MODULAR_MOD_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_MODULAR_MOD_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MODULAR_MOD_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
             -- CONTROL
             TENSOR_MODULAR_MOD_DATA_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_MOD_DATA_IN_K_ENABLE <= '1';
-
+          elsif (TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_MODULAR_MOD_DATA_IN <= TWO_DATA;
+            TENSOR_MODULAR_MOD_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_k_loop) <= unsigned(TENSOR_MODULAR_MOD_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_MODULAR_MOD_DATA_IN_K_ENABLE <= '1';
-
-            -- DATA
-            TENSOR_MODULAR_MOD_DATA_IN <= TWO_DATA;
-
-            -- LOOP
-            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             TENSOR_MODULAR_MOD_DATA_IN_I_ENABLE <= '0';
@@ -1687,12 +1796,28 @@ begin
             TENSOR_MODULAR_MOD_DATA_IN_K_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_MODULAR_MOD_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_MOD_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_MODULAR_MOD_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_MOD_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_MODULAR_MOD_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_MOD_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_MODULAR_MOD_DATA_OUT_K_ENABLE = '1' or TENSOR_MODULAR_MOD_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_MODULAR_MOD_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when TENSOR_MODULAR_MOD_READY = '1';
-        end loop;
+          exit TENSOR_MODULAR_MOD_SECOND_RUN when TENSOR_MODULAR_MOD_READY = '1';
+        end loop TENSOR_MODULAR_MOD_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -1721,25 +1846,21 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        TENSOR_MODULAR_ADDER_DATA_A_IN_I_ENABLE <= '1';
-        TENSOR_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
-        TENSOR_MODULAR_ADDER_DATA_A_IN_K_ENABLE <= '1';
-        TENSOR_MODULAR_ADDER_DATA_B_IN_I_ENABLE <= '1';
-        TENSOR_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
-        TENSOR_MODULAR_ADDER_DATA_B_IN_K_ENABLE <= '1';
-
         -- DATA
-        TENSOR_MODULAR_ADDER_DATA_A_IN <= ONE_DATA;
-        TENSOR_MODULAR_ADDER_DATA_B_IN <= ONE_DATA;
+        TENSOR_MODULAR_ADDER_DATA_A_IN <= ZERO_DATA;
+        TENSOR_MODULAR_ADDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-        index_k_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
 
-        loop
-          if ((TENSOR_MODULAR_ADDER_DATA_OUT_I_ENABLE = '1') and (TENSOR_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1') and (TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(TENSOR_MODULAR_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        TENSOR_MODULAR_ADDER_FIRST_RUN : loop
+          if (TENSOR_MODULAR_ADDER_DATA_OUT_I_ENABLE = '1' and TENSOR_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MODULAR_ADDER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_MODULAR_ADDER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
             -- CONTROL
             TENSOR_MODULAR_ADDER_DATA_A_IN_I_ENABLE <= '1';
             TENSOR_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
@@ -1747,40 +1868,36 @@ begin
             TENSOR_MODULAR_ADDER_DATA_B_IN_I_ENABLE <= '1';
             TENSOR_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_ADDER_DATA_B_IN_K_ENABLE <= '1';
-
+          elsif (TENSOR_MODULAR_ADDER_DATA_OUT_I_ENABLE = '1' and TENSOR_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_MODULAR_ADDER_DATA_A_IN <= ONE_DATA;
-            TENSOR_MODULAR_ADDER_DATA_B_IN <= TWO_DATA;
+            TENSOR_MODULAR_ADDER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_MODULAR_ADDER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1') and (TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(TENSOR_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            TENSOR_MODULAR_ADDER_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_MODULAR_ADDER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_MODULAR_ADDER_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_MODULAR_ADDER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MODULAR_ADDER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_MODULAR_ADDER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
             -- CONTROL
             TENSOR_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_ADDER_DATA_A_IN_K_ENABLE <= '1';
             TENSOR_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_ADDER_DATA_B_IN_K_ENABLE <= '1';
-
+          elsif (TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_MODULAR_ADDER_DATA_A_IN <= ONE_DATA;
-            TENSOR_MODULAR_ADDER_DATA_B_IN <= TWO_DATA;
+            TENSOR_MODULAR_ADDER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_MODULAR_ADDER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_k_loop) <= unsigned(TENSOR_MODULAR_ADDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_MODULAR_ADDER_DATA_A_IN_K_ENABLE <= '1';
             TENSOR_MODULAR_ADDER_DATA_B_IN_K_ENABLE <= '1';
-
-            -- DATA
-            TENSOR_MODULAR_ADDER_DATA_A_IN <= ONE_DATA;
-            TENSOR_MODULAR_ADDER_DATA_B_IN <= TWO_DATA;
-
-            -- LOOP
-            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             TENSOR_MODULAR_ADDER_DATA_A_IN_I_ENABLE <= '0';
@@ -1791,12 +1908,28 @@ begin
             TENSOR_MODULAR_ADDER_DATA_B_IN_K_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_MODULAR_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_ADDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_MODULAR_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_ADDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_ADDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1' or TENSOR_MODULAR_ADDER_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_MODULAR_ADDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when TENSOR_MODULAR_ADDER_READY = '1';
-        end loop;
+          exit TENSOR_MODULAR_ADDER_FIRST_RUN when TENSOR_MODULAR_ADDER_READY = '1';
+        end loop TENSOR_MODULAR_ADDER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_TENSOR_MODULAR_ADDER_CASE_1) then
@@ -1806,25 +1939,21 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        TENSOR_MODULAR_ADDER_DATA_A_IN_I_ENABLE <= '1';
-        TENSOR_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
-        TENSOR_MODULAR_ADDER_DATA_A_IN_K_ENABLE <= '1';
-        TENSOR_MODULAR_ADDER_DATA_B_IN_I_ENABLE <= '1';
-        TENSOR_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
-        TENSOR_MODULAR_ADDER_DATA_B_IN_K_ENABLE <= '1';
-
         -- DATA
-        TENSOR_MODULAR_ADDER_DATA_A_IN <= ONE_DATA;
-        TENSOR_MODULAR_ADDER_DATA_B_IN <= ONE_DATA;
+        TENSOR_MODULAR_ADDER_DATA_A_IN <= ZERO_DATA;
+        TENSOR_MODULAR_ADDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-        index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
 
-        loop
-          if ((TENSOR_MODULAR_ADDER_DATA_OUT_I_ENABLE = '1') and (TENSOR_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1') and (TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(TENSOR_MODULAR_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        TENSOR_MODULAR_ADDER_SECOND_RUN : loop
+          if (TENSOR_MODULAR_ADDER_DATA_OUT_I_ENABLE = '1' and TENSOR_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MODULAR_ADDER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_MODULAR_ADDER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
             -- CONTROL
             TENSOR_MODULAR_ADDER_DATA_A_IN_I_ENABLE <= '1';
             TENSOR_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
@@ -1832,40 +1961,36 @@ begin
             TENSOR_MODULAR_ADDER_DATA_B_IN_I_ENABLE <= '1';
             TENSOR_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_ADDER_DATA_B_IN_K_ENABLE <= '1';
-
+          elsif (TENSOR_MODULAR_ADDER_DATA_OUT_I_ENABLE = '1' and TENSOR_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_MODULAR_ADDER_DATA_A_IN <= TWO_DATA;
-            TENSOR_MODULAR_ADDER_DATA_A_IN <= TWO_DATA;
+            TENSOR_MODULAR_ADDER_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_MODULAR_ADDER_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1') and (TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(TENSOR_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            TENSOR_MODULAR_ADDER_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_MODULAR_ADDER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_MODULAR_ADDER_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_MODULAR_ADDER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_MODULAR_ADDER_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MODULAR_ADDER_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_MODULAR_ADDER_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
             -- CONTROL
             TENSOR_MODULAR_ADDER_DATA_A_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_ADDER_DATA_A_IN_K_ENABLE <= '1';
             TENSOR_MODULAR_ADDER_DATA_B_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_ADDER_DATA_B_IN_K_ENABLE <= '1';
-
+          elsif (TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_MODULAR_ADDER_DATA_A_IN <= TWO_DATA;
-            TENSOR_MODULAR_ADDER_DATA_B_IN <= TWO_DATA;
+            TENSOR_MODULAR_ADDER_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_MODULAR_ADDER_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_k_loop) <= unsigned(TENSOR_MODULAR_ADDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_MODULAR_ADDER_DATA_A_IN_K_ENABLE <= '1';
             TENSOR_MODULAR_ADDER_DATA_B_IN_K_ENABLE <= '1';
-
-            -- DATA
-            TENSOR_MODULAR_ADDER_DATA_A_IN <= TWO_DATA;
-            TENSOR_MODULAR_ADDER_DATA_B_IN <= TWO_DATA;
-
-            -- LOOP
-            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             TENSOR_MODULAR_ADDER_DATA_A_IN_I_ENABLE <= '0';
@@ -1876,12 +2001,28 @@ begin
             TENSOR_MODULAR_ADDER_DATA_B_IN_K_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_MODULAR_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_ADDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_MODULAR_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_ADDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_MODULAR_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_ADDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_MODULAR_ADDER_DATA_OUT_K_ENABLE = '1' or TENSOR_MODULAR_ADDER_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_MODULAR_ADDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when TENSOR_MODULAR_ADDER_READY = '1';
-        end loop;
+          exit TENSOR_MODULAR_ADDER_SECOND_RUN when TENSOR_MODULAR_ADDER_READY = '1';
+        end loop TENSOR_MODULAR_ADDER_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -1907,25 +2048,21 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
-        TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
-        TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_K_ENABLE <= '1';
-        TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
-        TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-        TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_K_ENABLE <= '1';
-
         -- DATA
-        TENSOR_MODULAR_MULTIPLIER_DATA_A_IN <= ONE_DATA;
-        TENSOR_MODULAR_MULTIPLIER_DATA_B_IN <= ONE_DATA;
+        TENSOR_MODULAR_MULTIPLIER_DATA_A_IN <= ZERO_DATA;
+        TENSOR_MODULAR_MULTIPLIER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-        index_k_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
 
-        loop
-          if ((TENSOR_MODULAR_MULTIPLIER_DATA_OUT_I_ENABLE = '1') and (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        TENSOR_MODULAR_MULTIPLIER_FIRST_RUN : loop
+          if (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and TENSOR_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
             -- CONTROL
             TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
             TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
@@ -1933,40 +2070,36 @@ begin
             TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
             TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_K_ENABLE <= '1';
-
+          elsif (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and TENSOR_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN <= ONE_DATA;
-            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN <= TWO_DATA;
+            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
             -- CONTROL
             TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_K_ENABLE <= '1';
             TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_K_ENABLE <= '1';
-
+          elsif (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN <= ONE_DATA;
-            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN <= TWO_DATA;
+            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_k_loop) <= unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_K_ENABLE <= '1';
             TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_K_ENABLE <= '1';
-
-            -- DATA
-            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN <= ONE_DATA;
-            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN <= TWO_DATA;
-
-            -- LOOP
-            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
@@ -1977,12 +2110,28 @@ begin
             TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_K_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1' or TENSOR_MODULAR_MULTIPLIER_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when TENSOR_MODULAR_MULTIPLIER_READY = '1';
-        end loop;
+          exit TENSOR_MODULAR_MULTIPLIER_FIRST_RUN when TENSOR_MODULAR_MULTIPLIER_READY = '1';
+        end loop TENSOR_MODULAR_MULTIPLIER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_TENSOR_MODULAR_MULTIPLIER_CASE_1) then
@@ -1992,25 +2141,21 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
-        TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
-        TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_K_ENABLE <= '1';
-        TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
-        TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-        TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_K_ENABLE <= '1';
-
         -- DATA
-        TENSOR_MODULAR_MULTIPLIER_DATA_A_IN <= ONE_DATA;
-        TENSOR_MODULAR_MULTIPLIER_DATA_B_IN <= ONE_DATA;
+        TENSOR_MODULAR_MULTIPLIER_DATA_A_IN <= ZERO_DATA;
+        TENSOR_MODULAR_MULTIPLIER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-        index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
 
-        loop
-          if ((TENSOR_MODULAR_MULTIPLIER_DATA_OUT_I_ENABLE = '1') and (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        TENSOR_MODULAR_MULTIPLIER_SECOND_RUN : loop
+          if (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and TENSOR_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
             -- CONTROL
             TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
             TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
@@ -2018,40 +2163,36 @@ begin
             TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
             TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_K_ENABLE <= '1';
-
+          elsif (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and TENSOR_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN <= TWO_DATA;
+            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
             -- CONTROL
             TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_K_ENABLE <= '1';
             TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_K_ENABLE <= '1';
-
+          elsif (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN <= TWO_DATA;
+            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_k_loop) <= unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_K_ENABLE <= '1';
             TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_K_ENABLE <= '1';
-
-            -- DATA
-            TENSOR_MODULAR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-            TENSOR_MODULAR_MULTIPLIER_DATA_B_IN <= TWO_DATA;
-
-            -- LOOP
-            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             TENSOR_MODULAR_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
@@ -2062,12 +2203,28 @@ begin
             TENSOR_MODULAR_MULTIPLIER_DATA_B_IN_K_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_MODULAR_MULTIPLIER_DATA_OUT_K_ENABLE = '1' or TENSOR_MODULAR_MULTIPLIER_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_MODULAR_MULTIPLIER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when TENSOR_MODULAR_MULTIPLIER_READY = '1';
-        end loop;
+          exit TENSOR_MODULAR_MULTIPLIER_SECOND_RUN when TENSOR_MODULAR_MULTIPLIER_READY = '1';
+        end loop TENSOR_MODULAR_MULTIPLIER_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -2093,53 +2250,44 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        TENSOR_MODULAR_INVERTER_DATA_IN_I_ENABLE <= '1';
-        TENSOR_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';
-        TENSOR_MODULAR_INVERTER_DATA_IN_K_ENABLE <= '1';
-
         -- DATA
-        TENSOR_MODULAR_INVERTER_DATA_IN <= ONE_DATA;
+        TENSOR_MODULAR_INVERTER_DATA_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-        index_k_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
 
-        loop
-          if ((TENSOR_MODULAR_INVERTER_DATA_OUT_I_ENABLE = '1') and (TENSOR_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1') and (TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(TENSOR_MODULAR_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        TENSOR_MODULAR_INVERTER_FIRST_RUN : loop
+          if (TENSOR_MODULAR_INVERTER_DATA_OUT_I_ENABLE = '1' and TENSOR_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MODULAR_INVERTER_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
             -- CONTROL
             TENSOR_MODULAR_INVERTER_DATA_IN_I_ENABLE <= '1';
             TENSOR_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_INVERTER_DATA_IN_K_ENABLE <= '1';
-
+          elsif (TENSOR_MODULAR_INVERTER_DATA_OUT_I_ENABLE = '1' and TENSOR_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_MODULAR_INVERTER_DATA_IN <= ONE_DATA;
+            TENSOR_MODULAR_INVERTER_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1') and (TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(TENSOR_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            TENSOR_MODULAR_INVERTER_DATA_IN_I_ENABLE <= '1';
+            TENSOR_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';
+            TENSOR_MODULAR_INVERTER_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MODULAR_INVERTER_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
             -- CONTROL
             TENSOR_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_INVERTER_DATA_IN_K_ENABLE <= '1';
-
+          elsif (TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_MODULAR_INVERTER_DATA_IN <= ONE_DATA;
+            TENSOR_MODULAR_INVERTER_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_k_loop) <= unsigned(TENSOR_MODULAR_INVERTER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_MODULAR_INVERTER_DATA_IN_K_ENABLE <= '1';
-
-            -- DATA
-            TENSOR_MODULAR_INVERTER_DATA_IN <= ONE_DATA;
-
-            -- LOOP
-            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             TENSOR_MODULAR_INVERTER_DATA_IN_I_ENABLE <= '0';
@@ -2147,12 +2295,28 @@ begin
             TENSOR_MODULAR_INVERTER_DATA_IN_K_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_MODULAR_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_INVERTER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_MODULAR_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_INVERTER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_INVERTER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1' or TENSOR_MODULAR_INVERTER_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_MODULAR_INVERTER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when TENSOR_MODULAR_INVERTER_READY = '1';
-        end loop;
+          exit TENSOR_MODULAR_INVERTER_FIRST_RUN when TENSOR_MODULAR_INVERTER_READY = '1';
+        end loop TENSOR_MODULAR_INVERTER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_TENSOR_MODULAR_INVERTER_CASE_1) then
@@ -2162,53 +2326,44 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        TENSOR_MODULAR_INVERTER_DATA_IN_I_ENABLE <= '1';
-        TENSOR_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';
-        TENSOR_MODULAR_INVERTER_DATA_IN_K_ENABLE <= '1';
-
         -- DATA
-        TENSOR_MODULAR_INVERTER_DATA_IN <= ONE_DATA;
+        TENSOR_MODULAR_INVERTER_DATA_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-        index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
 
-        loop
-          if ((TENSOR_MODULAR_INVERTER_DATA_OUT_I_ENABLE = '1') and (TENSOR_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1') and (TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(TENSOR_MODULAR_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        TENSOR_MODULAR_INVERTER_SECOND_RUN : loop
+          if (TENSOR_MODULAR_INVERTER_DATA_OUT_I_ENABLE = '1' and TENSOR_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MODULAR_INVERTER_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
             -- CONTROL
             TENSOR_MODULAR_INVERTER_DATA_IN_I_ENABLE <= '1';
             TENSOR_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_INVERTER_DATA_IN_K_ENABLE <= '1';
-
+          elsif (TENSOR_MODULAR_INVERTER_DATA_OUT_I_ENABLE = '1' and TENSOR_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_MODULAR_INVERTER_DATA_IN <= TWO_DATA;
+            TENSOR_MODULAR_INVERTER_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1') and (TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(TENSOR_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            TENSOR_MODULAR_INVERTER_DATA_IN_I_ENABLE <= '1';
+            TENSOR_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';
+            TENSOR_MODULAR_INVERTER_DATA_IN_K_ENABLE <= '1';
+          elsif (TENSOR_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1' and TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_MODULAR_INVERTER_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
             -- CONTROL
             TENSOR_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';
             TENSOR_MODULAR_INVERTER_DATA_IN_K_ENABLE <= '1';
-
+          elsif (TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_MODULAR_INVERTER_DATA_IN <= TWO_DATA;
+            TENSOR_MODULAR_INVERTER_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-            index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1') and (unsigned(index_k_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_k_loop) <= unsigned(TENSOR_MODULAR_INVERTER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             TENSOR_MODULAR_INVERTER_DATA_IN_K_ENABLE <= '1';
-
-            -- DATA
-            TENSOR_MODULAR_INVERTER_DATA_IN <= TWO_DATA;
-
-            -- LOOP
-            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             TENSOR_MODULAR_INVERTER_DATA_IN_I_ENABLE <= '0';
@@ -2216,12 +2371,28 @@ begin
             TENSOR_MODULAR_INVERTER_DATA_IN_K_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_MODULAR_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_INVERTER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_MODULAR_INVERTER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_INVERTER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_MODULAR_INVERTER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_MODULAR_INVERTER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_MODULAR_INVERTER_DATA_OUT_K_ENABLE = '1' or TENSOR_MODULAR_INVERTER_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_MODULAR_INVERTER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when TENSOR_MODULAR_INVERTER_READY = '1';
-        end loop;
+          exit TENSOR_MODULAR_INVERTER_SECOND_RUN when TENSOR_MODULAR_INVERTER_READY = '1';
+        end loop TENSOR_MODULAR_INVERTER_SECOND_RUN;
       end if;
 
       wait for WORKING;
