@@ -103,7 +103,7 @@ entity ntm_integer_stimulus is
     SCALAR_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
     SCALAR_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SCALAR_INTEGER_DIVIDER_REMAINDER_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -----------------------------------------------------------------------
     -- STIMULUS VECTOR
@@ -163,7 +163,7 @@ entity ntm_integer_stimulus is
     VECTOR_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
     VECTOR_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_INTEGER_DIVIDER_REMAINDER_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -----------------------------------------------------------------------
     -- STIMULUS MATRIX
@@ -235,7 +235,7 @@ entity ntm_integer_stimulus is
     MATRIX_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
     MATRIX_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_INTEGER_DIVIDER_REMAINDER_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
     -----------------------------------------------------------------------
     -- STIMULUS TENSOR
@@ -319,7 +319,7 @@ entity ntm_integer_stimulus is
     TENSOR_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
     TENSOR_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+    TENSOR_INTEGER_DIVIDER_REMAINDER_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 

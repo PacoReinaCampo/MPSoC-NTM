@@ -72,13 +72,14 @@ entity ntm_tensor_modular_adder is
     DATA_OUT_K_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    MODULO_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -136,28 +137,19 @@ architecture ntm_tensor_modular_adder_architecture of ntm_tensor_modular_adder i
   signal data_b_in_j_modular_adder_int : std_logic;
   signal data_b_in_k_modular_adder_int : std_logic;
 
-  -- MATRIX ADDER
+  -- SCALAR ADDER
   -- CONTROL
-  signal start_matrix_modular_adder : std_logic;
-  signal ready_matrix_modular_adder : std_logic;
+  signal start_scalar_modular_adder : std_logic;
+  signal ready_scalar_modular_adder : std_logic;
 
-  signal operation_matrix_modular_adder : std_logic;
-
-  signal data_a_in_i_enable_matrix_modular_adder : std_logic;
-  signal data_a_in_j_enable_matrix_modular_adder : std_logic;
-  signal data_b_in_i_enable_matrix_modular_adder : std_logic;
-  signal data_b_in_j_enable_matrix_modular_adder : std_logic;
-
-  signal data_out_i_enable_matrix_modular_adder : std_logic;
-  signal data_out_j_enable_matrix_modular_adder : std_logic;
+  signal operation_scalar_modular_adder : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_modular_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_modular_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_modular_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_modular_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_modular_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_modular_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_modular_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_modular_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_modular_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_modular_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -165,7 +157,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN ± DATA_B_IN mod MODULO_IN
+  -- DATA_OUT = DATA_A_IN ± DATA_B_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -182,18 +174,13 @@ begin
       DATA_OUT_K_ENABLE <= '0';
 
       -- Control Internal
-      start_matrix_modular_adder <= '0';
+      start_scalar_modular_adder <= '0';
 
-      operation_matrix_modular_adder <= '0';
+      operation_scalar_modular_adder <= '0';
 
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
       index_k_loop <= ZERO_CONTROL;
-
-      data_a_in_i_enable_matrix_modular_adder <= '0';
-      data_a_in_j_enable_matrix_modular_adder <= '0';
-      data_b_in_i_enable_matrix_modular_adder <= '0';
-      data_b_in_j_enable_matrix_modular_adder <= '0';
 
       data_a_in_i_modular_adder_int <= '0';
       data_a_in_j_modular_adder_int <= '0';
@@ -203,11 +190,9 @@ begin
       data_b_in_k_modular_adder_int <= '0';
 
       -- Data Internal
-      modulo_in_matrix_modular_adder <= ZERO_DATA;
-      size_i_in_matrix_modular_adder <= ZERO_CONTROL;
-      size_j_in_matrix_modular_adder <= ZERO_CONTROL;
-      data_a_in_matrix_modular_adder <= ZERO_DATA;
-      data_b_in_matrix_modular_adder <= ZERO_DATA;
+      modulo_in_scalar_modular_adder <= ZERO_DATA;
+      data_a_in_scalar_modular_adder <= ZERO_DATA;
+      data_b_in_scalar_modular_adder <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -240,36 +225,22 @@ begin
 
           if ((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            data_a_in_matrix_modular_adder <= DATA_A_IN;
+            data_a_in_scalar_modular_adder <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_i_enable_matrix_modular_adder <= '1';
-            data_a_in_j_enable_matrix_modular_adder <= '1';
-
             data_a_in_i_modular_adder_int <= '1';
             data_a_in_j_modular_adder_int <= '1';
             data_a_in_k_modular_adder_int <= '1';
-          else
-            -- Control Internal
-            data_a_in_i_enable_matrix_modular_adder <= '0';
-            data_a_in_j_enable_matrix_modular_adder <= '0';
           end if;
 
           if ((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1') and (DATA_B_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            data_b_in_matrix_modular_adder <= DATA_B_IN;
+            data_b_in_scalar_modular_adder <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_i_enable_matrix_modular_adder <= '1';
-            data_b_in_j_enable_matrix_modular_adder <= '1';
-
             data_b_in_i_modular_adder_int <= '1';
             data_b_in_j_modular_adder_int <= '1';
             data_b_in_k_modular_adder_int <= '1';
-          else
-            -- Control Internal
-            data_b_in_i_enable_matrix_modular_adder <= '0';
-            data_b_in_j_enable_matrix_modular_adder <= '0';
           end if;
 
           -- Control Outputs
@@ -278,20 +249,13 @@ begin
           DATA_OUT_K_ENABLE <= '0';
 
           if (data_a_in_i_modular_adder_int = '1' and data_a_in_j_modular_adder_int = '1' and data_a_in_k_modular_adder_int = '1' and data_b_in_i_modular_adder_int = '1' and data_b_in_j_modular_adder_int = '1' and data_b_in_k_modular_adder_int = '1') then
-            -- Data Inputs
-            modulo_in_matrix_modular_adder <= MODULO_IN;
-            size_i_in_matrix_modular_adder <= SIZE_J_IN;
-            size_j_in_matrix_modular_adder <= SIZE_K_IN;
+            -- Data Internal
+            modulo_in_scalar_modular_adder <= MODULO_IN;
 
             -- Control Internal
-            start_matrix_modular_adder <= '1';
+            start_scalar_modular_adder <= '1';
 
-            operation_matrix_modular_adder <= OPERATION;
-
-            data_a_in_i_enable_matrix_modular_adder <= '0';
-            data_a_in_j_enable_matrix_modular_adder <= '0';
-            data_b_in_i_enable_matrix_modular_adder <= '0';
-            data_b_in_j_enable_matrix_modular_adder <= '0';
+            operation_scalar_modular_adder <= OPERATION;
 
             data_a_in_i_modular_adder_int <= '0';
             data_a_in_j_modular_adder_int <= '0';
@@ -301,41 +265,33 @@ begin
             data_b_in_k_modular_adder_int <= '0';
 
             -- FSM Control
-            adder_ctrl_fsm_int <= ENDER_K_STATE;
+            if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+              adder_ctrl_fsm_int <= ENDER_I_STATE;
+            elsif (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+              adder_ctrl_fsm_int <= ENDER_J_STATE;
+            else
+              adder_ctrl_fsm_int <= ENDER_K_STATE;
+            end if;
           end if;
 
         when INPUT_J_STATE =>           -- STEP 2
 
           if ((DATA_A_IN_J_ENABLE = '1') and (DATA_A_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            data_a_in_matrix_modular_adder <= DATA_A_IN;
+            data_a_in_scalar_modular_adder <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_i_enable_matrix_modular_adder <= '1';
-            data_a_in_j_enable_matrix_modular_adder <= '1';
-
             data_a_in_j_modular_adder_int <= '1';
             data_a_in_k_modular_adder_int <= '1';
-          else
-            -- Control Internal
-            data_a_in_i_enable_matrix_modular_adder <= '0';
-            data_a_in_j_enable_matrix_modular_adder <= '0';
           end if;
 
           if ((DATA_B_IN_J_ENABLE = '1') and (DATA_B_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            data_b_in_matrix_modular_adder <= DATA_B_IN;
+            data_b_in_scalar_modular_adder <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_i_enable_matrix_modular_adder <= '1';
-            data_b_in_j_enable_matrix_modular_adder <= '1';
-
             data_b_in_j_modular_adder_int <= '1';
             data_b_in_k_modular_adder_int <= '1';
-          else
-            -- Control Internal
-            data_b_in_i_enable_matrix_modular_adder <= '0';
-            data_b_in_j_enable_matrix_modular_adder <= '0';
           end if;
 
           -- Control Outputs
@@ -343,11 +299,13 @@ begin
           DATA_OUT_K_ENABLE <= '0';
 
           if (data_a_in_j_modular_adder_int = '1' and data_a_in_k_modular_adder_int = '1' and data_b_in_j_modular_adder_int = '1' and data_b_in_k_modular_adder_int = '1') then
-            -- Data Inputs
-            data_a_in_i_enable_matrix_modular_adder <= '0';
-            data_a_in_j_enable_matrix_modular_adder <= '0';
-            data_b_in_i_enable_matrix_modular_adder <= '0';
-            data_b_in_j_enable_matrix_modular_adder <= '0';
+            -- Data Internal
+            modulo_in_scalar_modular_adder <= MODULO_IN;
+
+            -- Control Internal
+            start_scalar_modular_adder <= '1';
+
+            operation_scalar_modular_adder <= OPERATION;
 
             data_a_in_j_modular_adder_int <= '0';
             data_a_in_k_modular_adder_int <= '0';
@@ -355,55 +313,53 @@ begin
             data_b_in_k_modular_adder_int <= '0';
 
             -- FSM Control
-            adder_ctrl_fsm_int <= ENDER_K_STATE;
+            if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+              adder_ctrl_fsm_int <= ENDER_I_STATE;
+            elsif (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+              adder_ctrl_fsm_int <= ENDER_J_STATE;
+            else
+              adder_ctrl_fsm_int <= ENDER_K_STATE;
+            end if;
           end if;
 
         when INPUT_K_STATE =>           -- STEP 3
 
           if (DATA_A_IN_K_ENABLE = '1') then
             -- Data Inputs
-            data_a_in_matrix_modular_adder <= DATA_A_IN;
+            data_a_in_scalar_modular_adder <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_j_enable_matrix_modular_adder <= '1';
-
             data_a_in_k_modular_adder_int <= '1';
-          else
-            -- Control Internal
-            data_a_in_j_enable_matrix_modular_adder <= '0';
           end if;
 
           if (DATA_B_IN_K_ENABLE = '1') then
             -- Data Inputs
-            data_b_in_matrix_modular_adder <= DATA_B_IN;
+            data_b_in_scalar_modular_adder <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_j_enable_matrix_modular_adder <= '1';
-
             data_b_in_k_modular_adder_int <= '1';
-          else
-            -- Control Internal
-            data_b_in_j_enable_matrix_modular_adder <= '0';
           end if;
 
           -- Control Outputs
           DATA_OUT_K_ENABLE <= '0';
 
           if (data_a_in_k_modular_adder_int = '1' and data_b_in_k_modular_adder_int = '1') then
+            -- Data Internal
+            modulo_in_scalar_modular_adder <= MODULO_IN;
+
             -- Control Internal
-            data_a_in_j_enable_matrix_modular_adder <= '0';
-            data_b_in_j_enable_matrix_modular_adder <= '0';
+            start_scalar_modular_adder <= '1';
+
+            operation_scalar_modular_adder <= OPERATION;
 
             data_a_in_k_modular_adder_int <= '0';
             data_b_in_k_modular_adder_int <= '0';
 
             -- FSM Control
-            if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
-              if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-                adder_ctrl_fsm_int <= ENDER_I_STATE;
-              else
-                adder_ctrl_fsm_int <= ENDER_J_STATE;
-              end if;
+            if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+              adder_ctrl_fsm_int <= ENDER_I_STATE;
+            elsif (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+              adder_ctrl_fsm_int <= ENDER_J_STATE;
             else
               adder_ctrl_fsm_int <= ENDER_K_STATE;
             end if;
@@ -411,10 +367,10 @@ begin
 
         when ENDER_I_STATE =>           -- STEP 4
 
-          if (data_out_i_enable_matrix_modular_adder = '1' and data_out_j_enable_matrix_modular_adder = '1') then
+          if (ready_scalar_modular_adder = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_modular_adder;
+              DATA_OUT <= data_out_scalar_modular_adder;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -432,7 +388,7 @@ begin
               adder_ctrl_fsm_int <= STARTER_STATE;
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_modular_adder;
+              DATA_OUT <= data_out_scalar_modular_adder;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -449,15 +405,15 @@ begin
             end if;
           else
             -- Control Internal
-            start_matrix_modular_adder <= '0';
+            start_scalar_modular_adder <= '0';
           end if;
 
         when ENDER_J_STATE =>           -- STEP 5
 
-          if (data_out_j_enable_matrix_modular_adder = '1') then
+          if (ready_scalar_modular_adder = '1') then
             if ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_modular_adder;
+              DATA_OUT <= data_out_scalar_modular_adder;
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';
@@ -472,15 +428,15 @@ begin
             end if;
           else
             -- Control Internal
-            start_matrix_modular_adder <= '0';
+            start_scalar_modular_adder <= '0';
           end if;
 
         when ENDER_K_STATE =>           -- STEP 6
 
-          if (data_out_j_enable_matrix_modular_adder = '1') then
+          if (ready_scalar_modular_adder = '1') then
             if (unsigned(index_k_loop) < unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_modular_adder;
+              DATA_OUT <= data_out_scalar_modular_adder;
 
               -- Control Outputs
               DATA_OUT_K_ENABLE <= '1';
@@ -493,7 +449,7 @@ begin
             end if;
           else
             -- Control Internal
-            start_matrix_modular_adder <= '0';
+            start_scalar_modular_adder <= '0';
           end if;
 
         when others =>
@@ -503,8 +459,8 @@ begin
     end if;
   end process;
 
-  -- MATRIX ADDER
-  matrix_modular_adder : ntm_matrix_modular_adder
+  -- SCALAR ADDER
+  scalar_modular_adder : ntm_scalar_modular_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -515,26 +471,17 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_modular_adder,
-      READY => ready_matrix_modular_adder,
+      START => start_scalar_modular_adder,
+      READY => ready_scalar_modular_adder,
 
-      OPERATION => operation_matrix_modular_adder,
-
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_modular_adder,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_modular_adder,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_modular_adder,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_modular_adder,
-
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_modular_adder,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_modular_adder,
+      OPERATION => operation_scalar_modular_adder,
 
       -- DATA
-      MODULO_IN => modulo_in_matrix_modular_adder,
-      SIZE_I_IN => size_i_in_matrix_modular_adder,
-      SIZE_J_IN => size_j_in_matrix_modular_adder,
-      DATA_A_IN => data_a_in_matrix_modular_adder,
-      DATA_B_IN => data_b_in_matrix_modular_adder,
-      DATA_OUT  => data_out_matrix_modular_adder
+      MODULO_IN => modulo_in_scalar_modular_adder,
+      DATA_A_IN => data_a_in_scalar_modular_adder,
+      DATA_B_IN => data_b_in_scalar_modular_adder,
+
+      DATA_OUT => data_out_scalar_modular_adder
       );
 
 end architecture;

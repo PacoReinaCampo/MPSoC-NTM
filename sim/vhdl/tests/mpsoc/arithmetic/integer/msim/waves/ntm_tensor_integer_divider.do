@@ -31,7 +31,7 @@ add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_divider_test/tensor
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_divider_test/tensor_integer_divider/DATA_OUT_K_ENABLE
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_divider_test/tensor_integer_divider/index_k_loop
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_divider_test/tensor_integer_divider/DATA_OUT
-add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_divider_test/tensor_integer_divider/REST_OUT
+add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_divider_test/tensor_integer_divider/REMAINDER_OUT
 
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_divider_test/tensor_integer_divider/divider_ctrl_fsm_int
 
@@ -46,7 +46,7 @@ add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_divider_test/tensor
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_divider_test/tensor_integer_divider/data_b_in_scalar_integer_divider
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_divider_test/tensor_integer_divider/ready_scalar_integer_divider
 add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_divider_test/tensor_integer_divider/data_out_scalar_integer_divider
-add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_divider_test/tensor_integer_divider/rest_out_scalar_integer_divider
+add wave -noupdate /ntm_integer_testbench/ntm_tensor_integer_divider_test/tensor_integer_divider/remainder_out_scalar_integer_divider
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

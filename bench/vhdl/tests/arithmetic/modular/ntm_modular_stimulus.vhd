@@ -48,7 +48,7 @@ use work.ntm_modular_pkg.all;
 entity ntm_modular_stimulus is
   generic (
     -- SYSTEM-SIZE
-    DATA_SIZE    : integer := 128;
+    DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
@@ -393,7 +393,7 @@ architecture ntm_modular_stimulus_architecture of ntm_modular_stimulus is
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
-  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+  constant MODULO : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(73, DATA_SIZE));
 
   -----------------------------------------------------------------------
   -- Signals
@@ -501,8 +501,8 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MOD_CASE 0          ";
         -------------------------------------------------------------------
 
-        SCALAR_MODULAR_MOD_MODULO_IN <= FULL;
-        SCALAR_MODULAR_MOD_DATA_IN   <= ONE_DATA;
+        SCALAR_MODULAR_MOD_MODULO_IN <= MODULO;
+        SCALAR_MODULAR_MOD_DATA_IN   <= SCALAR_SAMPLE_A;
       end if;
 
       if (STIMULUS_NTM_SCALAR_MODULAR_MOD_CASE_1) then
@@ -511,8 +511,8 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MOD_CASE 1          ";
         -------------------------------------------------------------------
 
-        SCALAR_MODULAR_MOD_MODULO_IN <= FULL;
-        SCALAR_MODULAR_MOD_DATA_IN   <= TWO_DATA;
+        SCALAR_MODULAR_MOD_MODULO_IN <= MODULO;
+        SCALAR_MODULAR_MOD_DATA_IN   <= SCALAR_SAMPLE_B;
       end if;
 
       wait for WORKING;
@@ -534,9 +534,9 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ADDER_CASE 0        ";
         -------------------------------------------------------------------
 
-        SCALAR_MODULAR_ADDER_MODULO_IN <= FULL;
-        SCALAR_MODULAR_ADDER_DATA_A_IN <= TWO_DATA;
-        SCALAR_MODULAR_ADDER_DATA_B_IN <= ONE_DATA;
+        SCALAR_MODULAR_ADDER_MODULO_IN <= MODULO;
+        SCALAR_MODULAR_ADDER_DATA_A_IN <= SCALAR_SAMPLE_A;
+        SCALAR_MODULAR_ADDER_DATA_B_IN <= SCALAR_SAMPLE_B;
       end if;
 
       if (STIMULUS_NTM_SCALAR_MODULAR_ADDER_CASE_1) then
@@ -545,9 +545,9 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ADDER_CASE 1        ";
         -------------------------------------------------------------------
 
-        SCALAR_MODULAR_ADDER_MODULO_IN <= FULL;
-        SCALAR_MODULAR_ADDER_DATA_A_IN <= TWO_DATA;
-        SCALAR_MODULAR_ADDER_DATA_B_IN <= TWO_DATA;
+        SCALAR_MODULAR_ADDER_MODULO_IN <= MODULO;
+        SCALAR_MODULAR_ADDER_DATA_A_IN <= SCALAR_SAMPLE_B;
+        SCALAR_MODULAR_ADDER_DATA_B_IN <= SCALAR_SAMPLE_A;
       end if;
 
       wait for WORKING;
@@ -566,9 +566,9 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULTIPLIER_CASE 0   ";
         -------------------------------------------------------------------
 
-        SCALAR_MODULAR_MULTIPLIER_MODULO_IN <= FULL;
-        SCALAR_MODULAR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-        SCALAR_MODULAR_MULTIPLIER_DATA_B_IN <= ONE_DATA;
+        SCALAR_MODULAR_MULTIPLIER_MODULO_IN <= MODULO;
+        SCALAR_MODULAR_MULTIPLIER_DATA_A_IN <= SCALAR_SAMPLE_A;
+        SCALAR_MODULAR_MULTIPLIER_DATA_B_IN <= SCALAR_SAMPLE_B;
       end if;
 
       if (STIMULUS_NTM_SCALAR_MODULAR_MULTIPLIER_CASE_1) then
@@ -577,9 +577,9 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_MULTIPLIER_CASE 1   ";
         -------------------------------------------------------------------
 
-        SCALAR_MODULAR_MULTIPLIER_MODULO_IN <= FULL;
-        SCALAR_MODULAR_MULTIPLIER_DATA_A_IN <= TWO_DATA;
-        SCALAR_MODULAR_MULTIPLIER_DATA_B_IN <= TWO_DATA;
+        SCALAR_MODULAR_MULTIPLIER_MODULO_IN <= MODULO;
+        SCALAR_MODULAR_MULTIPLIER_DATA_A_IN <= SCALAR_SAMPLE_B;
+        SCALAR_MODULAR_MULTIPLIER_DATA_B_IN <= SCALAR_SAMPLE_A;
       end if;
 
       wait for WORKING;
@@ -598,8 +598,8 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_INVERTER_CASE 0     ";
         -------------------------------------------------------------------
 
-        SCALAR_MODULAR_INVERTER_MODULO_IN <= FULL;
-        SCALAR_MODULAR_INVERTER_DATA_IN   <= ONE_DATA;
+        SCALAR_MODULAR_INVERTER_MODULO_IN <= MODULO;
+        SCALAR_MODULAR_INVERTER_DATA_IN   <= SCALAR_SAMPLE_A;
       end if;
 
       if (STIMULUS_NTM_SCALAR_MODULAR_INVERTER_CASE_1) then
@@ -608,8 +608,8 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_SCALAR_INVERTER_CASE 1     ";
         -------------------------------------------------------------------
 
-        SCALAR_MODULAR_INVERTER_MODULO_IN <= FULL;
-        SCALAR_MODULAR_INVERTER_DATA_IN   <= ONE_DATA;
+        SCALAR_MODULAR_INVERTER_MODULO_IN <= MODULO;
+        SCALAR_MODULAR_INVERTER_DATA_IN   <= SCALAR_SAMPLE_B;
       end if;
 
       wait for WORKING;
@@ -627,7 +627,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_MODULAR_MOD_SIZE_IN <= THREE_CONTROL;
+      VECTOR_MODULAR_MOD_MODULO_IN <= MODULO;
+      VECTOR_MODULAR_MOD_SIZE_IN   <= THREE_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_MODULAR_MOD_CASE_0) then
 
@@ -733,7 +734,7 @@ begin
       VECTOR_MODULAR_ADDER_OPERATION <= '0';
 
       -- DATA
-      VECTOR_MODULAR_ADDER_MODULO_IN <= FULL;
+      VECTOR_MODULAR_ADDER_MODULO_IN <= MODULO;
       VECTOR_MODULAR_ADDER_SIZE_IN   <= THREE_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_MODULAR_ADDER_CASE_0) then
@@ -849,7 +850,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_MODULAR_MULTIPLIER_MODULO_IN <= FULL;
+      VECTOR_MODULAR_MULTIPLIER_MODULO_IN <= MODULO;
       VECTOR_MODULAR_MULTIPLIER_SIZE_IN   <= THREE_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_MODULAR_MULTIPLIER_CASE_0) then
@@ -965,7 +966,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      VECTOR_MODULAR_INVERTER_SIZE_IN <= THREE_CONTROL;
+      VECTOR_MODULAR_INVERTER_MODULO_IN <= MODULO;
+      VECTOR_MODULAR_INVERTER_SIZE_IN   <= THREE_CONTROL;
 
       if (STIMULUS_NTM_VECTOR_MODULAR_INVERTER_CASE_0) then
 
@@ -1072,7 +1074,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_MODULAR_MOD_MODULO_IN <= FULL;
+      MATRIX_MODULAR_MOD_MODULO_IN <= MODULO;
       MATRIX_MODULAR_MOD_SIZE_I_IN <= THREE_CONTROL;
       MATRIX_MODULAR_MOD_SIZE_J_IN <= THREE_CONTROL;
 
@@ -1210,7 +1212,7 @@ begin
       MATRIX_MODULAR_ADDER_OPERATION <= '0';
 
       -- DATA
-      MATRIX_MODULAR_ADDER_MODULO_IN <= FULL;
+      MATRIX_MODULAR_ADDER_MODULO_IN <= MODULO;
       MATRIX_MODULAR_ADDER_SIZE_I_IN <= THREE_CONTROL;
       MATRIX_MODULAR_ADDER_SIZE_J_IN <= THREE_CONTROL;
 
@@ -1367,7 +1369,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_MODULAR_MULTIPLIER_MODULO_IN <= FULL;
+      MATRIX_MODULAR_MULTIPLIER_MODULO_IN <= MODULO;
       MATRIX_MODULAR_MULTIPLIER_SIZE_I_IN <= THREE_CONTROL;
       MATRIX_MODULAR_MULTIPLIER_SIZE_J_IN <= THREE_CONTROL;
 
@@ -1524,7 +1526,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_MODULAR_INVERTER_MODULO_IN <= FULL;
+      MATRIX_MODULAR_INVERTER_MODULO_IN <= MODULO;
       MATRIX_MODULAR_INVERTER_SIZE_I_IN <= THREE_CONTROL;
       MATRIX_MODULAR_INVERTER_SIZE_J_IN <= THREE_CONTROL;
 
@@ -1663,7 +1665,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      TENSOR_MODULAR_MOD_MODULO_IN <= FULL;
+      TENSOR_MODULAR_MOD_MODULO_IN <= MODULO;
       TENSOR_MODULAR_MOD_SIZE_I_IN <= THREE_CONTROL;
       TENSOR_MODULAR_MOD_SIZE_J_IN <= THREE_CONTROL;
       TENSOR_MODULAR_MOD_SIZE_K_IN <= THREE_CONTROL;
@@ -1834,7 +1836,7 @@ begin
       TENSOR_MODULAR_ADDER_OPERATION <= '0';
 
       -- DATA
-      TENSOR_MODULAR_ADDER_MODULO_IN <= FULL;
+      TENSOR_MODULAR_ADDER_MODULO_IN <= MODULO;
       TENSOR_MODULAR_ADDER_SIZE_I_IN <= THREE_CONTROL;
       TENSOR_MODULAR_ADDER_SIZE_J_IN <= THREE_CONTROL;
       TENSOR_MODULAR_ADDER_SIZE_K_IN <= THREE_CONTROL;
@@ -2036,7 +2038,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      TENSOR_MODULAR_MULTIPLIER_MODULO_IN <= FULL;
+      TENSOR_MODULAR_MULTIPLIER_MODULO_IN <= MODULO;
       TENSOR_MODULAR_MULTIPLIER_SIZE_I_IN <= THREE_CONTROL;
       TENSOR_MODULAR_MULTIPLIER_SIZE_J_IN <= THREE_CONTROL;
       TENSOR_MODULAR_MULTIPLIER_SIZE_K_IN <= THREE_CONTROL;
@@ -2238,7 +2240,7 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      TENSOR_MODULAR_INVERTER_MODULO_IN <= FULL;
+      TENSOR_MODULAR_INVERTER_MODULO_IN <= MODULO;
       TENSOR_MODULAR_INVERTER_SIZE_I_IN <= THREE_CONTROL;
       TENSOR_MODULAR_INVERTER_SIZE_J_IN <= THREE_CONTROL;
       TENSOR_MODULAR_INVERTER_SIZE_K_IN <= THREE_CONTROL;

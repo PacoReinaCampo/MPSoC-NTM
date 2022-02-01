@@ -26,7 +26,7 @@ add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_adder_test/matrix_i
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_adder_test/matrix_integer_adder/DATA_OUT_J_ENABLE
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_adder_test/matrix_integer_adder/index_j_loop
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_adder_test/matrix_integer_adder/DATA_OUT
-add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_adder_test/matrix_integer_adder/REST_OUT
+add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_adder_test/matrix_integer_adder/REMAINDER_OUT
 
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_adder_test/matrix_integer_adder/adder_ctrl_fsm_int
 
@@ -39,7 +39,7 @@ add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_adder_test/matrix_i
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_adder_test/matrix_integer_adder/data_b_in_scalar_integer_adder
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_adder_test/matrix_integer_adder/ready_scalar_integer_adder
 add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_adder_test/matrix_integer_adder/data_out_scalar_integer_adder
-add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_adder_test/matrix_integer_adder/rest_out_scalar_integer_adder
+add wave -noupdate /ntm_integer_testbench/ntm_matrix_integer_adder_test/matrix_integer_adder/remainder_out_scalar_integer_adder
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

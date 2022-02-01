@@ -49,7 +49,7 @@ package ntm_modular_pkg is
   -----------------------------------------------------------------------
 
   -- SYSTEM-SIZE
-  constant DATA_SIZE : integer := 512;
+  constant DATA_SIZE : integer := 32;
 
   constant CONTROL_X_SIZE : integer := 3;
   constant CONTROL_Y_SIZE : integer := 3;
@@ -113,11 +113,11 @@ package ntm_modular_pkg is
   constant MATRIX_SAMPLE_A : matrix_buffer := ((P_ONE, P_FOUR, P_ONE), (P_ZERO, P_EIGHT, P_FOUR), (P_FIVE, P_THREE, P_NINE));
   constant MATRIX_SAMPLE_B : matrix_buffer := ((P_ONE, P_TWO, P_SIX), (P_ONE, P_THREE, P_SIX), (P_EIGHT, P_FOUR, P_FOUR));
 
-  constant VECTOR_SAMPLE_A : vector_buffer := (P_FOUR, P_SEVEN, N_THREE);
-  constant VECTOR_SAMPLE_B : vector_buffer := (P_THREE, N_NINE, N_ONE);
+  constant VECTOR_SAMPLE_A : vector_buffer := (P_FOUR, P_SEVEN, P_THREE);
+  constant VECTOR_SAMPLE_B : vector_buffer := (P_THREE, P_NINE, P_ONE);
 
   constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := P_NINE;
-  constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := N_FOUR;
+  constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := P_FOUR;
 
   -- SCALAR-FUNCTIONALITY
   signal STIMULUS_NTM_SCALAR_MODULAR_MOD_TEST        : boolean := false;

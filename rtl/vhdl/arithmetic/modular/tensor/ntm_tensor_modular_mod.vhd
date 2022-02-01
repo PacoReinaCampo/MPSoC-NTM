@@ -67,12 +67,13 @@ entity ntm_tensor_modular_mod is
     DATA_OUT_K_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    MODULO_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DATA_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -123,23 +124,16 @@ architecture ntm_tensor_modular_mod_architecture of ntm_tensor_modular_mod is
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- MATRIX MOD
+  -- SCALAR MULTIPLIER
   -- CONTROL
-  signal start_matrix_modular_mod : std_logic;
-  signal ready_matrix_modular_mod : std_logic;
-
-  signal data_in_i_enable_matrix_modular_mod : std_logic;
-  signal data_in_j_enable_matrix_modular_mod : std_logic;
-
-  signal data_out_i_enable_matrix_modular_mod : std_logic;
-  signal data_out_j_enable_matrix_modular_mod : std_logic;
+  signal start_scalar_modular_mod : std_logic;
+  signal ready_scalar_modular_mod : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_modular_mod : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_modular_mod : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_modular_mod : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_matrix_modular_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_modular_mod  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_modular_mod : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_modular_mod   : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_modular_mod : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -164,20 +158,15 @@ begin
       DATA_OUT_K_ENABLE <= '0';
 
       -- Control Internal
-      start_matrix_modular_mod <= '0';
+      start_scalar_modular_mod <= '0';
 
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
       index_k_loop <= ZERO_CONTROL;
 
-      data_in_i_enable_matrix_modular_mod <= '0';
-      data_in_j_enable_matrix_modular_mod <= '0';
-
       -- Data Internal
-      modulo_in_matrix_modular_mod <= ZERO_DATA;
-      size_i_in_matrix_modular_mod <= ZERO_CONTROL;
-      size_j_in_matrix_modular_mod <= ZERO_CONTROL;
-      data_in_matrix_modular_mod   <= ZERO_DATA;
+      modulo_in_scalar_modular_mod <= ZERO_DATA;
+      data_in_scalar_modular_mod   <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -210,20 +199,20 @@ begin
 
           if ((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1') and (DATA_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            modulo_in_matrix_modular_mod <= MODULO_IN;
-            size_i_in_matrix_modular_mod <= SIZE_J_IN;
-            size_j_in_matrix_modular_mod <= SIZE_K_IN;
-
-            data_in_matrix_modular_mod <= DATA_IN;
+            modulo_in_scalar_modular_mod <= MODULO_IN;
+            data_in_scalar_modular_mod   <= DATA_IN;
 
             -- Control Internal
-            start_matrix_modular_mod <= '1';
-
-            data_in_i_enable_matrix_modular_mod <= '1';
-            data_in_j_enable_matrix_modular_mod <= '1';
+            start_scalar_modular_mod <= '1';
 
             -- FSM Control
-            mod_ctrl_fsm_int <= ENDER_K_STATE;
+            if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+              mod_ctrl_fsm_int <= ENDER_I_STATE;
+            elsif (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+              mod_ctrl_fsm_int <= ENDER_J_STATE;
+            else
+              mod_ctrl_fsm_int <= ENDER_K_STATE;
+            end if;
           end if;
 
           -- Control Outputs
@@ -235,14 +224,20 @@ begin
 
           if ((DATA_IN_J_ENABLE = '1') and (DATA_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            data_in_matrix_modular_mod <= DATA_IN;
+            modulo_in_scalar_modular_mod <= MODULO_IN;
+            data_in_scalar_modular_mod   <= DATA_IN;
 
             -- Control Internal
-            data_in_i_enable_matrix_modular_mod <= '1';
-            data_in_j_enable_matrix_modular_mod <= '1';
+            start_scalar_modular_mod <= '1';
 
             -- FSM Control
-            mod_ctrl_fsm_int <= ENDER_K_STATE;
+            if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+              mod_ctrl_fsm_int <= ENDER_I_STATE;
+            elsif (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+              mod_ctrl_fsm_int <= ENDER_J_STATE;
+            else
+              mod_ctrl_fsm_int <= ENDER_K_STATE;
+            end if;
           end if;
 
           -- Control Outputs
@@ -253,18 +248,17 @@ begin
 
           if (DATA_IN_K_ENABLE = '1') then
             -- Data Inputs
-            data_in_matrix_modular_mod <= DATA_IN;
+            modulo_in_scalar_modular_mod <= MODULO_IN;
+            data_in_scalar_modular_mod   <= DATA_IN;
 
             -- Control Internal
-            data_in_j_enable_matrix_modular_mod <= '1';
+            start_scalar_modular_mod <= '1';
 
             -- FSM Control
-            if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
-              if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-                mod_ctrl_fsm_int <= ENDER_I_STATE;
-              else
-                mod_ctrl_fsm_int <= ENDER_J_STATE;
-              end if;
+            if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+              mod_ctrl_fsm_int <= ENDER_I_STATE;
+            elsif (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+              mod_ctrl_fsm_int <= ENDER_J_STATE;
             else
               mod_ctrl_fsm_int <= ENDER_K_STATE;
             end if;
@@ -275,10 +269,10 @@ begin
 
         when ENDER_I_STATE =>           -- STEP 4
 
-          if (data_out_i_enable_matrix_modular_mod = '1' and data_out_j_enable_matrix_modular_mod = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+          if (ready_scalar_modular_mod = '1') then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_modular_mod;
+              DATA_OUT <= data_out_scalar_modular_mod;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -294,9 +288,9 @@ begin
 
               -- FSM Control
               mod_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_modular_mod;
+              DATA_OUT <= data_out_scalar_modular_mod;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -313,18 +307,15 @@ begin
             end if;
           else
             -- Control Internal
-            start_matrix_modular_mod <= '0';
-
-            data_in_i_enable_matrix_modular_mod <= '0';
-            data_in_j_enable_matrix_modular_mod <= '0';
+            start_scalar_modular_mod <= '0';
           end if;
 
         when ENDER_J_STATE =>           -- STEP 5
 
-          if (data_out_j_enable_matrix_modular_mod = '1') then
-            if ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+          if (ready_scalar_modular_mod = '1') then
+            if ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_modular_mod;
+              DATA_OUT <= data_out_scalar_modular_mod;
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';
@@ -339,18 +330,15 @@ begin
             end if;
           else
             -- Control Internal
-            start_matrix_modular_mod <= '0';
-
-            data_in_i_enable_matrix_modular_mod <= '0';
-            data_in_j_enable_matrix_modular_mod <= '0';
+            start_scalar_modular_mod <= '0';
           end if;
 
         when ENDER_K_STATE =>           -- STEP 6
 
-          if (data_out_j_enable_matrix_modular_mod = '1') then
+          if (ready_scalar_modular_mod = '1') then
             if (unsigned(index_k_loop) < unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_modular_mod;
+              DATA_OUT <= data_out_scalar_modular_mod;
 
               -- Control Outputs
               DATA_OUT_K_ENABLE <= '1';
@@ -363,10 +351,7 @@ begin
             end if;
           else
             -- Control Internal
-            start_matrix_modular_mod <= '0';
-
-            data_in_i_enable_matrix_modular_mod <= '0';
-            data_in_j_enable_matrix_modular_mod <= '0';
+            start_scalar_modular_mod <= '0';
           end if;
 
         when others =>
@@ -376,8 +361,8 @@ begin
     end if;
   end process;
 
-  -- MATRIX MOD
-  matrix_modular_mod : ntm_matrix_modular_mod
+  -- SCALAR MULTIPLIER
+  scalar_modular_mod : ntm_scalar_modular_mod
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -388,21 +373,14 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_modular_mod,
-      READY => ready_matrix_modular_mod,
-
-      DATA_IN_I_ENABLE => data_in_i_enable_matrix_modular_mod,
-      DATA_IN_J_ENABLE => data_in_j_enable_matrix_modular_mod,
-
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_modular_mod,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_modular_mod,
+      START => start_scalar_modular_mod,
+      READY => ready_scalar_modular_mod,
 
       -- DATA
-      MODULO_IN => modulo_in_matrix_modular_mod,
-      SIZE_I_IN => size_i_in_matrix_modular_mod,
-      SIZE_J_IN => size_j_in_matrix_modular_mod,
-      DATA_IN   => data_in_matrix_modular_mod,
-      DATA_OUT  => data_out_matrix_modular_mod
+      MODULO_IN => modulo_in_scalar_modular_mod,
+      DATA_IN   => data_in_scalar_modular_mod,
+
+      DATA_OUT => data_out_scalar_modular_mod
       );
 
 end architecture;

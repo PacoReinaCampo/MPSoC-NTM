@@ -67,12 +67,13 @@ entity ntm_matrix_modular_multiplier is
     DATA_OUT_J_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_A_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_B_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    MODULO_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -125,22 +126,17 @@ architecture ntm_matrix_modular_multiplier_architecture of ntm_matrix_modular_mu
   signal data_b_in_i_multiplier_int : std_logic;
   signal data_b_in_j_multiplier_int : std_logic;
 
-  -- VECTOR MULTIPLIER
+  -- SCALAR MULTIPLIER
   -- CONTROL
-  signal start_vector_multiplier : std_logic;
-  signal ready_vector_multiplier : std_logic;
-
-  signal data_a_in_enable_vector_multiplier : std_logic;
-  signal data_b_in_enable_vector_multiplier : std_logic;
-
-  signal data_out_enable_vector_multiplier : std_logic;
+  signal start_scalar_modular_multiplier : std_logic;
+  signal ready_scalar_modular_multiplier : std_logic;
 
   -- DATA
-  signal modulo_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_modular_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_modular_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_modular_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_modular_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -148,7 +144,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = DATA_A_IN · DATA_B_IN mod MODULO_IN
+  -- DATA_OUT = DATA_A_IN ± DATA_B_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -164,13 +160,10 @@ begin
       DATA_OUT_J_ENABLE <= '0';
 
       -- Control Internal
-      start_vector_multiplier <= '0';
+      start_scalar_modular_multiplier <= '0';
 
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
-
-      data_a_in_enable_vector_multiplier <= '0';
-      data_b_in_enable_vector_multiplier <= '0';
 
       data_a_in_i_multiplier_int <= '0';
       data_a_in_j_multiplier_int <= '0';
@@ -178,10 +171,9 @@ begin
       data_b_in_j_multiplier_int <= '0';
 
       -- Data Internal
-      modulo_in_vector_multiplier <= ZERO_DATA;
-      size_in_vector_multiplier   <= ZERO_CONTROL;
-      data_a_in_vector_multiplier <= ZERO_DATA;
-      data_b_in_vector_multiplier <= ZERO_DATA;
+      modulo_in_scalar_modular_multiplier <= ZERO_DATA;
+      data_a_in_scalar_modular_multiplier <= ZERO_DATA;
+      data_b_in_scalar_modular_multiplier <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -211,30 +203,20 @@ begin
 
           if ((DATA_A_IN_I_ENABLE = '1') and (DATA_A_IN_J_ENABLE = '1')) then
             -- Data Inputs
-            data_a_in_vector_multiplier <= DATA_A_IN;
+            data_a_in_scalar_modular_multiplier <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_enable_vector_multiplier <= '1';
-
             data_a_in_i_multiplier_int <= '1';
             data_a_in_j_multiplier_int <= '1';
-          else
-            -- Control Internal
-            data_a_in_enable_vector_multiplier <= '0';
           end if;
 
           if ((DATA_B_IN_I_ENABLE = '1') and (DATA_B_IN_J_ENABLE = '1')) then
             -- Data Inputs
-            data_b_in_vector_multiplier <= DATA_B_IN;
+            data_b_in_scalar_modular_multiplier <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_enable_vector_multiplier <= '1';
-
             data_b_in_i_multiplier_int <= '1';
             data_b_in_j_multiplier_int <= '1';
-          else
-            -- Control Internal
-            data_b_in_enable_vector_multiplier <= '0';
           end if;
 
           -- Control Outputs
@@ -242,15 +224,11 @@ begin
           DATA_OUT_J_ENABLE <= '0';
 
           if (data_a_in_i_multiplier_int = '1' and data_a_in_j_multiplier_int = '1' and data_b_in_i_multiplier_int = '1' and data_b_in_j_multiplier_int = '1') then
-            -- Data Inputs
-            modulo_in_vector_multiplier <= MODULO_IN;
-            size_in_vector_multiplier   <= SIZE_J_IN;
+            -- Data Internal
+            modulo_in_scalar_modular_multiplier <= MODULO_IN;
 
             -- Control Internal
-            start_vector_multiplier <= '1';
-
-            data_a_in_enable_vector_multiplier <= '0';
-            data_b_in_enable_vector_multiplier <= '0';
+            start_scalar_modular_multiplier <= '1';
 
             data_a_in_i_multiplier_int <= '0';
             data_a_in_j_multiplier_int <= '0';
@@ -269,37 +247,29 @@ begin
 
           if (DATA_A_IN_J_ENABLE = '1') then
             -- Data Inputs
-            data_a_in_vector_multiplier <= DATA_A_IN;
+            data_a_in_scalar_modular_multiplier <= DATA_A_IN;
 
             -- Control Internal
-            data_a_in_enable_vector_multiplier <= '1';
-
             data_a_in_j_multiplier_int <= '1';
-          else
-            -- Control Internal
-            data_a_in_enable_vector_multiplier <= '0';
           end if;
 
           if (DATA_B_IN_J_ENABLE = '1') then
             -- Data Inputs
-            data_b_in_vector_multiplier <= DATA_B_IN;
+            data_b_in_scalar_modular_multiplier <= DATA_B_IN;
 
             -- Control Internal
-            data_b_in_enable_vector_multiplier <= '1';
-
             data_b_in_j_multiplier_int <= '1';
-          else
-            -- Control Internal
-            data_b_in_enable_vector_multiplier <= '0';
           end if;
 
           -- Control Outputs
           DATA_OUT_J_ENABLE <= '0';
 
           if (data_a_in_j_multiplier_int = '1' and data_b_in_j_multiplier_int = '1') then
+            -- Data Internal
+            modulo_in_scalar_modular_multiplier <= MODULO_IN;
+
             -- Control Internal
-            data_a_in_enable_vector_multiplier <= '0';
-            data_b_in_enable_vector_multiplier <= '0';
+            start_scalar_modular_multiplier <= '1';
 
             data_a_in_j_multiplier_int <= '0';
             data_b_in_j_multiplier_int <= '0';
@@ -314,10 +284,10 @@ begin
 
         when ENDER_I_STATE =>           -- STEP 3
 
-          if (data_out_enable_vector_multiplier = '1') then
+          if (ready_scalar_modular_multiplier = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_multiplier;
+              DATA_OUT <= data_out_scalar_modular_multiplier;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -333,7 +303,7 @@ begin
               multiplier_ctrl_fsm_int <= STARTER_STATE;
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_multiplier;
+              DATA_OUT <= data_out_scalar_modular_multiplier;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -348,15 +318,15 @@ begin
             end if;
           else
             -- Control Internal
-            start_vector_multiplier <= '0';
+            start_scalar_modular_multiplier <= '0';
           end if;
 
         when ENDER_J_STATE =>           -- STEP 3
 
-          if (data_out_enable_vector_multiplier = '1') then
+          if (ready_scalar_modular_multiplier = '1') then
             if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_multiplier;
+              DATA_OUT <= data_out_scalar_modular_multiplier;
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';
@@ -369,7 +339,7 @@ begin
             end if;
           else
             -- Control Internal
-            start_vector_multiplier <= '0';
+            start_scalar_modular_multiplier <= '0';
           end if;
 
         when others =>
@@ -379,8 +349,8 @@ begin
     end if;
   end process;
 
-  -- VECTOR MULTIPLIER
-  vector_multiplier : ntm_vector_modular_multiplier
+  -- SCALAR MULTIPLIER
+  scalar_modular_multiplier : ntm_scalar_modular_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -391,20 +361,15 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_multiplier,
-      READY => ready_vector_multiplier,
-
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplier,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplier,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
+      START => start_scalar_modular_multiplier,
+      READY => ready_scalar_modular_multiplier,
 
       -- DATA
-      MODULO_IN => modulo_in_vector_multiplier,
-      SIZE_IN   => size_in_vector_multiplier,
-      DATA_A_IN => data_a_in_vector_multiplier,
-      DATA_B_IN => data_b_in_vector_multiplier,
-      DATA_OUT  => data_out_vector_multiplier
+      MODULO_IN => modulo_in_scalar_modular_multiplier,
+      DATA_A_IN => data_a_in_scalar_modular_multiplier,
+      DATA_B_IN => data_b_in_scalar_modular_multiplier,
+
+      DATA_OUT => data_out_scalar_modular_multiplier
       );
 
 end architecture;
