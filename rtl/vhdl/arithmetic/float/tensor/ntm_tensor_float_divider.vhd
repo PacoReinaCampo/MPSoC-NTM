@@ -76,7 +76,7 @@ entity ntm_tensor_float_divider is
     DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
     OVERFLOW_OUT : out std_logic
     );
 end entity;
@@ -154,7 +154,7 @@ architecture ntm_tensor_float_divider_architecture of ntm_tensor_float_divider i
   signal data_a_in_matrix_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_matrix_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_float_divider     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal overflow_out_matrix_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -170,7 +170,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO_DATA;
+      DATA_OUT     <= ZERO_DATA;
       OVERFLOW_OUT <= ZERO_DATA;
 
       -- Control Outputs
@@ -401,7 +401,7 @@ begin
           if (data_out_i_enable_matrix_float_divider = '1' and data_out_j_enable_matrix_float_divider = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_float_divider;
+              DATA_OUT     <= data_out_matrix_float_divider;
               OVERFLOW_OUT <= overflow_out_matrix_float_divider;
 
               -- Control Outputs
@@ -420,7 +420,7 @@ begin
               divider_ctrl_fsm_int <= STARTER_STATE;
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_float_divider;
+              DATA_OUT     <= data_out_matrix_float_divider;
               OVERFLOW_OUT <= overflow_out_matrix_float_divider;
 
               -- Control Outputs
@@ -446,7 +446,7 @@ begin
           if (data_out_j_enable_matrix_float_divider = '1') then
             if ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_float_divider;
+              DATA_OUT     <= data_out_matrix_float_divider;
               OVERFLOW_OUT <= overflow_out_matrix_float_divider;
 
               -- Control Outputs

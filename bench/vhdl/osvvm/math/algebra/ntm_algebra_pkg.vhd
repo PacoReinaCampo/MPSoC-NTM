@@ -123,21 +123,21 @@ package ntm_algebra_pkg is
   signal STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_TEST : boolean := false;
   signal STIMULUS_NTM_VECTOR_MULTIPLICATION_TEST    : boolean := false;
   signal STIMULUS_NTM_VECTOR_SUMMATION_TEST         : boolean := false;
-  signal STIMULUS_NTM_VECTOR_MODULE_TEST         : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MODULE_TEST            : boolean := false;
 
   signal STIMULUS_NTM_DOT_PRODUCT_CASE_0              : boolean := false;
   signal STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_0       : boolean := false;
   signal STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_0 : boolean := false;
   signal STIMULUS_NTM_VECTOR_MULTIPLICATION_CASE_0    : boolean := false;
   signal STIMULUS_NTM_VECTOR_SUMMATION_CASE_0         : boolean := false;
-  signal STIMULUS_NTM_VECTOR_MODULE_CASE_0         : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MODULE_CASE_0            : boolean := false;
 
   signal STIMULUS_NTM_DOT_PRODUCT_CASE_1              : boolean := false;
   signal STIMULUS_NTM_VECTOR_CONVOLUTION_CASE_1       : boolean := false;
   signal STIMULUS_NTM_VECTOR_COSINE_SIMILARITY_CASE_1 : boolean := false;
   signal STIMULUS_NTM_VECTOR_MULTIPLICATION_CASE_1    : boolean := false;
   signal STIMULUS_NTM_VECTOR_SUMMATION_CASE_1         : boolean := false;
-  signal STIMULUS_NTM_VECTOR_MODULE_CASE_1         : boolean := false;
+  signal STIMULUS_NTM_VECTOR_MODULE_CASE_1            : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
   signal STIMULUS_NTM_MATRIX_CONVOLUTION_TEST    : boolean := false;

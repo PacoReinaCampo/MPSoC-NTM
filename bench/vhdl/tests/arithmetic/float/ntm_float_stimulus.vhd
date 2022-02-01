@@ -119,11 +119,11 @@ entity ntm_float_stimulus is
     VECTOR_FLOAT_ADDER_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_FLOAT_ADDER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_FLOAT_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_FLOAT_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_FLOAT_ADDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_FLOAT_ADDER_OVERFLOW_OUT  : in  std_logic;
+    VECTOR_FLOAT_ADDER_SIZE_IN      : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_FLOAT_ADDER_DATA_A_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_FLOAT_ADDER_DATA_B_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_FLOAT_ADDER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_FLOAT_ADDER_OVERFLOW_OUT : in  std_logic;
 
     -- VECTOR FLOAT MULTIPLIER
     -- CONTROL
@@ -136,11 +136,11 @@ entity ntm_float_stimulus is
     VECTOR_FLOAT_MULTIPLIER_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_FLOAT_MULTIPLIER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_FLOAT_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_FLOAT_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_FLOAT_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_FLOAT_MULTIPLIER_OVERFLOW_OUT  : in  std_logic;
+    VECTOR_FLOAT_MULTIPLIER_SIZE_IN      : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_FLOAT_MULTIPLIER_DATA_A_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_FLOAT_MULTIPLIER_DATA_B_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_FLOAT_MULTIPLIER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_FLOAT_MULTIPLIER_OVERFLOW_OUT : in  std_logic;
 
     -- VECTOR FLOAT DIVIDER
     -- CONTROL
@@ -153,11 +153,11 @@ entity ntm_float_stimulus is
     VECTOR_FLOAT_DIVIDER_DATA_OUT_ENABLE : in std_logic;
 
     -- DATA
-    VECTOR_FLOAT_DIVIDER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_FLOAT_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_FLOAT_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_FLOAT_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_FLOAT_DIVIDER_OVERFLOW_OUT  : in  std_logic;
+    VECTOR_FLOAT_DIVIDER_SIZE_IN      : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    VECTOR_FLOAT_DIVIDER_DATA_A_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_FLOAT_DIVIDER_DATA_B_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_FLOAT_DIVIDER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    VECTOR_FLOAT_DIVIDER_OVERFLOW_OUT : in  std_logic;
 
     -----------------------------------------------------------------------
     -- STIMULUS MATRIX FLOAT
@@ -179,12 +179,12 @@ entity ntm_float_stimulus is
     MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_FLOAT_ADDER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_FLOAT_ADDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_FLOAT_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_FLOAT_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_FLOAT_ADDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_FLOAT_ADDER_OVERFLOW_OUT  : in  std_logic;
+    MATRIX_FLOAT_ADDER_SIZE_I_IN    : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_FLOAT_ADDER_SIZE_J_IN    : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_FLOAT_ADDER_DATA_A_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_FLOAT_ADDER_DATA_B_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_FLOAT_ADDER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_FLOAT_ADDER_OVERFLOW_OUT : in  std_logic;
 
     -- MATRIX FLOAT MULTIPLIER
     -- CONTROL
@@ -200,12 +200,12 @@ entity ntm_float_stimulus is
     MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_FLOAT_MULTIPLIER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_FLOAT_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_FLOAT_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_FLOAT_MULTIPLIER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_FLOAT_MULTIPLIER_OVERFLOW_OUT  : in  std_logic;
+    MATRIX_FLOAT_MULTIPLIER_SIZE_I_IN    : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN    : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_FLOAT_MULTIPLIER_DATA_A_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_FLOAT_MULTIPLIER_DATA_B_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_FLOAT_MULTIPLIER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_FLOAT_MULTIPLIER_OVERFLOW_OUT : in  std_logic;
 
     -- MATRIX FLOAT DIVIDER
     -- CONTROL
@@ -221,12 +221,12 @@ entity ntm_float_stimulus is
     MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_FLOAT_DIVIDER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_FLOAT_DIVIDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_FLOAT_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_FLOAT_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_FLOAT_DIVIDER_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_FLOAT_DIVIDER_OVERFLOW_OUT  : in  std_logic
+    MATRIX_FLOAT_DIVIDER_SIZE_I_IN    : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_FLOAT_DIVIDER_SIZE_J_IN    : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_FLOAT_DIVIDER_DATA_A_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_FLOAT_DIVIDER_DATA_B_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_FLOAT_DIVIDER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_FLOAT_DIVIDER_OVERFLOW_OUT : in  std_logic
     );
 end entity;
 

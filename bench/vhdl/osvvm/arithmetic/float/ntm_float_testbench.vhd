@@ -317,9 +317,9 @@ begin
       SCALAR_FLOAT_ADDER_OPERATION => operation_scalar_float_adder,
 
       -- DATA
-      SCALAR_FLOAT_ADDER_DATA_A_IN => data_a_in_scalar_float_adder,
-      SCALAR_FLOAT_ADDER_DATA_B_IN => data_b_in_scalar_float_adder,
-      SCALAR_FLOAT_ADDER_DATA_OUT  => data_out_scalar_float_adder,
+      SCALAR_FLOAT_ADDER_DATA_A_IN    => data_a_in_scalar_float_adder,
+      SCALAR_FLOAT_ADDER_DATA_B_IN    => data_b_in_scalar_float_adder,
+      SCALAR_FLOAT_ADDER_DATA_OUT     => data_out_scalar_float_adder,
       SCALAR_FLOAT_ADDER_OVERFLOW_OUT => overflow_out_scalar_float_adder,
 
       -- SCALAR FLOAT MULTIPLIER
@@ -361,11 +361,11 @@ begin
       VECTOR_FLOAT_ADDER_DATA_OUT_ENABLE => data_out_enable_vector_float_adder,
 
       -- DATA
-      VECTOR_FLOAT_ADDER_SIZE_IN   => size_in_vector_float_adder,
-      VECTOR_FLOAT_ADDER_DATA_A_IN => data_a_in_vector_float_adder,
-      VECTOR_FLOAT_ADDER_DATA_B_IN => data_b_in_vector_float_adder,
-      VECTOR_FLOAT_ADDER_DATA_OUT  => data_out_vector_float_adder,
-      VECTOR_FLOAT_ADDER_OVERFLOW_OUT  => overflow_out_vector_float_adder,
+      VECTOR_FLOAT_ADDER_SIZE_IN      => size_in_vector_float_adder,
+      VECTOR_FLOAT_ADDER_DATA_A_IN    => data_a_in_vector_float_adder,
+      VECTOR_FLOAT_ADDER_DATA_B_IN    => data_b_in_vector_float_adder,
+      VECTOR_FLOAT_ADDER_DATA_OUT     => data_out_vector_float_adder,
+      VECTOR_FLOAT_ADDER_OVERFLOW_OUT => overflow_out_vector_float_adder,
 
       -- VECTOR FLOAT MULTIPLIER
       -- CONTROL
@@ -378,11 +378,11 @@ begin
       VECTOR_FLOAT_MULTIPLIER_DATA_OUT_ENABLE => data_out_enable_vector_float_multiplier,
 
       -- DATA
-      VECTOR_FLOAT_MULTIPLIER_SIZE_IN   => size_in_vector_float_multiplier,
-      VECTOR_FLOAT_MULTIPLIER_DATA_A_IN => data_a_in_vector_float_multiplier,
-      VECTOR_FLOAT_MULTIPLIER_DATA_B_IN => data_b_in_vector_float_multiplier,
-      VECTOR_FLOAT_MULTIPLIER_DATA_OUT  => data_out_vector_float_multiplier,
-      VECTOR_FLOAT_MULTIPLIER_OVERFLOW_OUT  => overflow_out_vector_float_multiplier,
+      VECTOR_FLOAT_MULTIPLIER_SIZE_IN      => size_in_vector_float_multiplier,
+      VECTOR_FLOAT_MULTIPLIER_DATA_A_IN    => data_a_in_vector_float_multiplier,
+      VECTOR_FLOAT_MULTIPLIER_DATA_B_IN    => data_b_in_vector_float_multiplier,
+      VECTOR_FLOAT_MULTIPLIER_DATA_OUT     => data_out_vector_float_multiplier,
+      VECTOR_FLOAT_MULTIPLIER_OVERFLOW_OUT => overflow_out_vector_float_multiplier,
 
       -- VECTOR FLOAT DIVIDER
       -- CONTROL
@@ -395,11 +395,11 @@ begin
       VECTOR_FLOAT_DIVIDER_DATA_OUT_ENABLE => data_out_enable_vector_float_divider,
 
       -- DATA
-      VECTOR_FLOAT_DIVIDER_SIZE_IN   => size_in_vector_float_divider,
-      VECTOR_FLOAT_DIVIDER_DATA_A_IN => data_a_in_vector_float_divider,
-      VECTOR_FLOAT_DIVIDER_DATA_B_IN => data_b_in_vector_float_divider,
-      VECTOR_FLOAT_DIVIDER_DATA_OUT  => data_out_vector_float_divider,
-      VECTOR_FLOAT_DIVIDER_OVERFLOW_OUT  => overflow_out_vector_float_divider,
+      VECTOR_FLOAT_DIVIDER_SIZE_IN      => size_in_vector_float_divider,
+      VECTOR_FLOAT_DIVIDER_DATA_A_IN    => data_a_in_vector_float_divider,
+      VECTOR_FLOAT_DIVIDER_DATA_B_IN    => data_b_in_vector_float_divider,
+      VECTOR_FLOAT_DIVIDER_DATA_OUT     => data_out_vector_float_divider,
+      VECTOR_FLOAT_DIVIDER_OVERFLOW_OUT => overflow_out_vector_float_divider,
 
       -----------------------------------------------------------------------
       -- STIMULUS MATRIX FLOAT
@@ -421,12 +421,12 @@ begin
       MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_float_adder,
 
       -- DATA
-      MATRIX_FLOAT_ADDER_SIZE_I_IN => size_i_in_matrix_float_adder,
-      MATRIX_FLOAT_ADDER_SIZE_J_IN => size_j_in_matrix_float_adder,
-      MATRIX_FLOAT_ADDER_DATA_A_IN => data_a_in_matrix_float_adder,
-      MATRIX_FLOAT_ADDER_DATA_B_IN => data_b_in_matrix_float_adder,
-      MATRIX_FLOAT_ADDER_DATA_OUT  => data_out_matrix_float_adder,
-      MATRIX_FLOAT_ADDER_OVERFLOW_OUT  => overflow_out_matrix_float_adder,
+      MATRIX_FLOAT_ADDER_SIZE_I_IN    => size_i_in_matrix_float_adder,
+      MATRIX_FLOAT_ADDER_SIZE_J_IN    => size_j_in_matrix_float_adder,
+      MATRIX_FLOAT_ADDER_DATA_A_IN    => data_a_in_matrix_float_adder,
+      MATRIX_FLOAT_ADDER_DATA_B_IN    => data_b_in_matrix_float_adder,
+      MATRIX_FLOAT_ADDER_DATA_OUT     => data_out_matrix_float_adder,
+      MATRIX_FLOAT_ADDER_OVERFLOW_OUT => overflow_out_matrix_float_adder,
 
       -- MATRIX FLOAT MULTIPLIER
       -- CONTROL
@@ -442,12 +442,12 @@ begin
       MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_float_multiplier,
 
       -- DATA
-      MATRIX_FLOAT_MULTIPLIER_SIZE_I_IN => size_i_in_matrix_float_multiplier,
-      MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN => size_j_in_matrix_float_multiplier,
-      MATRIX_FLOAT_MULTIPLIER_DATA_A_IN => data_a_in_matrix_float_multiplier,
-      MATRIX_FLOAT_MULTIPLIER_DATA_B_IN => data_b_in_matrix_float_multiplier,
-      MATRIX_FLOAT_MULTIPLIER_DATA_OUT  => data_out_matrix_float_multiplier,
-      MATRIX_FLOAT_MULTIPLIER_OVERFLOW_OUT  => overflow_out_matrix_float_multiplier,
+      MATRIX_FLOAT_MULTIPLIER_SIZE_I_IN    => size_i_in_matrix_float_multiplier,
+      MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN    => size_j_in_matrix_float_multiplier,
+      MATRIX_FLOAT_MULTIPLIER_DATA_A_IN    => data_a_in_matrix_float_multiplier,
+      MATRIX_FLOAT_MULTIPLIER_DATA_B_IN    => data_b_in_matrix_float_multiplier,
+      MATRIX_FLOAT_MULTIPLIER_DATA_OUT     => data_out_matrix_float_multiplier,
+      MATRIX_FLOAT_MULTIPLIER_OVERFLOW_OUT => overflow_out_matrix_float_multiplier,
 
       -- MATRIX FLOAT DIVIDER
       -- CONTROL
@@ -463,12 +463,12 @@ begin
       MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_float_divider,
 
       -- DATA
-      MATRIX_FLOAT_DIVIDER_SIZE_I_IN => size_i_in_matrix_float_divider,
-      MATRIX_FLOAT_DIVIDER_SIZE_J_IN => size_j_in_matrix_float_divider,
-      MATRIX_FLOAT_DIVIDER_DATA_A_IN => data_a_in_matrix_float_divider,
-      MATRIX_FLOAT_DIVIDER_DATA_B_IN => data_b_in_matrix_float_divider,
-      MATRIX_FLOAT_DIVIDER_DATA_OUT  => data_out_matrix_float_divider,
-      MATRIX_FLOAT_DIVIDER_OVERFLOW_OUT  => overflow_out_matrix_float_divider
+      MATRIX_FLOAT_DIVIDER_SIZE_I_IN    => size_i_in_matrix_float_divider,
+      MATRIX_FLOAT_DIVIDER_SIZE_J_IN    => size_j_in_matrix_float_divider,
+      MATRIX_FLOAT_DIVIDER_DATA_A_IN    => data_a_in_matrix_float_divider,
+      MATRIX_FLOAT_DIVIDER_DATA_B_IN    => data_b_in_matrix_float_divider,
+      MATRIX_FLOAT_DIVIDER_DATA_OUT     => data_out_matrix_float_divider,
+      MATRIX_FLOAT_DIVIDER_OVERFLOW_OUT => overflow_out_matrix_float_divider
       );
 
   -----------------------------------------------------------------------

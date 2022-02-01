@@ -294,7 +294,7 @@ begin
       end case;
     end if;
   end process;
-  
+
   -- Data Outputs
   DATA_OUT <= data_out_sign_int & data_out_exponent_int(EXPONENT_SIZE-1 downto 0) & data_out_mantissa_int(MANTISSA_SIZE-1 downto 0);
 
