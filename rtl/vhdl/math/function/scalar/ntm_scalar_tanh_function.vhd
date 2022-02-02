@@ -107,39 +107,39 @@ architecture ntm_scalar_tanh_function_architecture of ntm_scalar_tanh_function i
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Data Internal
-  signal data_int_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_int_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR ADDER
   -- CONTROL
-  signal start_scalar_adder : std_logic;
-  signal ready_scalar_adder : std_logic;
+  signal start_scalar_integer_adder : std_logic;
+  signal ready_scalar_integer_adder : std_logic;
 
-  signal operation_scalar_adder : std_logic;
+  signal operation_scalar_integer_adder : std_logic;
 
   -- DATA
-  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_integer_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR MULTIPLIER
   -- CONTROL
-  signal start_scalar_multiplier : std_logic;
-  signal ready_scalar_multiplier : std_logic;
+  signal start_scalar_integer_multiplier : std_logic;
+  signal ready_scalar_integer_multiplier : std_logic;
 
   -- DATA
-  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_integer_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR DIVIDER
   -- CONTROL
-  signal start_scalar_divider : std_logic;
-  signal ready_scalar_divider : std_logic;
+  signal start_scalar_integer_divider : std_logic;
+  signal ready_scalar_integer_divider : std_logic;
 
   -- DATA
-  signal data_a_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_integer_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR EXPONENTIATOR
   -- CONTROL
@@ -169,27 +169,27 @@ begin
       READY <= '0';
 
       -- Control Internal
-      start_scalar_adder <= '0';
+      start_scalar_integer_adder <= '0';
 
-      operation_scalar_adder <= '0';
+      operation_scalar_integer_adder <= '0';
 
-      start_scalar_multiplier <= '0';
+      start_scalar_integer_multiplier <= '0';
 
-      start_scalar_divider <= '0';
+      start_scalar_integer_divider <= '0';
 
       start_scalar_exponentiator_function <= '0';
 
       -- Data Internal
-      data_a_in_scalar_adder <= ZERO_DATA;
-      data_b_in_scalar_adder <= ZERO_DATA;
+      data_a_in_scalar_integer_adder <= ZERO_DATA;
+      data_b_in_scalar_integer_adder <= ZERO_DATA;
 
-      data_a_in_scalar_multiplier <= ZERO_DATA;
-      data_b_in_scalar_multiplier <= ZERO_DATA;
+      data_a_in_scalar_integer_multiplier <= ZERO_DATA;
+      data_b_in_scalar_integer_multiplier <= ZERO_DATA;
 
-      data_a_in_scalar_divider <= ZERO_DATA;
-      data_b_in_scalar_divider <= ZERO_DATA;
+      data_a_in_scalar_integer_divider <= ZERO_DATA;
+      data_b_in_scalar_integer_divider <= ZERO_DATA;
 
-      data_int_scalar_adder <= ZERO_DATA;
+      data_int_scalar_integer_adder <= ZERO_DATA;
 
       data_in_scalar_exponentiator_function <= ZERO_DATA;
 
@@ -202,46 +202,46 @@ begin
 
           if (START = '1') then
             -- Control Internal
-            start_scalar_multiplier <= '1';
+            start_scalar_integer_multiplier <= '1';
 
             -- Data Inputs
-            data_a_in_scalar_multiplier <= TWO_DATA;
-            data_b_in_scalar_multiplier <= DATA_IN;
+            data_a_in_scalar_integer_multiplier <= TWO_DATA;
+            data_b_in_scalar_integer_multiplier <= DATA_IN;
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
           else
             -- Control Internal
-            start_scalar_multiplier <= '0';
+            start_scalar_integer_multiplier <= '0';
           end if;
 
         when SCALAR_MULTIPLIER_STATE =>  -- STEP 1
 
-          if (ready_scalar_multiplier = '1') then
+          if (ready_scalar_integer_multiplier = '1') then
             -- Control Internal
             start_scalar_exponentiator_function <= '1';
 
             -- Data Inputs
-            data_in_scalar_exponentiator_function <= data_out_scalar_multiplier;
+            data_in_scalar_exponentiator_function <= data_out_scalar_integer_multiplier;
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_EXPONENTIATOR_STATE;
           else
             -- Control Internal
-            start_scalar_multiplier <= '0';
+            start_scalar_integer_multiplier <= '0';
           end if;
 
         when SCALAR_EXPONENTIATOR_STATE =>  -- STEP 1
 
           if (ready_scalar_exponentiator_function = '1') then
             -- Control Internal
-            start_scalar_adder <= '1';
+            start_scalar_integer_adder <= '1';
 
-            operation_scalar_adder <= '1';
+            operation_scalar_integer_adder <= '1';
 
             -- Data Inputs
-            data_a_in_scalar_adder <= data_out_scalar_exponentiator_function;
-            data_b_in_scalar_adder <= ONE_DATA;
+            data_a_in_scalar_integer_adder <= data_out_scalar_exponentiator_function;
+            data_b_in_scalar_integer_adder <= ONE_DATA;
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_FIRST_ADDER_STATE;
@@ -252,49 +252,49 @@ begin
 
         when SCALAR_FIRST_ADDER_STATE =>  -- STEP 3
 
-          if (ready_scalar_adder = '1') then
+          if (ready_scalar_integer_adder = '1') then
             -- Control Internal
-            start_scalar_adder <= '1';
+            start_scalar_integer_adder <= '1';
 
             -- Data Internal
-            data_int_scalar_adder <= data_out_scalar_adder;
+            data_int_scalar_integer_adder <= data_out_scalar_integer_adder;
 
             -- Control Inputs
-            operation_scalar_adder <= '0';
+            operation_scalar_integer_adder <= '0';
 
             -- Data Inputs
-            data_a_in_scalar_adder <= data_out_scalar_exponentiator_function;
-            data_b_in_scalar_adder <= ONE_DATA;
+            data_a_in_scalar_integer_adder <= data_out_scalar_exponentiator_function;
+            data_b_in_scalar_integer_adder <= ONE_DATA;
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_SECOND_ADDER_STATE;
           else
             -- Control Internal
-            start_scalar_adder <= '0';
+            start_scalar_integer_adder <= '0';
           end if;
 
         when SCALAR_SECOND_ADDER_STATE =>  -- STEP 4
 
-          if (ready_scalar_adder = '1') then
+          if (ready_scalar_integer_adder = '1') then
             -- Control Internal
-            start_scalar_divider <= '1';
+            start_scalar_integer_divider <= '1';
 
             -- Data Internal
-            data_a_in_scalar_divider <= data_int_scalar_adder;
-            data_b_in_scalar_divider <= data_out_scalar_adder;
+            data_a_in_scalar_integer_divider <= data_int_scalar_integer_adder;
+            data_b_in_scalar_integer_divider <= data_out_scalar_integer_adder;
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;
           else
             -- Control Internal
-            start_scalar_adder <= '0';
+            start_scalar_integer_adder <= '0';
           end if;
 
         when SCALAR_DIVIDER_STATE =>    -- STEP 5
 
-          if (ready_scalar_divider = '1') then
+          if (ready_scalar_integer_divider = '1') then
             -- Data Outputs
-            DATA_OUT <= data_out_scalar_divider;
+            DATA_OUT <= data_out_scalar_integer_divider;
 
             -- Control Outputs
             READY <= '1';
@@ -303,7 +303,7 @@ begin
             controller_ctrl_fsm_int <= STARTER_STATE;
           else
             -- Control Internal
-            start_scalar_divider <= '0';
+            start_scalar_integer_divider <= '0';
           end if;
 
         when others =>
@@ -314,7 +314,7 @@ begin
   end process;
 
   -- SCALAR ADDER
-  scalar_adder : ntm_scalar_adder
+  scalar_integer_adder : ntm_scalar_integer_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -325,19 +325,19 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_adder,
-      READY => ready_scalar_adder,
+      START => start_scalar_integer_adder,
+      READY => ready_scalar_integer_adder,
 
-      OPERATION => operation_scalar_adder,
+      OPERATION => operation_scalar_integer_adder,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_adder,
-      DATA_B_IN => data_b_in_scalar_adder,
-      DATA_OUT  => data_out_scalar_adder
+      DATA_A_IN => data_a_in_scalar_integer_adder,
+      DATA_B_IN => data_b_in_scalar_integer_adder,
+      DATA_OUT  => data_out_scalar_integer_adder
       );
 
   -- SCALAR MULTIPLIER
-  scalar_multiplier : ntm_scalar_multiplier
+  scalar_integer_multiplier : ntm_scalar_integer_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -348,17 +348,17 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_multiplier,
-      READY => ready_scalar_multiplier,
+      START => start_scalar_integer_multiplier,
+      READY => ready_scalar_integer_multiplier,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_multiplier,
-      DATA_B_IN => data_b_in_scalar_multiplier,
-      DATA_OUT  => data_out_scalar_multiplier
+      DATA_A_IN => data_a_in_scalar_integer_multiplier,
+      DATA_B_IN => data_b_in_scalar_integer_multiplier,
+      DATA_OUT  => data_out_scalar_integer_multiplier
       );
 
   -- SCALAR DIVIDER
-  scalar_divider : ntm_scalar_divider
+  scalar_integer_divider : ntm_scalar_integer_divider
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -369,13 +369,13 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_divider,
-      READY => ready_scalar_divider,
+      START => start_scalar_integer_divider,
+      READY => ready_scalar_integer_divider,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_divider,
-      DATA_B_IN => data_b_in_scalar_divider,
-      DATA_OUT  => data_out_scalar_divider
+      DATA_A_IN => data_a_in_scalar_integer_divider,
+      DATA_B_IN => data_b_in_scalar_integer_divider,
+      DATA_OUT  => data_out_scalar_integer_divider
       );
 
   -- SCALAR EXPONENTIATOR

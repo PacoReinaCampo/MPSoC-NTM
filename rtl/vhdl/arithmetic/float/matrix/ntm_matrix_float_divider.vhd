@@ -72,7 +72,7 @@ entity ntm_matrix_float_divider is
     DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
     OVERFLOW_OUT : out std_logic
     );
 end entity;
@@ -135,7 +135,7 @@ architecture ntm_matrix_float_divider_architecture of ntm_matrix_float_divider i
   signal data_a_in_scalar_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_scalar_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_float_divider     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal overflow_out_scalar_float_divider : std_logic;
 
 begin
@@ -151,7 +151,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO_DATA;
+      DATA_OUT     <= ZERO_DATA;
       OVERFLOW_OUT <= '0';
 
       -- Control Outputs
@@ -281,7 +281,7 @@ begin
           if (ready_scalar_float_divider = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
-              DATA_OUT <= data_out_scalar_float_divider;
+              DATA_OUT     <= data_out_scalar_float_divider;
               OVERFLOW_OUT <= overflow_out_scalar_float_divider;
 
               -- Control Outputs
@@ -298,7 +298,7 @@ begin
               divider_ctrl_fsm_int <= STARTER_STATE;
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
-              DATA_OUT <= data_out_scalar_float_divider;
+              DATA_OUT     <= data_out_scalar_float_divider;
               OVERFLOW_OUT <= overflow_out_scalar_float_divider;
 
               -- Control Outputs
@@ -322,7 +322,7 @@ begin
           if (ready_scalar_float_divider = '1') then
             if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
-              DATA_OUT <= data_out_scalar_float_divider;
+              DATA_OUT     <= data_out_scalar_float_divider;
               OVERFLOW_OUT <= overflow_out_scalar_float_divider;
 
               -- Control Outputs
@@ -365,7 +365,7 @@ begin
       DATA_A_IN => data_a_in_scalar_float_divider,
       DATA_B_IN => data_b_in_scalar_float_divider,
 
-      DATA_OUT => data_out_scalar_float_divider,
+      DATA_OUT     => data_out_scalar_float_divider,
       OVERFLOW_OUT => overflow_out_scalar_float_divider
       );
 

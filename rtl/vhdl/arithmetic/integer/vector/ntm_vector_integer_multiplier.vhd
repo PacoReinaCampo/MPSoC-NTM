@@ -167,7 +167,7 @@ begin
       case multiplier_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
-          READY<= '0';
+          READY <= '0';
 
           if (START = '1') then
             -- Control Outputs

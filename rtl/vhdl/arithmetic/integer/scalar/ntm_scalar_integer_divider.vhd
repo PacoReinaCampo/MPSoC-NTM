@@ -62,7 +62,7 @@ entity ntm_scalar_integer_divider is
     DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT      : out std_logic_vector(DATA_SIZE-1 downto 0);
     REMAINDER_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
@@ -123,7 +123,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO_DATA;
+      DATA_OUT      <= ZERO_DATA;
       REMAINDER_OUT <= ZERO_DATA;
 
       -- Control Outputs
@@ -157,7 +157,7 @@ begin
 
           if (signed(DATA_B_IN) = signed(ZERO_DATA)) then
             -- Data Outputs
-            DATA_OUT <= ONE_DATA;
+            DATA_OUT      <= ONE_DATA;
             REMAINDER_OUT <= ZERO_DATA;
 
             -- Control Outputs
@@ -168,7 +168,7 @@ begin
           elsif (DATA_A_IN(DATA_SIZE-1) = '0' and DATA_B_IN(DATA_SIZE-1) = '0') then
             if (signed(DATA_B_IN) > signed(index_loop)) then
               -- Data Outputs
-              DATA_OUT <= divider_int;
+              DATA_OUT      <= divider_int;
               REMAINDER_OUT <= index_loop;
 
               -- Control Outputs
@@ -186,7 +186,7 @@ begin
           elsif (DATA_A_IN(DATA_SIZE-1) = '1' and DATA_B_IN(DATA_SIZE-1) = '0') then
             if (signed(index_loop)+signed(DATA_B_IN) > signed(ZERO_DATA)) then
               -- Data Outputs
-              DATA_OUT <= divider_int;
+              DATA_OUT      <= divider_int;
               REMAINDER_OUT <= index_loop;
 
               -- Control Outputs
@@ -204,7 +204,7 @@ begin
           elsif (DATA_A_IN(DATA_SIZE-1) = '0' and DATA_B_IN(DATA_SIZE-1) = '1') then
             if (signed(index_loop)+signed(DATA_B_IN) < signed(ZERO_DATA)) then
               -- Data Outputs
-              DATA_OUT <= divider_int;
+              DATA_OUT      <= divider_int;
               REMAINDER_OUT <= index_loop;
 
               -- Control Outputs
@@ -222,7 +222,7 @@ begin
           elsif (DATA_A_IN(DATA_SIZE-1) = '1' and DATA_B_IN(DATA_SIZE-1) = '1') then
             if (signed(DATA_B_IN) < signed(index_loop)) then
               -- Data Outputs
-              DATA_OUT <= divider_int;
+              DATA_OUT      <= divider_int;
               REMAINDER_OUT <= index_loop;
 
               -- Control Outputs

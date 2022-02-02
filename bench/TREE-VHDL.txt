@@ -2,24 +2,21 @@
 │   ├── arithmetic
 │   │   ├── float
 │   │   │   ├── matrix
-│   │   │   │   ├── ntm_matrix_adder.vhd
-│   │   │   │   ├── ntm_matrix_divider.vhd
-│   │   │   │   └── ntm_matrix_multiplier.vhd
+│   │   │   │   ├── ntm_matrix_float_adder.vhd
+│   │   │   │   ├── ntm_matrix_float_divider.vhd
+│   │   │   │   └── ntm_matrix_float_multiplier.vhd
 │   │   │   ├── scalar
-│   │   │   │   ├── ntm_scalar_adder.vhd
-│   │   │   │   ├── ntm_scalar_divider.vhd
 │   │   │   │   ├── ntm_scalar_float_adder.vhd
 │   │   │   │   ├── ntm_scalar_float_divider.vhd
-│   │   │   │   ├── ntm_scalar_float_multiplier.vhd
-│   │   │   │   └── ntm_scalar_multiplier.vhd
+│   │   │   │   └── ntm_scalar_float_multiplier.vhd
 │   │   │   ├── tensor
-│   │   │   │   ├── ntm_tensor_adder.vhd
-│   │   │   │   ├── ntm_tensor_divider.vhd
-│   │   │   │   └── ntm_tensor_multiplier.vhd
+│   │   │   │   ├── ntm_tensor_float_adder.vhd
+│   │   │   │   ├── ntm_tensor_float_divider.vhd
+│   │   │   │   └── ntm_tensor_float_multiplier.vhd
 │   │   │   └── vector
-│   │   │       ├── ntm_vector_adder.vhd
-│   │   │       ├── ntm_vector_divider.vhd
-│   │   │       └── ntm_vector_multiplier.vhd
+│   │   │       ├── ntm_vector_float_adder.vhd
+│   │   │       ├── ntm_vector_float_divider.vhd
+│   │   │       └── ntm_vector_float_multiplier.vhd
 │   │   ├── integer
 │   │   │   ├── matrix
 │   │   │   │   ├── ntm_matrix_integer_adder.vhd

@@ -2,20 +2,17 @@
 │   ├── arithmetic
 │   │   ├── float
 │   │   │   ├── matrix
-│   │   │   │   ├── ntm_matrix_adder.sv
-│   │   │   │   ├── ntm_matrix_divider.sv
-│   │   │   │   └── ntm_matrix_multiplier.sv
+│   │   │   │   ├── ntm_matrix_float_adder.sv
+│   │   │   │   ├── ntm_matrix_float_divider.sv
+│   │   │   │   └── ntm_matrix_float_multiplier.sv
 │   │   │   ├── scalar
-│   │   │   │   ├── ntm_scalar_adder.sv
-│   │   │   │   ├── ntm_scalar_divider.sv
 │   │   │   │   ├── ntm_scalar_float_adder.sv
 │   │   │   │   ├── ntm_scalar_float_divider.sv
-│   │   │   │   ├── ntm_scalar_float_multiplier.sv
-│   │   │   │   └── ntm_scalar_multiplier.sv
+│   │   │   │   └── ntm_scalar_float_multiplier.sv
 │   │   │   ├── tensor
-│   │   │   │   ├── ntm_tensor_adder.sv
-│   │   │   │   ├── ntm_tensor_divider.sv
-│   │   │   │   └── ntm_tensor_multiplier.sv
+│   │   │   │   ├── ntm_tensor_float_adder.sv
+│   │   │   │   ├── ntm_tensor_float_divider.sv
+│   │   │   │   └── ntm_tensor_float_multiplier.sv
 │   │   │   └── vector
 │   │   │       ├── ntm_vector_adder.sv
 │   │   │       ├── ntm_vector_divider.sv

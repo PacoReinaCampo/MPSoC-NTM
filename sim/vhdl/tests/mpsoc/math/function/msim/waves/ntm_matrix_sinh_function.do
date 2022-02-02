@@ -27,16 +27,10 @@ add wave -noupdate /ntm_function_testbench/ntm_matrix_sinh_function_test/matrix_
 add wave -noupdate /ntm_function_testbench/ntm_matrix_sinh_function_test/matrix_sinh_function/index_i_loop
 add wave -noupdate /ntm_function_testbench/ntm_matrix_sinh_function_test/matrix_sinh_function/index_j_loop
 
-add wave -noupdate /ntm_function_testbench/ntm_matrix_sinh_function_test/matrix_sinh_function/start_vector_sinh_function
-add wave -noupdate /ntm_function_testbench/ntm_matrix_sinh_function_test/matrix_sinh_function/ready_vector_sinh_function
-
-add wave -noupdate /ntm_function_testbench/ntm_matrix_sinh_function_test/matrix_sinh_function/data_in_enable_vector_sinh_function
-
-add wave -noupdate /ntm_function_testbench/ntm_matrix_sinh_function_test/matrix_sinh_function/data_out_enable_vector_sinh_function
-
-add wave -noupdate /ntm_function_testbench/ntm_matrix_sinh_function_test/matrix_sinh_function/size_in_vector_sinh_function
-add wave -noupdate /ntm_function_testbench/ntm_matrix_sinh_function_test/matrix_sinh_function/data_in_vector_sinh_function
-add wave -noupdate /ntm_function_testbench/ntm_matrix_sinh_function_test/matrix_sinh_function/data_out_vector_sinh_function
+add wave -noupdate /ntm_function_testbench/ntm_matrix_sinh_function_test/matrix_sinh_function/start_scalar_sinh_function
+add wave -noupdate /ntm_function_testbench/ntm_matrix_sinh_function_test/matrix_sinh_function/data_in_scalar_sinh_function
+add wave -noupdate /ntm_function_testbench/ntm_matrix_sinh_function_test/matrix_sinh_function/ready_scalar_sinh_function
+add wave -noupdate /ntm_function_testbench/ntm_matrix_sinh_function_test/matrix_sinh_function/data_out_scalar_sinh_function
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

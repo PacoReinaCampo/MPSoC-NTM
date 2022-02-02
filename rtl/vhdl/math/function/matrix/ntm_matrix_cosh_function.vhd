@@ -65,10 +65,11 @@ entity ntm_matrix_cosh_function is
     DATA_OUT_J_ENABLE : out std_logic;
 
     -- DATA
-    SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DATA_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -116,19 +117,16 @@ architecture ntm_matrix_cosh_function_architecture of ntm_matrix_cosh_function i
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- VECTOR COSH
+  -- SCALAR COSH
   -- CONTROL
-  signal start_vector_cosh_function : std_logic;
-  signal ready_vector_cosh_function : std_logic;
-
-  signal data_in_enable_vector_cosh_function : std_logic;
-
-  signal data_out_enable_vector_cosh_function : std_logic;
+  signal start_scalar_cosh_function : std_logic;
+  signal ready_scalar_cosh_function : std_logic;
 
   -- DATA
-  signal size_in_vector_cosh_function  : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_cosh_function  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_cosh_function : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_cosh_function   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_cosh_function : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_cosh_function : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -136,7 +134,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = (exponentiation(DATA_IN) + 1/exponentiation(DATA_IN))/2
+  -- DATA_OUT = cosh(DATA_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -152,16 +150,13 @@ begin
       DATA_OUT_J_ENABLE <= '0';
 
       -- Control Internal
-      start_vector_cosh_function <= '0';
+      start_scalar_cosh_function <= '0';
 
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
 
-      data_in_enable_vector_cosh_function <= '0';
-
       -- Data Internal
-      size_in_vector_cosh_function <= ZERO_CONTROL;
-      data_in_vector_cosh_function <= ZERO_DATA;
+      data_in_scalar_cosh_function <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -170,29 +165,31 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          DATA_OUT_I_ENABLE <= '0';
-          DATA_OUT_J_ENABLE <= '0';
-
           if (START = '1') then
+            -- Control Outputs
+            DATA_OUT_I_ENABLE <= '1';
+            DATA_OUT_J_ENABLE <= '1';
+
+            -- Assignations
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
             cosh_ctrl_fsm_int <= INPUT_I_STATE;
+          else
+            -- Control Outputs
+            DATA_OUT_I_ENABLE <= '0';
+            DATA_OUT_J_ENABLE <= '0';
           end if;
 
         when INPUT_I_STATE =>           -- STEP 1
 
           if ((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) then
             -- Data Inputs
-            size_in_vector_cosh_function <= SIZE_J_IN;
-
-            data_in_vector_cosh_function <= DATA_IN;
+            data_in_scalar_cosh_function <= DATA_IN;
 
             -- Control Internal
-            start_vector_cosh_function <= '1';
-
-            data_in_enable_vector_cosh_function <= '1';
+            start_scalar_cosh_function <= '1';
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
@@ -210,10 +207,10 @@ begin
 
           if (DATA_IN_J_ENABLE = '1') then
             -- Data Inputs
-            data_in_vector_cosh_function <= DATA_IN;
+            data_in_scalar_cosh_function <= DATA_IN;
 
             -- Control Internal
-            data_in_enable_vector_cosh_function <= '1';
+            start_scalar_cosh_function <= '1';
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
@@ -228,10 +225,10 @@ begin
 
         when ENDER_I_STATE =>           -- STEP 3
 
-          if (data_out_enable_vector_cosh_function = '1') then
+          if (ready_scalar_cosh_function = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_cosh_function;
+              DATA_OUT <= data_out_scalar_cosh_function;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -247,7 +244,7 @@ begin
               cosh_ctrl_fsm_int <= STARTER_STATE;
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_cosh_function;
+              DATA_OUT <= data_out_scalar_cosh_function;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -262,17 +259,15 @@ begin
             end if;
           else
             -- Control Internal
-            start_vector_cosh_function <= '0';
-
-            data_in_enable_vector_cosh_function <= '0';
+            start_scalar_cosh_function <= '0';
           end if;
 
-        when ENDER_J_STATE =>           -- STEP 4
+        when ENDER_J_STATE =>           -- STEP 3
 
-          if (data_out_enable_vector_cosh_function = '1') then
+          if (ready_scalar_cosh_function = '1') then
             if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
-              DATA_OUT <= data_out_vector_cosh_function;
+              DATA_OUT <= data_out_scalar_cosh_function;
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';
@@ -285,9 +280,7 @@ begin
             end if;
           else
             -- Control Internal
-            start_vector_cosh_function <= '0';
-
-            data_in_enable_vector_cosh_function <= '0';
+            start_scalar_cosh_function <= '0';
           end if;
 
         when others =>
@@ -297,8 +290,8 @@ begin
     end if;
   end process;
 
-  -- VECTOR COSH
-  vector_cosh_function : ntm_vector_cosh_function
+  -- SCALAR COSH
+  scalar_cosh_function : ntm_scalar_cosh_function
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -309,17 +302,12 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_cosh_function,
-      READY => ready_vector_cosh_function,
-
-      DATA_IN_ENABLE => data_in_enable_vector_cosh_function,
-
-      DATA_OUT_ENABLE => data_out_enable_vector_cosh_function,
+      START => start_scalar_cosh_function,
+      READY => ready_scalar_cosh_function,
 
       -- DATA
-      SIZE_IN  => size_in_vector_cosh_function,
-      DATA_IN  => data_in_vector_cosh_function,
-      DATA_OUT => data_out_vector_cosh_function
+      DATA_IN  => data_in_scalar_cosh_function,
+      DATA_OUT => data_out_scalar_cosh_function
       );
 
 end architecture;

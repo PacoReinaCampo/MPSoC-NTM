@@ -1087,7 +1087,7 @@ begin
         -- INITIAL CONDITIONS
         -- DATA
         MATRIX_MODULAR_MOD_DATA_IN <= ZERO_DATA;
-        
+
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
         index_j_loop <= ZERO_CONTROL;
@@ -1147,7 +1147,7 @@ begin
         -- INITIAL CONDITIONS
         -- DATA
         MATRIX_MODULAR_MOD_DATA_IN <= ZERO_DATA;
-        
+
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
         index_j_loop <= ZERO_CONTROL;
@@ -1548,7 +1548,7 @@ begin
           if (MATRIX_MODULAR_INVERTER_DATA_OUT_I_ENABLE = '1' and MATRIX_MODULAR_INVERTER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             MATRIX_MODULAR_INVERTER_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-            
+
             -- CONTROL
             MATRIX_MODULAR_INVERTER_DATA_IN_I_ENABLE <= '1';
             MATRIX_MODULAR_INVERTER_DATA_IN_J_ENABLE <= '1';

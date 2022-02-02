@@ -68,7 +68,7 @@ entity ntm_vector_integer_divider is
     DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_OUT      : out std_logic_vector(DATA_SIZE-1 downto 0);
     REMAINDER_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
@@ -123,10 +123,10 @@ architecture ntm_vector_integer_divider_architecture of ntm_vector_integer_divid
   signal ready_scalar_integer_divider : std_logic;
 
   -- DATA
-  signal remainder_out_scalar_integer_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_integer_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal remainder_out_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_integer_divider     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_integer_divider     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_integer_divider      : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -141,7 +141,7 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO_DATA;
+      DATA_OUT      <= ZERO_DATA;
       REMAINDER_OUT <= ZERO_DATA;
 
       -- Control Outputs
@@ -235,7 +235,7 @@ begin
             end if;
 
             -- Data Outputs
-            DATA_OUT <= data_out_scalar_integer_divider;
+            DATA_OUT      <= data_out_scalar_integer_divider;
             REMAINDER_OUT <= remainder_out_scalar_integer_divider;
 
             -- Control Outputs
@@ -274,7 +274,7 @@ begin
       DATA_A_IN => data_a_in_scalar_integer_divider,
       DATA_B_IN => data_b_in_scalar_integer_divider,
 
-      DATA_OUT => data_out_scalar_integer_divider,
+      DATA_OUT      => data_out_scalar_integer_divider,
       REMAINDER_OUT => remainder_out_scalar_integer_divider
       );
 

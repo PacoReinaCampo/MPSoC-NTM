@@ -232,7 +232,7 @@ package ntm_integer_pkg is
       SCALAR_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      SCALAR_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_INTEGER_DIVIDER_DATA_OUT      : in std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_INTEGER_DIVIDER_REMAINDER_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
@@ -292,7 +292,7 @@ package ntm_integer_pkg is
       VECTOR_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      VECTOR_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_INTEGER_DIVIDER_DATA_OUT      : in std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_INTEGER_DIVIDER_REMAINDER_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
@@ -364,7 +364,7 @@ package ntm_integer_pkg is
       MATRIX_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MATRIX_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_INTEGER_DIVIDER_DATA_OUT      : in std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_INTEGER_DIVIDER_REMAINDER_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
@@ -448,7 +448,7 @@ package ntm_integer_pkg is
       TENSOR_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      TENSOR_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_INTEGER_DIVIDER_DATA_OUT      : in std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_INTEGER_DIVIDER_REMAINDER_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;

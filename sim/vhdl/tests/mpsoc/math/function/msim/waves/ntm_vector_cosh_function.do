@@ -6,39 +6,26 @@ add wave -noupdate /ntm_function_pkg/MONITOR_TEST
 add wave -noupdate /ntm_function_pkg/MONITOR_CASE
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM SCALAR COSH TEST}
+add wave -noupdate -divider {NTM VECTOR COSH TEST}
 add wave -noupdate -divider {=========================================}
 
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/CLK
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/RST
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/START
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/DATA_IN
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/READY
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/DATA_OUT
+add wave -noupdate /ntm_function_testbench/ntm_vector_cosh_function_test/vector_cosh_function/CLK
+add wave -noupdate /ntm_function_testbench/ntm_vector_cosh_function_test/vector_cosh_function/RST
+add wave -noupdate /ntm_function_testbench/ntm_vector_cosh_function_test/vector_cosh_function/START
+add wave -noupdate /ntm_function_testbench/ntm_vector_cosh_function_test/vector_cosh_function/SIZE_IN
+add wave -noupdate /ntm_function_testbench/ntm_vector_cosh_function_test/vector_cosh_function/DATA_IN_ENABLE
+add wave -noupdate /ntm_function_testbench/ntm_vector_cosh_function_test/vector_cosh_function/DATA_IN
+add wave -noupdate /ntm_function_testbench/ntm_vector_cosh_function_test/vector_cosh_function/READY
+add wave -noupdate /ntm_function_testbench/ntm_vector_cosh_function_test/vector_cosh_function/DATA_OUT_ENABLE
+add wave -noupdate /ntm_function_testbench/ntm_vector_cosh_function_test/vector_cosh_function/index_loop
+add wave -noupdate /ntm_function_testbench/ntm_vector_cosh_function_test/vector_cosh_function/DATA_OUT
 
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/controller_ctrl_fsm_int
+add wave -noupdate /ntm_function_testbench/ntm_vector_cosh_function_test/vector_cosh_function/cosh_ctrl_fsm_int
 
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/index_adder_loop
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/index_multiplier_loop
-
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/start_scalar_adder
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/operation_scalar_adder
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/data_a_in_scalar_adder
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/data_b_in_scalar_adder
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/ready_scalar_adder
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/data_out_scalar_adder
-
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/start_scalar_multiplier
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/data_a_in_scalar_multiplier
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/data_b_in_scalar_multiplier
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/ready_scalar_multiplier
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/data_out_scalar_multiplier
-
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/start_scalar_divider
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/data_a_in_scalar_divider
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/data_b_in_scalar_divider
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/ready_scalar_divider
-add wave -noupdate /ntm_function_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/data_out_scalar_divider
+add wave -noupdate /ntm_function_testbench/ntm_vector_cosh_function_test/vector_cosh_function/start_scalar_cosh_function
+add wave -noupdate /ntm_function_testbench/ntm_vector_cosh_function_test/vector_cosh_function/data_in_scalar_cosh_function
+add wave -noupdate /ntm_function_testbench/ntm_vector_cosh_function_test/vector_cosh_function/ready_scalar_cosh_function
+add wave -noupdate /ntm_function_testbench/ntm_vector_cosh_function_test/vector_cosh_function/data_out_scalar_cosh_function
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}
