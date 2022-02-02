@@ -16,7 +16,10 @@ alias ntm_scalar_logistic_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_exponentiator_function.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_logarithm_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_logistic_function.vhd
 }
 
@@ -28,6 +31,8 @@ alias ntm_scalar_oneplus_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_oneplus_function.vhd
 }
@@ -43,6 +48,7 @@ alias ntm_vector_logistic_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_exponentiator_function.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_logarithm_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_logistic_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/ntm_vector_logistic_function.vhd
 }
@@ -55,6 +61,8 @@ alias ntm_vector_oneplus_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_oneplus_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/ntm_vector_oneplus_function.vhd
@@ -71,6 +79,7 @@ alias ntm_matrix_logistic_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_exponentiator_function.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_logarithm_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_logistic_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/ntm_vector_logistic_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/function/matrix/ntm_matrix_logistic_function.vhd
@@ -84,7 +93,8 @@ alias ntm_matrix_oneplus_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_exponentiator_function.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/function/scalar/ntm_scalar_oneplus_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/function/vector/ntm_vector_oneplus_function.vhd

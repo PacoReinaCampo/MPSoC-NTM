@@ -95,7 +95,7 @@ architecture ntm_scalar_sinh_function_architecture of ntm_scalar_sinh_function i
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
-  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(5, DATA_SIZE));
+  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(2, DATA_SIZE));
 
   -----------------------------------------------------------------------
   -- Signals
@@ -197,8 +197,8 @@ begin
             index_multiplier_loop <= ZERO_DATA;
 
             -- Data Input
-            data_a_in_scalar_integer_multiplier <= DATA_IN;
-            data_b_in_scalar_integer_multiplier <= ZERO_DATA;
+            data_a_in_scalar_integer_multiplier <= ONE_DATA;
+            data_b_in_scalar_integer_multiplier <= ONE_DATA;
 
             data_int_scalar_integer_multiplier <= ZERO_DATA;
 
@@ -216,8 +216,8 @@ begin
               start_scalar_integer_multiplier <= '1';
 
               -- Data Internal
-              data_a_in_scalar_integer_multiplier <= ZERO_DATA;
-              data_b_in_scalar_integer_multiplier <= ZERO_DATA;
+              data_a_in_scalar_integer_multiplier <= ONE_DATA;
+              data_b_in_scalar_integer_multiplier <= ONE_DATA;
 
               data_int_scalar_integer_multiplier <= data_out_scalar_integer_multiplier;
 
@@ -227,6 +227,8 @@ begin
               controller_ctrl_fsm_int <= SCALAR_SECOND_MULTIPLIER_STATE;
             else
               -- Data Internal
+              data_a_in_scalar_integer_multiplier <= DATA_IN;
+
               if (signed(index_multiplier_loop) = signed(ZERO_DATA)) then
                 data_b_in_scalar_integer_multiplier <= ONE_DATA;
               else
@@ -253,8 +255,8 @@ begin
               start_scalar_integer_divider <= '1';
 
               -- Data Internal
-              data_a_in_scalar_integer_divider <= data_out_scalar_integer_multiplier;
-              data_b_in_scalar_integer_divider <= data_int_scalar_integer_multiplier;
+              data_a_in_scalar_integer_divider <= data_int_scalar_integer_multiplier;
+              data_b_in_scalar_integer_divider <= data_out_scalar_integer_multiplier;
 
               index_multiplier_loop <= ZERO_DATA;
 
@@ -262,6 +264,8 @@ begin
               controller_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;
             else
               -- Data Internal
+              data_a_in_scalar_integer_multiplier <= std_logic_vector((signed(index_adder_loop) sll 1)+signed(ONE_DATA));
+
               if (signed(index_multiplier_loop) = signed(ZERO_DATA)) then
                 data_b_in_scalar_integer_multiplier <= ONE_DATA;
               else
@@ -284,7 +288,11 @@ begin
             -- Control Internal
             start_scalar_integer_adder <= '1';
 
-            operation_scalar_integer_adder <= '0';
+            if (index_adder_loop(0) = '0') then
+              operation_scalar_integer_adder <= '1';
+            else
+              operation_scalar_integer_adder <= '0';
+            end if;
 
             -- Data Internal
             data_a_in_scalar_integer_adder <= data_out_scalar_integer_divider;
@@ -322,8 +330,8 @@ begin
               index_adder_loop <= std_logic_vector(signed(index_adder_loop)+signed(ONE_DATA));
 
               -- Data Input
-              data_a_in_scalar_integer_multiplier <= DATA_IN;
-              data_b_in_scalar_integer_multiplier <= ZERO_DATA;
+              data_a_in_scalar_integer_multiplier <= ONE_DATA;
+              data_b_in_scalar_integer_multiplier <= ONE_DATA;
 
               -- FSM Control
               controller_ctrl_fsm_int <= SCALAR_FIRST_MULTIPLIER_STATE;

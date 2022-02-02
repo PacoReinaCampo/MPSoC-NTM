@@ -128,12 +128,12 @@ architecture ntm_scalar_oneplus_function_architecture of ntm_scalar_oneplus_func
 
   -- SCALAR LOGARITHM
   -- CONTROL
-  signal start_scalar_logarithm : std_logic;
-  signal ready_scalar_logarithm : std_logic;
+  signal start_scalar_logarithm_function : std_logic;
+  signal ready_scalar_logarithm_function : std_logic;
 
   -- DATA
-  signal data_in_scalar_logarithm  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logarithm : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_logarithm_function  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_logarithm_function : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -208,10 +208,10 @@ begin
 
           if (ready_scalar_integer_adder = '1') then
             -- Control Internal
-            start_scalar_logarithm <= '1';
+            start_scalar_logarithm_function <= '1';
 
             -- Data Internal
-            data_in_scalar_logarithm <= data_out_scalar_integer_adder;
+            data_in_scalar_logarithm_function <= data_out_scalar_integer_adder;
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_LOGARITHM_STATE;
@@ -222,7 +222,7 @@ begin
 
         when SCALAR_LOGARITHM_STATE =>  -- STEP 3
 
-          if (ready_scalar_logarithm = '1') then
+          if (ready_scalar_logarithm_function = '1') then
             -- Control Internal
             start_scalar_integer_adder <= '1';
 
@@ -230,13 +230,13 @@ begin
 
             -- Data Internal
             data_a_in_scalar_integer_adder <= ONE_DATA;
-            data_b_in_scalar_integer_adder <= data_out_scalar_logarithm;
+            data_b_in_scalar_integer_adder <= data_out_scalar_logarithm_function;
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_SECOND_ADDER_STATE;
           else
             -- Control Internal
-            start_scalar_logarithm <= '0';
+            start_scalar_logarithm_function <= '0';
           end if;
 
         when SCALAR_SECOND_ADDER_STATE =>      -- STEP 4
@@ -252,7 +252,7 @@ begin
             controller_ctrl_fsm_int <= STARTER_STATE;
           else
             -- Control Internal
-            start_scalar_exponentiator_function <= '0';
+            start_scalar_integer_adder <= '0';
           end if;
 
         when others =>
@@ -303,6 +303,26 @@ begin
       -- DATA
       DATA_IN  => data_in_scalar_exponentiator_function,
       DATA_OUT => data_out_scalar_exponentiator_function
+      );
+
+  -- SCALAR LOGARITHM
+  scalar_logarithm_function : ntm_scalar_logarithm_function
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_scalar_logarithm_function,
+      READY => ready_scalar_logarithm_function,
+
+      -- DATA
+      DATA_IN  => data_in_scalar_logarithm_function,
+      DATA_OUT => data_out_scalar_logarithm_function
       );
 
 end architecture;
