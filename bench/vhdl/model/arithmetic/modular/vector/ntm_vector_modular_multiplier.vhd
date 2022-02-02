@@ -165,20 +165,25 @@ begin
       case multiplier_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
-          READY           <= '0';
-          DATA_OUT_ENABLE <= '0';
+          READY <= '0';
 
           if (START = '1') then
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '1';
+
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
             multiplier_ctrl_fsm_int <= INPUT_STATE;
+          else
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '0';
           end if;
 
         when INPUT_STATE =>             -- STEP 1
 
-          if ((DATA_A_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
+          if (DATA_A_IN_ENABLE = '1') then
             -- Data Inputs
             data_a_in_scalar_multiplier <= DATA_A_IN;
 
@@ -186,7 +191,7 @@ begin
             data_a_in_multiplier_int <= '1';
           end if;
 
-          if ((DATA_B_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
+          if (DATA_B_IN_ENABLE = '1') then
             -- Data Inputs
             data_b_in_scalar_multiplier <= DATA_B_IN;
 

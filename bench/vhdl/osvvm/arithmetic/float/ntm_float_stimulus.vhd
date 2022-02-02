@@ -226,7 +226,91 @@ entity ntm_float_stimulus is
     MATRIX_FLOAT_DIVIDER_DATA_A_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_FLOAT_DIVIDER_DATA_B_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
     MATRIX_FLOAT_DIVIDER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_FLOAT_DIVIDER_OVERFLOW_OUT : in  std_logic
+    MATRIX_FLOAT_DIVIDER_OVERFLOW_OUT : in  std_logic;
+
+    -----------------------------------------------------------------------
+    -- STIMULUS TENSOR
+    -----------------------------------------------------------------------
+
+    -- TENSOR ADDER
+    -- CONTROL
+    TENSOR_FLOAT_ADDER_START : out std_logic;
+    TENSOR_FLOAT_ADDER_READY : in  std_logic;
+
+    TENSOR_FLOAT_ADDER_OPERATION : out std_logic;
+
+    TENSOR_FLOAT_ADDER_DATA_A_IN_I_ENABLE : out std_logic;
+    TENSOR_FLOAT_ADDER_DATA_A_IN_J_ENABLE : out std_logic;
+    TENSOR_FLOAT_ADDER_DATA_A_IN_K_ENABLE : out std_logic;
+    TENSOR_FLOAT_ADDER_DATA_B_IN_I_ENABLE : out std_logic;
+    TENSOR_FLOAT_ADDER_DATA_B_IN_J_ENABLE : out std_logic;
+    TENSOR_FLOAT_ADDER_DATA_B_IN_K_ENABLE : out std_logic;
+
+    TENSOR_FLOAT_ADDER_DATA_OUT_I_ENABLE : in std_logic;
+    TENSOR_FLOAT_ADDER_DATA_OUT_J_ENABLE : in std_logic;
+    TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE : in std_logic;
+
+    -- DATA
+    TENSOR_FLOAT_ADDER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_FLOAT_ADDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_FLOAT_ADDER_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_FLOAT_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_FLOAT_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    TENSOR_FLOAT_ADDER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_FLOAT_ADDER_OVERFLOW_OUT : in std_logic;
+
+    -- TENSOR MULTIPLIER
+    -- CONTROL
+    TENSOR_FLOAT_MULTIPLIER_START : out std_logic;
+    TENSOR_FLOAT_MULTIPLIER_READY : in  std_logic;
+
+    TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE : out std_logic;
+    TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE : out std_logic;
+    TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_K_ENABLE : out std_logic;
+    TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE : out std_logic;
+    TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE : out std_logic;
+    TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_K_ENABLE : out std_logic;
+
+    TENSOR_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE : in std_logic;
+    TENSOR_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE : in std_logic;
+    TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE : in std_logic;
+
+    -- DATA
+    TENSOR_FLOAT_MULTIPLIER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_FLOAT_MULTIPLIER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_FLOAT_MULTIPLIER_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_FLOAT_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_FLOAT_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    TENSOR_FLOAT_MULTIPLIER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_FLOAT_MULTIPLIER_OVERFLOW_OUT : in std_logic;
+
+    -- TENSOR DIVIDER
+    -- CONTROL
+    TENSOR_FLOAT_DIVIDER_START : out std_logic;
+    TENSOR_FLOAT_DIVIDER_READY : in  std_logic;
+
+    TENSOR_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE : out std_logic;
+    TENSOR_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE : out std_logic;
+    TENSOR_FLOAT_DIVIDER_DATA_A_IN_K_ENABLE : out std_logic;
+    TENSOR_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE : out std_logic;
+    TENSOR_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE : out std_logic;
+    TENSOR_FLOAT_DIVIDER_DATA_B_IN_K_ENABLE : out std_logic;
+
+    TENSOR_FLOAT_DIVIDER_DATA_OUT_I_ENABLE : in std_logic;
+    TENSOR_FLOAT_DIVIDER_DATA_OUT_J_ENABLE : in std_logic;
+    TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE : in std_logic;
+
+    -- DATA
+    TENSOR_FLOAT_DIVIDER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_FLOAT_DIVIDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_FLOAT_DIVIDER_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_FLOAT_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_FLOAT_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    TENSOR_FLOAT_DIVIDER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_FLOAT_DIVIDER_OVERFLOW_OUT : in std_logic
     );
 end entity;
 
@@ -268,8 +352,9 @@ architecture ntm_float_stimulus_architecture of ntm_float_stimulus is
   -----------------------------------------------------------------------
 
   -- LOOP
-  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0) := ZERO_CONTROL;
-  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0) := ZERO_CONTROL;
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- GLOBAL
   signal clk_int : std_logic;
@@ -335,6 +420,11 @@ begin
   MATRIX_FLOAT_ADDER_START      <= start_int;
   MATRIX_FLOAT_MULTIPLIER_START <= start_int;
   MATRIX_FLOAT_DIVIDER_START    <= start_int;
+
+  -- TENSOR-FUNCTIONALITY
+  TENSOR_FLOAT_ADDER_START      <= start_int;
+  TENSOR_FLOAT_MULTIPLIER_START <= start_int;
+  TENSOR_FLOAT_DIVIDER_START    <= start_int;
 
   -----------------------------------------------------------------------
   -- STIMULUS
@@ -463,19 +553,26 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_FLOAT_ADDER_DATA_A_IN_ENABLE <= '1';
-        VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_FLOAT_ADDER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-        VECTOR_FLOAT_ADDER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+        VECTOR_FLOAT_ADDER_DATA_A_IN <= ZERO_DATA;
+        VECTOR_FLOAT_ADDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_FLOAT_ADDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_FLOAT_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_FLOAT_ADDER_FIRST_RUN : loop
+          if (VECTOR_FLOAT_ADDER_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_FLOAT_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_FLOAT_ADDER_DATA_A_IN_ENABLE <= '1';
+            VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_FLOAT_ADDER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            VECTOR_FLOAT_ADDER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_FLOAT_ADDER_DATA_OUT_ENABLE = '1' or VECTOR_FLOAT_ADDER_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_FLOAT_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_FLOAT_ADDER_DATA_A_IN_ENABLE <= '1';
             VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '1';
@@ -492,12 +589,12 @@ begin
             VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_FLOAT_ADDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
-        end loop;
+
+          -- CONTROL
+          exit VECTOR_FLOAT_ADDER_FIRST_RUN when VECTOR_FLOAT_ADDER_READY = '1';
+        end loop VECTOR_FLOAT_ADDER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_VECTOR_FLOAT_ADDER_CASE_1) then
@@ -507,19 +604,26 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_FLOAT_ADDER_DATA_A_IN_ENABLE <= '1';
-        VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_FLOAT_ADDER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-        VECTOR_FLOAT_ADDER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+        VECTOR_FLOAT_ADDER_DATA_A_IN <= ZERO_DATA;
+        VECTOR_FLOAT_ADDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_FLOAT_ADDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_FLOAT_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_FLOAT_ADDER_SECOND_RUN : loop
+          if (VECTOR_FLOAT_ADDER_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_FLOAT_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_FLOAT_ADDER_DATA_A_IN_ENABLE <= '1';
+            VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_FLOAT_ADDER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            VECTOR_FLOAT_ADDER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_FLOAT_ADDER_DATA_OUT_ENABLE = '1' or VECTOR_FLOAT_ADDER_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_FLOAT_ADDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_FLOAT_ADDER_DATA_A_IN_ENABLE <= '1';
             VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '1';
@@ -536,12 +640,12 @@ begin
             VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_FLOAT_ADDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
-        end loop;
+
+          -- CONTROL
+          exit VECTOR_FLOAT_ADDER_SECOND_RUN when VECTOR_FLOAT_ADDER_READY = '1';
+        end loop VECTOR_FLOAT_ADDER_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -564,19 +668,26 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_FLOAT_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
-        VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-        VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+        VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= ZERO_DATA;
+        VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_FLOAT_MULTIPLIER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_FLOAT_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_FLOAT_MULTIPLIER_FIRST_RUN : loop
+          if (VECTOR_FLOAT_MULTIPLIER_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_FLOAT_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_FLOAT_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
+            VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_FLOAT_MULTIPLIER_DATA_OUT_ENABLE = '1' or VECTOR_FLOAT_MULTIPLIER_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_FLOAT_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_FLOAT_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
             VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
@@ -593,12 +704,12 @@ begin
             VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_FLOAT_MULTIPLIER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
-        end loop;
+
+          -- CONTROL
+          exit VECTOR_FLOAT_MULTIPLIER_FIRST_RUN when VECTOR_FLOAT_MULTIPLIER_READY = '1';
+        end loop VECTOR_FLOAT_MULTIPLIER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_VECTOR_FLOAT_MULTIPLIER_CASE_1) then
@@ -608,19 +719,26 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_FLOAT_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
-        VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-        VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+        VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= ZERO_DATA;
+        VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_FLOAT_MULTIPLIER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_FLOAT_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_FLOAT_MULTIPLIER_SECOND_RUN : loop
+          if (VECTOR_FLOAT_MULTIPLIER_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_FLOAT_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_FLOAT_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
+            VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_FLOAT_MULTIPLIER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            VECTOR_FLOAT_MULTIPLIER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_FLOAT_MULTIPLIER_DATA_OUT_ENABLE = '1' or VECTOR_FLOAT_MULTIPLIER_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_FLOAT_MULTIPLIER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_FLOAT_MULTIPLIER_DATA_A_IN_ENABLE <= '1';
             VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '1';
@@ -637,12 +755,12 @@ begin
             VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_FLOAT_MULTIPLIER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
-        end loop;
+
+          -- CONTROL
+          exit VECTOR_FLOAT_MULTIPLIER_SECOND_RUN when VECTOR_FLOAT_MULTIPLIER_READY = '1';
+        end loop VECTOR_FLOAT_MULTIPLIER_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -665,19 +783,26 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_FLOAT_DIVIDER_DATA_A_IN_ENABLE <= '1';
-        VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_FLOAT_DIVIDER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-        VECTOR_FLOAT_DIVIDER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+        VECTOR_FLOAT_DIVIDER_DATA_A_IN <= ZERO_DATA;
+        VECTOR_FLOAT_DIVIDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_FLOAT_DIVIDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_FLOAT_DIVIDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_FLOAT_DIVIDER_FIRST_RUN : loop
+          if (VECTOR_FLOAT_DIVIDER_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_FLOAT_DIVIDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_FLOAT_DIVIDER_DATA_A_IN_ENABLE <= '1';
+            VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_FLOAT_DIVIDER_DATA_A_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+            VECTOR_FLOAT_DIVIDER_DATA_B_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_FLOAT_DIVIDER_DATA_OUT_ENABLE = '1' or VECTOR_FLOAT_DIVIDER_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_FLOAT_DIVIDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_FLOAT_DIVIDER_DATA_A_IN_ENABLE <= '1';
             VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '1';
@@ -694,12 +819,12 @@ begin
             VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_FLOAT_DIVIDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
-        end loop;
+
+          -- CONTROL
+          exit VECTOR_FLOAT_DIVIDER_FIRST_RUN when VECTOR_FLOAT_DIVIDER_READY = '1';
+        end loop VECTOR_FLOAT_DIVIDER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_VECTOR_FLOAT_DIVIDER_CASE_1) then
@@ -709,19 +834,26 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        VECTOR_FLOAT_DIVIDER_DATA_A_IN_ENABLE <= '1';
-        VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '1';
-
         -- DATA
-        VECTOR_FLOAT_DIVIDER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-        VECTOR_FLOAT_DIVIDER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+        VECTOR_FLOAT_DIVIDER_DATA_A_IN <= ZERO_DATA;
+        VECTOR_FLOAT_DIVIDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
 
-        loop
-          if ((VECTOR_FLOAT_DIVIDER_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ONE_CONTROL)) and (unsigned(index_i_loop) <= unsigned(VECTOR_FLOAT_DIVIDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+        VECTOR_FLOAT_DIVIDER_SECOND_RUN : loop
+          if (VECTOR_FLOAT_DIVIDER_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_FLOAT_DIVIDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            VECTOR_FLOAT_DIVIDER_DATA_A_IN_ENABLE <= '1';
+            VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '1';
+
+            -- DATA
+            VECTOR_FLOAT_DIVIDER_DATA_A_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+            VECTOR_FLOAT_DIVIDER_DATA_B_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((VECTOR_FLOAT_DIVIDER_DATA_OUT_ENABLE = '1' or VECTOR_FLOAT_DIVIDER_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_FLOAT_DIVIDER_SIZE_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             VECTOR_FLOAT_DIVIDER_DATA_A_IN_ENABLE <= '1';
             VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '1';
@@ -738,12 +870,12 @@ begin
             VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE <= '0';
           end if;
 
-          -- CONTROL
-          exit when VECTOR_FLOAT_DIVIDER_READY = '1';
-
           -- GLOBAL
           wait until rising_edge(clk_int);
-        end loop;
+
+          -- CONTROL
+          exit VECTOR_FLOAT_DIVIDER_SECOND_RUN when VECTOR_FLOAT_DIVIDER_READY = '1';
+        end loop VECTOR_FLOAT_DIVIDER_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -774,46 +906,43 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_FLOAT_ADDER_DATA_B_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-        MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+        MATRIX_FLOAT_ADDER_DATA_A_IN <= ZERO_DATA;
+        MATRIX_FLOAT_ADDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_FLOAT_ADDER_DATA_OUT_I_ENABLE = '1') and (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_FLOAT_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_FLOAT_ADDER_FIRST_RUN : loop
+          if (MATRIX_FLOAT_ADDER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_ADDER_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_FLOAT_ADDER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
             MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_FLOAT_ADDER_DATA_OUT_I_ENABLE = '0') and (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_FLOAT_ADDER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-            MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '0';
@@ -822,12 +951,23 @@ begin
             MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_FLOAT_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_FLOAT_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' or MATRIX_FLOAT_ADDER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_FLOAT_ADDER_READY = '1';
-        end loop;
+          exit MATRIX_FLOAT_ADDER_FIRST_RUN when MATRIX_FLOAT_ADDER_READY = '1';
+        end loop MATRIX_FLOAT_ADDER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_MATRIX_FLOAT_ADDER_CASE_1) then
@@ -837,46 +977,43 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_FLOAT_ADDER_DATA_B_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-        MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+        MATRIX_FLOAT_ADDER_DATA_A_IN <= ZERO_DATA;
+        MATRIX_FLOAT_ADDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_FLOAT_ADDER_DATA_OUT_I_ENABLE = '1') and (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_FLOAT_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_FLOAT_ADDER_SECOND_RUN : loop
+          if (MATRIX_FLOAT_ADDER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_ADDER_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_FLOAT_ADDER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
             MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_FLOAT_ADDER_DATA_OUT_I_ENABLE = '0') and (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_FLOAT_ADDER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_FLOAT_ADDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-            MATRIX_FLOAT_ADDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '0';
@@ -885,12 +1022,23 @@ begin
             MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_FLOAT_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_FLOAT_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' or MATRIX_FLOAT_ADDER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_FLOAT_ADDER_READY = '1';
-        end loop;
+          exit MATRIX_FLOAT_ADDER_SECOND_RUN when MATRIX_FLOAT_ADDER_READY = '1';
+        end loop MATRIX_FLOAT_ADDER_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -914,46 +1062,43 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= ZERO_DATA;
+        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '1') and (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_FLOAT_MULTIPLIER_FIRST_RUN : loop
+          if (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '0') and (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
@@ -962,12 +1107,23 @@ begin
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' or MATRIX_FLOAT_MULTIPLIER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_FLOAT_MULTIPLIER_READY = '1';
-        end loop;
+          exit MATRIX_FLOAT_MULTIPLIER_FIRST_RUN when MATRIX_FLOAT_MULTIPLIER_READY = '1';
+        end loop MATRIX_FLOAT_MULTIPLIER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_CASE_1) then
@@ -977,46 +1133,43 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+        MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= ZERO_DATA;
+        MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '1') and (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_FLOAT_MULTIPLIER_SECOND_RUN : loop
+          if (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '0') and (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_FLOAT_MULTIPLIER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-            MATRIX_FLOAT_MULTIPLIER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
@@ -1025,12 +1178,23 @@ begin
             MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' or MATRIX_FLOAT_MULTIPLIER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_FLOAT_MULTIPLIER_READY = '1';
-        end loop;
+          exit MATRIX_FLOAT_MULTIPLIER_SECOND_RUN when MATRIX_FLOAT_MULTIPLIER_READY = '1';
+        end loop MATRIX_FLOAT_MULTIPLIER_SECOND_RUN;
       end if;
 
       wait for WORKING;
@@ -1054,46 +1218,43 @@ begin
         -------------------------------------------------------------------
 
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-        MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+        MATRIX_FLOAT_DIVIDER_DATA_A_IN <= ZERO_DATA;
+        MATRIX_FLOAT_DIVIDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '1') and (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_FLOAT_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_FLOAT_DIVIDER_FIRST_RUN : loop
+          if (MATRIX_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
             MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '0') and (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '0';
@@ -1102,12 +1263,23 @@ begin
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_FLOAT_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_FLOAT_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' or MATRIX_FLOAT_DIVIDER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_FLOAT_DIVIDER_READY = '1';
-        end loop;
+          exit MATRIX_FLOAT_DIVIDER_FIRST_RUN when MATRIX_FLOAT_DIVIDER_READY = '1';
+        end loop MATRIX_FLOAT_DIVIDER_FIRST_RUN;
       end if;
 
       if (STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_CASE_1) then
@@ -1116,48 +1288,44 @@ begin
         MONITOR_CASE <= "STIMULUS_NTM_MATRIX_DIVIDER_CASE 1      ";
         -------------------------------------------------------------------
 
-
         -- INITIAL CONDITIONS
-        -- CONTROL
-        MATRIX_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
-        MATRIX_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE <= '0';
-        MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
-
         -- DATA
-        MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-        MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+        MATRIX_FLOAT_DIVIDER_DATA_A_IN <= ZERO_DATA;
+        MATRIX_FLOAT_DIVIDER_DATA_B_IN <= ZERO_DATA;
 
         -- LOOP
-        index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-        index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
 
-        loop
-          if ((MATRIX_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '1') and (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_i_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_i_loop) <= unsigned(MATRIX_FLOAT_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL))) then
+        MATRIX_FLOAT_DIVIDER_SECOND_RUN : loop
+          if (MATRIX_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
-
+          elsif (MATRIX_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '1' and MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
             MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
             MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '0') and (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1') and (unsigned(index_j_loop) >= unsigned(ZERO_CONTROL)) and (unsigned(index_j_loop) <= unsigned(MATRIX_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
+          elsif (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+
             -- CONTROL
             MATRIX_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
-
-            -- DATA
-            MATRIX_FLOAT_DIVIDER_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-            MATRIX_FLOAT_DIVIDER_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- LOOP
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           else
             -- CONTROL
             MATRIX_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '0';
@@ -1166,12 +1334,633 @@ begin
             MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '0';
           end if;
 
+          -- LOOP
+          if (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_FLOAT_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+          elsif (MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_FLOAT_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+          elsif ((MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' or MATRIX_FLOAT_DIVIDER_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+          end if;
+
           -- GLOBAL
           wait until rising_edge(clk_int);
 
           -- CONTROL
-          exit when MATRIX_FLOAT_DIVIDER_READY = '1';
-        end loop;
+          exit MATRIX_FLOAT_DIVIDER_SECOND_RUN when MATRIX_FLOAT_DIVIDER_READY = '1';
+        end loop MATRIX_FLOAT_DIVIDER_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    -------------------------------------------------------------------
+    -- TENSOR-FLOAT
+    -------------------------------------------------------------------
+
+    if (STIMULUS_NTM_TENSOR_FLOAT_ADDER_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_TENSOR_ADDER_TEST          ";
+      -------------------------------------------------------------------
+
+      -- CONTROL
+      TENSOR_FLOAT_ADDER_OPERATION <= '0';
+
+      -- DATA
+      TENSOR_FLOAT_ADDER_SIZE_I_IN <= THREE_CONTROL;
+      TENSOR_FLOAT_ADDER_SIZE_J_IN <= THREE_CONTROL;
+      TENSOR_FLOAT_ADDER_SIZE_K_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_TENSOR_FLOAT_ADDER_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_ADDER_CASE 0        ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_FLOAT_ADDER_DATA_A_IN <= ZERO_DATA;
+        TENSOR_FLOAT_ADDER_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_FLOAT_ADDER_FIRST_RUN : loop
+          if (TENSOR_FLOAT_ADDER_DATA_OUT_I_ENABLE = '1' and TENSOR_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_ADDER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_ADDER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_FLOAT_ADDER_DATA_OUT_I_ENABLE = '1' and TENSOR_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_ADDER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_ADDER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_ADDER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_ADDER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_ADDER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_ADDER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_ADDER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '0';
+            TENSOR_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '0';
+            TENSOR_FLOAT_ADDER_DATA_A_IN_K_ENABLE <= '0';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_I_ENABLE <= '0';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '0';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_FLOAT_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_FLOAT_ADDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_FLOAT_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_FLOAT_ADDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_FLOAT_ADDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE = '1' or TENSOR_FLOAT_ADDER_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_FLOAT_ADDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_FLOAT_ADDER_FIRST_RUN when TENSOR_FLOAT_ADDER_READY = '1';
+        end loop TENSOR_FLOAT_ADDER_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_NTM_TENSOR_FLOAT_ADDER_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_ADDER_CASE 1        ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_FLOAT_ADDER_DATA_A_IN <= ZERO_DATA;
+        TENSOR_FLOAT_ADDER_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_FLOAT_ADDER_SECOND_RUN : loop
+          if (TENSOR_FLOAT_ADDER_DATA_OUT_I_ENABLE = '1' and TENSOR_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_ADDER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_ADDER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_FLOAT_ADDER_DATA_OUT_I_ENABLE = '1' and TENSOR_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_ADDER_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_ADDER_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_FLOAT_ADDER_DATA_OUT_J_ENABLE = '1' and TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_ADDER_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_ADDER_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_ADDER_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_ADDER_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_ADDER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_FLOAT_ADDER_DATA_A_IN_I_ENABLE <= '0';
+            TENSOR_FLOAT_ADDER_DATA_A_IN_J_ENABLE <= '0';
+            TENSOR_FLOAT_ADDER_DATA_A_IN_K_ENABLE <= '0';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_I_ENABLE <= '0';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_J_ENABLE <= '0';
+            TENSOR_FLOAT_ADDER_DATA_B_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_FLOAT_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_FLOAT_ADDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_FLOAT_ADDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_FLOAT_ADDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_FLOAT_ADDER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_FLOAT_ADDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE = '1' or TENSOR_FLOAT_ADDER_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_FLOAT_ADDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_FLOAT_ADDER_SECOND_RUN when TENSOR_FLOAT_ADDER_READY = '1';
+        end loop TENSOR_FLOAT_ADDER_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_TENSOR_FLOAT_MULTIPLIER_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_TENSOR_MULTIPLIER_TEST     ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      TENSOR_FLOAT_MULTIPLIER_SIZE_I_IN <= THREE_CONTROL;
+      TENSOR_FLOAT_MULTIPLIER_SIZE_J_IN <= THREE_CONTROL;
+      TENSOR_FLOAT_MULTIPLIER_SIZE_K_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_TENSOR_FLOAT_MULTIPLIER_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_MULTIPLIER_CASE 0   ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_FLOAT_MULTIPLIER_DATA_A_IN <= ZERO_DATA;
+        TENSOR_FLOAT_MULTIPLIER_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_FLOAT_MULTIPLIER_FIRST_RUN : loop
+          if (TENSOR_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and TENSOR_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and TENSOR_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '0';
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_K_ENABLE <= '0';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE <= '0';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '0';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_FLOAT_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_FLOAT_MULTIPLIER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_FLOAT_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_FLOAT_MULTIPLIER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_FLOAT_MULTIPLIER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE = '1' or TENSOR_FLOAT_MULTIPLIER_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_FLOAT_MULTIPLIER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_FLOAT_MULTIPLIER_FIRST_RUN when TENSOR_FLOAT_MULTIPLIER_READY = '1';
+        end loop TENSOR_FLOAT_MULTIPLIER_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_NTM_TENSOR_FLOAT_MULTIPLIER_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_MULTIPLIER_CASE 1   ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_FLOAT_MULTIPLIER_DATA_A_IN <= ZERO_DATA;
+        TENSOR_FLOAT_MULTIPLIER_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_FLOAT_MULTIPLIER_SECOND_RUN : loop
+          if (TENSOR_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and TENSOR_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE = '1' and TENSOR_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE = '1' and TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE <= '0';
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE <= '0';
+            TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_K_ENABLE <= '0';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE <= '0';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE <= '0';
+            TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_FLOAT_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_FLOAT_MULTIPLIER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_FLOAT_MULTIPLIER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_FLOAT_MULTIPLIER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_FLOAT_MULTIPLIER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_FLOAT_MULTIPLIER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE = '1' or TENSOR_FLOAT_MULTIPLIER_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_FLOAT_MULTIPLIER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_FLOAT_MULTIPLIER_SECOND_RUN when TENSOR_FLOAT_MULTIPLIER_READY = '1';
+        end loop TENSOR_FLOAT_MULTIPLIER_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
+    if (STIMULUS_NTM_TENSOR_FLOAT_DIVIDER_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_NTM_TENSOR_DIVIDER_TEST        ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      TENSOR_FLOAT_DIVIDER_SIZE_I_IN <= THREE_CONTROL;
+      TENSOR_FLOAT_DIVIDER_SIZE_J_IN <= THREE_CONTROL;
+      TENSOR_FLOAT_DIVIDER_SIZE_K_IN <= THREE_CONTROL;
+
+      if (STIMULUS_NTM_TENSOR_FLOAT_DIVIDER_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_DIVIDER_CASE 0      ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_FLOAT_DIVIDER_DATA_A_IN <= ZERO_DATA;
+        TENSOR_FLOAT_DIVIDER_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_FLOAT_DIVIDER_FIRST_RUN : loop
+          if (TENSOR_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '1' and TENSOR_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '1' and TENSOR_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '0';
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '0';
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_K_ENABLE <= '0';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE <= '0';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '0';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_FLOAT_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_FLOAT_DIVIDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_FLOAT_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_FLOAT_DIVIDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_FLOAT_DIVIDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE = '1' or TENSOR_FLOAT_DIVIDER_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_FLOAT_DIVIDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_FLOAT_DIVIDER_FIRST_RUN when TENSOR_FLOAT_DIVIDER_READY = '1';
+        end loop TENSOR_FLOAT_DIVIDER_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_NTM_TENSOR_FLOAT_DIVIDER_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_TENSOR_DIVIDER_CASE 1      ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        TENSOR_FLOAT_DIVIDER_DATA_A_IN <= ZERO_DATA;
+        TENSOR_FLOAT_DIVIDER_DATA_B_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+        index_j_loop <= ZERO_CONTROL;
+        index_k_loop <= ZERO_CONTROL;
+
+        TENSOR_FLOAT_DIVIDER_SECOND_RUN : loop
+          if (TENSOR_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '1' and TENSOR_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_FLOAT_DIVIDER_DATA_OUT_I_ENABLE = '1' and TENSOR_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_FLOAT_DIVIDER_DATA_OUT_J_ENABLE = '1' and TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_K_ENABLE <= '1';
+          elsif (TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
+            -- DATA
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+
+            -- CONTROL
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_K_ENABLE <= '1';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_K_ENABLE <= '1';
+          else
+            -- CONTROL
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE <= '0';
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE <= '0';
+            TENSOR_FLOAT_DIVIDER_DATA_A_IN_K_ENABLE <= '0';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE <= '0';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE <= '0';
+            TENSOR_FLOAT_DIVIDER_DATA_B_IN_K_ENABLE <= '0';
+          end if;
+
+          -- LOOP
+          if (TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_FLOAT_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_FLOAT_DIVIDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= ZERO_CONTROL;
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_FLOAT_DIVIDER_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_FLOAT_DIVIDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+            index_j_loop <= ZERO_CONTROL;
+            index_k_loop <= ZERO_CONTROL;
+          elsif (TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_FLOAT_DIVIDER_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_FLOAT_DIVIDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+            index_k_loop <= ZERO_CONTROL;
+          elsif ((TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE = '1' or TENSOR_FLOAT_DIVIDER_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_FLOAT_DIVIDER_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit TENSOR_FLOAT_DIVIDER_SECOND_RUN when TENSOR_FLOAT_DIVIDER_READY = '1';
+        end loop TENSOR_FLOAT_DIVIDER_SECOND_RUN;
       end if;
 
       wait for WORKING;

@@ -67,12 +67,13 @@ entity ntm_tensor_modular_inverter is
     DATA_OUT_K_ENABLE : out std_logic;
 
     -- DATA
-    MODULO_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
-    DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+    MODULO_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DATA_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -123,23 +124,16 @@ architecture ntm_tensor_modular_inverter_architecture of ntm_tensor_modular_inve
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- MATRIX INVERTER
+  -- SCALAR MULTIPLIER
   -- CONTROL
-  signal start_matrix_modular_inverter : std_logic;
-  signal ready_matrix_modular_inverter : std_logic;
-
-  signal data_in_i_enable_matrix_modular_inverter : std_logic;
-  signal data_in_j_enable_matrix_modular_inverter : std_logic;
-
-  signal data_out_i_enable_matrix_modular_inverter : std_logic;
-  signal data_out_j_enable_matrix_modular_inverter : std_logic;
+  signal start_scalar_modular_inverter : std_logic;
+  signal ready_scalar_modular_inverter : std_logic;
 
   -- DATA
-  signal modulo_in_matrix_modular_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal size_i_in_matrix_modular_inverter : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_modular_inverter : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_matrix_modular_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_modular_inverter  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal modulo_in_scalar_modular_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_modular_inverter   : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_scalar_modular_inverter : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -147,7 +141,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- 1 = DATA_OUT · DATA_IN mod MODULO_IN
+  -- 1 = DATA_OUT · DATA_IN
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -164,20 +158,15 @@ begin
       DATA_OUT_K_ENABLE <= '0';
 
       -- Control Internal
-      start_matrix_modular_inverter <= '0';
+      start_scalar_modular_inverter <= '0';
 
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
       index_k_loop <= ZERO_CONTROL;
 
-      data_in_i_enable_matrix_modular_inverter <= '0';
-      data_in_j_enable_matrix_modular_inverter <= '0';
-
       -- Data Internal
-      modulo_in_matrix_modular_inverter <= ZERO_DATA;
-      size_i_in_matrix_modular_inverter <= ZERO_CONTROL;
-      size_j_in_matrix_modular_inverter <= ZERO_CONTROL;
-      data_in_matrix_modular_inverter   <= ZERO_DATA;
+      modulo_in_scalar_modular_inverter <= ZERO_DATA;
+      data_in_scalar_modular_inverter   <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -186,37 +175,44 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          DATA_OUT_I_ENABLE <= '0';
-          DATA_OUT_J_ENABLE <= '0';
-          DATA_OUT_K_ENABLE <= '0';
-
           if (START = '1') then
+            -- Control Outputs
+            DATA_OUT_I_ENABLE <= '1';
+            DATA_OUT_J_ENABLE <= '1';
+            DATA_OUT_K_ENABLE <= '1';
+
+            -- Assignations
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
             index_k_loop <= ZERO_CONTROL;
 
             -- FSM Control
             inverter_ctrl_fsm_int <= INPUT_I_STATE;
+          else
+            -- Control Outputs
+            DATA_OUT_I_ENABLE <= '0';
+            DATA_OUT_J_ENABLE <= '0';
+            DATA_OUT_K_ENABLE <= '0';
           end if;
 
         when INPUT_I_STATE =>           -- STEP 1
 
-          if (((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1') and (DATA_IN_K_ENABLE = '1')) or ((index_i_loop = ZERO_CONTROL) and (index_j_loop = ZERO_CONTROL))) then
+          if ((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1') and (DATA_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            modulo_in_matrix_modular_inverter <= MODULO_IN;
-            size_i_in_matrix_modular_inverter <= SIZE_J_IN;
-            size_j_in_matrix_modular_inverter <= SIZE_K_IN;
-
-            data_in_matrix_modular_inverter <= DATA_IN;
+            modulo_in_scalar_modular_inverter <= MODULO_IN;
+            data_in_scalar_modular_inverter   <= DATA_IN;
 
             -- Control Internal
-            start_matrix_modular_inverter <= '1';
-
-            data_in_i_enable_matrix_modular_inverter <= '1';
-            data_in_j_enable_matrix_modular_inverter <= '1';
+            start_scalar_modular_inverter <= '1';
 
             -- FSM Control
-            inverter_ctrl_fsm_int <= ENDER_K_STATE;
+            if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+              inverter_ctrl_fsm_int <= ENDER_I_STATE;
+            elsif (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+              inverter_ctrl_fsm_int <= ENDER_J_STATE;
+            else
+              inverter_ctrl_fsm_int <= ENDER_K_STATE;
+            end if;
           end if;
 
           -- Control Outputs
@@ -226,16 +222,22 @@ begin
 
         when INPUT_J_STATE =>           -- STEP 2
 
-          if (((DATA_IN_J_ENABLE = '1') and (DATA_IN_K_ENABLE = '1')) or (index_j_loop = ZERO_CONTROL)) then
+          if ((DATA_IN_J_ENABLE = '1') and (DATA_IN_K_ENABLE = '1')) then
             -- Data Inputs
-            data_in_matrix_modular_inverter <= DATA_IN;
+            modulo_in_scalar_modular_inverter <= MODULO_IN;
+            data_in_scalar_modular_inverter   <= DATA_IN;
 
             -- Control Internal
-            data_in_i_enable_matrix_modular_inverter <= '1';
-            data_in_j_enable_matrix_modular_inverter <= '1';
+            start_scalar_modular_inverter <= '1';
 
             -- FSM Control
-            inverter_ctrl_fsm_int <= ENDER_K_STATE;
+            if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+              inverter_ctrl_fsm_int <= ENDER_I_STATE;
+            elsif (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+              inverter_ctrl_fsm_int <= ENDER_J_STATE;
+            else
+              inverter_ctrl_fsm_int <= ENDER_K_STATE;
+            end if;
           end if;
 
           -- Control Outputs
@@ -246,18 +248,17 @@ begin
 
           if (DATA_IN_K_ENABLE = '1') then
             -- Data Inputs
-            data_in_matrix_modular_inverter <= DATA_IN;
+            modulo_in_scalar_modular_inverter <= MODULO_IN;
+            data_in_scalar_modular_inverter   <= DATA_IN;
 
             -- Control Internal
-            data_in_j_enable_matrix_modular_inverter <= '1';
+            start_scalar_modular_inverter <= '1';
 
             -- FSM Control
-            if (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
-              if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-                inverter_ctrl_fsm_int <= ENDER_I_STATE;
-              else
-                inverter_ctrl_fsm_int <= ENDER_J_STATE;
-              end if;
+            if ((unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+              inverter_ctrl_fsm_int <= ENDER_I_STATE;
+            elsif (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
+              inverter_ctrl_fsm_int <= ENDER_J_STATE;
             else
               inverter_ctrl_fsm_int <= ENDER_K_STATE;
             end if;
@@ -268,10 +269,10 @@ begin
 
         when ENDER_I_STATE =>           -- STEP 4
 
-          if (data_out_i_enable_matrix_modular_inverter = '1' and data_out_j_enable_matrix_modular_inverter = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+          if (ready_scalar_modular_inverter = '1') then
+            if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_modular_inverter;
+              DATA_OUT <= data_out_scalar_modular_inverter;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -287,9 +288,9 @@ begin
 
               -- FSM Control
               inverter_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+            elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_modular_inverter;
+              DATA_OUT <= data_out_scalar_modular_inverter;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -306,18 +307,15 @@ begin
             end if;
           else
             -- Control Internal
-            start_matrix_modular_inverter <= '0';
-
-            data_in_i_enable_matrix_modular_inverter <= '0';
-            data_in_j_enable_matrix_modular_inverter <= '0';
+            start_scalar_modular_inverter <= '0';
           end if;
 
         when ENDER_J_STATE =>           -- STEP 5
 
-          if (data_out_j_enable_matrix_modular_inverter = '1') then
-            if ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL))) then
+          if (ready_scalar_modular_inverter = '1') then
+            if ((unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)))) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_modular_inverter;
+              DATA_OUT <= data_out_scalar_modular_inverter;
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';
@@ -332,18 +330,15 @@ begin
             end if;
           else
             -- Control Internal
-            start_matrix_modular_inverter <= '0';
-
-            data_in_i_enable_matrix_modular_inverter <= '0';
-            data_in_j_enable_matrix_modular_inverter <= '0';
+            start_scalar_modular_inverter <= '0';
           end if;
 
         when ENDER_K_STATE =>           -- STEP 6
 
-          if (data_out_j_enable_matrix_modular_inverter = '1') then
+          if (ready_scalar_modular_inverter = '1') then
             if (unsigned(index_k_loop) < unsigned(SIZE_K_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
-              DATA_OUT <= data_out_matrix_modular_inverter;
+              DATA_OUT <= data_out_scalar_modular_inverter;
 
               -- Control Outputs
               DATA_OUT_K_ENABLE <= '1';
@@ -356,10 +351,7 @@ begin
             end if;
           else
             -- Control Internal
-            start_matrix_modular_inverter <= '0';
-
-            data_in_i_enable_matrix_modular_inverter <= '0';
-            data_in_j_enable_matrix_modular_inverter <= '0';
+            start_scalar_modular_inverter <= '0';
           end if;
 
         when others =>
@@ -369,8 +361,8 @@ begin
     end if;
   end process;
 
-  -- MATRIX INVERTER
-  matrix_modular_inverter : ntm_matrix_modular_inverter
+  -- SCALAR MULTIPLIER
+  scalar_modular_inverter : ntm_scalar_modular_inverter
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -381,21 +373,14 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_modular_inverter,
-      READY => ready_matrix_modular_inverter,
-
-      DATA_IN_I_ENABLE => data_in_i_enable_matrix_modular_inverter,
-      DATA_IN_J_ENABLE => data_in_j_enable_matrix_modular_inverter,
-
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_modular_inverter,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_modular_inverter,
+      START => start_scalar_modular_inverter,
+      READY => ready_scalar_modular_inverter,
 
       -- DATA
-      MODULO_IN => modulo_in_matrix_modular_inverter,
-      SIZE_I_IN => size_i_in_matrix_modular_inverter,
-      SIZE_J_IN => size_j_in_matrix_modular_inverter,
-      DATA_IN   => data_in_matrix_modular_inverter,
-      DATA_OUT  => data_out_matrix_modular_inverter
+      MODULO_IN => modulo_in_scalar_modular_inverter,
+      DATA_IN   => data_in_scalar_modular_inverter,
+
+      DATA_OUT => data_out_scalar_modular_inverter
       );
 
 end architecture;

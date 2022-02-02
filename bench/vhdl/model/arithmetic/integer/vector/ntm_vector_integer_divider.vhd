@@ -68,8 +68,8 @@ entity ntm_vector_integer_divider is
     DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-    REST_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    DATA_OUT      : out std_logic_vector(DATA_SIZE-1 downto 0);
+    REMAINDER_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -123,10 +123,10 @@ architecture ntm_vector_integer_divider_architecture of ntm_vector_integer_divid
   signal ready_scalar_integer_divider : std_logic;
 
   -- DATA
-  signal rest_out_scalar_integer_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_a_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_integer_divider  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal remainder_out_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_integer_divider     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_integer_divider     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_integer_divider      : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -141,8 +141,8 @@ begin
   begin
     if (RST = '0') then
       -- Data Outputs
-      DATA_OUT <= ZERO_DATA;
-      REST_OUT <= ZERO_DATA;
+      DATA_OUT      <= ZERO_DATA;
+      REMAINDER_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
@@ -166,20 +166,25 @@ begin
       case divider_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
-          READY           <= '0';
-          DATA_OUT_ENABLE <= '0';
+          READY <= '0';
 
           if (START = '1') then
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '1';
+
             -- Control Internal
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
             divider_ctrl_fsm_int <= INPUT_STATE;
+          else
+            -- Control Outputs
+            DATA_OUT_ENABLE <= '0';
           end if;
 
         when INPUT_STATE =>             -- STEP 1
 
-          if ((DATA_A_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
+          if (DATA_A_IN_ENABLE = '1') then
             -- Data Inputs
             data_a_in_scalar_integer_divider <= DATA_A_IN;
 
@@ -187,7 +192,7 @@ begin
             data_a_in_divider_int <= '1';
           end if;
 
-          if ((DATA_B_IN_ENABLE = '1') or (index_loop = ZERO_CONTROL)) then
+          if (DATA_B_IN_ENABLE = '1') then
             -- Data Inputs
             data_b_in_scalar_integer_divider <= DATA_B_IN;
 
@@ -230,8 +235,8 @@ begin
             end if;
 
             -- Data Outputs
-            DATA_OUT <= data_out_scalar_integer_divider;
-            REST_OUT <= rest_out_scalar_integer_divider;
+            DATA_OUT      <= data_out_scalar_integer_divider;
+            REMAINDER_OUT <= remainder_out_scalar_integer_divider;
 
             -- Control Outputs
             DATA_OUT_ENABLE <= '1';
@@ -269,8 +274,8 @@ begin
       DATA_A_IN => data_a_in_scalar_integer_divider,
       DATA_B_IN => data_b_in_scalar_integer_divider,
 
-      DATA_OUT => data_out_scalar_integer_divider,
-      REST_OUT => rest_out_scalar_integer_divider
+      DATA_OUT      => data_out_scalar_integer_divider,
+      REMAINDER_OUT => remainder_out_scalar_integer_divider
       );
 
 end architecture;

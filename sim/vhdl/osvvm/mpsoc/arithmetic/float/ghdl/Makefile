@@ -15,6 +15,10 @@ build:
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_float_multiplier.vhd
 	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/matrix/ntm_matrix_float_divider.vhd
 
+	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/tensor/ntm_tensor_float_adder.vhd
+	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/tensor/ntm_tensor_float_multiplier.vhd
+	ghdl -a --std=08 ../../../../../../../rtl/vhdl/math/float/tensor/ntm_tensor_float_divider.vhd
+
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/math/float/ntm_float_pkg.vhd
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/math/float/ntm_float_stimulus.vhd
 	ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/math/float/ntm_float_testbench.vhd

@@ -593,8 +593,8 @@ package ntm_arithmetic_pkg is
       DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      REST_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      DATA_OUT      : out std_logic_vector(DATA_SIZE-1 downto 0);
+      REMAINDER_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -683,8 +683,8 @@ package ntm_arithmetic_pkg is
       DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      REST_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      DATA_OUT      : out std_logic_vector(DATA_SIZE-1 downto 0);
+      REMAINDER_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -785,8 +785,8 @@ package ntm_arithmetic_pkg is
       DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      REST_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      DATA_OUT      : out std_logic_vector(DATA_SIZE-1 downto 0);
+      REMAINDER_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 
@@ -899,8 +899,8 @@ package ntm_arithmetic_pkg is
       DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
-      REST_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      DATA_OUT      : out std_logic_vector(DATA_SIZE-1 downto 0);
+      REMAINDER_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

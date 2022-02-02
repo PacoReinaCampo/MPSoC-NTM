@@ -6,7 +6,7 @@ add wave -noupdate /ntm_integer_pkg/MONITOR_TEST
 add wave -noupdate /ntm_integer_pkg/MONITOR_CASE
 
 add wave -noupdate -divider {=========================================}
-add wave -noupdate -divider {NTM VECTOR MULTIPLIER TEST}
+add wave -noupdate -divider {NTM VECTOR INTEGER MULTIPLIER TEST}
 add wave -noupdate -divider {=========================================}
 
 add wave -noupdate /ntm_integer_testbench/ntm_vector_integer_multiplier_test/vector_integer_multiplier/CLK

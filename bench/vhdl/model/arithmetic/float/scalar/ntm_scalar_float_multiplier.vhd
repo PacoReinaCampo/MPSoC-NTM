@@ -195,7 +195,7 @@ begin
 
         when OPERATION_STATE =>
 
-          if (data_a_in_exponent_int = EXPONENT_FULL or data_b_in_exponent_int = EXPONENT_FULL) then
+          if (unsigned(data_a_in_exponent_int) = unsigned(EXPONENT_FULL) or unsigned(data_b_in_exponent_int) = unsigned(EXPONENT_FULL)) then
             -- Control Outputs
             READY <= '1';
 
@@ -206,7 +206,7 @@ begin
 
             -- FSM Control
             multiplier_ctrl_fsm_int <= STARTER_STATE;
-          elsif (data_a_in_exponent_int = EXPONENT_EMPTY or data_b_in_exponent_int = EXPONENT_EMPTY) then
+          elsif (unsigned(data_a_in_exponent_int) = unsigned(EXPONENT_EMPTY) or unsigned(data_b_in_exponent_int) = unsigned(EXPONENT_EMPTY)) then
             -- Control Outputs
             READY <= '1';
 

@@ -196,7 +196,7 @@ begin
 
         when OPERATION_STATE =>
 
-          if (data_b_in_mantissa_int = LIMIT_MANTISSA and data_b_in_exponent_int = EXPONENT_EMPTY) then
+          if (unsigned(data_b_in_mantissa_int) = unsigned(LIMIT_MANTISSA) and unsigned(data_b_in_exponent_int) = unsigned(EXPONENT_EMPTY)) then
             -- Data Outputs
             OVERFLOW_OUT <= '1';
 
@@ -212,9 +212,9 @@ begin
             divider_ctrl_fsm_int <= STARTER_STATE;
           elsif (
             data_exponent_int(EXPONENT_SIZE+1) = '1' or
-            data_exponent_int(EXPONENT_SIZE-1 downto 0) = EXPONENT_EMPTY or
-            (data_a_in_exponent_int = EXPONENT_EMPTY and data_a_in_mantissa_int = MANTISSA_EMPTY) or
-            (data_b_in_exponent_int = EXPONENT_FULL and data_b_in_mantissa_int = MANTISSA_EMPTY)) then
+            unsigned(data_exponent_int(EXPONENT_SIZE-1 downto 0)) = unsigned(EXPONENT_EMPTY) or
+            (unsigned(data_a_in_exponent_int) = unsigned(EXPONENT_EMPTY) and unsigned(data_a_in_mantissa_int) = unsigned(MANTISSA_EMPTY)) or
+            (unsigned(data_b_in_exponent_int) = unsigned(EXPONENT_FULL) and unsigned(data_b_in_mantissa_int) = unsigned(MANTISSA_EMPTY))) then
 
             -- Control Outputs
             READY <= '1';
@@ -273,7 +273,7 @@ begin
         when ENDER_STATE =>
 
           -- Data Internal
-          if (data_exponent_int = ZERO_EXPONENT) then
+          if (unsigned(data_exponent_int) = unsigned(ZERO_EXPONENT)) then
             -- Underflow
             data_out_mantissa_int <= MANTISSA_EMPTY;
             data_out_exponent_int <= EXPONENT_EMPTY;

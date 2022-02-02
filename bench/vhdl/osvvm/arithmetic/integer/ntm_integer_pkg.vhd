@@ -194,7 +194,7 @@ package ntm_integer_pkg is
       RST : out std_logic;
 
       -----------------------------------------------------------------------
-      -- STIMULUS SCALAR
+      -- STIMULUS INTEGER SCALAR
       -----------------------------------------------------------------------
 
       -- SCALAR ADDER
@@ -232,11 +232,11 @@ package ntm_integer_pkg is
       SCALAR_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      SCALAR_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_INTEGER_DIVIDER_DATA_OUT      : in std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_INTEGER_DIVIDER_REMAINDER_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
-      -- STIMULUS VECTOR
+      -- STIMULUS INTEGER VECTOR
       -----------------------------------------------------------------------
 
       -- VECTOR ADDER
@@ -292,11 +292,11 @@ package ntm_integer_pkg is
       VECTOR_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      VECTOR_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_INTEGER_DIVIDER_DATA_OUT      : in std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_INTEGER_DIVIDER_REMAINDER_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
-      -- STIMULUS MATRIX
+      -- STIMULUS INTEGER MATRIX
       -----------------------------------------------------------------------
 
       -- MATRIX ADDER
@@ -364,11 +364,11 @@ package ntm_integer_pkg is
       MATRIX_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MATRIX_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_INTEGER_DIVIDER_DATA_OUT      : in std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_INTEGER_DIVIDER_REMAINDER_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       -----------------------------------------------------------------------
-      -- STIMULUS TENSOR
+      -- STIMULUS INTEGER TENSOR
       -----------------------------------------------------------------------
 
       -- TENSOR ADDER
@@ -448,8 +448,8 @@ package ntm_integer_pkg is
       TENSOR_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
       TENSOR_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      TENSOR_INTEGER_DIVIDER_DATA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_INTEGER_DIVIDER_REST_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+      TENSOR_INTEGER_DIVIDER_DATA_OUT      : in std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_INTEGER_DIVIDER_REMAINDER_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

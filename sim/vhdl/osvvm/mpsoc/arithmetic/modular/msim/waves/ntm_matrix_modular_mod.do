@@ -27,14 +27,11 @@ add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_mod
 
 add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/mod_ctrl_fsm_int
 
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/start_vector_mod
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/modulo_in_vector_mod
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/size_in_vector_mod
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/data_in_enable_vector_mod
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/data_in_vector_mod
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/ready_vector_mod
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/data_out_enable_vector_mod
-add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/data_out_vector_mod
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/start_scalar_modular_mod
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/modulo_in_scalar_modular_mod
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/data_in_scalar_modular_mod
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/ready_scalar_modular_mod
+add wave -noupdate /ntm_modular_testbench/ntm_matrix_modular_mod_test/matrix_modular_mod/data_out_scalar_modular_mod
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

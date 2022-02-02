@@ -111,7 +111,7 @@ package ntm_float_pkg is
   constant TENSOR_SAMPLE_A : tensor_buffer := (((P_TWO, P_ONE, P_FOUR), (P_NINE, P_FOUR, P_TWO), (P_ONE, P_ONE, P_TWO)), ((P_EIGHT, P_SIX, P_TWO), (P_EIGHT, P_FIVE, P_TWO), (P_ONE, P_FOUR, P_ONE)), ((P_THREE, P_ONE, P_SIX), (P_FIVE, P_ZERO, P_FOUR), (P_FIVE, P_EIGHT, P_FIVE)));
   constant TENSOR_SAMPLE_B : tensor_buffer := (((P_ONE, P_THREE, P_ONE), (P_TWO, P_FOUR, P_EIGHT), (P_FOUR, P_ONE, P_TWO)), ((P_NINE, P_ONE, P_FIVE), (P_NINE, P_EIGHT, P_ONE), (P_FIVE, P_EIGHT, P_FOUR)), ((P_FIVE, P_FOUR, P_ONE), (P_THREE, P_FOUR, P_SIX), (P_ONE, P_EIGHT, P_EIGHT)));
 
-  constant MATRIX_SAMPLE_A : matrix_buffer := ((P_ONE, P_FOUR, P_ONE), (P_ZERO, P_EIGHT, P_FOUR), (P_FIVE, P_THREE, P_NINE));
+  constant MATRIX_SAMPLE_A : matrix_buffer := ((P_ONE, P_FOUR, P_ONE), (P_SEVEN, P_EIGHT, P_FOUR), (P_FIVE, P_THREE, P_NINE));
   constant MATRIX_SAMPLE_B : matrix_buffer := ((P_ONE, P_TWO, P_SIX), (P_ONE, P_THREE, P_SIX), (P_EIGHT, P_FOUR, P_FOUR));
 
   constant VECTOR_SAMPLE_A : vector_buffer := (P_FOUR, P_SEVEN, N_THREE);
@@ -178,6 +178,19 @@ package ntm_float_pkg is
   signal STIMULUS_NTM_MATRIX_FLOAT_ADDER_CASE_1      : boolean := false;
   signal STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
   signal STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_CASE_1    : boolean := false;
+
+  -- TENSOR-FUNCTIONALITY
+  signal STIMULUS_NTM_TENSOR_FLOAT_ADDER_TEST      : boolean := false;
+  signal STIMULUS_NTM_TENSOR_FLOAT_MULTIPLIER_TEST : boolean := false;
+  signal STIMULUS_NTM_TENSOR_FLOAT_DIVIDER_TEST    : boolean := false;
+
+  signal STIMULUS_NTM_TENSOR_FLOAT_ADDER_CASE_0      : boolean := false;
+  signal STIMULUS_NTM_TENSOR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_TENSOR_FLOAT_DIVIDER_CASE_0    : boolean := false;
+
+  signal STIMULUS_NTM_TENSOR_FLOAT_ADDER_CASE_1      : boolean := false;
+  signal STIMULUS_NTM_TENSOR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_TENSOR_FLOAT_DIVIDER_CASE_1    : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
@@ -364,7 +377,91 @@ package ntm_float_pkg is
       MATRIX_FLOAT_DIVIDER_DATA_A_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_FLOAT_DIVIDER_DATA_B_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
       MATRIX_FLOAT_DIVIDER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_FLOAT_DIVIDER_OVERFLOW_OUT : in  std_logic
+      MATRIX_FLOAT_DIVIDER_OVERFLOW_OUT : in  std_logic;
+
+      -----------------------------------------------------------------------
+      -- STIMULUS TENSOR FLOAT
+      -----------------------------------------------------------------------
+
+      -- TENSOR ADDER
+      -- CONTROL
+      TENSOR_FLOAT_ADDER_START : out std_logic;
+      TENSOR_FLOAT_ADDER_READY : in  std_logic;
+
+      TENSOR_FLOAT_ADDER_OPERATION : out std_logic;
+
+      TENSOR_FLOAT_ADDER_DATA_A_IN_I_ENABLE : out std_logic;
+      TENSOR_FLOAT_ADDER_DATA_A_IN_J_ENABLE : out std_logic;
+      TENSOR_FLOAT_ADDER_DATA_A_IN_K_ENABLE : out std_logic;
+      TENSOR_FLOAT_ADDER_DATA_B_IN_I_ENABLE : out std_logic;
+      TENSOR_FLOAT_ADDER_DATA_B_IN_J_ENABLE : out std_logic;
+      TENSOR_FLOAT_ADDER_DATA_B_IN_K_ENABLE : out std_logic;
+
+      TENSOR_FLOAT_ADDER_DATA_OUT_I_ENABLE : in std_logic;
+      TENSOR_FLOAT_ADDER_DATA_OUT_J_ENABLE : in std_logic;
+      TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE : in std_logic;
+
+      -- DATA
+      TENSOR_FLOAT_ADDER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_FLOAT_ADDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_FLOAT_ADDER_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_FLOAT_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_FLOAT_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+      TENSOR_FLOAT_ADDER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_FLOAT_ADDER_OVERFLOW_OUT : in std_logic;
+
+      -- TENSOR MULTIPLIER
+      -- CONTROL
+      TENSOR_FLOAT_MULTIPLIER_START : out std_logic;
+      TENSOR_FLOAT_MULTIPLIER_READY : in  std_logic;
+
+      TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE : out std_logic;
+      TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE : out std_logic;
+      TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_K_ENABLE : out std_logic;
+      TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE : out std_logic;
+      TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE : out std_logic;
+      TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_K_ENABLE : out std_logic;
+
+      TENSOR_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE : in std_logic;
+      TENSOR_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE : in std_logic;
+      TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE : in std_logic;
+
+      -- DATA
+      TENSOR_FLOAT_MULTIPLIER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_FLOAT_MULTIPLIER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_FLOAT_MULTIPLIER_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_FLOAT_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_FLOAT_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+      TENSOR_FLOAT_MULTIPLIER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_FLOAT_MULTIPLIER_OVERFLOW_OUT : in std_logic;
+
+      -- TENSOR DIVIDER
+      -- CONTROL
+      TENSOR_FLOAT_DIVIDER_START : out std_logic;
+      TENSOR_FLOAT_DIVIDER_READY : in  std_logic;
+
+      TENSOR_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE : out std_logic;
+      TENSOR_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE : out std_logic;
+      TENSOR_FLOAT_DIVIDER_DATA_A_IN_K_ENABLE : out std_logic;
+      TENSOR_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE : out std_logic;
+      TENSOR_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE : out std_logic;
+      TENSOR_FLOAT_DIVIDER_DATA_B_IN_K_ENABLE : out std_logic;
+
+      TENSOR_FLOAT_DIVIDER_DATA_OUT_I_ENABLE : in std_logic;
+      TENSOR_FLOAT_DIVIDER_DATA_OUT_J_ENABLE : in std_logic;
+      TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE : in std_logic;
+
+      -- DATA
+      TENSOR_FLOAT_DIVIDER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_FLOAT_DIVIDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_FLOAT_DIVIDER_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_FLOAT_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_FLOAT_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+      TENSOR_FLOAT_DIVIDER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_FLOAT_DIVIDER_OVERFLOW_OUT : in std_logic
       );
   end component;
 

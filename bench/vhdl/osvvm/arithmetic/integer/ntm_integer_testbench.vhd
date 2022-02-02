@@ -161,8 +161,8 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
   signal data_a_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal rest_out_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_integer_divider      : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal remainder_out_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- VECTOR
@@ -221,8 +221,8 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
   signal data_a_in_vector_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_vector_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal rest_out_vector_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_integer_divider      : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal remainder_out_vector_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- MATRIX
@@ -293,8 +293,8 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
   signal data_a_in_matrix_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_matrix_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal rest_out_matrix_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_integer_divider      : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal remainder_out_matrix_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- TENSOR
@@ -377,8 +377,8 @@ architecture ntm_integer_testbench_architecture of ntm_integer_testbench is
   signal data_a_in_tensor_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_tensor_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_tensor_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal rest_out_tensor_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_integer_divider      : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal remainder_out_tensor_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -443,8 +443,8 @@ begin
       SCALAR_INTEGER_DIVIDER_DATA_A_IN => data_a_in_scalar_integer_divider,
       SCALAR_INTEGER_DIVIDER_DATA_B_IN => data_b_in_scalar_integer_divider,
 
-      SCALAR_INTEGER_DIVIDER_DATA_OUT => data_out_scalar_integer_divider,
-      SCALAR_INTEGER_DIVIDER_REST_OUT => rest_out_scalar_integer_divider,
+      SCALAR_INTEGER_DIVIDER_DATA_OUT      => data_out_scalar_integer_divider,
+      SCALAR_INTEGER_DIVIDER_REMAINDER_OUT => remainder_out_scalar_integer_divider,
 
       -----------------------------------------------------------------------
       -- STIMULUS VECTOR
@@ -503,8 +503,8 @@ begin
       VECTOR_INTEGER_DIVIDER_DATA_A_IN => data_a_in_vector_integer_divider,
       VECTOR_INTEGER_DIVIDER_DATA_B_IN => data_b_in_vector_integer_divider,
 
-      VECTOR_INTEGER_DIVIDER_DATA_OUT => data_out_vector_integer_divider,
-      VECTOR_INTEGER_DIVIDER_REST_OUT => rest_out_vector_integer_divider,
+      VECTOR_INTEGER_DIVIDER_DATA_OUT      => data_out_vector_integer_divider,
+      VECTOR_INTEGER_DIVIDER_REMAINDER_OUT => remainder_out_vector_integer_divider,
 
       -----------------------------------------------------------------------
       -- STIMULUS MATRIX
@@ -575,8 +575,8 @@ begin
       MATRIX_INTEGER_DIVIDER_DATA_A_IN => data_a_in_matrix_integer_divider,
       MATRIX_INTEGER_DIVIDER_DATA_B_IN => data_b_in_matrix_integer_divider,
 
-      MATRIX_INTEGER_DIVIDER_DATA_OUT => data_out_matrix_integer_divider,
-      MATRIX_INTEGER_DIVIDER_REST_OUT => rest_out_matrix_integer_divider,
+      MATRIX_INTEGER_DIVIDER_DATA_OUT      => data_out_matrix_integer_divider,
+      MATRIX_INTEGER_DIVIDER_REMAINDER_OUT => remainder_out_matrix_integer_divider,
 
       -----------------------------------------------------------------------
       -- STIMULUS TENSOR
@@ -659,8 +659,8 @@ begin
       TENSOR_INTEGER_DIVIDER_DATA_A_IN => data_a_in_tensor_integer_divider,
       TENSOR_INTEGER_DIVIDER_DATA_B_IN => data_b_in_tensor_integer_divider,
 
-      TENSOR_INTEGER_DIVIDER_DATA_OUT => data_out_tensor_integer_divider,
-      TENSOR_INTEGER_DIVIDER_REST_OUT => rest_out_tensor_integer_divider
+      TENSOR_INTEGER_DIVIDER_DATA_OUT      => data_out_tensor_integer_divider,
+      TENSOR_INTEGER_DIVIDER_REMAINDER_OUT => remainder_out_tensor_integer_divider
       );
 
   -----------------------------------------------------------------------
@@ -739,8 +739,8 @@ begin
         DATA_A_IN => data_a_in_scalar_integer_divider,
         DATA_B_IN => data_b_in_scalar_integer_divider,
 
-        DATA_OUT => data_out_scalar_integer_divider,
-        REST_OUT => rest_out_scalar_integer_divider
+        DATA_OUT      => data_out_scalar_integer_divider,
+        REMAINDER_OUT => remainder_out_scalar_integer_divider
         );
   end generate ntm_scalar_integer_divider_test;
 
@@ -838,8 +838,8 @@ begin
         DATA_A_IN => data_a_in_vector_integer_divider,
         DATA_B_IN => data_b_in_vector_integer_divider,
 
-        DATA_OUT => data_out_vector_integer_divider,
-        REST_OUT => rest_out_vector_integer_divider
+        DATA_OUT      => data_out_vector_integer_divider,
+        REMAINDER_OUT => remainder_out_vector_integer_divider
         );
   end generate ntm_vector_integer_divider_test;
 
@@ -949,8 +949,8 @@ begin
         DATA_A_IN => data_a_in_matrix_integer_divider,
         DATA_B_IN => data_b_in_matrix_integer_divider,
 
-        DATA_OUT => data_out_matrix_integer_divider,
-        REST_OUT => rest_out_matrix_integer_divider
+        DATA_OUT      => data_out_matrix_integer_divider,
+        REMAINDER_OUT => remainder_out_matrix_integer_divider
         );
   end generate ntm_matrix_integer_divider_test;
 
@@ -1072,8 +1072,8 @@ begin
         DATA_A_IN => data_a_in_tensor_integer_divider,
         DATA_B_IN => data_b_in_tensor_integer_divider,
 
-        DATA_OUT => data_out_tensor_integer_divider,
-        REST_OUT => rest_out_tensor_integer_divider
+        DATA_OUT      => data_out_tensor_integer_divider,
+        REMAINDER_OUT => remainder_out_tensor_integer_divider
         );
   end generate ntm_tensor_integer_divider_test;
 

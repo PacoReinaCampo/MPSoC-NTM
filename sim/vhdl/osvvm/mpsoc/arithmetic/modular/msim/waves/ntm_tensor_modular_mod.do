@@ -31,17 +31,11 @@ add wave -noupdate /ntm_modular_testbench/ntm_tensor_modular_mod_test/tensor_mod
 
 add wave -noupdate /ntm_modular_testbench/ntm_tensor_modular_mod_test/tensor_modular_mod/mod_ctrl_fsm_int
 
-add wave -noupdate /ntm_modular_testbench/ntm_tensor_modular_mod_test/tensor_modular_mod/start_matrix_modular_mod
-add wave -noupdate /ntm_modular_testbench/ntm_tensor_modular_mod_test/tensor_modular_mod/modulo_in_matrix_modular_mod
-add wave -noupdate /ntm_modular_testbench/ntm_tensor_modular_mod_test/tensor_modular_mod/size_i_in_matrix_modular_mod
-add wave -noupdate /ntm_modular_testbench/ntm_tensor_modular_mod_test/tensor_modular_mod/size_j_in_matrix_modular_mod
-add wave -noupdate /ntm_modular_testbench/ntm_tensor_modular_mod_test/tensor_modular_mod/data_in_i_enable_matrix_modular_mod
-add wave -noupdate /ntm_modular_testbench/ntm_tensor_modular_mod_test/tensor_modular_mod/data_in_j_enable_matrix_modular_mod
-add wave -noupdate /ntm_modular_testbench/ntm_tensor_modular_mod_test/tensor_modular_mod/data_in_matrix_modular_mod
-add wave -noupdate /ntm_modular_testbench/ntm_tensor_modular_mod_test/tensor_modular_mod/ready_matrix_modular_mod
-add wave -noupdate /ntm_modular_testbench/ntm_tensor_modular_mod_test/tensor_modular_mod/data_out_i_enable_matrix_modular_mod
-add wave -noupdate /ntm_modular_testbench/ntm_tensor_modular_mod_test/tensor_modular_mod/data_out_j_enable_matrix_modular_mod
-add wave -noupdate /ntm_modular_testbench/ntm_tensor_modular_mod_test/tensor_modular_mod/data_out_matrix_modular_mod
+add wave -noupdate /ntm_modular_testbench/ntm_tensor_modular_mod_test/tensor_modular_mod/start_scalar_modular_mod
+add wave -noupdate /ntm_modular_testbench/ntm_tensor_modular_mod_test/tensor_modular_mod/modulo_in_scalar_modular_mod
+add wave -noupdate /ntm_modular_testbench/ntm_tensor_modular_mod_test/tensor_modular_mod/data_in_scalar_modular_mod
+add wave -noupdate /ntm_modular_testbench/ntm_tensor_modular_mod_test/tensor_modular_mod/ready_scalar_modular_mod
+add wave -noupdate /ntm_modular_testbench/ntm_tensor_modular_mod_test/tensor_modular_mod/data_out_scalar_modular_mod
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

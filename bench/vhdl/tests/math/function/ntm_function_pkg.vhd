@@ -118,79 +118,34 @@ package ntm_function_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := N_NINE;
 
   -- SCALAR-FUNCTIONALITY
-  signal STIMULUS_NTM_SCALAR_COSH_TEST          : boolean := false;
-  signal STIMULUS_NTM_SCALAR_EXPONENTIATOR_TEST : boolean := false;
-  signal STIMULUS_NTM_SCALAR_LOGARITHM_TEST     : boolean := false;
   signal STIMULUS_NTM_SCALAR_LOGISTIC_TEST      : boolean := false;
   signal STIMULUS_NTM_SCALAR_ONEPLUS_TEST       : boolean := false;
-  signal STIMULUS_NTM_SCALAR_SINH_TEST          : boolean := false;
-  signal STIMULUS_NTM_SCALAR_TANH_TEST          : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_COSH_CASE_0          : boolean := false;
-  signal STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_LOGARITHM_CASE_0     : boolean := false;
   signal STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0      : boolean := false;
   signal STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0       : boolean := false;
-  signal STIMULUS_NTM_SCALAR_SINH_CASE_0          : boolean := false;
-  signal STIMULUS_NTM_SCALAR_TANH_CASE_0          : boolean := false;
 
-  signal STIMULUS_NTM_SCALAR_COSH_CASE_1          : boolean := false;
-  signal STIMULUS_NTM_SCALAR_EXPONENTIATOR_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_LOGARITHM_CASE_1     : boolean := false;
   signal STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1      : boolean := false;
   signal STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1       : boolean := false;
-  signal STIMULUS_NTM_SCALAR_SINH_CASE_1          : boolean := false;
-  signal STIMULUS_NTM_SCALAR_TANH_CASE_1          : boolean := false;
 
   -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_NTM_VECTOR_COSH_TEST          : boolean := false;
-  signal STIMULUS_NTM_VECTOR_EXPONENTIATOR_TEST : boolean := false;
-  signal STIMULUS_NTM_VECTOR_LOGARITHM_TEST     : boolean := false;
   signal STIMULUS_NTM_VECTOR_LOGISTIC_TEST      : boolean := false;
   signal STIMULUS_NTM_VECTOR_ONEPLUS_TEST       : boolean := false;
-  signal STIMULUS_NTM_VECTOR_SINH_TEST          : boolean := false;
-  signal STIMULUS_NTM_VECTOR_TANH_TEST          : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_COSH_CASE_0          : boolean := false;
-  signal STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_LOGARITHM_CASE_0     : boolean := false;
   signal STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0      : boolean := false;
   signal STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0       : boolean := false;
-  signal STIMULUS_NTM_VECTOR_SINH_CASE_0          : boolean := false;
-  signal STIMULUS_NTM_VECTOR_TANH_CASE_0          : boolean := false;
 
-  signal STIMULUS_NTM_VECTOR_COSH_CASE_1          : boolean := false;
-  signal STIMULUS_NTM_VECTOR_EXPONENTIATOR_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_LOGARITHM_CASE_1     : boolean := false;
   signal STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1      : boolean := false;
   signal STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1       : boolean := false;
-  signal STIMULUS_NTM_VECTOR_SINH_CASE_1          : boolean := false;
-  signal STIMULUS_NTM_VECTOR_TANH_CASE_1          : boolean := false;
 
   -- MATRIX-FUNCTIONALITY
-  signal STIMULUS_NTM_MATRIX_COSH_TEST          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST : boolean := false;
-  signal STIMULUS_NTM_MATRIX_LOGARITHM_TEST     : boolean := false;
   signal STIMULUS_NTM_MATRIX_LOGISTIC_TEST      : boolean := false;
   signal STIMULUS_NTM_MATRIX_ONEPLUS_TEST       : boolean := false;
-  signal STIMULUS_NTM_MATRIX_SINH_TEST          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TANH_TEST          : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_COSH_CASE_0          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_LOGARITHM_CASE_0     : boolean := false;
   signal STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0      : boolean := false;
   signal STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0       : boolean := false;
-  signal STIMULUS_NTM_MATRIX_SINH_CASE_0          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TANH_CASE_0          : boolean := false;
 
-  signal STIMULUS_NTM_MATRIX_COSH_CASE_1          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_LOGARITHM_CASE_1     : boolean := false;
   signal STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1      : boolean := false;
   signal STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1       : boolean := false;
-  signal STIMULUS_NTM_MATRIX_SINH_CASE_1          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TANH_CASE_1          : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
@@ -218,24 +173,6 @@ package ntm_function_pkg is
       -- STIMULUS SCALAR
       -----------------------------------------------------------------------
 
-      -- SCALAR COSH
-      -- CONTROL
-      SCALAR_COSH_START : out std_logic;
-      SCALAR_COSH_READY : in  std_logic;
-
-      -- DATA
-      SCALAR_COSH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_COSH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- SCALAR EXPONENTIATOR
-      -- CONTROL
-      SCALAR_EXPONENTIATOR_START : out std_logic;
-      SCALAR_EXPONENTIATOR_READY : in  std_logic;
-
-      -- DATA
-      SCALAR_EXPONENTIATOR_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_EXPONENTIATOR_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
       -- SCALAR LOGISTIC
       -- CONTROL
       SCALAR_LOGISTIC_START : out std_logic;
@@ -244,15 +181,6 @@ package ntm_function_pkg is
       -- DATA
       SCALAR_LOGISTIC_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_LOGISTIC_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- SCALAR LOGARITHM
-      -- CONTROL
-      SCALAR_LOGARITHM_START : out std_logic;
-      SCALAR_LOGARITHM_READY : in  std_logic;
-
-      -- DATA
-      SCALAR_LOGARITHM_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_LOGARITHM_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- SCALAR ONEPLUS
       -- CONTROL
@@ -263,69 +191,9 @@ package ntm_function_pkg is
       SCALAR_ONEPLUS_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
       SCALAR_ONEPLUS_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- SCALAR SINH
-      -- CONTROL
-      SCALAR_SINH_START : out std_logic;
-      SCALAR_SINH_READY : in  std_logic;
-
-      -- DATA
-      SCALAR_SINH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_SINH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- SCALAR TANH
-      -- CONTROL
-      SCALAR_TANH_START : out std_logic;
-      SCALAR_TANH_READY : in  std_logic;
-
-      -- DATA
-      SCALAR_TANH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_TANH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
       -----------------------------------------------------------------------
       -- STIMULUS VECTOR
       -----------------------------------------------------------------------
-
-      -- VECTOR COSH
-      -- CONTROL
-      VECTOR_COSH_START : out std_logic;
-      VECTOR_COSH_READY : in  std_logic;
-
-      VECTOR_COSH_DATA_IN_ENABLE : out std_logic;
-
-      VECTOR_COSH_DATA_OUT_ENABLE : in std_logic;
-
-      -- DATA
-      VECTOR_COSH_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_COSH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_COSH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- VECTOR EXPONENTIATOR
-      -- CONTROL
-      VECTOR_EXPONENTIATOR_START : out std_logic;
-      VECTOR_EXPONENTIATOR_READY : in  std_logic;
-
-      VECTOR_EXPONENTIATOR_DATA_IN_ENABLE : out std_logic;
-
-      VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE : in std_logic;
-
-      -- DATA
-      VECTOR_EXPONENTIATOR_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_EXPONENTIATOR_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_EXPONENTIATOR_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- VECTOR LOGARITHM
-      -- CONTROL
-      VECTOR_LOGARITHM_START : out std_logic;
-      VECTOR_LOGARITHM_READY : in  std_logic;
-
-      VECTOR_LOGARITHM_DATA_IN_ENABLE : out std_logic;
-
-      VECTOR_LOGARITHM_DATA_OUT_ENABLE : in std_logic;
-
-      -- DATA
-      VECTOR_LOGARITHM_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_LOGARITHM_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_LOGARITHM_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- VECTOR LOGISTIC
       -- CONTROL
@@ -355,88 +223,9 @@ package ntm_function_pkg is
       VECTOR_ONEPLUS_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
       VECTOR_ONEPLUS_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- VECTOR SINH
-      -- CONTROL
-      VECTOR_SINH_START : out std_logic;
-      VECTOR_SINH_READY : in  std_logic;
-
-      VECTOR_SINH_DATA_IN_ENABLE : out std_logic;
-
-      VECTOR_SINH_DATA_OUT_ENABLE : in std_logic;
-
-      -- DATA
-      VECTOR_SINH_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_SINH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_SINH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- VECTOR TANH
-      -- CONTROL
-      VECTOR_TANH_START : out std_logic;
-      VECTOR_TANH_READY : in  std_logic;
-
-      VECTOR_TANH_DATA_IN_ENABLE : out std_logic;
-
-      VECTOR_TANH_DATA_OUT_ENABLE : in std_logic;
-
-      -- DATA
-      VECTOR_TANH_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_TANH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_TANH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
       -----------------------------------------------------------------------
       -- STIMULUS MATRIX
       -----------------------------------------------------------------------
-
-      -- MATRIX COSH
-      -- CONTROL
-      MATRIX_COSH_START : out std_logic;
-      MATRIX_COSH_READY : in  std_logic;
-
-      MATRIX_COSH_DATA_IN_I_ENABLE : out std_logic;
-      MATRIX_COSH_DATA_IN_J_ENABLE : out std_logic;
-
-      MATRIX_COSH_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_COSH_DATA_OUT_J_ENABLE : in std_logic;
-
-      -- DATA
-      MATRIX_COSH_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_COSH_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_COSH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_COSH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- MATRIX EXPONENTIATOR
-      -- CONTROL
-      MATRIX_EXPONENTIATOR_START : out std_logic;
-      MATRIX_EXPONENTIATOR_READY : in  std_logic;
-
-      MATRIX_EXPONENTIATOR_DATA_IN_I_ENABLE : out std_logic;
-      MATRIX_EXPONENTIATOR_DATA_IN_J_ENABLE : out std_logic;
-
-      MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_EXPONENTIATOR_DATA_OUT_J_ENABLE : in std_logic;
-
-      -- DATA
-      MATRIX_EXPONENTIATOR_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_EXPONENTIATOR_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_EXPONENTIATOR_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- MATRIX LOGARITHM
-      -- CONTROL
-      MATRIX_LOGARITHM_START : out std_logic;
-      MATRIX_LOGARITHM_READY : in  std_logic;
-
-      MATRIX_LOGARITHM_DATA_IN_I_ENABLE : out std_logic;
-      MATRIX_LOGARITHM_DATA_IN_J_ENABLE : out std_logic;
-
-      MATRIX_LOGARITHM_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_LOGARITHM_DATA_OUT_J_ENABLE : in std_logic;
-
-      -- DATA
-      MATRIX_LOGARITHM_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_LOGARITHM_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_LOGARITHM_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_LOGARITHM_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- MATRIX LOGISTIC
       -- CONTROL
@@ -470,41 +259,7 @@ package ntm_function_pkg is
       MATRIX_ONEPLUS_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_ONEPLUS_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
       MATRIX_ONEPLUS_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_ONEPLUS_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- MATRIX SINH
-      -- CONTROL
-      MATRIX_SINH_START : out std_logic;
-      MATRIX_SINH_READY : in  std_logic;
-
-      MATRIX_SINH_DATA_IN_I_ENABLE : out std_logic;
-      MATRIX_SINH_DATA_IN_J_ENABLE : out std_logic;
-
-      MATRIX_SINH_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_SINH_DATA_OUT_J_ENABLE : in std_logic;
-
-      -- DATA
-      MATRIX_SINH_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_SINH_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_SINH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_SINH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- MATRIX TANH
-      -- CONTROL
-      MATRIX_TANH_START : out std_logic;
-      MATRIX_TANH_READY : in  std_logic;
-
-      MATRIX_TANH_DATA_IN_I_ENABLE : out std_logic;
-      MATRIX_TANH_DATA_IN_J_ENABLE : out std_logic;
-
-      MATRIX_TANH_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_TANH_DATA_OUT_J_ENABLE : in std_logic;
-
-      -- DATA
-      MATRIX_TANH_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_TANH_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_TANH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_TANH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      MATRIX_ONEPLUS_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

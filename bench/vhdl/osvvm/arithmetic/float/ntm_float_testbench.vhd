@@ -93,7 +93,20 @@ entity ntm_float_testbench is
 
     ENABLE_NTM_MATRIX_FLOAT_ADDER_CASE_1      : boolean := false;
     ENABLE_NTM_MATRIX_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
-    ENABLE_NTM_MATRIX_FLOAT_DIVIDER_CASE_1    : boolean := false
+    ENABLE_NTM_MATRIX_FLOAT_DIVIDER_CASE_1    : boolean := false;
+
+    -- TENSOR-FUNCTIONALITY
+    ENABLE_NTM_TENSOR_FLOAT_ADDER_TEST      : boolean := false;
+    ENABLE_NTM_TENSOR_FLOAT_MULTIPLIER_TEST : boolean := false;
+    ENABLE_NTM_TENSOR_FLOAT_DIVIDER_TEST    : boolean := false;
+
+    ENABLE_NTM_TENSOR_FLOAT_ADDER_CASE_0      : boolean := false;
+    ENABLE_NTM_TENSOR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
+    ENABLE_NTM_TENSOR_FLOAT_DIVIDER_CASE_0    : boolean := false;
+
+    ENABLE_NTM_TENSOR_FLOAT_ADDER_CASE_1      : boolean := false;
+    ENABLE_NTM_TENSOR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
+    ENABLE_NTM_TENSOR_FLOAT_DIVIDER_CASE_1    : boolean := false
     );
 end ntm_float_testbench;
 
@@ -280,6 +293,90 @@ architecture ntm_float_testbench_architecture of ntm_float_testbench is
 
   signal data_out_matrix_float_divider     : std_logic_vector(DATA_SIZE-1 downto 0);
   signal overflow_out_matrix_float_divider : std_logic;
+
+  -----------------------------------------------------------------------
+  -- TENSOR
+  -----------------------------------------------------------------------
+
+  -- TENSOR FLOAT ADDER
+  -- CONTROL
+  signal start_tensor_float_adder : std_logic;
+  signal ready_tensor_float_adder : std_logic;
+
+  signal operation_tensor_float_adder : std_logic;
+
+  signal data_a_in_i_enable_tensor_float_adder : std_logic;
+  signal data_a_in_j_enable_tensor_float_adder : std_logic;
+  signal data_a_in_k_enable_tensor_float_adder : std_logic;
+  signal data_b_in_i_enable_tensor_float_adder : std_logic;
+  signal data_b_in_j_enable_tensor_float_adder : std_logic;
+  signal data_b_in_k_enable_tensor_float_adder : std_logic;
+
+  signal data_out_i_enable_tensor_float_adder : std_logic;
+  signal data_out_j_enable_tensor_float_adder : std_logic;
+  signal data_out_k_enable_tensor_float_adder : std_logic;
+
+  -- DATA
+  signal size_i_in_tensor_float_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_tensor_float_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_k_in_tensor_float_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_tensor_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_tensor_float_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_tensor_float_adder : std_logic;
+
+  -- TENSOR FLOAT MULTIPLIER
+  -- CONTROL
+  signal start_tensor_float_multiplier : std_logic;
+  signal ready_tensor_float_multiplier : std_logic;
+
+  signal data_a_in_i_enable_tensor_float_multiplier : std_logic;
+  signal data_a_in_j_enable_tensor_float_multiplier : std_logic;
+  signal data_a_in_k_enable_tensor_float_multiplier : std_logic;
+  signal data_b_in_i_enable_tensor_float_multiplier : std_logic;
+  signal data_b_in_j_enable_tensor_float_multiplier : std_logic;
+  signal data_b_in_k_enable_tensor_float_multiplier : std_logic;
+
+  signal data_out_i_enable_tensor_float_multiplier : std_logic;
+  signal data_out_j_enable_tensor_float_multiplier : std_logic;
+  signal data_out_k_enable_tensor_float_multiplier : std_logic;
+
+  -- DATA
+  signal size_i_in_tensor_float_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_tensor_float_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_k_in_tensor_float_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_tensor_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_tensor_float_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_tensor_float_multiplier : std_logic;
+
+  -- TENSOR FLOAT DIVIDER
+  -- CONTROL
+  signal start_tensor_float_divider : std_logic;
+  signal ready_tensor_float_divider : std_logic;
+
+  signal data_a_in_i_enable_tensor_float_divider : std_logic;
+  signal data_a_in_j_enable_tensor_float_divider : std_logic;
+  signal data_a_in_k_enable_tensor_float_divider : std_logic;
+  signal data_b_in_i_enable_tensor_float_divider : std_logic;
+  signal data_b_in_j_enable_tensor_float_divider : std_logic;
+  signal data_b_in_k_enable_tensor_float_divider : std_logic;
+
+  signal data_out_i_enable_tensor_float_divider : std_logic;
+  signal data_out_j_enable_tensor_float_divider : std_logic;
+  signal data_out_k_enable_tensor_float_divider : std_logic;
+
+  -- DATA
+  signal size_i_in_tensor_float_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_tensor_float_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_k_in_tensor_float_divider : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_tensor_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_tensor_float_divider     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_tensor_float_divider : std_logic;
 
 begin
 
@@ -468,7 +565,91 @@ begin
       MATRIX_FLOAT_DIVIDER_DATA_A_IN    => data_a_in_matrix_float_divider,
       MATRIX_FLOAT_DIVIDER_DATA_B_IN    => data_b_in_matrix_float_divider,
       MATRIX_FLOAT_DIVIDER_DATA_OUT     => data_out_matrix_float_divider,
-      MATRIX_FLOAT_DIVIDER_OVERFLOW_OUT => overflow_out_matrix_float_divider
+      MATRIX_FLOAT_DIVIDER_OVERFLOW_OUT => overflow_out_matrix_float_divider,
+
+      -----------------------------------------------------------------------
+      -- STIMULUS TENSOR
+      -----------------------------------------------------------------------
+
+      -- TENSOR FLOAT ADDER
+      -- CONTROL
+      TENSOR_FLOAT_ADDER_START => start_tensor_float_adder,
+      TENSOR_FLOAT_ADDER_READY => ready_tensor_float_adder,
+
+      TENSOR_FLOAT_ADDER_OPERATION => operation_tensor_float_adder,
+
+      TENSOR_FLOAT_ADDER_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_float_adder,
+      TENSOR_FLOAT_ADDER_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_float_adder,
+      TENSOR_FLOAT_ADDER_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_float_adder,
+      TENSOR_FLOAT_ADDER_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_float_adder,
+      TENSOR_FLOAT_ADDER_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_float_adder,
+      TENSOR_FLOAT_ADDER_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_float_adder,
+
+      TENSOR_FLOAT_ADDER_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_float_adder,
+      TENSOR_FLOAT_ADDER_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_float_adder,
+      TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_float_adder,
+
+      -- DATA
+      TENSOR_FLOAT_ADDER_SIZE_I_IN => size_i_in_tensor_float_adder,
+      TENSOR_FLOAT_ADDER_SIZE_J_IN => size_j_in_tensor_float_adder,
+      TENSOR_FLOAT_ADDER_SIZE_K_IN => size_k_in_tensor_float_adder,
+      TENSOR_FLOAT_ADDER_DATA_A_IN => data_a_in_tensor_float_adder,
+      TENSOR_FLOAT_ADDER_DATA_B_IN => data_b_in_tensor_float_adder,
+
+      TENSOR_FLOAT_ADDER_DATA_OUT     => data_out_tensor_float_adder,
+      TENSOR_FLOAT_ADDER_OVERFLOW_OUT => overflow_out_tensor_float_adder,
+
+      -- TENSOR FLOAT MULTIPLIER
+      -- CONTROL
+      TENSOR_FLOAT_MULTIPLIER_START => start_tensor_float_multiplier,
+      TENSOR_FLOAT_MULTIPLIER_READY => ready_tensor_float_multiplier,
+
+      TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_float_multiplier,
+      TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_float_multiplier,
+      TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_float_multiplier,
+      TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_float_multiplier,
+      TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_float_multiplier,
+      TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_float_multiplier,
+
+      TENSOR_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_float_multiplier,
+      TENSOR_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_float_multiplier,
+      TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_float_multiplier,
+
+      -- DATA
+      TENSOR_FLOAT_MULTIPLIER_SIZE_I_IN => size_i_in_tensor_float_multiplier,
+      TENSOR_FLOAT_MULTIPLIER_SIZE_J_IN => size_j_in_tensor_float_multiplier,
+      TENSOR_FLOAT_MULTIPLIER_SIZE_K_IN => size_k_in_tensor_float_multiplier,
+      TENSOR_FLOAT_MULTIPLIER_DATA_A_IN => data_a_in_tensor_float_multiplier,
+      TENSOR_FLOAT_MULTIPLIER_DATA_B_IN => data_b_in_tensor_float_multiplier,
+
+      TENSOR_FLOAT_MULTIPLIER_DATA_OUT     => data_out_tensor_float_multiplier,
+      TENSOR_FLOAT_MULTIPLIER_OVERFLOW_OUT => overflow_out_tensor_float_multiplier,
+
+      -- TENSOR FLOAT DIVIDER
+      -- CONTROL
+      TENSOR_FLOAT_DIVIDER_START => start_tensor_float_divider,
+      TENSOR_FLOAT_DIVIDER_READY => ready_tensor_float_divider,
+
+      TENSOR_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_float_divider,
+      TENSOR_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_float_divider,
+      TENSOR_FLOAT_DIVIDER_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_float_divider,
+      TENSOR_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_float_divider,
+      TENSOR_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_float_divider,
+      TENSOR_FLOAT_DIVIDER_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_float_divider,
+
+      TENSOR_FLOAT_DIVIDER_DATA_OUT_I_ENABLE => data_out_i_enable_tensor_float_divider,
+      TENSOR_FLOAT_DIVIDER_DATA_OUT_J_ENABLE => data_out_j_enable_tensor_float_divider,
+      TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_float_divider,
+
+      -- DATA
+      TENSOR_FLOAT_DIVIDER_SIZE_I_IN => size_i_in_tensor_float_divider,
+      TENSOR_FLOAT_DIVIDER_SIZE_J_IN => size_j_in_tensor_float_divider,
+      TENSOR_FLOAT_DIVIDER_SIZE_K_IN => size_k_in_tensor_float_divider,
+      TENSOR_FLOAT_DIVIDER_DATA_A_IN => data_a_in_tensor_float_divider,
+      TENSOR_FLOAT_DIVIDER_DATA_B_IN => data_b_in_tensor_float_divider,
+
+      TENSOR_FLOAT_DIVIDER_DATA_OUT     => data_out_tensor_float_divider,
+      TENSOR_FLOAT_DIVIDER_OVERFLOW_OUT => overflow_out_tensor_float_divider
       );
 
   -----------------------------------------------------------------------
@@ -760,5 +941,128 @@ begin
         OVERFLOW_OUT => overflow_out_matrix_float_divider
         );
   end generate ntm_matrix_float_divider_test;
+
+  -----------------------------------------------------------------------
+  -- TENSOR
+  -----------------------------------------------------------------------
+
+  -- TENSOR FLOAT ADDER
+  ntm_tensor_float_adder_test : if (ENABLE_NTM_TENSOR_FLOAT_ADDER_TEST) generate
+    tensor_float_adder : ntm_tensor_float_adder
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_tensor_float_adder,
+        READY => ready_tensor_float_adder,
+
+        OPERATION => operation_tensor_float_adder,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_float_adder,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_float_adder,
+        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_float_adder,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_float_adder,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_float_adder,
+        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_float_adder,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_float_adder,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_float_adder,
+        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_float_adder,
+
+        -- DATA
+        SIZE_I_IN => size_i_in_tensor_float_adder,
+        SIZE_J_IN => size_j_in_tensor_float_adder,
+        SIZE_K_IN => size_k_in_tensor_float_adder,
+        DATA_A_IN => data_a_in_tensor_float_adder,
+        DATA_B_IN => data_b_in_tensor_float_adder,
+
+        DATA_OUT     => data_out_tensor_float_adder,
+        OVERFLOW_OUT => overflow_out_tensor_float_adder
+        );
+  end generate ntm_tensor_float_adder_test;
+
+  -- TENSOR FLOAT MULTIPLIER
+  ntm_tensor_float_multiplier_test : if (ENABLE_NTM_TENSOR_FLOAT_MULTIPLIER_TEST) generate
+    tensor_float_multiplier : ntm_tensor_float_multiplier
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_tensor_float_multiplier,
+        READY => ready_tensor_float_multiplier,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_float_multiplier,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_float_multiplier,
+        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_float_multiplier,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_float_multiplier,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_float_multiplier,
+        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_float_multiplier,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_float_multiplier,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_float_multiplier,
+        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_float_multiplier,
+
+        -- DATA
+        SIZE_I_IN => size_i_in_tensor_float_multiplier,
+        SIZE_J_IN => size_j_in_tensor_float_multiplier,
+        SIZE_K_IN => size_k_in_tensor_float_multiplier,
+        DATA_A_IN => data_a_in_tensor_float_multiplier,
+        DATA_B_IN => data_b_in_tensor_float_multiplier,
+
+        DATA_OUT     => data_out_tensor_float_multiplier,
+        OVERFLOW_OUT => overflow_out_tensor_float_multiplier
+        );
+  end generate ntm_tensor_float_multiplier_test;
+
+  -- TENSOR FLOAT DIVIDER
+  ntm_tensor_float_divider_test : if (ENABLE_NTM_TENSOR_FLOAT_DIVIDER_TEST) generate
+    tensor_float_divider : ntm_tensor_float_divider
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_tensor_float_divider,
+        READY => ready_tensor_float_divider,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_float_divider,
+        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_float_divider,
+        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_float_divider,
+        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_float_divider,
+        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_float_divider,
+        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_float_divider,
+
+        DATA_OUT_I_ENABLE => data_out_i_enable_tensor_float_divider,
+        DATA_OUT_J_ENABLE => data_out_j_enable_tensor_float_divider,
+        DATA_OUT_K_ENABLE => data_out_k_enable_tensor_float_divider,
+
+        -- DATA
+        SIZE_I_IN => size_i_in_tensor_float_divider,
+        SIZE_J_IN => size_j_in_tensor_float_divider,
+        SIZE_K_IN => size_k_in_tensor_float_divider,
+        DATA_A_IN => data_a_in_tensor_float_divider,
+        DATA_B_IN => data_b_in_tensor_float_divider,
+
+        DATA_OUT     => data_out_tensor_float_divider,
+        OVERFLOW_OUT => overflow_out_tensor_float_divider
+        );
+  end generate ntm_tensor_float_divider_test;
 
 end ntm_float_testbench_architecture;

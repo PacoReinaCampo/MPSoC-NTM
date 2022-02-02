@@ -271,6 +271,93 @@ alias ntm_matrix_float_divider_verification_compilation {
 }
 
 ##################################################################################################
+# NTM_TENSOR_FLOAT_ADDER_TEST 
+##################################################################################################
+
+alias ntm_tensor_float_adder_verification_compilation {
+  echo "TEST: NTM_TENSOR_FLOAT_ADDER_TEST"
+
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/ntm_float_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/ntm_float_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/ntm_float_testbench.vhd
+
+  vsim -g /ntm_float_testbench/ENABLE_NTM_TENSOR_FLOAT_ADDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_float_testbench
+
+  #MACROS
+  add log -r sim:/ntm_float_testbench/*
+
+  #WAVES
+  view -title ntm_tensor_float_adder wave
+  do $simulation_path/mpsoc/arithmetic/float/msim/waves/ntm_tensor_float_adder.do
+
+  force -freeze sim:/ntm_float_pkg/STIMULUS_NTM_TENSOR_FLOAT_ADDER_TEST true 0
+  force -freeze sim:/ntm_float_pkg/STIMULUS_NTM_TENSOR_FLOAT_ADDER_CASE_0 true 0
+
+  onbreak {resume}
+  run -all
+
+  dataset save sim ntm_tensor_float_adder_test.wlf
+}
+
+##################################################################################################
+# NTM_TENSOR_FLOAT_MULTIPLIER_TEST 
+##################################################################################################
+
+alias ntm_tensor_float_multiplier_verification_compilation {
+  echo "TEST: NTM_TENSOR_FLOAT_MULTIPLIER_TEST"
+
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/ntm_float_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/ntm_float_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/ntm_float_testbench.vhd
+
+  vsim -g /ntm_float_testbench/ENABLE_NTM_TENSOR_FLOAT_MULTIPLIER_TEST=true -t ps +notimingchecks -L unisim work.ntm_float_testbench
+
+  #MACROS
+  add log -r sim:/ntm_float_testbench/*
+
+  #WAVES
+  view -title ntm_tensor_float_multiplier wave
+  do $simulation_path/mpsoc/arithmetic/float/msim/waves/ntm_tensor_float_multiplier.do
+
+  force -freeze sim:/ntm_float_pkg/STIMULUS_NTM_TENSOR_FLOAT_MULTIPLIER_TEST true 0
+  force -freeze sim:/ntm_float_pkg/STIMULUS_NTM_TENSOR_FLOAT_MULTIPLIER_CASE_0 true 0
+
+  onbreak {resume}
+  run -all
+
+  dataset save sim ntm_tensor_float_multiplier_test.wlf
+}
+
+##################################################################################################
+# NTM_TENSOR_FLOAT_DIVIDER_TEST 
+##################################################################################################
+
+alias ntm_tensor_float_divider_verification_compilation {
+  echo "TEST: NTM_TENSOR_FLOAT_DIVIDER_TEST"
+
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/ntm_float_pkg.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/ntm_float_stimulus.vhd
+  vcom -2008 -reportprogress 300 -work work $verification_path/arithmetic/float/ntm_float_testbench.vhd
+
+  vsim -g /ntm_float_testbench/ENABLE_NTM_TENSOR_FLOAT_DIVIDER_TEST=true -t ps +notimingchecks -L unisim work.ntm_float_testbench
+
+  #MACROS
+  add log -r sim:/ntm_float_testbench/*
+
+  #WAVES
+  view -title ntm_tensor_float_divider wave
+  do $simulation_path/mpsoc/arithmetic/float/msim/waves/ntm_tensor_float_divider.do
+
+  force -freeze sim:/ntm_float_pkg/STIMULUS_NTM_TENSOR_FLOAT_DIVIDER_TEST true 0
+  force -freeze sim:/ntm_float_pkg/STIMULUS_NTM_TENSOR_FLOAT_DIVIDER_CASE_0 true 0
+
+  onbreak {resume}
+  run -all
+
+  dataset save sim ntm_tensor_float_divider_test.wlf
+}
+
+##################################################################################################
 
 alias v01 {
   ntm_scalar_float_adder_verification_compilation
@@ -308,6 +395,18 @@ alias v09 {
   ntm_matrix_float_divider_verification_compilation
 }
 
+alias v10 {
+  ntm_tensor_float_adder_verification_compilation
+}
+
+alias v11 {
+  ntm_tensor_float_multiplier_verification_compilation
+}
+
+alias v12 {
+  ntm_tensor_float_divider_verification_compilation
+}
+
 echo "****************************************"
 echo "v01 . NTM-SCALAR-FLOAT-ADDER-TEST"
 echo "v02 . NTM-SCALAR-FLOAT-MULTIPLIER-TEST"
@@ -318,4 +417,7 @@ echo "v06 . NTM-VECTOR-FLOAT-DIVIDER-TEST"
 echo "v07 . NTM-MATRIX-FLOAT-ADDER-TEST"
 echo "v08 . NTM-MATRIX-FLOAT-MULTIPLIER-TEST"
 echo "v09 . NTM-MATRIX-FLOAT-DIVIDER-TEST"
+echo "v10 . NTM-TENSOR-FLOAT-ADDER-TEST"
+echo "v11 . NTM-TENSOR-FLOAT-MULTIPLIER-TEST"
+echo "v12 . NTM-TENSOR-FLOAT-DIVIDER-TEST"
 echo "****************************************"
