@@ -44,7 +44,7 @@ use ieee.numeric_std.all;
 
 use work.ntm_math_pkg.all;
 
-entity ntm_matrix_logistic_function is
+entity ntm_matrix_logarithm_function is
   generic (
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64
@@ -73,13 +73,13 @@ entity ntm_matrix_logistic_function is
     );
 end entity;
 
-architecture ntm_matrix_logistic_function_architecture of ntm_matrix_logistic_function is
+architecture ntm_matrix_logarithm_function_architecture of ntm_matrix_logarithm_function is
 
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
 
-  type logistic_ctrl_fsm is (
+  type logarithm_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_I_STATE,                      -- STEP 1
     INPUT_J_STATE,                      -- STEP 2
@@ -111,7 +111,7 @@ architecture ntm_matrix_logistic_function_architecture of ntm_matrix_logistic_fu
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal logistic_ctrl_fsm_int : logistic_ctrl_fsm;
+  signal logarithm_ctrl_fsm_int : logarithm_ctrl_fsm;
 
   -- Internal Signals
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -119,14 +119,14 @@ architecture ntm_matrix_logistic_function_architecture of ntm_matrix_logistic_fu
 
   -- SCALAR LOGARITHM
   -- CONTROL
-  signal start_scalar_logistic_function : std_logic;
-  signal ready_scalar_logistic_function : std_logic;
+  signal start_scalar_logarithm_function : std_logic;
+  signal ready_scalar_logarithm_function : std_logic;
 
   -- DATA
-  signal data_in_scalar_logistic_function   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_logistic_function : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_in_scalar_logarithm_function   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_logarithm_function : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_scalar_logistic_function : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_logarithm_function : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -134,7 +134,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = logistic(DATA_IN)
+  -- DATA_OUT = logarithm(DATA_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -150,17 +150,17 @@ begin
       DATA_OUT_J_ENABLE <= '0';
 
       -- Control Internal
-      start_scalar_logistic_function <= '0';
+      start_scalar_logarithm_function <= '0';
 
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
 
       -- Data Internal
-      data_in_scalar_logistic_function <= ZERO_DATA;
+      data_in_scalar_logarithm_function <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
-      case logistic_ctrl_fsm_int is
+      case logarithm_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -175,7 +175,7 @@ begin
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            logistic_ctrl_fsm_int <= INPUT_I_STATE;
+            logarithm_ctrl_fsm_int <= INPUT_I_STATE;
           else
             -- Control Outputs
             DATA_OUT_I_ENABLE <= '0';
@@ -186,16 +186,16 @@ begin
 
           if ((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) then
             -- Data Inputs
-            data_in_scalar_logistic_function <= DATA_IN;
+            data_in_scalar_logarithm_function <= DATA_IN;
 
             -- Control Internal
-            start_scalar_logistic_function <= '1';
+            start_scalar_logarithm_function <= '1';
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              logistic_ctrl_fsm_int <= ENDER_I_STATE;
+              logarithm_ctrl_fsm_int <= ENDER_I_STATE;
             else
-              logistic_ctrl_fsm_int <= ENDER_J_STATE;
+              logarithm_ctrl_fsm_int <= ENDER_J_STATE;
             end if;
           end if;
 
@@ -207,16 +207,16 @@ begin
 
           if (DATA_IN_J_ENABLE = '1') then
             -- Data Inputs
-            data_in_scalar_logistic_function <= DATA_IN;
+            data_in_scalar_logarithm_function <= DATA_IN;
 
             -- Control Internal
-            start_scalar_logistic_function <= '1';
+            start_scalar_logarithm_function <= '1';
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
-              logistic_ctrl_fsm_int <= ENDER_I_STATE;
+              logarithm_ctrl_fsm_int <= ENDER_I_STATE;
             else
-              logistic_ctrl_fsm_int <= ENDER_J_STATE;
+              logarithm_ctrl_fsm_int <= ENDER_J_STATE;
             end if;
           end if;
 
@@ -225,10 +225,10 @@ begin
 
         when ENDER_I_STATE =>           -- STEP 3
 
-          if (ready_scalar_logistic_function = '1') then
+          if (ready_scalar_logarithm_function = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
-              DATA_OUT <= data_out_scalar_logistic_function;
+              DATA_OUT <= data_out_scalar_logarithm_function;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -241,10 +241,10 @@ begin
               index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              logistic_ctrl_fsm_int <= STARTER_STATE;
+              logarithm_ctrl_fsm_int <= STARTER_STATE;
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
               -- Data Outputs
-              DATA_OUT <= data_out_scalar_logistic_function;
+              DATA_OUT <= data_out_scalar_logarithm_function;
 
               -- Control Outputs
               DATA_OUT_I_ENABLE <= '1';
@@ -255,19 +255,19 @@ begin
               index_j_loop <= ZERO_CONTROL;
 
               -- FSM Control
-              logistic_ctrl_fsm_int <= INPUT_I_STATE;
+              logarithm_ctrl_fsm_int <= INPUT_I_STATE;
             end if;
           else
             -- Control Internal
-            start_scalar_logistic_function <= '0';
+            start_scalar_logarithm_function <= '0';
           end if;
 
         when ENDER_J_STATE =>           -- STEP 3
 
-          if (ready_scalar_logistic_function = '1') then
+          if (ready_scalar_logarithm_function = '1') then
             if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
-              DATA_OUT <= data_out_scalar_logistic_function;
+              DATA_OUT <= data_out_scalar_logarithm_function;
 
               -- Control Outputs
               DATA_OUT_J_ENABLE <= '1';
@@ -276,22 +276,22 @@ begin
               index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
               -- FSM Control
-              logistic_ctrl_fsm_int <= INPUT_J_STATE;
+              logarithm_ctrl_fsm_int <= INPUT_J_STATE;
             end if;
           else
             -- Control Internal
-            start_scalar_logistic_function <= '0';
+            start_scalar_logarithm_function <= '0';
           end if;
 
         when others =>
           -- FSM Control
-          logistic_ctrl_fsm_int <= STARTER_STATE;
+          logarithm_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
 
   -- SCALAR LOGARITHM
-  scalar_logistic_function : ntm_scalar_logistic_function
+  scalar_logarithm_function : ntm_scalar_logarithm_function
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -302,12 +302,12 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_logistic_function,
-      READY => ready_scalar_logistic_function,
+      START => start_scalar_logarithm_function,
+      READY => ready_scalar_logarithm_function,
 
       -- DATA
-      DATA_IN  => data_in_scalar_logistic_function,
-      DATA_OUT => data_out_scalar_logistic_function
+      DATA_IN  => data_in_scalar_logarithm_function,
+      DATA_OUT => data_out_scalar_logarithm_function
       );
 
 end architecture;
