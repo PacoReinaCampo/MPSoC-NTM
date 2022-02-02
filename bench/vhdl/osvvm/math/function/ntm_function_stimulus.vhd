@@ -247,16 +247,16 @@ begin
   end process;
 
   -- SCALAR-FUNCTIONALITY
-  SCALAR_LOGISTIC_START      <= start_int;
-  SCALAR_ONEPLUS_START       <= start_int;
+  SCALAR_LOGISTIC_START <= start_int;
+  SCALAR_ONEPLUS_START  <= start_int;
 
   -- VECTOR-FUNCTIONALITY
-  VECTOR_LOGISTIC_START      <= start_int;
-  VECTOR_ONEPLUS_START       <= start_int;
+  VECTOR_LOGISTIC_START <= start_int;
+  VECTOR_ONEPLUS_START  <= start_int;
 
   -- MATRIX-FUNCTIONALITY
-  MATRIX_LOGISTIC_START      <= start_int;
-  MATRIX_ONEPLUS_START       <= start_int;
+  MATRIX_LOGISTIC_START <= start_int;
+  MATRIX_ONEPLUS_START  <= start_int;
 
   -----------------------------------------------------------------------
   -- STIMULUS

@@ -74,9 +74,8 @@ architecture ntm_scalar_oneplus_function_architecture of ntm_scalar_oneplus_func
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     SCALAR_EXPONENTIATOR_STATE,         -- STEP 1
-    SCALAR_FIRST_ADDER_STATE,           -- STEP 2
-    SCALAR_LOGARITHM_STATE,             -- STEP 3
-    SCALAR_SECOND_ADDER_STATE           -- STEP 4
+    SCALAR_LOGARITHM_STATE,             -- STEP 2
+    SCALAR_ADDER_STATE                  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -191,33 +190,16 @@ begin
 
           if (ready_scalar_exponentiator_function = '1') then
             -- Control Internal
-            start_scalar_integer_adder <= '1';
-
-            -- Data Internal
-            data_a_in_scalar_integer_adder <= ONE_DATA;
-            data_b_in_scalar_integer_adder <= data_out_scalar_exponentiator_function;
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_FIRST_ADDER_STATE;
-          else
-            -- Control Internal
-            start_scalar_exponentiator_function <= '0';
-          end if;
-
-        when SCALAR_FIRST_ADDER_STATE =>  -- STEP 2
-
-          if (ready_scalar_integer_adder = '1') then
-            -- Control Internal
             start_scalar_logarithm_function <= '1';
 
             -- Data Internal
-            data_in_scalar_logarithm_function <= data_out_scalar_integer_adder;
+            data_in_scalar_logarithm_function <= data_out_scalar_exponentiator_function;
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_LOGARITHM_STATE;
           else
             -- Control Internal
-            start_scalar_integer_adder <= '0';
+            start_scalar_exponentiator_function <= '0';
           end if;
 
         when SCALAR_LOGARITHM_STATE =>  -- STEP 3
@@ -233,13 +215,13 @@ begin
             data_b_in_scalar_integer_adder <= data_out_scalar_logarithm_function;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_SECOND_ADDER_STATE;
+            controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
           else
             -- Control Internal
             start_scalar_logarithm_function <= '0';
           end if;
 
-        when SCALAR_SECOND_ADDER_STATE =>      -- STEP 4
+        when SCALAR_ADDER_STATE =>      -- STEP 4
 
           if (ready_scalar_integer_adder = '1') then
             -- Data Outputs

@@ -57,34 +57,34 @@ entity ntm_function_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- SCALAR-FUNCTIONALITY
-    ENABLE_NTM_SCALAR_LOGISTIC_TEST      : boolean := false;
-    ENABLE_NTM_SCALAR_ONEPLUS_TEST       : boolean := false;
+    ENABLE_NTM_SCALAR_LOGISTIC_TEST : boolean := false;
+    ENABLE_NTM_SCALAR_ONEPLUS_TEST  : boolean := false;
 
-    ENABLE_NTM_SCALAR_LOGISTIC_CASE_0      : boolean := false;
-    ENABLE_NTM_SCALAR_ONEPLUS_CASE_0       : boolean := false;
+    ENABLE_NTM_SCALAR_LOGISTIC_CASE_0 : boolean := false;
+    ENABLE_NTM_SCALAR_ONEPLUS_CASE_0  : boolean := false;
 
-    ENABLE_NTM_SCALAR_LOGISTIC_CASE_1      : boolean := false;
-    ENABLE_NTM_SCALAR_ONEPLUS_CASE_1       : boolean := false;
+    ENABLE_NTM_SCALAR_LOGISTIC_CASE_1 : boolean := false;
+    ENABLE_NTM_SCALAR_ONEPLUS_CASE_1  : boolean := false;
 
     -- VECTOR-FUNCTIONALITY
-    ENABLE_NTM_VECTOR_LOGISTIC_TEST      : boolean := false;
-    ENABLE_NTM_VECTOR_ONEPLUS_TEST       : boolean := false;
+    ENABLE_NTM_VECTOR_LOGISTIC_TEST : boolean := false;
+    ENABLE_NTM_VECTOR_ONEPLUS_TEST  : boolean := false;
 
-    ENABLE_NTM_VECTOR_LOGISTIC_CASE_0      : boolean := false;
-    ENABLE_NTM_VECTOR_ONEPLUS_CASE_0       : boolean := false;
+    ENABLE_NTM_VECTOR_LOGISTIC_CASE_0 : boolean := false;
+    ENABLE_NTM_VECTOR_ONEPLUS_CASE_0  : boolean := false;
 
-    ENABLE_NTM_VECTOR_LOGISTIC_CASE_1      : boolean := false;
-    ENABLE_NTM_VECTOR_ONEPLUS_CASE_1       : boolean := false;
+    ENABLE_NTM_VECTOR_LOGISTIC_CASE_1 : boolean := false;
+    ENABLE_NTM_VECTOR_ONEPLUS_CASE_1  : boolean := false;
 
     -- MATRIX-FUNCTIONALITY
-    ENABLE_NTM_MATRIX_LOGISTIC_TEST      : boolean := false;
-    ENABLE_NTM_MATRIX_ONEPLUS_TEST       : boolean := false;
+    ENABLE_NTM_MATRIX_LOGISTIC_TEST : boolean := false;
+    ENABLE_NTM_MATRIX_ONEPLUS_TEST  : boolean := false;
 
-    ENABLE_NTM_MATRIX_LOGISTIC_CASE_0      : boolean := false;
-    ENABLE_NTM_MATRIX_ONEPLUS_CASE_0       : boolean := false;
+    ENABLE_NTM_MATRIX_LOGISTIC_CASE_0 : boolean := false;
+    ENABLE_NTM_MATRIX_ONEPLUS_CASE_0  : boolean := false;
 
-    ENABLE_NTM_MATRIX_LOGISTIC_CASE_1      : boolean := false;
-    ENABLE_NTM_MATRIX_ONEPLUS_CASE_1       : boolean := false
+    ENABLE_NTM_MATRIX_LOGISTIC_CASE_1 : boolean := false;
+    ENABLE_NTM_MATRIX_ONEPLUS_CASE_1  : boolean := false
     );
 end ntm_function_testbench;
 

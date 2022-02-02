@@ -206,7 +206,7 @@ alias v05 {
   ntm_matrix_logistic_function_verification_compilation
 }
 
-alias 06 {
+alias v06 {
   ntm_matrix_oneplus_function_verification_compilation
 }
 

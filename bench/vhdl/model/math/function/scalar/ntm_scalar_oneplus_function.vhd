@@ -239,7 +239,7 @@ begin
             start_scalar_logarithm_function <= '0';
           end if;
 
-        when SCALAR_SECOND_ADDER_STATE =>      -- STEP 4
+        when SCALAR_SECOND_ADDER_STATE =>  -- STEP 4
 
           if (ready_scalar_integer_adder = '1') then
             -- Data Outputs
