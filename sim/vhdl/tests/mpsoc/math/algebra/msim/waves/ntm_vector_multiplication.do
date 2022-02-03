@@ -23,11 +23,11 @@ add wave -noupdate /ntm_algebra_testbench/ntm_vector_multiplication_test/vector_
 
 add wave -noupdate /ntm_algebra_testbench/ntm_vector_multiplication_test/vector_multiplication/index_loop
 
-add wave -noupdate /ntm_algebra_testbench/ntm_vector_multiplication_test/vector_multiplication/start_scalar_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_vector_multiplication_test/vector_multiplication/data_a_in_scalar_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_vector_multiplication_test/vector_multiplication/data_b_in_scalar_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_vector_multiplication_test/vector_multiplication/ready_scalar_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_vector_multiplication_test/vector_multiplication/data_out_scalar_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_multiplication_test/vector_multiplication/start_scalar_integer_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_multiplication_test/vector_multiplication/data_a_in_scalar_integer_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_multiplication_test/vector_multiplication/data_b_in_scalar_integer_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_multiplication_test/vector_multiplication/ready_scalar_integer_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_multiplication_test/vector_multiplication/data_out_scalar_integer_multiplier
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

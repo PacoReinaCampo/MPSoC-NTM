@@ -58,9 +58,13 @@ entity dnc_memory_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- FUNCTIONALITY
-    ENABLE_DNC_MEMORY_TEST   : boolean := false;
-    ENABLE_DNC_MEMORY_CASE_0 : boolean := false;
-    ENABLE_DNC_MEMORY_CASE_1 : boolean := false
+    ENABLE_DNC_MEMORY_SORT_VECTOR_TEST   : boolean := false;
+    ENABLE_DNC_MEMORY_SORT_VECTOR_CASE_0 : boolean := false;
+    ENABLE_DNC_MEMORY_SORT_VECTOR_CASE_1 : boolean := false;
+
+    ENABLE_NTM_MEMORY_TEST   : boolean := false;
+    ENABLE_NTM_MEMORY_CASE_0 : boolean := false;
+    ENABLE_NTM_MEMORY_CASE_1 : boolean := false
     );
 end dnc_memory_testbench;
 
@@ -328,6 +332,24 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
 
   signal w_out_read_weighting : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- SORT VECTOR
+  -- CONTROL
+  signal start_sort_vector : std_logic;
+  signal ready_sort_vector : std_logic;
+
+  signal u_in_enable_sort_vector : std_logic;
+
+  signal u_out_enable_sort_vector : std_logic;
+
+  signal phi_out_enable_sort_vector : std_logic;
+
+  -- DATA
+  signal size_n_in_sort_vector : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal u_in_sort_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal phi_out_sort_vector : std_logic_vector(DATA_SIZE-1 downto 0);
+
   -- TEMPORAL LINK MATRIX
   -- CONTROL
   signal start_temporal_link_matrix : std_logic;
@@ -504,6 +526,25 @@ begin
       CLK => CLK,
       RST => RST,
 
+      -- SORT VECTOR
+      -- CONTROL
+      DNC_MEMORY_SORT_VECTOR_START => start_sort_vector,
+      DNC_MEMORY_SORT_VECTOR_READY => ready_sort_vector,
+
+      DNC_MEMORY_SORT_VECTOR_U_IN_ENABLE => u_in_enable_sort_vector,
+
+      DNC_MEMORY_SORT_VECTOR_U_OUT_ENABLE => u_out_enable_sort_vector,
+
+      DNC_MEMORY_SORT_VECTOR_PHI_OUT_ENABLE => phi_out_enable_sort_vector,
+
+      -- DATA
+      DNC_MEMORY_SORT_VECTOR_SIZE_N_IN => size_n_in_sort_vector,
+
+      DNC_MEMORY_SORT_VECTOR_U_IN => u_in_sort_vector,
+
+      DNC_MEMORY_SORT_VECTOR_PHI_OUT => phi_out_sort_vector,
+
+      -- ADDRESSING
       -- CONTROL
       DNC_MEMORY_START => start_addressing,
       DNC_MEMORY_READY => ready_addressing,
@@ -910,6 +951,37 @@ begin
 
       W_OUT => w_out_read_weighting
       );
+
+  -- SORT VECTOR
+  dnc_sort_vector_test : if (ENABLE_DNC_MEMORY_SORT_VECTOR_TEST) generate
+    sort_vector : dnc_sort_vector
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_sort_vector,
+        READY => ready_sort_vector,
+
+        U_IN_ENABLE => u_in_enable_sort_vector,
+
+        U_OUT_ENABLE => u_out_enable_sort_vector,
+
+        PHI_OUT_ENABLE => phi_out_enable_sort_vector,
+
+        -- DATA
+        SIZE_N_IN => size_n_in_sort_vector,
+
+        U_IN => u_in_sort_vector,
+
+        PHI_OUT => phi_out_sort_vector
+        );
+  end generate dnc_sort_vector_test;
 
   -- TEMPORAL LINK MATRIX
   temporal_link_matrix : dnc_temporal_link_matrix

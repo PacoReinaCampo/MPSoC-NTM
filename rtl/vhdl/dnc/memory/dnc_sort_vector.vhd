@@ -158,8 +158,6 @@ begin
           -- Control Outputs
           READY <= '0';
 
-          U_OUT_ENABLE <= '0';
-
           PHI_OUT_ENABLE <= '0';
 
           if (START = '1') then
@@ -172,6 +170,8 @@ begin
 
             -- FSM Control
             sort_ctrl_fsm_int <= INPUT_STATE;
+          else
+            U_OUT_ENABLE <= '0';
           end if;
 
         when INPUT_STATE =>             -- STEP 2
@@ -218,17 +218,17 @@ begin
             -- Control Internal
             index_m_loop <= ZERO_CONTROL;
           else
-            -- Data Internal
-            if (vector_in_int(to_integer(unsigned(index_m_loop))) > vector_in_int(to_integer(unsigned(index_m_loop)+unsigned(ONE_CONTROL)))) then
-              vector_out_int := vector_in_int(to_integer(unsigned(index_i_loop)));
-
-              vector_in_int(to_integer(unsigned(index_i_loop))) <= vector_in_int(to_integer(unsigned(index_i_loop)+unsigned(ONE_CONTROL)));
-
-              vector_in_int(to_integer(unsigned(index_i_loop)+unsigned(ONE_CONTROL))) <= vector_out_int;
-            end if;
-
             -- Control Internal
             index_m_loop <= std_logic_vector(unsigned(index_m_loop)+unsigned(ONE_CONTROL));
+          end if;
+
+          -- Data Internal
+          if (signed(vector_in_int(to_integer(unsigned(index_m_loop)))) < signed(vector_in_int(to_integer(unsigned(index_m_loop)+unsigned(ONE_CONTROL))))) then
+            vector_out_int := vector_in_int(to_integer(unsigned(index_i_loop)));
+
+            vector_in_int(to_integer(unsigned(index_m_loop))) <= vector_in_int(to_integer(unsigned(index_m_loop)+unsigned(ONE_CONTROL)));
+
+            vector_in_int(to_integer(unsigned(index_m_loop)+unsigned(ONE_CONTROL))) <= vector_out_int;
           end if;
 
           -- Control Outputs

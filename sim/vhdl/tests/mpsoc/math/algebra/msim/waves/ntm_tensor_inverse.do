@@ -12,20 +12,13 @@ add wave -noupdate -divider {=========================================}
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/CLK
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/RST
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/START
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/SIZE_A_I_IN
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/SIZE_A_J_IN
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/SIZE_A_K_IN
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/SIZE_B_I_IN
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/SIZE_B_J_IN
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/SIZE_B_K_IN
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/DATA_A_IN_I_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/DATA_A_IN_J_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/DATA_A_IN_K_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/DATA_A_IN
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/DATA_B_IN_I_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/DATA_B_IN_J_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/DATA_B_IN_K_ENABLE
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/DATA_B_IN
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/SIZE_I_IN
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/SIZE_J_IN
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/SIZE_K_IN
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/DATA_IN_I_ENABLE
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/DATA_IN_J_ENABLE
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/DATA_IN_K_ENABLE
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/DATA_IN
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/DATA_I_ENABLE
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/DATA_J_ENABLE
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/DATA_K_ENABLE
@@ -40,29 +33,6 @@ add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/index_i_loop
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/index_j_loop
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/index_k_loop
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/index_m_loop
-
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/data_a_in_i_inverse_int
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/data_a_in_j_inverse_int
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/data_a_in_k_inverse_int
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/data_b_in_i_inverse_int
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/data_b_in_j_inverse_int
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/data_b_in_k_inverse_int
-
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/start_scalar_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/operation_scalar_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/data_a_in_scalar_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/data_b_in_scalar_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/ready_scalar_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/data_out_scalar_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/overflow_out_scalar_adder
-
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/start_scalar_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/data_a_in_scalar_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/data_b_in_scalar_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/ready_scalar_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/data_out_scalar_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_inverse_test/tensor_inverse/overflow_out_scalar_multiplier
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}
