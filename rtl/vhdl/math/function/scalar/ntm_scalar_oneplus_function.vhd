@@ -158,12 +158,14 @@ begin
       operation_scalar_integer_adder <= '0';
 
       start_scalar_exponentiator_function <= '0';
+      start_scalar_logarithm_function     <= '0';
 
       -- Data Internal
       data_a_in_scalar_integer_adder <= ZERO_DATA;
       data_b_in_scalar_integer_adder <= ZERO_DATA;
 
       data_in_scalar_exponentiator_function <= ZERO_DATA;
+      data_in_scalar_logarithm_function     <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -181,9 +183,6 @@ begin
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_EXPONENTIATOR_STATE;
-          else
-            -- Control Internal
-            start_scalar_exponentiator_function <= '0';
           end if;
 
         when SCALAR_EXPONENTIATOR_STATE =>  -- STEP 1
