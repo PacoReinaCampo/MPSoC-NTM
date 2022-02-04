@@ -42,6 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 use work.ntm_state_pkg.all;
 
@@ -64,7 +65,14 @@ entity ntm_state_vector_state is
     DATA_B_IN_I_ENABLE : in std_logic;
     DATA_B_IN_J_ENABLE : in std_logic;
 
+    DATA_A_I_ENABLE : out std_logic;
+    DATA_A_J_ENABLE : out std_logic;
+    DATA_B_I_ENABLE : out std_logic;
+    DATA_B_J_ENABLE : out std_logic;
+
     DATA_U_IN_ENABLE : in std_logic;
+
+    DATA_U_ENABLE : out std_logic;
 
     DATA_X_OUT_ENABLE : out std_logic;
 
@@ -112,6 +120,160 @@ architecture ntm_state_vector_state_architecture of ntm_state_vector_state is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- MATRIX STATE
+  -- CONTROL
+  signal start_state_matrix_state : std_logic;
+  signal ready_state_matrix_state : std_logic;
+
+  signal data_a_in_i_state_matrix_state : std_logic;
+  signal data_a_in_j_state_matrix_state : std_logic;
+  signal data_b_in_i_state_matrix_state : std_logic;
+  signal data_b_in_j_state_matrix_state : std_logic;
+  signal data_c_in_i_state_matrix_state : std_logic;
+  signal data_c_in_j_state_matrix_state : std_logic;
+  signal data_d_in_i_state_matrix_state : std_logic;
+  signal data_d_in_j_state_matrix_state : std_logic;
+
+  signal data_a_i_state_matrix_state : std_logic;
+  signal data_a_j_state_matrix_state : std_logic;
+  signal data_b_i_state_matrix_state : std_logic;
+  signal data_b_j_state_matrix_state : std_logic;
+  signal data_c_i_state_matrix_state : std_logic;
+  signal data_c_j_state_matrix_state : std_logic;
+  signal data_d_i_state_matrix_state : std_logic;
+  signal data_d_j_state_matrix_state : std_logic;
+
+  signal data_k_in_i_enable_state_matrix_state : std_logic;
+  signal data_k_in_j_enable_state_matrix_state : std_logic;
+
+  signal data_k_i_enable_state_matrix_state : std_logic;
+  signal data_k_j_enable_state_matrix_state : std_logic;
+
+  signal data_a_out_i_enable_state_matrix_state : std_logic;
+  signal data_a_out_j_enable_state_matrix_state : std_logic;
+
+  -- DATA
+  signal size_a_in_i_state_matrix_state : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_in_j_state_matrix_state : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_in_i_state_matrix_state : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_in_j_state_matrix_state : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_c_in_i_state_matrix_state : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_c_in_j_state_matrix_state : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_d_in_i_state_matrix_state : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_d_in_j_state_matrix_state : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal data_a_in_state_matrix_state : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_state_matrix_state : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_c_in_state_matrix_state : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_d_in_state_matrix_state : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_k_in_state_matrix_state : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_a_out_state_matrix_state : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- MATRIX INPUT
+  -- CONTROL
+  signal start_state_matrix_input : std_logic;
+  signal ready_state_matrix_input : std_logic;
+
+  signal data_b_in_i_state_matrix_input : std_logic;
+  signal data_b_in_j_state_matrix_input : std_logic;
+  signal data_d_in_i_state_matrix_input : std_logic;
+  signal data_d_in_j_state_matrix_input : std_logic;
+
+  signal data_b_i_state_matrix_input : std_logic;
+  signal data_b_j_state_matrix_input : std_logic;
+  signal data_d_i_state_matrix_input : std_logic;
+  signal data_d_j_state_matrix_input : std_logic;
+
+  signal data_k_in_i_enable_state_matrix_input : std_logic;
+  signal data_k_in_j_enable_state_matrix_input : std_logic;
+
+  signal data_k_i_enable_state_matrix_input : std_logic;
+  signal data_k_j_enable_state_matrix_input : std_logic;
+
+  signal data_b_out_i_enable_state_matrix_input : std_logic;
+  signal data_b_out_j_enable_state_matrix_input : std_logic;
+
+  -- DATA
+  signal size_b_in_i_state_matrix_input : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_in_j_state_matrix_input : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_d_in_i_state_matrix_input : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_d_in_j_state_matrix_input : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal data_b_in_state_matrix_input : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_d_in_state_matrix_input : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_k_in_state_matrix_input : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_b_out_state_matrix_input : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- MATRIX ADDER
+  -- CONTROL
+  signal start_matrix_integer_adder : std_logic;
+  signal ready_matrix_integer_adder : std_logic;
+
+  signal operation_matrix_integer_adder : std_logic;
+
+  signal data_a_in_i_enable_matrix_integer_adder : std_logic;
+  signal data_a_in_j_enable_matrix_integer_adder : std_logic;
+  signal data_b_in_i_enable_matrix_integer_adder : std_logic;
+  signal data_b_in_j_enable_matrix_integer_adder : std_logic;
+
+  signal data_out_i_enable_matrix_integer_adder : std_logic;
+  signal data_out_j_enable_matrix_integer_adder : std_logic;
+
+  -- DATA
+  signal size_i_in_matrix_integer_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_integer_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_matrix_integer_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_matrix_integer_adder : std_logic;
+
+  -- MATRIX PRODUCT
+  -- CONTROL
+  signal start_matrix_product : std_logic;
+  signal ready_matrix_product : std_logic;
+
+  signal data_a_in_i_enable_matrix_product : std_logic;
+  signal data_a_in_j_enable_matrix_product : std_logic;
+  signal data_b_in_i_enable_matrix_product : std_logic;
+  signal data_b_in_j_enable_matrix_product : std_logic;
+
+  signal data_i_enable_matrix_product : std_logic;
+  signal data_j_enable_matrix_product : std_logic;
+
+  signal data_out_i_enable_matrix_product : std_logic;
+  signal data_out_j_enable_matrix_product : std_logic;
+
+  -- DATA
+  signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- MATRIX EXPONENTIATOR
+  -- CONTROL
+  signal start_matrix_exponentiator : std_logic;
+  signal ready_matrix_exponentiator : std_logic;
+
+  signal data_in_i_enable_matrix_exponentiator : std_logic;
+  signal data_in_j_enable_matrix_exponentiator : std_logic;
+
+  signal data_out_i_enable_matrix_exponentiator : std_logic;
+  signal data_out_j_enable_matrix_exponentiator : std_logic;
+
+  -- DATA
+  signal size_i_in_matrix_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_exponentiator : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_matrix_exponentiator   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_exponentiator  : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
@@ -122,8 +284,216 @@ begin
   -- y(k) = C·x(k) + D·u(k)
 
   -- x(k) = exp(A,k)·x(0) + summation(exp(A,k-j-1)·B·u(j))[j in 0 to k-1]
-  -- y(k) = C·exp(A,k)·x(0) + summation(C·exp(A,k-j)·B·u(j))[j in 0 to k-1] + D·u(k)
 
   -- CONTROL
+
+  -- MATRIX STATE
+  state_matrix_state : ntm_state_matrix_state
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_state_matrix_state,
+      READY => ready_state_matrix_state,
+
+      DATA_A_IN_I_ENABLE => data_a_in_i_state_matrix_state,
+      DATA_A_IN_J_ENABLE => data_a_in_j_state_matrix_state,
+      DATA_B_IN_I_ENABLE => data_b_in_i_state_matrix_state,
+      DATA_B_IN_J_ENABLE => data_b_in_j_state_matrix_state,
+      DATA_C_IN_I_ENABLE => data_c_in_i_state_matrix_state,
+      DATA_C_IN_J_ENABLE => data_c_in_j_state_matrix_state,
+      DATA_D_IN_I_ENABLE => data_d_in_i_state_matrix_state,
+      DATA_D_IN_J_ENABLE => data_d_in_j_state_matrix_state,
+
+      DATA_A_I_ENABLE => data_a_i_state_matrix_state,
+      DATA_A_J_ENABLE => data_a_j_state_matrix_state,
+      DATA_B_I_ENABLE => data_b_i_state_matrix_state,
+      DATA_B_J_ENABLE => data_b_j_state_matrix_state,
+      DATA_C_I_ENABLE => data_c_i_state_matrix_state,
+      DATA_C_J_ENABLE => data_c_j_state_matrix_state,
+      DATA_D_I_ENABLE => data_d_i_state_matrix_state,
+      DATA_D_J_ENABLE => data_d_j_state_matrix_state,
+
+      DATA_K_IN_I_ENABLE => data_k_in_i_enable_state_matrix_state,
+      DATA_K_IN_J_ENABLE => data_k_in_j_enable_state_matrix_state,
+
+      DATA_K_I_ENABLE => data_k_i_enable_state_matrix_state,
+      DATA_K_J_ENABLE => data_k_j_enable_state_matrix_state,
+
+      DATA_A_OUT_I_ENABLE => data_a_out_i_enable_state_matrix_state,
+      DATA_A_OUT_J_ENABLE => data_a_out_j_enable_state_matrix_state,
+
+      -- DATA
+      SIZE_A_I_IN => size_a_in_i_state_matrix_state,
+      SIZE_A_J_IN => size_a_in_j_state_matrix_state,
+      SIZE_B_I_IN => size_b_in_i_state_matrix_state,
+      SIZE_B_J_IN => size_b_in_j_state_matrix_state,
+      SIZE_C_I_IN => size_c_in_i_state_matrix_state,
+      SIZE_C_J_IN => size_c_in_j_state_matrix_state,
+      SIZE_D_I_IN => size_d_in_i_state_matrix_state,
+      SIZE_D_J_IN => size_d_in_j_state_matrix_state,
+
+      DATA_A_IN => data_a_in_state_matrix_state,
+      DATA_B_IN => data_b_in_state_matrix_state,
+      DATA_C_IN => data_c_in_state_matrix_state,
+      DATA_D_IN => data_d_in_state_matrix_state,
+
+      DATA_K_IN => data_k_in_state_matrix_state,
+
+      DATA_A_OUT => data_a_out_state_matrix_state
+      );
+
+  -- MATRIX INPUT
+  state_matrix_input : ntm_state_matrix_input
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_state_matrix_input,
+      READY => ready_state_matrix_input,
+
+      DATA_B_IN_I_ENABLE => data_b_in_i_state_matrix_input,
+      DATA_B_IN_J_ENABLE => data_b_in_j_state_matrix_input,
+      DATA_D_IN_I_ENABLE => data_d_in_i_state_matrix_input,
+      DATA_D_IN_J_ENABLE => data_d_in_j_state_matrix_input,
+
+      DATA_B_I_ENABLE => data_b_i_state_matrix_input,
+      DATA_B_J_ENABLE => data_b_j_state_matrix_input,
+      DATA_D_I_ENABLE => data_d_i_state_matrix_input,
+      DATA_D_J_ENABLE => data_d_j_state_matrix_input,
+
+      DATA_K_IN_I_ENABLE => data_k_in_i_enable_state_matrix_input,
+      DATA_K_IN_J_ENABLE => data_k_in_j_enable_state_matrix_input,
+
+      DATA_K_I_ENABLE => data_k_i_enable_state_matrix_input,
+      DATA_K_J_ENABLE => data_k_j_enable_state_matrix_input,
+
+      DATA_B_OUT_I_ENABLE => data_b_out_i_enable_state_matrix_input,
+      DATA_B_OUT_J_ENABLE => data_b_out_j_enable_state_matrix_input,
+
+      -- DATA
+      SIZE_B_I_IN => size_b_in_i_state_matrix_input,
+      SIZE_B_J_IN => size_b_in_j_state_matrix_input,
+      SIZE_D_I_IN => size_d_in_i_state_matrix_input,
+      SIZE_D_J_IN => size_d_in_j_state_matrix_input,
+
+      DATA_B_IN => data_b_in_state_matrix_input,
+      DATA_D_IN => data_d_in_state_matrix_input,
+
+      DATA_K_IN => data_k_in_state_matrix_input,
+
+      DATA_B_OUT => data_b_out_state_matrix_input
+      );
+
+  -- MATRIX ADDER
+  matrix_integer_adder : ntm_matrix_integer_adder
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_matrix_integer_adder,
+      READY => ready_matrix_integer_adder,
+
+      OPERATION => operation_matrix_integer_adder,
+
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_integer_adder,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_integer_adder,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_integer_adder,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_integer_adder,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_integer_adder,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_integer_adder,
+
+      -- DATA
+      SIZE_I_IN => size_i_in_matrix_integer_adder,
+      SIZE_J_IN => size_j_in_matrix_integer_adder,
+      DATA_A_IN => data_a_in_matrix_integer_adder,
+      DATA_B_IN => data_b_in_matrix_integer_adder,
+
+      DATA_OUT     => data_out_matrix_integer_adder,
+      OVERFLOW_OUT => overflow_out_matrix_integer_adder
+      );
+
+  -- MATRIX PRODUCT
+  matrix_product : ntm_matrix_product
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_matrix_product,
+      READY => ready_matrix_product,
+
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_product,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
+
+      DATA_I_ENABLE => data_i_enable_matrix_product,
+      DATA_J_ENABLE => data_j_enable_matrix_product,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
+
+      -- DATA
+      SIZE_A_I_IN => size_a_i_in_matrix_product,
+      SIZE_A_J_IN => size_a_j_in_matrix_product,
+      SIZE_B_I_IN => size_b_i_in_matrix_product,
+      SIZE_B_J_IN => size_b_j_in_matrix_product,
+      DATA_A_IN   => data_a_in_matrix_product,
+      DATA_B_IN   => data_b_in_matrix_product,
+      DATA_OUT    => data_out_matrix_product
+      );
+
+  -- MATRIX EXPONENTIATOR
+  matrix_exponentiator_function : ntm_matrix_exponentiator_function
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_matrix_exponentiator,
+      READY => ready_matrix_exponentiator,
+
+      DATA_IN_I_ENABLE => data_in_i_enable_matrix_exponentiator,
+      DATA_IN_J_ENABLE => data_in_j_enable_matrix_exponentiator,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_exponentiator,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_exponentiator,
+
+      -- DATA
+      SIZE_I_IN => size_i_in_matrix_exponentiator,
+      SIZE_J_IN => size_j_in_matrix_exponentiator,
+      DATA_IN   => data_in_matrix_exponentiator,
+      DATA_OUT  => data_out_matrix_exponentiator
+      );
 
 end architecture;

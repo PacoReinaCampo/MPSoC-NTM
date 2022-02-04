@@ -42,6 +42,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 use work.ntm_state_pkg.all;
 
@@ -64,8 +65,16 @@ entity ntm_state_matrix_output is
     DATA_D_IN_I_ENABLE : in std_logic;
     DATA_D_IN_J_ENABLE : in std_logic;
 
+    DATA_C_I_ENABLE : out std_logic;
+    DATA_C_J_ENABLE : out std_logic;
+    DATA_D_I_ENABLE : out std_logic;
+    DATA_D_J_ENABLE : out std_logic;
+
     DATA_K_IN_I_ENABLE : in std_logic;
     DATA_K_IN_J_ENABLE : in std_logic;
+
+    DATA_K_I_ENABLE : out std_logic;
+    DATA_K_J_ENABLE : out std_logic;
 
     DATA_C_OUT_I_ENABLE : out std_logic;
     DATA_C_OUT_J_ENABLE : out std_logic;
@@ -114,6 +123,30 @@ architecture ntm_state_matrix_output_architecture of ntm_state_matrix_output is
   -- Signals
   -----------------------------------------------------------------------
 
+  -- MATRIX ADDER
+  -- CONTROL
+  signal start_matrix_integer_adder : std_logic;
+  signal ready_matrix_integer_adder : std_logic;
+
+  signal operation_matrix_integer_adder : std_logic;
+
+  signal data_a_in_i_enable_matrix_integer_adder : std_logic;
+  signal data_a_in_j_enable_matrix_integer_adder : std_logic;
+  signal data_b_in_i_enable_matrix_integer_adder : std_logic;
+  signal data_b_in_j_enable_matrix_integer_adder : std_logic;
+
+  signal data_out_i_enable_matrix_integer_adder : std_logic;
+  signal data_out_j_enable_matrix_integer_adder : std_logic;
+
+  -- DATA
+  signal size_i_in_matrix_integer_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_integer_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_matrix_integer_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_matrix_integer_adder : std_logic;
+
   -- MATRIX PRODUCT
   -- CONTROL
   signal start_matrix_product : std_logic;
@@ -139,26 +172,70 @@ architecture ntm_state_matrix_output_architecture of ntm_state_matrix_output is
   signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
 
+  -- MATRIX INVERSE
+  -- CONTROL
+  signal start_matrix_inverse : std_logic;
+  signal ready_matrix_inverse : std_logic;
+
+  signal data_in_i_enable_matrix_inverse : std_logic;
+  signal data_in_j_enable_matrix_inverse : std_logic;
+
+  signal data_i_enable_matrix_inverse : std_logic;
+  signal data_j_enable_matrix_inverse : std_logic;
+
+  signal data_out_i_enable_matrix_inverse : std_logic;
+  signal data_out_j_enable_matrix_inverse : std_logic;
+
+  -- DATA
+  signal size_i_in_matrix_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_matrix_inverse   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_inverse  : std_logic_vector(DATA_SIZE-1 downto 0);
+
 begin
 
   -----------------------------------------------------------------------
   -- Body
   -----------------------------------------------------------------------
 
-  -- u(k) = -K·y(k) + r(k)
-
-  -- x(k+1) = a·x(k) + b·r(k)
-  -- y(k) = c·x(k) + d·r(k)
-
-  -- x(k) = exp(a,k)·x(0) + summation(exp(a,k-j-1)·b·u(j))[j in 0 to k-1]
-  -- y(k) = c·exp(a,k)·x(0) + summation(c·exp(a,k-j)·b·u(j))[j in 0 to k-1] + d·u(k)
-
-  -- a = A-B·K·inv(I+DK)·C
-  -- b = B·(I-K·inv(I+DK)·D)
   -- c = inv(I+DK)·C
-  -- d = inv(I+DK)·D
 
   -- CONTROL
+
+  -- MATRIX ADDER
+  matrix_integer_adder : ntm_matrix_integer_adder
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_matrix_integer_adder,
+      READY => ready_matrix_integer_adder,
+
+      OPERATION => operation_matrix_integer_adder,
+
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_integer_adder,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_integer_adder,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_integer_adder,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_integer_adder,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_integer_adder,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_integer_adder,
+
+      -- DATA
+      SIZE_I_IN => size_i_in_matrix_integer_adder,
+      SIZE_J_IN => size_j_in_matrix_integer_adder,
+      DATA_A_IN => data_a_in_matrix_integer_adder,
+      DATA_B_IN => data_b_in_matrix_integer_adder,
+
+      DATA_OUT     => data_out_matrix_integer_adder,
+      OVERFLOW_OUT => overflow_out_matrix_integer_adder
+      );
 
   -- MATRIX PRODUCT
   matrix_product : ntm_matrix_product
@@ -194,6 +271,37 @@ begin
       DATA_A_IN   => data_a_in_matrix_product,
       DATA_B_IN   => data_b_in_matrix_product,
       DATA_OUT    => data_out_matrix_product
+      );
+
+  -- MATRIX INVERSE
+  matrix_inverse : ntm_matrix_inverse
+    generic map (
+      DATA_SIZE    => DATA_SIZE,
+      CONTROL_SIZE => CONTROL_SIZE
+      )
+    port map (
+      -- GLOBAL
+      CLK => CLK,
+      RST => RST,
+
+      -- CONTROL
+      START => start_matrix_inverse,
+      READY => ready_matrix_inverse,
+
+      DATA_IN_I_ENABLE => data_in_i_enable_matrix_inverse,
+      DATA_IN_J_ENABLE => data_in_j_enable_matrix_inverse,
+
+      DATA_I_ENABLE => data_i_enable_matrix_inverse,
+      DATA_J_ENABLE => data_j_enable_matrix_inverse,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_inverse,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_inverse,
+
+      -- DATA
+      SIZE_I_IN => size_i_in_matrix_inverse,
+      SIZE_J_IN => size_j_in_matrix_inverse,
+      DATA_IN   => data_in_matrix_inverse,
+      DATA_OUT  => data_out_matrix_inverse
       );
 
 end architecture;

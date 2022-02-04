@@ -68,7 +68,18 @@ entity ntm_state_top is
     DATA_D_IN_I_ENABLE : in std_logic;
     DATA_D_IN_J_ENABLE : in std_logic;
 
+    DATA_A_I_ENABLE : out std_logic;
+    DATA_A_J_ENABLE : out std_logic;
+    DATA_B_I_ENABLE : out std_logic;
+    DATA_B_J_ENABLE : out std_logic;
+    DATA_C_I_ENABLE : out std_logic;
+    DATA_C_J_ENABLE : out std_logic;
+    DATA_D_I_ENABLE : out std_logic;
+    DATA_D_J_ENABLE : out std_logic;
+
     DATA_U_IN_ENABLE : in std_logic;
+
+    DATA_U_ENABLE : out std_logic;
 
     DATA_X_OUT_ENABLE : out std_logic;
     DATA_Y_OUT_ENABLE : out std_logic;
@@ -134,7 +145,14 @@ architecture ntm_state_top_architecture of ntm_state_top is
   signal data_b_in_i_state_vector_state : std_logic;
   signal data_b_in_j_state_vector_state : std_logic;
 
+  signal data_a_i_state_vector_state : std_logic;
+  signal data_a_j_state_vector_state : std_logic;
+  signal data_b_i_state_vector_state : std_logic;
+  signal data_b_j_state_vector_state : std_logic;
+
   signal data_u_in_enable_state_vector_state : std_logic;
+
+  signal data_u_enable_state_vector_state : std_logic;
 
   signal data_x_out_enable_state_vector_state : std_logic;
 
@@ -165,7 +183,18 @@ architecture ntm_state_top_architecture of ntm_state_top is
   signal data_d_in_i_state_vector_output : std_logic;
   signal data_d_in_j_state_vector_output : std_logic;
 
+  signal data_a_i_state_vector_output : std_logic;
+  signal data_a_j_state_vector_output : std_logic;
+  signal data_b_i_state_vector_output : std_logic;
+  signal data_b_j_state_vector_output : std_logic;
+  signal data_c_i_state_vector_output : std_logic;
+  signal data_c_j_state_vector_output : std_logic;
+  signal data_d_i_state_vector_output : std_logic;
+  signal data_d_j_state_vector_output : std_logic;
+
   signal data_u_in_enable_state_vector_output : std_logic;
+
+  signal data_u_enable_state_vector_output : std_logic;
 
   signal data_y_out_enable_state_vector_output : std_logic;
 
@@ -222,7 +251,14 @@ begin
       DATA_B_IN_I_ENABLE => data_b_in_i_state_vector_state,
       DATA_B_IN_J_ENABLE => data_b_in_j_state_vector_state,
 
+      DATA_A_I_ENABLE => data_a_i_state_vector_state,
+      DATA_A_J_ENABLE => data_a_j_state_vector_state,
+      DATA_B_I_ENABLE => data_b_i_state_vector_state,
+      DATA_B_J_ENABLE => data_b_j_state_vector_state,
+
       DATA_U_IN_ENABLE => data_u_in_enable_state_vector_state,
+
+      DATA_U_ENABLE => data_u_enable_state_vector_state,
 
       DATA_X_OUT_ENABLE => data_x_out_enable_state_vector_state,
 
@@ -264,7 +300,18 @@ begin
       DATA_D_IN_I_ENABLE => data_d_in_i_state_vector_output,
       DATA_D_IN_J_ENABLE => data_d_in_j_state_vector_output,
 
+      DATA_A_I_ENABLE => data_a_i_state_vector_output,
+      DATA_A_J_ENABLE => data_a_j_state_vector_output,
+      DATA_B_I_ENABLE => data_b_i_state_vector_output,
+      DATA_B_J_ENABLE => data_b_j_state_vector_output,
+      DATA_C_I_ENABLE => data_c_i_state_vector_output,
+      DATA_C_J_ENABLE => data_c_j_state_vector_output,
+      DATA_D_I_ENABLE => data_d_i_state_vector_output,
+      DATA_D_J_ENABLE => data_d_j_state_vector_output,
+
       DATA_U_IN_ENABLE => data_u_in_enable_state_vector_output,
+
+      DATA_U_ENABLE => data_u_enable_state_vector_output,
 
       DATA_Y_OUT_ENABLE => data_y_out_enable_state_vector_output,
 
