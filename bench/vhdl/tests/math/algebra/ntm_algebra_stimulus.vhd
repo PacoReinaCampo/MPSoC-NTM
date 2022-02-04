@@ -201,7 +201,7 @@ entity ntm_algebra_stimulus is
     MATRIX_INVERSE_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_INVERSE_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     MATRIX_INVERSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_INVERSE_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_INVERSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- MATRIX MULTIPLICATION
     -- CONTROL
@@ -341,7 +341,7 @@ entity ntm_algebra_stimulus is
     TENSOR_INVERSE_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     TENSOR_INVERSE_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
     TENSOR_INVERSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_INVERSE_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_INVERSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- TENSOR MULTIPLICATION
     -- CONTROL

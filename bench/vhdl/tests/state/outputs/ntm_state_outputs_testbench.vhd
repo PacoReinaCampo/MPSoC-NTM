@@ -57,13 +57,40 @@ entity ntm_state_outputs_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- FUNCTIONALITY
-    ENABLE_NTM_STATE_TOP_TEST   : boolean := false;
-    ENABLE_NTM_STATE_TOP_CASE_0 : boolean := false;
-    ENABLE_NTM_STATE_TOP_CASE_1 : boolean := false
+    ENABLE_NTM_VECTOR_STATE_TEST   : boolean := false;
+    ENABLE_NTM_VECTOR_STATE_CASE_0 : boolean := false;
+    ENABLE_NTM_VECTOR_STATE_CASE_1 : boolean := false;
+
+    ENABLE_NTM_VECTOR_OUTPUT_TEST   : boolean := false;
+    ENABLE_NTM_VECTOR_OUTPUT_CASE_0 : boolean := false;
+    ENABLE_NTM_VECTOR_OUTPUT_CASE_1 : boolean := false
     );
 end ntm_state_outputs_testbench;
 
 architecture ntm_state_outputs_testbench_architecture of ntm_state_outputs_testbench is
+
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Constants
+  -----------------------------------------------------------------------
+
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
+
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+
+  constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
+  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+
+  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
 
   -----------------------------------------------------------------------
   -- Signals
@@ -73,44 +100,87 @@ architecture ntm_state_outputs_testbench_architecture of ntm_state_outputs_testb
   signal CLK : std_logic;
   signal RST : std_logic;
 
-  -- TOP
+  -- STATE INTERNAL
   -- CONTROL
-  signal start_state_top : std_logic;
-  signal ready_state_top : std_logic;
+  signal start_state_vector_state : std_logic;
+  signal ready_state_vector_state : std_logic;
 
-  signal data_a_i_in_enable_state_top : std_logic;
-  signal data_a_j_in_enable_state_top : std_logic;
-  signal data_b_i_in_enable_state_top : std_logic;
-  signal data_b_j_in_enable_state_top : std_logic;
-  signal data_c_i_in_enable_state_top : std_logic;
-  signal data_c_j_in_enable_state_top : std_logic;
-  signal data_d_i_in_enable_state_top : std_logic;
-  signal data_d_j_in_enable_state_top : std_logic;
+  signal data_a_in_i_state_vector_state : std_logic;
+  signal data_a_in_j_state_vector_state : std_logic;
+  signal data_b_in_i_state_vector_state : std_logic;
+  signal data_b_in_j_state_vector_state : std_logic;
 
-  signal data_u_in_enable_state_top : std_logic;
+  signal data_a_i_state_vector_state : std_logic;
+  signal data_a_j_state_vector_state : std_logic;
+  signal data_b_i_state_vector_state : std_logic;
+  signal data_b_j_state_vector_state : std_logic;
 
-  signal data_x_out_enable_state_top : std_logic;
-  signal data_y_out_enable_state_top : std_logic;
+  signal data_u_in_enable_state_vector_state : std_logic;
+
+  signal data_u_enable_state_vector_state : std_logic;
+
+  signal data_x_out_enable_state_vector_state : std_logic;
 
   -- DATA
-  signal size_a_i_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_a_j_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_i_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_j_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_c_i_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_c_j_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_d_i_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_d_j_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_i_in_state_vector_state : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_state_vector_state : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_state_vector_state : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_state_vector_state : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_a_in_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_c_in_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_d_in_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_state_vector_state : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_state_vector_state : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_u_in_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_u_in_state_vector_state : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_x_out_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_y_out_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_x_out_state_vector_state : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  -- STATE OUTPUT
+  -- CONTROL
+  signal start_state_vector_output : std_logic;
+  signal ready_state_vector_output : std_logic;
+
+  signal data_a_in_i_state_vector_output : std_logic;
+  signal data_a_in_j_state_vector_output : std_logic;
+  signal data_b_in_i_state_vector_output : std_logic;
+  signal data_b_in_j_state_vector_output : std_logic;
+  signal data_c_in_i_state_vector_output : std_logic;
+  signal data_c_in_j_state_vector_output : std_logic;
+  signal data_d_in_i_state_vector_output : std_logic;
+  signal data_d_in_j_state_vector_output : std_logic;
+
+  signal data_a_i_state_vector_output : std_logic;
+  signal data_a_j_state_vector_output : std_logic;
+  signal data_b_i_state_vector_output : std_logic;
+  signal data_b_j_state_vector_output : std_logic;
+  signal data_c_i_state_vector_output : std_logic;
+  signal data_c_j_state_vector_output : std_logic;
+  signal data_d_i_state_vector_output : std_logic;
+  signal data_d_j_state_vector_output : std_logic;
+
+  signal data_u_in_enable_state_vector_output : std_logic;
+
+  signal data_u_enable_state_vector_output : std_logic;
+
+  signal data_y_out_enable_state_vector_output : std_logic;
+
+  -- DATA
+  signal size_a_in_i_state_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_in_j_state_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_in_i_state_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_in_j_state_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_c_in_i_state_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_c_in_j_state_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_d_in_i_state_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_d_in_j_state_vector_output : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal data_a_in_state_vector_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_state_vector_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_c_in_state_vector_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_d_in_state_vector_output : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_u_in_state_vector_output : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_y_out_state_vector_output : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -119,7 +189,7 @@ begin
   -----------------------------------------------------------------------
 
   -- STIMULUS
-  top_stimulus : ntm_state_outputs_stimulus
+  state_outputs_stimulus : ntm_state_outputs_stimulus
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE    => DATA_SIZE,
@@ -137,48 +207,92 @@ begin
       CLK => CLK,
       RST => RST,
 
+      -- VECTOR STATE
       -- CONTROL
-      NTM_STATE_TOP_START => start_state_top,
-      NTM_STATE_TOP_READY => ready_state_top,
+      NTM_VECTOR_STATE_START => start_state_vector_state,
+      NTM_VECTOR_STATE_READY => ready_state_vector_state,
 
-      NTM_STATE_TOP_DATA_A_IN_I_ENABLE => data_a_i_in_enable_state_top,
-      NTM_STATE_TOP_DATA_A_IN_J_ENABLE => data_a_j_in_enable_state_top,
-      NTM_STATE_TOP_DATA_B_IN_I_ENABLE => data_b_i_in_enable_state_top,
-      NTM_STATE_TOP_DATA_B_IN_J_ENABLE => data_b_j_in_enable_state_top,
-      NTM_STATE_TOP_DATA_C_IN_I_ENABLE => data_c_i_in_enable_state_top,
-      NTM_STATE_TOP_DATA_C_IN_J_ENABLE => data_c_j_in_enable_state_top,
-      NTM_STATE_TOP_DATA_D_IN_I_ENABLE => data_d_i_in_enable_state_top,
-      NTM_STATE_TOP_DATA_D_IN_J_ENABLE => data_d_j_in_enable_state_top,
+      NTM_VECTOR_STATE_DATA_A_IN_I_ENABLE => data_a_in_i_state_vector_state,
+      NTM_VECTOR_STATE_DATA_A_IN_J_ENABLE => data_a_in_j_state_vector_state,
+      NTM_VECTOR_STATE_DATA_B_IN_I_ENABLE => data_b_in_i_state_vector_state,
+      NTM_VECTOR_STATE_DATA_B_IN_J_ENABLE => data_b_in_j_state_vector_state,
 
-      NTM_STATE_TOP_DATA_U_IN_ENABLE => data_u_in_enable_state_top,
+      NTM_VECTOR_STATE_DATA_A_I_ENABLE => data_a_i_state_vector_state,
+      NTM_VECTOR_STATE_DATA_A_J_ENABLE => data_a_j_state_vector_state,
+      NTM_VECTOR_STATE_DATA_B_I_ENABLE => data_b_i_state_vector_state,
+      NTM_VECTOR_STATE_DATA_B_J_ENABLE => data_b_j_state_vector_state,
 
-      NTM_STATE_TOP_DATA_X_OUT_ENABLE => data_x_out_enable_state_top,
-      NTM_STATE_TOP_DATA_Y_OUT_ENABLE => data_y_out_enable_state_top,
+      NTM_VECTOR_STATE_DATA_U_IN_ENABLE => data_u_in_enable_state_vector_state,
+
+      NTM_VECTOR_STATE_DATA_U_ENABLE => data_u_enable_state_vector_state,
+
+      NTM_VECTOR_STATE_DATA_X_OUT_ENABLE => data_x_out_enable_state_vector_state,
 
       -- DATA
-      NTM_STATE_TOP_SIZE_A_I_IN => size_a_i_in_state_top,
-      NTM_STATE_TOP_SIZE_A_J_IN => size_a_j_in_state_top,
-      NTM_STATE_TOP_SIZE_B_I_IN => size_b_i_in_state_top,
-      NTM_STATE_TOP_SIZE_B_J_IN => size_b_j_in_state_top,
-      NTM_STATE_TOP_SIZE_C_I_IN => size_c_i_in_state_top,
-      NTM_STATE_TOP_SIZE_C_J_IN => size_c_j_in_state_top,
-      NTM_STATE_TOP_SIZE_D_I_IN => size_d_i_in_state_top,
-      NTM_STATE_TOP_SIZE_D_J_IN => size_d_j_in_state_top,
+      NTM_VECTOR_STATE_SIZE_A_I_IN => size_a_i_in_state_vector_state,
+      NTM_VECTOR_STATE_SIZE_A_J_IN => size_a_j_in_state_vector_state,
+      NTM_VECTOR_STATE_SIZE_B_I_IN => size_b_i_in_state_vector_state,
+      NTM_VECTOR_STATE_SIZE_B_J_IN => size_b_j_in_state_vector_state,
 
-      NTM_STATE_TOP_DATA_A_IN => data_a_in_state_top,
-      NTM_STATE_TOP_DATA_B_IN => data_b_in_state_top,
-      NTM_STATE_TOP_DATA_C_IN => data_c_in_state_top,
-      NTM_STATE_TOP_DATA_D_IN => data_d_in_state_top,
+      NTM_VECTOR_STATE_DATA_A_IN => data_a_in_state_vector_state,
+      NTM_VECTOR_STATE_DATA_B_IN => data_b_in_state_vector_state,
 
-      NTM_STATE_TOP_DATA_U_IN => data_u_in_state_top,
+      NTM_VECTOR_STATE_DATA_U_IN => data_u_in_state_vector_state,
 
-      NTM_STATE_TOP_DATA_X_OUT => data_x_out_state_top,
-      NTM_STATE_TOP_DATA_Y_OUT => data_y_out_state_top
+      NTM_VECTOR_STATE_DATA_X_OUT => data_x_out_state_vector_state,
+
+      -- VECTOR OUTPUT
+      -- CONTROL
+      NTM_VECTOR_OUTPUT_START => start_state_vector_output,
+      NTM_VECTOR_OUTPUT_READY => ready_state_vector_output,
+
+      NTM_VECTOR_OUTPUT_DATA_A_IN_I_ENABLE => data_a_in_i_state_vector_output,
+      NTM_VECTOR_OUTPUT_DATA_A_IN_J_ENABLE => data_a_in_j_state_vector_output,
+      NTM_VECTOR_OUTPUT_DATA_B_IN_I_ENABLE => data_b_in_i_state_vector_output,
+      NTM_VECTOR_OUTPUT_DATA_B_IN_J_ENABLE => data_b_in_j_state_vector_output,
+      NTM_VECTOR_OUTPUT_DATA_C_IN_I_ENABLE => data_c_in_i_state_vector_output,
+      NTM_VECTOR_OUTPUT_DATA_C_IN_J_ENABLE => data_c_in_j_state_vector_output,
+      NTM_VECTOR_OUTPUT_DATA_D_IN_I_ENABLE => data_d_in_i_state_vector_output,
+      NTM_VECTOR_OUTPUT_DATA_D_IN_J_ENABLE => data_d_in_j_state_vector_output,
+
+      NTM_VECTOR_OUTPUT_DATA_A_I_ENABLE => data_a_i_state_vector_output,
+      NTM_VECTOR_OUTPUT_DATA_A_J_ENABLE => data_a_j_state_vector_output,
+      NTM_VECTOR_OUTPUT_DATA_B_I_ENABLE => data_b_i_state_vector_output,
+      NTM_VECTOR_OUTPUT_DATA_B_J_ENABLE => data_b_j_state_vector_output,
+      NTM_VECTOR_OUTPUT_DATA_C_I_ENABLE => data_c_i_state_vector_output,
+      NTM_VECTOR_OUTPUT_DATA_C_J_ENABLE => data_c_j_state_vector_output,
+      NTM_VECTOR_OUTPUT_DATA_D_I_ENABLE => data_d_i_state_vector_output,
+      NTM_VECTOR_OUTPUT_DATA_D_J_ENABLE => data_d_j_state_vector_output,
+
+      NTM_VECTOR_OUTPUT_DATA_U_IN_ENABLE => data_u_in_enable_state_vector_output,
+
+      NTM_VECTOR_OUTPUT_DATA_U_ENABLE => data_u_enable_state_vector_output,
+
+      NTM_VECTOR_OUTPUT_DATA_Y_OUT_ENABLE => data_y_out_enable_state_vector_output,
+
+      -- DATA
+      NTM_VECTOR_OUTPUT_SIZE_A_I_IN => size_a_in_i_state_vector_output,
+      NTM_VECTOR_OUTPUT_SIZE_A_J_IN => size_a_in_j_state_vector_output,
+      NTM_VECTOR_OUTPUT_SIZE_B_I_IN => size_b_in_i_state_vector_output,
+      NTM_VECTOR_OUTPUT_SIZE_B_J_IN => size_b_in_j_state_vector_output,
+      NTM_VECTOR_OUTPUT_SIZE_C_I_IN => size_c_in_i_state_vector_output,
+      NTM_VECTOR_OUTPUT_SIZE_C_J_IN => size_c_in_j_state_vector_output,
+      NTM_VECTOR_OUTPUT_SIZE_D_I_IN => size_d_in_i_state_vector_output,
+      NTM_VECTOR_OUTPUT_SIZE_D_J_IN => size_d_in_j_state_vector_output,
+
+      NTM_VECTOR_OUTPUT_DATA_A_IN => data_a_in_state_vector_output,
+      NTM_VECTOR_OUTPUT_DATA_B_IN => data_b_in_state_vector_output,
+      NTM_VECTOR_OUTPUT_DATA_C_IN => data_c_in_state_vector_output,
+      NTM_VECTOR_OUTPUT_DATA_D_IN => data_d_in_state_vector_output,
+
+      NTM_VECTOR_OUTPUT_DATA_U_IN => data_u_in_state_vector_output,
+
+      NTM_VECTOR_OUTPUT_DATA_Y_OUT => data_y_out_state_vector_output
       );
 
-  -- TOP
-  ntm_state_outputs_test : if (ENABLE_NTM_STATE_TOP_TEST) generate
-    top : ntm_state_outputs
+  -- VECTOR STATE
+  ntm_state_vector_state_test : if (ENABLE_NTM_VECTOR_STATE_TEST) generate
+    state_vector_state : ntm_state_vector_state
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -189,43 +303,99 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_state_top,
-        READY => ready_state_top,
+        START => start_state_vector_state,
+        READY => ready_state_vector_state,
 
-        DATA_A_IN_I_ENABLE => data_a_i_in_enable_state_top,
-        DATA_A_IN_J_ENABLE => data_a_j_in_enable_state_top,
-        DATA_B_IN_I_ENABLE => data_b_i_in_enable_state_top,
-        DATA_B_IN_J_ENABLE => data_b_j_in_enable_state_top,
-        DATA_C_IN_I_ENABLE => data_c_i_in_enable_state_top,
-        DATA_C_IN_J_ENABLE => data_c_j_in_enable_state_top,
-        DATA_D_IN_I_ENABLE => data_d_i_in_enable_state_top,
-        DATA_D_IN_J_ENABLE => data_d_j_in_enable_state_top,
+        DATA_A_IN_I_ENABLE => data_a_in_i_state_vector_state,
+        DATA_A_IN_J_ENABLE => data_a_in_j_state_vector_state,
+        DATA_B_IN_I_ENABLE => data_b_in_i_state_vector_state,
+        DATA_B_IN_J_ENABLE => data_b_in_j_state_vector_state,
 
-        DATA_U_IN_ENABLE => data_u_in_enable_state_top,
+        DATA_A_I_ENABLE => data_a_i_state_vector_state,
+        DATA_A_J_ENABLE => data_a_j_state_vector_state,
+        DATA_B_I_ENABLE => data_b_i_state_vector_state,
+        DATA_B_J_ENABLE => data_b_j_state_vector_state,
 
-        DATA_X_OUT_ENABLE => data_x_out_enable_state_top,
-        DATA_Y_OUT_ENABLE => data_y_out_enable_state_top,
+        DATA_U_IN_ENABLE => data_u_in_enable_state_vector_state,
+
+        DATA_U_ENABLE => data_u_enable_state_vector_state,
+
+        DATA_X_OUT_ENABLE => data_x_out_enable_state_vector_state,
 
         -- DATA
-        SIZE_A_I_IN => size_a_i_in_state_top,
-        SIZE_A_J_IN => size_a_j_in_state_top,
-        SIZE_B_I_IN => size_b_i_in_state_top,
-        SIZE_B_J_IN => size_b_j_in_state_top,
-        SIZE_C_I_IN => size_c_i_in_state_top,
-        SIZE_C_J_IN => size_c_j_in_state_top,
-        SIZE_D_I_IN => size_d_i_in_state_top,
-        SIZE_D_J_IN => size_d_j_in_state_top,
+        SIZE_A_I_IN => size_a_i_in_state_vector_state,
+        SIZE_A_J_IN => size_a_j_in_state_vector_state,
+        SIZE_B_I_IN => size_b_i_in_state_vector_state,
+        SIZE_B_J_IN => size_b_j_in_state_vector_state,
 
-        DATA_A_IN => data_a_in_state_top,
-        DATA_B_IN => data_b_in_state_top,
-        DATA_C_IN => data_c_in_state_top,
-        DATA_D_IN => data_d_in_state_top,
+        DATA_A_IN => data_a_in_state_vector_state,
+        DATA_B_IN => data_b_in_state_vector_state,
 
-        DATA_U_IN => data_u_in_state_top,
+        DATA_U_IN => data_u_in_state_vector_state,
 
-        DATA_X_OUT => data_x_out_state_top,
-        DATA_Y_OUT => data_y_out_state_top
+        DATA_X_OUT => data_x_out_state_vector_state
         );
-  end generate ntm_state_outputs_test;
+  end generate ntm_state_vector_state_test;
+
+  -- VECTOR OUTPUT
+  ntm_state_vector_output_test : if (ENABLE_NTM_VECTOR_OUTPUT_TEST) generate
+    state_vector_output : ntm_state_vector_output
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
+
+        -- CONTROL
+        START => start_state_vector_output,
+        READY => ready_state_vector_output,
+
+        DATA_A_IN_I_ENABLE => data_a_in_i_state_vector_output,
+        DATA_A_IN_J_ENABLE => data_a_in_j_state_vector_output,
+        DATA_B_IN_I_ENABLE => data_b_in_i_state_vector_output,
+        DATA_B_IN_J_ENABLE => data_b_in_j_state_vector_output,
+        DATA_C_IN_I_ENABLE => data_c_in_i_state_vector_output,
+        DATA_C_IN_J_ENABLE => data_c_in_j_state_vector_output,
+        DATA_D_IN_I_ENABLE => data_d_in_i_state_vector_output,
+        DATA_D_IN_J_ENABLE => data_d_in_j_state_vector_output,
+
+        DATA_A_I_ENABLE => data_a_i_state_vector_output,
+        DATA_A_J_ENABLE => data_a_j_state_vector_output,
+        DATA_B_I_ENABLE => data_b_i_state_vector_output,
+        DATA_B_J_ENABLE => data_b_j_state_vector_output,
+        DATA_C_I_ENABLE => data_c_i_state_vector_output,
+        DATA_C_J_ENABLE => data_c_j_state_vector_output,
+        DATA_D_I_ENABLE => data_d_i_state_vector_output,
+        DATA_D_J_ENABLE => data_d_j_state_vector_output,
+
+        DATA_U_IN_ENABLE => data_u_in_enable_state_vector_output,
+
+        DATA_U_ENABLE => data_u_enable_state_vector_output,
+
+        DATA_Y_OUT_ENABLE => data_y_out_enable_state_vector_output,
+
+        -- DATA
+        SIZE_A_I_IN => size_a_in_i_state_vector_output,
+        SIZE_A_J_IN => size_a_in_j_state_vector_output,
+        SIZE_B_I_IN => size_b_in_i_state_vector_output,
+        SIZE_B_J_IN => size_b_in_j_state_vector_output,
+        SIZE_C_I_IN => size_c_in_i_state_vector_output,
+        SIZE_C_J_IN => size_c_in_j_state_vector_output,
+        SIZE_D_I_IN => size_d_in_i_state_vector_output,
+        SIZE_D_J_IN => size_d_in_j_state_vector_output,
+
+        DATA_A_IN => data_a_in_state_vector_output,
+        DATA_B_IN => data_b_in_state_vector_output,
+        DATA_C_IN => data_c_in_state_vector_output,
+        DATA_D_IN => data_d_in_state_vector_output,
+
+        DATA_U_IN => data_u_in_state_vector_output,
+
+        DATA_Y_OUT => data_y_out_state_vector_output
+        );
+  end generate ntm_state_vector_output_test;
 
 end ntm_state_outputs_testbench_architecture;

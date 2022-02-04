@@ -153,11 +153,11 @@ package dnc_memory_pkg is
       DNC_MEMORY_SORT_VECTOR_START : out std_logic;
       DNC_MEMORY_SORT_VECTOR_READY : in  std_logic;
 
-      DNC_MEMORY_SORT_VECTOR_U_IN_ENABLE : out std_logic;       -- for j in 0 to N-1
+      DNC_MEMORY_SORT_VECTOR_U_IN_ENABLE : out std_logic;  -- for j in 0 to N-1
 
-      DNC_MEMORY_SORT_VECTOR_U_OUT_ENABLE : in std_logic;       -- for j in 0 to N-1
+      DNC_MEMORY_SORT_VECTOR_U_OUT_ENABLE : in std_logic;  -- for j in 0 to N-1
 
-      DNC_MEMORY_SORT_VECTOR_PHI_OUT_ENABLE : in std_logic;     -- for j in 0 to N-1
+      DNC_MEMORY_SORT_VECTOR_PHI_OUT_ENABLE : in std_logic;  -- for j in 0 to N-1
 
       -- DATA
       DNC_MEMORY_SORT_VECTOR_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);

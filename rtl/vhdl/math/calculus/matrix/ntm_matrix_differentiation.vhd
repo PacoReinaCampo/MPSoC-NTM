@@ -159,7 +159,7 @@ architecture ntm_matrix_differentiation_architecture of ntm_matrix_differentiati
   signal data_a_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_integer_divider      : std_logic_vector(DATA_SIZE-1 downto 0);
   signal remainder_out_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
@@ -524,7 +524,7 @@ begin
       DATA_A_IN => data_a_in_scalar_integer_divider,
       DATA_B_IN => data_b_in_scalar_integer_divider,
 
-      DATA_OUT => data_out_scalar_integer_divider,
+      DATA_OUT      => data_out_scalar_integer_divider,
       REMAINDER_OUT => remainder_out_scalar_integer_divider
       );
 

@@ -64,7 +64,7 @@ entity ntm_state_matrix_feedforward is
     DATA_D_IN_J_ENABLE : in std_logic;
 
     DATA_D_I_ENABLE : out std_logic;
-    DATA_D_J_ENABLE : in std_logic;
+    DATA_D_J_ENABLE : in  std_logic;
 
     DATA_K_IN_I_ENABLE : in std_logic;
     DATA_K_IN_J_ENABLE : in std_logic;

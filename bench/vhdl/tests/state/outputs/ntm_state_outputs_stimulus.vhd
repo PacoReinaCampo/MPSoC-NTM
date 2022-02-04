@@ -63,43 +63,87 @@ entity ntm_state_outputs_stimulus is
     CLK : out std_logic;
     RST : out std_logic;
 
+    -- VECTOR STATE
     -- CONTROL
-    NTM_STATE_TOP_START : out std_logic;
-    NTM_STATE_TOP_READY : in  std_logic;
+    NTM_VECTOR_STATE_START : out std_logic;
+    NTM_VECTOR_STATE_READY : in  std_logic;
 
-    NTM_STATE_TOP_DATA_A_IN_I_ENABLE : out std_logic;
-    NTM_STATE_TOP_DATA_A_IN_J_ENABLE : out std_logic;
-    NTM_STATE_TOP_DATA_B_IN_I_ENABLE : out std_logic;
-    NTM_STATE_TOP_DATA_B_IN_J_ENABLE : out std_logic;
-    NTM_STATE_TOP_DATA_C_IN_I_ENABLE : out std_logic;
-    NTM_STATE_TOP_DATA_C_IN_J_ENABLE : out std_logic;
-    NTM_STATE_TOP_DATA_D_IN_I_ENABLE : out std_logic;
-    NTM_STATE_TOP_DATA_D_IN_J_ENABLE : out std_logic;
+    NTM_VECTOR_STATE_DATA_A_IN_I_ENABLE : out std_logic;
+    NTM_VECTOR_STATE_DATA_A_IN_J_ENABLE : out std_logic;
+    NTM_VECTOR_STATE_DATA_B_IN_I_ENABLE : out std_logic;
+    NTM_VECTOR_STATE_DATA_B_IN_J_ENABLE : out std_logic;
 
-    NTM_STATE_TOP_DATA_U_IN_ENABLE : out std_logic;
+    NTM_VECTOR_STATE_DATA_A_I_ENABLE : in std_logic;
+    NTM_VECTOR_STATE_DATA_A_J_ENABLE : in std_logic;
+    NTM_VECTOR_STATE_DATA_B_I_ENABLE : in std_logic;
+    NTM_VECTOR_STATE_DATA_B_J_ENABLE : in std_logic;
 
-    NTM_STATE_TOP_DATA_X_OUT_ENABLE : in std_logic;
-    NTM_STATE_TOP_DATA_Y_OUT_ENABLE : in std_logic;
+    NTM_VECTOR_STATE_DATA_U_IN_ENABLE : out std_logic;
+
+    NTM_VECTOR_STATE_DATA_U_ENABLE : in std_logic;
+
+    NTM_VECTOR_STATE_DATA_X_OUT_ENABLE : in std_logic;
 
     -- DATA
-    NTM_STATE_TOP_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    NTM_STATE_TOP_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    NTM_STATE_TOP_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    NTM_STATE_TOP_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    NTM_STATE_TOP_SIZE_C_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    NTM_STATE_TOP_SIZE_C_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    NTM_STATE_TOP_SIZE_D_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    NTM_STATE_TOP_SIZE_D_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_VECTOR_STATE_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_VECTOR_STATE_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_VECTOR_STATE_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_VECTOR_STATE_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    NTM_STATE_TOP_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_STATE_TOP_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_STATE_TOP_DATA_C_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_STATE_TOP_DATA_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_VECTOR_STATE_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_VECTOR_STATE_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    NTM_STATE_TOP_DATA_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_VECTOR_STATE_DATA_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    NTM_STATE_TOP_DATA_X_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_STATE_TOP_DATA_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+    NTM_VECTOR_STATE_DATA_X_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- VECTOR OUTPUT
+    -- CONTROL
+    NTM_VECTOR_OUTPUT_START : out std_logic;
+    NTM_VECTOR_OUTPUT_READY : in  std_logic;
+
+    NTM_VECTOR_OUTPUT_DATA_A_IN_I_ENABLE : out std_logic;
+    NTM_VECTOR_OUTPUT_DATA_A_IN_J_ENABLE : out std_logic;
+    NTM_VECTOR_OUTPUT_DATA_B_IN_I_ENABLE : out std_logic;
+    NTM_VECTOR_OUTPUT_DATA_B_IN_J_ENABLE : out std_logic;
+    NTM_VECTOR_OUTPUT_DATA_C_IN_I_ENABLE : out std_logic;
+    NTM_VECTOR_OUTPUT_DATA_C_IN_J_ENABLE : out std_logic;
+    NTM_VECTOR_OUTPUT_DATA_D_IN_I_ENABLE : out std_logic;
+    NTM_VECTOR_OUTPUT_DATA_D_IN_J_ENABLE : out std_logic;
+
+    NTM_VECTOR_OUTPUT_DATA_A_I_ENABLE : in std_logic;
+    NTM_VECTOR_OUTPUT_DATA_A_J_ENABLE : in std_logic;
+    NTM_VECTOR_OUTPUT_DATA_B_I_ENABLE : in std_logic;
+    NTM_VECTOR_OUTPUT_DATA_B_J_ENABLE : in std_logic;
+    NTM_VECTOR_OUTPUT_DATA_C_I_ENABLE : in std_logic;
+    NTM_VECTOR_OUTPUT_DATA_C_J_ENABLE : in std_logic;
+    NTM_VECTOR_OUTPUT_DATA_D_I_ENABLE : in std_logic;
+    NTM_VECTOR_OUTPUT_DATA_D_J_ENABLE : in std_logic;
+
+    NTM_VECTOR_OUTPUT_DATA_U_IN_ENABLE : out std_logic;
+
+    NTM_VECTOR_OUTPUT_DATA_U_ENABLE : in std_logic;
+
+    NTM_VECTOR_OUTPUT_DATA_Y_OUT_ENABLE : in std_logic;
+
+    -- DATA
+    NTM_VECTOR_OUTPUT_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_VECTOR_OUTPUT_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_VECTOR_OUTPUT_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_VECTOR_OUTPUT_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_VECTOR_OUTPUT_SIZE_C_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_VECTOR_OUTPUT_SIZE_C_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_VECTOR_OUTPUT_SIZE_D_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_VECTOR_OUTPUT_SIZE_D_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    NTM_VECTOR_OUTPUT_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_VECTOR_OUTPUT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_VECTOR_OUTPUT_DATA_C_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_VECTOR_OUTPUT_DATA_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    NTM_VECTOR_OUTPUT_DATA_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    NTM_VECTOR_OUTPUT_DATA_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -160,6 +204,8 @@ begin
     wait for PERIOD/2;
   end process;
 
+  CLK <= clk_int;
+
   -- rst generation
   rst_process : process
   begin
@@ -169,6 +215,8 @@ begin
     rst_int <= '1';
     wait for WORKING;
   end process;
+
+  RST <= rst_int;
 
   -- start generation
   start_process : process
@@ -184,7 +232,8 @@ begin
   end process;
 
   -- FUNCTIONALITY
-  NTM_STATE_TOP_START <= start_int;
+  NTM_VECTOR_STATE_START  <= start_int;
+  NTM_VECTOR_OUTPUT_START <= start_int;
 
   -----------------------------------------------------------------------
   -- STIMULUS
@@ -193,44 +242,45 @@ begin
   main_test : process
   begin
 
-    if (STIMULUS_NTM_STATE_TOP_TEST) then
+    if (STIMULUS_NTM_VECTOR_OUTPUT_TEST) then
 
       -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_STATE_TOP_TEST             ";
+      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_OUTPUT_TEST         ";
       -------------------------------------------------------------------
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_STATE_TOP_CASE_0           ";
-      -------------------------------------------------------------------
+      if (STIMULUS_NTM_VECTOR_OUTPUT_CASE_0) then
 
-      if (STIMULUS_NTM_STATE_TOP_CASE_0) then
-        NTM_STATE_TOP_SIZE_A_I_IN <= THREE_CONTROL;
-        NTM_STATE_TOP_SIZE_A_J_IN <= THREE_CONTROL;
-        NTM_STATE_TOP_SIZE_B_I_IN <= THREE_CONTROL;
-        NTM_STATE_TOP_SIZE_B_J_IN <= THREE_CONTROL;
-        NTM_STATE_TOP_SIZE_C_I_IN <= THREE_CONTROL;
-        NTM_STATE_TOP_SIZE_C_J_IN <= THREE_CONTROL;
-        NTM_STATE_TOP_SIZE_D_I_IN <= THREE_CONTROL;
-        NTM_STATE_TOP_SIZE_D_J_IN <= THREE_CONTROL;
+        -------------------------------------------------------------------
+        MONITOR_CASE                  <= "STIMULUS_NTM_VECTOR_OUTPUT_CASE_0       ";
+        -------------------------------------------------------------------
+        NTM_VECTOR_OUTPUT_SIZE_A_I_IN <= THREE_CONTROL;
+        NTM_VECTOR_OUTPUT_SIZE_A_J_IN <= THREE_CONTROL;
+        NTM_VECTOR_OUTPUT_SIZE_B_I_IN <= THREE_CONTROL;
+        NTM_VECTOR_OUTPUT_SIZE_B_J_IN <= THREE_CONTROL;
+        NTM_VECTOR_OUTPUT_SIZE_C_I_IN <= THREE_CONTROL;
+        NTM_VECTOR_OUTPUT_SIZE_C_J_IN <= THREE_CONTROL;
+        NTM_VECTOR_OUTPUT_SIZE_D_I_IN <= THREE_CONTROL;
+        NTM_VECTOR_OUTPUT_SIZE_D_J_IN <= THREE_CONTROL;
 
-        NTM_STATE_TOP_DATA_U_IN <= EMPTY;
+        NTM_VECTOR_OUTPUT_DATA_U_IN <= EMPTY;
       end if;
 
-      -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_STATE_TOP_CASE_1           ";
-      -------------------------------------------------------------------
+      if (STIMULUS_NTM_VECTOR_OUTPUT_CASE_1) then
 
-      if (STIMULUS_NTM_STATE_TOP_CASE_1) then
-        NTM_STATE_TOP_SIZE_A_I_IN <= THREE_CONTROL;
-        NTM_STATE_TOP_SIZE_A_J_IN <= THREE_CONTROL;
-        NTM_STATE_TOP_SIZE_B_I_IN <= THREE_CONTROL;
-        NTM_STATE_TOP_SIZE_B_J_IN <= THREE_CONTROL;
-        NTM_STATE_TOP_SIZE_C_I_IN <= THREE_CONTROL;
-        NTM_STATE_TOP_SIZE_C_J_IN <= THREE_CONTROL;
-        NTM_STATE_TOP_SIZE_D_I_IN <= THREE_CONTROL;
-        NTM_STATE_TOP_SIZE_D_J_IN <= THREE_CONTROL;
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_OUTPUT_CASE_1       ";
+        -------------------------------------------------------------------
 
-        NTM_STATE_TOP_DATA_U_IN <= FULL;
+        NTM_VECTOR_OUTPUT_SIZE_A_I_IN <= THREE_CONTROL;
+        NTM_VECTOR_OUTPUT_SIZE_A_J_IN <= THREE_CONTROL;
+        NTM_VECTOR_OUTPUT_SIZE_B_I_IN <= THREE_CONTROL;
+        NTM_VECTOR_OUTPUT_SIZE_B_J_IN <= THREE_CONTROL;
+        NTM_VECTOR_OUTPUT_SIZE_C_I_IN <= THREE_CONTROL;
+        NTM_VECTOR_OUTPUT_SIZE_C_J_IN <= THREE_CONTROL;
+        NTM_VECTOR_OUTPUT_SIZE_D_I_IN <= THREE_CONTROL;
+        NTM_VECTOR_OUTPUT_SIZE_D_J_IN <= THREE_CONTROL;
+
+        NTM_VECTOR_OUTPUT_DATA_U_IN <= FULL;
       end if;
 
       wait for WORKING;

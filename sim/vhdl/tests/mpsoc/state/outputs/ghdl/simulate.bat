@@ -46,9 +46,9 @@ ghdl -a --std=08 ../../../../../../../rtl/vhdl/state/feedback/ntm_state_matrix_s
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/state/outputs/ntm_state_vector_output.vhd
 ghdl -a --std=08 ../../../../../../../rtl/vhdl/state/outputs/ntm_state_vector_state.vhd
 
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/state/top/ntm_state_outputs_pkg.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/state/top/ntm_state_outputs_stimulus.vhd
-ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/state/top/ntm_state_outputs_testbench.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/state/outputs/ntm_state_outputs_pkg.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/state/outputs/ntm_state_outputs_stimulus.vhd
+ghdl -a --std=08 ../../../../../../../bench/vhdl/tests/state/outputs/ntm_state_outputs_testbench.vhd
 
 ghdl -m --std=08 ntm_state_outputs_testbench
 ghdl -r --std=08 ntm_state_outputs_testbench --ieee-asserts=disable-at-0 --disp-tree=inst > ntm_state_outputs_testbench.tree

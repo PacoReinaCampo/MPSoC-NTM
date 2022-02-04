@@ -124,7 +124,8 @@ architecture ntm_matrix_inverse_architecture of ntm_matrix_inverse is
   signal inverse_ctrl_fsm_int : inverse_ctrl_fsm;
 
   -- Buffer
-  signal matrix_int : matrix_buffer;
+  signal matrix_in_int  : matrix_buffer;
+  signal matrix_out_int : matrix_buffer;
 
   -- Control Internal
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -189,7 +190,13 @@ begin
 
           if ((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) then
             -- Data Inputs
-            matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
+            matrix_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
+            
+            if (unsigned(index_i_loop) = unsigned(index_j_loop)) then
+              matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= ONE_DATA;
+            else
+              matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= ZERO_DATA;
+            end if;
 
             -- FSM Control
             inverse_ctrl_fsm_int <= ENDER_J_STATE;
@@ -203,7 +210,13 @@ begin
 
           if (DATA_IN_J_ENABLE = '1') then
             -- Data Inputs
-            matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
+            matrix_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
+            
+            if (unsigned(index_i_loop) = unsigned(index_j_loop)) then
+              matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= ONE_DATA;
+            else
+              matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= ZERO_DATA;
+            end if;
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
@@ -221,7 +234,7 @@ begin
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            DATA_OUT <= matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
@@ -231,7 +244,7 @@ begin
             inverse_ctrl_fsm_int <= CLEAN_I_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            DATA_OUT <= matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
             DATA_I_ENABLE <= '1';
@@ -249,7 +262,7 @@ begin
 
           if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            DATA_OUT <= matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
             DATA_J_ENABLE <= '1';
@@ -293,7 +306,7 @@ begin
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
+            DATA_OUT <= matrix_in_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
 
             -- Control Outputs
             READY <= '1';
@@ -309,7 +322,7 @@ begin
             inverse_ctrl_fsm_int <= STARTER_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
+            DATA_OUT <= matrix_in_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
 
             -- Control Outputs
             DATA_OUT_I_ENABLE <= '1';
@@ -327,7 +340,7 @@ begin
 
           if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
+            DATA_OUT <= matrix_in_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
 
             -- Control Outputs
             DATA_OUT_J_ENABLE <= '1';

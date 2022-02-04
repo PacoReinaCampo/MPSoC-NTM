@@ -40,6 +40,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/state/feedback/ntm_state_matrix_inpu
 vhdl2008 work ../../../../../../../rtl/vhdl/state/feedback/ntm_state_matrix_output.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/state/feedback/ntm_state_matrix_state.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/tests/state/top/ntm_state_feedback_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/state/top/ntm_state_feedback_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/state/top/ntm_state_feedback_testbench.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/state/feedback/ntm_state_feedback_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/state/feedback/ntm_state_feedback_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/state/feedback/ntm_state_feedback_testbench.vhd

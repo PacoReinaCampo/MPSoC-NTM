@@ -160,6 +160,8 @@ begin
     wait for PERIOD/2;
   end process;
 
+  CLK <= clk_int;
+
   -- rst generation
   rst_process : process
   begin
@@ -169,6 +171,8 @@ begin
     rst_int <= '1';
     wait for WORKING;
   end process;
+
+  RST <= rst_int;
 
   -- start generation
   start_process : process

@@ -186,9 +186,9 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
   signal data_out_enable_vector_softmax : std_logic;
 
   -- DATA
-  signal size_in_vector_softmax   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_softmax  : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_softmax : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -340,8 +340,8 @@ begin
   data_in_vector_exponentiator_function <= data_out_vector_integer_multiplier;
 
   -- VECTOR SOFTMAX
-  size_in_vector_softmax   <= SIZE_J_IN;
-  data_in_vector_softmax   <= data_out_vector_exponentiator_function;
+  size_in_vector_softmax <= SIZE_J_IN;
+  data_in_vector_softmax <= data_out_vector_exponentiator_function;
 
   -- VECTOR MULTIPLIER
   vector_integer_multiplier : ntm_vector_integer_multiplier
@@ -444,9 +444,9 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_softmax,
 
       -- DATA
-      SIZE_IN   => size_in_vector_softmax,
-      DATA_IN   => data_in_vector_softmax,
-      DATA_OUT  => data_out_vector_softmax
+      SIZE_IN  => size_in_vector_softmax,
+      DATA_IN  => data_in_vector_softmax,
+      DATA_OUT => data_out_vector_softmax
       );
 
 end architecture;
