@@ -88,9 +88,11 @@ package ntm_state_pkg is
       DATA_D_I_ENABLE : out std_logic;
       DATA_D_J_ENABLE : out std_logic;
 
-      DATA_U_IN_ENABLE : in std_logic;
+      DATA_K_IN_I_ENABLE : in std_logic;
+      DATA_K_IN_J_ENABLE : in std_logic;
 
-      DATA_U_ENABLE : out std_logic;
+      DATA_K_I_ENABLE : out std_logic;
+      DATA_K_J_ENABLE : out std_logic;
 
       DATA_X_OUT_ENABLE : out std_logic;
       DATA_Y_OUT_ENABLE : out std_logic;
@@ -110,7 +112,7 @@ package ntm_state_pkg is
       DATA_C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DATA_U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       DATA_X_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
@@ -153,10 +155,13 @@ package ntm_state_pkg is
       DATA_D_I_ENABLE : out std_logic;
       DATA_D_J_ENABLE : out std_logic;
 
-      DATA_U_IN_ENABLE : in std_logic;
+      DATA_K_IN_I_ENABLE : in std_logic;
+      DATA_K_IN_J_ENABLE : in std_logic;
 
-      DATA_U_ENABLE : out std_logic;
+      DATA_K_I_ENABLE : out std_logic;
+      DATA_K_J_ENABLE : out std_logic;
 
+      DATA_X_OUT_ENABLE : out std_logic;
       DATA_Y_OUT_ENABLE : out std_logic;
 
       -- DATA
@@ -174,8 +179,9 @@ package ntm_state_pkg is
       DATA_C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DATA_U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
+      DATA_X_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
@@ -198,15 +204,25 @@ package ntm_state_pkg is
       DATA_A_IN_J_ENABLE : in std_logic;
       DATA_B_IN_I_ENABLE : in std_logic;
       DATA_B_IN_J_ENABLE : in std_logic;
+      DATA_C_IN_I_ENABLE : in std_logic;
+      DATA_C_IN_J_ENABLE : in std_logic;
+      DATA_D_IN_I_ENABLE : in std_logic;
+      DATA_D_IN_J_ENABLE : in std_logic;
 
       DATA_A_I_ENABLE : out std_logic;
       DATA_A_J_ENABLE : out std_logic;
       DATA_B_I_ENABLE : out std_logic;
       DATA_B_J_ENABLE : out std_logic;
+      DATA_C_I_ENABLE : out std_logic;
+      DATA_C_J_ENABLE : out std_logic;
+      DATA_D_I_ENABLE : out std_logic;
+      DATA_D_J_ENABLE : out std_logic;
 
-      DATA_U_IN_ENABLE : in std_logic;
+      DATA_K_IN_I_ENABLE : in std_logic;
+      DATA_K_IN_J_ENABLE : in std_logic;
 
-      DATA_U_ENABLE : out std_logic;
+      DATA_K_I_ENABLE : out std_logic;
+      DATA_K_J_ENABLE : out std_logic;
 
       DATA_X_OUT_ENABLE : out std_logic;
 
@@ -215,11 +231,17 @@ package ntm_state_pkg is
       SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
       SIZE_B_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_C_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_C_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
       DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
       DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DATA_U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       DATA_X_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );

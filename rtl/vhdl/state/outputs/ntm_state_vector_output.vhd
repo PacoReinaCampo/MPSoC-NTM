@@ -78,10 +78,13 @@ entity ntm_state_vector_output is
     DATA_D_I_ENABLE : out std_logic;
     DATA_D_J_ENABLE : out std_logic;
 
-    DATA_U_IN_ENABLE : in std_logic;
+    DATA_K_IN_I_ENABLE : in std_logic;
+    DATA_K_IN_J_ENABLE : in std_logic;
 
-    DATA_U_ENABLE : out std_logic;
+    DATA_K_I_ENABLE : out std_logic;
+    DATA_K_J_ENABLE : out std_logic;
 
+    DATA_X_OUT_ENABLE : out std_logic;
     DATA_Y_OUT_ENABLE : out std_logic;
 
     -- DATA
@@ -99,8 +102,9 @@ entity ntm_state_vector_output is
     DATA_C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DATA_U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+    DATA_K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
+    DATA_X_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
@@ -396,8 +400,8 @@ begin
   data_d_in_i_enable_matrix_state <= DATA_D_IN_I_ENABLE;
   data_d_in_j_enable_matrix_state <= DATA_D_IN_J_ENABLE;
 
-  --signal data_k_in_i_enable_matrix_state;
-  --signal data_k_in_j_enable_matrix_state;
+  data_k_in_i_enable_matrix_state <= DATA_K_IN_I_ENABLE;
+  data_k_in_j_enable_matrix_state <= DATA_K_IN_J_ENABLE;
 
   --signal data_k_i_enable_matrix_state;
   --signal data_k_j_enable_matrix_state;
@@ -420,7 +424,7 @@ begin
   data_c_in_matrix_state <= DATA_C_IN;
   data_d_in_matrix_state <= DATA_D_IN;
 
-  --signal data_k_in_matrix_state : std_logic_vector(DATA_SIZE-1 downto 0);
+  data_k_in_matrix_state <= DATA_K_IN;
 
   --signal data_a_out_matrix_state : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -435,8 +439,8 @@ begin
   data_d_in_i_enable_matrix_input <= DATA_D_IN_I_ENABLE;
   data_d_in_j_enable_matrix_input <= DATA_D_IN_J_ENABLE;
 
-  --signal data_k_in_i_enable_matrix_input : std_logic;
-  --signal data_k_in_j_enable_matrix_input : std_logic;
+  data_k_in_i_enable_matrix_input <= DATA_K_IN_I_ENABLE;
+  data_k_in_j_enable_matrix_input <= DATA_K_IN_J_ENABLE;
 
   --signal data_k_i_enable_matrix_input : std_logic;
   --signal data_k_j_enable_matrix_input : std_logic;
@@ -453,7 +457,7 @@ begin
   data_b_in_matrix_input <= DATA_B_IN;
   data_d_in_matrix_input <= DATA_D_IN;
 
-  --signal data_k_in_matrix_input : std_logic_vector(DATA_SIZE-1 downto 0);
+  data_k_in_matrix_input <= DATA_K_IN;
 
   --signal data_b_out_matrix_input : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -468,8 +472,8 @@ begin
   data_d_in_i_enable_matrix_output <= DATA_D_IN_I_ENABLE;
   data_d_in_j_enable_matrix_output <= DATA_D_IN_J_ENABLE;
 
-  --signal data_k_in_i_enable_matrix_output : std_logic;
-  --signal data_k_in_j_enable_matrix_output : std_logic;
+  data_k_in_i_enable_matrix_output <= DATA_K_IN_I_ENABLE;
+  data_k_in_j_enable_matrix_output <= DATA_K_IN_J_ENABLE;
 
   --signal data_k_i_enable_matrix_output : std_logic;
   --signal data_k_j_enable_matrix_output : std_logic;
@@ -486,7 +490,7 @@ begin
   data_c_in_matrix_output <= DATA_C_IN;
   data_d_in_matrix_output <= DATA_D_IN;
 
-  --signal data_k_in_matrix_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  data_k_in_matrix_output <= DATA_K_IN;
 
   --signal data_c_out_matrix_output : std_logic_vector(DATA_SIZE-1 downto 0);
 
@@ -499,8 +503,8 @@ begin
   data_d_in_i_enable_matrix_feedforward <= DATA_D_IN_I_ENABLE;
   data_d_in_j_enable_matrix_feedforward <= DATA_D_IN_J_ENABLE;
 
-  --signal data_k_in_i_enable_matrix_feedforward : std_logic;
-  --signal data_k_in_j_enable_matrix_feedforward : std_logic;
+  data_k_in_i_enable_matrix_feedforward <= DATA_K_IN_I_ENABLE;
+  data_k_in_j_enable_matrix_feedforward <= DATA_K_IN_J_ENABLE;
 
   --signal data_k_i_enable_matrix_feedforward : std_logic;
   --signal data_k_j_enable_matrix_feedforward : std_logic;
@@ -514,7 +518,7 @@ begin
 
   data_d_in_matrix_feedforward <= DATA_D_IN;
 
-  --signal data_k_in_matrix_feedforward : std_logic_vector(DATA_SIZE-1 downto 0);
+  data_k_in_matrix_feedforward <= DATA_K_IN;
 
   --signal data_d_out_matrix_feedforward : std_logic_vector(DATA_SIZE-1 downto 0);
 

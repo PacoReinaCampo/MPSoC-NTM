@@ -64,7 +64,7 @@ entity ntm_state_matrix_feedforward is
     DATA_D_IN_J_ENABLE : in std_logic;
 
     DATA_D_I_ENABLE : out std_logic;
-    DATA_D_J_ENABLE : in  std_logic;
+    DATA_D_J_ENABLE : out std_logic;
 
     DATA_K_IN_I_ENABLE : in std_logic;
     DATA_K_IN_J_ENABLE : in std_logic;
@@ -93,6 +93,22 @@ architecture ntm_state_matrix_feedforward_architecture of ntm_state_matrix_feedf
   -- Types
   -----------------------------------------------------------------------
 
+  type feedforward_ctrl_fsm is (
+    STARTER_STATE,                      -- STEP 0
+    INPUT_FIRST_I_STATE,                -- STEP 1
+    INPUT_FIRST_J_STATE,                -- STEP 2
+    MATRIX_FIRST_PRODUCT_I_STATE,       -- STEP 3
+    MATRIX_FIRST_PRODUCT_J_STATE,       -- STEP 4
+    MATRIX_ADDER_I_STATE,               -- STEP 5
+    MATRIX_ADDER_J_STATE,               -- STEP 6
+    MATRIX_INVERSE_I_STATE,             -- STEP 7
+    MATRIX_INVERSE_J_STATE,             -- STEP 8
+    INPUT_SECOND_I_STATE,               -- STEP 9
+    INPUT_SECOND_J_STATE,               -- STEP 10
+    MATRIX_SECOND_PRODUCT_I_STATE,      -- STEP 11
+    MATRIX_SECOND_PRODUCT_J_STATE       -- STEP 12
+    );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
@@ -115,6 +131,18 @@ architecture ntm_state_matrix_feedforward_architecture of ntm_state_matrix_feedf
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal feedforward_ctrl_fsm_int : feedforward_ctrl_fsm;
+
+  -- Control Internal
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal data_a_in_i_feedforward_int : std_logic;
+  signal data_a_in_j_feedforward_int : std_logic;
+  signal data_b_in_i_feedforward_int : std_logic;
+  signal data_b_in_j_feedforward_int : std_logic;
 
   -- MATRIX ADDER
   -- CONTROL
@@ -194,6 +222,195 @@ begin
   -- d = inv(I+DK)·D
 
   -- CONTROL
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      DATA_D_OUT <= ZERO_DATA;
+
+      -- Control Outputs
+      READY <= '0';
+
+      -- Control Internal
+      index_i_loop <= ZERO_CONTROL;
+      index_j_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case feedforward_ctrl_fsm_int is
+        when STARTER_STATE =>                  -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          -- Control Internal
+          index_i_loop <= ZERO_CONTROL;
+          index_j_loop <= ZERO_CONTROL;
+
+          if (START = '1') then
+            -- FSM Control
+            feedforward_ctrl_fsm_int <= INPUT_FIRST_I_STATE;
+          end if;
+
+        when INPUT_FIRST_I_STATE =>            -- STEP 1
+
+          if ((DATA_D_IN_I_ENABLE = '1') and (DATA_D_IN_J_ENABLE = '1')) then
+            -- Data Inputs
+            data_a_in_matrix_product <= DATA_D_IN;
+
+            -- Control Internal
+            data_a_in_i_enable_matrix_product <= '1';
+            data_a_in_j_enable_matrix_product <= '1';
+
+            data_a_in_i_feedforward_int <= '1';
+            data_a_in_j_feedforward_int <= '1';
+          else
+            -- Control Internal
+            data_a_in_i_enable_matrix_product <= '0';
+            data_a_in_j_enable_matrix_product <= '0';
+          end if;
+
+          if ((DATA_K_IN_I_ENABLE = '1') and (DATA_K_IN_J_ENABLE = '1')) then
+            -- Data Inputs
+            data_b_in_matrix_product <= DATA_K_IN;
+
+            -- Control Internal
+            data_b_in_i_enable_matrix_product <= '1';
+            data_b_in_j_enable_matrix_product <= '1';
+
+            data_b_in_i_feedforward_int <= '1';
+            data_b_in_j_feedforward_int <= '1';
+          else
+            -- Control Internal
+            data_b_in_i_enable_matrix_product <= '0';
+            data_b_in_j_enable_matrix_product <= '0';
+          end if;
+
+          -- Control Outputs
+          DATA_D_I_ENABLE <= '0';
+          DATA_D_J_ENABLE <= '0';
+
+          DATA_K_I_ENABLE <= '0';
+          DATA_K_J_ENABLE <= '0';
+
+          if (data_a_in_i_feedforward_int = '1' and data_a_in_j_feedforward_int = '1' and data_b_in_i_feedforward_int = '1' and data_b_in_j_feedforward_int = '1') then
+            -- Control Internal
+            data_a_in_i_feedforward_int <= '0';
+            data_a_in_j_feedforward_int <= '0';
+            data_b_in_i_feedforward_int <= '0';
+            data_b_in_j_feedforward_int <= '0';
+
+            -- FSM Control
+            feedforward_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_J_STATE;
+          end if;
+
+        when INPUT_FIRST_J_STATE =>            -- STEP 2
+
+          if (DATA_D_IN_J_ENABLE = '1') then
+            -- Data Inputs
+            data_a_in_matrix_product <= DATA_D_IN;
+
+            -- Control Internal
+            data_a_in_j_enable_matrix_product <= '1';
+
+            data_a_in_j_feedforward_int <= '1';
+          else
+            -- Control Internal
+            data_a_in_j_enable_matrix_product <= '0';
+          end if;
+
+          if (DATA_K_IN_J_ENABLE = '1') then
+            -- Data Inputs
+            data_b_in_matrix_product <= DATA_K_IN;
+
+            -- Control Internal
+            data_b_in_j_enable_matrix_product <= '1';
+
+            data_b_in_j_feedforward_int <= '1';
+          else
+            -- Control Internal
+            data_b_in_j_enable_matrix_product <= '0';
+          end if;
+
+          -- Control Outputs
+          DATA_D_J_ENABLE <= '0';
+
+          DATA_K_J_ENABLE <= '0';
+
+          if (data_a_in_j_feedforward_int = '1' and data_b_in_j_feedforward_int = '1') then
+            -- Control Internal
+            data_a_in_j_feedforward_int <= '0';
+            data_b_in_j_feedforward_int <= '0';
+
+            -- FSM Control
+            if (unsigned(index_j_loop) = unsigned(SIZE_D_J_IN)-unsigned(ONE_CONTROL)) then
+              feedforward_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_I_STATE;
+            else
+              feedforward_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_J_STATE;
+            end if;
+          end if;
+
+        when MATRIX_FIRST_PRODUCT_I_STATE =>   -- STEP 3
+
+          if (data_out_i_enable_matrix_product = '1') then
+            -- Data Outputs
+            data_b_in_matrix_integer_adder <= data_out_matrix_product;
+
+            -- Control Outputs
+            DATA_D_I_ENABLE <= '1';
+            DATA_D_J_ENABLE <= '1';
+
+            DATA_K_I_ENABLE <= '1';
+            DATA_K_J_ENABLE <= '1';
+
+            data_b_in_i_enable_matrix_integer_adder <= '1';
+
+            -- FSM Control
+            feedforward_ctrl_fsm_int <= MATRIX_ADDER_J_STATE;
+          end if;
+
+        when MATRIX_FIRST_PRODUCT_J_STATE =>   -- STEP 4
+
+          if (data_out_j_enable_matrix_product = '1') then
+            -- Data Outputs
+            data_b_in_matrix_integer_adder <= data_out_matrix_product;
+
+            -- Control Outputs
+            DATA_D_J_ENABLE <= '1';
+
+            DATA_K_J_ENABLE <= '1';
+
+            data_b_in_i_enable_matrix_integer_adder <= '1';
+
+            -- FSM Control
+            if (unsigned(index_j_loop) = unsigned(SIZE_D_J_IN)-unsigned(ONE_CONTROL)) then
+              feedforward_ctrl_fsm_int <= INPUT_FIRST_I_STATE;
+            else
+              feedforward_ctrl_fsm_int <= INPUT_FIRST_J_STATE;
+            end if;
+          end if;
+
+        when MATRIX_ADDER_I_STATE =>           -- STEP 5
+
+        when MATRIX_ADDER_J_STATE =>           -- STEP 6
+
+        when MATRIX_INVERSE_I_STATE =>         -- STEP 7
+
+        when MATRIX_INVERSE_J_STATE =>         -- STEP 8
+
+        when INPUT_SECOND_I_STATE =>           -- STEP 9
+
+        when INPUT_SECOND_J_STATE =>           -- STEP 10
+
+        when MATRIX_SECOND_PRODUCT_I_STATE =>  -- STEP 11
+
+        when MATRIX_SECOND_PRODUCT_J_STATE =>  -- STEP 12
+
+        when others =>
+          -- FSM Control
+          feedforward_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
   -- MATRIX ADDER
   matrix_integer_adder : ntm_matrix_integer_adder
