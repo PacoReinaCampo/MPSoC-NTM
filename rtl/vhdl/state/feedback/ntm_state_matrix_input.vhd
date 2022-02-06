@@ -100,6 +100,29 @@ architecture ntm_state_matrix_input_architecture of ntm_state_matrix_input is
   -- Types
   -----------------------------------------------------------------------
 
+  type input_ctrl_fsm is (
+    STARTER_STATE,                      -- STEP 0
+    INPUT_FIRST_I_STATE,                -- STEP 1
+    INPUT_FIRST_J_STATE,                -- STEP 2
+    MATRIX_FIRST_PRODUCT_I_STATE,       -- STEP 3
+    MATRIX_FIRST_PRODUCT_J_STATE,       -- STEP 4
+    MATRIX_FIRST_ADDER_I_STATE,         -- STEP 5
+    MATRIX_FIRST_ADDER_J_STATE,         -- STEP 6
+    MATRIX_INVERSE_I_STATE,             -- STEP 7
+    MATRIX_INVERSE_J_STATE,             -- STEP 8
+    INPUT_SECOND_I_STATE,               -- STEP 9
+    INPUT_SECOND_J_STATE,               -- STEP 10
+    MATRIX_SECOND_PRODUCT_I_STATE,      -- STEP 11
+    MATRIX_SECOND_PRODUCT_J_STATE,      -- STEP 12
+    MATRIX_THIRD_PRODUCT_I_STATE,       -- STEP 13
+    MATRIX_THIRD_PRODUCT_J_STATE,       -- STEP 14
+    MATRIX_SECOND_ADDER_I_STATE,        -- STEP 15
+    MATRIX_SECOND_ADDER_J_STATE,        -- STEP 16
+    MATRIX_FOURTH_PRODUCT_I_STATE,      -- STEP 17
+    MATRIX_FOURTH_PRODUCT_J_STATE       -- STEP 18
+
+    );
+
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
@@ -122,6 +145,18 @@ architecture ntm_state_matrix_input_architecture of ntm_state_matrix_input is
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- Finite State Machine
+  signal input_ctrl_fsm_int : input_ctrl_fsm;
+
+  -- Control Internal
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal data_a_in_i_input_int : std_logic;
+  signal data_a_in_j_input_int : std_logic;
+  signal data_b_in_i_input_int : std_logic;
+  signal data_b_in_j_input_int : std_logic;
 
   -- MATRIX ADDER
   -- CONTROL
@@ -198,9 +233,80 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- b = B·(I-K·inv(I+DK)·D)
+  -- b = B·(I-K·inv(I+D·K)·D)
 
   -- CONTROL
+  ctrl_fsm : process(CLK, RST)
+  begin
+    if (RST = '0') then
+      -- Data Outputs
+      DATA_B_OUT <= ZERO_DATA;
+
+      -- Control Outputs
+      READY <= '0';
+
+      -- Control Internal
+      index_i_loop <= ZERO_CONTROL;
+      index_j_loop <= ZERO_CONTROL;
+
+    elsif (rising_edge(CLK)) then
+
+      case input_ctrl_fsm_int is
+        when STARTER_STATE =>                  -- STEP 0
+          -- Control Outputs
+          READY <= '0';
+
+          -- Control Internal
+          index_i_loop <= ZERO_CONTROL;
+          index_j_loop <= ZERO_CONTROL;
+
+          if (START = '1') then
+            -- FSM Control
+            input_ctrl_fsm_int <= INPUT_FIRST_I_STATE;
+          end if;
+
+        when INPUT_FIRST_I_STATE =>            -- STEP 1 D,K
+
+        when INPUT_FIRST_J_STATE =>            -- STEP 2 D,K
+
+        when MATRIX_FIRST_PRODUCT_I_STATE =>   -- STEP 3 (D·K)
+
+        when MATRIX_FIRST_PRODUCT_J_STATE =>   -- STEP 4 (D·K)
+
+        when MATRIX_FIRST_ADDER_I_STATE =>     -- STEP 5 (I+DK)
+
+        when MATRIX_FIRST_ADDER_J_STATE =>     -- STEP 6 (I+DK)
+
+        when MATRIX_INVERSE_I_STATE =>         -- STEP 7 inv(I+DK)
+
+        when MATRIX_INVERSE_J_STATE =>         -- STEP 8 inv(I+DK)
+
+        when MATRIX_SECOND_PRODUCT_I_STATE =>  -- STEP 9 K·inv(I+DK)
+
+        when MATRIX_SECOND_PRODUCT_J_STATE =>  -- STEP 10 K·inv(I+DK)
+
+        when MATRIX_THIRD_PRODUCT_I_STATE =>   -- STEP 11 K·inv(I+DK)·D
+
+        when MATRIX_THIRD_PRODUCT_J_STATE =>   -- STEP 12 K·inv(I+DK)·D
+
+        when MATRIX_SECOND_ADDER_I_STATE =>    -- STEP 13 I-K·inv(I+DK)·D
+
+        when MATRIX_SECOND_ADDER_J_STATE =>    -- STEP 14 I-K·inv(I+DK)·D
+
+        when INPUT_SECOND_I_STATE =>           -- STEP 15 B
+
+        when INPUT_SECOND_J_STATE =>           -- STEP 16 B
+
+        when MATRIX_FOURTH_PRODUCT_I_STATE =>  -- STEP 17 B·(I-K·inv(I+D·K)·D)
+
+        when MATRIX_FOURTH_PRODUCT_J_STATE =>  -- STEP 18 B·(I-K·inv(I+D·K)·D)
+
+        when others =>
+          -- FSM Control
+          input_ctrl_fsm_int <= STARTER_STATE;
+      end case;
+    end if;
+  end process;
 
   -- MATRIX ADDER
   matrix_integer_adder : ntm_matrix_integer_adder

@@ -103,10 +103,8 @@ architecture ntm_state_matrix_feedforward_architecture of ntm_state_matrix_feedf
     MATRIX_ADDER_J_STATE,               -- STEP 6
     MATRIX_INVERSE_I_STATE,             -- STEP 7
     MATRIX_INVERSE_J_STATE,             -- STEP 8
-    INPUT_SECOND_I_STATE,               -- STEP 9
-    INPUT_SECOND_J_STATE,               -- STEP 10
-    MATRIX_SECOND_PRODUCT_I_STATE,      -- STEP 11
-    MATRIX_SECOND_PRODUCT_J_STATE       -- STEP 12
+    MATRIX_SECOND_PRODUCT_I_STATE,      -- STEP 9
+    MATRIX_SECOND_PRODUCT_J_STATE       -- STEP 10
     );
 
   -----------------------------------------------------------------------
@@ -219,7 +217,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- d = inv(I+DK)·D
+  -- d = inv(I+D·K)·D
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -251,7 +249,7 @@ begin
             feedforward_ctrl_fsm_int <= INPUT_FIRST_I_STATE;
           end if;
 
-        when INPUT_FIRST_I_STATE =>            -- STEP 1
+        when INPUT_FIRST_I_STATE =>            -- STEP 1 D,K
 
           if ((DATA_D_IN_I_ENABLE = '1') and (DATA_D_IN_J_ENABLE = '1')) then
             -- Data Inputs
@@ -303,7 +301,7 @@ begin
             feedforward_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_J_STATE;
           end if;
 
-        when INPUT_FIRST_J_STATE =>            -- STEP 2
+        when INPUT_FIRST_J_STATE =>            -- STEP 2 D,K
 
           if (DATA_D_IN_J_ENABLE = '1') then
             -- Data Inputs
@@ -349,7 +347,7 @@ begin
             end if;
           end if;
 
-        when MATRIX_FIRST_PRODUCT_I_STATE =>   -- STEP 3
+        when MATRIX_FIRST_PRODUCT_I_STATE =>   -- STEP 3 (D·K)
 
           if (data_out_i_enable_matrix_product = '1') then
             -- Data Outputs
@@ -368,7 +366,7 @@ begin
             feedforward_ctrl_fsm_int <= MATRIX_ADDER_J_STATE;
           end if;
 
-        when MATRIX_FIRST_PRODUCT_J_STATE =>   -- STEP 4
+        when MATRIX_FIRST_PRODUCT_J_STATE =>   -- STEP 4 (D·K)
 
           if (data_out_j_enable_matrix_product = '1') then
             -- Data Outputs
@@ -389,21 +387,17 @@ begin
             end if;
           end if;
 
-        when MATRIX_ADDER_I_STATE =>           -- STEP 5
+        when MATRIX_ADDER_I_STATE =>           -- STEP 5 (I+D·K)
 
-        when MATRIX_ADDER_J_STATE =>           -- STEP 6
+        when MATRIX_ADDER_J_STATE =>           -- STEP 6 (I+D·K)
 
-        when MATRIX_INVERSE_I_STATE =>         -- STEP 7
+        when MATRIX_INVERSE_I_STATE =>         -- STEP 7 inv(I+D·K)
 
-        when MATRIX_INVERSE_J_STATE =>         -- STEP 8
+        when MATRIX_INVERSE_J_STATE =>         -- STEP 8 inv(I+D·K)
 
-        when INPUT_SECOND_I_STATE =>           -- STEP 9
+        when MATRIX_SECOND_PRODUCT_I_STATE =>  -- STEP 9 inv(I+D·K)·D
 
-        when INPUT_SECOND_J_STATE =>           -- STEP 10
-
-        when MATRIX_SECOND_PRODUCT_I_STATE =>  -- STEP 11
-
-        when MATRIX_SECOND_PRODUCT_J_STATE =>  -- STEP 12
+        when MATRIX_SECOND_PRODUCT_J_STATE =>  -- STEP 10 inv(I+D·K)·D
 
         when others =>
           -- FSM Control
