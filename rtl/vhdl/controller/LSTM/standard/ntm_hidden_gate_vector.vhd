@@ -121,19 +121,19 @@ architecture ntm_hidden_gate_vector_architecture of ntm_hidden_gate_vector is
 
   -- VECTOR MULTIPLIER
   -- CONTROL
-  signal start_vector_multiplier : std_logic;
-  signal ready_vector_multiplier : std_logic;
+  signal start_vector_integer_multiplier : std_logic;
+  signal ready_vector_integer_multiplier : std_logic;
 
-  signal data_a_in_enable_vector_multiplier : std_logic;
-  signal data_b_in_enable_vector_multiplier : std_logic;
+  signal data_a_in_enable_vector_integer_multiplier : std_logic;
+  signal data_b_in_enable_vector_integer_multiplier : std_logic;
 
-  signal data_out_enable_vector_multiplier : std_logic;
+  signal data_out_enable_vector_integer_multiplier : std_logic;
 
   -- DATA
-  signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_integer_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_integer_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR TANH
   -- CONTROL
@@ -209,7 +209,7 @@ begin
           if (data_out_enable_vector_tanh = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
-              start_vector_multiplier <= '1';
+              start_vector_integer_multiplier <= '1';
             end if;
 
             -- FSM Control
@@ -221,7 +221,7 @@ begin
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 3
 
-          if (data_out_enable_vector_multiplier = '1') then
+          if (data_out_enable_vector_integer_multiplier = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_L_IN) - unsigned(ONE_CONTROL)) then
               -- Control Outputs
               READY <= '1';
@@ -237,7 +237,7 @@ begin
             end if;
 
             -- Data Outputs
-            H_OUT <= data_out_vector_multiplier;
+            H_OUT <= data_out_vector_integer_multiplier;
 
             -- Control Outputs
             H_OUT_ENABLE <= '1';
@@ -246,7 +246,7 @@ begin
             H_OUT_ENABLE <= '0';
 
             -- Control Internal
-            start_vector_multiplier <= '0';
+            start_vector_integer_multiplier <= '0';
           end if;
 
         when others =>
@@ -260,8 +260,8 @@ begin
   data_in_enable_vector_tanh <= S_IN_ENABLE;
 
   -- VECTOR MULTIPLIER
-  data_a_in_enable_vector_multiplier <= O_IN_ENABLE;
-  data_b_in_enable_vector_multiplier <= data_out_enable_vector_tanh;
+  data_a_in_enable_vector_integer_multiplier <= O_IN_ENABLE;
+  data_b_in_enable_vector_integer_multiplier <= data_out_enable_vector_tanh;
 
   -- DATA
   -- VECTOR TANH
@@ -269,12 +269,12 @@ begin
   data_in_vector_tanh <= S_IN;
 
   -- VECTOR MULTIPLIER
-  size_in_vector_multiplier   <= SIZE_L_IN;
-  data_a_in_vector_multiplier <= O_IN;
-  data_b_in_vector_multiplier <= data_out_vector_tanh;
+  size_in_vector_integer_multiplier   <= SIZE_L_IN;
+  data_a_in_vector_integer_multiplier <= O_IN;
+  data_b_in_vector_integer_multiplier <= data_out_vector_tanh;
 
   -- VECTOR MULTIPLIER
-  vector_multiplier : ntm_vector_multiplier
+  vector_integer_multiplier : ntm_vector_integer_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -285,19 +285,19 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_multiplier,
-      READY => ready_vector_multiplier,
+      START => start_vector_integer_multiplier,
+      READY => ready_vector_integer_multiplier,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplier,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplier,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_integer_multiplier,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_integer_multiplier,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
+      DATA_OUT_ENABLE => data_out_enable_vector_integer_multiplier,
 
       -- DATA
-      SIZE_IN   => size_in_vector_multiplier,
-      DATA_A_IN => data_a_in_vector_multiplier,
-      DATA_B_IN => data_b_in_vector_multiplier,
-      DATA_OUT  => data_out_vector_multiplier
+      SIZE_IN   => size_in_vector_integer_multiplier,
+      DATA_A_IN => data_a_in_vector_integer_multiplier,
+      DATA_B_IN => data_b_in_vector_integer_multiplier,
+      DATA_OUT  => data_out_vector_integer_multiplier
       );
 
   -- VECTOR TANH

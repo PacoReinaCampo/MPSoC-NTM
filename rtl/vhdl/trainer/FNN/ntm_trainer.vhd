@@ -181,14 +181,11 @@ architecture ntm_trainer_architecture of ntm_trainer is
   signal start_vector_summation : std_logic;
   signal ready_vector_summation : std_logic;
 
-  signal data_in_vector_enable_vector_summation : std_logic;
-  signal data_in_scalar_enable_vector_summation : std_logic;
+  signal data_in_enable_vector_summation : std_logic;
 
-  signal data_out_vector_enable_vector_summation : std_logic;
-  signal data_out_scalar_enable_vector_summation : std_logic;
+  signal data_out_enable_vector_summation : std_logic;
 
   -- DATA
-  signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -198,15 +195,12 @@ architecture ntm_trainer_architecture of ntm_trainer is
   signal start_vector_differentiation : std_logic;
   signal ready_vector_differentiation : std_logic;
 
-  signal data_in_vector_enable_vector_differentiation : std_logic;
-  signal data_in_scalar_enable_vector_differentiation : std_logic;
+  signal data_in_enable_vector_differentiation : std_logic;
 
-  signal data_out_vector_enable_vector_differentiation : std_logic;
-  signal data_out_scalar_enable_vector_differentiation : std_logic;
+  signal data_out_enable_vector_differentiation : std_logic;
 
   -- DATA
   signal size_in_vector_differentiation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal period_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal length_in_vector_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -278,8 +272,7 @@ begin
         when VECTOR_DIFFERENTIATION_DW_STATE =>  -- STEP 2
 
           -- Control Inputs
-          data_in_vector_enable_vector_differentiation <= '0';
-          data_in_scalar_enable_vector_differentiation <= '0';
+          data_in_enable_vector_differentiation <= '0';
 
           -- Data Inputs
           size_in_vector_differentiation <= SIZE_X_IN;
@@ -306,11 +299,9 @@ begin
         when VECTOR_SUMMATION_DW_STATE =>  -- STEP 5
 
           -- Control Inputs
-          data_in_vector_enable_vector_summation <= '0';
-          data_in_scalar_enable_vector_summation <= '0';
+          data_in_enable_vector_summation <= '0';
 
           -- Data Inputs
-          size_in_vector_summation   <= FULL;
           length_in_vector_summation <= FULL;
           data_in_vector_summation   <= FULL;
 
@@ -357,8 +348,7 @@ begin
         when VECTOR_DIFFERENTIATION_DK_STATE =>  -- STEP 2
 
           -- Control Inputs
-          data_in_vector_enable_vector_differentiation <= '0';
-          data_in_scalar_enable_vector_differentiation <= '0';
+          data_in_enable_vector_differentiation <= '0';
 
           -- Data Inputs
           size_in_vector_differentiation <= SIZE_X_IN;
@@ -385,11 +375,9 @@ begin
         when VECTOR_SUMMATION_DK_STATE =>  -- STEP 5
 
           -- Control Inputs
-          data_in_vector_enable_vector_summation <= '0';
-          data_in_scalar_enable_vector_summation <= '0';
+          data_in_enable_vector_summation <= '0';
 
           -- Data Inputs
-          size_in_vector_summation   <= FULL;
           length_in_vector_summation <= FULL;
           data_in_vector_summation   <= FULL;
 
@@ -436,8 +424,7 @@ begin
         when VECTOR_DIFFERENTIATION_DU_STATE =>  -- STEP 2
 
           -- Control Inputs
-          data_in_vector_enable_vector_differentiation <= '0';
-          data_in_scalar_enable_vector_differentiation <= '0';
+          data_in_enable_vector_differentiation <= '0';
 
           -- Data Inputs
           size_in_vector_differentiation <= SIZE_X_IN;
@@ -464,11 +451,9 @@ begin
         when VECTOR_SUMMATION_DU_STATE =>  -- STEP 5
 
           -- Control Inputs
-          data_in_vector_enable_vector_summation <= '0';
-          data_in_scalar_enable_vector_summation <= '0';
+          data_in_enable_vector_summation <= '0';
 
           -- Data Inputs
-          size_in_vector_summation   <= FULL;
           length_in_vector_summation <= FULL;
           data_in_vector_summation   <= FULL;
 
@@ -515,8 +500,7 @@ begin
         when VECTOR_DIFFERENTIATION_DB_STATE =>  -- STEP 2
 
           -- Control Inputs
-          data_in_vector_enable_vector_differentiation <= '0';
-          data_in_scalar_enable_vector_differentiation <= '0';
+          data_in_enable_vector_differentiation <= '0';
 
           -- Data Inputs
           size_in_vector_differentiation <= SIZE_X_IN;
@@ -525,11 +509,9 @@ begin
         when VECTOR_SUMMATION_DB_STATE =>  -- STEP 3
 
           -- Control Inputs
-          data_in_vector_enable_vector_summation <= '0';
-          data_in_scalar_enable_vector_summation <= '0';
+          data_in_enable_vector_summation <= '0';
 
           -- Data Inputs
-          size_in_vector_summation   <= FULL;
           length_in_vector_summation <= FULL;
           data_in_vector_summation   <= FULL;
 
@@ -544,7 +526,7 @@ begin
   end process;
 
   -- VECTOR SUMMATION
-  vector_summation_function : ntm_vector_summation_function
+  vector_summation : ntm_vector_summation
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -558,14 +540,11 @@ begin
       START => start_vector_summation,
       READY => ready_vector_summation,
 
-      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_summation,
-      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_summation,
+      DATA_IN_ENABLE => data_in_enable_vector_summation,
 
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_summation,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
+      DATA_OUT_ENABLE => data_out_enable_vector_summation,
 
       -- DATA
-      SIZE_IN   => size_in_vector_summation,
       LENGTH_IN => length_in_vector_summation,
       DATA_IN   => data_in_vector_summation,
       DATA_OUT  => data_out_vector_summation
@@ -586,15 +565,12 @@ begin
       START => start_vector_differentiation,
       READY => ready_vector_differentiation,
 
-      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_differentiation,
-      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_differentiation,
+      DATA_IN_ENABLE => data_in_enable_vector_differentiation,
 
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_differentiation,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_differentiation,
+      DATA_OUT_ENABLE => data_out_enable_vector_differentiation,
 
       -- DATA
       SIZE_IN   => size_in_vector_differentiation,
-      PERIOD_IN => period_in_vector_differentiation,
       LENGTH_IN => length_in_vector_differentiation,
       DATA_IN   => data_in_vector_differentiation,
       DATA_OUT  => data_out_vector_differentiation

@@ -50,12 +50,12 @@ entity ntm_trainer_lstm_stimulus is
     DATA_SIZE    : integer := 128;
     CONTROL_SIZE : integer := 64;
 
-    X : integer := 64;
-    Y : integer := 64;
-    N : integer := 64;
-    W : integer := 64;
-    L : integer := 64;
-    R : integer := 64
+    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i in 0 to R-1
     );
   port (
     -- GLOBAL
@@ -63,68 +63,68 @@ entity ntm_trainer_lstm_stimulus is
     RST : out std_logic;
 
     -- CONTROL
-    NTM_trainer_lstm_START : out std_logic;
-    NTM_trainer_lstm_READY : in  std_logic;
+    NTM_TRAINER_LSTM_START : out std_logic;
+    NTM_TRAINER_LSTM_READY : in  std_logic;
 
-    NTM_trainer_lstm_W_IN_L_ENABLE : out std_logic;
-    NTM_trainer_lstm_W_IN_X_ENABLE : out std_logic;
+    NTM_TRAINER_LSTM_W_IN_L_ENABLE : out std_logic;
+    NTM_TRAINER_LSTM_W_IN_X_ENABLE : out std_logic;
 
-    NTM_trainer_lstm_K_IN_I_ENABLE : out std_logic;
-    NTM_trainer_lstm_K_IN_L_ENABLE : out std_logic;
-    NTM_trainer_lstm_K_IN_K_ENABLE : out std_logic;
+    NTM_TRAINER_LSTM_K_IN_I_ENABLE : out std_logic;
+    NTM_TRAINER_LSTM_K_IN_L_ENABLE : out std_logic;
+    NTM_TRAINER_LSTM_K_IN_K_ENABLE : out std_logic;
 
-    NTM_trainer_lstm_U_IN_L_ENABLE : out std_logic;
-    NTM_trainer_lstm_U_IN_P_ENABLE : out std_logic;
+    NTM_TRAINER_LSTM_U_IN_L_ENABLE : out std_logic;
+    NTM_TRAINER_LSTM_U_IN_P_ENABLE : out std_logic;
 
-    NTM_trainer_lstm_B_IN_ENABLE : out std_logic;
+    NTM_TRAINER_LSTM_B_IN_ENABLE : out std_logic;
 
-    NTM_trainer_lstm_X_IN_ENABLE : out std_logic;
+    NTM_TRAINER_LSTM_X_IN_ENABLE : out std_logic;
 
-    NTM_trainer_lstm_X_OUT_ENABLE : in std_logic;
+    NTM_TRAINER_LSTM_X_OUT_ENABLE : in std_logic;
 
-    NTM_trainer_lstm_R_IN_I_ENABLE : out std_logic;
-    NTM_trainer_lstm_R_IN_K_ENABLE : out std_logic;
+    NTM_TRAINER_LSTM_R_IN_I_ENABLE : out std_logic;
+    NTM_TRAINER_LSTM_R_IN_K_ENABLE : out std_logic;
 
-    NTM_trainer_lstm_R_OUT_I_ENABLE : in std_logic;
-    NTM_trainer_lstm_R_OUT_K_ENABLE : in std_logic;
+    NTM_TRAINER_LSTM_R_OUT_I_ENABLE : in std_logic;
+    NTM_TRAINER_LSTM_R_OUT_K_ENABLE : in std_logic;
 
-    NTM_trainer_lstm_H_IN_ENABLE : out std_logic;
+    NTM_TRAINER_LSTM_H_IN_ENABLE : out std_logic;
 
-    NTM_trainer_lstm_W_OUT_L_ENABLE : in std_logic;
-    NTM_trainer_lstm_W_OUT_X_ENABLE : in std_logic;
+    NTM_TRAINER_LSTM_W_OUT_L_ENABLE : in std_logic;
+    NTM_TRAINER_LSTM_W_OUT_X_ENABLE : in std_logic;
 
-    NTM_trainer_lstm_K_OUT_I_ENABLE : in std_logic;
-    NTM_trainer_lstm_K_OUT_L_ENABLE : in std_logic;
-    NTM_trainer_lstm_K_OUT_K_ENABLE : in std_logic;
+    NTM_TRAINER_LSTM_K_OUT_I_ENABLE : in std_logic;
+    NTM_TRAINER_LSTM_K_OUT_L_ENABLE : in std_logic;
+    NTM_TRAINER_LSTM_K_OUT_K_ENABLE : in std_logic;
 
-    NTM_trainer_lstm_U_OUT_L_ENABLE : in std_logic;
-    NTM_trainer_lstm_U_OUT_P_ENABLE : in std_logic;
+    NTM_TRAINER_LSTM_U_OUT_L_ENABLE : in std_logic;
+    NTM_TRAINER_LSTM_U_OUT_P_ENABLE : in std_logic;
 
-    NTM_trainer_lstm_B_OUT_ENABLE : in std_logic;
+    NTM_TRAINER_LSTM_B_OUT_ENABLE : in std_logic;
 
-    NTM_trainer_lstm_H_OUT_ENABLE : in std_logic;
+    NTM_TRAINER_LSTM_H_OUT_ENABLE : in std_logic;
 
     -- DATA
-    NTM_trainer_lstm_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    NTM_trainer_lstm_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    NTM_trainer_lstm_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    NTM_trainer_lstm_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_TRAINER_LSTM_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_TRAINER_LSTM_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_TRAINER_LSTM_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_TRAINER_LSTM_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    NTM_trainer_lstm_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_trainer_lstm_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_trainer_lstm_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_trainer_lstm_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TRAINER_LSTM_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TRAINER_LSTM_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TRAINER_LSTM_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TRAINER_LSTM_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    NTM_trainer_lstm_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_trainer_lstm_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_trainer_lstm_H_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TRAINER_LSTM_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TRAINER_LSTM_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TRAINER_LSTM_H_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    NTM_trainer_lstm_W_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_trainer_lstm_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_trainer_lstm_U_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-    NTM_trainer_lstm_B_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TRAINER_LSTM_W_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TRAINER_LSTM_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TRAINER_LSTM_U_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_TRAINER_LSTM_B_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    NTM_trainer_lstm_H_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+    NTM_TRAINER_LSTM_H_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
     );
 end entity;
 
@@ -170,6 +170,8 @@ begin
     wait for PERIOD/2;
   end process;
 
+  CLK <= clk_int;
+
   -- rst generation
   rst_process : process
   begin
@@ -179,6 +181,8 @@ begin
     rst_int <= '1';
     wait for WORKING;
   end process;
+
+  RST <= rst_int;
 
   -- start generation
   start_process : process
