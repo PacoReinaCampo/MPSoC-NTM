@@ -208,7 +208,7 @@ begin
   start_vector_output <= START;
 
   READY <= ready_vector_output;
-  
+
   data_a_in_i_enable_vector_output <= DATA_A_IN_I_ENABLE;
   data_a_in_j_enable_vector_output <= DATA_A_IN_J_ENABLE;
   data_b_in_i_enable_vector_output <= DATA_B_IN_I_ENABLE;
