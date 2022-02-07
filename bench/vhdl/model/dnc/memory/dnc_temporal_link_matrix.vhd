@@ -130,29 +130,29 @@ architecture dnc_temporal_link_matrix_architecture of dnc_temporal_link_matrix i
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- Data Internal
-  signal data_int_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_int_scalar_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR ADDER
   -- CONTROL
-  signal start_scalar_adder : std_logic;
-  signal ready_scalar_adder : std_logic;
+  signal start_scalar_integer_adder : std_logic;
+  signal ready_scalar_integer_adder : std_logic;
 
-  signal operation_scalar_adder : std_logic;
+  signal operation_scalar_integer_adder : std_logic;
 
   -- DATA
-  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_integer_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR MULTIPLIER
   -- CONTROL
-  signal start_scalar_multiplier : std_logic;
-  signal ready_scalar_multiplier : std_logic;
+  signal start_scalar_integer_multiplier : std_logic;
+  signal ready_scalar_integer_multiplier : std_logic;
 
   -- DATA
-  signal data_a_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_integer_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -191,13 +191,13 @@ begin
 
           if (START = '1') then
             -- Control Internal
-            start_scalar_adder <= '1';
+            start_scalar_integer_adder <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
           else
             -- Control Internal
-            start_scalar_adder <= '0';
+            start_scalar_integer_adder <= '0';
           end if;
 
         when INPUT_FIRST_STATE =>       -- STEP 1
@@ -205,45 +205,45 @@ begin
         when SCALAR_MULTIPLIER_ADDER_STATE =>  -- STEP 2
 
           -- Control Input
-          operation_scalar_adder <= '1';
+          operation_scalar_integer_adder <= '1';
 
           -- Data Input
-          data_a_in_scalar_adder <= ONE_DATA;
-          data_b_in_scalar_adder <= W_IN;
+          data_a_in_scalar_integer_adder <= ONE_DATA;
+          data_b_in_scalar_integer_adder <= W_IN;
 
-          data_a_in_scalar_multiplier <= W_IN;
-          data_b_in_scalar_multiplier <= P_IN;
+          data_a_in_scalar_integer_multiplier <= W_IN;
+          data_b_in_scalar_integer_multiplier <= P_IN;
 
           -- Data Internal
-          data_int_scalar_multiplier <= data_out_scalar_multiplier;
+          data_int_scalar_integer_multiplier <= data_out_scalar_integer_multiplier;
 
         when INPUT_SECOND_STATE =>      -- STEP 3
 
         when SCALAR_FIRST_ADDER_STATE =>  -- STEP 4
 
           -- Control Input
-          operation_scalar_adder <= '1';
+          operation_scalar_integer_adder <= '1';
 
           -- Data Input
-          data_a_in_scalar_adder <= data_out_scalar_adder;
-          data_b_in_scalar_adder <= W_IN;
+          data_a_in_scalar_integer_adder <= data_out_scalar_integer_adder;
+          data_b_in_scalar_integer_adder <= W_IN;
 
         when SCALAR_MULTIPLIER_STATE =>  -- STEP 5
 
           -- Data Input
-          data_a_in_scalar_multiplier <= data_out_scalar_adder;
-          data_b_in_scalar_multiplier <= L_OUT;
+          data_a_in_scalar_integer_multiplier <= data_out_scalar_integer_adder;
+          data_b_in_scalar_integer_multiplier <= L_OUT;
 
         when INPUT_THIRD_STATE =>       -- STEP 6
 
         when SCALAR_SECOND_ADDER_STATE =>  -- STEP 7
 
           -- Control Input
-          operation_scalar_adder <= '0';
+          operation_scalar_integer_adder <= '0';
 
           -- Data Input
-          data_a_in_scalar_adder <= data_out_scalar_multiplier;
-          data_b_in_scalar_adder <= data_int_scalar_multiplier;
+          data_a_in_scalar_integer_adder <= data_out_scalar_integer_multiplier;
+          data_b_in_scalar_integer_adder <= data_int_scalar_integer_multiplier;
 
         when others =>
           -- FSM Control
@@ -253,7 +253,7 @@ begin
   end process;
 
   -- SCALAR ADDER
-  scalar_adder : ntm_scalar_adder
+  scalar_integer_adder : ntm_scalar_integer_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -264,19 +264,19 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_adder,
-      READY => ready_scalar_adder,
+      START => start_scalar_integer_adder,
+      READY => ready_scalar_integer_adder,
 
-      OPERATION => operation_scalar_adder,
+      OPERATION => operation_scalar_integer_adder,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_adder,
-      DATA_B_IN => data_b_in_scalar_adder,
-      DATA_OUT  => data_out_scalar_adder
+      DATA_A_IN => data_a_in_scalar_integer_adder,
+      DATA_B_IN => data_b_in_scalar_integer_adder,
+      DATA_OUT  => data_out_scalar_integer_adder
       );
 
   -- SCALAR MULTIPLIER
-  scalar_multiplier : ntm_scalar_multiplier
+  scalar_integer_multiplier : ntm_scalar_integer_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -287,13 +287,13 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_multiplier,
-      READY => ready_scalar_adder,
+      START => start_scalar_integer_multiplier,
+      READY => ready_scalar_integer_adder,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_multiplier,
-      DATA_B_IN => data_b_in_scalar_multiplier,
-      DATA_OUT  => data_out_scalar_multiplier
+      DATA_A_IN => data_a_in_scalar_integer_multiplier,
+      DATA_B_IN => data_b_in_scalar_integer_multiplier,
+      DATA_OUT  => data_out_scalar_integer_multiplier
       );
 
 end architecture;

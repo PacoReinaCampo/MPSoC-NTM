@@ -45,6 +45,23 @@ use work.ntm_fnn_controller_pkg.all;
 use work.ntm_trainer_fnn_pkg.all;
 
 entity ntm_trainer_fnn_testbench is
+  generic (
+    -- SYSTEM-SIZE
+    DATA_SIZE    : integer := 128;
+    CONTROL_SIZE : integer := 64;
+
+    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
+
+    -- FUNCTIONALITY
+    ENABLE_NTM_SCALAR_INTEGER_ADDER_TEST      : boolean := false;
+    ENABLE_NTM_SCALAR_INTEGER_MULTIPLIER_TEST : boolean := false;
+    ENABLE_NTM_SCALAR_INTEGER_DIVIDER_TEST    : boolean := false
+    );
 end ntm_trainer_fnn_testbench;
 
 architecture ntm_trainer_fnn_testbench_architecture of ntm_trainer_fnn_testbench is
@@ -148,68 +165,68 @@ begin
       RST => RST,
 
       -- CONTROL
-      NTM_trainer_fnn_START => start_controller,
-      NTM_trainer_fnn_READY => ready_controller,
+      NTM_TRAINER_FNN_START => start_controller,
+      NTM_TRAINER_FNN_READY => ready_controller,
 
-      NTM_trainer_fnn_W_IN_L_ENABLE => w_in_l_enable_controller,
-      NTM_trainer_fnn_W_IN_X_ENABLE => w_in_x_enable_controller,
+      NTM_TRAINER_FNN_W_IN_L_ENABLE => w_in_l_enable_controller,
+      NTM_TRAINER_FNN_W_IN_X_ENABLE => w_in_x_enable_controller,
 
-      NTM_trainer_fnn_K_IN_I_ENABLE => k_in_i_enable_controller,
-      NTM_trainer_fnn_K_IN_L_ENABLE => k_in_l_enable_controller,
-      NTM_trainer_fnn_K_IN_K_ENABLE => k_in_k_enable_controller,
+      NTM_TRAINER_FNN_K_IN_I_ENABLE => k_in_i_enable_controller,
+      NTM_TRAINER_FNN_K_IN_L_ENABLE => k_in_l_enable_controller,
+      NTM_TRAINER_FNN_K_IN_K_ENABLE => k_in_k_enable_controller,
 
-      NTM_trainer_fnn_U_IN_L_ENABLE => u_in_l_enable_controller,
-      NTM_trainer_fnn_U_IN_P_ENABLE => u_in_p_enable_controller,
+      NTM_TRAINER_FNN_U_IN_L_ENABLE => u_in_l_enable_controller,
+      NTM_TRAINER_FNN_U_IN_P_ENABLE => u_in_p_enable_controller,
 
-      NTM_trainer_fnn_B_IN_ENABLE => b_in_enable_controller,
+      NTM_TRAINER_FNN_B_IN_ENABLE => b_in_enable_controller,
 
-      NTM_trainer_fnn_X_IN_ENABLE => x_in_enable_controller,
+      NTM_TRAINER_FNN_X_IN_ENABLE => x_in_enable_controller,
 
-      NTM_trainer_fnn_X_OUT_ENABLE => x_out_enable_controller,
+      NTM_TRAINER_FNN_X_OUT_ENABLE => x_out_enable_controller,
 
-      NTM_trainer_fnn_R_IN_I_ENABLE => r_in_i_enable_controller,
-      NTM_trainer_fnn_R_IN_K_ENABLE => r_in_k_enable_controller,
+      NTM_TRAINER_FNN_R_IN_I_ENABLE => r_in_i_enable_controller,
+      NTM_TRAINER_FNN_R_IN_K_ENABLE => r_in_k_enable_controller,
 
-      NTM_trainer_fnn_R_OUT_I_ENABLE => r_out_i_enable_controller,
-      NTM_trainer_fnn_R_OUT_K_ENABLE => r_out_k_enable_controller,
+      NTM_TRAINER_FNN_R_OUT_I_ENABLE => r_out_i_enable_controller,
+      NTM_TRAINER_FNN_R_OUT_K_ENABLE => r_out_k_enable_controller,
 
-      NTM_trainer_fnn_H_IN_ENABLE => h_in_enable_controller,
+      NTM_TRAINER_FNN_H_IN_ENABLE => h_in_enable_controller,
 
-      NTM_trainer_fnn_W_OUT_L_ENABLE => w_out_l_enable_controller,
-      NTM_trainer_fnn_W_OUT_X_ENABLE => w_out_x_enable_controller,
+      NTM_TRAINER_FNN_W_OUT_L_ENABLE => w_out_l_enable_controller,
+      NTM_TRAINER_FNN_W_OUT_X_ENABLE => w_out_x_enable_controller,
 
-      NTM_trainer_fnn_K_OUT_I_ENABLE => k_out_i_enable_controller,
-      NTM_trainer_fnn_K_OUT_L_ENABLE => k_out_l_enable_controller,
-      NTM_trainer_fnn_K_OUT_K_ENABLE => k_out_k_enable_controller,
+      NTM_TRAINER_FNN_K_OUT_I_ENABLE => k_out_i_enable_controller,
+      NTM_TRAINER_FNN_K_OUT_L_ENABLE => k_out_l_enable_controller,
+      NTM_TRAINER_FNN_K_OUT_K_ENABLE => k_out_k_enable_controller,
 
-      NTM_trainer_fnn_U_OUT_L_ENABLE => u_out_l_enable_controller,
-      NTM_trainer_fnn_U_OUT_P_ENABLE => u_out_p_enable_controller,
+      NTM_TRAINER_FNN_U_OUT_L_ENABLE => u_out_l_enable_controller,
+      NTM_TRAINER_FNN_U_OUT_P_ENABLE => u_out_p_enable_controller,
 
-      NTM_trainer_fnn_B_OUT_ENABLE => b_out_enable_controller,
+      NTM_TRAINER_FNN_B_OUT_ENABLE => b_out_enable_controller,
 
-      NTM_trainer_fnn_H_OUT_ENABLE => h_out_enable_controller,
+      NTM_TRAINER_FNN_H_OUT_ENABLE => h_out_enable_controller,
 
       -- DATA
-      NTM_trainer_fnn_SIZE_X_IN => size_x_in_controller,
-      NTM_trainer_fnn_SIZE_W_IN => size_w_in_controller,
-      NTM_trainer_fnn_SIZE_L_IN => size_l_in_controller,
-      NTM_trainer_fnn_SIZE_R_IN => size_r_in_controller,
+      NTM_TRAINER_FNN_SIZE_X_IN => size_x_in_controller,
+      NTM_TRAINER_FNN_SIZE_W_IN => size_w_in_controller,
+      NTM_TRAINER_FNN_SIZE_L_IN => size_l_in_controller,
+      NTM_TRAINER_FNN_SIZE_R_IN => size_r_in_controller,
 
-      NTM_trainer_fnn_W_IN => w_in_controller,
-      NTM_trainer_fnn_K_IN => k_in_controller,
-      NTM_trainer_fnn_U_IN => u_in_controller,
-      NTM_trainer_fnn_B_IN => b_in_controller,
+      NTM_TRAINER_FNN_W_IN => w_in_controller,
+      NTM_TRAINER_FNN_K_IN => k_in_controller,
+      NTM_TRAINER_FNN_U_IN => u_in_controller,
+      NTM_TRAINER_FNN_B_IN => b_in_controller,
 
-      NTM_trainer_fnn_X_IN => x_in_controller,
-      NTM_trainer_fnn_R_IN => r_in_controller,
-      NTM_trainer_fnn_H_IN => h_in_controller,
+      NTM_TRAINER_FNN_X_IN => x_in_controller,
+      NTM_TRAINER_FNN_R_IN => r_in_controller,
+      NTM_TRAINER_FNN_H_IN => h_in_controller,
 
-      NTM_trainer_fnn_W_OUT => w_out_controller,
-      NTM_trainer_fnn_K_OUT => k_out_controller,
-      NTM_trainer_fnn_U_OUT => u_out_controller,
-      NTM_trainer_fnn_B_OUT => b_out_controller,
+      NTM_TRAINER_FNN_W_OUT => w_out_controller,
+      NTM_TRAINER_FNN_K_OUT => k_out_controller,
+      NTM_TRAINER_FNN_U_OUT => u_out_controller,
+      NTM_TRAINER_FNN_B_OUT => b_out_controller,
 
-      NTM_trainer_fnn_H_OUT => h_out_controller
+      NTM_TRAINER_FNN_H_OUT => h_out_controller
       );
 
   -- CONTROLLER

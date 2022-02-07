@@ -25,20 +25,20 @@ add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/produ
 
 add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/index_loop
 
-add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/start_scalar_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/operation_scalar_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_a_in_scalar_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_b_in_scalar_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/ready_scalar_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_out_scalar_adder
+add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/start_scalar_integer_adder
+add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/operation_scalar_integer_adder
+add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_a_in_scalar_integer_adder
+add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_b_in_scalar_integer_adder
+add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/ready_scalar_integer_adder
+add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_out_scalar_integer_adder
 
-add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/start_scalar_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/start_scalar_integer_multiplier
 add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_a_in_product_int
-add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_a_in_scalar_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_a_in_scalar_integer_multiplier
 add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_b_in_product_int
-add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_b_in_scalar_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/ready_scalar_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_out_scalar_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_b_in_scalar_integer_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/ready_scalar_integer_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_dot_product_test/dot_product/data_out_scalar_integer_multiplier
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

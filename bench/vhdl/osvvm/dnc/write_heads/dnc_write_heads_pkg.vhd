@@ -47,7 +47,7 @@ package dnc_write_heads_pkg is
   -----------------------------------------------------------------------
 
   -- SYSTEM-SIZE
-  constant DATA_SIZE : integer := 512;
+  constant DATA_SIZE : integer := 128;
 
   constant CONTROL_X_SIZE : integer := 3;
   constant CONTROL_Y_SIZE : integer := 3;
@@ -118,9 +118,29 @@ package dnc_write_heads_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := N_FOUR;
 
   -- FUNCTIONALITY
-  signal STIMULUS_DNC_WRITE_HEADS_TEST   : boolean := false;
-  signal STIMULUS_DNC_WRITE_HEADS_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_WRITE_HEADS_CASE_1 : boolean := false;
+  signal STIMULUS_DNC_ALLOCATION_GATE_TEST   : boolean := false;
+  signal STIMULUS_DNC_ALLOCATION_GATE_CASE_0 : boolean := false;
+  signal STIMULUS_DNC_ALLOCATION_GATE_CASE_1 : boolean := false;
+    
+  signal STIMULUS_DNC_ERASE_VECTOR_TEST   : boolean := false;
+  signal STIMULUS_DNC_ERASE_VECTOR_CASE_0 : boolean := false;
+  signal STIMULUS_DNC_ERASE_VECTOR_CASE_1 : boolean := false;
+    
+  signal STIMULUS_DNC_WRITE_GATE_TEST   : boolean := false;
+  signal STIMULUS_DNC_WRITE_GATE_CASE_0 : boolean := false;
+  signal STIMULUS_DNC_WRITE_GATE_CASE_1 : boolean := false;
+    
+  signal STIMULUS_DNC_WRITE_KEY_TEST   : boolean := false;
+  signal STIMULUS_DNC_WRITE_KEY_CASE_0 : boolean := false;
+  signal STIMULUS_DNC_WRITE_KEY_CASE_1 : boolean := false;
+    
+  signal STIMULUS_DNC_WRITE_STRENGTH_TEST   : boolean := false;
+  signal STIMULUS_DNC_WRITE_STRENGTH_CASE_0 : boolean := false;
+  signal STIMULUS_DNC_WRITE_STRENGTH_CASE_1 : boolean := false;
+    
+  signal STIMULUS_DNC_WRITE_VECTOR_TEST   : boolean := false;
+  signal STIMULUS_DNC_WRITE_VECTOR_CASE_0 : boolean := false;
+  signal STIMULUS_DNC_WRITE_VECTOR_CASE_1 : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components

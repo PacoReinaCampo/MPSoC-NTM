@@ -14,22 +14,25 @@ vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/integer/matrix/ntm_matrix
 vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/integer/matrix/ntm_matrix_integer_multiplier.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/integer/matrix/ntm_matrix_integer_divider.vhd
 
-vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_adder.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_multiplier.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/scalar/ntm_scalar_divider.vhd
-
-vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/vector/ntm_vector_adder.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/vector/ntm_vector_multiplier.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/vector/ntm_vector_divider.vhd
-
-vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_adder.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_multiplier.vhd
-vhdl2008 work ../../../../../../../rtl/vhdl/arithmetic/float/matrix/ntm_matrix_divider.vhd
-
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/vector/ntm_dot_product.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_convolution.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_cosine_similarity.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_multiplication.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_summation.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/vector/ntm_vector_module.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_convolution.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_inverse.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_multiplication.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_product.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_summation.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/matrix/ntm_matrix_transpose.vhd
+
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_convolution.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_inverse.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_multiplication.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_product.vhd
+vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_summation.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/math/algebra/tensor/ntm_tensor_transpose.vhd
 
 vhdl2008 work ../../../../../../../rtl/vhdl/state/feedback/ntm_state_matrix_feedforward.vhd
@@ -37,6 +40,6 @@ vhdl2008 work ../../../../../../../rtl/vhdl/state/feedback/ntm_state_matrix_inpu
 vhdl2008 work ../../../../../../../rtl/vhdl/state/feedback/ntm_state_matrix_output.vhd
 vhdl2008 work ../../../../../../../rtl/vhdl/state/feedback/ntm_state_matrix_state.vhd
 
-vhdl2008 work ../../../../../../../bench/vhdl/tests/state/top/ntm_state_feedback_pkg.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/state/top/ntm_state_feedback_stimulus.vhd
-vhdl2008 work ../../../../../../../bench/vhdl/tests/state/top/ntm_state_feedback_testbench.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/state/feedback/ntm_state_feedback_pkg.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/state/feedback/ntm_state_feedback_stimulus.vhd
+vhdl2008 work ../../../../../../../bench/vhdl/tests/state/feedback/ntm_state_feedback_testbench.vhd

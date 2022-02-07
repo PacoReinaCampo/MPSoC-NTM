@@ -188,9 +188,6 @@ begin
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_EXPONENTIATOR_STATE;
-          else
-            -- Control Internal
-            start_scalar_exponentiator_function <= '0';
           end if;
 
         when SCALAR_EXPONENTIATOR_STATE =>  -- STEP 1

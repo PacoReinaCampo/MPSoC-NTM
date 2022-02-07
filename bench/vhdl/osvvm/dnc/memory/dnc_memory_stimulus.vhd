@@ -63,6 +63,25 @@ entity dnc_memory_stimulus is
     CLK : out std_logic;
     RST : out std_logic;
 
+    -- SORT VECTOR
+    -- CONTROL
+    DNC_MEMORY_SORT_VECTOR_START : out std_logic;
+    DNC_MEMORY_SORT_VECTOR_READY : in  std_logic;
+
+    DNC_MEMORY_SORT_VECTOR_U_IN_ENABLE : out std_logic;  -- for j in 0 to N-1
+
+    DNC_MEMORY_SORT_VECTOR_U_OUT_ENABLE : in std_logic;  -- for j in 0 to N-1
+
+    DNC_MEMORY_SORT_VECTOR_PHI_OUT_ENABLE : in std_logic;  -- for j in 0 to N-1
+
+    -- DATA
+    DNC_MEMORY_SORT_VECTOR_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    DNC_MEMORY_SORT_VECTOR_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_MEMORY_SORT_VECTOR_PHI_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+    -- ADDRESSING
     -- CONTROL
     DNC_MEMORY_START : out std_logic;
     DNC_MEMORY_READY : in  std_logic;
@@ -131,9 +150,29 @@ architecture dnc_memory_stimulus_architecture of dnc_memory_stimulus is
   constant WAITING : time := 50 ns;
   constant WORKING : time := 1 ms;
 
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
+
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+
+  constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
+  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+
+  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
+
+  -- LOOP
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- GLOBAL
   signal clk_int : std_logic;
@@ -158,6 +197,8 @@ begin
     wait for PERIOD/2;
   end process;
 
+  CLK <= clk_int;
+
   -- rst generation
   rst_process : process
   begin
@@ -167,6 +208,8 @@ begin
     rst_int <= '1';
     wait for WORKING;
   end process;
+
+  RST <= rst_int;
 
   -- start generation
   start_process : process
@@ -181,6 +224,9 @@ begin
     wait for WORKING;
   end process;
 
+  -- FUNCTIONALITY
+  DNC_MEMORY_SORT_VECTOR_START <= start_int;
+
   -----------------------------------------------------------------------
   -- STIMULUS
   -----------------------------------------------------------------------
@@ -188,19 +234,128 @@ begin
   main_test : process
   begin
 
+    if (STIMULUS_DNC_MEMORY_SORT_VECTOR_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "STIMULUS_DNC_MEMORY_SORT_VECTOR_TEST    ";
+      -------------------------------------------------------------------
+
+      -- DATA
+      DNC_MEMORY_SORT_VECTOR_SIZE_N_IN <= THREE_CONTROL;
+
+      if (STIMULUS_DNC_MEMORY_SORT_VECTOR_CASE_0) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_DNC_MEMORY_SORT_VECTOR_CASE 0  ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        DNC_MEMORY_SORT_VECTOR_U_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+
+        SORT_VECTOR_FIRST_RUN : loop
+          if (DNC_MEMORY_SORT_VECTOR_U_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(DNC_MEMORY_SORT_VECTOR_SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            DNC_MEMORY_SORT_VECTOR_U_IN_ENABLE <= '1';
+
+            -- DATA
+            DNC_MEMORY_SORT_VECTOR_U_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((DNC_MEMORY_SORT_VECTOR_U_OUT_ENABLE = '1' or DNC_MEMORY_SORT_VECTOR_START = '1') and (unsigned(index_i_loop) < unsigned(DNC_MEMORY_SORT_VECTOR_SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            DNC_MEMORY_SORT_VECTOR_U_IN_ENABLE <= '1';
+
+            -- DATA
+            DNC_MEMORY_SORT_VECTOR_U_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            DNC_MEMORY_SORT_VECTOR_U_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit SORT_VECTOR_FIRST_RUN when DNC_MEMORY_SORT_VECTOR_READY = '1';
+        end loop SORT_VECTOR_FIRST_RUN;
+      end if;
+
+      if (STIMULUS_DNC_MEMORY_SORT_VECTOR_CASE_1) then
+
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_DNC_MEMORY_SORT_VECTOR_CASE 1  ";
+        -------------------------------------------------------------------
+
+        -- INITIAL CONDITIONS
+        -- DATA
+        DNC_MEMORY_SORT_VECTOR_U_IN <= ZERO_DATA;
+
+        -- LOOP
+        index_i_loop <= ZERO_CONTROL;
+
+        SORT_VECTOR_SECOND_RUN : loop
+          if (DNC_MEMORY_SORT_VECTOR_U_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(DNC_MEMORY_SORT_VECTOR_SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            DNC_MEMORY_SORT_VECTOR_U_IN_ENABLE <= '1';
+
+            -- DATA
+            DNC_MEMORY_SORT_VECTOR_U_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= ZERO_CONTROL;
+          elsif ((DNC_MEMORY_SORT_VECTOR_U_OUT_ENABLE = '1' or DNC_MEMORY_SORT_VECTOR_START = '1') and (unsigned(index_i_loop) < unsigned(DNC_MEMORY_SORT_VECTOR_SIZE_N_IN)-unsigned(ONE_CONTROL))) then
+            -- CONTROL
+            DNC_MEMORY_SORT_VECTOR_U_IN_ENABLE <= '1';
+
+            -- DATA
+            DNC_MEMORY_SORT_VECTOR_U_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
+
+            -- LOOP
+            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+          else
+            -- CONTROL
+            DNC_MEMORY_SORT_VECTOR_U_IN_ENABLE <= '0';
+          end if;
+
+          -- GLOBAL
+          wait until rising_edge(clk_int);
+
+          -- CONTROL
+          exit SORT_VECTOR_SECOND_RUN when DNC_MEMORY_SORT_VECTOR_READY = '1';
+        end loop SORT_VECTOR_SECOND_RUN;
+      end if;
+
+      wait for WORKING;
+
+    end if;
+
     if (STIMULUS_DNC_MEMORY_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_DNC_MEMORY_TEST                ";
       -------------------------------------------------------------------
 
+      if (STIMULUS_DNC_MEMORY_CASE_0) then
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_DNC_MEMORY_CASE_0              ";
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MEMORY_CASE_0              ";
-      -------------------------------------------------------------------
+      end if;
 
+      if (STIMULUS_DNC_MEMORY_CASE_0) then
+        -------------------------------------------------------------------
+        MONITOR_CASE <= "STIMULUS_DNC_MEMORY_CASE_1              ";
       -------------------------------------------------------------------
-      MONITOR_CASE <= "STIMULUS_NTM_MEMORY_CASE_1              ";
-      -------------------------------------------------------------------
+      end if;
+
+      wait for WORKING;
 
     end if;
 

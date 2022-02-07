@@ -260,10 +260,8 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal start_matrix_inverse : std_logic;
   signal ready_matrix_inverse : std_logic;
 
-  signal data_a_in_i_enable_matrix_inverse : std_logic;
-  signal data_a_in_j_enable_matrix_inverse : std_logic;
-  signal data_b_in_i_enable_matrix_inverse : std_logic;
-  signal data_b_in_j_enable_matrix_inverse : std_logic;
+  signal data_in_i_enable_matrix_inverse : std_logic;
+  signal data_in_j_enable_matrix_inverse : std_logic;
 
   signal data_i_enable_matrix_inverse : std_logic;
   signal data_j_enable_matrix_inverse : std_logic;
@@ -272,13 +270,10 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_out_j_enable_matrix_inverse : std_logic;
 
   -- DATA
-  signal size_a_i_in_matrix_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_a_j_in_matrix_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_i_in_matrix_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_j_in_matrix_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_inverse   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_inverse   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_inverse    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_matrix_inverse   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_inverse  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX MULTIPLICATION
   -- CONTROL
@@ -401,12 +396,9 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal start_tensor_inverse : std_logic;
   signal ready_tensor_inverse : std_logic;
 
-  signal data_a_in_i_enable_tensor_inverse : std_logic;
-  signal data_a_in_j_enable_tensor_inverse : std_logic;
-  signal data_a_in_k_enable_tensor_inverse : std_logic;
-  signal data_b_in_i_enable_tensor_inverse : std_logic;
-  signal data_b_in_j_enable_tensor_inverse : std_logic;
-  signal data_b_in_k_enable_tensor_inverse : std_logic;
+  signal data_in_i_enable_tensor_inverse : std_logic;
+  signal data_in_j_enable_tensor_inverse : std_logic;
+  signal data_in_k_enable_tensor_inverse : std_logic;
 
   signal data_i_enable_tensor_inverse : std_logic;
   signal data_j_enable_tensor_inverse : std_logic;
@@ -417,15 +409,11 @@ architecture ntm_algebra_testbench_architecture of ntm_algebra_testbench is
   signal data_out_k_enable_tensor_inverse : std_logic;
 
   -- DATA
-  signal size_a_i_in_tensor_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_a_j_in_tensor_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_a_k_in_tensor_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_i_in_tensor_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_j_in_tensor_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_k_in_tensor_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_tensor_inverse   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_tensor_inverse   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_tensor_inverse    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_tensor_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_tensor_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_k_in_tensor_inverse : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_tensor_inverse   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_inverse  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- TENSOR MULTIPLICATION
   -- CONTROL
@@ -678,10 +666,8 @@ begin
       MATRIX_INVERSE_START => start_matrix_inverse,
       MATRIX_INVERSE_READY => ready_matrix_inverse,
 
-      MATRIX_INVERSE_DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_inverse,
-      MATRIX_INVERSE_DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_inverse,
-      MATRIX_INVERSE_DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_inverse,
-      MATRIX_INVERSE_DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_inverse,
+      MATRIX_INVERSE_DATA_IN_I_ENABLE => data_in_i_enable_matrix_inverse,
+      MATRIX_INVERSE_DATA_IN_J_ENABLE => data_in_j_enable_matrix_inverse,
 
       MATRIX_INVERSE_DATA_I_ENABLE => data_i_enable_matrix_inverse,
       MATRIX_INVERSE_DATA_J_ENABLE => data_j_enable_matrix_inverse,
@@ -690,13 +676,10 @@ begin
       MATRIX_INVERSE_DATA_OUT_J_ENABLE => data_out_j_enable_matrix_inverse,
 
       -- DATA
-      MATRIX_INVERSE_SIZE_A_I_IN => size_a_i_in_matrix_inverse,
-      MATRIX_INVERSE_SIZE_A_J_IN => size_a_j_in_matrix_inverse,
-      MATRIX_INVERSE_SIZE_B_I_IN => size_b_i_in_matrix_inverse,
-      MATRIX_INVERSE_SIZE_B_J_IN => size_b_j_in_matrix_inverse,
-      MATRIX_INVERSE_DATA_A_IN   => data_a_in_matrix_inverse,
-      MATRIX_INVERSE_DATA_B_IN   => data_b_in_matrix_inverse,
-      MATRIX_INVERSE_DATA_OUT    => data_out_matrix_inverse,
+      MATRIX_INVERSE_SIZE_I_IN => size_i_in_matrix_inverse,
+      MATRIX_INVERSE_SIZE_J_IN => size_j_in_matrix_inverse,
+      MATRIX_INVERSE_DATA_IN   => data_in_matrix_inverse,
+      MATRIX_INVERSE_DATA_OUT  => data_out_matrix_inverse,
 
       -- MATRIX MULTIPLICATION
       -- CONTROL
@@ -819,12 +802,9 @@ begin
       TENSOR_INVERSE_START => start_tensor_inverse,
       TENSOR_INVERSE_READY => ready_tensor_inverse,
 
-      TENSOR_INVERSE_DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_inverse,
-      TENSOR_INVERSE_DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_inverse,
-      TENSOR_INVERSE_DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_inverse,
-      TENSOR_INVERSE_DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_inverse,
-      TENSOR_INVERSE_DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_inverse,
-      TENSOR_INVERSE_DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_inverse,
+      TENSOR_INVERSE_DATA_IN_I_ENABLE => data_in_i_enable_tensor_inverse,
+      TENSOR_INVERSE_DATA_IN_J_ENABLE => data_in_j_enable_tensor_inverse,
+      TENSOR_INVERSE_DATA_IN_K_ENABLE => data_in_k_enable_tensor_inverse,
 
       TENSOR_INVERSE_DATA_I_ENABLE => data_i_enable_tensor_inverse,
       TENSOR_INVERSE_DATA_J_ENABLE => data_j_enable_tensor_inverse,
@@ -835,15 +815,11 @@ begin
       TENSOR_INVERSE_DATA_OUT_K_ENABLE => data_out_k_enable_tensor_inverse,
 
       -- DATA
-      TENSOR_INVERSE_SIZE_A_I_IN => size_a_i_in_tensor_inverse,
-      TENSOR_INVERSE_SIZE_A_J_IN => size_a_j_in_tensor_inverse,
-      TENSOR_INVERSE_SIZE_A_K_IN => size_a_k_in_tensor_inverse,
-      TENSOR_INVERSE_SIZE_B_I_IN => size_b_i_in_tensor_inverse,
-      TENSOR_INVERSE_SIZE_B_J_IN => size_b_j_in_tensor_inverse,
-      TENSOR_INVERSE_SIZE_B_K_IN => size_b_k_in_tensor_inverse,
-      TENSOR_INVERSE_DATA_A_IN   => data_a_in_tensor_inverse,
-      TENSOR_INVERSE_DATA_B_IN   => data_b_in_tensor_inverse,
-      TENSOR_INVERSE_DATA_OUT    => data_out_tensor_inverse,
+      TENSOR_INVERSE_SIZE_I_IN => size_i_in_tensor_inverse,
+      TENSOR_INVERSE_SIZE_J_IN => size_j_in_tensor_inverse,
+      TENSOR_INVERSE_SIZE_K_IN => size_k_in_tensor_inverse,
+      TENSOR_INVERSE_DATA_IN   => data_in_tensor_inverse,
+      TENSOR_INVERSE_DATA_OUT  => data_out_tensor_inverse,
 
       -- TENSOR MULTIPLICATION
       -- CONTROL
@@ -1175,10 +1151,8 @@ begin
         START => start_matrix_inverse,
         READY => ready_matrix_inverse,
 
-        DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_inverse,
-        DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_inverse,
-        DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_inverse,
-        DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_inverse,
+        DATA_IN_I_ENABLE => data_in_i_enable_matrix_inverse,
+        DATA_IN_J_ENABLE => data_in_j_enable_matrix_inverse,
 
         DATA_I_ENABLE => data_i_enable_matrix_inverse,
         DATA_J_ENABLE => data_j_enable_matrix_inverse,
@@ -1187,13 +1161,10 @@ begin
         DATA_OUT_J_ENABLE => data_out_j_enable_matrix_inverse,
 
         -- DATA
-        SIZE_A_I_IN => size_a_i_in_matrix_inverse,
-        SIZE_A_J_IN => size_a_j_in_matrix_inverse,
-        SIZE_B_I_IN => size_b_i_in_matrix_inverse,
-        SIZE_B_J_IN => size_b_j_in_matrix_inverse,
-        DATA_A_IN   => data_a_in_matrix_inverse,
-        DATA_B_IN   => data_b_in_matrix_inverse,
-        DATA_OUT    => data_out_matrix_inverse
+        SIZE_I_IN => size_i_in_matrix_inverse,
+        SIZE_J_IN => size_j_in_matrix_inverse,
+        DATA_IN   => data_in_matrix_inverse,
+        DATA_OUT  => data_out_matrix_inverse
         );
   end generate ntm_matrix_inverse_test;
 
@@ -1394,12 +1365,9 @@ begin
         START => start_tensor_inverse,
         READY => ready_tensor_inverse,
 
-        DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_inverse,
-        DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_inverse,
-        DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_inverse,
-        DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_inverse,
-        DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_inverse,
-        DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_inverse,
+        DATA_IN_I_ENABLE => data_in_i_enable_tensor_inverse,
+        DATA_IN_J_ENABLE => data_in_j_enable_tensor_inverse,
+        DATA_IN_K_ENABLE => data_in_k_enable_tensor_inverse,
 
         DATA_I_ENABLE => data_i_enable_tensor_inverse,
         DATA_J_ENABLE => data_j_enable_tensor_inverse,
@@ -1410,15 +1378,11 @@ begin
         DATA_OUT_K_ENABLE => data_out_k_enable_tensor_inverse,
 
         -- DATA
-        SIZE_A_I_IN => size_a_i_in_tensor_inverse,
-        SIZE_A_J_IN => size_a_j_in_tensor_inverse,
-        SIZE_A_K_IN => size_a_k_in_tensor_inverse,
-        SIZE_B_I_IN => size_b_i_in_tensor_inverse,
-        SIZE_B_J_IN => size_b_j_in_tensor_inverse,
-        SIZE_B_K_IN => size_b_k_in_tensor_inverse,
-        DATA_A_IN   => data_a_in_tensor_inverse,
-        DATA_B_IN   => data_b_in_tensor_inverse,
-        DATA_OUT    => data_out_tensor_inverse
+        SIZE_I_IN => size_i_in_tensor_inverse,
+        SIZE_J_IN => size_j_in_tensor_inverse,
+        SIZE_K_IN => size_k_in_tensor_inverse,
+        DATA_IN   => data_in_tensor_inverse,
+        DATA_OUT  => data_out_tensor_inverse
         );
   end generate ntm_tensor_inverse_test;
 

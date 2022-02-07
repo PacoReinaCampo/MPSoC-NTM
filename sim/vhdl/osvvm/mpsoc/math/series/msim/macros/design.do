@@ -97,7 +97,7 @@ alias ntm_vector_exponentiator_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_exponentiatorfunction.vhd
+  vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/ntm_vector_exponentiator_function.vhd
 }
 

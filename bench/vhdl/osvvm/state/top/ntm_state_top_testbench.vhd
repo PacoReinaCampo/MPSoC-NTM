@@ -75,8 +75,8 @@ architecture ntm_state_top_testbench_architecture of ntm_state_top_testbench is
 
   -- TOP
   -- CONTROL
-  signal start_state_top : std_logic;
-  signal ready_state_top : std_logic;
+  signal start_top : std_logic;
+  signal ready_top : std_logic;
 
   signal data_a_i_in_enable_state_top : std_logic;
   signal data_a_j_in_enable_state_top : std_logic;
@@ -87,27 +87,31 @@ architecture ntm_state_top_testbench_architecture of ntm_state_top_testbench is
   signal data_d_i_in_enable_state_top : std_logic;
   signal data_d_j_in_enable_state_top : std_logic;
 
-  signal data_u_in_enable_state_top : std_logic;
+  signal data_k_in_i_enable_state_top : std_logic;
+  signal data_k_in_j_enable_state_top : std_logic;
+
+  signal data_k_i_enable_state_top : std_logic;
+  signal data_k_j_enable_state_top : std_logic;
 
   signal data_x_out_enable_state_top : std_logic;
   signal data_y_out_enable_state_top : std_logic;
 
   -- DATA
-  signal size_a_i_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_a_j_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_i_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_j_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_c_i_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_c_j_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_d_i_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_d_j_in_state_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_i_in_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_c_i_in_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_c_j_in_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_d_i_in_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_d_j_in_top : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_a_in_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_c_in_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_d_in_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_c_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_d_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_u_in_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_k_in_top : std_logic_vector(DATA_SIZE-1 downto 0);
 
   signal data_x_out_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_y_out_state_top : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -119,7 +123,7 @@ begin
   -----------------------------------------------------------------------
 
   -- STIMULUS
-  top_stimulus : ntm_state_top_stimulus
+  state_top_stimulus : ntm_state_top_stimulus
     generic map (
       -- SYSTEM-SIZE
       DATA_SIZE    => DATA_SIZE,
@@ -138,8 +142,8 @@ begin
       RST => RST,
 
       -- CONTROL
-      NTM_STATE_TOP_START => start_state_top,
-      NTM_STATE_TOP_READY => ready_state_top,
+      NTM_STATE_TOP_START => start_top,
+      NTM_STATE_TOP_READY => ready_top,
 
       NTM_STATE_TOP_DATA_A_IN_I_ENABLE => data_a_i_in_enable_state_top,
       NTM_STATE_TOP_DATA_A_IN_J_ENABLE => data_a_j_in_enable_state_top,
@@ -150,27 +154,31 @@ begin
       NTM_STATE_TOP_DATA_D_IN_I_ENABLE => data_d_i_in_enable_state_top,
       NTM_STATE_TOP_DATA_D_IN_J_ENABLE => data_d_j_in_enable_state_top,
 
-      NTM_STATE_TOP_DATA_U_IN_ENABLE => data_u_in_enable_state_top,
+      NTM_STATE_TOP_DATA_K_IN_I_ENABLE => data_k_in_i_enable_state_top,
+      NTM_STATE_TOP_DATA_K_IN_J_ENABLE => data_k_in_j_enable_state_top,
+
+      NTM_STATE_TOP_DATA_K_I_ENABLE => data_k_i_enable_state_top,
+      NTM_STATE_TOP_DATA_K_J_ENABLE => data_k_j_enable_state_top,
 
       NTM_STATE_TOP_DATA_X_OUT_ENABLE => data_x_out_enable_state_top,
       NTM_STATE_TOP_DATA_Y_OUT_ENABLE => data_y_out_enable_state_top,
 
       -- DATA
-      NTM_STATE_TOP_SIZE_A_I_IN => size_a_i_in_state_top,
-      NTM_STATE_TOP_SIZE_A_J_IN => size_a_j_in_state_top,
-      NTM_STATE_TOP_SIZE_B_I_IN => size_b_i_in_state_top,
-      NTM_STATE_TOP_SIZE_B_J_IN => size_b_j_in_state_top,
-      NTM_STATE_TOP_SIZE_C_I_IN => size_c_i_in_state_top,
-      NTM_STATE_TOP_SIZE_C_J_IN => size_c_j_in_state_top,
-      NTM_STATE_TOP_SIZE_D_I_IN => size_d_i_in_state_top,
-      NTM_STATE_TOP_SIZE_D_J_IN => size_d_j_in_state_top,
+      NTM_STATE_TOP_SIZE_A_I_IN => size_a_i_in_top,
+      NTM_STATE_TOP_SIZE_A_J_IN => size_a_j_in_top,
+      NTM_STATE_TOP_SIZE_B_I_IN => size_b_i_in_top,
+      NTM_STATE_TOP_SIZE_B_J_IN => size_b_j_in_top,
+      NTM_STATE_TOP_SIZE_C_I_IN => size_c_i_in_top,
+      NTM_STATE_TOP_SIZE_C_J_IN => size_c_j_in_top,
+      NTM_STATE_TOP_SIZE_D_I_IN => size_d_i_in_top,
+      NTM_STATE_TOP_SIZE_D_J_IN => size_d_j_in_top,
 
-      NTM_STATE_TOP_DATA_A_IN => data_a_in_state_top,
-      NTM_STATE_TOP_DATA_B_IN => data_b_in_state_top,
-      NTM_STATE_TOP_DATA_C_IN => data_c_in_state_top,
-      NTM_STATE_TOP_DATA_D_IN => data_d_in_state_top,
+      NTM_STATE_TOP_DATA_A_IN => data_a_in_top,
+      NTM_STATE_TOP_DATA_B_IN => data_b_in_top,
+      NTM_STATE_TOP_DATA_C_IN => data_c_in_top,
+      NTM_STATE_TOP_DATA_D_IN => data_d_in_top,
 
-      NTM_STATE_TOP_DATA_U_IN => data_u_in_state_top,
+      NTM_STATE_TOP_DATA_K_IN => data_k_in_top,
 
       NTM_STATE_TOP_DATA_X_OUT => data_x_out_state_top,
       NTM_STATE_TOP_DATA_Y_OUT => data_y_out_state_top
@@ -178,7 +186,7 @@ begin
 
   -- TOP
   ntm_state_top_test : if (ENABLE_NTM_STATE_TOP_TEST) generate
-    top : ntm_state_top
+    state_top : ntm_state_top
       generic map (
         DATA_SIZE    => DATA_SIZE,
         CONTROL_SIZE => CONTROL_SIZE
@@ -189,8 +197,8 @@ begin
         RST => RST,
 
         -- CONTROL
-        START => start_state_top,
-        READY => ready_state_top,
+        START => start_top,
+        READY => ready_top,
 
         DATA_A_IN_I_ENABLE => data_a_i_in_enable_state_top,
         DATA_A_IN_J_ENABLE => data_a_j_in_enable_state_top,
@@ -201,27 +209,31 @@ begin
         DATA_D_IN_I_ENABLE => data_d_i_in_enable_state_top,
         DATA_D_IN_J_ENABLE => data_d_j_in_enable_state_top,
 
-        DATA_U_IN_ENABLE => data_u_in_enable_state_top,
+        DATA_K_IN_I_ENABLE => data_k_in_i_enable_state_top,
+        DATA_K_IN_J_ENABLE => data_k_in_j_enable_state_top,
+
+        DATA_K_I_ENABLE => data_k_i_enable_state_top,
+        DATA_K_J_ENABLE => data_k_j_enable_state_top,
 
         DATA_X_OUT_ENABLE => data_x_out_enable_state_top,
         DATA_Y_OUT_ENABLE => data_y_out_enable_state_top,
 
         -- DATA
-        SIZE_A_I_IN => size_a_i_in_state_top,
-        SIZE_A_J_IN => size_a_j_in_state_top,
-        SIZE_B_I_IN => size_b_i_in_state_top,
-        SIZE_B_J_IN => size_b_j_in_state_top,
-        SIZE_C_I_IN => size_c_i_in_state_top,
-        SIZE_C_J_IN => size_c_j_in_state_top,
-        SIZE_D_I_IN => size_d_i_in_state_top,
-        SIZE_D_J_IN => size_d_j_in_state_top,
+        SIZE_A_I_IN => size_a_i_in_top,
+        SIZE_A_J_IN => size_a_j_in_top,
+        SIZE_B_I_IN => size_b_i_in_top,
+        SIZE_B_J_IN => size_b_j_in_top,
+        SIZE_C_I_IN => size_c_i_in_top,
+        SIZE_C_J_IN => size_c_j_in_top,
+        SIZE_D_I_IN => size_d_i_in_top,
+        SIZE_D_J_IN => size_d_j_in_top,
 
-        DATA_A_IN => data_a_in_state_top,
-        DATA_B_IN => data_b_in_state_top,
-        DATA_C_IN => data_c_in_state_top,
-        DATA_D_IN => data_d_in_state_top,
+        DATA_A_IN => data_a_in_top,
+        DATA_B_IN => data_b_in_top,
+        DATA_C_IN => data_c_in_top,
+        DATA_D_IN => data_d_in_top,
 
-        DATA_U_IN => data_u_in_state_top,
+        DATA_K_IN => data_k_in_top,
 
         DATA_X_OUT => data_x_out_state_top,
         DATA_Y_OUT => data_y_out_state_top

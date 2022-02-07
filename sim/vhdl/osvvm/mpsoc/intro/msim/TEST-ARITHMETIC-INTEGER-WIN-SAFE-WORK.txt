@@ -1,0 +1,4 @@
+cd D:/QueenField/Work/MPSoC-NTM/sim/vhdl/tests/mpsoc/intro/msim
+
+do D:/QueenField/Work/MPSoC-NTM/sim/vhdl/tests/mpsoc/intro/msim/macros/design.do
+do D:/QueenField/Work/MPSoC-NTM/sim/vhdl/tests/mpsoc/intro/msim/macros/verification.do

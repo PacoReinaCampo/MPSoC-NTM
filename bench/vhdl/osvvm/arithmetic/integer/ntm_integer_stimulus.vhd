@@ -358,9 +358,9 @@ architecture ntm_integer_stimulus_architecture of ntm_integer_stimulus is
   -----------------------------------------------------------------------
 
   -- LOOP
-  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0) := ZERO_CONTROL;
-  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0) := ZERO_CONTROL;
-  signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0) := ZERO_CONTROL;
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   -- GLOBAL
   signal clk_int : std_logic;

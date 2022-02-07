@@ -76,7 +76,11 @@ entity ntm_state_top_stimulus is
     NTM_STATE_TOP_DATA_D_IN_I_ENABLE : out std_logic;
     NTM_STATE_TOP_DATA_D_IN_J_ENABLE : out std_logic;
 
-    NTM_STATE_TOP_DATA_U_IN_ENABLE : out std_logic;
+    NTM_STATE_TOP_DATA_K_IN_I_ENABLE : out std_logic;
+    NTM_STATE_TOP_DATA_K_IN_J_ENABLE : out std_logic;
+
+    NTM_STATE_TOP_DATA_K_I_ENABLE : in std_logic;
+    NTM_STATE_TOP_DATA_K_J_ENABLE : in std_logic;
 
     NTM_STATE_TOP_DATA_X_OUT_ENABLE : in std_logic;
     NTM_STATE_TOP_DATA_Y_OUT_ENABLE : in std_logic;
@@ -96,7 +100,7 @@ entity ntm_state_top_stimulus is
     NTM_STATE_TOP_DATA_C_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_STATE_TOP_DATA_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-    NTM_STATE_TOP_DATA_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_STATE_TOP_DATA_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
 
     NTM_STATE_TOP_DATA_X_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
     NTM_STATE_TOP_DATA_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
@@ -160,6 +164,8 @@ begin
     wait for PERIOD/2;
   end process;
 
+  CLK <= clk_int;
+
   -- rst generation
   rst_process : process
   begin
@@ -169,6 +175,8 @@ begin
     rst_int <= '1';
     wait for WORKING;
   end process;
+
+  RST <= rst_int;
 
   -- start generation
   start_process : process
@@ -213,7 +221,7 @@ begin
         NTM_STATE_TOP_SIZE_D_I_IN <= THREE_CONTROL;
         NTM_STATE_TOP_SIZE_D_J_IN <= THREE_CONTROL;
 
-        NTM_STATE_TOP_DATA_U_IN <= EMPTY;
+        NTM_STATE_TOP_DATA_K_IN <= EMPTY;
       end if;
 
       -------------------------------------------------------------------
@@ -230,7 +238,7 @@ begin
         NTM_STATE_TOP_SIZE_D_I_IN <= THREE_CONTROL;
         NTM_STATE_TOP_SIZE_D_J_IN <= THREE_CONTROL;
 
-        NTM_STATE_TOP_DATA_U_IN <= FULL;
+        NTM_STATE_TOP_DATA_K_IN <= FULL;
       end if;
 
       wait for WORKING;

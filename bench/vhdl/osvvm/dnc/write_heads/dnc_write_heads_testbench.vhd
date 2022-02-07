@@ -58,9 +58,29 @@ entity dnc_write_heads_testbench is
     R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- i in 0 to R-1
 
     -- FUNCTIONALITY
-    ENABLE_DNC_WRITE_HEADS_TEST   : boolean := false;
-    ENABLE_DNC_WRITE_HEADS_CASE_0 : boolean := false;
-    ENABLE_DNC_WRITE_HEADS_CASE_1 : boolean := false
+    ENABLE_DNC_ALLOCATION_GATE_TEST   : boolean := false;
+    ENABLE_DNC_ALLOCATION_GATE_CASE_0 : boolean := false;
+    ENABLE_DNC_ALLOCATION_GATE_CASE_1 : boolean := false;
+    
+    ENABLE_DNC_ERASE_VECTOR_TEST   : boolean := false;
+    ENABLE_DNC_ERASE_VECTOR_CASE_0 : boolean := false;
+    ENABLE_DNC_ERASE_VECTOR_CASE_1 : boolean := false;
+    
+    ENABLE_DNC_WRITE_GATE_TEST   : boolean := false;
+    ENABLE_DNC_WRITE_GATE_CASE_0 : boolean := false;
+    ENABLE_DNC_WRITE_GATE_CASE_1 : boolean := false;
+    
+    ENABLE_DNC_WRITE_KEY_TEST   : boolean := false;
+    ENABLE_DNC_WRITE_KEY_CASE_0 : boolean := false;
+    ENABLE_DNC_WRITE_KEY_CASE_1 : boolean := false;
+    
+    ENABLE_DNC_WRITE_STRENGTH_TEST   : boolean := false;
+    ENABLE_DNC_WRITE_STRENGTH_CASE_0 : boolean := false;
+    ENABLE_DNC_WRITE_STRENGTH_CASE_1 : boolean := false;
+    
+    ENABLE_DNC_WRITE_VECTOR_TEST   : boolean := false;
+    ENABLE_DNC_WRITE_VECTOR_CASE_0 : boolean := false;
+    ENABLE_DNC_WRITE_VECTOR_CASE_1 : boolean := false
     );
 end dnc_write_heads_testbench;
 
@@ -251,147 +271,159 @@ begin
       );
 
   -- ALLOCATION GATE
-  allocation_gate : dnc_allocation_gate
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  dnc_allocation_gate_test : if (ENABLE_DNC_ALLOCATION_GATE_TEST) generate
+    allocation_gate : dnc_allocation_gate
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_allocation_gate,
-      READY => ready_allocation_gate,
+        -- CONTROL
+        START => start_allocation_gate,
+        READY => ready_allocation_gate,
 
-      -- DATA
-      GA_IN => ga_in_allocation_gate,
+        -- DATA
+        GA_IN => ga_in_allocation_gate,
 
-      GA_OUT => ga_out_allocation_gate
-      );
+        GA_OUT => ga_out_allocation_gate
+        );
+  end generate dnc_allocation_gate_test;
 
   -- ERASE VECTOR
-  erase_vector : dnc_erase_vector
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  dnc_erase_vector_test : if (ENABLE_DNC_ERASE_VECTOR_TEST) generate
+    erase_vector : dnc_erase_vector
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_erase_vector,
-      READY => ready_erase_vector,
+        -- CONTROL
+        START => start_erase_vector,
+        READY => ready_erase_vector,
 
-      E_IN_ENABLE => e_in_enable_erase_vector,
+        E_IN_ENABLE => e_in_enable_erase_vector,
 
-      E_OUT_ENABLE => e_out_enable_erase_vector,
+        E_OUT_ENABLE => e_out_enable_erase_vector,
 
-      -- DATA
-      SIZE_W_IN => size_w_in_erase_vector,
+        -- DATA
+        SIZE_W_IN => size_w_in_erase_vector,
 
-      E_IN => e_in_erase_vector,
+        E_IN => e_in_erase_vector,
 
-      E_OUT => e_out_erase_vector
-      );
+        E_OUT => e_out_erase_vector
+        );
+  end generate dnc_erase_vector_test;
 
   -- WRITE GATE
-  write_gate : dnc_write_gate
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  dnc_write_gate_test : if (ENABLE_DNC_WRITE_GATE_TEST) generate
+    write_gate : dnc_write_gate
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_write_gate,
-      READY => ready_write_gate,
+        -- CONTROL
+        START => start_write_gate,
+        READY => ready_write_gate,
 
-      -- DATA
-      GW_IN => gw_in_write_gate,
+        -- DATA
+        GW_IN => gw_in_write_gate,
 
-      GW_OUT => gw_out_write_gate
-      );
+        GW_OUT => gw_out_write_gate
+        );
+  end generate dnc_write_gate_test;
 
   -- WRITE KEY
-  write_key : dnc_write_key
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  dnc_write_key_test : if (ENABLE_DNC_WRITE_KEY_TEST) generate
+    write_key : dnc_write_key
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_write_key,
-      READY => ready_write_key,
+        -- CONTROL
+        START => start_write_key,
+        READY => ready_write_key,
 
-      K_IN_ENABLE => k_in_enable_write_key,
+        K_IN_ENABLE => k_in_enable_write_key,
 
-      K_OUT_ENABLE => k_out_enable_write_key,
+        K_OUT_ENABLE => k_out_enable_write_key,
 
-      -- DATA
-      SIZE_W_IN => size_w_in_write_key,
+        -- DATA
+        SIZE_W_IN => size_w_in_write_key,
 
-      K_IN => k_in_write_key,
+        K_IN => k_in_write_key,
 
-      K_OUT => k_out_write_key
-      );
+        K_OUT => k_out_write_key
+        );
+  end generate dnc_write_key_test;
 
   -- WRITE STRENGTH
-  write_strength : dnc_write_strength
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  dnc_write_strength_test : if (ENABLE_DNC_WRITE_STRENGTH_TEST) generate
+    write_strength : dnc_write_strength
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_write_strength,
-      READY => ready_write_strength,
+        -- CONTROL
+        START => start_write_strength,
+        READY => ready_write_strength,
 
-      -- DATA
-      BETA_IN => beta_in_write_strength,
+        -- DATA
+        BETA_IN => beta_in_write_strength,
 
-      BETA_OUT => beta_out_write_strength
-      );
+        BETA_OUT => beta_out_write_strength
+        );
+  end generate dnc_write_strength_test;
 
   -- WRITE VECTOR
-  write_vector : dnc_write_vector
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
+  dnc_write_vector_test : if (ENABLE_DNC_WRITE_VECTOR_TEST) generate
+    write_vector : dnc_write_vector
+      generic map (
+        DATA_SIZE    => DATA_SIZE,
+        CONTROL_SIZE => CONTROL_SIZE
+        )
+      port map (
+        -- GLOBAL
+        CLK => CLK,
+        RST => RST,
 
-      -- CONTROL
-      START => start_write_vector,
-      READY => ready_write_vector,
+        -- CONTROL
+        START => start_write_vector,
+        READY => ready_write_vector,
 
-      V_IN_ENABLE => v_in_enable_write_vector,
+        V_IN_ENABLE => v_in_enable_write_vector,
 
-      V_OUT_ENABLE => v_out_enable_write_vector,
+        V_OUT_ENABLE => v_out_enable_write_vector,
 
-      -- DATA
-      SIZE_W_IN => size_w_in_write_vector,
+        -- DATA
+        SIZE_W_IN => size_w_in_write_vector,
 
-      V_IN => v_in_write_vector,
+        V_IN => v_in_write_vector,
 
-      V_OUT => v_out_write_vector
-      );
+        V_OUT => v_out_write_vector
+        );
+  end generate dnc_write_vector_test;
 
 end dnc_write_heads_testbench_architecture;

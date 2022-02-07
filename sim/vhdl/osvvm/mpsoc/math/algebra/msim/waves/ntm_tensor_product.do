@@ -49,20 +49,20 @@ add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_b_in_j_product_int
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_b_in_k_product_int
 
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/start_scalar_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/operation_scalar_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_a_in_scalar_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_b_in_scalar_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/ready_scalar_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_out_scalar_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/overflow_out_scalar_adder
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/start_scalar_integer_adder
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/operation_scalar_integer_adder
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_a_in_scalar_integer_adder
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_b_in_scalar_integer_adder
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/ready_scalar_integer_adder
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_out_scalar_integer_adder
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/overflow_out_scalar_integer_adder
 
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/start_scalar_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_a_in_scalar_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_b_in_scalar_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/ready_scalar_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_out_scalar_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/overflow_out_scalar_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/start_scalar_integer_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_a_in_scalar_integer_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_b_in_scalar_integer_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/ready_scalar_integer_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/data_out_scalar_integer_multiplier
+add wave -noupdate /ntm_algebra_testbench/ntm_tensor_product_test/tensor_product/overflow_out_scalar_integer_multiplier
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

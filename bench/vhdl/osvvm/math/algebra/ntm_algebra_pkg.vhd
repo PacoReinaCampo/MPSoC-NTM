@@ -329,10 +329,8 @@ package ntm_algebra_pkg is
       MATRIX_INVERSE_START : out std_logic;
       MATRIX_INVERSE_READY : in  std_logic;
 
-      MATRIX_INVERSE_DATA_A_IN_I_ENABLE : out std_logic;
-      MATRIX_INVERSE_DATA_A_IN_J_ENABLE : out std_logic;
-      MATRIX_INVERSE_DATA_B_IN_I_ENABLE : out std_logic;
-      MATRIX_INVERSE_DATA_B_IN_J_ENABLE : out std_logic;
+      MATRIX_INVERSE_DATA_IN_I_ENABLE : out std_logic;
+      MATRIX_INVERSE_DATA_IN_J_ENABLE : out std_logic;
 
       MATRIX_INVERSE_DATA_I_ENABLE : in std_logic;
       MATRIX_INVERSE_DATA_J_ENABLE : in std_logic;
@@ -341,13 +339,10 @@ package ntm_algebra_pkg is
       MATRIX_INVERSE_DATA_OUT_J_ENABLE : in std_logic;
 
       -- DATA
-      MATRIX_INVERSE_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_INVERSE_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_INVERSE_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_INVERSE_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_INVERSE_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INVERSE_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INVERSE_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_INVERSE_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_INVERSE_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_INVERSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_INVERSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- MATRIX MULTIPLICATION
       -- CONTROL
@@ -470,12 +465,9 @@ package ntm_algebra_pkg is
       TENSOR_INVERSE_START : out std_logic;
       TENSOR_INVERSE_READY : in  std_logic;
 
-      TENSOR_INVERSE_DATA_A_IN_I_ENABLE : out std_logic;
-      TENSOR_INVERSE_DATA_A_IN_J_ENABLE : out std_logic;
-      TENSOR_INVERSE_DATA_A_IN_K_ENABLE : out std_logic;
-      TENSOR_INVERSE_DATA_B_IN_I_ENABLE : out std_logic;
-      TENSOR_INVERSE_DATA_B_IN_J_ENABLE : out std_logic;
-      TENSOR_INVERSE_DATA_B_IN_K_ENABLE : out std_logic;
+      TENSOR_INVERSE_DATA_IN_I_ENABLE : out std_logic;
+      TENSOR_INVERSE_DATA_IN_J_ENABLE : out std_logic;
+      TENSOR_INVERSE_DATA_IN_K_ENABLE : out std_logic;
 
       TENSOR_INVERSE_DATA_I_ENABLE : in std_logic;
       TENSOR_INVERSE_DATA_J_ENABLE : in std_logic;
@@ -486,15 +478,11 @@ package ntm_algebra_pkg is
       TENSOR_INVERSE_DATA_OUT_K_ENABLE : in std_logic;
 
       -- DATA
-      TENSOR_INVERSE_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INVERSE_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INVERSE_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INVERSE_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INVERSE_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INVERSE_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INVERSE_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_INVERSE_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_INVERSE_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_INVERSE_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_INVERSE_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_INVERSE_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      TENSOR_INVERSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      TENSOR_INVERSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- TENSOR MULTIPLICATION
       -- CONTROL

@@ -47,7 +47,7 @@ package dnc_memory_pkg is
   -----------------------------------------------------------------------
 
   -- SYSTEM-SIZE
-  constant DATA_SIZE : integer := 512;
+  constant DATA_SIZE : integer := 128;
 
   constant CONTROL_X_SIZE : integer := 3;
   constant CONTROL_Y_SIZE : integer := 3;
@@ -118,6 +118,10 @@ package dnc_memory_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := N_FOUR;
 
   -- FUNCTIONALITY
+  signal STIMULUS_DNC_MEMORY_SORT_VECTOR_TEST   : boolean := false;
+  signal STIMULUS_DNC_MEMORY_SORT_VECTOR_CASE_0 : boolean := false;
+  signal STIMULUS_DNC_MEMORY_SORT_VECTOR_CASE_1 : boolean := false;
+
   signal STIMULUS_DNC_MEMORY_TEST   : boolean := false;
   signal STIMULUS_DNC_MEMORY_CASE_0 : boolean := false;
   signal STIMULUS_DNC_MEMORY_CASE_1 : boolean := false;
@@ -144,6 +148,25 @@ package dnc_memory_pkg is
       CLK : out std_logic;
       RST : out std_logic;
 
+      -- SORT VECTOR
+      -- CONTROL
+      DNC_MEMORY_SORT_VECTOR_START : out std_logic;
+      DNC_MEMORY_SORT_VECTOR_READY : in  std_logic;
+
+      DNC_MEMORY_SORT_VECTOR_U_IN_ENABLE : out std_logic;  -- for j in 0 to N-1
+
+      DNC_MEMORY_SORT_VECTOR_U_OUT_ENABLE : in std_logic;  -- for j in 0 to N-1
+
+      DNC_MEMORY_SORT_VECTOR_PHI_OUT_ENABLE : in std_logic;  -- for j in 0 to N-1
+
+      -- DATA
+      DNC_MEMORY_SORT_VECTOR_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+      DNC_MEMORY_SORT_VECTOR_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DNC_MEMORY_SORT_VECTOR_PHI_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- ADDRESSING
       -- CONTROL
       DNC_MEMORY_START : out std_logic;
       DNC_MEMORY_READY : in  std_logic;

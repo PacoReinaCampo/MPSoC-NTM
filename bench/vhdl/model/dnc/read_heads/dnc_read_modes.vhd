@@ -102,22 +102,25 @@ architecture dnc_read_modes_architecture of dnc_read_modes is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- VECTOR SOFTMAX
+  -- MATRIX SOFTMAX
   -- CONTROL
-  signal start_vector_softmax : std_logic;
-  signal ready_vector_softmax : std_logic;
+  signal start_matrix_softmax : std_logic;
+  signal ready_matrix_softmax : std_logic;
 
-  signal data_in_vector_enable_vector_softmax : std_logic;
-  signal data_in_scalar_enable_vector_softmax : std_logic;
+  signal data_in_i_enable_matrix_softmax : std_logic;
+  signal data_in_j_enable_matrix_softmax : std_logic;
 
-  signal data_out_vector_enable_vector_softmax : std_logic;
-  signal data_out_scalar_enable_vector_softmax : std_logic;
+  signal data_i_enable_matrix_softmax : std_logic;
+  signal data_j_enable_matrix_softmax : std_logic;
+
+  signal data_out_i_enable_matrix_softmax : std_logic;
+  signal data_out_j_enable_matrix_softmax : std_logic;
 
   -- DATA
-  signal length_in_vector_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_in_vector_softmax   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_softmax : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_in_matrix_softmax   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_softmax  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -129,26 +132,26 @@ begin
 
   -- ASSIGNATIONS
   -- CONTROL
-  start_vector_softmax <= START;
+  start_matrix_softmax <= START;
 
-  READY <= ready_vector_softmax;
+  READY <= ready_matrix_softmax;
 
-  data_in_vector_enable_vector_softmax <= PI_IN_I_ENABLE;
-  data_in_scalar_enable_vector_softmax <= PI_IN_P_ENABLE;
+  data_in_i_enable_matrix_softmax <= PI_IN_I_ENABLE;
+  data_in_j_enable_matrix_softmax <= PI_IN_P_ENABLE;
 
-  PI_OUT_I_ENABLE <= data_out_vector_enable_vector_softmax;
-  PI_OUT_P_ENABLE <= data_out_scalar_enable_vector_softmax;
+  PI_OUT_I_ENABLE <= data_out_i_enable_matrix_softmax;
+  PI_OUT_P_ENABLE <= data_out_j_enable_matrix_softmax;
 
   -- DATA
-  length_in_vector_softmax <= ONE_CONTROL;
-  size_in_vector_softmax   <= SIZE_R_IN;
+  size_i_in_matrix_softmax <= SIZE_R_IN;
+  size_j_in_matrix_softmax <= THREE_CONTROL;
 
-  data_in_vector_softmax <= PI_IN;
+  data_in_matrix_softmax <= PI_IN;
 
-  PI_OUT <= data_out_vector_softmax;
+  PI_OUT <= data_out_matrix_softmax;
 
-  -- VECTOR SOFTMAX
-  vector_softmax_function : ntm_vector_softmax_function
+  -- MATRIX SOFTMAX
+  matrix_softmax : ntm_matrix_softmax
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -159,20 +162,23 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_softmax,
-      READY => ready_vector_softmax,
+      START => start_matrix_softmax,
+      READY => ready_matrix_softmax,
 
-      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_softmax,
-      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_softmax,
+      DATA_IN_I_ENABLE => data_in_i_enable_matrix_softmax,
+      DATA_IN_J_ENABLE => data_in_j_enable_matrix_softmax,
 
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_softmax,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_softmax,
+      DATA_I_ENABLE => data_i_enable_matrix_softmax,
+      DATA_J_ENABLE => data_j_enable_matrix_softmax,
+
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_softmax,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_softmax,
 
       -- DATA
-      SIZE_IN   => size_in_vector_softmax,
-      LENGTH_IN => length_in_vector_softmax,
-      DATA_IN   => data_in_vector_softmax,
-      DATA_OUT  => data_out_vector_softmax
+      SIZE_I_IN => size_i_in_matrix_softmax,
+      SIZE_J_IN => size_j_in_matrix_softmax,
+      DATA_IN   => data_in_matrix_softmax,
+      DATA_OUT  => data_out_matrix_softmax
       );
 
 end architecture;

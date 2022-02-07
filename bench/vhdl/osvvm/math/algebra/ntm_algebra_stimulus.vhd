@@ -188,10 +188,8 @@ entity ntm_algebra_stimulus is
     MATRIX_INVERSE_START : out std_logic;
     MATRIX_INVERSE_READY : in  std_logic;
 
-    MATRIX_INVERSE_DATA_A_IN_I_ENABLE : out std_logic;
-    MATRIX_INVERSE_DATA_A_IN_J_ENABLE : out std_logic;
-    MATRIX_INVERSE_DATA_B_IN_I_ENABLE : out std_logic;
-    MATRIX_INVERSE_DATA_B_IN_J_ENABLE : out std_logic;
+    MATRIX_INVERSE_DATA_IN_I_ENABLE : out std_logic;
+    MATRIX_INVERSE_DATA_IN_J_ENABLE : out std_logic;
 
     MATRIX_INVERSE_DATA_I_ENABLE : in std_logic;
     MATRIX_INVERSE_DATA_J_ENABLE : in std_logic;
@@ -200,13 +198,10 @@ entity ntm_algebra_stimulus is
     MATRIX_INVERSE_DATA_OUT_J_ENABLE : in std_logic;
 
     -- DATA
-    MATRIX_INVERSE_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_INVERSE_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_INVERSE_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_INVERSE_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_INVERSE_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_INVERSE_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_INVERSE_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_INVERSE_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_INVERSE_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    MATRIX_INVERSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    MATRIX_INVERSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- MATRIX MULTIPLICATION
     -- CONTROL
@@ -329,12 +324,9 @@ entity ntm_algebra_stimulus is
     TENSOR_INVERSE_START : out std_logic;
     TENSOR_INVERSE_READY : in  std_logic;
 
-    TENSOR_INVERSE_DATA_A_IN_I_ENABLE : out std_logic;
-    TENSOR_INVERSE_DATA_A_IN_J_ENABLE : out std_logic;
-    TENSOR_INVERSE_DATA_A_IN_K_ENABLE : out std_logic;
-    TENSOR_INVERSE_DATA_B_IN_I_ENABLE : out std_logic;
-    TENSOR_INVERSE_DATA_B_IN_J_ENABLE : out std_logic;
-    TENSOR_INVERSE_DATA_B_IN_K_ENABLE : out std_logic;
+    TENSOR_INVERSE_DATA_IN_I_ENABLE : out std_logic;
+    TENSOR_INVERSE_DATA_IN_J_ENABLE : out std_logic;
+    TENSOR_INVERSE_DATA_IN_K_ENABLE : out std_logic;
 
     TENSOR_INVERSE_DATA_I_ENABLE : in std_logic;
     TENSOR_INVERSE_DATA_J_ENABLE : in std_logic;
@@ -345,15 +337,11 @@ entity ntm_algebra_stimulus is
     TENSOR_INVERSE_DATA_OUT_K_ENABLE : in std_logic;
 
     -- DATA
-    TENSOR_INVERSE_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_INVERSE_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_INVERSE_SIZE_A_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_INVERSE_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_INVERSE_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_INVERSE_SIZE_B_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    TENSOR_INVERSE_DATA_A_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_INVERSE_DATA_B_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    TENSOR_INVERSE_DATA_OUT    : in  std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_INVERSE_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_INVERSE_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_INVERSE_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    TENSOR_INVERSE_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+    TENSOR_INVERSE_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
 
     -- TENSOR MULTIPLICATION
     -- CONTROL
@@ -1399,10 +1387,8 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      MATRIX_INVERSE_SIZE_A_I_IN <= THREE_CONTROL;
-      MATRIX_INVERSE_SIZE_A_J_IN <= THREE_CONTROL;
-      MATRIX_INVERSE_SIZE_B_I_IN <= THREE_CONTROL;
-      MATRIX_INVERSE_SIZE_B_J_IN <= THREE_CONTROL;
+      MATRIX_INVERSE_SIZE_I_IN <= THREE_CONTROL;
+      MATRIX_INVERSE_SIZE_J_IN <= THREE_CONTROL;
 
       if (STIMULUS_NTM_MATRIX_INVERSE_CASE_0) then
 
@@ -1412,8 +1398,7 @@ begin
 
         -- INITIAL CONDITIONS
         -- DATA
-        MATRIX_INVERSE_DATA_A_IN <= ZERO_DATA;
-        MATRIX_INVERSE_DATA_B_IN <= ZERO_DATA;
+        MATRIX_INVERSE_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
@@ -1422,48 +1407,38 @@ begin
         MATRIX_INVERSE_FIRST_RUN : loop
           if (MATRIX_INVERSE_DATA_I_ENABLE = '1' and MATRIX_INVERSE_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_INVERSE_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-            MATRIX_INVERSE_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_INVERSE_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
-            MATRIX_INVERSE_DATA_A_IN_I_ENABLE <= '1';
-            MATRIX_INVERSE_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_INVERSE_DATA_B_IN_I_ENABLE <= '1';
-            MATRIX_INVERSE_DATA_B_IN_J_ENABLE <= '1';
+            MATRIX_INVERSE_DATA_IN_I_ENABLE <= '1';
+            MATRIX_INVERSE_DATA_IN_J_ENABLE <= '1';
           elsif (MATRIX_INVERSE_DATA_I_ENABLE = '1' and MATRIX_INVERSE_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_INVERSE_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-            MATRIX_INVERSE_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_INVERSE_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
-            MATRIX_INVERSE_DATA_A_IN_I_ENABLE <= '1';
-            MATRIX_INVERSE_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_INVERSE_DATA_B_IN_I_ENABLE <= '1';
-            MATRIX_INVERSE_DATA_B_IN_J_ENABLE <= '1';
+            MATRIX_INVERSE_DATA_IN_I_ENABLE <= '1';
+            MATRIX_INVERSE_DATA_IN_J_ENABLE <= '1';
           elsif (MATRIX_INVERSE_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_INVERSE_DATA_A_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-            MATRIX_INVERSE_DATA_B_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_INVERSE_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
-            MATRIX_INVERSE_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_INVERSE_DATA_B_IN_J_ENABLE <= '1';
+            MATRIX_INVERSE_DATA_IN_J_ENABLE <= '1';
           else
             -- CONTROL
-            MATRIX_INVERSE_DATA_A_IN_I_ENABLE <= '0';
-            MATRIX_INVERSE_DATA_A_IN_J_ENABLE <= '0';
-            MATRIX_INVERSE_DATA_B_IN_I_ENABLE <= '0';
-            MATRIX_INVERSE_DATA_B_IN_J_ENABLE <= '0';
+            MATRIX_INVERSE_DATA_IN_I_ENABLE <= '0';
+            MATRIX_INVERSE_DATA_IN_J_ENABLE <= '0';
           end if;
 
           -- LOOP
-          if (MATRIX_INVERSE_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_INVERSE_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INVERSE_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+          if (MATRIX_INVERSE_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_INVERSE_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INVERSE_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
-          elsif (MATRIX_INVERSE_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_INVERSE_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INVERSE_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif (MATRIX_INVERSE_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_INVERSE_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INVERSE_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_INVERSE_DATA_J_ENABLE = '1' or MATRIX_INVERSE_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_INVERSE_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_INVERSE_DATA_J_ENABLE = '1' or MATRIX_INVERSE_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_INVERSE_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           end if;
 
@@ -1483,8 +1458,7 @@ begin
 
         -- INITIAL CONDITIONS
         -- DATA
-        MATRIX_INVERSE_DATA_A_IN <= ZERO_DATA;
-        MATRIX_INVERSE_DATA_B_IN <= ZERO_DATA;
+        MATRIX_INVERSE_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
@@ -1493,48 +1467,38 @@ begin
         MATRIX_INVERSE_SECOND_RUN : loop
           if (MATRIX_INVERSE_DATA_I_ENABLE = '1' and MATRIX_INVERSE_DATA_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_INVERSE_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-            MATRIX_INVERSE_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_INVERSE_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
-            MATRIX_INVERSE_DATA_A_IN_I_ENABLE <= '1';
-            MATRIX_INVERSE_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_INVERSE_DATA_B_IN_I_ENABLE <= '1';
-            MATRIX_INVERSE_DATA_B_IN_J_ENABLE <= '1';
+            MATRIX_INVERSE_DATA_IN_I_ENABLE <= '1';
+            MATRIX_INVERSE_DATA_IN_J_ENABLE <= '1';
           elsif (MATRIX_INVERSE_DATA_I_ENABLE = '1' and MATRIX_INVERSE_DATA_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_INVERSE_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-            MATRIX_INVERSE_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_INVERSE_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
-            MATRIX_INVERSE_DATA_A_IN_I_ENABLE <= '1';
-            MATRIX_INVERSE_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_INVERSE_DATA_B_IN_I_ENABLE <= '1';
-            MATRIX_INVERSE_DATA_B_IN_J_ENABLE <= '1';
+            MATRIX_INVERSE_DATA_IN_I_ENABLE <= '1';
+            MATRIX_INVERSE_DATA_IN_J_ENABLE <= '1';
           elsif (MATRIX_INVERSE_DATA_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            MATRIX_INVERSE_DATA_A_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-            MATRIX_INVERSE_DATA_B_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            MATRIX_INVERSE_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- CONTROL
-            MATRIX_INVERSE_DATA_A_IN_J_ENABLE <= '1';
-            MATRIX_INVERSE_DATA_B_IN_J_ENABLE <= '1';
+            MATRIX_INVERSE_DATA_IN_J_ENABLE <= '1';
           else
             -- CONTROL
-            MATRIX_INVERSE_DATA_A_IN_I_ENABLE <= '0';
-            MATRIX_INVERSE_DATA_A_IN_J_ENABLE <= '0';
-            MATRIX_INVERSE_DATA_B_IN_I_ENABLE <= '0';
-            MATRIX_INVERSE_DATA_B_IN_J_ENABLE <= '0';
+            MATRIX_INVERSE_DATA_IN_I_ENABLE <= '0';
+            MATRIX_INVERSE_DATA_IN_J_ENABLE <= '0';
           end if;
 
           -- LOOP
-          if (MATRIX_INVERSE_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_INVERSE_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INVERSE_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+          if (MATRIX_INVERSE_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_INVERSE_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INVERSE_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
-          elsif (MATRIX_INVERSE_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_INVERSE_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INVERSE_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif (MATRIX_INVERSE_DATA_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_INVERSE_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_INVERSE_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_INVERSE_DATA_J_ENABLE = '1' or MATRIX_INVERSE_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_INVERSE_SIZE_B_J_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((MATRIX_INVERSE_DATA_J_ENABLE = '1' or MATRIX_INVERSE_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_INVERSE_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
           end if;
 
@@ -2321,12 +2285,9 @@ begin
       -------------------------------------------------------------------
 
       -- DATA
-      TENSOR_INVERSE_SIZE_A_I_IN <= THREE_CONTROL;
-      TENSOR_INVERSE_SIZE_A_J_IN <= THREE_CONTROL;
-      TENSOR_INVERSE_SIZE_A_K_IN <= THREE_CONTROL;
-      TENSOR_INVERSE_SIZE_B_I_IN <= THREE_CONTROL;
-      TENSOR_INVERSE_SIZE_B_J_IN <= THREE_CONTROL;
-      TENSOR_INVERSE_SIZE_B_K_IN <= THREE_CONTROL;
+      TENSOR_INVERSE_SIZE_I_IN <= THREE_CONTROL;
+      TENSOR_INVERSE_SIZE_J_IN <= THREE_CONTROL;
+      TENSOR_INVERSE_SIZE_K_IN <= THREE_CONTROL;
 
       if (STIMULUS_NTM_TENSOR_INVERSE_CASE_0) then
 
@@ -2336,8 +2297,7 @@ begin
 
         -- INITIAL CONDITIONS
         -- DATA
-        TENSOR_INVERSE_DATA_A_IN <= ZERO_DATA;
-        TENSOR_INVERSE_DATA_B_IN <= ZERO_DATA;
+        TENSOR_INVERSE_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
@@ -2347,69 +2307,53 @@ begin
         TENSOR_INVERSE_FIRST_RUN : loop
           if (TENSOR_INVERSE_DATA_I_ENABLE = '1' and TENSOR_INVERSE_DATA_J_ENABLE = '1' and TENSOR_INVERSE_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_INVERSE_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-            TENSOR_INVERSE_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_INVERSE_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
             -- CONTROL
-            TENSOR_INVERSE_DATA_A_IN_I_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_B_IN_I_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_B_IN_K_ENABLE <= '1';
+            TENSOR_INVERSE_DATA_IN_I_ENABLE <= '1';
+            TENSOR_INVERSE_DATA_IN_J_ENABLE <= '1';
+            TENSOR_INVERSE_DATA_IN_K_ENABLE <= '1';
           elsif (TENSOR_INVERSE_DATA_I_ENABLE = '1' and TENSOR_INVERSE_DATA_J_ENABLE = '1' and TENSOR_INVERSE_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_INVERSE_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-            TENSOR_INVERSE_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_INVERSE_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
             -- CONTROL
-            TENSOR_INVERSE_DATA_A_IN_I_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_B_IN_I_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_B_IN_K_ENABLE <= '1';
+            TENSOR_INVERSE_DATA_IN_I_ENABLE <= '1';
+            TENSOR_INVERSE_DATA_IN_J_ENABLE <= '1';
+            TENSOR_INVERSE_DATA_IN_K_ENABLE <= '1';
           elsif (TENSOR_INVERSE_DATA_J_ENABLE = '1' and TENSOR_INVERSE_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_INVERSE_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-            TENSOR_INVERSE_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_INVERSE_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
             -- CONTROL
-            TENSOR_INVERSE_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_B_IN_K_ENABLE <= '1';
+            TENSOR_INVERSE_DATA_IN_J_ENABLE <= '1';
+            TENSOR_INVERSE_DATA_IN_K_ENABLE <= '1';
           elsif (TENSOR_INVERSE_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_INVERSE_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-            TENSOR_INVERSE_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_INVERSE_DATA_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
             -- CONTROL
-            TENSOR_INVERSE_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_B_IN_K_ENABLE <= '1';
+            TENSOR_INVERSE_DATA_IN_K_ENABLE <= '1';
           else
             -- CONTROL
-            TENSOR_INVERSE_DATA_A_IN_I_ENABLE <= '0';
-            TENSOR_INVERSE_DATA_A_IN_J_ENABLE <= '0';
-            TENSOR_INVERSE_DATA_A_IN_K_ENABLE <= '0';
-            TENSOR_INVERSE_DATA_B_IN_I_ENABLE <= '0';
-            TENSOR_INVERSE_DATA_B_IN_J_ENABLE <= '0';
-            TENSOR_INVERSE_DATA_B_IN_K_ENABLE <= '0';
+            TENSOR_INVERSE_DATA_IN_I_ENABLE <= '0';
+            TENSOR_INVERSE_DATA_IN_J_ENABLE <= '0';
+            TENSOR_INVERSE_DATA_IN_K_ENABLE <= '0';
           end if;
 
           -- LOOP
-          if (TENSOR_INVERSE_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_INVERSE_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_INVERSE_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INVERSE_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          if (TENSOR_INVERSE_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_INVERSE_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_INVERSE_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INVERSE_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
             index_k_loop <= ZERO_CONTROL;
-          elsif (TENSOR_INVERSE_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_INVERSE_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_INVERSE_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INVERSE_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          elsif (TENSOR_INVERSE_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_INVERSE_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_INVERSE_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INVERSE_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
             index_k_loop <= ZERO_CONTROL;
-          elsif (TENSOR_INVERSE_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_INVERSE_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INVERSE_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          elsif (TENSOR_INVERSE_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_INVERSE_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INVERSE_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
             index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_INVERSE_DATA_K_ENABLE = '1' or TENSOR_INVERSE_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_INVERSE_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((TENSOR_INVERSE_DATA_K_ENABLE = '1' or TENSOR_INVERSE_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_INVERSE_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
             index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
           end if;
 
@@ -2429,8 +2373,7 @@ begin
 
         -- INITIAL CONDITIONS
         -- DATA
-        TENSOR_INVERSE_DATA_A_IN <= ZERO_DATA;
-        TENSOR_INVERSE_DATA_B_IN <= ZERO_DATA;
+        TENSOR_INVERSE_DATA_IN <= ZERO_DATA;
 
         -- LOOP
         index_i_loop <= ZERO_CONTROL;
@@ -2440,69 +2383,53 @@ begin
         TENSOR_INVERSE_SECOND_RUN : loop
           if (TENSOR_INVERSE_DATA_I_ENABLE = '1' and TENSOR_INVERSE_DATA_J_ENABLE = '1' and TENSOR_INVERSE_DATA_K_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_INVERSE_DATA_A_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-            TENSOR_INVERSE_DATA_B_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_INVERSE_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
             -- CONTROL
-            TENSOR_INVERSE_DATA_A_IN_I_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_B_IN_I_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_B_IN_K_ENABLE <= '1';
+            TENSOR_INVERSE_DATA_IN_I_ENABLE <= '1';
+            TENSOR_INVERSE_DATA_IN_J_ENABLE <= '1';
+            TENSOR_INVERSE_DATA_IN_K_ENABLE <= '1';
           elsif (TENSOR_INVERSE_DATA_I_ENABLE = '1' and TENSOR_INVERSE_DATA_J_ENABLE = '1' and TENSOR_INVERSE_DATA_K_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL) and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_INVERSE_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-            TENSOR_INVERSE_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_INVERSE_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
             -- CONTROL
-            TENSOR_INVERSE_DATA_A_IN_I_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_B_IN_I_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_B_IN_K_ENABLE <= '1';
+            TENSOR_INVERSE_DATA_IN_I_ENABLE <= '1';
+            TENSOR_INVERSE_DATA_IN_J_ENABLE <= '1';
+            TENSOR_INVERSE_DATA_IN_K_ENABLE <= '1';
           elsif (TENSOR_INVERSE_DATA_J_ENABLE = '1' and TENSOR_INVERSE_DATA_K_ENABLE = '1' and unsigned(index_k_loop) = unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_INVERSE_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-            TENSOR_INVERSE_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_INVERSE_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
             -- CONTROL
-            TENSOR_INVERSE_DATA_A_IN_J_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_B_IN_J_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_B_IN_K_ENABLE <= '1';
+            TENSOR_INVERSE_DATA_IN_J_ENABLE <= '1';
+            TENSOR_INVERSE_DATA_IN_K_ENABLE <= '1';
           elsif (TENSOR_INVERSE_DATA_K_ENABLE = '1' and unsigned(index_k_loop) > unsigned(ZERO_CONTROL)) then
             -- DATA
-            TENSOR_INVERSE_DATA_A_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-            TENSOR_INVERSE_DATA_B_IN <= TENSOR_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+            TENSOR_INVERSE_DATA_IN <= TENSOR_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
             -- CONTROL
-            TENSOR_INVERSE_DATA_A_IN_K_ENABLE <= '1';
-            TENSOR_INVERSE_DATA_B_IN_K_ENABLE <= '1';
+            TENSOR_INVERSE_DATA_IN_K_ENABLE <= '1';
           else
             -- CONTROL
-            TENSOR_INVERSE_DATA_A_IN_I_ENABLE <= '0';
-            TENSOR_INVERSE_DATA_A_IN_J_ENABLE <= '0';
-            TENSOR_INVERSE_DATA_A_IN_K_ENABLE <= '0';
-            TENSOR_INVERSE_DATA_B_IN_I_ENABLE <= '0';
-            TENSOR_INVERSE_DATA_B_IN_J_ENABLE <= '0';
-            TENSOR_INVERSE_DATA_B_IN_K_ENABLE <= '0';
+            TENSOR_INVERSE_DATA_IN_I_ENABLE <= '0';
+            TENSOR_INVERSE_DATA_IN_J_ENABLE <= '0';
+            TENSOR_INVERSE_DATA_IN_K_ENABLE <= '0';
           end if;
 
           -- LOOP
-          if (TENSOR_INVERSE_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_INVERSE_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_INVERSE_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INVERSE_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          if (TENSOR_INVERSE_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(TENSOR_INVERSE_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_INVERSE_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INVERSE_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
             index_k_loop <= ZERO_CONTROL;
-          elsif (TENSOR_INVERSE_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_INVERSE_SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_INVERSE_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INVERSE_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          elsif (TENSOR_INVERSE_DATA_K_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(TENSOR_INVERSE_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(TENSOR_INVERSE_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INVERSE_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
             index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
             index_j_loop <= ZERO_CONTROL;
             index_k_loop <= ZERO_CONTROL;
-          elsif (TENSOR_INVERSE_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_INVERSE_SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INVERSE_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          elsif (TENSOR_INVERSE_DATA_K_ENABLE = '1' and (unsigned(index_j_loop) < unsigned(TENSOR_INVERSE_SIZE_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(TENSOR_INVERSE_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
             index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
             index_k_loop <= ZERO_CONTROL;
-          elsif ((TENSOR_INVERSE_DATA_K_ENABLE = '1' or TENSOR_INVERSE_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_INVERSE_SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((TENSOR_INVERSE_DATA_K_ENABLE = '1' or TENSOR_INVERSE_START = '1') and (unsigned(index_k_loop) < unsigned(TENSOR_INVERSE_SIZE_K_IN)-unsigned(ONE_CONTROL))) then
             index_k_loop <= std_logic_vector(unsigned(index_k_loop) + unsigned(ONE_CONTROL));
           end if;
 

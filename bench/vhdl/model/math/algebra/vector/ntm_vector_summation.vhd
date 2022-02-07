@@ -112,15 +112,15 @@ architecture ntm_vector_summation_architecture of ntm_vector_summation is
 
   -- SCALAR ADDER
   -- CONTROL
-  signal start_scalar_adder : std_logic;
-  signal ready_scalar_adder : std_logic;
+  signal start_scalar_integer_adder : std_logic;
+  signal ready_scalar_integer_adder : std_logic;
 
-  signal operation_scalar_adder : std_logic;
+  signal operation_scalar_integer_adder : std_logic;
 
   -- DATA
-  signal data_a_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_integer_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -141,15 +141,15 @@ begin
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
-      start_scalar_adder <= '0';
+      start_scalar_integer_adder <= '0';
 
-      operation_scalar_adder <= '0';
+      operation_scalar_integer_adder <= '0';
 
       index_loop <= ZERO_CONTROL;
 
       -- Data Internal
-      data_a_in_scalar_adder <= ZERO_DATA;
-      data_b_in_scalar_adder <= ZERO_DATA;
+      data_a_in_scalar_integer_adder <= ZERO_DATA;
+      data_b_in_scalar_integer_adder <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -172,18 +172,18 @@ begin
 
           if (DATA_IN_ENABLE = '1') then
             -- Data Inputs
-            data_a_in_scalar_adder <= DATA_IN;
+            data_a_in_scalar_integer_adder <= DATA_IN;
 
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
-              data_b_in_scalar_adder <= ZERO_DATA;
+              data_b_in_scalar_integer_adder <= ZERO_DATA;
             else
-              data_b_in_scalar_adder <= data_out_scalar_adder;
+              data_b_in_scalar_integer_adder <= data_out_scalar_integer_adder;
             end if;
 
             -- Control Internal
-            start_scalar_adder <= '1';
+            start_scalar_integer_adder <= '1';
 
-            operation_scalar_adder <= '0';
+            operation_scalar_integer_adder <= '0';
 
             -- FSM Control
             summation_ctrl_fsm_int <= SCALAR_ADDER_STATE;
@@ -194,7 +194,7 @@ begin
 
         when SCALAR_ADDER_STATE =>      -- STEP 2
 
-          if (ready_scalar_adder = '1') then
+          if (ready_scalar_integer_adder = '1') then
             if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
               -- Control Outputs
               READY <= '1';
@@ -210,13 +210,13 @@ begin
             end if;
 
             -- Data Outputs
-            DATA_OUT <= data_out_scalar_adder;
+            DATA_OUT <= data_out_scalar_integer_adder;
 
             -- Control Outputs
             DATA_OUT_ENABLE <= '1';
           else
             -- Control Internal
-            start_scalar_adder <= '0';
+            start_scalar_integer_adder <= '0';
           end if;
 
         when others =>
@@ -227,7 +227,7 @@ begin
   end process;
 
   -- SCALAR ADDER
-  scalar_adder : ntm_scalar_adder
+  scalar_integer_adder : ntm_scalar_integer_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -238,15 +238,15 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_adder,
-      READY => ready_scalar_adder,
+      START => start_scalar_integer_adder,
+      READY => ready_scalar_integer_adder,
 
-      OPERATION => operation_scalar_adder,
+      OPERATION => operation_scalar_integer_adder,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_adder,
-      DATA_B_IN => data_b_in_scalar_adder,
-      DATA_OUT  => data_out_scalar_adder
+      DATA_A_IN => data_a_in_scalar_integer_adder,
+      DATA_B_IN => data_b_in_scalar_integer_adder,
+      DATA_OUT  => data_out_scalar_integer_adder
       );
 
 end architecture;
