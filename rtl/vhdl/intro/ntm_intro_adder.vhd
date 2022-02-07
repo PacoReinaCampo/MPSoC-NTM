@@ -47,8 +47,8 @@ entity ntm_intro_adder is
     DATA_SIZE : positive := 4
     );
   port (
-    RST : in std_logic;
     CLK : in std_logic;
+    RST : in std_logic;
 
     DATA_A_IN : in  unsigned(DATA_SIZE-1 downto 0);
     DATA_B_IN : in  unsigned(DATA_SIZE-1 downto 0);

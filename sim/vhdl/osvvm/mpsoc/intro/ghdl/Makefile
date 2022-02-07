@@ -1,10 +1,10 @@
 all: build simulate
 
 build:
-	ghdl -a --std=08 ghdl -a --std=08 ../../../../../../../rtl/vhdl/intro/ntm_intro_adder.vhd
+	ghdl -a --std=08 ../../../../../../rtl/vhdl/intro/ntm_intro_adder.vhd
 
-	ghdl -a --std=08 ghdl -a --std=08 ../../../../../../../bench/vhdl/model/intro/ntm_intro_adder_model.vhd
-	ghdl -a --std=08 ghdl -a --std=08 ../../../../../../../bench/vhdl/osvvm/intro/ntm_intro_testbench.vhd
+	ghdl -a --std=08 ../../../../../../bench/vhdl/model/intro/ntm_intro_adder_model.vhd
+	ghdl -a --std=08 ../../../../../../bench/vhdl/osvvm/intro/ntm_intro_testbench.vhd
 
 simulate:
 	ghdl -m --std=08 ntm_intro_testbench

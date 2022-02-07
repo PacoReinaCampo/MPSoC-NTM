@@ -53,6 +53,10 @@ end entity ntm_intro_testbench;
 
 architecture ntm_intro_testbench_architecture of ntm_intro_testbench is
 
+  -----------------------------------------------------------------------
+  -- Components
+  -----------------------------------------------------------------------
+
   component ntm_intro_adder_model is
     generic (
       DATA_SIZE : positive := 4
@@ -66,10 +70,6 @@ architecture ntm_intro_testbench_architecture of ntm_intro_testbench is
       DATA_OUT  : out unsigned(DATA_SIZE downto 0)
       );
   end component ntm_intro_adder_model;
-
-  -----------------------------------------------------------------------
-  -- Components
-  -----------------------------------------------------------------------
 
   component ntm_intro_adder is
     generic (
@@ -90,7 +90,7 @@ architecture ntm_intro_testbench_architecture of ntm_intro_testbench is
   -----------------------------------------------------------------------
 
   -- width of adder inputs
-  constant C_ADDER_WIDTH : positive := 8;
+  constant DATA_SIZE : positive := 8;
 
   -- clock period
   constant C_CLK_PERIOD : time := 20 ns;
@@ -106,11 +106,11 @@ architecture ntm_intro_testbench_architecture of ntm_intro_testbench is
   signal clk_int : std_logic := '0';
   signal rst_int : std_logic := '0';
 
-  signal s_adder1_in : unsigned(C_ADDER_WIDTH-1 downto 0);
-  signal s_adder2_in : unsigned(C_ADDER_WIDTH-1 downto 0);
+  signal data_a_in_int : unsigned(DATA_SIZE-1 downto 0);
+  signal data_b_in_int : unsigned(DATA_SIZE-1 downto 0);
 
-  signal s_adder0_out : unsigned(C_ADDER_WIDTH downto 0) := (others => '0');
-  signal s_adder1_out : unsigned(C_ADDER_WIDTH downto 0) := (others => '0');
+  signal data_out_model_int  : unsigned(DATA_SIZE downto 0) := (others => '0');
+  signal data_out_design_int : unsigned(DATA_SIZE downto 0) := (others => '0');
 
   -- coverage object of (protected) type CovPType
   shared variable sv_coverage : CovPType;
@@ -122,63 +122,64 @@ begin
   -----------------------------------------------------------------------
 
   -- global signals
-  rst_int <= '1' after 100 ns;
-
   clk_int <= not(clk_int) after C_CLK_PERIOD/2;
+
+  rst_int <= '1' after 100 ns;
 
   -- DUT 0: MODEL
   intro_adder_model : ntm_intro_adder_model
     generic map (
-      DATA_SIZE => C_ADDER_WIDTH
+      DATA_SIZE => DATA_SIZE
       )
     port map (
-      RST => rst_int,
       CLK => clk_int,
+      RST => rst_int,
 
-      DATA_A_IN => s_adder1_in,
-      DATA_B_IN => s_adder2_in,
-      DATA_OUT  => s_adder0_out
+      DATA_A_IN => data_a_in_int,
+      DATA_B_IN => data_b_in_int,
+      DATA_OUT  => data_out_model_int
       );
 
-  -- DUT 2: RTL
+  -- DUT 1: DESIGN
   intro_adder : ntm_intro_adder
     generic map (
-      DATA_SIZE => C_ADDER_WIDTH
+      DATA_SIZE => DATA_SIZE
       )
     port map (
-      RST => rst_int,
       CLK => clk_int,
+      RST => rst_int,
 
-      DATA_A_IN => s_adder1_in,
-      DATA_B_IN => s_adder2_in,
-      DATA_OUT  => s_adder1_out
+      DATA_A_IN => data_a_in_int,
+      DATA_B_IN => data_b_in_int,
+      DATA_OUT  => data_out_design_int
       );
 
   -- stimulus & coverage of adder inputs
-  StimCoverageP : process is
+  StimCoverageProcess : process is
     -- holds the two random values from sv_coverage object
     variable v_adder_in : integer_vector(0 to 1);
   begin
-    s_adder1_in <= (others => '0');
-    s_adder2_in <= (others => '0');
+    data_a_in_int <= (others => '0');
+    data_b_in_int <= (others => '0');
 
     -- cross bins for all possible combinations (very slow on large vector widths):
-    -- sv_coverage.AddCross(GenBin(0, 2**C_ADDER_WIDTH-1), GenBin(0, 2**C_ADDER_WIDTH-1));
+    -- sv_coverage.AddCross(GenBin(0, 2**DATA_SIZE-1), GenBin(0, 2**DATA_SIZE-1));
 
     -- cross bins for maximum of C_MAX_BINS slices with same width:
-    sv_coverage.AddCross(GenBin(0, 2**C_ADDER_WIDTH-1, C_MAX_BINS), GenBin(0, 2**C_ADDER_WIDTH-1, C_MAX_BINS));
+    sv_coverage.AddCross(GenBin(0, 2**DATA_SIZE-1, C_MAX_BINS), GenBin(0, 2**DATA_SIZE-1, C_MAX_BINS));
 
     -- cross bins for corner cases (min against max):
-    sv_coverage.AddCross(GenBin(0), GenBin(2**C_ADDER_WIDTH-1));
-    sv_coverage.AddCross(GenBin(2**C_ADDER_WIDTH-1), GenBin(0));
+    sv_coverage.AddCross(GenBin(0), GenBin(2**DATA_SIZE-1));
+    sv_coverage.AddCross(GenBin(2**DATA_SIZE-1), GenBin(0));
 
     -- loop until reaching coverage goal
     while not sv_coverage.IsCovered loop
       wait until rising_edge(clk_int);
       -- generate random values depending on coverage hole
-      v_adder_in  := sv_coverage.RandCovPoint;
-      s_adder1_in <= to_unsigned(v_adder_in(0), C_ADDER_WIDTH);
-      s_adder2_in <= to_unsigned(v_adder_in(1), C_ADDER_WIDTH);
+      v_adder_in := sv_coverage.RandCovPoint;
+
+      data_a_in_int <= to_unsigned(v_adder_in(0), DATA_SIZE);
+      data_b_in_int <= to_unsigned(v_adder_in(1), DATA_SIZE);
 
       -- save generated random values in coverage object
       sv_coverage.ICover(v_adder_in);
@@ -189,15 +190,15 @@ begin
     report("CovBin Coverage details");
     sv_coverage.WriteBin;
     stop;
-  end process StimCoverageP;
+  end process StimCoverageProcess;
 
   -- check if outputs of both adders are equal
-  CheckerP : process is
+  CheckerProcess : process is
   begin
     wait until rising_edge(clk_int);
-    assert s_adder0_out = s_adder1_out
-      report "FAILURE: s_adder0_out (0x" & to_hstring(s_adder0_out) & ") & s_adder1_out (0x" & to_hstring(s_adder1_out) & ") are not equal!"
+    assert data_out_model_int = data_out_design_int
+      report "FAILURE: data_out_model_int (0x" & to_hstring(data_out_model_int) & ") & data_out_design_int (0x" & to_hstring(data_out_design_int) & ") are not equal!"
       severity failure;
-  end process CheckerP;
+  end process CheckerProcess;
 
 end architecture ntm_intro_testbench_architecture;
