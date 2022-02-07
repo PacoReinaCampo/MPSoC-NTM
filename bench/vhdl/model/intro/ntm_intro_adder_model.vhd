@@ -16,7 +16,7 @@
 
 -- Copyright (c) 2020-2021 by the author(s)
 --
--- Permission is hereby granted, free of charge, to any person obtaining DATA_A_IN copy
+-- Permission is hereby granted, free of charge, to any person obtaining a copy
 -- of this software and associated documentation files (the "Software"), to deal
 -- in the Software without restriction, including without limitation the rights
 -- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
@@ -38,9 +38,8 @@
 -- Author(s):
 --   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
--- Code your design here
-library IEEE;
-use IEEE.std_logic_1164.all;
+library ieee;
+use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity ntm_intro_adder_model is

@@ -38,53 +38,54 @@
 -- Author(s):
 --   Paco Reina Campo <pacoreinacampo@queenfield.tech>
 
--- Code your design here
-library IEEE;
-  use IEEE.std_logic_1164.all;
-  use ieee.numeric_std.all;
-  
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
-entity adder1 is
+entity ntm_intro_adder is
   generic (
-    G_ADDER_WIDTH : positive := 4
-  );
+    DATA_SIZE : positive := 4
+    );
   port (
-    reset_n : in  std_logic;
-  	clk     : in  std_logic;
-  	a       : in  unsigned(G_ADDER_WIDTH - 1 downto 0);
-    b       : in  unsigned(G_ADDER_WIDTH - 1 downto 0);
-    y       : out unsigned(G_ADDER_WIDTH downto 0)
-  );
-end entity adder1;
+    RST : in std_logic;
+    CLK : in std_logic;
 
+    DATA_A_IN : in  unsigned(DATA_SIZE-1 downto 0);
+    DATA_B_IN : in  unsigned(DATA_SIZE-1 downto 0);
+    DATA_OUT  : out unsigned(DATA_SIZE downto 0)
+    );
+end entity ntm_intro_adder;
 
-
-architecture rtl of adder1 is
+architecture ntm_intro_adder_architecture of ntm_intro_adder is
 
 begin
 
+  -----------------------------------------------------------------------
+  -- Body
+  -----------------------------------------------------------------------
 
-  -- "rtl" model of adder
-  Adder1P : process (clk, reset_n) is
-    variable v_carry : std_logic;
+  rtl : process (CLK, RST) is
+    variable carry_int : std_logic;
   begin
-    if(reset_n = '0') then
-      y <= (others => '0');
-    elsif(rising_edge(clk)) then
-      v_carry := '0';
-      for index in 0 to G_ADDER_WIDTH - 1 loop
-        if(index = 0) then
-          y(index) <= a(index) xor b(index);
+    if(RST = '0') then
+      DATA_OUT <= (others => '0');
+    elsif(rising_edge(CLK)) then
+      carry_int := '0';
+
+      for index_loop in 0 to DATA_SIZE-1 loop
+        if(index_loop = 0) then
+          DATA_OUT(index_loop) <= DATA_A_IN(index_loop) xor DATA_B_IN(index_loop);
         else
-          y(index) <= a(index) xor b(index) xor v_carry;
+          DATA_OUT(index_loop) <= DATA_A_IN(index_loop) xor DATA_B_IN(index_loop) xor carry_int;
         end if;
-        v_carry := (a(index) and b(index)) or
-      		       (a(index) and v_carry)  or
-                   (b(index) and v_carry);
+
+        carry_int := (DATA_A_IN(index_loop) and DATA_B_IN(index_loop)) or
+                     (DATA_A_IN(index_loop) and carry_int) or
+                     (DATA_B_IN(index_loop) and carry_int);
       end loop;
-      y(G_ADDER_WIDTH) <= v_carry;
+
+      DATA_OUT(DATA_SIZE) <= carry_int;
     end if;
-  end process Adder1P;
+  end process rtl;
 
-
-end architecture rtl;
+end architecture ntm_intro_adder_architecture;
