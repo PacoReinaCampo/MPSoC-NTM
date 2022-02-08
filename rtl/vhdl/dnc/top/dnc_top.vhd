@@ -471,6 +471,8 @@ architecture dnc_top_architecture of dnc_top is
 
   signal k_in_enable_write_key : std_logic;
 
+  signal k_enable_write_key : std_logic;
+
   signal k_out_enable_write_key : std_logic;
 
   -- DATA
@@ -1469,6 +1471,8 @@ begin
       READY => ready_write_key,
 
       K_IN_ENABLE => k_in_enable_write_key,
+
+      K_ENABLE => k_enable_write_key,
 
       K_OUT_ENABLE => k_out_enable_write_key,
 

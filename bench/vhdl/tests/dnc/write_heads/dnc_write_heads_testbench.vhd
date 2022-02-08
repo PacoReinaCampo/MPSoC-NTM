@@ -134,6 +134,8 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
 
   signal k_in_enable_write_key : std_logic;
 
+  signal k_enable_write_key : std_logic;
+
   signal k_out_enable_write_key : std_logic;
 
   -- DATA
@@ -235,6 +237,8 @@ begin
       DNC_WRITE_KEY_READY => ready_write_key,
 
       DNC_WRITE_KEY_K_IN_ENABLE => k_in_enable_write_key,
+
+      DNC_WRITE_KEY_K_ENABLE => k_enable_write_key,
 
       DNC_WRITE_KEY_K_OUT_ENABLE => k_out_enable_write_key,
 
@@ -366,6 +370,8 @@ begin
         READY => ready_write_key,
 
         K_IN_ENABLE => k_in_enable_write_key,
+
+        K_ENABLE => k_enable_write_key,
 
         K_OUT_ENABLE => k_out_enable_write_key,
 

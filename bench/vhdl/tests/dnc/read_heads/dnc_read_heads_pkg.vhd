@@ -47,7 +47,7 @@ package dnc_read_heads_pkg is
   -----------------------------------------------------------------------
 
   -- SYSTEM-SIZE
-  constant DATA_SIZE : integer := 512;
+  constant DATA_SIZE : integer := 128;
 
   constant CONTROL_X_SIZE : integer := 3;
   constant CONTROL_Y_SIZE : integer := 3;
@@ -118,9 +118,21 @@ package dnc_read_heads_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := N_FOUR;
 
   -- FUNCTIONALITY
-  signal STIMULUS_DNC_READ_HEADS_TEST   : boolean := false;
-  signal STIMULUS_DNC_READ_HEADS_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_READ_HEADS_CASE_1 : boolean := false;
+  signal STIMULUS_DNC_FREE_GATES_TEST   : boolean := false;
+  signal STIMULUS_DNC_FREE_GATES_CASE_0 : boolean := false;
+  signal STIMULUS_DNC_FREE_GATES_CASE_1 : boolean := false;
+    
+  signal STIMULUS_DNC_READ_KEYS_TEST   : boolean := false;
+  signal STIMULUS_DNC_READ_KEYS_CASE_0 : boolean := false;
+  signal STIMULUS_DNC_READ_KEYS_CASE_1 : boolean := false;
+    
+  signal STIMULUS_DNC_READ_MODES_TEST   : boolean := false;
+  signal STIMULUS_DNC_READ_MODES_CASE_0 : boolean := false;
+  signal STIMULUS_DNC_READ_MODES_CASE_1 : boolean := false;
+    
+  signal STIMULUS_DNC_READ_STRENGTHS_TEST   : boolean := false;
+  signal STIMULUS_DNC_READ_STRENGTHS_CASE_0 : boolean := false;
+  signal STIMULUS_DNC_READ_STRENGTHS_CASE_1 : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
@@ -167,6 +179,9 @@ package dnc_read_heads_pkg is
 
       DNC_READ_KEYS_K_IN_I_ENABLE : out std_logic;
       DNC_READ_KEYS_K_IN_K_ENABLE : out std_logic;
+
+      DNC_READ_KEYS_K_I_ENABLE : in std_logic;
+      DNC_READ_KEYS_K_K_ENABLE : in std_logic;
 
       DNC_READ_KEYS_K_OUT_I_ENABLE : in std_logic;
       DNC_READ_KEYS_K_OUT_K_ENABLE : in std_logic;

@@ -207,6 +207,8 @@ package dnc_write_heads_pkg is
 
       DNC_WRITE_KEY_K_IN_ENABLE : out std_logic;
 
+      DNC_WRITE_KEY_K_ENABLE : in std_logic;
+
       DNC_WRITE_KEY_K_OUT_ENABLE : in std_logic;
 
       -- DATA

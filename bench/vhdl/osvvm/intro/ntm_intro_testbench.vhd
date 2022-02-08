@@ -93,7 +93,7 @@ architecture ntm_intro_testbench_architecture of ntm_intro_testbench is
   constant DATA_SIZE : positive := 8;
 
   -- clock period
-  constant C_CLK_PERIOD : time := 20 ns;
+  constant PERIOD : time := 20 ns;
 
   -- how many bins should be generated
   constant C_MAX_BINS : natural := 16;
@@ -102,18 +102,20 @@ architecture ntm_intro_testbench_architecture of ntm_intro_testbench is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- testbench signals
+  -- GLOBAL
   signal clk_int : std_logic := '0';
   signal rst_int : std_logic := '0';
 
+  -- CONTROL
+  -- coverage object of (protected) type CovPType
+  shared variable sv_coverage : CovPType;
+
+  -- SCALAR ADDER
   signal data_a_in_int : unsigned(DATA_SIZE-1 downto 0);
   signal data_b_in_int : unsigned(DATA_SIZE-1 downto 0);
 
   signal data_out_model_int  : unsigned(DATA_SIZE downto 0) := (others => '0');
   signal data_out_design_int : unsigned(DATA_SIZE downto 0) := (others => '0');
-
-  -- coverage object of (protected) type CovPType
-  shared variable sv_coverage : CovPType;
 
 begin
 
@@ -121,12 +123,13 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- global signals
-  clk_int <= not(clk_int) after C_CLK_PERIOD/2;
+  -- clk generation
+  clk_int <= not clk_int after PERIOD/2;
 
+  -- rst generation
   rst_int <= '1' after 100 ns;
 
-  -- DUT 0: MODEL
+  -- MODEL
   intro_adder_model : ntm_intro_adder_model
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -140,7 +143,7 @@ begin
       DATA_OUT  => data_out_model_int
       );
 
-  -- DUT 1: DESIGN
+  -- DUT
   intro_adder : ntm_intro_adder
     generic map (
       DATA_SIZE => DATA_SIZE
@@ -185,7 +188,7 @@ begin
       sv_coverage.ICover(v_adder_in);
     end loop;
 
-    wait for 2*C_CLK_PERIOD;
+    wait for 2*PERIOD;
     -- print coverage report
     report("CovBin Coverage details");
     sv_coverage.WriteBin;

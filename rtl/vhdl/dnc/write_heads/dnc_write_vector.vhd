@@ -128,7 +128,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- V_OUT = write_vector(V_IN)
+  -- v(t;k) = v^(t;k)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
