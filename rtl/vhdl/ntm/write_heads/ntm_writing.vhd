@@ -135,49 +135,49 @@ architecture ntm_writing_architecture of ntm_writing is
 
   -- MATRIX ADDER
   -- CONTROL
-  signal start_matrix_adder : std_logic;
-  signal ready_matrix_adder : std_logic;
+  signal start_matrix_integer_adder : std_logic;
+  signal ready_matrix_integer_adder : std_logic;
 
-  signal operation_matrix_adder : std_logic;
+  signal operation_matrix_integer_adder : std_logic;
 
-  signal data_a_in_i_enable_matrix_adder : std_logic;
-  signal data_a_in_j_enable_matrix_adder : std_logic;
-  signal data_b_in_i_enable_matrix_adder : std_logic;
-  signal data_b_in_j_enable_matrix_adder : std_logic;
+  signal data_a_in_i_enable_matrix_integer_adder : std_logic;
+  signal data_a_in_j_enable_matrix_integer_adder : std_logic;
+  signal data_b_in_i_enable_matrix_integer_adder : std_logic;
+  signal data_b_in_j_enable_matrix_integer_adder : std_logic;
 
-  signal data_out_i_enable_matrix_adder : std_logic;
-  signal data_out_j_enable_matrix_adder : std_logic;
+  signal data_out_i_enable_matrix_integer_adder : std_logic;
+  signal data_out_j_enable_matrix_integer_adder : std_logic;
 
   -- DATA
-  signal size_i_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_integer_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_integer_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_matrix_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal overflow_out_matrix_adder : std_logic;
+  signal data_out_matrix_integer_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_matrix_integer_adder : std_logic;
 
   -- MATRIX MULTIPLIER
   -- CONTROL
-  signal start_matrix_multiplier : std_logic;
-  signal ready_matrix_multiplier : std_logic;
+  signal start_matrix_integer_multiplier : std_logic;
+  signal ready_matrix_integer_multiplier : std_logic;
 
-  signal data_a_in_i_enable_matrix_multiplier : std_logic;
-  signal data_a_in_j_enable_matrix_multiplier : std_logic;
-  signal data_b_in_i_enable_matrix_multiplier : std_logic;
-  signal data_b_in_j_enable_matrix_multiplier : std_logic;
+  signal data_a_in_i_enable_matrix_integer_multiplier : std_logic;
+  signal data_a_in_j_enable_matrix_integer_multiplier : std_logic;
+  signal data_b_in_i_enable_matrix_integer_multiplier : std_logic;
+  signal data_b_in_j_enable_matrix_integer_multiplier : std_logic;
 
-  signal data_out_i_enable_matrix_multiplier : std_logic;
-  signal data_out_j_enable_matrix_multiplier : std_logic;
+  signal data_out_i_enable_matrix_integer_multiplier : std_logic;
+  signal data_out_j_enable_matrix_integer_multiplier : std_logic;
 
   -- DATA
-  signal size_i_in_matrix_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_integer_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_integer_multiplier : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_matrix_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal overflow_out_matrix_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_integer_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_matrix_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -247,7 +247,7 @@ begin
   end process;
 
   -- MATRIX ADDER
-  matrix_adder : ntm_matrix_adder
+  matrix_integer_adder : ntm_matrix_integer_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -258,31 +258,31 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_adder,
-      READY => ready_matrix_adder,
+      START => start_matrix_integer_adder,
+      READY => ready_matrix_integer_adder,
 
-      OPERATION => operation_matrix_adder,
+      OPERATION => operation_matrix_integer_adder,
 
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_adder,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_adder,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_adder,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_adder,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_integer_adder,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_integer_adder,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_integer_adder,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_integer_adder,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_adder,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_adder,
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_integer_adder,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_integer_adder,
 
       -- DATA
-      SIZE_I_IN => size_i_in_matrix_adder,
-      SIZE_J_IN => size_j_in_matrix_adder,
-      DATA_A_IN => data_a_in_matrix_adder,
-      DATA_B_IN => data_b_in_matrix_adder,
+      SIZE_I_IN => size_i_in_matrix_integer_adder,
+      SIZE_J_IN => size_j_in_matrix_integer_adder,
+      DATA_A_IN => data_a_in_matrix_integer_adder,
+      DATA_B_IN => data_b_in_matrix_integer_adder,
 
-      DATA_OUT     => data_out_matrix_adder,
-      OVERFLOW_OUT => overflow_out_matrix_adder
+      DATA_OUT     => data_out_matrix_integer_adder,
+      OVERFLOW_OUT => overflow_out_matrix_integer_adder
       );
 
   -- MATRIX MULTIPLIER
-  matrix_multiplier : ntm_matrix_multiplier
+  matrix_integer_multiplier : ntm_matrix_integer_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -293,25 +293,25 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_multiplier,
-      READY => ready_matrix_multiplier,
+      START => start_matrix_integer_multiplier,
+      READY => ready_matrix_integer_multiplier,
 
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_multiplier,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_multiplier,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_multiplier,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_multiplier,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_integer_multiplier,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_integer_multiplier,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_integer_multiplier,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_integer_multiplier,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_multiplier,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_multiplier,
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_integer_multiplier,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_integer_multiplier,
 
       -- DATA
-      SIZE_I_IN => size_i_in_matrix_multiplier,
-      SIZE_J_IN => size_j_in_matrix_multiplier,
-      DATA_A_IN => data_a_in_matrix_multiplier,
-      DATA_B_IN => data_b_in_matrix_multiplier,
+      SIZE_I_IN => size_i_in_matrix_integer_multiplier,
+      SIZE_J_IN => size_j_in_matrix_integer_multiplier,
+      DATA_A_IN => data_a_in_matrix_integer_multiplier,
+      DATA_B_IN => data_b_in_matrix_integer_multiplier,
 
-      DATA_OUT     => data_out_matrix_multiplier,
-      OVERFLOW_OUT => overflow_out_matrix_multiplier
+      DATA_OUT     => data_out_matrix_integer_multiplier,
+      OVERFLOW_OUT => overflow_out_matrix_integer_multiplier
       );
 
 end architecture;

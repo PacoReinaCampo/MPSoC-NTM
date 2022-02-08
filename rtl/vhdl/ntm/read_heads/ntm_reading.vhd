@@ -126,33 +126,30 @@ architecture ntm_reading_architecture of ntm_reading is
   signal start_vector_summation : std_logic;
   signal ready_vector_summation : std_logic;
 
-  signal data_in_vector_enable_vector_summation : std_logic;
-  signal data_in_scalar_enable_vector_summation : std_logic;
+  signal data_in_enable_vector_summation : std_logic;
 
-  signal data_out_vector_enable_vector_summation : std_logic;
-  signal data_out_scalar_enable_vector_summation : std_logic;
+  signal data_out_enable_vector_summation : std_logic;
 
   -- DATA
-  signal size_in_vector_summation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR MULTIPLIER
   -- CONTROL
-  signal start_vector_multiplier : std_logic;
-  signal ready_vector_multiplier : std_logic;
+  signal start_vector_integer_multiplier : std_logic;
+  signal ready_vector_integer_multiplier : std_logic;
 
-  signal data_a_in_enable_vector_multiplier : std_logic;
-  signal data_b_in_enable_vector_multiplier : std_logic;
+  signal data_a_in_enable_vector_integer_multiplier : std_logic;
+  signal data_b_in_enable_vector_integer_multiplier : std_logic;
 
-  signal data_out_enable_vector_multiplier : std_logic;
+  signal data_out_enable_vector_integer_multiplier : std_logic;
 
   -- DATA
-  signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_integer_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_integer_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -191,20 +188,20 @@ begin
 
           if (START = '1') then
             -- Control Internal
-            start_vector_multiplier <= '1';
+            start_vector_integer_multiplier <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
           else
             -- Control Internal
-            start_vector_multiplier <= '0';
+            start_vector_integer_multiplier <= '0';
           end if;
 
         when INPUT_FIRST_STATE =>       -- STEP 1
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
 
-          if (data_out_enable_vector_multiplier = '1') then
+          if (data_out_enable_vector_integer_multiplier = '1') then
             -- Control Internal
             start_vector_summation <= '1';
 
@@ -212,14 +209,14 @@ begin
             controller_ctrl_fsm_int <= VECTOR_SUMMATION_STATE;
           else
             -- Control Internal
-            start_vector_multiplier <= '0';
+            start_vector_integer_multiplier <= '0';
           end if;
 
         when INPUT_SECOND_STATE =>      -- STEP 3
 
         when VECTOR_SUMMATION_STATE =>  -- STEP 4
 
-          if (data_out_vector_enable_vector_summation = '1') then
+          if (data_out_enable_vector_summation = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL)) then
               -- Control Outputs
               READY <= '1';
@@ -255,26 +252,24 @@ begin
   end process;
 
   -- VECTOR MULTIPLIER
-  data_a_in_enable_vector_multiplier <= M_IN_K_ENABLE;
-  data_b_in_enable_vector_multiplier <= M_IN_K_ENABLE;
+  data_a_in_enable_vector_integer_multiplier <= M_IN_K_ENABLE;
+  data_b_in_enable_vector_integer_multiplier <= M_IN_K_ENABLE;
 
   -- VECTOR SUMMATION
-  data_in_vector_enable_vector_summation <= data_out_enable_vector_multiplier;
-  data_in_scalar_enable_vector_summation <= M_IN_J_ENABLE;
+  data_in_enable_vector_summation <= data_out_enable_vector_integer_multiplier;
 
   -- DATA
   -- VECTOR MULTIPLIER
-  size_in_vector_multiplier   <= SIZE_W_IN;
-  data_a_in_vector_multiplier <= W_IN;
-  data_b_in_vector_multiplier <= M_IN;
+  size_in_vector_integer_multiplier   <= SIZE_W_IN;
+  data_a_in_vector_integer_multiplier <= W_IN;
+  data_b_in_vector_integer_multiplier <= M_IN;
 
   -- VECTOR SUMMATION
-  size_in_vector_summation   <= SIZE_W_IN;
   length_in_vector_summation <= SIZE_N_IN;
-  data_in_vector_summation   <= data_out_vector_multiplier;
+  data_in_vector_summation   <= data_out_vector_integer_multiplier;
 
   -- VECTOR SUMMATION
-  vector_summation_function : ntm_vector_summation_function
+  vector_summation : ntm_vector_summation
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -288,21 +283,18 @@ begin
       START => start_vector_summation,
       READY => ready_vector_summation,
 
-      DATA_IN_VECTOR_ENABLE => data_in_vector_enable_vector_summation,
-      DATA_IN_SCALAR_ENABLE => data_in_scalar_enable_vector_summation,
+      DATA_IN_ENABLE => data_in_enable_vector_summation,
 
-      DATA_OUT_VECTOR_ENABLE => data_out_vector_enable_vector_summation,
-      DATA_OUT_SCALAR_ENABLE => data_out_scalar_enable_vector_summation,
+      DATA_OUT_ENABLE => data_out_enable_vector_summation,
 
       -- DATA
-      SIZE_IN   => size_in_vector_summation,
       LENGTH_IN => length_in_vector_summation,
       DATA_IN   => data_in_vector_summation,
       DATA_OUT  => data_out_vector_summation
       );
 
   -- VECTOR MULTIPLIER
-  vector_multiplier : ntm_vector_multiplier
+  vector_integer_multiplier : ntm_vector_integer_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -313,19 +305,19 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_multiplier,
-      READY => ready_vector_multiplier,
+      START => start_vector_integer_multiplier,
+      READY => ready_vector_integer_multiplier,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplier,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplier,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_integer_multiplier,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_integer_multiplier,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
+      DATA_OUT_ENABLE => data_out_enable_vector_integer_multiplier,
 
       -- DATA
-      SIZE_IN   => size_in_vector_multiplier,
-      DATA_A_IN => data_a_in_vector_multiplier,
-      DATA_B_IN => data_b_in_vector_multiplier,
-      DATA_OUT  => data_out_vector_multiplier
+      SIZE_IN   => size_in_vector_integer_multiplier,
+      DATA_A_IN => data_a_in_vector_integer_multiplier,
+      DATA_B_IN => data_b_in_vector_integer_multiplier,
+      DATA_OUT  => data_out_vector_integer_multiplier
       );
 
 end architecture;

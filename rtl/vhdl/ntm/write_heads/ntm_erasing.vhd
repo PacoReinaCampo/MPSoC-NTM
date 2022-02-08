@@ -131,37 +131,37 @@ architecture ntm_erasing_architecture of ntm_erasing is
 
   -- VECTOR ADDER
   -- CONTROL
-  signal start_vector_adder : std_logic;
-  signal ready_vector_adder : std_logic;
+  signal start_vector_integer_adder : std_logic;
+  signal ready_vector_integer_adder : std_logic;
 
-  signal operation_vector_adder : std_logic;
+  signal operation_vector_integer_adder : std_logic;
 
-  signal data_a_in_enable_vector_adder : std_logic;
-  signal data_b_in_enable_vector_adder : std_logic;
+  signal data_a_in_enable_vector_integer_adder : std_logic;
+  signal data_b_in_enable_vector_integer_adder : std_logic;
 
-  signal data_out_enable_vector_adder : std_logic;
+  signal data_out_enable_vector_integer_adder : std_logic;
 
   -- DATA
-  signal size_in_vector_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_integer_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_integer_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR MULTIPLIER
   -- CONTROL
-  signal start_vector_multiplier : std_logic;
-  signal ready_vector_multiplier : std_logic;
+  signal start_vector_integer_multiplier : std_logic;
+  signal ready_vector_integer_multiplier : std_logic;
 
-  signal data_a_in_enable_vector_multiplier : std_logic;
-  signal data_b_in_enable_vector_multiplier : std_logic;
+  signal data_a_in_enable_vector_integer_multiplier : std_logic;
+  signal data_b_in_enable_vector_integer_multiplier : std_logic;
 
-  signal data_out_enable_vector_multiplier : std_logic;
+  signal data_out_enable_vector_integer_multiplier : std_logic;
 
   -- DATA
-  signal size_in_vector_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_integer_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_integer_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX PRODUCT
   -- CONTROL
@@ -172,6 +172,9 @@ architecture ntm_erasing_architecture of ntm_erasing is
   signal data_a_in_j_enable_matrix_product : std_logic;
   signal data_b_in_i_enable_matrix_product : std_logic;
   signal data_b_in_j_enable_matrix_product : std_logic;
+
+  signal data_i_enable_matrix_product : std_logic;
+  signal data_j_enable_matrix_product : std_logic;
 
   signal data_out_i_enable_matrix_product : std_logic;
   signal data_out_j_enable_matrix_product : std_logic;
@@ -226,35 +229,35 @@ begin
 
           if (START = '1') then
             -- Control Internal
-            start_vector_multiplier <= '1';
+            start_vector_integer_multiplier <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
           else
             -- Control Internal
-            start_vector_multiplier <= '0';
+            start_vector_integer_multiplier <= '0';
           end if;
 
         when INPUT_FIRST_STATE =>       -- STEP 1
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
 
-          if (data_out_enable_vector_multiplier = '1') then
+          if (data_out_enable_vector_integer_multiplier = '1') then
             -- Control Internal
-            start_vector_adder <= '1';
+            start_vector_integer_adder <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
           else
             -- Control Internal
-            start_vector_multiplier <= '0';
+            start_vector_integer_multiplier <= '0';
           end if;
 
         when INPUT_SECOND_STATE =>      -- STEP 3
 
         when VECTOR_ADDER_STATE =>      -- STEP 4
 
-          if (data_out_enable_vector_adder = '1') then
+          if (data_out_enable_vector_integer_adder = '1') then
             -- Control Internal
             start_matrix_product <= '1';
 
@@ -262,7 +265,7 @@ begin
             controller_ctrl_fsm_int <= MATRIX_PRODUCT_I_STATE;
           else
             -- Control Internal
-            start_vector_adder <= '0';
+            start_vector_integer_adder <= '0';
           end if;
 
         when INPUT_I_THIRD_STATE =>     -- STEP 5
@@ -282,7 +285,7 @@ begin
             end if;
 
             -- Data Outputs
-            M_OUT <= data_out_vector_adder;
+            M_OUT <= data_out_vector_integer_adder;
 
             -- Control Outputs
             M_OUT_J_ENABLE <= '1';
@@ -309,7 +312,7 @@ begin
             end if;
 
             -- Data Outputs
-            M_OUT <= data_out_vector_adder;
+            M_OUT <= data_out_vector_integer_adder;
 
             -- Control Outputs
             M_OUT_K_ENABLE <= '1';
@@ -329,14 +332,14 @@ begin
   end process;
 
   -- VECTOR MULTIPLIER
-  data_a_in_enable_vector_multiplier <= '0';
-  data_b_in_enable_vector_multiplier <= '0';
+  data_a_in_enable_vector_integer_multiplier <= '0';
+  data_b_in_enable_vector_integer_multiplier <= '0';
 
   -- VECTOR ADDER
-  operation_vector_adder <= '0';
+  operation_vector_integer_adder <= '0';
 
-  data_a_in_enable_vector_adder <= '0';
-  data_b_in_enable_vector_adder <= '0';
+  data_a_in_enable_vector_integer_adder <= '0';
+  data_b_in_enable_vector_integer_adder <= '0';
 
   -- MATRIX PRODUCT
   data_a_in_i_enable_matrix_product <= '0';
@@ -346,14 +349,14 @@ begin
 
   -- DATA
   -- VECTOR MULTIPLIER
-  size_in_vector_multiplier   <= SIZE_W_IN;
-  data_a_in_vector_multiplier <= W_IN;
-  data_b_in_vector_multiplier <= E_IN;
+  size_in_vector_integer_multiplier   <= SIZE_W_IN;
+  data_a_in_vector_integer_multiplier <= W_IN;
+  data_b_in_vector_integer_multiplier <= E_IN;
 
   -- VECTOR ADDER
-  size_in_vector_adder   <= SIZE_W_IN;
-  data_a_in_vector_adder <= ONE_DATA;
-  data_b_in_vector_adder <= data_out_vector_adder;
+  size_in_vector_integer_adder   <= SIZE_W_IN;
+  data_a_in_vector_integer_adder <= ONE_DATA;
+  data_b_in_vector_integer_adder <= data_out_vector_integer_adder;
 
   -- MATRIX PRODUCT
   size_a_i_in_matrix_product <= SIZE_N_IN;
@@ -361,10 +364,10 @@ begin
   size_b_i_in_matrix_product <= SIZE_W_IN;
   size_b_j_in_matrix_product <= ONE_DATA;
   data_a_in_matrix_product   <= M_IN;
-  data_b_in_matrix_product   <= data_out_vector_multiplier;
+  data_b_in_matrix_product   <= data_out_vector_integer_multiplier;
 
   -- VECTOR ADDER
-  vector_adder : ntm_vector_adder
+  vector_integer_adder : ntm_vector_integer_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -375,25 +378,25 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_adder,
-      READY => ready_vector_adder,
+      START => start_vector_integer_adder,
+      READY => ready_vector_integer_adder,
 
-      OPERATION => operation_vector_adder,
+      OPERATION => operation_vector_integer_adder,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_adder,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_adder,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_integer_adder,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_integer_adder,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_adder,
+      DATA_OUT_ENABLE => data_out_enable_vector_integer_adder,
 
       -- DATA
-      SIZE_IN   => size_in_vector_adder,
-      DATA_A_IN => data_a_in_vector_adder,
-      DATA_B_IN => data_b_in_vector_adder,
-      DATA_OUT  => data_out_vector_adder
+      SIZE_IN   => size_in_vector_integer_adder,
+      DATA_A_IN => data_a_in_vector_integer_adder,
+      DATA_B_IN => data_b_in_vector_integer_adder,
+      DATA_OUT  => data_out_vector_integer_adder
       );
 
   -- VECTOR MULTIPLIER
-  vector_multiplier : ntm_vector_multiplier
+  vector_integer_multiplier : ntm_vector_integer_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -404,19 +407,19 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_multiplier,
-      READY => ready_vector_multiplier,
+      START => start_vector_integer_multiplier,
+      READY => ready_vector_integer_multiplier,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_multiplier,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_multiplier,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_integer_multiplier,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_integer_multiplier,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_multiplier,
+      DATA_OUT_ENABLE => data_out_enable_vector_integer_multiplier,
 
       -- DATA
-      SIZE_IN   => size_in_vector_multiplier,
-      DATA_A_IN => data_a_in_vector_multiplier,
-      DATA_B_IN => data_b_in_vector_multiplier,
-      DATA_OUT  => data_out_vector_multiplier
+      SIZE_IN   => size_in_vector_integer_multiplier,
+      DATA_A_IN => data_a_in_vector_integer_multiplier,
+      DATA_B_IN => data_b_in_vector_integer_multiplier,
+      DATA_OUT  => data_out_vector_integer_multiplier
       );
 
   -- MATRIX PRODUCT
@@ -438,6 +441,9 @@ begin
       DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
       DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
       DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
+
+      DATA_I_ENABLE => data_i_enable_matrix_product,
+      DATA_J_ENABLE => data_j_enable_matrix_product,
 
       DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
