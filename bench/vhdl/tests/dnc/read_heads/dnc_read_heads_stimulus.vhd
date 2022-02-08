@@ -339,7 +339,8 @@ begin
 
       wait for WORKING;
 
-    end if;    if (STIMULUS_DNC_READ_KEYS_TEST) then
+    end if;
+    if (STIMULUS_DNC_READ_KEYS_TEST) then
 
       -------------------------------------------------------------------
       MONITOR_TEST <= "STIMULUS_DNC_READ_KEYS_TEST             ";

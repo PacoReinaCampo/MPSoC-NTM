@@ -51,39 +51,10 @@ use osvvm.CoveragePkg.all;
 entity ntm_intro_testbench is
 end entity ntm_intro_testbench;
 
+use work.ntm_intro_model_pkg.all;
+use work.ntm_intro_pkg.all;
+
 architecture ntm_intro_testbench_architecture of ntm_intro_testbench is
-
-  -----------------------------------------------------------------------
-  -- Components
-  -----------------------------------------------------------------------
-
-  component ntm_intro_adder_model is
-    generic (
-      DATA_SIZE : positive := 4
-      );
-    port (
-      RST : in std_logic;
-      CLK : in std_logic;
-
-      DATA_A_IN : in  unsigned(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  unsigned(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out unsigned(DATA_SIZE downto 0)
-      );
-  end component ntm_intro_adder_model;
-
-  component ntm_intro_adder is
-    generic (
-      DATA_SIZE : positive := 4
-      );
-    port (
-      RST : in std_logic;
-      CLK : in std_logic;
-
-      DATA_A_IN : in  unsigned(DATA_SIZE-1 downto 0);
-      DATA_B_IN : in  unsigned(DATA_SIZE-1 downto 0);
-      DATA_OUT  : out unsigned(DATA_SIZE downto 0)
-      );
-  end component ntm_intro_adder;
 
   -----------------------------------------------------------------------
   -- Constants

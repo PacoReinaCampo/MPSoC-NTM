@@ -191,7 +191,7 @@ begin
           if ((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) then
             -- Data Inputs
             matrix_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
-            
+
             if (unsigned(index_i_loop) = unsigned(index_j_loop)) then
               matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= ONE_DATA;
             else
@@ -211,7 +211,7 @@ begin
           if (DATA_IN_J_ENABLE = '1') then
             -- Data Inputs
             matrix_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
-            
+
             if (unsigned(index_i_loop) = unsigned(index_j_loop)) then
               matrix_out_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= ONE_DATA;
             else

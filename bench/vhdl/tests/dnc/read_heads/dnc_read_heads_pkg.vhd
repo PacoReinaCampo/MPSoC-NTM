@@ -121,15 +121,15 @@ package dnc_read_heads_pkg is
   signal STIMULUS_DNC_FREE_GATES_TEST   : boolean := false;
   signal STIMULUS_DNC_FREE_GATES_CASE_0 : boolean := false;
   signal STIMULUS_DNC_FREE_GATES_CASE_1 : boolean := false;
-    
+
   signal STIMULUS_DNC_READ_KEYS_TEST   : boolean := false;
   signal STIMULUS_DNC_READ_KEYS_CASE_0 : boolean := false;
   signal STIMULUS_DNC_READ_KEYS_CASE_1 : boolean := false;
-    
+
   signal STIMULUS_DNC_READ_MODES_TEST   : boolean := false;
   signal STIMULUS_DNC_READ_MODES_CASE_0 : boolean := false;
   signal STIMULUS_DNC_READ_MODES_CASE_1 : boolean := false;
-    
+
   signal STIMULUS_DNC_READ_STRENGTHS_TEST   : boolean := false;
   signal STIMULUS_DNC_READ_STRENGTHS_CASE_0 : boolean := false;
   signal STIMULUS_DNC_READ_STRENGTHS_CASE_1 : boolean := false;

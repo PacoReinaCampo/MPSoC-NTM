@@ -1,6 +1,9 @@
 @echo off
 call ../../../../../../settings64_ghdl.bat
 
+ghdl -a --std=08 ../../../../../../rtl/vhdl/pkg/ntm_intro_pkg.vhd
+ghdl -a --std=08 ../../../../../../bench/vhdl/osvvm/intro/ntm_intro_model_pkg.vhd
+
 ghdl -a --std=08 ../../../../../../rtl/vhdl/intro/ntm_intro_adder.vhd
 
 ghdl -a --std=08 ../../../../../../bench/vhdl/model/intro/ntm_intro_adder_model.vhd

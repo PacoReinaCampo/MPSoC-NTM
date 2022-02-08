@@ -169,7 +169,7 @@ architecture dnc_content_based_addressing_architecture of dnc_content_based_addr
   signal data_out_enable_vector_cosine_similarity : std_logic;
 
   -- DATA
-  signal length_in_vector_cosine_similarity   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_cosine_similarity : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal data_a_in_vector_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_cosine_similarity : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_cosine_similarity  : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -327,7 +327,7 @@ begin
 
   -- DATA
   -- VECTOR COSINE SIMILARITY
-  length_in_vector_cosine_similarity   <= SIZE_I_IN;
+  length_in_vector_cosine_similarity <= SIZE_I_IN;
   data_a_in_vector_cosine_similarity <= K_IN;
   data_b_in_vector_cosine_similarity <= M_IN;
 
@@ -341,8 +341,8 @@ begin
   data_in_vector_exponentiator_function <= data_out_vector_integer_multiplier;
 
   -- VECTOR SOFTMAX
-  size_in_vector_softmax   <= SIZE_I_IN;
-  data_in_vector_softmax   <= data_out_vector_exponentiator_function;
+  size_in_vector_softmax <= SIZE_I_IN;
+  data_in_vector_softmax <= data_out_vector_exponentiator_function;
 
   -- VECTOR MULTIPLIER
   vecto_integer_multiplier : ntm_vector_integer_multiplier

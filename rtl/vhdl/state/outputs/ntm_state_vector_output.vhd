@@ -421,7 +421,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case output_ctrl_fsm_int is
-        when STARTER_STATE =>                  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -434,25 +434,25 @@ begin
             output_ctrl_fsm_int <= INPUT_FIRST_I_STATE;
           end if;
 
-        when INPUT_FIRST_I_STATE =>            -- STEP 1 D,K
+        when INPUT_FIRST_I_STATE =>     -- STEP 1 D,K
 
-        when INPUT_FIRST_J_STATE =>            -- STEP 2 D,K
+        when INPUT_FIRST_J_STATE =>     -- STEP 2 D,K
 
-        when MATRIX_FIRST_PRODUCT_I_STATE =>   -- STEP 3 (D·K)
+        when MATRIX_FIRST_PRODUCT_I_STATE =>  -- STEP 3 (D·K)
 
-        when MATRIX_FIRST_PRODUCT_J_STATE =>   -- STEP 4 (D·K)
+        when MATRIX_FIRST_PRODUCT_J_STATE =>  -- STEP 4 (D·K)
 
-        when MATRIX_ADDER_I_STATE =>           -- STEP 5 (I+D·K)
+        when MATRIX_ADDER_I_STATE =>    -- STEP 5 (I+D·K)
 
-        when MATRIX_ADDER_J_STATE =>           -- STEP 6 (I+D·K)
+        when MATRIX_ADDER_J_STATE =>    -- STEP 6 (I+D·K)
 
-        when MATRIX_INVERSE_I_STATE =>         -- STEP 7 inv(I+D·K)
+        when MATRIX_INVERSE_I_STATE =>  -- STEP 7 inv(I+D·K)
 
-        when MATRIX_INVERSE_J_STATE =>         -- STEP 8 inv(I+D·K)
+        when MATRIX_INVERSE_J_STATE =>  -- STEP 8 inv(I+D·K)
 
-        when INPUT_SECOND_I_STATE =>           -- STEP 9 C
+        when INPUT_SECOND_I_STATE =>    -- STEP 9 C
 
-        when INPUT_SECOND_J_STATE =>           -- STEP 10 C
+        when INPUT_SECOND_J_STATE =>    -- STEP 10 C
 
         when MATRIX_SECOND_PRODUCT_I_STATE =>  -- STEP 11 inv(I+D·K)·C
 

@@ -121,23 +121,23 @@ package dnc_write_heads_pkg is
   signal STIMULUS_DNC_ALLOCATION_GATE_TEST   : boolean := false;
   signal STIMULUS_DNC_ALLOCATION_GATE_CASE_0 : boolean := false;
   signal STIMULUS_DNC_ALLOCATION_GATE_CASE_1 : boolean := false;
-    
+
   signal STIMULUS_DNC_ERASE_VECTOR_TEST   : boolean := false;
   signal STIMULUS_DNC_ERASE_VECTOR_CASE_0 : boolean := false;
   signal STIMULUS_DNC_ERASE_VECTOR_CASE_1 : boolean := false;
-    
+
   signal STIMULUS_DNC_WRITE_GATE_TEST   : boolean := false;
   signal STIMULUS_DNC_WRITE_GATE_CASE_0 : boolean := false;
   signal STIMULUS_DNC_WRITE_GATE_CASE_1 : boolean := false;
-    
+
   signal STIMULUS_DNC_WRITE_KEY_TEST   : boolean := false;
   signal STIMULUS_DNC_WRITE_KEY_CASE_0 : boolean := false;
   signal STIMULUS_DNC_WRITE_KEY_CASE_1 : boolean := false;
-    
+
   signal STIMULUS_DNC_WRITE_STRENGTH_TEST   : boolean := false;
   signal STIMULUS_DNC_WRITE_STRENGTH_CASE_0 : boolean := false;
   signal STIMULUS_DNC_WRITE_STRENGTH_CASE_1 : boolean := false;
-    
+
   signal STIMULUS_DNC_WRITE_VECTOR_TEST   : boolean := false;
   signal STIMULUS_DNC_WRITE_VECTOR_CASE_0 : boolean := false;
   signal STIMULUS_DNC_WRITE_VECTOR_CASE_1 : boolean := false;

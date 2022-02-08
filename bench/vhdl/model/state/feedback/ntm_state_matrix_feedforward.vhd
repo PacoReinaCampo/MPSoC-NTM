@@ -236,7 +236,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case feedforward_ctrl_fsm_int is
-        when STARTER_STATE =>                  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -249,7 +249,7 @@ begin
             feedforward_ctrl_fsm_int <= INPUT_FIRST_I_STATE;
           end if;
 
-        when INPUT_FIRST_I_STATE =>            -- STEP 1 D,K
+        when INPUT_FIRST_I_STATE =>     -- STEP 1 D,K
 
           if ((DATA_D_IN_I_ENABLE = '1') and (DATA_D_IN_J_ENABLE = '1')) then
             -- Data Inputs
@@ -301,7 +301,7 @@ begin
             feedforward_ctrl_fsm_int <= MATRIX_FIRST_PRODUCT_J_STATE;
           end if;
 
-        when INPUT_FIRST_J_STATE =>            -- STEP 2 D,K
+        when INPUT_FIRST_J_STATE =>     -- STEP 2 D,K
 
           if (DATA_D_IN_J_ENABLE = '1') then
             -- Data Inputs
@@ -347,7 +347,7 @@ begin
             end if;
           end if;
 
-        when MATRIX_FIRST_PRODUCT_I_STATE =>   -- STEP 3 (D·K)
+        when MATRIX_FIRST_PRODUCT_I_STATE =>  -- STEP 3 (D·K)
 
           if (data_out_i_enable_matrix_product = '1') then
             -- Data Outputs
@@ -366,7 +366,7 @@ begin
             feedforward_ctrl_fsm_int <= MATRIX_ADDER_J_STATE;
           end if;
 
-        when MATRIX_FIRST_PRODUCT_J_STATE =>   -- STEP 4 (D·K)
+        when MATRIX_FIRST_PRODUCT_J_STATE =>  -- STEP 4 (D·K)
 
           if (data_out_j_enable_matrix_product = '1') then
             -- Data Outputs
@@ -387,13 +387,13 @@ begin
             end if;
           end if;
 
-        when MATRIX_ADDER_I_STATE =>           -- STEP 5 (I+D·K)
+        when MATRIX_ADDER_I_STATE =>    -- STEP 5 (I+D·K)
 
-        when MATRIX_ADDER_J_STATE =>           -- STEP 6 (I+D·K)
+        when MATRIX_ADDER_J_STATE =>    -- STEP 6 (I+D·K)
 
-        when MATRIX_INVERSE_I_STATE =>         -- STEP 7 inv(I+D·K)
+        when MATRIX_INVERSE_I_STATE =>  -- STEP 7 inv(I+D·K)
 
-        when MATRIX_INVERSE_J_STATE =>         -- STEP 8 inv(I+D·K)
+        when MATRIX_INVERSE_J_STATE =>  -- STEP 8 inv(I+D·K)
 
         when MATRIX_SECOND_PRODUCT_I_STATE =>  -- STEP 9 inv(I+D·K)·D
 

@@ -61,23 +61,23 @@ entity dnc_write_heads_testbench is
     ENABLE_DNC_ALLOCATION_GATE_TEST   : boolean := false;
     ENABLE_DNC_ALLOCATION_GATE_CASE_0 : boolean := false;
     ENABLE_DNC_ALLOCATION_GATE_CASE_1 : boolean := false;
-    
+
     ENABLE_DNC_ERASE_VECTOR_TEST   : boolean := false;
     ENABLE_DNC_ERASE_VECTOR_CASE_0 : boolean := false;
     ENABLE_DNC_ERASE_VECTOR_CASE_1 : boolean := false;
-    
+
     ENABLE_DNC_WRITE_GATE_TEST   : boolean := false;
     ENABLE_DNC_WRITE_GATE_CASE_0 : boolean := false;
     ENABLE_DNC_WRITE_GATE_CASE_1 : boolean := false;
-    
+
     ENABLE_DNC_WRITE_KEY_TEST   : boolean := false;
     ENABLE_DNC_WRITE_KEY_CASE_0 : boolean := false;
     ENABLE_DNC_WRITE_KEY_CASE_1 : boolean := false;
-    
+
     ENABLE_DNC_WRITE_STRENGTH_TEST   : boolean := false;
     ENABLE_DNC_WRITE_STRENGTH_CASE_0 : boolean := false;
     ENABLE_DNC_WRITE_STRENGTH_CASE_1 : boolean := false;
-    
+
     ENABLE_DNC_WRITE_VECTOR_TEST   : boolean := false;
     ENABLE_DNC_WRITE_VECTOR_CASE_0 : boolean := false;
     ENABLE_DNC_WRITE_VECTOR_CASE_1 : boolean := false

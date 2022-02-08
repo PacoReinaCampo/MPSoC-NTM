@@ -252,7 +252,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case input_ctrl_fsm_int is
-        when STARTER_STATE =>                  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -265,37 +265,37 @@ begin
             input_ctrl_fsm_int <= INPUT_FIRST_I_STATE;
           end if;
 
-        when INPUT_FIRST_I_STATE =>            -- STEP 1 D,K
+        when INPUT_FIRST_I_STATE =>     -- STEP 1 D,K
 
-        when INPUT_FIRST_J_STATE =>            -- STEP 2 D,K
+        when INPUT_FIRST_J_STATE =>     -- STEP 2 D,K
 
-        when MATRIX_FIRST_PRODUCT_I_STATE =>   -- STEP 3 (D·K)
+        when MATRIX_FIRST_PRODUCT_I_STATE =>  -- STEP 3 (D·K)
 
-        when MATRIX_FIRST_PRODUCT_J_STATE =>   -- STEP 4 (D·K)
+        when MATRIX_FIRST_PRODUCT_J_STATE =>  -- STEP 4 (D·K)
 
-        when MATRIX_FIRST_ADDER_I_STATE =>     -- STEP 5 (I+DK)
+        when MATRIX_FIRST_ADDER_I_STATE =>  -- STEP 5 (I+DK)
 
-        when MATRIX_FIRST_ADDER_J_STATE =>     -- STEP 6 (I+DK)
+        when MATRIX_FIRST_ADDER_J_STATE =>  -- STEP 6 (I+DK)
 
-        when MATRIX_INVERSE_I_STATE =>         -- STEP 7 inv(I+DK)
+        when MATRIX_INVERSE_I_STATE =>  -- STEP 7 inv(I+DK)
 
-        when MATRIX_INVERSE_J_STATE =>         -- STEP 8 inv(I+DK)
+        when MATRIX_INVERSE_J_STATE =>  -- STEP 8 inv(I+DK)
 
         when MATRIX_SECOND_PRODUCT_I_STATE =>  -- STEP 9 K·inv(I+DK)
 
         when MATRIX_SECOND_PRODUCT_J_STATE =>  -- STEP 10 K·inv(I+DK)
 
-        when MATRIX_THIRD_PRODUCT_I_STATE =>   -- STEP 11 K·inv(I+DK)·D
+        when MATRIX_THIRD_PRODUCT_I_STATE =>  -- STEP 11 K·inv(I+DK)·D
 
-        when MATRIX_THIRD_PRODUCT_J_STATE =>   -- STEP 12 K·inv(I+DK)·D
+        when MATRIX_THIRD_PRODUCT_J_STATE =>  -- STEP 12 K·inv(I+DK)·D
 
-        when MATRIX_SECOND_ADDER_I_STATE =>    -- STEP 13 I-K·inv(I+DK)·D
+        when MATRIX_SECOND_ADDER_I_STATE =>  -- STEP 13 I-K·inv(I+DK)·D
 
-        when MATRIX_SECOND_ADDER_J_STATE =>    -- STEP 14 I-K·inv(I+DK)·D
+        when MATRIX_SECOND_ADDER_J_STATE =>  -- STEP 14 I-K·inv(I+DK)·D
 
-        when INPUT_SECOND_I_STATE =>           -- STEP 15 B
+        when INPUT_SECOND_I_STATE =>    -- STEP 15 B
 
-        when INPUT_SECOND_J_STATE =>           -- STEP 16 B
+        when INPUT_SECOND_J_STATE =>    -- STEP 16 B
 
         when MATRIX_FOURTH_PRODUCT_I_STATE =>  -- STEP 17 B·(I-K·inv(I+D·K)·D)
 

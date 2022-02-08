@@ -493,7 +493,7 @@ begin
             data_b_in_j_enable_matrix_product <= '0';
           end if;
 
-        when MATRIX_SECOND_ADDER_I_STATE =>    -- STEP 11
+        when MATRIX_SECOND_ADDER_I_STATE =>  -- STEP 11
 
           if (data_out_i_enable_matrix_integer_adder = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_Y_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_R_IN))) then
@@ -518,7 +518,7 @@ begin
             data_b_in_i_enable_matrix_product <= '0';
           end if;
 
-        when MATRIX_SECOND_ADDER_J_STATE =>    -- STEP 12
+        when MATRIX_SECOND_ADDER_J_STATE =>  -- STEP 12
 
           if (data_out_j_enable_matrix_integer_adder = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_Y_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_R_IN))) then

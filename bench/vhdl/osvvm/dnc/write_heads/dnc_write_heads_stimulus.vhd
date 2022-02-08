@@ -403,7 +403,7 @@ begin
       end if;
 
       wait for WORKING;
-    
+
     end if;
 
     if (STIMULUS_DNC_WRITE_KEY_TEST) then

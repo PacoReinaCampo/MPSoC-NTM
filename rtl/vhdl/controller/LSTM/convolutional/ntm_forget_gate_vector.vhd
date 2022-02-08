@@ -209,9 +209,9 @@ architecture ntm_forget_gate_vector_architecture of ntm_forget_gate_vector is
   signal size_b_i_in_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal size_b_j_in_matrix_convolution : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  signal data_a_in_matrix_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_convolution   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_convolution    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_convolution : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_convolution  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR LOGISTIC
   -- CONTROL
@@ -538,9 +538,9 @@ begin
       SIZE_B_I_IN => size_b_i_in_matrix_convolution,
       SIZE_B_J_IN => size_b_j_in_matrix_convolution,
 
-      DATA_A_IN   => data_a_in_matrix_convolution,
-      DATA_B_IN   => data_b_in_matrix_convolution,
-      DATA_OUT    => data_out_matrix_convolution
+      DATA_A_IN => data_a_in_matrix_convolution,
+      DATA_B_IN => data_b_in_matrix_convolution,
+      DATA_OUT  => data_out_matrix_convolution
       );
 
   -- VECTOR LOGISTIC
