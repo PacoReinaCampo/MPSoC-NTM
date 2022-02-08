@@ -937,6 +937,8 @@ package dnc_core_pkg is
 
       V_IN_ENABLE : in std_logic;       -- for k in 0 to W-1
 
+      V_ENABLE : out std_logic;         -- for k in 0 to W-1
+
       V_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
 
       -- DATA

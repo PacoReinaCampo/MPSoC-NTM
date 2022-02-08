@@ -132,6 +132,8 @@ entity dnc_write_heads_stimulus is
 
     DNC_WRITE_VECTOR_V_IN_ENABLE : out std_logic;
 
+    DNC_WRITE_VECTOR_V_ENABLE : in std_logic;
+
     DNC_WRITE_VECTOR_V_OUT_ENABLE : in std_logic;
 
     -- DATA
@@ -560,7 +562,7 @@ begin
         index_i_loop <= ZERO_CONTROL;
 
         WRITE_VECTOR_FIRST_RUN : loop
-          if (DNC_WRITE_VECTOR_V_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(DNC_WRITE_VECTOR_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+          if (DNC_WRITE_VECTOR_V_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(DNC_WRITE_VECTOR_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             DNC_WRITE_VECTOR_V_IN_ENABLE <= '1';
 
@@ -569,7 +571,7 @@ begin
 
             -- LOOP
             index_i_loop <= ZERO_CONTROL;
-          elsif ((DNC_WRITE_VECTOR_V_OUT_ENABLE = '1' or DNC_WRITE_VECTOR_START = '1') and (unsigned(index_i_loop) < unsigned(DNC_WRITE_VECTOR_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
+          elsif ((DNC_WRITE_VECTOR_V_ENABLE = '1' or DNC_WRITE_VECTOR_START = '1') and (unsigned(index_i_loop) < unsigned(DNC_WRITE_VECTOR_SIZE_W_IN)-unsigned(ONE_CONTROL))) then
             -- CONTROL
             DNC_WRITE_VECTOR_V_IN_ENABLE <= '1';
 

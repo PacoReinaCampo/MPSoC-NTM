@@ -20,7 +20,7 @@ add wave -noupdate /ntm_algebra_testbench/ntm_vector_module_test/vector_module/R
 add wave -noupdate /ntm_algebra_testbench/ntm_vector_module_test/vector_module/DATA_OUT_ENABLE
 add wave -noupdate /ntm_algebra_testbench/ntm_vector_module_test/vector_module/DATA_OUT
 
-add wave -noupdate /ntm_algebra_testbench/ntm_vector_module_test/vector_module/transpose_ctrl_fsm_int
+add wave -noupdate /ntm_algebra_testbench/ntm_vector_module_test/vector_module/module_ctrl_fsm_int
 
 add wave -noupdate /ntm_algebra_testbench/ntm_vector_module_test/vector_module/index_loop
 

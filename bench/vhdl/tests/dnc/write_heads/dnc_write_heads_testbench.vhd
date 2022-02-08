@@ -158,6 +158,8 @@ architecture dnc_write_heads_testbench_architecture of dnc_write_heads_testbench
 
   signal v_in_enable_write_vector : std_logic;
 
+  signal v_enable_write_vector : std_logic;
+
   signal v_out_enable_write_vector : std_logic;
 
   -- DATA
@@ -259,6 +261,8 @@ begin
       DNC_WRITE_VECTOR_READY => ready_write_vector,
 
       DNC_WRITE_VECTOR_V_IN_ENABLE => v_in_enable_write_vector,
+
+      DNC_WRITE_VECTOR_V_ENABLE => v_enable_write_vector,
 
       DNC_WRITE_VECTOR_V_OUT_ENABLE => v_out_enable_write_vector,
 
@@ -414,6 +418,8 @@ begin
         READY => ready_write_vector,
 
         V_IN_ENABLE => v_in_enable_write_vector,
+
+        V_ENABLE => v_enable_write_vector,
 
         V_OUT_ENABLE => v_out_enable_write_vector,
 
