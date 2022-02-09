@@ -196,6 +196,9 @@ architecture ntm_interface_vector_architecture of ntm_interface_vector is
   signal data_b_in_i_enable_matrix_product : std_logic;
   signal data_b_in_j_enable_matrix_product : std_logic;
 
+  signal data_i_enable_matrix_product : std_logic;
+  signal data_j_enable_matrix_product : std_logic;
+
   signal data_out_i_enable_matrix_product : std_logic;
   signal data_out_j_enable_matrix_product : std_logic;
 
@@ -384,7 +387,7 @@ begin
     end if;
   end process;
 
-  -- SCALAR PRODUCT
+  -- DOT PRODUCT
   dot_product : ntm_dot_product
     generic map (
       DATA_SIZE    => DATA_SIZE,
@@ -430,6 +433,9 @@ begin
       DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
       DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
       DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
+
+      DATA_I_ENABLE => data_i_enable_matrix_product,
+      DATA_J_ENABLE => data_j_enable_matrix_product,
 
       DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
       DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,

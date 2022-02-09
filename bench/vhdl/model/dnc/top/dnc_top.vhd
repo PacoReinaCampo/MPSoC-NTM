@@ -471,6 +471,8 @@ architecture dnc_top_architecture of dnc_top is
 
   signal k_in_enable_write_key : std_logic;
 
+  signal k_enable_write_key : std_logic;
+
   signal k_out_enable_write_key : std_logic;
 
   -- DATA
@@ -494,6 +496,8 @@ architecture dnc_top_architecture of dnc_top is
   signal ready_write_vector : std_logic;
 
   signal v_in_enable_write_vector : std_logic;
+
+  signal v_enable_write_vector : std_logic;
 
   signal v_out_enable_write_vector : std_logic;
 
@@ -1468,6 +1472,8 @@ begin
 
       K_IN_ENABLE => k_in_enable_write_key,
 
+      K_ENABLE => k_enable_write_key,
+
       K_OUT_ENABLE => k_out_enable_write_key,
 
       -- DATA
@@ -1515,6 +1521,8 @@ begin
       READY => ready_write_vector,
 
       V_IN_ENABLE => v_in_enable_write_vector,
+
+      V_ENABLE => v_enable_write_vector,
 
       V_OUT_ENABLE => v_out_enable_write_vector,
 

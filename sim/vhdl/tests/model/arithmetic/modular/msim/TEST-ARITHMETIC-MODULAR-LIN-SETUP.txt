@@ -1,0 +1,4 @@
+cd /home/usuario/github/MPSoC-NTM/sim/vhdl/tests/model/arithmetic/modular/msim
+
+do /home/usuario/github/MPSoC-NTM/sim/vhdl/tests/model/arithmetic/modular/msim/macros/design.do
+do /home/usuario/github/MPSoC-NTM/sim/vhdl/tests/model/arithmetic/modular/msim/macros/verification.do

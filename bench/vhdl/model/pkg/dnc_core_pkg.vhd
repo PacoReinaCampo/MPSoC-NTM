@@ -177,17 +177,15 @@ package dnc_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
+      L_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
       L_IN_G_ENABLE : in std_logic;     -- for g in 0 to N-1 (square matrix)
       L_IN_J_ENABLE : in std_logic;     -- for j in 0 to N-1 (square matrix)
-
-      L_OUT_G_ENABLE : out std_logic;   -- for g in 0 to N-1 (square matrix)
-      L_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1 (square matrix)
 
       W_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
       W_IN_J_ENABLE : in std_logic;     -- for j in 0 to N-1
 
-      W_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
-      W_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1
+      F_I_ENABLE : out std_logic;       -- for i in 0 to R-1 (read heads flow)
+      F_J_ENABLE : out std_logic;       -- for j in 0 to N-1
 
       F_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
       F_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1
@@ -731,6 +729,9 @@ package dnc_core_pkg is
       K_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
       K_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
+      K_I_ENABLE : out std_logic;       -- for i in 0 to R-1
+      K_K_ENABLE : out std_logic;       -- for k in 0 to W-1
+
       K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
       K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
@@ -889,6 +890,8 @@ package dnc_core_pkg is
 
       K_IN_ENABLE : in std_logic;       -- for k in 0 to W-1
 
+      K_ENABLE : out std_logic;         -- for k in 0 to W-1
+
       K_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
 
       -- DATA
@@ -936,6 +939,8 @@ package dnc_core_pkg is
       READY : out std_logic;
 
       V_IN_ENABLE : in std_logic;       -- for k in 0 to W-1
+
+      V_ENABLE : out std_logic;         -- for k in 0 to W-1
 
       V_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
 

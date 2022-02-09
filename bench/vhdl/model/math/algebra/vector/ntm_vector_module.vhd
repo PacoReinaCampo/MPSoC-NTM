@@ -78,7 +78,7 @@ architecture ntm_vector_module_architecture of ntm_vector_module is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  type transpose_ctrl_fsm is (
+  type module_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
     ENDER_STATE,                        -- STEP 3
@@ -113,7 +113,7 @@ architecture ntm_vector_module_architecture of ntm_vector_module is
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal transpose_ctrl_fsm_int : transpose_ctrl_fsm;
+  signal module_ctrl_fsm_int : module_ctrl_fsm;
 
   -- Buffer
   signal vector_int : vector_buffer;
@@ -127,7 +127,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- DATA_OUT = transpose(DATA_IN)
+  -- DATA_OUT = module(DATA_IN)
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -148,7 +148,7 @@ begin
 
     elsif (rising_edge(CLK)) then
 
-      case transpose_ctrl_fsm_int is
+      case module_ctrl_fsm_int is
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
@@ -165,7 +165,7 @@ begin
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            transpose_ctrl_fsm_int <= INPUT_STATE;
+            module_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
         when INPUT_STATE =>             -- STEP 2
@@ -175,7 +175,7 @@ begin
             vector_int(to_integer(unsigned(index_loop))) <= DATA_IN;
 
             -- FSM Control
-            transpose_ctrl_fsm_int <= ENDER_STATE;
+            module_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
           -- Control Outputs
@@ -188,7 +188,7 @@ begin
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            transpose_ctrl_fsm_int <= CLEAN_STATE;
+            module_ctrl_fsm_int <= CLEAN_STATE;
           else
             -- Control Internal
             index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
@@ -197,7 +197,7 @@ begin
             DATA_ENABLE <= '1';
 
             -- FSM Control
-            transpose_ctrl_fsm_int <= INPUT_STATE;
+            module_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
           -- Data Outputs
@@ -211,7 +211,7 @@ begin
           DATA_OUT_ENABLE <= '0';
 
           -- FSM Control
-          transpose_ctrl_fsm_int <= OPERATION_STATE;
+          module_ctrl_fsm_int <= OPERATION_STATE;
 
         when OPERATION_STATE =>         -- STEP 8
 
@@ -223,13 +223,13 @@ begin
             index_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            transpose_ctrl_fsm_int <= STARTER_STATE;
+            module_ctrl_fsm_int <= STARTER_STATE;
           else
             -- Control Internal
             index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
             -- FSM Control
-            transpose_ctrl_fsm_int <= CLEAN_STATE;
+            module_ctrl_fsm_int <= CLEAN_STATE;
           end if;
 
           -- Data Outputs
@@ -240,7 +240,7 @@ begin
 
         when others =>
           -- FSM Control
-          transpose_ctrl_fsm_int <= STARTER_STATE;
+          module_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;

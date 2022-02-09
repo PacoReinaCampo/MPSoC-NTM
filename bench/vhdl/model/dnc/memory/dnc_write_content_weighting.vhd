@@ -176,7 +176,7 @@ begin
   C_OUT <= c_out_vector_content_based_addressing;
 
   -- VECTOR CONTENT BASED ADDRESSING
-  dnc_content_based_addressing_i : dnc_content_based_addressing
+  content_based_addressing : dnc_content_based_addressing
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE

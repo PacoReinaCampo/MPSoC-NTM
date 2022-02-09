@@ -1,0 +1,4 @@
+cd D:/QueenField/GitHub/MPSoC-NTM/sim/vhdl/tests/model/dnc/read_heads/msim
+
+do D:/QueenField/GitHub/MPSoC-NTM/sim/vhdl/tests/model/dnc/read_heads/msim/macros/design.do
+do D:/QueenField/GitHub/MPSoC-NTM/sim/vhdl/tests/model/dnc/read_heads/msim/macros/verification.do
