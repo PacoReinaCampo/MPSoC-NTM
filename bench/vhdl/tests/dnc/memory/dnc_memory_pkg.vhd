@@ -118,13 +118,13 @@ package dnc_memory_pkg is
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := N_FOUR;
 
   -- FUNCTIONALITY
+  signal STIMULUS_DNC_MEMORY_FORWARD_WEIGHTING_TEST   : boolean := false;
+  signal STIMULUS_DNC_MEMORY_FORWARD_WEIGHTING_CASE_0 : boolean := false;
+  signal STIMULUS_DNC_MEMORY_FORWARD_WEIGHTING_CASE_1 : boolean := false;
+
   signal STIMULUS_DNC_MEMORY_SORT_VECTOR_TEST   : boolean := false;
   signal STIMULUS_DNC_MEMORY_SORT_VECTOR_CASE_0 : boolean := false;
   signal STIMULUS_DNC_MEMORY_SORT_VECTOR_CASE_1 : boolean := false;
-
-  signal STIMULUS_DNC_MEMORY_TEST   : boolean := false;
-  signal STIMULUS_DNC_MEMORY_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_MEMORY_CASE_1 : boolean := false;
 
   -----------------------------------------------------------------------
   -- Components
@@ -147,6 +147,34 @@ package dnc_memory_pkg is
       -- GLOBAL
       CLK : out std_logic;
       RST : out std_logic;
+
+      -- FORWARD WEIGHTING
+      -- CONTROL
+      DNC_MEMORY_FORWARD_WEIGHTING_START : out std_logic;
+      DNC_MEMORY_FORWARD_WEIGHTING_READY : in  std_logic;
+
+      DNC_MEMORY_FORWARD_WEIGHTING_L_IN_I_ENABLE : out std_logic;
+      DNC_MEMORY_FORWARD_WEIGHTING_L_IN_G_ENABLE : out std_logic;
+      DNC_MEMORY_FORWARD_WEIGHTING_L_IN_J_ENABLE : out std_logic;
+
+      DNC_MEMORY_FORWARD_WEIGHTING_W_IN_I_ENABLE : out std_logic;
+      DNC_MEMORY_FORWARD_WEIGHTING_W_IN_J_ENABLE : out std_logic;
+
+      DNC_MEMORY_FORWARD_WEIGHTING_F_I_ENABLE : in std_logic;
+      DNC_MEMORY_FORWARD_WEIGHTING_F_J_ENABLE : in std_logic;
+
+      DNC_MEMORY_FORWARD_WEIGHTING_F_OUT_I_ENABLE : in std_logic;
+      DNC_MEMORY_FORWARD_WEIGHTING_F_OUT_J_ENABLE : in std_logic;
+
+      -- DATA
+      DNC_MEMORY_FORWARD_WEIGHTING_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DNC_MEMORY_FORWARD_WEIGHTING_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+      DNC_MEMORY_FORWARD_WEIGHTING_L_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DNC_MEMORY_FORWARD_WEIGHTING_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DNC_MEMORY_FORWARD_WEIGHTING_F_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
 
       -- SORT VECTOR
       -- CONTROL

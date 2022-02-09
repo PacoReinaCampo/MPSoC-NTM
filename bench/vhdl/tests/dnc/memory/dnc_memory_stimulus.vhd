@@ -63,6 +63,34 @@ entity dnc_memory_stimulus is
     CLK : out std_logic;
     RST : out std_logic;
 
+    -- FORWARD WEIGHTING
+    -- CONTROL
+    DNC_MEMORY_FORWARD_WEIGHTING_START : out std_logic;
+    DNC_MEMORY_FORWARD_WEIGHTING_READY : in  std_logic;
+
+    DNC_MEMORY_FORWARD_WEIGHTING_L_IN_I_ENABLE : out std_logic;
+    DNC_MEMORY_FORWARD_WEIGHTING_L_IN_G_ENABLE : out std_logic;
+    DNC_MEMORY_FORWARD_WEIGHTING_L_IN_J_ENABLE : out std_logic;
+
+    DNC_MEMORY_FORWARD_WEIGHTING_W_IN_I_ENABLE : out std_logic;
+    DNC_MEMORY_FORWARD_WEIGHTING_W_IN_J_ENABLE : out std_logic;
+
+    DNC_MEMORY_FORWARD_WEIGHTING_F_I_ENABLE : in std_logic;
+    DNC_MEMORY_FORWARD_WEIGHTING_F_J_ENABLE : in std_logic;
+
+    DNC_MEMORY_FORWARD_WEIGHTING_F_OUT_I_ENABLE : in std_logic;
+    DNC_MEMORY_FORWARD_WEIGHTING_F_OUT_J_ENABLE : in std_logic;
+
+    -- DATA
+    DNC_MEMORY_FORWARD_WEIGHTING_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    DNC_MEMORY_FORWARD_WEIGHTING_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    DNC_MEMORY_FORWARD_WEIGHTING_L_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_MEMORY_FORWARD_WEIGHTING_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    DNC_MEMORY_FORWARD_WEIGHTING_F_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+
     -- SORT VECTOR
     -- CONTROL
     DNC_MEMORY_SORT_VECTOR_START : out std_logic;
@@ -331,28 +359,6 @@ begin
           -- CONTROL
           exit SORT_VECTOR_SECOND_RUN when DNC_MEMORY_SORT_VECTOR_READY = '1';
         end loop SORT_VECTOR_SECOND_RUN;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_DNC_MEMORY_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_DNC_MEMORY_TEST                ";
-      -------------------------------------------------------------------
-
-      if (STIMULUS_DNC_MEMORY_CASE_0) then
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_DNC_MEMORY_CASE_0              ";
-      -------------------------------------------------------------------
-      end if;
-
-      if (STIMULUS_DNC_MEMORY_CASE_0) then
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_DNC_MEMORY_CASE_1              ";
-      -------------------------------------------------------------------
       end if;
 
       wait for WORKING;

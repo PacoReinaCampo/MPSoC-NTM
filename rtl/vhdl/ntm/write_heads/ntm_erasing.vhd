@@ -62,9 +62,13 @@ entity ntm_erasing is
     M_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
     M_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
+    W_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
+
     E_IN_ENABLE : in std_logic;         -- for k in 0 to W-1
 
-    E_OUT_ENABLE : in std_logic;        -- for k in 0 to W-1
+    W_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
+
+    E_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
 
     M_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
     M_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
@@ -88,15 +92,12 @@ architecture ntm_erasing_architecture of ntm_erasing is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    INPUT_FIRST_STATE,                  -- STEP 1
-    VECTOR_MULTIPLIER_STATE,            -- STEP 2
-    INPUT_SECOND_STATE,                 -- STEP 3
-    VECTOR_ADDER_STATE,                 -- STEP 4
-    INPUT_I_THIRD_STATE,                -- STEP 5
-    INPUT_J_THIRD_STATE,                -- STEP 6
-    MATRIX_PRODUCT_I_STATE,             -- STEP 7
-    MATRIX_PRODUCT_J_STATE              -- STEP 8
+    STARTER_STATE,                  -- STEP 0
+    INPUT_FIRST_STATE,              -- STEP 1
+    VECTOR_FIRST_MULTIPLIER_STATE,  -- STEP 2
+    VECTOR_ADDER_STATE,             -- STEP 3
+    INPUT_SECOND_STATE,             -- STEP 4
+    VECTOR_SECOND_MULTIPLIER_STATE  -- STEP 5
     );
 
   -----------------------------------------------------------------------
@@ -128,6 +129,9 @@ architecture ntm_erasing_architecture of ntm_erasing is
   -- Internal Signals
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+  signal data_a_in_erasing_int : std_logic;
+  signal data_b_in_erasing_int : std_logic;
 
   -- VECTOR ADDER
   -- CONTROL
@@ -163,31 +167,6 @@ architecture ntm_erasing_architecture of ntm_erasing is
   signal data_b_in_vector_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_integer_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- MATRIX PRODUCT
-  -- CONTROL
-  signal start_matrix_product : std_logic;
-  signal ready_matrix_product : std_logic;
-
-  signal data_a_in_i_enable_matrix_product : std_logic;
-  signal data_a_in_j_enable_matrix_product : std_logic;
-  signal data_b_in_i_enable_matrix_product : std_logic;
-  signal data_b_in_j_enable_matrix_product : std_logic;
-
-  signal data_i_enable_matrix_product : std_logic;
-  signal data_j_enable_matrix_product : std_logic;
-
-  signal data_out_i_enable_matrix_product : std_logic;
-  signal data_out_j_enable_matrix_product : std_logic;
-
-  -- DATA
-  signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
-
 begin
 
   -----------------------------------------------------------------------
@@ -206,6 +185,9 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      W_OUT_ENABLE <= '0';
+      E_OUT_ENABLE <= '0';
+
       M_OUT_J_ENABLE <= '0';
       M_OUT_K_ENABLE <= '0';
 
@@ -213,12 +195,18 @@ begin
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
 
+      data_a_in_erasing_int <= '0';
+      data_b_in_erasing_int <= '0';
+
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>                   -- STEP 0
           -- Control Outputs
           READY <= '0';
+
+          W_OUT_ENABLE <= '0';
+          E_OUT_ENABLE <= '0';
 
           M_OUT_J_ENABLE <= '0';
           M_OUT_K_ENABLE <= '0';
@@ -228,23 +216,76 @@ begin
           index_j_loop <= ZERO_CONTROL;
 
           if (START = '1') then
-            -- Control Internal
-            start_vector_integer_multiplier <= '1';
-
             -- FSM Control
             controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
-          else
-            -- Control Internal
-            start_vector_integer_multiplier <= '0';
           end if;
 
-        when INPUT_FIRST_STATE =>       -- STEP 1
+        when INPUT_FIRST_STATE =>               -- STEP 1
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
+          if (W_IN_ENABLE = '1') then
+            -- Data Inputs
+            data_a_in_vector_integer_multiplier <= W_IN;
+
+            -- Control Internal
+            data_a_in_enable_vector_integer_multiplier <= '1';
+
+            data_a_in_erasing_int <= '1';
+          else
+            -- Control Internal
+            data_a_in_enable_vector_integer_multiplier <= '0';
+          end if;
+
+          if (E_IN_ENABLE = '1') then
+            -- Data Inputs
+            data_b_in_vector_integer_multiplier <= E_IN;
+
+            -- Control Internal
+            data_b_in_enable_vector_integer_multiplier <= '1';
+
+            data_b_in_erasing_int <= '1';
+          else
+            -- Control Internal
+            data_b_in_enable_vector_integer_multiplier <= '0';
+          end if;
+
+          -- Control Outputs
+          M_OUT_J_ENABLE <= '0';
+          M_OUT_K_ENABLE <= '0';
+
+          if (data_a_in_erasing_int = '1' and data_b_in_erasing_int = '1') then
+            -- Control Internal
+            if (unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+              start_vector_integer_multiplier <= '1';
+            else
+              start_vector_integer_multiplier <= '0';
+            end if;
+
+            data_a_in_erasing_int <= '0';
+            data_b_in_erasing_int <= '0';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_FIRST_MULTIPLIER_STATE;
+          end if;
+
+        when VECTOR_FIRST_MULTIPLIER_STATE =>   -- STEP 2
 
           if (data_out_enable_vector_integer_multiplier = '1') then
+            -- Control Outputs
+            W_OUT_ENABLE <= '1';
+            E_OUT_ENABLE <= '1';
+
+            -- Data Internal
+            data_a_in_vector_integer_adder <= ONE_DATA;
+            data_b_in_vector_integer_adder <= data_out_vector_integer_multiplier;
+
             -- Control Internal
-            start_vector_integer_adder <= '1';
+            if (unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+              start_vector_integer_adder <= '1';
+            else
+              start_vector_integer_adder <= '0';
+            end if;
+
+            operation_vector_integer_adder <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
@@ -253,75 +294,91 @@ begin
             start_vector_integer_multiplier <= '0';
           end if;
 
-        when INPUT_SECOND_STATE =>      -- STEP 3
-
-        when VECTOR_ADDER_STATE =>      -- STEP 4
+        when VECTOR_ADDER_STATE =>              -- STEP 3
 
           if (data_out_enable_vector_integer_adder = '1') then
-            -- Control Internal
-            start_matrix_product <= '1';
+            -- Data Outputs
+            data_b_in_vector_integer_multiplier <= data_out_vector_integer_adder;
 
             -- FSM Control
-            controller_ctrl_fsm_int <= MATRIX_PRODUCT_I_STATE;
+            controller_ctrl_fsm_int <= INPUT_SECOND_STATE;
           else
             -- Control Internal
-            start_vector_integer_adder <= '0';
+            start_vector_integer_multiplier <= '0';
           end if;
 
-        when INPUT_I_THIRD_STATE =>     -- STEP 5
+          -- Control Outputs
+          W_OUT_ENABLE <= '0';
+          E_OUT_ENABLE <= '0';
 
-        when INPUT_J_THIRD_STATE =>     -- STEP 6
+        when INPUT_SECOND_STATE =>              -- STEP 4
 
-        when MATRIX_PRODUCT_I_STATE =>  -- STEP 7
+          if (M_IN_K_ENABLE = '1') then
+            -- Data Inputs
+            data_a_in_vector_integer_multiplier <= M_IN;
 
-          if (data_out_i_enable_matrix_product = '1') then
-            if ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
-              -- Control Internal
-              index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-              index_j_loop <= ZERO_CONTROL;
-
-              -- FSM Control
-              controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+            -- Control Internal
+            if (unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+              start_vector_integer_multiplier <= '1';
+            else
+              start_vector_integer_multiplier <= '0';
             end if;
 
-            -- Data Outputs
-            M_OUT <= data_out_vector_integer_adder;
-
-            -- Control Outputs
-            M_OUT_J_ENABLE <= '1';
+            data_a_in_enable_vector_integer_multiplier <= '1';
+            data_b_in_enable_vector_integer_multiplier <= '1';
           else
-            -- Control Outputs
-            M_OUT_J_ENABLE <= '0';
+            -- Control Internal
+            data_a_in_enable_vector_integer_multiplier <= '0';
+            data_b_in_enable_vector_integer_multiplier <= '0';
           end if;
 
-        when MATRIX_PRODUCT_J_STATE =>  -- STEP 8
+        when VECTOR_SECOND_MULTIPLIER_STATE =>  -- STEP 5
 
-          if (data_out_j_enable_matrix_product = '1') then
-            if ((unsigned(index_i_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
+          if (data_out_enable_vector_integer_multiplier = '1') then
+            if (unsigned(index_i_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+              if (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+                -- Control Internal
+                index_i_loop <= ZERO_CONTROL;
+                index_j_loop <= ZERO_CONTROL;
+
+                -- FSM Control
+                controller_ctrl_fsm_int <= STARTER_STATE;
+              elsif (unsigned(index_j_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+                -- Control Internal
+                index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+
+                -- FSM Control
+                controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
+              end if;
+
               -- Control Outputs
-              READY <= '1';
+              M_OUT_J_ENABLE <= '1';
+              M_OUT_K_ENABLE <= '1';
+            elsif (unsigned(index_i_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+              if (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+                -- Control Internal
+                index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+                index_j_loop <= ZERO_CONTROL;
 
-              -- FSM Control
-              controller_ctrl_fsm_int <= STARTER_STATE;
-            elsif ((unsigned(index_i_loop) < unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) < unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL))) then
-              -- Control Internal
-              index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+                -- FSM Control
+                controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
+              elsif (unsigned(index_j_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+                -- Control Internal
+                index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
 
-              -- FSM Control
-              controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+                -- FSM Control
+                controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
+              end if;
+
+              -- Control Outputs
+              M_OUT_K_ENABLE <= '1';
             end if;
 
             -- Data Outputs
-            M_OUT <= data_out_vector_integer_adder;
-
-            -- Control Outputs
-            M_OUT_K_ENABLE <= '1';
+            M_OUT <= data_out_vector_integer_multiplier;
           else
-            -- Control Outputs
-            M_OUT_K_ENABLE <= '0';
-
             -- Control Internal
-            start_matrix_product <= '0';
+            start_vector_integer_multiplier <= '0';
           end if;
 
         when others =>
@@ -330,41 +387,6 @@ begin
       end case;
     end if;
   end process;
-
-  -- VECTOR MULTIPLIER
-  data_a_in_enable_vector_integer_multiplier <= '0';
-  data_b_in_enable_vector_integer_multiplier <= '0';
-
-  -- VECTOR ADDER
-  operation_vector_integer_adder <= '0';
-
-  data_a_in_enable_vector_integer_adder <= '0';
-  data_b_in_enable_vector_integer_adder <= '0';
-
-  -- MATRIX PRODUCT
-  data_a_in_i_enable_matrix_product <= '0';
-  data_a_in_j_enable_matrix_product <= '0';
-  data_b_in_i_enable_matrix_product <= '0';
-  data_b_in_j_enable_matrix_product <= '0';
-
-  -- DATA
-  -- VECTOR MULTIPLIER
-  size_in_vector_integer_multiplier   <= SIZE_W_IN;
-  data_a_in_vector_integer_multiplier <= W_IN;
-  data_b_in_vector_integer_multiplier <= E_IN;
-
-  -- VECTOR ADDER
-  size_in_vector_integer_adder   <= SIZE_W_IN;
-  data_a_in_vector_integer_adder <= ONE_DATA;
-  data_b_in_vector_integer_adder <= data_out_vector_integer_adder;
-
-  -- MATRIX PRODUCT
-  size_a_i_in_matrix_product <= SIZE_N_IN;
-  size_a_j_in_matrix_product <= SIZE_W_IN;
-  size_b_i_in_matrix_product <= SIZE_W_IN;
-  size_b_j_in_matrix_product <= ONE_DATA;
-  data_a_in_matrix_product   <= M_IN;
-  data_b_in_matrix_product   <= data_out_vector_integer_multiplier;
 
   -- VECTOR ADDER
   vector_integer_adder : ntm_vector_integer_adder
@@ -420,42 +442,6 @@ begin
       DATA_A_IN => data_a_in_vector_integer_multiplier,
       DATA_B_IN => data_b_in_vector_integer_multiplier,
       DATA_OUT  => data_out_vector_integer_multiplier
-      );
-
-  -- MATRIX PRODUCT
-  matrix_product : ntm_matrix_product
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_matrix_product,
-      READY => ready_matrix_product,
-
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_product,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
-
-      DATA_I_ENABLE => data_i_enable_matrix_product,
-      DATA_J_ENABLE => data_j_enable_matrix_product,
-
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
-
-      -- DATA
-      SIZE_A_I_IN => size_a_i_in_matrix_product,
-      SIZE_A_J_IN => size_a_j_in_matrix_product,
-      SIZE_B_I_IN => size_b_i_in_matrix_product,
-      SIZE_B_J_IN => size_b_j_in_matrix_product,
-      DATA_A_IN   => data_a_in_matrix_product,
-      DATA_B_IN   => data_b_in_matrix_product,
-      DATA_OUT    => data_out_matrix_product
       );
 
 end architecture;

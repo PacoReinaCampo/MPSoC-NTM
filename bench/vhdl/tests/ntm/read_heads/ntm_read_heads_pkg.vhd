@@ -151,8 +151,12 @@ package ntm_read_heads_pkg is
       NTM_READ_HEADS_M_IN_J_ENABLE : out std_logic;
       NTM_READ_HEADS_M_IN_K_ENABLE : out std_logic;
 
+      NTM_READ_HEADS_W_IN_ENABLE : out std_logic;
+
       NTM_READ_HEADS_M_OUT_J_ENABLE : in std_logic;
       NTM_READ_HEADS_M_OUT_K_ENABLE : in std_logic;
+
+      NTM_READ_HEADS_W_OUT_ENABLE : in std_logic;
 
       NTM_READ_HEADS_R_OUT_ENABLE : in std_logic;
 

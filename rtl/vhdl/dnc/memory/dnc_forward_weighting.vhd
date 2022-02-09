@@ -59,17 +59,15 @@ entity dnc_forward_weighting is
     START : in  std_logic;
     READY : out std_logic;
 
-    L_IN_G_ENABLE : in std_logic;       -- for g in 0 to N-1 (square matrix)
-    L_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1 (square matrix)
-
-    L_OUT_G_ENABLE : out std_logic;     -- for g in 0 to N-1 (square matrix)
-    L_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1 (square matrix)
+    L_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
+    L_IN_G_ENABLE : in std_logic;       -- for g in 0 to N-1 (square tensor)
+    L_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1 (square tensor)
 
     W_IN_I_ENABLE : in std_logic;       -- for i in 0 to R-1 (read heads flow)
     W_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
 
-    W_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
-    W_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
+    F_I_ENABLE : out std_logic;         -- for i in 0 to R-1 (read heads flow)
+    F_J_ENABLE : out std_logic;         -- for j in 0 to N-1
 
     F_OUT_I_ENABLE : out std_logic;     -- for i in 0 to R-1 (read heads flow)
     F_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
@@ -115,27 +113,36 @@ architecture dnc_forward_weighting_architecture of dnc_forward_weighting is
   -- Signals
   -----------------------------------------------------------------------
 
-  -- MATRIX PRODUCT
+  -- TENSOR PRODUCT
   -- CONTROL
-  signal start_matrix_product : std_logic;
-  signal ready_matrix_product : std_logic;
+  signal start_tensor_product : std_logic;
+  signal ready_tensor_product : std_logic;
 
-  signal data_a_in_i_enable_matrix_product : std_logic;
-  signal data_a_in_j_enable_matrix_product : std_logic;
-  signal data_b_in_i_enable_matrix_product : std_logic;
-  signal data_b_in_j_enable_matrix_product : std_logic;
+  signal data_a_in_i_enable_tensor_product : std_logic;
+  signal data_a_in_j_enable_tensor_product : std_logic;
+  signal data_a_in_k_enable_tensor_product : std_logic;
+  signal data_b_in_i_enable_tensor_product : std_logic;
+  signal data_b_in_j_enable_tensor_product : std_logic;
+  signal data_b_in_k_enable_tensor_product : std_logic;
 
-  signal data_out_i_enable_matrix_product : std_logic;
-  signal data_out_j_enable_matrix_product : std_logic;
+  signal data_i_enable_tensor_product : std_logic;
+  signal data_j_enable_tensor_product : std_logic;
+  signal data_k_enable_tensor_product : std_logic;
+
+  signal data_out_i_enable_tensor_product : std_logic;
+  signal data_out_j_enable_tensor_product : std_logic;
+  signal data_out_k_enable_tensor_product : std_logic;
 
   -- DATA
-  signal size_a_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_a_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_i_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_b_j_in_matrix_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_product   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_product    : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_a_i_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_j_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_a_k_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_i_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_j_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_b_k_in_tensor_product : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_tensor_product   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_tensor_product    : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -147,30 +154,37 @@ begin
 
   -- ASSIGNATIONS
   -- CONTROL
-  start_matrix_product <= START;
+  start_tensor_product <= START;
 
-  READY <= ready_matrix_product;
+  READY <= ready_tensor_product;
 
-  data_a_in_i_enable_matrix_product <= L_IN_G_ENABLE;
-  data_a_in_j_enable_matrix_product <= L_IN_J_ENABLE;
-  data_b_in_i_enable_matrix_product <= W_IN_I_ENABLE;
-  data_b_in_j_enable_matrix_product <= W_IN_J_ENABLE;
+  data_a_in_i_enable_tensor_product <= L_IN_I_ENABLE;
+  data_a_in_j_enable_tensor_product <= L_IN_G_ENABLE;
+  data_a_in_k_enable_tensor_product <= L_IN_J_ENABLE;
+  data_b_in_i_enable_tensor_product <= W_IN_I_ENABLE;
+  data_b_in_j_enable_tensor_product <= W_IN_J_ENABLE;
+  data_b_in_k_enable_tensor_product <= '0';
 
-  F_OUT_I_ENABLE <= data_out_i_enable_matrix_product;
-  F_OUT_J_ENABLE <= data_out_j_enable_matrix_product;
+  F_I_ENABLE <= data_i_enable_tensor_product;
+  F_J_ENABLE <= data_j_enable_tensor_product;
+
+  F_OUT_I_ENABLE <= data_out_i_enable_tensor_product;
+  F_OUT_J_ENABLE <= data_out_j_enable_tensor_product;
 
   -- DATA
-  size_a_i_in_matrix_product <= SIZE_N_IN;
-  size_a_j_in_matrix_product <= SIZE_N_IN;
-  size_b_i_in_matrix_product <= SIZE_R_IN;
-  size_b_j_in_matrix_product <= SIZE_N_IN;
-  data_a_in_matrix_product   <= L_IN;
-  data_b_in_matrix_product   <= W_IN;
+  size_a_i_in_tensor_product <= SIZE_R_IN;
+  size_a_j_in_tensor_product <= SIZE_N_IN;
+  size_a_k_in_tensor_product <= SIZE_N_IN;
+  size_b_i_in_tensor_product <= SIZE_R_IN;
+  size_b_j_in_tensor_product <= SIZE_N_IN;
+  size_b_k_in_tensor_product <= ONE_CONTROL;
+  data_a_in_tensor_product   <= L_IN;
+  data_b_in_tensor_product   <= W_IN;
 
-  F_OUT <= data_out_matrix_product;
+  F_OUT <= data_out_tensor_product;
 
-  -- MATRIX PRODUCT
-  matrix_product : ntm_matrix_product
+  -- TENSOR PRODUCT
+  tensor_product : ntm_tensor_product
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -180,26 +194,35 @@ begin
       CLK => CLK,
       RST => RST,
 
-      -- CONTROL
-      START => start_matrix_product,
-      READY => ready_matrix_product,
+        -- CONTROL
+      START => start_tensor_product,
+      READY => ready_tensor_product,
 
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_product,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_product,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_product,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_product,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_tensor_product,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_tensor_product,
+      DATA_A_IN_K_ENABLE => data_a_in_k_enable_tensor_product,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_tensor_product,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_tensor_product,
+      DATA_B_IN_K_ENABLE => data_b_in_k_enable_tensor_product,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_product,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_product,
+      DATA_I_ENABLE => data_i_enable_tensor_product,
+      DATA_J_ENABLE => data_j_enable_tensor_product,
+      DATA_K_ENABLE => data_k_enable_tensor_product,
 
-      -- DATA
-      SIZE_A_I_IN => size_a_i_in_matrix_product,
-      SIZE_A_J_IN => size_a_j_in_matrix_product,
-      SIZE_B_I_IN => size_b_i_in_matrix_product,
-      SIZE_B_J_IN => size_b_j_in_matrix_product,
-      DATA_A_IN   => data_a_in_matrix_product,
-      DATA_B_IN   => data_b_in_matrix_product,
-      DATA_OUT    => data_out_matrix_product
+      DATA_OUT_I_ENABLE => data_out_i_enable_tensor_product,
+      DATA_OUT_J_ENABLE => data_out_j_enable_tensor_product,
+      DATA_OUT_K_ENABLE => data_out_k_enable_tensor_product,
+
+        -- DATA
+      SIZE_A_I_IN => size_a_i_in_tensor_product,
+      SIZE_A_J_IN => size_a_j_in_tensor_product,
+      SIZE_A_K_IN => size_a_k_in_tensor_product,
+      SIZE_B_I_IN => size_b_i_in_tensor_product,
+      SIZE_B_J_IN => size_b_j_in_tensor_product,
+      SIZE_B_K_IN => size_b_k_in_tensor_product,
+      DATA_A_IN   => data_a_in_tensor_product,
+      DATA_B_IN   => data_b_in_tensor_product,
+      DATA_OUT    => data_out_tensor_product
       );
 
 end architecture;

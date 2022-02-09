@@ -62,8 +62,12 @@ entity ntm_reading is
     M_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
     M_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
 
+    W_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
+
     M_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
     M_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
+
+    W_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
 
     R_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
 
@@ -86,10 +90,9 @@ architecture ntm_reading_architecture of ntm_reading is
 
   type controller_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
-    INPUT_FIRST_STATE,                  -- STEP 1
+    INPUT_STATE,                        -- STEP 1
     VECTOR_MULTIPLIER_STATE,            -- STEP 2
-    INPUT_SECOND_STATE,                 -- STEP 3
-    VECTOR_SUMMATION_STATE              -- STEP 4
+    VECTOR_ADDER_STATE                  -- STEP 3
     );
 
   -----------------------------------------------------------------------
@@ -119,21 +122,31 @@ architecture ntm_reading_architecture of ntm_reading is
   signal controller_ctrl_fsm_int : controller_ctrl_fsm;
 
   -- Internal Signals
-  signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- VECTOR SUMMATION
+  signal data_a_in_reading_int : std_logic;
+  signal data_b_in_reading_int : std_logic;
+
+  -- VECTOR ADDER
   -- CONTROL
-  signal start_vector_summation : std_logic;
-  signal ready_vector_summation : std_logic;
+  signal start_vector_integer_adder : std_logic;
+  signal ready_vector_integer_adder : std_logic;
 
-  signal data_in_enable_vector_summation : std_logic;
+  signal operation_vector_integer_adder : std_logic;
 
-  signal data_out_enable_vector_summation : std_logic;
+  signal data_a_in_enable_vector_integer_adder : std_logic;
+  signal data_b_in_enable_vector_integer_adder : std_logic;
+
+  signal data_out_enable_vector_integer_adder : std_logic;
 
   -- DATA
-  signal length_in_vector_summation : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_in_vector_summation   : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_summation  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_integer_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  signal data_out_vector_integer_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal overflow_out_vector_integer_adder : std_logic;
 
   -- VECTOR MULTIPLIER
   -- CONTROL
@@ -169,79 +182,175 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      W_OUT_ENABLE <= '0';
       R_OUT_ENABLE <= '0';
 
+      M_OUT_J_ENABLE <= '0';
+      M_OUT_K_ENABLE <= '0';
+
       -- Control Internal
-      index_loop <= ZERO_CONTROL;
+      index_i_loop <= ZERO_CONTROL;
+      index_j_loop <= ZERO_CONTROL;
+
+      data_a_in_reading_int <= '0';
+      data_b_in_reading_int <= '0';
 
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+        when STARTER_STATE =>                   -- STEP 0
           -- Control Outputs
           READY <= '0';
 
+          W_OUT_ENABLE <= '0';
           R_OUT_ENABLE <= '0';
 
+          M_OUT_J_ENABLE <= '0';
+          M_OUT_K_ENABLE <= '0';
+
           -- Control Internal
-          index_loop <= ZERO_CONTROL;
+          index_i_loop <= ZERO_CONTROL;
+          index_j_loop <= ZERO_CONTROL;
 
           if (START = '1') then
-            -- Control Internal
-            start_vector_integer_multiplier <= '1';
-
             -- FSM Control
-            controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
-          else
-            -- Control Internal
-            start_vector_integer_multiplier <= '0';
+            controller_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_FIRST_STATE =>       -- STEP 1
+        when INPUT_STATE =>               -- STEP 1
 
-        when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
+          if (W_IN_ENABLE = '1') then
+            -- Data Inputs
+            data_a_in_vector_integer_multiplier <= W_IN;
 
-          if (data_out_enable_vector_integer_multiplier = '1') then
             -- Control Internal
-            start_vector_summation <= '1';
+            data_a_in_enable_vector_integer_multiplier <= '1';
 
-            -- FSM Control
-            controller_ctrl_fsm_int <= VECTOR_SUMMATION_STATE;
+            data_a_in_reading_int <= '1';
           else
             -- Control Internal
-            start_vector_integer_multiplier <= '0';
+            data_a_in_enable_vector_integer_multiplier <= '0';
           end if;
 
-        when INPUT_SECOND_STATE =>      -- STEP 3
+          if (M_IN_K_ENABLE = '1') then
+            -- Data Inputs
+            data_b_in_vector_integer_multiplier <= M_IN;
 
-        when VECTOR_SUMMATION_STATE =>  -- STEP 4
+            -- Control Internal
+            data_b_in_enable_vector_integer_multiplier <= '1';
 
-          if (data_out_enable_vector_summation = '1') then
-            if (unsigned(index_loop) = unsigned(SIZE_W_IN) - unsigned(ONE_CONTROL)) then
-              -- Control Outputs
-              READY <= '1';
+            data_b_in_reading_int <= '1';
+          else
+            -- Control Internal
+            data_b_in_enable_vector_integer_multiplier <= '0';
+          end if;
 
-              -- FSM Control
-              controller_ctrl_fsm_int <= STARTER_STATE;
+          -- Control Outputs
+          M_OUT_J_ENABLE <= '0';
+          M_OUT_K_ENABLE <= '0';
+
+          if (data_a_in_reading_int = '1' and data_b_in_reading_int = '1') then
+            -- Control Internal
+            if (unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+              start_vector_integer_multiplier <= '1';
             else
-              -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop) + unsigned(ONE_CONTROL));
-
-              -- FSM Control
-              controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+              start_vector_integer_multiplier <= '0';
             end if;
 
-            -- Data Outputs
-            R_OUT <= data_out_vector_summation;
+            data_a_in_reading_int <= '0';
+            data_b_in_reading_int <= '0';
 
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
+          end if;
+
+        when VECTOR_MULTIPLIER_STATE =>   -- STEP 2
+
+          if (data_out_enable_vector_integer_multiplier = '1') then
             -- Control Outputs
-            R_OUT_ENABLE <= '1';
-          else
-            -- Control Outputs
-            R_OUT_ENABLE <= '0';
+            W_OUT_ENABLE <= '1';
+
+            -- Data Internal
+            if (unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+              data_a_in_vector_integer_adder <= ZERO_DATA;
+            else
+              data_a_in_vector_integer_adder <= data_out_vector_integer_adder;
+            end if;
+
+            data_b_in_vector_integer_adder <= data_out_vector_integer_multiplier;
 
             -- Control Internal
-            start_vector_summation <= '0';
+            if (unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
+              start_vector_integer_adder <= '1';
+            else
+              start_vector_integer_adder <= '0';
+            end if;
+
+            operation_vector_integer_adder <= '0';
+
+            data_a_in_enable_vector_integer_adder <= '1';
+            data_b_in_enable_vector_integer_adder <= '1';
+
+            -- FSM Control
+            controller_ctrl_fsm_int <= VECTOR_ADDER_STATE;
+          else
+            -- Control Internal
+            start_vector_integer_multiplier <= '0';
+          end if;
+
+        when VECTOR_ADDER_STATE =>  -- STEP 5
+
+          if (data_out_enable_vector_integer_adder = '1') then
+            if (unsigned(index_i_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+              if (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+                -- Control Internal
+                index_i_loop <= ZERO_CONTROL;
+                index_j_loop <= ZERO_CONTROL;
+
+                -- FSM Control
+                controller_ctrl_fsm_int <= STARTER_STATE;
+              elsif (unsigned(index_j_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+                -- Control Internal
+                index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+
+                -- FSM Control
+                controller_ctrl_fsm_int <= INPUT_STATE;
+              end if;
+
+              -- Data Outputs
+              R_OUT <= data_out_vector_integer_adder;
+
+              -- Control Outputs
+              M_OUT_J_ENABLE <= '1';
+              M_OUT_K_ENABLE <= '1';
+            elsif (unsigned(index_i_loop) < unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then
+              if (unsigned(index_j_loop) = unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+                -- Control Internal
+                index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
+                index_j_loop <= ZERO_CONTROL;
+
+                -- FSM Control
+                controller_ctrl_fsm_int <= INPUT_STATE;
+              elsif (unsigned(index_j_loop) < unsigned(SIZE_W_IN)-unsigned(ONE_CONTROL)) then
+                -- Control Internal
+                index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
+
+                -- FSM Control
+                controller_ctrl_fsm_int <= INPUT_STATE;
+              end if;
+
+              -- Control Outputs
+              M_OUT_K_ENABLE <= '1';
+            end if;
+          else
+            -- Control Outputs
+            W_OUT_ENABLE <= '0';
+
+            -- Control Internal
+            start_vector_integer_adder <= '0';
+
+            data_a_in_enable_vector_integer_adder <= '0';
+            data_b_in_enable_vector_integer_adder <= '0';
           end if;
 
         when others =>
@@ -251,25 +360,8 @@ begin
     end if;
   end process;
 
-  -- VECTOR MULTIPLIER
-  data_a_in_enable_vector_integer_multiplier <= M_IN_K_ENABLE;
-  data_b_in_enable_vector_integer_multiplier <= M_IN_K_ENABLE;
-
-  -- VECTOR SUMMATION
-  data_in_enable_vector_summation <= data_out_enable_vector_integer_multiplier;
-
-  -- DATA
-  -- VECTOR MULTIPLIER
-  size_in_vector_integer_multiplier   <= SIZE_W_IN;
-  data_a_in_vector_integer_multiplier <= W_IN;
-  data_b_in_vector_integer_multiplier <= M_IN;
-
-  -- VECTOR SUMMATION
-  length_in_vector_summation <= SIZE_N_IN;
-  data_in_vector_summation   <= data_out_vector_integer_multiplier;
-
-  -- VECTOR SUMMATION
-  vector_summation : ntm_vector_summation
+  -- VECTOR ADDER
+  vector_integer_adder : ntm_vector_integer_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -280,17 +372,21 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_summation,
-      READY => ready_vector_summation,
+      START => start_vector_integer_adder,
+      READY => ready_vector_integer_adder,
 
-      DATA_IN_ENABLE => data_in_enable_vector_summation,
+      OPERATION => operation_vector_integer_adder,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_summation,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_integer_adder,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_integer_adder,
+
+      DATA_OUT_ENABLE => data_out_enable_vector_integer_adder,
 
       -- DATA
-      LENGTH_IN => length_in_vector_summation,
-      DATA_IN   => data_in_vector_summation,
-      DATA_OUT  => data_out_vector_summation
+      SIZE_IN   => size_in_vector_integer_adder,
+      DATA_A_IN => data_a_in_vector_integer_adder,
+      DATA_B_IN => data_b_in_vector_integer_adder,
+      DATA_OUT  => data_out_vector_integer_adder
       );
 
   -- VECTOR MULTIPLIER

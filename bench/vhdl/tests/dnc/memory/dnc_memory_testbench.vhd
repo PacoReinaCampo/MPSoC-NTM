@@ -169,17 +169,15 @@ architecture dnc_memory_testbench_architecture of dnc_memory_testbench is
   signal start_forward_weighting : std_logic;
   signal ready_forward_weighting : std_logic;
 
+  signal l_in_i_enable_forward_weighting : std_logic;
   signal l_in_g_enable_forward_weighting : std_logic;
   signal l_in_j_enable_forward_weighting : std_logic;
-
-  signal l_out_g_enable_forward_weighting : std_logic;
-  signal l_out_j_enable_forward_weighting : std_logic;
 
   signal w_in_i_enable_forward_weighting : std_logic;
   signal w_in_j_enable_forward_weighting : std_logic;
 
-  signal w_out_i_enable_forward_weighting : std_logic;
-  signal w_out_j_enable_forward_weighting : std_logic;
+  signal f_i_enable_forward_weighting : std_logic;
+  signal f_j_enable_forward_weighting : std_logic;
 
   signal f_out_i_enable_forward_weighting : std_logic;
   signal f_out_j_enable_forward_weighting : std_logic;
@@ -566,6 +564,34 @@ begin
       CLK => CLK,
       RST => RST,
 
+      -- FORWARD WEIGHTING
+      -- CONTROL
+      DNC_MEMORY_FORWARD_WEIGHTING_START => start_forward_weighting,
+      DNC_MEMORY_FORWARD_WEIGHTING_READY => ready_forward_weighting,
+
+      DNC_MEMORY_FORWARD_WEIGHTING_L_IN_I_ENABLE => l_in_i_enable_forward_weighting,
+      DNC_MEMORY_FORWARD_WEIGHTING_L_IN_G_ENABLE => l_in_g_enable_forward_weighting,
+      DNC_MEMORY_FORWARD_WEIGHTING_L_IN_J_ENABLE => l_in_j_enable_forward_weighting,
+
+      DNC_MEMORY_FORWARD_WEIGHTING_W_IN_I_ENABLE => w_in_i_enable_forward_weighting,
+      DNC_MEMORY_FORWARD_WEIGHTING_W_IN_J_ENABLE => w_in_j_enable_forward_weighting,
+
+      DNC_MEMORY_FORWARD_WEIGHTING_F_I_ENABLE => f_i_enable_forward_weighting,
+      DNC_MEMORY_FORWARD_WEIGHTING_F_J_ENABLE => f_j_enable_forward_weighting,
+
+      DNC_MEMORY_FORWARD_WEIGHTING_F_OUT_I_ENABLE => f_out_i_enable_forward_weighting,
+      DNC_MEMORY_FORWARD_WEIGHTING_F_OUT_J_ENABLE => f_out_j_enable_forward_weighting,
+
+        -- DATA
+      DNC_MEMORY_FORWARD_WEIGHTING_SIZE_R_IN => size_r_in_forward_weighting,
+      DNC_MEMORY_FORWARD_WEIGHTING_SIZE_N_IN => size_n_in_forward_weighting,
+
+      DNC_MEMORY_FORWARD_WEIGHTING_L_IN => l_in_forward_weighting,
+
+      DNC_MEMORY_FORWARD_WEIGHTING_W_IN => w_in_forward_weighting,
+
+      DNC_MEMORY_FORWARD_WEIGHTING_F_OUT => f_out_forward_weighting,
+
       -- SORT VECTOR
       -- CONTROL
       DNC_MEMORY_SORT_VECTOR_START => start_sort_vector,
@@ -727,17 +753,15 @@ begin
         START => start_forward_weighting,
         READY => ready_forward_weighting,
 
+        L_IN_I_ENABLE => l_in_i_enable_forward_weighting,
         L_IN_G_ENABLE => l_in_g_enable_forward_weighting,
         L_IN_J_ENABLE => l_in_j_enable_forward_weighting,
-
-        L_OUT_G_ENABLE => l_out_g_enable_forward_weighting,
-        L_OUT_J_ENABLE => l_out_j_enable_forward_weighting,
 
         W_IN_I_ENABLE => w_in_i_enable_forward_weighting,
         W_IN_J_ENABLE => w_in_j_enable_forward_weighting,
 
-        W_OUT_I_ENABLE => w_out_i_enable_forward_weighting,
-        W_OUT_J_ENABLE => w_out_j_enable_forward_weighting,
+        F_I_ENABLE => f_i_enable_forward_weighting,
+        F_J_ENABLE => f_j_enable_forward_weighting,
 
         F_OUT_I_ENABLE => f_out_i_enable_forward_weighting,
         F_OUT_J_ENABLE => f_out_j_enable_forward_weighting,

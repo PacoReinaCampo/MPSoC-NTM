@@ -353,8 +353,12 @@ architecture ntm_top_architecture of ntm_top is
   signal m_in_j_enable_reading : std_logic;
   signal m_in_k_enable_reading : std_logic;
 
+  signal w_in_enable_reading : std_logic;
+
   signal m_out_j_enable_reading : std_logic;
   signal m_out_k_enable_reading : std_logic;
+
+  signal w_out_enable_reading : std_logic;
 
   signal r_out_enable_reading : std_logic;
 
@@ -406,7 +410,11 @@ architecture ntm_top_architecture of ntm_top is
   signal m_in_j_enable_erasing : std_logic;
   signal m_in_k_enable_erasing : std_logic;
 
+  signal w_in_enable_erasing : std_logic;
+
   signal e_in_enable_erasing : std_logic;
+
+  signal w_out_enable_erasing : std_logic;
 
   signal e_out_enable_erasing : std_logic;
 
@@ -1012,8 +1020,12 @@ begin
       M_IN_J_ENABLE => m_in_j_enable_reading,
       M_IN_K_ENABLE => m_in_k_enable_reading,
 
+      W_IN_ENABLE => w_in_enable_reading,
+
       M_OUT_J_ENABLE => m_out_j_enable_reading,
       M_OUT_K_ENABLE => m_out_k_enable_reading,
+
+      W_OUT_ENABLE => w_out_enable_reading,
 
       R_OUT_ENABLE => r_out_enable_reading,
 
@@ -1087,7 +1099,11 @@ begin
       M_IN_J_ENABLE => m_in_j_enable_erasing,
       M_IN_K_ENABLE => m_in_k_enable_erasing,
 
+      W_IN_ENABLE => w_in_enable_erasing,
+
       E_IN_ENABLE => e_in_enable_erasing,
+
+      W_OUT_ENABLE => w_out_enable_erasing,
 
       E_OUT_ENABLE => e_out_enable_erasing,
 
