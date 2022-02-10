@@ -303,15 +303,14 @@ begin
               end loop;
             end if;
 
-            for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+            for i in k+1 to to_integer(unsigned(SIZE_I_IN))-1 loop
               data_quotient_int := std_logic_vector(signed(matrix_in_int(i, k))/signed(matrix_in_int(k, k)));
 
               for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
                 matrix_in_int(i, j)  := std_logic_vector(signed(matrix_in_int(i, j))-(resize(signed(data_quotient_int), DATA_SIZE/2)*resize(signed(matrix_in_int(k, j)), DATA_SIZE/2)));
-              --matrix_out_int(i, j) := std_logic_vector(signed(matrix_out_int(i, j))-(resize(signed(data_quotient_int), DATA_SIZE/2)*resize(signed(matrix_out_int(k, j)), DATA_SIZE/2)));
+                matrix_out_int(i, j) := std_logic_vector(signed(matrix_out_int(i, j))-(resize(signed(data_quotient_int), DATA_SIZE/2)*resize(signed(matrix_out_int(k, j)), DATA_SIZE/2)));
               end loop;
             end loop;
-
           end loop;
 
           -- FSM Control

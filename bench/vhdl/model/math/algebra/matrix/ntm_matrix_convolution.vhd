@@ -334,7 +334,7 @@ begin
 
               for m in 0 to i loop
                 for n in 0 to j loop
-                  matrix_convolution_int(i, j) := std_logic_vector(signed(matrix_convolution_int(i, j)) + resize(signed(matrix_a_int(m, n)), DATA_SIZE/2)*resize(signed(matrix_b_int(i-m, j-n)), DATA_SIZE/2));
+                  matrix_convolution_int(i, j) := std_logic_vector(signed(matrix_convolution_int(i, j)) + (resize(signed(matrix_a_int(m, n)), DATA_SIZE/2)*resize(signed(matrix_b_int(i-m, j-n)), DATA_SIZE/2)));
                 end loop;
               end loop;
 
