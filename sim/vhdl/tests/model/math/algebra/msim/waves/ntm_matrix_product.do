@@ -33,27 +33,11 @@ add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product
 
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/index_i_loop
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/index_j_loop
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/index_m_loop
 
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/data_a_in_i_product_int
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/data_a_in_j_product_int
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/data_b_in_i_product_int
 add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/data_b_in_j_product_int
-
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/start_scalar_integer_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/operation_scalar_integer_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/data_a_in_scalar_integer_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/data_b_in_scalar_integer_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/ready_scalar_integer_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/data_out_scalar_integer_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/overflow_out_scalar_integer_adder
-
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/start_scalar_integer_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/data_a_in_scalar_integer_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/data_b_in_scalar_integer_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/ready_scalar_integer_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/data_out_scalar_integer_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_matrix_product_test/matrix_product/overflow_out_scalar_integer_multiplier
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

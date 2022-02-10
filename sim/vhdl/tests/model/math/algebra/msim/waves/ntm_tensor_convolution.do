@@ -40,9 +40,6 @@ add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_con
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/index_i_loop
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/index_j_loop
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/index_k_loop
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/index_m_loop
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/index_n_loop
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/index_p_loop
 
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/data_a_in_i_convolution_int
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/data_a_in_j_convolution_int
@@ -50,21 +47,6 @@ add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_con
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/data_b_in_i_convolution_int
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/data_b_in_j_convolution_int
 add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/data_b_in_k_convolution_int
-
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/start_scalar_integer_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/operation_scalar_integer_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/data_a_in_scalar_integer_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/data_b_in_scalar_integer_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/ready_scalar_integer_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/data_out_scalar_integer_adder
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/overflow_out_scalar_integer_adder
-
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/start_scalar_integer_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/data_a_in_scalar_integer_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/data_b_in_scalar_integer_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/ready_scalar_integer_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/data_out_scalar_integer_multiplier
-add wave -noupdate /ntm_algebra_testbench/ntm_tensor_convolution_test/tensor_convolution/overflow_out_scalar_integer_multiplier
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}
