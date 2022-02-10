@@ -105,7 +105,8 @@ architecture ntm_scalar_integer_divider_architecture of ntm_scalar_integer_divid
   signal divider_ctrl_fsm_int : divider_ctrl_fsm;
 
   -- Data Internal
-  signal divider_int : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal divider_int   : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal remainder_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- Control Internal
   signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -129,11 +130,9 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      -- Data Internal
-      divider_int <= ZERO_DATA;
-
-      -- Control Internal
-      index_loop <= ZERO_DATA;
+      -- Assignations
+      divider_int   <= ZERO_DATA;
+      remainder_int <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -143,11 +142,9 @@ begin
           READY <= '0';
 
           if (START = '1') then
-            -- Data Internal
-            divider_int <= ZERO_DATA;
-
-            -- Control Internal
-            index_loop <= DATA_A_IN;
+            -- Assignations
+            divider_int   <= std_logic_vector(signed(DATA_A_IN) / signed(DATA_B_IN));
+            remainder_int <= std_logic_vector(signed(DATA_A_IN) rem signed(DATA_B_IN));
 
             -- FSM Control
             divider_ctrl_fsm_int <= ENDER_STATE;
@@ -155,89 +152,15 @@ begin
 
         when ENDER_STATE =>             -- STEP 1
 
-          if (signed(DATA_B_IN) = signed(ZERO_DATA)) then
-            -- Data Outputs
-            DATA_OUT      <= ONE_DATA;
-            REMAINDER_OUT <= ZERO_DATA;
+          -- Data Outputs
+          DATA_OUT      <= divider_int;
+          REMAINDER_OUT <= remainder_int;
 
-            -- Control Outputs
-            READY <= '1';
+          -- Control Outputs
+          READY <= '1';
 
-            -- FSM Control
-            divider_ctrl_fsm_int <= STARTER_STATE;
-          elsif (DATA_A_IN(DATA_SIZE-1) = '0' and DATA_B_IN(DATA_SIZE-1) = '0') then
-            if (signed(DATA_B_IN) > signed(index_loop)) then
-              -- Data Outputs
-              DATA_OUT      <= divider_int;
-              REMAINDER_OUT <= index_loop;
-
-              -- Control Outputs
-              READY <= '1';
-
-              -- FSM Control
-              divider_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Data Internal
-              divider_int <= std_logic_vector(signed(divider_int) + signed(ONE_DATA));
-
-              -- Control Internal
-              index_loop <= std_logic_vector(signed(index_loop) - signed(DATA_B_IN));
-            end if;
-          elsif (DATA_A_IN(DATA_SIZE-1) = '1' and DATA_B_IN(DATA_SIZE-1) = '0') then
-            if (signed(index_loop)+signed(DATA_B_IN) > signed(ZERO_DATA)) then
-              -- Data Outputs
-              DATA_OUT      <= divider_int;
-              REMAINDER_OUT <= index_loop;
-
-              -- Control Outputs
-              READY <= '1';
-
-              -- FSM Control
-              divider_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Data Internal
-              divider_int <= std_logic_vector(signed(divider_int) - signed(ONE_DATA));
-
-              -- Control Internal
-              index_loop <= std_logic_vector(signed(index_loop) + signed(DATA_B_IN));
-            end if;
-          elsif (DATA_A_IN(DATA_SIZE-1) = '0' and DATA_B_IN(DATA_SIZE-1) = '1') then
-            if (signed(index_loop)+signed(DATA_B_IN) < signed(ZERO_DATA)) then
-              -- Data Outputs
-              DATA_OUT      <= divider_int;
-              REMAINDER_OUT <= index_loop;
-
-              -- Control Outputs
-              READY <= '1';
-
-              -- FSM Control
-              divider_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Data Internal
-              divider_int <= std_logic_vector(signed(divider_int) - signed(ONE_DATA));
-
-              -- Control Internal
-              index_loop <= std_logic_vector(signed(index_loop) + signed(DATA_B_IN));
-            end if;
-          elsif (DATA_A_IN(DATA_SIZE-1) = '1' and DATA_B_IN(DATA_SIZE-1) = '1') then
-            if (signed(DATA_B_IN) < signed(index_loop)) then
-              -- Data Outputs
-              DATA_OUT      <= divider_int;
-              REMAINDER_OUT <= index_loop;
-
-              -- Control Outputs
-              READY <= '1';
-
-              -- FSM Control
-              divider_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Data Internal
-              divider_int <= std_logic_vector(signed(divider_int) + signed(ONE_DATA));
-
-              -- Control Internal
-              index_loop <= std_logic_vector(signed(index_loop) - signed(DATA_B_IN));
-            end if;
-          end if;
+          -- FSM Control
+          divider_ctrl_fsm_int <= STARTER_STATE;
 
         when others =>
           -- FSM Control

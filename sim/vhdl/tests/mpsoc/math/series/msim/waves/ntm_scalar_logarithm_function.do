@@ -18,6 +18,8 @@ add wave -noupdate /ntm_series_testbench/ntm_scalar_logarithm_function_test/scal
 
 add wave -noupdate /ntm_series_testbench/ntm_scalar_logarithm_function_test/scalar_logarithm_function/controller_ctrl_fsm_int
 
+add wave -noupdate /ntm_series_testbench/ntm_scalar_logarithm_function_test/scalar_logarithm_function/data_int_scalar_integer_multiplier
+
 add wave -noupdate /ntm_series_testbench/ntm_scalar_logarithm_function_test/scalar_logarithm_function/index_adder_loop
 add wave -noupdate /ntm_series_testbench/ntm_scalar_logarithm_function_test/scalar_logarithm_function/index_multiplier_loop
 

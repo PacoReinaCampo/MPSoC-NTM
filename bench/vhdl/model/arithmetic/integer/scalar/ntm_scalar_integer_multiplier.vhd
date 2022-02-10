@@ -129,11 +129,8 @@ begin
       -- Control Outputs
       READY <= '0';
 
-      -- Data Internal
-      multiplier_int <= ZERO_DATA;
-
-      -- Control Internal
-      index_loop <= ZERO_DATA;
+      -- Assignations
+      multiplier_int <= (others => '0');
 
     elsif (rising_edge(CLK)) then
 
@@ -143,11 +140,8 @@ begin
           READY <= '0';
 
           if (START = '1') then
-            -- Data Internal
-            multiplier_int <= ZERO_DATA;
-
-            -- Control Internal
-            index_loop <= ZERO_DATA;
+            -- Assignations
+            multiplier_int <= std_logic_vector(resize(signed(DATA_A_IN), DATA_SIZE/2) * resize(signed(DATA_B_IN), DATA_SIZE/2));
 
             -- FSM Control
             multiplier_ctrl_fsm_int <= ENDER_STATE;
@@ -155,43 +149,15 @@ begin
 
         when ENDER_STATE =>             -- STEP 1
 
-          if (DATA_B_IN(DATA_SIZE-1) = '1') then
-            if (signed(index_loop) = signed(DATA_B_IN)) then
-              -- Data Outputs
-              DATA_OUT     <= multiplier_int;
-              OVERFLOW_OUT <= ZERO_DATA;
+          -- Data Outputs
+          DATA_OUT     <= multiplier_int;
+          OVERFLOW_OUT <= (others => '0');
 
-              -- Control Outputs
-              READY <= '1';
+          -- Control Outputs
+          READY <= '1';
 
-              -- FSM Control
-              multiplier_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Data Internal
-              multiplier_int <= std_logic_vector(signed(multiplier_int) - signed(DATA_A_IN));
-
-              -- Control Internal
-              index_loop <= std_logic_vector(signed(index_loop) - signed(ONE_DATA));
-            end if;
-          elsif (DATA_B_IN(DATA_SIZE-1) = '0') then
-            if (signed(index_loop) = signed(DATA_B_IN)) then
-              -- Data Outputs
-              DATA_OUT     <= multiplier_int;
-              OVERFLOW_OUT <= ZERO_DATA;
-
-              -- Control Outputs
-              READY <= '1';
-
-              -- FSM Control
-              multiplier_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Data Internal
-              multiplier_int <= std_logic_vector(signed(multiplier_int) + signed(DATA_A_IN));
-
-              -- Control Internal
-              index_loop <= std_logic_vector(signed(index_loop) + signed(ONE_DATA));
-            end if;
-          end if;
+          -- FSM Control
+          multiplier_ctrl_fsm_int <= STARTER_STATE;
 
         when others =>
           -- FSM Control

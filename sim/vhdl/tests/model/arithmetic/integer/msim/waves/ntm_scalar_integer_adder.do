@@ -20,6 +20,7 @@ add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_adder_test/scalar_i
 add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_adder_test/scalar_integer_adder/OVERFLOW_OUT
 
 add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_adder_test/scalar_integer_adder/adder_ctrl_fsm_int
+
 add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_adder_test/scalar_integer_adder/adder_int
 
 TreeUpdate [SetDefaultTree]

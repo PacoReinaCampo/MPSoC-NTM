@@ -15,9 +15,6 @@ vlib work
 alias ntm_scalar_cosh_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_cosh_function.vhd
 }
 
@@ -28,9 +25,6 @@ alias ntm_scalar_cosh_function_design_compilation {
 alias ntm_scalar_exponentiator_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_exponentiator_function.vhd
 }
 
@@ -41,9 +35,6 @@ alias ntm_scalar_exponentiator_function_design_compilation {
 alias ntm_scalar_logarithm_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_logarithm_function.vhd
 }
 
@@ -54,9 +45,6 @@ alias ntm_scalar_logarithm_function_design_compilation {
 alias ntm_scalar_sinh_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_sinh_function.vhd
 }
 
@@ -67,9 +55,6 @@ alias ntm_scalar_sinh_function_design_compilation {
 alias ntm_scalar_tanh_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_tanh_function.vhd
 }
 
@@ -80,9 +65,6 @@ alias ntm_scalar_tanh_function_design_compilation {
 alias ntm_vector_cosh_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_cosh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/ntm_vector_cosh_function.vhd
 }
@@ -94,9 +76,6 @@ alias ntm_vector_cosh_function_design_compilation {
 alias ntm_vector_exponentiator_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/ntm_vector_exponentiator_function.vhd
 }
@@ -108,9 +87,6 @@ alias ntm_vector_exponentiator_function_design_compilation {
 alias ntm_vector_logarithm_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_logarithm_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/ntm_vector_logarithm_function.vhd
 }
@@ -122,9 +98,6 @@ alias ntm_vector_logarithm_function_design_compilation {
 alias ntm_vector_sinh_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_sinh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/ntm_vector_sinh_function.vhd
 }
@@ -136,9 +109,6 @@ alias ntm_vector_sinh_function_design_compilation {
 alias ntm_vector_tanh_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_tanh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/ntm_vector_tanh_function.vhd
 }
@@ -150,9 +120,6 @@ alias ntm_vector_tanh_function_design_compilation {
 alias ntm_matrix_cosh_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_cosh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/ntm_vector_cosh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/matrix/ntm_matrix_cosh_function.vhd
@@ -165,9 +132,6 @@ alias ntm_matrix_cosh_function_design_compilation {
 alias ntm_matrix_exponentiator_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/ntm_vector_exponentiator_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/matrix/ntm_matrix_exponentiator_function.vhd
@@ -180,9 +144,6 @@ alias ntm_matrix_exponentiator_function_design_compilation {
 alias ntm_matrix_logarithm_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_logarithm_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/ntm_vector_logarithm_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/matrix/ntm_matrix_logarithm_function.vhd
@@ -195,9 +156,6 @@ alias ntm_matrix_logarithm_function_design_compilation {
 alias ntm_matrix_sinh_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_sinh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/ntm_vector_sinh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/matrix/ntm_matrix_sinh_function.vhd
@@ -210,9 +168,6 @@ alias ntm_matrix_sinh_function_design_compilation {
 alias ntm_matrix_tanh_function_design_compilation {
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_arithmetic_pkg.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/pkg/ntm_math_pkg.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
-  vcom -2008 -reportprogress 300 -work work $design_path/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/scalar/ntm_scalar_tanh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/vector/ntm_vector_tanh_function.vhd
   vcom -2008 -reportprogress 300 -work work $design_path/math/series/matrix/ntm_matrix_tanh_function.vhd

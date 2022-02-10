@@ -18,6 +18,11 @@ add wave -noupdate /ntm_series_testbench/ntm_scalar_cosh_function_test/scalar_co
 
 add wave -noupdate /ntm_series_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/controller_ctrl_fsm_int
 
+add wave -noupdate /ntm_series_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/data_int_scalar_integer_multiplier
+
+add wave -noupdate /ntm_series_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/index_adder_loop
+add wave -noupdate /ntm_series_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/index_multiplier_loop
+
 add wave -noupdate /ntm_series_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/start_scalar_integer_adder
 add wave -noupdate /ntm_series_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/operation_scalar_integer_adder
 add wave -noupdate /ntm_series_testbench/ntm_scalar_cosh_function_test/scalar_cosh_function/data_a_in_scalar_integer_adder

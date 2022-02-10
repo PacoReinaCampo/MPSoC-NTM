@@ -19,8 +19,8 @@ add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_multiplier_test/sca
 add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_multiplier_test/scalar_integer_multiplier/OVERFLOW_OUT
 
 add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_multiplier_test/scalar_integer_multiplier/multiplier_ctrl_fsm_int
+
 add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_multiplier_test/scalar_integer_multiplier/multiplier_int
-add wave -noupdate /ntm_integer_testbench/ntm_scalar_integer_multiplier_test/scalar_integer_multiplier/index_loop
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1042309203 ps} 0} {{Cursor 2} {7446987402 ps} 0}

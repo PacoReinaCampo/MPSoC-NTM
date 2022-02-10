@@ -47,7 +47,7 @@ package ntm_series_pkg is
   -----------------------------------------------------------------------
 
   -- SYSTEM-SIZE
-  constant DATA_SIZE : integer := 128;
+  constant DATA_SIZE : integer := 32;
 
   constant CONTROL_X_SIZE : integer := 3;
   constant CONTROL_Y_SIZE : integer := 3;

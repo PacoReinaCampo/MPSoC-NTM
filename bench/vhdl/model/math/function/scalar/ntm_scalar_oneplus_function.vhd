@@ -42,15 +42,15 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.ntm_arithmetic_pkg.all;
-use work.ntm_math_pkg.all;
+use ieee.math_real.all; 
+use ieee.float_pkg.all;
 
 entity ntm_scalar_oneplus_function is
   generic (
-    DATA_SIZE    : integer := 128;
+    DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64
     );
-  port (
+  port(
     -- GLOBAL
     CLK : in std_logic;
     RST : in std_logic;
@@ -63,7 +63,7 @@ entity ntm_scalar_oneplus_function is
     DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
     );
-end entity;
+end ntm_scalar_oneplus_function;
 
 architecture ntm_scalar_oneplus_function_architecture of ntm_scalar_oneplus_function is
 
@@ -71,11 +71,9 @@ architecture ntm_scalar_oneplus_function_architecture of ntm_scalar_oneplus_func
   -- Types
   -----------------------------------------------------------------------
 
-  type controller_ctrl_fsm is (
-    STARTER_STATE,                      -- STEP 0
-    SCALAR_EXPONENTIATOR_STATE,         -- STEP 1
-    SCALAR_LOGARITHM_STATE,             -- STEP 2
-    SCALAR_ADDER_STATE                  -- STEP 3
+  type oneplus_ctrl_fsm is (
+    STARTER_STATE,
+    ENDER_STATE
     );
 
   -----------------------------------------------------------------------
@@ -87,10 +85,10 @@ architecture ntm_scalar_oneplus_function_architecture of ntm_scalar_oneplus_func
   constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
   constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_signed(3, DATA_SIZE));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -102,208 +100,56 @@ architecture ntm_scalar_oneplus_function_architecture of ntm_scalar_oneplus_func
   -----------------------------------------------------------------------
 
   -- Finite State Machine
-  signal controller_ctrl_fsm_int : controller_ctrl_fsm;
+  signal oneplus_ctrl_fsm_int : oneplus_ctrl_fsm;
 
-  -- SCALAR ADDER
-  -- CONTROL
-  signal start_scalar_integer_adder : std_logic;
-  signal ready_scalar_integer_adder : std_logic;
-
-  signal operation_scalar_integer_adder : std_logic;
-
-  -- DATA
-  signal data_a_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_integer_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR EXPONENTIATOR
-  -- CONTROL
-  signal start_scalar_exponentiator_function : std_logic;
-  signal ready_scalar_exponentiator_function : std_logic;
-
-  -- DATA
-  signal data_in_scalar_exponentiator_function  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_exponentiator_function : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR LOGARITHM
-  -- CONTROL
-  signal start_scalar_logarithm_function : std_logic;
-  signal ready_scalar_logarithm_function : std_logic;
-
-  -- DATA
-  signal data_in_scalar_logarithm_function  : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_logarithm_function : std_logic_vector(DATA_SIZE-1 downto 0);
+  -- Internal Signals
+  signal data_int : real;
 
 begin
 
-  -----------------------------------------------------------------------
-  -- Body
-  -----------------------------------------------------------------------
-
-  -- DATA_OUT = 1 + logarithm(1 + (exponentiation(DATA_IN)))
-
-  -- CONTROL
-  ctrl_fsm : process(CLK, RST)
+  ctrl_fsm : process (CLK, RST)
   begin
-    if (RST = '0') then
+    if(RST = '0') then
       -- Data Outputs
       DATA_OUT <= ZERO_DATA;
 
       -- Control Outputs
       READY <= '0';
 
-      -- Control Internal
-      start_scalar_integer_adder <= '0';
-
-      operation_scalar_integer_adder <= '0';
-
-      start_scalar_exponentiator_function <= '0';
-      start_scalar_logarithm_function     <= '0';
-
       -- Data Internal
-      data_a_in_scalar_integer_adder <= ZERO_DATA;
-      data_b_in_scalar_integer_adder <= ZERO_DATA;
+      data_int <= 0.0;
 
-      data_in_scalar_exponentiator_function <= ZERO_DATA;
-      data_in_scalar_logarithm_function     <= ZERO_DATA;
+    elsif rising_edge(CLK) then
 
-    elsif (rising_edge(CLK)) then
-
-      case controller_ctrl_fsm_int is
-        when STARTER_STATE =>           -- STEP 0
+      case oneplus_ctrl_fsm_int is
+        when STARTER_STATE =>
           -- Control Outputs
           READY <= '0';
 
           if (START = '1') then
-            -- Control Internal
-            start_scalar_exponentiator_function <= '1';
-
-            -- Data Input
-            data_in_scalar_exponentiator_function <= DATA_IN;
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_EXPONENTIATOR_STATE;
-          end if;
-
-        when SCALAR_EXPONENTIATOR_STATE =>  -- STEP 1
-
-          if (ready_scalar_exponentiator_function = '1') then
-            -- Control Internal
-            start_scalar_logarithm_function <= '1';
-
             -- Data Internal
-            data_in_scalar_logarithm_function <= data_out_scalar_exponentiator_function;
+            data_int <= to_real(to_float(DATA_IN));
 
             -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_LOGARITHM_STATE;
-          else
-            -- Control Internal
-            start_scalar_exponentiator_function <= '0';
+            oneplus_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
-        when SCALAR_LOGARITHM_STATE =>  -- STEP 3
+        when ENDER_STATE =>
 
-          if (ready_scalar_logarithm_function = '1') then
-            -- Control Internal
-            start_scalar_integer_adder <= '1';
+          -- Data Outputs
+          DATA_OUT <= std_logic_vector(to_float(1.0+log(1.0+exp(data_int))));
 
-            operation_scalar_integer_adder <= '0';
+          -- Control Outputs
+          READY <= '1';
 
-            -- Data Internal
-            data_a_in_scalar_integer_adder <= ONE_DATA;
-            data_b_in_scalar_integer_adder <= data_out_scalar_logarithm_function;
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
-          else
-            -- Control Internal
-            start_scalar_logarithm_function <= '0';
-          end if;
-
-        when SCALAR_ADDER_STATE =>      -- STEP 4
-
-          if (ready_scalar_integer_adder = '1') then
-            -- Data Outputs
-            DATA_OUT <= data_out_scalar_integer_adder;
-
-            -- Control Outputs
-            READY <= '1';
-
-            -- FSM Control
-            controller_ctrl_fsm_int <= STARTER_STATE;
-          else
-            -- Control Internal
-            start_scalar_integer_adder <= '0';
-          end if;
+          -- FSM Control
+          oneplus_ctrl_fsm_int <= STARTER_STATE;
 
         when others =>
           -- FSM Control
-          controller_ctrl_fsm_int <= STARTER_STATE;
+          oneplus_ctrl_fsm_int <= STARTER_STATE;
       end case;
     end if;
   end process;
 
-  -- SCALAR ADDER
-  scalar_integer_adder : ntm_scalar_integer_adder
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_integer_adder,
-      READY => ready_scalar_integer_adder,
-
-      OPERATION => operation_scalar_integer_adder,
-
-      -- DATA
-      DATA_A_IN => data_a_in_scalar_integer_adder,
-      DATA_B_IN => data_b_in_scalar_integer_adder,
-      DATA_OUT  => data_out_scalar_integer_adder
-      );
-
-  -- SCALAR EXPONENTIATOR
-  scalar_exponentiator_function : ntm_scalar_exponentiator_function
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_exponentiator_function,
-      READY => ready_scalar_exponentiator_function,
-
-      -- DATA
-      DATA_IN  => data_in_scalar_exponentiator_function,
-      DATA_OUT => data_out_scalar_exponentiator_function
-      );
-
-  -- SCALAR LOGARITHM
-  scalar_logarithm_function : ntm_scalar_logarithm_function
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_logarithm_function,
-      READY => ready_scalar_logarithm_function,
-
-      -- DATA
-      DATA_IN  => data_in_scalar_logarithm_function,
-      DATA_OUT => data_out_scalar_logarithm_function
-      );
-
-end architecture;
+end ntm_scalar_oneplus_function_architecture;
