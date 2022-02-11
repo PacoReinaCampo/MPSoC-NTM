@@ -18,12 +18,12 @@
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
 -- of this software and associated documentation files (the "Software"), to deal
--- out the Software without restriction, including without limitation the rights
+-- in the Software without restriction, including without limitation the rights
 -- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 -- copies of the Software, and to permit persons to whom the Software is
 -- furnished to do so, subject to the following conditions:
 --
--- The above copyright notice and this permission notice shall be included out
+-- The above copyright notice and this permission notice shall be included in
 -- all copies or substantial portions of the Software.
 --
 -- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -42,166 +42,51 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.ntm_math_pkg.all;
-use work.ntm_function_pkg.all;
+use std.env.all;
 
-entity ntm_function_stimulus is
-  generic (
-    -- SYSTEM-SIZE
-    DATA_SIZE    : integer := 128;
-    CONTROL_SIZE : integer := 64;
+library osvvm;
+use osvvm.RandomPkg.all;
+use osvvm.CoveragePkg.all;
 
-    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x out 0 to X-1
-    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y out 0 to Y-1
-    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j out 0 to N-1
-    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k out 0 to W-1
-    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l out 0 to L-1
-    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i out 0 to R-1
-    );
-  port (
-    -- GLOBAL
-    CLK : out std_logic;
-    RST : out std_logic;
+entity ntm_intro_testbench is
+end entity ntm_intro_testbench;
 
-    -----------------------------------------------------------------------
-    -- STIMULUS SCALAR
-    -----------------------------------------------------------------------
+use work.ntm_intro_model_pkg.all;
+use work.ntm_intro_pkg.all;
 
-    -- SCALAR LOGISTIC
-    -- CONTROL
-    SCALAR_LOGISTIC_START : out std_logic;
-    SCALAR_LOGISTIC_READY : in  std_logic;
-
-    -- DATA
-    SCALAR_LOGISTIC_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_LOGISTIC_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- SCALAR ONEPLUS
-    -- CONTROL
-    SCALAR_ONEPLUS_START : out std_logic;
-    SCALAR_ONEPLUS_READY : in  std_logic;
-
-    -- DATA
-    SCALAR_ONEPLUS_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-    SCALAR_ONEPLUS_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -----------------------------------------------------------------------
-    -- STIMULUS VECTOR
-    -----------------------------------------------------------------------
-
-    -- VECTOR LOGISTIC
-    -- CONTROL
-    VECTOR_LOGISTIC_START : out std_logic;
-    VECTOR_LOGISTIC_READY : in  std_logic;
-
-    VECTOR_LOGISTIC_DATA_IN_ENABLE : out std_logic;
-
-    VECTOR_LOGISTIC_DATA_OUT_ENABLE : in std_logic;
-
-    -- DATA
-    VECTOR_LOGISTIC_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_LOGISTIC_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_LOGISTIC_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- VECTOR ONEPLUS
-    -- CONTROL
-    VECTOR_ONEPLUS_START : out std_logic;
-    VECTOR_ONEPLUS_READY : in  std_logic;
-
-    VECTOR_ONEPLUS_DATA_IN_ENABLE : out std_logic;
-
-    VECTOR_ONEPLUS_DATA_OUT_ENABLE : in std_logic;
-
-    -- DATA
-    VECTOR_ONEPLUS_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    VECTOR_ONEPLUS_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-    VECTOR_ONEPLUS_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -----------------------------------------------------------------------
-    -- STIMULUS MATRIX
-    -----------------------------------------------------------------------
-
-    -- MATRIX LOGISTIC
-    -- CONTROL
-    MATRIX_LOGISTIC_START : out std_logic;
-    MATRIX_LOGISTIC_READY : in  std_logic;
-
-    MATRIX_LOGISTIC_DATA_IN_I_ENABLE : out std_logic;
-    MATRIX_LOGISTIC_DATA_IN_J_ENABLE : out std_logic;
-
-    MATRIX_LOGISTIC_DATA_OUT_I_ENABLE : in std_logic;
-    MATRIX_LOGISTIC_DATA_OUT_J_ENABLE : in std_logic;
-
-    -- DATA
-    MATRIX_LOGISTIC_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_LOGISTIC_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_LOGISTIC_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_LOGISTIC_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
-
-    -- MATRIX ONEPLUS
-    -- CONTROL
-    MATRIX_ONEPLUS_START : out std_logic;
-    MATRIX_ONEPLUS_READY : in  std_logic;
-
-    MATRIX_ONEPLUS_DATA_IN_I_ENABLE : out std_logic;
-    MATRIX_ONEPLUS_DATA_IN_J_ENABLE : out std_logic;
-
-    MATRIX_ONEPLUS_DATA_OUT_I_ENABLE : in std_logic;
-    MATRIX_ONEPLUS_DATA_OUT_J_ENABLE : in std_logic;
-
-    -- DATA
-    MATRIX_ONEPLUS_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_ONEPLUS_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-    MATRIX_ONEPLUS_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-    MATRIX_ONEPLUS_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
-    );
-end entity;
-
-architecture ntm_function_stimulus_architecture of ntm_function_stimulus is
-
-  -----------------------------------------------------------------------
-  -- Types
-  -----------------------------------------------------------------------
+architecture ntm_intro_testbench_architecture of ntm_intro_testbench is
 
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
-  constant PERIOD : time := 10 ns;
+  -- width of adder inputs
+  constant DATA_SIZE : positive := 8;
 
-  constant WAITING : time := 50 ns;
-  constant WORKING : time := 1 ms;
+  -- clock period
+  constant PERIOD : time := 20 ns;
 
-  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
-  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
-  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
-  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
-
-  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
-
-  constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
-  constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
-
-  constant EULER : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
+  -- how many bins should be generated
+  constant C_MAX_BINS : natural := 16;
 
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
 
-  -- LOOP
-  signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal index_k_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
   -- GLOBAL
-  signal clk_int : std_logic;
-  signal rst_int : std_logic;
+  signal clk_int : std_logic := '0';
+  signal rst_int : std_logic := '0';
 
   -- CONTROL
-  signal start_int : std_logic;
+  -- coverage object of (protected) type CovPType
+  shared variable sv_coverage : CovPType;
+
+  -- SCALAR ADDER
+  signal data_a_in_int : unsigned(DATA_SIZE-1 downto 0);
+  signal data_b_in_int : unsigned(DATA_SIZE-1 downto 0);
+
+  signal data_out_model_int  : unsigned(DATA_SIZE downto 0) := (others => '0');
+  signal data_out_design_int : unsigned(DATA_SIZE downto 0) := (others => '0');
 
 begin
 
@@ -210,607 +95,84 @@ begin
   -----------------------------------------------------------------------
 
   -- clk generation
-  clk_process : process
-  begin
-    clk_int <= '1';
-    wait for PERIOD/2;
-
-    clk_int <= '0';
-    wait for PERIOD/2;
-  end process;
-
-  CLK <= clk_int;
+  clk_int <= not clk_int after PERIOD/2;
 
   -- rst generation
-  rst_process : process
+  rst_int <= '1' after 100 ns;
+
+  -- MODEL
+  intro_adder_model : ntm_intro_adder_model
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      CLK => clk_int,
+      RST => rst_int,
+
+      DATA_A_IN => data_a_in_int,
+      DATA_B_IN => data_b_in_int,
+      DATA_OUT  => data_out_model_int
+      );
+
+  -- DUT
+  intro_adder : ntm_intro_adder
+    generic map (
+      DATA_SIZE => DATA_SIZE
+      )
+    port map (
+      CLK => clk_int,
+      RST => rst_int,
+
+      DATA_A_IN => data_a_in_int,
+      DATA_B_IN => data_b_in_int,
+      DATA_OUT  => data_out_design_int
+      );
+
+  -- stimulus & coverage of adder inputs
+  StimCoverageProcess : process is
+    -- holds the two random values from sv_coverage object
+    variable v_adder_in : integer_vector(0 to 1);
   begin
-    rst_int <= '0';
-    wait for WAITING;
+    data_a_in_int <= (others => '0');
+    data_b_in_int <= (others => '0');
 
-    rst_int <= '1';
-    wait for WORKING;
-  end process;
+    -- cross bins for all possible combinations (very slow on large vector widths):
+    -- sv_coverage.AddCross(GenBin(0, 2**DATA_SIZE-1), GenBin(0, 2**DATA_SIZE-1));
 
-  RST <= rst_int;
+    -- cross bins for maximum of C_MAX_BINS slices with same width:
+    sv_coverage.AddCross(GenBin(0, 2**DATA_SIZE-1, C_MAX_BINS), GenBin(0, 2**DATA_SIZE-1, C_MAX_BINS));
 
-  -- start generation
-  start_process : process
+    -- cross bins for corner cases (min against max):
+    sv_coverage.AddCross(GenBin(0), GenBin(2**DATA_SIZE-1));
+    sv_coverage.AddCross(GenBin(2**DATA_SIZE-1), GenBin(0));
+
+    -- loop until reaching coverage goal
+    while not sv_coverage.IsCovered loop
+      wait until rising_edge(clk_int);
+      -- generate random values depending on coverage hole
+      v_adder_in := sv_coverage.RandCovPoint;
+
+      data_a_in_int <= to_unsigned(v_adder_in(0), DATA_SIZE);
+      data_b_in_int <= to_unsigned(v_adder_in(1), DATA_SIZE);
+
+      -- save generated random values in coverage object
+      sv_coverage.ICover(v_adder_in);
+    end loop;
+
+    wait for 2*PERIOD;
+    -- print coverage report
+    report("CovBin Coverage details");
+    sv_coverage.WriteBin;
+    stop;
+  end process StimCoverageProcess;
+
+  -- check if outputs of both adders are equal
+  CheckerProcess : process is
   begin
-    start_int <= '0';
-    wait for WAITING;
-
-    start_int <= '1';
-    wait for PERIOD;
-
-    start_int <= '0';
-    wait for WORKING;
-  end process;
-
-  -- SCALAR-FUNCTIONALITY
-  SCALAR_LOGISTIC_START <= start_int;
-  SCALAR_ONEPLUS_START  <= start_int;
-
-  -- VECTOR-FUNCTIONALITY
-  VECTOR_LOGISTIC_START <= start_int;
-  VECTOR_ONEPLUS_START  <= start_int;
-
-  -- MATRIX-FUNCTIONALITY
-  MATRIX_LOGISTIC_START <= start_int;
-  MATRIX_ONEPLUS_START  <= start_int;
-
-  -----------------------------------------------------------------------
-  -- STIMULUS
-  -----------------------------------------------------------------------
-
-  main_test : process
-  begin
-
-    -------------------------------------------------------------------
-    -- SCALAR-FUNCTION
-    -------------------------------------------------------------------
-
-    if (STIMULUS_NTM_SCALAR_LOGISTIC_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_LOGISTIC_TEST       ";
-      -------------------------------------------------------------------
-
-      if (STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_LOGISTIC_CASE 0     ";
-        -------------------------------------------------------------------
-
-        SCALAR_LOGISTIC_DATA_IN <= SCALAR_SAMPLE_A;
-      end if;
-
-      if (STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_LOGISTIC_CASE 1     ";
-        -------------------------------------------------------------------
-
-        SCALAR_LOGISTIC_DATA_IN <= SCALAR_SAMPLE_B;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_NTM_SCALAR_ONEPLUS_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_SCALAR_ONEPLUS_TEST        ";
-      -------------------------------------------------------------------
-
-      if (STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ONEPLUS_CASE 0      ";
-        -------------------------------------------------------------------
-
-        SCALAR_ONEPLUS_DATA_IN <= SCALAR_SAMPLE_A;
-      end if;
-
-      if (STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_SCALAR_ONEPLUS_CASE 1      ";
-        -------------------------------------------------------------------
-
-        SCALAR_ONEPLUS_DATA_IN <= SCALAR_SAMPLE_B;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    -------------------------------------------------------------------
-    -- VECTOR-FUNCTION
-    -------------------------------------------------------------------
-
-    if (STIMULUS_NTM_VECTOR_LOGISTIC_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_LOGISTIC_TEST       ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      VECTOR_LOGISTIC_SIZE_IN <= THREE_CONTROL;
-
-      if (STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_LOGISTIC_CASE 0     ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        VECTOR_LOGISTIC_DATA_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-
-        VECTOR_LOGISTIC_FIRST_RUN : loop
-          if (VECTOR_LOGISTIC_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_LOGISTIC_SIZE_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            VECTOR_LOGISTIC_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            VECTOR_LOGISTIC_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= ZERO_CONTROL;
-          elsif ((VECTOR_LOGISTIC_DATA_OUT_ENABLE = '1' or VECTOR_LOGISTIC_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_LOGISTIC_SIZE_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            VECTOR_LOGISTIC_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            VECTOR_LOGISTIC_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            VECTOR_LOGISTIC_DATA_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit VECTOR_LOGISTIC_FIRST_RUN when VECTOR_LOGISTIC_READY = '1';
-        end loop VECTOR_LOGISTIC_FIRST_RUN;
-      end if;
-
-      if (STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_LOGISTIC_CASE 1     ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        VECTOR_LOGISTIC_DATA_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-
-        VECTOR_LOGISTIC_SECOND_RUN : loop
-          if ((VECTOR_LOGISTIC_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_LOGISTIC_SIZE_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            VECTOR_LOGISTIC_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            VECTOR_LOGISTIC_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= ZERO_CONTROL;
-          elsif (((VECTOR_LOGISTIC_DATA_OUT_ENABLE = '1') or (VECTOR_LOGISTIC_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_LOGISTIC_SIZE_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            VECTOR_LOGISTIC_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            VECTOR_LOGISTIC_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            VECTOR_LOGISTIC_DATA_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit VECTOR_LOGISTIC_SECOND_RUN when VECTOR_LOGISTIC_READY = '1';
-        end loop VECTOR_LOGISTIC_SECOND_RUN;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_NTM_VECTOR_ONEPLUS_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_VECTOR_ONEPLUS_TEST        ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      VECTOR_ONEPLUS_SIZE_IN <= THREE_CONTROL;
-
-      if (STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_ONEPLUS_CASE 0      ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        VECTOR_ONEPLUS_DATA_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-
-        VECTOR_ONEPLUS_FIRST_RUN : loop
-          if (VECTOR_ONEPLUS_DATA_OUT_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(VECTOR_ONEPLUS_SIZE_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            VECTOR_ONEPLUS_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            VECTOR_ONEPLUS_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= ZERO_CONTROL;
-          elsif ((VECTOR_ONEPLUS_DATA_OUT_ENABLE = '1' or VECTOR_ONEPLUS_START = '1') and (unsigned(index_i_loop) < unsigned(VECTOR_ONEPLUS_SIZE_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            VECTOR_ONEPLUS_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            VECTOR_ONEPLUS_DATA_IN <= VECTOR_SAMPLE_A(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            VECTOR_ONEPLUS_DATA_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit VECTOR_ONEPLUS_FIRST_RUN when VECTOR_ONEPLUS_READY = '1';
-        end loop VECTOR_ONEPLUS_FIRST_RUN;
-      end if;
-
-      if (STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_VECTOR_ONEPLUS_CASE 1      ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        VECTOR_ONEPLUS_DATA_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-
-        VECTOR_ONEPLUS_SECOND_RUN : loop
-          if ((VECTOR_ONEPLUS_DATA_OUT_ENABLE = '1') and (unsigned(index_i_loop) = unsigned(VECTOR_ONEPLUS_SIZE_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            VECTOR_ONEPLUS_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            VECTOR_ONEPLUS_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= ZERO_CONTROL;
-          elsif (((VECTOR_ONEPLUS_DATA_OUT_ENABLE = '1') or (VECTOR_ONEPLUS_START = '1')) and (unsigned(index_i_loop) < unsigned(VECTOR_ONEPLUS_SIZE_IN)-unsigned(ONE_CONTROL))) then
-            -- CONTROL
-            VECTOR_ONEPLUS_DATA_IN_ENABLE <= '1';
-
-            -- DATA
-            VECTOR_ONEPLUS_DATA_IN <= VECTOR_SAMPLE_B(to_integer(unsigned(index_i_loop)));
-
-            -- LOOP
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-          else
-            -- CONTROL
-            VECTOR_ONEPLUS_DATA_IN_ENABLE <= '0';
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit VECTOR_ONEPLUS_SECOND_RUN when VECTOR_ONEPLUS_READY = '1';
-        end loop VECTOR_ONEPLUS_SECOND_RUN;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    -------------------------------------------------------------------
-    -- MATRIX-FUNCTION
-    -------------------------------------------------------------------
-
-    if (STIMULUS_NTM_MATRIX_LOGISTIC_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_LOGISTIC_TEST       ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      MATRIX_LOGISTIC_SIZE_I_IN <= THREE_CONTROL;
-      MATRIX_LOGISTIC_SIZE_J_IN <= THREE_CONTROL;
-
-      if (STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_LOGISTIC_CASE 0     ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        MATRIX_LOGISTIC_DATA_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-        index_j_loop <= ZERO_CONTROL;
-
-        MATRIX_LOGISTIC_FIRST_RUN : loop
-          if (MATRIX_LOGISTIC_DATA_OUT_I_ENABLE = '1' and MATRIX_LOGISTIC_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_LOGISTIC_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- CONTROL
-            MATRIX_LOGISTIC_DATA_IN_I_ENABLE <= '1';
-            MATRIX_LOGISTIC_DATA_IN_J_ENABLE <= '1';
-          elsif (MATRIX_LOGISTIC_DATA_OUT_I_ENABLE = '1' and MATRIX_LOGISTIC_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_LOGISTIC_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- CONTROL
-            MATRIX_LOGISTIC_DATA_IN_I_ENABLE <= '1';
-            MATRIX_LOGISTIC_DATA_IN_J_ENABLE <= '1';
-          elsif (MATRIX_LOGISTIC_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_LOGISTIC_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- CONTROL
-            MATRIX_LOGISTIC_DATA_IN_J_ENABLE <= '1';
-          else
-            -- CONTROL
-            MATRIX_LOGISTIC_DATA_IN_I_ENABLE <= '0';
-            MATRIX_LOGISTIC_DATA_IN_J_ENABLE <= '0';
-          end if;
-
-          -- LOOP
-          if (MATRIX_LOGISTIC_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_LOGISTIC_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_LOGISTIC_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= ZERO_CONTROL;
-            index_j_loop <= ZERO_CONTROL;
-          elsif (MATRIX_LOGISTIC_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_LOGISTIC_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_LOGISTIC_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_LOGISTIC_DATA_OUT_J_ENABLE = '1' or MATRIX_LOGISTIC_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_LOGISTIC_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit MATRIX_LOGISTIC_FIRST_RUN when MATRIX_LOGISTIC_READY = '1';
-        end loop MATRIX_LOGISTIC_FIRST_RUN;
-      end if;
-
-      if (STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_LOGISTIC_CASE 1     ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        MATRIX_LOGISTIC_DATA_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-        index_j_loop <= ZERO_CONTROL;
-
-        MATRIX_LOGISTIC_SECOND_RUN : loop
-          if (MATRIX_LOGISTIC_DATA_OUT_I_ENABLE = '1' and MATRIX_LOGISTIC_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_LOGISTIC_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- CONTROL
-            MATRIX_LOGISTIC_DATA_IN_I_ENABLE <= '1';
-            MATRIX_LOGISTIC_DATA_IN_J_ENABLE <= '1';
-          elsif (MATRIX_LOGISTIC_DATA_OUT_I_ENABLE = '1' and MATRIX_LOGISTIC_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_LOGISTIC_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- CONTROL
-            MATRIX_LOGISTIC_DATA_IN_I_ENABLE <= '1';
-            MATRIX_LOGISTIC_DATA_IN_J_ENABLE <= '1';
-          elsif (MATRIX_LOGISTIC_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_LOGISTIC_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- CONTROL
-            MATRIX_LOGISTIC_DATA_IN_J_ENABLE <= '1';
-          else
-            -- CONTROL
-            MATRIX_LOGISTIC_DATA_IN_I_ENABLE <= '0';
-            MATRIX_LOGISTIC_DATA_IN_J_ENABLE <= '0';
-          end if;
-
-          -- LOOP
-          if (MATRIX_LOGISTIC_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_LOGISTIC_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_LOGISTIC_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= ZERO_CONTROL;
-            index_j_loop <= ZERO_CONTROL;
-          elsif (MATRIX_LOGISTIC_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_LOGISTIC_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_LOGISTIC_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_LOGISTIC_DATA_OUT_J_ENABLE = '1' or MATRIX_LOGISTIC_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_LOGISTIC_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit MATRIX_LOGISTIC_SECOND_RUN when MATRIX_LOGISTIC_READY = '1';
-        end loop MATRIX_LOGISTIC_SECOND_RUN;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    if (STIMULUS_NTM_MATRIX_ONEPLUS_TEST) then
-
-      -------------------------------------------------------------------
-      MONITOR_TEST <= "STIMULUS_NTM_MATRIX_ONEPLUS_TEST        ";
-      -------------------------------------------------------------------
-
-      -- DATA
-      MATRIX_ONEPLUS_SIZE_I_IN <= THREE_CONTROL;
-      MATRIX_ONEPLUS_SIZE_J_IN <= THREE_CONTROL;
-
-      if (STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_ONEPLUS_CASE 0      ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        MATRIX_ONEPLUS_DATA_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-        index_j_loop <= ZERO_CONTROL;
-
-        MATRIX_ONEPLUS_FIRST_RUN : loop
-          if (MATRIX_ONEPLUS_DATA_OUT_I_ENABLE = '1' and MATRIX_ONEPLUS_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_ONEPLUS_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- CONTROL
-            MATRIX_ONEPLUS_DATA_IN_I_ENABLE <= '1';
-            MATRIX_ONEPLUS_DATA_IN_J_ENABLE <= '1';
-          elsif (MATRIX_ONEPLUS_DATA_OUT_I_ENABLE = '1' and MATRIX_ONEPLUS_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_ONEPLUS_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- CONTROL
-            MATRIX_ONEPLUS_DATA_IN_I_ENABLE <= '1';
-            MATRIX_ONEPLUS_DATA_IN_J_ENABLE <= '1';
-          elsif (MATRIX_ONEPLUS_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_ONEPLUS_DATA_IN <= MATRIX_SAMPLE_A(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- CONTROL
-            MATRIX_ONEPLUS_DATA_IN_J_ENABLE <= '1';
-          else
-            -- CONTROL
-            MATRIX_ONEPLUS_DATA_IN_I_ENABLE <= '0';
-            MATRIX_ONEPLUS_DATA_IN_J_ENABLE <= '0';
-          end if;
-
-          -- LOOP
-          if (MATRIX_ONEPLUS_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_ONEPLUS_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_ONEPLUS_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= ZERO_CONTROL;
-            index_j_loop <= ZERO_CONTROL;
-          elsif (MATRIX_ONEPLUS_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_ONEPLUS_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_ONEPLUS_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_ONEPLUS_DATA_OUT_J_ENABLE = '1' or MATRIX_ONEPLUS_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_ONEPLUS_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit MATRIX_ONEPLUS_FIRST_RUN when MATRIX_ONEPLUS_READY = '1';
-        end loop MATRIX_ONEPLUS_FIRST_RUN;
-      end if;
-
-      if (STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1) then
-
-        -------------------------------------------------------------------
-        MONITOR_CASE <= "STIMULUS_NTM_MATRIX_ONEPLUS_CASE 1      ";
-        -------------------------------------------------------------------
-
-        -- INITIAL CONDITIONS
-        -- DATA
-        MATRIX_ONEPLUS_DATA_IN <= ZERO_DATA;
-
-        -- LOOP
-        index_i_loop <= ZERO_CONTROL;
-        index_j_loop <= ZERO_CONTROL;
-
-        MATRIX_ONEPLUS_SECOND_RUN : loop
-          if (MATRIX_ONEPLUS_DATA_OUT_I_ENABLE = '1' and MATRIX_ONEPLUS_DATA_OUT_J_ENABLE = '1' and unsigned(index_i_loop) = unsigned(ZERO_CONTROL) and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_ONEPLUS_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- CONTROL
-            MATRIX_ONEPLUS_DATA_IN_I_ENABLE <= '1';
-            MATRIX_ONEPLUS_DATA_IN_J_ENABLE <= '1';
-          elsif (MATRIX_ONEPLUS_DATA_OUT_I_ENABLE = '1' and MATRIX_ONEPLUS_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) = unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_ONEPLUS_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- CONTROL
-            MATRIX_ONEPLUS_DATA_IN_I_ENABLE <= '1';
-            MATRIX_ONEPLUS_DATA_IN_J_ENABLE <= '1';
-          elsif (MATRIX_ONEPLUS_DATA_OUT_J_ENABLE = '1' and unsigned(index_j_loop) > unsigned(ZERO_CONTROL)) then
-            -- DATA
-            MATRIX_ONEPLUS_DATA_IN <= MATRIX_SAMPLE_B(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
-
-            -- CONTROL
-            MATRIX_ONEPLUS_DATA_IN_J_ENABLE <= '1';
-          else
-            -- CONTROL
-            MATRIX_ONEPLUS_DATA_IN_I_ENABLE <= '0';
-            MATRIX_ONEPLUS_DATA_IN_J_ENABLE <= '0';
-          end if;
-
-          -- LOOP
-          if (MATRIX_ONEPLUS_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) = unsigned(MATRIX_ONEPLUS_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_ONEPLUS_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= ZERO_CONTROL;
-            index_j_loop <= ZERO_CONTROL;
-          elsif (MATRIX_ONEPLUS_DATA_OUT_J_ENABLE = '1' and (unsigned(index_i_loop) < unsigned(MATRIX_ONEPLUS_SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(MATRIX_ONEPLUS_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
-            index_j_loop <= ZERO_CONTROL;
-          elsif ((MATRIX_ONEPLUS_DATA_OUT_J_ENABLE = '1' or MATRIX_ONEPLUS_START = '1') and (unsigned(index_j_loop) < unsigned(MATRIX_ONEPLUS_SIZE_J_IN)-unsigned(ONE_CONTROL))) then
-            index_j_loop <= std_logic_vector(unsigned(index_j_loop) + unsigned(ONE_CONTROL));
-          end if;
-
-          -- GLOBAL
-          wait until rising_edge(clk_int);
-
-          -- CONTROL
-          exit MATRIX_ONEPLUS_SECOND_RUN when MATRIX_ONEPLUS_READY = '1';
-        end loop MATRIX_ONEPLUS_SECOND_RUN;
-      end if;
-
-      wait for WORKING;
-
-    end if;
-
-    assert false
-      report "END OF TEST"
+    wait until rising_edge(clk_int);
+    assert data_out_model_int = data_out_design_int
+      report "FAILURE: data_out_model_int (0x" & to_hstring(data_out_model_int) & ") & data_out_design_int (0x" & to_hstring(data_out_design_int) & ") are not equal!"
       severity failure;
+  end process CheckerProcess;
 
-  end process main_test;
-
-end architecture;
+end architecture ntm_intro_testbench_architecture;

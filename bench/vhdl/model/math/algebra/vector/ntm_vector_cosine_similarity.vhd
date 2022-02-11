@@ -143,7 +143,8 @@ begin
   ctrl_fsm : process(CLK, RST)
     variable data_a_int : std_logic_vector(DATA_SIZE-1 downto 0);
     variable data_b_int : std_logic_vector(DATA_SIZE-1 downto 0);
-    variable data_p_int : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    variable data_p_int : vector_buffer;
   begin
     if (RST = '0') then
       -- Data Outputs
@@ -238,17 +239,20 @@ begin
           -- Data Inputs
           data_a_int := ZERO_DATA;
           data_b_int := ZERO_DATA;
-          data_p_int := ZERO_DATA;
 
           for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-            data_a_int := std_logic_vector(signed(data_a_int) + signed(vector_a_int(i)));
-            data_b_int := std_logic_vector(signed(data_b_int) + signed(vector_a_int(i)));
-
-            data_p_int := std_logic_vector(signed(data_p_int) + signed(vector_a_int(i)));
+            data_p_int(i) := ZERO_DATA;
           end loop;
 
           for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-            vector_out_int(i) <= std_logic_vector(signed(data_p_int)/signed(data_a_int)*signed(data_b_int));
+            data_a_int := std_logic_vector(signed(data_a_int) + (signed(vector_a_int(i))*signed(vector_a_int(i))));
+            data_b_int := std_logic_vector(signed(data_b_int) + (signed(vector_a_int(i))*signed(vector_a_int(i))));
+
+            data_p_int(i) := std_logic_vector(signed(data_p_int(i)) + (signed(vector_a_int(i))*signed(vector_b_int(i))));
+          end loop;
+
+          for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
+            vector_out_int(i) <= std_logic_vector(signed(data_p_int(i))/(signed(data_a_int)*signed(data_b_int)));
           end loop;
 
           -- FSM Control
