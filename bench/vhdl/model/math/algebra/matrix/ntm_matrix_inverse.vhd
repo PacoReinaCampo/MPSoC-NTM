@@ -125,7 +125,6 @@ architecture ntm_matrix_inverse_architecture of ntm_matrix_inverse is
   -- Finite State Machine
   signal inverse_ctrl_fsm_int : inverse_ctrl_fsm;
 
-
   -- Control Internal
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
   signal index_j_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -285,16 +284,16 @@ begin
         when INVERSION_STATE =>         -- STEP 5
 
           -- Data Inputs
-          for k in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-            if (matrix_in_int(k, k) = ZERO_DATA) then
+          for m in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+            if (matrix_in_int(m, m) = ZERO_DATA) then
               for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-                if (matrix_in_int(i, k) /= ZERO_DATA) then
+                if (matrix_in_int(i, m) /= ZERO_DATA) then
                   for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-                    data_interchange_in_int(j)  := matrix_in_int(k, j);
-                    data_interchange_out_int(j) := matrix_out_int(k, j);
+                    data_interchange_in_int(j)  := matrix_in_int(m, j);
+                    data_interchange_out_int(j) := matrix_out_int(m, j);
 
-                    matrix_in_int(k, j)  := matrix_in_int(i, j);
-                    matrix_out_int(k, j) := matrix_out_int(i, j);
+                    matrix_in_int(m, j)  := matrix_in_int(i, j);
+                    matrix_out_int(m, j) := matrix_out_int(i, j);
 
                     matrix_in_int(i, j)  := data_interchange_in_int(j);
                     matrix_out_int(i, j) := data_interchange_out_int(j);
@@ -303,12 +302,12 @@ begin
               end loop;
             end if;
 
-            for i in k+1 to to_integer(unsigned(SIZE_I_IN))-1 loop
-              data_quotient_int := std_logic_vector(signed(matrix_in_int(i, k))/signed(matrix_in_int(k, k)));
+            for i in m+1 to to_integer(unsigned(SIZE_I_IN))-1 loop
+              data_quotient_int := std_logic_vector(signed(matrix_in_int(i, m))/signed(matrix_in_int(m, m)));
 
               for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-                matrix_in_int(i, j)  := std_logic_vector(signed(matrix_in_int(i, j))-(resize(signed(data_quotient_int), DATA_SIZE/2)*resize(signed(matrix_in_int(k, j)), DATA_SIZE/2)));
-                matrix_out_int(i, j) := std_logic_vector(signed(matrix_out_int(i, j))-(resize(signed(data_quotient_int), DATA_SIZE/2)*resize(signed(matrix_out_int(k, j)), DATA_SIZE/2)));
+                matrix_in_int(i, j)  := std_logic_vector(signed(matrix_in_int(i, j))-(resize(signed(data_quotient_int), DATA_SIZE/2)*resize(signed(matrix_in_int(m, j)), DATA_SIZE/2)));
+                matrix_out_int(i, j) := std_logic_vector(signed(matrix_out_int(i, j))-(resize(signed(data_quotient_int), DATA_SIZE/2)*resize(signed(matrix_out_int(m, j)), DATA_SIZE/2)));
               end loop;
             end loop;
           end loop;

@@ -107,9 +107,6 @@ architecture ntm_scalar_integer_multiplier_architecture of ntm_scalar_integer_mu
   -- Data Internal
   signal multiplier_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  -- Control Internal
-  signal index_loop : std_logic_vector(DATA_SIZE-1 downto 0);
-
 begin
 
   -----------------------------------------------------------------------

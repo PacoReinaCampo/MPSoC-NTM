@@ -62,6 +62,8 @@ entity ntm_vector_cosine_similarity is
     DATA_A_IN_ENABLE : in std_logic;
     DATA_B_IN_ENABLE : in std_logic;
 
+    DATA_ENABLE : out std_logic;
+
     DATA_OUT_ENABLE : out std_logic;
 
     -- DATA
@@ -78,12 +80,18 @@ architecture ntm_vector_cosine_similarity_architecture of ntm_vector_cosine_simi
   -- Types
   -----------------------------------------------------------------------
 
+  -- Finite State Machine
   type cosine_similarity_ctrl_fsm is (
     STARTER_STATE,                      -- STEP 0
     INPUT_STATE,                        -- STEP 1
-    SCALAR_MULTIPLIER_STATE,            -- STEP 2
-    SCALAR_ADDER_STATE                  -- STEP 3
+    ENDER_STATE,                        -- STEP 2
+    COSINE_SIMILARITY_STATE,            -- STEP 3
+    CLEAN_STATE,                        -- STEP 4
+    OPERATION_STATE                     -- STEP 5
     );
+
+  -- Buffer
+  type vector_buffer is array (CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Constants
@@ -111,33 +119,17 @@ architecture ntm_vector_cosine_similarity_architecture of ntm_vector_cosine_simi
   -- Finite State Machine
   signal cosine_similarity_ctrl_fsm_int : cosine_similarity_ctrl_fsm;
 
+  -- Buffer
+  signal vector_a_int : vector_buffer;
+  signal vector_b_int : vector_buffer;
+
+  signal vector_out_int : vector_buffer;
+
   -- Internal Signals
   signal index_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
   signal data_a_in_cosine_similarity_int : std_logic;
   signal data_b_in_cosine_similarity_int : std_logic;
-
-  -- SCALAR ADDER
-  -- CONTROL
-  signal start_scalar_integer_adder : std_logic;
-  signal ready_scalar_integer_adder : std_logic;
-
-  signal operation_scalar_integer_adder : std_logic;
-
-  -- DATA
-  signal data_a_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_integer_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
-
-  -- SCALAR MULTIPLIER
-  -- CONTROL
-  signal start_scalar_integer_multiplier : std_logic;
-  signal ready_scalar_integer_multiplier : std_logic;
-
-  -- DATA
-  signal data_a_in_scalar_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_integer_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -149,6 +141,9 @@ begin
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
+    variable data_a_int : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable data_b_int : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable data_p_int : std_logic_vector(DATA_SIZE-1 downto 0);
   begin
     if (RST = '0') then
       -- Data Outputs
@@ -157,29 +152,15 @@ begin
       -- Control Outputs
       READY <= '0';
 
+      DATA_ENABLE <= '0';
+
       DATA_OUT_ENABLE <= '0';
 
-      -- Data Internal
-      data_a_in_scalar_integer_adder <= ZERO_DATA;
-      data_b_in_scalar_integer_adder <= ZERO_DATA;
-
-      data_a_in_scalar_integer_multiplier <= ZERO_DATA;
-      data_b_in_scalar_integer_multiplier <= ZERO_DATA;
-
       -- Control Internal
-      start_scalar_integer_adder      <= '0';
-      start_scalar_integer_multiplier <= '0';
-
-      operation_scalar_integer_adder <= '0';
-
       data_a_in_cosine_similarity_int <= '0';
       data_b_in_cosine_similarity_int <= '0';
 
       index_loop <= ZERO_CONTROL;
-
-      -- Data Internal
-      data_a_in_scalar_integer_multiplier <= ZERO_DATA;
-      data_b_in_scalar_integer_multiplier <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -187,6 +168,8 @@ begin
         when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
+
+          DATA_ENABLE <= '0';
 
           DATA_OUT_ENABLE <= '0';
 
@@ -202,7 +185,7 @@ begin
 
           if (DATA_A_IN_ENABLE = '1') then
             -- Data Inputs
-            data_a_in_scalar_integer_multiplier <= DATA_A_IN;
+            vector_a_int(to_integer(unsigned(index_loop))) <= DATA_A_IN;
 
             -- Control Internal
             data_a_in_cosine_similarity_int <= '1';
@@ -210,7 +193,7 @@ begin
 
           if (DATA_B_IN_ENABLE = '1') then
             -- Data Inputs
-            data_b_in_scalar_integer_multiplier <= DATA_B_IN;
+            vector_b_int(to_integer(unsigned(index_loop))) <= DATA_B_IN;
 
             -- Control Internal
             data_b_in_cosine_similarity_int <= '1';
@@ -218,74 +201,93 @@ begin
 
           if (data_a_in_cosine_similarity_int = '1' and data_b_in_cosine_similarity_int = '1') then
             -- Control Internal
-            start_scalar_integer_multiplier <= '1';
-
             data_a_in_cosine_similarity_int <= '0';
             data_b_in_cosine_similarity_int <= '0';
 
             -- FSM Control
-            cosine_similarity_ctrl_fsm_int <= SCALAR_MULTIPLIER_STATE;
+            cosine_similarity_ctrl_fsm_int <= ENDER_STATE;
           end if;
 
           -- Control Outputs
-          DATA_OUT_ENABLE <= '0';
+          DATA_ENABLE <= '0';
 
-        when SCALAR_MULTIPLIER_STATE =>  -- STEP 3
+        when ENDER_STATE =>             -- STEP 2
 
-          if (ready_scalar_integer_multiplier = '1') then
+          if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
             -- Control Internal
-            start_scalar_integer_adder <= '1';
-
-            operation_scalar_integer_adder <= '0';
-
-            -- Data Internal
-            data_a_in_scalar_integer_adder <= data_out_scalar_integer_multiplier;
-
-            if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
-              data_b_in_scalar_integer_adder <= ZERO_DATA;
-            else
-              data_b_in_scalar_integer_adder <= data_out_scalar_integer_adder;
-            end if;
+            index_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            cosine_similarity_ctrl_fsm_int <= SCALAR_ADDER_STATE;
+            cosine_similarity_ctrl_fsm_int <= COSINE_SIMILARITY_STATE;
           else
             -- Control Internal
-            start_scalar_integer_multiplier <= '0';
-
-            data_a_in_cosine_similarity_int <= '0';
-            data_b_in_cosine_similarity_int <= '0';
-          end if;
-
-        when SCALAR_ADDER_STATE =>      -- STEP 2
-
-          if (ready_scalar_integer_adder = '1') then
-            if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
-              -- Data Outputs
-              DATA_OUT <= data_out_scalar_integer_adder;
-
-              -- Control Outputs
-              READY <= '1';
-
-              -- Control Internal
-              index_loop <= ZERO_CONTROL;
-
-              -- FSM Control
-              cosine_similarity_ctrl_fsm_int <= STARTER_STATE;
-            else
-              -- Control Internal
-              index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
-
-              -- FSM Control
-              cosine_similarity_ctrl_fsm_int <= INPUT_STATE;
-            end if;
+            index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
 
             -- Control Outputs
-            DATA_OUT_ENABLE <= '1';
+            DATA_ENABLE <= '1';
+
+            -- FSM Control
+            cosine_similarity_ctrl_fsm_int <= INPUT_STATE;
+          end if;
+
+          -- Data Outputs
+          DATA_OUT <= ZERO_DATA;
+
+        when COSINE_SIMILARITY_STATE => -- STEP 3
+
+          -- Data Inputs
+          data_a_int := ZERO_DATA;
+          data_b_int := ZERO_DATA;
+          data_p_int := ZERO_DATA;
+
+          for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
+            data_a_int := std_logic_vector(signed(data_a_int) + signed(vector_a_int(i)));
+            data_b_int := std_logic_vector(signed(data_b_int) + signed(vector_a_int(i)));
+
+            data_p_int := std_logic_vector(signed(data_p_int) + signed(vector_a_int(i)));
+          end loop;
+
+          for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
+            vector_out_int(i) <= std_logic_vector(signed(data_p_int)/signed(data_a_int)*signed(data_b_int));
+          end loop;
+
+          -- FSM Control
+          cosine_similarity_ctrl_fsm_int <= CLEAN_STATE;
+
+        when CLEAN_STATE =>             -- STEP 4
+
+          -- Control Outputs
+          DATA_ENABLE <= '0';
+
+          DATA_OUT_ENABLE <= '0';
+
+          -- FSM Control
+          cosine_similarity_ctrl_fsm_int <= OPERATION_STATE;
+
+        when OPERATION_STATE =>         -- STEP 5
+
+          if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
+            -- Control Outputs
+            READY <= '1';
+
+            -- Control Internal
+            index_loop <= ZERO_CONTROL;
+
+            -- FSM Control
+            cosine_similarity_ctrl_fsm_int <= STARTER_STATE;
           else
             -- Control Internal
-            start_scalar_integer_adder <= '0';
+            index_loop <= std_logic_vector(unsigned(index_loop)+unsigned(ONE_CONTROL));
+
+            -- FSM Control
+            cosine_similarity_ctrl_fsm_int <= CLEAN_STATE;
           end if;
+
+          -- Data Outputs
+          DATA_OUT <= vector_out_int(to_integer(unsigned(index_loop)));
+
+          -- Control Outputs
+          DATA_OUT_ENABLE <= '1';
 
         when others =>
           -- FSM Control
@@ -293,49 +295,5 @@ begin
       end case;
     end if;
   end process;
-
-  -- SCALAR ADDER
-  scalar_integer_adder : ntm_scalar_integer_adder
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_integer_adder,
-      READY => ready_scalar_integer_adder,
-
-      OPERATION => operation_scalar_integer_adder,
-
-      -- DATA
-      DATA_A_IN => data_a_in_scalar_integer_adder,
-      DATA_B_IN => data_b_in_scalar_integer_adder,
-      DATA_OUT  => data_out_scalar_integer_adder
-      );
-
-  -- SCALAR MULTIPLIER
-  scalar_integer_multiplier : ntm_scalar_integer_multiplier
-    generic map (
-      DATA_SIZE    => DATA_SIZE,
-      CONTROL_SIZE => CONTROL_SIZE
-      )
-    port map (
-      -- GLOBAL
-      CLK => CLK,
-      RST => RST,
-
-      -- CONTROL
-      START => start_scalar_integer_multiplier,
-      READY => ready_scalar_integer_multiplier,
-
-      -- DATA
-      DATA_A_IN => data_a_in_scalar_integer_multiplier,
-      DATA_B_IN => data_b_in_scalar_integer_multiplier,
-      DATA_OUT  => data_out_scalar_integer_multiplier
-      );
 
 end architecture;

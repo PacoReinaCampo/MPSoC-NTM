@@ -88,10 +88,11 @@ architecture ntm_matrix_softmax_architecture of ntm_matrix_softmax is
     INPUT_J_STATE,                      -- STEP 2
     ENDER_I_STATE,                      -- STEP 3
     ENDER_J_STATE,                      -- STEP 4
-    CLEAN_I_STATE,                      -- STEP 5
-    CLEAN_J_STATE,                      -- STEP 6
-    OPERATION_I_STATE,                  -- STEP 7
-    OPERATION_J_STATE                   -- STEP 8
+    SOFTMAX_STATE,                      -- STEP 5
+    CLEAN_I_STATE,                      -- STEP 6
+    CLEAN_J_STATE,                      -- STEP 7
+    OPERATION_I_STATE,                  -- STEP 8
+    OPERATION_J_STATE                   -- STEP 9
     );
 
   -- Buffer
@@ -124,7 +125,8 @@ architecture ntm_matrix_softmax_architecture of ntm_matrix_softmax is
   signal softmax_ctrl_fsm_int : softmax_ctrl_fsm;
 
   -- Buffer
-  signal matrix_int : matrix_buffer;
+  signal matrix_in_int  : matrix_buffer;
+  signal matrix_out_int : matrix_buffer;
 
   -- Control Internal
   signal index_i_loop : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -140,6 +142,7 @@ begin
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
+    variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
   begin
     if (RST = '0') then
       -- Data Outputs
@@ -189,7 +192,7 @@ begin
 
           if ((DATA_IN_I_ENABLE = '1') and (DATA_IN_J_ENABLE = '1')) then
             -- Data Inputs
-            matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
+            matrix_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
 
             -- FSM Control
             softmax_ctrl_fsm_int <= ENDER_J_STATE;
@@ -203,7 +206,7 @@ begin
 
           if (DATA_IN_J_ENABLE = '1') then
             -- Data Inputs
-            matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
+            matrix_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop))) <= DATA_IN;
 
             -- FSM Control
             if (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
@@ -221,17 +224,17 @@ begin
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            DATA_OUT <= matrix_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Internal
             index_i_loop <= ZERO_CONTROL;
             index_j_loop <= ZERO_CONTROL;
 
             -- FSM Control
-            softmax_ctrl_fsm_int <= CLEAN_I_STATE;
+            softmax_ctrl_fsm_int <= SOFTMAX_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            DATA_OUT <= matrix_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
             DATA_I_ENABLE <= '1';
@@ -249,7 +252,7 @@ begin
 
           if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
+            DATA_OUT <= matrix_in_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)));
 
             -- Control Outputs
             DATA_J_ENABLE <= '1';
@@ -260,6 +263,26 @@ begin
             -- FSM Control
             softmax_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
+
+        when SOFTMAX_STATE =>         -- STEP 3
+
+          -- Data Internal
+          data_summation_int := ZERO_DATA;
+
+          for m in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+            for n in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+              data_summation_int := std_logic_vector(signed(data_summation_int) + signed(matrix_in_int(m, n)));
+            end loop;
+          end loop;
+
+          for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+            for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+              matrix_out_int(i, j) <= std_logic_vector(signed(matrix_in_int(i, j))/signed(data_summation_int));
+            end loop;
+          end loop;
+
+          -- FSM Control
+          softmax_ctrl_fsm_int <= CLEAN_I_STATE;
 
         when CLEAN_I_STATE =>           -- STEP 5
 
@@ -293,7 +316,7 @@ begin
 
           if ((unsigned(index_i_loop) = unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
+            DATA_OUT <= matrix_out_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
 
             -- Control Outputs
             READY <= '1';
@@ -309,7 +332,7 @@ begin
             softmax_ctrl_fsm_int <= STARTER_STATE;
           elsif ((unsigned(index_i_loop) < unsigned(SIZE_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL))) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
+            DATA_OUT <= matrix_out_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
 
             -- Control Outputs
             DATA_OUT_I_ENABLE <= '1';
@@ -327,7 +350,7 @@ begin
 
           if (unsigned(index_j_loop) < unsigned(SIZE_J_IN)-unsigned(ONE_CONTROL)) then
             -- Data Outputs
-            DATA_OUT <= matrix_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
+            DATA_OUT <= matrix_out_int(to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_i_loop)));
 
             -- Control Outputs
             DATA_OUT_J_ENABLE <= '1';
