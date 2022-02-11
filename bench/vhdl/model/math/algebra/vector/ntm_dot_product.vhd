@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 
 entity ntm_dot_product is
   generic (
-    DATA_SIZE    : integer := 128;
+    DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64
     );
   port (

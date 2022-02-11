@@ -155,258 +155,375 @@ package ntm_series_pkg is
   signal STIMULUS_NTM_VECTOR_SINH_CASE_1          : boolean := false;
   signal STIMULUS_NTM_VECTOR_TANH_CASE_1          : boolean := false;
 
-  -- MATRIX-FUNCTIONALITY
-  signal STIMULUS_NTM_MATRIX_COSH_TEST          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_EXPONENTIATOR_TEST : boolean := false;
-  signal STIMULUS_NTM_MATRIX_LOGARITHM_TEST     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_SINH_TEST          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TANH_TEST          : boolean := false;
-
-  signal STIMULUS_NTM_MATRIX_COSH_CASE_0          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_LOGARITHM_CASE_0     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_SINH_CASE_0          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TANH_CASE_0          : boolean := false;
-
-  signal STIMULUS_NTM_MATRIX_COSH_CASE_1          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_EXPONENTIATOR_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_LOGARITHM_CASE_1     : boolean := false;
-  signal STIMULUS_NTM_MATRIX_SINH_CASE_1          : boolean := false;
-  signal STIMULUS_NTM_MATRIX_TANH_CASE_1          : boolean := false;
-
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
 
-  component ntm_series_stimulus is
+  -- SCALAR
+  component ntm_scalar_cosh_function is
     generic (
-      -- SYSTEM-SIZE
       DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64;
-
-      X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x out 0 to X-1
-      Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y out 0 to Y-1
-      N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j out 0 to N-1
-      W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k out 0 to W-1
-      L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l out 0 to L-1
-      R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i out 0 to R-1
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
-      CLK : out std_logic;
-      RST : out std_logic;
+      CLK : in std_logic;
+      RST : in std_logic;
 
-      -----------------------------------------------------------------------
-      -- STIMULUS SCALAR
-      -----------------------------------------------------------------------
-
-      -- SCALAR COSH
       -- CONTROL
-      SCALAR_COSH_START : out std_logic;
-      SCALAR_COSH_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
       -- DATA
-      SCALAR_COSH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_COSH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- SCALAR EXPONENTIATOR
+  component ntm_scalar_exponentiator_function is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      SCALAR_EXPONENTIATOR_START : out std_logic;
-      SCALAR_EXPONENTIATOR_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
       -- DATA
-      SCALAR_EXPONENTIATOR_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_EXPONENTIATOR_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- SCALAR LOGARITHM
+  component ntm_scalar_logarithm_function is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      SCALAR_LOGARITHM_START : out std_logic;
-      SCALAR_LOGARITHM_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
       -- DATA
-      SCALAR_LOGARITHM_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_LOGARITHM_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- SCALAR SINH
+  component ntm_scalar_sinh_function is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      SCALAR_SINH_START : out std_logic;
-      SCALAR_SINH_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
       -- DATA
-      SCALAR_SINH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_SINH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- SCALAR TANH
+  component ntm_scalar_tanh_function is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      SCALAR_TANH_START : out std_logic;
-      SCALAR_TANH_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
       -- DATA
-      SCALAR_TANH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_TANH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -----------------------------------------------------------------------
-      -- STIMULUS VECTOR
-      -----------------------------------------------------------------------
+  -- VECTOR
+  component ntm_vector_cosh_function is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
 
-      -- VECTOR COSH
       -- CONTROL
-      VECTOR_COSH_START : out std_logic;
-      VECTOR_COSH_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      VECTOR_COSH_DATA_IN_ENABLE : out std_logic;
+      DATA_IN_ENABLE : in std_logic;
 
-      VECTOR_COSH_DATA_OUT_ENABLE : in std_logic;
+      DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      VECTOR_COSH_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_COSH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_COSH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_IN  : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- VECTOR EXPONENTIATOR
+  component ntm_vector_exponentiator_function is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      VECTOR_EXPONENTIATOR_START : out std_logic;
-      VECTOR_EXPONENTIATOR_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      VECTOR_EXPONENTIATOR_DATA_IN_ENABLE : out std_logic;
+      DATA_IN_ENABLE : in std_logic;
 
-      VECTOR_EXPONENTIATOR_DATA_OUT_ENABLE : in std_logic;
+      DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      VECTOR_EXPONENTIATOR_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_EXPONENTIATOR_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_EXPONENTIATOR_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_IN  : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- VECTOR LOGARITHM
+  component ntm_vector_logarithm_function is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      VECTOR_LOGARITHM_START : out std_logic;
-      VECTOR_LOGARITHM_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      VECTOR_LOGARITHM_DATA_IN_ENABLE : out std_logic;
+      DATA_IN_ENABLE : in std_logic;
 
-      VECTOR_LOGARITHM_DATA_OUT_ENABLE : in std_logic;
+      DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      VECTOR_LOGARITHM_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_LOGARITHM_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_LOGARITHM_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_IN  : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- VECTOR SINH
+  component ntm_vector_sinh_function is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      VECTOR_SINH_START : out std_logic;
-      VECTOR_SINH_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      VECTOR_SINH_DATA_IN_ENABLE : out std_logic;
+      DATA_IN_ENABLE : in std_logic;
 
-      VECTOR_SINH_DATA_OUT_ENABLE : in std_logic;
+      DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      VECTOR_SINH_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_SINH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_SINH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_IN  : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- VECTOR TANH
+  component ntm_vector_tanh_function is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      VECTOR_TANH_START : out std_logic;
-      VECTOR_TANH_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      VECTOR_TANH_DATA_IN_ENABLE : out std_logic;
+      DATA_IN_ENABLE : in std_logic;
 
-      VECTOR_TANH_DATA_OUT_ENABLE : in std_logic;
+      DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      VECTOR_TANH_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_TANH_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_TANH_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_IN  : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -----------------------------------------------------------------------
-      -- STIMULUS MATRIX
-      -----------------------------------------------------------------------
+  -- MATRIX
+  component ntm_matrix_cosh_function is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
 
-      -- MATRIX COSH
       -- CONTROL
-      MATRIX_COSH_START : out std_logic;
-      MATRIX_COSH_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      MATRIX_COSH_DATA_IN_I_ENABLE : out std_logic;
-      MATRIX_COSH_DATA_IN_J_ENABLE : out std_logic;
+      DATA_IN_I_ENABLE : in std_logic;
+      DATA_IN_J_ENABLE : in std_logic;
 
-      MATRIX_COSH_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_COSH_DATA_OUT_J_ENABLE : in std_logic;
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      MATRIX_COSH_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_COSH_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_COSH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_COSH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- MATRIX EXPONENTIATOR
+  component ntm_matrix_exponentiator_function is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      MATRIX_EXPONENTIATOR_START : out std_logic;
-      MATRIX_EXPONENTIATOR_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      MATRIX_EXPONENTIATOR_DATA_IN_I_ENABLE : out std_logic;
-      MATRIX_EXPONENTIATOR_DATA_IN_J_ENABLE : out std_logic;
+      DATA_IN_I_ENABLE : in std_logic;
+      DATA_IN_J_ENABLE : in std_logic;
 
-      MATRIX_EXPONENTIATOR_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_EXPONENTIATOR_DATA_OUT_J_ENABLE : in std_logic;
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      MATRIX_EXPONENTIATOR_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_EXPONENTIATOR_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_EXPONENTIATOR_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_EXPONENTIATOR_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- MATRIX LOGARITHM
+  component ntm_matrix_logarithm_function is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      MATRIX_LOGARITHM_START : out std_logic;
-      MATRIX_LOGARITHM_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      MATRIX_LOGARITHM_DATA_IN_I_ENABLE : out std_logic;
-      MATRIX_LOGARITHM_DATA_IN_J_ENABLE : out std_logic;
+      DATA_IN_I_ENABLE : in std_logic;
+      DATA_IN_J_ENABLE : in std_logic;
 
-      MATRIX_LOGARITHM_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_LOGARITHM_DATA_OUT_J_ENABLE : in std_logic;
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      MATRIX_LOGARITHM_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_LOGARITHM_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_LOGARITHM_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_LOGARITHM_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- MATRIX SINH
+  component ntm_matrix_sinh_function is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      MATRIX_SINH_START : out std_logic;
-      MATRIX_SINH_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      MATRIX_SINH_DATA_IN_I_ENABLE : out std_logic;
-      MATRIX_SINH_DATA_IN_J_ENABLE : out std_logic;
+      DATA_IN_I_ENABLE : in std_logic;
+      DATA_IN_J_ENABLE : in std_logic;
 
-      MATRIX_SINH_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_SINH_DATA_OUT_J_ENABLE : in std_logic;
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      MATRIX_SINH_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_SINH_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_SINH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_SINH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- MATRIX TANH
+  component ntm_matrix_tanh_function is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      MATRIX_TANH_START : out std_logic;
-      MATRIX_TANH_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      MATRIX_TANH_DATA_IN_I_ENABLE : out std_logic;
-      MATRIX_TANH_DATA_IN_J_ENABLE : out std_logic;
+      DATA_IN_I_ENABLE : in std_logic;
+      DATA_IN_J_ENABLE : in std_logic;
 
-      MATRIX_TANH_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_TANH_DATA_OUT_J_ENABLE : in std_logic;
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      MATRIX_TANH_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_TANH_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_TANH_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_TANH_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

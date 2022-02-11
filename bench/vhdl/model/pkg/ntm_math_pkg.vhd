@@ -61,7 +61,7 @@ package ntm_math_pkg is
   -- VECTOR
   component ntm_dot_product is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -88,7 +88,7 @@ package ntm_math_pkg is
 
   component ntm_vector_convolution is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -117,7 +117,7 @@ package ntm_math_pkg is
 
   component ntm_vector_cosine_similarity is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -144,7 +144,7 @@ package ntm_math_pkg is
 
   component ntm_vector_multiplication is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -169,7 +169,7 @@ package ntm_math_pkg is
 
   component ntm_vector_summation is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -194,7 +194,7 @@ package ntm_math_pkg is
 
   component ntm_vector_module is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -222,7 +222,7 @@ package ntm_math_pkg is
   -- MATRIX
   component ntm_matrix_convolution is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -258,7 +258,7 @@ package ntm_math_pkg is
 
   component ntm_matrix_inverse is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -289,7 +289,7 @@ package ntm_math_pkg is
 
   component ntm_matrix_multiplication is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -320,7 +320,7 @@ package ntm_math_pkg is
 
   component ntm_matrix_product is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -356,7 +356,7 @@ package ntm_math_pkg is
 
   component ntm_matrix_summation is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -387,7 +387,7 @@ package ntm_math_pkg is
 
   component ntm_matrix_transpose is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -419,7 +419,7 @@ package ntm_math_pkg is
   -- TENSOR
   component ntm_tensor_convolution is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -461,7 +461,7 @@ package ntm_math_pkg is
 
   component ntm_tensor_inverse is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -496,7 +496,7 @@ package ntm_math_pkg is
 
   component ntm_tensor_multiplication is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -531,7 +531,7 @@ package ntm_math_pkg is
 
   component ntm_tensor_product is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -573,7 +573,7 @@ package ntm_math_pkg is
 
   component ntm_tensor_summation is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -608,7 +608,7 @@ package ntm_math_pkg is
 
   component ntm_tensor_transpose is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -648,7 +648,7 @@ package ntm_math_pkg is
   -- SCALAR
   component ntm_scalar_cosh_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -668,7 +668,7 @@ package ntm_math_pkg is
 
   component ntm_scalar_exponentiator_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -688,7 +688,7 @@ package ntm_math_pkg is
 
   component ntm_scalar_logarithm_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -708,7 +708,7 @@ package ntm_math_pkg is
 
   component ntm_scalar_sinh_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -728,7 +728,7 @@ package ntm_math_pkg is
 
   component ntm_scalar_tanh_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -749,7 +749,7 @@ package ntm_math_pkg is
   -- VECTOR
   component ntm_vector_cosh_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -774,7 +774,7 @@ package ntm_math_pkg is
 
   component ntm_vector_exponentiator_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -799,7 +799,7 @@ package ntm_math_pkg is
 
   component ntm_vector_logarithm_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -824,7 +824,7 @@ package ntm_math_pkg is
 
   component ntm_vector_sinh_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -849,7 +849,7 @@ package ntm_math_pkg is
 
   component ntm_vector_tanh_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -875,7 +875,7 @@ package ntm_math_pkg is
   -- MATRIX
   component ntm_matrix_cosh_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -903,7 +903,7 @@ package ntm_math_pkg is
 
   component ntm_matrix_exponentiator_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -931,7 +931,7 @@ package ntm_math_pkg is
 
   component ntm_matrix_logarithm_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -959,7 +959,7 @@ package ntm_math_pkg is
 
   component ntm_matrix_sinh_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -987,7 +987,7 @@ package ntm_math_pkg is
 
   component ntm_matrix_tanh_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1021,7 +1021,7 @@ package ntm_math_pkg is
   -- SCALAR
   component ntm_scalar_logistic_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1041,7 +1041,7 @@ package ntm_math_pkg is
 
   component ntm_scalar_oneplus_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1062,7 +1062,7 @@ package ntm_math_pkg is
   -- VECTOR
   component ntm_vector_logistic_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1087,7 +1087,7 @@ package ntm_math_pkg is
 
   component ntm_vector_oneplus_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1113,7 +1113,7 @@ package ntm_math_pkg is
   -- MATRIX
   component ntm_matrix_logistic_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1141,7 +1141,7 @@ package ntm_math_pkg is
 
   component ntm_matrix_oneplus_function is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1173,7 +1173,7 @@ package ntm_math_pkg is
 
   component ntm_vector_differentiation is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1201,7 +1201,7 @@ package ntm_math_pkg is
 
   component ntm_vector_integration is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1229,7 +1229,7 @@ package ntm_math_pkg is
 
   component ntm_vector_softmax is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1256,7 +1256,7 @@ package ntm_math_pkg is
 
   component ntm_matrix_differentiation is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1291,7 +1291,7 @@ package ntm_math_pkg is
 
   component ntm_matrix_integration is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1323,7 +1323,7 @@ package ntm_math_pkg is
 
   component ntm_matrix_softmax is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1354,7 +1354,7 @@ package ntm_math_pkg is
 
   component ntm_tensor_differentiation is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1394,7 +1394,7 @@ package ntm_math_pkg is
 
   component ntm_tensor_integration is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -1430,7 +1430,7 @@ package ntm_math_pkg is
 
   component ntm_tensor_softmax is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (

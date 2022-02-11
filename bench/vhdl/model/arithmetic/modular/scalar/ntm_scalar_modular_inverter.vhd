@@ -46,9 +46,9 @@ use work.ntm_arithmetic_pkg.all;
 
 entity ntm_scalar_modular_inverter is
   generic (
-    DATA_SIZE    : integer := 128;
+    DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64
-  );
+    );
   port (
     -- GLOBAL
     CLK : in std_logic;
@@ -62,8 +62,8 @@ entity ntm_scalar_modular_inverter is
     MODULO_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
     DATA_IN   : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-    DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
-  );
+    DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+    );
 end entity;
 
 architecture ntm_scalar_modular_inverter_architecture of ntm_scalar_modular_inverter is
@@ -73,10 +73,10 @@ architecture ntm_scalar_modular_inverter_architecture of ntm_scalar_modular_inve
   -----------------------------------------------------------------------
 
   type inverter_ctrl_fsm is (
-    STARTER_STATE,  -- STEP 0
-    MODULO_STATE,   -- STEP 1
-    ENDER_STATE     -- STEP 2
-  );
+    STARTER_STATE,                      -- STEP 0
+    MODULO_STATE,                       -- STEP 1
+    ENDER_STATE                         -- STEP 2
+    );
 
   -----------------------------------------------------------------------
   -- Constants
@@ -125,7 +125,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case inverter_ctrl_fsm_int is
-        when STARTER_STATE =>  -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -156,7 +156,7 @@ begin
             inverter_ctrl_fsm_int <= MODULO_STATE;
           end if;
 
-        when MODULO_STATE =>  -- STEP 1
+        when MODULO_STATE =>            -- STEP 1
 
           -- Data Internal
           inversion_int <= x1_var(DATA_SIZE-1 downto 0);
@@ -164,8 +164,8 @@ begin
           -- FSM Control
           inverter_ctrl_fsm_int <= ENDER_STATE;
 
-        when ENDER_STATE =>  -- STEP 2
-        
+        when ENDER_STATE =>             -- STEP 2
+
           if (unsigned(MODULO_IN) > unsigned(ZERO_DATA)) then
             if (unsigned(inversion_int) > unsigned(ZERO_DATA)) then
               if (x0_var(0) = '0') then

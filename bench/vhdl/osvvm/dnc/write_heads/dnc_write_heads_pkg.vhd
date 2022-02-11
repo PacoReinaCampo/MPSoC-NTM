@@ -117,130 +117,155 @@ package dnc_write_heads_pkg is
   constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := P_NINE;
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := N_FOUR;
 
-  -- FUNCTIONALITY
-  signal STIMULUS_DNC_ALLOCATION_GATE_TEST   : boolean := false;
-  signal STIMULUS_DNC_ALLOCATION_GATE_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_ALLOCATION_GATE_CASE_1 : boolean := false;
-
-  signal STIMULUS_DNC_ERASE_VECTOR_TEST   : boolean := false;
-  signal STIMULUS_DNC_ERASE_VECTOR_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_ERASE_VECTOR_CASE_1 : boolean := false;
-
-  signal STIMULUS_DNC_WRITE_GATE_TEST   : boolean := false;
-  signal STIMULUS_DNC_WRITE_GATE_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_WRITE_GATE_CASE_1 : boolean := false;
-
-  signal STIMULUS_DNC_WRITE_KEY_TEST   : boolean := false;
-  signal STIMULUS_DNC_WRITE_KEY_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_WRITE_KEY_CASE_1 : boolean := false;
-
-  signal STIMULUS_DNC_WRITE_STRENGTH_TEST   : boolean := false;
-  signal STIMULUS_DNC_WRITE_STRENGTH_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_WRITE_STRENGTH_CASE_1 : boolean := false;
-
-  signal STIMULUS_DNC_WRITE_VECTOR_TEST   : boolean := false;
-  signal STIMULUS_DNC_WRITE_VECTOR_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_WRITE_VECTOR_CASE_1 : boolean := false;
-
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
 
-  component dnc_write_heads_stimulus is
+  component dnc_allocation_gate is
     generic (
-      -- SYSTEM-SIZE
       DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64;
-
-      X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
-      Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
-      N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
-      W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
-      L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
-      R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i in 0 to R-1
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
-      CLK : out std_logic;
-      RST : out std_logic;
+      CLK : in std_logic;
+      RST : in std_logic;
 
-      -- ALLOCATION GATE
       -- CONTROL
-      DNC_ALLOCATION_GATE_START : out std_logic;
-      DNC_ALLOCATION_GATE_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
       -- DATA
-      DNC_ALLOCATION_GATE_GA_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      GA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DNC_ALLOCATION_GATE_GA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      GA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- ERASE VECTOR
+  component dnc_erase_vector is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      DNC_ERASE_VECTOR_START : out std_logic;
-      DNC_ERASE_VECTOR_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      DNC_ERASE_VECTOR_E_IN_ENABLE : out std_logic;
+      E_IN_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-      DNC_ERASE_VECTOR_E_OUT_ENABLE : in std_logic;
+      E_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
 
       -- DATA
-      DNC_ERASE_VECTOR_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      DNC_ERASE_VECTOR_E_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      E_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DNC_ERASE_VECTOR_E_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      E_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- WRITE GATE
+  component dnc_write_gate is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      DNC_WRITE_GATE_START : out std_logic;
-      DNC_WRITE_GATE_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
       -- DATA
-      DNC_WRITE_GATE_GW_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      GW_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DNC_WRITE_GATE_GW_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      GW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- WRITE KEY
+  component dnc_write_key is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      DNC_WRITE_KEY_START : out std_logic;
-      DNC_WRITE_KEY_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      DNC_WRITE_KEY_K_IN_ENABLE : out std_logic;
+      K_IN_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-      DNC_WRITE_KEY_K_OUT_ENABLE : in std_logic;
+      K_ENABLE : out std_logic;         -- for k in 0 to W-1
+
+      K_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
 
       -- DATA
-      DNC_WRITE_KEY_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      DNC_WRITE_KEY_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DNC_WRITE_KEY_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- WRITE STRENGTH
+  component dnc_write_strength is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      DNC_WRITE_STRENGTH_START : out std_logic;
-      DNC_WRITE_STRENGTH_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
       -- DATA
-      DNC_WRITE_STRENGTH_BETA_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DNC_WRITE_STRENGTH_BETA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- WRITE VECTOR
+  component dnc_write_vector is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      DNC_WRITE_VECTOR_START : out std_logic;
-      DNC_WRITE_VECTOR_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      DNC_WRITE_VECTOR_V_IN_ENABLE : out std_logic;
+      V_IN_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-      DNC_WRITE_VECTOR_V_OUT_ENABLE : in std_logic;
+      V_ENABLE : out std_logic;         -- for k in 0 to W-1
+
+      V_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
 
       -- DATA
-      DNC_WRITE_VECTOR_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      DNC_WRITE_VECTOR_V_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      V_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DNC_WRITE_VECTOR_V_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+      V_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

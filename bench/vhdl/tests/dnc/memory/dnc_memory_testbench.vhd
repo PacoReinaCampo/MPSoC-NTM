@@ -47,7 +47,7 @@ use work.dnc_memory_pkg.all;
 entity dnc_memory_testbench is
   generic (
     -- SYSTEM-SIZE
-    DATA_SIZE    : integer := 128;
+    DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64;
 
     X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
@@ -582,7 +582,7 @@ begin
       DNC_MEMORY_FORWARD_WEIGHTING_F_OUT_I_ENABLE => f_out_i_enable_forward_weighting,
       DNC_MEMORY_FORWARD_WEIGHTING_F_OUT_J_ENABLE => f_out_j_enable_forward_weighting,
 
-        -- DATA
+      -- DATA
       DNC_MEMORY_FORWARD_WEIGHTING_SIZE_R_IN => size_r_in_forward_weighting,
       DNC_MEMORY_FORWARD_WEIGHTING_SIZE_N_IN => size_n_in_forward_weighting,
 

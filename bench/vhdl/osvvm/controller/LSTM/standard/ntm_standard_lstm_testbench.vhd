@@ -64,7 +64,7 @@ architecture ntm_standard_lstm_testbench_architecture of ntm_standard_lstm_testb
   constant L : integer := 64;           -- l in 0 to L-1
   constant R : integer := 64;           -- i in 0 to R-1
 
-  constant DATA_SIZE    : integer := 128;
+  constant DATA_SIZE    : integer := 32;
   constant CONTROL_SIZE : integer := 64;
 
   -----------------------------------------------------------------------

@@ -117,196 +117,206 @@ package ntm_state_feedback_pkg is
   constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := P_NINE;
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := N_FOUR;
 
-  -- FUNCTIONALITY
-  signal STIMULUS_NTM_MATRIX_STATE_TEST   : boolean := false;
-  signal STIMULUS_NTM_MATRIX_STATE_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_STATE_CASE_1 : boolean := false;
-
-  signal STIMULUS_NTM_MATRIX_INPUT_TEST   : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INPUT_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INPUT_CASE_1 : boolean := false;
-
-  signal STIMULUS_NTM_MATRIX_OUTPUT_TEST   : boolean := false;
-  signal STIMULUS_NTM_MATRIX_OUTPUT_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_OUTPUT_CASE_1 : boolean := false;
-
-  signal STIMULUS_NTM_MATRIX_FEEDFORWARD_TEST   : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FEEDFORWARD_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FEEDFORWARD_CASE_1 : boolean := false;
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
 
-  component ntm_state_feedback_stimulus is
+  component ntm_state_matrix_state is
     generic (
-      -- SYSTEM-SIZE
       DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64;
-
-      X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
-      Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
-      N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
-      W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
-      L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
-      R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i in 0 to R-1
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
-      CLK : out std_logic;
-      RST : out std_logic;
+      CLK : in std_logic;
+      RST : in std_logic;
 
-      -- MATRIX STATE
       -- CONTROL
-      NTM_MATRIX_STATE_START : out std_logic;
-      NTM_MATRIX_STATE_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      NTM_MATRIX_STATE_DATA_A_IN_I_ENABLE : out std_logic;
-      NTM_MATRIX_STATE_DATA_A_IN_J_ENABLE : out std_logic;
-      NTM_MATRIX_STATE_DATA_B_IN_I_ENABLE : out std_logic;
-      NTM_MATRIX_STATE_DATA_B_IN_J_ENABLE : out std_logic;
-      NTM_MATRIX_STATE_DATA_C_IN_I_ENABLE : out std_logic;
-      NTM_MATRIX_STATE_DATA_C_IN_J_ENABLE : out std_logic;
-      NTM_MATRIX_STATE_DATA_D_IN_I_ENABLE : out std_logic;
-      NTM_MATRIX_STATE_DATA_D_IN_J_ENABLE : out std_logic;
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+      DATA_C_IN_I_ENABLE : in std_logic;
+      DATA_C_IN_J_ENABLE : in std_logic;
+      DATA_D_IN_I_ENABLE : in std_logic;
+      DATA_D_IN_J_ENABLE : in std_logic;
 
-      NTM_MATRIX_STATE_DATA_A_I_ENABLE : in std_logic;
-      NTM_MATRIX_STATE_DATA_A_J_ENABLE : in std_logic;
-      NTM_MATRIX_STATE_DATA_B_I_ENABLE : in std_logic;
-      NTM_MATRIX_STATE_DATA_B_J_ENABLE : in std_logic;
-      NTM_MATRIX_STATE_DATA_C_I_ENABLE : in std_logic;
-      NTM_MATRIX_STATE_DATA_C_J_ENABLE : in std_logic;
-      NTM_MATRIX_STATE_DATA_D_I_ENABLE : in std_logic;
-      NTM_MATRIX_STATE_DATA_D_J_ENABLE : in std_logic;
+      DATA_A_I_ENABLE : out std_logic;
+      DATA_A_J_ENABLE : out std_logic;
+      DATA_B_I_ENABLE : out std_logic;
+      DATA_B_J_ENABLE : out std_logic;
+      DATA_C_I_ENABLE : out std_logic;
+      DATA_C_J_ENABLE : out std_logic;
+      DATA_D_I_ENABLE : out std_logic;
+      DATA_D_J_ENABLE : out std_logic;
 
-      NTM_MATRIX_STATE_DATA_K_IN_I_ENABLE : out std_logic;
-      NTM_MATRIX_STATE_DATA_K_IN_J_ENABLE : out std_logic;
+      DATA_K_IN_I_ENABLE : in std_logic;
+      DATA_K_IN_J_ENABLE : in std_logic;
 
-      NTM_MATRIX_STATE_DATA_K_I_ENABLE : in std_logic;
-      NTM_MATRIX_STATE_DATA_K_J_ENABLE : in std_logic;
+      DATA_K_I_ENABLE : out std_logic;
+      DATA_K_J_ENABLE : out std_logic;
 
-      NTM_MATRIX_STATE_DATA_A_OUT_I_ENABLE : in std_logic;
-      NTM_MATRIX_STATE_DATA_A_OUT_J_ENABLE : in std_logic;
+      DATA_A_OUT_I_ENABLE : out std_logic;
+      DATA_A_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      NTM_MATRIX_STATE_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_MATRIX_STATE_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_MATRIX_STATE_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_MATRIX_STATE_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_MATRIX_STATE_SIZE_C_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_MATRIX_STATE_SIZE_C_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_MATRIX_STATE_SIZE_D_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_MATRIX_STATE_SIZE_D_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_C_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_C_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      NTM_MATRIX_STATE_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_MATRIX_STATE_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_MATRIX_STATE_DATA_C_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_MATRIX_STATE_DATA_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_MATRIX_STATE_DATA_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_MATRIX_STATE_DATA_A_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- MATRIX INPUT
+  component ntm_state_matrix_input is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      NTM_MATRIX_INPUT_START : out std_logic;
-      NTM_MATRIX_INPUT_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      NTM_MATRIX_INPUT_DATA_B_IN_I_ENABLE : out std_logic;
-      NTM_MATRIX_INPUT_DATA_B_IN_J_ENABLE : out std_logic;
-      NTM_MATRIX_INPUT_DATA_D_IN_I_ENABLE : out std_logic;
-      NTM_MATRIX_INPUT_DATA_D_IN_J_ENABLE : out std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+      DATA_D_IN_I_ENABLE : in std_logic;
+      DATA_D_IN_J_ENABLE : in std_logic;
 
-      NTM_MATRIX_INPUT_DATA_B_I_ENABLE : in std_logic;
-      NTM_MATRIX_INPUT_DATA_B_J_ENABLE : in std_logic;
-      NTM_MATRIX_INPUT_DATA_D_I_ENABLE : in std_logic;
-      NTM_MATRIX_INPUT_DATA_D_J_ENABLE : in std_logic;
+      DATA_B_I_ENABLE : out std_logic;
+      DATA_B_J_ENABLE : out std_logic;
+      DATA_D_I_ENABLE : out std_logic;
+      DATA_D_J_ENABLE : out std_logic;
 
-      NTM_MATRIX_INPUT_DATA_K_IN_I_ENABLE : out std_logic;
-      NTM_MATRIX_INPUT_DATA_K_IN_J_ENABLE : out std_logic;
+      DATA_K_IN_I_ENABLE : in std_logic;
+      DATA_K_IN_J_ENABLE : in std_logic;
 
-      NTM_MATRIX_INPUT_DATA_K_I_ENABLE : in std_logic;
-      NTM_MATRIX_INPUT_DATA_K_J_ENABLE : in std_logic;
+      DATA_K_I_ENABLE : out std_logic;
+      DATA_K_J_ENABLE : out std_logic;
 
-      NTM_MATRIX_INPUT_DATA_B_OUT_I_ENABLE : in std_logic;
-      NTM_MATRIX_INPUT_DATA_B_OUT_J_ENABLE : in std_logic;
-
-      -- DATA
-      NTM_MATRIX_INPUT_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_MATRIX_INPUT_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_MATRIX_INPUT_SIZE_D_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_MATRIX_INPUT_SIZE_D_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-      NTM_MATRIX_INPUT_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_MATRIX_INPUT_DATA_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-      NTM_MATRIX_INPUT_DATA_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-
-      NTM_MATRIX_INPUT_DATA_B_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-
-      -- MATRIX OUTPUT
-      NTM_MATRIX_OUTPUT_START : out std_logic;
-      NTM_MATRIX_OUTPUT_READY : in  std_logic;
-
-      NTM_MATRIX_OUTPUT_DATA_C_IN_I_ENABLE : out std_logic;
-      NTM_MATRIX_OUTPUT_DATA_C_IN_J_ENABLE : out std_logic;
-      NTM_MATRIX_OUTPUT_DATA_D_IN_I_ENABLE : out std_logic;
-      NTM_MATRIX_OUTPUT_DATA_D_IN_J_ENABLE : out std_logic;
-
-      NTM_MATRIX_OUTPUT_DATA_C_I_ENABLE : in std_logic;
-      NTM_MATRIX_OUTPUT_DATA_C_J_ENABLE : in std_logic;
-      NTM_MATRIX_OUTPUT_DATA_D_I_ENABLE : in std_logic;
-      NTM_MATRIX_OUTPUT_DATA_D_J_ENABLE : in std_logic;
-
-      NTM_MATRIX_OUTPUT_DATA_K_IN_I_ENABLE : out std_logic;
-      NTM_MATRIX_OUTPUT_DATA_K_IN_J_ENABLE : out std_logic;
-
-      NTM_MATRIX_OUTPUT_DATA_K_I_ENABLE : in std_logic;
-      NTM_MATRIX_OUTPUT_DATA_K_J_ENABLE : in std_logic;
-
-      NTM_MATRIX_OUTPUT_DATA_C_OUT_I_ENABLE : in std_logic;
-      NTM_MATRIX_OUTPUT_DATA_C_OUT_J_ENABLE : in std_logic;
+      DATA_B_OUT_I_ENABLE : out std_logic;
+      DATA_B_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      NTM_MATRIX_OUTPUT_SIZE_C_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_MATRIX_OUTPUT_SIZE_C_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_MATRIX_OUTPUT_SIZE_D_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_MATRIX_OUTPUT_SIZE_D_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_B_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      NTM_MATRIX_OUTPUT_DATA_C_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_MATRIX_OUTPUT_DATA_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_MATRIX_OUTPUT_DATA_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_MATRIX_OUTPUT_DATA_C_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- MATRIX FEEDFORWARD
-      NTM_MATRIX_FEEDFORWARD_START : out std_logic;
-      NTM_MATRIX_FEEDFORWARD_READY : in  std_logic;
+  component ntm_state_matrix_output is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
 
-      NTM_MATRIX_FEEDFORWARD_DATA_D_IN_I_ENABLE : out std_logic;
-      NTM_MATRIX_FEEDFORWARD_DATA_D_IN_J_ENABLE : out std_logic;
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
 
-      NTM_MATRIX_FEEDFORWARD_DATA_D_I_ENABLE : in  std_logic;
-      NTM_MATRIX_FEEDFORWARD_DATA_D_J_ENABLE : out std_logic;
+      DATA_C_IN_I_ENABLE : in std_logic;
+      DATA_C_IN_J_ENABLE : in std_logic;
+      DATA_D_IN_I_ENABLE : in std_logic;
+      DATA_D_IN_J_ENABLE : in std_logic;
 
-      NTM_MATRIX_FEEDFORWARD_DATA_K_IN_I_ENABLE : out std_logic;
-      NTM_MATRIX_FEEDFORWARD_DATA_K_IN_J_ENABLE : out std_logic;
+      DATA_C_I_ENABLE : out std_logic;
+      DATA_C_J_ENABLE : out std_logic;
+      DATA_D_I_ENABLE : out std_logic;
+      DATA_D_J_ENABLE : out std_logic;
 
-      NTM_MATRIX_FEEDFORWARD_DATA_K_I_ENABLE : in std_logic;
-      NTM_MATRIX_FEEDFORWARD_DATA_K_J_ENABLE : in std_logic;
+      DATA_K_IN_I_ENABLE : in std_logic;
+      DATA_K_IN_J_ENABLE : in std_logic;
 
-      NTM_MATRIX_FEEDFORWARD_DATA_D_OUT_I_ENABLE : in std_logic;
-      NTM_MATRIX_FEEDFORWARD_DATA_D_OUT_J_ENABLE : in std_logic;
+      DATA_K_I_ENABLE : out std_logic;
+      DATA_K_J_ENABLE : out std_logic;
+
+      DATA_C_OUT_I_ENABLE : out std_logic;
+      DATA_C_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      NTM_MATRIX_FEEDFORWARD_SIZE_D_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_MATRIX_FEEDFORWARD_SIZE_D_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_C_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_C_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      NTM_MATRIX_FEEDFORWARD_DATA_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_C_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_MATRIX_FEEDFORWARD_DATA_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_MATRIX_FEEDFORWARD_DATA_D_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+      DATA_C_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_state_matrix_feedforward is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_D_IN_I_ENABLE : in std_logic;
+      DATA_D_IN_J_ENABLE : in std_logic;
+
+      DATA_D_I_ENABLE : out std_logic;
+      DATA_D_J_ENABLE : out std_logic;
+
+      DATA_K_IN_I_ENABLE : in std_logic;
+      DATA_K_IN_J_ENABLE : in std_logic;
+
+      DATA_K_I_ENABLE : out std_logic;
+      DATA_K_J_ENABLE : out std_logic;
+
+      DATA_D_OUT_I_ENABLE : out std_logic;
+      DATA_D_OUT_J_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+      DATA_D_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      DATA_D_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

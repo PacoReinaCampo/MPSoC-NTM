@@ -47,7 +47,7 @@ use work.dnc_core_pkg.all;
 
 entity dnc_addressing is
   generic (
-    DATA_SIZE    : integer := 128;
+    DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64
     );
   port (

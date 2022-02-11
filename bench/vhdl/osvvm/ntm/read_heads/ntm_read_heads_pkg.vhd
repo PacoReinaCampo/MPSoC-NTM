@@ -117,52 +117,44 @@ package ntm_read_heads_pkg is
   constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := P_NINE;
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := N_FOUR;
 
-  -- FUNCTIONALITY
-  signal STIMULUS_NTM_READ_HEADS_TEST   : boolean := false;
-  signal STIMULUS_NTM_READ_HEADS_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_READ_HEADS_CASE_1 : boolean := false;
-
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
 
-  component ntm_read_heads_stimulus is
+  component ntm_reading is
     generic (
-      -- SYSTEM-SIZE
       DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64;
-
-      X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
-      Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
-      N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
-      W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
-      L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
-      R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i in 0 to R-1
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
-      CLK : out std_logic;
-      RST : out std_logic;
+      CLK : in std_logic;
+      RST : in std_logic;
 
       -- CONTROL
-      NTM_READ_HEADS_START : out std_logic;
-      NTM_READ_HEADS_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      NTM_READ_HEADS_M_IN_J_ENABLE : out std_logic;
-      NTM_READ_HEADS_M_IN_K_ENABLE : out std_logic;
+      M_IN_J_ENABLE : in std_logic;     -- for j in 0 to N-1
+      M_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
-      NTM_READ_HEADS_M_OUT_J_ENABLE : in std_logic;
-      NTM_READ_HEADS_M_OUT_K_ENABLE : in std_logic;
+      W_IN_ENABLE : in std_logic;       -- for j in 0 to N-1
 
-      NTM_READ_HEADS_R_OUT_ENABLE : in std_logic;
+      M_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1
+      M_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
+
+      W_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
+
+      R_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
 
       -- DATA
-      NTM_READ_HEADS_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_READ_HEADS_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      NTM_READ_HEADS_W_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_READ_HEADS_M_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_READ_HEADS_R_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      M_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      R_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

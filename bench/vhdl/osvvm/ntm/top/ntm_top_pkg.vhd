@@ -117,82 +117,196 @@ package ntm_top_pkg is
   constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := P_NINE;
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := N_FOUR;
 
-  -- FUNCTIONALITY
-  signal STIMULUS_NTM_TOP_TEST   : boolean := false;
-  signal STIMULUS_NTM_TOP_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_TOP_CASE_1 : boolean := false;
-
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
 
-  component ntm_top_stimulus is
+  component ntm_top is
     generic (
-      -- SYSTEM-SIZE
       DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64;
-
-      X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
-      Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
-      N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
-      W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
-      L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
-      R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i in 0 to R-1
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
-      CLK : out std_logic;
-      RST : out std_logic;
+      CLK : in std_logic;
+      RST : in std_logic;
 
       -- CONTROL
-      NTM_TOP_START : out std_logic;
-      NTM_TOP_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      NTM_TOP_W_IN_L_ENABLE : out std_logic;
-      NTM_TOP_W_IN_X_ENABLE : out std_logic;
+      W_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+      W_IN_X_ENABLE : in std_logic;     -- for x in 0 to X-1
 
-      NTM_TOP_W_OUT_L_ENABLE : in std_logic;
-      NTM_TOP_W_OUT_X_ENABLE : in std_logic;
+      W_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+      W_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
 
-      NTM_TOP_K_IN_I_ENABLE : out std_logic;
-      NTM_TOP_K_IN_L_ENABLE : out std_logic;
-      NTM_TOP_K_IN_K_ENABLE : out std_logic;
+      K_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
+      K_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+      K_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
-      NTM_TOP_K_OUT_I_ENABLE : in std_logic;
-      NTM_TOP_K_OUT_L_ENABLE : in std_logic;
-      NTM_TOP_K_OUT_K_ENABLE : in std_logic;
+      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
+      K_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+      K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      NTM_TOP_U_IN_L_ENABLE : out std_logic;
-      NTM_TOP_U_IN_P_ENABLE : out std_logic;
+      U_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+      U_IN_P_ENABLE : in std_logic;     -- for p in 0 to L-1
 
-      NTM_TOP_U_OUT_L_ENABLE : in std_logic;
-      NTM_TOP_U_OUT_P_ENABLE : in std_logic;
+      U_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+      U_OUT_P_ENABLE : out std_logic;   -- for p in 0 to L-1
 
-      NTM_TOP_B_IN_ENABLE : out std_logic;
+      B_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
-      NTM_TOP_B_OUT_ENABLE : in std_logic;
+      B_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
-      NTM_TOP_X_IN_ENABLE : out std_logic;
+      X_IN_ENABLE : in std_logic;       -- for x in 0 to X-1
 
-      NTM_TOP_X_OUT_ENABLE : in std_logic;
+      X_OUT_ENABLE : out std_logic;     -- for x in 0 to X-1
 
-      NTM_TOP_Y_OUT_ENABLE : in std_logic;
+      Y_OUT_ENABLE : out std_logic;     -- for y in 0 to Y-1
 
       -- DATA
-      NTM_TOP_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_TOP_SIZE_Y_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_TOP_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_TOP_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_TOP_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_TOP_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      NTM_TOP_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_TOP_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_TOP_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_TOP_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_TOP_X_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_TOP_Y_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      X_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_interface_vector is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      -- Key Vector
+      WK_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
+      WK_IN_K_ENABLE : in std_logic;    -- for k in 0 to W-1
+
+      WK_OUT_L_ENABLE : out std_logic;  -- for l in 0 to L-1
+      WK_OUT_K_ENABLE : out std_logic;  -- for k in 0 to W-1
+
+      K_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
+
+      -- Key Strength
+      WBETA_IN_ENABLE : in std_logic;   -- for l in 0 to L-1
+
+      WBETA_OUT_ENABLE : out std_logic;  -- for l in 0 to L-1
+
+      -- Interpolation Gate
+      WG_IN_ENABLE : in std_logic;      -- for l in 0 to L-1
+
+      WG_OUT_ENABLE : out std_logic;    -- for l in 0 to L-1
+
+      -- Shift Weighting
+      WS_IN_L_ENABLE : in std_logic;    -- for l in 0 to L-1
+      WS_IN_J_ENABLE : in std_logic;    -- for j in 0 to N-1
+
+      WS_OUT_L_ENABLE : out std_logic;  -- for l in 0 to L-1
+      WS_OUT_J_ENABLE : out std_logic;  -- for j in 0 to N-1
+
+      S_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
+
+      -- Sharpening
+      WGAMMA_IN_ENABLE : in std_logic;  -- for l in 0 to L-1
+
+      WGAMMA_OUT_ENABLE : out std_logic;  -- for l in 0 to L-1
+
+      -- Hidden State
+      H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+
+      -- DATA
+      SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+      WK_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
+      WBETA_IN  : in std_logic_vector(DATA_SIZE-1 downto 0);
+      WG_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
+      WS_IN     : in std_logic_vector(DATA_SIZE-1 downto 0);
+      WGAMMA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      K_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      BETA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      G_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      S_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      GAMMA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_output_vector is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      K_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
+      K_IN_Y_ENABLE : in std_logic;     -- for y in 0 to Y-1
+      K_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
+
+      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
+      K_OUT_Y_ENABLE : out std_logic;   -- for y in 0 to Y-1
+      K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
+
+      R_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
+      R_IN_K_ENABLE : in std_logic;     -- for j in 0 to W-1
+
+      R_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
+      R_OUT_K_ENABLE : out std_logic;   -- for j in 0 to W-1
+
+      U_IN_Y_ENABLE : in std_logic;     -- for y in 0 to Y-1
+      U_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+
+      U_OUT_Y_ENABLE : out std_logic;   -- for y in 0 to Y-1
+      U_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+
+      H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
+
+      H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
+
+      Y_OUT_ENABLE : out std_logic;     -- for y in 0 to Y-1
+
+      -- DATA
+      SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+      K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+
+      Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

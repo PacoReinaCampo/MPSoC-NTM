@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 
 entity ntm_erasing is
   generic (
-    DATA_SIZE    : integer := 128;
+    DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64
     );
   port (
@@ -92,12 +92,12 @@ architecture ntm_erasing_architecture of ntm_erasing is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,                  -- STEP 0
-    INPUT_FIRST_STATE,              -- STEP 1
-    VECTOR_FIRST_MULTIPLIER_STATE,  -- STEP 2
-    VECTOR_ADDER_STATE,             -- STEP 3
-    INPUT_SECOND_STATE,             -- STEP 4
-    VECTOR_SECOND_MULTIPLIER_STATE  -- STEP 5
+    STARTER_STATE,                      -- STEP 0
+    INPUT_FIRST_STATE,                  -- STEP 1
+    VECTOR_FIRST_MULTIPLIER_STATE,      -- STEP 2
+    VECTOR_ADDER_STATE,                 -- STEP 3
+    INPUT_SECOND_STATE,                 -- STEP 4
+    VECTOR_SECOND_MULTIPLIER_STATE      -- STEP 5
     );
 
   -----------------------------------------------------------------------
@@ -201,7 +201,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>                   -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -220,7 +220,7 @@ begin
             controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
           end if;
 
-        when INPUT_FIRST_STATE =>               -- STEP 1
+        when INPUT_FIRST_STATE =>       -- STEP 1
 
           if (W_IN_ENABLE = '1') then
             -- Data Inputs
@@ -267,7 +267,7 @@ begin
             controller_ctrl_fsm_int <= VECTOR_FIRST_MULTIPLIER_STATE;
           end if;
 
-        when VECTOR_FIRST_MULTIPLIER_STATE =>   -- STEP 2
+        when VECTOR_FIRST_MULTIPLIER_STATE =>  -- STEP 2
 
           if (data_out_enable_vector_integer_multiplier = '1') then
             -- Control Outputs
@@ -294,7 +294,7 @@ begin
             start_vector_integer_multiplier <= '0';
           end if;
 
-        when VECTOR_ADDER_STATE =>              -- STEP 3
+        when VECTOR_ADDER_STATE =>      -- STEP 3
 
           if (data_out_enable_vector_integer_adder = '1') then
             -- Data Outputs
@@ -311,7 +311,7 @@ begin
           W_OUT_ENABLE <= '0';
           E_OUT_ENABLE <= '0';
 
-        when INPUT_SECOND_STATE =>              -- STEP 4
+        when INPUT_SECOND_STATE =>      -- STEP 4
 
           if (M_IN_K_ENABLE = '1') then
             -- Data Inputs

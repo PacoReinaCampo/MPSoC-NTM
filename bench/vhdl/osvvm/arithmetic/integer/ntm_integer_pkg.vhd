@@ -119,337 +119,385 @@ package ntm_integer_pkg is
   constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := P_NINE;
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := N_FOUR;
 
-  -- SCALAR-FUNCTIONALITY
-  signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_TEST    : boolean := false;
-
-  signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_0    : boolean := false;
-
-  signal STIMULUS_NTM_SCALAR_INTEGER_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_INTEGER_DIVIDER_CASE_1    : boolean := false;
-
-  -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_NTM_VECTOR_INTEGER_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_TEST    : boolean := false;
-
-  signal STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_0    : boolean := false;
-
-  signal STIMULUS_NTM_VECTOR_INTEGER_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_INTEGER_DIVIDER_CASE_1    : boolean := false;
-
-  -- MATRIX-FUNCTIONALITY
-  signal STIMULUS_NTM_MATRIX_INTEGER_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_TEST    : boolean := false;
-
-  signal STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_0    : boolean := false;
-
-  signal STIMULUS_NTM_MATRIX_INTEGER_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_INTEGER_DIVIDER_CASE_1    : boolean := false;
-
-  -- TENSOR-FUNCTIONALITY
-  signal STIMULUS_NTM_TENSOR_INTEGER_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INTEGER_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INTEGER_DIVIDER_TEST    : boolean := false;
-
-  signal STIMULUS_NTM_TENSOR_INTEGER_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INTEGER_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INTEGER_DIVIDER_CASE_0    : boolean := false;
-
-  signal STIMULUS_NTM_TENSOR_INTEGER_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INTEGER_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_INTEGER_DIVIDER_CASE_1    : boolean := false;
-
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
 
-  component ntm_integer_stimulus is
+  -- SCALAR
+  component ntm_scalar_integer_adder is
     generic (
-      -- SYSTEM-SIZE
       DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64;
-
-      X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
-      Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
-      N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
-      W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
-      L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
-      R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i in 0 to R-1
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
-      CLK : out std_logic;
-      RST : out std_logic;
+      CLK : in std_logic;
+      RST : in std_logic;
 
-      -----------------------------------------------------------------------
-      -- STIMULUS INTEGER SCALAR
-      -----------------------------------------------------------------------
-
-      -- SCALAR ADDER
       -- CONTROL
-      SCALAR_INTEGER_ADDER_START : out std_logic;
-      SCALAR_INTEGER_ADDER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      SCALAR_INTEGER_ADDER_OPERATION : out std_logic;
+      OPERATION : in std_logic;
 
       -- DATA
-      SCALAR_INTEGER_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_INTEGER_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      SCALAR_INTEGER_ADDER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_INTEGER_ADDER_OVERFLOW_OUT : in std_logic;
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
 
-      -- SCALAR MULTIPLIER
+  component ntm_scalar_integer_multiplier is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      SCALAR_INTEGER_MULTIPLIER_START : out std_logic;
-      SCALAR_INTEGER_MULTIPLIER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
       -- DATA
-      SCALAR_INTEGER_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_INTEGER_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      SCALAR_INTEGER_MULTIPLIER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_INTEGER_MULTIPLIER_OVERFLOW_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- SCALAR DIVIDER
+  component ntm_scalar_integer_divider is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      SCALAR_INTEGER_DIVIDER_START : out std_logic;
-      SCALAR_INTEGER_DIVIDER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
       -- DATA
-      SCALAR_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      SCALAR_INTEGER_DIVIDER_DATA_OUT      : in std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_INTEGER_DIVIDER_REMAINDER_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT      : out std_logic_vector(DATA_SIZE-1 downto 0);
+      REMAINDER_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -----------------------------------------------------------------------
-      -- STIMULUS INTEGER VECTOR
-      -----------------------------------------------------------------------
+  -- VECTOR
+  component ntm_vector_integer_adder is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
 
-      -- VECTOR ADDER
       -- CONTROL
-      VECTOR_INTEGER_ADDER_START : out std_logic;
-      VECTOR_INTEGER_ADDER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      VECTOR_INTEGER_ADDER_OPERATION : out std_logic;
+      OPERATION : in std_logic;
 
-      VECTOR_INTEGER_ADDER_DATA_A_IN_ENABLE : out std_logic;
-      VECTOR_INTEGER_ADDER_DATA_B_IN_ENABLE : out std_logic;
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
 
-      VECTOR_INTEGER_ADDER_DATA_OUT_ENABLE : in std_logic;
+      DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      VECTOR_INTEGER_ADDER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_INTEGER_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_INTEGER_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      VECTOR_INTEGER_ADDER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_INTEGER_ADDER_OVERFLOW_OUT : in std_logic;
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
 
-      -- VECTOR MULTIPLIER
+  component ntm_vector_integer_multiplier is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      VECTOR_INTEGER_MULTIPLIER_START : out std_logic;
-      VECTOR_INTEGER_MULTIPLIER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      VECTOR_INTEGER_MULTIPLIER_DATA_A_IN_ENABLE : out std_logic;
-      VECTOR_INTEGER_MULTIPLIER_DATA_B_IN_ENABLE : out std_logic;
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
 
-      VECTOR_INTEGER_MULTIPLIER_DATA_OUT_ENABLE : in std_logic;
+      DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      VECTOR_INTEGER_MULTIPLIER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_INTEGER_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_INTEGER_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      VECTOR_INTEGER_MULTIPLIER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_INTEGER_MULTIPLIER_OVERFLOW_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- VECTOR DIVIDER
+  component ntm_vector_integer_divider is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      VECTOR_INTEGER_DIVIDER_START : out std_logic;
-      VECTOR_INTEGER_DIVIDER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      VECTOR_INTEGER_DIVIDER_DATA_A_IN_ENABLE : out std_logic;
-      VECTOR_INTEGER_DIVIDER_DATA_B_IN_ENABLE : out std_logic;
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
 
-      VECTOR_INTEGER_DIVIDER_DATA_OUT_ENABLE : in std_logic;
+      DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      VECTOR_INTEGER_DIVIDER_SIZE_IN   : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      VECTOR_INTEGER_DIVIDER_DATA_OUT      : in std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_INTEGER_DIVIDER_REMAINDER_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT      : out std_logic_vector(DATA_SIZE-1 downto 0);
+      REMAINDER_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -----------------------------------------------------------------------
-      -- STIMULUS INTEGER MATRIX
-      -----------------------------------------------------------------------
+  -- MATRIX
+  component ntm_matrix_integer_adder is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
 
-      -- MATRIX ADDER
       -- CONTROL
-      MATRIX_INTEGER_ADDER_START : out std_logic;
-      MATRIX_INTEGER_ADDER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      MATRIX_INTEGER_ADDER_OPERATION : out std_logic;
+      OPERATION : in std_logic;
 
-      MATRIX_INTEGER_ADDER_DATA_A_IN_I_ENABLE : out std_logic;
-      MATRIX_INTEGER_ADDER_DATA_A_IN_J_ENABLE : out std_logic;
-      MATRIX_INTEGER_ADDER_DATA_B_IN_I_ENABLE : out std_logic;
-      MATRIX_INTEGER_ADDER_DATA_B_IN_J_ENABLE : out std_logic;
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
 
-      MATRIX_INTEGER_ADDER_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_INTEGER_ADDER_DATA_OUT_J_ENABLE : in std_logic;
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      MATRIX_INTEGER_ADDER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_INTEGER_ADDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_INTEGER_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INTEGER_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MATRIX_INTEGER_ADDER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INTEGER_ADDER_OVERFLOW_OUT : in std_logic;
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
 
-      -- MATRIX MULTIPLIER
+  component ntm_matrix_integer_multiplier is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      MATRIX_INTEGER_MULTIPLIER_START : out std_logic;
-      MATRIX_INTEGER_MULTIPLIER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      MATRIX_INTEGER_MULTIPLIER_DATA_A_IN_I_ENABLE : out std_logic;
-      MATRIX_INTEGER_MULTIPLIER_DATA_A_IN_J_ENABLE : out std_logic;
-      MATRIX_INTEGER_MULTIPLIER_DATA_B_IN_I_ENABLE : out std_logic;
-      MATRIX_INTEGER_MULTIPLIER_DATA_B_IN_J_ENABLE : out std_logic;
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
 
-      MATRIX_INTEGER_MULTIPLIER_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_INTEGER_MULTIPLIER_DATA_OUT_J_ENABLE : in std_logic;
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      MATRIX_INTEGER_MULTIPLIER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_INTEGER_MULTIPLIER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_INTEGER_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INTEGER_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MATRIX_INTEGER_MULTIPLIER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INTEGER_MULTIPLIER_OVERFLOW_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- MATRIX DIVIDER
+  component ntm_matrix_integer_divider is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      MATRIX_INTEGER_DIVIDER_START : out std_logic;
-      MATRIX_INTEGER_DIVIDER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      MATRIX_INTEGER_DIVIDER_DATA_A_IN_I_ENABLE : out std_logic;
-      MATRIX_INTEGER_DIVIDER_DATA_A_IN_J_ENABLE : out std_logic;
-      MATRIX_INTEGER_DIVIDER_DATA_B_IN_I_ENABLE : out std_logic;
-      MATRIX_INTEGER_DIVIDER_DATA_B_IN_J_ENABLE : out std_logic;
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
 
-      MATRIX_INTEGER_DIVIDER_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_INTEGER_DIVIDER_DATA_OUT_J_ENABLE : in std_logic;
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      MATRIX_INTEGER_DIVIDER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_INTEGER_DIVIDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      MATRIX_INTEGER_DIVIDER_DATA_OUT      : in std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_INTEGER_DIVIDER_REMAINDER_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT      : out std_logic_vector(DATA_SIZE-1 downto 0);
+      REMAINDER_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -----------------------------------------------------------------------
-      -- STIMULUS INTEGER TENSOR
-      -----------------------------------------------------------------------
+  -- TENSOR
+  component ntm_tensor_integer_adder is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
 
-      -- TENSOR ADDER
       -- CONTROL
-      TENSOR_INTEGER_ADDER_START : out std_logic;
-      TENSOR_INTEGER_ADDER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      TENSOR_INTEGER_ADDER_OPERATION : out std_logic;
+      OPERATION : in std_logic;
 
-      TENSOR_INTEGER_ADDER_DATA_A_IN_I_ENABLE : out std_logic;
-      TENSOR_INTEGER_ADDER_DATA_A_IN_J_ENABLE : out std_logic;
-      TENSOR_INTEGER_ADDER_DATA_A_IN_K_ENABLE : out std_logic;
-      TENSOR_INTEGER_ADDER_DATA_B_IN_I_ENABLE : out std_logic;
-      TENSOR_INTEGER_ADDER_DATA_B_IN_J_ENABLE : out std_logic;
-      TENSOR_INTEGER_ADDER_DATA_B_IN_K_ENABLE : out std_logic;
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_K_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_K_ENABLE : in std_logic;
 
-      TENSOR_INTEGER_ADDER_DATA_OUT_I_ENABLE : in std_logic;
-      TENSOR_INTEGER_ADDER_DATA_OUT_J_ENABLE : in std_logic;
-      TENSOR_INTEGER_ADDER_DATA_OUT_K_ENABLE : in std_logic;
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+      DATA_OUT_K_ENABLE : out std_logic;
 
       -- DATA
-      TENSOR_INTEGER_ADDER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INTEGER_ADDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INTEGER_ADDER_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INTEGER_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_INTEGER_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      TENSOR_INTEGER_ADDER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_INTEGER_ADDER_OVERFLOW_OUT : in std_logic;
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
 
-      -- TENSOR MULTIPLIER
+  component ntm_tensor_integer_multiplier is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      TENSOR_INTEGER_MULTIPLIER_START : out std_logic;
-      TENSOR_INTEGER_MULTIPLIER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      TENSOR_INTEGER_MULTIPLIER_DATA_A_IN_I_ENABLE : out std_logic;
-      TENSOR_INTEGER_MULTIPLIER_DATA_A_IN_J_ENABLE : out std_logic;
-      TENSOR_INTEGER_MULTIPLIER_DATA_A_IN_K_ENABLE : out std_logic;
-      TENSOR_INTEGER_MULTIPLIER_DATA_B_IN_I_ENABLE : out std_logic;
-      TENSOR_INTEGER_MULTIPLIER_DATA_B_IN_J_ENABLE : out std_logic;
-      TENSOR_INTEGER_MULTIPLIER_DATA_B_IN_K_ENABLE : out std_logic;
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_K_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_K_ENABLE : in std_logic;
 
-      TENSOR_INTEGER_MULTIPLIER_DATA_OUT_I_ENABLE : in std_logic;
-      TENSOR_INTEGER_MULTIPLIER_DATA_OUT_J_ENABLE : in std_logic;
-      TENSOR_INTEGER_MULTIPLIER_DATA_OUT_K_ENABLE : in std_logic;
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+      DATA_OUT_K_ENABLE : out std_logic;
 
       -- DATA
-      TENSOR_INTEGER_MULTIPLIER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INTEGER_MULTIPLIER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INTEGER_MULTIPLIER_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INTEGER_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_INTEGER_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      TENSOR_INTEGER_MULTIPLIER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_INTEGER_MULTIPLIER_OVERFLOW_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- TENSOR DIVIDER
+  component ntm_tensor_integer_divider is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      TENSOR_INTEGER_DIVIDER_START : out std_logic;
-      TENSOR_INTEGER_DIVIDER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      TENSOR_INTEGER_DIVIDER_DATA_A_IN_I_ENABLE : out std_logic;
-      TENSOR_INTEGER_DIVIDER_DATA_A_IN_J_ENABLE : out std_logic;
-      TENSOR_INTEGER_DIVIDER_DATA_A_IN_K_ENABLE : out std_logic;
-      TENSOR_INTEGER_DIVIDER_DATA_B_IN_I_ENABLE : out std_logic;
-      TENSOR_INTEGER_DIVIDER_DATA_B_IN_J_ENABLE : out std_logic;
-      TENSOR_INTEGER_DIVIDER_DATA_B_IN_K_ENABLE : out std_logic;
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_K_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_K_ENABLE : in std_logic;
 
-      TENSOR_INTEGER_DIVIDER_DATA_OUT_I_ENABLE : in std_logic;
-      TENSOR_INTEGER_DIVIDER_DATA_OUT_J_ENABLE : in std_logic;
-      TENSOR_INTEGER_DIVIDER_DATA_OUT_K_ENABLE : in std_logic;
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+      DATA_OUT_K_ENABLE : out std_logic;
 
       -- DATA
-      TENSOR_INTEGER_DIVIDER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INTEGER_DIVIDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INTEGER_DIVIDER_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_INTEGER_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_INTEGER_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      TENSOR_INTEGER_DIVIDER_DATA_OUT      : in std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_INTEGER_DIVIDER_REMAINDER_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+      DATA_OUT      : out std_logic_vector(DATA_SIZE-1 downto 0);
+      REMAINDER_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

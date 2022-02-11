@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 
 entity ntm_reading is
   generic (
-    DATA_SIZE    : integer := 128;
+    DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64
     );
   port (
@@ -198,7 +198,7 @@ begin
     elsif (rising_edge(CLK)) then
 
       case controller_ctrl_fsm_int is
-        when STARTER_STATE =>                   -- STEP 0
+        when STARTER_STATE =>           -- STEP 0
           -- Control Outputs
           READY <= '0';
 
@@ -217,7 +217,7 @@ begin
             controller_ctrl_fsm_int <= INPUT_STATE;
           end if;
 
-        when INPUT_STATE =>               -- STEP 1
+        when INPUT_STATE =>             -- STEP 1
 
           if (W_IN_ENABLE = '1') then
             -- Data Inputs
@@ -264,7 +264,7 @@ begin
             controller_ctrl_fsm_int <= VECTOR_MULTIPLIER_STATE;
           end if;
 
-        when VECTOR_MULTIPLIER_STATE =>   -- STEP 2
+        when VECTOR_MULTIPLIER_STATE =>  -- STEP 2
 
           if (data_out_enable_vector_integer_multiplier = '1') then
             -- Control Outputs
@@ -298,7 +298,7 @@ begin
             start_vector_integer_multiplier <= '0';
           end if;
 
-        when VECTOR_ADDER_STATE =>  -- STEP 5
+        when VECTOR_ADDER_STATE =>      -- STEP 5
 
           if (data_out_enable_vector_integer_adder = '1') then
             if (unsigned(index_i_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then

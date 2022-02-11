@@ -46,7 +46,7 @@ use work.ntm_math_pkg.all;
 
 entity ntm_matrix_softmax is
   generic (
-    DATA_SIZE    : integer := 128;
+    DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64
     );
   port (
@@ -264,7 +264,7 @@ begin
             softmax_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
-        when SOFTMAX_STATE =>         -- STEP 3
+        when SOFTMAX_STATE =>           -- STEP 3
 
           -- Data Internal
           data_summation_int := ZERO_DATA;

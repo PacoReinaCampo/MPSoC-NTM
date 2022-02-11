@@ -46,7 +46,7 @@ use work.ntm_arithmetic_pkg.all;
 
 entity ntm_vector_summation is
   generic (
-    DATA_SIZE    : integer := 128;
+    DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64
     );
   port (

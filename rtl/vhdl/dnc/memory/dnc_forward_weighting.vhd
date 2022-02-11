@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 
 entity dnc_forward_weighting is
   generic (
-    DATA_SIZE    : integer := 128;
+    DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64
     );
   port (
@@ -194,7 +194,7 @@ begin
       CLK => CLK,
       RST => RST,
 
-        -- CONTROL
+      -- CONTROL
       START => start_tensor_product,
       READY => ready_tensor_product,
 
@@ -213,7 +213,7 @@ begin
       DATA_OUT_J_ENABLE => data_out_j_enable_tensor_product,
       DATA_OUT_K_ENABLE => data_out_k_enable_tensor_product,
 
-        -- DATA
+      -- DATA
       SIZE_A_I_IN => size_a_i_in_tensor_product,
       SIZE_A_J_IN => size_a_j_in_tensor_product,
       SIZE_A_K_IN => size_a_k_in_tensor_product,

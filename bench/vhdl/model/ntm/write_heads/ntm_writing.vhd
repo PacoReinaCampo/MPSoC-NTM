@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 
 entity ntm_writing is
   generic (
-    DATA_SIZE    : integer := 128;
+    DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64
     );
   port (
@@ -92,11 +92,11 @@ architecture ntm_writing_architecture of ntm_writing is
   -----------------------------------------------------------------------
 
   type controller_ctrl_fsm is (
-    STARTER_STATE,            -- STEP 0
-    INPUT_FIRST_STATE,        -- STEP 1
-    VECTOR_MULTIPLIER_STATE,  -- STEP 2
-    INPUT_SECOND_STATE,       -- STEP 3
-    VECTOR_ADDER_STATE        -- STEP 4
+    STARTER_STATE,                      -- STEP 0
+    INPUT_FIRST_STATE,                  -- STEP 1
+    VECTOR_MULTIPLIER_STATE,            -- STEP 2
+    INPUT_SECOND_STATE,                 -- STEP 3
+    VECTOR_ADDER_STATE                  -- STEP 4
     );
 
   -----------------------------------------------------------------------
@@ -223,7 +223,7 @@ begin
             controller_ctrl_fsm_int <= INPUT_FIRST_STATE;
           end if;
 
-        when INPUT_FIRST_STATE =>        -- STEP 1
+        when INPUT_FIRST_STATE =>       -- STEP 1
 
           if (W_IN_ENABLE = '1') then
             -- Data Inputs
@@ -287,7 +287,7 @@ begin
             start_vector_integer_multiplier <= '0';
           end if;
 
-        when INPUT_SECOND_STATE =>       -- STEP 3
+        when INPUT_SECOND_STATE =>      -- STEP 3
 
           if (M_IN_K_ENABLE = '1') then
             -- Data Inputs
@@ -314,7 +314,7 @@ begin
           W_OUT_ENABLE <= '0';
           A_OUT_ENABLE <= '0';
 
-        when VECTOR_ADDER_STATE =>       -- STEP 4
+        when VECTOR_ADDER_STATE =>      -- STEP 4
 
           if (data_out_enable_vector_integer_adder = '1') then
             if (unsigned(index_i_loop) = unsigned(SIZE_N_IN)-unsigned(ONE_CONTROL)) then

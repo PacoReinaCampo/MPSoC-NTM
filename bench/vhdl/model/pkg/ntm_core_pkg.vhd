@@ -58,7 +58,7 @@ package ntm_core_pkg is
 
   component ntm_reading is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -70,17 +70,17 @@ package ntm_core_pkg is
       START : in  std_logic;
       READY : out std_logic;
 
-      M_IN_J_ENABLE : in std_logic;       -- for j in 0 to N-1
-      M_IN_K_ENABLE : in std_logic;       -- for k in 0 to W-1
+      M_IN_J_ENABLE : in std_logic;     -- for j in 0 to N-1
+      M_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
-      W_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
+      W_IN_ENABLE : in std_logic;       -- for j in 0 to N-1
 
-      M_OUT_J_ENABLE : out std_logic;     -- for j in 0 to N-1
-      M_OUT_K_ENABLE : out std_logic;     -- for k in 0 to W-1
+      M_OUT_J_ENABLE : out std_logic;   -- for j in 0 to N-1
+      M_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      W_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
+      W_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
 
-      R_OUT_ENABLE : out std_logic;       -- for k in 0 to W-1
+      R_OUT_ENABLE : out std_logic;     -- for k in 0 to W-1
 
       -- DATA
       SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -99,7 +99,7 @@ package ntm_core_pkg is
 
   component ntm_writing is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -139,7 +139,7 @@ package ntm_core_pkg is
 
   component ntm_erasing is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -154,13 +154,13 @@ package ntm_core_pkg is
       M_IN_J_ENABLE : in std_logic;
       M_IN_K_ENABLE : in std_logic;
 
-      W_IN_ENABLE : in std_logic;         -- for j in 0 to N-1
+      W_IN_ENABLE : in std_logic;       -- for j in 0 to N-1
 
-      E_IN_ENABLE : in std_logic;         -- for k in 0 to W-1
+      E_IN_ENABLE : in std_logic;       -- for k in 0 to W-1
 
-      W_OUT_ENABLE : out std_logic;       -- for j in 0 to N-1
+      W_OUT_ENABLE : out std_logic;     -- for j in 0 to N-1
 
-      E_OUT_ENABLE : in std_logic;        -- for k in 0 to W-1
+      E_OUT_ENABLE : in std_logic;      -- for k in 0 to W-1
 
       M_OUT_J_ENABLE : out std_logic;
       M_OUT_K_ENABLE : out std_logic;
@@ -183,7 +183,7 @@ package ntm_core_pkg is
 
   component ntm_content_based_addressing is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -221,7 +221,7 @@ package ntm_core_pkg is
 
   component ntm_addressing is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -271,7 +271,7 @@ package ntm_core_pkg is
 
   component ntm_top is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -333,7 +333,7 @@ package ntm_core_pkg is
 
   component ntm_interface_vector is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (
@@ -404,7 +404,7 @@ package ntm_core_pkg is
 
   component ntm_output_vector is
     generic (
-      DATA_SIZE    : integer := 128;
+      DATA_SIZE    : integer := 32;
       CONTROL_SIZE : integer := 64
       );
     port (

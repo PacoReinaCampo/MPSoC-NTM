@@ -46,7 +46,7 @@ use work.ntm_math_pkg.all;
 
 entity ntm_vector_softmax is
   generic (
-    DATA_SIZE    : integer := 128;
+    DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64
     );
   port (
@@ -209,7 +209,7 @@ begin
           -- Data Outputs
           DATA_OUT <= vector_in_int(to_integer(unsigned(index_loop)));
 
-        when SOFTMAX_STATE =>         -- STEP 3
+        when SOFTMAX_STATE =>           -- STEP 3
 
           -- Data Internal
           data_summation_int := ZERO_DATA;

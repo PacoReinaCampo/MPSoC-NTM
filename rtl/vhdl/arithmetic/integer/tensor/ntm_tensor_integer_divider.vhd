@@ -46,7 +46,7 @@ use work.ntm_arithmetic_pkg.all;
 
 entity ntm_tensor_integer_divider is
   generic (
-    DATA_SIZE    : integer := 128;
+    DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64
     );
   port (

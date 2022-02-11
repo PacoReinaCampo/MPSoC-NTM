@@ -151,115 +151,298 @@ package ntm_function_pkg is
   -- Components
   -----------------------------------------------------------------------
 
-  component ntm_function_stimulus is
+  -- VECTOR
+  component ntm_vector_differentiation is
     generic (
-      -- SYSTEM-SIZE
       DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64;
-
-      X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x out 0 to X-1
-      Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y out 0 to Y-1
-      N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j out 0 to N-1
-      W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k out 0 to W-1
-      L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l out 0 to L-1
-      R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i out 0 to R-1
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
-      CLK : out std_logic;
-      RST : out std_logic;
+      CLK : in std_logic;
+      RST : in std_logic;
 
-      -----------------------------------------------------------------------
-      -- STIMULUS SCALAR
-      -----------------------------------------------------------------------
-
-      -- SCALAR LOGISTIC
       -- CONTROL
-      SCALAR_LOGISTIC_START : out std_logic;
-      SCALAR_LOGISTIC_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_IN_ENABLE : in std_logic;
+
+      DATA_ENABLE : out std_logic;
+
+      DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      SCALAR_LOGISTIC_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_LOGISTIC_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- SCALAR ONEPLUS
+  component ntm_vector_integration is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      SCALAR_ONEPLUS_START : out std_logic;
-      SCALAR_ONEPLUS_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_IN_ENABLE : in std_logic;
+
+      DATA_ENABLE : out std_logic;
+
+      DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      SCALAR_ONEPLUS_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_ONEPLUS_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -----------------------------------------------------------------------
-      -- STIMULUS VECTOR
-      -----------------------------------------------------------------------
+  component ntm_vector_softmax is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
 
-      -- VECTOR LOGISTIC
       -- CONTROL
-      VECTOR_LOGISTIC_START : out std_logic;
-      VECTOR_LOGISTIC_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      VECTOR_LOGISTIC_DATA_IN_ENABLE : out std_logic;
+      DATA_IN_ENABLE : in std_logic;
 
-      VECTOR_LOGISTIC_DATA_OUT_ENABLE : in std_logic;
+      DATA_ENABLE : out std_logic;
+
+      DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      VECTOR_LOGISTIC_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_LOGISTIC_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_LOGISTIC_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_IN  : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- VECTOR ONEPLUS
+  -- MATRIX
+  component ntm_matrix_differentiation is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      VECTOR_ONEPLUS_START : out std_logic;
-      VECTOR_ONEPLUS_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      VECTOR_ONEPLUS_DATA_IN_ENABLE : out std_logic;
+      CONTROL : in std_logic;
 
-      VECTOR_ONEPLUS_DATA_OUT_ENABLE : in std_logic;
+      DATA_IN_I_ENABLE : in std_logic;
+      DATA_IN_J_ENABLE : in std_logic;
+
+      DATA_I_ENABLE : out std_logic;
+      DATA_J_ENABLE : out std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      VECTOR_ONEPLUS_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_ONEPLUS_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_ONEPLUS_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_I_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_I_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      LENGTH_J_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN     : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -----------------------------------------------------------------------
-      -- STIMULUS MATRIX
-      -----------------------------------------------------------------------
+  component ntm_matrix_integration is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
 
-      -- MATRIX LOGISTIC
       -- CONTROL
-      MATRIX_LOGISTIC_START : out std_logic;
-      MATRIX_LOGISTIC_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      MATRIX_LOGISTIC_DATA_IN_I_ENABLE : out std_logic;
-      MATRIX_LOGISTIC_DATA_IN_J_ENABLE : out std_logic;
+      DATA_IN_I_ENABLE : in std_logic;
+      DATA_IN_J_ENABLE : in std_logic;
 
-      MATRIX_LOGISTIC_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_LOGISTIC_DATA_OUT_J_ENABLE : in std_logic;
+      DATA_I_ENABLE : out std_logic;
+      DATA_J_ENABLE : out std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      MATRIX_LOGISTIC_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_LOGISTIC_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_LOGISTIC_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_LOGISTIC_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- MATRIX ONEPLUS
+  component ntm_matrix_softmax is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      MATRIX_ONEPLUS_START : out std_logic;
-      MATRIX_ONEPLUS_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      MATRIX_ONEPLUS_DATA_IN_I_ENABLE : out std_logic;
-      MATRIX_ONEPLUS_DATA_IN_J_ENABLE : out std_logic;
+      DATA_IN_I_ENABLE : in std_logic;
+      DATA_IN_J_ENABLE : in std_logic;
 
-      MATRIX_ONEPLUS_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_ONEPLUS_DATA_OUT_J_ENABLE : in std_logic;
+      DATA_I_ENABLE : out std_logic;
+      DATA_J_ENABLE : out std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      MATRIX_ONEPLUS_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_ONEPLUS_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_ONEPLUS_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_ONEPLUS_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  -- TENSOR
+  component ntm_tensor_differentiation is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      CONTROL : in std_logic_vector(1 downto 0);
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_IN_I_ENABLE : in std_logic;
+      DATA_IN_J_ENABLE : in std_logic;
+      DATA_IN_K_ENABLE : in std_logic;
+
+      DATA_I_ENABLE : out std_logic;
+      DATA_J_ENABLE : out std_logic;
+      DATA_K_ENABLE : out std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+      DATA_OUT_K_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_I_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN   : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_I_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      LENGTH_J_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      LENGTH_K_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN     : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT    : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_tensor_integration is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_IN_I_ENABLE : in std_logic;
+      DATA_IN_J_ENABLE : in std_logic;
+      DATA_IN_K_ENABLE : in std_logic;
+
+      DATA_I_ENABLE : out std_logic;
+      DATA_J_ENABLE : out std_logic;
+      DATA_K_ENABLE : out std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+      DATA_OUT_K_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      LENGTH_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
+
+  component ntm_tensor_softmax is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
+      -- CONTROL
+      START : in  std_logic;
+      READY : out std_logic;
+
+      DATA_IN_I_ENABLE : in std_logic;
+      DATA_IN_J_ENABLE : in std_logic;
+      DATA_IN_K_ENABLE : in std_logic;
+
+      DATA_I_ENABLE : out std_logic;
+      DATA_J_ENABLE : out std_logic;
+      DATA_K_ENABLE : out std_logic;
+
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+      DATA_OUT_K_ENABLE : out std_logic;
+
+      -- DATA
+      SIZE_I_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN : in  std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_IN   : in  std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

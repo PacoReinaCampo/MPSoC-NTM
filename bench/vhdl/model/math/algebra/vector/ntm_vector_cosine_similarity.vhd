@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 
 entity ntm_vector_cosine_similarity is
   generic (
-    DATA_SIZE    : integer := 128;
+    DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64
     );
   port (
@@ -234,7 +234,7 @@ begin
           -- Data Outputs
           DATA_OUT <= ZERO_DATA;
 
-        when COSINE_SIMILARITY_STATE => -- STEP 3
+        when COSINE_SIMILARITY_STATE =>  -- STEP 3
 
           -- Data Inputs
           data_a_int := ZERO_DATA;

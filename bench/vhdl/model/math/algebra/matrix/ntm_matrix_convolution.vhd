@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 
 entity ntm_matrix_convolution is
   generic (
-    DATA_SIZE    : integer := 128;
+    DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64
     );
   port (
@@ -325,7 +325,7 @@ begin
             convolution_ctrl_fsm_int <= INPUT_J_STATE;
           end if;
 
-        when CONVOLUTION_STATE =>           -- STEP 5
+        when CONVOLUTION_STATE =>       -- STEP 5
 
           -- Data Inputs
           for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop

@@ -117,100 +117,123 @@ package dnc_read_heads_pkg is
   constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := P_NINE;
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := N_FOUR;
 
-  -- FUNCTIONALITY
-  signal STIMULUS_DNC_READ_HEADS_TEST   : boolean := false;
-  signal STIMULUS_DNC_READ_HEADS_CASE_0 : boolean := false;
-  signal STIMULUS_DNC_READ_HEADS_CASE_1 : boolean := false;
-
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
 
-  component dnc_read_heads_stimulus is
+  component dnc_free_gates is
     generic (
-      -- SYSTEM-SIZE
       DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64;
-
-      X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
-      Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
-      N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
-      W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
-      L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
-      R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i in 0 to R-1
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
-      CLK : out std_logic;
-      RST : out std_logic;
+      CLK : in std_logic;
+      RST : in std_logic;
 
-      -- FREE GATES
       -- CONTROL
-      DNC_FREE_GATES_START : out std_logic;
-      DNC_FREE_GATES_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      DNC_FREE_GATES_F_IN_ENABLE : out std_logic;
+      F_IN_ENABLE : in std_logic;       -- for i in 0 to R-1
 
-      DNC_FREE_GATES_F_OUT_ENABLE : in std_logic;
+      F_OUT_ENABLE : out std_logic;     -- for i in 0 to R-1
 
       -- DATA
-      DNC_FREE_GATES_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      DNC_FREE_GATES_F_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      F_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DNC_FREE_GATES_F_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      F_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- READ KEYS
+  component dnc_read_keys is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      DNC_READ_KEYS_START : out std_logic;
-      DNC_READ_KEYS_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      DNC_READ_KEYS_K_IN_I_ENABLE : out std_logic;
-      DNC_READ_KEYS_K_IN_K_ENABLE : out std_logic;
+      K_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1
+      K_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
-      DNC_READ_KEYS_K_OUT_I_ENABLE : in std_logic;
-      DNC_READ_KEYS_K_OUT_K_ENABLE : in std_logic;
+      K_I_ENABLE : out std_logic;       -- for i in 0 to R-1
+      K_K_ENABLE : out std_logic;       -- for k in 0 to W-1
+
+      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1
+      K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
       -- DATA
-      DNC_READ_KEYS_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      DNC_READ_KEYS_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      DNC_READ_KEYS_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DNC_READ_KEYS_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- READ MODES
+  component dnc_read_modes is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      DNC_READ_MODES_START : out std_logic;
-      DNC_READ_MODES_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      DNC_READ_MODES_PI_IN_I_ENABLE : out std_logic;
-      DNC_READ_MODES_PI_IN_P_ENABLE : out std_logic;
+      PI_IN_I_ENABLE : in std_logic;    -- for i in 0 to R-1
+      PI_IN_P_ENABLE : in std_logic;    -- for i in 0 to 2
 
-      DNC_READ_MODES_PI_OUT_I_ENABLE : in std_logic;
-      DNC_READ_MODES_PI_OUT_P_ENABLE : in std_logic;
+      PI_OUT_I_ENABLE : out std_logic;  -- for i in 0 to R-1
+      PI_OUT_P_ENABLE : out std_logic;  -- for i in 0 to 2
 
       -- DATA
-      DNC_READ_MODES_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      DNC_READ_MODES_PI_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      PI_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DNC_READ_MODES_PI_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      PI_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
-      -- READ STRENGTHS
+  component dnc_read_strengths is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      DNC_READ_STRENGTHS_START : out std_logic;
-      DNC_READ_STRENGTHS_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      DNC_READ_STRENGTHS_BETA_IN_ENABLE  : out std_logic;
-      DNC_READ_STRENGTHS_BETA_OUT_ENABLE : in  std_logic;
+      BETA_IN_ENABLE : in std_logic;    -- for i in 0 to R-1
+
+      BETA_OUT_ENABLE : out std_logic;  -- for i in 0 to R-1
 
       -- DATA
-      DNC_READ_STRENGTHS_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      DNC_READ_STRENGTHS_BETA_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      BETA_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      DNC_READ_STRENGTHS_BETA_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+      BETA_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

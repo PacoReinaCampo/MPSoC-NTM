@@ -48,7 +48,7 @@ use work.ntm_lstm_controller_pkg.all;
 
 entity ntm_activation_trainer is
   generic (
-    DATA_SIZE    : integer := 128;
+    DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64
     );
   port (

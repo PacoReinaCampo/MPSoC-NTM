@@ -47,7 +47,7 @@ use work.ntm_math_pkg.all;
 entity ntm_convolutional_fnn_stimulus is
   generic (
     -- SYSTEM-SIZE
-    DATA_SIZE    : integer := 128;
+    DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64;
 
     X : integer := 64;

@@ -123,87 +123,79 @@ package ntm_standard_fnn_pkg is
   -- Components
   -----------------------------------------------------------------------
 
-  component ntm_standard_fnn_stimulus is
+  component ntm_controller is
     generic (
-      -- SYSTEM-SIZE
       DATA_SIZE    : integer := 128;
-      CONTROL_SIZE : integer := 64;
-
-      X : integer := 64;
-      Y : integer := 64;
-      N : integer := 64;
-      W : integer := 64;
-      L : integer := 64;
-      R : integer := 64
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
-      CLK : out std_logic;
-      RST : out std_logic;
+      CLK : in std_logic;
+      RST : in std_logic;
 
       -- CONTROL
-      NTM_STANDARD_FNN_START : out std_logic;
-      NTM_STANDARD_FNN_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      NTM_STANDARD_FNN_W_IN_L_ENABLE : out std_logic;
-      NTM_STANDARD_FNN_W_IN_X_ENABLE : out std_logic;
+      W_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+      W_IN_X_ENABLE : in std_logic;     -- for x in 0 to X-1
 
-      NTM_STANDARD_FNN_K_IN_I_ENABLE : out std_logic;
-      NTM_STANDARD_FNN_K_IN_L_ENABLE : out std_logic;
-      NTM_STANDARD_FNN_K_IN_K_ENABLE : out std_logic;
+      K_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
+      K_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+      K_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
-      NTM_STANDARD_FNN_U_IN_L_ENABLE : out std_logic;
-      NTM_STANDARD_FNN_U_IN_P_ENABLE : out std_logic;
+      U_IN_L_ENABLE : in std_logic;     -- for l in 0 to L-1
+      U_IN_P_ENABLE : in std_logic;     -- for p in 0 to L-1
 
-      NTM_STANDARD_FNN_B_IN_ENABLE : out std_logic;
+      B_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
-      NTM_STANDARD_FNN_X_IN_ENABLE : out std_logic;
+      X_IN_ENABLE : in std_logic;       -- for x in 0 to X-1
 
-      NTM_STANDARD_FNN_X_OUT_ENABLE : in std_logic;
+      X_OUT_ENABLE : out std_logic;     -- for x in 0 to X-1
 
-      NTM_STANDARD_FNN_R_IN_I_ENABLE : out std_logic;
-      NTM_STANDARD_FNN_R_IN_K_ENABLE : out std_logic;
+      R_IN_I_ENABLE : in std_logic;     -- for i in 0 to R-1 (read heads flow)
+      R_IN_K_ENABLE : in std_logic;     -- for k in 0 to W-1
 
-      NTM_STANDARD_FNN_R_OUT_I_ENABLE : in std_logic;
-      NTM_STANDARD_FNN_R_OUT_K_ENABLE : in std_logic;
+      R_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
+      R_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      NTM_STANDARD_FNN_H_IN_ENABLE : out std_logic;
+      H_IN_ENABLE : in std_logic;       -- for l in 0 to L-1
 
-      NTM_STANDARD_FNN_W_OUT_L_ENABLE : in std_logic;
-      NTM_STANDARD_FNN_W_OUT_X_ENABLE : in std_logic;
+      W_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+      W_OUT_X_ENABLE : out std_logic;   -- for x in 0 to X-1
 
-      NTM_STANDARD_FNN_K_OUT_I_ENABLE : in std_logic;
-      NTM_STANDARD_FNN_K_OUT_L_ENABLE : in std_logic;
-      NTM_STANDARD_FNN_K_OUT_K_ENABLE : in std_logic;
+      K_OUT_I_ENABLE : out std_logic;   -- for i in 0 to R-1 (read heads flow)
+      K_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+      K_OUT_K_ENABLE : out std_logic;   -- for k in 0 to W-1
 
-      NTM_STANDARD_FNN_U_OUT_L_ENABLE : in std_logic;
-      NTM_STANDARD_FNN_U_OUT_P_ENABLE : in std_logic;
+      U_OUT_L_ENABLE : out std_logic;   -- for l in 0 to L-1
+      U_OUT_P_ENABLE : out std_logic;   -- for p in 0 to L-1
 
-      NTM_STANDARD_FNN_B_OUT_ENABLE : in std_logic;
+      B_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
-      NTM_STANDARD_FNN_H_OUT_ENABLE : in std_logic;
+      H_OUT_ENABLE : out std_logic;     -- for l in 0 to L-1
 
       -- DATA
-      NTM_STANDARD_FNN_SIZE_X_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_STANDARD_FNN_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_STANDARD_FNN_SIZE_L_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      NTM_STANDARD_FNN_SIZE_R_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-      NTM_STANDARD_FNN_W_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_STANDARD_FNN_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_STANDARD_FNN_U_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_STANDARD_FNN_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      W_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      K_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      U_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_STANDARD_FNN_X_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_STANDARD_FNN_R_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_STANDARD_FNN_H_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      X_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      R_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      H_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_STANDARD_FNN_W_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_STANDARD_FNN_K_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_STANDARD_FNN_U_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
-      NTM_STANDARD_FNN_B_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      W_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      K_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      U_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
+      B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0);
 
-      NTM_STANDARD_FNN_H_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+      H_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
 

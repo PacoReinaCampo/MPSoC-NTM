@@ -128,340 +128,385 @@ package ntm_float_pkg is
   -- MULTIPLICATION = X"CBC15371"
   -- DIVISION       = X"C44C3801"
 
-  -- SCALAR-FUNCTIONALITY
-  signal STIMULUS_NTM_SCALAR_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_SCALAR_DIVIDER_TEST    : boolean := false;
-
-  signal STIMULUS_NTM_SCALAR_FLOAT_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_TEST    : boolean := false;
-
-  signal STIMULUS_NTM_SCALAR_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_DIVIDER_CASE_0    : boolean := false;
-
-  signal STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE_0    : boolean := false;
-
-  signal STIMULUS_NTM_SCALAR_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_DIVIDER_CASE_1    : boolean := false;
-
-  signal STIMULUS_NTM_SCALAR_FLOAT_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_SCALAR_FLOAT_DIVIDER_CASE_1    : boolean := false;
-
-  -- VECTOR-FUNCTIONALITY
-  signal STIMULUS_NTM_VECTOR_FLOAT_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_FLOAT_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_VECTOR_FLOAT_DIVIDER_TEST    : boolean := false;
-
-  signal STIMULUS_NTM_VECTOR_FLOAT_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_FLOAT_DIVIDER_CASE_0    : boolean := false;
-
-  signal STIMULUS_NTM_VECTOR_FLOAT_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_VECTOR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_VECTOR_FLOAT_DIVIDER_CASE_1    : boolean := false;
-
-  -- MATRIX-FUNCTIONALITY
-  signal STIMULUS_NTM_MATRIX_FLOAT_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_TEST    : boolean := false;
-
-  signal STIMULUS_NTM_MATRIX_FLOAT_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_CASE_0    : boolean := false;
-
-  signal STIMULUS_NTM_MATRIX_FLOAT_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_MATRIX_FLOAT_DIVIDER_CASE_1    : boolean := false;
-
-  -- TENSOR-FUNCTIONALITY
-  signal STIMULUS_NTM_TENSOR_FLOAT_ADDER_TEST      : boolean := false;
-  signal STIMULUS_NTM_TENSOR_FLOAT_MULTIPLIER_TEST : boolean := false;
-  signal STIMULUS_NTM_TENSOR_FLOAT_DIVIDER_TEST    : boolean := false;
-
-  signal STIMULUS_NTM_TENSOR_FLOAT_ADDER_CASE_0      : boolean := false;
-  signal STIMULUS_NTM_TENSOR_FLOAT_MULTIPLIER_CASE_0 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_FLOAT_DIVIDER_CASE_0    : boolean := false;
-
-  signal STIMULUS_NTM_TENSOR_FLOAT_ADDER_CASE_1      : boolean := false;
-  signal STIMULUS_NTM_TENSOR_FLOAT_MULTIPLIER_CASE_1 : boolean := false;
-  signal STIMULUS_NTM_TENSOR_FLOAT_DIVIDER_CASE_1    : boolean := false;
-
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
 
-  component ntm_float_stimulus is
+  -- SCALAR
+  component ntm_scalar_float_adder is
     generic (
-      -- SYSTEM-SIZE
       DATA_SIZE    : integer := 32;
-      CONTROL_SIZE : integer := 64;
-
-      X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(32, DATA_SIZE));  -- x in 0 to X-1
-      Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(32, DATA_SIZE));  -- y in 0 to Y-1
-      N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(32, DATA_SIZE));  -- j in 0 to N-1
-      W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(32, DATA_SIZE));  -- k in 0 to W-1
-      L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(32, DATA_SIZE));  -- l in 0 to L-1
-      R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(32, DATA_SIZE))  -- i in 0 to R-1
+      CONTROL_SIZE : integer := 64
       );
     port (
       -- GLOBAL
-      CLK : out std_logic;
-      RST : out std_logic;
+      CLK : in std_logic;
+      RST : in std_logic;
 
-      -----------------------------------------------------------------------
-      -- STIMULUS SCALAR FLOAT
-      -----------------------------------------------------------------------
-
-      -- SCALAR FLOAT ADDER
       -- CONTROL
-      SCALAR_FLOAT_ADDER_START : out std_logic;
-      SCALAR_FLOAT_ADDER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      SCALAR_FLOAT_ADDER_OPERATION : out std_logic;
+      OPERATION : in std_logic;
 
       -- DATA
-      SCALAR_FLOAT_ADDER_DATA_A_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_FLOAT_ADDER_DATA_B_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_FLOAT_ADDER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_FLOAT_ADDER_OVERFLOW_OUT : in  std_logic;
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- SCALAR FLOAT MULTIPLIER
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component ntm_scalar_float_multiplier is
+    generic (
+      DATA_SIZE    : integer := 32;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      SCALAR_FLOAT_MULTIPLIER_START : out std_logic;
-      SCALAR_FLOAT_MULTIPLIER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
       -- DATA
-      SCALAR_FLOAT_MULTIPLIER_DATA_A_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_FLOAT_MULTIPLIER_DATA_B_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_FLOAT_MULTIPLIER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_FLOAT_MULTIPLIER_OVERFLOW_OUT : in  std_logic;
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- SCALAR FLOAT DIVIDER
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component ntm_scalar_float_divider is
+    generic (
+      DATA_SIZE    : integer := 32;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      SCALAR_FLOAT_DIVIDER_START : out std_logic;
-      SCALAR_FLOAT_DIVIDER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
       -- DATA
-      SCALAR_FLOAT_DIVIDER_DATA_A_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_FLOAT_DIVIDER_DATA_B_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_FLOAT_DIVIDER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      SCALAR_FLOAT_DIVIDER_OVERFLOW_OUT : in  std_logic;
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -----------------------------------------------------------------------
-      -- STIMULUS VECTOR FLOAT
-      -----------------------------------------------------------------------
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
 
-      -- VECTOR FLOAT ADDER
+  -- VECTOR
+  component ntm_vector_float_adder is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      VECTOR_FLOAT_ADDER_START : out std_logic;
-      VECTOR_FLOAT_ADDER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      VECTOR_FLOAT_ADDER_OPERATION : out std_logic;
+      OPERATION : in std_logic;
 
-      VECTOR_FLOAT_ADDER_DATA_A_IN_ENABLE : out std_logic;
-      VECTOR_FLOAT_ADDER_DATA_B_IN_ENABLE : out std_logic;
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
 
-      VECTOR_FLOAT_ADDER_DATA_OUT_ENABLE : in std_logic;
+      DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      VECTOR_FLOAT_ADDER_SIZE_IN      : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_FLOAT_ADDER_DATA_A_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_FLOAT_ADDER_DATA_B_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_FLOAT_ADDER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_FLOAT_ADDER_OVERFLOW_OUT : in  std_logic;
+      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- VECTOR FLOAT MULTIPLIER
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component ntm_vector_float_multiplier is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      VECTOR_FLOAT_MULTIPLIER_START : out std_logic;
-      VECTOR_FLOAT_MULTIPLIER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      VECTOR_FLOAT_MULTIPLIER_DATA_A_IN_ENABLE : out std_logic;
-      VECTOR_FLOAT_MULTIPLIER_DATA_B_IN_ENABLE : out std_logic;
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
 
-      VECTOR_FLOAT_MULTIPLIER_DATA_OUT_ENABLE : in std_logic;
+      DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      VECTOR_FLOAT_MULTIPLIER_SIZE_IN      : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_FLOAT_MULTIPLIER_DATA_A_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_FLOAT_MULTIPLIER_DATA_B_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_FLOAT_MULTIPLIER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_FLOAT_MULTIPLIER_OVERFLOW_OUT : in  std_logic;
+      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- VECTOR FLOAT DIVIDER
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component ntm_vector_float_divider is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      VECTOR_FLOAT_DIVIDER_START : out std_logic;
-      VECTOR_FLOAT_DIVIDER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      VECTOR_FLOAT_DIVIDER_DATA_A_IN_ENABLE : out std_logic;
-      VECTOR_FLOAT_DIVIDER_DATA_B_IN_ENABLE : out std_logic;
+      DATA_A_IN_ENABLE : in std_logic;
+      DATA_B_IN_ENABLE : in std_logic;
 
-      VECTOR_FLOAT_DIVIDER_DATA_OUT_ENABLE : in std_logic;
+      DATA_OUT_ENABLE : out std_logic;
 
       -- DATA
-      VECTOR_FLOAT_DIVIDER_SIZE_IN      : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      VECTOR_FLOAT_DIVIDER_DATA_A_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_FLOAT_DIVIDER_DATA_B_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_FLOAT_DIVIDER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      VECTOR_FLOAT_DIVIDER_OVERFLOW_OUT : in  std_logic;
+      SIZE_IN   : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -----------------------------------------------------------------------
-      -- STIMULUS MATRIX FLOAT
-      -----------------------------------------------------------------------
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
 
-      -- MATRIX FLOAT ADDER
+  -- MATRIX
+  component ntm_matrix_float_adder is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      MATRIX_FLOAT_ADDER_START : out std_logic;
-      MATRIX_FLOAT_ADDER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      MATRIX_FLOAT_ADDER_OPERATION : out std_logic;
+      OPERATION : in std_logic;
 
-      MATRIX_FLOAT_ADDER_DATA_A_IN_I_ENABLE : out std_logic;
-      MATRIX_FLOAT_ADDER_DATA_A_IN_J_ENABLE : out std_logic;
-      MATRIX_FLOAT_ADDER_DATA_B_IN_I_ENABLE : out std_logic;
-      MATRIX_FLOAT_ADDER_DATA_B_IN_J_ENABLE : out std_logic;
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
 
-      MATRIX_FLOAT_ADDER_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_FLOAT_ADDER_DATA_OUT_J_ENABLE : in std_logic;
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      MATRIX_FLOAT_ADDER_SIZE_I_IN    : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_FLOAT_ADDER_SIZE_J_IN    : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_FLOAT_ADDER_DATA_A_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_FLOAT_ADDER_DATA_B_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_FLOAT_ADDER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_FLOAT_ADDER_OVERFLOW_OUT : in  std_logic;
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- MATRIX FLOAT MULTIPLIER
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component ntm_matrix_float_multiplier is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      MATRIX_FLOAT_MULTIPLIER_START : out std_logic;
-      MATRIX_FLOAT_MULTIPLIER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE : out std_logic;
-      MATRIX_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE : out std_logic;
-      MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE : out std_logic;
-      MATRIX_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE : out std_logic;
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
 
-      MATRIX_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE : in std_logic;
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      MATRIX_FLOAT_MULTIPLIER_SIZE_I_IN    : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_FLOAT_MULTIPLIER_SIZE_J_IN    : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_FLOAT_MULTIPLIER_DATA_A_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_FLOAT_MULTIPLIER_DATA_B_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_FLOAT_MULTIPLIER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_FLOAT_MULTIPLIER_OVERFLOW_OUT : in  std_logic;
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -- MATRIX FLOAT DIVIDER
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
+
+  component ntm_matrix_float_divider is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      MATRIX_FLOAT_DIVIDER_START : out std_logic;
-      MATRIX_FLOAT_DIVIDER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      MATRIX_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE : out std_logic;
-      MATRIX_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE : out std_logic;
-      MATRIX_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE : out std_logic;
-      MATRIX_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE : out std_logic;
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
 
-      MATRIX_FLOAT_DIVIDER_DATA_OUT_I_ENABLE : in std_logic;
-      MATRIX_FLOAT_DIVIDER_DATA_OUT_J_ENABLE : in std_logic;
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
 
       -- DATA
-      MATRIX_FLOAT_DIVIDER_SIZE_I_IN    : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_FLOAT_DIVIDER_SIZE_J_IN    : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      MATRIX_FLOAT_DIVIDER_DATA_A_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_FLOAT_DIVIDER_DATA_B_IN    : out std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_FLOAT_DIVIDER_DATA_OUT     : in  std_logic_vector(DATA_SIZE-1 downto 0);
-      MATRIX_FLOAT_DIVIDER_OVERFLOW_OUT : in  std_logic;
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      -----------------------------------------------------------------------
-      -- STIMULUS TENSOR FLOAT
-      -----------------------------------------------------------------------
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
 
-      -- TENSOR ADDER
+  -- TENSOR
+  component ntm_tensor_float_adder is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      TENSOR_FLOAT_ADDER_START : out std_logic;
-      TENSOR_FLOAT_ADDER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      TENSOR_FLOAT_ADDER_OPERATION : out std_logic;
+      OPERATION : in std_logic;
 
-      TENSOR_FLOAT_ADDER_DATA_A_IN_I_ENABLE : out std_logic;
-      TENSOR_FLOAT_ADDER_DATA_A_IN_J_ENABLE : out std_logic;
-      TENSOR_FLOAT_ADDER_DATA_A_IN_K_ENABLE : out std_logic;
-      TENSOR_FLOAT_ADDER_DATA_B_IN_I_ENABLE : out std_logic;
-      TENSOR_FLOAT_ADDER_DATA_B_IN_J_ENABLE : out std_logic;
-      TENSOR_FLOAT_ADDER_DATA_B_IN_K_ENABLE : out std_logic;
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_K_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_K_ENABLE : in std_logic;
 
-      TENSOR_FLOAT_ADDER_DATA_OUT_I_ENABLE : in std_logic;
-      TENSOR_FLOAT_ADDER_DATA_OUT_J_ENABLE : in std_logic;
-      TENSOR_FLOAT_ADDER_DATA_OUT_K_ENABLE : in std_logic;
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+      DATA_OUT_K_ENABLE : out std_logic;
 
       -- DATA
-      TENSOR_FLOAT_ADDER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_FLOAT_ADDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_FLOAT_ADDER_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_FLOAT_ADDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_FLOAT_ADDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      TENSOR_FLOAT_ADDER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_FLOAT_ADDER_OVERFLOW_OUT : in std_logic;
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
 
-      -- TENSOR MULTIPLIER
+  component ntm_tensor_float_multiplier is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      TENSOR_FLOAT_MULTIPLIER_START : out std_logic;
-      TENSOR_FLOAT_MULTIPLIER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_I_ENABLE : out std_logic;
-      TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_J_ENABLE : out std_logic;
-      TENSOR_FLOAT_MULTIPLIER_DATA_A_IN_K_ENABLE : out std_logic;
-      TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_I_ENABLE : out std_logic;
-      TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_J_ENABLE : out std_logic;
-      TENSOR_FLOAT_MULTIPLIER_DATA_B_IN_K_ENABLE : out std_logic;
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_K_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_K_ENABLE : in std_logic;
 
-      TENSOR_FLOAT_MULTIPLIER_DATA_OUT_I_ENABLE : in std_logic;
-      TENSOR_FLOAT_MULTIPLIER_DATA_OUT_J_ENABLE : in std_logic;
-      TENSOR_FLOAT_MULTIPLIER_DATA_OUT_K_ENABLE : in std_logic;
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+      DATA_OUT_K_ENABLE : out std_logic;
 
       -- DATA
-      TENSOR_FLOAT_MULTIPLIER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_FLOAT_MULTIPLIER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_FLOAT_MULTIPLIER_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_FLOAT_MULTIPLIER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_FLOAT_MULTIPLIER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      TENSOR_FLOAT_MULTIPLIER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_FLOAT_MULTIPLIER_OVERFLOW_OUT : in std_logic;
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
+      );
+  end component;
 
-      -- TENSOR DIVIDER
+  component ntm_tensor_float_divider is
+    generic (
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64
+      );
+    port (
+      -- GLOBAL
+      CLK : in std_logic;
+      RST : in std_logic;
+
       -- CONTROL
-      TENSOR_FLOAT_DIVIDER_START : out std_logic;
-      TENSOR_FLOAT_DIVIDER_READY : in  std_logic;
+      START : in  std_logic;
+      READY : out std_logic;
 
-      TENSOR_FLOAT_DIVIDER_DATA_A_IN_I_ENABLE : out std_logic;
-      TENSOR_FLOAT_DIVIDER_DATA_A_IN_J_ENABLE : out std_logic;
-      TENSOR_FLOAT_DIVIDER_DATA_A_IN_K_ENABLE : out std_logic;
-      TENSOR_FLOAT_DIVIDER_DATA_B_IN_I_ENABLE : out std_logic;
-      TENSOR_FLOAT_DIVIDER_DATA_B_IN_J_ENABLE : out std_logic;
-      TENSOR_FLOAT_DIVIDER_DATA_B_IN_K_ENABLE : out std_logic;
+      DATA_A_IN_I_ENABLE : in std_logic;
+      DATA_A_IN_J_ENABLE : in std_logic;
+      DATA_A_IN_K_ENABLE : in std_logic;
+      DATA_B_IN_I_ENABLE : in std_logic;
+      DATA_B_IN_J_ENABLE : in std_logic;
+      DATA_B_IN_K_ENABLE : in std_logic;
 
-      TENSOR_FLOAT_DIVIDER_DATA_OUT_I_ENABLE : in std_logic;
-      TENSOR_FLOAT_DIVIDER_DATA_OUT_J_ENABLE : in std_logic;
-      TENSOR_FLOAT_DIVIDER_DATA_OUT_K_ENABLE : in std_logic;
+      DATA_OUT_I_ENABLE : out std_logic;
+      DATA_OUT_J_ENABLE : out std_logic;
+      DATA_OUT_K_ENABLE : out std_logic;
 
       -- DATA
-      TENSOR_FLOAT_DIVIDER_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_FLOAT_DIVIDER_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_FLOAT_DIVIDER_SIZE_K_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
-      TENSOR_FLOAT_DIVIDER_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_FLOAT_DIVIDER_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SIZE_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      SIZE_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+      DATA_A_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
+      DATA_B_IN : in std_logic_vector(DATA_SIZE-1 downto 0);
 
-      TENSOR_FLOAT_DIVIDER_DATA_OUT     : in std_logic_vector(DATA_SIZE-1 downto 0);
-      TENSOR_FLOAT_DIVIDER_OVERFLOW_OUT : in std_logic
+      DATA_OUT     : out std_logic_vector(DATA_SIZE-1 downto 0);
+      OVERFLOW_OUT : out std_logic
       );
   end component;
 
