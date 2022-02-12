@@ -142,9 +142,61 @@ package ntm_write_heads_pkg is
   constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := INT_P_NINE;
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := INT_N_FOUR;
 
+  -- FUNCTIONALITY
+  signal STIMULUS_NTM_WRITE_HEADS_TEST   : boolean := false;
+  signal STIMULUS_NTM_WRITE_HEADS_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_WRITE_HEADS_CASE_1 : boolean := false;
+
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
+
+  component ntm_write_heads_stimulus is
+    generic (
+      -- SYSTEM-SIZE
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64;
+
+      X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+      Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+      N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+      W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+      L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+      R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i in 0 to R-1
+      );
+    port (
+      -- GLOBAL
+      CLK : out std_logic;
+      RST : out std_logic;
+
+      -- CONTROL
+      NTM_WRITE_HEADS_START : out std_logic;
+      NTM_WRITE_HEADS_READY : in  std_logic;
+
+      NTM_WRITE_HEADS_M_IN_J_ENABLE : out std_logic;
+      NTM_WRITE_HEADS_M_IN_K_ENABLE : out std_logic;
+
+      NTM_WRITE_HEADS_W_IN_ENABLE : out std_logic;
+
+      NTM_WRITE_HEADS_A_IN_ENABLE : out std_logic;
+
+      NTM_WRITE_HEADS_W_OUT_ENABLE : in std_logic;
+
+      NTM_WRITE_HEADS_A_OUT_ENABLE : in std_logic;
+
+      NTM_WRITE_HEADS_M_OUT_J_ENABLE : in std_logic;
+      NTM_WRITE_HEADS_M_OUT_K_ENABLE : in std_logic;
+
+      -- DATA
+      NTM_WRITE_HEADS_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      NTM_WRITE_HEADS_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+      NTM_WRITE_HEADS_M_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_WRITE_HEADS_A_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_WRITE_HEADS_W_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_WRITE_HEADS_M_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
   component ntm_writing is
     generic (

@@ -142,9 +142,151 @@ package ntm_function_pkg is
   constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := INT_P_NINE;
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := INT_N_FOUR;
 
+  -- SCALAR-FUNCTIONALITY
+  signal STIMULUS_NTM_SCALAR_LOGISTIC_TEST : boolean := false;
+  signal STIMULUS_NTM_SCALAR_ONEPLUS_TEST  : boolean := false;
+
+  signal STIMULUS_NTM_SCALAR_LOGISTIC_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_SCALAR_ONEPLUS_CASE_0  : boolean := false;
+
+  signal STIMULUS_NTM_SCALAR_LOGISTIC_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_SCALAR_ONEPLUS_CASE_1  : boolean := false;
+
+  -- VECTOR-FUNCTIONALITY
+  signal STIMULUS_NTM_VECTOR_LOGISTIC_TEST : boolean := false;
+  signal STIMULUS_NTM_VECTOR_ONEPLUS_TEST  : boolean := false;
+
+  signal STIMULUS_NTM_VECTOR_LOGISTIC_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_VECTOR_ONEPLUS_CASE_0  : boolean := false;
+
+  signal STIMULUS_NTM_VECTOR_LOGISTIC_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_VECTOR_ONEPLUS_CASE_1  : boolean := false;
+
+  -- MATRIX-FUNCTIONALITY
+  signal STIMULUS_NTM_MATRIX_LOGISTIC_TEST : boolean := false;
+  signal STIMULUS_NTM_MATRIX_ONEPLUS_TEST  : boolean := false;
+
+  signal STIMULUS_NTM_MATRIX_LOGISTIC_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_MATRIX_ONEPLUS_CASE_0  : boolean := false;
+
+  signal STIMULUS_NTM_MATRIX_LOGISTIC_CASE_1 : boolean := false;
+  signal STIMULUS_NTM_MATRIX_ONEPLUS_CASE_1  : boolean := false;
+
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
+
+  component ntm_function_stimulus is
+    generic (
+      -- SYSTEM-SIZE
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64;
+
+      X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x out 0 to X-1
+      Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y out 0 to Y-1
+      N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j out 0 to N-1
+      W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k out 0 to W-1
+      L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l out 0 to L-1
+      R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i out 0 to R-1
+      );
+    port (
+      -- GLOBAL
+      CLK : out std_logic;
+      RST : out std_logic;
+
+      -----------------------------------------------------------------------
+      -- STIMULUS SCALAR
+      -----------------------------------------------------------------------
+
+      -- SCALAR LOGISTIC
+      -- CONTROL
+      SCALAR_LOGISTIC_START : out std_logic;
+      SCALAR_LOGISTIC_READY : in  std_logic;
+
+      -- DATA
+      SCALAR_LOGISTIC_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_LOGISTIC_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- SCALAR ONEPLUS
+      -- CONTROL
+      SCALAR_ONEPLUS_START : out std_logic;
+      SCALAR_ONEPLUS_READY : in  std_logic;
+
+      -- DATA
+      SCALAR_ONEPLUS_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      SCALAR_ONEPLUS_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -----------------------------------------------------------------------
+      -- STIMULUS VECTOR
+      -----------------------------------------------------------------------
+
+      -- VECTOR LOGISTIC
+      -- CONTROL
+      VECTOR_LOGISTIC_START : out std_logic;
+      VECTOR_LOGISTIC_READY : in  std_logic;
+
+      VECTOR_LOGISTIC_DATA_IN_ENABLE : out std_logic;
+
+      VECTOR_LOGISTIC_DATA_OUT_ENABLE : in std_logic;
+
+      -- DATA
+      VECTOR_LOGISTIC_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_LOGISTIC_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_LOGISTIC_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- VECTOR ONEPLUS
+      -- CONTROL
+      VECTOR_ONEPLUS_START : out std_logic;
+      VECTOR_ONEPLUS_READY : in  std_logic;
+
+      VECTOR_ONEPLUS_DATA_IN_ENABLE : out std_logic;
+
+      VECTOR_ONEPLUS_DATA_OUT_ENABLE : in std_logic;
+
+      -- DATA
+      VECTOR_ONEPLUS_SIZE_IN  : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      VECTOR_ONEPLUS_DATA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+      VECTOR_ONEPLUS_DATA_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -----------------------------------------------------------------------
+      -- STIMULUS MATRIX
+      -----------------------------------------------------------------------
+
+      -- MATRIX LOGISTIC
+      -- CONTROL
+      MATRIX_LOGISTIC_START : out std_logic;
+      MATRIX_LOGISTIC_READY : in  std_logic;
+
+      MATRIX_LOGISTIC_DATA_IN_I_ENABLE : out std_logic;
+      MATRIX_LOGISTIC_DATA_IN_J_ENABLE : out std_logic;
+
+      MATRIX_LOGISTIC_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_LOGISTIC_DATA_OUT_J_ENABLE : in std_logic;
+
+      -- DATA
+      MATRIX_LOGISTIC_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_LOGISTIC_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_LOGISTIC_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_LOGISTIC_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+      -- MATRIX ONEPLUS
+      -- CONTROL
+      MATRIX_ONEPLUS_START : out std_logic;
+      MATRIX_ONEPLUS_READY : in  std_logic;
+
+      MATRIX_ONEPLUS_DATA_IN_I_ENABLE : out std_logic;
+      MATRIX_ONEPLUS_DATA_IN_J_ENABLE : out std_logic;
+
+      MATRIX_ONEPLUS_DATA_OUT_I_ENABLE : in std_logic;
+      MATRIX_ONEPLUS_DATA_OUT_J_ENABLE : in std_logic;
+
+      -- DATA
+      MATRIX_ONEPLUS_SIZE_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_ONEPLUS_SIZE_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      MATRIX_ONEPLUS_DATA_IN   : out std_logic_vector(DATA_SIZE-1 downto 0);
+      MATRIX_ONEPLUS_DATA_OUT  : in  std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
   -- VECTOR
   component ntm_vector_differentiation is

@@ -128,9 +128,76 @@ package ntm_state_top_pkg is
   constant SCALAR_SAMPLE_A : std_logic_vector(DATA_SIZE-1 downto 0) := INT_P_NINE;
   constant SCALAR_SAMPLE_B : std_logic_vector(DATA_SIZE-1 downto 0) := INT_N_FOUR;
 
+  -- FUNCTIONALITY
+  signal STIMULUS_NTM_STATE_TOP_TEST   : boolean := false;
+  signal STIMULUS_NTM_STATE_TOP_CASE_0 : boolean := false;
+  signal STIMULUS_NTM_STATE_TOP_CASE_1 : boolean := false;
+
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
+
+  component ntm_state_top_stimulus is
+    generic (
+      -- SYSTEM-SIZE
+      DATA_SIZE    : integer := 128;
+      CONTROL_SIZE : integer := 64;
+
+      X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+      Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+      N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+      W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+      L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+      R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i in 0 to R-1
+      );
+    port (
+      -- GLOBAL
+      CLK : out std_logic;
+      RST : out std_logic;
+
+      -- CONTROL
+      NTM_STATE_TOP_START : out std_logic;
+      NTM_STATE_TOP_READY : in  std_logic;
+
+      NTM_STATE_TOP_DATA_A_IN_I_ENABLE : out std_logic;
+      NTM_STATE_TOP_DATA_A_IN_J_ENABLE : out std_logic;
+      NTM_STATE_TOP_DATA_B_IN_I_ENABLE : out std_logic;
+      NTM_STATE_TOP_DATA_B_IN_J_ENABLE : out std_logic;
+      NTM_STATE_TOP_DATA_C_IN_I_ENABLE : out std_logic;
+      NTM_STATE_TOP_DATA_C_IN_J_ENABLE : out std_logic;
+      NTM_STATE_TOP_DATA_D_IN_I_ENABLE : out std_logic;
+      NTM_STATE_TOP_DATA_D_IN_J_ENABLE : out std_logic;
+
+      NTM_STATE_TOP_DATA_K_IN_I_ENABLE : out std_logic;
+      NTM_STATE_TOP_DATA_K_IN_J_ENABLE : out std_logic;
+
+      NTM_STATE_TOP_DATA_K_I_ENABLE : in std_logic;
+      NTM_STATE_TOP_DATA_K_J_ENABLE : in std_logic;
+
+      NTM_STATE_TOP_DATA_X_OUT_ENABLE : in std_logic;
+      NTM_STATE_TOP_DATA_Y_OUT_ENABLE : in std_logic;
+
+      -- DATA
+      NTM_STATE_TOP_SIZE_A_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      NTM_STATE_TOP_SIZE_A_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      NTM_STATE_TOP_SIZE_B_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      NTM_STATE_TOP_SIZE_B_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      NTM_STATE_TOP_SIZE_C_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      NTM_STATE_TOP_SIZE_C_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      NTM_STATE_TOP_SIZE_D_I_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+      NTM_STATE_TOP_SIZE_D_J_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+      NTM_STATE_TOP_DATA_A_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_STATE_TOP_DATA_B_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_STATE_TOP_DATA_C_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_STATE_TOP_DATA_D_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+      NTM_STATE_TOP_DATA_K_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+      NTM_STATE_TOP_DATA_X_OUT : in std_logic_vector(DATA_SIZE-1 downto 0);
+      NTM_STATE_TOP_DATA_Y_OUT : in std_logic_vector(DATA_SIZE-1 downto 0)
+      );
+  end component;
 
   component ntm_state_top is
     generic (
