@@ -42,51 +42,88 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use std.env.all;
+use work.ntm_math_pkg.all;
+use work.ntm_memory_pkg.all;
 
-library osvvm;
-use osvvm.RandomPkg.all;
-use osvvm.CoveragePkg.all;
+entity ntm_memory_stimulus is
+  generic (
+    -- SYSTEM-SIZE
+    DATA_SIZE    : integer := 32;
+    CONTROL_SIZE : integer := 64;
 
-entity ntm_intro_testbench is
-end entity ntm_intro_testbench;
+    X : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- x in 0 to X-1
+    Y : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- y in 0 to Y-1
+    N : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- j in 0 to N-1
+    W : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- k in 0 to W-1
+    L : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE));  -- l in 0 to L-1
+    R : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(64, DATA_SIZE))  -- i in 0 to R-1
+    );
+  port (
+    -- GLOBAL
+    CLK : out std_logic;
+    RST : out std_logic;
 
-use work.ntm_intro_model_pkg.all;
-use work.ntm_intro_pkg.all;
+    -- CONTROL
+    NTM_MEMORY_START : out std_logic;
+    NTM_MEMORY_READY : in  std_logic;
 
-architecture ntm_intro_testbench_architecture of ntm_intro_testbench is
+    NTM_MEMORY_K_IN_ENABLE : out std_logic;
+    NTM_MEMORY_S_IN_ENABLE : out std_logic;
+
+    NTM_MEMORY_K_OUT_ENABLE : in std_logic;
+    NTM_MEMORY_S_OUT_ENABLE : in std_logic;
+
+    NTM_MEMORY_M_IN_J_ENABLE : out std_logic;
+    NTM_MEMORY_M_IN_K_ENABLE : out std_logic;
+
+    NTM_MEMORY_M_OUT_J_ENABLE : in std_logic;
+    NTM_MEMORY_M_OUT_K_ENABLE : in std_logic;
+
+    NTM_MEMORY_W_IN_ENABLE  : out std_logic;
+    NTM_MEMORY_W_OUT_ENABLE : in  std_logic;
+
+    -- DATA
+    NTM_MEMORY_SIZE_N_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+    NTM_MEMORY_SIZE_W_IN : out std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    NTM_MEMORY_K_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_MEMORY_BETA_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_MEMORY_G_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_MEMORY_S_IN     : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_MEMORY_GAMMA_IN : in  std_logic_vector(DATA_SIZE-1 downto 0);
+
+    NTM_MEMORY_M_IN : out std_logic_vector(DATA_SIZE-1 downto 0);
+
+    NTM_MEMORY_W_IN  : out std_logic_vector(DATA_SIZE-1 downto 0);
+    NTM_MEMORY_W_OUT : in  std_logic_vector(DATA_SIZE-1 downto 0)
+    );
+end entity;
+
+architecture ntm_memory_stimulus_architecture of ntm_memory_stimulus is
+
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
 
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
 
-  -- width of adder inputs
-  constant DATA_SIZE : positive := 8;
+  constant PERIOD : time := 10 ns;
 
-  -- clock period
-  constant PERIOD : time := 20 ns;
-
-  -- how many bins should be generated
-  constant C_MAX_BINS : natural := 16;
+  constant WAITING : time := 50 ns;
+  constant WORKING : time := 1 ms;
 
   -----------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------
 
   -- GLOBAL
-  signal clk_int : std_logic := '0';
-  signal rst_int : std_logic := '0';
+  signal clk_int : std_logic;
+  signal rst_int : std_logic;
 
   -- CONTROL
-  -- coverage object of (protected) type CovPType
-  shared variable sv_coverage : CovPType;
-
-  -- SCALAR ADDER
-  signal data_a_in_int : unsigned(DATA_SIZE-1 downto 0);
-  signal data_b_in_int : unsigned(DATA_SIZE-1 downto 0);
-
-  signal data_out_model_int  : unsigned(DATA_SIZE downto 0) := (others => '0');
-  signal data_out_design_int : unsigned(DATA_SIZE downto 0) := (others => '0');
+  signal start_int : std_logic;
 
 begin
 
@@ -95,84 +132,65 @@ begin
   -----------------------------------------------------------------------
 
   -- clk generation
-  clk_int <= not clk_int after PERIOD/2;
+  clk_process : process
+  begin
+    clk_int <= '1';
+    wait for PERIOD/2;
+
+    clk_int <= '0';
+    wait for PERIOD/2;
+  end process;
 
   -- rst generation
-  rst_int <= '1' after 100 ns;
-
-  -- MODEL
-  intro_adder_model : ntm_intro_adder_model
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      CLK => clk_int,
-      RST => rst_int,
-
-      DATA_A_IN => data_a_in_int,
-      DATA_B_IN => data_b_in_int,
-      DATA_OUT  => data_out_model_int
-      );
-
-  -- DUT
-  intro_adder : ntm_intro_adder
-    generic map (
-      DATA_SIZE => DATA_SIZE
-      )
-    port map (
-      CLK => clk_int,
-      RST => rst_int,
-
-      DATA_A_IN => data_a_in_int,
-      DATA_B_IN => data_b_in_int,
-      DATA_OUT  => data_out_design_int
-      );
-
-  -- stimulus & coverage of adder inputs
-  StimCoverageProcess : process is
-    -- holds the two random values from sv_coverage object
-    variable v_adder_in : integer_vector(0 to 1);
+  rst_process : process
   begin
-    data_a_in_int <= (others => '0');
-    data_b_in_int <= (others => '0');
+    rst_int <= '0';
+    wait for WAITING;
 
-    -- cross bins for all possible combinations (very slow on large vector widths):
-    -- sv_coverage.AddCross(GenBin(0, 2**DATA_SIZE-1), GenBin(0, 2**DATA_SIZE-1));
+    rst_int <= '1';
+    wait for WORKING;
+  end process;
 
-    -- cross bins for maximum of C_MAX_BINS slices with same width:
-    sv_coverage.AddCross(GenBin(0, 2**DATA_SIZE-1, C_MAX_BINS), GenBin(0, 2**DATA_SIZE-1, C_MAX_BINS));
-
-    -- cross bins for corner cases (min against max):
-    sv_coverage.AddCross(GenBin(0), GenBin(2**DATA_SIZE-1));
-    sv_coverage.AddCross(GenBin(2**DATA_SIZE-1), GenBin(0));
-
-    -- loop until reaching coverage goal
-    while not sv_coverage.IsCovered loop
-      wait until rising_edge(clk_int);
-      -- generate random values depending on coverage hole
-      v_adder_in := sv_coverage.RandCovPoint;
-
-      data_a_in_int <= to_unsigned(v_adder_in(0), DATA_SIZE);
-      data_b_in_int <= to_unsigned(v_adder_in(1), DATA_SIZE);
-
-      -- save generated random values in coverage object
-      sv_coverage.ICover(v_adder_in);
-    end loop;
-
-    wait for 2*PERIOD;
-    -- print coverage report
-    report("CovBin Coverage details");
-    sv_coverage.WriteBin;
-    stop;
-  end process StimCoverageProcess;
-
-  -- check if outputs of both adders are equal
-  CheckerProcess : process is
+  -- start generation
+  start_process : process
   begin
-    wait until rising_edge(clk_int);
-    assert data_out_model_int = data_out_design_int
-      report "FAILURE: data_out_model_int (0x" & to_hstring(data_out_model_int) & ") & data_out_design_int (0x" & to_hstring(data_out_design_int) & ") are not equal!"
+    start_int <= '0';
+    wait for WAITING;
+
+    start_int <= '1';
+    wait for PERIOD;
+
+    start_int <= '0';
+    wait for WORKING;
+  end process;
+
+  -----------------------------------------------------------------------
+  -- STIMULUS
+  -----------------------------------------------------------------------
+
+  main_test : process
+  begin
+
+    if (STIMULUS_NTM_MEMORY_TEST) then
+
+      -------------------------------------------------------------------
+      MONITOR_TEST <= "NTM_MEMORY_TEST                         ";
+      -------------------------------------------------------------------
+
+      -------------------------------------------------------------------
+      MONITOR_CASE <= "NTM_MEMORY_CASE_0                       ";
+      -------------------------------------------------------------------
+
+      -------------------------------------------------------------------
+      MONITOR_CASE <= "NTM_MEMORY_CASE_1                       ";
+      -------------------------------------------------------------------
+
+    end if;
+
+    assert false
+      report "END OF TEST"
       severity failure;
-  end process CheckerProcess;
 
-end architecture ntm_intro_testbench_architecture;
+  end process main_test;
+
+end architecture;
