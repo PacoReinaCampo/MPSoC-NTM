@@ -246,7 +246,7 @@ begin
 
           for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
             data_a_int := std_logic_vector(signed(data_a_int) + (signed(vector_a_int(i))*signed(vector_a_int(i))));
-            data_b_int := std_logic_vector(signed(data_b_int) + (signed(vector_a_int(i))*signed(vector_a_int(i))));
+            data_b_int := std_logic_vector(signed(data_b_int) + (signed(vector_b_int(i))*signed(vector_b_int(i))));
 
             data_p_int(i) := std_logic_vector(signed(data_p_int(i)) + (signed(vector_a_int(i))*signed(vector_b_int(i))));
           end loop;
