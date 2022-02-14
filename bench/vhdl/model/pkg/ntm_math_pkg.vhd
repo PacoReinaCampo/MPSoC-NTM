@@ -40,6 +40,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use ieee.math_real.all;
+use ieee.float_pkg.all;
+
 package ntm_math_pkg is
 
   -----------------------------------------------------------------------
@@ -1653,6 +1656,40 @@ package ntm_math_pkg is
 
     ) return tensor_buffer;
 
+  -----------------------------------------------------------------------
+  -- MATH - SERIES
+  -----------------------------------------------------------------------
+
+  -- SCALAR
+  function function_scalar_cosh (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector;
+
+  function function_scalar_exponentiator (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector;
+
+  function function_scalar_logarithm (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector;
+
+  function function_scalar_sinh (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector;
+
+  function function_scalar_tanh (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector;
+
+  -- VECTOR
+
+  -- MATRIX
+
 end ntm_math_pkg;
 
 package body ntm_math_pkg is
@@ -2187,5 +2224,79 @@ package body ntm_math_pkg is
 
     return tensor_output;
   end function function_tensor_transpose;
+
+  -----------------------------------------------------------------------
+  -- MATH - SERIES
+  -----------------------------------------------------------------------
+
+  -- SCALAR
+  function function_scalar_cosh (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector is
+
+    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  begin
+    -- Data Inputs
+    scalar_output := std_logic_vector(to_float(cosh(to_real(to_float(scalar_input)))));
+
+    return scalar_output;
+  end function function_scalar_cosh;
+
+  function function_scalar_exponentiator (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector is
+
+    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  begin
+    -- Data Inputs
+    scalar_output := std_logic_vector(to_float(exp(to_real(to_float(scalar_input)))));
+
+    return scalar_output;
+  end function function_scalar_exponentiator;
+
+  function function_scalar_logarithm (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector is
+
+    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  begin
+    -- Data Inputs
+    scalar_output := std_logic_vector(to_float(log(to_real(to_float(scalar_input)))));
+
+    return scalar_output;
+  end function function_scalar_logarithm;
+
+  function function_scalar_sinh (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector is
+
+    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  begin
+    -- Data Inputs
+    scalar_output := std_logic_vector(to_float(sinh(to_real(to_float(scalar_input)))));
+
+    return scalar_output;
+  end function function_scalar_sinh;
+
+  function function_scalar_tanh (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector is
+
+    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  begin
+    -- Data Inputs
+    scalar_output := std_logic_vector(to_float(tanh(to_real(to_float(scalar_input)))));
+
+    return scalar_output;
+  end function function_scalar_tanh;
+
+  -- VECTOR
+
+  -- MATRIX
 
 end ntm_math_pkg;

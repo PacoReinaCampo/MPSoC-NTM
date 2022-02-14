@@ -70,7 +70,7 @@ package ntm_state_pkg is
   type vector_buffer is array (CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
   type matrix_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
   type tensor_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
-  
+
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
@@ -547,11 +547,11 @@ package body ntm_state_pkg is
     -- Data Inputs
     MATRIX_IDENTITY := function_matrix_identity(SIZE_D_I_IN);
 
-   -- matrix_product := function_matrix_product(SIZE_D_I_IN, SIZE_D_J_IN, SIZE_K_I_IN, SIZE_K_J_IN, matrix_data_d_input, matrix_data_k_input);
-   -- matrix_adder := function_matrix_adder(SIZE_D_I_IN, SIZE_K_J_IN, MATRIX_IDENTITY, matrix_product);
-   -- matrix_inverse:= function_matrix_inverse(SIZE_D_I_IN, SIZE_K_J_IN, matrix_adder);
+    -- matrix_product := function_matrix_product(SIZE_D_I_IN, SIZE_D_J_IN, SIZE_K_I_IN, SIZE_K_J_IN, matrix_data_d_input, matrix_data_k_input);
+    -- matrix_adder := function_matrix_adder(SIZE_D_I_IN, SIZE_K_J_IN, MATRIX_IDENTITY, matrix_product);
+    -- matrix_inverse:= function_matrix_inverse(SIZE_D_I_IN, SIZE_K_J_IN, matrix_adder);
 
-   -- matrix_d_output := function_matrix_product(SIZE_D_I_IN, SIZE_K_J_IN, SIZE_D_I_IN, SIZE_D_J_IN, matrix_inverse, matrix_data_d_input);
+    -- matrix_d_output := function_matrix_product(SIZE_D_I_IN, SIZE_K_J_IN, SIZE_D_I_IN, SIZE_D_J_IN, matrix_inverse, matrix_data_d_input);
 
     return matrix_d_output;
   end function function_state_matrix_feedforward;
