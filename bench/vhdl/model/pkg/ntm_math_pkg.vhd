@@ -1726,23 +1726,23 @@ package body ntm_math_pkg is
     variable vector_output : vector_buffer;
   begin
     -- Data Inputs
-          data_a_int := ZERO_DATA;
-          data_b_int := ZERO_DATA;
+    data_a_int := ZERO_DATA;
+    data_b_int := ZERO_DATA;
 
-          for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-            data_p_int(i) := ZERO_DATA;
-          end loop;
+    for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
+      data_p_int(i) := ZERO_DATA;
+    end loop;
 
-          for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-            data_a_int := std_logic_vector(signed(data_a_int) + (resize(signed(vector_a_input(i)), DATA_SIZE/2)*resize(signed(vector_a_input(i)), DATA_SIZE/2)));
-            data_b_int := std_logic_vector(signed(data_b_int) + (resize(signed(vector_b_input(i)), DATA_SIZE/2)*resize(signed(vector_b_input(i)), DATA_SIZE/2)));
+    for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
+      data_a_int := std_logic_vector(signed(data_a_int) + (resize(signed(vector_a_input(i)), DATA_SIZE/2)*resize(signed(vector_a_input(i)), DATA_SIZE/2)));
+      data_b_int := std_logic_vector(signed(data_b_int) + (resize(signed(vector_b_input(i)), DATA_SIZE/2)*resize(signed(vector_b_input(i)), DATA_SIZE/2)));
 
-            data_p_int(i) := std_logic_vector(signed(data_p_int(i)) + (resize(signed(data_a_int), DATA_SIZE/2)*resize(signed(data_b_int), DATA_SIZE/2)));
-          end loop;
+      data_p_int(i) := std_logic_vector(signed(data_p_int(i)) + (resize(signed(data_a_int), DATA_SIZE/2)*resize(signed(data_b_int), DATA_SIZE/2)));
+    end loop;
 
-          for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-            vector_output(i) := std_logic_vector(signed(data_p_int(i))/(signed(data_a_int)*signed(data_b_int)));
-          end loop;
+    for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
+      vector_output(i) := std_logic_vector(signed(data_p_int(i))/(signed(data_a_int)*signed(data_b_int)));
+    end loop;
 
     return vector_output;
   end function function_vector_cosine_similarity;
