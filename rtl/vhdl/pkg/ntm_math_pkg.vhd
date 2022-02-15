@@ -40,6 +40,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use ieee.math_real.all;
+use ieee.float_pkg.all;
+
 package ntm_math_pkg is
 
   -----------------------------------------------------------------------
@@ -1655,6 +1658,253 @@ package ntm_math_pkg is
 
     ) return tensor_buffer;
 
+  -----------------------------------------------------------------------
+  -- MATH - SERIES
+  -----------------------------------------------------------------------
+
+  -- SCALAR
+  function function_scalar_cosh (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector;
+
+  function function_scalar_exponentiator (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector;
+
+  function function_scalar_logarithm (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector;
+
+  function function_scalar_sinh (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector;
+
+  function function_scalar_tanh (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector;
+
+  -- VECTOR
+  function function_vector_cosh (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
+
+    ) return vector_buffer;
+
+  function function_vector_exponentiator (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
+
+    ) return vector_buffer;
+
+  function function_vector_logarithm (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
+
+    ) return vector_buffer;
+
+  function function_vector_sinh (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
+
+    ) return vector_buffer;
+
+  function function_vector_tanh (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
+
+    ) return vector_buffer;
+
+  -- MATRIX
+  function function_matrix_cosh (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
+
+    ) return matrix_buffer;
+
+  function function_matrix_exponentiator (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
+
+    ) return matrix_buffer;
+
+  function function_matrix_logarithm (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
+
+    ) return matrix_buffer;
+
+  function function_matrix_sinh (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
+
+    ) return matrix_buffer;
+
+  function function_matrix_tanh (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
+
+    ) return matrix_buffer;
+
+  -----------------------------------------------------------------------
+  -- MATH - FUNCTION
+  -----------------------------------------------------------------------
+
+  -- SCALAR
+  function function_scalar_logistic (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector;
+
+  function function_scalar_oneplus (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector;
+
+  -- VECTOR
+  function function_vector_logistic (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_vector_oneplus (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
+    ) return vector_buffer;
+
+  -- MATRIX
+  function function_matrix_logistic (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
+    ) return matrix_buffer;
+
+  function function_matrix_oneplus (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
+    ) return matrix_buffer;
+
+  -----------------------------------------------------------------------
+  -- MATH - CALCULUS
+  -----------------------------------------------------------------------
+
+  -- VECTOR
+  function function_vector_differentiation (
+    SIZE_A_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_a_input : vector_buffer;
+    vector_b_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_vector_integration (
+    SIZE_A_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_a_input : vector_buffer;
+    vector_b_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_vector_softmax (
+    SIZE_A_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_a_input : vector_buffer;
+    vector_b_input : vector_buffer
+    ) return vector_buffer;
+
+  -- MATRIX
+  function function_matrix_differentiation (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_a_input : matrix_buffer;
+    matrix_b_input : matrix_buffer
+    ) return matrix_buffer;
+
+  function function_matrix_integration (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_a_input : matrix_buffer;
+    matrix_b_input : matrix_buffer
+    ) return matrix_buffer;
+
+  function function_matrix_softmax (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_a_input : matrix_buffer;
+    matrix_b_input : matrix_buffer
+    ) return matrix_buffer;
+
+  -- TENSOR
+  function function_tensor_differentiation (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_a_input : tensor_buffer;
+    tensor_b_input : tensor_buffer
+    ) return tensor_buffer;
+
+  function function_tensor_integration (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_a_input : tensor_buffer;
+    tensor_b_input : tensor_buffer
+    ) return tensor_buffer;
+
+  function function_tensor_softmax (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_a_input : tensor_buffer;
+    tensor_b_input : tensor_buffer
+    ) return tensor_buffer;
+    
 end ntm_math_pkg;
 
 package body ntm_math_pkg is
@@ -2189,5 +2439,560 @@ package body ntm_math_pkg is
 
     return tensor_output;
   end function function_tensor_transpose;
+
+  -----------------------------------------------------------------------
+  -- MATH - SERIES
+  -----------------------------------------------------------------------
+
+  -- SCALAR
+  function function_scalar_cosh (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector is
+
+    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  begin
+    -- Data Inputs
+    scalar_output := std_logic_vector(to_float(cosh(to_real(to_float(scalar_input)))));
+
+    return scalar_output;
+  end function function_scalar_cosh;
+
+  function function_scalar_exponentiator (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector is
+
+    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  begin
+    -- Data Inputs
+    scalar_output := std_logic_vector(to_float(exp(to_real(to_float(scalar_input)))));
+
+    return scalar_output;
+  end function function_scalar_exponentiator;
+
+  function function_scalar_logarithm (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector is
+
+    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  begin
+    -- Data Inputs
+    scalar_output := std_logic_vector(to_float(log(to_real(to_float(scalar_input)))));
+
+    return scalar_output;
+  end function function_scalar_logarithm;
+
+  function function_scalar_sinh (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector is
+
+    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  begin
+    -- Data Inputs
+    scalar_output := std_logic_vector(to_float(sinh(to_real(to_float(scalar_input)))));
+
+    return scalar_output;
+  end function function_scalar_sinh;
+
+  function function_scalar_tanh (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector is
+
+    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  begin
+    -- Data Inputs
+    scalar_output := std_logic_vector(to_float(tanh(to_real(to_float(scalar_input)))));
+
+    return scalar_output;
+  end function function_scalar_tanh;
+
+  -- VECTOR
+  function function_vector_cosh (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_output : vector_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      vector_output(i) := std_logic_vector(to_float(cosh(to_real(to_float(vector_input(i))))));
+    end loop;
+
+    return vector_output;
+  end function function_vector_cosh;
+
+  function function_vector_exponentiator (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_output : vector_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      vector_output(i) := std_logic_vector(to_float(exp(to_real(to_float(vector_input(i))))));
+    end loop;
+
+    return vector_output;
+  end function function_vector_exponentiator;
+
+  function function_vector_logarithm (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_output : vector_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      vector_output(i) := std_logic_vector(to_float(log(to_real(to_float(vector_input(i))))));
+    end loop;
+
+    return vector_output;
+  end function function_vector_logarithm;
+
+  function function_vector_sinh (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_output : vector_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      vector_output(i) := std_logic_vector(to_float(sinh(to_real(to_float(vector_input(i))))));
+    end loop;
+
+    return vector_output;
+  end function function_vector_sinh;
+
+  function function_vector_tanh (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_output : vector_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      vector_output(i) := std_logic_vector(to_float(tanh(to_real(to_float(vector_input(i))))));
+    end loop;
+
+    return vector_output;
+  end function function_vector_tanh;
+
+  -- MATRIX
+  function function_matrix_cosh (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        matrix_output(i, j) := std_logic_vector(to_float(cosh(to_real(to_float(matrix_input(i, j))))));
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_matrix_cosh;
+
+  function function_matrix_exponentiator (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        matrix_output(i, j) := std_logic_vector(to_float(exp(to_real(to_float(matrix_input(i, j))))));
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_matrix_exponentiator;
+
+  function function_matrix_logarithm (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        matrix_output(i, j) := std_logic_vector(to_float(log(to_real(to_float(matrix_input(i, j))))));
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_matrix_logarithm;
+
+  function function_matrix_sinh (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        matrix_output(i, j) := std_logic_vector(to_float(sinh(to_real(to_float(matrix_input(i, j))))));
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_matrix_sinh;
+
+  function function_matrix_tanh (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        matrix_output(i, j) := std_logic_vector(to_float(tanh(to_real(to_float(matrix_input(i, j))))));
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_matrix_tanh;
+
+  -----------------------------------------------------------------------
+  -- MATH - FUNCTION
+  -----------------------------------------------------------------------
+
+  -- SCALAR
+  function function_scalar_logistic (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector is
+
+    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  begin
+    -- Data Inputs
+    scalar_output := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(scalar_input))))));
+
+    return scalar_output;
+  end function function_scalar_logistic;
+
+  function function_scalar_oneplus (
+    scalar_input : std_logic_vector(DATA_SIZE-1 downto 0)
+
+    ) return std_logic_vector is
+
+    variable scalar_output : std_logic_vector(DATA_SIZE-1 downto 0);
+  begin
+    -- Data Inputs
+    scalar_output := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(scalar_input))))));
+
+    return scalar_output;
+  end function function_scalar_oneplus;
+
+  -- VECTOR
+  function function_vector_logistic (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_output : vector_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      vector_output(i) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(vector_input(i)))))));
+    end loop;
+
+    return vector_output;
+  end function function_vector_logistic;
+
+  function function_vector_oneplus (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_output : vector_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      vector_output(i) := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(vector_input(i)))))));
+    end loop;
+
+    return vector_output;
+  end function function_vector_oneplus;
+
+  -- MATRIX
+  function function_matrix_logistic (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        matrix_output(i, j) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(matrix_input(i, j)))))));
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_matrix_logistic;
+
+  function function_matrix_oneplus (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        matrix_output(i, j) := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(matrix_input(i, j)))))));
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_matrix_oneplus;
+
+  -----------------------------------------------------------------------
+  -- MATH - CALCULUS
+  -----------------------------------------------------------------------
+
+  -- VECTOR
+  function function_vector_differentiation (
+    SIZE_A_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_a_input : vector_buffer;
+    vector_b_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_output : vector_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_A_IN))-1 loop
+      vector_output(i) := std_logic_vector(signed(vector_a_input(i)) + signed(vector_b_input(i)));
+    end loop;
+
+    return vector_output;
+  end function function_vector_differentiation;
+
+  function function_vector_integration (
+    SIZE_A_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_a_input : vector_buffer;
+    vector_b_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_output : vector_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_A_IN))-1 loop
+      vector_output(i) := std_logic_vector(signed(vector_a_input(i)) + signed(vector_b_input(i)));
+    end loop;
+
+    return vector_output;
+  end function function_vector_integration;
+
+  function function_vector_softmax (
+    SIZE_A_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_a_input : vector_buffer;
+    vector_b_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_output : vector_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_A_IN))-1 loop
+      vector_output(i) := std_logic_vector(signed(vector_a_input(i)) + signed(vector_b_input(i)));
+    end loop;
+
+    return vector_output;
+  end function function_vector_softmax;
+
+  -- MATRIX
+  function function_matrix_differentiation (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_a_input : matrix_buffer;
+    matrix_b_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
+        matrix_output(i, j) := std_logic_vector(signed(matrix_a_input(i, j)) + signed(matrix_b_input(i, j)));
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_matrix_differentiation;
+
+  function function_matrix_integration (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_a_input : matrix_buffer;
+    matrix_b_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
+        matrix_output(i, j) := std_logic_vector(signed(matrix_a_input(i, j)) + signed(matrix_b_input(i, j)));
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_matrix_integration;
+
+  function function_matrix_softmax (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_a_input : matrix_buffer;
+    matrix_b_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
+        matrix_output(i, j) := std_logic_vector(signed(matrix_a_input(i, j)) + signed(matrix_b_input(i, j)));
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_matrix_softmax;
+
+  -- TENSOR
+  function function_tensor_differentiation (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_a_input : tensor_buffer;
+    tensor_b_input : tensor_buffer
+    ) return tensor_buffer is
+
+    variable tensor_output : tensor_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
+        for k in 0 to to_integer(unsigned(SIZE_B_K_IN))-1 loop
+          tensor_output(i, j, k) := std_logic_vector(signed(tensor_a_input(i, j, k)) + signed(tensor_b_input(i, j, k)));
+        end loop;
+      end loop;
+    end loop;
+
+    return tensor_output;
+  end function function_tensor_differentiation;
+
+  function function_tensor_integration (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_a_input : tensor_buffer;
+    tensor_b_input : tensor_buffer
+    ) return tensor_buffer is
+
+    variable tensor_output : tensor_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
+        for k in 0 to to_integer(unsigned(SIZE_B_K_IN))-1 loop
+          tensor_output(i, j, k) := std_logic_vector(signed(tensor_a_input(i, j, k)) + signed(tensor_b_input(i, j, k)));
+        end loop;
+      end loop;
+    end loop;
+
+    return tensor_output;
+  end function function_tensor_integration;
+
+  function function_tensor_softmax (
+    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_a_input : tensor_buffer;
+    tensor_b_input : tensor_buffer
+    ) return tensor_buffer is
+
+    variable tensor_output : tensor_buffer;
+  begin
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
+        for k in 0 to to_integer(unsigned(SIZE_B_K_IN))-1 loop
+          tensor_output(i, j, k) := std_logic_vector(signed(tensor_a_input(i, j, k)) + signed(tensor_b_input(i, j, k)));
+        end loop;
+      end loop;
+    end loop;
+
+    return tensor_output;
+  end function function_tensor_softmax;
 
 end ntm_math_pkg;
