@@ -40,6 +40,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use ieee.math_real.all;
+use ieee.float_pkg.all;
+
+use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 
 package ntm_state_pkg is
@@ -47,6 +51,28 @@ package ntm_state_pkg is
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
+
+  constant DATA_SIZE    : integer := 32;
+  constant CONTROL_SIZE : integer := 64;
+
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
+
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  -- Buffer
+  type vector_buffer is array (CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
+  type matrix_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
+  type tensor_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Components
@@ -449,5 +475,149 @@ package ntm_state_pkg is
       DATA_D_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
+
+  -----------------------------------------------------------------------
+  -- Functions
+  -----------------------------------------------------------------------
+
+  function function_matrix_identity (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0)
+    ) return matrix_buffer;
+
+  function function_state_matrix_feedforward (
+    SIZE_D_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_data_d_input : matrix_buffer;
+    matrix_data_k_input : matrix_buffer
+
+    ) return matrix_buffer;
+
+end ntm_state_pkg;
+
+package body ntm_state_pkg is
+
+  -----------------------------------------------------------------------
+  -- Functions
+  -----------------------------------------------------------------------
+
+  function function_matrix_identity (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0)
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+
+  begin
+
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+        if i = j then
+          matrix_output(i, j) := ONE_DATA;
+        else
+          matrix_output(i, j) := ZERO_DATA;
+        end if;
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_matrix_identity;
+
+  function function_state_matrix_feedforward (
+    SIZE_D_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_data_d_input : matrix_buffer;
+    matrix_data_k_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable MATRIX_IDENTITY : matrix_buffer;
+
+    variable matrix_product : matrix_buffer;
+    variable matrix_adder   : matrix_buffer;
+    variable matrix_inverse : matrix_buffer;
+
+    variable matrix_in_int : matrix_buffer;
+
+    variable data_interchange_in_int  : vector_buffer;
+    variable data_interchange_out_int : vector_buffer;
+
+    variable data_quotient_int : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    variable matrix_d_output : matrix_buffer;
+
+  begin
+
+    -- d = inv(I+D·K)·D
+
+    -- Data Inputs
+    MATRIX_IDENTITY := function_matrix_identity(SIZE_D_I_IN);
+
+    -- matrix_product := function_matrix_product(SIZE_D_I_IN, SIZE_D_J_IN, SIZE_K_I_IN, SIZE_K_J_IN, matrix_data_d_input, matrix_data_k_input);
+    for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
+        matrix_product(i, j) := ZERO_DATA;
+
+        for m in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
+          matrix_product(i, j) := std_logic_vector(signed(matrix_product(i, j)) + (resize(signed(matrix_data_d_input(i, m)), DATA_SIZE/2)*resize(signed(matrix_data_k_input(m, j)), DATA_SIZE/2)));
+        end loop;
+      end loop;
+    end loop;
+
+    -- matrix_adder := function_matrix_adder(SIZE_D_I_IN, SIZE_K_J_IN, MATRIX_IDENTITY, matrix_product);
+    for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
+        matrix_adder(i, j) := std_logic_vector(to_float(to_real(to_float(MATRIX_IDENTITY(i, j))) + to_real(to_float(matrix_product(i, j)))));
+      end loop;
+    end loop;
+
+    -- matrix_inverse:= function_matrix_inverse(SIZE_D_I_IN, SIZE_K_J_IN, matrix_adder);
+    matrix_in_int := matrix_adder;
+
+    for m in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
+      if (matrix_in_int(m, m) = ZERO_DATA) then
+        for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
+          if (matrix_in_int(i, m) /= ZERO_DATA) then
+            for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
+              data_interchange_in_int(j)  := matrix_in_int(m, j);
+              data_interchange_out_int(j) := matrix_inverse(m, j);
+
+              matrix_in_int(m, j) := matrix_in_int(i, j);
+              matrix_inverse(m, j) := matrix_inverse(i, j);
+
+              matrix_in_int(i, j) := data_interchange_in_int(j);
+              matrix_inverse(i, j) := data_interchange_out_int(j);
+            end loop;
+          end if;
+        end loop;
+      end if;
+
+      for i in m+1 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
+        data_quotient_int := std_logic_vector(signed(matrix_in_int(i, m))/signed(matrix_in_int(m, m)));
+
+        for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
+          matrix_in_int(i, j) := std_logic_vector(signed(matrix_in_int(i, j))-(resize(signed(data_quotient_int), DATA_SIZE/2)*resize(signed(matrix_in_int(m, j)), DATA_SIZE/2)));
+          matrix_inverse(i, j) := std_logic_vector(signed(matrix_inverse(i, j))-(resize(signed(data_quotient_int), DATA_SIZE/2)*resize(signed(matrix_inverse(m, j)), DATA_SIZE/2)));
+        end loop;
+      end loop;
+    end loop;
+
+    -- matrix_d_output := function_matrix_product(SIZE_K_I_IN, SIZE_K_J_IN, SIZE_D_I_IN, SIZE_D_J_IN, matrix_inverse, matrix_data_d_input);
+    for i in 0 to to_integer(unsigned(SIZE_K_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
+        matrix_d_output(i, j) := ZERO_DATA;
+
+        for m in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
+          matrix_d_output(i, j) := std_logic_vector(signed(matrix_d_output(i, j)) + (resize(signed(matrix_inverse(i, m)), DATA_SIZE/2)*resize(signed(matrix_data_d_input(m, j)), DATA_SIZE/2)));
+        end loop;
+      end loop;
+    end loop;
+
+    return matrix_d_output;
+  end function function_state_matrix_feedforward;
 
 end ntm_state_pkg;
