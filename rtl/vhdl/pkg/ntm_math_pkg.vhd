@@ -1814,95 +1814,84 @@ package ntm_math_pkg is
 
   -- VECTOR
   function function_vector_differentiation (
-    SIZE_A_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_a_input : vector_buffer;
-    vector_b_input : vector_buffer
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
     ) return vector_buffer;
 
   function function_vector_integration (
-    SIZE_A_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_a_input : vector_buffer;
-    vector_b_input : vector_buffer
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
     ) return vector_buffer;
 
   function function_vector_softmax (
-    SIZE_A_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_a_input : vector_buffer;
-    vector_b_input : vector_buffer
+    vector_input : vector_buffer
     ) return vector_buffer;
 
   -- MATRIX
   function function_matrix_differentiation (
-    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    CONTROL : std_logic;
 
-    matrix_a_input : matrix_buffer;
-    matrix_b_input : matrix_buffer
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
     ) return matrix_buffer;
 
   function function_matrix_integration (
-    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    matrix_a_input : matrix_buffer;
-    matrix_b_input : matrix_buffer
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
     ) return matrix_buffer;
 
   function function_matrix_softmax (
-    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    matrix_a_input : matrix_buffer;
-    matrix_b_input : matrix_buffer
+    matrix_input : matrix_buffer
     ) return matrix_buffer;
 
   -- TENSOR
   function function_tensor_differentiation (
-    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    CONTROL : std_logic_vector(1 downto 0);
 
-    tensor_a_input : tensor_buffer;
-    tensor_b_input : tensor_buffer
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    tensor_input : tensor_buffer
     ) return tensor_buffer;
 
   function function_tensor_integration (
-    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    tensor_a_input : tensor_buffer;
-    tensor_b_input : tensor_buffer
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    tensor_input : tensor_buffer
     ) return tensor_buffer;
 
   function function_tensor_softmax (
-    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    tensor_a_input : tensor_buffer;
-    tensor_b_input : tensor_buffer
+    tensor_input : tensor_buffer
     ) return tensor_buffer;
     
 end ntm_math_pkg;
@@ -2796,54 +2785,72 @@ package body ntm_math_pkg is
 
   -- VECTOR
   function function_vector_differentiation (
-    SIZE_A_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_a_input : vector_buffer;
-    vector_b_input : vector_buffer
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
     ) return vector_buffer is
 
     variable vector_output : vector_buffer;
   begin
     -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_A_IN))-1 loop
-      vector_output(i) := std_logic_vector(signed(vector_a_input(i)) + signed(vector_b_input(i)));
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      if (i=0) then
+        vector_output(i) := std_logic_vector((signed(vector_input(i)) - signed(vector_input(i)))/signed(LENGTH_IN));
+      else
+        vector_output(i) := std_logic_vector((signed(vector_input(i)) - signed(vector_input(i-1)))/signed(LENGTH_IN));
+      end if;
     end loop;
 
     return vector_output;
   end function function_vector_differentiation;
 
   function function_vector_integration (
-    SIZE_A_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_a_input : vector_buffer;
-    vector_b_input : vector_buffer
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    vector_input : vector_buffer
     ) return vector_buffer is
+
+    variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_output : vector_buffer;
   begin
     -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_A_IN))-1 loop
-      vector_output(i) := std_logic_vector(signed(vector_a_input(i)) + signed(vector_b_input(i)));
+    data_summation_int := ZERO_DATA;
+
+    for m in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      data_summation_int := std_logic_vector(signed(data_summation_int) + signed(vector_input(m)));
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      vector_output(i) := std_logic_vector(resize(signed(vector_input(i)), DATA_SIZE/2)*resize(signed(LENGTH_IN), DATA_SIZE/2));
     end loop;
 
     return vector_output;
   end function function_vector_integration;
 
   function function_vector_softmax (
-    SIZE_A_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_a_input : vector_buffer;
-    vector_b_input : vector_buffer
+    vector_input : vector_buffer
     ) return vector_buffer is
+
+    variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_output : vector_buffer;
   begin
     -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_A_IN))-1 loop
-      vector_output(i) := std_logic_vector(signed(vector_a_input(i)) + signed(vector_b_input(i)));
+    data_summation_int := ZERO_DATA;
+
+    for m in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      data_summation_int := std_logic_vector(signed(data_summation_int) + signed(vector_input(m)));
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      vector_output(i) := std_logic_vector(signed(vector_input(i))/signed(data_summation_int));
     end loop;
 
     return vector_output;
@@ -2851,21 +2858,34 @@ package body ntm_math_pkg is
 
   -- MATRIX
   function function_matrix_differentiation (
-    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    CONTROL : std_logic;
 
-    matrix_a_input : matrix_buffer;
-    matrix_b_input : matrix_buffer
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
     ) return matrix_buffer is
 
     variable matrix_output : matrix_buffer;
   begin
     -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(signed(matrix_a_input(i, j)) + signed(matrix_b_input(i, j)));
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        if (CONTROL = '0') then
+          if (i = 0) then
+            matrix_output(i, j) := std_logic_vector((signed(matrix_input(i, j)) - signed(matrix_input(i, j)))/signed(LENGTH_IN));
+          else
+            matrix_output(i, j) := std_logic_vector((signed(matrix_input(i, j)) - signed(matrix_input(i-1, j)))/signed(LENGTH_IN));
+          end if;
+        elsif (CONTROL = '1') then
+          if (j = 0) then
+            matrix_output(i, j) := std_logic_vector((signed(matrix_input(i, j)) - signed(matrix_input(i, j)))/signed(LENGTH_IN));
+          else
+            matrix_output(i, j) := std_logic_vector((signed(matrix_input(i, j)) - signed(matrix_input(i, j-1)))/signed(LENGTH_IN));
+          end if;
+        end if;
       end loop;
     end loop;
 
@@ -2873,21 +2893,30 @@ package body ntm_math_pkg is
   end function function_matrix_differentiation;
 
   function function_matrix_integration (
-    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    matrix_a_input : matrix_buffer;
-    matrix_b_input : matrix_buffer
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    matrix_input : matrix_buffer
     ) return matrix_buffer is
+
+    variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable matrix_output : matrix_buffer;
   begin
     -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(signed(matrix_a_input(i, j)) + signed(matrix_b_input(i, j)));
+    data_summation_int := ZERO_DATA;
+
+    for m in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for n in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        data_summation_int := std_logic_vector(signed(data_summation_int) + signed(matrix_input(m, n)));
+      end loop;
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        matrix_output(i, j) := std_logic_vector(resize(signed(matrix_input(i, j)), DATA_SIZE/2)*resize(signed(LENGTH_IN), DATA_SIZE/2));
       end loop;
     end loop;
 
@@ -2895,21 +2924,28 @@ package body ntm_math_pkg is
   end function function_matrix_integration;
 
   function function_matrix_softmax (
-    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    matrix_a_input : matrix_buffer;
-    matrix_b_input : matrix_buffer
+    matrix_input : matrix_buffer
     ) return matrix_buffer is
+
+    variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable matrix_output : matrix_buffer;
   begin
     -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(signed(matrix_a_input(i, j)) + signed(matrix_b_input(i, j)));
+    data_summation_int := ZERO_DATA;
+
+    for m in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for n in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        data_summation_int := std_logic_vector(signed(data_summation_int) + signed(matrix_input(m, n)));
+      end loop;
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        matrix_output(i, j) := std_logic_vector(signed(matrix_input(i, j))/signed(data_summation_int));
       end loop;
     end loop;
 
@@ -2918,24 +2954,42 @@ package body ntm_math_pkg is
 
   -- TENSOR
   function function_tensor_differentiation (
-    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    CONTROL : std_logic_vector(1 downto 0);
 
-    tensor_a_input : tensor_buffer;
-    tensor_b_input : tensor_buffer
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    tensor_input : tensor_buffer
     ) return tensor_buffer is
 
     variable tensor_output : tensor_buffer;
   begin
     -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
-        for k in 0 to to_integer(unsigned(SIZE_B_K_IN))-1 loop
-          tensor_output(i, j, k) := std_logic_vector(signed(tensor_a_input(i, j, k)) + signed(tensor_b_input(i, j, k)));
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
+          if (CONTROL = "01") then
+            if (i = 0) then
+              tensor_output(i, j, k) := std_logic_vector((signed(tensor_input(i, j, k)) - signed(tensor_input(i, j, k)))/signed(LENGTH_IN));
+            else
+              tensor_output(i, j, k) := std_logic_vector((signed(tensor_input(i, j, k)) - signed(tensor_input(i-1, j, k)))/signed(LENGTH_IN));
+            end if;
+          elsif (CONTROL = "10") then
+            if (j = 0) then
+              tensor_output(i, j, k) := std_logic_vector((signed(tensor_input(i, j, k)) - signed(tensor_input(i, j, k)))/signed(LENGTH_IN));
+            else
+              tensor_output(i, j, k) := std_logic_vector((signed(tensor_input(i, j, k)) - signed(tensor_input(i, j-1, k)))/signed(LENGTH_IN));
+            end if;
+          elsif (CONTROL = "11") then
+            if (k = 0) then
+              tensor_output(i, j, k) := std_logic_vector((signed(tensor_input(i, j, k)) - signed(tensor_input(i, j, k)))/signed(LENGTH_IN));
+            else
+              tensor_output(i, j, k) := std_logic_vector((signed(tensor_input(i, j, k)) - signed(tensor_input(i, j, k-1)))/signed(LENGTH_IN));
+            end if;
+          end if;
         end loop;
       end loop;
     end loop;
@@ -2944,24 +2998,34 @@ package body ntm_math_pkg is
   end function function_tensor_differentiation;
 
   function function_tensor_integration (
-    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    tensor_a_input : tensor_buffer;
-    tensor_b_input : tensor_buffer
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    tensor_input : tensor_buffer
     ) return tensor_buffer is
+
+    variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable tensor_output : tensor_buffer;
   begin
     -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
-        for k in 0 to to_integer(unsigned(SIZE_B_K_IN))-1 loop
-          tensor_output(i, j, k) := std_logic_vector(signed(tensor_a_input(i, j, k)) + signed(tensor_b_input(i, j, k)));
+    data_summation_int := ZERO_DATA;
+
+    for m in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for n in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        for p in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
+          data_summation_int := std_logic_vector(signed(data_summation_int) + signed(tensor_input(m, n, p)));
+        end loop;
+      end loop;
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
+          tensor_output(i, j, k) := std_logic_vector(resize(signed(tensor_input(i, j, k)), DATA_SIZE/2)*resize(signed(LENGTH_IN), DATA_SIZE/2));
         end loop;
       end loop;
     end loop;
@@ -2970,24 +3034,32 @@ package body ntm_math_pkg is
   end function function_tensor_integration;
 
   function function_tensor_softmax (
-    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    tensor_a_input : tensor_buffer;
-    tensor_b_input : tensor_buffer
+    tensor_input : tensor_buffer
     ) return tensor_buffer is
+
+    variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable tensor_output : tensor_buffer;
   begin
     -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
-        for k in 0 to to_integer(unsigned(SIZE_B_K_IN))-1 loop
-          tensor_output(i, j, k) := std_logic_vector(signed(tensor_a_input(i, j, k)) + signed(tensor_b_input(i, j, k)));
+    data_summation_int := ZERO_DATA;
+
+    for m in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for n in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        for p in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
+          data_summation_int := std_logic_vector(signed(data_summation_int) + signed(tensor_input(m, n, p)));
+        end loop;
+      end loop;
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+        for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
+          tensor_output(i, j, k) := std_logic_vector(signed(tensor_input(i, j, k))/signed(data_summation_int));
         end loop;
       end loop;
     end loop;
