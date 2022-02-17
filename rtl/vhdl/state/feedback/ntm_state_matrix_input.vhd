@@ -120,7 +120,6 @@ architecture ntm_state_matrix_input_architecture of ntm_state_matrix_input is
     MATRIX_SECOND_ADDER_J_STATE,        -- STEP 16
     MATRIX_FOURTH_PRODUCT_I_STATE,      -- STEP 17
     MATRIX_FOURTH_PRODUCT_J_STATE       -- STEP 18
-
     );
 
   -----------------------------------------------------------------------
