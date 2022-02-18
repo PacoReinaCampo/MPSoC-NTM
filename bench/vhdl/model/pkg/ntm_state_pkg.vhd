@@ -564,6 +564,28 @@ package body ntm_state_pkg is
   -- STATE - FEEDBACK
   -----------------------------------------------------------------------
 
+  function function_matrix_identity (
+    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0)
+    ) return matrix_buffer is
+
+    variable matrix_output : matrix_buffer;
+
+  begin
+
+    -- Data Inputs
+    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_IN))-1 loop
+        if i = j then
+          matrix_output(i, j) := ONE_DATA;
+        else
+          matrix_output(i, j) := ZERO_DATA;
+        end if;
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_matrix_identity;
+
   function function_state_matrix_state (
     SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -697,28 +719,6 @@ package body ntm_state_pkg is
 
     return matrix_a_output;
   end function function_state_matrix_state;
-
-  function function_matrix_identity (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0)
-    ) return matrix_buffer is
-
-    variable matrix_output : matrix_buffer;
-
-  begin
-
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-        if i = j then
-          matrix_output(i, j) := ONE_DATA;
-        else
-          matrix_output(i, j) := ZERO_DATA;
-        end if;
-      end loop;
-    end loop;
-
-    return matrix_output;
-  end function function_matrix_identity;
 
   function function_state_matrix_input (
     SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);

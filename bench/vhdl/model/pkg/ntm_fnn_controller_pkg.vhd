@@ -40,6 +40,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use ieee.math_real.all;
+use ieee.float_pkg.all;
+
 use work.ntm_math_pkg.all;
 
 package ntm_fnn_controller_pkg is
@@ -47,6 +50,28 @@ package ntm_fnn_controller_pkg is
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
+
+  constant DATA_SIZE    : integer := 32;
+  constant CONTROL_SIZE : integer := 64;
+
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
+
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.0));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(1.0));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(2.0));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(3.0));
+
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  -- Buffer
+  type vector_buffer is array (CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
+  type matrix_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
+  type tensor_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Components
@@ -184,5 +209,60 @@ package ntm_fnn_controller_pkg is
       B_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
+
+  -----------------------------------------------------------------------
+  -- Functions
+  -----------------------------------------------------------------------
+
+  function function_ntm_fnn_standard_controller (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer;
+
+end ntm_fnn_controller_pkg;
+
+package body ntm_fnn_controller_pkg is
+
+  -----------------------------------------------------------------------
+  -- Functions
+  -----------------------------------------------------------------------
+
+  function function_ntm_fnn_standard_controller (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_h_output : vector_buffer;
+
+  begin
+
+    -- Data Inputs
+
+    -- h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + b(t;l))
+
+    return vector_h_output;
+  end function function_ntm_fnn_standard_controller;
 
 end ntm_fnn_controller_pkg;
