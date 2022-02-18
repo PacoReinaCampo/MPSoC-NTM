@@ -248,7 +248,7 @@ architecture ntm_forget_trainer_architecture of ntm_forget_trainer is
 
   -- DATA
   signal size_in_vector_differentiation   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal length_in_vector_differentiation : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal length_in_vector_differentiation : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_in_vector_differentiation   : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_out_vector_differentiation  : std_logic_vector(DATA_SIZE-1 downto 0);
 

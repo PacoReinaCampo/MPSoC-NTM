@@ -214,6 +214,10 @@ package ntm_fnn_controller_pkg is
   -- Functions
   -----------------------------------------------------------------------
 
+  -----------------------------------------------------------------------
+  -- Controller
+  -----------------------------------------------------------------------
+
   function function_ntm_fnn_convolutional_controller (
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -246,12 +250,64 @@ package ntm_fnn_controller_pkg is
     vector_h_input : vector_buffer
     ) return vector_buffer;
 
+  -----------------------------------------------------------------------
+  -- Trainer
+  -----------------------------------------------------------------------
+
+  function function_ntm_fnn_w_trainer (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return matrix_buffer;
+
+  function function_ntm_fnn_k_trainer (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return tensor_buffer;
+
+  function function_ntm_fnn_u_trainer (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return matrix_buffer;
+
+  function function_ntm_fnn_b_trainer (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer;
+
 end ntm_fnn_controller_pkg;
 
 package body ntm_fnn_controller_pkg is
 
   -----------------------------------------------------------------------
   -- Functions
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- Controller
   -----------------------------------------------------------------------
 
   function function_ntm_fnn_convolutional_controller (
@@ -417,5 +473,89 @@ package body ntm_fnn_controller_pkg is
 
     return vector_h_output;
   end function function_ntm_fnn_standard_controller;
+
+  -----------------------------------------------------------------------
+  -- Trainer
+  -----------------------------------------------------------------------
+
+  function function_ntm_fnn_w_trainer (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return matrix_buffer is
+
+    variable matrix_w_output : matrix_buffer;
+
+    begin
+
+    -- dW(t;l) = summation(d*(t;l) · x(t;x))[t in 0 to T]
+
+    return matrix_w_output;
+  end function function_ntm_fnn_w_trainer;
+
+  function function_ntm_fnn_k_trainer (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return tensor_buffer is
+
+    variable tensor_k_output : tensor_buffer;
+
+    begin
+
+    -- dK(t;l) = summation(d*(t;l) · r(t;i;k))[t in 0 to T-1]
+
+    return tensor_k_output;
+  end function function_ntm_fnn_k_trainer;
+
+  function function_ntm_fnn_u_trainer (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return matrix_buffer is
+
+    variable matrix_u_output : matrix_buffer;
+
+    begin
+
+    -- dU(t;l) = summation(d*(t+1;l) · h(t;l))[t in 0 to T-1]
+
+    return matrix_u_output;
+  end function function_ntm_fnn_u_trainer;
+
+  function function_ntm_fnn_b_trainer (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_b_output : vector_buffer;
+
+    begin
+
+    -- db(t;l) = summation(d*(t;l))[t in 0 to T]
+
+    return vector_b_output;
+  end function function_ntm_fnn_b_trainer;
 
 end ntm_fnn_controller_pkg;
