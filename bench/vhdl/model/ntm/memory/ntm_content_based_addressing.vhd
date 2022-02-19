@@ -45,7 +45,7 @@ use ieee.numeric_std.all;
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 
-entity dnc_content_based_addressing is
+entity ntm_content_based_addressing is
   generic (
     DATA_SIZE    : integer := 32;
     CONTROL_SIZE : integer := 64
@@ -83,7 +83,7 @@ entity dnc_content_based_addressing is
     );
 end entity;
 
-architecture dnc_content_based_addressing_architecture of dnc_content_based_addressing is
+architecture ntm_content_based_addressing_architecture of ntm_content_based_addressing is
 
   -----------------------------------------------------------------------
   -- Types
@@ -197,7 +197,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- C(M,k,beta)[i] = softmax(exponentiation(EULER,cosine_similarity(k,M)·beta))[i]
+  -- C(M[i,·],k,beta)[i] = softmax(exponentiation(cosine_similarity(k,M[i,·])·beta))[i]
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)

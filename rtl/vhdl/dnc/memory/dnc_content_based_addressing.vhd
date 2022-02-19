@@ -196,7 +196,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- C(M,k,beta)[i] = softmax(exponentiation(EULER,cosine_similarity(k,M)·beta))[i]
+  -- C(M[i,·],k,beta)[i] = softmax(exponentiation(cosine_similarity(k,M[i,·])·beta))[i]
 
   -- CONTROL
   ctrl_fsm : process(CLK, RST)
@@ -445,6 +445,7 @@ begin
 
       -- DATA
       SIZE_IN  => size_in_vector_softmax,
+
       DATA_IN  => data_in_vector_softmax,
       DATA_OUT => data_out_vector_softmax
       );
