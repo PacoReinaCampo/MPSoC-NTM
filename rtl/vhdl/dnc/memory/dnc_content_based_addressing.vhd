@@ -444,7 +444,7 @@ begin
       DATA_OUT_ENABLE => data_out_enable_vector_softmax,
 
       -- DATA
-      SIZE_IN  => size_in_vector_softmax,
+      SIZE_IN => size_in_vector_softmax,
 
       DATA_IN  => data_in_vector_softmax,
       DATA_OUT => data_out_vector_softmax

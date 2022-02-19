@@ -1485,5 +1485,5 @@ package ntm_math_pkg is
       DATA_OUT  : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
-    
+
 end ntm_math_pkg;

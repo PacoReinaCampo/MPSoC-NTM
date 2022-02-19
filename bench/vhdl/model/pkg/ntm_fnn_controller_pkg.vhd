@@ -491,7 +491,7 @@ package body ntm_fnn_controller_pkg is
 
     variable matrix_w_output : matrix_buffer;
 
-    begin
+  begin
 
     -- dW(t;l) = summation(d*(t;l) · x(t;x))[t in 0 to T]
 
@@ -511,7 +511,7 @@ package body ntm_fnn_controller_pkg is
 
     variable tensor_k_output : tensor_buffer;
 
-    begin
+  begin
 
     -- dK(t;l) = summation(d*(t;l) · r(t;i;k))[t in 0 to T-1]
 
@@ -531,7 +531,7 @@ package body ntm_fnn_controller_pkg is
 
     variable matrix_u_output : matrix_buffer;
 
-    begin
+  begin
 
     -- dU(t;l) = summation(d*(t+1;l) · h(t;l))[t in 0 to T-1]
 
@@ -551,7 +551,7 @@ package body ntm_fnn_controller_pkg is
 
     variable vector_b_output : vector_buffer;
 
-    begin
+  begin
 
     -- db(t;l) = summation(d*(t;l))[t in 0 to T]
 

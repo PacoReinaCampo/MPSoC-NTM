@@ -530,7 +530,7 @@ package ntm_core_pkg is
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     vector_k_input    : vector_buffer;
-    vector_beta_input : std_logic_vector(DATA_SIZE-1 downto 0);
+    scalar_beta_input : std_logic_vector(DATA_SIZE-1 downto 0);
     matrix_m_input    : matrix_buffer
     ) return vector_buffer;
 
@@ -539,15 +539,15 @@ package ntm_core_pkg is
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     vector_k_input     : vector_buffer;
-    vector_beta_input  : vector_buffer;
-    vector_g_input     : vector_buffer;
+    scalar_beta_input  : std_logic_vector(DATA_SIZE-1 downto 0);
+    scalar_g_input     : std_logic_vector(DATA_SIZE-1 downto 0);
     vector_s_input     : vector_buffer;
-    vector_gamma_input : vector_buffer;
+    scalar_gamma_input : std_logic_vector(DATA_SIZE-1 downto 0);
 
     matrix_m_input : matrix_buffer;
 
     vector_w_input : vector_buffer
-    
+
     ) return vector_buffer;
 
   -----------------------------------------------------------------------
@@ -582,7 +582,7 @@ package body ntm_core_pkg is
 
     variable vector_r_output : vector_buffer;
 
-    begin
+  begin
 
     -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
 
@@ -604,9 +604,15 @@ package body ntm_core_pkg is
 
     variable matrix_m_output : matrix_buffer;
 
-    begin
+  begin
 
     -- M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
+
+    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+      for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+        matrix_m_output(j, k) := std_logic_vector(to_float(to_real(to_float(matrix_m_input(j, k))) + (to_real(to_float(vector_w_input(j)))*to_real(to_float(vector_a_input(k))))));
+      end loop;
+    end loop;
 
     return matrix_m_output;
   end function function_ntm_writing;
@@ -622,9 +628,15 @@ package body ntm_core_pkg is
 
     variable matrix_m_output : matrix_buffer;
 
-    begin
+  begin
 
     -- M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
+
+    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+      for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+        matrix_m_output(j, k) := std_logic_vector(to_float(to_real(to_float(matrix_m_input(j, k)))*(1.0 - to_real(to_float(vector_w_input(j)))*to_real(to_float(vector_e_input(k))))));
+      end loop;
+    end loop;
 
     return matrix_m_output;
   end function function_ntm_erasing;
@@ -638,7 +650,7 @@ package body ntm_core_pkg is
     SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     vector_k_input    : vector_buffer;
-    vector_beta_input : std_logic_vector(DATA_SIZE-1 downto 0);
+    scalar_beta_input : std_logic_vector(DATA_SIZE-1 downto 0);
     matrix_m_input    : matrix_buffer
     ) return vector_buffer is
 
@@ -648,7 +660,7 @@ package body ntm_core_pkg is
 
     variable vector_c_output : vector_buffer;
 
-    begin
+  begin
     -- C(M[i,·],k,beta)[i] = softmax(exponentiation(cosine_similarity(k,M[i,·])·beta))[i]
 
     -- Data Inputs
@@ -658,12 +670,12 @@ package body ntm_core_pkg is
 
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        data_operation_int(i) := std_logic_vector(to_float(to_real(to_float(data_operation_int(i))) + (to_real(to_float(vector_k_input(j)))*to_real(to_float(matrix_m_input(i,j))))));
+        data_operation_int(i) := std_logic_vector(to_float(to_real(to_float(data_operation_int(i))) + (to_real(to_float(vector_k_input(j)))*to_real(to_float(matrix_m_input(i, j))))));
       end loop;
     end loop;
 
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      data_operation_int(i) := std_logic_vector(to_float(exp(to_real(to_float(data_operation_int(i)))*to_real(to_float(vector_beta_input)))));
+      data_operation_int(i) := std_logic_vector(to_float(exp(to_real(to_float(data_operation_int(i)))*to_real(to_float(scalar_beta_input)))));
     end loop;
 
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
@@ -682,28 +694,62 @@ package body ntm_core_pkg is
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     vector_k_input     : vector_buffer;
-    vector_beta_input  : vector_buffer;
-    vector_g_input     : vector_buffer;
+    scalar_beta_input  : std_logic_vector(DATA_SIZE-1 downto 0);
+    scalar_g_input     : std_logic_vector(DATA_SIZE-1 downto 0);
     vector_s_input     : vector_buffer;
-    vector_gamma_input : vector_buffer;
+    scalar_gamma_input : std_logic_vector(DATA_SIZE-1 downto 0);
 
     matrix_m_input : matrix_buffer;
 
     vector_w_input : vector_buffer
-    
+
     ) return vector_buffer is
+
+    variable vector_wc_output : vector_buffer;
+    variable vector_wg_output : vector_buffer;
 
     variable vector_w_output : vector_buffer;
 
-    begin
+    variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
-    -- wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
+  begin
+
+    -- wc(t;j) = C(M(t;j;k),k(t;k),beta(t))
+    vector_wc_output := function_ntm_content_based_addressing (
+      SIZE_I_IN => SIZE_N_IN,
+      SIZE_J_IN => SIZE_W_IN,
+
+      vector_k_input    => vector_k_input,
+      scalar_beta_input => scalar_beta_input,
+      matrix_m_input    => matrix_m_input
+      );
 
     -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
+    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+      vector_wg_output(j) := std_logic_vector(to_float(to_real(to_float(scalar_g_input))*to_real(to_float(vector_wc_output(j))) + (1.0 - to_real(to_float(scalar_g_input)))*to_real(to_float(vector_w_input(j)))));
+    end loop;
 
     -- w(t;j) = wg(t;j)*s(t;k)
+    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+      vector_w_output(j) := ZERO_DATA;
+
+      for m in 0 to j loop
+        vector_w_output(j) := std_logic_vector(to_float(to_real(to_float(vector_w_output(j))) + (to_real(to_float(vector_wg_output(m)))*to_real(to_float(vector_s_input(j-m))))));
+      end loop;
+    end loop;
 
     -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
+    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+      vector_w_output(j) := std_logic_vector(to_float(to_real(to_float(vector_w_output(j)))**to_real(to_float(scalar_gamma_input))));
+    end loop;
+
+    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+      data_summation_int := std_logic_vector(to_float(to_real(to_float(data_summation_int)) + to_real(to_float(vector_w_output(j)))));
+    end loop;
+
+    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+      vector_w_output(j) := std_logic_vector(to_float(exp(to_real(to_float(vector_w_output(j)))/to_real(to_float(data_summation_int)))));
+    end loop;
 
     return vector_w_output;
   end function function_ntm_addressing;

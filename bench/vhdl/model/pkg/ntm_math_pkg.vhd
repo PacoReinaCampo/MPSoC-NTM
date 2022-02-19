@@ -1893,7 +1893,7 @@ package ntm_math_pkg is
 
     tensor_input : tensor_buffer
     ) return tensor_buffer;
-    
+
 end ntm_math_pkg;
 
 package body ntm_math_pkg is
@@ -2796,7 +2796,7 @@ package body ntm_math_pkg is
   begin
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      if (i=0) then
+      if (i = 0) then
         vector_output(i) := std_logic_vector((signed(vector_input(i)) - signed(vector_input(i)))/signed(LENGTH_IN));
       else
         vector_output(i) := std_logic_vector((signed(vector_input(i)) - signed(vector_input(i-1)))/signed(LENGTH_IN));

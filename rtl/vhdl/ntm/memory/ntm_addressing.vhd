@@ -278,7 +278,7 @@ begin
   -- Body
   -----------------------------------------------------------------------
 
-  -- wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
+  -- wc(t;j) = C(M(t;j;k),k(t;k),beta(t))
 
   -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
 
@@ -440,20 +440,20 @@ begin
   m_in_vector_content_based_addressing      <= M_IN;
 
   -- VECTOR CONVOLUTION
-  length_in_vector_convolution <= FULL;
+  length_in_vector_convolution <= THREE_CONTROL;
   data_a_in_vector_convolution <= FULL;
   data_b_in_vector_convolution <= FULL;
 
   -- VECTOR EXPONENTIATOR
-  size_in_vector_exponentiator_function <= FULL;
+  size_in_vector_exponentiator_function <= THREE_CONTROL;
   data_in_vector_exponentiator_function <= FULL;
 
   -- VECTOR SUMMATION
-  length_in_vector_summation <= FULL;
+  length_in_vector_summation <= THREE_CONTROL;
   data_in_vector_summation   <= FULL;
 
   -- VECTOR DIVIDER
-  size_in_vector_integer_divider   <= FULL;
+  size_in_vector_integer_divider   <= THREE_CONTROL;
   data_a_in_vector_integer_divider <= FULL;
   data_b_in_vector_integer_divider <= FULL;
 
