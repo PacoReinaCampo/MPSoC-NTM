@@ -40,6 +40,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use ieee.math_real.all;
+use ieee.float_pkg.all;
+
 use work.ntm_math_pkg.all;
 
 package ntm_core_pkg is
@@ -47,6 +50,28 @@ package ntm_core_pkg is
   -----------------------------------------------------------------------
   -- Constants
   -----------------------------------------------------------------------
+
+  constant DATA_SIZE    : integer := 32;
+  constant CONTROL_SIZE : integer := 64;
+
+  constant ZERO_CONTROL  : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, CONTROL_SIZE));
+  constant ONE_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, CONTROL_SIZE));
+  constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
+  constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
+
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.0));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(1.0));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(2.0));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(3.0));
+
+  -----------------------------------------------------------------------
+  -- Types
+  -----------------------------------------------------------------------
+
+  -- Buffer
+  type vector_buffer is array (CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
+  type matrix_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
+  type tensor_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Components
@@ -457,5 +482,214 @@ package ntm_core_pkg is
       Y_OUT : out std_logic_vector(DATA_SIZE-1 downto 0)
       );
   end component;
+
+  -----------------------------------------------------------------------
+  -- Functions
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- READ HEADS
+  -----------------------------------------------------------------------
+
+  function function_ntm_reading (
+    SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_w_input : vector_buffer;
+    matrix_k_input : matrix_buffer
+    ) return vector_buffer;
+
+  -----------------------------------------------------------------------
+  -- WRITE HEADS
+  -----------------------------------------------------------------------
+
+  function function_ntm_writing (
+    SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_m_input : matrix_buffer;
+    vector_a_input : vector_buffer;
+    vector_w_input : vector_buffer
+    ) return matrix_buffer;
+
+  function function_ntm_erasing (
+    SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_m_input : matrix_buffer;
+    vector_e_input : vector_buffer;
+    vector_w_input : vector_buffer
+    ) return matrix_buffer;
+
+  -----------------------------------------------------------------------
+  -- MEMORY
+  -----------------------------------------------------------------------
+
+  function function_ntm_content_based_addressing (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_k_input    : vector_buffer;
+    vector_beta_input : std_logic_vector(DATA_SIZE-1 downto 0);
+    matrix_m_input    : matrix_buffer
+    ) return vector_buffer;
+
+  function function_ntm_addressing (
+    SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_k_input     : vector_buffer;
+    vector_beta_input  : vector_buffer;
+    vector_g_input     : vector_buffer;
+    vector_s_input     : vector_buffer;
+    vector_gamma_input : vector_buffer;
+
+    matrix_m_input : matrix_buffer;
+
+    vector_w_input : vector_buffer
+    
+    ) return vector_buffer;
+
+  -----------------------------------------------------------------------
+  -- TOP
+  -----------------------------------------------------------------------
+
+  -- function function_ntm_top (
+
+  -- function function_ntm_interface_vector (
+
+  -- function function_ntm_output_vector (
+
+end ntm_core_pkg;
+
+package body ntm_core_pkg is
+
+  -----------------------------------------------------------------------
+  -- Functions
+  -----------------------------------------------------------------------
+
+  -----------------------------------------------------------------------
+  -- READ HEADS
+  -----------------------------------------------------------------------
+
+  function function_ntm_reading (
+    SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_w_input : vector_buffer;
+    matrix_k_input : matrix_buffer
+    ) return vector_buffer is
+
+    variable vector_r_output : vector_buffer;
+
+    begin
+
+    -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
+
+    return vector_r_output;
+  end function function_ntm_reading;
+
+  -----------------------------------------------------------------------
+  -- WRITE HEADS
+  -----------------------------------------------------------------------
+
+  function function_ntm_writing (
+    SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_m_input : matrix_buffer;
+    vector_a_input : vector_buffer;
+    vector_w_input : vector_buffer
+    ) return matrix_buffer is
+
+    variable matrix_m_output : matrix_buffer;
+
+    begin
+
+    -- M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
+
+    return matrix_m_output;
+  end function function_ntm_writing;
+
+  function function_ntm_erasing (
+    SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_m_input : matrix_buffer;
+    vector_e_input : vector_buffer;
+    vector_w_input : vector_buffer
+    ) return matrix_buffer is
+
+    variable matrix_m_output : matrix_buffer;
+
+    begin
+
+    -- M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
+
+    return matrix_m_output;
+  end function function_ntm_erasing;
+
+  -----------------------------------------------------------------------
+  -- MEMORY
+  -----------------------------------------------------------------------
+
+  function function_ntm_content_based_addressing (
+    SIZE_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_k_input    : vector_buffer;
+    vector_beta_input : std_logic_vector(DATA_SIZE-1 downto 0);
+    matrix_m_input    : matrix_buffer
+    ) return vector_buffer is
+
+    variable vector_c_output : vector_buffer;
+
+    begin
+
+    -- C(M,k,beta)[i] = softmax(exponentiation(EULER,cosine_similarity(k,M)·beta))[i]
+
+    return vector_c_output;
+  end function function_ntm_content_based_addressing;
+
+  function function_ntm_addressing (
+    SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_k_input     : vector_buffer;
+    vector_beta_input  : vector_buffer;
+    vector_g_input     : vector_buffer;
+    vector_s_input     : vector_buffer;
+    vector_gamma_input : vector_buffer;
+
+    matrix_m_input : matrix_buffer;
+
+    vector_w_input : vector_buffer
+    
+    ) return vector_buffer is
+
+    variable vector_w_output : vector_buffer;
+
+    begin
+
+    -- wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
+
+    -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
+
+    -- w(t;j) = wg(t;j)*s(t;k)
+
+    -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
+
+    return vector_w_output;
+  end function function_ntm_addressing;
+
+  -----------------------------------------------------------------------
+  -- TOP
+  -----------------------------------------------------------------------
+
+  -- function function_ntm_top (
+
+  -- function function_ntm_interface_vector (
+
+  -- function function_ntm_output_vector (
 
 end ntm_core_pkg;
