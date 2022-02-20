@@ -42,6 +42,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use ieee.math_real.all;
+use ieee.float_pkg.all;
+
 use work.ntm_math_pkg.all;
 
 entity ntm_matrix_inverse is
@@ -108,10 +111,10 @@ architecture ntm_matrix_inverse_architecture of ntm_matrix_inverse is
   constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
   constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.0));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(1.0));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(2.0));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(3.0));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -303,11 +306,11 @@ begin
             end if;
 
             for i in m+1 to to_integer(unsigned(SIZE_I_IN))-1 loop
-              data_quotient_int := std_logic_vector(signed(matrix_in_int(i, m))/signed(matrix_in_int(m, m)));
+              data_quotient_int := std_logic_vector(to_float(to_real(to_float(matrix_in_int(i, m)))/to_real(to_float(matrix_in_int(m, m)))));
 
               for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-                matrix_in_int(i, j)  := std_logic_vector(signed(matrix_in_int(i, j))-(resize(signed(data_quotient_int), DATA_SIZE/2)*resize(signed(matrix_in_int(m, j)), DATA_SIZE/2)));
-                matrix_out_int(i, j) := std_logic_vector(signed(matrix_out_int(i, j))-(resize(signed(data_quotient_int), DATA_SIZE/2)*resize(signed(matrix_out_int(m, j)), DATA_SIZE/2)));
+                matrix_in_int(i, j)  := std_logic_vector(to_float(to_real(to_float(matrix_in_int(i, j))) - (to_real(to_float(data_quotient_int))*to_real(to_float(matrix_in_int(m, j))))));
+                matrix_out_int(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_out_int(i, j))) - (to_real(to_float(data_quotient_int))*to_real(to_float(matrix_out_int(m, j))))));
               end loop;
             end loop;
           end loop;

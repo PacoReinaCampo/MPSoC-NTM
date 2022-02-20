@@ -57,10 +57,10 @@ package ntm_math_pkg is
   constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
   constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.0));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(1.0));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(2.0));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(3.0));
 
   -----------------------------------------------------------------------
   -- Types
@@ -1923,7 +1923,7 @@ package body ntm_math_pkg is
     end loop;
 
     for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-      vector_output(i) := std_logic_vector(signed(vector_output(i)) + resize(signed(vector_a_input(i)), DATA_SIZE/2)*resize(signed(vector_a_input(i)), DATA_SIZE/2));
+      vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_output(i))) + (to_real(to_float(vector_a_input(i)))*to_real(to_float(vector_a_input(i))))));
     end loop;
 
     return vector_output;
@@ -1944,7 +1944,7 @@ package body ntm_math_pkg is
       vector_output(i) := ZERO_DATA;
 
       for m in 0 to i loop
-        vector_output(i) := std_logic_vector(signed(vector_output(i)) + (resize(signed(vector_a_input(m)), DATA_SIZE/2)*resize(signed(vector_b_input(i-m)), DATA_SIZE/2)));
+        vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_output(i))) + (to_real(to_float(vector_a_input(m)))*to_real(to_float(vector_b_input(i-m))))));
       end loop;
     end loop;
 
@@ -1975,14 +1975,14 @@ package body ntm_math_pkg is
     end loop;
 
     for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-      data_a_int := std_logic_vector(signed(data_a_int) + (resize(signed(vector_a_input(i)), DATA_SIZE/2)*resize(signed(vector_a_input(i)), DATA_SIZE/2)));
-      data_b_int := std_logic_vector(signed(data_b_int) + (resize(signed(vector_b_input(i)), DATA_SIZE/2)*resize(signed(vector_b_input(i)), DATA_SIZE/2)));
+      data_a_int := std_logic_vector(to_float(to_real(to_float(data_a_int)) + (to_real(to_float(vector_a_input(i)))*to_real(to_float(vector_a_input(i))))));
+      data_b_int := std_logic_vector(to_float(to_real(to_float(data_b_int)) + (to_real(to_float(vector_b_input(i)))*to_real(to_float(vector_b_input(i))))));
 
-      data_p_int(i) := std_logic_vector(signed(data_p_int(i)) + (resize(signed(data_a_int), DATA_SIZE/2)*resize(signed(data_b_int), DATA_SIZE/2)));
+      data_p_int(i) := std_logic_vector(to_float(to_real(to_float(data_p_int(i))) + (to_real(to_float(data_a_int))*to_real(to_float(data_b_int)))));
     end loop;
 
     for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-      vector_output(i) := std_logic_vector(signed(data_p_int(i))/(signed(data_a_int)*signed(data_b_int)));
+      vector_output(i) := std_logic_vector(to_float(to_real(to_float(data_p_int(i)))/(to_real(to_float(data_a_int))*to_real(to_float(data_b_int)))));
     end loop;
 
     return vector_output;
@@ -2003,7 +2003,7 @@ package body ntm_math_pkg is
     end loop;
 
     for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-      vector_output(i) := std_logic_vector(signed(vector_output(i)) + resize(signed(vector_input(i)), DATA_SIZE/2)*resize(signed(vector_input(i)), DATA_SIZE/2));
+      vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_output(i))) + (to_real(to_float(vector_input(i)))*to_real(to_float(vector_input(i))))));
     end loop;
 
     return vector_output;
@@ -2024,7 +2024,7 @@ package body ntm_math_pkg is
     end loop;
 
     for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-      vector_output(i) := std_logic_vector(resize(signed(vector_output(i)), DATA_SIZE/2)*resize(signed(vector_input(i)), DATA_SIZE/2));
+      vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_output(i)))*to_real(to_float(vector_input(i)))));
     end loop;
 
     return vector_output;
@@ -2045,7 +2045,7 @@ package body ntm_math_pkg is
     end loop;
 
     for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-      vector_output(i) := std_logic_vector(signed(vector_output(i)) + signed(vector_input(i)));
+      vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_output(i))) + to_real(to_float(vector_input(i)))));
     end loop;
 
     return vector_output;
@@ -2071,7 +2071,7 @@ package body ntm_math_pkg is
 
         for m in 0 to i loop
           for n in 0 to j loop
-            matrix_output(i, j) := std_logic_vector(signed(matrix_output(i, j)) + (resize(signed(matrix_a_input(m, n)), DATA_SIZE/2)*resize(signed(matrix_b_input(i-m, j-n)), DATA_SIZE/2)));
+            matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_output(i, j))) + (to_real(to_float(matrix_a_input(m, n)))*to_real(to_float(matrix_b_input(i-m, j-n))))));
           end loop;
         end loop;
       end loop;
@@ -2118,11 +2118,11 @@ package body ntm_math_pkg is
       end if;
 
       for i in m+1 to to_integer(unsigned(SIZE_I_IN))-1 loop
-        data_quotient_int := std_logic_vector(signed(matrix_in_int(i, m))/signed(matrix_in_int(m, m)));
+        data_quotient_int := std_logic_vector(to_float(to_real(to_float(matrix_in_int(i, m)))/to_real(to_float(matrix_in_int(m, m)))));
 
         for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-          matrix_in_int(i, j) := std_logic_vector(signed(matrix_in_int(i, j))-(resize(signed(data_quotient_int), DATA_SIZE/2)*resize(signed(matrix_in_int(m, j)), DATA_SIZE/2)));
-          matrix_output(i, j) := std_logic_vector(signed(matrix_output(i, j))-(resize(signed(data_quotient_int), DATA_SIZE/2)*resize(signed(matrix_output(m, j)), DATA_SIZE/2)));
+          matrix_in_int(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_in_int(i, j))) - (to_real(to_float(data_quotient_int))*to_real(to_float(matrix_in_int(m, j))))));
+          matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_output(i, j))) - (to_real(to_float(data_quotient_int))*to_real(to_float(matrix_output(m, j))))));
         end loop;
       end loop;
     end loop;
@@ -2148,7 +2148,7 @@ package body ntm_math_pkg is
 
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(resize(signed(matrix_output(i, j)), DATA_SIZE/2)*resize(signed(matrix_input(i, j)), DATA_SIZE/2));
+        matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_output(i, j)))*to_real(to_float(matrix_input(i, j)))));
       end loop;
     end loop;
 
@@ -2173,7 +2173,7 @@ package body ntm_math_pkg is
         matrix_output(i, j) := ZERO_DATA;
 
         for m in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-          matrix_output(i, j) := std_logic_vector(signed(matrix_output(i, j)) + (resize(signed(matrix_a_input(i, m)), DATA_SIZE/2)*resize(signed(matrix_b_input(m, j)), DATA_SIZE/2)));
+          matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_output(i, j))) + (to_real(to_float(matrix_a_input(i, m)))*to_real(to_float(matrix_b_input(m, j))))));
         end loop;
       end loop;
     end loop;
@@ -2199,7 +2199,7 @@ package body ntm_math_pkg is
 
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(signed(matrix_output(i, j)) + signed(matrix_input(i, j)));
+        matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_output(i, j))) + to_real(to_float(matrix_input(i, j)))));
       end loop;
     end loop;
 
@@ -2249,7 +2249,7 @@ package body ntm_math_pkg is
           for m in 0 to i loop
             for n in 0 to j loop
               for p in 0 to k loop
-                tensor_output(i, j, k) := std_logic_vector(signed(tensor_output(i, j, k)) + (resize(signed(tensor_a_input(m, n, p)), DATA_SIZE/2)*resize(signed(tensor_b_input(i-m, j-n, k-p)), DATA_SIZE/2)));
+                tensor_output(i, j, k) := std_logic_vector(to_float(to_real(to_float(tensor_output(i, j, k))) + (to_real(to_float(tensor_a_input(m, n, p)))*to_real(to_float(tensor_b_input(i-m, j-n, k-p))))));
               end loop;
             end loop;
           end loop;
@@ -2303,12 +2303,12 @@ package body ntm_math_pkg is
       end if;
 
       for i in m+1 to to_integer(unsigned(SIZE_I_IN))-1 loop
-        data_quotient_int := std_logic_vector(signed(tensor_in_int(i, m, m))/signed(tensor_in_int(m, m, m)));
+        data_quotient_int := std_logic_vector(to_float(to_real(to_float(tensor_in_int(i, m, m)))/to_real(to_float(tensor_in_int(m, m, m)))));
 
         for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
           for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-            tensor_in_int(i, j, k) := std_logic_vector(signed(tensor_in_int(i, j, k))-(resize(signed(data_quotient_int), DATA_SIZE/2)*resize(signed(tensor_in_int(m, j, k)), DATA_SIZE/2)));
-            tensor_output(i, j, k) := std_logic_vector(signed(tensor_output(i, j, k))-(resize(signed(data_quotient_int), DATA_SIZE/2)*resize(signed(tensor_output(m, j, k)), DATA_SIZE/2)));
+            tensor_in_int(i, j, k) := std_logic_vector(to_float(to_real(to_float(tensor_in_int(i, j, k))) - (to_real(to_float(data_quotient_int))*to_real(to_float(tensor_in_int(m, j, k))))));
+            tensor_output(i, j, k) := std_logic_vector(to_float(to_real(to_float(tensor_output(i, j, k))) - (to_real(to_float(data_quotient_int))*to_real(to_float(tensor_output(m, j, k))))));
           end loop;
         end loop;
       end loop;
@@ -2339,7 +2339,7 @@ package body ntm_math_pkg is
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
         for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-          tensor_output(i, j, k) := std_logic_vector(resize(signed(tensor_output(i, j, k)), DATA_SIZE/2)*resize(signed(tensor_input(i, j, k)), DATA_SIZE/2));
+          tensor_output(i, j, k) := std_logic_vector(to_float(to_real(to_float(tensor_output(i, j, k)))*to_real(to_float(tensor_input(i, j, k)))));
         end loop;
       end loop;
     end loop;
@@ -2368,7 +2368,7 @@ package body ntm_math_pkg is
           tensor_output(i, j, k) := ZERO_DATA;
 
           for m in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-            tensor_output(i, j, k) := std_logic_vector(signed(tensor_output(i, j, k)) + (resize(signed(tensor_a_input(i, j, m)), DATA_SIZE/2)*resize(signed(tensor_b_input(i, m, k)), DATA_SIZE/2)));
+            tensor_output(i, j, k) := std_logic_vector(to_float(to_real(to_float(tensor_output(i, j, k))) + (to_real(to_float(tensor_a_input(i, j, m)))*to_real(to_float(tensor_b_input(i, m, k))))));
           end loop;
         end loop;
       end loop;
@@ -2399,7 +2399,7 @@ package body ntm_math_pkg is
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
         for k in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-          tensor_output(i, j, k) := std_logic_vector(signed(tensor_output(i, j, k)) + signed(tensor_input(i, j, k)));
+          tensor_output(i, j, k) := std_logic_vector(to_float(to_real(to_float(tensor_output(i, j, k))) + to_real(to_float(tensor_input(i, j, k)))));
         end loop;
       end loop;
     end loop;
@@ -2797,9 +2797,9 @@ package body ntm_math_pkg is
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
       if (i = 0) then
-        vector_output(i) := std_logic_vector((signed(vector_input(i)) - signed(vector_input(i)))/signed(LENGTH_IN));
+        vector_output(i) := std_logic_vector(to_float((to_real(to_float(vector_input(i))) - to_real(to_float(vector_input(i))))/to_real(to_float(LENGTH_IN))));
       else
-        vector_output(i) := std_logic_vector((signed(vector_input(i)) - signed(vector_input(i-1)))/signed(LENGTH_IN));
+        vector_output(i) := std_logic_vector(to_float((to_real(to_float(vector_input(i))) - to_real(to_float(vector_input(i-1))))/to_real(to_float(LENGTH_IN))));
       end if;
     end loop;
 
@@ -2822,11 +2822,11 @@ package body ntm_math_pkg is
     data_summation_int := ZERO_DATA;
 
     for m in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      data_summation_int := std_logic_vector(signed(data_summation_int) + signed(vector_input(m)));
+      data_summation_int := std_logic_vector(to_float(to_real(to_float(data_summation_int)) + to_real(to_float(vector_input(m)))));
     end loop;
 
     for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := std_logic_vector(resize(signed(vector_input(i)), DATA_SIZE/2)*resize(signed(LENGTH_IN), DATA_SIZE/2));
+      vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_input(i)))*to_real(to_float(LENGTH_IN))));
     end loop;
 
     return vector_output;
@@ -2846,11 +2846,11 @@ package body ntm_math_pkg is
     data_summation_int := ZERO_DATA;
 
     for m in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      data_summation_int := std_logic_vector(signed(data_summation_int) + signed(vector_input(m)));
+      data_summation_int := std_logic_vector(to_float(to_real(to_float(data_summation_int)) + to_real(to_float(vector_input(m)))));
     end loop;
 
     for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
-      vector_output(i) := std_logic_vector(signed(vector_input(i))/signed(data_summation_int));
+      vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_input(i)))/to_real(to_float(data_summation_int))));
     end loop;
 
     return vector_output;
@@ -2875,15 +2875,15 @@ package body ntm_math_pkg is
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
         if (CONTROL = '0') then
           if (i = 0) then
-            matrix_output(i, j) := std_logic_vector((signed(matrix_input(i, j)) - signed(matrix_input(i, j)))/signed(LENGTH_IN));
+            matrix_output(i, j) := std_logic_vector(to_float((to_real(to_float(matrix_input(i, j))) - to_real(to_float(matrix_input(i, j))))/to_real(to_float(LENGTH_IN))));
           else
-            matrix_output(i, j) := std_logic_vector((signed(matrix_input(i, j)) - signed(matrix_input(i-1, j)))/signed(LENGTH_IN));
+            matrix_output(i, j) := std_logic_vector(to_float((to_real(to_float(matrix_input(i, j))) - to_real(to_float(matrix_input(i-1, j))))/to_real(to_float(LENGTH_IN))));
           end if;
         elsif (CONTROL = '1') then
           if (j = 0) then
-            matrix_output(i, j) := std_logic_vector((signed(matrix_input(i, j)) - signed(matrix_input(i, j)))/signed(LENGTH_IN));
+            matrix_output(i, j) := std_logic_vector(to_float((to_real(to_float(matrix_input(i, j))) - to_real(to_float(matrix_input(i, j))))/to_real(to_float(LENGTH_IN))));
           else
-            matrix_output(i, j) := std_logic_vector((signed(matrix_input(i, j)) - signed(matrix_input(i, j-1)))/signed(LENGTH_IN));
+            matrix_output(i, j) := std_logic_vector(to_float((to_real(to_float(matrix_input(i, j))) - to_real(to_float(matrix_input(i, j-1))))/to_real(to_float(LENGTH_IN))));
           end if;
         end if;
       end loop;
@@ -2910,13 +2910,13 @@ package body ntm_math_pkg is
 
     for m in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for n in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        data_summation_int := std_logic_vector(signed(data_summation_int) + signed(matrix_input(m, n)));
+        data_summation_int := std_logic_vector(to_float(to_real(to_float(data_summation_int)) + to_real(to_float(matrix_input(m, n)))));
       end loop;
     end loop;
 
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(resize(signed(matrix_input(i, j)), DATA_SIZE/2)*resize(signed(LENGTH_IN), DATA_SIZE/2));
+        matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_input(i, j)))*to_real(to_float(LENGTH_IN))));
       end loop;
     end loop;
 
@@ -2939,13 +2939,13 @@ package body ntm_math_pkg is
 
     for m in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for n in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        data_summation_int := std_logic_vector(signed(data_summation_int) + signed(matrix_input(m, n)));
+        data_summation_int := std_logic_vector(to_float(to_real(to_float(data_summation_int)) + to_real(to_float(matrix_input(m, n)))));
       end loop;
     end loop;
 
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        matrix_output(i, j) := std_logic_vector(signed(matrix_input(i, j))/signed(data_summation_int));
+        matrix_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_input(i, j)))/to_real(to_float(data_summation_int))));
       end loop;
     end loop;
 
@@ -2973,21 +2973,21 @@ package body ntm_math_pkg is
         for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
           if (CONTROL = "01") then
             if (i = 0) then
-              tensor_output(i, j, k) := std_logic_vector((signed(tensor_input(i, j, k)) - signed(tensor_input(i, j, k)))/signed(LENGTH_IN));
+              tensor_output(i, j, k) := std_logic_vector(to_float((to_real(to_float(tensor_input(i, j, k))) - to_real(to_float(tensor_input(i, j, k))))/to_real(to_float(LENGTH_IN))));
             else
-              tensor_output(i, j, k) := std_logic_vector((signed(tensor_input(i, j, k)) - signed(tensor_input(i-1, j, k)))/signed(LENGTH_IN));
+              tensor_output(i, j, k) := std_logic_vector(to_float((to_real(to_float(tensor_input(i, j, k))) - to_real(to_float(tensor_input(i-1, j, k))))/to_real(to_float(LENGTH_IN))));
             end if;
           elsif (CONTROL = "10") then
             if (j = 0) then
-              tensor_output(i, j, k) := std_logic_vector((signed(tensor_input(i, j, k)) - signed(tensor_input(i, j, k)))/signed(LENGTH_IN));
+              tensor_output(i, j, k) := std_logic_vector(to_float((to_real(to_float(tensor_input(i, j, k))) - to_real(to_float(tensor_input(i, j, k))))/to_real(to_float(LENGTH_IN))));
             else
-              tensor_output(i, j, k) := std_logic_vector((signed(tensor_input(i, j, k)) - signed(tensor_input(i, j-1, k)))/signed(LENGTH_IN));
+              tensor_output(i, j, k) := std_logic_vector(to_float((to_real(to_float(tensor_input(i, j, k))) - to_real(to_float(tensor_input(i, j-1, k))))/to_real(to_float(LENGTH_IN))));
             end if;
           elsif (CONTROL = "11") then
             if (k = 0) then
-              tensor_output(i, j, k) := std_logic_vector((signed(tensor_input(i, j, k)) - signed(tensor_input(i, j, k)))/signed(LENGTH_IN));
+              tensor_output(i, j, k) := std_logic_vector(to_float((to_real(to_float(tensor_input(i, j, k))) - to_real(to_float(tensor_input(i, j, k))))/to_real(to_float(LENGTH_IN))));
             else
-              tensor_output(i, j, k) := std_logic_vector((signed(tensor_input(i, j, k)) - signed(tensor_input(i, j, k-1)))/signed(LENGTH_IN));
+              tensor_output(i, j, k) := std_logic_vector(to_float((to_real(to_float(tensor_input(i, j, k))) - to_real(to_float(tensor_input(i, j, k-1))))/to_real(to_float(LENGTH_IN))));
             end if;
           end if;
         end loop;
@@ -3017,7 +3017,7 @@ package body ntm_math_pkg is
     for m in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for n in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
         for p in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-          data_summation_int := std_logic_vector(signed(data_summation_int) + signed(tensor_input(m, n, p)));
+          data_summation_int := std_logic_vector(to_float(to_real(to_float(data_summation_int)) + to_real(to_float(tensor_input(m, n, p)))));
         end loop;
       end loop;
     end loop;
@@ -3025,7 +3025,7 @@ package body ntm_math_pkg is
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
         for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-          tensor_output(i, j, k) := std_logic_vector(resize(signed(tensor_input(i, j, k)), DATA_SIZE/2)*resize(signed(LENGTH_IN), DATA_SIZE/2));
+          tensor_output(i, j, k) := std_logic_vector(to_float(to_real(to_float(tensor_input(i, j, k)))*to_real(to_float(LENGTH_IN))));
         end loop;
       end loop;
     end loop;
@@ -3051,7 +3051,7 @@ package body ntm_math_pkg is
     for m in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for n in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
         for p in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-          data_summation_int := std_logic_vector(signed(data_summation_int) + signed(tensor_input(m, n, p)));
+          data_summation_int := std_logic_vector(to_float(to_real(to_float(data_summation_int)) + to_real(to_float(tensor_input(m, n, p)))));
         end loop;
       end loop;
     end loop;
@@ -3059,7 +3059,7 @@ package body ntm_math_pkg is
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
         for k in 0 to to_integer(unsigned(SIZE_K_IN))-1 loop
-          tensor_output(i, j, k) := std_logic_vector(signed(tensor_input(i, j, k))/signed(data_summation_int));
+          tensor_output(i, j, k) := std_logic_vector(to_float(to_real(to_float(tensor_input(i, j, k)))/to_real(to_float(data_summation_int))));
         end loop;
       end loop;
     end loop;
