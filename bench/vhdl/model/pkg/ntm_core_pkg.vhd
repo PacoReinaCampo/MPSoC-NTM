@@ -675,14 +675,13 @@ package body ntm_core_pkg is
 
     -- C(M[i,·],k,beta)[i] = softmax(exponentiation(cosine_similarity(k,M[i,·])·beta))[i]
 
-    -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      -- Dot product k,M[i,·]
       vector_operation_int(i) := ZERO_DATA;
 
+      -- Module M[i,·]
       vector_m_operation_int(i) := ZERO_DATA;
-    end loop;
 
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
         -- Dot product k,M[i,·]
         vector_operation_int(i) := std_logic_vector(to_float(to_real(to_float(vector_operation_int(i))) + (to_real(to_float(vector_k_input(j)))*to_real(to_float(matrix_m_input(i, j))))));
@@ -700,6 +699,8 @@ package body ntm_core_pkg is
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       vector_operation_int(i) := std_logic_vector(to_float(exp(to_real(to_float(vector_operation_int(i)))*to_real(to_float(scalar_beta_input))/(sqrt(to_real(to_float(scalar_k_operation_int)))*sqrt(to_real(to_float(vector_m_operation_int(i))))))));
     end loop;
+
+    data_summation_int := ZERO_DATA;
 
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       data_summation_int := std_logic_vector(to_float(to_real(to_float(data_summation_int)) + to_real(to_float(vector_operation_int(i)))));
