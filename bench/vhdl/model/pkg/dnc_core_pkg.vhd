@@ -1347,9 +1347,9 @@ package dnc_core_pkg is
 
     matrix_pi_input : matrix_buffer;
 
-    matrix_b_input : matrix_buffer;
+    vector_b_input : vector_buffer;
     matrix_c_input : matrix_buffer;
-    matrix_f_input : matrix_buffer
+    vector_f_input : vector_buffer
     ) return matrix_buffer;
 
   function function_dnc_sort_vector (
@@ -1396,6 +1396,7 @@ package dnc_core_pkg is
 
   function function_dnc_addressing (
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_k_read_input    : matrix_buffer;
@@ -1403,8 +1404,8 @@ package dnc_core_pkg is
     vector_f_read_input    : vector_buffer;
     vector_pi_read_input   : vector_buffer;
 
-    matrix_k_write_input    : matrix_buffer;
-    vector_beta_write_input : vector_buffer;
+    vector_k_write_input    : vector_buffer;
+    scalar_beta_write_input : std_logic_vector(DATA_SIZE-1 downto 0);
     vector_e_write_input    : vector_buffer;
     vector_v_write_input    : vector_buffer;
     scalar_ga_write_input   : std_logic_vector(DATA_SIZE-1 downto 0);
@@ -1602,6 +1603,12 @@ package body dnc_core_pkg is
 
     -- psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
 
+    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+        vector_psi_output(j) := std_logic_vector(to_float(1.0 - to_real(to_float(vector_f_input(i)))*to_real(to_float(matrix_w_input(i, j)))));
+      end loop;
+    end loop;
+
     return vector_psi_output;
   end function function_dnc_memory_retention_vector;
 
@@ -1702,16 +1709,22 @@ package body dnc_core_pkg is
 
     matrix_pi_input : matrix_buffer;
 
-    matrix_b_input : matrix_buffer;
+    vector_b_input : vector_buffer;
     matrix_c_input : matrix_buffer;
-    matrix_f_input : matrix_buffer
+    vector_f_input : vector_buffer
     ) return matrix_buffer is
 
     variable matrix_w_output : matrix_buffer;
 
   begin
 
-    -- w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
+    -- w(t;i,j) = pi(t;i)[1]·b(t;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;j)
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        matrix_w_output(i, j) := std_logic_vector(to_float((to_real(to_float(matrix_pi_input(i, 0)))*to_real(to_float(vector_b_input(j)))) + (to_real(to_float(matrix_pi_input(i, 1)))*to_real(to_float(matrix_c_input(i, j)))) + (to_real(to_float(matrix_pi_input(i, 2)))*to_real(to_float(vector_f_input(j))))));
+      end loop;
+    end loop;
 
     return matrix_w_output;
   end function function_dnc_read_weighting;
@@ -1820,11 +1833,16 @@ package body dnc_core_pkg is
 
     -- w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - ga(t))·c(t;j))
 
+    for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+      vector_w_output(j) := std_logic_vector(to_float(to_real(to_float(scalar_gw_input))*((to_real(to_float(scalar_ga_input))*to_real(to_float(vector_a_input(j)))) + ((1.0 - to_real(to_float(scalar_ga_input)))*to_real(to_float(vector_c_input(j)))))));
+    end loop;
+
     return vector_w_output;
   end function function_dnc_write_weighting;
 
   function function_dnc_addressing (
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
     matrix_k_read_input    : matrix_buffer;
@@ -1832,13 +1850,40 @@ package body dnc_core_pkg is
     vector_f_read_input    : vector_buffer;
     vector_pi_read_input   : vector_buffer;
 
-    matrix_k_write_input    : matrix_buffer;
-    vector_beta_write_input : vector_buffer;
+    vector_k_write_input    : vector_buffer;
+    scalar_beta_write_input : std_logic_vector(DATA_SIZE-1 downto 0);
     vector_e_write_input    : vector_buffer;
     vector_v_write_input    : vector_buffer;
     scalar_ga_write_input   : std_logic_vector(DATA_SIZE-1 downto 0);
     scalar_gw_write_input   : std_logic_vector(DATA_SIZE-1 downto 0)
     ) return matrix_buffer is
+
+    variable matrix_l_in_int : matrix_buffer;
+    variable matrix_m_in_int : matrix_buffer;
+
+    variable matrix_l_out_int : matrix_buffer;
+    variable matrix_m_out_int : matrix_buffer;
+
+    variable matrix_b_int : matrix_buffer;
+    variable matrix_c_int : matrix_buffer;
+    variable matrix_f_int : matrix_buffer;
+    variable matrix_w_int : matrix_buffer;
+
+    variable vector_p_in_int : vector_buffer;
+    variable vector_u_in_int : vector_buffer;
+
+    variable vector_p_out_int : vector_buffer;
+    variable vector_u_out_int : vector_buffer;
+
+    variable vector_a_int : vector_buffer;
+    variable vector_b_int : vector_buffer;
+    variable vector_c_int : vector_buffer;
+    variable vector_f_int : vector_buffer;
+    variable vector_w_int : vector_buffer;
+
+    variable vector_psi_int : vector_buffer;
+
+    variable matrix_pi_int : matrix_buffer;
 
     variable matrix_r_output : matrix_buffer;
 
@@ -1848,49 +1893,140 @@ package body dnc_core_pkg is
 
     -- p(t;j) = (1 - summation(w(t;j))[i in 1 to N])·p(t-1;j) + w(t;j)
     -- p(t=0) = 0
+    vector_p_out_int := function_dnc_precedence_weighting (
+      SIZE_N_IN => SIZE_N_IN,
 
+      vector_w_input => vector_w_int,
+      vector_p_input => vector_p_in_int
+    );
+    
     -- TEMPORAL_LINK_MATRIX
 
     -- L(t)[g;j] = (1 - w(t;j)[i] - w(t;j)[j])·L(t-1)[g;j] + w(t;j)[i]·p(t-1;j)[j]
     -- L(t=0)[g,j] = 0
+    matrix_l_out_int := function_dnc_temporal_link_matrix (
+      SIZE_N_IN => SIZE_N_IN,
 
+      matrix_l_input => matrix_l_in_int,
+      vector_w_input => vector_w_int,
+      vector_p_input => vector_p_out_int
+      );
+    
     -- BACKWARD_FORWARD_WEIGHTING
 
     -- b(t;i;j) = transpose(L(t;g;j))·w(t-1;i;j)
+    matrix_b_int := function_dnc_backward_weighting (
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_N_IN => SIZE_N_IN,
+
+      matrix_l_input => matrix_l_out_int,
+      matrix_w_input => matrix_w_int
+      );
 
     -- f(t;i;j) = L(t;g;j)·w(t-1;i;j)
+    matrix_f_int := function_dnc_forward_weighting (
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_N_IN => SIZE_N_IN,
+
+      matrix_l_input => matrix_l_out_int,
+      matrix_w_input => matrix_w_int
+      );
 
     -- MEMORY_RETENTION_VECTOR
 
     -- psi(t;j) = multiplication(1 - f(t;i)·w(t-1;i;j))[i in 1 to R]
+    vector_psi_int := function_dnc_memory_retention_vector (
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_N_IN => SIZE_N_IN,
+
+      vector_f_input => vector_f_int,
+      matrix_w_input => matrix_w_int
+      );
 
     -- USAGE_VECTOR
 
     -- u(t;j) = (u(t-1;j) + w(t-1;j) - u(t-1;j) o w(t-1;j)) o psi(t;j)
+    vector_u_out_int := function_dnc_usage_vector (
+      SIZE_N_IN => SIZE_N_IN,
 
+      vector_u_input   => vector_u_in_int,
+      vector_w_input   => vector_w_int,
+      vector_psi_input => vector_psi_int
+    );
+    
     -- ALLOCATION_WEIGHTING
 
     -- a(t)[phi(t)[j]] = (1 - u(t)[phi(t)[j]])·multiplication(u(t)[phi(t)[j]])[i in 1 to j-1]
+    vector_a_int := function_dnc_allocation_weighting (
+      SIZE_N_IN => SIZE_N_IN,
 
+      vector_u_input => vector_u_out_int
+      );
+    
     -- READ_WRITE_CONTENT_WEIGHTING
 
     -- c(t;i;j) = C(M(t-1;j;k),k(t;i;k),beta(t;i))
 
     -- c(t;j) = C(M(t-1;j;k),k(t;k),beta(t))
+    vector_c_int := function_dnc_write_content_weighting (
+      SIZE_N_IN => SIZE_N_IN,
+      SIZE_W_IN => SIZE_W_IN,
+
+      vector_k_input    => vector_k_write_input,
+      matrix_m_input    => matrix_m_in_int,
+      scalar_beta_input => scalar_beta_write_input
+      );
 
     -- READ_WRITE_WEIGHTING
 
     -- w(t;i,j) = pi(t;i)[1]·b(t;i;j) + pi(t;i)[2]·c(t;i,j) + pi(t;i)[3]·f(t;i;j)
+    matrix_w_int := function_dnc_read_weighting (
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_N_IN => SIZE_N_IN,
+
+      matrix_pi_input => matrix_pi_int,
+
+      vector_b_input => vector_b_int,
+      matrix_c_input => matrix_c_int,
+      vector_f_input => vector_f_int
+      );
 
     -- w(t;j) = gw(t)·(ga(t)·a(t;j) + (1 - ga(t))·c(t;j))
+    vector_w_int := function_dnc_write_weighting (
+      SIZE_N_IN => SIZE_N_IN,
 
+      vector_a_input => vector_a_int,
+      vector_c_input => vector_c_int,
+
+      scalar_ga_input => scalar_ga_write_input,
+      scalar_gw_input => scalar_gw_write_input
+      );
+    
     -- MEMORY_MATRIX
 
     -- M(t;j;k) = M(t-1;j;k) o (E - w(t;j)·transpose(e(t;k))) + w(t;j)·transpose(v(t;k))
+    matrix_m_out_int := function_dnc_memory_matrix (
+      SIZE_N_IN => SIZE_N_IN,
+      SIZE_W_IN => SIZE_W_IN,
+
+      matrix_m_input => matrix_m_in_int,
+
+      vector_w_input => vector_w_int,
+      vector_v_input => vector_v_write_input,
+      vector_e_input => vector_e_write_input
+      );
 
     -- READ_VECTORS
 
     -- r(t;i;k) = transpose(M(t;j;k))·w(t;i;j)
+    matrix_r_output := function_dnc_read_vectors (
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_N_IN => SIZE_N_IN,
+      SIZE_W_IN => SIZE_W_IN,
+
+      matrix_m_input => matrix_m_out_int,
+      matrix_w_input => matrix_w_int
+      );
 
     return matrix_r_output;
   end function function_dnc_addressing;
