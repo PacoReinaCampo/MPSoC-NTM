@@ -42,6 +42,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use ieee.math_real.all;
+use ieee.float_pkg.all;
+
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 
@@ -114,10 +117,10 @@ architecture ntm_matrix_convolution_architecture of ntm_matrix_convolution is
   constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
   constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.0));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(1.0));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(2.0));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(3.0));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -334,7 +337,7 @@ begin
 
               for m in 0 to i loop
                 for n in 0 to j loop
-                  matrix_convolution_int(i, j) := std_logic_vector(signed(matrix_convolution_int(i, j)) + (resize(signed(matrix_a_int(m, n)), DATA_SIZE/2)*resize(signed(matrix_b_int(i-m, j-n)), DATA_SIZE/2)));
+                  matrix_convolution_int(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_convolution_int(i, j))) + (to_real(to_float(matrix_a_int(m, n)))*to_real(to_float(matrix_b_int(i-m, j-n))))));
                 end loop;
               end loop;
 

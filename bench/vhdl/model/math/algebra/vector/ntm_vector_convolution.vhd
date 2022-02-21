@@ -42,6 +42,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use ieee.math_real.all;
+use ieee.float_pkg.all;
+
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 
@@ -102,10 +105,10 @@ architecture ntm_vector_convolution_architecture of ntm_vector_convolution is
   constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
   constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.0));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(1.0));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(2.0));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(3.0));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -238,7 +241,7 @@ begin
             vector_convolution_int(i) := ZERO_DATA;
 
             for m in 0 to i loop
-              vector_convolution_int(i) := std_logic_vector(signed(vector_convolution_int(i)) + (resize(signed(vector_a_int(m)), DATA_SIZE/2)*resize(signed(vector_b_int(i-m)), DATA_SIZE/2)));
+              vector_convolution_int(i) := std_logic_vector(to_float(to_real(to_float(vector_convolution_int(i))) + (to_real(to_float(vector_a_int(m)))*to_real(to_float(vector_b_int(i-m))))));
             end loop;
 
             vector_out_int(i) <= vector_convolution_int(i);

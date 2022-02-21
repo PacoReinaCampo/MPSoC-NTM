@@ -586,6 +586,14 @@ package body ntm_core_pkg is
 
     -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
 
+    for i in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+      vector_r_output(i) := ZERO_DATA;
+
+      for j in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+        vector_r_output(i) := std_logic_vector(to_float(to_real(to_float(vector_r_output(i))) + (to_real(to_float(vector_w_input(j)))*to_real(to_float(matrix_k_input(i, j))))));
+      end loop;
+    end loop;
+
     return vector_r_output;
   end function function_ntm_reading;
 
@@ -654,36 +662,51 @@ package body ntm_core_pkg is
     matrix_m_input    : matrix_buffer
     ) return vector_buffer is
 
-    variable data_operation_int : vector_buffer;
+    variable vector_operation_int : vector_buffer;
+
+    variable vector_m_operation_int : vector_buffer;
+    variable scalar_k_operation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable data_summation_int : std_logic_vector(DATA_SIZE-1 downto 0);
 
     variable vector_c_output : vector_buffer;
 
   begin
+
     -- C(M[i,·],k,beta)[i] = softmax(exponentiation(cosine_similarity(k,M[i,·])·beta))[i]
 
     -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      data_operation_int(i) := ZERO_DATA;
+      vector_operation_int(i) := ZERO_DATA;
+
+      vector_m_operation_int(i) := ZERO_DATA;
     end loop;
 
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
-        data_operation_int(i) := std_logic_vector(to_float(to_real(to_float(data_operation_int(i))) + (to_real(to_float(vector_k_input(j)))*to_real(to_float(matrix_m_input(i, j))))));
+        -- Dot product k,M[i,·]
+        vector_operation_int(i) := std_logic_vector(to_float(to_real(to_float(vector_operation_int(i))) + (to_real(to_float(vector_k_input(j)))*to_real(to_float(matrix_m_input(i, j))))));
+
+        -- Module M[i,·]
+        vector_m_operation_int(i) := std_logic_vector(to_float(to_real(to_float(vector_m_operation_int(i))) + (to_real(to_float(matrix_m_input(i, j)))*to_real(to_float(matrix_m_input(i, j))))));
       end loop;
     end loop;
 
-    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      data_operation_int(i) := std_logic_vector(to_float(exp(to_real(to_float(data_operation_int(i)))*to_real(to_float(scalar_beta_input)))));
+    -- Module k
+    for j in 0 to to_integer(unsigned(SIZE_J_IN))-1 loop
+      scalar_k_operation_int := std_logic_vector(to_float(to_real(to_float(scalar_k_operation_int)) + (to_real(to_float(vector_k_input(j)))*to_real(to_float(vector_k_input(j))))));
     end loop;
 
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      data_summation_int := std_logic_vector(to_float(to_real(to_float(data_summation_int)) + to_real(to_float(data_operation_int(i)))));
+      vector_operation_int(i) := std_logic_vector(to_float(exp(to_real(to_float(vector_operation_int(i)))*to_real(to_float(scalar_beta_input))/(sqrt(to_real(to_float(scalar_k_operation_int)))*sqrt(to_real(to_float(vector_m_operation_int(i))))))));
     end loop;
 
     for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
-      vector_c_output(i) := std_logic_vector(to_float(exp(to_real(to_float(data_operation_int(i)))/to_real(to_float(data_summation_int)))));
+      data_summation_int := std_logic_vector(to_float(to_real(to_float(data_summation_int)) + to_real(to_float(vector_operation_int(i)))));
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_I_IN))-1 loop
+      vector_c_output(i) := std_logic_vector(to_float(exp(to_real(to_float(vector_operation_int(i)))/to_real(to_float(data_summation_int)))));
     end loop;
 
     return vector_c_output;

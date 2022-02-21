@@ -42,6 +42,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use ieee.math_real.all;
+use ieee.float_pkg.all;
+
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 
@@ -102,10 +105,10 @@ architecture ntm_vector_cosine_similarity_architecture of ntm_vector_cosine_simi
   constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
   constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.0));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(1.0));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(2.0));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(3.0));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -245,14 +248,14 @@ begin
           end loop;
 
           for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-            data_a_int := std_logic_vector(signed(data_a_int) + (signed(vector_a_int(i))*signed(vector_a_int(i))));
-            data_b_int := std_logic_vector(signed(data_b_int) + (signed(vector_b_int(i))*signed(vector_b_int(i))));
+            data_a_int := std_logic_vector(to_float(to_real(to_float(data_a_int)) + (to_real(to_float(vector_a_int(i)))*to_real(to_float(vector_a_int(i))))));
+            data_b_int := std_logic_vector(to_float(to_real(to_float(data_b_int)) + (to_real(to_float(vector_b_int(i)))*to_real(to_float(vector_b_int(i))))));
 
-            data_p_int(i) := std_logic_vector(signed(data_p_int(i)) + (signed(vector_a_int(i))*signed(vector_b_int(i))));
+            data_p_int(i) := std_logic_vector(to_float(to_real(to_float(data_p_int(i))) + (to_real(to_float(vector_a_int(i)))*to_real(to_float(vector_b_int(i))))));
           end loop;
 
           for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-            vector_out_int(i) <= std_logic_vector(signed(data_p_int(i))/(signed(data_a_int)*signed(data_b_int)));
+            vector_out_int(i) <= std_logic_vector(to_float(to_real(to_float(data_p_int(i)))/(to_real(to_float(data_a_int))*to_real(to_float(data_b_int)))));
           end loop;
 
           -- FSM Control

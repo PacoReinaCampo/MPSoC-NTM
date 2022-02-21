@@ -13,17 +13,17 @@
 ../../../../../../../bench/vhdl/model/arithmetic/integer/matrix/ntm_matrix_integer_multiplier.vhd
 ../../../../../../../bench/vhdl/model/arithmetic/integer/matrix/ntm_matrix_integer_divider.vhd
 
-../../../../../../../bench/vhdl/model/arithmetic/float/scalar/ntm_scalar_adder.vhd
-../../../../../../../bench/vhdl/model/arithmetic/float/scalar/ntm_scalar_multiplier.vhd
-../../../../../../../bench/vhdl/model/arithmetic/float/scalar/ntm_scalar_divider.vhd
+../../../../../../../bench/vhdl/model/arithmetic/float/scalar/ntm_scalar_float_adder.vhd
+../../../../../../../bench/vhdl/model/arithmetic/float/scalar/ntm_scalar_float_multiplier.vhd
+../../../../../../../bench/vhdl/model/arithmetic/float/scalar/ntm_scalar_float_divider.vhd
 
-../../../../../../../bench/vhdl/model/arithmetic/float/vector/ntm_vector_adder.vhd
-../../../../../../../bench/vhdl/model/arithmetic/float/vector/ntm_vector_multiplier.vhd
-../../../../../../../bench/vhdl/model/arithmetic/float/vector/ntm_vector_divider.vhd
+../../../../../../../bench/vhdl/model/arithmetic/float/vector/ntm_vector_float_adder.vhd
+../../../../../../../bench/vhdl/model/arithmetic/float/vector/ntm_vector_float_multiplier.vhd
+../../../../../../../bench/vhdl/model/arithmetic/float/vector/ntm_vector_float_divider.vhd
 
-../../../../../../../bench/vhdl/model/arithmetic/float/matrix/ntm_matrix_adder.vhd
-../../../../../../../bench/vhdl/model/arithmetic/float/matrix/ntm_matrix_multiplier.vhd
-../../../../../../../bench/vhdl/model/arithmetic/float/matrix/ntm_matrix_divider.vhd
+../../../../../../../bench/vhdl/model/arithmetic/float/matrix/ntm_matrix_float_adder.vhd
+../../../../../../../bench/vhdl/model/arithmetic/float/matrix/ntm_matrix_float_multiplier.vhd
+../../../../../../../bench/vhdl/model/arithmetic/float/matrix/ntm_matrix_float_divider.vhd
 
 ../../../../../../../bench/vhdl/model/math/calculus/vector/ntm_vector_differentiation.vhd
 ../../../../../../../bench/vhdl/model/math/calculus/vector/ntm_vector_integration.vhd

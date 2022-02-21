@@ -42,6 +42,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+use ieee.math_real.all;
+use ieee.float_pkg.all;
+
 use work.ntm_arithmetic_pkg.all;
 use work.ntm_math_pkg.all;
 
@@ -124,10 +127,10 @@ architecture ntm_tensor_product_architecture of ntm_tensor_product is
   constant TWO_CONTROL   : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, CONTROL_SIZE));
   constant THREE_CONTROL : std_logic_vector(CONTROL_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, CONTROL_SIZE));
 
-  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(0, DATA_SIZE));
-  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(1, DATA_SIZE));
-  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(2, DATA_SIZE));
-  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_unsigned(3, DATA_SIZE));
+  constant ZERO_DATA  : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.0));
+  constant ONE_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(1.0));
+  constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(2.0));
+  constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(3.0));
 
   constant FULL  : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '1');
   constant EMPTY : std_logic_vector(DATA_SIZE-1 downto 0) := (others => '0');
@@ -426,7 +429,7 @@ begin
                 tensor_product_int(i, j, k) := ZERO_DATA;
 
                 for m in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-                  tensor_product_int(i, j, k) := std_logic_vector(signed(tensor_product_int(i, j, k)) + (resize(signed(tensor_a_int(i, j, m)), DATA_SIZE/2)*resize(signed(tensor_b_int(i, m, k)), DATA_SIZE/2)));
+                  tensor_product_int(i, j, k) := std_logic_vector(to_float(to_real(to_float(tensor_product_int(i, j, k))) + (to_real(to_float(tensor_a_int(i, j, m)))*to_real(to_float(tensor_b_int(i, m, k))))));
                 end loop;
 
                 tensor_out_int(i, j, k) <= tensor_product_int(i, j, k);
