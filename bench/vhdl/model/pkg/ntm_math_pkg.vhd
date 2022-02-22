@@ -1982,7 +1982,7 @@ package body ntm_math_pkg is
     end loop;
 
     for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
-      vector_output(i) := std_logic_vector(to_float(to_real(to_float(data_p_int(i)))/(to_real(to_float(data_a_int))*to_real(to_float(data_b_int)))));
+      vector_output(i) := std_logic_vector(to_float(to_real(to_float(data_p_int(i)))/(sqrt(to_real(to_float(data_a_int)))*sqrt(to_real(to_float(data_b_int))))));
     end loop;
 
     return vector_output;
@@ -2004,6 +2004,10 @@ package body ntm_math_pkg is
 
     for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
       vector_output(i) := std_logic_vector(to_float(to_real(to_float(vector_output(i))) + (to_real(to_float(vector_input(i)))*to_real(to_float(vector_input(i))))));
+    end loop;
+
+    for i in 0 to to_integer(unsigned(LENGTH_IN))-1 loop
+      vector_output(i) := std_logic_vector(to_float(sqrt(to_real(to_float(vector_output(i))))));
     end loop;
 
     return vector_output;

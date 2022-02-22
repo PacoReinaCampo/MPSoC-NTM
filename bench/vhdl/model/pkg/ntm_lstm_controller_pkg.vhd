@@ -801,6 +801,96 @@ package ntm_lstm_controller_pkg is
   -- Controller
   -----------------------------------------------------------------------
 
+  -----------------------------------------------------------------------
+  -- CONVOLUTIONAL
+  -----------------------------------------------------------------------
+
+  function function_ntm_activation_convolutional_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_ntm_input_convolutional_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_ntm_output_convolutional_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_ntm_forget_convolutional_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_ntm_state_convolutional_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_s_input : vector_buffer;
+    vector_i_input : vector_buffer;
+    vector_f_input : vector_buffer;
+    vector_a_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_ntm_hidden_convolutional_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_s_input : vector_buffer;
+    vector_o_input : vector_buffer
+    ) return vector_buffer;
+
   function function_ntm_lstm_convolutional_controller (
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -815,6 +905,96 @@ package ntm_lstm_controller_pkg is
     vector_x_input : vector_buffer;
     matrix_r_input : matrix_buffer;
     vector_h_input : vector_buffer
+    ) return vector_buffer;
+
+  -----------------------------------------------------------------------
+  -- STANDARD
+  -----------------------------------------------------------------------
+
+  function function_ntm_activation_standard_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_ntm_input_standard_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_ntm_output_standard_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_ntm_forget_standard_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_ntm_state_standard_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_s_input : vector_buffer;
+    vector_i_input : vector_buffer;
+    vector_f_input : vector_buffer;
+    vector_a_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_ntm_hidden_standard_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_s_input : vector_buffer;
+    vector_o_input : vector_buffer
     ) return vector_buffer;
 
   function function_ntm_lstm_standard_controller (
@@ -1133,6 +1313,398 @@ package body ntm_lstm_controller_pkg is
   -- Controller
   -----------------------------------------------------------------------
 
+  -----------------------------------------------------------------------
+  -- CONVOLUTIONAL
+  -----------------------------------------------------------------------
+
+  function function_ntm_activation_convolutional_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer is
+
+    variable tensor_product : matrix_buffer;
+    variable matrix_product : vector_buffer;
+    variable vector_adder   : vector_buffer;
+
+    variable vector_a_output : vector_buffer;
+
+  begin
+
+    -- a(t;l) = tanh(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+
+    -- Data Inputs
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := ZERO_DATA;
+    end loop;
+
+    -- K(i;l;k)·r(t;i;k)
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        tensor_product(i, l) := ZERO_DATA;
+
+        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+          for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+            tensor_product(i, l) := std_logic_vector(to_float(to_real(to_float(tensor_product(i, l))) + (to_real(to_float(tensor_k_input(i, l, m)))*to_real(to_float(matrix_r_input(i, m))))));
+          end loop;
+        end loop;
+      end loop;
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(tensor_product(i, l)))));
+      end loop;
+    end loop;
+
+    -- W(l;x)·x(t;x)
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
+
+      for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_w_input(l, x)))*to_real(to_float(vector_x_input(x))))));
+      end loop;
+    end loop;
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
+    end loop;
+
+    -- U(l;l)·h(t-1;l)
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
+
+      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_u_input(l, m)))*to_real(to_float(vector_h_input(m))))));
+      end loop;
+    end loop;
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
+    end loop;
+
+    -- tanh(i(t;l))
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_a_output(l) := std_logic_vector(to_float(tanh(to_real(to_float(vector_adder(l))))));
+    end loop;
+
+    return vector_a_output;
+  end function function_ntm_activation_convolutional_gate_vector;
+
+  function function_ntm_input_convolutional_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer is
+
+    variable tensor_product : matrix_buffer;
+    variable matrix_product : vector_buffer;
+    variable vector_adder   : vector_buffer;
+
+    variable vector_i_output : vector_buffer;
+
+  begin
+
+    -- i(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+
+    -- Data Inputs
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := ZERO_DATA;
+    end loop;
+
+    -- K(i;l;k)·r(t;i;k)
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        tensor_product(i, l) := ZERO_DATA;
+
+        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+          for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+            tensor_product(i, l) := std_logic_vector(to_float(to_real(to_float(tensor_product(i, l))) + (to_real(to_float(tensor_k_input(i, l, m)))*to_real(to_float(matrix_r_input(i, m))))));
+          end loop;
+        end loop;
+      end loop;
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(tensor_product(i, l)))));
+      end loop;
+    end loop;
+
+    -- W(l;x)·x(t;x)
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
+
+      for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_w_input(l, x)))*to_real(to_float(vector_x_input(x))))));
+      end loop;
+    end loop;
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
+    end loop;
+
+    -- U(l;l)·h(t-1;l)
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
+
+      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_u_input(l, m)))*to_real(to_float(vector_h_input(m))))));
+      end loop;
+    end loop;
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
+    end loop;
+
+    -- logistic(i(t;l))
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_i_output(l) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(vector_adder(l)))))));
+    end loop;
+
+    return vector_i_output;
+  end function function_ntm_input_convolutional_gate_vector;
+
+  function function_ntm_output_convolutional_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer is
+
+    variable tensor_product : matrix_buffer;
+    variable matrix_product : vector_buffer;
+    variable vector_adder   : vector_buffer;
+
+    variable vector_o_output : vector_buffer;
+
+  begin
+
+    -- o(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+
+    -- Data Inputs
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := ZERO_DATA;
+    end loop;
+
+    -- K(i;l;k)·r(t;i;k)
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        tensor_product(i, l) := ZERO_DATA;
+
+        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+          for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+            tensor_product(i, l) := std_logic_vector(to_float(to_real(to_float(tensor_product(i, l))) + (to_real(to_float(tensor_k_input(i, l, m)))*to_real(to_float(matrix_r_input(i, m))))));
+          end loop;
+        end loop;
+      end loop;
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(tensor_product(i, l)))));
+      end loop;
+    end loop;
+
+    -- W(l;x)·x(t;x)
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
+
+      for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_w_input(l, x)))*to_real(to_float(vector_x_input(x))))));
+      end loop;
+    end loop;
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
+    end loop;
+
+    -- U(l;l)·h(t-1;l)
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
+
+      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_u_input(l, m)))*to_real(to_float(vector_h_input(m))))));
+      end loop;
+    end loop;
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
+    end loop;
+
+    -- logistic(o(t;l))
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_o_output(l) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(vector_adder(l)))))));
+    end loop;
+
+    return vector_o_output;
+  end function function_ntm_output_convolutional_gate_vector;
+
+  function function_ntm_forget_convolutional_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer is
+
+    variable tensor_product : matrix_buffer;
+    variable matrix_product : vector_buffer;
+    variable vector_adder   : vector_buffer;
+
+    variable vector_f_output : vector_buffer;
+
+  begin
+
+    -- f(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+
+    -- Data Inputs
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := ZERO_DATA;
+    end loop;
+
+    -- K(i;l;k)·r(t;i;k)
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        tensor_product(i, l) := ZERO_DATA;
+
+        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+          for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+            tensor_product(i, l) := std_logic_vector(to_float(to_real(to_float(tensor_product(i, l))) + (to_real(to_float(tensor_k_input(i, l, m)))*to_real(to_float(matrix_r_input(i, m))))));
+          end loop;
+        end loop;
+      end loop;
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(tensor_product(i, l)))));
+      end loop;
+    end loop;
+
+    -- W(l;x)·x(t;x)
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
+
+      for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_w_input(l, x)))*to_real(to_float(vector_x_input(x))))));
+      end loop;
+    end loop;
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
+    end loop;
+
+    -- U(l;l)·h(t-1;l)
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
+
+      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_u_input(l, m)))*to_real(to_float(vector_h_input(m))))));
+      end loop;
+    end loop;
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
+    end loop;
+
+    -- logistic(f(t;l))
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_f_output(l) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(vector_adder(l)))))));
+    end loop;
+
+    return vector_f_output;
+  end function function_ntm_forget_convolutional_gate_vector;
+
+  function function_ntm_state_convolutional_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_s_input : vector_buffer;
+    vector_i_input : vector_buffer;
+    vector_f_input : vector_buffer;
+    vector_a_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_s_output : vector_buffer;
+
+  begin
+
+    -- s(t;l) = f(t;l) o s(t-1;l) + i(t;l) o a(t;l)
+
+    -- s(t=0;l) = 0
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_s_output(l) := std_logic_vector(to_float((to_real(to_float(vector_f_input(l)))*to_real(to_float(vector_s_input(l)))) + (to_real(to_float(vector_i_input(l)))*to_real(to_float(vector_a_input(l))))));
+    end loop;
+
+    return vector_s_output;
+  end function function_ntm_state_convolutional_gate_vector;
+
+  function function_ntm_hidden_convolutional_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_s_input : vector_buffer;
+    vector_o_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_h_output : vector_buffer;
+
+  begin
+
+    -- h(t;l) = o(t;l) o tanh(s(t;l))
+
+    -- h(t=0;l) = 0; h(t;l=0) = 0
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_h_output(l) := std_logic_vector(to_float(to_real(to_float(vector_o_input(l)))*tanh(to_real(to_float(vector_s_input(l))))));
+    end loop;
+
+    return vector_h_output;
+  end function function_ntm_hidden_convolutional_gate_vector;
+
   function function_ntm_lstm_convolutional_controller (
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1149,71 +1721,518 @@ package body ntm_lstm_controller_pkg is
     vector_h_input : vector_buffer
     ) return vector_buffer is
 
-    variable tensor_product : vector_buffer;
-    variable matrix_product : vector_buffer;
-    variable vector_adder   : vector_buffer;
+    variable vector_a_int : vector_buffer;
+    variable vector_f_int : vector_buffer;
+    variable vector_i_int : vector_buffer;
+    variable vector_o_int : vector_buffer;
+
+    variable vector_s_in_int  : vector_buffer;
+    variable vector_s_out_int : vector_buffer;
 
     variable vector_h_output : vector_buffer;
 
   begin
 
-    -- h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(t;l))
+    -- VECTOR_ACTIVATION_STATE
+
+    -- a(t;l) = tanh(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+    vector_a_int := function_ntm_activation_convolutional_gate_vector (
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+
+      matrix_w_input => matrix_w_input,
+      tensor_k_input => tensor_k_input,
+      matrix_u_input => matrix_u_input,
+      vector_b_input => vector_b_input,
+
+      vector_x_input => vector_x_input,
+      matrix_r_input => matrix_r_input,
+      vector_h_input => vector_h_input
+      );
+
+    -- VECTOR_FORGET_STATE
+
+    -- f(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+    vector_f_int := function_ntm_forget_convolutional_gate_vector (
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+
+      matrix_w_input => matrix_w_input,
+      tensor_k_input => tensor_k_input,
+      matrix_u_input => matrix_u_input,
+      vector_b_input => vector_b_input,
+
+      vector_x_input => vector_x_input,
+      matrix_r_input => matrix_r_input,
+      vector_h_input => vector_h_input
+      );
+
+    -- VECTOR_INPUT_STATE
+
+    -- i(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+    vector_i_int := function_ntm_input_convolutional_gate_vector (
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+
+      matrix_w_input => matrix_w_input,
+      tensor_k_input => tensor_k_input,
+      matrix_u_input => matrix_u_input,
+      vector_b_input => vector_b_input,
+
+      vector_x_input => vector_x_input,
+      matrix_r_input => matrix_r_input,
+      vector_h_input => vector_h_input
+      );
+
+    -- VECTOR_STATE_STATE
+
+    -- s(t;l) = f(t;l) o s(t-1;l) + i(t;l) o a(t;l)
+    -- s(t=0;l) = 0
+    vector_s_out_int := function_ntm_state_convolutional_gate_vector (
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+
+      vector_s_input => vector_s_in_int,
+      vector_i_input => vector_i_int,
+      vector_f_input => vector_f_int,
+      vector_a_input => vector_a_int
+      );
+
+    -- VECTOR_OUTPUT_GATE
+
+    -- o(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + U(l-1;l-1)*h(t;l-1) + b(t;l))
+    vector_o_int := function_ntm_output_convolutional_gate_vector (
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+
+      matrix_w_input => matrix_w_input,
+      tensor_k_input => tensor_k_input,
+      matrix_u_input => matrix_u_input,
+      vector_b_input => vector_b_input,
+
+      vector_x_input => vector_x_input,
+      matrix_r_input => matrix_r_input,
+      vector_h_input => vector_h_input
+      );
+
+    -- VECTOR_HIDDEN_GATE
+
+    -- h(t;l) = o(t;l) o tanh(s(t;l))
+    -- h(t=0;l) = 0; h(t;l=0) = 0
+    vector_h_output := function_ntm_hidden_convolutional_gate_vector (
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+
+      vector_s_input => vector_s_out_int,
+      vector_o_input => vector_o_int
+      );
+
+    return vector_h_output;
+  end function function_ntm_lstm_convolutional_controller;
+
+  -----------------------------------------------------------------------
+  -- STANDARD
+  -----------------------------------------------------------------------
+
+  function function_ntm_activation_standard_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer is
+
+    variable tensor_product : matrix_buffer;
+    variable matrix_product : vector_buffer;
+    variable vector_adder   : vector_buffer;
+
+    variable vector_a_output : vector_buffer;
+
+  begin
+
+    -- a(t;l) = tanh(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
 
     -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(i) := ZERO_DATA;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := ZERO_DATA;
     end loop;
 
     -- K(i;l;k)·r(t;i;k)
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-          tensor_product(j) := ZERO_DATA;
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        tensor_product(i, l) := ZERO_DATA;
 
+        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
           for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-            tensor_product(j) := std_logic_vector(to_float(to_real(to_float(tensor_product(j))) + (to_real(to_float(tensor_k_input(i, j, m)))*to_real(to_float(matrix_r_input(m, k))))));
+            tensor_product(i, l) := std_logic_vector(to_float(to_real(to_float(tensor_product(i, l))) + (to_real(to_float(tensor_k_input(i, l, m)))*to_real(to_float(matrix_r_input(i, m))))));
           end loop;
         end loop;
       end loop;
     end loop;
 
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(i) := std_logic_vector(to_float(to_real(to_float(vector_adder(i))) + to_real(to_float(tensor_product(i)))));
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(tensor_product(i, l)))));
+      end loop;
     end loop;
 
     -- W(l;x)·x(t;x)
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      matrix_product(i) := ZERO_DATA;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
 
-      for m in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
-        matrix_product(i) := std_logic_vector(to_float(to_real(to_float(matrix_product(i))) + (to_real(to_float(matrix_w_input(i, m)))*to_real(to_float(vector_x_input(m))))));
+      for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_w_input(l, x)))*to_real(to_float(vector_x_input(x))))));
       end loop;
     end loop;
 
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(i) := std_logic_vector(to_float(to_real(to_float(vector_adder(i))) + to_real(to_float(matrix_product(i)))));
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
     end loop;
 
     -- U(l;l)·h(t-1;l)
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      matrix_product(i) := ZERO_DATA;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
 
       for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        matrix_product(i) := std_logic_vector(to_float(to_real(to_float(matrix_product(i))) + (to_real(to_float(matrix_u_input(i, m)))*to_real(to_float(vector_h_input(m))))));
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_u_input(l, m)))*to_real(to_float(vector_h_input(m))))));
       end loop;
     end loop;
 
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(i) := std_logic_vector(to_float(to_real(to_float(vector_adder(i))) + to_real(to_float(matrix_product(i)))));
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
     end loop;
 
-    -- tanh
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_h_output(i) := std_logic_vector(to_float(tanh(to_real(to_float(vector_adder(i))))));
+    -- tanh(i(t;l))
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_a_output(l) := std_logic_vector(to_float(tanh(to_real(to_float(vector_adder(l))))));
+    end loop;
+
+    return vector_a_output;
+  end function function_ntm_activation_standard_gate_vector;
+
+  function function_ntm_input_standard_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer is
+
+    variable tensor_product : matrix_buffer;
+    variable matrix_product : vector_buffer;
+    variable vector_adder   : vector_buffer;
+
+    variable vector_i_output : vector_buffer;
+
+  begin
+
+    -- i(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
+
+    -- Data Inputs
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := ZERO_DATA;
+    end loop;
+
+    -- K(i;l;k)·r(t;i;k)
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        tensor_product(i, l) := ZERO_DATA;
+
+        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+          for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+            tensor_product(i, l) := std_logic_vector(to_float(to_real(to_float(tensor_product(i, l))) + (to_real(to_float(tensor_k_input(i, l, m)))*to_real(to_float(matrix_r_input(i, m))))));
+          end loop;
+        end loop;
+      end loop;
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(tensor_product(i, l)))));
+      end loop;
+    end loop;
+
+    -- W(l;x)·x(t;x)
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
+
+      for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_w_input(l, x)))*to_real(to_float(vector_x_input(x))))));
+      end loop;
+    end loop;
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
+    end loop;
+
+    -- U(l;l)·h(t-1;l)
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
+
+      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_u_input(l, m)))*to_real(to_float(vector_h_input(m))))));
+      end loop;
+    end loop;
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
+    end loop;
+
+    -- logistic(i(t;l))
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_i_output(l) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(vector_adder(l)))))));
+    end loop;
+
+    return vector_i_output;
+  end function function_ntm_input_standard_gate_vector;
+
+  function function_ntm_output_standard_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer is
+
+    variable tensor_product : matrix_buffer;
+    variable matrix_product : vector_buffer;
+    variable vector_adder   : vector_buffer;
+
+    variable vector_o_output : vector_buffer;
+
+  begin
+
+    -- o(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
+
+    -- Data Inputs
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := ZERO_DATA;
+    end loop;
+
+    -- K(i;l;k)·r(t;i;k)
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        tensor_product(i, l) := ZERO_DATA;
+
+        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+          for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+            tensor_product(i, l) := std_logic_vector(to_float(to_real(to_float(tensor_product(i, l))) + (to_real(to_float(tensor_k_input(i, l, m)))*to_real(to_float(matrix_r_input(i, m))))));
+          end loop;
+        end loop;
+      end loop;
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(tensor_product(i, l)))));
+      end loop;
+    end loop;
+
+    -- W(l;x)·x(t;x)
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
+
+      for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_w_input(l, x)))*to_real(to_float(vector_x_input(x))))));
+      end loop;
+    end loop;
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
+    end loop;
+
+    -- U(l;l)·h(t-1;l)
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
+
+      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_u_input(l, m)))*to_real(to_float(vector_h_input(m))))));
+      end loop;
+    end loop;
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
+    end loop;
+
+    -- logistic(o(t;l))
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_o_output(l) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(vector_adder(l)))))));
+    end loop;
+
+    return vector_o_output;
+  end function function_ntm_output_standard_gate_vector;
+
+  function function_ntm_forget_standard_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer;
+    matrix_r_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer is
+
+    variable tensor_product : matrix_buffer;
+    variable matrix_product : vector_buffer;
+    variable vector_adder   : vector_buffer;
+
+    variable vector_f_output : vector_buffer;
+
+  begin
+
+    -- f(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
+
+    -- Data Inputs
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := ZERO_DATA;
+    end loop;
+
+    -- K(i;l;k)·r(t;i;k)
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        tensor_product(i, l) := ZERO_DATA;
+
+        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+          for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+            tensor_product(i, l) := std_logic_vector(to_float(to_real(to_float(tensor_product(i, l))) + (to_real(to_float(tensor_k_input(i, l, m)))*to_real(to_float(matrix_r_input(i, m))))));
+          end loop;
+        end loop;
+      end loop;
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(tensor_product(i, l)))));
+      end loop;
+    end loop;
+
+    -- W(l;x)·x(t;x)
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
+
+      for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_w_input(l, x)))*to_real(to_float(vector_x_input(x))))));
+      end loop;
+    end loop;
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
+    end loop;
+
+    -- U(l;l)·h(t-1;l)
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
+
+      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_u_input(l, m)))*to_real(to_float(vector_h_input(m))))));
+      end loop;
+    end loop;
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
+    end loop;
+
+    -- logistic(f(t;l))
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_f_output(l) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(vector_adder(l)))))));
+    end loop;
+
+    return vector_f_output;
+  end function function_ntm_forget_standard_gate_vector;
+
+  function function_ntm_state_standard_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_s_input : vector_buffer;
+    vector_i_input : vector_buffer;
+    vector_f_input : vector_buffer;
+    vector_a_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_s_output : vector_buffer;
+
+  begin
+
+    -- s(t;l) = f(t;l) o s(t-1;l) + i(t;l) o a(t;l)
+
+    -- s(t=0;l) = 0
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_s_output(l) := std_logic_vector(to_float((to_real(to_float(vector_f_input(l)))*to_real(to_float(vector_s_input(l)))) + (to_real(to_float(vector_i_input(l)))*to_real(to_float(vector_a_input(l))))));
+    end loop;
+
+    return vector_s_output;
+  end function function_ntm_state_standard_gate_vector;
+
+  function function_ntm_hidden_standard_gate_vector (
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_s_input : vector_buffer;
+    vector_o_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_h_output : vector_buffer;
+
+  begin
+
+    -- h(t;l) = o(t;l) o tanh(s(t;l))
+
+    -- h(t=0;l) = 0; h(t;l=0) = 0
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_h_output(l) := std_logic_vector(to_float(to_real(to_float(vector_o_input(l)))*tanh(to_real(to_float(vector_s_input(l))))));
     end loop;
 
     return vector_h_output;
-  end function function_ntm_lstm_convolutional_controller;
+  end function function_ntm_hidden_standard_gate_vector;
 
   function function_ntm_lstm_standard_controller (
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1231,68 +2250,123 @@ package body ntm_lstm_controller_pkg is
     vector_h_input : vector_buffer
     ) return vector_buffer is
 
-    variable tensor_product : vector_buffer;
-    variable matrix_product : vector_buffer;
-    variable vector_adder   : vector_buffer;
+    variable vector_a_int : vector_buffer;
+    variable vector_f_int : vector_buffer;
+    variable vector_i_int : vector_buffer;
+    variable vector_o_int : vector_buffer;
+
+    variable vector_s_in_int  : vector_buffer;
+    variable vector_s_out_int : vector_buffer;
 
     variable vector_h_output : vector_buffer;
 
   begin
 
-    -- h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + b(t;l))
+    -- VECTOR_ACTIVATION_STATE
 
-    -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(i) := ZERO_DATA;
-    end loop;
+    -- a(t;l) = tanh(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
+    vector_a_int := function_ntm_activation_standard_gate_vector (
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
 
-    -- K(i;l;k)·r(t;i;k)
-    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-          tensor_product(j) := ZERO_DATA;
+      matrix_w_input => matrix_w_input,
+      tensor_k_input => tensor_k_input,
+      matrix_u_input => matrix_u_input,
+      vector_b_input => vector_b_input,
 
-          for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-            tensor_product(j) := std_logic_vector(to_float(to_real(to_float(tensor_product(j))) + (to_real(to_float(tensor_k_input(i, j, m)))*to_real(to_float(matrix_r_input(m, k))))));
-          end loop;
-        end loop;
-      end loop;
-    end loop;
+      vector_x_input => vector_x_input,
+      matrix_r_input => matrix_r_input,
+      vector_h_input => vector_h_input
+      );
 
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(i) := std_logic_vector(to_float(to_real(to_float(vector_adder(i))) + to_real(to_float(tensor_product(i)))));
-    end loop;
+    -- VECTOR_FORGET_STATE
 
-    -- W(l;x)·x(t;x)
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      matrix_product(i) := ZERO_DATA;
+    -- f(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
+    vector_f_int := function_ntm_forget_standard_gate_vector (
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
 
-      for m in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
-        matrix_product(i) := std_logic_vector(to_float(to_real(to_float(matrix_product(i))) + (to_real(to_float(matrix_w_input(i, m)))*to_real(to_float(vector_x_input(m))))));
-      end loop;
-    end loop;
+      matrix_w_input => matrix_w_input,
+      tensor_k_input => tensor_k_input,
+      matrix_u_input => matrix_u_input,
+      vector_b_input => vector_b_input,
 
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(i) := std_logic_vector(to_float(to_real(to_float(vector_adder(i))) + to_real(to_float(matrix_product(i)))));
-    end loop;
+      vector_x_input => vector_x_input,
+      matrix_r_input => matrix_r_input,
+      vector_h_input => vector_h_input
+      );
 
-    -- U(l;l)·h(t-1;l)
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      matrix_product(i) := ZERO_DATA;
+    -- VECTOR_INPUT_STATE
 
-      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        matrix_product(i) := std_logic_vector(to_float(to_real(to_float(matrix_product(i))) + (to_real(to_float(matrix_u_input(i, m)))*to_real(to_float(vector_h_input(m))))));
-      end loop;
-    end loop;
+    -- i(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
+    vector_i_int := function_ntm_input_standard_gate_vector (
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
 
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(i) := std_logic_vector(to_float(to_real(to_float(vector_adder(i))) + to_real(to_float(matrix_product(i)))));
-    end loop;
+      matrix_w_input => matrix_w_input,
+      tensor_k_input => tensor_k_input,
+      matrix_u_input => matrix_u_input,
+      vector_b_input => vector_b_input,
 
-    -- tanh
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_h_output(i) := std_logic_vector(to_float(tanh(to_real(to_float(vector_adder(i))))));
-    end loop;
+      vector_x_input => vector_x_input,
+      matrix_r_input => matrix_r_input,
+      vector_h_input => vector_h_input
+      );
+
+    -- VECTOR_STATE_STATE
+
+    -- s(t;l) = f(t;l) o s(t-1;l) + i(t;l) o a(t;l)
+    -- s(t=0;l) = 0
+    vector_s_out_int := function_ntm_state_standard_gate_vector (
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+
+      vector_s_input => vector_s_in_int,
+      vector_i_input => vector_i_int,
+      vector_f_input => vector_f_int,
+      vector_a_input => vector_a_int
+      );
+
+    -- VECTOR_OUTPUT_GATE
+
+    -- o(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + U(l-1;l-1)·h(t;l-1) + b(t;l))
+    vector_o_int := function_ntm_output_standard_gate_vector (
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+
+      matrix_w_input => matrix_w_input,
+      tensor_k_input => tensor_k_input,
+      matrix_u_input => matrix_u_input,
+      vector_b_input => vector_b_input,
+
+      vector_x_input => vector_x_input,
+      matrix_r_input => matrix_r_input,
+      vector_h_input => vector_h_input
+      );
+
+    -- VECTOR_HIDDEN_GATE
+
+    -- h(t;l) = o(t;l) o tanh(s(t;l))
+    -- h(t=0;l) = 0; h(t;l=0) = 0
+    vector_h_output := function_ntm_hidden_standard_gate_vector (
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+
+      vector_s_input => vector_s_out_int,
+      vector_o_input => vector_o_int
+      );
 
     return vector_h_output;
   end function function_ntm_lstm_standard_controller;

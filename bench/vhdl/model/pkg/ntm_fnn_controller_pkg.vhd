@@ -310,6 +310,10 @@ package body ntm_fnn_controller_pkg is
   -- Controller
   -----------------------------------------------------------------------
 
+  -----------------------------------------------------------------------
+  -- CONVOLUTIONAL
+  -----------------------------------------------------------------------
+
   function function_ntm_fnn_convolutional_controller (
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -326,7 +330,7 @@ package body ntm_fnn_controller_pkg is
     vector_h_input : vector_buffer
     ) return vector_buffer is
 
-    variable tensor_product : vector_buffer;
+    variable tensor_product : matrix_buffer;
     variable matrix_product : vector_buffer;
     variable vector_adder   : vector_buffer;
 
@@ -337,60 +341,66 @@ package body ntm_fnn_controller_pkg is
     -- h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(t;l))
 
     -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(i) := ZERO_DATA;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := ZERO_DATA;
     end loop;
 
     -- K(i;l;k)·r(t;i;k)
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-          tensor_product(j) := ZERO_DATA;
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        tensor_product(i, l) := ZERO_DATA;
 
+        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
           for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-            tensor_product(j) := std_logic_vector(to_float(to_real(to_float(tensor_product(j))) + (to_real(to_float(tensor_k_input(i, j, m)))*to_real(to_float(matrix_r_input(m, k))))));
+            tensor_product(i, l) := std_logic_vector(to_float(to_real(to_float(tensor_product(i, l))) + (to_real(to_float(tensor_k_input(i, l, m)))*to_real(to_float(matrix_r_input(i, m))))));
           end loop;
         end loop;
       end loop;
     end loop;
 
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(i) := std_logic_vector(to_float(to_real(to_float(vector_adder(i))) + to_real(to_float(tensor_product(i)))));
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(tensor_product(i, l)))));
+      end loop;
     end loop;
 
     -- W(l;x)·x(t;x)
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      matrix_product(i) := ZERO_DATA;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
 
-      for m in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
-        matrix_product(i) := std_logic_vector(to_float(to_real(to_float(matrix_product(i))) + (to_real(to_float(matrix_w_input(i, m)))*to_real(to_float(vector_x_input(m))))));
+      for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_w_input(l, x)))*to_real(to_float(vector_x_input(x))))));
       end loop;
     end loop;
 
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(i) := std_logic_vector(to_float(to_real(to_float(vector_adder(i))) + to_real(to_float(matrix_product(i)))));
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
     end loop;
 
     -- U(l;l)·h(t-1;l)
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      matrix_product(i) := ZERO_DATA;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
 
       for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        matrix_product(i) := std_logic_vector(to_float(to_real(to_float(matrix_product(i))) + (to_real(to_float(matrix_u_input(i, m)))*to_real(to_float(vector_h_input(m))))));
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_u_input(l, m)))*to_real(to_float(vector_h_input(m))))));
       end loop;
     end loop;
 
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(i) := std_logic_vector(to_float(to_real(to_float(vector_adder(i))) + to_real(to_float(matrix_product(i)))));
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
     end loop;
 
-    -- tanh
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_h_output(i) := std_logic_vector(to_float(tanh(to_real(to_float(vector_adder(i))))));
+    -- logistic(h(t;l))
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_h_output(l) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(vector_adder(l)))))));
     end loop;
 
     return vector_h_output;
   end function function_ntm_fnn_convolutional_controller;
+
+  -----------------------------------------------------------------------
+  -- STANDARD
+  -----------------------------------------------------------------------
 
   function function_ntm_fnn_standard_controller (
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -408,7 +418,7 @@ package body ntm_fnn_controller_pkg is
     vector_h_input : vector_buffer
     ) return vector_buffer is
 
-    variable tensor_product : vector_buffer;
+    variable tensor_product : matrix_buffer;
     variable matrix_product : vector_buffer;
     variable vector_adder   : vector_buffer;
 
@@ -416,59 +426,61 @@ package body ntm_fnn_controller_pkg is
 
   begin
 
-    -- h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + b(t;l))
+    -- h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(t;l))
 
     -- Data Inputs
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(i) := ZERO_DATA;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := ZERO_DATA;
     end loop;
 
     -- K(i;l;k)·r(t;i;k)
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
-      for j in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-          tensor_product(j) := ZERO_DATA;
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        tensor_product(i, l) := ZERO_DATA;
 
+        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
           for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-            tensor_product(j) := std_logic_vector(to_float(to_real(to_float(tensor_product(j))) + (to_real(to_float(tensor_k_input(i, j, m)))*to_real(to_float(matrix_r_input(m, k))))));
+            tensor_product(i, l) := std_logic_vector(to_float(to_real(to_float(tensor_product(i, l))) + (to_real(to_float(tensor_k_input(i, l, m)))*to_real(to_float(matrix_r_input(i, m))))));
           end loop;
         end loop;
       end loop;
     end loop;
 
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(i) := std_logic_vector(to_float(to_real(to_float(vector_adder(i))) + to_real(to_float(tensor_product(i)))));
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(tensor_product(i, l)))));
+      end loop;
     end loop;
 
     -- W(l;x)·x(t;x)
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      matrix_product(i) := ZERO_DATA;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
 
-      for m in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
-        matrix_product(i) := std_logic_vector(to_float(to_real(to_float(matrix_product(i))) + (to_real(to_float(matrix_w_input(i, m)))*to_real(to_float(vector_x_input(m))))));
+      for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_w_input(l, x)))*to_real(to_float(vector_x_input(x))))));
       end loop;
     end loop;
 
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(i) := std_logic_vector(to_float(to_real(to_float(vector_adder(i))) + to_real(to_float(matrix_product(i)))));
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
     end loop;
 
     -- U(l;l)·h(t-1;l)
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      matrix_product(i) := ZERO_DATA;
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      matrix_product(l) := ZERO_DATA;
 
       for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        matrix_product(i) := std_logic_vector(to_float(to_real(to_float(matrix_product(i))) + (to_real(to_float(matrix_u_input(i, m)))*to_real(to_float(vector_h_input(m))))));
+        matrix_product(l) := std_logic_vector(to_float(to_real(to_float(matrix_product(l))) + (to_real(to_float(matrix_u_input(l, m)))*to_real(to_float(vector_h_input(m))))));
       end loop;
     end loop;
 
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_adder(i) := std_logic_vector(to_float(to_real(to_float(vector_adder(i))) + to_real(to_float(matrix_product(i)))));
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_adder(l) := std_logic_vector(to_float(to_real(to_float(vector_adder(l))) + to_real(to_float(matrix_product(l)))));
     end loop;
 
-    -- tanh
-    for i in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_h_output(i) := std_logic_vector(to_float(tanh(to_real(to_float(vector_adder(i))))));
+    -- logistic(h(t;l))
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_h_output(l) := std_logic_vector(to_float(1.0/(1.0+1.0/exp(to_real(to_float(vector_adder(l)))))));
     end loop;
 
     return vector_h_output;
