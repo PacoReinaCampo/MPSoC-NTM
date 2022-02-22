@@ -64,6 +64,8 @@ package ntm_lstm_controller_pkg is
   constant TWO_DATA   : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(2.0));
   constant THREE_DATA : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(3.0));
 
+  constant LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0) := std_logic_vector(to_float(0.001));
+
   -----------------------------------------------------------------------
   -- Types
   -----------------------------------------------------------------------
@@ -72,6 +74,7 @@ package ntm_lstm_controller_pkg is
   type vector_buffer is array (CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
   type matrix_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
   type tensor_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
+  type array4_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
   -----------------------------------------------------------------------
   -- Components
@@ -797,6 +800,25 @@ package ntm_lstm_controller_pkg is
   -- Functions
   -----------------------------------------------------------------------
 
+  function function_vector_controller_differentiation (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    vector_input : matrix_buffer
+    ) return matrix_buffer;
+
+  function function_matrix_controller_differentiation (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    matrix_input : tensor_buffer
+    ) return tensor_buffer;
+
   -----------------------------------------------------------------------
   -- Controller
   -----------------------------------------------------------------------
@@ -1018,288 +1040,308 @@ package ntm_lstm_controller_pkg is
   -----------------------------------------------------------------------
 
   function function_ntm_lstm_w_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer
-    ) return matrix_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer
+    ) return tensor_buffer;
 
   function function_ntm_lstm_k_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer
-    ) return tensor_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer
+    ) return array4_buffer;
 
   function function_ntm_lstm_u_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer
-    ) return matrix_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer
+    ) return tensor_buffer;
 
   function function_ntm_lstm_b_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer
-    ) return vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer
+    ) return matrix_buffer;
 
   function function_ntm_lstm_activation_w_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return matrix_buffer;
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return tensor_buffer;
 
   function function_ntm_lstm_activation_k_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return tensor_buffer;
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return array4_buffer;
 
   function function_ntm_lstm_activation_u_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return matrix_buffer;
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return tensor_buffer;
 
   function function_ntm_lstm_activation_b_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return vector_buffer;
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return matrix_buffer;
 
   function function_ntm_lstm_forget_w_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return matrix_buffer;
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return tensor_buffer;
 
   function function_ntm_lstm_forget_k_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return tensor_buffer;
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return array4_buffer;
 
   function function_ntm_lstm_forget_u_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return matrix_buffer;
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return tensor_buffer;
 
   function function_ntm_lstm_forget_b_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return vector_buffer;
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return matrix_buffer;
 
   function function_ntm_lstm_input_w_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return matrix_buffer;
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return tensor_buffer;
 
   function function_ntm_lstm_input_k_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return tensor_buffer;
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return array4_buffer;
 
   function function_ntm_lstm_input_u_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return matrix_buffer;
-
-  function function_ntm_lstm_input_b_trainer (
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
-
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return vector_buffer;
-
-  function function_ntm_lstm_output_w_trainer (
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
-
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return matrix_buffer;
-
-  function function_ntm_lstm_output_k_trainer (
-    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
-
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
     ) return tensor_buffer;
 
-  function function_ntm_lstm_output_u_trainer (
+  function function_ntm_lstm_input_b_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
     ) return matrix_buffer;
 
-  function function_ntm_lstm_output_b_trainer (
+  function function_ntm_lstm_output_w_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return vector_buffer;
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return tensor_buffer;
+
+  function function_ntm_lstm_output_k_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
+
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return array4_buffer;
+
+  function function_ntm_lstm_output_u_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
+
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return tensor_buffer;
+
+  function function_ntm_lstm_output_b_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
+
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return matrix_buffer;
 
 end ntm_lstm_controller_pkg;
 
@@ -1308,6 +1350,59 @@ package body ntm_lstm_controller_pkg is
   -----------------------------------------------------------------------
   -- Functions
   -----------------------------------------------------------------------
+
+  function function_vector_controller_differentiation (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    vector_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable vector_output : matrix_buffer;
+  begin
+    -- Data Inputs
+    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        if (t = 0) then
+          vector_output(t, l) := std_logic_vector(to_float((to_real(to_float(vector_input(t, l))) - to_real(to_float(vector_input(t, l))))/to_real(to_float(LENGTH_IN))));
+        else
+          vector_output(t, l) := std_logic_vector(to_float((to_real(to_float(vector_input(t, l))) - to_real(to_float(vector_input(t-1, l))))/to_real(to_float(LENGTH_IN))));
+        end if;
+      end loop;
+    end loop;
+
+    return vector_output;
+  end function function_vector_controller_differentiation;
+
+  function function_matrix_controller_differentiation (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    LENGTH_IN : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    matrix_input : tensor_buffer
+    ) return tensor_buffer is
+
+    variable matrix_output : tensor_buffer;
+  begin
+    -- Data Inputs
+    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
+      for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+        for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+          if (t = 0) then
+            matrix_output(t, i, l) := std_logic_vector(to_float((to_real(to_float(matrix_input(t, i, l))) - to_real(to_float(matrix_input(t, i, l))))/to_real(to_float(LENGTH_IN))));
+          else
+            matrix_output(t, i, l) := std_logic_vector(to_float((to_real(to_float(matrix_input(t, i, l))) - to_real(to_float(matrix_input(t-1, i, l))))/to_real(to_float(LENGTH_IN))));
+          end if;
+        end loop;
+      end loop;
+    end loop;
+
+    return matrix_output;
+  end function function_matrix_controller_differentiation;
 
   -----------------------------------------------------------------------
   -- Controller
@@ -2376,101 +2471,214 @@ package body ntm_lstm_controller_pkg is
   -----------------------------------------------------------------------
 
   function function_ntm_lstm_w_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer
-    ) return matrix_buffer is
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer
+    ) return tensor_buffer is
 
-    variable matrix_w_output : matrix_buffer;
+    variable vector_dh_int : matrix_buffer;
+
+    variable matrix_w_output : tensor_buffer;
 
   begin
 
-    -- dW(t;l) = summation(d*(t;l) · x(t;x))[t in 0 to T]
+    -- dW(t;l;x) = summation(d*(t;l) · x(t;x))[t in 0 to T]
+
+    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
+          matrix_w_output(t, l, x) := ZERO_DATA;
+        end loop;
+      end loop;
+    end loop;
+
+    vector_dh_int := function_vector_controller_differentiation (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_L_IN => SIZE_L_IN,
+
+      LENGTH_IN => LENGTH_IN,
+
+      vector_input => vector_h_input
+      );
+
+    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        for x in 0 to to_integer(unsigned(SIZE_X_IN))-1 loop
+          matrix_w_output(t, l, x) := std_logic_vector(to_float(to_real(to_float(matrix_w_output(t, l, x))) + (to_real(to_float(vector_dh_int(t, l)))*to_real(to_float(vector_x_input(t, x))))));
+        end loop;
+      end loop;
+    end loop;
 
     return matrix_w_output;
   end function function_ntm_lstm_w_trainer;
 
   function function_ntm_lstm_k_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer
-    ) return tensor_buffer is
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer
+    ) return array4_buffer is
 
-    variable tensor_k_output : tensor_buffer;
+    variable vector_dh_int : matrix_buffer;
+
+    variable tensor_k_output : array4_buffer;
 
   begin
 
-    -- dK(t;l) = summation(d*(t;l) · r(t;i;k))[t in 0 to T-1]
+    -- dK(t;l;i;k) = summation(d*(t;l) · r(t;i;k))[t in 0 to T-1]
+
+    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+          for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+            tensor_k_output(t, l, i, k) := ZERO_DATA;
+          end loop;
+        end loop;
+      end loop;
+    end loop;
+
+    vector_dh_int := function_vector_controller_differentiation (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_L_IN => SIZE_L_IN,
+
+      LENGTH_IN => LENGTH_IN,
+
+      vector_input => vector_h_input
+      );
+
+    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+          for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+            tensor_k_output(t, l, i, k) := std_logic_vector(to_float(to_real(to_float(tensor_k_output(t, l, i, k))) + (to_real(to_float(vector_dh_int(t, l)))*to_real(to_float(matrix_r_input(t, i, k))))));
+          end loop;
+        end loop;
+      end loop;
+    end loop;
 
     return tensor_k_output;
   end function function_ntm_lstm_k_trainer;
 
   function function_ntm_lstm_u_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer
-    ) return matrix_buffer is
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer
+    ) return tensor_buffer is
 
-    variable matrix_u_output : matrix_buffer;
+    variable vector_dh_int : matrix_buffer;
+
+    variable matrix_u_output : tensor_buffer;
 
   begin
 
-    -- dU(t;l) = summation(d*(t+1;l) · h(t;l))[t in 0 to T-1]
+    -- dU(t;l;m) = summation(d*(t+1;l) · h(t;l))[t in 0 to T-1]
+
+    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+          matrix_u_output(t, l, m) := ZERO_DATA;
+        end loop;
+      end loop;
+    end loop;
+
+    vector_dh_int := function_vector_controller_differentiation (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_L_IN => SIZE_L_IN,
+
+      LENGTH_IN => LENGTH_IN,
+
+      vector_input => vector_h_input
+      );
+
+    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+          matrix_u_output(t, l, m) := std_logic_vector(to_float(to_real(to_float(matrix_u_output(t, l, m))) + (to_real(to_float(vector_dh_int(t, l)))*to_real(to_float(vector_h_input(t, m))))));
+        end loop;
+      end loop;
+    end loop;
 
     return matrix_u_output;
   end function function_ntm_lstm_u_trainer;
 
   function function_ntm_lstm_b_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer
-    ) return vector_buffer is
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer
+    ) return matrix_buffer is
 
-    variable vector_b_output : vector_buffer;
+    variable vector_dh_int : matrix_buffer;
+
+    variable vector_b_output : matrix_buffer;
 
   begin
 
     -- db(t;l) = summation(d*(t;l))[t in 0 to T]
 
+    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        vector_b_output(t, l) := ZERO_DATA;
+      end loop;
+    end loop;
+
+    vector_dh_int := function_vector_controller_differentiation (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_L_IN => SIZE_L_IN,
+
+      LENGTH_IN => LENGTH_IN,
+
+      vector_input => vector_h_input
+      );
+
+    for t in 0 to to_integer(unsigned(SIZE_T_IN))-1 loop
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        vector_b_output(t, l) := std_logic_vector(to_float(to_real(to_float(vector_b_output(t, l))) + to_real(to_float(vector_dh_int(t, l)))));
+      end loop;
+    end loop;
+
     return vector_b_output;
   end function function_ntm_lstm_b_trainer;
 
   function function_ntm_lstm_activation_w_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return matrix_buffer is
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return tensor_buffer is
 
-    variable matrix_w_output : matrix_buffer;
+    variable matrix_w_output : tensor_buffer;
 
   begin
 
@@ -2478,6 +2686,7 @@ package body ntm_lstm_controller_pkg is
 
     -- dW(t;l) = summation(da(t;l) · x(t;x))[t in 0 to T]
     matrix_w_output := function_ntm_lstm_w_trainer (
+      SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
@@ -2492,21 +2701,22 @@ package body ntm_lstm_controller_pkg is
   end function function_ntm_lstm_activation_w_trainer;
 
   function function_ntm_lstm_activation_k_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return tensor_buffer is
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return array4_buffer is
 
-    variable tensor_k_output : tensor_buffer;
+    variable tensor_k_output : array4_buffer;
 
   begin
 
@@ -2514,6 +2724,7 @@ package body ntm_lstm_controller_pkg is
 
     -- dK(t;l) = summation(da(t;l) · r(t;i;k))[t in 0 to T-1]
     tensor_k_output := function_ntm_lstm_k_trainer (
+      SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
@@ -2528,21 +2739,22 @@ package body ntm_lstm_controller_pkg is
   end function function_ntm_lstm_activation_k_trainer;
 
   function function_ntm_lstm_activation_u_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return matrix_buffer is
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return tensor_buffer is
 
-    variable matrix_u_output : matrix_buffer;
+    variable matrix_u_output : tensor_buffer;
 
   begin
 
@@ -2550,6 +2762,7 @@ package body ntm_lstm_controller_pkg is
 
     -- dU(t;l) = summation(da(t+1;l) · h(t;l))[t in 0 to T-1]
     matrix_u_output := function_ntm_lstm_u_trainer (
+      SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
@@ -2564,21 +2777,22 @@ package body ntm_lstm_controller_pkg is
   end function function_ntm_lstm_activation_u_trainer;
 
   function function_ntm_lstm_activation_b_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return vector_buffer is
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return matrix_buffer is
 
-    variable vector_b_output : vector_buffer;
+    variable vector_b_output : matrix_buffer;
 
   begin
 
@@ -2586,6 +2800,7 @@ package body ntm_lstm_controller_pkg is
 
     -- db(t;l) = summation(da(t;l))[t in 0 to T]
     vector_b_output := function_ntm_lstm_b_trainer (
+      SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
@@ -2600,21 +2815,22 @@ package body ntm_lstm_controller_pkg is
   end function function_ntm_lstm_activation_b_trainer;
 
   function function_ntm_lstm_forget_w_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return matrix_buffer is
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return tensor_buffer is
 
-    variable matrix_w_output : matrix_buffer;
+    variable matrix_w_output : tensor_buffer;
 
   begin
 
@@ -2622,6 +2838,7 @@ package body ntm_lstm_controller_pkg is
 
     -- db(t;l) = summation(df(t;l))[t in 0 to T]
     matrix_w_output := function_ntm_lstm_w_trainer (
+      SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
@@ -2636,21 +2853,22 @@ package body ntm_lstm_controller_pkg is
   end function function_ntm_lstm_forget_w_trainer;
 
   function function_ntm_lstm_forget_k_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return tensor_buffer is
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return array4_buffer is
 
-    variable tensor_k_output : tensor_buffer;
+    variable tensor_k_output : array4_buffer;
 
   begin
 
@@ -2658,6 +2876,7 @@ package body ntm_lstm_controller_pkg is
 
     -- dW(t;l) = summation(df(t;l) · x(t;x))[t in 0 to T]
     tensor_k_output := function_ntm_lstm_k_trainer (
+      SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
@@ -2672,21 +2891,22 @@ package body ntm_lstm_controller_pkg is
   end function function_ntm_lstm_forget_k_trainer;
 
   function function_ntm_lstm_forget_u_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return matrix_buffer is
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return tensor_buffer is
 
-    variable matrix_u_output : matrix_buffer;
+    variable matrix_u_output : tensor_buffer;
 
   begin
 
@@ -2694,6 +2914,7 @@ package body ntm_lstm_controller_pkg is
 
     -- dU(t;l) = summation(df(t+1;l) · h(t;l))[t in 0 to T-1]
     matrix_u_output := function_ntm_lstm_u_trainer (
+      SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
@@ -2708,21 +2929,22 @@ package body ntm_lstm_controller_pkg is
   end function function_ntm_lstm_forget_u_trainer;
 
   function function_ntm_lstm_forget_b_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return vector_buffer is
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return matrix_buffer is
 
-    variable vector_b_output : vector_buffer;
+    variable vector_b_output : matrix_buffer;
 
   begin
 
@@ -2730,6 +2952,7 @@ package body ntm_lstm_controller_pkg is
 
     -- db(t;l) = summation(df(t;l))[t in 0 to T]
     vector_b_output := function_ntm_lstm_b_trainer (
+      SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
@@ -2744,21 +2967,22 @@ package body ntm_lstm_controller_pkg is
   end function function_ntm_lstm_forget_b_trainer;
 
   function function_ntm_lstm_input_w_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return matrix_buffer is
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return tensor_buffer is
 
-    variable matrix_w_output : matrix_buffer;
+    variable matrix_w_output : tensor_buffer;
 
   begin
 
@@ -2766,6 +2990,7 @@ package body ntm_lstm_controller_pkg is
 
     -- dW(t;l) = summation(di(t;l) · x(t;x))[t in 0 to T]
     matrix_w_output := function_ntm_lstm_w_trainer (
+      SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
@@ -2780,21 +3005,22 @@ package body ntm_lstm_controller_pkg is
   end function function_ntm_lstm_input_w_trainer;
 
   function function_ntm_lstm_input_k_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return tensor_buffer is
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return array4_buffer is
 
-    variable tensor_k_output : tensor_buffer;
+    variable tensor_k_output : array4_buffer;
 
   begin
 
@@ -2802,6 +3028,7 @@ package body ntm_lstm_controller_pkg is
 
     -- dK(t;l) = summation(di(t;l) · r(t;i;k))[t in 0 to T-1]
     tensor_k_output := function_ntm_lstm_k_trainer (
+      SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
@@ -2816,21 +3043,22 @@ package body ntm_lstm_controller_pkg is
   end function function_ntm_lstm_input_k_trainer;
 
   function function_ntm_lstm_input_u_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return matrix_buffer is
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return tensor_buffer is
 
-    variable matrix_u_output : matrix_buffer;
+    variable matrix_u_output : tensor_buffer;
 
   begin
 
@@ -2838,6 +3066,7 @@ package body ntm_lstm_controller_pkg is
 
     -- dU(t;l) = summation(di(t+1;l) · h(t;l))[t in 0 to T-1]
     matrix_u_output := function_ntm_lstm_u_trainer (
+      SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
@@ -2852,21 +3081,22 @@ package body ntm_lstm_controller_pkg is
   end function function_ntm_lstm_input_u_trainer;
 
   function function_ntm_lstm_input_b_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return vector_buffer is
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return matrix_buffer is
 
-    variable vector_b_output : vector_buffer;
+    variable vector_b_output : matrix_buffer;
 
   begin
 
@@ -2874,6 +3104,7 @@ package body ntm_lstm_controller_pkg is
 
     -- db(t;l) = summation(di(t;l))[t in 0 to T]
     vector_b_output := function_ntm_lstm_b_trainer (
+      SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
@@ -2888,28 +3119,41 @@ package body ntm_lstm_controller_pkg is
   end function function_ntm_lstm_input_b_trainer;
 
   function function_ntm_lstm_output_w_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return matrix_buffer is
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return tensor_buffer is
 
-    variable matrix_w_output : matrix_buffer;
+    variable vector_dh_int : matrix_buffer;
+
+    variable matrix_w_output : tensor_buffer;
 
   begin
 
     -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
 
+    vector_dh_int := function_vector_controller_differentiation (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_L_IN => SIZE_L_IN,
+
+      LENGTH_IN => LENGTH_IN,
+
+      vector_input => vector_h_input
+      );
+
     -- dW(t;l) = summation(di(t;l) · x(t;x))[t in 0 to T]
     matrix_w_output := function_ntm_lstm_w_trainer (
+      SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
@@ -2924,28 +3168,41 @@ package body ntm_lstm_controller_pkg is
   end function function_ntm_lstm_output_w_trainer;
 
   function function_ntm_lstm_output_k_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return tensor_buffer is
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return array4_buffer is
 
-    variable tensor_k_output : tensor_buffer;
+    variable vector_dh_int : matrix_buffer;
+
+    variable tensor_k_output : array4_buffer;
 
   begin
 
     -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
 
+    vector_dh_int := function_vector_controller_differentiation (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_L_IN => SIZE_L_IN,
+
+      LENGTH_IN => LENGTH_IN,
+
+      vector_input => vector_h_input
+      );
+
     -- dK(t;l) = summation(do(t;i;l) · r(t;i;k))[t in 0 to T-1]
     tensor_k_output := function_ntm_lstm_k_trainer (
+      SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
@@ -2960,28 +3217,41 @@ package body ntm_lstm_controller_pkg is
   end function function_ntm_lstm_output_k_trainer;
 
   function function_ntm_lstm_output_u_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return matrix_buffer is
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return tensor_buffer is
 
-    variable matrix_u_output : matrix_buffer;
+    variable vector_dh_int : matrix_buffer;
+
+    variable matrix_u_output : tensor_buffer;
 
   begin
 
     -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
 
+    vector_dh_int := function_vector_controller_differentiation (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_L_IN => SIZE_L_IN,
+
+      LENGTH_IN => LENGTH_IN,
+
+      vector_input => vector_h_input
+      );
+
     -- dU(t;l) = summation(do(t+1;l) · h(t;l))[t in 0 to T-1]
     matrix_u_output := function_ntm_lstm_u_trainer (
+      SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
@@ -2996,28 +3266,41 @@ package body ntm_lstm_controller_pkg is
   end function function_ntm_lstm_output_u_trainer;
 
   function function_ntm_lstm_output_b_trainer (
+    SIZE_T_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_x_input : vector_buffer;
-    matrix_r_input : matrix_buffer;
-    vector_h_input : vector_buffer;
+    vector_x_input : matrix_buffer;
+    matrix_r_input : tensor_buffer;
+    vector_h_input : matrix_buffer;
 
-    vector_a_input : vector_buffer;
-    matrix_i_input : vector_buffer;
-    vector_s_input : vector_buffer
-    ) return vector_buffer is
+    vector_a_input : matrix_buffer;
+    vector_i_input : matrix_buffer;
+    vector_s_input : matrix_buffer
+    ) return matrix_buffer is
 
-    variable vector_b_output : vector_buffer;
+    variable vector_dh_int : matrix_buffer;
+
+    variable vector_b_output : matrix_buffer;
 
   begin
 
     -- do(t;l) = dh(t;l) o tanh(a(t;l)) o o(t;l) o (1 - o(t;l))
 
+    vector_dh_int := function_vector_controller_differentiation (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_L_IN => SIZE_L_IN,
+
+      LENGTH_IN => LENGTH_IN,
+
+      vector_input => vector_h_input
+      );
+
     -- db(t;l) = summation(do(t;l))[t in 0 to T]
     vector_b_output := function_ntm_lstm_b_trainer (
+      SIZE_T_IN => SIZE_T_IN,
       SIZE_X_IN => SIZE_X_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
