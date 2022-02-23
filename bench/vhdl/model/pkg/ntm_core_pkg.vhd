@@ -558,7 +558,18 @@ package ntm_core_pkg is
 
   -- function function_ntm_interface_vector (
 
-  -- function function_ntm_output_vector (
+  function function_ntm_output_vector (
+    SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_k_input : tensor_buffer;
+    matrix_r_input : matrix_buffer;
+
+    matrix_u_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer;
 
 end ntm_core_pkg;
 
@@ -786,6 +797,55 @@ package body ntm_core_pkg is
 
   -- function function_ntm_interface_vector (
 
-  -- function function_ntm_output_vector (
+  function function_ntm_output_vector (
+    SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_k_input : tensor_buffer;
+    matrix_r_input : matrix_buffer;
+
+    matrix_u_input : matrix_buffer;
+    vector_h_input : vector_buffer
+    ) return vector_buffer is
+
+    variable data_summation_int : matrix_buffer;
+    variable data_product_int   : vector_buffer;
+
+    variable vector_y_output : vector_buffer;
+
+  begin
+
+    -- y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
+
+    for y in 0 to to_integer(unsigned(SIZE_Y_IN))-1 loop
+      vector_y_output(y) := ZERO_DATA;
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for y in 0 to to_integer(unsigned(SIZE_Y_IN))-1 loop
+        for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+          data_summation_int(i, y) := std_logic_vector(to_float(to_real(to_float(data_summation_int(i, y))) + (to_real(to_float(tensor_k_input(i, y, k)))*to_real(to_float(matrix_r_input(i, k))))));
+        end loop;
+      end loop;
+    end loop;
+
+    for y in 0 to to_integer(unsigned(SIZE_Y_IN))-1 loop
+      data_product_int(y) := ZERO_DATA;
+
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        data_product_int(y) := std_logic_vector(to_float(to_real(to_float(data_product_int(y))) + (to_real(to_float(matrix_u_input(y, l)))*to_real(to_float(vector_h_input(l))))));
+      end loop;
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for y in 0 to to_integer(unsigned(SIZE_Y_IN))-1 loop
+        vector_y_output(y) := std_logic_vector(to_float(to_real(to_float(data_summation_int(i, y))) + to_real(to_float(data_product_int(y)))));
+      end loop;
+    end loop;
+      
+    return vector_y_output;
+  end function function_ntm_output_vector;
 
 end ntm_core_pkg;
