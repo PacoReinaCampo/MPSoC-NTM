@@ -492,12 +492,13 @@ package ntm_core_pkg is
   -----------------------------------------------------------------------
 
   function function_ntm_reading (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_w_input : vector_buffer;
-    matrix_k_input : matrix_buffer
-    ) return vector_buffer;
+    matrix_w_input : matrix_buffer;
+    matrix_m_input : matrix_buffer
+    ) return matrix_buffer;
 
   -----------------------------------------------------------------------
   -- WRITE HEADS
@@ -554,9 +555,93 @@ package ntm_core_pkg is
   -- TOP
   -----------------------------------------------------------------------
 
-  -- function function_ntm_top (
+  function function_ntm_top (
+    SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- function function_ntm_interface_vector (
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_ntm_interface_k_vector (
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_wk_input     : tensor_buffer;
+    matrix_wbeta_input  : matrix_buffer;
+    matrix_wg_input     : matrix_buffer;
+    tensor_ws_input     : tensor_buffer;
+    matrix_wgamma_input : matrix_buffer;
+
+    vector_h_input : vector_buffer
+    ) return matrix_buffer;
+
+  function function_ntm_interface_beta_vector (
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_wk_input     : tensor_buffer;
+    matrix_wbeta_input  : matrix_buffer;
+    matrix_wg_input     : matrix_buffer;
+    tensor_ws_input     : tensor_buffer;
+    matrix_wgamma_input : matrix_buffer;
+
+    vector_h_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_ntm_interface_g_vector (
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_wk_input     : tensor_buffer;
+    matrix_wbeta_input  : matrix_buffer;
+    matrix_wg_input     : matrix_buffer;
+    tensor_ws_input     : tensor_buffer;
+    matrix_wgamma_input : matrix_buffer;
+
+    vector_h_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_ntm_interface_s_vector (
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_wk_input     : tensor_buffer;
+    matrix_wbeta_input  : matrix_buffer;
+    matrix_wg_input     : matrix_buffer;
+    tensor_ws_input     : tensor_buffer;
+    matrix_wgamma_input : matrix_buffer;
+
+    vector_h_input : vector_buffer
+    ) return matrix_buffer;
+
+  function function_ntm_interface_gamma_vector (
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_wk_input     : tensor_buffer;
+    matrix_wbeta_input  : matrix_buffer;
+    matrix_wg_input     : matrix_buffer;
+    tensor_ws_input     : tensor_buffer;
+    matrix_wgamma_input : matrix_buffer;
+
+    vector_h_input : vector_buffer
+    ) return vector_buffer;
 
   function function_ntm_output_vector (
     SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -584,28 +669,31 @@ package body ntm_core_pkg is
   -----------------------------------------------------------------------
 
   function function_ntm_reading (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    vector_w_input : vector_buffer;
-    matrix_k_input : matrix_buffer
-    ) return vector_buffer is
+    matrix_w_input : matrix_buffer;
+    matrix_m_input : matrix_buffer
+    ) return matrix_buffer is
 
-    variable vector_r_output : vector_buffer;
+    variable matrix_r_output : matrix_buffer;
 
   begin
 
-    -- r(t;k) = summation(w(t;j)·M(t;j;k))[j in 1 to N]
+    -- r(t;i;k) = summation(w(t;i;j)·M(t;j;k))[j in 1 to N]
 
-    for i in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
-      vector_r_output(i) := ZERO_DATA;
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+        matrix_r_output(i, k) := ZERO_DATA;
 
-      for j in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
-        vector_r_output(i) := std_logic_vector(to_float(to_real(to_float(vector_r_output(i))) + (to_real(to_float(vector_w_input(j)))*to_real(to_float(matrix_k_input(i, j))))));
+        for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+          matrix_r_output(i, k) := std_logic_vector(to_float(to_real(to_float(matrix_r_output(i, k))) + (to_real(to_float(matrix_w_input(i, j)))*to_real(to_float(matrix_m_input(j, k))))));
+        end loop;
       end loop;
     end loop;
 
-    return vector_r_output;
+    return matrix_r_output;
   end function function_ntm_reading;
 
   -----------------------------------------------------------------------
@@ -793,9 +881,388 @@ package body ntm_core_pkg is
   -- TOP
   -----------------------------------------------------------------------
 
-  -- function function_ntm_top (
+  function function_ntm_top (
+    SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-  -- function function_ntm_interface_vector (
+    matrix_w_input : matrix_buffer;
+    tensor_k_input : tensor_buffer;
+    matrix_u_input : matrix_buffer;
+    vector_b_input : vector_buffer;
+
+    vector_x_input : vector_buffer
+    ) return vector_buffer is
+
+    variable tensor_wk_int     : tensor_buffer;
+    variable matrix_wbeta_int  : matrix_buffer;
+    variable matrix_wg_int     : matrix_buffer;
+    variable tensor_ws_int     : tensor_buffer;
+    variable matrix_wgamma_int : matrix_buffer;
+
+    variable tensor_k_int : tensor_buffer;
+
+    variable matrix_m_in_int : matrix_buffer;
+    variable matrix_w_in_int : matrix_buffer;
+
+    variable matrix_wm_out_int : matrix_buffer;
+    variable matrix_em_out_int : matrix_buffer;
+
+    variable matrix_k_int : matrix_buffer;
+    variable matrix_r_int : matrix_buffer;
+    variable matrix_s_int : matrix_buffer;
+    variable matrix_u_int : matrix_buffer;
+
+    variable vector_w_in_int : vector_buffer;
+
+    variable vector_w_out_int : vector_buffer;
+
+    variable vector_a_int : vector_buffer;
+    variable vector_e_int : vector_buffer;
+    variable vector_h_int : vector_buffer;
+    variable vector_g_int : vector_buffer;
+    variable vector_k_int : vector_buffer;
+    variable vector_r_int : vector_buffer;
+    variable vector_s_int : vector_buffer;
+
+    variable vector_beta_int  : vector_buffer;
+    variable vector_gamma_int : vector_buffer;
+
+    variable scalar_g_int : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable scalar_s_int : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    variable scalar_beta_int  : std_logic_vector(DATA_SIZE-1 downto 0);
+    variable scalar_gamma_int : std_logic_vector(DATA_SIZE-1 downto 0);
+
+    variable vector_y_output : vector_buffer;
+
+  begin
+
+    -- CONTROLLER_BODY_STATE
+
+    -- FNN Convolutional mode: h(t;l) = sigmoid(W(l;x)*x(t;x) + K(i;l;k)*r(t;i;k) + U(l;l)*h(t-1;l) + b(t;l))
+    -- FNN Standard mode:      h(t;l) = sigmoid(W(l;x)·x(t;x) + K(i;l;k)·r(t;i;k) + U(l;l)·h(t-1;l) + b(t;l))
+    
+    -- INTERFACE_VECTOR_STATE
+
+    -- xi(t;?) = U(t;?;l)·h(t;l)
+
+    -- k(t;i;k) = U(t;i;k;l)·h(t;l)
+    matrix_k_int := function_ntm_interface_k_vector (
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_N_IN => SIZE_N_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+
+      tensor_wk_input     => tensor_wk_int,
+      matrix_wbeta_input  => matrix_wbeta_int,
+      matrix_wg_input     => matrix_wg_int,
+      tensor_ws_input     => tensor_ws_int,
+      matrix_wgamma_input => matrix_wgamma_int,
+
+      vector_h_input => vector_h_int
+      );
+
+    -- beta(t) = U(t;l)·h(t;l)
+    vector_beta_int := function_ntm_interface_beta_vector (
+      SIZE_N_IN => SIZE_N_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+
+      tensor_wk_input     => tensor_wk_int,
+      matrix_wbeta_input  => matrix_wbeta_int,
+      matrix_wg_input     => matrix_wg_int,
+      tensor_ws_input     => tensor_ws_int,
+      matrix_wgamma_input => matrix_wgamma_int,
+
+      vector_h_input => vector_h_int
+      );
+
+    -- g(t) = U(t;l)·h(t;l)
+    vector_g_int := function_ntm_interface_g_vector (
+      SIZE_N_IN => SIZE_N_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+
+      tensor_wk_input     => tensor_wk_int,
+      matrix_wbeta_input  => matrix_wbeta_int,
+      matrix_wg_input     => matrix_wg_int,
+      tensor_ws_input     => tensor_ws_int,
+      matrix_wgamma_input => matrix_wgamma_int,
+
+      vector_h_input => vector_h_int
+      );
+
+    -- s(t;i;j) = U(t;i;j;l)·h(t;l)
+    matrix_s_int := function_ntm_interface_s_vector (
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_N_IN => SIZE_N_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+
+      tensor_wk_input     => tensor_wk_int,
+      matrix_wbeta_input  => matrix_wbeta_int,
+      matrix_wg_input     => matrix_wg_int,
+      tensor_ws_input     => tensor_ws_int,
+      matrix_wgamma_input => matrix_wgamma_int,
+
+      vector_h_input => vector_h_int
+      );
+
+    -- gamma(t) = U(t;l)·h(t;l)
+    vector_gamma_int := function_ntm_interface_gamma_vector (
+      SIZE_N_IN => SIZE_N_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+
+      tensor_wk_input     => tensor_wk_int,
+      matrix_wbeta_input  => matrix_wbeta_int,
+      matrix_wg_input     => matrix_wg_int,
+      tensor_ws_input     => tensor_ws_int,
+      matrix_wgamma_input => matrix_wgamma_int,
+
+      vector_h_input => vector_h_int
+      );
+
+    -- READ_HEADS_STATE
+
+    -- r(t;i;k) = summation(w(t;i;j)·M(t;j;k))[j in 1 to N]
+    matrix_r_int := function_ntm_reading (
+      SIZE_R_IN => SIZE_R_IN,
+      SIZE_N_IN => SIZE_N_IN,
+      SIZE_W_IN => SIZE_W_IN,
+
+      matrix_w_input => matrix_w_in_int,
+      matrix_m_input => matrix_m_in_int
+      );
+
+    -- WRITE_HEADS_STATE
+
+    -- M(t;j;k) = M(t;j;k) + w(t;j)·a(t;k)
+    matrix_wm_out_int := function_ntm_writing (
+      SIZE_N_IN => SIZE_N_IN,
+      SIZE_W_IN => SIZE_W_IN,
+
+      matrix_m_input => matrix_m_in_int,
+      vector_a_input => vector_a_int,
+      vector_w_input => vector_w_in_int
+      );
+
+    -- M(t;j;k) = M(t;j;k)·(1 - w(t;j)·e(t;k))
+    matrix_em_out_int := function_ntm_erasing (
+      SIZE_N_IN => SIZE_N_IN,
+      SIZE_W_IN => SIZE_W_IN,
+
+      matrix_m_input => matrix_m_in_int,
+      vector_e_input => vector_e_int,
+      vector_w_input => vector_w_in_int
+      );
+
+    -- MEMORY_STATE
+
+    -- wc(t;j) = C(M(t1;j;k),k(t;k),beta(t))
+    -- wg(t;j) = g(t)·wc(t;j) + (1 - g(t))·w(t-1;j)
+    -- w(t;j) = wg(t;j)*s(t;k)
+    -- w(t;j) = exponentiation(w(t;k),gamma(t)) / summation(exponentiation(w(t;k),gamma(t)))[j in 0 to N-1]
+
+    vector_w_out_int := function_ntm_addressing (
+      SIZE_N_IN => SIZE_N_IN,
+      SIZE_W_IN => SIZE_W_IN,
+
+      vector_k_input     => vector_k_int,
+      scalar_beta_input  => scalar_beta_int,
+      scalar_g_input     => scalar_g_int,
+      vector_s_input     => vector_s_int,
+      scalar_gamma_input => scalar_gamma_int,
+
+      matrix_m_input => matrix_m_in_int,
+
+      vector_w_input => vector_w_in_int
+      );
+
+    -- OUTPUT_VECTOR_STATE
+
+    -- y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
+    vector_y_output := function_ntm_output_vector (
+      SIZE_Y_IN => SIZE_Y_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_R_IN => SIZE_R_IN,
+
+      tensor_k_input => tensor_k_int,
+      matrix_r_input => matrix_r_int,
+
+      matrix_u_input => matrix_u_int,
+      vector_h_input => vector_h_int
+      );
+
+    return vector_y_output;
+
+  end function function_ntm_top;
+
+  function function_ntm_interface_k_vector (
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_wk_input     : tensor_buffer;
+    matrix_wbeta_input  : matrix_buffer;
+    matrix_wg_input     : matrix_buffer;
+    tensor_ws_input     : tensor_buffer;
+    matrix_wgamma_input : matrix_buffer;
+
+    vector_h_input : vector_buffer
+    ) return matrix_buffer is
+
+    variable matrix_k_output : matrix_buffer;
+
+  begin
+
+    -- k(t;i;k) = U(t;i;k;l)·h(t;l)
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+        matrix_k_output(i, k) := ZERO_DATA;
+
+        for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+          matrix_k_output(i, k) := std_logic_vector(to_float(to_real(to_float(matrix_k_output(i, k))) + (to_real(to_float(tensor_wk_input(i, k, l)))*to_real(to_float(vector_h_input(l))))));
+        end loop;
+      end loop;
+    end loop;
+
+    return matrix_k_output;
+  end function function_ntm_interface_k_vector;
+
+  function function_ntm_interface_beta_vector (
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_wk_input     : tensor_buffer;
+    matrix_wbeta_input  : matrix_buffer;
+    matrix_wg_input     : matrix_buffer;
+    tensor_ws_input     : tensor_buffer;
+    matrix_wgamma_input : matrix_buffer;
+
+    vector_h_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_beta_output : vector_buffer;
+
+  begin
+
+    -- beta(t;l) = U(t;l;m)·h(t;m)
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_beta_output(l) := ZERO_DATA;
+
+      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        vector_beta_output(l) := std_logic_vector(to_float(to_real(to_float(vector_beta_output(l))) + (to_real(to_float(matrix_wbeta_input(l, m)))*to_real(to_float(vector_h_input(m))))));
+      end loop;
+    end loop;
+      
+    return vector_beta_output;
+  end function function_ntm_interface_beta_vector;
+
+  function function_ntm_interface_g_vector (
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_wk_input     : tensor_buffer;
+    matrix_wbeta_input  : matrix_buffer;
+    matrix_wg_input     : matrix_buffer;
+    tensor_ws_input     : tensor_buffer;
+    matrix_wgamma_input : matrix_buffer;
+
+    vector_h_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_g_output : vector_buffer;
+
+  begin
+
+    -- g(t;l) = U(t;l;m)·h(t;m)
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_g_output(l) := ZERO_DATA;
+
+      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        vector_g_output(l) := std_logic_vector(to_float(to_real(to_float(vector_g_output(l))) + (to_real(to_float(matrix_wg_input(l, m)))*to_real(to_float(vector_h_input(m))))));
+      end loop;
+    end loop;
+      
+    return vector_g_output;
+  end function function_ntm_interface_g_vector;
+
+  function function_ntm_interface_s_vector (
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_wk_input     : tensor_buffer;
+    matrix_wbeta_input  : matrix_buffer;
+    matrix_wg_input     : matrix_buffer;
+    tensor_ws_input     : tensor_buffer;
+    matrix_wgamma_input : matrix_buffer;
+
+    vector_h_input : vector_buffer
+    ) return matrix_buffer is
+
+    variable matrix_s_output : matrix_buffer;
+
+  begin
+
+    -- s(t;i;j) = U(t;i;j;l)·h(t;l)
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_N_IN))-1 loop
+        matrix_s_output(i, j) := ZERO_DATA;
+
+        for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+          matrix_s_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_s_output(i, j))) + (to_real(to_float(tensor_ws_input(i, j, l)))*to_real(to_float(vector_h_input(l))))));
+        end loop;
+      end loop;
+    end loop;
+      
+    return matrix_s_output;
+  end function function_ntm_interface_s_vector;
+
+  function function_ntm_interface_gamma_vector (
+    SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    tensor_wk_input     : tensor_buffer;
+    matrix_wbeta_input  : matrix_buffer;
+    matrix_wg_input     : matrix_buffer;
+    tensor_ws_input     : tensor_buffer;
+    matrix_wgamma_input : matrix_buffer;
+
+    vector_h_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_gamma_output : vector_buffer;
+
+  begin
+
+    -- gamma(t;l) = U(t;l;m)·h(t;m)
+
+    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+      vector_gamma_output(l) := ZERO_DATA;
+
+      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        vector_gamma_output(l) := std_logic_vector(to_float(to_real(to_float(vector_gamma_output(l))) + (to_real(to_float(matrix_wgamma_input(l, m)))*to_real(to_float(vector_h_input(m))))));
+      end loop;
+    end loop;
+      
+    return vector_gamma_output;
+  end function function_ntm_interface_gamma_vector;
 
   function function_ntm_output_vector (
     SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -812,6 +1279,7 @@ package body ntm_core_pkg is
 
     variable data_summation_int : matrix_buffer;
     variable data_product_int   : vector_buffer;
+    variable data_addition_int  : vector_buffer;
 
     variable vector_y_output : vector_buffer;
 
@@ -820,11 +1288,16 @@ package body ntm_core_pkg is
     -- y(t;y) = K(t;i;y;k)·r(t;i;k) + U(t;y;l)·h(t;l)
 
     for y in 0 to to_integer(unsigned(SIZE_Y_IN))-1 loop
+      data_product_int(y)  := ZERO_DATA;
+      data_addition_int(y) := ZERO_DATA;
+
       vector_y_output(y) := ZERO_DATA;
     end loop;
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for y in 0 to to_integer(unsigned(SIZE_Y_IN))-1 loop
+        data_summation_int(i, y) := ZERO_DATA;
+
         for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
           data_summation_int(i, y) := std_logic_vector(to_float(to_real(to_float(data_summation_int(i, y))) + (to_real(to_float(tensor_k_input(i, y, k)))*to_real(to_float(matrix_r_input(i, k))))));
         end loop;
@@ -841,8 +1314,12 @@ package body ntm_core_pkg is
 
     for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
       for y in 0 to to_integer(unsigned(SIZE_Y_IN))-1 loop
-        vector_y_output(y) := std_logic_vector(to_float(to_real(to_float(data_summation_int(i, y))) + to_real(to_float(data_product_int(y)))));
+        data_addition_int(y) := std_logic_vector(to_float(to_real(to_float(data_addition_int(y))) + to_real(to_float(data_summation_int(i, y)))));
       end loop;
+    end loop;
+
+    for y in 0 to to_integer(unsigned(SIZE_Y_IN))-1 loop
+      vector_y_output(y) := std_logic_vector(to_float(to_real(to_float(data_addition_int(y))) + to_real(to_float(data_product_int(y)))));
     end loop;
       
     return vector_y_output;
