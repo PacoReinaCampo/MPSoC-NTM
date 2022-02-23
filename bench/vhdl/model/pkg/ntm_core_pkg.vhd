@@ -571,6 +571,10 @@ package ntm_core_pkg is
     vector_x_input : vector_buffer
     ) return vector_buffer;
 
+  -----------------------------------------------------------------------
+  -- TOP - INTERFACE
+  -----------------------------------------------------------------------
+
   function function_ntm_interface_k_vector (
     SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -587,6 +591,7 @@ package ntm_core_pkg is
     ) return matrix_buffer;
 
   function function_ntm_interface_beta_vector (
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -601,6 +606,7 @@ package ntm_core_pkg is
     ) return vector_buffer;
 
   function function_ntm_interface_g_vector (
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -630,6 +636,7 @@ package ntm_core_pkg is
     ) return matrix_buffer;
 
   function function_ntm_interface_gamma_vector (
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -642,6 +649,10 @@ package ntm_core_pkg is
 
     vector_h_input : vector_buffer
     ) return vector_buffer;
+
+  -----------------------------------------------------------------------
+  -- TOP - OUTPUT
+  -----------------------------------------------------------------------
 
   function function_ntm_output_vector (
     SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -966,8 +977,9 @@ package body ntm_core_pkg is
       vector_h_input => vector_h_int
       );
 
-    -- beta(t) = U(t;l)·h(t;l)
+    -- beta(t;i) = U(t;i;l)·h(t;l)
     vector_beta_int := function_ntm_interface_beta_vector (
+      SIZE_R_IN => SIZE_R_IN,
       SIZE_N_IN => SIZE_N_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
@@ -981,8 +993,9 @@ package body ntm_core_pkg is
       vector_h_input => vector_h_int
       );
 
-    -- g(t) = U(t;l)·h(t;l)
+    -- g(t;i) = U(t;i;l)·h(t;l)
     vector_g_int := function_ntm_interface_g_vector (
+      SIZE_R_IN => SIZE_R_IN,
       SIZE_N_IN => SIZE_N_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
@@ -1012,8 +1025,9 @@ package body ntm_core_pkg is
       vector_h_input => vector_h_int
       );
 
-    -- gamma(t) = U(t;l)·h(t;l)
+    -- gamma(t;i) = U(t;i;l)·h(t;l)
     vector_gamma_int := function_ntm_interface_gamma_vector (
+      SIZE_R_IN => SIZE_R_IN,
       SIZE_N_IN => SIZE_N_IN,
       SIZE_W_IN => SIZE_W_IN,
       SIZE_L_IN => SIZE_L_IN,
@@ -1103,6 +1117,10 @@ package body ntm_core_pkg is
 
   end function function_ntm_top;
 
+  -----------------------------------------------------------------------
+  -- TOP - INTERFACE
+  -----------------------------------------------------------------------
+
   function function_ntm_interface_k_vector (
     SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1138,6 +1156,7 @@ package body ntm_core_pkg is
   end function function_ntm_interface_k_vector;
 
   function function_ntm_interface_beta_vector (
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1155,13 +1174,13 @@ package body ntm_core_pkg is
 
   begin
 
-    -- beta(t;l) = U(t;l;m)·h(t;m)
+    -- beta(t;i) = U(t;i;l)·h(t;l)
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_beta_output(l) := ZERO_DATA;
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      vector_beta_output(i) := ZERO_DATA;
 
-      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_beta_output(l) := std_logic_vector(to_float(to_real(to_float(vector_beta_output(l))) + (to_real(to_float(matrix_wbeta_input(l, m)))*to_real(to_float(vector_h_input(m))))));
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        vector_beta_output(i) := std_logic_vector(to_float(to_real(to_float(vector_beta_output(i))) + (to_real(to_float(matrix_wbeta_input(i, l)))*to_real(to_float(vector_h_input(l))))));
       end loop;
     end loop;
       
@@ -1169,6 +1188,7 @@ package body ntm_core_pkg is
   end function function_ntm_interface_beta_vector;
 
   function function_ntm_interface_g_vector (
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1186,13 +1206,13 @@ package body ntm_core_pkg is
 
   begin
 
-    -- g(t;l) = U(t;l;m)·h(t;m)
+    -- g(t;i) = U(t;i;l)·h(t;l)
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_g_output(l) := ZERO_DATA;
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      vector_g_output(i) := ZERO_DATA;
 
-      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_g_output(l) := std_logic_vector(to_float(to_real(to_float(vector_g_output(l))) + (to_real(to_float(matrix_wg_input(l, m)))*to_real(to_float(vector_h_input(m))))));
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        vector_g_output(i) := std_logic_vector(to_float(to_real(to_float(vector_g_output(i))) + (to_real(to_float(matrix_wg_input(i, l)))*to_real(to_float(vector_h_input(l))))));
       end loop;
     end loop;
       
@@ -1234,6 +1254,7 @@ package body ntm_core_pkg is
   end function function_ntm_interface_s_vector;
 
   function function_ntm_interface_gamma_vector (
+    SIZE_R_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_W_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_L_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -1251,18 +1272,22 @@ package body ntm_core_pkg is
 
   begin
 
-    -- gamma(t;l) = U(t;l;m)·h(t;m)
+    -- gamma(t;i) = U(t;i;l)·h(t;l)
 
-    for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-      vector_gamma_output(l) := ZERO_DATA;
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      vector_gamma_output(i) := ZERO_DATA;
 
-      for m in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
-        vector_gamma_output(l) := std_logic_vector(to_float(to_real(to_float(vector_gamma_output(l))) + (to_real(to_float(matrix_wgamma_input(l, m)))*to_real(to_float(vector_h_input(m))))));
+      for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
+        vector_gamma_output(i) := std_logic_vector(to_float(to_real(to_float(vector_gamma_output(i))) + (to_real(to_float(matrix_wgamma_input(i, l)))*to_real(to_float(vector_h_input(l))))));
       end loop;
     end loop;
       
     return vector_gamma_output;
   end function function_ntm_interface_gamma_vector;
+
+  -----------------------------------------------------------------------
+  -- TOP - OUTPUT
+  -----------------------------------------------------------------------
 
   function function_ntm_output_vector (
     SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
