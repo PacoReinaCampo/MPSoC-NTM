@@ -1221,11 +1221,11 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-      vector_product(j) := ZERO_DATA;
+    for i in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
+      vector_product(i) := ZERO_DATA;
 
-      for m in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
-        vector_product(j) := std_logic_vector(to_float(to_real(to_float(vector_product(j))) + (to_real(to_float(matrix_first_product(m, j)))*to_real(to_float(INITIAL_X(j))))));
+      for m in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+        vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_first_product(i, m)))*to_real(to_float(INITIAL_X(m))))));
       end loop;
     end loop;
 
@@ -1261,11 +1261,11 @@ package body ntm_state_pkg is
         end loop;
       end loop;
 
-      for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-        vector_product(j) := ZERO_DATA;
+      for i in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
+        vector_product(i) := ZERO_DATA;
 
-        for m in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
-          vector_product(j) := std_logic_vector(to_float(to_real(to_float(vector_product(j))) + (to_real(to_float(matrix_second_product(m, j)))*to_real(to_float(vector_data_u_input(k, j))))));
+        for m in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+          vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_second_product(i, m)))*to_real(to_float(vector_data_u_input(k, m))))));
         end loop;
       end loop;
 
@@ -1275,11 +1275,11 @@ package body ntm_state_pkg is
 
     end loop;
 
-    for j in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
-      vector_product(j) := ZERO_DATA;
+    for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
+      vector_product(i) := ZERO_DATA;
 
-      for m in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-        vector_product(j) := std_logic_vector(to_float(to_real(to_float(vector_product(j))) + (to_real(to_float(matrix_data_d_int(m, j)))*to_real(to_float(vector_data_u_input(to_integer(unsigned(LENGTH_K_IN)), j))))));
+      for m in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
+        vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_data_d_int(i, m)))*to_real(to_float(vector_data_u_input(to_integer(unsigned(LENGTH_K_IN)), m))))));
       end loop;
     end loop;
 
@@ -1407,11 +1407,11 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-      vector_product(j) := ZERO_DATA;
+    for i in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
+      vector_product(i) := ZERO_DATA;
 
-      for m in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
-        vector_product(j) := std_logic_vector(to_float(to_real(to_float(vector_product(j))) + (to_real(to_float(matrix_exponent(m, j)))*to_real(to_float(INITIAL_X(j))))));
+      for m in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+        vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_exponent(i, m)))*to_real(to_float(INITIAL_X(m))))));
       end loop;
     end loop;
 
@@ -1437,11 +1437,11 @@ package body ntm_state_pkg is
         end loop;
       end loop;
 
-      for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
-        vector_product(j) := ZERO_DATA;
+      for i in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
+        vector_product(i) := ZERO_DATA;
 
-        for m in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
-          vector_product(j) := std_logic_vector(to_float(to_real(to_float(vector_product(j))) + (to_real(to_float(matrix_product(m, j)))*to_real(to_float(vector_data_u_input(k, j))))));
+        for m in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+          vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_product(i, m)))*to_real(to_float(vector_data_u_input(k, m))))));
         end loop;
       end loop;
 
@@ -1451,11 +1451,11 @@ package body ntm_state_pkg is
 
     end loop;
 
-    for j in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
-      vector_product(j) := ZERO_DATA;
+    for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
+      vector_product(i) := ZERO_DATA;
 
-      for m in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
-        vector_product(j) := std_logic_vector(to_float(to_real(to_float(vector_product(j))) + (to_real(to_float(matrix_data_d_int(m, j)))*to_real(to_float(vector_data_u_input(to_integer(unsigned(LENGTH_K_IN)), j))))));
+      for m in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
+        vector_product(i) := std_logic_vector(to_float(to_real(to_float(vector_product(i))) + (to_real(to_float(matrix_data_d_int(i, m)))*to_real(to_float(vector_data_u_input(to_integer(unsigned(LENGTH_K_IN)), m))))));
       end loop;
     end loop;
 
