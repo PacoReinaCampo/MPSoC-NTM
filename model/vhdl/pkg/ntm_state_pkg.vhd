@@ -74,6 +74,8 @@ package ntm_state_pkg is
   type matrix_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
   type tensor_buffer is array (CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0, CONTROL_SIZE-1 downto 0) of std_logic_vector(DATA_SIZE-1 downto 0);
 
+  constant INITIAL_X : vector_buffer := (others => (others => '0'));
+
   -----------------------------------------------------------------------
   -- Components
   -----------------------------------------------------------------------
@@ -480,77 +482,151 @@ package ntm_state_pkg is
   -- Functions
   -----------------------------------------------------------------------
 
+  function function_matrix_identity (
+    SIZE_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0)
+    ) return matrix_buffer;
+
   -----------------------------------------------------------------------
   -- STATE - FEEDBACK
   -----------------------------------------------------------------------
 
-  function function_matrix_identity (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0)
-    ) return matrix_buffer;
-
   function function_state_matrix_state (
-    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_C_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_C_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_D_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_D_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    matrix_data_a_input : matrix_buffer;
-    matrix_data_b_input : matrix_buffer;
-    matrix_data_c_input : matrix_buffer;
-    matrix_data_d_input : matrix_buffer;
-    matrix_data_k_input : matrix_buffer
+    matrix_data_a_input : in matrix_buffer;
+    matrix_data_b_input : in matrix_buffer;
+    matrix_data_c_input : in matrix_buffer;
+    matrix_data_d_input : in matrix_buffer;
+    matrix_data_k_input : in matrix_buffer
     ) return matrix_buffer;
 
   function function_state_matrix_input (
-    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_D_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_D_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    matrix_data_b_input : matrix_buffer;
-    matrix_data_d_input : matrix_buffer;
-    matrix_data_k_input : matrix_buffer
+    matrix_data_b_input : in matrix_buffer;
+    matrix_data_d_input : in matrix_buffer;
+    matrix_data_k_input : in matrix_buffer
     ) return matrix_buffer;
 
   function function_state_matrix_output (
-    SIZE_C_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_C_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_D_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_D_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    matrix_data_c_input : matrix_buffer;
-    matrix_data_d_input : matrix_buffer;
-    matrix_data_k_input : matrix_buffer
+    matrix_data_c_input : in matrix_buffer;
+    matrix_data_d_input : in matrix_buffer;
+    matrix_data_k_input : in matrix_buffer
     ) return matrix_buffer;
 
   function function_state_matrix_feedforward (
-    SIZE_D_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_D_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    matrix_data_d_input : matrix_buffer;
-    matrix_data_k_input : matrix_buffer
-
+    matrix_data_d_input : in matrix_buffer;
+    matrix_data_k_input : in matrix_buffer
     ) return matrix_buffer;
 
   -----------------------------------------------------------------------
   -- STATE - OUTPUTS
   -----------------------------------------------------------------------
 
+  function function_state_vector_output (
+    LENGTH_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    SIZE_K_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_data_a_input : in matrix_buffer;
+    matrix_data_b_input : in matrix_buffer;
+    matrix_data_c_input : in matrix_buffer;
+    matrix_data_d_input : in matrix_buffer;
+
+    matrix_data_k_input : in matrix_buffer;
+
+    vector_data_u_input : in matrix_buffer
+    ) return vector_buffer;
+
+  function function_state_vector_state (
+    LENGTH_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    SIZE_K_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_data_a_input : in matrix_buffer;
+    matrix_data_b_input : in matrix_buffer;
+    matrix_data_c_input : in matrix_buffer;
+    matrix_data_d_input : in matrix_buffer;
+
+    matrix_data_k_input : in matrix_buffer;
+
+    vector_data_u_input : in matrix_buffer
+    ) return vector_buffer;
+
   -----------------------------------------------------------------------
   -- STATE - TOP
   -----------------------------------------------------------------------
+
+  function function_state_top (
+    LENGTH_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    SIZE_K_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_data_a_input : in matrix_buffer;
+    matrix_data_b_input : in matrix_buffer;
+    matrix_data_c_input : in matrix_buffer;
+    matrix_data_d_input : in matrix_buffer;
+
+    matrix_data_k_input : in matrix_buffer;
+
+    vector_data_u_input : in matrix_buffer
+    ) return vector_buffer;
 
 end ntm_state_pkg;
 
@@ -560,19 +636,14 @@ package body ntm_state_pkg is
   -- Functions
   -----------------------------------------------------------------------
 
-  -----------------------------------------------------------------------
-  -- STATE - FEEDBACK
-  -----------------------------------------------------------------------
-
   function function_matrix_identity (
-    SIZE_IN : std_logic_vector(CONTROL_SIZE-1 downto 0)
+    SIZE_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0)
     ) return matrix_buffer is
 
     variable matrix_output : matrix_buffer;
 
   begin
 
-    -- Data Inputs
     for i in 0 to to_integer(unsigned(SIZE_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_IN))-1 loop
         if i = j then
@@ -586,23 +657,27 @@ package body ntm_state_pkg is
     return matrix_output;
   end function function_matrix_identity;
 
-  function function_state_matrix_state (
-    SIZE_A_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_A_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_C_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_C_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_D_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_D_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  -----------------------------------------------------------------------
+  -- STATE - FEEDBACK
+  -----------------------------------------------------------------------
 
-    matrix_data_a_input : matrix_buffer;
-    matrix_data_b_input : matrix_buffer;
-    matrix_data_c_input : matrix_buffer;
-    matrix_data_d_input : matrix_buffer;
-    matrix_data_k_input : matrix_buffer
+  function function_state_matrix_state (
+    SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_data_a_input : in matrix_buffer;
+    matrix_data_b_input : in matrix_buffer;
+    matrix_data_c_input : in matrix_buffer;
+    matrix_data_d_input : in matrix_buffer;
+    matrix_data_k_input : in matrix_buffer
     ) return matrix_buffer is
 
     variable MATRIX_IDENTITY : matrix_buffer;
@@ -625,10 +700,8 @@ package body ntm_state_pkg is
 
     -- a = A-B·K·inv(I+D·K)·C
 
-    -- Data Inputs
     MATRIX_IDENTITY := function_matrix_identity(SIZE_D_I_IN);
 
-    -- matrix_first_product := function_matrix_product(SIZE_D_I_IN, SIZE_D_J_IN, SIZE_K_I_IN, SIZE_K_J_IN, matrix_data_d_input, matrix_data_k_input);
     for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
         matrix_first_product(i, j) := ZERO_DATA;
@@ -639,14 +712,12 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    -- matrix_adder := function_matrix_adder(SIZE_D_I_IN, SIZE_K_J_IN, MATRIX_IDENTITY, matrix_first_product);
     for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
         matrix_adder(i, j) := std_logic_vector(to_float(to_real(to_float(MATRIX_IDENTITY(i, j))) + to_real(to_float(matrix_first_product(i, j)))));
       end loop;
     end loop;
 
-    -- matrix_inverse := function_matrix_inverse(SIZE_D_I_IN, SIZE_K_J_IN, matrix_adder);
     matrix_in_int := matrix_adder;
 
     for m in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
@@ -677,7 +748,6 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    -- matrix_first_product := function_matrix_product(SIZE_K_I_IN, SIZE_K_J_IN, SIZE_D_I_IN, SIZE_K_J_IN, matrix_data_k_input, matrix_inverse);
     for i in 0 to to_integer(unsigned(SIZE_K_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
         matrix_first_product(i, j) := ZERO_DATA;
@@ -688,7 +758,6 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    -- matrix_second_product := function_matrix_product(SIZE_K_I_IN, SIZE_K_J_IN, SIZE_D_I_IN, SIZE_K_J_IN, matrix_data_k_input, matrix_first_product);
     for i in 0 to to_integer(unsigned(SIZE_K_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
         matrix_second_product(i, j) := ZERO_DATA;
@@ -699,7 +768,6 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    -- matrix_first_product := function_matrix_product(SIZE_K_I_IN, SIZE_K_J_IN, SIZE_C_I_IN, SIZE_C_J_IN, matrix_second_product, matrix_data_c_input);
     for i in 0 to to_integer(unsigned(SIZE_K_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_C_J_IN))-1 loop
         matrix_first_product(i, j) := ZERO_DATA;
@@ -710,7 +778,6 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    -- matrix_a_output := function_matrix_adder(SIZE_K_I_IN, SIZE_C_J_IN, matrix_data_a_input, matrix_first_product);
     for i in 0 to to_integer(unsigned(SIZE_K_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_C_J_IN))-1 loop
         matrix_a_output(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_data_a_input(i, j))) + to_real(to_float(matrix_first_product(i, j)))));
@@ -721,16 +788,16 @@ package body ntm_state_pkg is
   end function function_state_matrix_state;
 
   function function_state_matrix_input (
-    SIZE_B_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_B_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_D_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_D_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    matrix_data_b_input : matrix_buffer;
-    matrix_data_d_input : matrix_buffer;
-    matrix_data_k_input : matrix_buffer
+    matrix_data_b_input : in matrix_buffer;
+    matrix_data_d_input : in matrix_buffer;
+    matrix_data_k_input : in matrix_buffer
     ) return matrix_buffer is
 
     variable MATRIX_IDENTITY : matrix_buffer;
@@ -753,10 +820,8 @@ package body ntm_state_pkg is
 
     -- b = B·(I-K·inv(I+D·K)·D)
 
-    -- Data Inputs
     MATRIX_IDENTITY := function_matrix_identity(SIZE_D_I_IN);
 
-    -- matrix_first_product := function_matrix_product(SIZE_D_I_IN, SIZE_D_J_IN, SIZE_K_I_IN, SIZE_K_J_IN, matrix_data_d_input, matrix_data_k_input);
     for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
         matrix_first_product(i, j) := ZERO_DATA;
@@ -767,14 +832,12 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    -- matrix_adder := function_matrix_adder(SIZE_D_I_IN, SIZE_K_J_IN, MATRIX_IDENTITY, matrix_first_product);
     for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
         matrix_adder(i, j) := std_logic_vector(to_float(to_real(to_float(MATRIX_IDENTITY(i, j))) + to_real(to_float(matrix_first_product(i, j)))));
       end loop;
     end loop;
 
-    -- matrix_inverse := function_matrix_inverse(SIZE_D_I_IN, SIZE_K_J_IN, matrix_adder);
     matrix_in_int := matrix_adder;
 
     for m in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
@@ -805,7 +868,6 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    -- matrix_first_product := function_matrix_product(SIZE_K_I_IN, SIZE_K_J_IN, SIZE_D_I_IN, SIZE_K_J_IN, matrix_data_k_input, matrix_inverse);
     for i in 0 to to_integer(unsigned(SIZE_K_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
         matrix_first_product(i, j) := ZERO_DATA;
@@ -816,7 +878,6 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    -- matrix_second_product := function_matrix_product(SIZE_K_I_IN, SIZE_K_J_IN, SIZE_D_I_IN, SIZE_D_J_IN, matrix_first_product, matrix_data_d_input);
     for i in 0 to to_integer(unsigned(SIZE_K_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
         matrix_second_product(i, j) := ZERO_DATA;
@@ -827,14 +888,12 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    -- matrix_adder := function_matrix_adder(SIZE_K_I_IN, SIZE_D_J_IN, MATRIX_IDENTITY, matrix_second_product);
     for i in 0 to to_integer(unsigned(SIZE_K_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
         matrix_adder(i, j) := std_logic_vector(to_float(to_real(to_float(MATRIX_IDENTITY(i, j))) + to_real(to_float(matrix_second_product(i, j)))));
       end loop;
     end loop;
 
-    -- matrix_b_output := function_matrix_product(SIZE_K_I_IN, SIZE_D_J_IN, SIZE_B_I_IN, SIZE_B_J_IN, matrix_adder, matrix_data_b_input);
     for i in 0 to to_integer(unsigned(SIZE_K_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
         matrix_b_output(i, j) := ZERO_DATA;
@@ -849,16 +908,16 @@ package body ntm_state_pkg is
   end function function_state_matrix_input;
 
   function function_state_matrix_output (
-    SIZE_C_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_C_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_D_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_D_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    matrix_data_c_input : matrix_buffer;
-    matrix_data_d_input : matrix_buffer;
-    matrix_data_k_input : matrix_buffer
+    matrix_data_c_input : in matrix_buffer;
+    matrix_data_d_input : in matrix_buffer;
+    matrix_data_k_input : in matrix_buffer
     ) return matrix_buffer is
 
     variable MATRIX_IDENTITY : matrix_buffer;
@@ -880,10 +939,8 @@ package body ntm_state_pkg is
 
     -- c = inv(I+D·K)·C
 
-    -- Data Inputs
     MATRIX_IDENTITY := function_matrix_identity(SIZE_D_I_IN);
 
-    -- matrix_product := function_matrix_product(SIZE_D_I_IN, SIZE_D_J_IN, SIZE_K_I_IN, SIZE_K_J_IN, matrix_data_d_input, matrix_data_k_input);
     for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
         matrix_product(i, j) := ZERO_DATA;
@@ -894,14 +951,12 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    -- matrix_adder := function_matrix_adder(SIZE_D_I_IN, SIZE_K_J_IN, MATRIX_IDENTITY, matrix_product);
     for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
         matrix_adder(i, j) := std_logic_vector(to_float(to_real(to_float(MATRIX_IDENTITY(i, j))) + to_real(to_float(matrix_product(i, j)))));
       end loop;
     end loop;
 
-    -- matrix_inverse:= function_matrix_inverse(SIZE_D_I_IN, SIZE_K_J_IN, matrix_adder);
     matrix_in_int := matrix_adder;
 
     for m in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
@@ -932,7 +987,6 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    -- matrix_c_output := function_matrix_product(SIZE_D_I_IN, SIZE_K_J_IN, SIZE_C_I_IN, SIZE_C_J_IN, matrix_inverse, matrix_data_c_input);
     for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
         matrix_c_output(i, j) := ZERO_DATA;
@@ -947,13 +1001,13 @@ package body ntm_state_pkg is
   end function function_state_matrix_output;
 
   function function_state_matrix_feedforward (
-    SIZE_D_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_D_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_I_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
-    SIZE_K_J_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
 
-    matrix_data_d_input : matrix_buffer;
-    matrix_data_k_input : matrix_buffer
+    matrix_data_d_input : in matrix_buffer;
+    matrix_data_k_input : in matrix_buffer
     ) return matrix_buffer is
 
     variable MATRIX_IDENTITY : matrix_buffer;
@@ -975,10 +1029,8 @@ package body ntm_state_pkg is
 
     -- d = inv(I+D·K)·D
 
-    -- Data Inputs
     MATRIX_IDENTITY := function_matrix_identity(SIZE_D_I_IN);
 
-    -- matrix_product := function_matrix_product(SIZE_D_I_IN, SIZE_D_J_IN, SIZE_K_I_IN, SIZE_K_J_IN, matrix_data_d_input, matrix_data_k_input);
     for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
         matrix_product(i, j) := ZERO_DATA;
@@ -989,14 +1041,12 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    -- matrix_adder := function_matrix_adder(SIZE_D_I_IN, SIZE_K_J_IN, MATRIX_IDENTITY, matrix_product);
     for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_K_J_IN))-1 loop
         matrix_adder(i, j) := std_logic_vector(to_float(to_real(to_float(MATRIX_IDENTITY(i, j))) + to_real(to_float(matrix_product(i, j)))));
       end loop;
     end loop;
 
-    -- matrix_inverse:= function_matrix_inverse(SIZE_D_I_IN, SIZE_K_J_IN, matrix_adder);
     matrix_in_int := matrix_adder;
 
     for m in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
@@ -1027,7 +1077,6 @@ package body ntm_state_pkg is
       end loop;
     end loop;
 
-    -- matrix_d_output := function_matrix_product(SIZE_D_I_IN, SIZE_K_J_IN, SIZE_D_I_IN, SIZE_D_J_IN, matrix_inverse, matrix_data_d_input);
     for i in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
       for j in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
         matrix_d_output(i, j) := ZERO_DATA;
@@ -1045,8 +1094,445 @@ package body ntm_state_pkg is
   -- STATE - OUTPUTS
   -----------------------------------------------------------------------
 
+  function function_state_vector_output (
+    LENGTH_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    SIZE_K_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_data_a_input : in matrix_buffer;
+    matrix_data_b_input : in matrix_buffer;
+    matrix_data_c_input : in matrix_buffer;
+    matrix_data_d_input : in matrix_buffer;
+
+    matrix_data_k_input : in matrix_buffer;
+
+    vector_data_u_input : in matrix_buffer
+    ) return vector_buffer is
+
+    variable matrix_data_a_int : matrix_buffer;
+    variable matrix_data_b_int : matrix_buffer;
+    variable matrix_data_c_int : matrix_buffer;
+    variable matrix_data_d_int : matrix_buffer;
+
+    variable matrix_exponent : matrix_buffer;
+
+    variable matrix_first_product  : matrix_buffer;
+    variable matrix_second_product : matrix_buffer;
+
+    variable vector_product : vector_buffer;
+
+    variable data_summation_int : vector_buffer;
+
+    variable vector_y_output : vector_buffer;
+
+  begin
+
+    -- x(k+1) = A·x(k) + B·u(k)
+    -- y(k) = C·x(k) + D·u(k)
+
+    matrix_data_a_int := function_state_matrix_state (
+      SIZE_A_I_IN => SIZE_A_I_IN,
+      SIZE_A_J_IN => SIZE_A_J_IN,
+      SIZE_B_I_IN => SIZE_B_I_IN,
+      SIZE_B_J_IN => SIZE_B_J_IN,
+      SIZE_C_I_IN => SIZE_C_I_IN,
+      SIZE_C_J_IN => SIZE_C_J_IN,
+      SIZE_D_I_IN => SIZE_D_I_IN,
+      SIZE_D_J_IN => SIZE_D_J_IN,
+
+      SIZE_K_I_IN => SIZE_K_I_IN,
+      SIZE_K_J_IN => SIZE_K_J_IN,
+
+      matrix_data_a_input => matrix_data_a_input,
+      matrix_data_b_input => matrix_data_b_input,
+      matrix_data_c_input => matrix_data_c_input,
+      matrix_data_d_input => matrix_data_d_input,
+
+      matrix_data_k_input => matrix_data_k_input
+      );
+
+    matrix_data_b_int := function_state_matrix_input (
+      SIZE_B_I_IN => SIZE_B_I_IN,
+      SIZE_B_J_IN => SIZE_B_J_IN,
+      SIZE_D_I_IN => SIZE_D_I_IN,
+      SIZE_D_J_IN => SIZE_D_J_IN,
+
+      SIZE_K_I_IN => SIZE_K_I_IN,
+      SIZE_K_J_IN => SIZE_K_J_IN,
+
+      matrix_data_b_input => matrix_data_b_input,
+      matrix_data_d_input => matrix_data_d_input,
+
+      matrix_data_k_input => matrix_data_k_input
+      );
+
+    matrix_data_c_int := function_state_matrix_output (
+      SIZE_C_I_IN => SIZE_C_I_IN,
+      SIZE_C_J_IN => SIZE_C_J_IN,
+      SIZE_D_I_IN => SIZE_D_I_IN,
+      SIZE_D_J_IN => SIZE_D_J_IN,
+
+      SIZE_K_I_IN => SIZE_K_I_IN,
+      SIZE_K_J_IN => SIZE_K_J_IN,
+
+      matrix_data_c_input => matrix_data_c_input,
+      matrix_data_d_input => matrix_data_d_input,
+
+      matrix_data_k_input => matrix_data_k_input
+      );
+
+    matrix_data_d_int := function_state_matrix_feedforward (
+      SIZE_D_I_IN => SIZE_D_I_IN,
+      SIZE_D_J_IN => SIZE_D_J_IN,
+
+      SIZE_K_I_IN => SIZE_K_I_IN,
+      SIZE_K_J_IN => SIZE_K_J_IN,
+
+      matrix_data_d_input => matrix_data_d_input,
+
+      matrix_data_k_input => matrix_data_k_input
+      );
+
+    -- y(k) = C·exp(A,k)·x(0) + summation(C·exp(A,k-j)·B·u(j))[j in 0 to k-1] + D·u(k)
+
+    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+        matrix_exponent(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_data_a_int(i, j)))**to_integer(unsigned(LENGTH_K_IN))));
+      end loop;
+    end loop;
+
+    for i in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+        matrix_first_product(i, j) := ZERO_DATA;
+
+        for m in 0 to to_integer(unsigned(SIZE_C_J_IN))-1 loop
+          matrix_first_product(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_first_product(i, j))) + (to_real(to_float(matrix_data_c_int(i, m)))*to_real(to_float(matrix_exponent(m, j))))));
+        end loop;
+      end loop;
+    end loop;
+
+    for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+      vector_product(j) := ZERO_DATA;
+
+      for m in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
+        vector_product(j) := std_logic_vector(to_float(to_real(to_float(vector_product(j))) + (to_real(to_float(matrix_first_product(m, j)))*to_real(to_float(INITIAL_X(j))))));
+      end loop;
+    end loop;
+
+    -- Initial Summation
+    data_summation_int := vector_product;
+
+    -- Summation
+    for k in 0 to to_integer(unsigned(LENGTH_K_IN))-1 loop
+
+      for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
+        for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+          matrix_exponent(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_exponent(i, j)))**(to_integer(unsigned(LENGTH_K_IN))-k)));
+        end loop;
+      end loop;
+
+      for i in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
+        for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+          matrix_first_product(i, j) := ZERO_DATA;
+
+          for m in 0 to to_integer(unsigned(SIZE_C_J_IN))-1 loop
+            matrix_first_product(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_first_product(i, j))) + (to_real(to_float(matrix_data_c_int(i, m)))*to_real(to_float(matrix_exponent(m, j))))));
+          end loop;
+        end loop;
+      end loop;
+
+      for i in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
+        for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
+          matrix_second_product(i, j) := ZERO_DATA;
+
+          for m in 0 to to_integer(unsigned(SIZE_C_J_IN))-1 loop
+            matrix_second_product(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_second_product(i, j))) + (to_real(to_float(matrix_first_product(i, m)))*to_real(to_float(matrix_data_b_int(m, j))))));
+          end loop;
+        end loop;
+      end loop;
+
+      for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+        vector_product(j) := ZERO_DATA;
+
+        for m in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
+          vector_product(j) := std_logic_vector(to_float(to_real(to_float(vector_product(j))) + (to_real(to_float(matrix_second_product(m, j)))*to_real(to_float(vector_data_u_input(k, j))))));
+        end loop;
+      end loop;
+
+      for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+        data_summation_int(j) := std_logic_vector(to_float(to_real(to_float(data_summation_int(j))) + (to_real(to_float(vector_product(j))))));
+      end loop;
+
+    end loop;
+
+    for j in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
+      vector_product(j) := ZERO_DATA;
+
+      for m in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
+        vector_product(j) := std_logic_vector(to_float(to_real(to_float(vector_product(j))) + (to_real(to_float(matrix_data_d_int(m, j)))*to_real(to_float(vector_data_u_input(to_integer(unsigned(LENGTH_K_IN)), j))))));
+      end loop;
+    end loop;
+
+    for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+      data_summation_int(j) := std_logic_vector(to_float(to_real(to_float(data_summation_int(j))) + (to_real(to_float(vector_product(j))))));
+    end loop;
+
+    vector_y_output := data_summation_int;
+
+    return vector_y_output;
+  end function function_state_vector_output;
+
+  function function_state_vector_state (
+    LENGTH_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    SIZE_K_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_data_a_input : in matrix_buffer;
+    matrix_data_b_input : in matrix_buffer;
+    matrix_data_c_input : in matrix_buffer;
+    matrix_data_d_input : in matrix_buffer;
+
+    matrix_data_k_input : in matrix_buffer;
+
+    vector_data_u_input : in matrix_buffer
+    ) return vector_buffer is
+
+    variable matrix_data_a_int : matrix_buffer;
+    variable matrix_data_b_int : matrix_buffer;
+    variable matrix_data_c_int : matrix_buffer;
+    variable matrix_data_d_int : matrix_buffer;
+
+    variable matrix_exponent : matrix_buffer;
+    variable matrix_product  : matrix_buffer;
+
+    variable vector_product : vector_buffer;
+
+    variable data_summation_int : vector_buffer;
+
+    variable vector_x_output : vector_buffer;
+
+  begin
+
+    -- x(k+1) = A·x(k) + B·u(k)
+    -- y(k) = C·x(k) + D·u(k)
+
+    matrix_data_a_int := function_state_matrix_state (
+      SIZE_A_I_IN => SIZE_A_I_IN,
+      SIZE_A_J_IN => SIZE_A_J_IN,
+      SIZE_B_I_IN => SIZE_B_I_IN,
+      SIZE_B_J_IN => SIZE_B_J_IN,
+      SIZE_C_I_IN => SIZE_C_I_IN,
+      SIZE_C_J_IN => SIZE_C_J_IN,
+      SIZE_D_I_IN => SIZE_D_I_IN,
+      SIZE_D_J_IN => SIZE_D_J_IN,
+
+      SIZE_K_I_IN => SIZE_K_I_IN,
+      SIZE_K_J_IN => SIZE_K_J_IN,
+
+      matrix_data_a_input => matrix_data_a_input,
+      matrix_data_b_input => matrix_data_b_input,
+      matrix_data_c_input => matrix_data_c_input,
+      matrix_data_d_input => matrix_data_d_input,
+
+      matrix_data_k_input => matrix_data_k_input
+      );
+
+    matrix_data_b_int := function_state_matrix_input (
+      SIZE_B_I_IN => SIZE_B_I_IN,
+      SIZE_B_J_IN => SIZE_B_J_IN,
+      SIZE_D_I_IN => SIZE_D_I_IN,
+      SIZE_D_J_IN => SIZE_D_J_IN,
+
+      SIZE_K_I_IN => SIZE_K_I_IN,
+      SIZE_K_J_IN => SIZE_K_J_IN,
+
+      matrix_data_b_input => matrix_data_b_input,
+      matrix_data_d_input => matrix_data_d_input,
+
+      matrix_data_k_input => matrix_data_k_input
+      );
+
+    matrix_data_c_int := function_state_matrix_output (
+      SIZE_C_I_IN => SIZE_C_I_IN,
+      SIZE_C_J_IN => SIZE_C_J_IN,
+      SIZE_D_I_IN => SIZE_D_I_IN,
+      SIZE_D_J_IN => SIZE_D_J_IN,
+
+      SIZE_K_I_IN => SIZE_K_I_IN,
+      SIZE_K_J_IN => SIZE_K_J_IN,
+
+      matrix_data_c_input => matrix_data_c_input,
+      matrix_data_d_input => matrix_data_d_input,
+
+      matrix_data_k_input => matrix_data_k_input
+      );
+
+    matrix_data_d_int := function_state_matrix_feedforward (
+      SIZE_D_I_IN => SIZE_D_I_IN,
+      SIZE_D_J_IN => SIZE_D_J_IN,
+
+      SIZE_K_I_IN => SIZE_K_I_IN,
+      SIZE_K_J_IN => SIZE_K_J_IN,
+
+      matrix_data_d_input => matrix_data_d_input,
+
+      matrix_data_k_input => matrix_data_k_input
+      );
+
+    -- x(k) = exp(A,k)·x(0) + summation(exp(A,k-j-1)·B·u(j))[j in 0 to k-1]
+
+    for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
+      for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+        matrix_exponent(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_data_a_int(i, j)))**to_integer(unsigned(LENGTH_K_IN))));
+      end loop;
+    end loop;
+
+    for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+      vector_product(j) := ZERO_DATA;
+
+      for m in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
+        vector_product(j) := std_logic_vector(to_float(to_real(to_float(vector_product(j))) + (to_real(to_float(matrix_exponent(m, j)))*to_real(to_float(INITIAL_X(j))))));
+      end loop;
+    end loop;
+
+    -- Initial Summation
+    data_summation_int := vector_product;
+
+    -- Summation
+    for k in 0 to to_integer(unsigned(LENGTH_K_IN))-1 loop
+
+      for i in 0 to to_integer(unsigned(SIZE_A_I_IN))-1 loop
+        for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+          matrix_exponent(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_exponent(i, j)))**(to_integer(unsigned(LENGTH_K_IN))-k)));
+        end loop;
+      end loop;
+
+      for i in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
+        for j in 0 to to_integer(unsigned(SIZE_B_J_IN))-1 loop
+          matrix_product(i, j) := ZERO_DATA;
+
+          for m in 0 to to_integer(unsigned(SIZE_C_J_IN))-1 loop
+            matrix_product(i, j) := std_logic_vector(to_float(to_real(to_float(matrix_product(i, j))) + (to_real(to_float(matrix_exponent(i, m)))*to_real(to_float(matrix_data_b_int(m, j))))));
+          end loop;
+        end loop;
+      end loop;
+
+      for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+        vector_product(j) := ZERO_DATA;
+
+        for m in 0 to to_integer(unsigned(SIZE_C_I_IN))-1 loop
+          vector_product(j) := std_logic_vector(to_float(to_real(to_float(vector_product(j))) + (to_real(to_float(matrix_product(m, j)))*to_real(to_float(vector_data_u_input(k, j))))));
+        end loop;
+      end loop;
+
+      for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+        data_summation_int(j) := std_logic_vector(to_float(to_real(to_float(data_summation_int(j))) + (to_real(to_float(vector_product(j))))));
+      end loop;
+
+    end loop;
+
+    for j in 0 to to_integer(unsigned(SIZE_D_J_IN))-1 loop
+      vector_product(j) := ZERO_DATA;
+
+      for m in 0 to to_integer(unsigned(SIZE_D_I_IN))-1 loop
+        vector_product(j) := std_logic_vector(to_float(to_real(to_float(vector_product(j))) + (to_real(to_float(matrix_data_d_int(m, j)))*to_real(to_float(vector_data_u_input(to_integer(unsigned(LENGTH_K_IN)), j))))));
+      end loop;
+    end loop;
+
+    for j in 0 to to_integer(unsigned(SIZE_A_J_IN))-1 loop
+      data_summation_int(j) := std_logic_vector(to_float(to_real(to_float(data_summation_int(j))) + (to_real(to_float(vector_product(j))))));
+    end loop;
+
+    vector_x_output := data_summation_int;
+
+    return vector_x_output;
+  end function function_state_vector_state;
+
   -----------------------------------------------------------------------
   -- STATE - TOP
   -----------------------------------------------------------------------
+
+  function function_state_top (
+    LENGTH_K_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    SIZE_A_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_A_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_B_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_C_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_D_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    SIZE_K_I_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_K_J_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_data_a_input : in matrix_buffer;
+    matrix_data_b_input : in matrix_buffer;
+    matrix_data_c_input : in matrix_buffer;
+    matrix_data_d_input : in matrix_buffer;
+
+    matrix_data_k_input : in matrix_buffer;
+
+    vector_data_u_input : in matrix_buffer
+    ) return vector_buffer is
+
+    variable vector_y_output : vector_buffer;
+
+  begin
+
+    -- x(k+1) = A·x(k) + B·u(k)
+    -- y(k) = C·x(k) + D·u(k)
+
+    -- x(k) = exp(A,k)·x(0) + summation(exp(A,k-j-1)·B·u(j))[j in 0 to k-1]
+    -- y(k) = C·exp(A,k)·x(0) + summation(C·exp(A,k-j)·B·u(j))[j in 0 to k-1] + D·u(k)
+
+    vector_y_output := function_state_vector_output (
+      LENGTH_K_IN => LENGTH_K_IN,
+
+      SIZE_A_I_IN => SIZE_A_I_IN,
+      SIZE_A_J_IN => SIZE_A_J_IN,
+      SIZE_B_I_IN => SIZE_B_I_IN,
+      SIZE_B_J_IN => SIZE_B_J_IN,
+      SIZE_C_I_IN => SIZE_C_I_IN,
+      SIZE_C_J_IN => SIZE_C_J_IN,
+      SIZE_D_I_IN => SIZE_D_I_IN,
+      SIZE_D_J_IN => SIZE_D_J_IN,
+
+      SIZE_K_I_IN => SIZE_K_I_IN,
+      SIZE_K_J_IN => SIZE_K_J_IN,
+
+      matrix_data_a_input => matrix_data_a_input,
+      matrix_data_b_input => matrix_data_b_input,
+      matrix_data_c_input => matrix_data_c_input,
+      matrix_data_d_input => matrix_data_d_input,
+
+      matrix_data_k_input => matrix_data_k_input,
+
+      vector_data_u_input => vector_data_u_input
+      );
+
+    return vector_y_output;
+  end function function_state_top;
 
 end ntm_state_pkg;

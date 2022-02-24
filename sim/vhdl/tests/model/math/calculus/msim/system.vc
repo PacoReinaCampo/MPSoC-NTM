@@ -1,41 +1,41 @@
-../../../../../../../bench/vhdl/model/pkg/ntm_arithmetic_pkg.vhd
-../../../../../../../bench/vhdl/model/pkg/ntm_math_pkg.vhd
+../../../../../../../model/vhdl/pkg/ntm_arithmetic_pkg.vhd
+../../../../../../../model/vhdl/pkg/ntm_math_pkg.vhd
 
-../../../../../../../bench/vhdl/model/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
-../../../../../../../bench/vhdl/model/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
-../../../../../../../bench/vhdl/model/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
+../../../../../../../model/vhdl/arithmetic/integer/scalar/ntm_scalar_integer_adder.vhd
+../../../../../../../model/vhdl/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.vhd
+../../../../../../../model/vhdl/arithmetic/integer/scalar/ntm_scalar_integer_divider.vhd
 
-../../../../../../../bench/vhdl/model/arithmetic/integer/vector/ntm_vector_integer_adder.vhd
-../../../../../../../bench/vhdl/model/arithmetic/integer/vector/ntm_vector_integer_multiplier.vhd
-../../../../../../../bench/vhdl/model/arithmetic/integer/vector/ntm_vector_integer_divider.vhd
+../../../../../../../model/vhdl/arithmetic/integer/vector/ntm_vector_integer_adder.vhd
+../../../../../../../model/vhdl/arithmetic/integer/vector/ntm_vector_integer_multiplier.vhd
+../../../../../../../model/vhdl/arithmetic/integer/vector/ntm_vector_integer_divider.vhd
 
-../../../../../../../bench/vhdl/model/arithmetic/integer/matrix/ntm_matrix_integer_adder.vhd
-../../../../../../../bench/vhdl/model/arithmetic/integer/matrix/ntm_matrix_integer_multiplier.vhd
-../../../../../../../bench/vhdl/model/arithmetic/integer/matrix/ntm_matrix_integer_divider.vhd
+../../../../../../../model/vhdl/arithmetic/integer/matrix/ntm_matrix_integer_adder.vhd
+../../../../../../../model/vhdl/arithmetic/integer/matrix/ntm_matrix_integer_multiplier.vhd
+../../../../../../../model/vhdl/arithmetic/integer/matrix/ntm_matrix_integer_divider.vhd
 
-../../../../../../../bench/vhdl/model/arithmetic/float/scalar/ntm_scalar_float_adder.vhd
-../../../../../../../bench/vhdl/model/arithmetic/float/scalar/ntm_scalar_float_multiplier.vhd
-../../../../../../../bench/vhdl/model/arithmetic/float/scalar/ntm_scalar_float_divider.vhd
+../../../../../../../model/vhdl/arithmetic/float/scalar/ntm_scalar_float_adder.vhd
+../../../../../../../model/vhdl/arithmetic/float/scalar/ntm_scalar_float_multiplier.vhd
+../../../../../../../model/vhdl/arithmetic/float/scalar/ntm_scalar_float_divider.vhd
 
-../../../../../../../bench/vhdl/model/arithmetic/float/vector/ntm_vector_float_adder.vhd
-../../../../../../../bench/vhdl/model/arithmetic/float/vector/ntm_vector_float_multiplier.vhd
-../../../../../../../bench/vhdl/model/arithmetic/float/vector/ntm_vector_float_divider.vhd
+../../../../../../../model/vhdl/arithmetic/float/vector/ntm_vector_float_adder.vhd
+../../../../../../../model/vhdl/arithmetic/float/vector/ntm_vector_float_multiplier.vhd
+../../../../../../../model/vhdl/arithmetic/float/vector/ntm_vector_float_divider.vhd
 
-../../../../../../../bench/vhdl/model/arithmetic/float/matrix/ntm_matrix_float_adder.vhd
-../../../../../../../bench/vhdl/model/arithmetic/float/matrix/ntm_matrix_float_multiplier.vhd
-../../../../../../../bench/vhdl/model/arithmetic/float/matrix/ntm_matrix_float_divider.vhd
+../../../../../../../model/vhdl/arithmetic/float/matrix/ntm_matrix_float_adder.vhd
+../../../../../../../model/vhdl/arithmetic/float/matrix/ntm_matrix_float_multiplier.vhd
+../../../../../../../model/vhdl/arithmetic/float/matrix/ntm_matrix_float_divider.vhd
 
-../../../../../../../bench/vhdl/model/math/calculus/vector/ntm_vector_differentiation.vhd
-../../../../../../../bench/vhdl/model/math/calculus/vector/ntm_vector_integration.vhd
-../../../../../../../bench/vhdl/model/math/calculus/vector/ntm_vector_softmax.vhd
+../../../../../../../model/vhdl/math/calculus/vector/ntm_vector_differentiation.vhd
+../../../../../../../model/vhdl/math/calculus/vector/ntm_vector_integration.vhd
+../../../../../../../model/vhdl/math/calculus/vector/ntm_vector_softmax.vhd
 
-../../../../../../../bench/vhdl/model/math/calculus/matrix/ntm_matrix_differentiation.vhd
-../../../../../../../bench/vhdl/model/math/calculus/matrix/ntm_matrix_integration.vhd
-../../../../../../../bench/vhdl/model/math/calculus/matrix/ntm_matrix_softmax.vhd
+../../../../../../../model/vhdl/math/calculus/matrix/ntm_matrix_differentiation.vhd
+../../../../../../../model/vhdl/math/calculus/matrix/ntm_matrix_integration.vhd
+../../../../../../../model/vhdl/math/calculus/matrix/ntm_matrix_softmax.vhd
 
-../../../../../../../bench/vhdl/model/math/calculus/tensor/ntm_tensor_differentiation.vhd
-../../../../../../../bench/vhdl/model/math/calculus/tensor/ntm_tensor_integration.vhd
-../../../../../../../bench/vhdl/model/math/calculus/tensor/ntm_tensor_softmax.vhd
+../../../../../../../model/vhdl/math/calculus/tensor/ntm_tensor_differentiation.vhd
+../../../../../../../model/vhdl/math/calculus/tensor/ntm_tensor_integration.vhd
+../../../../../../../model/vhdl/math/calculus/tensor/ntm_tensor_softmax.vhd
 
 ../../../../../../../bench/vhdl/tests/math/calculus/ntm_calculus_pkg.vhd
 ../../../../../../../bench/vhdl/tests/math/calculus/ntm_calculus_stimulus.vhd
