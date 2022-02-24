@@ -694,7 +694,7 @@ begin
       );
 
   -- VECTOR MULTIPLIER
-  vector_multiplier : ntm_vector_integer_multiplier
+  vector_multiplier : ntm_vector_float_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -721,7 +721,7 @@ begin
       );
 
   -- VECTOR ADDER
-  vector_adder : ntm_vector_integer_adder
+  vector_adder : ntm_vector_float_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE

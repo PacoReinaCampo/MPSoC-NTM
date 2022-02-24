@@ -174,21 +174,21 @@ architecture ntm_controller_architecture of ntm_controller is
 
   -- VECTOR ADDER
   -- CONTROL
-  signal start_vector_integer_adder : std_logic;
-  signal ready_vector_integer_adder : std_logic;
+  signal start_vector_float_adder : std_logic;
+  signal ready_vector_float_adder : std_logic;
 
-  signal operation_vector_integer_adder : std_logic;
+  signal operation_vector_float_adder : std_logic;
 
-  signal data_a_in_enable_vector_integer_adder : std_logic;
-  signal data_b_in_enable_vector_integer_adder : std_logic;
+  signal data_a_in_enable_vector_float_adder : std_logic;
+  signal data_b_in_enable_vector_float_adder : std_logic;
 
-  signal data_out_enable_vector_integer_adder : std_logic;
+  signal data_out_enable_vector_float_adder : std_logic;
 
   -- DATA
-  signal size_in_vector_integer_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_integer_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_float_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_float_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX PRODUCT
   -- CONTROL
@@ -344,13 +344,13 @@ begin
             end if;
 
             -- Data Outputs
-            data_a_in_vector_integer_adder <= data_out_matrix_product;
+            data_a_in_vector_float_adder <= data_out_matrix_product;
 
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '1';
+            data_a_in_enable_vector_float_adder <= '1';
           else
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '0';
+            data_a_in_enable_vector_float_adder <= '0';
           end if;
 
         when MATRIX_FIRST_PRODUCT_J_STATE =>  -- STEP 2
@@ -366,29 +366,29 @@ begin
             end if;
 
             -- Data Outputs
-            data_a_in_vector_integer_adder <= data_out_matrix_product;
+            data_a_in_vector_float_adder <= data_out_matrix_product;
 
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '1';
+            data_a_in_enable_vector_float_adder <= '1';
           else
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '0';
+            data_a_in_enable_vector_float_adder <= '0';
           end if;
 
         when VECTOR_FIRST_ADDER_STATE =>  -- STEP 3
 
           -- Data Inputs
-          size_in_vector_integer_adder   <= SIZE_L_IN;
-          data_a_in_vector_integer_adder <= data_out_matrix_product;
-          data_b_in_vector_integer_adder <= B_IN;
+          size_in_vector_float_adder   <= SIZE_L_IN;
+          data_a_in_vector_float_adder <= data_out_matrix_product;
+          data_b_in_vector_float_adder <= B_IN;
 
           -- Control Inputs
-          operation_vector_integer_adder <= '0';
+          operation_vector_float_adder <= '0';
 
-          data_a_in_enable_vector_integer_adder <= data_out_enable_vector_integer_adder;
-          data_b_in_enable_vector_integer_adder <= B_IN_ENABLE;
+          data_a_in_enable_vector_float_adder <= data_out_enable_vector_float_adder;
+          data_b_in_enable_vector_float_adder <= B_IN_ENABLE;
 
-          if (data_out_enable_vector_integer_adder = '1') then
+          if (data_out_enable_vector_float_adder = '1') then
             -- Control Internal
             start_matrix_product <= '1';
 
@@ -396,7 +396,7 @@ begin
             controller_ctrl_fsm_int <= MATRIX_SECOND_PRODUCT_I_STATE;
           else
             -- Control Internal
-            start_vector_integer_adder <= '0';
+            start_vector_float_adder <= '0';
           end if;
 
         when MATRIX_SECOND_PRODUCT_I_STATE =>  -- STEP 4
@@ -426,13 +426,13 @@ begin
             end if;
 
             -- Data Outputs
-            data_a_in_vector_integer_adder <= data_out_matrix_product;
+            data_a_in_vector_float_adder <= data_out_matrix_product;
 
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '1';
+            data_a_in_enable_vector_float_adder <= '1';
           else
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '0';
+            data_a_in_enable_vector_float_adder <= '0';
           end if;
 
         when MATRIX_SECOND_PRODUCT_J_STATE =>  -- STEP 5
@@ -448,29 +448,29 @@ begin
             end if;
 
             -- Data Outputs
-            data_a_in_vector_integer_adder <= data_out_matrix_product;
+            data_a_in_vector_float_adder <= data_out_matrix_product;
 
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '1';
+            data_a_in_enable_vector_float_adder <= '1';
           else
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '0';
+            data_a_in_enable_vector_float_adder <= '0';
           end if;
 
         when VECTOR_SECOND_ADDER_STATE =>  -- STEP 6
 
           -- Data Inputs
-          size_in_vector_integer_adder   <= SIZE_L_IN;
-          data_a_in_vector_integer_adder <= data_out_matrix_product;
-          data_b_in_vector_integer_adder <= data_out_vector_integer_adder;
+          size_in_vector_float_adder   <= SIZE_L_IN;
+          data_a_in_vector_float_adder <= data_out_matrix_product;
+          data_b_in_vector_float_adder <= data_out_vector_float_adder;
 
           -- Control Inputs
-          operation_vector_integer_adder <= '0';
+          operation_vector_float_adder <= '0';
 
-          data_a_in_enable_vector_integer_adder <= data_out_i_enable_matrix_product;
-          data_b_in_enable_vector_integer_adder <= data_out_enable_vector_integer_adder;
+          data_a_in_enable_vector_float_adder <= data_out_i_enable_matrix_product;
+          data_b_in_enable_vector_float_adder <= data_out_enable_vector_float_adder;
 
-          if (data_out_enable_vector_integer_adder = '1') then
+          if (data_out_enable_vector_float_adder = '1') then
             -- Control Internal
             start_matrix_product <= '1';
 
@@ -478,7 +478,7 @@ begin
             controller_ctrl_fsm_int <= MATRIX_THIRD_PRODUCT_I_STATE;
           else
             -- Control Internal
-            start_vector_integer_adder <= '0';
+            start_vector_float_adder <= '0';
           end if;
 
         when MATRIX_THIRD_PRODUCT_I_STATE =>  -- STEP 7
@@ -508,13 +508,13 @@ begin
             end if;
 
             -- Data Outputs
-            data_a_in_vector_integer_adder <= data_out_matrix_product;
+            data_a_in_vector_float_adder <= data_out_matrix_product;
 
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '1';
+            data_a_in_enable_vector_float_adder <= '1';
           else
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '0';
+            data_a_in_enable_vector_float_adder <= '0';
           end if;
 
         when MATRIX_THIRD_PRODUCT_J_STATE =>  -- STEP 8
@@ -530,29 +530,29 @@ begin
             end if;
 
             -- Data Outputs
-            data_a_in_vector_integer_adder <= data_out_matrix_product;
+            data_a_in_vector_float_adder <= data_out_matrix_product;
 
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '1';
+            data_a_in_enable_vector_float_adder <= '1';
           else
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '0';
+            data_a_in_enable_vector_float_adder <= '0';
           end if;
 
         when VECTOR_THIRD_ADDER_STATE =>  -- STEP 9
 
           -- Data Inputs
-          size_in_vector_integer_adder   <= SIZE_L_IN;
-          data_a_in_vector_integer_adder <= data_out_matrix_product;
-          data_b_in_vector_integer_adder <= data_out_vector_integer_adder;
+          size_in_vector_float_adder   <= SIZE_L_IN;
+          data_a_in_vector_float_adder <= data_out_matrix_product;
+          data_b_in_vector_float_adder <= data_out_vector_float_adder;
 
           -- Control Inputs
-          operation_vector_integer_adder <= '0';
+          operation_vector_float_adder <= '0';
 
-          data_a_in_enable_vector_integer_adder <= data_out_i_enable_matrix_product;
-          data_b_in_enable_vector_integer_adder <= data_out_enable_vector_integer_adder;
+          data_a_in_enable_vector_float_adder <= data_out_i_enable_matrix_product;
+          data_b_in_enable_vector_float_adder <= data_out_enable_vector_float_adder;
 
-          if (data_out_enable_vector_integer_adder = '1') then
+          if (data_out_enable_vector_float_adder = '1') then
             -- Control Internal
             start_vector_logistic <= '1';
 
@@ -560,17 +560,17 @@ begin
             controller_ctrl_fsm_int <= VECTOR_LOGISTIC_STATE;
           else
             -- Control Internal
-            start_vector_integer_adder <= '0';
+            start_vector_float_adder <= '0';
           end if;
 
         when VECTOR_LOGISTIC_STATE =>   -- STEP 10
 
           -- Data Inputs
           size_in_vector_logistic <= SIZE_L_IN;
-          data_in_vector_logistic <= data_out_vector_integer_adder;
+          data_in_vector_logistic <= data_out_vector_float_adder;
 
           -- Control Inputs
-          data_in_enable_vector_logistic <= data_out_enable_vector_integer_adder;
+          data_in_enable_vector_logistic <= data_out_enable_vector_float_adder;
 
           if (ready_vector_logistic = '1') then
             if (unsigned(index_i_loop) = unsigned(SIZE_L_IN) - unsigned(ONE_CONTROL)) then
@@ -632,7 +632,7 @@ begin
   B_OUT <= b_out_trainer;
 
   -- VECTOR ADDER
-  vector_integer_adder : ntm_vector_integer_adder
+  vector_float_adder : ntm_vector_float_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -643,21 +643,21 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_integer_adder,
-      READY => ready_vector_integer_adder,
+      START => start_vector_float_adder,
+      READY => ready_vector_float_adder,
 
-      OPERATION => operation_vector_integer_adder,
+      OPERATION => operation_vector_float_adder,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_integer_adder,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_integer_adder,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_adder,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_adder,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_integer_adder,
+      DATA_OUT_ENABLE => data_out_enable_vector_float_adder,
 
       -- DATA
-      SIZE_IN   => size_in_vector_integer_adder,
-      DATA_A_IN => data_a_in_vector_integer_adder,
-      DATA_B_IN => data_b_in_vector_integer_adder,
-      DATA_OUT  => data_out_vector_integer_adder
+      SIZE_IN   => size_in_vector_float_adder,
+      DATA_A_IN => data_a_in_vector_float_adder,
+      DATA_B_IN => data_b_in_vector_float_adder,
+      DATA_OUT  => data_out_vector_float_adder
       );
 
   -- MATRIX PRODUCT

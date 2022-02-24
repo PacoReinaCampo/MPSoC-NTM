@@ -174,21 +174,21 @@ architecture ntm_controller_architecture of ntm_controller is
 
   -- VECTOR ADDER
   -- CONTROL
-  signal start_vector_integer_adder : std_logic;
-  signal ready_vector_integer_adder : std_logic;
+  signal start_vector_float_adder : std_logic;
+  signal ready_vector_float_adder : std_logic;
 
-  signal operation_vector_integer_adder : std_logic;
+  signal operation_vector_float_adder : std_logic;
 
-  signal data_a_in_enable_vector_integer_adder : std_logic;
-  signal data_b_in_enable_vector_integer_adder : std_logic;
+  signal data_a_in_enable_vector_float_adder : std_logic;
+  signal data_b_in_enable_vector_float_adder : std_logic;
 
-  signal data_out_enable_vector_integer_adder : std_logic;
+  signal data_out_enable_vector_float_adder : std_logic;
 
   -- DATA
-  signal size_in_vector_integer_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_integer_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_float_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_float_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX CONVOLUTION
   -- CONTROL
@@ -343,13 +343,13 @@ begin
             end if;
 
             -- Data Outputs
-            data_a_in_vector_integer_adder <= data_out_matrix_convolution;
+            data_a_in_vector_float_adder <= data_out_matrix_convolution;
 
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '1';
+            data_a_in_enable_vector_float_adder <= '1';
           else
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '0';
+            data_a_in_enable_vector_float_adder <= '0';
           end if;
 
         when MATRIX_J_FIRST_CONVOLUTION_STATE =>  -- STEP 2
@@ -370,27 +370,27 @@ begin
             end if;
 
             -- Data Outputs
-            data_a_in_vector_integer_adder <= data_out_matrix_convolution;
+            data_a_in_vector_float_adder <= data_out_matrix_convolution;
 
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '1';
+            data_a_in_enable_vector_float_adder <= '1';
           else
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '0';
+            data_a_in_enable_vector_float_adder <= '0';
           end if;
 
         when VECTOR_FIRST_ADDER_STATE =>  -- STEP 3
 
           -- Control Inputs
-          operation_vector_integer_adder <= '0';
+          operation_vector_float_adder <= '0';
 
-          data_a_in_enable_vector_integer_adder <= '0';
-          data_b_in_enable_vector_integer_adder <= '0';
+          data_a_in_enable_vector_float_adder <= '0';
+          data_b_in_enable_vector_float_adder <= '0';
 
           -- Data Inputs
-          size_in_vector_integer_adder   <= SIZE_L_IN;
-          data_a_in_vector_integer_adder <= data_out_matrix_convolution;
-          data_b_in_vector_integer_adder <= B_IN;
+          size_in_vector_float_adder   <= SIZE_L_IN;
+          data_a_in_vector_float_adder <= data_out_matrix_convolution;
+          data_b_in_vector_float_adder <= B_IN;
 
         when MATRIX_I_SECOND_CONVOLUTION_STATE =>  -- STEP 4
 
@@ -418,13 +418,13 @@ begin
             end if;
 
             -- Data Outputs
-            data_a_in_vector_integer_adder <= data_out_matrix_convolution;
+            data_a_in_vector_float_adder <= data_out_matrix_convolution;
 
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '1';
+            data_a_in_enable_vector_float_adder <= '1';
           else
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '0';
+            data_a_in_enable_vector_float_adder <= '0';
           end if;
 
         when MATRIX_J_SECOND_CONVOLUTION_STATE =>  -- STEP 5
@@ -445,27 +445,27 @@ begin
             end if;
 
             -- Data Outputs
-            data_a_in_vector_integer_adder <= data_out_matrix_convolution;
+            data_a_in_vector_float_adder <= data_out_matrix_convolution;
 
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '1';
+            data_a_in_enable_vector_float_adder <= '1';
           else
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '0';
+            data_a_in_enable_vector_float_adder <= '0';
           end if;
 
         when VECTOR_SECOND_ADDER_STATE =>  -- STEP 6
 
           -- Control Inputs
-          operation_vector_integer_adder <= '0';
+          operation_vector_float_adder <= '0';
 
-          data_a_in_enable_vector_integer_adder <= '0';
-          data_b_in_enable_vector_integer_adder <= '0';
+          data_a_in_enable_vector_float_adder <= '0';
+          data_b_in_enable_vector_float_adder <= '0';
 
           -- Data Inputs
-          size_in_vector_integer_adder   <= SIZE_L_IN;
-          data_a_in_vector_integer_adder <= data_out_matrix_convolution;
-          data_b_in_vector_integer_adder <= data_out_vector_integer_adder;
+          size_in_vector_float_adder   <= SIZE_L_IN;
+          data_a_in_vector_float_adder <= data_out_matrix_convolution;
+          data_b_in_vector_float_adder <= data_out_vector_float_adder;
 
         when MATRIX_I_THIRD_CONVOLUTION_STATE =>  -- STEP 7
 
@@ -493,13 +493,13 @@ begin
             end if;
 
             -- Data Outputs
-            data_a_in_vector_integer_adder <= data_out_matrix_convolution;
+            data_a_in_vector_float_adder <= data_out_matrix_convolution;
 
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '1';
+            data_a_in_enable_vector_float_adder <= '1';
           else
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '0';
+            data_a_in_enable_vector_float_adder <= '0';
           end if;
 
         when MATRIX_J_THIRD_CONVOLUTION_STATE =>  -- STEP 8
@@ -520,27 +520,27 @@ begin
             end if;
 
             -- Data Outputs
-            data_a_in_vector_integer_adder <= data_out_matrix_convolution;
+            data_a_in_vector_float_adder <= data_out_matrix_convolution;
 
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '1';
+            data_a_in_enable_vector_float_adder <= '1';
           else
             -- Control Outputs
-            data_a_in_enable_vector_integer_adder <= '0';
+            data_a_in_enable_vector_float_adder <= '0';
           end if;
 
         when VECTOR_THIRD_ADDER_STATE =>  -- STEP 9
 
           -- Control Inputs
-          operation_vector_integer_adder <= '0';
+          operation_vector_float_adder <= '0';
 
-          data_a_in_enable_vector_integer_adder <= '0';
-          data_b_in_enable_vector_integer_adder <= '0';
+          data_a_in_enable_vector_float_adder <= '0';
+          data_b_in_enable_vector_float_adder <= '0';
 
           -- Data Inputs
-          size_in_vector_integer_adder   <= SIZE_L_IN;
-          data_a_in_vector_integer_adder <= data_out_matrix_convolution;
-          data_b_in_vector_integer_adder <= data_out_vector_integer_adder;
+          size_in_vector_float_adder   <= SIZE_L_IN;
+          data_a_in_vector_float_adder <= data_out_matrix_convolution;
+          data_b_in_vector_float_adder <= data_out_vector_float_adder;
 
         when VECTOR_LOGISTIC_STATE =>   -- STEP 10
 
@@ -549,7 +549,7 @@ begin
 
           -- Data Inputs
           size_in_vector_logistic <= SIZE_L_IN;
-          data_in_vector_logistic <= data_out_vector_integer_adder;
+          data_in_vector_logistic <= data_out_vector_float_adder;
 
           if (ready_vector_logistic = '1') then
             if (unsigned(index_i_loop) = unsigned(SIZE_L_IN) - unsigned(ONE_CONTROL)) then
@@ -611,7 +611,7 @@ begin
   B_OUT <= b_out_trainer;
 
   -- VECTOR ADDER
-  vector_integer_adder : ntm_vector_integer_adder
+  vector_float_adder : ntm_vector_float_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -622,21 +622,21 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_integer_adder,
-      READY => ready_vector_integer_adder,
+      START => start_vector_float_adder,
+      READY => ready_vector_float_adder,
 
-      OPERATION => operation_vector_integer_adder,
+      OPERATION => operation_vector_float_adder,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_integer_adder,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_integer_adder,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_adder,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_adder,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_integer_adder,
+      DATA_OUT_ENABLE => data_out_enable_vector_float_adder,
 
       -- DATA
-      SIZE_IN   => size_in_vector_integer_adder,
-      DATA_A_IN => data_a_in_vector_integer_adder,
-      DATA_B_IN => data_b_in_vector_integer_adder,
-      DATA_OUT  => data_out_vector_integer_adder
+      SIZE_IN   => size_in_vector_float_adder,
+      DATA_A_IN => data_a_in_vector_float_adder,
+      DATA_B_IN => data_b_in_vector_float_adder,
+      DATA_OUT  => data_out_vector_float_adder
       );
 
   -- MATRIX CONVOLUTION

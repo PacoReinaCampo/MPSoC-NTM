@@ -162,29 +162,27 @@ architecture ntm_tensor_product_architecture of ntm_tensor_product is
 
   -- SCALAR ADDER
   -- CONTROL
-  signal start_scalar_integer_adder : std_logic;
-  signal ready_scalar_integer_adder : std_logic;
+  signal start_scalar_float_adder : std_logic;
+  signal ready_scalar_float_adder : std_logic;
 
-  signal operation_scalar_integer_adder : std_logic;
+  signal operation_scalar_float_adder : std_logic;
 
   -- DATA
-  signal data_a_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_scalar_integer_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal overflow_out_scalar_integer_adder : std_logic;
+  signal data_out_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR MULTIPLIER
   -- CONTROL
-  signal start_scalar_integer_multiplier : std_logic;
-  signal ready_scalar_integer_multiplier : std_logic;
+  signal start_scalar_float_multiplier : std_logic;
+  signal ready_scalar_float_multiplier : std_logic;
 
   -- DATA
-  signal data_a_in_scalar_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_scalar_integer_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal overflow_out_scalar_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -213,10 +211,10 @@ begin
       DATA_OUT_K_ENABLE <= '0';
 
       -- Control Internal
-      start_scalar_integer_adder      <= '0';
-      start_scalar_integer_multiplier <= '0';
+      start_scalar_float_adder      <= '0';
+      start_scalar_float_multiplier <= '0';
 
-      operation_scalar_integer_adder <= '0';
+      operation_scalar_float_adder <= '0';
 
       index_i_loop <= ZERO_CONTROL;
       index_j_loop <= ZERO_CONTROL;
@@ -231,11 +229,11 @@ begin
       data_b_in_k_product_int <= '0';
 
       -- Data Internal
-      data_a_in_scalar_integer_adder <= ZERO_DATA;
-      data_b_in_scalar_integer_adder <= ZERO_DATA;
+      data_a_in_scalar_float_adder <= ZERO_DATA;
+      data_b_in_scalar_float_adder <= ZERO_DATA;
 
-      data_a_in_scalar_integer_multiplier <= ZERO_DATA;
-      data_b_in_scalar_integer_multiplier <= ZERO_DATA;
+      data_a_in_scalar_float_multiplier <= ZERO_DATA;
+      data_b_in_scalar_float_multiplier <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -457,8 +455,8 @@ begin
         when CLEAN_I_STATE =>           -- STEP 7
 
           -- Data Inputs
-          data_a_in_scalar_integer_multiplier <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-          data_b_in_scalar_integer_multiplier <= tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+          data_a_in_scalar_float_multiplier <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+          data_b_in_scalar_float_multiplier <= tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
           -- Control Outputs
           DATA_I_ENABLE <= '0';
@@ -470,7 +468,7 @@ begin
           DATA_OUT_K_ENABLE <= '0';
 
           -- Control Internal
-          start_scalar_integer_multiplier <= '1';
+          start_scalar_float_multiplier <= '1';
 
           -- FSM Control
           if ((unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
@@ -484,8 +482,8 @@ begin
         when CLEAN_J_STATE =>           -- STEP 8
 
           -- Data Inputs
-          data_a_in_scalar_integer_multiplier <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-          data_b_in_scalar_integer_multiplier <= tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+          data_a_in_scalar_float_multiplier <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+          data_b_in_scalar_float_multiplier <= tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
           -- Control Outputs
           DATA_J_ENABLE <= '0';
@@ -495,7 +493,7 @@ begin
           DATA_OUT_K_ENABLE <= '0';
 
           -- Control Internal
-          start_scalar_integer_multiplier <= '1';
+          start_scalar_float_multiplier <= '1';
 
           -- FSM Control
           if ((unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
@@ -509,8 +507,8 @@ begin
         when CLEAN_K_STATE =>           -- STEP 9
 
           -- Data Inputs
-          data_a_in_scalar_integer_multiplier <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
-          data_b_in_scalar_integer_multiplier <= tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+          data_a_in_scalar_float_multiplier <= tensor_a_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
+          data_b_in_scalar_float_multiplier <= tensor_b_int(to_integer(unsigned(index_i_loop)), to_integer(unsigned(index_j_loop)), to_integer(unsigned(index_k_loop)));
 
           -- Control Outputs
           DATA_K_ENABLE <= '0';
@@ -518,7 +516,7 @@ begin
           DATA_OUT_K_ENABLE <= '0';
 
           -- Control Internal
-          start_scalar_integer_multiplier <= '1';
+          start_scalar_float_multiplier <= '1';
 
           -- FSM Control
           if ((unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
@@ -531,83 +529,83 @@ begin
 
         when SCALAR_MULTIPLIER_I_STATE =>  -- STEP 10
 
-          if (ready_scalar_integer_multiplier = '1') then
+          if (ready_scalar_float_multiplier = '1') then
             -- Control Internal
-            start_scalar_integer_adder <= '1';
+            start_scalar_float_adder <= '1';
 
-            operation_scalar_integer_adder <= '0';
+            operation_scalar_float_adder <= '0';
 
             -- Data Internal
-            data_a_in_scalar_integer_adder <= data_out_scalar_integer_multiplier;
+            data_a_in_scalar_float_adder <= data_out_scalar_float_multiplier;
 
             if (unsigned(index_m_loop) = unsigned(ZERO_CONTROL)) then
-              data_b_in_scalar_integer_adder <= ZERO_DATA;
+              data_b_in_scalar_float_adder <= ZERO_DATA;
             else
-              data_b_in_scalar_integer_adder <= data_out_scalar_integer_adder;
+              data_b_in_scalar_float_adder <= data_out_scalar_float_adder;
             end if;
 
             -- FSM Control
             product_ctrl_fsm_int <= SCALAR_ADDER_I_STATE;
           else
             -- Control Internal
-            start_scalar_integer_multiplier <= '0';
+            start_scalar_float_multiplier <= '0';
           end if;
 
         when SCALAR_MULTIPLIER_J_STATE =>  -- STEP 11
 
-          if (ready_scalar_integer_multiplier = '1') then
+          if (ready_scalar_float_multiplier = '1') then
             -- Control Internal
-            start_scalar_integer_adder <= '1';
+            start_scalar_float_adder <= '1';
 
-            operation_scalar_integer_adder <= '0';
+            operation_scalar_float_adder <= '0';
 
             -- Data Internal
-            data_a_in_scalar_integer_adder <= data_out_scalar_integer_multiplier;
+            data_a_in_scalar_float_adder <= data_out_scalar_float_multiplier;
 
             if (unsigned(index_m_loop) = unsigned(ZERO_CONTROL)) then
-              data_b_in_scalar_integer_adder <= ZERO_DATA;
+              data_b_in_scalar_float_adder <= ZERO_DATA;
             else
-              data_b_in_scalar_integer_adder <= data_out_scalar_integer_adder;
+              data_b_in_scalar_float_adder <= data_out_scalar_float_adder;
             end if;
 
             -- FSM Control
             product_ctrl_fsm_int <= SCALAR_ADDER_J_STATE;
           else
             -- Control Internal
-            start_scalar_integer_multiplier <= '0';
+            start_scalar_float_multiplier <= '0';
           end if;
 
         when SCALAR_MULTIPLIER_K_STATE =>  -- STEP 12
 
-          if (ready_scalar_integer_multiplier = '1') then
+          if (ready_scalar_float_multiplier = '1') then
             -- Control Internal
-            start_scalar_integer_adder <= '1';
+            start_scalar_float_adder <= '1';
 
-            operation_scalar_integer_adder <= '0';
+            operation_scalar_float_adder <= '0';
 
             -- Data Internal
-            data_a_in_scalar_integer_adder <= data_out_scalar_integer_multiplier;
+            data_a_in_scalar_float_adder <= data_out_scalar_float_multiplier;
 
             if (unsigned(index_m_loop) = unsigned(ZERO_CONTROL)) then
-              data_b_in_scalar_integer_adder <= ZERO_DATA;
+              data_b_in_scalar_float_adder <= ZERO_DATA;
             else
-              data_b_in_scalar_integer_adder <= data_out_scalar_integer_adder;
+              data_b_in_scalar_float_adder <= data_out_scalar_float_adder;
             end if;
 
             -- FSM Control
             product_ctrl_fsm_int <= SCALAR_ADDER_K_STATE;
           else
             -- Control Internal
-            start_scalar_integer_multiplier <= '0';
+            start_scalar_float_multiplier <= '0';
           end if;
 
         when SCALAR_ADDER_I_STATE =>    -- STEP 13
 
-          if (ready_scalar_integer_adder = '1') then
+          if (ready_scalar_float_adder = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
               if (unsigned(index_m_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then
                 -- Data Outputs
-                DATA_OUT <= data_out_scalar_integer_adder;
+                DATA_OUT <= data_out_scalar_float_adder;
 
                 -- Control Outputs
                 DATA_OUT_I_ENABLE <= '1';
@@ -634,7 +632,7 @@ begin
             elsif ((unsigned(index_i_loop) < unsigned(SIZE_A_I_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
               if (unsigned(index_m_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then
                 -- Data Outputs
-                DATA_OUT <= data_out_scalar_integer_adder;
+                DATA_OUT <= data_out_scalar_float_adder;
 
                 -- Control Outputs
                 DATA_OUT_I_ENABLE <= '1';
@@ -656,16 +654,16 @@ begin
             end if;
           else
             -- Control Internal
-            start_scalar_integer_adder <= '0';
+            start_scalar_float_adder <= '0';
           end if;
 
         when SCALAR_ADDER_J_STATE =>    -- STEP 14
 
-          if (ready_scalar_integer_adder = '1') then
+          if (ready_scalar_float_adder = '1') then
             if ((unsigned(index_j_loop) < unsigned(SIZE_A_J_IN)-unsigned(ONE_CONTROL)) and (unsigned(index_k_loop) = unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL))) then
               if (unsigned(index_m_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then
                 -- Data Outputs
-                DATA_OUT <= data_out_scalar_integer_adder;
+                DATA_OUT <= data_out_scalar_float_adder;
 
                 -- Control Outputs
                 DATA_OUT_J_ENABLE <= '1';
@@ -685,16 +683,16 @@ begin
             end if;
           else
             -- Control Internal
-            start_scalar_integer_adder <= '0';
+            start_scalar_float_adder <= '0';
           end if;
 
         when SCALAR_ADDER_K_STATE =>    -- STEP 15
 
-          if (ready_scalar_integer_adder = '1') then
+          if (ready_scalar_float_adder = '1') then
             if (unsigned(index_k_loop) < unsigned(SIZE_B_K_IN)-unsigned(ONE_CONTROL)) then
               if (unsigned(index_m_loop) = unsigned(SIZE_A_K_IN)-unsigned(ONE_CONTROL)) then
                 -- Data Outputs
-                DATA_OUT <= data_out_scalar_integer_adder;
+                DATA_OUT <= data_out_scalar_float_adder;
 
                 -- Control Outputs
                 DATA_OUT_K_ENABLE <= '1';
@@ -712,7 +710,7 @@ begin
             end if;
           else
             -- Control Internal
-            start_scalar_integer_adder <= '0';
+            start_scalar_float_adder <= '0';
           end if;
 
         when others =>
@@ -723,7 +721,7 @@ begin
   end process;
 
   -- SCALAR ADDER
-  scalar_integer_adder : ntm_scalar_integer_adder
+  scalar_float_adder : ntm_scalar_float_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -734,21 +732,20 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_integer_adder,
-      READY => ready_scalar_integer_adder,
+      START => start_scalar_float_adder,
+      READY => ready_scalar_float_adder,
 
-      OPERATION => operation_scalar_integer_adder,
+      OPERATION => operation_scalar_float_adder,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_integer_adder,
-      DATA_B_IN => data_b_in_scalar_integer_adder,
+      DATA_A_IN => data_a_in_scalar_float_adder,
+      DATA_B_IN => data_b_in_scalar_float_adder,
 
-      DATA_OUT     => data_out_scalar_integer_adder,
-      OVERFLOW_OUT => overflow_out_scalar_integer_adder
+      DATA_OUT => data_out_scalar_float_adder
       );
 
   -- SCALAR MULTIPLIER
-  scalar_integer_multiplier : ntm_scalar_integer_multiplier
+  scalar_float_multiplier : ntm_scalar_float_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -759,15 +756,14 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_integer_multiplier,
-      READY => ready_scalar_integer_multiplier,
+      START => start_scalar_float_multiplier,
+      READY => ready_scalar_float_multiplier,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_integer_multiplier,
-      DATA_B_IN => data_b_in_scalar_integer_multiplier,
+      DATA_A_IN => data_a_in_scalar_float_multiplier,
+      DATA_B_IN => data_b_in_scalar_float_multiplier,
 
-      DATA_OUT     => data_out_scalar_integer_multiplier,
-      OVERFLOW_OUT => overflow_out_scalar_integer_multiplier
+      DATA_OUT => data_out_scalar_float_multiplier
       );
 
 end architecture;

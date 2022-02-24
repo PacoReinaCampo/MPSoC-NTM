@@ -130,19 +130,19 @@ architecture ntm_content_based_addressing_architecture of ntm_content_based_addr
 
   -- VECTOR MULTIPLIER
   -- CONTROL
-  signal start_vector_integer_multiplier : std_logic;
-  signal ready_vector_integer_multiplier : std_logic;
+  signal start_vector_float_multiplier : std_logic;
+  signal ready_vector_float_multiplier : std_logic;
 
-  signal data_a_in_enable_vector_integer_multiplier : std_logic;
-  signal data_b_in_enable_vector_integer_multiplier : std_logic;
+  signal data_a_in_enable_vector_float_multiplier : std_logic;
+  signal data_b_in_enable_vector_float_multiplier : std_logic;
 
-  signal data_out_enable_vector_integer_multiplier : std_logic;
+  signal data_out_enable_vector_float_multiplier : std_logic;
 
   -- DATA
-  signal size_in_vector_integer_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_integer_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_float_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_float_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR EXPONENTIATOR
   -- CONTROL
@@ -246,7 +246,7 @@ begin
           if (data_out_enable_vector_cosine_similarity = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
-              start_vector_integer_multiplier <= '1';
+              start_vector_float_multiplier <= '1';
             end if;
 
             -- FSM Control
@@ -260,7 +260,7 @@ begin
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 4
 
-          if (data_out_enable_vector_integer_multiplier = '1') then
+          if (data_out_enable_vector_float_multiplier = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_exponentiator_function <= '1';
@@ -270,7 +270,7 @@ begin
             controller_ctrl_fsm_int <= VECTOR_EXPONENTIATOR_STATE;
           else
             -- Control Internal
-            start_vector_integer_multiplier <= '0';
+            start_vector_float_multiplier <= '0';
           end if;
 
         when VECTOR_EXPONENTIATOR_STATE =>  -- STEP 5
@@ -332,20 +332,20 @@ begin
   data_b_in_vector_cosine_similarity <= M_IN;
 
   -- VECTOR MULTIPLIER
-  size_in_vector_integer_multiplier   <= SIZE_I_IN;
-  data_a_in_vector_integer_multiplier <= data_out_vector_cosine_similarity;
-  data_b_in_vector_integer_multiplier <= BETA_IN;
+  size_in_vector_float_multiplier   <= SIZE_I_IN;
+  data_a_in_vector_float_multiplier <= data_out_vector_cosine_similarity;
+  data_b_in_vector_float_multiplier <= BETA_IN;
 
   -- VECTOR EXPONENTIATOR
   size_in_vector_exponentiator_function <= SIZE_I_IN;
-  data_in_vector_exponentiator_function <= data_out_vector_integer_multiplier;
+  data_in_vector_exponentiator_function <= data_out_vector_float_multiplier;
 
   -- VECTOR SOFTMAX
   size_in_vector_softmax <= SIZE_I_IN;
   data_in_vector_softmax <= data_out_vector_exponentiator_function;
 
   -- VECTOR MULTIPLIER
-  vecto_integer_multiplier : ntm_vector_integer_multiplier
+  vecto_float_multiplier : ntm_vector_float_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -356,19 +356,19 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_integer_multiplier,
-      READY => ready_vector_integer_multiplier,
+      START => start_vector_float_multiplier,
+      READY => ready_vector_float_multiplier,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_integer_multiplier,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_integer_multiplier,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_multiplier,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_multiplier,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_integer_multiplier,
+      DATA_OUT_ENABLE => data_out_enable_vector_float_multiplier,
 
       -- DATA
-      SIZE_IN   => size_in_vector_integer_multiplier,
-      DATA_A_IN => data_a_in_vector_integer_multiplier,
-      DATA_B_IN => data_b_in_vector_integer_multiplier,
-      DATA_OUT  => data_out_vector_integer_multiplier
+      SIZE_IN   => size_in_vector_float_multiplier,
+      DATA_A_IN => data_a_in_vector_float_multiplier,
+      DATA_B_IN => data_b_in_vector_float_multiplier,
+      DATA_OUT  => data_out_vector_float_multiplier
       );
 
   -- VECTOR EXPONENTIATOR

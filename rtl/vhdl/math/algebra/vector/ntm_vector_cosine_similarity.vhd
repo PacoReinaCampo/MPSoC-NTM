@@ -119,25 +119,25 @@ architecture ntm_vector_cosine_similarity_architecture of ntm_vector_cosine_simi
 
   -- SCALAR ADDER
   -- CONTROL
-  signal start_scalar_integer_adder : std_logic;
-  signal ready_scalar_integer_adder : std_logic;
+  signal start_scalar_float_adder : std_logic;
+  signal ready_scalar_float_adder : std_logic;
 
-  signal operation_scalar_integer_adder : std_logic;
+  signal operation_scalar_float_adder : std_logic;
 
   -- DATA
-  signal data_a_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_integer_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_float_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR MULTIPLIER
   -- CONTROL
-  signal start_scalar_integer_multiplier : std_logic;
-  signal ready_scalar_integer_multiplier : std_logic;
+  signal start_scalar_float_multiplier : std_logic;
+  signal ready_scalar_float_multiplier : std_logic;
 
   -- DATA
-  signal data_a_in_scalar_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_integer_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_float_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -160,17 +160,17 @@ begin
       DATA_OUT_ENABLE <= '0';
 
       -- Data Internal
-      data_a_in_scalar_integer_adder <= ZERO_DATA;
-      data_b_in_scalar_integer_adder <= ZERO_DATA;
+      data_a_in_scalar_float_adder <= ZERO_DATA;
+      data_b_in_scalar_float_adder <= ZERO_DATA;
 
-      data_a_in_scalar_integer_multiplier <= ZERO_DATA;
-      data_b_in_scalar_integer_multiplier <= ZERO_DATA;
+      data_a_in_scalar_float_multiplier <= ZERO_DATA;
+      data_b_in_scalar_float_multiplier <= ZERO_DATA;
 
       -- Control Internal
-      start_scalar_integer_adder      <= '0';
-      start_scalar_integer_multiplier <= '0';
+      start_scalar_float_adder      <= '0';
+      start_scalar_float_multiplier <= '0';
 
-      operation_scalar_integer_adder <= '0';
+      operation_scalar_float_adder <= '0';
 
       data_a_in_cosine_similarity_int <= '0';
       data_b_in_cosine_similarity_int <= '0';
@@ -178,8 +178,8 @@ begin
       index_loop <= ZERO_CONTROL;
 
       -- Data Internal
-      data_a_in_scalar_integer_multiplier <= ZERO_DATA;
-      data_b_in_scalar_integer_multiplier <= ZERO_DATA;
+      data_a_in_scalar_float_multiplier <= ZERO_DATA;
+      data_b_in_scalar_float_multiplier <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -202,7 +202,7 @@ begin
 
           if (DATA_A_IN_ENABLE = '1') then
             -- Data Inputs
-            data_a_in_scalar_integer_multiplier <= DATA_A_IN;
+            data_a_in_scalar_float_multiplier <= DATA_A_IN;
 
             -- Control Internal
             data_a_in_cosine_similarity_int <= '1';
@@ -210,7 +210,7 @@ begin
 
           if (DATA_B_IN_ENABLE = '1') then
             -- Data Inputs
-            data_b_in_scalar_integer_multiplier <= DATA_B_IN;
+            data_b_in_scalar_float_multiplier <= DATA_B_IN;
 
             -- Control Internal
             data_b_in_cosine_similarity_int <= '1';
@@ -218,7 +218,7 @@ begin
 
           if (data_a_in_cosine_similarity_int = '1' and data_b_in_cosine_similarity_int = '1') then
             -- Control Internal
-            start_scalar_integer_multiplier <= '1';
+            start_scalar_float_multiplier <= '1';
 
             data_a_in_cosine_similarity_int <= '0';
             data_b_in_cosine_similarity_int <= '0';
@@ -232,26 +232,26 @@ begin
 
         when SCALAR_MULTIPLIER_STATE =>  -- STEP 3
 
-          if (ready_scalar_integer_multiplier = '1') then
+          if (ready_scalar_float_multiplier = '1') then
             -- Control Internal
-            start_scalar_integer_adder <= '1';
+            start_scalar_float_adder <= '1';
 
-            operation_scalar_integer_adder <= '0';
+            operation_scalar_float_adder <= '0';
 
             -- Data Internal
-            data_a_in_scalar_integer_adder <= data_out_scalar_integer_multiplier;
+            data_a_in_scalar_float_adder <= data_out_scalar_float_multiplier;
 
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
-              data_b_in_scalar_integer_adder <= ZERO_DATA;
+              data_b_in_scalar_float_adder <= ZERO_DATA;
             else
-              data_b_in_scalar_integer_adder <= data_out_scalar_integer_adder;
+              data_b_in_scalar_float_adder <= data_out_scalar_float_adder;
             end if;
 
             -- FSM Control
             cosine_similarity_ctrl_fsm_int <= SCALAR_ADDER_STATE;
           else
             -- Control Internal
-            start_scalar_integer_multiplier <= '0';
+            start_scalar_float_multiplier <= '0';
 
             data_a_in_cosine_similarity_int <= '0';
             data_b_in_cosine_similarity_int <= '0';
@@ -259,10 +259,10 @@ begin
 
         when SCALAR_ADDER_STATE =>      -- STEP 2
 
-          if (ready_scalar_integer_adder = '1') then
+          if (ready_scalar_float_adder = '1') then
             if (unsigned(index_loop) = unsigned(LENGTH_IN)-unsigned(ONE_CONTROL)) then
               -- Data Outputs
-              DATA_OUT <= data_out_scalar_integer_adder;
+              DATA_OUT <= data_out_scalar_float_adder;
 
               -- Control Outputs
               READY <= '1';
@@ -284,7 +284,7 @@ begin
             DATA_OUT_ENABLE <= '1';
           else
             -- Control Internal
-            start_scalar_integer_adder <= '0';
+            start_scalar_float_adder <= '0';
           end if;
 
         when others =>
@@ -295,7 +295,7 @@ begin
   end process;
 
   -- SCALAR ADDER
-  scalar_integer_adder : ntm_scalar_integer_adder
+  scalar_float_adder : ntm_scalar_float_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -306,19 +306,19 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_integer_adder,
-      READY => ready_scalar_integer_adder,
+      START => start_scalar_float_adder,
+      READY => ready_scalar_float_adder,
 
-      OPERATION => operation_scalar_integer_adder,
+      OPERATION => operation_scalar_float_adder,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_integer_adder,
-      DATA_B_IN => data_b_in_scalar_integer_adder,
-      DATA_OUT  => data_out_scalar_integer_adder
+      DATA_A_IN => data_a_in_scalar_float_adder,
+      DATA_B_IN => data_b_in_scalar_float_adder,
+      DATA_OUT  => data_out_scalar_float_adder
       );
 
   -- SCALAR MULTIPLIER
-  scalar_integer_multiplier : ntm_scalar_integer_multiplier
+  scalar_float_multiplier : ntm_scalar_float_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -329,13 +329,13 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_integer_multiplier,
-      READY => ready_scalar_integer_multiplier,
+      START => start_scalar_float_multiplier,
+      READY => ready_scalar_float_multiplier,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_integer_multiplier,
-      DATA_B_IN => data_b_in_scalar_integer_multiplier,
-      DATA_OUT  => data_out_scalar_integer_multiplier
+      DATA_A_IN => data_a_in_scalar_float_multiplier,
+      DATA_B_IN => data_b_in_scalar_float_multiplier,
+      DATA_OUT  => data_out_scalar_float_multiplier
       );
 
 end architecture;

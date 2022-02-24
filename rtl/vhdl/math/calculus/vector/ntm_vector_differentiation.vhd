@@ -125,29 +125,27 @@ architecture ntm_vector_differentiation_architecture of ntm_vector_differentiati
 
   -- SCALAR ADDER
   -- CONTROL
-  signal start_scalar_integer_adder : std_logic;
-  signal ready_scalar_integer_adder : std_logic;
+  signal start_scalar_float_adder : std_logic;
+  signal ready_scalar_float_adder : std_logic;
 
-  signal operation_scalar_integer_adder : std_logic;
+  signal operation_scalar_float_adder : std_logic;
 
   -- DATA
-  signal data_a_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_scalar_integer_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal overflow_out_scalar_integer_adder : std_logic;
+  signal data_out_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR DIVIDER
   -- CONTROL
-  signal start_scalar_integer_divider : std_logic;
-  signal ready_scalar_integer_divider : std_logic;
+  signal start_scalar_float_divider : std_logic;
+  signal ready_scalar_float_divider : std_logic;
 
   -- DATA
-  signal data_a_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_scalar_integer_divider      : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal remainder_out_scalar_integer_divider : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -172,19 +170,19 @@ begin
       DATA_OUT_ENABLE <= '0';
 
       -- Control Internal
-      start_scalar_integer_adder   <= '0';
-      start_scalar_integer_divider <= '0';
+      start_scalar_float_adder   <= '0';
+      start_scalar_float_divider <= '0';
 
-      operation_scalar_integer_adder <= '0';
+      operation_scalar_float_adder <= '0';
 
       index_loop <= ZERO_CONTROL;
 
       -- Data Internal
-      data_a_in_scalar_integer_adder <= ZERO_DATA;
-      data_b_in_scalar_integer_adder <= ZERO_DATA;
+      data_a_in_scalar_float_adder <= ZERO_DATA;
+      data_b_in_scalar_float_adder <= ZERO_DATA;
 
-      data_a_in_scalar_integer_divider <= ZERO_DATA;
-      data_b_in_scalar_integer_divider <= ZERO_DATA;
+      data_a_in_scalar_float_divider <= ZERO_DATA;
+      data_b_in_scalar_float_divider <= ZERO_DATA;
 
     elsif (rising_edge(CLK)) then
 
@@ -249,12 +247,12 @@ begin
         when CLEAN_STATE =>             -- STEP 3
 
           -- Data Inputs
-          data_a_in_scalar_integer_adder <= vector_int(to_integer(unsigned(index_loop)));
+          data_a_in_scalar_float_adder <= vector_int(to_integer(unsigned(index_loop)));
 
           if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
-            data_b_in_scalar_integer_adder <= vector_int(to_integer(unsigned(index_loop)));
+            data_b_in_scalar_float_adder <= vector_int(to_integer(unsigned(index_loop)));
           else
-            data_b_in_scalar_integer_adder <= vector_int(to_integer(unsigned(index_loop)-unsigned(ONE_CONTROL)));
+            data_b_in_scalar_float_adder <= vector_int(to_integer(unsigned(index_loop)-unsigned(ONE_CONTROL)));
           end if;
 
           -- Control Outputs
@@ -263,33 +261,33 @@ begin
           DATA_OUT_ENABLE <= '0';
 
           -- Control Internal
-          start_scalar_integer_adder <= '1';
+          start_scalar_float_adder <= '1';
 
-          operation_scalar_integer_adder <= '1';
+          operation_scalar_float_adder <= '1';
 
           -- FSM Control
           differentiation_ctrl_fsm_int <= SCALAR_ADDER_STATE;
 
         when SCALAR_ADDER_STATE =>      -- STEP 4
 
-          if (ready_scalar_integer_adder = '1') then
+          if (ready_scalar_float_adder = '1') then
             -- Data Inputs
-            data_a_in_scalar_integer_divider <= data_out_scalar_integer_adder;
-            data_b_in_scalar_integer_divider <= LENGTH_IN;
+            data_a_in_scalar_float_divider <= data_out_scalar_float_adder;
+            data_b_in_scalar_float_divider <= LENGTH_IN;
 
             -- Control Internal
-            start_scalar_integer_divider <= '1';
+            start_scalar_float_divider <= '1';
 
             -- FSM Control
             differentiation_ctrl_fsm_int <= SCALAR_DIVIDER_STATE;
           else
             -- Control Internal
-            start_scalar_integer_adder <= '0';
+            start_scalar_float_adder <= '0';
           end if;
 
         when SCALAR_DIVIDER_STATE =>    -- STEP 5
 
-          if (ready_scalar_integer_divider = '1') then
+          if (ready_scalar_float_divider = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_IN)-unsigned(ONE_CONTROL)) then
               -- Control Outputs
               READY <= '1';
@@ -308,13 +306,13 @@ begin
             end if;
 
             -- Data Outputs
-            DATA_OUT <= data_out_scalar_integer_divider;
+            DATA_OUT <= data_out_scalar_float_divider;
 
             -- Control Outputs
             DATA_OUT_ENABLE <= '1';
           else
             -- Control Internal
-            start_scalar_integer_divider <= '0';
+            start_scalar_float_divider <= '0';
           end if;
 
         when others =>
@@ -325,7 +323,7 @@ begin
   end process;
 
   -- SCALAR ADDER
-  scalar_integer_adder : ntm_scalar_integer_adder
+  scalar_float_adder : ntm_scalar_float_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -336,21 +334,20 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_integer_adder,
-      READY => ready_scalar_integer_adder,
+      START => start_scalar_float_adder,
+      READY => ready_scalar_float_adder,
 
-      OPERATION => operation_scalar_integer_adder,
+      OPERATION => operation_scalar_float_adder,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_integer_adder,
-      DATA_B_IN => data_b_in_scalar_integer_adder,
+      DATA_A_IN => data_a_in_scalar_float_adder,
+      DATA_B_IN => data_b_in_scalar_float_adder,
 
-      DATA_OUT     => data_out_scalar_integer_adder,
-      OVERFLOW_OUT => overflow_out_scalar_integer_adder
+      DATA_OUT => data_out_scalar_float_adder
       );
 
   -- SCALAR DIVIDER
-  scalar_integer_divider : ntm_scalar_integer_divider
+  scalar_float_divider : ntm_scalar_float_divider
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -361,15 +358,14 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_integer_divider,
-      READY => ready_scalar_integer_divider,
+      START => start_scalar_float_divider,
+      READY => ready_scalar_float_divider,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_integer_divider,
-      DATA_B_IN => data_b_in_scalar_integer_divider,
+      DATA_A_IN => data_a_in_scalar_float_divider,
+      DATA_B_IN => data_b_in_scalar_float_divider,
 
-      DATA_OUT      => data_out_scalar_integer_divider,
-      REMAINDER_OUT => remainder_out_scalar_integer_divider
+      DATA_OUT => data_out_scalar_float_divider
       );
 
 end architecture;

@@ -106,15 +106,15 @@ architecture ntm_scalar_oneplus_function_architecture of ntm_scalar_oneplus_func
 
   -- SCALAR ADDER
   -- CONTROL
-  signal start_scalar_integer_adder : std_logic;
-  signal ready_scalar_integer_adder : std_logic;
+  signal start_scalar_float_adder : std_logic;
+  signal ready_scalar_float_adder : std_logic;
 
-  signal operation_scalar_integer_adder : std_logic;
+  signal operation_scalar_float_adder : std_logic;
 
   -- DATA
-  signal data_a_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_scalar_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_scalar_integer_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_a_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_float_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR EXPONENTIATOR
   -- CONTROL
@@ -153,16 +153,16 @@ begin
       READY <= '0';
 
       -- Control Internal
-      start_scalar_integer_adder <= '0';
+      start_scalar_float_adder <= '0';
 
-      operation_scalar_integer_adder <= '0';
+      operation_scalar_float_adder <= '0';
 
       start_scalar_exponentiator_function <= '0';
       start_scalar_logarithm_function     <= '0';
 
       -- Data Internal
-      data_a_in_scalar_integer_adder <= ZERO_DATA;
-      data_b_in_scalar_integer_adder <= ZERO_DATA;
+      data_a_in_scalar_float_adder <= ZERO_DATA;
+      data_b_in_scalar_float_adder <= ZERO_DATA;
 
       data_in_scalar_exponentiator_function <= ZERO_DATA;
       data_in_scalar_logarithm_function     <= ZERO_DATA;
@@ -205,13 +205,13 @@ begin
 
           if (ready_scalar_logarithm_function = '1') then
             -- Control Internal
-            start_scalar_integer_adder <= '1';
+            start_scalar_float_adder <= '1';
 
-            operation_scalar_integer_adder <= '0';
+            operation_scalar_float_adder <= '0';
 
             -- Data Internal
-            data_a_in_scalar_integer_adder <= ONE_DATA;
-            data_b_in_scalar_integer_adder <= data_out_scalar_logarithm_function;
+            data_a_in_scalar_float_adder <= ONE_DATA;
+            data_b_in_scalar_float_adder <= data_out_scalar_logarithm_function;
 
             -- FSM Control
             controller_ctrl_fsm_int <= SCALAR_ADDER_STATE;
@@ -222,9 +222,9 @@ begin
 
         when SCALAR_ADDER_STATE =>      -- STEP 4
 
-          if (ready_scalar_integer_adder = '1') then
+          if (ready_scalar_float_adder = '1') then
             -- Data Outputs
-            DATA_OUT <= data_out_scalar_integer_adder;
+            DATA_OUT <= data_out_scalar_float_adder;
 
             -- Control Outputs
             READY <= '1';
@@ -233,7 +233,7 @@ begin
             controller_ctrl_fsm_int <= STARTER_STATE;
           else
             -- Control Internal
-            start_scalar_integer_adder <= '0';
+            start_scalar_float_adder <= '0';
           end if;
 
         when others =>
@@ -244,7 +244,7 @@ begin
   end process;
 
   -- SCALAR ADDER
-  scalar_integer_adder : ntm_scalar_integer_adder
+  scalar_float_adder : ntm_scalar_float_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -255,15 +255,15 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_scalar_integer_adder,
-      READY => ready_scalar_integer_adder,
+      START => start_scalar_float_adder,
+      READY => ready_scalar_float_adder,
 
-      OPERATION => operation_scalar_integer_adder,
+      OPERATION => operation_scalar_float_adder,
 
       -- DATA
-      DATA_A_IN => data_a_in_scalar_integer_adder,
-      DATA_B_IN => data_b_in_scalar_integer_adder,
-      DATA_OUT  => data_out_scalar_integer_adder
+      DATA_A_IN => data_a_in_scalar_float_adder,
+      DATA_B_IN => data_b_in_scalar_float_adder,
+      DATA_OUT  => data_out_scalar_float_adder
       );
 
   -- SCALAR EXPONENTIATOR

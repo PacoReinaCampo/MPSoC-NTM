@@ -328,27 +328,26 @@ architecture ntm_state_vector_output_architecture of ntm_state_vector_output is
 
   -- MATRIX ADDER
   -- CONTROL
-  signal start_matrix_integer_adder : std_logic;
-  signal ready_matrix_integer_adder : std_logic;
+  signal start_matrix_float_adder : std_logic;
+  signal ready_matrix_float_adder : std_logic;
 
-  signal operation_matrix_integer_adder : std_logic;
+  signal operation_matrix_float_adder : std_logic;
 
-  signal data_a_in_i_enable_matrix_integer_adder : std_logic;
-  signal data_a_in_j_enable_matrix_integer_adder : std_logic;
-  signal data_b_in_i_enable_matrix_integer_adder : std_logic;
-  signal data_b_in_j_enable_matrix_integer_adder : std_logic;
+  signal data_a_in_i_enable_matrix_float_adder : std_logic;
+  signal data_a_in_j_enable_matrix_float_adder : std_logic;
+  signal data_b_in_i_enable_matrix_float_adder : std_logic;
+  signal data_b_in_j_enable_matrix_float_adder : std_logic;
 
-  signal data_out_i_enable_matrix_integer_adder : std_logic;
-  signal data_out_j_enable_matrix_integer_adder : std_logic;
+  signal data_out_i_enable_matrix_float_adder : std_logic;
+  signal data_out_j_enable_matrix_float_adder : std_logic;
 
   -- DATA
-  signal size_i_in_matrix_integer_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_integer_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_float_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_float_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_matrix_integer_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal overflow_out_matrix_integer_adder : std_logic;
+  signal data_out_matrix_float_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX PRODUCT
   -- CONTROL
@@ -811,7 +810,7 @@ begin
       );
 
   -- MATRIX ADDER
-  matrix_integer_adder : ntm_matrix_integer_adder
+  matrix_float_adder : ntm_matrix_float_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -822,27 +821,26 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_integer_adder,
-      READY => ready_matrix_integer_adder,
+      START => start_matrix_float_adder,
+      READY => ready_matrix_float_adder,
 
-      OPERATION => operation_matrix_integer_adder,
+      OPERATION => operation_matrix_float_adder,
 
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_integer_adder,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_integer_adder,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_integer_adder,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_integer_adder,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_float_adder,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_float_adder,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_float_adder,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_float_adder,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_integer_adder,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_integer_adder,
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_float_adder,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_float_adder,
 
       -- DATA
-      SIZE_I_IN => size_i_in_matrix_integer_adder,
-      SIZE_J_IN => size_j_in_matrix_integer_adder,
-      DATA_A_IN => data_a_in_matrix_integer_adder,
-      DATA_B_IN => data_b_in_matrix_integer_adder,
+      SIZE_I_IN => size_i_in_matrix_float_adder,
+      SIZE_J_IN => size_j_in_matrix_float_adder,
+      DATA_A_IN => data_a_in_matrix_float_adder,
+      DATA_B_IN => data_b_in_matrix_float_adder,
 
-      DATA_OUT     => data_out_matrix_integer_adder,
-      OVERFLOW_OUT => overflow_out_matrix_integer_adder
+      DATA_OUT     => data_out_matrix_float_adder
       );
 
   -- MATRIX PRODUCT

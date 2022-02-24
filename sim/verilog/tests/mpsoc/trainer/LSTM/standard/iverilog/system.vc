@@ -1,17 +1,17 @@
 ../../../../../../../../rtl/verilog/pkg/ntm_math_pkg.sv
 ../../../../../../../../rtl/verilog/pkg/ntm_lstm_controller_pkg.sv
 
-../../../../../../../../rtl/verilog/arithmetic/integer/scalar/ntm_scalar_integer_adder.sv
-../../../../../../../../rtl/verilog/arithmetic/integer/scalar/ntm_scalar_integer_multiplier.sv
-../../../../../../../../rtl/verilog/arithmetic/integer/scalar/ntm_scalar_integer_divider.sv
+../../../../../../../../rtl/verilog/arithmetic/float/scalar/ntm_scalar_float_adder.sv
+../../../../../../../../rtl/verilog/arithmetic/float/scalar/ntm_scalar_float_multiplier.sv
+../../../../../../../../rtl/verilog/arithmetic/float/scalar/ntm_scalar_float_divider.sv
 
-../../../../../../../../rtl/verilog/arithmetic/integer/vector/ntm_vector_integer_adder.sv
-../../../../../../../../rtl/verilog/arithmetic/integer/vector/ntm_vector_integer_multiplier.sv
-../../../../../../../../rtl/verilog/arithmetic/integer/vector/ntm_vector_integer_divider.sv
+../../../../../../../../rtl/verilog/arithmetic/float/vector/ntm_vector_float_adder.sv
+../../../../../../../../rtl/verilog/arithmetic/float/vector/ntm_vector_float_multiplier.sv
+../../../../../../../../rtl/verilog/arithmetic/float/vector/ntm_vector_float_divider.sv
 
-../../../../../../../../rtl/verilog/arithmetic/integer/matrix/ntm_matrix_integer_adder.sv
-../../../../../../../../rtl/verilog/arithmetic/integer/matrix/ntm_matrix_integer_multiplier.sv
-../../../../../../../../rtl/verilog/arithmetic/integer/matrix/ntm_matrix_integer_divider.sv
+../../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_float_adder.sv
+../../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_float_multiplier.sv
+../../../../../../../../rtl/verilog/arithmetic/float/matrix/ntm_matrix_float_divider.sv
 
 ../../../../../../../../rtl/verilog/arithmetic/float/scalar/ntm_scalar_adder.sv
 ../../../../../../../../rtl/verilog/arithmetic/float/scalar/ntm_scalar_multiplier.sv

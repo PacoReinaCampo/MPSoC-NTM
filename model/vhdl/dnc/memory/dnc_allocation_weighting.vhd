@@ -123,37 +123,37 @@ architecture dnc_allocation_weighting_architecture of dnc_allocation_weighting i
 
   -- VECTOR ADDER
   -- CONTROL
-  signal start_vector_integer_adder : std_logic;
-  signal ready_vector_integer_adder : std_logic;
+  signal start_vector_float_adder : std_logic;
+  signal ready_vector_float_adder : std_logic;
 
-  signal operation_vector_integer_adder : std_logic;
+  signal operation_vector_float_adder : std_logic;
 
-  signal data_a_in_enable_vector_integer_adder : std_logic;
-  signal data_b_in_enable_vector_integer_adder : std_logic;
+  signal data_a_in_enable_vector_float_adder : std_logic;
+  signal data_b_in_enable_vector_float_adder : std_logic;
 
-  signal data_out_enable_vector_integer_adder : std_logic;
+  signal data_out_enable_vector_float_adder : std_logic;
 
   -- DATA
-  signal size_in_vector_integer_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_integer_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_float_adder   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_float_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR MULTIPLIER
   -- CONTROL
-  signal start_vector_integer_multiplier : std_logic;
-  signal ready_vector_integer_multiplier : std_logic;
+  signal start_vector_float_multiplier : std_logic;
+  signal ready_vector_float_multiplier : std_logic;
 
-  signal data_a_in_enable_vector_integer_multiplier : std_logic;
-  signal data_b_in_enable_vector_integer_multiplier : std_logic;
+  signal data_a_in_enable_vector_float_multiplier : std_logic;
+  signal data_b_in_enable_vector_float_multiplier : std_logic;
 
-  signal data_out_enable_vector_integer_multiplier : std_logic;
+  signal data_out_enable_vector_float_multiplier : std_logic;
 
   -- DATA
-  signal size_in_vector_integer_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_vector_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_vector_integer_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_vector_integer_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_in_vector_float_multiplier   : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_vector_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_float_multiplier  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR MULTIPLICATION
   -- CONTROL
@@ -236,7 +236,7 @@ begin
           if (phi_out_enable_vector_sort = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
-              start_vector_integer_adder <= '1';
+              start_vector_float_adder <= '1';
             end if;
 
             -- FSM Control
@@ -248,7 +248,7 @@ begin
 
         when VECTOR_ADDER_STATE =>      -- STEP 3
 
-          if (data_out_enable_vector_integer_adder = '1') then
+          if (data_out_enable_vector_float_adder = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
               start_vector_sort <= '1';
@@ -258,7 +258,7 @@ begin
             controller_ctrl_fsm_int <= INPUT_SECOND_STATE;
           else
             -- Control Internal
-            start_vector_integer_adder <= '0';
+            start_vector_float_adder <= '0';
           end if;
 
         when INPUT_SECOND_STATE =>      -- STEP 4
@@ -287,7 +287,7 @@ begin
           if (data_out_enable_vector_multiplication = '1') then
             if (unsigned(index_loop) = unsigned(ZERO_CONTROL)) then
               -- Control Internal
-              start_vector_integer_multiplier <= '1';
+              start_vector_float_multiplier <= '1';
             end if;
 
             -- FSM Control
@@ -299,7 +299,7 @@ begin
 
         when VECTOR_MULTIPLIER_STATE =>  -- STEP 7
 
-          if (data_out_enable_vector_integer_multiplier = '1') then
+          if (data_out_enable_vector_float_multiplier = '1') then
             if (unsigned(index_loop) = unsigned(SIZE_N_IN) - unsigned(ONE_CONTROL)) then
               -- Control Outputs
               READY <= '1';
@@ -315,7 +315,7 @@ begin
             end if;
 
             -- Data Outputs
-            A_OUT <= data_out_vector_integer_multiplier;
+            A_OUT <= data_out_vector_float_multiplier;
 
             -- Control Outputs
             A_OUT_ENABLE <= '1';
@@ -324,7 +324,7 @@ begin
             A_OUT_ENABLE <= '0';
 
             -- Control Internal
-            start_vector_integer_multiplier <= '0';
+            start_vector_float_multiplier <= '0';
           end if;
 
         when others =>
@@ -336,21 +336,21 @@ begin
 
   -- DATA
   -- VECTOR ADDER
-  size_in_vector_integer_adder   <= SIZE_N_IN;
-  data_a_in_vector_integer_adder <= ONE_DATA;
-  data_b_in_vector_integer_adder <= phi_out_vector_sort;
+  size_in_vector_float_adder   <= SIZE_N_IN;
+  data_a_in_vector_float_adder <= ONE_DATA;
+  data_b_in_vector_float_adder <= phi_out_vector_sort;
 
   -- VECTOR MULTIPLICATION
   length_in_vector_multiplication <= SIZE_N_IN;
   data_in_vector_multiplication   <= phi_out_vector_sort;
 
   -- VECTOR MULTIPLIER
-  size_in_vector_integer_multiplier   <= SIZE_N_IN;
-  data_a_in_vector_integer_multiplier <= data_out_vector_integer_adder;
-  data_b_in_vector_integer_multiplier <= data_out_vector_multiplication;
+  size_in_vector_float_multiplier   <= SIZE_N_IN;
+  data_a_in_vector_float_multiplier <= data_out_vector_float_adder;
+  data_b_in_vector_float_multiplier <= data_out_vector_multiplication;
 
   -- VECTOR ADDER
-  vector_integer_adder : ntm_vector_integer_adder
+  vector_float_adder : ntm_vector_float_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -361,25 +361,25 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_integer_adder,
-      READY => ready_vector_integer_adder,
+      START => start_vector_float_adder,
+      READY => ready_vector_float_adder,
 
-      OPERATION => operation_vector_integer_adder,
+      OPERATION => operation_vector_float_adder,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_integer_adder,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_integer_adder,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_adder,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_adder,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_integer_adder,
+      DATA_OUT_ENABLE => data_out_enable_vector_float_adder,
 
       -- DATA
-      SIZE_IN   => size_in_vector_integer_adder,
-      DATA_A_IN => data_a_in_vector_integer_adder,
-      DATA_B_IN => data_b_in_vector_integer_adder,
-      DATA_OUT  => data_out_vector_integer_adder
+      SIZE_IN   => size_in_vector_float_adder,
+      DATA_A_IN => data_a_in_vector_float_adder,
+      DATA_B_IN => data_b_in_vector_float_adder,
+      DATA_OUT  => data_out_vector_float_adder
       );
 
   -- VECTOR MULTIPLIER
-  vector_integer_multiplier : ntm_vector_integer_multiplier
+  vector_float_multiplier : ntm_vector_float_multiplier
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -390,19 +390,19 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_vector_integer_multiplier,
-      READY => ready_vector_integer_multiplier,
+      START => start_vector_float_multiplier,
+      READY => ready_vector_float_multiplier,
 
-      DATA_A_IN_ENABLE => data_a_in_enable_vector_integer_multiplier,
-      DATA_B_IN_ENABLE => data_b_in_enable_vector_integer_multiplier,
+      DATA_A_IN_ENABLE => data_a_in_enable_vector_float_multiplier,
+      DATA_B_IN_ENABLE => data_b_in_enable_vector_float_multiplier,
 
-      DATA_OUT_ENABLE => data_out_enable_vector_integer_multiplier,
+      DATA_OUT_ENABLE => data_out_enable_vector_float_multiplier,
 
       -- DATA
-      SIZE_IN   => size_in_vector_integer_multiplier,
-      DATA_A_IN => data_a_in_vector_integer_multiplier,
-      DATA_B_IN => data_b_in_vector_integer_multiplier,
-      DATA_OUT  => data_out_vector_integer_multiplier
+      SIZE_IN   => size_in_vector_float_multiplier,
+      DATA_A_IN => data_a_in_vector_float_multiplier,
+      DATA_B_IN => data_b_in_vector_float_multiplier,
+      DATA_OUT  => data_out_vector_float_multiplier
       );
 
   -- VECTOR MULTIPLICATION

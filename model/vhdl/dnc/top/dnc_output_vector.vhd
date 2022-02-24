@@ -162,25 +162,25 @@ architecture dnc_output_vector_architecture of dnc_output_vector is
 
   -- MATRIX ADDER
   -- CONTROL
-  signal start_matrix_integer_adder : std_logic;
-  signal ready_matrix_integer_adder : std_logic;
+  signal start_matrix_float_adder : std_logic;
+  signal ready_matrix_float_adder : std_logic;
 
-  signal operation_matrix_integer_adder : std_logic;
+  signal operation_matrix_float_adder : std_logic;
 
-  signal data_a_in_i_enable_matrix_integer_adder : std_logic;
-  signal data_a_in_j_enable_matrix_integer_adder : std_logic;
-  signal data_b_in_i_enable_matrix_integer_adder : std_logic;
-  signal data_b_in_j_enable_matrix_integer_adder : std_logic;
+  signal data_a_in_i_enable_matrix_float_adder : std_logic;
+  signal data_a_in_j_enable_matrix_float_adder : std_logic;
+  signal data_b_in_i_enable_matrix_float_adder : std_logic;
+  signal data_b_in_j_enable_matrix_float_adder : std_logic;
 
-  signal data_out_i_enable_matrix_integer_adder : std_logic;
-  signal data_out_j_enable_matrix_integer_adder : std_logic;
+  signal data_out_i_enable_matrix_float_adder : std_logic;
+  signal data_out_j_enable_matrix_float_adder : std_logic;
 
   -- DATA
-  signal size_i_in_matrix_integer_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal size_j_in_matrix_integer_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
-  signal data_a_in_matrix_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_b_in_matrix_integer_adder : std_logic_vector(DATA_SIZE-1 downto 0);
-  signal data_out_matrix_integer_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal size_i_in_matrix_float_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal size_j_in_matrix_float_adder : std_logic_vector(CONTROL_SIZE-1 downto 0);
+  signal data_a_in_matrix_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_b_in_matrix_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_float_adder  : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX PRODUCT
   -- CONTROL
@@ -317,13 +317,13 @@ begin
 
           if (data_out_i_enable_matrix_product = '1') then
             -- Data Outputs
-            data_a_in_matrix_integer_adder <= data_out_matrix_product;
+            data_a_in_matrix_float_adder <= data_out_matrix_product;
 
             -- Control Outputs
             K_OUT_Y_ENABLE <= '1';
             R_OUT_K_ENABLE <= '1';
 
-            data_a_in_i_enable_matrix_integer_adder <= '1';
+            data_a_in_i_enable_matrix_float_adder <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= MATRIX_FIRST_ADDER_I_STATE;
@@ -337,12 +337,12 @@ begin
 
           if (data_out_j_enable_matrix_product = '1') then
             -- Data Outputs
-            data_a_in_matrix_integer_adder <= data_out_matrix_product;
+            data_a_in_matrix_float_adder <= data_out_matrix_product;
 
             -- Control Outputs
             K_OUT_K_ENABLE <= '1';
 
-            data_a_in_j_enable_matrix_integer_adder <= '1';
+            data_a_in_j_enable_matrix_float_adder <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= MATRIX_FIRST_ADDER_J_STATE;
@@ -353,7 +353,7 @@ begin
 
         when MATRIX_FIRST_ADDER_I_STATE =>  -- STEP 5
 
-          if (data_out_i_enable_matrix_integer_adder = '1') then
+          if (data_out_i_enable_matrix_float_adder = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_Y_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_R_IN) - unsigned(ONE_CONTROL))) then
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -364,16 +364,16 @@ begin
             end if;
 
             -- Data Outputs
-            data_a_in_matrix_integer_adder <= data_out_matrix_integer_adder;
+            data_a_in_matrix_float_adder <= data_out_matrix_float_adder;
 
             -- Control Outputs
-            data_a_in_i_enable_matrix_integer_adder <= '1';
+            data_a_in_i_enable_matrix_float_adder <= '1';
           else
             -- Control Outputs
             K_OUT_Y_ENABLE <= '0';
             R_OUT_K_ENABLE <= '0';
 
-            data_a_in_i_enable_matrix_integer_adder <= '0';
+            data_a_in_i_enable_matrix_float_adder <= '0';
           end if;
 
         when MATRIX_FIRST_ADDER_J_STATE =>  -- STEP 6
@@ -391,15 +391,15 @@ begin
             end if;
 
             -- Data Outputs
-            data_a_in_matrix_integer_adder <= data_out_matrix_integer_adder;
+            data_a_in_matrix_float_adder <= data_out_matrix_float_adder;
 
             -- Control Outputs
-            data_a_in_j_enable_matrix_integer_adder <= '1';
+            data_a_in_j_enable_matrix_float_adder <= '1';
           else
             -- Control Outputs
             K_OUT_K_ENABLE <= '0';
 
-            data_a_in_j_enable_matrix_integer_adder <= '0';
+            data_a_in_j_enable_matrix_float_adder <= '0';
           end if;
 
         when INPUT_SECOND_I_STATE =>    -- STEP 7
@@ -461,13 +461,13 @@ begin
 
           if (data_out_i_enable_matrix_product = '1') then
             -- Data Outputs
-            data_b_in_matrix_integer_adder <= data_out_matrix_product;
+            data_b_in_matrix_float_adder <= data_out_matrix_product;
 
             -- Control Outputs
             U_OUT_Y_ENABLE <= '1';
             H_OUT_ENABLE   <= '1';
 
-            data_b_in_i_enable_matrix_integer_adder <= '1';
+            data_b_in_i_enable_matrix_float_adder <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= MATRIX_SECOND_ADDER_I_STATE;
@@ -480,12 +480,12 @@ begin
 
           if (data_out_j_enable_matrix_product = '1') then
             -- Data Outputs
-            data_b_in_matrix_integer_adder <= data_out_matrix_product;
+            data_b_in_matrix_float_adder <= data_out_matrix_product;
 
             -- Control Outputs
             U_OUT_L_ENABLE <= '1';
 
-            data_b_in_j_enable_matrix_integer_adder <= '1';
+            data_b_in_j_enable_matrix_float_adder <= '1';
 
             -- FSM Control
             controller_ctrl_fsm_int <= MATRIX_SECOND_ADDER_J_STATE;
@@ -496,7 +496,7 @@ begin
 
         when MATRIX_SECOND_ADDER_I_STATE =>  -- STEP 11
 
-          if (data_out_i_enable_matrix_integer_adder = '1') then
+          if (data_out_i_enable_matrix_float_adder = '1') then
             if ((unsigned(index_i_loop) < unsigned(SIZE_Y_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_R_IN))) then
               -- Control Internal
               index_i_loop <= std_logic_vector(unsigned(index_i_loop) + unsigned(ONE_CONTROL));
@@ -507,7 +507,7 @@ begin
             end if;
 
             -- Data Outputs
-            Y_OUT <= data_out_matrix_integer_adder;
+            Y_OUT <= data_out_matrix_float_adder;
 
             -- Control Outputs
             Y_OUT_ENABLE <= '1';
@@ -521,7 +521,7 @@ begin
 
         when MATRIX_SECOND_ADDER_J_STATE =>  -- STEP 12
 
-          if (data_out_j_enable_matrix_integer_adder = '1') then
+          if (data_out_j_enable_matrix_float_adder = '1') then
             if ((unsigned(index_i_loop) = unsigned(SIZE_Y_IN) - unsigned(ONE_CONTROL)) and (unsigned(index_j_loop) = unsigned(SIZE_R_IN))) then
               -- FSM Control
               controller_ctrl_fsm_int <= STARTER_STATE;
@@ -545,7 +545,7 @@ begin
   end process;
 
   -- MATRIX ADDER
-  matrix_integer_adder : ntm_matrix_integer_adder
+  matrix_float_adder : ntm_matrix_float_adder
     generic map (
       DATA_SIZE    => DATA_SIZE,
       CONTROL_SIZE => CONTROL_SIZE
@@ -556,25 +556,25 @@ begin
       RST => RST,
 
       -- CONTROL
-      START => start_matrix_integer_adder,
-      READY => ready_matrix_integer_adder,
+      START => start_matrix_float_adder,
+      READY => ready_matrix_float_adder,
 
-      OPERATION => operation_matrix_integer_adder,
+      OPERATION => operation_matrix_float_adder,
 
-      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_integer_adder,
-      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_integer_adder,
-      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_integer_adder,
-      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_integer_adder,
+      DATA_A_IN_I_ENABLE => data_a_in_i_enable_matrix_float_adder,
+      DATA_A_IN_J_ENABLE => data_a_in_j_enable_matrix_float_adder,
+      DATA_B_IN_I_ENABLE => data_b_in_i_enable_matrix_float_adder,
+      DATA_B_IN_J_ENABLE => data_b_in_j_enable_matrix_float_adder,
 
-      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_integer_adder,
-      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_integer_adder,
+      DATA_OUT_I_ENABLE => data_out_i_enable_matrix_float_adder,
+      DATA_OUT_J_ENABLE => data_out_j_enable_matrix_float_adder,
 
       -- DATA
-      SIZE_I_IN => size_i_in_matrix_integer_adder,
-      SIZE_J_IN => size_j_in_matrix_integer_adder,
-      DATA_A_IN => data_a_in_matrix_integer_adder,
-      DATA_B_IN => data_b_in_matrix_integer_adder,
-      DATA_OUT  => data_out_matrix_integer_adder
+      SIZE_I_IN => size_i_in_matrix_float_adder,
+      SIZE_J_IN => size_j_in_matrix_float_adder,
+      DATA_A_IN => data_a_in_matrix_float_adder,
+      DATA_B_IN => data_b_in_matrix_float_adder,
+      DATA_OUT  => data_out_matrix_float_adder
       );
 
   -- MATRIX PRODUCT
