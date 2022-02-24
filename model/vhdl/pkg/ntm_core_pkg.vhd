@@ -1344,7 +1344,7 @@ package body ntm_core_pkg is
     for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
       scalar_beta_output := std_logic_vector(to_float(to_real(to_float(scalar_beta_output)) + (to_real(to_float(vector_wbeta_input(l)))*to_real(to_float(vector_h_input(l))))));
     end loop;
-      
+
     return scalar_beta_output;
   end function function_ntm_interface_beta_vector;
 
@@ -1374,7 +1374,7 @@ package body ntm_core_pkg is
     for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
       scalar_g_output := std_logic_vector(to_float(to_real(to_float(scalar_g_output)) + (to_real(to_float(vector_wg_input(l)))*to_real(to_float(vector_h_input(l))))));
     end loop;
-      
+
     return scalar_g_output;
   end function function_ntm_interface_g_vector;
 
@@ -1406,7 +1406,7 @@ package body ntm_core_pkg is
         vector_s_output(j) := std_logic_vector(to_float(to_real(to_float(vector_s_output(j))) + (to_real(to_float(matrix_ws_input(j, l)))*to_real(to_float(vector_h_input(l))))));
       end loop;
     end loop;
-  
+
     return vector_s_output;
   end function function_ntm_interface_s_vector;
 
@@ -1436,7 +1436,7 @@ package body ntm_core_pkg is
     for l in 0 to to_integer(unsigned(SIZE_L_IN))-1 loop
       scalar_gamma_output := std_logic_vector(to_float(to_real(to_float(scalar_gamma_output)) + (to_real(to_float(vector_wgamma_input(l)))*to_real(to_float(vector_h_input(l))))));
     end loop;
-      
+
     return scalar_gamma_output;
   end function function_ntm_interface_gamma_vector;
 
@@ -1501,7 +1501,7 @@ package body ntm_core_pkg is
     for y in 0 to to_integer(unsigned(SIZE_Y_IN))-1 loop
       vector_y_output(y) := std_logic_vector(to_float(to_real(to_float(data_addition_int(y))) + to_real(to_float(data_product_int(y)))));
     end loop;
-      
+
     return vector_y_output;
   end function function_ntm_output_vector;
 

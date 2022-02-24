@@ -145,7 +145,7 @@ architecture ntm_reading_architecture of ntm_reading is
   signal data_a_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_vector_float_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_vector_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- VECTOR MULTIPLIER
   -- CONTROL

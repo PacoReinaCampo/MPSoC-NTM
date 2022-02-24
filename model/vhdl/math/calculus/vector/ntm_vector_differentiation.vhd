@@ -134,7 +134,7 @@ architecture ntm_vector_differentiation_architecture of ntm_vector_differentiati
   signal data_a_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_scalar_float_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- SCALAR DIVIDER
   -- CONTROL
@@ -145,7 +145,7 @@ architecture ntm_vector_differentiation_architecture of ntm_vector_differentiati
   signal data_a_in_scalar_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_scalar_float_divider      : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_float_divider : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -343,7 +343,7 @@ begin
       DATA_A_IN => data_a_in_scalar_float_adder,
       DATA_B_IN => data_b_in_scalar_float_adder,
 
-      DATA_OUT     => data_out_scalar_float_adder
+      DATA_OUT => data_out_scalar_float_adder
       );
 
   -- SCALAR DIVIDER
@@ -365,7 +365,7 @@ begin
       DATA_A_IN => data_a_in_scalar_float_divider,
       DATA_B_IN => data_b_in_scalar_float_divider,
 
-      DATA_OUT      => data_out_scalar_float_divider
+      DATA_OUT => data_out_scalar_float_divider
       );
 
 end architecture;

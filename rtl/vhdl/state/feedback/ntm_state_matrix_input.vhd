@@ -178,7 +178,7 @@ architecture ntm_state_matrix_input_architecture of ntm_state_matrix_input is
   signal data_a_in_matrix_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_matrix_float_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX PRODUCT
   -- CONTROL
@@ -337,7 +337,7 @@ begin
       DATA_A_IN => data_a_in_matrix_float_adder,
       DATA_B_IN => data_b_in_matrix_float_adder,
 
-      DATA_OUT     => data_out_matrix_float_adder
+      DATA_OUT => data_out_matrix_float_adder
       );
 
   -- MATRIX PRODUCT

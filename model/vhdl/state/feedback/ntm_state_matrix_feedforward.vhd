@@ -163,7 +163,7 @@ architecture ntm_state_matrix_feedforward_architecture of ntm_state_matrix_feedf
   signal data_a_in_matrix_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_matrix_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_matrix_float_adder     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_matrix_float_adder : std_logic_vector(DATA_SIZE-1 downto 0);
 
   -- MATRIX PRODUCT
   -- CONTROL

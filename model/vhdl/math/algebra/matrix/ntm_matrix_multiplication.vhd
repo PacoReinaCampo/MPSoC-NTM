@@ -140,7 +140,7 @@ architecture ntm_matrix_multiplication_architecture of ntm_matrix_multiplication
   signal data_a_in_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
   signal data_b_in_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
-  signal data_out_scalar_float_multiplier     : std_logic_vector(DATA_SIZE-1 downto 0);
+  signal data_out_scalar_float_multiplier : std_logic_vector(DATA_SIZE-1 downto 0);
 
 begin
 
@@ -414,7 +414,7 @@ begin
       DATA_A_IN => data_a_in_scalar_float_multiplier,
       DATA_B_IN => data_b_in_scalar_float_multiplier,
 
-      DATA_OUT     => data_out_scalar_float_multiplier
+      DATA_OUT => data_out_scalar_float_multiplier
       );
 
 end architecture;
