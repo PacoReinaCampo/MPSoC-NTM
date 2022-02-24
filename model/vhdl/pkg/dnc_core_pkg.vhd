@@ -1683,6 +1683,7 @@ package dnc_core_pkg is
   -----------------------------------------------------------------------
 
   function function_dnc_top (
+    SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -3102,6 +3103,7 @@ package body dnc_core_pkg is
   -----------------------------------------------------------------------
 
   function function_dnc_top (
+    SIZE_T_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_X_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_Y_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
     SIZE_N_IN : in std_logic_vector(CONTROL_SIZE-1 downto 0);
@@ -3157,6 +3159,13 @@ package body dnc_core_pkg is
     variable tensor_k_int : tensor_buffer;
     variable matrix_u_int : matrix_buffer;
 
+    variable tensor_kt_int : array4_buffer;
+    variable matrix_ut_int : tensor_buffer;
+
+    variable vector_xt_int : matrix_buffer;
+    variable matrix_rt_int : tensor_buffer;
+    variable vector_ht_int : matrix_buffer;
+
     -- Internal Variable
     variable matrix_r_int : matrix_buffer;
 
@@ -3186,6 +3195,34 @@ package body dnc_core_pkg is
       vector_x_input => vector_x_input,
       matrix_r_input => matrix_r_int,
       vector_h_input => vector_h_int
+      );
+
+
+
+    -- TRAINER_STATE
+
+    tensor_kt_int := function_ntm_fnn_k_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+
+      vector_x_input => vector_xt_int,
+      matrix_r_input => matrix_rt_int,
+      vector_h_input => vector_ht_int
+      );
+
+    matrix_ut_int := function_ntm_fnn_u_trainer (
+      SIZE_T_IN => SIZE_T_IN,
+      SIZE_X_IN => SIZE_X_IN,
+      SIZE_W_IN => SIZE_W_IN,
+      SIZE_L_IN => SIZE_L_IN,
+      SIZE_R_IN => SIZE_R_IN,
+
+      vector_x_input => vector_xt_int,
+      matrix_r_input => matrix_rt_int,
+      vector_h_input => vector_ht_int
       );
 
 
