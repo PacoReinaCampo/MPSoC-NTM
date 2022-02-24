@@ -1508,6 +1508,69 @@ package dnc_core_pkg is
     ) return matrix_buffer;
 
   -----------------------------------------------------------------------
+  -- READ HEADS
+  -----------------------------------------------------------------------
+
+  function function_dnc_free_gates (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_f_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_dnc_read_keys (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_k_input : matrix_buffer
+    ) return matrix_buffer;
+
+  function function_dnc_read_modes (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_pi_input : matrix_buffer
+    ) return matrix_buffer;
+
+  function function_dnc_read_strengths (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_beta_input : vector_buffer
+    ) return vector_buffer;
+
+  -----------------------------------------------------------------------
+  -- WRITE HEADS
+  -----------------------------------------------------------------------
+
+  function function_dnc_allocation_gate (
+    scalar_ga_input : std_logic_vector(DATA_SIZE-1 downto 0)
+    ) return std_logic_vector;
+
+  function function_dnc_erase_vector (
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_e_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_dnc_write_gate (
+    scalar_gw_input : std_logic_vector(DATA_SIZE-1 downto 0)
+    ) return std_logic_vector;
+
+  function function_dnc_write_key (
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_k_input : vector_buffer
+    ) return vector_buffer;
+
+  function function_dnc_write_strength (
+    scalar_beta_input : std_logic_vector(DATA_SIZE-1 downto 0)
+    ) return std_logic_vector;
+
+  function function_dnc_write_vector (
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_v_input : vector_buffer
+    ) return vector_buffer;
+
+  -----------------------------------------------------------------------
   -- TOP - READ_INTERFACE
   -----------------------------------------------------------------------
 
@@ -2710,6 +2773,189 @@ package body dnc_core_pkg is
 
     return matrix_r_output;
   end function function_dnc_addressing;
+
+  -----------------------------------------------------------------------
+  -- READ HEADS
+  -----------------------------------------------------------------------
+
+  function function_dnc_free_gates (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_f_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_f_output : vector_buffer;
+
+  begin
+
+    -- f(t;i) = sigmoid(f^(t;i))
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      vector_f_output(i) := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(vector_f_input(i)))))));
+    end loop;
+
+    return vector_f_output;
+  end function function_dnc_free_gates;
+
+  function function_dnc_read_keys (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_k_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable matrix_f_output : matrix_buffer;
+
+  begin
+
+    -- k(t;i;k) = k^(t;i;k)
+
+    matrix_f_output := matrix_k_input;
+
+    return matrix_f_output;
+  end function function_dnc_read_keys;
+
+  function function_dnc_read_modes (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    matrix_pi_input : matrix_buffer
+    ) return matrix_buffer is
+
+    variable matrix_pi_output : matrix_buffer;
+
+  begin
+
+    -- pi(t;i;p) = softmax(pi^(t;i;p))
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      for p in 0 to to_integer(unsigned(TWO_CONTROL)) loop
+        matrix_pi_output(i, p) := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(matrix_pi_input(i, p)))))));
+      end loop;
+    end loop;
+
+    return matrix_pi_output;
+  end function function_dnc_read_modes;
+
+  function function_dnc_read_strengths (
+    SIZE_R_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_beta_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_beta_output : vector_buffer;
+
+  begin
+
+    -- beta(t;i) = oneplus(beta^(t;i))
+
+    for i in 0 to to_integer(unsigned(SIZE_R_IN))-1 loop
+      vector_beta_output(i) := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(vector_beta_input(i)))))));
+    end loop;
+
+    return vector_beta_output;
+  end function function_dnc_read_strengths;
+
+  -----------------------------------------------------------------------
+  -- WRITE HEADS
+  -----------------------------------------------------------------------
+
+  function function_dnc_allocation_gate (
+    scalar_ga_input : std_logic_vector(DATA_SIZE-1 downto 0)
+    ) return std_logic_vector is
+
+    variable scalar_ga_output : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  begin
+
+    -- ga(t) = sigmoid(g^(t))
+
+    scalar_ga_output := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(scalar_ga_input))))));
+
+    return scalar_ga_output;
+  end function function_dnc_allocation_gate;
+
+  function function_dnc_erase_vector (
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_e_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_e_output : vector_buffer;
+
+  begin
+
+    -- e(t;k) = sigmoid(e^(t;k))
+
+    for k in 0 to to_integer(unsigned(SIZE_W_IN))-1 loop
+      vector_e_output(k) := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(vector_e_input(k)))))));
+    end loop;
+
+    return vector_e_output;
+  end function function_dnc_erase_vector;
+
+  function function_dnc_write_gate (
+    scalar_gw_input : std_logic_vector(DATA_SIZE-1 downto 0)
+    ) return std_logic_vector is
+
+    variable scalar_gw_output : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  begin
+
+    -- gw(t) = sigmoid(gw^(t))
+
+    scalar_gw_output := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(scalar_gw_input))))));
+
+    return scalar_gw_output;
+  end function function_dnc_write_gate;
+
+  function function_dnc_write_key (
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_k_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_k_output : vector_buffer;
+
+  begin
+
+    -- k(t;k) = k^(t;k)
+
+    vector_k_output := vector_k_input;
+
+    return vector_k_output;
+  end function function_dnc_write_key;
+
+  function function_dnc_write_strength (
+    scalar_beta_input : std_logic_vector(DATA_SIZE-1 downto 0)
+    ) return std_logic_vector is
+
+    variable scalar_beta_output : std_logic_vector(DATA_SIZE-1 downto 0);
+
+  begin
+
+    -- beta(t) = oneplus(beta^(t))
+
+    scalar_beta_output := std_logic_vector(to_float(1.0+log(1.0+1.0+exp(to_real(to_float(scalar_beta_input))))));
+
+    return scalar_beta_output;
+  end function function_dnc_write_strength;
+
+  function function_dnc_write_vector (
+    SIZE_W_IN : std_logic_vector(CONTROL_SIZE-1 downto 0);
+
+    vector_v_input : vector_buffer
+    ) return vector_buffer is
+
+    variable vector_v_output : vector_buffer;
+
+  begin
+
+    -- v(t;k) = v^(t;k)
+
+    vector_v_output := vector_v_input;
+
+    return vector_v_output;
+  end function function_dnc_write_vector;
 
   -----------------------------------------------------------------------
   -- TOP - READ_INTERFACE
